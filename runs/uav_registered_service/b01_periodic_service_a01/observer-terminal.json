@@ -1,0 +1,206 @@
+{
+  "before": {
+    "generation": 1,
+    "wake_id": "f6103c94-2287-4227-bb7d-b8dbe62a3b2a",
+    "events": [
+      {
+        "id": "ebe3f0c9d7397378618fb27c",
+        "kind": "CHECKPOINT",
+        "evidence": {
+          "generation": 1,
+          "jobs": [
+            "launch-b01-periodic-service-a01"
+          ]
+        },
+        "created": 1790727383.2657616,
+        "consumed": false
+      },
+      {
+        "id": "33afeb1eb7a77b1a774e859b",
+        "kind": "READY",
+        "evidence": {
+          "job_id": "launch-b01-periodic-service-a01",
+          "status": "ready",
+          "facts": {
+            "admission": {
+              "claim_state": "accepted",
+              "state": "accepted"
+            },
+            "artifacts": {
+              "stderr": {
+                "path": "/home/wu/projects/HMASD/runs/uav_registered_service/b01_periodic_service_a01/stderr.log",
+                "state": "present"
+              },
+              "stdout": {
+                "path": "/home/wu/projects/HMASD/runs/uav_registered_service/b01_periodic_service_a01/stdout.log",
+                "state": "present"
+              },
+              "summary": {
+                "path": "/home/wu/projects/HMASD/runs/uav_registered_service/b01_periodic_service_a01/summary.json",
+                "state": "present"
+              }
+            },
+            "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/f4e526fcc68cb24283d861eb0185f27586fd0b4bded2d78e7b15eb7d94904211.json",
+            "direction": "uav_registered_service",
+            "execution": {
+              "exit_code": 0,
+              "exit_witness": {
+                "exit_code": 0,
+                "finished_at_epoch": 1790728002.5098877,
+                "path": "/home/wu/projects/HMASD/runs/uav_registered_service/b01_periodic_service_a01/process-exit.json",
+                "state": "valid",
+                "termination": "process_exit"
+              },
+              "runner": {
+                "recorded_identity": {
+                  "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+                  "kind": "linux_pid_start_ticks",
+                  "pid": 1017392,
+                  "session_id": 1017391,
+                  "start_ticks": 107076677
+                },
+                "state": "absent"
+              },
+              "state": "exited",
+              "supervisor": {
+                "recorded_identity": {
+                  "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+                  "kind": "linux_pid_start_ticks",
+                  "pid": 1017391,
+                  "session_id": 1017391,
+                  "start_ticks": 107076674
+                },
+                "state": "absent"
+              }
+            },
+            "explicit_retry_available": false,
+            "kind": "hmasd_operation_status",
+            "manifest_ref": "/home/wu/projects/HMASD/runs/uav_registered_service/b01_periodic_service_a01/launch-manifest.json",
+            "node": "wsl_4070",
+            "observed_at": "2026-09-30T00:27:08.720531Z",
+            "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/f4e526fcc68cb24283d861eb0185f27586fd0b4bded2d78e7b15eb7d94904211.json",
+            "output_root": "/home/wu/projects/HMASD/runs/uav_registered_service/b01_periodic_service_a01",
+            "record_consistency": {
+              "mismatches": [],
+              "state": "consistent"
+            },
+            "schema_version": 1,
+            "sha": "6f4c21ba5bd4774b91a1f3545099a9ac58b2b233",
+            "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/84cf7f4bc7e043af8ee26c0864f1457f"
+          }
+        },
+        "created": 1790728029.1355999,
+        "consumed": false
+      }
+    ],
+    "jobs": {
+      "launch-b01-periodic-service-a01": {
+        "spec": {
+          "id": "launch-b01-periodic-service-a01",
+          "protocol": "launch",
+          "argv": [
+            "/usr/bin/ssh",
+            "hmasd-wsl-node",
+            "/home/wu/.venvs/hmasd/bin/python /home/wu/projects/HMASD/scripts/hmasd_launch.py status /home/wu/projects/HMASD/.git/hmasd-admission/f4e526fcc68cb24283d861eb0185f27586fd0b4bded2d78e7b15eb7d94904211.json"
+          ],
+          "cwd": "/home/fires/hmasd-wsl",
+          "interval": 30,
+          "timeout": 20
+        },
+        "status": "ready",
+        "due": 1790728059.1350014,
+        "errors": 0,
+        "last": {
+          "admission": {
+            "claim_state": "accepted",
+            "state": "accepted"
+          },
+          "artifacts": {
+            "stderr": {
+              "path": "/home/wu/projects/HMASD/runs/uav_registered_service/b01_periodic_service_a01/stderr.log",
+              "state": "present"
+            },
+            "stdout": {
+              "path": "/home/wu/projects/HMASD/runs/uav_registered_service/b01_periodic_service_a01/stdout.log",
+              "state": "present"
+            },
+            "summary": {
+              "path": "/home/wu/projects/HMASD/runs/uav_registered_service/b01_periodic_service_a01/summary.json",
+              "state": "present"
+            }
+          },
+          "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/f4e526fcc68cb24283d861eb0185f27586fd0b4bded2d78e7b15eb7d94904211.json",
+          "direction": "uav_registered_service",
+          "execution": {
+            "exit_code": 0,
+            "exit_witness": {
+              "exit_code": 0,
+              "finished_at_epoch": 1790728002.5098877,
+              "path": "/home/wu/projects/HMASD/runs/uav_registered_service/b01_periodic_service_a01/process-exit.json",
+              "state": "valid",
+              "termination": "process_exit"
+            },
+            "runner": {
+              "recorded_identity": {
+                "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+                "kind": "linux_pid_start_ticks",
+                "pid": 1017392,
+                "session_id": 1017391,
+                "start_ticks": 107076677
+              },
+              "state": "absent"
+            },
+            "state": "exited",
+            "supervisor": {
+              "recorded_identity": {
+                "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+                "kind": "linux_pid_start_ticks",
+                "pid": 1017391,
+                "session_id": 1017391,
+                "start_ticks": 107076674
+              },
+              "state": "absent"
+            }
+          },
+          "explicit_retry_available": false,
+          "kind": "hmasd_operation_status",
+          "manifest_ref": "/home/wu/projects/HMASD/runs/uav_registered_service/b01_periodic_service_a01/launch-manifest.json",
+          "node": "wsl_4070",
+          "observed_at": "2026-09-30T00:27:08.720531Z",
+          "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/f4e526fcc68cb24283d861eb0185f27586fd0b4bded2d78e7b15eb7d94904211.json",
+          "output_root": "/home/wu/projects/HMASD/runs/uav_registered_service/b01_periodic_service_a01",
+          "record_consistency": {
+            "mismatches": [],
+            "state": "consistent"
+          },
+          "schema_version": 1,
+          "sha": "6f4c21ba5bd4774b91a1f3545099a9ac58b2b233",
+          "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/84cf7f4bc7e043af8ee26c0864f1457f"
+        },
+        "observed": 1790728029.1350014
+      }
+    },
+    "delivery": {
+      "id": "f6103c94-2287-4227-bb7d-b8dbe62a3b2a",
+      "status": "delivery_unknown",
+      "created": 1790727383.2775211,
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Error: failed to queue session message: thread/queue/add failed: direct app-server input is not allowed for unloaded spawned sub-agents (code -32600)\n",
+      "exposed_ids": [
+        "ebe3f0c9d7397378618fb27c",
+        "33afeb1eb7a77b1a774e859b"
+      ]
+    },
+    "stopped": false
+  },
+  "rearm": {
+    "generation": 2,
+    "pid": 268790,
+    "window_seconds": 1500
+  },
+  "stop": {
+    "status": "observation_stop_requested",
+    "work_unchanged": true
+  }
+}

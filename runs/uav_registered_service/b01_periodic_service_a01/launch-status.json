@@ -1,0 +1,67 @@
+{
+  "admission": {
+    "claim_state": "accepted",
+    "state": "accepted"
+  },
+  "artifacts": {
+    "stderr": {
+      "path": "/home/wu/projects/HMASD/runs/uav_registered_service/b01_periodic_service_a01/stderr.log",
+      "state": "present"
+    },
+    "stdout": {
+      "path": "/home/wu/projects/HMASD/runs/uav_registered_service/b01_periodic_service_a01/stdout.log",
+      "state": "present"
+    },
+    "summary": {
+      "path": "/home/wu/projects/HMASD/runs/uav_registered_service/b01_periodic_service_a01/summary.json",
+      "state": "present"
+    }
+  },
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/f4e526fcc68cb24283d861eb0185f27586fd0b4bded2d78e7b15eb7d94904211.json",
+  "direction": "uav_registered_service",
+  "execution": {
+    "exit_code": 0,
+    "exit_witness": {
+      "exit_code": 0,
+      "finished_at_epoch": 1790728002.5098877,
+      "path": "/home/wu/projects/HMASD/runs/uav_registered_service/b01_periodic_service_a01/process-exit.json",
+      "state": "valid",
+      "termination": "process_exit"
+    },
+    "runner": {
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 1017392,
+        "session_id": 1017391,
+        "start_ticks": 107076677
+      },
+      "state": "absent"
+    },
+    "state": "exited",
+    "supervisor": {
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 1017391,
+        "session_id": 1017391,
+        "start_ticks": 107076674
+      },
+      "state": "absent"
+    }
+  },
+  "explicit_retry_available": false,
+  "kind": "hmasd_operation_status",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/uav_registered_service/b01_periodic_service_a01/launch-manifest.json",
+  "node": "wsl_4070",
+  "observed_at": "2026-09-30T01:07:50.217292Z",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/f4e526fcc68cb24283d861eb0185f27586fd0b4bded2d78e7b15eb7d94904211.json",
+  "output_root": "/home/wu/projects/HMASD/runs/uav_registered_service/b01_periodic_service_a01",
+  "record_consistency": {
+    "mismatches": [],
+    "state": "consistent"
+  },
+  "schema_version": 1,
+  "sha": "6f4c21ba5bd4774b91a1f3545099a9ac58b2b233",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/84cf7f4bc7e043af8ee26c0864f1457f"
+}

@@ -1,0 +1,33 @@
+{
+  "reason": "read-only support correction: eager NPZ materialization; scientific outputs unchanged",
+  "epoch": 1790730924.229683,
+  "pid": 1020998,
+  "ppid": 1020996,
+  "process_start_ticks": 107542311,
+  "command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/84cf7f4bc7e043af8ee26c0864f1457f/experiments/candidates/uav_registered_service/b01/read.py",
+    "--out",
+    "/home/wu/projects/HMASD/runs/uav_registered_service/b01_periodic_service_a01"
+  ],
+  "cpu_seconds_before_signal": 404.53,
+  "status_before": {
+    "task": "registered-service-b01-read-a01",
+    "status": "running",
+    "exit_code": null,
+    "pid": 1020993,
+    "uptime_seconds": 405,
+    "tmux_active": true
+  },
+  "signal": "SIGTERM",
+  "status_after": {
+    "task": "registered-service-b01-read-a01",
+    "status": "failed",
+    "exit_code": 143,
+    "pid": 1020993,
+    "uptime_seconds": 405,
+    "tmux_active": true
+  },
+  "process_absent_after": true,
+  "stopped_at_epoch": 1790730924.3523536
+}

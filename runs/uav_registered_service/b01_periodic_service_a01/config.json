@@ -1,0 +1,231 @@
+{
+  "launch_sha": "6f4c21ba5bd4774b91a1f3545099a9ac58b2b233",
+  "arms": [
+    "R",
+    "S2",
+    "T2",
+    "O",
+    "P"
+  ],
+  "seeds": [
+    29308000,
+    29308001,
+    29308002,
+    29308003,
+    29308004,
+    29308005,
+    29308006,
+    29308007,
+    29308008,
+    29308009,
+    29308010,
+    29308011,
+    29308012,
+    29308013,
+    29308014,
+    29308015,
+    29308016,
+    29308017,
+    29308018,
+    29308019,
+    29308020,
+    29308021,
+    29308022,
+    29308023,
+    29308024,
+    29308025,
+    29308026,
+    29308027,
+    29308028,
+    29308029,
+    29308030,
+    29308031,
+    29308032,
+    29308033,
+    29308034,
+    29308035,
+    29308036,
+    29308037,
+    29308038,
+    29308039,
+    29308040,
+    29308041,
+    29308042,
+    29308043,
+    29308044,
+    29308045,
+    29308046,
+    29308047,
+    29308048,
+    29308049,
+    29308050,
+    29308051,
+    29308052,
+    29308053,
+    29308054,
+    29308055,
+    29308056,
+    29308057,
+    29308058,
+    29308059,
+    29308060,
+    29308061,
+    29308062,
+    29308063
+  ],
+  "horizon": 256,
+  "arm_orders": [
+    [
+      "R",
+      "S2",
+      "T2",
+      "O",
+      "P"
+    ],
+    [
+      "S2",
+      "T2",
+      "O",
+      "P",
+      "R"
+    ],
+    [
+      "T2",
+      "O",
+      "P",
+      "R",
+      "S2"
+    ],
+    [
+      "O",
+      "P",
+      "R",
+      "S2",
+      "T2"
+    ],
+    [
+      "P",
+      "R",
+      "S2",
+      "T2",
+      "O"
+    ],
+    [
+      "P",
+      "O",
+      "T2",
+      "S2",
+      "R"
+    ],
+    [
+      "O",
+      "T2",
+      "S2",
+      "R",
+      "P"
+    ],
+    [
+      "T2",
+      "S2",
+      "R",
+      "P",
+      "O"
+    ],
+    [
+      "S2",
+      "R",
+      "P",
+      "O",
+      "T2"
+    ],
+    [
+      "R",
+      "P",
+      "O",
+      "T2",
+      "S2"
+    ]
+  ],
+  "order": "world index modulo10 cyclic/reversed cyclic",
+  "planned_fits": 0,
+  "planned_episodes": 320,
+  "planned_steps": 81920,
+  "learning": "fixed deterministic policies; no parameters, gradients or optimizer",
+  "terminal_history_completeness": "all reconstructable post-anchor transitions; unknown prefix excluded from model validity only",
+  "compute_threads": 1,
+  "cpu_limit_seconds": null,
+  "preferred_node": "wsl_4070",
+  "actual_host": "LAPTOP-U9TDKC8A",
+  "actual_platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "actual_python": "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+  "admission_identity": {
+    "schema_version": 1,
+    "direction": "uav_registered_service",
+    "sha": "6f4c21ba5bd4774b91a1f3545099a9ac58b2b233",
+    "command_sha256": "4b286c2a36a0fcc476c66d15d06e0d0333d37a299adf46627d3f0b5894bbc67c",
+    "parent_pid": 1017391,
+    "child_pid": 1017392,
+    "accepted_at_epoch": 1790725849.4461362
+  },
+  "host": "N5 U50 static uniform free_space no-shadowing non-FDMA 3dB cap10",
+  "delivery_ticks": {
+    "R": 1,
+    "S2": 2,
+    "T2": 2,
+    "O": 2,
+    "P": 2
+  },
+  "hold_ticks": 4,
+  "map_bytes": 400,
+  "report_bytes": 24,
+  "command_bytes": 16,
+  "link_bits_per_second": 2000,
+  "deadline_seconds": {
+    "R": 0.456,
+    "S2": 1.456,
+    "T2": 1.456,
+    "O": 1.456,
+    "P": 1.456
+  },
+  "score": "P: new pairs; O/P: lexicographic older-age distinct users; native J,served,preserve Cq,more active,lower mask,lower q",
+  "truth_history": "evaluation only; no service ACK",
+  "terminal_history_scope": "separately timed evaluator support outside online deadline; included in worker resources; never actor action",
+  "source_identities": [
+    {
+      "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/84cf7f4bc7e043af8ee26c0864f1457f/experiments/candidates/uav_registered_service/b01/__init__.py",
+      "bytes": 62,
+      "sha256": "ef0474c939a8e83168c671d537bd3d6b178b533d268f48eae8cfcf4357218c31"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/84cf7f4bc7e043af8ee26c0864f1457f/experiments/candidates/uav_registered_service/b01/history.py",
+      "bytes": 4562,
+      "sha256": "d67ee807bb29fe4346c070f72d9f7110bc0696ef898b24b13bb49b5db9d626ed"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/84cf7f4bc7e043af8ee26c0864f1457f/experiments/candidates/uav_registered_service/b01/metrics.py",
+      "bytes": 3542,
+      "sha256": "ca6f5b3895f6101ac2b4bb1e590d2c7b278d90cffe8b4cd4fa614fab0624fbbb"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/84cf7f4bc7e043af8ee26c0864f1457f/experiments/candidates/uav_registered_service/b01/read.py",
+      "bytes": 24001,
+      "sha256": "4a8e0b262d26e017d6e81bf2189f4bbcc8e8dd2b7c5df9fac7aa6968f911e496"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/84cf7f4bc7e043af8ee26c0864f1457f/experiments/candidates/uav_registered_service/b01/run.py",
+      "bytes": 1353,
+      "sha256": "0829c43177b19bdd200ab2ce157cd0bb54fe15394e0e16761c8cb8d901aa507d"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/84cf7f4bc7e043af8ee26c0864f1457f/experiments/candidates/uav_registered_service/b01/scheduler.py",
+      "bytes": 11880,
+      "sha256": "30c9d7d923a2f89ef61dd3fe2f662ac85dc3e0571240c9989f4c384d845ff1b5"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/84cf7f4bc7e043af8ee26c0864f1457f/experiments/candidates/uav_registered_service/b01/study.py",
+      "bytes": 20079,
+      "sha256": "a705d26145cb35d9a9e83d70a45c2206ddc3d04dfa0a99c438a1dbc795aded50"
+    }
+  ],
+  "frozen_radio_source": "2bff85091f85f6d52fc0344d0329b4fc39fa6d5c"
+}

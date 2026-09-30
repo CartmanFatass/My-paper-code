@@ -358,6 +358,12 @@ def verify_episode(row,raw,**kwargs):
     return verify_history_episode(row,raw,**kwargs)
 
 
+def load_episode(path):
+    """Decompress each array once; verification then reuses one episode in memory."""
+    with np.load(path,allow_pickle=False) as archive:
+        return {name:archive[name] for name in archive.files}
+
+
 def read_result(out):
     started,cpu_started=time.perf_counter(),time.process_time()
     out=Path(out)
@@ -390,14 +396,15 @@ def read_result(out):
         if identity!=row['raw']:
             raise AssertionError('raw identity mismatch')
         total_bytes+=identity['bytes']
-        with np.load(path,allow_pickle=False) as raw:
-            world=(raw['true_sites'],raw['positions'][0])
-            if row['seed'] in worlds:
-                for left,right in zip(world,worlds[row['seed']]):
-                    np.testing.assert_array_equal(left,right)
-            else:
-                worlds[row['seed']]=tuple(x.copy() for x in world)
-            rows.append(verify_episode(row,raw))
+        raw=load_episode(path)
+        world=(raw['true_sites'],raw['positions'][0])
+        if row['seed'] in worlds:
+            for left,right in zip(world,worlds[row['seed']]):
+                np.testing.assert_array_equal(left,right)
+        else:
+            worlds[row['seed']]=tuple(x.copy() for x in world)
+        rows.append(verify_episode(row,raw))
+        del raw  # Release the large arrays before materializing the next episode.
         print(json.dumps(dict(verified=len(rows),arm=row['arm'],seed=row['seed'])),flush=True)
     paired=paired_reading(summary['rows'],seeds)
     if paired!=summary['paired']:

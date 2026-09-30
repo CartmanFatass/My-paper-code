@@ -369,3 +369,77 @@ Drain witnessed accepted admission, consistent source/records and matching live
 runner/supervisor identities. This native child remains active through collection
 and reading; a future queue call is not assumed to wake an unloaded child.
 The fixed320episodes are running; no partial endpoint has been interpreted.
+
+## 2026-09-30 — B01 collection and saved-data reader
+
+The original native worker finished successfully at epoch1790728002.5098877:
+320complete episodes,81920native steps,0fits and0updates, with one constructor
+and320explicit resets. Native runner/supervisor identities are absent and the
+original claim/status/exit records agree. This is technical completion; the
+full result reading and independent scientific review remain in progress.
+The worker used2152.542003process CPU seconds,2152.919848wall seconds and
+197944KiB lifetime peak RSS. No invocation was repeated.
+
+The native child's original long deterministic wait lost its exec cell; the
+queue delivery returned-32600 after the child became unloaded. Root's native
+follow-up recovered this same task. I drained generation1's CHECKPOINT and READY
+events, consumed them using the same state/handle in generation2, and stopped
+the observer. Complete terminal facts are retained in observer-terminal.json;
+registration was not treated as proof of a future wake. This observation failure
+did not change the accepted source, result worker or scientific exposure.
+
+Compact config/summary/exit/status were collected. The320unique raw NPZ files
+remain at the original wsl_4070 output/raw path (178488494bytes, individual
+SHA256 identities in summary.json). Seven owned source identities matched the
+accepted immutable source6f4c21ba5bd4774b91a1f3545099a9ac58b2b233 before reading.
+The saved-data reader was accepted once at2026-09-30T01:08:39UTC by supervisor
+`registered-service-b01-read-a01`, PID1020993, original source snapshot
+`84cf7f4bc7e043af8ee26c0864f1457f`. Reader support adds no native episodes or fits.
+
+### Focused reader performance correction — prospective L0
+
+At the first three verified rows, the read-only checker remains CPU-active but
+spends minutes in an O/P record: read_result passes a lazy compressed NpzFile to
+inner loops that repeatedly index full candidate_contacts/ordering_keys arrays.
+Each lookup decompresses the same array again. This is a support implementation
+cost, not an adverse policy outcome or grounds to truncate checker coverage.
+Preserve the first reader's identity/log/resources and reconcile its terminal
+state before any replacement support invocation. Original scientific outputs,
+source and full320-row reading contract remain fixed.
+
+L0: eagerly materialize every allow_pickle=False NPZ array once per episode,
+then pass the same values to the unchanged verification functions. Inspect
+verifier mutation behavior; check lazy versus materialized results on a bounded
+synthetic fixture and the existing focused tests. No data repair, physics/key
+change, coverage reduction, new environment evaluation or shared-code edit.
+Registered Implementer owns only the B01 reader and its focused tests; DM owns
+this record/index/publication. Accepted-source identity remains distinct from
+the later support-reader source. Record both reader costs and completion facts.
+
+The original reader's exact child1020998/parent1020996 and command were verified
+before SIGTERM; it exited143 and is absent. Its three completed checks were
+R/S2/T2 at29308000; O had not completed. The retained time report records
+403.64user +.91system =404.55CPU seconds,404.65wall seconds and157136KiB peak
+RSS. `time` prints an exit-status0 footer after reporting signal15; the actual
+supervisor exit143 and captured termination signal are the termination facts.
+This is abandoned support cost, not a failed scientific batch.
+
+The Implementer changed only read.py and its existing test file. load_episode
+reads each archive member once with allow_pickle=False, closes the archive,
+and the caller releases the per-episode dictionary after unchanged verification.
+All five H8 synthetic fixture arms return exactly the same lazy/materialized
+checks, with materialized arrays write-protected and verified unchanged. A
+focused archive fixture verifies one read per member and closure. The complete
+owned suite passes33tests in15.32s; no native result episode was added. The
+largest base O/P array schema is38.729MiB per episode, plus generated metadata
+and checker temporaries; the entire320-row panel is never materialized together.
+I inspected the diff and accept its narrow behavior; independent review follows
+before the corrected support run.
+
+Registered independent engineering Reviewer found no material finding. Its
+own focused run passed6checks (13deselected) in4.73s: five-arm lazy/materialized
+equivalence under read-only arrays, plus archive-load/close behavior. Input hashes,
+world binding, verifier functions, candidate coverage and output calculation are
+unchanged; only small world/position references persist between episodes. Actual
+full-panel memory/performance remain to be measured. DM accepts and publishes
+this support revision; original scientific source6f4c21ba5 remains fixed.

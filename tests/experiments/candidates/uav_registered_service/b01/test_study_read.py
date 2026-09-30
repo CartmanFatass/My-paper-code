@@ -27,7 +27,14 @@ def collect(tmp_path,arm,seed=9801,horizon=8,**kwargs):
 def test_full_small_fixture_reader_and_native_contract(tmp_path,arm):
     row,raw,counts=collect(tmp_path,arm)
     assert counts['team_steps']==8 and counts['complete_episodes']==1
-    result=read.verify_episode(row,raw)
+    materialized=read.load_episode(row['raw']['path'])
+    for array in materialized.values():
+        array.setflags(write=False)
+    result=read.verify_episode(row,materialized)
+    with np.load(row['raw']['path'],allow_pickle=False) as lazy:
+        assert read.verify_episode(row,lazy)==result
+    for name in raw:
+        np.testing.assert_array_equal(materialized[name],raw[name])
     assert result['verified_steps']==8 and result['max_native_J_error']<1e-12
     assert row['F']==sum(row['per_window_coverage'])
     if arm in ('O','P'):
@@ -222,3 +229,31 @@ def test_native_early_terminal_retains_original_failure_and_partial_raw(tmp_path
             assert raw['model_valid'][0] and raw['terminal_history_complete']
             assert 'terminal_support_failure_type' not in raw
         assert len(raw['actual_contacts'])==1
+
+
+def test_episode_materialization_loads_each_array_once_and_closes_archive(monkeypatch):
+    arrays={'scalar':np.array(7),'bits':np.array([True,False]),
+            'keys':np.array([[np.nan,1.5]]),'labels':np.array(['unknown'])}
+    accesses=[]
+    closed=[]
+    class Archive:
+        files=list(arrays)
+        def __enter__(self):
+            return self
+        def __exit__(self,*args):
+            closed.append(True)
+        def __getitem__(self,name):
+            accesses.append(name)
+            return arrays[name]
+    def load(path,*,allow_pickle):
+        assert path=='fixture.npz' and allow_pickle is False
+        return Archive()
+    monkeypatch.setattr(read.np,'load',load)
+    materialized=read.load_episode('fixture.npz')
+    assert accesses==list(arrays) and closed==[True]
+    assert list(materialized)==list(arrays)
+    for name in arrays:
+        assert materialized[name] is arrays[name]
+    # Repeated verification-style indexing cannot decompress a member again.
+    assert materialized['keys'][0,1]==materialized['keys'][0,1]==1.5
+    assert accesses==list(arrays)
