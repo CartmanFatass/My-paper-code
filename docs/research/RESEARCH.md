@@ -1820,6 +1820,150 @@ FSD/PPC暂停、G33冻结、Milan数据依赖及不复用完整收尾旧DM均保
 <a id="portfolio-review-2026-09-30-owner-deep-report-and-next-question"></a>
 [Completed owner-report review, full Pro advice, focused independent assessment and Root selection](archive/2026-09-30/RESEARCH-owner-deep-report-next-question.md#decision).
 
+## Portfolio review 2026-09-30 temporal-service-continuity
+
+Conversation: continuing Jev Portfolio conversation; the address remains private to local operation state.
+Question: Is the concrete A/S/M/R comparison the next worthwhile way to develop the observed ordinary service/waiting capability, or would a simpler or materially different complete comparison buy more useful knowledge? Work as an innovator on the next investment, not as a mandatory confirmation gate or a source of another automatic repair.
+
+### Owner scope and live investment choice
+
+The owner requested a continuing result → synthesis/Pro innovator → next-iteration loop and normally3–4 substantive scientific DMs in parallel. Root owns question construction and cross-question allocation; DMs own their scientific continuity, implementation, execution, reading and publication. Ordinary control, useful task performance and finite learning capability are legitimate contributions; a new architecture, novelty claim or positive result is not owed. Root has selected bounded continuity design work from the newly completed waiting result, and received the concrete proposal and full independent Astra Max selection review below. No implementation or new native exposure for that proposal has occurred. Your advice can change whether to invest, its concrete comparison or a reasoned stop.
+
+Two independent studies continue without waiting for this advice: native N8 E-versus-all-on learning from the existing H6 parent (two fits/576,000 steps), and ordinary full-policy U continuation from all three retained decentralized parents (three fits/491,520 steps; accepted at source `f5f165ec772a1fed7c9d7689bd897fe16391a18e`). Their different information, action laws and learning programs must not be conflated with this ordinary N5 control question. Do not re-review or interrupt their unchanged accepted operations. A fourth question is optional only if it is genuinely independent and worth its full cost, not to split the present recipe or fill a quota. Claude's quota pause and question ownership, FSD/PPC pauses, G33 freeze and Milan-data dependency remain.
+
+### Newly complete evidence: accumulated-user fairness is useful, with temporal costs
+
+`uav_user_waiting` B01, input `86ae782cab3946a14062d3e0825c8597ea4513a7`, compared R/O/W/M on64 fresh common N5/U50/H256 worlds:256 episodes,65,536 native steps,0fits/updates. R accumulated each user's causal model-reconstructed age and ranked by minimum maximum accumulated burden, then minimum sum, then retained native tie keys through both search orders. It used the existing registered user map, delayed reports/commands, rotating member and finite motion/mask support, without service ACKs or future native C calls. All256 fixed trajectories passed the complete saved-data reader. Compact evidence and independent disposition were published at `0b9e2fee44edaf4183ae25aa8269136280f4826c`, standing/cleanup at `8e8ca5391c165e1104d166f07dac333cf41ffc81`.
+
+| Mean over64 worlds | R | O | W | M |
+| --- | ---: | ---: | ---: | ---: |
+| Worst-user complete mean age | 9.200317 | 11.089661 | 12.947205 | 11.948669 |
+| Aggregate mean age | 4.433879 | 4.500314 | 3.256572 | 3.205242 |
+| Served users/tick | 21.576599 | 18.702637 | 24.455017 | 24.316101 |
+| Native mean J | .360902 | .322828 | .396148 | .393546 |
+| Within-episode pooled age p95 | 19.422656 | 16.923437 | 15.265625 | 14.860156 |
+| Mean per-user episode-maximum gap | 27.491875 | 24.104375 | 20.475000 | 20.189687 |
+| Episode maximum gap | 54.171875 | 52.734375 | 56.453125 | 53.937500 |
+
+R−O worst-user mean age is−1.889343, descriptive paired-world t95[−3.013856,−.764831],45 improving/19 adverse worlds. Service+2.873962 and J+.038074 are positive in all64. Aggregate age−.066434[−.243032,+.110163] remains unresolved. Quality−.007206, higher transmitter exposure(+82.9375 transmitter-ticks/episode), age p95+2.499219[+1.616429,+3.382008] and mean per-user maximum gap+3.387500[+2.394902,+4.380098] are real costs. R improves worst-user mean age versus W/M while losing aggregate age/service. Four-window coverage is near200 for all arms, which does not remove their continuous waiting differences. No scalar exchange rate or new protection threshold is supplied.
+
+The complete adverse witness matters. In world29321048, R's worst-user mean age17.203125 versus O8.5 accompanies user13's closed90-tick gap[71,161), despite correct model last-service and accumulated burden at every anchor. At report72, the selected action and four visited alternatives serving13 tie at maximum predicted burden1465, attained by user28; the secondary total-burden key selects away from13. Subsequent visited sets have no serving13 candidate at reports76..152. This is not a missing-history diagnosis, an identified overcompensation mechanism or proof of full-support unreachability. Conversely, in29321040 R improves the primary from O32.160156 to10.570313; O's worst user has closed83/91-tick waits despite correct modeled ages. Both original raw witnesses were independently reconstructed. The older learned L1 failures had189/183/181-tick waits with correct last-service times as well; no automatic ACK/learner repair follows.
+
+Model history is useful but approximate: R has470 false-positive and438 false-negative model service flags, and all64 worlds show some cumulative burden discrepancy, up to1036 for a user. No history prefix was unavailable and no deadline was missed. Same-visited-set ranking sensitivity shows the settled burden affects choices, but does not identify its causal contribution to complete package value. The current standing is conditional retention of R beside O/W/M; zero fits supplies no learning observation.
+
+B01 cost was2,375,680 candidate requests,1,676,660 unique completed plans and6,654,556 candidate-state reductions, plus separately counted C/history/prefix work. Worker lifetime CPU1169.178s plus external reader654.89s totals1824.068s(.506686CPUh), with incompletely metered support additional. Largest charged report wall was.162977s against1.456s; this was not a deadline crisis. Sole full evidence is retained on wsl_4070 at `/home/wu/projects/HMASD/runs/uav_user_waiting/b01_burden_a01/`,256raw NPZ files/296,862,326logical bytes; compact source/hash/per-world records remain in Git. Cleanup reclaimed818,479,104 allocated bytes without deleting required evidence.
+
+### Concrete option, source-backed premises and predictions
+
+The full design is `docs/research/candidates/uav_user_waiting/NOTES.md`, section **Recommended ordinary continuity comparison; design only**, published at `b298ab6194d9ba8cf8341fad30a7ca6d68424119`. Read the entire section, including information contract, terminal clocks, full costs and alternative outcomes. The following identifies the consequential choices; it does not replace that exact source.
+
+**Question:** can a fixed ordinary temporal criterion develop useful complete service continuity beyond M, and does one modeled next decision add enough beyond a matched short-block controller? **S** minimizes the sum of squared post-transition model ages over its four delivered ticks (`Q4`, shortened at the terminal boundary), using the same two finite search orders/116 pre-cache requests. **A** starts with exactly that S search and considers only its two order finalists, including S's selected action, deduplicated by command/mask. For each distinct finalist it predicts the next report/C proposals and one next-S decision; it ranks first actions by the two-block squared-age score with the original S key as tie-breaker. Only the first action is sent; actual A replans at the next report. With one finalist or no next report, A=S. This is restricted rollout selection between two finalists, not exhaustive MPC, an optimal planner or a guaranteed improvement.
+
+**M is the primary complete-use reference**, because it already has the stronger typical-user temporal/aggregate capability; R preserves the separate fairness frontier. S is the matched short-block control. Additional O/W arms are not proposed: M already includes their alternatives and their complete evidence is retained. The four-arm design can preserve useful S even if the rollout adds nothing. Sparse distinct finalists or executed A−S changes limit exposure to this restricted opportunity, not prospective control in general.
+
+Native age resets to0: `a'=(1-s)(a+1)`, so one-tick quadratic drift is `sum(2a+1)-sum(s*(a+1)^2)`. A gap g contributes `g(g+1)(2g+1)/6` squared-age cost, but this is only a surrogate for maximum gaps: over12ticks one gap6 costs91, whereas two gap5 periods cost110 despite a smaller maximum. The constructive conjecture is that coupled service sets, motion consequences and a delayed future decision make a bounded temporal forecast useful. The contrary hypotheses are absent useful finalists, wrong future C/service predictions, base-S continuation being a poor proxy for later A replanning, or a short objective-aligned S already doing all useful work. Neither accurate forecasts nor a lower surrogate is the success criterion.
+
+### Explicit richer information and one coherent model trajectory
+
+The native `LocalController(history=False)` still retains a private waypoint index `_nav_index` (0..9) used by its sweep fallback. The scheduler cannot silently copy that object. The proposal instead gives **every arm** one additional post-C-call waypoint byte per UAV in the report: five25-byte reports plus16-byte command,136→141 recurring bytes at2kbit/s, wire time.544→.564s and charged computation allowance**1.436s**. All actual C computation, encoding, history, candidate/virtual computation and serialization use that one deadline. M/R keep their rankings under the same new codec/deadline. No service ACK, hidden native user coordinate, future native observation/action or actual future C call is available. This comparison is within the explicit extension; it does not establish the byte's separate value or performance under the old information contract. An old/new-contract factorial is not automatically needed for this narrower question.
+
+At report t, old commands run t,t+1; a newly delivered first action runs t+2..t+5. A's synthetic report is at t+4, while two ticks of that first action remain committed. Its modeled next-S action starts at t+6 and runs to t+9, clipped at256. At report248 the scored horizon has six delivered ticks; at252 no continuation is purchased. Synthetic104-value local observations and current C proposals come only from the lawful model/map and reported state. The real future C call is not queried.
+
+**Root adopts the independent reviewer's specification clarification for the proposed input, without selecting native execution yet:** keep one shared model geometry trajectory/private age history initialized from the decoded current report; save its state/history at t+4, generate the synthetic observation/report there, and preserve the same first commitment through t+6. Count each delivered tick once in Q8. The continued-prefix geometry/age must reproduce the last two first-block ticks. Under the current source, decoded UAV coordinates,0/±30m model motion and bounds lie on the integer-metre grid, so synthetic float32 normalization followed by the metre codec returns the same model position; it is not a new native-state anchor. A contrary fixture would identify a construction discrepancy before exposure. This resolves the two-resolution concern for the specified code, not model equality to native truth. Compare predicted versus actual t+4 geometry/C before the next command takes effect; subsequent hypothetical-S versus replanned-A action disagreement is not by itself prediction error.
+
+### Proposed complete comparison, cost and actual alternatives
+
+Proposed fixed panel: A/S/M/R on64 new common worlds29322000..29322063, eight cyclic/reversed orders;256 H256 episodes/**65,536 native steps/0fits/0updates**. Primary world endpoint is `G=(1/50)sum_u max_gap_u[0:256]`, observed finite-window maximal contiguous unserved lengths with initial/trailing censoring marked separately; primary contrast**A−M:G**. Planned A−S and S−M test the continuation and shorter ordinary program respectively. Report all world-level and pairwise results with descriptive paired t95 over64 independent worlds, not over users or ticks. Retain squared age, pooled age p95, worst-user mean age versus R, per-user/global/closed/censored gaps, service/J/quality, coverage, travel, transmitter use, all adverse worlds/timeouts, physical activation and full runtime. There is no hard service SLA, preselected utility exchange rate, equivalence margin or learning claim.
+
+Exact pre-cache ceilings: A22,040/S7,424/M14,848/R7,424 requests per world,**3,311,104 total**;**13,140,480 candidate-state reductions** after terminal truncation. A adds at most40,320 virtual C decisions,1,088,640 C trajectories/4,354,560 model ticks and8,064 five-UAV synthetic observation/report constructions; setup/peer links, private prefixes/history, output and full reading are additional. The full proposal records the corresponding counts separately to avoid hiding work behind0fits or double-counting nested CPU. Plan one16-tick four-arm correctness fixture(64native steps), non-native checks and independent engineering review, separate from result exposure. Worker+reader estimate**.7–.9CPUh**, serial40–60minutes, plus uncertain engineering/support; estimated raw retention.45–.75GB. These are planning anchors, not measured outcomes or bounds; the shorter1.436s deadline's feasibility remains empirical.
+
+The competing **S/M/R-only** study would test the simpler temporal-cost capability without the private-index extension or A implementation, at49,152 native steps and1,900,544 baseline requests under otherwise matched complete endpoints. It would leave the practical increment of forecasting a future decision unanswered. Retaining current M/R and spending nothing new remains a legitimate alternative. An unchanged R replication or burden-only attribution has less direct value for the present use choice. You may identify a materially better constructive comparison; no new module or named method is required. Do not turn failure of one outcome into an automatic horizon/beam/penalty/ACK/learner series.
+
+### Context and source precedence
+
+Paths below inherit the full question `source_sha` supplied by the send message unless an exact evidence revision is named. Read original inputs/results before the proponents' explanations, preserve contrary outcomes and distinguish published summaries from independent raw verification.
+
+- Governance: `docs/project/OPERATING_CONSTITUTION.md` §§1–5,7–9; current owner loop/parallel-working instruction above and current pause/routing in `docs/research/RESEARCH.md`. Root's delegated scientific selection is not a new owner-permission round; Pro advice grants no launch authority.
+- Methods: `.agents/skills/hmasd-scientific-tools/SKILL.md` — Choose the question; Design the comparison and decision exposure; Update the working explanation; Simple-model and literature bridges; Comparators and MARL information; Statistics; Cost and exposure. `.agents/skills/hmasd-loop-dispatch/SKILL.md` — Root-led DM trial. `.agents/skills/hmasd-portfolio-task/SKILL.md` — Steps and Boundaries. For consequential feasibility only, `.agents/skills/hmasd-research-engineering/SKILL.md` — L0; Checks and review; Execution and admission. These are current methods under the constitution, not additional governance.
+- Shared understanding: RESEARCH topic2's lawful-history/actual-service distinction and topic6's finite-window coverage/continuous-gap distinction change the comparator and interpretation here. They are revisable synthesis, not a preferred conclusion.
+- Frozen new evidence: `runs/uav_user_waiting/b01_burden_a01/{config,result}.json`; original source `86ae782cab3946a14062d3e0825c8597ea4513a7`, complete publication `0b9e2fee44edaf4183ae25aa8269136280f4826c`; `docs/research/candidates/uav_user_waiting/NOTES.md` B01 prospective/complete reading/independent disposition. Full canonical outputs are node-only; disclose inability to inspect them rather than claiming a raw re-review.
+- Concrete new design: same NOTES, `#b02-continuity-design` at `b298ab6194d9ba8cf8341fad30a7ca6d68424119`, with the explicit shared-model clarification above. There is no production B02 implementation yet to certify.
+- Retained contrary/context evidence: `docs/research/candidates/uav_service_age/NOTES.md` complete B01 reading and `runs/uav_service_age/b01_age_selector_a01/result.json`; use their original source/complete-reading identities, not a new paired panel. The supplied current waiting comparison already includes the strongest relevant M/R references; no old result is promoted to a new paired panel.
+- Consequential source: `experiments/candidates/uav_local_history/b01/controller.py` (`_nav_index`, `act`, `history=False`); `experiments/candidates/uav_radio_activation/b03/protocol.py` (report codec/clocks); `experiments/candidates/uav_user_waiting/b01/{history,scheduler,study,read}.py`; `experiments/candidates/uav_service_age/b01/scheduler.py` (M/W); `envs/pettingzoo/uav_env.py` and `uav_radio.py` only for the claimed observation/motion/assignment premises. Do not infer a new physical radio, battery or private-state permission.
+- Primary bridges, actual relevant passages: Li–Li–Eryilmaz2014, https://www.ele.uri.edu/faculty/binli/papers/TON14_RegularService.pdf §II Eq4–6/Lemma1 (reset0/steady-state inter-service moments); Kadota et al.2018, https://www.mit.edu/~modiano/papers/CV_J_104.pdf §IV-D Eq32–36 (different reset1 and broadcast/feedback assumptions); Asghar–Smith–Sundaram2019, https://ece.uwaterloo.ca/~sl2smith/papers/2019ACC-Multi-Robot_Routing_w_Latency_Constraints.pdf §III (timed graph revisits). DM, Root and reviewer read these passages. None supplies a UAV guarantee. Three local library searches were coverage-limited; no novelty claim or complete literature census is made. The older Remembering to Be Fair bridge remains inherited, not a new method here.
+
+Current stated owner/governance/method context replaces conflicting old chat instructions for this question. Named frozen results retain their original meaning. Do not substitute conversation memory or a moving branch for the pinned reasoning inputs; cite sources actually used and make decision-critical unread gaps explicit. Do not launch, grant budget or introduce a new approval/certification requirement.
+
+### Requested constructive advice
+
+1. Reconstruct what B01 strengthened and what its temporal costs left unresolved. Does the revised complete question buy useful capability/understanding beyond a repair or another asset ranking? Challenge Root's investment framing, not only implementation details.
+2. Choose the proposed A/S/M/R, the simpler S/M/R, a materially better concrete alternative, or retention/no investment. Explain the strongest constructive reason and contrary prediction, comparator/information rights, finite learning-versus-control interpretation and complete marginal cost. A small derivation/source bridge may help; a theorem, pilot, guaranteed gain or diagnosed defect is not an entry requirement.
+3. Evaluate the declared common byte extension, restricted two-finalist continuation, asynchronous prefix/shared model and strong M reference. Correct a consequential mismatch before investment, while avoiding an automatic full factorial, parameter sweep or exhaustive search. Keep surrogate, activation, prediction accuracy and native benefit separate.
+4. State what complete outcomes would change development/use and what would end the selected recipe without automatic repair. Identify any genuinely worthwhile independent additional question only if it offers distinct value alongside the two accepted studies; no fourth-question quota or re-review of unchanged accepted work.
+5. Return **MATERIAL_DISSENT: yes/no**, actual sources read and consequential limits. Be constructive, but owe neither a rescue experiment nor agreement. Write only the assigned empty `### Pro Answer` on latest main, preserve every other byte and stop on overlap; if safe writeback is unavailable, return the complete answer in chat rather than a hash or receipt.
+
+### Answer
+
+Independent Scientific Reviewer `/root/deep_report_review`, registered Astra Max/max, reused its separate evidence-first context for this material new question. Root read the complete response below; original supporting/adverse evidence preceded the proposed interpretation. The full returned answer is preserved below; its local source link resolves to the same proposal named by repository path above.
+
+**Recommend selecting the fixed A/S/M/R exploration, with the predictor clarification below.** It is a worthwhile third investment alongside the accepted fleet and parent studies. I do not recommend adding a fourth study merely to fill a slot.
+
+I reconstructed the frozen B01 inputs and results before reading its interpretation, then read the complete [B02 proposal at `b298ab619`](/home/fires/hmasd-wsl/docs/research/candidates/uav_user_waiting/NOTES.md:499). I checked all 53 source bindings, the consequential arm summaries and contrasts, controller/history/codec semantics, and four canonical R/O trajectories from the strongest positive and adverse worlds. I independently reconstructed their ages and checked matching initial geometry. I did not repeat the complete physical reader over all 256 trajectories; that accepted reader has passed. B02 implementation, runtime and model-prediction accuracy remain unverified.
+
+B01 supplies both a useful capability and a consequential limitation. R improves worst-user mean age over O by 1.889 ticks and service by 2.874 users/tick, while increasing pooled age p95 by 2.499 ticks and average per-user maximum gap by 3.388 ticks. In the adverse world, user 13’s 90-tick closed wait occurs despite correct age and accumulated burden at every report anchor. At report 72, the maximum-burden criterion ties and the secondary total-burden criterion selects away from that user. Later serving candidates are absent from the visited sets. This establishes neither missing memory nor global unreachability.
+
+The completed recommendation to retain R conditionally remains sound. The new proposal now supplies something the earlier re-entry condition lacked: a concrete comparison that can distinguish **the benefit of a temporal objective** from **the additional benefit of a modeled next decision**. It need not prove that insufficient lookahead caused the earlier loss.
+
+The comparator correction is substantive. M already outperforms R/O on the proposed typical-user gap endpoint and aggregate service. Its inclusion prevents a favorable comparison against an unsuitable reference. S supplies the matched short-block control; R preserves the separate worst-user-mean capability. Four arms are sufficient for these questions. Additional O/W arms, an unchanged R replication or a burden-attribution experiment would add less decision value here.
+
+The strongest remaining objection is limited opportunity for A to help. A can choose only between S’s two finalists, those finalists may coincide, and minimizing predicted squared-age cost does not guarantee smaller maximum gaps. The proposal explicitly acknowledges these restrictions and gives them measurable consequences. They justify a bounded exploration, not a prerequisite pilot or a broader planning claim.
+
+The predictor should be specified as **one shared model trajectory and private age history**, initialized from the decoded current report:
+
+- Save the private history at `t+4`, after the first two delivered ticks.
+- Generate the synthetic local observations and report from that modeled state.
+- Continue the first commitment through `t+4,t+5`; apply the modeled next-S action from `t+6`.
+- Count each delivered tick once in `Q8`; recomputing the continuation prefix must reproduce the last two ticks of the first block.
+
+Under the declared source, the apparent re-quantization ambiguity is resolvable without an oracle. Decoded UAV coordinates are integer metres; model commands move by 0 or ±30 metres and clip to integer bounds. Consequently, modeled `t+4` positions remain on the same grid. Float32 observation normalization followed by the existing metre-rounding codec returns that position: roundoff is far below half a metre. The synthetic report therefore does not introduce a new physical anchor in this contract. If implementation produces inconsistent prefix ages or geometry, that is a construction discrepancy to resolve in the planned correctness checks—not an undocumented restart approximation.
+
+This argument concerns a trajectory generated from lawful decoded inputs. It does **not** make the model equal to native truth. Quantized map/geometry, future C decisions and subsequent A replanning still matter. The proposed diagnostic correctly checks predicted next-report geometry and C proposals before the next command takes effect; disagreement between hypothetical next-S and actual next-A actions is not, by itself, forecast error.
+
+The extra waypoint byte is a defensible matched contract extension. The source supports its relevance: C’s navigation index persists despite `history=False`. All arms receive the same additional five bytes and the same 1.436-second computation allowance. This tests the rollout increment within that extension. It does not identify the byte’s separate value or establish performance under B01’s original information rights.
+
+I read the three load-bearing primary passages. They support the method bridge with the limits stated in the proposal: [Li–Li–Eryilmaz](https://www.ele.uri.edu/faculty/binli/papers/TON14_RegularService.pdf) connects reset-to-zero service age to inter-service moments under steady-state assumptions; [Kadota et al.](https://www.mit.edu/~modiano/papers/CV_J_104.pdf) supplies an age-sensitive quadratic-drift construction under different service and feedback assumptions; [Asghar–Smith–Sundaram](https://ece.uwaterloo.ca/~sl2smith/papers/2019ACC-Multi-Robot_Routing_w_Latency_Constraints.pdf) formalizes temporal revisit latency on metric graphs. None supplies a native UAV guarantee. No novelty conclusion is needed for this investment.
+
+The smallest worthwhile complete observation is the proposed fixed **64 fresh common worlds × four arms × H256**, followed by its complete reader:
+
+| Cost component | Declared amount |
+|---|---:|
+| Fits / updates | 0 / 0 |
+| Complete episodes / native steps | 256 / 65,536 |
+| Candidate-request ceiling | 3,311,104 |
+| Candidate-state reduction ceiling | 13,140,480 |
+| Additional virtual C decisions | At most 40,320 |
+
+These counts agree with my independent algebra. Prefix/history work, synthetic observations and verification remain additional. The proposed **0.7–0.9 CPU-hours for worker plus reader** is a planning estimate anchored to B01’s measured 0.507 CPU-hours, not a bound. Engineering/support cost, deadline feasibility and estimated 0.45–0.75 GB retention remain uncertain. The planned 64-step correctness fixture is separate exposure.
+
+The reading should change investment as follows:
+
+- **S improves M; A supplies no worthwhile increment over S:** retain the shorter ordinary capability and end this rollout extension.
+- **A improves both S and M on the declared gap endpoint:** retain a conditional prospective-control capability, with its measured service, fairness and computation costs.
+- **A improves S but remains inferior to M for the intended use:** retain M; the matched increment alone does not justify adoption.
+- **Finalists rarely differ or changes rarely execute:** conclude limited exposure for this restricted rollout, without treating it as a general failure of anticipation.
+- **Active, timely rollout fails despite reasonably accurate next-report predictions:** weaken this specific short-continuation approach. Do not automatically purchase a longer horizon, wider candidate set or learner.
+- **Intervals leave consequential benefit and loss unresolved:** preserve that uncertainty; replication requires a decision it would change.
+
+This buys two substantive judgments in one complete panel while retaining the established positive and adverse evidence. It does not require a positive result, establish a learning opportunity, or authorize execution independently of Root’s selection.
+
+**MATERIAL_DISSENT: no** — I support the revised bounded A/S/M/R investment, including the shared-trajectory clarification. The earlier comparator and computation objections have been addressed; I do not support broader expansion or promotion of A before its complete native comparison.
+
+### Pro Answer
+
+### Decision
+
+Pending the complete Pro constructive answer and Root's reasoned investment disposition. Root adopts the shared-model clarification as the concrete proposal sent for advice, not as a selected native launch. The two independent accepted learning studies continue unchanged. The waiting DM retains question ownership; no result exposure or implementation for this B02 proposal is yet selected.
+
 ## Prior reviews and runtime context
 
 <a id="portfolio-review-2026-09-30-parent-adaptation-development"></a>
