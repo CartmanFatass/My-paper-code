@@ -1924,3 +1924,267 @@ errors. Registration alone was not treated as adoption. This native child remain
 active through collection/reading; a checkpoint will rearm observation of the same
 operation, never restart or duplicate the worker. No result has yet been read and
 the fixed3fit/491520-step envelope is unchanged.
+
+<a id="b03-complete-reading"></a>
+## 2026-09-30 — B03 complete reading: useful ordinary sampling, adverse learned development
+
+The fixed C/I/Lg/Ls study is complete and has been read. All three learned greedy
+endpoints lose mean native J and service against C; all three sampled endpoints
+lose against their own initial sampled law I. Conversely, I improves mean J and
+service over C in every fresh block. This is useful **zero-fit ordinary stochastic
+capability**, with movement and within-episode service costs, rather than evidence
+that this learning program developed C successfully. Retain C, I and every learned
+endpoint; end unchanged B03 investment. The broader learning question remains open.
+
+The original [summary](../../../../runs/uav_parent_adaptation/b03_c_prior_a01/summary.json),
+[config](../../../../runs/uav_parent_adaptation/b03_c_prior_a01/config.json),
+[pure reading](../../../../runs/uav_parent_adaptation/b03_c_prior_a01/reading.json)
+and [terminal status](../../../../runs/uav_parent_adaptation/b03_c_prior_a01/terminal-status.json)
+bind this result to published input `a36f20e14cc434803f1d8e6f6e346f34197f6d19`.
+Summary SHA256 is `6337f5e641abbc83fcf5b687c9ab73c022a851b026e6fedb7cfff1e71f227c83`;
+reading SHA256 is `1bd05e78a8cd7851d710ae59d3dfb767dfaeeaef2042f670d177cda58a11140c`.
+These original outputs were copied without selecting or rewriting their rows.
+
+### Fixed endpoint results and uncertainty
+
+Each block has 32 distinct fresh worlds, with all four arms on each world and all
+three final checkpoints fixed before any evaluation. J is mean native per-tick
+`.7*served/50 + .3*quality`; it has no height, path, message or energy penalty.
+Service is connected users per tick. The table contains all declared J contrasts.
+The outer intervals are the fixed descriptive t95 over three block means (df2),
+not confirmation or multiplicity-adjusted intervals. For learned comparisons they
+combine independent training with distinct deployment-world/action variation;
+96 trajectories are not 96 trained policies. The two primary-adjacent upper bounds
+near zero must not be promoted to high precision from only three units.
+
+| Contrast | Block 303031 ΔJ | Block 303032 ΔJ | Block 303033 ΔJ | Mean ΔJ [outer t95] | Mean Δservice [outer t95] |
+|---|---:|---:|---:|---:|---:|
+| Lg−C, primary | −.011832 | −.014644 | −.006250 | −.010909 [−.021522, −.000296] | −.518880 [−1.037616, −.000144] |
+| Ls−I, necessary learning | −.070742 | −.090402 | −.072493 | −.077879 [−.104908, −.050850] | −4.675252 [−6.375828, −2.974676] |
+| I−C, initial stochastic use | +.015039 | +.031275 | +.024848 | +.023721 [+.003409, +.044032] | +1.709106 [+.517769, +2.900444] |
+| Lg−Ls, final decoding | +.043871 | +.044483 | +.041394 | +.043249 [+.039186, +.047313] | +2.447266 [+1.759800, +3.134732] |
+| Ls−C | −.055703 | −.059127 | −.047644 | −.054158 [−.068803, −.039514] | −2.966146 [−4.144436, −1.787855] |
+| Lg−I | −.026871 | −.045919 | −.031099 | −.034629 [−.059477, −.009782] | −2.227987 [−3.652200, −.803773] |
+
+All per-block vectors, paired-world intervals, quality/path readings and world
+signs remain in the reading. Lg−C J has 31 gains, 60 losses and five exact ties;
+its service has 34 gains, 57 losses and five ties. Only its third per-block J
+interval is wholly negative; all three service intervals cross zero. Ls−I J has
+only three gains and 93 losses, with all three per-block J/service intervals
+negative. I−C has 61 J gains/35 losses and 63 service gains/33 losses. These signs
+describe deployment heterogeneity without manufacturing training replication.
+
+The initial table/head are exactly zero, so I is the **same stochastic policy law
+in all three blocks**; independent hidden initializations do not change its output.
+Thus the generic reader interval-scope sentence about training variation does not
+apply to I−C. Its frozen three-block reading above remains unchanged. As a clearly
+supplemental fixed-policy calculation, pooling the 96 independent world/action
+blocks gives paired t95 ΔJ [+.012245,+.035197], service [+.881612,+2.536601]
+and path [+1350.912,+1950.503]m/UAV. This distinction strengthens the ordinary
+comparator evidence without changing the exploratory status or selected endpoint.
+
+The exact descriptive identity is
+`Lg−C = (Ls−I) + (I−C) + (Lg−Ls)`:
+`−.010909 = −.077879 + .023721 + .043249`.
+Greedy decoding recovers part of the final sampled loss but produces no upgrade
+over C or I. This is accounting across closed-loop policies, not causal mediation,
+a decoder-selection permission or evidence that greedy decoding caused learning.
+
+### Native tradeoffs and retained tails
+
+| Arm, pooled 96 episodes | J | Service/tick | Path m/UAV | Episode-J p10 | Mean within-episode service p10 | Whole-team zero ticks |
+|---|---:|---:|---:|---:|---:|---:|
+| C | .339785 | 20.336385 | 2294.255 | .256979 | 19.531250 | 0 |
+| I | .363506 | 22.045492 | 3944.962 | .306135 | 17.500000 | 0 |
+| Lg | .328877 | 19.817505 | 7214.694 | .248232 | 17.020833 | 2 |
+| Ls | .285627 | 17.370239 | 9357.406 | .238848 | 11.125000 | 3 |
+
+The p10 and exact zero-gap readings are supplementary reductions of retained raw
+service arrays; I independently reproduced the Scientific Reviewer's calculation.
+Across-world lower-tail return and within-episode continuity therefore point in
+different directions. I adds 1650.708m/UAV, about72% of C's path, while its mean
+quality difference is −.000689 with uncertainty crossing zero. Lg adds4920.439m
+over C and Ls adds5412.444m over I. These are real movement costs, not battery
+consequences on this all-on host. No path penalty was added retrospectively to J.
+
+Retained positive and adverse witnesses include:
+
+- I in world30300109 gains .234261J and16.488281 users/tick over C
+  (8.488281→24.976563). In30300221 it raises service9.984375→22.25.
+  In30300220 it instead loses .093560J and7.039063 users/tick
+  (26.710938→19.671875); Lg in that same world serves29.160156.
+- Lg in30300026 gains .120961J and9.277344 service over C
+  (14→23.277344). In30300031 it loses .138672J and9.707031 service
+  (24.503906→14.796875), with path roughly440→8559m/UAV.
+- Ls−I's worst J world is30300213: −.213640J, service30.417969→16.042969.
+  Its strongest positive is30300207: +.035044J/+3.125 service. The other
+  two J-positive Ls−I cases are30300108 and30300230; none is discarded.
+- Lg's two zero ticks are30300013, primitive ticks9–10 inclusive. Ls has
+  tick79 in30300007 and ticks15–16 in30300231. C/I have none; the maximum
+  learned zero run is two. In30300231 Ls still raises mean service over C
+  from3.449219 to14.5, so mean improvement and a new local gap coexist.
+
+Ticks here are one-based post-step indices. The absence of whole-team zero service
+for C/I is neither user-level continuity nor physical-safety proof. These witnesses
+also preclude claiming that sampling always helps, that C always becomes stationary,
+or that increased movement identifies the causal source of a gain.
+
+### Intervention, learning traces and changed explanation
+
+The trainable intervention was active. The three tables changed572/598/572 of702
+entries (L2 movement16.547/15.041/16.834); all1755 output-head entries changed,
+alongside9664/9856/9472 hidden entries and33537 critic entries. Greedy requested
+departures from the same-input C command were5222/4163/624 of10240 macro-agent
+decisions. Physical departures were15811/16306/1684 of40960 agent-ticks;
+boundary aliases accounted for5077/346/812 requested-different ticks. Ls requested
+5868/5979/5382 departures and physically departed on20370/22265/20494 ticks.
+I's corresponding requests were997/979/1040, with3784/3732/3957 physical ticks.
+An agent's later C output uses its actual changed history, so these counts are not
+the fraction of the full closed-loop C trajectory replaced or a return attribution.
+
+Initial C probability is.899999976 and entropy.650893. Endpoint Ls mean C
+probabilities are.429887/.415474/.469835 and entropies1.611200/1.893462/1.779413;
+Lg's categorical reference probabilities are.480011/.299373/.316747.
+The first32→last32 training-episode J means decline in every fit, approximately
+.37185→.29224, .36326→.28318 and.34790→.29161, while entropy rises and C mass
+falls. Critic MSE decreases, actor/table gradient norms and parameters move, and
+PPO clip fractions remain small. Training worlds change between bins: these are
+descriptive curves, not paired learning effects or an identified late-collapse time.
+Loss magnitudes do not establish relative gradient dominance.
+
+**Opportunity:** I's gain establishes that a useful ordinary stochastic policy is
+available under this same information/action contract. It weakens the conjecture
+that the initial .9-C exploratory law is necessarily damaging; it is not optimal
+headroom or an identified escape mechanism. **Representation:** the program exactly
+retains greedy C at initialization and expresses consequential alternatives. Its
+failure does not demonstrate that more memory, context or finer actions are needed.
+**Finite learning:** the exact table+MLP PPO recipe deteriorates under both fixed
+comparisons. Nonactivation and greedy decoding alone are contradicted explanations.
+**Complete value:** retain C's lower-motion behavior and I's native mean capability;
+neither learned endpoint is a preferred aggregate replacement here.
+
+Entropy regularization, team credit/critic estimation, finite optimization, table
+versus MLP interactions and changed visitation remain unseparated explanations.
+No repair receives causal credit from the observed correlations. The omitted
+standalone K-only learner can still succeed; including a trainable table inside D
+does not answer that comparison. Earlier B01/B02 K/D/U capabilities and losses
+remain intact and do not identify a weak-parent explanation across different hosts
+and action contracts.
+
+### Execution, complete reading and cost
+
+The native worker exited0 at2026-09-30T16:00:32.411UTC with both manifest-bound
+runner and supervisor absent. The original observer produced READY at16:00:50UTC,
+event `5e4cd0a255ec61bfd29902d1`, wake
+`13858aab-842b-4e59-bfa8-8d2a7f1c71ab`, generation8. App-queue delivery returned
+the known native-child `-32600` failure; the live turn collected from the same
+accepted handle. Draining/consuming rearmed generation9 without restarting work.
+
+The original source snapshot's pure reader ran once under detached task
+`uav-parent-b03-c-prior-reader-a01`, completing0 at16:02:43UTC. It read all1920
+raw episodes (292,100,449 logical bytes), independently reconstructed all491520
+native objective steps (maximum error2.36e-16), and exactly replayed all384
+evaluation actor trajectories/122880 agent rows (maximum logit error0).
+It checked source/checkpoint bindings, legal local/critic packing, C waypoint/tie
+choices against saved paid candidate scores, four-tick holds, categorical-label
+densities including aliases, addressed sampling and actual nested model counts.
+It did not rerun an optimizer or environment. Initial/final network replay,
+saved training likelihood validation and full optimizer reproduction are distinct.
+
+Actual scientific cost is exactly3fits,1536 training plus384 evaluation episodes,
+393216+98304=491520 primitive team steps,3072 actor and3072 critic Adam calls.
+C executes614400 decisions,16,588,800 candidate trajectories and66,355,200 modeled
+ticks, with256,141,255 link evaluations (253,570,608 candidate plus2,570,647
+setup). All2,457,600 every-tick agent ingests occurred;62425 C fallback decisions
+were used. Training collection used491520 actor and98304 critic rows; optimization
+replayed1,966,080 actor and393216 critic rows. Evaluation used92160 policy rows
+and30720 identity-shadow rows. Search remains part of C/I/Lg/Ls execution; this
+study establishes no planner-amortization benefit.
+
+The worker reports548.002988CPU-s within its batch and549.016484CPU-s since
+admission, peak559604KiB, and526.240260 monotonic wall seconds. The native epoch
+span is about549.909s; retain this clock disagreement rather than claim speedup.
+Per-fit CPU is148.475894/147.367751/146.628585; optimizer timing is nested, not
+additional. The external complete-reader timer reports40.92user+.32system=
+41.24CPU-s,42.15wall-s and458724KiB peak. Its internal40.077838CPU-s scope overlaps
+and is not added again. Measured worker-since-admission plus reader is therefore
+**590.256484CPU-s**. Engineering, independent review, subsequent saved-array
+inspection and publication are additional and incompletely metered.
+
+B01–B03 cumulatively paid18fits,2,654,208 native steps and27,648 optimizer calls,
+with3726.278368 measured worker/reader CPU-s. Prior acquisition/support remain
+additional. The prospective .5–1.5CPU-hour estimate overpredicted this batch; it
+was not a stopping cap and does not authorize extra exposure.
+
+One canonical required bulk copy remains at
+`hmasd-wsl-node:/home/wu/projects/HMASD/runs/uav_parent_adaptation/b03_c_prior_a01/`.
+Its1920 raw NPZs, six initial/final checkpoints (2,394,750 bytes),
+`training.jsonl` (2,279,010), `updates.jsonl` (5,439,543),
+`evaluation.jsonl` (573,320) and original logs retain positive, adverse and training
+evidence. Checkpoint/stream hashes and sizes were reverified against the original
+summary; raw bindings remain in the evaluation rows/training stream and full reader.
+No duplicate raw/checkpoint collection or retention archive was created.
+
+<a id="b03-independent-disposition"></a>
+### Independent scientific reading and investment disposition
+
+Registered ResearchCritic `critic_b03_result` reconstructed the evidence in a
+separate `fork_turns=none` context before reading the complete original selection
+review/Pro answer and my preferred interpretation. Its checks covered all23
+source identities at the launch Git SHA, six checkpoint hashes, training/update
+streams, all384 endpoint hashes/reductions and initial world pairing. It additionally
+reconstructed radio outcomes from geometry for24 positive/adverse trajectories
+(maximum J error2.22e-16), reusing the exhaustive reader for the remaining raw
+physics and endpoint-network checks. It did not run fits, native steps or optimizers.
+
+Its substantive recommendation is **end unchanged B03, retain C/I and every learned
+endpoint, and select no additional fit now; future learning comparisons must include
+I as an available competent ordinary stochastic reference**. Merely beating C may
+recover a benefit already available without training. The reviewer independently
+identified I's identical fixed law across roots, its positive pooled-world interval
+and the opposite episode-J versus within-episode service tails; I verified and
+incorporated those refinements above. It agrees that active sampled degradation
+rules out nonactivation/greedy-only accounts while leaving entropy, credit,
+optimization, visitation and K-only success unresolved. **MATERIAL_DISSENT: no.**
+I accept its recommendation and preserve all contrary cases. No second Pro round
+adds a distinct needed perspective to this agreed fixed-result disposition.
+
+The strongest objection to ending immediate investment is the new ordinary I
+capability and the affordable cost of testing a more competence-preserving learner.
+That is a substantive learning question, rather than a duty to repair the last
+editable component. The critic favors a matched entropy-objective comparison if
+Root selects further C-learning: prospectively select a retained block, keep its
+initialization/training streams fixed, change only the entropy coefficient, then
+evaluate fresh C/I/old-greedy/old-sampled/new-greedy/new-sampled trajectories.
+One conditional exploratory fit costs180224 native steps,1024 actor+1024 critic
+updates and24,330,240 C model ticks (roughly200worker CPU-s plus reading/support);
+three blocks cost540672 steps and buy recurrence. One selected block would support
+only conditional exploration, not an empirical learning-program claim. The predicted
+intermediate change is less entropy growth/C-mass loss; the necessary native
+consequence is sampled improvement beyond I. Merely reducing old Ls damage without
+beating I would not establish incremental usefulness; changed entropy without native
+improvement weakens that repair, and continued deterioration without the term weakens
+entropy as a sufficient explanation. This is a possible discrimination, not an
+identified cause, fixed successor design or selected fit.
+
+A fresh C/I replication could instead cost0fits/192episodes/49152steps, roughly
+50worker CPU-s. It would answer ordinary-policy recurrence for a specified adoption
+or transfer decision, not learning. Neither that decision nor a changed learning
+comparison is currently selected. The existing96-world evidence already changes
+comparator reuse; unchanged B03 replication has little immediate decision value.
+Root owns any next cross-question allocation. No unread operation or external
+scientific dependency prevents the present stop, and no replacement idea is owed.
+
+Before this material disposition I refreshed published main (`35540584d`) and
+reused topics2/5/8: competent ordinary alternatives, finite-package versus mechanism
+claims, and the distinction between task opportunity and learnability. I also read
+the newly published adjacent
+[local-C inheritance B02 result at269d5d03f](https://github.com/CartmanFatass/My-paper-code/blob/269d5d03f/docs/research/candidates/uav_fleet_adaptation/NOTES.md#b02-complete-reading):
+one imitation lineage passes its exploratory greedy/sampled starting-asset screens,
+without a measured speed gain. It is useful constructive evidence for the broader
+learning question, not an independent replication, comparison against our I, or
+diagnosis of B03's PPO loss; its inputs, learned law, worlds and training objective
+differ. Its owning DM retains interpretation and future execution. No cross-topic
+pivot or extra run is launched here. The directly reusable B03 change is to retain
+ordinary stochastic I and keep sampled learning, deployed greedy value and temporal
+service tradeoffs separate in the shared background.
