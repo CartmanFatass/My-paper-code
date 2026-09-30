@@ -1946,15 +1946,16 @@ capabilities against competent ordinary alternatives. Detailed innovation remain
 Oracle; no transfer-only prerequisite, S2 acquisition or fifth DM is selected.
 
 **Actual compute placement.** The configured local_linux and wsl_4070 are distinct physical
-Windows hosts (AMD Ryzen 7 8745H and Intel Core i9-13900H). The real-deadline waiting M/S/U/K
-producer and full reader retain the remote window. Untimed T/G2/A2, parent B06 approximation
-and fleet B06 development use single-compute-thread execution and prospectively prefer
-local_linux while that window remains occupied. Overlap requires fresh actual-node memory and
-occupancy admission; return a concrete conflict rather than disturbing an accepted process.
-Reported concurrent timings are not uncontended hardware benchmarks. Preserve actual interpreter,
-node identity, source publication and admission; do not migrate accepted operations or create a
-new resource-management mechanism. Original real-deadline comparisons retain their accepted
-windows and recorded fallbacks.
+Windows hosts (AMD Ryzen 7 8745H and Intel Core i9-13900H). Waiting's M/S/U/K producer and
+full reader reached verified terminal completion on wsl_4070 at22:11:37 UTC on September30,
+releasing its timed/heavy window. Unaccepted fleet B06 therefore resumes the owner's configured
+remote-first placement, subject to fresh actual-node admission; an actual remote constraint may
+justify local use. Already accepted T/G2/A2 and parent B06 approximation remain on local_linux
+under their original handles. These untimed studies use one compute thread; any overlap needs
+fresh memory/occupancy admission and explicitly conditional timing. Preserve actual interpreter,
+node identity and published source, and do not migrate accepted operations or create a new
+resource-management mechanism. Completed real-deadline comparisons retain their recorded
+hardware, accepted windows and observed fallbacks.
 
 The [retired initial four-study allocation](archive/2026-09-30/RESEARCH-four-study-initial-allocation.md)
 preserves its complete selection reasons, costs, resource decisions and source revision.
