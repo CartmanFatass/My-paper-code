@@ -1,0 +1,57 @@
+{
+  "object": "UAV-PARENT-RADIO-COMPOSITION-B05",
+  "status": "VERIFIED",
+  "completed_rows": 512,
+  "current_row": null,
+  "reader_calls": {
+    "environment_steps": 0,
+    "full_C_ranking_queries": 0,
+    "optimizer_steps": 0,
+    "regenerated_tape_integers": 45056,
+    "episode_metric_reconstructions": 512,
+    "metric_one_step_clip_agent_ops": 1105920,
+    "actual_motion_agent_ticks": 655360,
+    "native_formula_attempts": 164352,
+    "native_formula_completed": 164352,
+    "native_user_links_attempts": 41088000,
+    "native_user_links_completed": 41088000,
+    "native_peer_geometry_links_attempts": 1328208,
+    "native_peer_geometry_links_completed": 1328208,
+    "S_helper_attempts": 61440,
+    "S_helper_completed": 61440,
+    "S_helper_setup_links_attempts": 394246,
+    "S_helper_setup_links_completed": 394246,
+    "S_helper_extreme_links_attempts": 707156,
+    "S_helper_extreme_links_completed": 707156,
+    "S_forward_attempts": 61440,
+    "S_forward_completed": 61440,
+    "C_fallback_candidate_motion_steps": 1749492,
+    "candidate_pair_requests": 351817,
+    "candidate_geometry_requests": 1401210,
+    "candidate_geometry_attempts": 122354,
+    "candidate_geometry_completed": 122354,
+    "candidate_user_links_attempts": 30588500,
+    "candidate_user_links_completed": 30588500,
+    "candidate_reduction_attempts": 1401210,
+    "candidate_reduction_completed": 1401210,
+    "forecast_motion_agent_ticks": 6961760,
+    "wire_report_rounds": 22528,
+    "search_arithmetic_requests": 1425408
+  },
+  "reader_cpu_envelope_seconds": 3600.0,
+  "reader_wall_seconds": 306.1187618980184,
+  "reader_cpu_seconds": 305.1068306259999,
+  "process_peak_rss_kib": 352224,
+  "inputs": {
+    "summary": {
+      "path": "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b05_radio_composition_a01/summary.json",
+      "bytes": 4058714,
+      "sha256": "5806e0bc3461253a04ab2696d3a7b789f6f8ceb27e2e40ce9628a40327e75ef3"
+    },
+    "config": {
+      "path": "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b05_radio_composition_a01/config.json",
+      "bytes": 9381,
+      "sha256": "ce04a2f2b2f6cf9751246fbc9946b8bc541e5e7fb3286f2406375f395c4b2695"
+    }
+  }
+}

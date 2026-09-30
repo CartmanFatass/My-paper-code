@@ -4026,3 +4026,369 @@ refused the prior, stopped observer state; that completed state was drained and
 rearmed before adding this new job. No old result job was resumed and the accepted
 B05 worker was neither repeated nor moved. The native child remains active through
 terminal collection/full reading; checkpoint rearming retains this same handle.
+
+<a id="b05-complete-reading"></a>
+## 2026-09-30 — B05 complete reading: the inherited advantage does not simply add
+
+The single accepted producer and declared full reader completed. All512 episodes,
+131072 native transitions and0new fits/labels/optimizer updates are retained;
+[summary.json](../../../../runs/uav_parent_adaptation/b05_radio_composition_a01/summary.json)
+is COMPLETE and [reading.json](../../../../runs/uav_parent_adaptation/b05_radio_composition_a01/reading.json)
+is VERIFIED for all512 rows. The
+native exit witness records exit0 at20:06:39.448902UTC, with both manifest-bound
+processes absent and operation records consistent. The25-minute observer
+checkpoint at20:00:46 was drained and rearmed from generation14 to15 against the
+same operation; terminal READY was observed at20:07:08. The native child's known
+App queue rejection did not unload it or repeat work. Its terminal event was
+consumed, generation16 rearmed only to acknowledge that event, and observation
+stopped. The actual node's producer/reader window was then released to Root.
+
+Source remains `b0731ce69a4f15bc840f560cb1356a1b48a61f7b`, with42 bound source
+hashes and the unchanged original B02 S file/state identities above. There was one
+unscored constructor reset plus512 explicit resets,32768 local blocks,
+163840 agent decisions,122880 private-I sampled decisions and245760 addressed
+integer reads. All64 tape bundles were supplied once and reused under the fixed
+law; their unused public fields did not become a coordination device. No batch,
+clock, actor, tape, stopping rule or reader scope was changed after acceptance.
+
+The following are equal-weight32-world means after averaging Q/S's two tapes
+within each world. Brackets are the fixed **descriptive paired95% df31 t
+intervals**, not training-population, simultaneous or confirmation guarantees.
+Every world and tape remains in the full records. J is the principal score;
+service-p10 is within-episode team service, not individual-user continuity.
+
+|Fixed contrast|J difference [interval]|Mean service/step difference [interval]|Service-p10 difference [interval]|Mean path difference m/UAV [interval]|
+|---|---|---|---|---|
+|S_I_S2−C_S2|−.00449742 [−.01034881,+.00135396]|−.348938 [−.869857,+.171981]|+.031250 [−.660424,+.722924]|−981.531 [−1300.115,−662.948]|
+|S_I_S2−Q_I_S2|+.00497472 [+.00003469,+.00991474]|+.311279 [−.116399,+.738957]|+.640625 [−.007300,+1.288550]|−2458.879 [−2698.398,−2219.359]|
+|S_I_S2−C_T2|−.01031097 [−.01727293,−.00334902]|−.915955 [−1.513642,−.318267]|−.375000 [−1.144259,+.394259]|−1064.600 [−1377.043,−752.157]|
+|S_I_E−C_E|−.00993253 [−.02633375,+.00646869]|−.452942 [−1.879499,+.973616]|−.414063 [−1.511221,+.683096]|−65.385 [−676.559,+545.790]|
+|S_I_E−Q_I_E|−.00795202 [−.02008030,+.00417625]|−.534424 [−1.497677,+.428830]|+.460938 [−.327538,+1.249413]|−1949.937 [−2376.029,−1523.844]|
+|S_I_all−C_all|+.04659683 [+.02944582,+.06374785]|+3.432556 [+2.181908,+4.683204]|+1.796875 [+.106352,+3.487398]|+522.416 [+78.226,+966.606]|
+|S_I_all−Q_I_all|+.01820078 [+.00636933,+.03003223]|+1.299194 [+.519128,+2.079260]|+2.703125 [+1.473760,+3.932490]|−945.259 [−1297.748,−592.769]|
+|Q_I_S2−C_S2|−.00947214 [−.01455336,−.00439092]|−.660217 [−1.125753,−.194681]|−.609375 [−1.040089,−.178661]|+1477.347 [+1150.921,+1803.774]|
+|C_T2−C_S2|+.00581355 [+.00091308,+.01071402]|+.567017 [+.131439,+1.002594]|+.406250 [−.016983,+.829483]|+83.069 [−206.098,+372.235]|
+
+The main constructive prediction was a positive S increment over **both**
+matched S2 controls. Its point prediction fails. S−C has12 positive and20 negative
+world means; its interval does not establish harm or equivalence. S−Q has21/11,
+with the J interval's lower endpoint only.00003469 above zero; neither its mean
+service nor p10 interval excludes a loss. Its episode-minimum service difference
+is+.578125 [+.030366,+1.125884]. The predeclared stronger C_T2 comparison is
+adverse in24/32 J worlds and has lower mean service. It rules out a superior-J
+or superior-service reading against the retained ordinary full-use reference.
+The fixed E secondary does not rescue the failed primary: both its S−C and S−Q
+J points are negative, with intervals spanning zero.
+
+### Complete task and resource tradeoffs
+
+|Program|Mean J|Service/step|Service-p10|Episode minimum|Quality|Path m/UAV|Mean active transmitters|Episode CPU s|
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+|C_all|.338149|20.047974|18.578125|10.718750|.191590|2593.693|5|.189192|
+|Q_I_all|.366545|22.181335|17.671875|9.671875|.186687|4061.368|5|.284860|
+|S_I_all|.384746|23.480530|20.375000|11.000000|.186727|3116.109|5|.279002|
+|C_E|.465001|28.153564|26.390625|11.562500|.236171|2630.779|3.239380|1.221032|
+|Q_I_E|.463021|28.235046|25.515625|11.218750|.225766|4515.331|3.284729|1.295951|
+|S_I_E|.455069|27.700623|25.976563|11.750000|.224199|2565.395|3.234863|1.270824|
+|C_S2|.482908|30.059326|26.859375|11.375000|.206925|4554.011|3.446289|3.037700|
+|Q_I_S2|.473436|29.399109|26.250000|11.046875|.206162|6031.358|3.398315|3.177318|
+|S_I_S2|.478411|29.710388|26.890625|11.625000|.208218|3572.480|3.367676|3.011403|
+|C_T2|.488722|30.626343|27.265625|11.375000|.199843|4637.080|3.584229|26.434159|
+
+S_S2's path is shorter than Q_S2 in all32 world means and shorter than C_S2 in24;
+this physical movement difference survives the joint controller. It is not a
+battery, safety or continuity measurement. Its episode CPU advantage over C_S2
+is only−.026296 [−.097266,+.044673]s, versus−.165915 [−.219605,−.112225]s over
+Q_S2. Against C_T2 it saves23.422756 CPU-s/episode, but with the service deficit
+above: the larger planner's mean total episode CPU is8.778× S_S2 here. These
+measurements do not create an untested energy constraint or default adoption.
+S_S2−C_T2 quality is+.008375 [+.001814,+.014935] and transmitter count
+−.216553 [−.337451,−.095654]; its eligible-but-unassigned users increase
+.699646 [+.254570,+1.144722]. This is an accounting of distinct task components,
+not an identified cause of the lost service.
+
+Ordinary radio management retains large capability on this fresh panel. C_E−C_all
+gives J+.126852 [+.106160,+.147545], service+8.105591 and p10+7.8125;
+C_S2−C_all gives J+.144759 [+.125487,+.164032], service+10.011353 and
+p10+8.28125, with all32 J differences positive. Q's S2 package also raises J in
+all32 worlds, despite Q_S2 being worse than C_S2. C_S2−C_E gives J+.017907
+[+.006483,+.029331] and service+1.905762, while quality falls.029245 and
+path rises1923.232m. C_T2 adds a small conditional mean J/service increment over
+C_S2 here, unlike the previous B03 panel's unresolved increment; neither panel
+establishes equivalence or a universal T2 preference. It costs23.396459 additional
+CPU-s/episode over C_S2, lowers quality.007082 and activates.137939 more transmitters.
+
+The same S improves substantially over its own all-on deployment: E−all is
+J+.070323 [+.060615,+.080031], service+4.220093, p10+5.601563 and
+path−550.715m [−930.936,−170.494]; S2−all is J+.093665
+[+.080807,+.106524], service+6.229858, p10+6.515625 and path+456.371m
+[+133.342,+779.399]. Both have32 positive world J differences. S2−E adds
+J+.023342 [+.014582,+.032102] and p10+.914063 [+.406962,+1.421163], but
+quality falls.015982 and path rises1007.085m. E and S2 change several feedback,
+commitment and control features together; this is not a pure latency experiment.
+
+The all-on S−Q capability recurs on fresh deployment worlds, with23/32 positive
+J and23/32 positive p10 world differences; it is still one inherited training
+asset. All-on Q−C again raises J by.028396 [+.013073,+.043719] and mean service
+by2.133362 while losing.90625 mean p10 (interval spans zero), losing1.046875
+episode minimum [−1.612060,−.481690] and adding1467.675m path. Ordinary
+randomization's all-on mean value therefore does not automatically transfer to
+the managed contract either. All512 episodes have zero team-zero-service steps
+and gaps; individual users can still be unserved. Global episode minima by
+C/Q/S all-on are2/1/3, by C/Q/S E are3/1/3, by C/Q/S S2 are3/1/3, and C_T2 is3.
+
+### Adverse worlds and changed exposure
+
+World29347015 loses S_S2−C_T2 J.079553, service6.269531 and p10.5, with
+both S tapes losing about.0791/.0800J despite637.875m less mean path. The same
+world loses S_S2−Q_S2 J.040232 and service3.117188, and S_E−C_E J.085751,
+service6.427734 and p10 7.5. Against C_S2, S's largest J loss is29347007
+(−.033438J,−3.273438 service, unchanged p10,+60.483m path); world29347026
+loses6p10 users despite1319.905m less path. World29347027 loses5.5p10 against
+C_T2 and5 against Q_S2. Means do not erase these tails.
+
+The positive extreme29347001 has S_S2−C_S2 J+.049824, service+4.419922,
+p10+2.5 and1604.230m less path, but quality−.040184. World29347020 gives
+S_E−C_E J+.098897 and p10+7.75, with1045.410m more path and quality−.203456;
+it is not an all-component gain. The all-on reference also retains losses:
+S−Q world29347021 has J−.035359, p10−1 and path+1310.322m; world29347030
+has opposite tape J differences+.110176/−.098431, averaging only+.005873.
+No world, tape, startup or loss was filtered.
+
+Actual radio control created the expected feedback change, without proving a
+specific failure mechanism. S's empty/fallback local rows rise from702/20480
+all-on to7301/20480 under E and6791/20480 under S2;7149/6639 of those are
+silent rows. The same five agents keep their own private helper navigation;
+S still forms its network distribution and draws fresh private I coins on these
+empty/fallback and cache-hit inputs. C/Q have the corresponding silence and
+fallback exposure. All managed arms have only2.375 active-empty rows per
+episode on average; silence dominates their empty-row counts.
+
+Q has1970 categorical departures in each deployment, as expected from its
+fixed .1 departure rate and reused private tape. S has3422/3529/3601 departures
+for all/E/S2; its distribution depends on its changed visited histories, so
+these differences do not violate the unchanged same-input law. Actual one-step
+physical departures are3323/3360/3451, with99/169/150 clipping aliases.
+S2 delivers940 C,2077 Q and1790 S proposal overrides; C_T2 delivers1114.
+Every counted delivered override also changes the one-step physical command
+at delivery. These are saved-trajectory arithmetic checks, not alternate native
+suffixes or a decomposition of future reward. Greater intervention frequency
+alone does not identify a mediator.
+
+There are **0deadline misses in22528 managed rounds**, with no late proposal
+carries. The source's real wall-clock scopes were retained. E maximum round
+seconds C/Q/S=.027222/.030353/.030634 against.456; S2 maxima are
+.094400/.097134/.108496 against1.456; C_T2 maximum is.562316 against1.456.
+C_T2 mean/median/p95/p99 are.409132/.413661/.440121/.461909s. This local-host
+timing is neither the historical remote margin nor a guarantee on another node.
+The relative S loss cannot be excused as deadline failure in this panel.
+All352 managed episodes pay8704 recurring bytes and400 provisioned map bytes:
+3063808 recurring bytes plus140800 provisioned bytes; the32 unique maps total12800.
+These are modeled payloads, not measured physical energy.
+
+Saved forecast errors retain the declared approximation. E's next-renewal +5
+mean position errors for C/Q/S are16.584/26.165/15.502m, versus about.37/.33/.32m
+at +2…+4. Its +5 J mean-absolute errors are.006560/.010409/.004196. S2's
+known-commitment +3…+6 mean position errors are roughly.311m C,.275m Q and
+.291m S; J MAE stays below.00028 in each listed aggregate. C_T2 is about.316m
+with J MAE at most.000336. Rounding and threshold discontinuities still cause
+individual errors. Neither the small S2 errors nor the larger E +5 errors
+is a causal explanation of a complete world difference or permission to repair
+E retrospectively.
+
+### Complete verification and acquisition accounting
+
+The reader checked all164352 native-endpoint/report/terminal formula states,
+all source/checkpoint/raw bindings, motion, masked observations, navigation,
+cache behavior, private decoder, reports, arrivals, ties and saved search choices.
+All61440 S helper and one-row forward recomputations succeeded, including
+empty/fallback and cache-hit rows. Maximum native SINR and report-observation
+errors are0; maximum scalar native-metric error is1.66533453694e−16. C/Q use
+their paid source-bound rankings without new full-C ranking calls. All completed
+E candidates and the predeclared at-most-five actually-paid joint pairs per
+round were independently recomputed; it did not repeat every unselected joint
+candidate's physics. Native radio kernels are shared with the source; observation,
+motion forecast, search and selection arithmetic were reconstructed separately.
+This is the specified proportional verification, not an independent physical simulator.
+
+Worker C/Q:102400 requests,39469 hits,62931 misses,1699137 candidate paths,
+6796548 model ticks/reductions,39897900 candidate power links and418246 setup
+links. Worker S:61440 requests,29866 hits,31574 helper/forward misses,
+204655 setup and366562 extreme helper links. Its original policy-internal
+sampling counter stays0 because all122880 draws occur in the explicit B04-I
+wrapper after the five-query barrier; no draws are missing.
+
+|Coordinator|Requests|Distinct paid plans|Mask-state reductions|Geometry snapshots|Known prefix ticks|
+|---|---:|---:|---:|---:|---:|
+|E|317440|317440|1264800|40800|0|
+|S2|1187840|782739|3105488|1097280|20480|
+|C_T2|1714176|1714176|6803136|219456|4096|
+|Total|3219456|2814355|11173424|1357536|24576|
+
+No deadline interruption occurred, so E's attempted-request lower/upper bounds
+coincide here. The reader uses351817 candidate-pair requests and1401210
+mask-state reductions,122354 distinct recomputed geometries and30588500 user
+links, plus164352 native/observation formula checks with41088000 user links
+and1328208 active-peer geometry links. It also charges1101402 helper links,
+655360 actual-motion agent-ticks,6961760 forecast-motion agent-ticks,
+1105920 one-step clipping operations,1749492 fallback candidate-motion steps,
+1425408 saved-search arithmetic requests and45056 regenerated tape integers.
+Reader native steps, new full-C ranking queries and optimizer updates are0.
+Counts describe their declared call/geometry scopes; overlapping links are not
+silently promoted to independent observations or unique physical calls.
+
+Worker entry-through-summary timing is1597.239225866 CPU/1599.513719225 wall s,
+including imports, binding/load, construction/resets, all worker queries,
+native execution, diagnostics and prior writes, excluding its final self-write/
+close and the separately metered reader. The reader's internal artifact records
+304.951984046 CPU/305.963908326 wall s; its more inclusive final progress records
+305.106830626 CPU/306.118761898 wall s. They overlap and are not added. The
+disjoint measured worker+final-reader cost is **1902.346056492 CPU s** (31.706min),
+not free because there are0fits. Peak worker RSS is314212KiB and whole-process
+reader-progress peak352224KiB; peaks are not additive memory use. Engineering,
+review, transfer, post-read arithmetic and publication are unmetered support
+costs; launcher and final self-write costs lie outside these timers.
+
+Direction acquisition through this study is18fits/2891776 native steps and
+5744.062714 measured worker+reader CPU-s under the historical timing scopes.
+Original S acquisition and applicable radio/ordinary-reference work remain
+separately charged; shared source histories are not double-counted by adding
+overlapping totals. This study adds no training-population replication.
+
+Canonical output is the configured local-node directory
+`/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b05_radio_composition_a01`.
+All512 raw files were independently size/SHA-checked again after terminal exit:
+231301715 bytes,0 mismatches, one canonical evidence copy. `summary.json`
+has4058714 bytes/SHA256`5806e0bc3461253a04ab2696d3a7b789f6f8ceb27e2e40ce9628a40327e75ef3`;
+`reading.json`4528496 bytes/SHA256`eb10aacf025f56d5902837b153b74c76ea5ccd96ebed1602dce546c126c9430f`.
+The config is9381 bytes/SHA256`ce04a2f2b2f6cf9751246fbc9946b8bc541e5e7fb3286f2406375f395c4b2695`.
+Per-raw identities, complete world/tape contrasts and all audits are retained
+unaltered. Canonical stdout3267 bytes/SHA256`696bfadf74ff29aaf97835700830a5551e05401035268c555e67da7eca148ede`
+and empty stderr remain with the run. No full-tree copy or duplicate raw transfer
+was made. Snapshot/temporary asset cleanup awaits the independent consumers'
+release, not a new backup.
+
+Current published main `a5073c72c` topics2/4/8 were read for this interpretation.
+The new evidence changes topic4's scope from an all-on conditional S capability
+to a deployment-dependent service/path tradeoff; it also strengthens the need
+to retain C_T2 in topic2 rather than treating its previous unresolved increment
+as equivalence. It leaves the general information/representation decomposition
+in topic8 unchanged. The independent B05 scientific critic is reconstructing
+the original evidence in a separate context before final investment disposition.
+
+<a id="b05-independent-disposition"></a>
+### Independent scientific diagnosis and resolved investment judgment
+
+The registered `hmasd-research-critic` ran as
+`/root/dm_parent_adaptation/critic_b05_result` with `fork_turns=none`, without
+inherited DM/Root conversation. Its assignment supplied the actual question,
+fixed protocol and original supporting/adverse sources. It reconstructed the
+B05 results before reading the original selection Oracle advice or DM design
+disposition; it explicitly calls this evidence-first review, **not blind discovery**.
+It performed no new model/helper/native queries, wrote no direction files and
+spawned no helpers. The full substantive recommendation is recorded here:
+
+> I recommend retaining the all-on S capability and the S2 path/service tradeoff,
+> revising the complementary-capability explanation, and ending further purchases
+> for this unchanged composition recipe. B05 answers the selected reuse question
+> without establishing a generally preferred managed-S package or identifying a
+> training repair.
+
+The critic independently recovered all20 paired contrasts, including failed
+S_S2−C_S2, the narrow positive S_S2−Q_S2 and the adverse C_T2 challenge. It
+emphasized the two S−Q tape mean J increments+.009018 and+.000932: the
+world-paired positive interval has a lower endpoint near zero and cannot supply
+simultaneous or training-population support. C_T2−C_S2's new+.005814J and
++.567017 service increment makes treating the retained searches as interchangeable
+particularly inappropriate. Its one-member27×31 search is not full-team enumeration.
+
+It retains the all-on capability and the fact that either radio package improves
+S against its own all-on program in every world. It also preserves the shorter
+S_S2 path against C_S2 and Q_S2. Those facts do not establish a uniquely efficient
+neural option: C_E already provides J.465001 with2630.779m/UAV and1.221CPU-s,
+C_S2 provides.482908 with4554.011m/3.038CPU-s, and C_T2 provides.488722 with
+4637.080m/26.434CPU-s. S_S2's.478411 with3572.480m/3.011CPU-s is a conditional
+service/movement tradeoff among these programs. No physical utility currently
+prices those differences. Its p10 intervals against all three managed controls
+cross zero, with the concrete losses at29347015/07/26/27 above still consequential.
+
+Its changed explanation is **ordinary-control absorption at package level**:
+the S−C J difference changes from+.046597 all-on to−.004497 under S2, while
+ordinary Q−C changes from+.028396 to−.009472. Managed ordinary control supplies
+much of the benefit previously obtained through stochastic local motion. This
+is a simpler explanation consistent with the contrasts, not an identified
+component-level mechanism. Silence, proposals, physical departures and corrections
+are all active, and there are no deadline misses. Nonactivation therefore does
+not rescue the primary prediction.
+
+The critic specifically cautions against calling the S2 deficit failed discovery:
+its service difference versus C comprises only.009766 more users without an
+eligible server and.339172 more eligible-but-unassigned users. That identity
+does not identify an assignment repair, capacity/geometry cause or masking
+effect. E's forecast crosses motion renewal; S2 commits its scored block, so
+their difference remains bundled. Task opportunity is established by ordinary
+managed gains, and lawful execution of the inherited representation is established.
+Its sufficiency and finite learnability under the managed contract remain
+untested. No training occurred. The two-lineage fleet B04 R−S losses weaken
+automatic reward-continuation investment, without ruling out masked development
+or supplying a substitute B05 asset. B01–B03 adversity and B04 A/B failure remain.
+
+> My investment recommendation is no additional native run for the unchanged
+> B05 question. More worlds would chiefly refine the small S2−C difference; no
+> current adoption decision requires that precision. S/Q+T2, temperature selection
+> or replacing S would answer new questions. Ending this purchase does not close
+> the broader learning question or discard the useful asset.
+
+The critic's strongest constructive **candidate**, if separately selected, is
+to develop proposals under the actual fixed S2 execution process, comparing
+against unchanged S+S2 and competent ordinary control. It distinguishes a gain
+beyond both references, a gain only over the inherited parent, and no improvement;
+each retains path/tail tradeoffs. The conjecture need not first solve a causal
+mechanism. Training horizon, independently fitted units and complete costs remain
+unspecified, so the critic explicitly returns it to Root allocation rather than
+giving it priority or treating B05 as authorization. It does not endorse a new fit.
+
+Its direct checks cover42 source hashes against the snapshot and current source,
+the original S file hash, configuration/reader bindings, all512 schedule and
+initial-state/tape identities, all means/20 paired contrasts and saved deadline
+times. It checked36 positive/adverse/tail NPZ episodes for hashes, native
+reward/connection reductions, service/path statistics, local feature provenance,
+silent-input behavior and S2 commitments. It reviewed the bounded reader scope
+without repeating neural/helper/native evaluations or all unselected candidate
+physics, and reused applicable historical independent reading. It charged the
+full1902.346 worker+reader CPU-s and existing acquisition/unmodeled costs.
+Both it and Root's separate source-only successor Oracle released their snapshot/
+staged-S consumers after reading. **MATERIAL_DISSENT: no.** The critic finds
+the selected comparison appropriate and supports restricted retention plus no
+automatic new run; no broader superiority claim or new investment was endorsed.
+
+I accept this diagnosis and the no-run recommendation. The main belief changed
+is that independently useful local motion and ordinary radio control need not
+produce an additional service advantage when combined. The matched all-on
+advantage recurs; the strong ordinary controller gains more from management.
+The descriptive interaction in J is−.051094 [−.068360,−.033829] against C and
+−.013226 [−.025410,−.001043] against Q under S2 (E interactions−.056529 and
+−.026153). This narrows the complementary-capability prediction while preserving
+S_S2's movement tradeoff. It is not a proof of substitution, a failure of all
+composition, learned coordination, representation insufficiency or unlearnability.
+
+The finite study is complete. Stop unchanged B05 purchases; retain original S_I,
+the competent ordinary C/Q and E/S2/T2 references, all failed/adverse records
+and the implemented composition/reader interfaces. An exact replication would
+primarily tighten the near-zero S2−C contrast without resolving an active use
+decision. A masked-development conjecture or a per-user-continuity composition
+changes the question and requires its own fixed comparison and full price;
+neither is granted a run by this result. Root's source-only Oracle has separately
+asked whether the existing post-helper0…9 navigation index can be carried by
+waiting's141-byte report. I confirmed that bounded interface fact and provider
+cost ceilings, while explicitly reporting this adverse primary and declining
+to assume a generic managed-S service advantage. That feasibility exchange made
+0queries/0fits/0new native exposures and selected no successor here.
+
+The direction returns to **reserve**, with no producer, unread accepted result,
+open Pro question or selected next experiment. Its broader scientific question
+remains open, not waiting on a fabricated external decision. Re-entry would be
+a separately selected consequential comparison with an ordinary reference,
+declared resource/task value and complete costs. Cross-question allocation and
+the critic's unpriced S2-development candidate return to Root through the native
+parent boundary; ordinary publication and cleanup remain this DM's responsibility.
