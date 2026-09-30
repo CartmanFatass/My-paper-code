@@ -1841,6 +1841,13 @@ The three local literature stores were searched for these report bridges; their 
 carry no novelty verdict. No new result-bearing fit, controller evaluation, counterfactual label
 generation or supplied prototype execution was performed for this report review.
 
+Report-reading cleanup,2026-09-30: after both readers finished and the primary URLs, hashes
+and coverage were published, the nine owned PDF/text/manifest temporary files and their
+`temp/deep_report_review_20260930/` directory were removed. No active file consumer was
+found among inspectable same-user processes. Target allocation removed was 11,091,968 bytes;
+net reduction including this record was 11,091,968 allocated bytes. The targets are absent,
+with no leftovers; the complete owner report and review remain in the repository.
+
 ### Pro Answer
 
 The owner-requested round-boundary constructive synthesis will use the complete current result
