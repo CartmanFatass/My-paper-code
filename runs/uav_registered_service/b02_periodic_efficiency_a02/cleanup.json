@@ -1,0 +1,260 @@
+{
+  "scope": "Exact terminal B02 source snapshots only; unique canonical a01/a02 raw evidence retained. Initial refusal preserved.",
+  "publication_sha": "8e87c58de68c605393e272d4b60291c57712882a",
+  "initial_preview": {
+    "returncode": 0,
+    "stdout": {
+      "mode": "preview",
+      "snapshots": [
+        {
+          "eligible": false,
+          "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/79cec060155e4252bc9d82b5c3d08e34",
+          "reason": "snapshot has changed, untracked, or ignored files",
+          "snapshot": "79cec060155e4252bc9d82b5c3d08e34"
+        },
+        {
+          "claim": "/home/wu/projects/HMASD/.git/hmasd-admission/9626ce7ddc190ad3507d1189b71e3308b366e6f1777e4d7bdf4d1d71d4465601.json",
+          "durable_ref": "refs/remotes/origin/HEAD",
+          "eligible": true,
+          "output": "/home/wu/projects/HMASD/runs/uav_registered_service/b02_periodic_efficiency_a02",
+          "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/2d9f08d7fc8041ea844836c3966ad4e3",
+          "sha": "8ab72e5e2c2123e6cf0af6744ada24f8188ec2dc",
+          "snapshot": "2d9f08d7fc8041ea844836c3966ad4e3"
+        }
+      ]
+    },
+    "stderr": ""
+  },
+  "remote_cache_cleanup": {
+    "before_targets": [
+      {
+        "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/79cec060155e4252bc9d82b5c3d08e34",
+        "allocated_bytes": 806465536
+      },
+      {
+        "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/2d9f08d7fc8041ea844836c3966ad4e3",
+        "allocated_bytes": 806293504
+      },
+      {
+        "path": "/home/wu/projects/HMASD/.git/worktrees/79cec060155e4252bc9d82b5c3d08e34",
+        "allocated_bytes": 3473408
+      },
+      {
+        "path": "/home/wu/projects/HMASD/.git/worktrees/2d9f08d7fc8041ea844836c3966ad4e3",
+        "allocated_bytes": 3473408
+      }
+    ],
+    "before_allocated_bytes": 1619705856,
+    "live_snapshot_consumers": [],
+    "deleted_generated_cache_files": [
+      "/home/wu/projects/HMASD/.git/hmasd-launch-sources/79cec060155e4252bc9d82b5c3d08e34/envs/pettingzoo/__pycache__/__init__.cpython-310.pyc",
+      "/home/wu/projects/HMASD/.git/hmasd-launch-sources/79cec060155e4252bc9d82b5c3d08e34/envs/pettingzoo/__pycache__/scenario1.cpython-310.pyc",
+      "/home/wu/projects/HMASD/.git/hmasd-launch-sources/79cec060155e4252bc9d82b5c3d08e34/envs/pettingzoo/__pycache__/scenario2.cpython-310.pyc",
+      "/home/wu/projects/HMASD/.git/hmasd-launch-sources/79cec060155e4252bc9d82b5c3d08e34/envs/pettingzoo/__pycache__/uav_env.cpython-310.pyc",
+      "/home/wu/projects/HMASD/.git/hmasd-launch-sources/79cec060155e4252bc9d82b5c3d08e34/envs/pettingzoo/__pycache__/uav_radio.cpython-310.pyc",
+      "/home/wu/projects/HMASD/.git/hmasd-launch-sources/79cec060155e4252bc9d82b5c3d08e34/experiments/candidates/uav_local_history/b01/__pycache__/__init__.cpython-310.pyc",
+      "/home/wu/projects/HMASD/.git/hmasd-launch-sources/79cec060155e4252bc9d82b5c3d08e34/experiments/candidates/uav_local_history/b01/__pycache__/controller.cpython-310.pyc",
+      "/home/wu/projects/HMASD/.git/hmasd-launch-sources/79cec060155e4252bc9d82b5c3d08e34/experiments/candidates/uav_radio_activation/b01/__pycache__/__init__.cpython-310.pyc",
+      "/home/wu/projects/HMASD/.git/hmasd-launch-sources/79cec060155e4252bc9d82b5c3d08e34/experiments/candidates/uav_radio_activation/b01/__pycache__/protocol.cpython-310.pyc",
+      "/home/wu/projects/HMASD/.git/hmasd-launch-sources/79cec060155e4252bc9d82b5c3d08e34/experiments/candidates/uav_radio_activation/b02/__pycache__/__init__.cpython-310.pyc",
+      "/home/wu/projects/HMASD/.git/hmasd-launch-sources/79cec060155e4252bc9d82b5c3d08e34/experiments/candidates/uav_radio_activation/b02/__pycache__/protocol.cpython-310.pyc",
+      "/home/wu/projects/HMASD/.git/hmasd-launch-sources/79cec060155e4252bc9d82b5c3d08e34/experiments/candidates/uav_radio_activation/b02/__pycache__/scheduler.cpython-310.pyc",
+      "/home/wu/projects/HMASD/.git/hmasd-launch-sources/79cec060155e4252bc9d82b5c3d08e34/experiments/candidates/uav_radio_activation/b03/__pycache__/__init__.cpython-310.pyc",
+      "/home/wu/projects/HMASD/.git/hmasd-launch-sources/79cec060155e4252bc9d82b5c3d08e34/experiments/candidates/uav_radio_activation/b03/__pycache__/protocol.cpython-310.pyc",
+      "/home/wu/projects/HMASD/.git/hmasd-launch-sources/79cec060155e4252bc9d82b5c3d08e34/experiments/candidates/uav_radio_activation/b03/__pycache__/scheduler.cpython-310.pyc"
+    ],
+    "removed_cache_directories": [
+      "/home/wu/projects/HMASD/.git/hmasd-launch-sources/79cec060155e4252bc9d82b5c3d08e34/envs/pettingzoo/__pycache__",
+      "/home/wu/projects/HMASD/.git/hmasd-launch-sources/79cec060155e4252bc9d82b5c3d08e34/experiments/candidates/uav_local_history/b01/__pycache__",
+      "/home/wu/projects/HMASD/.git/hmasd-launch-sources/79cec060155e4252bc9d82b5c3d08e34/experiments/candidates/uav_radio_activation/b01/__pycache__",
+      "/home/wu/projects/HMASD/.git/hmasd-launch-sources/79cec060155e4252bc9d82b5c3d08e34/experiments/candidates/uav_radio_activation/b02/__pycache__",
+      "/home/wu/projects/HMASD/.git/hmasd-launch-sources/79cec060155e4252bc9d82b5c3d08e34/experiments/candidates/uav_radio_activation/b03/__pycache__"
+    ],
+    "tracked_source_unchanged": true,
+    "post_cache_removal_git_status": "clean"
+  },
+  "clean_preview": {
+    "returncode": 0,
+    "stdout": {
+      "mode": "preview",
+      "snapshots": [
+        {
+          "claim": "/home/wu/projects/HMASD/.git/hmasd-admission/7b2c9de4c24d7e5ad9fb59c378d7136d703d0e94581a4b0c7b66084c6cf23413.json",
+          "durable_ref": "refs/remotes/origin/HEAD",
+          "eligible": true,
+          "output": "/home/wu/projects/HMASD/runs/uav_registered_service/b02_periodic_efficiency_a01",
+          "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/79cec060155e4252bc9d82b5c3d08e34",
+          "sha": "8ab72e5e2c2123e6cf0af6744ada24f8188ec2dc",
+          "snapshot": "79cec060155e4252bc9d82b5c3d08e34"
+        },
+        {
+          "claim": "/home/wu/projects/HMASD/.git/hmasd-admission/9626ce7ddc190ad3507d1189b71e3308b366e6f1777e4d7bdf4d1d71d4465601.json",
+          "durable_ref": "refs/remotes/origin/HEAD",
+          "eligible": true,
+          "output": "/home/wu/projects/HMASD/runs/uav_registered_service/b02_periodic_efficiency_a02",
+          "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/2d9f08d7fc8041ea844836c3966ad4e3",
+          "sha": "8ab72e5e2c2123e6cf0af6744ada24f8188ec2dc",
+          "snapshot": "2d9f08d7fc8041ea844836c3966ad4e3"
+        }
+      ]
+    },
+    "stderr": ""
+  },
+  "collector_apply": {
+    "returncode": 0,
+    "stdout": {
+      "mode": "apply",
+      "snapshots": [
+        {
+          "claim": "/home/wu/projects/HMASD/.git/hmasd-admission/7b2c9de4c24d7e5ad9fb59c378d7136d703d0e94581a4b0c7b66084c6cf23413.json",
+          "durable_ref": "refs/remotes/origin/HEAD",
+          "eligible": true,
+          "output": "/home/wu/projects/HMASD/runs/uav_registered_service/b02_periodic_efficiency_a01",
+          "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/79cec060155e4252bc9d82b5c3d08e34",
+          "removed": true,
+          "sha": "8ab72e5e2c2123e6cf0af6744ada24f8188ec2dc",
+          "snapshot": "79cec060155e4252bc9d82b5c3d08e34"
+        },
+        {
+          "claim": "/home/wu/projects/HMASD/.git/hmasd-admission/9626ce7ddc190ad3507d1189b71e3308b366e6f1777e4d7bdf4d1d71d4465601.json",
+          "durable_ref": "refs/remotes/origin/HEAD",
+          "eligible": true,
+          "output": "/home/wu/projects/HMASD/runs/uav_registered_service/b02_periodic_efficiency_a02",
+          "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/2d9f08d7fc8041ea844836c3966ad4e3",
+          "removed": true,
+          "sha": "8ab72e5e2c2123e6cf0af6744ada24f8188ec2dc",
+          "snapshot": "2d9f08d7fc8041ea844836c3966ad4e3"
+        }
+      ]
+    },
+    "stderr": ""
+  },
+  "remote_after_verification": {
+    "after_targets": [
+      {
+        "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/79cec060155e4252bc9d82b5c3d08e34",
+        "exists": false,
+        "allocated_bytes": 0
+      },
+      {
+        "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/2d9f08d7fc8041ea844836c3966ad4e3",
+        "exists": false,
+        "allocated_bytes": 0
+      },
+      {
+        "path": "/home/wu/projects/HMASD/.git/worktrees/79cec060155e4252bc9d82b5c3d08e34",
+        "exists": false,
+        "allocated_bytes": 0
+      },
+      {
+        "path": "/home/wu/projects/HMASD/.git/worktrees/2d9f08d7fc8041ea844836c3966ad4e3",
+        "exists": false,
+        "allocated_bytes": 0
+      }
+    ],
+    "after_allocated_bytes": 0,
+    "retained_evidence": [
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_registered_service/b02_periodic_efficiency_a01",
+        "raw_files": 102,
+        "raw_bytes": 65045794,
+        "all_raw_hashes_match": true,
+        "summary_sha256": "203885babdf7d5d97ab9c15010a0808e40fdb8c2909fc182ef2890e95ce9bcb6"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_registered_service/b02_periodic_efficiency_a02",
+        "raw_files": 192,
+        "raw_bytes": 125150096,
+        "all_raw_hashes_match": true,
+        "summary_sha256": "99fac8086f621fc0d07a3d4a1edbc9c10d1b053a0966309bc9c27f4100409192"
+      }
+    ],
+    "claims_retained": [
+      "/home/wu/projects/HMASD/.git/hmasd-admission/7b2c9de4c24d7e5ad9fb59c378d7136d703d0e94581a4b0c7b66084c6cf23413.json",
+      "/home/wu/projects/HMASD/.git/hmasd-admission/9626ce7ddc190ad3507d1189b71e3308b366e6f1777e4d7bdf4d1d71d4465601.json"
+    ]
+  },
+  "remote_net_allocated_bytes_reclaimed": 1619705856,
+  "local_cleanup": {
+    "before_targets": [
+      {
+        "path": "/home/fires/hmasd-wsl/temp/directions/uav_registered_service/b02-observe",
+        "allocated_bytes": 8192
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/temp/directions/uav_registered_service/b02-a02-observe",
+        "allocated_bytes": 16384
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/temp/directions/uav_registered_service/b02-diagnosis",
+        "allocated_bytes": 8192
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/experiments/candidates/uav_registered_service/b02/__pycache__",
+        "allocated_bytes": 184320
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/tests/experiments/candidates/uav_registered_service/b02/__pycache__",
+        "allocated_bytes": 65536
+      }
+    ],
+    "before_allocated_bytes": 282624,
+    "live_target_consumers": [],
+    "observer_stopped": true,
+    "observer_daemon_absent": true,
+    "all_jobs_terminal": true,
+    "deleted_files": [
+      "/home/fires/hmasd-wsl/temp/directions/uav_registered_service/b02-observe/request.json",
+      "/home/fires/hmasd-wsl/temp/directions/uav_registered_service/b02-a02-observe/reader-request.json",
+      "/home/fires/hmasd-wsl/temp/directions/uav_registered_service/b02-a02-observe/request.json",
+      "/home/fires/hmasd-wsl/temp/directions/uav_registered_service/b02-a02-observe/probe_reader.py",
+      "/home/fires/hmasd-wsl/temp/directions/uav_registered_service/b02-diagnosis/reconstruct.py",
+      "/home/fires/hmasd-wsl/experiments/candidates/uav_registered_service/b02/__pycache__/scheduler.cpython-312.pyc",
+      "/home/fires/hmasd-wsl/experiments/candidates/uav_registered_service/b02/__pycache__/read.cpython-310.pyc",
+      "/home/fires/hmasd-wsl/experiments/candidates/uav_registered_service/b02/__pycache__/study.cpython-312.pyc",
+      "/home/fires/hmasd-wsl/experiments/candidates/uav_registered_service/b02/__pycache__/read.cpython-312.pyc",
+      "/home/fires/hmasd-wsl/experiments/candidates/uav_registered_service/b02/__pycache__/metrics.cpython-310.pyc",
+      "/home/fires/hmasd-wsl/experiments/candidates/uav_registered_service/b02/__pycache__/metrics.cpython-312.pyc",
+      "/home/fires/hmasd-wsl/experiments/candidates/uav_registered_service/b02/__pycache__/__init__.cpython-310.pyc",
+      "/home/fires/hmasd-wsl/experiments/candidates/uav_registered_service/b02/__pycache__/run.cpython-310.pyc",
+      "/home/fires/hmasd-wsl/experiments/candidates/uav_registered_service/b02/__pycache__/scheduler.cpython-310.pyc",
+      "/home/fires/hmasd-wsl/experiments/candidates/uav_registered_service/b02/__pycache__/run.cpython-312.pyc",
+      "/home/fires/hmasd-wsl/experiments/candidates/uav_registered_service/b02/__pycache__/study.cpython-310.pyc",
+      "/home/fires/hmasd-wsl/experiments/candidates/uav_registered_service/b02/__pycache__/__init__.cpython-312.pyc",
+      "/home/fires/hmasd-wsl/tests/experiments/candidates/uav_registered_service/b02/__pycache__/test_gate_scheduler.cpython-310-pytest-9.1.1.pyc",
+      "/home/fires/hmasd-wsl/tests/experiments/candidates/uav_registered_service/b02/__pycache__/test_study_read.cpython-310-pytest-9.1.1.pyc"
+    ],
+    "after_targets": [
+      {
+        "path": "/home/fires/hmasd-wsl/temp/directions/uav_registered_service/b02-observe",
+        "exists": false,
+        "allocated_bytes": 0
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/temp/directions/uav_registered_service/b02-a02-observe",
+        "exists": false,
+        "allocated_bytes": 0
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/temp/directions/uav_registered_service/b02-diagnosis",
+        "exists": false,
+        "allocated_bytes": 0
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/experiments/candidates/uav_registered_service/b02/__pycache__",
+        "exists": false,
+        "allocated_bytes": 0
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/tests/experiments/candidates/uav_registered_service/b02/__pycache__",
+        "exists": false,
+        "allocated_bytes": 0
+      }
+    ],
+    "after_allocated_bytes": 0
+  },
+  "local_net_allocated_bytes_reclaimed": 282624,
+  "total_target_allocated_bytes_reclaimed": 1619988480,
+  "remaining_cleanup_blocker": null,
+  "scope_note": "Allocated bytes in the exact deleted source/metadata/scratch/cache targets, not Git object storage or host-wide free-space change."
+}

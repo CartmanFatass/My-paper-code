@@ -1526,3 +1526,65 @@ round offers distinct value for this agreed reading. Publish the shared-backgrou
 updates about conditional efficiency and fixed-window versus continuous service;
 then remove unused snapshots/scratch after checking consumers. Cleanup facts will
 be appended below after measured deletion, not inferred from publication.
+
+
+<a id="b02-final-cleanup"></a>
+### B02 publication and measured cleanup complete
+
+The complete scientific reading, independent diagnosis, compact artifacts and
+reserve standing were published in `8e87c58de68c605393e272d4b60291c57712882a` before
+retiring source snapshots. Useful B02 code/tests and frozen source/reader
+`8ab72e5e2` remain published for G/O/S2 use. No further experiment, advice or
+observer is active, and no selected scientific successor is waiting. The broader
+question stays open under the preceding disposition.
+
+Both native workers and the pure reader are terminal; all bounded helpers have
+returned. Privileged read-only process scans found no consumers of the exact
+remote snapshots or local deletion targets. The observer is stopped, its daemon
+absent, its events consumed and its three jobs terminal. Source hashes and the
+full reading were retained before deletion. No authoring checkout was removed,
+and no other direction's live files were touched.
+
+The native snapshot collector's initial preview refused a01 because the snapshot
+had changed/untracked/ignored files. Inspection found exactly15 generated `.pyc`
+files in five `__pycache__` directories from the one-report diagnosis, with no
+tracked change or other untracked file. After checking consumers, those exact
+cache files and empty cache directories were removed. The subsequent native
+preview accepted both snapshots; `hmasd_snapshot_gc.py --apply` removed exactly:
+
+- `/home/wu/projects/HMASD/.git/hmasd-launch-sources/79cec060155e4252bc9d82b5c3d08e34`
+  and its matching `.git/worktrees/79cec060155e4252bc9d82b5c3d08e34` registration;
+- `/home/wu/projects/HMASD/.git/hmasd-launch-sources/2d9f08d7fc8041ea844836c3966ad4e3`
+  and its matching `.git/worktrees/2d9f08d7fc8041ea844836c3966ad4e3` registration.
+
+The original refusal and later successful previews/apply are preserved in
+[cleanup.json](../../../../runs/uav_registered_service/b02_periodic_efficiency_a02/cleanup.json).
+These four remote targets occupied1,619,705,856 allocated bytes before cache
+removal and zero afterward. Exact absence is verified; claims, manifests and
+canonical outputs remain. No force removal, claim deletion, source rewrite,
+archive, backup copy or Git object pruning was used.
+
+Locally removed exact targets under `/home/fires/hmasd-wsl/`:
+
+- `temp/directions/uav_registered_service/b02-observe/` (8192 allocated bytes);
+- `temp/directions/uav_registered_service/b02-a02-observe/` (16384);
+- `temp/directions/uav_registered_service/b02-diagnosis/` (8192);
+- `experiments/candidates/uav_registered_service/b02/__pycache__/` (184320);
+- `tests/experiments/candidates/uav_registered_service/b02/__pycache__/` (65536).
+
+These local targets held282,624 allocated bytes and are absent. Total measured
+allocation in the deleted targets fell from **1,619,988,480 bytes to zero**.
+This is target allocation reclaimed, not a claim about Git object storage or
+host-wide free-space changes amid other work. Detailed deleted files, measurements
+and no-consumer checks are in the compact cleanup record. No requested target or
+concrete cleanup blocker remains. The previously observed remote automatic-GC
+bad-tree/repack warning did not block this native collector and was not repaired.
+
+After deletion, every retained raw artifact was checked again against its original
+size and SHA256: a01 has102 files/65,045,794 bytes, a02 has192 files/125,150,096 bytes.
+Both summaries retain their recorded hashes and both original native claims
+remain present. Required raw evidence totals294 files/190,195,890 bytes in its
+one canonical node location; no redundant local raw copy or retention chain was
+created. The technical failure, adverse worlds, positive capability and precise
+primary-attempt rule remain recoverable. Closure is complete; this native DM
+returns the read result and no-run recommendation to Root.
