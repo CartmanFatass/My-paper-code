@@ -2676,3 +2676,126 @@ copy; original64 M traces remain by reference. Useful frozen implementation,
 tests, argument adapter and compact extractor stay published. B03 is fully
 read, diagnosed, published and cleaned; the changed ordinary M/S/U/K question
 may now proceed under Root's existing allocation.
+
+<a id="b04-selected-l0"></a>
+## 2026-09-30 — B04 fixed ordinary service-floor comparison and L0
+
+B03 closure is published at `5861a1b1936115c875120ad8c9bf66b1cb099394`.
+The completed result critic and original Root-assigned selection advice above
+cover the present question; there is no unresolved material objection or need
+for another routine selection round. Current published RESEARCH topic2 carries
+B03's predictive-signal/control distinction and recurring S tradeoff; topic8's
+information/action/finite-controller distinction limits the interpretation of
+a local constraint. Those premises guide this fixed comparison. No new claim
+of learning, novelty or native service preservation is being assumed.
+
+**Actual host and decision exposure.** Reuse the complete N5/U50/H256 native
+factory, static uniform worlds, original C motion proposals, componentwise
+clipped motion, 400-byte map and B02 post-C navigation protocol. At report
+ticks0,4,…,252 the five C calls, lawful report encoding/decoding, history
+settlement, two-tick old-command prefix, candidate generation/ranking and
+command encoding are inside the existing1.436s computation allowance;141
+recurring bytes account for the .564s transmission component. C proposals at
+tick0 supply the original startup. Delivery is at t+2. Only member
+(t/4 mod5)'s27 command alternatives and the31 nonempty team masks are searched;
+other members keep their C proposals. No additional ACK, truth, actor input,
+future C, fitted value, global action enumeration or native counterfactual is
+introduced. Cached predictions are legal modeled history, not actual contacts.
+
+The candidate block contains min(4,256−t−2) delivered transitions. At the last
+report t252 it therefore contains the **two** scored transitions254/255;
+the252/253 old-command prefix is shared and is excluded from both candidate
+service and S ranking. No beyond-terminal reward/contact padding is allowed.
+The ordinary S key is the existing lexicographic tuple
+(-sum delivered squared per-user ages, mean native modeled J, mean served,
+proposal-command retention, active-mask count, -mask id, -command id).
+Initial/reset contacts are unscored; native age starts0 and becomes1 on the
+first unserved transition. Initial/terminal gaps retain censoring, and an
+always-unserved user has a256tick gap counted in both boundary groups.
+
+**Four fixed programs and matched construction.** M and S retain their exact
+B02 programs. Full M runs the unchanged O and W two-order searches (232
+pre-cache requests), choosing the O/W winners by W's existing key. S runs its
+unchanged116-request two-order search. U and K both run O, W, then S without
+modifying any generator, with one common stage/cache/history. The union is all
+distinct pairs actually visited by those348 requests, in first-visit order;
+it includes intermediate pairs and the final M and S winners. U chooses the
+maximum existing S key over this entire union. K uses the **same completed
+union** and same S key, but admits only candidates with modeled delivered-block
+mean served users >= the same-state M winner's. Mean service is the total
+number of assigned user-ticks divided by that common block length; comparing
+integer totals is exactly equivalent (no epsilon, relaxed floor or fitted
+threshold). This is contact assignment, not mere SINR eligibility. M is always
+feasible. Full tuple ties preserve first-visit order, though mask/command IDs
+already provide a total order. The floor never affects search generation.
+
+The whole program must finish on time. A partial union, missing history or
+whole-round timeout holds the old command and mask under the original fallback;
+neither M nor a partial winner is a new rescue. The same source construction
+does not require different deployed trajectories to visit identical pools.
+Record every requested/evaluated pair, O/W/S search result, M/S/U/K same-state
+pair, integer service total/floor, feasible mask, chosen/returned program,
+deadline and meaningful command/mask/forecast changes. Separately count complete
+calculation, timely delivery and actual changed execution. There is no changed-
+choice minimum, pilot-based gate or post-result exposure threshold.
+
+**Fixed addresses and stopping.** Evaluation uses exactly64 fresh world seeds
+29426000…29426063, all four programs in eight alternating cyclic/reverse arm
+orders (eight worlds per order), H256. There are256 complete new episodes,
+65,536 new result steps,0 fits and0 optimizer updates. Bootstrap diagnostic
+seed29426998 with10,000 paired resamples is fixed; paired-world t95 and all
+individual world vectors remain primary descriptive summaries, with no claim
+of multiplicity-adjusted confirmation. One necessary native correctness fixture
+uses seed29426999, H8×M/S/U/K (four episodes/32 steps) and no final world. No
+complete quality pilot, sweep, adaptive extension or duplicate retry is
+selected. Preserve partial/failure evidence if interrupted; do not quietly
+restart the scientific batch.
+
+The primary joint reading is K−M actual mean service (constructive sign >=0),
+episode maximum gap (<0) and worst-user mean age (<0). These signs express the
+conjecture, not confirmed noninferiority or a chosen adoption tolerance. Retain
+G/J/overall age/quality/path, complete censored gap/age tails, transmitter use,
+all adverse worlds, actual selection exposure and full cost. K−U isolates the
+local filter at matched generation; U−S measures expanded ordinary search.
+K's intermediate prediction is modeled service floor satisfaction on every
+complete selected decision; its native consequence is the joint pattern above.
+Exact intermediate satisfaction with native losses weakens this local-floor
+package. Sparse changes do not refute the wider frontier, and successful U is a
+useful ordinary contribution even if K adds no value. Declining another repair
+is not an empirical rejection of broader learning or control.
+
+**Complete cost and reader.** The worker has4,276,224 pre-cache candidate
+requests, at most16,971,264 delivered-state reductions,32,768 prefix transitions
+and81,920 current-C calls, before cache savings; there are no future-C or
+learned-value calls. Expected worker+bounded-reader0.9–1.3 CPU-hours and3–6
+engineering hours remain estimates, not profiled guarantees. The reader checks
+all256 raw/source hashes, all65,536 native endpoints, C observations/proposals,
+lawful executed histories, native age/gap metrics, all saved candidate costs/
+keys, exact O/W/S request paths and U/K pool/filter/selection arithmetic. It
+recomputes physical radio for every selected program and completed search
+winner plus all visited pairs at report ticks0/60/124/248, using the same native
+radio kernel. All other stored contact-to-score arithmetic is checked without
+repurchasing all candidate physics. Two existing independent C passes imply
+163,840 reader C calls; actual physical/history work and reader CPU/RSS are
+reported separately. Bounded fixture runs the same checks at H8. All actual
+model/native history discrepancies remain adverse evidence, not verifier errors
+or reasons to supply truth to a policy. Output/native-status bindings remain
+distinct for the worker and separately admitted reader.
+
+**Implementation scope and ownership.** New code and tests live only in this
+direction's `b04/` directories. Reuse the B02 protocol, finite-search stage,
+history and pickle-free record storage; keep frozen prior files unchanged.
+Retain byte identities of the ordinary dependency set in the B04 config along
+with all new modules and the exact published launch SHA. The DM owns this
+notebook, worker/reader/config/publication and fixtures. A bounded Implementer
+may own only `b04/scheduler.py` and its corresponding scheduler tests: add the
+whole-union U/K behavior and record fields while M/S delegate unchanged to
+the frozen scheduler. No Git index, shared files, notebook, science choice,
+native launch or new child belongs to that helper. DM review/acceptance and an
+independent engineering review cover control, delayed delivery, immutable
+generator paths, failure records, numerical comparisons, reader and admission.
+Mock/analytical correctness tests add no native panel; the32-step fixture is
+separately admitted only after exact inputs are published. Required outputs
+remain one canonical node copy plus compact Git evidence. Source publication,
+fresh actual-node admission, detached observation, full reading, independent
+result diagnosis and cleanup complete this one selected chain.
