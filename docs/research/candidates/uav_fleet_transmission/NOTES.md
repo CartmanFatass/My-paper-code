@@ -264,3 +264,50 @@ observed accepted admission, matching live runner/supervisor identities and cons
 The child remains active through same-handle observation and complete reading; no queued App
 wake is assumed to restore an unloaded child. Root has the concrete acceptance fact for node
 allocation. No partial outcome has been used to alter, shorten or extend the fixed panel.
+
+
+## 2026-09-30 — complete B01 collection and verification
+
+The one accepted local operation exited0 at03:08:08UTC with a valid native
+[exit witness](../../../../runs/uav_fleet_transmission/b01_native_s1_a01/process-exit.json);
+runner and supervisor are absent and admission/identity records remain consistent. All160
+H500 episodes and80,000 native transitions completed, with0new fits/updates. The
+[compact summary](../../../../runs/uav_fleet_transmission/b01_native_s1_a01/summary.json)
+and [complete saved-data reading](../../../../runs/uav_fleet_transmission/b01_native_s1_a01/reading.json)
+bind all320 raw/decision files by size and SHA256. Reading SHA256 is
+`ebc4a7cf316c008b49bf8615cbb0238fe0c4a8756612c3b1b9ce4f212798695d` (279111bytes);
+summary SHA256 is `1020f99704c1fb5a4742be314dc45db0bce8fad57e27d8e6a79e635ae80837af`
+(311167bytes). Source remains `a2f62e613a12331ad380876a6c764f8a46a893ee`.
+
+Both original checkpoint file hashes and all four H6/SET×N4/N8 parameter digests matched
+before/after; normalizers were unchanged and every optimizer hook count is0. The full pure
+reader accepted all80,160 recorded native snapshots, original action clipping and N scaling,
+mask-dependent user/peer feedback, all50 mask decisions per E episode and all500 C_N motion
+passes per C episode. No scientific episode was retried or discarded. The two inherited
+one-label debug-std warnings remain diagnostics only; all required recorded metrics are finite.
+
+The worker used450.196771wall/1374.205686CPU seconds. The complete reader added
+152.016061wall/151.953611CPU seconds; total run_study interval was602.244175wall/
+1526.190628CPU seconds, excluding admission/module import. Broader process lifetime self
+user/system CPU was1520.736398/8.263752seconds, with child user/system .017681/.007843
+seconds separately. Peak RSS was680576KiB for the whole process, not a separate reader peak.
+These timings are for this local Python3.10.20/NumPy1.26.3/Torch2.7.0+cpu runtime with four
+Torch threads; they are not a controlled speed comparison with the old remote anchor.
+
+Worker requests/scoring: E648000/648000,0cached; C_N2592000/1646158,945842cached.
+Computed/reused geometry rows: E27994/5012006; C_N1726158/9229586. Full reader repeats
+those candidate counts independently as verification work, in addition to native-physics
+reconstruction; neither reader nor caching reduces declared exposure. Two old fits remain
+in the lineage: each360000training team steps/720episodes/45updates, with each old final
+record also carrying96000evaluation team steps. New world replication is conditional on
+these two fixed trained instances.
+
+Observer generation1 delivered READY at03:08:26UTC for the same operation. Its attempted
+native-child App queue wake was rejected (`-32600`, direct app-server input is not allowed
+for multi-agent v2 sub-agents); the still-active DM directly drained the terminal event, so
+no observation or worker was rebound. Event164c2ca40d1219f193449031/wake
+fea443aa-70cd-4bd5-a568-ca91df4d83f1 was consumed by same-handle rearm to generation2,
+then observation was stopped; scientific work is unchanged. Root received the concrete
+calculation-release fact. Full scientific diagnosis is in progress in the independent
+`hmasd-research-critic` context `/root/dm_fleet_transmission/result_diagnosis`; technical
+completion alone is not the interpretation below.
