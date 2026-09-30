@@ -244,3 +244,161 @@ no remaining material issue. After local input commit `6508ab45aa743f9caae031474
 all17 direction tests passed in5.69s with no skips. This includes exact parent restoration and
 old-evaluator parity under the new binding; only pre-existing deprecation warnings remain.
 The fixed experiment is unchanged and ready for source publication and fresh a02 admission.
+
+### Corrected a02 accepted and observed
+
+Published input `a6bf357d85f5acb5053da169ecde74cf5f733b55`; native `b01_warmstart_a02`
+accepted2026-09-30T11:35:14.252529Z on wsl_4070. Fresh admission measured14,200,680,448 available
+bytes and passed. Native claim/operation
+`/home/wu/projects/HMASD/.git/hmasd-admission/feece2a7968c70a07b352e505574f729d75c8a65d3985697e5dda9e9d6bdc0ff.json`;
+output `/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b01_warmstart_a02`; source snapshot
+`/home/wu/projects/HMASD/.git/hmasd-launch-sources/2338e6fa78a341dbac70b199189dce9d`.
+Kernel supervisor1104662 / runner1104663 have matching live PID/start identities and no exit
+witness. Agent-task `fleet-adaptation-b01-a02` only launched the native detached operation;
+its own exit0 is not study completion. Strict parent loading succeeded; first progress has A
+fit started,8000 collected/stored steps,16episodes and one update attempt (not yet completed).
+No evaluation result exists at this observation.
+
+The earlier terminal observer was consumed/stopped; adding a02 required rearming the same
+controller to clear stopped state, then adding the distinct accepted a02 status handle.
+Controller generation4 now observes a02 with30s deterministic native-status probes and1500s
+checkpoints; a01 remains terminal in its record. Native child stays active and drains/rearms
+this handle through actual result reading; the known unsupported child queue wake is not
+assumed to return an unloaded child. No worker was rebound, restarted or duplicated.
+
+12:02UTC observation checkpoint: same a02 native identities running, no probe errors or exit.
+A has112000 stored/collected steps,224episodes,13 completed update groups and update14 started;
+measured fit wall1513.330s so far. Consumed generation4 checkpoint and rearmed generation5
+against the same operation. This is collection progress, with no final evaluation/interpretation.
+
+12:28UTC: same a02 running without observation errors. A216000 stored/collected steps,
+432episodes,26 completed update groups and update27 started; fit wall2970.843s.
+Consumed generation5 checkpoint and rearmed generation6; no new result endpoint exists.
+
+12:53UTC: A completed exactly32 updates /256000 steps /512episodes in3669.032s; F is now
+training and has completed7 groups /56000 steps /112episodes in857.170s. Same a02 native
+operation is live with no observation errors. Consumed generation6 checkpoint and rearmed7.
+Fit completion is not the four-endpoint read-result boundary; no interpretation is drawn.
+
+13:19UTC: F160000 stored/collected steps /320episodes,19 completed updates with update20
+started; last recorded fit wall2258.566s. Native a02 still running, no probe errors. Consumed
+checkpoint generation7 and rearmed8 on the unchanged handle; final evaluation remains pending.
+
+13:44UTC: F completed the declared32 updates /256000 steps /512episodes in3796.415s.
+Both planned fits are technically complete; common final evaluation is now running. Native
+operation remains consistent/live without probe errors. Consumed generation8 and rearmed9;
+no added fit, policy selection or scientific interpretation is inferred from completion.
+
+<a id="b01-complete-reading"></a>
+## 2026-09-30 — B01 complete reading: a conditional J increment, no complete continuation gain
+
+Same accepted a02 exited0 at2026-09-30T14:03:20.861777Z; both native identities are absent and
+terminal records agree. The generation9 READY event was drained/consumed, generation10 then
+stopped with no active observation or worker. Collected original compact outputs into
+[runs/uav_fleet_adaptation/b01_warmstart_a02](../../../../runs/uav_fleet_adaptation/b01_warmstart_a02/).
+Source remains `a6bf357d85f5acb5053da169ecde74cf5f733b55`; no added fit or evaluation occurred.
+
+### Integrity, exposure and actual cost
+
+Both fits completed32 groups /512 H500 episodes /256000 stored native steps. Both independently
+restored the exact parent module/normalizer digest, empty Adam/buffers and matched fresh runtime;
+reset geometry and initial observations match. Each has96000 actor AND96000 critic,480 coordinator,
+480 team-discriminator and1920 individual-discriminator optimizer calls. Actor relative parameter
+movement is.492419(A)/.489854(F); critic.499244/.517513 and all remaining objectives also move.
+This establishes executed learning, not useful learning. All128 final episodes /64000 evaluation
+steps completed with no optimizer calls or parameter/normalizer mutation in evaluation. Total
+new exposure is2fits /1152 episodes /576000 native steps; a01 adds zero scientific exposure.
+
+The complete saved-data reader verified577152 native physics snapshots across all576000 steps,
+state/local feedback, raw-Gaussian execution clipping, native reward/J-over-N, E choices/C_N
+passes, matched inventories and sampler/optimizer accounting. It does not replay actors, GRUs
+or optimizer arithmetic. Summary SHA256 `79ac154d39df2bb9a44221e8bbf23ae972ac5b2c45e1d5339a4dc95eb65663c6`
+(333817bytes); original reading SHA256 `8cb3aefbbb64c56836aab81a1bc3dbb4d779dea1334580cf10cb34f049483d30`
+(1579701bytes). Complete original signed world comparisons and training metrics are preserved
+there; no world was dropped or chosen after exposure.
+
+A fit wall3669.032s /CPU14768.951s; F3796.415s /14624.910s. Entire run_study worker wall7845.122s
+/CPU30459.928s, plus saved-data reader709.813s /730.348s. Total run_study8555.006 monotonic wall
+seconds /31190.348 process CPU seconds; this scope excludes admission/imports. Process-lifetime
+peakRSS3718912KiB, including preceding arms and reader, is not a per-stage peak. Native
+acceptance-to-exit UTC span8886.609s is recorded separately; the difference from monotonic scope
+is not assigned an unmeasured overhead cause. The technical a01 adds3.036305 self CPU seconds
+and its separately recorded launch/support cost. Engineering/review effort is not priced by
+these worker timers.
+
+Worker requests:6528000 E candidates during F training plus1632000 in evaluation =8160000;
+C_N evaluation3456000 motion requests,2164508 scored and1291492 exact-cache hits. Full reader
+independently repeats these requests: another8160000 E and3456000 motion, with no new episodes.
+The frozen reading's `worker_and_reader_*_requests` values denote the matched count **for each**
+side, not their sum: combined worker+reader requests are16320000 E and6912000 motion. This
+clarification preserves the original record and avoids understating validation cost.
+
+### Fixed complete-panel outcomes
+
+I is the unchanged parent; A is all-on continuation; F is E-active continuation. Every endpoint
+here includes E. J is native J, service is mean users served per tick, path is meters/UAV overH500.
+
+| Endpoint | J | Service | Quality | Mean height(m) | Path(m/UAV) | Within-world service p05 | Active mean | Mask switches |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| I/E | .557700 | 36.657188 | .218310 | 70.993303 | 14124.524 | 33.559375 | 4.256250 | 12.562500 |
+| A/E | .542012 | 36.161562 | .208605 | 76.831405 | 21622.365 | 33.059375 | 4.332500 | 23.593750 |
+| F/E | .552370 | 36.048063 | .218796 | 67.941450 | 20957.516 | 32.965625 | 4.215625 | 20.437500 |
+| C_N/E | .610048 | 38.770750 | .224466 | 50.082523 | 250.637 | 38.812500 | 4.179375 | 1.437500 |
+
+Intervals below are the frozen10000 paired-world bootstrap95% descriptions, conditional on
+one selected parent and one continuation per condition. They are not training-seed intervals,
+equivalence tests or a new confirmation/adoption rule.
+
+| Contrast | Mean ΔJ [interval] | J positive/negative worlds | Mean Δservice [interval] | Service positive/negative worlds |
+| --- | --- | --- | --- | --- |
+| F/E−A/E | +.010358 [.003208,.017127] | 25/7 | −.113500 [−.666775,.419833] | 13/19 |
+| F/E−I/E | −.005330 [−.012414,.001470] | 12/20 | −.609125 [−1.109023,−.128748] | 8/24 |
+| F/E−C_N/E | −.057678 [−.070029,−.044230] | 3/29 | −2.722687 [−3.676753,−1.686614] | 5/27 |
+| A/E−I/E | −.015688 [−.021838,−.009206] | 4/28 | −.495625 [−.943381,−.032936] | 11/21 |
+| A/E−C_N/E | −.068036 [−.081078,−.054170] | 2/30 | −2.609188 [−3.649253,−1.525998] | 7/25 |
+| I/E−C_N/E | −.052347 [−.065789,−.038674] | 4/28 | −2.113562 [−3.182423,−1.013734] | 9/23 |
+
+F−A native-J arithmetic is service−.001589 plus quality+.003057291 plus reduced height
+penalty+.008889956 =+.010358247. Height is lower in all32 worlds; this is a legitimate term of
+the declared native objective, not dismissed as a proxy. It is a component identity rather than
+identification of a learned altitude, feedback or interference mechanism. F−I gains.003051854
+from lower height and.000145644 from quality but loses.008527750 through service. Both fits
+therefore change behavior substantially while failing to improve mean service over I/E; A/E's
+J decline makes the positive F−A contrast insufficient for a useful full continuation gain.
+
+F−I has.1834375 more ineligible users and.4256875 more eligible-unserved users per tick;
+their sum gives the.609125 service loss. F−C has1.1685625 more ineligible and1.554125 more
+eligible-unserved. These after-trajectory identities do not identify causes or bound learning.
+F−I path increases6832.992m/UAV [6514.744,7147.531] in all32 worlds; service p05−.593750 and
+minimum−.750000 have intervals crossing zero. F−C service p05−5.846875 and minimum−3.218750
+remain adverse. All arms have zero zero-service ticks/zero-run length. These metrics do not
+assert every individual user's continuity or a physical flight-energy model.
+
+Concrete adverse worlds remain:29316001 F−A J−.042488/service−4.376;29316025 F−I J−.048292;
+29316016 F−I service−3.462 and F−C J−.104446;29316001 F−C service−6.466. Positive worlds also
+remain:29316029 F−A J+.050148/service+3.400;29316023 F−I J+.051224/service+3.360;29316015 F−C
+J+.058789/service+6.950. No retrospective world-specific gate is chosen.
+
+Measured evaluation wall/CPU seconds over32 episodes: I/E75.090/300.446, A/E75.848/301.287,
+F/E76.253/303.762, C_N/E148.946/156.135. Neural CPU includes the fixed four-thread kernels;
+C_N is mostly serial. Thus C_N's stronger mean service/J and much shorter native paths do not
+imply measured wall dominance; fixed policy amortization trades online wall against CPU and
+training cost. No deadline-bound or physical deployment claim was tested.
+
+### Working explanation and independent diagnosis pending
+
+The primary program contrast retains a conditional native-J advantage from E-active experience
+relative to all-on continuation. The desired complete native improvement beyond the unchanged
+parent and C_N/E did not appear in this bounded recipe. Ordinary extra N8 exposure alone also
+did not fix the gap. The prior N8 management capability and N4 adverses stay intact; neither
+representation impossibility, generic unlearnability nor a missing-feedback defect follows.
+Warm-start stability, five-objective finite optimization and training/deployment behavior remain
+unidentified alternatives rather than invitations to automatic repairs. The comparison can
+change our continuation judgment without explaining all of those alternatives.
+
+The evidence supports ending unchanged warm-start investment while preserving the positive
+F−A component and original I/E/C_N/E capabilities. Independent ResearchCritic
+`/root/dm_fleet_adaptation/result_diagnosis` has the original prospective design, original
+positive/adverse parent study, actual full new records and current shared background in a
+separate context. Its result and disposition will be appended before final route/publication
+closure; no follow-on experiment or broader question has been selected.
