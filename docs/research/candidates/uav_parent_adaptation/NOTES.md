@@ -6020,3 +6020,254 @@ question/lead and all earlier contrary evidence. State is reserve/idle with no
 selected producer, unread scientific result or advice. Shortlist use remains
 an unselected candidate for Root's allocation; no owner permission or resource
 failure is manufactured as a dependency.
+
+<a id="post-b06-shortlist-source-assessment"></a>
+## 2026-09-30 — source-only price of using the fixed ranker to allocate two branches
+
+**Scope and scientific question.** After reading the complete B06 result,
+original critic and disposition, Root accepted closure and assigned this bounded
+source-only assessment. The question is whether the **already-fitted** artifact
+can allocate a fixed continuation budget more usefully than ordinary stationary
+top2 selection. This changes the policy's use of predictions, not its training,
+features or labels. It is the concrete candidate proposed by the original B06
+critic, whose applicable independent recommendation is reused above; there is
+no duplicate review or preliminary pipeline gate. Actual work in this assessment
+is source and saved timing/byte-count arithmetic only: **0 code changes, new
+fits, labels, ranker/model/controller/native queries or shortlist outcome probes**.
+Root alone can subsequently select result work. B06 publication/cleanup remains
+complete at e08adc2e2, with its failed target and all adverse evidence intact.
+
+I refreshed published main to8d8dbf163 and read the relevant current RESEARCH
+topics3/4, including the newly published N8 B04 temporal result. Their concrete
+design effects are to keep the competent exact-reuse T_E and K2_E programs,
+price the retained bank, preserve service/path/quality losses, and separate
+prediction accuracy from a useful complete decision. B04's two40/120-opportunity
+capability concerns a different action schedule and estimand: this proposal
+keeps the sole t40 choice and original H500 commitment/C continuation. It
+neither extends timing nor consumes B04 labels. No new learning-method or
+novelty claim is proposed.
+
+### Exact proposed policy and source feasibility
+
+Call the possible policy **L2_E** only for this assessment. It consumes the
+same published ranker, SHA256
+`a2b5d1a8c127c50494e8b8aa76ff84ba3ca61e4b5db6281e4713e524ea2fd0c1`,
+with the same12 features,13 coefficients/scaler and16-world training archive.
+At the existing lawful t40 public report, construct the unchanged stationary
+bank and compute each member champion's predicted advantage with B06's
+unchanged feature and prediction arithmetic. Rank champions by that value,
+then predicted stationary service, shorter path/duration and lower member/site,
+as in the existing direct ranker. Retain exactly min(2,m) champions for m
+available champions, plus stay. **Do not discard a negative predicted champion
+or use the direct ranker's positive-initiation gate to shorten the menu.**
+K2_E has the same min(2,m)+1 branch count, using its existing stationary order.
+No extra R candidate, confidence gate, adaptive branch allocation or third
+learned candidate is introduced.
+
+Both shortlists then use the identical existing exact-recurrence evaluator and
+full-return tie order; initiate only when the best complete modeled J is
+strictly greater than stay. Arrival reporting, mask choice, commitment duration,
+ordinary continuation, private history, all source dtypes and summation order
+remain unchanged. Each arm pays its own bank and branches; no cross-arm cache
+can make the learned program's standalone cost disappear. A synthetic zero-beta
+invariant would reproduce **K2_E's shortlist**, not B06 direct L's R fallback;
+this does not modify the actual nonzero artifact. A zero/one-champion context
+must retain matched branch counts and lawful decline.
+
+The source supports this without a new learner or simulator:
+
+- `learning.choose_plan` already returns all frozen features and predicted
+  advantages as well as its direct decision. Its score arithmetic is reusable;
+  its final positive gate is not the proposed shortlist rule.
+- `controller.AmortizedProgram._decide` already builds K2_E's top2-plus-stay
+  list and invokes `cycle.simulate_continuation` independently for each branch.
+  The latter accepts an arbitrary already-formed source-bound plan; neither
+  recurrence nor its certificate depends on how the candidate was ranked.
+- The original `b03.controller.continuation_rank` supplies the common final
+  ordering, and `reader.verify_reuse` supplies the full independent recurrence
+  audit. The saved T_E branches contain every possible final L2_E program for
+  the executed-program/model comparison; this is not a native label for every
+  unexecuted option.
+
+This is **not a configuration-only addition**. B06's controller constructor
+rejects new arm names, and its collector hard-codes which arm receives the
+artifact. Host/RNG/world files, admission tags, source checks, reader panel,
+contrasts, counters and the old75%/half-CPU target are also fixed to B06.
+Moreover `validate_fit` validates the original fit through the original
+source-bound `fixed_config("fit")`; changing those B06 files would break that
+provenance path. A selected successor needs new versioned controller/collector/
+reader/contract adapters while importing the frozen numerical, host and
+certificate routines. Preserve B06 sources and records rather than monkeypatch
+global arm lists or world constants. There is no hard interface blocker, but
+this explicit integration is part of the engineering bill.
+
+The existing artifact and six published fit inputs suffice for numerical and
+lineage validation with `resolve=False`; no extraction, scientific solve or
+new paid training archive is needed. Fit/import/hash checks still take CPU.
+The current B06 evaluation labels remain evaluation-only and cannot train,
+calibrate, select features or tune a new threshold for this policy.
+
+### Smallest complete proposed comparison and reading
+
+Keep16 **new** common worlds, four complete arms R/T_E/K2_E/L2_E, H500:
+64episodes/32000native steps. Each receives the same native host, sole t40
+opportunity and original legal information/action rights. Before any selected
+construction/execution, fix fresh world/RNG addresses, their common pairing and
+the same cyclic four-arm order; none is generated or screened here. Reusing the
+exposed B06 panel to inspect which second candidate would win is excluded.
+
+The primary is native **L2_E−K2_E J at matched branch counts**, alongside service,
+quality, height, path, full service tails and selection/controller/complete CPU
+and wall. L2_E−R and L2_E−T_E keep the complete value/cost frontier visible;
+all original ordinary contrasts remain. Preserve all physical choices,
+initiations, losses and actual branch costs. Matched branch count is not an
+equal-CPU claim: duration, recurrence and native continuation can differ, and
+learned features/sorting are additional work. Report the original whole-episode
+tails and prospectively labelled t40+ suffix diagnostics, because B06 already
+showed that common-prefix minima/p05 can hide later changes. This adds no new
+native exposure or individual-user continuity claim.
+
+The old75%-retention/half-T_E-CPU target is specific to direct L and must not
+be silently inherited or rescued. Read the new paired world contrasts and
+the measured frontier without inventing an adoption tolerance. A favorable
+J increment over K2_E with similar actual cost supports conditional learned
+allocation of computation. No increment favors ordinary K2_E for this purpose;
+loss of material savings against T_E weakens the shortlist's practical role.
+Service/path/tail losses remain tradeoffs. A result still conditions on one
+fixed fitted artifact; it is not a training-program replication.
+
+Full verification stays substantive. Independently reconstruct native physics,
+observations, actions, common prefixes and all candidate banks; derive scalar
+features, scores and top2/tie choices independently of the worker's selector;
+replay **every executed model branch uncompressed** and check arrays, decisions,
+ordered totals and reuse certificates. Validate the same-physical-program raw
+identity and model/native comparison, with independent counters and all paired
+outcomes. The current reader offers these mechanisms but needs the L2_E
+factory/record and new panel adaptations. No partial reader or reused T_E
+timing result is priced as a complete new comparison.
+
+### Incremental exposure, computation and retention bill
+
+Training acquisition/fit/update cost is0. Evaluation necessarily computes fresh
+model branches; these are charged below and barred from fitting. Thus
+“no new labels” means no new **training** labels, not free evaluation planning.
+
+| Quantity | Complete proposed four-arm panel |
+|---|---:|
+|New training labels / fits / optimizer updates|0 /0 /0|
+|Fresh native episodes / steps / stored snapshots|64 /32000 /32064|
+|R / T_E / K2_E / L2_E continuation branches per world|0 /≤8 /≤3 /≤3|
+|Model branches / logical model ticks|≤224 /103040|
+|R / T_E / K2_E / L2_E worker request ceilings per world|210479 /1083573 /539613 /539613|
+|Whole worker request ceiling, before any recurrence|37972448|
+|Full-reader request ceiling / logical model ticks|37972448 /103040|
+|Candidate rows / separate transit ticks, on each side|44800 /1792000|
+|L2_E feature-distance pairs / coefficient products|≤51984 /1456|
+|New reader native transitions / fits|0 /0|
+
+The additional L2_E branch ceiling over direct L is48branches/22080logical
+ticks and5266144worker requests:16*(111550stay+2*108792option requests).
+The full reader repeats this model work independently. Its scorer-work ceiling
+plus the worker's is75944896requests, with native-physics reconstruction and
+feature/hash/I/O work separately additional. Counts are source ceilings, not
+expected recurrence or independent observations. No extra correctness panel
+or repeat of the three consumed B06 paid branch checks is included; synthetic
+collector/reader and edge-case checks plus the already-verified recurrence
+implementation suffice for the proposed engineering scope.
+
+**Timing anchored to the implemented program.** B06 worker CPU was544.425720s
+and full reader983.166263s. Its non-bank selection cost per actual branch is
+.671535s for T_E and .662831s for K2_E; the original learned feature+inference
+mean is.000933s/world. Replacing direct L's recorded7.020764s complete episode
+with K2_E's9.158566s plus that feature work adds about34.219763s across16worlds.
+Holding the other work mix fixed therefore gives **578.645483worker CPU-s**,
+including the existing worker overhead. New shortlist sorting/recording is
+unmeasured and additionally charged, not declared free.
+
+The reader has no isolated per-branch timer. Scaling its983.166263s by
+(24286618+5266144)/24286618 gives **1196.349306reader CPU-s**, an explicitly
+approximate request-mix anchor. Assigning all old reader time to branches and
+scaling127→175 gives1354.756662s as a more conservative sensitivity, not a
+per-branch measurement. Central combined planning is therefore about1775s
+(29.6CPU-min); a B06-like range is roughly30–40CPU-min, with worker about10–15
+and full reader about20–24. Recurrence is not assumed for admission or reading:
+scaling worker to the entire37972448unreused-request ceiling from its12234121
+actual requests gives1689.796703s, while full-reader ceiling scaling gives
+1537.193437s. Their sum is53.8CPU-min at the same average rates. Use
+**0.5–0.9 combined CPU-hours** as the prospective range, not a hard runtime
+bound or a scientific stop rule. No new timing probe was run.
+
+At that work mix L2_E selection is near K2_E, about3.7255s versus T_E5.0448s:
+roughly74%of T_E selection CPU and85%of its complete episode CPU, not direct
+L's34%/65%. These are forecasting anchors, not new L2_E measurements. The
+remaining potential teacher saving is real enough to measure but materially
+smaller; no physical energy or deployment break-even follows without an actual
+use volume and utility. The original fit/acquisition and prior B06 experiments
+remain paid historical costs, not new charges or zero acquisition history.
+
+**Retention and memory.** B06's74929496raw bytes decompose into6726380native
+arrays,21526114native decisions,8072192candidate arrays and38604810model
+arrays/decisions. Its127model pairs average303974.882bytes. Adding48 at that
+rate gives89.52MBraw;224branches plus the maximum44800-row bank gives110.69MB,
+before the new full-summary maps and compact reading. Plan **0.10–0.20GB new
+canonical evidence**, one required copy, with the new bulk summary outside Git
+and compact readable outcomes/source identities in Git. Compression and future
+trajectories can change those estimates. Reuse the existing fit by binding,
+without copying its whole source archive. The unchanged largest T_E branch
+set keeps peak memory in the same class: **0.40–0.75GiB process RSS** versus
+B06's407596KiB measured peak. One accepted evaluation source snapshot costs
+about **1.7–2.0GB disposable disk** at current repository size; no separate fit
+snapshot is needed. Fresh actual-node admission remains for a selected launch,
+not this source assessment.
+
+**Incremental support estimate, not measured labor:**
+
+|Work newly required|Estimated hours|
+|---|---:|
+|Fixed-score shortlist adapter, records and edge semantics|.5–1|
+|Versioned panel/config/admission and collector integration|1–1.5|
+|Full reader/contrasts/counters and focused synthetic checks|1–1.5|
+|Independent high-risk engineering review and corrections|.5–1|
+|Complete scientific reading, publication and cleanup|.5–1|
+|Total|3.5–6|
+
+The first four rows are3–5engineering/check/review hours. They do not rebuy
+B06's extraction/ridge implementation, exact-recurrence design, original full
+physics reader or its4–7hour development estimate. Nor does existing code
+make new arm/source/reader integration free. Existing scientific advice covers
+this exact policy-role proposal; no fresh Pro or scientific pipeline review is
+priced as a routine prerequisite. A material changed question or new objection
+would retain its applicable review requirement.
+
+### Investment preference and return boundary
+
+**I favor one bounded complete shortlist comparison over stopping now**, with
+modest expectations and this full bill. Its knowledge purchase is specific:
+does the fixed learned ordering improve the allocation of the same three
+continuations, including stay, beyond competent stationary selection? B06
+already contains a consequential learned choice outside K2_E's winning program;
+exact reranking can assess a different use of that capability without another
+fit or a repair chosen from a new probe. The original direct decision is in
+L2_E's candidate set whenever it initiates, so exact model reranking cannot
+lower that menu's best modeled value. This is a model-set statement, not native
+dominance over L, R or K2_E and not an outcome prediction for unseen worlds.
+
+The strongest case for stopping is also substantial. Ninety percent of the
+MSE improvement is common world-mean correction, which cannot improve top2
+ordering; centered improvement is only17%, and the current native gain is
+concentrated in one world. Ordinary K2_E is already useful, exact reuse reduces
+the remaining T_E saving, and3.5–6support hours could buy a more consequential
+question. These lower the expected payoff and rule out automatic larger archives,
+new features, calibration or a repaired fit. They do not make a matched-budget
+use comparison redundant with direct L's failed target. A null/adverse complete
+L2_E−K2_E result would support ending investment in this fixed artifact's
+ranking use; a positive would retain a conditional capability with its costs,
+not select a broad learning program or new data purchase.
+
+This source-only assignment is complete. The preference is a recommendation
+to Root's cross-question allocation, **not selection or execution authority**.
+No experimental source, ranker, panel, scratch or bulk was created; no new
+deletion target or disk reduction arises from this assessment itself. B06's
+verified3469398016-byte cleanup remains the actual completed cleanup. Own
+RESEARCH standing stays reserve, with the costed candidate linked and no live
+result producer, unread advice or technical blocker.
