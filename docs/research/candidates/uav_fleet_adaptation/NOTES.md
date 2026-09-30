@@ -999,3 +999,261 @@ The final exact-integer identity scan found the B02 ranges only in this notebook
 and its three implementation declarations. The now-implemented parent C-prior
 protocol still uses30310000+1000*block+episode and30300000+100*block+world;
 the selected world and randomness identities remain disjoint.
+
+### B02 publication and admission
+
+Exact implementation/tests/prospective notebook inputs were committed and
+published as `e945483b85c7f8ddfc315c57f36938d6c14201c7`, verified against
+`refs/heads/main`. The primary-node configured compute and maintained launcher
+bytes matched published main. Its local policy still recorded lifted/exploring
+and the same native-child lead; the launcher checks that tuple against current
+published main, independently of older descriptive prose on the remote checkout.
+
+The first supervisor command (`fleet-b02-inheritance-a01-20260930`) ended with
+exit4 at2026-09-30 15:43:48UTC: the kernel's current-control check encountered
+newly published `7bb778764d4de030179f9b4d06681c35073fb372` after the prior fetch,
+and `git cat-file -e <sha>^{commit}` timed out after30seconds. This refusal
+preceded snapshot preparation, claim reservation, output creation and runner
+execution:0fits/0native steps. The original supervisor log remains under the
+same name in `/home/wu/.agent-tasks/`. A bounded exact claim-directory check
+confirmed no operation at this source/output before retrying the unchanged
+request after fetching current control. This is preacceptance reconciliation,
+not an extra fit or a duplicate accepted worker.
+
+Remote Git transport required the configured `zsh -lic` network environment;
+the initial direct-shell read-only fetch was stopped without scientific effects.
+An overly broad read-only metadata scan was likewise stopped and narrowed to
+the admission claim directory. Fetches succeeded, while background automatic-GC
+emitted a preexisting missing historical-tree warning (`dfe82c9813ee82191abb8385cc12a6886fd0a77b`);
+no shared Git repair, cleanup or removal of that warning was attempted. The
+second supervisor (`fleet-b02-inheritance-a01-admission2-20260930`) was issued
+only after the current control fetch; it keeps the exact source, scientific
+argv, node and output `runs/uav_fleet_adaptation/b02_inheritance_a01` unchanged.
+
+The unchanged request was accepted at2026-09-30 15:48:26.621743UTC. The
+[native manifest](../../../../runs/uav_fleet_adaptation/b02_inheritance_a01/launch-manifest.json)
+and [fresh preflight](../../../../runs/uav_fleet_adaptation/b02_inheritance_a01/admission-preflight.json)
+are collected locally; the manifest is the canonical source of the operation,
+source snapshot, command and native process identities. The detached worker uses
+the original published `e945483b8` inputs and durable primary-node output.
+
+The session's stopped B01 observer was drained (generation10, no pending events)
+and rearmed without reviving either completed B01 job; the new same-handle B02
+observer is generation12 with a600second checkpoint window,30second interval and
+25second read-only SSH probe timeout. Initial registration rejected a relative
+`ssh` executable and then the stopped prior state; both were corrected in the
+observer request only. No worker restart or extra launch resulted. This native
+DM turn stays active through collection and scientific reading.
+
+
+<a id="b02-complete-reading"></a>
+## 2026-09-30 — B02 complete reading: a learned starting asset, without a speed gain
+
+The fixed local-C inheritance study completed at its declared boundary: one
+continuous fit, 256 training and 192 evaluation episodes, 114,688 native steps,
+8,000 Adam updates and 4,096,000 sample presentations. All six frozen arms and
+all 32 fresh common evaluation worlds are present. The primary greedy asset
+screen and the separately declared temperature-one sampled screen both pass
+on their point rules; BC alone fails the milestone screen. This is exploratory
+asset retention for one training lineage, not population noninferiority,
+training recurrence, a later learning gain or a latency claim.
+
+The original [summary](../../../../runs/uav_fleet_adaptation/b02_inheritance_a01/summary.json),
+[configuration](../../../../runs/uav_fleet_adaptation/b02_inheritance_a01/config.json),
+[saved-data reading](../../../../runs/uav_fleet_adaptation/b02_inheritance_a01/reading.json)
+and native records bind the result to published source
+`e945483b85c7f8ddfc315c57f36938d6c14201c7`. Summary SHA256 is
+`2e9e5d83f6b7d1cdff0a947a361fe1e1493046cd7c8b25aee068ed9eb7fc6e8c`;
+reading SHA256 is
+`a3f76992ccb01aa90138eec2272dc2667b7283d32e86742e87bf77e43bd613e9`.
+These are original files, not a rewritten selected-result summary.
+
+### Complete endpoint comparison
+
+Here J is the native per-step objective, service is connected users per step,
+service p10 is the within-world tenth percentile across its 256 ticks, and path
+is mean total metres per UAV. Each table entry is the mean of 32 worlds. All
+noninitial arms have zero zero-service ticks in every world; S0 has at least one
+in 26/32 worlds and averages 183.375 such ticks. This is team-level service,
+not an individual-user continuity or physical-safety guarantee.
+
+| Fixed arm | J | Service | Service p10 | SINR quality | Path m/UAV |
+|---|---:|---:|---:|---:|---:|
+| S0 | 0.014486 | 0.754883 | 0.593750 | 0.013058 | 563.132315 |
+| BC | 0.317098 | 18.925415 | 18.656250 | 0.173809 | 1895.997334 |
+| S_greedy | 0.342868 | 20.717041 | 20.390625 | 0.176097 | 1733.578576 |
+| S_sampled | 0.387299 | 23.704590 | 21.125000 | 0.184782 | 2977.841423 |
+| C_memo | 0.340733 | 20.351685 | 19.781250 | 0.186031 | 2578.514211 |
+| C7_memo | 0.328562 | 19.480957 | 18.656250 | 0.186095 | 2522.027695 |
+
+All nine prespecified paired contrasts follow. Brackets are nominal descriptive
+world-paired t95 intervals conditional on this trained lineage and, for the
+sampled arm, its one fixed independent innovation stream per world. They are
+not simultaneous intervals or uncertainty over training programs. Positive /
+negative counts refer to J; all signed values and the remaining metrics stay
+in the original summary/reading.
+
+| Contrast | Mean ΔJ [t95] | J positive / negative | Mean Δservice [t95] |
+|---|---:|---:|---:|
+| S_greedy-C_memo | +0.002135 [-0.015278, +0.019548] | 15 / 17 | +0.365356 [-0.955989, +1.686702] |
+| S_sampled-C_memo | +0.046566 [+0.028246, +0.064886] | 26 / 6 | +3.352905 [+2.042278, +4.663533] |
+| BC-C_memo | -0.023635 [-0.048287, +0.001018] | 13 / 19 | -1.426270 [-3.111093, +0.258554] |
+| C7_memo-C_memo | -0.012171 [-0.026843, +0.002501] | 10 / 22 | -0.870728 [-1.930474, +0.189019] |
+| S_greedy-S0 | +0.328382 [+0.300946, +0.355818] | 32 / 0 | +19.962158 [+18.092715, +21.831601] |
+| S_greedy-BC | +0.025769 [-0.001484, +0.053023] | 18 / 14 | +1.791626 [-0.142474, +3.725726] |
+| S_sampled-S_greedy | +0.044431 [+0.021281, +0.067581] | 22 / 10 | +2.987549 [+1.336212, +4.638885] |
+| S_greedy-C7_memo | +0.014306 [-0.003432, +0.032044] | 18 / 14 | +1.236084 [-0.107508, +2.579676] |
+| S_sampled-C7_memo | +0.058737 [+0.037457, +0.080017] | 26 / 6 | +4.223633 [+2.696867, +5.750398] |
+
+The primary greedy endpoint is close in panel mean to C, but it loses J in
+17/32 worlds and service in 14/32. Its mean p10 change is +.609375
+[−.772445, +1.991195]; quality changes by −.009934
+[−.019962, +.000094], with 21 quality losses. Its path is shorter by
+844.935636 m/UAV [−1579.220249, −110.651022]. The prespecified point margins
+(ΔJ ≥ −.01, Δservice ≥ −.5, Δp10 ≥ −1 and no new zero-service world) pass;
+the intervals do not establish those margins in a population. Actual parameter
+updates and positive greedy−S0 J/service, both 32/32 positive, satisfy the
+additional learning condition. No sampled result substitutes for this primary
+reading, and the weak S0 is not the competent comparator.
+
+The separately fixed sampled decoder gives a larger complete-native mean gain:
+26/32 positive J and service changes versus C, retaining all six adverse worlds.
+Its p10 change versus C is +1.343750 [−.071577, +2.759077] and its quality
+change is −.001250 [−.010326, +.007827]. Its path versus C increases by
+399.327211 m/UAV [−177.222837, +975.877260]. Relative to the same final
+weights decoded greedily, sampling improves J by +.044431 and service by
++2.987549 while increasing path by 1244.262847 m/UAV
+[+819.664901, +1668.860793]. Decoder choice therefore matters for this fixed
+asset. It does not isolate learned coordination, beneficial exploration or a
+universal sampling mechanism; no randomized ordinary-C comparator was run.
+
+The intermediate BC milestone is below C in all three point margins. Final
+greedy−BC means improve, but the J/service/p10 intervals cross zero. The two
+aggregation blocks also add data, optimization and exposure, so this is not a
+matched causal estimate of DAgger over ordinary BC. C7 has worse mean J/service
+and p10 than full C; its p10 difference is −1.125000
+[−2.242838, −.007162]. Full C remains the primary ordinary reference. Neither
+C7's seven-command support nor its reduced link count warrants replacing C
+with a weaker baseline.
+
+### Trajectory evidence and unresolved explanation
+
+I inspected seven saved positive/adverse trajectories, with no new host, radio,
+policy or optimizer calls (separate inspection CPU .482909 s). In world29341030,
+greedy−C J is −.102518 and service −8.402344: greedy's four 64-tick service
+block means are 17.921875, 19, 19, 19, versus C's 26.03125, 27.5, 27.5,
+27.5. All 160 greedy UAV-ticks in the final 32 ticks are stationary, versus
+96 for C. This supports a persistent adverse placement in that world, not a
+universal optimization diagnosis.
+
+World29341010 is adverse even under sampling: sampled−C J −.032295 and
+service −3.347656. Sampled block means are 20.078125, 21.453125, 18.59375,
+20.046875 versus C's 22.6875, 23.625, 23.625, 23.625. Conversely,
+world29341009 gives sampled−C J +.178922 and service +11.507813. Its sampled
+block means rise from 27.375 to 29.84375, 31.015625, 31.234375; C's remain
+18.3125 then 18.375. Greedy reaches 17.875 then 18. The mean paths are
+189.415 m/UAV for greedy, 2805.794 for sampled and 3798.117 for C. A story that
+C always stops moving, or that more movement alone causes the gain, is not
+supported by this witness. Policy-dependent movement and interference change
+visited states jointly; the data do not identify one causal mediator.
+
+### Paid learning, model work and timing
+
+There is one actor/Adam lineage, not three independent fits. The fixed
+30/20/20 epoch phases contain 40,960 / 61,440 / 81,920 cumulative labels,
+2,400 / 2,400 / 3,200 updates, and 4,660 / 6,421 / 8,364 distinct feature
+rows. Last-epoch cross-entropies are .442391 / .487890 / .416533 and paid
+pre-update stream accuracies .877930 / .860238 / .879517. These are metrics
+from already-paid optimization forwards, not frozen-endpoint imitation
+accuracies or final-policy expert-query diagnostics. No such extra diagnostic
+queries were made. Final versus S0 movement is L2 39.469967, max absolute
+1.751200, with 26,791 of 34,715 parameters changed.
+
+The 81,920 training labels and 10,240 C evaluation requests share the exact
+per-agent, per-episode memoization contract. Across all 92,160 full-C requests,
+82,823 were hits and 9,337 actual rankings remained: 252,099 candidate
+trajectories, 1,008,396 modeled ticks, 3,395,196 candidate power links and
+34,515 setup links. C7 made 10,240 requests / 1,293 rankings, 9,051
+trajectories, 36,204 modeled ticks and 117,908 candidate power links; it reused
+its helper setup rather than count a second copy. Total analytic helper work
+was 18,489 calls, 71,618 setup links and 131,366 extreme-power links. Neural
+collection/evaluation made 12,536 actual row forwards outside optimization;
+the sampled arm made all 10,240 fresh indexed draws, including cache hits.
+These are actual counters; the much larger prospective ceilings were not spent.
+
+| Evaluation arm | Mean query CPU s/episode | Mean query wall s/episode | Hits / 10,240 requests | Actual neural rows |
+|---|---:|---:|---:|---:|
+| S0 | 0.017070793 | 0.016358786 | 9079 | 1161 |
+| BC | 0.018232587 | 0.017458464 | 9416 | 824 |
+| S_greedy | 0.021408272 | 0.020515840 | 9078 | 1162 |
+| S_sampled | 0.083939891 | 0.080443448 | 4555 | 5685 |
+| C_memo | 0.015968623 | 0.015357289 | 9267 | 0 |
+| C7_memo | 0.020899747 | 0.020068138 | 8947 | 0 |
+
+C evaluation caches 90.498% of decisions. Greedy pays +.005440 query CPU
+seconds/episode versus C [.003420, .007459], slower in 27/32 worlds; sampled
+pays +.067971 [.061241, .074701], slower in all32. C7 also costs +.004931
+[.003523, .006339], slower in 28/32 despite fewer candidate links. The student
+removes online full-C candidate ranking, but this implementation does not
+amortize it into a measured speed benefit. Radio/navigation features, neural
+calls, cache behavior and sampling still cost time. Timings are complete
+policy queries on each arm's own trajectories, not matched-state microbenchmarks
+or physical deployment latency. There is still no supplied deadline requirement.
+
+The worker reports 100.363925 wall / 101.990390 CPU seconds and peak RSS
+679,316 KiB. This scope starts at its entry, including imports, construction,
+resets, native collection, training, checks, raw compression/hashing and prior
+summary writes; its final self-report write is excluded. Of the worker's CPU,
+all episode rows total78.484586 s; named disjoint components include native
+steps51.830696, policy queries8.244462, expert labels4.425574, expert features
+1.462282 and raw writes2.986595. Optimization phases total14.515561 CPU s.
+Residual initialization, resets, summary and other checks remain in the measured
+worker total, not invented as zero overhead.
+
+The saved-data reader reports 5.227979 wall / 5.553432 CPU seconds, peak RSS
+509,424 KiB. Combined measured worker+reader scopes are 105.591904 wall /
+107.543822 CPU seconds. Admission, failed preacceptance transport, engineering,
+review, support and publication are outside those timers. Engineering/review
+person-time was not formally metered; elapsed allocation/publication timestamps
+are not substituted for labor. The prospective 10–40 worker CPU-minute and
+1–5 reader-minute estimates overpredicted these observed costs. The separately
+reported .482909 CPU-second DM inspection is outside the reader timer. Earlier
+B01's two fits/576,000 steps/31,190.348 worker+reader CPU seconds and historical
+parent/teacher selection costs remain incurred; this small B02 run does not
+reset cumulative investment or retroactively become a positive B01 outcome.
+
+### Collection, verification and durable assets
+
+The accepted worker exited0 with its manifest-bound runner/supervisor absent.
+The deterministic observer recorded READY at2026-09-30 15:50:37.585UTC,
+event `0d1972f5648b12437ab2deca`, wake
+`725d3304-9a6f-4182-88e5-c02aaebac0f9`, generation12. Native child App-queue
+submission was rejected with `-32600`; the turn remained active and collected
+through the original handle. The event was drained and consumed by rearm13,
+then observation stopped with no pending events. No worker was restarted.
+
+The same-source saved-data reader ran under detached supervisor
+`fleet-b02-read-a01-20260930` and exited0 at15:54:12UTC. It verified all448
+raw hashes,114,688 recorded native ticks,143,360 decision records and all four
+assets, along with the six fixed arm/world bindings, metric reductions, recorded
+motion/hold/navigation, lawful feature construction, paid source rankings,
+cache keys/counters, sampled innovations, dataset/shuffle identities and exact
+update counts. It performed zero native steps, expert-radio queries, actor
+forwards and optimizer calls. This is complete saved-evidence verification;
+it is not a physics, actor or optimizer replay, and bounded engineering cases
+are not a universal floating-point proof.
+
+One canonical bulk copy remains on
+`hmasd-wsl-node:/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b02_inheritance_a01/`:
+448 raw NPZ files (48,609,094 logical bytes) plus four checkpoint assets
+(1,416,970 bytes). Hashes/sizes are in the original summary and verified reading;
+compact originals were copied locally with matching hashes. No redundant local
+raw or checkpoint copy was created. The endpoint for any separately selected
+future use is `assets/S.pt`,424,487 bytes, file SHA256
+`b9e25fca68109bb50fa64fadfc90939ad6a4669058c1c0ccd1351c8bbcefe12a`,
+tensor-state SHA256
+`6fa2eddc542d8f5293f5daf6a989b97a9d7d5f56f484f1eb6bddc6a87d27de0c`,
+at8,000 updates. S0/BC/D1 retain the exact training/reading lineage. This
+114-input,27-command actor depends on its declared analytic navigation helper;
+it is not a drop-in checkpoint for the historical SetActor, nor a tested PPO
+initialization. Both fixed decoding laws refer to the same final asset.
