@@ -1,0 +1,90 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-30T18:49:33.936646Z",
+  "bootstrap_command": [
+    "/home/wu/.venvs/hmasd-gcc-31021/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/44a238c7a07d45b1b72f03493a2d26a5/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/44a238c7a07d45b1b72f03493a2d26a5/experiments/candidates/uav_user_waiting/b03/correctness.py",
+    "--output",
+    "/home/wu/projects/HMASD/runs/uav_user_waiting/b03_correctness_a01",
+    "--",
+    "--out",
+    "/home/wu/projects/HMASD/runs/uav_user_waiting/b03_correctness_a01",
+    "--launch-sha",
+    "a045bc9b4e3ba9ef211474293c4bc43ad8b16b08",
+    "--seed",
+    "29425999"
+  ],
+  "claim_key": "3a7152c6b44765365b45049e8a10604c05766e5fd0c9f658082487829cd4972e",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/3a7152c6b44765365b45049e8a10604c05766e5fd0c9f658082487829cd4972e.json",
+  "command": [
+    "/home/wu/.venvs/hmasd-gcc-31021/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/44a238c7a07d45b1b72f03493a2d26a5/experiments/candidates/uav_user_waiting/b03/correctness.py",
+    "--out",
+    "/home/wu/projects/HMASD/runs/uav_user_waiting/b03_correctness_a01",
+    "--launch-sha",
+    "a045bc9b4e3ba9ef211474293c4bc43ad8b16b08",
+    "--seed",
+    "29425999"
+  ],
+  "command_sha256": "c047b9bb815f9dae501ff9b975220bd9c4788262e6ea41d9babdfafa1d711ccd",
+  "control_observation": {
+    "observed_at": "2026-09-30T18:49:33.788593Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "837b7d2376d06131c13be66d17c9e5cf2f97fb6e"
+  },
+  "control_root": "/home/wu/projects/HMASD",
+  "created_at": "2026-09-30T18:49:33.825996Z",
+  "cwd": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/44a238c7a07d45b1b72f03493a2d26a5",
+  "direction": "uav_user_waiting",
+  "host_identity": "LAPTOP-U9TDKC8A",
+  "identity_command": [
+    "/home/wu/.local/opt/hmasd-cpython-3.10.21-gcc/bin/python3.10",
+    "experiments/candidates/uav_user_waiting/b03/correctness.py",
+    "--launch-sha",
+    "a045bc9b4e3ba9ef211474293c4bc43ad8b16b08",
+    "--seed",
+    "29425999"
+  ],
+  "lead": "Codex DM (native child)",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/uav_user_waiting/b03_correctness_a01/launch-manifest.json",
+  "node": "wsl_4070",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/3a7152c6b44765365b45049e8a10604c05766e5fd0c9f658082487829cd4972e.json",
+  "output_root": "/home/wu/projects/HMASD/runs/uav_user_waiting/b03_correctness_a01",
+  "preflight": "/home/wu/projects/HMASD/runs/uav_user_waiting/b03_correctness_a01/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 1146453,
+      "session_id": 1146453,
+      "start_ticks": 113691082
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 1146453,
+    "process_group_id": 1146453
+  },
+  "process_exit": "/home/wu/projects/HMASD/runs/uav_user_waiting/b03_correctness_a01/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 1146511,
+      "session_id": 1146453,
+      "start_ticks": 113691085
+    },
+    "pid": 1146511,
+    "process_group_id": 1146453,
+    "supervisor_pid": 1146453
+  },
+  "schema_version": 1,
+  "sha": "a045bc9b4e3ba9ef211474293c4bc43ad8b16b08",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/44a238c7a07d45b1b72f03493a2d26a5",
+  "stderr": "/home/wu/projects/HMASD/runs/uav_user_waiting/b03_correctness_a01/stderr.log",
+  "stdout": "/home/wu/projects/HMASD/runs/uav_user_waiting/b03_correctness_a01/stdout.log"
+}

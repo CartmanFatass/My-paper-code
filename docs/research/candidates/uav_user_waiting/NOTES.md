@@ -2113,3 +2113,55 @@ at most 8,064 predictions and fit replay's final training predictions at most
 provisional; no full-size feature/fit timing has been measured. A read-only
 node process inspection found no active research worker before publication;
 fresh admission and node contention are checked again at launch.
+
+### B03 accepted operations and first observation
+
+Inputs were published at `a045bc9b4e3ba9ef211474293c4bc43ad8b16b08` before
+native exposure. Root assigned this direction the next exclusive heavy window on
+`wsl_4070` for fixture, producer and complete reader. The canonical remote tree's
+unrelated dirty controls and older HEAD were preserved; configured login-shell
+fetch made the published source available to the native snapshot launcher. The
+actual admission projection agreed on the lifted pause and this direction's
+active `Codex DM (native child)` ownership. Remote Git's pre-existing automatic
+GC warning did not prevent fetch, source verification or acceptance; no unrelated
+Git repair or checkout reset was made.
+
+The selected correctness operation `b03_correctness_a01` was accepted at
+2026-09-30 18:49:33.936646 UTC and exited zero. Canonical output is
+`hmasd-wsl-node:/home/wu/projects/HMASD/runs/uav_user_waiting/b03_correctness_a01/`;
+operation claim is
+`/home/wu/projects/HMASD/.git/hmasd-admission/3a7152c6b44765365b45049e8a10604c05766e5fd0c9f658082487829cd4972e.json`.
+The five H8 interfaces completed exactly 40 native/team steps, zero scientific
+fits and zero optimizer steps. Native reward/radio/observation reconstruction,
+all 40 modeled transitions and bounded candidate/history/key checks passed;
+LR/LN each replayed 113 value calls. All arms had zero deadline misses. These
+checks validate the defined model arithmetic, not equality between decoded
+model history and the native service process: the fixture retains its observed
+model-versus-native history differences. Measured wall time was 4.67145s,
+process user/system 4.12979/0.33974s and peak RSS 422,552KiB. The collected summary
+SHA256 is `7bfeea92fb797fdc6fc1f584be014d83d42c3ad1a6806e3ae472bdda4a8c4a10`;
+compact local copies match canonical hashes, while the five raw files remain
+only at their recorded canonical paths. This is correctness evidence, not an
+outcome-bearing estimate.
+
+The full selected producer `b03_value_a01` was then accepted at
+2026-09-30 18:52:09.873791 UTC, with canonical output
+`hmasd-wsl-node:/home/wu/projects/HMASD/runs/uav_user_waiting/b03_value_a01/`
+and operation claim
+`/home/wu/projects/HMASD/.git/hmasd-admission/d6a66f057cc5d6e340ac9ee5e1812ede7c01cb08005cfcda34f3779fb6a70003.json`.
+Its accepted source snapshot is
+`/home/wu/projects/HMASD/.git/hmasd-launch-sources/d913f7219d8b43c6baa5dd66a0f8d5c4`;
+supervisor/runner are PID 1147328/1147329 with start ticks 113705555/113705558
+on boot `bb732fcb-1a33-4659-a786-331110ae41d3`. Published control observation was
+`4e05c7d60894f145ec4572ee8706c364a70c4023`. Generation 24 of the same-session
+deterministic observer adopted the matching live identities and consistent
+accepted claim at 18:54:55 UTC. Registration's initial missing `jobs` wrapper
+was corrected locally before observation; it never resubmitted a launch.
+The native child remains active because App queue input is rejected for this
+runtime. Fixture observation was drained and acknowledged; checkpoint rearming
+continues on the producer's existing claim. The full reader remains selected
+but unlaunched until a terminal producer summary can be bound by SHA256.
+
+Root's N8 admission-schema warning was checked against this source: B03 retains
+the actual admission dictionary and validates its `sha`; it has no guessed
+`operation_id` access. No source change or extra exposure followed that check.
