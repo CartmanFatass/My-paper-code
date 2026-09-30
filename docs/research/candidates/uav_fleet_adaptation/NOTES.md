@@ -4654,3 +4654,407 @@ timing anchor. They were sent directly to the assigning Oracle, including the
 pairing and greedy-aggregation corrections. This completes my factual scope;
 the Oracle's independent recommendation and Root's allocation remain the next
 decision. No new source file, fit, model query or native step has been created.
+
+
+<a id="count-generalization-original-independent-recommendation"></a>
+### Original independent count-development recommendation — 2026-09-30
+
+Root requested preservation of the complete answer and my response before
+its cross-question choice. The same registered, separate-context scientific
+Oracle `/root/oracle_next_capability` returned this original answer at
+2026-09-30T21:42:26.365686Z. This source-only recommendation selects no run.
+
+> **Recommendation: revise the portability premise and retain one costed static-count development candidate.** For the next fleet-learning allocation, I prefer the complete comparison below to reserved S2 acquisition or a transfer-only ranking panel. It tests a distinct use of the demonstrated S capability. Its estimated **8–14 support hours** make it a substantive investment, despite modest compute. It should not displace the selected N8 amortization study; this source-only request selects no run.
+>
+> I retained my separate reviewer context and earlier analysis. Root supplied the premise and B05 headlines, so this follow-up was not blinded.
+>
+> **The frozen package is not count-portable.** The source contains consequential N5 assumptions:
+>
+> - The environment factory, collector shapes, agent loops, reward summation and sampling-address guard fix five UAVs.
+> - The controller rejects more than four visible peers. Both C and the cheaper helper infer unobserved interference only when `visible_peers < 4`. Removing the rejection alone would produce incorrect completeness assumptions at larger counts.
+> - The network accepts 114 features, but peer slots beyond the fourth were always zero during N5 acquisition. Fixed input width establishes neither learned support nor invariance.
+> - Native reset draws all `3N` UAV coordinates before user positions. Reusing a numeric seed across N therefore changes the user map.
+>
+> These are direct source findings; the current controller, policy, model and factory hashes match the B02 bindings. A prospective package needs explicit new wrappers. Outside N5, frozen weights with a generalized helper would be **parameter reuse under a revised interface**, not unchanged-package transfer. [Controller](</home/fires/hmasd-wsl/experiments/candidates/uav_fleet_adaptation/b02/controllers.py:32>), [policy](</home/fires/hmasd-wsl/experiments/candidates/uav_fleet_adaptation/b02/policies.py:19>), [factory](</home/fires/hmasd-wsl/experiments/candidates/ucope/uav_motion_prefix_b01/environment.py:8>), [native reset](</home/fires/hmasd-wsl/envs/pettingzoo/uav_env.py:252>).
+>
+> The useful positive remains meaningful. B05’s fresh S−Q comparisons give J **+.023534/+.027712**, mean service **+1.656/+2.030**, temporal service-p10 **+3.531/+3.203**, and shorter mean paths. Preserve the adverse exception: lineage-1 world29483104 has S zero-service ticks0 and6; CAL has four. The completed independent review supports retaining S and ending exact CAL/CONT. Active fitting and changed physical decisions did not establish added native value, and no common failure cause was identified. I checked the consequential paired arrays and costs and reused that review’s broader reconstruction. [B05 evidence](</home/fires/hmasd-wsl/runs/uav_fleet_adaptation/b05_native_consequence_a01/reading.json>), [original review and disposition](</home/fires/hmasd-wsl/docs/research/candidates/uav_fleet_adaptation/NOTES.md:4268>).
+>
+> The strongest contrary evidence is the earlier mixed-count comparison. Gaussian B19’s promising development result reversed in all three fresh B20 training pairs: M−F J averaged **−.062244 at N5 and −.083490 at N7**, with the N7 interval entirely negative. All six fitted policies nevertheless improved over initialization. This argues against treating population diversity as an automatic improvement. It does not establish failure of the different categorical, teacher-imitation contract proposed here. [B20 aggregate](</home/fires/hmasd-wsl/runs/agent_count_generalization/s1_ordered_roster_confirmation_b20_aggregate_20260925/summary.json>).
+>
+> Other records keep ordinary competence central. In both native fleet-loss panels, MAPR and DIRECT learned substantially but remained below BCRH on failed-zone recovery. Availability recovery retained a successful stationary-hold endpoint alongside two harmful dispatch endpoints; it supplied no initialization comparison establishing that endpoint’s learned improvement. Neither contract tests categorical S across physical fleet sizes. July’s information gate also allowed ordinary TEAM_REC to reconstruct the useful roster, and its external review retained legitimate fixed-slot routing. These results rule out manufacturing an advantage through deprived controls; they do not close the present question. [Fleet-loss endpoints](</home/fires/hmasd-wsl/docs/research/candidates/variable_n_fleet_churn/evidence/b01_formal_20260905_02/evaluation_episodes.json>), [second panel](</home/fires/hmasd-wsl/docs/research/candidates/variable_n_fleet_churn/evidence/b01_seed02_20260905_01/evaluation_episodes.json>), [availability results](</home/fires/hmasd-wsl/runs/uav_availability_recovery/b01_joint_reserve_a01/summary.json>), [July gate](</home/fires/hmasd-wsl/docs/research/cdc/EVIDENCE_NOTES/20260723_ASYNC_COMMITMENT_ROSTER_G3_INFORMATION_GATE.md>).
+>
+> **The worthwhile question is whether count-diverse acquisition develops useful interpolation beyond ordinary continued training and inherited reuse.** It concerns actual fleet size, fixed within each episode—not failure recovery, rejoining, identity memory or heterogeneous teammates.
+>
+> The smallest complete comparison I recommend is:
+>
+> | Arm | Acquisition and purpose |
+> |---|---|
+> | P | Each original S asset, frozen, with the generalized interface; measures parameter reuse. |
+> | F | Full-network continuation using only N5; controls ordinary additional imitation. |
+> | M | Same continuation budget, with equal numbers of N3 and N7 episodes within each acquisition phase. |
+> | C_N / Q_N | Correct count-aware C and its existing `.10` perturbation law; competent ordinary references. |
+> | Paid B* | Retain lineage-0 S at temperature2. Lineage-1 B*=P is exact reuse. No new calibration. |
+>
+> For each of the two inherited lineages, fit F and M once: **four fits**, with fresh Adam and no inherited optimizer state. Retain the original acquisition law: **128 C-roll-in episodes, then64 and64 episodes executing the current student greedily**, with teacher labels throughout. Final learned deployment remains temperature-one categorical sampling. Each fit receives81,920 labels and8,000 updates; only its final endpoint is evaluated.
+>
+> Give every participant the reliable pre-mission fleet count. An economical learner interface is the original 114-wide first-layer calculation plus a zero-initialized 128-weight branch, `u·(N−5)/2`, before ReLU. Both F and M receive the same architecture. This preserves the inherited computation at initialization and lets M learn count dependence. Its implementation still needs explicit arithmetic checks. The treatment also exposes previously unused peer slots; a positive result would not isolate scalar-count conditioning.
+>
+> Balanced M **episodes** yield30% N3 and70% N7 **label rows** under the inherited row-uniform loss. Keep that exposure explicit. Labels, updates, team steps and aggregate UAV steps match F; actual CPU and geometry work need not match.
+>
+> Evaluate at **unseen N4 and N6**, plus **N5 retention**, using32 fresh shared layouts and two fixed innovation tapes per stochastic policy. This gives1,632 evaluation episodes. C/Q are shared across lineages within each N; duplicate policy identities are reused.
+>
+> Preserve H256, four-tick holds, the27 commands, all-on transmission,50 users, capacity10,3dB eligibility and the existing J formula. Changing N changes interference and physical capacity; comparisons remain within N. Use a declared environment-side layout generator with independently addressed users and up-to-seven UAV positions, taking the first N positions. Charge initialization and channel refresh. Never treat equal seeds as proof of equal exogenous inputs.
+>
+> The primary comparison is M−F on the equal-weight N4/N6 target population, accompanied by every count/lineage result, M−P, M−B*, M−C/Q, and N5 retention. Report service, p10/minimum/zero-service tails, quality, travel and actual computation alongside J. Record visible-peer exposure and requested versus executed motion. Two tapes remain within-world repetitions; this supplies32 world clusters and two inherited-lineage blocks, not confirmation across a training population.
+>
+> The literature supports this conjecture’s components, without supplying its outcome. DAgger motivates acquiring labels on learner-induced states; its guarantees do not establish native benefit for this finite neural program or its stochastic deployment. [Ross et al., Algorithm3.1](https://proceedings.mlr.press/v15/ross11a/ross11a.pdf). ADAPT explicitly builds object-wise aggregation, while InforMARL constructs variable agent–entity graphs and tests transfer across counts. Those mechanisms show why input handling matters; they do not make the current padded MLP invariant. I would not add either architecture as an automatic repair. [MARL-0104, pp3–4](</home/fires/projects/Inst-sci/papers/MyLib/json/MARL-0104.json>), [My-lib `icml-2023-pmlr-v202-nayak23a`, pp3–7](</mnt/c/Projects/My-lib/.local-formal-capture/corpus/papers/icml-2023/pmlr-v202-nayak23a/arxiv-2211.02127.pdf>). Foundations P08’s mean-action approximation also has unestablished assumptions here; its indexed local PDF was unavailable, so I checked the [publisher PDF, equations6–8](https://proceedings.mlr.press/v80/yang18d/yang18d.pdf). All three libraries were searched; no novelty claim follows.
+>
+> **The complete prospective bill is:**
+>
+> | Work | Amount |
+> |---|---:|
+> | New fits / teacher labels | 4 /327,680 |
+> | Adam updates / fitting presentations | 32,000 /16,384,000 |
+> | Acquisition / evaluation episodes | 1,024 /1,632 |
+> | Total native steps | **679,936** |
+> | Full-C requests, including C/Q evaluation | 419,840 |
+> | Student collection requests | 593,920 |
+> | Worker CPU estimate | **15–30 minutes** |
+> | Reader CPU estimate | **10–30 minutes** |
+> | Engineering, review, reading, publication and cleanup | **8–14 unmetered planning hours** |
+> | Retained evidence / sequential working RAM | roughly1–3GB / plausibly below1GiB |
+>
+> The DM independently confirmed these counts and estimates from source. B02/B03 fit work was approximately14.5/15.2 CPU-seconds per fit, but their high cache reuse is not guaranteed at new counts. Zero memo reuse permits11,335,680 C candidate paths and45,342,720 candidate ticks; severe misses could exceed the timing range.
+>
+> A concrete reader scope fits the estimate: all episode metrics, bindings, RNG records, label-score consistency and counters;430,080 final student neural rows; and at most80 saved contexts checked numerically by C and helper. That adds at most2,160 candidate paths/8,640 model ticks. Acquisition actors, all teacher arithmetic and optimizer updates would not be exhaustively replayed. No such checks have been executed for this candidate.
+>
+> Outcome-dependent decisions are straightforward:
+>
+> - **M improves F and inherited references across both held-out counts and lineages, with acceptable retention and costs:** retain a constructive population-development capability; consider replication only for a specified use or claim.
+> - **F and M both improve P without a consistent M increment:** ordinary continued imitation explains the useful development; do not credit population diversity.
+> - **P/B* remains competitive:** preserve parameter reuse and decline further acquisition.
+> - **M improves fitting but lacks complete native benefit, or gains are offset by consequential losses:** end this exact mixture recipe. Preserve any conditional positives without automatically selecting a count, new architecture or larger training purchase.
+>
+> A transfer-only comparison retaining P/B*/C/Q would still cost864 episodes and221,184 steps, while paying much of the same interface and layout engineering. I would not buy it as a mandatory preliminary gate. Reserved S2 remains a distinct option, priced at2–4 worker CPU-hours,15–45 reader minutes and5–9 support hours. The count study costs more support but tests full-parameter development across physical populations using an acquisition procedure that already produced useful assets; it is not another bounded consequence-head retry. Stopping incurs none of these new costs and preserves the demonstrated N5 capability.
+>
+> I checked source/configuration bindings, consequential B05 summaries, B20 block and own-learning results, both fleet-loss endpoint files, availability evidence and the cited primary passages. I reused applicable earlier H6/SET analysis and the completed B05 critic. No code edits, fits, actor/controller/native queries or experiments occurred.
+>
+> **MATERIAL_DISSENT: no — Root marked portability unverified and selected only this source assessment. The supported correction is explicit: unchanged-package portability is false; the proposed learning comparison requires a revised, fairly shared interface and its full engineering cost.**
+
+
+<a id="b06-count-development-design"></a>
+### B06 selected static-count development — 2026-09-30
+
+**Decision and response to the complete advice.** Root selected this complete
+study at21:48 UTC after the above independent recommendation and my source
+assessment. The reviewer is the existing `hmasd-research-critic`, created in a
+separate context as `/root/oracle_next_capability`; its original full answer is
+preserved immediately above. I accept the corrected question and comparison.
+There is no material dissent and no reason to repeat that selection review or
+add a Pro round with the same question. Its advice is reasoning, not new
+empirical evidence. This is the only active result-bearing study in my question.
+
+The intended contribution is a conditional empirical answer about **developing
+useful count interpolation from competent learned parameters**. The complete
+policy acts in a coupled, partially observed team: changing N alters capacity,
+interference, observations, labels and the future states induced by every UAV's
+choices. Mixed acquisition may teach use of peer-slot/count variation absent
+from continued N5 acquisition. The competing ordinary explanation is that
+additional imitation alone develops the asset, or that the inherited asset
+already supplies the useful behavior. This is why F and P/B* are indispensable.
+M−F is a complete acquisition-package comparison, not the causal effect of the
+new scalar count, and not a test of unchanged-package portability. Its native
+prediction is positive M−F on the equal-weight held-out N4/N6 target, with the
+same signs in both inherited lineages and without consequential N5 retention
+loss. Parameter movement, peer exposure and fitting curves show what was
+learned/visited; none can replace that native comparison. No observed fitting
+improvement or minimum activation rate is required for admission.
+
+I refreshed published main at92b6e324e254b129cd790fc87749ae1a5761f35f.
+[RESEARCH topic2](../../RESEARCH.md#2-部分可观测性要求处理信息不要求每次都重新训练)
+retains B18 technical missingness, B19's positive development and all three
+adverse B20 fresh training pairs. Their effect here is to preserve F, both
+lineage blocks and every count/tail rather than assume diversity is useful.
+[Topic4](../../RESEARCH.md#4-学习理论表示能力和有限训练结果处在不同层面)
+and my [B05 disposition](#b05-independent-disposition) retain the S capability
+and the failed native-head increments. B06 does not reopen CAL/CONT or diagnose
+its cause. The unavailable unchanged interface is corrected prospectively;
+the earlier record and its costs remain intact. Fleet-loss and availability
+results support strong ordinary references but have different event/control
+contracts; they neither refute nor establish this static-count comparison.
+
+I personally read Ross et al.'s original DAgger paper, section2/Algorithm3.1
+and Theorems3.1–3.4 ([primary PDF](https://proceedings.mlr.press/v15/ross11a/ross11a.pdf)).
+Learner-induced acquisition motivates the continuation; this finite,
+three-stage neural recipe and stochastic deployment do not inherit a native
+reward guarantee. I also read ADAPT `MARL-0104` pp3–4 in
+`/home/fires/projects/Inst-sci/papers/MyLib/json/MARL-0104.json` and InforMARL
+pp3–5 in `/mnt/c/Projects/My-lib/.local-formal-capture/corpus/papers/icml-2023/pmlr-v202-nayak23a/arxiv-2211.02127.pdf`.
+Their object aggregation/graph interfaces explain an alternative source of
+count handling, not a property of our padded MLP. I have not independently
+read InforMARL's transfer-results pages or the mean-field passage because
+neither is load-bearing for this contract. The complete advice records its
+broader search and primary reading. No novelty, invariance or theorem claim
+is made, and no graph redesign is reserved as an automatic repair.
+
+**Fixed host and policy contract.** N is constant within an episode and is
+reliable public pre-mission metadata for every policy, helper and ordinary
+controller. The host keeps50 anonymous static uniform users,1000m square,
+50–150m altitude,30m coordinate motion/tick, H256, four-tick holds, the same
+27-command ordering, all-on transmission, capacity10,3dB eligibility and
+native `J=mean_t(.7*served_t/50+.3*quality_t)`. No new radio action,
+communication, user truth, global critic, history, agent identity feature or
+deployment teacher is given to learned policies. Motion uses actual local
+observations and each program's own navigation state. A chosen category is
+held for four ticks and independently clipped in each coordinate by the
+native host. Requested categories, held commands and executed displacement
+are all retained; different categories can yield the same physical path.
+
+New direction-local C_N and helper code checks at most N−1 visible peers and
+uses `visible_peers < N−1` for the unobserved-interference residual. The
+original free-space arithmetic, ordered observations, score, argmax tie
+order, fallback sweep and navigation update remain bound. Cache identity
+includes N, the103 ordered FP32 fields and predecision navigation; caches
+are private per agent/episode and discarded on every model version change.
+Time is excluded only because this static four-tick policy does not use it.
+Q_N keeps `.90` mass on C_N's category and `.10/26` on each other category,
+including physical aliases. Fallback changes navigation/features; it does
+not forcibly replace a learned categorical choice. B02–B05 files, original
+C source, host and adapter remain unchanged.
+
+**Arms and learner.** For each immutable B02/B03 S lineage, P is the frozen
+weight asset under this new interface. F and M each initialize the same
+34,715 parameters, adding128 exactly zero count weights before the first
+ReLU: `Linear114(x) + u*((N-5)/2)`. The original first-layer matrix shape and
+all later layers stay unchanged; all34,843 parameters train. Count-dependent
+helpers make P_N a revised program outside N5, even with identical parameters.
+The count branch remains differentiable at initialization; no zero-branch
+shortcut may erase its gradient. F receives only N5, so its count branch
+has zero data gradient and stays zero with weight decay0. This is a recorded
+property, not an information restriction on F. Initial FP32 logits are
+checked with synthetic full-domain fixtures; no result-asset probe is added.
+
+Each F/M fit has128 C_N-roll-in episodes,64 current-student **greedy**
+episodes, then64 more after the first aggregate update. At every four-tick
+agent decision C_N supplies one label, including its executing label during
+phase0. Data append in phase/world/tick/agent order. M alternates N3,N7
+by phase-local episode index, beginning with N3; every phase is balanced in
+episodes. F has N5 for the same world-address list. Both therefore acquire
+40,960/20,480/20,480 new labels, with cumulative40,960/61,440/81,920 rows.
+M's row-uniform loss gives30% N3 and70% N7 exposure. It is not a reweighted
+equal-count loss. All rows, repeated states, aliases and fallback labels stay.
+
+Each fit starts one fresh Adam, carried across its three phases; no inherited
+optimizer state is loaded. Full shuffled epochs30/20/20, batch512 with no
+partial batch, learning rate3e−4, betas(.9,.999), eps1e−8, weight decay0,
+amsgrad/foreach/fused false, global gradient clipping1.0 and ordinary mean
+cross entropy exactly fix8,000 updates and4,096,000 presentations per fit.
+Training uses FP32 batch512 arithmetic; deployment uses FP32 one-row
+arithmetic, as in the original imitation package. Changing minibatch size or
+adding extra data/endpoint forwards is not a numerical optimization of this
+contract. Save each phase state/optimizer and existing pre-update training
+stream statistics; final selection is the fixed last phase only. No validation
+selection, temperature sweep, early stopping or additional fit follows a score.
+
+**Addressed worlds, layouts and innovations.** A literal-source/config search
+found no existing integer2951xxxx seed assignments before fixing these ranges:
+
+| Domain | Fixed addresses |
+|---|---|
+| Lineage0 F/M acquisition |29510000–29510255, consecutive128/64/64 phases|
+| Lineage1 F/M acquisition |29512000–29512255, same phase lengths|
+| Shared final worlds |29515000–29515031|
+| Layout root |29514001|
+| Final private innovation tapes0/1 |29514011 /29514012|
+| Within-lineage F/M shuffle roots |29514101 /29514102|
+| Discarded actor constructors by lineage |29514201 /29514202|
+| Native environment constructors N3..N7 |29514303–29514307|
+| Necessary native correctness world |29519000, shared across N3..N7|
+
+For a world w, `default_rng(SeedSequence([29514001,w,1]))` makes one
+FP64 `uniform(0,1000,size=(50,2))` user array. Independently,
+`default_rng(SeedSequence([29514001,w,2]))` makes one FP64
+`uniform(low=[0,0,50],high=[1000,1000,150],size=(7,3))` UAV array;
+N uses its first N rows. These exact array arithmetic and row orders define
+the new joint initialization. They preserve native uniform marginals and
+explicitly change the cross-count coupling. Equal numeric native seeds alone
+do not supply that pairing. F/M share exogenous arrays within lineage/world;
+all final arms/counts/lineages share each final world's users and nested UAV
+starts. Different N still changes the entire physical problem.
+
+Five native environments are constructed once, one per N3..N7. Each episode
+first makes the unchanged native `reset(seed=w)` (charged and discarded),
+then installs copies of the two addressed arrays, clears the path-loss step,
+refreshes channel state and rebuilds observations plus adapter state. Bind
+initial arrays and the generated seven-UAV array in raw evidence; assert the
+first returned local observations are from this refreshed geometry. Nothing
+from those evaluator-only arrays enters the actor/helper except native local
+observations. Native discarded draws/refreshes and constructor resets remain
+in the cost. No mid-episode state replacement occurs.
+
+At final decision(t,i), draw exactly one FP64 uniform from
+`default_rng(SeedSequence([tape_root,w,t,i])).random()` with0≤i<N,
+t in0,4,…,252. Use the existing nominal FP64 softmax and inverse-CDF rule,
+retaining its finite-grid caveat; no resampling of C, duplicate categories or
+aliases. Roots are shared across stochastic arms/lineages/counts for paired
+private innovations, not a shared-policy broadcast. Greedy acquisition uses
+no innovations. Epoch order is `default_rng(SeedSequence([shuffle_root,
+phase,epoch])).permutation(n_rows)`; F/M share the within-lineage roots but
+their collected rows and visitation differ. There is no count-dependent
+change to the action alphabet or stochastic decoder.
+
+**Final panel and primary reading.** At each N4,N5,N6 and each32 new world,
+run two fixed tapes of P/F/M for both lineages, B*0=P0 at temperature2,
+and Q_N. Run deterministic C_N once per world/count. B*1=P1 at temperature1
+is metadata identity reuse, not another episode; C/Q are exact shared
+programs within N/world/tape across lineages. P/F/M account for1,152 final
+episodes, B*0 for192, Q for192 and C for96:1,632 complete evaluations.
+No adaptation or calibration is performed during the panel.
+
+For each metric and world, average its two tapes before comparisons. The
+primary target is M−F averaged equally over N4 and N6 and both lineage
+blocks; its paired descriptive t95 interval uses32 world-cluster values.
+Also report the32-world paired distribution for **every count and lineage**,
+the per-lineage equal-N4/N6 target, M/F−P, M−B*, M/F/P/B*−C/Q and N5
+retention. The two inherited lineages are fixed blocks, not a training
+population, and the two tapes are within-world repeats, not64 independent
+worlds. Report J, mean service, temporal p10/minimum/zero-service counts and
+longest zero streak, mean quality, mean path per UAV and query/native/fit/
+reader compute. Include all adverse worlds and material component conflicts;
+do not select a favorable count, tape, lineage or endpoint after reading.
+No significance threshold, equivalence claim or default operational adoption
+is attached to this exploratory comparison.
+
+The constructive prediction receives support only if the complete M−F
+increment is coherent across held-out counts/lineages with the native tails,
+N5 retention and acquisition/runtime bill assessed explicitly. If both F/M
+improve P without a coherent M increment, ordinary continued imitation gets
+the credit. If inherited P/B* remains competitive, preserve reuse. Active
+fitting without useful native consequence ends this exact mixture recipe;
+isolated positives remain conditional facts. A harmful or unresolved result
+does not obligate an architecture change, larger mixture, new seed or rescue
+of B05. At the read boundary obtain independent scientific diagnosis, publish
+the conditional judgment and return the next investment choice to Root.
+
+**Necessary correctness and bounded reader.** The new initializer/N-shaped
+collector warrants one prospectively charged native integration fixture:
+five8-tick trajectories at world29519000, N3..N7, with C_N execution and
+the analytic helper at both decisions. This verifies nested initial arrays,
+refresh/local-state consistency, peer thresholds, holds, native motion and
+native metric algebra. It is run once inside the same admitted producer,
+using the five environments subsequently used by the main study, with no
+fit, neural actor query or endpoint-quality selection. Its5 partial
+trajectories/40 native steps/200 UAV ticks and50 C/50 helper requests are
+additional engineering exposure, separately retained. A failed correctness
+assertion terminates the attempt and preserves actual work; it does not
+authorize a duplicate retry. Synthetic tests use artificial parameters and
+fake hosts; repeated native pytest smoke runs are not part of the scope.
+
+The one complete reader checks every saved trajectory's initial bindings,
+source/state identities, native metrics, command holds/displacements,
+terminal boundary, local feature encoding, navigation, visibility counts,
+RNG addresses, supplied score/label consistency and counters. It verifies
+all430,080 final student one-row forward laws, including repeated memo hits;
+it does not run an acquisition-actor sweep or repeat fitting. To bound
+teacher/helper arithmetic, select the first16 saved decision rows per N in
+the fixed ordering: N3/N7 from lineage0 M phase0, N4/N5/N6 from final C_N,
+then ascending world,tick,agent. Query both C_N and helper on those80
+contexts exactly once:80 rankings/2,160 paths/8,640 candidate model ticks
+plus80 helper calls. Saved labels/scores elsewhere are checked algebraically,
+not called exhaustive independent teacher replay. The correctness fixture
+is read from saved arrays, with no additional replay. Optimizer states,
+shuffle digests, phase movements and logs are checked without32,000 extra
+Adam calls or16,384,000 extra fitting presentations. No complete same-input
+P shadow sweep was priced; requested/executed movement comes from each
+program's own raw trajectory. Missing indispensable evidence quarantines
+its dependent interpretation rather than inventing a favorable conclusion.
+
+**Complete prospective cost and scope.**
+
+| Work | Fixed study | Extra native correctness |
+|---|---:|---:|
+| Full-network fits |4|0|
+| Complete H256 episodes |2,656 =1,024 acquisition +1,632 final|5 partial H8 trajectories|
+| Native team steps / UAV ticks |679,936 /3,399,680|40 /200|
+| C_N labels |327,680|0 (fixture actions are not fitting data)|
+| Adam updates / presentations |32,000 /16,384,000|0 /0|
+| Worker student requests |593,920, including163,840 greedy acquisition|0|
+| Worker C requests |419,840|50|
+| Worker helper request ceiling |757,760|50|
+| Worker no-memo C paths / ticks |11,335,680 /45,342,720|1,350 /5,400|
+| Reader student forwards |430,080|0|
+| Reader C rankings / helper calls |80 /80 total over the study's saved rows|0 additional|
+
+Study episode counts by N3..N7 are256/544/1056/544/256. Native dense
+slot accounting is `N*(50+N)` per channel evaluation, preserving its
+historical meaning (not claiming every slot has nonzero physical work).
+With one constructor per N, explicit native reset and one layout refresh
+per episode, the study costs189,253,673 dense slots; the H8 fixture adds
+13,850, for189,267,523 combined. Study no-memo C/helper link ceilings are
+951,705,600/109,854,720; the fixture adds113,400/7,400. Worker combined
+dense/C/helper ceiling is1,250,948,643 slots. The balanced80-row reader
+adds at most192,000 C/helper links under20-user support, with no native
+channel calls. Record actual cache misses, geometry and link work alongside
+these ceilings. Labels/team steps/UAV steps/updates match F/M; actual CPU
+does not necessarily match because N and visited geometry differ.
+
+The selected planning estimate remains15–30 worker CPU minutes plus10–30
+reader CPU minutes, roughly1–3GB unique bulk and sequential RAM plausibly
+below1GiB, before actual admission. The small fixture is included in this
+runtime allowance, not hidden in the original native-step total. Support
+remains8–14 unmetered hours, not a promise or a cap on reading required
+evidence. Those estimates are source-based, not a new benchmark. The
+preceding acquired/developed lineages have already cost8 fits,2 calibrations,
+1,687,552 native steps and2,343.116291 chain CPU-s over their scoped hosts,
+plus the separate older B01 two-fit576,000-step/31,190.348CPU-s investment.
+B06 would bring acquisition+B04+B05+B06 to12 fits/2 calibrations and
+2,367,488 study steps (2,367,528 including its native fixture), without
+pooling heterogeneous host timings or erasing earlier adverse outcomes.
+
+Root prospectively assigns local_linux, untimed CPU/one thread while the
+real-deadline waiting chain occupies the preferred remote. Fresh actual-node
+memory/occupancy admission, current owner-pause/lead and published exact
+inputs still govern execution. Any N8/parent overlap is reported with actual
+timing scope. Existing accepted operations and their observation handles
+are untouched. This fixes one producer/full-reader chain, not an automatic
+second attempt or future collection.
+
+
+<a id="b06-count-development-l0"></a>
+### B06 implementation scope
+
+Deliver one fixed count-development runner and bounded complete reader under
+`experiments/candidates/uav_fleet_adaptation/b06_count_development/`, mirrored
+by focused tests under `tests/experiments/candidates/uav_fleet_adaptation/b06_count_development/`.
+New entrypoints are the direction-local runner/reader; source identities,
+original S byte/tensor hashes and B* provenance remain explicit. Outputs go
+to `runs/uav_fleet_adaptation/b06_count_development_a01/`; disposable inputs
+and observer requests stay under `temp/directions/uav_fleet_adaptation/`.
+I own NOTES, protocol, integration, acceptance, launch, reading and publication.
+No frozen source or shared core file is owned by this task.
+
+One bounded Implementer may own only the new count-conditioned full-network
+continuation kernel (`model.py`) and its focused `test_model.py`: same original
+network keys plus zero128 count branch, fresh continuing Adam, exact phased
+row-uniform CE and checkpoint/gradient/movement accounting. Pass the fixed
+protocol/parent-state interfaces; it uses synthetic weights/data, no real S
+forward, native query, production fit, Git index operation or result launch.
+I implement the count-aware controllers, addressed native initializer,
+collection, orchestration and bounded reader in disjoint new files, then
+read/accept the returned diff and checks. Helpers do not edit the notebook
+or each other's files. There is at most one active Implementer.
+
+Focused checks cover N5 source-C/helper equivalence; count-dependent unknown
+interference and packed rows at N3..N7; zero-branch initial computation and
+F/M gradients; fixed data/update/order arithmetic; label versus greedy
+roll-in and sampled-final separation; independent addressing/tapes; layout
+refresh/pairing; cache invalidation; complete raw reconstruction, row/label
+corruption rejection and clustered estimands. Synthetic tests must not
+quietly consume a result asset/endpoint or run native quality pilots.
+Independent high-risk engineering review receives this contract, source
+diff and tests. I resolve findings and publish exact inputs before one
+admitted worker and its fixed reader. Engineering correctness is separate
+from the already completed scientific selection review and the later
+independent result interpretation. A material premise contradiction returns
+promptly to Root; implementation errors preserve accepted exposure before
+any revised proposal. No new CLAIM is needed for this exploratory study.
