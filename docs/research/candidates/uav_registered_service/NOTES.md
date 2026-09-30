@@ -880,3 +880,166 @@ records and no retry allowance. The inherited remote automatic-GC bad-tree
 warning remains a separate repository-maintenance issue; it did not block this
 exact cleanup. No direction-owned cleanup target is left blocked. No unread
 result, active producer or selected successor remains.
+
+
+<a id="b02-prospective"></a>
+
+## 2026-09-30 — B02 periodic-efficiency comparison and L0
+
+New native lead `/root/dm_periodic_efficiency`, parent Root
+`01a0ef2b-a391-7693-a748-60e24be246ae`, owns this direction on shared main.
+The former DM and B01 are fully complete; no worker, reader, observer or cleanup
+operation transfers. Root selected the existing G/O/S2 proposal after the complete
+B01 result/independent diagnosis and the complete Pro answer published at
+`cf45e361cba3e8f3230f8d33a8de7175492c4771` in RESEARCH's periodic-efficiency-and-fleet-control
+review. Root is publishing the active row/routing; preparation proceeds now and
+result launch awaits that actual published active ownership and normal admission.
+The owner resume is in force for this assigned question; unrelated pauses remain.
+
+I read the full B01 notebook, its original result/reader identities, independent
+result diagnosis and exact investment proposal, and the complete new Pro answer.
+Reuse those applicable separate-context reviews: no material dissent about G.
+Adopt the exact gate and complete G/O/S2 comparison; Pro's material N-comparator
+objection is outside this question and does not alter G. Advice is not empirical
+evidence. The published shared background section2 at `cf45e361c` changes the
+question from additional F superiority to preserving a useful periodic capability
+at lower native-service/motion cost. It also preserves O's continuous-refresh
+benefit and the T2/local-positive/later-loss counterexamples. Thus the competing
+explanation is that O's persistent age priority prepares next-window geometry and
+limits waiting, rather than all post-completion motion being wasted. No novelty,
+learning, packet ACK, battery or default physical-adoption claim is intended.
+
+Actual interface inspection confirms that B01 settles only known executed
+commands/masks with decoded own-position anchors, copies history before the
+common two-transition committed prefix, and applies one key in both sequential
+inner searches/final choice. Its prefix/candidate predictions do not enter the
+executed log. Native assignment couples motion, interference, capacity, later
+observations and C proposals. G changes this conditional ordering only; it adds
+no information or action rights. The gate's eligibility and action effect are
+measured separately from timely execution. A gate may be active without changing
+a chosen command/mask. No activation-rate screen or pilot is selected.
+
+Freeze `b02_periodic_efficiency_a01`: arms S2/O/G, seeds29309000..29309063,
+N5/U50/H256, six cyclic/reversed-cyclic orders of[S2,O,G], world index modulo6.
+The exact integer seed range was rechecked across current docs/research,
+experiments, tests and runs: only the B01 proposal and Root/Pro prospective text
+refer to it; no prior execution record was found. Exactly192episodes/49152native
+steps,0newfits/0optimizer updates. All startup/terminal and adverse trajectories
+remain. No extra worlds, gate threshold, clock, tuning or useful-prefix endpoint.
+The existing proposal's gate, semantic boundaries, complete vector and failure
+branches are adopted unchanged, including all50bits/64tick windows, crossing
+blocks reverting to O, censored first-window ineligibility, history continuing
+while released, and charged whole-team deadline fallback.
+
+Primary decision: the complete exploratory G-O tradeoff with S2 as the competent
+native-efficiency reference. Report all three signed world-paired contrasts and
+descriptive t95 intervals, F/J/service/quality/path/continuous closed and censored
+gaps/user-window distribution/zeros/service tails/deadlines and compute. Worlds
+are the independent units; no equivalence or preservation from nonsignificance,
+no invented F-to-J exchange rate or noninferiority threshold. Prediction: G
+actually releases decisions, improves complete J/service and reduces motion;
+retaining F and gaps remains a hypothesis. Read model-versus-actual completion
+at release, later-window losses and action exposure, without feeding truth into
+the actor. A costly loss may justify stopping this gate; it does not refute all
+possible temporal control. Root owns the next cross-question investment.
+
+Nominal maximum work remains12288rounds,1425408candidate requests,
+5657088candidate state reductions,1316736geometry snapshots,49152O/G
+history/private-prefix/terminal reductions, plus C/native/output. Cache reuse
+and actual interrupted work are counted separately. The589.4worker CPU-second
+anchor and354.02B01reader CPU-second anchor are historical, not hard stops;
+B01's2911.112measured worker/reader CPU seconds and prior preparation remain
+sunk exposure. New engineering, tests/review, reader and network/support costs
+are unknown until measured; no fabricated full-cost estimate. Preferred node
+wsl_4070 has first priority over Root's proposed N timed execution, with fresh
+actual-node memory/load admission still required.
+
+### L0 — one bounded B02 gate, collector and pure reader
+
+Implement under `experiments/candidates/uav_registered_service/b02/` and matching
+`tests/experiments/candidates/uav_registered_service/b02/`. Preserve B01 frozen
+paths and reuse its legal history, metrics, kernels and unchanged O/S2 behavior;
+no shared core, old source, governance, other direction or runtime changes.
+Entrypoints are admitted `b02/run.py` and pure saved-data `b02/read.py`.
+Deliver the exact gate before search, full three-arm collection and reader with
+complete source/config identity and actual counts/resources. No result pilot.
+Helpers own these new code/test paths only, no notebook/index/Git/launch/children;
+DM accepts diff/checks and owns all publication on shared main. Foreign edits
+must remain untouched. Shared edit+stage+commit transactions use
+`.git/hmasd-main-writer.lock`; helpers make no Git index mutation.
+
+At each report, settle reconstructable executed history, build the private two
+transition prefix, then fix native ordering iff the actual candidate block is
+inside one fully reconstructable window and all50prefix bits there are true.
+Both inner orders and final comparison use that fixed key; otherwise full O key.
+Recompute next report and retain ordinary age updates while native-ranked.
+Do not trigger release from a candidate's own completion, mutate history with
+forecasts, copy actual connection bits, relax deadlines, or skip backlog.
+Record gate-computed/eligible/released/timely-executed scope and raw legal
+snapshots/contacts/keys sufficient for independent reconstruction. Record
+model/actual completion disagreement evaluator-side, including future committed
+prefix truth only in evaluation. Preserve existing selected and deterministic
+report0/60/124/252 candidate-physics coverage and all actual/history/key readings.
+Materialize each NPZ once per episode as in the corrected B01 reader; pure
+readback creates no environment episodes. Reuse frozen O/S2 full endpoints.
+
+Focused checks:49vs50bits; same/cross-window and window restart; censored anchor
+and pending settlement; report252terminal half-block; no forecast persistence;
+both search orders use the same gate; truth-free actor API; charged gate/history
+work and whole-team late fallback; retained O/S2 equivalence on non-panel
+fixtures; complete paired counts and pure reader catches gate/key corruption.
+Synthetic test seeds differ from the fixed evaluation range. Independent
+engineering review is required before source acceptance. On complete collection,
+read the entire fixed panel, obtain fresh independent scientific diagnosis,
+publish the direction/background result and remove verified unused scratch and
+source snapshot while preserving canonical raw evidence.
+
+
+### B02 engineering acceptance and published activation
+
+Root published the selected plan/sole new lead at
+`b975b4534d001d470acf2f416785b54e8b5661f5`; the complete selection review and Pro
+answer now remain in [the completed review](../../archive/2026-09-30/RESEARCH-periodic-efficiency-and-fleet-control.md#decision).
+The canonical node's RESEARCH was narrowly synchronized to those published bytes
+by Root, preserving its existing HEAD/index/sparse selection and peer outputs.
+Current direction state is exploring, launch lead remains `Codex DM (native child)`.
+No inherited operation or unrelated pause changed.
+
+Registered Implementer `/root/dm_periodic_efficiency/implement_g` delivered six
+new B02 source files and two tests without editing frozen B01, shared code,
+records or Git. I read all scheduler/collector/reader differences and test code,
+including the final structured gap/window comparison and source-identity check,
+and accept the implementation. O/S2 invoke the original schedulers; local G
+scheduler/collector/reader bodies are needed because frozen B01 hard-codes arms
+and provides no ordering hook. History/search/storage/metrics/kernel and retained
+reader helpers are reused. No global patching or new controller framework.
+
+B02 focused suite:41tests passed in17.76s; both entrypoint CLI-help checks and
+owned whitespace checks passed. Registered independent engineering Reviewer
+`/root/dm_periodic_efficiency/review_g` used a separate read-only context and
+independently obtained40passes in16.34s, then3focused final integration checks
+in2.19s. Fourteen existing dependency deprecation warnings remain. The final
+study.py/read.py hashes matched its inspected versions. Reviewer conclusion:
+no material engineering finding, no requested repair. DM acceptance is my own.
+
+These checks cover exact49/50coverage eligibility, crossing/window restart and
+terminal half-block, both sequential orders, private forecasts, censored startup,
+atomic backlog/reanchors, charged gate/decode deadline fallback, source/count
+identity, actual truth boundaries and raw corruption detection. Frozen O/S2
+scientific fixture fields match B01 exactly; pre-release G matches O. The actual
+B01 controller/history/protocol/host dependencies have no diff from scientific
+source6f4c21ba5; only the separately accepted B01 reader materialization amendment
+is present. Tests used non-panel seeds98101..98110 and pytest-managed scratch;
+no scientific pilot or panel episode was executed.
+
+A new structured list-of-dictionaries metric exposed a reader comparison error
+in tests; B02 now handles it locally without changing frozen B01. S2 also receives
+all-visited candidate checks at reports0/60/124/252, reported as additional checked
+pairs alongside its frozen coverage; O/G retain the declared all-selected and
+those deterministic-report checks. This is saved-data support, not extra native
+exposure. Gate command-edit counts explicitly compare against C proposals, mask
+changes against the prearrival mask; neither is labeled an alternate-O causal
+action difference. Actual native/prefix/final-window truth remains evaluator-only.
+The reader materializes each NPZ once and checks all192records and paired endpoints.
+Shared radio kernels and actual-node deadline/resource behavior remain stated
+limits, with the latter to be measured by the fixed complete comparison.
