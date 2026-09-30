@@ -1,0 +1,18 @@
+Traceback (most recent call last):
+  File "/home/wu/projects/HMASD/.git/hmasd-launch-sources/f25246d8c0cf47089df3ab90c14cdd6b/experiments/candidates/uav_fleet_adaptation/run_b01.py", line 28, in <module>
+    main()
+  File "/home/wu/projects/HMASD/.git/hmasd-launch-sources/f25246d8c0cf47089df3ab90c14cdd6b/experiments/candidates/uav_fleet_adaptation/run_b01.py", line 24, in main
+    run_study(args.out.resolve(), args.checkpoint_root.resolve(), args.launch_sha, admission)
+  File "/home/wu/projects/HMASD/.git/hmasd-launch-sources/f25246d8c0cf47089df3ab90c14cdd6b/experiments/candidates/uav_fleet_adaptation/study.py", line 122, in run_study
+    record = load_parent(checkpoint_root)
+  File "/home/wu/projects/HMASD/.git/hmasd-launch-sources/f25246d8c0cf47089df3ab90c14cdd6b/experiments/candidates/uav_fleet_adaptation/training.py", line 34, in load_parent
+    return source.load_source_policy(Path(checkpoint_root), PARENT)
+  File "/home/wu/projects/HMASD/.git/hmasd-launch-sources/f25246d8c0cf47089df3ab90c14cdd6b/experiments/candidates/load_critical_member_generalization/load_probe/probe.py", line 256, in load_source_policy
+    source_bytes, summary_identity = _committed_bytes(summary_path, Path(repository_root))
+  File "/home/wu/projects/HMASD/.git/hmasd-launch-sources/f25246d8c0cf47089df3ab90c14cdd6b/experiments/candidates/load_critical_member_generalization/load_probe/probe.py", line 185, in _committed_bytes
+    working = path.read_bytes()
+  File "/home/wu/.local/opt/hmasd-cpython-3.10.21-gcc/lib/python3.10/pathlib.py", line 1126, in read_bytes
+    with self.open(mode='rb') as f:
+  File "/home/wu/.local/opt/hmasd-cpython-3.10.21-gcc/lib/python3.10/pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+FileNotFoundError: [Errno 2] No such file or directory: '/home/wu/projects/HMASD/.git/hmasd-launch-sources/f25246d8c0cf47089df3ab90c14cdd6b/runs/agent_count_generalization/s1_action_law_b03_h6_clip_s942201/summary.json'

@@ -1,0 +1,90 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-30T11:25:37.098143Z",
+  "bootstrap_command": [
+    "/home/wu/.venvs/hmasd-gcc-31021/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/f25246d8c0cf47089df3ab90c14cdd6b/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/f25246d8c0cf47089df3ab90c14cdd6b/experiments/candidates/uav_fleet_adaptation/run_b01.py",
+    "--output",
+    "/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b01_warmstart_a01",
+    "--",
+    "--out",
+    "/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b01_warmstart_a01",
+    "--checkpoint-root",
+    "/home/wu/hmasd-worktrees/agent-count-action-law-20260922-b03/runs/agent_count_generalization",
+    "--launch-sha",
+    "bf452481d2b951fe4e484e70858704c21eec5ed8"
+  ],
+  "claim_key": "8ca1d0ce7a6b5938aceb9f10a9374d560c7362ccbad1b1598c245ad138f01ab1",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/8ca1d0ce7a6b5938aceb9f10a9374d560c7362ccbad1b1598c245ad138f01ab1.json",
+  "command": [
+    "/home/wu/.venvs/hmasd-gcc-31021/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/f25246d8c0cf47089df3ab90c14cdd6b/experiments/candidates/uav_fleet_adaptation/run_b01.py",
+    "--out",
+    "/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b01_warmstart_a01",
+    "--checkpoint-root",
+    "/home/wu/hmasd-worktrees/agent-count-action-law-20260922-b03/runs/agent_count_generalization",
+    "--launch-sha",
+    "bf452481d2b951fe4e484e70858704c21eec5ed8"
+  ],
+  "command_sha256": "d47a819be6142769336b33627454d7cb8cb5d554fde548e8ac2d7093a5112aa8",
+  "control_observation": {
+    "observed_at": "2026-09-30T11:25:36.972221Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "bf452481d2b951fe4e484e70858704c21eec5ed8"
+  },
+  "control_root": "/home/wu/projects/HMASD",
+  "created_at": "2026-09-30T11:25:36.983741Z",
+  "cwd": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/f25246d8c0cf47089df3ab90c14cdd6b",
+  "direction": "uav_fleet_adaptation",
+  "host_identity": "LAPTOP-U9TDKC8A",
+  "identity_command": [
+    "/home/wu/.local/opt/hmasd-cpython-3.10.21-gcc/bin/python3.10",
+    "experiments/candidates/uav_fleet_adaptation/run_b01.py",
+    "--checkpoint-root",
+    "/home/wu/hmasd-worktrees/agent-count-action-law-20260922-b03/runs/agent_count_generalization",
+    "--launch-sha",
+    "bf452481d2b951fe4e484e70858704c21eec5ed8"
+  ],
+  "lead": "Codex DM (native child)",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b01_warmstart_a01/launch-manifest.json",
+  "node": "wsl_4070",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/8ca1d0ce7a6b5938aceb9f10a9374d560c7362ccbad1b1598c245ad138f01ab1.json",
+  "output_root": "/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b01_warmstart_a01",
+  "preflight": "/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b01_warmstart_a01/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 1103083,
+      "session_id": 1103083,
+      "start_ticks": 111141932
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 1103083,
+    "process_group_id": 1103083
+  },
+  "process_exit": "/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b01_warmstart_a01/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 1103084,
+      "session_id": 1103083,
+      "start_ticks": 111141935
+    },
+    "pid": 1103084,
+    "process_group_id": 1103083,
+    "supervisor_pid": 1103083
+  },
+  "schema_version": 1,
+  "sha": "bf452481d2b951fe4e484e70858704c21eec5ed8",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/f25246d8c0cf47089df3ab90c14cdd6b",
+  "stderr": "/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b01_warmstart_a01/stderr.log",
+  "stdout": "/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b01_warmstart_a01/stdout.log"
+}

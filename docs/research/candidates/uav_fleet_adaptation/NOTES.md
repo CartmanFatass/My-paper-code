@@ -198,3 +198,42 @@ Git auto-GC bad-tree/repack warning; this warning is not a failed scientific ope
 original remote parent checkpoint was reverified at the declared SHA; one23MB local temporary
 copy is used by the exact-checkpoint tests and will be removed at cleanup. Actual result launch
 still requires committed/published inputs and fresh destination memory/admission.
+
+## 2026-09-30 — B01 a01 technical failure and bounded input correction
+
+`b01_warmstart_a01`, source `bf452481d2b951fe4e484e70858704c21eec5ed8`, was admitted
+on wsl_4070 at11:25:37.098UTC (14,211,506,176 available physical bytes;4GiB floor passed),
+then exited1 at11:25:40.655UTC in `parent_loading`. Both runner1103084 and supervisor1103083
+are absent; exit witness and launch/admission records agree. The sparse source snapshot
+`/home/wu/projects/HMASD/.git/hmasd-launch-sources/f25246d8c0cf47089df3ab90c14cdd6b`
+lacked the historical `runs/agent_count_generalization/s1_action_law_b03_h6_clip_s942201/summary.json`
+working file required by the frozen loader. Read-only inspection verified that the original Git
+blob exists at that accepted HEAD,737415bytes, SHA256
+`55a994c81f49a9b97b52efa4ddaea82579e1068ea3a7ddbd11c8b7645bf88921`; this is sparse working-file
+absence, not a changed parent. The record has fits={}, episodes=[], and failure before agent
+construction: zero new fits, native steps, updates or evaluation episodes. Self CPU3.036305s,
+child user0.001089s, peakRSS417456KiB; acceptance-to-exit3.557210s is not a full preparation
+wall-time measurement. Compact original records are retained under
+[runs/uav_fleet_adaptation/b01_warmstart_a01](../../../../runs/uav_fleet_adaptation/b01_warmstart_a01/).
+This is no evidence for or against adaptation. The observer's terminal event was drained,
+consumed and observation stopped; no worker was restarted.
+
+L0 correction: retain exactly that required metadata blob under owned
+`experiments/candidates/uav_fleet_adaptation/inputs/<parent-tag>/summary.json`, pin its original
+path/revision/hash/bytes, and call the unchanged strict frozen loader with that explicit
+summary root. This source path is included by the existing sparse selection. The loader still
+requires working bytes identical to Git HEAD, all original source contract fields and the exact
+external checkpoint. No accepted snapshot, remote sparse selection, old loader, learner,
+worlds, objective, sampler or scientific comparator changes. This single required input is
+737415bytes (identical Git blob), not another copy of the historical study.
+
+The new isolated Git-fixture check uses the real retained checkpoint: absent historical working
+file loads the owned committed metadata; changed bytes fail the original hash pin; exact but
+uncommitted bytes fail the loader's HEAD check. It passed1/1 in2.54s. Existing full integration
+checks will run after this new input is committed, as required by the loader's actual contract.
+Independent engineering review is checking the actual narrow diff. After review and exact-source
+publication, explicitly select fresh attempt `b01_warmstart_a02` with the corrected source SHA
+and fresh actual-node admission. This replaces no accepted work and does not use an automatic
+retry. The scientific budget remains the declared two fits and576000 native steps, with zero
+used by a01; all partial future exposure remains counted. No new scientific premise or selection
+review is required for this input-path correction.

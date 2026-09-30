@@ -2,6 +2,7 @@
 from dataclasses import replace
 from pathlib import Path
 import json
+import subprocess
 
 import numpy as np
 import pytest
@@ -177,6 +178,45 @@ def test_real_full_h6_update_actual_exposure_and_movement(synthetic_collection):
         collected_rows = np.sort(raw["raw_actions"].reshape(-1, 3), axis=0)
         replay_rows = np.sort(np.concatenate([batch.reshape(-1, 3) for batch in replay]), axis=0)
         np.testing.assert_array_equal(replay_rows, collected_rows)
+
+
+def test_parent_metadata_survives_sparse_snapshot_and_remains_bound(tmp_path, monkeypatch):
+    checkpoint_root = Path("temp/directions/uav_fleet_adaptation/inputs").resolve()
+    if not (checkpoint_root / training.PARENT.tag / "checkpoint_45.pt").exists():
+        pytest.skip("retained parent external checkpoint is not staged on this host")
+    original = training.PARENT_SUMMARY_ROOT / training.PARENT.tag / "summary.json"
+    # A disposable Git fixture tests the frozen loader's real HEAD-byte check.
+    # It contains only the bound metadata, with no historical runs/ working file.
+    repository = tmp_path / "metadata-binding"
+    metadata_root = repository / "experiments/candidates/uav_fleet_adaptation/inputs"
+    metadata = metadata_root / training.PARENT.tag / "summary.json"
+    metadata.parent.mkdir(parents=True)
+    metadata.write_bytes(original.read_bytes())
+    def git(*args):
+        return subprocess.run(
+            ["git", "-C", str(repository), "-c", "core.hooksPath=/dev/null", *args],
+            check=True, capture_output=True)
+    git("init", "-q")
+    git("add", str(metadata.relative_to(repository)))
+    git("-c", "user.name=Binding test", "-c", "user.email=binding@example.invalid",
+        "commit", "-qm", "Bind retained metadata")
+    monkeypatch.setattr(training, "REPOSITORY_ROOT", repository)
+    monkeypatch.setattr(training, "PARENT_SUMMARY_ROOT", metadata_root)
+    assert not (repository / training.PARENT_SUMMARY_ORIGIN["path"]).exists()
+    record = training.load_parent(checkpoint_root)
+    assert record["summary_identity"]["working_bytes_identical"] is True
+    assert record["summary_identity"]["sha256"] == training.PARENT_SUMMARY_SHA256
+    assert record["summary_identity"]["origin"] == training.PARENT_SUMMARY_ORIGIN
+    assert record["checkpoint_sha256_before"] == record["checkpoint_record"]["sha256"]
+    metadata.write_bytes(metadata.read_bytes() + b"\n")
+    with pytest.raises(ValueError, match="pinned original"):
+        training.load_parent(checkpoint_root)
+    metadata.write_bytes(original.read_bytes())
+    git("rm", "--cached", str(metadata.relative_to(repository)))
+    git("-c", "user.name=Binding test", "-c", "user.email=binding@example.invalid",
+        "commit", "-qm", "Remove committed binding")
+    with pytest.raises(ValueError, match="not committed at HEAD"):
+        training.load_parent(checkpoint_root)
 
 
 def test_retained_parent_restoration_is_strict_and_fresh(tmp_path):

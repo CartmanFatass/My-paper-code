@@ -1,0 +1,11 @@
+{
+  "claim_key": "8ca1d0ce7a6b5938aceb9f10a9374d560c7362ccbad1b1598c245ad138f01ab1",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/8ca1d0ce7a6b5938aceb9f10a9374d560c7362ccbad1b1598c245ad138f01ab1.json",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b01_warmstart_a01/launch-manifest.json",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/8ca1d0ce7a6b5938aceb9f10a9374d560c7362ccbad1b1598c245ad138f01ab1.json",
+  "pid": 1103083,
+  "runner_pid": 1103084,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-30T11:25:37.103553Z"
+}

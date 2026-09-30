@@ -2,6 +2,7 @@
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from types import SimpleNamespace
+import hashlib
 import time
 import resource
 
@@ -17,6 +18,15 @@ from .host import TRAIN_WORLD_IDS, make_env, mask_bits, mask_integer, runtime_se
 
 FIT_SEED = 29316101
 PARENT = source.SourcePolicy("H6", 942201, "s1_action_law_b03_h6_clip_s942201")
+REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
+PARENT_SUMMARY_ROOT = Path(__file__).resolve().parent / "inputs"
+PARENT_SUMMARY_SHA256 = "55a994c81f49a9b97b52efa4ddaea82579e1068ea3a7ddbd11c8b7645bf88921"
+PARENT_SUMMARY_ORIGIN = {
+    "path": "runs/agent_count_generalization/" + PARENT.tag + "/summary.json",
+    "git_revision": "bf452481d2b951fe4e484e70858704c21eec5ed8",
+    "sha256": PARENT_SUMMARY_SHA256,
+    "bytes": 737415,
+}
 
 
 @dataclass(frozen=True)
@@ -31,7 +41,17 @@ class TrainSpec:
 
 
 def load_parent(checkpoint_root):
-    return source.load_source_policy(Path(checkpoint_root), PARENT)
+    # Launcher snapshots include this direction's source tree but can omit runs/.
+    # Keep the frozen loader's HEAD/working-byte check on an exact bound input.
+    summary_bytes = (PARENT_SUMMARY_ROOT / PARENT.tag / "summary.json").read_bytes()
+    if (len(summary_bytes) != PARENT_SUMMARY_ORIGIN["bytes"]
+            or hashlib.sha256(summary_bytes).hexdigest() != PARENT_SUMMARY_SHA256):
+        raise ValueError("bound parent metadata differs from its pinned original")
+    record = source.load_source_policy(
+        Path(checkpoint_root), PARENT,
+        tracked_summary_root=PARENT_SUMMARY_ROOT, repository_root=REPOSITORY_ROOT)
+    record["summary_identity"]["origin"] = dict(PARENT_SUMMARY_ORIGIN)
+    return record
 
 
 def _array_digest(value):
