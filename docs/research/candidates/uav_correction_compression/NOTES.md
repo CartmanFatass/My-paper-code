@@ -574,3 +574,73 @@ using the supported preview/apply collector. Preserve all refusals and unique ev
 measure actual net allocated bytes and publish the final cleanup outcome. The known
 remote Git auto-maintenance bad-tree warning was not repaired or tested as a GC blocker
 here. Canonical raw evidence and original B06/B19451 inputs will remain untouched.
+
+<a id="b01-final-cleanup"></a>
+## 2026-09-30 — Cleanup complete after the shared compute window released
+
+Root returned a cleanup-only follow-up after B's scientific worker exited; its pure
+reader remained on its own snapshot. This session adopted that scope, added **0 new
+scientific episodes/steps/fits**, and did not change the B01 result, explanation or
+reserve disposition. Result publication `e17f4fdf9` and standing/background
+publication `e259ceb43` remain the scientific evidence boundary.
+
+Before deletion,245 canonical remote run files matched the collected bytes: all224
+raw trajectories (61,647,628 logical bytes), seven episode streams, seven cell
+summaries and seven worker metadata/summary files. Row hashes/lengths and stream
+hashes also matched the published global summary. The three original D checkpoints
+were verified at their **declared local canonical paths**
+`runs/uav_message_content/b06_calibration/{19701,19702,19703}/D/final.pt`; the original
+B19451 parent was verified at its declared remote canonical path. All four hashes
+and lengths match the frozen input manifest, as did their redundant remote staging
+copies. An initial read-only probe of the remote B06 relative D path found no file;
+that was an incorrect location assumption, not lost canonical evidence. The manifest
+already names the local originals, which were checked directly. No replacement copy
+or new retention package was created.
+
+The A worker/supervisor and all local evidence consumers were absent. Supported
+snapshot GC first previewed only `42ec62eb9cf0453e8400236ffa74119d` and refused with
+`cannot inspect own process 660: [Errno 13] Permission denied: '/proc/660/cwd'; retry
+with --sudo-process-scan`. Repeating the preview with the documented
+`--sudo-process-scan` passed: exact claim/output/source identities, clean snapshot,
+terminal native witness, no process references and durable source reachability through
+`refs/remotes/origin/HEAD`. The same exact-target apply rechecked those conditions
+and removed the worktree normally. Only the read-only process probe used existing
+passwordless `sudo -n`; Git deletion ran as the original user. No force, claim removal,
+sparse-checkout change, Git repair or branch switch occurred.
+
+Under the remote shared writer lock, a separate supported read-only process scan
+found no staging references. Its exact four-file inventory and hashes were checked
+again before deletion. Git's snapshot registration was also verified absent after
+normal worktree removal. B's snapshot `84cf7f4bc7e043af8ee26c0864f1457f` remained
+present with the same inode; no B or peer path was deleted or modified. The temporary
+local seven-arm directories contained only the verified raw/stream/summary copies
+and were removed after the canonical verification. Required compact Git artifacts,
+useful evaluator/reader/tests, original assets and remote raw evidence remain.
+
+Exact-target `du -s -B1` before deletion and target-absence/zero-after checks measured:
+
+| Actual deleted target | Allocated bytes reclaimed |
+|---|---:|
+|Remote `.git/hmasd-launch-sources/42ec62eb9cf0453e8400236ffa74119d/`|805,650,432|
+|Its remote `.git/worktrees/42ec62eb9cf0453e8400236ffa74119d/` registration, removed by Git|3,452,928|
+|Remote `/home/wu/hmasd-inputs/uav-correction-compression-b01/` four-checkpoint staging|2,179,072|
+|Local a02 `D19701/`, `C19701/`, `D19702/`, `C19702/`, `D19703/`, `C19703/`, `B40/` replicas|63,188,992|
+|This cleanup-only follow-up subtotal|**874,471,424**|
+|Previously deleted local scratch/caches/redundant logs|167,936|
+|Complete closure total|**874,639,360**|
+
+These are net allocated bytes removed from the named targets, not apparent file
+lengths, a moved directory, Git object-pack reclamation or a host-wide free-space
+estimate. No backup/archive/duplicate retention was created as a cleanup condition.
+
+After deletion, a fresh audit again checked all224 canonical raw hashes/lengths,
+seven stream hashes, seven cell summaries, seven worker compact files and the
+original checkpoint hashes. All remain intact. Native status at
+2026-09-30 01:13:27.739116 UTC still reports exit0, absent A worker/supervisor and
+consistent records, with claim/manifest/exit witness preserved. Local deleted targets
+and remote snapshot/registration/staging are absent. The protected-process refusal
+is resolved; the earlier Git auto-maintenance warning did not block this collector
+and was not independently repaired. **No cleanup target, live operation, unread
+review or concrete cleanup blocker remains.** The scientific next step remains idle
+unless a consequential new deployment-cost question earns a prospective comparison
+within Root's allocation; this cleanup authorizes no successor or relaunch.
