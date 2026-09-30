@@ -644,3 +644,113 @@ inventory rule hashes to
 `c6158dae473bf01fa242ff9fe8d9cd5420fe5fc96ef80b5066f6bc4d5aedee26`.
 The original full summary/reading hashes above are unchanged. This cleanup closes
 the completed operation, not ownership of the adaptation question.
+
+<a id="u-source-preparation"></a>
+
+## 2026-09-30 — U source/recipe preparation for the next investment decision
+
+Root requested these details while integrating the boundary and owner-requested Pro
+advice. This is read-only source work and prospective design: **zero new fits,
+model constructions, policy calls or native steps; no U implementation or accepted
+launch**. The U choice can still change in that review. RESEARCH result publication
+was released back to Root at `4e559e8ba09c0cbbbe5abb2597e0b3e328a4f935`; this
+preparation edits only this notebook. CodeGraph was used first, followed by the
+specific missing source ranges and directly required collector/learner definitions.
+
+The parent input is the original B01 **B-final** checkpoint in each retained lineage,
+not a newly generated, rescreened or best parent. Under the canonical B01 run root:
+
+| Lineage | P relative path | Bytes | SHA256 |
+| --- | --- | ---: | --- |
+| 1 | `1/B/final.pt` | 466157 | `08160fa709eced214c589b091b8e93692a23bf741aa32c678dd53d7a2ebe055e` |
+| 2 | `2/B/final.pt` | 466157 | `2afe506c4878369ad894c5cc744849f5544cdb853af98cf96d8cfd806c6494b1` |
+| 3 | `3/B/final.pt` | 466157 | `8f77669e39aed70f23602684ff8d6592e66530429c722ea8d3487636c6fc899c` |
+
+The compact result's `fit_artifact_bindings` provides every P/K/D path, file size,
+digest, parent/source identity, aggregate tensor hashes and episode/update stream
+hashes. The full summary retains individual tensor bindings. All these input
+checkpoints have original launch source `930a0789dad4adbba67592c5fff07802a3dd40c2`;
+future U source must be recorded separately, rather than relabeling inherited files.
+
+The exact model handoff is new and small. B01 `model.read_checkpoint` can validate
+the original bytes/binding with stage B, endpoint final, original source and lineage,
+without constructing a model. Construct one original CADC RR Actor/Critic pair in
+an isolated Torch RNG context, strictly load both complete state dictionaries, make
+all original parameters trainable, and initialize a fresh optimizer. Actor/critic
+sizes are 171/451 with 39,942/74,497 parameters. Do **not** call B01 `build_b`: it
+accepts a C-final checkpoint and deliberately zeros structural columns. Do not use
+`build_adaptation`, which freezes the base and creates a different parameterization.
+P tensors, including variance and GRU, must equal U's initial tensors exactly; only
+optimizer state is reset. A new U checkpoint schema must bind the old B parent and
+new execution source explicitly. Frozen B01 metadata/allowed-stage validation stays
+unchanged rather than being weakened to accommodate U.
+
+The ordinary finite update is fully exposed by existing code, not specified merely
+as "PPO": `cadc_b01.learner.update` through B01 `update_parent`, using
+`uav_motion_prefix_b01.learner.optimizer_for`. It is joint Adam with lr .0003,
+betas (.9,.999), epsilon 1e-8, no weight decay/AMSGrad/foreach/fused; two complete
+episodes per rollout, four full-rollout epochs, recurrent chunks of 32 starting
+from detached recorded hidden states. Targets are undiscounted complete returns
+with no terminal bootstrap, advantages standardized across the two episodes,
+per-agent likelihood ratios clipped to [.8,1.2] and summed over agents before the
+team-time mean, squared critic loss with coefficient .5, and Gaussian entropy with
+coefficient .01. One global .5 gradient-norm clip covers actor **and** critic.
+The original log-standard-deviation clamp [−5,2] and tanh physical action range
+remain. "Full-policy" permits updating this existing function and variance; it adds
+neither actuator rights nor a new policy class with arbitrary actions.
+
+This exposes an important comparison limitation before implementation. K/D used
+separate actor/critic clips and Adam calls, and their frozen variance makes the
+reported Gaussian entropy constant. U's joint clipping couples actor steps to
+critic gradients, and its entropy term can change variance. Its broader trainable
+policy also differs from K's three parameters and D's 16,259 correction parameters.
+Those differences belong to the proposed complete program; a U win or loss would
+not identify freezing. Choosing separately clipped full-policy optimization instead
+would be a real comparator revision for the next scientific choice, not a silent
+engineering repair. No such revision has been selected here.
+
+The existing collector requires a bounded addition. B01 `collect_parent` trains the
+original 28-byte C/B interface; the retained B05/B06 **B40 collector explicitly
+rejects training**, and its residual storage lacks the `sends`/`eligible` fields
+required by the joint learner. A new direction-owned U collector can reuse
+`b05.channel.ForecastChannel`, `packet_for` with three zero tail values, the original
+171/451 input views, CADC `sample_actions`/`action_terms`, the B06 independent
+innovation witness and existing physical/reward primitives. It must store original
+joint-learner tensors including actual sends/eligibility while recording 40-byte
+transport. It needs no shared learner or simulator rewrite. U evaluation can use
+the existing B40 **evaluation** behavior under an explicit U program identity;
+its plain-policy mean must not be mislabeled as a bounded difference from P.
+The U reader should retain the exact-FP32 K/D residual checks, while checking U's
+own density, variance, transport, actual motion and return without imposing the
+residual bound on U−P. A new fixed-study reader accounts for only three new fits
+and the fresh 384 evaluations, not inherited K/D fitting a second time.
+
+The proposed common training addresses are the already bound K/D ones: masters
+29813/29823/29833, base = 100000 × master, scene base+1000..1511, channel
+base+6000..6511, continuous motion generator base+21. Match initial-scene and
+channel-sequence hashes, underlying innovation hashes and generator start/end
+states against all 512 saved K rows per lineage. Full-policy updates may change
+variance and trajectories while these exogenous innovations remain matched; source
+labels alone are insufficient. Constructor draws must not alter the motion stream.
+
+A proposed fresh evaluation address set is masters **29815/29825/29835**: scene
+base+2000..2031, channel base+7000..7031, and fresh-per-world motion
+base+3000..3031. These addresses are absent from this direction's current records
+and disjoint from all B01 training/evaluation ranges. Their final collision and
+identity checks belong in the selected protocol, if any. P/U/K/D share a tuple
+within a lineage and have independent panels across lineages; they keep their own
+executed observation/GRU history. No old world or I panel is silently added.
+
+At the proposed fixed exposure, new work is 768 rollouts / 3072 joint epochs and
+Adam calls, 7,864,320 actor replay rows, 1,572,864 critic replay rows and 2,457,600
+motion vectors, over the already stated 491,520 native steps. Expected constructor
+count is three training pairs plus twelve evaluation pairs, with no native
+initialization panel. Scientific stop is the declared three fits and complete
+fresh evaluation, or a recorded partial technical failure; no fit substitution,
+checkpoint selection or automatic retry. Any implementation would live in the
+owned next-study modules/tests with a prospective L0 and independent engineering
+review of lineage/source binding, initial-function preservation, 40-byte collection,
+RNG/own-history replay, joint optimization, numerical reading and failure counts.
+These are correctness checks, not a preliminary scientific pilot or a new model
+of why U must improve. Exact inputs must be published before any future admitted
+execution. The present preparation does not authorize that execution.
