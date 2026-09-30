@@ -1,0 +1,197 @@
+{
+  "direction": "uav_parent_adaptation",
+  "source_sha": "930a0789dad4adbba67592c5fff07802a3dd40c2",
+  "lineages": [
+    1,
+    2,
+    3
+  ],
+  "stages": [
+    "C",
+    "B",
+    "K",
+    "D"
+  ],
+  "programs": [
+    "I",
+    "P",
+    "K",
+    "D"
+  ],
+  "horizon": 256,
+  "train": 512,
+  "evaluation": 32,
+  "rng": {
+    "1": {
+      "C": {
+        "master": 29811,
+        "construction": 2981100011,
+        "scene_start": 2981101000,
+        "scene_end": 2981101511,
+        "channel_start": 2981106000,
+        "channel_end": 2981106511,
+        "motion": 2981100021,
+        "motion_mode": "continuous_across_training_episodes"
+      },
+      "B": {
+        "master": 29812,
+        "construction": 2981200011,
+        "scene_start": 2981201000,
+        "scene_end": 2981201511,
+        "channel_start": 2981206000,
+        "channel_end": 2981206511,
+        "motion": 2981200021,
+        "motion_mode": "continuous_across_training_episodes"
+      },
+      "K": {
+        "master": 29813,
+        "construction": 2981300011,
+        "scene_start": 2981301000,
+        "scene_end": 2981301511,
+        "channel_start": 2981306000,
+        "channel_end": 2981306511,
+        "motion": 2981300021,
+        "motion_mode": "continuous_across_training_episodes"
+      },
+      "D": {
+        "master": 29813,
+        "construction": 2981300011,
+        "scene_start": 2981301000,
+        "scene_end": 2981301511,
+        "channel_start": 2981306000,
+        "channel_end": 2981306511,
+        "motion": 2981300021,
+        "motion_mode": "continuous_across_training_episodes"
+      },
+      "evaluation": {
+        "master": 29814,
+        "scene_start": 2981402000,
+        "scene_end": 2981402031,
+        "channel_start": 2981407000,
+        "channel_end": 2981407031,
+        "motion_start": 2981403000,
+        "motion_end": 2981403031,
+        "motion_mode": "fresh_per_episode"
+      }
+    },
+    "2": {
+      "C": {
+        "master": 29821,
+        "construction": 2982100011,
+        "scene_start": 2982101000,
+        "scene_end": 2982101511,
+        "channel_start": 2982106000,
+        "channel_end": 2982106511,
+        "motion": 2982100021,
+        "motion_mode": "continuous_across_training_episodes"
+      },
+      "B": {
+        "master": 29822,
+        "construction": 2982200011,
+        "scene_start": 2982201000,
+        "scene_end": 2982201511,
+        "channel_start": 2982206000,
+        "channel_end": 2982206511,
+        "motion": 2982200021,
+        "motion_mode": "continuous_across_training_episodes"
+      },
+      "K": {
+        "master": 29823,
+        "construction": 2982300011,
+        "scene_start": 2982301000,
+        "scene_end": 2982301511,
+        "channel_start": 2982306000,
+        "channel_end": 2982306511,
+        "motion": 2982300021,
+        "motion_mode": "continuous_across_training_episodes"
+      },
+      "D": {
+        "master": 29823,
+        "construction": 2982300011,
+        "scene_start": 2982301000,
+        "scene_end": 2982301511,
+        "channel_start": 2982306000,
+        "channel_end": 2982306511,
+        "motion": 2982300021,
+        "motion_mode": "continuous_across_training_episodes"
+      },
+      "evaluation": {
+        "master": 29824,
+        "scene_start": 2982402000,
+        "scene_end": 2982402031,
+        "channel_start": 2982407000,
+        "channel_end": 2982407031,
+        "motion_start": 2982403000,
+        "motion_end": 2982403031,
+        "motion_mode": "fresh_per_episode"
+      }
+    },
+    "3": {
+      "C": {
+        "master": 29831,
+        "construction": 2983100011,
+        "scene_start": 2983101000,
+        "scene_end": 2983101511,
+        "channel_start": 2983106000,
+        "channel_end": 2983106511,
+        "motion": 2983100021,
+        "motion_mode": "continuous_across_training_episodes"
+      },
+      "B": {
+        "master": 29832,
+        "construction": 2983200011,
+        "scene_start": 2983201000,
+        "scene_end": 2983201511,
+        "channel_start": 2983206000,
+        "channel_end": 2983206511,
+        "motion": 2983200021,
+        "motion_mode": "continuous_across_training_episodes"
+      },
+      "K": {
+        "master": 29833,
+        "construction": 2983300011,
+        "scene_start": 2983301000,
+        "scene_end": 2983301511,
+        "channel_start": 2983306000,
+        "channel_end": 2983306511,
+        "motion": 2983300021,
+        "motion_mode": "continuous_across_training_episodes"
+      },
+      "D": {
+        "master": 29833,
+        "construction": 2983300011,
+        "scene_start": 2983301000,
+        "scene_end": 2983301511,
+        "channel_start": 2983306000,
+        "channel_end": 2983306511,
+        "motion": 2983300021,
+        "motion_mode": "continuous_across_training_episodes"
+      },
+      "evaluation": {
+        "master": 29834,
+        "scene_start": 2983402000,
+        "scene_end": 2983402031,
+        "channel_start": 2983407000,
+        "channel_end": 2983407031,
+        "motion_start": 2983403000,
+        "motion_end": 2983403031,
+        "motion_mode": "fresh_per_episode"
+      }
+    }
+  },
+  "device": "cpu",
+  "dtype": "float32",
+  "torch_threads": 1,
+  "parent_packet_bytes": 28,
+  "evaluation_and_adaptation_packet_bytes": 40,
+  "correction_bound": 0.1,
+  "episode_endpoint": "fixed_final",
+  "action_mode": "sampled",
+  "checkpoint_selection": false,
+  "parent_quality_selection": false,
+  "parent_generation_fits": 6,
+  "adaptation_fits": 6,
+  "expected_team_steps": 1671168,
+  "expected_adam_calls": 18432,
+  "expected_actor_replay_rows": 31457280
+}

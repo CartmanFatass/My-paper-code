@@ -1,0 +1,24 @@
+Command exited with non-zero status 1
+	Command being timed: "env PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 /home/wu/.venvs/hmasd-gcc-31021/bin/python experiments/candidates/uav_parent_adaptation/read_b01.py /home/wu/projects/HMASD/runs/uav_parent_adaptation/b01_unscreened_a01"
+	User time (seconds): 36.28
+	System time (seconds): 0.15
+	Percent of CPU this job got: 100%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:36.31
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 412632
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 14
+	Minor (reclaiming a frame) page faults: 58418
+	Voluntary context switches: 70
+	Involuntary context switches: 89
+	Swaps: 0
+	File system inputs: 1744
+	File system outputs: 8
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 1

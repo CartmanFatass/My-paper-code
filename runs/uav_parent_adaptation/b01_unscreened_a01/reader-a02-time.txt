@@ -1,0 +1,35 @@
+Command exited with non-zero status 1
+	Command being timed: "env PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 /home/wu/.venvs/hmasd-gcc-31021/bin/python -c import hashlib,json,sys
+from pathlib import Path
+source=Path('/home/wu/projects/HMASD/temp/directions/uav_parent_adaptation/reader-d97c3f9dc.py').read_bytes()
+assert hashlib.sha256(source).hexdigest() == "2ab5e11be5debe403a759f9874cd52f7950841d61baa6dd7769bf417e6c78543"
+sys.path.insert(0,'/home/wu/projects/HMASD/.git/hmasd-launch-sources/022c25b3220a42bb81ad93beb7ada464')
+sys.argv=['/home/wu/projects/HMASD/temp/directions/uav_parent_adaptation/reader-d97c3f9dc.py','/home/wu/projects/HMASD/runs/uav_parent_adaptation/b01_unscreened_a01']
+exec(compile(source,'/home/wu/projects/HMASD/temp/directions/uav_parent_adaptation/reader-d97c3f9dc.py',"exec"),{"__name__":"__main__","__file__":'/home/wu/projects/HMASD/.git/hmasd-launch-sources/022c25b3220a42bb81ad93beb7ada464/experiments/candidates/uav_parent_adaptation/read_b01.py'})
+p=Path('/home/wu/projects/HMASD/runs/uav_parent_adaptation/b01_unscreened_a01')/"reading.json"
+reading=json.loads(p.read_text())
+reading["reader_code"]={"published_sha":"d97c3f9dc4002b49648e3d7f2560b79221638d9a","path":"experiments/candidates/uav_parent_adaptation/read_b01.py","sha256":hashlib.sha256(source).hexdigest(),"source_context":'/home/wu/projects/HMASD/.git/hmasd-launch-sources/022c25b3220a42bb81ad93beb7ada464',"native_source_unchanged":True}
+p.write_text(json.dumps(reading,indent=2,allow_nan=False)+"\n")
+print(json.dumps(reading["reader_code"]))"
+	User time (seconds): 73.21
+	System time (seconds): 0.17
+	Percent of CPU this job got: 100%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:13.14
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 409664
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 58325
+	Voluntary context switches: 50
+	Involuntary context switches: 151
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 8
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 1

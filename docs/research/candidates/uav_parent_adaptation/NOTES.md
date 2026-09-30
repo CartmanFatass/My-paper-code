@@ -353,3 +353,251 @@ verified published bytes with the original frozen source-root/import context; it
 result records the actual compiled reader SHA/digest separately from native source
 930a0789d. The accepted snapshot remains unmodified and no model/simulator is invoked
 by the reader. Scientific reading is still pending, rather than a failure outcome.
+
+<a id="b01-complete-reading"></a>
+
+## 2026-09-30 — B01 complete reading: bounded development outside B19451, uncertain D−K
+
+The complete pure reader passed all **384 trajectories** at 10:36:55 UTC. Native
+source remains `930a0789dad4adbba67592c5fff07802a3dd40c2`; reader source is
+`f55937874a42c99703de0da9deb99901d9ee3dca`, with the exact reader digest recorded in
+the [compact complete result](../../../../runs/uav_parent_adaptation/b01_unscreened_a01/result.json).
+The final read added zero models, policy calls, optimizer calls or native steps.
+The two preceding numerical reader failures and their costs above remain part of
+the record. All source/lineage/checkpoint bindings, frozen bases, evaluation identity,
+optimizer laws, actual counts, geometry/transport, density, physical motion, own-history
+and shared-innovation checks passed; all composed means match exact FP32 addition.
+The independent engineering Reviewer accepted both reader repairs before this read.
+
+All three roots and every endpoint are retained. Mean final outcomes are:
+
+| Independent lineage | I J / users per tick | P J / users per tick | K J / users per tick | D J / users per tick |
+| --- | --- | --- | --- | --- |
+| 1 | .156637 / 9.334961 | .179053 / 8.909790 | .181215 / 9.052490 | .180252 / 8.971680 |
+| 2 | .095505 / 5.449951 | .205285 / 12.029297 | .206609 / 12.117065 | .208535 / 12.236328 |
+| 3 | .141326 / 8.528198 | .133709 / 7.250000 | .142408 / 7.735840 | .145800 / 7.875610 |
+
+The primary D−K net-J contrasts are **−.000963274, +.001926071, +.003392202**;
+the equal-weight mean is **+.001451666**, descriptive outer df2 t95
+**[−.004053565, +.006956898]**. Corresponding service contrasts are
+−.080811, +.119263, +.139771 users/tick; mean **+.059408**
+[−.243321, +.362136]. These are three complete-program units, including independent
+parent generation, adaptation and deployment sampling. They are neither an isolated
+parent-variance estimate nor 96 independent training replicates. The result does not
+establish D superiority, equivalence, a deployment default or state-dependence causality.
+
+| Companion contrast | Three lineage mean J contrasts | Mean J, outer descriptive t95 | Mean users/tick, outer descriptive t95 |
+| --- | --- | --- | --- |
+| D−P | +.001199 / +.003250 / +.012091 | +.005513 [−.008866, +.019892] | +.298177 [−.428941, +1.025295] |
+| K−P | +.002162 / +.001324 / +.008699 | +.004061 [−.005969, +.014092] | +.238770 [−.297121, +.774660] |
+| P−I | +.022416 / +.109780 / −.007617 | +.041527 [−.109973, +.193027] | +1.625326 [−9.084924, +12.335575] |
+
+Both K and D improve their own parent's observed mean J **and service in all three
+unscreened lineages**. This extends the useful bounded-development signal beyond
+selected B19451 and preserves ordinary learned calibration as a real capability.
+Outer uncertainty remains substantial. Parent construction itself is mixed: lineage 1
+gains J while losing .425171 users/tick; lineage 3 loses both J and 1.278198 users/tick
+relative to its actual initialization. All three parents improve quality Q and reduce
+path length, so J, service and motion cannot be collapsed into a single learning-success
+label. There is no evaluation of the intermediate C endpoint and no attribution of
+these parent differences to C training versus B continuation.
+
+### Adverse worlds, tails and physical scope
+
+D−K loses J in 14/14/9 worlds and jointly loses J/service in 6/13/9 worlds. D−P
+jointly loses in 9/9/10 worlds; K−P jointly loses in 10/16/11. These coexist with the
+positive own-parent means. In **lineage 1/world 1**, P/K/D serve
+8.789063/8.019531/2.019531 users/tick with J .186132/.169908/.048360.
+D−P is **−.137772 J / −6.769531 users/tick** and D−K is −.121547/−6.000000.
+Zero-service steps rise from P's 5 and K's 7 to D's **83**, with longest gap 38
+versus 3 for either control. A .10 same-history action bound is not a bound on
+closed-loop service damage. In **lineage 1/world 11**, the opposite useful case is
+retained: D−K is +.059347 J / +3.136719 users/tick and D eliminates P's 51 and K's
+45 zero-service steps. In **lineage 3/world 30**, D improves P by .069699 J and
+4.894531 users/tick, but still trails I by .062650 J and 4.468750 users/tick.
+
+D's total zero-step contrast versus P is +.09375/−.21875/−3.0625 per episode across
+the three lineages; its average longest-gap contrast is negative in every lineage.
+D−K's mean longest-gap contrast is −.21875, with a narrow descriptive outer interval,
+but this secondary result does not replace the primary question or erase the severe
+world-1 loss. D newly creates zero service versus P in lineage 2/world 14; versus K
+it also does so in lineage 3/world 15. K creates new zero-service worlds versus P in
+1/5, 2/22 and 3/8,16. Complete world indices and lower-tail outcomes remain in the
+result, including within-trajectory service p05 and worst tick; these are not user
+age or long-mission guarantees.
+
+Relative to I, P's path reductions are 4458.21/1275.50/1602.33 m/UAV, while boundary
+occupancy rises to .7450/.5667/.7118. P's mean heights are 131.54/91.24/74.60 m;
+lineage 1 spends .7398 of member-ticks at the height ceiling and lineage 3 spends
+.5010 at the floor. D/K alter these patterns only modestly on average, with differing
+path signs across roots. These measured geometry changes neither identify the cause
+of return differences nor establish energy or flight safety in this S1 host.
+
+### Actual learning and the explanation update
+
+Each C/B fit executed 1024 joint Adam calls; each K/D fit executed 1024 actor and
+1024 critic calls with the declared separate clips and learning rates. All six base
+actors have exactly zero displacement during adaptation, and zero-tail critic columns
+stay exactly zero. K's three parameters move by norms .472222/.369702/.554207;
+D's hidden/output norms also change materially. K is not an inactive or untrained
+control. Parent training curves are nonmonotone; adaptation returns mostly track
+their own parent level while correction RMS grows. These endpoints are the fixed
+512-episode endpoints, never selected best checkpoints.
+
+D correction RMS is .078980/.050453/.064828 versus K's .026403/.020761/.029576.
+D's mean-component shares of correction second moment are **98.23%/95.03%/98.37%**;
+these are not shares of reward explained. D's ideal common-history Gaussian KL is
+.007025/.003170/.004879 versus K's .000805/.000546/.001004. Same-noise action-change
+RMS is .028593/.028188/.036276 for D and .010119/.011867/.018342 for K. D1 spends
+14.34% of correction coordinates at or beyond the .095 diagnostic cutoff, below the
+.10 hard bound; D2/D3 and all K have zero such coordinates. The original FP32 and
+FP64 cutoff fractions differ in precisely one coordinate and both are retained.
+
+The leading simple explanation remains useful directional calibration with differing
+finite optimization. The old mean-substitution failure still prevents equating
+near-constant magnitude with dispensable variation. Here no matched fixed-mean,
+native-optimal constant, unbounded continuation, message intervention or freezing
+control was run. Representation is exercised, complete finite learning sometimes
+develops a parent, and D's added complete-program value over K remains unresolved;
+none of those observations alone isolates the intervention's causal mechanism.
+
+### Paid cost and necessary evidence
+
+The fixed batch completed exactly **12 fits, 6144 training episodes, 384 evaluations,
+1,671,168 native team steps, 18,432 actual Adam calls and 31,457,280 actor replay rows**.
+Worker CPU was **2086.356845 s** (2081.529335 user + 4.827510 system), with peak RSS
+531,864 KiB. Recorded monotonic batch duration is 2003.590777 s, while start/end epoch
+timestamps span 2086.022848 s; these clocks disagree, so neither is silently substituted
+for the other or used as a performance comparison. The three full reader attempts cost
+36.43 + 73.38 + 84.01 CPU-s externally, making **2280.176845 measured worker-plus-reader
+CPU-s**. The final reader's own 83.729852 CPU-s excludes imports and is nested, not
+additional. Diagnosis, tests, review and other support work are not completely metered.
+One C/B fit cost about 146–153 CPU-s, K/D about 170–182 CPU-s, and 32 final worlds
+about 9.6–10.6 CPU-s per endpoint on this run. These are future scale anchors, not bounds.
+
+These costs add to the inherited message-content record of 33 policy fits plus
+3 predictors and 4,751,360 persisted steps (plus 0..256 interrupted steps), and the
+57,344-step zero-fit correction-compression comparison. No historical asset is counted
+as a fourth new root, and no inherited acquisition cost is described as free.
+
+The single canonical bulk location is
+`wsl_4070:/home/wu/projects/HMASD/runs/uav_parent_adaptation/b01_unscreened_a01/`.
+At collection it contains 480 files / 125,576,567 logical bytes, including 384 raw
+NPZ trajectories / 95,918,982 bytes and 24 bound checkpoints / 12,068,538 bytes.
+The full immutable `summary.json` is 1,571,422 bytes, SHA256
+`02ad55031ca64e58ea03582ba7bcb18825f01568dc8f1cb8613ede793240948b`;
+`reading.json` is 2,635,773 bytes, SHA256
+`a0d942d7bc7a0bee04c9f0d14c668e8f8b18e452beebd059183f31e3cf084ade`.
+The sorted `(relative path, bytes, sha256)` inventory, compact JSON with ASCII strings
+and separators `(',', ':')`, hashes to
+`61787e44091e699c809bb1e2eb011c0d46e231f95621fc6fb3f894cc87b3805f`.
+Per-file source/trajectory/checkpoint/stream bindings are in those original outputs;
+no new retention store or duplicate raw tree is created. The published compact result
+preserves all native world outcomes, contrasts, source/checkpoint identities, exposures
+and costs; only per-episode curves and per-trajectory validation detail remain solely
+in the bound full reading, with 64-episode curve means in the compact result.
+
+Independent scientific diagnosis, continuation choice and cleanup are recorded below.
+
+<a id="b01-independent-review-and-next-investment"></a>
+
+### Independent scientific review and DM disposition
+
+Registered ResearchCritic `/root/dm_parent_adaptation/critic_b01_result` reviewed the
+actual question in a separate context with no inherited DM/Root conversation. It
+received the original selection/advice and supporting/adverse source records, not
+only a preferred explanation. The review was not outcome-blinded: completion facts
+were supplied. Its provisional numerical reconstruction preceded its reading of the
+adviser explanation and this appended interpretation. It reports **no material dissent**.
+
+The critic independently checked source/config/summary/reader identities, all 384
+native endpoint rows and consequential contrasts, evaluation pairing and unchanged
+tensor identities, all 24 checkpoint digests/frozen bases, all 12 episode/update stream
+hashes and 1,536 matched K/D training-episode pairs, plus 24 consequential raw
+trajectories and the separate saturation case. It reused the full pure reader for
+exhaustive radio/channel/density reconstruction rather than rerunning policies,
+physics or historical raw archives. Its evidence consumers have finished.
+
+Its consequential recommendation is to **retain both K and D as conditional
+capabilities and next compare ordinary full-policy continuation on all three retained
+parents**. It agrees that the useful own-parent means extend beyond B19451, that
+lineage 3 has particularly clear conditional own-parent evidence, and that D−K remains
+unresolved. Parent production's service losses and D's severe world-1 damage prevent
+an improvement guarantee or new default. K is active; larger directional corrections
+and differing finite optimization remain simpler accounts of D's increment. Critic
+quality, recurrent feedback and threshold-sensitive geometry remain possible
+contributors, without selecting an identified repair target. The old compression
+loss rules out treating the mean-component share as proof that variation is useless.
+It recommends neither confirmation nor closure of the broader adaptation question.
+
+I accept that interpretation and recommendation. The changed judgment is that
+restricted development has useful instances on fresh unscreened parents, while the
+choice among ordinary and richer adaptation programs remains open. I do not convert
+three positive own-parent means into reliable population benefit or count adviser
+agreement as new empirical evidence. No new Pro round is selected: this separate
+scientific review covers the present interpretation/investment comparison, with the
+earlier primary-source bridge and full selection advice still applicable.
+
+Before this material continuation choice I read current published background
+topics 4 and 5, and the applicable uncertainty/comparator discussion in topics 6/7
+at `b45d15745`. Their concrete effect is to retain an ordinary complete learning
+program, preserve all three parents and adverse worlds, separate conditional asset
+reuse from fresh program replication, and read full J/service/tails rather than
+correction size. B02 B19452's damaging plain continuation and B04's three adverse
+geometry-only G continuations remain strong contrary evidence. In particular,
+G19501−B0 was −.073191 J / −4.996216 users/tick. They lower expectations for further
+unrestricted learning; selected B19451 and those contracts do not settle its value
+on these new parents. This is a new comparator purchase, not a renamed repair of
+the completed B04 batch.
+
+The proposed next comparison is **U**, ordinary unrestricted continuation (the name
+avoids confusion with the historical forecast F arm):
+
+- Keep every existing P, K and D, without parent or checkpoint selection. Train U
+  once from each P for 512 H256 episodes using the original B-style full actor/critic
+  PPO program: fresh joint Adam at .0003, trainable variance, the same sampled
+  execution, objective, legal geometry and common communication contract. Preserve
+  P's entire initial function, including GRU/variance; the eventual loader must not
+  silently change P while resetting optimizer state. Match the recorded K/D training
+  exogenous streams and verify the available witnesses on each arm's own history.
+- Evaluate P/U/K/D on 32 new matched worlds per lineage, independent across lineages.
+  Primary U−D net J; accompany it with U−P/U−K, service and quality, complete adverse
+  tails, movement and cost. There is no claim that the different parameterizations,
+  capacity and optimizer laws isolate freezing. The old K/D endpoints make this
+  conditional asset reuse, not three new parent-generation replications.
+- New cost would be **3 fits, 1536 training episodes and 384 evaluation episodes:
+  393,216 + 98,304 = 491,520 native steps**, with 3,072 new joint Adam calls. Current
+  measurements suggest about **553–586 worker CPU-s**, plus reader, implementation
+  and review. No new parent acquisition is needed; its already paid cost stays in
+  the cumulative record. Exact U loading/collection/reading, RNG addresses and the
+  stopping contract remain prospective implementation work if this proposal is selected.
+
+The substantive question is whether ordinary further learning develops these
+heterogeneous parents more effectively than the retained restricted programs. The
+constructive prediction is that extra policy freedom can realize useful changes
+beyond a small mean correction; the adverse prediction is larger harmful drift,
+as seen in B02/B04. U improving P and exceeding D/K in complete J/service would add
+a useful ordinary learning capability and change which program deserves development.
+U damaging P while K/D retain gains would strengthen their practical finite-program
+case, without proving freezing is the cause. Mixed outcomes, quality/service trades
+or failure of old gains to transfer would limit further investment. None of these
+branches automatically authorizes longer training, radius/noise changes or a search.
+
+I rank this direct conditional comparison above an unchanged three-root replication
+(another 12 fits / 1,671,168 steps, about 2086 worker CPU-s) because it can change the
+choice of learning program rather than mainly refine the small, uncertain D−K
+increment. A fresh fixed-policy panel alone does not add training replication.
+Repeated mean compression has weak marginal value after its direct adverse test;
+radius/noise changes lack an identified bottleneck. A paired fresh U/K/D campaign
+would buy additional adaptation sampling at substantially greater cost; it is not
+needed to state the narrower conditional question. Idle is a legitimate allocation
+alternative, not an empirical rejection of this family.
+
+Root's latest allocation preserves this question as **owned/active** while two
+independent questions proceed in parallel. B01 itself is fully read and cannot be
+extended. I return the costed U recommendation at the assigned substantive boundary;
+it is not a new accepted operation or an automatic reserve/closure. No scientific
+worker, observer, unread Pro answer or result collection remains. Cross-question
+allocation belongs to Root; this DM retains the broader adaptation question and
+its evidence. The three complete unscreened parent/adapter lineages are reusable
+assets for an explicitly selected comparison, not a free quality-screened library.
