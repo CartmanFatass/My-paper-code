@@ -1697,6 +1697,8 @@ FSD/PPC暂停、G33冻结、Milan数据依赖及不复用完整收尾旧DM均保
 
 <a id="portfolio-review-2026-09-30-next-native-service-question"></a>
 [Completed next-question review: original objections, full Pro answer, independent follow-up and Root decision](archive/2026-09-30/RESEARCH-cumulative-service-age-selection.md#decision).
+该次Pro观察及浏览器操作已闭合；完整问答已保全后删除11份指定传输／撰写／论文临时文件，
+净释放1,138,688 allocated bytes，目标均已消失。仅保留归档中的完整证据及本地终态操作／观察元数据。
 
 ## Prior reviews and runtime context
 
@@ -1791,6 +1793,7 @@ Root 已向三个原会话各投递一次明确携带 `model="gpt-6-astra"`、`t
 
 | 责任 / 原生任务标题 | Task / host | Authoring checkout / branch | 恢复入口 |
 | --- | --- | --- | --- |
+| DM: cumulative native service age | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_service_age` | `/home/fires/hmasd-wsl` / `main` | New registered `hmasd-direction-manager`; actual first turn verified gpt-6-astra/max, native UUID01a0f0a3-e515-7701-b805-6565d0cc4c07. Owns `uav_service_age` and matching direction paths. Selected one-fit cumulative-age comparison at feacab30d; preparing exact inputs, no accepted operation at assignment. DM owns execution, full reading and publication; material cross-question changes return to Root. [Decision](archive/2026-09-30/RESEARCH-cumulative-service-age-selection.md#decision). |
 | DM: fixed correction deployment | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_correction_compression` | `/home/fires/hmasd-wsl` / `main` | Actual first turn verified gpt-6-astra/max; native UUID01a0ef78-6628-7593-b359-b608f0c80190. B01 fully read/independently diagnosed, reserve; scientific result e17f4fdf9. Cleanup complete: terminal source snapshot/registration, redundant staging, local bulk replicas/scratch/caches removed;874639360allocated bytes reclaimed. Required evidence/assets intact; no live operation, unread review or remaining cleanup dependency. [Result](candidates/uav_correction_compression/NOTES.md#b01-complete-reading), [final cleanup](candidates/uav_correction_compression/NOTES.md#b01-final-cleanup). |
 | Completed DM: registered-user B01 | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_registered_service` | `/home/fires/hmasd-wsl` / `main` | Completed B01 and full cleanup, result01e1b6e85/closureb7216efb9; no live worker, unread result or cleanup blocker. Sole direction ownership now passes to the new periodic-efficiency DM below; this old session is not restored. [Complete inheritance](candidates/uav_registered_service/NOTES.md#b01-investment-decision). |
 | DM: periodic-service efficiency | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_periodic_efficiency` | `/home/fires/hmasd-wsl` / `main` | Sole current owner of `uav_registered_service`, B02 G/O/S2; actual first turn verified gpt-6-astra/max, native UUID01a0f028-0d02-7093-9e46-fef762b6d749. Complete a02 primary panel, full reading and independent diagnosis; reserve, no live result producer, unread result, pending advice or selected successor. Original failure and both attempts' required raw evidence retained. Result8e87c58de; exact terminal snapshots/registrations, unused scratch and B02 caches removed,1,619,988,480 allocated bytes reclaimed. No cleanup blocker. [Read result and disposition](candidates/uav_registered_service/NOTES.md#b02-complete-reading), [measured closure](candidates/uav_registered_service/NOTES.md#b02-final-cleanup). |
