@@ -2266,3 +2266,69 @@ scope and receive relevant checks/review; no extra result exposure follows autom
 Commit/publish exact inputs before fresh-node admission. After one accepted worker/reader
 operation, arm deterministic same-handle observation and keep this native DM active through
 collection, complete reading, independent result criticism, publication and measured cleanup.
+
+
+<a id="b04-engineering-acceptance"></a>
+### B04 implementation accepted; prelaunch checks — 2026-09-30 20:40 UTC
+
+The bounded Implementer returned the four assigned files without scope deviation or Git
+mutation. I read the complete controller/model changes and accept them with the new fixed
+host, streamed evidence collector, admission entry and complete reader. T and the first
+G2 choice delegate to the unchanged B03 implementation; all frozen B02/B03 dependencies
+remain byte-identical to their accepted source. The new executor only parameterizes the
+scheduled commitment clock. A2 stores every inner branch and the complete outer trajectory
+once, retaining the physical/report separation and sequential tick reductions. The actual
+second selection replaces the expired first plan even on decline. The single worker calls
+its full reader after all48native episodes; failures preserve completed cells and live-cell
+native prefixes/model artifacts, with no implicit resume or repeat.
+
+Focused checks completed with the configured local scientific interpreter:
+
+- Final temporal semantics:10passed in0.46s; final concatenation-copy refinement:1targeted
+  pass in0.15s. The independent engineering reviewer also ran the final10checks. These
+  include original T/G2 prefix delegation, t120pricing/nonpositive champions, strict J ties,
+  empty eligible sets, physical aliases, nested stay-first reversal, fresh actual replanning,
+  expired/malformed-plan refusal, hostile sink mutations and nonassociative scalar sums.
+- Collector/reader/admission tests:7passed in2.28s. After expanding corruption coverage,
+  the two integration checks passed in2.78s. The scripted formula-only fixture exercises
+  actual collection/serialization and full episode reconstruction; missing/reordered branches
+  and banks, rehashed branch/candidate/native corruption and partial-cell loss are rejected.
+  It does not instantiate or transition a native environment or call the result planner.
+- Constructed native t120correspondence:2passed in1.98s, exactly**26native transitions**
+  total. Decline and a10tick commitment both match commands, masks, physical coordinates,
+  all native reward components and H500-encoded reports through t132, including arrival and
+  ordinary resumption. The remaining230transitions of the correctness cap are unused.
+- CLI help and owned-file whitespace checks passed. No fit, optimizer update, scientific
+  result world or full real policy episode was used for prelaunch checking. The pure
+  temporal suite contains a three-tick constructed real model segment and three direct score
+  checks per invocation; its1000candidate transit propagations use mocked radio. Repeated
+  unit/review/import/support CPU is incurred but not formally metered.
+
+Original engineering-review conclusion (`/root/dm_fleet_transmission/engineering_review`):
+
+> No material finding remains in the stable B04 implementation; no repairs requested.
+>
+> Reviewed the full controller→model→collector→reader path. It preserves frozen T/G2 behavior through t119, prices the second menu over 380 ticks, separates decoded inner reports from outer physical state, replans at actual t120, declines equal-J choices, and counts each candidate bank once. Final plan validation and copying changes preserve those semantics.
+>
+> Checks:
+>
+> - Independently ran final temporal tests: **10 passed**.
+> - Reviewed and reused DM evidence for **7 collector/reader checks**, including tampering and partial-failure preservation.
+> - Reviewed the native correspondence tests and DM’s **2 passes / 26 constructed native transitions**; I performed no native transitions.
+>
+> Residual limit: no complete real T/G2/A2 H500 worker-reader panel was executed during review. Synthetic integration covers storage/reconstruction; bounded native checks cover t120 commitment, arrival, and resumption.
+>
+> No edits, Git mutations, launches, or additional result queries performed.
+
+I accept that scoped engineering conclusion. The first complete scientific panel remains
+this one selected result operation, with unchanged48H500/0fit exposure and all prospective
+ceilings. No implementation check is counted as evidence for useful anticipation.
+
+At20:40:21UTC the actual configured remote node still has the accepted user-waiting full
+reader running; it retains its deadline window. Local_linux has the accepted untimed,
+single-thread fleet CAL/CONT worker plus its observer. Root explicitly permits sharing that
+released local window when fresh resources allow. Select local_linux for B04, with one CPU
+thread and a separate admitted snapshot, subject to the launcher's fresh actual memory and
+published pause/lead checks. Do not disturb, migrate or duplicate either accepted process.
+The standing/routing rows are updated to this already-selected B04 contract; source publication
+and successful admission, not this prospective note, establish the actual operation handle.
