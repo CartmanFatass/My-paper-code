@@ -1398,3 +1398,150 @@ reader. No unused extra entrypoint was found; the sole disposable local scratch
 and all B02 bytecode caches were removed. The separate preexisting remote Git
 historical-tree GC warning was not repaired or misreported as a cleanup blocker.
 Other directions, shared controls and accepted peer operations were preserved.
+
+
+<a id="b03-recurrence-prospective"></a>
+## 2026-09-30 — B03 selected: one independent inheritance lineage
+
+Root read the complete B02 review and selected exactly the Reviewer's proposed
+in-scope recurrence comparison. B02 remains closed at `e6b1a3243` (complete
+evidence `269d5d03f`), with its cleanup and conditional asset unchanged. B03
+asks whether the same finite construction recurs under fresh training worlds,
+initialization and minibatch shuffles on the existing **development** panel.
+This is one new exploratory lineage, not confirmation, a requirement for using
+today's asset, a test of learned stochastic superiority over randomized C, or
+permission for further automatic repeats.
+
+The relevant current published background is `e6b1a3243`, RESEARCH topic4 and
+its linked B02 complete/independent reading. It changes the prediction from
+whether a competent asset can be constructed at all to whether the fixed
+construction recurs. Topic2/3/8 reading used for B02 is unchanged and reused:
+local information, native decision consequences and ordinary physical structure
+still constrain the comparison. C's ordinary capability, the lack of a measured
+speed gain, B02's minimum-service/world losses and the earlier imitation and
+B01 warm-start adverses all survive. Ordinary randomization remains a serious
+alternative for the sampled surplus; the separate C-prior study/Root's further
+cross-question diagnosis does not change this recurrence contract or add an arm.
+The completed fresh-context `b02_result_review` explicitly reviewed this one-fit
+choice, fixed outcome branches and cost. Its advice remains applicable; no new
+selection reviewer or Pro round is needed for the unchanged question.
+
+**Exact new identities and fixed recipe.** Expert worlds29343000–29343127,
+aggregation1 worlds29343128–29343191, aggregation2 worlds29343192–29343255;
+initialization29344001, shuffle root29344002. Existing evaluation worlds
+29341000–29341031 and sampling root29342003 are deliberately reused. Their
+sampling address remains(root,world,decision_tick,agent), and shuffles remain
+(root,phase,epoch). A current repository identity scan found no use of the new
+training/root integers before this entry. These are independent training inputs;
+the common evaluation panel/innovations are not new independent world evidence.
+
+Keep128 C roll-in episodes and two64 greedy-student aggregation blocks,
+30/20/20 epochs, one continuous Adam, identical114→128→128→27 actor, CE loss,
+learning rate3e-4, batch512 and gradient cap1. Keep four-tick holds, exact
+per-agent episode caches, lawful analytic navigation and fresh T=1 draws. New
+evaluation collects only S0, BC, final greedy and final sampled:128 episodes.
+There is no teacher query on neural evaluation, no new C/C7 world and no
+additional fit, epoch, temperature, endpoint selection or reward update.
+
+**Retained-control contract.** Reuse the original64 C_memo/C7_memo evaluation
+trajectories in canonical primary-node B02 output. Bind the original source
+`e945483b85c7f8ddfc315c57f36938d6c14201c7`, COMPLETE summary SHA256
+`2e9e5d83f6b7d1cdff0a947a361fe1e1493046cd7c8b25aee068ed9eb7fc6e8c`,
+VERIFIED reading SHA256
+`a3f76992ccb01aa90138eec2272dc2667b7283d32e86742e87bf77e43bd613e9`,
+config/manifest/exit identities and every retained raw hash. Compare every
+unchanged protocol field, all15 B02 source identities and runtime/host settings;
+new evaluation resets must match the retained world's actual initial-state
+identity. The current15 files match, and Git shows no change since e945 in the
+host environment tree, source teacher/factory or B02 implementation. Before
+new native work, a strict loader must establish the retained source/protocol/
+raw bindings. If reuse is impossible, return the material scope/cost change to
+Root before adding any ordinary-control evaluation. No copy of retained bulk
+or reconstruction of a replacement C/C7 result is authorized.
+
+**Exposure and cost.** New work is1fit,384 complete episodes and98,304 native
+steps (65,536 training plus32,768 evaluation),8,000 updates and4,096,000
+presentations. Labels/datasets stay40,960+20,480+20,480 /40,960,61,440,81,920.
+Before cache hits the new full-C ceiling is81,920 rankings,2,211,840 candidate
+trajectories,8,847,360 modeled ticks,176,947,200 candidate power links plus
+8,192,000 setup links. New C7 rankings/model calls are zero. Helper requests
+are at most122,880, with17,203,200 setup/extreme power links at the declared
+20-user/four-peer bound. Neural collection/evaluation is at most81,920 row
+forwards outside optimization, including10,240 fixed sampled draws. All actual
+counters remain recorded, without crediting theoretical savings as timings.
+
+The64 retained controls represent16,384 already-paid native ticks; keep their
+original cost identities separate from new exposure. Their timings are historical
+instrumented package costs, not contemporaneous paired microbenchmarks. The
+saved-data reader will verify384 new files plus64 retained controls (98,304 new
+and16,384 retained recorded ticks), all new lineage assets, model/data/shuffle
+counts and complete mixed-provenance contrasts. It performs0new native steps,
+0expert/radio-model queries,0actor forwards and0optimizer calls. No additional
+source-policy or endpoint-agreement diagnostics are added. Worker1–3CPU minutes
+and reader5–15CPU seconds are planning estimates anchored to B02's101.990 and
+5.553 CPU seconds; engineering/review/support is estimated30–90elapsed minutes
+for planning, not formally metered labor or a deadline. Actual memory/resource
+admission remains required on the preferred primary node; reasoning/editing does
+not await a fresh resource probe.
+
+The same point screens and complete metrics remain operative. Both modes again
+competent would strengthen the case for a separately specified reward-continuation
+comparison; greedy-only competence would retain deterministic construction while
+weakening the sampled-start premise; failure would weaken recurrence while
+preserving the old asset, with no automatic repair. Loss of sampled surplus while
+near-C competence survives would narrow the surplus story without erasing
+inheritance. Read intervals, minimum service, all world/tail losses, quality,
+path and full cost even when the point rules pass. Two exploratory lineages on
+one development panel do not establish a population or training-seed guarantee.
+
+**L0.** Add a bounded B03 admitted wrapper, contract, retained-control loader and
+saved-data integration under the owned `b03/` implementation/test directories;
+future output is `runs/uav_fleet_adaptation/b03_inheritance_recurrence_a01/`.
+Keep all B02 source files byte-unchanged and reuse its collector, actor, optimizer,
+per-episode saved-data checker and metric reductions. The new orchestration
+must separate384 new rows/counters from64 retained rows, bind all six comparison
+arms honestly and preserve failed/partial new exposure. No monkeypatch of B02
+globals, output substitution, synthetic production summary or source worktree
+copy is permitted. The canonical old output remains read-only.
+
+A bounded Implementer may own only the strict retained-control loader and its
+new focused tests; DM owns contract, runner/reader integration, notebook and Git
+index. All edits stay on shared main with disjoint paths, no helper staging,
+launch, scientific choice or children. Appropriate prior numerical/collector/
+optimizer/RNG review is reused because the underlying bytes are unchanged; the
+independent engineering Reviewer checks new source/control binding, seed isolation,
+collection order, mixed-provenance accounting, failures and reader coverage.
+Synthetic complete-pipeline and corruption checks suffice for the changed layer;
+no new native pilot is required. Exact inputs are published before actual-node
+admission. Observe the accepted handle without a duplicate launch, then fully
+read, independently diagnose, publish and clean this single selected study.
+
+### B03 implementation and independent engineering acceptance
+
+The DM accepted the bounded Implementer's `retained.py` and focused tests, then
+integrated the admitted B03 wrapper and saved-data reader. All seven B03 modules
+reuse the byte-unchanged B02 numerical/collector/optimizer kernels. Retained
+metadata, all15 source identities, runtime/host/thread settings and all64 raw
+control hashes are checked before the new environment constructor. Four new arms
+have separate rows/costs; the source-bound historical control rows are read-only.
+Reset comparison preserves any already-completed new row before reporting a
+mismatch. Inflight failure accounting preserves the actually paid partial work.
+
+The DM's complete B03 test invocation passed **52 tests in4.55s**; the independent
+engineering Reviewer read all seven modules and both test files and independently
+passed the same52 tests in3.64s, with **no material finding or requested repair**.
+Coverage includes a complete old synthetic lineage/reader bound to a fresh
+synthetic lineage, all new/retained saved-file verification with scientific calls
+forbidden, unchanged source/protocol/runtime rejection, metadata/raw corruption,
+wrong sampling draw/endpoint, production admission, preconstructor rejection,
+completed reset-mismatch exposure and partial-episode failures. These are
+nonscientific fixtures; no new native episode or result fit has yet occurred.
+Original B02 byte identities and all five production metadata pins were checked.
+
+The residual local coverage limit is explicit: production64 raw trajectories and
+the original primary-node runtime are available only on that node. The accepted
+worker's retained-input guard will check both before any native construction;
+failure leaves zero native exposure and does not authorize added control episodes.
+No new native smoke/pilot, architecture change or repeat of unchanged B02 tests is
+needed for this outer-layer integration. The source is ready for exact publication
+and the already-selected one-fit actual-node admission.
