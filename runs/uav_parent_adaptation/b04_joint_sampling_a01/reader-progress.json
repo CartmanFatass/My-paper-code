@@ -1,0 +1,23 @@
+{
+  "object": "UAV-PARENT-JOINT-SAMPLING-B04",
+  "status": "VERIFIED",
+  "completed_rows": 416,
+  "current_row": {
+    "arm": "S_A",
+    "world": 29346031,
+    "tape": 0
+  },
+  "reader_calls": {
+    "environment_steps": 0,
+    "radio_calls": 0,
+    "teacher_queries": 0,
+    "optimizer_steps": 0,
+    "S_forward_rows": 61440,
+    "actual_motion_agent_ticks": 532480,
+    "modal_alias_motion_steps": 491520,
+    "C_fallback_candidate_motion_steps": 262980,
+    "regenerated_tape_integers": 45056
+  },
+  "reader_wall_seconds": 13.219216740923002,
+  "reader_cpu_seconds": 13.723424257999994
+}

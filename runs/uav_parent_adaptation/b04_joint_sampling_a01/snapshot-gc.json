@@ -1,0 +1,14 @@
+{
+  "target": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/18a7c9818ef3472189804ebe275ff08b",
+  "allocated_bytes_before": 810541056,
+  "collector_returncode": 0,
+  "collector_stdout": "{\n  \"mode\": \"apply\",\n  \"snapshots\": [\n    {\n      \"claim\": \"/home/wu/projects/HMASD/.git/hmasd-admission/c2c761fb82b3ff5af3046f87ebe18861cdfb6a0101e1df5f7d5cfc3ae4a1036e.json\",\n      \"durable_ref\": \"refs/remotes/origin/HEAD\",\n      \"eligible\": true,\n      \"output\": \"/home/wu/projects/HMASD/runs/uav_parent_adaptation/b04_joint_sampling_a01\",\n      \"path\": \"/home/wu/projects/HMASD/.git/hmasd-launch-sources/18a7c9818ef3472189804ebe275ff08b\",\n      \"removed\": true,\n      \"sha\": \"e7225b0c7c428472b7349b6cce1f64fd42b97049\",\n      \"snapshot\": \"18a7c9818ef3472189804ebe275ff08b\"\n    }\n  ]\n}\n",
+  "collector_stderr": "",
+  "absent_after": true,
+  "allocated_bytes_after": 0,
+  "net_reclaimed_bytes": 810541056,
+  "registered_after": false,
+  "canonical_raw_files_after": 416,
+  "canonical_raw_bytes_after": 179448786,
+  "joint_audit_exists_after": true
+}

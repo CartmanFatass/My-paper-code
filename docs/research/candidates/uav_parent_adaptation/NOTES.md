@@ -2905,3 +2905,290 @@ facts at17:32:28UTC show accepted/running native identities and consistent recor
 with0 observation errors. The native child remains active through terminal
 collection and reading; an App queue delivery is not assumed to wake an unloaded
 child. No checkpoint rearm will repeat the worker or paid reader.
+
+<a id="b04-complete-reading"></a>
+### B04 complete reading — coupling changed, primary prediction failed
+
+The sole admitted operation at source
+`e7225b0c7c428472b7349b6cce1f64fd42b97049` exited0 at
+2026-09-30 17:33:51.296666UTC. The
+[terminal status](../../../../runs/uav_parent_adaptation/b04_joint_sampling_a01/terminal-status.json)
+has consistent records, the original runner/supervisor absent and a valid native
+exit witness. The collector is COMPLETE and the independent saved-data reader
+VERIFIED all416 episodes/106496 native steps, exactly1 constructor reset and416
+explicit episode resets, with0fits/optimizer steps/teacher labels. No extra pilot,
+native retry or replacement asset was used. Full source-bound
+[summary](../../../../runs/uav_parent_adaptation/b04_joint_sampling_a01/summary.json),
+[config](../../../../runs/uav_parent_adaptation/b04_joint_sampling_a01/config.json),
+[reading](../../../../runs/uav_parent_adaptation/b04_joint_sampling_a01/reading.json)
+and [reader completion/cost](../../../../runs/uav_parent_adaptation/b04_joint_sampling_a01/reader-progress.json)
+retain every episode, all13 contrasts, all32 paired-world differences, counters
+and raw identities. Collected summary/config bytes match the reader's input hashes.
+
+The terminal observer event `8e8f61fa192222ee1ed5f38d` was observed at17:34:00UTC,
+drained and consumed on the same handle (generation11→12). Its App queue attempt
+returned the known `-32600` native-child restriction; this did not unload the
+active DM or lose collection. Observation was then stopped; the experiment was
+already terminal and was never relaunched.
+
+The comparison uses the predeclared within-world average of the two paired tapes,
+then equal weights for32 worlds. All intervals below are unadjusted descriptive
+paired t95 intervals. They are conditional on one previously fitted S, this host,
+the supplied common device and this panel; no training-population or noninferiority
+claim is made. S is the original B02 artifact, not the newer recurrence endpoint.
+
+| Arm | Mean J | Mean users/step | Mean within-episode service p10 | Mean episode minimum | Mean connected quality | Mean path m/UAV | Episode-J p10 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| C | .349364 | 20.948364 | 19.890625 | 11.250000 | .186957 | 2881.311 | .275937 |
+| Q_I | .367648 | 22.380859 | 17.968750 | 10.250000 | .181054 | 4040.714 | .317449 |
+| Q_A | .364841 | 22.133606 | 17.453125 | 10.421875 | .183236 | 4263.391 | .302284 |
+| Q_B | .359549 | 21.790894 | 17.007812 | 8.015625 | .181589 | 4282.151 | .292387 |
+| S_I | .391723 | 24.147888 | 21.515625 | 11.375000 | .178842 | 2808.472 | .323327 |
+| S_A | .388725 | 23.947998 | 20.906250 | 11.281250 | .178176 | 2820.824 | .321185 |
+| S_B | .393633 | 24.230103 | 21.187500 | 11.312500 | .181372 | 3003.613 | .325804 |
+
+No episode in any arm has a zero-service step or positive zero-service gap. The
+lowest service anywhere is1 for C and each Q,3 for S_I and2 for S_A/S_B. These
+finite observations do not establish safety. Across-episode J tails and within-
+episode service tails remain different outcomes.
+
+| Fixed contrast | ΔJ [t95] | Δservice-p10 [t95] | J worlds +/− | Mean Δpath m/UAV |
+|---|---|---|---:|---:|
+| **S_A−S_I primary** | **−.002998 [−.012536,+.006539]** | **−.609375 [−1.420082,+.201332]** | 13/19 | +12.352 |
+| S_B−S_I | +.001910 [−.005679,+.009499] | −.328125 [−.994593,+.338343] | 21/11 | +195.141 |
+| Q_A−Q_I | −.002807 [−.013827,+.008213] | −.515625 [−1.401408,+.370158] | 17/15 | +222.677 |
+| Q_B−Q_I | −.008099 [−.020625,+.004427] | −.960938 [−1.898234,−.023641] | 14/18 | +241.438 |
+| S_I−Q_I | +.024075 [+.008176,+.039974] | +3.546875 [+2.025238,+5.068512] | 27/5 | −1232.241 |
+| S_A−Q_A | +.023883 [+.005876,+.041891] | +3.453125 [+1.999489,+4.906761] | 24/8 | −1442.567 |
+| S_B−Q_B | +.034084 [+.019739,+.048429] | +4.179688 [+2.853752,+5.505623] | 28/4 | −1278.538 |
+| Q_I−C | +.018284 [+.003711,+.032856] | −1.921875 [−2.995083,−.848667] | 21/11 | +1159.403 |
+| Q_A−C | +.015477 [+.001528,+.029425] | −2.437500 [−3.630638,−1.244362] | 23/9 | +1382.080 |
+| Q_B−C | +.010185 [−.004017,+.024386] | −2.882812 [−4.077703,−1.687922] | 21/11 | +1400.840 |
+| S_I−C | +.042359 [+.022299,+.062418] | +1.625000 [−.187117,+3.437117] | 28/4 | −72.838 |
+| S_A−C | +.039360 [+.018004,+.060716] | +1.015625 [−.874214,+2.905464] | 27/5 | −60.487 |
+| S_B−C | +.044269 [+.024784,+.063754] | +1.296875 [−.482911,+3.076661] | 26/6 | +122.303 |
+
+Both primary point estimates are negative, so the predeclared constructive
+prediction fails. Mean service changes−.199890 [−.898139,+.498359], quality
+−.000666 [−.005043,+.003710]; all32 worlds remain in the reading. The wide interval
+does not establish harm, equality or impossibility. B's small positive J mean is
+an uncertain secondary with a negative continuity point estimate; choosing B as
+the winner would change the question after seeing the result. Q_B's worse service
+p10 and minima (Δminimum−2.234375 [−3.123407,−1.345343]) retain a substantive tail
+cost. Q_A has a positive path increment interval [+45.444,+399.911] despite no
+J/continuity advantage over Q_I.
+
+The distinct predeclared positive is the fixed learned distribution versus the
+ordinary randomized package. S_I−Q_I gains1.767029 users/step
+[+.648008,+2.886050]; its p10 improves in28 worlds and loses in4. Its path interval
+is[−1674.902,−789.581]m/UAV. The matched A/B comparisons have the same favorable
+mean J/service/p10/path pattern, but are correlated views of the same asset/panel,
+not three independent learning replications. The result now supports useful
+conditional S_I deployment beyond this explicit ordinary randomization reference.
+It does not isolate a learned-coordination mechanism, the causal contribution of
+aggregation, modal versus tail shape, or an advantage over every competent ordinary
+stochastic law. S_I−C's p10 interval still crosses harm, despite a positive point.
+S_A−Q_A's quality difference is−.005060 [−.009778,−.000342]; native J improves
+through the complete service/quality arithmetic, not every component.
+
+Adverse cases constrain this positive. On29346004, S_I−Q_I is−.100149J,
+−7.037109 service and−9.25 service-p10; S_I−C is−.095970J/−10.75p10.
+S_A−Q_A on that world is−.132656J/−9.318359 service/−8.5p10. On29346018,
+S_B−Q_B is−.075990J/−5.263672 service/−4.5p10. Conversely S_I−Q_I on29346016
+gains+.126770J/+8.396484 service/+12.5p10, with2039.335m less path. These gains
+do not erase the losses. For the primary,29346006 loses−.046420J/−3.070313
+service/−4p10 and adds1262.257m;29346005 loses6.25p10 even though mean service
+changes only−.070313. Positive29346017 gains+.061829J/+4.732422 service/+3p10
+and cuts3035.178m, yet lowers its episode minimum by2.5. Q_A−Q_I on29346007
+loses7p10, and Q_B−Q_I loses−.095828J/−8p10 there. All remaining individual
+worlds and tape outcomes are in the linked summary/reading, without quiet-world
+exclusion or endpoint selection.
+
+### The intervention was physical; pair suppression did not earn native value
+
+All stochastic arms have4096 joint decisions. The categorical/physical counts
+below use the promised audit: a departure is physically distinct if its four-tick
+own-coordinate path differs from the modal command after clipping. This evolves
+no other agents, calls no radio and assigns no counterfactual reward.
+
+| Arm | Categorical departures | Physical departures | Aliases | Observed departing pairs/joint row | Conditional expected pairs for its actual law |
+|---|---:|---:|---:|---:|---:|
+| Q_I | 2053 | 1950 | 103 | .102051 | .100000 |
+| Q_A | 2067 | 1969 | 98 | .000000 | .000000 |
+| Q_B | 2025 | 1941 | 84 | .988770 | 1.000000 |
+| S_I | 3165 | 3020 | 145 | .276367 | .261630 |
+| S_A | 3200 | 3051 | 149 | .205078 | .207883 |
+| S_B | 3328 | 3215 | 113 | .662109 | .688197 |
+
+Q_A has no multi-departure block; Q_I has323 and Q_B405, the last always five
+categorical departures. Thus the predicted Q overlap manipulation is real, not a
+failed sampler or wholly clipped-away difference. For the visited S_A states,
+conditional pair expectations under I/A/B are .280486/.207883/.659493. A therefore
+suppresses pair coincidence on those same saved histories, but not to zero; unequal
+S tail masses legitimately overlap. Actual S_I/S_A/S_B multi-departure block counts
+are673/655/929. S_A's3051 physical departures rule out nonactivation as a rescue
+account. Fewer joint departures are not demonstrated useful coordination here.
+
+Conditional expected total departures on the separately visited S_I/S_A/S_B
+histories are .756977/.782371/.820183 per joint row. These differing visited q
+values do not violate marginal equality at a fixed local input; the policies
+induce different trajectories. They also stop us from treating cross-arm observed
+frequencies as a controlled reward mediator. All24576 stochastic joint rows retain
+their three conditional pair-law expectations and requested/physical masks in the
+211062-byte canonical `audit/joint_sampling.npz`, SHA256
+`77406f4f540a30dafbb19f343b1a8b67124a9cc5f66acbb3a3565d0d56bb1667`;
+the reading supplies its exact episode index, columns and decision clocks. Raw p,
+logits, integer tapes/thresholds and native trajectories remain available.
+
+### Complete exposure, costs and scope
+
+Worker requests are exactly71680 C and61440 S. Memoization leaves41768 C misses,
+1127736 candidate paths/4510944 modeled ticks,19040400 candidate and190050 setup
+power evaluations; S has31804 misses/helper calls/forward rows,154236 setup and
+287448 extreme-motion power evaluations. C/S hits are29912/29636; all122880
+stochastic agent decisions still take fresh addressed innovations. No hidden
+historical S draw occurs. Native dense slot accounting is29401075 including the
+single constructor reset; combined worker controller powers/native dense slots
+are49073209, not that many independent physical links or radio function calls.
+
+The reader pays61440 one-row frozen-S forwards,532480 actual agent-motion checks,
+491520 modal alias-motion steps and262980 fallback candidate geometric steps,
+plus regeneration of45056 tape integers. It performs0 environment/radio/teacher/
+optimizer calls. This independently verifies saved SINR/connection reductions,
+action/RNG/cache/provenance and motion; helper-radio correctness stays tied to
+the pinned source, not an unperformed physics rerun.
+
+Worker CPU/wall are101.714866/97.914237s, with427224KiB process-lifetime peak RSS.
+The final reader-progress measurement is13.723424 CPU/13.219217 wall seconds;
+the reading's earlier13.706780/13.203466 excludes its final self-report write and
+overlaps that measurement. The more inclusive disjoint worker-plus-reader sum is
+**115.438290 CPU seconds**. Worker final self-report/close, reader final progress
+write, launcher and engineering/review labor remain outside those explicit scopes.
+Reader lifetime RSS is430116KiB and overlaps the worker; it is not incremental
+reader memory. Native acceptance-to-exit epoch span is117.228828s; retain it beside
+the internal clocks rather than asserting they are identical.
+
+Measured full episode CPU means for C/Q_I/Q_A/Q_B/S_I/S_A/S_B are
+.159007/.244727/.249300/.214865/.231808/.235718/.230479s, including raw-write and
+query work. S_I is .012919s/episode cheaper than Q_I on this implementation,
+whereas S_B is .015614s dearer than Q_B; all sampled packages cost more CPU than
+highly cached C. These are own-trajectory complete-package timings, not same-input
+microbenchmarks or a general neural speedup. C's complete and query costs, S's
+retained analytic helper, cache counts and all positive/adverse timing differences
+remain in the summary. Physical common-device transport/synchronization/latency/
+energy and a flight-energy model are still unmodeled. The64 unique tape bundles
+contain360448 bytes plus the supplied roster rights; zero online payload is not
+zero physical deployment cost.
+
+The one canonical new bulk copy is
+`wsl_4070:/home/wu/projects/HMASD/runs/uav_parent_adaptation/b04_joint_sampling_a01/`:
+416 raw NPZ files,179448786 bytes, each size/SHA in the summary, plus the joint audit
+above and native logs/status. No raw trajectory was copied into the authoring tree.
+The original S file remains at its bound inheritance path. Its acquisition already
+cost a fit/data/optimization in the fleet direction;0new fits does not make it a
+free learned policy. Through B04 this direction has paid18fits/2760704 native
+steps/3841.716658 measured worker+reader CPU seconds, with original acquisition,
+support, engineering and review accounted separately rather than hidden by the
+current zero-fit label.
+
+<a id="b04-independent-disposition"></a>
+### Independent scientific reconstruction and disposition
+
+A registered ResearchCritic received the actual question, original protocol and
+supporting/adverse evidence in a separate context without DM/Root conversation.
+It reconstructed the evidence before reading the earlier Oracle recommendation
+and Root's selection. Its independent checks covered all416 episode identities,
+all13×18 recorded contrast metrics and32-world intervals, all23 source hashes,
+the original S file hash, matched initial states/tapes and reader input hashes.
+It checked24 canonical raw episodes covering both tapes for primary J loss/gain,
+continuity loss, adverse Q_B and the strongest positive/negative S_I−Q_I worlds;
+saved SINR/connections, reward and exogenous tape/logit reductions agree. All384
+joint-audit entries reproduce their compact summaries. It did not repeat neural
+forwards, helper/channel physics or optimizers; those remain source-bound and
+covered by the completed engineering/reader work.
+
+Its substantive recommendation was: **retain S_I as a conditional deployment
+capability and end this A/B coupling recipe.** Both primary point conditions fail;
+intervals leave modest benefit and harm unresolved, so this is not equivalence.
+B's small secondary J mean with lower p10/more movement does not justify replacing
+S_I or changing the primary. The actual physical departures and Q_A's complete
+elimination of simultaneous categorical departures reject a nonactivation or
+overwhelming-aliasing rescue. Reducing modal-departure coincidence was insufficient
+for native service here: a modal departure is not necessarily a harmful interference
+event, and state-blind staggering can remove useful as well as harmful joint moves.
+That is a compatible competing explanation, not an identified reward mechanism.
+
+The reviewer regards S_I−Q_I's native J/service/p10/path advantage as the strongest
+useful positive. The favorable pattern across laws weakens the claim that fixed .1
+ordinary exploration already explains the entire asset's usefulness. It does not
+establish superiority to calibrated ordinary control, identify imitation or
+aggregation's causal contribution, or show reliable construction across fitted
+instances. Q's fixed rate and S's probability map/acquisition differ; sampled S0
+is absent. B04 changes none of B03's adverse learning results or unresolved entropy/
+credit explanations. The reviewer explicitly retains world29346004's large losses,
+world29346016's positive, S_A's minimum-service loss even in favorable29346017,
+and the adverse quality component. Whole-team zero-service absence is not individual-
+user continuity; the p10/team-zero proxies do not silently become that estimand.
+
+The review's investment advice is **no further parent run for this A/B recipe**.
+More episodes could narrow uncertainty, but no current adoption decision needs to
+resolve a tiny coupling effect versus zero, and no particular coupling repair is
+identified as worth buying. Preserve S_I, Q_I and C with losses. The useful starting
+asset premise is stronger for a prospective development comparison, which would
+need unchanged S_I and a competent ordinary stochastic comparator: improvement
+beyond both would support development; merely recovering S_I would not; mean gain
+with continuity loss remains a tradeoff. Any separate fleet design's detailed fits
+or calibration costs are outside this review's endorsement. It reports
+**MATERIAL_DISSENT: no**; no additional fit/law or coupling-benefit claim is selected.
+
+I adopt this judgment. The actual target intermediate changed, while its predicted
+native consequence did not improve. This weakens this static staggering rationale,
+not the existence of a broader coordination opportunity or all richer correlated
+policies. Representation and lawful execution succeeded; no new learnability test
+occurred. The S−Q secondary strengthens complete-package usefulness of this fixed
+learned probability map beyond the explicit ordinary reference; it does not explain
+the earlier reward-learning failures or permit claiming learned coordination.
+
+At this boundary I reread current published RESEARCH topics2/4 and the selected
+parent plan. The existing ordinary-randomization positive, the fleet's two retained
+construction endpoints and all parent-learning adverses remain. B04 closes the
+previously untested original-S versus ordinary-randomization comparison, while
+its matched fixed-marginal A/B manipulation does not supply useful coordination.
+The relevant reusable background must now distinguish these two outcomes.
+
+A direct repeat would chiefly narrow the small coupling intervals, not separate
+the positive S probability-map explanations. An arbitrary rank/phase sweep has no
+targeted native prediction justified by this result. Calibrating an ordinary
+state-dependent stochastic distribution or developing the retained S would be a
+different scientific purchase, with its own comparator and acquisition costs;
+neither follows automatically from the favorable S−Q comparison. The pre-existing
+entropy-only learning alternative remains unselected and is not diagnosed here.
+My next-investment recommendation to Root is to preserve S_I as a working capability
+and compare any worthwhile development against unchanged S_I and competent ordinary
+stochastic control, rather than add another state-blind coupling cell. That is a
+cross-question planning recommendation, not a fit authorization or endorsement of
+an unseen detailed design. The current A/B idea closes, the broader parent/control
+question stays open, and this direction enters reserve with no producer, unread
+advice or selected next study. No owner decision is fabricated as a dependency.
+
+<a id="b04-final-cleanup"></a>
+### B04 retention and measured closure
+
+The useful fixed-policy collector, finite-grid sampler, guarded reader and their
+synthetic checks stay published at the source commit; they implement the retained
+S_I/Q_I/C capabilities and keep the required evidence independently readable.
+No unused trial variant was created. Unique416-episode raw, joint diagnostics,
+original S and all positive/adverse records remain in their canonical locations.
+
+After terminal collection, complete reading and live-process checks, the standard
+snapshot collector previewed and removed exactly
+`wsl_4070:/home/wu/projects/HMASD/.git/hmasd-launch-sources/18a7c9818ef3472189804ebe275ff08b`.
+The actual directory and Git worktree registration are gone:810541056 allocated
+bytes before,0 after, **810541056 bytes reclaimed**. Native claim, manifest, exit
+witness and source reachability remain; all416 canonical raw files still total
+179448786 bytes and the joint audit remains present. The read-only protected-process
+scan used the node's existing sudo support; no force removal or retention copy
+was made. [Exact collector result and measurements](../../../../runs/uav_parent_adaptation/b04_joint_sampling_a01/snapshot-gc.json).
+Local rebuildable caches, observer-request scratch and redundant tiny log copies
+will be removed after this compact result/standing publication, with their measured
+deletions appended here. They are not required evidence or a live result producer.
