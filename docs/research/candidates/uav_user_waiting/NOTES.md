@@ -1080,3 +1080,285 @@ No acceptance is inferred from supervisor submission alone. Native child remains
 active through deterministic observation, collection and complete reading;
 checkpoint rearming will never restart the worker. Prior failed attempts are
 unchanged, and this acceptance is not a scientific-result boundary.
+
+
+**First A03 checkpoint.** Generation15's900s checkpoint was drained with the
+same accepted operation still consistent/running and zero probe errors. The
+last saved summary held156 new complete episodes/39,936 steps, plus the retained
+six:162 valid panel rows. This is saved progress, not the instantaneous count
+inside the running next episode or a read result. The event
+`5c6a33a4e9628d91c11b5b89` and wake
+`6cce1154-309a-4278-b5e0-8fd17ea1bd92` were consumed into generation16 with a600s
+window; no worker was restarted. Native child queue delivery again returned
+code−32600, so the turn remains active with deterministic local event waiting.
+
+
+**A03 worker terminal and complete-panel reader.** The protected continuation
+exited0 at2026-09-30T15:04:36.758678Z with250 new complete H256 episodes/64,000
+native transitions/0fits and the original six rows unchanged. The final fixed
+panel is256episodes/65,536valid transitions; total result exposure is65,648
+including the original112-step failed prefix. A02 contributed no native exposure.
+The generation16 READY event `1c953ba04ce1f03d25e63d94` and wake
+`ab49ec55-8fad-421f-99af-31bedbf4bf1d` were consumed into generation17; native
+operation facts show consistent exit0 and absent runner/supervisor identities.
+The full composite summary SHA256 is
+`620cad3f8da694615ef4883b8e225c94b54f1a86bb4333c5b64c1fbd5a875df3`.
+
+The unchanged accepted-source composite reader was submitted once at15:06:41Z
+as `uav-user-waiting-b02-reader-a03` using the configured GCC Python, one thread
+and external `/usr/bin/time -v`. Its immutable task binding is preserved in
+`runs/uav_user_waiting/b02_continuity_a03/reader-supervisor.json`: wrapper
+PID1129756/start112418663, task-start1790780801, wrapper SHA256
+`481f035b449b6cb4712de59ce2c48a93d78f0423936b814da893acf3b95ebbdb`.
+Generation18 observes that same pure-reader handle through the previously
+accepted read-only adapter; the first drain was consistent/running with zero
+probe errors. It does not launch a second result operation or add native steps.
+The DM remains active through the complete reader and independent scientific
+diagnosis. Worker exit alone is not yet a verified scientific conclusion.
+
+
+**Pure-reader checkpoint.** Generation18 reached its900s checkpoint with the
+same bound reader consistent/running and zero probe errors. At this checkpoint
+the native log had verified217/256 trajectories. Event
+`a80041fd9b4cd5782575b02d` and wake
+`3a67528d-0a07-457e-be45-9e7ef29a6a84` were consumed into generation19 with a600s
+window; no reader or worker restart. This remains verification progress.
+
+
+<a id="b02-complete-reading"></a>
+### B02 complete reading — 2026-09-30 UTC
+
+**The fixed anticipation package does not establish the intended typical-user
+continuity gain. Retain M for that use, and preserve S as a useful additional
+extreme-tail/fairness tradeoff.** The scientific panel is now complete, not a
+technical-failure verdict:256 valid H256 episodes on the64 fixed common worlds,
+0fits. The protected six original rows plus250 new rows give65,536 valid steps;
+the original112-step failed prefix makes65,648 total result-exposure steps.
+The64 native correctness steps are separate. A02 contributed zero native steps.
+Original scientific inputs remain `16500b6f85c8cd20a7765801ed413608c36cf9f0`;
+the accepted protected-continuation/reader source is
+`db13ccf307e9cf467450fdad8318721fb8db603a`.
+
+The pure composite reader completed once, exit0. Generation19 READY event
+`4ae13e2a0c770a995b35d9e8` and wake
+`19f6f964-dba5-4a47-a0f3-e1af79937c58` were consumed into generation20; observation
+was then stopped. No worker, reader or Send was restarted. Native reader binding
+and terminal facts are in the compact [result](../../../../runs/uav_user_waiting/b02_continuity_a03/result.json).
+
+**Verification and retained evidence.** All256 raw files/408,643,897 logical
+bytes passed their exact identities, paired-world geometry, native transitions,
+actual observations/C/private waypoint states, age/gap endpoints, lawful report
+and delayed-delivery contracts, model-history reconstruction, completed key/cost
+arithmetic and continuation-clock checks. The reader verified65,536 native and
+65,536 executed-model transitions, with177,158 candidate physics pairs under the
+frozen subset:all selected plans and both A finalists, plus all evaluated
+candidates at reports0/60/124/248. Native radio is a shared kernel; history,
+cost/ranking/trajectory reconstruction and the frozen observation reader are
+separate. This is not an independently implemented full physics audit. Maximum
+native J discrepancy was5.55e-17; SINR and actual-observation errors were0.
+The original112-step failed prefix was fully read earlier and is excluded from
+endpoints. Independent review also found its saved native prefix identical to
+the completed R/29322001 prefix, without diagnosing or curing the original error.
+
+The canonical full summary is5,027,091bytes, SHA256
+`620cad3f8da694615ef4883b8e225c94b54f1a86bb4333c5b64c1fbd5a875df3`;
+full reading4,532,651bytes, SHA256
+`353c14a1c03e4440e90f0718c52bcab5dfaaaf36b0b129c5b33ce9e5e604d065`.
+Both remain at `wsl_4070:/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/`.
+The six reused complete raw files remain in canonical `b02_continuity_a01/raw/`,
+along with the original553,351-byte partial R file. All250 new raw files remain
+in canonical `b02_continuity_a03/raw/`. The compact result records every raw
+identity, all paired per-world values, all per-user gap/mean-age summaries,
+per-world verification/model diagnostics, work/cost and native terminal bindings.
+No new result is inferred from a log or a successful exit alone.
+
+The fixed primary is the mean over50 users of each user's maximum observed
+contiguous unserved gap, including observed left/right-censored lengths. Worlds,
+not users or reports, are the independent paired units. The intervals below are
+prespecified descriptive paired t95 on64 worlds, not confirmation or equivalence.
+
+| Mean over64 worlds | A | S | M | R |
+|---|---:|---:|---:|---:|
+| Mean per-user maximum gap |20.455625|20.964063|19.826875|28.743125|
+| Worst-user mean age |9.725708|9.835510|12.914001|10.935425|
+| Episode maximum gap |49.921875|46.968750|55.921875|59.046875|
+| Aggregate mean age |3.378014|3.497772|3.175093|4.682748|
+| Pooled age p95 |13.954688|14.438281|14.970313|20.892188|
+| Mean squared age |42.330797|43.477169|46.206426|84.572096|
+| Served users/tick |21.247375|20.933899|24.596436|21.640076|
+| Native J/tick |.353128|.350250|.398139|.362645|
+| Scheduler CPU seconds/episode |9.258024|3.902444|5.059534|3.883219|
+
+Primary **A−M = +.628750 [−.215564,+1.473064]**,29 improving/35 adverse worlds.
+Planned A−S = −.508438 [−1.366416,+.349541],36 improving/28 adverse;
+S−M = +1.137188 [+.335121,+1.939254],25 improving/39 adverse. A's point increment
+over S is favorable but uncertain, and neither superiority nor equivalence is
+established. S's different tail gains do not retrospectively pass this primary.
+
+**Positive capability and its cost.** Against M, S reduces episode maximum gap
+by8.953125 [−12.816345,−5.089905] and worst-user mean age by3.078491
+[−4.271702,−1.885281], with1.157089 fewer scheduler CPU seconds per episode.
+A also reduces these respective endpoints by6.000000 and3.188293, and lowers
+age p95 by1.015625. But S/A serve3.662537/3.349060 fewer users per tick than M
+and lose J in **all64 worlds**. Their aggregate ages increase.322679/.202921,
+paths increase602.538/659.409m per UAV, while transmitter-on ticks fall105.938/
+97.813 and quality improves. Neither energy savings nor physical safety follows
+from this host's transmitter/path measures. Actual mean-squared-age contrasts
+with M have intervals crossing0; optimizing its local forecast does not certify
+improvement in its complete actual value either.
+
+A has a real observed secondary increment over S:service+.313477
+[+.099148,+.527805],44 improving/20 adverse worlds. J+.002878 has a narrow
+interval crossing0. Quality falls.005037, transmitter-on ticks rise8.125, and
+scheduler CPU rises5.355580 seconds/episode (2.37 times S). The episode-maximum
+gap point contrast A−S is+2.953125 with interval[−.629981,+6.536231]. Preserve
+this non-inert mixed result; it does not justify the extra rollout for the named
+continuity use. Against R, A/S reduce typical-user maximum gaps by8.287500/
+7.779063 and have lower worst-user mean-age point estimates, but their service,
+quality and travel costs remain. A−R worst-user mean age is−1.209717
+[−2.405703,−.013731]; S−R is−1.099915 [−2.287524,+.087694]. This is neither
+loss-free preservation by an equivalence rule nor general dominance of R.
+
+**Intervention, lawful model and limits.** All16,384 delivered rounds were
+timely; no unknown history prefix was used. The common141-byte round and1.436s
+compute allowance include the reported post-C waypoint byte for every arm.
+This evidence does not identify the byte's separate value or retroactively
+establish B01-contract performance. Maximum charged round was.267830s for A
+(.112368/.147476/.116074 for S/M/R), on this observed node/load.
+
+A had2,881 reports with two distinct finalists;40 horizon-terminal reports do
+not extend them, leaving2,841 complete timely two-branch comparisons. It selected
+a different pair from same-state S in644/4,096 reports:289 paid positive current
+squared-age cost and355 tied that cost; all644 lowered computed total cost.
+Across the2,841 comparisons, current sacrifice sums65,909, modeled continuation
+gain684,966 and total gain619,057. These inequalities are constructed by A's
+selection rule, not independent evidence of actual future benefit. The644 count
+is a command/mask-pair difference, not a claim that all induce physically distinct
+motion after clipping or distinct service.
+
+For the selected first branch, the modeled next C command differed on103/14,205
+UAV proposals (101 report slots), and its waypoint index on7. Maximum next-report
+position error was.499130m and maximum synthetic/native observation component
+difference.780659. The virtual future S pair differs from actually replanned A
+on456/2,841 slots **by design**, and cannot be counted as model error. These
+measurements reject total failure to activate or predict the next local policy;
+they do not isolate the cause of the primary result. Quantized-history service
+false-positive/false-negative counts were A454/416, S441/361, M481/463 and
+R431/379. Every episode has some terminal burden discrepancy; maximum absolute
+burden errors are672/1054/2028/1032. No truthful ACK was substituted for model
+history. Broadly calling that model exact would therefore be wrong.
+
+**Positive and adverse raw witnesses.** Independent contact-to-age and gap-run
+reconstruction on12 source-bound trajectories reproduced every inspected gap
+and endpoint. A−M positive29322058 has mean-user maximum gaps20.90/27.26 and
+maxima45/84; M's84 is closed. In adverse29322021, A/M are28.06/18.92 and40/50
+users have worse maxima under A. A−S positive29322027 is15.94/26.54, including
+S's66/63/62 observed terminal gaps; adverse29322001 is30.66/21.18 with37 users
+worse under A and56/55/55 closed gaps. In29322048, A user20 has a98-tick closed
+gap[110,208), worst-user mean21.253906 versus S/M/R10.085938/9.003906/8.074219.
+
+The first checked A/S divergence in positive29322027 pays86 current Q4 for339
+modeled continuation gain; adverse29322001 has a current tie and290 modeled
+continuation gain. Both execute and all five selected-branch next C proposals
+match actual C. They establish active model-supported interventions before both
+complete signs, not single-decision attribution of either trajectory. For the
+98-tick adverse user, age **and accumulated burden are correct at all64 anchors**.
+Some visited candidates predict service at reports108/112/116/124 but are not
+chosen; later visited sets contain none at128..200, with service selected204.
+This does not diagnose missing ACK/history, full-support unreachability, or a
+successful horizon/search repair.
+
+**Cost and cumulative investment.** The valid panel used3,034,792 requests,
+2,219,628 candidate plans,8,808,440 candidate-state reductions and28,410 virtual
+C calls; original C contributed81,920 decisions. Current/future requests are
+2,375,680/659,112. These panel counters exclude failed-prefix/aborted-request
+work and correctness/support. The new worker used1,495.087732 lifetime CPU
+seconds; the original failed worker42.228441. External full-reader time is
+1,113.99 CPU seconds/1,114.27 wall seconds, peak534,556KiB. Known worker plus
+full-reader CPU is **2,651.306173 seconds (.736474h)**, within the prospective
+.7–.9h estimate but not the whole research bill. A02 CPU/RSS is unmeasured;
+its2.233418s acceptance-to-exit, fixtures, engineering/review, two saved-failure
+replays, partial readers and collection are additional. New worker perf-counter
+wall1,431.421581s and reader internal wall1,055.765772s have different scopes
+from native UTC/external wall; no runtime explanation is inferred from them.
+Across this direction's B01+B02, result exposure is131,184 steps plus200 fixture
+steps,0fits, and4,475.374087 known worker/full-reader CPU seconds, with support
+additional. Completed continuation is not evidence that the unexplained original
+radio exception is cured.
+
+
+<a id="b02-independent-review-and-disposition"></a>
+### B02 independent scientific diagnosis and disposition
+
+The existing registered ResearchCritic worked in its separate, originally
+non-inherited context. It received the actual question, frozen design/source,
+original selection/Pro advice, B01 adverse evidence and both failed/completed
+outputs, not only the DM's explanation. It formed its numerical reading before
+consulting selection advice. It independently checked all62 original scientific
+bindings, continuation config/order/accounting, protected parent metadata/seven
+raw hashes, exact reuse of six rows, paired statistics and the matching failed/
+completed112-step prefix. Its bounded12-trajectory raw reconstruction and
+positive/adverse decision inspections are reported above. It did not duplicate
+the complete physical reader. After the full reader completed it independently
+verified both full-file hashes, source binding, terminal exit0,256 unique rows,
+aggregate verification counts and continuation diagnostic sums.
+
+**Substantive recommendation:** retain M for the intended typical-user
+continuity/service use; retain S as a conditional extreme-tail/worst-user-mean
+ordinary reference; end investment in this fixed A rollout extension; select no
+new native experiment. The initial recommendation was conditional on the full
+reader, and the final addendum explicitly says that condition is now satisfied
+within the reader's declared scope. **MATERIAL_DISSENT: no.** It would object to
+promoting A as a demonstrated typical-user improvement or treating S's extreme
+benefits as a retrospective primary success.
+
+Its explanation is that convex short-block control already supplies much of the
+observed extreme-tail capability, while neither the surrogate nor one modeled
+continuation establishes improvement in mean per-user maximum gap. The
+criteria differ:worst-user time mean, typical-user episode maximum and largest
+single interruption are not interchangeable. It preserves A's+.313477 service
+increment over S, active interventions and mixed continuity outcomes; it does
+not label A inert or universally useless. Same-state modeled gains are forecasts,
+not realized primary gains. Restricted finalists, finite forecasting,
+quantization and subsequent replanning remain possible limitations; none has
+been identified as the cause or shown to be repairable by more investment.
+Zero fits says nothing about learnability. The byte extension was common and
+lawful, but its separate value and original-contract transfer were not isolated.
+
+The Reviewer considered unchanged replication, model repair, wider search,
+longer horizon, ACK access and learning. Replication could narrow A−S uncertainty,
+but no present adoption decision depends on that precision. The other routes
+lack a selected discriminating complete-controller prediction. It recommends a
+constructive re-entry only for a consequential actual choice among typical-user
+continuity, extreme tails, service and compute, offering more decision value
+than retaining the measured M/S/R alternatives; it does not require a mechanism
+proof or a positive toy as an admission condition. Its final addendum confirms
+that the103 next-C mismatches and456 declared replanning differences do not
+justify an automatic repair or a general rejection of anticipation. No live
+Reviewer scratch consumer remains.
+
+**DM response and working explanation.** I accept this recommendation without
+a new Pro round:the completed independent diagnosis addresses the actual fixed
+claim, all supporting/adverse evidence and the continuation choice; no distinct
+unresolved expertise or material disagreement remains. The task opportunity is
+real but plural:M remains strong for typical-user interruption and aggregate
+service; S adds a measured extreme/fairness tradeoff. B01's R benefit remains
+valid on its own panel, and B02 shows R is not the only ordinary way to obtain
+lower worst-user time means. Representation/history were active and lawful;
+the correctly tracked98-tick witness specifically weakens a missing-age/ACK
+story, without showing the whole representation or support sufficient. No
+learning method was tested. For the complete package, A's added forecast cost
+has not earned investment for the selected primary use, even while its secondary
+service increment is retained as a real observed capability.
+
+I therefore **end this fixed A extension's additional investment**, retain M
+and conditional S alongside R and all adverse results, and place the direction
+in reserve after publication/cleanup. This is a choice about the tested package
+and current investment, not an empirical refutation of the still-open broader
+question of prospective service-continuity control. No automatic horizon,
+penalty, beam, ACK, decoder, fit or seed-panel repair follows. There is no
+producer, unread result, selected successor or approval dependency. Re-entry
+would need a selected complete controller/comparison with a consequential
+continuity-versus-tail/service/compute purpose; no such object is currently
+specified. A cross-question successor remains Root's allocation decision, not
+an outstanding task for this finished batch.

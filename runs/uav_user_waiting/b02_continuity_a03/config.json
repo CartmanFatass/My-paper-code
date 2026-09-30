@@ -1,0 +1,1582 @@
+{
+  "object": "UAV-USER-WAITING-B02-CONTINUATION",
+  "launch_sha": "db13ccf307e9cf467450fdad8318721fb8db603a",
+  "original_scientific_config": {
+    "object": "UAV-USER-WAITING-B02",
+    "launch_sha": "16500b6f85c8cd20a7765801ed413608c36cf9f0",
+    "seeds": [
+      29322000,
+      29322001,
+      29322002,
+      29322003,
+      29322004,
+      29322005,
+      29322006,
+      29322007,
+      29322008,
+      29322009,
+      29322010,
+      29322011,
+      29322012,
+      29322013,
+      29322014,
+      29322015,
+      29322016,
+      29322017,
+      29322018,
+      29322019,
+      29322020,
+      29322021,
+      29322022,
+      29322023,
+      29322024,
+      29322025,
+      29322026,
+      29322027,
+      29322028,
+      29322029,
+      29322030,
+      29322031,
+      29322032,
+      29322033,
+      29322034,
+      29322035,
+      29322036,
+      29322037,
+      29322038,
+      29322039,
+      29322040,
+      29322041,
+      29322042,
+      29322043,
+      29322044,
+      29322045,
+      29322046,
+      29322047,
+      29322048,
+      29322049,
+      29322050,
+      29322051,
+      29322052,
+      29322053,
+      29322054,
+      29322055,
+      29322056,
+      29322057,
+      29322058,
+      29322059,
+      29322060,
+      29322061,
+      29322062,
+      29322063
+    ],
+    "arms": [
+      "A",
+      "S",
+      "M",
+      "R"
+    ],
+    "arm_orders": [
+      [
+        "A",
+        "S",
+        "M",
+        "R"
+      ],
+      [
+        "S",
+        "M",
+        "R",
+        "A"
+      ],
+      [
+        "M",
+        "R",
+        "A",
+        "S"
+      ],
+      [
+        "R",
+        "A",
+        "S",
+        "M"
+      ],
+      [
+        "R",
+        "M",
+        "S",
+        "A"
+      ],
+      [
+        "M",
+        "S",
+        "A",
+        "R"
+      ],
+      [
+        "S",
+        "A",
+        "R",
+        "M"
+      ],
+      [
+        "A",
+        "R",
+        "M",
+        "S"
+      ]
+    ],
+    "horizon": 256,
+    "planned_fits": 0,
+    "planned_episodes": 256,
+    "planned_steps": 65536,
+    "delivery_ticks": 2,
+    "hold_ticks": 4,
+    "deadline_seconds": 1.436,
+    "report_bytes_per_uav": 25,
+    "command_bytes": 16,
+    "round_bytes": 141,
+    "transmission_seconds": 0.564,
+    "nodes": 5,
+    "users": 50,
+    "primary": "A-M: mean of50 individual maximum observed unserved gaps; lower favorable",
+    "actual_age": "postmove service resets0; otherwise+1 from initial0",
+    "S": "min sum of squared reconstructed per-user ages across the delivered4 ticks; native ties",
+    "A": "two S finalists each followed by one modeled next S; min combined8-tick squared-age cost; horizon clipped; same deadline",
+    "M": "retained minimum predicted cumulative-age selector between O and W plans, using W native tie keys",
+    "R": "min max accumulated reconstructed age; then min total; then native ties",
+    "nav_contract": "post-current-C index 0..9 in one common report byte; no other private state or future native C",
+    "continuation": "virtual report at t+4 after first2 delivered transitions; resumed committed prefix reproduces t+4,t+5; next S delivered t+6..9; count Q8 each once",
+    "synthetic_observation": "native-shaped104 float32; all top20 SINR-eligible users before capacity assignment and peers; quantized map and modeled positions",
+    "dtype": "int64 age costs/burden; float64 radio/history/forecast",
+    "fallback": "whole-round late or incomplete holds old commands/mask; no S rescue",
+    "unknown_prefix": "no invented transitions; burden permanently censored if first lawful anchor>0",
+    "native_ties": [
+      "J",
+      "served",
+      "q==proposal_q",
+      "mask.bit_count()",
+      "-mask",
+      "-q"
+    ],
+    "seed_rng": "native RandomState(world seed), exact inherited reset; no policy RNG",
+    "upper_work": {
+      "current_candidate_requests": 2375680,
+      "future_candidate_requests": 935424,
+      "total_candidate_requests": 3311104,
+      "candidate_state_reductions": 13140480,
+      "current_c_calls": 81920,
+      "virtual_c_calls": 40320
+    },
+    "reader": "all native/C/age/periodic/history/key/continuation arithmetic; selected plans and all evaluated pairs at0/60/124/248 checked physically",
+    "source_identities": [
+      {
+        "path": ".codex/hmasd-compute.toml",
+        "bytes": 3542,
+        "sha256": "2bb704e31e08a6a3489e80ea6851826740dfbf71461e0f7e70c4394694e65e6f"
+      },
+      {
+        "path": "envs/pettingzoo/env_adapter.py",
+        "bytes": 25232,
+        "sha256": "8b42c1c3e7ef44cb814f79225b4af944b1018ad764dfeb17e9e1cc294df79d40"
+      },
+      {
+        "path": "envs/pettingzoo/uav_env.py",
+        "bytes": 68827,
+        "sha256": "fb67554cf911adc9d3260a2a7f16d1773921c295646cb46beb4ba1247fec599e"
+      },
+      {
+        "path": "envs/pettingzoo/uav_radio.py",
+        "bytes": 5001,
+        "sha256": "db3464803b1a5aa9c9504096810dc971266a6bd7eba1c31dfe79e7d8d903f3cc"
+      },
+      {
+        "path": "experiments/candidates/uav_local_history/b01/controller.py",
+        "bytes": 14309,
+        "sha256": "b5fdfbfe2718ee693c9ed1d7aeb8bbb6c5c59964ec6c56c5bb35be8b685f23d2"
+      },
+      {
+        "path": "experiments/candidates/uav_radio_activation/b01/__init__.py",
+        "bytes": 58,
+        "sha256": "b0392e94f590eb0fd016ce26529485215b128b9accff9b1dc5fdd6ffd7d11b8a"
+      },
+      {
+        "path": "experiments/candidates/uav_radio_activation/b01/protocol.py",
+        "bytes": 4643,
+        "sha256": "4976e6739d1e5c919bd298b86091dcf6cf5d62d5c3cc3a7b977fa5b5f0956431"
+      },
+      {
+        "path": "experiments/candidates/uav_radio_activation/b01/read.py",
+        "bytes": 16058,
+        "sha256": "8d9f8d469335d2ac2c7551dd81217b9194c81c6a92d44725b202078c4a7b1347"
+      },
+      {
+        "path": "experiments/candidates/uav_radio_activation/b01/run.py",
+        "bytes": 1619,
+        "sha256": "02ca51bd761be8cbde3706f9f9ae3b3556fdff304480ec1bf45adc92388e971f"
+      },
+      {
+        "path": "experiments/candidates/uav_radio_activation/b01/scheduler.py",
+        "bytes": 4524,
+        "sha256": "2b75232b9b57464b31a113458e9bab6b5c47b00272cf4d255dd670914b05e792"
+      },
+      {
+        "path": "experiments/candidates/uav_radio_activation/b01/study.py",
+        "bytes": 16773,
+        "sha256": "7af060ca82f357722e76588669e7319b10da7254f317bc312f71d25eca14aa24"
+      },
+      {
+        "path": "experiments/candidates/uav_radio_activation/b02/__init__.py",
+        "bytes": 70,
+        "sha256": "3e9e194f32194488a58d2bee13d5be625f5142b2d4330b76c729809924bf950e"
+      },
+      {
+        "path": "experiments/candidates/uav_radio_activation/b02/protocol.py",
+        "bytes": 5120,
+        "sha256": "a1dbec8e5aecead2c702fab54376c95c8b9d1fd134cb0894a3c0eb705ebab69b"
+      },
+      {
+        "path": "experiments/candidates/uav_radio_activation/b02/read.py",
+        "bytes": 18060,
+        "sha256": "ef4baedfe98630064ee1545637dcc932304b39f934b055800ed9c970eaa5a04d"
+      },
+      {
+        "path": "experiments/candidates/uav_radio_activation/b02/run.py",
+        "bytes": 1630,
+        "sha256": "9d8633e865f76f1801611f2026e2264f2198134089fce32d9ebc5e3f1076f1c4"
+      },
+      {
+        "path": "experiments/candidates/uav_radio_activation/b02/scheduler.py",
+        "bytes": 7781,
+        "sha256": "5c748f097a7597806f0adb3e5b49a242f000391c7da9ab7eedb2f7efce7535e7"
+      },
+      {
+        "path": "experiments/candidates/uav_radio_activation/b02/study.py",
+        "bytes": 19057,
+        "sha256": "e6bb046907e195e02c65308015a29eb9c49bb479a22efa4bcac6ddd6dbe1ed75"
+      },
+      {
+        "path": "experiments/candidates/uav_radio_activation/b03/__init__.py",
+        "bytes": 70,
+        "sha256": "e7f16638203ff2d8d5254017185d2b2133c21fc41b1fef22aa4709cbafc9c350"
+      },
+      {
+        "path": "experiments/candidates/uav_radio_activation/b03/protocol.py",
+        "bytes": 5146,
+        "sha256": "3561dd0c2ea274a7e24e5a8bc6da3d6ee03b21fcec8768d18adb45b4f524b2c1"
+      },
+      {
+        "path": "experiments/candidates/uav_radio_activation/b03/read.py",
+        "bytes": 18928,
+        "sha256": "ed137cd753b2961ef1518f22a1a90475f55eef17fb688f574563e0e2cd89c3af"
+      },
+      {
+        "path": "experiments/candidates/uav_radio_activation/b03/run.py",
+        "bytes": 1632,
+        "sha256": "89c0e43aac625199305076a1a3188875e34969cdcb16588fe2d4dc05d1b74558"
+      },
+      {
+        "path": "experiments/candidates/uav_radio_activation/b03/scheduler.py",
+        "bytes": 6844,
+        "sha256": "41cdda90f1bb677c16f1ca12ee57cef2ac656b9b597a146cf8b4e6be9039d54f"
+      },
+      {
+        "path": "experiments/candidates/uav_radio_activation/b03/study.py",
+        "bytes": 19661,
+        "sha256": "aadd16bdac244757edb5736684b3d5432f8b4372b5e36fda124566987801a715"
+      },
+      {
+        "path": "experiments/candidates/uav_registered_service/b01/__init__.py",
+        "bytes": 62,
+        "sha256": "ef0474c939a8e83168c671d537bd3d6b178b533d268f48eae8cfcf4357218c31"
+      },
+      {
+        "path": "experiments/candidates/uav_registered_service/b01/history.py",
+        "bytes": 4562,
+        "sha256": "d67ee807bb29fe4346c070f72d9f7110bc0696ef898b24b13bb49b5db9d626ed"
+      },
+      {
+        "path": "experiments/candidates/uav_registered_service/b01/metrics.py",
+        "bytes": 3542,
+        "sha256": "ca6f5b3895f6101ac2b4bb1e590d2c7b278d90cffe8b4cd4fa614fab0624fbbb"
+      },
+      {
+        "path": "experiments/candidates/uav_registered_service/b01/read.py",
+        "bytes": 24261,
+        "sha256": "ed9d3a96c538b906f5ef11aec03b0ec934ea8354410a97e5ff14aeab38d86616"
+      },
+      {
+        "path": "experiments/candidates/uav_registered_service/b01/run.py",
+        "bytes": 1353,
+        "sha256": "0829c43177b19bdd200ab2ce157cd0bb54fe15394e0e16761c8cb8d901aa507d"
+      },
+      {
+        "path": "experiments/candidates/uav_registered_service/b01/scheduler.py",
+        "bytes": 11880,
+        "sha256": "30c9d7d923a2f89ef61dd3fe2f662ac85dc3e0571240c9989f4c384d845ff1b5"
+      },
+      {
+        "path": "experiments/candidates/uav_registered_service/b01/study.py",
+        "bytes": 20079,
+        "sha256": "a705d26145cb35d9a9e83d70a45c2206ddc3d04dfa0a99c438a1dbc795aded50"
+      },
+      {
+        "path": "experiments/candidates/uav_registered_service/b02/__init__.py",
+        "bytes": 56,
+        "sha256": "93e2a4c8326dc374289560fa9c465f59c006c97bd4d17fa888c11bb8c36a2da6"
+      },
+      {
+        "path": "experiments/candidates/uav_registered_service/b02/metrics.py",
+        "bytes": 5181,
+        "sha256": "7c40bc481c984395abba2c5b915327d94fda6fa63d030f54bb69851c64c35446"
+      },
+      {
+        "path": "experiments/candidates/uav_registered_service/b02/read.py",
+        "bytes": 27988,
+        "sha256": "75ccbdeacdd17fa29ae426592865354e29a02194821b5735509c98bbfd341eda"
+      },
+      {
+        "path": "experiments/candidates/uav_registered_service/b02/run.py",
+        "bytes": 1365,
+        "sha256": "234d72c002447686bd526d8de5c62aca6355a14c7bc9eeca2fba722254b8181b"
+      },
+      {
+        "path": "experiments/candidates/uav_registered_service/b02/scheduler.py",
+        "bytes": 12569,
+        "sha256": "fd12bd64ff076897988042073d75743c063960b665770542168852a5bba4c7b8"
+      },
+      {
+        "path": "experiments/candidates/uav_registered_service/b02/study.py",
+        "bytes": 18668,
+        "sha256": "c6914962ea2419ffe7f240ed8423bfd86732ce8e1fe4601a8a1cb604f134ec99"
+      },
+      {
+        "path": "experiments/candidates/uav_service_age/b01/__init__.py",
+        "bytes": 71,
+        "sha256": "a30d900ab2439ea58777f157cd60b4ad3dab5f5c6aa8f13363420a647dc097df"
+      },
+      {
+        "path": "experiments/candidates/uav_service_age/b01/features.py",
+        "bytes": 5106,
+        "sha256": "55d2b58377019a2edcd3407639047314db58be2bffcbeac31860bf1ddddb28d2"
+      },
+      {
+        "path": "experiments/candidates/uav_service_age/b01/learner.py",
+        "bytes": 8669,
+        "sha256": "9ad461b2a64d3439cf7004ad656758b02d3579c7c5b57ec127cbfc9db60f7ac8"
+      },
+      {
+        "path": "experiments/candidates/uav_service_age/b01/metrics.py",
+        "bytes": 4240,
+        "sha256": "8e85fc959ff06fb96fd87fe6154155f31d460392d55e74c2f26d934e2a01d6ec"
+      },
+      {
+        "path": "experiments/candidates/uav_service_age/b01/read.py",
+        "bytes": 34142,
+        "sha256": "7a6244085d44e126809d9bac63197fb9159b8206154047c4d4b7248026375604"
+      },
+      {
+        "path": "experiments/candidates/uav_service_age/b01/run.py",
+        "bytes": 1408,
+        "sha256": "6397b73ea24be7821071553003a034e8a7d979c29915d96897560b2da24541ab"
+      },
+      {
+        "path": "experiments/candidates/uav_service_age/b01/scheduler.py",
+        "bytes": 21161,
+        "sha256": "84e506aa6a538a7f8aa0d7d15ce25914345faa642eb9d89e4a88895f645db89e"
+      },
+      {
+        "path": "experiments/candidates/uav_service_age/b01/study.py",
+        "bytes": 21963,
+        "sha256": "9d153bdde6aa7df06806d9168be53f7c1f3bd69160a632d0b9abacb6f3625cd0"
+      },
+      {
+        "path": "experiments/candidates/uav_user_waiting/b01/__init__.py",
+        "bytes": 62,
+        "sha256": "8fde437b9ee3fa4dad6859adbd35c48e75192e32ca1f9ddbc233d7c1f5a94e9f"
+      },
+      {
+        "path": "experiments/candidates/uav_user_waiting/b01/history.py",
+        "bytes": 1480,
+        "sha256": "a839438052c6c57337eade4a1b066802830a5fbd0af78e49f45564160f57a7f4"
+      },
+      {
+        "path": "experiments/candidates/uav_user_waiting/b01/metrics.py",
+        "bytes": 2771,
+        "sha256": "b3e5cf2f0dd5d6246a27ad2a40bfd9e9157895782f1f103dc00fbcc2b5537d53"
+      },
+      {
+        "path": "experiments/candidates/uav_user_waiting/b01/read.py",
+        "bytes": 21847,
+        "sha256": "ac0ab412c19782b98a07127ed4678588fcd02d891385ddcc920e669fdfe63286"
+      },
+      {
+        "path": "experiments/candidates/uav_user_waiting/b01/run.py",
+        "bytes": 1393,
+        "sha256": "f323b7e9448e940e5d373713bda2e48d8885ffbff9bf148b8c2397aa511e9e56"
+      },
+      {
+        "path": "experiments/candidates/uav_user_waiting/b01/scheduler.py",
+        "bytes": 12897,
+        "sha256": "b93213bfb53c01d9d24d6247d2bfb5ef9967eeeb0cef46333ed6c4ed454355f7"
+      },
+      {
+        "path": "experiments/candidates/uav_user_waiting/b01/study.py",
+        "bytes": 15855,
+        "sha256": "6608cac2f8c2e7746b66d4919cb3527baf16993802c6801cd63e00ed19f46a00"
+      },
+      {
+        "path": "experiments/candidates/uav_user_waiting/b02/__init__.py",
+        "bytes": 52,
+        "sha256": "419ff3be5e484c47b704cbcaa13eeab4ad652c538833b3619c53c737cacd1da9"
+      },
+      {
+        "path": "experiments/candidates/uav_user_waiting/b02/metrics.py",
+        "bytes": 4385,
+        "sha256": "bf51affe06f92fb45558d12abb4516e2d6b2d3be3d57e0ca161564cfba724629"
+      },
+      {
+        "path": "experiments/candidates/uav_user_waiting/b02/predictor.py",
+        "bytes": 3957,
+        "sha256": "b356a04de8525a24764822044cd72af7c57aa286cd5d873bd8db54ac9be7db10"
+      },
+      {
+        "path": "experiments/candidates/uav_user_waiting/b02/protocol.py",
+        "bytes": 4020,
+        "sha256": "038bddbfa0f694e9b5aa2a6c3f0e659d945369a951b55497a1da2a9ec839e1d4"
+      },
+      {
+        "path": "experiments/candidates/uav_user_waiting/b02/read.py",
+        "bytes": 32455,
+        "sha256": "04e799dce7c0158473d018348d4fe2d2628e60eea1e2f57c2874d01251ca0f15"
+      },
+      {
+        "path": "experiments/candidates/uav_user_waiting/b02/run.py",
+        "bytes": 1393,
+        "sha256": "703db2414a8e7dfd0cc367f2f6a3a9e03b52dde1684e16a1d057c7e628977681"
+      },
+      {
+        "path": "experiments/candidates/uav_user_waiting/b02/scheduler.py",
+        "bytes": 25379,
+        "sha256": "b752521080a9fa12c24a05e696880a2f94e74734fe273d77fee5e20a0df85b41"
+      },
+      {
+        "path": "experiments/candidates/uav_user_waiting/b02/storage.py",
+        "bytes": 3196,
+        "sha256": "0a631080a9f3fc9acf4cd15aa43c29e052652b57dabedabb61e9bf12bf010154"
+      },
+      {
+        "path": "experiments/candidates/uav_user_waiting/b02/study.py",
+        "bytes": 18786,
+        "sha256": "e69ccca9d8213a07de56a13b1110365b74545a5312be53e23e84604c4d51753d"
+      },
+      {
+        "path": "experiments/candidates/ucope/uav_motion_prefix_b01/environment.py",
+        "bytes": 4819,
+        "sha256": "fb25e48857cc8531ac9b80f13243ccd6ca88fa5bf2b194a43dffed21c80690e6"
+      },
+      {
+        "path": "scripts/hmasd_admission.py",
+        "bytes": 19793,
+        "sha256": "0faa5d53fba5af9b1a2fc4979bde5bd50bcbcaac2dbef938e90a64680156cf4d"
+      }
+    ]
+  },
+  "continuation_source_identities": [
+    {
+      "path": "experiments/candidates/uav_user_waiting/b02_continuation/__init__.py",
+      "bytes": 78,
+      "sha256": "a716d0e1b4f113f816b4387fe881e53015a186498f7bdda799f6b845da1cc2f0"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b02_continuation/failure_capture.py",
+      "bytes": 11118,
+      "sha256": "afdc6bdccc77fd358a61f48f22fbbc137b57d561fb5798e44e85e5805d8efd8a"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b02_continuation/read.py",
+      "bytes": 5226,
+      "sha256": "bc93bbc312646aff0ac62e16f8d302023e0d3498370330e6502a227d0002dae8"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b02_continuation/run.py",
+      "bytes": 1572,
+      "sha256": "ca2b04ee19376521841fc5b8e71b87cc692f5ff54a38ce467aa444f3167c14f4"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b02_continuation/study.py",
+      "bytes": 12195,
+      "sha256": "2105ec6f0dafc13744e12076a72212e1e1fd27c5d1b11b2d6c744108da9ba912"
+    }
+  ],
+  "parent": {
+    "source_sha": "16500b6f85c8cd20a7765801ed413608c36cf9f0",
+    "output_root": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a01",
+    "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/d93ce289af2028b3c172d7b3cc21daa31d7dd32569f276d18400d265d776dc84.json",
+    "metadata_hashes": {
+      "launch-manifest.json": "f20656715060fb50126fe368fde717e8626ef2a30b38a43799ac7b9cff81a4b1",
+      "config.json": "e2c1ddee800b9afde9e2efbe7d1ebc2eb2ed9352388b7d33a0dc6cb3221d28cb",
+      "summary.json": "d9e1060d93d4d8181e371a6ccc7220c74102f6740c797fea09188706366d62a8",
+      "process-exit.json": "03ada784587a8beb1b8195a48207151b9d4f392e50b5b1e24fee485ab8f01d0c"
+    },
+    "reading_sha256": "e971cf194942ecc99278e63e8ba64f397242c44a638a5a1acf88fbd5636bbd18",
+    "original_counts": {
+      "constructors": 1,
+      "explicit_resets": 7,
+      "native_step_calls": 1648,
+      "team_steps": 1648,
+      "complete_episodes": 6,
+      "fit_started": 0,
+      "optimizer_steps": 0
+    },
+    "artifacts": [
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a01/raw/A_29322000.npz",
+        "bytes": 2672947,
+        "sha256": "34ac3a12d338082cb32279080346195db89ddf126dd20764eb1657d8ecb2e2ef"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a01/raw/M_29322000.npz",
+        "bytes": 1392932,
+        "sha256": "af6f2ef7b78f79598066943db81a4066c9dbe3610a8eff307549e75fdaa2a871"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a01/raw/M_29322001.npz",
+        "bytes": 1366102,
+        "sha256": "0b88b49e4d5a50a44a2e5cf8e26a191cbd6bae808791fe4a0d530f5866927ccd"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a01/raw/R_29322000.npz",
+        "bytes": 1230619,
+        "sha256": "b26957e99594fe40bfa5e877f1840271fe8a14edb1e18bd8a00b65b71d150de9"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a01/raw/R_29322001.npz",
+        "bytes": 553351,
+        "sha256": "a5f6f5a0d907dc15d9186fb47616f851a2e489e910797be75ffcd18d7443c643"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a01/raw/S_29322000.npz",
+        "bytes": 1255295,
+        "sha256": "7cf78b3fbf1d787d3b7c8de702651a87658eff43cd1eac713cca006b4113608f"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a01/raw/S_29322001.npz",
+        "bytes": 1197901,
+        "sha256": "3bcf246ad11ecaf08eb562df9b74a8a085795c2edf8a956b86b8410e76a0eee7"
+      }
+    ]
+  },
+  "reused_complete_episodes": 6,
+  "new_schedule": [
+    [
+      "R",
+      29322001
+    ],
+    [
+      "A",
+      29322001
+    ],
+    [
+      "M",
+      29322002
+    ],
+    [
+      "R",
+      29322002
+    ],
+    [
+      "A",
+      29322002
+    ],
+    [
+      "S",
+      29322002
+    ],
+    [
+      "R",
+      29322003
+    ],
+    [
+      "A",
+      29322003
+    ],
+    [
+      "S",
+      29322003
+    ],
+    [
+      "M",
+      29322003
+    ],
+    [
+      "R",
+      29322004
+    ],
+    [
+      "M",
+      29322004
+    ],
+    [
+      "S",
+      29322004
+    ],
+    [
+      "A",
+      29322004
+    ],
+    [
+      "M",
+      29322005
+    ],
+    [
+      "S",
+      29322005
+    ],
+    [
+      "A",
+      29322005
+    ],
+    [
+      "R",
+      29322005
+    ],
+    [
+      "S",
+      29322006
+    ],
+    [
+      "A",
+      29322006
+    ],
+    [
+      "R",
+      29322006
+    ],
+    [
+      "M",
+      29322006
+    ],
+    [
+      "A",
+      29322007
+    ],
+    [
+      "R",
+      29322007
+    ],
+    [
+      "M",
+      29322007
+    ],
+    [
+      "S",
+      29322007
+    ],
+    [
+      "A",
+      29322008
+    ],
+    [
+      "S",
+      29322008
+    ],
+    [
+      "M",
+      29322008
+    ],
+    [
+      "R",
+      29322008
+    ],
+    [
+      "S",
+      29322009
+    ],
+    [
+      "M",
+      29322009
+    ],
+    [
+      "R",
+      29322009
+    ],
+    [
+      "A",
+      29322009
+    ],
+    [
+      "M",
+      29322010
+    ],
+    [
+      "R",
+      29322010
+    ],
+    [
+      "A",
+      29322010
+    ],
+    [
+      "S",
+      29322010
+    ],
+    [
+      "R",
+      29322011
+    ],
+    [
+      "A",
+      29322011
+    ],
+    [
+      "S",
+      29322011
+    ],
+    [
+      "M",
+      29322011
+    ],
+    [
+      "R",
+      29322012
+    ],
+    [
+      "M",
+      29322012
+    ],
+    [
+      "S",
+      29322012
+    ],
+    [
+      "A",
+      29322012
+    ],
+    [
+      "M",
+      29322013
+    ],
+    [
+      "S",
+      29322013
+    ],
+    [
+      "A",
+      29322013
+    ],
+    [
+      "R",
+      29322013
+    ],
+    [
+      "S",
+      29322014
+    ],
+    [
+      "A",
+      29322014
+    ],
+    [
+      "R",
+      29322014
+    ],
+    [
+      "M",
+      29322014
+    ],
+    [
+      "A",
+      29322015
+    ],
+    [
+      "R",
+      29322015
+    ],
+    [
+      "M",
+      29322015
+    ],
+    [
+      "S",
+      29322015
+    ],
+    [
+      "A",
+      29322016
+    ],
+    [
+      "S",
+      29322016
+    ],
+    [
+      "M",
+      29322016
+    ],
+    [
+      "R",
+      29322016
+    ],
+    [
+      "S",
+      29322017
+    ],
+    [
+      "M",
+      29322017
+    ],
+    [
+      "R",
+      29322017
+    ],
+    [
+      "A",
+      29322017
+    ],
+    [
+      "M",
+      29322018
+    ],
+    [
+      "R",
+      29322018
+    ],
+    [
+      "A",
+      29322018
+    ],
+    [
+      "S",
+      29322018
+    ],
+    [
+      "R",
+      29322019
+    ],
+    [
+      "A",
+      29322019
+    ],
+    [
+      "S",
+      29322019
+    ],
+    [
+      "M",
+      29322019
+    ],
+    [
+      "R",
+      29322020
+    ],
+    [
+      "M",
+      29322020
+    ],
+    [
+      "S",
+      29322020
+    ],
+    [
+      "A",
+      29322020
+    ],
+    [
+      "M",
+      29322021
+    ],
+    [
+      "S",
+      29322021
+    ],
+    [
+      "A",
+      29322021
+    ],
+    [
+      "R",
+      29322021
+    ],
+    [
+      "S",
+      29322022
+    ],
+    [
+      "A",
+      29322022
+    ],
+    [
+      "R",
+      29322022
+    ],
+    [
+      "M",
+      29322022
+    ],
+    [
+      "A",
+      29322023
+    ],
+    [
+      "R",
+      29322023
+    ],
+    [
+      "M",
+      29322023
+    ],
+    [
+      "S",
+      29322023
+    ],
+    [
+      "A",
+      29322024
+    ],
+    [
+      "S",
+      29322024
+    ],
+    [
+      "M",
+      29322024
+    ],
+    [
+      "R",
+      29322024
+    ],
+    [
+      "S",
+      29322025
+    ],
+    [
+      "M",
+      29322025
+    ],
+    [
+      "R",
+      29322025
+    ],
+    [
+      "A",
+      29322025
+    ],
+    [
+      "M",
+      29322026
+    ],
+    [
+      "R",
+      29322026
+    ],
+    [
+      "A",
+      29322026
+    ],
+    [
+      "S",
+      29322026
+    ],
+    [
+      "R",
+      29322027
+    ],
+    [
+      "A",
+      29322027
+    ],
+    [
+      "S",
+      29322027
+    ],
+    [
+      "M",
+      29322027
+    ],
+    [
+      "R",
+      29322028
+    ],
+    [
+      "M",
+      29322028
+    ],
+    [
+      "S",
+      29322028
+    ],
+    [
+      "A",
+      29322028
+    ],
+    [
+      "M",
+      29322029
+    ],
+    [
+      "S",
+      29322029
+    ],
+    [
+      "A",
+      29322029
+    ],
+    [
+      "R",
+      29322029
+    ],
+    [
+      "S",
+      29322030
+    ],
+    [
+      "A",
+      29322030
+    ],
+    [
+      "R",
+      29322030
+    ],
+    [
+      "M",
+      29322030
+    ],
+    [
+      "A",
+      29322031
+    ],
+    [
+      "R",
+      29322031
+    ],
+    [
+      "M",
+      29322031
+    ],
+    [
+      "S",
+      29322031
+    ],
+    [
+      "A",
+      29322032
+    ],
+    [
+      "S",
+      29322032
+    ],
+    [
+      "M",
+      29322032
+    ],
+    [
+      "R",
+      29322032
+    ],
+    [
+      "S",
+      29322033
+    ],
+    [
+      "M",
+      29322033
+    ],
+    [
+      "R",
+      29322033
+    ],
+    [
+      "A",
+      29322033
+    ],
+    [
+      "M",
+      29322034
+    ],
+    [
+      "R",
+      29322034
+    ],
+    [
+      "A",
+      29322034
+    ],
+    [
+      "S",
+      29322034
+    ],
+    [
+      "R",
+      29322035
+    ],
+    [
+      "A",
+      29322035
+    ],
+    [
+      "S",
+      29322035
+    ],
+    [
+      "M",
+      29322035
+    ],
+    [
+      "R",
+      29322036
+    ],
+    [
+      "M",
+      29322036
+    ],
+    [
+      "S",
+      29322036
+    ],
+    [
+      "A",
+      29322036
+    ],
+    [
+      "M",
+      29322037
+    ],
+    [
+      "S",
+      29322037
+    ],
+    [
+      "A",
+      29322037
+    ],
+    [
+      "R",
+      29322037
+    ],
+    [
+      "S",
+      29322038
+    ],
+    [
+      "A",
+      29322038
+    ],
+    [
+      "R",
+      29322038
+    ],
+    [
+      "M",
+      29322038
+    ],
+    [
+      "A",
+      29322039
+    ],
+    [
+      "R",
+      29322039
+    ],
+    [
+      "M",
+      29322039
+    ],
+    [
+      "S",
+      29322039
+    ],
+    [
+      "A",
+      29322040
+    ],
+    [
+      "S",
+      29322040
+    ],
+    [
+      "M",
+      29322040
+    ],
+    [
+      "R",
+      29322040
+    ],
+    [
+      "S",
+      29322041
+    ],
+    [
+      "M",
+      29322041
+    ],
+    [
+      "R",
+      29322041
+    ],
+    [
+      "A",
+      29322041
+    ],
+    [
+      "M",
+      29322042
+    ],
+    [
+      "R",
+      29322042
+    ],
+    [
+      "A",
+      29322042
+    ],
+    [
+      "S",
+      29322042
+    ],
+    [
+      "R",
+      29322043
+    ],
+    [
+      "A",
+      29322043
+    ],
+    [
+      "S",
+      29322043
+    ],
+    [
+      "M",
+      29322043
+    ],
+    [
+      "R",
+      29322044
+    ],
+    [
+      "M",
+      29322044
+    ],
+    [
+      "S",
+      29322044
+    ],
+    [
+      "A",
+      29322044
+    ],
+    [
+      "M",
+      29322045
+    ],
+    [
+      "S",
+      29322045
+    ],
+    [
+      "A",
+      29322045
+    ],
+    [
+      "R",
+      29322045
+    ],
+    [
+      "S",
+      29322046
+    ],
+    [
+      "A",
+      29322046
+    ],
+    [
+      "R",
+      29322046
+    ],
+    [
+      "M",
+      29322046
+    ],
+    [
+      "A",
+      29322047
+    ],
+    [
+      "R",
+      29322047
+    ],
+    [
+      "M",
+      29322047
+    ],
+    [
+      "S",
+      29322047
+    ],
+    [
+      "A",
+      29322048
+    ],
+    [
+      "S",
+      29322048
+    ],
+    [
+      "M",
+      29322048
+    ],
+    [
+      "R",
+      29322048
+    ],
+    [
+      "S",
+      29322049
+    ],
+    [
+      "M",
+      29322049
+    ],
+    [
+      "R",
+      29322049
+    ],
+    [
+      "A",
+      29322049
+    ],
+    [
+      "M",
+      29322050
+    ],
+    [
+      "R",
+      29322050
+    ],
+    [
+      "A",
+      29322050
+    ],
+    [
+      "S",
+      29322050
+    ],
+    [
+      "R",
+      29322051
+    ],
+    [
+      "A",
+      29322051
+    ],
+    [
+      "S",
+      29322051
+    ],
+    [
+      "M",
+      29322051
+    ],
+    [
+      "R",
+      29322052
+    ],
+    [
+      "M",
+      29322052
+    ],
+    [
+      "S",
+      29322052
+    ],
+    [
+      "A",
+      29322052
+    ],
+    [
+      "M",
+      29322053
+    ],
+    [
+      "S",
+      29322053
+    ],
+    [
+      "A",
+      29322053
+    ],
+    [
+      "R",
+      29322053
+    ],
+    [
+      "S",
+      29322054
+    ],
+    [
+      "A",
+      29322054
+    ],
+    [
+      "R",
+      29322054
+    ],
+    [
+      "M",
+      29322054
+    ],
+    [
+      "A",
+      29322055
+    ],
+    [
+      "R",
+      29322055
+    ],
+    [
+      "M",
+      29322055
+    ],
+    [
+      "S",
+      29322055
+    ],
+    [
+      "A",
+      29322056
+    ],
+    [
+      "S",
+      29322056
+    ],
+    [
+      "M",
+      29322056
+    ],
+    [
+      "R",
+      29322056
+    ],
+    [
+      "S",
+      29322057
+    ],
+    [
+      "M",
+      29322057
+    ],
+    [
+      "R",
+      29322057
+    ],
+    [
+      "A",
+      29322057
+    ],
+    [
+      "M",
+      29322058
+    ],
+    [
+      "R",
+      29322058
+    ],
+    [
+      "A",
+      29322058
+    ],
+    [
+      "S",
+      29322058
+    ],
+    [
+      "R",
+      29322059
+    ],
+    [
+      "A",
+      29322059
+    ],
+    [
+      "S",
+      29322059
+    ],
+    [
+      "M",
+      29322059
+    ],
+    [
+      "R",
+      29322060
+    ],
+    [
+      "M",
+      29322060
+    ],
+    [
+      "S",
+      29322060
+    ],
+    [
+      "A",
+      29322060
+    ],
+    [
+      "M",
+      29322061
+    ],
+    [
+      "S",
+      29322061
+    ],
+    [
+      "A",
+      29322061
+    ],
+    [
+      "R",
+      29322061
+    ],
+    [
+      "S",
+      29322062
+    ],
+    [
+      "A",
+      29322062
+    ],
+    [
+      "R",
+      29322062
+    ],
+    [
+      "M",
+      29322062
+    ],
+    [
+      "A",
+      29322063
+    ],
+    [
+      "R",
+      29322063
+    ],
+    [
+      "M",
+      29322063
+    ],
+    [
+      "S",
+      29322063
+    ]
+  ],
+  "planned_new_episodes": 250,
+  "planned_new_steps": 64000,
+  "planned_fits": 0,
+  "valid_panel_episodes": 256,
+  "valid_panel_steps": 65536,
+  "original_failed_prefix_steps": 112,
+  "total_result_exposure_steps": 65648,
+  "retry_contract": "selected distinct continuation; standard fresh admission; not --retry-of same-source replay",
+  "failure_capture": "exception-only selected traceback operands; no normal policy/search/RNG hook; no automatic further retry"
+}

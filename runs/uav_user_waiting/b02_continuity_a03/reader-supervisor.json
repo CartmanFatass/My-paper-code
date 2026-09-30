@@ -1,0 +1,12 @@
+{
+  "name": "uav-user-waiting-b02-reader-a03",
+  "pid": 1129756,
+  "start_ticks": 112418663,
+  "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+  "task_start": 1790780801,
+  "wrapper_sha256": "481f035b449b6cb4712de59ce2c48a93d78f0423936b814da893acf3b95ebbdb",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/97402e6dc42c44dfbac06b78f3c7f145",
+  "output_root": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03",
+  "science_sha": "db13ccf307e9cf467450fdad8318721fb8db603a",
+  "threads": 1
+}
