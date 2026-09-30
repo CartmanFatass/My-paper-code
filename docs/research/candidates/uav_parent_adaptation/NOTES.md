@@ -2231,3 +2231,546 @@ successor. The concrete re-entry would be a prospectively selected consequential
 learning or transfer comparison, retaining I as an ordinary comparator and all
 earlier adverse constraints. Root owns any next cross-question allocation; that is
 not a pending approval or a fabricated external dependency for completed B03.
+
+<a id="b04-marginal-coupling-proposal"></a>
+## 2026-09-30 — B04 scientific design: coordinate fixed local distributions
+
+**Design boundary, not result execution.** Root assigned this same DM the question
+at16:27UTC, after accepting B03's completed disposition. Published allocation
+`df524c9ad36f8d3d25acdda4e4db9dd6dc223e7f` selects scientific design only:
+**0fits/0native steps/no result implementation**. The proposal below recommends a
+bounded purchase for Root's cross-question allocation; it does not launch it.
+The existing independent Astra Max Oracle `/root/deep_report_review` supplied the
+complete construction and challenge below. No additional discovery or critic
+layer was commissioned. Its review covers the substantive choice; ordinary
+implementation would still need the separate engineering review.
+
+The consequential phenomenon is that two competent local distributions have
+useful sampled deployment but adverse temporal-service/movement tradeoffs. Can
+their joint dependence be changed to improve complete service while keeping each
+controller's conditional local action marginal fixed? The intended contribution
+is restricted-asset usefulness and empirical understanding of this joint choice,
+not a new learning algorithm, diagnosed PPO failure or architectural novelty.
+My recommendation is the full six-law comparison plus deterministic C described
+below: **416episodes/106496 native team steps/0fits**. The original inherited S
+is the fixed input; the independently selected inheritance recurrence is neither
+a prerequisite nor a replacement-asset selector.
+
+### Scientific continuity and current background
+
+I refreshed published main at`df524c9ad` and read the relevant current
+[topic2](../../RESEARCH.md#2-部分可观测性要求处理信息不要求每次都重新训练),
+[topic4](../../RESEARCH.md#4-学习理论表示能力和有限训练结果处在不同层面),
+[topic5](../../RESEARCH.md#5-技能和异步性是组织决策的方式其收益需要证据) and
+[topic8](../../RESEARCH.md#8-数学信息与博弈结构怎样帮助dm选择实验).
+Their concrete effects are: retain ordinary stochastic Q as a competent comparator;
+retain S as a conditional useful asset with a charged helper and adverse minima;
+keep learning-program value separate from fixed-asset deployment; and locate this
+intervention in the joint action law, with an explicit added common device.
+No new reading weakens the B03 rejection or identifies entropy/credit as its cause.
+
+The immediate positive sources are [B03's complete C/I reading](#b03-complete-reading)
+at`8b7a3c056` and inheritance B02's
+[complete reading](../uav_fleet_adaptation/NOTES.md#b02-complete-reading) and
+[independent disposition](../uav_fleet_adaptation/NOTES.md#b02-independent-disposition),
+published as`269d5d03f` and`e6b1a3243`. I−C has+.023721J/+1.709106service but
+worse within-episode service p10 and more travel. S_sampled−C has+.046566J/
++3.352905service, conditional on one fitted lineage, with21/32 adverse episode
+minimum-service comparisons and greater query CPU than memoized C. These panels
+cannot be subtracted to rank S and I. The proposed common fresh panel buys that
+missing complete-package comparison while testing coupling within each base.
+B01/B02 parent-learning capabilities and losses, including the76tick outage,
+remain evidence; this is not an attempt to explain them with one common cause.
+
+The host supplies genuine coupling through simultaneous motion, interference and
+joint user assignment. A single-agent perturbation argument cannot determine the
+sign of that interaction. Reduced simultaneous departures might preserve service;
+conversely, simultaneous departures might enable a beneficial joint move or keep
+agents from being trapped by staggered behavior. B explicitly tests the opposing
+construction. Neither departure frequency nor a proxy pair statistic predicts
+native value by itself.
+
+### Bound assets and actual execution interface
+
+The planned object is `UAV-PARENT-JOINT-SAMPLING-B04`, proposed tag
+`b04_joint_sampling_a01`, owned in this direction's existing paths. No executable
+or run directory was created for this design. The source contract reuses the
+original inheritance launch `e945483b85c7f8ddfc315c57f36938d6c14201c7` and all15
+hashes in its [configuration](../../../../runs/uav_fleet_adaptation/b02_inheritance_a01/config.json).
+I independently compared every one with current files: all15 match. The Oracle
+also verified these bindings and the retained asset's availability/hash. A future
+runner must bind those exact sources and fail on drift, rather than import a
+different helper or host because it has the same name.
+
+The frozen S input is
+`hmasd-wsl-node:/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b02_inheritance_a01/assets/S.pt`,
+424487bytes, file SHA256
+`b9e25fca68109bb50fa64fadfc90939ad6a4669058c1c0ccd1351c8bbcefe12a`,
+tensor-state SHA256
+`6fa2eddc542d8f5293f5daf6a989b97a9d7d5f56f484f1eb6bddc6a87d27de0c`.
+It is the8000-update endpoint:114→128ReLU→128ReLU→27,34715 FP32 parameters,
+CPU evaluation, temperature1. Its acquisition remains1fit/81920 C labels/
+8000 updates/4096000 supervised sample presentations; the original complete
+acquisition/evaluation paid114688 native steps and107.544 worker+reader CPU-s.
+This proposal adds no label, optimizer step, training fit or checkpoint selection.
+
+The actual factory is
+`experiments/candidates/ucope/uav_motion_prefix_b01/environment.py:make_real`:
+N5/U50/H256, uniform static users,1000m square, height50–150m,30m/s,1s native
+tick, all-on free-space radio, no shadowing/FDMA/paper reward,20 observed users,
+vectorized channel. One environment constructor performs one unscored reset;
+the array adapter's constructor only seeds its own RNG and does not reset the
+base again. The planned worker reuses that one instance for416 explicit resets.
+There is no silence action, battery state, service-age reward or demand process.
+The native mean objective is the saved per-tick team reward, checked as
+`.7*served_users/50 + .3*connected_quality`; quality uses the existing clipped
+SINR expression. All physical/native outputs remain audit-only, outside actor
+arguments.
+
+Each of64 decisions, at ticks0,4,…,252, uses a frozen pre-step observation for
+all five agents, then holds each selected command for four native ticks. Commands
+are the existing27 Cartesian triples in{-1,0,1}³; clipping at physical boundaries
+can alias distinct labels. Each controller receives only its current104-value
+local row and its own navigation state. The relevant103 non-clock FP32 values,
+10-way pre-navigation encoding and lawful fallback bit form S's114 inputs.
+Initial navigation is the existing nearest-waypoint choice; the same analytic
+helper updates it on the agent's actual trajectory. It retains its analytic
+radio/fallback work. Nothing reads another agent's local row, logits, probabilities,
+modal command, actual command or navigation state for action selection.
+
+Q obtains C's command through the exact existing `MemoC.query`. S obtains its
+features/logits/probabilities through `StudentPolicy(..., sampled=False).query`,
+ignoring that method's returned greedy action and applying the common sampler
+below to its saved float64 probabilities. This interface makes **zero current C
+ranking queries on S trajectories**. Cache entries are features/logits/helper
+results, never sampled actions: each agent's exact key is412 ordered observation
+bytes plus its pre-navigation byte. Each episode creates fresh per-agent caches;
+there is no sharing across policies/worlds. A fresh draw occurs on every decision
+including cache hits. No old sampled trajectory is replayed as a new result.
+
+### Fixed local law and the supplied common-device contract
+
+Base Q assigns .9 to its own current C command and .1/26 to every other command
+in float64. It is motivated by B03 I, **not a bitwise reproduction** of B03's FP32
+`torch.multinomial` path. Base S uses the original weights, temperature and
+`categorical_probabilities` float64 softmax of its FP32 logits, with no tuning,
+floor, truncation or added teacher. Let m be the lowest-index maximizer of this
+computed p, q=1−p[m], and let the tail be the ascending action indices excluding m.
+
+I refine the Oracle's real-valued construction to avoid claiming that floating
+`(U+i/5)%1` is an exact permutation of a finite uniform grid. Let M=2^53 and
+draw integers uniformly from0,…,M−1. For rank i, d_i=floor(i*M/5), computed with
+integers. The departure input is private K_i in I, `(K+d_i)%M` in A, and common
+K in B. These are exact grid permutations. The same departure threshold
+b=ceil(M*q), clamped only to the valid endpoints0/M, and the same private tail
+decoder are used in all three laws. Invalid/nonfinite probabilities are errors,
+not fallbacks to a different policy.
+
+For an explicit common finite decoder, normalize the nonmodal vector by its own
+float64 sum, accumulate in ascending command order, and convert its CDF boundaries
+to integer thresholds by ceil(M*CDF), with terminal boundary M. A private integer
+L selects its half-open bin; q=0 selects m and needs no tail action. If the tail
+thresholds are t_j, the implemented probabilities are exactly
+`p_tilde[m]=1−b/M` and `p_tilde[a_j]=(b/M)*(t_j−t_(j−1))/M` under the declared
+finite draws. **p_tilde is identical across I/A/B for every same local input**.
+The intended real-valued identity is p[m] plus q times its normalized tail;
+common floating normalization and53-bit quantization are declared approximations,
+not a silent retuning. This two-draw decoder is not bitwise the old S inverse-CDF
+sampler either. The implementation checks must cover rounding boundaries, ties,
+q=0, unequal q, normalization and exact interval counts on small integer fixtures;
+they must not demand empirical episode frequencies match after visitation changes.
+
+The conditional statement averages over the *fresh current* device/private draws,
+given each pre-draw local history (and also holds given the joint pre-draw history).
+It is not a claim after conditioning on the realized common coin, nor equality of
+realized episode counts/occupancies. Each local p is built before access to the
+current entry; no future entries, tape root or environment seed enter the policy.
+The public device is independent of the scene and of previous entries. Tail draws
+are independent across agents and from departure draws, while matched by
+world/tape/tick/agent across all six stochastic policies. This is common random
+numbers for precision across comparisons, not extra online communication.
+
+For ideal Q, E[K_depart]=.5; I/A/B have P(K_depart≥2)=.08146/0/.1. The declared
+finite decoder makes only its explicit grid/normalization change to these ideal
+numbers; Q's A intervals remain strictly disjoint. Do not promote the real-valued
+q≤.2 boundary into an exact finite-grid guarantee. There is **no exclusivity or
+universal negative-correlation claim for S**. On a saved row, exact implemented
+pair expectations are b_i*b_j/M² for I, min(b_i,b_j)/M for B, and the cardinality
+of the intersection of their shifted integer intervals divided by M for A. The
+Oracle's old-state values below use its real-valued analytical construction; they
+are motivation, not planned new-policy outcomes or exact finite-grid checks.
+
+The existing common four-tick clock is retained. A public random device and
+fixed roster ranks0–4 are **new supplied coordination rights**, even though the
+array evaluator already had agent indices. All six stochastic policies receive
+the same rights, initialization and charged provision; deterministic C may ignore
+them. Rank is fixed by `uav_0,…,uav_4`, not learned, optimized or matched to the
+identities of anonymous visible peers. No rank or coin is appended to S's neural
+input; the decoder alone uses it. State-dependent shared recommendations, parent
+actions and joint observations would be another contract and are excluded.
+
+A concrete implementation provisions64 uint64 public entries=512bytes per
+episode, plus two private64-entry tapes=1024bytes/agent and five one-byte ranks.
+That is5632 unique tape bytes per bundle, or7680bytes if public entries are copied
+to each controller, plus5 rank bytes. Sixty-four world/tape bundles require360448
+unique tape bytes. Pre-provisioning synchronized tapes has zero online message
+payload in this simulator; provisioning, rank agreement and synchronized access
+are supplied assumptions, not free physical capabilities. Real transport,
+synchronization error, latency, battery/radio costs are **unmodeled**, so this
+study cannot establish a physical net benefit of a beacon or communication scheme.
+Measure actual sampler/helper/forward CPU and full trace-inclusive wall/CPU.
+Equal access does not imply these programs have identical actual compute costs.
+
+### Complete comparison and prospective reading
+
+Proposed fresh worlds are29346000–29346031, with independent innovation replicates
+0 and1. No outcome from these identities was opened or generated in this design.
+Public/private-departure/private-tail roots are respectively29346091/29346092/
+29346093, in separate `SeedSequence` namespaces indexed by world and tape, and
+by agent for private tapes. The world identifier only addresses the evaluator's
+independent draws; controllers never receive it. These identities are disjoint
+from original S acquisition/evaluation and the earlier parent panels. Freeze
+them and the exact source/asset hashes before any exposure.
+
+The six stochastic arms are Q_I,Q_A,Q_B,S_I,S_A,S_B, each32worlds×2tapes.
+Deterministic C runs once per world because its second innovation repetition
+would be identical:384+32=416 complete episodes,106496 primitive team steps.
+All32 worlds and both tapes stay in the reading, including inactive, aliased or
+adverse cases. No new S0, greedy-S, checkpoint-selection panel, pilot, correlation
+sweep or training recurrence is included. This comparison deliberately leaves
+sampled S versus sampled untrained S0 and the source of S's learned competence open.
+
+For balanced execution, use the fixed13-item base order
+`C,Q_I0,S_I0,Q_A0,S_A0,Q_B0,S_B0,Q_I1,S_I1,Q_A1,S_A1,Q_B1,S_B1`, cyclically
+rotated by world-index modulo13. C ignores innovation draws. Reset the host and
+every controller cache/navigation state per episode; no process restart or extra
+environment constructor is needed between cells. Measure timings honestly on the
+actual admitted node, not as intrinsic speed claims from a shared machine.
+
+Primary prediction: **S_A−S_I increases mean complete J without decreasing the
+mean of within-episode service p10**. First average the two paired tape effects
+within each world, then give the32 worlds equal weight. The predeclared point
+prediction requires mean ΔJ>0 and mean Δservice_p10≥0. Report paired t95 intervals
+over these32 blocks, all paired counts and the complete losses alongside it.
+A point pass is conditional exploratory support, not population noninferiority.
+If the continuity interval crosses negative values, mean continuity remains
+uncertain even when its point estimate is positive. A J gain plus a negative
+continuity estimate is a tradeoff; no nonsignificant loss becomes proof of safety,
+equivalence or preservation. Positive lower J bound and nonnegative lower
+service-p10 bound would supply stronger descriptive support for this bounded
+asset/contract, still not confirmation across independent trained instances.
+
+Read the opposing S_B−S_I and ordinary Q_A−Q_I/Q_B−Q_I comparisons in full.
+Read S_law−Q_law for each matched law and all arms versus C as complete-package
+comparisons. These fixed secondary effects are exploratory, with unadjusted
+descriptive intervals; the largest observed secondary is not retrospectively the
+primary. Two tapes and32 worlds do not create independent training replication.
+
+Required outcomes are mean J/service/connected quality; per-episode service
+p10/minimum and zero-service count/longest gap; episode-J distribution/p10;
+mean and per-agent path; boundary-contact/command-alias counts; helper, cache,
+forward, sampler and complete runtime/storage costs. Retain every step's own
+positions, native observations, reward/service/quality, SINR and connections,
+and every decision's lawful features/navigation/fallback, base p/logits where
+applicable, modal/selected commands, integer innovations/thresholds, cache hit
+and paid C candidate scores. Full truth remains audit-only.
+
+For each stochastic joint decision also read conditional expected departures,
+each law's pair-coincidence expectation, actual categorical departures and
+departures that yield a different four-tick own-motion path from the modal
+command after clipping. This last audit only evolves an agent's deterministic
+own coordinates from its recorded starting position; it does not call the
+environment/radio or attach a counterfactual reward. Requested versus physical
+departure and changing conditional q separate aliasing/visitation from marginal
+retuning. They do not identify a reward mediator or license dropping quiet worlds.
+
+Disposition is prospective: useful S_A retains a conditional deployment capability;
+comparably useful/lower-cost Q_A favors the ordinary package for that use; useful B
+rejects a generic staggering preference; mean gain with worse continuity/path
+retains the explicit tradeoff. Changed joint exposure without native benefit
+ends this specific coupling purchase. Sparse/aliased changes narrow the reading
+but the complete negative remains paid evidence. No result automatically selects
+a new coupling, entropy fit, asset replacement or repair. A confidence interval
+that is wide or crosses zero can leave the question unresolved without obliging
+another batch.
+
+### Full prospective cost, retention and implementation boundary
+
+There are133120 total controller requests:71680 C requests from224 episodes
+(192 Q plus32 C), and61440 S requests from192 episodes. Before memo hits, the
+worker ceilings are:
+
+| Work | Ceiling or exact planned exposure |
+|---|---:|
+| New fits / optimizer steps / new teacher labels | 0 / 0 / 0 |
+| Complete episodes / native team steps | 416 / 106496 |
+| C candidate four-tick paths / modeled ticks | 1935360 / 7741440 |
+| C candidate power evaluations / setup power evaluations | 154828800 / 7168000 |
+| S helper power evaluations / neural forward rows | 8601600 / 61440 |
+| Native dense link-power slots: (416×257+1)×(5×50+5²) | 29401075 |
+| Combined conservative power-slot ceiling | 199999475 |
+
+The native number is dense matrix-slot accounting, including diagonal/symmetric
+slots; it is not a claim of that many distinct physical links or scalar function
+calls. C ceilings use27 candidates×4ticks×up-to20 users plus up-to100 setup
+powers/request; S uses up-to100 setup plus40 extreme-motion powers/request.
+Actual helper/ranking/forward counts and cache hits must be saved. The single
+constructor reset is charged separately from416 episode resets; any changed
+lifecycle must update the prospective cost before launch. There are no C shadow
+rankings or branch rollouts on S states.
+
+The separately charged reader will stream saved episodes and recompute reductions,
+source/asset/RNG/cache/navigation/action bindings and the paid C-score selection.
+Replay **at most61440 S forward rows** from saved lawful features, in original
+one-row FP32 evaluation semantics; no optimizer or environment calls. Check532480
+recorded agent-tick motions. Physical-alias reading adds at most491520 own-motion
+steps (384×320×4), with no radio/reward counterfactual. Pair-law algebra covers
+24576 saved stochastic joint rows. Native reductions use already saved SINR and
+connections; this is not an independent re-execution of all channel physics.
+The exact scope/limitations and read counts belong in the eventual reading record.
+Navigation checks use the recorded fallback/position and exact cache binding;
+fallback correctness remains tied to the pinned helper and focused correctness
+checks. Do not describe that as an independent replay of every helper radio call.
+
+Oracle's measured reference timing was about.156CPU-s/C episode and.235CPU-s/S
+episode; new visitation can alter cache rates. Budget **2–6 worker CPU-minutes
+plus.5–3 reader CPU-minutes** as a provisional estimate, not a measured quote,
+timeout or native stopping rule. Engineering and review are additional unmetered
+investment. Use one CPU thread, no GPU, on the configured preferred `wsl_4070`
+interpreter `/home/wu/.venvs/hmasd-gcc-31021/bin/python` if selected and freshly
+admitted. A conservative working estimate is≤2GiB resident memory and≤1GiB new
+bulk disk; actual-node admission must preserve the configured4GiB free-memory
+floor and verify free disk. No new admission receipt is needed for this0native
+design; no result-node capacity is claimed reserved.
+
+Retain one canonical raw bundle and its manifests/hashes on the result node;
+publish compact config/summary/reading/cost evidence under this direction.
+Reference the original S artifact with its hash rather than duplicating the whole
+inheritance tree. A necessary launcher-bound asset copy, if the input mechanism
+requires one, remains an input snapshot with a declared lifecycle, not another
+permanent evidence copy. Preserve adverse worlds, original S provenance and all
+earlier results. Delete only completed scratch/unused implementation and redundant
+copies after live-consumer checks; actual deletion/reclaimed bytes are a later
+closure fact. This design created no disposable code or raw bulk to clean.
+
+If Root selects this purchase, the bounded implementation scope is the common
+integer coupling decoder, a source-bound fixed-policy collector, pure saved-data
+reader and focused interface/corruption checks in this direction. Reuse the pinned
+C/S/helper/host modules; do not fork their scientific logic or alter the fleet
+DM's recurrence files. No neural optimizer or shared environment modification is
+needed. Independent engineering review must cover exact marginal/threshold
+semantics, fresh draws on cache hits, source/asset binding, local-input isolation,
+one-reset lifecycle, full accounting and reader corruption detection. Only after
+that work is accepted and exact inputs are published would current pause/lead,
+fresh actual-node resources and duplicate admission be checked for one detached
+operation with same-handle deterministic observation. That future sequence is
+not a launch accepted by this design note.
+
+### Why buy this comparison rather than the nearby alternatives?
+
+The strongest learning alternative remains the B03 critic's matched entropy-only
+fit:180224 native steps,1024 actor+1024 critic updates,24330240 C modeled ticks,
+roughly200 worker CPU-s plus fresh endpoint reading. Its intermediate prediction
+is less entropy/C-mass damage, and its useful native consequence must be sampled
+performance beyond I. It is more direct for rehabilitating that learner. I do
+not infer entropy is irrelevant, nor claim0fits makes coupling cheaper: this
+proposal's total runtime plus implementation can exceed that one conditional fit.
+
+I prefer coupling now because the independently selected inheritance recurrence
+already buys another observation of a learning lineage, while this proposal
+develops a currently useful asset and places the ordinary stochastic alternative
+under the same complete comparison and added rights. The allocation is
+complementary, not dependent on the recurrence's success. Keeping C/I/S without
+another experiment is a legitimate cheaper option but leaves the actionable
+joint-dependence question unanswered.
+
+A smaller independent-only S/Q/C panel would cost160episodes/40960steps and
+answer the missing package comparison, but it cannot answer coordination. Dropping
+B leaves288episodes/73728steps; the extra128episodes/32768steps purchase a
+substantively opposing dependence law, not a parameter sweep. Q-only coupling
+would omit the retained learned asset. An S0 arm would answer a different
+learning-origin question and is not purchased. No preliminary toy, physics branch
+screen or correlation scan is needed to decide whether to buy the full episodes.
+
+I accept the Oracle's recommendation, preserving the entropy alternative and its
+dissent-free limits. The primary-source readings support familiar restricted-
+controller/correlation-device framing, not the predicted gain. I read the
+load-bearing passages myself: foundations B03 printedp36 andpp72–73/PDF43,79,80;
+MAVEN P17 §§4–5; My-lib `icml-2023-pmlr-v202-chen23an` §§4–6; Inst-sci
+MARL-0590 pp2–4; Ross11 Algorithm3.1 and accompanying finite/infinite-sample
+conditions. Their source identities and links are in the full answer below;
+local metadata for B03/P17 is retained while their referenced PDFs were not
+present here, so I read the primary web PDFs. Chen and MARL-0590 were read from
+the cited local PDFs/JSON. Shared randomness can help restricted controllers
+without improving an unrestricted finite-horizon optimal policy class; MAVEN's
+learned episode latent and Chen's communicated parent-action DAG are different
+interfaces; obedient value is not strategic regret; DAgger does not guarantee
+this nonconvex final checkpoint. No novelty claim is made from a library screen.
+
+**Boundary returned:** complete source-bound proposal and original independent
+recommendation, with0new fits/0native exposure/0new forwards in this design.
+The remaining decision is Root's cross-question allocation. There is no accepted
+operation or unread producer and no claimed empirical coupling result.
+The Oracle's final native return explicitly supports the integer-grid refinement:
+implemented marginals are preserved across the three new decoders, with scope,
+costs and recommendation unchanged; **MATERIAL_DISSENT: no**. No new scientific
+review or further experiment was requested to clear that numerical refinement.
+
+<a id="b04-original-independent-recommendation"></a>
+### Complete original independent recommendation, received2026-09-30 16:38UTC
+
+The following is the full native answer from the already-assigned Oracle. Its
+real-valued sampling prescription is retained verbatim as evidence; the DM's
+explicit finite-grid refinement and completed source/cost contract above control
+the proposed implementation. Adviser agreement is not empirical evidence.
+
+<details>
+<summary>Original Oracle answer, complete</summary>
+
+**Retain the selected inheritance recurrence. For the parent-adaptation DM’s next study, I recommend a bounded test of joint sampling that preserves each agent’s conditional action probabilities.** I rank this above the proposed entropy ablation at this boundary. It develops the retained asset through a different deployment rule and asks a complementary question; it does not diagnose B03’s learning failure.
+
+The recommendation is **416 complete episodes, 106,496 native steps and zero new fits**, subject to the DM completing the source-bound proposal. This review does not authorize execution.
+
+The evidence supports this question
+
+B03 substantially weakens its exact learning recipe. Across three fits, learned greedy performance falls below C by mean J **−.010909**, and learned sampled performance falls below its initial sampled policy I by **−.077879**, with 93/96 adverse J comparisons. The intervention and learning were active. Entropy growth, declining C mass and worsening performance do not isolate entropy, credit estimation, optimization or visitation as the cause.
+
+Its useful positive is ordinary randomization: I improves mean J by **+.023721** and service by **+1.709106 users/tick**, while adding **1,650.7 m/UAV** of travel. It improves episode-J p10 but reduces mean within-episode service p10 from **19.53125 to 17.5**. I is the same fixed policy law across the three initial networks; these are 96 world/action observations, not three independently learned versions of I. The full result and original independent review support retaining this comparator and ending unchanged B03 investment. [B03 reading](/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b03_c_prior_a01/reading.json)
+
+The inherited S asset supplies a different useful positive. Its sampled deployment improves J over C by **+.046566** and service by **+3.352905**, conditional on one training lineage and its recorded deployment panel. Its mean episode minimum service is lower, with 21/32 adverse minimum-service comparisons, and its measured query CPU exceeds memoized C. Thus neither learned origin nor positive mean return establishes a preferable complete package. [Inheritance summary](/home/fires/hmasd-wsl/runs/uav_fleet_adaptation/b02_inheritance_a01/summary.json)
+
+There is enough stochastic exposure for the proposed intervention. From all 32 original S_sampled raw files, with matching hashes, I reconstructed its saved float64 probabilities:
+
+- Mean probability of departing from the modal action: **.154834**; median **.076201**.
+- **376/2,048** joint decision blocks contain at least two nonmodal actions.
+- All 32 worlds contain departures.
+- **3,200/10,240** agent rows have nonmodal mass above .2.
+
+On these same recorded states, the proposed laws give the following *analytical conditional expectations*, without another policy rollout:
+
+| Sampling law | Expected departing agent pairs per block |
+|---|---:|
+| Independent | .274119 |
+| Shifted public uniform | .194680 |
+| Common public uniform | .664426 |
+
+The shifted law reduces this quantity on 1,771 states and increases it on 277. It therefore changes relevant joint exposure, but it is **not universally negatively correlated**. These calculations predict neither reward nor the distributions encountered on the new policies’ own trajectories.
+
+The constructive comparison
+
+Freeze two base distributions:
+
+1. **Q:** memoized C supplies its preferred command from the agent’s actual local observation and navigation state. Assign probability .9 to that command and .1/26 to each other command. This is an explicitly new float64 law motivated by B03 I, not bitwise reproduction of its FP32 `torch.multinomial` implementation.
+2. **S:** use the original inherited endpoint, unchanged features, weights, temperature and probabilities. The canonical artifact remains available and its file hash matches
+   `b9e25fca68109bb50fa64fadfc90939ad6a4669058c1c0ccd1351c8bbcefe12a`.
+
+For either base distribution \(p_i\), let \(m_i\) be its modal action, \(q_i=1-p_i(m_i)\), and let the tail distribution be \(p_i(a)/q_i\) over \(a\ne m_i\). Use one uniform to decide departure and an independent private uniform to choose within the tail.
+
+| Law | Departure uniform for agent \(i\) |
+|---|---|
+| Independent I | Independent \(U_i\) |
+| Shifted A | \((U+i/5)\bmod 1\) |
+| Common B | Shared \(U\) |
+
+Draw fresh uniforms at each existing four-tick decision. Keep tail draws independent across agents and matched across comparisons.
+
+This construction preserves every agent’s conditional categorical distribution when averaging over the fresh draw. It preserves neither the full joint distribution nor the realized episode departure count after trajectories diverge.
+
+For Q, all three laws have expected **.5 departures per joint decision**. Their probabilities of at least two departures are respectively **.08146, 0 and .1**; B makes all five depart together on those occasions. A is exclusive only when all relevant \(q_i\le .2\). It has no such general guarantee for S.
+
+This is a useful intervention because it changes joint behavior without retuning departure probabilities, retraining logits or adding C queries to S. S uses its own modal action and normalized tail.
+
+The resource contract must be explicit
+
+The four-tick clock and fixed N=5 roster already exist in execution. A usable **public random device and roster rank for coupling** must nevertheless be declared as supplied coordination resources, rather than inferred from the evaluator’s existing agent indices.
+
+Give Q and S the same addition. Neither receives another agent’s observations, probabilities, preferred action or chosen command. Roster rank does not identify visible anonymous peers. The neural input remains unchanged.
+
+One concrete implementation contract is an independent 64-entry FP64 public tape—**512 bytes per episode**—whose current entry is exposed at each decision, plus fixed ranks 0–4. Two private tapes require **1,024 bytes per agent**. All tapes must be independent of scene generation; actors receive no environment seed. Future tape entries stay outside the policy interface.
+
+This is a richer experimental contract. A physical implementation would require synchronized shared randomness or a beacon. Its transport, synchronization and latency costs are not priced by the existing native objective. Report those gaps; do not convert absence of a simulator penalty into a physical cost claim.
+
+The smallest worthwhile complete observation
+
+Use **32 fresh worlds**, each with **two independent innovation tapes**, for the six policies \(\{Q,S\}\times\{I,A,B\}\). Evaluate deterministic C once per world. Freeze all identities, ordering and the original S artifact before exposure; do not substitute the recurrence’s new endpoint.
+
+That yields:
+
+- 384 stochastic episodes plus 32 C episodes.
+- **416 episodes / 106,496 primitive team steps**.
+- **Zero fits, optimizer updates, new training labels or checkpoint selection.**
+
+The primary constructive prediction is **S_A improves mean J over S_I without reducing mean within-episode service p10**. Q_A versus Q_I asks whether the same capability is available through ordinary control. B supplies the consequential opposing construction: simultaneous departures may enable useful joint moves that staggering suppresses.
+
+Average the two paired differences within each world, then average the 32 world blocks. Use those 32 blocks for descriptive uncertainty. The two tapes improve the reading of deployment randomness; they are not independent training replication. The learned result remains conditional on one frozen asset.
+
+Read all J, service, quality, within-episode p10/minimum, zero-service gaps, path, boundary aliases and runtime outcomes. For each recorded joint row, retain:
+
+- \(\sum_i q_i\), the conditional expected departure count;
+- pair-coincidence expectations under each law;
+- requested categorical departures and actual physical departures after clipping.
+
+These distinguish changed joint dependence from frequency retuning, physical aliasing and changed visitation. Do not condition away inactive or adverse worlds.
+
+What the outcomes would change
+
+| Outcome | Consequence |
+|---|---|
+| S_A improves J and preserves/improves continuity | Retain a useful deployment modification of this frozen asset under the supplied-device contract. |
+| Q_A provides comparable or better complete benefit at lower cost | Prefer the ordinary package for that use; learned origin earns no special credit. |
+| B improves where A does not | Retain the evidence for coordinated simultaneous departures; reject the proposed staggering preference. |
+| Mean J improves while temporal service worsens | Record a tradeoff, not a dominating replacement or continuity improvement. |
+| Joint exposure changes but native benefit does not appear | Stop this specific coupling purchase and retain existing I/S capabilities. No automatic correlation sweep follows. |
+| Realized changes are sparse or largely aliased | Narrow the interpretation; the complete negative remains paid evidence and does not itself identify a repair. |
+
+Cross-base comparisons assess complete packages. They do not isolate the causal contribution of imitation training: S and Q differ in their state-dependent distributions and incurred computation. This study also leaves sampled S versus sampled untrained S0 unresolved.
+
+Cost and feasibility
+
+For the proposed 416 episodes, conservative worker ceilings before memoization are:
+
+| Work | Count |
+|---|---:|
+| C control requests | 71,680 |
+| S control requests / maximum neural forward rows | 61,440 |
+| C candidate trajectories | 1,935,360 |
+| C modeled ticks | 7,741,440 |
+| C candidate plus setup power evaluations | 161,996,800 |
+| S analytic-helper power evaluations | 8,601,600 |
+| Native dense power slots, including one constructor reset | 29,401,075 |
+| **Combined power-slot ceiling** | **199,999,475** |
+
+The constructor count assumes one environment instance with explicit episode resets; the DM must reconcile its actual lifecycle. No C shadow rankings on S trajectories are necessary.
+
+Price the reader separately. It can reconstruct native reductions from saved SINR/connections, verify source/cache/navigation bindings and paid C scores, and replay at most **61,440 S forward rows** without new environment, radio or optimizer calls. Full motion checking involves **532,480 recorded agent-ticks**; reconstructing modal-command paths for physical-alias diagnostics adds at most **491,520 deterministic own-motion steps**.
+
+Existing measured episode CPU is approximately .156 seconds for C and .235 seconds for sampled S, but changed trajectories can alter cache reuse. A provisional allowance of **2–6 worker CPU-minutes plus roughly .5–3 reader CPU-minutes** is plausible, not a measured quote or stopping cap. Engineering and review are additional and incompletely metered. The DM owns the final implementation, retention and actual-node resource declaration.
+
+The inherited asset also carries its existing acquisition cost: one fit, 81,920 paid C labels, 8,000 updates and 4.096 million supervised sample presentations. These are sunk dependencies, not zero-cost learning.
+
+Why I prefer this to the entropy ablation now
+
+The B03 critic’s alternative is legitimate: change only the entropy coefficient for one preselected retained training block, preserve initialization and training streams, and compare fresh initial/old/new deployments. It costs **one conditional fit, 180,224 native steps, 2,048 actor/critic updates and 24.33 million C modeled ticks**, with approximately 200 worker CPU-seconds plus support.
+
+Its strongest useful result would be learned sampled performance beyond I. Merely reducing the previous damage would not establish incremental usefulness. The entropy intervention could provide more direct evidence about improving that learning recipe than the coupling study can.
+
+My preference for coupling is therefore an **investment judgment**, not a conclusion that entropy is irrelevant or that zero-fit studies are automatically cheaper. The selected inheritance recurrence already buys another independent learning lineage. Coupling adds a distinct opportunity: improve the joint use of a competent frozen local distribution while preserving its conditional marginals. It directly develops the asset and tests an ordinary alternative without moving several learned components together.
+
+If the next priority were specifically to rehabilitate reward learning around C, the entropy comparison would be the more direct question. Under the present complementary allocation, I prefer coupling.
+
+The primary literature supports the framing, not the predicted gain
+
+I checked all three libraries and read the load-bearing primary passages.
+
+- **Foundations B03**, *A Concise Introduction to Decentralized POMDPs*, printed p.36 and §§6.2.3–6.2.4: finite-horizon problems admit an optimal pure joint policy; shared randomness can improve restricted stochastic controllers. Our claim concerns restricted fixed assets, not improvement of the unrestricted optimal decentralized value class. [Primary book](https://www.fransoliehoek.net/docs/OliehoekAmato16book.pdf); [library identity](/home/fires/hmasd-wsl/docs/new-libs/corpus/papers/B03/metadata.json).
+- **P17, MAVEN**, §§4–5, learns shared episode-level latent control and diverse behaviors. It establishes relevant prior art, not a prediction for our fresh per-decision coupling or a reason to import its architecture. [Primary paper](https://papers.neurips.cc/paper/8978-maven-multi-agent-variational-exploration.pdf).
+- **My-lib `icml-2023-pmlr-v202-chen23an`**, §§4–6, builds Bayesian-network action dependence using joint observations and parent actions. That is a different information contract from a state-independent public coin. [Read arXiv copy](https://arxiv.org/pdf/2306.01920); [local PDF](/mnt/c/Projects/My-lib/.local-formal-capture/corpus/papers/icml-2023/pmlr-v202-chen23an/arxiv-2306.01920.pdf).
+- **Inst-sci MARL-0590**, pp.2–4, distinguishes obedient joint-policy value from strategic-agent regret. Its mediator and deviation problem does not require adding a strategic-regret study here. [Local JSON](/home/fires/projects/Inst-sci/papers/MyLib/json/MARL-0590.json); [primary paper](https://proceedings.neurips.cc/paper_files/paper/2024/file/3103b25853719847502559bf67eb4037-Paper-Conference.pdf). DAgger supports querying experts on learner-induced states, but does not guarantee this fixed nonconvex endpoint’s stochastic benefit. [Ross et al., Algorithm 3.1 and accompanying theorems](https://proceedings.mlr.press/v15/ross11a/ross11a.pdf).
+
+These are familiar constructions. A useful contribution would be the controlled native comparison and its limits, not an architectural novelty claim.
+
+I independently checked consequential B03 compact outputs and 16 native positive/adverse trajectories, reused the complete original result reviews, verified all 15 inheritance source hashes against current files, verified the S artifact’s availability/hash, and read all 32 sampled-S trajectories for the new exposure calculations. I did not reproduce optimizers or the complete B03 physics/network audit. No new trajectories, fits, model forwards or repository records were created.
+
+**MATERIAL_DISSENT: no — I support the selected single inheritance recurrence and the complementary design allocation. I recommend the bounded coupling study as the next parent-DM purchase, while preserving the entropy ablation as a legitimate unselected alternative.**
+
+</details>
