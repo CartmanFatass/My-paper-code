@@ -1,0 +1,96 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-30T02:37:36.092982Z",
+  "bootstrap_command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/5a9b84b1152e4e6ea855a59997edf4e7/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/5a9b84b1152e4e6ea855a59997edf4e7/experiments/candidates/coupled_host_joint_skills_stage1/run_b05.py",
+    "--output",
+    "/home/fires/hmasd-wsl/runs/coupled_host_joint_skills_stage1/b05_ceiling_dev_a01",
+    "--",
+    "--worlds",
+    "1000-1031",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/coupled_host_joint_skills_stage1/b05_ceiling_dev_a01",
+    "--budget",
+    "3000",
+    "--launch-sha",
+    "883a8a6984428a0faf02219ab31428734871335b"
+  ],
+  "claim_key": "5ad2a5a45e3e1080ec01e650ef2f6ab482f254111e58b8f37fefac546d42de2f",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/5ad2a5a45e3e1080ec01e650ef2f6ab482f254111e58b8f37fefac546d42de2f.json",
+  "command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/5a9b84b1152e4e6ea855a59997edf4e7/experiments/candidates/coupled_host_joint_skills_stage1/run_b05.py",
+    "--worlds",
+    "1000-1031",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/coupled_host_joint_skills_stage1/b05_ceiling_dev_a01",
+    "--budget",
+    "3000",
+    "--launch-sha",
+    "883a8a6984428a0faf02219ab31428734871335b"
+  ],
+  "command_sha256": "db2d8c6beafa39ca13d66358e22137c281d2c0f7140f7dc6fe82de05f7000260",
+  "control_observation": {
+    "observed_at": "2026-09-30T02:37:35.878576Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "883a8a6984428a0faf02219ab31428734871335b"
+  },
+  "control_root": "/home/fires/hmasd-wsl",
+  "created_at": "2026-09-30T02:37:35.900576Z",
+  "cwd": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/5a9b84b1152e4e6ea855a59997edf4e7",
+  "direction": "coupled_host_joint_skills_stage1",
+  "host_identity": "Jacob",
+  "identity_command": [
+    "/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10",
+    "experiments/candidates/coupled_host_joint_skills_stage1/run_b05.py",
+    "--worlds",
+    "1000-1031",
+    "--budget",
+    "3000",
+    "--launch-sha",
+    "883a8a6984428a0faf02219ab31428734871335b"
+  ],
+  "lead": "Claude DM (WSL session)",
+  "manifest_ref": "/home/fires/hmasd-wsl/runs/coupled_host_joint_skills_stage1/b05_ceiling_dev_a01/launch-manifest.json",
+  "node": "local_linux",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/5ad2a5a45e3e1080ec01e650ef2f6ab482f254111e58b8f37fefac546d42de2f.json",
+  "output_root": "/home/fires/hmasd-wsl/runs/coupled_host_joint_skills_stage1/b05_ceiling_dev_a01",
+  "preflight": "/home/fires/hmasd-wsl/runs/coupled_host_joint_skills_stage1/b05_ceiling_dev_a01/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+      "kind": "linux_pid_start_ticks",
+      "pid": 429961,
+      "session_id": 429961,
+      "start_ticks": 17440057
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 429961,
+    "process_group_id": 429961
+  },
+  "process_exit": "/home/fires/hmasd-wsl/runs/coupled_host_joint_skills_stage1/b05_ceiling_dev_a01/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+      "kind": "linux_pid_start_ticks",
+      "pid": 429962,
+      "session_id": 429961,
+      "start_ticks": 17440061
+    },
+    "pid": 429962,
+    "process_group_id": 429961,
+    "supervisor_pid": 429961
+  },
+  "schema_version": 1,
+  "sha": "883a8a6984428a0faf02219ab31428734871335b",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/5a9b84b1152e4e6ea855a59997edf4e7",
+  "stderr": "/home/fires/hmasd-wsl/runs/coupled_host_joint_skills_stage1/b05_ceiling_dev_a01/stderr.log",
+  "stdout": "/home/fires/hmasd-wsl/runs/coupled_host_joint_skills_stage1/b05_ceiling_dev_a01/stdout.log"
+}
