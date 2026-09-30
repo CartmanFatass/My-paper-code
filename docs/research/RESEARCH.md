@@ -1873,20 +1873,43 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 The owner’s requested four-DM allocation remains substantive: `dm_fleet_adaptation` develops
 retained local actors through native consequence labels; `dm_fleet_transmission` studies
 anticipation across two relocation opportunities; `dm_parent_adaptation` has completed composition
-and now costs the distinct actual-S2 proposal-learning question from source; `dm_user_waiting`
-completes the learned-continuation reader while preparing the conditionally selected ordinary
-service/continuity comparison below. Existing leads keep their questions
-and accepted handles. Oracle/helpers are not DMs, and four assignments do not imply four admitted
+and actual-S2 design and now costs a distinct planner-amortization question from source;
+`dm_user_waiting` completes the learned-continuation reader while preparing the conditionally
+selected ordinary service/continuity comparison below. Existing leads keep their questions and
+accepted handles. Oracle/helpers are not DMs, and four assignments do not imply four admitted
 workers. The completed forecast and service-age DMs remain reserve.
 
 Astra Max Oracle owns detailed idea discovery and independent criticism using the research
 record, all three local libraries and needed primary web passages. Root selects the scientific
 objects and cross-question allocation; DMs retain reasoning, implementation, review, actual-node
-admission and complete publication/cleanup. The independent Oracle’s continuity recommendation is
-conditionally selected below. Actual-S2 learning remains source-only cost/design, with no fit
-selected. A separate Astra Max Oracle assesses a substantive duration/roster question against the
-full historical adverse record, existing ordinary control and stopping; Claude’s paused ownership
-remains intact. No routine Root run acknowledgment is added.
+admission and complete publication/cleanup. The independent continuity recommendation is
+conditionally selected below. No routine Root run acknowledgment is added.
+
+Root adopts the independent **reserve/defer** recommendation for actual-S2 learning, preserving
+its distinct proposal-consequence question. The complete two-fit comparison now costs2560H256
+episodes/655360steps, an estimated2–4worker CPUh+15–45reader minutes and5–9support hours.
+Its fixed same-data CAL and transferred all-on CAL/CONT/B* references remain part of the design.
+An optional transfer-only comparison costs384episodes/98304steps/0fits,30–60worker+10–25reader
+CPU minutes and3–6support hours. Neither purchase is selected. Read the underway all-on result
+before reconsidering their marginal value; a positive all-on result is not a new permission gate,
+and a negative one would not refute managed learning. [Full design and independent disposition](https://github.com/CartmanFatass/My-paper-code/blob/1eceb000eb2955e4c7f9f09000025775e3eb5bf9/docs/research/candidates/uav_parent_adaptation/NOTES.md#s2-development-independent-disposition).
+
+A separate independent review found no worthwhile new duration/roster purchase at this boundary.
+Root accepts that value/cost judgment while retaining the positive capabilities, adverse evidence
+and broader questions; Claude’s paused ownership is untouched. The [complete original review and
+Root decision](archive/2026-09-30/RESEARCH-duration-roster-allocation.md) are retired as a completed
+review. Its strongest charging-scheduling candidate substantially overlaps the already completed
+persistent-service B05, whose outage repair did not satisfy the full service/energy use contract.
+
+The fourth DM and that same independent Oracle now assess **learning to approximate N8 T**:
+can finite experience retain the complete-continuation capability at less decision computation
+than competent ordinary alternatives? This is an independent estimand alongside the accepted
+T/G2/A2 temporal study. The74 paid model branches span16 worlds, with only38 distinct native
+programs; candidate rows are not independent training worlds. An exact-reuse ordinary alternative
+could sharply reduce T's requests but has no measured optimized runtime. The Oracle owns detailed
+design/criticism, the DM actual interface and complete cost. No learner, new labels, optimized T
+implementation or fresh native panel is selected, and fleet-transmission ownership stays intact.
+A reasoned decline remains a valid outcome of this source-only assignment.
 
 **Actual compute placement.** The configured local_linux and wsl_4070 are distinct physical
 Windows hosts (AMD Ryzen 7 8745H and Intel Core i9-13900H). The accepted parent B05 worker and
