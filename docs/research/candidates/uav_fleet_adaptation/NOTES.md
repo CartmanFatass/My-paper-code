@@ -4203,3 +4203,19 @@ a small point loss does not itself constitute falsification. The assigned
 substantive result returns to Root for cross-question allocation after
 independent diagnosis, own publication and cleanup; this is not a request for
 per-run approval or a fabricated external dependency.
+
+
+<a id="b05-zero-service-correction"></a>
+**B05 factual correction,2026-09-30:** the sentence in the preceding complete
+reading that “No final arm has a zero-total-service tick” is incorrect and is
+superseded here. The independent Scientific Reviewer found, and I independently
+reconstructed from the original raw connections, that L1 world29483104 has
+**S zero-service ticks0 and6; CAL ticks0,3,4 and5**, with all transmitters on
+and native reward0 at those ticks. L1 B* inherits S's same two ticks by exact
+policy identity, without another episode. No other executed final row has a
+zero-service tick; C/Q/CONT have none in this world and all L0 final arms have
+none. The original summary and published reading already record these facts
+correctly; this was my prose error, not a failed reader or changed result.
+CAL therefore also has a concrete zero-total-service adverse beyond S here.
+Retain this correction with every later tail interpretation. No additional
+model query, episode or reader was performed.
