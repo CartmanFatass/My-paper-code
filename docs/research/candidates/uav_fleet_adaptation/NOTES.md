@@ -3799,3 +3799,72 @@ Read/review the integrated diff and checks; a registered independent
 engineering Reviewer receives this contract and original inputs, with no
 science-selection authority. Publish accepted source before any result
 execution; preserve and report any technical failure and incurred work.
+
+
+<a id="b05-engineering-acceptance"></a>
+### B05 engineering acceptance and actual node choice — 2026-09-30
+
+The DM accepts the ten-module direction-local implementation and two focused
+test files under the published L0 at `a5073c72c1765bc2585d77041e8ad073ee88cd2d`.
+The bounded Implementer supplied only `learning.py` and `test_learning.py`;
+its 24 checks passed in2.31s. I read and integrated that work, implemented the
+collector/runner/reader, and completed35 synthetic checks in4.52s. The fake
+H8 lifecycle covers both lineages,70 complete fake episodes/560 fake steps,
+four two-update heads and the saved reader's164 backbone rows/80 head rows/
+320 shadow motion ticks. These are engineering fixtures, not production
+worlds, acquired labels or useful fitted endpoints. No production actor,
+helper/model, native transition or optimizer query has occurred.
+
+The independent registered engineering Reviewer received the actual published
+contract and complete source/tests, and returned:
+
+> No material finding remains in the B05 diff reviewed against contract
+> `a5073c72c1765bc2585d77041e8ad073ee88cd2d`. No repair requested.
+>
+> Checked all ten modules and both test files, including paired forcing/RNG,
+> objective and gradient equations, frozen assets, accounting, reader limits
+> and failure paths. The prior calibration file matches its pinned hash.
+>
+> Independent validation: **35 tests passed in4.15s**, using synthetic
+> fixtures and managed pytest scratch.
+>
+> Limits: no production rollout, staged-asset loading or canonical actor
+> queries performed. Acquisition-wide neural replay and optimizer replay
+> remain excluded by the fixed contract. Scientific acceptance remains with
+> the DM.
+
+I accept this engineering result; it adds no positive scientific evidence and
+changes none of the four fits, labels, worlds, arms or final endpoints. Saved
+fit traces are separate bulk files, and the reader checks their provenance,
+loss/counter/gradient records, endpoint/Adam identities and declared limits;
+it performs zero optimizer replay. Every raw trajectory is read, with only
+the prescribed73728 backbone and40960 head replay rows. In addition to the
+already priced327680 worker+reader shadow motion steps, the reader's original
+C/Q fallback-ranking audit can reconstruct at most40960×27×4=4423680 simple
+motion ticks from saved score arrays. This is geometry verification, not new
+native steps, radio calls or acquisition. Actual fallback counts are reported.
+It also verifies the saved native trajectory geometry for1138688 team ticks
+(5693440 agent ticks). The unchanged25–45 worker plus5–15 reader CPU-minute
+estimate remains provisional; no production benchmark has been added.
+
+Root's original node-priority dependency is resolved: parent-adaptation B05's
+worker and complete reader exited0 at20:06:39.448902UTC, with both native
+identities absent and reading VERIFIED. Root released `local_linux` while the
+user-waiting direction retained the remote real-deadline producer/reader
+chain. I therefore choose configured `local_linux` (Jacob, CPU, one compute
+thread), rather than waiting for or disturbing the remote chain. Root permits
+sharing this physical host with the separately selected untimed/single-thread
+N8 study subject to fresh actual memory/occupancy admission. Any concurrent
+load is part of the measured timing conditions; no latency/deadline claim is
+made. No N8 operation or resource reservation is inferred from selection.
+
+The two exact original S files were freshly hash-checked at their canonical
+remote paths, then copied solely as required local B05 inputs to
+`temp/directions/uav_fleet_adaptation/b05_inputs/S_b02.pt` and `S_b03.pt`.
+Both are424487bytes and match the declared file SHA256 values; they remain
+identical inputs, not new checkpoints or an actor query. The staged copies
+are disposable after this study's live consumers finish; the canonical
+remote originals remain retained. The paid B04 calibration reading matches
+its declared SHA256. Source publication precedes result execution. The next
+action is fresh canonical pause/lead, source, actual-node memory and occupancy
+admission followed by one detached worker+reader chain at the fixed exposure.
