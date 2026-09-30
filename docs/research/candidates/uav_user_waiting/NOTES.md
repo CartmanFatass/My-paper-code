@@ -1415,3 +1415,573 @@ removed each. Actual absence was checked. No snapshot, tar, backup chain or
 extra retention copy was created as a deletion condition. **No cleanup target
 or concrete tool blocker remains.** The scientific runtime TypeError remains
 unexplained in its preserved adverse record; that is not a live cleanup block.
+
+
+<a id="b03-design-only"></a>
+## 2026-09-30 — B03 design only: experience about remaining interruption cost
+
+**State and authorized scope.** Root assigned one scientific design task to the
+existing lead after B02's completed boundary. This is new question preparation,
+not unfinished B02 collection or permission to restart A. The assignment permits
+source/literature reading and this prospective note: **0 fits, 0 new native
+steps, 0 model or actor queries, 0 current-data rescoring, and no result-code
+implementation.** Those are the actual counts for this design task. No operation
+was launched. B02's original runtime-fault uncertainty, stopped fixed-A investment,
+retained M/S/R evidence and measured cleanup remain closed.
+
+I used the current published RESEARCH background at
+[a76af735f5eae2bcb82371eaf5a470845f50529b](https://github.com/CartmanFatass/My-paper-code/blob/a76af735f5eae2bcb82371eaf5a470845f50529b/docs/research/RESEARCH.md):
+topic 2's B02 continuity/tail/service distinction, topic 3's newly positive N8
+relocation capability, and topic 8's separation of lawful information, policy
+class and finite learning. Their concrete effects are to retain M and S as
+complete ordinary references, avoid an ACK/horizon repair diagnosis, make
+counterfactual continuation validity an uncertainty, and compare this investment
+with developing N8's demonstrated capability. No shared-background claim changes
+merely because a new design is feasible.
+
+The question is whether native experience can improve **mean per-user maximum
+observed service interruption**, using a learned M-continuation value inside
+lawful joint command/mask search. Its first intended contribution is empirical
+understanding and possible task capability, not an asserted new architecture,
+duration-learning result or necessity theorem. It changes actual candidate
+ranking rather than choosing between unchanged O/W assets. Interference,
+capacity-limited assignment, joint transmitter masks and future responses of the
+five fixed C controllers couple the choices. There are no co-adapting learners.
+The lawful coordinator still does not observe exact radio geometry or truthful
+service ACKs.
+
+The prior learning result is adverse evidence, not a clean slate. I read the
+[published service-age compact result](../../../../runs/uav_service_age/b01_age_selector_a01/result.json)
+and its [complete interpretation](../uav_service_age/NOTES.md#b01-complete-reading):
+one active PPO selector fit, 512 training plus 448 evaluation episodes and
+245,760 native steps; L1 improved its own initialization but had mean age
+3.542917 versus M's 3.273864 and mean per-user maximum gap 21.614063 versus
+20.202500. It differed from M on 738 evaluation choices. Its known lifetime
+worker plus external-reader CPU was 6,687.213851 seconds, with support additional.
+The present proposal changes the objective, supervised native suffix target and
+action-level use of experience; it does not reinterpret that negative as an
+optimizer, missing-history or nonactivation failure. This direction has already
+paid 131,184 result steps, 200 correctness steps and 4,475.374087 known worker/
+full-reader CPU seconds across B01/B02. Both investments lower the case for an
+unfocused repair, without refuting a different complete learning comparison.
+
+### Source binding and actual interface
+
+The following source was read on the published main revision above and had no
+working-tree diff. B02's full 62-file scientific binding remains in its original
+config and compact continuation evidence; the independent Oracle checked all
+62. These are the directly load-bearing interfaces, not a replacement manifest:
+
+| Source | Consequence for this design |
+|---|---|
+| experiments/candidates/uav_user_waiting/b02/protocol.py; imported uav_radio_activation/b01/protocol.py | N5/U50/H256; map 400 bytes, five 25-byte reports and 16-byte command; report period 4, delivery 2, recurring 141 bytes and 1.436-second charged computation. Bounds are (0,0,50) to (1000,1000,150); masks are nonempty. |
+| experiments/candidates/uav_user_waiting/b02/scheduler.py, _Stage.prepare/score/search | Two old-command prefix ticks; four delivered candidate ticks except the final truncated stage; saved midpoint after the first two delivered ticks. The two search orders use 27+31+31+27=116 pre-cache requests. M retains its existing O/W generation and cumulative-age selection. |
+| experiments/candidates/uav_user_waiting/b02/study.py, collect_episode/allocate_raw/record_round | C acts only at reports; the pending command arrives after two native steps. Actual radio arrays are copied before mask-arrival mutation. Raw records retain commands, masks, packets, post-C navigation, model contacts and causal stage histories. |
+| experiments/candidates/uav_registered_service/b01/history.py and uav_user_waiting/b01/history.py | Executed actions settle atomically from decoded anchors. Only executed settlement changes persistent memory. A late initial anchor leaves the missing prefix censored permanently; numerical reconstructed ages are not truthful past service. |
+| experiments/candidates/uav_local_history/b01/controller.py and uav_user_waiting/b02/predictor.py | For history=False, current local points overwrite prior points at each call; navigation is persistent. A pre-next-C value must carry previous post-C navigation, but exact future native observation remains unavailable. No future C call is required by the proposed value method. |
+| experiments/candidates/uav_user_waiting/b01/metrics.py and b02/metrics.py | The native mean of 50 per-user maxima is the primary quantity; extreme episode maximum, worst-user mean age, aggregate age and native J/service remain distinct endpoints. |
+| experiments/candidates/uav_service_age/b01/features.py and learner.py | Existing causal availability/scaling conventions can guide a new feature pack. The learner is a two-action PPO actor/critic and is not a supervised suffix-value fit. No direct reuse of that learning rule is claimed. |
+
+For a compact byte check, the inspected B02 scheduler SHA256 is
+b752521080a9fa12c24a05e696880a2f94e74734fe273d77fee5e20a0df85b41,
+its study is e69ccca9d8213a07de56a13b1110365b74545a5312be53e23e84604c4d51753d,
+the inherited waiting history is
+a839438052c6c57337eade4a1b066802830a5fbd0af78e49f45564160f57a7f4,
+and the inspected service-age learner is
+9ad461b2a64d3439cf7004ad656758b02d3579c7c5b57ec127cbfc9db60f7ac8.
+
+At a boundary k before native transition k, define actual age a-minus(k) as the
+post-transition age after k-1, with a-minus(0)=0. Let actual b(k) be the vector
+of maximum ages over transitions 0 through k-1, with b(0)=0. Each native
+transition first records actual service, updates age, then updates b by a
+coordinatewise maximum. Thus
+G = mean(b(256)) = sum from k=0 to 255 of mean(b(k+1)-b(k)).
+This is exactly the existing observed-gap convention, including observed
+left/right-censored endpoints; it is not the unobserved length of a gap outside
+the episode.
+
+The actor instead maintains modeled ages and maxima from lawful executed
+settlement. At report t, score the modeled record increment over t..t+3:
+old action/mask at t,t+1 and candidate at t+2,t+3. Add the value at the
+**pre-current-C boundary t+4**. The value input carries the candidate commands/
+mask that still execute at t+4,t+5 and the current report's post-C nav as the
+next boundary's previous nav. No actual future C proposal or post-current-C nav
+is an input. At t=252, the four elapsed ticks reach terminal 256 and V=0.
+The existing delivered-four-tick M/native score still costs t+2..t+5, clipped
+at the native horizon; it is not silently shortened to two delivered ticks.
+
+For old M data, pre-C navigation at report t>=4 is the previous report's saved
+post-C nav. Decode the current anchor from saved packets, exclude that current
+packet's newly chosen C proposal/nav from value features, and use only model
+contacts strictly before t whose causal settlement is already complete in the
+stored stage record. The terminal log by itself is not proof that a past actor
+could see the information. This permits later extraction without new physics
+queries, but **no extraction or rescoring has been performed in this design
+task**. Original true positions/maps/observations and actual contacts may only
+supply offline targets/verification, never deployment features.
+
+### Proposed fixed representation, target and comparison
+
+Use the same 805-component float32 input for ridge and MLP, with fixed scaling
+and no fitted normalizer or learned encoder:
+
+| Field | Width and fixed meaning |
+|---|---|
+| Decoded map | 100, xy/1000 in registered user order |
+| Decoded boundary anchors | 15, (xyz-LOW)/(HIGH-LOW) |
+| Effective commands and mask | 15 command components in {-1,0,1}; 5 mask bits |
+| Previous post-C nav | 50, five separate 10-way one-hot vectors |
+| Modeled age and running maximum | 50+50, divided by 256; omit redundant last-service tick |
+| Modeled window contacts | 200, the existing four-by-50 bits |
+| Known-unserved and availability | 50 indicators last<0 under a complete history; 3 indicators for decoded map, anchor and complete origin-to-boundary history |
+| Clock and rotating member | 2, t/256 and (256-t)/256; 5-way one-hot (t/4) mod 5 |
+| Per-user fixed relations | 250: d, d², slack=(b-age)/256, d·age/256 and d·slack |
+| Pooled fixed relations | 10: means and second moments of age/256, b/256, slack and d; means of the two interaction terms |
+
+Here d is distance from the decoded user at z=0 to the nearest UAV active under
+the effective boundary mask, divided by sqrt(1000²+1000²+150²). The nonempty mask
+makes it defined. Quantize a synthetic candidate endpoint with the same position
+codec before packing it. These features use geometry arithmetic, not additional
+radio/model queries. The pooled terms do not make the entire network permutation
+invariant. This basis was added prospectively to both estimators because a ridge
+on separate raw geometry and ages could not express even their simple interaction.
+A neural win would still not prove that every ordinary basis or linear alternative
+fails.
+
+A usable feature row requires an anchor at tick 0, all executed transitions
+settled causally to the boundary, and known modeled maximum history. Incomplete
+rows are retained as missing evidence and excluded from regression, not filled
+with invented b/age. For deployment, if M has completed lawfully but maximum
+history is unavailable, the new planner may use that completed M candidate;
+there is no value query on fabricated features. Any whole-round deadline or
+incomplete M/search computation instead retains the old commands/mask, as in
+the original contract. No partial result or late M rescue is delivered. Count
+these cases separately. Expected label counts below assume eligible histories;
+fewer labels never reduce reported episode exposure.
+
+The supervised target at a real M-suffix boundary t is
+y_t = mean(actual b(256)-actual b(t)).
+Normalize y by 256. This is **not** actual G_final minus modeled G_t. Predicting
+native remaining increase from modeled b does not reveal the hidden actual past;
+adding a modeled prefix increment remains approximate. The suffix after every
+training row must actually follow M, including its outstanding two-tick
+commitment. No fictional branch, relabeled physical suffix or value bootstrap
+supplies a target.
+
+The complete proposed arms are M, S, G0, LR and LN. Each new planner generates
+the full M candidate (232 requests), runs the same two-order coordinate search
+with its own new key (116), then explicitly includes M (at most1 additional
+request): **349 pre-cache requests/report**, within the legal 27x31 space.
+It is not exhaustive search. The key minimizes modeled elapsed record increment
+plus its terminal value, then elapsed four-tick cumulative age, then the existing
+delivered-four-tick native tie key. Values affect the inner searches as well as
+the final choice. Candidate physics is cached across all these rankings.
+
+G0 uses terminal0. LR uses weighted ridge with lambda=0.001 and an unregularized
+intercept. LN uses two 128-ReLU hidden layers and an unclipped scalar output,
+Adam learning rate0.001, 4,096 minibatches of 256, one fixed initialization/data
+sampling realization and the final checkpoint only. Hidden layers receive
+ordinary seeded nonzero initialization; only the last scalar weights/bias start
+at zero. Therefore G0 is LN's exact **pre-fit decision rule when computation
+completes**; extra inference time can still change a deadline outcome and must
+be charged. Both models deploy 256 times the scalar output, clipped to
+[0,256-t], with terminal256 exactly0. Both train the same weighted MSE objective:
+each eligible episode has equal total weight, and its eligible reports share
+that weight equally. LN samples episode then eligible report uniformly. Ridge
+uses those same weights. No validation-score search, checkpoint selection,
+online update, feature revision or repeated acquisition is part of this recipe.
+
+M/S remain full-use references. R's retained evidence remains in B01/B02; this
+proposal does not buy a fresh R arm or claim improvement over every fairness
+reference. G0 controls direct objective/search development, and LR tests whether
+a modest fitted relational basis captures the benefit. Neither retaining M
+among scored candidates nor any prediction metric gives a policy-improvement
+guarantee.
+
+### Proposed exposure, full cost and reading
+
+Reuse all 64 already-paid B02 M trajectories with their recorded canonical raw
+hashes. Acquire192 fresh H256 episodes:96 pure M and 96 with one uniformly
+sampled legal command/mask pair at a prebound report, then M for the remainder.
+For perturbation j=0..95 use report index floor(63*j/96), hence0..62, and train
+only at later reports. Uniform means uniform over encoded27x31 pairs; it does
+not mean uniform over physically non-aliased behaviors. Pure M contributes
+reports 4..252. The resulting maximum is 160*63+3,102=**13,182 suffix labels from
+256 distinct training episodes**, not13,182 independent worlds. Old training
+worlds have already been exposed and are not holdout data.
+
+Evaluate64 untouched common worlds with all five frozen programs:320 episodes.
+This is **512 new H256 episodes /131,072 native steps**, plus 64 reused episodes/
+16,384 previously paid steps. There are **2 initial scientific regression fits
+on one acquisition realization**, one analytic ridge solve and one neural fit;
+they are not independent training replications. The acquisition/evaluation
+worlds, intervention tapes, initialization and minibatch seed must be bound
+before any execution if Root selects the proposal. There is no data-dependent
+arm or seed selection.
+
+| Prospective work | Count or explicit uncertainty |
+|---|---|
+| Candidate requests | 192*64*232 +64*64*(232+116+3*349) =8,564,736 upper bound before cache reuse |
+| Candidate-state reductions | (192*232+64*(232+116+3*349))*(63*4+2) =33,991,296 upper bound;4-per-request loose bound34,258,944 |
+| Prefix and history model work | 65,536 committed-prefix reductions; up to 131,072 executed-history/terminal settlements for the new full episodes, separately counted |
+| Actual C decisions | 512*64*5 =163,840; no virtual future-C call |
+| Deployment value queries | At most2*64*63*117 =943,488; terminal zeros require no network call |
+| Value/fit verification | Up to 943,488 saved-choice value re-evaluations,8,064 held-out M-suffix predictions, and 26,364 final training-row predictions; all separately metered |
+| Learning arithmetic | Original ridge weighted solve and 4,096 Adam steps /1,048,576 minibatch presentations. A deterministic full fit replay in the reader adds one weighted solve and another4,096 Adam steps; no new acquisition or independent statistical replication. |
+| Communication | New full episodes:4,620,288 recurring bytes and 204,800 map bytes; fixed141-byte report rounds |
+| Necessary native correctness if selected | One H8 common fixture world across the five interfaces,40 native steps/0 scientific fits, using fixed stub values where appropriate; synthetic history/target/feature/deadline checks separately metered. No such fixture has run now. |
+
+The 805-wide input matrix at 13,182 rows has 42,446,040 float32 bytes; LN has 119,809
+parameters (479,236 float32 bytes). These are analytic payload sizes, not peak
+RSS or total artifact sizes. Preserve one canonical copy of new native evidence,
+training inputs/checkpoint and full reader output; publish compact per-world
+results, provenance and counters. Avoid retaining a fully materialized feature
+matrix for every candidate when a saved trace and prediction are enough to
+reconstruct it. B02 averaged about1.6MB compressed/raw episode, suggesting an
+order-of-1GB new trajectory bill, but changed traces/compression make the actual
+serialized size unverified. Preserve the old64 M raws by reference, not by a
+second retention package.
+
+For the proposed configured wsl_4070 CPU path, old M/S scheduler rates give
+about3,006 CPU seconds (0.835h) for new acquisition/evaluation scheduling
+before new feature/value overhead. Scaling the external B02 reader's1,113.99
+CPU seconds by the upper candidate-reduction ratio gives about4,299 seconds
+(1.194h), versus the Oracle's lower episode-based nominal estimate. These are
+different planning extrapolations, not measured bounds. **Approximately2–3 CPU
+hours** is a useful provisional worker/reader/fit expectation, with changed
+feature arithmetic, full fit replay, imports, I/O, engineering and support
+unmeasured. Record actual component and lifetime CPU/wall, peak RSS and disk;
+there is no admitted budget or guarantee of timing. The current compute table
+names the gcc3.10.21 interpreter as a provisional mitigation, not a cure for
+B02's unexplained radio exception. Actual-node admission is needed only if a
+result launch is selected.
+
+Read every native trajectory and the causal feature/target/selection pipeline,
+including reused training-source hashes. Check native contacts/ages/maxima and
+the telescoping identity; every fit update/counter/parameter change; causal
+input provenance; request/cache/choice arithmetic and deadline fallback. The
+proposed physical reader keeps B02's bounded scope: every actual native/C and
+executed-model transition, each selected candidate, and every visited candidate
+at reports 0/60/124/248. Rebuild age/max/value/key arithmetic from saved contacts
+for all remaining evaluated candidates; this is not an exhaustive radio replay
+or an optimality claim. For old64 M trajectories, reuse the source-bound B02
+physical verification and recheck raw hashes plus the newly derived causal
+features/targets, without repurchasing all old candidate radio calls. Report paired
+world levels and all prespecified contrasts for G, extreme/censored gaps,
+worst-user mean age, mean age, J/service/quality, travel, transmitters and total
+compute. The primary complete-use contrast is LN-M on G; LN-G0 is the main
+experience-use comparison; LN-LR, LR-G0, G0-M and comparisons with S preserve
+ordinary and tail alternatives. World-paired intervals describe one fitted
+acquisition instance; reports/users/epochs are not independent replicates.
+
+Log chosen-pair differences from the already computed M candidate, value
+dispersion/clipping, and zero-terminal rankings within the same visited set.
+That last calculation is not the full G0 controller at the same state: its own
+coordinate search could visit different pairs. Low fresh-M suffix error does
+not validate counterfactual M continuation on states selected by LN, and a
+realized LN suffix follows LN rather than M. Do not score its observed suffix
+as an M-value prediction error. No extra shadow physical branches or native
+suffix bank is authorized by this design.
+
+Constructive prediction: learned continuation changes executed pairs and lowers
+G beyond both M and G0. The strongest ordinary competing outcomes are that G0
+captures the benefit, or LR captures it without a demonstrated neural increment.
+Retain either as a useful capability; absence of a significant LN-LR difference
+is not equivalence. A G benefit with worse service or extreme tails is a
+conditional frontier point, not default adoption. An active native negative
+ends this finite recipe; sparse changed choices limit the learning/exposure
+reading; missing targets, failed fits or deadline-dominated deployment are
+technical or exposure limitations rather than evidence against learning in
+general. None automatically purchases a repair, another fit or confirmation.
+
+### Independent recommendation and DM investment judgment
+
+Root's separate-context Astra Max Oracle reconstructed the original evidence,
+read the primary bridges and returned the complete recommendation preserved
+below. It checked five original native trajectories, not a second full-panel
+reader; its agreement is advice, not new independent empirical replication.
+I directly read the cited load-bearing pages in B01, Remembering to Be Fair,
+Diminishing Return of Value Expansion and Inst-sci VS-0005, plus Bertsekas
+sections1–2/Proposition2.1. The exact-value/Markov assumptions do not hold here.
+Running-max memory gives the algebraic objective decomposition without making
+the public state Markov. None of these sources identifies the cause of B02's
+negative primary result or establishes novelty.
+
+I accept the recommendation with the explicit timing, eligibility, feature and
+cost refinements above; **no material scientific disagreement remains**.
+Selected-state extrapolation is the strongest objection. One perturbation per
+world broadens observed support but neither covers the planner's future
+selected distribution nor recovers hidden exact radio state. A good fit could
+still supply the wrong action ranking. That objection limits the claim and
+lowers expected success; it is not a mandatory preliminary model-accuracy,
+toy-pass or counterfactual-headroom gate.
+
+My preference is the complete five-program comparison over first buying only
+M/S/G0: it directly answers whether experience adds useful continuation value
+and can return a useful ordinary or linear positive in one bounded study.
+The cheaper alternative is 64 worlds times M/S/G0,192 episodes/49,152 steps,
+0 fits and no training acquisition; it answers the narrower ordinary-objective
+question and remains a legitimate allocation, not a required positive precursor.
+N8's newly positive relocation/activation/C-reoptimization capability is a
+stronger demonstrated starting point. A comparably concrete, inexpensive
+continuation-development question under that lead could take priority. The
+existence of four DM slots alone does not justify this investment, and I do not
+take over N8 or claim it needs learning.
+
+**Return boundary:** this is a feasible, costed design recommendation, with no
+selected result execution. Root owns whether to invest in this complete design,
+the cheaper ordinary-only alternative, an N8 development or neither. If
+selected, new code belongs in this direction's B03 paths with a bounded L0,
+fixed data/RNG/fit inputs, engineering review and published source before launch;
+the frozen B02 files and evidence are not rewritten. No new shared host/control
+change is indicated. Exact runtime/deadline margin, serialization size, support
+coverage and native benefit remain unresolved. B02 remains completed and no
+accepted operation is waiting to be resumed.
+
+<a id="b03-original-oracle-advice"></a>
+### Original independent Oracle recommendation, received 2026-09-30
+
+The following is the complete substantive recommendation, with spacing and
+paragraph formatting normalized. Its nominal reader estimate is retained as
+advice; the more conservative DM calculation above is the current planning
+estimate. The zero-initialization statement refers to the decision rule, with
+the deployment-time caveat already made explicit above.
+
+I recommend a bounded successor question in uav_user_waiting: can native
+experience improve average per-user worst interruption by learning the remaining
+M-continuation cost and using it inside the joint command/mask search, beyond both
+competent M and a direct-objective ordinary planner? Revise the next approach,
+retain the published B02 disposition and M/S capabilities, and make no claim
+that a horizon, ACK, representation or learning bottleneck has been identified.
+This develops the controller's action choices rather than ranking unchanged
+assets. The decision clock remains fixed; a learned option duration is not part
+of this proposal.
+
+I reconstructed the waiting evidence before forming this proposal, then used the
+waiting DM's source check to resolve boundary, feature and cost details. I
+checked all 62 scientific source hashes in B02's frozen configuration against
+current files; all matched. I read the compact positive/adverse/failure records
+and independently reduced five retained native trajectories, including A/S/M on
+seed 29322048 and S/M on29322000. I did not repeat the complete256-episode reader,
+audit every candidate replay or independently reproduce all current portfolio
+results. Those remain explicit limits.
+
+The strongest empirical premise is the existing tradeoff, not a failed-predictor
+narrative. In the 64-world B02 panel, M's mean per-user maximum gap was 19.826875,
+extreme maximum gap55.921875 and mean service24.596436. S gave20.964063,46.968750
+and 20.933899 respectively; A gave20.455625,49.921875 and 21.247375. S's extreme-tail
+improvement cost service in all 64 worlds and worsened the average per-user worst
+gap versus M by 1.137188 [0.335121,1.939254]. A-M on that average gap was+0.628750
+[-0.215564,1.473064], despite644 executed pair changes,289 with positive modeled
+current sacrifice. A was an active intervention, not nonactivation. On
+A/29322048, user 20's98-tick gap occurred with modeled contacts exactly equal to
+actual contacts for that user throughout the episode; S and M on the same world
+had extreme gaps47 and 50. This removes an ACK error explanation for that witness,
+but does not prove generally correct histories or that longer prediction is the
+remedy. Source: runs/uav_user_waiting/b02_continuity_a03/result.json; frozen
+scientific source 16500b6f85c8cd20a7765801ed413608c36cf9f0, protected continuation/
+reader db13ccf307e9cf467450fdad8318721fb8db603a. The complete reader covered 256
+trajectories/65,536 valid steps; the 112 failed original native steps remain
+charged. Known worker plus full-reader cost was 2,651.306 CPU seconds, with some
+support/A02 cost unmetered.
+
+The prior learned service-age selector is a serious negative. One fit consumed512
+training episodes plus 448 evaluation episodes,245,760 native steps, and both
+actor/critic moved. L1 improved its own mean-age result from 3.816882 to 3.542917
+but remained worse than M's3.273864; its mean per-user maximum gap was 21.614
+versus M 20.2025. It made738 evaluation choices differing from M, so this was not
+merely inactive learning. Worker and external reader cost approximately4,564.268
+and 2,121.840 CPU seconds. Source:
+runs/uav_service_age/b01_age_selector_a01/result.json. The proposed change is
+substantive—native suffix regression and action-level ranking under a different
+existing objective—but a negative would still be a finite-package result, not
+evidence that learning or temporal reasoning is impossible.
+
+Literature supports the construction's form, not its success. DIRECT: B01,
+docs/new-libs/papers/B01_Albrecht_MARL_Foundations_2024.pdf, physical p60/printed31,
+Eqs2.38–2.42, gives policy improvement with the appropriate exact value function.
+Bertsekas arXiv1910.00120v3, https://arxiv.org/html/1910.00120 sections1–2/
+Proposition2.1, gives base-policy rollout and componentwise search under its
+state/action-ordering assumptions. INFERENCE: retain M's candidate and
+approximate its remaining cost, but our partial lawful state, learned value and
+finite search inherit no no-worsening theorem. DIRECT: Remembering to Be Fair,
+paper icml-2024-pmlr-v235-alamdari24a,
+/mnt/c/Projects/My-lib/.local-formal-capture/corpus/papers/icml-2024/pmlr-v235-alamdari24a/arxiv-2312.04772.pdf
+pp5–7, distinguishes temporal and stakeholder aggregation and uses explicit
+reward memory under declared conditions. INFERENCE: our maximum-gap state makes
+the objective telescoping; it does not establish a Markov public state or license
+counterfactual physical suffixes. DIRECT counterweight: Diminishing Return of
+Value Expansion Methods in Model-Based RL, iclr-2023-virtual-11586,
+/mnt/c/Projects/My-lib/.local-formal-capture/corpus/papers/iclr-2023/iclr-2023-virtual-11586/arxiv-2303.03955.pdf
+pp2–5, shows that oracle accuracy/longer model rollouts did not automatically
+establish superior sample efficiency in its studied SAC tasks. It is not a UAV
+impossibility result. I also checked the formal Inst-sci store: VS-0005,
+/home/fires/projects/Inst-sci/papers/MyLib/json/VS-0005.json pp3–4, studies
+action-repeat options and prefix reuse under a different commitment contract.
+Together with July's R30 fixed-clock design and external-review record, these
+checks rule out a novelty claim or an automatic case for reopening duration
+selection. All three libraries were searched; index hints were locators, not
+evidence.
+
+Define actual service age a_u(t), running maximum b_u(t)=max_{s<=t}a_u(s), and
+G=mean_u b_u(H), H=256. Per-tick increments mean_u[b_u(t+1)-b_u(t)] telescope to G
+from the initial state. The deployed controller maintains MODEL ages/maxima/
+windows from settled executed history only. Native contacts and actual b are
+offline regression labels and reader evidence, never new deployment ACKs. Train
+y_t=mean_u[actual_b_u(H)-actual_b_u(t)] on suffixes genuinely followed by M. This
+is not actual G_H minus modeled G_t. A modeled immediate increment plus expected
+native suffix remains an approximation when history/geometry are imperfect.
+
+Keep the actual N5/U50 native S1 host, static 400-byte registered map,27 commands
+and 31 nonempty masks. Reports remain every4 ticks; the rotating member is
+(t/4) mod 5 and the other four use current C proposals. Five 25-byte reports plus
+a 16-byte command packet cost 141 bytes/report; at 2 kbit/s, wire time is 0.564
+seconds, leaving1.436 seconds of charged computation before two-tick delivery.
+At report t, old commands/mask execute t,t+1; the candidate executes t+2,t+3
+and remains committed at t+4,t+5. Score the four elapsed ticks t..t+3 plus V_M at
+the pre-current-C boundary t+4. The value state MUST include that still-committed
+candidate action/mask and the prior report's post-C navigation memory. Do not use
+actual future C outputs. At t252, score the final four elapsed ticks and use
+terminal value 0. Hypothetical histories are private copies; only executed
+history updates persistent memory. Whole-round lateness retains old commands/
+mask, with no partial or late rescue.
+
+The code supports this boundary:
+experiments/candidates/uav_user_waiting/b02/scheduler.py already retains the
+midpoint after two delivered ticks; study.py retains model_contacts and
+navigation records for causal reconstruction. The service_age feature path
+supplies lawful missingness conventions, but its learner is a two-action PPO
+implementation, not a reusable supervised value learner. A new bounded history
+maximum/feature pack, acquisition collector, ridge/MLP fit, ranking path and full
+reader are required. No shared host rewrite is indicated.
+
+Both estimators receive the same fixed-scaled decoded map/anchors, effective
+commands/mask, previous post-C nav(one-hot), modeled ages/maxima/windows,
+known-unserved/availability flags and time/phase. Add the same fixed relational
+features to both: per-user nearest-active3-D distance d normalized by
+sqrt(1000²+1000²+150²), d², slack=(b-age)/H, d·age/H and d·slack; plus the ten
+pooled means/second moments and interaction means agreed in the DM source note.
+These require geometry arithmetic, not new radio queries or a learned encoder.
+Quantize synthetic endpoint anchors through the same codec. History unavailable
+from tick 0 must not be converted into fabricated b/age; freeze row eligibility
+and the lawful completed-M fallback prospectively. Deadline fallback remains the
+original hold rule.
+
+Evaluate five complete programs: M; S; G0, the direct four-tick record-gap planner
+with terminal value 0; LR, that planner with fitted ridge continuation value; LN,
+that planner with fitted neural continuation value. Each new planner first
+generates M's full candidate(232 pre-cache requests), retains it, conducts the
+ordinary two-order coordinate search using its own key(116 requests), then
+compares M explicitly(up to one additional pair): at most349 requests/report.
+Value changes inner and final ranking. Secondary key is modeled cumulative age
+over the four elapsed ticks, followed by the existing delivered-four-tick native
+tie key, with native-horizon truncation. G0 is a consequential ordinary
+comparator; M and S remain full-use references. Candidate retention is not a
+policy-improvement guarantee.
+
+Smallest complete learning comparison I recommend: reuse all 64 already-paid B02
+M trajectories, collect192 fresh full episodes(96 pure M;96 with one legal
+uniform(q,mask) intervention followed permanently by M), and evaluate64 untouched
+common worlds times 5 programs=320 episodes. Prebind acquisition worlds, evaluation
+worlds and separate intervention tapes. For intervention j=0..95, freeze report
+r_j=floor(63j/96); train only at later report states whose future really is M.
+Pure episodes contribute reports 4..252. If histories are eligible throughout,
+160*63+sum_j(63-r_j)=13,182 labels. Retain every native episode, including adverse/
+censored failures; any unavailable label reduces usable rows, not reported
+exposure. This is 512 NEW complete H256 episodes/131,072 native steps, plus 64
+reused/16,384 already-paid steps. It is a recommended bounded exposure, not a
+sample-complexity lower bound or guarantee of learnability.
+
+Fit weighted ridge(lambda=10^-3, intercept unregularized) and a
+two-hidden-layer 128-ReLU MLP on the identical data/features. Give episodes equal
+aggregate weight; sample episode then eligible report uniformly for the MLP.
+Normalize target by H; use Adam 10^-3 for 4,096 minibatches of 256, one fixed seed,
+final checkpoint only. Zero-initialize only the final scalar layer, with seeded
+nonzero hidden initialization, so G0 is exactly LN's pre-fit deployment. Train an
+unclipped scalar MSE output; deploy H times output clipped to[0,H-t]. Ridge uses
+the same clipping. These are two started regression fits on ONE acquisition
+realization, not two independent learning replications. No score-driven
+checkpoint, feature or hyperparameter search is proposed.
+
+Complete cost:8,564,736 pre-cache candidate requests;33,991,296 candidate
+reductions after terminal truncation, plus 65,536 committed-prefix reductions and
+settlement;943,488 nonterminal terminal-value queries in deployment. Rechecking
+all learned values in the reader incurs up to the same query count again; fresh
+M evaluation supplies 8,064 held-out suffix predictions for the two models
+without extra episodes. Count training prediction diagnostics separately. The
+neural fit has 1,048,576 minibatch sample presentations/gradient participation;
+ridge has one weighted solve. All512 new plus 64 reused trajectories require
+physical/history/target/choice/deadline reading. Nominal new-episode communication
+is 4,620,288 recurring bytes plus 204,800 map bytes. Old measured M scheduling was
+323.810 CPU seconds/64 episodes; the old complete reader used 1,112.707 seconds/
+256 trajectories. Crude scaling suggests around 0.8 scheduler CPU hours plus 0.7
+reader CPU hours, BEFORE changed features, fitting, imports, storage and
+engineering/support. These are planning extrapolations, not measured new costs
+or node admission. Exact peak memory, serialized bulk size and actual deadline
+margin remain unverified; avoid retaining redundant fully materialized candidate
+feature matrices when traces and outputs suffice.
+
+Constructive prediction: LN reduces G against both M and its exact pre-fit G0
+through executed command/mask changes, with complete native service/reward,
+extreme-gap/worst-user-age, quality, travel and transmitter cost reported.
+Opposing ordinary prediction: G0 absorbs the gain because direct objective
+arithmetic is sufficient. Another useful outcome is that LR supplies the effect
+and no additional neural benefit is established; prefer the simpler fitted
+capability without claiming statistical equivalence. If mean-gap benefit
+purchases service or extreme-tail deterioration, retain it only as an explicit
+conditional frontier point, not a default controller or universal improvement.
+There is no invented mission threshold to make a method win.
+
+The strongest consequential objection is selected-state extrapolation. Observed
+M and singly perturbed M suffixes need not support the synthetic states selected
+by a new planner. Navigation memory and relational features do not make the
+observation Markov, and low held-out M prediction error does not validate
+counterfactual M continuation on LN trajectories. The one-intervention acquisition
+addresses some support, not this guarantee. Separate: valid choices rarely
+differing(nonactivation/sparse exposure); genuinely different executed choices
+that worsen native outcomes(active adverse intervention); and outcomes obscured
+by censoring/deadlines. An active negative stops this finite recipe without
+demanding a repair; a sparse-choice result does not refute value-based control
+generally. A narrow positive warrants replication only if another independent
+data/fit realization would change a practical or scientific decision. More worlds
+for one fit are not that replication.
+
+This deserves a bounded place because it targets an already-declared native
+continuity quantity, reuses demonstrated ordinary control and paid experience,
+and permits a useful ordinary positive while changing actual action development.
+It does not duplicate N5 policy reward-development, parent joint sampling or
+anonymous-peer forecasting. The newer N8 relocation result also merits
+constructive attention under its owner: R-J reward/service gains
+(+0.01765/+1.55225) coexist with quality/travel/adverse-world costs, and
+after-arrival C reoptimization remains part of the useful closed loop. I read
+its compact output and original independent review, not an independent full N8
+raw audit. A well-posed inexpensive N8 continuation-development comparison could
+take priority over this still-conjectural acquisition/two-fit investment. Four
+active DMs are not themselves a reason to run it.
+
+A useful lower-cost alternative is M/S/G0 only:64 worlds times 3 programs=192
+episodes/49,152 native steps,0 fits and 0 new training acquisition. That answers
+whether directly targeting accumulated worst gaps improves ordinary control; it
+does not answer whether learning remaining cost helps. It is an alternative
+allocation, not a mandatory positive precursor or another unbounded gate.
+
+MATERIAL_DISSENT: no, for Root's current design-only continuity assignment and the
+bounded comparison as a proposal. No run is authorized by this review; the
+retained source limits, complete costs and competing N8 investment remain part
+of Root's decision.
+
+### Pre-publication background refresh
+
+Current published main advanced to
+c0a9ddc5a856e83c01583cd17afed3652cb16ef4 while this note was prepared. I read the
+affected topic2/topic4 B04 additions and current direction standing. Parent
+adaptation's fixed joint-sampling primary failed, while the distinct fixed
+S_I-Q_I comparison retained J+0.024075, service+1.767029, service-p10+3.546875 and
+path-1232.241m/UAV, with serious adverse worlds. This strengthens the competing
+investment in an already demonstrated inherited asset. It does not measure this
+proposal's individual-user maximum-gap objective or change the lawful M/S
+comparison, and it is not evidence that all learning is adverse. Root's final
+allocation should include that positive alongside N8; neither the new value
+design nor the older failed selector owns the project-wide learning question.
+This refresh adds no run, rescore or changed result to the present design-only
+scope.
