@@ -3146,3 +3146,68 @@ The32-step fixture raw evidence also remains canonical. Useful source/tests and
 compact readings are published; no full-tree copy, tar or duplicate backup is a
 cleanup condition. Terminal snapshots, redundant progress data and local copies
 are the final cleanup targets after publication and fresh live-consumer checks.
+
+
+<a id="b04-final-cleanup"></a>
+### B04 publication, cleanup and reserve standing
+
+Complete compact evidence, native terminal records and independent scientific
+interpretation were committed and published on main at
+`5d6353ff59da4b2b5c796629cacb4820ab0bb986` before deleting any final retained-input
+copy. Worker/reader/fixture processes and independent review were terminal;
+observer generation37 was stopped with no pending event. No B04 native/model
+query, result reader, Pro request or selected continuation remains. The actual
+`wsl_4070` timed window was released to Root after complete verification.
+
+The exact-target snapshot collector previewed and then freshly rechecked all
+three accepted snapshots: terminal identities, no live source consumers, clean
+source and durable Git reachability passed. It used the supported read-only
+`--sudo-process-scan` for the already known node `/proc` permission restriction.
+No claim, manifest or unique result was removed to create eligibility. Apply
+removed, and subsequent inspection confirmed absent, these exact paths under
+`/home/wu/projects/HMASD/.git/hmasd-launch-sources/`:
+
+- `b01a6dda2cfe44159ab182d37d48213f` — correctness fixture source.
+- `be056e4355fc4310bf8e7746ec3b002c` — fixed worker source.
+- `fb6ae62573bd4141b21580b90e26f058` — complete reader source.
+
+Their allocated sizes were **not captured before deletion**, and this version
+of the collector reports removal/eligibility without byte counts. Therefore
+no fabricated byte credit is assigned to these three snapshots; their exact
+reclaimed-byte total is unmetered. This is a measurement-record limitation,
+not a cleanup tool blocker or remaining directory.
+
+The full worker summary and complete reader digests were rechecked at the
+canonical node. The redundant reader progress contained the same256 rows and
+worker binding as the final reading. `fuser` found no live consumer before
+deleting that progress file and the local temporary inputs/requests. Exact
+allocated-byte measurements (`st_blocks×512`, including the local directory)
+before deletion and verified zero after deletion are:
+
+| Deleted target | Before bytes | After bytes | Measured net reduction |
+|---|---:|---:|---:|
+| node `runs/uav_user_waiting/b04_service_floor_read_a01/reading-progress.json` |10,403,840|0|10,403,840|
+| local `temp/directions/uav_user_waiting/b04/` |16,470,016|0|16,470,016|
+| ten local compiled-bytecode directories listed below |602,112|0|602,112|
+
+The local directory held exactly `worker-summary.json`, `reader-reading.json`,
+`fixture-observer-request.json`, `worker-observer-request.json`, and
+`reader-observer-request.json`; all five files and the directory are gone.
+The44 untracked `.pyc` files and their ten `__pycache__` directories were also
+checked for live consumers, deleted and verified absent. Exact directories are
+`experiments/candidates/uav_user_waiting/{,b01/,b02/,b03/,b03_reader/,b04/}__pycache__`
+and `tests/experiments/candidates/uav_user_waiting/{,b03/,b03_reader/,b04/}__pycache__`;
+no tracked source or test file was removed.
+**Measured target reclamation is27,475,968 allocated bytes; total actual
+reclamation is at least that amount**, with the three deleted source snapshots'
+portion unmetered. No cleanup target or tool blocker remains. One canonical
+copy of complete raw/summary/reader/fixture evidence and all accepted-operation
+receipts is retained; compact Git data, useful source/tests and all adverse
+outcomes remain published. No full-tree backup, tar or retention chain was made.
+
+The direction moves to reserve with the bounded result and re-entry condition
+in the preceding disposition. The directly affected shared background records
+U's useful conditional capability and the local-floor/trajectory distinction;
+it does not turn them into adoption, learning or a general impossibility claim.
+The substantive prospective B04 selection is retained in the dated research
+archive. No new study, automatic retry or owner/adviser dependency is created.
