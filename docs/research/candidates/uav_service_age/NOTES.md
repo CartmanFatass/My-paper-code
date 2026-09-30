@@ -190,3 +190,89 @@ Use fixture-managed non-panel seeds for correctness; count any support transitio
 Independent high-risk engineering review precedes exact-input publication/launch.
 Accepted operations retain their handles and deterministic observer; the native
 DM stays active through collection, full reading and scientific diagnosis.
+
+### B01 implementation acceptance and exact feature freeze
+
+The first registered Implementer `/root/dm_service_age/implement_plans` delivered
+only its four assigned scheduler/features/test files, with no Git mutation or
+native result execution. DM read the code and checks and accepts the behavior.
+DM implemented the finite learner, complete collector, actual-age metrics,
+admitted entry and pure reader. All frozen G/O/S2/history/protocol/controller/
+host dependencies have zero diff from G source `8ab72e5e2`; they are imported,
+not rewritten. One local collector is needed to capture the new causal learning
+rows and objective; the original scheduler classes remain the O/G/S2 programs.
+
+Freeze feature schema1, exactly635 float32 values in source `FEATURE_SPEC`:
+ordered map100 (metres/1000); decoded own positions15 ((xyz−LOW)/(HIGH−LOW));
+actual commands15 and transmitter bits5; decoded C proposals15; pending
+commands15/bits5/availability1 (all0 at this report clock); settled model ages50
+(/256) and censored-unseen flags50; private-prefix ages50 (/256) and flags50;
+clock5 (t/256, remaining/256, candidate length/4, last-settled tick/256,
+unsettled ticks/256); rotating-member one-hot5; decoded-position/proposal,
+history and prefix availability4. Each O/W plan contributes125 values:
+commands15, mask bits5, endpoint ages50 (/256), endpoint unknown50,
+J/served-per50/quality/cumulative-cost-per51200 summaries4, availability1.
+Absent fields are zero with the stated masks; legitimate partial settled history
+retains its actual cursor and age uncertainty. These are model ages, never actual
+ages or hindsight-completed history. Terminal short blocks keep the same51200
+scale. The critic receives the exact stored causal vector; sampled-late rows keep
+the vector and likelihood used at sampling. The actor softmax is float32, then
+the accepted probability pair is normalized in float64 before threshold sampling
+and likelihood recording; the learner's inputs/losses are float32 as frozen.
+
+Standalone W does not search O or compute unused O age-group keys. Dual M/L search
+O then W, sharing geometry/contact results but retaining both116-request traces
+and independent rankings. Full new-plan generation, feature/inference work,
+command encode/decode and diagnostic packing are inside the charged scheduler
+interval. The actual mean-age reward and raw recording are outside the deployed
+policy input; their costs remain in episode/worker support measurements.
+
+Focused checks:19 Implementer scheduler/features tests passed (latest2.83s wall,
+4.85s user+system CPU,278800KiB peak); four learner tests passed (3.65s wall,
+3.40s CPU,348364KiB peak). First integrated suite had26passes and one diagnostic
+label mismatch: M's ordinary unsampled choice had been marked as a forced actor
+row. Restricting that label to L corrects the exposure reading without changing
+commands or training. That invocation cost13.85s wall/13.82s CPU and292 native
+fixture steps. Final four native integration checks passed (15.49s wall/15.48s
+CPU,468624KiB peak), using348 further fixture steps, including exact O/G/S2
+equivalence, all seven programs, first-missing causal fills, complete64-report
+H256 L0 and report252's two-transition block. Total measured native support is
+640steps,0 result fits; synthetic learner tests are not scientific training.
+Fixtures use77101..77104 and synthetic701/705/706, outside declared worlds.
+Pytest cleaned its own scratch. Dependency deprecation warnings remain.
+
+The collector also preserves a completed trajectory and pre-update identities
+when a between-episode update raises, records the failed endpoint parameters
+and actual partial optimizer counts. Its pure mocked regression passed1test
+(2.08s wall/2.07s CPU,273176KiB peak), with no environment or optimizer execution.
+The failed endpoint is diagnostic data, not a resume contract. The reader's CLI
+help passed. Checks cover28 distinct tests in the scoped invocations; no result
+world or additional experimental fit was used.
+
+Independent registered engineering Reviewer
+`/root/dm_service_age/review_execution`, in a separate read-only context, traced
+the full scheduler/collector/learner/reader/admission/source identity path and
+the final failure-retention delta. It found no material engineering defect and
+requested no repair. It reused the test outputs and ran no native transitions,
+fits or further checks. I accept the source independently. The full960-episode
+batch, actual deadlines and512-update replay remain unexecuted; engineering
+review supplies no favorable empirical result.
+
+The complete reader will independently rebuild every actual age/triangular-gap
+sum, native/C trajectory, causal history, feature vector and completed candidate
+ranking/selection, and replay all512 saved PPO updates from the fixed initial
+parameters to the final checkpoint. This deterministic saved-data verification is
+support cost, not a second fit or more independent evidence. Candidate physical
+recomputation covers both available O/W winners plus all evaluated pairs at
+reports0/60/124/252; it deliberately shares radio kernels and does not repeat
+49million candidate reductions. Whole raw NPZs are materialized once per episode.
+
+Priority node wsl_4070 preliminary read-only inspection reports configured
+Python3.10.21/NumPy1.26.3/Torch2.7.0+cu118, with15621386240 available bytes and
+successful imports. Select CPU execution with one Torch/BLAS/OpenMP thread for
+this small network and sequential native decision loop. The observed transient
+CPython failures remain unresolved; these checks do not establish a repair.
+Fresh actual-node memory/load admission is still required at launch. No runtime,
+canonical HEAD, launcher, peer output or sparse-selection change is selected.
+Known test costs above do not measure all authoring, review, dependency-import
+or transfer support; those unmeasured costs are not zero.
