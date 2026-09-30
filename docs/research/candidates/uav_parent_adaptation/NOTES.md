@@ -224,3 +224,38 @@ Support time is still incompletely metered. Remote canonical launcher and comput
 config hashes match published main; its other maintained edits and sparse layout
 are preserved. Only this direction's active row will be synchronized before fresh
 node admission. The prospective12-fit/384-panel program is unchanged.
+
+## 2026-09-30 09:42 UTC — B01 accepted; same-handle observation
+
+Exact source `930a0789dad4adbba67592c5fff07802a3dd40c2` was published before native
+execution. The preceding implementation heading's09:37 time was an estimate;
+source publication was complete by09:35:19UTC. The configured remote network shell
+was needed for partial-clone Git object fetches; interrupted read-only fetch/control
+sync processes were reconciled before the successful narrow control-row update.
+Remote canonical unrelated files and sparse selection were preserved. Its historical
+Git auto-GC warning (`bad tree object9e40125e…`) did not prevent fetching or source
+admission and was not treated as a scientific/runtime finding.
+
+Supervisor delivery01 had a shell syntax error at the parenthesized lead before
+`hmasd_launch.py` was invoked, with terminal code2 and zero scientific exposure.
+After preserving that fact, delivery02 passed one correctly quoted command through
+the configured network shell. It admitted the original unchanged scientific
+request, not a retry of a native operation. The canonical supervisor logs remain
+under `/home/wu/.agent-tasks/uav-parent-adaptation-b01-a01/task.log` and
+`/home/wu/.agent-tasks/uav-parent-adaptation-b01-delivery02/task.log` onwsl_4070.
+
+The single native operation was accepted at09:41:21.223817UTC. Its exact command,
+source snapshot, native identities and status reference are in the retained
+[launch manifest](../../../../runs/uav_parent_adaptation/b01_unscreened_a01/launch-manifest.json).
+[Fresh admission](../../../../runs/uav_parent_adaptation/b01_unscreened_a01/admission-preflight.json)
+passed with14,687,539,200 effective available bytes versus4GiB required. The canonical
+output is `wsl_4070:/home/wu/projects/HMASD/runs/uav_parent_adaptation/b01_unscreened_a01/`.
+It remains the one necessary bulk-evidence location; no raw-tree copy is selected.
+
+`hmasd_wait.py` is armed against that same operation for this native child's actual
+UUID, generation1/window1500s. Initial drain observed consistent accepted records
+and both native processes running, no exit witness. The first request rejected a
+relative SSH executable before starting observation; using `/usr/bin/ssh` fixed it
+without changing the operation. Registration and process life are not scientific
+completion. This turn stays active through terminal collection and complete reading;
+checkpoint rearm will never restart the worker.
