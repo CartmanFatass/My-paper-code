@@ -227,3 +227,23 @@ change no decision or scientific exposure. Full panel, declared seeds and all160
 fixed. The accepted local worker will consume the verified staged checkpoint paths; the source
 remote originals remain required, untouched assets. Canonical bulk retention and actual cleanup
 follow terminal collection, not an assumption that launch acceptance is a read result.
+
+### Pre-admission input-location refusal and correction
+
+The first native launcher invocation at source `a6c31f8e8bc54e54de2555086160375ed661664b`
+returned exit4 before acceptance: `absolute author input is absent from published snapshot:
+/home/fires/hmasd-wsl/temp/directions/uav_fleet_transmission/final45_checks`.
+Same-target `status` reports that the status reference does not exist; the scientific output
+directory is absent. No N worker, episode or fit started. The launcher created only an
+unclaimed source snapshot `a23f403740a04e79acd7cf29c433219e`, retained for supported exact-target
+cleanup after reconciliation. This is a known input-binding refusal, not an uncertain result
+launch or a failed scientific batch.
+
+The ignored author scratch is intentionally outside the published snapshot. Move only the
+two verified binaries to external direction-owned local staging,
+`/home/fires/hmasd-inputs/uav_fleet_transmission/b01_native_s1_a01/<original-tag>/checkpoint_45.pt`.
+Sizes and hashes were rechecked after the move; the old temporary files/directories are gone.
+No additional copy, model, seed, numerical contract, exposure or node was introduced. The
+actual source and scientific arguments are unchanged except this outcome-blind checkpoint-root
+location correction. A fresh admission invocation may now use the same unused output tag;
+no accepted operation is retried. The move itself reclaimed0 disk bytes.
