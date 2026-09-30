@@ -1,0 +1,98 @@
+{
+  "scope": "Owner-requested shared runtime repair; engineering only; scientific comparison unchanged",
+  "old_runtime": {
+    "python": "3.10.21 (Clang22.1.3 PBS20260901)",
+    "path": "/home/wu/.venvs/hmasd/bin/python",
+    "exe_sha256": "ca420bd4614ae7757b4cd4938b3c663e98d2b631bda518610071d9a4ca0b509e",
+    "build_id": "afb5e1790bd84db7ed2c50d21b86fd33a96784bf",
+    "numpy": "1.26.3",
+    "torch": "2.7.0+cu118"
+  },
+  "set_core": {
+    "path": "/mnt/c/Users/wu/AppData/Local/Temp/wsl-crashes/wsl-crash-1790535138-823176-_home_wu_.local_share_uv_python_cpython-3.10.21-linux-x86_64-gnu_bin_python3.10-11.dmp",
+    "bytes": 2625273856,
+    "sha256": "e797368713e44b40e257363e59479afcd0c8a31c03836621f41d45c04271680c",
+    "binding": "core-resident GNU build-ID notes for executable, NumPy, libc match mapped-path builds; sampled interrupted CPython and NumPy instructions match disk; not whole-memory identity",
+    "numpy_build_id": "6248641b6cc6c5958d7bd1c0315651a6e2f00686",
+    "libc_build_id": "a4a7992a8e66555c8141ab2a08a8465ff6e0ea65",
+    "fault_rip": "0x55808bf4e0fd",
+    "function": "PyErr_Format+253",
+    "instruction": "decq (%r13)",
+    "r13": 7,
+    "origin": "r13 loaded from current tstate curexc_value (+0x60); exception fields subsequently cleared; fault while decrefing preexisting exception value",
+    "not_supported": [
+      "Value7 is not the format %U argument or newly formatted result",
+      "Does not establish who wrote invalid pending exception state",
+      "Does not distinguish earlier C-API misuse, layout/corruption or other memory corruption",
+      "libcuda build-ID mismatch remains outside this stack; Python locals/source line unavailable"
+    ]
+  },
+  "latest_g_failure": {
+    "source_sha": "8ab72e5e2c2123e6cf0af6744ada24f8188ec2dc",
+    "record": "runs/uav_registered_service/b02_periodic_efficiency_a01",
+    "arm": "S2",
+    "world": 29309033,
+    "tick": 12,
+    "error": "SystemError: unknown opcode in NumPy _all_dispatcher reached by np.all(mask)",
+    "before_failure": "101 complete episodes plus12 transitions",
+    "necessary_custom_extension": false,
+    "necessary_torch": false,
+    "raw_sha256": "c814063d2709353162ce73348d00263569de941941b866723e1f4666feb30117"
+  },
+  "candidate": {
+    "version": "same CPython3.10.21",
+    "compiler": "GCC13.3.0",
+    "cflags": "-O2 -g -fno-omit-frame-pointer; no PGO/LTO",
+    "source_url": "https://www.python.org/ftp/python/3.10.21/Python-3.10.21.tar.xz",
+    "source_sha256": "a0da1e72132e950154eca0f6f47d5db828454700de20e5113667940d81e0db04",
+    "prefix": "/home/wu/.local/opt/hmasd-cpython-3.10.21-gcc",
+    "venv": "/home/wu/.venvs/hmasd-gcc-31021",
+    "exe_sha256": "039033f129d33a69044ceff71ca87b109ad99d511b59946f81ffc3f728b1a3a1",
+    "package_tree": "Original /home/wu/.venvs/hmasd/lib/python3.10/site-packages, shared by a plain .pth entry; not copied or mutated",
+    "runtime_search_paths": "No RPATH/RUNPATH in executable or stdlib extensions in final build; SSL/crypto/ffi resolve system libraries",
+    "scope": "Selected provisional mitigation for subsequent launches; not compiler-cause isolation"
+  },
+  "hardware": {
+    "owner_report": "CPU seems downclocked following prior overheating",
+    "windows_observation": "96 Kernel-Processor-Power37 events/14days; latest cores12..19 firmware limited86401s; activeTurbo AC min/max100%; thermal WMI access denied; no matchingWHEA events/14days",
+    "memory_probe": "512MiB memtester1pass exit0 in78.900774s in WSL guest; not complete physical-memory/CPU health certification",
+    "firmware_or_power_changes": false
+  },
+  "primary_background_sources": [
+    {
+      "url": "https://www.python.org/downloads/release/python-31021/",
+      "use": "Release/source provenance"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/setup-upgrade-and-drivers/event-id-37-windows-kernel-processor-power",
+      "use": "Microsoft definition of event37 frequency restriction; page appliesWindowsServer, not diagnosis of this laptop"
+    },
+    {
+      "url": "https://www.intel.com/content/www/us/en/support/articles/000088048/processors.html",
+      "use": "Thermal throttling is protective; laptop power/thermal limits determined byOEM, no hardware-cause claim"
+    }
+  ],
+  "implementation_attempts": [
+    "Initial side build lacked optional development headers and could not import _ssl; never configured or used for scientific work.",
+    "Development packages were downloaded/extracted privately without package installation; next candidate imported successfully but contained a temporary runtime search path.",
+    "Final side build removed all runtime search paths; exact final executable hash is the deployed-candidate identity.",
+    "First memtester invocation used wrong usr/bin path and exited before workload; corrected usr/sbin invocation passed."
+  ],
+  "decision": {
+    "state": "Accepted by Root after independent engineering review; exact-input publication and node deployment pending",
+    "root_cause": "unresolved; both old and new runtimes pass bounded replays",
+    "runtime_cost": "New build completed5318 vs old5986 same-input reports in300s (~11% fewer); not a uniform latency guarantee",
+    "scientific_result_fits": 0,
+    "native_fixture_steps": 696,
+    "synthetic_fixture_optimizer_steps": 24,
+    "compatibility": "30existing tests per runtime pass; checkpoint bothways loads and all numerical contents/initializers/innovations identical",
+    "deadline_scope": "128same-input realclock scheduler calls perruntime,0misses; existing fullH256 L0realclockfixturepasses, but test does not print max charge or certify all possibledeadlinebehavior",
+    "fallback_on_recurrence": "Do not automatically retry/resume a failed scientific operation. Preserve evidence and re-evaluate node/runtime admission; replacement does not certify hardware or eliminate fault risk."
+  },
+  "engineering_review": {
+    "result": "No material finding in actual executable configuration diff and final evidence",
+    "scope": "Read-only independent reviewer; no additional workloads launched",
+    "verified": "Seven checkpoint-content fields match; configured venv path preserved; old package tree and tool PATH intentionally retained",
+    "limits": "Provisional mitigation; root cause, improved reliability, general CUDA and optimizer-resume compatibility not established"
+  }
+}
