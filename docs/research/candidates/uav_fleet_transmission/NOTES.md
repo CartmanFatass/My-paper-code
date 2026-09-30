@@ -1743,3 +1743,43 @@ ordinary comparators and prospective total cost in this existing notebook, witho
 result code, native/controller/model queries or fits. This is current authorized design
 work with an actual Oracle producer, not idle waiting for invented approval. The B03 result
 and its adverse evidence remain fixed while that next investment is considered.
+
+<a id="b03-final-cleanup"></a>
+### B03 publication and completed measured cleanup
+
+Scientific reading, full original independent diagnosis, all compact native evidence, own
+RESEARCH standing and the affected shared-background topic were published to main at
+`0791f8a25460f6c841dc04ed779b63ccfb8a1090`. The substantively superseded prospective N8
+index plan alone was retired under constitution section4 to
+[2026-09-30 historical index material](../../archive/2026-09-30/RESEARCH.md), preserving its
+published source and rebased evidence citations; the other current plans/controls were
+preserved. No result code changed during reading, and no additional result was launched.
+
+After publication, the maintained native snapshot collector previewed both exact terminal
+sources as eligible, then rechecked and removed them under the serialized shared Git lock.
+It verified terminal witnesses, absent processes, consistent claims, outputs outside the
+snapshots, clean files and durable `main` reachability. Read-only privileged process scanning
+had no reference or permission blocker. The critic and original Oracle explicitly released
+their raw/snapshot consumers. Actual deleted targets are:
+
+- `.git/hmasd-launch-sources/8341f5d7c61343a3bf8d0898931b925a` and its
+  `.git/worktrees/8341f5d7c61343a3bf8d0898931b925a` registration (unexposed failed A01).
+- `.git/hmasd-launch-sources/b70bade3003946de9ca9f65580ebc865` and its
+  `.git/worktrees/b70bade3003946de9ca9f65580ebc865` registration (complete A02).
+- `temp/directions/uav_fleet_transmission` (consumed/stopped observer scratch).
+- `experiments/candidates/uav_fleet_transmission/__pycache__`.
+- `experiments/candidates/uav_fleet_transmission/b02/__pycache__`.
+- `experiments/candidates/uav_fleet_transmission/b03/__pycache__`.
+- `tests/experiments/candidates/uav_fleet_transmission/b03/__pycache__`.
+
+All nine filesystem targets and both Git worktree registrations are absent. Measured
+allocated bytes across their union plus both B03 run directories and the canonical A02
+store decreased from**3,478,691,840**to**48,267,264**, a **net3,430,424,576bytes reclaimed**.
+This accounts for the raw relocation and necessary compact canonical copies; it does not
+count moving raw data as savings. Remaining allocation is24,576bytes in A01,1,441,792in
+the compact A02 run and46,800,896in canonical A02 evidence. All260required bulk hashes and
+original run symlink identities were reverified after deletion. Useful code/tests, all
+positive/adverse/failed evidence, operation claims and B01/B02 canonical evidence remain.
+No cleanup target, tool blocker, active result producer, unread result or pending B03 review
+remains. Root-authorized source-only next-design work is the next task, with no new
+result-code/query/fit authorization.
