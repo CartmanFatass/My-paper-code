@@ -1,0 +1,52 @@
+{
+  "deleted": [
+    {
+      "target": "temp/directions/uav_parent_adaptation",
+      "allocated_before": 8192,
+      "allocated_after": 0,
+      "net_reclaimed_bytes": 8192,
+      "absent": true
+    },
+    {
+      "target": "experiments/candidates/uav_parent_adaptation/b03_c_prior/__pycache__",
+      "allocated_before": 73728,
+      "allocated_after": 0,
+      "net_reclaimed_bytes": 73728,
+      "absent": true
+    },
+    {
+      "target": "tests/experiments/candidates/uav_parent_adaptation/b03_c_prior/__pycache__",
+      "allocated_before": 77824,
+      "allocated_after": 0,
+      "net_reclaimed_bytes": 77824,
+      "absent": true
+    },
+    {
+      "target": "runs/uav_parent_adaptation/b03_c_prior_a01/stdout.log",
+      "allocated_before": 8192,
+      "allocated_after": 0,
+      "net_reclaimed_bytes": 8192,
+      "absent": true,
+      "retained_sha256": "68c49d2a1a38b200eddad2d955e4a8966c939a9b8394fd4c07a066da6fc4fa78"
+    },
+    {
+      "target": "runs/uav_parent_adaptation/b03_c_prior_a01/stderr.log",
+      "allocated_before": 0,
+      "allocated_after": 0,
+      "net_reclaimed_bytes": 0,
+      "absent": true,
+      "retained_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "target": "runs/uav_parent_adaptation/b03_c_prior_a01/reader.log",
+      "allocated_before": 4096,
+      "allocated_after": 0,
+      "net_reclaimed_bytes": 4096,
+      "absent": true,
+      "retained_sha256": "d6157d1ac126f3630bfbfe44fd4c4d8277b4d374c1e1717258dc72cd18f1ba1c"
+    }
+  ],
+  "net_reclaimed_bytes": 172032,
+  "observer_stopped": true,
+  "observer_generation": 9
+}

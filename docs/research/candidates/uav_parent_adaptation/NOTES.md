@@ -2188,3 +2188,46 @@ differ. Its owning DM retains interpretation and future execution. No cross-topi
 pivot or extra run is launched here. The directly reusable B03 change is to retain
 ordinary stochastic I and keep sampled learning, deployed greedy value and temporal
 service tradeoffs separate in the shared background.
+
+<a id="b03-final-cleanup"></a>
+### B03 publication, retained consumers and measured cleanup
+
+The complete compact result and independent disposition were published as
+`8b7a3c0567ae07d7243ba3b5ce4ed55903ad666a` before deletion. The worker, original
+pure reader and Scientific Reviewer finished; no accepted operation was moved or
+restarted. Observation generation9 was stopped after all three historical jobs
+were ready and every event consumed, with no pending wake. C/I policy definitions,
+checkpoint loaders, collector/reader, exact update law and focused checks remain
+useful for the retained assets and result validation on current main; no unused
+alternative implementation was created. No other direction's source, evidence,
+cache, checkpoint or accepted input was removed.
+
+The exact-target native snapshot collector verified terminal identities, durable
+source reachability, clean input content and absence of live consumers using its
+supported read-only elevated process scan. It then removed
+`hmasd-wsl-node:/home/wu/projects/HMASD/.git/hmasd-launch-sources/a2c7685a172c4a72b51b4259699a237c`:
+allocated bytes **809742336→0**. No multiply-linked regular files were present.
+The original admission/manifest and canonical output remain; summary/reading hashes
+were rechecked after deletion. [Actual native deletion and measurements](../../../../runs/uav_parent_adaptation/b03_c_prior_a01/snapshot-gc.json).
+
+Local deletion removed only the finished direction scratch directory
+`temp/directions/uav_parent_adaptation/` (8192 bytes), B03 implementation
+`__pycache__/` (73728), matching test `__pycache__/` (77824), and redundant collected
+`stdout.log`/`stderr.log`/`reader.log` (8192/0/4096). Each log's canonical-node copy
+matched its hash before deletion. All targets are absent and local allocated
+reduction is172032 bytes. [Exact targets and retained log hashes](../../../../runs/uav_parent_adaptation/b03_c_prior_a01/local-cleanup.json).
+The transient GC preview was discarded and is not counted as reclaimed research
+storage. No backup/archive/worktree copy or bulk retention chain was created.
+
+**Net allocated reduction across deletion targets:809914368 bytes. No cleanup
+blocker or leftover disposable target remains.** This is measured target allocation,
+not a claim about concurrent host-wide free-space changes or Git object storage.
+The one required raw/checkpoint/training-log copy stays in the canonical B03 output.
+The unrelated remote historical auto-GC warning did not block this exact cleanup;
+no repository-GC repair was attempted. B01/B02 cleanup remains recorded separately.
+
+Direction state is reserve with no live producer, unread result/advice or selected
+successor. The concrete re-entry would be a prospectively selected consequential
+learning or transfer comparison, retaining I as an ordinary comparator and all
+earlier adverse constraints. Root owns any next cross-question allocation; that is
+not a pending approval or a fabricated external dependency for completed B03.

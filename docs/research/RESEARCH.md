@@ -82,6 +82,14 @@ S1匿名静态用户的合法几何缓存也已完成普通控制比较：B01在
 识别失败原因，不自动授权换解码、延长训练或改编码。C/H含明确无线／搜索知识，比较是有限完整包用途，
 不是经验或信息价值上界。[全部正反结果、独立取舍与成本](candidates/uav_local_history/NOTES.md#2026-09-29---b02-complete-reading)。
 
+同一当前观测C还存在有用的零训练随机策略：B03的I在每个四步决策以.9概率选C命令，
+其余质量均匀分给另26个命令。96个新世界／动作区组中，I−C的平均J +.023721、服务+1.709106人/步，
+三个区组均为正；但35个世界J下降，平均路径多1650.708m/UAV，回合内服务p10均值19.53125→17.5。
+跨世界回合J的p10反而.256979→.306135，故平均／跨世界收益与回合内连续性不可互换。
+三份零头／零表初始化表达同一个固定I，不是三个训练复现。保留I为普通随机参照和C的低运动取舍；
+未来学习只胜确定性C可能仅重现已有零fit能力，还需与I比较。无新增信息或动作权利，不建立安全、
+电池或随机化机理结论；[完整比较、全部反例与独立判读](candidates/uav_parent_adaptation/NOTES.md#b03-complete-reading)。
+
 同一当前观测C的无线activation比较已保留新的普通能力：N5/U50/H256、64新共同世界，
 192回合／49,152步／0fit中，G/E对all-on的完整平均J +.115009／+.119393，服务/步
 +7.396606／+7.781250；E对贪心G另增J .004385、服务 .384644，描述区间均不跨零。
@@ -669,8 +677,9 @@ final-greedy and temperature-one sampled point screens pass. Greedy−C J is +.0
 or the declared margins in a population. Sampled−C gives J +.046566[+.028246,+.064886] and
 service +3.352905[+2.042278,+4.663533], 26/32 positive for each, while episode-minimum service
 falls by .781250, with 21/32 lower minima. Sampling's gain over greedy is a fixed-decoder result,
-not identified learned coordination; ordinary randomized C remains an unresolved simpler
-explanation. The actor removes full candidate ranking but retains a charged analytic radio/
+not identified learned coordination. Ordinary C randomization is independently useful on
+another panel (topic2); the student's increment over a matched stochastic ordinary reference
+remains untested. The actor removes full candidate ranking but retains a charged analytic radio/
 navigation helper. Cached C is faster: greedy/sample query CPU is 1.34×/5.26× C. Dense local
 labels and active updates produced native competence in this one fit; extra data and updates
 prevent attributing final−BC progression specifically to aggregation. Preserve this positive,
@@ -929,45 +938,46 @@ all constants/adverse evidence, end this mean-substitution recipe, and buy no
 automatic tuning/panel. A consequential new deployment-cost comparison could reopen
 the broader question. [Full fixed-asset evidence, independent diagnosis and cost](https://github.com/CartmanFatass/My-paper-code/blob/e17f4fdf91bd9e81d6614b0d6af6c38ca0020aa9/docs/research/candidates/uav_correction_compression/NOTES.md#b01-complete-reading).
 
-The independent-parent `uav_parent_adaptation` B01 now extends that development
-signal beyond selected B19451: three unscreened C→B→K/D lineages, 12 fits and 384
-complete evaluation trajectories. Both K and D improve their own parent's observed
-mean J and service in every lineage; D−P/K−P means are **+.005513/+.004061 J** and
-**+.298177/+.238770 users/tick**, with outer df2 intervals still crossing zero.
-The primary D−K J blocks are **−.000963/+.001926/+.003392**, mean **+.001452**
-[−.004054,+.006957]; service mean **+.059408** [−.243321,+.362136]. These three
-complete-program units combine parent generation, adaptation and deployment sampling;
-96 worlds do not create more training replicates. Parent generation itself loses
-service versus initialization in two lineages and J in one. D's mostly constant
-correction magnitude and active K leave finite calibration/optimization credible,
-while the prior mean-compression loss still prevents dismissing useful variation.
-A small same-history action bound does not preserve closed-loop service: lineage 1/
-world 1 D−P loses **6.769531 users/tick**, with zero ticks **5→83**; world 11 instead
-eliminates P's 51 zero ticks. Retain both conditional capabilities, all parents and
-adverse worlds, without D superiority, state-dependence/freezing causality or a new
-default. B02 below compares ordinary continuation using these retained parents;
-it does not extend B01. B01 cost is 1,671,168 native steps and 2280.176845 measured
-worker-plus-reader CPU-s; support remains incompletely metered.
-[Complete B01 result and independent reading](candidates/uav_parent_adaptation/NOTES.md#b01-complete-reading).
+Development of competent parents has produced conditional learning capabilities,
+with heterogeneous finite-program value. In `uav_parent_adaptation` B01, both K and D
+improve their own unscreened parent's observed mean J/service in all three lineages:
+D−P/K−P mean J +.005513/+.004061. Primary D−K is −.000963/+.001926/+.003392,
+mean +.001452 [−.004054,+.006957]; its extra value remains unresolved. These are
+three complete-program units, not96 training replicates. Parent generation itself
+loses service versus initialization in two lineages. Active K and D's mostly constant
+correction magnitude leave ordinary calibration credible, while the earlier mean-
+substitution losses still prevent dismissing useful function variation. Small same-
+history action bounds also fail to preserve closed-loop service: D1/world1 adds78
+zero ticks over P (5→83), even while D1/world11 eliminates P's51 zeros.
+[Complete B01 and independent diagnosis](candidates/uav_parent_adaptation/NOTES.md#b01-complete-reading).
 
-Ordinary full-policy U in B02 develops one unscreened parent substantially while
-hurting the other two observed means. U−D J is **−.015289/−.008906/+.047649**,
-equal-lineage mean **+.007818**, conditional deployment 95% **[−.001009,+.016645]**;
-service means are −.860962/−.738037/+2.927612 users/tick. U3 improves its own P by
-+.053578 J/+3.338379 service and reduces total zero ticks 233→1; U2/world31 instead
-adds 85 zero ticks, including 76 consecutive, while P/K/D have none. Retain this
-ordinary learning capability and every adverse endpoint, without a default or
-parent-selection rule. Sigma rises in all U; joint optimization, variance freedom,
-representation and recurrent feedback remain combined, so this does not identify
-freezing or a repair. Earlier beneficial and harmful continuations from the same C
-also preclude assigning the present split to parent quality. Fresh-panel D−K means
-are positive in all three lineages (average +.002599 J/+.129313 service, conditional
-intervals positive), but these reused endpoints add no K/D training replication;
-K2−P2 J/service and D2−P2 service are now negative. Independent review supports
-retaining the capabilities and ending immediate unchanged-continuation investment;
-a repeat has narrow information value but is unselected, and the broader question
-stays open in reserve. B02 adds 3 fits/491,520 steps/855.845039 measured worker-plus-reader
-CPU-s. [Complete result and independent investment judgment, evidence 6adc79248](candidates/uav_parent_adaptation/NOTES.md#b02-complete-reading).
+Ordinary full-policy U in B02 adds a substantial constructive capability in lineage3:
+U3−P3 J +.053578/service +3.338379, zero ticks233→1. Its other two lineages lose
+mean J/service; U−D J blocks are −.015289/−.008906/+.047649, equal mean+.007818
+with conditional deployment interval[−.001009,+.016645]. U2/world31 adds85 zeros,
+including76 consecutive, while P/K/D have none. Fresh-panel D−K mean+.002599J
+has a positive conditional interval but adds no K/D training replication; K2−P2
+J/service and D2−P2 service turn negative. Sigma rises even for useful U3, and
+older beneficial/harmful continuations from the same C preclude identifying parent
+quality as the moderator. Retain all capabilities and losses without a new default,
+freezing causality or an automatic continuation.
+[Complete B02 and investment judgment](candidates/uav_parent_adaptation/NOTES.md#b02-complete-reading).
+
+Competent deterministic initialization and useful initial sampling also do not ensure
+that a finite learner preserves either. In ordinary-C B03, primary final-greedy Lg−C
+J is −.011832/−.014644/−.006250 (mean−.010909); actual sampled learning Ls−I is
+−.070742/−.090402/−.072493 (mean−.077879,93/96 world losses). I itself improves
+C by+.023721J/+1.709106 service without a fit, with the movement/continuity costs
+in topic2. Tables, hidden/output layers and critics change and both modes depart
+from C, contradicting nonactivation and greedy-only failure accounts. Rising entropy
+and declining C probability do not identify entropy, credit, optimization or visitation
+as the cause. A standalone K-only learner remains untested. Retain C/I/all learned
+endpoints; future learning must confront the competent ordinary stochastic comparator,
+not merely recover its existing gain. End unchanged B03, preserving the broader
+learning question and any materially justified comparison. B01–B03 paid18fits,
+2,654,208 native steps and3726.28 measured worker/reader CPU-s, with earlier
+acquisition/support additional.
+[Complete B03, independent disposition and alternatives](candidates/uav_parent_adaptation/NOTES.md#b03-independent-disposition).
 
 ### 6. 实证研究是在具体条件下缩小解释空间
 
@@ -1403,7 +1413,7 @@ T的正均值也不代表两个固定响应都各擅其长。直接学习、有�
 | `uav_service_age` | Can finite experience reduce cumulative native service age beyond competent lawful ordinary control under the same delayed commitment? | reserve | Codex DM (native child) | **B01 complete/read/independently diagnosed; retain W/M, end unchanged selector investment.** Source d4430e619, compact result0b358981a:1fit/960episodes/245760steps; full frozen reader and 2048 updates per network replayed. L1−M mean age+.269054[+.069315,+.468793], L1−W+.229916; own-initialization gain−.273965 is retained but does not establish training-population or foresight superiority. W−O age−1.086826 with service/travel gains and worse user tails; retain both W/M with their measured compute tradeoff. All choices executed, no deadline misses. No active producer, unread result/advice or selected successor; wider learning question stays open. [Complete evidence/disposition](candidates/uav_service_age/NOTES.md#b01-complete-reading), [cleanup complete:822185984bytes reclaimed](candidates/uav_service_age/NOTES.md#b01-final-cleanup), [routing](#session-routing). |
 | `uav_fleet_adaptation` | Can demonstrated multi-UAV control capability become a competent learned starting policy under lawful local inputs, and support worthwhile further development? | reserve | Codex DM (native child) | **B02 complete: retain one conditional learned starting asset.** One local-C lineage (1 fit/114,688 steps/8,000 updates) passes both fixed point screens. Greedy−C J+.002135/service +.365356 (intervals cross 0); sampled−C J +.046566/service +3.352905,26/32 positive each, with lower minimum service in 21 worlds and higher path/compute. C remains faster; no equivalence, recurrence or later-PPO claim. Independent review recommends considering one fresh-lineage replication (1 fit/98,304 steps with retained controls); no successor selected. B01 A/F remains ended. Evidence 269d5d03f; [complete result](candidates/uav_fleet_adaptation/NOTES.md#b02-complete-reading), [disposition/next choice](candidates/uav_fleet_adaptation/NOTES.md#b02-independent-disposition), [cleanup:813293568bytes reclaimed](candidates/uav_fleet_adaptation/NOTES.md#b02-final-cleanup), [routing](#session-routing). |
 | `uav_user_waiting` | Can ordinary prospective control reduce typical users’ service interruptions beyond M while retaining the accumulated-fairness capability of R? | reserve | Codex DM (native child) | **B02 complete/read/independently diagnosed; retain M and conditional S, end this fixed A extension.** Evidence87a66f083:256valid episodes/65,536steps/0fits; total65,648 result steps retains112 failed-prefix steps, plus64 correctness steps. Primary A−M mean per-user maximum gap+.628750[−.215564,+1.473064]; A−S−.508438 interval crosses0. S−M primary+1.137188, but maximum gap−8.953125 and worst-user mean age−3.078491, at service−3.662537 in all64 worlds. A−S service+.313477 with2.37× scheduler CPU; preserve the mixed result, not a primary success. Full reader and all644 pair changes verified within declared scope; no deadline misses or runtime-cure claim. Known worker/full-reader2,651.306 CPU seconds, support additional. No producer, unread result or selected successor; re-entry needs a consequential complete continuity/tail/service/compute comparison. [Reading and disposition](candidates/uav_user_waiting/NOTES.md#b02-complete-reading), [cleanup:2,448,371,712bytes reclaimed](candidates/uav_user_waiting/NOTES.md#b02-final-cleanup), [B01](candidates/uav_user_waiting/NOTES.md#b01-complete-reading); [routing](#session-routing). |
-| `uav_parent_adaptation` | Can learning develop competent parents, including an existing local ordinary controller, without confusing sampled learning with deployed improvement? | exploring | Codex DM (native child) | **Select fixed ordinary-C development; implementation next.**3fits/491520steps,C/I/Lg/Ls,primary full-categorical greedy Lg−C;Ls−I separately. Same27commands/local information. Initial greedy=C,sampled p(C)=.9;702table+localMLP,actual tablelr.01. Full independent/6Pro reading complete,no material dissent. No extra K/continuous residual/tuning. U3 and U1/U2 losses/76-tick outage remain; unchanged U ends. [Design](candidates/uav_parent_adaptation/NOTES.md#ordinary-parent-allocation-addendum-20260930), [full advice/selection](archive/2026-09-30/RESEARCH-ordinary-controller-development.md#decision), [B02](candidates/uav_parent_adaptation/NOTES.md#b02-complete-reading); [routing](#session-routing). |
+| `uav_parent_adaptation` | Can learning develop competent parents, including an existing local ordinary controller, without confusing sampled learning with deployed improvement? | reserve | Codex DM (native child) | **B03 complete/read/independently diagnosed; end unchanged recipe, retain C/I and all endpoints.** Evidence8b7a3c056:3fits/491520steps. All three Lg−C and Ls−I mean J effects are negative (pooled−.010909/−.077879). Zero-fit I−C gains+.023721J/+1.709106 service, with+1650.708m path and worse within-episode service p10; preserve all losses. Future learning includes I as an ordinary comparator; entropy/credit causes and K-only success remain unresolved. B01/B02 capabilities and adverses stand. No producer, unread advice or selected result successor at this boundary. [Complete reading](candidates/uav_parent_adaptation/NOTES.md#b03-complete-reading), [independent disposition](candidates/uav_parent_adaptation/NOTES.md#b03-independent-disposition), [cleanup:809914368bytes](candidates/uav_parent_adaptation/NOTES.md#b03-final-cleanup); [routing](#session-routing). |
 | `uav_correction_compression` | Can useful learned residual corrections be deployed as fixed calibrations while preserving complete native behavior and reducing online work? | reserve | Codex DM (native child) | **B01 complete/read/independently diagnosed; no mean replacement.** Published result e17f4fdf9:224 episodes/57344 steps/0fits. All three C−D J/service intervals are below zero and all frozen retention rules fail; D19702 retains a positive conditional B40 increment. Keep D/B40/all adverse outcomes, choose no new default or automatic tuning/panel. Nearly constant magnitude does not imply dispensable variation; optimal constants/message causality remain open. Full actor CPU saves21–22.5%, trace-inclusive loop only2.7–3.8%. Re-entry needs a consequential deployment-cost question and complete comparison. [Evidence/disposition](candidates/uav_correction_compression/NOTES.md#b01-complete-reading); [closure complete](candidates/uav_correction_compression/NOTES.md#b01-final-cleanup), no live work or cleanup blocker. [Routing](#session-routing). |
 | `uav_registered_service` | Can lawful model-history scheduling improve registered users' periodic native link opportunities at a worthwhile complete-service and execution cost? | reserve | Codex DM (native child) | **B02 complete/read/independently diagnosed; retain conditional G, select no further run.** Primary a02, source8ab72e5e2:192episodes/49152steps/0fits, all raw and full declared reader complete. G-O J+.080997, service+5.734924/tick, path-1599.590m/UAV, but F-.109375 (7 extra missed obligations in6worlds) and maximum gap+21.609ticks. Every world activates; no deadline failures. Two terminal false model-window completions do not explain five other lost obligations. Reject loss-free preservation without inventing an adoption tolerance; keep G for service/travel tradeoff, O for stronger coverage/refresh, S2 for native efficiency. Original a01 failure/102raws retained; cumulative75020steps and1130.943 measured worker/reader CPU seconds, no runtime fix established. B01 O capability, P-O unresolved superiority and adverse gaps stand. Reserve with no producer, unread result or selected successor; re-entry needs a consequential complete service-contract comparison chosen by Root. [Complete B02 evidence and disposition](candidates/uav_registered_service/NOTES.md#b02-complete-reading), [closure complete](candidates/uav_registered_service/NOTES.md#b02-final-cleanup):1,619,988,480 allocated bytes reclaimed, no cleanup blocker; [failure/recovery](candidates/uav_registered_service/NOTES.md#b02-recovery-decision), [B01 evidence](candidates/uav_registered_service/NOTES.md#b01-complete-reading), [routing](#session-routing). |
 | `uav_fleet_transmission` | Can transmission management and physical repositioning develop complete native fleet service beside competent immediate joint control? | exploring | Codex DM (native child) | **B01 complete; select bounded N8 C/J/R.**16fresh H500 worlds,48episodes/24000steps/0fits: original C/E,joint movement/mask J,one silent-repositioning option R at t40. Full J/service and cost contrasts;50.919Mscore-request ceiling,no claimed headroom/learning/option necessity. Retain N8 E benefit,N4 harms,C/E and all B01 evidence6b51a962e/cleanup3377176576bytes. Same non-owner-archived DM owns new B02. [Full independent proposal/selection](archive/2026-09-30/RESEARCH-silent-reserve-repositioning.md#root-decision), [B01](candidates/uav_fleet_transmission/NOTES.md#b01-complete-reading); [routing](#session-routing). |
@@ -1857,28 +1867,36 @@ a better concrete question if source evidence defeats this premise; Root owns th
 [competent C contract](candidates/uav_parent_adaptation/NOTES.md#ordinary-parent-design-20260930),
 [completed waiting evidence](candidates/uav_user_waiting/NOTES.md#b02-complete-reading).
 
-### Parent adaptation: develop ordinary C while preserving learned-parent evidence
+### Parent adaptation: retain ordinary stochastic capability; B03 complete
 
-B01/B02 are complete and retain useful U3, heterogeneous U1/U2 losses and the76-tick outage.
-The unchanged U recipe ends; no U repeat is selected. [Complete result/disposition](candidates/uav_parent_adaptation/NOTES.md#b02-complete-reading)
-retain15fits/2,162,688steps and3,136.021884 measured worker-reader CPU seconds; earlier
-acquisition/support are additional.
+The exact three-fit C/I/Lg/Ls study is fully read and independently diagnosed at
+`8b7a3c056`. Lg−C J is −.011832/−.014644/−.006250; Ls−I is
+−.070742/−.090402/−.072493. Initial I−C instead gains+.023721J/+1.709106
+users/tick across three fresh blocks. Retain I as a useful zero-fit ordinary
+stochastic comparator, C's lower movement, every learned endpoint and all losses.
+I increases path1650.708m/UAV and lowers mean within-episode service p10 by2.03125;
+its favorable across-world return tail does not establish continuity or safety.
 
-Root selects **three independent512-episode fits of the published C-prior categorical policy**,
-N5/all-on/H256, original4-tick27-command support and lawful local information. Initial greedy=C;
-initial sampled p(C)=.9 differs. The702-parameter table uses actual Adam lr.01 beside a13,659-
-parameter MLP at .0003 and the declared separate critic. Each fit's fresh32-world C/I/Lg/Ls
-panel separates ordinary C, initial sampled behavior, final full-categorical greedy use and
-final sampled learning. Primary Lg−C native J and necessary Ls−I remain distinct; retain all
-service/quality/tail/path/compute outcomes. Three fits/491,520 steps and66,355,200 C model ticks
-are selected; C remains in execution. The .5–1.5CPU-hour estimate is not a cap. No extra K,
-continuous residual, prior/decoder tuning, pilot or automatic further fit; K remains unresolved.
+Independent review supports ending unchanged B03 with no additional fit selected.
+Active sampled degradation rules out nonactivation/greedy-only explanations but
+leaves entropy, credit, finite optimization, visitation and standalone K unresolved.
+A future learner should compare with I as well as C. A matched entropy-objective
+comparison has a discriminating prediction and finite cost (one conditional fit/
+180224steps, or three blocks/540672), while C/I replication could answer a specified
+transfer decision (0fits/49152steps); neither is selected or a prerequisite to retain I.
+Root owns any next cross-question allocation. The broader competent-parent learning
+question stays open in reserve at this result boundary, without a producer or external blocker.
 
-The same DM owns implementation/checks/publication/admission/full reading/independent diagnosis
-and its own result entry. [Exact design/addendum](candidates/uav_parent_adaptation/NOTES.md#ordinary-parent-allocation-addendum-20260930)
-and [full independent/6Pro advice plus Root selection](archive/2026-09-30/RESEARCH-ordinary-controller-development.md#decision)
-replace the pending decision. One fixed C is not three generated parents; this is exploration,
-with no safety, contextual-causality or planner-amortization claim.
+B03 paid3fits/491520steps/590.256484 measured worker+reader CPU seconds and
+retains its sole required raw/checkpoint/log copy. Cleanup reclaimed809914368
+allocated bytes with no blocker. B01/B02's useful K/D/U3 and U1/U2 losses/76-tick
+outage remain; no U repeat follows. The direction totals18fits/2,654,208 steps/
+3726.278368 measured worker+reader CPU seconds, with earlier acquisition/support extra.
+[Complete B03](candidates/uav_parent_adaptation/NOTES.md#b03-complete-reading),
+[independent judgment and prospective alternatives](candidates/uav_parent_adaptation/NOTES.md#b03-independent-disposition),
+[cleanup](candidates/uav_parent_adaptation/NOTES.md#b03-final-cleanup),
+[retired completed plan](archive/2026-09-30/RESEARCH-parent-adaptation-b03-complete.md),
+[original full advice/selection](archive/2026-09-30/RESEARCH-ordinary-controller-development.md#decision).
 
 ### Retained completed-round capabilities
 
@@ -2104,7 +2122,7 @@ Root 已向三个原会话各投递一次明确携带 `model="gpt-6-astra"`、`t
 | --- | --- | --- | --- |
 | DM: local-C inheritance after fleet adaptation (complete) | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_fleet_adaptation` | `/home/fires/hmasd-wsl` / `main` | Registered `hmasd-direction-manager`; actual first turn verified gpt-6-astra/max, native UUID01a0f1f4-bfe5-7ca0-8b1e-4945c185f49a. B02 fully read/reviewed/published 269d5d03f: conditional final asset retained, both fixed screens pass with all adverses/cost limits. Reserve; no live producer, unread advice or successor. B02 cleanup 813,293,568 bytes; B01 cleanup 1,681,186,816 bytes, unchanged A/F ended. [Complete reading](candidates/uav_fleet_adaptation/NOTES.md#b02-complete-reading), [disposition](candidates/uav_fleet_adaptation/NOTES.md#b02-independent-disposition). |
 | DM: individual-user waiting | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_user_waiting` | `/home/fires/hmasd-wsl` / `main` | Registered `hmasd-direction-manager`; actual first turn verified gpt-6-astra/max, native UUID01a0f1f5-8634-7e13-b931-e75abdb10d45. Owns `uav_user_waiting` and matching paths. B01 and B02 complete/read/independently diagnosed/cleaned. B02 evidence87a66f083 retains M and conditional S, preserves A's mixed gains/costs and all technical failures; end fixed A extension. Reserve with no producer, unread result, selected successor or approval dependency. [Disposition](candidates/uav_user_waiting/NOTES.md#b02-independent-review-and-disposition), [measured closure](candidates/uav_user_waiting/NOTES.md#b02-final-cleanup). |
-| DM: independent-parent adaptation | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_parent_adaptation` | `/home/fires/hmasd-wsl` / `main` | Registered `hmasd-direction-manager`; actual first turn verified gpt-6-astra/max,native UUID01a0f192-56da-7d31-8bfc-a068c0ddde92. Owns `uav_parent_adaptation` and matching paths. B01/B02 complete/read/cleaned; same DM now owns selected3fit/491520step ordinary-C C/I/Lg/Ls through implementation/check/publication/admission/full reading/independent diagnosis. No routine Root ACK,no U continuation. [Design](candidates/uav_parent_adaptation/NOTES.md#ordinary-parent-allocation-addendum-20260930), [selection/full advice](archive/2026-09-30/RESEARCH-ordinary-controller-development.md#decision). |
+| DM: independent-parent adaptation (B03 complete) | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_parent_adaptation` | `/home/fires/hmasd-wsl` / `main` | Registered `hmasd-direction-manager`; actual first turn verified gpt-6-astra/max, native UUID01a0f192-56da-7d31-8bfc-a068c0ddde92. B01–B03 complete/read/independently diagnosed; B03 result8b7a3c056 retains C/I and all learned endpoints. Reserve at this boundary, no live worker/reader/observer or unread advice. B03 cleanup809914368bytes, no blocker; no U/B03 automatic continuation. [Complete reading](candidates/uav_parent_adaptation/NOTES.md#b03-complete-reading), [disposition](candidates/uav_parent_adaptation/NOTES.md#b03-independent-disposition), [cleanup](candidates/uav_parent_adaptation/NOTES.md#b03-final-cleanup). |
 | DM: cumulative native service age | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_service_age` | `/home/fires/hmasd-wsl` / `main` | Registered `hmasd-direction-manager`; actual first turn verified gpt-6-astra/max, native UUID01a0f0a3-e515-7701-b805-6565d0cc4c07. Owns `uav_service_age` and matching paths. B01 one fit/source d4430e619 fully collected, verified, independently diagnosed and published; reserve, no live worker/reader/observer, unread advice or selected successor. Compact result0b358981a retains conditional W/M capability, own-initialization learning and primary/tail losses. Terminal cleanup reclaimed822185984allocated bytes, required unique evidence retained, no blocker. Returns this substantive boundary and proposed re-entry questions to Root; no automatic extra fit or new track. [Complete result](candidates/uav_service_age/NOTES.md#b01-complete-reading), [cleanup](candidates/uav_service_age/NOTES.md#b01-final-cleanup). |
 | DM: fixed correction deployment | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_correction_compression` | `/home/fires/hmasd-wsl` / `main` | Actual first turn verified gpt-6-astra/max; native UUID01a0ef78-6628-7593-b359-b608f0c80190. B01 fully read/independently diagnosed, reserve; scientific result e17f4fdf9. Cleanup complete: terminal source snapshot/registration, redundant staging, local bulk replicas/scratch/caches removed;874639360allocated bytes reclaimed. Required evidence/assets intact; no live operation, unread review or remaining cleanup dependency. [Result](candidates/uav_correction_compression/NOTES.md#b01-complete-reading), [final cleanup](candidates/uav_correction_compression/NOTES.md#b01-final-cleanup). |
 | Completed DM: registered-user B01 | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_registered_service` | `/home/fires/hmasd-wsl` / `main` | Completed B01 and full cleanup, result01e1b6e85/closureb7216efb9; no live worker, unread result or cleanup blocker. Sole direction ownership now passes to the new periodic-efficiency DM below; this old session is not restored. [Complete inheritance](candidates/uav_registered_service/NOTES.md#b01-investment-decision). |

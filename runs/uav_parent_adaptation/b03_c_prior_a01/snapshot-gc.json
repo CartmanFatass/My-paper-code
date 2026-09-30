@@ -1,0 +1,27 @@
+{
+  "tool_exit_code": 0,
+  "tool_stdout": {
+    "mode": "apply",
+    "snapshots": [
+      {
+        "claim": "/home/wu/projects/HMASD/.git/hmasd-admission/0c29db8c82243a628a85dbb729edec3c8e549a426018f4a6e335c1416547f789.json",
+        "durable_ref": "refs/remotes/origin/HEAD",
+        "eligible": true,
+        "output": "/home/wu/projects/HMASD/runs/uav_parent_adaptation/b03_c_prior_a01",
+        "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/a2c7685a172c4a72b51b4259699a237c",
+        "removed": true,
+        "sha": "a36f20e14cc434803f1d8e6f6e346f34197f6d19",
+        "snapshot": "a2c7685a172c4a72b51b4259699a237c"
+      }
+    ]
+  },
+  "tool_stderr": "",
+  "target": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/a2c7685a172c4a72b51b4259699a237c",
+  "allocated_before": 809742336,
+  "allocated_after": 0,
+  "net_reclaimed_bytes": 809742336,
+  "absent": true,
+  "retained_output": "/home/wu/projects/HMASD/runs/uav_parent_adaptation/b03_c_prior_a01",
+  "retained_summary_sha256": "6337f5e641abbc83fcf5b687c9ab73c022a851b026e6fedb7cfff1e71f227c83",
+  "retained_reading_sha256": "1bd05e78a8cd7851d710ae59d3dfb767dfaeeaef2042f670d177cda58a11140c"
+}
