@@ -443,3 +443,55 @@ dependency. Longer horizons or different information/action rights likewise requ
 their own consequential question and prediction. Root receives the completed study
 and chooses any cross-question allocation. This direction becomes reserve after
 publication/cleanup; no owner decision, other DM result or recurring check blocks it.
+
+### Publication and final cleanup started
+
+Complete reading, independent disposition and compact evidence were published in
+`0b9e2fee44edaf4183ae25aa8269136280f4826c`. The wait controller is stopped
+in generation7, no unconsumed event remains and both original native operations
+are terminal. The earlier incorrect status-reference probe remains a historical
+blocked observer; it never restarted or replaced the successful operation.
+
+Exact-target snapshot GC preview with the supported read-only sudo process scan
+initially refused `b0c39dd04cef4a898b18c8095dd94a56`: “snapshot has changed,
+untracked, or ignored files”. Inspect the named contents and current consumers
+before removing only disposable runtime material; preserve this refusal. No claim,
+manifest, scientific output or foreign snapshot was removed to make the tool pass.
+
+<a id="b01-final-cleanup"></a>
+### Final cleanup complete
+
+The refusal was exactly45 ignored Python bytecode files in the completed source
+snapshot; no tracked source had changed. Both native processes were terminal,
+the observer was stopped, all bounded helpers had returned, and no remaining
+source/test consumer required the disposable observer. Removing only those45
+bytecode files and their empty cache directories reduced snapshot allocation from
+808,284,160 to807,718,912 bytes. A second exact-target GC preview passed source,
+durable Git reachability, terminal identities and the privileged read-only process
+reference scan. Supported `--apply --snapshot b0c39dd04cef4a898b18c8095dd94a56`
+then removed the snapshot; its path is absent. Claim, manifest and canonical
+scientific outputs remain present. The initial refusal is resolved, not suppressed.
+
+Deleted targets and measured allocated bytes (each target now absent):
+
+| Deleted target | Net allocated bytes reclaimed |
+| --- | ---: |
+| wsl_4070 `/home/wu/projects/HMASD/.git/hmasd-launch-sources/b0c39dd04cef4a898b18c8095dd94a56`, including its runtime caches | 808,284,160 |
+| Local `temp/directions/uav_user_waiting/` (observer, requests, extraction script/cache) | 53,248 |
+| Local `experiments/candidates/uav_user_waiting/b01/__pycache__/` | 147,456 |
+| Local `tests/experiments/candidates/uav_user_waiting/b01/__pycache__/` | 102,400 |
+| Local disposable `tests/experiments/candidates/uav_user_waiting/b01/test_reader_observer.py` | 12,288 |
+| Local run-directory duplicate `summary.json` | 4,689,920 |
+| Local run-directory duplicate `reading.json` | 5,156,864 |
+| Local run-directory duplicate `stdout.log` / empty `stderr.log` | 28,672 / 0 |
+| Local temporary `reader-terminal.json`, preserved inside published result | 4,096 |
+| **Total across the two nodes** | **818,479,104** |
+
+The local subtotal is10,194,944 bytes. These are before/after allocated bytes for
+the exact deleted targets, not Git-object pruning or a claim about whole-host free
+capacity while other studies write concurrently. No backup, archive chain or
+second raw copy was created. Useful source/tests, compact evidence and the one
+necessary canonical copy of all256 trajectories/full readings remain. There is
+no active worker/reader/observer, unread result/advice, selected successor or
+concrete cleanup blocker. The direction is reserve with the conditional R/O/W/M
+comparison and the re-entry reasoning above available to Root.
