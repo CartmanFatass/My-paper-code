@@ -601,3 +601,46 @@ worker, observer, unread Pro answer or result collection remains. Cross-question
 allocation belongs to Root; this DM retains the broader adaptation question and
 its evidence. The three complete unscreened parent/adapter lineages are reusable
 assets for an explicitly selected comparison, not a free quality-screened library.
+
+### Publication and measured B01 cleanup
+
+Complete compact evidence and the independent interpretation/recommendation were
+published at `8feee300696636a17f921e0d6cd42aad9c2652b0`, before reclamation. Root's
+parallel allocation at `97927817dfc4b8c15e2e07f4284b6ec2a8df8a15` preserves this
+question as active. No implementation or fit for U has been accepted. The existing
+tested source remains useful to the active question and its retained checkpoint/
+reading contracts; no direction code was removed.
+
+After the critic's consumers finished and the native worker/observer were terminal,
+managed snapshot GC first refused inspection of protected `/proc/660/cwd`. Its
+documented read-only `--sudo-process-scan` path then passed preview and apply. The
+exact snapshot
+`/home/wu/projects/HMASD/.git/hmasd-launch-sources/022c25b3220a42bb81ad93beb7ada464`
+was deleted through `hmasd_snapshot_gc.py`, with accepted identity, absent processes,
+clean source, durable Git reachability and external native outputs checked again.
+Its allocated size fell from **807,444,480 to 0 bytes**. The two remote staging files
+`temp/directions/uav_parent_adaptation/reader-d97c3f9dc.py` and
+`reader-f55937874.py`, and their empty directory, were also deleted: **57,344 to 0**.
+
+Local deletion removed only the three direction-owned `__pycache__` directories
+(implementation root, `b01/`, mirrored `b01` tests), the stopped observer request in
+`temp/directions/uav_parent_adaptation/`, and redundant local run copies
+`summary.json`, `reading.json`, `delivery01.log`, `delivery02.log`,
+`reader-a01.log`, `reader-a02.log`, `reader-a03.log`. These targets fell from
+**4,399,104 to 0 allocated bytes** and all are actually absent. Before removing the
+three reader logs, their unique 5,906 logical bytes were consolidated into the same
+canonical run directory and verified by SHA256, costing 12,288 allocated bytes;
+the complete failed reads therefore remain available without a second local copy.
+The two delivery logs retain their original supervisor location recorded above.
+
+Net allocated reduction across these cleanup changes, accounting for that necessary
+diagnostic retention, is **811,888,640 bytes**. This is measured task-path space,
+not a claim about Git object storage or global host free capacity. No full-tree copy,
+archive, backup chain or alternative source checkout was created. There is no
+remaining cleanup-tool blocker. Required native claims, exit/status/manifest,
+stopped observer state, all 24 checkpoints, streams and 384 trajectories remain.
+The canonical run now has **483 files / 125,582,473 logical bytes**; the same sorted
+inventory rule hashes to
+`c6158dae473bf01fa242ff9fe8d9cd5420fe5fc96ef80b5066f6bc4d5aedee26`.
+The original full summary/reading hashes above are unchanged. This cleanup closes
+the completed operation, not ownership of the adaptation question.
