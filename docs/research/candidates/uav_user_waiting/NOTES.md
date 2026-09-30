@@ -2840,3 +2840,39 @@ Source publication below precedes the single selected native fixture at
 seed29426999,H8×M/S/U/K=32 steps on the retained `wsl_4070` window. A successful
 fixture is followed by the fixed64 fresh worlds and complete saved-data reading;
 there is no per-run Root acknowledgment or adaptive quality gate.
+
+
+<a id="b04-native-start"></a>
+### B04 native fixture read; fixed producer accepted
+
+The exact scientific inputs were committed and published at
+`dd3b2577d407b57a3b76ea4ba95b6ead4349d0d4`. Native fixture
+[`b04_correctness_a01`](../../../../runs/uav_user_waiting/b04_correctness_a01/launch-manifest.json)
+was accepted at21:27:50.784093UTC and exited zero at21:27:55.083957UTC.
+Its complete summary SHA256 is
+`74d34501f613201f8fa2c973e1f168c823debc64b46c076b5a46e379c3e0d186`;
+the collected summary and four admission/exit files match canonical node hashes.
+Exactly four H8 episodes/32 native steps completed, with zero fits/optimizer
+updates, eight complete and timely calculations and zero deadline misses.
+The reader verified all32 native and modeled transitions, all observations,
+terminal clipping, candidate cost/path/pool/floor arithmetic and the declared
+physical subset. Maximum reward reconstruction error was5.55e−17; radio and
+observation error were zero. Process user/system time2.997491/.302938s,
+wall3.970811s and lifetime peak RSS412,524KiB. This is integration evidence;
+it does not estimate treatment quality. Raw fixture arrays remain once at the
+manifest's canonical node output.
+
+The unchanged-source full producer
+[`b04_service_floor_a01`](../../../../runs/uav_user_waiting/b04_service_floor_a01/launch-manifest.json)
+was accepted at21:30:06.167218UTC under fresh actual-node admission.
+Its operation claim is
+`/home/wu/projects/HMASD/.git/hmasd-admission/1686d37b2d92e283bc678ede5bca7d429e10461288381dab32dec778615df6cb.json`.
+Generation34 of this session's deterministic observer adopted matching live
+supervisor/runner identities and a consistent accepted claim at21:30:20UTC.
+The prior stopped observer was drained/rearmed before adding B04; the initial
+refusal to add to stopped state caused no repeat or change to either launch.
+Fixture terminal events were drained and consumed. Queue delivery again returned
+native-child rejection−32600, so the child remains active through deterministic
+observation, same-handle checkpoints and the separately admitted final reader.
+Root's reserved timed-node window continues through that reading. The fixed
+256 episodes/65,536 steps/zero fits and complete/adverse reading remain in force.
