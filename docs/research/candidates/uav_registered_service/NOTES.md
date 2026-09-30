@@ -1085,3 +1085,70 @@ identities and consistent source/records. The native child stays active through
 collection and complete reading, rather than relying on a future App wake.
 No accepted operation is duplicated or rebound. The fixed192complete episodes
 are in progress; no partial endpoint has been interpreted.
+
+
+### B02 technical termination — original operation remains terminal
+
+The original worker ended exit1 at2026-09-30T02:52:25UTC. Its runner/supervisor
+identities are absent and the native records/exit witness agree. It completed
+101episodes, then12transitions of S2/world29309033:25868native steps,102explicit
+resets,0fits/updates. The exception is `SystemError: unknown opcode` in NumPy
+`_all_dispatcher` (fromnumeric.py2416), called by frozen S2's mask scoring through
+`uav_radio.py:68`, `np.all(mask)`; stderr says `XXX lineno: 2416, opcode: 0`.
+The partial102nd NPZ and101completed rows remain; no full-panel contrast is read.
+Measured worker cost314.167874CPU seconds,309.214783wall seconds,184260KiB lifetime
+peak RSS. No result operation has been repeated or replaced.
+
+The same-handle observer delivered terminal facts successfully to disk but its
+App queue attempt was rejected with-32600: direct app-server input is not allowed
+for multi-agent v2 sub-agents. The active native child's deterministic state wait
+and drain observed this fact without relying on that delivery. Generation1's
+BLOCKED terminal event was consumed in generation2 and observation stopped; this
+does not restart or alter the terminal worker. Root received the requested
+calculation-release fact and allowed N to proceed; any new G deadline-sensitive
+operation waits for N's worker release. Technical completion is not a science
+conclusion, and the failure is not evidence against G.
+
+Current published RESEARCH's shared-runtime diagnosis already preserves distinct
+CPython/NumPy immediate failures with no established common cause. This traceback
+is similar evidence, not proof of a NumPy, Python, hardware or controller defect.
+Root authorizes ordinary in-scope diagnosis/repair without a new science approval;
+any comparison-meaning change will be returned explicitly.
+
+Bounded support L0, before checking: verify the102saved raw hashes,38recorded
+source identities and partial identity/count; then reconstruct exactly one
+failed S2 report at t12 from its saved legal observations/commands/proposals/mask
+using the original snapshot and node interpreter. The fresh-process computation
+uses a fixed nonexpiring test clock solely to test deterministic input failure;
+it creates0native episodes/steps/fits and no complete-task policy endpoint. It
+cannot establish that the original transient failure is fixed or license a
+result retry. Preserve the compact diagnostic and runtime/module byte identities.
+No environment/library installation, broad stress run, whole-panel rerun or
+source edit is selected by this check.
+
+
+The bounded reconciliation completed: all102raw SHA256/size records and all38
+source records match. The one exact failed S2/t12 input computed112candidate
+pairs and finite commands in a fresh original-runtime process without exception,
+using the declared nonexpiring clock. It constructed no environment, stepped no
+transition and produced no new endpoint. Support cost0.174903wall/0.173562CPU
+seconds,60848KiB peak RSS; executable and NumPy module identities are retained in
+[failure-reconstruction.json](../../../../runs/uav_registered_service/b02_periodic_efficiency_a01/failure-reconstruction.json).
+This weakens a deterministic failure of that saved decision input. It establishes
+neither the transient cause nor a runtime repair, and does not validate unexamined
+completed endpoints.
+
+A focused independent ResearchCritic now compares stopping, repeating the whole
+panel, repeating the interrupted world, and source-bound completion of only the
+91missing episodes on the same original node/runtime. No partial policy contrast
+has been computed or used for this decision. The latter is the DM's current
+preferred candidate: preserve101complete endpoints and the12failed transitions,
+finish the fixed192endpoint panel without changing policies, seeds, order of
+remaining cells, information, horizon or physical clocks. It would add23296native
+transitions and0fits; cumulative exposure49164steps, including the12failed steps,
+would be reported separately from49152complete-endpoint steps. The interrupted
+world29309033 spans processes/load periods; that fact cannot be erased by pairing
+seed numbers. Review will address this condition and a predeclared sensitivity
+without that world. No new result attempt is selected by this paragraph. The
+current N worker/resource coordination still blocks heavy/timed recovery; short
+remote evidence reconciliation was independent.
