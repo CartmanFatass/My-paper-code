@@ -1256,3 +1256,95 @@ published main. Its new Root allocation selects the separate inherited-policy an
 studies while N8 still awaits this complete design return. The relevant shared scientific
 background and this direction's lead/paused scope are unchanged. I preserve those separate
 decisions and make no N8 execution inference from them.
+
+<a id="b03-selected-implementation"></a>
+## 2026-09-30 — B03 selected; bounded implementation
+
+Root selects the complete design at `9e2eabd278024c3cbbb525da0b2ed189b11899c8`
+([published decision](../../RESEARCH.md#n8-continuation-root-decision-20260930)). The exact
+16-world C/R/T panel, scopes, costs, outcome reading and exclusions above now apply to
+implementation through complete reading/publication/cleanup. This is not an extension or
+restart of B02. Current owner pause is lifted for this Root scope; this direction is exploring
+with the existing `Codex DM (native child)` lead. The applicable full independent selection
+review and allocation addendum are already read; no changed scientific premise calls for
+another selection round. Actual node admission still precedes execution, with wsl_4070 first.
+
+**L0.** Deliver the fixed continuation selector in new owned
+`experiments/candidates/uav_fleet_transmission/b03/` with mirrored tests and a guarded
+`run.py` entry, preserving every accepted B02 source. DM owns world bindings, champion/T
+selection and execution, worker/reader, source and run records, this notebook and publication.
+The registered Implementer is loaned only `b03/surrogate.py` and its mirrored
+`test_surrogate.py`: one pure public-model continuation from the copied t40 C state, original
+report bits and optional already-specified original R plan. It selects no candidates and
+touches no environment, result launcher, notebook, shared file or Git index. Other writers
+remain in the shared main checkout; helpers must preserve their edits and spawn no children.
+
+The surrogate must leave its inputs unchanged; copy the actual issued-command, next-tick and
+predicted-position state; use the actual t40 public report unchanged; and synthesize only later
+reports with exact FP32 encoding and preserved static user bits. Separate model physical
+positions from controller estimates. Reuse original forced-transit/arrival/C-resumption
+semantics without re-enumerating R. Score each model-physical post-action state, accumulate
+returns in tick order, and expose full positions/actions/masks/reports/estimates, decision
+digests, direct reward scores, counts and complete-branch summary for independent readback.
+Keep model calls separate from actual native steps and from original candidate propagation.
+
+Checks cover codec equality, input purity/history/clock, old-mask order, branch isolation,
+nonpositive champions/ties/global-R inclusion, complete selected/declined serialization,
+native correspondence on constructed fixtures and refusal of altered/incomplete evidence.
+Pure helper fixtures may use a shortened tail solely for correctness; production requires
+t40/H500. Native correctness is prospectively bounded by **128 additional transitions** on
+constructed/old-world fixtures, never on the sixteen new result identities; record actual
+cost separately. No new-panel outcome pilot or exposure threshold is allowed. Independent
+engineering review covers the complete changed numerical/controller/reader/entry path before
+publication/launch. Stop on a consequential interface contradiction or material scope change
+and return it to Root; otherwise complete this one selected panel with no automatic expansion.
+
+### Implementation acceptance and prospective node correction, 18:45 UTC
+
+The new B03 implementation now retains every original stationary candidate row, the exact
+per-member champions, all complete model branch arrays/decisions and the executed C/R/T
+trajectories. The reader reconstructs every retained branch and original candidate enumeration,
+then all native physics, observations, control decisions and counts. Program identity includes
+the arrival member and primitive commitment; separate modeled-execution and site-alias readings
+do not assert that a model-only alias guarantees native equivalence. C and R call the unchanged
+B02 worker/reader. All16 accepted B02 source bindings still match their recorded bytes/hash.
+
+Generated and source-bound only the declared16 initial arrays at address `[260930,26]`, with
+their little-endian-float64 hashes and runtime seeds. No policy, radio, model or native outcome
+on those identities has been queried. The helper's pure surrogate implementation was read and
+accepted with its six checks. The full local B03 suite passed21tests in5.38seconds, including
+two13-step constructed native tails: **26actual native correctness transitions**, below the
+prospective128 ceiling. After adding the required alias readings,13affected selector/reader
+checks passed in4.59seconds, adding zero native transitions. All new Python files parse and
+the owned sources have no trailing whitespace. Existing matplotlib deprecation warnings were
+the only warnings; no fixture/test scratch was retained.
+
+Independent engineering Reviewer `/root/dm_fleet_transmission/engineering_review` read the
+new implementation and returned **no material finding** after checking original-R inclusion,
+nonpositive champions, strict C-stay improvement, copied history/absolute clocks, FP32 reports,
+separate physical/controller positions, complete replay, alias scope, costs, bindings, admission
+order and incomplete-attempt refusal. It independently ran19zero-native tests (4.82seconds)
+and confirmed the frozen B02/host/control diff is empty. It added zero native transitions.
+The explicit coverage limit is retained: **no end-to-end T/H500 native worker-to-reader fixture
+has run**. Checks combine short native/model tails with separate selector, serialization and
+refusal tests; the selected complete operation must still pass its full reader. I accept the
+implementation and review; this is engineering acceptance, not a scientific result.
+
+Root initially reserved the next heavy `wsl_4070` window for the already-selected waiting
+study. Before any N8 accepted operation, Root then prospectively **selects `local_linux` for
+this complete N8 panel**, after verifying that `local_linux` (AMD8745H) and `wsl_4070`
+(Intel13900H) are separate Windows physical hosts. N8 has no online wall-time deadline;
+waiting/composition need the other node, while local fleet-adaptation currently owns its
+producer/reader CPU window. This is the current explicit Root resource allocation, replacing
+the preceding remote-first arrangement. It does not inherit the prior B02 local-preference
+deviation or use an old interpreter failure as an automatic fallback. No accepted operation
+has moved, stopped or restarted.
+
+The selected local configuration is `/home/fires/.venvs/hmasd-linux-cpu/bin/python`, observed
+Python3.10.20/NumPy1.26.3/Torch2.7.0+cpu, one Torch intra/inter-op thread. All worlds, masks,
+commands, dtype/order laws, C/R/T branches, reader and prospective scientific cost bounds are
+unchanged. Fresh actual-node pause/lead/source/memory admission still applies after publication.
+The concrete execution dependency is the existing fleet-adaptation producer+reader's original
+handle reaching terminal/resource release, coordinated by Root. No N8 result worker or full
+reader will overlap that reserved local heavy-CPU window. The planned fresh output is
+`runs/uav_fleet_transmission/b03_complete_continuation_a01/`; it does not yet exist.
