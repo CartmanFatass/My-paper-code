@@ -1257,3 +1257,144 @@ at8,000 updates. S0/BC/D1 retain the exact training/reading lineage. This
 114-input,27-command actor depends on its declared analytic navigation helper;
 it is not a drop-in checkpoint for the historical SetActor, nor a tested PPO
 initialization. Both fixed decoding laws refer to the same final asset.
+
+
+<a id="b02-independent-disposition"></a>
+### Independent scientific review, changed explanation and next investment
+
+The dedicated ResearchCritic `b02_result_review` worked in a separate context
+without DM/Root conversation inheritance. It reconstructed the frozen protocol
+and results before reading the full archived allocation advice. It checked all
+15 source hashes against `e945483b8`, all192 evaluation rows/common worlds and
+the paired means. Its independent raw reading covered ten positive/adverse
+evaluation trajectories and three training trajectories, with zero new native,
+expert/radio, actor-forward or optimizer calls. The two aggregation witnesses
+contained131 and191 behavior-versus-teacher disagreements: paid labels corrected
+actual student histories rather than copying the executed commands. Its scope
+does not include replay of all physics, neural or optimizer arithmetic, or a
+universal finite-precision helper proof. No material discrepancy was found.
+
+The Reviewer recommends retaining the final actor as a **conditional learned
+starting asset**. `MATERIAL_DISSENT: no`. I accept that disposition and its
+limits: both fixed point screens pass, while training recurrence, C equivalence,
+speedup, a sampling mechanism and later PPO utility remain unsupported. Its
+additional adverse reading is consequential: sampled mean within-world minimum
+service is10.21875 versus C's11, a difference−.781250
+[−1.365725, −.196775], with21 lower,7 higher and4 tied worlds. The sampled
+p10 also falls in11 worlds. These losses remain evidence despite the selected
+point-screen pass; no energy or physical-safety inference follows from path.
+
+The working explanation changes at four distinct levels:
+
+- **Task opportunity.** Competent ordinary local control remains a real
+  capability in this fresh panel. The cheaper-looking seven-action ranking did
+  not improve complete performance or measured query time. Keep full C and its
+  exact memoization as the serious ordinary reference.
+- **Lawful representation.** A114-input actor can execute without the current
+  teacher command from current local observation, its own predecision navigation
+  and an analytic eligibility feature. Full candidate ranking is absent from
+  neural deployment; the radio/navigation scaffold remains. This demonstrates
+  one usable representation and execution package, not model-free control or
+  equality of function classes.
+- **Finite learnability.** This finite supervised lineage produced consequential
+  native competence. Actual updates, parameter movement and full-world outcomes
+  support that positive; training-stream accuracy or81920 repeated labels alone
+  would not. There is only one fitted lineage and8364 distinct aggregate feature
+  rows. The old96 local-history/C losses and coupled-host distillation's
+  .400410-versus-.758656 adverse remain intact for their different recipes;
+  B02 does not repair or diagnose either historical failure.
+- **Complete-package value.** The asset is now available for a separately selected
+  learning comparison, while its complete online compute advantage is absent.
+  Greedy/sample query CPU is about1.34×/5.26× C, and full episode CPU is
+  .161518/.234974 versus C's.155697 seconds. A sampled service improvement is
+  a native capability with minimum-service/path/compute tradeoffs, not a complete
+  domination claim.
+
+The strongest simpler explanation for sampled surplus is ordinary randomization
+around a competent local policy. Greedy uses hover on8031 decisions, sampled on
+6572, and sampled visits more distinct local cache states. This is compatible
+with escaping some stationary or repetitive behavior, but does not isolate that
+mechanism or credit it to learned coordination. The separately selected ordinary
+C prior with `p(C)=.9` is a concrete future comparator for a learned stochastic
+advantage; different-panel outcomes would not be a matched test here. No new
+randomized-C arm or extra native diagnostic is added to B02.
+
+For the next allocation, the Reviewer favors one unchanged-recipe independent
+training lineage before spending on a reward-training adapter. I agree that this
+is the best currently specified continuation to consider, rather than inventing
+an unexplained repair. It would use fresh training worlds, initialization and
+shuffles, retain S0/BC/final greedy/final sampled readings on this now-development
+32-world panel with its fixed sampling innovations, and reuse the original C/C7
+trajectories only if the exact host/source/protocol bindings remain unchanged.
+That prospective object costs one fit,384 new episodes,98,304 native steps,
+8,000 updates and4,096,000 presentations. The observed107.544 worker+reader
+CPU seconds provide an empirical planning anchor, not a guaranteed future cost
+or a substitute for unmetered engineering/review/support work.
+
+The recurrence comparison would change a real investment choice. Repeated
+competence in both modes strengthens the case for a separately designed reward
+continuation; greedy-only recurrence retains deterministic construction while
+weakening the stochastic-start premise; failure lowers confidence in the fixed
+construction program while preserving today's usable asset. Loss of sampled
+superiority with retained near-C competence would remove the surplus story
+without erasing inheritance. Two such exploratory lineages would still not
+confirm a population claim. This recommendation is **not a prerequisite for
+conditional use of the existing checkpoint**. Merely remaining better than S0
+would be insufficient evidence of useful subsequent learning: any continuation
+must compare with its unchanged starting asset and competent ordinary control.
+
+No replication, adapter, reward fit, new temperature, extra epoch or new arm is
+selected or authorized by this review. Root owns the next cross-question
+allocation after this assigned boundary. B02 is complete and the direction is
+reserve with a qualified reusable asset, no live producer, unread advice or
+fabricated external dependency. Additional Pro advice offers no distinct value
+for this retention/recurrence preference; materially changed later questions
+receive review on their actual claim, comparison and cost. The constructive
+positive and all adverse evidence are retained without relaunching the old B01
+A/F recipe or treating unsuccessful compression elsewhere as unlearnability.
+
+<a id="b02-final-cleanup"></a>
+### Final cleanup and retained evidence
+
+The complete compact evidence was published first at
+`269d5d03f6765062fc3dbb8c88fffa4c8e16b948`. After the independent review
+consumer finished, the source snapshot collector preview and apply both found
+the exact accepted B02 snapshot eligible: terminal native processes absent,
+matching claim/source/output identity, externally retained complete evidence,
+clean source files, durable published reachability and no live process reference.
+The documented `--sudo-process-scan` option used existing passwordless sudo only
+for its read-only protected-process scan; removal remained under the original
+user and serialized writer/admission locks. No force deletion or new copy was
+needed, and no new refusal occurred.
+
+Actual remote deletions and measured allocated bytes:
+
+- `/home/wu/projects/HMASD/.git/hmasd-launch-sources/a3e5bf4370244776bd70ba812355289a/`:
+  809,566,208 bytes.
+- Its registration
+  `/home/wu/projects/HMASD/.git/worktrees/a3e5bf4370244776bd70ba812355289a/`:
+  3,555,328 bytes.
+
+Both are absent, reclaiming813,121,536 allocated bytes. The canonical run,
+448 unique raw files, four assets, manifest, terminal witnesses and admission
+claim remain. Its original source is published and source-bound; removing the
+disposable execution snapshot does not remove that source or duplicate guard.
+
+After checking the stopped/drained observer and completed helper consumers,
+exact local deletions were `temp/directions/uav_fleet_adaptation/` (12,288 bytes,
+only the obsolete B02 observer request),
+`experiments/candidates/uav_fleet_adaptation/b02/__pycache__/` (102,400 bytes)
+and the matching test `b02/__pycache__/` (57,344 bytes). All three are absent;
+local allocated usage fell172,032 bytes. **B02 therefore reclaimed813,293,568
+allocated bytes**, separately from B01's already reported1,681,186,816 bytes;
+cumulative deletion for these two completed studies is2,494,480,384 bytes.
+These are measured exact-target allocations, not whole-host free space or Git
+object shrinkage during concurrent work.
+
+No cleanup blocker or redundant bulk remains for B02. Useful implementation,
+17 correctness checks, compact positive/adverse readings and all required unique
+training/endpoint evidence remain for the retained asset and its saved-data
+reader. No unused extra entrypoint was found; the sole disposable local scratch
+and all B02 bytecode caches were removed. The separate preexisting remote Git
+historical-tree GC warning was not repaired or misreported as a cleanup blocker.
+Other directions, shared controls and accepted peer operations were preserved.
