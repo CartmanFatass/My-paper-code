@@ -1,0 +1,6493 @@
+{
+  "config": {
+    "admission_operation": null,
+    "arms": [
+      "C",
+      "J",
+      "R"
+    ],
+    "direction": "uav_fleet_transmission",
+    "launch_sha": "9928d34b54628baaa542961debb65c5ce7ef0f23",
+    "new_fits": 0,
+    "object_id": "fleet_silent_repositioning_b02",
+    "option_model_tick_ceiling": 448000,
+    "position_prediction_ceiling": 5184000,
+    "radio_request_ceiling": 50918864,
+    "source_bindings": {
+      "envs/pettingzoo/env_adapter.py": {
+        "bytes": 25232,
+        "sha256": "8b42c1c3e7ef44cb814f79225b4af944b1018ad764dfeb17e9e1cc294df79d40"
+      },
+      "envs/pettingzoo/scenario1.py": {
+        "bytes": 7476,
+        "sha256": "e5b3eb7d755a7d7866cc7cd01531383bee821f0c6d72a81a3d4fa9cb5954939e"
+      },
+      "envs/pettingzoo/uav_env.py": {
+        "bytes": 68827,
+        "sha256": "fb67554cf911adc9d3260a2a7f16d1773921c295646cb46beb4ba1247fec599e"
+      },
+      "envs/pettingzoo/uav_radio.py": {
+        "bytes": 5001,
+        "sha256": "db3464803b1a5aa9c9504096810dc971266a6bd7eba1c31dfe79e7d8d903f3cc"
+      },
+      "experiments/candidates/agent_count_generalization/adapter.py": {
+        "bytes": 4364,
+        "sha256": "b59d7028771b5acc4148f7dd90b5480c3143ae88580bb1b8154944831e2c0fbc"
+      },
+      "experiments/candidates/uav_fleet_transmission/b02/controller.py": {
+        "bytes": 5847,
+        "sha256": "d3766108d55662e0eea19e82227221d11e2ffedf0f971ad526071df2e142afb2"
+      },
+      "experiments/candidates/uav_fleet_transmission/b02/host.py": {
+        "bytes": 2791,
+        "sha256": "822745022a2842d4e683a677d2e3fa4c1dfc52db2dd781f4c0afb018cc09e0e3"
+      },
+      "experiments/candidates/uav_fleet_transmission/b02/option.py": {
+        "bytes": 9269,
+        "sha256": "dbf1dcb827e881986ccadf65c061662900df80b65cd01494c967773ad0815cc8"
+      },
+      "experiments/candidates/uav_fleet_transmission/b02/reader.py": {
+        "bytes": 10409,
+        "sha256": "e0a85eca3bf98784dce92e5d7bb661092b2f730d7ddaeab00d8ef84a598202b3"
+      },
+      "experiments/candidates/uav_fleet_transmission/b02/run.py": {
+        "bytes": 879,
+        "sha256": "484c5c36cab36f50273e8d9030beba0f51c0b923e3874b3ec0cc2fbe6b770b8b"
+      },
+      "experiments/candidates/uav_fleet_transmission/b02/study.py": {
+        "bytes": 11807,
+        "sha256": "b4e969f8352f27fa1d3dc6aaa76e9eba15f76ce40ce649ec5665ce0645039ced"
+      },
+      "experiments/candidates/uav_fleet_transmission/b02/worlds.json": {
+        "bytes": 83088,
+        "sha256": "b1be4cdb2f187a65e98283d9b72ab457edc63e55378636304de8d09d8ca7cbfa"
+      },
+      "experiments/candidates/uav_fleet_transmission/control.py": {
+        "bytes": 10050,
+        "sha256": "8fee671dcdf1183201f6a3e8290347a30e90b20b33955477b638cdbb5e5f36b5"
+      },
+      "experiments/candidates/uav_fleet_transmission/host.py": {
+        "bytes": 4306,
+        "sha256": "f46d4053f6fb0798f2d70e0d6aed3df6b63f012318b4df23207d06dbe0432f76"
+      },
+      "experiments/candidates/uav_fleet_transmission/reader.py": {
+        "bytes": 16221,
+        "sha256": "639dd22d6314067c6a526bc8534d525738a7de46a57b850c3e1c5950b4b86ce2"
+      },
+      "experiments/candidates/uav_fleet_transmission/study.py": {
+        "bytes": 19049,
+        "sha256": "1ce5f91d7ef67b17181a385021f854d2794e7cfb919662efff2b55d4711424cc"
+      }
+    },
+    "spec": {
+      "bootstrap_replicates": 10000,
+      "bootstrap_seed": 26093024,
+      "cadence": 10,
+      "horizon": 500,
+      "n": 8,
+      "option_t": 40,
+      "world_ids": [
+        29324000,
+        29324001,
+        29324002,
+        29324003,
+        29324004,
+        29324005,
+        29324006,
+        29324007,
+        29324008,
+        29324009,
+        29324010,
+        29324011,
+        29324012,
+        29324013,
+        29324014,
+        29324015
+      ]
+    },
+    "updates": 0,
+    "versions": {
+      "numpy": "1.26.3",
+      "python": "3.10.20",
+      "torch": "2.7.0+cpu"
+    },
+    "world_file": {
+      "bytes": 83088,
+      "path": "experiments/candidates/uav_fleet_transmission/b02/worlds.json",
+      "sha256": "b1be4cdb2f187a65e98283d9b72ab457edc63e55378636304de8d09d8ca7cbfa"
+    },
+    "world_order": "ascending world; cyclic C/J/R starting at world index mod3"
+  },
+  "episodes": [
+    {
+      "arm": "C",
+      "calls": {
+        "arrival": 0,
+        "joint": 0,
+        "mask": 50,
+        "motion": 500,
+        "option": 0
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "joint": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 400,
+          "geometry_rows_reused": 101600,
+          "requested_candidates": 12750,
+          "scored_candidates": 12750
+        },
+        "motion": {
+          "cached_candidates": 39362,
+          "geometry_rows_computed": 72138,
+          "geometry_rows_reused": 476966,
+          "requested_candidates": 108000,
+          "scored_candidates": 68638
+        },
+        "option": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 342385,
+        "path": "raw/n8_C_w29324000.jsonl.gz",
+        "sha256": "2451df0773bcca973080aa0b4962cfce36ad5f2903e849bd7ab912ee9ce99d98"
+      },
+      "metrics": {
+        "J": 0.6370062129800779,
+        "active_mean": 4.0,
+        "active_min": 4,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 41.026,
+        "eligible_unserved": 1.036,
+        "height_penalty": 3.861042727895145e-05,
+        "ineligible": 8.974,
+        "longest_zero_run": 0,
+        "mask_switches": 1,
+        "mean_height": 50.038610427278954,
+        "mean_path_per_uav": 219.65579380868303,
+        "mean_visible_peer_slots": 0.24625,
+        "mean_visible_user_slots": 5.12825,
+        "per_uav_path": [
+          32.84212740047688,
+          48.526510977799724,
+          327.6731848747091,
+          403.67900998899034,
+          386.6204604269516,
+          44.37553689335705,
+          72.44163354840776,
+          441.08788635877187
+        ],
+        "quality": 0.25728274469118956,
+        "served": 39.99,
+        "served_min": 38,
+        "served_p05": 40.0,
+        "total_team_path": 1757.2463504694642,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": null,
+      "option_model_ticks": 0,
+      "position_predictions": 108000,
+      "raw": {
+        "bytes": 72062,
+        "path": "raw/n8_C_w29324000.npz",
+        "sha256": "f808921a30b306b6f58ac5081bc0f9a75027bc03fbb303688c48aaa2c03f2366"
+      },
+      "runtime_seed": 1086047726,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 4.4230058690000025,
+        "cpu_seconds": 5.117093082,
+        "native_and_record_cpu_seconds": 0.5426762679999992,
+        "wall_seconds": 5.1176619510224555
+      },
+      "world_id": 29324000
+    },
+    {
+      "arm": "J",
+      "calls": {
+        "arrival": 0,
+        "joint": 50,
+        "mask": 0,
+        "motion": 450,
+        "option": 0
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "joint": {
+          "cached_candidates": 988890,
+          "geometry_rows_computed": 7272,
+          "geometry_rows_reused": 14113608,
+          "requested_candidates": 2754000,
+          "scored_candidates": 1765110
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "motion": {
+          "cached_candidates": 35484,
+          "geometry_rows_computed": 64866,
+          "geometry_rows_reused": 428862,
+          "requested_candidates": 97200,
+          "scored_candidates": 61716
+        },
+        "option": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 46601,
+        "path": "raw/n8_J_w29324000.jsonl.gz",
+        "sha256": "c17b8fb665a54b09ae7f80d4b4e8df41a12ea4363a05ce1bbd252572941dd8dd"
+      },
+      "metrics": {
+        "J": 0.6377654751776578,
+        "active_mean": 4.0,
+        "active_min": 4,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 41.974,
+        "eligible_unserved": 1.98,
+        "height_penalty": 3.861042727895145e-05,
+        "ineligible": 8.026,
+        "longest_zero_run": 0,
+        "mask_switches": 2,
+        "mean_height": 50.038610427278954,
+        "mean_path_per_uav": 220.6601828462731,
+        "mean_visible_peer_slots": 0.005,
+        "mean_visible_user_slots": 5.24675,
+        "per_uav_path": [
+          13.364330592631802,
+          23.554665518289966,
+          414.7818953593897,
+          200.66391592249335,
+          180.2710051016261,
+          425.57780596106824,
+          81.97675090428123,
+          425.0910934104046
+        ],
+        "quality": 0.2596269520164559,
+        "served": 39.994,
+        "served_min": 39,
+        "served_p05": 40.0,
+        "total_team_path": 1765.2814627701848,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": null,
+      "option_model_ticks": 0,
+      "position_predictions": 108000,
+      "raw": {
+        "bytes": 86717,
+        "path": "raw/n8_J_w29324000.npz",
+        "sha256": "4a6ac0bfb81ac76b26e11a6b1ba15e1f98d313a0ab47065a2499908f149dc975"
+      },
+      "runtime_seed": 1086047726,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 106.97980671400002,
+        "cpu_seconds": 107.584947896,
+        "native_and_record_cpu_seconds": 0.5452078529998765,
+        "wall_seconds": 107.62627270500525
+      },
+      "world_id": 29324000
+    },
+    {
+      "arm": "R",
+      "calls": {
+        "arrival": 0,
+        "joint": 0,
+        "mask": 50,
+        "motion": 500,
+        "option": 1
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "joint": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 400,
+          "geometry_rows_reused": 101600,
+          "requested_candidates": 12750,
+          "scored_candidates": 12750
+        },
+        "motion": {
+          "cached_candidates": 39362,
+          "geometry_rows_computed": 72138,
+          "geometry_rows_reused": 476966,
+          "requested_candidates": 108000,
+          "scored_candidates": 68638
+        },
+        "option": {
+          "cached_candidates": 10112,
+          "geometry_rows_computed": 328,
+          "geometry_rows_reused": 328384,
+          "requested_candidates": 51201,
+          "scored_candidates": 41089
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 343238,
+        "path": "raw/n8_R_w29324000.jsonl.gz",
+        "sha256": "6594144b5785002c0f0716347d0c744535579f0cdba3820dc347c4cbaa239521"
+      },
+      "metrics": {
+        "J": 0.6370062129800779,
+        "active_mean": 4.0,
+        "active_min": 4,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 41.026,
+        "eligible_unserved": 1.036,
+        "height_penalty": 3.861042727895145e-05,
+        "ineligible": 8.974,
+        "longest_zero_run": 0,
+        "mask_switches": 1,
+        "mean_height": 50.038610427278954,
+        "mean_path_per_uav": 219.65579380868303,
+        "mean_visible_peer_slots": 0.24625,
+        "mean_visible_user_slots": 5.12825,
+        "per_uav_path": [
+          32.84212740047688,
+          48.526510977799724,
+          327.6731848747091,
+          403.67900998899034,
+          386.6204604269516,
+          44.37553689335705,
+          72.44163354840776,
+          441.08788635877187
+        ],
+        "quality": 0.25728274469118956,
+        "served": 39.99,
+        "served_min": 38,
+        "served_p05": 40.0,
+        "total_team_path": 1757.2463504694642,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": {
+        "initiated": false,
+        "predicted_total_J": 293.200330980976,
+        "selected": {
+          "arrival_t": 60,
+          "descent_ticks": 0,
+          "duration": 20,
+          "member": 5,
+          "offsets": [
+            16,
+            -4
+          ],
+          "path": 529.7056274847714,
+          "predicted_destination": [
+            [
+              41.28433018922806,
+              748.3120560646057,
+              50.0
+            ],
+            [
+              619.1108822822571,
+              147.46510982513428,
+              50.0
+            ],
+            [
+              904.1621088981628,
+              843.8302278518677,
+              50.0
+            ],
+            [
+              86.41160279512405,
+              910.0000262260437,
+              50.0
+            ],
+            [
+              917.2526001930237,
+              272.3934054374695,
+              50.0
+            ],
+            [
+              915.3000521659851,
+              826.4080929756165,
+              50.0
+            ],
+            [
+              186.44767999649048,
+              478.2233536243439,
+              50.0
+            ],
+            [
+              148.6782282590866,
+              178.21529507637024,
+              50.0
+            ]
+          ],
+          "predicted_mask": 184,
+          "predicted_total_J": 293.1123121439544,
+          "predicted_total_served": 18400,
+          "site": 10,
+          "tail_score": {
+            "J": 0.6371919810602742,
+            "energy_penalty": 0.0,
+            "quality": 0.2573066035342476,
+            "served": 40
+          },
+          "transit_J": 12.747840477433739,
+          "transit_served": 800,
+          "unrounded_duration": 16
+        },
+        "stay_total_J": 293.200330980976
+      },
+      "option_model_ticks": 8160,
+      "position_predictions": 108000,
+      "raw": {
+        "bytes": 72062,
+        "path": "raw/n8_R_w29324000.npz",
+        "sha256": "f808921a30b306b6f58ac5081bc0f9a75027bc03fbb303688c48aaa2c03f2366"
+      },
+      "runtime_seed": 1086047726,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 5.97561152199988,
+        "cpu_seconds": 6.6754994890000035,
+        "native_and_record_cpu_seconds": 0.5526971289999238,
+        "wall_seconds": 6.679767040011939
+      },
+      "world_id": 29324000
+    },
+    {
+      "arm": "J",
+      "calls": {
+        "arrival": 0,
+        "joint": 50,
+        "mask": 0,
+        "motion": 450,
+        "option": 0
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "joint": {
+          "cached_candidates": 988890,
+          "geometry_rows_computed": 7272,
+          "geometry_rows_reused": 14113608,
+          "requested_candidates": 2754000,
+          "scored_candidates": 1765110
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "motion": {
+          "cached_candidates": 35442,
+          "geometry_rows_computed": 64908,
+          "geometry_rows_reused": 429156,
+          "requested_candidates": 97200,
+          "scored_candidates": 61758
+        },
+        "option": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 41220,
+        "path": "raw/n8_J_w29324001.jsonl.gz",
+        "sha256": "45bd8ed5744061ef410cc7ea326366eec0fdd16f1ef2bf079a8839df630cbc21"
+      },
+      "metrics": {
+        "J": 0.6322411931061972,
+        "active_mean": 4.0,
+        "active_min": 4,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 43.004,
+        "eligible_unserved": 3.004,
+        "height_penalty": 8.440975346747831e-05,
+        "ineligible": 6.996,
+        "longest_zero_run": 0,
+        "mask_switches": 1,
+        "mean_height": 50.08440975346748,
+        "mean_path_per_uav": 101.91448542456351,
+        "mean_visible_peer_slots": 0.0,
+        "mean_visible_user_slots": 5.3755,
+        "per_uav_path": [
+          186.73579121433684,
+          143.35718604747254,
+          48.25356962475104,
+          99.93788383843398,
+          144.92695068116566,
+          3.5788834840800234,
+          187.60236302514437,
+          0.9232554811236326
+        ],
+        "quality": 0.24108534286554922,
+        "served": 40.0,
+        "served_min": 40,
+        "served_p05": 40.0,
+        "total_team_path": 815.3158833965081,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": null,
+      "option_model_ticks": 0,
+      "position_predictions": 108000,
+      "raw": {
+        "bytes": 55829,
+        "path": "raw/n8_J_w29324001.npz",
+        "sha256": "9c1111631d1f6b32df0a3a722adcb3662295ba938d76aa002f51b3d6fa45799e"
+      },
+      "runtime_seed": 2997474618,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 107.37045953600024,
+        "cpu_seconds": 108.049276579,
+        "native_and_record_cpu_seconds": 0.6165809329999519,
+        "wall_seconds": 108.08899858899531
+      },
+      "world_id": 29324001
+    },
+    {
+      "arm": "R",
+      "calls": {
+        "arrival": 1,
+        "joint": 0,
+        "mask": 47,
+        "motion": 479,
+        "option": 1
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 8,
+          "geometry_rows_reused": 1016,
+          "requested_candidates": 128,
+          "scored_candidates": 128
+        },
+        "joint": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 376,
+          "geometry_rows_reused": 95504,
+          "requested_candidates": 11985,
+          "scored_candidates": 11985
+        },
+        "motion": {
+          "cached_candidates": 37679,
+          "geometry_rows_computed": 69138,
+          "geometry_rows_reused": 457142,
+          "requested_candidates": 103464,
+          "scored_candidates": 65785
+        },
+        "option": {
+          "cached_candidates": 8064,
+          "geometry_rows_computed": 344,
+          "geometry_rows_reused": 344752,
+          "requested_candidates": 51201,
+          "scored_candidates": 43137
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 332165,
+        "path": "raw/n8_R_w29324001.jsonl.gz",
+        "sha256": "1602f37c3a91b4a454d63c066aa9f1930cd1ecc938f1d543925ac3a6c69a3838"
+      },
+      "metrics": {
+        "J": 0.6845084948833973,
+        "active_mean": 5.76,
+        "active_min": 4,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 45.714,
+        "eligible_unserved": 0.47,
+        "height_penalty": 8.340714595145637e-05,
+        "ineligible": 4.286,
+        "longest_zero_run": 0,
+        "mask_switches": 3,
+        "mean_height": 50.083407145951455,
+        "mean_path_per_uav": 409.59071946701613,
+        "mean_visible_peer_slots": 0.006,
+        "mean_visible_user_slots": 5.71425,
+        "per_uav_path": [
+          236.90268834177616,
+          644.7972835822819,
+          545.1328725613687,
+          301.8994080655003,
+          348.2564583734923,
+          115.0034946883818,
+          447.4401261939283,
+          637.2934239293993
+        ],
+        "quality": 0.1705863400978292,
+        "served": 45.244,
+        "served_min": 38,
+        "served_p05": 40.0,
+        "total_team_path": 3276.725755736129,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": {
+        "activated_steps_after_arrival": 440,
+        "actual_arrival_mask": 190,
+        "arrival_t": 60,
+        "duration": 20,
+        "first_remute_t": null,
+        "initial_contiguous_active_steps": 440,
+        "initiated": true,
+        "member": 7,
+        "predicted_mask": 190,
+        "predicted_total_J": 300.60254449456875,
+        "predicted_total_served": 19720,
+        "realized_remaining_J_sum": 317.2134748484526,
+        "realized_remaining_served_sum": 21032,
+        "remuted": false,
+        "selected": {
+          "arrival_t": 60,
+          "descent_ticks": 0,
+          "duration": 20,
+          "member": 7,
+          "offsets": [
+            3,
+            17
+          ],
+          "path": 547.2792206135786,
+          "predicted_destination": [
+            [
+              262.18461990356445,
+              775.8814096450806,
+              50.0
+            ],
+            [
+              350.40155053138733,
+              213.5041207075119,
+              50.0
+            ],
+            [
+              205.2329182624817,
+              609.396755695343,
+              50.0
+            ],
+            [
+              889.1581296920776,
+              103.65822911262512,
+              50.0
+            ],
+            [
+              945.2890157699585,
+              821.2347030639648,
+              50.0
+            ],
+            [
+              899.8497724533081,
+              518.6178684234619,
+              50.0
+            ],
+            [
+              899.9747633934021,
+              169.3648397922516,
+              50.0
+            ],
+            [
+              621.8665504455566,
+              844.9482715129852,
+              50.0
+            ]
+          ],
+          "predicted_mask": 190,
+          "predicted_total_J": 300.60254449456875,
+          "predicted_total_served": 19720,
+          "site": 64,
+          "tail_score": {
+            "J": 0.6544111300571138,
+            "energy_penalty": 0.0,
+            "quality": 0.17470376685704614,
+            "served": 43
+          },
+          "transit_J": 12.661647269438692,
+          "transit_served": 800,
+          "unrounded_duration": 17
+        },
+        "site": 64,
+        "stay_total_J": 291.2178871970898,
+        "stay_total_served": 18400,
+        "transit_J_sum": 12.661647218217158,
+        "transit_served_sum": 800
+      },
+      "option_model_ticks": 7610,
+      "position_predictions": 103464,
+      "raw": {
+        "bytes": 100392,
+        "path": "raw/n8_R_w29324001.npz",
+        "sha256": "c662517f1bb0c2cbfa3110e575922bcaef90ff771d9546d5c4054c7b681e9786"
+      },
+      "runtime_seed": 2997474618,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 6.643086065000091,
+        "cpu_seconds": 7.426938572000012,
+        "native_and_record_cpu_seconds": 0.6344495620003272,
+        "wall_seconds": 7.4279974960081745
+      },
+      "world_id": 29324001
+    },
+    {
+      "arm": "C",
+      "calls": {
+        "arrival": 0,
+        "joint": 0,
+        "mask": 50,
+        "motion": 500,
+        "option": 0
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "joint": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 400,
+          "geometry_rows_reused": 101600,
+          "requested_candidates": 12750,
+          "scored_candidates": 12750
+        },
+        "motion": {
+          "cached_candidates": 39320,
+          "geometry_rows_computed": 72180,
+          "geometry_rows_reused": 477260,
+          "requested_candidates": 108000,
+          "scored_candidates": 68680
+        },
+        "option": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 344848,
+        "path": "raw/n8_C_w29324001.jsonl.gz",
+        "sha256": "4c6dc4b407913549b5f711e18a758b7413a3e71c0bafc0f9ae5a6e0029938e61"
+      },
+      "metrics": {
+        "J": 0.6325173172244813,
+        "active_mean": 4.0,
+        "active_min": 4,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 43.968,
+        "eligible_unserved": 3.988,
+        "height_penalty": 8.340714595145637e-05,
+        "ineligible": 6.032,
+        "longest_zero_run": 0,
+        "mask_switches": 2,
+        "mean_height": 50.083407145951455,
+        "mean_path_per_uav": 234.5394513439714,
+        "mean_visible_peer_slots": 0.006,
+        "mean_visible_user_slots": 5.496,
+        "per_uav_path": [
+          236.90268834177616,
+          457.51806296870336,
+          345.4272450765973,
+          121.8994080655003,
+          194.53678897225623,
+          42.57708781718896,
+          447.4401261939283,
+          30.01420331582074
+        ],
+        "quality": 0.24293574790144248,
+        "served": 39.98,
+        "served_min": 38,
+        "served_p05": 40.0,
+        "total_team_path": 1876.3156107517711,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": null,
+      "option_model_ticks": 0,
+      "position_predictions": 108000,
+      "raw": {
+        "bytes": 75628,
+        "path": "raw/n8_C_w29324001.npz",
+        "sha256": "9184ddb1694d8e844a29abd186ea1c210d207f526c5f45ae6fe0226cc7890a3c"
+      },
+      "runtime_seed": 2997474618,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 5.177732934999682,
+        "cpu_seconds": 5.975865030000023,
+        "native_and_record_cpu_seconds": 0.6429211480000276,
+        "wall_seconds": 5.976366104994668
+      },
+      "world_id": 29324001
+    },
+    {
+      "arm": "R",
+      "calls": {
+        "arrival": 1,
+        "joint": 0,
+        "mask": 46,
+        "motion": 469,
+        "option": 1
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 8,
+          "geometry_rows_reused": 1016,
+          "requested_candidates": 128,
+          "scored_candidates": 128
+        },
+        "joint": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 368,
+          "geometry_rows_reused": 93472,
+          "requested_candidates": 11730,
+          "scored_candidates": 11730
+        },
+        "motion": {
+          "cached_candidates": 36832,
+          "geometry_rows_computed": 67755,
+          "geometry_rows_reused": 448021,
+          "requested_candidates": 101304,
+          "scored_candidates": 64472
+        },
+        "option": {
+          "cached_candidates": 7680,
+          "geometry_rows_computed": 248,
+          "geometry_rows_reused": 245520,
+          "requested_candidates": 38401,
+          "scored_candidates": 30721
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 332316,
+        "path": "raw/n8_R_w29324002.jsonl.gz",
+        "sha256": "55726e3cf22c014cf10d8766e203a3e16b6f8ee79f61c22a508f6dc9ad979cde"
+      },
+      "metrics": {
+        "J": 0.6845243885709201,
+        "active_mean": 4.96,
+        "active_min": 4,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 44.81,
+        "eligible_unserved": 0.086,
+        "height_penalty": 0.00011787163349768648,
+        "ineligible": 5.19,
+        "longest_zero_run": 0,
+        "mask_switches": 3,
+        "mean_height": 50.117871633497685,
+        "mean_path_per_uav": 658.8249349519501,
+        "mean_visible_peer_slots": 0.12875,
+        "mean_visible_user_slots": 5.60125,
+        "per_uav_path": [
+          969.5577653722074,
+          1046.8867954917864,
+          638.339240938178,
+          112.74617179123845,
+          1199.5126222377226,
+          49.63705007255899,
+          675.1023601419033,
+          578.8174735700052
+        ],
+        "quality": 0.19502086734805935,
+        "served": 44.724,
+        "served_min": 35,
+        "served_p05": 43.0,
+        "total_team_path": 5270.599479615601,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": {
+        "activated_steps_after_arrival": 430,
+        "actual_arrival_mask": 211,
+        "arrival_t": 70,
+        "duration": 30,
+        "first_remute_t": null,
+        "initial_contiguous_active_steps": 430,
+        "initiated": true,
+        "member": 1,
+        "predicted_mask": 211,
+        "predicted_total_J": 316.5117502549499,
+        "predicted_total_served": 20700,
+        "realized_remaining_J_sum": 316.5117497761012,
+        "realized_remaining_served_sum": 20700,
+        "remuted": false,
+        "selected": {
+          "arrival_t": 70,
+          "descent_ticks": 0,
+          "duration": 30,
+          "member": 1,
+          "offsets": [
+            28,
+            12
+          ],
+          "path": 989.1168824543142,
+          "predicted_destination": [
+            [
+              198.1060355901718,
+              198.53933155536652,
+              50.0
+            ],
+            [
+              865.2971854060888,
+              405.662023127079,
+              50.0
+            ],
+            [
+              878.8027763366699,
+              387.9634737968445,
+              50.0
+            ],
+            [
+              172.85609245300293,
+              12.620354071259499,
+              50.0
+            ],
+            [
+              298.3672320842743,
+              939.9999976158142,
+              50.0
+            ],
+            [
+              339.02400732040405,
+              565.5198693275452,
+              50.0
+            ],
+            [
+              693.5635209083557,
+              943.5606598854065,
+              50.0
+            ],
+            [
+              276.44065022468567,
+              560.5141520500183,
+              50.0
+            ]
+          ],
+          "predicted_mask": 211,
+          "predicted_total_J": 316.5117502549499,
+          "predicted_total_served": 20700,
+          "site": 45,
+          "tail_score": {
+            "J": 0.6880968427904735,
+            "energy_penalty": 0.0,
+            "quality": 0.19365614263491132,
+            "served": 45
+          },
+          "transit_J": 20.63010785504633,
+          "transit_served": 1350,
+          "unrounded_duration": 28
+        },
+        "site": 45,
+        "stay_total_J": 316.3283204440436,
+        "stay_total_served": 20700,
+        "transit_J_sum": 20.63010781244798,
+        "transit_served_sum": 1350
+      },
+      "option_model_ticks": 6620,
+      "position_predictions": 101304,
+      "raw": {
+        "bytes": 127493,
+        "path": "raw/n8_R_w29324002.npz",
+        "sha256": "85f4874ae4acb832984d5fb8ef67e9e81625fd1d436a44c471bbeda0bec5c7ac"
+      },
+      "runtime_seed": 3030584818,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 5.704134722000134,
+        "cpu_seconds": 6.442790811999998,
+        "native_and_record_cpu_seconds": 0.595614688999575,
+        "wall_seconds": 6.59103267500177
+      },
+      "world_id": 29324002
+    },
+    {
+      "arm": "C",
+      "calls": {
+        "arrival": 0,
+        "joint": 0,
+        "mask": 50,
+        "motion": 500,
+        "option": 0
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "joint": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 400,
+          "geometry_rows_reused": 101600,
+          "requested_candidates": 12750,
+          "scored_candidates": 12750
+        },
+        "motion": {
+          "cached_candidates": 39281,
+          "geometry_rows_computed": 72219,
+          "geometry_rows_reused": 477533,
+          "requested_candidates": 108000,
+          "scored_candidates": 68719
+        },
+        "option": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 357128,
+        "path": "raw/n8_C_w29324002.jsonl.gz",
+        "sha256": "021e9c1a52989cd1d1b2bb462aa6474dc3c106052e63e7762cc43fee8b675fd3"
+      },
+      "metrics": {
+        "J": 0.6841575286004559,
+        "active_mean": 4.96,
+        "active_min": 4,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 44.81,
+        "eligible_unserved": 0.086,
+        "height_penalty": 0.00011787163349768648,
+        "ineligible": 5.19,
+        "longest_zero_run": 0,
+        "mask_switches": 2,
+        "mean_height": 50.117871633497685,
+        "mean_path_per_uav": 535.1853246451608,
+        "mean_visible_peer_slots": 0.12875,
+        "mean_visible_user_slots": 5.60125,
+        "per_uav_path": [
+          969.5577653722074,
+          57.76991303747218,
+          638.339240938178,
+          112.74617179123845,
+          1199.5126222377226,
+          49.63705007255899,
+          675.1023601419033,
+          578.8174735700052
+        ],
+        "quality": 0.19379800077984496,
+        "served": 44.724,
+        "served_min": 35,
+        "served_p05": 43.0,
+        "total_team_path": 4281.482597161286,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": null,
+      "option_model_ticks": 0,
+      "position_predictions": 108000,
+      "raw": {
+        "bytes": 125307,
+        "path": "raw/n8_C_w29324002.npz",
+        "sha256": "824f3acf42a834781bb720cd6b42444956ecb1b5dd43201efac25e120ea526ce"
+      },
+      "runtime_seed": 3030584818,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 4.510479454999938,
+        "cpu_seconds": 5.236620706000025,
+        "native_and_record_cpu_seconds": 0.5758867340000506,
+        "wall_seconds": 5.237165494007058
+      },
+      "world_id": 29324002
+    },
+    {
+      "arm": "J",
+      "calls": {
+        "arrival": 0,
+        "joint": 50,
+        "mask": 0,
+        "motion": 450,
+        "option": 0
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "joint": {
+          "cached_candidates": 988890,
+          "geometry_rows_computed": 7272,
+          "geometry_rows_reused": 14113608,
+          "requested_candidates": 2754000,
+          "scored_candidates": 1765110
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "motion": {
+          "cached_candidates": 35406,
+          "geometry_rows_computed": 64944,
+          "geometry_rows_reused": 429408,
+          "requested_candidates": 97200,
+          "scored_candidates": 61794
+        },
+        "option": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 51346,
+        "path": "raw/n8_J_w29324002.jsonl.gz",
+        "sha256": "4bf37f28d410f45f84d56460bae1aebb2ea29dcbe092e33f3ee62125ddccc375"
+      },
+      "metrics": {
+        "J": 0.6851524909300601,
+        "active_mean": 4.98,
+        "active_min": 4,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 44.928,
+        "eligible_unserved": 0.064,
+        "height_penalty": 0.00011037163349768647,
+        "ineligible": 5.072,
+        "longest_zero_run": 0,
+        "mask_switches": 2,
+        "mean_height": 50.110371633497685,
+        "mean_path_per_uav": 487.61467677381023,
+        "mean_visible_peer_slots": 0.1295,
+        "mean_visible_user_slots": 5.616,
+        "per_uav_path": [
+          783.0115833413322,
+          45.343506166279326,
+          793.3625648094617,
+          90.78464756417213,
+          983.4174482881348,
+          497.60269123923877,
+          654.6325820219547,
+          52.76239075990833
+        ],
+        "quality": 0.19055620854519312,
+        "served": 44.864,
+        "served_min": 35,
+        "served_p05": 45.0,
+        "total_team_path": 3900.917414190482,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": null,
+      "option_model_ticks": 0,
+      "position_predictions": 108000,
+      "raw": {
+        "bytes": 107729,
+        "path": "raw/n8_J_w29324002.npz",
+        "sha256": "e45a8847a332ee5d373e886a2d24088caa90f979c6b6082aace929ef3a7c3e5a"
+      },
+      "runtime_seed": 3030584818,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 102.17846955099935,
+        "cpu_seconds": 102.81635432999997,
+        "native_and_record_cpu_seconds": 0.5785338090000778,
+        "wall_seconds": 102.94618255502428
+      },
+      "world_id": 29324002
+    },
+    {
+      "arm": "C",
+      "calls": {
+        "arrival": 0,
+        "joint": 0,
+        "mask": 50,
+        "motion": 500,
+        "option": 0
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "joint": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 400,
+          "geometry_rows_reused": 101600,
+          "requested_candidates": 12750,
+          "scored_candidates": 12750
+        },
+        "motion": {
+          "cached_candidates": 39329,
+          "geometry_rows_computed": 72171,
+          "geometry_rows_reused": 477197,
+          "requested_candidates": 108000,
+          "scored_candidates": 68671
+        },
+        "option": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 341868,
+        "path": "raw/n8_C_w29324003.jsonl.gz",
+        "sha256": "f5b901a1e0ec7cc12eae456bb5803b2cfa1f18dbe0ba7f05ce68b117920288e4"
+      },
+      "metrics": {
+        "J": 0.5843965024563172,
+        "active_mean": 4.0,
+        "active_min": 4,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 38.988,
+        "eligible_unserved": 3.002,
+        "height_penalty": 7.617545850767315e-05,
+        "ineligible": 11.012,
+        "longest_zero_run": 0,
+        "mask_switches": 1,
+        "mean_height": 50.07617545850767,
+        "mean_path_per_uav": 109.59718254563644,
+        "mean_visible_peer_slots": 0.12525,
+        "mean_visible_user_slots": 4.8735,
+        "per_uav_path": [
+          92.8771703589999,
+          96.05429053850148,
+          186.6437225429147,
+          142.92641770385418,
+          128.7726463014235,
+          69.21477336223352,
+          72.9180711787344,
+          87.37036837842976
+        ],
+        "quality": 0.268895593049416,
+        "served": 35.986,
+        "served_min": 32,
+        "served_p05": 36.0,
+        "total_team_path": 876.7774603650915,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": null,
+      "option_model_ticks": 0,
+      "position_predictions": 108000,
+      "raw": {
+        "bytes": 54815,
+        "path": "raw/n8_C_w29324003.npz",
+        "sha256": "312196ddee0c9c71841b6aacf55884fa53304c4a752c0fa78fce76ebd9b21022"
+      },
+      "runtime_seed": 1720431316,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 4.41658360500071,
+        "cpu_seconds": 5.102396211999974,
+        "native_and_record_cpu_seconds": 0.5342025749994264,
+        "wall_seconds": 5.103104574984172
+      },
+      "world_id": 29324003
+    },
+    {
+      "arm": "J",
+      "calls": {
+        "arrival": 0,
+        "joint": 50,
+        "mask": 0,
+        "motion": 450,
+        "option": 0
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "joint": {
+          "cached_candidates": 988890,
+          "geometry_rows_computed": 7272,
+          "geometry_rows_reused": 14113608,
+          "requested_candidates": 2754000,
+          "scored_candidates": 1765110
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "motion": {
+          "cached_candidates": 35469,
+          "geometry_rows_computed": 64881,
+          "geometry_rows_reused": 428967,
+          "requested_candidates": 97200,
+          "scored_candidates": 61731
+        },
+        "option": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 44868,
+        "path": "raw/n8_J_w29324003.jsonl.gz",
+        "sha256": "38ff51cae6e9463994e8fae41c2648e14861dda194701292a83121bc7e062c5b"
+      },
+      "metrics": {
+        "J": 0.6137102438202905,
+        "active_mean": 4.0,
+        "active_min": 4,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 41.976,
+        "eligible_unserved": 2.994,
+        "height_penalty": 3.8193011769279194e-05,
+        "ineligible": 8.024,
+        "longest_zero_run": 0,
+        "mask_switches": 1,
+        "mean_height": 50.03819301176928,
+        "mean_path_per_uav": 231.6053404290345,
+        "mean_visible_peer_slots": 0.2505,
+        "mean_visible_user_slots": 5.247,
+        "per_uav_path": [
+          521.4922444591202,
+          403.33351115208006,
+          443.57598500493884,
+          60.964893476787864,
+          250.32233174527664,
+          47.253249135167195,
+          60.49166430754157,
+          65.40884415136343
+        ],
+        "quality": 0.22666812277353315,
+        "served": 38.982,
+        "served_min": 35,
+        "served_p05": 39.0,
+        "total_team_path": 1852.842723432276,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": null,
+      "option_model_ticks": 0,
+      "position_predictions": 108000,
+      "raw": {
+        "bytes": 74273,
+        "path": "raw/n8_J_w29324003.npz",
+        "sha256": "896a1c952651a7fd1fadcfe43324d6680511b9e30b6aa84ceeff0ab57224af5e"
+      },
+      "runtime_seed": 1720431316,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 101.30038092499996,
+        "cpu_seconds": 101.89029238,
+        "native_and_record_cpu_seconds": 0.5311905919997457,
+        "wall_seconds": 101.97599096401245
+      },
+      "world_id": 29324003
+    },
+    {
+      "arm": "R",
+      "calls": {
+        "arrival": 1,
+        "joint": 0,
+        "mask": 47,
+        "motion": 479,
+        "option": 1
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 8,
+          "geometry_rows_reused": 1016,
+          "requested_candidates": 128,
+          "scored_candidates": 128
+        },
+        "joint": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 376,
+          "geometry_rows_reused": 95504,
+          "requested_candidates": 11985,
+          "scored_candidates": 11985
+        },
+        "motion": {
+          "cached_candidates": 37670,
+          "geometry_rows_computed": 69147,
+          "geometry_rows_reused": 457205,
+          "requested_candidates": 103464,
+          "scored_candidates": 65794
+        },
+        "option": {
+          "cached_candidates": 7040,
+          "geometry_rows_computed": 352,
+          "geometry_rows_reused": 352936,
+          "requested_candidates": 51201,
+          "scored_candidates": 44161
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 323691,
+        "path": "raw/n8_R_w29324003.jsonl.gz",
+        "sha256": "b97f8869002017eddfa632c831119042a9889183b7d97fdee14501cb1c0db852"
+      },
+      "metrics": {
+        "J": 0.6361585524187308,
+        "active_mean": 4.88,
+        "active_min": 4,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 40.744,
+        "eligible_unserved": 0.362,
+        "height_penalty": 7.617545850767315e-05,
+        "ineligible": 9.256,
+        "longest_zero_run": 0,
+        "mask_switches": 2,
+        "mean_height": 50.07617545850767,
+        "mean_path_per_uav": 193.2735894168293,
+        "mean_visible_peer_slots": 0.12525,
+        "mean_visible_user_slots": 5.093,
+        "per_uav_path": [
+          122.8771703589999,
+          96.05429053850148,
+          186.6437225429147,
+          142.92641770385418,
+          171.19905317261635,
+          69.21477336223352,
+          72.9180711787344,
+          684.3552164767798
+        ],
+        "quality": 0.2362890929241281,
+        "served": 40.382,
+        "served_min": 32,
+        "served_p05": 36.0,
+        "total_team_path": 1546.1887153346345,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": {
+        "activated_steps_after_arrival": 440,
+        "actual_arrival_mask": 151,
+        "arrival_t": 60,
+        "duration": 20,
+        "first_remute_t": null,
+        "initial_contiguous_active_steps": 440,
+        "initiated": true,
+        "member": 7,
+        "predicted_mask": 151,
+        "predicted_total_J": 284.4901652715788,
+        "predicted_total_served": 17880,
+        "realized_remaining_J_sum": 294.83410182611897,
+        "realized_remaining_served_sum": 18758,
+        "remuted": false,
+        "selected": {
+          "arrival_t": 60,
+          "descent_ticks": 0,
+          "duration": 20,
+          "member": 7,
+          "offsets": [
+            7,
+            16
+          ],
+          "path": 566.98484809835,
+          "predicted_destination": [
+            [
+              94.61458027362823,
+              844.5137739181519,
+              50.0
+            ],
+            [
+              889.8518085479736,
+              213.70553970336914,
+              50.0
+            ],
+            [
+              473.06936979293823,
+              617.7402138710022,
+              50.0
+            ],
+            [
+              450.5966305732727,
+              304.0938973426819,
+              50.0
+            ],
+            [
+              278.6056399345398,
+              75.16565173864365,
+              50.0
+            ],
+            [
+              98.64433109760284,
+              64.51647728681564,
+              50.0
+            ],
+            [
+              188.2026344537735,
+              264.93024826049805,
+              50.0
+            ],
+            [
+              889.0961027145386,
+              755.7963240146637,
+              50.0
+            ]
+          ],
+          "predicted_mask": 151,
+          "predicted_total_J": 284.4901652715788,
+          "predicted_total_served": 17880,
+          "site": 1,
+          "tail_score": {
+            "J": 0.6199921663640129,
+            "energy_penalty": 0.0,
+            "quality": 0.24664055454670986,
+            "served": 39
+          },
+          "transit_J": 11.69361207141315,
+          "transit_served": 720,
+          "unrounded_duration": 16
+        },
+        "site": 1,
+        "stay_total_J": 268.95307764250254,
+        "stay_total_served": 16560,
+        "transit_J_sum": 11.693612036735313,
+        "transit_served_sum": 720
+      },
+      "option_model_ticks": 7690,
+      "position_predictions": 103464,
+      "raw": {
+        "bytes": 63652,
+        "path": "raw/n8_R_w29324003.npz",
+        "sha256": "72886372f86b241d3fcd356ccfaab225a9ebbdde0a2f7802e886ac03df772f96"
+      },
+      "runtime_seed": 1720431316,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 5.802895451000154,
+        "cpu_seconds": 6.489242192000006,
+        "native_and_record_cpu_seconds": 0.5417327090005415,
+        "wall_seconds": 6.49091717301053
+      },
+      "world_id": 29324003
+    },
+    {
+      "arm": "J",
+      "calls": {
+        "arrival": 0,
+        "joint": 50,
+        "mask": 0,
+        "motion": 450,
+        "option": 0
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "joint": {
+          "cached_candidates": 988890,
+          "geometry_rows_computed": 7272,
+          "geometry_rows_reused": 14113608,
+          "requested_candidates": 2754000,
+          "scored_candidates": 1765110
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "motion": {
+          "cached_candidates": 35475,
+          "geometry_rows_computed": 64875,
+          "geometry_rows_reused": 428925,
+          "requested_candidates": 97200,
+          "scored_candidates": 61725
+        },
+        "option": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 44716,
+        "path": "raw/n8_J_w29324004.jsonl.gz",
+        "sha256": "ee22e582f5930414f5a8ecd9a0602320da8e89123673d768e6d3af4abb9e7d41"
+      },
+      "metrics": {
+        "J": 0.6482773996283725,
+        "active_mean": 5.0,
+        "active_min": 5,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 41.984,
+        "eligible_unserved": 0.004,
+        "height_penalty": 6.710634803319892e-05,
+        "ineligible": 8.016,
+        "longest_zero_run": 0,
+        "mask_switches": 1,
+        "mean_height": 50.06710634803319,
+        "mean_path_per_uav": 214.1525622268307,
+        "mean_visible_peer_slots": 0.00225,
+        "mean_visible_user_slots": 5.248,
+        "per_uav_path": [
+          222.80323287678544,
+          496.95425428698957,
+          30.32892759469445,
+          354.8468747998672,
+          52.199895572798226,
+          279.6982957008357,
+          1.5879533785463238,
+          274.8010636041287
+        ],
+        "quality": 0.20208168658801887,
+        "served": 41.98,
+        "served_min": 38,
+        "served_p05": 42.0,
+        "total_team_path": 1713.2204978146456,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": null,
+      "option_model_ticks": 0,
+      "position_predictions": 108000,
+      "raw": {
+        "bytes": 77424,
+        "path": "raw/n8_J_w29324004.npz",
+        "sha256": "9e8259a53c733d6e24138a8d6280ede61903d78845daf9ae01ef15e9eae9468e"
+      },
+      "runtime_seed": 3222740975,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 108.44803080499952,
+        "cpu_seconds": 109.04799149999997,
+        "native_and_record_cpu_seconds": 0.5396147940003289,
+        "wall_seconds": 109.11426515202038
+      },
+      "world_id": 29324004
+    },
+    {
+      "arm": "R",
+      "calls": {
+        "arrival": 1,
+        "joint": 0,
+        "mask": 48,
+        "motion": 489,
+        "option": 1
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 8,
+          "geometry_rows_reused": 1016,
+          "requested_candidates": 128,
+          "scored_candidates": 128
+        },
+        "joint": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 384,
+          "geometry_rows_reused": 97536,
+          "requested_candidates": 12240,
+          "scored_candidates": 12240
+        },
+        "motion": {
+          "cached_candidates": 38496,
+          "geometry_rows_computed": 70551,
+          "geometry_rows_reused": 466473,
+          "requested_candidates": 105624,
+          "scored_candidates": 67128
+        },
+        "option": {
+          "cached_candidates": 6784,
+          "geometry_rows_computed": 355,
+          "geometry_rows_reused": 354981,
+          "requested_candidates": 51201,
+          "scored_candidates": 44417
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 333382,
+        "path": "raw/n8_R_w29324004.jsonl.gz",
+        "sha256": "d3cb14fc4dd3947a449e28f951fe7d64c7d3c3add68e85eabf512cadf83b460a"
+      },
+      "metrics": {
+        "J": 0.6506924695684619,
+        "active_mean": 4.9,
+        "active_min": 4,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 42.608,
+        "eligible_unserved": 0.144,
+        "height_penalty": 8.960634803319888e-05,
+        "ineligible": 7.392,
+        "longest_zero_run": 0,
+        "mask_switches": 2,
+        "mean_height": 50.08960634803319,
+        "mean_path_per_uav": 245.1240361016793,
+        "mean_visible_peer_slots": 0.005,
+        "mean_visible_user_slots": 5.326,
+        "per_uav_path": [
+          300.69227844667114,
+          556.9542542869896,
+          30.32892759469445,
+          79.27644687901699,
+          74.16141979986455,
+          346.30211958922155,
+          210.0419972027899,
+          363.2348450141863
+        ],
+        "quality": 0.18762025305498387,
+        "served": 42.464,
+        "served_min": 34,
+        "served_p05": 38.0,
+        "total_team_path": 1960.9922888134345,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": {
+        "activated_steps_after_arrival": 450,
+        "actual_arrival_mask": 227,
+        "arrival_t": 50,
+        "duration": 10,
+        "first_remute_t": null,
+        "initial_contiguous_active_steps": 450,
+        "initiated": true,
+        "member": 6,
+        "predicted_mask": 227,
+        "predicted_total_J": 290.53353129114385,
+        "predicted_total_served": 18830,
+        "realized_remaining_J_sum": 301.3604283364203,
+        "realized_remaining_served_sum": 19726,
+        "remuted": false,
+        "selected": {
+          "arrival_t": 50,
+          "descent_ticks": 0,
+          "duration": 10,
+          "member": 6,
+          "offsets": [
+            0,
+            -3
+          ],
+          "path": 90.0,
+          "predicted_destination": [
+            [
+              185.10884046554565,
+              202.70603895187378,
+              50.0
+            ],
+            [
+              162.72678971290588,
+              759.7904205322266,
+              50.0
+            ],
+            [
+              478.92066836357117,
+              135.5835199356079,
+              50.0
+            ],
+            [
+              774.639368057251,
+              466.3953483104706,
+              50.0
+            ],
+            [
+              886.7751955986023,
+              554.450273513794,
+              50.0
+            ],
+            [
+              884.1233253479004,
+              799.0949749946594,
+              50.0
+            ],
+            [
+              573.4864473342896,
+              481.66236639022827,
+              50.0
+            ],
+            [
+              746.1473345756531,
+              90.00000357627869,
+              50.0
+            ]
+          ],
+          "predicted_mask": 227,
+          "predicted_total_J": 290.53353129114385,
+          "predicted_total_served": 18830,
+          "site": 51,
+          "tail_score": {
+            "J": 0.6321119255148152,
+            "energy_penalty": 0.0,
+            "quality": 0.19370641838271765,
+            "served": 41
+          },
+          "transit_J": 6.083164809477033,
+          "transit_served": 380,
+          "unrounded_duration": 3
+        },
+        "site": 51,
+        "stay_total_J": 279.8255812359435,
+        "stay_total_served": 17480,
+        "transit_J_sum": 6.083164824424952,
+        "transit_served_sum": 380
+      },
+      "option_model_ticks": 6980,
+      "position_predictions": 105624,
+      "raw": {
+        "bytes": 81467,
+        "path": "raw/n8_R_w29324004.npz",
+        "sha256": "a495fed233be6954de0c2504217696acccb1fbaee57a52cecf43bb87d7f690b5"
+      },
+      "runtime_seed": 3222740975,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 5.7824272169987125,
+        "cpu_seconds": 6.459256181000001,
+        "native_and_record_cpu_seconds": 0.5353147540008649,
+        "wall_seconds": 6.4679458269965835
+      },
+      "world_id": 29324004
+    },
+    {
+      "arm": "C",
+      "calls": {
+        "arrival": 0,
+        "joint": 0,
+        "mask": 50,
+        "motion": 500,
+        "option": 0
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "joint": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 400,
+          "geometry_rows_reused": 101600,
+          "requested_candidates": 12750,
+          "scored_candidates": 12750
+        },
+        "motion": {
+          "cached_candidates": 39365,
+          "geometry_rows_computed": 72135,
+          "geometry_rows_reused": 476945,
+          "requested_candidates": 108000,
+          "scored_candidates": 68635
+        },
+        "option": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 342322,
+        "path": "raw/n8_C_w29324004.jsonl.gz",
+        "sha256": "dd3b63467f39de4a19ec06c329fa09c420ddee387b2b5a9fe840cc242a9bc095"
+      },
+      "metrics": {
+        "J": 0.6076227767427168,
+        "active_mean": 4.0,
+        "active_min": 4,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 39.014,
+        "eligible_unserved": 1.042,
+        "height_penalty": 8.960634803319888e-05,
+        "ineligible": 10.986,
+        "longest_zero_run": 0,
+        "mask_switches": 1,
+        "mean_height": 50.08960634803319,
+        "mean_path_per_uav": 184.214133524982,
+        "mean_visible_peer_slots": 0.00475,
+        "mean_visible_user_slots": 4.87675,
+        "per_uav_path": [
+          215.83946470428546,
+          454.5278474157967,
+          30.32892759469445,
+          79.27644687901699,
+          74.16141979986455,
+          286.30211958922155,
+          30.041997202789908,
+          303.2348450141863
+        ],
+        "quality": 0.2536812769691674,
+        "served": 37.972,
+        "served_min": 34,
+        "served_p05": 38.0,
+        "total_team_path": 1473.713068199856,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": null,
+      "option_model_ticks": 0,
+      "position_predictions": 108000,
+      "raw": {
+        "bytes": 66946,
+        "path": "raw/n8_C_w29324004.npz",
+        "sha256": "e41510992196c48a39d5da3b19f2600d82ce6f5b2b8a45041188764999c4fccc"
+      },
+      "runtime_seed": 3222740975,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 4.3729816280005025,
+        "cpu_seconds": 5.049306169999909,
+        "native_and_record_cpu_seconds": 0.533405072998903,
+        "wall_seconds": 5.049851699004648
+      },
+      "world_id": 29324004
+    },
+    {
+      "arm": "R",
+      "calls": {
+        "arrival": 1,
+        "joint": 0,
+        "mask": 47,
+        "motion": 479,
+        "option": 1
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 8,
+          "geometry_rows_reused": 1016,
+          "requested_candidates": 128,
+          "scored_candidates": 128
+        },
+        "joint": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 376,
+          "geometry_rows_reused": 95504,
+          "requested_candidates": 11985,
+          "scored_candidates": 11985
+        },
+        "motion": {
+          "cached_candidates": 37616,
+          "geometry_rows_computed": 69201,
+          "geometry_rows_reused": 457583,
+          "requested_candidates": 103464,
+          "scored_candidates": 65848
+        },
+        "option": {
+          "cached_candidates": 6400,
+          "geometry_rows_computed": 358,
+          "geometry_rows_reused": 358050,
+          "requested_candidates": 51201,
+          "scored_candidates": 44801
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 344835,
+        "path": "raw/n8_R_w29324005.jsonl.gz",
+        "sha256": "706d9b6725b33898a5e317afdd1bf2770b67c3a983a3dd21d94818825d2d8164"
+      },
+      "metrics": {
+        "J": 0.6610849165238315,
+        "active_mean": 4.88,
+        "active_min": 4,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 44.892,
+        "eligible_unserved": 1.716,
+        "height_penalty": 0.00015813411375362264,
+        "ineligible": 5.108,
+        "longest_zero_run": 0,
+        "mask_switches": 2,
+        "mean_height": 50.15813411375362,
+        "mean_path_per_uav": 741.6282680932226,
+        "mean_visible_peer_slots": 0.2285,
+        "mean_visible_user_slots": 5.6115,
+        "per_uav_path": [
+          561.935141827163,
+          96.19855956834215,
+          1422.6833812220539,
+          608.0420100367701,
+          1086.063697812358,
+          1124.2359951725357,
+          466.7339703861338,
+          567.1333887204236
+        ],
+        "quality": 0.18926350212528373,
+        "served": 43.176,
+        "served_min": 32,
+        "served_p05": 38.0,
+        "total_team_path": 5933.026144745781,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": {
+        "activated_steps_after_arrival": 440,
+        "actual_arrival_mask": 117,
+        "arrival_t": 60,
+        "duration": 20,
+        "first_remute_t": null,
+        "initial_contiguous_active_steps": 440,
+        "initiated": true,
+        "member": 5,
+        "predicted_mask": 117,
+        "predicted_total_J": 297.72177849261215,
+        "predicted_total_served": 19680,
+        "realized_remaining_J_sum": 307.05550722351944,
+        "realized_remaining_served_sum": 20101,
+        "remuted": false,
+        "selected": {
+          "arrival_t": 60,
+          "descent_ticks": 0,
+          "duration": 20,
+          "member": 5,
+          "offsets": [
+            -14,
+            15
+          ],
+          "path": 623.9696961966999,
+          "predicted_destination": [
+            [
+              806.5921068191528,
+              744.2958354949951,
+              50.0
+            ],
+            [
+              729.1815280914307,
+              376.57755613327026,
+              50.0
+            ],
+            [
+              133.25804471969604,
+              201.04746520519257,
+              50.0
+            ],
+            [
+              737.2288107872009,
+              170.31650245189667,
+              50.0
+            ],
+            [
+              295.4288423061371,
+              919.0517663955688,
+              50.0
+            ],
+            [
+              272.15893745422363,
+              667.3451483249664,
+              50.0
+            ],
+            [
+              918.014645576477,
+              343.118280172348,
+              50.0
+            ],
+            [
+              907.9136848449707,
+              795.7466244697571,
+              50.0
+            ]
+          ],
+          "predicted_mask": 117,
+          "predicted_total_J": 297.72177849261215,
+          "predicted_total_served": 19680,
+          "site": 59,
+          "tail_score": {
+            "J": 0.6490677030391557,
+            "energy_penalty": 0.0,
+            "quality": 0.1568923434638524,
+            "served": 43
+          },
+          "transit_J": 12.131989155383598,
+          "transit_served": 760,
+          "unrounded_duration": 15
+        },
+        "site": 59,
+        "stay_total_J": 279.0357505738227,
+        "stay_total_served": 17480,
+        "transit_J_sum": 12.131989122655101,
+        "transit_served_sum": 760
+      },
+      "option_model_ticks": 7950,
+      "position_predictions": 103464,
+      "raw": {
+        "bytes": 163670,
+        "path": "raw/n8_R_w29324005.npz",
+        "sha256": "f0acd12d09f38c05fc134ea323825f14a6affe6c74cf20803a8368fa051cb8e6"
+      },
+      "runtime_seed": 1331922148,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 5.785950942999534,
+        "cpu_seconds": 6.477421343999936,
+        "native_and_record_cpu_seconds": 0.5508343340011379,
+        "wall_seconds": 6.478040722984588
+      },
+      "world_id": 29324005
+    },
+    {
+      "arm": "C",
+      "calls": {
+        "arrival": 0,
+        "joint": 0,
+        "mask": 50,
+        "motion": 500,
+        "option": 0
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "joint": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 400,
+          "geometry_rows_reused": 101600,
+          "requested_candidates": 12750,
+          "scored_candidates": 12750
+        },
+        "motion": {
+          "cached_candidates": 39311,
+          "geometry_rows_computed": 72189,
+          "geometry_rows_reused": 477323,
+          "requested_candidates": 108000,
+          "scored_candidates": 68689
+        },
+        "option": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 352502,
+        "path": "raw/n8_C_w29324005.jsonl.gz",
+        "sha256": "07d9b1f4eca69c9fff33ab4c202396f4282bc12015a9f849bbb8f5417c1f5121"
+      },
+      "metrics": {
+        "J": 0.6050454017189272,
+        "active_mean": 4.0,
+        "active_min": 4,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 46.7,
+        "eligible_unserved": 8.766,
+        "height_penalty": 0.00012813411375362264,
+        "ineligible": 3.3,
+        "longest_zero_run": 0,
+        "mask_switches": 1,
+        "mean_height": 50.128134113753624,
+        "mean_path_per_uav": 410.21905611608815,
+        "mean_visible_peer_slots": 0.008,
+        "mean_visible_user_slots": 5.8375,
+        "per_uav_path": [
+          144.950293728813,
+          96.19855956834215,
+          880.5513468660901,
+          608.0420100367701,
+          796.3580703275866,
+          101.49043677931735,
+          87.02834290136241,
+          567.1333887204236
+        ],
+        "quality": 0.24699178610893602,
+        "served": 37.934,
+        "served_min": 32,
+        "served_p05": 38.0,
+        "total_team_path": 3281.7524489287052,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": null,
+      "option_model_ticks": 0,
+      "position_predictions": 108000,
+      "raw": {
+        "bytes": 103871,
+        "path": "raw/n8_C_w29324005.npz",
+        "sha256": "e986821a5359cc04d031f102bb71857d6ee87a8e43f7d1e720a2c501bb90aa23"
+      },
+      "runtime_seed": 1331922148,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 4.249940077998076,
+        "cpu_seconds": 4.923768560999974,
+        "native_and_record_cpu_seconds": 0.5286858800005803,
+        "wall_seconds": 4.924284977983916
+      },
+      "world_id": 29324005
+    },
+    {
+      "arm": "J",
+      "calls": {
+        "arrival": 0,
+        "joint": 50,
+        "mask": 0,
+        "motion": 450,
+        "option": 0
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "joint": {
+          "cached_candidates": 988890,
+          "geometry_rows_computed": 7272,
+          "geometry_rows_reused": 14113608,
+          "requested_candidates": 2754000,
+          "scored_candidates": 1765110
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "motion": {
+          "cached_candidates": 35406,
+          "geometry_rows_computed": 64944,
+          "geometry_rows_reused": 429408,
+          "requested_candidates": 97200,
+          "scored_candidates": 61794
+        },
+        "option": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 49734,
+        "path": "raw/n8_J_w29324005.jsonl.gz",
+        "sha256": "7410a1c2130deadfc9a17713342b6048aca565492229a140a50513680b07561b"
+      },
+      "metrics": {
+        "J": 0.6248314595709126,
+        "active_mean": 4.96,
+        "active_min": 4,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 42.882,
+        "eligible_unserved": 2.052,
+        "height_penalty": 0.00012320900590412703,
+        "ineligible": 7.118,
+        "longest_zero_run": 0,
+        "mask_switches": 2,
+        "mean_height": 50.12320900590413,
+        "mean_path_per_uav": 397.83548573373866,
+        "mean_visible_peer_slots": 0.249,
+        "mean_visible_user_slots": 5.36025,
+        "per_uav_path": [
+          97.57619117220167,
+          83.7721526971493,
+          756.3693171361997,
+          568.5068926808966,
+          840.2811187817192,
+          79.52891255225103,
+          222.34603928787465,
+          534.3032615616166
+        ],
+        "quality": 0.1777822285893893,
+        "served": 40.83,
+        "served_min": 34,
+        "served_p05": 41.0,
+        "total_team_path": 3182.6838858699093,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": null,
+      "option_model_ticks": 0,
+      "position_predictions": 108000,
+      "raw": {
+        "bytes": 107693,
+        "path": "raw/n8_J_w29324005.npz",
+        "sha256": "2d95ba927d5702ba8711c476e6e8420cac2e9a73165a03d4cce5211007a0aa88"
+      },
+      "runtime_seed": 1331922148,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 107.69599573299968,
+        "cpu_seconds": 108.31802533799998,
+        "native_and_record_cpu_seconds": 0.5607414570000628,
+        "wall_seconds": 108.3591566690011
+      },
+      "world_id": 29324005
+    },
+    {
+      "arm": "C",
+      "calls": {
+        "arrival": 0,
+        "joint": 0,
+        "mask": 50,
+        "motion": 500,
+        "option": 0
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "joint": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 400,
+          "geometry_rows_reused": 101600,
+          "requested_candidates": 12750,
+          "scored_candidates": 12750
+        },
+        "motion": {
+          "cached_candidates": 34955,
+          "geometry_rows_computed": 76545,
+          "geometry_rows_reused": 507815,
+          "requested_candidates": 108000,
+          "scored_candidates": 73045
+        },
+        "option": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 364586,
+        "path": "raw/n8_C_w29324006.jsonl.gz",
+        "sha256": "306d4eba5e3831ef0a7a51b1835e2bc796d0b48fde064db94195c45daca99947"
+      },
+      "metrics": {
+        "J": 0.5382907601469406,
+        "active_mean": 3.98,
+        "active_min": 3,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 35.082,
+        "eligible_unserved": 0.188,
+        "height_penalty": 0.007409879624742572,
+        "ineligible": 14.918,
+        "longest_zero_run": 0,
+        "mask_switches": 2,
+        "mean_height": 57.40987962474257,
+        "mean_path_per_uav": 196.51563621192105,
+        "mean_visible_peer_slots": 0.37325,
+        "mean_visible_user_slots": 4.3845,
+        "per_uav_path": [
+          98.53228534008747,
+          238.54722260936305,
+          110.78561932756273,
+          227.52984166493883,
+          45.59909360137662,
+          171.7679803070701,
+          175.75979276786694,
+          503.6032540771024
+        ],
+        "quality": 0.19061546590561007,
+        "served": 34.894,
+        "served_min": 30,
+        "served_p05": 35.0,
+        "total_team_path": 1572.1250896953684,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": null,
+      "option_model_ticks": 0,
+      "position_predictions": 108000,
+      "raw": {
+        "bytes": 75618,
+        "path": "raw/n8_C_w29324006.npz",
+        "sha256": "2fbc8878c4197d24cf5fe0dcae9391177379cf5f8d2e2492949cb39bf11ec68b"
+      },
+      "runtime_seed": 2140801900,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 4.363706505000891,
+        "cpu_seconds": 5.039636222000013,
+        "native_and_record_cpu_seconds": 0.5228835689990774,
+        "wall_seconds": 5.0402778340212535
+      },
+      "world_id": 29324006
+    },
+    {
+      "arm": "J",
+      "calls": {
+        "arrival": 0,
+        "joint": 50,
+        "mask": 0,
+        "motion": 450,
+        "option": 0
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "joint": {
+          "cached_candidates": 988890,
+          "geometry_rows_computed": 7272,
+          "geometry_rows_reused": 14113608,
+          "requested_candidates": 2754000,
+          "scored_candidates": 1765110
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "motion": {
+          "cached_candidates": 35520,
+          "geometry_rows_computed": 64830,
+          "geometry_rows_reused": 428610,
+          "requested_candidates": 97200,
+          "scored_candidates": 61680
+        },
+        "option": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 47453,
+        "path": "raw/n8_J_w29324006.jsonl.gz",
+        "sha256": "02e9556383c851fd0a7fc68a784fd8d0c7000ccad7775eebd8fda976f39eb4c6"
+      },
+      "metrics": {
+        "J": 0.6371467363149923,
+        "active_mean": 4.98,
+        "active_min": 4,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 40.972,
+        "eligible_unserved": 1.026,
+        "height_penalty": 9.085315512534725e-05,
+        "ineligible": 9.028,
+        "longest_zero_run": 0,
+        "mask_switches": 3,
+        "mean_height": 50.090853155125345,
+        "mean_path_per_uav": 378.00103686270563,
+        "mean_visible_peer_slots": 0.12675,
+        "mean_visible_user_slots": 5.1215,
+        "per_uav_path": [
+          405.811505953666,
+          264.0005337849328,
+          411.91665843026766,
+          557.5733318193691,
+          16.711592900352343,
+          645.0882885778191,
+          119.16012988264589,
+          603.7462535525924
+        ],
+        "quality": 0.2599786315670588,
+        "served": 39.946,
+        "served_min": 35,
+        "served_p05": 40.0,
+        "total_team_path": 3024.008294901645,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": null,
+      "option_model_ticks": 0,
+      "position_predictions": 108000,
+      "raw": {
+        "bytes": 96455,
+        "path": "raw/n8_J_w29324006.npz",
+        "sha256": "3180cb1adb2589597aacc73f1187d5722b6625519aa3955b455ddec4f693fb7b"
+      },
+      "runtime_seed": 2140801900,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 108.2273052270009,
+        "cpu_seconds": 108.842318127,
+        "native_and_record_cpu_seconds": 0.5542672079982367,
+        "wall_seconds": 108.90661940100836
+      },
+      "world_id": 29324006
+    },
+    {
+      "arm": "R",
+      "calls": {
+        "arrival": 1,
+        "joint": 0,
+        "mask": 47,
+        "motion": 479,
+        "option": 1
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 8,
+          "geometry_rows_reused": 1016,
+          "requested_candidates": 128,
+          "scored_candidates": 128
+        },
+        "joint": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 376,
+          "geometry_rows_reused": 95504,
+          "requested_candidates": 11985,
+          "scored_candidates": 11985
+        },
+        "motion": {
+          "cached_candidates": 40016,
+          "geometry_rows_computed": 66801,
+          "geometry_rows_reused": 440783,
+          "requested_candidates": 103464,
+          "scored_candidates": 63448
+        },
+        "option": {
+          "cached_candidates": 7040,
+          "geometry_rows_computed": 353,
+          "geometry_rows_reused": 352935,
+          "requested_candidates": 51201,
+          "scored_candidates": 44161
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 330997,
+        "path": "raw/n8_R_w29324006.jsonl.gz",
+        "sha256": "a342a02ac385862a2fefdef6acf397a79da4f6131439ebc061d549fd58561a67"
+      },
+      "metrics": {
+        "J": 0.622316117925905,
+        "active_mean": 4.86,
+        "active_min": 3,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 40.364,
+        "eligible_unserved": 0.188,
+        "height_penalty": 0.0008398796247425709,
+        "ineligible": 9.636,
+        "longest_zero_run": 0,
+        "mask_switches": 3,
+        "mean_height": 50.83987962474257,
+        "mean_path_per_uav": 347.9010296810539,
+        "mean_visible_peer_slots": 0.262,
+        "mean_visible_user_slots": 5.04475,
+        "per_uav_path": [
+          573.5603502830536,
+          358.5472226093631,
+          110.78561932756273,
+          476.3057038614572,
+          45.59909360137662,
+          321.7679803070701,
+          175.75979276786694,
+          720.882474690681
+        ],
+        "quality": 0.20230665850215923,
+        "served": 40.176,
+        "served_min": 30,
+        "served_p05": 35.0,
+        "total_team_path": 2783.208237448431,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": {
+        "activated_steps_after_arrival": 440,
+        "actual_arrival_mask": 171,
+        "arrival_t": 60,
+        "duration": 20,
+        "first_remute_t": null,
+        "initial_contiguous_active_steps": 440,
+        "initiated": true,
+        "member": 0,
+        "predicted_mask": 171,
+        "predicted_total_J": 281.30888554308547,
+        "predicted_total_served": 18300,
+        "realized_remaining_J_sum": 289.98657185104616,
+        "realized_remaining_served_sum": 18741,
+        "remuted": false,
+        "selected": {
+          "arrival_t": 60,
+          "descent_ticks": 0,
+          "duration": 20,
+          "member": 0,
+          "offsets": [
+            0,
+            14
+          ],
+          "path": 420.0,
+          "predicted_destination": [
+            [
+              260.34167408943176,
+              957.3983383178711,
+              50.0
+            ],
+            [
+              116.31454527378082,
+              429.38560247421265,
+              50.0
+            ],
+            [
+              72.76300340890884,
+              74.65221732854843,
+              50.0
+            ],
+            [
+              666.0858988761902,
+              455.5664658546448,
+              110.00000238418579
+            ],
+            [
+              571.4303851127625,
+              283.13514590263367,
+              50.0
+            ],
+            [
+              923.2200384140015,
+              140.3540074825287,
+              50.0
+            ],
+            [
+              845.471978187561,
+              229.42300140857697,
+              50.0
+            ],
+            [
+              937.8231167793274,
+              803.3463358879089,
+              50.0
+            ]
+          ],
+          "predicted_mask": 171,
+          "predicted_total_J": 281.30888554308547,
+          "predicted_total_served": 18300,
+          "site": 14,
+          "tail_score": {
+            "J": 0.6148350269907131,
+            "energy_penalty": 0.007500000298023224,
+            "quality": 0.20778342429578797,
+            "served": 40
+          },
+          "transit_J": 10.781473667171685,
+          "transit_served": 700,
+          "unrounded_duration": 14
+        },
+        "site": 14,
+        "stay_total_J": 247.97389434494883,
+        "stay_total_served": 16100,
+        "transit_J_sum": 10.78147360702452,
+        "transit_served_sum": 700
+      },
+      "option_model_ticks": 8380,
+      "position_predictions": 103464,
+      "raw": {
+        "bytes": 94854,
+        "path": "raw/n8_R_w29324006.npz",
+        "sha256": "f0f71b11ae6871be7324ac0c5c44e3319f27a469af4239adff67cad6d1c482b7"
+      },
+      "runtime_seed": 2140801900,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 5.879927470001348,
+        "cpu_seconds": 6.573759095000014,
+        "native_and_record_cpu_seconds": 0.5540503399984118,
+        "wall_seconds": 6.584130383998854
+      },
+      "world_id": 29324006
+    },
+    {
+      "arm": "J",
+      "calls": {
+        "arrival": 0,
+        "joint": 50,
+        "mask": 0,
+        "motion": 450,
+        "option": 0
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "joint": {
+          "cached_candidates": 988890,
+          "geometry_rows_computed": 7272,
+          "geometry_rows_reused": 14113608,
+          "requested_candidates": 2754000,
+          "scored_candidates": 1765110
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "motion": {
+          "cached_candidates": 35487,
+          "geometry_rows_computed": 64863,
+          "geometry_rows_reused": 428841,
+          "requested_candidates": 97200,
+          "scored_candidates": 61713
+        },
+        "option": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 41268,
+        "path": "raw/n8_J_w29324007.jsonl.gz",
+        "sha256": "b52a6e304939cc08bef4b0f3bcb9f668943457356b0e0a70a77a0aa498dcd9ac"
+      },
+      "metrics": {
+        "J": 0.5642805262022371,
+        "active_mean": 4.0,
+        "active_min": 4,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 38.004,
+        "eligible_unserved": 2.004,
+        "height_penalty": 5.33312626082848e-05,
+        "ineligible": 11.996,
+        "longest_zero_run": 0,
+        "mask_switches": 1,
+        "mean_height": 50.05333126260828,
+        "mean_path_per_uav": 99.09601946348661,
+        "mean_visible_peer_slots": 0.1255,
+        "mean_visible_user_slots": 4.7505,
+        "per_uav_path": [
+          218.45761723227074,
+          11.167069392132902,
+          174.95935335586685,
+          18.979061732458547,
+          41.584220712272014,
+          148.4234881043527,
+          166.08380962368778,
+          13.113535554851367
+        ],
+        "quality": 0.20111285821615177,
+        "served": 36.0,
+        "served_min": 36,
+        "served_p05": 36.0,
+        "total_team_path": 792.7681557078929,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": null,
+      "option_model_ticks": 0,
+      "position_predictions": 108000,
+      "raw": {
+        "bytes": 57235,
+        "path": "raw/n8_J_w29324007.npz",
+        "sha256": "404b6dc493bd48d078a316a7e14a2431a21d225d86fbdb9727e779158498f4f8"
+      },
+      "runtime_seed": 740505102,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 106.24095256200053,
+        "cpu_seconds": 106.837793304,
+        "native_and_record_cpu_seconds": 0.5424918140022328,
+        "wall_seconds": 106.8965779299906
+      },
+      "world_id": 29324007
+    },
+    {
+      "arm": "R",
+      "calls": {
+        "arrival": 1,
+        "joint": 0,
+        "mask": 48,
+        "motion": 489,
+        "option": 1
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 8,
+          "geometry_rows_reused": 1016,
+          "requested_candidates": 128,
+          "scored_candidates": 128
+        },
+        "joint": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 384,
+          "geometry_rows_reused": 97536,
+          "requested_candidates": 12240,
+          "scored_candidates": 12240
+        },
+        "motion": {
+          "cached_candidates": 38460,
+          "geometry_rows_computed": 70587,
+          "geometry_rows_reused": 466725,
+          "requested_candidates": 105624,
+          "scored_candidates": 67164
+        },
+        "option": {
+          "cached_candidates": 8576,
+          "geometry_rows_computed": 340,
+          "geometry_rows_reused": 340660,
+          "requested_candidates": 51201,
+          "scored_candidates": 42625
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 342186,
+        "path": "raw/n8_R_w29324007.jsonl.gz",
+        "sha256": "6e08320a8ec9ab8c461f3f819cc235bc33b55a62b8fd48e7bcd0fb42230ce47e"
+      },
+      "metrics": {
+        "J": 0.6187194903506411,
+        "active_mean": 4.0,
+        "active_min": 4,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 41.386,
+        "eligible_unserved": 1.774,
+        "height_penalty": 9.425566963941724e-05,
+        "ineligible": 8.614,
+        "longest_zero_run": 0,
+        "mask_switches": 2,
+        "mean_height": 50.094255669639416,
+        "mean_path_per_uav": 520.0763182920707,
+        "mean_visible_peer_slots": 0.21525,
+        "mean_visible_user_slots": 5.17325,
+        "per_uav_path": [
+          282.84554833052994,
+          11.167069392132902,
+          724.6625930883611,
+          191.33081697234894,
+          1252.3682548784236,
+          937.0754879145404,
+          716.7539653056554,
+          44.40681045457274
+        ],
+        "quality": 0.21415248673426854,
+        "served": 39.612,
+        "served_min": 33,
+        "served_p05": 37.0,
+        "total_team_path": 4160.610546336566,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": {
+        "activated_steps_after_arrival": 450,
+        "actual_arrival_mask": 116,
+        "arrival_t": 50,
+        "duration": 10,
+        "first_remute_t": null,
+        "initial_contiguous_active_steps": 450,
+        "initiated": true,
+        "member": 4,
+        "predicted_mask": 116,
+        "predicted_total_J": 264.7984799484236,
+        "predicted_total_served": 17020,
+        "realized_remaining_J_sum": 286.60598286158876,
+        "realized_remaining_served_sum": 18330,
+        "remuted": false,
+        "selected": {
+          "arrival_t": 50,
+          "descent_ticks": 0,
+          "duration": 10,
+          "member": 4,
+          "offsets": [
+            1,
+            -8
+          ],
+          "path": 252.42640687119285,
+          "predicted_destination": [
+            [
+              664.7146940231323,
+              258.26993584632874,
+              50.0
+            ],
+            [
+              319.97475028038025,
+              605.3611040115356,
+              50.0
+            ],
+            [
+              483.7293028831482,
+              923.1826663017273,
+              50.0
+            ],
+            [
+              198.28753173351288,
+              996.9448447227478,
+              50.0
+            ],
+            [
+              670.2884125709534,
+              278.97597312927246,
+              50.0
+            ],
+            [
+              846.9656705856323,
+              757.0709586143494,
+              50.0
+            ],
+            [
+              28.363151475787163,
+              311.9547963142395,
+              50.0
+            ],
+            [
+              70.75072079896927,
+              799.6760606765747,
+              50.0
+            ]
+          ],
+          "predicted_mask": 116,
+          "predicted_total_J": 264.7984799484236,
+          "predicted_total_served": 17020,
+          "site": 0,
+          "tail_score": {
+            "J": 0.5757391036325142,
+            "energy_penalty": 0.0,
+            "quality": 0.19246367877504725,
+            "served": 37
+          },
+          "transit_J": 5.715883313792256,
+          "transit_served": 370,
+          "unrounded_duration": 8
+        },
+        "site": 0,
+        "stay_total_J": 262.9306324344438,
+        "stay_total_served": 17020,
+        "transit_J_sum": 5.715883297822326,
+        "transit_served_sum": 370
+      },
+      "option_model_ticks": 7100,
+      "position_predictions": 105624,
+      "raw": {
+        "bytes": 125093,
+        "path": "raw/n8_R_w29324007.npz",
+        "sha256": "4a1183dceedbdfeaa5771723b1d153140a3d16bbf8cecf745b159f1b1e433a59"
+      },
+      "runtime_seed": 740505102,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 5.904768397001362,
+        "cpu_seconds": 6.562358847999917,
+        "native_and_record_cpu_seconds": 0.5184918270024355,
+        "wall_seconds": 6.563617069972679
+      },
+      "world_id": 29324007
+    },
+    {
+      "arm": "C",
+      "calls": {
+        "arrival": 0,
+        "joint": 0,
+        "mask": 50,
+        "motion": 500,
+        "option": 0
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "joint": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 400,
+          "geometry_rows_reused": 101600,
+          "requested_candidates": 12750,
+          "scored_candidates": 12750
+        },
+        "motion": {
+          "cached_candidates": 39347,
+          "geometry_rows_computed": 72153,
+          "geometry_rows_reused": 477071,
+          "requested_candidates": 108000,
+          "scored_candidates": 68653
+        },
+        "option": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 340744,
+        "path": "raw/n8_C_w29324007.jsonl.gz",
+        "sha256": "bdf73d1addc2018a516ea55bf72edd166c82b565d6ae943c7b2c9120eb91af8f"
+      },
+      "metrics": {
+        "J": 0.5713687880271174,
+        "active_mean": 4.0,
+        "active_min": 4,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 37.008,
+        "eligible_unserved": 0.016,
+        "height_penalty": 7.925566963941724e-05,
+        "ineligible": 12.992,
+        "longest_zero_run": 0,
+        "mask_switches": 1,
+        "mean_height": 50.079255669639416,
+        "mean_path_per_uav": 142.01889856111774,
+        "mean_visible_peer_slots": 0.00125,
+        "mean_visible_user_slots": 4.626,
+        "per_uav_path": [
+          282.84554833052994,
+          11.167069392132902,
+          134.9569656035897,
+          191.33081697234894,
+          63.545744939338334,
+          220.84989497554557,
+          187.0483378208839,
+          44.40681045457274
+        ],
+        "quality": 0.17853347898918995,
+        "served": 36.992,
+        "served_min": 33,
+        "served_p05": 37.0,
+        "total_team_path": 1136.151188488942,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": null,
+      "option_model_ticks": 0,
+      "position_predictions": 108000,
+      "raw": {
+        "bytes": 58837,
+        "path": "raw/n8_C_w29324007.npz",
+        "sha256": "fe5462eca42d5f981850579317dc85c3747009bb773cd76bdbacfb4d36907d9d"
+      },
+      "runtime_seed": 740505102,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 4.212480579000271,
+        "cpu_seconds": 4.860991284000079,
+        "native_and_record_cpu_seconds": 0.5040512179995176,
+        "wall_seconds": 4.862970051995944
+      },
+      "world_id": 29324007
+    },
+    {
+      "arm": "R",
+      "calls": {
+        "arrival": 1,
+        "joint": 0,
+        "mask": 48,
+        "motion": 489,
+        "option": 1
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 8,
+          "geometry_rows_reused": 1016,
+          "requested_candidates": 128,
+          "scored_candidates": 128
+        },
+        "joint": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 384,
+          "geometry_rows_reused": 97536,
+          "requested_candidates": 12240,
+          "scored_candidates": 12240
+        },
+        "motion": {
+          "cached_candidates": 38388,
+          "geometry_rows_computed": 70659,
+          "geometry_rows_reused": 467229,
+          "requested_candidates": 105624,
+          "scored_candidates": 67236
+        },
+        "option": {
+          "cached_candidates": 10624,
+          "geometry_rows_computed": 324,
+          "geometry_rows_reused": 324292,
+          "requested_candidates": 51201,
+          "scored_candidates": 40577
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 344363,
+        "path": "raw/n8_R_w29324008.jsonl.gz",
+        "sha256": "f5e0456150e6a61650641d6ae863df69e73811c5d129502710ad3e9f0ba3e688"
+      },
+      "metrics": {
+        "J": 0.6857124739457857,
+        "active_mean": 4.9,
+        "active_min": 4,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 45.612,
+        "eligible_unserved": 1.36,
+        "height_penalty": 0.00014605646363065414,
+        "ineligible": 4.388,
+        "longest_zero_run": 0,
+        "mask_switches": 2,
+        "mean_height": 50.14605646363065,
+        "mean_path_per_uav": 556.6428343811107,
+        "mean_visible_peer_slots": 0.0245,
+        "mean_visible_user_slots": 5.7015,
+        "per_uav_path": [
+          1102.5990782341796,
+          648.6711735161548,
+          114.85914393450594,
+          83.28332071241476,
+          816.1936321346201,
+          893.5108506279552,
+          695.1958946666723,
+          98.82958122238263
+        ],
+        "quality": 0.2211017680313886,
+        "served": 44.252,
+        "served_min": 37,
+        "served_p05": 38.0,
+        "total_team_path": 4453.142675048885,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": {
+        "activated_steps_after_arrival": 450,
+        "actual_arrival_mask": 115,
+        "arrival_t": 50,
+        "duration": 10,
+        "first_remute_t": null,
+        "initial_contiguous_active_steps": 450,
+        "initiated": true,
+        "member": 6,
+        "predicted_mask": 115,
+        "predicted_total_J": 307.11776289007156,
+        "predicted_total_served": 19730,
+        "realized_remaining_J_sum": 318.4756932635496,
+        "realized_remaining_served_sum": 20608,
+        "remuted": false,
+        "selected": {
+          "arrival_t": 50,
+          "descent_ticks": 0,
+          "duration": 10,
+          "member": 6,
+          "offsets": [
+            -10,
+            -2
+          ],
+          "path": 324.8528137423857,
+          "predicted_destination": [
+            [
+              333.0276608467102,
+              172.21245169639587,
+              50.0
+            ],
+            [
+              897.2418308258057,
+              77.49055325984955,
+              50.0
+            ],
+            [
+              389.3325924873352,
+              431.8847954273224,
+              50.0
+            ],
+            [
+              205.5942267179489,
+              164.08312320709229,
+              50.0
+            ],
+            [
+              204.80071008205414,
+              602.9598712921143,
+              50.0
+            ],
+            [
+              893.8347697257996,
+              791.6812896728516,
+              50.0
+            ],
+            [
+              594.6583271026611,
+              816.6652345657349,
+              50.0
+            ],
+            [
+              140.29322564601898,
+              166.55302047729492,
+              50.0
+            ]
+          ],
+          "predicted_mask": 115,
+          "predicted_total_J": 307.11776289007156,
+          "predicted_total_served": 19730,
+          "site": 55,
+          "tail_score": {
+            "J": 0.6687829925047493,
+            "energy_penalty": 0.0,
+            "quality": 0.222609975015831,
+            "served": 43
+          },
+          "transit_J": 6.165416262934415,
+          "transit_served": 380,
+          "unrounded_duration": 10
+        },
+        "site": 55,
+        "stay_total_J": 283.6091480949831,
+        "stay_total_served": 17480,
+        "transit_J_sum": 6.165416249075373,
+        "transit_served_sum": 380
+      },
+      "option_model_ticks": 8070,
+      "position_predictions": 105624,
+      "raw": {
+        "bytes": 130933,
+        "path": "raw/n8_R_w29324008.npz",
+        "sha256": "6179c02882f274abe15e978eba18182dce0deca3397c1ba0e6264e7c9a3e9498"
+      },
+      "runtime_seed": 4249859877,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 5.787012220999372,
+        "cpu_seconds": 6.459720873999913,
+        "native_and_record_cpu_seconds": 0.525962164998873,
+        "wall_seconds": 6.461210465990007
+      },
+      "world_id": 29324008
+    },
+    {
+      "arm": "C",
+      "calls": {
+        "arrival": 0,
+        "joint": 0,
+        "mask": 50,
+        "motion": 500,
+        "option": 0
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "joint": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 400,
+          "geometry_rows_reused": 101600,
+          "requested_candidates": 12750,
+          "scored_candidates": 12750
+        },
+        "motion": {
+          "cached_candidates": 39275,
+          "geometry_rows_computed": 72225,
+          "geometry_rows_reused": 477575,
+          "requested_candidates": 108000,
+          "scored_candidates": 68725
+        },
+        "option": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 346873,
+        "path": "raw/n8_C_w29324008.jsonl.gz",
+        "sha256": "76e64839454ea25178ae229927c79367a614425c9eab08a499eede11ba4afc09"
+      },
+      "metrics": {
+        "J": 0.6159793823336208,
+        "active_mean": 4.0,
+        "active_min": 4,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 42.022,
+        "eligible_unserved": 4.026,
+        "height_penalty": 0.00013105646363065413,
+        "ineligible": 7.978,
+        "longest_zero_run": 0,
+        "mask_switches": 1,
+        "mean_height": 50.13105646363065,
+        "mean_path_per_uav": 313.475024956947,
+        "mean_visible_peer_slots": 0.2465,
+        "mean_visible_user_slots": 5.25275,
+        "per_uav_path": [
+          625.6142301358295,
+          201.68632541780477,
+          114.85914393450594,
+          83.28332071241476,
+          683.7672252634272,
+          594.2701057873103,
+          105.49026718190095,
+          98.82958122238263
+        ],
+        "quality": 0.2805547959908387,
+        "served": 37.996,
+        "served_min": 37,
+        "served_p05": 38.0,
+        "total_team_path": 2507.800199655576,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": null,
+      "option_model_ticks": 0,
+      "position_predictions": 108000,
+      "raw": {
+        "bytes": 85325,
+        "path": "raw/n8_C_w29324008.npz",
+        "sha256": "1f76dfceb93b409900b8c356fa43247b44883cd509bacf4f01feb264e85bd5b0"
+      },
+      "runtime_seed": 4249859877,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 4.227022280000369,
+        "cpu_seconds": 4.894807382000067,
+        "native_and_record_cpu_seconds": 0.5270691269995496,
+        "wall_seconds": 4.895176462974632
+      },
+      "world_id": 29324008
+    },
+    {
+      "arm": "J",
+      "calls": {
+        "arrival": 0,
+        "joint": 50,
+        "mask": 0,
+        "motion": 450,
+        "option": 0
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "joint": {
+          "cached_candidates": 988890,
+          "geometry_rows_computed": 7272,
+          "geometry_rows_reused": 14113608,
+          "requested_candidates": 2754000,
+          "scored_candidates": 1765110
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "motion": {
+          "cached_candidates": 35397,
+          "geometry_rows_computed": 64953,
+          "geometry_rows_reused": 429471,
+          "requested_candidates": 97200,
+          "scored_candidates": 61803
+        },
+        "option": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 52875,
+        "path": "raw/n8_J_w29324008.jsonl.gz",
+        "sha256": "b1021358a3bf22ca5dd1cbc576d6f4631e2abd101b2905e14588cb418abf584d"
+      },
+      "metrics": {
+        "J": 0.6128323427250503,
+        "active_mean": 4.0,
+        "active_min": 4,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 42.068,
+        "eligible_unserved": 4.074,
+        "height_penalty": 0.00013105646363065416,
+        "ineligible": 7.932,
+        "longest_zero_run": 0,
+        "mask_switches": 3,
+        "mean_height": 50.13105646363065,
+        "mean_path_per_uav": 479.73915237548,
+        "mean_visible_peer_slots": 0.12875,
+        "mean_visible_user_slots": 5.2585,
+        "per_uav_path": [
+          1043.465135629689,
+          522.0889086957029,
+          114.85914393450594,
+          103.74820335654132,
+          1228.1551563616863,
+          438.3855331061113,
+          310.34308092428665,
+          76.86805699531631
+        ],
+        "quality": 0.270157997295603,
+        "served": 37.994,
+        "served_min": 37,
+        "served_p05": 38.0,
+        "total_team_path": 3837.91321900384,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": null,
+      "option_model_ticks": 0,
+      "position_predictions": 108000,
+      "raw": {
+        "bytes": 115811,
+        "path": "raw/n8_J_w29324008.npz",
+        "sha256": "3c75b6cb640e1c789d009402e6abcfa079474b5b2bdb8177cc8bc3210dacfcdb"
+      },
+      "runtime_seed": 4249859877,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 103.79860181200218,
+        "cpu_seconds": 104.37885885399987,
+        "native_and_record_cpu_seconds": 0.5244657319984753,
+        "wall_seconds": 104.45552054300788
+      },
+      "world_id": 29324008
+    },
+    {
+      "arm": "C",
+      "calls": {
+        "arrival": 0,
+        "joint": 0,
+        "mask": 50,
+        "motion": 500,
+        "option": 0
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "joint": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 400,
+          "geometry_rows_reused": 101600,
+          "requested_candidates": 12750,
+          "scored_candidates": 12750
+        },
+        "motion": {
+          "cached_candidates": 39275,
+          "geometry_rows_computed": 71230,
+          "geometry_rows_reused": 478570,
+          "requested_candidates": 108000,
+          "scored_candidates": 68725
+        },
+        "option": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 357842,
+        "path": "raw/n8_C_w29324009.jsonl.gz",
+        "sha256": "f28ce29b9854ca4cd2bb983f2213a62e4d9951703344c224b18a650c2d6bb6ac"
+      },
+      "metrics": {
+        "J": 0.61262849081643,
+        "active_mean": 4.0,
+        "active_min": 4,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 41.996,
+        "eligible_unserved": 3.982,
+        "height_penalty": 0.00011412673332058149,
+        "ineligible": 8.004,
+        "longest_zero_run": 0,
+        "mask_switches": 1,
+        "mean_height": 50.11412673332058,
+        "mean_path_per_uav": 498.0392124727123,
+        "mean_visible_peer_slots": 0.0045,
+        "mean_visible_user_slots": 5.2495,
+        "per_uav_path": [
+          103.87936820712764,
+          941.653402968554,
+          90.45130864507038,
+          1045.7369810651317,
+          84.8450837539651,
+          614.6649527763299,
+          95.46878819032584,
+          1007.6138141751934
+        ],
+        "quality": 0.2684887251658353,
+        "served": 38.014,
+        "served_min": 33,
+        "served_p05": 38.0,
+        "total_team_path": 3984.3136997816982,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": null,
+      "option_model_ticks": 0,
+      "position_predictions": 108000,
+      "raw": {
+        "bytes": 111179,
+        "path": "raw/n8_C_w29324009.npz",
+        "sha256": "fd2546a07fd2e6a59ddad8227ea0063c37f658c6300b3d6c378591b08e15523e"
+      },
+      "runtime_seed": 3016817476,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 4.242168281998829,
+        "cpu_seconds": 4.909062786999812,
+        "native_and_record_cpu_seconds": 0.516279709998571,
+        "wall_seconds": 4.909629425994353
+      },
+      "world_id": 29324009
+    },
+    {
+      "arm": "J",
+      "calls": {
+        "arrival": 0,
+        "joint": 50,
+        "mask": 0,
+        "motion": 450,
+        "option": 0
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "joint": {
+          "cached_candidates": 988890,
+          "geometry_rows_computed": 7272,
+          "geometry_rows_reused": 14113608,
+          "requested_candidates": 2754000,
+          "scored_candidates": 1765110
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "motion": {
+          "cached_candidates": 35424,
+          "geometry_rows_computed": 64926,
+          "geometry_rows_reused": 429282,
+          "requested_candidates": 97200,
+          "scored_candidates": 61776
+        },
+        "option": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 48865,
+        "path": "raw/n8_J_w29324009.jsonl.gz",
+        "sha256": "b957cea0542b896cd3bf461cbaee27fdb54592ac0872828a203ad472f14a8c87"
+      },
+      "metrics": {
+        "J": 0.6010422566623476,
+        "active_mean": 3.98,
+        "active_min": 3,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 41.084,
+        "eligible_unserved": 4.198,
+        "height_penalty": 9.91267333205815e-05,
+        "ineligible": 8.916,
+        "longest_zero_run": 0,
+        "mask_switches": 2,
+        "mean_height": 50.09912673332058,
+        "mean_path_per_uav": 325.137661899352,
+        "mean_visible_peer_slots": 0.00925,
+        "mean_visible_user_slots": 5.1355,
+        "per_uav_path": [
+          91.45296133593479,
+          553.9092997108489,
+          120.45130864507038,
+          660.7559598406757,
+          62.88355952689878,
+          443.4626837086187,
+          73.50726396325952,
+          594.6782584635089
+        ],
+        "quality": 0.2824579446522271,
+        "served": 36.886,
+        "served_min": 30,
+        "served_p05": 37.0,
+        "total_team_path": 2601.101295194816,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": null,
+      "option_model_ticks": 0,
+      "position_predictions": 108000,
+      "raw": {
+        "bytes": 100542,
+        "path": "raw/n8_J_w29324009.npz",
+        "sha256": "b296dc22e61caf6e9166e6284715745d8e59e737bb77f4cdc7749bec00a59762"
+      },
+      "runtime_seed": 3016817476,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 110.12513423000064,
+        "cpu_seconds": 110.7380971550001,
+        "native_and_record_cpu_seconds": 0.5513200540021899,
+        "wall_seconds": 110.80256035301136
+      },
+      "world_id": 29324009
+    },
+    {
+      "arm": "R",
+      "calls": {
+        "arrival": 1,
+        "joint": 0,
+        "mask": 47,
+        "motion": 479,
+        "option": 1
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 8,
+          "geometry_rows_reused": 1016,
+          "requested_candidates": 128,
+          "scored_candidates": 128
+        },
+        "joint": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 376,
+          "geometry_rows_reused": 95504,
+          "requested_candidates": 11985,
+          "scored_candidates": 11985
+        },
+        "motion": {
+          "cached_candidates": 37616,
+          "geometry_rows_computed": 68248,
+          "geometry_rows_reused": 458536,
+          "requested_candidates": 103464,
+          "scored_candidates": 65848
+        },
+        "option": {
+          "cached_candidates": 8832,
+          "geometry_rows_computed": 339,
+          "geometry_rows_reused": 338613,
+          "requested_candidates": 51201,
+          "scored_candidates": 42369
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 342377,
+        "path": "raw/n8_R_w29324009.jsonl.gz",
+        "sha256": "8d0a0eabd8530e5f96b8389f31ab9ea4c45a7ba72696e7c0f07259278d0ee41d"
+      },
+      "metrics": {
+        "J": 0.6302073683621269,
+        "active_mean": 4.88,
+        "active_min": 4,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 42.004,
+        "eligible_unserved": 2.232,
+        "height_penalty": 0.00011412673332058149,
+        "ineligible": 7.996,
+        "longest_zero_run": 0,
+        "mask_switches": 2,
+        "mean_height": 50.11412673332058,
+        "mean_path_per_uav": 661.3755219206023,
+        "mean_visible_peer_slots": 0.115,
+        "mean_visible_user_slots": 5.2505,
+        "per_uav_path": [
+          843.584995691899,
+          971.653402968554,
+          90.45130864507038,
+          1148.1633879363244,
+          84.8450837539651,
+          807.0913596475227,
+          95.46878819032584,
+          1249.7458485311572
+        ],
+        "quality": 0.2450449836514917,
+        "served": 39.772,
+        "served_min": 33,
+        "served_p05": 38.0,
+        "total_team_path": 5291.004175364818,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": {
+        "activated_steps_after_arrival": 440,
+        "actual_arrival_mask": 171,
+        "arrival_t": 60,
+        "duration": 20,
+        "first_remute_t": null,
+        "initial_contiguous_active_steps": 440,
+        "initiated": true,
+        "member": 0,
+        "predicted_mask": 171,
+        "predicted_total_J": 283.7023879480864,
+        "predicted_total_served": 17920,
+        "realized_remaining_J_sum": 291.0043425469645,
+        "realized_remaining_served_sum": 18359,
+        "remuted": false,
+        "selected": {
+          "arrival_t": 60,
+          "descent_ticks": 0,
+          "duration": 20,
+          "member": 0,
+          "offsets": [
+            -3,
+            -17
+          ],
+          "path": 547.2792206135786,
+          "predicted_destination": [
+            [
+              495.68477630615234,
+              210.53933143615723,
+              50.0
+            ],
+            [
+              54.41667512059212,
+              768.2728171348572,
+              50.0
+            ],
+            [
+              615.9710884094238,
+              570.7363486289978,
+              50.0
+            ],
+            [
+              892.1750783920288,
+              205.8936506509781,
+              50.0
+            ],
+            [
+              999.4490742683411,
+              972.7483987808228,
+              50.0
+            ],
+            [
+              148.64328503608704,
+              98.46474975347519,
+              50.0
+            ],
+            [
+              978.5474538803101,
+              971.7082977294922,
+              50.0
+            ],
+            [
+              663.6168956756592,
+              807.7762126922607,
+              50.0
+            ]
+          ],
+          "predicted_mask": 171,
+          "predicted_total_J": 283.7023879480864,
+          "predicted_total_served": 17920,
+          "site": 89,
+          "tail_score": {
+            "J": 0.6168913063357374,
+            "energy_penalty": 0.0,
+            "quality": 0.23630435445245815,
+            "served": 39
+          },
+          "transit_J": 12.27021316036196,
+          "transit_served": 760,
+          "unrounded_duration": 17
+        },
+        "site": 89,
+        "stay_total_J": 282.214902688325,
+        "stay_total_served": 17480,
+        "transit_J_sum": 12.270213207570261,
+        "transit_served_sum": 760
+      },
+      "option_model_ticks": 8350,
+      "position_predictions": 103464,
+      "raw": {
+        "bytes": 132424,
+        "path": "raw/n8_R_w29324009.npz",
+        "sha256": "22af03aa4a19440fd81fc086e9cd4e3385520bd607b132b7ef210b2b89798cf2"
+      },
+      "runtime_seed": 3016817476,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 5.712930004997133,
+        "cpu_seconds": 6.393931287999976,
+        "native_and_record_cpu_seconds": 0.5375301260032757,
+        "wall_seconds": 6.396055983001133
+      },
+      "world_id": 29324009
+    },
+    {
+      "arm": "J",
+      "calls": {
+        "arrival": 0,
+        "joint": 50,
+        "mask": 0,
+        "motion": 450,
+        "option": 0
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "joint": {
+          "cached_candidates": 988890,
+          "geometry_rows_computed": 7272,
+          "geometry_rows_reused": 14113608,
+          "requested_candidates": 2754000,
+          "scored_candidates": 1765110
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "motion": {
+          "cached_candidates": 35424,
+          "geometry_rows_computed": 64926,
+          "geometry_rows_reused": 429282,
+          "requested_candidates": 97200,
+          "scored_candidates": 61776
+        },
+        "option": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 50393,
+        "path": "raw/n8_J_w29324010.jsonl.gz",
+        "sha256": "1e6094740ac8ebbeaad3c9f5d27fc8d934efa204c29b663f9aef212148101219"
+      },
+      "metrics": {
+        "J": 0.6247314039596225,
+        "active_mean": 4.98,
+        "active_min": 4,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 39.964,
+        "eligible_unserved": 0.052,
+        "height_penalty": 9.75247507913636e-05,
+        "ineligible": 10.036,
+        "longest_zero_run": 0,
+        "mask_switches": 4,
+        "mean_height": 50.09752475079136,
+        "mean_path_per_uav": 409.74899465718295,
+        "mean_visible_peer_slots": 0.2505,
+        "mean_visible_user_slots": 4.9955,
+        "per_uav_path": [
+          601.98332588102,
+          493.16606218192237,
+          117.96296693363462,
+          530.0078434111467,
+          340.8236599091004,
+          1.3853012524489472,
+          319.15745549564883,
+          873.5053421925419
+        ],
+        "quality": 0.2202030957013801,
+        "served": 39.912,
+        "served_min": 35,
+        "served_p05": 40.0,
+        "total_team_path": 3277.9919572574636,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": null,
+      "option_model_ticks": 0,
+      "position_predictions": 108000,
+      "raw": {
+        "bytes": 110173,
+        "path": "raw/n8_J_w29324010.npz",
+        "sha256": "cc5106f000e9775a117bbf9d9e317eed0df525df7689f3bad170a45e1deaef9f"
+      },
+      "runtime_seed": 2842858610,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 83.49544201199592,
+        "cpu_seconds": 84.12957661099995,
+        "native_and_record_cpu_seconds": 0.5736607490041479,
+        "wall_seconds": 84.2110335509933
+      },
+      "world_id": 29324010
+    },
+    {
+      "arm": "R",
+      "calls": {
+        "arrival": 0,
+        "joint": 0,
+        "mask": 50,
+        "motion": 500,
+        "option": 1
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "joint": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 400,
+          "geometry_rows_reused": 101600,
+          "requested_candidates": 12750,
+          "scored_candidates": 12750
+        },
+        "motion": {
+          "cached_candidates": 39302,
+          "geometry_rows_computed": 72198,
+          "geometry_rows_reused": 477386,
+          "requested_candidates": 108000,
+          "scored_candidates": 68698
+        },
+        "option": {
+          "cached_candidates": 6144,
+          "geometry_rows_computed": 259,
+          "geometry_rows_reused": 257797,
+          "requested_candidates": 38401,
+          "scored_candidates": 32257
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 349445,
+        "path": "raw/n8_R_w29324010.jsonl.gz",
+        "sha256": "eaa64873dc2de9b4e5f2ffb39462dc4f4b3e1ae1d61096ac5ab0f4d6564a79a7"
+      },
+      "metrics": {
+        "J": 0.6251216823763046,
+        "active_mean": 4.98,
+        "active_min": 4,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 39.962,
+        "eligible_unserved": 0.064,
+        "height_penalty": 0.00011301046256131455,
+        "ineligible": 10.038,
+        "longest_zero_run": 0,
+        "mask_switches": 2,
+        "mean_height": 50.11301046256132,
+        "mean_path_per_uav": 275.035189666571,
+        "mean_visible_peer_slots": 0.2525,
+        "mean_visible_user_slots": 4.99525,
+        "per_uav_path": [
+          262.37768256333845,
+          486.5222343413683,
+          186.47897273349975,
+          257.87580905518246,
+          51.118032424328995,
+          277.3018309225282,
+          72.0862422329431,
+          606.520713059379
+        ],
+        "quality": 0.22220897612955287,
+        "served": 39.898,
+        "served_min": 33,
+        "served_p05": 40.0,
+        "total_team_path": 2200.281517332568,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": {
+        "initiated": false,
+        "predicted_total_J": 288.34950062771446,
+        "selected": {
+          "arrival_t": 70,
+          "descent_ticks": 0,
+          "duration": 30,
+          "member": 2,
+          "offsets": [
+            -20,
+            21
+          ],
+          "path": 878.5281374238571,
+          "predicted_destination": [
+            [
+              938.6084079742432,
+              169.72994804382324,
+              50.0
+            ],
+            [
+              141.35970175266266,
+              124.5536133646965,
+              50.0
+            ],
+            [
+              330.5660128593445,
+              701.0041671991348,
+              50.0
+            ],
+            [
+              68.16679984331131,
+              876.0758638381958,
+              50.0
+            ],
+            [
+              282.4898064136505,
+              699.5612978935242,
+              50.0
+            ],
+            [
+              323.49181175231934,
+              685.1789951324463,
+              50.0
+            ],
+            [
+              765.5683159828186,
+              63.14077228307724,
+              50.0
+            ],
+            [
+              904.5600295066833,
+              731.1326265335083,
+              50.0
+            ]
+          ],
+          "predicted_mask": 143,
+          "predicted_total_J": 288.28777729503986,
+          "predicted_total_served": 18400,
+          "site": 29,
+          "tail_score": {
+            "J": 0.6267031978609046,
+            "energy_penalty": 0.0,
+            "quality": 0.22234399286968212,
+            "served": 40
+          },
+          "transit_J": 18.805402214850943,
+          "transit_served": 1200,
+          "unrounded_duration": 21
+        },
+        "stay_total_J": 288.34950062771446
+      },
+      "option_model_ticks": 6180,
+      "position_predictions": 108000,
+      "raw": {
+        "bytes": 91130,
+        "path": "raw/n8_R_w29324010.npz",
+        "sha256": "7ffe11c93575b85d46224019b0c838809dae6fa8b65ec945e64c81c2214eeb78"
+      },
+      "runtime_seed": 2842858610,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 5.655906240001059,
+        "cpu_seconds": 6.37866662600004,
+        "native_and_record_cpu_seconds": 0.5749035559990716,
+        "wall_seconds": 6.387644686998101
+      },
+      "world_id": 29324010
+    },
+    {
+      "arm": "C",
+      "calls": {
+        "arrival": 0,
+        "joint": 0,
+        "mask": 50,
+        "motion": 500,
+        "option": 0
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "joint": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 400,
+          "geometry_rows_reused": 101600,
+          "requested_candidates": 12750,
+          "scored_candidates": 12750
+        },
+        "motion": {
+          "cached_candidates": 39302,
+          "geometry_rows_computed": 72198,
+          "geometry_rows_reused": 477386,
+          "requested_candidates": 108000,
+          "scored_candidates": 68698
+        },
+        "option": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 348600,
+        "path": "raw/n8_C_w29324010.jsonl.gz",
+        "sha256": "047f00444afbfbe0f1e2368b962454045f900d0bae1f868a8a803599d1316e6b"
+      },
+      "metrics": {
+        "J": 0.6251216823763046,
+        "active_mean": 4.98,
+        "active_min": 4,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 39.962,
+        "eligible_unserved": 0.064,
+        "height_penalty": 0.00011301046256131455,
+        "ineligible": 10.038,
+        "longest_zero_run": 0,
+        "mask_switches": 2,
+        "mean_height": 50.11301046256132,
+        "mean_path_per_uav": 275.035189666571,
+        "mean_visible_peer_slots": 0.2525,
+        "mean_visible_user_slots": 4.99525,
+        "per_uav_path": [
+          262.37768256333845,
+          486.5222343413683,
+          186.47897273349975,
+          257.87580905518246,
+          51.118032424328995,
+          277.3018309225282,
+          72.0862422329431,
+          606.520713059379
+        ],
+        "quality": 0.22220897612955287,
+        "served": 39.898,
+        "served_min": 33,
+        "served_p05": 40.0,
+        "total_team_path": 2200.281517332568,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": null,
+      "option_model_ticks": 0,
+      "position_predictions": 108000,
+      "raw": {
+        "bytes": 91130,
+        "path": "raw/n8_C_w29324010.npz",
+        "sha256": "7ffe11c93575b85d46224019b0c838809dae6fa8b65ec945e64c81c2214eeb78"
+      },
+      "runtime_seed": 2842858610,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 4.320968499001083,
+        "cpu_seconds": 5.0349099799998385,
+        "native_and_record_cpu_seconds": 0.5648318409980675,
+        "wall_seconds": 5.035565610014601
+      },
+      "world_id": 29324010
+    },
+    {
+      "arm": "R",
+      "calls": {
+        "arrival": 1,
+        "joint": 0,
+        "mask": 47,
+        "motion": 479,
+        "option": 1
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 8,
+          "geometry_rows_reused": 1016,
+          "requested_candidates": 128,
+          "scored_candidates": 128
+        },
+        "joint": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 376,
+          "geometry_rows_reused": 95504,
+          "requested_candidates": 11985,
+          "scored_candidates": 11985
+        },
+        "motion": {
+          "cached_candidates": 37634,
+          "geometry_rows_computed": 69183,
+          "geometry_rows_reused": 457457,
+          "requested_candidates": 103464,
+          "scored_candidates": 65830
+        },
+        "option": {
+          "cached_candidates": 6400,
+          "geometry_rows_computed": 358,
+          "geometry_rows_reused": 358050,
+          "requested_candidates": 51201,
+          "scored_candidates": 44801
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 339478,
+        "path": "raw/n8_R_w29324011.jsonl.gz",
+        "sha256": "d65aa83bd3a724b50d2cec85f6abe1820bbe7d9431a281971885dec88121842f"
+      },
+      "metrics": {
+        "J": 0.6024101339720105,
+        "active_mean": 3.96,
+        "active_min": 3,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 41.71,
+        "eligible_unserved": 3.166,
+        "height_penalty": 0.0001504418357161953,
+        "ineligible": 8.29,
+        "longest_zero_run": 0,
+        "mask_switches": 3,
+        "mean_height": 50.150441835716194,
+        "mean_path_per_uav": 637.9469778725665,
+        "mean_visible_peer_slots": 0.1535,
+        "mean_visible_user_slots": 5.2105,
+        "per_uav_path": [
+          76.61238379113897,
+          73.34381531304652,
+          1558.1763845447222,
+          611.1298644254082,
+          982.2081745957321,
+          204.40525021106097,
+          940.014806632874,
+          657.6851434665496
+        ],
+        "quality": 0.20981525269242235,
+        "served": 38.544,
+        "served_min": 29,
+        "served_p05": 35.0,
+        "total_team_path": 5103.575822980532,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": {
+        "activated_steps_after_arrival": 440,
+        "actual_arrival_mask": 212,
+        "arrival_t": 60,
+        "duration": 20,
+        "first_remute_t": null,
+        "initial_contiguous_active_steps": 440,
+        "initiated": true,
+        "member": 2,
+        "predicted_mask": 212,
+        "predicted_total_J": 272.55319577489996,
+        "predicted_total_served": 17940,
+        "realized_remaining_J_sum": 279.93515435662107,
+        "realized_remaining_served_sum": 17931,
+        "remuted": false,
+        "selected": {
+          "arrival_t": 60,
+          "descent_ticks": 0,
+          "duration": 20,
+          "member": 2,
+          "offsets": [
+            16,
+            -9
+          ],
+          "path": 591.8376618407357,
+          "predicted_destination": [
+            [
+              208.65203440189362,
+              557.0942759513855,
+              50.0
+            ],
+            [
+              136.8626058101654,
+              260.6453001499176,
+              50.0
+            ],
+            [
+              933.4847736358643,
+              279.5709776878357,
+              50.0
+            ],
+            [
+              954.1534185409546,
+              271.525502204895,
+              50.0
+            ],
+            [
+              616.7124509811401,
+              689.4121766090393,
+              50.0
+            ],
+            [
+              472.57357835769653,
+              862.0738983154297,
+              50.0
+            ],
+            [
+              142.15390384197235,
+              469.75237131118774,
+              50.0
+            ],
+            [
+              263.8186514377594,
+              834.6368670463562,
+              50.0
+            ]
+          ],
+          "predicted_mask": 212,
+          "predicted_total_J": 272.55319577489996,
+          "predicted_total_served": 17940,
+          "site": 3,
+          "tail_score": {
+            "J": 0.5925123448600728,
+            "energy_penalty": 0.0,
+            "quality": 0.15504114953357595,
+            "served": 39
+          },
+          "transit_J": 11.84776403646795,
+          "transit_served": 780,
+          "unrounded_duration": 16
+        },
+        "site": 3,
+        "stay_total_J": 272.4985728387629,
+        "stay_total_served": 17940,
+        "transit_J_sum": 11.847764032283276,
+        "transit_served_sum": 780
+      },
+      "option_model_ticks": 7220,
+      "position_predictions": 103464,
+      "raw": {
+        "bytes": 145415,
+        "path": "raw/n8_R_w29324011.npz",
+        "sha256": "c238efd52e1746a2bb339944aa2b56d4e4037410cba7f6c10621f277922ffccd"
+      },
+      "runtime_seed": 3445161339,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 5.90204689500024,
+        "cpu_seconds": 6.599714518999917,
+        "native_and_record_cpu_seconds": 0.551430570000548,
+        "wall_seconds": 6.600369733991101
+      },
+      "world_id": 29324011
+    },
+    {
+      "arm": "C",
+      "calls": {
+        "arrival": 0,
+        "joint": 0,
+        "mask": 50,
+        "motion": 500,
+        "option": 0
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "joint": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 400,
+          "geometry_rows_reused": 101600,
+          "requested_candidates": 12750,
+          "scored_candidates": 12750
+        },
+        "motion": {
+          "cached_candidates": 39302,
+          "geometry_rows_computed": 72198,
+          "geometry_rows_reused": 477386,
+          "requested_candidates": 108000,
+          "scored_candidates": 68698
+        },
+        "option": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 349884,
+        "path": "raw/n8_C_w29324011.jsonl.gz",
+        "sha256": "19016c2022eefcd8c495e7e69d5c5bfb7a105724ab4b9b7d0c1a47c91b39fdb6"
+      },
+      "metrics": {
+        "J": 0.5875369707437992,
+        "active_mean": 3.96,
+        "active_min": 3,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 41.8,
+        "eligible_unserved": 3.238,
+        "height_penalty": 0.00014294183571619527,
+        "ineligible": 8.2,
+        "longest_zero_run": 0,
+        "mask_switches": 2,
+        "mean_height": 50.142941835716194,
+        "mean_path_per_uav": 268.03295642381556,
+        "mean_visible_peer_slots": 0.25525,
+        "mean_visible_user_slots": 5.22175,
+        "per_uav_path": [
+          76.61238379113897,
+          73.34381531304652,
+          130.11312976499278,
+          611.1298644254082,
+          312.7969196261893,
+          204.40525021106097,
+          330.60355166333113,
+          405.25873659535677
+        ],
+        "quality": 0.15937304193171803,
+        "served": 38.562,
+        "served_min": 29,
+        "served_p05": 35.0,
+        "total_team_path": 2144.2636513905245,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": null,
+      "option_model_ticks": 0,
+      "position_predictions": 108000,
+      "raw": {
+        "bytes": 90938,
+        "path": "raw/n8_C_w29324011.npz",
+        "sha256": "817cb672d59067e3032b62384a27e2c016f66502213e3f1e68d1f649f9c5e221"
+      },
+      "runtime_seed": 3445161339,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 4.462589182999864,
+        "cpu_seconds": 5.1701016519998575,
+        "native_and_record_cpu_seconds": 0.559072160996493,
+        "wall_seconds": 5.170844373002183
+      },
+      "world_id": 29324011
+    },
+    {
+      "arm": "J",
+      "calls": {
+        "arrival": 0,
+        "joint": 50,
+        "mask": 0,
+        "motion": 450,
+        "option": 0
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "joint": {
+          "cached_candidates": 988890,
+          "geometry_rows_computed": 7272,
+          "geometry_rows_reused": 14113608,
+          "requested_candidates": 2754000,
+          "scored_candidates": 1765110
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "motion": {
+          "cached_candidates": 35442,
+          "geometry_rows_computed": 64908,
+          "geometry_rows_reused": 429156,
+          "requested_candidates": 97200,
+          "scored_candidates": 61758
+        },
+        "option": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 49376,
+        "path": "raw/n8_J_w29324011.jsonl.gz",
+        "sha256": "f2cedbe6da414908e4dba131cc315a32eade9cd33c95dd218d12c7b83a8b41d2"
+      },
+      "metrics": {
+        "J": 0.6194441893441998,
+        "active_mean": 3.98,
+        "active_min": 3,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 40.16,
+        "eligible_unserved": 0.404,
+        "height_penalty": 9.52131679434312e-05,
+        "ineligible": 9.84,
+        "longest_zero_run": 0,
+        "mask_switches": 4,
+        "mean_height": 50.095213167943434,
+        "mean_path_per_uav": 322.47300701813583,
+        "mean_visible_peer_slots": 0.25125,
+        "mean_visible_user_slots": 5.0115,
+        "per_uav_path": [
+          198.21548632641137,
+          51.3822910859802,
+          302.2450207591729,
+          621.0453668080957,
+          858.9168134983281,
+          201.5967371851476,
+          296.215620565072,
+          50.16671991687916
+        ],
+        "quality": 0.2098513417071441,
+        "served": 39.756,
+        "served_min": 30,
+        "served_p05": 40.0,
+        "total_team_path": 2579.7840561450867,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": null,
+      "option_model_ticks": 0,
+      "position_predictions": 108000,
+      "raw": {
+        "bytes": 105085,
+        "path": "raw/n8_J_w29324011.npz",
+        "sha256": "70e644f3afb23fbf6a6b99b010513a5e2c1b930b5121581c24c5a616262a8e5a"
+      },
+      "runtime_seed": 3445161339,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 81.5780441190002,
+        "cpu_seconds": 82.18995130100006,
+        "native_and_record_cpu_seconds": 0.553933688998768,
+        "wall_seconds": 82.29173353099031
+      },
+      "world_id": 29324011
+    },
+    {
+      "arm": "C",
+      "calls": {
+        "arrival": 0,
+        "joint": 0,
+        "mask": 50,
+        "motion": 500,
+        "option": 0
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "joint": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 400,
+          "geometry_rows_reused": 101600,
+          "requested_candidates": 12750,
+          "scored_candidates": 12750
+        },
+        "motion": {
+          "cached_candidates": 39266,
+          "geometry_rows_computed": 72234,
+          "geometry_rows_reused": 477638,
+          "requested_candidates": 108000,
+          "scored_candidates": 68734
+        },
+        "option": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 342641,
+        "path": "raw/n8_C_w29324012.jsonl.gz",
+        "sha256": "4c3a1ba1fb756417d132b789f7df767209b9838d8d5f53851dd3d0c4ec881d19"
+      },
+      "metrics": {
+        "J": 0.6298505410949201,
+        "active_mean": 4.0,
+        "active_min": 4,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 40.98,
+        "eligible_unserved": 0.99,
+        "height_penalty": 0.00013590155134265476,
+        "ineligible": 9.02,
+        "longest_zero_run": 0,
+        "mask_switches": 1,
+        "mean_height": 50.135901551342656,
+        "mean_path_per_uav": 216.73378408672545,
+        "mean_visible_peer_slots": 0.00075,
+        "mean_visible_user_slots": 5.1225,
+        "per_uav_path": [
+          111.66932902201333,
+          338.79640464526744,
+          384.15733757749217,
+          434.0319121444276,
+          73.34599645531917,
+          54.00048610792193,
+          216.69881504050542,
+          121.16999170085654
+        ],
+        "quality": 0.2337548088208763,
+        "served": 39.99,
+        "served_min": 39,
+        "served_p05": 40.0,
+        "total_team_path": 1733.8702726938036,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": null,
+      "option_model_ticks": 0,
+      "position_predictions": 108000,
+      "raw": {
+        "bytes": 68683,
+        "path": "raw/n8_C_w29324012.npz",
+        "sha256": "92ef21f78f0ddb809a8992d4a71f7356da7233eca8ee693ea13a2c819f2aebbb"
+      },
+      "runtime_seed": 331357597,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 4.5054413940004,
+        "cpu_seconds": 5.199885259999974,
+        "native_and_record_cpu_seconds": 0.5494856369994068,
+        "wall_seconds": 5.200243623025017
+      },
+      "world_id": 29324012
+    },
+    {
+      "arm": "J",
+      "calls": {
+        "arrival": 0,
+        "joint": 50,
+        "mask": 0,
+        "motion": 450,
+        "option": 0
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "joint": {
+          "cached_candidates": 988890,
+          "geometry_rows_computed": 7272,
+          "geometry_rows_reused": 14113608,
+          "requested_candidates": 2754000,
+          "scored_candidates": 1765110
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "motion": {
+          "cached_candidates": 35388,
+          "geometry_rows_computed": 64962,
+          "geometry_rows_reused": 429534,
+          "requested_candidates": 97200,
+          "scored_candidates": 61812
+        },
+        "option": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 42086,
+        "path": "raw/n8_J_w29324012.jsonl.gz",
+        "sha256": "ea4134166b61cd5e69489337e2800089fa1f6953db1a4f6691e4326663a487c6"
+      },
+      "metrics": {
+        "J": 0.6197361126051635,
+        "active_mean": 4.0,
+        "active_min": 4,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 39.024,
+        "eligible_unserved": 0.016,
+        "height_penalty": 0.00013000683546755107,
+        "ineligible": 10.976,
+        "longest_zero_run": 0,
+        "mask_switches": 1,
+        "mean_height": 50.130006835467555,
+        "mean_path_per_uav": 163.85962369099053,
+        "mean_visible_peer_slots": 0.00075,
+        "mean_visible_user_slots": 4.878,
+        "per_uav_path": [
+          89.70780479494701,
+          303.64921838765315,
+          239.30452383510647,
+          292.0703879173613,
+          73.34599645531917,
+          32.03896188085561,
+          189.5901045558248,
+          91.16999170085654
+        ],
+        "quality": 0.2458470648021039,
+        "served": 39.008,
+        "served_min": 38,
+        "served_p05": 39.0,
+        "total_team_path": 1310.8769895279243,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": null,
+      "option_model_ticks": 0,
+      "position_predictions": 108000,
+      "raw": {
+        "bytes": 58490,
+        "path": "raw/n8_J_w29324012.npz",
+        "sha256": "a6477786eb54a41b3c4bca8c5e41a65c9b5863fb6985e05035cc1c01aa98c428"
+      },
+      "runtime_seed": 331357597,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 81.2329178179964,
+        "cpu_seconds": 81.8470048449999,
+        "native_and_record_cpu_seconds": 0.5552984570010722,
+        "wall_seconds": 81.9084491780086
+      },
+      "world_id": 29324012
+    },
+    {
+      "arm": "R",
+      "calls": {
+        "arrival": 1,
+        "joint": 0,
+        "mask": 47,
+        "motion": 479,
+        "option": 1
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 8,
+          "geometry_rows_reused": 1016,
+          "requested_candidates": 128,
+          "scored_candidates": 128
+        },
+        "joint": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 376,
+          "geometry_rows_reused": 95504,
+          "requested_candidates": 11985,
+          "scored_candidates": 11985
+        },
+        "motion": {
+          "cached_candidates": 37553,
+          "geometry_rows_computed": 69264,
+          "geometry_rows_reused": 458024,
+          "requested_candidates": 103464,
+          "scored_candidates": 65911
+        },
+        "option": {
+          "cached_candidates": 9344,
+          "geometry_rows_computed": 335,
+          "geometry_rows_reused": 334521,
+          "requested_candidates": 51201,
+          "scored_candidates": 41857
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 345874,
+        "path": "raw/n8_R_w29324012.jsonl.gz",
+        "sha256": "47887c39a88ece723075f70ff7a8a600e22de36f3d074dbea942a211c8ae205a"
+      },
+      "metrics": {
+        "J": 0.6737340521770577,
+        "active_mean": 4.88,
+        "active_min": 4,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 44.39,
+        "eligible_unserved": 0.118,
+        "height_penalty": 0.00017340155134265475,
+        "ineligible": 5.61,
+        "longest_zero_run": 0,
+        "mask_switches": 2,
+        "mean_height": 50.17340155134266,
+        "mean_path_per_uav": 879.1141063469224,
+        "mean_visible_peer_slots": 0.0055,
+        "mean_visible_user_slots": 5.54875,
+        "per_uav_path": [
+          111.66932902201333,
+          1395.1925077131596,
+          1235.0652341299747,
+          1505.1103188258082,
+          73.34599645531917,
+          1215.8381479486575,
+          1375.5213249795906,
+          121.16999170085654
+        ],
+        "quality": 0.18033151242800163,
+        "served": 44.272,
+        "served_min": 39,
+        "served_p05": 40.0,
+        "total_team_path": 7032.912850775379,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": {
+        "activated_steps_after_arrival": 440,
+        "actual_arrival_mask": 110,
+        "arrival_t": 60,
+        "duration": 20,
+        "first_remute_t": null,
+        "initial_contiguous_active_steps": 440,
+        "initiated": true,
+        "member": 5,
+        "predicted_mask": 110,
+        "predicted_total_J": 295.6042365173324,
+        "predicted_total_served": 19280,
+        "realized_remaining_J_sum": 311.8153996476864,
+        "realized_remaining_served_sum": 20541,
+        "remuted": false,
+        "selected": {
+          "arrival_t": 60,
+          "descent_ticks": 0,
+          "duration": 20,
+          "member": 5,
+          "offsets": [
+            0,
+            -12
+          ],
+          "path": 360.0,
+          "predicted_destination": [
+            [
+              219.07980740070343,
+              428.01398038864136,
+              50.0
+            ],
+            [
+              615.4553890228271,
+              110.96901446580887,
+              50.0
+            ],
+            [
+              163.0888134241104,
+              899.0373015403748,
+              50.0
+            ],
+            [
+              760.018527507782,
+              760.497510433197,
+              50.0
+            ],
+            [
+              111.53751611709595,
+              162.12771832942963,
+              50.0
+            ],
+            [
+              518.503725528717,
+              530.3639316558838,
+              50.0
+            ],
+            [
+              73.43829423189163,
+              401.02213621139526,
+              50.0
+            ],
+            [
+              841.1000370979309,
+              298.6794710159302,
+              50.0
+            ]
+          ],
+          "predicted_mask": 110,
+          "predicted_total_J": 295.6042365173324,
+          "predicted_total_served": 19280,
+          "site": 34,
+          "tail_score": {
+            "J": 0.6431841694775087,
+            "energy_penalty": 0.0,
+            "quality": 0.18394723159169568,
+            "served": 42
+          },
+          "transit_J": 12.603201947228616,
+          "transit_served": 800,
+          "unrounded_duration": 12
+        },
+        "site": 34,
+        "stay_total_J": 289.87364478625807,
+        "stay_total_served": 18400,
+        "transit_J_sum": 12.603201917679028,
+        "transit_served_sum": 800
+      },
+      "option_model_ticks": 7830,
+      "position_predictions": 103464,
+      "raw": {
+        "bytes": 172009,
+        "path": "raw/n8_R_w29324012.npz",
+        "sha256": "01d755ee7d28207430762294e25306f1ca4fac69f575042256da947482217b7d"
+      },
+      "runtime_seed": 331357597,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 5.948722056999259,
+        "cpu_seconds": 6.651511374999927,
+        "native_and_record_cpu_seconds": 0.5563939749997644,
+        "wall_seconds": 6.6524482289969455
+      },
+      "world_id": 29324012
+    },
+    {
+      "arm": "J",
+      "calls": {
+        "arrival": 0,
+        "joint": 50,
+        "mask": 0,
+        "motion": 450,
+        "option": 0
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "joint": {
+          "cached_candidates": 988890,
+          "geometry_rows_computed": 7272,
+          "geometry_rows_reused": 14113608,
+          "requested_candidates": 2754000,
+          "scored_candidates": 1765110
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "motion": {
+          "cached_candidates": 35451,
+          "geometry_rows_computed": 64899,
+          "geometry_rows_reused": 429093,
+          "requested_candidates": 97200,
+          "scored_candidates": 61749
+        },
+        "option": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 41873,
+        "path": "raw/n8_J_w29324013.jsonl.gz",
+        "sha256": "03ad4cb6351a34bc513107967825d8f6a67e1ad760ff7c57541b91032616e5c1"
+      },
+      "metrics": {
+        "J": 0.6100963079173632,
+        "active_mean": 5.0,
+        "active_min": 5,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 41.0,
+        "eligible_unserved": 1.002,
+        "height_penalty": 8.624275510200793e-05,
+        "ineligible": 9.0,
+        "longest_zero_run": 0,
+        "mask_switches": 1,
+        "mean_height": 50.086242755102006,
+        "mean_path_per_uav": 108.01658662001527,
+        "mean_visible_peer_slots": 0.24975,
+        "mean_visible_user_slots": 5.125,
+        "per_uav_path": [
+          71.84761467098863,
+          46.65489684437332,
+          151.29697609645984,
+          93.54934583185872,
+          124.77692369092978,
+          169.28089857612127,
+          194.56740028536478,
+          12.158636964025838
+        ],
+        "quality": 0.1673685022415508,
+        "served": 39.998,
+        "served_min": 39,
+        "served_p05": 40.0,
+        "total_team_path": 864.1326929601222,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": null,
+      "option_model_ticks": 0,
+      "position_predictions": 108000,
+      "raw": {
+        "bytes": 56637,
+        "path": "raw/n8_J_w29324013.npz",
+        "sha256": "0cc33980fb2fe7a8549cea27771aec847b67e849a3470d6379206b0514ce6bc7"
+      },
+      "runtime_seed": 2322411216,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 87.03294904799804,
+        "cpu_seconds": 87.64933779400008,
+        "native_and_record_cpu_seconds": 0.5592702119961359,
+        "wall_seconds": 87.73402140900725
+      },
+      "world_id": 29324013
+    },
+    {
+      "arm": "R",
+      "calls": {
+        "arrival": 1,
+        "joint": 0,
+        "mask": 46,
+        "motion": 469,
+        "option": 1
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 8,
+          "geometry_rows_reused": 1016,
+          "requested_candidates": 128,
+          "scored_candidates": 128
+        },
+        "joint": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 368,
+          "geometry_rows_reused": 93472,
+          "requested_candidates": 11730,
+          "scored_candidates": 11730
+        },
+        "motion": {
+          "cached_candidates": 37141,
+          "geometry_rows_computed": 67446,
+          "geometry_rows_reused": 445858,
+          "requested_candidates": 101304,
+          "scored_candidates": 64163
+        },
+        "option": {
+          "cached_candidates": 5632,
+          "geometry_rows_computed": 363,
+          "geometry_rows_reused": 364189,
+          "requested_candidates": 51201,
+          "scored_candidates": 45569
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 317673,
+        "path": "raw/n8_R_w29324013.jsonl.gz",
+        "sha256": "b459dfe997f58f8a10e8f8c97e7151b9fd27fbac5e4a061257b32f42c0b27310"
+      },
+      "metrics": {
+        "J": 0.6146590279268963,
+        "active_mean": 4.0,
+        "active_min": 4,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 40.99,
+        "eligible_unserved": 1.006,
+        "height_penalty": 6.655442722573446e-05,
+        "ineligible": 9.01,
+        "longest_zero_run": 0,
+        "mask_switches": 2,
+        "mean_height": 50.06655442722573,
+        "mean_path_per_uav": 221.5970964085864,
+        "mean_visible_peer_slots": 0.24975,
+        "mean_visible_user_slots": 5.12375,
+        "per_uav_path": [
+          93.80913889805495,
+          65.73065070159114,
+          155.15289690253798,
+          33.54934583185872,
+          104.31204104680324,
+          213.79689956799197,
+          102.88445288395718,
+          1003.5413454358959
+        ],
+        "quality": 0.18316527451374043,
+        "served": 39.984,
+        "served_min": 37,
+        "served_p05": 40.0,
+        "total_team_path": 1772.7767712686912,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": {
+        "activated_steps_after_arrival": 430,
+        "actual_arrival_mask": 226,
+        "arrival_t": 70,
+        "duration": 30,
+        "first_remute_t": null,
+        "initial_contiguous_active_steps": 430,
+        "initiated": true,
+        "member": 7,
+        "predicted_mask": 226,
+        "predicted_total_J": 282.88631180038647,
+        "predicted_total_served": 18400,
+        "realized_remaining_J_sum": 282.8863128280077,
+        "realized_remaining_served_sum": 18400,
+        "remuted": false,
+        "selected": {
+          "arrival_t": 70,
+          "descent_ticks": 0,
+          "duration": 30,
+          "member": 7,
+          "offsets": [
+            -28,
+            -10
+          ],
+          "path": 964.2640687119285,
+          "predicted_destination": [
+            [
+              557.6971769332886,
+              871.8019723892212,
+              50.0
+            ],
+            [
+              735.2755665779114,
+              868.8443899154663,
+              50.0
+            ],
+            [
+              6.343240849673748,
+              663.6568307876587,
+              50.0
+            ],
+            [
+              775.459349155426,
+              622.4076151847839,
+              50.0
+            ],
+            [
+              695.872962474823,
+              997.1022605895996,
+              50.0
+            ],
+            [
+              149.6521532535553,
+              324.3957459926605,
+              50.0
+            ],
+            [
+              763.1732225418091,
+              145.0415551662445,
+              50.0
+            ],
+            [
+              24.60554599761963,
+              700.0,
+              50.0
+            ]
+          ],
+          "predicted_mask": 226,
+          "predicted_total_J": 282.88631180038647,
+          "predicted_total_served": 18400,
+          "site": 6,
+          "tail_score": {
+            "J": 0.6150243417373857,
+            "energy_penalty": 0.0,
+            "quality": 0.18341447245795275,
+            "served": 40
+          },
+          "transit_J": 18.425844853310593,
+          "transit_served": 1200,
+          "unrounded_duration": 28
+        },
+        "site": 6,
+        "stay_total_J": 282.52962108409577,
+        "stay_total_served": 18400,
+        "transit_J_sum": 18.42584492164109,
+        "transit_served_sum": 1200
+      },
+      "option_model_ticks": 8330,
+      "position_predictions": 101304,
+      "raw": {
+        "bytes": 57771,
+        "path": "raw/n8_R_w29324013.npz",
+        "sha256": "3e56de57a683419c4783e0c1e650e6fec9981b6157dfb52d286914508a764f52"
+      },
+      "runtime_seed": 2322411216,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 5.765718460999551,
+        "cpu_seconds": 6.4457249820000015,
+        "native_and_record_cpu_seconds": 0.5341936729996632,
+        "wall_seconds": 6.455789133004146
+      },
+      "world_id": 29324013
+    },
+    {
+      "arm": "C",
+      "calls": {
+        "arrival": 0,
+        "joint": 0,
+        "mask": 50,
+        "motion": 500,
+        "option": 0
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "joint": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 400,
+          "geometry_rows_reused": 101600,
+          "requested_candidates": 12750,
+          "scored_candidates": 12750
+        },
+        "motion": {
+          "cached_candidates": 42350,
+          "geometry_rows_computed": 69150,
+          "geometry_rows_reused": 456050,
+          "requested_candidates": 108000,
+          "scored_candidates": 65650
+        },
+        "option": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 340947,
+        "path": "raw/n8_C_w29324013.jsonl.gz",
+        "sha256": "0dbc831f190fc3da17769c23d5cdfed9618c8b3e5b6f9e7cd86adddea88d5e81"
+      },
+      "metrics": {
+        "J": 0.613945646534541,
+        "active_mean": 4.0,
+        "active_min": 4,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 40.99,
+        "eligible_unserved": 1.006,
+        "height_penalty": 6.655442722573446e-05,
+        "ineligible": 9.01,
+        "longest_zero_run": 0,
+        "mask_switches": 1,
+        "mean_height": 50.06655442722573,
+        "mean_path_per_uav": 101.06408781959533,
+        "mean_visible_peer_slots": 0.24975,
+        "mean_visible_user_slots": 5.12375,
+        "per_uav_path": [
+          93.80913889805495,
+          65.73065070159114,
+          155.15289690253798,
+          33.54934583185872,
+          104.31204104680324,
+          213.79689956799197,
+          102.88445288395718,
+          39.27727672396741
+        ],
+        "quality": 0.18078733653922222,
+        "served": 39.984,
+        "served_min": 37,
+        "served_p05": 40.0,
+        "total_team_path": 808.5127025567626,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": null,
+      "option_model_ticks": 0,
+      "position_predictions": 108000,
+      "raw": {
+        "bytes": 56255,
+        "path": "raw/n8_C_w29324013.npz",
+        "sha256": "68a53ded074371260bf8ce1dad323017dbdf86452bc3e933dfd2e11942fb4b77"
+      },
+      "runtime_seed": 2322411216,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 4.306384604005871,
+        "cpu_seconds": 5.024862061000022,
+        "native_and_record_cpu_seconds": 0.5697292309980639,
+        "wall_seconds": 5.025881379988277
+      },
+      "world_id": 29324013
+    },
+    {
+      "arm": "R",
+      "calls": {
+        "arrival": 1,
+        "joint": 0,
+        "mask": 47,
+        "motion": 479,
+        "option": 1
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 8,
+          "geometry_rows_reused": 1016,
+          "requested_candidates": 128,
+          "scored_candidates": 128
+        },
+        "joint": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 376,
+          "geometry_rows_reused": 95504,
+          "requested_candidates": 11985,
+          "scored_candidates": 11985
+        },
+        "motion": {
+          "cached_candidates": 40544,
+          "geometry_rows_computed": 66273,
+          "geometry_rows_reused": 437087,
+          "requested_candidates": 103464,
+          "scored_candidates": 62920
+        },
+        "option": {
+          "cached_candidates": 8192,
+          "geometry_rows_computed": 244,
+          "geometry_rows_reused": 241428,
+          "requested_candidates": 38401,
+          "scored_candidates": 30209
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 332833,
+        "path": "raw/n8_R_w29324014.jsonl.gz",
+        "sha256": "c14b79713ff24668e859ad3cf5b26a38460134770dff30984a3efb4aaf6e1237"
+      },
+      "metrics": {
+        "J": 0.7193103194285787,
+        "active_mean": 5.86,
+        "active_min": 4,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 46.74,
+        "eligible_unserved": 0.088,
+        "height_penalty": 0.00010989993887285777,
+        "ineligible": 3.26,
+        "longest_zero_run": 0,
+        "mask_switches": 3,
+        "mean_height": 50.10989993887286,
+        "mean_path_per_uav": 394.7773900137741,
+        "mean_visible_peer_slots": 0.0165,
+        "mean_visible_user_slots": 5.8425,
+        "per_uav_path": [
+          491.8505341559912,
+          30.83970712374298,
+          271.6644902415912,
+          711.8636697540669,
+          99.80820913171041,
+          515.6811701057732,
+          470.77392870965804,
+          565.7374108876587
+        ],
+        "quality": 0.2209740645581722,
+        "served": 46.652,
+        "served_min": 38,
+        "served_p05": 45.0,
+        "total_team_path": 3158.2191201101928,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": {
+        "activated_steps_after_arrival": 440,
+        "actual_arrival_mask": 237,
+        "arrival_t": 60,
+        "duration": 20,
+        "first_remute_t": null,
+        "initial_contiguous_active_steps": 440,
+        "initiated": true,
+        "member": 5,
+        "predicted_mask": 237,
+        "predicted_total_J": 326.22181016019897,
+        "predicted_total_served": 21140,
+        "realized_remaining_J_sum": 332.416774982431,
+        "realized_remaining_served_sum": 21578,
+        "remuted": false,
+        "selected": {
+          "arrival_t": 60,
+          "descent_ticks": 0,
+          "duration": 20,
+          "member": 5,
+          "offsets": [
+            13,
+            0
+          ],
+          "path": 390.0,
+          "predicted_destination": [
+            [
+              97.25068509578705,
+              713.6145830154419,
+              50.0
+            ],
+            [
+              383.8563859462738,
+              98.84550422430038,
+              50.0
+            ],
+            [
+              493.8184916973114,
+              752.2599101066589,
+              50.0
+            ],
+            [
+              677.8192520141602,
+              112.1361181139946,
+              50.0
+            ],
+            [
+              523.0502486228943,
+              0.0,
+              50.0
+            ],
+            [
+              935.7619428634644,
+              378.27253341674805,
+              50.0
+            ],
+            [
+              899.4373083114624,
+              872.4132776260376,
+              50.0
+            ],
+            [
+              191.1121904850006,
+              304.37391996383667,
+              50.0
+            ]
+          ],
+          "predicted_mask": 237,
+          "predicted_total_J": 326.22181016019897,
+          "predicted_total_served": 21140,
+          "site": 22,
+          "tail_score": {
+            "J": 0.7095651941862415,
+            "energy_penalty": 0.0,
+            "quality": 0.2185506472874719,
+            "served": 46
+          },
+          "transit_J": 14.013124718252701,
+          "transit_served": 900,
+          "unrounded_duration": 13
+        },
+        "site": 22,
+        "stay_total_J": 322.301868519812,
+        "stay_total_served": 20700,
+        "transit_J_sum": 14.013124728007362,
+        "transit_served_sum": 900
+      },
+      "option_model_ticks": 6200,
+      "position_predictions": 103464,
+      "raw": {
+        "bytes": 109130,
+        "path": "raw/n8_R_w29324014.npz",
+        "sha256": "0fd9d48bb32fefcad47a40c38d024946a27a55f50f021ccffa59138f63306432"
+      },
+      "runtime_seed": 452436311,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 5.3920718179986125,
+        "cpu_seconds": 6.069410200999982,
+        "native_and_record_cpu_seconds": 0.5344945870019728,
+        "wall_seconds": 6.070761387993116
+      },
+      "world_id": 29324014
+    },
+    {
+      "arm": "C",
+      "calls": {
+        "arrival": 0,
+        "joint": 0,
+        "mask": 50,
+        "motion": 500,
+        "option": 0
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "joint": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 400,
+          "geometry_rows_reused": 101600,
+          "requested_candidates": 12750,
+          "scored_candidates": 12750
+        },
+        "motion": {
+          "cached_candidates": 42329,
+          "geometry_rows_computed": 69171,
+          "geometry_rows_reused": 456197,
+          "requested_candidates": 108000,
+          "scored_candidates": 65671
+        },
+        "option": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 351615,
+        "path": "raw/n8_C_w29324014.jsonl.gz",
+        "sha256": "312621a9eaac4ba35b6b61a878e7b6892253410f96909c9933b46115d7389a8a"
+      },
+      "metrics": {
+        "J": 0.6990805069520555,
+        "active_mean": 4.98,
+        "active_min": 4,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 44.984,
+        "eligible_unserved": 0.088,
+        "height_penalty": 0.00010989993887285777,
+        "ineligible": 5.016,
+        "longest_zero_run": 0,
+        "mask_switches": 2,
+        "mean_height": 50.10989993887286,
+        "mean_path_per_uav": 333.22408915487495,
+        "mean_visible_peer_slots": 0.1265,
+        "mean_visible_user_slots": 5.623,
+        "per_uav_path": [
+          491.8505341559912,
+          30.83970712374298,
+          271.6644902415912,
+          669.437262882874,
+          99.80820913171041,
+          125.68117010577313,
+          410.77392870965804,
+          565.7374108876587
+        ],
+        "quality": 0.2354880229697608,
+        "served": 44.896,
+        "served_min": 38,
+        "served_p05": 45.0,
+        "total_team_path": 2665.7927132389996,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": null,
+      "option_model_ticks": 0,
+      "position_predictions": 108000,
+      "raw": {
+        "bytes": 100761,
+        "path": "raw/n8_C_w29324014.npz",
+        "sha256": "7004e1ae3a74a413a0d9fa5f6be73ad9b8d1cca9eb9e7a573f467e89a3c00897"
+      },
+      "runtime_seed": 452436311,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 4.275850874996877,
+        "cpu_seconds": 4.985278766999954,
+        "native_and_record_cpu_seconds": 0.5555189899996549,
+        "wall_seconds": 4.986452384007862
+      },
+      "world_id": 29324014
+    },
+    {
+      "arm": "J",
+      "calls": {
+        "arrival": 0,
+        "joint": 50,
+        "mask": 0,
+        "motion": 450,
+        "option": 0
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "joint": {
+          "cached_candidates": 988890,
+          "geometry_rows_computed": 7272,
+          "geometry_rows_reused": 14113608,
+          "requested_candidates": 2754000,
+          "scored_candidates": 1765110
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "motion": {
+          "cached_candidates": 35451,
+          "geometry_rows_computed": 64899,
+          "geometry_rows_reused": 429093,
+          "requested_candidates": 97200,
+          "scored_candidates": 61749
+        },
+        "option": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 44815,
+        "path": "raw/n8_J_w29324014.jsonl.gz",
+        "sha256": "1c99f857729218995b91220c78d1321f847e3592616774e4f53ced7472e0e13a"
+      },
+      "metrics": {
+        "J": 0.7173132013629264,
+        "active_mean": 4.98,
+        "active_min": 4,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 46.932,
+        "eligible_unserved": 0.084,
+        "height_penalty": 9.658624806421267e-05,
+        "ineligible": 3.068,
+        "longest_zero_run": 0,
+        "mask_switches": 2,
+        "mean_height": 50.09658624806421,
+        "mean_path_per_uav": 247.08075435364083,
+        "mean_visible_peer_slots": 0.1255,
+        "mean_visible_user_slots": 5.8665,
+        "per_uav_path": [
+          431.16976446283286,
+          7.147554510337315,
+          159.70296601452486,
+          441.8636697540669,
+          85.1769388185723,
+          83.25476323458028,
+          381.1983192141737,
+          387.1320588200383
+        ],
+        "quality": 0.20512595870330239,
+        "served": 46.848,
+        "served_min": 39,
+        "served_p05": 47.0,
+        "total_team_path": 1976.6460348291266,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": null,
+      "option_model_ticks": 0,
+      "position_predictions": 108000,
+      "raw": {
+        "bytes": 78764,
+        "path": "raw/n8_J_w29324014.npz",
+        "sha256": "317d1311dd8b95061230fb8f4f5d4c01bedbdccde1f573dc72d2fdf900a87bf6"
+      },
+      "runtime_seed": 452436311,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 87.3653683269979,
+        "cpu_seconds": 87.99042733800002,
+        "native_and_record_cpu_seconds": 0.5685811800003648,
+        "wall_seconds": 88.08011387599981
+      },
+      "world_id": 29324014
+    },
+    {
+      "arm": "C",
+      "calls": {
+        "arrival": 0,
+        "joint": 0,
+        "mask": 50,
+        "motion": 500,
+        "option": 0
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "joint": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 400,
+          "geometry_rows_reused": 101600,
+          "requested_candidates": 12750,
+          "scored_candidates": 12750
+        },
+        "motion": {
+          "cached_candidates": 39311,
+          "geometry_rows_computed": 72189,
+          "geometry_rows_reused": 477323,
+          "requested_candidates": 108000,
+          "scored_candidates": 68689
+        },
+        "option": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 342102,
+        "path": "raw/n8_C_w29324015.jsonl.gz",
+        "sha256": "761634a4963d26c0d1edf65d45030e0c94fbc35236689da049e53a97af21da92"
+      },
+      "metrics": {
+        "J": 0.596028639640739,
+        "active_mean": 4.0,
+        "active_min": 4,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 41.978,
+        "eligible_unserved": 4.992,
+        "height_penalty": 0.00011107551893757149,
+        "ineligible": 8.022,
+        "longest_zero_run": 0,
+        "mask_switches": 1,
+        "mean_height": 50.11107551893757,
+        "mean_path_per_uav": 124.29208016046833,
+        "mean_visible_peer_slots": 0.0005,
+        "mean_visible_user_slots": 5.24725,
+        "per_uav_path": [
+          106.54865867218822,
+          79.17662087881814,
+          136.09913343170024,
+          167.05764973041033,
+          155.44397446548197,
+          43.90296353242106,
+          80.27572608858128,
+          225.8319144841454
+        ],
+        "quality": 0.2611190505322551,
+        "served": 36.986,
+        "served_min": 33,
+        "served_p05": 37.0,
+        "total_team_path": 994.3366412837466,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": null,
+      "option_model_ticks": 0,
+      "position_predictions": 108000,
+      "raw": {
+        "bytes": 57535,
+        "path": "raw/n8_C_w29324015.npz",
+        "sha256": "9bba15f5d447945ee14e5619ef110c0d55ecc3974e63494d9d97447eab5e7958"
+      },
+      "runtime_seed": 3779317685,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 4.335959674004016,
+        "cpu_seconds": 5.027088099000139,
+        "native_and_record_cpu_seconds": 0.538297857999396,
+        "wall_seconds": 5.027511837979546
+      },
+      "world_id": 29324015
+    },
+    {
+      "arm": "J",
+      "calls": {
+        "arrival": 0,
+        "joint": 50,
+        "mask": 0,
+        "motion": 450,
+        "option": 0
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "joint": {
+          "cached_candidates": 988890,
+          "geometry_rows_computed": 7272,
+          "geometry_rows_reused": 14113608,
+          "requested_candidates": 2754000,
+          "scored_candidates": 1765110
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "motion": {
+          "cached_candidates": 35433,
+          "geometry_rows_computed": 64917,
+          "geometry_rows_reused": 429219,
+          "requested_candidates": 97200,
+          "scored_candidates": 61767
+        },
+        "option": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 44738,
+        "path": "raw/n8_J_w29324015.jsonl.gz",
+        "sha256": "782473879afcb6eff39033e7433583955649cfc147486edf5d35288afb966843"
+      },
+      "metrics": {
+        "J": 0.6524143998568703,
+        "active_mean": 4.98,
+        "active_min": 4,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 42.904,
+        "eligible_unserved": 1.09,
+        "height_penalty": 0.00011405060865981808,
+        "ineligible": 7.096,
+        "longest_zero_run": 0,
+        "mask_switches": 2,
+        "mean_height": 50.11405060865982,
+        "mean_path_per_uav": 199.89231993081899,
+        "mean_visible_peer_slots": 0.2445,
+        "mean_visible_user_slots": 5.363,
+        "per_uav_path": [
+          94.12225180099537,
+          192.36649903872745,
+          218.85468108672072,
+          94.55026242616256,
+          412.60620922636934,
+          11.290270454204958,
+          309.9813535733527,
+          265.36703184001885
+        ],
+        "quality": 0.22377483488510053,
+        "served": 41.814,
+        "served_min": 34,
+        "served_p05": 42.0,
+        "total_team_path": 1599.1385594465519,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": null,
+      "option_model_ticks": 0,
+      "position_predictions": 108000,
+      "raw": {
+        "bytes": 78515,
+        "path": "raw/n8_J_w29324015.npz",
+        "sha256": "5aadc540fc1415ac09e078c24c2c450544daee5eca5bdc9ee67eee564de45a2a"
+      },
+      "runtime_seed": 3779317685,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 96.16147455699706,
+        "cpu_seconds": 96.78161875699993,
+        "native_and_record_cpu_seconds": 0.5615339359997051,
+        "wall_seconds": 96.86900663099368
+      },
+      "world_id": 29324015
+    },
+    {
+      "arm": "R",
+      "calls": {
+        "arrival": 1,
+        "joint": 0,
+        "mask": 47,
+        "motion": 479,
+        "option": 1
+      },
+      "candidate_counts": {
+        "arrival": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 8,
+          "geometry_rows_reused": 1016,
+          "requested_candidates": 128,
+          "scored_candidates": 128
+        },
+        "joint": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 0,
+          "geometry_rows_reused": 0,
+          "requested_candidates": 0,
+          "scored_candidates": 0
+        },
+        "mask": {
+          "cached_candidates": 0,
+          "geometry_rows_computed": 376,
+          "geometry_rows_reused": 95504,
+          "requested_candidates": 11985,
+          "scored_candidates": 11985
+        },
+        "motion": {
+          "cached_candidates": 37643,
+          "geometry_rows_computed": 69174,
+          "geometry_rows_reused": 457394,
+          "requested_candidates": 103464,
+          "scored_candidates": 65821
+        },
+        "option": {
+          "cached_candidates": 9728,
+          "geometry_rows_computed": 332,
+          "geometry_rows_reused": 331452,
+          "requested_candidates": 51201,
+          "scored_candidates": 41473
+        }
+      },
+      "complete": true,
+      "decisions": {
+        "bytes": 328593,
+        "path": "raw/n8_R_w29324015.jsonl.gz",
+        "sha256": "7fd6d429ce8b0a4fcc795f01faf4bd2d1a6c92bb91371ffefe68120427ae31f2"
+      },
+      "metrics": {
+        "J": 0.637246237412558,
+        "active_mean": 4.88,
+        "active_min": 4,
+        "all_on_fraction": 0.0,
+        "capacity_identity_holds": true,
+        "eligible": 41.102,
+        "eligible_unserved": 0.596,
+        "height_penalty": 0.00011857551893757149,
+        "ineligible": 8.898,
+        "longest_zero_run": 0,
+        "mask_switches": 2,
+        "mean_height": 50.11857551893757,
+        "mean_path_per_uav": 248.21367756004446,
+        "mean_visible_peer_slots": 0.11075,
+        "mean_visible_user_slots": 5.13775,
+        "per_uav_path": [
+          106.54865867218822,
+          296.4558414923967,
+          196.09913343170024,
+          167.05764973041033,
+          347.87038133667477,
+          43.90296353242106,
+          571.942877800419,
+          255.8319144841454
+        ],
+        "quality": 0.234269376438319,
+        "served": 40.506,
+        "served_min": 33,
+        "served_p05": 37.0,
+        "total_team_path": 1985.7094204803557,
+        "zero_steps": 0
+      },
+      "n": 8,
+      "option": {
+        "activated_steps_after_arrival": 440,
+        "actual_arrival_mask": 214,
+        "arrival_t": 60,
+        "duration": 20,
+        "first_remute_t": null,
+        "initial_contiguous_active_steps": 440,
+        "initiated": true,
+        "member": 6,
+        "predicted_mask": 214,
+        "predicted_total_J": 292.4449866183788,
+        "predicted_total_served": 18780,
+        "realized_remaining_J_sum": 294.9658258211746,
+        "realized_remaining_served_sum": 18780,
+        "remuted": false,
+        "selected": {
+          "arrival_t": 60,
+          "descent_ticks": 0,
+          "duration": 20,
+          "member": 6,
+          "offsets": [
+            -11,
+            3
+          ],
+          "path": 367.27922061357856,
+          "predicted_destination": [
+            [
+              126.11612677574158,
+              480.93801736831665,
+              50.0
+            ],
+            [
+              919.7659492492676,
+              791.9417023658752,
+              50.0
+            ],
+            [
+              195.5338418483734,
+              712.8493189811707,
+              50.0
+            ],
+            [
+              724.9622941017151,
+              687.2330904006958,
+              50.0
+            ],
+            [
+              836.0787034034729,
+              143.89702677726746,
+              50.0
+            ],
+            [
+              668.1059002876282,
+              605.272650718689,
+              50.0
+            ],
+            [
+              404.98523235321045,
+              321.9505214691162,
+              50.0
+            ],
+            [
+              180.45522272586823,
+              157.9122692346573,
+              50.0
+            ]
+          ],
+          "predicted_mask": 214,
+          "predicted_total_J": 292.4449866183788,
+          "predicted_total_served": 18780,
+          "site": 75,
+          "tail_score": {
+            "J": 0.6375373188803278,
+            "energy_penalty": 0.0,
+            "quality": 0.21179106293442612,
+            "served": 41
+          },
+          "transit_J": 11.928566311034556,
+          "transit_served": 740,
+          "unrounded_duration": 11
+        },
+        "site": 75,
+        "stay_total_J": 274.3570251537947,
+        "stay_total_served": 17020,
+        "transit_J_sum": 11.928566388489788,
+        "transit_served_sum": 740
+      },
+      "option_model_ticks": 7570,
+      "position_predictions": 103464,
+      "raw": {
+        "bytes": 78824,
+        "path": "raw/n8_R_w29324015.npz",
+        "sha256": "3abf3203dc241f55c86c742c0fdb240784f87ba26824308838422b5164c3b1df"
+      },
+      "runtime_seed": 3779317685,
+      "steps": 500,
+      "timing": {
+        "controller_cpu_seconds": 5.864077514998598,
+        "cpu_seconds": 6.575550632999921,
+        "native_and_record_cpu_seconds": 0.5702088870000352,
+        "wall_seconds": 6.576426143001299
+      },
+      "world_id": 29324015
+    }
+  ],
+  "launch_sha": "9928d34b54628baaa542961debb65c5ce7ef0f23",
+  "new_fits": 0,
+  "reading": {
+    "bytes": 111805,
+    "path": "reading.json",
+    "sha256": "269fc6aca11d085d53375961ba031524af2964255ba3ea0acc3bf574cf3f15fd"
+  },
+  "status": "complete",
+  "total_timing": {
+    "cpu_seconds": 3494.767428225,
+    "process_resources": {
+      "children_system_seconds": 0.002832,
+      "children_user_seconds": 0.0,
+      "peak_rss_kib_process": 599368,
+      "scope": "process lifetime including imports; self CPU includes native threads; child totals separate",
+      "self_system_seconds": 825.34069,
+      "self_user_seconds": 2672.530237
+    },
+    "wall_seconds": 3497.5174913390074
+  },
+  "updates": 0,
+  "worker_status": "complete",
+  "worker_timing": {
+    "cpu_seconds": 1776.094879733,
+    "process_resources": {
+      "children_system_seconds": 0.002832,
+      "children_user_seconds": 0.0,
+      "peak_rss_kib_process": 597796,
+      "scope": "process lifetime including imports; self CPU includes native threads; child totals separate",
+      "self_system_seconds": 422.022784,
+      "self_user_seconds": 1357.175595
+    },
+    "wall_seconds": 1777.508579698013
+  }
+}

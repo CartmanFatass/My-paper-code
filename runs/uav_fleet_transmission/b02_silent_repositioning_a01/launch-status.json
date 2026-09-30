@@ -1,0 +1,76 @@
+{
+  "admission": {
+    "claim_state": "accepted",
+    "state": "accepted"
+  },
+  "artifacts": {
+    "stderr": {
+      "path": "/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b02_silent_repositioning_a01/stderr.log",
+      "state": "present"
+    },
+    "stdout": {
+      "path": "/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b02_silent_repositioning_a01/stdout.log",
+      "state": "present"
+    },
+    "summary": {
+      "path": "/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b02_silent_repositioning_a01/summary.json",
+      "state": "present"
+    }
+  },
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/0d6181464fbb73a969cf1d82021de0098c3cb75e3b078104900afdb7d3d5f5c3.json",
+  "direction": "uav_fleet_transmission",
+  "execution": {
+    "exit_code": 0,
+    "exit_witness": {
+      "exit_code": 0,
+      "finished_at_epoch": 1790788265.9349675,
+      "path": "/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b02_silent_repositioning_a01/process-exit.json",
+      "state": "valid",
+      "termination": "process_exit"
+    },
+    "runner": {
+      "recorded_identity": {
+        "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+        "kind": "linux_pid_start_ticks",
+        "pid": 1060925,
+        "session_id": 1060924,
+        "start_ticks": 22336014
+      },
+      "state": "absent"
+    },
+    "state": "exited",
+    "supervisor": {
+      "recorded_identity": {
+        "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+        "kind": "linux_pid_start_ticks",
+        "pid": 1060924,
+        "session_id": 1060924,
+        "start_ticks": 22336010
+      },
+      "state": "absent"
+    }
+  },
+  "explicit_retry": {
+    "eligible": false,
+    "reasons": [
+      "parent has no consistent terminal nonzero native exit"
+    ],
+    "scientific_authorization": false,
+    "successor_ref": null,
+    "supported": true
+  },
+  "explicit_retry_available": false,
+  "kind": "hmasd_operation_status",
+  "manifest_ref": "/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b02_silent_repositioning_a01/launch-manifest.json",
+  "node": "local_linux",
+  "observed_at": "2026-09-30T17:11:28.076389Z",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/0d6181464fbb73a969cf1d82021de0098c3cb75e3b078104900afdb7d3d5f5c3.json",
+  "output_root": "/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b02_silent_repositioning_a01",
+  "record_consistency": {
+    "mismatches": [],
+    "state": "consistent"
+  },
+  "schema_version": 1,
+  "sha": "9928d34b54628baaa542961debb65c5ce7ef0f23",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/3c88e1ef6f92472294c00ae056408d00"
+}
