@@ -7161,3 +7161,229 @@ cross-question investment. The direction remains **reserve, source assessment
 complete**, until Root's actual next assignment. No producer, observer or
 unfinished B07 collection is being awaited. No further question, review round,
 fixture or result launch is created by completing this source-only boundary.
+
+<a id="b08-selected-contract"></a>
+## B08 selected: exact computation reuse for the retained G2/A2 programs
+
+Root has now selected the narrowed saved-history comparison after reading the
+complete source assessment and original independent Astra Max answer. The full
+cross-question prompt, overlap correction, answer and allocation are retained
+once in [Root's canonical review](../../archive/2026-10-01/RESEARCH-temporal-use-and-planning-economy.md).
+I read the entire original answer, including its distinct local-feedback
+recommendation and contrary evidence; it is not a new result of this direction.
+This selection supersedes the preceding source-only reserve state. B07's learned
+ranking stop and the G_E/A_E timing no-purchase remain unchanged. There is one
+active study, B08; no new fit, native panel, timing law or ranker repair is selected.
+
+### Response to the scientific review and fixed comparison
+
+I accept the review's two substantial corrections: preserve the useful native
+A2 object through zero-native controller replay, and compare the newly timed
+original/reuse outputs with the independently certified old outputs rather than
+buying a third model reconstruction. Equally optimized G2 is essential. These
+corrections reduce the bill while retaining the complete decision/coupling that
+made B04 informative. I also accept the stronger priority of the separate local
+cadence question; parallel implementation here does not reserve its CPU window.
+There is no material scientific dissent and no unresolved distinct expertise
+question requiring another selection review or Pro request. The published topic
+3/4 reading and concrete design effects in the source assessment remain applicable.
+
+**Question/prediction.** Can exact recurring-state reuse reduce the complete
+execution cost of unchanged G2/A2, and what anticipation premium remains after
+both receive it? I predict some exact recurrence in long120→500 tails and a
+lower complete cost for each reuse arm, without predicting a fraction, relative
+speed ranking or deployment threshold. All scientific outputs and inherited
+native outcomes must remain bit-identical; native J improvement is not an
+endpoint. Bank construction, terminal/trace work and serialization may erase
+scorer savings. This is an implementation-economy study on exposed histories,
+not learning, new-world confirmation or native throughput measurement.
+
+The fixed panel is the original sixteen B04 worlds, ascending original world
+order, and four variants `G2_original`, `G2_reuse`, `A2_original`, `A2_reuse`.
+For world index i, execute that tuple rotated left by i modulo4. Each variant
+starts a fresh private controller and fresh per-call branch/segment caches,
+and runs every tick0…499 using only that original arm's lawful public report
+at t divisible by10. All other ticks receive None. There is no cross-arm bank,
+simulation cache or candidate sharing. Ordinary R/K2_E/T_E results remain outside
+this matched panel and are not ranked by cross-panel averages. The bound source
+is frozen B04 `239360b03f5d7acf788bd9ae5d4dccbde4f9237e` with original config,
+summary, full-reader certificate and every required per-artifact hash.
+
+The selected result bill is **64 H500 controller histories /32,000 controller
+clock calls /0 new native transitions, worlds, fits, updates, targets or labels**.
+The exact logical ledger is134,353,178 requests,498,120 model ticks,282 stationary
+banks,96,400 stationary rows,1,904,820 candidate-transit ticks and1,246 emitted
+complete model branches. Actual scored/reward work may decrease; no new recurrence
+scan or smoke replay precedes the complete observation. The independent reader
+adds zero controller/scorer/model/native queries. It verifies both new variants
+against the old immutable scientific arrays/records and reconstructs the new
+terminal and recurrence certificates from those arrays and lawful reports.
+
+Measure each complete variant from input loading through all500 ticks, own bank
+and branch computation, original-sized scientific output serialization, hashes,
+certificate recording and final ledger/output reductions. Record both CPU and
+wall time, enclosing worker/reader totals, and separately the common original
+input/source verification overhead. Primary cost readings are total reuse/original
+ratios within G2 and A2 and total optimized A2/optimized G2; retain all per-world
+timings and counts, not a best timing trial. There is one fixed execution per
+variant/world, no benchmark resampling and no data-dependent stopping for savings.
+Timing overhead, input validation and final evidence reading are paid even if
+the resulting savings are small. Historical native episode CPU is context only.
+
+Stop the attempt at the first consequential branch, command, decision, state,
+record or output mismatch. Preserve the first mismatch and all prior work/cost;
+do not continue later saved public reports as if they were a changed policy's
+native continuation. No tolerance relaxation, native rerun, cache expansion,
+JIT/C++, deeper search, clock change or new learning follows automatically.
+Exact equality plus useful complete savings retains an implementation; high
+reuse with little saving identifies remaining complete-package cost; sparse or
+slower reuse ends this fixed optimization; any mismatch fails the unchanged-
+program claim. No universal usable-cost threshold is invented.
+
+Prospective whole-comparison estimates remain1.5–2.5 combined CPU-hours and7–13
+support hours, .4–.6GB transient scientific output,16–64MiB new retained
+cost/digest/terminal/reuse evidence, .5–.9GiB streamed RSS,1.6–2.0GB source snapshot
+and2–3GiB output/scratch headroom. They are estimates, not allowances or admission.
+Original B04's6,223.405CPU-seconds and225,118,040raw bytes/1,701artifacts remain
+incurred history. After complete equality and reader/reviewer release, delete
+duplicate new scientific payloads and retain the original one canonical copy
+plus all unique new bindings/cost/certificate evidence. Any unique failed or
+adverse payload remains. No whole-worktree backup or retention chain is needed.
+
+Use the configured **local_linux** interpreter under fresh local admission because
+the remote GCC recurrence remains unresolved. All new timed variants use the
+same actual local runtime and one numerical thread. At readiness, inspect the
+actual separately selected T/H and local-cadence worker/reader windows and place
+this observation after them when practical; otherwise record actual overlap and
+interleaving. No CPU hold is requested during implementation, no standing node
+reservation is created and no accepted operation is moved.
+
+<a id="b08-l0"></a>
+### B08 implementation L0 and ownership
+
+Deliver one versioned exact G2/A2 replay comparison under
+`experiments/candidates/uav_parent_adaptation/b08_exact_planning_reuse/`, mirrored
+tests, and output tag `runs/uav_parent_adaptation/b08_exact_planning_reuse_a01/`.
+B08 is unoccupied. Author only on shared main; preserve all other writers. Frozen
+B04/B06 modules are read-only dependencies. The DM alone owns this notebook,
+shared standing and Git index/commits; no authoring worktree is created.
+
+One bounded Implementer owns **the exact segment adapter and explicit-bound
+selector behavior**, specifically `segment.py`, `controller.py`, `__init__.py`
+and `tests/.../b08_exact_planning_reuse/test_segment.py` /
+`test_controller.py`. It receives this L0 and returns its diff, callable/certificate
+schema, checks and open risks; it edits no collector, reader, NOTES, shared file
+or Git index, launches no result work and spawns no children. The DM owns
+`study.py`, `reader.py`, `run.py`, any input/binding helper and their separate
+collector/reader tests. Paths are disjoint even within this one direction.
+
+The callable selector is `TemporalProgram(arm, horizon=500, branch_sink=None,
+candidate_sink=None, *, reuse=False, segment_sink=None)`. It must preserve the
+frozen public properties, plans/selections/banks and exact scientific branch
+output. Original mode calls the unchanged frozen B03/B04 model routines;
+reuse mode may use the unchanged B06 routine for G2's lawful t40 first search
+and the new bounded segment adapter for B04 segments. Simulator dependencies
+are explicit; no shared-global monkeypatching is permitted. Segment certificates
+are emitted with stable segment identities, before the selector consumes their
+returned terminal states, through a copied sink payload whose mutation cannot
+alter the result. The Implementer reports its exact small schema before the DM
+integrates independent certificate checking.
+
+Preserve separate start/end/report horizon500, copied full terminal controller
+and mask, original ordered reductions and the unrounded outer/decoded inner
+distinction. Eligibility is strictly after the segment's start/arrival event;
+cache scope is one segment/branch, never another call or t120 barrier. The key
+uses every required FP bit, mask and phase40. Absolute reports/clock advance,
+issued commands survive clipping, and no-recurrence fallback is the original
+computation. Record entry/terminal history, source-time certificates and logical
+versus actual work without changing frozen scientific records or state.
+
+Correctness checks are focused synthetic state/transition/serialization tests:
+report cadence and clock, arrival/barrier120, no-repeat fallback, signed-zero
+and one-ULP key distinctions, clipped command history, outer-versus-inner starts,
+terminal reconstruction, ordered floating reductions, sink isolation, independent
+reader rejection and complete count arithmetic. They use constructed arrays and
+synthetic transition/scorer doubles, no result worlds, paid traces, native
+environment calls or extra real C/scorer/model episodes. Test time and synthetic
+call scope are support costs and will be recorded. Any necessary additional
+result-bearing correctness work must first be declared/costed; no hidden pilot.
+An independent engineering Reviewer checks the high-risk state/numerical and
+reader/executable configuration diff. The DM accepts the reviewed implementation,
+publishes exact inputs, admits the single replay→reader chain, then obtains an
+independent scientific result diagnosis and publishes/cleans at that boundary.
+
+**Source-checked boundary clarification before execution.** Root explicitly
+confirmed that its phrase "clear at120/eachsegment" refers to actual modeled-
+program boundaries. G2's first frozen B03 selection evaluates C-only branches
+through500; those forecasts contain no120 decision/event. Its already-verified
+B06 whole-continuation reuse therefore remains valid across the numerical clock120.
+An artificial flush there would disadvantage the ordinary comparator. G2's actual
+second selection and every A2 prefix/inner/outer segment get fresh caches. The new
+B04 segment adapter rejects unused40→500 calls (start40 may end no later than120),
+preventing accidental crossing of A2's real boundary. This clarification changes
+no scientific output, logical count, timing scope or selected work and will be
+included in engineering review; Root also preserves it in the canonical decision.
+
+<a id="b08-engineering-accepted"></a>
+### B08 implementation accepted before result execution
+
+I inspected and accept the bounded Implementer's three source/two test files,
+then completed the immutable-input, replay, reader and admitted entry modules.
+The final implementation comprises seven owned source modules and four test
+files. Frozen B03/B04/B06 sources are unchanged. Both scientific output variants
+are checked against immutable B04 arrays/ordered records, with independent
+certificate reconstruction before terminal states can affect later branching.
+No new B08 controller/scorer/model/native result call has occurred at this point.
+
+The source/hash-only preflight verified all1,483 selected old artifacts
+(192,383,803 bytes) and43 source bindings in1.07275379 CPU-seconds. Original B04
+config/summary/full-reader hashes and its full48-episode/24,000-step audit are
+required inputs. This was file/metadata verification, not a pilot simulation.
+
+The independent Engineering Reviewer read all seven source modules and four test
+files. Its consequential findings were corrected before publication: clock-keyed
+catalogs now undergo the original JSON key normalization before comparison;
+an actual command mismatch retains its exact original dtype/bits before any
+normal-output float32 conversion; and the first available original/reuse actual
+terminal-state pair is compared before starting another history. Complete model
+segment mismatches already stop inside the copied sink. Failure rows explicitly
+label the old complete-history logical bill as expected work rather than incurred
+complete work. Partial emitted work, the first failed payload and actual process
+cost remain preserved.
+
+Full plans are bound wherever the archive retains them: all actual alternatives,
+A2 first alternatives, suffix selection, inner stay and selected nonstay. The old
+compact inner record does not retain every nonselected inner plan's ancillary
+fields; those execution-relevant plan facts, complete arrays/decisions and candidate
+banks remain checked under the unchanged bound source. No claim of recovering
+unrecorded metadata is made. All model terminal states come from old arrays.
+The actual controller's private final estimate was not in the old native artifact;
+its bits are compared with the newly timed frozen-original variant, alongside all
+500 old commands/masks/decisions. This does not buy an extra state propagation.
+
+Configured-interpreter synthetic checks: **74 passed in6.84s**. They cover both
+recurrence formats, the lawful G2 numeric120 crossing, all terminal/key/source/count
+and absolute-report corruption cases, recoverable plan metadata, signed zero and
+dtype/list ordering, file hash/path escapes, index80 state/index79 command recovery,
+outer/inner physical distinction, sink isolation, complete500-clock report cadence,
+first mismatched segment/command stopping, terminal-pair stopping and admission
+before effects. One earlier combined test run had72 passes and one failure in7.12s:
+the synthetic arrival fixture declared positive-zero plan commands while its fake
+program ignored them and issued negative zero. Binding that fake program to its
+declared plan fixed the fixture; no production tolerance or scientific rule changed.
+The Implementer's prior five evolving synthetic runs totalled17.62s. All tests use
+constructed arrays and fake transitions/scorers, zero real scientific result queries.
+
+Final independent engineering disposition: **no material finding remains**.
+It specifically accepted frozen bindings, A2 state separation, recurrence ledgers,
+first-mismatch evidence, zero-query reader and complete timing. Runtime equality
+and savings remain unmeasured and belong to the selected full observation. I accept
+the implementation with those explicit archival limits; no further engineering
+round or result fixture is selected.
+
+Per-history timing includes its input load, all model/bank work and copied sinks,
+scientific serialization/hash/certificate checking, first metadata write and object
+collection. Final timing-metadata rewrites, shared summary updates, paired-history
+checks and final aggregation remain paid enclosing-worker overhead. The separate
+reader and common input/source verification are also measured; no uncharged claim
+of native throughput or complete operational latency is made.
