@@ -3883,3 +3883,16 @@ communication and is preserving the accepted collection. No retry,
 resumption, different-node replay, allocator repair, new scientific
 comparison or confirmation is selected by this failure. Any selected
 recovery must retain A01's exposure and cost rather than silently replace it.
+
+**Local collection cleanup (00:35 UTC).** After publication at`54fd01aca88`
+and identity verification, the DM checked visible same-user open file
+descriptors for the six exact targets below and found no live consumer.
+Deleted the redundant local
+`runs/uav_user_waiting/b05_local_allocation_a01/{summary.json,stdout.log,stderr.log,failure-observation.json,failure-inventory.json}`
+and the consumed
+`temp/directions/uav_user_waiting/b05/worker-observer-request.json`.
+Measured allocated file bytes fell from1,568,768 to0; all six targets are
+absent, so net allocated disk reclaimed is1,568,768 bytes. Compact committed
+metadata and the complete original canonical output/core remain. The
+remote source snapshot is deliberately retained for Root's live forensic
+consumer; no deletion tool was blocked and no backup chain was created.
