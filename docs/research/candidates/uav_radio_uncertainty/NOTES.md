@@ -483,3 +483,42 @@ and6a22fef75e7bbc0997b2f4b0096d278de793d43e466497b36bba49884cab23f9). Existing G
 gitstatus warnings remain unrelated unresolved control observations. Source uses the
 launcher's immutable snapshot, without altering the retained canonical checkout.
 No H8/main scientific operation had yet been accepted at this preparation boundary.
+
+
+<a id="b01-native-correctness"></a>
+## 2026-10-01 07:50 UTC — four fixed H8 episodes verified
+
+The [native manifest](../../../../runs/uav_radio_uncertainty/b01_correctness_a01/launch-manifest.json)
+binds the accepted9b6f493b snapshot, actual node, command and operation. The first
+`agent-task` shell invocation lost nested quoting and failed before opening the launch
+kernel (`/home/wu/scripts/hmasd_launch.py` absent); its supervisor exited2 and the run
+output did not exist. The corrected supervisor command preserved one shell command
+argument, then obtained this single native acceptance. That shell failure consumed no
+scientific query and created no scientific operation or duplicate attempt.
+
+The accepted check exited0 with consistent terminal witness and both native processes
+absent. The complete [summary](../../../../runs/uav_radio_uncertainty/b01_correctness_a01/summary.json)
+reports VERIFIED_COMPLETE: three constructors/discarded constructor resets, four explicit
+H8 resets,32 steps,20 current-C queries,7250 physical normals,805 geometry uniforms,
+eight mask refreshes and200 sounding slots,0fits/updates. All three discarded snapshots,
+old/sigma0 exact equality, the two managed episodes, all actually computed candidate
+particles, both C passes and all native/outcome audits passed. No extra reset, episode,
+world, benchmark or repair was needed. The reader made40 current-C calls,7250 physical
+normals,47 native SINR/grant states,16665 candidate fleet scores and4455 candidate fleet
+updates. U made56000 model-normal materializations on each worker/reader side. The four
+managed decisions all completed within the fixed deadline; this tiny correctness fixture
+is not a deployment-performance estimate or an efficacy panel.
+
+Check process wall5.022877895040438s,CPU4.511872s,waited-childCPU.004657s,peakRSS419276KiB.
+Canonical NPZ evidence is330780bytes across nine files at the manifest's remote output
+root; the complete summary lists each absolute path,size and SHA256. All are retained
+there, without a second raw-data copy. Its eight top-level compact/native record files
+were collected and hash/size verified locally; summarySHA256
+c1cfbd65658bf5385e390f8f8d4ee03796e5679c2376f4a41a5007aa27399818.
+The same-session observer registered generation59 and read READY. Its queue delivery
+was rejected for a native child(-32600); this continuously active child drained the
+terminal fact directly and rearmed generation60 without restarting the worker.
+
+I accept the fixed correctness boundary. The already-selected32-world complete P/U32
+worker and full independent reader remain the next operations at the unchanged source,
+seeds,clock,particle count and cost. Correctness observations do not alter that plan.
