@@ -10055,3 +10055,65 @@ The separately owned actual-S2 study is not a same-rights comparator, a
 dependency for completing B09, or permission to duplicate its work. The
 broader focal-cooperation question remains reserve; there is no active producer,
 pending advice, unresolved scientific dissent or selected follow-on.
+
+<a id="b09-final-cleanup"></a>
+### B09 publication and final cleanup
+
+Complete compact evidence, the original independent review and the resolved
+disposition were published on main at
+`71af384c3176ecc8976579b4442d00b2cafe69c5`; normal push and remote ref were
+verified. This publishes6 explicit owned paths: the notebook, compact
+publication, native terminal/status records and final worker/reader progress.
+The full19.19MB reading and47.61MB worker summary remain at their bound
+canonical digests, not duplicated into Git. The current shared index/background
+publication follows this direction evidence without a Root acknowledgment gate.
+
+The Scientific Reviewer explicitly completed artifact consumption. The original
+runner, supervisor and stopped observer identities are absent. A privileged
+read-only process scan found no open-file or cwd consumer of the exact staging,
+request or cache targets, with no scan errors. Both unique remote P0/P1 files
+were freshly checked again at424487bytes each and their original SHA256 values
+before deleting the local duplicates. No fit, model forward, native transition,
+optimizer step or production reader was added by closure.
+
+The exact managed source snapshot
+`/home/fires/hmasd-wsl/.git/hmasd-launch-sources/d569e5df118b4cd0bfdd91bc9305b1f5`
+was removed by `hmasd_snapshot_gc.py`, after eligible preview, terminal-identity
+and live-consumer checks, and durable source reachability on main. The first
+unprivileged preview refused with
+`cannot inspect own process 383: [Errno 13] Permission denied: '/proc/383/cwd'; retry with --sudo-process-scan`.
+The tool's supported `--sudo-process-scan` preview and apply both succeeded.
+The source directory is absent; claim, manifest, native exit record and canonical
+output remain. There is no unresolved cleanup-tool blocker. **The snapshot's
+allocated bytes were not measured before this deletion**, so no numerical
+reclamation credit is claimed for it and no replacement snapshot is created
+to manufacture a measurement.
+
+The following seven exact disposable targets were separately measured immediately
+before deletion and verified absent afterward:
+
+| Deleted target | Allocated bytes before → after |
+| --- | --- |
+| `/home/fires/hmasd-inputs/uav_fleet_adaptation/b09_focal_response_a01/` (P0/P1 copies) | 856064 → 0 |
+| `temp/directions/uav_fleet_adaptation/b09_wait_request.json` | 4096 → 0 |
+| `experiments/candidates/uav_fleet_adaptation/b09_focal_response/__pycache__/` | 131072 → 0 |
+| `tests/experiments/candidates/uav_fleet_adaptation/b09_focal_response/__pycache__/` | 90112 → 0 |
+| Empty `temp/directions/uav_fleet_adaptation/test/` | 4096 → 0 |
+| Empty `temp/directions/uav_fleet_adaptation/` | 4096 → 0 |
+| Empty `/home/fires/hmasd-inputs/uav_fleet_adaptation/` | 4096 → 0 |
+
+**Measured net allocated reclamation is1093632bytes for those seven targets**;
+the additionally deleted source snapshot is unmetered. This is a lower bound
+on deleted-target reclamation, not a measurement of concurrent host free space
+or Git-object storage. Earlier49152byte Oracle-transfer cleanup remains
+separately recorded. There are no leftover targets in this cleanup scope.
+
+Retained useful code is the reviewed tracker/head/ego-only learning and private
+controller program with its independent physical/training-state reader and
+meaningful tests. These supply the executable interpretation of the required
+saved-state contract. The one canonical output retains2560 raw trajectories,
+512 precollection plus4 final checkpoints,256 history-zero artifacts, full
+readings and compact/native records. No required unique evidence, adverse
+outcome, original asset, source identity or other direction's work was removed;
+no backup tree or retention chain was created. Final standing is reserve with
+no active observation, scientific operation, unread advice or selected successor.
