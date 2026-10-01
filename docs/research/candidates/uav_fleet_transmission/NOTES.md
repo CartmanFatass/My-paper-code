@@ -6908,3 +6908,82 @@ not an outcome-driven change. The independent Oracle's reading coverage, Root's 
 primary coverage and this DM's executable source audit remain distinct. No full-paper or
 novelty claim is added. B08's representation capability, scoped M/V stop and prior costs/adverses
 remain unchanged. The contract/L0 above governs only this selected successor.
+
+
+**B09 L0 bounded reader delegation (before executable checks).** The private model adapter
+was returned with static-only checks; no model/native call was run. A second bounded task may
+use the same Implementer context to adapt ONLY B09 `reader.py` and mirrored `test_reader.py`
+for complete C/H/F saved-input replay. All other source, trace schema, planner, runner, NOTES
+and Git mutations remain DM-owned. The behavior is full actual-call reconstruction, not a
+new control comparison. It must repay every executed candidate's nominal30ticks/RF snapshots,
+check the new typed evidence and exact rankings/targets, use origin-bound10/20/30 error on
+H/F's own histories, retain B08 native consistency/cutoff/directed-routing safeguards, and
+stop at incomplete recorded prefixes instead of finishing searches never executed. Static
+checks only until exact inputs are published; tests are written within the joint finite
+allowance. It returns its diff/coverage gaps to the DM, who accepts and runs counted checks.
+No independent scientific selection or new launch is delegated.
+
+**B09 implementation/check boundary (2026-10-01, before all executable queries).**
+The initial controller/model/nominal/capture/runner implementation is written; the bounded
+reader is still being integrated. A separate named engineering Reviewer is examining the
+actual source against this contract. Static AST parsing is not runtime acceptance. No B09
+native constructor, reset, step, RF query, controller search or Lloyd solve has executed.
+The first finite check invocation will run on configured `local_linux` with the scientific
+interpreter and single-thread numerical libraries after these exact source/test bytes are
+committed and pushed. It is a synthetic correctness invocation, with no result mission or
+host sweep. The selected native engineering/science chain remains prospectively `wsl_4070`;
+source/node-specific exact replay is required within each chain, not across these hosts.
+
+The finite test allocation is 400 full candidate executions (one nonempty H and F search at
+tick30, each replayed once), six standalone nominal calls (three audited and three original
+reference calls), <=106 candidate executions reserved for bounded prefix-reader checks,
+sparse best-of-eight/Lloyd checks at q1/2/5/6/30, original C byte parity and BS precedence,
+and original empty/missing-BS fallbacks including an F exit between replans. The adapter's
+separate q0/1/2/5/6/29/30/reference/cache-poison/cutoff/interference/order/failure checks are
+currently priced at 44 score attempts/36 RF pipeline attempts, with three actual model
+constructors and one mock constructor-failure attempt. Exact attempted counters, including
+failed assertions and reference work, will be read from the test invocation. These are within
+the single joint allowance above, not fresh allowances per file/reviewer. No native reset
+or step belongs in these finite tests. Remaining fixed native engineering is four61-step
+streams including the original reference, each followed by its actual-policy reader.
+
+Numerical semantics are now executable: lawful FP32 observation values decode to FP64;
+nominal motion/energy and modeled RF use NumPy/native FP64, and original proposals/actions
+retain their FP32 interface. Candidate ordering, original R score/travel tie tolerances,
+tracker association/capping and nominal source operation order are unchanged. Candidate
+trace fields and every native model output digest are exact same-source/node replays;
+the digest is an audit identity, not a cross-platform numerical equivalence claim.
+Independent adapter-vs-native-scalar checks use rtol1e-12/atol1e-7bps for rates/capacities,
+rtol1e-12/atol1e-10dB for SINR, and exact discrete association/routing decisions. Original
+native-derived metric tolerances remain explicitly named in the reader. No failed comparison
+will be made to pass by outcome-dependent tolerance relaxation. Raw nominal histories are
+hashed every joint tick; sample xyz/battery/margins/F/waits/crossings, scores and model RF
+identities remain in <=2KiB typed candidate records. Interrupted prefix reading re-executes
+only recorded completed ticks/RF calls, stops before absent scoring/ranking work, and bills
+recorded started-but-uncompleted attempts separately instead of retrying unknown work.
+An incomplete batch returns its preserved summary to one prefix reader and still exits
+nonzero after reading; this is neither a successful scientific panel nor a retry grant.
+
+The same finite allowance also includes one all-prior-F nonempty search: four identical
+starting layouts are still scored, no member sweep is legal, current physical targets stay
+fixed and the original first-tie choice wins. This costs four candidate executions/12 RF
+calls, leaving <=102 candidate executions for prefix-reader checks. The engineering review
+identified two pre-query omissions: compact per-native-user service/outage tails were missing,
+and a post-replay reader failure could double-count a completed arm as in-flight work. Both
+are being repaired before source acceptance, without changing control or scientific exposure.
+Per-user outage spells cover observed native steps only; fixed-H QoS normalization does not
+turn an early-terminated unobserved suffix into an observed outage. Per-UAV energy/charge/wait
+and post-step cutoff tails supplement the original mission totals.
+
+A second static partial-stage audit found that a last fully scored candidate does not prove
+that ranking/selection completed. The reader will stop before unknown final ranking effects
+and explicitly report incomplete-plan accepted/selected flags as not fully verifiable; it
+will still verify all recorded input/nominal/RF/scalar fields. Earlier completed plans and
+complete episodes retain exact ranking/selection checks. NaN score and travel sentinels mark
+unexecuted scalar assignments; an interrupted recorded finite assignment is reconstructed.
+Three real finite interrupted-query cases (after7 completed nominal ticks, during the third
+RF attempt, and before travel tie-break after the score) each replay only their recorded
+completed prefix. They add six candidate executions,134 joint ticks and11 attempted RF
+pipelines including the injected failed RF attempt, zero native steps/resets. Total currently
+planned candidate/standalone nominal executions are416, below the same512 joint allowance;
+reader protocol tests use explicit doubles and no additional real model/native calls.

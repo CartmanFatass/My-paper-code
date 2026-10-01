@@ -1,0 +1,36 @@
+{
+  "files": {
+    "configs/config_1.py": "f55b5f148c2664334b455305dea094591799eb0c0544237f7bb717bd1401ccb8",
+    "envs/pettingzoo/env_adapter.py": "8b42c1c3e7ef44cb814f79225b4af944b1018ad764dfeb17e9e1cc294df79d40",
+    "envs/pettingzoo/native/uav_geometry_backend.cpp": "1ff1eecb1c4a69ec402f4f2a506dca830e140844f8ed9c56f52e2c99c94791dd",
+    "envs/pettingzoo/relay/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "envs/pettingzoo/relay/belief_map.py": "b27750f09706cad0b97ec2689b703228e3f28a711877b4dd15707c8571b4ce04",
+    "envs/pettingzoo/relay/channel_geometry.py": "c16121dd5ecf82d5f706c236b71b8d1805446d0d9e483a8a4d5258b2657acb69",
+    "envs/pettingzoo/relay/energy_aware.py": "f6836b7b8d26e73b83888fa2eb5cb7d02e9ec565e35ddc3de0098c9746f367cf",
+    "envs/pettingzoo/relay/forced_relay.py": "79a61f1ed07ae9bb52d9cfb6163041b13fff13ecb9e3e30b0a97709f622bd973",
+    "envs/pettingzoo/relay/local_view.py": "560c8de76599c649b921be7c2324f5983c8ad48bf5ca93fe4e1871d2c4f46657",
+    "envs/pettingzoo/relay/progressive.py": "176ce4856725d2b2a8857aa42e80730c5e020996bf3411c8249494d49a8910f8",
+    "envs/pettingzoo/relay/routed_core.py": "f67869ae1de05c4f0d7e05e0dac0e4f13008d2f17251d07e20dc97c4ea44abf0",
+    "envs/pettingzoo/relay/routing.py": "1956f4cabbb3a2660fdbff9a4892327dfd16f02b2d497f64faef2f02a24645d5",
+    "envs/pettingzoo/uav_cpp_backend.py": "59b9915cf232d263930b2521eff2a933aeb2bca218eb2958dfce81ff52fc822c",
+    "experiments/candidates/energy_relay_benchmark/b01/evaluation.py": "15391e2eafff0876dd0bfa94a0d8f9f96558c76254e8d73cb8e55426735eccd7",
+    "experiments/candidates/energy_relay_benchmark/b01/feedback.py": "0cb8cc14d7d63ea6dd6bbc84c830e01c06837507acd70b8fd29ae6411a6c13d2",
+    "experiments/candidates/energy_relay_benchmark/b01/heuristic.py": "f82bbcc1d6586ae41acbb720b225b294c3dff812246e88f15f699b2d9146351e",
+    "experiments/candidates/energy_relay_benchmark/b01/observation.py": "baa416c9067504fdeb2656b376768ed06c3febe440c358c92c7281922791536f",
+    "experiments/candidates/uav_fleet_transmission/b08_anonymous_memory/controller.py": "4f8469b053e70e63ca93ad9636122a6f32ae9eb150802c671f005e25cef78933",
+    "experiments/candidates/uav_information_value/b02/controller.py": "6046f3db724c6893c16d1e256ff05603e5148c6239b37ead266e1446988bce3d",
+    "experiments/candidates/uav_information_value/batch.py": "ffa9e3b462e59134347da677f5c5ac4aa68265f3132c502919c5ca50bf5becfb",
+    "experiments/candidates/uav_information_value/controllers.py": "3f06d1a98f24ff6348ba4fb6bc505729f9c7df55b6cedac867d4a4eb5064cac2",
+    "experiments/candidates/uav_joint_transition/controllers.py": "57bfe8a3847f6864c5f2ef97c97aef80ef414e5dd6c5ff6c628ff68370749715",
+    "experiments/candidates/uav_joint_transition/motion.py": "d333c163a816f139b7d71ab4679553d50f742ef4c5aa7633a932c33f9732dbb5",
+    "experiments/candidates/uav_radio_placement/b01/placement.py": "6682930810fec111fa68e165bbb2790117627d986fbb61057742837dee504b4f",
+    "experiments/candidates/uav_service_auxiliary/b01/native.py": "873024b6f3e01705c07005d0dcc19185da2073f871dd93ae4cb739c5e739f990",
+    "experiments/candidates/uav_service_auxiliary/b04/evaluation.py": "0a3695e958c31b1eb97f6bbf38a1d41727f1c7f6cc679b4c046fcfda4b5487af"
+  },
+  "original_source_sha": "94f08627050b7d495b4c9e9af18db02ab17a5c1e",
+  "precursor_sources": {
+    "B08": "94f08627050b7d495b4c9e9af18db02ab17a5c1e",
+    "R": "8ec998ecac68f93697ab31c65d5732ab337f4203",
+    "nominal_motion": "18c9a6ba5094a19479eedc43977202877eb199d3"
+  }
+}
