@@ -1885,3 +1885,62 @@ I relied on the completed numerical reader for remaining physical and candidate 
 ### DM disposition of the full original answer
 
 I read the complete answer and accept its no-dissent recommendation. The important correction is to retain mixed, uncertain mean waiting effects and severe opposite individual tails rather than present B02 as uniform waiting harm. The startup windows are unequal, and the realized payload deduction is accounting rather than identified pilot causation. The old equal-sensing positive and the new raw-quality/transmitter positives remain capabilities, while complete paid package value is now directly adverse. I close this fixed purchase and retain competent PRIOR as the ordinary reference for this objective. No further study, repair or broad sensing/learning rejection follows. Full numerical correctness, scoped empirical support, adoption and next investment are separate conclusions; the next cross-question choice returns to Root.
+
+<a id="b02-final-cleanup"></a>
+### B02 publication, retained consumers and measured cleanup
+
+Complete evidence, original scientific review/DM disposition, idle standing and the directly
+affected topic2 shared understanding were published on main as
+`549250a183ceb7e27dd19aaeb5e1e973fe2d1652`. Topic8's existing non-free/non-nested information-value
+qualification still applies; no new mathematical or causal claim was needed. Source and all
+checks were already published before their respective executions. The source-bound B02
+comparison/reader and its small data-only tests remain useful reproducibility/verification
+consumers, so the inherited RF-uncertainty, local-history and user-waiting dependencies remain
+read-only and retained. No other direction's code was removed or rewritten.
+
+Reader observer generation5 checkpoint `9287472100b050314382ffe6` was drained and rearmed on
+the same claim as generation6, with the same running native identities. READY event
+`86f13dc854a0c5591e65235c` / wake `c25bca03-bf9d-4643-87fb-30f88b8dff9b` was then drained
+and consumed into generation7. The observer is stopped, all three actual jobs are ready,
+and there are no unconsumed events or active result processes. The independent scientific
+Reviewer, engineering Reviewer and Implementer have completed. No unread advice, queued
+successor or external producer remains. The reader outer launcher took28s; together with
+main24s, check22s and refused first launch13s, detached-launch shell elapsed is87s (not
+isolated CPU cost). No accepted worker was restarted or moved.
+
+After fresh artifact verification and completed-process/consumer checks, supported snapshot
+GC preview/apply removed the four exact disposable remote source targets:
+
+| wsl_4070 source snapshot under `/home/wu/projects/HMASD/.git/hmasd-launch-sources/` | Allocated bytes before | After |
+|---|---:|---:|
+| `f90ed2758c0a4c8a9e3629a6387e7ae1` (refused prelaunch) | 819,789,824 | 0 |
+| `6ed40097716a4e108328b0deab9a5bc8` (H8) | 819,814,400 | 0 |
+| `c4b8d0d58fff463d8a3454b4b03c10bf` (main) | 819,834,880 | 0 |
+| `6384ac9510f441caa3bfbfc23c77f0b6` (reader) | 819,826,688 | 0 |
+
+All four targets are absent; remote source allocation reclaimed3,279,265,792 B. Claims,
+source Git history, manifests, positive/adverse/failed evidence and canonical outputs remain.
+No backup, tarball or copied retention tree was made, and no collector blocker remains.
+
+After compact result publication, the following owned local redundant read copies/scratch
+were removed, all checked untracked before deletion:
+
+- `runs/uav_radio_information_cost/b02_integrated_package_a01/{summary.json,started.json,progress.json}`;
+- `runs/uav_radio_information_cost/b02_integrated_package_read_a01/{summary.json,reading.json,started.json,progress.json}`;
+- `runs/uav_radio_information_cost/b02_integrated_package_check_a02/{started.json,progress.json,read/summary.json,read/started.json,read/progress.json}`;
+- `temp/directions/uav_radio_information_cost/` (three spent observer request files, saved-JSON analysis script and its temporary display output);
+- the two `__pycache__/` directories under the B02 experiment and matching test package.
+
+These exact local targets measured2,535,424 allocated B before and0 after; all are absent.
+The complete original scientific answer's local worker/reader links refer to those temporary
+read copies. Their unchanged canonical bytes remain at the node/path/SHA256 bindings in
+`result.json` and above; the original answer was preserved verbatim, not silently edited.
+The tracked compact result, configuration, native status/manifests and full small H8 reading
+remain locally readable. Required134 NPZs total141,607,190 logical B and remain once remotely.
+
+Combined exact-target allocation reclaimed is **3,281,801,216 B** (remote source snapshots
+plus local redundant files/caches). This measures target allocation, not a claimed change in
+host free space or Git object storage. There are no disposable B02 targets blocked for cleanup;
+required canonical evidence, the stopped small observer record and source consumers are actual
+retained items. The fixed purchase is closed; broader question continuity is idle with no
+selected next experiment. Root owns any cross-question next selection.
