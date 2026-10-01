@@ -1,0 +1,29 @@
+{
+  "status": "VERIFIED",
+  "actual": {
+    "native_steps": 0,
+    "optimizer_steps": 0,
+    "refits": 0,
+    "scalar_states": 441696,
+    "user_distance_links": 110424000,
+    "peer_distance_pairs": 4416960,
+    "scalar_user_sinrs": 104067000,
+    "scalar_peer_sinrs": 9898140,
+    "logical_dense_sinr_slots": 121466400,
+    "observation_rows": 2208480,
+    "assignments": 441696,
+    "critic_rows": 32768,
+    "saved_episodes": 1376,
+    "saved_native_ticks": 352256,
+    "policy_requests": 440320,
+    "gate_requests": 88064,
+    "saved_update_groups": 256,
+    "scalar_power_links": 119257920
+  },
+  "progress": {
+    "stage": "episode",
+    "id": "evaluation_INIT90_w30012031_t0"
+  },
+  "reader_wall_seconds": 884.1527963138651,
+  "reader_cpu_seconds": 918.2826791030001
+}

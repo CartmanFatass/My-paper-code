@@ -10921,3 +10921,520 @@ absolute `/usr/bin/ssh`, draining the empty old queue and rearming40→41,
 the new job registered generation42. No historical job was resumed.
 As a native child I keep this turn active through the same-handle terminal
 reading; a registration or exit-zero alone is not a scientific conclusion.
+
+At09:25:46UTC observer42 produced checkpoint443b24fda2bb4fd8073b4adc;
+its wake97008109-5104-42d4-9d3e-624414411aa7 was rejected by the native-child
+App queue (`-32600`, direct app-server input not allowed). The active native
+turn received the deterministic checkpoint, drained it and rearmed the SAME
+claim as generation43/PID1915037, without restarting any scientific process.
+Recorded native identities remain consistent/running and both logs are empty.
+One checkpoint read of `reading-progress.json` shows1084/1376 episodes and
+all256 groups checked,0 new native/optimizer/refit work; the full worker is
+complete and the sequential reader remains in progress. This is technical
+progress, not an interpreted result. The original finite exposure and timing
+forecast remain unchanged.
+
+
+<a id="b10-complete-reading"></a>
+### B10 complete reading: both full joint learners lose inherited value; retain ordinary local opportunities and adverse consequences
+
+The one accepted operation finished at2026-10-01 09:29:32.440987UTC with
+exit0. Runner1234750 and supervisor1234749 are absent with consistent native
+identities. [Terminal status](../../../../runs/uav_fleet_adaptation/b10_joint_control_a01/terminal-status.json)
+and [native exit](../../../../runs/uav_fleet_adaptation/b10_joint_control_a01/process-exit.json)
+are collected. Observer43 emitted READY3cc3d13fd6ee4e94a57f20a0 at09:29:53UTC;
+wake9a196c45-0685-4276-a7da-1a3f51d7e808 received the same native-child queue
+rejection `-32600`. The active turn drained/consumed it, rearmed43→44 and
+stopped observation. Generation44 is stopped, wake is null, all historical
+events consumed and daemon1920170 absent. No operation was restarted and
+no reader, fit or native branch was repeated.
+
+The exact source is73278079be41ad8068b73594a32cde5841119032. The full reader
+is VERIFIED, with all1,376 complete episodes,352,256 saved native steps,
+441,696 scalar states,2,208,480 local rows,119,257,920 scalar power links,
+440,320 actual policy requests,88,064 masks,32,768 critic rows and all256
+training groups checked. It reconstructs every actual saved policy/prior/CJ
+law and chosen category, old-mask timing, scalar radio/observation/assignment,
+movement/reward, pregroup critic values, targets/advantages and first-epoch
+loss algebra. All pregroup/final model identities and optimizer hash chains,
+finite tensors and actual final Adam moments/512 steps per parameter per fit
+pass. Maximum errors are radio/observation/prior prediction/critic0,
+reward1.387779e-16 and policy4.485995e-15. Reader exposure is0 native steps,
+0 optimizer steps and0 refits. This does **not** independently replay later-
+epoch gradients or Adam updates; the fixed reader scope remains unchanged.
+
+[Compact complete panel](../../../../runs/uav_fleet_adaptation/b10_joint_control_a01/publication.json)
+contains all15 levels and32 declared contrasts for18 principal measures,
+paired world vectors, pointwise intervals, adverse-world lists and the full
+cost summary. It is1,056,941B/SHA256
+`a78ebbe0318fcb48f9b16f5dffdf5b88cc59cf5a538a5e14ff0d202798ce6f2c`.
+Full summary, full reading and all raw/checkpoint evidence remain in the ONE
+canonical configured-node output:
+`wsl_4070:/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b10_joint_control_a01/`.
+Freshly verified bulk identities are:
+
+| Artifact | Bytes | SHA256 |
+| --- | ---: | --- |
+| summary.json | 20033143 | c64805727d97a413c29bad3820106ac0d7e552b2860ca00bb0030edd2222c6ab |
+| reading.json | 9645541 | e72add4e371cab3922dde51427bd938d2730c8ec0633c1219f2e62f37684e187 |
+| episodes.jsonl | 7681778 | a2b3ccef14b180393bd1b08d858bc24c3272179c09d29eb43716526c409fc39f |
+
+At collection this canonical output has1,647 files and2 subdirectories,
+1,115,774,100 logical bytes and1,119,678,464 allocated bytes including its
+three directories. The1,376 raw NPZ files occupy998,859,132 compressed bytes
+(2,876,729,536 uncompressed array bytes);258 assets are256 model-only pregroup
+snapshots plus2 actual final model/Adam checkpoints,78,468,874 logical bytes.
+No new bulk file was Git-added or copied into another retention tree.
+
+**Fixed estimand and complete outcomes.** The32 final worlds are30012000–30012031;
+two stochastic tapes are averaged within world, deterministic C_A/C_ZERO/CJ
+are run once. The20,000 shared percentile bootstrap draws use30013041.
+The intervals below are descriptive, pointwise and conditional on the retained
+original P0/HIDDEN assets and each separately reported training block. They
+are not simultaneous-comparison coverage, independent-parent replication,
+training-population inference, an equivalence test or confirmation. No endpoint
+is selected or pooled as a replacement for the other.
+
+| Program | J | Mean service | Quality | Service p10 | Minimum service | Path m/UAV | Transmitter on fraction | Silent travel m/team | Episode CPU-s |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| J0 | 0.369613 | 22.644958 | 0.175280 | 17.156250 | 9.718750 | 4062.423622 | 0.891113 | 2581.586278 | 0.483251 |
+| J1 | 0.366451 | 22.642090 | 0.164871 | 17.085938 | 9.515625 | 6130.037610 | 0.909814 | 3075.714842 | 0.510490 |
+| INIT90 | 0.392600 | 24.254517 | 0.176789 | 19.054688 | 10.546875 | 3888.509285 | 0.897363 | 1959.456699 | 0.503256 |
+| P0_A | 0.389390 | 24.042664 | 0.175975 | 20.921875 | 11.812500 | 3334.981968 | 1.000000 | 0.000000 | 0.385111 |
+| P0_ZERO | 0.394198 | 24.359192 | 0.177232 | 21.242188 | 13.156250 | 3261.062909 | 0.993799 | 149.098693 | 0.378237 |
+| P0_HIDDEN | 0.390667 | 24.143311 | 0.175536 | 19.046875 | 10.593750 | 3915.435712 | 0.894385 | 2106.573745 | 0.435818 |
+| Bstar0_A | 0.392585 | 24.259216 | 0.176519 | 20.046875 | 10.765625 | 4597.108965 | 1.000000 | 0.000000 | 0.442751 |
+| Bstar0_ZERO | 0.396474 | 24.529541 | 0.176868 | 20.835938 | 11.921875 | 4564.798581 | 0.995459 | 189.569836 | 0.448666 |
+| Hdirect_A | 0.391694 | 24.157898 | 0.178279 | 20.679688 | 11.796875 | 3316.943621 | 1.000000 | 0.000000 | 0.429654 |
+| Hdirect_ZERO | 0.398213 | 24.583557 | 0.180144 | 21.195312 | 12.796875 | 3244.374696 | 0.995898 | 149.390613 | 0.424277 |
+| G_A | 0.369033 | 22.364502 | 0.186433 | 19.070312 | 11.468750 | 3613.511433 | 1.000000 | 0.000000 | 0.367979 |
+| G_ZERO | 0.371314 | 22.483215 | 0.188498 | 19.351562 | 12.437500 | 3464.416498 | 0.995068 | 157.130371 | 0.368716 |
+| C_A | 0.331498 | 19.755615 | 0.183066 | 18.843750 | 11.562500 | 2151.650360 | 1.000000 | 0.000000 | 0.259080 |
+| C_ZERO | 0.336520 | 20.024292 | 0.187266 | 19.531250 | 12.656250 | 2071.251605 | 0.989941 | 126.862380 | 0.261053 |
+| CJ | 0.337123 | 20.021851 | 0.189392 | 19.468750 | 12.656250 | 2259.426996 | 0.990625 | 123.112380 | 0.281734 |
+
+| Declared contrast | J [pointwise95%] | Mean service [pointwise95%] | Quality mean | Service p10 mean | Minimum mean | Path m/UAV mean | J worlds +/−/= |
+| --- | --- | --- | ---: | ---: | ---: | ---: | --- |
+| J0-INIT90 | -0.022987 [-0.032303, -0.014040] | -1.609558 [-2.315981, -0.936806] | -0.001509 | -1.898438 | -0.828125 | +173.914337 | 6/26/0 |
+| J0-P0_A | -0.019776 [-0.032247, -0.007437] | -1.397705 [-2.303296, -0.506950] | -0.000695 | -3.765625 | -2.093750 | +727.441654 | 13/19/0 |
+| J0-P0_ZERO | -0.024585 [-0.037382, -0.012192] | -1.714233 [-2.677005, -0.808159] | -0.001953 | -4.085938 | -3.437500 | +801.360713 | 9/23/0 |
+| J0-P0_HIDDEN | -0.021054 [-0.032884, -0.009663] | -1.498352 [-2.376173, -0.654539] | -0.000257 | -1.890625 | -0.875000 | +146.987909 | 9/23/0 |
+| J0-Bstar0_A | -0.022971 [-0.035852, -0.010125] | -1.614258 [-2.545973, -0.688658] | -0.001239 | -2.890625 | -1.046875 | -534.685343 | 10/22/0 |
+| J0-Bstar0_ZERO | -0.026861 [-0.040157, -0.013925] | -1.884583 [-2.856628, -0.943779] | -0.001588 | -3.679688 | -2.203125 | -502.374959 | 8/24/0 |
+| J0-Hdirect_A | -0.022081 [-0.034221, -0.010293] | -1.512939 [-2.390088, -0.664423] | -0.002999 | -3.523438 | -2.078125 | +745.480001 | 10/22/0 |
+| J0-Hdirect_ZERO | -0.028600 [-0.041855, -0.015758] | -1.938599 [-2.902240, -1.021664] | -0.004865 | -4.039062 | -3.078125 | +818.048925 | 8/24/0 |
+| J0-G_A | +0.000580 [-0.015771, +0.015472] | +0.280457 [-0.948199, +1.392711] | -0.011154 | -1.914062 | -1.750000 | +448.912189 | 19/13/0 |
+| J0-G_ZERO | -0.001701 [-0.015354, +0.012113] | +0.161743 [-0.862775, +1.215970] | -0.013218 | -2.195312 | -2.718750 | +598.007124 | 15/17/0 |
+| J0-C_A | +0.038115 [+0.020744, +0.055386] | +2.889343 [+1.671480, +4.099985] | -0.007786 | -1.687500 | -1.843750 | +1910.773262 | 23/9/0 |
+| J0-C_ZERO | +0.033094 [+0.016600, +0.050222] | +2.620667 [+1.430901, +3.851080] | -0.011986 | -2.375000 | -2.937500 | +1991.172017 | 22/10/0 |
+| J0-CJ | +0.032490 [+0.016204, +0.049337] | +2.623108 [+1.445554, +3.843388] | -0.014112 | -2.312500 | -2.937500 | +1802.996626 | 22/10/0 |
+| J1-INIT90 | -0.026149 [-0.034239, -0.017991] | -1.612427 [-2.162419, -1.052489] | -0.011917 | -1.968750 | -1.031250 | +2241.528325 | 5/27/0 |
+| J1-P0_A | -0.022939 [-0.036621, -0.008762] | -1.400574 [-2.353702, -0.415213] | -0.011103 | -3.835938 | -2.296875 | +2795.055642 | 10/22/0 |
+| J1-P0_ZERO | -0.027748 [-0.040847, -0.013853] | -1.717102 [-2.643434, -0.733945] | -0.012361 | -4.156250 | -3.640625 | +2868.974702 | 8/24/0 |
+| J1-P0_HIDDEN | -0.024217 [-0.032656, -0.015582] | -1.501221 [-2.093567, -0.891110] | -0.010665 | -1.960938 | -1.078125 | +2214.601898 | 3/29/0 |
+| J1-Bstar0_A | -0.026134 [-0.036110, -0.016316] | -1.617126 [-2.294069, -0.946524] | -0.011647 | -2.960938 | -1.250000 | +1532.928645 | 5/27/0 |
+| J1-Bstar0_ZERO | -0.030023 [-0.040476, -0.019836] | -1.887451 [-2.598029, -1.190587] | -0.011996 | -3.750000 | -2.406250 | +1565.239030 | 4/28/0 |
+| J1-Hdirect_A | -0.025244 [-0.037666, -0.013156] | -1.515808 [-2.359142, -0.690668] | -0.013408 | -3.593750 | -2.281250 | +2813.093989 | 9/23/0 |
+| J1-Hdirect_ZERO | -0.031762 [-0.043734, -0.019441] | -1.941467 [-2.775159, -1.087572] | -0.015273 | -4.109375 | -3.281250 | +2885.662914 | 7/25/0 |
+| J1-G_A | -0.002582 [-0.017454, +0.012703] | +0.277588 [-0.809270, +1.400452] | -0.021562 | -1.984375 | -1.953125 | +2516.526178 | 17/15/0 |
+| J1-G_ZERO | -0.004864 [-0.018666, +0.009764] | +0.158875 [-0.840163, +1.243903] | -0.023627 | -2.265625 | -2.921875 | +2665.621113 | 13/19/0 |
+| J1-C_A | +0.034952 [+0.013752, +0.056095] | +2.886475 [+1.418274, +4.344740] | -0.018194 | -1.757812 | -2.046875 | +3978.387250 | 21/11/0 |
+| J1-C_ZERO | +0.029931 [+0.010781, +0.049244] | +2.617798 [+1.259943, +3.984143] | -0.022394 | -2.445312 | -3.140625 | +4058.786005 | 21/11/0 |
+| J1-CJ | +0.029327 [+0.010364, +0.048473] | +2.620239 [+1.271590, +3.973830] | -0.024520 | -2.382812 | -3.140625 | +3870.610614 | 21/11/0 |
+| P0_ZERO-P0_A | +0.004809 [-0.003939, +0.014174] | +0.316528 [-0.310672, +0.979555] | +0.001258 | +0.320312 | +1.343750 | -73.919060 | 15/9/8 |
+| Bstar0_ZERO-Bstar0_A | +0.003889 [-0.002261, +0.010458] | +0.270325 [-0.154912, +0.714906] | +0.000349 | +0.789062 | +1.156250 | -32.310384 | 17/10/5 |
+| Hdirect_ZERO-Hdirect_A | +0.006519 [-0.000723, +0.014344] | +0.425659 [-0.067445, +0.959541] | +0.001865 | +0.515625 | +1.000000 | -72.568925 | 17/7/8 |
+| G_ZERO-G_A | +0.002281 [-0.009584, +0.012452] | +0.118713 [-0.760387, +0.866579] | +0.002065 | +0.281250 | +0.968750 | -149.094935 | 17/6/9 |
+| C_ZERO-C_A | +0.005021 [-0.014845, +0.023782] | +0.268677 [-1.170532, +1.590579] | +0.004200 | +0.687500 | +1.093750 | -80.398755 | 13/6/13 |
+| INIT90-P0_HIDDEN | +0.001933 [-0.003784, +0.007784] | +0.111206 [-0.292424, +0.526872] | +0.001252 | +0.007812 | -0.046875 | -26.926427 | 17/15/0 |
+
+Both full learners lose J, mean service and service-p10 against actual INIT90;
+J0−INIT90 is−.022986507/−1.609558 service and J1−INIT90−.026149186/−1.612427,
+with all four J/service intervals wholly negative. There are26/27 adverse J
+worlds respectively. Both endpoints also lose J/service against every retained
+P0_A/P0_ZERO/P0_HIDDEN/Bstar0_A/Bstar0_ZERO/Hdirect_A/Hdirect_ZERO control,
+with negative pointwise J/service intervals in all14 endpoint/control cells.
+J0/J1−Hdirect_ZERO are−.028599759/−.031762438J and−1.938599/−1.941467 service;
+service-p10 is lower4.039063/4.109375 and minimum lower3.078125/3.281250.
+Those p10/minimum intervals are also negative. J1 has an additional quality
+loss against INIT90 and every retained control; J0 quality differences against
+these controls remain unresolved. Complete component intervals and every
+adverse world remain in the compact and full readings.
+
+Narrower competence is real: both endpoints exceed C_A/C_ZERO/CJ in mean
+J/service with positive pointwise intervals. J0/J1−CJ are+.032489924/+.029327245J
+and+2.623108/+2.620239 service. Both nevertheless lose quality, p10 and minimum
+against CJ and travel1,803/3,871m farther per UAV. These C-family gains do not
+establish benefit from the new learning because the actual initial and stronger
+retained alternatives perform better. Neither endpoint establishes a J/service
+increment over G_A/G_ZERO; quality/p10/minimum are adverse against both G
+controls. This is not uniform inferiority on every measure: J0 travels535/502m
+less than Bstar0_A/ZERO (both path intervals negative) while losing mean service;
+its transmitter on-time is.891113 versus INIT90.897363 (difference−.00625,
+interval[−.011865,−.000830]). J1 instead raises on-time by.012451 and travels
+2,241.528m more than INIT90 ([+1,964.988,+2,509.093]). No energy model, latency
+requirement or task-specific travel/exposure exchange rate was purchased.
+
+Actual INIT90−P0_HIDDEN smoothing gives+.001932572J[−.003783835,+.007784136]
+and+.111206 service[−.292424,+.526872], with unresolved p10/minimum/path changes.
+It is not equivalent to or an upgrade over the deterministic HIDDEN gate.
+All five ordinary ZERO−A mean J/service intervals span zero, while their mean
+minimum-service intervals are positive: P0+1.343750, Bstar0+1.156250,
+Hdirect+1, G+.968750 and C+1.093750. Bstar0 also improves p10+.789063
+[+.109375,+1.570313]. This retains ordinary conditional tail capability;
+team episode minima/p10 are not individual-user continuity or safety guarantees.
+
+**Executed learning, finite initialization and prior use.** Both38198-parameter
+actors are fully trainable and move: J0/J1 parameter L2 changes1.828459/1.836621,
+30,374/30,242 parameter entries change. Their35457-parameter critics move
+1.322805/1.409293. Each performs512 actor and512 critic Adam steps; all512
+actor gradients per fit are nonzero and clipped at the prescribed.5. Actual
+unclipped actor norms are1.971893–8.240912 and2.521461–8.751316; maximum
+recorded clipped norms are.499999940/.499999881. Mean clipped-ratio fractions
+are.014810/.017697, maxima.114063/.134375, with273/278 epochs containing a
+clipped ratio. These are active finite updates, not convergence evidence or
+a diagnosis of the loss. First-epoch density identities, sums of five individual
+surrogates, target dtypes and all final optimizer states pass; later gradient
+replay remains outside scope.
+
+The4,352 actual initialization-fidelity rows (four initial training episodes
+and64 INIT90 final episodes) have raw logits exactly equal to duplicated
+original P0 outputs on this host. Maximum probability difference from the
+original finite product law is8.881784e-16, maximum TV4.857976e-16 and
+row-weighted mean TV9.504351e-17. This validates the observed finite
+initialization; it does not prove universal floating-point identity or original
+P0_HIDDEN trajectory identity. INIT90 was evaluated as its actual54-category
+program rather than replaced by an algebraic assumption.
+
+All64 final episodes of EACH fitted endpoint differ from their paired actual
+INIT90 in requested categories, commands, physical positions and transmitter
+masks. Each endpoint has4,096 eligible final rows. On its own visited contexts,
+J0/J1's OFF marginal departs from the saved original frozen HIDDEN prior by
+mean absolute.068791/.153428 (maximum.875869/.873088), with marginal bit modes
+opposing the frozen preference in105/391 rows. Actual sampled bits match that
+preference in3,577/3,350 rows, versus INIT90's3,674/4,096. Thus the full law
+changes and sometimes overrides the fixed prior; this is not a direct
+measurement of prior necessity or a native causal attribution of reward.
+The parent body used by HIDDEN stays frozen and byte-identical, distinct from
+the trainable actor. The saved probability/context reading makes0 new model
+or controller queries and is not a prior-removal experiment.
+
+Final eligible OFF fractions are.544434/.450928/.513184 for J0/J1/INIT90;
+mean motion entropies.465475/.426057/.508135. Requested zero-motion decisions
+average158.906/62.766/171.250 of320 per episode. J1's much longer physical path
+coexists with far fewer zero-motion requests; this descriptive association does
+not identify why reward fell. Actual silent travel averages2,581.586/3,075.715/
+1,959.457m per team and silent moving UAV-ticks68.531/101.203/59.313 per episode.
+Clipping alters requested command displacements on74.141/68.016/32.094 UAV-ticks
+per episode. Hence silent movement, command execution and boundary effects are
+observed, not just available output labels.
+
+Every eligible actor is ON in the old decision mask; there are0 noneligible
+OFF requests. J0/J1/INIT90 final histories contain2,198/1,825/2,079 old-silent
+rows, which choose before their forced reactivation. The fixed13/13/13/13/12
+per-member opportunity imbalance is retained. The reader verifies all five
+old rows are queried before one setter call and the setter's refreshed rows
+are not used for that decision. More available action representation and
+actual mask/motion use did not give a useful learned increment in this purchase.
+Neither a failure to activate nor the B09 residual corridor is an explanation
+established by this different complete comparison.
+
+**First/later consequences and positive/adverse histories.** Both endpoints
+lose against INIT90 in the first128 and last128 native ticks. J0 differences
+are−.023929822/−.022043193J, J1−.028027798/−.024270575; all four descriptive
+intervals are negative. First/last32 training episode averages also decline
+(J0 .398718→.371271J, J1 .381088→.369593), but those are different training
+worlds and changing policies, not a controlled learning curve or overfitting
+proof. The matched final-panel initialization comparison is the relevant
+complete learning increment.
+
+Posthoc illustrative readings preserve both signs and both tapes; they are
+not extra independent units or additions to the32 declared contrasts:
+
+- J0−INIT90 at30012011 is−.105771691J/−8.093750 service after averaging tapes,
+  yet quality is+.025136 and minimum+.5. Both first changed four-tick blocks
+  are initially favorable: J+.002850/+.068678 and service+.75/+5.25. Complete
+  tape losses are−.116509/−.095034J and−9.074219/−7.113281 service; later-half
+  J differences are−.160011/−.152024. A positive early native block did not
+  predict a useful full trajectory.
+- J0's positive30012019 gives+.048904967J/+3.736328 service, p10+3/minimum+4.5,
+  but quality−.011345 and path+503.505m/UAV. Its first changed blocks instead
+  loseJ−.023565/−.087404 and service−1/−6.25. Both full tapes become positive.
+- J1's adverse30012022 gives−.063353493J/−4.312500 service, p10−7/minimum−9.5
+  and path+3,269.215m/UAV. Both first blocks and both full tapes lose service;
+  tape1 minimum falls11.
+- J1's positive world mean30012012 is+.016853268J/+1.277344 service, but its
+  tapes disagree: +.083133/+5.843750 versus−.049426/−3.289063. The favorable
+  tape starts with−.038870J/−2.75 service; the adverse tape starts+.007378J
+  with unchanged first-block service. Mean path still rises1,239.276m/UAV.
+
+All eight illustrated pairs have their first requested-category difference
+at tick0 with the same starting observations; positions differ after the first
+move. They establish real policy consequences and large exceptions, without
+identifying a common learned motion/radio mechanism or a rule for choosing
+favorable cases. No new native branch or same-input policy sensitivity was run.
+
+**Ordinary CJ's narrow executed capability.** Across its2,048 eligible decisions,
+197 OFF scores predict positive local service;5 are selected as strict positive
+OFF wins and all5 use the prescribed zero motion. The other91 OFF decisions
+are zero-service fallbacks. CJ differs physically from C_ZERO in exactly five
+worlds and is identical in the other27. Its first divergences are ticks8/36/32/12/12
+in30012002/17/20/26/30. At each divergence the old observations, all held commands
+and all positions through the next four ticks are equal; only the eligible
+physical transmitter bit differs. Those already-executed four-tick native
+comparisons all improve J/service: respectively+.039984/+2.25,
++.055082/+3, +.091826/+6.25, +.043784/+2.5 and+.019484/+1.25.
+The ordinary local intervention therefore has a real immediate capability.
+
+The complete trajectories do not preserve every gain. In those same five
+worlds, full CJ−C_ZERO J is−.025874,+.031938,−.000277,+.017314,−.003784 and
+service−2.140625,+1.617188,−.257813,+.953125,−.25. Each travels farther by
+957.257/3,131.045/403.882/1,495.487/33.941m per UAV. Across all32 world means,
+CJ−C_ZERO is+.000603669J/−.002441 service/+188.175m per UAV: two J gains,
+three losses,27 identical. These are descriptive saved-panel readings; no new
+CJ−C_ZERO bootstrap contrast was added to the fixed32. CJ is retained as a
+lawful ordinary capability and comparator, not a demonstrated full-horizon
+upgrade or global bound. Local observed-user scoring, fixed visible peers and
+unknown-interference calibration still omit unseen users and the old-silent
+peer's impending activation; no new information right is inferred.
+
+**Outages and a concrete retained-prior adverse.** Training has20 zero-service
+ticks in5 episodes, maximum streak6; final evaluation has19 zero-service ticks
+in6 episodes, all in30012025. The final programs/ticks are P0_HIDDEN both tapes
+[5,6,7], INIT90 both tapes[5,6,7], J0 tape1[4,5,6,7] and J1 tape1[4,24,25]
+(maximum J1 streak2). All other final programs have0 zero-service ticks on this
+panel. All six outage episodes have the eligible member1 OFF at the affected
+rounds; four active transmitters do not provide a service guarantee.
+
+For both tapes at30012025, P0_HIDDEN and INIT90 share P0_A's exact positions
+through tick8, old observations at tick4 and held tick4–7 commands. Original
+HIDDEN predicts a small positive advantage (.000825782/.000761071) with nine
+current capped users for member1. Switching it OFF changes service[10,10,10,10]
+to[1,0,0,0] and block J by−.210272/−.211033. This is an already-executed
+common-prefix physical-mask adverse, not a new replay or a saved-context
+model ablation. It isolates this immediate held-block consequence, not full-
+horizon mediation or the overall cause of learning loss. The case belongs to
+the retained prior/initial package itself and coexists with B08's positive
+finite gate evidence; it cannot by itself explain J0/J1's loss against INIT90.
+The learned episodes already have different motion histories, so their exact
+outages are not assigned to that same single cause.
+
+**Complete measured price and reading limits.** New exposure is2 fits,
+512 training episodes/131,072 native steps plus864 final episodes/221,184
+native steps. There are163,840 collected actor and32,768 collected critic rows,
+655,360 actor and131,072 critic epoch replay rows,1,024 updates per optimizer
+type,440,320 policy requests,409,600 addressed categorical uniforms and0
+separate bit draws. One constructor performs one additional unscored reset;
+all97,249,075 native dense power slots (including constructor),91,944,580
+unique distance pairs and24,217,600 mask-refresh SINR slots are charged.
+There are88,064 mask installations and no extra native calibration or pilot.
+
+Each worker/full-reader pass incurs190,834 actual joint-network forwards,
+143,682 frozen-P0 forwards,268,410 helper calls,1,339,956 C candidate paths,
+5,359,824 modeled ticks and28,060,230 controller power links under the actual
+private episode/model-version caches. Each also pays49,152 HIDDEN predictions,
+81,920 Hdirect target vectors,40,960 G tail reductions,2,048 CJ OFF scores/
+8,192 logical OFF ticks and9,077 repeated CJ setup links. No setup-reuse
+optimization was credited. Including collection, epoch replay and independent
+reader gives1,037,028 joint actor rows,287,364 frozen-P0 rows and196,608 critic
+rows. The reader additionally pays119,257,920 scalar radio links and makes
+0 new native, optimizer or refit calls.
+
+Worker perf-counter wall/process CPU is832.551875/860.761120s; reader
+884.152796/918.282679s; enclosing entry-through-reader scope
+1,717.666552/1,780.045981s, peak731,560KiB. Fit bodies231.995084/239.031127
+and235.132069/243.033867s are nested in worker totals and are not added again.
+Native acceptance-to-terminal UTC span is1,781.917907s, a different observed
+clock/scope from the recorded perf-counter span; no clock-cause diagnosis or
+isolated-speed guarantee is inferred. Final writes, admission, staging,
+transfer, source/engineering/review support and most interactive reading are
+additional/incompletely metered. Four bounded saved-array arithmetic readings
+above used1.131013 process CPU-s/1.087629 perf-counter seconds,0 model/controller/
+native queries,0 optimizer steps; further metadata/table reduction is unmetered.
+The earlier finite correctness calls and zero-science wrapper/kernel refusals
+remain separately accounted above. The12–24 support-hour-equivalent was a
+forecast, not measured person-hours. Reused B02–B09 acquisition remains incurred;
+B02–B10 cumulative exposure is22 fits+2 calibrations/4,055,080 native steps,
+with older B01 additional and no invented homogeneous cumulative CPU estimate.
+
+**Working explanation at this reading boundary.** Both independent training
+blocks changed complete joint control and lost useful inherited performance;
+this finite unrestricted-head/full-body program did not develop its own
+starting capability under the selected local contract. Active movement,
+bit-law changes and accurate initial finite law remove nonactivation and an
+unverified initialization substitution as accounts of this result. The outcome
+does not identify an optimization, credit-assignment, information or representation
+cause; in particular it does not retroactively diagnose B09. Task opportunity
+remains real (including CJ's five native early gains), representation/learning
+activation is observed, but useful complete-package learning is not established.
+B08's conditional gate capability, original parents, ordinary ZERO tails,
+strong P0/Bstar/Hdirect alternatives, narrow endpoint C gains and every adverse
+are retained together.
+
+The prescribed unchanged B10 purchase has reached its adverse branch. My
+proposed disposition is to stop it without extra worlds, parents, epochs,
+mask/probability tuning or confirmation, retain the broader local joint-learning
+question as unresolved, and return this bounded evidence to Root for its next
+cross-question allocation. This is a conditional investment judgment, not
+an empirical refutation of joint learning or proof that a different method
+cannot help. A fresh context-isolated Scientific Reviewer is independently
+reading the actual evidence and original selection advice; its complete original
+response and the resolved disposition follow below. No new study is selected
+by this paragraph.
+
+
+<a id="b10-independent-disposition"></a>
+### B10 complete original Scientific Reviewer and resolved disposition
+
+The registered `hmasd-research-critic` task `b10_result_review` ran with
+`fork_turns="none"`, no inherited DM/Root conversation and read-only source/
+saved-evidence authority. It reconstructed the outcomes before reading the
+proposer/Root interpretation. Its final original response, received09:44:12UTC,
+is reproduced COMPLETELY below (12332 characters/12449 UTF-8 bytes,
+SHA256`c7f5e9a642ebc157c0ed0502a5b32980c11013cd30220d674a3bc0a1f9a79376`). The frozen outcome branches were disclosed;
+this is context-independent review, not allocation blinding. It made0 new
+native/model/controller/optimizer calls and0 reader reruns; exact actual
+coverage and reliance limits are in its original response. All snapshot and
+staging consumption is released. No material dissent was reported.
+
+> **Stop the unchanged B10 purchase; retain the controllers and the narrow CJ capability.** Both completed training blocks reduce native performance relative to their actual INIT90 starting program and the retained P0/HIDDEN asset. This is an adverse finite-development result, not evidence that joint local control is generally unlearnable.
+>
+> No DM/Root conversation was inherited. The assignment disclosed the frozen outcome branches; I reconstructed B10’s results before reading the original Oracle recommendation, Root adoption and historical dispositions. This was a separate-context result review, not an allocation-blinded study.
+>
+> The consequential reward comparisons are:
+>
+> | Reference | J0 − reference: mean J [descriptive 95% interval] | J1 − reference |
+> |---|---:|---:|
+> | INIT90 | −.022987 [−.032303, −.014040] | −.026149 [−.034239, −.017991] |
+> | P0_HIDDEN | −.021054 [−.032884, −.009663] | −.024217 [−.032656, −.015582] |
+> | Bstar0_ZERO | −.026861 [−.040157, −.013925] | −.030023 [−.040476, −.019836] |
+> | Hdirect_ZERO | −.028600 [−.041855, −.015758] | −.031762 [−.043734, −.019441] |
+> | G_ZERO | −.001701 [−.015354, +.012113] | −.004864 [−.018666, +.009764] |
+> | CJ | +.032490 [+.016204, +.049337] | +.029327 [+.010364, +.048473] |
+>
+> These are pointwise paired-world intervals, averaging the two stochastic tapes within each world. They condition on the fitted endpoints and the same original P0/HIDDEN parents. They provide neither training-population precision, independent-parent replication, simultaneous dominance nor equivalence. The two fitted blocks remain separate. [Complete compact evidence](/home/fires/hmasd-wsl/runs/uav_fleet_adaptation/b10_joint_control_a01/publication.json).
+>
+> **The strongest simpler explanation is retained competence followed by adverse finite development.** Both endpoints retain enough inherited competence to outperform C/CJ on mean J, but that does not establish an increment from training. INIT90 and several retained compositions perform better. Neither choosing the better fitted block nor treating deterministic C as the sole baseline would answer the selected question.
+>
+> The native components reinforce that reading:
+>
+> | Program | Mean J | Mean served | Service p10 | Mean episode minimum | Travel, m/UAV |
+> |---|---:|---:|---:|---:|---:|
+> | J0 | .369613 | 22.6450 | 17.1563 | 9.7188 | 4062.4 |
+> | J1 | .366451 | 22.6421 | 17.0859 | 9.5156 | 6130.0 |
+> | INIT90 | .392600 | 24.2545 | 19.0547 | 10.5469 | 3888.5 |
+> | P0_HIDDEN | .390667 | 24.1433 | 19.0469 | 10.5938 | 3915.4 |
+> | Hdirect_ZERO | .398213 | 24.5836 | 21.1953 | 12.7969 | 3244.4 |
+>
+> Relative to INIT90, both fits lose about **1.61 served users per tick** and **1.9 service-p10 users**. J1 additionally loses .011917 quality and adds **2241.5 m/UAV**. J0’s quality change is small, but its service loss remains substantial.
+>
+> Losses occur in both episode halves: J0−INIT90 J is −.023930 first-half and −.022043 later; J1 is −.028028 and −.024271. A startup-only explanation therefore does not fit the aggregate evidence. Reward and service share their arithmetic, so these are not independent confirmations.
+>
+> There are narrower tradeoffs. J0 travels about 502 m/UAV less than Bstar0_ZERO, while losing J, service and tails. J0 uses 89.111% of transmitter ticks versus INIT90’s 89.736%; J1 uses 90.981%. Their gains over C/CJ coexist with lower quality, p10 and minimum service, and substantially more travel. No measured energy utility turns these into a preferred controller.
+>
+> **Learning and transmitter use were active.** Each fit completed 128 groups and 512 actor plus 512 critic steps. All recorded actor gradients were nonzero. Actor displacement is approximately 4.1% of initial parameter norm, and the actual final Adam states contain finite moments and step 512 for every parameter. Near-zero first-epoch mean surrogate losses follow normalized advantages; they do not indicate absent optimization.
+>
+> Eligible OFF execution was substantial:
+>
+> - J0: 8,882/16,384 training opportunities and 2,230/4,096 evaluation opportunities.
+> - J1: 7,600/16,384 training opportunities and 1,847/4,096 evaluation opportunities.
+>
+> No noneligible OFF request occurred. J0 increases aggregate OFF use relative to INIT90 while J1 decreases it; both lose performance. Aggregate silence frequency alone therefore does not explain their common adverse result.
+>
+> The initialization checks also matter. Across all 4,352 recorded eligible initialization-fidelity rows, raw duplicated logits match exactly; maximum probability discrepancy is \(8.88\times10^{-16}\), and maximum total variation is \(4.86\times10^{-16}\). This supports the implemented initial product law on those executed rows. It does **not** make INIT90’s trajectories identical to P0_HIDDEN: the gate is smoothed and the single 54-category uniform changes sampling coupling. The actual INIT90 control correctly resolves that ambiguity.
+>
+> Requested and physical motion are distinct. J1 averages only 62.77 zero-motion requests per episode versus INIT90’s 171.25, alongside its much longer physical path. Native clipping and action aliases were retained. These observations support a consequential policy change, not a causal conclusion that excess travel, forgetting, the prior, PPO, shared credit or co-adaptation individually caused the loss. No such repair was identified.
+>
+> **Positive and adverse worlds remain consequential.** J0−INIT90 ranges from −.105772 in world 30012011 to +.048905 in 30012019; J1 ranges from −.063353 in 30012022 to +.016853 in 30012012. I inspected both tapes of these and other selected cases. Favorable worlds show real native capability, but do not supply a lawful prospective rule for obtaining it.
+>
+> The final panel contains **19 zero-service ticks in six episodes**, all in world 30012025:
+>
+> - P0_HIDDEN and INIT90: three ticks on each tape.
+> - J0: four consecutive ticks on tape 1.
+> - J1: ticks 4, 24 and 25 on tape 1, longest streak two.
+>
+> Other final programs have none on this panel. The J1 raw masks show four active transmitters at each outage. Eligibility is not a service guarantee; these finite counts do not establish reliability or attribute every outage to a particular learning mechanism.
+>
+> **CJ supplies a distinct, narrow ordinary capability.** My saved-data comparison found only five worlds where CJ and C_ZERO execute different programs. CJ makes 96 OFF decisions: 91 at zero observed count and five with positive observed count.
+>
+> At each first divergence, the saved commands and positions through the following four ticks are identical between CJ and C_ZERO; only the eligible transmitter bit differs:
+>
+> | World | First four-tick ΔJ | First four-tick Δserved | Complete-episode ΔJ |
+> |---|---:|---:|---:|
+> | 30012002 | +.039984 | +2.25 | −.025874 |
+> | 30012017 | +.055082 | +3.00 | +.031938 |
+> | 30012020 | +.091826 | +6.25 | −.000277 |
+> | 30012026 | +.043784 | +2.50 | +.017314 |
+> | 30012030 | +.019484 | +1.25 | −.003784 |
+>
+> Thus these are five executed immediate native improvements, not merely favorable local proxy scores. But the complete comparison has **two gains, three losses and 27 identical worlds**, with mean J +.000604. This additional CJ−C_ZERO reduction is diagnostic and post hoc, not another frozen primary contrast.
+>
+> The next boundary exposes the consequential coupling: each previously silent UAV is forced ON after choosing from its censored old row, with zero observed users. Its C_ZERO counterpart sees users. Subsequent motion changes in several cases, and the complete effects diverge. This supports preserving the immediate capability and the information/motion consequence together. It does not identify a sufficient repair or establish complete CJ superiority.
+>
+> **The recommended correction is retention plus a scoped stop.** The original prospective branches distinguished useful development beyond strong controls, recovery only from initialization, narrower C/CJ gains, ordinary capability and adverse development. The observed pattern selects the narrower C/CJ competence and adverse-development branches. The original advice’s central objection—ordinary competence may survive while another finite PPO update damages or rearranges it—is strengthened.
+>
+> B08’s conditional learned-gate positive remains valid historical evidence; B10 lacks RAW and is not a replication of that feature comparison. B09’s restricted focal/history result also retains its original scope. B10 changes the learning and physical-action contract, but supplies no common-cause explanation for their outcomes.
+>
+> No additional observation is necessary to decide this purchase. More evaluation worlds would refine fixed-policy precision rather than add independent learning evidence. An unchanged complete repetition would buy recurrence at another two fits and 352,256 native steps; the present two adverse endpoints give no compelling decision that this expenditure would resolve. CJ’s five immediate positives likewise do not justify an automatic refinement or expansion.
+>
+> The broader local-control question can remain a reserve. A later constructive conjecture need not first prove a mechanism or invent an architecture, but should predict a consequential complete outcome against the competent retained controls. Any additional information, timing or control rights must also be supplied to the appropriate ordinary comparator. No such successor is selected by this review.
+>
+> **The complete price exceeds the two fits.** B10 incurred 1,376 episodes, 352,256 native steps, 1,024 actor and 1,024 critic updates. Fit walls were 231.995 and 235.132 seconds, already included in worker totals. Worker wall/CPU were 832.552/860.761 seconds; reader 884.153/918.283; enclosing reported wall/CPU **1717.667/1780.046 seconds**, with peak RSS 731,560 KiB. The accepted-to-terminal UTC span is approximately 1781.918 seconds; these clock scopes should remain distinct.
+>
+> Worker work includes 440,320 policy requests, 190,834 joint-network rows, 143,682 frozen-network rows, 1,339,956 candidate trajectories and 28,060,230 controller power links. The reader repeats applicable policy work and reconstructs 441,696 scalar states and 119,257,920 scalar power links. Raw compressed files occupy 998,859,132 bytes. Correctness invocations add the recorded 26.70 wall/20.59 CPU seconds; preparation failures, staging, scientific/engineering support and publication remain additional. The 12–24 support-hour estimate is not measured labor. B02–B10 cumulative exposure is **22 fits, two calibrations and 4,055,080 native steps**, with B01 separate.
+>
+> My independent checks covered:
+>
+> - All 48 source hashes against local files, accepted snapshot and launch-commit blobs; original/staged asset hashes and original P0 tensor identity.
+> - Exact execution order, disjoint training/final worlds, shared initial-state bindings, episode-log equality and worker/reader comparison equality.
+> - All **154 scalar metrics across 15 levels and 32 contrasts**, including the fixed 20,000-resample intervals: 72,380 checked summary fields, with only rounding discrepancies up to \(2.73\times10^{-12}\). All compact metric records and adverse lists agree.
+> - All 1,376 raw-file hashes and all 258 checkpoint hashes; saved model chains, warm copies, optimizer-hash continuity and actual final moments/steps.
+> - Selected arithmetic and native traces from **101 raw episodes**, including all CJ/C_ZERO worlds, positive/adverse learned cases and every final outage.
+> - The complete original 65,130-byte Oracle transfer, whose recorded hash matches, followed by the separate Root adoption and relevant B08/B09 readings.
+>
+> I relied on the accepted full reader for exhaustive physics, policy-density and critic reconstruction beyond those raw checks. Neither I nor that reader independently replayed later-epoch gradients and Adam arithmetic. Historical bulk and literature experiments were not re-audited. This review added no fits, native transitions, model/controller queries, optimizer work or production-reader execution. Artifact consumption is complete.
+>
+> **MATERIAL_DISSENT: no — direct evidence supports ending this unchanged B10 investment and withholding a useful joint-learning upgrade claim, while retaining CJ’s immediate capability, inherited competence and all adverse outcomes. It does not support closing the broader question as unlearnable or launching an automatic repair.**
+
+
+**DM resolution, separate from the original review.** I read the complete
+original response and accept its scoped stop, retention and interpretation.
+The adverse learning increment is now independently reconstructed rather than
+inferred from a weak deterministic baseline. Both actual INIT90 comparisons
+and the seven retained P0/Bstar/Hdirect controls remain adverse; the narrower
+C/CJ competence and J0's Bstar travel/exposure tradeoffs remain visible. We do
+not choose J0, pool training blocks, claim joint control unlearnable or replace
+B08/B09's original explanations. No unresolved scientific direction objection
+remains and no repeat Pro/selection round is needed for this unchanged resolved
+choice; adviser agreement is not an extra empirical unit.
+
+The review also independently retained CJ's five immediate native improvements
+and its two-gain/three-loss complete outcome. That concrete capability is useful
+evidence; preserving it does not select an ordinary-controller repair. The
+existing common-prefix P0_HIDDEN outage reading above adds a specific adverse
+consequence of the inherited gate, while its presence already in INIT90 prevents
+using it as a sufficient explanation of the new learning loss. Reward and
+service are arithmetically related, not independent confirmations. The two
+fits' opposite changes in aggregate silence also prevent a common scalar-OFF-
+frequency account; no particular optimization/representation/credit repair
+has been identified.
+
+**Resolved keep/stop/next action:** stop the exact B10 learning purchase. Retain
+P0/HIDDEN and ordinary P0/Bstar/Hdirect/G/C/ZERO/CJ implementations, the actual
+INIT90 and both adverse fitted endpoints, complete original advice and all
+positive/adverse evidence. Extra evaluation would refine fixed-world precision;
+an unchanged repeat costs another2fits/352,256 native steps without an identified
+decision warranting it. Probability/mask/epoch changes or a new diagnosis would
+be new investments, not completion of this batch. No such investment or
+confirmation is selected. The broader local-control question remains reserve;
+Root owns any next cross-question allocation. Idle after publication/cleanup
+means no producer or unread result, not an invented dependency or owner-approval
+request. A later consequential use or empirical-understanding question may
+justify a distinct prospective comparison with competent same-rights controls.
+
+Cost clarification: the single unscored constructor reset above is the native
+factory's reset. Each worker/reader pass also constructs3 joint actors,
+2 fresh critics and1 frozen original Student; their work is inside the stated
+clock scopes. These constructors are not additional scientific fits. Actual
+finite correctness exposure26.70 wall/20.59 CPU-s remains separate from the
+production1,780.045981 CPU-s and unmetered support.
