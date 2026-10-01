@@ -1,0 +1,635 @@
+{
+  "direction": "uav_fleet_transmission",
+  "extra_allocator_queries": 0,
+  "extra_model_queries": 0,
+  "extra_radio_queries": 0,
+  "fits": 0,
+  "horizon": 3000,
+  "jobs": [
+    {
+      "arm": "C",
+      "job_key": "29880001/C",
+      "limit": 3000,
+      "seed": 29880001
+    },
+    {
+      "arm": "M",
+      "job_key": "29880001/M",
+      "limit": 3000,
+      "seed": 29880001
+    },
+    {
+      "arm": "V",
+      "job_key": "29880001/V",
+      "limit": 3000,
+      "seed": 29880001
+    },
+    {
+      "arm": "M",
+      "job_key": "29880002/M",
+      "limit": 3000,
+      "seed": 29880002
+    },
+    {
+      "arm": "V",
+      "job_key": "29880002/V",
+      "limit": 3000,
+      "seed": 29880002
+    },
+    {
+      "arm": "C",
+      "job_key": "29880002/C",
+      "limit": 3000,
+      "seed": 29880002
+    },
+    {
+      "arm": "V",
+      "job_key": "29880003/V",
+      "limit": 3000,
+      "seed": 29880003
+    },
+    {
+      "arm": "C",
+      "job_key": "29880003/C",
+      "limit": 3000,
+      "seed": 29880003
+    },
+    {
+      "arm": "M",
+      "job_key": "29880003/M",
+      "limit": 3000,
+      "seed": 29880003
+    },
+    {
+      "arm": "C",
+      "job_key": "29880004/C",
+      "limit": 3000,
+      "seed": 29880004
+    },
+    {
+      "arm": "M",
+      "job_key": "29880004/M",
+      "limit": 3000,
+      "seed": 29880004
+    },
+    {
+      "arm": "V",
+      "job_key": "29880004/V",
+      "limit": 3000,
+      "seed": 29880004
+    },
+    {
+      "arm": "M",
+      "job_key": "29880005/M",
+      "limit": 3000,
+      "seed": 29880005
+    },
+    {
+      "arm": "V",
+      "job_key": "29880005/V",
+      "limit": 3000,
+      "seed": 29880005
+    },
+    {
+      "arm": "C",
+      "job_key": "29880005/C",
+      "limit": 3000,
+      "seed": 29880005
+    },
+    {
+      "arm": "V",
+      "job_key": "29880006/V",
+      "limit": 3000,
+      "seed": 29880006
+    },
+    {
+      "arm": "C",
+      "job_key": "29880006/C",
+      "limit": 3000,
+      "seed": 29880006
+    },
+    {
+      "arm": "M",
+      "job_key": "29880006/M",
+      "limit": 3000,
+      "seed": 29880006
+    },
+    {
+      "arm": "C",
+      "job_key": "29880007/C",
+      "limit": 3000,
+      "seed": 29880007
+    },
+    {
+      "arm": "M",
+      "job_key": "29880007/M",
+      "limit": 3000,
+      "seed": 29880007
+    },
+    {
+      "arm": "V",
+      "job_key": "29880007/V",
+      "limit": 3000,
+      "seed": 29880007
+    },
+    {
+      "arm": "M",
+      "job_key": "29880008/M",
+      "limit": 3000,
+      "seed": 29880008
+    },
+    {
+      "arm": "V",
+      "job_key": "29880008/V",
+      "limit": 3000,
+      "seed": 29880008
+    },
+    {
+      "arm": "C",
+      "job_key": "29880008/C",
+      "limit": 3000,
+      "seed": 29880008
+    },
+    {
+      "arm": "V",
+      "job_key": "29880009/V",
+      "limit": 3000,
+      "seed": 29880009
+    },
+    {
+      "arm": "C",
+      "job_key": "29880009/C",
+      "limit": 3000,
+      "seed": 29880009
+    },
+    {
+      "arm": "M",
+      "job_key": "29880009/M",
+      "limit": 3000,
+      "seed": 29880009
+    },
+    {
+      "arm": "C",
+      "job_key": "29880010/C",
+      "limit": 3000,
+      "seed": 29880010
+    },
+    {
+      "arm": "M",
+      "job_key": "29880010/M",
+      "limit": 3000,
+      "seed": 29880010
+    },
+    {
+      "arm": "V",
+      "job_key": "29880010/V",
+      "limit": 3000,
+      "seed": 29880010
+    },
+    {
+      "arm": "M",
+      "job_key": "29880011/M",
+      "limit": 3000,
+      "seed": 29880011
+    },
+    {
+      "arm": "V",
+      "job_key": "29880011/V",
+      "limit": 3000,
+      "seed": 29880011
+    },
+    {
+      "arm": "C",
+      "job_key": "29880011/C",
+      "limit": 3000,
+      "seed": 29880011
+    },
+    {
+      "arm": "V",
+      "job_key": "29880012/V",
+      "limit": 3000,
+      "seed": 29880012
+    },
+    {
+      "arm": "C",
+      "job_key": "29880012/C",
+      "limit": 3000,
+      "seed": 29880012
+    },
+    {
+      "arm": "M",
+      "job_key": "29880012/M",
+      "limit": 3000,
+      "seed": 29880012
+    },
+    {
+      "arm": "C",
+      "job_key": "29880013/C",
+      "limit": 3000,
+      "seed": 29880013
+    },
+    {
+      "arm": "M",
+      "job_key": "29880013/M",
+      "limit": 3000,
+      "seed": 29880013
+    },
+    {
+      "arm": "V",
+      "job_key": "29880013/V",
+      "limit": 3000,
+      "seed": 29880013
+    },
+    {
+      "arm": "M",
+      "job_key": "29880014/M",
+      "limit": 3000,
+      "seed": 29880014
+    },
+    {
+      "arm": "V",
+      "job_key": "29880014/V",
+      "limit": 3000,
+      "seed": 29880014
+    },
+    {
+      "arm": "C",
+      "job_key": "29880014/C",
+      "limit": 3000,
+      "seed": 29880014
+    },
+    {
+      "arm": "V",
+      "job_key": "29880015/V",
+      "limit": 3000,
+      "seed": 29880015
+    },
+    {
+      "arm": "C",
+      "job_key": "29880015/C",
+      "limit": 3000,
+      "seed": 29880015
+    },
+    {
+      "arm": "M",
+      "job_key": "29880015/M",
+      "limit": 3000,
+      "seed": 29880015
+    },
+    {
+      "arm": "C",
+      "job_key": "29880016/C",
+      "limit": 3000,
+      "seed": 29880016
+    },
+    {
+      "arm": "M",
+      "job_key": "29880016/M",
+      "limit": 3000,
+      "seed": 29880016
+    },
+    {
+      "arm": "V",
+      "job_key": "29880016/V",
+      "limit": 3000,
+      "seed": 29880016
+    },
+    {
+      "arm": "M",
+      "job_key": "29880017/M",
+      "limit": 3000,
+      "seed": 29880017
+    },
+    {
+      "arm": "V",
+      "job_key": "29880017/V",
+      "limit": 3000,
+      "seed": 29880017
+    },
+    {
+      "arm": "C",
+      "job_key": "29880017/C",
+      "limit": 3000,
+      "seed": 29880017
+    },
+    {
+      "arm": "V",
+      "job_key": "29880018/V",
+      "limit": 3000,
+      "seed": 29880018
+    },
+    {
+      "arm": "C",
+      "job_key": "29880018/C",
+      "limit": 3000,
+      "seed": 29880018
+    },
+    {
+      "arm": "M",
+      "job_key": "29880018/M",
+      "limit": 3000,
+      "seed": 29880018
+    },
+    {
+      "arm": "C",
+      "job_key": "29880019/C",
+      "limit": 3000,
+      "seed": 29880019
+    },
+    {
+      "arm": "M",
+      "job_key": "29880019/M",
+      "limit": 3000,
+      "seed": 29880019
+    },
+    {
+      "arm": "V",
+      "job_key": "29880019/V",
+      "limit": 3000,
+      "seed": 29880019
+    },
+    {
+      "arm": "M",
+      "job_key": "29880020/M",
+      "limit": 3000,
+      "seed": 29880020
+    },
+    {
+      "arm": "V",
+      "job_key": "29880020/V",
+      "limit": 3000,
+      "seed": 29880020
+    },
+    {
+      "arm": "C",
+      "job_key": "29880020/C",
+      "limit": 3000,
+      "seed": 29880020
+    },
+    {
+      "arm": "V",
+      "job_key": "29880021/V",
+      "limit": 3000,
+      "seed": 29880021
+    },
+    {
+      "arm": "C",
+      "job_key": "29880021/C",
+      "limit": 3000,
+      "seed": 29880021
+    },
+    {
+      "arm": "M",
+      "job_key": "29880021/M",
+      "limit": 3000,
+      "seed": 29880021
+    },
+    {
+      "arm": "C",
+      "job_key": "29880022/C",
+      "limit": 3000,
+      "seed": 29880022
+    },
+    {
+      "arm": "M",
+      "job_key": "29880022/M",
+      "limit": 3000,
+      "seed": 29880022
+    },
+    {
+      "arm": "V",
+      "job_key": "29880022/V",
+      "limit": 3000,
+      "seed": 29880022
+    },
+    {
+      "arm": "M",
+      "job_key": "29880023/M",
+      "limit": 3000,
+      "seed": 29880023
+    },
+    {
+      "arm": "V",
+      "job_key": "29880023/V",
+      "limit": 3000,
+      "seed": 29880023
+    },
+    {
+      "arm": "C",
+      "job_key": "29880023/C",
+      "limit": 3000,
+      "seed": 29880023
+    },
+    {
+      "arm": "V",
+      "job_key": "29880024/V",
+      "limit": 3000,
+      "seed": 29880024
+    },
+    {
+      "arm": "C",
+      "job_key": "29880024/C",
+      "limit": 3000,
+      "seed": 29880024
+    },
+    {
+      "arm": "M",
+      "job_key": "29880024/M",
+      "limit": 3000,
+      "seed": 29880024
+    },
+    {
+      "arm": "C",
+      "job_key": "29880025/C",
+      "limit": 3000,
+      "seed": 29880025
+    },
+    {
+      "arm": "M",
+      "job_key": "29880025/M",
+      "limit": 3000,
+      "seed": 29880025
+    },
+    {
+      "arm": "V",
+      "job_key": "29880025/V",
+      "limit": 3000,
+      "seed": 29880025
+    },
+    {
+      "arm": "M",
+      "job_key": "29880026/M",
+      "limit": 3000,
+      "seed": 29880026
+    },
+    {
+      "arm": "V",
+      "job_key": "29880026/V",
+      "limit": 3000,
+      "seed": 29880026
+    },
+    {
+      "arm": "C",
+      "job_key": "29880026/C",
+      "limit": 3000,
+      "seed": 29880026
+    },
+    {
+      "arm": "V",
+      "job_key": "29880027/V",
+      "limit": 3000,
+      "seed": 29880027
+    },
+    {
+      "arm": "C",
+      "job_key": "29880027/C",
+      "limit": 3000,
+      "seed": 29880027
+    },
+    {
+      "arm": "M",
+      "job_key": "29880027/M",
+      "limit": 3000,
+      "seed": 29880027
+    },
+    {
+      "arm": "C",
+      "job_key": "29880028/C",
+      "limit": 3000,
+      "seed": 29880028
+    },
+    {
+      "arm": "M",
+      "job_key": "29880028/M",
+      "limit": 3000,
+      "seed": 29880028
+    },
+    {
+      "arm": "V",
+      "job_key": "29880028/V",
+      "limit": 3000,
+      "seed": 29880028
+    },
+    {
+      "arm": "M",
+      "job_key": "29880029/M",
+      "limit": 3000,
+      "seed": 29880029
+    },
+    {
+      "arm": "V",
+      "job_key": "29880029/V",
+      "limit": 3000,
+      "seed": 29880029
+    },
+    {
+      "arm": "C",
+      "job_key": "29880029/C",
+      "limit": 3000,
+      "seed": 29880029
+    },
+    {
+      "arm": "V",
+      "job_key": "29880030/V",
+      "limit": 3000,
+      "seed": 29880030
+    },
+    {
+      "arm": "C",
+      "job_key": "29880030/C",
+      "limit": 3000,
+      "seed": 29880030
+    },
+    {
+      "arm": "M",
+      "job_key": "29880030/M",
+      "limit": 3000,
+      "seed": 29880030
+    },
+    {
+      "arm": "C",
+      "job_key": "29880031/C",
+      "limit": 3000,
+      "seed": 29880031
+    },
+    {
+      "arm": "M",
+      "job_key": "29880031/M",
+      "limit": 3000,
+      "seed": 29880031
+    },
+    {
+      "arm": "V",
+      "job_key": "29880031/V",
+      "limit": 3000,
+      "seed": 29880031
+    },
+    {
+      "arm": "M",
+      "job_key": "29880032/M",
+      "limit": 3000,
+      "seed": 29880032
+    },
+    {
+      "arm": "V",
+      "job_key": "29880032/V",
+      "limit": 3000,
+      "seed": 29880032
+    },
+    {
+      "arm": "C",
+      "job_key": "29880032/C",
+      "limit": 3000,
+      "seed": 29880032
+    }
+  ],
+  "labels": 0,
+  "launch_sha": "94f08627050b7d495b4c9e9af18db02ab17a5c1e",
+  "numeric_threads": 1,
+  "object": "fleet-b08-lawful-anonymous-memory-v1",
+  "optimizer_updates": 0,
+  "phase": "scientific",
+  "primary": "paired V-M total native J; cumulative native QoS companion",
+  "shield": {
+    "enter_margin": 0.0,
+    "exit_margin": 0.05
+  },
+  "source_binding": {
+    "files": {
+      "configs/config_1.py": "f55b5f148c2664334b455305dea094591799eb0c0544237f7bb717bd1401ccb8",
+      "envs/pettingzoo/env_adapter.py": "8b42c1c3e7ef44cb814f79225b4af944b1018ad764dfeb17e9e1cc294df79d40",
+      "envs/pettingzoo/relay/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "envs/pettingzoo/relay/belief_map.py": "b27750f09706cad0b97ec2689b703228e3f28a711877b4dd15707c8571b4ce04",
+      "envs/pettingzoo/relay/channel_geometry.py": "c16121dd5ecf82d5f706c236b71b8d1805446d0d9e483a8a4d5258b2657acb69",
+      "envs/pettingzoo/relay/energy_aware.py": "f6836b7b8d26e73b83888fa2eb5cb7d02e9ec565e35ddc3de0098c9746f367cf",
+      "envs/pettingzoo/relay/forced_relay.py": "79a61f1ed07ae9bb52d9cfb6163041b13fff13ecb9e3e30b0a97709f622bd973",
+      "envs/pettingzoo/relay/local_view.py": "560c8de76599c649b921be7c2324f5983c8ad48bf5ca93fe4e1871d2c4f46657",
+      "envs/pettingzoo/relay/progressive.py": "176ce4856725d2b2a8857aa42e80730c5e020996bf3411c8249494d49a8910f8",
+      "envs/pettingzoo/relay/routed_core.py": "f67869ae1de05c4f0d7e05e0dac0e4f13008d2f17251d07e20dc97c4ea44abf0",
+      "envs/pettingzoo/relay/routing.py": "1956f4cabbb3a2660fdbff9a4892327dfd16f02b2d497f64faef2f02a24645d5",
+      "experiments/candidates/energy_relay_benchmark/b01/evaluation.py": "15391e2eafff0876dd0bfa94a0d8f9f96558c76254e8d73cb8e55426735eccd7",
+      "experiments/candidates/energy_relay_benchmark/b01/feedback.py": "0cb8cc14d7d63ea6dd6bbc84c830e01c06837507acd70b8fd29ae6411a6c13d2",
+      "experiments/candidates/energy_relay_benchmark/b01/heuristic.py": "f82bbcc1d6586ae41acbb720b225b294c3dff812246e88f15f699b2d9146351e",
+      "experiments/candidates/energy_relay_benchmark/b01/observation.py": "baa416c9067504fdeb2656b376768ed06c3febe440c358c92c7281922791536f",
+      "experiments/candidates/uav_fleet_transmission/b08_anonymous_memory/__init__.py": "4823be41ca89243c5f55fb939d489d15162d9aecaa54e62a6fcf48b816e5072f",
+      "experiments/candidates/uav_fleet_transmission/b08_anonymous_memory/capture.py": "b6574d9261d51382a0599afea883b3dfdf264ad2def7102418af939f45cf4c07",
+      "experiments/candidates/uav_fleet_transmission/b08_anonymous_memory/contract.py": "aa67aafdc33742f9795fc1a651e13b72d4769bbbc087d8e66b9ca91508e7c911",
+      "experiments/candidates/uav_fleet_transmission/b08_anonymous_memory/controller.py": "4f8469b053e70e63ca93ad9636122a6f32ae9eb150802c671f005e25cef78933",
+      "experiments/candidates/uav_fleet_transmission/b08_anonymous_memory/frozen_sources.json": "a5c7f371769eff07e8e33f1cae6cb8be005df155e813d8ce604d4a22cc48c421",
+      "experiments/candidates/uav_fleet_transmission/b08_anonymous_memory/metrics.py": "98418f847fa061428713871c34f3cbad25152ddc07ca70dca87cbb64081d4041",
+      "experiments/candidates/uav_fleet_transmission/b08_anonymous_memory/reader.py": "8e9820a156e0c94f564f62e4b0bc9688761208d97fec3cd0fdd21a7132e8a134",
+      "experiments/candidates/uav_fleet_transmission/b08_anonymous_memory/run.py": "2d0947ba42c30030718d6f16075dc307c8dec5b44fc4b0c627a8685f4ac1fe64",
+      "experiments/candidates/uav_fleet_transmission/b08_anonymous_memory/study.py": "bd2f6e8abab8075cc37f7b9c2a4471cdc8a78fb358308e9fbcb1616704a2ee6c",
+      "experiments/candidates/uav_information_value/b02/controller.py": "6046f3db724c6893c16d1e256ff05603e5148c6239b37ead266e1446988bce3d",
+      "experiments/candidates/uav_information_value/batch.py": "ffa9e3b462e59134347da677f5c5ac4aa68265f3132c502919c5ca50bf5becfb",
+      "experiments/candidates/uav_information_value/controllers.py": "3f06d1a98f24ff6348ba4fb6bc505729f9c7df55b6cedac867d4a4eb5064cac2",
+      "experiments/candidates/uav_service_auxiliary/b01/native.py": "873024b6f3e01705c07005d0dcc19185da2073f871dd93ae4cb739c5e739f990",
+      "experiments/candidates/uav_service_auxiliary/b04/evaluation.py": "0a3695e958c31b1eb97f6bbf38a1d41727f1c7f6cc679b4c046fcfda4b5487af"
+    },
+    "original_source_sha": "d6151ff5155d8bf3f3289bba727ee5148f6b76a6"
+  },
+  "trace_timing": "Row t of own_xyz, return_margin, nearest_station, nearest_station_distance_m, station_occupancy, station_queue and target_xy is decoded from the legal observation the controller and shield act on at step t (decision time, same as mode/entered/exited). charging, waiting_steps and battery row t are decoded from the post-step observation (t+1), so station_occupancy[t].sum() pairs with charging[t-1].sum(). guard_checked/guard_blocked row t count the guard actions of step t.",
+  "truth_rights": "read-only capture/reader; every action uses only the original lawful observations",
+  "uncertainty": "descriptive two-sided paired-world Student-t 95%, df=31 for science",
+  "workers": 4
+}

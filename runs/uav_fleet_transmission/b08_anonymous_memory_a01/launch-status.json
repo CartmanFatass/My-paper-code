@@ -1,0 +1,11 @@
+{
+  "claim_key": "157e0eeeb9db7a4a3ced5cca257604b2f626f7cbcfadf364ee81fdc47618d274",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/157e0eeeb9db7a4a3ced5cca257604b2f626f7cbcfadf364ee81fdc47618d274.json",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b08_anonymous_memory_a01/launch-manifest.json",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/157e0eeeb9db7a4a3ced5cca257604b2f626f7cbcfadf364ee81fdc47618d274.json",
+  "pid": 1203126,
+  "runner_pid": 1203127,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-10-01T05:52:04.087414Z"
+}
