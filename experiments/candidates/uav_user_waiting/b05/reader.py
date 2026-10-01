@@ -57,11 +57,14 @@ def read_source(source_run, source_reading, counts, source_root=ROOT):
     if len(rows) != 192 or len(by) != 192 or set(by) != expected:
         raise ValueError('original input inventory is incomplete or duplicated')
     for (program, seed), row in by.items():
-        target = source_run / 'raw' / f'{program}_{seed}.npz'
-        if Path(row['raw']['path']).resolve(strict=True) != target.resolve(strict=True):
+        member = f'{program}_{seed}.npz'
+        canonical = p.B04_CANONICAL_RUN / 'raw' / member
+        if Path(row['raw']['path']) != canonical:
             raise ValueError('original raw path binding differs')
         if row['steps'] != p.HORIZON:
             raise ValueError('original source row is truncated')
+        by[program, seed] = dict(row, raw=dict(
+            row['raw'], path=str(source_run / 'raw' / member), canonical_path=str(canonical)))
     if sum(row['raw']['bytes'] for row in rows) != 262741183:
         raise ValueError('original M/S/U byte inventory differs')
     return by, dict(summary=summary_identity, reading=reading_identity,
@@ -517,6 +520,7 @@ def _worker_config_check(config, worker_launch_sha, source, counts, discrepancie
                     packages=list(p.PACKAGES), horizon=p.HORIZON, nodes=p.N, users=p.U,
                     capacity=p.CAPACITY, min_sinr=p.MIN_SINR, t_critical=p.T_CRITICAL,
                     atol=p.ATOL, b04_source_sha=p.SOURCE_SHA,
+                    b04_canonical_run=str(p.B04_CANONICAL_RUN),
                     gap_columns=list(p.GAP_COLUMNS), no_link_columns=list(p.NO_LINK_COLUMNS))
     for key, value in expected.items():
         compare_tree(config[key], value, f'config.{key}', discrepancies)

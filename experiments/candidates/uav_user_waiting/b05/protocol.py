@@ -16,6 +16,7 @@ ATOL = 1e-12
 SOURCE_SHA = 'dd3b2577d407b57a3b76ea4ba95b6ead4349d0d4'
 SUMMARY_SHA256 = '49754e61f38009681d5a842d320a1878bdd260518300a5391cc3c8678db47c47'
 READING_SHA256 = '69787803a4de84555c534d9b7f21a23c290c7d4446bc874a2da6e49237289513'
+B04_CANONICAL_RUN = Path('/home/wu/projects/HMASD/runs/uav_user_waiting/b04_service_floor_a01')
 RADIO_PATH = 'envs/pettingzoo/uav_radio.py'
 SOURCE_PATHS = (
     RADIO_PATH, 'envs/pettingzoo/uav_env.py', 'envs/pettingzoo/env_adapter.py',

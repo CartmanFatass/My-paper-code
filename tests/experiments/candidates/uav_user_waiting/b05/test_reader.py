@@ -213,6 +213,27 @@ def test_independent_raw_reader_rejects_hash_and_shape_corruption(tmp_path, monk
         read_raw(source_row, Counter())
 
 
+def test_staged_raw_copy_is_hash_bound_without_fallback_to_origin(tmp_path, monkeypatch):
+    from experiments.candidates.uav_user_waiting.b05 import protocol as p, study
+    raw, source_row, _, _, _ = _synthetic_production(tmp_path)
+    monkeypatch.setattr(p, 'HORIZON', 8)
+    origin = Path(source_row['raw']['path'])
+    staged = tmp_path / 'staged-copy.npz'
+    staged.write_bytes(origin.read_bytes())
+    source_row['raw'] = dict(source_row['raw'], path=str(staged), canonical_path=str(origin))
+    origin.unlink()
+    produced = study.load_trace(source_row['raw'], study.counters())
+    independently_read, identity = read_raw(source_row, Counter())
+    assert identity['path'] == str(staged)
+    assert np.array_equal(produced['sinr'], raw['sinr'])
+    assert np.array_equal(independently_read['sinr'], raw['sinr'])
+    staged.write_bytes(staged.read_bytes() + b'changed')
+    with pytest.raises(ValueError, match='hash/size'):
+        study.load_trace(source_row['raw'], study.counters())
+    with pytest.raises(ValueError, match='hash/bytes'):
+        read_raw(source_row, Counter())
+
+
 def test_reader_cli_requires_admission_before_reading_or_writing(tmp_path):
     root = Path(__file__).resolve().parents[5]
     entry = root / 'experiments/candidates/uav_user_waiting/b05/read.py'

@@ -3896,3 +3896,87 @@ absent, so net allocated disk reclaimed is1,568,768 bytes. Compact committed
 metadata and the complete original canonical output/core remain. The
 remote source snapshot is deliberately retained for Root's live forensic
 consumer; no deletion tool was blocked and no backup chain was created.
+
+<a id="b05-local-recovery-prospective"></a>
+### B05 — selected local recovery, exact staging and narrow L0 (2026-10-01 UTC)
+
+Root selected one complete recovery on `local_linux` after the bounded
+core check found an invalid CPython iterator operand during apparent JSON
+publication; its antecedent cause remains unresolved. This selection does
+not declare the remote interpreter or hardware repaired. A01's failed
+operation, unique partial outputs, core and source snapshot remain intact
+for the separate read-only diagnosis. There is no remote retry or prefix
+resume. The same DM owns recovery through the full independent reading,
+scientific interpretation/review, publication and measured cleanup.
+
+**Exact scope and additional bill.** Use new tags
+`b05_local_allocation_a02` and `b05_local_allocation_read_a02` for all192
+original M/S/U source trajectories,64 original worlds×3 paths×3 laws,
+576 outcomes including384 fair outcomes, followed by the original full
+independent reader. No new worlds, policies, fits, native resets/steps,
+model or C calls are added. All tie/reset/history/precision/metric semantics
+and the36 paired comparisons stay fixed. Charge the full294,912 fleet
+decisions,1,474,560 UAV allocation decisions,14,745,600 user-tick age updates
+and36,864,000 threshold entries again, in addition to A01's separately
+preserved partial bill. The earlier0.05–0.20CPUh complete replay/reader
+estimate remains a prospective conservative estimate, not a measured local
+price or hard allowance. New allocation CPU/wall measurements belong to
+the local node. Inherited B04 real-time execution, geometry/controller
+costs and deadline evidence still belong to their original remote node.
+
+**Input staging.** Copy byte-identical B04 metadata and only the192 M/S/U
+NPZ members to
+`/home/fires/hmasd-wsl/temp/directions/uav_user_waiting/b05/local-inputs/`,
+preserving sibling directories`b04_service_floor_a01/{summary.json,raw/}`
+and`b04_service_floor_read_a01/reading.json`. The two metadata files retain
+their fixed49754e61…c47 and69787803…9513 hashes; the192 raw members retain
+the summary's per-file hashes and total262,741,183 bytes. No K data, new
+trajectory or changed summary is staged. Mechanical transfer verification
+hashes every staged byte before execution; producer and independent reader
+each hash their actual input again. Staging is a temporary additional copy
+of the existing durable remote inputs, removable after its last consumer.
+
+**L0 owned correction.** Direct DM implementation is limited to B05's
+`protocol.py`, `study.py`, `reader.py` and their focused tests. The frozen
+summary/reading still describe their original canonical remote paths;
+local path equality cannot truthfully be satisfied by rewriting those
+hash-bound bytes. Add the fixed canonical B04 run root to the protocol,
+independently check each original member against that root and its exact
+program/seed basename, then bind only its read location to the staged
+summary's sibling`raw/` directory. Preserve the original path beside the
+effective input path and require the same bytes/hash on read. The original
+B04 reader's summary identity is compared using its canonical path and
+unchanged bytes/hash; B05 records its actual staged metadata location.
+The independent reader repeats the location/provenance check without
+using producer allocator or outcome code. No launcher change, filesystem
+alias, input mutation, numerical policy change, environment construction
+or unrestricted source override is needed. Synthetic checks cover relocated
+metadata, canonical-member mismatch and changed staged bytes, alongside
+the existing complete producer/reader assembly. An independent engineering
+Reviewer checks this source-binding correction before publication and
+execution. Existing scientific advice still covers the unchanged question;
+the technical recovery alone adds no new scientific review decision.
+
+Exact code and this scope are published before result execution. The local
+configured interpreter is`/home/fires/.venvs/hmasd-linux-cpu/bin/python`.
+Fresh actual-node pause/lead/publication/memory/duplicate admission applies;
+another accepted local operation is neither restarted nor presumed absent.
+The ongoing remote cause investigation is not a prerequisite for this
+separately selected local path. Source/baseline/invariance failure still
+preserves the affected output and stops; this selection authorizes one
+complete local recovery, not an automatic chain of replacements.
+
+**Recovery implementation accepted.** The194 staged files were verified
+byte for byte by SHA256:192 raw members total262,741,183 bytes and the two
+metadata files total16,448,835 bytes. Transfer verification did not load
+NPZ arrays or run an allocator. The narrow correction changes three
+production files and two test files; allocator, outcome, pair reducers and
+CLI are unchanged. The DM ran62 synthetic checks in1.52s and the independent
+engineering Reviewer ran the same62 in1.50s, including relocated metadata
+with the origin absent, rehashed synthetic wrong-member rejection, staged
+byte corruption and the complete producer/reader assembly. The Reviewer
+returned no material finding. The accepted five-file aggregate SHA256
+(sorted relative path, NUL, binary digest) is
+`4632d680d87635c7f08b9122c10c348eb034295250be0af64618e2a7ba650f59`.
+This accepts the location/provenance correction, not production arithmetic
+or local-node admission; those are still pending their actual operations.

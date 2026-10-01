@@ -297,6 +297,7 @@ def metadata(tmp_path, monkeypatch):
         bindings.append(dict(p.file_identity(path), path=name))
     run_root = tmp_path / 'b04'
     run_root.mkdir()
+    monkeypatch.setattr(p, 'B04_CANONICAL_RUN', run_root)
     summary_path, reading_path = run_root / 'summary.json', tmp_path / 'reading.json'
     rows = [dict(arm=program, seed=seed, steps=256, raw=dict(path=str(run_root / 'raw' / f'{program}_{seed}.npz'),
                 bytes=0, sha256='0'*64)) for seed in p.SEEDS for program in ('M','S','U','K')]
@@ -325,6 +326,55 @@ def test_frozen_metadata_bindings_and_source_changes(tmp_path, monkeypatch):
     with pytest.raises(ValueError, match='source mismatch'):
         s.validate_inputs(*paths, counts)
     assert counts['fleet_allocations'] == 0
+
+
+def test_relocated_metadata_preserves_canonical_members_without_original_files(tmp_path, monkeypatch):
+    from experiments.candidates.uav_user_waiting.b05 import reader
+    summary, reading, source_root = metadata(tmp_path, monkeypatch)
+    frozen = p.read_json(summary)
+    # This metadata-only fixture meets the independent inventory byte constraint.
+    frozen['rows'][0]['raw']['bytes'] = 262741183
+    frozen['artifacts'][0]['bytes'] = 262741183
+    p.write_json(summary, frozen)
+    summary_id = p.file_identity(summary)
+    original_reading = p.read_json(reading)
+    original_reading.update(worker_summary=summary_id, expected_summary_sha256=summary_id['sha256'])
+    p.write_json(reading, original_reading)
+    monkeypatch.setattr(p, 'SUMMARY_SHA256', summary_id['sha256'])
+    monkeypatch.setattr(p, 'READING_SHA256', p.file_identity(reading)['sha256'])
+    stage = tmp_path / 'stage'
+    stage.mkdir()
+    staged_summary, staged_reading = stage / 'summary.json', stage / 'reading.json'
+    staged_summary.write_bytes(summary.read_bytes())
+    staged_reading.write_bytes(reading.read_bytes())
+    summary.unlink()
+    reading.unlink()
+    _, _, _, producer_rows, _ = s.validate_inputs(staged_summary, staged_reading, source_root, s.counters())
+    independent_rows, source = reader.read_source(stage, staged_reading, s.counters(), source_root)
+    assert len(independent_rows) == 192
+    assert source['summary']['path'] == str(staged_summary)
+    for key, row in independent_rows.items():
+        member = f'{key[0]}_{key[1]}.npz'
+        assert row['raw'] == producer_rows[key]['raw']
+        assert row['raw']['path'] == str(stage / 'raw' / member)
+        assert row['raw']['canonical_path'] == str(p.B04_CANONICAL_RUN / 'raw' / member)
+
+    # Rehashing a synthetic substituted manifest must not remove membership checks.
+    changed = p.read_json(staged_summary)
+    wrong_path = str(p.B04_CANONICAL_RUN / 'raw' / 'wrong_member.npz')
+    changed['rows'][0]['raw']['path'] = wrong_path
+    changed['artifacts'][0]['path'] = wrong_path
+    p.write_json(staged_summary, changed)
+    changed_id = p.file_identity(staged_summary)
+    original_reading.update(worker_summary=dict(changed_id, path=str(summary)),
+                            expected_summary_sha256=changed_id['sha256'])
+    p.write_json(staged_reading, original_reading)
+    monkeypatch.setattr(p, 'SUMMARY_SHA256', changed_id['sha256'])
+    monkeypatch.setattr(p, 'READING_SHA256', p.file_identity(staged_reading)['sha256'])
+    with pytest.raises(ValueError, match='canonical member'):
+        s.validate_inputs(staged_summary, staged_reading, source_root, s.counters())
+    with pytest.raises(ValueError, match='path binding'):
+        reader.read_source(stage, staged_reading, s.counters(), source_root)
 
 
 def test_run_failure_summary_keeps_prefix_counts_and_refuses_retry(tmp_path, monkeypatch):

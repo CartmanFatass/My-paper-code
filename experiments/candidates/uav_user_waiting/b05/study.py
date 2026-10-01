@@ -60,7 +60,8 @@ def validate_inputs(summary_path, reading_path, source_root, counts):
               team_steps=65536, complete_episodes=256, fit_started=0, optimizer_steps=0), 'B04 counts mismatch')
     p.require(reading['status'] == 'VERIFIED_COMPLETE' and reading['worker_launch_sha'] == p.SOURCE_SHA
               and reading['expected_summary_sha256'] == p.SUMMARY_SHA256
-              and reading['worker_summary'] == summary_id, 'B04 full-reader binding mismatch')
+              and reading['worker_summary'] == dict(summary_id, path=str(p.B04_CANONICAL_RUN / 'summary.json')),
+              'B04 full-reader binding mismatch')
     expected = {(arm, seed) for seed in p.SEEDS for arm in ('M', 'S', 'U', 'K')}
     rows = summary['rows']
     p.require(len(rows) == 256 and {(row['arm'], row['seed']) for row in rows} == expected,
@@ -70,12 +71,15 @@ def validate_inputs(summary_path, reading_path, source_root, counts):
     artifacts = summary['artifacts']
     p.require(sorted(artifacts, key=lambda row: row['path']) == sorted([row['raw'] for row in rows], key=lambda row: row['path']),
               'B04 raw artifact membership mismatch')
-    by = {(row['arm'], row['seed']): row for row in rows}
+    by = {}
     for row in rows:
         p.require(row['steps'] == p.HORIZON, 'incomplete B04 episode')
         path = Path(row['raw']['path'])
-        p.require(path.is_absolute() and path == summary_path.parent / 'raw' / f"{row['arm']}_{row['seed']}.npz",
+        member = f"{row['arm']}_{row['seed']}.npz"
+        p.require(path.is_absolute() and path == p.B04_CANONICAL_RUN / 'raw' / member,
                   'B04 raw path is not its canonical member')
+        by[row['arm'], row['seed']] = dict(row, raw=dict(
+            row['raw'], path=str(summary_path.parent / 'raw' / member), canonical_path=str(path)))
     bindings = {item['path']: item for item in config['source_identities']}
     verified = []
     for name in p.SOURCE_PATHS:
@@ -389,6 +393,7 @@ def run_batch(out, launch_sha, summary_path, reading_path, source_root, *, entry
                   laws=list(p.LAWS), packages=list(p.PACKAGES), horizon=p.HORIZON, nodes=p.N, users=p.U,
                   capacity=p.CAPACITY, min_sinr=p.MIN_SINR, t_critical=p.T_CRITICAL, atol=p.ATOL,
                   b04_source_sha=p.SOURCE_SHA, b04_source_root=str(Path(source_root).resolve()),
+                  b04_canonical_run=str(p.B04_CANONICAL_RUN),
                   b04_summary=dict(path=str(Path(summary_path).resolve()), sha256=p.SUMMARY_SHA256),
                   b04_reading=dict(path=str(Path(reading_path).resolve()), sha256=p.READING_SHA256),
                   expected_counts=p.expected_counts(), gap_columns=list(p.GAP_COLUMNS), no_link_columns=list(p.NO_LINK_COLUMNS),
