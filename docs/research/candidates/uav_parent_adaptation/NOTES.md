@@ -6880,3 +6880,284 @@ unread result, outstanding review or selected successor remains. B07's fixed
 comparison and its authorized boundary are complete. The parent question stays
 open under the re-entry reasoning above; this idle state creates no new run or
 external waiting obligation.
+
+<a id="post-b07-a2-reuse-source-assessment"></a>
+## Source-only A2 execution-economy assessment — 2026-10-01 UTC
+
+**The unchanged positive B04 two-opportunity program has a feasible exact-reuse
+comparison, but its savings and complete economic value remain unmeasured.** The
+smallest useful observation is all sixteen saved G2/A2 controller histories,
+each replayed once by its original implementation and once with exact recurrence:
+64 complete H500 controller histories, **zero new native transitions, worlds,
+fits, training targets or changed decisions**. An independent reader can compare
+both new outputs against the immutable, previously audited B04 outputs, avoiding
+another full model reconstruction. This is a source-derived proposal for Root's
+allocation review, not a selected result study or a measured speedup.
+
+Root first asked whether a legal second choice after relocation could improve
+the one-initiation frontier. Before any execution, Root corrected that candidate:
+the [completed N8 allocation review](../../archive/2026-09-30/RESEARCH-n8-next-allocation.md#decision)
+already priced G_E/A_E at option completion and declined that investment. I read
+and reuse the complete original advice and decision. I neither re-price that
+timing experiment nor reopen it after B07's failure. The revised question is
+ordinary execution economy for **unchanged B04 G2/A2 at t40/t120**, preserving
+every report, event, branch, tie rule and native program. It is not another use
+of the learned ranking asset or a change to motion/replanning rights.
+
+This assessment performed source reading, reading of already published evidence
+and integer/cost arithmetic only: **0 new policy/scorer/model/native queries,
+0 outcome reductions, 0 fits/targets, 0 executable edits, fixtures or launches**.
+CodeGraph was used before navigating the affected code. B07's complete result,
+independent diagnosis and cleanup at `8bb2e5608` / `8ee48a5d2`, B06's original
+failed retention prediction and actual-S2 defer remain intact. The selected
+fleet-adaptation T/H study, waiting allocation recovery, other leads and the
+unresolved remote-runtime investigation are separate work.
+
+### Existing evidence and its effect on this proposal
+
+I reused the relevant published RESEARCH [topic3](https://github.com/CartmanFatass/My-paper-code/blob/8ee48a5d21538caf647769d7f505dff0501590a5/docs/research/RESEARCH.md#L333)
+and [topic4](https://github.com/CartmanFatass/My-paper-code/blob/8ee48a5d21538caf647769d7f505dff0501590a5/docs/research/RESEARCH.md#L797),
+checked against current published main `af5eb4e2d`, the complete B04 reading and
+original critic, the prior source-only adapter assessment and the
+completed N8 allocation advice. The effect is concrete: retain anticipation's
+conditional native value; give the ordinary G2 comparator the same optimization;
+price complete executed work; do not claim prediction/ranking or learning value.
+No new shared empirical judgment is established by this source assessment.
+
+B04 source `239360b03f5d7acf788bd9ae5d4dccbde4f9237e`, published result
+`8598d7f75efb98333979b5d07371aab6b5527a56`, establishes A2−G2 mean native J
+`+.001706076836 [.000277842988,.003935420760]` and service `+.243875` on sixteen
+worlds. Six first physical choices change and all six improve J; ten complete
+programs are identical. Mean travel rises 42.946589 m/UAV, quality falls
+.005651723048, and world 29497014 loses two user-ticks. These are retained
+tradeoffs, not a default-adoption or travel-cost dominance result. Original
+episode CPU was 2.888407914 times G2. There is no implemented B04 recurrence or
+measured A2 reuse fraction. [Full original evidence and critic](../uav_fleet_transmission/NOTES.md#b04-complete-reading).
+
+The completed B03 recurrence observation and parent B06/B07 implementations make
+exact ordinary reuse credible: the previously inspected 74 B03 branches had
+period40 recurrences, while B06/B07 checked 127/168 complete represented branches
+against uncompressed reconstruction. Those facts do not certify B04's nested
+tails, any A2 speedup or a better A2/G2 cost ratio. B06/B07's learned-ranking
+limitations do not invalidate the already demonstrated A2 planning capability.
+Ordinary R/K2_E/T_E remain measured alternatives on their own panels; their means
+must not be pooled with or used to rank this exposed B04 panel.
+
+The original broader source question also required checking registered service,
+service-age and user-waiting coverage. Their N5 registered/quantized maps, delayed
+manager reports, four-tick commitments and, for the proposed richer waiting
+contract, extra waypoint-message bytes are different information/action contracts.
+Their periodic or age/continuity objectives are not B04 native J. They do not
+supply an unmeasured repeated N8 comparator for free. Conversely, existing G2
+already supplies the competent ordinary second selection for **this** two-clock
+question; inventing another redecision rule is unnecessary. This source mapping
+makes no novelty claim or claim that the wider duration question is exhausted.
+
+### Actual interface and the bounded adaptation required
+
+The eight B04 implementation/reader files inspected in current main match their
+saved B04 source bindings. The load-bearing boundaries are:
+
+- [B04 controller](../../../../experiments/candidates/uav_fleet_transmission/b04/controller.py):
+  `TemporalProgram` takes public FP32 reports only at t divisible by10 and advances
+  every primitive tick. G2 uses the original B03 complete selector at40, then a
+  fresh ordinary selection at120. A2 chooses at40 by anticipating that same120
+  selection, then actually replans at120. All original stationary member
+  champions plus stay remain in the menu, including nonpositive champions;
+  selection must strictly improve total J over stay. Replacing an expired plan
+  at120, including decline, is essential.
+- [B04 segment model](../../../../experiments/candidates/uav_fleet_transmission/b04/surrogate.py):
+  starts are40/120; segment end and fixed report-normalization horizon500 are
+  separate. An A2 prefix40→120 ends with **unrounded FP64 physical positions**.
+  Its predicted report120 is FP32. The inner ordinary search starts from the
+  **decoded report positions**, whereas the selected outer suffix starts from
+  the original unrounded physical positions. Identical plan identity therefore
+  does not license replacing that outer suffix with an already computed inner
+  branch. Prefix and suffix rewards/path norms are summarized in original tick
+  order after concatenation, not by substituting a different floating reduction.
+- [B06 exact recurrence](../../../../experiments/candidates/uav_parent_adaptation/b06_continuation_amortization/cycle.py):
+  the existing callable fixes start40, decodes its initial physical state,
+  conflates terminal/report horizons and returns no terminal controller/mask.
+  Its core byte-key idea is reusable, but this callable is **not drop-in B04
+  support**. A new owned segment adapter must accept the separate bounds and
+  optional outer physical state and return copied terminal history/mask.
+
+After the current option's arrival, ordinary transition state comprises exact
+physical and estimated FP64 positions, FP32 issued commands (including commands
+whose movement clips), static public-user bits, entering mask and t modulo40.
+The modulo40 is the common period of eight-member rotation and ten-tick reports;
+the ordinary decoder ignores the report's absolute time fraction. Reuse must
+still regenerate each absolute report and advance `next_t`, preserve signed
+zeros/other FP bits, record every decision/reward/array element, and maintain
+separate actual and logical query counts. Entry history/users must satisfy the
+same original lawful-report contract; matching a digest alone is not state
+equality.
+
+A per-segment, per-branch cache with eligibility **strictly after its start or
+arrival barrier** is sufficient in principle. Clear it at each segment boundary,
+including120; do not cross a new selection/arrival or share work between candidate
+branches or timed arms. The40→120 prefix can reuse at most39/29/19/9/0 ticks for
+stay or duration10/20/30/40 respectively, since the earliest phase-preserving
+repeat is barrier+41. These are source upper bounds, not observed recurrence.
+The long120→500 tails are the plausible opportunity; bank construction,
+candidate-transit work, actual controller calls and complete output recording
+remain charged whether a tail repeats or not.
+
+Both current B04 `simulate_segment` calls and G2's separate B03 first-selection
+model are module-bound. A future versioned selector/factory must expose its
+simulation dependency explicitly so original and optimized variants remain
+independent. Global monkeypatching would risk contaminating the reference. The
+accepted B04/B06 sources and their inputs stay frozen. No new clock adapter,
+event-triggered command cancellation, perfect-information ACK, report, native
+environment interface or learned component is required for this narrower study.
+
+### Complete saved-history observation and independent checking
+
+[The existing B04 reader](../../../../experiments/candidates/uav_fleet_transmission/b04/reader.py)
+already demonstrates the lawful replay boundary: initialize the controller from
+reset and call `select(t, saved_state[t] if t%10==0 else None, old_mask)` in order
+through499. Only lawful saved public reports enter the policy. Full native
+physical arrays and future outcomes are validation inputs, not controller inputs.
+The original worker hardcodes `env.step`, so a new bounded replay entrypoint is
+needed; copying that worker and calling it would unnecessarily buy new native
+transitions. Same full actions/masks under the bound deterministic host preserve
+the **old audited native outcomes**. This supports no fresh-world generalization,
+new policy benefit, native end-to-end throughput or deployment-deadline claim.
+
+The useful comparison is four complete replay variants on the original sixteen
+G2/A2 histories: original G2, exact-reuse G2, original A2, exact-reuse A2. Use fresh
+independent controller/model states, the same source/runtime and a prespecified
+cyclic order. Every variant pays for all its banks, complete nested branches,
+actual120 selection, tick-level outputs and serialization/hashes. Report both
+each optimized/original cost ratio and optimized A2/optimized G2, plus complete
+worker/reader CPU and wall totals. Selection-only latency and actual/logical
+model counters are explanatory secondary quantities. No recurrence-only pilot,
+timing resampling or post-result choice of worlds is included.
+
+The independent cross-question reviewer `/root/deep_report_review` materially
+narrowed my initial price in two steps. First, unchanged policy economy can use
+these **zero-native saved-history replays**; a proposed64-new-native-episode
+comparison was unnecessary for this claim. Second, B04's certified original
+outputs already provide a stronger reference than repeating a third copy of
+the same623 original branches. I checked the actual retained fields and accept
+both corrections. The old source-only timing advice above remains historical;
+its statement that an *unchanged* full reader repeats model computation remains
+true, but that reader is not necessary for this narrower implementation claim.
+
+B04 retains all emitted branch arrays (physical positions, controller estimates,
+issued commands, masks, reward components, FP32 reports and their times), ordered
+decisions, bank rows, plans/selections and complete ordered summaries/query
+ledgers. Bind the original config/summary, per-artifact hashes and full-reader
+certificate. The new independent reader can compare **both timed variants** to
+those originals: identical shapes, dtypes and array payload bits; original list
+order and structured scientific values in decisions/banks/summaries; and the
+same actual commands/masks at all500 controller ticks. ZIP/container timestamps,
+new file locations and performance fields are not scientific equality targets.
+Stop at the first decision or scientific-output mismatch; later old reports
+would no longer represent a valid continuation of a changed policy.
+
+One explicit field gap is not an extra-model-query gap. B04 `_artifact` excludes
+the returned `terminal_controller`/mask objects. Their full state is recoverable
+from the archived arrays: terminal estimate=`controller_estimates[-1]`, issued
+command=`actions[-1]`, users=decode of the last lawful FP32 report, `next_t=end_t`,
+mask=`masks[-1]`. A first A2 prefix is also present in its concatenated outer
+branch: the boundary physical/estimated positions are index80; the final prefix
+command/mask are index79. Native action39/119 supplies entering actual-selection
+commands, and the corresponding outer prefix supplies each nested entry history.
+The fixed N8/user/report conditions come from the bound source/config. A future
+adapter should emit these boundary certificates and compare original/reuse
+states independently without allowing a sink to mutate selector state.
+
+Likewise, the new reader can reconstruct exact recurrence keys from original
+arrays, check source-time ordering, phase/barrier legality and full source/dest
+state equality, compare reused transitions and account for all computed/reused
+work. This is hash/array/record arithmetic, with **zero additional policy, scorer,
+model or native queries**. Source-equivalence reasoning and focused independent
+engineering review/tests remain necessary for the core adapter; the reader does
+not replace them. No outcome reduction or such validation was executed during
+this source assessment.
+
+### Prospective complete bill and remaining uncertainty
+
+The published B04 ledger gives the following work. New paired work is exactly
+twice the two original arms' logical ledger **conditional on exact equivalence**;
+actual scored/reward computation in the reuse variants remains to be measured.
+
+| Quantity | Original G2,16 worlds | Original A2,16 worlds | Four proposed timed replays |
+| --- | ---: | ---: | ---: |
+| Complete controller-clock calls |8,000|8,000|32,000|
+| Logical state/mask requests |17,271,568|49,905,021|134,353,178|
+| Logical modeled transitions |60,500|188,560|498,120|
+| Stationary banks |32|109|282|
+| Stationary candidate rows |11,100|37,100|96,400|
+| Candidate-transit ticks |218,790|733,620|1,904,820|
+| Emitted complete modeled branches |143|480|1,246|
+| New native transitions / fits / training targets |—|—|0 / 0 / 0|
+| Additional full-reader scored/model/native queries |—|—|0|
+
+The omitted duplicate reader would have added67,176,589 requests,249,060 modeled
+ticks,141 banks,48,200 rows,952,410 transit ticks and623 branches. Existing
+artifact equality/certificate checking still costs real CPU, I/O and support;
+it is not claimed free. For an implementation guard, the unchanged general B04
+G2/A2 source ceilings over four16-world variants are327,755,264 requests,
+1,208,320 model ticks,384 banks,268,800 rows,10,752,000 candidate-transit ticks
+and3,072 branches. Those loose structural ceilings are not predicted extra work
+on the known exact panel or a license to continue a diverged replay.
+
+Historical G2+A2 worker episode CPU was2,657.155465328seconds. Twice that is
+**5,314.310930656seconds /1.476197CPU-hours**, a no-saving planning anchor, not a
+new timing result: those old timings include native execution and stop before
+some final metrics/ledger/artifact-hash work. The new harness must measure the
+whole replay, input/output I/O, serialization, hashes, final reduction and
+independent reader, with common overhead separate and CPU/wall both retained.
+Removing native execution while adding independent byte/certificate checks makes
+direct substitution of old timing inappropriate. Conservatively allow roughly
+**1.5–2.5 combined CPU-hours before knowing reuse savings**; this is a planning
+range, not a validated upper bound, current node admission or an empirical
+speedup forecast.
+
+Engineering/support estimate: **7–13 hours** total: the already priced3–6 hours
+for the segment/terminal/barrier adapter, checks and independent core-engineering
+review;2–4 for the bounded replay collector, byte/certificate reader and inclusive
+timing/source bindings;2–3 for operation, scientific reading, publication and
+cleanup. This includes no new event-clock adaptation. These are prospective
+estimates, not measured labor or an allowance. The original B04 study already
+paid6,223.404735426worker/reader CPU-seconds and24,000native steps; its1,701 raw
+artifacts occupy225,118,040logical bytes in their single canonical retained copy.
+They remain sunk costs, not new acquisition or a fresh confirmation panel.
+
+Allow roughly **.4–.6GB transient new output**, **16–64MiB provisional final new
+timing/digest/terminal/reuse evidence**, streamed process RSS around.5–.9GiB,
+an approximately1.6–2.0GB source snapshot and2–3GiB output/scratch headroom.
+After the independent comparison certifies equality and releases consumers,
+remove duplicate new scientific payloads while retaining their full binding and
+the original single canonical evidence copy. Complete serialization is still
+timed even when redundant files are subsequently deleted. Keep adverse/failure
+outputs if any equality check fails. These are conservative source-derived
+retention estimates, not measured savings, a demand for backup copies or a node
+safety claim. Future result execution still needs actual resource admission;
+the remote GCC issue and sparse-input limitations are not resolved here.
+
+### Recommendation at this assigned boundary
+
+I recommend this bounded comparison **if Root chooses to buy A2 execution
+economy**. It preserves the consequential positive planning object and compares
+it with an equally optimized ordinary program without repurchasing native
+trajectories. It can establish a same-input implementation saving, no saving,
+or a failed exactness claim. Both G2 and A2 may benefit; A2's bank, outer/inner
+separation, records and terminal copies may leave its complete cost premium
+large even when many model ticks repeat. A faster A2 need not be cheaper than
+optimized G2, and no operational deadline or universal usable-cost threshold
+has been specified. These are the unresolved empirical/economic facts, not
+reasons to launch a preliminary scan or claim deployment readiness.
+
+The independent reviewer accepted the minimal-reader correction and will return
+its full cross-question allocation recommendation directly to Root. It regards
+this complete saved-history observation as worthwhile to consider, secondary to
+the separate local cadence-use question; that message does **not** select code
+or a run. I preserve that priority judgment. This DM has no material factual or
+scientific dissent on the bounded proposal, and does not self-select the
+cross-question investment. The direction remains **reserve, source assessment
+complete**, until Root's actual next assignment. No producer, observer or
+unfinished B07 collection is being awaited. No further question, review round,
+fixture or result launch is created by completing this source-only boundary.
