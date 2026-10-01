@@ -345,3 +345,107 @@ the stated basic-generation evaluation scope. This supports the declared limited
 analogy, not calibration, full-standard equivalence or a new novelty claim. The
 earlier HTTP404 observation remains accurate; no alternate paper or parameter was used.
 The original URLs and original reviewer coverage above remain unchanged.
+
+<a id="b01-source-and-check-binding"></a>
+## 2026-10-01 07:30 UTC — complete source and fixed correctness binding
+
+The one selected study is unchanged. I accepted the bounded Implementer adapter/RNG
+and independent native-reader source after reading the complete diff and native host
+interfaces. The DM authored protocol/model/search, collection, persistence, outcomes,
+the all-particle reader, entries and integration checks. All work remains on shared main
+inside this direction's paths. No native environment, model, C, allocator, RNG block,
+pytest run or scientific execution has occurred through this source-review boundary.
+The source was parsed statically with stdlib AST only (25 Python files including the
+two package initializers).
+
+Independent Engineering Reviewer `/root/dm_user_waiting/engineering_review` traced the
+full executable route without DM conversation inheritance: actual constructor/reset/
+step/mask hooks, addressed physical and model randomness, report0 startup C, three-tick
+arrival and final short block, native arithmetic and search, every completed partial
+model unit, both C audits, wire/pilots, payload service and all user ages/gaps. Three
+reachable P2 findings were accepted and repaired before any execution: final record
+allocation previously followed the deadline sample; a successful movement could lose
+its saved physical state if the arrival refresh failed; and a file-write/hash failure
+could omit an already collected episode's model/C work from the summary. Both atomic
+success/fallback records now precede the final clock classification; postmove state is
+saved before arrival checks; paid-work rows and intended output bindings precede all
+fallible persistence, with final/partial paths, sizes and errors retained. Close errors
+also preserve the summary. Zero-science doubles cover the latter two failures; a fake
+clock covers the finalization overrun. The Reviewer's final source disposition is
+“No material finding remains in the full B01 source review”; its reviewed 24-file
+fingerprint is `7ac4fc67ac9cec8e0717c64985cb3a0239c91ce21d2410a51877d8482e8eb6b7`.
+Runtime acceptance remains pending. These engineering corrections change no comparator,
+clock allowance, exposure, scientific claim or selected investment.
+
+The full reader uses an independently written physical/observation reconstruction and
+the unchanged original scalar user-SINR, global stable greedy allocation and native
+service reduction for **every actually completed particle calculation**. It does not
+use the producer's disjoint-row allocation shortcut as proof. It regenerates recorded
+conditional prefixes/geometries and candidate-dependent correlations, checks typed
+hashes of all completed intermediates and all particle SINR/grants/native scores, audits
+the complete logical search prefix and never finishes an unexecuted request. Every
+actual draw or kernel completed before a reader rejection is charged before its digest
+is checked. First-pass C consumes saved observations; second-pass C consumes the
+independently reconstructed observations from the same paid native audit. The gap/age
+reader uses scalar per-user loops, including initial and terminal censoring; the paired
+mean/1.96SE audit independently reconstructs every ordered world contrast without RNG.
+
+Precision checks are prospectively fixed: physical/model intermediates, observations,
+codec fields, commands, masks, grants and candidate scores/hashes are exact on the bound
+NumPy1.26.3 float64/float32 routes. Native team reward versus its divided/summed return
+has absolute tolerance1e-12; independent scalar outcome sums have1e-10 absolute tolerance;
+summed path lengths have1e-9m absolute tolerance; independently accumulated paired
+summaries use1e-12 relative or1e-10 absolute tolerance. None relaxes action/tie identity.
+The current-state sensor/anchor introduces one counted nominal geometry per decoded
+round (at most4,096 main plus4 H8,250 links each, and its reader repeat), separately from
+the already priced candidate geometry. Collection also makes one explicit native service
+diagnostic reduction per completed movement to retain quality; this does not add radio,
+allocation, a counterfactual world or a policy decision. Hashing, copies, serialization,
+these diagnostics and verification are real support costs, included in actual CPU/RSS/
+storage observations rather than described as free work.
+
+The fixed H8 source entry is `b01/check.py`: exactly the three additional constructors
+and four explicit H8 resets/32 native steps previously priced. The unchanged old masked
+factory's one discarded constructor reset is captured by a temporary return-recording
+wrapper around its original reset; no extra getter/reset is called. That original
+factory constructs at H256, so its discarded state is labeled H256; the subsequent
+fixed old-host episode is set to H8 before its explicit reset. The sigma0 and correlated
+instances are constructed directly at H8. The fixed command for tick t/member i is
+grid index `(3*t+5*i)%27`; both old/sigma0 episodes start mask31 and set mask5 at state3,
+mask18 at state7. They make no C/manager/pilot/map-transmission query. The P/U H8 pair
+uses its two actual three-tick arrivals each and the already declared world/seeds. All
+four episodes and three discarded snapshots are stored before their offline checks.
+This preserves the priced eight fixture mask refreshes,7,250 physical-normal
+materializations and805 geometry uniforms per side,47 native radio-state calculations
+per side,20 worker C calls plus40 reader C calls,200 sounding slots, and zero fits.
+Constructor/partial technical failures remain evidence and do not silently restart.
+
+The source-only synthetic suite is now concrete. Address checks use namespace
+0x54535048 for physical tests and0x54534D43 for model tests, with the declared roots
+29640001/29640002 and fixture world29641900. Five physical API blocks (ticks0,0,1,
+constructor-world29641996/tick0, then world29641900/tick0), three model API blocks
+(report ticks0,0,4), and one independent physical plus one independent model reference
+at world29641900/tick0 total113,500 scalar normals:1,500 physical and112,000 model.
+Invalid-input/version and lifecycle-double cases draw none. Other pure cases check
+hover/clipped motion, stationary variance, expected-power algebra, codec ties/endpoints/
+saturation, timing weights and stable native allocation:16 batched fleet items and16
+original scalar native references, zero new normals or native/C calls.
+
+Exactly eight synthetic manager rounds (zero native or C queries) and their eight
+actual-prefix reader attempts use fixed synthetic positions/sites/codes, fake clocks
+and the model-test namespace above: P full; U32 full; U32 terminal report252; P late at
+entry; U32 late after its noise block; P late after two geometry units; U32 late after
+its first full radio batch; U32 late only during finalization. Every U case generates
+the complete16×7×5×50 block. The after-noise reader attempt deliberately rejects an
+altered completed noise digest, retaining its already generated block in the cost.
+Both sides therefore generate140,000 normals each; their completed particle work is
+bounded by the original229,376 fleet/57,344,000 SINR-entry envelope, not a benchmark
+sweep. Native/model/channel query counts of the collector/storage failure doubles are
+zero. There are393,500 synthetic normal materializations in total, within the original
+784,000 pure/pipeline envelope. If every selected main/H8 U round reaches its noise
+block, model-plus-synthetic-kernel materializations are115,193,500, below the previously
+priced115,584,000; actual early cutoffs retain their smaller counts. The original full
+bill remains canonical and all actual attempts, CPU, RSS and generated bytes will be
+recorded. A technical correctness discrepancy permits a proportionate, prospectively
+counted repair; it neither authorizes a new scientific panel nor changes deadline
+fallbacks into retries.
