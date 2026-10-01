@@ -3813,3 +3813,73 @@ direction exploring. No retry, pilot, live integration or science revision
 has been added by these implementation corrections. Runtime resource
 fields are measured at final record assembly; final JSON serialization,
 Python teardown and external support are not claimed as zero cost.
+
+<a id="b05-a01-runtime-failure"></a>
+### B05 A01 — accepted replay interrupted by SIGSEGV; evidence preserved (2026-10-01 UTC)
+
+The reviewed inputs were published as `de238594dc9d64d7be246e7b9628a63f6a53b272`.
+The fixed replay was admitted once on the configured `wsl_4070` node with
+the configured GCC CPython3.10.21 interpreter. Its
+[manifest](../../../../runs/uav_user_waiting/b05_local_allocation_a01/launch-manifest.json),
+[native terminal status](../../../../runs/uav_user_waiting/b05_local_allocation_a01/native-status.json)
+and [compact failure reading](../../../../runs/uav_user_waiting/b05_local_allocation_a01/result.json)
+bind the exact command, source snapshot, native identities and preserved
+artifacts. Admission was accepted at00:27:26.275399Z; the runner exited by
+signal11 at00:27:41.182344Z,14.906945s later. Runner and supervisor were
+both absent at observation. That elapsed interval is not process CPU time.
+
+The last atomic `summary.json` is still `RUNNING`, with89 source traces,
+267 outcomes (89 original,178 fair),22,784 source ticks and68,352 fleet
+allocations. Its1,479,367 bytes hash to
+`6e646a0ff9ef278cb15fd86a96e8471f4fd09f047182e8d2cbd696c182db72b8`.
+It reports341,760 UAV decisions,3,417,600 age updates,11,392,000 threshold
+entries and4.45502627 inner-allocator CPU seconds. These are checkpoint
+lower bounds, not the completed bill. The disk also contains the complete
+`U_29426029` contact/outcome pair: its outcome self-reports256 steps for
+each of the three laws, yielding90 trace files/270 self-reported outcomes
+in total. A1,120,784-byte `summary.json.tmp` is truncated JSON. This is
+artifact context; it does not establish the faulting stack or cause.
+Whole-process CPU, peak RSS and final accounting were not finalized.
+New fits, native steps, model and C calls remain zero. The producer's
+recorded invariance discrepancies through its saved prefix were within
+the fixed thresholds, but no independent B05 reader has run and no partial
+allocation benefit, package ranking or population conclusion is adopted.
+
+All189 original output files,18,724,648 bytes, remain in their sole
+canonical directory
+`wsl_4070:/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/`.
+The compact record contains every file's path, size and SHA256, including
+the extra trace and incomplete temporary summary. Eight collected metadata
+copies were checked against those remote identities. Original B04 input
+data and all old adverse outcomes remain intact. The new core remains in
+place at
+`/mnt/c/Users/wu/AppData/Local/Temp/wsl-crashes/wsl-crash-1790814460-1179774-_home_wu_.local_opt_hmasd-cpython-3.10.21-gcc_bin_python3.10-11.dmp`:
+35,643,392 bytes, SHA256
+`a06e26819a28ca65630bccadcdc72205d8cacb541f0eba460e31ac2365ec9cec`.
+The source snapshot is retained while Root's read-only recurrence diagnosis
+may consume it; it has not been removed merely because the native process
+ended. The remote stderr is empty. At00:29:50.990256Z the guest reported
+load averages0.12/0.35/0.21,15,249,348KiB available memory and2995.199MHz
+for all20 visible CPUs. These post-failure observations neither measure
+fault-time conditions nor establish load/throttling as the cause.
+
+The deterministic observer registered this same operation, exposed the
+consistent terminal fact in generation39, and could not queue a native
+child wake (`-32600`). The DM stayed active, drained and consumed that
+event, rearmed generation40 and stopped observation after collection.
+There was no replacement worker or duplicate replay. A prior source-only
+Git fetch stalled without the configured network login shell; its exact
+owned transport process was terminated and the read-only fetch completed
+through `zsh -lic` before scientific admission. This did not restart a run.
+
+**Disposition and dependency.** This is technical incompleteness, not a
+negative result for RR/LRS or a changed explanation of waiting. The
+all64-world comparison, full independent reader and result interpretation
+remain outstanding. Root has taken the bounded read-only shared runtime
+recurrence investigation and node/runtime reassessment, under the owner's
+earlier instruction to investigate if the provisional replacement crashes.
+The DM supplied the exact operation/core identity through native child
+communication and is preserving the accepted collection. No retry,
+resumption, different-node replay, allocator repair, new scientific
+comparison or confirmation is selected by this failure. Any selected
+recovery must retain A01's exposure and cost rather than silently replace it.

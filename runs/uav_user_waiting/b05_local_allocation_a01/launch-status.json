@@ -1,0 +1,11 @@
+{
+  "claim_key": "7de44725cfde81bad5e5065bd41f21f23aee83d724a0c97def62c8280447e3c6",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/7de44725cfde81bad5e5065bd41f21f23aee83d724a0c97def62c8280447e3c6.json",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/launch-manifest.json",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/7de44725cfde81bad5e5065bd41f21f23aee83d724a0c97def62c8280447e3c6.json",
+  "pid": 1179773,
+  "runner_pid": 1179774,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-10-01T00:27:26.280239Z"
+}

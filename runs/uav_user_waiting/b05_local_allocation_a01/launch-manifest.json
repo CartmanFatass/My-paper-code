@@ -1,0 +1,102 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-10-01T00:27:26.275766Z",
+  "bootstrap_command": [
+    "/home/wu/.venvs/hmasd-gcc-31021/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/9b680a5b7dee471e865759e84a49a043/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/9b680a5b7dee471e865759e84a49a043/experiments/candidates/uav_user_waiting/b05/run.py",
+    "--output",
+    "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01",
+    "--",
+    "--out",
+    "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01",
+    "--launch-sha",
+    "de238594dc9d64d7be246e7b9628a63f6a53b272",
+    "--seed",
+    "29426000",
+    "--generic-summary",
+    "/home/wu/projects/HMASD/runs/uav_user_waiting/b04_service_floor_a01/summary.json",
+    "--generic-summary-sha256",
+    "49754e61f38009681d5a842d320a1878bdd260518300a5391cc3c8678db47c47"
+  ],
+  "claim_key": "7de44725cfde81bad5e5065bd41f21f23aee83d724a0c97def62c8280447e3c6",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/7de44725cfde81bad5e5065bd41f21f23aee83d724a0c97def62c8280447e3c6.json",
+  "command": [
+    "/home/wu/.venvs/hmasd-gcc-31021/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/9b680a5b7dee471e865759e84a49a043/experiments/candidates/uav_user_waiting/b05/run.py",
+    "--out",
+    "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01",
+    "--launch-sha",
+    "de238594dc9d64d7be246e7b9628a63f6a53b272",
+    "--seed",
+    "29426000",
+    "--generic-summary",
+    "/home/wu/projects/HMASD/runs/uav_user_waiting/b04_service_floor_a01/summary.json",
+    "--generic-summary-sha256",
+    "49754e61f38009681d5a842d320a1878bdd260518300a5391cc3c8678db47c47"
+  ],
+  "command_sha256": "55cb807198c2c01865454543ecd593a13dcf675da7b02604a96cfb262f4f3a99",
+  "control_observation": {
+    "observed_at": "2026-10-01T00:27:26.135374Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "168a42e571e25947f833486792c71f1c94d77a9f"
+  },
+  "control_root": "/home/wu/projects/HMASD",
+  "created_at": "2026-10-01T00:27:26.166784Z",
+  "cwd": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/9b680a5b7dee471e865759e84a49a043",
+  "direction": "uav_user_waiting",
+  "host_identity": "LAPTOP-U9TDKC8A",
+  "identity_command": [
+    "/home/wu/.local/opt/hmasd-cpython-3.10.21-gcc/bin/python3.10",
+    "experiments/candidates/uav_user_waiting/b05/run.py",
+    "--launch-sha",
+    "de238594dc9d64d7be246e7b9628a63f6a53b272",
+    "--seed",
+    "29426000",
+    "--generic-summary",
+    "<SOURCE>/runs/uav_user_waiting/b04_service_floor_a01/summary.json",
+    "--generic-summary-sha256",
+    "49754e61f38009681d5a842d320a1878bdd260518300a5391cc3c8678db47c47"
+  ],
+  "lead": "Codex DM (native child)",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/launch-manifest.json",
+  "node": "wsl_4070",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/7de44725cfde81bad5e5065bd41f21f23aee83d724a0c97def62c8280447e3c6.json",
+  "output_root": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01",
+  "preflight": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 1179773,
+      "session_id": 1179773,
+      "start_ticks": 115712016
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 1179773,
+    "process_group_id": 1179773
+  },
+  "process_exit": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 1179774,
+      "session_id": 1179773,
+      "start_ticks": 115712019
+    },
+    "pid": 1179774,
+    "process_group_id": 1179773,
+    "supervisor_pid": 1179773
+  },
+  "schema_version": 1,
+  "sha": "de238594dc9d64d7be246e7b9628a63f6a53b272",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/9b680a5b7dee471e865759e84a49a043",
+  "stderr": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/stderr.log",
+  "stdout": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/stdout.log"
+}

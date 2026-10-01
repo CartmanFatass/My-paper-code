@@ -1,0 +1,1171 @@
+{
+  "object": "UAV-USER-WAITING-B05",
+  "status": "FAILED_SIGSEGV_INCOMPLETE_UNREAD",
+  "scope": "Exact A01 failed operation and partial-output preservation; no scientific aggregate or benefit claim; no independent B05 reader run.",
+  "launch_sha": "de238594dc9d64d7be246e7b9628a63f6a53b272",
+  "node": "wsl_4070",
+  "native_status": "native-status.json",
+  "input_config": "config.json",
+  "last_atomic_summary": {
+    "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/summary.json",
+    "bytes": 1479367,
+    "sha256": "6e646a0ff9ef278cb15fd86a96e8471f4fd09f047182e8d2cbd696c182db72b8"
+  },
+  "last_atomic_counts": {
+    "source_traces": 89,
+    "source_ticks": 22784,
+    "original_outcomes": 89,
+    "fair_outcomes": 178,
+    "fleet_allocations": 68352,
+    "uav_allocation_decisions": 341760,
+    "original_kernel_calls": 22784,
+    "rr_row_selections": 113920,
+    "lrs_row_selections": 113920,
+    "transition_reductions": 68352,
+    "user_age_updates": 3417600,
+    "threshold_scans": 45568,
+    "threshold_entries": 11392000,
+    "hash_files": 291,
+    "hash_bytes": 153785429,
+    "input_hash_files": 113,
+    "input_hash_bytes": 137864049,
+    "raw_files_loaded": 89,
+    "raw_array_bytes_loaded": 60086852,
+    "contact_bytes_written": 455796,
+    "outcome_bytes_written": 15465584,
+    "contact_values_retained": 2278400,
+    "fair_contact_valid_user_ticks": 2278400,
+    "native_steps": 0,
+    "native_resets": 0,
+    "environment_constructions": 0,
+    "fits": 0,
+    "optimizer_updates": 0,
+    "parameter_updates": 0,
+    "model_calls": 0,
+    "c_calls": 0,
+    "radio_sinr_queries": 0,
+    "geometry_predictions": 0,
+    "candidate_requests": 0
+  },
+  "last_atomic_allocator_timing": {
+    "allocator_wall_seconds": 4.41880439245142,
+    "allocator_cpu_seconds": 4.45502626999993
+  },
+  "last_atomic_discrepancies_unverified": {
+    "native_quality": 0.0,
+    "native_J": 1.6653345369377348e-16,
+    "quality_ceiling": 0.0,
+    "per_user_mean_age": 0.0,
+    "F_user": 0.0,
+    "max_user_mean_age": 0.0,
+    "A": 0.0,
+    "age_sum": 0.0,
+    "mean_age_square": 0.0,
+    "age_square_sum": 0.0,
+    "F": 0.0,
+    "J": 1.1102230246251565e-16,
+    "return_sum": 2.842170943040401e-14,
+    "mean_served": 0.0,
+    "mean_quality": 0.0,
+    "ever_served": 0.0,
+    "never_served": 0.0,
+    "max_unserved_gap": 0.0,
+    "mean_user_max_unserved_gap": 0.0,
+    "max_closed_gap": 0.0,
+    "max_left_censored_gap": 0.0,
+    "max_right_censored_gap": 0.0,
+    "left_censored_gaps": 0.0,
+    "right_censored_gaps": 0.0,
+    "age_p95": 0.0,
+    "terminal_mean_age": 0.0,
+    "terminal_max_age": 0.0,
+    "service_p10": 0.0,
+    "min_served": 0.0,
+    "zero_service_steps": 0.0,
+    "longest_zero_service": 0.0
+  },
+  "last_atomic_row_count": 267,
+  "artifact_preservation": {
+    "root": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01",
+    "file_count": 189,
+    "bytes": 18724648,
+    "identities": [
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/admission-preflight.json",
+        "bytes": 760,
+        "sha256": "6811193cf4781bb681f313e68cbf23f8f9ad18aad40cdf64ddc2c75ba4331173"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/config.json",
+        "bytes": 8791,
+        "sha256": "c8e2c580d186832b2c1ff8395d75fd521146be8564a493bd1321650a65278d32"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/M_29426000.npz",
+        "bytes": 5101,
+        "sha256": "4f08633ff8360f75299a91a8cb318b8505d13129e7681976a6d144d611a0fe33"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/M_29426001.npz",
+        "bytes": 4907,
+        "sha256": "f72cfe8944087f680c204430e9b9824e14c24c5de33e3434c50a883e8bc6ff07"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/M_29426002.npz",
+        "bytes": 5104,
+        "sha256": "fd1f3f3a9065ac86bcb503bbe4c721c3eb04822b927def804e898b28d26b4388"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/M_29426003.npz",
+        "bytes": 5156,
+        "sha256": "619ef8398e74e5b5227d948d3daa216d1db830352f16e04070601d431d88e2f3"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/M_29426004.npz",
+        "bytes": 5062,
+        "sha256": "2a72d2d449721384f432e3e8cd57a26b40f305440e18022b7ecc95f96acdbd41"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/M_29426005.npz",
+        "bytes": 5111,
+        "sha256": "378bf834661829b706302c2d1b2259ffc70ffea5bcbb27d537586cccd0ce586c"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/M_29426006.npz",
+        "bytes": 4974,
+        "sha256": "3e10d715f13346bbaca7529b7bf9699aee2c2dbd6b8cf4c53ed992b363b74957"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/M_29426007.npz",
+        "bytes": 5094,
+        "sha256": "9cb08121a0cf69499919d20239e4933341e638ff70492ee8443bd4ce6445ce29"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/M_29426008.npz",
+        "bytes": 5112,
+        "sha256": "d752d24b27cf7794f1751191a880d856d8cb67e9230e04cafe53995c248d7940"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/M_29426009.npz",
+        "bytes": 4928,
+        "sha256": "d83f81f6ea96e6f5778a6103e1231e250fd34a560d3536db469c4b69ebaea183"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/M_29426010.npz",
+        "bytes": 5114,
+        "sha256": "3a2075a12c48c74bdfd03f03b973f523cb1019683eda0c786262e87bec271a63"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/M_29426011.npz",
+        "bytes": 5129,
+        "sha256": "4887cf5e269a04ab45cbf6995e407c74aeb6b8dc29554ad72292ccbfb5d584d0"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/M_29426012.npz",
+        "bytes": 5138,
+        "sha256": "1468a100394c112b5604f0a925aa1ff1ab69852bba22cc868634648c221a8a18"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/M_29426013.npz",
+        "bytes": 5091,
+        "sha256": "ec9875f6642a34b40cd87e25bda4549f755320771713dcbf79e9b6a23d56bd91"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/M_29426014.npz",
+        "bytes": 5101,
+        "sha256": "69af5d0eafba590b676dfebc1388800d2db30e1a66d7beb67d711dd573beeb4b"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/M_29426015.npz",
+        "bytes": 5010,
+        "sha256": "d7e2f56197555deaad7f8464c613e54cbf9c8594232b19d5e0a5f820fced32a6"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/M_29426016.npz",
+        "bytes": 5168,
+        "sha256": "08af0fab9c7f55cd3be3efd2f9a7de43bdb1adf7c42e864e07d1759ad1260374"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/M_29426017.npz",
+        "bytes": 4963,
+        "sha256": "660268c1ba373b101866671742267f0e504918aaa166a3c10d052c65228acd5e"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/M_29426018.npz",
+        "bytes": 5136,
+        "sha256": "22fd254c1e5ceb9925e0e1fe3412dc9a55fe41b33c45051842d6eac8b255a2be"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/M_29426019.npz",
+        "bytes": 5135,
+        "sha256": "18b922326e703f5284aab1241eb9160138cb1ecaa071724ca725506261c2399a"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/M_29426020.npz",
+        "bytes": 5182,
+        "sha256": "58c426bc610664230d8e2929b99819a35d88db57b511394c2c0f344c6745bbf8"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/M_29426021.npz",
+        "bytes": 5258,
+        "sha256": "0fa89df1b7afd085369b65bfa2cfb366457d7b9955f8ec8c89b418c3e48239b9"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/M_29426022.npz",
+        "bytes": 4975,
+        "sha256": "105c6e01c1efdc8e2877363b898fd90f4a8fbde9ef496a346ad40162cc5606bb"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/M_29426023.npz",
+        "bytes": 4904,
+        "sha256": "0cadea8f7eb5390646e1a0cc3801b6cf88372ceeb62ef744c99473510ef3fb03"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/M_29426024.npz",
+        "bytes": 5035,
+        "sha256": "b27b178f6aa0bb14758382d03edc4a75e5fb5a775cf2a3cbb956628dbf6d15ee"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/M_29426025.npz",
+        "bytes": 5125,
+        "sha256": "006526034d6301b923673ecc081050244c1b8ac13c7b23957a8fdc657caee19f"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/M_29426026.npz",
+        "bytes": 4928,
+        "sha256": "e5249e0497556dc7c7fb2fd5c5455d4bddd5a0a2aee3d5541b6590f1775cdbd4"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/M_29426027.npz",
+        "bytes": 5172,
+        "sha256": "ce233ba95efb6100e248b59f48cb6689975ab72272b339cd751de31dd5b957b7"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/M_29426028.npz",
+        "bytes": 5177,
+        "sha256": "3487336dba617a3fa98355327ee2f916035e795ab2fd945462c255f553d4d3d6"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/M_29426029.npz",
+        "bytes": 5033,
+        "sha256": "a9f121f875358132d722163c81bf54cb3028684faaa2cefce3a5a99ddf063f23"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/S_29426000.npz",
+        "bytes": 5264,
+        "sha256": "b2ae1841de6ac99c178b335edd147128a3d82ee479e01e592513633487f93272"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/S_29426001.npz",
+        "bytes": 5111,
+        "sha256": "adff8d6611136a6d938f1f1818c8e858f0552c0abe1bbae202e1f79a0cf90164"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/S_29426002.npz",
+        "bytes": 5174,
+        "sha256": "083c2e9f91b0591eb292b1a92111ce2f6ea586ff162904120909a7d0bfcf5baf"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/S_29426003.npz",
+        "bytes": 5132,
+        "sha256": "7c967adc3ea470f2ae0d992c0b0c0f8a94f6ac37f0c6ce30d15ab1e3089617c2"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/S_29426004.npz",
+        "bytes": 5231,
+        "sha256": "9c7789d5145aa34bb2f433242cafc148c0306e5ecd759421b3b375c72f11ad1c"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/S_29426005.npz",
+        "bytes": 5051,
+        "sha256": "6ea0a1a0eced5fcedc4623893e9bc7b30b0a5c550ce99923fa8db81439a70ad7"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/S_29426006.npz",
+        "bytes": 5160,
+        "sha256": "b497aa345b754c77e68bec4405efd4df44dbc51e8e28d4028e9291a1c642a662"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/S_29426007.npz",
+        "bytes": 5173,
+        "sha256": "14966cdee5aea1aa5da4d7ce2eecc20ed7d95ce23f0974863d764d43a71aca2a"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/S_29426008.npz",
+        "bytes": 5175,
+        "sha256": "898a60e67534cf52874266c966f561cf3b5813e18064ece1b9776a7079bad543"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/S_29426009.npz",
+        "bytes": 5087,
+        "sha256": "7c85d8ee2e1bc77857b67cf6d0188016c3e7cc3c803811defa6121d19e74febc"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/S_29426010.npz",
+        "bytes": 5247,
+        "sha256": "598a6750ca626428d845988707486dfb7542e4ae5f075fb9b00e9a305423fbc2"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/S_29426011.npz",
+        "bytes": 5201,
+        "sha256": "2a3e12bbd7b0eac64dae6c900e6479a11d3cf73526a3765d49aa2967dc8e0a67"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/S_29426012.npz",
+        "bytes": 5123,
+        "sha256": "9b6a41ccae8338c50d6bf31422c936c6e81a0208ef920a6d958d2354a2ae4609"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/S_29426013.npz",
+        "bytes": 5194,
+        "sha256": "fd0b2c371318c7eae890dcd26af94cf8a82e0e9cd7a1132fe3c4c32c830c45f5"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/S_29426014.npz",
+        "bytes": 5038,
+        "sha256": "18a7e4db937cc244881604d02723050bf326ac0128cbfcd4899d2c5646716e0f"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/S_29426015.npz",
+        "bytes": 5166,
+        "sha256": "b4fa81b67584b4e89a559f198b3e7258519063c10320da5841ebc99d8e44cb3a"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/S_29426016.npz",
+        "bytes": 5225,
+        "sha256": "971bc7f84a9385295232396e8f22f2e2e2fbd3b38964ef12c28e66222c74284e"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/S_29426017.npz",
+        "bytes": 5015,
+        "sha256": "b5f86626fe8456af425b86626d067f94743f94169e78b135400229e38d8154fe"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/S_29426018.npz",
+        "bytes": 5109,
+        "sha256": "dc2134c4d7bab9ac594206be3f24965a2b52f8d281cbd5b6aeb2e4218cbb37e2"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/S_29426019.npz",
+        "bytes": 5117,
+        "sha256": "dbc9e8a8704ae30143dc8014c2d239b30e76f110f89b189bd320dd6fa3b745c5"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/S_29426020.npz",
+        "bytes": 5187,
+        "sha256": "e70df195be9441beb93310c4ea24c397c232a455025194d32a45351e7068cb41"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/S_29426021.npz",
+        "bytes": 5214,
+        "sha256": "4b22d43c2302c8067668d50a25bd1669c9b42d96c6dbeaccf7685376a3f0aaa8"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/S_29426022.npz",
+        "bytes": 5155,
+        "sha256": "8a4e4900052f434025f16da4bcfe2d6dc8c731b5691ac0c953bd9fbb6f569444"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/S_29426023.npz",
+        "bytes": 5144,
+        "sha256": "3419b9d1b543a02d43cf945d6a9734bc14f955c04b5ae73c91579fb0ece7b3f7"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/S_29426024.npz",
+        "bytes": 5120,
+        "sha256": "caa068c492ee556c030db1af46159544f40970766bd9b2354c03f459ebe296ab"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/S_29426025.npz",
+        "bytes": 5173,
+        "sha256": "1326774dcad4e3ec74f99c4516feb083a9a319f7ae5ac7720b2bf460dc711015"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/S_29426026.npz",
+        "bytes": 5171,
+        "sha256": "92b8fff88b42bc7fbedb3cbefb0c3838b7fafc6721755841267c9591098378b3"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/S_29426027.npz",
+        "bytes": 5243,
+        "sha256": "5cf33e4457960f88fe8d643b551679f621691865f5e89b5cff5f7d7c4242424b"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/S_29426028.npz",
+        "bytes": 5134,
+        "sha256": "5c72f6a144163a8d3bcec05670e9530620eeae2af22122db049936ba7e283109"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/S_29426029.npz",
+        "bytes": 5052,
+        "sha256": "9fa24a6426791548d65c50b28d02ea98addd4e243c88f237549a10690cf33e2e"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/U_29426000.npz",
+        "bytes": 5203,
+        "sha256": "1f9861f244407fd7b818c072476c849f93bea71cecc3a4f8c2c4136ceae94949"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/U_29426001.npz",
+        "bytes": 5104,
+        "sha256": "d350f9cf88df3dcd7a2162bf0ec514606f9983b5fbabd4a068e579517d20f43e"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/U_29426002.npz",
+        "bytes": 4999,
+        "sha256": "51f98bbd7c4b7db4ca96d9efb98b07b1d94aa34935a8e4c3ec7e71d89f675500"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/U_29426003.npz",
+        "bytes": 5163,
+        "sha256": "3c974a3992c7cc3147d666e529a94d0032a426798bd7532f4c2392ab456b5d08"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/U_29426004.npz",
+        "bytes": 5140,
+        "sha256": "85cc0ac0066737481432ae49e54d3352b41daf95bc472291b9c91e4829034d23"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/U_29426005.npz",
+        "bytes": 4999,
+        "sha256": "858166c81e447a3b29619b2c1642d581030d25dae8ecd7104bf1eceb53f64d5b"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/U_29426006.npz",
+        "bytes": 5154,
+        "sha256": "a25bb3f3bfa8142b876b5a5c35d58e7348874418300bf593de198279fd8ad10c"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/U_29426007.npz",
+        "bytes": 5129,
+        "sha256": "4511694ee17143f0425cceaa9fa212ceefc7fdac161087c95936f46527d6435e"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/U_29426008.npz",
+        "bytes": 5200,
+        "sha256": "0e18033f8536eac29c99cb4d24f74b89cb536b3f5ea627f2b9d43bcc257e98db"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/U_29426009.npz",
+        "bytes": 4990,
+        "sha256": "bfb7f1fade77f4eb9547a7dcaf7cc5a6628b656f78d296ee4a8ee9274a58f3cb"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/U_29426010.npz",
+        "bytes": 5247,
+        "sha256": "3cc0cc2c547a025719af2e84c06a9566c339644d1c7813ccdc218faa2aea3e13"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/U_29426011.npz",
+        "bytes": 5087,
+        "sha256": "4205f6b5ad5b02484e29bbc178cb901416303d62b6aa4c2eee29e5e0886836af"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/U_29426012.npz",
+        "bytes": 5072,
+        "sha256": "d77fa706ef5128e850faee4744cc7fd694ed262c40b4a5898f010a0e37673a04"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/U_29426013.npz",
+        "bytes": 5227,
+        "sha256": "9a70bce67360d2493a90ff130b53b6884b20bb78815cf49a8e36f9e4a0318f23"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/U_29426014.npz",
+        "bytes": 5146,
+        "sha256": "04f1735dbaa5168ab3be8b0aac9674dbc705ded307b0be4279082a844bef30e5"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/U_29426015.npz",
+        "bytes": 5119,
+        "sha256": "c8e78441d59cf232280d034aeb9c55b534b2cb0ee746c8471d784de153650e36"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/U_29426016.npz",
+        "bytes": 5199,
+        "sha256": "23750ae53bc3c83877efbec2271bc0f69129a7e19b0b6426e12d0cda0b6c675f"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/U_29426017.npz",
+        "bytes": 5080,
+        "sha256": "67a4d0309a141fd6c7bd278843624b97d4db3717a42e8c347b5bb66e214feef2"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/U_29426018.npz",
+        "bytes": 5113,
+        "sha256": "75b885901dd12aac46bf646e5245bf533671e46346b4da6723e2ca6846ff0ae6"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/U_29426019.npz",
+        "bytes": 5136,
+        "sha256": "d9748ece4b211df13130f2255a674ed6c6afa7799f81752767e44a319050f064"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/U_29426020.npz",
+        "bytes": 5175,
+        "sha256": "cb177da3c9ed8d780147f3c2493c6dcad321b0cf6c767af0ecc21fe50e132db5"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/U_29426021.npz",
+        "bytes": 5181,
+        "sha256": "24dbdfd409814d1904495feb18c2e823983abc439524a01d0565f927ff6a870e"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/U_29426022.npz",
+        "bytes": 5164,
+        "sha256": "62950b3e236e9fdc6244c31c346affa0d958af7e9cc1991f4564d79fa86a8b01"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/U_29426023.npz",
+        "bytes": 5150,
+        "sha256": "dd5b86c2264affa4c9f81d01d088e60431be2155cbd9925701acd05fe6d4aad6"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/U_29426024.npz",
+        "bytes": 5108,
+        "sha256": "ff0f608d7c99973049db6beb25c554254888e910cfa937a27b30fb3ae704bfd8"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/U_29426025.npz",
+        "bytes": 5168,
+        "sha256": "80116eaef41d241d2e7b2b869bfdfff86bb0669cf59b62bccf06897767c0aa21"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/U_29426026.npz",
+        "bytes": 5081,
+        "sha256": "2cc4643af2d616dd5aac458a3f29448982bcd9120642d692c8411be3320cd6e0"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/U_29426027.npz",
+        "bytes": 5254,
+        "sha256": "cc08691c96182ea13e694a02a360b3e660c8f2bdd9960143a7752be1243a1645"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/U_29426028.npz",
+        "bytes": 5099,
+        "sha256": "1f239c4a857a92615aa7563067bc6d5a68eb5241243149553a53a82f95895713"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/U_29426029.npz",
+        "bytes": 5139,
+        "sha256": "37cd900c5e0380c7bccbffcbd3f9ba0870328b63086455444bb89c335855b2dc"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/launch-manifest.json",
+        "bytes": 4469,
+        "sha256": "86e46c5574e9d93449f1d7382c4858c43498fc53b8303d7863fae4ce8d1569b9"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/launch-status.json",
+        "bytes": 606,
+        "sha256": "bf1f54dc4d75d5e83220fd7e8e63d1544c4f9e3e80fac115c547c4a74f1e13be"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/M_29426000.json",
+        "bytes": 169866,
+        "sha256": "8bb87ee4555905f71bb18d03cfeb7cc9d02159bae95fc849aafd045b95304563"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/M_29426001.json",
+        "bytes": 138558,
+        "sha256": "df8c52ea8559833eba068e66c9576ff136895b471796779eade80b72e3fc289e"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/M_29426002.json",
+        "bytes": 167267,
+        "sha256": "be56793e452d468ac8167bc0715ff6e26c3064524dad5f6575fee15e8f02a0fc"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/M_29426003.json",
+        "bytes": 160944,
+        "sha256": "cf8854cb4017c67d17fa1654aead46836d43c724fad949b45737ad4130e34c7c"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/M_29426004.json",
+        "bytes": 152393,
+        "sha256": "bf661eb8a6ee444d9a76236aceb1395bc93adf8238b0574b60e951fc91b49c25"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/M_29426005.json",
+        "bytes": 167364,
+        "sha256": "15fda6b0eb5cb8cd023330c326d5fd0df186bed085a3451db862171be4285175"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/M_29426006.json",
+        "bytes": 157425,
+        "sha256": "6eeebdff96eea27bf17f00c175339c8e4edca44d917e9ed72effd6d79ff0f656"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/M_29426007.json",
+        "bytes": 167513,
+        "sha256": "7eaeff4c683120d8a3872ddfb1bedc60384f5c590d8338c8d8d42527294c3d10"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/M_29426008.json",
+        "bytes": 160221,
+        "sha256": "e4dacfddf266cceb9cdf1400547ca84fc2410852b1e7ece9bb7cd3b915b89ebb"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/M_29426009.json",
+        "bytes": 151557,
+        "sha256": "64379cd421c9f8854c6556c7d13bc59d2481b220b28059f2ba14655b1341b69f"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/M_29426010.json",
+        "bytes": 161554,
+        "sha256": "bffa0642b82042377fb8a6e74a9f06e9783b927b8f254a44d094990cc6c3b563"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/M_29426011.json",
+        "bytes": 165537,
+        "sha256": "193a39dcd83660b9337fb0dbd6677aa2d0cc6fb3bfb6727b175737d3b5a559ed"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/M_29426012.json",
+        "bytes": 169158,
+        "sha256": "14537bd2ac94b851ff39fd8a444273df85203a77924cc988450c397c3e1c7075"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/M_29426013.json",
+        "bytes": 169521,
+        "sha256": "bf8cb9a32774dd4ac8774f08b03512afa152017e338b5d6c9132363b7aaacdcd"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/M_29426014.json",
+        "bytes": 165784,
+        "sha256": "ff8d54baf344cc58321ab33b674411a8cfb54b3018039ffce911fff1a17fb225"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/M_29426015.json",
+        "bytes": 169895,
+        "sha256": "f9900c108cfa812a486077ef59de1e801f747244cccc78b3b38a7bbe95904ce3"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/M_29426016.json",
+        "bytes": 170371,
+        "sha256": "1d67c74300de1e631e7688a30647c45f76bd0a2598cdfde94af3b9fcdd7f754d"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/M_29426017.json",
+        "bytes": 157786,
+        "sha256": "60072c70931dcbce2a09ab204133b9d0819018364ba4d7277fe5448a6f5f56c9"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/M_29426018.json",
+        "bytes": 175169,
+        "sha256": "61869af65272204991c85d84977eca5c2550bc1d369074b70fdb6a944d409cdd"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/M_29426019.json",
+        "bytes": 175401,
+        "sha256": "a5452fa51062f61e1ef3c98be8bf9ea226ee4ac87a7480f97b830d78b499d635"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/M_29426020.json",
+        "bytes": 178471,
+        "sha256": "41f2743af34b39e965a03d77626c965b73493d3dd3ada8989056f2c0eb7a3ed5"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/M_29426021.json",
+        "bytes": 180404,
+        "sha256": "ba618aa71a23003b530e83239c4b509a04144dc856d376bdd9dbcf940ffc79c6"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/M_29426022.json",
+        "bytes": 157425,
+        "sha256": "f9f356948a81d18a22616a8bd6ca9fc158d04b231cbf69a7e82a058b430c7aca"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/M_29426023.json",
+        "bytes": 149817,
+        "sha256": "590b38f9c776979876ca415d1dedd27454361b0bf1541c92891b8a5dedbf9f25"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/M_29426024.json",
+        "bytes": 160456,
+        "sha256": "a05ce777795f8841cbc338c390891ceaa5d0909cd4ac0f22cc37ad6f13a451c7"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/M_29426025.json",
+        "bytes": 165779,
+        "sha256": "a4c88b5d338c5d766901444549f7410ff31208e97f2ede982cf981286b782e0d"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/M_29426026.json",
+        "bytes": 149481,
+        "sha256": "08dd062a966bd52810dfdbdaaa7250d8bbaa8af9d863e09a7bf895139c5ee038"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/M_29426027.json",
+        "bytes": 172069,
+        "sha256": "530b65c5c44753dc1854917c741c24f71d1d6db32660cda9607836c9ffdd0382"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/M_29426028.json",
+        "bytes": 175059,
+        "sha256": "abe9fdfcc68d11fc92c908a20420aea50e5d853325d4efd751fc12730c37a13c"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/M_29426029.json",
+        "bytes": 148140,
+        "sha256": "c710514a9a82b77d26e35c9eb267eb626c846d69439dd78408b1a31947c42a88"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/S_29426000.json",
+        "bytes": 187629,
+        "sha256": "cdc3214180535a7523812e40dd4af2cf9d126dabc8881574f2d04a56bf690870"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/S_29426001.json",
+        "bytes": 179948,
+        "sha256": "34eaa48d501ac76a3043679ef51de5d8bca160b23676985f0dce3c0c76cd933c"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/S_29426002.json",
+        "bytes": 174606,
+        "sha256": "85d1b969c58b92c3d7ee2ea1665e7bdba054aa14926ca8b4fa66129ddea8514f"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/S_29426003.json",
+        "bytes": 179711,
+        "sha256": "2ebb4a90c984d8c5d5c581f4fd51e8a3dd2a83421e06adba76fcaafa7c567b39"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/S_29426004.json",
+        "bytes": 181371,
+        "sha256": "1ab3c2049d88c324b512827a9c0a62e60acc641ce5afd52474717a8596068c12"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/S_29426005.json",
+        "bytes": 182374,
+        "sha256": "cc45b22a75e426079bb35a530930d2ea64d9c684e2b9b87de6447f8204d32b42"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/S_29426006.json",
+        "bytes": 175106,
+        "sha256": "05481be4c0fd6d345204edb263415f3cfcb4aba7699738b4dae6049a4d24167b"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/S_29426007.json",
+        "bytes": 181927,
+        "sha256": "01a9f565a2cf2a58affe93fc219e81e85ed94a32d4242d4487cb3524d5e73061"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/S_29426008.json",
+        "bytes": 174079,
+        "sha256": "3683f386e07b9c5e5dcf53d2a812111e12d940c389404ecdf3117eb795512074"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/S_29426009.json",
+        "bytes": 173410,
+        "sha256": "32d5c6ddd25b941af6417a2542273d958e98654656637c173b454c12f1e5ecf5"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/S_29426010.json",
+        "bytes": 183840,
+        "sha256": "9b4aeef4c8af7ded596e6e2f3d8b6857c4986af54d4c7bd54aecafabae41272b"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/S_29426011.json",
+        "bytes": 179831,
+        "sha256": "afeb063fac955b3e4fb2709f66f20b3ff665267e380dad832ef0aa7a41918f4c"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/S_29426012.json",
+        "bytes": 175406,
+        "sha256": "518f9f2fc82a83d9fdf6b3a855e3ba40361a03309e940c2ef603cdb8ce6639e2"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/S_29426013.json",
+        "bytes": 187055,
+        "sha256": "6483aa83dc7293907151a6f61f16d57a58991f42038a9ba9bd87aa474cf01c9e"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/S_29426014.json",
+        "bytes": 172976,
+        "sha256": "9b188689d8bc4317303723fe7d562bbcc9a0514161de476c7530fd2f781f80cf"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/S_29426015.json",
+        "bytes": 175949,
+        "sha256": "cd17fbd0590c16fd0d619dd346123f4b9c9fbca428b2df7ae93a4142f905010f"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/S_29426016.json",
+        "bytes": 182534,
+        "sha256": "f3309783c7446ea61465d2d35fcc9a5f0b5692f029345b7e59197e96b444c461"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/S_29426017.json",
+        "bytes": 171491,
+        "sha256": "fe523aed4652b7437030060a7a72d7f247a2dc37d2ce4d944af07efdccaad60d"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/S_29426018.json",
+        "bytes": 176490,
+        "sha256": "0aa61a9a0646e3958d6aeae44d88467da21ee4190af7dd856452105002a60e09"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/S_29426019.json",
+        "bytes": 179037,
+        "sha256": "76483dc52413a8a4f3cafe3d0b0d6a62a1ea0c5b4e6c002ee521a0079873c12f"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/S_29426020.json",
+        "bytes": 189504,
+        "sha256": "21aa48bb151280ffb9ee2ad0d227e91aaae87e155a4d809cb6e5e756ee6816a1"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/S_29426021.json",
+        "bytes": 189028,
+        "sha256": "341637aa4f439345c623694cf2681e9f14a16269fe8ee954e30223ba1895f1e0"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/S_29426022.json",
+        "bytes": 178251,
+        "sha256": "98173b1c05f1fb3b4edc3f78ef129b2a0a23d76b0d246e1692c75102ce282bd5"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/S_29426023.json",
+        "bytes": 177812,
+        "sha256": "f4a681ce9146c3b807962fb25d94d89e1d7e36eb2d568b956c05991d85de8c6b"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/S_29426024.json",
+        "bytes": 174988,
+        "sha256": "1350da3729806dc9e1d9b37cbd474ba5b9f4e75302c2fa85e03b9cd3d7853aa5"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/S_29426025.json",
+        "bytes": 183627,
+        "sha256": "1777121cd5d2394ac4b27f041e50f01307a1626893b061d75e5639b67fe6a6d8"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/S_29426026.json",
+        "bytes": 178983,
+        "sha256": "4db3d2b5c8097d0399da9595f8229108d387137793a9c4ba4b2da97d5fc489c8"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/S_29426027.json",
+        "bytes": 191074,
+        "sha256": "706252bd9439b1f1a00137d76a070e7ef594e1060ef12c54cd2a56a08c880fbf"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/S_29426028.json",
+        "bytes": 184117,
+        "sha256": "c9b0d1230fa91f736d6087f5b4f05ccad0b78d2d75dc367c6d133e20eb1dda8b"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/S_29426029.json",
+        "bytes": 177112,
+        "sha256": "33ac8c14353edea9316b1b708d48bcb324d763fdd3157f3b17a3ae38fe37ff1b"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/U_29426000.json",
+        "bytes": 177766,
+        "sha256": "4e131efcbdaf86b9ad6a226a041f3af30f4081f332f53b0a07dec500e2e88a83"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/U_29426001.json",
+        "bytes": 168677,
+        "sha256": "c0692eacc2fada8a01c85e91d97e8ed6c125175712bc5d440fa678fd0f0599e1"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/U_29426002.json",
+        "bytes": 177335,
+        "sha256": "7ac3cdd291480b92cafe377f03cdd883070ceae26d8abc2053c4fd01d6f1806a"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/U_29426003.json",
+        "bytes": 183159,
+        "sha256": "666d6a2b4524a4e26b6e43dc4c71e97a9959b928044d4bf100538bf029f30ee5"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/U_29426004.json",
+        "bytes": 176405,
+        "sha256": "f7b21502577d23e72062db7b5f548225b27e1d71b8e49bc986f4842dc31ab3b7"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/U_29426005.json",
+        "bytes": 173974,
+        "sha256": "a9522c2ffa30fb6f79bcbb65a2b1a6ce169e8f03f702ecc15d614300c07b27e4"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/U_29426006.json",
+        "bytes": 173400,
+        "sha256": "daf1ad8991373b2010b382d4c0c11e2b978deb76fba4f2d3ca10454084794678"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/U_29426007.json",
+        "bytes": 177935,
+        "sha256": "8b9e44dcb77b5b2cb30c7e8a4eede2972a72e6ee52d7a3a1267656e203d2e953"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/U_29426008.json",
+        "bytes": 185422,
+        "sha256": "402ee2229ef08b3c4d74e72ef25ba2f72de851229f4f235586b82c9b9ddb5c77"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/U_29426009.json",
+        "bytes": 166238,
+        "sha256": "b9f8c48e9dced6de55810987bc2a6e783c2ee5ec341c0b0c3fe2f4548559b888"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/U_29426010.json",
+        "bytes": 175102,
+        "sha256": "fc19e5f93e4ccc80ba47463dfc1dbcd30733d2106e5f4a4feb0d2e512d53467b"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/U_29426011.json",
+        "bytes": 173516,
+        "sha256": "ce0fafc1b7550c749eb30d4c6e6727896e9a6bacfccd0b3a5dbd10bdbc414cc3"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/U_29426012.json",
+        "bytes": 176850,
+        "sha256": "57e5b8c158ccd26f7776b087f04c86aa9044e9405ae3585788c992c7f8227551"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/U_29426013.json",
+        "bytes": 181651,
+        "sha256": "d3439f6fec8961e477918773d3fe9e9405b7130902bf5f09cf6ba834495c6482"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/U_29426014.json",
+        "bytes": 179410,
+        "sha256": "8e31190e2aa8391d728da2fa5929898434482a8ed1fbb9fe2a7d91641392a8c5"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/U_29426015.json",
+        "bytes": 174513,
+        "sha256": "29d77fa8e01ed6570a13557a69b3f92e3efa8c2cabad9fe4fff26afd21d258d5"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/U_29426016.json",
+        "bytes": 182618,
+        "sha256": "bde7c1cc746003229a22ba6000571a725ce6584688b49a6097677685cac4796b"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/U_29426017.json",
+        "bytes": 175178,
+        "sha256": "19a5af159e016f4f6092104588b496b2f95fb09b391e6fc04793e3108eed92f2"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/U_29426018.json",
+        "bytes": 179866,
+        "sha256": "fd3fc58b19af719efd5fa6fc41d503b820814a07688b7ce94fabe4d52d0ab8fe"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/U_29426019.json",
+        "bytes": 184199,
+        "sha256": "40e123fd2c398f9e077f781c949726e16e44c36d46d95e5c613d78b774d91b21"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/U_29426020.json",
+        "bytes": 186723,
+        "sha256": "c88ff28e558190c449bc1f91b308ffeae91e5d3ad470ba2f34425c495d2a83f2"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/U_29426021.json",
+        "bytes": 179440,
+        "sha256": "9c4ae36da22ceb4226f9cb8332ce89f612f64d061931c08015b6b7e9dea072c1"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/U_29426022.json",
+        "bytes": 178761,
+        "sha256": "ab825e93573bad4e5031b302074552d58c498dc5de5206200fcbe2b1df7f05e6"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/U_29426023.json",
+        "bytes": 173669,
+        "sha256": "b111ccdecf0313c650f2e99eb973a29afb4b68b7d34b4b4e5a57e79aa975762a"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/U_29426024.json",
+        "bytes": 174473,
+        "sha256": "70a0fd6f35248bfe3cef9b17f104152794d915b642027b7f3fd709fa6164603b"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/U_29426025.json",
+        "bytes": 180155,
+        "sha256": "cc1bb969b7ca0198bb903f934724e1be6d35bd526804105a247f4ec82b4cdac7"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/U_29426026.json",
+        "bytes": 175302,
+        "sha256": "7595f67558d1f0075fb49f5b7a8be79d4537a397bce0b04e1f6b71dce21b62df"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/U_29426027.json",
+        "bytes": 186643,
+        "sha256": "c0c93743bf653025a900d398232b0f8f79f464c977fc39ee21a0410589c55c6c"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/U_29426028.json",
+        "bytes": 177553,
+        "sha256": "cbae5aef6178d6b34535fcb6e06c6aefde4b5d4cd1886ae19577fa54f2337978"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/outcomes/U_29426029.json",
+        "bytes": 174745,
+        "sha256": "24a3cf176b4c8dfa5928a911eaae5445f0c09515adb74dd466eebb7f8ee473ad"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/process-exit.json",
+        "bytes": 553,
+        "sha256": "6ffdb5afa66dca5d576231a9a129714533d87929a51e2a31ea7d4d3f87d80673"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/stdout.log",
+        "bytes": 8054,
+        "sha256": "900b59c238cf3468fd82377857499fb2096c2b9e462d9d596f77f11e83a80a98"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/summary.json",
+        "bytes": 1479367,
+        "sha256": "6e646a0ff9ef278cb15fd86a96e8471f4fd09f047182e8d2cbd696c182db72b8"
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/summary.json.tmp",
+        "bytes": 1120784,
+        "sha256": "1150021525ad81473d2a99d20226a3c9662e5f744d52f0685ac429e0fc8204e2"
+      }
+    ]
+  },
+  "extra_trace_beyond_atomic_summary": {
+    "program": "U",
+    "seed": 29426029,
+    "steps": 256,
+    "complete": true,
+    "source": {
+      "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b04_service_floor_a01/raw/U_29426029.npz",
+      "bytes": 1439396,
+      "sha256": "d6a6cc718589fc3071b944058d8d5c27c9a716494f2c0bbea97d7ce0b1038d16"
+    },
+    "contacts": {
+      "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01/contacts/U_29426029.npz",
+      "bytes": 5139,
+      "sha256": "37cd900c5e0380c7bccbffcbd3f9ba0870328b63086455444bb89c335855b2dc"
+    },
+    "completed_by_law": {
+      "ORIGINAL": 256,
+      "RR": 256,
+      "LRS": 256
+    },
+    "gap_columns": [
+      "start",
+      "end",
+      "left_censored",
+      "right_censored",
+      "capacity_denied_ticks",
+      "no_link_ticks"
+    ],
+    "no_link_columns": [
+      "start",
+      "end",
+      "left_censored",
+      "right_censored"
+    ],
+    "discrepancies": {
+      "native_quality": 0.0,
+      "native_J": 1.1102230246251565e-16,
+      "quality_ceiling": 0.0,
+      "per_user_mean_age": 0.0,
+      "F_user": 0.0,
+      "max_user_mean_age": 0.0,
+      "A": 0.0,
+      "age_sum": 0.0,
+      "mean_age_square": 0.0,
+      "age_square_sum": 0.0,
+      "F": 0.0,
+      "J": 0.0,
+      "return_sum": 0.0,
+      "mean_served": 0.0,
+      "mean_quality": 0.0,
+      "ever_served": 0.0,
+      "never_served": 0.0,
+      "max_unserved_gap": 0.0,
+      "mean_user_max_unserved_gap": 0.0,
+      "max_closed_gap": 0.0,
+      "max_left_censored_gap": 0.0,
+      "max_right_censored_gap": 0.0,
+      "left_censored_gaps": 0.0,
+      "right_censored_gaps": 0.0,
+      "age_p95": 0.0,
+      "terminal_mean_age": 0.0,
+      "terminal_max_age": 0.0,
+      "service_p10": 0.0,
+      "min_served": 0.0,
+      "zero_service_steps": 0.0,
+      "longest_zero_service": 0.0
+    },
+    "timing": {
+      "allocator_wall_seconds": 0.053995557595044374,
+      "allocator_cpu_seconds": 0.05454696299998396
+    }
+  },
+  "interrupted_temporary_summary_json": "Expecting value: line 1 column 1120785 (char 1120784)",
+  "observed_outcome_file_count": 90,
+  "completed_outcomes_self_reported": 270,
+  "independently_verified_traces": 0,
+  "result_reader_runs": 0,
+  "fits": 0,
+  "native_steps": 0,
+  "new_model_calls": 0,
+  "new_c_calls": 0,
+  "cost_scope": "Atomic checkpoint counts are lower bounds. An additional complete U/29426029 outcome self-reports all256 steps for each law. Whole-process CPU, peak RSS and work after the last atomic checkpoint were not finalized; no zero-cost claim.",
+  "accepted_to_native_exit_seconds": 14.906944751739502,
+  "core_preserved_in_place": {
+    "path": "/mnt/c/Users/wu/AppData/Local/Temp/wsl-crashes/wsl-crash-1790814460-1179774-_home_wu_.local_opt_hmasd-cpython-3.10.21-gcc_bin_python3.10-11.dmp",
+    "bytes": 35643392,
+    "sha256": "a06e26819a28ca65630bccadcdc72205d8cacb541f0eba460e31ac2365ec9cec"
+  },
+  "post_failure_node_observation": {
+    "observed_at_epoch": 1790814590.9902565,
+    "loadavg": "0.12 0.35 0.21 1/448 1180318",
+    "meminfo": {
+      "MemTotal": "16180392 kB",
+      "MemFree": "10723512 kB",
+      "MemAvailable": "15249348 kB"
+    },
+    "cpu_mhz": [
+      "2995.199",
+      "2995.199",
+      "2995.199",
+      "2995.199",
+      "2995.199",
+      "2995.199",
+      "2995.199",
+      "2995.199",
+      "2995.199",
+      "2995.199",
+      "2995.199",
+      "2995.199",
+      "2995.199",
+      "2995.199",
+      "2995.199",
+      "2995.199",
+      "2995.199",
+      "2995.199",
+      "2995.199",
+      "2995.199"
+    ],
+    "core_pattern": "|/wsl-capture-crash %t %E %p %s"
+  },
+  "observation_limit": "Post-failure load/frequency is not a fault-time measurement or a cause diagnosis. Incomplete summary serialization is artifact context, not a proven fault stack.",
+  "observer": {
+    "job": "launch-b05-local-allocation-a01",
+    "observed_generation": 39,
+    "event": "ff04b15fc21c84c1dffd233d",
+    "queue_delivery": "Native-child queue rejected with -32600; same active DM drained terminal evidence, consumed the event and stopped observation after generation40."
+  },
+  "next_dependency": {
+    "owner": "Codex Root",
+    "action": "Bounded read-only recurrence diagnosis and node/runtime reassessment; no automatic retry or scientific-plan change."
+  }
+}
