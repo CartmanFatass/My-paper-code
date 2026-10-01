@@ -4390,3 +4390,290 @@ These are intentional unique evidence, not cleanup blockers. There is no
 concrete tool refusal or leftover selected deletion. B05 is closed/read/
 published/cleaned, with no live producer, unread advice or selected next
 batch; the retained question remains in reserve under the disposition above.
+
+<a id="post-b05-physical-contact-source-scope"></a>
+### Post-B05 — source-only physical-contact feasibility scope (2026-10-01 UTC)
+
+After reading the complete result and original Critic return, Root adopted
+the B05 conditional capabilities and assigned this same DM a bounded
+source-only successor question: what worthwhile change to physical
+eligible-link opportunities could be compared against the fair baselines?
+No new result study is selected. Current published background at
+`e0fe9a5f16fd812a6d1981d2e9c2460ff17ba5e1`, topic2 and
+[B05 disposition](#b05-independent-review-and-disposition), changes the
+comparison concretely: retain M:LRS and costed S:LRS/U:LRS, preserve the
+quality/J price, and do not seek another same-path allocator merely for a
+near-floor episode maximum. This bound does not forbid a consequential
+different endpoint or a change to physical eligibility.
+
+The initial source question concerns motion/radio prediction or selection
+consistent with fair allocation instead of the old modeled-greedy
+history. Inspect where that history enters M/S/U, what a modeled LRS
+substitution can use from already lawful manager information, and what
+private local last-grant state would have to be communicated for exact
+synchronization. Distinguish a modeled-history package from truth-synced
+allocation, with actual wire size, delivery latency, computation and
+matched ordinary alternatives. Check existing B01–B04/U, service-age,
+registered-age/cumulative-burden and UCOPE coverage before recommending
+anything; an adjacent better physical-contact question or reasoned stop
+is permitted. The separately assigned N5 H4/E/H1 local-cadence and N8
+unchanged-A2 computation questions are outside this scope.
+
+Root's independent reviewer owns innovation, three-library/primary-source
+review and its recommendation; this DM supplies concrete source and price
+facts through native communication. No new policy/model/native query,
+outcome reduction, target, fit, code, test, benchmark, port or launch is
+authorized. Reading existing recorded values and source is allowed. This
+assessment has zero result exposure; source/prior inspection, complete
+prospective pricing and publication are estimated at.5–1.5 support hours,
+not an actual measurement or experiment allowance. Any proposed study's
+full native/model/policy/reader work, support, memory and one canonical
+retention/snapshot bill will be recorded before Root's investment choice,
+together with what different outcomes would change. No positive pilot,
+mandatory native validation or forced novelty is introduced.
+
+<a id="post-b05-physical-contact-source-assessment"></a>
+### Post-B05 — source feasibility, comparison and complete prospective price (2026-10-01 UTC)
+
+**Finding and scope.** One plausible physical-path comparison is `S_F:LRS`:
+keep S's search, current-C controller, information, delivery and action
+rights, but use causal modeled local LRS grants in its settled history,
+committed prefix and private candidate forecasts. Recompute both the
+age-square objective and native service/quality/J tie terms from those
+grants. Deploy the same local LRS rule whose capability B05 established.
+This is a change to the physical planner under a known ordinary allocation
+capability, not a new allocator or evidence that learning is needed.
+Root's independent reviewer requested the price below for one such arm
+on the already exposed 64 B04/B05 worlds. It is a source-feasible candidate,
+not a selected study, an empirical result or a fixed claim. The independent
+reviewer owns its full scientific/literature recommendation; Root owns
+the ensuing cross-question investment. No new result query, reduction,
+target, fit, code, test, benchmark, port or launch occurred in this assessment.
+
+**Exact existing interface.** Source inspection locates the current
+greedy-law assumption at three places:
+
+- `experiments/candidates/uav_registered_service/b01/history.py:14–19,85–108`
+  reconstructs grants from the rounded registered map, decoded position
+  anchors and executed commands/masks. Its causal settlement copies and
+  updates history; a missing initial anchor censors the unreconstructable
+  prefix rather than inventing observations.
+- `experiments/candidates/uav_user_waiting/b02/scheduler.py:60–79,104–139`
+  uses greedy grants for the two committed prefix ticks and every private
+  candidate tick. `cost_keys:27–31` makes S's first objective negative
+  squared service age, followed by native ties. M searches O/W, while
+  B04 U searches O/W/S and selects by S from the visited pool. Those
+  programs all inherit this allocation model. Only the older R objective
+  uses accumulated per-user burden; syncing last-service times would not
+  reconstruct past accumulated burden.
+- `experiments/candidates/uav_user_waiting/b04/study.py` collects actual
+  commands, positions, SINR, greedy contacts/reward and post-C reports.
+  The manager receives decoded lawful reports and its own execution
+  ledger, not actual grants/rewards. The local C controller's 104-value
+  observation and channel/motion dynamics do not depend on grant choice.
+
+Modeled LRS requires a `5×50` own-UAV last-grant timestamp matrix, initially
+`-1`, propagated through settlement and prefix and copied privately for
+each candidate. Each UAV updates only its own selected rows; global
+service is the union of grants. A 50-vector of global latest service
+cannot recover which UAV last served each user. A forecast's private
+future must never update the execution ledger. No actual private timestamp
+or native connection may leak into this modeled state.
+
+This reconstruction needs **no new wire message**. However, it is not an
+exact reconstruction of native grants. The public map codec uses rounded
+metre coordinates in little-endian `int32`, 400 bytes for 50 XY positions
+(`uav_radio_activation/b01/protocol.py:28–43`); position reports also round
+metres after decoding normalized float32 observations. Native users and
+positions are continuous. Quantization, short forecasts and unobserved
+local state remain possible sources of model/native disagreement.
+
+The current B02 report is 25 bytes per UAV including post-C navigation;
+the command is 16 bytes. Five reports plus one command cost 141 bytes per
+round, 0.564 seconds at 2,000 bit/s, leaving **1.436 seconds for current C
+and manager together** under two-tick delivery. The hold is four ticks,
+with 64 reports at `t=0,4,…,252`: 9,024 recurring bytes per episode plus
+the one-time 400-byte map. These rights, sizes and cadence remain unchanged
+for the proposed modeled arm.
+
+An exact synchronization alternative would add 50 own last-grant values
+per UAV. At these report boundaries, `last_grant+1` fits in `uint8`
+(`0` means never; latest possible prior service at `t=252` is tick251).
+Adding 250 bytes gives 391 bytes/round, 1.564 seconds of wire time and
+only 0.436 seconds for computation; it costs 25,024 recurring bytes per
+episode, 16,000 extra. There is no terminal report in this design; a
+terminal/generalized timestamp schema would need its own range treatment.
+Even exact reports only synchronize the report boundary: the two-tick
+delivery prefix still needs prediction. This is a different information
+contract requiring ordinary comparators with the same addition, and is
+**not part of the priced arm**.
+
+The B05 separation argument still permits native path collection under
+the frozen environment's greedy measurement law followed by LRS replay
+of saved SINR. Selecting motion with the manager's own modeled LRS state
+does not introduce actual-grant feedback into C, reports or dynamics.
+Thus no native allocator port or extra replay-to-native validation run is
+needed for this candidate. The greedy collection reward is an auxiliary
+measurement; the fair package's quality/J must be computed from LRS
+contacts, not mislabeled as the environment's greedy reward. Changing the
+actual-grant-feedback contract would invalidate this argument.
+
+**Prior coverage and competing explanation.** The read service-age O/W/M,
+registered-service window, waiting B01 cumulative burden, B02 squared-age/
+continuation, B03 learned value and B04 U/K records all plan from assigned
+greedy service. B05 supplies fair allocation on their fixed paths; it did
+not change any manager forecast. The proposed substitution therefore
+tests a remaining model/action-law mismatch, with the old adverse results
+and incurred costs intact. This is not a novelty claim about LRS or
+age-aware planning. UCOPE's optional-renewal/joint-versus-independent
+studies use a different local-commitment question; its documented
+interference/eligibility correction is not this fair-grant forecast
+comparison. N5 H4/E/H1 cadence and N8 unchanged-A2 computation remain
+separate assigned questions, with no cadence, hold or compute-arm addition
+here. The original three-library/primary-source novelty review belongs to
+Root's independent scientific reviewer, not to this source inventory.
+
+A direct link-opportunity clock could instead update on
+`(SINR >= 3 dB).any(axis=0)`. It needs only 50 last-opportunity values and
+no private LRS timestamps, but an eligible yet capacity-denied tick can
+reset that clock without service. B05 S/world36 gives a concrete warning:
+LRS denied user26 at its lone eligible tick62 with 13 competitors for
+10 slots, followed by a long no-link interval; its maximum gap was55
+versus RR's50 and F_user9.582031 versus8.570313. A direct eligibility
+objective does not resolve that capacity decision. It is a source-checked
+alternative, not a second proposed arm or an established failed method.
+
+**Smallest complete purchase priced for review.** One new `S_F:LRS`
+physical program would use all64 development worlds29426000–29426063,
+H256, N5, unchanged static50 users, free-space/non-FDMA radio and3dB
+eligibility. Its ordinary primary comparison is paid S:LRS; paid M:LRS
+and U:LRS remain binding service/tail/resource alternatives. The baseline
+raws, reset geometry/users, exogenous inputs and frozen dependency hashes
+must be bound and checked; seed-name pairing alone is insufficient.
+These are adaptively reused worlds, not confirmation. No new baseline
+trajectory, allocator arm, actual-state ACK, old-S shadow evaluation,
+target stream, fit or native pilot is included. The original S prefix
+can locate first physical divergence; after that, whole trajectories
+cannot be treated as same-state counterfactual choices.
+
+The following are prospective complete-panel counts or conservative
+no-cache ceilings, **not measured work or a fit allowance**. Timeouts,
+censoring, actual cache misses and partial attempts must remain recorded.
+
+| Work | Prospective complete-panel quantity |
+| --- | ---: |
+| New native result episodes / team steps / UAV ticks |64 /16,384 /81,920 |
+| Native setup / radio refresh |64 explicit resets plus one constructor reset;4,096 mask refreshes in addition to16,384 step updates |
+| Manager rounds / current C calls |4,096 /20,480 |
+| S search requests (`27+31+31+27` per round) |475,136 |
+| Delivered candidate fleet ticks, no-cache ceiling |1,885,696 (`116×254×64`) |
+| Committed prefix / settled-history modeled fleet ticks |8,192 /16,384 |
+| All manager modeled SINR/LRS/history fleet ticks |≤1,910,272; ≤9,551,360 local row selections |
+| Candidate geometry snapshots, all27 trajectories |438,912, plus24,576 prefix/history snapshots |
+| Candidate+prefix+history global user-age updates |≤95,513,600 |
+| Native-path LRS replay / independent repeat |16,384 fleet ticks each;81,920 local row selections each |
+| Future C calls / training targets / fits |0 /0 /0 |
+
+The delivered candidate horizon summed over a single episode is254
+(`63×4+2`). History settlement is256 including its terminal reading:
+252 online plus4 terminal, not254. Each modeled fleet tick processes
+250 user links; candidate mask-dependent SINR/allocation work is separate
+from the 27-way cached position/path-loss calculation. At the upper
+counts, geometry processes115,872,000 user links and modeled fleet SINR
+processes477,568,000 link entries; these describe different work and must
+not be merged into one claimed number of native transitions.
+
+`uav_local_history/b01/controller.py:145–285` also matters to the bill.
+With `history=False`, each current C call prices27 paths/108 model ticks,
+at most20 users and4 peers: at most2,160 candidate user-link evaluations
+plus100 setup links. Thus the worker's C portion alone adds552,960 paths,
+2,211,840 model ticks and at most46,284,800 user-link evaluations. These
+are already part of current-C computation, not extra policy calls.
+
+**Independent reading and evidence.** Retaining the current B04 native
+and post-C navigation verification structure requires two further C
+passes:40,960 reader C calls, hence61,440 worker+reader calls in total.
+No unimplemented pass fusion is credited. All new native motion/radio,
+report bytes, service/quality/J, per-user age, F_user, complete gap records,
+censoring, command timing and execution history require reading. Every
+stored candidate's local grant recurrence, derived global ages/keys,
+search membership and lifecycle can be checked from per-UAV modeled grant
+records; storing only the global contact union is insufficient for LRS.
+Do not store a full timestamp matrix or full SINR matrix per candidate
+tick merely to make that recurrence readable.
+
+The bounded independent physical/priority reading inherited from B04
+checks each selected/search-winning pair and every visited candidate at
+reports0,60,124,248. With one S search, selected and winner coincide.
+A conservative full-panel ceiling is134,016 candidate physics ticks:
+per episode `4×116×4 +59×4 +2 =2,094`. Add8,192 prefix,16,384 settlement
+and16,384 native physics checks. Interrupted candidates retain their
+paid-prefix records. The reader also independently repeats all16,384
+native LRS fleet ticks and the native per-user outcome/gap calculation.
+All-candidate arithmetic/causality coverage is distinct from this bounded
+independent physics/priority coverage; no exhaustive physics claim is
+made. Reset/source binding, all native evidence and all complete/adverse
+worlds remain required. Model-history/priority correctness and the native
+consequence are separate checks.
+
+**Full resource estimate.** The historical B04 mixed256-episode worker
+used1,354.406528 CPU seconds and its reader988.464463, with recorded peak
+RSS569,076/552,760 KiB. Scaling those *recorded resource values* to64
+episodes gives585.717748 CPU seconds before the changed LRS/state-reading
+overhead; old S's recorded mean scheduler cost gives247.700672 seconds
+for64 episodes. Neither is an execution or prediction for the new arm.
+That history was measured remotely; a new local result cannot establish
+a measured relative speed against it. No matched timing study is priced.
+
+For investment choice, estimate **0.25–0.75 CPU hours for the complete
+new worker plus reader**, each with0.5–1GiB peak RSS, and up to0.1 separate
+CPU hours for synthetic correctness checks. Estimate5–9 support hours
+for implementation, synthetic checking, independent engineering review,
+scientific reading/disposition, publication and cleanup. This source-only
+assessment/review has its own preceding0.5–1.5 support-hour estimate.
+These ranges are judgments from the existing pipeline, not measured
+profiles, guarantees or authority for extra result work. Full new runtime,
+cache behavior, deadline compliance and storage compression remain unknown;
+no profile or positive pilot is a prerequisite to the investment choice.
+
+Budget0.15–0.4GB for one canonical copy of new native/control/grant/gap
+evidence, plus compact config/source/status/read results. Keep old B04/B05
+reference evidence at its existing canonical locations rather than stage
+every old raw again. Per-round settled/prefix `5×50` int16 snapshots are
+only about4MB for the panel; per-UAV grant records permit compact local
+recurrence checks. Charge up to3.5GB transient source copies if producer
+and reader use separate accepted snapshots (about1.75GB each, as measured
+at B05), and up to0.1GB disposable scratch. Required new bulk remains on
+one admitted durable node with source/hash/byte locators; compact evidence
+goes to Git. After consumers release, remove redundant staging and exact
+terminal source snapshots/registrations, measure net reclaimed bytes and
+retain unique positive/adverse/failed evidence. No model checkpoint or
+full-tree backup is needed. Node/interpreter choice and fresh admission
+belong to a selected launch, not this source assessment.
+
+**Predictions and disposition by outcome.** A useful result would show
+that planning with the deployed fair law changes executed physical
+choices and improves native service-continuity outcomes against S:LRS,
+with M:LRS and U:LRS exposing whether the gain merely purchases lost
+service, quality/J or added cost. Because B05's maximum gaps are near
+their no-link bound, a substantial maximum-gap gain needs improved
+physical opportunity; retain native no-link/denial records to test that
+consequence rather than credit a score improvement to model alignment
+automatically. Model-to-native grant/age consistency is an intermediate
+check, not the endpoint or a claimed guarantee from source alone.
+
+If modeled semantics change but the executed path does not, the tested
+planner has no decision exposure for the proposed effect. If paths change
+but service/no-link tails do not improve, the complete ordinary package
+does not earn further investment merely by being semantically aligned.
+If waiting improves at a service/quality/deadline price, retain that
+conditional tradeoff rather than declare dominance. If modeled grants
+remain inaccurate, report that observation and the native result without
+automatically buying ACKs, longer forecasts, a learned objective or a
+repair batch. A favorable reused-world result would support a capability
+on this exposed panel, not population confirmation, an identified sole
+mechanism, learning necessity or novelty. An uninformative or adverse
+result would not refute the entire physical-contact question. Root may
+select this comparison, a materially better proposal or a reasoned stop
+after its complete independent advice; this assessment does not select
+any of them.
