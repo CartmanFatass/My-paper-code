@@ -4507,3 +4507,63 @@ allocation; this completed in-scope choice has no pending Root-approval dependen
 retained-policy/learning question stays open, with the original positive capabilities and
 adverse learning evidence intact. Publication of the owned standing and directly affected
 shared-background judgments, followed by measured B06-only cleanup, completes this boundary.
+
+<a id="b06-final-cleanup"></a>
+
+### B06 publication and measured cleanup — 2026-10-01 UTC
+
+The complete result, original independent diagnosis and resolved response were published at
+**`4e8292f76ecbfc1f5630d3cecf7032890f74d6b3`** before deletion. The compact run files include
+the full per-episode metrics, all19 levels/45 paired world contrasts, source/asset identities,
+native manifest/exit and full-reader counters. The sole1120-file native raw inventory remains
+at the canonical local path above; after cleanup its file count/sizes and all three compact
+summary/reading/config hashes remain unchanged. No raw file or required source was discarded.
+
+Consumer check retains frozen C/G/S and B05 code used by the separate stochastic-target study;
+the B06 gate, actual-clock adapter, complete reader and their source-bound collector/contract
+and synthetic tests remain a compact useful checked package. The reader's configured source
+identity covers those modules, so deleting its required source would break that retained check.
+There is no unused B06 implementation outside this package. Root additionally identified the
+original B04 bulk as a live input to parent B08's accepted saved-history replay; that original
+evidence and every earlier B04/N8 record were untouched. No cross-direction input was removed.
+
+Native worker/supervisor and stopped observer were positively absent before deletion. The
+maintained exact-target snapshot collector first refused its ordinary process scan on protected
+`/proc/383/cwd`. Its supported `--sudo-process-scan` performed the read-only process check,
+found no live reference, and both preview/apply accepted the original terminal operation.
+It removed only the B06 snapshot and its Git registration; the claim, native manifests, exit
+witness and results remain. This was a resolved tool refusal, not a remaining blocker.
+
+| Deleted exact target, relative to shared main | Allocated bytes before | After |
+|---|---:|---:|
+|`.git/hmasd-launch-sources/3805148d619b40738ebf11a3528af28b/`|1,749,635,072|0|
+|`.git/worktrees/3805148d619b40738ebf11a3528af28b/`|3,588,096|0|
+|`temp/directions/uav_fleet_transmission/b06/` — two consumed S staging copies and stopped observer request|864,256|0|
+|`experiments/candidates/uav_fleet_transmission/b06_cadence/__pycache__/`|81,920|0|
+|`tests/experiments/candidates/uav_fleet_transmission/b06_cadence/__pycache__/`|69,632|0|
+
+All five targets are actually absent. Net allocated reduction across these exact targets is
+**1,754,238,976 bytes**; no replacement copy, archive or retention chain was made. This is
+measured allocated target storage, not a claim about host-wide free-space change amid other
+sessions or Git-object reclamation. The original remote S files and calibration remain
+canonical; the deleted local staging paths in the historical config accurately record the
+consumed execution inputs, not newly promised permanent copies. Required positive/adverse
+raw evidence, useful code and recoverable source commits remain. There is no cleanup blocker,
+active B06 operation, unread result/review, or selected new result study.
+
+<a id="post-b06-source-support"></a>
+
+### Post-B06 source-only support scope — 2026-10-01 UTC
+
+Root read the full result and original diagnosis and adopted the resolved stop, including the
+tick30 correction. It separately assigned `/root/deep_report_review` an independent source-only
+assessment of a worthwhile temporal/deployment or broader UAV question, or a justified stop.
+Within that task I may answer concrete source, feasibility and complete-cost questions in this
+existing notebook after closure. This is not another result-bearing idea or a launch selection:
+no new policy/model/native query, outcome reduction, benchmark, implementation or fit is
+authorized by it. There is no automatic trigger/threshold/termination repair, and prior declined
+actual-S2/transfer and G_E/A_E designs retain their reasoning rather than silently reopening.
+Parent B08 and waiting S_F remain with their current leads and accepted inputs. At this entry
+the adviser has not asked a concrete new feasibility question; I do not invent one or duplicate
+its library/source assessment. The direction is reserve for result execution, with this bounded
+source support available through the native parent task.
