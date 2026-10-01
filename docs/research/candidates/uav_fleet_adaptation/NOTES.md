@@ -12121,3 +12121,231 @@ PID2312882, with the owned request
 observed accepted/consistent/running original runner and supervisor,0probe
 errors. Native child remains active through the complete reading. No future
 queue delivery or scientific conclusion is inferred from registration.
+
+
+<a id="b11-complete-reading"></a>
+### B11 complete native result and numerical reading
+
+The one accepted chain exited0 at2026-10-01T13:22:33.148829UTC. Worker is COMPLETE,
+reader VERIFIED, all192H256 episodes/49,152 native steps/245,760 UAV-ticks were
+retained; 0fits/optimizer steps/new acquisition targets. The exact prospective
+six-cell roster, world/tape domains, source9746096f10070ec8646a8155c0ad183edf703920,
+and original P0 identity were honored. Initial/final parent tensor digest is
+6fa2eddc542d8f5293f5daf6a989b97a9d7d5f56f484f1eb6bddc6a87d27de0c;
+34,715 frozen parameters, one original parent, no new training replication.
+Configured Python3.10.21/Torch2.7.0+cu118 used one numerical thread. Full raw
+physics, reward, decisions and independent memory recurrence were read, including
+all unavailable bypass fields. Maximum absolute error: radio0, observation0,
+policy0, reward/quality1.1102230246251565e−16. This is numerical verification,
+not independent empirical replication or a distinct C implementation.
+
+[Complete compact publication](../../../../runs/uav_fleet_adaptation/b11_silence_commitment_a01/publication.json)
+retains all32-world values, all nine paired contrasts, adverse-world lists,
+41event records, physical-prefix comparisons, costs and artifact hashes.
+[Native exit](../../../../runs/uav_fleet_adaptation/b11_silence_commitment_a01/process-exit.json)
+and [terminal launcher state](../../../../runs/uav_fleet_adaptation/b11_silence_commitment_a01/launch-status.json)
+remain alongside the exact manifest/config/preflight. No partial cell was selected
+away and no second run or standalone full reader was invoked.
+
+**Observation and durable evidence.** The same-handle wait generation1 produced
+READY eventc7f3030c59434b5200fe4984. Queue delivery8fe4a905-4e9e-4e09-9ad5-5c67cf94ab39
+returned delivery_unknown, error−32600: direct app-server input is not allowed for
+unloaded spawned sub-agents. This native child stayed active, drained that exact
+terminal event, acknowledged it with generation1/event/wake, rearmed generation2
+PID2316309 and then stopped observation without changing work. State now has
+consumed=true, wake=null, stopped=true. The recorded native runner1254284,
+supervisor1254283 and outer1253748 were absent on the actual node. This transport
+limitation did not turn acceptance into completion or cause a relaunch.
+
+Canonical evidence remains one remote directory:
+`wsl_4070:/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b11_silence_commitment_a01/`.
+DM rechecked all195 cited artifact byte counts and SHA256 values:192 compressed
+raw episodes plus summary/reading/episode-log. Local publication exactly matches
+the canonical2,073,709-byte file, SHA256
+d307347cfdafe3af2689c9acc48782c0bde30281ef61518948023f6d232e4683.
+Canonical summary3,161,589bytes SHA256e41885d953a1212c93f7caaf854d5897f3dfa018e3f5b8eb504229f4e9d516c1;
+reading2,438,560bytes SHA2564dc8e3087c76480e64969466f13b014396b40372484aefc5dd3d6630fd13be22;
+episode log900,775bytes SHA2564d76f6a7a9000bd5fb90300b8075787dd2ea87018820a3e729f803a59dc88d88.
+Final canonical tree has205files,71,911,256logical bytes,72,364,032file-allocated
+bytes/72,388,608including directories; stdout/stderr are both empty. Raw arrays
+are412,393,792uncompressed bytes/63,318,246compressed file bytes. Local Git gets
+the compact publication and recovery records, not a second raw copy.
+
+**Native levels.** Hdirect values average its two tapes within each world.
+Service is mean team served users per tick; p10/minimum are within-episode team
+service tails, not individual-user continuity. Path is metres per UAV; silent
+travel is the whole-team sum. CPU below is complete per-episode worker CPU,
+including native execution and trace writing, not deployment-only query latency.
+
+| Program | J | Service | Quality | Service p10 | Minimum | Path m/UAV | Silent travel m | Active UAV-ticks | Mask switches | Episode CPU s |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| C_ZERO | 0.367183396 | 22.046508789 | 0.195107575 | 21.15625 | 13.28125 | 2700.629350836 | 101.352968106 | 1277 | 1.5 | 0.204719659 |
+| CJ | 0.371207413 | 22.333374023 | 0.195133923 | 21.171875 | 13.21875 | 2681.371564288 | 97.602968106 | 1275.875 | 2.0625 | 0.215343906 |
+| CJ_KEEP | 0.367801231 | 22.054443359 | 0.196796745 | 20.921875 | 13.03125 | 2585.028345611 | 113.512870683 | 1274.125 | 2.9375 | 0.215841879 |
+| CJ_RETURN | 0.37187828 | 22.374023438 | 0.195473175 | 21.296875 | 13.125 | 2617.422186355 | 104.459569824 | 1274.5 | 2.75 | 0.221319542 |
+| Hdirect_ZERO | 0.395329833 | 24.260742188 | 0.185598142 | 21.390625 | 12.625 | 3246.377377477 | 91.2574066 | 1276.625 | 1.6875 | 0.338990659 |
+
+All192episodes have zero zero-service ticks and zero longest zero-service streak;
+this panel has no outage event to distinguish the programs. Earlier B08/B10 outages
+remain evidence and are not erased by this new panel. Mean quality for each of
+CJ/KEEP/RETURN exceeds Hdirect here, while J and service are lower: Hdirect is a
+strong J/service reference, not a Pareto or energy-dominance assertion.
+
+**All nine fixed effects.** Every interval is the same20,000×32 paired-world
+percentile bootstrap, pointwise and conditional on the original frozen parent
+and five programs. Hdirect tapes are averaged before resampling. Exact zeros,
+sparsity and adverse worlds remain in every denominator. These are neither
+simultaneous tests nor equivalence or training-population intervals.
+
+| Contrast | J mean [95%] | J worlds +/−/= | Service mean [95%] | Quality mean [95%] |
+|---|---:|---:|---:|---:|
+| CJ-C_ZERO | 0.004024018 [0.000063218, 0.010583448] | 4/1/27 | 0.286865234 [0, 0.773193359] | 0.000026348 [-0.001809894, 0.002153991] |
+| CJ_KEEP-CJ | -0.003406183 [-0.008995212, 0.000195499] | 1/3/28 | -0.278930664 [-0.724975586, 0.014160156] | 0.001662822 [-0.000756718, 0.005074636] |
+| CJ_RETURN-CJ | 0.000670867 [-0.006428061, 0.007770389] | 3/2/27 | 0.040649414 [-0.520880127, 0.595214844] | 0.000339251 [-0.003433949, 0.003985975] |
+| CJ_RETURN-CJ_KEEP | 0.00407705 [0, 0.010312808] | 3/0/29 | 0.319580078 [0, 0.818603516] | -0.001323571 [-0.00382547, 0] |
+| CJ_KEEP-C_ZERO | 0.000617835 [-0.000337728, 0.001966928] | 2/3/27 | 0.00793457 [-0.125, 0.122924805] | 0.00168917 [-0.001547504, 0.006577607] |
+| CJ_RETURN-C_ZERO | 0.004694885 [0.000146356, 0.010851243] | 4/1/27 | 0.327514648 [0.019897461, 0.778564453] | 0.0003656 [-0.004279817, 0.00563192] |
+| CJ-Hdirect_ZERO | -0.02412242 [-0.042233815, -0.006976278] | 10/22/0 | -1.927368164 [-3.202444458, -0.663987732] | 0.009535781 [0.001876624, 0.017018187] |
+| CJ_KEEP-Hdirect_ZERO | -0.027528603 [-0.045039295, -0.010782539] | 8/24/0 | -2.206298828 [-3.468693542, -0.980082703] | 0.011198603 [0.00325352, 0.018869961] |
+| CJ_RETURN-Hdirect_ZERO | -0.023451553 [-0.040682064, -0.006767494] | 9/23/0 | -1.88671875 [-3.108111572, -0.649716187] | 0.009875032 [0.001861523, 0.017710178] |
+
+| Contrast | Team service p10 [95%] | Team minimum [95%] | Path m/UAV [95%] | Silent travel m [95%] |
+|---|---:|---:|---:|---:|
+| CJ-C_ZERO | 0.015625 [-0.390625, 0.3125] | -0.0625 [-0.1875, 0] | -19.257786547 [-170.952963696, 121.889299148] | -3.75 [-11.25, 0] |
+| CJ_KEEP-CJ | -0.25 [-0.78125, 0.15625] | -0.1875 [-0.53125, 0] | -96.343218677 [-317.23776838, 31.195920302] | 15.909902577 [0, 36.213203436] |
+| CJ_RETURN-CJ | 0.125 [-0.234375, 0.703125] | -0.09375 [-0.28125, 0] | -63.949377934 [-313.894379718, 128.289276024] | 6.856601718 [-4.393398282, 21.213203436] |
+| CJ_RETURN-CJ_KEEP | 0.375 [0, 0.96875] | 0.09375 [0, 0.25] | 32.393840744 [0, 97.062995329] | -9.053300859 [-23.409902577, 0] |
+| CJ_KEEP-C_ZERO | -0.234375 [-0.625, 0.03125] | -0.25 [-0.71875, 0] | -115.601005225 [-287.633990965, 15.621320344] | 12.159902577 [-1.286796564, 32.463203436] |
+| CJ_RETURN-C_ZERO | 0.140625 [-0.03125, 0.375] | -0.15625 [-0.46875, 0] | -83.207164481 [-250.674065873, 38.3286147] | 3.106601718 [-14.090097423, 19.659902577] |
+| CJ-Hdirect_ZERO | -0.21875 [-1.5, 1.015625] | 0.59375 [-0.25, 1.5] | -565.005813189 [-1261.324009249, 128.054281333] | 6.345561506 [-31.658121863, 47.185191958] |
+| CJ_KEEP-Hdirect_ZERO | -0.46875 [-1.90625, 0.84375] | 0.40625 [-0.578125, 1.390625] | -661.349031866 [-1319.692756702, 2.223232006] | 22.255464083 [-21.446658891, 68.891466641] |
+| CJ_RETURN-Hdirect_ZERO | -0.09375 [-1.234375, 1.015625] | 0.5 [-0.40625, 1.453125] | -628.955191122 [-1290.394444891, 30.668540571] | 13.202163224 [-25.015485223, 53.641343189] |
+
+| Contrast | Active UAV-ticks [95%] | Mask switches [95%] | Complete episode CPU s [95%] | Decision query CPU s [95%] |
+|---|---:|---:|---:|---:|
+| CJ-C_ZERO | -1.125 [-2.375, -0.25] | 0.5625 [0.125, 1.1875] | 0.010624247 [0.006191229, 0.014803947] | 0.012337493 [0.011469418, 0.013243747] |
+| CJ_KEEP-CJ | -1.75 [-4.625, 0] | 0.875 [0, 2.3125] | 0.000497974 [-0.003975203, 0.004903443] | 0.000710515 [-0.00067741, 0.002409918] |
+| CJ_RETURN-CJ | -1.375 [-4.25, 0.5] | 0.6875 [-0.25, 2.125] | 0.005975636 [-0.000627751, 0.013276184] | 0.000899686 [-0.000662076, 0.002674704] |
+| CJ_RETURN-CJ_KEEP | 0.375 [0, 1] | -0.1875 [-0.5, 0] | 0.005477663 [-0.000805016, 0.013824623] | 0.00018917 [-0.001114737, 0.001818413] |
+| CJ_KEEP-C_ZERO | -2.875 [-6.5, -0.5] | 1.4375 [0.25, 3.25] | 0.011122221 [0.004056987, 0.017823994] | 0.013048008 [0.011491493, 0.014971177] |
+| CJ_RETURN-C_ZERO | -2.5 [-6, -0.375] | 1.25 [0.1875, 3] | 0.016599884 [0.008738596, 0.02474027] | 0.013237179 [0.011686472, 0.015038407] |
+| CJ-Hdirect_ZERO | -0.75 [-2.8125, 0.875] | 0.375 [-0.4375, 1.40625] | -0.123646754 [-0.135279687, -0.11190654] | -0.103167243 [-0.111718245, -0.094445185] |
+| CJ_KEEP-Hdirect_ZERO | -2.5 [-6.375, 0.4375] | 1.25 [-0.21875, 3.1875] | -0.12314878 [-0.136374646, -0.110269867] | -0.102456728 [-0.111032192, -0.093863621] |
+| CJ_RETURN-Hdirect_ZERO | -2.125 [-5.875, 0.5625] | 1.0625 [-0.28125, 2.9375] | -0.117671117 [-0.128803614, -0.106188752] | -0.102267558 [-0.110486745, -0.093932077] |
+
+CPU intervals describe these recorded executions on one node, including code/data
+work and system variation; they do not establish portable runtime dominance.
+RETURN remains0.117671episode CPU-s cheaper than Hdirect on average, while losing
+.023452J/1.886719served users. Native-step means across five programs range
+.126700–.130379CPU-s; setter.019378–.020074; raw-write.009388–.026905. The baseline's
+larger neural traces contribute to its total measured cost. Query CPU is
+.024673/.037011/.037721/.037910/.140178s for C_ZERO/CJ/KEEP/RETURN/Hdirect.
+
+**Exposure, actual physical distinctions and adverses.** CJ, KEEP and RETURN
+have10/21/20positive-count OFF events. KEEP creates/consumes21 and RETURN20;
+each activates in worlds30021000,30021005,30021009,30021026,30021030, and both
+leave0terminal pending. Other27worlds have identical CJ-family and C_ZERO
+executed behavior. Baseline C_ZERO and both Hdirect tapes create0positive-count
+memories, as predicted by their source. Zero-count fallback remains active and
+unchanged in law: whole-panel OFF counts are24/33/47/44 for C_ZERO/CJ/KEEP/RETURN,
+and54 across the64 Hdirect episodes. Different later visitation changes actual
+fallback/guard counts; opportunity counts are not independent experimental units.
+
+DM additionally read the20saved raw files for those five worlds and four
+deterministic programs, without native transitions, C/model/shadow queries or
+new bootstrap. All41origins have raw count1–7, capped count equal to raw count,
+strict OFF-minus-selected-ON score margins .0024420098230255177–.05052734078742416.
+All41consume the next old-silent row, bypass C, preserve originating post-C nav,
+issue their stored category once and become ON through the setter. Origin rows,
+count/cap, clock, nav, categories and consumption remain recoverable in the
+hashed raw files; complete independent reader already reconstructed their law.
+
+RETURN consumes five nonzero old C plans in three worlds; each produces four
+moving ticks/120m, no clipping. KEEP consumes zero every time. Events are:
+
+| World | Agent | Origin→consume tick | Stored RETURN category | Net physical displacement m |
+|---|---:|---:|---:|---|
+| 30021005 | 1 | 24→28 | 6 | [120,0,0] |
+| 30021009 | 1 | 4→8 | 1 | [−120,0,0] |
+| 30021030 | 1 | 4→8 | 2 | [0,−120,0] |
+| 30021030 | 3 | 12→16 | 2 | [0,−120,0] |
+| 30021030 | 0 | 20→24 | 5 | [0,120,0] |
+
+The first RETURN/KEEP execution differences occur at ticks28/8/8 in worlds05/09/30,
+with identical prior physical state and masks, identical peer commands and nav,
+and only the focal stored command changed. Their first four-tick native J
+increments are+.022034430/+.017180945/+.025718661, service+2/+1.25/+1.25.
+Complete RETURN−KEEP J is+.060787037/+.000299944/+.069378616 in those worlds;
+all other29worlds have identical execution, not merely equal final J. World09
+has only2different boundary categories,8different displacement ticks and7different
+position states; its positive full return is small. Worlds05/30 have125/82different
+categories and later masks/peer histories diverge. These are complete-program
+consequences, not matched replay after divergence or identified teammate responses.
+Mean RETURN−KEEP J+.004077050 has bootstrap lower endpoint exactly0. Two worlds
+provide nearly all the gain. All three lose served-user quality; two add travel.
+
+The old evidence remains: all five B10 first-OFF origins had C categoryzero, and
+B10world30012030 had equal own next zero commands despite later loss. New distinct
+origins show possible exposure, not retroactive correction of those facts. All
+five fresh CJ/C_ZERO first changes improve their immediate four-tick J; in only
+worlds00/26 do commanded/physical motions coincide. In05/09/30 CJ simultaneously
+replaces a nonzero C command with zero, so those fresh improvements are not pure
+radio-only counterfactuals.
+
+Complete J by active world, relative to C_ZERO:
+
+| World | CJ | KEEP | RETURN | KEEP−CJ | RETURN−CJ |
+|---|---:|---:|---:|---:|---:|
+| 30021000 | 0.016827922 | -0.004533871 | -0.004533871 | -0.021361793 | -0.021361793 |
+| 30021005 | 0.017175259 | -0.001101178 | 0.059685858 | -0.018276438 | 0.042510599 |
+| 30021009 | 0.008917316 | 0.008917316 | 0.00921726 | 0 | 0.000299944 |
+| 30021026 | 0.092742417 | 0.017126833 | 0.017126833 | -0.075615584 | -0.075615584 |
+| 30021030 | -0.006894345 | -0.000638377 | 0.068740239 | 0.006255968 | 0.075634584 |
+
+World30021000: both commitments suppress the old-silent actor's subsequent motion,
+lose.021361793J versus CJ and finish below C_ZERO despite a first-CJ block gain.
+World30021026: KEEP=RETURN, twelve repeated same-agent zero commitments each, and
+both lose.075615584J/5.8671875service versus CJ. The first committed four-tick
+block actually improves J+.009636141/service+.25 against CJ before later harm;
+this directly limits an immediate-improvement explanation. In this world no
+RETURN/KEEP distinction is available. World30021005 KEEP reduces service-p10 by7
+against CJ; RETURN retains a3-user lower episode minimum versus CJ. In30021030
+RETURN improves service-p10 by7.5 versus CJ but loses quality. The complete
+adverse-world roster for all metrics/contrasts is preserved in publication,
+including22/24/23 J losses against Hdirect for CJ/KEEP/RETURN respectively.
+
+The fixed first/later halves are consistent with a full consequence rather than
+an isolated startup issue: RETURN−CJ J is+.000606516 early/+.000735218 late,
+both intervals cross zero; KEEP−CJ is−.003423062/−.003389304, both cross zero;
+RETURN−KEEP is+.004029578/+.004124522, both lower endpoints0. These halves reuse
+the same episodes and do not add replication.
+
+**Actual bill.** Worker51.523785143wall/52.549583628CPU-s; independent complete
+reader82.502344407wall/85.166776750CPU-s; enclosing chain134.184271632wall/
+137.863369436CPU-s. Peak process452,080KiB, worker440,572KiB. The forecast
+180–720CPU-s/4–20min was conservative here;8–16support-hour-equivalents was an
+unmeasured estimate, not actual labor and not a budget consumed. Known bounded
+fake/corruption work and two pytest invocations remain recorded above; DM and
+Reviewer saved-data reading/publication cost is additional and not fully metered.
+
+Worker paid61,440policy requests,61,399C requests,44,770hits/16,629misses,
+448,983C paths/1,795,932modeled ticks,7,931,844candidate links+79,908setup+
+30,258OFFsetup=8,042,010controller power links;12,247frozen forward rows;
+20,480private uniforms/40,960T/H vectors;6,144OFF scores/24,576logical OFF ticks.
+All41C bypasses are real; no fabricated shadow savings. Native totals include
+193resets,12,288setters,16,949,075dense slots/12,829,700distance pairs and22,195
+layout draws. Reader paid61,632scalar states/308,160rows/16,640,640power links/
+16,024,320distance pairs/16,948,800dense slots, replayed the available C/Hdirect
+queries, and added0native steps/optimizer updates/refits. Both passes generated
+the declared640,000bootstrap integers independently. No auxiliary policy query,
+extra horizon, fit, world or tape was bought after seeing activation or results.
+
+Cumulative B02–B11 execution is22fits+2calibrations/4,104,232native steps, plus
+B01 and all previously recorded support/adverse/failed exposure. This finite
+zero-fit result does not reset the earlier scientific or support bill.
+
+Independent scientific review was assigned after complete numerical collection
+to registered `/root/dm_silence_commitment/read_b11_science`, fork_turns=none,
+with original contract, source and raw positive/adverse evidence. Its original
+answer and the DM's resolved interpretation follow; no further run is authorized
+by technical completion or by this descriptive reading.

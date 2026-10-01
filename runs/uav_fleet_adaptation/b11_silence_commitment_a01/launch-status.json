@@ -1,0 +1,11 @@
+{
+  "claim_key": "79fc1427521e90dda2b970b0949b5c94940837cc1912ead025fe6a0e8dbd0fe9",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/79fc1427521e90dda2b970b0949b5c94940837cc1912ead025fe6a0e8dbd0fe9.json",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b11_silence_commitment_a01/launch-manifest.json",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/79fc1427521e90dda2b970b0949b5c94940837cc1912ead025fe6a0e8dbd0fe9.json",
+  "pid": 1254283,
+  "runner_pid": 1254284,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-10-01T13:20:13.715292Z"
+}
