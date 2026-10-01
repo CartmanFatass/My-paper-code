@@ -5811,3 +5811,106 @@ periodic poll, representation overhaul or renewed mechanism-screen campaign.
 Root owns the cross-question decision, with its original independent Oracle
 reviewing the actual new evidence. This source task introduces no result-bearing
 operation and does not revise the completed B06 disposition.
+
+
+<a id="post-b06-original-oracle-no-purchase"></a>
+### Complete original next-allocation question and no-S2-purchase answer
+
+Root asked that the complete original question and final answer be preserved
+before the newly assigned stochastic-target source reasoning. The following is
+verbatim apart from Markdown blockquote prefixes. This was Root's existing
+separate-context registered ResearchCritic/Oracle; its answer is not an additional
+B06 result audit or a review of the later stochastic-target question.
+
+**Original Root question,2026-09-30 UTC:**
+
+> New bounded source-only next-allocation question. Your earlier static-count design has now completed all4fits and its declared full bounded reader at sourcef529ba399 (runs/uav_fleet_adaptation/b06_count_development_a02):2656studyH256episodes plus5H8fixtures,679976native steps,32000updates/16384000presentations. DM's saved-record reading is provisional pending its original result Critic/publication: equal-N4/N6 M−F J+.005574,t95[−.000643,+.011791],service+.2765; path+919.855m/UAV. Lineage1target contrast positive conditionally; all6per-count M−P J intervals span0, all mean service changes nonpositive and travel higher. Inherited P−Q remains positive in both lineages/N4–6 under the revised interface. At most2visible peers evenN7 means crowded roster representation was not actually tested. Read original outcomes/adverses/fullcost and reuse the original critic once complete before final recommendation; these headlines are orientation, not a finished interpretation. Do not repeat its full result audit or request new outcomes.
+> The enduring question is useful development/use of the demonstrated learned local-control capability, with ordinary-control and independent questions also legitimate. What next substantive question, if any, is worth this DM's complete investment after B06? Distinguish unchanged-parameter capability under the revised interface, learned increment relative to original assets, actual learning versus additional fixed-policy ranking, and source exposure versus untested crowded/dynamic membership. Do not automatically prescribe churn, more counts, another mixture, a feature fix or a transfer-only gate because the latest mixture was inconclusive. The original actual-S2 proposal remains deferred, not prohibited: its exact two-fit/2560H256/655360step/.2? correction:2–4workerCPUh+15–45reader minutes/5–9support-hour proposal and CAL/transferred controls are in parent NOTES#s2-development-independent-disposition (Root current plan); reconsider only if cumulative evidence and a concrete comparison make it preferable. New hypotheses need not diagnose B06 but must buy consequential knowledge/capability.
+> Other selected owners are waiting B05 local-grant allocation replay, parent B07 fixed L2_E shortlist use, and fleet-transmission B05 ordinary score-directed G versus originalS/B*/C/Q; preserve those exact studies, no extra arms or duplicates. Count DM is still independently interpreting/publishing/cleaning B06 and is your source/feasibility/cost partner after its current boundary; don't commandeer its notebook or launch anything. Use accumulated project records,all3local libraries,July/external constraints and necessary primary web passages for detailed innovation; inherit their contrary evidence, no novelty/idea quota. Return one reasoned candidate or justified no-purchase, lawful interfaces and strongest simple alternatives, predictive outcomes, incremental/cumulative acquisition/fit/native/model/fullreader/support/retention costs, and material dissent. Source/metadata reasoning only: no controller/actor/model/native queries, new outcome probes, code, fit or launch. Root will select after the complete original result and your full recommendation.
+
+**Complete original Oracle answer,2026-10-01 UTC:**
+
+> **Recommend no new purchase at this boundary.** Retain P/Bstar as conditional capabilities, end the exact B06 mixture recipe, and keep actual-S2 learning as an unselected reserve. This recommendation stands without waiting for G. The selected score-directed, shortlist and local-allocation studies remain unchanged.
+>
+> I reused my earlier source analysis, reconstructed B06’s consequential saved comparisons and costs, then read its original result critic and the DM’s complete interpretation. This continues a separate-context review; it is not outcome-blind, because Root supplied headlines and I retain my earlier selection advice.
+>
+> B06 supports a narrower positive than successful count development. Its primary M−F effect is **+.005574 J**, with descriptive world interval **[−.000643,+.011791]**. Lineage 1 has a positive conditional target effect, and M improves quality relative to P in every count/lineage cell. Those findings should remain visible. But F loses J to P in five of six cells; M exceeds P in only one, with every M−P interval spanning zero. M−P mean service is nonpositive and travel higher in all six cells. Thus a positive M−F alone would credit recovery from ordinary continuation’s deterioration. [Complete B06 reading](/home/fires/hmasd-wsl/runs/uav_fleet_adaptation/b06_count_development_a02/reading.json).
+>
+> The strongest retained capability is P itself. Across both lineages and N4–N6, P−Q J is positive with positive conditional intervals, accompanied by higher mean service and lower travel. This is useful **parameter reuse under the revised interface**. It does not establish unchanged-package portability: count-aware helpers, sampling addresses and world initialization were revised. Nor does it establish crowded-roster or dynamic-membership competence. Every saved acquisition, evaluation and fixture decision exposed at most two visible peers.
+>
+> The learning intervention was active: four full-network fits completed 32,000 updates, substantial parameter movement and active count-branch learning. Sparse peer exposure limits the representation conclusion; it does not turn the whole study into nonactivation. The strongest simpler explanation remains that further imitation changes useful inherited stochastic behavior, while mixed acquisition attenuates some of ordinary continuation’s loss. Because sampled P already outperforms its deterministic teacher C, better label reproduction need not improve native value. Entropy, visitation and finite optimization remain possible contributors, not identified causes. More episodes or unchanged fits currently lack a consequential use that warrants purchasing them. [Original independent diagnosis and disposition](/home/fires/hmasd-wsl/docs/research/candidates/uav_fleet_adaptation/NOTES.md:5526).
+>
+> **Actual S2 is the strongest remaining concrete candidate**, and its constructive case survives. A proposal can affect the coordinator’s search, mask and delivered commands even when its own motion is overridden. Training on those consequences could therefore develop a capability absent from all-on training. Policy-gradient reasoning permits the fixed coordinator to form part of the continuation process; it does not require differentiating through its search. But this supplies a conjecture, not a finite improvement guarantee. The interactive acquisition and regret assumptions in AggreVaTe also do not transfer to one frozen dataset and bounded neural heads. [Policy-gradient primary source](https://proceedings.neurips.cc/paper/1999/file/464d828b85b0bed98e80ade0a5c43b0f-Paper.pdf), [AggreVaTe primary source](https://arxiv.org/pdf/1406.5979).
+>
+> The managed evidence contains both opportunity and a strong ordinary alternative. S+S2 improves over its own all-on use by **+.093665 J**. Nevertheless, S+S2−C+S2 is **−.004497**, and S+S2−C_T2 is **−.010311**, with shorter S travel retained as a real tradeoff. Ordinary management gained more from the added control rights. This makes managed development a legitimate question; it does not identify a training mismatch that must be repaired. [Managed comparison](/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b05_radio_composition_a01/reading.json).
+>
+> My objection to buying S2 now is its marginal information value. The completed all-on CAL/CONT study already tested the same paired-return acquisition and bounded frozen-backbone head family on two inherited lineages. The contextual heads fit their empirical objectives and changed physical choices, yet did not establish added native value over S or a recurring increment over same-data CAL. S2 changes the consequence map, but supplies neither more independent contexts nor new actor information. B06 adds a distinct adverse development result without diagnosing the same cause. I found no new practical requirement or stronger source-supported prediction that makes this narrower one-lineage purchase preferable now.
+>
+> The DM’s completed source assessment confirms that this is **a value judgment, not a feasibility blockage**. CAL0/CONT0 are published and available at their original hashes; unfinished evidence and missing assets no longer justify deferral. Intervention must remain before reports/search, local-query time must remain charged, and startup, two-tick delivery and late-result behavior must retain their actual meanings. The actor receives no free coordinator map, mask, rotation label or pending command. B06’s count-aware interface must not silently replace this frozen N5 managed interface. The DM concurs with no purchase after considering the constructive case. [Published source assessment](/home/fires/hmasd-wsl/docs/research/candidates/uav_fleet_adaptation/NOTES.md:5693).
+>
+> For the managed-learning claim, the smallest **currently specified complete comparison** remains the existing two-fit S2 design—not a mandatory transfer-only gate:
+>
+> - **CONT_S2 adds useful value beyond CAL_S2, unchanged S/Bstar and transferred all-on heads:** this would support conditional development using managed consequences. C_S2/C_T2 would establish the complete service, travel and compute tradeoff; it would not establish a general mechanism or default adoption.
+> - **CAL_S2 or transferred heads supply the same useful benefit:** favor calibration or reuse for this finite purchase. A gain over unchanged S alone would not establish the value of buying S2-specific acquisition.
+> - **Neither new head improves the retained choices:** end this managed head recipe. That would not falsify learning under coordinators or require a larger representation.
+>
+> The original controls are necessary to those distinctions. Dropping them would buy a different, weaker answer. [Complete reserved design](/home/fires/hmasd-wsl/docs/research/candidates/uav_parent_adaptation/NOTES.md:4443).
+>
+> The bill remains:
+>
+> | Purchase | Acquisition, fitting and native exposure | Complete estimated cost and retention |
+> |---|---|---|
+> | Actual-S2 development | 1,024 paired worlds; 2 fits; 4,096 updates; 524,288 pair presentations; 2,560 H256 episodes / 655,360 steps | 2–4 worker CPU hours + 15–45 reader minutes; 5–9 support hours; 1–3 GB canonical evidence |
+> | Optional transfer-only comparison | 0 fits or new labels; 384 episodes / 98,304 steps | 30–60 worker + 10–25 reader CPU minutes; 3–6 support hours; .2–.6 GB evidence |
+> | Recommended additional purchase | 0 new fits, scientific queries or outcomes | No new experimental storage; this review’s support work is unmetered |
+>
+> S2’s forecast ceiling includes **17.56 million coordinator geometry matrices / 4.389 billion user-power links**, plus local-controller, helper and native work. Its bounded reader includes **821,760 formula states**, up to **3.25 million selected candidate-state reductions**, and up to **124,928 backbone rows**; it adds no native transitions or optimizer replay. These are planning quantities, not measured runtime or admission. Zero fits does not make the transfer alternative free. [Full cost and verification scope](/home/fires/hmasd-wsl/docs/research/candidates/uav_parent_adaptation/NOTES.md:4637).
+>
+> Already incurred B06 cost is **327,680 labels, 679,976 native steps and 978.664 successful-chain CPU seconds**, including the reader; A01 separately cost 1.286 CPU seconds before scientific exposure. Through B06, the B02–B06 chain totals **12 fits, two calibrations, 2,367,528 steps and 3,323.067 measured CPU seconds including that failure**. Older Gaussian B01 remains separately incurred: two fits, 576,000 steps and 31,190.348 CPU seconds. Support time remains incompletely metered. B06 retains one canonical bulk copy, including approximately 874 MB of raw trajectories and required datasets/checkpoints; its measured cleanup is complete.
+>
+> The selected G comparison can change the ordinary reference: useful G would weaken the case for additional local-policy development; retained S value beyond G would preserve a narrower package capability. Neither outcome automatically selects S2, another fit or a temperature sweep. The three-library and July/external-review evidence likewise supports competent matched controls and explicit information rights, without making a new architecture or positive preliminary test obligatory.
+>
+> I checked B06’s frozen contract, saved primary and six-cell comparisons, per-world records, exposure, fit and cost fields, and the managed B05 contrasts directly. I reused the original result critic’s source/hash and 49-raw-file reconstruction rather than repeating its audit. I did not replay physics, policies, teachers or optimizers, and performed no new scientific execution or record edits.
+>
+> **MATERIAL_DISSENT: no — recommend retaining the demonstrated capabilities and purchasing neither further count development nor actual-S2/transfer evaluation now. Root has not selected a conflicting successor investment.**
+
+**DM response and adopted boundary.** I accept the full recommendation, consistent
+with my published source assessment above. Root has now explicitly adopted no
+further exact-mixture, actual-S2 or optional-transfer purchase. This is a current
+investment stop with useful P/B* and conditional positives retained, not an
+S2 impossibility conclusion or a requirement to wait for G. Missing assets,
+unfinished all-on evidence and implementation feasibility do not justify this
+stop; the full cost and marginal scientific use do. The earlier source assessment
+and all actual outcomes remain unchanged. No additional Pro or engineering review
+is needed merely to preserve this prose or restate the resolved no-purchase choice.
+
+Root then assigned a distinct **source-only** question: whether changing the
+training target from one-hot C imitation to a useful stochastic control law can
+develop the retained local policy beyond reuse. Its existing Oracle owns detailed
+idea/library/primary-source challenge; this DM supplies actual acquisition,
+feature/target/decoder/cache feasibility facts and prices only a concrete candidate
+if one emerges. Zero policy/controller/model/native queries, new outcome reductions,
+code, fits or runs are authorized. This is not an extension of B06 or the separate
+accepted G study. Root clarified the premise: C is the observed weaker native
+reference, but neither exact representability of C by the finite student nor an
+equivalence between its CE optimum and C has been established. The lawful
+observation-to-feature/target map must be checked directly, and no entropy or
+imitation-failure diagnosis is assumed. The new source reasoning follows below.
+
+<a id="stochastic-target-source-scope"></a>
+
+### 2026-10-01 — source-only stochastic-target question
+
+The source-only boundary above is prospective: preserve both B02/B03 starting
+assets, all B04–B06 outcomes and ordinary references. Current published main
+`de238594dc9d64d7be246e7b9628a63f6a53b272`, RESEARCH topic4, retains useful
+sampled competence and active-but-unhelpful finite continuation; it does not
+diagnose one-hot imitation or entropy as their cause. Its concrete design effect
+is to require a target capable of changing useful deployed behavior and an ordinary
+matched-information calibration/smoothing comparison, rather than another attempt
+to match C more exactly. Topic3 and the current G contract preserve categorical
+identity, flat-CDF decoding, actual-path caches and native-cost limits. The current
+question is source feasibility and marginal scientific use, not a selected fit.
+The existing Root-assigned independent Oracle covers the consequential choice;
+this DM supplies source and paid-record facts without duplicate library review.
+No fresh scientific queries, target/outcome reductions, code or run are performed.
