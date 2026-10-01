@@ -6153,3 +6153,53 @@ again immediately before release. The fallback local observational memory check 
 04:22:30Z found6,687,744,000 effective available bytes; that is not remote admission.
 
 Input transfer completed at04:25:04.674654Z: all320 files passed their existing full SHA256/byte identities;124,165,095payload bytes and124,837,888allocated regular-file bytes, plus directory metadata. The remote actual-node observational check at04:23:38Z passed with15,607,500,800effective bytes available. No active native research runner was present in the bounded /proc argv inspection at transfer verification; this is a timestamped observation, not a reservation. Source8fd6ee547 remains the exact scientific input; publishing this transfer/cost record does not change it.
+
+
+<a id="b07-a01-zero-query-failure"></a>
+### B07 a01 accepted input failure, retained before recovery — 2026-10-01 UTC
+
+The remote supervisor task `uav_user_waiting_b07_cap_two_launch_a01` accepted the bootstrap
+once; the native admission kernel accepted source8fd6ee547 at04:29:00.716684Z with
+14,670,974,976effective available bytes. Exact operation is
+`/home/wu/projects/HMASD/.git/hmasd-admission/56f1e3253e25f85dbb264d74dc2d5d2a587f366c2a62734997ab3a50e417a097.json`,
+output `runs/uav_user_waiting/b07_cap_two_a01/`, source snapshot
+`a18d26cc245a4352b817ff080aaea63c`. The runner1190920 and supervisor1190919 exited1 at
+04:29:02.083292Z; both original native identities are absent and the terminal witness is
+consistent. Full manifest/status/preflight/summary/stdout/stderr/exit evidence is collected
+at the matching local run path. Neither output nor accepted snapshot is edited for repair.
+
+The summary reports `INCOMPLETE_TECHNICAL_FAILURE`: `FileNotFoundError` for the snapshot's
+`runs/uav_user_waiting/b06_fair_model_a01/result.json`. It failed in load_baselines before
+constructor_attempts or policy work. All constructors, resets, C calls, modeled radio,
+native steps, allocation, targets, fits and updates are zero; no episode/raw/outcome exists.
+Measured worker snapshot is1.244578628wall seconds and1.218674lifetime CPU seconds,
+386,572KiB peakRSS. The publication tail and shell/Git/snapshot/source-transfer costs are
+separate/unmetered; zero scientific queries does not mean zero cost. This is no scientific
+negative or empirical test of C2. The previously recorded inference that worktree-local
+sparse settings implied a complete new snapshot was wrong: this accepted snapshot did
+not materialize the tracked runs/ inputs. Existing staging files were present and verified;
+the failure is the compact metadata access assumption, not missing staged native evidence.
+
+Same-session deterministic observer generation52 independently recorded failed native exit
+(event75a08106b35c6a1b79018983). Queue deliveryac417485-9090-4d67-8be1-96a14f10d0d7 was
+unknown/rejected with native-child -32600; this turn stayed active, read the complete facts
+and consumed/rearmed the same observer without resuming or relaunching a01.
+
+Root original recovery selection (native message, after complete zero-query failure facts):
+
+> Proceed with the bounded B07-owned Git-blob input remedy within the selected study; I do not select a shared snapshot/control change. Bind each compact JSON to the declared accepted commit and expected content hash (no mutable-HEAD or fallback substitution), retain exact source/read costs, and finish the existing a01 same-handle collection and zero-query failure record. Your focused synthetic checks plus engineering review are appropriate. After publishing the IO-only revision, a newly identified/admitted attempt of the unchanged64-world comparison is authorized; a01 stays immutable and is not counted as world exposure or a scientific negative. No further Root ACK is needed for the in-scope repair/launch.
+
+L0 addition: change only B07 compact-reference loading and its worker/reader binding to
+read each declared relative JSON path from the explicit accepted source SHA's Git blob,
+verify the existing expected digest before JSON parsing, and record source read wall/CPU
+including child CPU. No mutable HEAD lookup or working-file fallback. Full raw/outcome
+payloads keep their original external digest checks and canonical locations. Focused
+synthetic temporary-Git tests must reject wrong content/commit and show that a later HEAD
+or modified/missing working file cannot change the bound bytes. Reuse the applicable51
+scientific/integration tests and independent engineering review for this identity change.
+A newly admitted a02 will run exactly the still-unexposed64 worlds/16384native steps,
+with unchanged C2, LRS, complete reader, four references, uncertainty and cost estimands.
+No shared control, sparse selection, accepted snapshot or old source is modified; a01
+remains a retained, separately charged infrastructure failure. The mechanism prediction
+is only that compact metadata can be loaded from the pinned commit under sparse checkout;
+it makes no scientific score prediction or extra scientific investment.
