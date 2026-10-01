@@ -8772,3 +8772,414 @@ using long deterministic waits and same-handle drain/rearm at checkpoints.
 No source, seed, episode, epoch, comparator or science stopping rule changes
 follow from this healthy initial observation. Technical acceptance is not a
 read scientific result.
+
+
+A02 observation checkpoint37 at05:56:24.854UTC returned the expected native-child
+App queue rejection−32600. The child stayed active, read the checkpoint and fresh
+same-handle status at05:58:34.677UTC, and rearmed37→38 without any worker restart.
+The worker then had504/512 training episodes,129024 native steps and1008 actor
+plus1008 critic optimizer updates; no failure was recorded. Entry-to-current
+summary was1644.704110CPU-s/1601.268644wall-s. This is progress only; final
+comparisons and the complete independent saved-data reader remain outstanding.
+
+
+Checkpoint38 was drained and rearmed38→39 on the same accepted operation.
+Both training fits and all1024 actor/1024 critic updates were complete; the
+final panel had256/512 episodes, giving768 total complete episodes and196608
+native steps, with no recorded failure. Current worker cost was3169.013692CPU-s/
+3081.517444wall-s. The local wait's display code encountered a state-shape error
+while printing this checkpoint; the detached observer continued successfully,
+and a fresh drain exposed consistent running native identities. That local
+wait display was corrected without touching the observer or scientific worker.
+Final-panel completion and complete saved-data reading remain outstanding.
+
+
+Checkpoint39 was drained/rearmed39→40 without changing the operation. The worker
+had completed all1024 episodes/262144 native steps/two fits and2048 total optimizer
+updates with no failure, at4433.101634CPU-s/4307.006299wall-s. Its sequential
+saved-data reader had progressed through704/1024 episodes and was still running.
+This is technical collection completion; verification, interpretation and the
+scientific result boundary are still pending.
+
+
+<a id="b09-complete-reading"></a>
+### 2026-10-01 — B09 complete: active managed development changes travel, without an established native-value increment
+
+**Evidence and technical completion.** Corrected A02, published source
+`8e5659881dc1f3e8419f9c406cabdf07abe1a5a1`, completed the fixed 1,024 H256
+episodes, 262,144 native steps, two fits and 1,024 actor plus 1,024 critic updates.
+The sequential complete saved-data reader returned `VERIFIED`. Native exit0 at
+06:51:25.253UTC and the same-handle observation at06:51:38.651UTC establish a
+valid exit witness, consistent records and both original processes absent.
+Observer generation40 was drained/rearmed40→41 and stopped. Native-child queue
+delivery again returned−32600; the child remained active through collection and
+reading. No replacement worker or additional scientific query was launched.
+
+All1,550 original terminal files,744,998,114logical bytes, were collected to
+`/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b09_managed_development_a02`.
+Every length and SHA256 matched the original remote inventory. The unchanged
+full `summary.json` and `reading.json` contain bulk row/audit/contrast vectors;
+they remain at that canonical location with all raw trajectories, updates and
+initial/group/final checkpoints. The compact
+[result](../../../../runs/uav_parent_adaptation/b09_managed_development_a02/result.json)
+contains all9 levels, all36 contrasts and all40 original scalar metrics, plus
+the512 final world/tape rows needed to recover every paired vector. Extraction
+reconstructed every original world and paired vector exactly, reproduced all
+means and signs with zero numeric discrepancy, and made0 native/model/optimizer
+calls. [Collection inventory](../../../../runs/uav_parent_adaptation/b09_managed_development_a02/collection-inventory.json),
+[native terminal status](../../../../runs/uav_parent_adaptation/b09_managed_development_a02/terminal-status.json).
+
+The reader checked all74 bound sources, original asset identities, all256
+immutable rollout-group heads, every native/report/terminal formula and local
+helper/backbone/head/I-decoder row, critic inputs/returns and parameter/optimizer
+provenance. It paid328,704 native/report/terminal formula states,286,720
+backbone/helper rows,204,800 new-head,40,960 transfer-head and20,480 Bstar
+applications;32,768 critic feature rows and32,768 return targets;260 checkpoint
+files and256 update records. All65,536 saved coordination rounds and7,602,176
+saved search-arithmetic requests were checked. Independent candidate physics
+covered170,572 scored pairs/676,960 state reductions from the declared at-most-five
+paid pairs per round. This is not a full C reranking, new native execution,
+optimizer/critic-forward replay or all-unselected-candidate physics claim.
+
+**Fixed primary and companions.** Average two tapes inside each of32 new world
+clusters. These are descriptive paired-world t31 intervals conditional on one
+training realization per arm, not training-population intervals, equivalence
+tests or multiplicity-adjusted discoveries. All panels and final endpoints were
+fixed before exposure; no checkpoint or world was selected from these outcomes.
+
+| Contrast | Mean ΔJ [descriptive95%] | Δservice/tick [descriptive95%] | Δpath m/UAV [descriptive95%] |
+|---|---:|---:|---:|
+| **CONT_S2−CAL_S2** | **+.000093691 [−.005340178,+.005527560]** | −.031311 [−.526217,+.463595] | −555.084 [−818.589,−291.579] |
+| CONT_S2−S_I_S2 | −.000550038 [−.005529407,+.004429332] | −.088989 [−.553062,+.375083] | −596.464 [−843.217,−349.712] |
+| CAL_S2−S_I_S2 | −.000643729 [−.001804518,+.000517060] | −.057678 [−.155873,+.040517] | −41.380 [−111.665,+28.905] |
+
+The primary has15 positive/17 negative world means; CONT−S has13/19. CAL−S
+has13 positive/10 negative/9 equal J worlds. CONT has shorter world-mean travel
+than either CAL or S in27/32 worlds. Its path difference is about15.8% of S's
+mean path; this descriptive ratio is not a resource price or adoption threshold.
+CONT−CAL/CONT−S mean quality is+.001773485/+.002319373, while the service
+component moves downward. Their quality intervals also cross zero. Thus the
+near-zero native contrast does not establish preserved service or a new native
+gain. Travel is measured geometry, not measured battery consumption.
+
+**All complete-package levels.** Paths are metres per UAV; CPU is the complete
+episode scope on the admitted node. The ordinary deterministic cells have32
+episodes each; all other cells have64, paired through world averages.
+
+| Program | J | users/tick | quality | p10 | episode minimum | path m/UAV | episode CPU-s |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| C_S2 | .480902571 | 30.064331 | .200006456 | 27.328125 | 11.843750 | 4535.647 | 3.600572 |
+| C_T2 | .481554419 | 30.175903 | .196972576 | 27.453125 | 11.843750 | 4720.845 | 31.718063 |
+| Q_I_S2 | .468721361 | 29.178833 | .200725661 | 26.515625 | 11.406250 | 6038.339 | 3.742437 |
+| S_I_S2 | .475249037 | 29.541504 | .205559940 | 27.078125 | 12.125000 | 3768.440 | 3.536223 |
+| CAL_S2 | .474605308 | 29.483826 | .206105828 | 27.117188 | 12.125000 | 3727.060 | 3.560664 |
+| CONT_S2 | .474698999 | 29.452515 | .207879313 | 27.203125 | 12.250000 | 3171.976 | 3.566658 |
+| CAL_all_S2 | .473148082 | 29.345886 | .207685581 | 26.968750 | 12.359375 | 3756.436 | 3.623249 |
+| CONT_all_S2 | .474917672 | 29.497925 | .206489084 | 27.164062 | 12.093750 | 3970.330 | 3.641937 |
+| Bstar_S2 | .472083472 | 29.296997 | .206418378 | 26.789062 | 11.828125 | 4803.083 | 3.652524 |
+
+Original S's useful sampled capability recurs: S−Q J+.006527676
+[+.002183541,+.010871811], service+.362671, p10+.5625 and path−2269.899m/UAV.
+This remains conditional on the retained original fitted asset and these worlds.
+C_S2−CONT J+.006203573[+.000097217,+.012309928] and service+.611816
+[+.015969,+1.207664] favor the ordinary controller, while its travel is1363.672m
+longer and mean minimum service.40625lower. C_S2 does not dominate every outcome.
+C_T2−CONT J+.006855420[−.000328574,+.014039415] is unresolved, with service+.723389,
+quality−.010906737, travel+1548.869m and CPU+28.151404s. C_T2−C_S2 J+.000651848
+[−.003266526,+.004570222] also remains unresolved while costing28.117491 more
+CPU-s/episode, about8.81times C_S2's complete CPU. A stronger search procedure is
+not thereby an established better native controller on this panel.
+
+CONT−CAL_all/CONT_all/Bstar J is+.001550917/−.000218673/+.002615527, all with
+intervals crossing zero. None establishes a new native increment over the paid
+assets. CONT's respective travel differences are−584.460/−798.355/−1631.107m;
+the last is negative in all32 world averages. CONT−Bstar complete CPU is−.085865s
+[−.159124,−.012607], but uncertain native preservation prevents calling that
+net amortization. The transferred heads differ in estimator, collection and
+exposure as well as actual-S2 training; their comparison cannot isolate a data-
+distribution or visitation mechanism. `Bstar` is S temperature2 under S2, not
+the T2 coordination algorithm.
+
+**Realized behavior, timing and adverse cases.** CAL/CONT each completed512 Adam
+steps per actor and per critic, with head movement L2 .079653821/.704239754 and
+critic movement1.729840617/1.693174875. All original S tensors remained unchanged.
+CONT's mean requested departures are50.031 versus59.641CAL/60.453S, and actual
+one-step physical command changes are156.859 versus175.391/176.406 per320 local
+decision opportunities. Delivered proposal overrides remain26.219CONT versus
+27.625CAL/27.609S. These are readings on each arm's own diverging histories,
+not same-history head counterfactuals or an isolated feature-value effect.
+
+Saved actor ratios span .997326–1.002981 for CAL and .863923–1.208424 for CONT.
+CAL never reaches ratio clipping; CONT's mean clipped-row fraction is.000003052,
+with maximum per-epoch.0015625. Actor gradient clipping occurs0/96 of512 steps;
+critic and actor clipped norms remain within the declared.5 bound. These facts
+establish executed learning and its finite exposure; they do not diagnose an
+entropy, critic, clipping or representation failure and do not select a repair.
+
+All1,024 episodes meet the deadline; late carries are0. Final mean active
+transmitters are3.345581S,3.334106CAL,3.322388CONT,3.548584C_S2 and3.534424C_T2;
+mean heights are50.145131,50.140248,50.157339,50.118843 and50.157906m respectively.
+The new heads add local-query CPU versus S: CAL+.038500s and CONT+.033012s,
+both with positive conditional world intervals. Complete episode differences
+CAL−S+.024441s and CONT−S+.030435s cross zero because other work and timings
+also vary. No deployed computation saving versus unchanged S is established.
+
+All favorable and adverse worlds/tapes remain in the compact matrix and original
+raw/reader. In world29843005, CONT−CAL and CONT−S world-mean J is−.037964691;
+tape0 loses.066199612J and6.988281users/tick. On that tape, C_S2−CONT J is
+.080299327 and C_T2−CONT+.092707831. The useful opposite witnesses remain:
+CONT−CAL reaches+.038377608 world-mean J in29843014 and+.050134273 on its tape1;
+CONT−S reaches+.034030947 world-mean J in29843013. CONT's mean p10/minimum gains
+over S are only+.125/+.125 with intervals crossing zero; it loses3.25 world-
+mean p10 users in29843017 (tape0−6.5) and2.5 mean minimum users in29843022
+(tape1−6). Neither the path gain nor the primary interval erases these losses.
+
+Training has4 episodes/5 ticks of whole-team zero service. Final evaluation has
+10 such episodes/12 ticks, all in world29843017 at startup before first S2
+delivery: C_S2,C_T2,Q on both tapes and CONT on both tapes each have tick0;
+S/CAL tape0 have ticks0–1; CAL_all/CONT_all tape0 have tick0; Bstar has none.
+The longest gap is2. CONT has two one-tick outage episodes versus one two-tick
+episode for S/CAL, despite equal mean zero-tick counts. These are team-service
+statistics and provide no individual-user continuity guarantee.
+
+**Complete new cost and carried history.** A02 paid512 training plus512 final
+episodes, two head fits/two critics,32,768 on-policy team return targets,655,360
+actor replay rows and131,072 critic replay rows. There are0 expert-pair labels
+or new calibration searches. It paid327,680 local requests:40,960 C/Q rankings
+with35,023 cache misses,945,621 candidate trajectories,3,782,484 model ticks,
+23,989,932 candidate plus243,989 setup links;286,720 S-family requests with
+201,410 actual backbone/helper computations and169,337 actual head computations.
+The reader separately reconstructs every required row rather than claiming the
+worker's memo hits as independent verification.
+
+S2 paid7,364,608 requests/4,717,455 unique candidate plans/18,719,276 reductions;
+T2 paid1,714,176 requests and6,803,136 reductions. Total geometry is7,022,592
+snapshots, with65,536 rounds/mask refreshes,8,912,896 recurring bytes and409,600
+paid map bytes. It performed1,024 explicit plus one constructor reset,307,200
+sampling decisions/614,400 private integer reads; all320 unique tapes were
+provisioned, including unused public values. Actual reuse is recorded, not
+substituted for the complete prospective work contract.
+
+Worker CPU/wall is4433.101634/4307.006299s; complete reader381.070844/369.621727s.
+The measured sum is4814.172478CPU-s (1.337270h). Updates cost62.499836CPU-s and
+61.404229wall-s inside the worker total; training-episode critic evaluation costs
+10.489724CPU-s inside the512 training episodes'1605.721406CPU-s. These overlapping
+scopes must not be added again. Worker and reader recorded process RSS peaks are
+605,596/715,516KiB, not a summed simultaneous peak. The70–120worker and15–40reader
+CPU-minute forecasts compare with73.885/6.351 actual minutes; no estimate was a
+spend requirement. Transfer cost99.655wall-s, inventory3.900713wall/.858655CPU-s,
+and saved-result extraction.907158wall/.904941CPU-s are separately measured
+support. Engineering, scientific review and remaining support are incompletely
+metered; the5–9support-hour forecast is not an actual labor bill.
+
+A01 remains an additional failed started fit attempt with2 native steps,0
+updates/complete episodes and2.337792CPU-s, plus its separately recorded bounded
+failure-reading/support cost. It is not a negative scientific outcome. B09 in
+total therefore has2 complete fits plus1 failed started attempt,262,146 native
+steps and4816.510270 measured main worker/complete-reader CPU-s; A01's1.675545
+bounded failure-reader CPU-s and the separately metered support remain additional.
+The prior parent ledger through B07 remains19fits/2,955,776native steps/
+8958.289684measured CPU-s; B08 adds0fits/0native and4827.801617chain CPU-s.
+Adding this study gives3,217,922parent native steps and18602.601571measured
+CPU-s across differing scopes/hosts, with the two complete fits and failed A01
+attempt added separately to that historical fit ledger. This is not a cross-host
+speed benchmark. The original S acquisition and transferred-head development
+belong to the already recorded fleet lineage; their full cumulative totals
+overlap other histories and are not added again or treated as free.
+
+**Working interpretation before independent disposition.** Actual-S2 collection
+and complete-return learning were executed as selected; the retained prediction
+of useful native development beyond CAL/S was not established. The useful new
+observation is conditional lower travel from the fitted CONT asset, with native
+value unresolved, adverse service worlds and no priced preservation rule. It
+does not establish a learned computational replacement for S2. The changing
+action-to-consequence contract justified testing this comparison, but the result
+does not diagnose a visitation cure, feature insufficiency or a common cause of
+earlier development losses.
+
+I re-read current published RESEARCH topics4/7 (main through2460999538), including
+the original S2 absorption evidence, adverse all-on/full-policy/target studies,
+and fleet B08's positive HIDDEN−RAW/HIDDEN−P0 native gate comparisons. Their
+concrete effect is to retain ordinary controls and original learned capabilities,
+keep feature/learning/package judgments separate, and decline to generalize this
+motion-head result into unlearnability of the same representation or of MARL.
+B08 exact N8 planning reuse remains a separate deterministic economy capability;
+it did not discount this N5 study. The independent scientific reconstruction,
+original recommendation and final investment disposition follow below.
+
+
+<a id="b09-independent-disposition"></a>
+#### B09 original independent scientific recommendation and DM disposition
+
+The registered Scientific Reviewer reconstructed the actual contract and evidence
+in its existing separate context, then read both original selection recommendations
+and contrary prior sources. It returned the following complete original answer on
+2026-10-01; no DM/Root conversation was inherited.
+
+> **B09 recommendation: retain CONT as a conditional lower-travel asset, revise the claim of added J/service capability, and stop this unchanged development program.** The completed study does not justify another fit, larger evaluation panel or automatic optimizer repair. It also does not justify closing broader local-control learning.
+>
+> I reconstructed B09 before reading both original selection recommendations. This continues my separately created reviewer context, without a DM/Root conversation fork; it is evidence-first review, not blind discovery. No preferred DM result explanation was supplied.
+>
+> The corrected A02 operation is bound to source `8e5659881dc1f3e8419f9c406cabdf07abe1a5a1`. It completed two learning systems, 1,024 H256 episodes and 262,144 native steps. The final comparison averages two private tapes within each of 32 fresh worlds; deterministic C controls run once per world. Intervals below are the declared descriptive paired-world intervals, conditional on **one training realization per arm**, not training-population replication. [Complete reading](/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b09_managed_development_a02/reading.json)
+>
+> | Contrast | J difference [95% interval] | Mean service difference | Travel difference, m/UAV |
+> |---|---:|---:|---:|
+> | CONT−CAL | +.000094 [−.005340, +.005528] | −.0313 | −555.1 |
+> | CONT−unchanged S | −.000550 [−.005529, +.004429] | −.0890 | −596.5 |
+> | CAL−unchanged S | −.000644 [−.001805, +.000517] | −.0577 | −41.4 |
+> | CONT−C_S2 | −.006204 [−.012310, −.000097] | −.6118 | −1,363.7 |
+> | CONT−C_T2 | −.006855 [−.014039, +.000329] | −.7234 | −1,548.9 |
+>
+> The focal positive predictions—CONT improving J beyond both CAL and S—are unestablished. CONT−CAL has 15 positive and 17 negative worlds; CONT−S has 13 positive and 19 negative. Near-zero means and intervals spanning zero establish neither equivalence nor harmlessness. CAL also supplies no demonstrated J improvement.
+>
+> **The strongest useful positive is the travel reduction.** CONT travels less than CAL and S in 27/32 worlds each. Their respective intervals are −818.6 to −291.6 m and −843.2 to −349.7 m per UAV, approximately 15–16% reductions in mean travel. CONT also shortens travel relative to transferred CAL, transferred CONT and paid B* by approximately 584, 798 and 1,631 m/UAV. The corresponding J increments, +.001551, −.000219 and +.002616, remain unresolved. This is a useful conditional asset to preserve; it does not establish energy savings, contextual necessity or success on the frozen J prediction.
+>
+> The ordinary alternatives remain consequential. C_S2 supplies greater mean J and service at approximately the same episode CPU: 3.601 seconds versus CONT’s 3.567. CONT retains shorter travel, higher mean quality and a higher mean episode minimum, so this is not uniform dominance. C_T2 costs 31.718 CPU seconds per episode. Its increment over C_S2 on this panel is only +.000652 J [−.003267, +.004570], with +28.117 CPU seconds. Its earlier positive panel does not make that additional expenditure established here. The unchanged S−Q J increment of +.006528 also preserves inherited capability; Q is not the decisive comparator for new development.
+>
+> Complete consequences qualify the travel positive:
+>
+> - CONT−CAL service-p10 is +.0859 [−.2822, +.4541], and episode minimum is +.125 [−.2413, +.4913]. Neither establishes a tail improvement.
+> - Mean quality increases by .00177 versus CAL and .00232 versus S, with both intervals spanning zero. Mean height is 50.157 m; the +.017 m difference from CAL is also unresolved.
+> - CONT averages 3.322 active transmitters versus CAL’s 3.334 and S’s 3.346. These small differences are unresolved. C_S2 and C_T2 use more active transmitters on average.
+> - The final panel contains **12 zero-service ticks in 10 episodes**, all in world29843017 at startup ticks0–1. CONT has one zero tick on each tape; CAL and S have two consecutive zero ticks on tape0. Their world-averaged zero-tick contrasts are nevertheless identical.
+> - Training adds five zero-service ticks across four episodes, with a longest gap of two. All 1,024 episodes have zero recorded deadline misses. These observations supply neither individual-user continuity nor a reliability guarantee.
+>
+> The positive and adverse worlds are substantial. CONT−CAL gains +.038378 J and +3.096 served users/step in world29843014. In world29843005 it loses −.037965 J and −3.838 served users while adding 188 m/UAV. World29843024 combines a 702 m travel reduction with −.020866 J and −1.904 service. World29843017 loses 3.25 service-p10. Lower travel therefore cannot be treated as universally benign. [Native summaries and paired worlds](/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b09_managed_development_a02/summary.json)
+>
+> **This was active finite development, not nonactivation.** Both initially zero heads and both critics moved. Each network’s final Adam state records 512 steps; the two initial critics are tensor-identical. Head movement is .079654 for CAL and .704240 for CONT; critic movement is 1.729841 and 1.693175. CONT changes proposals, delivered commands, masks and positions in all 64 paired final episodes relative to both CAL and S. CAL changes commands/positions in 40/64 episodes relative to S. These are comparisons of resulting histories, not same-history causal intervention rates.
+>
+> CONT also requests about 9.61 fewer departures and makes 18.53 fewer physical command changes per episode than CAL; both descriptive intervals exclude zero. That pattern is consistent with reduced exploratory motion contributing to shorter travel. It does **not** distinguish useful contextual adjustment from a broadly shared probability/persistence change. CAL’s smaller effective intervention under this finite optimizer does not prove that an ordinary global adjustment could not produce a similar tradeoff.
+>
+> The supported explanation changes as follows:
+>
+> 1. **Opportunity:** Direct learning under actual S2 has now been tested. The earlier composition deficit can no longer motivate this exact purchase as an untested possibility. Ordinary managed control remains competent; unused learnable J headroom was not established.
+> 2. **Representation:** The inherited local interface supports lawful, consequential changed behavior. Its sufficiency or insufficiency for better managed service remains unresolved. CONT adds a parameterization over frozen features, not new actor information.
+> 3. **Finite learning:** This specific on-policy program did not establish the predicted J increment. Compared with older transferred heads, it changes estimator, exposure and induced histories together; B09 does not isolate S2-conditioned acquisition as a cause or demonstrate a distribution-mismatch repair.
+> 4. **Complete value:** One fitted CONT system adds a credible lower-travel point. It does not earn a default service/J preference over ordinary C_S2 or establish a favorable acquisition/amortization case.
+>
+> The cumulative evidence supports this narrower diagnosis. I directly checked the consequential primary readings for earlier all-on PPO and native-consequence heads: PPO R−S J is −.040278/−.005212 across its two lineages, while the later bounded CONT−S differences are −.005135/−.005498 and unresolved. These lower expectations for another finite continuation without identifying a common failure mechanism. [PPO reading](/home/fires/hmasd-wsl/runs/uav_fleet_adaptation/b04_native_development_a01/reading.json), [native-consequence reading](/home/fires/hmasd-wsl/runs/uav_fleet_adaptation/b05_native_consequence_a01/reading.json)
+>
+> Conversely, fleet B08’s HIDDEN−RAW J +.007318 [+ .002490, +.012068] and HIDDEN−unchanged-parent +.010576 [+ .002280, +.019356] remain positive local-learning evidence. Its unresolved increment over stronger ordinary alternatives and its tail losses remain equally relevant. It prevents turning B09 into a general representation or local-learning impossibility claim. [Gate evidence](/home/fires/hmasd-wsl/runs/uav_fleet_adaptation/b08_local_gate_a01/publication.json)
+>
+> **My investment preference is no further native purchase at this boundary.** The completed matched comparison is sufficient to close the selected finite-program question. More final worlds would primarily refine the conditional endpoint differences; they would not establish reproducible learning. An unchanged independent training replication would become useful only if recurrence of this particular travel/service tradeoff would change an investment or use decision. It is not owed by the travel positive.
+>
+> A constructive continuation remains possible, without first proving a mechanism:
+>
+> - For a **travel/service use question**, compare retained CONT and S with a competent ordinary control that explicitly addresses the same tradeoff under equal information, delivery and communication rights. If the ordinary option reproduces the benefit, preserve the simpler capability; if CONT adds useful complete value, retain that narrower empirical contribution.
+> - For a **reproducible-development question**, use independently trained matched programs. Repeated travel gains with acceptable service consequences would strengthen the learning capability; recurrence failure would narrow this result to the retained asset.
+>
+> Neither comparison is selected or fully priced here. A new energy, information or control contract would require its addition to be costed and supplied to the competent ordinary comparator. No new architecture, positive pilot or exhaustive diagnosis is a prerequisite—but none is presently justified by this result alone. I see no distinct Pro expertise needed to resolve this boundary.
+>
+> The actual A02 bill is **4,433.102 worker CPU seconds plus 381.071 reader CPU seconds: 4,814.172 seconds, or 80.24 CPU minutes**. Corresponding measured wall scopes sum to 4,676.628 seconds. Optimization itself costs approximately 62.50 CPU seconds; the two small heads are not the complete price. The study includes 32,768 return targets, 655,360 head gradient rows, 131,072 critic replay rows, 65,536 coordinator rounds, 8,912,896 recurring bytes and 409,600 map-provision bytes. Peak worker/reader RSS is 605,596/715,516 KiB. Collection contains 744,998,114 bytes across 1,550 files. Engineering, review and publication labor remain incompletely metered; the 5–9 support-hour forecast is not actual measured labor.
+>
+> A01 remains a separate technical failure: one CAL attempt, two native steps and zero updates, with 2.338 worker CPU seconds and 1.676 failure-reader CPU seconds. It is neither a scientific negative nor a completed independent fit. Its correction does not erase that cost. Earlier acquisition and development remain incurred and should not be double-counted across overlapping lineages. [A01 failure reading](/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b09_managed_development_a01/failure-reading.json)
+>
+> I independently checked all 74 source bindings against the launch commit, all 1,550 collected-file hashes, the declared configuration and asset identities, and common initial-world/private-input binding. I recomputed 14 principal metrics from all 1,024 native arrays and reproduced all nine levels and 36 paired contrasts over the 40 saved metrics. I checked all update records and their parameter chain, initial/final tensors and optimizer steps, paired final behavior, and selected training critic-feature/return arithmetic. I did **not** repeat native physics, production policy/helper calls, full C reranking, critic-forward or optimizer replay. Those broader saved-data checks retain the completed reader’s declared scope. No code, records or experiments were changed. My snapshot, staging and raw-data consumers are released.
+>
+> **MATERIAL_DISSENT: no — for restricted retention and closure of the unchanged B09 purchase.** No expanded claim or further investment was proposed for adoption. The direct evidence would not support a contextual J improvement claim, a diagnosed training repair, or automatic renewed fitting.
+
+**DM resolved choice.** I accept the recommendation and its limits. B09 closes
+under its prospective active-adverse/unresolved branch. Retain the exact CONT
+asset as a conditional lower-travel point, original S's recurring capability,
+the ordinary C_S2/C_T2 choices and every adverse/technical outcome. Neither CAL
+nor CONT becomes a default replacement. No new epoch, head, critic, final world,
+calibration sweep, replication or diagnostic native rollout is selected. This
+is an investment disposition, not an empirical rejection of local-control
+learning or an equivalence claim for the fitted endpoints.
+
+The review's independent raw-history comparison strengthens the rejection of
+nonactivation: CONT changes executed trajectories in all64 paired final episodes
+relative to CAL/S; CAL changes commands/positions in40/64 relative to S. I accept
+those checked facts without converting them into same-history mechanism rates.
+Reduced departures are consistent with shorter travel, but CAL's small finite
+change does not rule out a competent ordinary probability/persistence adjustment.
+The new tradeoff therefore does not isolate contextual information value.
+
+**Next-investment comparison.** More final worlds would refine these endpoints
+without resolving reproducible learning; an unchanged independent fit would test
+recurrence but currently has no decision-relevant adoption contract. An ordinary
+travel/service comparator with the same rights could decide whether the retained
+CONT asset adds a useful point beyond simple control. That would become worthwhile
+if a concrete movement/service use question makes the tradeoff consequential,
+with its actual complete price and any added energy/information contract declared
+prospectively. Neither candidate is selected or fully priced here; no new
+architecture, positive toy or exhaustive failure diagnosis is required first.
+I return those alternatives to Root's cross-question allocation at this assigned
+boundary rather than silently starting a new question. The direction is reserve
+with no producer or outstanding external dependency; this is idle, not blocked
+on an owner decision. Existing question ownership and all accepted operations
+remain unchanged. No additional Pro consultation offers distinct value for this
+uncontested finite-program disposition.
+
+Root subsequently read the full native reading and original independent answer
+and adopted the same restricted retention/stop. Its new cross-question source/
+idea assessment is a separate object; no further B09 fit, worlds, optimizer
+repair or travel-utility study was selected. Root released all B09 raw/staging/
+snapshot consumers. Any later bounded source-price request remains distinct
+from this result and authorizes no new experiment by itself.
+
+
+<a id="b09-final-cleanup"></a>
+#### B09 final retention, actual deletion and measured reclamation
+
+Both accepted operations are terminal, both native runner/supervisor pairs are
+absent, the deterministic observer is stopped and the independent Scientific
+Reviewer/Root released consumers. Before deleting duplicates, all1,550 A02 and
+14 A01 original collected files matched their remote SHA256/length inventories;
+the cleanup also rehashed every remote bulk file it removed. Read-only process
+reference scans found no consumers of either remote output root or staging.
+The exact original S and transferred-head digests were checked again at their
+retained source locations, separately from the staging copies.
+
+The supported exact-target snapshot collector removed:
+
+- `/home/wu/projects/HMASD/.git/hmasd-launch-sources/5da2b2e3d044498fae1c794f8479971c`
+  (A01;817,311,744allocated bytes).
+- `/home/wu/projects/HMASD/.git/hmasd-launch-sources/f1ddd48003da40fb90b15ae9222a48bf`
+  (A02;817,385,472allocated bytes).
+
+It first refused because ordinary process inspection could not read `/proc/660/cwd`.
+The supported `--sudo-process-scan` performed only the read-only inspection;
+both clean, terminal, durable-source snapshots then became eligible and were
+removed normally. This blocker is resolved, not an outstanding cleanup failure.
+Native claims, manifests and exit witnesses were retained unchanged.
+
+The following redundant owned targets were also removed and checked absent:
+
+- Remote `runs/uav_parent_adaptation/b09_managed_development_a01/{raw,assets}`
+  and its empty `updates/` directory.
+- Remote `runs/uav_parent_adaptation/b09_managed_development_a02/{raw,assets,updates}`
+  plus its duplicate bulk `summary.json` and `reading.json`.
+- `/home/wu/hmasd-inputs/uav_parent_adaptation/b09_managed_development_a01/`,
+  the consumed three-file input copy shared by A01/A02.
+- Local `/home/fires/hmasd-wsl/temp/directions/uav_parent_adaptation/b09/`,
+  after its useful launch/observation/collection/cleanup facts had been recorded.
+- The generated `__pycache__/` directories under the B09 implementation and
+  matching test directories,225,280allocated bytes in total.
+
+**Net measurement across collection and cleanup:** the declared remote target
+paths decreased from2,384,125,952 to135,168allocated bytes, releasing2,383,990,784.
+The corresponding local run/scratch paths grew from905,216 to750,395,392bytes
+because the one canonical collection and compact records are retained. After
+charging that749,490,176byte local growth, net reclaimed allocation is
+**1,634,500,608bytes (about1.522GiB)**. The225,280bytes of rebuildable local cache
+cleanup are separately measured. This is allocated `st_blocks*512` over the
+listed paths, not logical payload, global free-space movement or Git object-
+storage reclamation. No archive, whole-tree copy or backup chain was made.
+
+Remaining required evidence is the one canonical local A01/A02 collection,
+including unchanged adverse trajectories, full original readings, all256 group
+heads and initial/final optimizer provenance; remote compact operation witnesses
+use135,168allocated bytes. Original S remains in the fleet B02 canonical remote
+asset, and original CAL0/CONT0 in the fleet B05 canonical local assets, at the
+digests in A02 `config.json`. All1,550 original A02 files still exist locally
+with unchanged lengths. The compact result records full identities and cleanup
+facts, including the real locator change from the historical remote metadata.
+
+The12 B09 source modules (111,496bytes) and two focused test modules (42,261bytes)
+remain useful as the runnable complete evidence reader, source-identity checks
+and independently reviewed bounded PPO/collector implementation. Import/test/
+entrypoint checks found no orphan prototype to retain or remove; source is already
+published at the launch commit. Keeping it does not reopen the study. No unused
+B09 snapshot, staging directory or task scratch remains, and there is no concrete
+tool blocker. [Compact result and measured cleanup](../../../../runs/uav_parent_adaptation/b09_managed_development_a02/result.json).
