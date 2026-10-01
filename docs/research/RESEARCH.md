@@ -11,7 +11,7 @@
 已读取前任完成的[单一 handoff](HANDOFF_20261001_ROOT_AND_FOUR_DMS.md)，接手 Codex 科学管理、选题与后继安排。
 上一轮四项研究及三项资料评估的完成／停止结论保持；旧操作不重启，历史 handoff 不改写。
 本次明确继续解除该轮 Codex 交接暂停；静默承诺与 RF 比较已完整判读并结束本配方，参数搜索继续推进；第四位 DM 已完成 S7 构造与计价，Root 采纳独立评审、本轮不购买该候选，见[当前分配](#root-selected-successors-20261001)。
-Owner 随后提供开放 Jev/Laya 联合技能研究计划，Root 已选择新方向 `typed_joint_skill_decision` 的资产核对与首项完整比较构造；当前0新实验，见[具体范围](#typed-joint-skill-selection-20261001)。
+Owner 随后提供开放 Jev/Laya 联合技能研究计划；资产核对与完整独立审查后，Root 已选择 `typed_joint_skill_decision` 的一次6-fit联合布局后果学习比较，准备实现／准入，见[具体范围](#typed-joint-skill-selection-20261001)。
 Claude 的独立权限和当前暂停、FSD/PPC 暂停、G33 冻结及 Milan 数据依赖保持原范围。
 
 **历史恢复：2026-09-29 21:59 UTC，owner明确要求“阅读handoff 我们继续工作”；该轮次现已完成并暂停。**
@@ -2102,7 +2102,7 @@ T的正均值也不代表两个固定响应都各擅其长。直接学习、有�
 
 | Direction | Question | State | Lead runtime | Standing and next step |
 | --- | --- | --- | --- | --- |
-| `typed_joint_skill_decision` | Can consequence-supervised joint selection over frozen competent skills/executors learn useful closed-loop behavior, and does an open pretrained typed model add value over a same-data numerical selector and strong ordinary control? | exploring | Codex DM (native child) | **Owner-proposed source-only B00 selected; no result study or model probe selected yet.** Audit actual assets and construct one complete comparison with native consequences, fair information/candidates, source-locked model path and full cost. Existing coordinator already models a prefix-conditioned joint choice; ordinary conflict-free static-slot assignments near .76 versus planner .78 constrain the useful learning question. Claude-owned directions remain paused/read-only. No new native/model/controller/RNG result queries, forwards, fits, tests, package install or weights downloaded. [Asset/first-comparison record](candidates/typed_joint_skill_decision/NOTES.md#b00-asset-and-first-comparison), [owner proposal](candidates/typed_joint_skill_decision/OWNER_PROPOSAL_20261001.md), [routing](#session-routing). |
+| `typed_joint_skill_decision` | Can consequence-supervised joint selection over frozen competent executors learn useful native behavior, and does a frozen open typed representation add value over same-data numerical selection? | exploring | Codex DM (native child) | **B00 complete; Root selects one full six-fit comparison after complete independent review.** Three independent256-train/128-test blocks, raw outcome-free M≤8 full layouts on unchanged static CoupledRelayHost/H500, one initial choice then frozen feedback executor. N versus pinned frozen Laya+adapted scorer, same-data fixed/static/travel ordinary rules and full planner scale. Maximum4.808M native steps/2,314,752static calls/1,552full Laya forwards;10CPUh/4GPUh/10GiB ceilings, full declared reader with explicit cache/source reliance. Purpose is one-budget contextual capability; no semantic, pretraining-causal, transfer, continuous-high-level or deployment-superiority claim. Implementation/engineering/publication/admission follow; isolated same-physical-node runtime is the narrow authorized config exception. Claude assets remain paused/read-only. [Full record](candidates/typed_joint_skill_decision/NOTES.md#b00-asset-and-first-comparison), [selected contract](candidates/typed_joint_skill_decision/NOTES.md#b01-selected-contract), [routing](#session-routing). |
 | `uav_episode_policy_search` | Can whole-episode parameter search develop useful contextual local-policy behavior beyond equally exposed calibration and retained ordinary controls? | exploring | Codex DM (native child) | **B01 selected; fixed four-fit exploration.** Two paired CAL/CONT blocks on frozen P0, all-ON N5/U50/H256:4,096 training+736 endpoints/1,236,992 native steps; all four final centers,37 fixed contrasts and full independent physics/policy/update reading. Match P0_A/Bstar0_A/Hdirect_A and separately retain richer ZERO rights; no old-PPO failure diagnosis or confirmation. Exact seed/failure/fixture/L0 contract is declared; bounded implementation and independent numerical/RNG review precede published-source node admission. All B02–B10/actual-S2 positives/adverses and incurred costs retained. No accepted result operation yet. [Prospective contract and L0](candidates/uav_episode_policy_search/NOTES.md#b01-selected-contract), [routing](#session-routing). |
 | `uav_service_age` | Can finite experience reduce cumulative native service age beyond competent lawful ordinary control under the same delayed commitment? | reserve | Codex DM (native child) | **B01 complete/read/independently diagnosed; retain W/M, end unchanged selector investment.** Source d4430e619, compact result0b358981a:1fit/960episodes/245760steps; full frozen reader and 2048 updates per network replayed. L1−M mean age+.269054[+.069315,+.468793], L1−W+.229916; own-initialization gain−.273965 is retained but does not establish training-population or foresight superiority. W−O age−1.086826 with service/travel gains and worse user tails; retain both W/M with their measured compute tradeoff. All choices executed, no deadline misses. No active producer, unread result/advice or selected successor; wider learning question stays open. [Complete evidence/disposition](candidates/uav_service_age/NOTES.md#b01-complete-reading), [cleanup complete:822185984bytes reclaimed](candidates/uav_service_age/NOTES.md#b01-final-cleanup), [routing](#session-routing). |
 | `uav_fleet_adaptation` | Can learned local motion and transmitter choices develop useful cooperation with independently acting teammates, and when does recent peer behavior add value? | reserve | Codex DM (native child) | **B11 complete/read; retain narrow capability, stop unchanged commitment investment.** All192H256 episodes/49,152steps/0fits and independent numeric/scientific readings are complete (source9746096f1; numeric evidence189992543). RETURN executes five nonzero old commands in three worlds and improves J versus KEEP +.004077 [0,.010313], but RETURN−CJ remains unresolved +.000671 [−.006428,.007770]; KEEP−CJ is−.003406 [−.008995,.000195]. CJ−C_ZERO +.004024 [.000063,.010583] and RETURN−C_ZERO +.004695 [.000146,.010851] retain conditional positives. All three lose J/service to Hdirect; RETURN−Hdirect J−.023452 [−.040682,−.006767], with higher quality/lower measured CPU. The00/26 active commitment harms, earlier30012030 counterexample, five original zero origins and B01–B10 capabilities/adverses remain. No established commitment upgrade, B10 learning repair, added worlds/tuning/learned memory or confirmation. Production137.863CPU-s; cumulative22fits+2calibrations/4,104,232native steps plus B01/support. Broad learning question stays open; no active operation/producer or automatic continuation. Re-entry requires a concrete use decision or distinct complete-comparison prediction, with Root selecting cross-question investment. [Complete evidence](https://github.com/CartmanFatass/My-paper-code/blob/18999254360364549f579125ab3c16ce8d722a0d/runs/uav_fleet_adaptation/b11_silence_commitment_a01/publication.json), [original independent review and disposition](candidates/uav_fleet_adaptation/NOTES.md#b11-independent-disposition). |
@@ -2423,16 +2423,30 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 <a id="root-successor-designs-20260930"></a>
 <a id="root-selected-successors-20261001"></a>
 <a id="typed-joint-skill-selection-20261001"></a>
-**Owner 新提案（2026-10-01 PDT）：** 提供 `OPEN_JEV_JOINT_SKILL_RESEARCH_PLAN_20261001.md` 并指出一个 promising 方向。
-Root 选择 `typed_joint_skill_decision` 的有界资产核对与首项比较构造，由新原生 DM `/root/dm_typed_joint_skill` 负责，
-实际首回合 gpt-6-astra/max 已核实；原跨题 ResearchCritic 复用独立上下文审查实际构造及机会成本。
-要回答的学习问题是：冻结已胜任执行器后，环境后果监督能否发展有用的联合选择，以及开放预训练模型相对同数据数值模型的增量。
-当前选的是 source-only B00；具体宿主、比较臂、完整数据/标签/训练/端点评价/reader/在线成本须在实际资产核对后写清，
-提案中的 B00–B05、阈值与默认规模均不是已选实验。没有新 native/model/controller/RNG 结果查询、前向、fit、测试、安装或权重下载。
-旧槽位的无冲突常量分配约 .76、规划参照约 .78，以及当前 coordinator 已有顺序联合结构，必须进入新比较的价值判断；
-不把模型接入、合法类型输出或重复已有去重规则当成学习贡献。可以修改构造，不预设 Laya 胜出或要求整个方向无效。
-Claude 的旧方向保持其所有权与暂停，只读复用已发表资产；FSD/PPC、G33、Milan 范围不变。RF 已完整收尾，CAL/CONT 原接受操作继续。
-[原提案](candidates/typed_joint_skill_decision/OWNER_PROPOSAL_20261001.md)、[资产与具体比较记录](candidates/typed_joint_skill_decision/NOTES.md#b00-asset-and-first-comparison)。
+**Owner 新提案与 Root 选择（2026-10-01 PDT）：** owner 提供开放 Jev/Laya 联合技能研究计划；
+`typed_joint_skill_decision` 的 B00 资产核对及实际比较构造完成，Root 已读完整方案、追加修正和原独立 ResearchCritic 全文，
+采纳一次有界能力比较，MATERIAL_DISSENT: no。原生 DM `/root/dm_typed_joint_skill`（实际 Astra/max）继续独立完成实施、
+正常工程验证、发表源输入、节点准入、全部读取、独立结果诊断与清理；普通 in-scope 执行不另等 Root 批准。
+
+科学对象是静态 coupled host 中未评分完整联合布局的原生后果选择：一次 t0 高层选择，冻结直线执行器反馈控制至 H500。
+三独立数据/训练块，每块256训练世界＋128测试世界；同一最多8候选菜单和完整回合标签，比较数值 N 与冻结 Laya 表示＋适配 scorer，
+共6fits。保留训练选定固定构造、同菜单静态 C_bh／旅行代价规则，以及固定完整 planner 的尺度和成本参照。
+这可买有意义的有限候选学习能力，不要求超过完整普通规划器；不归因技能语义、预训练机制、组合迁移或持续高层适应。
+现有 coordinator 已有联合顺序结构；旧槽位菜单预付2×3000搜索且普通分配约.777／planner约.780；
+既有监督蒸馏＋一次 DAgger 仍有学生.4004／教师.7587差距。新构造改变的是保留可执行布局并学习完整后果，不能称为已诊断旧失败。
+四规划器的旧 hindsight envelope 约.016/.015只限制那个昂贵排序用例；这里不把所有普通能力强的宿主排除在学习研究之外。
+
+已选完整上限：4,808,000原生步、2,314,752静态调用、1,552完整冻结 Laya 表示前向（含≤16correctness）、
+5,376额外 reader scorer上下文、6×512 optimizer updates。CPU预测3–6h／硬上限10h，GPU未测上限4h，峰值磁盘≤10GiB；
+支持工作10–16小时等价量为预测。Reader独立重算全部原生标签、统计和初末评分，读取完整更新证据；
+不额外重放Adam或全部冻结表示，明确依赖源／权重／缓存哈希和已计价adapter一致检查，不能称神经计算全部独立重演。
+技术失败保留原暴露与证据，不以截断输入、换模型或追加fit补成成功；正反结果按 notebook 分支处置，未选原提案其余流水线。
+
+Root 同时授权一个必要的窄共享配置例外：如需依赖隔离，在同物理 wsl_4070增设执行profile，保留相同实际资源准入／GPU身份，
+只绑定该方向核验后的独立解释器与PATH；由Root写入发表 `.codex/hmasd-compute.toml`。不改变既有wsl_4070解释器、不代表新增GPU容量。
+允许安装必要隔离依赖并下载唯一固定 Laya 权重／tokenizer；任何模型／原生技术探针仍用已发表源和实际准入。
+Claude旧方向只读复用、所有权与暂停不变；FSD/PPC、G33、Milan范围不变。RF已收尾，CAL/CONT继续其原链的独立判读。
+[原提案](candidates/typed_joint_skill_decision/OWNER_PROPOSAL_20261001.md)、[资产与完整构造](candidates/typed_joint_skill_decision/NOTES.md#b00-asset-and-first-comparison)、[已选合同／原评审与处置](candidates/typed_joint_skill_decision/NOTES.md#b01-selected-contract)。
 
 **2026-10-01 PDT — owner 恢复后三项研究中，静默承诺与 RF 已完成；参数搜索继续推进。S7 构造已完成，本轮不购买。**
 上一轮四项结果／独立判读／清理已完成，原[handoff](HANDOFF_20261001_ROOT_AND_FOUR_DMS.md)保持历史原文。
@@ -3755,7 +3769,7 @@ Root 已向三个原会话各投递一次明确携带 `model="gpt-6-astra"`、`t
 | 责任 / 原生任务标题 | Task / host | Authoring checkout / branch | 恢复入口 |
 | --- | --- | --- | --- |
 | 完成Root交接并继续任务（当前 Root） | `01a0f779-ace2-74e1-85ad-e0997b61d505` / `local` | `/home/fires/hmasd-wsl` / `main` | Owner 明确接任并继续；维护 Codex 问题选择、跨题分配与共享控制。身份由运行环境与 native list_threads 同时核对。上一轮已完整收尾，未迁移或重启旧操作；四个新原生 DM 的首个实际 turn 已逐个核对为 gpt-6-astra / max。Claude peer 联系本地址。[恢复范围](#resume-20261001)。 |
-| DM：开放模型联合技能选择 | parent `01a0f779-ace2-74e1-85ad-e0997b61d505` / child `/root/dm_typed_joint_skill` / UUID `01a0f7ce-366f-7d91-93e7-e38693506d43` | `/home/fires/hmasd-wsl` / `main` | 新注册 `hmasd-direction-manager`；Root 直接核对本次 rollout line1 session_meta 与 line8 first turn_context，实际 gpt-6-astra / max。独占 `typed_joint_skill_decision` 对应路径；当前只选资产/源核对及首项具体完整比较与全成本构造，未选结果运行。Claude 资产只读，无旧操作转移。[范围](#typed-joint-skill-selection-20261001)。 |
+| DM：开放模型联合技能选择 | parent `01a0f779-ace2-74e1-85ad-e0997b61d505` / child `/root/dm_typed_joint_skill` / UUID `01a0f7ce-366f-7d91-93e7-e38693506d43` | `/home/fires/hmasd-wsl` / `main` | 新注册 `hmasd-direction-manager`；Root 直接核对本次 rollout line1 session_meta 与 line8 first turn_context，实际 gpt-6-astra / max。独占 `typed_joint_skill_decision` 对应路径；B00构造和原独立意见已读，Root已选一次完整6-fit能力比较，DM自主执行／读取／发表与清理。Claude资产只读，无旧操作转移。[范围](#typed-joint-skill-selection-20261001)。 |
 | DM：RF 完整购买价值 | parent `01a0f779-ace2-74e1-85ad-e0997b61d505` / child `/root/dm_rf_purchase` / UUID `01a0f780-270c-7302-842e-9302428ef43f` | `/home/fires/hmasd-wsl` / `main` | 新注册 `hmasd-direction-manager`；Root 直接读本次 rollout session_meta 与首 turn_context，实际 gpt-6-astra / max。独占 `uav_radio_information_cost` 相应方向路径；B02完整比较、全数值核验与独立科学处置已完成，方向idle且无活动操作／排队后继；本 DM 保留证据连续性。保留前任已完成原操作和全部正负证据。[分配](#root-selected-successors-20261001)、[固定B02合同](candidates/uav_radio_information_cost/NOTES.md#b02-selected-contract)。 |
 | DM：静默命令承诺 | parent `01a0f779-ace2-74e1-85ad-e0997b61d505` / child `/root/dm_silence_commitment` / UUID `01a0f780-b068-7f01-b7f6-e4c32d327d40` | `/home/fires/hmasd-wsl` / `main` | 新注册 `hmasd-direction-manager`；Root 直接读本次 rollout session_meta 与首 turn_context，实际 gpt-6-astra / max。独占 `uav_fleet_adaptation` 相应方向路径；已选前瞻完整比较，执行／读取／结果处置由本 DM 自主完成。保留前任已完成原操作和全部正负证据。[分配](#root-selected-successors-20261001)。 |
 | DM：完整回合参数搜索 | parent `01a0f779-ace2-74e1-85ad-e0997b61d505` / child `/root/dm_episode_search` / UUID `01a0f781-65d4-7ba3-b412-beacc031237f` | `/home/fires/hmasd-wsl` / `main` | 新注册 `hmasd-direction-manager`；Root 直接读本次 rollout session_meta 与首 turn_context，实际 gpt-6-astra / max。独占 `uav_episode_policy_search` 相应方向路径；已选前瞻完整比较，执行／读取／结果处置由本 DM 自主完成。保留前任已完成原操作和全部正负证据。[分配](#root-selected-successors-20261001)。 |
