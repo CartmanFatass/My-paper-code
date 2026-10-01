@@ -9657,3 +9657,40 @@ copies will be removed after collection and consumer checks; the original unique
 assets remain. This is848974 copied file bytes plus filesystem allocation, not a
 new model population or scientific query. The selected result is one sequential
 worker/full-reader invocation at `runs/uav_fleet_adaptation/b09_focal_response_a01`.
+
+**Execution-node correction before any accepted operation.** Source was published
+atf7f26fa985e8c3510b7507158a9f2406c21dbf4e. The preferred node's preparation
+stalled in `git fetch origin main` for more than3minutes with no Git objects
+received. A separate15-second GitHub HTTP reachability check timed out (curl28).
+The DM terminated only that identified fetch's HTTP child; the preparing Python
+process exited with Git128, released its shared writer lock and stopped before
+control synchronization, staging, snapshot creation, claim or scientific launch.
+This is a transport/preparation failure with0 scientific queries/fits/episodes.
+No active operation is being moved and no failed scientific invocation retried.
+
+Use the configured `local_linux` CPU node for this single selected invocation.
+Actual preliminary host Jacob memory was5,991,354,368 available bytes, with
+752,295,718,912 filesystem-available bytes; swap was already almost full, which
+is not counted as available RAM. A single streaming worker/full reader with one
+Torch/BLAS thread is consistent with the declared0.5–1.5GiB rough process
+forecast and current available capacity; these facts do not reserve memory or
+promise a peak bound. The immediate launcher4GiB floor remains decisive.
+Scientific exposure, seeds, parameters, sources, retained assets and readings are
+unchanged. Local configured Python is the same interpreter used by the accepted
+synthetic checks; no extra actual-node fixture is needed.
+
+Correct the temporary input location above to
+`/home/fires/hmasd-inputs/uav_fleet_adaptation/b09_focal_response_a01/P0.pt`
+and`P1.pt`, copied directly from the original remote files and hash-verified.
+No remote staging directory was created. The canonical unique originals remain
+onwsl_4070; the one local consumption pair will be deleted after required
+reading/consumer checks. The result output is the local author-root
+`runs/uav_fleet_adaptation/b09_focal_response_a01`, with a retained immutable
+launcher source snapshot and the original local status handle. This is a
+routine feasible-node choice within the selected study, not a new question,
+scientific comparison or additional correctness purchase.
+
+Both local input copies completed and passed exact original size/SHA checks:
+848974 logical file bytes,425984 allocated bytes per file plus4096 directory
+bytes,856064 allocated bytes total. The two-file SCP/hash/chmod scope took
+1.029124s wall time. No checkpoint deserialization or model query was performed.
