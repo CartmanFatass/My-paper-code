@@ -5005,3 +5005,47 @@ Stop dependent work at a genuine semantics, ownership, resource or uncertain-acc
 no speculative launch or silent rerun. The implementation/check scope is covered by the4–7h
 support estimate; any consequential scope/investment change returns to Root. No per-run ACK
 or additional selection-review round is introduced.
+
+<a id="b07-engineering-acceptance"></a>
+
+#### B07 implementation and independent engineering acceptance
+
+2026-10-01 UTC. The new version implements the prospective contract without changing B06,
+the original C/Q laws, native host or another direction. C/Q actual-tick policy queries and the
+original-C replay helper are reused unchanged. The new collector saves private deadlines,
+query/hold/category/physical-change records; the reader enumerates the clocks independently,
+reconstructs all original C queries including deployed hits, and checks complete clock/draw
+multisets across the four q offsets. No actor/checkpoint is loaded. The worker records its full
+order and phase vectors before the first scored reset. It also writes a terminal progress state,
+so a last RUNNING progress checkpoint cannot be confused with the batch's final status.
+
+DM synthetic suite: initial22 checks passed in3.03s. A concrete coverage concern—stationary
+clipped cache hits and zero-user navigation/longest-outage behavior—justified two additional
+integrations. The final24 checks passed in3.08s. These are fabricated H8 fixtures and static
+clock algebra, not native episodes, a scientific pilot or retained-asset evaluation. The fixtures
+use disjoint world/address identities, and pytest removed its own temporary output. Production
+worlds have had zero native/controller outcome exposure. Historical test evidence for unchanged
+B06 policy arithmetic remains applicable; no repeat of its entire suite was needed.
+
+Original independent engineering Reviewer return (complete):
+
+> No material engineering finding remains in the reviewed B07 implementation. No repair is requested.
+>
+> Verified against the published contract:
+>
+> - Phase schedules, startup/terminal holds, actual-tick RNG addresses, matching across all four offsets, and balanced processing order.
+> - Private episode/agent caches and navigation, common pre-step observations, held nonquery commands, and one joint step per tick.
+> - Full original-C reader reconstruction, including cache hits; independent clock/deadline checks; telemetry invariants, source/raw identities, counters, and world-level reductions.
+> - Admission before scientific effects and preservation of partial worker/reader failure evidence.
+>
+> Ran the latest synthetic suite, including the added cache-hit and fallback-navigation integrations: **24 passed in 2.79s**, using the assigned CPU interpreter and pytest scratch lifecycle.
+>
+> Limits: no native environment execution, production admission, retained assets, or scientific outcome queries were performed. Native radio is checked through saved telemetry invariants and reductions, not independently resimulated, as declared. Reviewed code and Git state were not edited.
+
+DM acceptance: I read the implementation and the complete review, checked the declared law,
+counterbalanced order, independent reader and own tests, and accept this source for the single
+fixed purchase. No repair or scientific scope change was requested. The two additional fixed
+within-schedule Q10−C reductions are explicitly prospective context for the ordinary alternative;
+the primary timing estimand and panel are unchanged. The current step is source publication;
+this entry is not a launch receipt, actual-node admission or a result. Exact-source launch,
+deterministic observation, full reading, independent scientific diagnosis and cleanup remain.
