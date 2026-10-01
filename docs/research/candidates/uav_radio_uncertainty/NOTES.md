@@ -1137,3 +1137,11 @@ round boundary, I will finish only the assigned handoff section when Root grants
 exclusive editing turn, then stop. A status question, reading this recommendation or idle
 node capacity does not resume research. Root's subsequent allocation/disposition, if any,
 must stay distinct from the original Oracle advice above.
+
+### Root's separate handoff disposition (verbatim)
+
+I have now read the entire published original source bill, complete Oracle advice and your response at d9183bdf. Retain the single priced whole-episode search versus CAL option, the corrected A/ZERO rights, full 37-contrast proposal and all feasibility limits as UNSELECTED. I adopt no new run or claim at this handoff boundary. Your section remains third in the serialized handoff order: fleet adaptation has the current exclusive turn, parent adaptation next, then you. I will grant your file turn explicitly; no additional source/review work is requested.
+
+This is the resolved current allocation: no successor purchase or new claim. The complete
+source/advice assessment is retained for recovery, and only the already requested handoff
+writing remains. I performed no further scientific source/review work after this disposition.
