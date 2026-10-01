@@ -7815,3 +7815,231 @@ capability; the broader parent question remains open without an automatic next
 purchase. The direction returns to reserve. The RESEARCH standing/routing and the
 directly affected shared planning-cost judgment are updated at this substantive
 boundary; B06/B07's adverse learned-decision diagnosis is unchanged.
+
+<a id="post-b08-source-support"></a>
+### After B08: bounded source/feasibility support for the next capability choice
+
+Root fully read the B08 result, original independent criticism, DM response and
+measured cleanup, and adopted retaining both exact implementations while closing
+that fixed purchase. It then continued this DM's question ownership through
+source/feasibility support for its existing `oracle_next_capability`. The Oracle's
+question is the strongest consequential learned cooperative-control/capability
+investment from accumulated positive and adverse evidence, or justified stopping/
+reallocation. Actual-S2 and transfer-only reserves remain legitimately unselected;
+considering them is not reopening them. The already-selected local P0 transmitter
+gate and waiting C+cap-two+LRS purchases are distinct work.
+
+This assignment is **source only**: specific requested interface/evidence/cost
+facts, scientific challenges and a realistic complete-comparison price. No new
+native/model/controller query, fit, label, outcome reduction, code implementation,
+test or benchmark is selected. Root owns cross-question allocation after complete
+advice. I have offered the Oracle the published B08 evidence and requested its
+concrete source question. Future original advice and the response remain in this
+notebook; an ordinary source request creates no new result-bearing batch.
+
+#### Original bounded Oracle source question (complete)
+
+> Bounded source question, no pricing of a new run yet: I am testing whether online/experience-based uncertainty or dynamics learning would add a capability to the actual N8 cooperative interface, rather than refitting its ranker. Please identify the exact current controller-visible state/report/map, delivery/hold/startup/terminal rules, whether radio/motion/user laws and physical parameters are public/known to G2/A2, and any genuinely unknown persistent exogenous state already in that contract. I inspected MultiUAVEnv: free_space/urban/suburban/probabilistic are deterministic; 3gpp-36777 samples link LoS each generation (shadowing optionally), so changing to it would not simply preserve frozen exact recurrence. Please confirm from N8 host/model source whether a stochastic/unknown-law question needs a materially new adapter/reader and give any existing relevant project evidence locators. Also point me to the latest exact transfer-only and actual-S2 prospective bills (all programs/episodes/query/reader/support/storage scopes), without repricing or reducing outcomes. I will return a concrete candidate for a final full price only if its ordinary comparison survives this source check. All work source-only; do not query or benchmark.
+
+<a id="post-b08-n8-information-source-facts"></a>
+#### Source answer: N8 has known deterministic laws, not an unmodeled persistent radio/dynamics parameter
+
+I used CodeGraph first, then read only the omitted load-bearing source ranges.
+At current main `9f1b7f4bd2c2c70776128f035a4272cc763024d8`, all 14 inspected
+N8 host/control/model/reader/adapter/environment files still match the original
+B04 source bindings at **`239360b03f5d7acf788bd9ae5d4dccbde4f9237e`**. This
+is a source/hash read, with no imported controller, model, environment, test,
+benchmark, native query or outcome reduction.
+
+**The N8 G2/A2 interface is different from S2.**
+`b04/study.py:141–223` constructs `TemporalProgram`, begins with mask255 and
+calls `select(t, state if t%10==0 else None, old_mask)`. It passes no environment,
+world/seed identifier, native local observation, measured SINR/assignment or
+reward back into that decision object. Those richer arrays and outcomes are
+saved by the collector as audit evidence. They are not currently online feedback
+for G2/A2. Its sinks serialize model/bank outputs and cannot feed decisions.
+
+The public report is CountAdapter's **133 FP32 values**:
+24 normalized UAV coordinates in eight slots, eight validity bits, 100 normalized
+coordinates for all 50 users, and normalized time. The eight validity bits are
+all one here. `_count_state` casts native positions/users to FP32 before scaling;
+`decode_public_state` decodes the resulting numbers into FP64, preserving that
+quantization. Coordinates are normalized by a 1,000 m square and the 50–150 m
+height range. The same static user map appears inside each ten-tick report; this
+is not S2's separately provisioned map and report protocol. Alongside that report,
+the controller knows the actual integer clock, entering issued mask, its own
+joint command/position-estimate history and deterministic program state.
+[CountAdapter source](https://github.com/CartmanFatass/My-paper-code/blob/239360b03f5d7acf788bd9ae5d4dccbde4f9237e/experiments/candidates/agent_count_generalization/adapter.py#L43),
+[decoder and motion model](https://github.com/CartmanFatass/My-paper-code/blob/239360b03f5d7acf788bd9ae5d4dccbde4f9237e/experiments/candidates/uav_fleet_transmission/control.py#L14).
+
+Reports arrive at t=0,10,…,490. A mask selected on such a boundary is applied
+immediately before that tick's native motion/reward; between boundaries it is
+held. Ordinary C motion is recomputed **every tick**, with one rotating
+coordinate pass over all eight members' 27 ternary commands under the entering
+mask, then private deterministic state propagation. At a boundary C's chosen
+motion is followed by ordinary nonempty-mask selection; the newly chosen mask
+and motion execute in that same tick. There is **no two-tick delivery queue,
+four-tick motion hold, real-compute deadline, missed-deadline fallback or
+communication-capacity model** in this N8 collector. Startup is ordinary control
+from zero command history and all-on mask255 at t0. There are exactly 500 full
+native ticks; the terminal flag is required only after t499, with no final
+half-block or post-terminal action.
+[Actual collector ordering](https://github.com/CartmanFatass/My-paper-code/blob/239360b03f5d7acf788bd9ae5d4dccbde4f9237e/experiments/candidates/uav_fleet_transmission/b04/study.py#L197),
+[ordinary controller](https://github.com/CartmanFatass/My-paper-code/blob/239360b03f5d7acf788bd9ae5d4dccbde4f9237e/experiments/candidates/uav_fleet_transmission/control.py#L148),
+[program motion/mask ordering](https://github.com/CartmanFatass/My-paper-code/blob/239360b03f5d7acf788bd9ae5d4dccbde4f9237e/experiments/candidates/uav_fleet_transmission/b02/controller.py#L83).
+
+G2/A2 share the actual t40/t120 relocation opportunities. A selected plan moves
+one currently silent member for 10/20/30/40 aligned ticks, forces the other
+members' motion to zero and holds the old mask through transit. At arrival all
+motion is zero for that tick and a legal arrival mask is selected; ordinary
+control resumes afterward. These are planned physical commitments, not packet
+latency. G2's first search uses C-only continuations through500 and does not
+anticipate a modeled t120 choice; A2's first search includes its own t120
+selection, preserving the decoded inner versus unrounded outer state. The
+actual t120 choice starts fresh under the then-public report. All of this
+program state is endogenous and known to its controller.
+[Temporal selections](https://github.com/CartmanFatass/My-paper-code/blob/239360b03f5d7acf788bd9ae5d4dccbde4f9237e/experiments/candidates/uav_fleet_transmission/b04/controller.py#L115),
+[commitment execution](https://github.com/CartmanFatass/My-paper-code/blob/239360b03f5d7acf788bd9ae5d4dccbde4f9237e/experiments/candidates/uav_fleet_transmission/b04/surrogate.py#L37).
+
+**Public known law and the uncertainty qualification.** RepositionS1 explicitly
+constructs N8, 50 static users, uniform initialization, `channel_model="free_space"`,
+min-SINR0 dB and capacity10. Native Scenario1/defaults supply a 1,000 m square,
+50–150 m altitude, componentwise command×30 m/s, one-second steps, 2 GHz carrier,
+23 dBm transmission and −80 dBm noise; shadowing and FDMA are disabled. Users
+are drawn at reset and not moved by `MultiUAVEnv.step`. The matched host replaces
+initial native arrays with the bound world arrays. All UAVs remain physically
+present when a transmitter is silent. These constants/laws are encoded in the
+ordinary model, not secretly supplied from each world's future.
+
+The model's `predict_next` reproduces componentwise FP32 command multiplication,
+FP64 addition and clipping; this is not a 30 m/s Euclidean speed-ball constraint.
+`_Scores` calls the deterministic free-space path-loss formula and explicitly
+computes interference, the 0 dB eligibility/capacity assignment, served count,
+quality and the original height penalty. The objective is
+`.7*served/50 + .3*quality - .1*(mean_height-50)/100`; travel is uncharged.
+The full continuation code invokes that same known motion/radio law on decoded
+public geometry, constructs lawful future FP32 reports, and has no stochastic
+transition/latent-parameter sampler.
+[Bound host](https://github.com/CartmanFatass/My-paper-code/blob/239360b03f5d7acf788bd9ae5d4dccbde4f9237e/experiments/candidates/uav_fleet_transmission/b02/host.py#L54),
+[matched reset](https://github.com/CartmanFatass/My-paper-code/blob/239360b03f5d7acf788bd9ae5d4dccbde4f9237e/experiments/candidates/uav_fleet_transmission/host.py#L76),
+[known radio/objective](https://github.com/CartmanFatass/My-paper-code/blob/239360b03f5d7acf788bd9ae5d4dccbde4f9237e/experiments/candidates/uav_fleet_transmission/control.py#L90),
+[complete deterministic segment](https://github.com/CartmanFatass/My-paper-code/blob/239360b03f5d7acf788bd9ae5d4dccbde4f9237e/experiments/candidates/uav_fleet_transmission/b04/surrogate.py#L62).
+
+I find **no designated unknown persistent exogenous law/state** such as wind,
+unknown actuator gain, changing user demand/mobility, hidden shadowing field,
+unknown radio coefficient or unknown teammate policy in this contract. The
+initial layout is random across worlds but its whole geometry is reported at
+reset; this is not a concealed persistent parameter after initialization.
+Native coordinates retain FP64 bits that the FP32 public report does not expose,
+including fixed user-coordinate rounding residuals. Private dead reckoning also
+starts from those quantized reports. Thus I do not claim omniscience of the exact
+native numerical state or universal mathematical sufficiency of the report.
+That precision gap is a different, narrowly specified unknown from a persistent
+radio/dynamics-learning problem. No published evidence here identifies it as a
+worthwhile learned uncertainty opportunity. The RNG/seed is not given to G2/A2,
+but under this free-space/static law it is not an evolving hidden physical driver
+after the initial arrays are fixed.
+
+**Changing the law is a material new adapter/model/reader contract.** The generic
+environment's existing 3GPP mechanism is reusable engineering, but RepositionS1
+hardcodes free space, `_Scores` hardcodes its free-space/known-parameter scorer,
+and every B03/B04 continuation assumes deterministic propagation. B04's full
+reader independently rebuilds native SINR and assignments from saved positions
+with `free_space_user_path_loss` and `user_sinr_from_path_loss`; it would correctly
+reject a new stochastic channel as the old experiment. B08's recurrence keys
+likewise contain geometry, commands, masks and clock phase, with no stochastic
+channel realization, latent law or evolving estimator state. Its old savings
+cannot be carried over by changing a channel string.
+[Original full native reader](https://github.com/CartmanFatass/My-paper-code/blob/239360b03f5d7acf788bd9ae5d4dccbde4f9237e/experiments/candidates/uav_fleet_transmission/b04/reader.py#L126).
+
+A new source-defined unknown-law question would need its actual persistent
+unknown separated from fresh innovations, lawful measured feedback and its
+clock/payload rights, estimator initialization/update/reset, counterfactual-model
+law, ordinary plug-in/known-law or robust comparison as applicable, and recorded
+native realization/source identities for its reader. Those are interface and
+scientific definitions, not a requirement for exhaustive proof or a preliminary
+pilot. Keeping the present signature with no measured radio feedback does not
+silently grant an online estimator the collector's SINR or reward diagnostics.
+Merely changing to a known stochastic channel would not itself create an unknown
+persistent law that experience can identify. I confirm the Oracle's source
+boundary: a 3GPP/unknown-law comparison is materially new, not unchanged G2/A2
+with B08's proof or price. No new design or price is selected by this answer.
+
+Learning useful finite control or amortizing known planning can still be studied
+in a known simulator; absent an unknown law is not a general argument against RL.
+It only corrects this proposed explanation of what experience would learn.
+Relevant existing evidence remains:
+
+- [Fleet B03 complete continuation result](../uav_fleet_transmission/NOTES.md#b03-complete-reading),
+  [B04 temporal capability and all adverse outcomes](../uav_fleet_transmission/NOTES.md#b04-complete-reading),
+  and [B08 exact reuse](#b08-complete-reading): existing finite known-law capability
+  and its verified scope, not full-menu optimality or unknown-law learning.
+- `tests/uav_path_loss_cache_test.py:test_3gpp_realization_is_sampled_once_per_link_and_generation`
+  and `tests/experiments/candidates/uav_radio_activation/b01/test_radio.py:test_mask_refresh_preserves_stochastic_realization_and_rng`
+  are existing source locators for stochastic realization/mask-refresh semantics,
+  not learning-result evidence. I did not run either test.
+- [Finite-model-decision-value B01/B02](https://github.com/CartmanFatass/My-paper-code/blob/99485cf41ce0bc530683b683100c41fa0f8bd975/docs/research/candidates/finite_model_decision_value/NOTES.md#2026-09-25--b02-complete-precision-changed-native-budget-response-remains-small-and-uncertain)
+  actually distinguishes a persistent parameter, fresh noise and hidden peer state
+  on a two-robot CrossingHost. Its shared-inference ordinary comparator and adverse
+  uncertainty-integration/precision result matter to a new comparison. It is a
+  different small host; neither a UAV unknown-law asset nor an automatic repair
+  assignment. Current RESEARCH topic2 retains those limits and the principle that
+  known formulas, identifiable unknowns and useful finite data are separate facts.
+
+#### Existing prospective S2/transfer bills, unchanged and unselected
+
+The complete latest source contracts, including all programs and operation tables,
+are [actual-S2 design](https://github.com/CartmanFatass/My-paper-code/blob/83a35e1817029b01aa4e472de6b7787479fb7c25/docs/research/candidates/uav_parent_adaptation/NOTES.md#s2-development-source-design)
+and [original independent corrections plus transfer-only bill](https://github.com/CartmanFatass/My-paper-code/blob/83a35e1817029b01aa4e472de6b7787479fb7c25/docs/research/candidates/uav_parent_adaptation/NOTES.md#s2-development-independent-disposition).
+They remain proposals. The following repeats their existing quantities; it is
+not repricing, new outcome reduction or selection.
+
+Actual-S2: 1,024 paired worlds under unchanged S+S2 produce 2,048 full H256
+acquisition episodes. Two final-only fits, CAL_S2/CONT_S2, use the same pairs,
+4,096 Adam updates and 524,288 pair presentations (up to 1,048,576 head-row
+presentations). Finals on 32 fresh common worlds comprise C_S2 and C_T2 once
+per world, plus two I tapes each for Q_S2, S_S2, CAL_S2, CONT_S2,
+CAL_all→S2, CONT_all→S2 and fixed paid L0 B*=S_T2 under S2: **512 final episodes;
+2,560 total H256 episodes / 655,360 native steps / 2 fits**. All programs keep
+the actual S2 two-tick delivery/four-tick commitment/1.456s deadline and original
+local proposal information; these are N5 S2 programs, not the N8 interface above.
+
+The already-recorded all-inclusive operation table specifies 819,200 local policy
+requests, 778,240 student/helper/backbone requests before cache, 40,960 C/Q
+rankings, 1,105,920 C candidate paths / 4,423,680 modeled ticks;
+18,767,872 S2 candidate requests / 18,120,704 unique-plan ceiling;
+71,916,544 S2 and 6,803,136 T2 mask-state reductions; 1,714,176 T2 candidate
+requests; 17,556,480 coordinator geometry matrices / 4,389,120,000 user-power
+links; 163,840 coordinator rounds / 22,282,240 recurring bytes. Helper/native
+link and initialization/reset ceilings remain in the original table/prose.
+Reader scope is 821,760 native/report/terminal formula states, at most
+3,251,200 paid candidate-state reductions; up to 2,048 intervention-context and
+122,880 final original-backbone rows, 81,920 fitted-head applications and
+20,480 fixed B* transforms. It adds zero reader-native transitions, full-C
+rankings or optimizer steps. Every final decision/intervention row is replayed;
+other acquisition rows receive the explicitly bounded saved-evidence checks.
+
+Its unchanged estimate is **2–4 worker CPU-hours + 15–45 reader CPU-minutes;
+5–9 support hours; 1–3 GB raw and below 2 GB streaming RAM**. The source-derived
+8,470.179936 worker CPU-second point extrapolation is not a measurement or
+admission. It extrapolates old S2/T2 behavior across new heads and histories.
+
+Transfer-only: use Q/S/CAL_all/CONT_all/fixed B* under S2 on 32 worlds×2 I tapes,
+plus C_S2/C_T2 once per world: **384 H256 episodes / 98,304 native steps /
+0 fits or new labels**. It retains paid B* and both already-selected all-on heads;
+no calibration search or fresh fit is hidden in transfer. Existing worker point
+extrapolation is 1,917.367008 CPU-seconds before added head/serialization work;
+the unchanged planning range is **30–60 worker + 10–25 reader CPU-minutes;
+3–6 support hours; .2–.6 GB raw and below 2 GB streaming RAM**. The declared
+reader covers 123,264 native/report/terminal formula states, at most 487,680
+candidate-state radio reductions for the fixed five paid joint pairs, 81,920
+student/helper/backbone rows, 40,960 CAL/CONT head rows and 20,480 B* transforms;
+zero new reader-native transitions, full-C rankings or optimizer updates.
+
+Both bills include full positive/adverse/tape/deadline reading and retain the
+same actual-proposal versus delivered-action distinction. Both inherit a fixed
+lineage and scoped assets, not training-population replication. B08's N8 reuse
+is not a measured discount on these N5 S2 bills. A direct S2 study and transfer-only
+reading remain competing purchases; neither is a mandatory gate or newly selected.
+The Oracle can now decide whether a concrete distinct question survives the source
+and ordinary-comparison challenge before asking for a new complete price.
