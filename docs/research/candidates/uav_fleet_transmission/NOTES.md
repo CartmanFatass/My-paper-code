@@ -5532,3 +5532,170 @@ no worker, observer, unread result/advice, selected successor or pending owner a
 fixed schedule investment ends under the resolved scientific reasoning above; the broader
 timing question remains open and no further run is implied. Return this meaningful read-result
 boundary to the assigning Root through the existing native child, without an App relay.
+
+
+<a id="post-b07-source-scope"></a>
+
+### Post-B07 bounded source/feasibility scope — 2026-10-01 UTC
+
+Root directly read the complete B07 result, original independent diagnosis, DM response and
+measured cleanup, and adopted the fixed-purchase stop at03:47UTC. It assigned this same DM
+one substantive source/feasibility task for the existing independent Astra Max Oracle
+`/root/deep_report_review`: supply source-bound facts and full marginal cost for its single
+strongest constructive question or a justified stop. Root chooses any cross-question allocation
+after the full original advice and price. This direction remains reserve during preparation;
+no successor is selected, implemented or admitted, and no B07 result is reopened.
+
+The source scope permits reading existing code/records and primary literature plus factual
+arithmetic. It permits zero new native/controller/model/actor/allocator queries, fits, labels,
+benchmarks, outcome reductions or scientific implementation. No capacity quota or small headline
+step count selects the next question. I retain notebook ownership; the Oracle writes no direction
+record. Its exact fact request, substantive exchanges and final advice will be preserved here
+before any eventual selection. This scope note is not an L0 implementation contract or launch
+permission, and carries no inferred pause lift for another lead's work.
+
+#### Full original Root assignment to the Oracle
+
+> Root new bounded SOURCE/IDEA assignment after fleet B07 closes. Continue as the owner's Astra Max Oracle for detailed idea/innovation work. I have fully read B07's entire result, original independent critic (/root/dm_fleet_transmission/b07_result_diagnosis), DM response and cleanup, and accept the fixed-schedule stop without reopening it. Published evidence: 7012107b736290dcde8fe6c5e5ed6271e14f398c result/diagnosis and 831a0c1e10bb6215d8f26965c39722d35f98abaf cleanup, in docs/research/candidates/uav_fleet_transmission/NOTES.md B07 final sections. Same DM remains available for bounded source facts; do not duplicate its 768-world reader or another general closure review.
+>
+> Your question: Across the accumulated HMASD/UAV evidence, what is the strongest worthwhile NEXT scientific investment for this now-free question owner, or is stopping preferable? Develop one consequential constructive question and its first complete comparison, rather than automatically refining timing or isolating another symptom. You may recommend development of a demonstrated capability, a meaningful learning comparison, or a materially different UAV/MARL question; choose by actual scientific/use value and total cost, not novelty wording or four-DM occupancy. No fixed proposal count; alternatives belong in your reasoning. Root will choose cross-question allocation after your full advice and factual price.
+>
+> Load-bearing current results: B07 reduced actual simultaneous physical changes sharply but C/Q DISP−SYNC mean J and service point estimates are adverse with intervals spanning both signs; Q10−C retains +mean service/J under both schedules with worse service-p10/minimum, farther paths and CPU. Q dispersion saves ~131m/UAV but costs CPU and has unestablished J/service preservation. There are complete outage/adverse-world witnesses. B06 H1 harmed all six C/Q/G/S mean J while ordinary event rule E retained travel/compute tradeoffs; no learnability diagnosis follows. Earlier selected transmission S assets retain their real capability. Do not pool these as mechanism replications or infer a termination learner/phase sweep is owed.
+>
+> Other work to coordinate against, not protect artificially by shrinking the question: fleet-adaptation B08 is selected/implementing a local own-Tx gate with old-mask current 114 features vs deterministic frozen hidden expansion, 512 paired native labels/two ridge fits, complete P0 and other parent baselines. Parent-adaptation B08 exact computation reuse is now publishing its result (8a5df94af87584b42ebb32fd2196aa28ab80c1b4; Root full reading pending). User-waiting retains strong S_F:LRS continuity with substantial service loss and individual harmed users; its source-priced C+cap-two+LRS comparison is awaiting Root selection. Existing actual-S2 and transfer reserves are legitimate alternatives, not automatically selected. Claude-owned questions, FSD/PPC pauses and frozen G33 remain untouched. Avoid duplicating the gate, exact-reuse or waiting program under a different name; if combining or reallocation is genuinely better, explain the material overlap to Root.
+>
+> Use relevant shared RESEARCH topics and original positive/adverse records, July work and external-review rounds, all three local literature stores plus needed primary web sources. Local hints and library misses are locators/coverage, not novelty evidence. Personally read each load-bearing primary passage and cite paper id+local JSON/PDF path or primary URL; distinguish source results, deductions for our model, and conjectural predictions. If a simple stochastic control/game/planning idea is a bridge, make the variables/assumptions and missing MARL coupling explicit. A learned proposal must specify what capability is learnable at its actual interface, why competent ordinary rules would plausibly leave value, and what paired outcome would change investment; a control/use proposal need not masquerade as algorithm novelty.
+>
+> Ask the owning DM only concrete source facts needed to make your best candidate executable and honestly priced. Full rights and timing matter: offered vs used information, report/map/history rights, native vs modeled service, movement/mask/allocator actions, stochastic innovations, startup/terminal/delivery/hold/clock rules, and whether a comparator must get added rights too. State complete native/fits/labels/controller/model/reader work, CPU/RSS/storage/support estimates and sunk vs marginal cost. Avoid a pilot that adds result exposure without answering the decision. No invented adoption margin, service floor, cash price or quota precondition. Opposite and uncertain outcomes must each have a meaningful disposition; a failed ordinary rule is not proof a richer method is necessary.
+>
+> SOURCE ONLY: no new policy/controller/native/model queries, no fits, outcomes recomputation, implementation, test benchmark or new experiment. Read existing records/source and primary literature; factual arithmetic is fine. Return full substantive advice and original source exchanges through native tools. Root selects or stops after reading the full recommendation; no automatic execution or new Pro round.
+
+#### Original DM request for the concrete fact need
+
+> I read Root’s complete post-B07 source/idea assignment. Please send the concrete source/interface and full-cost facts needed for your strongest candidate once identified; I will inspect that bounded source question and return its feasibility and marginal bill. B07’s published full result/diagnosis and cleanup already stand, so I will not rerun or reduce outcomes. I own the append-only NOTES and will preserve your exact question, recommendation and substantive exchanges there. No successor implementation or result exposure is selected.
+
+
+<a id="post-b07-s2-source-facts"></a>
+#### Source facts for the Oracle's revised actual-S2 candidate
+
+The Oracle first requested a bounded loss-host feasibility check, then closed that branch
+and requested the documented actual-S2 reserve's direct on-policy alternative. The exact
+requests and substantive replies follow. These are source facts and prospective arithmetic,
+not an experiment, a new empirical reduction, an adopted design or a claim that the previous
+learning failures came from visitation. I read the original parent proposal and all three
+original independent corrections at
+[actual-S2 source design](../uav_parent_adaptation/NOTES.md#s2-development-source-design)
+and [independent disposition](../uav_parent_adaptation/NOTES.md#s2-development-independent-disposition),
+plus the fleet DM's [subsequent source challenge](../uav_fleet_adaptation/NOTES.md#post-b06-source-allocation).
+The original two-fit/2560-episode reserve and its adverse evidence remain intact.
+
+Source inspected on shared main at `6e36fd68e0448825c71877baf07f316df321e550`:
+
+- `experiments/candidates/uav_parent_adaptation/b05_radio_composition/{collection,policies,contract,read,verify_coordinator}.py`
+  supplies the actual current managed execution and proportional reader.
+- `experiments/candidates/uav_radio_activation/b03/{protocol,scheduler}.py`,
+  `b02/scheduler.py` and `b01/protocol.py` define the unchanged report/map/search/arrival law.
+- `experiments/candidates/uav_fleet_adaptation/b04_native_development/{learning,collect}.py`
+  supplies the fixed PPO algebra and its current incompatible all-on collector/state checks;
+  `b05_native_consequence/learning.py:Head` supplies the exact existing CAL/CONT heads.
+- The original native host, mask/radio kernels, original C/current-only helper/nav and114-input
+  Student source supply the bounded loss facts. No environment or production policy was
+  instantiated and no executable or test was written or run.
+
+The revised arithmetic is **256 training episodes per arm**, not the initially requested512.
+Both arms have a frozen S backbone and their own on-policy histories. Equal episode/update
+budgets therefore do not preserve the old proposal's same-data CAL interpretation. The final
+512 episodes retain the original nine complete programs: C_S2 and C_T2 once each per world,
+and seven stochastic programs twice per world on32 worlds. All-on transfer heads are frozen
+parameters deployed through this common S2 interface, not extra all-on evaluation cells.
+
+A report-boundary pre-action critic can use the current physical state, current delivered
+commands/mask, local nav states, time/rotation/startup phase and the deterministic registered-map
+semantics. The source asserts no pending delivery at these boundaries: deliveries occur two
+ticks after each report and clear before the next report. A critic at intermediate native ticks
+would additionally need the pending commands/mask and due/timely state. Adding the current
+sampled proposal/current search result to a purported action-independent baseline would change
+that meaning. Neither this physical state augmentation nor a policy-gradient analogy proves an
+exact Markov description of hardware load, cache-dependent runtime and wall-clock lateness.
+Training-only critic evaluation belongs outside the original timed local-query-to-S2 scope;
+the actor/head query itself remains inside that scope. These are interface facts to expose in
+any eventual selection, not a demand for a new preliminary experiment.
+
+The complete price below uses the published parent B05 episode rates and existing array/count
+contracts. It removes1536 complete episodes/393216 native steps from the original fixed-pair
+reserve but purchases a different on-policy method. No fit or source query was made to obtain
+the estimate. The full learned-row reader price explicitly includes training rows; it is not a
+claim that the current old reader already supports the new heads/critic or that optimizer
+arithmetic will be replayed. Source/asset snapshots and all rollout-group head identities must
+be bound if later implemented. Current main/background and fresh actual-node admission remain
+separate from these estimates. Original acquisition, prior failed fits, ordinary-radio work,
+engineering and publication costs remain incurred; overlapping historical totals are not added.
+
+#### Original Oracle loss-host request
+
+> For my current source-only candidate assessment, I need concrete feasibility/price facts, not a design verdict or any new queries. Provisional question is N5 local-control recovery under one unannounced permanent radio+motion loss during H256, compared with competent current-information control and intact operation. The loss would mute the failed vehicle's actual signal/service, hold its position, and remove its actor decisions; fixed storage slots are acceptable, but no residual failed-transmitter interference. Please check from source: (1) can the retained all-on B05/B07 native host express this cleanly with an owned wrapper, and which source paths govern observation visibility, service, mask and movement? (2) Can retained C, Q10 and the two frozen S actors run survivors at this interface without a new global roster/map input or corrupting their frozen helper/nav semantics? What changes if peers disappear? (3) Which existing ordinary radio-aware/global alternative would actually be needed if we grant any current-mask/report rights, and can it be restricted to the surviving feasible subset? (4) Which existing 512-episode/131072-step local categorical training path could be reused for a bounded two-fit adaptation, and what label/C-model/optimizer/reader, CPU/RSS/storage/support bills would that imply? Please give source-based counts/ranges and unknowns only. No failure-law sweep, policy/controller/native/model calls, data reduction, fit, implementation or launch. Candidate is unselected and can still be declined.
+
+#### Original Oracle refinement to actual S2
+
+> A refinement to the outstanding factual request: please keep the loss-host facts bounded; that candidate may be declined because fewer all-on transmitters can improve service and no recovery need is established. The more promising alternative is the documented actual-S2 reserve, but I am testing a cheaper direct on-policy CAL-vs-CONT comparison against the frozen-pair design, not selecting it. Both would keep frozen S backbone and the existing ±.5tanh CAL(28)/CONT(3483) heads, actual pre-report proposals, fixed S2's old information/delivery/override/hold law, and all complete C_S2/C_T2/Q/S/B*/all-on-transfer final controls. Could the existing local PPO path train only these heads on actual S2 collection with a complete critic state, rather than acquire 1024 paired full-return labels under fixed S? Source-only facts needed: retained PPO/collector reusable pieces; actual current S2 state needed by critic for pending two-tick delivery and rotating overrides; counts for two arms×512 full H256 episodes plus the existing512-episode final panel; CPU/model/reader/RSS/storage/support range. No implementation, query, outcome calculation or experiment, and no scientific choice is delegated.
+
+#### Original DM bounded loss reply
+
+> Bounded loss-host facts from source: the retained make_real uses MultiUAVEnv N5/U50/H256/vectorized with masking disabled by default. An owned factory can enable its existing transmitter mask. set_transmitter_mask refreshes current channel/observations without advancing time; uav_radio.user_sinr_from_path_loss zeroes inactive interference and sets its service row to −inf, while _compute_uav_uav_sinr_matrix removes inactive sender/receiver visibility. Keep all five storage/adapter slots, force the failed command to zero and skip its policy/nav/RNG queries; deleting env.agents would misalign enumerate-based position rows. Preserve the original global reward sum over five slots. C/Q and both 114-input S actors accept fewer than four visible peers, with packed zero padding and no required roster input; peer loss legitimately changes observations/helper/cache keys, without a guaranteed observable loss flag. Existing all-on collectors/readers need a versioned mask/decision-validity contract and −inf handling; they are not drop-in loss evaluators. Four survivors have an upper capacity of40 users, but this supplies no claim that removing interference worsens actual service. I will stop that branch’s source work here per your refinement and price the actual-S2 on-policy CAL/CONT alternative. One training clarification: B04’s 512 episodes/131072 steps cover both 256-episode continuations together; your new two arms×512 entails1024 training episodes before finals.
+
+#### Original Oracle finite-horizon correction
+
+> Thank you; the loss facts close that branch for this assessment. For the S2 price use 256 full H256 training episodes PER arm, matching the existing B04 continuation horizon: 512 total training +512 declared final episodes =1024 episodes/262144 native steps. Two groups-of-two continuations imply512 actor and512 critic Adam updates per arm if the retained four-epoch full-rollout schedule is reused, so1024 actor+1024 critic updates total. This is a finite on-policy bounded-head package, not attribution of the old failure to visitation. Please keep the source facts on a Markov critic state and pending/actual timing explicit; no need to price the larger512-per-arm envelope further.
+
+#### Original DM state and timing reply
+
+> The 256-per-arm scope is arithmetically consistent: 512 training + 512 final H256 episodes, 262,144 native steps; 1,024 actor and 1,024 critic updates total if B04's two-episode/four-epoch schedule is retained. Source facts: the correct managed collector is parent B05 b05_radio_composition/collection.py with LocalTeam.decide, not the older standalone radio collector. Its pre-proposal report boundary asserts pending=None every t%4==0; previous delivery cleared at t−2. Thus a pre-action decision-epoch critic needs true positions/users/time, current delivered five-command vector and mask, five local nav states, fixed registered-map semantics and clock/rotation/startup phase. A microtick critic would additionally need the pending selected command/mask, delivery time/remaining delay and timely/fallback state. Do not put the current sampled proposal or resulting current pending packet into an action-independent baseline. At t=0 proposals execute immediately for two ticks; thereafter old commands continue until the two-tick arrival. The B04 136-vector omits mask, nav and pending semantics and is not sufficient unchanged. Timed deadline/cache/system-load effects also prevent claiming an exact hardware-runtime Markov state from just these physical features. Critic evaluation should be separately metered before the original local_wall start so it does not become an extra deployed computation inside S2's 1.456-second budget. Full operation/reader/storage price follows from the settled final panel and source counters.
+
+#### Original DM full source-price reply
+
+> Full source price for your revised 256-per-arm design, retaining the reserved 512-final-episode panel: 2 actor–critic development fits (2 fresh critics), 0 paired labels/expert queries/calibration searches; 1,024 episodes, 262,144 native steps, 1,024 explicit resets +1 constructor. The finals are C_S2/C_T2 once and Q/S/CAL_S2/CONT_S2/CAL_all→S2/CONT_all→S2/B*=S_T2→S2 twice on each of32 worlds. Thus992 S2 and32 T2 episodes;327,680 local requests=286,720 learned/helper/backbone requests +40,960 C/Q rankings before cache. C ceiling1,105,920 paths/4,423,680 model ticks/88,473,600 candidate+4,096,000 setup links; learned helper ceiling40,140,800 links. S2:7,364,608 score requests,7,110,656 unique-plan ceiling,28,220,416 mask-state reductions; T2:1,714,176 requests/6,803,136 reductions. All coordinator geometry:7,022,592 matrices/1,755,648,000 user links;65,536 rounds/refreshes,8,912,896 recurring-byte ceiling+409,600 provisioned map bytes (unique-map count awaits the seed contract). Native/reset/refresh dense user-link ceiling82,176,250.
+>
+> PPO reuse is substantive but not drop-in: B04 learning.py supplies two-complete-episode groups, four epochs, normalized full-return/H256 advantages, nominal FP64 categorical ratios clipped .8..1.2, sum-over-agent surrogate, critic MSE, fresh Adam3e−4 and gradient clipping .5. It has NO entropy bonus or KL term. Its all-parameters-trainable check/136-state contract must change for a frozen backbone and selected head-only optimizer. Preserve parent B05's two-private-integer I decoder; B04's inverse-CDF collector would change the execution law. The nominal smooth density is already explicitly a surrogate for the finite-bit executed law. Counts are1,024 head and1,024 critic updates;655,360 gradient head rows,163,840 first-density-identity rows (subset),32,768 collected critic rows+131,072 replay rows. Immutable hidden/logit caching can avoid extra backbone replay; a direct wrapper otherwise adds655,360 backbone forwards. This is a correctness/implementation choice, not free uncounted work.
+>
+> A full reader can verify every trajectory/source/asset/report/arrival/actual outcome and all saved search arithmetic, with the retained at-most-five actually-paid pairs per round:328,704 native/report/terminal formula states and≤1,300,480 independent candidate-state reductions. Full learned-row replay including training adds286,720 backbone/helper rows,204,800 new-head applications,40,960 transfer-head applications,20,480 B* transforms; replay needs each rollout group's immutable head state (256 group states total). Read critic features/targets/provenance/counts and movement; complete critic forward replay adds32,768 rows only if selected. No native steps/full-C rankings/optimizer rerun in this proposed reader; no full unselected candidate-physics replay claim.
+>
+> Published parent B05 mean episode rates give896*3.011403+64*3.177318+32*3.037700+32*26.434159=3,844.664928 CPU-s (64.08min) before new update/serialization work. This is extrapolation, not a benchmark. Budget estimate70–120 worker CPU min+15–40 reader CPU min;5–9 support hours remains appropriate because new head-only PPO/critic/density/managed-timing integration is real work. Streaming RSS estimate0.5–1.5GiB; durable raw/checkpoints0.5–1.5GB, plus transient source snapshot~1.7GB. Full training hidden/logit payload alone is101,580,800 uncompressed bytes; two-rollout streaming avoids loading it run-wide. Historical peaks430,004KiB for B04 PPO and352,224KiB for parent B05 worker/reader are scope-specific anchors, not admission. Compared with the reserved fixed-pair study this removes1,536 episodes/393,216 native steps, but buys a DIFFERENT finite on-policy package; it does not isolate a visitation mechanism or erase sunk costs. I will preserve these source facts and the exact exchanges in the existing notebook. No exposure or implementation occurred.
+
+#### Original DM decoder and training-data clarification
+
+> Two small source consequences to retain in the final wording: direct on-policy CAL and CONT have equal episode/update budgets but generally different own-history training data; the old reserve's 'same-data CAL' description no longer applies. Also the retained I decoder consumes two private integers per sampled member decision:960 stochastic episodes×320 decisions=307,200 sampling decisions and614,400 integer reads (the final C_S2/C_T2 episodes are deterministic). Distinct generated tape bundles depend on the as-yet-unselected seed/pairing contract. A four-tick training return includes the first two ticks of the prior commitment at later reports, then the new delivery; all later rewards remain in the full return, including overrides, aliases and late fallback. Those observations are retained rather than relabeling the delivered command as the learned action.
+
+**Current boundary.** All requested source facts have been returned through native communication.
+The original Oracle recommendation is still pending and goes directly to Root. This direction
+remains reserve, with no new selected study or result-bearing process. This prose-only work
+created no disposable source snapshot, run, asset staging or scratch;0 allocated bytes reclaimed
+and no cleanup target or blocker are claimed for it. No new empirical conclusion or reusable
+background judgment is supported by these source facts alone, so the shared index is unchanged.
+
+
+#### Original Oracle final critic-state question
+
+> Full price received, including the two-decoder-integer correction and different on-policy histories. Final recommendation will use the existing B04 PPO law with no KL or entropy bonus, zero-initialized bounded CAL/CONT heads, 256 episodes per arm, one fit each, final checkpoints only and the complete 512-final panel. One remaining source fact: please give the smallest coherent pre-proposal critic input based on existing available state, explicit dimension/bounds if easy, including actual delivered commands/mask and five helper navigation states. Does native 116 already carry time and all necessary own/peer/user state so 116+15+5+50=186 is correct, and is a separate current rotation/startup encoding necessary? No need to prove exact Markovness or benchmark; full-return Monte Carlo baseline may be partial but action-independent. Also send the publication anchor for the complete original exchange when preserved. No execution selected.
+
+#### Original DM critic-state reply
+
+> Yes:186 is the coherent width using five10-way nav one-hots. Native MultiUAVEnv._get_state (uav_env.py:376–389) is exactly five xyz positions(15), all50 xy user positions(100), and t/256(1); the adapter casts it to FP32. Normalize the first115 entries as the existing critic_features does (xy/1000, height(z−50)/100), retain t/256, then append actual delivered commands15, current mask5 and pre-query nav one-hots50. Coordinate/time/mask/nav entries are in[0,1]; commands are in{−1,0,1}; each nav block has exactly one1, and the mask is nonempty. At report clocks, t/256=0,4/256,…,252/256 is exactly representable in FP32, so startup(t=0), rotation((t//4)%5), remaining horizon and fixed delivery phase are recoverable; separate rotation/startup inputs are unnecessary for this pre-proposal baseline. Snapshot before current queries/nav advance and before the t=0 assignment actual=proposals; pending must be None. No previous command/remaining-hold20 block from old critic_features should be appended as well. The existing128–128 tanh critic with only input width changed would have40,577 parameters (=34,177+50*128).
+>
+> This186-vector is a declared finite MC baseline, not an exact reconstruction certificate: FP32 coordinates can lose fine physical/registered-map rounding information, and caches/hardware timing are omitted. Exact rounded map bytes already exist in the episode record; no new map or actor input is needed for the bounded baseline you describe. The source bound does not require a new rotation embedding or a Markov-proof gate. Complete exchange is preserved at docs/research/candidates/uav_fleet_transmission/NOTES.md#post-b07-s2-source-facts; I am adding this last question/reply and publishing that owned notebook now, then will send the commit anchor.
+
+#### Original Oracle final source-candidate clarification
+
+> For the final concrete cost/rights wording, common source candidate uses 256 fresh common training worlds with one indexed I tape each, identical two-episode grouping/order, matched fresh critic initialization; 32 disjoint final worlds with two common I tapes. Thus 320 distinct stochastic tape bundles and 288 unique maps, still charging all 1,024 resets/map provisions. Exact unused seed addresses can be fixed by DM before exposure. Immutable frozen hidden/logit caching is selected; no extra 655,360 replay backbone passes assumed. Reader includes full actor/head replay and critic inputs/targets/provenance checks; optional full critic-forward replay is not a selection prerequisite. This remains an unselected Root allocation, and belongs to the existing parent question. Thank you for preserving the full original exchange; no second price or experiment requested.
+
+**Source-scope response.** The186-entry critic, pre-action snapshot and fixed cached-backbone
+replay are feasible from the already available state/source. Its extra50 inputs relative to the
+old136-state critic change only the proposed value-network first layer, not the actor's114
+features. The critic remains an action-independent full-return baseline rather than an asserted
+exact hardware state. The final clarification fixes288 unique maps (115200 bytes), while all1024
+provisions still cost409600 bytes;320 common tape bundles contain204800 useful private integers
+before repeated reads. If the existing eleven-integer-per-round bundle provisioning is retained,
+it additionally generates20480 unused public integers, totaling225280 generated integers; the
+actual private reads remain614400. No future implementation may silently count reused tapes or
+cached contexts as independent training samples. These are arithmetic consequences, not new
+exposure or a second price. Root's original independent Oracle owns the recommendation; its
+whole final answer and the eventual allocation still need to be read before any implementation.
