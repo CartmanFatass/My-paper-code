@@ -1,0 +1,11 @@
+{
+  "source_sha": "cc86d9c679a52b74c345b806f3d0650d8932707e",
+  "kind": "focused correction of two failed fixture assertions; successful checks not repeated",
+  "node": "local_linux",
+  "python": "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+  "fits": 0,
+  "native_steps": 0,
+  "native_resets": 0,
+  "scope": "test_fallbacks_are_original_h1_and_do_no_candidate_or_rf_work and test_audited_nominal_equals_retained_motion_and_preserves_allocator_order",
+  "numeric_threads": 1
+}

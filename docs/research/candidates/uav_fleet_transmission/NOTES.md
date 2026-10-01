@@ -7018,3 +7018,46 @@ projection arrays/two Lloyd calls, zero RF pipelines and zero native reset/step.
 inside the one original finite allowance. The correct allocator assertion is lower-index
 tied waiter1 receives the initial charge and F is exited by t10, with exact original/new
 forecast equality still required. Successful full search/radio tests are not repeated.
+
+<a id="b09-engineering-acceptance"></a>
+
+**Focused checks passed; independent engineering acceptance.** Published correction
+cc86d9c679a52b74c345b806f3d0650d8932707e ran only the affected functions:3passed/9deselected,
+5.61s wall/4.13CPU seconds/334628KiB peak RSS, exact declared extra cost above and no RF/native
+execution. Complete records are `runs/uav_fleet_transmission/b09_service_prediction_checks_a02/`.
+All55 distinct required checks now pass across the retained first run and focused correction;
+two failed executions and the one repeated passing empty fallback remain charged. Cumulative
+finite checks:420candidate/nominal executions,12554jointticks,1259RFattempts,21real models plus
+one mock constructor failure,267proposals,145canonicalizations,136associations,38projection
+arrays,174Lloyd attempts;21.96CPU/24.19wall seconds across the two processes, peak380224KiB.
+No native reset/step or fit. Source8e26 production code is unchanged by the fixture correction.
+
+The named independent engineering Reviewer (`/root/dm_fleet_transmission/b09_engineering_review`,
+separate context, read-only) returned the following complete final assessment after reading
+both complete check logs and the final code. It ran no duplicate checks:
+
+~~~~text
+No material engineering finding remains for production source `8e26b973d`; fixture corrections at `cc86d9c67` leave production code unchanged.
+
+Resolved findings:
+
+- Missing individual service/outage tails: added in [metrics.py](/home/fires/hmasd-wsl/experiments/candidates/uav_fleet_transmission/b09_service_prediction/metrics.py:74), independently reconstructed by the reader.
+- Double-counted replay work after later validation failure: fixed by clearing accounted-for state in [reader.py](/home/fires/hmasd-wsl/experiments/candidates/uav_fleet_transmission/b09_service_prediction/reader.py:716), with a regression.
+- Interrupted scoring/ranking ambiguity: finite scalar assignments replay exactly; unfinished ranking flags remain explicitly unverified rather than becoming inferred rejections.
+
+I traced the lawful inputs, retained C/tracker/BS behavior, bounded search, nominal arithmetic, native cache/association/routing/delivery consumers, capture and complete/partial reader paths. Static parsing passed; reviewed paths have no outstanding changes.
+
+Author-run evidence establishes **55 distinct checks passing** across the retained first run and focused correction. The original two failures were fixture expectations and remain recorded. Cumulative cost: **420 candidate/nominal executions, 12,554 joint ticks, 1,259 RF attempts, and 21 real model constructions plus one mocked failure**. No native resets or steps occurred.
+
+Residual limits: the four 61-step native streams, native C/reference identity, integrated capture/reader plumbing and execution-node behavior still require the planned engineering run. Synthetic coverage does not establish scientific value or exact native continuation. I executed no models, planners, RF calls or tests; acceptance remains with the DM.
+~~~~
+
+**DM disposition.** I accept the implementation and counted focused checks, including the
+reader handback after reading every line of its actual native/identity/candidate/partial and
+endpoint paths. The original findings changed instrumentation and explicit partial coverage;
+no empirical scientific conclusion has yet been drawn. All native S7 and tracker/placement
+source dependencies retain their frozen26 hashes. The next effect is the original fixed
+four61-step engineering streams and one full actual-policy reader on fresh-admitted wsl_4070,
+with source published first and no automatic duplicate on failure. Nonempty synthetic evidence
+will remain separate if that engineering world has sparse or empty user exposure. The unchanged
+96-mission study follows only a read engineering result, without a new pilot or source tuning.
