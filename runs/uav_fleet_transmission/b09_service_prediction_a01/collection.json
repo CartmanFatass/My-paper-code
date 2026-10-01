@@ -1,0 +1,75 @@
+{
+  "observed_at_utc": "2026-10-01T11:38:49.496453+00:00",
+  "canonical_node": "wsl_4070",
+  "canonical_run_root": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b09_service_prediction_a01",
+  "manifest_sha256": "2c2f58b6c58de4281f54e911e2fe0dc6ce8f4b728b7353680c36c8e17e6afe8e",
+  "verification": "verified",
+  "mismatches": [],
+  "totals": {
+    "raw": {
+      "files": 192,
+      "stored_bytes": 906262386,
+      "allocated_bytes": 906805248
+    },
+    "artifacts": {
+      "files": 3,
+      "stored_bytes": 1888694,
+      "allocated_bytes": 1896448
+    }
+  },
+  "raw_copy_policy": "One canonical raw corpus retained at the remote run root; no local bulk copy.",
+  "collected_top_files": {
+    "admission-preflight.json": {
+      "bytes": 766,
+      "sha256": "61d3cb4f5147d1d0f55426cf4c1bde2c1a325c3dc2926bfa8dcc18aa13991c99"
+    },
+    "config.json": {
+      "bytes": 16743,
+      "sha256": "bfaaac99a3068158a5a2d63d3fe2629c48ebbfd8cdd025bcc69eef5e673c9beb"
+    },
+    "launch-manifest.json": {
+      "bytes": 4262,
+      "sha256": "8b5a7d1d5119b7f8a335cbff6ec1e516b6d9525df5241cfc1ce70af6e02e8902"
+    },
+    "launch-status.json": {
+      "bytes": 614,
+      "sha256": "979771afe498a1fab735cf2a32008c0566b9ddb95f518e26aa06c692ca724c00"
+    },
+    "manifest.json": {
+      "bytes": 34815,
+      "sha256": "2c2f58b6c58de4281f54e911e2fe0dc6ce8f4b728b7353680c36c8e17e6afe8e"
+    },
+    "perworld.json": {
+      "bytes": 1610746,
+      "sha256": "6361fea749ceb343fedb0c7aee686c466aa7c9f73fb76d4129bbc586911da8b9"
+    },
+    "process-exit.json": {
+      "bytes": 557,
+      "sha256": "9406d6b33d90680c39910dbf0ca30f6295d403014ff3d668f04befcb92683eb2"
+    },
+    "progress.json": {
+      "bytes": 1831,
+      "sha256": "b6b3502ce2f095c8991ff40726faa157838a9cda6ef9255f1d8ec35ea2ffdd56"
+    },
+    "reading.json": {
+      "bytes": 1721960,
+      "sha256": "be5173390e9c9632adc3603ad240daebdb6b89f076eb2388900c690b90a3d909"
+    },
+    "reading_worlds.json": {
+      "bytes": 2194189,
+      "sha256": "48b83e463b662c61ee3b12dd2a7bbe0771ce2f2de2d62e59d226f7556222eda3"
+    },
+    "stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "summary.json": {
+      "bytes": 261205,
+      "sha256": "382c9dfece3d6fe9d10fd9134aa0c4d40d9148d54cec5078af63886cfc60ced2"
+    }
+  }
+}

@@ -7150,3 +7150,51 @@ collection/full reading, same-handle drain/rearm, independent result diagnosis, 
 and cleanup; no reliance on the unsupported native-child App queue. Starts/checkpoints stay
 here, with no routine RESEARCH rewrite or extra empirical allocation. No scientific outcome
 has been read at this acceptance point.
+
+
+### B09 same-handle observation checkpoint — 2026-10-01 09:15 UTC
+
+Observer generation 33 checkpoint `47b2a328c41af9e825a27f7c`, wake `581d9ba7-87d8-4be3-9e75-af7d32283937`, was drained in the still-active native DM. Native operation `ec1d59fe992e79d1bbebfdc6ec7486df245b40a75f0bdf2f0a78941b6dc3a157` remained accepted/running, identities and records consistent, no exit witness, no observation error. Progress-only inspection reported 29/96 missions completed in the parent record; the immediately subsequent raw progress scan had 29 completed and four active entries (asynchronous snapshots), with completed missions at all 3,000 steps. No outcome file was read and no scientific choice was made. MemAvailable was 12,995,172 KiB, swap-free 4,105,992 KiB, and load 5.05/5.05/4.25. The native-child App queue remains unsupported (`-32600`); direct deterministic observation is intact. The exact same operation was rearmed as generation 34 for 1,500 seconds. No restart, duplicate launch, change of exposure or reader omission.
+
+
+### B09 same-handle observation checkpoint — 2026-10-01 09:40 UTC
+
+Generation 34 checkpoint `f8e17485f2be5ce2fdeefdb6`, wake `76231c21-c376-4a68-97f2-6cbd09390ebb`, was drained with the original operation still accepted/running and identities/records consistent, zero observer errors, no exit witness. Progress-only inspection: 61/96 completed, four active raw progress entries, 189,100 native steps represented by the asynchronous progress snapshots. MemAvailable 13,369,376 KiB, swap-free 4,105,992 KiB, load 4.11/4.19/4.40. No scientific outcome inspection or design change. Same-handle rearm generation 35, 1,500 seconds; no worker restart or second launch.
+
+
+### B09 same-handle observation checkpoint — 2026-10-01 10:05 UTC
+
+Generation 35 checkpoint `939bead1e29bdb84dacc2a49`, wake `b90b1b58-9852-432c-a7c7-f83cf7105ac2`, was drained; the original accepted operation remains running with consistent identities and records, zero observer errors, no exit witness. Progress-only inspection reports 94/96 completed, with only final-world H/F active, 285,100 native steps represented by the asynchronous snapshots. MemAvailable 13,428,540 KiB, swap-free 4,105,992 KiB, load 3.63/3.93/4.05. Full replay remains part of the same accepted chain. No outcome reading or choice change. Same-handle rearm generation 36 for 1,500 seconds, no relaunch.
+
+
+### B09 same-handle observation and owner round closure — 2026-10-01 10:31 UTC
+
+Generation 36 checkpoint `eb28f47572a1031bf1235b26`, wake `db85c0cb-c40c-4858-a033-ec602a232dc0`, was drained with consistent accepted/running operation and zero observer errors. The native worker phase reports all 96 missions complete and exactly 288,000 native steps. Full replay is still running under the same handle; the presence of summary/partial reading files is not a read-result boundary. MemAvailable 14,087,048 KiB, swap-free 4,105,992 KiB, load 2.00/2.00/2.38. Same-handle observer rearmed as generation 37 for 1,500 seconds. No scientific outcome reading or relaunch.
+
+While accepted work continued, Root relayed the owner's explicit instruction: “完成这一轮工作后就先就先写handoff吧 不打断 写一个单独的handoff文件 你写总览 各个DM写自己的各个部分 方便后续继续”. This closes the current round after B09's accepted worker/full reader, independent scientific reading, publication and measured cleanup, without interrupting it. No successor experiment is selected or launched. Root will create `docs/research/HANDOFF_20261001_ROOT_AND_FOUR_DMS.md` and serialize exclusive section-writing turns. This DM will write its own self-contained question/evidence/judgment/cost/retention/continuation section only after the current work is complete and its writing turn is granted. This explicitly requested standalone handoff supplements, and does not replace, the existing scientific records.
+
+
+### B09 full-reader observation checkpoint — 2026-10-01 10:56 UTC
+
+Generation 37 checkpoint `786a030f14e41e804ce67cb6`, wake `981d5f94-b49d-4468-9f67-773020469357`, was drained with the original operation still accepted/running, consistent identities/records and zero observer errors. The incremental reader file contains 17 world records; the file's entry count alone does not establish verification or scientific value. All native missions had already completed. MemAvailable 14,073,252 KiB, swap-free 4,105,992 KiB, load 2.02/2.01/2.05; stderr/stdout remain empty. Same-handle generation 38 was armed for 1,500 seconds; no restart or extra work.
+
+Root additionally assigned this DM to retire the substantive completed C/H/F selection block at `RESEARCH.md#forecast-service-use-selected-20261001` when publishing the complete B09 result: preserve the exact source revision in the usual dated archive and replace the same anchor with concise outcome/evidence. Root separately owns the cross-direction assessment and owner-stop overview. This changes documentation ownership only, adds no experiment or review, and preserves the explicit end-of-round boundary.
+
+
+### B09 full-reader observation checkpoint — 2026-10-01 11:22 UTC
+
+Generation 38 checkpoint `8f4220e7cce7a50173ea662e`, wake `bfcb21b7-4f15-44bd-8b00-3ddd5c42a81b`, was drained with the same original operation accepted/running, consistent identities/records, zero observer errors and no exit witness. The incremental reader file now contains 27 world records; their scientific content remains unread. MemAvailable 14,074,844 KiB, swap-free 4,105,992 KiB, load 2.00/2.00/2.00; stderr/stdout empty. Same-handle rearm generation 39 for 1,500 seconds.
+
+Root has now explicitly granted this DM the exclusive handoff-file writing turn after the other three DMs' published sections (latest then `0538232e4061d00dc0707a5e16cbdb88b9a71c3b`). After full result reading/diagnosis/publication/cleanup, this DM owns only the bytes between `<!-- DM_FLEET_TRANSMISSION_BEGIN -->` and `<!-- DM_FLEET_TRANSMISSION_END -->` in `docs/research/HANDOFF_20261001_ROOT_AND_FOUR_DMS.md`, preserving markers and all outside bytes, writing in Chinese, checking links and publication and then releasing the turn to Root. Root is independently retiring three unrelated completed source assessments and updating its overview; those regions remain outside this DM's editing scope. No successor is selected.
+
+
+<a id="b09-terminal-collection"></a>
+### B09 complete worker/full-reader chain and canonical collection — 2026-10-01 11:38 UTC
+
+The originally accepted scientific operation `ec1d59fe992e79d1bbebfdc6ec7486df245b40a75f0bdf2f0a78941b6dc3a157` exited 0 with valid process-exit witness epoch `1790854551.1702433`; both recorded runner 1231375 and supervisor 1231374 are absent, with consistent source/operation records. Observer generation 39 delivered READY `ef5e886caeafd52048425257`, wake `a3c371ef-ee5a-4f8d-8720-05b626c395f7`, and the native DM drained it directly; no duplicate worker/reader was launched. The terminal event was consumed through generation 40 and observation was explicitly stopped with no active jobs or pending events.
+
+Source is `93166e7ac6cffa3c76da113afdc84e7317bb585c`. All 32 frozen worlds / 96 missions completed 3,000 native steps each: exactly 288,000 native transitions, 192 stream/probe environment constructions, 96 resets, zero fits/labels/optimizer updates. The full reader reports **VERIFIED** with no errors or missing saved decision fields, 288,000 actual proposals and shield/feedback calls reconstructed, all 485,744 actually executed candidate records and their 14,572,320 nominal joint ticks / 1,457,232 RF/service calls reconstructed again, and no partial/inflight/unreplayed/unknown work. Worker and reader each used 64 private models with zero model reset/step. All 38 source-binding hashes match the published launch commit. Independently derived reader paired statistics exactly equal the worker summary. All 96 native endings are the prescribed horizon truncation. Scientific interpretation is being completed separately below; verification does not itself establish value.
+
+The collected 11 top-level JSON files plus the two empty logs match remote SHA-256 and size (5,847,688 bytes before the collection record). A fresh streaming verification of every manifest entry found no mismatch: 192 canonical raw/progress files use 906,262,386 stored bytes / 906,805,248 allocated bytes; the 96 NPZ files alone use 906,213,874 stored / 906,412,032 allocated bytes and represent 6,954,552,608 uncompressed array bytes. The sole required bulk stays at `wsl_4070:/home/wu/projects/HMASD/runs/uav_fleet_transmission/b09_service_prediction_a01/raw/`; no local bulk replica was made. Collection verification is in `runs/uav_fleet_transmission/b09_service_prediction_a01/collection.json`. Manifest SHA-256 `2c2f58b6c58de4281f54e911e2fe0dc6ce8f4b728b7353680c36c8e17e6afe8e`; summary `382c9dfece3d6fe9d10fd9134aa0c4d40d9148d54cec5078af63886cfc60ced2`; full reading `be5173390e9c9632adc3603ad240daebdb6b89f076eb2388900c690b90a3d909`; per-world reading `48b83e463b662c61ee3b12dd2a7bbe0771ce2f2de2d62e59d226f7556222eda3`.
+
+Scientific worker body CPU sum 18,465.250576 s; reader body CPU sum 10,287.260157 s. Reaped CPU including worker/reader startup and serialization is 18,476.495185 + 10,291.558094 s; with parent chain CPU 6.174499 s, full recorded chain total is **28,774.227778 CPU s (7.993 h)**. Worker-parent wall 4,531.465171 s, reader-parent wall 5,032.932096 s, full chain wall 9,566.774583 s (2.657 h). Worker peak RSS max 619,936 KiB, reader max 652,304 KiB, parent 484,704 KiB; these are per-process maxima, not a simultaneous sum. Admission, support, independent scientific reading and publication remain additional, unmeasured costs, with finite checks/engineering costs retained above. These occupied-node measurements are not isolated performance benchmarks or a real-time deployment guarantee.
