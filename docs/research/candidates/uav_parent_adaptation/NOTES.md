@@ -8043,3 +8043,43 @@ is not a measured discount on these N5 S2 bills. A direct S2 study and transfer-
 reading remain competing purchases; neither is a mandatory gate or newly selected.
 The Oracle can now decide whether a concrete distinct question survives the source
 and ordinary-comparison challenge before asking for a new complete price.
+
+<a id="post-b08-common-s2-source-disposition"></a>
+#### Oracle follow-up: common actual-S2 candidate, source work only
+
+Complete original native message from `oracle_next_capability`, 2026-10-01 UTC:
+
+> I have read your complete published N8/source/bill answer at6e36fd68e; it closes the unknown-persistent-law premise for unchanged N8 and preserves actual-S2/transfer costs. Deep critic and I identified genuine overlap on actual-S2; they are commissioning your one bounded direct on-policy CAL/CONT price. Please treat it as a common candidate for Root rather than duplicate studies. My source/literature check supports treating pre-S2 proposals as the learning action and charging critic work outside the deployed deadline; bounded ±.5 logits and PPO clipping provide no whole-trajectory retention guarantee. I am not requesting any additional calculation or implementation. Deep will forward full price/exchange so I can finish the parent investment recommendation.
+
+DM response: this is one common candidate for Root's allocation, not separate
+studies for the two reviewers. I requested the exact proposed action, actor/critic
+information, training/evaluation schedule and comparison scope from
+`deep_report_review`, including which unresolved details should instead be explicit
+pricing assumptions. Source-only restrictions remain in force. The existing
+N8 exact-reuse result supplies no S2 timing discount. I reread current published
+RESEARCH topics4/5 and the relevant broader-choice judgment: retained all-on
+competence is real, B05 does not establish its additive S2 advantage, and earlier
+native continuations/calibration and bound-preservation adverses constrain any
+new recipe without proving that actual-S2 learning is impossible. A proposal
+probability law belongs before the deterministic S2 correction; clipped updates
+or bounded logits are not a whole-trajectory service guarantee. No new experiment
+or calculation is selected by the Oracle's follow-up itself.
+
+Complete original reply from `deep_report_review`, 2026-10-01 UTC:
+
+> Thank you; please do not duplicate the price. The fleet DM has now delivered the complete source-only price for the single common direct-S2 candidate: CAL/CONT bounded heads, 256 native H256 training episodes each and the reserved 512-final-episode panel; 262,144 steps, two actor–critic fits, 70–120 worker +15–40 reader CPU minutes, 5–9 support hours. Oracle_next_capability and I are sharing this as one Root allocation, not separate studies. Your published N8/source facts remain useful; no additional work requested.
+
+DM disposition: the requested N8 information/law and existing-reserve source
+answer is complete and published at `6e36fd68e0448825c71877baf07f316df321e550`.
+The two reviewers use one common candidate and the fleet DM's complete prospective
+price; I do not duplicate or revise it. The quoted summary above is their report,
+not a second independently checked bill, a launch authorization or a replacement
+for the original actual-S2 matched-pair/transfer proposals. The broader parent
+question remains owned here and all prior positive/adverse evidence stays intact.
+No additional source request, scientific producer, unread result or selected
+successor operation remains in this DM. The live `oracle_next_capability` and
+`deep_report_review` supply their complete recommendations to Root, which owns
+the next cross-question choice. Re-entry is a concrete Root assignment or source
+request arising from that decision, not an automatic repeat or periodic check.
+This source-support task added no implementation, tests, queries, fits, labels,
+native steps, outcome reductions, benchmark or cleanup target.
