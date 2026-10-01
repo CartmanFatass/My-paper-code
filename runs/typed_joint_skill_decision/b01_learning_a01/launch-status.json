@@ -14,24 +14,21 @@
     },
     "summary": {
       "path": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b01_learning_a01/summary.json",
-      "state": "absent"
+      "state": "present"
     }
   },
   "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/de7d2a2115696e5c0391064a1bc1b3b79addfcfb094afa5a51d3987b2220b5a8.json",
   "direction": "typed_joint_skill_decision",
   "execution": {
+    "exit_code": 0,
     "exit_witness": {
+      "exit_code": 0,
+      "finished_at_epoch": 1790880087.553602,
       "path": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b01_learning_a01/process-exit.json",
-      "state": "absent"
+      "state": "valid",
+      "termination": "process_exit"
     },
     "runner": {
-      "observed_identity": {
-        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
-        "kind": "linux_pid_start_ticks",
-        "pid": 1278984,
-        "session_id": 1278983,
-        "start_ticks": 122002913
-      },
       "recorded_identity": {
         "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
         "kind": "linux_pid_start_ticks",
@@ -39,17 +36,10 @@
         "session_id": 1278983,
         "start_ticks": 122002913
       },
-      "state": "running"
+      "state": "absent"
     },
-    "state": "running",
+    "state": "exited",
     "supervisor": {
-      "observed_identity": {
-        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
-        "kind": "linux_pid_start_ticks",
-        "pid": 1278983,
-        "session_id": 1278983,
-        "start_ticks": 122002909
-      },
       "recorded_identity": {
         "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
         "kind": "linux_pid_start_ticks",
@@ -57,7 +47,7 @@
         "session_id": 1278983,
         "start_ticks": 122002909
       },
-      "state": "running"
+      "state": "absent"
     }
   },
   "explicit_retry": {
@@ -73,7 +63,7 @@
   "kind": "hmasd_operation_status",
   "manifest_ref": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b01_learning_a01/launch-manifest.json",
   "node": "wsl_4070_typed_joint",
-  "observed_at": "2026-10-01T18:32:24.781821Z",
+  "observed_at": "2026-10-01T18:41:39.413801Z",
   "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/de7d2a2115696e5c0391064a1bc1b3b79addfcfb094afa5a51d3987b2220b5a8.json",
   "output_root": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b01_learning_a01",
   "record_consistency": {

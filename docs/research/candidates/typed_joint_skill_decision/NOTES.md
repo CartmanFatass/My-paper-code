@@ -859,3 +859,34 @@ inconsistency. Initial progress had150 completed full frozen forwards, no fits,
 no new native/static calls; actual float32 checkpoint loading and representation
 forward are executing. Correctness agreement and full reading are still pending.
 No scientific outcome was inspected for tuning or selection.
+
+### B01 fixed fits terminal; declared reader transition
+
+The learning operation ended18:41:27UTC with exit0 and matching absent native
+processes. Observer READY`6457e9c2e21b1d772e54eee7` was read/consumed at18:58UTC;
+the same child queue-delivery limitation remained, with no lost or repeated work.
+Exactly1,552 full forwards including16 agreement repetitions,6 fresh fits,
+3,072 optimizer updates and49,152 training contexts per arm completed. Frozen
+full-state digest stayed`ff08e797f5aeb71c53c51f7edbe60fd28b70c9f8126dfbedad147b96343326d5`.
+Cumulative charged CPU6,361.889673s includes the prior rounded native charge;
+this phase measured575.889657CPU-s and547.037157GPU-reserved-wall-s. The disk
+peak was8,214,913,024bytes. Torch reported peak allocated2,895,674,880 and peak
+reserved9,793,699,840bytes; both raw allocator readings are retained, without
+calling the latter physical VRAM residency. Scientific effects remain unread.
+
+All1,609 learning-manifest files passed size/SHA256 checks,120,473,887bytes,
+with123,580,416bytes allocated in the original canonical learning output.
+Final manifest SHA256`16aca6b9ec339a7f7fa94b7d4a86eed34d917cbee956a9db2f810f132d32bd85`
+(250,004bytes). No cache or weight replica was made. The exact
+[learning locator](B01_LEARNING_INPUT.json),SHA256
+`968f97efe58212815b3f7c77786f0522be21f83ea8ef9d6799193f434d712cd8`,
+and [reader prior ledger](B01_AFTER_LEARNING_LEDGER.json),SHA256
+`083d92426178e6a3ec42cffeedca5c8d6c11439a0f370e0b914fd4af4c0d475e`,
+are also bound external inputs under the same node staging parent. CPU is
+conservatively rounded up to6,362s for continuation; GPU is carried exactly.
+
+After retained artifacts and terminal process identity were verified, the normal
+collector preview/apply with read-only privileged process scan removed source
+snapshot`9dd81ae5eba4450da18da28dd5186a25`. Verified target allocation fell from
+820,744,192bytes to0. The next phase is the original full reader, unchanged
+source61a2dfa9c, no new fit/encoder/native/static query, no endpoint selection.
