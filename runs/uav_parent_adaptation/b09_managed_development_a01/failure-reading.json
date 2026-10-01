@@ -1,0 +1,347 @@
+{
+  "status": "INCOMPLETE_TECHNICAL_FAILURE_READ",
+  "actual": {
+    "fits": 1,
+    "expert_labels": 0,
+    "optimizer_steps": 0,
+    "constructor_calls": 1,
+    "constructors": 1,
+    "constructor_resets": 1,
+    "explicit_reset_calls": 1,
+    "explicit_resets": 1,
+    "native_step_calls": 2,
+    "native_steps": 2,
+    "complete_episodes": 0,
+    "policy_block_calls": 1,
+    "policy_blocks": 1,
+    "sampling_decisions": 5,
+    "private_integer_reads": 10,
+    "coordinator_round_calls": 1,
+    "coordinator_round_returns": 1,
+    "mask_setter_calls": 1,
+    "mask_setter_returns": 0,
+    "critics": 2,
+    "actor_optimizer_steps": 0,
+    "critic_optimizer_steps": 0,
+    "actor_replay_rows": 0,
+    "critic_replay_rows": 0,
+    "density_identity_rows": 0,
+    "target_rows": 0,
+    "collected_critic_rows": 1,
+    "rollout_group_heads": 1,
+    "collected_critic_attempts": 1
+  },
+  "failure": {
+    "type": "RuntimeError",
+    "message": "transmitter masking is not enabled"
+  },
+  "checkpoint_checks": {
+    "CAL": {
+      "head_unchanged_sha256": "fbeece22b7fd8ead188bfb036b54b499a47730211c0852edf459ba0c376b0e25",
+      "critic_unchanged_sha256": "01c5e760d63539bc8d9f29b70b270ec0e087d4b5253f2ca2251f24f60460cf9f",
+      "all_optimizer_states_empty": true
+    },
+    "CONT": {
+      "head_unchanged_sha256": "855146943623e9baa766a75715c2f3106752d684384702d1ebe85fddb74cf30f",
+      "critic_unchanged_sha256": "01c5e760d63539bc8d9f29b70b270ec0e087d4b5253f2ca2251f24f60460cf9f",
+      "all_optimizer_states_empty": true
+    }
+  },
+  "prefix_raw": {
+    "path": "raw/CAL_S2_w29841000_t0.npz",
+    "bytes": 36400,
+    "sha256": "e21f47997cdc8c3237b33900ecce6c2b7310c75106a9668eb019b195db888f68",
+    "shapes": {
+      "observations": [
+        256,
+        5,
+        104
+      ],
+      "positions": [
+        257,
+        5,
+        3
+      ],
+      "commands": [
+        256,
+        5,
+        3
+      ],
+      "proposals": [
+        64,
+        5,
+        3
+      ],
+      "transmitter_mask": [
+        256,
+        5
+      ],
+      "reward": [
+        256
+      ],
+      "served": [
+        256
+      ],
+      "sinr_quality": [
+        256
+      ],
+      "sinr": [
+        256,
+        5,
+        50
+      ],
+      "connections": [
+        256,
+        5,
+        50
+      ],
+      "decision_ticks": [
+        64
+      ],
+      "completed_steps": [],
+      "completed_decisions": [],
+      "completed_rounds": [],
+      "coord_tick": [
+        64
+      ],
+      "coord_started": [
+        64
+      ],
+      "coord_due": [
+        64
+      ],
+      "coord_actual": [
+        64,
+        5,
+        3
+      ],
+      "coord_commands": [
+        64,
+        5,
+        3
+      ],
+      "coord_mask_before": [
+        64
+      ],
+      "coord_mask": [
+        64
+      ],
+      "coord_timely": [
+        64
+      ],
+      "coord_selected_mask": [
+        64
+      ],
+      "coord_selected_q": [
+        64
+      ],
+      "coord_reports": [
+        64,
+        5,
+        24
+      ],
+      "coord_report_count": [
+        64
+      ],
+      "coord_command_packet": [
+        64,
+        16
+      ],
+      "coord_has_command": [
+        64
+      ],
+      "coord_wall_seconds": [
+        64
+      ],
+      "coord_cpu_seconds": [
+        64
+      ],
+      "coord_forecast_lengths": [
+        64
+      ],
+      "coord_sequential_pair": [
+        64,
+        2
+      ],
+      "coord_sequential_score": [
+        64,
+        3
+      ],
+      "coord_candidate_plans": [
+        64
+      ],
+      "coord_candidate_requests": [
+        64
+      ],
+      "coord_candidate_request_upper": [
+        64
+      ],
+      "coord_state_reductions": [
+        64
+      ],
+      "coord_geometry_snapshots": [
+        64
+      ],
+      "coord_prefix_ticks": [
+        64
+      ],
+      "coord_recurring_bytes": [
+        64
+      ],
+      "coord_forecast": [
+        64,
+        27,
+        4,
+        5,
+        3
+      ],
+      "coord_scores": [
+        64,
+        27,
+        32,
+        3
+      ],
+      "coord_order": [
+        64,
+        837,
+        2
+      ],
+      "initial_users": [
+        50,
+        2
+      ],
+      "map_packet": [
+        400
+      ],
+      "critic_states": [
+        64,
+        116
+      ],
+      "critic_features": [
+        64,
+        186
+      ],
+      "critic_actual": [
+        64,
+        5,
+        3
+      ],
+      "critic_mask": [
+        64,
+        5
+      ],
+      "critic_nav": [
+        64,
+        5
+      ],
+      "values": [
+        64
+      ],
+      "terminal_observation": [
+        5,
+        104
+      ],
+      "terminal_mask": [
+        5
+      ],
+      "nav_pre": [
+        1,
+        5
+      ],
+      "nav_next": [
+        1,
+        5
+      ],
+      "action_index": [
+        1,
+        5
+      ],
+      "modal_index": [
+        1,
+        5
+      ],
+      "probabilities": [
+        1,
+        5,
+        27
+      ],
+      "fallback": [
+        1,
+        5
+      ],
+      "memo_hit": [
+        1,
+        5
+      ],
+      "features": [
+        1,
+        5,
+        114
+      ],
+      "n_current": [
+        1,
+        5
+      ],
+      "n_peers": [
+        1,
+        5
+      ],
+      "logits": [
+        1,
+        5,
+        27
+      ],
+      "departure_threshold": [
+        1,
+        5
+      ],
+      "tail_thresholds": [
+        1,
+        5,
+        26
+      ],
+      "effective_probabilities": [
+        1,
+        5,
+        27
+      ],
+      "departure_integer": [
+        1,
+        5
+      ],
+      "requested_departure": [
+        1,
+        5
+      ],
+      "private_depart_integer": [
+        1,
+        5
+      ],
+      "private_tail_integer": [
+        1,
+        5
+      ],
+      "hidden": [
+        1,
+        5,
+        128
+      ],
+      "base_logits": [
+        1,
+        5,
+        27
+      ],
+      "logp": [
+        1,
+        5
+      ],
+      "episode_complete": []
+    }
+  },
+  "scope": "Collected-byte identity; three retained positions (reset plus two endpoints), two current-observation/reward rows, initial/failed tensor identity and empty optimizer states. No native, backbone, critic, updater or complete result reader replay. No scientific effect estimate.",
+  "inspection_correction": "First inspection used three observation rows as if H+1; actual schema has H current observations, so only first two are completed. Corrected the inspection bound without changing saved artifacts.",
+  "native_steps_added": 0,
+  "fits_added": 0,
+  "wall_seconds": 0.9218131420202553,
+  "cpu_seconds": 1.6755448149999999
+}

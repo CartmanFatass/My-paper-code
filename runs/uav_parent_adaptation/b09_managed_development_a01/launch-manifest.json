@@ -1,0 +1,96 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-10-01T05:21:57.692413Z",
+  "bootstrap_command": [
+    "/home/wu/.venvs/hmasd-gcc-31021/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/5da2b2e3d044498fae1c794f8479971c/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/5da2b2e3d044498fae1c794f8479971c/experiments/candidates/uav_parent_adaptation/b09_managed_development/run.py",
+    "--output",
+    "/home/wu/projects/HMASD/runs/uav_parent_adaptation/b09_managed_development_a01",
+    "--",
+    "--out",
+    "/home/wu/projects/HMASD/runs/uav_parent_adaptation/b09_managed_development_a01",
+    "--launch-sha",
+    "dd9d06510e3d525982a38fb077b0825d2336403a",
+    "--seed",
+    "29840911",
+    "--input-dir",
+    "/home/wu/hmasd-inputs/uav_parent_adaptation/b09_managed_development_a01"
+  ],
+  "claim_key": "23db19eb59365808118025bac60c256c1e3e060ce72de37379b37d0fa4121469",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/23db19eb59365808118025bac60c256c1e3e060ce72de37379b37d0fa4121469.json",
+  "command": [
+    "/home/wu/.venvs/hmasd-gcc-31021/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/5da2b2e3d044498fae1c794f8479971c/experiments/candidates/uav_parent_adaptation/b09_managed_development/run.py",
+    "--out",
+    "/home/wu/projects/HMASD/runs/uav_parent_adaptation/b09_managed_development_a01",
+    "--launch-sha",
+    "dd9d06510e3d525982a38fb077b0825d2336403a",
+    "--seed",
+    "29840911",
+    "--input-dir",
+    "/home/wu/hmasd-inputs/uav_parent_adaptation/b09_managed_development_a01"
+  ],
+  "command_sha256": "d91d957d6305c692b38d32dd15d0119c3e2fd8c6c05b89f878186b4ab5ba55c9",
+  "control_observation": {
+    "observed_at": "2026-10-01T05:21:57.571410Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "bd5b8649dc9595571ed3d1aab174c379c47e4907"
+  },
+  "control_root": "/home/wu/projects/HMASD",
+  "created_at": "2026-10-01T05:21:57.581841Z",
+  "cwd": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/5da2b2e3d044498fae1c794f8479971c",
+  "direction": "uav_parent_adaptation",
+  "host_identity": "LAPTOP-U9TDKC8A",
+  "identity_command": [
+    "/home/wu/.local/opt/hmasd-cpython-3.10.21-gcc/bin/python3.10",
+    "experiments/candidates/uav_parent_adaptation/b09_managed_development/run.py",
+    "--launch-sha",
+    "dd9d06510e3d525982a38fb077b0825d2336403a",
+    "--seed",
+    "29840911",
+    "--input-dir",
+    "/home/wu/hmasd-inputs/uav_parent_adaptation/b09_managed_development_a01"
+  ],
+  "lead": "Codex DM (native child)",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/uav_parent_adaptation/b09_managed_development_a01/launch-manifest.json",
+  "node": "wsl_4070",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/23db19eb59365808118025bac60c256c1e3e060ce72de37379b37d0fa4121469.json",
+  "output_root": "/home/wu/projects/HMASD/runs/uav_parent_adaptation/b09_managed_development_a01",
+  "preflight": "/home/wu/projects/HMASD/runs/uav_parent_adaptation/b09_managed_development_a01/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 1195551,
+      "session_id": 1195551,
+      "start_ticks": 117456264
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 1195551,
+    "process_group_id": 1195551
+  },
+  "process_exit": "/home/wu/projects/HMASD/runs/uav_parent_adaptation/b09_managed_development_a01/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 1195552,
+      "session_id": 1195551,
+      "start_ticks": 117456267
+    },
+    "pid": 1195552,
+    "process_group_id": 1195551,
+    "supervisor_pid": 1195551
+  },
+  "schema_version": 1,
+  "sha": "dd9d06510e3d525982a38fb077b0825d2336403a",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/5da2b2e3d044498fae1c794f8479971c",
+  "stderr": "/home/wu/projects/HMASD/runs/uav_parent_adaptation/b09_managed_development_a01/stderr.log",
+  "stdout": "/home/wu/projects/HMASD/runs/uav_parent_adaptation/b09_managed_development_a01/stdout.log"
+}

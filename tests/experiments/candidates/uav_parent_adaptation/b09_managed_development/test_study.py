@@ -170,9 +170,75 @@ def test_admission_and_fixture_guards_precede_queries(tmp_path, monkeypatch):
         raise RuntimeError('synthetic admission refusal')
     monkeypatch.setattr(hmasd_admission, 'require_admission', refuse)
     with pytest.raises(RuntimeError, match='admission refusal'):
-        run.main(['--out', str(tmp_path / 'b09_managed_development_a01'), '--seed', '29840911',
+        run.main(['--out', str(tmp_path / 'b09_managed_development_a02'), '--seed', '29840911',
                   '--launch-sha', 'bad', '--input-dir', str(tmp_path)])
     assert not called and not list(tmp_path.iterdir())
+
+
+def test_production_selects_original_masked_factory_before_any_fit(tmp_path, monkeypatch):
+    from experiments.candidates.uav_radio_activation.b01 import study as original_masked
+    from experiments.candidates.ucope.uav_motion_prefix_b01 import environment
+
+    actor = model.make_student(71901)
+    bindings = {'S': {'state_sha256': model.state_digest(actor.state_dict())}}
+    monkeypatch.setattr(study, 'preflight_inputs', lambda *args: bindings)
+    monkeypatch.setattr(study, 'load_inputs', lambda *args: (actor, {}, bindings))
+    monkeypatch.setattr(study, 'source_identities', lambda *args: {})
+    monkeypatch.setattr(torch, 'get_num_threads', lambda: 1)
+    monkeypatch.setattr(torch, 'get_num_interop_threads', lambda: 1)
+    original_make = environment.make_real
+    seen = {}
+
+    def record_base(**kwargs):
+        seen.update(kwargs)
+        return object()
+
+    def stop_adapter(base, *, seed):
+        assert seed == FROZEN.train_worlds[0]
+        assert seen['seed'] == seed
+        assert seen['enable_transmitter_mask'] is True
+        assert (seen['n_uavs'], seen['n_users'], seen['max_steps']) == (5, 50, 256)
+        raise RuntimeError('production construction seam verified')
+
+    def recording_make(seed, *, base_class):
+        return original_make(seed, base_class=base_class, adapter_class=stop_adapter)
+
+    def forbidden_generic(*args, **kwargs):
+        raise AssertionError('generic unmasked factory selected')
+
+    monkeypatch.setattr(original_masked, 'MultiUAVEnv', record_base)
+    monkeypatch.setattr(original_masked, 'make_real', recording_make)
+    monkeypatch.setattr(environment, 'make_real', forbidden_generic)
+    out = tmp_path / 'construction-seam'
+    with pytest.raises(RuntimeError, match='construction seam verified'):
+        study.run_batch(out, 'mocked-admission', input_dir=tmp_path,
+                        admission={'sha': 'mocked-admission'}, scientific_invocation=True)
+    summary = json.loads((out / 'summary.json').read_text())
+    assert summary['actual']['constructor_calls'] == 1
+    assert summary['actual']['fits'] == summary['actual']['native_steps'] == 0
+    assert not summary['rows'] and not summary['updates']
+
+
+def test_disabled_production_host_fails_before_a_fit(tmp_path, monkeypatch):
+    from types import SimpleNamespace
+    from experiments.candidates.uav_radio_activation.b01 import study as original_masked
+
+    actor = model.make_student(71901)
+    bindings = {'S': {'state_sha256': model.state_digest(actor.state_dict())}}
+    monkeypatch.setattr(study, 'preflight_inputs', lambda *args: bindings)
+    monkeypatch.setattr(study, 'load_inputs', lambda *args: (actor, {}, bindings))
+    monkeypatch.setattr(study, 'source_identities', lambda *args: {})
+    monkeypatch.setattr(torch, 'get_num_threads', lambda: 1)
+    monkeypatch.setattr(torch, 'get_num_interop_threads', lambda: 1)
+    monkeypatch.setattr(original_masked, 'factory',
+                        lambda seed: SimpleNamespace(env=SimpleNamespace(enable_transmitter_mask=False)))
+    out = tmp_path / 'disabled-host'
+    with pytest.raises(ValueError, match='requires transmitter masking'):
+        study.run_batch(out, 'mocked-admission', input_dir=tmp_path,
+                        admission={'sha': 'mocked-admission'}, scientific_invocation=True)
+    summary = json.loads((out / 'summary.json').read_text())
+    assert summary['actual']['constructors'] == summary['actual']['constructor_resets'] == 1
+    assert summary['actual']['fits'] == summary['actual']['native_steps'] == 0
 
 
 def test_all_assets_present_before_any_model_load(tmp_path, monkeypatch):

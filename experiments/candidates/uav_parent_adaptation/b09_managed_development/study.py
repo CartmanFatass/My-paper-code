@@ -35,8 +35,7 @@ def run_batch(out, launch_sha, *, input_dir, admission=None, protocol=FROZEN,
             raise ValueError('production requires the admitted complete fixed B09 contract')
         if torch.get_num_threads() != 1 or torch.get_num_interop_threads() != 1:
             raise ValueError('production CPU thread contract')
-        from experiments.candidates.ucope.uav_motion_prefix_b01.environment import make_real
-        factory = make_real
+        from experiments.candidates.uav_radio_activation.b01.study import factory
         bindings = ASSETS
     else:
         if scientific_invocation or protocol == FROZEN or fixture_bindings is None:
@@ -143,6 +142,8 @@ def run_batch(out, launch_sha, *, input_dir, admission=None, protocol=FROZEN,
         env = factory(protocol.train_worlds[0])
         counts['constructors'] += 1
         counts['constructor_resets'] += 1
+        if production and not env.env.enable_transmitter_mask:
+            raise ValueError('B09 production host requires transmitter masking')
         inflight.clear()
         for group, kind, worlds in protocol.training_schedule():
             check()

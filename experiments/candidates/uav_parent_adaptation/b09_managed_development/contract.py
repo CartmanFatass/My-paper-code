@@ -10,7 +10,6 @@ from experiments.candidates.uav_parent_adaptation.b05_radio_composition.contract
 )
 
 OBJECT = 'UAV-PARENT-MANAGED-DEVELOPMENT-B09'
-TAG = 'b09_managed_development_a01'
 ARMS = ('C_S2', 'C_T2', 'Q_I_S2', 'S_I_S2', 'CAL_S2', 'CONT_S2',
         'CAL_all_S2', 'CONT_all_S2', 'Bstar_S2')
 HEADS = ('CAL', 'CONT')

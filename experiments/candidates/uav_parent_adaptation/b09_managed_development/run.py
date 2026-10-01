@@ -19,7 +19,7 @@ def main(argv=None):
     parser.add_argument('--seed', type=int, required=True)
     parser.add_argument('--input-dir', type=Path, required=True)
     args = parser.parse_args(argv)
-    if args.seed != 29840911 or args.out.name != 'b09_managed_development_a01':
+    if args.seed != 29840911 or args.out.name != 'b09_managed_development_a02':
         parser.error('the complete selected B09 seed/tag is fixed')
     from scripts.hmasd_admission import require_admission
     admission = require_admission(__file__, direction='uav_parent_adaptation')

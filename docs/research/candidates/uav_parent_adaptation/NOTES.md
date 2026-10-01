@@ -8627,3 +8627,125 @@ checks. The next action is exact input publication, fresh remote admission and
 one complete worker/reader operation on the selected1024-episode contract, with
 the already staged and independently file-hashed assets. No exposure, seed,
 comparator or outcome rule changes were made by engineering review.
+
+
+<a id="b09-a01-technical-failure"></a>
+#### B09 A01 accepted technical failure and bounded correction — 2026-10-01 UTC
+
+Reviewed source `dd9d06510e3d525982a38fb077b0825d2336403a` was published before
+execution. The first source-refresh shell lacked the configured `zsh -lic`
+network environment and stalled Git transport; only the identified preparatory
+processes were stopped. No launcher or scientific process existed at that point.
+Using the configured network shell fetched the published source successfully.
+Canonical remote HEAD570fd4564, maintained launcher/config and peer outputs were
+preserved; only this direction's current published RESEARCH row was synchronized
+under `.git/hmasd-main-writer.lock`. The existing unrelated missing-tree auto-GC
+warning remains unrepaired. Fresh runtime imports and resource feasibility
+succeeded; these do not establish a cure for prior remote runtime faults.
+
+The [native manifest](../../../../runs/uav_parent_adaptation/b09_managed_development_a01/launch-manifest.json)
+accepted A01 at05:21:57.692UTC. The [release preflight](../../../../runs/uav_parent_adaptation/b09_managed_development_a01/admission-preflight.json)
+measured14683238400B available against the4294967296B floor. It exited1 at
+05:22:00.795UTC; the [original failure and all counters](../../../../runs/uav_parent_adaptation/b09_managed_development_a01/summary.json)
+and [traceback](../../../../runs/uav_parent_adaptation/b09_managed_development_a01/stderr.log)
+show `RuntimeError: transmitter masking is not enabled` at the first delayed S2
+mask delivery. Native status confirms both original processes absent and a
+consistent exit witness. All raw prefix, original/failed checkpoints and compact
+records were collected unchanged before considering a correction.
+
+Actual exposure is1 started CAL fit attempt,0 completed episodes,2 native steps,
+1 constructor reset plus1 explicit reset,5 frozen-backbone/head proposals,
+5 stochastic decisions/10 private integer reads,1 critic row and1 completed
+coordinator round;0 actor/critic optimizer steps or target/update rows. Two fresh
+critics were initialized; both original/failed head and critic state digests
+are identical. All320 tape bundles were provisioned. Worker entry-to-summary
+cost is2.337792371CPU-s/2.792666021wall-s, peak536900KiB. No complete worker reader
+ran. This is a failed technical attempt, not a zero-cost launch refusal or
+scientific evidence against the selected question.
+
+The deterministic observer initially required explicit resume of its stopped
+B08 state, then registered the accepted A01 handle in generation34. Its first
+observation exposed terminal failure; the App wake was rejected with−32600 for
+this native child, which remained active and read the event. The same handle
+was drained/rearmed34→35 and observation stopped after collection; no worker was
+restarted and no successor accepted.
+
+**Diagnosis.** Source reconstruction found that B09 selected the generic
+`uav_motion_prefix_b01.environment.make_real` factory, whose default disables
+transmitter masking. The inherited B05 S2 host instead imports
+`uav_radio_activation.b01.study.factory`, which passes
+`enable_transmitter_mask=True` into that same original constructor. The pure
+NumPy integration fixture supported mask changes unconditionally; it therefore
+did not cover this production construction seam. The prior engineering review
+missed that omission. No scientific schedule, learner or scheduler repair is
+needed to address this exception.
+
+**Prospective correction and L0.** I choose one corrected A02 execution of the
+same fixed B09 study, because the two-step technical failure did not reach an
+optimizer update or final comparison and the selected question remains unanswered.
+This is an explicit lead decision under constitution§3, not automatic retry or
+score-dependent extension. A02 starts both heads/critics fresh using the exact
+same declared seeds, ordering, information/action rights,256+256 training and
+512 final episodes. It adds2 started fits and262144 native steps; combined with
+A01 the planned study total is3 started attempts and262146 native steps. Keep
+A01's one critic row, proposals, round, tape generation, cost and failed evidence
+in addition to the unchanged complete A02 bill. Original70–120/15–40CPU-minute
+worker/reader estimates remain forecasts. No extra head, epoch, world, pilot or
+scientific comparator is authorized by this correction.
+
+DM owns only B09 `study.py`, `run.py` and its integration test for this repair:
+select the already pinned masked factory, fail closed on an unexpectedly disabled
+production host before a fit, and bind the executable to fresh tag
+`b09_managed_development_a02`. Add a production-construction regression using
+recording doubles and the original factory argument path, without a production
+asset query, world construction or native step. The existing complete synthetic
+suite covers unchanged learning/collection/reader paths; the independent
+engineering Reviewer must close this actual patch before source publication and
+fresh actual-node admission. The changed-source A02 is a separately recorded
+corrected operation; preserve the accepted A01 source and tag without mutation.
+A02 may consume the already declared exact outside-root staging files if their
+three digests still match, avoiding another redundant copy. Clean both snapshots
+and that consumed copy after complete reading and live-consumer checks.
+
+
+**A01 collection/read.** All14 remote original files,792482logical bytes,
+matched the collected SHA256/length inventory. The canonical failure evidence
+is local, with exact original remote files retained until safe cleanup.
+[Inventory](../../../../runs/uav_parent_adaptation/b09_managed_development_a01/collection-inventory.json)
+and [bounded failure reading](../../../../runs/uav_parent_adaptation/b09_managed_development_a01/failure-reading.json)
+verify unchanged head/critic tensors and empty Adam state for both arms, three
+stored positions (reset plus two endpoints), and two current-observation/reward
+rows. One inspection initially treated the observation buffer as H+1; it is H,
+so that local bound was corrected without modifying any artifact. No complete
+scientific reading, new policy/native query or optimizer replay was performed.
+The successful bounded inspection cost1.675545CPU-s/.921813wall-s; earlier
+inspection overhead is additional unmetered support. This does not omit the
+A01 started fit attempt or certify a scientific result.
+
+**Patch check and original independent review.** The DM's focused integration
+suite passed19tests in9.84s. The registered Reviewer returned:
+
+> No material finding remains in the correction. I recommend accepting the bounded patch.
+>
+> My earlier review missed the production factory mismatch. A01's original traceback and summary confirm failure at the first mask delivery: **2 native steps, 1 started CAL fit attempt, 0 completed episodes, 0 optimizer steps**.
+>
+> The patch addresses that failure:
+>
+> - `study.py:38` selects the unchanged, already-pinned B05 masked factory. Its wrapper passes `enable_transmitter_mask=True` through the original constructor without changing other environment arguments.
+> - `study.py:145` rejects a disabled host before any fit or collection.
+> - `run.py:22` requires A02. A direct A01-tag invocation exited with parser error **before admission or output access**.
+> - The new tests exercise the production branch through the original factory argument path using constructor doubles, plus the disabled-host guard.
+>
+> **Validation:** 19 focused integration tests passed in **9.79 seconds**. The diff against `dd9d06510` changes only those three assigned files; learning, schedules, seeds, collection, and reader semantics remain unchanged.
+>
+> Nonblocking cleanup: `contract.py:13` still declares an unused A01 `TAG`; no executable consumer was found, so it does not override the A02 entrypoint.
+>
+> No production asset query, native construction, or experiment was performed during this review. Runtime success beyond the repaired construction path remains unverified.
+
+**DM acceptance.** I accept the correction and its stated runtime limit. I also
+removed the review-identified unused `TAG` constant from `contract.py`; the
+entrypoint alone binds A02, and no executable consumer used the deleted value.
+This cleanup changes no exposure or behavior. The accepted A01 snapshot remains
+immutable. The next action is publication of this correction and the original
+failure record, then one fresh admitted A02 operation using the fixed scientific
+contract and the already hashed outside-root consumption files.

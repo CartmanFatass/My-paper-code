@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/home/wu/projects/HMASD/.git/hmasd-launch-sources/5da2b2e3d044498fae1c794f8479971c/experiments/candidates/uav_parent_adaptation/b09_managed_development/run.py", line 46, in <module>
+    if main()['status'] != 'VERIFIED':
+  File "/home/wu/projects/HMASD/.git/hmasd-launch-sources/5da2b2e3d044498fae1c794f8479971c/experiments/candidates/uav_parent_adaptation/b09_managed_development/run.py", line 36, in main
+    batch = run_batch(args.out, args.launch_sha, input_dir=args.input_dir, admission=admission,
+  File "/home/wu/projects/HMASD/.git/hmasd-launch-sources/5da2b2e3d044498fae1c794f8479971c/experiments/candidates/uav_parent_adaptation/b09_managed_development/study.py", line 160, in run_batch
+    rollouts = [collect(kind + '_S2', world, 0, phase='training', head=head, critic=critic,
+  File "/home/wu/projects/HMASD/.git/hmasd-launch-sources/5da2b2e3d044498fae1c794f8479971c/experiments/candidates/uav_parent_adaptation/b09_managed_development/study.py", line 160, in <listcomp>
+    rollouts = [collect(kind + '_S2', world, 0, phase='training', head=head, critic=critic,
+  File "/home/wu/projects/HMASD/.git/hmasd-launch-sources/5da2b2e3d044498fae1c794f8479971c/experiments/candidates/uav_parent_adaptation/b09_managed_development/study.py", line 91, in collect
+    row, rollout = collector(env, arm=arm, world=world, tape=tape, bundle=bundles.get((world, tape)),
+  File "/home/wu/projects/HMASD/.git/hmasd-launch-sources/5da2b2e3d044498fae1c794f8479971c/experiments/candidates/uav_parent_adaptation/b09_managed_development/collection.py", line 174, in collect_episode
+    env.env.set_transmitter_mask(ep.mask_array(current_mask))
+  File "/home/wu/projects/HMASD/.git/hmasd-launch-sources/5da2b2e3d044498fae1c794f8479971c/envs/pettingzoo/uav_env.py", line 227, in set_transmitter_mask
+    raise RuntimeError("transmitter masking is not enabled")
+RuntimeError: transmitter masking is not enabled

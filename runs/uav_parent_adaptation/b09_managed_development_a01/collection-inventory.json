@@ -1,0 +1,80 @@
+{
+  "status": "VERIFIED",
+  "canonical_root": "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b09_managed_development_a01",
+  "remote_source": "wsl_4070:/home/wu/projects/HMASD/runs/uav_parent_adaptation/b09_managed_development_a01",
+  "files": [
+    {
+      "path": "admission-preflight.json",
+      "bytes": 765,
+      "sha256": "ee61df32de802b42586964fdac6d45004418cd3d604040c06ce4007ae55257f4"
+    },
+    {
+      "path": "assets/CAL_failed.pt",
+      "bytes": 167415,
+      "sha256": "45d43c1a9e32e8215e37dfc9345123d8e3210f2d6aad5dd723badd6c052a3c33"
+    },
+    {
+      "path": "assets/CAL_group000.pt",
+      "bytes": 2509,
+      "sha256": "a7cc80749275965e9825a0bfaaa90f49d23eb539a41511b9543ae52d0bfc8012"
+    },
+    {
+      "path": "assets/CAL_initial.pt",
+      "bytes": 166789,
+      "sha256": "33080ced25267bbcf98feda656b8e54471dcb6dca47596c5b8f6922d80895e3b"
+    },
+    {
+      "path": "assets/CONT_failed.pt",
+      "bytes": 181253,
+      "sha256": "ee4a22b5e3dccd1c3804b4963b5f7747190fa132d5e28b21458d25df0145ffdb"
+    },
+    {
+      "path": "assets/CONT_initial.pt",
+      "bytes": 180627,
+      "sha256": "64eb3b883c1b5b688b5d4d5afe4277206c8e7ae435d32793278c8cfce1fd4b21"
+    },
+    {
+      "path": "config.json",
+      "bytes": 18811,
+      "sha256": "5ad28d2a2d6c993933032fe7f5b93574d594f1ff87315cc722cae7a9ca6f8c74"
+    },
+    {
+      "path": "launch-manifest.json",
+      "bytes": 4279,
+      "sha256": "a67d5ecafd1aadd776ab146ac7d7023f1dde7c7882147bf72f11a96ad4ae357d"
+    },
+    {
+      "path": "launch-status.json",
+      "bytes": 614,
+      "sha256": "c2bf66ffaf170864fff98fb16fa5909f2d112c9a6069b4f30a2f9b35a0465f78"
+    },
+    {
+      "path": "process-exit.json",
+      "bytes": 557,
+      "sha256": "813569ac82fbcecb888fe02ef13cb6cdd0998e565cc91a5cd21f418b8c49dfd6"
+    },
+    {
+      "path": "raw/CAL_S2_w29841000_t0.npz",
+      "bytes": 36400,
+      "sha256": "e21f47997cdc8c3237b33900ecce6c2b7310c75106a9668eb019b195db888f68"
+    },
+    {
+      "path": "stderr.log",
+      "bytes": 1943,
+      "sha256": "87447c1b5b5115fb174a5fb53e4fefbc086ce9bb1382a54cd0ddf5510ddd4b7c"
+    },
+    {
+      "path": "stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "summary.json",
+      "bytes": 30520,
+      "sha256": "cbb9cfaa61adb02da18721b759983beccab7f900c99e0a4467e1600cbc9d0daf"
+    }
+  ],
+  "logical_bytes": 792482,
+  "native_steps_added": 0,
+  "fit_attempts_added": 0
+}
