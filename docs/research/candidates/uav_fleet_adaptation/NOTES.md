@@ -10848,3 +10848,41 @@ arguments, output tag, node and fit/episode price are unchanged. This first
 actual kernel submission is not a duplicate/retry of any native operation;
 no `--retry-of` applies because no kernel acceptance existed. Normal fresh
 admission remains mandatory.
+
+
+The corrected outer submit2 reached the actual kernel and was refused before
+claim/admission at08:56:30UTC (exit4): `absolute author input is absent from
+published snapshot: /home/wu/projects/HMASD/runs/uav_fleet_adaptation/
+b02_inheritance_a01/assets/S.pt`. Reconstructed from launcher1660–1687:
+absolute inputs inside the author checkout are rebound into the published
+source snapshot, where ignored bulk inputs intentionally do not exist.
+Thus the earlier direct-canonical-input plan is corrected; actual source,
+input bytes, comparators and scientific price remain unchanged. No B10
+claim/output was created, supervisor1233187 is stopped and no runner began.
+The one unclaimed source snapshot `cdc6962ab4704c9e94c544741b8474cc` measured
+819224576 allocated bytes. Its first supported-GC preview refused protected
+`/proc/660/cwd` inspection; the documented `--sudo-process-scan` preview
+then confirmed eligibility and exact `--unclaimed-source --apply` removed
+it. Target absence is verified:819224576 bytes reclaimed,0 remaining
+snapshot from submit2. No other worktree, run or claim was modified.
+
+Prospective required staging copies exactly the two hash-bound originals into
+`wsl_4070:/home/wu/hmasd-inputs/uav_fleet_adaptation/b10_joint_control_a01/`
+as `P0.pt` and `HIDDEN.npz`, outside the author checkout:429606 logical bytes
+plus filesystem rounding/directories (under0.5MiB forecast). Verify both
+canonical files and both copies at staging; retain staging through the one
+worker/reader, then delete it while keeping the original canonical evidence.
+Next outer submission name `fleet_b10_joint_control_a01_submit3` preserves
+both earlier technical records. Same original scientific SHA/output tag and
+finite study; only the two CLI file locators change to required staged paths.
+No admitted-operation retry or extra scientific exposure is selected.
+
+
+Required staging completed with fresh canonical and copied-file verification:
+P0.pt424487B/SHA256`b9e25fca68109bb50fa64fadfc90939ad6a4669058c1c0ccd1351c8bbcefe12a`
+(425984 allocated bytes), HIDDEN.npz5119B/SHA256
+`e8f6ecea525d7892edc1e82c407070d14ea234dae3c90c6c054ce16804eaa026`
+(8192 allocated bytes), total staging directory438272 allocated bytes.
+Original canonical files are untouched. Outer submit3 accepted the corrected
+supervisor command; actual admission/operation facts are recorded separately
+below after its native handshake, not inferred from outer acceptance.
