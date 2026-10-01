@@ -6492,3 +6492,338 @@ active through complete worker/reader collection; any checkpoint rearming uses
 the same operation and does not restart the worker. Acceptance and initial
 progress establish technical execution only. No B07 scientific result is read
 at this point; all64episodes and complete independent replay remain required.
+
+<a id="b07-complete-reading"></a>
+## 2026-10-01 — B07 complete: fixed learned ranking adds no demonstrated value over ordinary top two
+
+The single accepted local operation completed its worker and full reader at
+00:25:21 UTC, with a valid zero-exit witness and both accepted native process
+identities absent. At the 00:22 checkpoint the deterministic observer had
+observed the same healthy operation; generation 25 rearmed that handle without
+restarting its worker. It observed completion at 00:25:23. The native-child
+queue delivery again returned `-32600`; direct same-handle collection in this
+still-active DM drained the completion at 00:26:44. The consumed event was
+rearmed once and the observer stopped. This delivery limit caused no duplicate
+request, missing collection or scientific exception.
+
+All **64 complete H500 episodes / 32,000 native steps**, across the 16 frozen
+fresh worlds, are read. The experiment added **0 fits, 0 optimizer updates and
+0 training-acquisition labels**. It reused the one unchanged B06 artifact.
+The complete independent reader verified all 32,064 native snapshots, lawful
+observations/actions/rewards and exact shared prefixes through t39; all stationary
+bank rows; scalar features, scores, ordered learned shortlists and exact final
+stay/initiate ties; and every model branch by uncompressed replay. All saved
+optimized branch arrays were bitwise equal to the original evaluator, and all
+recurrence certificates and actual/logical work totals reconstructed. Maximum
+scalar feature/score errors were 1.11e-16 / 8.88e-16. Every L2_E and K2_E world
+paid exactly two champion branches plus stay. No world had all-negative learned
+scores; that rule was exercised by the accepted synthetic checks, not by an
+observed native opportunity in this panel.
+
+The original [complete reading](../../../../runs/uav_parent_adaptation/b07_shortlist_amortization_a01/reading.json)
+contains every predeclared outcome/timing contrast and paired-world interval.
+The [saved-output diagnostics](../../../../runs/uav_parent_adaptation/b07_shortlist_amortization_a01/diagnostics.json)
+retain every world's physical choice, model values, candidate/menu identities,
+native consequences and artifact checks. These diagnostics used only already-paid
+outputs (0.144533 CPU-s), with no additional native, model or learned-policy query.
+
+### Native value and adverse components
+
+| Arm | Mean native J | Mean served users | Quality term | Mean path, m/UAV | Mean selection CPU-s | Mean complete episode CPU-s |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| R | 0.662885885 | 42.927875 | 0.206654885 | 409.191144 | 1.573469 | 6.386801 |
+| T_E | 0.668284375 | 43.386750 | 0.203237247 | 392.294107 | 4.389500 | 9.682470 |
+| K2_E | 0.667363846 | 43.292750 | 0.204552358 | 388.178370 | 3.380433 | 8.511091 |
+| L2_E | 0.666477967 | 43.213375 | 0.205319222 | 421.972105 | 3.410024 | 8.560057 |
+
+| Contrast | Mean native ΔJ | Paired 95% bootstrap interval | J gain / loss / equal worlds | Mean Δserved | Mean Δpath, m/UAV |
+| --- | ---: | --- | --- | ---: | ---: |
+| **L2_E − K2_E (primary)** | **−0.000885878** | **[−0.002373417, +0.000136034]** | **1 / 3 / 12** | **−0.079375** | **+33.793735** |
+| L2_E − R | +0.003592082 | [+0.000945279, +0.006749726] | 7 / 1 / 8 | +0.285500 | +12.780961 |
+| L2_E − T_E | −0.001806408 | [−0.003465250, −0.000410590] | 0 / 6 / 10 | −0.173375 | +29.677998 |
+| K2_E − R | +0.004477961 | [+0.001692668, +0.007543543] | 7 / 0 / 9 | +0.364875 | −21.012774 |
+| T_E − R | +0.005398490 | [+0.002275683, +0.008913208] | 9 / 0 / 7 | +0.458875 | −16.897037 |
+| T_E − K2_E | +0.000920529 | [+0.000030884, +0.002148782] | 4 / 0 / 12 | +0.094000 | +4.115737 |
+
+These are the frozen 10,000-replicate percentile intervals, seed 29367991,
+using identical resampled world indices for every metric. They describe 16
+evaluation worlds conditional on this fitted artifact and these programs;
+neither 64 episodes nor individual model branches are independent training
+replications. The primary interval crosses zero: this panel does not establish
+population inferiority or equivalence. It does not demonstrate a learned
+allocation advantage. The positive L2_E−R result preserves its complete conditional
+capability, but ordinary K2_E has the stronger observed mean at matched branch
+budget. No old B06 75%-retention criterion or new adoption threshold is applied.
+
+The native objective is **J = 0.7 × served/50 + 0.3 × quality − height_penalty**.
+Height penalties for R/T_E/K2_E/L2_E were 0.000100831 / 0.000101299 /
+0.000100362 / 0.000105049. L2_E−K2_E's quality gain (+0.000766864) therefore
+does not cancel its lower service and higher mean height penalty. Its Δserved
+interval is [−0.206375, +0.004500], and its Δpath interval is
+[−8.974811, +112.536349]. L2_E−T_E trades +0.002081975 quality for less service,
+higher mean path and lower J. T_E−R also has a lower mean quality term
+(−0.003417638), and loses service in one world despite its aggregate service
+gain. These components are retained, rather than interpreting a weighted J
+improvement as improvement of every service or resource outcome.
+
+Whole-episode served p05 and minimum were identical between all four arms in
+every world; aggregate values were 39.9375 and 35.625. The prospective
+post-action t40–499 suffix uses exactly `connections[41:]` (460 outcomes).
+Suffix mean served was R 43.238179, T_E 43.736957, K2_E 43.634783,
+L2_E 43.548505. Suffix p05 was R 43.0625, T_E 42.0625, K2_E 42.75,
+L2_E 43.25. Thus L2_E−K2_E suffix-p05 is +0.5 [0, +1.5] and L2_E−T_E
+is +1.1875 [0, +2.75]. Suffix minimum remained identical by world, with
+mean 39.9375. Whole and suffix zero-service steps and longest zero-service
+runs were zero throughout. The positive suffix-tail component prevents a claim
+of complete metric-frontier dominance by ordinary selection. These all-user
+count summaries do not identify per-user continuity or fairness.
+
+### What the changed decisions locate
+
+All four arms initiated a move in all 16 worlds. L2_E and K2_E shortlist sets
+differed in seven worlds, but their executed physical programs differed in only
+four: 29367000, 29367001, 29367002 and 29367010. The exact teacher's selected
+program was present in 10/16 learned menus versus 12/16 ordinary menus.
+The three losses and one gain must be read together:
+
+- World 29367000: ΔJ −0.005705214, Δserved −0.544, Δpath −39.979 m/UAV,
+  but suffix-p05 rises from 37 to 45 and quality rises +0.0063443.
+- World 29367001: ΔJ +0.001151710, Δserved +0.036, Δpath −21.213 m/UAV;
+  L2_E selects the teacher's `m6_s31`, a useful ranking change.
+- World 29367002: ΔJ −0.000126883 with equal service and Δpath −5.373 m/UAV;
+  the small J loss is in quality, not service.
+- World 29367010: ΔJ −0.009493667, Δserved −0.762, Δpath +607.265 m/UAV
+  and Δheight_penalty +0.0000825, despite +0.00418944 quality. The learned
+  shortlist excludes the T_E/K2_E choice `m1_s50`: `m2_s50` ranks just above it
+  (0.0389112 versus 0.0387894 predicted advantage), and L2_E executes R's
+  `m5_s50`. This single adverse world contributes heavily to the mean gap.
+
+Every executed program's saved model and native actions, masks and served-user
+series agree exactly across all 64 episodes. Maximum per-tick native/model J
+error is 5.6744e-9 and maximum normalized remaining-J error is 3.78475e-9.
+Those 64 episodes cover 29 distinct physical programs among the teacher's
+72 world-specific branches; the other 43 branches have full model replay but
+no native execution. Model fidelity is therefore strongly checked on selected
+programs, not universally established for every unexecuted counterfactual.
+Given the retained model and menu, candidate exclusion is an observed immediate
+bottleneck: exact continuation cannot recover a candidate already discarded.
+This does not identify whether features, objective, regularization, training
+coverage or irreducible world variation caused the learned ordering.
+
+### Complete cost and retained scope
+
+L2_E/K2_E selection CPU ratio is 1.008754 [1.000196, 1.017971], controller
+ratio 1.006763 [0.999631, 1.014188], and complete episode ratio
+1.005753 [0.998996, 1.012693]. The mean complete CPU difference is
++0.048966 s [−0.008605, +0.107811]. This is similar measured cost, not a
+guarantee of identical CPU. L2_E/T_E selection ratio is 0.776859
+[0.747085, 0.808840], controller ratio 0.887734 [0.870582, 0.906071],
+and complete ratio 0.884078 [0.866447, 0.902718]. The learned shortlist
+saves about 22.3% selection CPU and 11.6% complete CPU relative to T_E;
+ordinary K2_E ratios are about 0.770118 and 0.879021 on the same panel.
+L2_E's independent bank costs 1.596256 CPU-s per episode; its features,
+inference and sorting cost 0.0006225, 0.0003335 and 0.0000083 s. The complete
+L2_E−K2_E timing gap is not attributable solely to those tiny extra operations.
+Complete episode timing includes metric reduction and artifact hashing.
+
+The worker used 168 model branches (T_E 72, K2_E 48, L2_E 48), all with exact
+recurrence. Of 77,280 logical continuation ticks, it computed 10,587 and reused
+66,693. Model state-mask requests fell from 18,167,940 logical to 2,031,939
+actual; adding 10,295,587 native-controller requests gives **12,327,526 actual
+worker requests**, versus 28,463,527 without reuse. It independently paid
+22,400 stationary rows and 435,680 transit ticks, and the learner used 17,263
+feature-distance pairs and 728 coefficient products. The reader independently
+paid the full 77,280 model ticks / 28,463,527 requests plus the same stationary
+and transit work, while reconstructing 64 episodes with **0 new native
+transitions**. All totals remain below the prospective ceilings. Branch-count
+matching does not equate candidate-specific physical work or measured CPU.
+
+Worker CPU/wall: 534.634559 / 534.796317 s. Full-reader CPU/wall:
+1149.801970 / 1150.071805 s. The complete entry records **1684.564490 CPU-s
+(0.467935 h), 1684.996083 wall-s**; process-lifetime inclusive CPU is
+1686.183310 s plus 0.002202 child-system s, with 414,648 KiB process peak RSS.
+The small timing scopes differ by setup/finalization; none includes unmetered
+authoring or independent-review effort. The forecast was an estimate, not a
+spend requirement. No training or teacher-data acquisition is hidden in B07:
+the earlier fit (1.966261 CPU-s) and paid acquisition (1222.447506 CPU-s) remain
+historical exposures. Direction cumulative measured worker/reader scopes become
+**19 fits, 2,955,776 native steps, 8958.289684 CPU-s**, before the separately
+recorded saved-output analysis; support effort remains incompletely metered.
+
+Required bulk is 528 original artifacts / 86,517,868 bytes, plus the unchanged
+4,213,746-byte summary (total 90,731,614 logical bytes). Every raw artifact's
+size and SHA256 was verified. Summary SHA256 is
+`21cbb7288c4e01bf87556b54af48249c763920aa6e5d90fa85a3b0b3e6e1416d`;
+reader SHA256 is
+`3610d1ff1bec4f36110ff57d10a3d8aa0883d48cfdb51052da3daa3bd2081c2c`.
+Original arrays, adverse worlds and full source/fit identities remain required
+evidence. Canonical retention and measured cleanup follow after the independent
+scientific reader releases its live consumers; neither a move nor publication
+alone counts as reclaimed disk.
+
+<a id="b07-independent-disposition"></a>
+### Original independent scientific review and resolved disposition
+
+The dedicated ResearchCritic received the actual question, frozen contract,
+original B06 and B07 sources/outputs and relevant shared background in a separate
+context (`fork_turns=none`), with no DM/Root conversation inheritance. Its full
+response follows. Its saved-output checks incurred no new native, model or
+fit execution; it distinguishes those checks from the completed full reader.
+
+> **Recommendation: close this fixed-artifact ranking purchase, retain the ordinary planning capability and the learned asset’s conditional evidence, and select no automatic replication, refit or archive expansion.** B07 did not demonstrate that learned top-two allocation improves on ordinary K2_E. This is an investment conclusion under the frozen comparison, not proof of population inferiority or failure of the broader amortization question.
+>
+> I received no inherited DM/Root conversation. I reconstructed B07’s contract and outputs before reading the complete original B06 critic, DM response and shortlist rationale. I subsequently checked the relevant published RESEARCH topics 3/4; their competent-comparator and prediction-versus-decision distinctions remain applicable.
+>
+> I independently checked all 48 source bindings against the launch commit and accepted snapshot, preservation of the 39 inherited bindings, six bound fit inputs, fresh world/RNG arrays, all 528 raw artifact hashes, principal metrics from all 64 native arrays, common prefixes, and the declared outcome/timing bootstrap arithmetic. All 168 saved model branches agree bitwise with their corresponding T_E branches. All 64 executed suffixes match their selected model’s actions, masks and service series. I did **not** repeat native physics or the full uncompressed simulations; those remain covered by the completed reader. [B07 contract](/home/fires/hmasd-wsl/docs/research/candidates/uav_parent_adaptation/NOTES.md:6275), [source/configuration](/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b07_shortlist_amortization_a01/config.json), [complete reading](/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b07_shortlist_amortization_a01/reading.json).
+>
+> The complete paired result is:
+>
+> | Contrast | Mean ΔJ [95% paired-world interval] | Δservice/tick | Δpath, m/UAV |
+> |---|---:|---:|---:|
+> | **L2_E−K2_E** | **−.000886 [−.002373, +.000136]** | **−.079375** | **+33.794** |
+> | L2_E−R | +.003592 [+.000945, +.006750] | +.285500 | +12.781 |
+> | L2_E−T_E | −.001806 [−.003465, −.000411] | −.173375 | +29.678 |
+> | K2_E−R | +.004478 [+.001693, +.007544] | +.364875 | −21.013 |
+> | T_E−R | +.005398 [+.002276, +.008913] | +.458875 | −16.897 |
+> | T_E−K2_E | +.000921 [+.000031, +.002149] | +.094000 | +4.116 |
+>
+> These intervals condition on one fixed fit and 16 fresh worlds. They neither establish learning across independent training instances nor turn 64 episodes into 64 independent comparisons. The primary interval crossing zero prevents a population-inferiority claim; it does not supply evidence of useful superiority or equivalence. No B06 retention threshold applies.
+>
+> The ranking intervention was active. All four programs initiated in all 16 worlds. Every shortlist evaluated exactly two champions plus stay; each world offered three to five champions. L2_E changed seven unordered menus relative to K2_E, but only four final physical choices. Those four produced one J gain and three losses; the other twelve complete native programs were identical.
+>
+> | World | L2_E−K2_E ΔJ | Δservice/tick | Δpath, m/UAV | Δsuffix service p05 |
+> |---|---:|---:|---:|---:|
+> | 29367000 | −.005705 | −.544 | −39.979 | **+8** |
+> | 29367001 | **+.001152** | **+.036** | **−21.213** | 0 |
+> | 29367002 | −.000127 | 0 | −5.373 | 0 |
+> | 29367010 | −.009494 | −.762 | **+607.265** | 0 |
+>
+> The useful witness is real: in **29367001**, learning includes `m6_s31`, which K2_E omits, and exact evaluation selects T_E’s winning program. Conversely, in **29367000, 29367002 and 29367010**, learning removes T_E’s winner from K2_E’s available menu. In 29367010, the omitted winner ranks third under the learned score; exact reranking cannot recover a branch it never receives. Three other changed menus leave the selected program unchanged. K2_E contains T_E’s winning choice in 12 worlds; L2_E in 10. These are consequential allocation errors, not nonactivation or failed execution. [Original choices, branches and outcomes](/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b07_shortlist_amortization_a01/summary.json).
+>
+> The strongest objection to a blanket rejection is the **tail tradeoff**, which must remain visible. L2_E−K2_E suffix mean service is −.086277, but mean suffix p05 is +.5 [0, 1.5], entirely from world 29367000. Its better tail there accompanies lower mean service and J, shorter travel and higher quality. Across the full panel, L2_E−K2_E quality is +.000767 and height penalty is +.000004688. The native objective decomposition is:
+>
+> `−.00111125 coverage + .000230059 quality − .000004688 height = −.000885878 J`.
+>
+> Thus K2_E does not dominate every outcome. Neither does this incidental tail benefit establish a learned tail-protection capability: that was not the ranker’s training or selection objective.
+>
+> All whole-episode minima and p05 values are identical across arms within each world; every minimum occurs in the shared prefix, with 33–40 prefix ticks at or below the whole-episode p05. All episodes have zero whole-team zero-service ticks. These results do not establish individual-user continuity. The prospective suffix diagnostic reveals losses hidden by the full-episode statistics:
+>
+> - K2_E lowers suffix p05 versus R in worlds 29367000 and 29367008, by 8 and 1.
+> - L2_E lowers it versus R in 29367008, by 1.
+> - T_E lowers it versus R in four worlds: 29367000/04/08/11, by 8/2/1/8.
+> - T_E also loses .04 mean service in 29367004 while gaining .000247 J and adding 83.487 m/UAV.
+>
+> L2_E has one J loss versus R, in 29367002, and no mean-service loss versus R on this panel. Against T_E it loses J in six worlds—29367000/02/04/07/10/11—with four service losses. The ordinary capability therefore survives with its own adverse evidence.
+>
+> The supported diagnosis is **prediction transfer without useful incremental budget allocation**. I independently reproduced B06’s error decomposition from its 79 saved teacher arrays: 90.2% of the residual-MSE reduction came from world-mean correction, while centered error improved 17.0%. Its failed direct target, concentrated useful world 29366003, active loss in 29366005, missed gain in 29366010 and missed initiation in 29366015 all remain intact. [Original B06 evidence](/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b06_continuation_amortization_a01/reading.json), [diagnostics](/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b06_continuation_amortization_a01/diagnostics.json), [complete earlier recommendation and response](/home/fires/hmasd-wsl/docs/research/candidates/uav_parent_adaptation/NOTES.md:5860).
+>
+> A new, descriptive calculation from B07’s **already-saved** 56 champion predictions and teacher values corroborates that distinction:
+>
+> - Equal-world residual MSE: .000298587 under zero correction → .000135670 with the fit.
+> - World-mean error component: .000262314 → .000106581.
+> - Centered error component: .0000362733 → .0000290897.
+> - Consequently, **95.6% of the MSE reduction comes from world-mean correction**, while centered error improves 19.8%.
+>
+> A common within-world offset cannot alter the top-two order. It therefore cannot justify shortlist superiority, even when aggregate prediction improves substantially. The remaining centered improvement also does not guarantee correct decisions at consequential rank boundaries. This arithmetic identifies a limitation of the prediction evidence; it does not identify inadequate features, sample size, ridge penalty or a particular repair.
+>
+> Model/native mismatch is a poor explanation of the observed ranking losses. Maximum selected-program normalized return discrepancy is approximately **3.78×10⁻⁹**, and service agrees exactly. However, the executions cover only **29 distinct programs among 72 T_E branches**, leaving 43 without native execution. The full teacher is a competent finite reference over member champions, not a globally optimal controller or a guarantee for another host.
+>
+> B07 strengthens the practical ordinary alternative. K2_E captures **82.9%** of T_E’s observed mean J increment over R; L2_E captures **66.5%**. These are descriptive ratios, not adoption rules. They cannot be compared with B06’s 44.2% as evidence that L2_E improved on direct L: the panels differ, and direct L was not executed in B07.
+>
+> The measured computation frontier is:
+>
+> | Program | Selection CPU, s | Controller CPU, s | Complete episode CPU, s |
+> |---|---:|---:|---:|
+> | R | 1.573 | 5.752 | 6.387 |
+> | K2_E | 3.380 | 7.553 | 8.511 |
+> | L2_E | 3.410 | 7.605 | 8.560 |
+> | T_E | 4.390 | 8.566 | 9.682 |
+>
+> These scopes overlap and must not be added. L2_E costs **100.6% of K2_E’s complete episode CPU** and **88.4% of T_E’s**, while its selection CPU is 77.7% of T_E’s. Its remaining teacher saving is measurable—about 1.12 complete CPU-seconds per episode—but modest, and ordinary K2_E obtains slightly greater savings with better mean J/service here. Equal branch counts did not imply equal computation; L2_E and K2_E made 576,518 and 574,123 actual model requests respectively.
+>
+> The complete new bill is **zero fits, updates and training acquisition; 64 H500 episodes/32,000 native steps; 168 model branches**. All branches recur: 77,280 logical model ticks become 10,587 computed plus 66,693 reused ticks. Worker requests total 12,327,526; the full reader separately pays the 28,463,527-request unreused scope, including 77,280 model ticks, while making zero new native transitions. Stationary-bank work is 22,400 rows and 435,680 transit ticks on each side.
+>
+> Worker CPU/wall is **534.635/534.796 s**; reader CPU/wall **1,149.802/1,150.072 s**. The inclusive entry is **1,684.564 CPU-s / 1,684.996 wall-s**, about .468 CPU-hours. Process-lifetime self-plus-child CPU is 1,686.186 s; this is an alternative inclusive scope, not an additional charge. Peak process RSS is **414,648 KiB**; raw evidence is **86,517,868 bytes**. DM’s subsequent saved-output arithmetic adds .145 CPU-s. Historical paid acquisition remains 1,222.448 CPU-s, and B06 fit/evaluation remains a separate 1,529.662 entry CPU-s. Engineering, review, publication and broader support labor are incompletely metered; the 3.5–6 support-hour forecast is not an actual measurement. [Timing and resources](/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b07_shortlist_amortization_a01/summary.json), [terminal execution](/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b07_shortlist_amortization_a01/terminal-status.json).
+>
+> The prospective alternatives made different predictions: useful learned allocation would improve native J over matched K2_E at comparable cost; ordinary ordering sufficiency would leave no useful increment; disappearance of teacher savings would undermine shortlisting altogether. B07 supports the **second** investment branch. Savings remain, but the learned allocator did not earn them beyond the ordinary shortlist.
+>
+> **No additional observation is needed to dispose of this fixed study.** More worlds could change the estimated population ranking, but no current deployment utility, deadline or use volume makes purchasing that precision necessary. A future service-tail objective would require a new prospective comparison against competent ordinary selection given the same objective and resources; these tail witnesses do not select that study. A general learning claim would require independent training instances, not further episodes of this artifact.
+>
+> Retain the useful learned choice, the tail tradeoff and B06’s cheaper direct asset as scoped evidence. Retain R/K2_E/T_E as measured ordinary capabilities. Close unchanged learned top-two allocation; leave the broader parent question open for a separately justified investment.
+>
+> **MATERIAL_DISSENT: no — closing this fixed-artifact ranking purchase follows B07’s prospective adverse-result disposition. The evidence supports neither automatic further investment nor an expanded learned-allocation claim.**
+
+**DM disposition.** I accept the full recommendation and its limits. The specific
+prior prediction—better top-two allocation at comparable cost—was not supported;
+the useful 29367001 choice and the positive L2_E−R result do not erase the matched
+ordinary comparison. B07 strengthens the judgment that aggregate prediction
+transfer is insufficient evidence for this fitted ranker's use at a consequential
+ranking boundary. The independent new-panel decomposition is a descriptive
+use of paid predictions and branch values, not new training data acquisition or
+a post hoc tuning target. Its world-mean improvement cannot change within-world
+order; its remaining centered improvement has not yielded better top-two use.
+The observed immediate loss is candidate exclusion, with selected-program
+model/native agreement making execution mismatch an implausible explanation of
+these particular losses. The cause of those ordering errors remains unresolved.
+
+Complete-package value and the parent learning question remain distinct. R,
+ordinary K2_E, full finite T_E and exact recurrence reuse are usable conditional
+capabilities. L2_E retains one useful allocation witness, its positive comparison
+with R, and a suffix-tail tradeoff, while B06's much cheaper direct learned asset
+retains its original conditional evidence. Neither fit is promoted to a general
+learning result. The different B06/B07 panels and absence of direct L from B07
+preclude interpreting their gain-retention ratios as an improvement comparison.
+The finite teacher is not a global optimum and its unexecuted branches do not
+become native evidence merely because replay is exact.
+
+**Choice after cumulative cost.** Close investment in this unchanged artifact's
+top-two allocation. An unchanged replication could narrow the population gap
+but currently changes no specified deployment decision; it would purchase more
+precision about a modest, unsupported learned increment. Refitting, new features,
+larger archives or ranking losses would be new scientific investments, and this
+result does not identify which could change both the intermediate ranking and
+native complete value. A richer tail or individual-user-continuity contract
+could pose a consequential separate question, but would need an ordinary
+comparator with that same information, objective and computation; the incidental
+suffix witness is neither its selection nor a reason to relabel this result.
+Independent training replication is necessary for a general learning claim,
+but that claim is not being purchased here. No further observation is needed
+for the bounded result and its predeclared adverse-result disposition. There is
+no material scientific dissent or unresolved expertise question requiring an
+additional Pro round.
+
+The direction returns to **reserve**, with the enduring experience-to-useful-control
+question open and no automatic extension, confirmation, refit, hidden diagnostic
+run or revived actual-S2 study. Root owns selection of any cross-question next
+investment; this is not a fabricated external dependency on an already running
+producer. A concrete re-entry would require a separately justified deployment
+utility or learning/decision comparison that could change the ordinary frontier
+and prospectively prices its full cost. Until then the appropriate state is idle.
+This full reading/disposition, useful code, retained evidence, owned RESEARCH
+standing and directly affected topics 3/4 are published by this DM, followed by
+measured cleanup and the native return at the assigned substantive boundary.
+
+### B07 evidence retention and publication
+
+After the independent critic completed, a read-only `/proc` file-descriptor scan
+found no open consumer of the B07 raw files or bulk summary. Both were moved by
+same-filesystem rename into their one canonical durable local_linux location:
+`/home/fires/hmasd-artifacts/uav_parent_adaptation/b07_shortlist_amortization_a01/`
+(`raw/` and `summary.json`). The original run paths are local symlinks to those
+same files. No second bulk copy, archive or retention package was created. The
+canonical 528-artifact count, 86,517,868 raw bytes and summary size/hash match the
+collected originals. This relocation is **not** reported as space reclamation.
+
+The compact publication retains original `config.json`, `reading.json`,
+`diagnostics.json`, launch/admission manifest and status, process-exit witness
+and terminal status. Exact source remains `31285a226c2aec4bbfe32d37c059b5834d26e4c5`;
+the accepted scientific bytes and B06 originals were not modified after execution.
+Diagnostic SHA256 is
+`a28ae7f8f4b66c1abb4f5ee45bc2e97b917f7c0c0c3904ef1b69ed9da3654d96`.
+The independent critic's additional saved-output decomposition is recorded in
+its complete response above. More precise equal-world components are zero/fitted
+residual MSE 0.0002985870953075247 / 0.00013567024840798906; world-mean terms
+0.00026231375984478206 / 0.00010658053010060755; centered terms
+0.00003627333546274275 / 0.00002908971830738154. No data from that reading
+trains or tunes the bound fit. The original source, fit inputs, per-world arrays
+and candidate predictions retain the audit path for this descriptive arithmetic.

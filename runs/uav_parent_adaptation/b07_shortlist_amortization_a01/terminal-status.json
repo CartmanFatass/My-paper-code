@@ -1,0 +1,76 @@
+{
+  "admission": {
+    "claim_state": "accepted",
+    "state": "accepted"
+  },
+  "artifacts": {
+    "stderr": {
+      "path": "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b07_shortlist_amortization_a01/stderr.log",
+      "state": "present"
+    },
+    "stdout": {
+      "path": "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b07_shortlist_amortization_a01/stdout.log",
+      "state": "present"
+    },
+    "summary": {
+      "path": "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b07_shortlist_amortization_a01/summary.json",
+      "state": "present"
+    }
+  },
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/7c925de6feb70e0cda13ab402ef2da0a86edaf97d5f98268c316939735b8334e.json",
+  "direction": "uav_parent_adaptation",
+  "execution": {
+    "exit_code": 0,
+    "exit_witness": {
+      "exit_code": 0,
+      "finished_at_epoch": 1790814321.7272656,
+      "path": "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b07_shortlist_amortization_a01/process-exit.json",
+      "state": "valid",
+      "termination": "process_exit"
+    },
+    "runner": {
+      "recorded_identity": {
+        "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+        "kind": "linux_pid_start_ticks",
+        "pid": 1304439,
+        "session_id": 1304438,
+        "start_ticks": 25122955
+      },
+      "state": "absent"
+    },
+    "state": "exited",
+    "supervisor": {
+      "recorded_identity": {
+        "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+        "kind": "linux_pid_start_ticks",
+        "pid": 1304438,
+        "session_id": 1304438,
+        "start_ticks": 25122950
+      },
+      "state": "absent"
+    }
+  },
+  "explicit_retry": {
+    "eligible": false,
+    "reasons": [
+      "parent has no consistent terminal nonzero native exit"
+    ],
+    "scientific_authorization": false,
+    "successor_ref": null,
+    "supported": true
+  },
+  "explicit_retry_available": false,
+  "kind": "hmasd_operation_status",
+  "manifest_ref": "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b07_shortlist_amortization_a01/launch-manifest.json",
+  "node": "local_linux",
+  "observed_at": "2026-10-01T00:27:14.993576Z",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/7c925de6feb70e0cda13ab402ef2da0a86edaf97d5f98268c316939735b8334e.json",
+  "output_root": "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b07_shortlist_amortization_a01",
+  "record_consistency": {
+    "mismatches": [],
+    "state": "consistent"
+  },
+  "schema_version": 1,
+  "sha": "31285a226c2aec4bbfe32d37c059b5834d26e4c5",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/c110bfbadd8241c6920763a323e1ea25"
+}

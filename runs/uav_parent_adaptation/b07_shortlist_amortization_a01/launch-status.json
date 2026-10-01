@@ -1,0 +1,11 @@
+{
+  "claim_key": "7c925de6feb70e0cda13ab402ef2da0a86edaf97d5f98268c316939735b8334e",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/7c925de6feb70e0cda13ab402ef2da0a86edaf97d5f98268c316939735b8334e.json",
+  "manifest_ref": "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b07_shortlist_amortization_a01/launch-manifest.json",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/7c925de6feb70e0cda13ab402ef2da0a86edaf97d5f98268c316939735b8334e.json",
+  "pid": 1304438,
+  "runner_pid": 1304439,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-30T23:57:14.569998Z"
+}
