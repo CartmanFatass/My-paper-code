@@ -1164,3 +1164,46 @@ manifest, and the original three phase outputs, remain required positive/adverse
 evidence. The dedicated environment has no selected future consumer; its deletion
 and Root's additive-profile retirement will be measured below. Existing shared
 wsl_4070 interpreter and every unrelated source/output stay outside this cleanup.
+
+<a id="b01-cleanup"></a>
+### Completed retirement and measured evidence retention
+
+The complete results, original independent answer, DM disposition, own reserve
+standing and directly affected shared learning judgment were published at
+`7a488add8`. Root adopted the same no-immediate-run disposition and retired only
+the additive profile at`81dca051abd93bb1e42b109a54a94396b684094b`;
+remote compute SHA256`2bb704e31e08a6a3489e80ea6851826740dfbf71461e0f7e70c4394694e65e6f`
+is byte-identical to its pre-addition version. Original nodes/interpreters are
+unchanged. The actual three operation exits were all0; observer stop was consumed,
+all bounded helpers completed, and no accepted or uncertain work was restarted.
+
+No external Python source/test consumer of this direction remained. Immediately
+before dedicated-environment deletion a privileged read-only scan of all same-user
+process cmdline/cwd/exe/maps/fds found0references and0inspection errors. The exact
+`/home/wu/.venvs/hmasd-typed-joint-31021` (5,914,038,272allocated bytes)
+and its owned`/home/wu/hmasd-inputs/typed_joint_skill_decision/cuda-cache`
+(4,096bytes) were removed, with absence checked. Across environment+inputs+
+canonical direction runs, measured allocation fell
+7,406,014,464→1,491,972,096bytes:
+**5,914,042,368net bytes reclaimed on the result node**.
+Host available bytes increased by the same amount during this deletion; that is
+context, not a general system-wide attribution claim.
+
+The one pinned model/tokenizer/config object and setup/license/revision/dependency
+records remain at the declared node input root (846,659,584allocated bytes).
+All original native, learning and reader evidence remains in the canonical run
+parent (645,312,512allocated bytes).
+The historical dedicated interpreter paths in manifests are now retired; exact
+source and dependency identities remain, rather than claiming those paths still
+execute. Frozen source/tests stay recoverable at61a2dfa9c, not as a new copy.
+
+On the author host, retired14tracked files in
+`experiments/candidates/typed_joint_skill_decision/` and matching`tests/`;
+removed their Python caches, the complete owned`temp/directions/typed_joint_skill_decision/`
+scratch directory, and the redundant local full`b01_read_a01/costs.json` after its
+unique canonical copy/hash and compact cost reading were verified. Before removal
+these targets occupied4,042,752allocated bytes; no backup/archive or
+replacement source tree was created. All four targets are absent. The compact
+CSV was normalized to the repository's LF convention without changing values.
+
+Author-host owned-root allocation including the expanded notebook fell4,882,432→839,680bytes, a net4,042,752bytes reclaimed. No cleanup tool blocker or selected follow-up remains.
