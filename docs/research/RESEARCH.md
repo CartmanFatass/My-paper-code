@@ -2004,9 +2004,9 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 service allocation, planner amortization and ordinary stochastic control.** Fleet B06 is fully
 read, independently diagnosed, published and cleaned. Root read the complete result, original
 Critic and DM response and adopts the exact-mixture stop while retaining the conditional P/B*
-capabilities and positive component evidence. The same `dm_fleet_adaptation` now contributes
-source/interface/full-cost reasoning to Astra Max Oracle’s next-allocation assessment; no
-successor result study is selected there. `dm_user_waiting` owns the selected M/S/U saved-path
+capabilities and positive component evidence. The same `dm_fleet_adaptation` now owns the
+bounded stochastic-target source question below with Astra Max Oracle; no successor fit,
+implementation or result study is selected there. `dm_user_waiting` owns the selected M/S/U saved-path
 allocator comparison, `dm_parent_adaptation` the fixed learned-top2 computation comparison,
 and `dm_fleet_transmission` the fixed score-directed ordinary G comparison.
 The existing leads retain question continuity; Oracle/helpers are not DMs and four substantive
@@ -2034,15 +2034,17 @@ No count comparator, accepted operation or other owner's scope changes mid-study
 DMs own implementation, review, actual-node admission, complete interpretation, publication
 and cleanup without per-step Root acknowledgment.
 
-Root adopts the independent **reserve/defer** recommendation for actual-S2 learning, preserving
-its distinct proposal-consequence question. The complete two-fit comparison now costs2560H256
-episodes/655360steps, an estimated2–4worker CPUh+15–45reader minutes and5–9support hours.
-Its fixed same-data CAL and transferred all-on CAL/CONT/B* references remain part of the design.
-An optional transfer-only comparison costs384episodes/98304steps/0fits,30–60worker+10–25reader
-CPU minutes and3–6support hours. Neither purchase is selected. The all-on CAL/CONT comparison
-is now fully read: its active fitting and physical intervention did not establish recurring native
-improvement. That does not refute managed learning; at this boundary Root instead selects the
-count-development question below, with its different acquisition law and complete ordinary controls. [Full design and independent disposition](https://github.com/CartmanFatass/My-paper-code/blob/1eceb000eb2955e4c7f9f09000025775e3eb5bf9/docs/research/candidates/uav_parent_adaptation/NOTES.md#s2-development-independent-disposition).
+Root read the complete October1 independent next-allocation recommendation and DM source
+assessment and **selects neither actual-S2 learning nor transfer-only evaluation now**. The
+managed-proposal conjecture remains distinct, and all fixed transfer assets are available; this
+is a marginal-value choice after complete all-on and count results, not a technical blockage
+or a refutation of managed learning. The two-fit comparison remains2560H256 episodes/655360
+steps, estimated2–4worker CPUh+15–45reader minutes and5–9support hours, with same-data CAL
+and transferred all-on CAL/CONT/B* controls. The optional transfer-only purchase remains384
+episodes/98304steps/0fits,30–60worker+10–25reader CPU minutes and3–6support hours. Neither
+is an obligatory gate. This decision stands independently of G’s eventual outcome.
+[Complete reserved design and original independent corrections](https://github.com/CartmanFatass/My-paper-code/blob/1eceb000eb2955e4c7f9f09000025775e3eb5bf9/docs/research/candidates/uav_parent_adaptation/NOTES.md#s2-development-independent-disposition),
+[completed source/feasibility challenge](candidates/uav_fleet_adaptation/NOTES.md#post-b06-source-allocation).
 
 A separate independent review found no worthwhile new duration/roster purchase at this boundary.
 Root accepts that value/cost judgment while retaining the positive capabilities, adverse evidence
@@ -2056,9 +2058,34 @@ ending its finite mixture recipe. The allocator purchase tests a distinct causal
 already-demonstrated motion/radio capabilities. Root accepts the substantial support costs
 for these selected questions. G adds an ordinary use/reference comparison, while L2_E tests
 allocation of a fixed planning budget. The failed parent retention target remains contrary
-evidence. Astra Max Oracle is assessing the next worthwhile learning/use question against
-complete cost and stopping; actual-S2 remains deferred during that assessment. No transfer-only
-gate, new acquisition or fifth DM is selected.
+evidence. Actual-S2 remains an unselected reserve. The fourth DM’s current substantive work
+is the bounded source question below, with detailed innovation and independent criticism by
+Astra Max Oracle. No new acquisition or fifth DM is selected.
+
+<a id="stochastic-target-source-root-question-20261001"></a>
+**Changed training target: source-only question, no selected experiment.** Can learning a useful
+stochastic control distribution develop retained local-policy capability beyond unchanged reuse?
+P exceeds deterministic C in the completed native comparison, and further one-hot imitation
+does not supply an improvement objective merely by reducing label loss. That motivates a
+different target, without identifying entropy or imitation as B06’s failure cause. Hypothetical
+exact cloning under matched interfaces would reproduce C; whether C is determined by the
+student’s features, representable by its network or reached by CE fitting remains unestablished.
+
+The same fleet-adaptation DM supplies lawful feature/target interfaces and complete source-derived
+costs. Oracle checks prior project attempts, all three libraries and needed primary passages,
+constructs a consequential comparison or recommends stopping. Existing G/Q laws are possible
+teacher/reference candidates, not assumed superior targets or extra arms in the accepted G study.
+Unchanged S, identity-like self-distillation, ordinary smoothing/entropy control and direct reuse
+are relevant simpler alternatives. Successful cloning need not improve on its teacher; better
+local model scores need not improve native J. A proposal must say what useful knowledge or
+capability it could add, with distinct outcome implications and all original adverse evidence.
+
+This assignment buys source reasoning only:0new fits, native/model/controller/actor queries,
+outcome reductions or implementation. Source-review/support time is unmetered, not zero. If a
+concrete experiment is proposed, acquisition, labels, fitting, native/model work, full reader,
+support and retention must be priced before Root selects it. A reasoned stop is valid; neither
+a new architecture nor a positive pilot is required. The other three selected studies keep their
+owners, inputs and interpretation contracts.
 
 **Actual compute placement.** The configured local_linux and wsl_4070 are distinct physical
 Windows hosts (AMD Ryzen 7 8745H and Intel Core i9-13900H). The earlier waiting and fleet-count
