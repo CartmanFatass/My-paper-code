@@ -668,3 +668,92 @@ reader code and the shared Bill extension require their own actual-diff review b
 independent reviewer. The B01 scientific counters are still zero. Root owns publication of
 the already-authorized additive same-physical-node compute profile; no new research approval
 is requested. This is implementation acceptance, not an accepted scientific operation/result.
+
+### B01 launch topology correction, before effects
+
+Runtime profile `wsl_4070_typed_joint` was published by Root at
+`389f5cd7ea30fbe7338e252f75c85e6d439a95c0` and its canonical node bytes were
+verified. It is the same physical GPU; all existing profile fields remain unchanged.
+No experimental operation has yet been admitted.
+
+The maintained launcher accepts `--out`, `--output` or `--output-root`, not the
+collector's initial `--out-dir` spelling. The direction entrypoints acquire a
+canonical `--out` alias; the shared launcher is unchanged. Its actual source/output
+binding also prevents reusing a snapshot as the next phase source while keeping
+outputs in the canonical author run directory. Therefore the earlier one-snapshot
+reuse plan is corrected to **sequential snapshots of the same published source
+SHA**, with completed collection/verification and the normal exact-target snapshot
+collector between native, learning and reader phases. Only one source copy is
+retained at peak. Snapshot creation/reading costs remain in the complete bill.
+
+Later phases use small SHA-bound input locator JSON files staged outside the author
+repo, pointing to the original canonical durable artifacts with their manifest and
+summary identities. This avoids the launcher's intentional absolute-input remapping
+without copying bulk traces or caches. The locator is an explicit input contract,
+not a second mutable data source. No scientific exposure, world, model, context,
+precision, fit or endpoint changes in this integration correction.
+
+The initial phase ledger explicitly starts all scientific counters and cumulative
+scientific CPU/GPU at zero. Preparation/support CPU is incompletely metered in
+`RUNTIME_ASSETS.json`; zero scientific CPU is not a claim of free installation or
+engineering. The10CPUh/4GPUh ceilings apply cumulatively to the admitted native,
+learning and full-reader processes, including their imports, validation and child
+work. Source preparation/collection/publication support is reported separately.
+All retained study bytes, including the isolated runtime, partial/download setup
+area, canonical direction outputs and the actual active source snapshot, enter
+the same10GiB physical allocation guard. The declared run-parent directory is
+created empty for the ledger's existing-root check; it contains no scientific
+output before admission. CPU numerical threads are fixed to one and logged;
+this changes no scientific exposure, target or per-arm information.
+
+DM inspection of the installed pinned Transformers5.0.0 source found an implicit
+ModernBERT optimization: absent `reference_compile` defaults to Triton availability
+on GPU, and embeddings/MLP may call decorated compiled functions. The pinned
+encoder config omits this field and the isolated runtime contains Triton. The
+adapter therefore explicitly fixes the in-memory encoder/module config flag to
+`False` before any forward and records it. Downloaded config and vendored upstream
+bytes remain exact. This enforces the already-declared no-compile arithmetic; it
+is not a new model arm, context alteration or empirical compatibility result.
+
+Owner's interruption/resume of Root temporarily removed helper registrations while
+all source edits remained. The DM stayed on UUID01a0f7ce-366f-7d91-93e7-e38693506d43.
+Native follow-up recovered the original Implementer
+01a0f7f6-be3d-7ed3-8240-63e498bf56a0 and Engineering Reviewer
+01a0f810-0818-74f0-b103-1654ae954025; a subsequent native listing confirmed both
+running under their original paths. No helper was replaced and no experimental
+operation/producer existed or was restarted. The same selected B01 continues.
+
+### B01 L0-2 accepted for publication, before result execution
+
+DM read the complete model/extraction/training/reader implementation and accepts
+the fixed code after the original independent Engineering Reviewer completed its
+actual-diff review. Reviewer final: **no material finding remains;35 pure/mock
+tests passed independently in2.63s, exit0**. Coverage includes actual upstream
+post-head scorer capture; six fresh fits with matched private order RNG; masks,
+feature/label separation,512 updates per fit; full native trace arithmetic and
+functional scorer readings; source/input/artifact identities; cumulative CPU/GPU/
+query/disk accounting. The reader recomputes backhauled-user membership from
+association/routing, preserves runner GPU choices if CPU recomputation differs,
+and retains all original worlds/blocks and native tradeoffs.
+
+The review found and closed same-source-SHA enforcement and learning-manifest
+membership gaps, and missing cost/training/absolute native readouts. DM's launcher
+CLI/literal admission guard checks and explicit no-compile issue were incorporated.
+CUDA driver cache is rooted beneath the counted staging parent before CUDA
+initialization. No shared launcher, host or accepted interpreter was modified.
+Reviewed SHA256 identities (full files remain recoverable from this publication):
+models `3990948ce255e1df96b2e2e811d2284ea3fee7212ce265dfc5c54a665bc178ad`;
+learning `05af99192b0e16dba8cb83aa7f6e87c5c279f5ec197e2888be8ffcb53ce05541`;
+reader `0f046f3f51aa335d75ced2994bc8aa95d746e940303914d746a1e19204b0fb88`;
+data `32f10f028681155afb4586c1b867402da4b48e61e47316f01cf2bb8932f8f385`;
+native `a04904036f7973c89e81f4f6a80d474e734b4a2ae4827d485b9e95dfbedbbcc4`.
+
+Residual review limits: no actual tokenizer, checkpoint, native execution, model
+forward, training or GPU numerical probe has occurred. Actual compatibility and
+1e-5/1e-6 agreement are unresolved until the paid admitted path. Runtime costs
+will be complete process/resource bills plus segmented measured components; those
+segments do not establish a post-fit end-to-end online latency claim. No full
+independent encoder or optimizer-trajectory replay is represented as purchased.
+The initial ledger states41 zero scientific counters and the exact three durable
+disk roots; the admitted source root is added dynamically. This publication
+authorizes no duplicate operation and adds no scientific exposure to B01.
