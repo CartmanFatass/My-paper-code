@@ -6305,3 +6305,132 @@ Full uncompressed scientific arrays total6,097,569,216bytes;96 NPZ files1,044,21
 
 
 **Additional mode/charging reading from the same complete records.** Mean feedback-mode UAV-time fractions C/M/V are .354455729/.358885417/.363221354; mean entries47.21875/46.65625/46.1875 and exits40.125/39.8125/39.09375 per mission. Actual charging UAV-seconds1494.09375/1481.1875/1490.25 accompany1198.28125/1178.5/1213.375 charging spells; mean one-tick-spell shares .982605436/.982493298/.984095353 retain the inherited charging/recapture behavior. Mean wait ticks5197.6875/5367.625/5467.40625 and post-exit recaptures39.21875/38.65625/38.1875 are recorded rather than concealed by service/J. The proposed/submitted shield remains part of every package. None of these descriptive mode differences identifies the source of the service loss or makes P_BS a default-safe reference.
+
+
+<a id="b08-independent-disposition"></a>
+### 2026-10-01 — B08 independent diagnosis and resolved investment
+
+Dedicated ResearchCritic used a separate context without DM/Root history, reconstructed the original compact records and source before the prior advice/DM interpretation, and independently checked all96 rows and84 complete metric/contrast reductions. It made0 native/controller/model/allocator/replay/fit calls. Its disclosed limitations remain part of the judgment. Full original response, verbatim:
+
+> **Recommend stopping the B08 purchase, retaining C/P_BS as the conditional performance comparator, and preserving the demonstrated tracking capability without promoting M or V as better native controllers.** Neither prescribed package establishes useful complete value. This ends the tested investment; it does not establish that history or anticipation is generally useless.
+>
+> I received no inherited DM or Root conversation. The assignment disclosed Root’s stopping rule, so this was not blinded to that rule. I reconstructed the compact results and relevant executable semantics before reading the original recommendation, Root’s adoption and the subsequently published DM reading. My provisional conclusion survived those comparisons.
+>
+> I independently checked the 96 episode records, all 84 metric/contrast reductions—including their signed world differences and declared intervals—against `perworld.json`. The 29 bound source files match both current files and launch `94f08627050b7d495b4c9e9af18db02ab17a5c1e`; the 20 frozen original inputs also match `d6151ff5155d8bf3f3289bba727ee5148f6b76a6`. Compact manifest hashes agree. I inspected the controller, identity-binding and reader logic. I did not reread every remote NPZ, repeat the reader or independently resimulate radio physics; those checks remain the recorded reader’s scope and the DM’s canonical-artifact verification.
+>
+> All missions reached H3000, with 288,000 native transitions, no missing worlds, no worker errors and no early termination. The reader records equal complete 3,001-boundary user paths within every paired world. Thus neither failed execution nor survival censoring explains the result. The separate 61-step engineering streams had no user sightings and supply no evidence of nonempty tracking efficacy.
+>
+> The native result is unfavorable in point estimate and unresolved in population precision. Mean total J for C/M/V is **2084.27/2077.60/2056.19**; mean QoS per step is **.71075/.71267/.70173**.
+>
+> | Contrast | Total J difference, descriptive t95 | Cumulative QoS difference, descriptive t95 | J gains/losses |
+> |---|---:|---:|---:|
+> | M−C | −6.67 [−38.13, +24.79] | +5.76 [−22.21, +33.73] | 14/18 |
+> | V−M, primary | −21.41 [−67.94, +25.12] | −32.82 [−74.71, +9.07] | 14/18 |
+> | V−C | −28.08 [−63.33, +7.17] | −27.06 [−63.65, +9.53] | 13/19 |
+>
+> These are exploratory differences across 32 exogenous worlds for fixed programs, not training replications or equivalence findings. J and service share components. V’s mean service deficit is approximately **1.09 percentage points against M** and **.90 against C**. The intervals allow positive effects, but the observed complete package supplies no persuasive reason to adopt either increment. [Native summaries](/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b08_anonymous_memory_a01/summary.json)
+>
+> Native costs and tails reinforce that decision without proving universal harm:
+>
+> - M’s small service increase is outweighed in mean J by its larger return-constraint cost: **+5.76 QoS − 2×6.22 return cost ≈ −6.67 J**. V actually reduces return cost against M; its service loss remains larger. Therefore an energy-only explanation cannot account for V’s adverse outcome.
+> - Within-mission QoS p10 averages **.50772/.53613/.45931** for C/M/V. V−M is **−.07682 [−.13287, −.02076]**, with 22 worse worlds. This is a consequential adverse secondary descriptor, not a multiplicity-adjusted discovery.
+> - Mean travel rises **19,138→19,259→19,412 m/UAV**, and propulsion **1384.80→1386.53→1388.74 Wh/team**. Mean reserve exposure is **366.97/449.88/364.06 UAV-seconds**, with mixed substantial tails. All arms retain the inherited charging/recapture behavior; approximately 98% of charging spells last one tick.
+> - Cutoff and depletion counts are zero, while zero-service duration is unchanged in every world. These observations do not establish safety or remove P_BS’s existing default-adoption restriction.
+>
+> The individual cases preserve both capability and failure. In **29880014**, M improves C by **256.15 J/257.94 cumulative QoS**, but V loses **313.23 J/315.52 QoS** against M. In **29880016**, V loses **303.63 QoS** against M despite reducing reserve exposure from **679 to 4 UAV-seconds**. Conversely, **29880004** gives V complete gains against both comparators: **+123.34 J/+126.54 QoS against C**, and **+151.39/+149.21 against M**. These are real positive cases, but no prospectively usable selector identifies them. World **29880002** illustrates why repairing M’s J loss is insufficient: V−M gains **220.48 J** while losing **27.90 QoS**. [Per-world evidence](/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b08_anonymous_memory_a01/perworld.json)
+>
+> The strongest useful positive is **accurate ordinary prediction of the represented moving users, with actual physical intervention**.
+>
+> M adds 1,226 remembered points over **661/3,200 plans**; V adds 1,259 over **684/3,200**. Memory’s additions are therefore limited, but neither arm is inactive. Every world physically diverges: M−C first diverges at boundaries **241–1771**, median **1381**; V−M and V−C at **61–151**, median **91**. This rejects nonactivation. First divergence does not quantify every subsequent meaningful choice or identify its causal contribution.
+>
+> All **68,979 V forecast origins** are origin-bound and evaluated against the same native user at t+15, with **zero ambiguous, unbound or future-censored forecast origins**. Of these, 68,859 have nonzero velocity and 1,259 are remembered rather than current sightings. Point-weighted mean error is **.733 m versus 33.218 m** for holding the same last sighting; RMSE is **5.568 versus 34.301 m**. V improves 68,030 forecasts, worsens 829 and ties 120; every world has lower mean forecast error. The rare adverse tail remains substantial—the largest recorded error is **158.26 m**, against a held-point error of **100.53 m**.
+>
+> Primitive identity diagnostics retain 11 ambiguous canonical points per M/V arm, 5/6 identity switches and 1,842/1,853 reidentified births. Reidentification is not itself an incorrect association. There are no unbound current points or duplicate bound track-times. These denominators disfavor widespread identity failure as the explanation. They do not exclude rare, decision-important errors. Accuracy remains conditional on V’s own observed/remembered users, not all users everywhere, and is not a mediation estimate. [Reader evidence](/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b08_anonymous_memory_a01/reading_worlds.json)
+>
+> My supported diagnosis is that **the tested information-to-control composition fails to establish a useful increment despite successful representation and activation**. The strongest simpler account combines competent current-state control, modest displacement, limited extra memory content and an H1 interface that turns predicted coordinates into geometric targets without optimizing the complete native service/return consequence. This account is consistent with the observations; it is not an identified unique cause.
+>
+> The distinctions matter:
+>
+> - **Opportunity:** moving users and incomplete observations remain real. The result does not establish sufficient current state, optimal information value or exhausted headroom.
+> - **Representation:** ordinary lawful history can estimate these short-horizon positions very accurately. Broad forecasting incompetence is weakened.
+> - **Decision exposure:** physical interventions occur in every world. The earlier peer-forecast study’s sparse physical-choice account cannot simply be reused here.
+> - **Complete value:** the midpoint/centroid construction has not converted that capability into a useful full-mission package.
+> - **Learnability:** untouched. There were zero fits or updates; neither a learning failure nor a need for learned prediction follows.
+>
+> I checked the consequential historical positives and adverses directly in the stored outputs. Information-value B02’s P_BS−H_BS gain and B03’s P_BS−S0_BS increment justify the stronger comparator, while B02 world 28100224 preserves its reserve objection. B01’s privileged-user increment remains a different-information, uncertain-J comparison, not recoverable tracking headroom. The local-history and peer-forecast records retain their conditional positives and complete-package losses. D2’s held-out cold-replanning gain also remains real: approximately **.81682 versus .74875** post-event coverage. Its full-information relocation task establishes useful ordinary adaptation under different conditions, not a reason to continue this predictor unchanged.
+>
+> Actual cost is material despite zero fitting. The scientific execution/readback chain consumed **9,493.61 CPU-seconds and 42.65 minutes wall time**; including engineering gives **9,508.33 CPU-seconds, or 2.641 CPU-hours**. Controller proposal CPU grows from **.90 seconds/mission for C to about 7.85 for M/V**; the additional CV arithmetic costs little relative to the common primitive tracking. Worker/reader/parent peak RSS is **593,456/586,384/479,068 KiB**, respectively, not simultaneous total memory. Scientific arrays occupy 6.098 GB uncompressed; manifest raw/metadata occupy **1,044,791,296 allocated bytes**. Source/design, synthetic checks, admission, publication and other support are additional and incompletely metered. The prospective 8–14 support-hour estimate must not be reported as measured work.
+>
+> The smallest worthwhile complete observation selected for this question is now in hand. I recommend **no additional worlds, unchanged replication, tracker refinement, S4 escalation, learner or confirmation**. Recurrence could narrow uncertainty, but no present adoption decision or distinct mechanism prediction makes that the next worthwhile purchase.
+>
+> The constructive continuation, if independently justified later, is to reuse this demonstrated ordinary motion representation in a task-relevant decision comparison—not to assume another predictor is needed. For example, a service-aware planner could compare held versus CV inputs with the same lawful information and computational rights, retaining C as the complete-use anchor. Native improvement would support that new composition; continued accurate prediction without native benefit would weaken that use. Existing truth-informed radio planners are not drop-in comparators: adapting their information contract and paying their scoring cost remain unassessed. I do not recommend purchasing that revision now merely because it is possible.
+>
+> I find no consequential disagreement with the DM’s published factual reading or Root’s bounded stopping disposition. The substantive correction is to close the **M/V control-package investment while retaining the positive representation result**, rather than record a generic failure of memory, forecasting or learning.
+>
+> **MATERIAL_DISSENT: no — the verified complete outcomes support ending B08 without adopting M/V or funding an automatic successor; they do not support a broader impossibility claim.**
+
+**DM response and resolved choice.** The complete original diagnosis is read and accepted without material dissent. End this fixed M/V control-package purchase and do not promote either program over C/P_BS for complete native J/service. Retain the accurate ordinary anonymous tracker/projection as a scoped representation capability, the complete positive cases and all adverse/tail outcomes, and C's existing conditional-use/default-adoption restrictions. The result does not exhaust lawful-history uses, prove sufficient current state or concern learned prediction. Large accuracy gains and physical effects make broad tracking incompetence or nonactivation weak explanations; rare consequential errors and the native planning/control composition remain unresolved alternatives, not equal excuses for automatic repairs.
+
+Current published shared topic2 at `71f33faad07c93a418b434ecf013b50fac8502d5` was read again at this material interpretation/closure boundary. Its actual S7 BS prior/memory positives and reserve adverses still determine C; its prior sparse peer-forecast exposure cannot explain this all-world physical intervention. B08 adds a stronger scoped distinction: a useful geometric representation does not establish complete mission value through this midpoint/H1 interface. The directly affected S7 background will be revised accordingly, preserving the earlier positive ordinary capabilities and distinct-information D2 outcome.
+
+No further worlds, unchanged replication, tracker refinement, threshold/horizon sweep, S4, learning or confirmation are selected. A later service-aware use of the retained representation would be a new task/comparator/investment: it should predict a native consequence and price matched ordinary planning with the same lawful inputs. That conditional possibility is not a pending producer or an owner-approval dependency, and the present evidence does not justify purchasing it now. Broader assignment/allocation belongs to Root under the native-child trial. There is no need for an additional Pro round: this independent diagnosis covers the actual claim, complete evidence and bounded stop, with no unresolved disagreement requiring distinct advice.
+
+**Code/evidence retention decision.** Retain `controller.py`, its10 synthetic rule tests, package marker and frozen original-source map as useful ordinary representation code. Retire the now-unused fixed batch/capture/full-reader driver and its integration tests after the completed reviewer and source-consumer check; their exact executable source remains at `94f08627050b7d495b4c9e9af18db02ab17a5c1e` and the result at `172137f59340083c6ee42cb54c66e38ee09cf48b`. No historical input or verdict is rewritten. Both canonical raw trees and all compact records remain; cleanup measurements and current standing follow below.
+
+
+<a id="b08-final-cleanup"></a>
+### 2026-10-01 — B08 publication, actual retirement and idle boundary
+
+The worker and the single complete reader are terminal and verified; the full independent
+Scientific Reviewer response above has been read and accepted. Both native supervisors/runners
+are absent. Observation generation29 is stopped, its daemon PID is absent and every event is
+consumed. There is no unread result/advice, live producer or selected successor. Root owns
+broader allocation under the native-child trial; this is an idle boundary, not a fabricated
+owner-approval dependency. The shared S7 background and this direction’s standing now carry
+the resolved representation/control distinction and scoped stop. The original Root selection
+remains identifiable as the completed frozen comparison, with its unaltered cost/outcome contract.
+
+**Consumer and retained-code check.** CodeGraph plus the exact package import/entrypoint search
+find no executable consumers outside B08’s own runner/reader/tests. The completed Scientific
+Reviewer no longer consumes the live driver. Retained `controller.py` and its10 rule tests,
+`__init__.py` and `frozen_sources.json` remain byte-exact to the reviewed launch commit;
+AST/import inspection confirms none depend on the retired modules. No unchanged check,
+controller replay, native transition or fit was repeated. The prior20 synthetic checks and
+the complete engineering/scientific readings retain their original costs and scopes.
+The exact retired executable and tests remain at
+[launch source94f086270](https://github.com/CartmanFatass/My-paper-code/tree/94f08627050b7d495b4c9e9af18db02ab17a5c1e/experiments/candidates/uav_fleet_transmission/b08_anonymous_memory)
+and its corresponding committed test directory; no historical input or verdict is rewritten.
+
+**Actual deleted targets and allocated bytes.** The maintained snapshot collector removed
+both terminal, reconciled input snapshots and their worktree registrations under
+`/home/wu/projects/HMASD/.git/hmasd-launch-sources/`:
+
+- `b8223a56fb4b400eb4218a7076e15785` (engineering):817,553,408→0 bytes, already recorded above.
+- `45d70cc3315d42ea8bf224e99b1e6956` (scientific):817,553,408→0 bytes after compact publication,
+  canonical hash verification and terminal reconciliation; supported protected-process scan
+  confirmed eligibility before apply. Fresh final checks confirm both paths and registrations absent.
+- Current-tree fixed study modules `capture.py`, `contract.py`, `metrics.py`, `reader.py`,
+  `run.py`, `study.py` under `experiments/candidates/uav_fleet_transmission/b08_anonymous_memory/`,
+  plus its mirrored `test_reader.py`:94,208→0 allocated bytes using explicit `git rm` paths.
+- B08’s implementation/test `__pycache__` directories, including directory allocation:
+  139,264→0 bytes. Only these rebuilt owned caches were removed.
+- The two stopped requests `temp/directions/uav_fleet_transmission/b08-engineering-wait.json`
+  and `b08-scientific-wait.json`:8,192→0 bytes.
+
+Local target reduction is241,664bytes; **combined net allocated target reduction is
+1,635,348,480bytes**. This is measured target storage, not a claim about global free-space
+change or Git object reclamation. No backup, archive package, copied bulk tree or replacement
+snapshot was created. No deleted target remains and no cleanup tool blocker remains.
+
+**Necessary evidence retained.** Both original canonical run trees remain on `wsl_4070` at
+`/home/wu/projects/HMASD/runs/uav_fleet_transmission/b08_anonymous_memory_engineering_a01/`
+and `.../b08_anonymous_memory_a01/`, retaining4 and96 raw NPZs respectively, their metadata,
+source bindings and native terminal records. All compact records are published locally;
+scientific result/read commit is `172137f59340083c6ee42cb54c66e38ee09cf48b`. All192 scientific
+raw/metadata files and8 engineering files were already SHA256/size-verified against the
+canonical manifests; the final presence check adds no replay. The scientific raw/metadata
+allocation remains1,044,791,296bytes, with6,097,569,216 uncompressed array bytes. These are
+required unique evidence for the retained favorable and adverse readings, not redundant copies.
+Older B04/N8 artifacts with live cross-direction consumers are untouched. Support, including
+this review/publication/cleanup, remains additional and incompletely metered;2.641CPUh measures
+the new engineering plus scientific execution/readback chain only.
