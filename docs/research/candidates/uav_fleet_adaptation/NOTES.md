@@ -7072,3 +7072,249 @@ all exposure and the completed cleanup stay fixed. I finish the direction's
 publication and will answer concrete source/feasibility/cost requests within
 that limit, preserving substantive findings here. No successor result study,
 required replacement, recurring check or experiment dependency is invented.
+
+<a id="post-b07-local-gate-source-facts"></a>
+### 2026-10-01 — Source-only facts for Root's local-gate Oracle
+
+This appendix answers `/root/oracle_next_capability` within Root's bounded
+source-support assignment above. It is **not a selected study, fit allowance,
+new outcome reading or implementation**. B07 remains closed. The current
+published main background retains its P/Bstar/Hdirect capabilities, adverse
+worlds and no-automatic-repair conclusion; those findings are not changed by
+this source inspection. Current main was refreshed before publication. No
+other direction was asked to do work.
+
+The Oracle's concrete provisional question is whether a local binary
+transmitter gate can add useful native value when all motion is supplied by
+frozen P0, without a registered map or report link. At each original four-tick
+boundary, only member `r=(t/4) mod 5` may turn OFF; the other four must be ON.
+The Oracle requested native mask/observation timing, overlap with prior work,
+reusable code and complete-cost feasibility. It explicitly accepted the
+old-mask decision timing described below; no all-on sensing refresh or
+managed-I decoder is part of the candidate.
+
+**Native interface and consequential timing.** The original N5 factory is
+[make_real](../../../../experiments/candidates/ucope/uav_motion_prefix_b01/environment.py#L8):
+five physical UAVs, fifty uniform static users, H256, free-space/vectorized
+radio, 3 dB eligibility, capacity ten, no FDMA/shadowing/paper reward. The
+existing [radio B01 factory](../../../../experiments/candidates/uav_radio_activation/b01/study.py#L52)
+already enables masking through the injected base class.
+[set_transmitter_mask](../../../../envs/pettingzoo/uav_env.py#L224) validates
+and copies a boolean five-vector, refreshes radio/assignment/observations with
+the current physical channel, and advances neither positions nor clock. It
+does **not** enforce the proposed rotating-role or four-active invariant;
+those would belong to a new caller. Native `step` moves all five UAVs first,
+then computes radio/reward, increments time and returns the actual-mask local
+observations. A silent vehicle still moves.
+
+The source-compatible ordering is one current old-mask observation per
+boundary; all five original P0 proposals and their private navigation updates;
+the designated gate's choice from its allowed old-mask local inputs; one mask
+setter; then four native transitions with the chosen motion/mask. Setter
+feedback must not cause a second policy invocation. In particular, no temporary
+all-on mask is installed to obtain a more informative gate observation. At a
+boundary the previous silent member makes its next P0 proposal from its
+censored row before being reactivated; the newly designated rotating member
+was active during the preceding block. At reset all five are active.
+
+Decision-observation mask and newly applied native-step mask can differ at
+that same clock. The reader must record and reconstruct both, rather than
+copy the managed-arrival reader's assumption that the report and step share
+one mask. Completed reward, SINR and connections must be copied before a
+subsequent setter: the vectorized update overwrites the SINR array in place.
+These are observable state-machine facts, not a proposed extra experiment.
+
+Silence removes its user's SINR row (`-inf`) and both directions of its peer
+links; hence its actor row retains own position/clock but has zero user/peer
+slots. Other active members' SINRs and visibility also change. Consequently,
+**fixed P0 parameters do not imply fixed P0 trajectories**. The complete
+comparison would include this feedback and later-motion consequence. Native
+masking itself is available; no fatal interface incompatibility was found.
+Sources: [user radio](../../../../envs/pettingzoo/uav_radio.py#L33),
+[peer masking](../../../../envs/pettingzoo/uav_env.py#L952),
+[observation assembly](../../../../envs/pettingzoo/uav_env.py#L405), and
+[existing setter tests, inspected only](../../../../tests/experiments/candidates/uav_radio_activation/b01/test_radio.py).
+
+**Preserving the inherited motion program.** Original P0 is the B02 S asset,
+file SHA256 `b9e25fca68109bb50fa64fadfc90939ad6a4669058c1c0ccd1351c8bbcefe12a`,
+state SHA256 `6fa2eddc542d8f5293f5daf6a989b97a9d7d5f56f484f1eb6bddc6a87d27de0c`;
+its canonical remote locator remains in
+[the frozen asset binding](../../../../experiments/candidates/uav_fleet_adaptation/b04_native_development/contract.py#L31).
+It is the original FP32 114→128→128→27 ReLU network. No checkpoint was loaded
+or queried during this inspection. The B07 temporary consumption copy has
+already been deleted; the required canonical asset is unchanged.
+
+[B02 StudentPolicy](../../../../experiments/candidates/uav_fleet_adaptation/b02/policies.py#L81)
+and [its helper](../../../../experiments/candidates/uav_fleet_adaptation/b02/controllers.py#L123)
+provide the required original program without importing B06 count adaptation.
+The actor uses first103 observation fields, pre-navigation one-hot10 and the
+analytic fallback bit. Its cache keys exact ordered FP32 local fields plus
+navigation, never sampled commands. One FP32 row supplies logits; temperature
+one probabilities use the original FP64 law, followed by one fresh uniform
+at `[root, world, tick, agent]` and the original right-search flat CDF. Every
+stochastic boundary draws even on a cache hit. All27 command categories,
+including boundary aliases, remain. Gate randomness requires its own declared
+domain so it cannot consume or shift those motion draws. The original
+[fixed-policy adapter](../../../../experiments/candidates/uav_fleet_transmission/b05_score_sampling/policies.py#L59)
+already supplies P1, Bstar0 at temperature2, G, Q10 and C with that decoder;
+the managed-I two-integer sampler is a different program.
+
+With no visible users the helper returns fallback=True; navigation advances
+only by its original fallback/within60m waypoint rule. **P0 still samples its
+network**, rather than bypassing it for C's hard waypoint action. The unchanged
+helper can process masked rows and calibrates unobserved interference from
+observed SINR, but continues to model own-on candidates with frozen observed
+peers. That is an inherited modeling limit, not a demonstrated bug. The native
+local row contains at most20 anonymous eligible-user slots and10 anonymous
+peer slots, not the complete map, user identities, teammates' commands or
+global outcomes. Evaluator information must remain outside both local gates.
+
+I corrected the phrase “own count 0…10”: the lawful variable is
+`c=min(number of positive user-slot SINR fields,10)`, the **capped visible-user
+count**, not a supplied grant ACK. The Oracle accepted this definition for
+all fitted features and ZERO's `c==0` rule. Any source-law relation to actual
+service would not authorize reading extra feedback.
+
+**Record overlap and scope.** Targeted searches of current UAV notebooks and
+source, the research archives, external-review records and Claude research
+records found no exact previous frozen-P0/local/rotating-one-bit native learner.
+This is a bounded search finding, not a literature or exhaustive novelty claim;
+the Oracle independently owns its three-library and primary-source assessment.
+The closest records are materially different:
+
+- Radio activation B01–B03 choose central G/E or S/T commands/masks using a
+  registered map and delayed report rights; the rotating mover in S/T does not
+  make their mask choice a local binary gate. Their immediate/full-trajectory
+  reversals remain relevant contrary evidence.
+- Fleet adaptation B01 trains motion under central N8 E, whose chosen mask
+  stays deterministic; it does not learn a local transmitter action.
+- Parent adaptation B05 composes a frozen S asset with central E/S2/T2 and a
+  managed-I sampler. Its existing mask/censor discussion supports feasibility,
+  while its native outcomes do not answer the new local gate comparison.
+- Persistent-service's binary service/dispatch gate has a different energy,
+  service and member-selection contract.
+
+Direct entries are [radio results](../uav_radio_activation/NOTES.md),
+[earlier N8 scope](#2026-09-30--b01-prospective-n8-warm-start-comparison),
+[parent composition](../uav_parent_adaptation/NOTES.md#2026-09-30--design-only-inherited-local-motion-with-actual-radio-management),
+and [persistent service](../uav_persistent_service/NOTES.md). No stopped object
+is reopened, and no new result is inferred from the matches.
+
+**The concrete object priced, including accepted corrections.** For pricing,
+the Oracle specified512 addressed training worlds, eight for each of64 force
+clocks. Each produces two complete H256 branches: force the eligible member
+OFF versus ON once, then use the same fixed .5 gate baseline and addressed
+motion/gate tapes. Both branches are fully charged, including their common
+prefix. The saved paired native mean-J difference is the one training target
+per world; no new target was computed here. Subsequent repeated deployment of
+a fitted gate changes the continuation law used to acquire those labels, so
+complete final rollouts remain necessary evidence if this question is selected.
+
+The initial proposal compared a count-bucket table with a ridge on P0's128
+hidden features. I pointed out that the existing114 pre-network fields already
+contain lawful geometry/navigation/fallback information absent from a count-only
+table. The Oracle accepted the stronger ordinary comparator while keeping two
+fits: RAW has those114 fields plus an11-way `c` one-hot (125 features); HIDDEN
+adds P0's original128 hidden fields to that same vector (253 features). Both
+use fixed FP64 ridge, training-only centering/scaling (constant columns scale1),
+an unpenalized intercept and unit coefficient penalty in **sum-of-squared-error**
+units; choose OFF iff prediction>0 and ON on an exact tie. ZERO remains unfitted.
+Thus this is a finite feature-package comparison, not an isolated nonlinear
+mechanism test or two independent training replications. This source suggestion
+and the Oracle's acceptance do not select or authorize either fit.
+
+The priced final panel is32 worlds×2 tapes for P0 A/O/R/ZERO/RAW/HIDDEN
+(384 episodes), P1/Bstar0/G/Q10 each A and ZERO (512), and deterministic C A
+and ZERO once per world (64). It is **960 final plus1024 acquisition =1984
+episodes/507904 native steps**. I corrected the initial2048/524288 total; the
+Oracle accepted1984/507904 and specified no unnamed extra64 episodes. Its
+panel-width decision remains its own recommendation to Root.
+
+| Source-derived exposure for this provisional full list | Count |
+|---|---:|
+| Acquisition native steps / P0 motion decisions | 262144 / 327680 |
+| Final native steps / all-parent motion decisions | 245760 / 307200 |
+| All motion decisions / rotating gate opportunities | 634880 / 126976 |
+| Learned-parent helper requests and one-row forward ceiling | 532480 |
+| C-family requests (C, Q10, G); no-hit ceiling | 102400 |
+| Fresh stochastic motion uniforms (C's64 episodes excluded) | 614400 |
+| G score-tail constructions | 40960 |
+| Mask setter ceiling (one per boundary) | 126976 |
+| C no-hit candidate paths / modeled ticks | 2764800 / 11059200 |
+| Learned-parent helper link ceiling / C link ceiling | 74547200 / 231424000 |
+| Native dense power slots for scored episodes/resets | 140219200 |
+| Additional dense SINR slots at the mask-setter ceiling | 34918400 |
+
+Each additional constructor reset adds275 native dense power slots. Setter
+refresh reuses physical path loss, so its SINR arithmetic is not another
+physical-channel draw or another set of power-distance evaluations. Cache
+misses and actual link counts depend on the new histories; old empirical hit
+rates were not substituted. With forced-clock gate draws omitted, acquisition
+would use64512 stochastic gate uniforms; final R adds4096. The exact convention
+must be declared, while the motion-address rule remains independent.
+
+**Reusable engineering and dominant cost.** The original128 hidden vector is
+the second ReLU output in [B02 Student](../../../../experiments/candidates/uav_fleet_adaptation/b02/model.py#L15).
+It can be retained from the already-paid one-row forward/cache; a new encoder
+fit or duplicate production forward is not inherently required. Current code
+does not expose it, so that small interface change and its arithmetic identity
+would still need implementation/checking if selected. The two double design
+arrays with intercept have512×126 and512×254 entries, about0.52/1.04 MB. The
+larger Gram product has512×254²≈33.0 million multiply-accumulates. These are
+source arithmetic sizes, not measured runtimes.
+
+The [parent B06 solution audit](../../../../experiments/candidates/uav_parent_adaptation/b06_continuation_amortization/fit.py#L83)
+is a useful numerical pattern for scaler/constant-column and normal-equation
+verification without fitting again in the final reader. Its normalized world
+weights and penalized intercept differ from this provisional objective and
+must not be imported as defaults. B04 native PPO and B07 target fitting are
+not drop-in gate learners and would not be called for this proposal.
+
+The existing mask-aware [radio/observation formulas](../../../../experiments/candidates/uav_radio_activation/b01/read.py#L39)
+and [parent composition native checks](../../../../experiments/candidates/uav_parent_adaptation/b05_radio_composition/verify_local.py#L76)
+can support independent reconstruction; the latter's managed decoder and
+report-mask timing must not be inherited. The existing all-on B02 collector
+and reader reject masks, so they also cannot be used unchanged. A complete
+reader must bind all1984 episode files/507904 native endpoints, decision and
+applied masks, rotating eligibility, held commands, raw local-feature/nav laws,
+private draws,512 common-prefix pair identities, training labels and both
+fixed regression solutions, plus complete final comparisons. Replaying every
+policy request can add up to the same532480 learned-parent and102400 C-family
+requests, while adding **zero native transitions and zero optimizer updates**.
+Exact reader query scope belongs in the eventual prospective contract; it is
+not a free afterthought or an execution authorized by this appendix.
+
+The planning estimate supplied to the Oracle is **0.5–1 CPU-hour for worker
+plus a complete reader** on the known one-thread local host, and **6–12 support
+hours** for implementation, meaningful checks, independent engineering review
+and scientific reading. These are rough estimates, not observed labor, hard
+limits or node admission. Timing anchors are the already-published B04's1312
+episodes/two native fits/calibrations at517.603 complete CPU-s with its lighter
+no-radio reader, and B07's672 final episodes/two archive fits/full928-file reader
+at560.463 complete CPU-s. The new pair acquisition, P0/helper execution, saved
+evidence and full mask-aware reading dominate the small regression solves.
+Approximately1–3 GiB bulk/scratch headroom is a planning allowance, not a
+measured artifact size. No S2 runtime was repriced.
+
+On the Oracle's final factual request, durable output and staging were priced
+separately using **already-recorded metadata only**. B07's672 canonical raw
+NPZs total317776140bytes; straight episode scaling to1984 is approximately
+938196223bytes, or0.874 GiB. This is a reference calculation, not a prediction
+of the new layout/compression. A rough **0.7–1.5 GiB new durable bulk** allowance
+is reasonable for native raw plus the much smaller paired-feature/regression
+evidence; its actual size remains unmeasured. The1–3 GiB working-output/scratch
+allowance above must not be interpreted as a second complete durable raw copy.
+If local execution requires consumption copies of both original motion assets,
+their two known file identities total848974bytes; Bstar0 reuses P0. Source
+staging is another scope: B07's actually measured launch-source snapshot
+allocated1750671360bytes, with3592192bytes of Git administration, and both were
+deleted at closure. Those historical sizes neither require a new duplicate nor
+measure a future snapshot. No new artifact inventory or benchmark was performed.
+
+All work for this appendix was source/document inspection and arithmetic on
+the Oracle's prospective counts. No production model was loaded, no native,
+controller or helper query was made, no saved outcome was newly reduced, no
+fit/target was computed, no test or implementation was run, and no new bulk or
+scratch artifact was created. Source-support labor is unmetered. The factual
+response and corrections were returned through native child communication;
+Root/Oracle retain the next-question decision, including a justified stop.
