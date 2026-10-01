@@ -5955,3 +5955,162 @@ The complete source facts and price above were published at `d37cec5777f53841250
 > I have now read the COMPLETE source-facts and price text, including the bounds and unmetered historical reader gap. One routine ordering detail matters scientifically if Root later selects this candidate: keep M's current-point prefix byte-for-byte in C's canonical xy order, append retained old tracks in frozen age/birth order, and let V change coordinates in that same track order without resorting or merging at prediction time. H1's linspace k-means initialization is order-sensitive; when M adds no retained points it must present exactly C's current point array. This prevents an incidental permutation from becoming the alleged history effect. It fits your quoted freeze/checking work; no new price, arm, source search or execution is requested. I will send my separate final investment recommendation to Root once your immutable source anchor is ready.
 
 DM disposition: accepted within the quoted freeze/checking scope, with no new arm or price. M keeps the current canonical-point prefix exactly as C sees it, then appends surviving unseen tracks in the frozen age/birth order; V uses the same track order and only changes coordinates. No prediction-time resort or merge is permitted. This preserves the identity case when memory adds no points and avoids attributing an incidental k-means seed-order change to history. No implementation or execution follows from this correction. The remaining source task is the immutable artifact return; the Oracle's investment recommendation remains separate.
+
+
+<a id="changing-demand-original-recommendation"></a>
+### 2026-10-01 — Complete original Oracle investment recommendation, separate from source facts
+
+The Oracle returned its complete recommendation directly to Root at 04:59:26 UTC. The DM read all 14,778 characters and preserves it verbatim below. This is the Oracle's scientific judgment, distinct from the DM's source facts and cost ranges; it is not a Root selection or a newly executed result.
+
+The final intervening Oracle clarification, verbatim:
+
+> One reading consequence of your unchanged early-termination fact: my final recommendation will use total native J and cumulative native QoS/service over the actual mission (with the fixed planned H3000 denominator available for comparison), alongside actual length/termination. A favorable average over only surviving steps cannot count as a complete service gain. This needs only already recorded sums/lengths, no trace padding, invented post-terminal transitions or extra queries. No price revision is requested.
+
+DM response: accepted within the unchanged price. Cumulative service and total native J, actual length/termination and the fixed planned H3000 denominator remain visible; no survival-only gain, invented post-terminal trace or new query follows.
+
+**Complete original Oracle recommendation:**
+
+> **Recommend selecting one ordinary tracking comparison on unchanged S7-S2: P_BS versus short-lived user memory versus the same memory with constant-velocity extrapolation.** This is a worthwhile, bounded control question at the quoted **3–10 CPU hours plus 8–14 support hours**. It is a close investment judgment, not a prediction of a large gain. I recommend no learner, new demand law, faster-motion variant or preliminary opportunity screen.
+>
+> The complete original source exchanges, corrections and price are preserved at [commit 4f8475d, `changing-demand-source-facts` and subsequent sections](https://github.com/CartmanFatass/My-paper-code/blob/4f8475d1f6f925fd8049c16ac3cbe6a1d1faff02/docs/research/candidates/uav_fleet_transmission/NOTES.md#changing-demand-source-facts). Those are the DM’s facts; the investment recommendation here is mine.
+>
+> The consequential correction to the initial framing is that **S7 already tests changing spatial demand**. Its users move throughout the information-value, radio-placement, joint-transition and long-mission studies. The selected question would concern better use of lawful observations within that existing mission, not introduce the project’s first moving-demand task.
+>
+> Three different changes must remain separate:
+>
+> - **User motion:** user positions evolve while their offered demand remains fixed.
+> - **Demand-rate change:** offered traffic changes, requiring corresponding delivery and satisfaction semantics.
+> - **Objective reweighting:** priorities change without necessarily changing positions or offered traffic.
+>
+> I select only the first. July G33 was a **non-executed** demand-burst design, and current RESEARCH preserves its freeze. It supplies neither positive evidence nor authority to reopen that route.
+>
+> The evidence supports a modest opportunity, with substantial contrary evidence.
+>
+> | Evidence | Consequence for this choice |
+> |---|---|
+> | Information-value B02: P_BS−H_BS gained **.086515 QoS and 398.172 total J**. B03 established an additional construction benefit over the station-0 anchor. | Use **P_BS**, the stronger conditional ordinary performance comparator. Beating the older local controller would be inadequate. |
+> | B01: providing complete current user positions with BS truth added **.036580 QoS**, but the **66.341 J** interval crossed zero. World 28100120 gained service while losing **508.092 J**. | There is some demonstrated consequence of user-map content. This different-information comparison is neither recoverable headroom nor an upper bound for a lawful tracker. |
+> | P_BS’s B02 world 28100224 increased final reserve count **0→7**; B03 retained several seven-member reserve tails against the simpler anchor. | Stronger mean performance does not establish a safe default. New user-map gains must retain energy and adverse-world readings. |
+> | Ordinary local spatial history had mixed results across its two panels; all three learned-history instances lost to C. Peer forecasting improved broad geometric accuracy while producing sparse physical-choice changes and no established native benefit. | History, prediction accuracy and learning are not sufficient explanations of useful control. The proposed comparison must reach actual targets, commands and complete missions. |
+> | S4 availability-triggered replanning removed observed waiting but changed mean QoS by **−.013172**, with an interval spanning both signs. H12000 service work removed late outages yet retained adverse mean service and serious energy tails. | Faster reaction or removal of a favorable diagnostic cannot substitute for complete native value. |
+> | D2’s migration study retained a real ordinary replanning benefit: hold-out cold replanning reached **.8168** post-event coverage versus **.7488** for KEEP. Its corrected grid comparison was against frozen cold, not a per-world maximum envelope. | Ordinary adaptation to changed demand is already useful. D2’s unpredictable cluster relocation does not establish trajectory-prediction value; its failed learners do not remove the ordinary positive. |
+>
+> Sources include the [information-value protocols and readings](/home/fires/hmasd-wsl/docs/research/candidates/uav_information_value/NOTES.md), [availability results](/home/fires/hmasd-wsl/docs/research/candidates/energy_relay_availability/NOTES.md:688), [long-mission reading](/home/fires/hmasd-wsl/docs/research/candidates/uav_persistent_service/NOTES.md:3381), and [D2’s original record and corrections](/home/fires/hmasd-wsl/docs/research/candidates/coupled_host_replan_timing/NOTES.md).
+>
+> The useful distinction from the peer-forecast study is that **native user motion is exogenous to these controllers**. Estimating it does not require predicting how another adapting UAV policy will respond. Observation availability still depends on UAV trajectories, and subsequent assignment, interference, routing, charging and BS discovery remain coupled. This removes one difficulty; it does not guarantee native benefit.
+>
+> The strongest consequential objection is the combination of **small motion scale, limited established user-map benefit and substantial implementation/readback cost**. S2 users move at most 90 metres between 30-second replans, versus a 1500-metre sensing radius and 30-m/s UAV cruise. Short memory cannot recover never-seen users, and extrapolation can be wrong at waypoint changes or pauses. Nevertheless, the comparison would decide a concrete ordinary-control choice that the existing studies did not test. That warrants one complete observation, without requiring a positive precursor.
+>
+> The actual contract should remain fault-free S7-S2: eight UAVs, thirty users, H3000, one-second native steps, fixed 1-Mbps per-user demand, native energy/charging/routing and the existing termination rule. User and cluster speeds are 3 m/s. Cluster movement changes future waypoints; it is **not** added to every user’s displacement. Velocities, waypoints, pauses and cluster identities are hidden.
+>
+> Controllers receive the existing free pooling of the eight lawful observations. User rows are anonymous and locally distance-sorted; their order is not identity. This remains an ordinary centralized team-control comparison under that pooling contract, not a communication-method or decentralized-learning claim.
+>
+> | Arm | Fixed program |
+> |---|---|
+> | **C** | Exact P_BS, including its station prior, genuine BS-memory precedence, H1 planner, feedback shield and 30-step replanning. |
+> | **M** | P_BS plus bounded anonymous tracking; supply latest sighted coordinates for current and retained users. |
+> | **V** | Identical tracking and memory rules, but supply clipped constant-velocity projections at the present time plus 15 seconds. |
+>
+> The priceable tracking rule is explicit: assimilate the original 0.5-metre canonical detections every primitive step; accept only mutually unique associations within `3 × elapsed_seconds + 0.5 m`; discard ambiguous old hypotheses rather than manufacture identity; retain unmatched tracks for at most 30 seconds; prioritize current detections and cap the state at thirty users. Velocity comes only from consecutive, unambiguous primitive sightings, is capped at 3 m/s, and otherwise is zero.
+>
+> At a planning boundary, V supplies
+>
+> \[
+> \operatorname{clip}\!\left(x_{\mathrm{last}}+
+> (\mathrm{age}+15)\hat v,\,[0,8000]^2\right).
+> \]
+>
+> Thus **V−M tests extrapolation of stale locations toward the present together with anticipation**. It does not isolate anticipation alone. No fourth arm is needed for that narrower question.
+>
+> Ordering matters because H1’s initialization is order-sensitive. M must retain C’s exact canonical current-point prefix, append old tracks in a frozen age/birth order, and V must change coordinates in that same order without another sort or merge. The DM accepted this clarification within the quoted price. The original anonymous CV idea was already proposed and withdrawn before execution in the information-value study; this is **recorded, previously unexecuted work**, not a new algorithm or a repeated failed tracker.
+>
+> The simple-model bridge is useful but limited. For fixed user assignments, constant velocities and a fixed service point over a hold of length \(T\),
+>
+> \[
+> \arg\min_p\int_0^T\sum_j\|p-(x_j+v_js)\|^2\,ds
+> =\bar x+\frac{T}{2}\bar v.
+> \]
+>
+> This motivates an untuned 15-second midpoint for the existing 30-second hold. It is my derivation, not a native QoS theorem. Coverage-control literature supplies the squared-distance/centroid connection; time-varying coverage work also shows why moving density changes the control problem. Its known smooth densities and motion laws omit anonymous censored observations, finite UAV travel, discrete association, interference, backhaul and battery constraints. [Cortés et al., coverage control](https://motion.me.ucsb.edu/pdf/2002j-cmkb.pdf), [Lee and Egerstedt, time-varying densities, §§II–IV](https://arxiv.org/pdf/1404.0338).
+>
+> I used all three local stores and read the consequential primary passages:
+>
+> - Foundations **B01, §3.4.1**: history and sufficient-state reasoning does not imply that a recurrent learner is necessary. [Primary PDF](/home/fires/hmasd-wsl/docs/new-libs/papers/B01_Albrecht_MARL_Foundations_2024.pdf).
+> - Inst-sci **MARL-0016, pp.2–4**, *Models as Agents*: prediction error and joint-policy consequences must be connected; coordinate accuracy alone is insufficient. [Primary JSON](/home/fires/projects/Inst-sci/papers/MyLib/json/MARL-0016.json).
+> - My-lib **neurips-2023-ba1c5356d9164bb64c446a4b690226b0, pp.1–6**, *PID-Inspired Inductive Biases*: ordinary temporal differences are a serious alternative to generic recurrent memory. Its tracking tasks do not solve anonymous multi-user association or UAV radio coupling. [Primary PDF](/mnt/c/Projects/My-lib/.local-formal-capture/corpus/papers/neurips-2023/ba1c5356d9164bb64c446a4b690226b0/arxiv-2307.05891.pdf).
+>
+> July G35’s competent current-state result and the relevant external-review records reinforce the comparator requirement. None transfers a performance verdict to S7.
+>
+> The **minimum useful complete observation** is one prospectively fixed, fresh 32-world C/M/V panel:
+>
+> | Cost or exposure | Complete prospective amount |
+> |---|---:|
+> | Scientific episodes / native transitions | **96 / 288,000** |
+> | Fits, labels, optimizer updates | **0** |
+> | Bounded engineering native exposure | **244 additional transitions** |
+> | Execution plus reader, including engineering | **576,488 proposals/shield calls; 19,224 H1 plans** |
+> | Canonicalization / association passes | **390,656 / 384,244** |
+> | Additional native scoring/model branches | **0** |
+> | Total CPU estimate | **3–10 single-thread CPU hours** |
+> | Node wall estimate | **1–4 hours**, before queueing/contention |
+> | Implementation, checking and reading support | **8–14 focused hours** |
+> | Canonical / peak disk reservation | **6 GiB / about 10 GiB** |
+> | Memory reservation | **Up to 1 GiB per worker/reader; fresh admission around 6 GiB available** |
+>
+> The scientific V run makes 3,200 projection-array calls, at most 96,000 predicted vectors; replay repeats them. The M/V execution alone permits up to 172.8 million association-pair checks and 1.3824 billion scalar canonicalizer comparisons. These are meaningful costs despite zero fits. The price separately includes finite synthetic-check ceilings and 200 environment constructions/100 resets. Normal radio and allocator work inside native transitions is included, not declared free.
+>
+> Historical worker anchors were **4.196 CPU hours for B01, 1.196 for B02 and 2.669 for B03**. They are sunk, different-package observations. Historical reader/support timing is incomplete; the new overhead estimates are unbenchmarked ranges. Source/design work already spent is additional. No timing pilot is required.
+>
+> The reader must replay each actual controller once from stored lawful inputs, retain exact exogenous user paths, and check targets, proposed/submitted actions, actual motion, recorded routing, service, energy and termination. Truth-side identity binding must remain separate from policy inputs. Ambiguous or unbound tracks stay explicit; matching a prediction to whichever future user happens to be nearest would be misleading.
+>
+> Read **total native J and cumulative native service**, with actual length and termination and the fixed H3000 denominator available. Favorable averages over surviving steps cannot establish a complete-mission gain. Do not fabricate post-terminal transitions. The 32 paired worlds describe these fixed programs; they are not independent training replications. Service and J also share components and are not independent corroboration.
+>
+> The outcomes would change real choices:
+>
+> - **M improves C; V adds no persuasive benefit:** retain ordinary short memory as a conditional comparator and decline forecasting investment.
+> - **V improves both M and C in complete native service/J:** retain this ordinary extrapolation package. That supports useful use of history, not learned prediction, optimal filtering or a safe default.
+> - **V beats M but not C:** do not mistake repair of a harmful memory baseline for a useful new capability.
+> - **Prediction improves but choices rarely change:** report limited decision exposure. If physical interventions occur and native outcomes worsen, record an active adverse result. Neither automatically identifies a repair.
+> - **Effects remain uncertain, or energy tradeoffs defeat the intended use:** retain the unresolved or adverse evidence and end this purchase without extra worlds, threshold tuning, S4 escalation or a learner.
+>
+> A positive result would be useful even without further development: it would supply a better-scoped ordinary reference for service under moving users. It would not automatically justify confirmation or expansion.
+>
+> This reuses my separate reviewer context and earlier reviews; it is not a fresh blinded review. For this assignment I directly read the relevant protocols, source, published configurations and consequential stored summary/per-world outputs, including positive and adverse information-value cases and D2’s original results/corrections. I checked the relevant P_BS/H1 paths against the frozen source. The DM supplied the exact profile, reachable-RNG, diagnostic-field and price facts. I performed no native/controller/model query, fitting, benchmark or outcome recomputation. Actual new runtime pairing, implementation correctness, timing and node admission remain unverified.
+>
+> The earlier B09 handoff is complete. This recommendation neither duplicates that N5 study nor changes the P0 own-Tx, C+cap-two+LRS or B07 dispositions.
+>
+> **MATERIAL_DISSENT: no — recommend this single bounded ordinary-control purchase under the corrected scope; no new execution or broader claim is authorized by the source review itself.**
+
+**DM response and source-task closure.** The full review is read. Its main framing correction is accepted: older S7 already includes moving users, so the prospective contribution is better use of lawful observations within that mission. The recorded-but-unexecuted tracker ancestry and the distinction between geometric extrapolation, actual control exposure and complete service/energy value are retained. The ordinary C/M/V comparison is feasible at the quoted cost, with small-scale motion, weak prior incremental user-map evidence, anonymous association and risk tails still adverse constraints. The review recommends buying one observation; the source does not predict that it will improve service. Root owns that allocation decision. This completes the assigned source/feasibility work without code, tests, controller/native/model/allocator queries, fits, pilot or outcome reduction. B07 remains closed and no result-bearing successor has been launched. No cleanup target or duplicate bulk was created by this documentation-only work: actual deletions none, net allocated disk reclaimed 0 bytes, tool blocker none.
+
+
+<a id="b08-root-selection"></a>
+### 2026-10-01 — Root selects one ordinary C/M/V mission comparison
+
+Root's adoption arrived after the original recommendation was read and appended above. The original recommendation, its source facts/price, and this allocation are separate records. The closed B07 study stays closed; B08 is the sole next result-bearing study under this direction's existing native lead.
+
+**Full original Root adoption, verbatim:**
+
+> Root SELECTS ONE complete ordinary anonymous-tracking comparison on unchanged native fault-free S7-S2, as your next result-bearing study (B08 is the natural next tag). I read the Oracle's COMPLETE original recommendation, all original source/price/correction exchanges in NOTES5811–end at4f8475d1f6f925fd8049c16ac3cbe6a1d1faff02, and the load-bearing Cortes coverage §§II–III and Lee–Egerstedt time-varying-density §§II–IV primary passages. Reuse this adequate independent source/design review; no extra selection critic/Pro pass is needed absent a material new disagreement. You retain scientific ownership, may challenge the premises, and own prospective NOTES/L0, implementation/delegation, engineering review, exact-source publication, actual-node admission, accepted observation, full reading/independent result diagnosis, your own standing/background publication and measured cleanup. Routine steps do not await Root ACK.
+>
+> Purpose and investment: S7 ALREADY has continuously moving users; this is a better-use-of-lawful-history comparison, not a new demand law or the programme's first moving-demand task. It can establish a useful ordinary control reference even if no learner follows. This is a close/modest-value purchase at the full3–10CPU-hour/8–14support-hour estimate, not a claim of large recoverable headroom. Retain P_BS's demonstrated BS prior/memory strength, its reserve/energy adverses, the small/uncertain privileged-user increment, earlier history/peer-forecast adverses, D2's ordinary migration positive and corrected finite comparator. P_BS is a conditional performance reference, not the default-safe controller. The anonymous CV proposal was previously recorded then WITHDRAWN before execution; no algorithmic novelty or failed-tracker rescue claim. July G33 demand-rate design and other paused scopes remain frozen.
+>
+> Frozen complete comparison: 32 FRESH common worlds, C/M/V once each,96 H3000 missions/288000 scientific native transitions at full length,0 fits/labels/optimizer updates. NativeS7-S2 eight UAV/thirty users,dt1s,fixed1Mbps/user,3m/s user/cluster bounds,original energy/charging/routing/termination,30-step H1 planning/feedback shield. No S4/faster motion, extra controller, new host, altered offered rates, objective reweighting or extra arm. C is exact P_BS from d6151ff5155d8bf3f3289bba727ee5148f6b76a6 with canonical ee9c6c8aca0ee13e3d7a02416ff4acf85766f274 dependencies: frozen station prior, genuine-BS-sighting/memory precedence, exact planner/order/hysteresis/fallback and current-user interface. Free pooling of all8 lawful observations is an inherited centralized-team contract, not a decentralized-learning or communications claim; richer central R/TransitHold P have incompatible truth/scoring rights and are not required extra baselines.
+>
+> M/V ingest the unchanged0.5m canonical merged lawful user xy each primitive step, with private ephemeral track births, last sighting/time and last two unambiguous consecutive sightings only. Feasible matching distance≤3*elapsed_s+0.5m; only MUTUALLY UNIQUE continuations retain identity. Ambiguous current points become fresh zero-velocity tracks; old hypotheses feasible for a detection but not uniquely continued are discarded. Unmatched old tracks persist at most30s. Current points have priority; retain freshest old tracks only up to public30-user cap with fixed ties. M supplies last sighted coordinates. V uses SAME memory/association and supplies clip(last_xy+(age+15s)*v,arena), norm(v)≤3m/s from adjacent primitive unique sightings, otherwisev=0. Reset every world. No true ID/velocity/waypoint/pause/cluster/future enters actions. M preserves C's canonical current-point prefix EXACTLY, then old-track frozen age/birth order; V changes coordinates in that SAME order with NO prediction-time resort/merge. Freeze expiration-before-matching and remaining event/tie details explicitly before any exposure, within this rule. H1 order-sensitivity makes the no-added-memory identity check important.
+>
+> Primary estimand: V−M TOTAL native J over the actual mission, with cumulative native service as the load-bearing companion. C anchors useful complete value: also read M−C and V−C, all3 absolute levels, signed all32 worlds and predeclared paired-world uncertainty. V−M bundles stale-to-present extrapolation with15s anticipation; it does NOT isolate anticipation. Preserve actual mission lengths/terminations, native cumulative service/J and fixedH3000 normalization; an early terminal is not padded with simulated transitions or replaced. A favorable surviving-step average is insufficient. Read QoS/service, actual motions/targets, energy/modes/return/charging/low-reserve/depletion/cutoff, outages/tails/path and full CPU/RSS/storage. J and service share components, not independent corroboration. No new acceptable-risk threshold or invented utility price is needed; preserve tradeoffs and do not declare safe/default adoption.
+>
+> Full reader: ONE exact offline replay of each actual C/M/V+feedback controller from full logged lawful inputs, track events and plan inputs/targets/proposed+submitted commands; source/asset binding, actual exogenous user-path equality across each world's observed common time prefix, native motion and recorded routing/service/energy/termination, and all endpoint/uncertainty calculations. If lengths differ, preserve each complete observed trajectory and do not fabricate a common unobserved suffix. Truth-side identity binding/candidate sets are reader-only, using actual contemporaneous native coordinates and radius/stable-order provenance; explicit ambiguous/unbound/reidentified denominators. Never identify a forecast by nearest future user. Retain forecast errors/exposure/common-prefix first physical divergence as descriptive, not mediation. No shadow H1 on other arms' later histories, counterfactual native branches, exhaustive extra scoring or extra rollout. The midpoint xbar+(30/2)vbar follows a fixed-assignment constant-velocity squared-distance model; radio/backhaul/anonymous visibility/battery/native value do not inherit its guarantee.
+>
+> Complete bill accepted as prospective, NOT a current node reservation or hard performance cap. Scientific execution288000proposals/shieldcalls/9600plans; C3200canonicalizations; M/V192000canonicalizations+associations, up to172.8M feasibility distances and1.3824B scalar merge comparisons. V3200projection-array calls≤96000vectors. Offline reader repeats each actual call, including primitive processing. Declared bounded correctness check is FOUR61-step streams on ONE separate engineering world with H3000 config retained (frozen P_BS reference,wrappedC,M,V),244 extra native transitions/12plans, then exact replay: no pilot or performance-based selection. Combined scientific+engineering totals288244native,576488proposal/shield,19224plans,390656canonicalizations,384244association passes,200envconstructions/100resets. Additional finite synthetic ceilings≤1024canonicalizer/1024association/256projection tests are bounds not quotas. Keep any test reruns/technical failures explicitly costed; no hidden data exposure. Scientific source/addresses/order/uncertainty and exact input hashes must be frozen and published before their queries.
+>
+> Estimate3–10single-threadCPUh and1–4nodewallh with UP TO4 execution and2 reader workers; fresh node feasibility decides actual admission, never override current occupancy. Up to1GiB/worker/reader plus.5–1GiB parent,6GiBcanonical/about10GiBpeakdisk. Preserve full8x365FP32 lawful input arrays and separate exactFP64 native user paths plus bounded typed state/routes, one canonical bulk tree; compact evidence inGit. Old B01–03 worker/read/support costs remain sunk and incompletely metered; new readback estimates are unbenchmarked. Source/design and publication/support are additional. Preserve actual allocated storage measurements/unique artifacts on cleanup; no backup duplicate condition. No accepted other-direction operation moves for this study.
+>
+> Outcome decisions: useful M over C with no V increment retains memory and ends forecasting purchase; useful V over BOTH M/C on complete J/service retains ordinary extrapolation. V>M alone cannot rescue a harmful M baseline. Better forecast accuracy/sparse choice change does not establish value; active physical changes with adverse outcomes stay adverse without diagnosing a unique repair. Uncertain or unfavorable complete outcomes end THIS purchase with no extra worlds, threshold/horizon sweep, S4 escalation, learner or confirmation by default. Positive ordinary capability is worth retaining even without an automatic successor. Material new objections or genuinely useful broader pivots return to Root; complete all already accepted work. Please preserve the Oracle's entire original answer separately from this adoption in your existing notebook.
+
+**Endpoint clarification delivered with the Oracle artifact handoff, verbatim:**
+
+> primaryV−M total nativeJ plus cumulative-service companion, allC/M/Vlevels and M−C/V−C, actual termination/length plus fixedH3000 normalization; if an arm ends early, compare exogenous path equality only on the actually observed common time prefix, retain every arm's complete observed path, fabricate no missing suffix.
+
+DM disposition: accept this one selected comparison and reuse the applicable independent selection review. Next: prospective B08 contract/L0 with source identities, fresh worlds, event order, fixed uncertainty, counted checks and full reader, followed by bounded implementation and independent engineering review. The source handoff is complete; implementation and all result exposure remain unstarted at this entry.
