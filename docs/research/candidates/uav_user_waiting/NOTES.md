@@ -5334,3 +5334,225 @@ accepted B06 processes. Source staging was78,207,842temporary bytes and
 will be removed only after the independent saved-input reader releases it.
 No repair, additional world, true-state ACK, horizon sweep, learner or
 confirmation is selected by this completed comparison.
+
+<a id="b06-independent-review-and-disposition"></a>
+### B06 independent scientific review and DM disposition — 2026-10-01 UTC
+
+The registered ResearchCritic returned this complete original answer in its
+continuing independent B01–B05 context, after reconstructing the actual
+question and original supporting/adverse sources. It did not inherit this
+DM conversation. This is independent scientific review, not a newly
+blinded review or another engineering check. Its original answer follows
+verbatim; absolute source links and line numbers are retained as delivered.
+
+> **Retain S_F:LRS as a strong, conditional continuity capability and close the fixed B06 study.** Its declared primary result is favorable, with substantial physical opportunity gains against already-fair comparators. It does **not** achieve the direction’s broader aim of improving continuity without sacrificing service, and it does not justify default adoption, confirmation or a learner.
+>
+> This is a follow-up in my continuing independent reviewer context, retaining my B01–B05 reviews, not a newly blinded review. I reconstructed the frozen comparison and B06 outputs before reading the original selection advice and the DM’s new interpretation. I used saved evidence and arithmetic only: no controller, model, native or allocator queries, fits, code edits or record edits.
+>
+> The consequential comparison is appropriate. S_F changes the modeled allocation law throughout settlement, the committed prefix and private candidate forecasts while retaining S’s information, action, delivery and search rights. Both physical programs are evaluated under the same B05 local LRS law. M:LRS and U:LRS remain necessary alternatives because service and continuity represent different operating choices. The earlier B05 result established useful allocation capability on fixed paths; its small remaining maximum-gap allowance did not constrain what changed physical trajectories could achieve. [Frozen B06 contract](/home/fires/hmasd-wsl/docs/research/candidates/uav_user_waiting/NOTES.md:4823)
+>
+> I checked source/configuration identities against published input `69347051d55f31cc8a5c9ed71239aabd5d1d9ee6` and the accepted worker snapshot, the bound B04/B05 results, all 64 staged S raw hashes, all 192 baseline full-outcome hashes, and worker/reader completion records. Both processes exited zero. The full reader’s numerical reductions agree with the worker within `1.4210854715202004e−14`. Its coverage includes all candidate arithmetic and the declared bounded candidate-physics checks; I am not converting that into exhaustive independent physics verification. [Worker evidence](/home/fires/hmasd-wsl/runs/uav_user_waiting/b06_fair_model_a01/summary.json), [independent technical reading](/home/fires/hmasd-wsl/runs/uav_user_waiting/b06_fair_model_read_a01/reading.json)
+>
+> The complete operating points are:
+>
+> | Mean across the same 64 worlds | S_F:LRS | S:LRS | M:LRS | U:LRS |
+> |---|---:|---:|---:|---:|
+> | Episode maximum gap | 12.1563 | 35.0938 | 43.3750 | 33.1719 |
+> | Worst-user mean age | 2.4677 | 6.2853 | 9.1250 | 5.8076 |
+> | Mean user maximum gap | 6.8550 | 14.9113 | 15.3622 | 14.8781 |
+> | Overall mean age | 1.5456 | 2.2986 | 2.2888 | 2.2592 |
+> | Served users/tick | 16.9464 | 21.1805 | 24.7362 | 21.6669 |
+> | Quality | .22658 | .16125 | .16654 | .15939 |
+> | Native J | .30522 | .34490 | .39627 | .35115 |
+>
+> I read all 64 paired primary vectors and the complete tradeoffs. S_F−S maximum gap is **−22.9375 ticks**, descriptive paired t95 **[−25.6633, −20.2117]**, with all 64 worlds favorable and individual differences from −53 to −7. The frozen bootstrap gives [−25.6250, −20.3590]. Against M/U, the primary differences are −31.21875/−21.015625, again favorable in every world. Worst-user mean age, average age, typical-user maximum gaps, age p95 and quality also improve in every world against all three references. These remain adaptively reused development worlds, not confirmation or independent training replication.
+>
+> The price is substantial. Versus S, service falls **4.23407 users/tick**, t95 **[−4.70267, −3.76548]**, with losses in 63/64 worlds. Native J falls .039678, with losses in 62/64. Against M/U, service falls 7.78979/4.72046 in every world. Quality improves, but its contribution to native J does not offset the service reduction. World29426053 supplies a useful exception: both service and J improve against S. Thus these data neither establish service preservation nor prove that the tradeoff is unavoidable. [Complete retained vectors](/home/fires/hmasd-wsl/runs/uav_user_waiting/b06_fair_model_a01/result.json)
+>
+> The activation evidence is substantive. All 64 first depart through an executed transmitter-mask change at transition2. Commands also depart then in37 worlds; their first departures are transition6 in26 and transition10 in one. The corresponding first differing **stored position indices** are3/7/11.
+>
+> For all64, true sites, map packets, reset positions/observations, first C proposals, navigation, reports and first-round forecast geometry match. Executed commands/masks and factual LRS contacts match before transition2. Observations at indices0 and1 are bitwise identical; stored observation2 is refreshed after the newly delivered mask, so its difference is part of the intervention. Pre-divergence SINR differs by at most `5.684341886080802e−14` across runtimes, with identical eligibility and connections. Modeled prefix histories match in62 worlds and legitimately differ in two because changing their allocation law is the treatment. Later trajectory differences are not same-state policy comparisons.
+>
+> The strongest explanation update is that **ordinary allocation and the physical opportunities created by its planner jointly matter**. The longest native no-link interval per episode falls from S’s34.21875 to11.109375, and falls in every world against S/M/U. This directly supports the predicted physical-opportunity improvement. Maximum closed gaps also improve in all64; censoring does not manufacture the result.
+>
+> The original contrary prediction—that greedy-model urgency might preserve useful physical refreshing better—loses substantial support for these aggregate endpoints on this panel. It is not refuted for every user or other tasks. Nor does the result demonstrate that modeled LRS history became exact: S_F retains3,865 false-positive and3,862 false-negative global contact entries. Without an old-S shadow on the new states, there is no measured old-to-new forecast-accuracy comparison.
+>
+> A strong simpler account remains. S_F uses fewer simultaneous transmitters:452 transmitter-on UAV ticks per episode versus S’s637.0625, with fewer in every world. Reduced cochannel interference can create broader eligibility and higher quality while fewer active capacity slots reduce throughput. LRS then distributes that smaller service supply more regularly. Consistent with this account, no-link user ticks fall from5669.84 to2597.09, while capacity-denied ticks rise from1707.95 to5864.63. The new trajectories contain **more total unserved user ticks**, yet shorter gaps and lower ages. This is useful regularity, not service-count dominance.
+>
+> That explanation is supported as an account of the package’s behavior, not an identified causal decomposition. Motion, masks, modeled histories, age costs and native tie values change together. Mean path length is about388m/UAV below S but146m above M; mean height is51.347m, with most UAV ticks at the50m boundary. Neither distance nor transmitter exposure establishes an energy benefit without an energy model. A simpler low-concurrency radio policy might capture much of the gain; it has not been compared.
+>
+> Individual adverse outcomes remain consequential. Against S:
+>
+> - 38/3,200 user-world maximum gaps worsen; 54 tie.
+> - 643 mean ages worsen; 14 tie.
+> - 2,617 users receive fewer service ticks.
+> - Nine worlds have worse terminal mean age.
+>
+> Against M/U, respectively,267/44 individual maximum gaps and1328/724 mean ages worsen. These user records are dependent observations within worlds, not additional independent experimental units.
+>
+> I independently reconstructed full ages, service counts, closed/censored gaps and no-link/denial intervals for **900 user records across nine representative worlds × S_F/S**, using saved contacts and native SINR. All matched. The underlying examples illustrate both sides:
+>
+> - World31/user1 has S’s initial66-tick no-link gap; under S_F its maximum gap is10 and mean age falls from13.9492 to2.96875.
+> - World09 gains21 ticks on the episode maximum but loses9.11719 served users/tick.
+> - World49 gains14 maximum-gap ticks but loses.109293 native J.
+> - World23/user3 worsens from an8-tick maximum gap to12, with the new `[126,138)` interval entirely without a link; service falls129→77.
+> - World41/user34’s mean age rises1.76172→3.11328, service falls136→48 and maximum gap rises12→15. Its new `[148,163)` gap contains three denied and twelve no-link ticks.
+> - World54/user32 improves its overall mean age and maximum gap but ends with an11-tick right-censored gap, versus terminal age zero under S.
+>
+> The denial/no-link labels describe observed intervals; they are not additive causal estimates of what an alternative policy would repair. S_F’s mean maximum-gap excess above its **own** fixed-eligibility no-link bound is1.046875 ticks. That limits further allocator-only gains on these saved paths for this endpoint, without bounding other age outcomes or future physical programs.
+>
+> Representation is now demonstrated for this ordinary modeled-state controller under the existing wire contract. Actual private timestamps, grants and native truth were not supplied to the manager. Learnability remains untested: there are zero fits. Earlier learned-value failures remain valid, and this result does not diagnose them as missing information, inadequate representation or an LLM limitation. Likewise, B04’s failed local service guarantee remains a warning against assuming that another blockwise constraint would preserve complete-episode service.
+>
+> The measured new worker/reader snapshots total **987.521216 CPU seconds (.274311 CPU hours)**, with separate peaks414,552/379,248KiB. The purchase includes16,384 native steps,20,480 worker C calls,40,960 reader C calls,475,136 candidate requests and1,444,018 manager modeled fleet ticks, including terminal settlement. All4,096 decisions were complete and timely; maximum recorded manager wall time was.243515s. The13,270 C fallbacks were ordinary controller fallbacks, not deadline failures.
+>
+> These measurements exclude unmetered implementation, review, staging, control and final-write overhead. Historical remote S/M/U timings are not matched local speed controls. The1.906182 CPU seconds of offline LRS replay do not establish integrated allocation latency. Canonical new raw/outcome payloads total about91MB; the temporary S staging is78,207,842 bytes.
+>
+> My correction is therefore to **retain the new conditional ordinary reference, revise the explanation toward physical opportunity plus regular allocation, and end this fixed purchase**. The primary succeeded; the service-preserving broader objective did not. The strongest consequential objection is to any claim of default superiority, userwise protection or an identified memory mechanism. The DM’s published conditional reading does not make those claims, so I find no material objection to retention and closure.
+>
+> The smallest complete observation needed for this retention decision is already paid and read. More worlds would not resolve the service price or identify why the package works. I recommend no immediate confirmation, ACK addition, allocator change, horizon sweep or learning repair.
+>
+> A worthwhile possible successor is a **simpler ordinary radio-control comparison**: can one predeclared causal low-concurrency mask rule, with existing C and the same LRS rights, reproduce useful continuity at lower planning cost or higher service? Comparable continuity with better cost/service would reduce the practical need for S_F’s modeled history; worse continuity would support retaining its complete dynamic package; another service/waiting tradeoff would require a use-based choice. None of these outcomes alone isolates private-history causality. A complete one-program comparison on the existing panel would require64 H256 trajectories/16,384 native steps and zero fits, with full fair outcomes and verification. Exact rule, reader work, CPU and support costs remain unpriced. This is a constructive question for a later allocation decision, not a selected run or prerequisite to retaining B06.
+>
+> All my saved-input and accepted-source-snapshot consumers are released for cleanup. Preserve the canonical positive/adverse evidence and existing originals; I no longer need the temporary64 S copies.
+>
+> **MATERIAL_DISSENT: no — retain S_F:LRS only as the evidenced continuity/service tradeoff and close B06; no additional investment is selected.**
+
+**DM response and resolved judgment.** I accept the recommendation and its
+limits. There is no material scientific disagreement to resolve. The
+complete evidence is published at
+`6aa6a393edf37c2da12fcd5d605158a576ac4866`, after the exact input publication
+at69347051d55f31cc8a5c9ed71239aabd5d1d9ee6. B06 closes as a successful
+primary continuity comparison and a retained **conditional ordinary
+capability**, with a substantial service/J price. It does not establish
+the broader service-preserving objective, default superiority, every-user
+protection, fresh confirmation or learning benefit. M:LRS remains the
+higher-service reference; S:LRS/U:LRS remain useful intermediate operating
+points and retain their historical cost scope. No evidence is deleted
+because a new arm improves an aggregate endpoint.
+
+This changes the working explanation in a consequential way. B05's
+near-floor statement was conditional on fixed physical eligibility. B06
+shows that modeling the fair allocation law inside the same lawful
+physical planner can change eligibility and improve both closed and
+censored continuity endpoints far beyond allocator-only headroom on the
+old trajectories. The contrary prediction that retaining greedy urgency
+was needed for useful refreshing is weakened for this panel's aggregate
+waiting endpoints. The ordinary capability is demonstrated without new
+true-grant feedback or added wire information. Learnability and earlier
+learned-value failure explanations remain untouched.
+
+The lower-concurrency account is a serious unresolved alternative to a
+unique history or accuracy mechanism. Fewer transmitter slots, less
+interference, changed motion and regular LRS grants can jointly explain
+more unserved user ticks alongside shorter gaps. The observed package
+supports that account but does not identify its components. It also does
+not prove the service price unavoidable:29426053 improves both service and
+J against S. I will not turn path length/Tx reductions into an unmeasured
+energy claim or the offline fair replay into an integrated latency claim.
+
+The Reviewer's prefix reading clarifies indexing and numerical scope:
+state indices3/7/11 correspond to movement transitions2/6/10. The common
+pre-intervention SINR values agree within5.684341886080802e−14 across the
+two runtimes, with identical eligibility/connections, while reset inputs,
+first C/report/proposal geometry and observations0/1 are bitwise equal.
+Observation2 follows the changed delivered mask. The selected comparison
+is therefore not a promise of universal cross-runtime bit equality, and
+it is not evidence of a changed pre-intervention physical condition.
+
+For the next investment, retaining the present result needs no further
+native purchase. Repeating the same comparison on more worlds could test
+fresh-world stability but would not answer the service price or the
+simpler-control alternative. An automatic ACK, horizon, allocator or
+learning repair is not justified. The Reviewer's constructive proposal—a
+single predeclared causal low-concurrency mask controller, with existing C
+and the same LRS rights against the paid full operating points—could
+change whether the modeled planner is practically needed. Its minimum
+complete native exposure would be64×256=16,384team steps and0fits, but its
+exact rule, full reader bill, CPU and support costs are not yet designed
+or priced. It is a proposed next question for Root's cross-question
+allocation, not an admitted idea or a prerequisite for preserving B06.
+
+This DM is idle at the assigned read-result boundary after publication
+and cleanup. No producer or unread advice remains. The parent question is
+open, with a better ordinary capability and explicit adverse constraints;
+Root owns selection of any next comparison under this assignment. No
+routine approval or automatic additional run is requested. The Reviewer
+has released all staged-input and accepted-source-snapshot consumers.
+
+<a id="b06-final-cleanup"></a>
+### B06 final cleanup and retained evidence — 2026-10-01 UTC
+
+Useful implementation/tests were published at69347051 and complete compact
+readings/config/native evidence at6aa6a393 before cleanup. The independent
+ResearchCritic released all saved-input and accepted-source consumers.
+Fresh same-handle native status established both processes exited0 with
+absent identities; the observer was stopped with no unconsumed event.
+The original192 baseline full-outcome and64 staged-S digests had also been
+checked by the independent review. No further result-bearing consumer or
+selected continuation needs the temporary copies.
+
+The supported exact-target snapshot collector previewed and removed both
+completed source snapshots, using its read-only sudo process scan. Their
+claims, native manifests/exit witnesses and canonical outputs remain.
+The redundant reader progress file retained64rows identical to the final
+reading; only its READING status and pre-paired-check discrepancy counters
+were older. The final verified reading retains those results plus the
+completed checks. No source or evidence byte was substituted to make a
+cleanup check pass.
+
+Allocated-byte measurements included files and directories, deduplicated
+by inode; no regular-file hardlinks were found in the deletion set.
+All targets below are now absent, including their worktree registrations.
+
+| Actual deleted target | Allocated bytes before | After |
+|---|---:|---:|
+| `.git/hmasd-launch-sources/9effd90648174e00b0e6839a15ba8f7b/` | 1760686080 | 0 |
+| `.git/hmasd-launch-sources/639d93e82dd6450f8bb2ef425902d586/` | 1760686080 | 0 |
+| `temp/directions/uav_user_waiting/b06/` (64 temporary S inputs and two wait requests) | 78372864 | 0 |
+| `runs/uav_user_waiting/b06_fair_model_read_a01/reading-progress.json` | 106496 | 0 |
+| `experiments/candidates/uav_user_waiting/b01/__pycache__/` | 49152 | 0 |
+| `experiments/candidates/uav_user_waiting/b02/__pycache__/` | 102400 | 0 |
+| `experiments/candidates/uav_user_waiting/b04/__pycache__/` | 65536 | 0 |
+| `experiments/candidates/uav_user_waiting/b05/__pycache__/` | 86016 | 0 |
+| `experiments/candidates/uav_user_waiting/b06/__pycache__/` | 135168 | 0 |
+| `tests/experiments/candidates/uav_user_waiting/b06/__pycache__/` | 118784 | 0 |
+| **Total/net allocated bytes reclaimed** | **3600408576** | **0** |
+
+This is a measured3,600,408,576-byte reduction for the exact deletion set,
+not a claim about concurrent whole-host free capacity or Git object
+compaction. Actual leftovers among those targets: **none**. Concrete tool
+blocker: **none**. No full-tree copy, tarball or backup chain was created.
+
+The retained new evidence is one canonical local raw/outcome copy
+(90,988,580payload bytes), its immutable full worker summary, the complete
+technical reading and the published compact results/config/status/source
+identities. The original B04 remote raw and B05 local evidence stay at
+their already recorded canonical locations; temporary staging is not
+reported as retained evidence. The useful B06 fair-history planner and
+reader/test code remain on main, together with frozen dependencies needed
+to interpret the current positive/adverse result. No unused new production
+code was identified for deletion, and other directions' files were not
+removed. The present study has no active producer or unread result/advice.
+
+<a id="post-b06-source-only-scope"></a>
+### Post-B06 continuing source-only scope — 2026-10-01 UTC
+
+After reading the full B06 evidence, original scientific review and DM
+response, Root adopted the conditional-capability retention and closure.
+That communication was a cross-question disposition, not permission
+needed for this DM's publication/cleanup. Root assigned its existing
+independent Astra Max Oracle a source-only next-value question: consider
+the low-concurrency ordinary-controller suggestion against a better
+independent question or stop, reusing the full audit and B01–B06 adverses.
+
+This DM's continuing work is limited to **requested bounded source,
+feasibility and full-cost facts** after the completed cleanup. No new
+policy/model/native/allocator query, target or outcome reduction, fit,
+implementation or result operation is selected. Root will choose only
+after complete original advice and the full bill; the16,384native-step
+headline alone is not an investment comparison. The separately selected
+fleet-adaptation P0 one-eligible-OFF gate uses a distinct greedy host with
+at least four active members and no reports; no merger or expansion of
+that work is requested. Any actual requested source facts and their
+scope will stay in this notebook. There is no new result-bearing idea,
+new direction record or automatic confirmation.
