@@ -11,7 +11,7 @@
 已读取前任完成的[单一 handoff](HANDOFF_20261001_ROOT_AND_FOUR_DMS.md)，接手 Codex 科学管理、选题与后继安排。
 上一轮四项研究及三项资料评估的完成／停止结论保持；旧操作不重启，历史 handoff 不改写。
 本次明确继续解除该轮 Codex 交接暂停；静默承诺、RF 完整购买与参数搜索均已完整判读、发表和清理。S7 构造与计价也已完成，Root 采纳独立评审、本轮不购买该候选；见[首轮完成处置](#root-selected-successors-20261001)。
-Owner 随后提供开放 Jev/Laya 联合技能研究计划；资产核对与完整独立审查后，Root 已选择 `typed_joint_skill_decision` 的一次6-fit联合布局后果学习比较，准备实现／准入，见[具体范围](#typed-joint-skill-selection-20261001)。
+Owner 随后提供开放 Jev/Laya 联合技能研究计划；所选 `typed_joint_skill_decision` 首轮6-fit比较已完整执行、独立判读、发表和清理。Root采纳停止两个精确配方、保留更宽问题；当前无活动结果操作或已选后继，见[完整处置](#typed-joint-skill-selection-20261001)。
 Claude 的独立权限和当前暂停、FSD/PPC 暂停、G33 冻结及 Milan 数据依赖保持原范围。
 
 **历史恢复：2026-09-29 21:59 UTC，owner明确要求“阅读handoff 我们继续工作”；该轮次现已完成并暂停。**
@@ -2463,30 +2463,31 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 ### Parallel allocation: independent work and rolling succession
 
 <a id="typed-joint-skill-selection-20261001"></a>
-**Owner 新提案与 Root 选择（2026-10-01 PDT）：** owner 提供开放 Jev/Laya 联合技能研究计划；
-`typed_joint_skill_decision` 的 B00 资产核对及实际比较构造完成，Root 已读完整方案、追加修正和原独立 ResearchCritic 全文，
-采纳一次有界能力比较，MATERIAL_DISSENT: no。原生 DM `/root/dm_typed_joint_skill`（实际 Astra/max）继续独立完成实施、
-正常工程验证、发表源输入、节点准入、全部读取、独立结果诊断与清理；普通 in-scope 执行不另等 Root 批准。
+**2026-10-01 PDT — owner 新提联合布局学习的首轮比较已完整结束。**
+Root 已读完全部原生结果、8,528-byte原始独立 ResearchCritic 答复、DM处置和测量清理，
+采纳停止精确 N／L-F 配方、保留更宽联合选择问题，MATERIAL_DISSENT:no。方向 reserve；无活动操作、未读意见或已选追加。
+Owner中断后恢复了同一DM／helpers及原进度，没有重启已接受producer或重复训练。
+[原提案](candidates/typed_joint_skill_decision/OWNER_PROPOSAL_20261001.md)、[完成选择与历史计划](archive/2026-10-01/RESEARCH-typed-joint-skill-first-comparison.md)、[完整结果／原始独立判读／处置](candidates/typed_joint_skill_decision/NOTES.md#b01-complete-reading)保留。
 
-科学对象是静态 coupled host 中未评分完整联合布局的原生后果选择：一次 t0 高层选择，冻结直线执行器反馈控制至 H500。
-三独立数据/训练块，每块256训练世界＋128测试世界；同一最多8候选菜单和完整回合标签，比较数值 N 与冻结 Laya 表示＋适配 scorer，
-共6fits。保留训练选定固定构造、同菜单静态 C_bh／旅行代价规则，以及固定完整 planner 的尺度和成本参照。
-这可买有意义的有限候选学习能力，不要求超过完整普通规划器；不归因技能语义、预训练机制、组合迁移或持续高层适应。
-现有 coordinator 已有联合顺序结构；旧槽位菜单预付2×3000搜索且普通分配约.777／planner约.780；
-既有监督蒸馏＋一次 DAgger 仍有学生.4004／教师.7587差距。新构造改变的是保留可执行布局并学习完整后果，不能称为已诊断旧失败。
-四规划器的旧 hindsight envelope 约.016/.015只限制那个昂贵排序用例；这里不把所有普通能力强的宿主排除在学习研究之外。
+三独立训练／测试块中，每个场景八个可执行布局确有选择空间：菜单最佳相对训练选定固定构造的完整C_bh增量为
++.08584／+.07586／+.08032；普通静态评分在341/384测试世界达到菜单最大值，平均剩余regret仅.00060／.00129／.00115。
+数值N训练regret降至约.0005–.0008，却在测试上约.099–.102；相对自身初始化的改善和局部正例真实，
+三个最终均值仍均低于固定构造。冻结Laya表示＋scorer的训练拟合更弱；L-F−N为−.024323／+.017847／−.004801，
+未建立一致包增量或等价。两者失败不能合并归因于同一优化／表示原因，也不否定更宽的联合学习或full fine-tuning。
+L-F仅翻转显示顺序便改变239/384世界的选择；保留全部收益／损失，不选择有利顺序、不自动授权增强或追加训练。
 
-已选完整上限：4,808,000原生步、2,314,752静态调用、1,552完整冻结 Laya 表示前向（含≤16correctness）、
-5,376额外 reader scorer上下文、6×512 optimizer updates。CPU预测3–6h／硬上限10h，GPU未测上限4h，峰值磁盘≤10GiB；
-支持工作10–16小时等价量为预测。Reader独立重算全部原生标签、统计和初末评分，读取完整更新证据；
-不额外重放Adam或全部冻结表示，明确依赖源／权重／缓存哈希和已计价adapter一致检查，不能称神经计算全部独立重演。
-技术失败保留原暴露与证据，不以截断输入、换模型或追加fit补成成功；正反结果按 notebook 分支处置，未选原提案其余流水线。
+完成6fits／3,072updates、4,808,000原生步、783,749实际静态调用和1,552完整冻结前向；
+reader重建9,600独立回合并读取5,376评分上下文，依赖已声明的源／缓存／更新记录，未独立重放encoder或Adam。
+241/2,304端点logit容差标记保留，执行选择全部一致；不能把它写成全面数值等价。
+实测完整入账过程CPU2.0171h、GPU保留9.117min、观察磁盘峰值7.662GiB；支持工作未完整计量。
+末次清理在节点净释放5,914,042,368bytes、本地净释放4,042,752bytes；此前分阶段源快照另释放2,462,195,712bytes。
+一份固定模型与三阶段原始证据保留，专用环境／执行profile／当前配方代码测试及scratch已退休，无清理阻碍。
+[实际成本、反例和清理范围](candidates/typed_joint_skill_decision/NOTES.md#b01-cleanup)。
 
-Root 同时授权一个必要的窄共享配置例外：如需依赖隔离，在同物理 wsl_4070增设执行profile，保留相同实际资源准入／GPU身份，
-只绑定该方向核验后的独立解释器与PATH；由Root写入发表 `.codex/hmasd-compute.toml`。不改变既有wsl_4070解释器、不代表新增GPU容量。
-允许安装必要隔离依赖并下载唯一固定 Laya 权重／tokenizer；任何模型／原生技术探针仍用已发表源和实际准入。
-Claude旧方向只读复用、所有权与暂停不变；FSD/PPC、G33、Milan范围不变。此前 RF、静默承诺与 CAL/CONT 均已完整收尾。
-[原提案](candidates/typed_joint_skill_decision/OWNER_PROPOSAL_20261001.md)、[资产与完整构造](candidates/typed_joint_skill_decision/NOTES.md#b00-asset-and-first-comparison)、[已选合同／原评审与处置](candidates/typed_joint_skill_decision/NOTES.md#b01-selected-contract)。
+本轮不立即购买更多数据、epochs、Laya微调、第四块或同配方复现。几何／排列结构的数值后继只有在具体预测
+同等信息／数据／曝光下的新世界regret改善、完整比较与价格已声明时才值得重新分配；这不是已识别的修复、自动队列或owner审批依赖。
+这次有限结果没有关闭技能学习问题；当前对这两个配方的投入已完成，Root保留跨题选择责任。
+Claude的独立所有权和暂停、FSD/PPC、G33、Milan范围均保持。
 
 <a id="root-successor-designs-20260930"></a>
 <a id="root-selected-successors-20261001"></a>
@@ -2503,7 +2504,7 @@ Root 已分别读完全部原生结果、原始独立科学意见、DM 处置与
 S7 的 C/H_C/F_C 构造、完整价格和 focused 独立评审均已发表；本轮不购买，方向 reserve，无前置诊断或自动队列。
 预测的条件性用途仍成立，但触发只覆盖部分已知损失，预计8–24 CPU-h和12–20支持小时等价量不足以支持本轮优先投入。
 [完整评审与处置](candidates/uav_fleet_transmission/NOTES.md#post-b09-focused-root-disposition-20261001)。
-三个结果属于各自合同，J 不跨实验比较；机器成本较低不自动产生后继授权。当前已选推进对象为上方 TJSD 比较，
+三个结果属于各自合同，J 不跨实验比较；机器成本较低不自动产生后继授权。上方 TJSD 后续比较也已完整收尾，当前没有已选追加；
 Claude 权限与暂停、FSD/PPC、G33及Milan范围保持。
 
 Root read the complete count B06, parent B07 and ordinary G B05 results, original independent
@@ -3757,7 +3758,7 @@ B18 已定位的即时路径是 NumPy `_clip` 的 TypeError 后异常清理与�
 地址用于恢复与用户明确要求的联系；不产生 App 消息/回复循环。表中是责任路由，任务是否运行、
 操作是否终态及结果是否读完须从对应 NOTES/native 记录核对；发布方法不证明活跃会话已经重载。
 
-**本次接任（owner，2026-10-01 PDT）：** 当前 Root 为下表「完成Root交接并继续任务」。前任完成记录保留在原地址；接任时 native agent tree 只有本 Root，前任 children 不属于本次可直接复用的原生树。先建立四个原生 DM 承接首轮工作，随后为 owner 新提案注册第五个原生 DM；首轮四项任务已完成，当前 TJSD 推进中。各 DM 继承已发表证据；未恢复旧会话。
+**本次接任（owner，2026-10-01 PDT）：** 当前 Root 为下表「完成Root交接并继续任务」。前任完成记录保留在原地址；接任时 native agent tree 只有本 Root，前任 children 不属于本次可直接复用的原生树。先建立四个原生 DM 承接首轮工作，随后为 owner 新提案注册第五个原生 DM；首轮四项任务及 TJSD 首轮研究均已完整收尾，无已选追加。各 DM 继承已发表证据；未恢复旧会话。
 四个Codex DM的最终报告均为已收尾、无活动结果操作或待读证据；owner已归档的旧DM地址只作历史来源。
 有完整文档的已完成研究由新建DM接续，继承原始正面、不利和失败证据；不恢复旧会话，也不把归档当作问题被否定。
 
