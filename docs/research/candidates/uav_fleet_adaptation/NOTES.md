@@ -9694,3 +9694,32 @@ Both local input copies completed and passed exact original size/SHA checks:
 848974 logical file bytes,425984 allocated bytes per file plus4096 directory
 bytes,856064 allocated bytes total. The two-file SCP/hash/chmod scope took
 1.029124s wall time. No checkpoint deserialization or model query was performed.
+
+<a id="b09-accepted-operation"></a>
+### B09 accepted operation and same-handle observation
+
+The single selected local invocation was accepted2026-10-01T06:19:35.770582Z
+from published source3886b4020955df0bf729b72a644451a55449920b. Native source,
+command, process identities and canonical output are in the retained
+[launch manifest](../../../../runs/uav_fleet_adaptation/b09_focal_response_a01/launch-manifest.json);
+its `operation_ref` is the only status handle for this purchase. Immediate
+[admission](../../../../runs/uav_fleet_adaptation/b09_focal_response_a01/admission-preflight.json)
+measured4,866,732,032 physical/effective available bytes against the4,294,967,296
+floor. Source/science/lead/pause admission passed; acceptance is not a read result.
+The immutable source snapshot remains launcher-owned until terminal collection.
+
+The first observer-arm call refused because the previous B08 observation was
+explicitly stopped. A diagnostic `status` spelling was also rejected by this
+observer CLI (its read command is`drain`). Drain confirmed generation36, no wake,
+no pending events and all old jobs terminal. Same-owner rearm37 then registered
+B09 atgeneration38 against this accepted operation, interval30s/timeout20s/window
+1500s. The first actual observation2026-10-01T06:21:31.046684Z found matching
+runner/supervisor identities running, accepted admission, no exit witness and
+consistent records. There was no new or restarted scientific worker. The native
+child remains active and will drain/rearm this handle through complete reading;
+queue delivery to an unloaded child is not presumed.
+
+At that initial adoption, the worker had completed1fit and275 training episodes
+with70400 native steps, startingH0 afterF0; elapsed worker129.901wall/128.417CPU
+seconds. Stderr was empty. This is progress only; no interim native score was
+reduced or used to change the fixed exposure, optimizer, panel or stopping rule.
