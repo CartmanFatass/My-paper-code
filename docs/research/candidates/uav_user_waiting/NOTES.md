@@ -3980,3 +3980,360 @@ returned no material finding. The accepted five-file aggregate SHA256
 `4632d680d87635c7f08b9122c10c348eb034295250be0af64618e2a7ba650f59`.
 This accepts the location/provenance correction, not production arithmetic
 or local-node admission; those are still pending their actual operations.
+
+**Local A02 acceptance.** Source/scope publication is
+`4de05b0da41827cf945587003a2476584dac480e`. The new local producer was admitted
+once at00:53:04.261137Z; its
+[manifest](../../../../runs/uav_user_waiting/b05_local_allocation_a02/launch-manifest.json)
+binds the configured interpreter, canonical outputs, immutable snapshot,
+staged metadata argument and actual native identities. The standard
+observer registered generation42 and adopted a consistent running status
+at00:53:21.576376Z. The same DM keeps its turn active through collection and
+the planned full reader. This is execution acceptance, not a scientific
+result; A01's separate failure evidence remains preserved.
+
+<a id="b05-complete-reading"></a>
+### B05 — complete local recovery and independent reading (2026-10-01 UTC)
+
+**Evidence and completeness.** The local producer finished with native
+exit0 at00:53:46.526686Z; the separately admitted full reader finished with
+native exit0 at00:55:34.728416Z. Both native records have consistent
+identities and absent runner/supervisor processes. Source is
+`4de05b0da41827cf945587003a2476584dac480e`. The
+[compact complete result](../../../../runs/uav_user_waiting/b05_local_allocation_a02/result.json)
+retains all576 producer rows, their complete per-user summary vectors,
+all36 paired-world comparisons, all source/artifact identities, native
+status and both passes' measured work. Repeated per-path source/artifact/
+inherited-cost descriptors are factored into192`path_records`; each row
+merged with its shared record was checked to equal the full producer row,
+including a second check after writing and rereading the compact JSON.
+No endpoint or adverse world was removed in this factorization.
+
+The unique full files remain on`local_linux`:
+
+- `runs/uav_user_waiting/b05_local_allocation_a02/summary.json`:
+  4,780,839 bytes, SHA256
+  `29829b9026d73992a2bf188373ed6ba24c7061d2a55dc57e74c91b39940f6508`.
+- `runs/uav_user_waiting/b05_local_allocation_read_a02/reading.json`:
+  4,551,440 bytes, SHA256
+  `1fbd3ec9c3a85a74e9006171c89033d0f4705c21e9caf1fdb1b9494bd64d9a07`.
+- Producer`contacts/` and`outcomes/` hold192 pairs. The former retain all
+  two-law contact streams; the latter retain all576 complete per-user gap,
+  censoring, no-link and denial interval records. Their hashes are in the
+  bound summary and compact record; their combined bytes are34,159,038.
+
+The reader verified every original/fair grant, service/quality/J tick,
+actual age, gap, exclusion record, inherited field and the complete paired
+comparison. It checked263,430 floating and9,231,493 exact fields; maximum
+absolute floating discrepancy was2.842171e−14, within the fixed1e−12
+threshold. Original quality/reward reconstruction errors were at most
+2.220446e−16/1.665335e−16. There were192 verified source traces,192 original
+reconstructions and384 fair outcomes; no failure or truncated trace.
+The same observer drained producer generation42 and reader generation44,
+consumed their terminal events, then stopped after generation45. Native
+child queue delivery remained unsupported; neither operation was relaunched.
+
+**Levels and same-path allocation.** All units below are simulator ticks
+except service (users/tick) and the native quality/J scales. F_user is the
+largest per-user mean age; gap is the episode maximum unserved gap; G is
+the mean per-user maximum gap. These are means over the same64 reused
+world clusters, not independent user/tick replicates or new confirmation.
+
+| Physical program / law | F_user | gap | G | A | service | quality | J |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| M / ORIGINAL | 12.982300 | 55.078125 | 19.534375 | 3.130050 | 24.736206 | .178278 | .399790 |
+| M / RR | 9.368286 | 43.859375 | 15.605000 | 2.311390 | 24.736206 | .158520 | .393863 |
+| M / LRS | 9.125000 | 43.375000 | 15.362188 | 2.288806 | 24.736206 | .166544 | .396270 |
+| S / ORIGINAL | 10.962158 | 51.406250 | 20.901563 | 3.517103 | 21.180481 | .188986 | .353223 |
+| S / RR | 6.460388 | 36.703125 | 15.158750 | 2.334149 | 21.180481 | .153867 | .342687 |
+| S / LRS | 6.285339 | 35.093750 | 14.911250 | 2.298601 | 21.180481 | .161247 | .344901 |
+| U / ORIGINAL | 9.362488 | 46.828125 | 19.797187 | 3.273011 | 21.666870 | .184305 | .358628 |
+| U / RR | 6.170105 | 35.312500 | 15.239062 | 2.303875 | 21.666870 | .152620 | .349122 |
+| U / LRS | 5.807617 | 33.171875 | 14.878125 | 2.259182 | 21.666870 | .159392 | .351154 |
+
+Every law preserves **each tick's contact count** on its same physical
+path. This both realizes the source-conditioned construction and fixes the
+total eligible-but-denied user-ticks; the change redistributes grants and
+denials over users/time. It is not a newly learned service improvement.
+Both fair laws reduce G, A and age-p95 in all64 worlds for every path.
+LRS reduces F_user in all64 worlds for each path. LRS−ORIGINAL F_user is
+M−3.857300 (descriptive paired t95[−4.599530,−3.115070]),
+S−4.676819[−5.576029,−3.777608], and
+U−3.554871[−4.106393,−3.003348]. Corresponding episode-gap mean changes
+are−11.703125/−16.312500/−13.656250, with53/62/62 improved worlds,
+11/2/1 ties and0/0/1 losses. G changes are−4.172188/−5.990313/−4.919063.
+
+These benefits have a measured price: LRS quality and native J fall in
+every world against original greedy on all three paths. Mean quality
+changes are−.011733/−.027739/−.024913 and J changes
+−.003520/−.008322/−.007474 for M/S/U. RR also loses quality and J in every
+world, by larger means. There was no declared utility weight, quality
+noninferiority margin or global dominance rule that makes this cost zero.
+All packages serve every user at least once within H256; never-served
+counts are already zero under the originals and cannot explain the gain.
+
+**Competent ordinary comparator.** RR supplies most of the waiting gain.
+Its F_user changes against original greedy are−3.614014/−4.501770/
+−3.192383 for M/S/U. LRS−RR adds smaller F_user changes of
+−.243286[−.399993,−.086580],−.175049[−.307962,−.042135], and
+−.362488[−.546644,−.178331]. It has24/26/22 adverse F_user worlds;
+these means do not give per-world protection. LRS−RR episode-gap changes
+are−.484375[−1.200630,+.231880],−1.609375[−2.433188,−.785562], and
+−2.140625[−3.407982,−.873268]; M's interval crosses zero. LRS's quality
+advantages over RR are+.008024/+.007380/+.006773 and its J advantages
++.002407/+.002214/+.002032, positive in every world. This is a useful
+whole-rule comparison; RR is also stateful, and the comparison does not
+isolate memory, SINR tie-breaking or any one mediator.
+
+**Adverse worlds and censoring.** The sole LRS−ORIGINAL episode-gap loss
+is U/29426039:34→35. Users48 and49 have the closed interval[218,253),
+containing3 capacity-denied and32 no-link ticks. It is not a reset/terminal
+censor artifact or proof that all its length is caused by denial. RR's
+episode-gap losses occur in M/29426030(+1),M/29426058(+5),
+S/29426021(+3),S/29426038(+2),S/29426059(+2),
+U/29426039(+1),U/29426049(+7),U/29426059(+1).
+RR's F_user losses are M/29426058(+.417969) and
+U/29426030(+.441406); S has none. All per-user counterexamples remain in
+the bound outputs, including LRS's adverse comparisons to RR.
+
+The same-path gain is present in closed gaps as well as censored ones.
+For M, mean maximum closed/left/right gaps change under LRS from
+51.609375/36.515625/25.640625 to41.796875/26.359375/18.265625;
+for S,48.828125/30.265625/23.781250 to32.625000/21.578125/16.171875;
+for U,45.828125/27.234375/19.921875 to32.125000/21.125000/13.734375.
+Longest observed gaps have a censored tie in15/14/10 LRS worlds, so those
+observed intervals do not establish waiting lengths beyond the horizon.
+The initial age is zero and only scored postmove grants update histories;
+reset and unscored mask-refresh contacts are not extra service observations.
+
+**Opportunity and a fixed-path bound.** Mean capacity-choice exposure
+(`|E_i|>10`) is283.171875/301.828125/290.703125 UAV-ticks per H256 episode
+for M/S/U, out of1280. Exactly-at-capacity exposure is111.5625/70.6875/79
+and provides no subset choice. Mean no-link user-ticks are5435.921875/
+5669.843750/5690.703125; mean capacity-denied user-ticks are1031.609375/
+1707.953125/1562.578125. Both totals are unchanged across laws on a path.
+LRS changes1110.875/1616.03125/1504.1875 user-grant bits per episode;
+XOR counts include both recipients and displaced grants, not additional
+served users. Thus real subset-choice exposure existed in this full panel;
+the source proof alone had not established that opportunity.
+
+For each world/path let L be the longest saved contiguous no-link interval
+over all users. Every allocator restricted to that eligibility trace must
+leave that interval unserved, so its episode maximum gap is at least L.
+This is a finite-path bound, not an additional simulated policy. Across all
+192 outcome files, mean L is42.75/34.21875/31.890625 for M/S/U. Mean
+LRS episode gap minus L is only.625/.875/1.28125, with42/37/39 worlds at
+the bound. Consequently those means also bound any further mean reduction
+of episode maximum gap achievable by another allocator on these exact
+paths, even one with privileged information. This does **not** bound
+F_user, G or mean age, guarantee the bound is jointly attainable elsewhere,
+or decompose a mixed gap into additive causal effects. The full per-world
+arithmetic and all longest-gap intervals are retained in`gap_reading` of
+the compact result; the scientific Reviewer independently reconstructed it.
+
+**Cross-path reading.** M+LRS versus U+ORIGINAL increases service by
+3.069336 and J by.037643 in every world, reduces A by.984205 in every
+world, and reduces G by4.435 (61 improvements/3 losses). F_user changes
+−.237488[−1.191972,+.716996] and episode maximum gap
+−3.453125[−7.741012,+.834762] remain unresolved; this is not tail
+equivalence or universal dominance. Quality is lower by.017760 on average.
+The inherited M path is shorter on average but has83.1875 more transmitter
+ticks than U; neither fact alone establishes energy value.
+
+Giving both paths LRS retains the physical-program tradeoff: U+LRS minus
+M+LRS reduces F_user by3.317383[−4.117548,−2.517218] and maximum gap by
+10.203125[−13.749208,−6.657042], but loses3.069336 service/tick and
+.045116 J, both in all64 worlds. Its mean-age change−.029624 has an
+interval crossing zero. U+LRS versus cheaper S+LRS retains service
++.486389[+.271307,+.701471] and J+.006253[+.003039,+.009467], but
+F_user−.477722, maximum gap−1.921875 and G−.033125 now all have
+descriptive intervals crossing zero. U still pays1.353448 additional
+inherited scheduler CPU seconds per episode versus S. Thus improved local
+allocation changes the useful ordinary reference without erasing the
+remaining extreme-tail/service tradeoff or proving S/U equivalence.
+
+**Costs, exposure and failure retained.** Complete local producer/reader
+process CPU is41.849593+23.628504=65.478097s (0.018188CPUh); recorded
+wall is42.141184+23.755721=65.896905s. Worker peak RSS is75,800KiB and
+reader peak79,581,184 bytes, each below the prospective.25GiB streaming
+target. Producer inner-allocator CPU is9.969120s; the independent reader's
+original/RR/LRS selector CPU is.384220/.362227/.459433s. These timings are
+local replay computation, not remote or integrated live-deadline evidence.
+Final record assembly/serialization and support have their stated limits;
+the JSON publication extraction is separately metered in the result.
+
+The full pair paid294,912 fleet allocations,1,474,560 conceptual UAV
+decisions,14,745,600 user-age updates and36,864,000 threshold entries.
+Each pass read all262,741,183 raw source bytes; transfer verification
+additionally hashed279,190,018 staged bytes. Both passes had zero native
+steps/resets/constructions, fits, optimizer updates, C/model/SINR queries or
+geometry predictions. The64 reused world clusters remain the scientific
+replicates: repeated reconstruction and A01's partial execution do not add
+independent worlds. A01's incomplete bill is separate, not replaced by
+these successful measurements. All90 preserved A01 fair-contact NPZ
+hashes match the fully verified A02 artifacts. That confirms those bytes;
+it does not complete A01's missing panel or its missing final accounting.
+
+Root's [bounded recurrence diagnosis](../../../../runs/runtime_repair/cpython_20261001_recurrence/diagnosis.json),
+published at`011e074cf2c021a59f38c6c32131ec37ba2ab15a`, recovers
+`protocol.py:84 → study.py:420 → json/encoder.py:296` during progress
+publication and an invalid CPython FOR_ITER operand with a null iterator
+slot. The antecedent cause remains unknown. Mapped build identities match
+the rebuilt GCC interpreter/NumPy/libc, but executable text pages are absent
+from the core; disk-fallback disassembly is not evidence of resident code
+corruption. Post-fault load observations and A02 success do not diagnose or
+cure the remote recurrence. The original core and A01 source snapshot
+remain required forensic evidence under Root's disposition.
+
+The relevant published shared background at`011e074cf2c` (topic2) remains
+the comparison context: accumulated burden, learned factual continuation,
+expanded search and local floors answer different questions and retain
+their adverse evidence. B05 directly tests the source-identified local
+subset-choice right. Its ordinary allocation capability can revise future
+comparators under these richer rights; it does not retrospectively change
+the old information/action contracts, claim novelty, establish learnability
+or supply new-world confirmation. Independent scientific disposition is
+recorded below before choosing any continuation.
+
+<a id="b05-independent-review-and-disposition"></a>
+### B05 — independent scientific review and disposition (2026-10-01 UTC)
+
+The registered ResearchCritic received the actual question, original
+supporting/adverse B01–B04 records, the complete original Oracle question
+and answer, fixed B05 contracts, frozen source, full producer/reader and
+canonical data. It reconstructed the main result before reading the
+Oracle recommendation and DM explanation. It checked all21 source
+bindings, all192 outcome hashes/gap records and seven consequential
+original/contact archives; it did not rerun native dynamics or perform a
+new fit. Its saved-data inspection used3.86 metered CPU seconds, separate
+from worker/reader and other unmetered support. The DM's condensed record
+of its substantive diagnosis and recommendation follows:
+
+> Retain LRS as a useful ordinary allocation capability and revise the
+> baseline toward M:LRS. Close B05 without an automatic learner, allocator
+> extension or native rerun. S:LRS remains the cheaper option; U:LRS
+> retains an extreme-tail advantage with lower service. The new result
+> changes the practical comparison without establishing learning necessity
+> or a free fairness improvement.
+>
+> Count preservation and the original greedy quality ceiling follow from
+> disjoint eligibility sets and work conservation. The empirical finding
+> is the substantial improvement in complete waiting outcomes. LRS lowers
+> worst-user mean age by3.857300/4.676819/3.554871 ticks and episode maximum
+> gap by11.703125/16.312500/13.656250 on M/S/U; quality and J fall in every
+> world. Round-robin supplies most of that improvement. LRS's smaller
+> F_user increments and its quality gain over RR in every world deserve
+> retention, but24/26/22 adverse F_user worlds preclude uniform protection.
+> RR is also stateful, and LRS changes discipline and tie-breaking: this
+> supports the whole rule, not an isolated effect of memory.
+>
+> M:LRS retains M's service while reaching approximately the original U
+> tail range; the F_user and maximum-gap differences versus U:ORIGINAL
+> remain uncertain, and quality falls. Giving both paths LRS preserves
+> U's distinct extreme-continuity contribution at a loss of3.069336 served
+> users/tick in every world. Under LRS, U's extreme-tail increment over S
+> becomes unresolved while its1.353448 extra inherited scheduler CPU
+> seconds/episode remains. The stronger B04 U−S tail result should not be
+> carried unchanged into this richer allocation contract.
+>
+> The cases preserve both opportunity and adverse consequences.
+> M/29426061's original user47 has a closed87-tick gap[62,149), containing
+> 18 denied and69 no-link ticks. LRS reduces that user's longest gap to25;
+> episode F_user falls22.0625→6.078125, while RR already achieves6.164063.
+> Serving selected eligible opportunities splits mixed intervals;
+> subtracting denial counts from gap length misdescribes the effect.
+> S/29426036 shows LRS worsening RR's F_user8.570313→9.582031 and maximum
+> gap50→55: at tick62 RR grants user26 while LRS declines it among13
+> eligible users competing for ten slots. LRS's closed[58,113) interval
+> has one denied tick and54 no-link ticks. U/29426030 provides the positive
+> RR comparison: F_user11.226563→8.160156 and gap55→34; LRS grants user28
+> at its first eligible tick34 and retains the initial censored[0,34)
+> interval. U/29426039's sole LRS−original maximum-gap loss34→35 is real,
+> with three denied and32 no-link ticks in closed[218,253) intervals.
+> M/29426022 retains user40's unavoidable88-tick no-link interval[71,159)
+> under both fair laws; U's different path substantially reduces that
+> user's waiting. Allocation and physical-path opportunities are distinct.
+>
+> The no-link bound was independently reconstructed from all192 outcome
+> files. Any uninterrupted interval without an eligible link lies inside
+> an unserved gap. Further allocation changes on these paths can therefore
+> reduce LRS's mean episode maximum gap by at most.625/.875/1.28125 ticks
+> for M/S/U, with42/37/39 worlds already at the bound. This finite-panel
+> endpoint bound neither establishes allocator optimality nor bounds
+> improvement in F_user or typical age.
+>
+> Direct reading of the frozen radio, observation, collector and history
+> dependencies confirms that actual grants/rewards do not feed C or the
+> manager's modeled-greedy history. A faithful port preserving that history
+> has no demonstrated new grant-feedback path into motion. Remaining port
+> uncertainty concerns implementation, added work and timeliness; feeding
+> actual grants back or changing the forecast law is a different comparison.
+>
+> The old service–waiting tradeoff was partly contingent on greedy
+> allocation, and ordinary local rules exploit substantial opportunity
+> under the added rights. This supports a representable, causal local
+> capability, leaves finite learnability untouched and does not explain
+> earlier learned-policy failures. Eligible IDs/SINRs and subset control
+> are explicit additions; there is no result for unchanged old actor rights,
+> global-age access, hardware channels or another host.
+>
+> The65.478097 successful process CPU seconds do not replace A01's paid
+> incomplete prefix. Matching90 contact hashes supports unchanged outputs
+> without diagnosing the crash or adding replication. Local replay timing
+> does not establish integrated deadlines. No additional observation is
+> needed for this bounded result. Retain M:LRS as a main ordinary reference
+> under the richer contract and the measured S/U alternatives; end further
+> allocation-only investment aimed merely at reducing maximum gap on these
+> paths. Materially larger maximum-gap gains require changed eligible-link
+> sequences and comparison with fair baselines, including service, quality
+> and cost. Buy fresh-world confirmation or a native port only for a
+> corresponding population or practical-use decision, not because B05
+> happened to be a replay. MATERIAL_DISSENT: no.
+
+**DM response and changed explanation.** I accept this recommendation.
+B05 establishes useful ordinary task capability under a specifically
+richer local action/information contract. It changes the practical
+baseline to include M:LRS, with RR as its competent simpler comparison,
+and retains S:LRS/U:LRS as measured cost/service/extreme-tail choices.
+The former physical-program tradeoff was partly contingent on original
+greedy allocation; it was not wholly a lack of useful link opportunity.
+The positive full-panel result now supplies that opportunity evidence,
+which the earlier source proof alone could not provide.
+
+Representation is not wholly untested: the causal local LRS rule is an
+implemented representable capability with verified outcomes. The limits of
+the old actor representation, finite learning and training-population
+reliability remain untested by B05. The prior B03 learned failures, B04 K
+adverses and their incurred costs remain unchanged. No individual memory
+mechanism, missing ACK, neural limitation or learning necessity has been
+identified. Complete-package value is conditional: contact count is
+preserved, but quality/J fall, policies have adverse worlds, allocation
+rights are richer, and integrated runtime has not been measured. Without
+a supplied utility for these outcomes there is no universal adoption rule.
+
+The selected B05 purchase is complete and ends here. Another fixed-path
+allocator may still improve F_user or typical age, but this study supplies
+no selected use case or conjecture worth buying it merely to chase the
+already near-floor episode maximum. Nor does it select a native rerun,
+fresh-world confirmation, changed forecast, new learning objective or
+retuning. For the parent maximum-gap/service question, a consequential
+future comparison would have to change physical eligibility and give
+ordinary alternatives the same fair-allocation rights. That is a
+recommendation to Root for a separately justified question, not execution
+authority or an admission gate. Root owns that next cross-question
+allocation; there is currently no dependent producer or required owner
+decision. The direction returns to reserve after publication/cleanup,
+with this conditional capability and its adverse evidence retained.
+
+**Cleanup boundary.** The Critic closed all read handles and released the
+two A02 source snapshots and temporary input staging. After completing
+the core diagnosis, Root also released the A01 source snapshot from its
+temporary forensic requirement. All21 A01 code identities were checked
+against published`de238594dc9d64d7be246e7b9628a63f6a53b272`; the exact
+config/native failure records also match published Git. All21 A02 code
+identities match published`4de05b0da41827cf945587003a2476584dac480e`.
+Exact-target collector previews accept all three terminal snapshots.
+The core, mapped runtime files, canonical failed/partial A01 records,
+original B04 evidence and complete unique A02 outputs remain required;
+only source copies, staging and redundant scratch are selected for
+deletion. Measured removal is recorded below after it actually occurs.

@@ -1,0 +1,102 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-10-01T00:53:04.261137Z",
+  "bootstrap_command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/f558b8cd2a9c4b29a199f298bb7af1ff/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/f558b8cd2a9c4b29a199f298bb7af1ff/experiments/candidates/uav_user_waiting/b05/run.py",
+    "--output",
+    "/home/fires/hmasd-wsl/runs/uav_user_waiting/b05_local_allocation_a02",
+    "--",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/uav_user_waiting/b05_local_allocation_a02",
+    "--launch-sha",
+    "4de05b0da41827cf945587003a2476584dac480e",
+    "--seed",
+    "29426000",
+    "--generic-summary",
+    "/home/fires/hmasd-wsl/temp/directions/uav_user_waiting/b05/local-inputs/b04_service_floor_a01/summary.json",
+    "--generic-summary-sha256",
+    "49754e61f38009681d5a842d320a1878bdd260518300a5391cc3c8678db47c47"
+  ],
+  "claim_key": "aedcfdcf8446788c90abd34b6d0f0ec00b655bafe7674443be4c46e1402ffb6b",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/aedcfdcf8446788c90abd34b6d0f0ec00b655bafe7674443be4c46e1402ffb6b.json",
+  "command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/f558b8cd2a9c4b29a199f298bb7af1ff/experiments/candidates/uav_user_waiting/b05/run.py",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/uav_user_waiting/b05_local_allocation_a02",
+    "--launch-sha",
+    "4de05b0da41827cf945587003a2476584dac480e",
+    "--seed",
+    "29426000",
+    "--generic-summary",
+    "/home/fires/hmasd-wsl/temp/directions/uav_user_waiting/b05/local-inputs/b04_service_floor_a01/summary.json",
+    "--generic-summary-sha256",
+    "49754e61f38009681d5a842d320a1878bdd260518300a5391cc3c8678db47c47"
+  ],
+  "command_sha256": "5bf6931eb4b41a83678237833c0cffab5f956f38749f2d5030feece495dc6a5b",
+  "control_observation": {
+    "observed_at": "2026-10-01T00:53:04.030537Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "4de05b0da41827cf945587003a2476584dac480e"
+  },
+  "control_root": "/home/fires/hmasd-wsl",
+  "created_at": "2026-10-01T00:53:04.055459Z",
+  "cwd": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/f558b8cd2a9c4b29a199f298bb7af1ff",
+  "direction": "uav_user_waiting",
+  "host_identity": "Jacob",
+  "identity_command": [
+    "/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10",
+    "experiments/candidates/uav_user_waiting/b05/run.py",
+    "--launch-sha",
+    "4de05b0da41827cf945587003a2476584dac480e",
+    "--seed",
+    "29426000",
+    "--generic-summary",
+    "<SOURCE>/temp/directions/uav_user_waiting/b05/local-inputs/b04_service_floor_a01/summary.json",
+    "--generic-summary-sha256",
+    "49754e61f38009681d5a842d320a1878bdd260518300a5391cc3c8678db47c47"
+  ],
+  "lead": "Codex DM (native child)",
+  "manifest_ref": "/home/fires/hmasd-wsl/runs/uav_user_waiting/b05_local_allocation_a02/launch-manifest.json",
+  "node": "local_linux",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/aedcfdcf8446788c90abd34b6d0f0ec00b655bafe7674443be4c46e1402ffb6b.json",
+  "output_root": "/home/fires/hmasd-wsl/runs/uav_user_waiting/b05_local_allocation_a02",
+  "preflight": "/home/fires/hmasd-wsl/runs/uav_user_waiting/b05_local_allocation_a02/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+      "kind": "linux_pid_start_ticks",
+      "pid": 1335494,
+      "session_id": 1335494,
+      "start_ticks": 25457919
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 1335494,
+    "process_group_id": 1335494
+  },
+  "process_exit": "/home/fires/hmasd-wsl/runs/uav_user_waiting/b05_local_allocation_a02/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+      "kind": "linux_pid_start_ticks",
+      "pid": 1335516,
+      "session_id": 1335494,
+      "start_ticks": 25457923
+    },
+    "pid": 1335516,
+    "process_group_id": 1335494,
+    "supervisor_pid": 1335494
+  },
+  "schema_version": 1,
+  "sha": "4de05b0da41827cf945587003a2476584dac480e",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/f558b8cd2a9c4b29a199f298bb7af1ff",
+  "stderr": "/home/fires/hmasd-wsl/runs/uav_user_waiting/b05_local_allocation_a02/stderr.log",
+  "stdout": "/home/fires/hmasd-wsl/runs/uav_user_waiting/b05_local_allocation_a02/stdout.log"
+}
