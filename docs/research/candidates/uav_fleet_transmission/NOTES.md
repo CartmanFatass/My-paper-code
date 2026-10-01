@@ -7388,3 +7388,67 @@ The prior B08 result is strengthened only in its constructive continuation: accu
 The critic's possible ordinary route-establishment composition is retained here as **UNSELECTED and unpriced**, with source feasibility and total support cost unresolved. It is not a fourth completed source assessment, an approved next study or a reason to run a zero-service rescue. A future choice must identify what complete outcome would change a decision, compare the capable ordinary alternative under any added rights, declare costs, and obtain applicable focused scientific review for its actual design. At the current owner boundary, no source investigation or empirical extension is selected. End this fixed B09 purchase and move the direction to reserve after publication/cleanup, with no live producer or fabricated external dependency. Re-entry requires the owner's explicit continuation and Root's later allocation within the native trial; reading/status/workflow edits do not lift that stop.
 
 Root separately read the complete original critic, terminal collection at6da7fe816 and stored primary signed-world/interval/major-tail evidence, and adopted this same scoped disposition by native message: preserve F−H J/service value, C-relative losses and the world21/world12 counterexamples without a unique repair. Root requested no additional run/review and confirmed autonomous completion of this publication, measured cleanup and the exclusive handoff section. This is coordination and adoption, not new empirical support or a permission gate for direction publication.
+
+
+### B09 final retirement scope — 2026-10-01
+
+The complete scientific reading, original ResearchCritic answer/disposition, affected shared background/standing and exact retired selection are published at `1ec491d983373bc630d5c476a0df89878d501f97`. Cleanup is now limited to the terminal scientific source snapshot `643469c7928a44aa8bd0bb6bee5b0d6e` and its managed registration, the two consumed B09 observer request JSON files, and unused B09 capture/metrics/reader/run/study drivers plus their reader-only test. Keep the useful unchanged controller/model/nominal/trace/contract/frozen-source package and controller/model tests, exact frozen source93166e7ac in Git, the complete required scientific/engineering raw corpus and compact evidence. B08's retained tracker/controller and older B04/N8 cross-direction consumers remain intact.
+
+CodeGraph was consulted first; its broad-name results were incomplete, so direct source AST/import and targeted executable-reference inspection supplied the current dependency closure. Only retired run/study/reader and the reader test consume the five proposed retired modules; retained controller/model tests import no deleted module. The nearest experiments/tests AGENTS were read. No runtime, model, RF, native or test replay is needed for unchanged useful code; validate static syntax, retained relative imports, source identity and exact deleted-file absence. Historical engineering-review local links are preserved verbatim as original advice; the closure below supplies pinned-source replacements.
+
+Fresh terminal/live-consumer checks: observer generation40 is stopped, its recorded daemon2146440 absent, all jobs ready, all23 events consumed, no wake or active job. Managed snapshot preview first encountered the documented protected `/proc/660/cwd` read refusal; the supported `--sudo-process-scan` read-only preview found the exact source eligible against its terminal claim and durable source reference. This is a resolved process-observation issue, not a deletion-policy rejection or remaining blocker. Apply only this exact snapshot, measure allocated bytes before/after and preserve claim/manifest/output records. Do not make a backup, raw replica, worktree or retention chain.
+
+
+<a id="b09-final-cleanup"></a>
+### B09 measured closure, retained source and owner handoff boundary — 2026-10-01
+
+Full scientific result/independent diagnosis and updated RESEARCH were published at `1ec491d983373bc630d5c476a0df89878d501f97` before retirement. The exact-target snapshot collector's supported protected-process scan confirmed eligibility and removed only terminal source `643469c7928a44aa8bd0bb6bee5b0d6e` plus its registration. Fresh native status at2026-10-01T12:06:36.414923Z still reports exit0, valid original exit witness, absent original runner1231375/supervisor1231374 and consistent records. Claims, manifests and canonical output remain usable after source retirement. The stopped observer daemon is absent, every event consumed, no wake or active job. The result critic is complete and read; no additional review/Pro is outstanding.
+
+| Actually deleted target | Allocated bytes before | After |
+| --- | ---: | ---: |
+| wsl_4070 `/home/wu/projects/HMASD/.git/hmasd-launch-sources/4c59c5f284bc4057ba2a0db7ff541fd8` — engineering, previously measured/deleted | 818995200 | 0 |
+| wsl_4070 `/home/wu/projects/HMASD/.git/hmasd-launch-sources/643469c7928a44aa8bd0bb6bee5b0d6e` — science | 818991104 | 0 |
+| wsl_4070 `/home/wu/projects/HMASD/.git/worktrees/643469c7928a44aa8bd0bb6bee5b0d6e` — science registration | 3670016 | 0 |
+| local `experiments/candidates/uav_fleet_transmission/b09_service_prediction/capture.py` | 16384 | 0 |
+| local same package `metrics.py` | 12288 | 0 |
+| local same package `reader.py` | 57344 | 0 |
+| local same package `run.py` | 4096 | 0 |
+| local same package `study.py` | 16384 | 0 |
+| local `tests/experiments/candidates/uav_fleet_transmission/b09_service_prediction/test_reader.py` | 20480 | 0 |
+| local `temp/directions/uav_fleet_transmission/` — exactly two consumed B09 observer requests plus directory | 12288 | 0 |
+| local B09 scientific `stdout.log`, `stderr.log` — empty collection copies | 0 | 0 |
+
+All listed targets are absent. Science-source/registration reduction is822,661,120bytes; local reduction139,264bytes; including the already-recorded engineering snapshot, **B09 total measured net allocated target reduction is1,641,795,584bytes**. Engineering registration is also absent; no extra unmeasured byte credit is added for it. This is target allocation, not host-wide free-space or Git-object reclamation. No backup, tarball, archive package, redundant raw copy or replacement checkout was made. No deleted target or cleanup tool blocker remains. Remote main has no direction B09 source/test/scratch copy outside the retired accepted snapshots.
+
+The six useful Python implementation files (`__init__`, `contract`, `controller`, `model`, `nominal`, `trace`), frozen dependency bindings and two controller/model test files remain. All eight retained Python files parse, all relative imports resolve, and their bytes exactly equal launch source93166e7ac; no numerical implementation changed and no model/native/test runtime was repeated. The older B08 anonymous tracker/controller and original B04/N8 source/evidence consumers remain intact. The deleted driver/reader/test sources stay recoverable at the exact launch commit, rather than silently promised executable on current main:
+
+- [capture](https://github.com/CartmanFatass/My-paper-code/blob/93166e7ac6cffa3c76da113afdc84e7317bb585c/experiments/candidates/uav_fleet_transmission/b09_service_prediction/capture.py), [metrics](https://github.com/CartmanFatass/My-paper-code/blob/93166e7ac6cffa3c76da113afdc84e7317bb585c/experiments/candidates/uav_fleet_transmission/b09_service_prediction/metrics.py), [full reader](https://github.com/CartmanFatass/My-paper-code/blob/93166e7ac6cffa3c76da113afdc84e7317bb585c/experiments/candidates/uav_fleet_transmission/b09_service_prediction/reader.py).
+- [run entry](https://github.com/CartmanFatass/My-paper-code/blob/93166e7ac6cffa3c76da113afdc84e7317bb585c/experiments/candidates/uav_fleet_transmission/b09_service_prediction/run.py), [study](https://github.com/CartmanFatass/My-paper-code/blob/93166e7ac6cffa3c76da113afdc84e7317bb585c/experiments/candidates/uav_fleet_transmission/b09_service_prediction/study.py), [reader tests](https://github.com/CartmanFatass/My-paper-code/blob/93166e7ac6cffa3c76da113afdc84e7317bb585c/tests/experiments/candidates/uav_fleet_transmission/b09_service_prediction/test_reader.py).
+
+These are also the pinned replacements for historical local links inside the original engineering advice; that answer remains verbatim. The historical exact source/current-reference hashes in output configs retain their original meaning after disposal.
+
+One necessary canonical scientific96NPZ/96progress copy remains under `wsl_4070:/home/wu/projects/HMASD/runs/uav_fleet_transmission/b09_service_prediction_a01/raw/`,906,805,248allocated bytes. The engineering4NPZ/4progress copy remains at its corresponding `_engineering_a01/raw/`,811,008allocated bytes. Their canonical manifest hashes, source/exit records and compact independent readings are retained; no positive/adverse/failure evidence was removed. The supplementary telemetry is published at1ec491d98 with SHA256 `37ea61c3c404b2829fb35aa17723dd12d3d6028d356e549790e5524302727fcd` and adds no scientific query.
+
+The direction is reserve with no live worker/reader/observer, unread result/advice, selected successor or external producer. Its scientific stop and retained capabilities are the independent disposition above. The explicitly requested standalone Chinese handoff is the remaining documentation deliverable under the granted section-writing turn; finishing it does not select another study. After that publication, return the file turn to Root and stop this round. Owner continuation and subsequent Root allocation, rather than elapsed time or another status request, are the concrete re-entry conditions.
+
+
+### B01–B09 cumulative own-direction exposure at handoff — 2026-10-01
+
+These totals add recorded completed scientific worker/full-reader scopes only, across different hosts and timer boundaries; they are incurred costs, not a pooled experiment or algorithm-efficiency comparison. All studies add zero new fits.
+
+| Study | Complete result missions | Native scientific steps | Recorded worker/full-reader CPU s |
+| --- | ---: | ---: | ---: |
+| B01 | 160 | 80000 | 1526.190628 |
+| B02 | 48 | 24000 | 3494.767428 |
+| B03 | 48 | 24000 | 1222.447506 |
+| B04 | 48 | 24000 | 6223.404735 |
+| B05 | 416 | 106496 | 140.041000 |
+| B06 | 1120 | 286720 | 755.535830 |
+| B07 | 768 | 196608 | 345.586312 |
+| B08 | 96 | 288000 | 9493.606080 |
+| B09 | 96 | 288000 | 28774.227778 |
+| **Total** | **2800** | **1317824** | **51975.807299** |
+
+The scientific total is about14.438CPUh. Engineering, synthetic checks, partial/failed setup, inherited acquisition and all support are additional. Known separate native correctness exposure includes26steps each for B03/B04 and244each for B08/B09; these are not scientific world replications. B03 A01 failed before episode/native/query exposure, with2.419563wall s and CPU/RSS unmeasured; its evidence remains. B08/B09 engineering CPU is14.726038/11.887242s, and B09's finite checks21.96s/static telemetry.187309s are separate. Earlier detailed correctness/support costs remain in their original entries; this subtotal does not assert a complete gross resource meter.
+
+Inherited S acquisition is a different overlapping lineage: through transmissionB07, the selected parent/fleet/evaluation chain records8fits,2calibrations,2,277,376native steps and about3,584.279CPU s across hosts/scopes. Do not add this wholesale to the own-direction table: B05–B07 evaluation occurs in both, while the original fits were not performed by these zero-fit studies. Frozen H6/SET parent training and other research branches are also previously incurred, not free assets. No repeated evaluation of the same source actors creates independent training units.
