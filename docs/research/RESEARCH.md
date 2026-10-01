@@ -10,7 +10,7 @@
 当前 Root 为 `01a0f779-ace2-74e1-85ad-e0997b61d505`（[完成Root交接并继续任务](codex://threads/01a0f779-ace2-74e1-85ad-e0997b61d505)），
 已读取前任完成的[单一 handoff](HANDOFF_20261001_ROOT_AND_FOUR_DMS.md)，接手 Codex 科学管理、选题与后继安排。
 上一轮四项研究及三项资料评估的完成／停止结论保持；旧操作不重启，历史 handoff 不改写。
-本次明确继续解除该轮 Codex 交接暂停，现正选择下一项具体工作；三项定价候选暂仍为 UNSELECTED，尚无新结果操作。
+本次明确继续解除该轮 Codex 交接暂停；现已选择三项完整比较，第四位 DM 负责 S7 的 source-only 构造与计价，见[当前分配](#root-selected-successors-20261001)。
 Claude 的独立权限和当前暂停、FSD/PPC 暂停、G33 冻结及 Milan 数据依赖保持原范围。
 
 **历史恢复：2026-09-29 21:59 UTC，owner明确要求“阅读handoff 我们继续工作”；该轮次现已完成并暂停。**
@@ -2375,69 +2375,41 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 ### Parallel allocation: independent work and rolling succession
 
 <a id="root-successor-designs-20260930"></a>
-**The previous round is complete. The owner resumed Codex research on 2026-10-01 PDT; the new Root is selecting concrete successor work.**
-All four studies have complete numerical reading, original independent scientific diagnosis,
-DM publication and measured cleanup. Root read the complete critics and responses, retaining
-S7 F−H's native J/service positive while rejecting H/F as an upgrade over C; U32's conditional
-objective gain and waiting harms; FULL's adverse purchase and mixed waiting evidence; and
-inherited local-control competence alongside B10's active learning losses. All adverse worlds
-and prior C/P_BS restrictions remain. These results identify no common failure cause.
+<a id="root-selected-successors-20261001"></a>
+**2026-10-01 PDT — owner 恢复后，Root 已选择三项完整研究，并委托第四位 DM 构造 S7 的具体后继。**
+上一轮四项结果／独立判读／清理已完成，原[handoff](HANDOFF_20261001_ROOT_AND_FOUR_DMS.md)保持历史原文。
+新 Root 读取了三项完整原建议及 DM 回应，复用适用的独立科学审阅；新增跨题 reviewer
+`/root/successor_allocation_review` 已从紧凑原结果与源接口核对，初步未发现阻止三项原比较选择的实质异议。
+其最终答复仍在完成，任何新增实质问题只阻止受影响的新投入，不成为普通执行的逐批审批。
 
-Root also read all three complete source/price exchanges, final independent recommendations
-and separate DM responses. The three priced options below remain **UNSELECTED**, without new
-implementation, result operation or execution budget. S7's route-establishment suggestion is
-separately unpriced/unselected. All four DMs authored their own sections and Root completed the
-[single handoff](HANDOFF_20261001_ROOT_AND_FOUR_DMS.md). No live operation, unread advice or
-selected successor remains from the previous round. The explicit continuation is recorded
-[above](#resume-20261001); selection is being reconciled before any new result execution.
-
-| Unselected question and what a complete comparison would add | Prospective complete native exposure | Forecast marginal CPU and support |
+| 本次分配与要改变的判断 | 已选完整比较／成本预测 | 当前责任 |
 | --- | --- | --- |
-| [Ordinary self-silence commitments](candidates/uav_fleet_adaptation/NOTES.md#post-b10-original-oracle-recommendation): can one lawful stored command preserve CJ's immediate gain over a complete episode? Compare C_ZERO, CJ, CJ_KEEP, CJ_RETURN and Hdirect_ZERO. | 0 fits; 192 H256 episodes / 49,152 steps. Full physics/policy/memory reader included in the price; finite fake fixtures are separately proposed, not executed. | Production 180–720 CPU-s; 8–16 focused support-hour equivalents; RSS .4–1.0 GiB and .12–.25 GB canonical evidence. |
-| [Complete paid RF program](candidates/uav_radio_information_cost/NOTES.md#b02-original-independent-selection-review): does literal U32_FULL earn its full sensing/report/delivery purchase against competent P_PRIOR? The two old panels cannot be subtracted to answer this. | 0 fits; 32 paired H256 worlds plus one paired H8 fixture: 66 episodes / 16,400 steps. Both full reconstruction paths and fixed checks are priced. | .7–1.5 CPU-h; 6–12 support-hour equivalents; RSS .5–1.5 GiB and .15–.35 GB canonical evidence. |
-| [Whole-episode policy search](candidates/uav_radio_uncertainty/NOTES.md#episode-search-original-advice): can frozen-P0 contextual readout development exceed equally exposed global calibration and retained strong controls? This changes the finite update/data-use construction, not whether earlier studies saw complete returns. | 4 fits in two paired blocks; 4,096 training and 736 endpoint H256 episodes / 1,236,992 steps. All final centers, 37 contrasts and full policy/update/physics reconstruction. | 1.36–4.55 CPU-h including proposed correctness; 14–24 support-hour equivalents; RSS .5–1.5 GiB and 3–6 GB compressed canonical evidence. |
+| 完整 RF 付费程序是否值得购买？旧 U32−P 与 FULL−PRIOR 面板不能相减代替。 | literal U32_FULL／P_PRIOR，32 paired H256 worlds＋paired H8；66 episodes／16,400 steps／0 fits；.7–1.5 CPU-h，6–12 support-hour equivalents。主 payload-J 与全部个人等待、删失、服务、timing、成本共同判读。 | `/root/dm_rf_purchase`，独占 `uav_radio_information_cost` 后继。 |
+| 自身静默后的合法命令承诺能否保留完整回合用途？不把个体下一动作当所有损失的原因。 | C_ZERO／CJ／CJ_KEEP／CJ_RETURN／Hdirect_ZERO，32 worlds、192 H256 episodes／49,152 steps／0 fits；production 180–720 CPU-s，8–16 support-hour equivalents。原 guard、9 contrasts、有限 memory reader 保持。 | `/root/dm_silence_commitment`，独占 `uav_fleet_adaptation` 后继。 |
+| 完整当前联合策略的参数搜索，能否超过同曝光普通校准及保留强参照？ | `uav_episode_policy_search`：CAL／CONT 两 paired blocks、4 fits；4,096 training＋736 endpoints／1,236,992 steps；1.36–4.55 CPU-h，14–24 support-hour equivalents。保留 37 contrasts 和 A／ZERO 权利区别。 | `/root/dm_episode_search`，新方向专属路径。 |
+| 如何把 S7 已显示的预测用途与普通路线建立结合，值得买哪一个完整比较？ | **只选有界 source-only 构造与完整计价，未选新结果批次。** 查明源接口、普通替代、区别性预测和全成本；无 native/model/controller/RNG 查询或保存结果再 reduction。 | `/root/dm_s7_prediction_use`，独占 `uav_fleet_transmission` 问题连续性；具体设计返回 Root 作跨题选择。 |
 
-These forecasts have not been benchmarked, and support-hour equivalents are not measured
-labor or Codex elapsed time. The source bills also retain all model/search/RNG/reader work,
-correctness and storage peaks, inherited acquisition and cumulative cost. Equal native
-exposure is not equal compute; zero new fits is not zero cost. Fresh node admission, final
-identities, finite fixtures and implementation correctness remain future engineering work
-only after a later selection. No hidden model/controller/RNG query or saved-outcome reduction
-was performed to price these options.
+选择理由有区别：RF 直接补齐已展示能力的完整采用比较；策略搜索实质改变有限更新／数据使用单位，
+保留高维搜索无效及 neighborhood fitness 不改善最终 center 的风险；静默承诺的科学范围较窄，
+但一次完整小面板可回答合法历史是否保留即时作用。S7 先把未报价建议写成实际程序和价格，不能自动重开 H/F。
+四位 DM 并行推进实质工作，不等于同时占用四批训练，也不因一线等待阻止其他独立工作。
 
-The narrowed silence question uses only the agent's own observation/action history; it buys
-no new sensor or ACK. The five old CJ origins would give KEEP and RETURN the same zero
-command, and world30012030 rules out blaming every loss on the silent member's next motion.
-Guard frequency, separation and complete utility remain unknown. The RF adviser qualitatively
-expects PRIOR may retain its advantage; a favorable paid-program J result must still be read
-with its measured waiting outcomes and prior harms, while adverse or unresolved value closes
-that fixed purchase. Policy search
-must retain CAL and the corrected all-ON A references; ZERO has richer transmitter rights.
-Its 3,484-dimensional contextual search may be ineffective at 16 updates, and neighborhood
-fitness need not improve the deployed center. None is an established repair of B10 or a
-cross-project priority ranking. Existing B04–B10, waiting, actual-S2 and S7 C/M/V stops remain.
+以上数值是已发表 source bills 的未基准测试预测，support-hour equivalents 不是已测劳动或 Codex elapsed。
+各 DM 前瞻声明精确输入／seeds／失败和有限 correctness，完成适用工程审阅并发表后，经实际节点准入执行。
+优先 `wsl_4070`，具体节点不适合时依既有方法记录原因再用本地。完整 reader、独立结果诊断、原答／回应、
+自主发表和测量清理均属于已选工作；接受 launch 或局部摘要不是完成。普通 in-scope 执行不等 Root 再批准。
 
-Final independent advice was checked against actual Astra/max turns. The earlier RF
-age_control_interface helper was a Luna/medium Scout: Root's Astra label was erroneous.
-Its original advice and a separate provenance correction remain in the notebook; the later
-Astra reviewer reconstructed the evidence independently. This model correction supplies no
-new empirical replication. Root's bounded primary reading supports only the formulation:
-[B03, histories and finite controllers, §§2.1.2/2.2 and 6.2–6.2.1](https://www.fransoliehoek.net/docs/OliehoekAmato16book.pdf),
-[Salimans et al., whole-policy smoothed return, §§2–3](https://arxiv.org/pdf/1703.03864),
-and [Mania et al., random search and return scaling, §§2–3](https://arxiv.org/pdf/1803.07055).
-The RF cost/information passages and all advisers' actual three-library, July and external
-review coverage, omissions and source corrections remain in the full original advice;
-Root does not claim whole-library reading or novelty. No theorem supplies the proposed UAV gain.
+各结果分支保持原评估：RF 正 J 伴等待损失是可见取舍而非默认采用；负面／不确定结束固定购买。
+静默若只有缓解或 KEEP／RETURN 同值，分别报告，不扩世界制造差异；world30012030 与原五个相同首命令保留。
+搜索即使改善 P0，也须面对 CAL、Bstar/Hdirect 和更丰富 ZERO 参照；二 block 条件于单一 P0，不能称确认。
+任一技术失败不改写为科学反例，已接受操作按同身份收尾；任何后来新题由 Root 比较机会成本再分配。
+Claude 暂停与问题所有权、FSD/PPC、G33 和 Milan 依赖保持原范围。
 
-Complete source bills and independently preserved originals:
-[fleet source/price and advice at855046e1](https://github.com/CartmanFatass/My-paper-code/blob/855046e1f165a3deb13571367215effc47e47555/docs/research/candidates/uav_fleet_adaptation/NOTES.md#post-b10-blind-return-source-assessment),
-[RF source/price at6fea0a36](https://github.com/CartmanFatass/My-paper-code/blob/6fea0a3650535b015474092dcdaa1b2210db4d36/docs/research/candidates/uav_radio_information_cost/NOTES.md#b02-integrated-package-source-only),
-[RF original Astra review at42b0fe1d](https://github.com/CartmanFatass/My-paper-code/blob/42b0fe1d8a5cf9645455dbce9e9705b4e6c41959/docs/research/candidates/uav_radio_information_cost/NOTES.md#b02-original-independent-selection-review),
-[policy-search source/price at623ab06f](https://github.com/CartmanFatass/My-paper-code/blob/623ab06fb29cba36299e0a3e385267ce3feb2a6f/docs/research/candidates/uav_radio_uncertainty/NOTES.md#episode-search-complete-source-price),
-[policy-search complete advice/response atd9183bdf](https://github.com/CartmanFatass/My-paper-code/blob/d9183bdf99b1e17f35e568bb6494f30861cdf3dc/docs/research/candidates/uav_radio_uncertainty/NOTES.md#episode-search-original-advice).
-The [superseded assessment assignment](archive/2026-10-01/RESEARCH-successor-assessments-completion.md)
-retains its original scope. All four nonarchived leads and launch-bound lead values remain;
-helpers are not extra DMs, and Claude's pause/ownership and other owner holds are unchanged.
+直接原意见与 source bill：
+[静默承诺完整建议](candidates/uav_fleet_adaptation/NOTES.md#post-b10-original-oracle-recommendation)、
+[RF 完整独立评估](candidates/uav_radio_information_cost/NOTES.md#b02-original-independent-selection-review)、
+[参数搜索完整建议](candidates/uav_radio_uncertainty/NOTES.md#episode-search-original-advice)。
+[被替代的未选计划及完整价格来源](archive/2026-10-01/RESEARCH-priced-successors-before-selection.md)保留，原 notebook 不改写。
 
 Root read the complete count B06, parent B07 and ordinary G B05 results, original independent
 criticisms and DM responses. It adopts the exact count-mixture and fixed learned-shortlist
@@ -3690,7 +3662,7 @@ B18 已定位的即时路径是 NumPy `_clip` 的 TypeError 后异常清理与�
 地址用于恢复与用户明确要求的联系；不产生 App 消息/回复循环。表中是责任路由，任务是否运行、
 操作是否终态及结果是否读完须从对应 NOTES/native 记录核对；发布方法不证明活跃会话已经重载。
 
-**本次接任（owner，2026-10-01 PDT）：** 当前 Root 为下表「完成Root交接并继续任务」。前任完成记录保留在原地址；当前 native agent tree 只有本 Root，前任 children 不属于本次可直接复用的原生树。新研究继承已发表证据，在具体选题时登记实际负责人。
+**本次接任（owner，2026-10-01 PDT）：** 当前 Root 为下表「完成Root交接并继续任务」。前任完成记录保留在原地址；接任时 native agent tree 只有本 Root，前任 children 不属于本次可直接复用的原生树。现已建立下列四个新原生 DM，继承已发表证据和无活动操作的完成边界；未恢复旧会话。
 四个Codex DM的最终报告均为已收尾、无活动结果操作或待读证据；owner已归档的旧DM地址只作历史来源。
 有完整文档的已完成研究由新建DM接续，继承原始正面、不利和失败证据；不恢复旧会话，也不把归档当作问题被否定。
 
@@ -3711,15 +3683,19 @@ Root 已向三个原会话各投递一次明确携带 `model="gpt-6-astra"`、`t
 
 | 责任 / 原生任务标题 | Task / host | Authoring checkout / branch | 恢复入口 |
 | --- | --- | --- | --- |
-| 完成Root交接并继续任务（当前 Root） | `01a0f779-ace2-74e1-85ad-e0997b61d505` / `local` | `/home/fires/hmasd-wsl` / `main` | Owner 明确接任并继续；维护 Codex 问题选择、跨题分配与共享控制。身份由运行环境与 native list_threads 同时核对。上一轮已完整收尾，未迁移或重启旧操作；新题实际 children 在选定后登记。Claude peer 联系本地址。[恢复范围](#resume-20261001)。 |
-| DM: joint local motion/transmitter development | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_fleet_adaptation` | `/home/fires/hmasd-wsl` / `main` | Same nonarchived registered `hmasd-direction-manager`; actual first turn verified gpt-6-astra/max, native UUID01a0f1f4-bfe5-7ca0-8b1e-4945c185f49a. B10 is complete through the full native reader, independent scientific diagnosis, own publication and measured cleanup; result4a0db1166, reserve with no producer, unread advice or selected successor. Retain original assets, both adverse endpoints, useful joint/CJ code, all B01–B10 evidence and one canonical required bulk copy. Both exact B10 source snapshots, duplicate staging and scratch are gone;1639141376 allocated bytes reclaimed, no cleanup blocker. No accepted operation moves or ownership transfers. [Resolved result](candidates/uav_fleet_adaptation/NOTES.md#b10-independent-disposition), [cleanup](candidates/uav_fleet_adaptation/NOTES.md#b10-final-cleanup), [original advice and adoption](candidates/uav_fleet_adaptation/NOTES.md#b10-original-oracle-advice). |
-| DM: radio uncertainty (formerly individual-user waiting) | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_user_waiting` | `/home/fires/hmasd-wsl` / `main` | Same nonarchived registered `hmasd-direction-manager`; first actual turn verified gpt-6-astra/max, native UUID01a0f1f5-8634-7e13-b931-e75abdb10d45. `uav_radio_uncertainty` B01 complete through full numerical/scientific reading, publication and measured cleanup; reserve with conditional U32 capability and all waiting harms retained. No running operation, open advice or selected successor. Source retained for useful P/U32 and acquisition-code imports; active consumers have finished. Waiting B01–B07 remain closed in reserve. [Full RF disposition](candidates/uav_radio_uncertainty/NOTES.md#b01-independent-review-and-disposition), [closure](candidates/uav_radio_uncertainty/NOTES.md#b01-final-cleanup), [original contract/advice](candidates/uav_radio_uncertainty/NOTES.md#b01-selected-contract). |
-| DM: radio information cost (formerly UAV development/amortization) | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_parent_adaptation` | `/home/fires/hmasd-wsl` / `main` | Same nonarchived registered `hmasd-direction-manager`; actual first turn gpt-6-astra/max, native UUID01a0f192-56da-7d31-8bfc-a068c0ddde92. B01 P_FULL/P_PRIOR is complete, independently read/diagnosed, published and cleaned. This fixed FULL purchase is closed; broader information-cost ownership remains, reserve with no live producer, unread advice or selected successor. Useful code/PRIOR and all positive/adverse evidence remain; 2,455,994,368 allocated bytes reclaimed, no cleanup blocker and RF live-source consumer released. Parent B01–B09 and lower-motion no-purchase remain closed in reserve. No accepted operation, paused direction or RF ownership moves. [Complete outcome](candidates/uav_radio_information_cost/NOTES.md#b01-complete-reading), [original diagnosis and response](candidates/uav_radio_information_cost/NOTES.md#b01-independent-disposition), [cleanup](candidates/uav_radio_information_cost/NOTES.md#b01-final-cleanup). |
+| 完成Root交接并继续任务（当前 Root） | `01a0f779-ace2-74e1-85ad-e0997b61d505` / `local` | `/home/fires/hmasd-wsl` / `main` | Owner 明确接任并继续；维护 Codex 问题选择、跨题分配与共享控制。身份由运行环境与 native list_threads 同时核对。上一轮已完整收尾，未迁移或重启旧操作；四个新原生 DM 的首个实际 turn 已逐个核对为 gpt-6-astra / max。Claude peer 联系本地址。[恢复范围](#resume-20261001)。 |
+| DM：RF 完整购买价值 | parent `01a0f779-ace2-74e1-85ad-e0997b61d505` / child `/root/dm_rf_purchase` / UUID `01a0f780-270c-7302-842e-9302428ef43f` | `/home/fires/hmasd-wsl` / `main` | 新注册 `hmasd-direction-manager`；Root 直接读本次 rollout session_meta 与首 turn_context，实际 gpt-6-astra / max。独占 `uav_radio_information_cost` 相应方向路径；已选前瞻完整比较，执行／读取／结果处置由本 DM 自主完成。保留前任已完成原操作和全部正负证据。[分配](#root-selected-successors-20261001)。 |
+| DM：静默命令承诺 | parent `01a0f779-ace2-74e1-85ad-e0997b61d505` / child `/root/dm_silence_commitment` / UUID `01a0f780-b068-7f01-b7f6-e4c32d327d40` | `/home/fires/hmasd-wsl` / `main` | 新注册 `hmasd-direction-manager`；Root 直接读本次 rollout session_meta 与首 turn_context，实际 gpt-6-astra / max。独占 `uav_fleet_adaptation` 相应方向路径；已选前瞻完整比较，执行／读取／结果处置由本 DM 自主完成。保留前任已完成原操作和全部正负证据。[分配](#root-selected-successors-20261001)。 |
+| DM：完整回合参数搜索 | parent `01a0f779-ace2-74e1-85ad-e0997b61d505` / child `/root/dm_episode_search` / UUID `01a0f781-65d4-7ba3-b412-beacc031237f` | `/home/fires/hmasd-wsl` / `main` | 新注册 `hmasd-direction-manager`；Root 直接读本次 rollout session_meta 与首 turn_context，实际 gpt-6-astra / max。独占 `uav_episode_policy_search` 相应方向路径；已选前瞻完整比较，执行／读取／结果处置由本 DM 自主完成。保留前任已完成原操作和全部正负证据。[分配](#root-selected-successors-20261001)。 |
+| DM：S7 预测用途构造 | parent `01a0f779-ace2-74e1-85ad-e0997b61d505` / child `/root/dm_s7_prediction_use` / UUID `01a0f77e-bce4-7471-9529-be2ba81a927a` | `/home/fires/hmasd-wsl` / `main` | 新注册 `hmasd-direction-manager`；Root 直接读本次 rollout session_meta 与首 turn_context，实际 gpt-6-astra / max。独占 `uav_fleet_transmission` 相应方向路径；仅 source-only 设计／全成本，未选结果运行。保留前任已完成原操作和全部正负证据。[分配](#root-selected-successors-20261001)。 |
+| Prior completed DM: joint local motion/transmitter development | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_fleet_adaptation` | `/home/fires/hmasd-wsl` / `main` | Same nonarchived registered `hmasd-direction-manager`; actual first turn verified gpt-6-astra/max, native UUID01a0f1f4-bfe5-7ca0-8b1e-4945c185f49a. B10 is complete through the full native reader, independent scientific diagnosis, own publication and measured cleanup; result4a0db1166, reserve with no producer, unread advice or selected successor. Retain original assets, both adverse endpoints, useful joint/CJ code, all B01–B10 evidence and one canonical required bulk copy. Both exact B10 source snapshots, duplicate staging and scratch are gone;1639141376 allocated bytes reclaimed, no cleanup blocker. No accepted operation moves or ownership transfers. [Resolved result](candidates/uav_fleet_adaptation/NOTES.md#b10-independent-disposition), [cleanup](candidates/uav_fleet_adaptation/NOTES.md#b10-final-cleanup), [original advice and adoption](candidates/uav_fleet_adaptation/NOTES.md#b10-original-oracle-advice). |
+| Prior completed DM: radio uncertainty (formerly individual-user waiting) | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_user_waiting` | `/home/fires/hmasd-wsl` / `main` | Same nonarchived registered `hmasd-direction-manager`; first actual turn verified gpt-6-astra/max, native UUID01a0f1f5-8634-7e13-b931-e75abdb10d45. `uav_radio_uncertainty` B01 complete through full numerical/scientific reading, publication and measured cleanup; reserve with conditional U32 capability and all waiting harms retained. No running operation, open advice or selected successor. Source retained for useful P/U32 and acquisition-code imports; active consumers have finished. Waiting B01–B07 remain closed in reserve. [Full RF disposition](candidates/uav_radio_uncertainty/NOTES.md#b01-independent-review-and-disposition), [closure](candidates/uav_radio_uncertainty/NOTES.md#b01-final-cleanup), [original contract/advice](candidates/uav_radio_uncertainty/NOTES.md#b01-selected-contract). |
+| Prior completed DM: radio information cost (formerly UAV development/amortization) | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_parent_adaptation` | `/home/fires/hmasd-wsl` / `main` | Same nonarchived registered `hmasd-direction-manager`; actual first turn gpt-6-astra/max, native UUID01a0f192-56da-7d31-8bfc-a068c0ddde92. B01 P_FULL/P_PRIOR is complete, independently read/diagnosed, published and cleaned. This fixed FULL purchase is closed; broader information-cost ownership remains, reserve with no live producer, unread advice or selected successor. Useful code/PRIOR and all positive/adverse evidence remain; 2,455,994,368 allocated bytes reclaimed, no cleanup blocker and RF live-source consumer released. Parent B01–B09 and lower-motion no-purchase remain closed in reserve. No accepted operation, paused direction or RF ownership moves. [Complete outcome](candidates/uav_radio_information_cost/NOTES.md#b01-complete-reading), [original diagnosis and response](candidates/uav_radio_information_cost/NOTES.md#b01-independent-disposition), [cleanup](candidates/uav_radio_information_cost/NOTES.md#b01-final-cleanup). |
 | DM: cumulative native service age | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_service_age` | `/home/fires/hmasd-wsl` / `main` | Registered `hmasd-direction-manager`; actual first turn verified gpt-6-astra/max, native UUID01a0f0a3-e515-7701-b805-6565d0cc4c07. Owns `uav_service_age` and matching paths. B01 one fit/source d4430e619 fully collected, verified, independently diagnosed and published; reserve, no live worker/reader/observer, unread advice or selected successor. Compact result0b358981a retains conditional W/M capability, own-initialization learning and primary/tail losses. Terminal cleanup reclaimed822185984allocated bytes, required unique evidence retained, no blocker. Returns this substantive boundary and proposed re-entry questions to Root; no automatic extra fit or new track. [Complete result](candidates/uav_service_age/NOTES.md#b01-complete-reading), [cleanup](candidates/uav_service_age/NOTES.md#b01-final-cleanup). |
 | DM: fixed correction deployment | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_correction_compression` | `/home/fires/hmasd-wsl` / `main` | Actual first turn verified gpt-6-astra/max; native UUID01a0ef78-6628-7593-b359-b608f0c80190. B01 fully read/independently diagnosed, reserve; scientific result e17f4fdf9. Cleanup complete: terminal source snapshot/registration, redundant staging, local bulk replicas/scratch/caches removed;874639360allocated bytes reclaimed. Required evidence/assets intact; no live operation, unread review or remaining cleanup dependency. [Result](candidates/uav_correction_compression/NOTES.md#b01-complete-reading), [final cleanup](candidates/uav_correction_compression/NOTES.md#b01-final-cleanup). |
 | Completed DM: registered-user B01 | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_registered_service` | `/home/fires/hmasd-wsl` / `main` | Completed B01 and full cleanup, result01e1b6e85/closureb7216efb9; no live worker, unread result or cleanup blocker. Sole direction ownership now passes to the new periodic-efficiency DM below; this old session is not restored. [Complete inheritance](candidates/uav_registered_service/NOTES.md#b01-investment-decision). |
 | DM: periodic-service efficiency | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_periodic_efficiency` | `/home/fires/hmasd-wsl` / `main` | Sole current owner of `uav_registered_service`, B02 G/O/S2; actual first turn verified gpt-6-astra/max, native UUID01a0f028-0d02-7093-9e46-fef762b6d749. Complete a02 primary panel, full reading and independent diagnosis; reserve, no live result producer, unread result, pending advice or selected successor. Original failure and both attempts' required raw evidence retained. Result8e87c58de; exact terminal snapshots/registrations, unused scratch and B02 caches removed,1,619,988,480 allocated bytes reclaimed. No cleanup blocker. [Read result and disposition](candidates/uav_registered_service/NOTES.md#b02-complete-reading), [measured closure](candidates/uav_registered_service/NOTES.md#b02-final-cleanup). |
-| DM: fleet transmission control | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_fleet_transmission` | `/home/fires/hmasd-wsl` / `main` | Same nonarchived native lead, actual first turn gpt-6-astra/max; UUID01a0f02a-2102-7aa3-be5a-adfb99e49910. B09 full native chain, actual-candidate reader and independent diagnosis complete. Retain F−H conditional J/service value; no H/F upgrade over C. No active result operation or selected successor. Measured cleanup complete:1,641,795,584allocated bytes reclaimed, no blocker. Own handoff section complete and writing turn returned to Root for its overview; owner round-stop, status/reading does not resume. B01–B08 positives/adverses, sole canonical evidence, B04/N8 live consumers and P_BS restrictions remain. [B09 reading](candidates/uav_fleet_transmission/NOTES.md#b09-complete-reading), [resolved disposition](candidates/uav_fleet_transmission/NOTES.md#b09-independent-disposition), [handoff](HANDOFF_20261001_ROOT_AND_FOUR_DMS.md). |
+| Prior completed DM: fleet transmission control | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_fleet_transmission` | `/home/fires/hmasd-wsl` / `main` | Same nonarchived native lead, actual first turn gpt-6-astra/max; UUID01a0f02a-2102-7aa3-be5a-adfb99e49910. B09 full native chain, actual-candidate reader and independent diagnosis complete. Retain F−H conditional J/service value; no H/F upgrade over C. No active result operation or selected successor. Measured cleanup complete:1,641,795,584allocated bytes reclaimed, no blocker. Own handoff section complete and writing turn returned to Root for its overview; owner round-stop, status/reading does not resume. B01–B08 positives/adverses, sole canonical evidence, B04/N8 live consumers and P_BS restrictions remain. [B09 reading](candidates/uav_fleet_transmission/NOTES.md#b09-complete-reading), [resolved disposition](candidates/uav_fleet_transmission/NOTES.md#b09-independent-disposition), [handoff](HANDOFF_20261001_ROOT_AND_FOUR_DMS.md). |
 | DM: lawful local-peer forecasting (complete) | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_local_peer_forecast` | `/home/fires/hmasd-wsl` / `main` | Registered `hmasd-direction-manager`; first actual turn verified gpt-6-astra/max, native UUID 01a0f300-8dad-7670-b5df-e98b1806afd7. B01 C/V/R fully read, independently diagnosed and published at `d7445071f`; source `13da38312`, 32 worlds/96 episodes/24576 steps/0 fits. Reserve: retain conditional V gains, R geometry and all adverses; end the unchanged sign recipe with no active producer, unread result/advice or selected successor. Complete cleanup reclaimed 810602496 allocated bytes; sole canonical raw evidence and useful code remain, no blocker. Root owns any cross-question allocation. [Reading](candidates/uav_local_peer_forecast/NOTES.md#b01-complete-reading), [disposition](candidates/uav_local_peer_forecast/NOTES.md#b01-independent-diagnosis), [cleanup](candidates/uav_local_peer_forecast/NOTES.md#b01-publication-cleanup). |
 | DM: timely joint radio control (complete) | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_radio_recovery` | `/home/fires/hmasd-wsl` / `main` | Recovered unfinished B03 responsibility with original operation/source intact. Full192/192 saved-data reconstruction and independent diagnosis complete, zero new episodes. Reserve with conditional S2 capability, R tradeoffs and all adverses; no active reader, unread review or successor. [Complete result and disposition](candidates/uav_radio_activation/NOTES.md#2026-09-29---b03-complete-reading), [original pause handoff](candidates/uav_radio_activation/NOTES.md#owner-pause-and-handoff---2026-09-29-2131-utc). |
 | Prior DM: joint motion and radio activation (complete) | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_radio_joint_control` | `/home/fires/hmasd-wsl` / `main` | B02 fully collected, reconstructed and independently read. R retained alongside T-S capability and all adverses. No active producer/unread result; cleanup69dc18003 reclaimed1646100480allocated bytes and preserved unique evidence. New successor ownership is above, not a resumed old process. [Full reading and next-investment disposition](candidates/uav_radio_activation/NOTES.md#2026-09-29---b02-complete-reading). |
