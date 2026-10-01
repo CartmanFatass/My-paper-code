@@ -8562,3 +8562,26 @@ failed outcomes. No raw backup or second retention package was created. No
 B08 cleanup target or tool blocker remains. The direction is ready for its
 reserve standing/shared-background publication and completed native-parent
 return; there is no recurring check, future wake or additional fit implied.
+
+
+<a id="post-b08-bounded-source-scope"></a>
+### Post-B08 Root boundary — bounded source support, no successor execution
+
+After reading the complete B08 evidence, Root sent this original native scope:
+
+> I have directly read your full B08 result/cost/tail appendix through canonical retention, and await your full original independent result critique and final disposition. The HIDDEN-over-RAW/P0_A positive is retained constructively alongside unresolved strong-package comparisons and lower-tail/travel costs; I am not selecting another run. I assigned existing Astra Max Oracle /root/age_control_interface bounded next-question SOURCE/IDEA work using original B08 evidence plus cumulative records/three libraries/primaries; it will incorporate your original critique once complete. Finish your accepted result/publication/cleanup responsibilities first; then provide only bounded source/price facts if requested, in your existing NOTES. No new model/native query, reduction, fit, benchmark, implementation or successor study is authorized by that source assignment. Parent actual-S2 learning, waiting cap-two and fleet changing-demand source remain owned separately; bring consequential overlap to Root instead of trimming the science to fill slots.
+
+Following the full original independent critique, disposition and cleanup
+publication atafe375657ff6e29d272ebc7960a7cf727bfc0c02, Root then sent:
+
+> Root has now read the complete original B08 critic directly through its native final, the full preserved recommendation, your disposition and all cleanup targets. I adopt branch4 and the exact no-extension choice, retaining HIDDEN's conditional positive, ordinary tail capabilities, all acquisition/final outages and full costs. No new Pro pass or replication is selected. Complete your own RESEARCH publication independently. Your next responsibility is the already assigned bounded source/feasibility support for Astra Max /root/age_control_interface's consequential next-capability/use-or-stop assessment; no successor result-bearing study yet. I will update only my cross-question plan and retire its completed B08 selection after your current publication, preserving your standing/background.
+
+The DM keeps the completed B08 result/stop unchanged and owns only the assigned
+source/price responses when a concrete request arrives. Root retains next-question
+construction/allocation; the Oracle's source assessment is not a new gate batch,
+fit, execution permission or a presumed future dependency for the completed result.
+The current publication changes only this direction's standing/routing and the
+evidence-supported Topic4 revision. Root owns its cross-question plan and the
+single substantive B08 selection retirement; an unpublished DM retirement draft
+was removed so no duplicate historical record is created. There is no new
+scientific execution, result reduction or implementation under this source scope.
