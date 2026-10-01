@@ -6119,3 +6119,37 @@ Node selection follows the assigned remote-first preference with fresh actual-no
 only once published inputs are ready. Local canonical S_F/B05 evidence is immediately
 usable; if the remote node is suitable, only these required references may need a separate
 priced, hash-verified input transfer. Deleted S raw staging is not recreated.
+
+
+<a id="b07-node-and-input-transfer"></a>
+### B07 node choice and prospective required-input transfer — 2026-10-01 04:23 UTC
+
+Published inputs are `8fd6ee5470ba350414850984a2b7408297750d6c`.
+The assigned remote-first check reached `wsl_4070` and its configured mitigated
+`/home/wu/.venvs/hmasd-gcc-31021/bin/python`. Maintained launcher, admission, resource
+preflight and compute-config bytes match local published controls exactly. The live
+remote pause/state/lead match current published main (lifted/exploring/Codex DM native
+child); its older prose is not a permission change. Git's initial non-network-shell
+fetch stalled and was terminated through its identified remote-https child, before any
+result operation. Repeating the *read-only fetch* through the configured `zsh -lic`
+network shell completed; it was not a scientific retry. Git emitted the existing
+unrelated repack `bad tree object dfe82c9813ee82191abb8385cc12a6886fd0a77b` warning;
+the selected input tree is present and readable. No repository repair/branch/index
+mutation or sparse-selection change is being attempted. New snapshots use full detached
+worktrees because the canonical sparse setting is worktree-local.
+
+Only required, immutable existing references need temporary transfer for remote execution:
+64 S_F raw files85,882,929 bytes, plus64 S_F and192 B05 full outcome JSON files38,282,166
+bytes;320 files total124,165,095 payload bytes. No deleted S raw, other baseline raw,
+model/controller query, outcome recomputation or whole-tree backup is included. This
+124MB remote input-stage cost is additional to the source quote's local-reference case;
+it is separately identified from the unchanged .06–.15GB new canonical-output estimate,
+3.6–4GB accepted-source estimate and up-to.1GB local support scratch. The transfer is
+prospective and required by the selected remote preference; canonical local originals
+remain the retained evidence. Check each remote payload against its existing digest,
+retain it only while worker/reader consumers need it, and remove those temporary copies
+at closure. No operation has yet been accepted. Actual-node admission will sample memory
+again immediately before release. The fallback local observational memory check at
+04:22:30Z found6,687,744,000 effective available bytes; that is not remote admission.
+
+Input transfer completed at04:25:04.674654Z: all320 files passed their existing full SHA256/byte identities;124,165,095payload bytes and124,837,888allocated regular-file bytes, plus directory metadata. The remote actual-node observational check at04:23:38Z passed with15,607,500,800effective bytes available. No active native research runner was present in the bounded /proc argv inspection at transfer verification; this is a timestamped observation, not a reservation. Source8fd6ee547 remains the exact scientific input; publishing this transfer/cost record does not change it.
