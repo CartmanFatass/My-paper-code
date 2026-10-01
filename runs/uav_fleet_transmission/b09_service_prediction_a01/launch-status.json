@@ -1,0 +1,11 @@
+{
+  "claim_key": "ec1d59fe992e79d1bbebfdc6ec7486df245b40a75f0bdf2f0a78941b6dc3a157",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/ec1d59fe992e79d1bbebfdc6ec7486df245b40a75f0bdf2f0a78941b6dc3a157.json",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b09_service_prediction_a01/launch-manifest.json",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/ec1d59fe992e79d1bbebfdc6ec7486df245b40a75f0bdf2f0a78941b6dc3a157.json",
+  "pid": 1231374,
+  "runner_pid": 1231375,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-10-01T08:49:47.417426Z"
+}

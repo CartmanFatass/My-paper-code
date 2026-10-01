@@ -7126,3 +7126,27 @@ blocker for this target, no backup copy and no source/code alteration.
 actual-candidate reader, source93166e7ac, four workers followed by two readers subject to a
 fresh actual-node memory check. The engineering result does not enlarge the finite checks or
 world list. Source/model/scoring/tracker/native dynamics and interpretation branches stay fixed.
+
+**B09 fixed scientific chain accepted,2026-10-01 08:49UTC.** No source change followed the
+engineering reading. Fresh wsl_4070 MemAvailable15612829696bytes exceeded the prospective8GiB
+four-worker headroom check; free disk842838958080bytes and load.14/1.11/1.24 were observed.
+The kernel separately performed its current control/source/actual-memory admission. The
+supervisor `uft-b09-scientific-93166e7ac-a01` and native kernel accepted the original96mission
+panel at source93166e7ac6cffa3c76da113afdc84e7317bb585c: four workers, then two full readers in
+the same chain. Exact identity is in
+`runs/uav_fleet_transmission/b09_service_prediction_a01/launch-manifest.json`; operation ends
+`ec1d59fe992e79d1bbebfdc6ec7486df245b40a75f0bdf2f0a78941b6dc3a157.json` and its live immutable
+snapshot is643469c7928a44aa8bd0bb6bee5b0d6e. Do not retire that snapshot or rebind/relaunch
+this operation while active. Frozen addresses/arm rotation/96H3000limits and source binding
+were verified from the accepted config; all four compact admission/config/manifest/status
+files were collected and hash/size checked, no raw data copied.
+
+Observer generation33 is armed against that same native status handle from
+`temp/directions/uav_fleet_transmission/b09-scientific-wait.json`,30s deterministic probes
+and1500s checkpoint window. Its first adopted fact at2026-10-01 08:51:14UTC is accepted/running
+with matching native runner/supervisor identities, no consistency mismatch and no probe error.
+Registration alone was not counted as adoption. This native DM remains active through
+collection/full reading, same-handle drain/rearm, independent result diagnosis, publication
+and cleanup; no reliance on the unsupported native-child App queue. Starts/checkpoints stay
+here, with no routine RESEARCH rewrite or extra empirical allocation. No scientific outcome
+has been read at this acceptance point.
