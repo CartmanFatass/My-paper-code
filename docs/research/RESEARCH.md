@@ -2585,9 +2585,9 @@ The same DM owns this study through full independent reading, publication and me
 Root checked B03 §§2.3.3–2.3.4/6.2.4, MARL-0002 ACE primary JSON p3 and DLPA2404.03037
 primary pp2–4. Their established decision objects, global-state/action-dependency rights and
 conditional-action models do not guarantee this local PPO result or make 54 categories novel.
-The complete original Oracle advice and its actual three-library/July/external/CADC coverage
-are being preserved separately from the original DM price and Root adoption in the direction
-notebook. [Retained B08 capability and ordinary alternatives](candidates/uav_fleet_adaptation/NOTES.md#b08-complete-reading).
+[The complete original Oracle advice and actual three-library/July/external/CADC coverage](https://github.com/CartmanFatass/My-paper-code/blob/6717c0ed99669b3d727993f9805486b9a6c8130b/docs/research/candidates/uav_fleet_adaptation/NOTES.md#b10-original-oracle-advice)
+are preserved in full, with the original 13-program price, revised 15-program recommendation
+and Root adoption kept separate. [Retained B08 capability and ordinary alternatives](candidates/uav_fleet_adaptation/NOTES.md#b08-complete-reading).
 
 <a id="anonymous-user-tracking-selected-20261001"></a>
 **C/M/V complete: retain accurate ordinary prediction; end this control-package purchase.**
@@ -2868,9 +2868,10 @@ Source framing is limited to acquisition cost and decision consequences. Root ve
 DOI10.1287/opre.6.4.516 is by Harris, Hauptschein and Schwartz (1958); the original advice's
 Burke attribution is preserved with an explicit correction. Root read its complete abstract
 and Burghal–Molisch's introduction/AR1-delay/NMSE passages. Those binary-communication/D2D
-models do not validate this UAV channel law or service outcome. The lead preserves original
-advice, actual three-library/July/external coverage and both corrections separately from
-adoption. [Information-acquisition cost/risk source](https://pubsonline.informs.org/doi/abs/10.1287/opre.6.4.516),
+models do not validate this UAV channel law or service outcome. [The complete original advice,
+source price and actual three-library/July/external coverage](https://github.com/CartmanFatass/My-paper-code/blob/8c9a6a8c42cd3b20e9cfd5258c197bfc75b055af/docs/research/candidates/uav_radio_information_cost/NOTES.md#b01-original-source-advice)
+are preserved with the author/count corrections and Root adoption recorded separately.
+[Information-acquisition cost/risk source](https://pubsonline.informs.org/doi/abs/10.1287/opre.6.4.516),
 [primary CSI acquisition paper](https://wides.usc.edu/Updated_pdf/Burghal2015Efficient.pdf).
 
 <a id="stochastic-target-source-root-question-20261001"></a>
