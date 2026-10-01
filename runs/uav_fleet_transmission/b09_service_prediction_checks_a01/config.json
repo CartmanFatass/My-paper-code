@@ -1,0 +1,11 @@
+{
+  "source_sha": "8e26b973d989dbcb484e22d061ec02a2bb70f00b",
+  "kind": "fixed finite synthetic correctness checks",
+  "node": "local_linux",
+  "python": "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+  "fits": 0,
+  "native_steps": 0,
+  "native_resets": 0,
+  "scope": "three published B09 test modules, one invocation; actual attempt counts emitted in junit and stdout",
+  "numeric_threads": 1
+}

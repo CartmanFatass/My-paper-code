@@ -6987,3 +6987,34 @@ completed prefix. They add six candidate executions,134 joint ticks and11 attemp
 pipelines including the injected failed RF attempt, zero native steps/resets. Total currently
 planned candidate/standalone nominal executions are416, below the same512 joint allowance;
 reader protocol tests use explicit doubles and no additional real model/native calls.
+
+**First finite execution and focused correction.** Source8e26b973d989dbcb484e22d061ec02a2bb70f00b
+was committed/pushed before every first model/controller/Lloyd query. The one local synthetic
+invocation is preserved at `runs/uav_fleet_transmission/b09_service_prediction_checks_a01/`:
+53passed/2failed,18.58s wall,17.83CPU seconds,380224KiB process peak RSS; no native reset/step
+or fit. Actual work was414 candidate/standalone nominal executions,12374 joint ticks,
+1259 RF attempts(1223 controller+36 adapter/reference),19 constructor attempts(18 real plus
+one explicit mock failure),255 proposal calls,137 canonicalizations,130 associations,
+30 projection arrays,172 Lloyd attempts. The raw emitted counters split60 original-reference
+ticks under `joint_forecast_ticks_started`; all other12314 starts use `joint_forecast_ticks`.
+The preserved aggregate sums both; the test reference counter spelling is corrected below.
+
+Both failures are test-fixture mistakes, independently agreed by the engineering Reviewer
+after reading the complete log and retained source. The absent-BS fixture wrongly retained
+station0 and omitted the station1 required by the original search ring; it correctly raised
+`UnobservedRegime`. The charging fixture assumed equal UAV1/2 batteries at t10 after the
+first tied docking allocation, but the recomputed margin exits F before repeated allocation.
+The original and audited nominal forecasts were exactly equal for both executed scenarios;
+the third low-battery scenario had not run because the wrong assertion stopped the test.
+All400 full H/F candidates/replays, sparse radio/cardinality/cache/cutoff checks, all-prior-F
+four-start tie, actual interrupted candidate prefixes and pure reader checks passed.
+No production controller/model/reader semantics change is inferred from these failures.
+
+Before further calls I correct only those test fixtures and the reference counter name,
+publish them, then rerun the two affected test functions(three parametrized cases), keeping
+all prior cost. This prospectively adds six nominal/reference executions180joint ticks,
+three private constructors,12proposal calls/eight canonicalizations/six associations/eight
+projection arrays/two Lloyd calls, zero RF pipelines and zero native reset/step. It stays
+inside the one original finite allowance. The correct allocator assertion is lower-index
+tied waiter1 receives the initial charge and F is exited by t10, with exact original/new
+forecast equality still required. Successful full search/radio tests are not repeated.

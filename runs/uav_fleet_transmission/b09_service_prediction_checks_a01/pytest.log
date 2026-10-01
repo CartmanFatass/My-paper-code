@@ -1,0 +1,125 @@
+.....F.....FB09 controller/reference attempted-call totals: {"associations": 130, "candidate_forecasts": 414, "canonicalizations": 137, "current_projections": 12, "future_projections": 18, "joint_forecast_ticks": 12314, "joint_forecast_ticks_completed": 12374, "joint_forecast_ticks_started": 60, "lloyd_solves": 172, "model_constructions": 15, "model_rf_calls": 1223, "model_score_calls": 1223, "plans": 15, "proposals": 255}
+..............B09 adapter/reference attempted-call totals: {"mock_constructor_attempts": 1, "model_constructions": 4, "model_rf_calls": 36, "model_score_calls": 44, "reference_constructions": 1, "reference_rf_calls": 6, "reference_score_calls": 7}
+.............................
+=================================== FAILURES ===================================
+_ test_fallbacks_are_original_h1_and_do_no_candidate_or_rf_work[users1-stations1] _
+
+users = [(1100.0, 1200.0), (1600.0, 1500.0)]
+stations = ((7000.0, 500.0, 100.0), None)
+
+    @pytest.mark.parametrize("users,stations", [
+        ([], ((7000., 500., 100.), (1000., 7000., 100.))),
+        ([(1100., 1200.), (1600., 1500.)], ((7000., 500., 100.), None)),
+    ])
+    def test_fallbacks_are_original_h1_and_do_no_candidate_or_rf_work(users, stations):
+        first = module.ServiceController("F")
+        reference = MemoryController("C")
+        try:
+            obs = frame(users, stations=stations)
+            for step in range(3):
+                modes = np.zeros(8, dtype=bool)
+                modes[7] = step < 2  # Original fallback handles an F exit between replans.
+>               actual = propose(first, obs, step, modes)
+
+tests/experiments/candidates/uav_fleet_transmission/b09_service_prediction/test_controller.py:194: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/experiments/candidates/uav_fleet_transmission/b09_service_prediction/test_controller.py:67: in propose
+    action = controller.propose(obs, Poison(), step, Poison(),
+experiments/candidates/uav_fleet_transmission/b09_service_prediction/controller.py:309: in propose
+    action = self.heuristic.act(observations, modes, {"users_xy": users, "bs_xy": bs})
+experiments/candidates/energy_relay_benchmark/b01/heuristic.py:310: in act
+    self.plan(obs, modes, plan_inputs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <experiments.candidates.uav_information_value.controllers.PointSetHeuristic object at 0x713212e6f5b0>
+observations = array([[0.1125    , 0.1125    , 0.33333334, ..., 0.        , 0.        ,
+        0.        ],
+       [0.15      , 0.11...       ],
+       [0.9       , 0.875     , 0.33333334, ..., 0.        , 0.        ,
+        0.        ]], dtype=float32)
+modes = array([False, False, False, False, False, False, False,  True])
+plan_inputs = {'users_xy': array([[1099.99999404, 1199.99998808],
+       [1600.00002384, 1500.        ]]), 'bs_xy': None}
+
+    def plan(self, observations, modes, plan_inputs=None) -> dict:
+        if plan_inputs is None:
+            raise ValueError("point-set planner requires plan_inputs at each replan")
+        params = self.params
+        users = plan_inputs["users_xy"]
+        bs_xy = plan_inputs["bs_xy"]
+        station_xy = observed_station_xy(observations, self.layout)
+        if bs_xy is None and station_xy is None:
+>           raise UnobservedRegime(
+                f"replan at call {self.calls}: no BS and no station {SEARCH_STATION} decodable")
+E           experiments.candidates.energy_relay_benchmark.b01.heuristic.UnobservedRegime: replan at call 0: no BS and no station 1 decodable
+
+experiments/candidates/uav_information_value/controllers.py:51: UnobservedRegime
+__ test_audited_nominal_equals_retained_motion_and_preserves_allocator_order ___
+
+    def test_audited_nominal_equals_retained_motion_and_preserves_allocator_order():
+        counts = module.CostDict()
+        model = LawfulServiceModel(counts)
+        try:
+            for scenario in range(3):
+                start = motion.legal_start(frame())
+                prior = np.zeros(8, dtype=bool)
+                if scenario == 1:
+                    start["xyz"][:] = start["stations"][0]
+                    start["battery"][:] = .2
+                    start["margin"][:] = 0.
+                    start["waits"][:] = [1, 7, 7, 0, 0, 0, 0, 0]
+                    prior[:] = True
+                elif scenario == 2:
+                    start["battery"][:] = [.5, .2, .1, .05, .01, .001, 0., .8]
+                    start["margin"][:] = [-.1, .01, .05, .1, .2, .3, .4, .5]
+                targets = start["xyz"].copy()
+                targets[:, 0] = np.clip(targets[:, 0] + 1100., 0, 8000)
+                targets[:, 2] = 150.
+                mode = np.zeros(8, dtype=np.int64)
+                module.bump(counts, "candidate_forecasts")
+                actual, digest = nominal.forecast(start, targets, mode, prior, model.raw, counters=counts)
+                module.bump(counts, "candidate_forecasts")
+                module.bump(counts, "joint_forecast_ticks_started", 30)
+                expected = motion.forecast(start, targets, mode, prior, model.raw)
+                module.bump(counts, "joint_forecast_ticks_completed", 30)
+                for field in fields(actual):
+                    equal(getattr(actual, field.name), getattr(expected, field.name), field.name)
+                assert len(digest) == 64
+                if scenario == 1:
+                    assert actual.battery[0, 1] > actual.battery[0, 0]
+>                   assert actual.battery[0, 1] == actual.battery[0, 2]
+E                   assert 0.19470470857937888 == 0.19296859746826778
+
+tests/experiments/candidates/uav_fleet_transmission/b09_service_prediction/test_controller.py:327: AssertionError
+=============================== warnings summary ===============================
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:64
+  /home/fires/.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:64: PyparsingDeprecationWarning: 'oneOf' deprecated - use 'one_of'
+    prop = Group((name + Suppress("=") + comma_separated(value)) | oneOf(_CONSTANTS))
+
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:85
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:85
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:85
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:85
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:85
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:85
+  /home/fires/.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:85: PyparsingDeprecationWarning: 'parseString' deprecated - use 'parse_string'
+    parse = parser.parseString(pattern)
+
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:89
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:89
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:89
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:89
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:89
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:89
+  /home/fires/.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:89: PyparsingDeprecationWarning: 'resetCache' deprecated - use 'reset_cache'
+    parser.resetCache()
+
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_mathtext.py:45
+  /home/fires/.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_mathtext.py:45: PyparsingDeprecationWarning: 'enablePackrat' deprecated - use 'enable_packrat'
+    ParserElement.enablePackrat()
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/experiments/candidates/uav_fleet_transmission/b09_service_prediction/test_controller.py::test_fallbacks_are_original_h1_and_do_no_candidate_or_rf_work[users1-stations1]
+FAILED tests/experiments/candidates/uav_fleet_transmission/b09_service_prediction/test_controller.py::test_audited_nominal_equals_retained_motion_and_preserves_allocator_order
+2 failed, 53 passed, 14 warnings in 16.99s

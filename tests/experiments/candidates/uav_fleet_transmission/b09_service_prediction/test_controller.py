@@ -181,7 +181,7 @@ def test_sparse_geometric_seed_uses_original_eight_lloyd_starts():
 
 @pytest.mark.parametrize("users,stations", [
     ([], ((7000., 500., 100.), (1000., 7000., 100.))),
-    ([(1100., 1200.), (1600., 1500.)], ((7000., 500., 100.), None)),
+    ([(1100., 1200.), (1600., 1500.)], (None, (1000., 7000., 100.))),
 ])
 def test_fallbacks_are_original_h1_and_do_no_candidate_or_rf_work(users, stations):
     first = module.ServiceController("F")
@@ -316,7 +316,7 @@ def test_audited_nominal_equals_retained_motion_and_preserves_allocator_order():
             module.bump(counts, "candidate_forecasts")
             actual, digest = nominal.forecast(start, targets, mode, prior, model.raw, counters=counts)
             module.bump(counts, "candidate_forecasts")
-            module.bump(counts, "joint_forecast_ticks_started", 30)
+            module.bump(counts, "joint_forecast_ticks", 30)
             expected = motion.forecast(start, targets, mode, prior, model.raw)
             module.bump(counts, "joint_forecast_ticks_completed", 30)
             for field in fields(actual):
@@ -324,6 +324,9 @@ def test_audited_nominal_equals_retained_motion_and_preserves_allocator_order():
             assert len(digest) == 64
             if scenario == 1:
                 assert actual.battery[0, 1] > actual.battery[0, 0]
-                assert actual.battery[0, 1] == actual.battery[0, 2]
+                # The initial equal-battery/equal-wait tie charges UAV1 before
+                # UAV2. Recomputed margin then exits F; no fair cycling promise.
+                assert actual.battery[0, 1] > actual.battery[0, 2]
+                assert not actual.F[0].any()
     finally:
         model.close()

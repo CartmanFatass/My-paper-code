@@ -1,0 +1,47 @@
+{
+  "actual_model_constructors": 18,
+  "candidate_and_standalone_nominal_executions": 414,
+  "counters": {
+    "b09_adapter_counts": {
+      "mock_constructor_attempts": 1,
+      "model_constructions": 4,
+      "model_rf_calls": 36,
+      "model_score_calls": 44,
+      "reference_constructions": 1,
+      "reference_rf_calls": 6,
+      "reference_score_calls": 7
+    },
+    "b09_controller_check_counts": {
+      "associations": 130,
+      "candidate_forecasts": 414,
+      "canonicalizations": 137,
+      "current_projections": 12,
+      "future_projections": 18,
+      "joint_forecast_ticks": 12314,
+      "joint_forecast_ticks_completed": 12374,
+      "joint_forecast_ticks_started": 60,
+      "lloyd_solves": 172,
+      "model_constructions": 15,
+      "model_rf_calls": 1223,
+      "model_score_calls": 1223,
+      "plans": 15,
+      "proposals": 255
+    }
+  },
+  "cpu_seconds": 17.83,
+  "diagnosis": "Both failed assertions were fixture errors independently confirmed by engineering Reviewer; full search/RF/replay checks passed. Original/new nominal equality passed scenarios0/1 before allocator assertion, scenario2 unexecuted.",
+  "failed": 2,
+  "fits": 0,
+  "joint_forecast_ticks_completed": 12374,
+  "joint_forecast_ticks_started": 12374,
+  "mock_model_constructor_attempts": 1,
+  "model_constructor_attempts": 19,
+  "native_resets": 0,
+  "native_steps": 0,
+  "passed": 53,
+  "peak_rss_kib": 380224,
+  "rf_attempts": 1259,
+  "source_sha": "8e26b973d989dbcb484e22d061ec02a2bb70f00b",
+  "status": "failed-checks-preserved",
+  "wall_seconds": 18.58
+}
