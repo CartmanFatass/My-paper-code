@@ -8006,3 +8006,26 @@ checked for live consumers and reclaimed at closure. Remote fetch succeeded
 and verified the published source, while Git's unrelated automatic maintenance
 reported an existing bad-tree/repack warning; no repository repair or history
 change was attempted, and snapshot preparation itself succeeded.
+
+<a id="b08-accepted-operation"></a>
+### B08 accepted worker and complete-reader chain — 2026-10-01 UTC
+
+The single scientific operation was accepted at03:55:27UTC from published
+source `21de06cd2cd465d3962bbe95183bbfc7c3eddeb1`, after the two explicitly
+non-admitted request corrections above. The native
+[manifest](../../../../runs/uav_fleet_adaptation/b08_local_gate_a01/launch-manifest.json)
+and [fresh actual-node preflight](../../../../runs/uav_fleet_adaptation/b08_local_gate_a01/admission-preflight.json)
+are collected unchanged; physical/effective available memory was15579402240B
+against the4294967296B floor. The bound outside-root consumption copy is used
+only to satisfy the snapshot input contract; the inherited asset digest and
+all frozen study semantics are unchanged.
+
+The assigning native child resumed its previously stopped deterministic
+observer, registered job `b08-a01`, and adopted generation35 against the native
+operation in the manifest. The first observed native status at03:56:44UTC is
+accepted/running/consistent, with the original runner and supervisor both
+present and no terminal witness. The child remains active through the complete
+worker and its sequential scalar/policy/fit reader; checkpoint rearming will
+observe this same operation, never restart it. Acceptance and healthy initial
+observation are not a scientific result. The exact1984episodes/twofits and
+one full reader remain the stopping contract.

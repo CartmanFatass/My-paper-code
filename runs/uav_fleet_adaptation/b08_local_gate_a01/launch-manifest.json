@@ -1,0 +1,96 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-10-01T03:55:27.570324Z",
+  "bootstrap_command": [
+    "/home/wu/.venvs/hmasd-gcc-31021/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/74aa489c067b43cf970655f6f8863929/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/74aa489c067b43cf970655f6f8863929/experiments/candidates/uav_fleet_adaptation/b08_local_gate/run.py",
+    "--output",
+    "/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b08_local_gate_a01",
+    "--",
+    "--out",
+    "/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b08_local_gate_a01",
+    "--launch-sha",
+    "21de06cd2cd465d3962bbe95183bbfc7c3eddeb1",
+    "--seed",
+    "29832000",
+    "--parent",
+    "/home/wu/hmasd-inputs/uav_fleet_adaptation/b08_local_gate_a01/S.pt"
+  ],
+  "claim_key": "320e567a0efa6c78dbf2293a53e0a201f89b47ed576a4c062befbebfa129ee75",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/320e567a0efa6c78dbf2293a53e0a201f89b47ed576a4c062befbebfa129ee75.json",
+  "command": [
+    "/home/wu/.venvs/hmasd-gcc-31021/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/74aa489c067b43cf970655f6f8863929/experiments/candidates/uav_fleet_adaptation/b08_local_gate/run.py",
+    "--out",
+    "/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b08_local_gate_a01",
+    "--launch-sha",
+    "21de06cd2cd465d3962bbe95183bbfc7c3eddeb1",
+    "--seed",
+    "29832000",
+    "--parent",
+    "/home/wu/hmasd-inputs/uav_fleet_adaptation/b08_local_gate_a01/S.pt"
+  ],
+  "command_sha256": "43867ee518bc99dcedad36e586b5c4d70f3d2fc95823cc5744dcd3c6bd842fd6",
+  "control_observation": {
+    "observed_at": "2026-10-01T03:55:27.450390Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "82143bd57bcc8ffd34346a0bc223e695315f7e5a"
+  },
+  "control_root": "/home/wu/projects/HMASD",
+  "created_at": "2026-10-01T03:55:27.459337Z",
+  "cwd": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/74aa489c067b43cf970655f6f8863929",
+  "direction": "uav_fleet_adaptation",
+  "host_identity": "LAPTOP-U9TDKC8A",
+  "identity_command": [
+    "/home/wu/.local/opt/hmasd-cpython-3.10.21-gcc/bin/python3.10",
+    "experiments/candidates/uav_fleet_adaptation/b08_local_gate/run.py",
+    "--launch-sha",
+    "21de06cd2cd465d3962bbe95183bbfc7c3eddeb1",
+    "--seed",
+    "29832000",
+    "--parent",
+    "/home/wu/hmasd-inputs/uav_fleet_adaptation/b08_local_gate_a01/S.pt"
+  ],
+  "lead": "Codex DM (native child)",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b08_local_gate_a01/launch-manifest.json",
+  "node": "wsl_4070",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/320e567a0efa6c78dbf2293a53e0a201f89b47ed576a4c062befbebfa129ee75.json",
+  "output_root": "/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b08_local_gate_a01",
+  "preflight": "/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b08_local_gate_a01/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 1187266,
+      "session_id": 1187266,
+      "start_ticks": 116947938
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 1187266,
+    "process_group_id": 1187266
+  },
+  "process_exit": "/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b08_local_gate_a01/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 1187267,
+      "session_id": 1187266,
+      "start_ticks": 116947941
+    },
+    "pid": 1187267,
+    "process_group_id": 1187266,
+    "supervisor_pid": 1187266
+  },
+  "schema_version": 1,
+  "sha": "21de06cd2cd465d3962bbe95183bbfc7c3eddeb1",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/74aa489c067b43cf970655f6f8863929",
+  "stderr": "/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b08_local_gate_a01/stderr.log",
+  "stdout": "/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b08_local_gate_a01/stdout.log"
+}
