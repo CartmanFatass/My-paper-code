@@ -890,3 +890,17 @@ collector preview/apply with read-only privileged process scan removed source
 snapshot`9dd81ae5eba4450da18da28dd5186a25`. Verified target allocation fell from
 820,744,192bytes to0. The next phase is the original full reader, unchanged
 source61a2dfa9c, no new fit/encoder/native/static query, no endpoint selection.
+
+### B01 full reader accepted
+
+The single`typed-joint-b01-read-a01` request was admitted19:02:36UTC at unchanged
+source61a2dfa9c on the same configured physical node. Operation
+`/home/wu/projects/HMASD/.git/hmasd-admission/ee4fc6511c76056f93e11fda408c830762b74f0522c4ac1f0384ae9a7db913f5.json`
+binds [manifest](../../../../runs/typed_joint_skill_decision/b01_read_a01/launch-manifest.json),
+source snapshot`974edfe9197e4739ae514b357c1dd26a` and canonical
+`/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b01_read_a01`.
+Generation8's first observation adopted consistent live runner1280771/start122179181
+and supervisor1280770/start122179178. The first progress read had576 complete
+episode reconstructions; no new native/static/model/fit/update exposure. This is
+the selected complete reader, with5,376 functional scorer contexts and the saved
+optimizer evidence, not an independent encoder or optimizer replay.
