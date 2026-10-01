@@ -5699,3 +5699,142 @@ actual private reads remain614400. No future implementation may silently count r
 cached contexts as independent training samples. These are arithmetic consequences, not new
 exposure or a second price. Root's original independent Oracle owns the recommendation; its
 whole final answer and the eventual allocation still need to be read before any implementation.
+
+
+<a id="post-b07-original-s2-recommendation"></a>
+#### Complete original Oracle recommendation and Root allocation
+
+The complete original final answer from the existing independent ResearchCritic/Oracle
+`/root/deep_report_review` was read directly, including its adverse cases, primary-source
+limits, exact proposed reader and outcome dispositions. Its full wording is preserved
+below separately from Root's subsequent selection. It is a continuing independent-context
+assessment, not a second empirical replication or an additional blinded review.
+
+> **Recommend one revised, parent-owned actual-S2 learning comparison. Leave the fleet timing study closed and do not create a separate fleet successor merely to occupy its owner.** The worthwhile question is whether a small contextual update to the retained S policy can improve its complete native performance under the coordinator that will actually execute its proposals, beyond global recalibration and competent ordinary control.
+>
+> This replaces the *prospective* paired-label S2 reserve; it does not reopen or reinterpret a frozen experiment. It costs **two fits, 262,144 native steps, an estimated 85–160 worker-plus-reader CPU minutes, and 5–9 support hours**. I recommend this bounded exploration despite a substantial risk of another negative result.
+>
+> This assessment continues my earlier independent-context work; it is not a new blind replication. No Root/DM conversation fork was supplied. I personally read the B07 protocol, complete result, original critic and disposition; the relevant parent B05 positives and adverse cases; prior learning failures; and the original S2 reserve. I inspected the managed collector, local-policy interface and native state/mask sources. I did not rerun policies, controllers, physics or outcome reductions.
+>
+> The full original source exchanges have been returned through native communication and published at **`e80cb994f0e23807774213bb4410fc314ec1ab98`**, in the [existing fleet notebook](/home/fires/hmasd-wsl/docs/research/candidates/uav_fleet_transmission/NOTES.md:5578).
+>
+> **The strongest objection is ordinary-controller competence plus repeated failed learning—not a missing diagnosis.** Under the actual S2 contract, existing S has mean \(J=0.478411\), against C’s \(0.482908\). S−C is −0.004497, with a world-level interval spanning zero, and −0.349 served users. S travels about 982 m less per UAV. The more expensive C_T2 reaches \(J=0.488722\) and about 0.916 more served users than S_S2, at approximately 23.4 additional CPU seconds per episode. Thus there is already a useful ordinary service/compute/path frontier; learning must improve that comparison, not merely improve its own training loss. [Parent B05 complete reading](/home/fires/hmasd-wsl/docs/research/candidates/uav_parent_adaptation/NOTES.md:4031)
+>
+> Earlier contextual development gives a low prior for success. All-on full-policy PPO continuations reduced J by approximately 0.0403 and 0.0052 in their two lineages. The subsequent bounded contextual heads also failed to establish native improvement despite changed actions and improved fitting objectives. Those are consequential adverse results. They do not identify visitation, critic quality, entropy or representation as the cause.
+>
+> B07 adds no reason to train a timing repair: it substantially reduced simultaneous physical changes while its C/Q mean J and service effects remained adverse in point estimate and uncertain in sign. Q’s useful mean-service advantage coexisted with worse service tails, greater travel and greater CPU. I retain the decision to stop that schedule recipe. [B07 result and original diagnosis](/home/fires/hmasd-wsl/docs/research/candidates/uav_fleet_transmission/NOTES.md:5126)
+>
+> The strongest constructive counterargument is narrower. S2 is a materially different closed-loop contract: it changes masks, local visibility, delivered motion and subsequent observations. S’s empty/fallback feature rows increased from 702/20,480 under all-on operation to 6,791/20,480 under S2; own position remains available when silent. Meanwhile, S2 itself materially improves complete native service. The earlier all-on fitting programs therefore have not tested direct development under this operating contract.
+>
+> That establishes an opportunity to test, not demonstrated learnable headroom. A contextual head could learn how the existing pose, navigation and visibility features should alter proposals before the bounded coordinator search. C’s local forecast and S2’s finite search may leave useful long-horizon adjustments. The competing explanation is that the ordinary coordinator already captures the usable structure, while the restricted local representation and finite optimizer cannot add value. The proposed comparison distinguishes these investment choices without claiming to identify every cause.
+>
+> I would buy the following single complete observation:
+>
+> - **Two development programs.** Retain the original B02 S asset, SHA-256 `b9e25fca68109bb50fa64fadfc90939ad6a4669058c1c0ccd1351c8bbcefe12a`, with frozen backbone and its 27 proposal labels. Train the existing zero-initialized CAL head, with 28 parameters, and CONT head, with 3,483 parameters. Both retain the existing bounded \(0.5\tanh(\cdot)\) logit adjustment. CAL permits global temperature/bias adjustment; CONT conditions on the frozen 128-dimensional representation. CAL is contained in CONT’s function class, but their finite training comparison is not a pure capacity experiment.
+> - **256 full H256 episodes per program.** Use 256 fresh common training worlds, one indexed private I tape per world, identical two-episode grouping/order and matched fresh critic initialization. Each program follows its own resulting histories. Use four update epochs per group and the existing B04 PPO algebra: full native-return targets divided by H256, normalized team advantages, sum-over-agent clipped surrogate, clipping 0.8–1.2, Adam \(3\times10^{-4}\), gradient clipping 0.5, and no entropy or KL term. Select the final checkpoint only.
+> - **The complete reserved final panel.** On 32 disjoint fresh worlds, run C_S2 and C_T2 once each; run Q, S, new CAL, new CONT, both fixed all-on head transfers and the already-paid temperature reference B* under S2 on two common I tapes each. That is 512 final episodes and 1,024 total episodes. There are 320 unique stochastic tape bundles and 288 unique maps, while all 1,024 episode resets and provisions remain charged.
+>
+> The focal predictions are positive held-out J differences for CONT−CAL and CONT−S. The fixed transferred heads test usefulness beyond assets already available. **They do not isolate the value of S2 experience:** direct learning also changes estimator, exposure and visitation. Likewise, CAL and CONT have equal episode/update budgets but different on-policy data. No additional all-on learning factorial is needed for this finite development question.
+>
+> The richer coordination rights must remain explicit. Both new actors receive only the original 114 observation/helper/navigation features—no registered map, global mask, report contents, clock or delivered-command input. The coordinator retains its registered rounded map, reports, search, rotating intervention and mask authority. It keeps the original 136-byte round, 1.456-second deadline including local actor queries, two-tick delivery delay, startup and terminal behavior. At later reports, the previous command executes for the first two ticks before the new delivery. Overrides, aliases and late fallback remain in the native return. The learned action is the **sampled proposal**, not the command eventually delivered.
+>
+> Use the parent B05 two-private-integer decoder. Replacing it with the old PPO collector’s inverse-CDF sampler would change the execution law.
+>
+> The training critic can use a **186-value pre-proposal input**: normalized native state 116, actual delivered commands 15, current mask 5 and pre-query navigation one-hots 50. At report boundaries no delivery is pending; exact \(t/256\) identifies startup, rotation and remaining horizon. Snapshot it before current queries, navigation updates or the startup assignment of proposals to actual commands. The existing 128–128 tanh critic becomes 40,577 parameters. Meter its training-only work outside the deployed deadline, while charging its CPU to development.
+>
+> This is a finite Monte Carlo baseline, not an exact physical/hardware state reconstruction. FP32 coordinates, map rounding, caches and load remain limitations. Bounded logit changes also provide no trajectory-value retention guarantee.
+>
+> The elementary bridge is legitimate but limited: for a nominal factorized proposal law, a fixed coordinator can be part of the environment transition. A likelihood-gradient estimator weights each member’s sampled-proposal score by subsequent team return; it need not differentiate through the coordinator. This follows the policy-gradient formulation, not a guarantee for this finite-bit, shared-head PPO implementation. [Sutton et al., policy-gradient theorem](https://proceedings.neurips.cc/paper/1999/file/464d828b85b0bed98e80ade0a5c43b0f-Paper.pdf)
+>
+> I checked all three literature stores and personally read the relevant primary passages:
+>
+> - **B01, MARL Foundations**, §9.4, supports the distinction between decentralized actor information and centralized training baselines. It does not guarantee success from adding a critic. [Local PDF](/home/fires/hmasd-wsl/docs/new-libs/papers/B01_Albrecht_MARL_Foundations_2024.pdf)
+> - **MARL-0007, DeCOM**, pp. 2–3, composes learned base actions and learned perturbations using neighboring proposal information. Its continuous actions, additional actor rights and jointly learned composition differ materially from fixed S2; its results cannot be imported as evidence for this proposal. [Primary JSON](/home/fires/projects/Inst-sci/papers/MyLib/json/MARL-0007.json)
+> - **ICLR-2025-83ce241ce40aef32225eb2833ca2363c, Residual-MPPI**, pp. 1–5, strengthens the ordinary-planning alternative. Its maximum-entropy prior and unchanged-dynamics assumptions do not hold automatically for S under S2. [Primary PDF](/mnt/c/Projects/My-lib/.local-formal-capture/corpus/papers/iclr-2025/83ce241ce40aef32225eb2833ca2363c/arxiv-2407.00898.pdf)
+>
+> This is an ordinary policy-development comparison, with no algorithmic novelty claim. July G35’s competent current-state comparison and the September external-review record also argue against treating additional dynamics or partial observability as proof that richer learned memory is necessary.
+>
+> The marginal bill is substantial enough to keep explicit:
+>
+> | Work | Complete proposed scope |
+> |---|---:|
+> | Native execution | 1,024 episodes; 262,144 steps; 1,024 resets plus constructor |
+> | Fitting | Two actor–critic fits; 1,024 head and 1,024 critic updates |
+> | Optimization exposure | 655,360 head gradient rows; 131,072 critic replay rows |
+> | New labels/expert acquisition | None |
+> | Local requests | 327,680, including 40,960 C/Q rankings |
+> | Coordinator geometry ceiling | 7,022,592 matrices; 1,755,648,000 user links |
+> | Recurring communication ceiling | 8,912,896 bytes, plus 409,600 map-provision bytes |
+> | Worker CPU estimate | 70–120 minutes |
+> | Reader CPU estimate | 15–40 minutes |
+> | Support estimate | 5–9 hours |
+> | Streaming RSS / durable evidence | 0.5–1.5 GiB / 0.5–1.5 GB |
+> | Transient source snapshot | Approximately 1.7 GB |
+>
+> The worker estimate extrapolates published episode rates to **3,844.665 CPU seconds before new update/serialization work**; it is not a benchmark. Frozen hidden/logit caching avoids an otherwise additional 655,360 backbone replay passes. Preserve the 256 rollout-group head identities.
+>
+> The reader budget covers every trajectory’s source, asset, report, delivery and native-outcome checks; complete actor/head replay including training; critic feature/target/provenance checks; saved search arithmetic; and up to 1,300,480 independent candidate-state reductions. It does not promise native reruns, full C rankings, optimizer replay or every unselected candidate’s physics.
+>
+> This removes 393,216 native steps from the old 655,360-step reserve by buying a **different method**. It does not erase sunk acquisition, failed fitting or integration costs. The published fleet lineage through B07 already records eight fits, two calibrations, 2,277,376 native steps and approximately 3,584.279 scoped CPU seconds; overlapping parent histories must not be added as independent costs. Exact unused seeds, the new implementation/reader and fresh node admission remain unresolved execution details.
+>
+> The reading should average the two private tapes within each world before paired uncertainty calculations. The 32 worlds estimate performance of the particular resulting assets. There is **one independent training realization per arm**, not hundreds of training replications. Report native J, mean service, service tails, quality, travel, CPU, deadline/fallback exposure and adverse worlds together.
+>
+> | Outcome | Consequence |
+> |---|---|
+> | CONT improves beyond CAL, S and transferred assets, and changes the ordinary-controller benefit/cost comparison | Supports a narrow constructive continuation. Independent training replication becomes worth considering; adoption and expansion are not automatic. |
+> | CAL matches or exceeds CONT | Prefer the simpler development program if its complete comparison is useful; no support for contextual-capacity investment. |
+> | Existing transferred assets perform as well as new development | Retain the useful transfer result; further fitting is unsupported. |
+> | New heads beat S but fail to improve the ordinary service/path/compute frontier | Record limited development evidence without a practical adoption claim. |
+> | Negative or uncertain final differences | End this bounded development program. Do not automatically buy more epochs, heads, critics or a larger final panel. |
+>
+> I found no comparably supported distinct fleet successor. Permanent vehicle loss is implementable, but in the present interference-limited host removing a transmitter can improve service; a four-survivor capacity ceiling does not establish a recovery deficit. The older static failure case favored competent no-response control. Uncertain-law learning requires a new contract because retained N8 uses known deterministic laws. Moving-demand and heterogeneous-team questions remain possible, but this review did not establish a complete, favorably priced comparison for either.
+>
+> Accordingly: **revise and select one common actual-S2 exploration if Root funds this learning question; retain the B07 stop and assign no separate fleet study now.** Agreement between the two Oracles is not additional empirical evidence.
+>
+> **MATERIAL_DISSENT: no.** There is no unresolved disagreement with Root’s current source-only allocation boundary. My consequential recommendation is the single revised comparison above, not revival of the old paired-label purchase or a duplicate fleet program.
+
+**Root allocation, original wording:**
+
+> Root has read your complete published source work e80cb994f0e23807774213bb4410fc314ec1ab98 and BOTH full Oracle recommendations. I selected the single actual-S2 learning study under the existing parent DM as B09; your price is its original complete source, not a second study. Preserve the original advice/exchanges in your NOTES and let the parent DM inherit them; no S2 implementation is assigned to this direction. B07 remains closed with all retained capabilities/adverses.
+
+**DM substantive response.** The final recommendation preserves the source interfaces, complete
+price, finite-density/runtime limits, different on-policy training histories and adverse ordinary
+comparators established above. I accept that the direct package is a distinct prospective
+comparison, with no identified visitation cure, novelty claim or implied value guarantee. The
+ordinary-controller frontier and repeated finite-learning failures remain material contrary
+evidence. Root selects one parent-owned B09; the parent DM owns its implementation, original
+review response, prospective contract, admitted execution and reading. This direction supplies
+the preserved original source record and makes no S2 copy. B07 remains closed with its complete
+positive/adverse evidence and measured cleanup. No result exposure or new reusable empirical
+judgment arose from this source task, and no further selection review is manufactured here.
+
+<a id="changing-demand-source-scope"></a>
+### Source-only changing-demand assignment — 2026-10-01 UTC
+
+Root assigned a new bounded source/feasibility question to this same DM and its existing
+independent Oracle after the S2 allocation. The consequential question concerns service demand
+that changes within a mission; actual user motion, demand intensity and reward reweighting must
+remain distinct candidate contracts. I will supply the concrete source/evidence/cost facts
+requested for the Oracle's best candidate, including lawful local history and association,
+known/hidden state, actual clocks and host coupling, ordinary matched-rights alternatives, and
+complete worker/reader/support/storage cost. A supported stop is a valid recommendation.
+The source scope permits reading and arithmetic only:0 new native/controller/model/allocator
+queries,0 fits/labels,0 outcome reductions,0 implementation/tests/benchmarks/pilots. No result
+study is selected in this direction; it remains reserve while this substantive preparation runs.
+Ownership of P0 gating, service-waiting and parent S2 stays with their existing leads. I own
+this append-only notebook and will preserve the complete original question, substantive fact
+exchanges, final advice and response before any eventual result selection.
+
+#### Full original Root changing-demand assignment to the Oracle
+
+> Root has read your complete final, the other Oracle's complete final, all original source exchanges and the full price at e80cb994f0e23807774213bb4410fc314ec1ab98. I selected ONE parent-owned B09 direct actual-S2 comparison exactly at 256 training episodes per CAL/CONT arm plus 512 finals, with the 186-input pre-proposal critic, original I decoder, immutable hidden/logit cache and full declared reader. Existing parent DM owns it. I adopt the B07 stop and decline an extra fleet S2 copy or unpriced loss/unknown-law experiment. Please first send the parent DM once your exact original Root source question, complete recommendation and original source/cost exchanges including corrections; preserve your independent wording separately from this adoption. Artifact handoff is not another selection review.
+>
+> NEW bounded SOURCE question for you and the same fleet DM: What worthwhile cooperative-control capability, if any, should we pursue when service demand changes WITHIN a mission? The current successful and adverse N5/N8 work mostly concerns static users and fixed demand; developing service under evolving demand is a consequential different mission question. Do not assume forecasting, recurrent learning or recovery is necessary. Distinguish actual user motion, demand-rate change and objective reweighting; select one scientifically meaningful, feasible contract if any, rather than combine them. This is not a continuation of the phase recipe and not pressure to turn its negative result positive.
+>
+> Your preceding assessment correctly left moving-demand/heterogeneous-team ideas without a complete favorably priced comparison. Root now purchases the missing bounded source/design work on CHANGING DEMAND specifically, while three other DMs carry selected studies. Decide whether a complete comparison is worth its whole cost against competent ordinary current-state and lawful-history control. Prefer an existing actual task/interface when it supports the question; a narrow owned host extension is an option only if its task value and semantics justify it, not merely to manufacture a learning advantage. Show what changed task consequence makes the question useful, and what a negative or uncertain outcome would change. A clear recommendation to stop this candidate remains a valid scientific result; no forced promising label or algorithmic novelty claim.
+>
+> Use the full relevant project positives/adverses: local spatial history and peer forecast, G0/S4 and long-mission service/energy/routing results, ordinary C/Q/S/managed service capabilities and their scoped limits, July/external records. Use all three local libraries and needed primary web sources, reading consequential passages rather than treating generated hints as evidence. If applying tracking, filtering, active sensing, control or a simpler decision model, map its state/action/observation/assumptions explicitly and identify missing joint motion, interference, censored visibility, anonymous association or allocator coupling. The ordinary alternative receives the same lawful history/feedback/control rights; a richer model is not automatically a richer capability.
+>
+> The existing fleet DM /root/dm_fleet_transmission owns its NOTES and can supply only concrete source facts for your best candidate: actual demand evolution and agent clocks, current observations and identities/association, private memory and known vs hidden laws, coordinator/map/report validity, service/energy/routing/termination, and required owned adapter/reader work. Give the complete minimum useful contrast and all fits/labels/native/controller/model/reader queries, transient/canonical storage, CPU/RSS/support and old-vs-new costs. Source facts may disclose that the older H3000 contract is costly or that a simple forecast already exhausts the useful opportunity; neither implies a mandatory pilot or new implementation.
+>
+> Coordinate true overlap with the active P0 own-Tx gate, C+cap-two+LRS and now-selected S2 development through Root; do not add their budgets or use one as another's required gate. No candidate count, new arm, phase or threshold sweep is requested. SOURCE ONLY: no native/controller/model/allocator queries, outcomes recomputation, fitting, test benchmark, implementation or pilot. Return your full original advice and source exchanges to Root for the next allocation decision.
