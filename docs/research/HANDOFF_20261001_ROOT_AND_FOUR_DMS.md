@@ -84,7 +84,270 @@ Oracle、Scout 和 Reviewer 是辅助工作，不计为第五个 DM。
 <!-- DM_FLEET_TRANSMISSION_BEGIN -->
 ## DM：机群发射控制与 S7 预测用途
 
-待 /root/dm_fleet_transmission 完成当前研究后本人填写。
+**本节由 /root/dm_fleet_transmission 本人于 2026-10-01 UTC 完成。方向
+`uav_fleet_transmission` 为 reserve；B01–B09 均已完整判读、独立审阅、发表和收尾。**
+本轮最后的 B09 保留“预测在这个规划器内有原生服务价值”的正结论，同时结束明显落后于
+C 的 H/F 完整规划包投入。没有运行中的 worker、reader、observer、未读意见或已选后继。
+本节完成后释放独占写入轮次给 Root，停在 owner 明确要求的交接边界。
+
+### 延续的问题、责任与不能丢失的解释
+
+目前问题是：**在用户已经移动的原生任务中，合法用户历史能否提高完整协同服务，超过
+有能力的当前状态控制？** 更早的 B01–B07 分别研究发射授权、静默移动、时间互补、普通
+随机控制、反馈节奏与联合更新。它们保留了一批普通控制能力和固定学习资产的条件性价值；
+目录连续不代表九批是同一个估计量，也不能把旧 S1 的归一化 J 与 S7 的 H3000 总 J 混用。
+
+本 DM 通过可修订方案承担问题内的科学推理与执行；Root 负责新问题与跨题分配。当前原生
+句柄为 `/root/dm_fleet_transmission`，线程标识 `01a0f02a-2102-7aa3-be5a-adfb99e49910`；
+共享主工作区 `/home/fires/hmasd-wsl` 的 `main`。当前没有要迁移或重启的操作。
+若 owner 以后明确继续且会话未归档，可按当前 RESEARCH 路由复用；已归档则由新 DM 继承
+已发表证据，不复活旧句柄。状态询问、读交接文件和工作流编辑均不解除本轮停止。
+
+判断必须分开：任务存在机会、表示实际准确、控制实际改变、完整包有用途，以及能否通过
+学习进一步发展。B08 建立准确表示却没有完整增量；B09 新增了规划器内的 J／服务正收益，
+但没有使该规划器超过 C。九批自身均为 **0 新 fit**，不诊断一般学习成败。P_BS 作为 C 的
+条件性性能参照仍带有既往世界 28100224 的储备电量／默认替换限制；本轮相对胜出不清除它。
+
+### B01–B08 累计能力、反证与停止范围
+
+| 研究 | 保留的实质结论 | 不能改写的限制／反证 |
+| --- | --- | --- |
+| B01，固定 H6／SET 的发射授权 | N8 的 E 相对 all：H6 J +.096344、服务 +6.235125；SET J +.254920、服务 +15.029375，均为 16/16 世界服务增加。普通 C/E 同样有能力。 | N4/H6 E−all J −.02005、服务 −1.474375，10 降／3 升／3 同值；不作全配置默认或学习修复。 |
+| B02，普通静默移动 R 对 C/J | C/J/R 平均 J .615036/.631313/.648963，服务 39.049875/40.300750/41.853；R 的静默再定位与恢复真实激活，有完整收益。 | 保留质量、服务尾部和路径代价；不证明必须采用 option 或学习。完整 C/J/R 比较的运行代价不同。 |
+| B03，完整继续后果 T 对 R | T−R J +.007400 [.001879,.014257]，服务 +.558625 [.148197,1.038134]；J 为 9 升／7 同值，普通完整后果判断有条件收益。 | 服务有一个负世界；世界 11 的服务／路径取舍仍在。T 约为 R 的 4.019 倍回合 CPU，不证明普遍优势。A01 的执行前技术失败保留。 |
+| B04，固定两次机会的时间互补 | T/G2/A2 平均 J .658213/.660257/.661963，服务 42.5455/42.72575/42.969625；六个首次承诺牺牲早期价值而换取完整收益。80 个实际预测的命令、mask、服务均核验。 | 已知有限模型和固定时序已经能形成该能力，不推出最优性或学习必要性；J 不含路径成本，质量／路径不利仍在。原始 B04/N8 证据有跨方向消费者，不能删。 |
+| B05，普通评分尾部采样 G 对 Q 与固定 S | S_L1−G J +.023431 [.012843,.033524]、服务 +1.868；S_L0−G J +.013616 的区间跨零，但保留服务／路径价值。G 对 Q10 的平均 J 增量未定，服务 p10／质量／计算等取舍有用。 | 世界 29630013 的 S_L0/S_L1/Bstar_L0 六条轨迹有原生零服务；普通臂本面板无此例也不等于安全。固定资产重复评价不增加训练复制，G 未吸收 S_L1 并不证明学习必需。 |
+| B06，H4／计数损失触发 E／H1 | E 对两 S 的 H4 平均路径减少约 41%/44%；对 H1 有较高 J／服务、较低 CPU。普通 E 也保留低运动能力。 | E−H4 J／服务均未定，不能称保持；H1−H4 在所有六个普通／S 父策略上 J 均下降。S_L0 世界 29670024 的 19 tick 零服务不被 E 覆盖；首次额外查询是 tick30/agent0，原 tick26 说法已更正。 |
+| B07，同步／分散更新，匹配个人时钟和抽样 | 分散显著减少同时物理变化、降低路径；Q10 的平均服务能力仍在。 | C/Q10 的分散−同步 J／服务均为负均值、区间跨零；不证明服务保持、优越或等价。4 个 offset 与 2 个动作 tape 均在世界内平均，不能虚增样本量。 |
+| B08，原 S7-S2 的 C/M/V | 普通匿名跟踪和固定 t+15 外推在自身 68,979 个来源绑定预测上，平均误差 .733m，对保持最后坐标 33.218m；32 世界均改善，实际轨迹均改变。 | V−M J −21.410 [−67.939,25.119]、累计 QoS −32.818 [−74.707,9.071]；M−C/V−C 亦未建立完整增量。少数大误差、身份切换与服务／能源不利保留；准确表示不等于 H1 质心／中点控制有用。 |
+
+每批的完整正反世界、原始独立诊断与本人处置仍在
+[B01](candidates/uav_fleet_transmission/NOTES.md#b01-complete-reading)、
+[B02](candidates/uav_fleet_transmission/NOTES.md#b02-complete-reading)、
+[B03](candidates/uav_fleet_transmission/NOTES.md#b03-complete-reading)、
+[B04](candidates/uav_fleet_transmission/NOTES.md#b04-complete-reading)、
+[B05](candidates/uav_fleet_transmission/NOTES.md#b05-independent-disposition)、
+[B06](candidates/uav_fleet_transmission/NOTES.md#b06-independent-disposition)、
+[B07](candidates/uav_fleet_transmission/NOTES.md#b07-independent-disposition)、
+[B08](candidates/uav_fleet_transmission/NOTES.md#b08-independent-disposition)。
+这些旧比较均已结束，没有因 B09 或此次交接重新获得加世界、调参数、训练或确认的授权。
+
+### 本轮 B09：固定比较及完整结论
+
+原始源代码／成本询问、完整 Astra Max 选题建议及实际文献覆盖、Root 独立选择与前瞻合同，分别见
+[源码与报价](candidates/uav_fleet_transmission/NOTES.md#post-b08-source-feasibility)、
+[完整原建议](candidates/uav_fleet_transmission/NOTES.md#b09-original-selection-advice)、
+[Root 采纳](candidates/uav_fleet_transmission/NOTES.md#b09-root-adoption)、
+[固定合同／L0](candidates/uav_fleet_transmission/NOTES.md#b09-selected-contract)。
+此前三处书库、July 和外审的实际覆盖由原建议保留；它们支持比较结构，不保证 S7 效果，
+也没有给出新颖性或一般可学习性结论。已完成的完整选择块按 Root 授权原样归档：
+[精确计划历史](archive/2026-10-01/RESEARCH-service-prediction-completion.md)。
+归档源为 `ddedb339ad268b6e327fe6202dd870fbcc8d9fe2`，原选择为 `2376d6835`；只退役计划，未改判历史。
+
+原生宿主保持 fault-free S7-S2、N8/U30/H3000、dt1、每用户 1Mbps、已有移动规律及无线／路由／
+能源／奖励／终止。32 个新配对世界 **29890001–29890032**，C/H/F 各一条，完整 96 回合。
+C 为精确 B08 C/P_BS。H/F 共用匿名跟踪、估计当前坐标 `clip(last + age*v)`、合法 BS 观测／
+记忆／先验优先级、30 tick 计划钟与原 shield；H 将当前估计保持到未来，F 外推到 10/20/30。
+H 因而不是 B08 的保持最后坐标 M。二者共用四种初始布局和两轮有限 pattern 搜索，
+每个候选模拟 30 个联合运动／能源 tick，并在三个时刻计算 QoS 与返航代价；没有按结果扩展搜索。
+空用户／无合法 BS 的原 fallback 保留。全部八机观测免费汇集，是继承的信息合同。
+
+模型由公开配置独立构造，不复制实时隐藏状态、真实用户 ID／速度／未来／RNG；没有 reset/step。
+未知用户按零服务计入 30 人分母但不产生竞争，**这不是服务下界**。省略 guard、中间关联、
+部分能量顺序和原生势函数／事件等，预测不是精确原生后续。F−H 是固定未来输入干预的完整
+闭环效果；后续观测／搜索不同是其后果，既不破坏该比较，也不识别准确率的中介作用。
+
+| 指标 | C | H | F |
+| --- | ---: | ---: | ---: |
+| 平均原生总 J | 2156.274 | 1636.023 | 1701.997 |
+| 平均 QoS／step | .731664 | .561128 | .581384 |
+| 平均最差用户累计 QoS | 1511.078 | 775.514 | 828.979 |
+| 平均最长个体零交付间隔，tick | 378.781 | 1144.906 | 1060.281 |
+| 全队平均推进耗能，Wh | 1387.118 | 1239.261 | 1240.642 |
+| 平均储备不足 UAV-step | 116.313 | 278.344 | 147.625 |
+| 平均控制提案 CPU／任务，s | .903 | 172.093 | 171.810 |
+
+| 配对差 | 总 J 均值 [描述性 t95] | 累计 QoS 均值 [描述性 t95] | J／QoS 均为升／降／同值 |
+| --- | ---: | ---: | ---: |
+| **F−H，主要比较** | **+65.974 [12.281,119.668]** | **+60.769 [9.617,111.922]** | **17／9／6** |
+| F−C | −454.277 [−640.312,−268.243] | −450.839 [−630.752,−270.925] | 6／26／0 |
+| H−C | −520.251 [−698.775,−341.727] | −511.608 [−685.056,−338.160] | 3／29／0 |
+
+F−H 的主要 J 增益来自 QoS +60.769，另有返航罚项约 +5.253、势函数 −.049；不是只靠返航
+罚分减少。其 J 中位数只有 +3.968；世界 28、31 贡献约 51% 的有符号总增益，九个负世界
+和六个完全同轨世界不删除。以上是固定程序在 32 外生世界上的描述性区间，不是独立训练
+复制、等价检验或多重性校正的确认；J 和 QoS 共享分量，不能算两个独立证明。
+
+F 在自身 **132,480** 个来源／时距记录上，10/20/30 平均误差 **.375/1.208/2.484m**，
+对保持同一当前估计的 **21.654/43.130/64.450m**。每个世界／时距均值改善，但 2,008 个
+记录更差，最大误差 183.928m，RMSE 9.507m；没有模糊、无绑定或未来截尾预测来源。
+H/F 仍保留 6/7 次身份切换和各 8 个模糊当前点。准确性只覆盖其自身表示到的用户。
+
+H/F 执行 **3027/3044** 个模型搜索轮和 **243276/242468** 个候选。F/H 在 26/32 世界
+物理轨迹改变；六个同轨世界为 08、10、12、13、19、21，各自仍有 77–97 个模型轮，
+并非规划器未执行。H−C/F−C 在全部 32 世界改变轨迹。
+
+两个关键反例约束下一次解释：
+
+- **29890021：** H/F 全 3000 步没有服务，30 名用户全部从未交付，无原生路由或直接 BS
+  连接；各自执行 96 轮、6996 候选，所有**选中**候选在三个时刻都预测零 QoS。
+  第一轮选当前位置、下一轮选 carried。C 使用同一个全程错误的推断 BS（约 1159.56m
+  误差），却得到 1610.210 累计 QoS 和 4750 直接 BS 连接 UAV-step。不能归因于空搜索，
+  也不能用所有选中方案都过度乐观预测正服务来解释；共同先验误差本身不足以解释差异。
+  未声称所有未选候选也为零，未识别足以修复的改动。
+- **29890012：** H/F 两名用户从未服务、3202 个储备不足 UAV-step、最低电量 .06894，
+  最终八机全低于储备阈值；C 无从未服务用户、仅一个储备不足步、最终无低储备成员。
+  此例已获得真实观测／记忆 BS，不能以全程 BS 未知排除。
+
+F−C 平均最差用户累计 QoS 少 682.099，用户 p10 少 629.887；最长个体零交付间隔增加
+681.5 tick [370.365,992.635]。F−H 的个体尾部改善未定。H/F 在所有世界少运动、少推进
+耗能，仍明显少服务；这是有测量的取舍，不能称匹配服务下更高效率。全批 cutoff／耗尽
+均为零，不建立安全或 H3000 以外持续性。世界 14、24 同时胜 H 和 C 的正例保留；没有
+能提前合法识别这些世界的选择器。世界 31 最大 F−H 增益仍低于 C；世界 2 服务下降与
+储备改善并存，不能用一个能源指标覆盖服务损失。
+
+**本人的判断与独立复核一致：保留预测在该规划器内的用途，保留 C/P_BS 性能参照，
+结束当前 H/F 完整包投入。** 可能的问题包括短时域内建立路线、候选／同分行为和不完整
+用户表示，但未分离出唯一原因。B09 不追认 H1 是 B08 失败原因，更不支持“预测无用”或
+“需要学习预测”的结论。原始 ResearchCritic 全文及独立检查范围见
+[完整诊断](candidates/uav_fleet_transmission/NOTES.md#b09-original-result-critic)，
+本人回应及 Root 另行采纳见[处置](candidates/uav_fleet_transmission/NOTES.md#b09-independent-disposition)。
+`MATERIAL_DISSENT: no`；没有用一致意见替代实验复制。
+
+### 已验证范围与实际完整成本
+
+科学 worker／完整 reader 均结束，所有 96 个任务到 H3000 正常截断，无科学失败回合或替换
+世界。reader 为 **VERIFIED / errors=[]**：全部 288000 原生步、288000 实际 proposal／feedback
+及 **485744** 实际候选完整重建；38 个 launch-source 绑定及 26 个冻结依赖身份核对，
+每个配对世界的全部 3001 边界用户路径一致。没有遗漏／未知／中断候选、未验证 rank 或
+虚构未执行搜索。独立 critic 自己核对 96 回合与 126 组符号／均值归约、主要区间和源身份；
+没有重跑每个远端 NPZ、控制器或独立原生 RF。原完整 reader 也不声称证明近似模型等于真实未来。
+
+工程的独立 REF/C/H/F 四条 61-step 流共 **244** 原生步，C 与原参照逐项一致；该前缀没有
+任何用户观测和候选，非空搜索正确性另由已计费的有限夹具与后续完整科学回放支持。
+55 个不同有限检查通过，首次两个夹具预期错误及修正仍保留；没有把这两次失败隐藏为未执行。
+
+| B09 支出范围 | 已付数量／测量 |
+| --- | --- |
+| 科学 native | 96 回合、288000 步、192 stream/probe 构造、96 reset、0 fit／标签／更新 |
+| 科学执行＋完整回放 | 971488 候选预测、29144640 联合 nominal tick、2914464 RF／service 调用，128 私有模型 |
+| 工程与有限检查 | 244 额外 native 步；检查另有 420 候选／独立 nominal 执行、12554 tick、1259 RF 尝试；总 153 个真实模型构造及一个模拟构造失败 |
+| 科学完整 CPU／wall | 28774.227778 CPU s；9566.774583 wall s，4 个 worker 后接 2 个 reader，包含 reaped 子进程与父链计时 |
+| 工程／有限检查／静态遥测 | 11.887242／21.96／.187309 CPU s；含前两项约 **8.002 CPU h**，静态遥测另计 |
+| 内存 | worker／reader／parent 峰值 619936／652304／484704 KiB，各进程峰值不相加作同时峰值 |
+| 科学原始证据 | 96 NPZ＋96 progress：906262386 logical／906805248 allocated bytes；ndarray 未压缩 6954552608 bytes |
+| 工程原始证据 | 4 NPZ＋4 progress：789587 logical／811008 allocated bytes |
+| 支持成本 | 源码／设计、实现、独立审查、准入、解释、发表和清理均另计且未完整计时；24–40 人时当量只是原预测，不能报为已测劳动 |
+
+控制提案约 190 倍于 C 的 CPU 代价未计入 J。上述是占用节点下完整程序的已测成本，不是
+孤立速度基准或物理实时保证。两个 reader 阶段均不增加 native 样本，0 fit 也不等于廉价。
+
+本方向 B01–B09 的**已完成科学**总量为 **2800 回合、1317824 原生步、0 新 fit、
+51975.807299 已记录 worker／full-reader CPU s（约 14.438h）**。各批依次为
+160/48/48/48/416/1120/768/96/96 回合；不同宿主／计时边界只作已付成本相加。
+工程、有限检查、支持与原始资产获得仍另计：B01 原资产等价检查 352 native 步，B02
+含独立复核的正确性检查 2013 步，B03/B04 各 26 步，B08/B09 各 244 步；这些明确单列
+合计至少 **2905 native 工程步**，并非完整所有检查的总计。B03 A01 在任何回合／native／
+查询前失败，2.419563 wall s、CPU／RSS 未测。原始两份 H6/SET final45 的 run-fit 墙时
+合计 158.146 分钟，不能把继承资产当成免费或本轮新增训练。至 B07 的另一条继承 S 链记录 8 fits、2 calibrations、
+2277376 native 步／约 3584.279 CPU s，**与本表 B05–B07 重叠，不能整块再加**。
+完整分批成本与限制在[本方向 NOTES](candidates/uav_fleet_transmission/NOTES.md#b09-final-cleanup)后的累计表。
+
+### 精确证据、源码与保留位置
+
+B09 冻结运行源 **`93166e7ac6cffa3c76da113afdc84e7317bb585c`**；原完整工程审查和修正前检查
+均保留。完整原始收集／reader 发表 **`6da7fe816561ce42091dbf69518df559b2526608`**，
+科学判读／原 critic／共享背景／计划退役发表 **`1ec491d983373bc630d5c476a0df89878d501f97`**，
+实际清理及累计成本发表 **`b6abd917530275579a617b4331cc54dde240e634`**。
+
+入口是[完整结果与全部 32 符号世界](candidates/uav_fleet_transmission/NOTES.md#b09-complete-reading)，
+以及 [config](../../runs/uav_fleet_transmission/b09_service_prediction_a01/config.json)、
+[summary](../../runs/uav_fleet_transmission/b09_service_prediction_a01/summary.json)、
+[perworld](../../runs/uav_fleet_transmission/b09_service_prediction_a01/perworld.json)、
+[reading](../../runs/uav_fleet_transmission/b09_service_prediction_a01/reading.json)、
+[逐世界回放](../../runs/uav_fleet_transmission/b09_service_prediction_a01/reading_worlds.json)、
+[静态遥测](../../runs/uav_fleet_transmission/b09_service_prediction_a01/telemetry_reading.json)、
+[收集验证](../../runs/uav_fleet_transmission/b09_service_prediction_a01/collection.json)。
+这些紧凑记录在 Git 中；完整候选／轨迹留一份必要原始数据，未复制到本地。
+
+| B09 文件 | SHA-256 |
+| --- | --- |
+| config.json | `bfaaac99a3068158a5a2d63d3fe2629c48ebbfd8cdd025bcc69eef5e673c9beb` |
+| manifest.json | `2c2f58b6c58de4281f54e911e2fe0dc6ce8f4b728b7353680c36c8e17e6afe8e` |
+| summary.json | `382c9dfece3d6fe9d10fd9134aa0c4d40d9148d54cec5078af63886cfc60ced2` |
+| reading.json | `be5173390e9c9632adc3603ad240daebdb6b89f076eb2388900c690b90a3d909` |
+| reading_worlds.json | `48b83e463b662c61ee3b12dd2a7bbe0771ce2f2de2d62e59d226f7556222eda3` |
+| telemetry_reading.json | `37ea61c3c404b2829fb35aa17723dd12d3d6028d356e549790e5524302727fcd` |
+
+科学唯一大数据位置：`wsl_4070:/home/wu/projects/HMASD/runs/uav_fleet_transmission/b09_service_prediction_a01/raw/`；
+工程在同父目录 `b09_service_prediction_engineering_a01/raw/`。manifest 逐文件记录 hash／大小；
+全部原始记录已流式 SHA256／size 核验，清理后数量、分配大小和重要汇总 hash 仍一致。
+工程 manifest SHA256 为 `9f63cd910fa7d95593d0cc87e9452c4d9660ae9016e2610a644a933ffd2e81d0`。
+
+历史入口与源身份如下；所有原始能力、反例和技术失败保持原样：
+
+| 批次／run tag（均在 runs/uav_fleet_transmission/） | 冻结源 | 唯一必要 bulk 位置 |
+| --- | --- | --- |
+| b01_native_s1_a01 | `a2f62e613a12331ad380876a6c764f8a46a893ee` | 本地 `/home/fires/hmasd-artifacts/uav_fleet_transmission/b01_native_s1_a01/raw/`，run 下为指向它的链接 |
+| b02_silent_repositioning_a01 | `9928d34b54628baaa542961debb65c5ce7ef0f23` | 同本地 artifact 父目录、对应 tag/raw/ |
+| b03_complete_continuation_a02 | `02e8c1adc5a625037490facc6388e4b8bc9fd74e` | 同本地 artifact 父目录、对应 tag/raw/；A01 失败记录另外保留 |
+| b04_temporal_complementarity_a01 | `239360b03f5d7acf788bd9ae5d4dccbde4f9237e` | 同本地 artifact 父目录，对应 raw/ 和完整 reading.json；Git 为 reading-summary.json，保留既有跨方向消费者 |
+| b05_score_sampling_a01 | `54c57af8d2e3860f25a278850055a6aa020e5beb` | wsl_4070 `/home/wu/projects/HMASD/runs/uav_fleet_transmission/b05_score_sampling_a01/raw/` |
+| b06_cadence_a01 | `df149ac620a90931d81fac727fe91a898b9ab760` | 本地共享主工作区 `runs/uav_fleet_transmission/b06_cadence_a01/raw/`，1120 文件 |
+| b07_joint_renewal_a01 | `2261ccb709b8f5d166902a602f9c7ba33d510e8a` | 本地共享主工作区 `runs/uav_fleet_transmission/b07_joint_renewal_a01/raw/`，768 文件 |
+| b08_anonymous_memory_a01 | `94f08627050b7d495b4c9e9af18db02ab17a5c1e` | wsl_4070 同 runs 父目录、对应 tag/raw/；工程对应 `_engineering_a01/raw/` |
+
+B04 完整 reading SHA256 为 `c9eaac15e69d1195e73710e4b071b5c196402bc6811b3a0bac333c771fd39363`；
+B08 reading 为 `303a7b6abaab626b2fddd22d168f0e9687aa0b40c84f7908e3b902175e223020`。
+其余每批的 config／manifest／summary／reading 与 NOTES 保留完整内容身份；恢复某题时读其
+原卡与直接绑定输入，不从这个表构造替代合同或作递归历史预加载。
+
+### 实际清理、保留代码与操作终态
+
+[测量与逐目标清单](candidates/uav_fleet_transmission/NOTES.md#b09-final-cleanup)记录本轮 B09
+净释放 **1641795584 allocated bytes**，不是整台机器的空闲空间变化，也不是 Git 对象回收。
+实际已删除：
+
+- 工程源快照 `4c59c5f284bc4057ba2a0db7ff541fd8`，已测 818995200 bytes；登记也已不存在，
+  未额外虚计未单列的登记大小。
+- 科学源快照 `643469c7928a44aa8bd0bb6bee5b0d6e` 及 `.git/worktrees/` 同 ID 登记，
+  分别 818991104／3670016 bytes。
+- 本地 B09 `capture.py`、`metrics.py`、`reader.py`、`run.py`、`study.py` 和镜像
+  `test_reader.py`，共 126976 bytes；停止的两个 observer 请求及其目录 12288 bytes。
+- 两份本地空日志已删除，释放 0 bytes；原远端日志及必要正反证据仍保留。
+
+总计远端／本地已测目标真实消失；没有备份包、第二份 raw、另一个 authoring checkout 或
+清理遗留阻碍。普通进程扫描遇到受保护 `/proc/660/cwd`，工具已有的只读
+`--sudo-process-scan` 解决后才完成精确目标删除，不是绕过执行拒绝。
+
+当前 main 保留 B09 的六个有用 Python 模块 `__init__/contract/controller/model/nominal/trace`、
+`frozen_sources.json` 及两个 controller/model 测试文件；八个 Python 文件逐字节等于运行源，
+静态语法／相对 import 闭合检查通过，没有新增 runtime／model／native 测试。B08 tracker/controller
+和其规则测试、B05–B07 有用包及旧 B04/N8 消费者都保留。废弃运行／reader 驱动从当前树退役，
+准确历史源码仍在[运行提交](https://github.com/CartmanFatass/My-paper-code/tree/93166e7ac6cffa3c76da113afdc84e7317bb585c/experiments/candidates/uav_fleet_transmission/b09_service_prediction)；
+不能直接对当前 main 重跑已退役入口，也不能把需要重建历史源码误写为丢失结果。
+
+原科学操作为远端 `.git/hmasd-admission/ec1d59fe992e79d1bbebfdc6ec7486df245b40a75f0bdf2f0a78941b6dc3a157.json`，
+源仍为93166e7ac；exit0 的 finished epoch 为1790854551.1702433。最新清理后状态继续确认
+runner1231375／supervisor1231374 不存在，记录一致。observer generation40 已停止、daemon2146440
+不存在、所有23事件已消费、无待交付 wake；原生 child 的 App queue −32600 限制没有导致丢失
+收集，本 DM 全程保持活动并直接读到结束。**不要重启、重发或迁移这些已完成句柄。**
+
+### 下一步的选择边界
+
+当前没有选定追加世界、原样复制、跟踪／horizon／guard／search 调参、学习器或确认。
+本轮三份已经完成的后续资料评估属于另外三位 DM；这里**没有第四份完成评估**。
+critic 提到的“在短模型给出零服务时保留普通路线建立行为，再在可服务时利用预测”只是一条
+**UNSELECTED、尚未报价**的后续构想，源码可行性和总代价未决。它不是已诊断修复，也不在交接后自动实施。
+
+若 owner 以后明确继续、Root 再选择本题，先明确要改变什么判断：只问完整包用途可比较
+C 与新包；若还要宣称预测增量，则需匹配的新 H/F 加 C。二者都改善而 F 无增量会支持普通
+控制改进；F 另有收益且新包超过 C 才支持新的预测组合；继续完整损失则削弱该路线。
+这些只是可区分结果的结构，不是已固定实验或成本承诺。任何更丰富信息权利应同样提供给
+有能力的普通参照并计入获得代价。另一轮准确率成功本身不改变采用判断。
+
+现在完成交接并停止，无外部 producer、未读结果或等待审批的实验。Root 下一步只需整合本文件
+总览和停止状态；研究再进入条件是 owner 明确继续及后续实际选择。
 <!-- DM_FLEET_TRANSMISSION_END -->
 
 <!-- DM_FLEET_ADAPTATION_BEGIN -->
