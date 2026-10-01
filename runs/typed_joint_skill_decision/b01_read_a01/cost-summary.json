@@ -1,0 +1,364 @@
+{
+  "canonical_full_source_call": {
+    "mean": 0.2822653020648431,
+    "n_worlds": 1152,
+    "normal_approx_95_interval": [
+      0.27736579291401314,
+      0.2871648112156731
+    ],
+    "sample_sd": 0.08484431375601828,
+    "standard_error": 0.0024997495667499836
+  },
+  "codec": {
+    "mean": 0.003560104799261252,
+    "n_worlds": 1152,
+    "normal_approx_95_interval": [
+      0.003458736647424414,
+      0.00366147295109809
+    ],
+    "sample_sd": 0.0017553822259634892,
+    "standard_error": 5.1718444814713324e-05
+  },
+  "cold_source_load": 3.791640271898359,
+  "construction": {
+    "mean": 0.01134735842990469,
+    "n_worlds": 1152,
+    "normal_approx_95_interval": [
+      0.011157591154187017,
+      0.011537125705622363
+    ],
+    "sample_sd": 0.003286181081810558,
+    "standard_error": 9.682003863146626e-05
+  },
+  "endpoint_scorer_panels": [
+    {
+      "active_scorer_wall_seconds": 0.06170555599965155,
+      "arm": "N",
+      "block": 1,
+      "endpoint": "initial-test.json",
+      "warm_scorer_seconds_per_world": 0.00048207465624727774
+    },
+    {
+      "active_scorer_wall_seconds": 0.09133403701707721,
+      "arm": "N",
+      "block": 1,
+      "endpoint": "final-test.json",
+      "warm_scorer_seconds_per_world": 0.0007135471641959157
+    },
+    {
+      "active_scorer_wall_seconds": 0.08621738408692181,
+      "arm": "N",
+      "block": 1,
+      "endpoint": "final-reverse-test.json",
+      "warm_scorer_seconds_per_world": 0.0006735733131790766
+    },
+    {
+      "active_scorer_wall_seconds": 0.05865160608664155,
+      "arm": "L",
+      "block": 1,
+      "endpoint": "initial-test.json",
+      "warm_scorer_seconds_per_world": 0.0004582156725518871
+    },
+    {
+      "active_scorer_wall_seconds": 0.049969597021117806,
+      "arm": "L",
+      "block": 1,
+      "endpoint": "final-test.json",
+      "warm_scorer_seconds_per_world": 0.00039038747672748286
+    },
+    {
+      "active_scorer_wall_seconds": 0.04349284805357456,
+      "arm": "L",
+      "block": 1,
+      "endpoint": "final-reverse-test.json",
+      "warm_scorer_seconds_per_world": 0.00033978787541855127
+    },
+    {
+      "active_scorer_wall_seconds": 0.043059323681518435,
+      "arm": "N",
+      "block": 2,
+      "endpoint": "initial-test.json",
+      "warm_scorer_seconds_per_world": 0.0003364009662618628
+    },
+    {
+      "active_scorer_wall_seconds": 0.05844279984012246,
+      "arm": "N",
+      "block": 2,
+      "endpoint": "final-test.json",
+      "warm_scorer_seconds_per_world": 0.00045658437375095673
+    },
+    {
+      "active_scorer_wall_seconds": 0.055095532443374395,
+      "arm": "N",
+      "block": 2,
+      "endpoint": "final-reverse-test.json",
+      "warm_scorer_seconds_per_world": 0.00043043384721386246
+    },
+    {
+      "active_scorer_wall_seconds": 0.06257045106031,
+      "arm": "L",
+      "block": 2,
+      "endpoint": "initial-test.json",
+      "warm_scorer_seconds_per_world": 0.0004888316489086719
+    },
+    {
+      "active_scorer_wall_seconds": 0.04710728628560901,
+      "arm": "L",
+      "block": 2,
+      "endpoint": "final-test.json",
+      "warm_scorer_seconds_per_world": 0.00036802567410632037
+    },
+    {
+      "active_scorer_wall_seconds": 0.0486852303147316,
+      "arm": "L",
+      "block": 2,
+      "endpoint": "final-reverse-test.json",
+      "warm_scorer_seconds_per_world": 0.0003803533618338406
+    },
+    {
+      "active_scorer_wall_seconds": 0.04262429126538336,
+      "arm": "N",
+      "block": 3,
+      "endpoint": "initial-test.json",
+      "warm_scorer_seconds_per_world": 0.0003330022755108075
+    },
+    {
+      "active_scorer_wall_seconds": 0.08436719351448119,
+      "arm": "N",
+      "block": 3,
+      "endpoint": "final-test.json",
+      "warm_scorer_seconds_per_world": 0.0006591186993318843
+    },
+    {
+      "active_scorer_wall_seconds": 0.0756098348647356,
+      "arm": "N",
+      "block": 3,
+      "endpoint": "final-reverse-test.json",
+      "warm_scorer_seconds_per_world": 0.0005907018348807469
+    },
+    {
+      "active_scorer_wall_seconds": 0.06213527824729681,
+      "arm": "L",
+      "block": 3,
+      "endpoint": "initial-test.json",
+      "warm_scorer_seconds_per_world": 0.00048543186130700633
+    },
+    {
+      "active_scorer_wall_seconds": 0.0640553212724626,
+      "arm": "L",
+      "block": 3,
+      "endpoint": "final-test.json",
+      "warm_scorer_seconds_per_world": 0.0005004321974411141
+    },
+    {
+      "active_scorer_wall_seconds": 0.05532861943356693,
+      "arm": "L",
+      "block": 3,
+      "endpoint": "final-reverse-test.json",
+      "warm_scorer_seconds_per_world": 0.0004322548393247416
+    }
+  ],
+  "limits": [
+    "segmented assembly, not a post-fit end-to-end online benchmark",
+    "N numeric input conversion, outer serialization and fresh host reset per-world online costs unmeasured separately",
+    "source cold load excludes interpreter/import startup; first codec call can include tokenizer cold load",
+    "offline cache does not remove L full encoder/two-head cost in deployment",
+    "full source call includes frozen original scorer and act head; segmented L also adds fitted adapter scorer",
+    "native helper timers overlap; process CPU/reserved GPU/global disk bills are authoritative"
+  ],
+  "matching": {
+    "mean": 0.017596297906897637,
+    "n_worlds": 1152,
+    "normal_approx_95_interval": [
+      0.017477724243901278,
+      0.017714871569893997
+    ],
+    "sample_sd": 0.0020533283553025496,
+    "standard_error": 6.049676683487723e-05
+  },
+  "native_collector_bill": {
+    "counter_semantics": "call entry charged, failed calls retained; completed counters only successful returns",
+    "cumulative_counters": {
+      "candidate_build_calls": 1920,
+      "candidate_builds_completed": 1920,
+      "candidate_episode_calls": 9216,
+      "candidate_episodes_completed": 9216,
+      "correctness_adapter_contexts": 0,
+      "correctness_episode_calls": 16,
+      "correctness_episodes_completed": 16,
+      "endpoint_L_contexts": 0,
+      "endpoint_N_contexts": 0,
+      "fit_calls": 0,
+      "fits_completed": 0,
+      "full_forward_correctness_calls": 0,
+      "full_forward_correctness_completed": 0,
+      "full_laya_forward_calls": 0,
+      "full_laya_forwards_completed": 0,
+      "host_construction_calls": 2688,
+      "hosts_constructed": 2688,
+      "matching_calls": 9600,
+      "matchings_completed": 9600,
+      "native_step_calls": 4808000,
+      "native_steps_completed": 4808000,
+      "optimizer_update_calls": 0,
+      "optimizer_updates_completed": 0,
+      "planner_episode_calls": 384,
+      "planner_episodes_completed": 384,
+      "planner_menu_calls": 384,
+      "planner_menus_completed": 384,
+      "reader_L_contexts": 0,
+      "reader_N_contexts": 0,
+      "reader_episode_reads": 0,
+      "reader_updates_read": 0,
+      "reset_calls": 14608,
+      "resets_completed": 14608,
+      "source_act_head_contexts": 0,
+      "source_scorer_contexts": 0,
+      "static_evaluation_calls": 783749,
+      "static_evaluations_completed": 783749,
+      "trace_rows_written": 9635232,
+      "training_L_contexts": 0,
+      "training_N_contexts": 0,
+      "worlds_completed": 1152
+    },
+    "cumulative_cpu_seconds": 5785.135966999999,
+    "cumulative_gpu_seconds": 0.0,
+    "delta_counters": {
+      "candidate_build_calls": 1920,
+      "candidate_builds_completed": 1920,
+      "candidate_episode_calls": 9216,
+      "candidate_episodes_completed": 9216,
+      "correctness_adapter_contexts": 0,
+      "correctness_episode_calls": 16,
+      "correctness_episodes_completed": 16,
+      "endpoint_L_contexts": 0,
+      "endpoint_N_contexts": 0,
+      "fit_calls": 0,
+      "fits_completed": 0,
+      "full_forward_correctness_calls": 0,
+      "full_forward_correctness_completed": 0,
+      "full_laya_forward_calls": 0,
+      "full_laya_forwards_completed": 0,
+      "host_construction_calls": 2688,
+      "hosts_constructed": 2688,
+      "matching_calls": 9600,
+      "matchings_completed": 9600,
+      "native_step_calls": 4808000,
+      "native_steps_completed": 4808000,
+      "optimizer_update_calls": 0,
+      "optimizer_updates_completed": 0,
+      "planner_episode_calls": 384,
+      "planner_episodes_completed": 384,
+      "planner_menu_calls": 384,
+      "planner_menus_completed": 384,
+      "reader_L_contexts": 0,
+      "reader_N_contexts": 0,
+      "reader_episode_reads": 0,
+      "reader_updates_read": 0,
+      "reset_calls": 14608,
+      "resets_completed": 14608,
+      "source_act_head_contexts": 0,
+      "source_scorer_contexts": 0,
+      "static_evaluation_calls": 783749,
+      "static_evaluations_completed": 783749,
+      "trace_rows_written": 9635232,
+      "training_L_contexts": 0,
+      "training_N_contexts": 0,
+      "worlds_completed": 1152
+    },
+    "disk_measurement": "collector files actual allocated blocks after each flushed chunk; global roots refreshed every 30 wall seconds",
+    "disk_roots": [
+      "/home/wu/.venvs/hmasd-typed-joint-31021",
+      "/home/wu/hmasd-inputs/typed_joint_skill_decision",
+      "/home/wu/projects/HMASD/runs/typed_joint_skill_decision",
+      "/home/wu/projects/HMASD/.git/hmasd-launch-sources/489ded1e05434035bce1033b7b92db5c"
+    ],
+    "global_peak_allocated_bytes_observed": 8091283456,
+    "gpu_reserved_wall_seconds": 0.0,
+    "gpu_scope": "elapsed reserved GPU window; caller synchronizes at boundaries; zero in CPU reader/native collector",
+    "process_and_finished_children_cpu_seconds": 5785.1359649999995,
+    "process_peak_rss_bytes": 459710464,
+    "rss_scope": "single collector process peak, Linux KiB converted to bytes",
+    "wall_seconds": 5576.803059138125
+  },
+  "native_nested_helper_timings": {
+    "candidate_build_wall_seconds": 9.309559724992141,
+    "host_construction_wall_seconds": 5.754187225596979,
+    "matching_wall_seconds": 19.71203079051338,
+    "native_step_wall_seconds": 4642.777400652878,
+    "reset_wall_seconds": 19.721093157073483,
+    "static_evaluation_wall_seconds": 285.2861219327897
+  },
+  "ordinary_rank": {
+    "mean": 1.4514742563025922e-05,
+    "n_worlds": 1152,
+    "normal_approx_95_interval": [
+      1.3957470967419854e-05,
+      1.507201415863199e-05
+    ],
+    "sample_sd": 9.650216919568131e-06,
+    "standard_error": 2.8432224265615754e-07
+  },
+  "ordinary_static_package": {
+    "mean": 0.0043141621610832065,
+    "n_worlds": 1152,
+    "normal_approx_95_interval": [
+      0.004297934343413405,
+      0.004330389978753008
+    ],
+    "sample_sd": 0.00028101550820021977,
+    "standard_error": 8.279498811123303e-06
+  },
+  "sequence_lengths": {
+    "max": 2123,
+    "mean": 2029.671875,
+    "min": 1847
+  },
+  "source_costs_bytes": 598024,
+  "source_costs_path": "hmasd-wsl-node:/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b01_read_a01/costs.json",
+  "source_costs_sha256": "54c829ea9eaec50ab8508bd09dd4f0247c50521c6c60526db640550c1c28a7ba",
+  "test_segmented_seconds": {
+    "L_segmented_seconds": {
+      "max": 1.0162058980022266,
+      "mean": 0.3176056824740954,
+      "median": 0.3004260229272404,
+      "min": 0.261883816552654,
+      "n_worlds": 384
+    },
+    "N_segmented_seconds": {
+      "max": 0.0699421711578907,
+      "mean": 0.02911224313538696,
+      "median": 0.02842625707762636,
+      "min": 0.025722664840941434,
+      "n_worlds": 384
+    },
+    "common_construction_seconds": {
+      "max": 0.050414426950737834,
+      "mean": 0.011187486038276498,
+      "median": 0.010850008460693061,
+      "min": 0.009095191024243832,
+      "n_worlds": 384
+    },
+    "common_matching_seconds": {
+      "max": 0.032448704820126295,
+      "mean": 0.017315007018017543,
+      "median": 0.017079329467378557,
+      "min": 0.01570519316010177,
+      "n_worlds": 384
+    },
+    "full_planner_compute_menu_seconds": {
+      "max": 1.2035522449295968,
+      "mean": 0.8217298019832621,
+      "median": 0.811567121068947,
+      "min": 0.5762637809384614,
+      "n_worlds": 384
+    },
+    "ordinary_segmented_seconds": {
+      "max": 0.07384529919363558,
+      "mean": 0.032825039908857434,
+      "median": 0.03223635058384389,
+      "min": 0.029178316239267588,
+      "n_worlds": 384
+    }
+  }
+}

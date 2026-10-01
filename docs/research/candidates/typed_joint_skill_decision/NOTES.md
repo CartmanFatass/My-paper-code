@@ -904,3 +904,263 @@ and supervisor1280770/start122179178. The first progress read had576 complete
 episode reconstructions; no new native/static/model/fit/update exposure. This is
 the selected complete reader, with5,376 functional scorer contexts and the saved
 optimizer evidence, not an independent encoder or optimizer replay.
+
+<a id="b01-complete-reading"></a>
+## 2026-10-01 — B01 complete reading: training fit does not establish new-world joint selection
+
+All three admitted operations completed, without retry, scientific failure, added
+world, changed endpoint or replacement model. The full reader ended19:17:49UTC,
+exit0; its original runner/supervisor are absent and consistent. READY event
+`d9e132219b81bbc2aa1e0cbe` was consumed at19:29UTC and the observer stopped after
+all three operations were terminal. Independent scientific result diagnosis is
+underway in the separate-context registered ResearchCritic; the interpretation
+below is DM's reading, with final disposition appended after its full answer.
+
+The [unaltered reader summary](../../../../runs/typed_joint_skill_decision/b01_read_a01/summary.json)
+contains all block aggregates and fit/movement readings. The
+[compact384-world table](../../../../runs/typed_joint_skill_decision/b01_read_a01/per-world.csv)
+retains each executed initial/final/reversed choice, native coverage/reward/front-end
+capacity/relay readings, all ordinary comparisons, and CPU/GPU numerical flags.
+It is a lossless projection of those named fields from the three original block
+JSON files, not a new model/native evaluation or selective panel. All128test worlds
+per block and all256training worlds per block remain in the original record.
+
+**Complete H500 mean C_bh, three independently drawn training/test blocks:**
+
+| Policy/readout | Block1 | Block2 | Block3 |
+|---|---:|---:|---:|
+| Uniform over eight full plans | .490678 | .483844 | .490448 |
+| Training-selected fixed construction slot3 | .628003 | .625096 | .627676 |
+| Same-menu static C_bh rule | .713245 | .699668 | .706850 |
+| Same-menu travel rule | .712826 | .700088 | .706324 |
+| Native best of the eight plans, privileged | .713841 | .700954 | .707996 |
+| Exact fixed full-planner reference | .784389 | .768999 | .766231 |
+| N initial | .592787 | .249914 | .414497 |
+| N final | .615015 | .599491 | .606133 |
+| L-F initial | .595599 | .578845 | .593753 |
+| L-F final | .590692 | .617338 | .601332 |
+| L-F minus N final | -.024323 | +.017847 | -.004801 |
+
+The finite menu contains a real state-dependent opportunity relative to the
+training-selected constant: native best-minus-fixed is+.085838/+.075858/+.080321.
+All worlds have eight legal distinct candidates, three plain/four relay/one flat;
+there were no fixed-slot fallbacks. The ordinary static rule reaches the native
+menu maximum in341/384test worlds, with mean menu regret only
+.000597/.001287/.001146. Thus this is neither an empty candidate bank nor proof
+that hindsight labels add deployable information. Most available native variation
+is already captured by the legal instantaneous coverage calculation. The full
+planner's larger means also show the coverage restriction of this bounded raw
+menu, without making planner superiority a universal learning gate.
+
+The numerical learner has real, extensive parameter learning. Each of its three
+fresh fits executes512updates/16,384context exposures; relative parameter movement
+is1.554/1.655/1.601. Training soft CE falls from2.0765/2.0815/2.0813 to
+.7688/.7867/.6713, and training regret falls to.000609/.000804/.000519.
+Yet test regret is.098826/.101463/.101863 and test soft CE is
+2.7406/2.7559/3.2005. Its own-initialization test gains are
++.022228/+.349577/+.191636, partly reflecting very different random initial choices;
+all final means remain below the training-selected fixed rule by
+.012988/.025605/.021543. Near-perfect training choice with poor new-world choice
+is a train/test generalization gap under this fixed data/architecture exposure.
+It weakens a no-update or inability-to-fit explanation; it does not identify a
+particular invariance, data-volume, loss or optimizer repair.
+
+L-F's three real scorer fits move relative parameters by.2653/.2883/.2417.
+Train soft CE falls1.9853/1.9835/1.9786→1.8595/1.8572/1.8841; train regret remains
+.100507/.096802/.103364. Test own-initialization effects are
+-.004907/+.038493/+.007579. This is weaker training fit plus no consistent package
+increment, not evidence that frozen features contain no task information. L-F−N's
+three-block descriptive mean is-.003759 (df2 t95[-.056185,+.048668]);384test worlds
+are not384independent training instances. Positive block2 is retained. There is
+no basis here to attribute an effect to typed pretraining, semantics, capacity or
+language; full fine-tuning and other contexts/architectures were not tested.
+
+Both arms beat uniform in every block, but neither acquires demonstrated native
+conditional generalization beyond the fixed construction rule. N beats/ties/loses
+that rule in117/121/146 worlds; L-F in83/177/124. Against static, N is9/95/280 and
+L-F9/88/287. Severe active losses coexist with real positives: N world106110004
+has C_bh .01724 versus static/L-F .65816; L-F world106110036 has.00708 versus
+static.63432. Conversely, L-F beats static by+.02232 in106110026 and+.02332 in
+106210064. No adverse world is removed and these are complete selected episodes,
+not partial/censored consequences. Reversing only display order changes N's
+choice in0/384worlds and L-F's in239/384 (79/81/79); L-F mean C_bh changes
+-.003347/-.001965/+.021050. This is an observed package sensitivity, not an
+identified cause of its canonical-order result, and no favorable order is selected.
+
+**Correctness scope and numerical adverse:** full reader reconstructed all9,600
+unique H500episodes, checked labels/matching/executor paths, and read all3,072
+update-chain records. Its5,376 independent functional scorer contexts consumed
+the exact allowance, without encoder or Adam replay. All16 paid frozen-source/cache
+agreement repetitions have zero recorded feature/logit/act error and identical
+choices. Every input used1,847–2,123tokens (mean2,029.67), below the fixed4,096
+limit with no option truncation. Frozen source state hash stayed unchanged.
+Among2,304 saved test endpoint comparisons,241CPU/GPU logit readings exceed the
+predeclared componentwise1e-5/1e-6 tolerance (16/202/23 by block), maximum absolute
+error1.7166e-5. **All2,304 executed choices agree**, and original GPU choices determine
+reported native outcomes. These flags are preserved; this is not a universal
+numerical-equivalence certificate or a reason to silently widen tolerance.
+Static radio values, cached encoder representations and optimizer attestations
+retain the explicit source/cache reliance declared before execution.
+
+**Actual price:**4,808,000native steps;783,749static calls (full planner uses the
+fixed flat→relay+incumbent program with two3000query ceilings, billed by actual
+calls);6fits/3,072updates;1,552full frozen forwards including16correctness;
+5,376reader scorer contexts and9,600episode reads. No failed scientific calls,
+extra model replica, extra fit or alternate endpoint. Measured admitted process
+CPU sums to7,261.651462s (2.0171h); cumulative ledger charges7,262.625848s because
+of the two upward rounding margins. GPU reserved window547.037157s (9.117min);
+reader uses CPU only. Observed global allocated peak8,226,697,216bytes (7.662GiB),
+including the isolated runtime, one weight object, all retained outputs and one
+source snapshot. Setup/install/engineering/review/publication support was not
+fully metered; the earlier10–16support-hour number remains a forecast, not a
+measurement. Missing support measurement is not zero work.
+
+[Compact cost reading](../../../../runs/typed_joint_skill_decision/b01_read_a01/cost-summary.json)
+retains actual component statistics and their limits. On384test worlds, segmented
+construction+matching+selection is N .029112s, ordinary static .032825s,
+L-F .317606s; full planner's own compute_menu averages.821730s. The shared raw
+menu construction/matching averages.011187/.017315s; L-F's full canonical model
+call across1,152worlds averages.282265s plus.003560s codec, and cold source load
+3.791640s. Cached adaptation scoring does not remove full-model deployment cost.
+These segmented assemblies are not a measured post-fit end-to-end online benchmark:
+N input conversion, outer serialization/fresh host reset and process startup are
+not separately priced online; original source calls include the frozen original
+scorer/act head, and L-F assembly also includes its fitted scorer. No demonstrated
+native capability or latency condition warrants adopting L-F over the ordinary
+rule. Its smaller time than full search comes with a large native quality loss.
+
+All1,164reader-manifest objects passed independent size/SHA256 file checks:
+9,837,632declared bytes and11,829,248allocated bytes. Canonical reader root is
+`hmasd-wsl-node:/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b01_read_a01`.
+Manifest SHA256`d211d941250d3daea7ed14fde17395e6fc8720e831de05d13bbaa192471b94e3`
+(190,307bytes); original summary SHA256
+`213be039392a3d69b8d66935ae884316875b8e9e371a86d4b5f580fbc1191271`.
+Original full costs.json is598,024bytes, SHA256
+`54c829ea9eaec50ab8508bd09dd4f0247c50521c6c60526db640550c1c28a7ba`,
+and remains there with all block/scorer/native readings. One canonical native,
+learning and reader output is preserved, with no bulk replica in Git.
+
+After terminal collection and output verification the normal exact-target collector
+removed reader snapshot`974edfe9197e4739ae514b357c1dd26a` (820,740,096→0allocated
+bytes, absence verified). Across three phase-specific snapshot deletions,
+2,462,195,712allocated bytes were reclaimed; these are measured deletion deltas,
+not a claim that source preparation occupied no disk. Operation claims and all
+three original exit witnesses remain, preserving duplicate prevention.
+
+<a id="b01-independent-result-review"></a>
+### Original independent result ResearchCritic answer, mechanically preserved
+
+Registered role`hmasd-research-critic`, separate context`fork_turns=none`, task
+`/root/dm_typed_joint_skill/b01_result_critic`, UUID
+`01a0f8f3-a3f1-7f12-a0d9-d81a67c03d53`, parent this DM. Actual first
+turn_context at line8 recordsgpt-6-astra/max.
+Canonical native`event_msg/task_complete.last_agent_message` from
+`/mnt/c/Users/fires/.codex/sessions/2026/10/01/rollout-2026-10-01T12-31-52-01a0f8f3-a3f1-7f12-a0d9-d81a67c03d53.jsonl`
+line166, turn`01a0f8f3-acd6-72f3-9f98-225664b63ebd`.
+Exact answer payload:8528UTF-8bytes, SHA256
+`374c3a8a266faa7bfe7b0e91586b8fa44d8d4414ee7ef86d3781a6823f5ee05b`. The following is copied mechanically without abridgment.
+
+<!-- BEGIN ORIGINAL B01 RESULT CRITIC -->
+**Recommendation: stop investment in these exact N and L-F recipes, retain the demonstrated learning and menu evidence, and reserve the broader question without an immediate new run.** The DM’s proposed disposition is supported. This is a result diagnosis, not a reversal of the original decision to purchase B01.
+
+I began without inherited DM/Root conversation history. I reconstructed the contract, outputs and costs before reading the DM’s proposed interpretation or prior scientific advice.
+
+The consequential results are:
+
+| Complete H500 coverage difference | Block 1 | Block 2 | Block 3 |
+|---|---:|---:|---:|
+| Menu hindsight best − fixed construction | +.08584 | +.07586 | +.08032 |
+| Menu best − static rule | .00060 | .00129 | .00115 |
+| N final − fixed construction | −.01299 | −.02561 | −.02154 |
+| L-F final − fixed construction | −.03731 | −.00776 | −.02634 |
+| L-F final − N final | −.02432 | +.01785 | −.00480 |
+
+These are three downstream training/data blocks conditional on one frozen pretrained checkpoint and executor. The 384 test worlds do not supply 384 independent learning replications. The within-block L-F−N intervals all cross zero; the evidence does not establish equivalence.
+
+**The menu offers genuine contextual opportunity, but neither learned package demonstrates useful held-world selection beyond the training-selected construction.** All 1,152 worlds retain eight legal alternatives after de-duplication/filling. The static rule attains the menu’s maximum native coverage on 341/384 test worlds and captures approximately 98.3–99.3% of its mean increment over the fixed rule. Limited menu opportunity therefore does not explain the learner failures; ordinary baseline competence does explain why further investment needs a stronger purpose.
+
+N exhibits substantial learning: every fit has 512 nonzero-gradient updates, changed parameters, and final training regret of only .00061/.00080/.00052. Test regret remains .09883/.10146/.10186. Its test soft CE worsens from approximately 2.08 initially to 2.74/2.76/3.20, despite native gains over initialization and uniform selection. This supports a finite generalization failure in the tested package, rather than absent optimizer movement or inability to fit the training choices. Gains over poor initial construction preferences do not establish useful contextual generalization beyond the fixed rule.
+
+L-F is different: final training regret remains .10051/.09680/.10336, with train CE around 1.86–1.88. It changes behavior and modestly improves the fitted objective, but does not fit the training ranking nearly as closely as N. Representation and finite optimization remain unresolved here. Neither this result nor the N comparison identifies a causal limitation of language, typed pretraining, full fine-tuning, or semantic reasoning.
+
+These are **active adverse choices**, not nonactivation or censored episodes. I independently reconstructed 23 complete saved traces across eight consequential worlds. Examples:
+
+- At world **106110004**, N selects a layout with coverage **.01724**, while L-F and static obtain **.65816**.
+- At **106110036**, L-F obtains **.00708**, versus N **.56920** and static **.63432**.
+- Useful positives also survive: L-F beats static by **.02232** at **106110026**, selecting a layout with better travel-period service despite lower terminal coverage. At **106210064**, its **+.02332** gain over static is also achieved by the ordinary travel rule.
+
+Thus the residual opportunity is real, but these cases do not establish a dependable learner advantage. The ordinary static rule also exceeds both learners in mean contract reward in every block.
+
+L-F’s reversed display order changes its selected layout in **79/81/79** worlds. Native effects include substantial gains and losses; the small block-average reversal effects must not be described as robustness. N changes no selected layout. This is a demonstrated package sensitivity, without establishing its underlying cause or making order augmentation an automatic repair.
+
+The strongest objection to renewed investment is consequently substantive: **the tested learners have not converted an available contextual opportunity into an advantage over a simple construction rule, while a cheap lawful static evaluator already captures nearly all of that opportunity.** Full-planner superiority is unnecessary for this judgment and should remain a separate scale reference. There is also no learner-induced downstream state distribution or changing learned executor here, so DAgger-style visitation shift and partner co-adaptation do not explain this comparison.
+
+The constructive evidence should remain explicit. Complete executable alternatives avoid coordinate averaging; the executor successfully realizes distinct useful outcomes; N learns their training ranking; both learners sometimes make valuable choices on new worlds. A future geometry-structured numerical comparison could therefore be scientifically coherent. Its distinct prediction would be **lower fresh-world regret at matched data and exposure**, rather than merely better training fit. Improvement beyond the fixed construction could justify retaining that capability even if static remains stronger. Training-only improvement would weaken that continuation; a changed information or computational contract would require the ordinary comparator to receive the same addition.
+
+That possible continuation is not selected by B01. Its concrete representation, fresh evaluation exposure and complete price remain undeclared. An unchanged replication, more L-F epochs, or expanded fine-tuning has no demonstrated decision value sufficient to recommend it now. The smallest worthwhile immediate action is complete publication and evidence retention: **zero additional fits, native steps or model forwards**.
+
+The cost materially reinforces this choice:
+
+- Six fits, **4,808,000 native steps**, **783,749 static calls**, **1,552 full frozen forwards**, and the complete declared reader.
+- Recorded cumulative execution: **2.017 CPU-hours**, **9.12 minutes of reserved GPU time**, and approximately **117.4 minutes summed phase wall time**. The six active optimization loops account for only **32.9 seconds**; fitting alone badly understates the experiment’s cost.
+- Observed peak allocated disk: **7.66 GiB**, including measured environment/input/output roots. Preparation and human/agent support are additional; the original support-hour forecast is not an actual measurement.
+- Saved component timings assemble to about **29.1 ms/world for N**, **32.8 ms for ordinary static selection**, and **317.6 ms for L-F**. These are segmented measurements, not a complete deployment benchmark. L-F’s cache does not remove its online encoder/head cost; N’s apparent saving over static is only about 3.7 ms before omitted conversion/reset/serialization costs.
+
+My checked scope includes the frozen contract and relevant governance; unchanged experimental source at `61a2dfa9…`; the five pinned native-source hashes; configuration, exit and manifest bindings; all three canonical block files and all test-world comparisons; all 1,152 feature/provenance/label identities; six saved update chains; the 16 saved source/cache agreement records; the 23 native traces above; and the recorded costs. The [reader summary](/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b01_read_a01/summary.json) and [prospective notebook](/home/fires/hmasd-wsl/docs/research/candidates/typed_joint_skill_decision/NOTES.md:157) support the aggregate reading.
+
+I independently confirmed **241 logit-tolerance flags among 2,304 endpoint comparisons**, maximum absolute discrepancy **1.7166×10⁻⁵**, with **zero changed choices or native consequences**. Those flags remain reportable; they do not overturn this behavioral result. The separate 16 source/cache checks report agreement.
+
+I did not replay the encoder, Adam trajectory, native environment or static evaluator, independently repeat every manifest-byte audit, or certify engineering correctness. The remaining reading relies on the pinned assets, caches, saved update evidence and complete admitted reader. No experiment or record was changed.
+
+**MATERIAL_DISSENT: no — I support the DM’s proposed no-immediate-run disposition and bounded claims. The direct evidence supports stopping these recipes, while preserving menu opportunity, actual learning, local positives and unresolved broader capability questions.**
+<!-- END ORIGINAL B01 RESULT CRITIC -->
+
+<a id="b01-independent-disposition"></a>
+### DM disposition after the complete independent result reading
+
+I read the entire original answer and accept its no-immediate-run recommendation;
+MATERIAL_DISSENT:no. Root independently read the complete B01 numbers and this
+8,528-byte answer and adopted the same bounded disposition. No additional Pro
+consultation is needed for a distinct unresolved question here. The review's raw
+trace checks support the observed native choices; they are not a second empirical
+replication. Its independence, covered sources and explicit limits remain above.
+
+**Stop these exact N and L-F recipes; reserve the broader consequence-supervised
+joint-selection question.** This is a negative result for useful fresh-world
+selection beyond a competent fixed construction at the purchased exposure, plus
+an unestablished frozen-package increment, not a claim of equivalence, universal
+unlearnability or a failed rationale for having bought the comparison. N's strong
+training fit and poor held-world decisions require a different explanation from
+L-F's much weaker training fit. Both change parameters and sometimes make useful
+new-world choices. No own-initialization gain is promoted to conditional task
+capability beyond the fixed alternative, and no ordinary-rule success closes the
+broader learning question. The preserved eight-plan opportunity, executed local
+positives and stronger lawful static rule are the constructive assets from B01.
+
+I do not select unchanged replication, more epochs, an alternative Laya context,
+full fine-tuning, added data or a fourth block. A geometry/permutation-structured
+numerical successor could be coherent only with a concrete prediction of lower
+fresh-world regret at matched information/data/exposure, a full prospective bill
+and a competent ordinary comparator. Training-only improvement would weaken that
+proposal; a fresh-world increment over fixed construction could establish a useful
+learning capability even if static remains stronger. B01 has not identified which
+structure or data change would accomplish this, so this is a re-entry condition,
+not a selected repair or a dependency on an owner decision. Out-of-question
+construction and cross-question investment remain Root's responsibility.
+
+This selected study is scientifically read and complete:0additional fits,
+0additional native steps and0additional model forwards are selected. All three
+accepted producers and the deterministic observer have ended, no unread result
+or Pro operation remains. The narrower L-F result is tied to HF55cf4c4/GH6d942c9,
+float32, the4096cap and frozen encoder/two-head plus scorer-adaptation package;
+it says nothing direct about other fine-tuning or typed-model families.
+
+Useful frozen code and35focused implementation tests were already published at
+[61a2dfa9c](https://github.com/CartmanFatass/My-paper-code/tree/61a2dfa9cde0178d482d0a079c5629c3bcb7789e/experiments/candidates/typed_joint_skill_decision).
+The exact completed recipe's current entrypoints/tests and scratch are now
+eligible for retirement after consumer checks; their historical source remains
+recoverable there. One pinned model object with license/revision/dependency
+manifest, and the original three phase outputs, remain required positive/adverse
+evidence. The dedicated environment has no selected future consumer; its deletion
+and Root's additive-profile retirement will be measured below. Existing shared
+wsl_4070 interpreter and every unrelated source/output stay outside this cleanup.
