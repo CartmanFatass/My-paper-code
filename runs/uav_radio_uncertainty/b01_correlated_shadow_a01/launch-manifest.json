@@ -1,0 +1,90 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-10-01T07:52:05.899706Z",
+  "bootstrap_command": [
+    "/home/wu/.venvs/hmasd-gcc-31021/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/58bb94a971024c3eb35b5215eaa224ef/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/58bb94a971024c3eb35b5215eaa224ef/experiments/candidates/uav_radio_uncertainty/b01/run.py",
+    "--output",
+    "/home/wu/projects/HMASD/runs/uav_radio_uncertainty/b01_correlated_shadow_a01",
+    "--",
+    "--out",
+    "/home/wu/projects/HMASD/runs/uav_radio_uncertainty/b01_correlated_shadow_a01",
+    "--launch-sha",
+    "9b6f493b343c2939b374a1ce21384266d3257456",
+    "--seed",
+    "29641000"
+  ],
+  "claim_key": "e1cf2d4a9f1d6df7f053e4e432958477350a3b8bd5cf2e414464499dac968de8",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/e1cf2d4a9f1d6df7f053e4e432958477350a3b8bd5cf2e414464499dac968de8.json",
+  "command": [
+    "/home/wu/.venvs/hmasd-gcc-31021/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/58bb94a971024c3eb35b5215eaa224ef/experiments/candidates/uav_radio_uncertainty/b01/run.py",
+    "--out",
+    "/home/wu/projects/HMASD/runs/uav_radio_uncertainty/b01_correlated_shadow_a01",
+    "--launch-sha",
+    "9b6f493b343c2939b374a1ce21384266d3257456",
+    "--seed",
+    "29641000"
+  ],
+  "command_sha256": "0de856e3eb40f642e25fa74eb77b00d739fbaa8d1501de9b75a45e4398416d95",
+  "control_observation": {
+    "observed_at": "2026-10-01T07:52:05.772475Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "4020c5c2421b5f4975ead36bc7ab69e1118e4cfa"
+  },
+  "control_root": "/home/wu/projects/HMASD",
+  "created_at": "2026-10-01T07:52:05.783113Z",
+  "cwd": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/58bb94a971024c3eb35b5215eaa224ef",
+  "direction": "uav_radio_uncertainty",
+  "host_identity": "LAPTOP-U9TDKC8A",
+  "identity_command": [
+    "/home/wu/.local/opt/hmasd-cpython-3.10.21-gcc/bin/python3.10",
+    "experiments/candidates/uav_radio_uncertainty/b01/run.py",
+    "--launch-sha",
+    "9b6f493b343c2939b374a1ce21384266d3257456",
+    "--seed",
+    "29641000"
+  ],
+  "lead": "Codex DM (native child)",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/uav_radio_uncertainty/b01_correlated_shadow_a01/launch-manifest.json",
+  "node": "wsl_4070",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/e1cf2d4a9f1d6df7f053e4e432958477350a3b8bd5cf2e414464499dac968de8.json",
+  "output_root": "/home/wu/projects/HMASD/runs/uav_radio_uncertainty/b01_correlated_shadow_a01",
+  "preflight": "/home/wu/projects/HMASD/runs/uav_radio_uncertainty/b01_correlated_shadow_a01/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 1221288,
+      "session_id": 1221288,
+      "start_ticks": 118332126
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 1221288,
+    "process_group_id": 1221288
+  },
+  "process_exit": "/home/wu/projects/HMASD/runs/uav_radio_uncertainty/b01_correlated_shadow_a01/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 1221289,
+      "session_id": 1221288,
+      "start_ticks": 118332129
+    },
+    "pid": 1221289,
+    "process_group_id": 1221288,
+    "supervisor_pid": 1221288
+  },
+  "schema_version": 1,
+  "sha": "9b6f493b343c2939b374a1ce21384266d3257456",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/58bb94a971024c3eb35b5215eaa224ef",
+  "stderr": "/home/wu/projects/HMASD/runs/uav_radio_uncertainty/b01_correlated_shadow_a01/stderr.log",
+  "stdout": "/home/wu/projects/HMASD/runs/uav_radio_uncertainty/b01_correlated_shadow_a01/stdout.log"
+}

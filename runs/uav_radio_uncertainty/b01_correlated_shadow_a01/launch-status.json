@@ -1,0 +1,11 @@
+{
+  "claim_key": "e1cf2d4a9f1d6df7f053e4e432958477350a3b8bd5cf2e414464499dac968de8",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/e1cf2d4a9f1d6df7f053e4e432958477350a3b8bd5cf2e414464499dac968de8.json",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/uav_radio_uncertainty/b01_correlated_shadow_a01/launch-manifest.json",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/e1cf2d4a9f1d6df7f053e4e432958477350a3b8bd5cf2e414464499dac968de8.json",
+  "pid": 1221288,
+  "runner_pid": 1221289,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-10-01T07:52:05.904712Z"
+}

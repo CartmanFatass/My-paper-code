@@ -522,3 +522,294 @@ terminal fact directly and rearmed generation60 without restarting the worker.
 I accept the fixed correctness boundary. The already-selected32-world complete P/U32
 worker and full independent reader remain the next operations at the unchanged source,
 seeds,clock,particle count and cost. Correctness observations do not alter that plan.
+
+
+### 2026-10-01 07:52 UTC — selected complete worker accepted
+
+The [main native manifest](../../../../runs/uav_radio_uncertainty/b01_correlated_shadow_a01/launch-manifest.json)
+records the accepted unchanged9b6f493b source and frozen32-world invocation. Destination
+memory/source/current-policy admission passed. Same-session deterministic observation
+uses that exact operation; this native child remains active through terminal collection
+and full reading. Registration alone is not a completed experiment. No additional panel,
+fit, tuning query, revised deadline or particle-count choice is selected.
+
+
+### 2026-10-01 08:02 UTC — complete worker collected; full reader accepted
+
+The main worker exited0 with consistent terminal witness and both native processes
+absent. The original659764byte summary remains at its canonical remote run root,
+SHA2566dca1d6ed767d689b36bcd7aa932e8076a616613ececfeadafb111a03341c140;
+a verified temporary local reading copy is under this direction's scratch. All64
+H256 episodes completed:16384 native steps,20480 current-C queries,4112250 physical
+normals,4096 full manager decisions and zero fits/updates. U generated57344000 model
+normals. Both managers completed475136 logical requests collectively,326045 actual
+candidate batches,20529026 candidate fleet scores and5132256500 candidate SINR entries;
+all actual partial-work counters remain in the original summary. Canonical NPZ artifacts
+total150807102bytes, with every file bound by the summary's size/SHA256. No second raw
+copy was made. Process resources:380.244082554942s wall,392.74938399999996s CPU,
+.001143s waited-childCPU and426208KiB peak process RSS. These are worker measurements;
+full reading, source preparation and support are additional work.
+
+Worker observation generation61 returned READY; native-child queue delivery again
+rejected(-32600), and this active child drained and rearmed generation62. The
+[full reader manifest](../../../../runs/uav_radio_uncertainty/b01_correlated_shadow_read_a01/launch-manifest.json)
+binds its accepted unchanged9b6f493b input, original worker hash/source, current
+policy and fresh actual-node admission. It creates no native episode, reset or fit;
+it performs the already priced complete independent reconstruction. Its same-session
+observer is armed against that exact operation. The worker's scores are provisional
+until that reader finishes. Independent ResearchCritic reading of the original complete
+contract, source and worker evidence has begun in the existing separate reviewer context;
+it receives terminal reader evidence before any unconditional scientific disposition.
+No result-dependent source, comparator, deadline or particle count has changed.
+
+
+### Live source consumer reported during complete reading
+
+Root selected the separate `uav_radio_information_cost` P_FULL/P_PRIOR acquisition
+comparison under `/root/dm_parent_adaptation`. That direction owns disjoint paths and
+uses the published9b6f493b `environment.py`, `randomness.py` and genuinely unchanged
+helpers by exact hash, without editing or forking the physical host. Its own codec,
+manager and integration fixtures are separate. It may reuse the published4020c5c24
+physical-lifecycle correctness. This is a concrete live consumer to preserve during
+RF cleanup, not an extra arm/query, changed source or scope extension of this study.
+
+
+### Completed correctness snapshot reclaimed during independent reading
+
+After the complete H8 result/hash verification, the supported native snapshot collector
+previewed and removed exactly
+`/home/wu/projects/HMASD/.git/hmasd-launch-sources/2df8b39b75684520824fa178ccb43788`.
+It checked the terminal claim, absent processes/consumers, clean source and durable Git
+reachability, using the configured passwordless read-only process scan. Allocated bytes
+were818282496 before and0 after; the directory and Git worktree registration are absent.
+Net measured reclamation:818282496bytes, with no relocated/archived copy. The canonical
+H8 summary still matches its original SHA256 and all nine bound evidence files remain
+outside that snapshot. Main worker/reader snapshots and the live acquisition direction's
+published source dependencies were untouched. Existing shell gitstatus warnings did not
+block this successful cleanup.
+
+
+Reader observer generation63 reached its bounded checkpoint with the same native
+operation still running. Direct drain/rearm advanced observation to generation64;
+no worker or reader restarted. Its saved progress at this checkpoint had verified37/64
+episodes and11536772 candidate fleet scores without discrepancy (1518.382731s process
+CPU,1475.2596817531157s wall,401740KiB peak RSS). This is partial verification, not a
+complete scientific result. The Scientific Reviewer has completed its original-source
+and saved-witness reading, awaiting terminal audit evidence; it created no scratch,
+downloads or duplicate evidence, and released its raw consumers. Its reading support
+was unmetered, not zero-cost.
+
+
+<a id="b01-complete-reading"></a>
+## 2026-10-01 08:48 UTC — complete independent numerical reading
+
+The unchanged full reader exited0 with a consistent native witness and both processes
+absent. Its original [reading.json](../../../../runs/uav_radio_uncertainty/b01_correlated_shadow_read_a01/reading.json)
+is277952bytes, SHA256099d634bc5ee3536193f36e3e2a76382ca9cb6e0edf9d8f9448d52bab38721dd,
+collected with size/hash verification. It reports VERIFIED_COMPLETE: all64 episodes,
+the discarded constructor,4096 decisions,20529026 original scalar candidate fleet
+scores,5132256500 candidate SINR entries,57344000 model-normal materializations,
+4112250 physical normals,20545 native radio/observation states,40960 current-C audit
+calls,7475 geometry uniforms and819200 per-user age updates. All saved gaps, including
+initial/terminal censoring, and every paired scalar summary passed. No new environment,
+native reset/step, fit or optimizer update was used by the reader. There was no failed
+reference prefix, numerical discrepancy, source correction or repeat.
+
+I read the complete structured report and checked all64 ordered episode identities,
+verified flags, raw bindings and per-episode model counts against the bound worker;
+its full paired and physical/model totals match, and each source-C counter is exactly
+twice the worker's. This final structural check used only saved JSON, no scientific
+kernel. Reader process CPU2761.467347s,wall2678.822373185074s,waited-childCPU.004582s,
+peakRSS402112KiB. The full reader is additional verification cost, distinct from the
+worker's intrinsic decision computation. Source/adviser/support work remains incompletely
+metered rather than free. Observation generation64's terminal fact was drained directly,
+consumed into generation65 and observation stopped; no operation was restarted or queued
+to another task. The complete terminal evidence has been sent to the existing independent
+ResearchCritic for its final interpretation and disposition.
+
+
+### Paired endpoints, exposure and cost
+
+The compact [result.json](../../../../runs/uav_radio_uncertainty/b01_correlated_shadow_a01/result.json)
+is an exact projection of the already-verified worker JSON, retaining every paired scalar's
+32 world values, level/contrast summaries, full work counters, runtime and all129 canonical
+artifact identities. It also binds the complete reader and its costs. The projection was
+checked against the worker/reader without another scientific kernel or counterfactual query.
+The original659764byte worker summary remains remote at its recorded path/hash; this compact
+projection does not replace or silently rewrite it. The per-user arrays and full gap records
+remain in that summary and its hash-bound canonical outcomes/NPZ files.
+
+The fixed primary is complete payload-J/256. Worlds are the32 independent paired units;
+the intervals below are the declared descriptive mean±1.96SE, not simultaneous confidence
+coverage, training replication or confirmatory inference. Positive waiting/gap differences
+are adverse. P/U32 levels and U32−P follow:
+
+| Endpoint | P | U32 | Difference [descriptive interval] |
+| --- | ---: | ---: | ---: |
+| Payload J | .444107595 | .451637183 | +.007529588 [+.004058439,+.011000736] |
+| Raw J | .455542010 | .463229479 | +.007687470 [+.004121300,+.011253639] |
+| Payload served/tick | 26.966027832 | 27.225659180 | +.259631348 [−.034785562,+.554048257] |
+| Raw served/tick | 27.660156250 | 27.924072266 | +.263916016 [−.038355944,+.566187975] |
+| Payload quality | .221944017 | .234926514 | +.012982496 [+.006254137,+.019710856] |
+| Mean user age | 1.915839844 | 2.856250000 | +.940410156 [+.135011600,+1.745808713] |
+| Worst-user mean age F | 6.822631836 | 11.552856445 | +4.730224609 [+1.327564410,+8.132884809] |
+| Maximum unserved gap | 39.968750 | 58.375000 | +18.406250 [+6.763120,+30.049380] |
+| Maximum closed gap | 39.343750 | 53.937500 | +14.593750 [+4.205668,+24.981832] |
+| Maximum right-censored gap | 17.281250 | 28.625000 | +11.343750 [+.844519,+21.842981] |
+| Mean per-user maximum gap | 14.791875 | 18.805625 | +4.013750 [+.600561,+7.426939] |
+| Service p10 | 24.343750 | 25.218750 | +.875000 [−.026799,+1.776799] |
+| Mean UAV path, metres | 6680.578509 | 6231.543159 | −449.035350 [−832.599127,−65.471574] |
+| Transmitter-on UAV-ticks | 869.343750 | 811.906250 | −57.437500 [−76.737838,−38.137162] |
+
+Payload-J improves in26worlds and declines in6:29641000,29641003,29641009,
+29641017,29641021and29641031.
+All32 signed primary, service, waiting, resource and companion values are retained in
+result.json; no adverse world was filtered. Maximum unserved gap worsens in22worlds,
+improves in9 and ties in1; mean age worsens in26 and improves in6. There are no fleet-wide
+zero-service ticks or never-served users in either arm. Mean episode minimum served is
+14.8125/15.25, with U−P+.4375 [−.001983,+.876983]; this does not establish a service floor
+or continuity guarantee. Sensor clipping/saturation counts are zero for both arms.
+
+All4096whole C-plus-manager rounds complete within1.336s. The maximum actually observed
+round wall is P .049592430s/U32 .253561227s; mean per-episode accumulated round wall is
+1.382269930s/9.435088751s and round CPU1.431300776s/9.757962022s. These are measured
+node/runtime outcomes, not an equal-work speed comparison against the historical scalar
+proxy or a deadline guarantee on other machines. Per episode, both transmit24000report
+bytes plus1024command bytes, with400setup-map bytes,3200sounding slots/6.4s and249.6
+payload-weighted ticks. Positive .9 report-tick service still resets the discrete age;
+no sub-tick continuity or hardware calibration was tested. Delivered command changes
+from each arm's previous command average63.4375/62.90625 per episode, and mask changes
+20.46875/15.34375. These are within-arm changes, not same-state causal ablations.
+
+The main worker/reader sum is3154.216731process CPU-s. Including the fixed H8 process
+and the published source-test child gives3166.677581measured CPU-s, with waited-child
+CPU and incompletely metered preparation/adviser/support work separately retained.
+Source/H8/main/reader invocation wall sums to3077.276606s; this sum is not batch elapsed
+or occupied-node time. Per-process peak RSS values are not summed as a simultaneous peak.
+The full scientific/native exposure is64H256+4H8 episodes,16416native steps,0fits/updates;
+all required constructor/discarded-reset and pure-check exposure remains above. Main
+worker/reader each uses20529026candidate fleet scores and5132256500SINR entries; model
+normal materializations are57344000per side. Including H8 and the bounded source suite,
+model-plus-synthetic normal materializations total115193500, within the priced ceiling.
+Worker+reader current-C calls total61500including H8. Verification is paid work distinct
+from the controller's intrinsic search. No failed native episode, repair panel, repeated
+fit or changed scientific rule was hidden in those totals.
+
+
+<a id="b01-independent-review-and-disposition"></a>
+## 2026-10-01 09:00 UTC — complete independent scientific review and disposition
+
+The existing ResearchCritic (`scientific_reading`, configured Astra/max role) received the
+original selected question, source contract, supportive/adverse sources and complete
+worker/reader evidence. Its original context was separate; this follow-up reused that
+context, as the reviewer explicitly discloses. Its full answer is preserved below before
+my resolution. It generated no extra experiment or numerical-reader run and holds no live
+raw-data, process or scratch consumer.
+
+### Original reviewer answer
+
+I recommend **retaining U32’s conditional payload-J capability, closing this fixed purchase, and buying no automatic replication or repair**. The result is an active package benefit with substantial user-waiting costs. Those costs constrain adoption; they do not retroactively change the prespecified payload-J endpoint.
+
+This follow-up reused the existing separate reviewer context. I reconstructed the result before considering the recorded interpretation and prior advice; this was not a fresh blinded review of the study.
+
+The frozen source is `9b6f493b343c2939b374a1ce21384266d3257456`. The [config](/home/fires/hmasd-wsl/runs/uav_radio_uncertainty/b01_correlated_shadow_a01/config.json), launch manifests and terminal [reading.json](/home/fires/hmasd-wsl/runs/uav_radio_uncertainty/b01_correlated_shadow_read_a01/reading.json) agree. The original worker summary at `/home/wu/projects/HMASD/runs/uav_radio_uncertainty/b01_correlated_shadow_a01/summary.json` matches SHA256 `6dca1d6ed767d689b36bcd7aa932e8076a616613ececfeadafb111a03341c140`.
+
+All 32 paired worlds completed. The fixed primary reading is:
+
+| Outcome | P | U32 | U32−P, descriptive 1.96-SE interval |
+|---|---:|---:|---:|
+| Payload J/256 | 0.444108 | 0.451637 | **+0.007530 [0.004058, 0.011001]** |
+| Payload served/tick | 26.9660 | 27.2257 | +0.2596 [−0.0348, 0.5540] |
+| Mean user age | 1.9158 | 2.8563 | **+0.9404 [0.1350, 1.7458]** |
+| Maximum unserved gap | 39.9688 | 58.3750 | **+18.4063 [6.7631, 30.0494]** |
+| Worst-user mean age | 6.8226 | 11.5529 | **+4.7302 [1.3276, 8.1329]** |
+
+Payload J improved in **26 worlds and declined in six**. Its service-count companion remains uncertain around zero; the quality increment contributes to the objective benefit. Neither arm had a fleet-wide zero-service tick or a never-served user, but those coarse facts plainly do not establish satisfactory continuity.
+
+I directly inspected hash-matched raw and saved outcome artifacts for worlds `29641005`, `29641019`, `29641020` and `29641031`, under the worker’s `raw/` and `outcomes/` directories:
+
+- **Strongest objective gain, world 29641005:** payload J increased **0.0324744** and raw service increased **1.953125 users/tick**. Nevertheless, maximum gap rose **28→129 ticks**. U32’s user 28 had a **closed** gap `[118,247)`, so terminal censoring cannot explain away this harm.
+- **World 29641019:** payload J increased **0.0180351**, while maximum gap rose **44→138** and mean age **1.8752→12.4266**. U32’s user 34 remained unserved over `[118,256)`. That is a right-censored 138-tick observed gap, not evidence that service resumed at 256.
+- **World 29641020:** payload J increased **0.0109988**, alongside a **closed 127-tick gap** for user 48, versus P’s maximum of 29.
+- **Strongest objective loss, world 29641031:** payload J declined **0.0163034** and raw service declined **1.554688 users/tick**, even though maximum gap improved **51→35**. Neither policy dominates every world or every service criterion.
+
+The proposed nonlinear-integration explanation receives useful, bounded support. P is a competent ordinary comparator: it receives the same measurements, known stochastic law, search rights and delivery budget, and uses analytic expected received powers. U32’s gain therefore cannot be dismissed as merely correcting an uninformed free-space baseline. All **4,096 manager decisions met the deadline**, and delivered command/mask changes were frequent. This is not nonactivation or fallback-dominated evidence.
+
+The result establishes the **finite U32 program’s** increment, however. It does not isolate exact expectation integration from finite Monte Carlo selection, different adaptive search paths or subsequent policy–trajectory interaction. The 32 particles are nested calculations, not independent experimental replication; there are 32 paired worlds and zero training fits.
+
+The strongest consequential limitation is the interaction between **the native objective and the host’s persistence law**. J contains service and quality, but no individual waiting penalty. U32 used fewer transmitter-on ticks and less travel on average. The saved stationary ending in world 29641019 is consistent with concentrating service on a persistent beneficiary set. Because this host freezes channel residuals during hover, persistence may help both the objective gain and prolonged exclusion. That is a plausible constructive explanation and limitation, not an identified causal decomposition. The closed adverse gaps also show that censoring alone is not the explanation.
+
+The prior deadline concern is weakened for this implementation on the measured node. Mean whole-round computation accumulated per mission was **1.3823 s for P versus 9.4351 s for U32**, with no decision exceeding its 1.336-second allowance. This does not establish performance on another computer or a controlled speedup over historical scalar estimates.
+
+The actual bill is substantial but below the original numerical-runtime forecast:
+
+- **Zero fits/updates; 64 H256 scientific episodes and 16,384 steps**, plus four H8 correctness episodes and 32 steps.
+- Worker: **380.244 s wall, 392.749 s CPU**, peak RSS **426,208 KiB**.
+- Full numerical reader: **2,678.822 s wall, 2,761.467 s CPU**, peak RSS **402,112 KiB**.
+- Correctness: **4.512 s CPU**; published synthetic tests: **7.949 s child CPU**.
+- Main canonical NPZ evidence: **150,807,102 bytes**; correctness NPZ evidence: **330,780 bytes**.
+- Worker and reader each processed **20,529,026 candidate fleet scores**. Verification cost must remain separate from intrinsic controller computation.
+- Both programs paid the declared measurement, traffic, sounding and delivery charges. Source/adviser/support work and the separate launch-shell failure’s overhead remain incompletely metered, not free. Terminal scientific rows contain no failed native episode.
+
+My correction is to retain the result as **conditional ordinary cooperative-control capability**, with its adverse continuity witnesses attached. Do not call it service preservation, field validity, learning, or evidence that the common sensing package pays for itself. Equally, do not discard the positive merely because a different adoption criterion would reject it.
+
+**No additional native observation is worth purchasing automatically here.** The already-owned `uav_radio_information_cost` P_FULL/P_PRIOR comparison is the smallest currently selected complete observation addressing a consequential missing premise: whether buying this central CSI package benefits ordinary control after its acquisition and timing costs.
+
+Its possible outcomes change different judgments:
+
+- A favorable complete result would strengthen the case for purchasing that information under its declared comparator and service tradeoffs.
+- An adverse or unresolved result would require any future deployment case for U32 to confront a cheaper ordinary reference directly.
+- Neither outcome can be added algebraically to U32−P, nor establishes U32’s performance without the common sensor. Any resulting integrated comparison needs its own prospective contract and complete price; this review selects none.
+
+I checked source governing physical-channel lifecycle, separated random streams, moments/particles, wire information, deadlines and outcome reading; all signed primary world effects and consequential companion summaries; terminal audit identities/counts; and the positive/adverse artifacts named above. I did **not** rerun numerical readers, generate new scientific calculations, independently reproduce every candidate score, validate physical calibration, or establish an acceptable user-waiting threshold. The completed numerical audit and engineering review retain those distinct responsibilities. I created no scratch or duplicate evidence and hold no live raw-file consumer.
+
+**MATERIAL_DISSENT: no** — retain the bounded positive and complete adverse evidence, close the fixed purchase, and make no automatic new investment.
+
+### DM resolution and changed explanation
+
+I accept that recommendation without a material scientific disagreement. The prospective
+positive payload-J prediction is supported conditionally by the finite complete P/U32
+comparison, with26positive/6adverse worlds. The anticipated numerical-cost risk did not
+turn into deadline failure on the actual node; this weakens the claim that U32 is currently
+unusable under this clock. The previously unmeasured complete benefit is now an active
+ordinary capability. The service-count gain remains unresolved and the new adverse
+waiting evidence blocks any service-preserving or broad default-adoption interpretation.
+The prespecified J result is retained; waiting harms do not retroactively change its endpoint.
+
+The useful explanation is narrower than exact-expectation superiority: integrating joint
+RF trajectories with the declared finite search changes native outcomes relative to a
+matched informed expected-power controller. Finite sampling/search-path and subsequent
+trajectory interactions remain unseparated. Neither common-sensor acquisition value nor
+channel-field validity was compared. The absence of an individual waiting term, native
+greedy grants and hover-persistent residuals plausibly help explain stable beneficiary
+sets; no new suffix replay or modified model was bought to isolate those links. The
+closed129/127tick exclusions mean that terminal censoring cannot be their sole cause.
+Fewer Tx ticks/path length remain measured exposure, not battery or hardware-energy gains.
+
+This updates the shared nonlinear-model/decision-value judgment without overturning
+finite_model_decision_value B02: a distinct complete RF-realization comparison now has a
+positive conditional objective increment, while that persistent-parameter/hidden-peer
+study's unresolved U−P results remain valid. Deterministic-host continuity failures are
+still not diagnosed as RF-model error. Representation and actual action use are established;
+learnability was not tested, and a method novelty or field-use claim is not selected.
+
+For next investment I compared unchanged replication, more particles/another deadline,
+a continuity-focused revision and ending the fixed purchase. Repetition could refine this
+population effect, but does not answer whether the common information package is worth
+buying or supply an acceptable service/waiting contract. Particle/deadline changes have no
+observed failure here to repair. A continuity-constrained full controller could be useful,
+but would change the objective/comparator, require a competent ordinary controller with the
+same information/resources, and pay a fresh complete comparison; its usefulness is currently
+a conjecture, not a consequence of this positive J result. The concrete already-owned
+P_FULL/P_PRIOR study addresses information purchase. It is independent work under the other
+lead, not another arm of this study, not a dependency required to close it, and its effects
+cannot be added to U32−P. Any later integrated comparison belongs to Root's cross-question
+selection with its own prospective price. No conditional experiment is silently registered.
+
+I therefore close B01 with U32 as a conditional payload-objective option, P as its cheaper
+matched reference, all waiting/service tradeoffs and canonical positive/adverse evidence
+retained. There is no new fit, native panel, open adviser, queued producer or automatic
+repair here. The broader question remains open. Concrete re-entry would require a selected
+use decision with a specified continuity criterion or a direct cheaper-reference comparison,
+not simply an invitation to repeat the positive. The one adequate independent reading
+covers this scoped closure; no distinct unresolved disagreement warrants a second Pro pass.

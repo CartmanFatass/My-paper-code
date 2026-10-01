@@ -1,0 +1,61 @@
+{
+  "at": "2026-10-01T08:56:31.361946+00:00",
+  "node": "wsl_4070",
+  "before_allocated_bytes": {
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/58bb94a971024c3eb35b5215eaa224ef": 818274304,
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/c7d012083adb4ec3a05a57514b71f91d": 818282496
+  },
+  "collector_exit": 0,
+  "collector": {
+    "mode": "apply",
+    "snapshots": [
+      {
+        "claim": "/home/wu/projects/HMASD/.git/hmasd-admission/e1cf2d4a9f1d6df7f053e4e432958477350a3b8bd5cf2e414464499dac968de8.json",
+        "durable_ref": "refs/remotes/origin/HEAD",
+        "eligible": true,
+        "output": "/home/wu/projects/HMASD/runs/uav_radio_uncertainty/b01_correlated_shadow_a01",
+        "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/58bb94a971024c3eb35b5215eaa224ef",
+        "removed": true,
+        "sha": "9b6f493b343c2939b374a1ce21384266d3257456",
+        "snapshot": "58bb94a971024c3eb35b5215eaa224ef"
+      },
+      {
+        "claim": "/home/wu/projects/HMASD/.git/hmasd-admission/f146835eea60cf9e70ace56d8b46241c574abb298bd9c6b1d0a7d7d138e9c40a.json",
+        "durable_ref": "refs/remotes/origin/HEAD",
+        "eligible": true,
+        "output": "/home/wu/projects/HMASD/runs/uav_radio_uncertainty/b01_correlated_shadow_read_a01",
+        "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/c7d012083adb4ec3a05a57514b71f91d",
+        "removed": true,
+        "sha": "9b6f493b343c2939b374a1ce21384266d3257456",
+        "snapshot": "c7d012083adb4ec3a05a57514b71f91d"
+      }
+    ]
+  },
+  "collector_stderr": "",
+  "after_allocated_bytes": {
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/58bb94a971024c3eb35b5215eaa224ef": 0,
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/c7d012083adb4ec3a05a57514b71f91d": 0
+  },
+  "net_reclaimed_bytes": 1636556800,
+  "snapshot_checks": [
+    {
+      "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/58bb94a971024c3eb35b5215eaa224ef",
+      "absent": true,
+      "registration_absent": true
+    },
+    {
+      "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/c7d012083adb4ec3a05a57514b71f91d",
+      "absent": true,
+      "registration_absent": true
+    }
+  ],
+  "retained_evidence": {
+    "worker_summary_path": "/home/wu/projects/HMASD/runs/uav_radio_uncertainty/b01_correlated_shadow_a01/summary.json",
+    "worker_summary_sha256": "6dca1d6ed767d689b36bcd7aa932e8076a616613ececfeadafb111a03341c140",
+    "worker_artifacts": 129,
+    "worker_artifacts_all_hash_verified": true,
+    "worker_artifact_bytes": 150807102,
+    "reader_path": "/home/wu/projects/HMASD/runs/uav_radio_uncertainty/b01_correlated_shadow_read_a01/reading.json",
+    "reader_sha256": "099d634bc5ee3536193f36e3e2a76382ca9cb6e0edf9d8f9448d52bab38721dd"
+  }
+}
