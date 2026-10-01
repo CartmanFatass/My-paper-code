@@ -7061,3 +7061,68 @@ four61-step engineering streams and one full actual-policy reader on fresh-admit
 with source published first and no automatic duplicate on failure. Nonempty synthetic evidence
 will remain separate if that engineering world has sparse or empty user exposure. The unchanged
 96-mission study follows only a read engineering result, without a new pilot or source tuning.
+
+<a id="b09-engineering-reading"></a>
+
+**B09 native engineering read,2026-10-01 UTC.** The fixed source is
+93166e7ac6cffa3c76da113afdc84e7317bb585c. Published control was fresh and the executing
+wsl_4070 had15100661760 bytes MemAvailable,20logical CPUs and842841333760 free disk bytes
+before this serial entry. The maintained canonical config/launcher/admission/preflight bytes
+matched the published source; canonical HEAD/other writers were left intact. The supervisor
+`uft-b09-engineering-93166e7ac-a01` accepted its command first. One early status check found
+no output while the snapshot was still being prepared; the same supervisor log then supplied
+the accepted native manifest, with no repeated launch. Exact command/process/source/output
+identity is in `runs/uav_fleet_transmission/b09_service_prediction_engineering_a01/launch-manifest.json`;
+native operation ends `70968445e33f1bba7a20362ca356a2574b618dce61b6a3534772aa36757c053a.json`.
+
+The same-handle observer was armed from the stopped/consumed generation29 state via30→31,
+using `temp/directions/uav_fleet_transmission/b09-engineering-wait.json`. Generation31 READY
+eventa10ece99748b8b3f902e83ef was drained with wake04281f54-e560-4b13-877e-fc2da862ea52:
+accepted, native exit0 at epoch1790844279.4382222, runner/supervisor absent and records
+consistent. App queue delivery again returned−32600 for a native child; observation itself
+completed and this active DM read it directly. The consumed event was rearmed to generation32;
+no alternate address, duplicate worker or replacement operation was created.
+
+All4/4 episodes completed244 actual native transitions,8stream/probe constructions and4resets,
+0fits/labels/updates. The integrated reader is VERIFIED,244actual proposals and244shield calls
+reconstructed, no missing fields/unverified ranking/failed or unstarted jobs. All native C
+arrays exactly match the original REFERENCE; all C/H/F common user paths match through62
+boundaries, and proposals/submissions/xyz targets/physical paths coincide throughout. Native
+S7-S2/H3000/dt1/1Mbps/fault-free parameters, energy/reward/route chronology and per-user/UAV
+reductions passed their saved-data checks. Engineering stops are explicit harness truncations,
+not native mission endings. This is technical integration, not a service-prediction result.
+
+The whole61-step world has ZERO lawful user-slot detections/tracks/candidates. Each H/F worker
+and reader constructed one private model as declared, but ran zero RF/nominal candidates;
+all3plans used the original ring fallback. There is therefore no nonempty native search or
+new10/20/30 accuracy evidence from this prefix. The already-counted nonempty synthetic checks
+remain the separate source correctness evidence; no second engineering world is added.
+Per execution and per reader:244proposals/shield,12plans,128canonicalizations,122associations,
+6current and9future projection arrays,2models,0Lloyd/forecast/RF calls. Whole engineering
+model constructors4; no model reset/step. All arms J=12.094080385553108 and cumulative
+QoS=12.440639360639361 on this short prefix, which is not a complete-mission claim. The twelve
+native users without any delivery and maximum61-step observed outage are retained in the
+individual summaries, not hidden by positive team service.
+
+Measured chain11.887242143CPU seconds/12.116991216wall seconds, including parent and reaped
+worker/reader import overhead. WorkerbodyCPU5.122165990s, readerbodyCPU.391168232s; maxima
+RSS498644KiB(worker),473504KiB(reader),472768KiB(parent), not a simultaneous summed peak.
+Network/admission/support are additional. Sole raw evidence remains on wsl_4070 at
+`/home/wu/projects/HMASD/runs/uav_fleet_transmission/b09_service_prediction_engineering_a01/raw/`:
+4NPZ788152stored/794624allocated bytes,5263572 uncompressed array bytes; all8raw+progress
+manifest entries789587stored/811008allocated bytes freshly rehashed against the manifest.
+All11 top-level JSON files were collected locally and verified hash/size-identical. The
+manifest carries each content identity; no second raw corpus was copied.
+
+After verified collection the exact disposable source snapshot
+`/home/wu/projects/HMASD/.git/hmasd-launch-sources/4c59c5f284bc4057ba2a0db7ff541fd8` was deleted
+by the maintained snapshot collector and is absent from disk/Git worktree registration.
+Allocated818995200→0 bytes: net818995200 reclaimed. Initial preview refused inspection of
+protected own process660cwd; the documented `--sudo-process-scan` read-only probe established
+eligibility and apply succeeded. Claims/manifests/sole raw evidence remain. There is no cleanup
+blocker for this target, no backup copy and no source/code alteration.
+
+**Next accepted scope unchanged:** one96-mission C/H/F panel on29890001..29890032 with full
+actual-candidate reader, source93166e7ac, four workers followed by two readers subject to a
+fresh actual-node memory check. The engineering result does not enlarge the finite checks or
+world list. Source/model/scoring/tracker/native dynamics and interpretation branches stay fixed.

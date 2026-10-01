@@ -1,0 +1,63 @@
+{
+  "artifacts": {
+    "config.json": {
+      "allocated_bytes": 8192,
+      "bytes": 7000,
+      "sha256": "b471fb18cd75d38c0780d30f9cafeecb6f6581f540007269df9dec1ab3e59423"
+    },
+    "perworld.json": {
+      "allocated_bytes": 61440,
+      "bytes": 57991,
+      "sha256": "df8159de170dc82931622f69adf9a1e72a2a77ba99f56416eb4f967d4e010e99"
+    },
+    "summary.json": {
+      "allocated_bytes": 4096,
+      "bytes": 1232,
+      "sha256": "a1b55b66c8d5359418c9830dc2afa64f1f2da376e000c6d0c572fce949dcca2a"
+    }
+  },
+  "launch_sha": "93166e7ac6cffa3c76da113afdc84e7317bb585c",
+  "object": "fleet-b09-lawful-service-prediction-v1",
+  "raw": {
+    "raw/29890099_C.npz": {
+      "allocated_bytes": 196608,
+      "bytes": 194780,
+      "sha256": "a6b066acee232afdddc38d1823bd5cc633dc5b43446cfddd1500513f1f21f0fe"
+    },
+    "raw/29890099_C.progress.json": {
+      "allocated_bytes": 4096,
+      "bytes": 374,
+      "sha256": "789c77a8bc56cbc4b1b7478dd3cf61da9b7fec0ad49d8a571e03871de2122d4d"
+    },
+    "raw/29890099_F.npz": {
+      "allocated_bytes": 200704,
+      "bytes": 199296,
+      "sha256": "57051971c263a09415de0b3b28d1c8342ed6d25b5f79ecdaa58da82e0c516635"
+    },
+    "raw/29890099_F.progress.json": {
+      "allocated_bytes": 4096,
+      "bytes": 361,
+      "sha256": "c4b5a37e1f3cf57ec782b6b6caf5dd4ed8c27bf021754a708d03a0dbfaab4b1d"
+    },
+    "raw/29890099_H.npz": {
+      "allocated_bytes": 200704,
+      "bytes": 199296,
+      "sha256": "57051971c263a09415de0b3b28d1c8342ed6d25b5f79ecdaa58da82e0c516635"
+    },
+    "raw/29890099_H.progress.json": {
+      "allocated_bytes": 4096,
+      "bytes": 332,
+      "sha256": "aa07c20333d3a93636de9386f80de52793b6d30fe8dfa52e1c090162625abf22"
+    },
+    "raw/29890099_REFERENCE.npz": {
+      "allocated_bytes": 196608,
+      "bytes": 194780,
+      "sha256": "a6b066acee232afdddc38d1823bd5cc633dc5b43446cfddd1500513f1f21f0fe"
+    },
+    "raw/29890099_REFERENCE.progress.json": {
+      "allocated_bytes": 4096,
+      "bytes": 368,
+      "sha256": "85eec7e53f5c2a92e84e1df7b1d061036af7cc0e962ece178d9c1f364f6d283e"
+    }
+  }
+}
