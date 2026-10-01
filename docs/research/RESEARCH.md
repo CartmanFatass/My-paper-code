@@ -2379,8 +2379,9 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 **2026-10-01 PDT — owner 恢复后，Root 已选择三项完整研究，并委托第四位 DM 构造 S7 的具体后继。**
 上一轮四项结果／独立判读／清理已完成，原[handoff](HANDOFF_20261001_ROOT_AND_FOUR_DMS.md)保持历史原文。
 新 Root 读取了三项完整原建议及 DM 回应，复用适用的独立科学审阅；新增跨题 reviewer
-`/root/successor_allocation_review` 已从紧凑原结果与源接口核对，初步未发现阻止三项原比较选择的实质异议。
-其最终答复仍在完成，任何新增实质问题只阻止受影响的新投入，不成为普通执行的逐批审批。
+`/root/successor_allocation_review` 已完整返回，Root 读完并采纳，MATERIAL_DISSENT: no。
+支持投入冲突时优先 RF、再 CAL/CONT、最后静默承诺；这不是正分排序，也不阻止独立工作并行。
+[完整原问答、实际检查范围与 Root 处置](archive/2026-10-01/RESEARCH-successor-allocation-review.md)保留；S7 具体合同以同一审阅的 focused follow-up 核对有变化部分。
 
 | 本次分配与要改变的判断 | 已选完整比较／成本预测 | 当前责任 |
 | --- | --- | --- |
