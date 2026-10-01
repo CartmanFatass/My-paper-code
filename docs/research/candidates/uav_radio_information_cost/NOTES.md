@@ -1162,3 +1162,148 @@ This source-only task does not make that scientific selection or count the helpe
 its required review. The corrected Jagannathan printed locator is pp.491–493; the previously
 quoted pp.136–138 remains only inside the unedited original advice. Neither correction
 changes the proposed source interfaces, query counts, cost bounds or the completed B01 result.
+
+<a id="b02-original-independent-selection-review"></a>
+## 2026-10-01 — Complete independent Astra scientific assessment; unselected handoff option
+
+Root assigned `/root/oracle_rf_integrated` through the registered
+`hmasd-research-critic` role and verified its actual Astra/max runtime. The independent
+assessment below is distinct from the earlier Luna/medium Scout advice, whose originals
+and provenance corrections remain above. The complete original final was received at
+2026-10-01 10:34:36 UTC and read in full. Root's disposition and the DM's response follow
+separately; neither is folded into the original answer. No new study is selected.
+
+### Complete original ResearchCritic final
+
+```text
+I recommend retaining **one fresh `U32_FULL` versus `P_PRIOR` comparison as a worthwhile, unselected option for handoff**. If RF work resumes, I favor this bounded purchase over ending the RF question with the present evidence. Its contribution would be a complete program-use result and empirical boundary, with no learning or field-validity claim. The owner’s current handoff-and-stop boundary remains intact.
+
+I received no inherited DM or Root conversation. The assignment contained result summaries and a priced candidate, so this was not a blinded review. I reconstructed the frozen comparisons and consequential outputs before reading the complete earlier recommendations, original DM source reply, and recorded dispositions. Different context or model identity supplies no additional empirical replication.
+
+The two completed results support distinct conclusions:
+
+| Comparison | Supported observation | Consequential limitation |
+|---|---|---|
+| U32−P, source `9b6f493b343c2939b374a1ce21384266d3257456` | Payload J **+.007529588**, descriptive interval **[+.004058439,+.011000736]**, 26 positive and six negative worlds | Payload-service increment is unresolved; mean age, worst-user mean age and maximum gap worsen with positive adverse intervals |
+| P_FULL−P_PRIOR, source `a80e2be9e3341b3bebfa743dacfda5e4ff13d977` | Payload J **−.015929915 [−.019169458,−.012690371]**; all 32 differences negative, including one near tie; raw J and service also decline on average | FULL improves waiting in many worlds, but aggregate waiting intervals cross zero and both programs have severe individual tails |
+
+These values agree with the original [RF result](/home/fires/hmasd-wsl/runs/uav_radio_uncertainty/b01_correlated_shadow_a01/result.json), [RF reader](/home/fires/hmasd-wsl/runs/uav_radio_uncertainty/b01_correlated_shadow_read_a01/reading.json), [information-package summary](/home/fires/hmasd-wsl/runs/uav_radio_information_cost/b01_pilot_package_a01/summary.json) and [information-package reader](/home/fires/hmasd-wsl/runs/uav_radio_information_cost/b01_pilot_package_read_a01/reading.json). The actual latter tags are `b01_pilot_package_a01` and `b01_pilot_package_read_a01`.
+
+I directly read the saved worker outcomes for consequential witnesses. In RF world **29641005**, U32’s strongest J gain coexists with a **129-tick closed gap**, versus P’s maximum 28. World **29641020** has a **127-tick closed gap** under U32; world **29641019** has a distinct **138-tick right-censored gap**. Censoring cannot explain away the closed exclusions. In the information comparison, world **29651010** gives PRIOR a **203-tick right-censored gap** despite its better J; world **29651029** gives FULL a **150-tick right-censored gap**, versus PRIOR’s 95. No team-wide outage or never-served user does not imply satisfactory individual continuity.
+
+Both interventions were active and timely. Each comparison completed all 4,096 manager rounds without deadline misses. The RF maximum U32 round was .25356 seconds against 1.336 seconds allowed. The information programs produced extensive command and mask differences. Technical nonexecution and manager deadline fallback are therefore poor explanations for their results. Local C’s own fallback decisions are a separate quantity.
+
+The supported explanation is that **finite joint-outcome integration can improve the native objective under purchased CSI, while purchasing CSI for the expected-power program can reduce complete utility**. These findings coexist. U32’s result includes finite sampling, adaptive search and subsequent trajectory effects; it does not identify exact-expectation superiority. FULL’s result includes acquisition, payload, delivery and induced-history effects; it does not isolate an information-content effect. Neither comparison tested learnability.
+
+The strongest simple alternative remains substantial: P_PRIOR already combines the correct known channel law with lawful local C observations, proposals and navigation. It is a competent lower-cost program, although it is not a policy-conditioned optimal posterior. The native J objective contains service and quality but no individual waiting penalty. Combined with residuals that freeze during hover, this permits persistent beneficiary sets. That is a plausible explanation for simultaneous J gains and exclusion, not an identified causal decomposition.
+
+My prospective expectation therefore **leans toward PRIOR retaining the mean payload-J advantage**. This is qualitative skepticism, not subtraction of the two panel effects. The constructive competing prediction is that U32’s handling of nonlinear allocation outcomes and its resulting motion/mask feedback can make the complete paid program worthwhile even though the expected-power paid program was adverse. A fresh direct comparison distinguishes these program-use predictions; the existing panels do not supply its measured effect.
+
+The strongest case for stopping is that this would buy a narrow result on a short, approximate host, probably with another difficult service tradeoff, while consuming more engineering and reading effort than its CPU time suggests. That objection limits its priority. I nevertheless favor one comparison because it resolves a concrete choice concerning an already demonstrated capability:
+
+- A favorable result would make U32_FULL an empirically supported **complete paid-program reference** for this aggregate objective and population.
+- An adverse result would establish that this particular integration capability does not earn its complete purchase against the retained ordinary alternative.
+- An unresolved result would leave that purchase unsupported and end this bounded attempt without automatic extension.
+
+That is useful empirical understanding without requiring a novel architecture or an owner-specified universal utility threshold. It also does not make this the only remaining RF question. I have not compared the other advisers’ final proposals and costs, so my recommendation does not establish cross-project priority.
+
+The smallest worthwhile complete observation is the already priced design, without an additional attribution arm:
+
+| Element | Recommended prospective scope |
+|---|---|
+| Programs | Literal protocol-V5 `U32` at `9b6f493b…`, externally labelled `U32_FULL`; unchanged protocol-V6 `P_PRIOR` at `a80e2be9…` |
+| Panel | 32 fresh paired H256 worlds **29661000–29661031**, alternating order |
+| Integration check | One separate paired H8 fixture: two episodes |
+| Total | **66 episodes, 16,400 native steps, zero fits or updates** |
+| Primary | All-world paired complete payload-J/256; both levels, every signed difference, mean ±1.96 SE |
+| Required companions | Raw/payload service and quality; all individual ages/gaps and censoring; startup/tail outcomes; path and transmitter exposure; delivered choices, timing, fallbacks and full resources |
+
+The programs retain their unequal purchased resources: U32_FULL pays .1-second sounding and 391 bytes per report with three-tick delivery; PRIOR sends 141 bytes with two-tick delivery and buys no central CSI. Both retain common local C rights and the same physical model. Pair initial geometry and addressed physical innovations; do not require identical realized residuals after motion diverges.
+
+This is an explicitly priced comparison between information contracts. The earlier P/U32 comparison supplies the separate matched-information capability evidence. A third arm is unnecessary for the proposed complete-program claim; it would be needed for a different attribution claim. A free-sensing reference would answer a different question.
+
+A positive primary result accompanied by worse waiting remains a positive J result with a measured tradeoff. It would not establish service preservation or broad adoption. An active adverse or unresolved result should retain PRIOR as the ordinary reference and close this fixed premium-program purchase. A technical failure or fallback-dominated result should retain its execution boundary and actual expenditure, without being recast as an active intervention loss. None of these outcomes automatically selects more particles, a changed deadline, selective sensing, a continuity objective, U32_PRIOR, or another panel.
+
+I read the **complete original source price and its separate corrections**, now preserved at [commit `6fea0a365…`](https://github.com/CartmanFatass/My-paper-code/blob/6fea0a3650535b015474092dcdaa1b2210db4d36/docs/research/candidates/uav_radio_information_cost/NOTES.md#b02-integrated-package-source-only). It is sufficient for selection; no second cost request is needed.
+
+The complete prospective bill includes:
+
+- **61,500 C calls**, at most **138,990,000 C link evaluations**.
+- **30,479,724–59,889,984 candidate fleet scores**, or **7.62–14.97 billion dense score entries**, across worker and full reader.
+- **114.8 million base-normal materializations** and **229.6 million signed particle values** across those two sides.
+- **512,500 acquired link measurements**, **102,500 sounding slots / 205 simulated seconds**, **1,090,600 recurring bytes**, plus **26,400 setup-map bytes**.
+- Estimated **0.7–1.5 CPU-hours** including full reconstruction and fixed integration checks; **0.5–1.5 GiB** per sequential process; **0.15–0.35 GB** canonical evidence.
+- Approximately **2–3 GB remote snapshot-inclusive peak** with fixture cleanup first, otherwise **3–4 GB**; approximately **4–5 GB** under the stated local topology.
+- **6–12 focused support-hour equivalents**, estimated rather than measured, covering integration, review, reading, publication and cleanup.
+
+These estimates are plausible against the measured RF worker-plus-reader cost of **3,154.216731 CPU-seconds**, or **3,166.677581 seconds including its fixed checks**. The information study cost **430.588630 own CPU-seconds plus .010114 waited-child seconds**; its inexpensive scorer does not price the U32 reader. Source and adviser effort remains additional real, incompletely metered expenditure.
+
+New owned orchestration remains necessary. The dispatcher and paired reader must preserve both literal protocols and source closures; they cannot monkeypatch frozen arm/world constants or relabel packets. Both full reconstruction paths must cover all executed candidates, partial work, physics and both C-information passes. Reuse of verified kernels makes this a bounded integration task. The proposed eight data-only orchestration cases and paired H8 fixture are reasonable; independent engineering review still owns executable correctness. Fresh admission, disk availability and fresh-world deadline behavior remain unverified.
+
+My primary-source reading changes the interpretation and comparator rather than supplying a performance guarantee:
+
+- **Li and Neely, TMC 2010:** I read §§1–2, pp.527–529, the timing-overhead extension §6.1, and conclusion p.535. Acquisition costs can change which sensing/transmission program is useful; mixed acquisition can outperform pure choices in their model. Their fixed-link, known-statistics, i.i.d. queueing setting does not establish a UAV result or justify an automatic selective-sensing successor. [Author PDF](https://ee.usc.edu/stochastic-nets/docs/Dynamic-Channel-Acquisition-TMC.pdf).
+- **Jagannathan et al., INFOCOM 2011:** I read §§I–II and the opening MDP formulation, printed pp.491–492. ACK history supplies information without explicit current CSI under independent binary Markov links. That supports rejecting “no pilot means uninformed”; it does not establish sufficiency of our C/proposal interface. The earlier pp.136–138 locator was incorrect. [Author PDF](https://www.mit.edu/~modiano/papers/CV_C_140.pdf).
+- **Zhang et al., Computer Networks 237 (2023), 110055:** I read the indexed primary measurement passages, §§3.3–3.5 and Table 3, pp.2–6. The UE1/70 m values are indeed 4.14 dB and 17.62 m. They come from a 3.5 GHz campus measurement and a separation-distance correlation definition. They do not calibrate our 2 GHz free-space mean, independent links or three-dimensional path-increment process. The PDF table rendering was unavailable; its cached primary text was readable. [Author PDF](https://leizhanggg.github.io/files/5Experimental%20study%20on%20low-altitude%20UAV-to-ground.pdf).
+- **ETSI TR 138 901 V19.3.0, §7.4.4 p.41:** the directly read exponential shadow-correlation description uses horizontal distance. It supplies no certification of this host’s hover-persistent process. [Official PDF](https://www.etsi.org/deliver/etsi_tr/138900_138999/138901/19.03.00_60/tr_138901v190300p.pdf).
+
+I inspected relevant coverage of all three local stores. In the foundations library, I directly read **B01 §§3.4–3.4.1, printed pp.49–54**, supporting explicit information/history distinctions without requiring recurrence or learning: [B01 PDF](/home/fires/hmasd-wsl/docs/new-libs/papers/B01_Albrecht_MARL_Foundations_2024.pdf).
+
+In Inst-sci, I checked the 190-PDF/JSON integrity record and targeted catalog coverage, then read **MARL-0006/DACOM**, physical pp.2–3, and **MARL-0451**, pp.2–4, through their primary JSON. DACOM’s delay-dependent observations/actions are relevant background, but do not model this sensing purchase. MARL-0451 concerns worst-case transition uncertainty with generative access. One correction to the helper’s citation: it is **Shi et al., a general-sum robust Markov-game paper**, not Zhao et al. or a zero-sum-only result. This does not change its non-transfer conclusion. Sources: [MARL-0006 JSON](/home/fires/projects/Inst-sci/papers/MyLib/json/MARL-0006.json), [PDF](/home/fires/projects/Inst-sci/papers/MyLib/pdf/MARL-0006.pdf); [MARL-0451 JSON](/home/fires/projects/Inst-sci/papers/MyLib/json/MARL-0451.json), [PDF](/home/fires/projects/Inst-sci/papers/MyLib/pdf/MARL-0451.pdf).
+
+In My-lib, I checked catalog/hint coverage and directly read **ICLR-2024 `c8b2f897e45770595656a79a9ad91e89`**, pp.3–5, and **ICLR-2023 `virtual-11921`**, arXiv v1 pp.1–3. Temporally coupled adversarial perturbations differ from known stochastic RF evolution; cheap-talk channel discovery differs from buying current link measurements. These are neighboring ideas, not transferable guarantees or ready successors. Sources: [temporally coupled robustness PDF](/mnt/c/Projects/My-lib/.local-formal-capture/corpus/papers/iclr-2024/c8b2f897e45770595656a79a9ad91e89/arxiv-2307.12062.pdf), [cheap-talk PDF](/mnt/c/Projects/My-lib/.local-formal-capture/corpus/papers/iclr-2023/iclr-2023-virtual-11921/arxiv-2303.10733.pdf). Catalog misses establish only bounded coverage.
+
+The inspected July G34/G51 records concern roster transport and removable shadow-baseline machinery; G33 preserves its existing physical radio while changing demand. The July Stage-C external review reinforces competent ordinary comparisons and restricted causal interpretations. None answers this RF package contrast. I make no novelty claim from these searches.
+
+I checked consequential saved summaries and witness outcomes, frozen configurations/contracts, source/reader identity consistency, information rights and exogenous-input semantics. I relied on the completed numerical readers and original raw-artifact reviews for exhaustive reconstruction; I did not re-reduce outcomes, recheck every NPZ, rerun a reader, validate physical calibration or perform any scientific query. No records or code were edited.
+
+**MATERIAL_DISSENT: no — retain both completed readings and recommend this single bounded comparison as an unselected future option. The recommendation supports neither an automatic follow-up program nor execution before the owner’s handoff-and-stop boundary.**
+```
+
+### Separate DM response and belief update
+
+I accept the independent recommendation as one scientifically useful, completely priced
+option for later RF allocation. It changes neither completed empirical result: U32 retains
+its conditional same-sensing J capability and waiting harms; B01 retains the adverse complete
+P_FULL purchase and P_PRIOR's competent lower-information reference, with both programs'
+individual-tail limits. Their separate-panel effects are not an estimate of the unobserved
+integrated-package contrast. The open question now has a concrete program-use estimand and
+ordinary comparator, without requiring attribution of every component or a new architecture.
+
+The review's qualitative expectation favoring PRIOR is a reasonable skeptical forecast,
+not a result or numerical posterior. The competing nonlinear-outcome/motion explanation
+remains worth distinguishing if this purchase later outranks other work. A positive primary
+would establish scoped aggregate program value while retaining observed waiting/exposure
+tradeoffs; adverse or unresolved evidence would end the fixed purchase without automatic
+extension. Technical failure remains separate from active scientific loss. I do not turn
+the review into a cross-project priority ranking or a requirement for Root to buy it.
+
+The existing complete source bill is sufficient for that later choice. No second price,
+prototype, model query or engineering implementation is needed for the handoff. If selected
+after explicit resumption, the new owned orchestration, exact prospective contract, independent
+engineering review, published inputs and actual-node admission would still be required.
+No frozen implementation, old source evidence or primary result is changed by this advice.
+
+### Separate primary-source errata
+
+The old helper's MARL-0451 attribution is corrected to **Shi et al., general-sum robust
+Markov games with worst-case transition uncertainty and generative access**. It is neither
+Zhao et al. nor a zero-sum-only theorem. The independent reviewer read its primary JSON
+pp.2–4; Root requested separate preservation of this correction. The earlier helper text
+remains unchanged. Its narrow non-transfer conclusion is retained, without treating catalog
+coverage or corrected authorship as evidence about this host's empirical value. The earlier
+Jagannathan printed-page correction and Scout runtime provenance correction also remain
+separate and in force.
+
+### Original Root disposition and owner handoff boundary
+
+```text
+The new /root/oracle_rf_integrated Astra/max review has returned its COMPLETE final answer; I read it in full. It recommends the already priced U32_FULL/P_PRIOR comparison as one worthwhile UNSELECTED handoff option, with a qualitative expectation leaning toward PRIOR, no cross-project priority claim, no expanded attribution/field/continuity claim and MATERIAL_DISSENT:no. Please read and preserve the exact complete original final in your owned NOTE, then record your own response and the owner's no-selection/no-launch handoff boundary separately. Root's disposition is to retain this recommendation and full price for later allocation, not select the experiment now. Preserve its additional primary-source correction: MARL-0451 is Shi et al. on general-sum robust Markov games, not Zhao/zero-sum-only. Keep the earlier helper text unchanged with separate errata. Your source task can then close, with no operation or unused scratch created. The handoff file currently belongs to fleet-adaptation's exclusive writing turn; wait for your turn before editing your section.
+```
+
+The owner requested finishing the present round, then one standalone Root-and-four-DM
+handoff. This source/advice task is now complete. Parent B01–B09, the lower-motion
+no-purchase disposition and RF-information B01 remain closed; the proposed RF B02 remains
+unselected. There is no new accepted operation, experimental code, unused scratch or cleanup
+blocker. The handoff is documentation, not resumption authority. Root controls the exclusive
+section-writing order; this DM will write only its granted section after that turn is issued.
