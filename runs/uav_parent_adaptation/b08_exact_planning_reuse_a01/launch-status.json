@@ -1,0 +1,76 @@
+{
+  "admission": {
+    "claim_state": "accepted",
+    "state": "accepted"
+  },
+  "artifacts": {
+    "stderr": {
+      "path": "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b08_exact_planning_reuse_a01/stderr.log",
+      "state": "present"
+    },
+    "stdout": {
+      "path": "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b08_exact_planning_reuse_a01/stdout.log",
+      "state": "present"
+    },
+    "summary": {
+      "path": "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b08_exact_planning_reuse_a01/summary.json",
+      "state": "present"
+    }
+  },
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/7b3713525a20bdb83e76a5e952cf89de8a6f2a8d6e95e65056f1da476192489d.json",
+  "direction": "uav_parent_adaptation",
+  "execution": {
+    "exit_code": 0,
+    "exit_witness": {
+      "exit_code": 0,
+      "finished_at_epoch": 1790825151.550753,
+      "path": "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b08_exact_planning_reuse_a01/process-exit.json",
+      "state": "valid",
+      "termination": "process_exit"
+    },
+    "runner": {
+      "recorded_identity": {
+        "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+        "kind": "linux_pid_start_ticks",
+        "pid": 1394964,
+        "session_id": 1394962,
+        "start_ticks": 25889906
+      },
+      "state": "absent"
+    },
+    "state": "exited",
+    "supervisor": {
+      "recorded_identity": {
+        "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+        "kind": "linux_pid_start_ticks",
+        "pid": 1394962,
+        "session_id": 1394962,
+        "start_ticks": 25889902
+      },
+      "state": "absent"
+    }
+  },
+  "explicit_retry": {
+    "eligible": false,
+    "reasons": [
+      "parent has no consistent terminal nonzero native exit"
+    ],
+    "scientific_authorization": false,
+    "successor_ref": null,
+    "supported": true
+  },
+  "explicit_retry_available": false,
+  "kind": "hmasd_operation_status",
+  "manifest_ref": "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b08_exact_planning_reuse_a01/launch-manifest.json",
+  "node": "local_linux",
+  "observed_at": "2026-10-01T03:27:39.092615Z",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/7b3713525a20bdb83e76a5e952cf89de8a6f2a8d6e95e65056f1da476192489d.json",
+  "output_root": "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b08_exact_planning_reuse_a01",
+  "record_consistency": {
+    "mismatches": [],
+    "state": "consistent"
+  },
+  "schema_version": 1,
+  "sha": "ba18513feec96ed4de8d7cf111f6587e99df8271",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/c060d43367b841d2b1852d9aefd4b26a"
+}

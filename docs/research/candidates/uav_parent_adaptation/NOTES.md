@@ -7414,3 +7414,375 @@ Observation uses the same child/session and30-second read-only native probes,
 with1500-second checkpoints. I keep this child turn active through collection,
 same-handle drain/rearm and full reading; queue registration does not establish
 future native-child wake delivery.
+
+**Original-operation checkpoint,02:30:49Z.** Native identities remain running
+and consistent;23/64 histories are complete and the next original G2 history
+is in its actual120 search. No scientific mismatch is reported. Generation28
+produced a CHECKPOINT; direct App queue delivery to this native child was rejected
+with−32600, while deterministic process observation remained healthy. I drained
+and consumed that event and rearmed the same operation to generation29, with no
+new worker, alternate address or repeated launch. Full collection/reading remain.
+
+**Actual later timing overlap.** Root reported that the separately selected
+waiting S_F:LRS operation was admitted locally at2026-10-01T02:45:12.333732Z
+from `69347051d55f31cc8a5c9ed71239aabd5d1d9ee6`, at
+`runs/uav_user_waiting/b06_fair_model_a01/launch-manifest.json` (supervisor1441216,
+runner1441218). Its fresh5,590,331,392 available bytes passed4GiB; its preflight
+observed this original B08 runner1394964 active at345,336KiB RSS. This is concrete
+overlap exposure to retain with B08's own boundary samples, not an isolated-machine
+timing claim. It grants no timing repeat, reservation or restart; B08 continues
+its original fixed order and accepted handle.
+
+**Original-operation checkpoint,02:55:39Z.**43/64 histories are complete;
+the original G2 reuse history for world29497010 is running, with both native
+identities consistent and no exit witness or scientific mismatch. I drained the
+generation29 CHECKPOINT and rearmed the same observer/operation to generation30.
+The same native-child queue rejection is separate from healthy observation;
+collection and the full independent reader are still outstanding.
+
+**Overlap boundary update from Root.** The waiting S_F:LRS worker completed64
+worlds and exited0 at02:54:19Z; its separate full zero-native reader was admitted
+at02:55:33Z from the same source, with5,449,162,752 available bytes and this B08
+runner still active. Thus the competing worker ended but its reader occupied the
+node next. This is recorded exposure, with no new B08 run or input change.
+
+**Overlap end reported by Root.** The waiting full reader verified64/64 and
+exited0 at03:02:56Z. Its DM verified worker/reader identities absent and stopped
+its observer. These reported boundaries therefore delimit the actual separate
+worker02:45:12–02:54:19 and reader02:55:33–03:02:56 windows. B08's boundary samples
+remain the direct per-history context; later absence does not erase that exposure.
+
+**Original-operation checkpoint,03:21:01Z.** The worker completed all64 histories
+and collected its logical outputs without a reported mismatch. The same process
+is now running the independent artifact reader (24/64 verified at this read).
+This is worker completion, not yet a fully read result. I drained generation30's
+CHECKPOINT and rearmed the original observer to31; no run or reader was restarted.
+
+<a id="b08-complete-reading"></a>
+### B08 complete: exact reuse preserves the programs and cuts their full measured cost
+
+**2026-10-01.** The original accepted operation completed the entire 64-history
+worker and independent 64-history reader, exiting 0 at 03:25:51.550753Z. The
+native runner and supervisor identities are absent and the terminal record is
+consistent. Generation 31 delivered the ready fact through deterministic
+observation; I drained the event, consumed it through generation 32 and stopped
+the observer. Its native-child queue rejection did not cause a second operation.
+The [native status](../../../../runs/uav_parent_adaptation/b08_exact_planning_reuse_a01/launch-status.json)
+and [exit witness](../../../../runs/uav_parent_adaptation/b08_exact_planning_reuse_a01/process-exit.json)
+retain execution identity. Source is `ba18513feec96ed4de8d7cf111f6587e99df8271`;
+source/admission records were already published before scientific execution.
+
+The [whole independent reading](../../../../runs/uav_parent_adaptation/b08_exact_planning_reuse_a01/reading.json)
+and [compact saved-output arithmetic](../../../../runs/uav_parent_adaptation/b08_exact_planning_reuse_a01/result.json)
+retain all 64 timings, paired-world comparisons, original outcomes, recurrence
+counts and sampled timing conditions. There are **0 new native transitions,
+worlds, fits, updates or training targets**. These are four complete controller
+replays for each of 16 already-audited B04 worlds, not 64 new native episodes.
+
+**Equality and exposure.** All 32,000 controller clock calls, 1,400 segment
+certificates, 1,246 emitted model branches and 282 private stationary banks pass.
+Both newly timed variants agree with the immutable B04 scientific arrays and
+ordered records: shapes, dtypes and all payload bits, including command/report
+precision and signed zero, decisions, banks and selected programs. All model
+terminal states are recovered from old arrays; actual final private controller
+history agrees between timed original and reuse, subject to the archival limits
+recorded before execution. All reuse keys, source times, barriers and actual
+work ledgers were independently reconstructed. The reader made **zero policy,
+scorer, model or native queries**. No mismatch, tolerance relaxation, extra
+fixture, repeat or model trajectory was purchased.
+
+The unchanged logical bill is 134,353,178 state/mask requests, 498,120 model
+physical transitions, 96,400 stationary candidate rows and 1,904,820 candidate
+transit ticks. Actual requests across the four variants are **85,180,669**;
+294,713 model ticks were computed and 203,407 reused. Ordinary original G2 and
+A2 together pay their full 249,060 ticks; their reuse variants compute 45,653
+of the same 249,060 logical ticks. Bank construction, every nested branch,
+the actual second selection, all 500 controller calls, serialization, hashing
+and certificate checks are paid separately for each timed history.
+
+| Variant, all 16 histories | Actual requests | Computed / reused model ticks | Worker CPU, s | Reader CPU, s | Worker + reader CPU, s | Worker + reader wall, s |
+|---|---:|---:|---:|---:|---:|---:|
+| G2 original | 17,271,568 | 60,500 / 0 | 798.664862 | 43.271525 | 841.936387 | 843.906060 |
+| G2 reuse | 4,940,001 | 9,514 / 50,986 | 329.164084 | 59.091323 | 388.255407 | 390.010908 |
+| A2 original | 49,905,021 | 188,560 / 0 | 2,321.702667 | 134.562313 | 2,456.264980 | 2,462.376170 |
+| A2 reuse | 13,064,079 | 36,139 / 152,421 | 936.270485 | 185.118418 | 1,121.388903 | 1,126.980197 |
+
+G2 reuse costs **46.1146%** of original G2 worker-plus-reader CPU and **46.2150%**
+of its wall time. A2 reuse costs **45.6542%** of original A2 CPU and **45.7680%**
+of wall time. Worker-only ratios are 41.2143% and 40.3269%; using those ratios
+alone would omit the larger reuse certificate-reading cost. Every one of the
+16 paired worlds has lower complete measured CPU for both reuse variants:
+G2 ratios range .441347–.474800 (median .463862), A2 .434009–.504858
+(median .452463). These are one prospectively cyclic/interleaved observation per
+variant/world, with no timing resampling or population uncertainty claim.
+
+The competent ordinary comparator improves alongside anticipation. **A2 reuse
+still costs 2.888276 times G2 reuse's worker-plus-reader CPU**, 2.889612 times its
+wall time and 2.644550 times its actual requests. Its worker-only premium is
+2.844388. The result materially lowers both absolute computation costs without
+removing anticipation's remaining cost. It does not establish native episode
+throughput, deployment latency/deadlines, a universal cost threshold or a new
+reward/generalization result.
+
+| Original world | G2 original CPU, s | G2 reuse CPU, s | A2 original CPU, s | A2 reuse CPU, s |
+|---|---:|---:|---:|---:|
+| 29497000 | 51.958190 | 22.931599 | 149.433218 | 67.518965 |
+| 29497001 | 48.270905 | 22.008770 | 128.655271 | 58.292827 |
+| 29497002 | 52.470464 | 24.669786 | 161.086331 | 73.462597 |
+| 29497003 | 52.291235 | 24.464690 | 156.222694 | 70.955763 |
+| 29497004 | 53.710132 | 24.658897 | 156.839140 | 70.612358 |
+| 29497005 | 46.540920 | 22.010635 | 122.704306 | 55.384240 |
+| 29497006 | 52.145736 | 24.220729 | 153.131201 | 68.715032 |
+| 29497007 | 56.462559 | 25.016864 | 176.244823 | 78.087376 |
+| 29497008 | 56.938780 | 26.376494 | 175.383342 | 86.204411 |
+| 29497009 | 55.238852 | 25.062829 | 182.713904 | 79.299478 |
+| 29497010 | 56.078821 | 26.481134 | 166.850839 | 73.476666 |
+| 29497011 | 54.848891 | 25.978492 | 160.818422 | 73.058723 |
+| 29497012 | 60.232980 | 26.968781 | 178.700220 | 80.209408 |
+| 29497013 | 46.519238 | 21.985817 | 116.839528 | 55.177842 |
+| 29497014 | 47.294266 | 22.455333 | 125.457267 | 57.635635 |
+| 29497015 | 50.934418 | 22.964557 | 145.184474 | 73.297582 |
+
+These per-history scopes include their own input load and output work. Shared
+source/input verification, final timing-metadata rewrites, summary aggregation,
+paired terminal checks and other enclosing overhead are separately paid, not
+allocated into favorable arm ratios. Whole worker CPU/wall is
+**4,402.794385 / 4,409.274483 s**; whole reader is
+**424.738998 / 437.733665 s**; the inclusive chain is
+**4,827.801617 CPU-s / 4,847.351780 wall-s** (1.341056 CPU-hours).
+There are 19.955940 CPU-seconds in enclosing/common work beyond the summed
+per-history costs. Worker/reader common immutable-input verification is
+.921212/.876768 CPU-seconds, already inside those enclosing bills. Process
+lifetime self user/system CPU is 4,711.401654/116.420179 s and child user/system
+is .002342/0 s; this is an alternative inclusive scope, not another charge.
+Peak process RSS is **377,000 KiB**, with the configured one Torch thread.
+Historical B04's 6,223.405 CPU-seconds and original acquisition remain history.
+The 7–13 support-hour figure was prospective, not measured consumption;
+engineering, review, publication and other support remain incompletely metered.
+The recorded synthetic tests and saved-output arithmetic are additional support,
+not hidden scientific queries or a new result batch.
+
+**Where reuse occurred.** Every recurrent segment's first period is 40 ticks.
+G2 t40's 77 C-only continuations compute 5,288/reuse 30,132 ticks; the actual
+second selection's 66 continuations compute 4,226/reuse 20,854. All 143 recur.
+For A2, 51 of 77 short prefixes recur (5,122 computed/1,038 reused ticks);
+all 337 inner continuations recur (21,639/106,421), all 77 outer suffixes recur
+(5,272/23,988), and all 66 actual-t120 continuations recur (4,106/20,974).
+The 26 prefixes without recurrence remain in the bill and use original
+computation. Fresh caches respect actual segment/selection barriers; G2's
+frozen t40 C-only forecast correctly crosses numerical t120 because it models
+no decision there. Outer unrounded physical state and inner decoded report state
+remain distinct and equal their respective originals.
+
+Lower query counts do not equal the complete time saving. Ordered output and
+proof work still runs. For example, segment-check/certificate CPU is
+36.624/52.498 s in original/reuse G2 and 107.417/163.174 s in original/reuse A2.
+Branch check/output is 31.275/31.029 and 94.877/95.705 s respectively.
+These are nested timing scopes inside controller/selection totals and must not
+be added to them. Bank callbacks measure checks/output, not bank construction;
+they cannot isolate the remaining bank cost. A2 retains 109 private banks and
+36,139 computed model ticks versus G2's 32 and 9,514. The evidence rejects the
+specific concern that high recurrence saves queries but no substantial total
+CPU here; it does not completely decompose all remaining cost or select a profiler.
+
+**Actual timing conditions.** The earlier fleet B06 and adaptation B07 native
+worker/reader chains had ended before B08 admission. Later waiting B06 overlapped
+as already recorded above: its worker 02:45:12–02:54:19Z, reader
+02:55:33–03:02:56Z, with the actual worker/reader process identities in B08's
+history-boundary samples. The independent scientific reviewer additionally
+identified fleet-transmission B07 joint-renewal runner 1483826, start ticks
+26277727, in samples from 03:10:10.628 through 03:15:06.748Z, with CPU ticks
+2,909→32,519; its preparer appears at 03:09:26Z. I checked the original samples
+and retain that second overlap too. It spans late worlds 29497013–15.
+Own supervisor and momentary status probes are distinguished from competing
+scientific workers. Full samples and summarized identities remain in the evidence;
+these boundaries are not continuous isolation certification. No isolated subset,
+repeat or correction factor is used to repair the observed timings.
+
+**The capability and its adverse native outcomes are inherited unchanged.**
+Original G2/A2 mean J is .6602573866/.6619634635 and service is
+42.725750/42.969625. A2−G2 therefore remains **J +.0017060768,
+service +.243875**, with six J gains and ten exact ties; five service gains,
+ten ties and one loss. The same original programs retain quality −.0056517230,
+height penalty +.00001265625 and path **+42.946589 m/UAV**
+(+343.572710 m/team). Mean whole-episode service minima/p05 are unchanged
+(32.8125/38.5625), and there are no whole-team zero-service ticks; none of this
+establishes individual-user continuity or removes early sacrifice. World 29497007
+still buys J +.000491523 with +613.328 m/UAV and lower quality; 29497014 still
+loses .004 service/tick (2 user-ticks) while J rises. World 29497012's first
+commitment and later opportunity still supply the largest native J increment.
+The full 16-world native component table is retained, not just favorable worlds.
+These are old audited outcomes preserved by equality, **not fresh replication**.
+B04's limited champion menu, fixed opportunities and unexecuted-native-branch
+limits remain. B06/B07 prediction and ranking failures are untouched.
+
+**Working interpretation before independent disposition.** The specific B08
+prediction succeeds: exact within-program recurrence reduces complete measured
+computation while preserving the demonstrated ordinary and anticipatory programs.
+This retains a useful implementation for both comparators. It changes planning
+cost and the competence of a future ordinary reference; it changes neither task
+opportunity, information rights, representation nor evidence for finite learning.
+The saved native benefit remains priced by a substantial optimized A2/G2 premium
+and its path/service/quality tradeoffs. No automatic JIT, deeper search, new
+clock, ranker fit, timing law or native benchmark follows. Independent scientific
+criticism and the final retention/next-investment disposition are recorded below.
+
+<a id="b08-independent-disposition"></a>
+### B08 independent diagnosis and resolved investment choice
+
+The named `hmasd-research-critic` ran in a separate context with no inherited
+DM/Root conversation. It received the actual fixed question, original B04/B06/B07
+supporting and adverse records, complete new outputs, source identities and Root's
+canonical selection review. It reconstructed the new evidence before considering
+prior explanations. This is independent scientific criticism, separate from the
+pre-execution engineering review. Its original complete answer follows.
+
+#### Original independent Scientific Reviewer answer (complete)
+
+**Recommendation: retain both exact-reuse implementations and close B08 without another run.** The predicted complete cost saving occurred. A2’s useful native capability is preserved, together with a substantial remaining computation premium and its original physical tradeoffs.
+
+I received no inherited DM or Root conversation. The assignment supplied factual headlines; I reconstructed the frozen comparison and outputs before reading Root’s allocation review and the earlier interpretations.
+
+The accepted source is `ba18513feec96ed4de8d7cf111f6587e99df8271`. All 64 histories and the independent reader completed, with exit 0.
+
+| Program | Original worker + reader CPU | Reuse worker + reader CPU | Remaining cost |
+|---|---:|---:|---:|
+| G2 | 841.936 s | 388.255 s | **46.11%** |
+| A2 | 2,456.265 s | 1,121.389 s | **45.65%** |
+
+Both programs save complete CPU on **every world**. Per-world remaining fractions range from 44.1–47.5% for G2 and 43.4–50.5% for A2. Worker-only fractions are 41.21% and 40.33%; the additional certificate-reading expense therefore matters but does not erase the saving.
+
+**Optimized A2 still costs 2.844 times optimized G2 in worker CPU and 2.888 times in worker-plus-reader CPU**; the latter ratio ranges from 2.510 to 3.268 across worlds. Wall ratios closely agree. These are ratios of summed matched histories under the declared instrumentation, with common overhead charged separately. [Complete reading](/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b08_exact_planning_reuse_a01/reading.json)
+
+The strongest supported explanation is ordinary reuse of deterministic recurring computation under this frozen host law:
+
+- G2’s 60,500 logical model ticks become 9,514 computed and 50,986 reused ticks: **84.3% reuse**.
+- A2’s 188,560 ticks become 36,139 computed and 152,421 reused: **80.8% reuse**.
+- Every long segment recurs with period 40. Of A2’s 77 short prefixes, 51 recur and 26 do not.
+- Actual state/mask requests fall to 28.60% of original G2 and 26.18% of original A2. Bank construction, ordered accumulation, output generation and checking remain paid.
+
+Thus the prospective alternative—recurrence exists but bookkeeping consumes the complete saving—is weakened by the observation. Host-specific recurrence remains an important limitation. This establishes a useful implementation capability for these programs and histories, without identifying a learning or representation advantage.
+
+The frozen semantics remain consequential. G2’s t40 forecasts contain no modeled t120 intervention, so their reuse may lawfully cross numerical tick 120. Actual G2 replanning and A2’s separate prefix, inner and outer segments start fresh work. A2’s decoded FP32 inner start remains distinct from its unrounded FP64 outer continuation. No cross-branch bank or cache pooling earns the saving.
+
+The retained native result remains **A2−G2 J +0.001706077 and service +0.243875 users/tick**, with six changed programs improving J and ten identical complete programs. The cost premium is paid in those ten identical worlds too; no lawful advance selector for the useful worlds has been established.
+
+The adverse evidence remains material:
+
+- World `29497012` supplies about 59% of the aggregate J increment.
+- World `29497007` gains only 0.000492 J while adding 613.33 m/UAV.
+- World `29497014` loses two user-ticks while gaining J and adding travel.
+- Across the panel, A2 adds 42.95 m/UAV and lowers mean quality by 0.005652. Native J does not charge travel.
+
+These outcomes preserve the earlier explanation that anticipating later control can improve a present commitment under matched opportunities. B08 changes its execution price. It changes neither the opportunity menu nor the control representation, and it supplies no learnability, fresh-world, individual-continuity or additional native-value evidence. [Original complete native result](/home/fires/hmasd-wsl/docs/research/candidates/uav_fleet_transmission/NOTES.md:2372)
+
+My independent checks covered:
+
+- All 43 B08 source bindings against the launch commit and accepted snapshot, preservation of 34 inherited bindings, the bound original records, 1,483 original artifact hashes and 3,030 new artifact hashes.
+- All per-world outcomes and costs; all 32,000 command/mask outputs; 64 plan/selection/bank catalog comparisons; native metric reductions; all 32 actual terminal-history pairs; and the aggregate count/timing/ratio arithmetic.
+- Bitwise model-array comparisons for 161 branches spanning an unchanged world and consequential positive/adverse worlds. I also checked 102 directly emitted model terminals against old arrays and 33,408 saved-array recurrence links.
+
+I did not independently repeat every recurrence-key reconstruction or scorer calculation. The completed zero-query reader covers the full segment/ledger comparison. The archival limits remain explicit: some nonselected inner-plan ancillary metadata was never saved, and the old actual controller’s private final estimate is unavailable. The latter is checked against the newly timed frozen-original variant alongside all old commands, masks and decisions; it is not claimed to have been recovered from the old archive.
+
+The complete new chain cost **4,827.802 CPU-seconds and 4,847.352 wall-seconds**, comprising 4,402.794 worker and 424.739 reader CPU-seconds plus final overhead. There are 19.956 common CPU-seconds outside the per-history ratios but inside that total. The study adds zero native transitions, worlds, fits, updates or training targets. Original B04’s 6,223.405 CPU-seconds remain separately incurred; engineering, review and publication support remain incompletely metered. The prospective support-hour estimate is not an actual bill. [Summary and resource accounting](/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b08_exact_planning_reuse_a01/summary.json)
+
+Timing was one prospectively ordered execution per variant/world. Besides the waiting-study overlap, the saved boundary samples show fleet-transmission B07 running during the late histories. These conditions limit portable timing precision. The large savings across every world and the independently bound work reductions still support retention without purchasing timing resampling.
+
+The strongest consequential objection would be to interpreting this result as removal of anticipation’s economic premium or as sufficient reason for renewed search or learning investment. Optimized A2 remains approximately three times as expensive, with unchanged physical tradeoffs and no specified deployment utility, deadline or use volume that decides adoption.
+
+The smallest worthwhile complete observation for the selected decision has already been obtained. Exact equality with substantial complete savings supports retention; sparse recurrence, negligible savings or mismatch would have supported different dispositions. None requires another observation now. Preserve this implementation as an available ordinary comparator for a separately justified future question. B08 supplies no new reason to reopen the unchanged ranker, declined completion-clock purchase, deeper search or a native benchmark.
+
+**All my raw and snapshot consumers are released.** The 64 history files duplicate the full summary. Retain the original canonical B04 science, full new summary, certificates, catalogs and compact cost/source evidence; duplicate new scientific payloads may be removed under the stated cleanup plan.
+
+**MATERIAL_DISSENT: no — for retaining the bounded exact implementation saving and ending this fixed purchase without additional experimentation.**
+
+#### DM response, changed judgment and next investment
+
+I read the complete answer and accept its retention and stopping recommendation.
+The predicted saving survives complete output/proof costs and benefits every
+original world in both programs. I retain the useful source and focused checks;
+the unchanged frozen B03/B04/B06 implementations retain their original identities.
+This is a successful fixed implementation purchase. It does not turn the old
+small anticipatory benefit into a new native result or establish an advantageous
+learned representation. Both optimized comparators belong in any future
+relevant comparison; using the slower ordinary G2 would buy an artificial gain.
+
+I also adopt the concrete cautions. Ten worlds pay A2's extra search while
+executing the same complete native program as G2; no prospective lawful selector
+has been demonstrated that knows those worlds in advance. World 29497012's
+concentration, 29497007's travel price and 29497014's service loss remain visible.
+Exact computation does not fix those task-utility tradeoffs. The approximately
+threefold remaining premium cannot be accepted or rejected by an invented
+universal deployment threshold. The shared background changes in planning cost
+and comparator competence, not in the B06/B07 learning diagnosis.
+
+The result distinguishes the selected alternatives: recurrence with meaningful
+complete saving occurred; sparse recurrence, erased net savings and mismatch did
+not. A same-panel repeat would mostly refine timing precision and would not change
+this retention decision. A direct native port or new timing panel would answer a
+new use/deadline question, which has no specified consequential use volume here.
+Further JIT/bank optimization would buy another engineering question; these
+measurements alone do not select it. Neither that work nor a learner refit follows
+from a positive optimization result. The full paid bill includes old B04's
+6,223.405 CPU-seconds, the new 4,827.802 CPU-seconds and incompletely metered
+support; sunk work creates no case for continued investment.
+
+The selected fixed B08 purchase is complete and ends here. Preserve the broader
+parent question and all prior positive/adverse capabilities, with no active
+producer, unread result/advice or selected successor. A consequential future
+question can reuse the exact implementations and their explicit host limitations;
+Root owns any cross-question assignment under the native-child trial. This is
+idle retained capability, not a fabricated dependency or a demand for Root ACK.
+The adequate original independent result review resolves this ordinary retention
+choice without material dissent; no distinct unresolved Pro question was identified.
+
+**Additional actual overlap from Root's completed fleet record.** Its B07 single
+worker→reader chain ran 03:09:41–03:15:27Z on `local_linux`, source
+`2261ccb709b8f5d166902a602f9c7ba33d510e8a`, runner1483826/supervisor1483805.
+Root reports 345.586312 CPU-seconds, 345.965256 wall-seconds and 309,888 KiB peak
+RSS for that separate chain, with exit 0 and stopped observation. This corroborates
+B08's own samples and records their intersection; that other direction's compute
+is not added to B08's process CPU bill, and no timing repeat is selected.
+
+<a id="b08-retained-evidence"></a>
+### B08 evidence retention and duplicate-output cleanup
+
+The complete reader finished before deletion. The independent scientific reviewer
+released all raw/snapshot consumers after its checks. All 64 history JSON files
+were verified equal to their corresponding complete-summary rows. Original B04
+config, full reader and summary were verified at their canonical main/run paths
+against the frozen hashes, independently of the now-finished launch snapshot.
+The sole original B04 scientific store remains untouched:
+`/home/fires/hmasd-artifacts/uav_fleet_transmission/b04_temporal_complementarity_a01`.
+
+I moved, without copying, **129 required unique files / 8,953,742 bytes** to
+`/home/fires/hmasd-artifacts/uav_parent_adaptation/b08_exact_planning_reuse_a01`:
+complete `summary.json` (6,487,996 bytes, SHA256
+`22101d22aaf96ec590fdaf8c204f22bb1da4848d64b81b119c633a9ac08e9c3c`), all 64
+certificate streams (1,369,187 bytes) and all 64 new artifact catalogs (1,096,559
+bytes). Each file's bytes and hash were verified after its move; their complete
+inventory is in `result.json`. Run-local summary/certificate links point to that
+one canonical copy. Compact config/full-reader/result/native status remain in Git.
+The reader SHA256 is
+`21bc6e2152ac8a4a3aca3411fba054068ca0faf402e1027f1641e43153c9cde6`;
+config SHA256 is
+`da142711e31ee1b605d015bcec996a829169f78db1b7c4d0c88c8ae58eec4703`.
+
+Deleted targets so far are this run's `raw/` (2,902 remaining duplicated
+scientific files after unique catalogs were moved), its `histories/` (64 exact
+summary duplicates), `temp/directions/uav_parent_adaptation/b08/` (the consumed
+wait request), and the B08 source/test `__pycache__/` directories. Explicit target
+allocated usage fell from **396,288,000 to 9,523,200 bytes**, a net reduction of
+**386,764,800 bytes** including the new canonical-location overhead. Moving
+retained files is not counted as reclaimed space. No unique failure/adverse
+payload existed in this equality-success operation; all old adverse outcomes and
+new proof/cost evidence remain.
+
+The unmodified original B08 full reader needs the deleted duplicate containers
+to run again; this publication does not pretend those containers remain available.
+Its completed pre-deletion audit, full certificates/digests and original canonical
+science remain evidence. The useful seven source modules and four focused test
+files remain published; no extra backup, archive or copied worktree was created.
+The terminal accepted source snapshot has passed native collector preview; its
+exact-target deletion and final net measurement follow publication of this compact
+reading. No concrete cleanup tool blocker is present.
