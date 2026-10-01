@@ -734,3 +734,170 @@ Reviewer `critic_rf_package_result` was assigned the original question/contract,
 worker/reader bytes and contrary evidence in a separate context before this interpretation;
 its complete recommendation and the resolved disposition follow below. No further native
 work, timing/filter/severity/sensor revision, extra world or confirmation is selected.
+
+<a id="b01-independent-disposition"></a>
+## 2026-10-01 — Independent scientific diagnosis and resolved disposition
+
+The registered ResearchCritic `critic_rf_package_result` worked in a separate context
+without DM/Root conversation inheritance. Its original complete final recommendation is
+preserved below, followed by the DM response. It reconstructed the evidence before reading
+the original selection advice and the later provisional DM explanation. Adviser agreement
+does not add an independent experimental replicate.
+
+### Original ResearchCritic answer, verbatim
+
+**Retain the adverse reading and close this fixed purchase.** I find no material objection to the DM’s proposed disposition. Retain P_PRIOR as an ordinary reference under this contract and preserve FULL’s conditional waiting benefits. Neither supports a general verdict on channel sensing.
+
+I received no inherited DM/Root conversation. I formed the provisional reading from the frozen contract and outputs before reading the original selection advice and the DM’s newly appended explanation.
+
+What I checked:
+
+- The worker and reader files match the supplied sizes and SHA256 identities, with source `a80e2be9e3341b3bebfa743dacfda5e4ff13d977`, complete episode coverage and exit-zero records.
+- I independently reduced all 32 paired metric vectors and all 1,600 paired user summaries. No discrepancies appeared.
+- I directly retrieved and hash-checked the canonical raw and outcome NPZs for both arms in worlds `29651003`, `29651010`, `29651015` and `29651029`, checking primary/service outcomes and consequential gap/censoring witnesses.
+- I inspected the configuration and source governing information rights, addressed innovations, arrival timing, payload weights and age/gap definitions. The seven recorded RF dependencies still match `9b6f493b`.
+- I relied on the completed full reader for the remaining transition and candidate reconstructions; I did not repeat it or run any native, controller, allocator, model or RNG query.
+
+The complete package result is adverse, with meaningful exceptions to preserve:
+
+| Outcome | FULL | PRIOR | Paired FULL−PRIOR |
+|---|---:|---:|---:|
+| Payload J | .444283 | .460212 | −.015930; 32 negative |
+| Payload served/tick | 26.982483 | 27.976807 | −.994324; 30 negative, 2 positive |
+| Raw J | .455697 | .460212 | −.004515; 21 negative, 11 positive |
+| Raw served/tick | 27.675659 | 27.976807 | −.301147; 22 negative, 10 positive |
+
+The primary descriptive interval is `[−.019169, −.012690]`; payload service is `[−1.230176, −.758471]`. These are paired-world descriptions of two fixed programs, not training replication. World `29651015` is effectively a near tie in magnitude: Δpayload-J is only `−4.51269e−7`. Its payload service improves by `.179688`, while its maximum individual gap worsens by 16 ticks. “Negative in every world” must not become “substantially worse in every world.”
+
+FULL’s positive waiting evidence is real. Mean age improves in 24/32 worlds, worst-user mean age in 20/32, and mean user maximum gap in 23/32. Across the 1,600 nested user comparisons, mean age improves for 895 and worsens for 704; maximum gap improves for 902 and worsens for 604. These counts describe distributional changes, not additional independent experimental units. Aggregate waiting intervals cross zero.
+
+The strongest opposite tail witnesses prevent a continuity-superiority claim:
+
+- In world `29651010`, PRIOR user 45 receives service only 20 times and has an observed 203-tick terminal gap, with mean age `81.164063`. FULL’s maximum user gap in that world is 40, although its payload J and service are worse.
+- In world `29651029`, FULL user 31 has a 150-tick terminal gap and mean age `44.691406`; other FULL users have terminal gaps of 140 and 136 ticks. FULL’s terminal mean age is `52.04`, versus PRIOR’s `3.76`. Its closed-gap maximum is nevertheless smaller, illustrating why closed-gap summaries alone would mislead.
+
+Those terminal spells are right-censored: deprivation persists through the horizon, and its eventual duration is unknown. Neither arm having a never-served user or a zero-team-service tick establishes sustained individual service. Positive `.9` payload service resets the declared one-second age metric; it does not establish absence of subsecond interruptions.
+
+This is an **active package comparison**, not technical nonexecution or sparse package exposure. Commands differ at 8,017/8,192 paired mission ticks and masks at 6,724. All 4,096 manager rounds are timely; FULL has no measurement clipping or endpoint codes. This does not establish that CSI content alone caused those action differences: differing delivery times and subsequent histories also contribute. The inherited local C recorded 6,535 fallback decisions—distinct from the zero manager deadline fallbacks.
+
+The strongest simpler explanation is sufficient: the known-law, expected-power coordinator with retained local C information already provides competent service; the added FULL package does not earn its acquisition and delivery costs under this finite search program. PRIOR is not information-free, nor a policy-conditioned Bayesian predictor. Its competence is enough for this adverse package conclusion without proving that it is the best no-pilot controller.
+
+The observed accounting identity is:
+
+`Δpayload-J = −.004515471 raw-J difference − .011414444 FULL raw-to-payload deduction.`
+
+Thus, an airtime-only **accounting** description is incomplete. This decomposition does not identify the causal effect of removing sounding: changed weights, latency and information would change decisions and trajectories. The result does not isolate channel aging, quantization, expected-power approximation or adaptive occupancy.
+
+The frozen attenuation calculation remains a useful conditional prediction: three unclipped 30 m moves strongly attenuate a measured residual, while hover can preserve it. It is not evidence that the observed utility loss was caused by aging. Likewise, [Burghal–Molisch’s primary acquisition paper](https://wides.usc.edu/Updated_pdf/Burghal2015Efficient.pdf), whose introductory/model passages I retrieved, supports distinguishing acquisition delay, estimation quality and subsequent scheduling. It does not validate this dB-shadowing host or explain its native service result. I did not independently repeat the earlier three-library coverage assessment.
+
+One interpretive correction to the DM’s wording: the frozen notes allowed either sign and did not commit to a positive effect. This result resolves the **adverse branch of the package question**; it need not be described as falsifying a definite positive forecast or a specific aging mechanism.
+
+What changes scientifically:
+
+- **Strengthened:** in this host and timing contract, adding the specified central pilot/report package reduces complete payload utility and service relative to this ordinary comparator.
+- **Preserved:** FULL can redistribute service toward neglected users in particular worlds and uses fewer transmitter-on ticks on average.
+- **Weakened:** adopting FULL for the stated payload objective, or treating its waiting improvements as dependable continuity protection.
+- **Untouched:** optimal acquisition, better use of already lawful local information, learning or representation limits, field validity, and the separate P/U32 uncertainty-integration question.
+
+The cost reinforces the need to preserve the complete comparison. FULL sends 25,024 recurring bytes per mission versus 9,024, purchases 6.4 simulated seconds of sounding and arrives one tick later. It travels approximately **784 m more per UAV** on average while using **35.47 fewer transmitter-on ticks**. Neither measure establishes energy savings.
+
+Including the fixed checks, this study used zero fits, 66 episodes and 16,400 native steps. Worker and reader each account for 1,324,449 candidate fleet scores including H8; the synthetic suite adds 3,392 evaluations. Recorded own CPU totals `430.588630 s`, plus `.010114 s` waited-child CPU; summed entry/test walls are `416.636237 s`, not calendar elapsed or isolated node occupancy. Main worker/reader RSS peaks are separate `435,940/406,560 KiB` measurements. Canonical NPZ evidence totals `151,033,826` bytes. Source, engineering, review, staging, transfer and publication costs remain incompletely metered.
+
+Observed maximum rounds of `.0553/.0603 s` leave considerable compute slack. That makes the declared three/two-tick delivery contract a consequential scope limitation; it does not retrospectively change the experiment or establish the value of a faster implementation.
+
+The smallest worthwhile complete observation for the current purchase is already available. Another unchanged panel would mainly test recurrence; it would not resolve an ambiguity currently preventing the decision. Attribution controls could explain components while leaving this adoption choice unchanged. I recommend **no immediate replication, delay/filter/sensor revision, or learner**.
+
+Return the completed boundary to Root without a queued successor. A separately selected acquisition, timing or continuity question could still be worthwhile, but it would need a consequential new comparison, the appropriate ordinary comparator and a prospective complete price. The present waiting positives do not supply an actionable selector for favorable worlds, and their severe adverse counterexample prevents treating them as an automatic continuation.
+
+**MATERIAL_DISSENT: no — the direct paired outcomes and opposite tail witnesses support closing this fixed FULL purchase while retaining its scoped positive evidence and leaving the broader question open.**
+
+### DM response and next investment
+
+Accept the evidence, narrow interpretation and fixed-purchase closure. In particular, correct
+the provisional phrase “fails its complete primary/value prediction”: the original contract
+allowed either sign. The observed negative primary/service comparison resolves its adverse
+branch; it does not falsify an asserted positive sign or demonstrate a specific aging mechanism.
+The active exposure, zero manager deadline misses and complete reconstruction make missing
+intervention or failed execution poor explanations. The untouched questions remain those
+listed by the critic; no learning or representation class was tested.
+
+Keep the usable known-law PRIOR coordinator as the ordinary package reference for this
+contract. Keep FULL's concrete waiting and transmitter-exposure positives, all near-ties,
+both arms' severe censored individual outages and the complete observed costs. These positives
+do not furnish a lawful rule for selecting favorable worlds, a reliable continuity controller
+or a reason to optimize this same package automatically. The waiting distributional counts
+are nested descriptions, not 1,600 independent study units.
+
+No additional observation is needed to close the selected purchase. Unchanged replication
+would primarily buy recurrence precision for fixed programs, and component-attribution
+controls would not reverse the present acquisition choice. A timing, selective-acquisition
+or continuity question could be selected later if its consequential comparison and complete
+cost justify it; none is specified or authorized here. Pro adds no distinct unresolved
+expertise at this uncontested boundary, so another consultation is not purchased.
+
+The broader information-cost question remains open, with this finite P_FULL purchase stopped
+and no experiment, queued producer, data dependency or immediate successor. Return the
+fully read boundary to Root for cross-question allocation; no Root acknowledgment is needed
+for this own-direction publication or cleanup. Re-entry requires a separately selected useful
+comparison rather than a recurring check, extra panel or revived renamed repair.
+
+<a id="b01-final-cleanup"></a>
+## 2026-10-01 — Published evidence, released consumers and measured cleanup
+
+Complete worker/reader evidence and all observed effects were published at
+`4ec3dd759f481da2e0caa7205d7f51d321432125` before final snapshot reclamation.
+The independent scientific diagnosis and DM response above close the fixed purchase.
+The unchanged useful protocol/manager/readers and fixed checks remain published at their
+source identity, supporting both the ordinary reference and future evidence reconstruction.
+No unused executable branch or duplicate raw tree was created for retention.
+
+All three accepted operations have consistent exit-zero witnesses and absent native
+workers/supervisors. The independent ResearchCritic has completed its reading. The same
+observer is stopped at generation 48 with no event or pending wake; its small terminal
+recovery state remains. No live consumer of the disposable snapshots remains, and this
+study's read-only RF dependency consumer is released. The RF direction's own code, raw
+evidence, accepted operations and other consumers were not changed.
+
+The supported exact-target snapshot collector previewed eligibility and then applied
+removal with its documented read-only `--sudo-process-scan`. Its terminal/native-process,
+clean-source and durable-Git checks passed. Measured allocated target bytes were:
+
+| Node and deleted target | Before | After |
+| --- | ---: | ---: |
+| wsl_4070 `.git/hmasd-launch-sources/f7b4ac15bb384229a7eb888003b49595` — H8 fixture | 818667520 | 0 |
+| wsl_4070 `.git/hmasd-launch-sources/a6c37c7d307f42dfb91cdf24b5b79a5e` — main worker | 818659328 | 0 |
+| wsl_4070 `.git/hmasd-launch-sources/4817eb50f066476785ddbfb5da300032` — full reader | 818659328 | 0 |
+| local `temp/directions/uav_radio_information_cost/` — one stopped-observer request | 8192 | 0 |
+
+All four targets are absent. Net allocated bytes reclaimed are 2,455,986,176 remote plus 8,192 local,
+**2,455,994,368 bytes total**; this is measured target reclamation, not a change in Git object
+storage, a whole-study net footprint or a claim about total host free capacity. No tarball,
+backup chain, whole-tree copy or replacement data copy was used. There is no cleanup tool
+blocker or leftover disposable target in this scope.
+
+The one canonical remote `runs/uav_radio_information_cost/` evidence tree remains 152,395,776
+allocated bytes before/after final cleanup. It includes 134 necessary NPZs/151,033,826 logical
+bytes, all individually bound by the original summaries. Main summary 667,846 bytes/SHA256
+`d16d488a384a339f0374f95c8b67a3a3b4689cee58833464e5720f0ab2e8783a` and full reader 278,732 bytes/
+`e5dec257f082b98ff726eec87408d592cd6f1ea7d4f7336cf2c0e7e2bf614409` were checked again unchanged.
+Compact source/config/native records and complete per-world/per-user readings remain in Git;
+large physical/outcome streams remain only in the canonical remote tree. Required positive,
+adverse, near-tie, censored-tail and partial synthetic-deadline evidence is preserved.
+
+### Root response and separate source-only continuation scope
+
+Root read the complete results/costs/tails and the original complete ResearchCritic answer,
+adopted the narrow closure and accepted its forecast-wording correction. Its subsequent
+assignment preserves all other selected studies: the existing Oracle
+`/root/age_control_interface` will narrow one concrete worthwhile successor question from
+the cumulative record, three libraries and primary sources, possibly in another UAV area
+or recommending no purchase. After this closure, this same nonarchived DM may answer that
+one source/complete-price request using code, existing records and count arithmetic only.
+No concrete source question has arrived at this entry, and no new result study is selected.
+
+That preparation expressly permits zero new native, controller, model, allocator, RNG or
+teacher queries; zero saved-output reductions, tests, benchmarks, implementation/prototypes,
+fits or launches. Preserve original source facts in this notebook and propose any new
+direction/paths before eventual Root selection. Root owns the later cross-question choice.
+This is neither a reopening of RF/B09/lower-motion stops nor an automatic timing/sensor
+repair; the present scientific standing remains the completed, idle fixed purchase above.

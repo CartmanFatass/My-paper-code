@@ -413,6 +413,22 @@ H已在各世界发现全部30用户；L1没有更早完成发现，但这不是
 这些0策略fit、固定小宿主探索不建立一般MARL/UAV优势。保留普通规划与完整正反证据，当前不再购买
 MC预算修补或自动追加复制；广义有限知识问题仍开放。[B01/B02完整读数、负例、成本及停止范围](https://github.com/CartmanFatass/My-paper-code/blob/99485cf41ce0bc530683b683100c41fa0f8bd975/docs/research/candidates/finite_model_decision_value/NOTES.md#2026-09-25--b02-complete-precision-changed-native-budget-response-remains-small-and-uncertain)。
 
+Buying current radio information is a complete control-package decision. On the declared
+correlated-shadowing N5/U50/H256 host, B01's FULL−PRIOR payload-J is −.015930
+[−.019169, −.012690] over 32 fresh paired worlds, negative in all 32 including one near tie;
+payload service is −.994324 users/tick. The ordinary stationary-prior coordinator retains
+lawful local C information and analytic expected power; it is neither information-free
+nor an optimal posterior. FULL pays larger reports, sounding and one extra delivery tick.
+Its raw J/service also decline on average, so sounding's observed accounting deduction
+alone does not describe the whole difference. The experiment does not isolate aging,
+quantization, information content or induced histories. FULL improves mean age in 24 worlds
+and travels 784 m farther per UAV on average; opposite 203/150-tick right-censored individual
+outages prevent continuity dominance despite zero team-service outages. All 4,096 rounds
+execute on time. Retain PRIOR as this contract's ordinary reference and FULL's scoped
+waiting positives; close the fixed purchase without a sensing-family, learning or field
+validity verdict. The separate P/U32 question charges identical sensing and remains distinct.
+[Complete package outcomes and original independent diagnosis](candidates/uav_radio_information_cost/NOTES.md#b01-independent-disposition).
+
 ### 3. MARL 增加的是联合行为和信息结构
 
 共享团队 reward 本身没有规定分散信息结构。CTDE 允许训练组件使用额外信息，执行 actor 使用部署时
@@ -1965,7 +1981,7 @@ T的正均值也不代表两个固定响应都各擅其长。直接学习、有�
 | `uav_service_age` | Can finite experience reduce cumulative native service age beyond competent lawful ordinary control under the same delayed commitment? | reserve | Codex DM (native child) | **B01 complete/read/independently diagnosed; retain W/M, end unchanged selector investment.** Source d4430e619, compact result0b358981a:1fit/960episodes/245760steps; full frozen reader and 2048 updates per network replayed. L1−M mean age+.269054[+.069315,+.468793], L1−W+.229916; own-initialization gain−.273965 is retained but does not establish training-population or foresight superiority. W−O age−1.086826 with service/travel gains and worse user tails; retain both W/M with their measured compute tradeoff. All choices executed, no deadline misses. No active producer, unread result/advice or selected successor; wider learning question stays open. [Complete evidence/disposition](candidates/uav_service_age/NOTES.md#b01-complete-reading), [cleanup complete:822185984bytes reclaimed](candidates/uav_service_age/NOTES.md#b01-final-cleanup), [routing](#session-routing). |
 | `uav_fleet_adaptation` | Can learned local motion and transmitter choices develop useful cooperation with independently acting teammates, and when does recent peer behavior add value? | exploring | Codex DM (native child) | **B10 selected: complete joint LOCAL motion/physical-transmission learning versus retained competent control.** Two warm-started full 54-category actor/critic fits and the fixed 15-program panel compare two fitted blocks, INIT90, P0/HIDDEN, Bstar0, Hdirect, G, C and same-rights CJ; 1376 episodes/352256 native steps plus full saved-state reading. Only the public rotating member may switch OFF; all decisions use old-mask rows. This develops B08’s conditional gate capability while preserving B04/B09, actual-S2 and CADC adverses; no learning gain or architectural novelty is assumed. Gains only over initialization establish recovery, and unresolved/adverse/inconsistent results end this exact purchase. Implementation and required correctness/review are underway; no accepted B10 operation yet. B01–B09 remain closed and retained. [Prospective contract](candidates/uav_fleet_adaptation/NOTES.md#b10-selected-contract), [complete original advice and separate adoption](candidates/uav_fleet_adaptation/NOTES.md#b10-original-oracle-advice), [B09 result and limits](https://github.com/CartmanFatass/My-paper-code/blob/71af384c3176ecc8976579b4442d00b2cafe69c5/docs/research/candidates/uav_fleet_adaptation/NOTES.md#b09-independent-disposition), [routing](#session-routing). |
 | `uav_radio_uncertainty` | Can integrating joint RF uncertainty improve complete cooperative service at its actual sensing, communication and execution cost? | exploring | Codex DM (native child) | **B01 selected, implementation before execution.** Matched P expected-power versus U32 conditional-trajectory control on an explicit approximate correlated-shadowing N5/U50/H256 host; correct known law, ideal current link measurements, action menu and 3-tick delivery/4-tick hold are shared. 32 fresh paired worlds/64 episodes/0 fits, plus four fixed H8 correctness episodes; full native and all-executed-candidate reader. Exact batching is being built; deadline feasibility remains unmeasured and fallbacks remain outcomes. Conditional-use development, not field validity, learning, service preservation or broad default adoption. Finite-model B02 and deterministic-host continuity adverses remain distinct constraints. Next: exact-source publication, independent numerical/RNG review, bounded correctness, admitted complete worker/reader and independent scientific reading. [Selected contract and price](candidates/uav_radio_uncertainty/NOTES.md#b01-selected-contract), [original Oracle advice](candidates/uav_radio_uncertainty/NOTES.md#radio-uncertainty-original-oracle-recommendation), [Root selection](#radio-uncertainty-selected-20261001), [routing](#session-routing). |
-| `uav_radio_information_cost` | When does paying for central current-channel information improve complete cooperative control after sensing, communication, computation and movement-induced aging costs? | exploring | Codex DM (native child) | **B01 selected; implementing the fixed P_FULL/P_PRIOR package comparison.** Same published correlated-shadowing N5/U50/H256 host and ordinary expected-power S2 search; FULL buys all-link CSI with three-tick delivery/.9 report payload, PRIOR uses stationary moments with two-tick delivery/full payload. Both retain local C information; this is conditional package value, not optimal no-pilot inference or isolated information causality. 32 fresh paired worlds/64 episodes/0 fits, two H8 fixtures and the fully priced native/all-candidate reader. Next: independent engineering review, exact-source publication, fixed checks, admitted worker/reader and independent scientific diagnosis. [Contract/L0](candidates/uav_radio_information_cost/NOTES.md#b01-selected-contract), [complete original advice/source price](candidates/uav_radio_information_cost/NOTES.md#b01-original-source-advice), [Root selection](#radio-information-cost-selected-20261001), [routing](#session-routing). |
+| `uav_radio_information_cost` | When does paying for central current-channel information improve complete cooperative control after sensing, communication, computation and movement-induced aging costs? | reserve | Codex DM (native child) | **B01 complete/read/independently diagnosed; close this fixed FULL purchase, retain ordinary PRIOR.** Published evidence 4ec3dd759/source a80e2be9e: 32 paired worlds/64 H256 missions/0 fits, plus two H8 fixtures. FULL−PRIOR payload-J −.015930[−.019169, −.012690], negative in 32/32 including one near tie; payload service −.994324/tick and travel +784 m/UAV. Preserve FULL's mixed waiting/exposure positives and both arms' severe individual censored outages. All 4,096 rounds timely; no isolated CSI/aging cause, optimal no-pilot or learning claim. Complete fixed checks+worker+reader cost 430.588630 own CPU seconds plus .010114 waited-child; support remains incompletely metered. Broader question open and idle, no producer or selected successor; re-entry needs a separately useful complete comparison. [Full outcomes](https://github.com/CartmanFatass/My-paper-code/blob/4ec3dd759f481da2e0caa7205d7f51d321432125/docs/research/candidates/uav_radio_information_cost/NOTES.md#b01-complete-reading), [original independent diagnosis and response](candidates/uav_radio_information_cost/NOTES.md#b01-independent-disposition), [cleanup: 2,455,994,368 bytes reclaimed](candidates/uav_radio_information_cost/NOTES.md#b01-final-cleanup), [routing](#session-routing). |
 | `uav_parent_adaptation` | Can experience develop or preserve useful complete UAV-control capability at lower decision cost under explicit information and action rights? | reserve | Codex DM (native child) | **B09 complete/read/independently judged/published/cleaned; unchanged actual-S2 development closes.** CONT−CAL J+.000094[−.005340,+.005528] and CONT−S−.000550[−.005529,+.004429] do not establish native development. Retain CONT’s conditional travel reduction (−555/−596m per UAV;27/32 worlds shorter against each), original S’s recurring capability and ordinary C_S2/C_T2 choices. C_S2 has higher mean J/service at similar complete CPU while CONT travels less; no equivalence, energy saving, contextual necessity or default replacement follows. All service/tail adverses and A01’s failed two-step attempt remain. Two complete fits/262144steps plus that failed prefix; no further fit, worlds, optimizer repair, replication or travel-utility study selected. The parent learning question stays open; reserve has no producer or external dependency. B08 exact reuse and all earlier positives/adverses remain. [Complete result](https://github.com/CartmanFatass/My-paper-code/blob/753fab32e2b74b4bfaa0dd841423d6580aedb879/runs/uav_parent_adaptation/b09_managed_development_a02/result.json), [original independent diagnosis and disposition](https://github.com/CartmanFatass/My-paper-code/blob/753fab32e2b74b4bfaa0dd841423d6580aedb879/docs/research/candidates/uav_parent_adaptation/NOTES.md#b09-independent-disposition), [measured cleanup](https://github.com/CartmanFatass/My-paper-code/blob/753fab32e2b74b4bfaa0dd841423d6580aedb879/docs/research/candidates/uav_parent_adaptation/NOTES.md#b09-final-cleanup), [routing](#session-routing). |
 | `uav_correction_compression` | Can useful learned residual corrections be deployed as fixed calibrations while preserving complete native behavior and reducing online work? | reserve | Codex DM (native child) | **B01 complete/read/independently diagnosed; no mean replacement.** Published result e17f4fdf9:224 episodes/57344 steps/0fits. All three C−D J/service intervals are below zero and all frozen retention rules fail; D19702 retains a positive conditional B40 increment. Keep D/B40/all adverse outcomes, choose no new default or automatic tuning/panel. Nearly constant magnitude does not imply dispensable variation; optimal constants/message causality remain open. Full actor CPU saves21–22.5%, trace-inclusive loop only2.7–3.8%. Re-entry needs a consequential deployment-cost question and complete comparison. [Evidence/disposition](candidates/uav_correction_compression/NOTES.md#b01-complete-reading); [closure complete](candidates/uav_correction_compression/NOTES.md#b01-final-cleanup), no live work or cleanup blocker. [Routing](#session-routing). |
 | `uav_registered_service` | Can lawful model-history scheduling improve registered users' periodic native link opportunities at a worthwhile complete-service and execution cost? | reserve | Codex DM (native child) | **B02 complete/read/independently diagnosed; retain conditional G, select no further run.** Primary a02, source8ab72e5e2:192episodes/49152steps/0fits, all raw and full declared reader complete. G-O J+.080997, service+5.734924/tick, path-1599.590m/UAV, but F-.109375 (7 extra missed obligations in6worlds) and maximum gap+21.609ticks. Every world activates; no deadline failures. Two terminal false model-window completions do not explain five other lost obligations. Reject loss-free preservation without inventing an adoption tolerance; keep G for service/travel tradeoff, O for stronger coverage/refresh, S2 for native efficiency. Original a01 failure/102raws retained; cumulative75020steps and1130.943 measured worker/reader CPU seconds, no runtime fix established. B01 O capability, P-O unresolved superiority and adverse gaps stand. Reserve with no producer, unread result or selected successor; re-entry needs a consequential complete service-contract comparison chosen by Root. [Complete B02 evidence and disposition](candidates/uav_registered_service/NOTES.md#b02-complete-reading), [closure complete](candidates/uav_registered_service/NOTES.md#b02-final-cleanup):1,619,988,480 allocated bytes reclaimed, no cleanup blocker; [failure/recovery](candidates/uav_registered_service/NOTES.md#b02-recovery-decision), [B01 evidence](candidates/uav_registered_service/NOTES.md#b01-complete-reading), [routing](#session-routing). |
@@ -2282,8 +2298,9 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 **Four native DMs now own four selected complete comparisons.** The former waiting DM owns
 correlated-RF P/U32 through its full reading; its original main worker has been admitted after
 fixed correctness checks. Fleet transmission owns S7 C/H/F task-relevant prediction use.
-The same parent DM now owns `uav_radio_information_cost`: P_FULL versus P_PRIOR tests the
-complete value of adding a specified central measurement package. Fleet adaptation owns B10
+The same parent DM has completed `uav_radio_information_cost`: the fixed P_FULL purchase
+closes after adverse complete value versus P_PRIOR; its broader question is open and idle.
+Fleet adaptation owns B10
 joint local motion/physical-transmitter learning against the retained strong compositions and
 an ordinary joint scorer. The two radio studies share one published physical kernel but answer
 different questions: using uncertainty after measurement, and paying to acquire that measurement.
@@ -2786,93 +2803,36 @@ question could also justify later work. Broader learning is not exhausted.
 [retired full selection and prospective bill](archive/2026-10-01/RESEARCH-managed-proposal-learning-completion.md#retired-managed-proposal-learning-selection).
 
 <a id="radio-information-cost-selected-20261001"></a>
-**Selected: what complete value does the specified central CSI package add to ordinary control?**
-Root read the full original Astra Max recommendation and the complete same-DM source/price.
-The same parent DM owns one P_FULL/P_PRIOR comparison in the new `uav_radio_information_cost`
-direction and its matching experiment/test/docs/run/temp paths. It reuses the published RF
-physical kernel at 9b6f493b343c2939b374a1ce21384266d3257456 through read-only dependencies;
-owned adapters implement the codecs, manager, collector and reader. The RF lead has the concrete
-source-consumer notice. Accepted P/U32 inputs/operations remain unchanged, and its favorable
-outcome is not a prerequisite. Both P/U arms buy the same CSI, so they cannot answer this
-separate acquisition-cost question. Its fixed physical lifecycle evidence is reused.
+<a id="radio-information-cost-completed-20261001"></a>
+**Complete: retain ordinary PRIOR; close the specified central-CSI purchase.**
+The unchanged source a80e2be9e completed 32 fresh paired N5/U50/H256 worlds, 64 missions/16,384
+scientific steps and 0 fits. Complete independent reconstruction and separate-context scientific
+diagnosis support the adverse branch of the question; the design allowed either sign.
+FULL−PRIOR payload-J is −.015930[−.019169, −.012690], with 32 negative worlds including one
+−.000000451 near tie; payload service is −.994324/tick[−1.230176, −.758471]. Raw J/service
+also decline on average. All 4,096 rounds execute before their deadlines; commands differ at
+8,017/8,192 paired mission ticks. The package was fully active and technically complete.
 
-Both new arms retain native C's 104-field local observations, including user/peer SINRs,
-proposals and private navigation. Those numerical histories may diverge after different
-actions. P_PRIOR has no central CSI codes or access to hidden losses; it initializes mean 0
-and variance 17.1396 dB² per link, uses the known recurrence and analytic expected power.
-The recurrence preserves those stationary moments, with a 1.973269373 dB effective-loss
-correction. This is a transparent ordinary prior, not an information-free controller or an
-exact posterior from C's implicit information. Observation-dependent motion can select a
-different occupied distribution. A positive P_FULL result therefore establishes value over
-this specified ordinary coordinator, not optimal no-pilot inference or necessary sensing.
+Keep FULL's conditional waiting and transmitter-exposure positives. It improves mean age
+in 24 worlds but travels 784 m farther per UAV on average; waiting mean intervals cross zero.
+PRIOR's 203-tick and FULL's 150-tick terminal individual gaps remain opposite right-censored
+adverses, despite no zero-team-service ticks or never-served users. PRIOR is a competent
+known-law ordinary reference with implicit local C information, not a strongest no-pilot
+posterior. The measured comparison changes the acquisition/use judgment, not a claim about
+isolated information, channel aging, learning, field validity or the separate P/U32 study.
 
-Keep the same N5/U50/H256 static-user CorrelatedShadowEnv, physical addressed randomness,
-free-space mean, A2A law, 3 dB/cap-10 native allocation, command alphabet, clipping and heights.
-All 250 user-link innovations occur each tick; rho=exp(-actual 3D path/17.62), scale 4.14 dB.
-Both use the 400-byte registered map, four-tick report/hold and original two-order rotating
-S2 search, 116 logical requests and 57/83/87/112 complete unique pairs with unchanged ties.
-Whole-round timing includes all five C calls through final command/record validation;
-deadline misses atomically retain old commands and mask with actual partial work/traffic.
-
-P_FULL retains current P's quantized 250-link total-loss sensor, including silent links,
-decoded-geometry mean and zero-variance point convention. Its five 75-byte reports plus
-16-byte command cost 391 bytes/1.564 s, plus .1 s sounding. Arrival is t+3, whole-computation
-deadline 1.336 s and report-transition payload weight .9. P_PRIOR has five 25-byte headers
-plus command: 141 bytes/.564 s, no central sounding, t+2 arrival, 1.436 s compute and payload
-weight 1. These are explicit package timing choices, not minimum latency claims. Common local
-sensing is still a background assumption; only the stated sounding reduces user payload.
-Map provisioning costs 1.6 s outside H256 service but stays in setup accounts. Read both
-startups and final scored blocks, whose total lengths are 253 and 254 respectively.
-
-Buy 32 fresh paired worlds, one deterministic trajectory per arm/world with alternating order:
-64 H256 missions/16,384 scientific steps and zero fits. Freeze unused addresses and exact
-source before queries; common geometry/innovations do not require equal channel state after
-different motion. Primary FULL−PRIOR payload-J/256 uses all 32 world effects and descriptive
-mean±1.96SE with required service companion. Retain raw/payload levels, quality, all 50 users'
-ages/gaps/censoring, outages/minimum/p10, travel/transmitter exposure, command/mask changes,
-deadlines/fallbacks, saturation and complete resource cost. Positive .9 service resets the
-one-second waiting metric; it does not establish a 100 ms outage or energy effect. A J gain
-with service harm remains a tradeoff. Adverse/unresolved results end this purchase without
-automatic delay/filter/severity/sensor/arm ladders or more worlds.
-
-The full reader reconstructs every actual physical transition/reset/constructor/arrival,
-observation/SINR/grant, raw and payload outcome, executed candidate score and both C/nav passes.
-Audit true state stays outside the manager. Verify arm-specific allowed fields, acquisition,
-moment initialization, clocks, weights, ties and partial work. No opposite-arm query on
-another history, unexecuted search completion or claim that offline replay repeats deadlines.
-Two H8 integration episodes add 16 native steps; reuse unchanged physical correctness rather
-than buy another RF host. Twelve typed synthetic cases use at most 24 reference evaluations;
-eight fake-clock rounds plus eight prefix replays add at most 7,168 score evaluations and no
-native/C/RNG calls. Combined synthetic scope is 7,192 evaluations/1,798,000 dense entries;
-the Oracle intermediate's 7,174 was corrected against the original source arithmetic.
-
-Main plus fixtures cost 66 episodes/16,400 native steps, two constructors, 66 explicit and
-two discarded constructor resets; 4,117,000 normals and 7,820 geometry uniforms per worker/
-reader side. Each side has 20,568 native radio-state calculations. Combined C work is 61,500
-calls, 1,660,500 candidate paths, 6,642,000 modeled ticks and at most 138,990,000 link evaluations.
-Manager scores per side are 925,395–1,818,320 before deadline truncation; combined candidate
-user-SINR entries 462,697,500–909,160,000. FULL buys 512,500 measurements/102,500 sounding slots/
-205 simulated seconds. Full-success recurring traffic is 1,090,600 bytes plus 26,400 map bytes.
-No model Gaussian tape, fit, calibration, future C or extra action RNG is added.
-
-Forecast worker 5–15 plus reader 10–30 CPU minutes and .01–.05 CPUh correctness, totaling
-.26–.80 CPUh. Sequential RSS is .5–1.5 GiB; canonical evidence .30–.60 GB, remote peak about
-3–4 GB or observed local snapshot topology 5–7 GB. Support is 8–16 focused person-hour
-equivalents: integration 3–6, reader 2–4, checks/review 1.5–3 and launch/reading/publication/
-cleanup 1.5–3. These are uncalibrated estimates, not benchmarks or spend entitlements;
-source/adviser/staging/transfer work remains additional. Inherited RF development is separately
-incurred, not charged twice or free. The DM owns implementation, independent review, published
-inputs, actual admission, complete reading/diagnosis, own publication and measured cleanup.
-
-Source framing is limited to acquisition cost and decision consequences. Root verified that
-DOI10.1287/opre.6.4.516 is by Harris, Hauptschein and Schwartz (1958); the original advice's
-Burke attribution is preserved with an explicit correction. Root read its complete abstract
-and Burghal–Molisch's introduction/AR1-delay/NMSE passages. Those binary-communication/D2D
-models do not validate this UAV channel law or service outcome. [The complete original advice,
-source price and actual three-library/July/external coverage](https://github.com/CartmanFatass/My-paper-code/blob/8c9a6a8c42cd3b20e9cfd5258c197bfc75b055af/docs/research/candidates/uav_radio_information_cost/NOTES.md#b01-original-source-advice)
-are preserved with the author/count corrections and Root adoption recorded separately.
-[Information-acquisition cost/risk source](https://pubsonline.informs.org/doi/abs/10.1287/opre.6.4.516),
-[primary CSI acquisition paper](https://wides.usc.edu/Updated_pdf/Burghal2015Efficient.pdf).
+No immediate replication, timing/filter/sensor revision, learner or queued successor is
+selected. The broader question is open and idle; a new consequential acquisition, timing
+or continuity comparison would need separate Root selection and its complete prospective
+price. The current fixed purchase requires no further observation. Main+checks cost 66 episodes/
+16,400 native steps, 430.588630 own CPU seconds plus .010114 waited-child; source/engineering/review
+and other support remain incompletely metered. All necessary positive/adverse raw evidence
+is retained once. Final cleanup reclaimed 2,455,994,368 allocated bytes with no remaining blocker;
+this study's RF live-source consumer is released, preserving the RF direction and its operations.
+[Published complete effects and costs](https://github.com/CartmanFatass/My-paper-code/blob/4ec3dd759f481da2e0caa7205d7f51d321432125/docs/research/candidates/uav_radio_information_cost/NOTES.md#b01-complete-reading),
+[original independent diagnosis and accepted correction](candidates/uav_radio_information_cost/NOTES.md#b01-independent-disposition),
+[measured cleanup](candidates/uav_radio_information_cost/NOTES.md#b01-final-cleanup),
+[retired full selection, source advice and prospective bill](archive/2026-10-01/RESEARCH-radio-information-package-completion.md).
 
 <a id="stochastic-target-source-root-question-20261001"></a>
 <a id="stochastic-target-selected-root-decision-20261001"></a>
@@ -3810,7 +3770,7 @@ Root 已向三个原会话各投递一次明确携带 `model="gpt-6-astra"`、`t
 | --- | --- | --- | --- |
 | DM: joint local motion/transmitter development | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_fleet_adaptation` | `/home/fires/hmasd-wsl` / `main` | Same nonarchived registered `hmasd-direction-manager`; actual first turn verified gpt-6-astra/max, native UUID01a0f1f4-bfe5-7ca0-8b1e-4945c185f49a. Owns selected B10 joint LOCAL motion/physical-transmission comparison through implementation, complete reading, publication and measured cleanup. B01–B09 remain closed, fully read and independently diagnosed, with capabilities/adverses and canonical evidence retained. No accepted operation moves or direction ownership transfers. [Contract](candidates/uav_fleet_adaptation/NOTES.md#b10-selected-contract), [original advice and adoption](candidates/uav_fleet_adaptation/NOTES.md#b10-original-oracle-advice), [B09 cleanup](candidates/uav_fleet_adaptation/NOTES.md#b09-final-cleanup). |
 | DM: radio uncertainty (formerly individual-user waiting) | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_user_waiting` | `/home/fires/hmasd-wsl` / `main` | Same nonarchived registered `hmasd-direction-manager`; first actual turn verified gpt-6-astra/max, native UUID01a0f1f5-8634-7e13-b931-e75abdb10d45. Owns active `uav_radio_uncertainty` B01 P/U32 implementation through complete reading/publication/cleanup. Waiting B01–B07 and scoped longer-planner stop remain closed in reserve. Exact costed RF comparison selected by Root; no accepted operation or paused direction moved. [Contract](candidates/uav_radio_uncertainty/NOTES.md#b01-selected-contract), [original advice and separate adoption](candidates/uav_radio_uncertainty/NOTES.md#radio-uncertainty-original-oracle-recommendation), [waiting adverse/positive evidence](candidates/uav_user_waiting/NOTES.md#b07-independent-review-and-disposition). |
-| DM: radio information cost (formerly UAV development/amortization) | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_parent_adaptation` | `/home/fires/hmasd-wsl` / `main` | Same nonarchived registered `hmasd-direction-manager`; actual first turn gpt-6-astra/max, native UUID01a0f192-56da-7d31-8bfc-a068c0ddde92. Owns active `uav_radio_information_cost` B01 P_FULL/P_PRIOR through complete reading/publication/cleanup, using read-only bound RF dependencies and disjoint owned adapters. Parent B01–B09 and lower-motion no-purchase remain closed in reserve with positives/adverses intact. No accepted operation, paused direction or RF ownership moves. [Selected contract](candidates/uav_radio_information_cost/NOTES.md#b01-selected-contract), [original advice and adoption](candidates/uav_radio_information_cost/NOTES.md#b01-original-source-advice), [B09 reading/disposition](https://github.com/CartmanFatass/My-paper-code/blob/753fab32e2b74b4bfaa0dd841423d6580aedb879/docs/research/candidates/uav_parent_adaptation/NOTES.md#b09-independent-disposition). |
+| DM: radio information cost (formerly UAV development/amortization) | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_parent_adaptation` | `/home/fires/hmasd-wsl` / `main` | Same nonarchived registered `hmasd-direction-manager`; actual first turn gpt-6-astra/max, native UUID01a0f192-56da-7d31-8bfc-a068c0ddde92. B01 P_FULL/P_PRIOR is complete, independently read/diagnosed, published and cleaned. This fixed FULL purchase is closed; broader information-cost ownership remains, reserve with no live producer, unread advice or selected successor. Useful code/PRIOR and all positive/adverse evidence remain; 2,455,994,368 allocated bytes reclaimed, no cleanup blocker and RF live-source consumer released. Parent B01–B09 and lower-motion no-purchase remain closed in reserve. No accepted operation, paused direction or RF ownership moves. [Complete outcome](candidates/uav_radio_information_cost/NOTES.md#b01-complete-reading), [original diagnosis and response](candidates/uav_radio_information_cost/NOTES.md#b01-independent-disposition), [cleanup](candidates/uav_radio_information_cost/NOTES.md#b01-final-cleanup). |
 | DM: cumulative native service age | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_service_age` | `/home/fires/hmasd-wsl` / `main` | Registered `hmasd-direction-manager`; actual first turn verified gpt-6-astra/max, native UUID01a0f0a3-e515-7701-b805-6565d0cc4c07. Owns `uav_service_age` and matching paths. B01 one fit/source d4430e619 fully collected, verified, independently diagnosed and published; reserve, no live worker/reader/observer, unread advice or selected successor. Compact result0b358981a retains conditional W/M capability, own-initialization learning and primary/tail losses. Terminal cleanup reclaimed822185984allocated bytes, required unique evidence retained, no blocker. Returns this substantive boundary and proposed re-entry questions to Root; no automatic extra fit or new track. [Complete result](candidates/uav_service_age/NOTES.md#b01-complete-reading), [cleanup](candidates/uav_service_age/NOTES.md#b01-final-cleanup). |
 | DM: fixed correction deployment | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_correction_compression` | `/home/fires/hmasd-wsl` / `main` | Actual first turn verified gpt-6-astra/max; native UUID01a0ef78-6628-7593-b359-b608f0c80190. B01 fully read/independently diagnosed, reserve; scientific result e17f4fdf9. Cleanup complete: terminal source snapshot/registration, redundant staging, local bulk replicas/scratch/caches removed;874639360allocated bytes reclaimed. Required evidence/assets intact; no live operation, unread review or remaining cleanup dependency. [Result](candidates/uav_correction_compression/NOTES.md#b01-complete-reading), [final cleanup](candidates/uav_correction_compression/NOTES.md#b01-final-cleanup). |
 | Completed DM: registered-user B01 | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_registered_service` | `/home/fires/hmasd-wsl` / `main` | Completed B01 and full cleanup, result01e1b6e85/closureb7216efb9; no live worker, unread result or cleanup blocker. Sole direction ownership now passes to the new periodic-efficiency DM below; this old session is not restored. [Complete inheritance](candidates/uav_registered_service/NOTES.md#b01-investment-decision). |
