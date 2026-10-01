@@ -29,9 +29,12 @@ def model_work(raw):
 
 def resources(started, cpu_started):
     usage = resource.getrusage(resource.RUSAGE_SELF)
+    children = resource.getrusage(resource.RUSAGE_CHILDREN)
     return dict(wall_seconds=time.perf_counter() - started, measured_cpu_seconds=time.process_time() - cpu_started,
                 process_user_seconds=usage.ru_utime, process_system_seconds=usage.ru_stime,
                 process_cpu_seconds=usage.ru_utime + usage.ru_stime, peak_rss_kib=usage.ru_maxrss,
+                child_cpu_seconds=children.ru_utime + children.ru_stime,
+                child_cpu_scope='waited subprocess lifetime, separately from worker self CPU',
                 rss_scope='whole worker process Linux KiB; not simultaneous multi-process peak',
                 torch_threads=torch.get_num_threads(), torch_interop_threads=torch.get_num_interop_threads(),
                 thread_environment={key: os.environ.get(key) for key in ('OMP_NUM_THREADS', 'OPENBLAS_NUM_THREADS', 'MKL_NUM_THREADS')})
@@ -59,11 +62,13 @@ def run_batch(out, baseline_sf, launch_sha, *, entry_start=None, admission=None)
                    admission=admission, counts=counts, rows=[], collector_rows=[],
                    runtime=dict(python=platform.python_version(), numpy=np.__version__, torch=torch.__version__,
                                 host=platform.node(), platform=platform.platform()),
-                   model_counts={}, lrs_replay_timing=[], incomplete_raw=[], episode_accounting=[], accounting_errors=[])
+                   model_counts={}, lrs_replay_timing=[], incomplete_raw=[], episode_accounting=[], accounting_errors=[],
+                   reference_source_reads=[])
     env = None
     current_seed = None
     try:
-        _, fair, staged, metadata = p.load_baselines(baseline_sf)
+        _, fair, staged, metadata = p.load_baselines(
+            baseline_sf, source_sha=launch_sha, source_reads=summary['reference_source_reads'])
         summary['config'] = p.frozen_config(launch_sha, metadata)
         p.write_json(out / 'config.json', summary['config'])
         counts['constructor_attempts'] += 1

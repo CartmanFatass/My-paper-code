@@ -3,9 +3,14 @@
 import hashlib
 import json
 from importlib.metadata import version
+import os
 from pathlib import Path
 import platform
+import re
+import resource
+import subprocess
 import sys
+import time
 
 import numpy as np
 
@@ -40,6 +45,51 @@ def _bound_json(path, digest):
     return json.loads(data), dict(path=str(path), bytes=len(data), sha256=digest)
 
 
+def _bound_source_json(relative, digest, *, root, source_sha, source_reads):
+    """Read only the named accepted commit's cached blob, independent of sparse files."""
+    started, cpu_started = time.perf_counter(), time.process_time()
+    children = resource.getrusage(resource.RUSAGE_CHILDREN)
+    child_started = children.ru_utime + children.ru_stime
+    record = dict(path=relative, source_commit=source_sha, expected_sha256=digest,
+                  source_kind='accepted_commit_git_blob', status='STARTED', bytes=0)
+    source_reads.append(record)
+    try:
+        require(isinstance(source_sha, str) and re.fullmatch(r'[0-9a-f]{40}', source_sha),
+                'explicit full accepted source commit required')
+        require(relative in (B06_RESULT, B05_RESULT), 'undeclared compact reference')
+        # Git 2.43 lacks --no-lazy-fetch. Deny every transport for this process:
+        # absent cached blobs fail, never fetch mutable inputs or block on credentials.
+        env = dict(os.environ, GIT_ALLOW_PROTOCOL='', GIT_TERMINAL_PROMPT='0',
+                   GIT_NO_REPLACE_OBJECTS='1')
+        completed = subprocess.run(['git', '-C', str(root), 'cat-file', 'blob',
+                                    source_sha + ':' + relative],
+                                   capture_output=True, timeout=55, env=env, check=False)
+        data = completed.stdout
+        record.update(returncode=completed.returncode, bytes=len(data),
+                      observed_sha256=hashlib.sha256(data).hexdigest(),
+                      stdout_complete=True,
+                      stderr=completed.stderr.decode('utf-8', errors='replace'))
+        require(completed.returncode == 0, 'accepted source blob unavailable: ' + relative)
+        require(record['observed_sha256'] == digest, 'reference hash mismatch: ' + relative)
+        value = json.loads(data)
+        record['status'] = 'VERIFIED'
+        return value, dict(path=relative, bytes=len(data), sha256=digest,
+                           source_commit=source_sha, source_kind=record['source_kind'])
+    except Exception as exc:
+        if isinstance(exc, subprocess.TimeoutExpired):
+            partial = exc.output or b''
+            record.update(bytes=len(partial), observed_sha256=hashlib.sha256(partial).hexdigest(),
+                          stdout_complete=False, timed_out=True, returncode=None,
+                          stderr=(exc.stderr or b'').decode('utf-8', errors='replace'))
+        record.update(status='FAILED', error_type=type(exc).__name__, error_message=str(exc))
+        raise
+    finally:
+        children = resource.getrusage(resource.RUSAGE_CHILDREN)
+        record.update(wall_seconds=time.perf_counter() - started,
+                      self_cpu_seconds=time.process_time() - cpu_started,
+                      child_cpu_seconds=children.ru_utime + children.ru_stime - child_started)
+
+
 def _relocated_identity(expected, canonical_root):
     original = Path(expected['path'])
     parts = original.parts
@@ -48,12 +98,14 @@ def _relocated_identity(expected, canonical_root):
     return dict(expected, path=str(Path(canonical_root) / relative), canonical_path=str(original))
 
 
-def load_baselines(baseline_sf, *, root=ROOT, verify_payloads=True):
+def load_baselines(baseline_sf, *, source_sha, source_reads, root=ROOT, verify_payloads=True):
     """Read immutable full outcomes; no old allocation, policy or outcome reduction."""
     baseline_sf = Path(baseline_sf).resolve(strict=True)
     canonical_root = baseline_sf.parents[3]
-    sf, id06 = _bound_json(Path(root) / B06_RESULT, B06_SHA256)
-    old, id05 = _bound_json(Path(root) / B05_RESULT, B05_SHA256)
+    sf, id06 = _bound_source_json(B06_RESULT, B06_SHA256, root=root,
+                                 source_sha=source_sha, source_reads=source_reads)
+    old, id05 = _bound_source_json(B05_RESULT, B05_SHA256, root=root,
+                                 source_sha=source_sha, source_reads=source_reads)
     require(sf['status'] == old['status'] == 'VERIFIED_COMPLETE', 'incomplete references')
     require(sf['launch_sha'] == B06_SOURCE and old['launch_sha'] == B05_SOURCE, 'reference source differs')
     originals = {row['seed']: row for row in sf['rows']}

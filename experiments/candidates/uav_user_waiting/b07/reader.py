@@ -94,7 +94,8 @@ def read_result(summary_path, destination, baseline_sf, *, expected_summary_sha2
                           new_fits=0, new_baseline_trajectories=0, verified_raw_files=0,
                           verified_raw_bytes=0, baseline_bytes_hashed=0))
     result = dict(object=p.OBJECT, status='READING', admission=admission, rows=[], counts=counts,
-                  discrepancies={}, independent_model_counts={}, worker_launch_sha=expected_launch_sha)
+                  discrepancies={}, independent_model_counts={}, worker_launch_sha=expected_launch_sha,
+                  reference_source_reads=[])
     verified_rows, current_seed = [], None
     try:
         identity = p.file_identity(summary_path)
@@ -104,7 +105,16 @@ def read_result(summary_path, destination, baseline_sf, *, expected_summary_sha2
         assert summary['status'] == 'COMPLETE' and summary['scientific_invocation']
         assert summary['launch_sha'] == expected_launch_sha and not summary['incomplete_raw']
         assert not summary['accounting_errors']
-        _, baselines, staged, metadata = p.load_baselines(baseline_sf)
+        _, baselines, staged, metadata = p.load_baselines(
+            baseline_sf, source_sha=expected_launch_sha, source_reads=result['reference_source_reads'])
+        assert len(summary['reference_source_reads']) == 2
+        for record, expected in zip(summary['reference_source_reads'], (metadata['b06_result'], metadata['b05_result'])):
+            assert record['status'] == 'VERIFIED' and record['returncode'] == 0
+            for key in ('path', 'bytes', 'source_commit', 'source_kind'):
+                assert record[key] == expected[key]
+            assert record['expected_sha256'] == record['observed_sha256'] == expected['sha256']
+            assert all(np.isfinite(record[key]) and record[key] >= 0
+                       for key in ('wall_seconds', 'self_cpu_seconds', 'child_cpu_seconds'))
         config = json.loads((summary_path.parent / 'config.json').read_text())
         assert summary['config'] == config == p.frozen_config(expected_launch_sha, metadata)
         assert json.loads((summary_path.parent / 'process-exit.json').read_text())['exit_code'] == 0
@@ -173,10 +183,13 @@ def read_result(summary_path, destination, baseline_sf, *, expected_summary_sha2
         result['error'] = dict(seed=current_seed, type=type(exc).__name__, message=str(exc), traceback=traceback.format_exc())
     finally:
         usage = resource.getrusage(resource.RUSAGE_SELF)
+        children = resource.getrusage(resource.RUSAGE_CHILDREN)
         result['resources'] = dict(wall_seconds=time.perf_counter() - started,
             measured_cpu_seconds=time.process_time() - cpu_started,
             process_user_seconds=usage.ru_utime, process_system_seconds=usage.ru_stime,
             process_cpu_seconds=usage.ru_utime + usage.ru_stime, peak_rss_kib=usage.ru_maxrss,
+            child_cpu_seconds=children.ru_utime + children.ru_stime,
+            child_cpu_scope='waited subprocess lifetime, separately from reader self CPU',
             torch_threads=torch.get_num_threads(), torch_interop_threads=torch.get_num_interop_threads(),
             scope='reader process lifetime Linux KiB; measured phase excludes imports; zero environment instance')
         p.write_json(destination / 'reading.json', result)

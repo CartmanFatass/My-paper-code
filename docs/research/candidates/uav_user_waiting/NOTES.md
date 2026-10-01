@@ -6203,3 +6203,58 @@ No shared control, sparse selection, accepted snapshot or old source is modified
 remains a retained, separately charged infrastructure failure. The mechanism prediction
 is only that compact metadata can be loaded from the pinned commit under sparse checkout;
 it makes no scientific score prediction or extra scientific investment.
+
+
+<a id="b07-pinned-blob-recovery"></a>
+### B07 source-blob IO remedy and replacement-attempt inputs — 2026-10-01 UTC
+
+The bounded B07-only revision reads the two compact JSON objects with `git cat-file blob
+<accepted-full-SHA>:<declared-path>`. Existing content hashes and scientific source bindings
+remain mandatory. The worker passes its admitted launch SHA; the independent reader passes
+the bound worker SHA. Static commit/path/bytes/hash identity stays in config; each attempt's
+wall, self CPU, waited Git child CPU, return status and captured byte count stay separately
+in the run record. No HEAD lookup, current-working-file fallback or source replacement is
+used. Git2.43 on both nodes lacks `--no-lazy-fetch`, so the subprocess denies every transport
+with `GIT_ALLOW_PROTOCOL=''` and disables replace objects. Missing cached blobs fail within
+the bounded read instead of fetching during execution. External raw and full outcome files
+keep their original digests and canonical paths.
+
+The independent focused engineering review found the pinned binding and unchanged policy
+contract sound, with one accounting correction: `TimeoutExpired` can contain a captured
+stdout/stderr prefix. The initial remedy reported zero bytes on that exception. The accepted
+fix retains prefix bytes/hash/diagnostics with `stdout_complete=False`, `timed_out=True` and
+FAILED status, never verified content. A mocked timeout covers this case. All59 synthetic
+checks passed in2.07s after the fix (earlier58 checks2.05s; independent pre-fix58 checks1.96s).
+These are temporary-Git and stub/controller-law checks, not native-world exposure.
+
+The previously stalled read-only diagnostic handle has terminated with Git exit128; no
+scientific worker was restarted. Under the configured remote network shell, only the two
+required compact blobs were hydrated at the explicit published8fd6ee5470ba350414850984a2b7408297750d6c
+commit into the existing Git object cache. SHA256 checks succeeded:
+
+- `runs/uav_user_waiting/b06_fair_model_a01/result.json`: 1591942bytes, SHA256`9aedf05ccfa2f19677680c62c8258d5dc02b662eefc33f130776da6ad8a4b212`, 2.384350432s wall, 0.002427770s Python CPU and 0.090621000s waited Git CPU.
+- `runs/uav_user_waiting/b05_local_allocation_a02/result.json`: 3773887bytes, SHA256`5a3fb0e095c9e52a1954ea7b6ebfac561b0aeedd5f8fee4d6df8fe35ea8262f0`, 3.155104595s wall, 0.005661564s Python CPU and 0.116908000s waited Git CPU.
+
+Total5,365,829compact payload bytes are additional metadata transport, separate from the
+320-file124,165,095-byte reference stage. Shell/Git daemon overhead beyond these measured
+children remains unmetered. Git repeated its pre-existing unrelated repack bad-tree warning;
+the required blob reads returned0 and matched exact hashes. No shared Git configuration,
+sparse specification, accepted snapshot, old result or control code was changed.
+
+After review closure and publication this exact revision will be the source of a separately
+identified a02 admission, using the unchanged64-world C2/LRS purchase. It is not an a01 resume
+or an additional world replication: a01 retains its zero-query infrastructure outcome.
+
+Independent engineering reviewer closure (original final):
+
+> No material finding remains.
+>
+> The timeout-accounting issue is resolved: failed reads retain captured bytes, prefix hash, stderr, and incomplete status. Commit binding, digest-before-parse, and no-fallback behavior remain intact.
+>
+> Checks: **58 tests passed in 1.96s** before the final repair; **8 focused source-loading tests passed in 1.58s** afterward.
+>
+> Limits: no production queries or launches; actual remote sparse-checkout and lazy-fetch behavior were not exercised.
+
+DM accepts the focused IO repair and its covered limitations. The pinned blob content was
+read/hashed on the remote node as separately recorded above; actual revised runtime use
+remains part of the newly admitted a02, not a synthetic claim of an already executed study.

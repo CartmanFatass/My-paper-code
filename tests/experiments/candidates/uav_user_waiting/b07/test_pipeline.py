@@ -103,7 +103,7 @@ def test_base_raw_survives_reducer_and_close_failure(monkeypatch,tmp_path):
     monkeypatch.setattr(study.torch,'set_num_threads',lambda n:None)
     monkeypatch.setattr(study.torch,'set_num_interop_threads',lambda n:None)
     monkeypatch.setattr(study.p,'SEEDS',(123,))
-    monkeypatch.setattr(study.p,'load_baselines',lambda root:({}, {},{123:{}},{}))
+    monkeypatch.setattr(study.p,'load_baselines',lambda root,**kwargs:({}, {},{123:{}},{}))
     monkeypatch.setattr(study.p,'frozen_config',lambda *args:{'fixed':'synthetic'})
     class Env:
         env=None
