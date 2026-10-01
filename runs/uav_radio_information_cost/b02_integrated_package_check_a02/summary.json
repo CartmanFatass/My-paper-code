@@ -1,0 +1,4510 @@
+{
+  "admission": {
+    "accepted_at_epoch": 1790860485.0066516,
+    "child_pid": 1253226,
+    "command_sha256": "bf9c9944165ad5d77cc1b748287df5c1f158cb6fa2aa489f6e09ee997d0e34d6",
+    "direction": "uav_radio_information_cost",
+    "parent_pid": 1253225,
+    "schema_version": 1,
+    "sha": "547e2200cbe261174ed392d66fcc56340c2588b2"
+  },
+  "artifacts": [
+    {
+      "bytes": 10480,
+      "path": "/home/wu/projects/HMASD/runs/uav_radio_information_cost/b02_integrated_package_check_a02/raw/constructor.npz",
+      "sha256": "f51d640e4c178624f53327782f79a45df4dedcf19937cc952fe7f3dfa2ea761f",
+      "write_status": "complete"
+    },
+    {
+      "bytes": 101093,
+      "path": "/home/wu/projects/HMASD/runs/uav_radio_information_cost/b02_integrated_package_check_a02/raw/U32_FULL_29661900.npz",
+      "sha256": "7f1eb2170484c704a1cb44f0644a7447b2e9bb7657ea08ea9ebfc1b1dafc5bc7",
+      "write_status": "complete"
+    },
+    {
+      "bytes": 2389,
+      "path": "/home/wu/projects/HMASD/runs/uav_radio_information_cost/b02_integrated_package_check_a02/outcomes/U32_FULL_29661900.npz",
+      "sha256": "ca843427f2f598848b79a91e5431662d0b72cfe3fa46fc13f7244e9c235d0a9d",
+      "write_status": "complete"
+    },
+    {
+      "bytes": 90594,
+      "path": "/home/wu/projects/HMASD/runs/uav_radio_information_cost/b02_integrated_package_check_a02/raw/P_PRIOR_29661900.npz",
+      "sha256": "12ff5d82a44b53916f3e8d9b5de0bcc48f5ea7a052eb25cb05bbd73efcf7bfd3",
+      "write_status": "complete"
+    },
+    {
+      "bytes": 2359,
+      "path": "/home/wu/projects/HMASD/runs/uav_radio_information_cost/b02_integrated_package_check_a02/outcomes/P_PRIOR_29661900.npz",
+      "sha256": "bdf341f66bdd43b31d7eed9a184efcf88d807bf573123e23789ffb0ef302f2fb",
+      "write_status": "complete"
+    }
+  ],
+  "config": {
+    "bytes": 12343,
+    "path": "/home/wu/projects/HMASD/runs/uav_radio_information_cost/b02_integrated_package_check_a02/config.json",
+    "sha256": "1e11880db3120d54672d9d1cdcde74a66260a178cc88f6c66fd82e71fd7bf377"
+  },
+  "constructor": {
+    "bytes": 10480,
+    "path": "/home/wu/projects/HMASD/runs/uav_radio_information_cost/b02_integrated_package_check_a02/raw/constructor.npz",
+    "sha256": "f51d640e4c178624f53327782f79a45df4dedcf19937cc952fe7f3dfa2ea761f",
+    "write_status": "complete"
+  },
+  "controller_counts": {
+    "cache_evicts": 0,
+    "cache_inserts": 0,
+    "cache_matches": 0,
+    "calibration_discrepancy_rows": 33,
+    "candidate_link_evaluations": 9180,
+    "censor_discrepancy_rows": 0,
+    "censor_prior_conflicts": 0,
+    "decisions": 20,
+    "fallback_decisions": 9,
+    "grid_power_evaluations": 0,
+    "ingests": 20,
+    "link_evaluations": 9315,
+    "model_ticks": 2160,
+    "objective_reductions": 2160,
+    "setup_link_evaluations": 135,
+    "shadow_decisions": 0,
+    "shadow_objective_reductions": 0,
+    "trajectories": 540
+  },
+  "counts": {
+    "complete_episodes": 2,
+    "constructor_attempts": 1,
+    "fits": 0,
+    "native_steps": 16,
+    "optimizer_updates": 0,
+    "training_episodes": 0
+  },
+  "current": {
+    "program": "P_PRIOR",
+    "world": 29661900
+  },
+  "kind": "check",
+  "launch_sha": "547e2200cbe261174ed392d66fcc56340c2588b2",
+  "model_counts": {
+    "anchor_geometry_attempts": 2,
+    "anchor_geometry_link_entries": 500,
+    "anchor_geometry_snapshots": 2,
+    "candidate_batch_attempts": 364,
+    "candidate_batch_calls": 364,
+    "candidate_cache_hits": 100,
+    "candidate_conditional_fleet_updates": 4320,
+    "candidate_fleet_scores": 16774,
+    "candidate_geometry_attempts": 297,
+    "candidate_geometry_link_entries": 74250,
+    "candidate_geometry_snapshots": 297,
+    "candidate_kinematic_ticks": 297,
+    "candidate_plans": 364,
+    "candidate_prior_prediction_fleets": 162,
+    "candidate_prior_stationary_reuses": 162,
+    "candidate_requests": 464,
+    "candidate_sinr_entries": 4193500,
+    "candidate_uncached_requests": 364,
+    "command_bytes_encoded": 64,
+    "command_bytes_sent": 64,
+    "model_normal_blocks": 2,
+    "model_normal_blocks_attempted": 2,
+    "model_normal_values": 56000,
+    "model_signed_normal_values": 112000,
+    "prefix_conditional_fleet_updates": 192,
+    "prefix_kinematic_ticks": 10,
+    "prefix_prior_prediction_fleets": 4,
+    "prefix_prior_stationary_reuses": 4,
+    "prefix_updates_attempted": 10,
+    "prior_initializations": 2,
+    "prior_initialized_link_pairs": 500,
+    "report_bytes_encoded": 1000,
+    "report_bytes_sent": 1000,
+    "report_loss_codes_encoded": 0
+  },
+  "paired": {
+    "companions": {
+      "final4": {
+        "contrast_U32_FULL_minus_PRIOR": {
+          "max_age": {
+            "descriptive_196se": [
+              0.0,
+              0.0
+            ],
+            "mean": 0.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 0,
+            "sd": 0.0,
+            "values": [
+              0.0
+            ],
+            "zero": 1
+          },
+          "mean_age": {
+            "descriptive_196se": [
+              -0.7449999999999999,
+              -0.7449999999999999
+            ],
+            "mean": -0.7449999999999999,
+            "n": 1,
+            "negative": 1,
+            "positive": 0,
+            "sd": 0.0,
+            "values": [
+              -0.7449999999999999
+            ],
+            "zero": 0
+          },
+          "path_metres": {
+            "descriptive_196se": [
+              84.8528137423857,
+              84.8528137423857
+            ],
+            "mean": 84.8528137423857,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              84.8528137423857
+            ],
+            "zero": 0
+          },
+          "payload_J": {
+            "descriptive_196se": [
+              0.00012812676361911857,
+              0.00012812676361911857
+            ],
+            "mean": 0.00012812676361911857,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              0.00012812676361911857
+            ],
+            "zero": 0
+          },
+          "payload_quality": {
+            "descriptive_196se": [
+              -0.15590624412126952,
+              -0.15590624412126952
+            ],
+            "mean": -0.15590624412126952,
+            "n": 1,
+            "negative": 1,
+            "positive": 0,
+            "sd": 0.0,
+            "values": [
+              -0.15590624412126952
+            ],
+            "zero": 0
+          },
+          "payload_served": {
+            "descriptive_196se": [
+              3.3500000000000014,
+              3.3500000000000014
+            ],
+            "mean": 3.3500000000000014,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              3.3500000000000014
+            ],
+            "zero": 0
+          },
+          "payload_time": {
+            "descriptive_196se": [
+              -0.10000000000000009,
+              -0.10000000000000009
+            ],
+            "mean": -0.10000000000000009,
+            "n": 1,
+            "negative": 1,
+            "positive": 0,
+            "sd": 0.0,
+            "values": [
+              -0.10000000000000009
+            ],
+            "zero": 0
+          },
+          "raw_J": {
+            "descriptive_196se": [
+              0.01042646146367543,
+              0.01042646146367543
+            ],
+            "mean": 0.01042646146367543,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              0.01042646146367543
+            ],
+            "zero": 0
+          },
+          "raw_quality": {
+            "descriptive_196se": [
+              -0.15191179512108183,
+              -0.15191179512108183
+            ],
+            "mean": -0.15191179512108183,
+            "n": 1,
+            "negative": 1,
+            "positive": 0,
+            "sd": 0.0,
+            "values": [
+              -0.15191179512108183
+            ],
+            "zero": 0
+          },
+          "raw_served": {
+            "descriptive_196se": [
+              4.0,
+              4.0
+            ],
+            "mean": 4.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              4.0
+            ],
+            "zero": 0
+          },
+          "transmitter_on_ticks": {
+            "descriptive_196se": [
+              4.0,
+              4.0
+            ],
+            "mean": 4.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              4.0
+            ],
+            "zero": 0
+          }
+        },
+        "levels": {
+          "P_PRIOR": {
+            "max_age": {
+              "descriptive_196se": [
+                8.0,
+                8.0
+              ],
+              "mean": 8.0,
+              "n": 1,
+              "negative": 0,
+              "positive": 1,
+              "sd": 0.0,
+              "values": [
+                8.0
+              ],
+              "zero": 0
+            },
+            "mean_age": {
+              "descriptive_196se": [
+                2.385,
+                2.385
+              ],
+              "mean": 2.385,
+              "n": 1,
+              "negative": 0,
+              "positive": 1,
+              "sd": 0.0,
+              "values": [
+                2.385
+              ],
+              "zero": 0
+            },
+            "path_metres": {
+              "descriptive_196se": [
+                614.5584412271571,
+                614.5584412271571
+              ],
+              "mean": 614.5584412271571,
+              "n": 1,
+              "negative": 0,
+              "positive": 1,
+              "sd": 0.0,
+              "values": [
+                614.5584412271571
+              ],
+              "zero": 0
+            },
+            "payload_J": {
+              "descriptive_196se": [
+                0.39208389616946426,
+                0.39208389616946426
+              ],
+              "mean": 0.39208389616946426,
+              "n": 1,
+              "negative": 0,
+              "positive": 1,
+              "sd": 0.0,
+              "values": [
+                0.39208389616946426
+              ],
+              "zero": 0
+            },
+            "payload_quality": {
+              "descriptive_196se": [
+                0.37361298723154757,
+                0.37361298723154757
+              ],
+              "mean": 0.37361298723154757,
+              "n": 1,
+              "negative": 0,
+              "positive": 1,
+              "sd": 0.0,
+              "values": [
+                0.37361298723154757
+              ],
+              "zero": 0
+            },
+            "payload_served": {
+              "descriptive_196se": [
+                20.0,
+                20.0
+              ],
+              "mean": 20.0,
+              "n": 1,
+              "negative": 0,
+              "positive": 1,
+              "sd": 0.0,
+              "values": [
+                20.0
+              ],
+              "zero": 0
+            },
+            "payload_time": {
+              "descriptive_196se": [
+                4.0,
+                4.0
+              ],
+              "mean": 4.0,
+              "n": 1,
+              "negative": 0,
+              "positive": 1,
+              "sd": 0.0,
+              "values": [
+                4.0
+              ],
+              "zero": 0
+            },
+            "raw_J": {
+              "descriptive_196se": [
+                0.39208389616946426,
+                0.39208389616946426
+              ],
+              "mean": 0.39208389616946426,
+              "n": 1,
+              "negative": 0,
+              "positive": 1,
+              "sd": 0.0,
+              "values": [
+                0.39208389616946426
+              ],
+              "zero": 0
+            },
+            "raw_quality": {
+              "descriptive_196se": [
+                0.37361298723154757,
+                0.37361298723154757
+              ],
+              "mean": 0.37361298723154757,
+              "n": 1,
+              "negative": 0,
+              "positive": 1,
+              "sd": 0.0,
+              "values": [
+                0.37361298723154757
+              ],
+              "zero": 0
+            },
+            "raw_served": {
+              "descriptive_196se": [
+                20.0,
+                20.0
+              ],
+              "mean": 20.0,
+              "n": 1,
+              "negative": 0,
+              "positive": 1,
+              "sd": 0.0,
+              "values": [
+                20.0
+              ],
+              "zero": 0
+            },
+            "transmitter_on_ticks": {
+              "descriptive_196se": [
+                8.0,
+                8.0
+              ],
+              "mean": 8.0,
+              "n": 1,
+              "negative": 0,
+              "positive": 1,
+              "sd": 0.0,
+              "values": [
+                8.0
+              ],
+              "zero": 0
+            }
+          },
+          "U32_FULL": {
+            "max_age": {
+              "descriptive_196se": [
+                8.0,
+                8.0
+              ],
+              "mean": 8.0,
+              "n": 1,
+              "negative": 0,
+              "positive": 1,
+              "sd": 0.0,
+              "values": [
+                8.0
+              ],
+              "zero": 0
+            },
+            "mean_age": {
+              "descriptive_196se": [
+                1.64,
+                1.64
+              ],
+              "mean": 1.64,
+              "n": 1,
+              "negative": 0,
+              "positive": 1,
+              "sd": 0.0,
+              "values": [
+                1.64
+              ],
+              "zero": 0
+            },
+            "path_metres": {
+              "descriptive_196se": [
+                699.4112549695428,
+                699.4112549695428
+              ],
+              "mean": 699.4112549695428,
+              "n": 1,
+              "negative": 0,
+              "positive": 1,
+              "sd": 0.0,
+              "values": [
+                699.4112549695428
+              ],
+              "zero": 0
+            },
+            "payload_J": {
+              "descriptive_196se": [
+                0.3922120229330834,
+                0.3922120229330834
+              ],
+              "mean": 0.3922120229330834,
+              "n": 1,
+              "negative": 0,
+              "positive": 1,
+              "sd": 0.0,
+              "values": [
+                0.3922120229330834
+              ],
+              "zero": 0
+            },
+            "payload_quality": {
+              "descriptive_196se": [
+                0.21770674311027804,
+                0.21770674311027804
+              ],
+              "mean": 0.21770674311027804,
+              "n": 1,
+              "negative": 0,
+              "positive": 1,
+              "sd": 0.0,
+              "values": [
+                0.21770674311027804
+              ],
+              "zero": 0
+            },
+            "payload_served": {
+              "descriptive_196se": [
+                23.35,
+                23.35
+              ],
+              "mean": 23.35,
+              "n": 1,
+              "negative": 0,
+              "positive": 1,
+              "sd": 0.0,
+              "values": [
+                23.35
+              ],
+              "zero": 0
+            },
+            "payload_time": {
+              "descriptive_196se": [
+                3.9,
+                3.9
+              ],
+              "mean": 3.9,
+              "n": 1,
+              "negative": 0,
+              "positive": 1,
+              "sd": 0.0,
+              "values": [
+                3.9
+              ],
+              "zero": 0
+            },
+            "raw_J": {
+              "descriptive_196se": [
+                0.4025103576331397,
+                0.4025103576331397
+              ],
+              "mean": 0.4025103576331397,
+              "n": 1,
+              "negative": 0,
+              "positive": 1,
+              "sd": 0.0,
+              "values": [
+                0.4025103576331397
+              ],
+              "zero": 0
+            },
+            "raw_quality": {
+              "descriptive_196se": [
+                0.22170119211046574,
+                0.22170119211046574
+              ],
+              "mean": 0.22170119211046574,
+              "n": 1,
+              "negative": 0,
+              "positive": 1,
+              "sd": 0.0,
+              "values": [
+                0.22170119211046574
+              ],
+              "zero": 0
+            },
+            "raw_served": {
+              "descriptive_196se": [
+                24.0,
+                24.0
+              ],
+              "mean": 24.0,
+              "n": 1,
+              "negative": 0,
+              "positive": 1,
+              "sd": 0.0,
+              "values": [
+                24.0
+              ],
+              "zero": 0
+            },
+            "transmitter_on_ticks": {
+              "descriptive_196se": [
+                12.0,
+                12.0
+              ],
+              "mean": 12.0,
+              "n": 1,
+              "negative": 0,
+              "positive": 1,
+              "sd": 0.0,
+              "values": [
+                12.0
+              ],
+              "zero": 0
+            }
+          }
+        }
+      },
+      "startup": {
+        "contrast_U32_FULL_minus_PRIOR": {
+          "max_age": {
+            "descriptive_196se": [
+              1.0,
+              1.0
+            ],
+            "mean": 1.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              1.0
+            ],
+            "zero": 0
+          },
+          "mean_age": {
+            "descriptive_196se": [
+              0.2766666666666666,
+              0.2766666666666666
+            ],
+            "mean": 0.2766666666666666,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              0.2766666666666666
+            ],
+            "zero": 0
+          },
+          "path_metres": {
+            "descriptive_196se": [
+              169.34452978022154,
+              169.34452978022154
+            ],
+            "mean": 169.34452978022154,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              169.34452978022154
+            ],
+            "zero": 0
+          },
+          "payload_J": {
+            "descriptive_196se": [
+              -0.007222392525627952,
+              -0.007222392525627952
+            ],
+            "mean": -0.007222392525627952,
+            "n": 1,
+            "negative": 1,
+            "positive": 0,
+            "sd": 0.0,
+            "values": [
+              -0.007222392525627952
+            ],
+            "zero": 0
+          },
+          "payload_quality": {
+            "descriptive_196se": [
+              -0.017852419529870878,
+              -0.017852419529870878
+            ],
+            "mean": -0.017852419529870878,
+            "n": 1,
+            "negative": 1,
+            "positive": 0,
+            "sd": 0.0,
+            "values": [
+              -0.017852419529870878
+            ],
+            "zero": 0
+          },
+          "payload_served": {
+            "descriptive_196se": [
+              -0.13333333333333286,
+              -0.13333333333333286
+            ],
+            "mean": -0.13333333333333286,
+            "n": 1,
+            "negative": 1,
+            "positive": 0,
+            "sd": 0.0,
+            "values": [
+              -0.13333333333333286
+            ],
+            "zero": 0
+          },
+          "payload_time": {
+            "descriptive_196se": [
+              0.8999999999999999,
+              0.8999999999999999
+            ],
+            "mean": 0.8999999999999999,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              0.8999999999999999
+            ],
+            "zero": 0
+          },
+          "raw_J": {
+            "descriptive_196se": [
+              0.0011483922362761079,
+              0.0011483922362761079
+            ],
+            "mean": 0.0011483922362761079,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              0.0011483922362761079
+            ],
+            "zero": 0
+          },
+          "raw_quality": {
+            "descriptive_196se": [
+              -0.011727581434635204,
+              -0.011727581434635204
+            ],
+            "mean": -0.011727581434635204,
+            "n": 1,
+            "negative": 1,
+            "positive": 0,
+            "sd": 0.0,
+            "values": [
+              -0.011727581434635204
+            ],
+            "zero": 0
+          },
+          "raw_served": {
+            "descriptive_196se": [
+              0.3333333333333339,
+              0.3333333333333339
+            ],
+            "mean": 0.3333333333333339,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              0.3333333333333339
+            ],
+            "zero": 0
+          },
+          "transmitter_on_ticks": {
+            "descriptive_196se": [
+              5.0,
+              5.0
+            ],
+            "mean": 5.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              5.0
+            ],
+            "zero": 0
+          }
+        },
+        "levels": {
+          "P_PRIOR": {
+            "max_age": {
+              "descriptive_196se": [
+                2.0,
+                2.0
+              ],
+              "mean": 2.0,
+              "n": 1,
+              "negative": 0,
+              "positive": 1,
+              "sd": 0.0,
+              "values": [
+                2.0
+              ],
+              "zero": 0
+            },
+            "mean_age": {
+              "descriptive_196se": [
+                1.05,
+                1.05
+              ],
+              "mean": 1.05,
+              "n": 1,
+              "negative": 0,
+              "positive": 1,
+              "sd": 0.0,
+              "values": [
+                1.05
+              ],
+              "zero": 0
+            },
+            "path_metres": {
+              "descriptive_196se": [
+                412.474059003848,
+                412.474059003848
+              ],
+              "mean": 412.474059003848,
+              "n": 1,
+              "negative": 0,
+              "positive": 1,
+              "sd": 0.0,
+              "values": [
+                412.474059003848
+              ],
+              "zero": 0
+            },
+            "payload_J": {
+              "descriptive_196se": [
+                0.2303956636951803,
+                0.2303956636951803
+              ],
+              "mean": 0.2303956636951803,
+              "n": 1,
+              "negative": 0,
+              "positive": 1,
+              "sd": 0.0,
+              "values": [
+                0.2303956636951803
+              ],
+              "zero": 0
+            },
+            "payload_quality": {
+              "descriptive_196se": [
+                0.1613188789839343,
+                0.1613188789839343
+              ],
+              "mean": 0.1613188789839343,
+              "n": 1,
+              "negative": 0,
+              "positive": 1,
+              "sd": 0.0,
+              "values": [
+                0.1613188789839343
+              ],
+              "zero": 0
+            },
+            "payload_served": {
+              "descriptive_196se": [
+                13.0,
+                13.0
+              ],
+              "mean": 13.0,
+              "n": 1,
+              "negative": 0,
+              "positive": 1,
+              "sd": 0.0,
+              "values": [
+                13.0
+              ],
+              "zero": 0
+            },
+            "payload_time": {
+              "descriptive_196se": [
+                2.0,
+                2.0
+              ],
+              "mean": 2.0,
+              "n": 1,
+              "negative": 0,
+              "positive": 1,
+              "sd": 0.0,
+              "values": [
+                2.0
+              ],
+              "zero": 0
+            },
+            "raw_J": {
+              "descriptive_196se": [
+                0.2303956636951803,
+                0.2303956636951803
+              ],
+              "mean": 0.2303956636951803,
+              "n": 1,
+              "negative": 0,
+              "positive": 1,
+              "sd": 0.0,
+              "values": [
+                0.2303956636951803
+              ],
+              "zero": 0
+            },
+            "raw_quality": {
+              "descriptive_196se": [
+                0.1613188789839343,
+                0.1613188789839343
+              ],
+              "mean": 0.1613188789839343,
+              "n": 1,
+              "negative": 0,
+              "positive": 1,
+              "sd": 0.0,
+              "values": [
+                0.1613188789839343
+              ],
+              "zero": 0
+            },
+            "raw_served": {
+              "descriptive_196se": [
+                13.0,
+                13.0
+              ],
+              "mean": 13.0,
+              "n": 1,
+              "negative": 0,
+              "positive": 1,
+              "sd": 0.0,
+              "values": [
+                13.0
+              ],
+              "zero": 0
+            },
+            "transmitter_on_ticks": {
+              "descriptive_196se": [
+                10.0,
+                10.0
+              ],
+              "mean": 10.0,
+              "n": 1,
+              "negative": 0,
+              "positive": 1,
+              "sd": 0.0,
+              "values": [
+                10.0
+              ],
+              "zero": 0
+            }
+          },
+          "U32_FULL": {
+            "max_age": {
+              "descriptive_196se": [
+                3.0,
+                3.0
+              ],
+              "mean": 3.0,
+              "n": 1,
+              "negative": 0,
+              "positive": 1,
+              "sd": 0.0,
+              "values": [
+                3.0
+              ],
+              "zero": 0
+            },
+            "mean_age": {
+              "descriptive_196se": [
+                1.3266666666666667,
+                1.3266666666666667
+              ],
+              "mean": 1.3266666666666667,
+              "n": 1,
+              "negative": 0,
+              "positive": 1,
+              "sd": 0.0,
+              "values": [
+                1.3266666666666667
+              ],
+              "zero": 0
+            },
+            "path_metres": {
+              "descriptive_196se": [
+                581.8185887840696,
+                581.8185887840696
+              ],
+              "mean": 581.8185887840696,
+              "n": 1,
+              "negative": 0,
+              "positive": 1,
+              "sd": 0.0,
+              "values": [
+                581.8185887840696
+              ],
+              "zero": 0
+            },
+            "payload_J": {
+              "descriptive_196se": [
+                0.22317327116955235,
+                0.22317327116955235
+              ],
+              "mean": 0.22317327116955235,
+              "n": 1,
+              "negative": 0,
+              "positive": 1,
+              "sd": 0.0,
+              "values": [
+                0.22317327116955235
+              ],
+              "zero": 0
+            },
+            "payload_quality": {
+              "descriptive_196se": [
+                0.14346645945406342,
+                0.14346645945406342
+              ],
+              "mean": 0.14346645945406342,
+              "n": 1,
+              "negative": 0,
+              "positive": 1,
+              "sd": 0.0,
+              "values": [
+                0.14346645945406342
+              ],
+              "zero": 0
+            },
+            "payload_served": {
+              "descriptive_196se": [
+                12.866666666666667,
+                12.866666666666667
+              ],
+              "mean": 12.866666666666667,
+              "n": 1,
+              "negative": 0,
+              "positive": 1,
+              "sd": 0.0,
+              "values": [
+                12.866666666666667
+              ],
+              "zero": 0
+            },
+            "payload_time": {
+              "descriptive_196se": [
+                2.9,
+                2.9
+              ],
+              "mean": 2.9,
+              "n": 1,
+              "negative": 0,
+              "positive": 1,
+              "sd": 0.0,
+              "values": [
+                2.9
+              ],
+              "zero": 0
+            },
+            "raw_J": {
+              "descriptive_196se": [
+                0.2315440559314564,
+                0.2315440559314564
+              ],
+              "mean": 0.2315440559314564,
+              "n": 1,
+              "negative": 0,
+              "positive": 1,
+              "sd": 0.0,
+              "values": [
+                0.2315440559314564
+              ],
+              "zero": 0
+            },
+            "raw_quality": {
+              "descriptive_196se": [
+                0.1495912975492991,
+                0.1495912975492991
+              ],
+              "mean": 0.1495912975492991,
+              "n": 1,
+              "negative": 0,
+              "positive": 1,
+              "sd": 0.0,
+              "values": [
+                0.1495912975492991
+              ],
+              "zero": 0
+            },
+            "raw_served": {
+              "descriptive_196se": [
+                13.333333333333334,
+                13.333333333333334
+              ],
+              "mean": 13.333333333333334,
+              "n": 1,
+              "negative": 0,
+              "positive": 1,
+              "sd": 0.0,
+              "values": [
+                13.333333333333334
+              ],
+              "zero": 0
+            },
+            "transmitter_on_ticks": {
+              "descriptive_196se": [
+                15.0,
+                15.0
+              ],
+              "mean": 15.0,
+              "n": 1,
+              "negative": 0,
+              "positive": 1,
+              "sd": 0.0,
+              "values": [
+                15.0
+              ],
+              "zero": 0
+            }
+          }
+        }
+      }
+    },
+    "complete": {
+      "contrast_U32_FULL_minus_PRIOR": {
+        "F_user": {
+          "descriptive_196se": [
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "n": 1,
+          "negative": 0,
+          "positive": 0,
+          "sd": 0.0,
+          "values": [
+            0.0
+          ],
+          "zero": 1
+        },
+        "age_p95": {
+          "descriptive_196se": [
+            -1.0,
+            -1.0
+          ],
+          "mean": -1.0,
+          "n": 1,
+          "negative": 1,
+          "positive": 0,
+          "sd": 0.0,
+          "values": [
+            -1.0
+          ],
+          "zero": 0
+        },
+        "attempted_bytes": {
+          "descriptive_196se": [
+            500.0,
+            500.0
+          ],
+          "mean": 500.0,
+          "n": 1,
+          "negative": 0,
+          "positive": 1,
+          "sd": 0.0,
+          "values": [
+            500.0
+          ],
+          "zero": 0
+        },
+        "c_cpu_seconds": {
+          "descriptive_196se": [
+            0.0014176440000002177,
+            0.0014176440000002177
+          ],
+          "mean": 0.0014176440000002177,
+          "n": 1,
+          "negative": 0,
+          "positive": 1,
+          "sd": 0.0,
+          "values": [
+            0.0014176440000002177
+          ],
+          "zero": 0
+        },
+        "candidate_fleet_scores": {
+          "descriptive_196se": [
+            15546.0,
+            15546.0
+          ],
+          "mean": 15546.0,
+          "n": 1,
+          "negative": 0,
+          "positive": 1,
+          "sd": 0.0,
+          "values": [
+            15546.0
+          ],
+          "zero": 0
+        },
+        "candidate_plans": {
+          "descriptive_196se": [
+            -26.0,
+            -26.0
+          ],
+          "mean": -26.0,
+          "n": 1,
+          "negative": 1,
+          "positive": 0,
+          "sd": 0.0,
+          "values": [
+            -26.0
+          ],
+          "zero": 0
+        },
+        "candidate_sinr_entries": {
+          "descriptive_196se": [
+            3886500.0,
+            3886500.0
+          ],
+          "mean": 3886500.0,
+          "n": 1,
+          "negative": 0,
+          "positive": 1,
+          "sd": 0.0,
+          "values": [
+            3886500.0
+          ],
+          "zero": 0
+        },
+        "command_bytes_sent": {
+          "descriptive_196se": [
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "n": 1,
+          "negative": 0,
+          "positive": 0,
+          "sd": 0.0,
+          "values": [
+            0.0
+          ],
+          "zero": 1
+        },
+        "deadline_misses": {
+          "descriptive_196se": [
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "n": 1,
+          "negative": 0,
+          "positive": 0,
+          "sd": 0.0,
+          "values": [
+            0.0
+          ],
+          "zero": 1
+        },
+        "delivered_command_changes": {
+          "descriptive_196se": [
+            1.0,
+            1.0
+          ],
+          "mean": 1.0,
+          "n": 1,
+          "negative": 0,
+          "positive": 1,
+          "sd": 0.0,
+          "values": [
+            1.0
+          ],
+          "zero": 0
+        },
+        "delivered_mask_changes": {
+          "descriptive_196se": [
+            -1.0,
+            -1.0
+          ],
+          "mean": -1.0,
+          "n": 1,
+          "negative": 1,
+          "positive": 0,
+          "sd": 0.0,
+          "values": [
+            -1.0
+          ],
+          "zero": 0
+        },
+        "longest_zero_service": {
+          "descriptive_196se": [
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "n": 1,
+          "negative": 0,
+          "positive": 0,
+          "sd": 0.0,
+          "values": [
+            0.0
+          ],
+          "zero": 1
+        },
+        "map_bytes": {
+          "descriptive_196se": [
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "n": 1,
+          "negative": 0,
+          "positive": 0,
+          "sd": 0.0,
+          "values": [
+            0.0
+          ],
+          "zero": 1
+        },
+        "mask_flips": {
+          "descriptive_196se": [
+            -3.0,
+            -3.0
+          ],
+          "mean": -3.0,
+          "n": 1,
+          "negative": 1,
+          "positive": 0,
+          "sd": 0.0,
+          "values": [
+            -3.0
+          ],
+          "zero": 0
+        },
+        "max_closed_gap": {
+          "descriptive_196se": [
+            2.0,
+            2.0
+          ],
+          "mean": 2.0,
+          "n": 1,
+          "negative": 0,
+          "positive": 1,
+          "sd": 0.0,
+          "values": [
+            2.0
+          ],
+          "zero": 0
+        },
+        "max_left_censored_gap": {
+          "descriptive_196se": [
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "n": 1,
+          "negative": 0,
+          "positive": 0,
+          "sd": 0.0,
+          "values": [
+            0.0
+          ],
+          "zero": 1
+        },
+        "max_right_censored_gap": {
+          "descriptive_196se": [
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "n": 1,
+          "negative": 0,
+          "positive": 0,
+          "sd": 0.0,
+          "values": [
+            0.0
+          ],
+          "zero": 1
+        },
+        "max_unserved_gap": {
+          "descriptive_196se": [
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "n": 1,
+          "negative": 0,
+          "positive": 0,
+          "sd": 0.0,
+          "values": [
+            0.0
+          ],
+          "zero": 1
+        },
+        "mean_age": {
+          "descriptive_196se": [
+            -0.3425,
+            -0.3425
+          ],
+          "mean": -0.3425,
+          "n": 1,
+          "negative": 1,
+          "positive": 0,
+          "sd": 0.0,
+          "values": [
+            -0.3425
+          ],
+          "zero": 0
+        },
+        "mean_path_length_m": {
+          "descriptive_196se": [
+            19.45584412271569,
+            19.45584412271569
+          ],
+          "mean": 19.45584412271569,
+          "n": 1,
+          "negative": 0,
+          "positive": 1,
+          "sd": 0.0,
+          "values": [
+            19.45584412271569
+          ],
+          "zero": 0
+        },
+        "mean_quality": {
+          "descriptive_196se": [
+            -0.11869221854090323,
+            -0.11869221854090323
+          ],
+          "mean": -0.11869221854090323,
+          "n": 1,
+          "negative": 1,
+          "positive": 0,
+          "sd": 0.0,
+          "values": [
+            -0.11869221854090323
+          ],
+          "zero": 0
+        },
+        "mean_served": {
+          "descriptive_196se": [
+            1.875,
+            1.875
+          ],
+          "mean": 1.875,
+          "n": 1,
+          "negative": 0,
+          "positive": 1,
+          "sd": 0.0,
+          "values": [
+            1.875
+          ],
+          "zero": 0
+        },
+        "mean_user_max_gap": {
+          "descriptive_196se": [
+            -0.52,
+            -0.52
+          ],
+          "mean": -0.52,
+          "n": 1,
+          "negative": 1,
+          "positive": 0,
+          "sd": 0.0,
+          "values": [
+            -0.52
+          ],
+          "zero": 0
+        },
+        "min_served": {
+          "descriptive_196se": [
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "n": 1,
+          "negative": 0,
+          "positive": 0,
+          "sd": 0.0,
+          "values": [
+            0.0
+          ],
+          "zero": 1
+        },
+        "model_normal_values": {
+          "descriptive_196se": [
+            56000.0,
+            56000.0
+          ],
+          "mean": 56000.0,
+          "n": 1,
+          "negative": 0,
+          "positive": 1,
+          "sd": 0.0,
+          "values": [
+            56000.0
+          ],
+          "zero": 0
+        },
+        "never_served": {
+          "descriptive_196se": [
+            -5.0,
+            -5.0
+          ],
+          "mean": -5.0,
+          "n": 1,
+          "negative": 1,
+          "positive": 0,
+          "sd": 0.0,
+          "values": [
+            -5.0
+          ],
+          "zero": 0
+        },
+        "payload_J": {
+          "descriptive_196se": [
+            -0.017645877198013082,
+            -0.017645877198013082
+          ],
+          "mean": -0.017645877198013082,
+          "n": 1,
+          "negative": 1,
+          "positive": 0,
+          "sd": 0.0,
+          "values": [
+            -0.017645877198013082
+          ],
+          "zero": 0
+        },
+        "payload_quality": {
+          "descriptive_196se": [
+            -0.12298625732671045,
+            -0.12298625732671045
+          ],
+          "mean": -0.12298625732671045,
+          "n": 1,
+          "negative": 1,
+          "positive": 0,
+          "sd": 0.0,
+          "values": [
+            -0.12298625732671045
+          ],
+          "zero": 0
+        },
+        "payload_served": {
+          "descriptive_196se": [
+            1.375,
+            1.375
+          ],
+          "mean": 1.375,
+          "n": 1,
+          "negative": 0,
+          "positive": 1,
+          "sd": 0.0,
+          "values": [
+            1.375
+          ],
+          "zero": 0
+        },
+        "payload_time": {
+          "descriptive_196se": [
+            -0.20000000000000018,
+            -0.20000000000000018
+          ],
+          "mean": -0.20000000000000018,
+          "n": 1,
+          "negative": 1,
+          "positive": 0,
+          "sd": 0.0,
+          "values": [
+            -0.20000000000000018
+          ],
+          "zero": 0
+        },
+        "pilot_seconds": {
+          "descriptive_196se": [
+            0.2,
+            0.2
+          ],
+          "mean": 0.2,
+          "n": 1,
+          "negative": 0,
+          "positive": 1,
+          "sd": 0.0,
+          "values": [
+            0.2
+          ],
+          "zero": 0
+        },
+        "pilot_slots": {
+          "descriptive_196se": [
+            100.0,
+            100.0
+          ],
+          "mean": 100.0,
+          "n": 1,
+          "negative": 0,
+          "positive": 1,
+          "sd": 0.0,
+          "values": [
+            100.0
+          ],
+          "zero": 0
+        },
+        "raw_J": {
+          "descriptive_196se": [
+            -0.009357665562270967,
+            -0.009357665562270967
+          ],
+          "mean": -0.009357665562270967,
+          "n": 1,
+          "negative": 1,
+          "positive": 0,
+          "sd": 0.0,
+          "values": [
+            -0.009357665562270967
+          ],
+          "zero": 0
+        },
+        "report_bytes_sent": {
+          "descriptive_196se": [
+            500.0,
+            500.0
+          ],
+          "mean": 500.0,
+          "n": 1,
+          "negative": 0,
+          "positive": 1,
+          "sd": 0.0,
+          "values": [
+            500.0
+          ],
+          "zero": 0
+        },
+        "round_cpu_seconds": {
+          "descriptive_196se": [
+            0.31908214899999976,
+            0.31908214899999976
+          ],
+          "mean": 0.31908214899999976,
+          "n": 1,
+          "negative": 0,
+          "positive": 1,
+          "sd": 0.0,
+          "values": [
+            0.31908214899999976
+          ],
+          "zero": 0
+        },
+        "round_max_wall_seconds": {
+          "descriptive_196se": [
+            0.2813660940155387,
+            0.2813660940155387
+          ],
+          "mean": 0.2813660940155387,
+          "n": 1,
+          "negative": 0,
+          "positive": 1,
+          "sd": 0.0,
+          "values": [
+            0.2813660940155387
+          ],
+          "zero": 0
+        },
+        "round_wall_seconds": {
+          "descriptive_196se": [
+            0.3087098547257483,
+            0.3087098547257483
+          ],
+          "mean": 0.3087098547257483,
+          "n": 1,
+          "negative": 0,
+          "positive": 1,
+          "sd": 0.0,
+          "values": [
+            0.3087098547257483
+          ],
+          "zero": 0
+        },
+        "sent_bytes": {
+          "descriptive_196se": [
+            500.0,
+            500.0
+          ],
+          "mean": 500.0,
+          "n": 1,
+          "negative": 0,
+          "positive": 1,
+          "sd": 0.0,
+          "values": [
+            500.0
+          ],
+          "zero": 0
+        },
+        "service_p10": {
+          "descriptive_196se": [
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "n": 1,
+          "negative": 0,
+          "positive": 0,
+          "sd": 0.0,
+          "values": [
+            0.0
+          ],
+          "zero": 1
+        },
+        "terminal_max_age": {
+          "descriptive_196se": [
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "n": 1,
+          "negative": 0,
+          "positive": 0,
+          "sd": 0.0,
+          "values": [
+            0.0
+          ],
+          "zero": 1
+        },
+        "terminal_mean_age": {
+          "descriptive_196se": [
+            -1.2,
+            -1.2
+          ],
+          "mean": -1.2,
+          "n": 1,
+          "negative": 1,
+          "positive": 0,
+          "sd": 0.0,
+          "values": [
+            -1.2
+          ],
+          "zero": 0
+        },
+        "transmitter_on_ticks": {
+          "descriptive_196se": [
+            8.0,
+            8.0
+          ],
+          "mean": 8.0,
+          "n": 1,
+          "negative": 0,
+          "positive": 1,
+          "sd": 0.0,
+          "values": [
+            8.0
+          ],
+          "zero": 0
+        },
+        "zero_service_steps": {
+          "descriptive_196se": [
+            0.0,
+            0.0
+          ],
+          "mean": 0.0,
+          "n": 1,
+          "negative": 0,
+          "positive": 0,
+          "sd": 0.0,
+          "values": [
+            0.0
+          ],
+          "zero": 1
+        }
+      },
+      "levels": {
+        "P_PRIOR": {
+          "F_user": {
+            "descriptive_196se": [
+              4.5,
+              4.5
+            ],
+            "mean": 4.5,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              4.5
+            ],
+            "zero": 0
+          },
+          "age_p95": {
+            "descriptive_196se": [
+              7.0,
+              7.0
+            ],
+            "mean": 7.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              7.0
+            ],
+            "zero": 0
+          },
+          "attempted_bytes": {
+            "descriptive_196se": [
+              282.0,
+              282.0
+            ],
+            "mean": 282.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              282.0
+            ],
+            "zero": 0
+          },
+          "c_cpu_seconds": {
+            "descriptive_196se": [
+              0.002940950999999803,
+              0.002940950999999803
+            ],
+            "mean": 0.002940950999999803,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              0.002940950999999803
+            ],
+            "zero": 0
+          },
+          "candidate_fleet_scores": {
+            "descriptive_196se": [
+              614.0,
+              614.0
+            ],
+            "mean": 614.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              614.0
+            ],
+            "zero": 0
+          },
+          "candidate_plans": {
+            "descriptive_196se": [
+              195.0,
+              195.0
+            ],
+            "mean": 195.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              195.0
+            ],
+            "zero": 0
+          },
+          "candidate_sinr_entries": {
+            "descriptive_196se": [
+              153500.0,
+              153500.0
+            ],
+            "mean": 153500.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              153500.0
+            ],
+            "zero": 0
+          },
+          "command_bytes_sent": {
+            "descriptive_196se": [
+              32.0,
+              32.0
+            ],
+            "mean": 32.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              32.0
+            ],
+            "zero": 0
+          },
+          "deadline_misses": {
+            "descriptive_196se": [
+              0.0,
+              0.0
+            ],
+            "mean": 0.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 0,
+            "sd": 0.0,
+            "values": [
+              0.0
+            ],
+            "zero": 1
+          },
+          "delivered_command_changes": {
+            "descriptive_196se": [
+              1.0,
+              1.0
+            ],
+            "mean": 1.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              1.0
+            ],
+            "zero": 0
+          },
+          "delivered_mask_changes": {
+            "descriptive_196se": [
+              2.0,
+              2.0
+            ],
+            "mean": 2.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              2.0
+            ],
+            "zero": 0
+          },
+          "longest_zero_service": {
+            "descriptive_196se": [
+              0.0,
+              0.0
+            ],
+            "mean": 0.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 0,
+            "sd": 0.0,
+            "values": [
+              0.0
+            ],
+            "zero": 1
+          },
+          "map_bytes": {
+            "descriptive_196se": [
+              400.0,
+              400.0
+            ],
+            "mean": 400.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              400.0
+            ],
+            "zero": 0
+          },
+          "mask_flips": {
+            "descriptive_196se": [
+              5.0,
+              5.0
+            ],
+            "mean": 5.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              5.0
+            ],
+            "zero": 0
+          },
+          "max_closed_gap": {
+            "descriptive_196se": [
+              4.0,
+              4.0
+            ],
+            "mean": 4.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              4.0
+            ],
+            "zero": 0
+          },
+          "max_left_censored_gap": {
+            "descriptive_196se": [
+              8.0,
+              8.0
+            ],
+            "mean": 8.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              8.0
+            ],
+            "zero": 0
+          },
+          "max_right_censored_gap": {
+            "descriptive_196se": [
+              8.0,
+              8.0
+            ],
+            "mean": 8.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              8.0
+            ],
+            "zero": 0
+          },
+          "max_unserved_gap": {
+            "descriptive_196se": [
+              8.0,
+              8.0
+            ],
+            "mean": 8.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              8.0
+            ],
+            "zero": 0
+          },
+          "mean_age": {
+            "descriptive_196se": [
+              1.8525,
+              1.8525
+            ],
+            "mean": 1.8525,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              1.8525
+            ],
+            "zero": 0
+          },
+          "mean_path_length_m": {
+            "descriptive_196se": [
+              271.76068737648393,
+              271.76068737648393
+            ],
+            "mean": 271.76068737648393,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              271.76068737648393
+            ],
+            "zero": 0
+          },
+          "mean_quality": {
+            "descriptive_196se": [
+              0.3041469450137929,
+              0.3041469450137929
+            ],
+            "mean": 0.3041469450137929,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              0.3041469450137929
+            ],
+            "zero": 0
+          },
+          "mean_served": {
+            "descriptive_196se": [
+              18.25,
+              18.25
+            ],
+            "mean": 18.25,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              18.25
+            ],
+            "zero": 0
+          },
+          "mean_user_max_gap": {
+            "descriptive_196se": [
+              4.16,
+              4.16
+            ],
+            "mean": 4.16,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              4.16
+            ],
+            "zero": 0
+          },
+          "min_served": {
+            "descriptive_196se": [
+              12.0,
+              12.0
+            ],
+            "mean": 12.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              12.0
+            ],
+            "zero": 0
+          },
+          "model_normal_values": {
+            "descriptive_196se": [
+              0.0,
+              0.0
+            ],
+            "mean": 0.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 0,
+            "sd": 0.0,
+            "values": [
+              0.0
+            ],
+            "zero": 1
+          },
+          "never_served": {
+            "descriptive_196se": [
+              9.0,
+              9.0
+            ],
+            "mean": 9.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              9.0
+            ],
+            "zero": 0
+          },
+          "payload_J": {
+            "descriptive_196se": [
+              0.3467440835041378,
+              0.3467440835041378
+            ],
+            "mean": 0.3467440835041378,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              0.3467440835041378
+            ],
+            "zero": 0
+          },
+          "payload_quality": {
+            "descriptive_196se": [
+              0.3041469450137929,
+              0.3041469450137929
+            ],
+            "mean": 0.3041469450137929,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              0.3041469450137929
+            ],
+            "zero": 0
+          },
+          "payload_served": {
+            "descriptive_196se": [
+              18.25,
+              18.25
+            ],
+            "mean": 18.25,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              18.25
+            ],
+            "zero": 0
+          },
+          "payload_time": {
+            "descriptive_196se": [
+              8.0,
+              8.0
+            ],
+            "mean": 8.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              8.0
+            ],
+            "zero": 0
+          },
+          "pilot_seconds": {
+            "descriptive_196se": [
+              0.0,
+              0.0
+            ],
+            "mean": 0.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 0,
+            "sd": 0.0,
+            "values": [
+              0.0
+            ],
+            "zero": 1
+          },
+          "pilot_slots": {
+            "descriptive_196se": [
+              0.0,
+              0.0
+            ],
+            "mean": 0.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 0,
+            "sd": 0.0,
+            "values": [
+              0.0
+            ],
+            "zero": 1
+          },
+          "raw_J": {
+            "descriptive_196se": [
+              0.3467440835041378,
+              0.3467440835041378
+            ],
+            "mean": 0.3467440835041378,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              0.3467440835041378
+            ],
+            "zero": 0
+          },
+          "report_bytes_sent": {
+            "descriptive_196se": [
+              250.0,
+              250.0
+            ],
+            "mean": 250.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              250.0
+            ],
+            "zero": 0
+          },
+          "round_cpu_seconds": {
+            "descriptive_196se": [
+              0.051687160000000176,
+              0.051687160000000176
+            ],
+            "mean": 0.051687160000000176,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              0.051687160000000176
+            ],
+            "zero": 0
+          },
+          "round_max_wall_seconds": {
+            "descriptive_196se": [
+              0.03281669411808252,
+              0.03281669411808252
+            ],
+            "mean": 0.03281669411808252,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              0.03281669411808252
+            ],
+            "zero": 0
+          },
+          "round_wall_seconds": {
+            "descriptive_196se": [
+              0.04994217725470662,
+              0.04994217725470662
+            ],
+            "mean": 0.04994217725470662,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              0.04994217725470662
+            ],
+            "zero": 0
+          },
+          "sent_bytes": {
+            "descriptive_196se": [
+              282.0,
+              282.0
+            ],
+            "mean": 282.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              282.0
+            ],
+            "zero": 0
+          },
+          "service_p10": {
+            "descriptive_196se": [
+              13.4,
+              13.4
+            ],
+            "mean": 13.4,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              13.4
+            ],
+            "zero": 0
+          },
+          "terminal_max_age": {
+            "descriptive_196se": [
+              8.0,
+              8.0
+            ],
+            "mean": 8.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              8.0
+            ],
+            "zero": 0
+          },
+          "terminal_mean_age": {
+            "descriptive_196se": [
+              2.84,
+              2.84
+            ],
+            "mean": 2.84,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              2.84
+            ],
+            "zero": 0
+          },
+          "transmitter_on_ticks": {
+            "descriptive_196se": [
+              22.0,
+              22.0
+            ],
+            "mean": 22.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              22.0
+            ],
+            "zero": 0
+          },
+          "zero_service_steps": {
+            "descriptive_196se": [
+              0.0,
+              0.0
+            ],
+            "mean": 0.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 0,
+            "sd": 0.0,
+            "values": [
+              0.0
+            ],
+            "zero": 1
+          }
+        },
+        "U32_FULL": {
+          "F_user": {
+            "descriptive_196se": [
+              4.5,
+              4.5
+            ],
+            "mean": 4.5,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              4.5
+            ],
+            "zero": 0
+          },
+          "age_p95": {
+            "descriptive_196se": [
+              6.0,
+              6.0
+            ],
+            "mean": 6.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              6.0
+            ],
+            "zero": 0
+          },
+          "attempted_bytes": {
+            "descriptive_196se": [
+              782.0,
+              782.0
+            ],
+            "mean": 782.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              782.0
+            ],
+            "zero": 0
+          },
+          "c_cpu_seconds": {
+            "descriptive_196se": [
+              0.004358595000000021,
+              0.004358595000000021
+            ],
+            "mean": 0.004358595000000021,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              0.004358595000000021
+            ],
+            "zero": 0
+          },
+          "candidate_fleet_scores": {
+            "descriptive_196se": [
+              16160.0,
+              16160.0
+            ],
+            "mean": 16160.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              16160.0
+            ],
+            "zero": 0
+          },
+          "candidate_plans": {
+            "descriptive_196se": [
+              169.0,
+              169.0
+            ],
+            "mean": 169.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              169.0
+            ],
+            "zero": 0
+          },
+          "candidate_sinr_entries": {
+            "descriptive_196se": [
+              4040000.0,
+              4040000.0
+            ],
+            "mean": 4040000.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              4040000.0
+            ],
+            "zero": 0
+          },
+          "command_bytes_sent": {
+            "descriptive_196se": [
+              32.0,
+              32.0
+            ],
+            "mean": 32.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              32.0
+            ],
+            "zero": 0
+          },
+          "deadline_misses": {
+            "descriptive_196se": [
+              0.0,
+              0.0
+            ],
+            "mean": 0.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 0,
+            "sd": 0.0,
+            "values": [
+              0.0
+            ],
+            "zero": 1
+          },
+          "delivered_command_changes": {
+            "descriptive_196se": [
+              2.0,
+              2.0
+            ],
+            "mean": 2.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              2.0
+            ],
+            "zero": 0
+          },
+          "delivered_mask_changes": {
+            "descriptive_196se": [
+              1.0,
+              1.0
+            ],
+            "mean": 1.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              1.0
+            ],
+            "zero": 0
+          },
+          "longest_zero_service": {
+            "descriptive_196se": [
+              0.0,
+              0.0
+            ],
+            "mean": 0.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 0,
+            "sd": 0.0,
+            "values": [
+              0.0
+            ],
+            "zero": 1
+          },
+          "map_bytes": {
+            "descriptive_196se": [
+              400.0,
+              400.0
+            ],
+            "mean": 400.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              400.0
+            ],
+            "zero": 0
+          },
+          "mask_flips": {
+            "descriptive_196se": [
+              2.0,
+              2.0
+            ],
+            "mean": 2.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              2.0
+            ],
+            "zero": 0
+          },
+          "max_closed_gap": {
+            "descriptive_196se": [
+              6.0,
+              6.0
+            ],
+            "mean": 6.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              6.0
+            ],
+            "zero": 0
+          },
+          "max_left_censored_gap": {
+            "descriptive_196se": [
+              8.0,
+              8.0
+            ],
+            "mean": 8.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              8.0
+            ],
+            "zero": 0
+          },
+          "max_right_censored_gap": {
+            "descriptive_196se": [
+              8.0,
+              8.0
+            ],
+            "mean": 8.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              8.0
+            ],
+            "zero": 0
+          },
+          "max_unserved_gap": {
+            "descriptive_196se": [
+              8.0,
+              8.0
+            ],
+            "mean": 8.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              8.0
+            ],
+            "zero": 0
+          },
+          "mean_age": {
+            "descriptive_196se": [
+              1.51,
+              1.51
+            ],
+            "mean": 1.51,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              1.51
+            ],
+            "zero": 0
+          },
+          "mean_path_length_m": {
+            "descriptive_196se": [
+              291.2165314991996,
+              291.2165314991996
+            ],
+            "mean": 291.2165314991996,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              291.2165314991996
+            ],
+            "zero": 0
+          },
+          "mean_quality": {
+            "descriptive_196se": [
+              0.18545472647288969,
+              0.18545472647288969
+            ],
+            "mean": 0.18545472647288969,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              0.18545472647288969
+            ],
+            "zero": 0
+          },
+          "mean_served": {
+            "descriptive_196se": [
+              20.125,
+              20.125
+            ],
+            "mean": 20.125,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              20.125
+            ],
+            "zero": 0
+          },
+          "mean_user_max_gap": {
+            "descriptive_196se": [
+              3.64,
+              3.64
+            ],
+            "mean": 3.64,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              3.64
+            ],
+            "zero": 0
+          },
+          "min_served": {
+            "descriptive_196se": [
+              12.0,
+              12.0
+            ],
+            "mean": 12.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              12.0
+            ],
+            "zero": 0
+          },
+          "model_normal_values": {
+            "descriptive_196se": [
+              56000.0,
+              56000.0
+            ],
+            "mean": 56000.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              56000.0
+            ],
+            "zero": 0
+          },
+          "never_served": {
+            "descriptive_196se": [
+              4.0,
+              4.0
+            ],
+            "mean": 4.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              4.0
+            ],
+            "zero": 0
+          },
+          "payload_J": {
+            "descriptive_196se": [
+              0.32909820630612474,
+              0.32909820630612474
+            ],
+            "mean": 0.32909820630612474,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              0.32909820630612474
+            ],
+            "zero": 0
+          },
+          "payload_quality": {
+            "descriptive_196se": [
+              0.18116068768708246,
+              0.18116068768708246
+            ],
+            "mean": 0.18116068768708246,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              0.18116068768708246
+            ],
+            "zero": 0
+          },
+          "payload_served": {
+            "descriptive_196se": [
+              19.625,
+              19.625
+            ],
+            "mean": 19.625,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              19.625
+            ],
+            "zero": 0
+          },
+          "payload_time": {
+            "descriptive_196se": [
+              7.8,
+              7.8
+            ],
+            "mean": 7.8,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              7.8
+            ],
+            "zero": 0
+          },
+          "pilot_seconds": {
+            "descriptive_196se": [
+              0.2,
+              0.2
+            ],
+            "mean": 0.2,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              0.2
+            ],
+            "zero": 0
+          },
+          "pilot_slots": {
+            "descriptive_196se": [
+              100.0,
+              100.0
+            ],
+            "mean": 100.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              100.0
+            ],
+            "zero": 0
+          },
+          "raw_J": {
+            "descriptive_196se": [
+              0.33738641794186686,
+              0.33738641794186686
+            ],
+            "mean": 0.33738641794186686,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              0.33738641794186686
+            ],
+            "zero": 0
+          },
+          "report_bytes_sent": {
+            "descriptive_196se": [
+              750.0,
+              750.0
+            ],
+            "mean": 750.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              750.0
+            ],
+            "zero": 0
+          },
+          "round_cpu_seconds": {
+            "descriptive_196se": [
+              0.37076930899999994,
+              0.37076930899999994
+            ],
+            "mean": 0.37076930899999994,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              0.37076930899999994
+            ],
+            "zero": 0
+          },
+          "round_max_wall_seconds": {
+            "descriptive_196se": [
+              0.3141827881336212,
+              0.3141827881336212
+            ],
+            "mean": 0.3141827881336212,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              0.3141827881336212
+            ],
+            "zero": 0
+          },
+          "round_wall_seconds": {
+            "descriptive_196se": [
+              0.3586520319804549,
+              0.3586520319804549
+            ],
+            "mean": 0.3586520319804549,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              0.3586520319804549
+            ],
+            "zero": 0
+          },
+          "sent_bytes": {
+            "descriptive_196se": [
+              782.0,
+              782.0
+            ],
+            "mean": 782.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              782.0
+            ],
+            "zero": 0
+          },
+          "service_p10": {
+            "descriptive_196se": [
+              13.4,
+              13.4
+            ],
+            "mean": 13.4,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              13.4
+            ],
+            "zero": 0
+          },
+          "terminal_max_age": {
+            "descriptive_196se": [
+              8.0,
+              8.0
+            ],
+            "mean": 8.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              8.0
+            ],
+            "zero": 0
+          },
+          "terminal_mean_age": {
+            "descriptive_196se": [
+              1.64,
+              1.64
+            ],
+            "mean": 1.64,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              1.64
+            ],
+            "zero": 0
+          },
+          "transmitter_on_ticks": {
+            "descriptive_196se": [
+              30.0,
+              30.0
+            ],
+            "mean": 30.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 1,
+            "sd": 0.0,
+            "values": [
+              30.0
+            ],
+            "zero": 0
+          },
+          "zero_service_steps": {
+            "descriptive_196se": [
+              0.0,
+              0.0
+            ],
+            "mean": 0.0,
+            "n": 1,
+            "negative": 0,
+            "positive": 0,
+            "sd": 0.0,
+            "values": [
+              0.0
+            ],
+            "zero": 1
+          }
+        }
+      }
+    },
+    "independent_units": "worlds; users and particles nested",
+    "per_world_user_differences": [
+      {
+        "per_user_max_gap": [
+          -3,
+          4,
+          -5,
+          0,
+          1,
+          -1,
+          -2,
+          0,
+          1,
+          0,
+          -2,
+          -1,
+          -1,
+          -1,
+          1,
+          -1,
+          2,
+          -2,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          2,
+          5,
+          -4,
+          0,
+          2,
+          -2,
+          -5,
+          -4,
+          2,
+          0,
+          3,
+          -2,
+          -5,
+          3,
+          0,
+          -5,
+          0,
+          1,
+          1,
+          -4,
+          0,
+          2,
+          -3,
+          0,
+          5,
+          -2,
+          -5
+        ],
+        "per_user_mean_age": [
+          -1.375,
+          3.125,
+          -3.375,
+          -0.25,
+          0.375,
+          -0.875,
+          -0.625,
+          -0.125,
+          0.125,
+          0.125,
+          -0.875,
+          -0.5,
+          0.0,
+          -0.75,
+          1.0,
+          -0.25,
+          0.875,
+          -1.0,
+          0.25,
+          -1.0,
+          0.0,
+          0.0,
+          -0.25,
+          1.0,
+          2.625,
+          -3.25,
+          0.0,
+          1.25,
+          -0.5,
+          -3.0,
+          -3.25,
+          0.375,
+          -0.125,
+          2.25,
+          -1.125,
+          -3.625,
+          1.5,
+          0.0,
+          -2.5,
+          0.0,
+          0.375,
+          0.5,
+          -2.5,
+          0.125,
+          0.5,
+          -1.125,
+          0.0,
+          3.625,
+          -1.5,
+          -3.375
+        ],
+        "per_user_service_ticks": [
+          2,
+          -3,
+          3,
+          1,
+          -1,
+          1,
+          2,
+          0,
+          0,
+          -1,
+          2,
+          1,
+          -1,
+          1,
+          -1,
+          0,
+          -2,
+          1,
+          -1,
+          1,
+          0,
+          0,
+          1,
+          -4,
+          -2,
+          4,
+          0,
+          -1,
+          0,
+          2,
+          4,
+          -2,
+          1,
+          -3,
+          2,
+          4,
+          -3,
+          0,
+          5,
+          0,
+          -2,
+          -2,
+          1,
+          -1,
+          0,
+          3,
+          0,
+          -4,
+          4,
+          3
+        ],
+        "world": 29661900
+      }
+    ],
+    "primary": "complete payload_J = sum(payload_weight * native_J) / H; positive favors U32_FULL",
+    "worlds": [
+      29661900
+    ]
+  },
+  "paired_actions": [
+    {
+      "command_difference_ticks": 5,
+      "command_difference_uav_ticks": 11,
+      "mask_difference_ticks": 6,
+      "paired_initial_state": true,
+      "physical_innovation_address": [
+        1380339784,
+        29640001,
+        29661900,
+        "state_tick"
+      ],
+      "post_c_nav_difference_entries": 0,
+      "proposal_difference_reports": 1,
+      "proposal_difference_uav_reports": 3,
+      "transmitter_bit_difference_ticks": 14,
+      "world": 29661900
+    }
+  ],
+  "physical_counts": {
+    "constructor_calls_attempted": 1,
+    "constructor_calls_completed": 1,
+    "constructor_reset_calls_attempted": 1,
+    "constructor_reset_calls_completed": 1,
+    "explicit_reset_calls_attempted": 2,
+    "explicit_reset_calls_completed": 2,
+    "native_step_calls_attempted": 16,
+    "native_step_calls_completed": 16,
+    "physical_initializations": 3,
+    "physical_normal_blocks_attempted": 19,
+    "physical_normal_blocks_completed": 19,
+    "physical_normal_values_attempted": 4750,
+    "physical_normal_values_completed": 4750,
+    "physical_updates": 16
+  },
+  "resources": {
+    "canonical_artifact_bytes": 206915,
+    "cpu_seconds": 1.784769,
+    "peak_rss_kib": 369908,
+    "peak_rss_scope": "this Linux process",
+    "waited_child_cpu_seconds": 0.0045780000000000005,
+    "wall_seconds": 2.2661714658606797
+  },
+  "rows": [
+    {
+      "arm": "U32",
+      "companions": {
+        "delivery": {
+          "arrival_refreshes": 2,
+          "last_candidate_ticks": 1,
+          "last_delivery_tick": 7,
+          "last_report_tick": 4,
+          "scored_suffix_ticks": 5,
+          "startup_ticks": 3,
+          "suffix_payload_time": 4.9
+        },
+        "final4": {
+          "max_age": 8,
+          "mean_age": 1.64,
+          "path_metres": 699.4112549695428,
+          "payload_J": 0.3922120229330834,
+          "payload_quality": 0.21770674311027804,
+          "payload_served": 23.35,
+          "payload_time": 3.9,
+          "per_user_mean_age": [
+            1.0,
+            6.5,
+            0.75,
+            0.25,
+            0.0,
+            3.75,
+            0.5,
+            0.5,
+            0.25,
+            0.25,
+            0.0,
+            1.5,
+            0.75,
+            1.0,
+            6.5,
+            2.5,
+            0.75,
+            1.0,
+            1.25,
+            4.5,
+            0.0,
+            0.0,
+            1.0,
+            0.75,
+            4.5,
+            0.0,
+            0.75,
+            2.75,
+            1.0,
+            1.5,
+            0.0,
+            0.75,
+            0.25,
+            5.5,
+            0.0,
+            0.25,
+            3.5,
+            5.5,
+            0.25,
+            1.5,
+            0.75,
+            0.25,
+            2.5,
+            0.5,
+            0.0,
+            0.0,
+            6.5,
+            6.5,
+            0.25,
+            1.5
+          ],
+          "per_user_service_ticks": [
+            1,
+            0,
+            2,
+            3,
+            4,
+            1,
+            2,
+            2,
+            3,
+            3,
+            4,
+            1,
+            2,
+            1,
+            0,
+            0,
+            2,
+            1,
+            1,
+            1,
+            4,
+            4,
+            2,
+            2,
+            1,
+            4,
+            2,
+            2,
+            1,
+            1,
+            4,
+            2,
+            3,
+            0,
+            4,
+            3,
+            0,
+            0,
+            3,
+            1,
+            2,
+            3,
+            0,
+            2,
+            4,
+            4,
+            0,
+            0,
+            3,
+            1
+          ],
+          "raw_J": 0.4025103576331397,
+          "raw_quality": 0.22170119211046574,
+          "raw_served": 24.0,
+          "start": 4,
+          "stop": 8,
+          "ticks": 4,
+          "transmitter_on_ticks": 12
+        },
+        "startup": {
+          "max_age": 3,
+          "mean_age": 1.3266666666666667,
+          "path_metres": 581.8185887840696,
+          "payload_J": 0.22317327116955235,
+          "payload_quality": 0.14346645945406342,
+          "payload_served": 12.866666666666667,
+          "payload_time": 2.9,
+          "per_user_mean_age": [
+            1.0,
+            2.0,
+            2.0,
+            1.0,
+            2.0,
+            1.0,
+            0.3333333333333333,
+            2.0,
+            2.0,
+            2.0,
+            0.6666666666666666,
+            0.3333333333333333,
+            0.3333333333333333,
+            2.0,
+            2.0,
+            2.0,
+            2.0,
+            2.0,
+            1.0,
+            2.0,
+            0.3333333333333333,
+            1.0,
+            0.6666666666666666,
+            1.0,
+            2.0,
+            2.0,
+            0.0,
+            2.0,
+            1.0,
+            2.0,
+            2.0,
+            0.0,
+            0.0,
+            1.0,
+            2.0,
+            2.0,
+            0.0,
+            1.0,
+            0.3333333333333333,
+            2.0,
+            0.0,
+            2.0,
+            2.0,
+            2.0,
+            2.0,
+            0.3333333333333333,
+            2.0,
+            2.0,
+            1.0,
+            1.0
+          ],
+          "per_user_service_ticks": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            1,
+            2,
+            0,
+            0,
+            0,
+            1,
+            2,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            2,
+            1,
+            1,
+            1,
+            0,
+            0,
+            3,
+            0,
+            1,
+            0,
+            0,
+            3,
+            3,
+            1,
+            0,
+            0,
+            3,
+            1,
+            2,
+            0,
+            3,
+            0,
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            1,
+            1
+          ],
+          "raw_J": 0.2315440559314564,
+          "raw_quality": 0.1495912975492991,
+          "raw_served": 13.333333333333334,
+          "start": 0,
+          "stop": 3,
+          "ticks": 3,
+          "transmitter_on_ticks": 15
+        }
+      },
+      "controller_counts": {
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 12,
+        "candidate_link_evaluations": 4212,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 10,
+        "fallback_decisions": 4,
+        "grid_power_evaluations": 0,
+        "ingests": 10,
+        "link_evaluations": 4269,
+        "model_ticks": 1080,
+        "objective_reductions": 1080,
+        "setup_link_evaluations": 57,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 270
+      },
+      "cpu_seconds": 0.3840895739999999,
+      "failure": null,
+      "model_counts": {
+        "anchor_geometry_attempts": 2,
+        "anchor_geometry_link_entries": 500,
+        "anchor_geometry_snapshots": 2,
+        "candidate_batch_attempts": 169,
+        "candidate_batch_calls": 169,
+        "candidate_cache_hits": 63,
+        "candidate_conditional_fleet_updates": 4320,
+        "candidate_fleet_scores": 16160,
+        "candidate_geometry_attempts": 135,
+        "candidate_geometry_link_entries": 33750,
+        "candidate_geometry_snapshots": 135,
+        "candidate_kinematic_ticks": 135,
+        "candidate_plans": 169,
+        "candidate_requests": 232,
+        "candidate_sinr_entries": 4040000,
+        "candidate_uncached_requests": 169,
+        "command_bytes_encoded": 32,
+        "command_bytes_sent": 32,
+        "model_normal_blocks": 2,
+        "model_normal_blocks_attempted": 2,
+        "model_normal_values": 56000,
+        "model_signed_normal_values": 112000,
+        "prefix_conditional_fleet_updates": 192,
+        "prefix_kinematic_ticks": 6,
+        "prefix_updates_attempted": 6,
+        "report_bytes_encoded": 750,
+        "report_bytes_sent": 750
+      },
+      "outcome": {
+        "F_user": 4.5,
+        "age_p95": 6.0,
+        "attempted_bytes": 782,
+        "c_cpu_seconds": 0.004358595000000021,
+        "candidate_fleet_scores": 16160,
+        "candidate_plans": 169,
+        "candidate_sinr_entries": 4040000,
+        "command_bytes_sent": 32,
+        "deadline_misses": 0,
+        "delivered_command_changes": 2,
+        "delivered_mask_changes": 1,
+        "longest_zero_service": 0,
+        "map_bytes": 400,
+        "mask_flips": 2,
+        "max_closed_gap": 6,
+        "max_left_censored_gap": 8,
+        "max_right_censored_gap": 8,
+        "max_unserved_gap": 8,
+        "mean_age": 1.51,
+        "mean_path_length_m": 291.2165314991996,
+        "mean_quality": 0.18545472647288969,
+        "mean_served": 20.125,
+        "mean_user_max_gap": 3.64,
+        "min_served": 12,
+        "model_normal_values": 56000,
+        "never_served": 4,
+        "payload_J": 0.32909820630612474,
+        "payload_quality": 0.18116068768708246,
+        "payload_served": 19.625,
+        "payload_time": 7.8,
+        "per_uav_path_metres": [
+          325.5664063329177,
+          269.54862477155694,
+          243.1416069300122,
+          352.3232065620996,
+          265.5028128994117
+        ],
+        "per_uav_transmitter_ticks": [
+          8,
+          3,
+          3,
+          8,
+          8
+        ],
+        "per_user_max_gap": [
+          2,
+          8,
+          3,
+          3,
+          3,
+          6,
+          1,
+          3,
+          3,
+          3,
+          2,
+          3,
+          2,
+          3,
+          8,
+          4,
+          4,
+          3,
+          2,
+          7,
+          1,
+          2,
+          3,
+          3,
+          7,
+          4,
+          2,
+          6,
+          2,
+          3,
+          4,
+          2,
+          1,
+          7,
+          3,
+          3,
+          5,
+          7,
+          1,
+          4,
+          2,
+          3,
+          4,
+          4,
+          4,
+          1,
+          8,
+          8,
+          2,
+          3
+        ],
+        "per_user_mean_age": [
+          0.875,
+          4.5,
+          1.125,
+          0.875,
+          0.75,
+          2.625,
+          0.375,
+          1.0,
+          0.875,
+          0.875,
+          0.5,
+          0.875,
+          0.75,
+          1.25,
+          4.5,
+          2.0,
+          1.625,
+          1.25,
+          1.125,
+          3.5,
+          0.125,
+          0.375,
+          1.0,
+          1.125,
+          3.5,
+          1.25,
+          0.5,
+          2.625,
+          0.875,
+          1.5,
+          1.25,
+          0.375,
+          0.125,
+          3.5,
+          0.75,
+          0.875,
+          1.875,
+          3.5,
+          0.25,
+          2.0,
+          0.5,
+          0.875,
+          2.0,
+          1.5,
+          1.25,
+          0.125,
+          4.5,
+          4.5,
+          0.5,
+          1.125
+        ],
+        "per_user_service_ticks": [
+          3,
+          0,
+          3,
+          4,
+          5,
+          2,
+          5,
+          3,
+          4,
+          4,
+          5,
+          4,
+          4,
+          2,
+          0,
+          1,
+          2,
+          2,
+          2,
+          1,
+          7,
+          6,
+          3,
+          3,
+          1,
+          4,
+          5,
+          2,
+          3,
+          2,
+          4,
+          6,
+          7,
+          1,
+          5,
+          4,
+          3,
+          1,
+          6,
+          1,
+          5,
+          4,
+          1,
+          2,
+          4,
+          7,
+          0,
+          0,
+          5,
+          3
+        ],
+        "pilot_seconds": 0.2,
+        "pilot_slots": 100,
+        "raw_J": 0.33738641794186686,
+        "report_bytes_sent": 750,
+        "round_cpu_seconds": 0.37076930899999994,
+        "round_max_wall_seconds": 0.3141827881336212,
+        "round_wall_seconds": 0.3586520319804549,
+        "sensor_saturation": {
+          "clipped_high": 0,
+          "clipped_low": 0,
+          "edge_high": 0,
+          "edge_low": 0
+        },
+        "sent_bytes": 782,
+        "service_p10": 13.4,
+        "terminal_max_age": 8,
+        "terminal_mean_age": 1.64,
+        "transmitter_on_ticks": 30,
+        "zero_service_steps": 0
+      },
+      "outcome_arrays": {
+        "bytes": 2389,
+        "path": "/home/wu/projects/HMASD/runs/uav_radio_information_cost/b02_integrated_package_check_a02/outcomes/U32_FULL_29661900.npz",
+        "sha256": "ca843427f2f598848b79a91e5431662d0b72cfe3fa46fc13f7244e9c235d0a9d",
+        "write_status": "complete"
+      },
+      "physical_counts": {
+        "constructor_calls_attempted": 0,
+        "constructor_calls_completed": 0,
+        "constructor_reset_calls_attempted": 0,
+        "constructor_reset_calls_completed": 0,
+        "explicit_reset_calls_attempted": 1,
+        "explicit_reset_calls_completed": 1,
+        "native_step_calls_attempted": 8,
+        "native_step_calls_completed": 8,
+        "physical_initializations": 1,
+        "physical_normal_blocks_attempted": 9,
+        "physical_normal_blocks_completed": 9,
+        "physical_normal_values_attempted": 2250,
+        "physical_normal_values_completed": 2250,
+        "physical_updates": 8
+      },
+      "program": "U32_FULL",
+      "raw": {
+        "bytes": 101093,
+        "path": "/home/wu/projects/HMASD/runs/uav_radio_information_cost/b02_integrated_package_check_a02/raw/U32_FULL_29661900.npz",
+        "sha256": "7f1eb2170484c704a1cb44f0644a7447b2e9bb7657ea08ea9ebfc1b1dafc5bc7",
+        "write_status": "complete"
+      },
+      "steps": 8,
+      "wall_seconds": 0.37151461001485586,
+      "world": 29661900
+    },
+    {
+      "arm": "P_PRIOR",
+      "companions": {
+        "delivery": {
+          "arrival_refreshes": 2,
+          "last_candidate_ticks": 2,
+          "last_delivery_tick": 6,
+          "last_report_tick": 4,
+          "scored_suffix_ticks": 6,
+          "startup_ticks": 2,
+          "suffix_payload_time": 6.0
+        },
+        "final4": {
+          "max_age": 8,
+          "mean_age": 2.385,
+          "path_metres": 614.5584412271571,
+          "payload_J": 0.39208389616946426,
+          "payload_quality": 0.37361298723154757,
+          "payload_served": 20.0,
+          "payload_time": 4.0,
+          "per_user_mean_age": [
+            3.5,
+            0.25,
+            6.5,
+            0.75,
+            0.0,
+            5.5,
+            1.5,
+            1.5,
+            0.75,
+            0.0,
+            1.75,
+            2.0,
+            1.25,
+            2.5,
+            4.5,
+            3.5,
+            0.75,
+            3.5,
+            0.75,
+            6.5,
+            0.0,
+            0.0,
+            1.5,
+            0.0,
+            0.75,
+            6.5,
+            0.75,
+            0.25,
+            2.5,
+            6.5,
+            6.5,
+            0.0,
+            0.25,
+            1.0,
+            1.25,
+            6.5,
+            0.75,
+            5.5,
+            4.5,
+            2.5,
+            0.25,
+            0.0,
+            6.5,
+            0.25,
+            0.75,
+            1.0,
+            6.5,
+            0.25,
+            2.5,
+            6.5
+          ],
+          "per_user_service_ticks": [
+            0,
+            3,
+            0,
+            2,
+            4,
+            0,
+            1,
+            1,
+            2,
+            4,
+            2,
+            1,
+            2,
+            0,
+            1,
+            0,
+            2,
+            0,
+            2,
+            0,
+            4,
+            4,
+            1,
+            4,
+            2,
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            4,
+            3,
+            3,
+            3,
+            0,
+            2,
+            0,
+            0,
+            0,
+            3,
+            4,
+            0,
+            3,
+            2,
+            3,
+            0,
+            3,
+            0,
+            0
+          ],
+          "raw_J": 0.39208389616946426,
+          "raw_quality": 0.37361298723154757,
+          "raw_served": 20.0,
+          "start": 4,
+          "stop": 8,
+          "ticks": 4,
+          "transmitter_on_ticks": 8
+        },
+        "startup": {
+          "max_age": 2,
+          "mean_age": 1.05,
+          "path_metres": 412.474059003848,
+          "payload_J": 0.2303956636951803,
+          "payload_quality": 0.1613188789839343,
+          "payload_served": 13.0,
+          "payload_time": 2.0,
+          "per_user_mean_age": [
+            1.5,
+            1.5,
+            1.5,
+            0.5,
+            1.5,
+            0.5,
+            0.5,
+            1.5,
+            1.5,
+            1.5,
+            0.5,
+            0.0,
+            0.0,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            0.5,
+            1.5,
+            0.5,
+            0.5,
+            1.5,
+            1.5,
+            0.0,
+            1.5,
+            0.5,
+            1.5,
+            1.5,
+            0.0,
+            0.0,
+            0.5,
+            1.5,
+            1.5,
+            0.0,
+            0.5,
+            0.5,
+            1.5,
+            0.0,
+            1.5,
+            1.5,
+            1.5,
+            1.5,
+            0.5,
+            1.5,
+            1.5,
+            1.5,
+            1.5
+          ],
+          "per_user_service_ticks": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            1,
+            1,
+            0,
+            0,
+            0,
+            1,
+            2,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            1,
+            1,
+            0,
+            0,
+            2,
+            0,
+            1,
+            0,
+            0,
+            2,
+            2,
+            1,
+            0,
+            0,
+            2,
+            1,
+            1,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "raw_J": 0.2303956636951803,
+          "raw_quality": 0.1613188789839343,
+          "raw_served": 13.0,
+          "start": 0,
+          "stop": 2,
+          "ticks": 2,
+          "transmitter_on_ticks": 10
+        }
+      },
+      "controller_counts": {
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 21,
+        "candidate_link_evaluations": 4968,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 10,
+        "fallback_decisions": 5,
+        "grid_power_evaluations": 0,
+        "ingests": 10,
+        "link_evaluations": 5046,
+        "model_ticks": 1080,
+        "objective_reductions": 1080,
+        "setup_link_evaluations": 78,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 270
+      },
+      "cpu_seconds": 0.06169922299999997,
+      "failure": null,
+      "model_counts": {
+        "candidate_batch_attempts": 195,
+        "candidate_batch_calls": 195,
+        "candidate_cache_hits": 37,
+        "candidate_fleet_scores": 614,
+        "candidate_geometry_attempts": 162,
+        "candidate_geometry_link_entries": 40500,
+        "candidate_geometry_snapshots": 162,
+        "candidate_kinematic_ticks": 162,
+        "candidate_plans": 195,
+        "candidate_prior_prediction_fleets": 162,
+        "candidate_prior_stationary_reuses": 162,
+        "candidate_requests": 232,
+        "candidate_sinr_entries": 153500,
+        "candidate_uncached_requests": 195,
+        "command_bytes_encoded": 32,
+        "command_bytes_sent": 32,
+        "prefix_kinematic_ticks": 4,
+        "prefix_prior_prediction_fleets": 4,
+        "prefix_prior_stationary_reuses": 4,
+        "prefix_updates_attempted": 4,
+        "prior_initializations": 2,
+        "prior_initialized_link_pairs": 500,
+        "report_bytes_encoded": 250,
+        "report_bytes_sent": 250,
+        "report_loss_codes_encoded": 0
+      },
+      "outcome": {
+        "F_user": 4.5,
+        "age_p95": 7.0,
+        "attempted_bytes": 282,
+        "c_cpu_seconds": 0.002940950999999803,
+        "candidate_fleet_scores": 614,
+        "candidate_plans": 195,
+        "candidate_sinr_entries": 153500,
+        "command_bytes_sent": 32,
+        "deadline_misses": 0,
+        "delivered_command_changes": 1,
+        "delivered_mask_changes": 2,
+        "longest_zero_service": 0,
+        "map_bytes": 400,
+        "mask_flips": 5,
+        "max_closed_gap": 4,
+        "max_left_censored_gap": 8,
+        "max_right_censored_gap": 8,
+        "max_unserved_gap": 8,
+        "mean_age": 1.8525,
+        "mean_path_length_m": 271.76068737648393,
+        "mean_quality": 0.3041469450137929,
+        "mean_served": 18.25,
+        "mean_user_max_gap": 4.16,
+        "min_served": 12,
+        "model_normal_values": 0,
+        "never_served": 9,
+        "payload_J": 0.3467440835041378,
+        "payload_quality": 0.3041469450137929,
+        "payload_served": 18.25,
+        "payload_time": 8.0,
+        "per_uav_path_metres": [
+          263.43437197695346,
+          281.9750316427498,
+          267.9944206723979,
+          279.89679969090673,
+          265.5028128994117
+        ],
+        "per_uav_transmitter_ticks": [
+          2,
+          2,
+          6,
+          4,
+          8
+        ],
+        "per_user_max_gap": [
+          5,
+          4,
+          8,
+          3,
+          2,
+          7,
+          3,
+          3,
+          2,
+          3,
+          4,
+          4,
+          3,
+          4,
+          7,
+          5,
+          2,
+          5,
+          2,
+          8,
+          1,
+          2,
+          3,
+          1,
+          2,
+          8,
+          2,
+          4,
+          4,
+          8,
+          8,
+          0,
+          1,
+          4,
+          5,
+          8,
+          2,
+          7,
+          6,
+          4,
+          1,
+          2,
+          8,
+          4,
+          2,
+          4,
+          8,
+          3,
+          4,
+          8
+        ],
+        "per_user_mean_age": [
+          2.25,
+          1.375,
+          4.5,
+          1.125,
+          0.375,
+          3.5,
+          1.0,
+          1.125,
+          0.75,
+          0.75,
+          1.375,
+          1.375,
+          0.75,
+          2.0,
+          3.5,
+          2.25,
+          0.75,
+          2.25,
+          0.875,
+          4.5,
+          0.125,
+          0.375,
+          1.25,
+          0.125,
+          0.875,
+          4.5,
+          0.5,
+          1.375,
+          1.375,
+          4.5,
+          4.5,
+          0.0,
+          0.25,
+          1.25,
+          1.875,
+          4.5,
+          0.375,
+          3.5,
+          2.75,
+          2.0,
+          0.125,
+          0.375,
+          4.5,
+          1.375,
+          0.75,
+          1.25,
+          4.5,
+          0.875,
+          2.0,
+          4.5
+        ],
+        "per_user_service_ticks": [
+          1,
+          3,
+          0,
+          3,
+          6,
+          1,
+          3,
+          3,
+          4,
+          5,
+          3,
+          3,
+          5,
+          1,
+          1,
+          1,
+          4,
+          1,
+          3,
+          0,
+          7,
+          6,
+          2,
+          7,
+          3,
+          0,
+          5,
+          3,
+          3,
+          0,
+          0,
+          8,
+          6,
+          4,
+          3,
+          0,
+          6,
+          1,
+          1,
+          1,
+          7,
+          6,
+          0,
+          3,
+          4,
+          4,
+          0,
+          4,
+          1,
+          0
+        ],
+        "pilot_seconds": 0.0,
+        "pilot_slots": 0,
+        "raw_J": 0.3467440835041378,
+        "report_bytes_sent": 250,
+        "round_cpu_seconds": 0.051687160000000176,
+        "round_max_wall_seconds": 0.03281669411808252,
+        "round_wall_seconds": 0.04994217725470662,
+        "sensor_saturation": {},
+        "sent_bytes": 282,
+        "service_p10": 13.4,
+        "terminal_max_age": 8,
+        "terminal_mean_age": 2.84,
+        "transmitter_on_ticks": 22,
+        "zero_service_steps": 0
+      },
+      "outcome_arrays": {
+        "bytes": 2359,
+        "path": "/home/wu/projects/HMASD/runs/uav_radio_information_cost/b02_integrated_package_check_a02/outcomes/P_PRIOR_29661900.npz",
+        "sha256": "bdf341f66bdd43b31d7eed9a184efcf88d807bf573123e23789ffb0ef302f2fb",
+        "write_status": "complete"
+      },
+      "physical_counts": {
+        "constructor_calls_attempted": 0,
+        "constructor_calls_completed": 0,
+        "constructor_reset_calls_attempted": 0,
+        "constructor_reset_calls_completed": 0,
+        "explicit_reset_calls_attempted": 1,
+        "explicit_reset_calls_completed": 1,
+        "native_step_calls_attempted": 8,
+        "native_step_calls_completed": 8,
+        "physical_initializations": 1,
+        "physical_normal_blocks_attempted": 9,
+        "physical_normal_blocks_completed": 9,
+        "physical_normal_values_attempted": 2250,
+        "physical_normal_values_completed": 2250,
+        "physical_updates": 8
+      },
+      "program": "P_PRIOR",
+      "raw": {
+        "bytes": 90594,
+        "path": "/home/wu/projects/HMASD/runs/uav_radio_information_cost/b02_integrated_package_check_a02/raw/P_PRIOR_29661900.npz",
+        "sha256": "12ff5d82a44b53916f3e8d9b5de0bcc48f5ea7a052eb25cb05bbd73efcf7bfd3",
+        "write_status": "complete"
+      },
+      "steps": 8,
+      "wall_seconds": 0.05960882594808936,
+      "world": 29661900
+    }
+  ],
+  "runtime": {
+    "host": "LAPTOP-U9TDKC8A",
+    "numpy": "1.26.3",
+    "python": "3.10.21",
+    "torch": "2.7.0+cu118"
+  },
+  "source_bindings": {
+    "P_PRIOR": {
+      "commit": "a80e2be9e3341b3bebfa743dacfda5e4ff13d977",
+      "files": {
+        "envs/pettingzoo/__init__.py": "d247e986e573c70196b7674d05a28ae229028d858ca4fb9c7ddf684c8c6d12c3",
+        "envs/pettingzoo/env_adapter.py": "8b42c1c3e7ef44cb814f79225b4af944b1018ad764dfeb17e9e1cc294df79d40",
+        "envs/pettingzoo/scenario1.py": "e5b3eb7d755a7d7866cc7cd01531383bee821f0c6d72a81a3d4fa9cb5954939e",
+        "envs/pettingzoo/scenario2.py": "277374f365e8eeda882de53d53cc051c1534fe210622fee74d7b5a8f9d2cf2f2",
+        "envs/pettingzoo/uav_env.py": "fb67554cf911adc9d3260a2a7f16d1773921c295646cb46beb4ba1247fec599e",
+        "envs/pettingzoo/uav_radio.py": "db3464803b1a5aa9c9504096810dc971266a6bd7eba1c31dfe79e7d8d903f3cc",
+        "experiments/candidates/uav_local_history/b01/__init__.py": "2e9325183add31dc3fdaf705b71ecf2b79a6c99cd0ad285e809b365edade511c",
+        "experiments/candidates/uav_local_history/b01/controller.py": "b5fdfbfe2718ee693c9ed1d7aeb8bbb6c5c59964ec6c56c5bb35be8b685f23d2",
+        "experiments/candidates/uav_radio_activation/b01/__init__.py": "b0392e94f590eb0fd016ce26529485215b128b9accff9b1dc5fdd6ffd7d11b8a",
+        "experiments/candidates/uav_radio_activation/b01/protocol.py": "4976e6739d1e5c919bd298b86091dcf6cf5d62d5c3cc3a7b977fa5b5f0956431",
+        "experiments/candidates/uav_radio_activation/b02/__init__.py": "3e9e194f32194488a58d2bee13d5be625f5142b2d4330b76c729809924bf950e",
+        "experiments/candidates/uav_radio_activation/b02/protocol.py": "a1dbec8e5aecead2c702fab54376c95c8b9d1fd134cb0894a3c0eb705ebab69b",
+        "experiments/candidates/uav_radio_activation/b02/scheduler.py": "5c748f097a7597806f0adb3e5b49a242f000391c7da9ab7eedb2f7efce7535e7",
+        "experiments/candidates/uav_radio_activation/b03/__init__.py": "e7f16638203ff2d8d5254017185d2b2133c21fc41b1fef22aa4709cbafc9c350",
+        "experiments/candidates/uav_radio_activation/b03/protocol.py": "3561dd0c2ea274a7e24e5a8bc6da3d6ee03b21fcec8768d18adb45b4f524b2c1",
+        "experiments/candidates/uav_radio_information_cost/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "experiments/candidates/uav_radio_information_cost/b01/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "experiments/candidates/uav_radio_information_cost/b01/collect.py": "8cfd92bcece0eaea1ecdbee35630dde37e115d950a464b6384d3fdc942c0e9c1",
+        "experiments/candidates/uav_radio_information_cost/b01/contract.py": "4cf89d17a6d7ed8baedfbc56e55c50d1d50654699a8345f10984dc09bab4bac1",
+        "experiments/candidates/uav_radio_information_cost/b01/io.py": "17c11c02e8146aaa75bdcb77c9b0ccc4aff9c3ea5f2649619cea194ad21b9306",
+        "experiments/candidates/uav_radio_information_cost/b01/manager.py": "19cbef0d0e1c433dd92c4991e88a588b8eaa3041b713bd3019721c178875210b",
+        "experiments/candidates/uav_radio_information_cost/b01/metrics.py": "7d4ae51941926af5e3ef0591d7bfb76f67445f6e72440044d0d938dbe942cb5a",
+        "experiments/candidates/uav_radio_information_cost/b01/protocol.py": "04fa37c014576fb284641a76c9789662331b996bd05d72424bc468c7fa1a4eb7",
+        "experiments/candidates/uav_radio_information_cost/b01/read_model.py": "a41b3b14ff383be7995f7bba24fa76ec00fa9fde0d5c54f42815e657ff192dd9",
+        "experiments/candidates/uav_radio_information_cost/b01/read_native.py": "555ec63725f2c95e01da108c0380979afea6068fb5700d3c3efd7fdf4a173b8a",
+        "experiments/candidates/uav_radio_information_cost/b01/read_outcomes.py": "d5f9277b71b2de8f5c2a8ce553beee5d4114ce251ff87e8125523db64c381530",
+        "experiments/candidates/uav_radio_information_cost/b01/reader.py": "096a98c3a485fafeb21832d8e9ae943077d7cdc7a8864fff09b38c7f929ed114",
+        "experiments/candidates/uav_radio_uncertainty/__init__.py": "1e50f59c1ae82218047b3461fdb8c82e231a003701196597f9a5660c99d23a84",
+        "experiments/candidates/uav_radio_uncertainty/b01/__init__.py": "660d43c77579e84e687abcdb5e0d666ded365b678838a9f0a72cd2a988cd3f5a",
+        "experiments/candidates/uav_radio_uncertainty/b01/contract.py": "3287555890b43929a8338a7b1e19a0af48c6b0c15a6ce601f9ba7eb976c8cfa5",
+        "experiments/candidates/uav_radio_uncertainty/b01/environment.py": "7105bfc9a15f143851bc95e3067fea6dbb5accc12e1c94cada1c5266ce83a9d6",
+        "experiments/candidates/uav_radio_uncertainty/b01/io.py": "332bbc49b12b3f8f8803c5f8436d9872eb113dc2ef6917e6a90ca86bedf39ec8",
+        "experiments/candidates/uav_radio_uncertainty/b01/model.py": "bcaafc660ec8c7b9843cf42f79bf3bc94a92fe294d5e4561b559305e983a9f16",
+        "experiments/candidates/uav_radio_uncertainty/b01/protocol.py": "b25534e100408c164b39597b8740013b62d900abce0bb3cc8a33ef2c23e2b679",
+        "experiments/candidates/uav_radio_uncertainty/b01/randomness.py": "0fec111dae7991c0382c3b517b5d6cee68fd247832b60ec8902ab2b4c4bf4240",
+        "experiments/candidates/uav_radio_uncertainty/b01/read_model.py": "e97fa2c5878420713c9ac16ed8b6578289e41556453d3bfacb785f9a7e6a85ee",
+        "experiments/candidates/uav_radio_uncertainty/b01/read_native.py": "1dcb76f2641597759244979a267190fe57b5c5be6a07cf9180a22f46f3e3a4cc",
+        "experiments/candidates/uav_radio_uncertainty/b01/read_outcomes.py": "51a24be86f276ee31af4c8884a357fc9e216b69c5a2598c6c936f3363c73a14c",
+        "experiments/candidates/uav_user_waiting/b02/__init__.py": "419ff3be5e484c47b704cbcaa13eeab4ad652c538833b3619c53c737cacd1da9",
+        "experiments/candidates/uav_user_waiting/b02/predictor.py": "b356a04de8525a24764822044cd72af7c57aa286cd5d873bd8db54ac9be7db10",
+        "experiments/candidates/uav_user_waiting/b02/protocol.py": "038bddbfa0f694e9b5aa2a6c3f0e659d945369a951b55497a1da2a9ec839e1d4",
+        "experiments/candidates/uav_user_waiting/b02/storage.py": "0a631080a9f3fc9acf4cd15aa43c29e052652b57dabedabb61e9bf12bf010154"
+      },
+      "roots": [
+        "experiments/candidates/uav_radio_information_cost/b01/collect.py",
+        "experiments/candidates/uav_radio_information_cost/b01/metrics.py",
+        "experiments/candidates/uav_radio_information_cost/b01/reader.py",
+        "experiments/candidates/uav_radio_uncertainty/b01/environment.py"
+      ]
+    },
+    "U32_FULL": {
+      "commit": "9b6f493b343c2939b374a1ce21384266d3257456",
+      "files": {
+        "envs/pettingzoo/__init__.py": "d247e986e573c70196b7674d05a28ae229028d858ca4fb9c7ddf684c8c6d12c3",
+        "envs/pettingzoo/env_adapter.py": "8b42c1c3e7ef44cb814f79225b4af944b1018ad764dfeb17e9e1cc294df79d40",
+        "envs/pettingzoo/scenario1.py": "e5b3eb7d755a7d7866cc7cd01531383bee821f0c6d72a81a3d4fa9cb5954939e",
+        "envs/pettingzoo/scenario2.py": "277374f365e8eeda882de53d53cc051c1534fe210622fee74d7b5a8f9d2cf2f2",
+        "envs/pettingzoo/uav_env.py": "fb67554cf911adc9d3260a2a7f16d1773921c295646cb46beb4ba1247fec599e",
+        "envs/pettingzoo/uav_radio.py": "db3464803b1a5aa9c9504096810dc971266a6bd7eba1c31dfe79e7d8d903f3cc",
+        "experiments/candidates/uav_local_history/b01/__init__.py": "2e9325183add31dc3fdaf705b71ecf2b79a6c99cd0ad285e809b365edade511c",
+        "experiments/candidates/uav_local_history/b01/controller.py": "b5fdfbfe2718ee693c9ed1d7aeb8bbb6c5c59964ec6c56c5bb35be8b685f23d2",
+        "experiments/candidates/uav_radio_activation/b01/__init__.py": "b0392e94f590eb0fd016ce26529485215b128b9accff9b1dc5fdd6ffd7d11b8a",
+        "experiments/candidates/uav_radio_activation/b01/protocol.py": "4976e6739d1e5c919bd298b86091dcf6cf5d62d5c3cc3a7b977fa5b5f0956431",
+        "experiments/candidates/uav_radio_activation/b02/__init__.py": "3e9e194f32194488a58d2bee13d5be625f5142b2d4330b76c729809924bf950e",
+        "experiments/candidates/uav_radio_activation/b02/protocol.py": "a1dbec8e5aecead2c702fab54376c95c8b9d1fd134cb0894a3c0eb705ebab69b",
+        "experiments/candidates/uav_radio_activation/b02/scheduler.py": "5c748f097a7597806f0adb3e5b49a242f000391c7da9ab7eedb2f7efce7535e7",
+        "experiments/candidates/uav_radio_activation/b03/__init__.py": "e7f16638203ff2d8d5254017185d2b2133c21fc41b1fef22aa4709cbafc9c350",
+        "experiments/candidates/uav_radio_activation/b03/protocol.py": "3561dd0c2ea274a7e24e5a8bc6da3d6ee03b21fcec8768d18adb45b4f524b2c1",
+        "experiments/candidates/uav_radio_uncertainty/__init__.py": "1e50f59c1ae82218047b3461fdb8c82e231a003701196597f9a5660c99d23a84",
+        "experiments/candidates/uav_radio_uncertainty/b01/__init__.py": "660d43c77579e84e687abcdb5e0d666ded365b678838a9f0a72cd2a988cd3f5a",
+        "experiments/candidates/uav_radio_uncertainty/b01/collect.py": "a9c379f98156ff4278226ce1dd67a4ebde401e12e7ab4753f0996564c66f6ebe",
+        "experiments/candidates/uav_radio_uncertainty/b01/contract.py": "3287555890b43929a8338a7b1e19a0af48c6b0c15a6ce601f9ba7eb976c8cfa5",
+        "experiments/candidates/uav_radio_uncertainty/b01/environment.py": "7105bfc9a15f143851bc95e3067fea6dbb5accc12e1c94cada1c5266ce83a9d6",
+        "experiments/candidates/uav_radio_uncertainty/b01/io.py": "332bbc49b12b3f8f8803c5f8436d9872eb113dc2ef6917e6a90ca86bedf39ec8",
+        "experiments/candidates/uav_radio_uncertainty/b01/manager.py": "5d6d714922d8f26bfac69b6f93fe2efe9eeb600b637b47e963a975cae29486ad",
+        "experiments/candidates/uav_radio_uncertainty/b01/metrics.py": "596c873dccfa4d6641fcbf6807da8550f8fda50735bbeedb576945103d872713",
+        "experiments/candidates/uav_radio_uncertainty/b01/model.py": "bcaafc660ec8c7b9843cf42f79bf3bc94a92fe294d5e4561b559305e983a9f16",
+        "experiments/candidates/uav_radio_uncertainty/b01/protocol.py": "b25534e100408c164b39597b8740013b62d900abce0bb3cc8a33ef2c23e2b679",
+        "experiments/candidates/uav_radio_uncertainty/b01/randomness.py": "0fec111dae7991c0382c3b517b5d6cee68fd247832b60ec8902ab2b4c4bf4240",
+        "experiments/candidates/uav_radio_uncertainty/b01/read_model.py": "e97fa2c5878420713c9ac16ed8b6578289e41556453d3bfacb785f9a7e6a85ee",
+        "experiments/candidates/uav_radio_uncertainty/b01/read_native.py": "1dcb76f2641597759244979a267190fe57b5c5be6a07cf9180a22f46f3e3a4cc",
+        "experiments/candidates/uav_radio_uncertainty/b01/read_outcomes.py": "51a24be86f276ee31af4c8884a357fc9e216b69c5a2598c6c936f3363c73a14c",
+        "experiments/candidates/uav_radio_uncertainty/b01/reader.py": "e3b61d9688b885c4a869dee3d0fa739a86da31814128728b58d03589bc220854",
+        "experiments/candidates/uav_user_waiting/b02/__init__.py": "419ff3be5e484c47b704cbcaa13eeab4ad652c538833b3619c53c737cacd1da9",
+        "experiments/candidates/uav_user_waiting/b02/predictor.py": "b356a04de8525a24764822044cd72af7c57aa286cd5d873bd8db54ac9be7db10",
+        "experiments/candidates/uav_user_waiting/b02/protocol.py": "038bddbfa0f694e9b5aa2a6c3f0e659d945369a951b55497a1da2a9ec839e1d4",
+        "experiments/candidates/uav_user_waiting/b02/storage.py": "0a631080a9f3fc9acf4cd15aa43c29e052652b57dabedabb61e9bf12bf010154"
+      },
+      "roots": [
+        "experiments/candidates/uav_radio_uncertainty/b01/collect.py",
+        "experiments/candidates/uav_radio_uncertainty/b01/metrics.py",
+        "experiments/candidates/uav_radio_uncertainty/b01/reader.py",
+        "experiments/candidates/uav_radio_uncertainty/b01/environment.py"
+      ]
+    }
+  },
+  "status": "COMPLETE"
+}

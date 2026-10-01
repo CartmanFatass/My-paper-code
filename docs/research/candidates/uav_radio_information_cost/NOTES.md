@@ -1564,3 +1564,41 @@ additional 1.69 s data-only test suite remain actual overhead; source/review/pub
 time is not fully measured. No repeated numerical check or additional native episode is
 implied. Root's initial remote control-row synchronization is complete; actual-node
 admission still runs immediately before the scientific child is released.
+
+### B02 accepted H8 integration and complete numerical read (2026-10-01 UTC)
+
+Corrected published source `547e2200cbe261174ed392d66fcc56340c2588b2` completed the
+single priced H8 pair on wsl_4070 as `b02_integrated_package_check_a02`. Admission at
+13:14:44.989 UTC observed 14,655,868,928 available physical bytes (4 GiB floor), passed
+all checks and released native PID 1253226 / supervisor 1253225. The same native claim
+`e1499663775141fd0d334f90aa7502bc5397539f41639b5a134163cf87479ec3` ended exit 0 at
+13:14:50.066 UTC with both identities absent. H8 completed 2 episodes / 16 steps /
+0 fits; its same-process full reader reconstructed 4 complete decisions, 0 partial
+ones, both C passes (40 reference C calls), all physical steps and all 16,774 model
+candidate fleet scores. Constructor 29661998 and paired initial geometry/innovation
+address were verified. Reader made 0 environments/resets/native steps/fits.
+
+`check.json` and full reading say VERIFIED_COMPLETE. I verified all 13 collected JSON
+files against fresh remote byte sizes and SHA256 hashes. Worker summary is
+`9a6214e25a5cf9a6381f28137d69a2db70a5a5e8f33601ef256856afd8a521c7` (113,910 B);
+full read is `69e503406c04131a1e5adace2f7bf7b9990332fb0418a9837c0baaa0b153dfd1`
+(98,011 B). Five required NPZs stay only in the canonical remote run directory
+`/home/wu/projects/HMASD/runs/uav_radio_information_cost/b02_integrated_package_check_a02`;
+constructor/raw/outcome artifact hashes and sizes are in the collected summary. Entire
+remote run had 546,854 logical bytes / 20 files at collection. This is integration
+evidence, not an efficacy estimate or panel selection.
+
+Complete check plus reader used 4.7684 s measured entry wall, 4.3371 process CPU s,
+0.004578 waited-child CPU s and peak RSS 372,540 KiB. The nested reader measurement
+already includes check work, so worker CPU is not added again. Outer detached launcher
+used 22 s elapsed separately; unmetered support remains unmetered. Deterministic waiter
+job `rf-b02-check-a02` consumed READY generation 1 / event
+`4f720e72fadc0e0c487804c7`, then rearmed generation 2. App queue delivery rejected input
+to an unloaded spawned child; the active DM read the same handle directly, with no
+replacement launch or claim.
+
+After verified collection, supported snapshot GC preview and apply both approved exact
+snapshot `6ed40097716a4e108328b0deab9a5bc8`; it is absent and allocated bytes fell
+819,814,400 -> 0. No output/claim was removed, no cleanup blocker or backup copy.
+The main contract now proceeds once at the unchanged executable source `547e2200c`;
+32 paired H256 worlds and separate complete reader remain the next operations.

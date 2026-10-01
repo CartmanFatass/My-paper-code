@@ -1,0 +1,90 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-10-01T13:14:45.006922Z",
+  "bootstrap_command": [
+    "/home/wu/.venvs/hmasd-gcc-31021/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/6ed40097716a4e108328b0deab9a5bc8/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/6ed40097716a4e108328b0deab9a5bc8/experiments/candidates/uav_radio_information_cost/b02_integrated_package/check.py",
+    "--output",
+    "/home/wu/projects/HMASD/runs/uav_radio_information_cost/b02_integrated_package_check_a02",
+    "--",
+    "--out",
+    "/home/wu/projects/HMASD/runs/uav_radio_information_cost/b02_integrated_package_check_a02",
+    "--launch-sha",
+    "547e2200cbe261174ed392d66fcc56340c2588b2",
+    "--seed",
+    "29661900"
+  ],
+  "claim_key": "e1499663775141fd0d334f90aa7502bc5397539f41639b5a134163cf87479ec3",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/e1499663775141fd0d334f90aa7502bc5397539f41639b5a134163cf87479ec3.json",
+  "command": [
+    "/home/wu/.venvs/hmasd-gcc-31021/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/6ed40097716a4e108328b0deab9a5bc8/experiments/candidates/uav_radio_information_cost/b02_integrated_package/check.py",
+    "--out",
+    "/home/wu/projects/HMASD/runs/uav_radio_information_cost/b02_integrated_package_check_a02",
+    "--launch-sha",
+    "547e2200cbe261174ed392d66fcc56340c2588b2",
+    "--seed",
+    "29661900"
+  ],
+  "command_sha256": "bf9c9944165ad5d77cc1b748287df5c1f158cb6fa2aa489f6e09ee997d0e34d6",
+  "control_observation": {
+    "observed_at": "2026-10-01T13:14:44.879076Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "547e2200cbe261174ed392d66fcc56340c2588b2"
+  },
+  "control_root": "/home/wu/projects/HMASD",
+  "created_at": "2026-10-01T13:14:44.891211Z",
+  "cwd": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/6ed40097716a4e108328b0deab9a5bc8",
+  "direction": "uav_radio_information_cost",
+  "host_identity": "LAPTOP-U9TDKC8A",
+  "identity_command": [
+    "/home/wu/.local/opt/hmasd-cpython-3.10.21-gcc/bin/python3.10",
+    "experiments/candidates/uav_radio_information_cost/b02_integrated_package/check.py",
+    "--launch-sha",
+    "547e2200cbe261174ed392d66fcc56340c2588b2",
+    "--seed",
+    "29661900"
+  ],
+  "lead": "Codex DM (native child)",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/uav_radio_information_cost/b02_integrated_package_check_a02/launch-manifest.json",
+  "node": "wsl_4070",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/e1499663775141fd0d334f90aa7502bc5397539f41639b5a134163cf87479ec3.json",
+  "output_root": "/home/wu/projects/HMASD/runs/uav_radio_information_cost/b02_integrated_package_check_a02",
+  "preflight": "/home/wu/projects/HMASD/runs/uav_radio_information_cost/b02_integrated_package_check_a02/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 1253225,
+      "session_id": 1253225,
+      "start_ticks": 120194027
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 1253225,
+    "process_group_id": 1253225
+  },
+  "process_exit": "/home/wu/projects/HMASD/runs/uav_radio_information_cost/b02_integrated_package_check_a02/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 1253226,
+      "session_id": 1253225,
+      "start_ticks": 120194030
+    },
+    "pid": 1253226,
+    "process_group_id": 1253225,
+    "supervisor_pid": 1253225
+  },
+  "schema_version": 1,
+  "sha": "547e2200cbe261174ed392d66fcc56340c2588b2",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/6ed40097716a4e108328b0deab9a5bc8",
+  "stderr": "/home/wu/projects/HMASD/runs/uav_radio_information_cost/b02_integrated_package_check_a02/stderr.log",
+  "stdout": "/home/wu/projects/HMASD/runs/uav_radio_information_cost/b02_integrated_package_check_a02/stdout.log"
+}
