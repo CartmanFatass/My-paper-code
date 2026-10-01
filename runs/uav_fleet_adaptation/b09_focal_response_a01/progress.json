@@ -1,0 +1,43 @@
+{
+  "state": "COMPLETE",
+  "actual": {
+    "fits_started": 4,
+    "fits_completed": 4,
+    "constructor_calls": 1,
+    "constructor_resets": 1,
+    "native_dense_power_slots": 180928275,
+    "native_unique_distance_pairs": 171059460,
+    "group_states": 512,
+    "roster_draws": 2560,
+    "explicit_reset_calls": 2560,
+    "explicit_resets": 2560,
+    "collected_critic_rows": 65536,
+    "motion_request_calls": 819200,
+    "motion_requests": 819200,
+    "motion_draws": 565248,
+    "collected_head_rows": 98304,
+    "native_step_calls": 655360,
+    "native_steps": 655360,
+    "training_native_steps": 262144,
+    "native_uav_ticks": 3276800,
+    "complete_episodes": 2560,
+    "training_episodes": 1024,
+    "head_replay_rows": 262144,
+    "density_identity_rows": 65536,
+    "head_optimizer_steps": 2048,
+    "critic_replay_rows": 262144,
+    "critic_optimizer_steps": 2048,
+    "evaluation_native_steps": 393216,
+    "evaluation_episodes": 1536
+  },
+  "progress": {
+    "kind": "evaluation",
+    "ego": "V",
+    "panel": "X",
+    "world": 29993031,
+    "tape": 1,
+    "group": null
+  },
+  "worker_wall_seconds": 1319.5734869060107,
+  "worker_cpu_seconds": 1312.185142965
+}

@@ -9723,3 +9723,335 @@ At that initial adoption, the worker had completed1fit and275 training episodes
 with70400 native steps, startingH0 afterF0; elapsed worker129.901wall/128.417CPU
 seconds. Stderr was empty. This is progress only; no interim native score was
 reduced or used to change the fixed exposure, optimizer, panel or stopping rule.
+
+**First observation checkpoint,06:46UTC.** Generation38 returned CHECKPOINT
+8f4220e7cce7a50173ea662e; actual queue delivery was rejected with-32600 because
+direct App-server input is unavailable for this native subagent. The active DM
+drained that exact event and rearms the same accepted handle atgeneration39;
+there is no operation restart, migration, resend or additional exposure.
+
+Worker progress is now COMPLETE:4fits,1024 training+1536 final episodes,655360
+native steps,512 saved precollection states,2048 head+2048 critic updates,
+262144 replay rows each. Worker wall1319.573s/CPU1312.185s. The full reader
+remains INCOMPLETE:354 episodes/90978 scalar states/22656 critic rows verified
+at279.200wall/276.136CPU seconds, with no native steps, refits or optimizer
+replay. The native runner/supervisor are still matching/live and stderr is empty.
+This is technical collection completion, not a complete verified scientific
+conclusion. No score has been used to revise exposure.
+
+The independent Scientific Reviewer may now reconstruct the completed immutable
+worker evidence, original question/advice and contrary sources in a separate
+context while the already accepted full reader continues. Its final judgment
+must cover the completed reader and any remaining defects or limitations; the DM
+will supply that terminal evidence on the same review handle. This review may
+reduce existing outcomes/check identities and saved arithmetic; it performs0
+new native, policy/model-forward, target, optimizer or production-reader calls,
+and creates no scientific experiment or notebook edits. It will report its
+actual coverage and retain dissent. No additional result purchase is selected.
+
+<a id="b09-complete-reading"></a>
+### B09 complete reading: no established focal-response increment; observed history has no sampled-action sensitivity
+
+The original operation exited0 at2026-10-01T07:10:24.687755Z. Generation39
+returned READY event`a98af992dd2a6b1d0b167763` at07:10:45UTC, with consistent
+records and both exact runner/supervisor identities absent. Native-child queue
+delivery again returned-32600; the still-active DM consumed that event through
+same-handle rearm40 and explicitly stopped observation. No launch, reader,
+optimizer or scientific query was repeated. Worker`COMPLETE` and reader`VERIFIED`
+are now read together, rather than treating process exit as a scientific verdict.
+
+The complete physical/policy reader checked all2560H256 episodes,657920 scalar
+states,3289600 private observation rows,177638400 scalar radio links,819200
+policy requests and all2560 roster draws. All512 precollection head/critic states,
+four final states,65536 actual precollection critic rows, suffix returns,
+advantages, first-epoch ego-only densities/losses and update/hash chains pass.
+The reader adds0 native steps, optimizer steps or refits. Its114688 head rows
+include the prescribed16384 history-zero diagnostic calls. Maximum absolute
+errors are radio7.10543e-14, reward9.47159e-16, planner5.55112e-17,
+observation0 and critic0; policy/history/category checks remain exact.
+No later-epoch optimizer replay or claim of converged optimization is added.
+
+Canonical evidence is
+`/home/fires/hmasd-wsl/runs/uav_fleet_adaptation/b09_focal_response_a01/`.
+The compact [publication](../../../../runs/uav_fleet_adaptation/b09_focal_response_a01/publication.json)
+contains all24 absolute levels,68 contrasts, the four primary world vectors,
+fit movements, conditional uncertainty and all256 history-sensitivity records.
+All published entries were checked against the full reader. The canonical full
+worker summary is47606181bytes, SHA256
+`628769cf5f4c5f358bf548eb6745b657dd72f57d45913da0a3fadacb99241ea4`;
+the19189587byte full reading is
+`557916b7f6234a253a6ce57499accc572cc4b676a8bab57db4c02e856785bf8d`.
+The611638byte publication is
+`511e571d09c215667101916a66fd35776748bc2c224175cedc0928eaf0ee454b`;
+the complete episode log is
+`ae43eb20867c2107b2fc36e799bf49c0ad98b83bc0a7870db4c1f97609753e25`.
+Source remains3886b4020955df0bf729b72a644451a55449920b. Unique raw,
+diagnostics and all516 checkpoint files stay in that one canonical location;
+original P0/P1 stay at their previously bound remote locations.
+
+**Primary question.** No block×roster contrast establishes an added J, mean
+service, served-user quality, service-p10 or episode-minimum benefit from H.
+The J means have opposite signs between training blocks in both rosters.
+This does not establish equivalence or general absence of history value.
+Each interval below is the fixed20000-resample pointwise95% paired-world
+percentile interval after averaging two tapes within each of32 worlds;
+there is no multiplicity adjustment or training-population confidence claim.
+
+| Contrast | J mean [interval] | Mean served [interval] | Positive/negative/zero J worlds |
+| --- | --- | --- | --- |
+| H0−F0 / T | +.000113 [−.003145,+.003447] | +.014160 [−.230348,+.277289] | 15/15/2 |
+| H0−F0 / X | −.000857 [−.007635,+.006278] | −.065674 [−.559509,+.452646] | 12/17/3 |
+| H1−F1 / T | −.001199 [−.007418,+.006078] | −.068726 [−.503786,+.440799] | 10/18/4 |
+| H1−F1 / X | +.002052 [−.000930,+.005404] | +.161011 [−.045717,+.396973] | 16/11/5 |
+
+Block0 does retain a conditional travel difference: H0−F0 reduces mean path
+per UAV by195.353m[−339.639,−69.428] onT and134.093m[−230.023,−43.969]
+onX; focal travel falls450.198m[−842.895,−95.316] and555.110m
+[−938.024,−197.655]. Block1 mean/focal travel intervals all cross zero.
+H0−P0 mean path is−5.327m[−167.294,+153.033] onT and+28.649m
+[−138.836,+188.687] onX: the H0−F0 improvement does not establish a travel
+upgrade over the unchanged inherited controller. No measured energy claim or
+posthoc deployment utility is inferred from distance.
+
+**Complete ordinary comparisons.** Every endpoint's J increment over Bstar0
+and Hdirect is unresolved. All four endpoint−Bstar0 means are negative in
+both rosters. Endpoint−P0 J means are+.001198 to+.002398 onT and−.003782
+to−.005877 onX, with no positive interval excluding zero. F1−P0/X has the
+narrow descriptive adverse interval−.005834[−.012354,−.000056], accompanied
+by service−.420227[−.897401,−.000485]. These are individual exploratory
+contrasts, not simultaneous discoveries. The results do not establish a useful
+current-context F increment either, while leaving broader response learning open.
+
+Narrower positive comparisons remain: H0/H1−C onT give J+.008594
+[+.000507,+.017953] and+.008351[+.000096,+.017237]; their V comparisons
+are almost the same. They do not absorb the stronger P0/Bstar0/Hdirect
+comparisons or their complete costs. F1−P0/T raises served-user quality by
+.002378[+.000608,+.004229], but J/service remain unresolved and travel rises.
+F0/F1/H1−P0 onT add190.026/211.143/176.233m per UAV, each with a
+positive interval; their focal increases are715.701/674.182/684.233m.
+H0−Bstar0/X saves858.825 focal meters[−1334.368,−395.136] while its
+J/service means are lower and unresolved. F1−Bstar0/X also saves538.381
+focal meters[−963.281,−100.605]. These are tradeoffs, not dominance.
+Against G onT, F0/H0/H1 lose served-user quality with negative intervals;
+F1/H1−G onX lose mean episode minimum by.34375/.359375, both with
+negative intervals. Native reward and service share components and are not
+independent corroboration.
+
+Absolute J and mean path per UAV retain the complete reference ordering without
+pooling rosters or choosing a preferred fitted endpoint:
+
+| Ego | J / T | J / X | Mean path m/UAV / T | Mean path m/UAV / X |
+| --- | --- | --- | --- | --- |
+| F0 | .364368 | .379405 | 3251.439 | 3676.760 |
+| H0 | .364480 | .378548 | 3056.086 | 3542.667 |
+| F1 | .365437 | .378591 | 3272.557 | 3602.926 |
+| H1 | .364238 | .380643 | 3237.646 | 3601.674 |
+| C | .355886 | .373491 | 2779.581 | 3103.504 |
+| Q10 | .360499 | .381828 | 3207.984 | 3443.233 |
+| G | .363944 | .381820 | 3186.485 | 3515.926 |
+| V | .355877 | .376387 | 2781.136 | 3167.387 |
+| R | .356657 | .373376 | 2756.459 | 3104.391 |
+| P0 | .363039 | .384425 | 3061.413 | 3514.017 |
+| Bstar0 | .369721 | .384079 | 3267.907 | 3697.729 |
+| Hdirect | .364676 | .380057 | 3112.616 | 3441.452 |
+
+All seven final zero-service episodes have one zero-service tick atT/world
+29993006/tape1: F0,H0,F1,H1,P0,Bstar0,Hdirect. The independent raw reading
+locates that tick at3, within the first hold; unchanged P0 also incurs it.
+Training adds10 zero-service ticks in8 episodes: both F0/H0 at29991011
+(two each),29991178 and29991184(one each), and both F1/H1 at29992190
+(one each). No longest streak exceeds1. Small mean contrasts also hide large
+world losses: the worst tape-averaged H−F J is−.023441/−.069914/−.059355/
+−.022762 for0T/0X/1T/1X; corresponding best values are+.028689/+.076990/
++.082851/+.030339. Full vectors and single-tape adverse records remain.
+
+**What the history and learning records change.** History exposure is sparse,
+but is not absent. In the4096 final focal decisions per cell, H0/T,H0/X,H1/T,
+H1/X have361/103/256/176 nonzero history descriptors, including81/62/96/83
+with moving-peer displacement. Nonzero includes a valid stationary match;
+it is not a motion count. Mean visible-peer counts per primitive focal row are
+.104736/.038574/.085693/.056885 in those cells.
+
+Zeroing the16 history coordinates in each saved H context changes probabilities
+slightly but changes **zero sampled categories, zero physical paths and zero
+modal categories in all16384 final decisions** under the same recorded action
+innovations. For0T/0X/1T/1X, mean total variation is.000131320/.000030277/
+.000022076/.000012478 and maximum total variation is.006253006/.005453279/
+.001977167/.002897973. The largest absolute logit changes are.025837/.024975/
+.017877/.017262. These are the selected observed-history sensitivity diagnostics,
+not an executed native ablation, retraining comparison or mediation estimate.
+They weaken a direct deployed-history-action explanation of the H−F travel
+difference on this fixed panel. They do not show that history never affected
+training, that another innovation would choose the same category, or that useful
+peer response cannot be learned under another law or exposure.
+
+All heads and critics moved. Final head L2 movements for F0/H0/H1/F1 are
+.806625/.842238/.764297/.732742;4806/4914/5157/5049 of7020 parameters
+change. Every one of2048 actor update steps has a nonzero gradient; four steps
+per fit require the prescribed norm clipping, and recorded PPO clip fractions
+are0. All65536 first-epoch replay logits match collection exactly; maximum
+chosen-log-probability error is1.77636e-15 and ratio-from-one error8.88178e-16.
+Near-zero first-epoch mean actor loss is expected from normalized advantages,
+not evidence that optimization was inactive. This is evidence of an active
+bounded fitting program, not convergence or a diagnosed reason for the outcome.
+
+**Complete price.** The selected4fits consume1024 training and1536 final
+episodes,655360 native steps,2048 head plus2048 critic optimizer steps and
+262144 replay rows for each. Collection98304 + optimization262144 +
+reader114688 give475136 head rows; the corresponding critic total is393216.
+Each of worker and reader incurs203123 frozen neural rows,199092 helper
+calls,4826142 candidate paths/19304568 modeled ticks and87649189
+controller/helper power links under its own episode-private caches. Each
+has262144 tracker ingests/20192 pair gates/20067 matches/6972 moving rows
+across H/V/R, not all ego history. Each also has16384 Hdirect target vectors,
+106496 G score-tail evaluations and565248 sampled action draws; roster
+sampling adds2560 separately addressed draws. Native radio work is180928275
+dense slots/171059460 unique distance pairs, including one constructor's
+overhead; the reader's177638400 scalar links are separately incurred.
+
+Worker time is1319.573487wall/1312.185143CPU seconds; full reader time is
+1725.463773wall/1713.009107CPU seconds. The enclosing entry-through-worker+
+reader scope is3047.323835wall/3027.477513CPU seconds, including its import
+and serialization gaps but excluding final writes, staging, admission and
+support. Peak process RSS is716940KiB on local CPU with one Torch/BLAS
+thread. Fit timings already contain their collection/update work and are not
+added again. Final H−F episode CPU increases by.0248–.0359s across the four
+cells; this is complete episode implementation time, not a physical latency
+requirement or optimized lower bound. Earlier synthetic correctness/review,
+the failed remote preparation,1.029124s input staging, final writing and
+unmetered implementation/scientific-review support remain additional.
+
+Uncompressed raw arrays total5114835968 bytes;2560 compressed raw files
+total1163855575 bytes. At terminal collection the one canonical output has
+3345 files plus4 directories,1346378117 logical bytes and1354358784
+allocated bytes. This includes90,116,096 allocated bytes for512 precollection
+plus4 final checkpoints and5,922,816 for diagnostics. No duplicate evidence
+tree or retention archive is made. B02–B09 now total20fits plus2 prior paid
+calibrations and3702824 native steps, with older B01 costs still separate.
+The independent terminal disposition follows below; no additional run is
+selected by completing this purchase.
+
+<a id="b09-independent-disposition"></a>
+### B09 original independent result review and resolved no-run disposition
+
+The configured ResearchCritic `b09_result_review` worked in a separate context
+without DM/Root conversation inheritance. It first reconstructed the worker
+outputs, then read the original Oracle recommendation, and held its final
+judgment until the terminal full reader was available. The following is its
+complete original final, including contrary evidence, coverage and limits:
+
+> **Recommend stopping further investment in the unchanged B09 recipe, retaining the original controllers and the conditional H0 travel result.** B09 establishes neither a useful new focal-controller upgrade nor a useful executed contribution from recent peer motion. This is an investment decision about this bounded experiment, not a refutation of single-controller adaptation or broader cooperative learning.
+>
+> I inherited no DM/Root conversation. The assignment supplied the frozen contract and historical dispositions; I formed the provisional B09 reading from worker outputs before reading the original Oracle recommendation. No DM result explanation was supplied. The accepted operation subsequently exited successfully, and I checked its terminal artifacts before reaching this disposition.
+>
+> The four fixed comparisons are:
+>
+> | Comparison | H−F mean J [descriptive 95% interval] | Mean service difference | Travel difference, m/UAV |
+> |---|---:|---:|---:|
+> | Block 0, T | +0.000113 [−0.003145, +0.003447] | +0.0142 | −195.35 |
+> | Block 0, X | −0.000857 [−0.007635, +0.006278] | −0.0657 | −134.09 |
+> | Block 1, T | −0.001199 [−0.007418, +0.006078] | −0.0687 | −34.91 |
+> | Block 1, X | +0.002052 [−0.000930, +0.005404] | +0.1610 | −1.25 |
+>
+> These intervals describe paired evaluation worlds conditional on the fitted policies. They establish neither equivalence nor training-population precision. The two independent response-training blocks share inherited P0; tapes and worlds do not supply additional training replication. J and service also share their reward arithmetic.
+>
+> The strong controls change the practical reading. All four learned endpoints have lower mean J than Bstar0 on both rosters. Against unchanged P0, their T increments are only +0.00120 to +0.00240, with intervals crossing zero; on X, all four means are adverse, from −0.00588 to −0.00378. F1−P0/X has a narrowly negative conditional interval, but this does not establish a general training ranking. Gains against deterministic C preserve usable controller competence without establishing added value from these fits. All eight controls remain relevant; selecting C alone would materially overstate the result. [Complete outcomes](</home/fires/hmasd-wsl/runs/uav_fleet_adaptation/b09_focal_response_a01/summary.json>).
+>
+> H0’s lower travel versus F0 is a supported conditional positive: its travel intervals exclude zero on both rosters. It does not recur in H1, and it supplies little movement advantage against P0: H0−P0 travel is −5.33 m/UAV on T and +28.65 on X. H−F service-p10 differences are −0.0703, +0.1484, −0.1484 and −0.0313; corresponding minimum-service differences are +0.0156, +0.0625, −0.0469 and −0.0156. There is no consistent tail improvement or priced deployment utility.
+>
+> Large individual opportunities and losses both survive reconstruction. H1−F1 on T/world29993018/tape1 gains **0.165702 J and 11.6445 served users**; T/world29993030/tape0 loses **0.118710 J and 8.4258 users**. H0−F0 on X/world29993030/tape1 loses **0.076386 J and 5.6367 users**. These show that changing one controller can have consequential native effects. They do not provide an implementable rule for obtaining the favorable cases. Seven final episodes have one zero-service tick each, all at T/world29993006/tape1/tick3, including unchanged P0 and every learned endpoint. They are not new H-specific outages.
+>
+> **The terminal history diagnostic materially narrows the explanation.** History-valid features occur in 8.63–8.90% of training decisions; moving-peer features occur in 3.20–3.27%. Final exposure remains sparse. Nevertheless, this was not an entirely absent feature or an inactive learner: all four heads moved, and every declared update completed.
+>
+> Across **all 16,384 final H decisions**, zeroing the history coordinates produces **zero modal, sampled-category or physical-command changes** under the saved current contexts and innovations. Mean probability total variation is approximately 0.0001313, 0.0000303, 0.0000221 and 0.0000125 for H0/T, H0/X, H1/T and H1/X; the largest observed TV is 0.006253. I independently checked every diagnostic artifact against the corresponding saved original probabilities and actions. [Full reader and diagnostics](</home/fires/hmasd-wsl/runs/uav_fleet_adaptation/b09_focal_response_a01/reading.json>).
+>
+> Thus the history coordinates perturb probabilities but are not decisive for any realized final choice in this panel. H0’s travel difference should be retained as a property of its fitted program, **not attributed to executed history-dependent responses**. In seven of the eight selected extreme H−F trajectory pairs, the first divergence occurs with zero H history and identical current context, consistent with differing fitted current-context coefficients. Those are deliberately selected witnesses, not an estimated population frequency.
+>
+> This remains an observed-context sensitivity result. It is not a measured deployed-ablation value, an expected-value estimate over other innovations, or a mediation analysis. History could have influenced optimization and therefore the final current-context coefficients.
+>
+> The strongest ordinary explanation is that inherited control and ordinary stochastic laws already provide useful responses to these related partners, while finite bounded adaptation changes that competence without producing a dependable increment. This explains the retained-control results more economically than a successful new partner-inference mechanism. It does **not** prove that current observations contain all useful information.
+>
+> The strongest consequential objection to a broader negative conclusion is the restricted learning contract. The ±0.5 residual permits at most a ±1 change in pairwise log-odds and generally cannot reproduce Bstar0’s temperature-two law. In eight inspected adverse trajectories, all 512 saved decisions have P0 logit span greater than two, making exact reproduction of that law impossible within this residual corridor. Sparse history, finite credit estimation and restricted policy changes therefore remain real limits. They do not establish that loosening the bound, adding memory or training longer would help.
+>
+> The historical evidence does not erase this distinction. I checked controller-composition B03’s original per-world outputs: mixture-minus-fixed J is negative in all six block/partner cells, while all twelve own-initialization J comparisons are positive. B09 asks a different question because F/H receive the **same** mixture. B02/B03’s retained competence and B08’s conditional feature/gate positive remain useful capabilities; B04–B07’s different adverse developments do not identify one common failure cause. Fictitious Co-Play supports frozen-partner response training as a legitimate construction, but its generated population, checkpoints and evaluation breadth do not transfer to these two related retained compositions. [FCP, §§2.1–2.4](https://proceedings.neurips.cc/paper_files/paper/2021/file/797134c3e42371bb4979a462eb2f042a-Paper.pdf).
+>
+> The recommended correction is therefore concrete:
+>
+> - **Retain** P0/P1, the ordinary/retained control alternatives, the H0 conditional movement result, and the positive/adverse trajectory witnesses.
+> - **Revise** any explanation of H−F differences as successful or harmful execution of recent-motion information. The direct diagnostic supports negligible realized decision influence here.
+> - **Stop** the unchanged response-head purchase without selecting a preferred block, automatic replication, longer training, broader visibility, new partner generation or confirmation.
+>
+> The strongest useful constructive possibility remains a controller that improves complete response using current context, or one whose lawful history becomes consequential and beneficial. The original predictions distinguished these: recurring F improvements over retained controls would support current-context learning; recurring H improvements over F **and** strong controls, including X, would support considering a separate history-response purchase. Neither pattern appears here. More history sensitivity alone would not supply complete value.
+>
+> No additional observation is necessary to make this no-run decision: the accepted full experiment and diagnostic already answer its bounded investment question. The broader single-controller question can remain a reserve. Any reopening should name a substantive use or a specific modifiable restriction, its contrasting prediction and complete comparator/cost. The already selected actual-S2 question offers a separate comparison under richer coordination rights; it should finish under its own ownership, not become a purported same-rights B09 comparator or a duplicate purchase. Additional rights would also need to be given to the competent ordinary alternative.
+>
+> Actual cost is substantial beyond fitting. B09 incurred **4 fits, 2,560 episodes, 655,360 native steps, 2,048 head and 2,048 critic updates**, with 262,144 replay rows for each. Fit bodies total 554.66 wall seconds, whereas the enclosing entry-through-worker-and-reader scope is **3,047.32 wall / 3,027.48 CPU seconds**, with peak process RSS **716,940 KiB**. Worker and reader CPU are 1,312.19 and 1,713.01 seconds respectively. Final writes, admission, staging, transfer and support are outside that enclosing measurement.
+>
+> The worker used 203,123 frozen-network rows and 4,826,142 candidate paths; the reader repeats the applicable policy work and adds the declared critic/history-zero checks. Raw payload is 5,114,835,968 uncompressed array bytes and 1,163,855,575 compressed file bytes. The DM’s post-terminal canonical allocation is **1,354,358,784 allocated bytes**, retaining all raw trajectories, group/final states and diagnostics. Snapshot/input cleanup remains pending consumer completion; I make no cleanup claim.
+>
+> The recorded synthetic checks and repairs, failed preferred-node Git preparation, observer/transport failures and input transfer remain additional costs. They were not failed scientific fits. The prospective 11–22 support hours are an estimate, not measured labor. B02–B09 now total 20 fits plus two calibrations and 3,702,824 native steps, with earlier B01 separate.
+>
+> My independent coverage was:
+>
+> - All 61 source hashes against the immutable snapshot **and launch-commit Git blobs**; both parent-file hashes; all 512 pregroup and four final asset hashes; complete episode-log binding.
+> - All 24 levels and 68 contrasts for nine consequential metrics: **828 vectors**, plus **52 bootstrap intervals**, reconstructed from the episode log; all 2,560 roster assignments.
+> - **35 selected raw episodes** covering positive/adverse extremes, controls and every final outage: reward/components, travel, boundaries, actor-context packing and paired exogenous inputs.
+> - All **256 history-zero artifacts**, their hashes and saved-array arithmetic against original final trajectories.
+> - Terminal summary/reader/publication hashes, successful exit identity, complete reader counts, fit audits and equality of worker/reader comparisons.
+>
+> The full reader verifies 657,920 physical states, 3,289,600 local rows, 819,200 policy requests, 65,536 critic rows and 114,688 head rows. Its maximum radio/reward errors are approximately 7.11e−14/9.47e−16; observation and critic errors are zero. I found no consequential inconsistency. I did not independently rerun those policy/scalar reconstructions or later optimizer updates; their coverage rests on the accepted reader, saved states, reviewed code and ledgers. Historical bulk was not exhaustively reconstructed.
+>
+> This review added **zero fits, native transitions, model/policy forwards, optimizer steps or production-reader executions**. Its additional work was read-only source/hash inspection and saved-array arithmetic; support was not fully metered. No files or records were edited. Artifact consumption for this review is complete.
+>
+> **MATERIAL_DISSENT: no — the evidence supports closing the selected bounded purchase while preserving its capabilities and limits. It does not support an expanded history-benefit claim, general unlearnability claim or automatic follow-on investment.**
+
+**DM resolution.** Accept the uncontested recommendation. End the unchanged B09
+purchase and retain P0/P1, the complete ordinary alternatives, H0's conditional
+travel difference, the active fitted endpoints and all adverse outcomes. No
+response-training block is selected as the preferred result; no confirmation,
+replication, longer training, enlarged visibility, partner generation or residual
+retuning is selected. The adequate original selection assessment plus this
+evidence-first terminal review cover this bounded stop; no additional Pro round
+offers a presently unresolved decision that requires it.
+
+The main explanation changes from a possible useful recent-motion response to
+an active but ineffective direct deployment perturbation on the realized panel.
+All16384 observed-history tests retain their sampled categories/physical paths.
+H0's conditional travel saving therefore belongs to its fitted program; it is
+not credited to executed recent-motion responses. Learning-time effects on
+current-context coefficients remain possible. The DM also independently
+reduced the saved training exposure: H0 has1458 history-valid/524 moving
+decisions, H1 has1414/536, each of16384; sparsity is measured, not absence.
+
+Separate four judgments. The task permits consequential focal influence, as
+the large favorable/adverse worlds show. The inherited representation and
+ordinary laws remain competent references. The bounded finite learning program
+was active but added no established complete J/service benefit, and the direct
+history coordinates were not decisive under these final innovations. Complete
+package value remains unestablished against the retained controls, including
+travel/tails and the3027.478CPU-s enclosing cost. None of these is a proof that
+all useful response information is current, that the task lacks opportunity,
+or that broader learning is impossible.
+
+The critic's residual-range objection is retained as a scope limit: with
+z+.5*tanh(head), any pairwise log-odds change is bounded by1, whereas Bstar0's
+temperature-two law changes a logit-span difference by half that span. A
+span>2 precludes exact reproduction within this corridor (up to irrelevant
+common logit shifts). This does not predict that widening the corridor would
+improve native value. The eight selected trajectory witnesses are not a new
+population survey and do not turn an explanatory possibility into a repair
+assignment.
+
+Given20fits plus2 calibrations/3702824 native steps since B02 and all retained
+positives/adverses, another unchanged run would mainly refine this fixed recipe,
+not resolve the substantive restriction or establish a new useful capability.
+The selected complete experiment is sufficient for this investment decision.
+A future current-context or history-response question would need a contrasting
+prediction against competent same-rights/resource controls, with full cost and
+training uncertainty; sensitivity alone would not be a value criterion.
+That is a re-entry condition, not a selected continuation or a demand for an
+extra prerequisite diagnostic. Root owns any new cross-question assignment.
+The separately owned actual-S2 study is not a same-rights comparator, a
+dependency for completing B09, or permission to duplicate its work. The
+broader focal-cooperation question remains reserve; there is no active producer,
+pending advice, unresolved scientific dissent or selected follow-on.
