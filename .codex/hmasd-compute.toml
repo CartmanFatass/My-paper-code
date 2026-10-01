@@ -89,6 +89,58 @@ sparse_checkout = [
   "manifold_hmasd",
 ]
 
+# Root-selected typed joint study: isolated runtime on the same admitted physical node.
+[nodes.wsl_4070_typed_joint]
+role = "isolated_typed_joint_execution"
+enabled = true
+transport = "ssh"
+ssh_target = "hmasd-wsl-node"
+host_identity = "LAPTOP-U9TDKC8A"
+os = "Ubuntu 24.04 on WSL2"
+repo_root = "/home/wu/projects/HMASD"
+worktree_root = "/home/wu/hmasd-worktrees"
+input_staging_root = "/home/wu/hmasd-inputs"
+# Runtime provenance: docs/research/candidates/typed_joint_skill_decision/RUNTIME_ASSETS.json
+# (published 7afca8344); this venv has independent packages, no shared package .pth.
+python = "/home/wu/.venvs/hmasd-typed-joint-31021/bin/python"
+network_shell = "zsh -lic"
+run_shell = "bash -lc"
+# PyTorch's native loader resolves ninja on PATH, not beside sys.executable.
+path_prefix = "/home/wu/.venvs/hmasd-typed-joint-31021/bin:/home/wu/.local/bin:/usr/lib/wsl/lib"
+task_supervisor = "/usr/local/bin/agent-task"
+gpu_probe = "/usr/lib/wsl/lib/nvidia-smi"
+gpu = "NVIDIA GeForce RTX 4070 Laptop GPU"
+gpu_memory_mib = 8188
+gpu_uuid = "GPU-294302a9-40ff-1a09-43b0-5fd98e06b557"
+# Descriptive alias only: this is the existing physical GPU, not additional capacity.
+physical_node = "wsl_4070"
+environment_verified_at = "2026-10-01T15:30:24Z"
+python_version = "3.10.21"
+numpy_version = "1.26.3"
+torch_version = "2.7.0+cu118"
+cuda_runtime = "11.8"
+transformers_version = "5.0.0"
+tokenizers_version = "0.22.2"
+huggingface_hub_version = "1.3.4"
+safetensors_version = "0.7.0"
+artifact_transport = "scp"
+frozen_input_transport = "scp_with_declared_sha256"
+result_memory_floor_gib = 4
+sparse_checkout = [
+  ".codex",
+  "docs/research",
+  "configs",
+  "hmasd",
+  "ha_ctse_process",
+  "envs",
+  "environments",
+  "experiments",
+  "scripts",
+  "tools",
+  "tests",
+  "manifold_hmasd",
+]
+
 [invariants]
 credentials_in_repository = false
 remote_receipt_admits_local = false
