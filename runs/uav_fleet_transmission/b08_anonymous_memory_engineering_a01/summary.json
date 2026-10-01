@@ -1,0 +1,41 @@
+{
+  "actual_native_transitions": 244,
+  "completed_episodes": 4,
+  "environment_constructions": 8,
+  "explicit_resets": 4,
+  "fits": 0,
+  "jobs": 4,
+  "known_native_transition_lower_bound": 244,
+  "labels": 0,
+  "launch_sha": "94f08627050b7d495b4c9e9af18db02ab17a5c1e",
+  "object": "fleet-b08-lawful-anonymous-memory-v1",
+  "optimizer_updates": 0,
+  "parent_cpu_seconds": 0.009512844999999936,
+  "parent_peak_rss_kib": 472420,
+  "parent_wall_seconds": 10.91818423802033,
+  "phase": "engineering",
+  "policy_counts": {
+    "associations": 122,
+    "canonicalizations": 128,
+    "plans": 12,
+    "projections": 3,
+    "proposals": 244
+  },
+  "pool_errors": [],
+  "raw_allocated_bytes": 778240,
+  "raw_array_bytes": 5197032,
+  "raw_storage_bytes": 773722,
+  "reaped_worker_cpu_seconds": 10.571548,
+  "status": "complete",
+  "submitted_jobs": [
+    "29889999/REFERENCE",
+    "29889999/C",
+    "29889999/M",
+    "29889999/V"
+  ],
+  "unstarted_jobs": [],
+  "worker_cpu_seconds_sum": 4.753418186999999,
+  "worker_peak_rss_kib_max": 498612,
+  "worker_resources_unmeasured": [],
+  "worker_wall_seconds_sum": 8.530169095378369
+}

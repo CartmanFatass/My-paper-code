@@ -1,0 +1,63 @@
+{
+  "artifacts": {
+    "config.json": {
+      "allocated_bytes": 8192,
+      "bytes": 5656,
+      "sha256": "ec34c9d5d09e6379f63bce131a0c0514898a90cf6d66ecd5e16935a6584e90ad"
+    },
+    "perworld.json": {
+      "allocated_bytes": 32768,
+      "bytes": 29539,
+      "sha256": "18418aebbfa705587794da56a4b037b84373e20f7ff70970665da94892e125b0"
+    },
+    "summary.json": {
+      "allocated_bytes": 4096,
+      "bytes": 1119,
+      "sha256": "d6010478519153755e03c0ac354ccfcd8caf3778e60d28a6278cb100e832a1d5"
+    }
+  },
+  "launch_sha": "94f08627050b7d495b4c9e9af18db02ab17a5c1e",
+  "object": "fleet-b08-lawful-anonymous-memory-v1",
+  "raw": {
+    "raw/29889999_C.npz": {
+      "allocated_bytes": 192512,
+      "bytes": 191172,
+      "sha256": "b7a4599b2986a977caf4c0c9d7a3794325dca7d7284f6785330f7db29ce67685"
+    },
+    "raw/29889999_C.progress.json": {
+      "allocated_bytes": 4096,
+      "bytes": 292,
+      "sha256": "7839613a53c805444260577e02548c3e83f08336ceaebce4410f7c6b0fd11519"
+    },
+    "raw/29889999_M.npz": {
+      "allocated_bytes": 196608,
+      "bytes": 195689,
+      "sha256": "585dbe6b9f43d9239ea084c1421af57d0b2d7b4778ed9098d942ababa02336d0"
+    },
+    "raw/29889999_M.progress.json": {
+      "allocated_bytes": 4096,
+      "bytes": 294,
+      "sha256": "39f7396bbb1daf277340c1fb975b048eb8eb07bd143df59fb46a2168c938d515"
+    },
+    "raw/29889999_REFERENCE.npz": {
+      "allocated_bytes": 192512,
+      "bytes": 191172,
+      "sha256": "b7a4599b2986a977caf4c0c9d7a3794325dca7d7284f6785330f7db29ce67685"
+    },
+    "raw/29889999_REFERENCE.progress.json": {
+      "allocated_bytes": 4096,
+      "bytes": 308,
+      "sha256": "62527af071feea35d708c70f1979bab8131375baf93afd27eda882dd2f00b05d"
+    },
+    "raw/29889999_V.npz": {
+      "allocated_bytes": 196608,
+      "bytes": 195689,
+      "sha256": "585dbe6b9f43d9239ea084c1421af57d0b2d7b4778ed9098d942ababa02336d0"
+    },
+    "raw/29889999_V.progress.json": {
+      "allocated_bytes": 4096,
+      "bytes": 294,
+      "sha256": "91ae8e3437d6a962f48eca741599d9978bd0cd1659af744162b2444d6d890fb1"
+    }
+  }
+}

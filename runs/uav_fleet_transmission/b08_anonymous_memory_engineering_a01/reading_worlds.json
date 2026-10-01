@@ -1,0 +1,243 @@
+[
+  {
+    "common_prefix_pairs": [
+      {
+        "contrast": "M-C",
+        "first_position_divergence_boundary": null,
+        "first_proposal_divergence_tick": null,
+        "first_submitted_divergence_tick": null,
+        "observed_common_boundaries": 62,
+        "user_path_sha256": "aa14cbc61bd845924e75ac48789f7cb9e3f4f0bcdcd59a24c12121a03e6330a9"
+      },
+      {
+        "contrast": "V-M",
+        "first_position_divergence_boundary": null,
+        "first_proposal_divergence_tick": null,
+        "first_submitted_divergence_tick": null,
+        "observed_common_boundaries": 62,
+        "user_path_sha256": "aa14cbc61bd845924e75ac48789f7cb9e3f4f0bcdcd59a24c12121a03e6330a9"
+      },
+      {
+        "contrast": "V-C",
+        "first_position_divergence_boundary": null,
+        "first_proposal_divergence_tick": null,
+        "first_submitted_divergence_tick": null,
+        "observed_common_boundaries": 62,
+        "user_path_sha256": "aa14cbc61bd845924e75ac48789f7cb9e3f4f0bcdcd59a24c12121a03e6330a9"
+      }
+    ],
+    "episodes": [
+      {
+        "arm": "REFERENCE",
+        "native": {
+          "extra_allocator_queries": 0,
+          "extra_model_queries": 0,
+          "full_rf_resimulation": false,
+          "native_agent_motion_ticks": 488,
+          "native_transitions_checked": 61,
+          "new_native_steps": 0,
+          "terminal_padding_rows": 0
+        },
+        "replay": {
+          "identity_reading": {
+            "binding": "contemporaneous stable native slot order and actual merge provenance",
+            "counts": {
+              "ambiguous_current_points": 0,
+              "births": 0,
+              "bound_current_points": 0,
+              "continuation_events": 0,
+              "current_points": 0,
+              "duplicate_bound_track_times": 0,
+              "forecast_ambiguous": 0,
+              "forecast_bound": 0,
+              "forecast_evaluated": 0,
+              "forecast_future_censored": 0,
+              "forecast_nonzero_velocity": 0,
+              "forecast_origins": 0,
+              "forecast_remembered": 0,
+              "forecast_unbound": 0,
+              "identity_switches": 0,
+              "reidentified_births": 0,
+              "silent_true_slots": 0,
+              "singleton_births": 0,
+              "singleton_continuations": 0,
+              "slot_records": 0,
+              "unbound_current_points": 0
+            }
+          },
+          "new_native_steps": 0,
+          "policy_counts": {
+            "associations": 0,
+            "canonicalizations": 3,
+            "plans": 3,
+            "projections": 0,
+            "proposals": 61
+          },
+          "verified_actual_proposals": 61,
+          "verified_feedback_calls": 61
+        },
+        "seed": 29889999
+      },
+      {
+        "arm": "C",
+        "native": {
+          "extra_allocator_queries": 0,
+          "extra_model_queries": 0,
+          "full_rf_resimulation": false,
+          "native_agent_motion_ticks": 488,
+          "native_transitions_checked": 61,
+          "new_native_steps": 0,
+          "terminal_padding_rows": 0
+        },
+        "replay": {
+          "identity_reading": {
+            "binding": "contemporaneous stable native slot order and actual merge provenance",
+            "counts": {
+              "ambiguous_current_points": 0,
+              "births": 0,
+              "bound_current_points": 0,
+              "continuation_events": 0,
+              "current_points": 0,
+              "duplicate_bound_track_times": 0,
+              "forecast_ambiguous": 0,
+              "forecast_bound": 0,
+              "forecast_evaluated": 0,
+              "forecast_future_censored": 0,
+              "forecast_nonzero_velocity": 0,
+              "forecast_origins": 0,
+              "forecast_remembered": 0,
+              "forecast_unbound": 0,
+              "identity_switches": 0,
+              "reidentified_births": 0,
+              "silent_true_slots": 0,
+              "singleton_births": 0,
+              "singleton_continuations": 0,
+              "slot_records": 0,
+              "unbound_current_points": 0
+            }
+          },
+          "new_native_steps": 0,
+          "policy_counts": {
+            "associations": 0,
+            "canonicalizations": 3,
+            "plans": 3,
+            "projections": 0,
+            "proposals": 61
+          },
+          "verified_actual_proposals": 61,
+          "verified_feedback_calls": 61
+        },
+        "seed": 29889999
+      },
+      {
+        "arm": "M",
+        "native": {
+          "extra_allocator_queries": 0,
+          "extra_model_queries": 0,
+          "full_rf_resimulation": false,
+          "native_agent_motion_ticks": 488,
+          "native_transitions_checked": 61,
+          "new_native_steps": 0,
+          "terminal_padding_rows": 0
+        },
+        "replay": {
+          "identity_reading": {
+            "binding": "contemporaneous stable native slot order and actual merge provenance",
+            "counts": {
+              "ambiguous_current_points": 0,
+              "births": 0,
+              "bound_current_points": 0,
+              "continuation_events": 0,
+              "current_points": 0,
+              "duplicate_bound_track_times": 0,
+              "forecast_ambiguous": 0,
+              "forecast_bound": 0,
+              "forecast_evaluated": 0,
+              "forecast_future_censored": 0,
+              "forecast_nonzero_velocity": 0,
+              "forecast_origins": 0,
+              "forecast_remembered": 0,
+              "forecast_unbound": 0,
+              "identity_switches": 0,
+              "reidentified_births": 0,
+              "silent_true_slots": 0,
+              "singleton_births": 0,
+              "singleton_continuations": 0,
+              "slot_records": 0,
+              "unbound_current_points": 0
+            }
+          },
+          "new_native_steps": 0,
+          "policy_counts": {
+            "associations": 61,
+            "canonicalizations": 61,
+            "plans": 3,
+            "projections": 0,
+            "proposals": 61
+          },
+          "verified_actual_proposals": 61,
+          "verified_feedback_calls": 61
+        },
+        "seed": 29889999
+      },
+      {
+        "arm": "V",
+        "native": {
+          "extra_allocator_queries": 0,
+          "extra_model_queries": 0,
+          "full_rf_resimulation": false,
+          "native_agent_motion_ticks": 488,
+          "native_transitions_checked": 61,
+          "new_native_steps": 0,
+          "terminal_padding_rows": 0
+        },
+        "replay": {
+          "identity_reading": {
+            "binding": "contemporaneous stable native slot order and actual merge provenance",
+            "counts": {
+              "ambiguous_current_points": 0,
+              "births": 0,
+              "bound_current_points": 0,
+              "continuation_events": 0,
+              "current_points": 0,
+              "duplicate_bound_track_times": 0,
+              "forecast_ambiguous": 0,
+              "forecast_bound": 0,
+              "forecast_evaluated": 0,
+              "forecast_future_censored": 0,
+              "forecast_nonzero_velocity": 0,
+              "forecast_origins": 0,
+              "forecast_remembered": 0,
+              "forecast_unbound": 0,
+              "identity_switches": 0,
+              "reidentified_births": 0,
+              "silent_true_slots": 0,
+              "singleton_births": 0,
+              "singleton_continuations": 0,
+              "slot_records": 0,
+              "unbound_current_points": 0
+            }
+          },
+          "new_native_steps": 0,
+          "policy_counts": {
+            "associations": 61,
+            "canonicalizations": 61,
+            "plans": 3,
+            "projections": 3,
+            "proposals": 61
+          },
+          "verified_actual_proposals": 61,
+          "verified_feedback_calls": 61
+        },
+        "seed": 29889999
+      }
+    ],
+    "exact_native_reference_C": true,
+    "job_key": "29889999",
+    "reader_worker_cpu_seconds": 0.3138616559999998,
+    "reader_worker_peak_rss_kib": 473508,
+    "reader_worker_wall_seconds": 0.3226866191253066,
+    "seed": 29889999,
+    "status": "completed"
+  }
+]
