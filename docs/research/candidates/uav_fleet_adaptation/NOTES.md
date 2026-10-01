@@ -6871,3 +6871,204 @@ fit, calibration or evaluation is selected by this result.
 Editorial count correction: the complete reading contains25native metric series per
 contrast;27 is the command-category count. All55contrasts and every declared
 metric/vector were retained and read. No experimental exposure or result changes.
+
+Cost-interpretation detail from the accepted direct-policy source: each direct
+decision calls the shared target constructor for both T and H and deploys its
+assigned vector. The81920direct target-vector calculations are explicitly
+counted. Hdirect therefore also computes an unused T score tilt; Tdirect
+constructs an unused H vector. Actual laws and all native comparisons remain
+correct, and no extra C/helper or actor query is hidden. The observed direct
+CPU differences describe this implementation, not a minimal possible direct
+baseline. This further limits any net-amortization claim; no such claim is
+made, and no post-result repair or repeat is selected. The independent
+Scientific Reviewer receives this source fact before its final disposition.
+
+
+<a id="b07-original-independent-result-review"></a>
+### B07 original independent ResearchCritic answer
+
+A new configured`hmasd-research-critic` received the actual B07 question, fixed
+T/H definitions, loss/exposure and full original source/output identities in a
+separate context with no DM/Root conversation inheritance. It was told to
+reconstruct original results before reading the complete selection Oracle and
+DM interpretations; no production model/controller/native query or repeat
+reader was authorized. Root's no-automatic-extension rule was disclosed, so
+this is not an allocation-blinded review. The reviewer independently reproduced
+all saved episode-summary reductions, then read prior positive/adverse sources
+and the complete original advice. Its full original final answer follows.
+
+> **Recommend ending this B07 target-development purchase, retaining the inherited policies and the narrow Hdirect positive, with no additional fit, retuning or evaluation selected.** B07 demonstrates good average fitting of a small score tilt on the paid archive. It does not establish useful learned development beyond P0 and ordinary paid calibration.
+>
+> I reconstructed the saved results before reading the original selection advice and the DM’s new interpretation. No DM/Root conversation history was inherited. The assignment did disclose Root’s stopping preference, so this was a separate-context review, not an allocation-blinded review.
+>
+> The consequential results are:
+>
+> | Comparison | Mean ΔJ | Descriptive 95% world interval |
+> |---|---:|---:|
+> | T−H, primary | −.006345 | [−.014699, +.002066] |
+> | T−P0 | +.000060 | [−.005529, +.005772] |
+> | H−P0 | +.006405 | [−.002012, +.015033] |
+> | T−Bstar0 | −.017762 | [−.027305, −.009488] |
+> | H−Bstar0 | −.011417 | [−.019193, −.003474] |
+> | Tdirect−P0 | −.001922 | [−.007664, +.003332] |
+> | Hdirect−P0 | +.007329 | [+.000754, +.014608] |
+> | Hdirect−Bstar0 | −.010493 | [−.018725, −.004044] |
+> | Hdirect−H | +.000924 | [−.007089, +.008865] |
+>
+> These intervals describe fixed policies on 32 worlds, with two tapes averaged within each world. They do not supply independent training replication, equivalence or multiplicity-controlled confirmation. [Complete B07 evidence](/home/fires/hmasd-wsl/runs/uav_fleet_adaptation/b07_stochastic_targets_a01/reading.json).
+>
+> T−H favors H in 22 of 32 worlds, although its interval spans zero. T’s essentially unchanged mean relative to P0 is a preservation pattern, not proof of equivalence. H’s increment over P0 remains unresolved. Neither learner clears the competent Bstar0 comparison; beating C or Q10 therefore cannot establish the requested development benefit. Even improvement over F0 is unresolved, and F0−P0 is only −.002520 with an interval crossing zero on this panel. The earlier F deterioration should remain historical evidence, not an assumed result of every subsequent panel.
+>
+> The complete components prevent a blanket ranking. Relative to Bstar0, T loses 1.415 mean served users but gains .006829 quality, .5625 mean episode minimum and 1,549 m less travel per UAV. H loses .905 users while gaining .004193 quality and 1,243 m less travel. Their p10 differences remain unresolved. Bstar0 itself gains 1.391 mean users over P0 while lowering quality and episode minimum and adding 1,379 m of travel. It is the stronger native-J comparator here, not an automatically preferable deployment default.
+>
+> There are no total-service outages in these 672 episodes. That does not erase earlier outages or establish individual-user continuity. Adverse worlds also remain substantial: T−P0 reaches −.039087 J in world 29710018; H−P0 reaches −.050376 in 29710003. Against Bstar0, both suffer their largest losses in 29710022: −.112855 for T and −.056451 for H. Those losses remain in the complete comparison.
+>
+> The supported diagnosis separates three questions:
+>
+> - **Opportunity remains.** P0 again exceeds Q10 on J by +.019720, and Bstar0 improves on P0 by +.017822 on this panel. Hdirect supplies a smaller positive over P0. These are useful conditional capabilities. They do not show that score tilting is the missing development mechanism.
+> - **Finite archive fitting occurred.** Both fits completed 8,000 updates with nonzero full-network gradients and substantial parameter movement. T’s mean own-target KL is .000188 and TV .004802; H’s are .016694 and .030004. Wholesale failure to learn is an inadequate explanation for T’s result. These are training-distribution measurements, however, not deployment fidelity or population learnability.
+> - **Complete added value was not established.** T supplies no demonstrated increment over reuse, H or Bstar0. H supplies an unresolved learned increment over P0 and loses J/service to Bstar0. Lower travel remains a measured tradeoff without a selected utility that makes it a successful development result.
+>
+> The strongest simpler explanation is that this recipe mainly preserves an already useful stochastic policy, while the additional local-score guidance supplies little demonstrated native value. T’s actual target displacement is small: mean TV from P0 is .007285, versus .040519 for H. T changes 674 of 81,920 target modes; H changes 2,638. T is exactly P0 on the 6,176 flat-score rows and differs on the remaining 75,744 rows. This is a broadly nonzero but modest intervention—not complete nonactivation, and not evidence that a strong score intervention actively harmed native performance.
+>
+> Both targets improve their local proxy, with H’s increase larger as predicted. T slightly reduces target entropy; H increases it. Their intervention strength, fallback behavior and distribution changes differ. Consequently, the result identifies neither a full-score advantage nor an entropy mechanism. C’s score remains a local proxy rather than native continuation value.
+>
+> An optimization-only rescue is particularly weak for T: **the exact direct T law also fails to establish improvement over P0**. That does not prove that approximation error is irrelevant, but it removes the premise that a demonstrated useful T controller was simply lost during fitting. H has larger fitting residual and still-improving stream loss, so additional optimization might change it. Yet exact Hdirect already trails Bstar0; fitting it more closely is not automatically a useful next purchase. Moreover, Hdirect−H uncertainty is not proof of successful amortization: learned H’s mean episode minimum is .375 lower, with a descriptive interval excluding zero.
+>
+> The learned-policy TV bound also cannot be inferred from the target construction. Maximum training-row TV from P0 reaches .274 for learned T and .720 for learned H. Good mean archive fit does not provide a uniform preservation guarantee. The zero count branch is expected under these N5 inputs; B07 supplies no new count-learning evidence. Recorded sampled physical departures show active stochastic deployment, but they are departures from each policy’s own mode—not counts of causal T-versus-P0 interventions.
+>
+> The strongest constructive positive is **ordinary H mixing**, not the proposed score tilt. Hdirect−P0 is +.007329 J, and Hdirect−Tdirect is +.009251 with a positive descriptive interval. Hdirect retains approximately P0’s mean travel and has better quality, minimum service and shorter travel than Bstar0, while sacrificing mean J/service. Fifteen of 32 worlds still lose against P0, and deployment costs more. This is worth preserving as a conditional controller result. It does not yet establish a useful learned upgrade or justify converting a secondary positive into an automatic replication programme.
+>
+> The prior evidence supports this distinction. I checked the original B02/B03 competence results, B04 reward-continuation losses, B05 consequence-head comparisons and outage records, B06 count/parent comparisons, and the original G comparison. Useful inherited behavior survives across those studies; the tested additions repeatedly fail to establish a clear increment over retained alternatives. B07 adds a specific boundary: changing the supervised target can preserve competence with good average archive fit without producing additional native value. It does not diagnose a common cause of PPO, consequence-head and imitation outcomes.
+>
+> **The next worthwhile purchase now is none.** The paid direct and learned comparisons already distinguish the consequential branches:
+>
+> - A coherent learned gain over P0/Bstar0 and H would have supported consideration of independent replication. It did not occur.
+> - A useful direct-T gain lost by the learner would have strengthened an archive/fitting hypothesis. It did not occur.
+> - The observed preservation pattern and ordinary Hdirect positive support retaining assets and ending this purchase.
+>
+> More episodes would improve conditional precision, not create training replication. More T optimization lacks a demonstrated useful direct target. A stronger tilt would be a new conjecture, not an evidenced repair. A future low-travel use case could justify a newly specified comparison retaining P0, Bstar0 and competent ordinary alternatives under the same utility; no such use case has been selected here. The broader development question remains open without obliging another attempt.
+>
+> The bill is material even though execution was inexpensive. B07 used two fits, 16,000 updates, 8,192,000 presentations and 172,032 new native steps. Fit wall times were 32.392 and 30.965 seconds; the complete worker/reader chain was **561.756 wall-seconds and 560.463 CPU-seconds**. Target construction, evaluation and the full reader dominate the difference between fit-only and complete cost. Staging added 3.517 wall-seconds. Engineering, review, publication and cleanup labor remain incompletely metered; the forecast 6–10 support hours is not an observed cost. B02–B07 total 14 fits, two calibrations, 2,539,560 native steps and approximately 3,883.530 measured chain CPU-seconds across differing scopes/hosts, with older B01 and support separately incurred. The learners save about .032–.033 CPU-seconds per episode against their direct counterparts, but uncertain native preservation and incurred training costs prevent a net amortization claim.
+>
+> My independent checks covered the supplied reading/summary hashes, all 48 source hashes against the launch commit and current files, frozen parent/F0 identities, shared initialization/shuffles, terminal receipts, and per-world exogenous-layout/initial-state bindings. Reducing all 672 episode-summary rows reproduced all 11 levels and all 55 contrasts across 25 metrics, including their 32-world vectors, to numerical rounding. I inspected target statistics, complete epoch curves and update counts, endpoint diagnostics, activation summaries and consequential adverse episode records.
+>
+> I relied on the accepted complete reader for bulk trajectory, feature, probability and saved-optimizer reconstruction. I did not reload production models, repeat C/helper queries, replay optimization or rerun trajectories. No engineering issue emerged requiring another review.
+>
+> The DM’s published provisional interpretation is supported. The main correction is an explicit final investment disposition: retain these capabilities and tradeoffs, end B07, and make no broader failure or default-adoption claim.
+>
+> **MATERIAL_DISSENT: no — the direct and learned evidence supports ending this purchase without automatic extension; it does not support expanded claims of useful score-tilt development or general unlearnability.**
+
+<a id="b07-independent-disposition"></a>
+### DM response and final B07 disposition
+
+I read and accept the complete independent recommendation, including the
+conditional Hdirect positive, all component tradeoffs, substantial adverse
+worlds and the limit on its review scope. There is no material scientific
+dissent. Its numerical reductions agree with the original complete reader
+and my reading above. The causal interpretation remains limited: a closely
+fitted modest target does not imply useful native improvement, and a negative
+or unresolved complete-package comparison does not identify entropy,
+representation, or a shared cause of earlier learning outcomes.
+
+The active idea ends here. I retain P0, the paid Bstar0 option, all earlier
+assets/adverses and the new ordinary Hdirect evidence. I select no further
+fit, target-strength change, data aggregation, calibration, longer optimization,
+new episode panel or exact reader repeat. This is the preservation/uncertain
+branch of the selected purchase, with adverse mean-J comparisons to Bstar0;
+it is not a failure to execute or an empirical impossibility claim. Hdirect's
+secondary positive does not create a new default or automatic replication.
+Bstar0's stronger J/service still trades quality, episode minimum and travel.
+T/H lower path does not acquire a post-hoc utility or a successful development
+claim. The unchanged T development recipe has lost its current investment
+rationale; the broader question of useful learned development remains open.
+
+The previously documented direct-constructor cost limit also qualifies the
+reviewer's measured CPU statement: both direct programs compute both target
+vectors before selecting one. Their measured runtime is honest complete
+implementation cost, not a minimal direct baseline. This changes no native
+value or stopping judgment and supplies no net-amortization claim or repair
+purchase. The reviewer was sent this factual detail before its final message;
+its original answer above is preserved without inserting my qualifier into it.
+
+The final direction standing is reserve with no producer, unread scientific
+result, pending advice or selected successor. This is not a fabricated
+dependency on an owner decision or recurring check. A future low-travel
+contract or materially different hypothesis would require a concrete question,
+competent same-utility alternatives and a separately selected comparison.
+Root retains cross-question selection under the native-child assignment; no
+in-question result publication or closure waits for a new acknowledgment.
+The complete evidence was published at`e1275959e1e117c433b0279c1ae1bc26ca94f284`;
+this disposition, directly affected shared understanding and cleanup facts
+complete the present boundary.
+
+
+<a id="b07-final-cleanup"></a>
+### B07 closure cleanup and retained evidence
+
+All producers and the single reader are reconciled terminal, the same-session
+observer is stopped with its READY event consumed, and the independent
+Scientific Reviewer has returned its complete answer. No live consumer uses
+the old-input consumption copy or temporary/test caches. Before deleting that
+copy I rehashed all261 original canonical remote files at
+`/home/wu/projects/HMASD/` against the existing source/staging manifest:
+25750748bytes matched, using .017114remote CPU-s/.683222enclosing wall-s.
+This is filesystem identity verification, not a new model/native query.
+The new canonical B07 result is entirely outside its disposable source snapshot
+and remains at the recorded local run path, with published complete readings
+and byte locators.
+
+The first maintained snapshot-collector preview refused an elevated read-only
+process scan because process1396736changed during reference inspection. No
+target was deleted under that refusal. A fresh preview then established
+terminal identities, no live references, clean source and durable reachability
+from main; the maintained exact-target apply removed the snapshot and its Git
+worktree administration. A separate maintained read-only process-reference
+scan returned no references for every scratch/cache target below. No claim,
+manifest, result output, branch, other direction or source code was removed.
+
+| Actual deleted target | Allocated bytes before | After |
+|---|---:|---:|
+| `.git/hmasd-launch-sources/4d911286533342c891ce01ebfb651e6e` | 1750671360 | 0 |
+| `.git/worktrees/4d911286533342c891ce01ebfb651e6e` | 3592192 | 0 |
+| `temp/directions/uav_fleet_adaptation/` (B07 input consumption copy, empty test scratch, consumed observer request) | 26456064 | 0 |
+| `experiments/candidates/uav_fleet_adaptation/__pycache__/` | 8192 | 0 |
+| `experiments/candidates/uav_fleet_adaptation/b02/__pycache__/` | 65536 | 0 |
+| `experiments/candidates/uav_fleet_adaptation/b04_native_development/__pycache__/` | 20480 | 0 |
+| `experiments/candidates/uav_fleet_adaptation/b06_count_development/__pycache__/` | 98304 | 0 |
+| `experiments/candidates/uav_fleet_adaptation/b07_stochastic_targets/__pycache__/` | 126976 | 0 |
+| `tests/experiments/candidates/uav_fleet_adaptation/b07_stochastic_targets/__pycache__/` | 118784 | 0 |
+
+All nine targets are absent. Net allocated disk reduction is**1781157888bytes**:
+1754263552snapshot/administration plus26894336scratch/caches. This is measured
+file-allocation reclamation, not Git-object removal or free-host-capacity growth.
+The actual source allocation exceeded its earlier rough planning range and is
+reported as measured. No backup, tar, whole-tree copy or retention chain was
+created. The transient preview refusal is resolved; no cleanup tool blocker
+or disposable leftover remains.
+
+Useful B07 code/tests and source-bound metadata remain published because they
+state and check the retained target/optimizer/native-reading contract. The
+unique six phase checkpoints, target archive, endpoint diagnostics,672raw
+trajectories, original complete summary and compact reading/native receipts
+remain at their single canonical locations. No new disposable production
+implementation or duplicate bulk archive remains. Earlier canonical sources
+and adverse outcomes are unchanged. The completed selected plan is retired
+in the existing dated research archive; current standing records reserve and
+no selected successor.
+
+
+<a id="post-b07-source-support"></a>
+### Root disposition and bounded source-only continuation
+
+After reading the complete B07 result, original independent recommendation and
+DM response, Root returned this native direction decision:
+
+> I have now read the complete B07 result, original new ResearchCritic recommendation and your final response. Root adopts ending unchanged T/H while retaining P/B*, Hdirect's conditional positive, adverse worlds and the nonminimal direct-constructor timing limitation. Finish your own publication and measured closure without waiting for me. I have assigned /root/oracle_next_capability a bounded source-only reassessment of the next worthwhile learned-development question or a better independent use of this slot; it must inherit your full record, all three libraries and primary passages. After closure, support that Oracle with the concrete source/feasibility/cost facts it requests and record substantive findings in your existing notebook. No new fit, target, native/controller query, new reduction or implementation is selected, and actual-S2/transfer remain unselected. This continues broader question ownership; it does not reopen the stopped recipe or create a required successor.
+
+This is continued question ownership and permission for bounded source facts,
+not another result-bearing idea. B07's result, exact-mixture/no-S2 dispositions,
+all exposure and the completed cleanup stay fixed. I finish the direction's
+publication and will answer concrete source/feasibility/cost requests within
+that limit, preserving substantive findings here. No successor result study,
+required replacement, recurring check or experiment dependency is invented.
