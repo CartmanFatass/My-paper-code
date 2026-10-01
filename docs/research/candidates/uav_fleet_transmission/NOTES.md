@@ -4113,3 +4113,397 @@ asset was changed. These two local staging copies can be reclaimed after complet
 the original canonical assets remain required consumers' evidence. Exact source publication
 precedes the single admitted local worker→reader operation; acceptance/results do not exist
 at this preparation entry.
+
+### B06 accepted local operation — 2026-10-01 01:46 UTC
+
+Exact reviewed inputs were published at `df149ac620a90931d81fac727fe91a898b9ab760` before
+execution. The single local worker→full-reader operation was accepted; its authoritative
+source/native identities and fresh actual-node admission are in the
+[launch manifest](../../../../runs/uav_fleet_transmission/b06_cadence_a01/launch-manifest.json)
+and [preflight](../../../../runs/uav_fleet_transmission/b06_cadence_a01/admission-preflight.json).
+No other operation, pilot, correctness rollout or fit was launched. Current main still records
+owner pause lifted and this same runtime as the active lead. The local prelaunch observation
+had 6.93 GB available RAM and ample disk; actual release used the kernel's fresher memory check.
+
+The initial observer arm correctly refused because the previous generation17 was stopped.
+I drained its empty pending queue/terminal old jobs, rearmed that observation state as18, then
+registered B06 on its ORIGINAL accepted handle as generation19. This changed observation only;
+it did not repeat the worker. This native child remains active through collection and full
+reading. Registration alone is not treated as successful wake delivery or a scientific result.
+
+<a id="b06-complete-reading"></a>
+
+### B06 complete reading — bounded feedback saves travel, without an established H4 reward upgrade
+
+2026-10-01 UTC. Source `df149ac620a90931d81fac727fe91a898b9ab760` completed the fixed
+**1120 H256 episodes / 286720 native transitions / zero new fits** and its full reader.
+[Configuration](../../../../runs/uav_fleet_transmission/b06_cadence_a01/config.json),
+[complete episode/world summaries](../../../../runs/uav_fleet_transmission/b06_cadence_a01/summary.json),
+[verified full reading](../../../../runs/uav_fleet_transmission/b06_cadence_a01/reading.json),
+[native exit witness](../../../../runs/uav_fleet_transmission/b06_cadence_a01/process-exit.json).
+There was one accepted operation, no pilot, repair, repeated rollout, added world, calibration,
+label acquisition, optimizer update or training transition. The worker summary is COMPLETE and
+the reader is VERIFIED for all 1120 episodes. `progress.json` is the last RUNNING collection
+checkpoint, while `launch-status.json` records acceptance; neither supersedes the terminal
+exit witness and completed outputs.
+
+The original native worker and supervisor exited with code0 at 01:59:07.270 UTC and were both
+absent at terminal observation. Generation19 produced READY event
+`d40ec5f32a673892bf57ed15` against the same original handle. App wake
+`99901c3d-a901-4e23-8646-49deb7fee92a` failed with the explicit native-child `-32600`
+queue restriction; this is failed wake delivery, not failed process observation. This child
+stayed active, read the complete existing event/status, consumed it through same-handle
+rearm to20 and stopped observation. The observer process is absent, the event is consumed,
+and no wake is pending. No replacement operation or alternate App recipient was used.
+
+The complete reader reconstructed original C at all **436918 actual ordinary queries**, including
+deployed cache hits, and original helper features plus fresh one-row FP32 actor output at all
+**269771 student queries**. It independently reconstructed all 450560 count decodes,
+337920 gate checks, 644933 private addressed draws, navigation, cache-cost accounting,
+requested/executed commands and remaining clipped holds. It checked 286720 team ticks and
+1433600 agent motion ticks, initial/current own-count truth, native service/quality/reward
+components, source/asset bindings, raw inventory and all fixed paired reductions. There were
+zero new native steps in reading. As declared, this validates the retained native telemetry;
+it does not independently resimulate radio physics.
+
+I read all 19 cell levels and all 45 declared contrasts, including each primary's 32-world
+component vectors, every adverse-J world for every fixed contrast, all 22 episodes with any
+zero-service tick and their saved tick sequences. No per-world best-ordinary envelope or
+extra threshold/panel was introduced. Every interval below is the frozen descriptive paired
+10000-resample world bootstrap, averaging the two stochastic tapes before resampling. C has
+one deterministic episode per mode/world. These 32 worlds are evaluation clusters conditional
+on the two fixed assets, not independent training units or a multiplicity-adjusted confirmation.
+
+The four primary comparisons show two different uses. Against H4, E lowers average travel
+substantially in both assets, but its mean J and service effects remain unresolved. Against
+H1, E improves mean J and service with much lower measured episode CPU, while traveling farther.
+The component tables below preserve quality and lower-tail tradeoffs instead of inferring an
+equivalence or a universal winner from the unresolved H4 reward comparisons.
+
+#### Primary value and travel differences
+
+| Contrast | J | Service/tick | Metres/UAV | Episode CPU seconds |
+|---|---:|---:|---:|---:|
+| S_L0/E-S_L0/H4 | +0.001008 [-0.006370, +0.008463] | +0.041321 [-0.476205, +0.551091] | -1211.463510 [-1518.146945, -906.141516] | -0.000917 [-0.012481, +0.010426] |
+| S_L1/E-S_L1/H4 | -0.002709 [-0.011645, +0.005805] | -0.332764 [-0.997328, +0.290540] | -1600.510435 [-1908.551362, -1293.511598] | +0.001018 [-0.010819, +0.011709] |
+| S_L0/E-S_L0/H1 | +0.027116 [+0.014748, +0.041568] | +2.115479 [+1.239803, +3.137701] | +877.763431 [+697.462363, +1071.440748] | -0.205021 [-0.225734, -0.186221] |
+| S_L1/E-S_L1/H1 | +0.034456 [+0.017428, +0.053684] | +2.421814 [+1.238576, +3.739581] | +1214.331175 [+995.228772, +1441.757717] | -0.175610 [-0.195019, -0.158552] |
+
+#### Primary quality and tail differences
+
+| Contrast | Served-user quality | Within-episode service p10 | Minimum service | Longest zero run |
+|---|---:|---:|---:|---:|
+| S_L0/E-S_L0/H4 | +0.001431 [-0.004254, +0.006767] | +0.187500 [-0.320312, +0.695312] | -0.015625 [-0.093750, +0.062500] | +0.000000 [+0.000000, +0.000000] |
+| S_L1/E-S_L1/H4 | +0.006500 [+0.002338, +0.010500] | +0.281250 [-0.492188, +1.015625] | +0.171875 [+0.031250, +0.359375] | +0.000000 [+0.000000, +0.000000] |
+| S_L0/E-S_L0/H1 | -0.008337 [-0.013533, -0.003285] | +1.421875 [+0.429492, +2.468750] | -0.171875 [-0.312500, -0.046875] | +0.328125 [+0.000000, +0.984375] |
+| S_L1/E-S_L1/H1 | +0.001836 [-0.003739, +0.007506] | +1.617188 [+0.414062, +2.843750] | +0.046875 [-0.062500, +0.171875] | +0.000000 [+0.000000, +0.000000] |
+
+#### Retained asset levels
+
+All levels are equally weighted world means; episode CPU includes reset, native stepping, gates,
+decisions and raw serialization for that deployed episode, without the independent reader.
+
+| Asset/cadence | J | Service/tick | Service p10 | Quality | Metres/UAV | Queries/episode | CPU seconds/episode |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| S_L0/H4 | 0.379864 | 23.278748 | 20.109375 | 0.179871 | 2976.303998 | 320.000000 | 0.312978 |
+| S_L0/E | 0.380872 | 23.320068 | 20.296875 | 0.181302 | 1764.840488 | 345.515625 | 0.312061 |
+| S_L0/H1 | 0.353756 | 21.204590 | 18.875000 | 0.189639 | 887.077057 | 1280.000000 | 0.517081 |
+| S_L1/H4 | 0.381248 | 23.339233 | 19.820312 | 0.181663 | 3609.968348 | 320.000000 | 0.322611 |
+| S_L1/E | 0.378539 | 23.006470 | 20.101562 | 0.188162 | 2009.457913 | 349.656250 | 0.323629 |
+| S_L1/H1 | 0.344083 | 20.584656 | 18.484375 | 0.186326 | 795.126739 | 1280.000000 | 0.499240 |
+| Bstar_L0/H4 | 0.389105 | 24.016052 | 19.335938 | 0.176267 | 4525.341842 | 320.000000 | 0.370898 |
+
+#### Complete ordinary comparison and paid reference
+
+All six parents have lower mean J under H1 than H4, with each descriptive interval below zero:
+C −.059552, Q10 −.021600, Q05 −.021378, G −.022570, S_L0 −.026108 and S_L1 −.037165.
+Every ordinary parent's E−H1 J interval is positive too. Thus the intermediate cadence's useful
+complete comparison is not specific to neural S. H1 is not uniformly dominated: it travels
+less, improves S_L0 quality and avoids the long S_L0 outage below. More frequent observations
+are available rights, but querying and acting more often changes the implemented joint policy.
+These complete packages do not isolate resampling, navigation, horizon/execution mismatch,
+information use or coupled teammate response as the cause. All versions still forecast four
+steps, including extrapolation beyond the mission end; their execution commitment differs.
+
+Ordinary E−H4 J differences are C +.003558 [−.010910,+.019256], Q10 +.006194
+[−.004707,+.017217], Q05 +.009969 [−.000732,+.020757] and G −.006103
+[−.015289,+.003342]. All four mean-J effects remain unresolved, while each cuts travel
+substantially; G additionally improves served-user quality. These ordinary capabilities belong
+beside the S results, without selecting an outcome-dependent ordinary envelope.
+
+Matched E retains a conditional S increment over the fixed G: S_L0/E−G/E J +.017792
+[+.002861,+.032280], service +1.603333 [+.539008,+2.657674]; S_L1/E−G/E J +.015460
+[+.001909,+.028766], service +1.289734 [+.322815,+2.236032]. Both lose quality against G
+(−.015516/−.008655); S_L1 also travels 191.458m/UAV farther. Against Q10/E, both S J
+intervals cross zero: +.013123 [−.001958,+.027398] and +.010791 [−.003222,+.024318].
+S_L0's service increment over Q10/E is positive, while S_L1's is unresolved. Both S−Q05/E
+and S−C/E J intervals are positive. These are separately fixed comparators, not proof of a
+best ordinary or learned law.
+
+The original H4 law also retains S−G J on this fresh panel: S_L0 +.010681
+[+.000271,+.021261], S_L1 +.012066 [+.001092,+.023659]. This adds conditional evaluation
+evidence to B05's S capability without adding training instances. Under H1, both S−G J
+intervals cross zero (+.007144 and −.002529), preserving the dependence on the complete use
+contract. The unchanged Bstar_L0/H4 reference has the highest displayed asset mean J above,
+but S_L0/E−Bstar_L0/H4 J −.008233 [−.018969,+.001979] and service −.695984
+[−1.465598,+.036893] remain unresolved; E saves 2760.501m/UAV and .058837 episode CPU
+seconds, with its other component tradeoffs retained. Bstar_L1/H4 is exactly S_L1/H4,
+not additional replication. No Bstar E/H1 program was tested or inferred.
+
+#### Exposure, tails and adverse worlds
+
+The selected intermediate intervention was exercised. The sequence below counts
+off-grid local losses, eligible extra queries, changed categorical choices relative to the
+old held command, and changed clipped remaining physical holds until the ORIGINAL boundary.
+The last two columns are saved-history diagnostics, not native counterfactual rewards.
+
+| E parent | Episodes | Off-grid losses | Eligible extras/queries | Category changes | Remaining physical-hold changes |
+|---|---:|---:|---:|---:|---:|
+| C |32|354|316|95|87|
+| Q10 |64|3016|2754|1998|1954|
+| Q05 |64|1949|1817|1146|1114|
+| G |64|2086|1951|1330|1264|
+| S_L0 |64|1738|1633|984|971|
+| S_L1 |64|2060|1898|1090|1071|
+
+Every S E episode has an extra query: S_L0 range2–52, S_L1 range7–61. Extra queries are
+8.0%/9.3% above H4 on average, while E uses about73% fewer queries than H1. This logical
+reduction is not by itself CPU evidence. Actual E−H1 episode CPU is −.205021/−.175610s,
+negative in all32 paired worlds for each S. E−H4 episode CPU remains unresolved. E increases
+gate CPU by approximately .00590/.00597s; its different visited states change cache costs.
+For S_L0 H4/E/H1, worker misses are11305/10899/20272 and hits9175/11214/61648;
+for S_L1 they are12554/12377/18874 and7926/10001/63046. The full reader charged fresh source
+computation at every query, not only these misses. Episode timing compares deployed complete
+trajectories under the interleaved order, not equal-input kernel speed.
+
+S_L0 E−H4 J improves in17/32 worlds and declines in15; S_L1 splits16/16. Their travel
+reductions hold in29/32 and30/32 worlds, not universally. S_L0 world29670001 loses
+.050148J/4.349609service despite better quality and1696.7m less travel; world29670012 loses
+.055356quality and world29670022 loses3.5service-p10. Its path increases in worlds00/04/16
+by670.96/2.59/223.73m. S_L1 world29670013 loses .068013J/5.050781service; world29670004
+loses .058412J/4.78125service despite higher quality andp10. World29670001 loses6.5p10
+despite a small J gain; world29670012 loses .024845quality, and paths increase in worlds00/18
+by434.82/45.55m. Short suffixes here refer to the fixed296700xx panel.
+
+Against H1, S_L0 E J still loses in seven worlds04/08/14/15/19/20/25, worst world25
+−.029514; S_L1 loses in six00/05/13/14/18/23, worst world18 −.067292J/−4.634766service/
+−5p10. The matched ordinary comparisons also have large local reversals: S_L0/E−G/E at
+world28 is −.112535J and S_L1/E−G/E at world29 is −.067522J. Every other adverse-J
+world and component remains explicit in the published 45 contrast vectors, without filtering.
+
+All 22 episodes with any native zero-service tick are retained and were directly inspected:
+
+| World/tape | Program(s) | Zero-service scored ticks |
+|---|---|---|
+|29670007/1|Q10, G, S_L0, S_L1, each H4/E/H1|0 only|
+|29670007/1|Q05 H4/E|0,1|
+|29670007/1|Q05 H1|0 only|
+|29670024/0|S_L0 H4/E|3 through21, one19-tick run|
+|29670024/1|S_L0 H4/E|2,3|
+|29670004/0|Bstar_L0/H4|3,4|
+|29670024/0|Bstar_L0/H4|22,23,24|
+|29670028/0|Bstar_L0/H4|2|
+
+C has no total-service outage on this panel. S_L0 H4 and E each have22 zero ticks in three
+episodes; H1 has one in one episode. S_L1 has one zero tick under every cadence. S E−H4
+zero counts and longest-zero differences are exactly zero in every world. The earlier B05
+world29630013 outages are separate retained adverse evidence, not repaired by this panel.
+
+In the19-tick S_L0 episode, E and H4 execute identical commands through tick29 and first
+differ at30. The service drop at scored tick3 becomes visible to the gate at pre-action tick4,
+already a mandatory original boundary. Counts stay zero during the ensuing plateau, so there
+is no new consecutive-tick loss to spend an off-grid query on; the first extra occurs at30.
+This is a concrete exposure limit of the chosen law, not a detected implementation defect.
+H1 avoids the outage on that world with different earlier behavior, but this is not a
+same-prefix rescue experiment or evidence that H1 is generally reliable. The gate truthfully
+detects own-count decline; that decline can also be a beneficial handoff and never identifies
+team harm, same-user continuity, safe interruption or first-transition protection.
+
+#### Cost, retained evidence and DM interpretation before independent diagnosis
+
+Actual new enclosing cost is **755.535830 CPU seconds / 760.111628 wall seconds**. The worker
+uses429.106360 CPU/430.786455 wall seconds; the full reader uses326.215538 CPU/329.109785
+wall seconds. The small difference to the enclosing timers is setup/finalization, not omitted
+work. Peak RSS is343148KiB for the same enclosing process; it is not a sum of worker/reader
+peaks. Support, engineering, consultation, admission, publication and cleanup labor is not
+fully metered; the prospective6–10support-hour estimate is not an actual measurement.
+
+Worker counts are1120 explicit resets plus one constructor reset,286720 native calls,
+706689 total decisions (436918ordinary/269771student),644933 sampled draws and124831 G
+score-tail evaluations. Native dense-power accounting is79156275slots. The complete reader's
+ordinary source work is11796786 trajectories/47187144 model ticks,193122792 candidate and
+1933651 setup link evaluations (195056443 total), with11550 fallback decisions. Student
+reading uses269771 helper calls,2379454 extreme and1267659 setup links, and269771 one-row
+actor calls. Source history/shadow/censor/calibration-discrepancy work is zero. The inherited
+selected chain remains8fits/2calibrations; adding this fixed panel makes2080768native steps
+and approximately3238.693 measured CPU seconds across the previously stated hosts/timer
+scopes. Other historical branches and unmetered support remain separate incurred costs.
+
+The sole canonical new raw evidence is on configured `local_linux` at
+`/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b06_cadence_a01/raw/`:1120 NPZ files,
+414546359 logical bytes,416796672 allocated file bytes (416858112 including the raw directory).
+Every file was independently streamed after the complete reader and matched its path/byte
+count/SHA256 in `summary.json`; the actual directory has exactly that inventory. The SHA256
+of sorted `relative_path TAB byte_count TAB sha256 LF` lines is
+`a58026dd50668a1f0a4c44349aea182c37696acc7ee986024c3a1bfd8cf448db`.
+The compact summary is4828897bytes/SHA256
+`36ad2bd66ce59f162144525c79136fec51680108380dfd25ea6996d52fc4d4f8`;
+the full compact reading is2248514bytes/SHA256
+`a7c71b2d71d0bd938b97e56791d8188661ec865d66b2491e3a524c399ced653f`;
+config is9114bytes/SHA256 `2a36e7a1e7081ee1dd5bcf822a7e0784823b267aa0ff886aa3e74cd6e10e978d`.
+The original remote S files and calibration remain canonical. No second raw copy, archive,
+retention package or new evidence registry was created.
+
+My working explanation changes at the use layer. The intermediate prediction—eligible local
+losses cause real extra queries and changed motion—is met. Mean native reward improvement
+over H4 is not established; the useful measured consequence is lower travel, with S_L1 quality
+and minimum-service gains and heterogeneous adverse worlds. Relative to H1, E retains a
+better mean reward/service–compute combination but pays travel and some S_L0 tail/quality
+costs. The ordinary cadence comparisons weaken any account specific to learned S.
+
+This supports an additional conditional use of the existing helper-plus-network representation,
+not its representational limits, an identified learned coordination mechanism, or further
+learnability. There are zero new fits. The original positive construction evidence, active
+failed PPO/consequence/head continuations, hard-target continuation results and all prior
+outages retain their scopes. Complete-package value is multi-component: no utility here prices
+service, quality, travel, compute and outages into a universal deployment choice. Travel is
+measured motion, not a measured battery or safety outcome.
+
+The technically complete fixed purchase has no missing primary requiring repair. My initial
+investment recommendation is to stop it, retain H4/E/H1 and ordinary/Bstar tradeoffs as scoped
+evidence, and select no threshold sweep, added world, default change or learned termination
+follow-up. More conditional worlds would refine means without supplying training replication
+or an identified cause. A future use decision would need explicit component prices or a
+different consequential contract; a future learning claim would need an independently chosen
+constructive prediction and training evidence. The parent question remains open. Original
+independent scientific diagnosis, its substantive response and the resolved choice follow.
+
+<a id="b06-independent-disposition"></a>
+
+### B06 original independent diagnosis and resolved disposition — 2026-10-01 UTC
+
+The dedicated ResearchCritic `/root/dm_fleet_transmission/b06_result_diagnosis` received the
+actual question, fixed protocol/source, original supporting/adverse evidence and allocation
+review in a separate context without DM/Root conversation inheritance. It reconstructed the
+results before reading my interpretation. Its full original final answer is preserved below,
+including the factual correction it identified in the unpublished draft. Its additional work
+uses saved arrays only, with no new actor/controller/model/environment execution.
+
+> **Recommend retaining E as a conditional lower-travel deployment option and closing B06 without another purchase.** E produced consequential interventions and substantial travel reductions. Its reward/service advantage over H4 remains unresolved, and it did not improve the students’ aggregate outage outcomes. Against H1, E offers higher mean reward/service and lower measured CPU, while traveling farther. H4, ordinary alternatives and the paid reference retain useful tradeoffs.
+>
+> I received no inherited DM/Root conversation. I reconstructed the frozen B06 comparison and results before reading the original allocation advice, source assessment and DM’s newly appended interpretation. My reading agrees with that interpretation, subject to the factual correction below.
+>
+> I independently checked:
+>
+> - Source `df149ac620a90931d81fac727fe91a898b9ab760`: all 36 configured source hashes matched committed bytes, and both staged actor files matched their declared hashes.
+> - All 1,120 raw-file hashes and sizes; native connections, service, quality, reward, motion and path reductions; every E count/gate sequence and extra-query physical comparison.
+> - Common initial states across each world’s arms, consistent saved uniforms at actual tick/agent addresses across all 64 stochastic tapes, and all 644,933 sampled CDF choices.
+> - All 19 levels and 45 contrasts for 14 consequential outcome/exposure metrics, including their declared bootstrap intervals. I inspected every adverse-J world and the primary adverse component vectors.
+>
+> These checks used existing arrays only. I did not execute an actor, controller, model or environment. The original full reader supplies the exhaustive source-controller/helper/actor replay, navigation and regenerated-RNG checks; I inspected its implementation and results without repeating those executions. Neither reading independently resimulates radio physics. Historical B05/UCOPE and development judgments below reuse their original outputs and applicable reviews rather than a new audit of all historical raw data. [Configuration](/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b06_cadence_a01/config.json), [complete summary](/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b06_cadence_a01/summary.json), [full reading](/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b06_cadence_a01/reading.json).
+>
+> The four primary comparisons support a deployment tradeoff:
+>
+> | Contrast | Mean ΔJ [descriptive 95% interval] | Δservice/tick | Δpath, m/UAV | Δepisode CPU, s |
+> |---|---:|---:|---:|---:|
+> | S_L0 E−H4 | +.001008 [−.006370, +.008463] | +.0413 | −1,211.5 | −.00092 |
+> | S_L1 E−H4 | −.002709 [−.011645, +.005805] | −.3328 | −1,600.5 | +.00102 |
+> | S_L0 E−H1 | +.027116 [+.014748, +.041568] | +2.1155 | +877.8 | −.20502 |
+> | S_L1 E−H1 | +.034456 [+.017428, +.053684] | +2.4218 | +1,214.3 | −.17561 |
+>
+> The intervals describe 32 paired world clusters after averaging two stochastic tapes. They add no independent training units and provide neither equivalence nor multiplicity-adjusted confirmation.
+>
+> Relative to H4, E reduces mean travel by approximately 41%/44%, with path intervals entirely below zero. Reward and service intervals cross zero in both lineages; therefore “preserves H4 reward/service” would exceed the evidence. S_L1 additionally improves served-user quality by .006500 and episode-minimum service by .171875, with positive descriptive intervals. Its p10 improvement remains unresolved. S_L0’s quality, p10 and minimum changes are unresolved.
+>
+> Relative to H1, E improves mean service and p10 in both lineages, and its episode CPU is lower in every paired world. However, S_L0/E has lower quality and minimum service than H1, and retains the prolonged outage described below. Both E programs travel farther than H1 in every paired world. H1 therefore remains a measured lower-travel alternative, although it is unattractive as the default service-oriented deployment.
+>
+> The intermediate prediction materialized:
+>
+> | E parent | Off-grid count losses | Extra queries | Changed categories | Changed remaining physical holds |
+> |---|---:|---:|---:|---:|
+> | S_L0, 64 episodes | 1,738 | 1,633 | 984 | 971 |
+> | S_L1, 64 episodes | 2,060 | 1,898 | 1,090 | 1,071 |
+>
+> Every student E episode contains a physically consequential extra query. Mean query counts are 345.5/349.7, versus 320 under H4 and 1,280 under H1. This is selective intervention with substantial exposure, rather than complete nonactivation. The 13/19 changed-category physical aliases also show why queries, categories and motion must remain distinct. These geometric checks supply no counterfactual native rewards.
+>
+> The adverse evidence limits practical adoption. S_L0 E−H4 loses J in 15/32 worlds; S_L1 loses in 16/32. Travel falls in 29/32 and 30/32 worlds, respectively. S_L0 loses .050148 J and 4.349609 service/tick in world 29670001 despite shorter travel and better quality. S_L1 loses .068013 J and 5.050781 service/tick in world 29670013. Positive mean movement savings do not remove these service losses.
+>
+> S_L0 H4 and E each retain 22 zero-service ticks across three episodes; S_L1 retains one under every cadence. E−H4 zero-count and longest-zero differences are exactly zero in every world. In world 29670024, tape 0, S_L0 H4 and E both have zero team service on scored ticks 3–21.
+>
+> **One factual correction is required in the DM’s appended reading:** the first E extra query in that episode occurs at **tick 30, agent 0**, not tick 26. Both `query_kind == 1` and the off-boundary `query_mask` establish this; tick 26 has neither a query nor a count loss. H4 and E first differ in commands at tick 30.
+>
+> The substantive diagnosis is unchanged. The service loss becomes observable at pre-action tick 4, already a mandatory boundary. The subsequent zero-count plateau supplies no further consecutive-count decline. Thus E has no extra-query exposure during this outage. That witness establishes a limitation of the chosen trigger’s coverage; it is not evidence that an active E intervention caused or prolonged the outage. H1 avoids the outage through different earlier behavior, which does not identify a same-prefix rescue effect. All six B05 retained-policy outage episodes remain separate adverse evidence.
+>
+> The ordinary comparisons substantially change the interpretation. Every parent loses mean J under H1 versus H4, with each descriptive interval below zero: C −.059552, Q10 −.021600, Q05 −.021378, G −.022570, S_L0 −.026108 and S_L1 −.037165. Every ordinary E−H1 J interval is positive. E’s favorable comparison with rapid renewal is therefore shared by ordinary policies.
+>
+> All four ordinary E−H4 reward differences remain unresolved, while each reduces travel by roughly 1.5–1.9 km/UAV. Q05/E and Q10/E improve service-p10 by about .969/.961; G/E improves quality by .008759. These are useful ordinary capabilities. C/E remains particularly cheap and short-travel, with lower mean service.
+>
+> The retained students nevertheless preserve a conditional increment beyond G under E:
+>
+> - S_L0/E−G/E: J +.017792 [+.002861, +.032280], service +1.6033/tick.
+> - S_L1/E−G/E: J +.015460 [+.001909, +.028766], service +1.2897/tick.
+>
+> Both improve p10 and lose quality against G/E. Both also have positive J intervals against C/E and Q05/E. Against Q10/E, both J intervals cross zero; S_L0’s service increment is positive, whereas S_L1’s remains unresolved. Ordinary competence therefore explains neither all retained S value nor a need for further learning.
+>
+> The fresh H4 panel also supports conditional S−G reward increments of +.010681/+ .012066, including a narrowly positive interval for S_L0. This strengthens fixed-asset deployment evidence alongside B05; it does not create another training replication. Under H1, both S−G reward intervals cross zero, showing that the retained advantage depends on the complete deployment law.
+>
+> Paid Bstar_L0/H4 remains relevant: mean J .389105 and service 24.016/tick, at 4,525m/UAV and .3709 episode CPU seconds. S_L0/E−Bstar_L0/H4 is unresolved in J and service, while E saves 2,760.5m/UAV and .05884 CPU seconds. Bstar has its own outages. Its untested E/H1 variants receive no inferred result.
+>
+> The scientific update should distinguish four judgments:
+>
+> - **Task opportunity:** lawful own-service loss is observable and can trigger consequential redecision. Its truth does not establish team harm, the value of switching, or a useful response during a zero-service plateau. The native benefit newly established most clearly is lower travel.
+> - **Representation:** the existing helper-plus-network representation retains useful capability under H4 and E. B06 tests another use of that representation, not its limits, sufficient state or learned coordination. Clock, held command and remaining duration were not added.
+> - **Learnability:** B06 adds zero fits. It neither diagnoses finite optimization nor supplies evidence that a termination learner would help. The active PPO continuations’ R−S losses, −.040278/−.005212 J, and consequence continuations’ −.005135/−.005498 remain adverse. UCOPE’s nine-fit real-branch comparison also remains relevant: it exercised KEEP/END and failed its frozen rule. Its different max-two-tick contract does not settle B06’s question. [Development outputs](/home/fires/hmasd-wsl/runs/uav_fleet_adaptation/b04_native_development_a01/summary.json), [consequence outputs](/home/fires/hmasd-wsl/runs/uav_fleet_adaptation/b05_native_consequence_a01/summary.json), [UCOPE reduction](/home/fires/hmasd-wsl/runs/ucope/paired_branch_credit_b10_reduce/summary.json).
+> - **Complete package use:** retain the service–travel–quality–compute choices without selecting a universal winner. Served-user quality averages changing user sets; aggregate p10 and outages do not measure individual-user continuity. Travel reduction is not measured battery savings.
+>
+> The strongest simpler explanation is **cadence-dependent motion persistence and visitation under the existing policies**. H1 changes resampling frequency, navigation opportunities and joint trajectories while retaining four-step forecasts. Its adverse pattern includes deterministic C, so an explanation confined to the students’ training distribution is insufficient. Ordinary E programs also obtain movement savings. These observations weaken claims of a special learned timing mechanism while preserving the students’ residual capability. They do not separate persistence, forecast/execution mismatch, censoring or coupled responses into identified causes.
+>
+> I find no material objection to the completed comparison or the DM’s substantive disposition. The important correction is to retain the positive movement capability while withholding reward-preservation, outage-protection and further-learnability claims. The native service/outage conjecture did not receive the hoped-for support against H4; the selective-intervention prediction and favorable reward/service–CPU comparison against H1 did.
+>
+> The completed panel is an adequate complete observation for this decision. No missing primary contrast requires repair. I recommend:
+>
+> - Retain H4 and E as conditional fixed-policy options, with the ordinary and paid-reference tradeoffs intact.
+> - Retain H1’s lower-travel behavior and positive exceptions as evidence; make no default switch or automatic H1 continuation.
+> - End this fixed purchase without threshold tuning, extra worlds, calibration, confirmation or a termination fit.
+>
+> A future use-driven continuation could be worthwhile if a real service floor, travel budget or query constraint makes the E/H4 choice consequential. Demonstrated compliance would favor E; unacceptable service loss would favor H4 or an ordinary alternative; unresolved compliance would leave the choice unresolved. Exact monetary prices for every component are unnecessary, and a different substantive learning conjecture could also warrant exploration. Neither reason is currently selected. Further worlds alone would principally refine conditional means, without resolving training variation or the mechanism. Declining that purchase leaves the parent question open.
+>
+> Actual new cost is **286,720 native transitions, zero fits/calibrations, 755.536 enclosing CPU seconds and 760.112 wall seconds**. Worker and reader consume 429.106 and 326.216 CPU seconds. The worker issues 706,689 policy queries; deployed memoization reduces actual ordinary computations to 190,786 and student forwards to 104,600. The full reader additionally reconstructs all 436,918 ordinary queries and 269,771 student rows, including cache hits. Its ordinary reconstruction includes 47,187,144 modeled ticks.
+>
+> Peak shared-process RSS is 343,148KiB; canonical raw evidence is 414,546,359 logical bytes. Engineering, admission, scientific review, publication and cleanup work remain additional and incompletely metered. Episode timings include native processing and serialization on this host; they are not physical deployment latency or energy measurements. The selected inherited chain now totals **8 fits, 2 calibrations, 2,080,768 native steps and approximately 3,238.693 scoped CPU seconds**, with other historical branches accounted separately.
+>
+> **MATERIAL_DISSENT: no — the evidence supports closing B06 without further investment while retaining its conditional capabilities. Correct the first-extra-query timestamp to tick 30; this does not change the scientific disposition.**
+
+#### DM response and resolved scientific choice
+
+I read the entire original answer and accept its substantive recommendation, with no material
+direction disagreement. I directly joined the flattened `query_kind` records to
+`decision_ticks`/`decision_agents` in the saved outage file: the first two extras are
+(tick30, agent0) and (tick31, agent3); tick26 has no count loss or query. I corrected the
+unpublished DM draft from26 to30 before publication. The original criticism above remains
+verbatim. This correction strengthens the exact exposure witness without changing the native
+outage, complete comparison or investment decision.
+
+The review's independent all-array/reduction checks corroborate the recorded result; agreement
+itself is not a further empirical replicate. I retain its explanation of cadence-dependent
+motion persistence and visitation as the strongest current simpler account, with forecast
+mismatch, censoring and multi-agent responses unseparated. Deterministic C's H1 loss prevents
+an explanation confined to S training-distribution shift. The additional ordinary p10/quality
+capabilities and S's conditional residual gains all remain useful evidence.
+
+**Stop this fixed B06 purchase and place the direction in reserve.** Keep E as a conditional
+lower-travel option beside H4, the competent ordinary programs and paid Bstar; retain H1's
+lower travel, S_L0 quality/outage exceptions and every adverse world. E is neither a demonstrated
+H4 reward/service-preserving replacement nor an outage shield. No threshold adjustment, added
+panel, calibration, confirmation, termination fit or new default is selected. There is no
+technical missingness to repair and no active result producer or unread scientific advice.
+
+I also accept the review's clarification of possible re-entry: a consequential service floor,
+travel budget or query limit can define a useful use comparison without exact monetary prices
+for every metric. A substantively different learning conjecture can warrant a separately
+chosen experiment without proving these component prices first. Neither condition is supplied
+by this panel, and neither creates an automatic continuation. Root owns any next cross-question
+allocation; this completed in-scope choice has no pending Root-approval dependency. The wider
+retained-policy/learning question stays open, with the original positive capabilities and
+adverse learning evidence intact. Publication of the owned standing and directly affected
+shared-background judgments, followed by measured B06-only cleanup, completes this boundary.

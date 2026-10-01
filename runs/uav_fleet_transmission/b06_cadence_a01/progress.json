@@ -1,0 +1,28 @@
+{
+  "complete_episodes": 1120,
+  "counts": {
+    "calibrations": 0,
+    "complete_episodes": 1120,
+    "constructor_resets": 1,
+    "count_decodes": 450560,
+    "event_gate_checks": 337920,
+    "explicit_resets": 1120,
+    "fits": 0,
+    "labels": 0,
+    "native_step_calls": 286720,
+    "native_steps": 286720,
+    "optimizer_updates": 0,
+    "ordinary_queries": 436918,
+    "sampled_draws": 644933,
+    "score_tail_evaluations": 124831,
+    "student_queries": 269771,
+    "training_native_steps": 0
+  },
+  "last": {
+    "arm": "S_L1",
+    "mode": "E",
+    "tape": 1,
+    "world": 29670031
+  },
+  "state": "RUNNING"
+}
