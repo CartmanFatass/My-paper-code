@@ -18,7 +18,18 @@
     "accepted_to_exit_seconds": 14.906944751739502,
     "source_snapshot": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/9b680a5b7dee471e865759e84a49a043",
     "direction_record": "../../uav_user_waiting/b05_local_allocation_a01/result.json",
-    "scientific_disposition": "Incomplete technical failure; no independent B05 reader ran and no partial-panel scientific verdict is assigned. Partial costs and outputs remain in the original direction record."
+    "scientific_disposition": "Incomplete technical failure; no independent B05 reader ran and no partial-panel scientific verdict is assigned. Partial costs and outputs remain in the original direction record.",
+    "source_snapshot_retirement": {
+      "status": "REMOVED_AFTER_FORENSIC_AND_READER_RELEASE",
+      "record_commit": "e0fe9a5f16fd812a6d1981d2e9c2460ff17ba5e1",
+      "record": "../../uav_user_waiting/b05_local_allocation_a02/cleanup.json",
+      "source_and_config_binding": "All21 original A01 code identities plus frozen config/native failure records verified against published de238594dc9d64d7be246e7b9628a63f6a53b272.",
+      "snapshot_allocated_bytes_reclaimed": 813965312,
+      "git_registration_allocated_bytes_reclaimed": 3612672,
+      "combined_remote_allocated_bytes_reclaimed": 817577984,
+      "snapshot_and_registration_absent": true,
+      "retained": "Original core and mapped runtime files, unchanged atomic failure summary and90 original contact/outcome pairs; no replacement source backup created."
+    }
   },
   "core": {
     "path_on_node": "/mnt/c/Users/wu/AppData/Local/Temp/wsl-crashes/wsl-crash-1790814460-1179774-_home_wu_.local_opt_hmasd-cpython-3.10.21-gcc_bin_python3.10-11.dmp",
@@ -89,9 +100,17 @@
     "linux_observation": "host_observation.json",
     "windows_observation": "windows_observation.json",
     "linux_sample_utc": "2026-10-01T00:32:46Z",
-    "linux_loadavg": [0.79, 0.50, 0.27],
+    "linux_loadavg": [
+      0.79,
+      0.5,
+      0.27
+    ],
     "linux_memory_available_kib": 15253592,
-    "linux_cpu_pressure_avg10_avg60_avg300": [0.0, 0.0, 0.0],
+    "linux_cpu_pressure_avg10_avg60_avg300": [
+      0.0,
+      0.0,
+      0.0
+    ],
     "windows_sample_utc": "2026-10-01T00:33:46Z",
     "windows_processor": "Intel Core i9-13900H, 14 cores / 20 logical processors",
     "windows_win32_processor_load_percent": 1,
@@ -113,9 +132,9 @@
   },
   "root_disposition": {
     "runtime_verdict": "The GCC rebuild did not eliminate the observed class of interpreter-state failures. A shared underlying cause across incidents is not established; the specific new fault is localized, not fixed.",
-    "failed_operation": "Retain original A01 core, snapshot and partial evidence. No automatic remote retry, partial scientific aggregate or fault-erasing replacement.",
-    "selected_recovery": "Separately authorize one new local A02 operation for the unchanged full192-source allocation comparison and full reader, with committed input-location bindings, fresh local admission and full repeated-cost accounting. This is not an assertion that local success diagnoses or cures the remote problem.",
-    "other_selected_work": "The newly selected S-prior T/H study uses the configured local node with fresh admission, priced input staging and complete source bindings. Accepted operations keep their original node and identity. No global configuration, power plan or package bytes changed.",
+    "failed_operation": "Retain original A01 core, mapped runtime files and required partial evidence. The source snapshot was retained temporarily during diagnosis; after source/config Git binding and consumer release it and its registration were removed with the exact-target collector. No automatic remote retry, partial scientific aggregate or fault-erasing replacement.",
+    "selected_recovery": "The separately selected local A02 completed the unchanged full192-source comparison and full reader at4de05b0da41827cf945587003a2476584dac480e, using65.478097combined process CPU seconds and0new native/model/C calls or fits. Result5715b7469b052f5380d51efa8b846f1d7d4850a5 retains all scientific and technical limits. Local success neither diagnoses nor cures the remote problem.",
+    "other_selected_work": "The selected S-prior T/H, local H4/E/H1 cadence and unchanged G2/A2 computation-reuse studies use configured local execution with fresh admission and full bindings. Accepted operations retain node/identity. No global runtime, power or package change; timing comparisons retain actual overlap/interleaving conditions.",
     "further_diagnosis": "No additional stress test, interpreter rebuild or scientific replay is selected. Any next technical check should discriminate a concrete cause and include contemporaneous evidence where available, instead of treating missing executable pages or post-fault load as diagnosis."
   },
   "new_scientific_work_for_this_diagnosis": {
