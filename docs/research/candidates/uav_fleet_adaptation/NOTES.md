@@ -11438,3 +11438,67 @@ factory's reset. Each worker/reader pass also constructs3 joint actors,
 clock scopes. These constructors are not additional scientific fits. Actual
 finite correctness exposure26.70 wall/20.59 CPU-s remains separate from the
 production1,780.045981 CPU-s and unmetered support.
+
+
+<a id="b10-final-cleanup"></a>
+### B10 publication, live-consumer check and measured terminal cleanup
+
+The complete native result, full original independent Scientific Reviewer and
+uncontested DM disposition are published on main as
+`4a0db1166d00511f45a4ee40689e67190a67ea87` (7 explicit owned paths), pushed
+normally and verified against the remote branch. Shared index was empty before
+and after; other directions' edits and accepted sources were preserved. The
+B10 implementation and focused checks were already published at scientific
+source73278079be41ad8068b73594a32cde5841119032. All13 modules and3 tests remain
+useful as the frozen joint learner, ordinary CJ implementation and complete
+reader; no additional unused tracked implementation was identified. The common
+B02/B04/B08 and native dependencies keep their existing consumers and paths.
+
+Before deletion, native terminal identities and the stopped observer were
+reconciled; the Scientific Reviewer explicitly finished consuming all artifacts
+and released the source/staging inputs. No B10 worker, reader, helper or observer
+remains live. Both original canonical remote input files were freshly rehashed
+against their staged copies: P0 retains424487B/SHA b9e25fca68109bb50fa64fadfc90939ad6a4669058c1c0ccd1351c8bbcefe12a
+and HIDDEN5119B/SHA e8f6ecea525d7892edc1e82c407070d14ea234dae3c90c6c054ce16804eaa026.
+The terminal source and staging measurements found no multiply-linked regular
+files. The supported exact-snapshot preview and apply both confirmed terminal
+eligibility and durable Git reachability, and removed only this snapshot and
+its tool-managed registration. `--sudo-process-scan` was the documented
+read-only scan for the already-recorded protected-/proc condition on this node;
+no claim, manifest, output or authoring checkout was removed to force eligibility.
+
+All deletion targets were measured before deletion and verified absent after:
+
+| Phase/node | Actual deleted target | Net allocated bytes reclaimed |
+| --- | --- | ---: |
+| Earlier prelaunch/wsl_4070 | `/home/wu/projects/HMASD/.git/hmasd-launch-sources/cdc6962ab4704c9e94c544741b8474cc` (refused, unclaimed source; original refusal and supported GC recorded above) | 819224576 |
+| Earlier advice/local | `temp/directions/uav_fleet_adaptation/b10_original_advice_transfer.md` (complete advice already embedded and verified) | 65536 |
+| Terminal/wsl_4070 | `/home/wu/projects/HMASD/.git/hmasd-launch-sources/80bde676266946438831245ee20f8634` | 819224576 |
+| Terminal/wsl_4070 | `/home/wu/hmasd-inputs/uav_fleet_adaptation/b10_joint_control_a01/` (only duplicate P0.pt/HIDDEN.npz) | 438272 |
+| Terminal/wsl_4070 | Empty `/home/wu/hmasd-inputs/uav_fleet_adaptation/` | 4096 |
+| Terminal/local | `experiments/candidates/uav_fleet_adaptation/b10_joint_control/__pycache__/` | 135168 |
+| Terminal/local | `tests/experiments/candidates/uav_fleet_adaptation/b10_joint_control/__pycache__/` | 36864 |
+| Terminal/local | `temp/directions/uav_fleet_adaptation/` (stopped B10 wait request plus empty test directory) | 12288 |
+
+Terminal cleanup reclaims819,851,264 allocated bytes. Including the two earlier
+measured B10 deletions, the complete B10 total is**1,639,141,376 allocated bytes**.
+All listed targets now allocate0 bytes. The earlier advice file is not counted
+again in the later temp-directory measurement. This is the measured net
+reduction across the exact owned targets, not whole-host free space or Git
+object compaction; other sessions can write elsewhere concurrently. No cleanup
+target remains and there is no cleanup-tool blocker. No tar, whole-tree copy,
+backup chain, bulk relocation or deletion of unique adverse evidence occurred.
+
+After cleanup, canonical remote publication/summary/reading/episodes hashes
+were checked again against the complete-reading identities, all passed. The
+required canonical result still contains1,647 files,1,115,774,100 logical bytes
+and1,119,678,464 allocated bytes. All1,376 raw files and258 checkpoints remain;
+the independent reviewer also checked their complete hashes. Original P0/HIDDEN
+canonical evidence is unchanged. Native claim, manifests, technical refusal
+records, compact local publication and source Git history remain recoverable.
+
+The direction returns to reserve with B01–B10 fully read/published, no active
+result-bearing study, no producer/observer/unread review and no selected next
+run. This closes the assigned B10 boundary and its cleanup; it does not close
+the broader local-control question, transfer another direction's ownership or
+select an automatic repair. Root owns any future cross-question task choice.
