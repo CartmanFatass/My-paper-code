@@ -476,3 +476,47 @@ and the one invocation's log/resource record are retained. Whole process1.18s wa
 the full process cost is used here. Test scratch cleaned through the standard pytest
 lifecycle. No failure, retry, extra case or scientific pilot occurred. Next remains
 the two admitted H8 streams on the unchanged published source.
+
+
+<a id="b01-native-correctness"></a>
+## 2026-10-01 — Two selected H8 streams completely verified
+
+The [accepted native manifest](../../../../runs/uav_radio_information_cost/b01_correctness_a01/launch-manifest.json)
+binds the unchanged publisheda80e2be9e input snapshot, actual host and one accepted operation.
+Both native processes are absent with a consistent exit0 witness. The complete
+[reader/check summary](../../../../runs/uav_radio_information_cost/b01_correctness_a01/summary.json)
+is VERIFIED_COMPLETE: exactly2episodes/16native steps,1constructor plus2explicit resets,
+4750physical normals/345geometry uniforms,4arrival refreshes and20worker/40reader current-C
+calls. Both complete native trajectories, persisted arrays, all1145executed fleet scores
+per worker/reader side, both current-C passes and all outcome metrics passed. Only FULL
+acquired500link readings/100slots/.2simulated sounding seconds; PRIOR contains no sensor
+arrays. All4decisions completed on time. No extra episode, repair or model RNG was needed.
+
+Actual worker search464requests/390unique plans,286250candidate user-SINR entries per side;
+worker C540paths/2160ticks/10594link evaluations, reader1080paths/4320ticks/21188links.
+The constructor and every reset/state/refresh were independently reconstructed, totaling
+23native radio-state calculations on each side. Recurring bytes1064 and maps800 match
+the fixed bill. This correctness fixture supplies no efficacy or deployment-speed claim.
+
+Whole check process1.552648751s wall,1.519722s CPU plus.004758s waited-childCPU,
+peak364112KiB. Five canonical NPZ artifacts total212850bytes at the manifest's remote
+output root, with individual path/bytes/SHA256 in the summary. The seven compact JSON
+records were collected and individually size/hash verified. SummarySHA256
+`33a093016ca6ddbb84701f47d7a89b5dc58e8b6c8392b834af7bbd5c45fc511c`.
+No second raw copy was created.
+
+Observation bookkeeping: an initial observer request used nonabsolute ssh and failed
+validation before registration; after using /usr/bin/ssh, the old stopped observer required
+its standard drain/rearm. Generation43 then observed this same accepted fixture READY;
+queue delivery to the native child returned−32600. This continuously active session read
+the terminal fact directly and rearmed generation44. Neither observer correction restarted
+a worker. A separately started preparatory Git fetch stalled in its HTTP helper; the launch
+kernel independently resolved published source and accepted/completed the fixture. The
+identified preparatory fetch/helper chain alone was terminated after reconciliation, with
+exit143 and no scientific effect; the canonical publication lock was released. No source,
+shared control or accepted operation was changed.
+
+The DM accepts this fixed correctness boundary. The already-selected64H256 main comparison
+was submitted unchanged through the same configured supervisor; supervisor submission is
+not native acceptance. Complete main worker/reader collection and scientific interpretation
+remain outstanding.
