@@ -2348,25 +2348,40 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 ### Parallel allocation: independent work and rolling succession
 
 <a id="root-successor-designs-20260930"></a>
-**Four native DMs now own four selected complete comparisons.** The former waiting DM owns
-correlated-RF P/U32, now complete through full independent reading, publication and measured
-cleanup, with conditional U32 retained and no next RF purchase selected. Fleet transmission owns S7 C/H/F task-relevant prediction use.
-The same parent DM has completed `uav_radio_information_cost`: the fixed P_FULL purchase
-closes after adverse complete value versus P_PRIOR; its broader question is open and idle.
-Fleet adaptation owns B10
-joint local motion/physical-transmitter learning against the retained strong compositions and
-an ordinary joint scorer. The two radio studies share one published physical kernel but answer
-different questions: using uncertainty after measurement, and paying to acquire that measurement.
-Neither requires a favorable result from the other. The full costs and outcome branches below
-are selected; implementation is not evidence that the proposed capabilities work.
-Actual-S2 and mixed-teammate B09, S7 C/M/V and the parent lower-motion source assessment remain
-closed, with all conditional positives and adverse/failed evidence retained. All four original
-nonarchived leads continue; no fifth DM, archived-session restoration or paused-direction
-transfer is involved.
-Detailed idea discovery and independent challenge use cumulative records, all three libraries
-and load-bearing primary passages. Helpers are not extra DMs; source/support work is real cost.
-Actual resource admission applies, capacity supplies no scientific premise, and Claude's
-pause/ownership remains unchanged.
+**Four native DMs retain responsibility: one accepted study and three successor assessments.**
+Fleet transmission owns the unchanged S7 C/H/F service-prediction comparison through its
+complete reader and scientific interpretation. Its accepted operation continues. The P/U32,
+P_FULL/P_PRIOR and fleet B10 joint-control studies have completed full reading, independent
+scientific review, publication and measured cleanup. Root has read each complete original
+critic and DM response and adopts their scoped stops, preserving U32's conditional objective
+gain and waiting harms, FULL's adverse package value and opposite waiting witnesses, and
+retained local-control competence including B08 HIDDEN and B10's immediate CJ witnesses.
+These results neither identify one common failure cause nor close their broader questions.
+
+The same parent DM supplies feasibility for the RF/information Oracle assessment: what
+complete use or understanding could justify another acquisition, timing, uncertainty-use or
+continuity comparison after both RF results? The same fleet-adaptation DM supplies feasibility
+for the local-control Oracle assessment: can lawful retained information or a separately
+priced observation contract make useful silence survive its next-observation consequences?
+The same former waiting DM supplies feasibility for the policy-development Oracle assessment:
+does a materially different objective, data use, representation or decision contract have a
+source-backed rationale and competent complete comparison after the accumulated development
+adverses? Each assessment may reject further investment; no new native comparison is selected.
+
+Detailed discovery and independent challenge use the actual question, cumulative records,
+all three local libraries and load-bearing primary passages. Each Oracle may request one
+concrete source-only price from its assigned DM; existing-code reading and count arithmetic
+are allowed, but no pilot, model/controller query, saved-output reduction, implementation or
+launch is selected by that request. A prospective price includes the complete worker, fits,
+search/teacher work, reader, correctness, support, memory and storage; unknown costs remain
+unknown. Root will choose the next questions after reading complete advice and feasibility,
+rather than count source work as four concurrent scientific runs.
+
+Actual-S2, mixed-teammate B09, S7 C/M/V and the parent lower-motion assessment remain closed.
+All four original nonarchived leads continue; no fifth DM, archived-session restoration or
+paused-direction transfer is involved. Helpers are not extra DMs; source/support work is real
+cost. Actual node admission applies to any future execution, and Claude's pause/ownership
+remains unchanged.
 
 Root read the complete count B06, parent B07 and ordinary G B05 results, original independent
 criticisms and DM responses. It adopts the exact count-mixture and fixed learned-shortlist
@@ -2479,111 +2494,63 @@ before deletion and earns no numerical credit. No cleanup target or consumer rem
 [retired full selection and prospective bill](archive/2026-10-01/RESEARCH-mixed-controller-response-completion.md#retired-mixed-controller-response-selection).
 
 <a id="joint-local-motion-transmission-selected-20261001"></a>
-**Selected B10: can finite joint development add useful local motion/transmission capability?**
-Root read the complete independent Astra Max recommendation, original same-DM source/price
-and load-bearing primary passages. It selects the revised 15-program comparison, including
-G_A/G_ZERO, under the same fleet-adaptation DM. The original 13-program source price remains
-separate evidence. B08's learned-gate gains provide a constructive premise; stronger ordinary
-controls, tail losses and repeated development adverses justify a cautious expectation.
-CADC already jointly learned message sending and motion and lost net/physical J, with physical
-transmitters always ON. That result constrains expectations without answering this physical-bit
-question. Earlier S/T control already established silent movement/reactivation as a useful
-decision object under richer rights; joint coupling itself is not a new discovery.
+<a id="joint-local-motion-transmission-completed-20261001"></a>
+**B10 complete: retain local-control capabilities; end this joint-learning purchase.**
+Both full-network actor/critic fits and all 1,376 H256 episodes completed at published source
+73278079be41ad8068b73594a32cde5841119032. The complete native/policy/learning-state reader passed.
+Root read the complete original independent ResearchCritic answer and DM resolution and
+adopts the exact stop: no extra fit, epoch, mask widening, prior tuning or confirmation.
 
-Under the unchanged B08 LOCAL contract, an OFF member's motion does not change its immediate
-four-tick radio contribution, but changes its location and observations after reactivation.
-The previous silent member chooses from its censored old row before being forced ON. Joint
-development may use these full-episode consequences; that is a conjecture, not demonstrated
-headroom or a causal diagnosis of B09's history, residual bound or update rule.
+J0/J1 minus actual INIT90 give J −.0229865/−.0261492, with descriptive world-bootstrap
+intervals [−.0323034,−.0140403]/[−.0342395,−.0179911], and service −1.60956/−1.61243
+users per tick. Both endpoints lose J and service to all seven P0_A/ZERO/HIDDEN,
+Bstar0_A/ZERO and Hdirect_A/ZERO references, with negative intervals. Against Hdirect_ZERO,
+J is −.0285998/−.0317624 and service −1.93860/−1.94147; p10 and minimum service also fall.
+Both half-horizon comparisons remain adverse, so the loss is not only an initial transient.
+Their gains over C/CJ retain competence without establishing useful development beyond the
+stronger references. All signed worlds, narrower travel/quality tradeoffs and unresolved
+G comparisons remain. Two fitted systems sharing P0/HIDDEN are not parent-population replication.
 
-Keep N5/U50/H256, free-space physics, static users, four-tick holds and private navigation.
-Only r=(t/4) mod 5 may turn OFF; the other four are ON. All choices use old-mask observations,
-then install the mask once and discard setter-returned rows for that decision. Add no map,
-reports, ACKs, peer identities/actions or observation history. The public rotating schedule
-is an inherited coordination resource, not an arbitrary correlated fleet-wide policy.
+Both actors and critics changed with every declared update active. Actor movement is about
+4.1% in L2; final eligible OFF fractions change in opposite directions, .5444/.4509 versus
+INIT90's .5132, despite both endpoints losing. This does not identify one silence-frequency
+or optimizer cause. Exact initial raw-row duplication and numerical probability fidelity do
+not make INIT90 and P0_HIDDEN the same sampling law or trajectory coupling. B08's positive
+HIDDEN result and the useful inherited/ordinary controls remain evidence, not erased failures.
 
-Train two shared actor/critic systems, each on 256 complete fresh episodes with disjoint
-training worlds and independent innovation/critic roots, both inheriting the same P0/HIDDEN.
-Duplicate P0's 27 output rows into ON27/OFF27 categories after its 114→128→128 body; all
-38,198 actor parameters train. Frozen HIDDEN uses the original 114 features, 11 count-one-hot
-entries and the original frozen P0 second 128-ReLU features. Its preferred bit gets prior
-probability .9 and the other .1; zero prediction prefers ON. Noneligible agents normalize over
-ON only. Retain finite raw FP32 logits, separate prior/mask, actual FP64 density and logp.
-The mathematical initial product does not establish bit-identical probabilities after GEMM
-and normalization changes. Evaluate the actual INIT90 program; one 54-way uniform changes
-coupling relative to separate bit/motion draws and does not preserve P0_HIDDEN trajectories.
+Ordinary CJ supplies five genuine immediate witnesses: in five worlds its first strict
+positive-service OFF choice holds the same zero motion and positions as C_ZERO over four
+ticks and increases native service by 1.25–6.25 users per tick. Across those five complete
+missions, only two J effects are positive and three negative; the other 27 worlds are
+identical. Across all 32, CJ−C_ZERO is +.000604 J, −.00244 service and +188.175 m/UAV travel.
+These are post-result diagnostics, not a new primary test or established episode benefit.
+The next boundary's old censored row before forced reactivation is a consequential contract
+feature; it does not identify the cause of every later loss or establish a history repair.
+Nor does this simulator contract prove that physical transmit silence requires receiver blindness.
 
-Use the existing B04 rule: two episodes per group, four full-row epochs, remaining macro-J
-sum/256, standardized advantages, sum of five per-agent clipped-ratio surrogates, [.8,1.2]
-clipping, Adam 3e-4 and gradient norm .5. No product-ratio objective, entropy/KL schedule,
-validation, checkpoint selection or calibration. The 35,457-parameter critic takes original
-136 CTDE features plus five OLD-mask bits and eligible one-hot, all training-only.
+Adverse evidence includes 20 training zero-service ticks in five episodes and 19 final
+zero-service ticks in six episodes. In the shared P0_HIDDEN/INIT90 outage world, small positive
+HIDDEN predictions switch one transmitter OFF and reduce service while held motion and old
+observations match P0_A. This identifies a local immediate adverse bit effect, not the cause
+of the full learning loss. Four transmitters remaining ON does not guarantee team service;
+team tails do not establish individual continuity, and motion/exposure are not energy measures.
 
-Ordinary CJ retains C's 27 ON candidates and navigation update, then compares one OFF score
-with own power zero, the same observed users/visible peers and calibrated unknown interference.
-That score is constant over OFF motions/four held ticks. A strict positive-service OFF win
-selects zero motion; ties select ON/original C order. If every candidate has zero modeled
-service, keep C's waypoint/navigation and ZERO gate. Preserve navigation advancement even if
-OFF eventually wins. Use an owned wrapper with its charged eligible-setup repeat, leaving
-frozen C unchanged. Cache eligibility and actor versions correctly. CJ still omits unseen
-users and the previous silent peer's reactivation; it is a competent approximate local
-alternative, not a global optimum or bound.
+The complete bill is 2 fits, 352,256 native steps, 1,024 actor and 1,024 critic Adam steps,
+with 163,840/32,768 collected actor/critic rows. The reader reconstructs 441,696 scalar states,
+2,208,480 observations and 119,257,920 scalar power links, including all masks, policies,
+draws, rewards, targets, first-epoch losses and saved-state chains. It does not independently
+replay every later-epoch gradient/Adam arithmetic. Worker+reader chain cost is 1,780.045981 CPU-s
+and 1,717.666552 wall-s; peak process RSS is 731,560 KiB. Correctness and source/adviser/
+staging/publication support remain additional work; estimates are not actual support time.
+B02–B10 cumulative exposure is 22 fits, two calibrations and 4,055,080 native steps, with B01
+separate. All 1,647 required canonical files remain in one evidence copy, 1,119,678,464 allocated
+bytes. Measured closure reclaimed 1,639,141,376 allocated bytes with no cleanup target or live
+consumer left; retained implementations and readers support the recorded capabilities.
 
-The 12 stochastic final programs are J0/J1/INIT90, P0_A/ZERO/HIDDEN, Bstar0_A/ZERO,
-Hdirect_A/ZERO and G_A/ZERO: each 32 new worlds × 2 tapes. C_A/C_ZERO/CJ run once per
-world. This yields 864 final episodes; with 512 training episodes, total 1,376 episodes and
-352,256 native steps. Freeze unused world/innovation/critic/bootstrap addresses and arm order
-before exposure. Average tapes within world and use 20,000 shared world-bootstrap draws for
-descriptive pointwise intervals. Read 32 contrasts: each endpoint against its 13 controls,
-five ZERO−A comparisons and INIT90−P0_HIDDEN. Report both fitted blocks separately; two
-conditional development units sharing acquisition assets are not independent-parent replication.
-
-Read J/service/quality, team-service p10/minimum, outages/zero streaks, travel, transmitter
-exposure/switches, joint categories/physical paths/aliases, activation and complete costs.
-These team tails do not establish individual continuity, nor travel/exposure measured energy.
-Gains only over INIT90 establish learning/recovery; gains only over C/CJ retain competence.
-Gains over strong retained references in both blocks strengthen conditional joint-development
-capability. If CJ supplies the useful gain, retain the ordinary result. Preserve narrower
-tradeoffs and all adverse worlds. Adverse, unresolved or inconsistent endpoints end this
-fixed purchase without automatic mask widening, probability tuning, more epochs/worlds or
-confirmation. A later worthwhile use or empirical-understanding question is a new allocation.
-
-The full source bill includes 2 fits, 256 groups, 1,024 actor and 1,024 critic Adam steps;
-163,840/32,768 collected actor/critic rows and 655,360/131,072 epoch replay rows. It prices
-440,320 motion requests, 88,064 mask installs and 409,600 categorical uniforms; no separate
-gate draws. Ceilings include 225,280 joint collection rows, 188,416 frozen-P0 forwards,
-327,680 helper requests, 112,640 C requests, 3,041,280 C paths, 12,165,120 C modeled ticks
-and 300,646,400 controller links including CJ's 204,800 extra setup links. CJ adds at most
-2,048 OFF scores, representing 8,192 held ticks. Native transitions/resets plus one unscored
-constructor cost 97,249,075 dense power slots; mask refresh adds 24,217,600 SINR slots.
-
-The complete reader reconstructs 441,696 scalar states, 2,208,480 local rows and 119,257,920
-scalar power links plus all policies, draws, masks and outcomes. It repeats collection work,
-reconstructs targets/advantages/first-epoch losses and verifies saved-state hashes, ledgers,
-parameter movement and final Adam states. It does not independently replay every later-epoch
-gradient/Adam update. Combined collection/training/reader network-row ceilings are 1,105,920
-joint-actor, 376,832 frozen-P0 and 196,608 critic rows. New numerical, mask, prior, critic,
-CJ and RNG checks plus independent engineering review remain required; their exact finite
-exposure is declared in L0 before queries, with no hidden native fixture or empirical pilot.
-
-Rehash the original remote P0 S.pt and HIDDEN.npz at staging: combined payload 429,606 bytes;
-copy actor weights, not optimizer state. Their original B02/B08 source identities remain.
-Historical B02–B09 acquisition already cost 20 fits, two calibrations and 3,702,824 native
-steps, with B01 separate. New storage has 256 pregroup model snapshots and two final Adam
-checkpoints, 77,190,536 raw tensor bytes before metadata, plus 1,376 raw episode files.
-Forecast 2.8–4.6 GB uncompressed arrays, 1.0–2.4 GB canonical evidence and .6–1.5 GiB streaming
-RSS; staging/snapshot/serialization peaks are additional. Revised worker .3–1.2 plus reader
-.3–1.2 CPUh gives .6–2.4 combined CPUh, roughly .6–3 wallh under contention. Support is
-12–24 focused person-hour equivalents, an uncalibrated estimate; correctness/source/adviser/
-staging costs remain separate. Actual-node admission controls execution, not these forecasts.
-The same DM owns this study through full independent reading, publication and measured closure.
-
-Root checked B03 §§2.3.3–2.3.4/6.2.4, MARL-0002 ACE primary JSON p3 and DLPA2404.03037
-primary pp2–4. Their established decision objects, global-state/action-dependency rights and
-conditional-action models do not guarantee this local PPO result or make 54 categories novel.
-[The complete original Oracle advice and actual three-library/July/external/CADC coverage](https://github.com/CartmanFatass/My-paper-code/blob/6717c0ed99669b3d727993f9805486b9a6c8130b/docs/research/candidates/uav_fleet_adaptation/NOTES.md#b10-original-oracle-advice)
-are preserved in full, with the original 13-program price, revised 15-program recommendation
-and Root adoption kept separate. [Retained B08 capability and ordinary alternatives](candidates/uav_fleet_adaptation/NOTES.md#b08-complete-reading).
+[Complete signed results](https://github.com/CartmanFatass/My-paper-code/blob/4a0db1166d00511f45a4ee40689e67190a67ea87/runs/uav_fleet_adaptation/b10_joint_control_a01/publication.json),
+[full original independent diagnosis and DM resolution](https://github.com/CartmanFatass/My-paper-code/blob/4a0db1166d00511f45a4ee40689e67190a67ea87/docs/research/candidates/uav_fleet_adaptation/NOTES.md#b10-independent-disposition),
+[measured closure](candidates/uav_fleet_adaptation/NOTES.md#b10-final-cleanup),
+[retired complete selection, rationale and price](archive/2026-10-01/RESEARCH-joint-local-control-completion.md#joint-local-motion-transmission-selected-20261001).
 
 <a id="anonymous-user-tracking-selected-20261001"></a>
 **C/M/V complete: retain accurate ordinary prediction; end this control-package purchase.**
@@ -3103,13 +3070,14 @@ interleaving in the reading, without an isolated-speed claim or rerun. Cap-two's
 and reader completed on the configured remote node. Anonymous-tracking B08 has also completed
 its recorded remote execution/readback and snapshot cleanup. Managed-proposal B09 has finished
 its remote worker/reader and canonical local collection; mixed-controller B09 has finished its
-local worker/reader. Both accepted operations and cleanup are complete. RF-uncertainty's fixed
-H8 correctness panel passed and its unchanged9b6f493b main32-world worker was admitted on
-wsl_4070 at2026-10-01 07:52:05UTC. The selected S7 service-prediction study chooses a configured
-host from its complete cost and fresh actual-node admission, accounting for any RF overlap.
-The joint-learning and radio-information studies likewise require fresh actual-node admission;
-their selection reserves no node capacity. Account for overlap among the four studies' workers
-and readers when admitted, without treating source/implementation work as a scientific run.
+local worker/reader. Both accepted operations and cleanup are complete. RF uncertainty,
+radio information and fleet B10 have now finished their recorded remote workers, complete
+readers and snapshot cleanup. S7 service prediction is the remaining accepted study: source
+93166e7ac6cffa3c76da113afdc84e7317bb585c was admitted on wsl_4070 at 2026-10-01 08:49 UTC,
+with four worker processes followed by two full-reader processes under the same chain.
+No result is inferred from its partial progress. The three successor assessments are
+source-only work and reserve no worker, fit or node capacity. Any selected new study must
+account for the remaining accepted operation and obtain fresh actual-node admission.
 This operation-specific placement changes no global runtime configuration and establishes no
 runtime cure. Accepted operations retain their node/identity; new overlap requires fresh
 memory/occupancy evidence, without a standing reservation.
