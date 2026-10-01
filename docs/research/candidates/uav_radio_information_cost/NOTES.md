@@ -411,3 +411,46 @@ Reuse the adequate independent selection assessment. The prospective contract/L0
 implements this decision; full result reading and independent diagnosis will precede route
 closure or any proposed new investment. Support-hour numbers are planning equivalents,
 not measured human labor or model elapsed time.
+
+
+<a id="b01-engineering-acceptance"></a>
+## 2026-10-01 — Implementation accepted for the fixed checks, before exposure
+
+The bounded Implementer owned protocol.py, manager.py and the twelve/eight-case synthetic
+test file; it returned those files with AST checks and no execution. The DM reviewed and
+accepted them, added the one same-record scalar replay per synthetic round, a pure corrupt
+wire-evidence rejection, collector/reader adapters and entrypoints. No physical RF kernel
+was copied, mutated or monkeypatched. PRIOR reports contain only headers; its saved raw
+physical truth is private audit evidence. Its stationary moment reuse and all completed
+partial work have distinct counters. Eight round replays use their original produced
+records; corruption rejection performs no additional fleet/native/C/RNG evaluation.
+
+The independently assigned engineering Reviewer `review_rf_package`, separate context,
+returned this complete finding:
+
+> No material finding remains in the reviewed draft, including the added realized command/mask/proposal/navigation comparisons.
+>
+> Reviewed the complete collector→manager→storage→reader path against the published contract. Source inspection supports PRIOR information exclusion, analytic stationary expected power and reuse accounting, arm-specific arrival/tail timing, whole-round deadlines and atomic fallback, executed-candidate replay, native reconstruction, and both C passes.
+>
+> Checks completed:
+>
+> - All 17 assigned Python files parse.
+> - Nine reused RF dependency files match `9b6f493b343c2939b374a1ce21384266d3257456`.
+> - Reviewed path/hash manifest digest: `302dda4a518dadcada65be8ed6d073e08b6d4465ed4c4260757e7e762b360cd4`.
+>
+> Residual limit: this was source-only review. No scientific imports, tests, native/C/model/allocator/RNG calls, launches, or file mutations occurred. Numerical/hash equivalence and runtime persistence remain unverified until the already selected, published-source checks execute. No additional exposure or repair is requested. DM retains acceptance.
+
+DM acceptance is for the selected correctness/execution path, not a result. The complete
+cross-package motion/mask/proposal/nav counts describe each program's own actual history;
+they add no opposite-arm execution or mechanism-identifying control. All new source and
+tests parse; no scientific imports or queries have occurred before source publication.
+
+Prospective actual host is configured `wsl_4070`: at08:24UTC it had about14.3GiB available
+versus4.5GiB locally, and the separate RF full reader was active. This is an occupancy
+observation, not admission or a reservation. Its configured CPython3.10.21/NumPy1.26.3
+runtime retains the bound numerical/RNG contract. Root synchronized only this direction's
+published row into the intentionally dirty canonical remote control tree; do not replace
+that tree. A fresh actual-node check at each launch still governs acceptance. The synthetic
+suite runs once after exact-source publication; then only the two H8 fixtures and fixed
+64H256 worker/full reader are selected. Runtime overlap costs are retained, not isolated
+speed claims.
