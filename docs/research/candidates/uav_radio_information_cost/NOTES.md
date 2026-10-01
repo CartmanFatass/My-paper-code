@@ -901,3 +901,140 @@ fits or launches. Preserve original source facts in this notebook and propose an
 direction/paths before eventual Root selection. Root owns the later cross-question choice.
 This is neither a reopening of RF/B09/lower-motion stops nor an automatic timing/sensor
 repair; the present scientific standing remains the completed, idle fixed purchase above.
+
+<a id="b02-integrated-package-source-only"></a>
+## 2026-10-01 — Source-only U32_FULL versus P_PRIOR package feasibility and complete price
+
+This is preparation for Root's allocation decision, not a selected study, an active idea,
+an empirical result or authority to implement. The owned record preserves the complete
+original source request/reply and the subsequent textual correction. Root's original
+assignment explicitly required publication of source facts in this notebook. The Oracle
+asked for a direct reply without editing records; the DM returned that reply first and
+informed Root that this own-notebook preservation follows Root's existing assignment.
+No Oracle, other direction, shared-background or RESEARCH entry is edited here.
+
+Author scope: append this original exchange and source limitations to the existing owned
+notebook, self-check the prose and explicit-path diff, then publish. Source inspection,
+published-record reading and scalar count arithmetic only were performed. There were no
+new native/controller/model/allocator/RNG/teacher queries, saved-output reductions, tests,
+benchmarks, prototypes, implementation, fits or launches. This record does not reopen B01,
+RF, B09 or the lower-motion stops. The proposed paths, seeds and checks below remain
+conditional and unexecuted. Root owns the purchase decision after the Oracle's advice.
+
+### Original Root assignment, 2026-10-01 09:05:22 UTC
+
+```text
+Root has read all complete RFinfo results/cost/tails and the ORIGINAL full 9108-character ResearchCritic final (215355948), and adopts closure of this exact FULL purchase with PRIOR/scoped FULL positives retained. I accept the correction: adverse branch of a question allowing either sign, not falsification of a committed positive forecast. Finish your current own publication and measured cleanup as planned; no per-step ACK is needed. Next within your same nonarchived DM responsibility, provide SOURCE-ONLY feasibility/complete cost for ONE concrete worthwhile successor question that /root/age_control_interface narrows from the cumulative project record, all three libraries and primary web sources. I have assigned that Oracle the opportunity assessment, not an automatic RF repair; it may prefer a different independent UAV control/learning question or no purchase. Keep the other three selected studies unchanged. After current closure, answer its one concrete source request using code/records/count arithmetic only: zero new native/controller/model/allocator/RNG/teacher queries, saved-output reductions, tests, benchmarks, implementation/prototype, fits or launches. Publish original source facts in your existing owned notebook, propose new direction/paths before any eventual Root selection, return complete bill and uncertainty without empirical pilot. No new result-bearing study is selected. Do not restore old B09/lower-motion/RF stops or begin a tuning ladder; Root will choose the next cross-question allocation after the complete advice. I will integrate the cross-portfolio standing against your published direction update; preserve your owned entries/background. If you have already finished when its concrete request arrives, the Oracle will use native follow-up on you, not a new DM.
+```
+
+### Original Oracle request, 2026-10-01 09:55:48 UTC
+
+```text
+One bounded source/price request for Root's age_control_interface opportunity assessment. No study is selected and this is not permission to implement/query/run: please inspect only existing published specs/code/records and give one complete feasibility and incremental cost for a fresh, prospectively paired native comparison of the two complete packages U32_FULL (the selected joint conditional-trajectory integrator with the existing paid all-link current-CSI acquisition/report/timing package) versus P_PRIOR (the lawful lower-information stationary-prior coordinator with no central pilots/reports). Question: does the known-law nonlinear integrator's positive same-sensing increment make the costly acquisition package worthwhile as a bundle, despite the adverse FULL−PRIOR result for P? Treat it as one package-level decision; do not algebraically combine the separate-panel B01 effects. Specify exact unchanged/incremented code/input interfaces, competent ordinary references, endpoints/tails and native timing; world/episode/step/C-call/fleet-score/radio-entry/model-normal counts for worker+full reader; correctness checks, fit (likely zero), CPU/RSS/disk/canonical evidence, engineering/source/support and likely blockers. Confirm if existing sources can be integrated reuseably or require new direction-owned implementation, and give conditional projected full cost rather than a partial workload. No all-family search, new methodological proposals or findings; your exact pointer/source locators are enough. Current directions' original source/cost sections are linked in published NOTEs. Please reply here; do not edit records.
+```
+
+### Complete original DM source reply
+
+The complete reply is retained below, including two textual slips corrected in the separate
+original correction immediately after it. The corrected C interface is a 104-component
+observation, not a 104 m radius. The main A2A counts are integral and exactly stated below.
+
+```text
+Source-only answer: this fresh package comparison is feasible through reusable existing kernels, but is not executable by changing the old CLI arguments alone. The conditional incremental bill is 32 paired H256 worlds plus exactly one paired H8 integration fixture: 66 episodes, 16,400 native steps, zero fits, approximately 0.7–1.5 CPU-hours including the full independent reader, and 6–12 focused support-hour equivalents for implementation through scientific reading/publication/cleanup. These are planning estimates, not measurements of a new experiment. No implementation, scientific query, saved-output reduction, test or launch was performed for this assessment, and no study is selected.
+
+1. Question, ownership and unchanged source interfaces
+
+The estimand would be the fresh paired native difference U32_FULL minus P_PRIOR, with both programs executed on each new world. It answers the complete acquisition-plus-integration package question. The positive earlier U32-minus-P same-sensing result and adverse earlier P_FULL-minus-P_PRIOR result are supporting context, not numbers to combine across panels. I found no source-level obstacle that requires a new scheduler, physics model, sensor codec, filter, allocator, scorer, or fitted asset.
+
+U32_FULL should be an outer program label only. Its internal arm remains literal U32, retaining the complete protocol-V5 collector/manager/model/reader path published at 9b6f493b343c2939b374a1ce21384266d3257456. P_PRIOR keeps its literal arm and complete protocol-V6 path published at a80e2be9e3341b3bebfa743dacfda5e4ff13d977. Use qualified module imports and source-bind both closures; do not relabel packets, monkeypatch frozen global ARMS/WORLDS, or replace one arm's decoder with the other's. Both published source trees and the inspected common physics/C dependencies are unchanged at the inspected published main bc3278267d83515506bbf3aee8cf7054964f9967.
+
+Useful exact APIs/locators, all relative to the repository:
+- experiments/candidates/uav_radio_uncertainty/b01/collect.py:60, collect_episode(env, world, 'U32', horizon); environment.py:217, make_env; collect.constructor_witness; metrics.py:35, outcomes; reader.py:25, verify_episode(raw, row, arrays, counts); read_model.py:97; read_native.py:236 and :360; read_outcomes.py:34 and :58; manager.py:21 and :33; model.py:41; randomness.py:22 and :26; protocol.py:12.
+- experiments/candidates/uav_radio_information_cost/b01/collect.py:62, the analogous P_PRIOR collector; reader.py:25, its verify_episode; read_native.py:113; read_model.py:18; metrics.py:35, :95 and :112; read_outcomes.py:16, :104 and :128; protocol.py (version 6).
+- Bound common dependencies include envs/pettingzoo/uav_env.py and uav_radio.py, the five local controllers in experiments/candidates/uav_local_history/b01/controller.py, and the fixed C implementation under experiments/candidates/uav_user_waiting/b02/.
+
+New direction-owned work is still required: admitted launcher entrypoints/configuration, fresh panel and outer program dispatch, source/arm identity checks, paired aggregation and action differences, and full-reader/check orchestration. Old whole-study read_result/paired/verify_pairing helpers assume their frozen WORLDS/ARMS; the information-cost paired_actions helper assumes P_FULL. Reuse the per-episode APIs and independent reconstruction kernels underneath a new owned wrapper. Both collectors rebuild five LocalController objects for each episode and reset their own counters; one native environment instance may serve the 64 main episodes, with a separate H8 environment for the two fixtures. Nothing requires loading old raw outcomes or fit checkpoints.
+
+If Root selects it, the existing enduring information-cost direction can own experiments/candidates/uav_radio_information_cost/b02_integrated_package/, its matching tests path, the existing NOTES.md, runs/uav_radio_information_cost/b02_integrated_package_a01 plus separate read/check tags, and temp/directions/uav_radio_information_cost/. Those proposed new paths were absent when checked. A new direction slug is unnecessary for this estimand; this is only an ownership proposal, not activation or registration.
+
+2. Concrete panel, ordinary reference, outcomes and interpretation
+
+A fully priced example is 32 fresh worlds 29661000–29661031, one H256 episode per program per world, alternating program execution order. Proposed constructor seed 29661999; a separate paired H8 fixture uses world 29661900 and constructor seed 29661998. Integer-token search found no use of these proposed seeds in inspected published research/code/run/test records. They must be frozen and normally checked again with the eventual input identity; this is not a claim about every historical machine. Use the existing physical/model roots and one declared U32 model stream per world. There are no fit seeds, training cells, repeats, calibration, action RNG or teacher data.
+
+P_PRIOR is a competent ordinary coordinator: it receives the same public geometry, known stationary radio law, reported local command proposals and implicit C information, and uses analytic expected-power planning with the same search rights. It buys no central current-CSI pilots or codes. It is not an optimal posterior using every indirect observation; that limitation is part of the question's scope. U32_FULL has the previously selected 32-particle joint conditional-trajectory integration with the existing all-link current-CSI purchase. Retain prior P_FULL and C results as scoped historical references, not extra arms. Both programs already incorporate C as their shared local proposal mechanism.
+
+Primary: all-32 paired difference in complete-episode payload-weighted J/256, displaying both levels, every paired value, mean and the existing mean±1.96 SE interval. Also retain raw J, raw/payload service and quality, all 50 users' wait/age and maximum-gap records, initial and terminal censored gaps, outage/never-served/minimum/p10 service, path length, active-transmitter exposure, proposals versus commands, command/mask/navigation differences, startup and final-tail outcomes, sensor clipping, deadline fallbacks and actual resources. The 1,600 paired users are nested within 32 worlds, not 1,600 independent experimental replicates.
+
+This can establish a package-level native performance contrast on the declared world distribution. It cannot separately identify acquisition value, CSI aging, quantization, particle integration or motion feedback. It is not a learning, field-validity, safety or universally optimal no-pilot claim. A positive J result accompanied by worse waiting/exposure is a measured tradeoff; neither source feasibility nor an unspecified J gain by itself establishes service-preserving adoption. Any stronger adoption gate must be fixed before the purchase. There is no algebraic cross-panel substitution.
+
+3. Native timing and coupling retained exactly
+
+N=5 UAVs, U=50 users, H=256, report/hold every four ticks; 27 commands, 31 nonempty masks, unchanged S2/two-order search with 116 logical requests/report and history-dependent unique-plan counts Q∈{57,83,87,112}. C keeps its 104 m local model, current local proposals and existing navigation interface. Public map setup is 400 B/episode; its 1.6 s setup lies outside the H256 outcome window for both programs.
+
+U32_FULL buys 250 all-link measurements/report, 0.1 s sounding plus 1.564 s recurring wire time: 75 B/UAV plus the 16 B command packet =391 B/report. Delivery is tick+3; the declared compute allowance is 1.336 s. Report-tick payload is 0.9, other ticks 1, total 249.6. The initial old-command prefix is three ticks; the scored suffixes total 253 ticks, weighted 246.7, plus weighted startup 2.9. The last report at tick252 delivers at255 and therefore has one native candidate tick.
+
+P_PRIOR sends five 25 B headers and a 16 B command packet =141 B/report, 0.564 s wire time, no sounding/codes/private z at the coordinator. Delivery is tick+2 with 1.436 s compute allowance. Payload weights total256. Its prefix is two ticks; scored suffixes total254, with two candidate ticks after the last report. Preserve whole-round timing around C, sensor/codec, manager and finalization, and atomic old-command-and-mask fallback with actually executed partial work charged.
+
+The physical law remains σ=4.14, decorrelation distance17.62 m with path-dependent correlation; hovering freezes the residual value but still draws 250 physical normals/tick, including silent links. Physical namespace/root are 0x52465048/29640001; model namespace/root 0x52464d43/29640002, NumPy1.26.3 Philox SeedSequence [namespace,root,world,tick]. U32 draws (16,7,5,50)=28,000 base normals/report and concatenates their negatives for32 particles, even on the shortened final horizon. All candidate plans share these future model innovations. Pair initial geometry and physical innovation addresses; realized residuals need not remain equal after the programs choose different paths. PRIOR uses one analytic stationary-prior trajectory, not Monte Carlo, and its expected power is reused across stationary future offsets. No future C query is added.
+
+4. Full main workload, including the independent reader
+
+Main worker: 64 episodes,16,384 native steps,81,920 UAV ticks, one environment construction with one constructor-discarded reset plus64 explicit resets,4,096 report rounds and4,096 command setters. The full reader uses zero native environment constructors/resets/steps: it reconstructs all saved physics, radio grants, outcomes, both controller-information passes and every actually evaluated candidate through its independent saved-byte routines. It is not a selected-candidate-only read.
+
+For the main panel alone:
+- C:20,480 worker calls and40,960 reader calls =61,440 combined;1,658,880 C candidate paths,6,635,520 C model ticks, at most138,854,400 variable-neighbour link evaluations combined. The worker portion is552,960 paths/2,211,840 ticks/at most46,284,800 links. Actual neighbour counts are trajectory dependent.
+- Physical reconstruction, per worker or full-reader side:4,112,250 physical normal variates,7,475 geometry uniforms,16,449 physical states,20,545 native radio/SINR/grant states,5,136,250 dense user-link entries,513,625 dense A2A entries including51,362.5? No: the exact dense count is513,625 entries across20,545 states, of which410,900 are off-diagonal; no fractional count is intended. [The dense A2A count is25 entries/state; off-diagonal20/state.]
+- Candidate scoring, per side:475,136 logical requests;233,472–458,752 unique plans across both programs. U32 needs14,767,104–29,016,064 fleet-score evaluations; PRIOR463,296–910,336; total15,230,400–29,926,400 fleet scores =3,807,600,000–7,481,600,000 dense user-link score entries. Worker+reader total7,615,200,000–14,963,200,000 entries. C counts above are separate. These are source-derived lower/upper bounds, not a guess that every round evaluates112 plans.
+- Model RNG, per side:57,344,000 independent base normal values (2,048 U32 reports×28,000),114,688,000 signed particle values. Worker+reader each regenerate their own corresponding values; this does not double the native information purchase.
+- U32 conditional propagation, per side:6,144 prefix geometry steps and218,592 suffix geometry steps,7,191,552 total particle-fleet transitions =1,797,888,000 dense user-link propagation entries. PRIOR has4,096 prefix plus219,456 suffix stationary reuse states =223,552 fleet states/55,888,000 link uses, plus2,048 prior initializations. Its stationary reuse is not a conditional residual update. Across programs there are438,048 suffix geometries and10,240 prefix geometries per side. U32 anchors2,048 posterior starts/512,000 current links; PRIOR has none.
+- Native acquisition:512,000 measured links,102,400 sounding slots,204.8 simulated sounding-seconds;800,768 U32 bytes plus288,768 PRIOR bytes =1,089,536 recurring wire bytes;25,600 setup-map bytes. The reader verifies these records without acquiring another pilot.
+
+Correction for clarity within the physical bullet: dense A2A entries are exactly513,625 per side; off-diagonal entries410,900. No fractional or other A2A count is part of the bill.
+
+5. Correctness work and all-in query total
+
+The incremental native check is exactly two H8 episodes, one per actual program on the separate fixture, and a full saved-byte read of both. That adds one constructor/two explicit resets/16 steps/four report rounds;20 worker plus40 reader C calls;464 logical candidate requests and228–448 unique plans;9,462–18,592 fleet scores per side;56,000 model base normals per side;4,750 physical normals/345 geometry uniforms/23 radio states/5,750 dense user-radio entries per side;500 measured links/100 sounding slots/0.2 simulated sounding-seconds;1,064 recurring bytes and800 setup bytes. H8 is a glue/source/reader-identity test, not an empirical feasibility pilot or source of outcome selection.
+
+Inherit, with their existing evidence bindings, the completed original RF numerical/particle/fallback/H8 suite and information-cost codec/type/deadline/reader checks. Do not rerun all kernels as an unpriced preliminary phase. Add at most eight genuinely new data-only orchestration cases using doubles for alias/dispatch/order/source guard/incomplete-result failure/pairing/check routing; these add zero native,C,model,allocator,RNG or fleet queries. An independent engineering review covers the new high-risk source/input/result-identity code before published checks. A real defect requiring further scientific queries changes the prospective bill; it is not covered by an unlimited repair allowance.
+
+Total new native/check purchase:66 episodes,16,400 steps,two constructors,66 explicit plus two constructor-discarded resets,4,100 report rounds. Per worker/full-reader side:4,117,000 physical normals,7,820 geometry uniforms,16,468 physical states,20,568 radio states,5,142,000 dense user-radio entries and514,200 dense A2A entries (411,360 off-diagonal). Combined C total61,500 calls/1,660,500 paths/6,642,000 model ticks/at most138,990,000 variable-neighbour link evaluations. There are also16,400 collector service-only diagnostics; these are not extra native states or radio queries.
+
+Per side, all main+check candidate scoring is475,600 logical requests,233,700–459,200 unique plans,15,239,862–29,944,992 fleet scores. Worker+full-reader total30,479,724–59,889,984 fleet scores/7,619,931,000–14,972,496,000 dense score entries. Model base normals total57,400,000 per side,114,800,000 both sides; signed particle values229,600,000 both sides. Per side U32 has7,196,064 conditional particle-fleet transitions; PRIOR223,718 stationary reuse states;438,345 suffix and10,250 prefix geometries across programs. Acquisition totals512,500 measured links,102,500 slots,205 simulated seconds,1,090,600 recurring bytes,26,400 setup bytes. Fits, parameter updates, calibration and teacher/target-label queries remain zero.
+
+6. Compute, storage, engineering and source/support price
+
+The closest measured full reconstruction is the published RF U32/P study: worker392.749384 CPU s/380.244083 wall s and full reader2,761.467347 CPU s/2,678.822373 wall s, at20,529,026 actual candidate fleet scores per side. Its largest U32 round was0.253561 s against1.336 s allowance. These support feasibility on the same configured node but are not guarantees for fresh trajectories. The information-cost two-cheap-scorer study's139.915588 worker CPU s and288.223320 reader CPU s cannot price this U32 reader.
+
+Conditional budget: main worker5–12 CPU minutes, full reader35–75 CPU minutes, fixed integration checks0.01–0.05 CPU-hours; roughly0.7–1.5 CPU-hours total. Main and reader are sequential. This includes all described native/model/C/allocator/reader work, not just the worker. It excludes unmetered source/review/publication effort and any genuinely newly authorized repair. Same configured wsl_4070 CPU environment, Python3.10.21/NumPy1.26.3/Torch2.7.0+cu118 with one Torch/BLAS thread; fresh actual-node admission, including the configured4 GiB requirement, is needed only if selected, not a reservation now.
+
+Peak process RSS planning0.5–1.5 GiB. Historical RF peaks were426,208 KiB worker and402,112 KiB reader; sequential peaks are not additive. The28,000-value base-normal array is224,000 B, signed32-particle values448,000 B; a full112-plan geometry-loss bank is about6,912,000 B for that one array. Stream one episode; do not retain the entire panel's particle arrays.
+
+Retain one canonical new raw-evidence copy plus compact Git summaries/configuration/source bindings/launch and reader statuses. Plan0.15–0.35 GB for compressed canonical evidence, using the previous full raw package's approximately151 MB as an empirical anchor, not a guaranteed upper bound. Do not store all model-normal tapes (the main base draws alone would occupy458,752,000 B) or all intermediate particle scores; deterministic addresses, hashes, primitive observations/loss/residual/grant/wait arrays and actual partial-work records support the full existing reconstruction. No old raw panel is an input. Accepted-source snapshots currently cost about0.82 GB each: approximately2–3 GB incremental remote peak with fixture snapshot released before the main/reader pair, or3–4 GB if all three are retained through completion; local planning4–5 GB under the same source preparation strategy. Normal measured cleanup should delete obsolete accepted snapshots and temporary transfers after consumers finish, preserving one required evidence copy. No copied authoring checkout, archive chain or fit artifact is needed.
+
+Incremental focused support-hour equivalents: source/interface/manifest0.5–1.5; new dispatcher/config/panel2–3; reader/pairing/schema1–2; correctness and independent engineering review1–2; launch/collection/full scientific reading/independent result review/publication/cleanup1.5–3. Sum6–11.5, rounded6–12. These are transparent conditional engineering/research-support estimates, not measured human or model labor. Current source assessment is already real support expenditure within that category. Root/Oracle primary reading and selection, or any additional distinct Pro advice, are separate real but incompletely metered support costs, not free. Earlier RF14–28 and information-cost8–16 support-hour forecasts belong to earlier work and should not be charged again as new implementation.
+
+7. Original records and remaining uncertainty
+
+Original price/source sections are in docs/research/candidates/uav_user_waiting/NOTES.md:6812–7211 (RF source investigation, preserved source commit70cf2ca28...), docs/research/candidates/uav_radio_uncertainty/NOTES.md:78–157 (selected source plan), :423–450 (checks), :631–698 (complete costs/results), :819–864 (closure), and docs/research/candidates/uav_radio_information_cost/NOTES.md (a80e2be9e-bound selection, complete worker/reader cost and original independent closure advice). Compact complete RFinfo evidence is published at4ec3dd759f481da2e0caa7205d7f51d321432125 and final standing/cleanup at0052b7dd5de658ac24b911a3ca9847a5602d632f; source facts can be checked directly at the two immutable executable commits above.
+
+No material source blocker was found. The new wrapper/pair reader is not implemented or reviewed; fresh admission is unperformed; wall/deadline/disk estimates are conditional. The fixed3-tick versus2-tick delivery, stationary-law approximation, coupled motion, nonlinear search and particle integration are consequential parts of the package, not implementation errors to normalize away. A fresh paired complete experiment is necessary to learn the requested contrast. This answer supplies a complete feasible purchase and its uncertainty; it does not say that purchase is worthwhile or selected.
+```
+
+### Original subsequent DM correction
+
+```text
+Two textual corrections to the source reply: C receives the unchanged 104-component local observation; “104 m local model” was a unit typo, not a radius or changed contract. For the main physical-radio bill, the clean statement is exactly 513,625 dense A2A entries per worker/reader side (20,545 states×25), with 410,900 off-diagonal entries (×20); discard the stray fractional fragment that the message already corrected. No cost, source, endpoint or feasibility conclusion changes.
+```
+
+### Source-only disposition
+
+The above feasibility and complete conditional price have been returned natively to the
+requesting Oracle. Current published RESEARCH topics 2 and 8 supply the relevant constraints:
+same-sensing integration support and sensor-package value are different contrasts, complete
+tails/exposure and information/compute costs belong to the package decision, and neither
+earlier panel substitutes for the proposed fresh pairing. No empirical interpretation or
+standing changes through source inspection. The present B01 remains complete and idle;
+Root's ensuing allocation decision is the actual next dependency for this proposed purchase.
+No scientific review or Pro consultation is added by this descriptive source publication.
+No scratch or implementation was created for this source-only task, so there is no new
+disposable target or disk reclamation claim. The earlier measured cleanup remains intact.
