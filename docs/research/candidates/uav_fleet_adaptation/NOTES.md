@@ -6629,3 +6629,245 @@ owned inputs will now be published before the one fresh local admission. The
 selected scientific question, target formula, loss, phase exposure, native panel,
 full reading and stop branches are unchanged. This is launch readiness only;
 there is still no B07 scientific result.
+
+
+<a id="b07-a01-operation"></a>
+### B07 accepted local worker→complete-reader operation
+
+At2026-10-01T01:50:42Z the one B07 chain was admitted from published
+`c2b2cd27276e49458b18ca69216b3525f281ea47`; its exact native identities, source
+snapshot, argv and operation reference are retained in
+[runs/uav_fleet_adaptation/b07_stochastic_targets_a01/launch-manifest.json](../../../../runs/uav_fleet_adaptation/b07_stochastic_targets_a01/launch-manifest.json).
+Fresh actual-node available/effective memory was6665248768bytes, above the
+4294967296byte floor. Current canonical/published pause, active direction and
+unchanged native-child lead passed admission. This operation-specific local
+choice follows the already-preserved remote-runtime failure evidence; it does
+not diagnose that failure or change shared runtime configuration.
+
+The same-session deterministic observer adopted both running native identities
+with a consistent accepted claim and zero observation errors at01:50:56Z. Its
+state is generation32, job`b07-a01`, after consuming the prior completed/stopped
+generation30 and rearming31. The native child remains active through collection
+and scientific reading; registration is not a future-wake guarantee. The
+unchanged chain includes both fits,672native episodes and the one full reader.
+This entry records acceptance only, not a completed result.
+
+
+<a id="b07-complete-reading"></a>
+### B07 complete reading — a fitted score tilt without demonstrated native improvement
+
+The accepted source`c2b2cd27276e49458b18ca69216b3525f281ea47` completed at
+2026-10-01T02:00:04.080027Z with exit0, consistent terminal records and both
+native identities absent. The fixed reader is`VERIFIED`; it was not repeated.
+The detached observer reported READY with zero probe errors. Its native-child
+queue delivery returned`-32600`(direct App input to subagents unsupported), while
+the still-active same-session deterministic watch delivered the terminal facts.
+Generation32/event`58017aca88ab5bcaca916563`/wake
+`84761055-8490-417b-9c87-cac7e9738b91` were drained and consumed by rearm33;
+observation is now stopped. This queue limitation caused no loss of observation
+or duplicate scientific effect.
+
+**Evidence and coverage.** The complete
+[reading](../../../../runs/uav_fleet_adaptation/b07_stochastic_targets_a01/reading.json)
+is2259473bytes, SHA-256
+`872153b4eea35738c35a2b3edfdd644ddc8b0201a96b83cd423474f743ad06ff`.
+Canonical`summary.json` is5121319bytes, SHA-256
+`0a637fb56f6f80efb9e59900337390b6badbbf1f881248505fee187a4446dc64`,
+at`/home/fires/hmasd-wsl/runs/uav_fleet_adaptation/b07_stochastic_targets_a01/`
+on configured`local_linux`. It retains all672 episode identities/metrics/byte
+bindings and both complete70-epoch traces. Its bulk stays at that one durable
+location; the complete compact reading/config/native receipts are published.
+All inherited assets and old canonical remote records remain unchanged.
+
+Both fits completed8000updates/4096000presentations each with original F0
+row order and shuffles, a fresh continuing Adam and the same selected FP64
+soft-CE kernel. Total16000updates/8192000presentations,163840target rows and
+81920frozen P0 forwards; no new acquisition or calibration. All672H256
+episodes completed172032native steps/860160UAV ticks,215040policy decisions
+and204800private indexed uniforms. The complete reader reconstructed928files,
+237568saved ticks,296960decision rows,all81920old C/feature/target contexts,
+all final actual laws and all163840 learned-endpoint training rows. It performed
+194560C requests,184320helper requests and389120actor rows, with zero native
+steps or optimizer replay. Archive C maximum absolute score difference was
+6.35e-16; target, final score and final logit reconstruction differences were0.
+Saved phase/Adam identities, finite tensors, original shuffle streams and all
+paid update counters passed.
+
+**Native result.** These are conditional descriptive95% paired-world bootstrap
+intervals:32worlds, two tapes averaged within each world(C once), one fixed
+parent/data instance. They are neither independent training replications nor
+multiple-comparison-controlled confirmation. Every signed world vector and all
+55contrasts/27metrics remain in the complete reading.
+
+| Comparison | Mean J difference | Descriptive95% interval | Positive/negative worlds |
+|---|---:|---|---:|
+| T-H | -0.006345146 | [-0.014699171,+0.002065722] | 10/22 |
+| T-P0 | +0.000060165 | [-0.005529060,+0.005771699] | 14/18 |
+| H-P0 | +0.006405312 | [-0.002012054,+0.015032668] | 18/14 |
+| T-Bstar0 | -0.017761984 | [-0.027304868,-0.009488492] | 7/25 |
+| H-Bstar0 | -0.011416838 | [-0.019192730,-0.003473902] | 10/22 |
+| T-F0 | +0.002580282 | [-0.007270777,+0.013326236] | 15/17 |
+| H-F0 | +0.008925428 | [-0.003380136,+0.021389787] | 17/15 |
+| Tdirect-P0 | -0.001921870 | [-0.007663945,+0.003332369] | 14/18 |
+| Hdirect-P0 | +0.007329361 | [+0.000754088,+0.014607773] | 17/15 |
+| Hdirect-Tdirect | +0.009251231 | [+0.002655882,+0.016335161] | 19/13 |
+| Tdirect-T | -0.001982036 | [-0.007429977,+0.002857813] | 15/17 |
+| Hdirect-H | +0.000924049 | [-0.007089281,+0.008864681] | 18/14 |
+| Bstar0-P0 | +0.017822150 | [+0.009240309,+0.028302560] | 24/8 |
+| P0-G | +0.011886889 | [-0.000287457,+0.025092126] | 18/14 |
+| T-G | +0.011947055 | [-0.001087319,+0.025609096] | 17/15 |
+| H-G | +0.018292201 | [+0.005508438,+0.031137947] | 22/10 |
+| G-Q10 | +0.007832861 | [-0.003797272,+0.018391520] | 22/10 |
+| G-Q05 | +0.011085048 | [+0.003450854,+0.019236957] | 16/16 |
+
+T−H's point favors H but its interval crosses zero. T−P0 has essentially
+no mean increment on this panel, without an equivalence claim; H−P0 is also
+unresolved. Both new learners fall below the paid Bstar0 calibration in mean
+J and service. No soft-over-hard rescue is established: T−F0 and H−F0 remain
+unresolved, and F0−P0 itself is−.002520[−.014408,+.008245] here. B06's adverse
+F evidence remains historical evidence, not a premise that every new panel
+must reproduce the same loss.
+
+| Program | Mean J | Mean service | Mean served-user quality | Service-p10 | Mean episode minimum | Path m/UAV | CPU s/episode |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| C | 0.331878 | 19.602905 | 0.191456 | 18.906250 | 11.000000 | 2509.397521 | 0.203809 |
+| Q10 | 0.357041 | 21.522339 | 0.185761 | 16.367188 | 9.687500 | 3977.536064 | 0.303773 |
+| Q05 | 0.353789 | 21.202881 | 0.189829 | 17.585938 | 10.406250 | 3413.356846 | 0.272968 |
+| G | 0.364874 | 21.916138 | 0.193494 | 18.601562 | 10.718750 | 3729.640525 | 0.285771 |
+| P0 | 0.376761 | 22.996765 | 0.182687 | 20.156250 | 10.843750 | 3018.499194 | 0.332256 |
+| Bstar0 | 0.394583 | 24.387695 | 0.177185 | 20.000000 | 10.218750 | 4397.489235 | 0.393971 |
+| F0 | 0.374241 | 22.766418 | 0.185037 | 19.679688 | 10.703125 | 2826.389233 | 0.309357 |
+| T | 0.376821 | 22.972656 | 0.184013 | 20.070312 | 10.781250 | 2848.050704 | 0.325160 |
+| H | 0.383166 | 23.482361 | 0.181377 | 20.289062 | 10.609375 | 3154.041000 | 0.332006 |
+| Tdirect | 0.374839 | 22.782410 | 0.186284 | 20.109375 | 10.812500 | 2948.641431 | 0.358366 |
+| Hdirect | 0.384090 | 23.477356 | 0.184691 | 19.992188 | 10.984375 | 3037.240323 | 0.363980 |
+
+T−Bstar0 loses1.415039 mean users while gaining.006829quality,
+.5625mean episode minimum and1549.439m less path; p10+.0703125 is unresolved.
+H−Bstar0 loses.905334users while gaining.004193quality and1243.448m less
+path; its p10/minimum changes are unresolved. Neither Bstar0 nor the new fits
+therefore Pareto-dominate every measured consequence. No physical travel or
+latency utility was selected to overturn the native-J comparison. Bstar0−P0's
++.017822J/+1.390930users trades−.005503quality,−.625mean minimum and
++1378.990m path; do not silently adopt a new default from mean J alone.
+
+The direct H law gives a small positive Hdirect−P0 native J comparison,
++.007329[+.000754,+.014608], but15/32worlds lose and Hdirect remains below
+Bstar0. Direct H exceeds direct T by+.009251J[+.002656,+.016335], whereas
+direct T−P0 is unresolved. This weakens a story that only finite fitting hid
+a demonstrated useful T target. Hdirect−H J is unresolved, not proof that
+compression preserves the direct law. H's mean minimum is.375 lower than
+Hdirect's[−.703125,−.046875]. Direct H/T cost approximately.0320/.0332 more
+CPU-s/episode than their learned counterparts; native uncertainty and all
+training/target/audit cost remain, so no net amortization claim follows.
+
+There are zero total-service outage ticks/episodes in this672episode panel.
+This is a finite-panel fact, not a reliability or individual-user-continuity
+claim; all earlier student/calibration outages remain adverse evidence. All
+worlds are retained. T loses against P0 in18/32worlds, worst world29710018
+(−.039087J); H loses in14/32, worst29710003(−.050376). Against Bstar0,
+T loses25/32 and H22/32; both largest losses are world29710022 at
+−.112855/−.056451J. T−H's worst world29710005 loses.058604J. These
+losses are part of the full comparison, not post-hoc exclusion or a subgroup
+adoption rule. G−Q10 again has an unresolved J interval but better quality,
+p10 and minimum; G−Q05 has a positive conditional J interval while using
+more path/CPU. P0−G J remains unresolved here, with better service/p10/path
+and lower quality, preserving the stronger ordinary comparator.
+
+**Target and learning activation.** Of81920fixed rows(9238unique feature rows),
+6176have flat scores/fallback: T is exactly P0 there. T differs from P0 on
+75744rows with mean TV.007284786, maximum.070071796 and674modal changes.
+H differs on all81920rows, mean TV.040519221, maximum.1 and2638modal
+changes. Both have no floating zero-probability categories on this archive.
+Thus T is a small active intervention, not nonactivation. H is a materially
+stronger intervention; this is a target-package comparison, not isolated full
+score information, entropy or fallback value. Target entropy changes are
+−.007658524(T) and+.026815702(H); proxy changes are+.000149082 and
++.000372820, with H−T proxy nonnegative as predicted. The proxy is not
+native continuation value.
+
+All16000optimizer updates had nonzero full-network gradients; the N5-zero
+count branch had zero gradients/moments/movement throughout. T changed26504
+parameters(L2movement1.628931); H changed26941(L2=11.958820). Every
+phase's stream diagnostics were read, with no checkpoint selection: T's
+first→last paid-epoch CE is.55992054→.55913593,.57510369→.57496818,
+.57358625→.57360857 across phases; H is.59702414→.58460161,
+.63131073→.62023549,.63424872→.62475708. The changing phase datasets
+and pre-update streams are not a held-out or common-endpoint learning curve.
+
+The paid all-row endpoint pass finds T's own-target mean KL=.000188220,
+TV=.004802228 and99.4141%target-mode agreement; H's are.016693858,
+.030003910 and98.1177%. T/H decoded mean TV to P0 is.008733830/.039779983,
+but maximum is.274024/.719853 even on these training rows, explicitly
+violating any proposed learned-policy TV≤.1 guarantee. Endpoint proxy
+values .106810014/.106842337 exceed P0's .106668873 on the archive,
+without implying a native gain. T learns its small target closely in average
+training-distribution metrics; wholesale nonlearning is not a good explanation
+for its missing native increment. Residual rare-row/off-data error remains
+unmeasured as a causal explanation. H has more fitting residual, but the
+direct H comparison is already paid evidence rather than a reason to append
+unselected optimization.
+
+All deployed programs retain the original27categorical aliases and one fresh
+private uniform per actual stochastic decision, including cache hits. Neural
+positive-probability categories may receive zero mass on the finite53-bit CDF
+grid(P0:5634, Bstar0:0,F0:41451,T:5756,H:2496,Tdirect:6257,Hdirect:6084
+category-context entries); no category merger or changed decoder was used.
+Modal versus physical departures, clipping, boundary counts, fallback and
+cache work are retained for every program. They do not identify a causal
+entropy or aliasing explanation of the native comparison.
+
+**Complete measured cost.** Target construction costs21.312861CPU-s/21.474069wall-s.
+T's fresh-Adam three-phase fit including checkpoint serialization costs
+31.986498CPU-s/32.392155wall-s; H costs30.789313/30.965046. The complete
+worker costs306.972346CPU-s/308.207649wall-s, reader253.261470/253.317627,
+and enclosing import/worker/reader chain560.463227/561.756339. Timing scopes
+exclude final write/admission/staging/support where specified; no summing of
+nested timings as additional scientific cost. Observed process peak RSS is
+593324KiB across the enclosing process, not an isolated reader increment.
+Configured Python3.10.20/Clang22.1.3/NumPy1.26.3/Torch2.7.0+cpu uses one
+Torch/inter-op/BLAS thread and deterministic algorithms. Local success does
+not identify the earlier remote runtime fault.
+
+Worker actual cache work is59959full-C misses/1618893candidate paths/
+6475572modeled ticks, plus61456helper misses. There are84343deployed
+neural rows and81920archive P0 rows, outside the8192000training presentations.
+Worker controller power links28544558 plus47678675native dense slots total
+76223233. The independent reader pays69197C misses/1868319paths/7473276
+modeled ticks,70694helper misses and31984432controller links; its389120
+neural rows include full163840endpoint diagnostics. Direct T/H correctly reuse
+C features rather than paying a redundant helper. Requested work and actual
+cache savings remain separately visible. Transfer/metadata timings and the
+26324992byte temporary staging allocation were recorded before launch.
+Actual combined chain CPU is9.341minutes, below the10–30minute planning
+range; engineering/review/publication active labor is not fully metered and
+is not assigned the forecast6–10hours as an observation. Cumulative B02–B07
+remains14fits+2paid calibrations/2539560native steps and approximately
+3883.530measured chain CPU-s across their different scopes/hosts, with the
+earlier B01 and all support costs separately incurred.
+
+Unique new evidence is672raw NPZs/317776140logical bytes, six phase/Adam
+checkpoints/2568102bytes, one target archive/7924148bytes and two endpoint
+archives/3333601bytes, at the canonical local run above. Existing summary
+and reading bind every byte hash; no whole-tree backup or second retention
+copy is needed. All six phase artifacts remain necessary to the selected
+saved-optimizer audit, not redundant final-checkpoint duplicates. Cleanup
+will remove the verified old-input consumption copy and disposable source/test
+material only after live consumers finish.
+
+**Provisional interpretation pending independent diagnosis.** The selected
+score-prior target is active and closely learnable on this archive, but neither
+its direct law nor fitted endpoint establishes a native increment over P0;
+the fit does not beat the simpler H package or Bstar0. This lowers investment
+priority for unchanged T without refuting score targets in general. The
+conditional direct-H positive and retained P0/Bstar0 capabilities remain useful
+evidence; H's fitted native increment and preservation relative to direct H
+are unresolved. No cause of earlier PPO/imitation failures is identified.
+The wider question of useful learned development remains open. Independent
+ResearchCritic now reconstructs the original saved evidence in a separate
+context; final direction disposition follows that reading. No extra query,
+fit, calibration or evaluation is selected by this result.
+
+Editorial count correction: the complete reading contains25native metric series per
+contrast;27 is the command-category count. All55contrasts and every declared
+metric/vector were retained and read. No experimental exposure or result changes.

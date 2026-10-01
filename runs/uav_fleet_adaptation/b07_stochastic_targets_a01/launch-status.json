@@ -1,0 +1,11 @@
+{
+  "claim_key": "08d0c78a9f91be49c258205cd958037dd4851c1e4c598ae4fd9641ace2104f42",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/08d0c78a9f91be49c258205cd958037dd4851c1e4c598ae4fd9641ace2104f42.json",
+  "manifest_ref": "/home/fires/hmasd-wsl/runs/uav_fleet_adaptation/b07_stochastic_targets_a01/launch-manifest.json",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/08d0c78a9f91be49c258205cd958037dd4851c1e4c598ae4fd9641ace2104f42.json",
+  "pid": 1381412,
+  "runner_pid": 1381413,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-10-01T01:50:42.077574Z"
+}

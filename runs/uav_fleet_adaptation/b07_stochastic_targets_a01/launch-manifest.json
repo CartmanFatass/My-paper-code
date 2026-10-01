@@ -1,0 +1,90 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-10-01T01:50:42.066002Z",
+  "bootstrap_command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/4d911286533342c891ce01ebfb651e6e/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/4d911286533342c891ce01ebfb651e6e/experiments/candidates/uav_fleet_adaptation/b07_stochastic_targets/run.py",
+    "--output",
+    "/home/fires/hmasd-wsl/runs/uav_fleet_adaptation/b07_stochastic_targets_a01",
+    "--",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/uav_fleet_adaptation/b07_stochastic_targets_a01",
+    "--launch-sha",
+    "c2b2cd27276e49458b18ca69216b3525f281ea47",
+    "--seed",
+    "29711000"
+  ],
+  "claim_key": "08d0c78a9f91be49c258205cd958037dd4851c1e4c598ae4fd9641ace2104f42",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/08d0c78a9f91be49c258205cd958037dd4851c1e4c598ae4fd9641ace2104f42.json",
+  "command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/4d911286533342c891ce01ebfb651e6e/experiments/candidates/uav_fleet_adaptation/b07_stochastic_targets/run.py",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/uav_fleet_adaptation/b07_stochastic_targets_a01",
+    "--launch-sha",
+    "c2b2cd27276e49458b18ca69216b3525f281ea47",
+    "--seed",
+    "29711000"
+  ],
+  "command_sha256": "d3e4ace30b3121dde2d9aee6029574de1f847508e3ff3ec6ad7561360983192d",
+  "control_observation": {
+    "observed_at": "2026-10-01T01:50:41.843466Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "84dccca60cc39c9d8d3eac99f7f478fe4fd010ac"
+  },
+  "control_root": "/home/fires/hmasd-wsl",
+  "created_at": "2026-10-01T01:50:41.863203Z",
+  "cwd": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/4d911286533342c891ce01ebfb651e6e",
+  "direction": "uav_fleet_adaptation",
+  "host_identity": "Jacob",
+  "identity_command": [
+    "/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10",
+    "experiments/candidates/uav_fleet_adaptation/b07_stochastic_targets/run.py",
+    "--launch-sha",
+    "c2b2cd27276e49458b18ca69216b3525f281ea47",
+    "--seed",
+    "29711000"
+  ],
+  "lead": "Codex DM (native child)",
+  "manifest_ref": "/home/fires/hmasd-wsl/runs/uav_fleet_adaptation/b07_stochastic_targets_a01/launch-manifest.json",
+  "node": "local_linux",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/08d0c78a9f91be49c258205cd958037dd4851c1e4c598ae4fd9641ace2104f42.json",
+  "output_root": "/home/fires/hmasd-wsl/runs/uav_fleet_adaptation/b07_stochastic_targets_a01",
+  "preflight": "/home/fires/hmasd-wsl/runs/uav_fleet_adaptation/b07_stochastic_targets_a01/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+      "kind": "linux_pid_start_ticks",
+      "pid": 1381412,
+      "session_id": 1381412,
+      "start_ticks": 25803739
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 1381412,
+    "process_group_id": 1381412
+  },
+  "process_exit": "/home/fires/hmasd-wsl/runs/uav_fleet_adaptation/b07_stochastic_targets_a01/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+      "kind": "linux_pid_start_ticks",
+      "pid": 1381413,
+      "session_id": 1381412,
+      "start_ticks": 25803743
+    },
+    "pid": 1381413,
+    "process_group_id": 1381412,
+    "supervisor_pid": 1381412
+  },
+  "schema_version": 1,
+  "sha": "c2b2cd27276e49458b18ca69216b3525f281ea47",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/4d911286533342c891ce01ebfb651e6e",
+  "stderr": "/home/fires/hmasd-wsl/runs/uav_fleet_adaptation/b07_stochastic_targets_a01/stderr.log",
+  "stdout": "/home/fires/hmasd-wsl/runs/uav_fleet_adaptation/b07_stochastic_targets_a01/stdout.log"
+}
