@@ -6170,3 +6170,138 @@ Complete measured chain:15.274930415s wall /14.726038353s CPU including parent a
 **Engineering publication/cleanup and scientific acceptance, 2026-10-01 05:52UTC.** Engineering compact evidence is published at `29ed7d060e9e590d43910896fb7126c0281b3664`. After collection/hash verification and terminal reconciliation, the maintained snapshot collector initially refused inspection of protected own process660; its supported `--sudo-process-scan` preview then verified eligibility and apply removed `/home/wu/projects/HMASD/.git/hmasd-launch-sources/b8223a56fb4b400eb4218a7076e15785` plus Git worktree registration. Allocated target bytes fell817553408→0: **817,553,408bytes reclaimed**, no backup/copy, no remaining engineering snapshot blocker. Original claim, manifest, full raw and compact result remain retained.
 
 Fresh scientific-launch MemAvailable was15,260,557,312bytes (>6GiB); the kernel independently admitted the unchanged source `94f08627050b7d495b4c9e9af18db02ab17a5c1e` for exactly the frozen32-world/96-mission plan with4 worker/2 reader processes. Native admission is accepted and runner/supervisor were running at05:52:18UTC. Scientific manifest: `runs/uav_fleet_transmission/b08_anonymous_memory_a01/launch-manifest.json`; same-handle operation ends `157e0eeeb9db7a4a3ced5cca257604b2f626f7cbcfadf364ee81fdc47618d274.json`. Deterministic observation is armed with the native DM turn kept active. No scientific result is read at acceptance; no duplicate/retry/sweep or extra environment branch is authorized by it. The complete reader runs once after accepted workers finish.
+
+
+**B08 accepted-operation checkpoint, 2026-10-01 06:17UTC.** Observer generation27 checkpoint was drained and consumed; same job/operation rearmed28, no worker restart or new launch. Native identity remained running/consistent, observer errors0; queue delivery again rejected−32600 and the active DM read the checkpoint locally. Progress reported67/96 completed missions and71 submitted (4 active), with no failure record. Fresh MemAvailable13,089,164KiB and load5.14 on the20-core node indicate no resource-pressure reason to alter the selected work. Completed examples retained full3000 steps and expected controller counts; the partial panel is not interpreted or used to change addresses, arms or reader. Continue accepted collection and single full reader unchanged; the original wall estimate needs no extension.
+
+
+<a id="b08-complete-reading"></a>
+### 2026-10-01 — B08 complete native panel and full reader
+
+**Technical completion and scope.** The selected96 scientific missions all reached the original3000-step native horizon and truncated there:288000 scientific transitions,192 environment constructions,96 explicit resets,0 fits/labels/optimizer updates, no early terminals, no replacement worlds, no worker errors/unstarted jobs. Native exit0 was witnessed at06:36:00.512UTC with absent runner/supervisor and consistent operation identity. Observer28 READY was drained/consumed, rearmed29 and stopped after collection; queue delivery again failed−32600 while direct same-session reading succeeded. Exact source remains `94f08627050b7d495b4c9e9af18db02ab17a5c1e`; engineering evidence is separately published at `29ed7d060e9e590d43910896fb7126c0281b3664`.
+
+The single full reader is **VERIFIED**: all96 actual C/M/V proposal/feedback streams replayed from stored lawful inputs, all288000 native transitions checked, and every world has exactly equal full3001-boundary exogenous user paths across all three arms. All actual targets, track/provenance/events, proposed/submitted actions, native motion, route topology/capacity, recorded service, power/battery/reward components and termination pass the declared checks. No new native/RF/allocator branch or extra policy replay was used. Directed routes retain native pre-energy timing; this is not an independent full RF resimulation. Both scientific execution and reading each used288000 proposal/shield calls,9600 plans,195200 canonicalizations,192000 associations,3200 projection arrays. Combined with engineering, the bill is288244 native transitions,576488 proposal/shield calls,19224 plans,390656 canonicalizations,384244 associations,6406 projection arrays,200 constructions/100 resets; separately counted synthetic tests add197 canonicalizations,217 associations,8 projections and no native effects.
+
+**Complete value.** These are fixed ordinary programs in32 fresh paired worlds, not training replications or confirmation. All intervals below are the predeclared descriptive paired-world Student-t95(df31); they do not establish equivalence or adjust for secondary endpoint multiplicity. J and service share components. All mission lengths equal3000, so fixed-H normalization has no survival selection.
+
+| Level (world mean) | C: exact P_BS | M: anonymous memory | V: same memory + CV |
+|---|---:|---:|---:|
+
+| Total native J | 2084.266560230 | 2077.595646309 | 2056.185785519 |
+
+| Cumulative QoS | 2132.236329441 | 2137.995879857 | 2105.178165012 |
+
+| QoS / planned3000 | 0.710745443 | 0.712665293 | 0.701726055 |
+
+| Service-equivalent user-seconds | 63967.089883237 | 64139.876395716 | 63155.344950359 |
+
+| Within-mission QoS p10 | 0.507720554 | 0.536128180 | 0.459311215 |
+
+| Return-constraint cost sum | 8.710287594 | 14.925530425 | 9.221167520 |
+
+| Reserve<=.10 UAV-seconds | 366.968750000 | 449.875000000 | 364.062500000 |
+
+| Travel per UAV, metres | 19138.359207271 | 19258.944108039 | 19412.100562834 |
+
+| Native propulsion, Wh | 1384.799065640 | 1386.525410874 | 1388.735985017 |
+
+| Controller proposal CPU, seconds | 0.901292428 | 7.849351104 | 7.857565836 |
+
+| Whole episode worker CPU, seconds | 84.910024377 | 92.878781109 | 92.496012170 |
+
+
+| Contrast | Total J mean[t95] | J +/- worlds | Cumulative QoS mean[t95] | Service +/- worlds |
+|---|---|---:|---|---:|
+
+| M-C | -6.670913920 [-38.131470228,+24.789642388] | 14/18 | +5.759550416 [-22.207639999,+33.726740831] | 17/15 |
+
+| V-M | -21.409860790 [-67.939166140,+25.119444559] | 14/18 | -32.817714845 [-74.706679377,+9.071249686] | 14/18 |
+
+| V-C | -28.080774710 [-63.334811486,+7.173262065] | 13/19 | -27.058164429 [-63.646875702,+9.530546843] | 11/21 |
+
+
+No tested increment establishes useful complete J/service improvement. M has a small positive service mean with uncertain sign and a negative J mean; V has negative J/service means against both M and C with intervals crossing zero. This does not prove zero effect or general harm. The unchanged total-zero-service duration is33.125s per world on average (maximum167) in every arm. All cutoff/depletion event totals are0, but reserve and service-tail consequences remain. V−M within-mission QoS p10 is−.076816965 [−.132873124,−.020760806] (22 worse/10 better worlds); that is an adverse secondary descriptor, not a corrected primary discovery. V−C route availability is−256.0625 UAV-seconds [−489.784921,−22.340079]. Native J also depends on endogenous return cost: M−C mean return cost+6.215242831 [−4.4825022,+16.9129879], V−M−5.704362904 [−16.1936345,+4.78490868]. These secondary reductions do not identify a causal bottleneck.
+
+**Positive and adverse cases stay visible.** World29880014 gives M−C J+256.148560/service+257.941425, but V−M J−313.228742/service−315.518164; QoS p10 C/M/V=.166667/.568617/.133333. World29880016 gives V−M J−287.089800/service−303.625606 although V has lower return cost/reserve exposure: a loss cannot be blamed solely on greater energy risk. World29880002 gives M−C service+17.074307 but J−211.022197, alongside return-cost31.056429→145.104681 and reserve UAV-seconds1437→3606; V repairs much of that J loss without a service gain. World29880020 gives V−C J+192.392126/service+201.448003, while its V−M J+151.217742 accompanies service−2.811563. The full signed32-world table below and the per-world records preserve both kinds of outcome. C/M/V worst single-world J levels are1614.952505/1625.689305/1672.620765, but their p10 J levels are1827.380009/1836.391114/1756.663926; a favorable minimum does not settle the tail comparison. Maximum low-reserve spells are571/507/263s and minimum final battery ratios .086859612/.076362999/.087370803. None is adopted as a new safety threshold.
+
+**Representation, exposure and native consequence are distinct.** M appended1226 old points over661/3200 plans; V appended1259 over684/3200. Each changed actual physical motion in all32 worlds. M−C first physical divergence is boundary241–1771, median1381; V−M and V−C are boundary61–151, median91. Proposal/submitted divergence precedes each by one primitive tick. These are actual common-path first divergences, not shadow plans on other arms' later trajectories. V applies68859 nonzero-velocity projections among68979 forecast origins; mean per-world projected displacement is33.363954m and the largest point displacement is131.753265m. The primitive history is used and affects control; a nonactivation explanation is inconsistent with these observations.
+
+All68979 V forecast origins are truth-bound and evaluated on the same identified user at t+15, with0 ambiguous/unbound/future-censored forecast origins,1259 remembered origins,68030 better/829 worse/120 equal errors versus holding that same point. Point-weighted mean error is**.732951491m versus33.218153140m**; RMSE5.567978867 versus34.301469274m. Every world's forecast mean error is lower; nevertheless rare errors remain (largest retained error158.257441m in world29880005,t2190,age27, versus held100.528970m). M/V current-point totals2041510/2042835 include11 ambiguous points each; reader-detected identity switches5/6 and reidentified births1842/1853 remain explicit, with no unbound current points or duplicate bound track-times. This supports an effective geometric representation in this motion law, not perfect identity or the claim that rare errors cannot affect value. It neither localizes the native losses to tracking nor proves the fixed midpoint/centroid interface is their unique cause. Accuracy is computed on V's own policy-induced observations; it is descriptive, not a mediation experiment or an oracle actor.
+
+**Complete cost and retention.** Scientific chain CPU9493.606079707s (2.637113h), wall2559.184692814s (42.653078min); worker body sum8649.114165002s/reaped8660.112064s and reader body825.006005005s/reaped829.340495s, plus parent4.153520707s. Including bounded engineering, full measured execution/readback CPU9508.332118060s (2.641203h). Admission/network/synthetic checks, source/design/literature/support/publication are additional and not completely metered, not zero. The prospective3–10CPU-hour range was an estimate, not a minimum cost or result criterion. RSS maxima: worker593456KiB, reader586384KiB, parent479068KiB (per-process peaks, not a measured simultaneous total). Controller proposal CPU per episode grows roughly.90→7.85s with primitive memory; the CV arithmetic itself adds little to M's measured controller CPU. Whole native worker CPU means84.91/92.88/92.50s include the complete environment path and differ from controller-only scope.
+
+Full uncompressed scientific arrays total6,097,569,216bytes;96 NPZ files1,044,210,313stored/1,044,398,080allocated bytes. The192 manifest raw/metadata entries total1,044,239,817stored/1,044,791,296allocated bytes; all were independently re-hashed against the manifest after completion. The canonical run has1,046,528,000 allocated file bytes including compact outputs/read progress. All11 local compact JSON files match remote SHA256; bulk has one canonical copy at `/home/wu/projects/HMASD/runs/uav_fleet_transmission/b08_anonymous_memory_a01/`. Reader hash `303a7b6abaab626b2fddd22d168f0e9687aa0b40c84f7908e3b902175e223020`; summary `7925693a5993804644f42ad81f4c3ee91eee978c35e5b5b785076b17a798c376`. No replay was repeated for this reading, and no raw copy was created.
+
+**Current judgment before independent diagnosis.** The predicted intermediate benefit is present: ordinary legal history yields accurate short-horizon geometry and materially different trajectories. Useful complete native service/J benefit is not established for either prescribed package. This weakens the specific chain from better user-location prediction through unchanged H1 planning to complete value; it leaves the broader value of history and different task-relevant uses unresolved. The fixed purchase selected by Root is complete; it grants no extra worlds, tuning, S4, learner or confirmation. Dedicated independent Scientific Reviewer has the original contract/supporting and adverse evidence plus full results; its original diagnosis and the resolved investment/retention choice will be appended here before final standing publication.
+
+**All32 signed paired effects (total J / cumulative QoS).**
+
+| World | M−C J / QoS | V−M J / QoS | V−C J / QoS |
+|---|---:|---:|---:|
+
+| 29880001 | -93.980228 / -94.738402 | +107.401428 / +103.772267 | +13.421200 / +9.033865 |
+
+| 29880002 | -211.022197 / +17.074307 | +220.480629 / -27.902415 | +9.458432 / -10.828108 |
+
+| 29880003 | +53.353270 / +35.247413 | -149.351629 / -136.154962 | -95.998359 / -100.907550 |
+
+| 29880004 | -28.048796 / -22.668649 | +151.393723 / +149.207564 | +123.344927 / +126.538915 |
+
+| 29880005 | +119.960444 / +7.488451 | -38.786326 / -22.597063 | +81.174118 / -15.108612 |
+
+| 29880006 | -9.316581 / -2.833214 | +41.737170 / +38.048091 | +32.420589 / +35.214877 |
+
+| 29880007 | -44.515244 / -45.249521 | +17.159114 / +22.927438 | -27.356130 / -22.322083 |
+
+| 29880008 | -96.628694 / +5.715274 | +82.248904 / +63.906749 | -14.379790 / +69.622023 |
+
+| 29880009 | +119.252691 / +33.395834 | -26.567927 / +66.308276 | +92.684764 / +99.704110 |
+
+| 29880010 | -0.429143 / +0.833440 | -55.041267 / -55.888222 | -55.470410 / -55.054782 |
+
+| 29880011 | +17.281879 / +32.595157 | +27.829646 / +14.493321 | +45.111525 / +47.088478 |
+
+| 29880012 | +85.171996 / +92.297188 | -68.054904 / -72.825558 | +17.117092 / +19.471630 |
+
+| 29880013 | +17.840266 / +28.878584 | -119.591778 / -131.886747 | -101.751512 / -103.008163 |
+
+| 29880014 | +256.148560 / +257.941425 | -313.228742 / -315.518164 | -57.080182 / -57.576739 |
+
+| 29880015 | -70.047830 / -74.028661 | +15.743099 / +15.813539 | -54.304731 / -58.215122 |
+
+| 29880016 | +48.902394 / +28.919579 | -287.089800 / -303.625606 | -238.187406 / -274.706027 |
+
+| 29880017 | -71.027273 / -68.022150 | -40.255637 / -43.580975 | -111.282910 / -111.603125 |
+
+| 29880018 | +39.549606 / +40.784959 | -48.743527 / -48.113549 | -9.193922 / -7.328589 |
+
+| 29880019 | +10.109793 / +10.120225 | -100.459622 / -100.413428 | -90.349829 / -90.293203 |
+
+| 29880020 | +41.174384 / +204.259566 | +151.217742 / -2.811563 | +192.392126 / +201.448003 |
+
+| 29880021 | -20.706622 / -21.215954 | +53.527567 / +102.118149 | +32.820945 / +80.902196 |
+
+| 29880022 | -99.789449 / -79.323863 | +156.793103 / +72.098390 | +57.003654 / -7.225473 |
+
+| 29880023 | -92.920489 / -88.877897 | -23.751435 / -21.845779 | -116.671924 / -110.723676 |
+
+| 29880024 | +3.936666 / +4.046925 | -34.833790 / -35.910581 | -30.897124 / -31.863656 |
+
+| 29880025 | +10.736800 / +10.696911 | +46.931460 / +47.967204 | +57.668260 / +58.664115 |
+
+| 29880026 | -114.834614 / -115.818648 | +72.031282 / +115.605998 | -42.803331 / -0.212650 |
+
+| 29880027 | -2.305454 / -2.968069 | -138.626634 / -137.448650 | -140.932088 / -140.416719 |
+
+| 29880028 | -68.455776 / -11.894754 | +155.892477 / +113.215371 | +87.436701 / +101.320616 |
+
+| 29880029 | +98.408092 / +100.443206 | -191.238489 / -190.267902 | -92.830397 / -89.824697 |
+
+| 29880030 | -21.102919 / -19.978394 | -189.574240 / -188.890389 | -210.677159 / -208.868783 |
+
+| 29880031 | -49.623445 / -38.963846 | -14.487221 / +3.645909 | -64.110666 / -35.317937 |
+
+| 29880032 | -40.541332 / -39.850810 | -145.819920 / -143.613587 | -186.361252 / -183.464397 |
+
+
+**Additional mode/charging reading from the same complete records.** Mean feedback-mode UAV-time fractions C/M/V are .354455729/.358885417/.363221354; mean entries47.21875/46.65625/46.1875 and exits40.125/39.8125/39.09375 per mission. Actual charging UAV-seconds1494.09375/1481.1875/1490.25 accompany1198.28125/1178.5/1213.375 charging spells; mean one-tick-spell shares .982605436/.982493298/.984095353 retain the inherited charging/recapture behavior. Mean wait ticks5197.6875/5367.625/5467.40625 and post-exit recaptures39.21875/38.65625/38.1875 are recorded rather than concealed by service/J. The proposed/submitted shield remains part of every package. None of these descriptive mode differences identifies the source of the service loss or makes P_BS a default-safe reference.
