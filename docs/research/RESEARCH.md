@@ -2090,15 +2090,19 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 ### Parallel allocation: independent work and rolling succession
 
 <a id="root-successor-designs-20260930"></a>
-**Four native DMs own four selected, distinct studies.** `dm_fleet_adaptation` owns the two-fit
-S-prior stochastic-target comparison; `dm_fleet_transmission` owns the zero-fit H4/E/H1 local
-feedback comparison; `dm_parent_adaptation` owns exact saved-history G2/A2 computation reuse,
-with no new native steps; `dm_user_waiting` owns one zero-fit S_F:LRS physical-planning comparison
-against the paid fair-allocation references. Root selected the latter after the complete source
-assessment and original independent recommendation. Astra Max Oracle owns detailed innovation
-and independent challenge using cumulative records, all three libraries and needed primary web
-passages. Helpers are not extra DMs; four studies do not imply four simultaneously admitted
-workers. Existing leads retain question continuity. Claude's pause/ownership is unchanged.
+**Four native DMs retain four substantive assignments.** The fleet-adaptation and
+fleet-transmission DMs have completed the T/H learning and H4/E/H1 cadence studies, including
+full interpretation and independent scientific review; they finish owned publication/cleanup
+and supply bounded source/cost facts for the next question. Astra Max Oracle separately
+assesses constructive learned development and an independent temporal/deployment or broader
+UAV question using cumulative records, all three libraries and primary passages. These source
+assignments select no new queries, targets, reductions, fits, implementation or result runs;
+a justified stop remains possible. Root chooses the next investments after the full advice.
+`dm_parent_adaptation` continues the selected exact G2/A2 saved-history computation comparison,
+and `dm_user_waiting` continues the selected S_F:LRS physical-planning comparison against paid
+fair references. Helpers are not extra DMs; this allocation implies neither four admitted
+workers nor scientific value from filling capacity. Existing leads retain question continuity;
+Claude's pause/ownership and all unselected reserves remain unchanged.
 
 Root read the complete count B06, parent B07 and ordinary G B05 results, original independent
 criticisms and DM responses. It adopts the exact count-mixture and fixed learned-shortlist
@@ -2148,105 +2152,61 @@ per-step Root acknowledgment. Root owns the cross-question investment choices re
 
 <a id="stochastic-target-source-root-question-20261001"></a>
 <a id="stochastic-target-selected-root-decision-20261001"></a>
-**Selected: two fixed-data fits of a modest S-prior control change, with direct-use controls.**
-Root read the complete new Oracle recommendation, the DM's source-derived feasibility/bill and
-consequential primary passages. C's N5 `history=False` decision is source-determined by the
-student's lawful observation slice and predecision navigation. That does not prove finite-MLP
-realizability or CE convergence. P's native advantage over C and hard-continuation losses motivate
-preserving useful stochastic behavior, without identifying entropy or imitation as the cause.
+**T/H complete: retain competence and the ordinary Hdirect positive; end this target recipe.**
+Root read the full B07 result, original independent ResearchCritic answer and DM response.
+The two fits completed all16000updates/8192000presentations, followed by672H256episodes on
+32fresh worlds with two tapes. Learned T−H J is−.006345[−.014699,+.002066], T−P0 is+.000060
+[−.005529,+.005772] and H−P0 is+.006405[−.002012,+.015033]. T/H both lose mean J to paid Bstar0
+(−.017762/−.011417; intervals below zero), while retaining lower travel and different quality
+and service-tail tradeoffs. This is a fixed-parent/data comparison, not independent training
+replication, equivalence or a universal deployment ranking.
 
-For original P0's decoded FP64 law p, C's27 local four-tick scores s and selected category c,
-use r proportional to p*exp((s−max(s))/.014), then T=.9p+.1r. The matched ordinary learned
-target is H=.9p+.1delta_c. Exactly flat scores return p.copy() for T. Retain all27 ordered
-categories, physical aliases, zero support, original private one-uniform flat-CDF decoding,
-each direct teacher's actual history/navigation and private score cache. Direct T/H reuse
-MemoC's already-computed lawful features; redundant analytic-helper work must not inflate an
-amortization claim. The native conjecture is useful limited guidance beyond unchanged P,
-not higher proxy value than H: H's conditional proxy expectation is at least T's. The score is
-not native continuation value; the target TV bound of.1 does not constrain off-data fitted
-behavior or Adam parameter displacement. T/H differ in strength and fallback as well as score
-information, so their comparison identifies the complete target package, not entropy or an
-isolated full-score mechanism.
+The score tilt is active but modest:75744/81920target rows differ from P, mean TV.007285,
+and both full networks change. T fits its archive target closely, yet direct T also lacks an
+established native gain. This weakens an optimization-only rescue without identifying a common
+cause of prior learning failures. Ordinary Hdirect−P0 has conditional J+.007329
+[+.000754,+.014608], with15/32adverse worlds; it remains below Bstar0 in mean J/service and
+retains useful quality/minimum/path tradeoffs. Preserve that capability without default adoption
+or an automatic replication. Target TV≤.1 is no uniform bound on the trained policies.
 
-Reuse the paid F0 N5 archive and P0 tensors with the original zero count branch: phase sizes
-40960/61440/81920,30/20/20epochs,8000updates and4096000presentations per fit, original F0
-shuffle order, Adam/clip and full-network exposure. This is **2fits/16000updates/8192000
-presentations**, with0new acquisition or calibration. Later old rows came from F0's greedy
-predecessors, not the new teachers. Both new fits use the same soft CE: FP32 network logits
-cast to FP64, FP64 log_softmax/targets, per-row weighted sum and batch mean, with gradients
-back to FP32 parameters. Paid F0 remains the same archive/init/order/exposure hard-target
-reference, but its original FP32 hard-CE kernel differs; an F0 contrast is not a bitwise
-loss-kernel-isolated target effect. No third numerical-control refit is selected.
-
-The complete fresh panel is32common N5/U50/H256worlds with two private tapes for P0, B*0,
-paid F0, learned T/H, direct T/H, G, Q10 and Q05; deterministic C runs once per world:
-**672episodes/172032new native steps**. All arms use the B06 initializer. Equal numeric seeds
-do not pair these layouts with the completed G study. Freeze new world/tape addresses, cyclic
-arm order and world-cluster bootstrap before outcomes. The primary learnedT−learnedH native J
-is read with all retained/direct/ordinary references, service, quality, p10/minima/outages,
-travel, signed adverse worlds, target/fit activation and complete computation. Average tapes
-within worlds. One parent/data instance with two objectives is not independent training
-replication, reliability, or a claim that learning is necessary.
-
-The complete target construction pays163840target rows and at most81920shared P0 forwards;
-final T/H diagnostics pay163840endpoint rows. The worker makes112640full-C requests and at
-most225280neural rows outside fitting. The full reader reconstructs all81920old C/feature/target
-records and all928old/new files/237568saved ticks, paying194560C requests and389120neural rows,
-with0new native transitions. Source-derived uncached ceilings include3041280worker and5253120
-reader candidate paths; actual cache work and serialization/transfer costs remain measured.
-No optimizer replay, learned-history C/P shadows or counterfactual native branches are added.
-
-Root accepts **10–30 combined worker/reader CPU minutes** and **6–10 support hours** as estimates,
-not admission, caps or measured runtime; new canonical evidence is estimated.4–.8GB and process
-memory.8–1.5GiB, plus a measured temporary snapshot and necessary hash-verified input staging.
-The old F0 archive remains canonical. Broader B02–B06 plus this study would total14fits,
-2calibrations and2539560native steps, adding measured new CPU to the prior3323.067seconds;
-older B01 and other branches/support remain separate incurred costs. The support bill is the
-principal investment; Root buys it for a constructive change of learning objective with paid
-data and strong learned/direct ordinary alternatives.
-
-A useful gain beyond retained references at a worthwhile native/cost position would support
-considering a separately selected independent replication. A useful H alone favors ordinary
-preservation-plus-C supervision. Useful direct T/H without useful actors preserves an ordinary
-capability and ends this finite fitting route. Only beating damaged F0, merely preserving P,
-proxy-only gains, active adverse results or uncertainty end this purchase without automatic
-DAgger, architecture/target repair, tuning or more worlds. No positive teacher pilot is required.
-[Complete source/price and original advice retained by the DM](candidates/uav_fleet_adaptation/NOTES.md#stochastic-target-concrete-price).
-This applies familiar distillation and regularized-improvement constructions; it is not an
-algorithmic novelty claim or a transfer of native-value guarantees.
-[Policy Distillation §§3.2–4.2](https://arxiv.org/pdf/1511.06295),
-[CSIL primary pp.3–5, NeurIPS2023 id2f0435cffef91068ced08d7c7d8e643e](https://arxiv.org/pdf/2305.16498).
+Root adopts the independent stop of unchanged T/H: no extra fit, stronger tilt, DAgger,
+optimization extension or episode panel. The broader learned-development question stays open
+for the source-only Oracle reassessment above. Actual new cost is2fits/172032native steps,
+560.463enclosing CPU seconds/561.756wall seconds, plus incompletely metered support. Direct
+programs compute both target vectors before deploying one; measured direct CPU is honest
+implementation cost, not a minimal baseline or demonstrated net amortization. All adverse
+worlds and earlier outages survive the new panel's absence of total-service outages.
+[Complete result and original review](candidates/uav_fleet_adaptation/NOTES.md#b07-original-independent-result-review),
+[DM disposition](candidates/uav_fleet_adaptation/NOTES.md#b07-independent-disposition),
+[retired exact selection and price](archive/2026-10-01/RESEARCH-stochastic-target-and-cadence-completion.md#retired-stochastic-target-selection).
 
 <a id="temporal-source-allocation-20261001"></a>
 <a id="temporal-use-and-economy-selected-20261001"></a>
-**Selected: local feedback cadence and exact planning economy.** Root read both complete DM
-source assessments and the entire original Astra Max answer, adopting its consecutive-tick
-trigger and nonduplicative saved-history reader. The initial parent timing proposal overlapped
-an already-declined purchase; its explicit correction is preserved with the full review.
-[Complete original question, correction, answer and Root decision](archive/2026-10-01/RESEARCH-temporal-use-and-planning-economy.md#decision).
+**Cadence complete; exact planning economy remains selected.** Root read the complete Fleet
+B06 result, original independent ResearchCritic answer and DM response. It adopts the fixed
+cadence stop and retains E as a conditional lower-travel option. With1120H256episodes/
+286720native steps/0fits, E−H4 cuts mean S_L0/S_L1 path by1211.464/1600.510m per UAV
+(about41%/44%), while J and service intervals remain unresolved. All student E episodes have
+consequential extra queries, but S_L0's19-tick outage remains; the first extra query there is
+at tick30. The trigger's zero-plateau exposure limitation is not a failed implementation or
+proof of first-transition protection.
 
-Fleet B06 compares C/Q10/Q05/G/S_L0/S_L1 under H4, bounded event E and H1, plus paid Bstar_L0/T2
-at H4:32fresh worlds, two stochastic tapes, deterministic C once per cadence/world,
-**1120H256episodes/286720native steps/0fits**. H4 queries at absolute0,4,…; H1 queries each tick.
-E retains every H4 query and permits one extra same-parent query per UAV/block when current
-local count falls below the immediately previous tick. Update count every tick, spend the
-allowance even if category/motion is unchanged and hold the replacement only until the next
-original boundary. Own count is decoded from positive user-slot fields and capped at ten;
-a local decline can be a beneficial handoff and does not protect the first lost transition.
+E−H1 improves mean J/service and lowers measured CPU for both students, at greater travel;
+H1 retains lower-travel, quality and outage exceptions. Every parent, including deterministic
+C, loses mean J with H1 versus H4, and ordinary E also lowers travel. Cadence-dependent motion
+and visitation are a plausible simpler account, not an isolated mechanism. S still retains
+conditional J/service increments over matched G/E, with quality losses; Q10/E comparisons and
+all adverse worlds remain visible. No reward-preservation, energy, reliability, learned-timing
+or training-population claim follows. Complete cost is755.536CPU/760.112wall seconds, plus
+incompletely metered support; each full reader query is paid even when deployment cached it.
 
-A versioned adapter preserves current-only state, original features/actor arithmetic/private
-caches, actual-tick indexed draws and one navigation update per real query. C/G retain their
-four-step prediction horizon under shorter execution; frozen modules and T/H remain unchanged.
-Primaries are each student's E−H4/E−H1 with matched ordinary references, H1−H4, complete
-J/service/quality/tails/outages/travel/cost and all adverse worlds. Average tapes within worlds;
-this adds no training replication or individual-user-continuity evidence. Separate count loss,
-extra query, category change and actual remaining-motion change. Buy no Bstar E/H1 variants,
-old-outage-selected panel, tuning or native pilot. Full reader reconstructs every actual query.
-Root accepts estimated **8–35combined CPU minutes/6–10support hours**, .7–1.3GBraw and
-.6–1.2GiBmemory plus1–2GBsnapshot; the worker ceiling is808960queries (501760ordinary/307200student),
-with corresponding full reader work. The inherited8fits/2calibrations/1794048steps/2483.157CPU-s
-remain paid. A useful ordinary result is valid; adverse, sparse, unresolved or H1-preferable
-outcomes can end this fixed purchase without automatic termination learning or extra worlds.
+No threshold sweep, extra worlds, Bstar cadence variant or termination fit follows. A concrete
+service floor, travel budget or query constraint could support a future use decision without
+requiring monetary prices for every component; no such new contract is invented here.
+[Full result and independent disposition](candidates/uav_fleet_transmission/NOTES.md#b06-complete-reading),
+[original complete selection review](archive/2026-10-01/RESEARCH-temporal-use-and-planning-economy.md#decision),
+[retired cadence selection](archive/2026-10-01/RESEARCH-stochastic-target-and-cadence-completion.md#retired-cadence-selection).
+The continuing B08 contract below is unchanged and was not retired with completed cadence work.
 
 Parent B08 compares original/reuse G2 and A2 on all16original B04 worlds:
 **64complete H500 controller replays/0new native steps, worlds or fits**. Fresh private state and
