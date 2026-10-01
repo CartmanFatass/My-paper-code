@@ -1503,3 +1503,64 @@ the source identities and reject optimized Python that would disable inherited a
 The main reader creates no environment or new trajectory. It verifies all expected
 program/world rows and saved artifact identities, then routes to the full inherited
 native/model/C/outcome checks; no selected-candidate shortcut was introduced.
+
+### H8 prelaunch refusal and bounded admission repair
+
+Published source `c83318a7752c146400abcdb4ffadcc58402d5eb7` was submitted through
+configured wsl_4070 supervisor `rfinfo-b02-check-a01` at 13:09:22 UTC. Its command
+ended after 13 s with exit 4 and the exact refusal:
+
+> hmasd launch refused: runner must contain exactly one require_admission(__file__, direction='uav_radio_information_cost') call before it can be spawned
+
+This is a launcher/static-interface defect, not a scientific negative. The common
+entry helper did call admission before effects, but the launcher's actual AST contract
+requires a direct literal call in each runner file. The earlier engineering review and
+mocked tests missed this reachable incompatibility. I read `_validate_guard_contract`
+in the maintained launcher and assigned a bounded repair: parse first, call admission
+directly in each check/run/read entry, then dispatch through the common execution helper;
+replace the existing admission test with checks against the actual static validator.
+The same eight data-only tests and same Reviewer cover the correction; no extra kernel
+suite, native stream, model query or new scientific choice is purchased.
+
+The remote output directory was absent, no native claim existed, and the supervisor
+was terminal/inactive. Thus actual exposure is 0 episodes/steps/fits/queries and no
+accepted native handle exists to resume or duplicate. The explicit refusal record is
+in `runs/uav_radio_information_cost/b02_integrated_package_check_a01/launch-refusal.json`.
+The source-only snapshot `f90ed2758c0a4c8a9e3629a6387e7ae1` remains eligible for the
+supported unclaimed-source cleanup after checks; it is not scientific evidence.
+The corrected first actual H8 check will use fresh tag
+`b02_integrated_package_check_a02` and new published source; main/read tags and all
+66 episodes/16,400 native steps/0 fits remain unchanged. Additional source/review/support
+time is real and incompletely metered, not erased by the zero scientific exposure.
+
+Remote object fetch succeeded at this source. Git's background autopack emitted the
+existing commit-graph warning for missing object
+`e0b4af9d04f8a4a53368e3ca0055007c82141449`; it did not prevent source resolution or
+snapshot creation. Root was informed; this DM did not modify shared Git metadata.
+
+The supported unclaimed-source collector found that exact source snapshot eligible,
+then removed it under the shared Git writer lock with the documented read-only sudo
+process scan. Measured allocated bytes fell from 819,789,824 to 0; the target is absent,
+net 819,789,824 bytes reclaimed, no cleanup blocker. The refusal record and published
+source remain. No replacement backup or copied evidence tree was created.
+
+The bounded repair changed only common entry.py, the three entrypoints and the existing
+admission test. Eight data-only cases passed in 1.69 s, now exercising the actual launcher
+validator for all three entries, argument-first behavior and source-mismatch refusal.
+No scientific call occurred. The same independent Reviewer's complete corrected answer:
+
+> The launch-blocking defect is repaired. **No material finding remains in the five-file repair.**
+>
+> I missed the launcher's static validator in my earlier review; runtime admission ordering alone was insufficient.
+>
+> All three corrected entrypoints now pass the actual `_validate_guard_contract` in my read-only check. Parsing precedes admission, and source verification/scientific execution follow it. AST and diff checks passed. Reviewed regression evidence: **8 tests passed in 1.69 s**, supplied by the implementer.
+>
+> No scientific execution occurred. The actual launch handshake and priced H8 integration remain untested by this review.
+
+DM read the five-file diff and accepts the direct-entry repair and corrected H8 attempt
+at the new source. Numerical inputs, particle/physical roots, program rights, panel,
+companion definitions and fit/step bill are unchanged. The initial 13 s refusal and
+additional 1.69 s data-only test suite remain actual overhead; source/review/publication
+time is not fully measured. No repeated numerical check or additional native episode is
+implied. Root's initial remote control-row synchronization is complete; actual-node
+admission still runs immediately before the scientific child is released.

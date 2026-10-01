@@ -5,11 +5,12 @@ import os
 from pathlib import Path
 import time
 
-from .config import DIRECTION, specification
+from .config import specification
 from .source import verify_sources
 
 
-def main(script, mode, argv=None):
+def parse(mode, argv=None):
+    """Validate CLI and configure thread limits before admission or imports."""
     started = time.perf_counter()
     parser = argparse.ArgumentParser(description={
         "run":"B02: fixed 64 H256 episodes, zero fits",
@@ -38,8 +39,12 @@ def main(script, mode, argv=None):
     for key in ("OMP_NUM_THREADS","OPENBLAS_NUM_THREADS","MKL_NUM_THREADS",
                 "NUMEXPR_NUM_THREADS","VECLIB_MAXIMUM_THREADS"):
         os.environ[key] = "1"
-    from scripts.hmasd_admission import require_admission
-    admission = dict(require_admission(script,direction=DIRECTION))
+    return args, started
+
+
+def execute(mode, args, admission, started):
+    """Run only after the entrypoint's literal admission call succeeds."""
+    admission = dict(admission)
     if admission["sha"] != args.launch_sha:
         raise ValueError("admission/source mismatch")
     verify_sources()

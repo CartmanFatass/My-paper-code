@@ -1,0 +1,32 @@
+{
+  "status": "PRELAUNCH_REFUSED",
+  "source": "c83318a7752c146400abcdb4ffadcc58402d5eb7",
+  "node": "wsl_4070",
+  "supervisor": {
+    "task": "rfinfo-b02-check-a01",
+    "status": "failed",
+    "exit_code": 4,
+    "pid": 1251924,
+    "uptime_seconds": 105,
+    "tmux_active": false
+  },
+  "supervisor_log": "=== Task 'rfinfo-b02-check-a01' started at 2026-10-01T21:09:22+08:00 ===\nhmasd launch refused: runner must contain exactly one require_admission(__file__, direction='uav_radio_information_cost') call before it can be spawned\n=== Task 'rfinfo-b02-check-a01' exited with code 4 at 2026-10-01T21:09:35+08:00 (Duration: 13s) ===\n",
+  "native_output_existed": false,
+  "native_claims": [],
+  "new_native_steps": 0,
+  "new_episodes": 0,
+  "fits": 0,
+  "query_exposure": "no native/model/controller/allocator/RNG calls; guard refused before runner spawn",
+  "provisional_cause": "shared entry helper lacks direct literal admission call in each wrapper",
+  "disposition": "bounded entrypoint repair then prospectively named corrected H8 check; no accepted operation to repeat",
+  "observed_at": "2026-10-01T13:11:08.298311+00:00",
+  "source_snapshot_cleanup": {
+    "target": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/f90ed2758c0a4c8a9e3629a6387e7ae1",
+    "mode": "supported unclaimed-source preview then apply with read-only sudo process scan",
+    "before_allocated_bytes": 819789824,
+    "after_allocated_bytes": 0,
+    "net_reclaimed_bytes": 819789824,
+    "absent": true,
+    "tool_blocker": null
+  }
+}

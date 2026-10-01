@@ -9,8 +9,11 @@ if str(ROOT) not in sys.path:
 
 
 def main(argv=None):
-    from experiments.candidates.uav_radio_information_cost.b02_integrated_package.entry import main as entry
-    return entry(__file__,"read",argv)
+    from experiments.candidates.uav_radio_information_cost.b02_integrated_package.entry import parse, execute
+    args, started = parse("read",argv)
+    from scripts.hmasd_admission import require_admission
+    admission = require_admission(__file__, direction="uav_radio_information_cost")
+    return execute("read",args,admission,started)
 
 
 if __name__ == "__main__":

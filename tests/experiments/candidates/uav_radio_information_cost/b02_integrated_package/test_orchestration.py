@@ -235,6 +235,9 @@ def test_complete_reader_routing_and_incomplete_identity_failures(tmp_path,monke
 
 def test_admission_precedes_effects_and_fixed_check_route(tmp_path,monkeypatch):
     import scripts.hmasd_admission as admission
+    from scripts.hmasd_launch import _validate_guard_contract
+    from experiments.candidates.uav_radio_information_cost.b02_integrated_package import run, check, read
+    runners = {"run":run,"check":check,"read":read}
     events = []
     monkeypatch.setattr(admission,"require_admission",lambda script,**kw:
         (events.append(("admit",script,kw)),{"sha":"a"*40})[1])
@@ -243,16 +246,26 @@ def test_admission_precedes_effects_and_fixed_check_route(tmp_path,monkeypatch):
     monkeypatch.setattr(study,"run_check",lambda *args:events.append(("check",)) or {"status":"VERIFIED_COMPLETE"})
     monkeypatch.setattr(reader,"read_result",lambda *args:events.append(("read",)) or {"status":"VERIFIED_COMPLETE"})
     for mode,seed in (("run",29661000),("check",29661900),("read",29661000)):
+        runner = runners[mode]
+        _validate_guard_contract(Path(runner.__file__),config.DIRECTION)
         args = ["--out",str(tmp_path/mode),"--seed",str(seed),"--launch-sha","a"*40]
         if mode == "read":
             args += ["--generic-summary",str(tmp_path/"unused"),"--worker-summary-sha256","c"*64,"--worker-launch-sha","d"*40]
         events.clear()
-        entry.main(mode+".py",mode,args)
+        runner.main(args)
         assert [x[0] for x in events] == ["admit","source",mode]
+        assert events[0][1:] == (runner.__file__,{"direction":config.DIRECTION})
+        # Admission failure must prevent the source guard and execution helper.
+        with monkeypatch.context() as refused:
+            refused.setattr(admission,"require_admission",lambda *a,**kw:{"sha":"e"*40})
+            events.clear()
+            with pytest.raises(ValueError,match="admission/source mismatch"):
+                runner.main(args)
+            assert events == []
         events.clear()
         args[args.index("--seed")+1] = "1"
         with pytest.raises(SystemExit):
-            entry.main(mode+".py",mode,args)
+            runner.main(args)
         assert events == []
 
 
