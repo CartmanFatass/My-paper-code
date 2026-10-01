@@ -4972,3 +4972,69 @@ the native conjecture. Active adverse or unresolved results end unchanged
 S_F investment. Gains with service, quality, path or deadline prices stay
 explicit operating points. No repair batch, true-state ACK, horizon sweep,
 learning, additional worlds or confirmation is selected automatically.
+
+### B06 implementation checkpoint — collection failure accounting
+
+The Implementer's modeled-state deliverable has been read and accepted
+for integration: exact B05 local LRS, private candidate copies and atomic
+executed settlement, with 26 synthetic tests passing in 1.37 seconds.
+No native query occurred. The staged 64 original S files match every
+declared length/SHA256 (78,207,842 bytes; 78,356,480 allocated file bytes,
+excluding the directory). Transfer time was not measured.
+
+A second bounded implementation task preserves the selected contract's
+paid failed-prefix accounting. Its one behavior is that any collector,
+LRS-replay or serialization failure retains the complete already-paid
+native/model/current-C counters exactly once, plus available raw prefix,
+without an automatic retry. This helper owns only new B06 `study.py`,
+`collect.py` and `test_failure_accounting.py`; the first modeled-state
+files are now DM-owned. The helper uses reported live C counters and
+saved scheduler records, retains incomplete attempts and tests only
+synthetic failure injection. No new science, frozen/shared source change,
+reader edit, Git mutation, native execution or child is permitted. DM
+continues the independent reader and accepts this bounded diff/checks.
+
+### B06 input/reader integration and engineering acceptance
+
+The bounded accounting diff is accepted after full source reading. C
+attempted/completed/failed calls and the actual source counters remain
+distinct: some frozen C counters precharge blocks, so they are not claimed
+as exact completed internal operations on an interrupted call. Collector
+and serialization failures retain available original raw and model work;
+secondary accounting/I/O failures cannot replace the primary exception.
+Worker/reader resource snapshots include imports but precede final
+artifact/publication writes, whose additional tail and support labor
+remain unmetered. They are not exact OS-exit CPU measurements.
+
+The complete synthetic suite passed64 tests in4.01 seconds; the independent
+engineering Reviewer repeated64 in5.86 seconds with no material core,
+numerical/state, reader or result-binding finding. Its reviewed19-file
+aggregate was `dea2ee8423048d23b6a65dbc349f19989c0910c5ce58a61857012a2190992d7a`.
+These checks include synthetic/model records only:0native constructor,
+reset or step,0fit and0production payload queries. Separate input-only
+verification checked the64 staged S files,192 bound fair references and
+75 unchanged scientific dependency hashes. B04 compact metadata carries
+no runtime record; B05's recorded runtime and the actual new runtime are
+preserved, without inventing B04 version measurements.
+
+The Reviewer identified a conditional launch-argument issue: the kernel
+relocates arbitrary `--baseline-s` paths into a source snapshot. The
+bounded CLI now **derives the already declared staging path from the
+kernel-preserved canonical absolute `--out` root** and exposes no
+alternate baseline CLI. Producer and reader both resolve that same
+`temp/directions/uav_user_waiting/b06/baseline_s/` under the author checkout,
+then require every original digest before queries. The reader's explicit
+worker `--generic-summary` retains its supported external-input route and
+expected digest. There is no copied payload in snapshots, new staging
+location, fallback, control-plane change or scientific revision. This
+small correction receives targeted engineering rereading before launch.
+
+Targeted review closed that path issue with no material finding. It read
+the actual proposed worker/reader argv and the launcher output remapping;
+7 protocol checks passed independently in0.17 seconds (DM pass0.15s).
+The final19-file code/test aggregate is
+`4cc75976fb3fcf2748e086802b02c457b856fe8d91c1c0ab51dcf3d3641cd2e0`.
+This DM accepts the implementation for the fixed single B06 comparison.
+Source-level integration and synthetic checks are complete; native
+collection and the full scientific reader remain unexecuted. No useful
+result, activation or deadline outcome is inferred from these checks.
