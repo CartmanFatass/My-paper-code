@@ -4062,3 +4062,54 @@ attempt; it is not a negative scientific result. The full independent scientific
 owned standing/background publication and measured exact-target cleanup complete the boundary.
 No substantial implementation, result query, fit, model query or native transition has occurred
 at the time of this prospective entry.
+
+### B06 engineering acceptance and exact input preparation — 2026-10-01 01:45 UTC
+
+The bounded Implementer delivered only the owned off-grid policy adapter and its tests;
+I read the complete diff and accept its valid-input semantics. Its 96 synthetic checks passed
+in 1.47s, covering exact old-grid diagnostics/counters, actual-clock off-grid decisions,
+fallback/navigation, private caches and RNG. Strict malformed-address validation now rejects
+bool/string/fractional inputs that the old wrapper int-coerced; the fixed production addresses
+are unchanged. No frozen C, G, S, T/H, native environment or shared runner source was edited.
+
+I authored the scheduler, contract/assets, variable-decision collector, metrics, reader and
+entrypoint. The full reader reconstructs original C at EVERY actual ordinary query, including
+deployed cache hits; it likewise rebuilds the analytic features and performs a fresh one-row
+FP32 actor call on EVERY actual student query. This makes the already-priced reader ceiling
+explicit and measures its actual source/helper/actor work separately from deployed cache cost.
+It independently reconstructs count losses, eligibility, one-extra budget, absolute deadlines,
+nav, real-tick draws/CDF categories, remaining clipped geometry and complete paired reductions.
+It verifies native telemetry, including initial/current count truth, eligibility/capacity,
+motion and native reward components; it does not independently resimulate radio physics.
+
+Self-check caught a reset-interface mismatch before any native invocation: original native
+reset returns empty per-agent info dictionaries. Initial SINR/connections are now copied from
+the native environment's evaluator attributes, and the fabricated fixture reproduces empty
+reset infos. These evaluator copies never enter the gate or actor. Full synthetic checks
+passed 107/107 in 4.26s before this source check and 107/107 in 4.13s after the correction.
+Each full integration test uses 70 H8 fabricated episodes/560 fabricated transitions; its
+failure fixture completes two fabricated transitions in three attempted calls. There are
+zero native transitions, retained-asset queries, fits, calibration or production-world queries
+in these checks. Managed pytest scratch was removed by normal teardown.
+
+Independent engineering Reviewer `/root/dm_fleet_transmission/b06_engineering_review` read
+all new modules/tests against the frozen sources, checked cadence/RNG/nav/cache/FP32 semantics,
+exposure bounds, reader reconstruction, admission order, failure records and source identities.
+Its own existing-suite rerun passed **107/107 in 4.33s**, and it verified the reset correction
+against native source. Original final recommendation: “No material finding remains in the
+reviewed B06 code.” It reported no native or production-asset execution and retained the
+radio-resimulation limit above. I accept this review; engineering approval is not scientific
+evidence. No separate preselection scientific consultation is needed: the complete applicable
+Oracle answer and my substantive response are already preserved/linked above.
+
+For local execution only, two exact 424487-byte S files were copied from their canonical
+remote locations to `temp/directions/uav_fleet_transmission/b06/assets/S_L0.pt` and `S_L1.pt`.
+Their SHA256 values are `b9e25fca68109bb50fa64fadfc90939ad6a4669058c1c0ccd1351c8bbcefe12a`
+and `cb67a3d46fe9628e1dfef1ef081b89091a13fde3a92295fe198f27555c67364d`, respectively.
+The local bindings retain canonical provenance and the runtime verifies file/tensor identity,
+architecture, endpoint and frozen optimizer-step history before loading only actor tensors.
+The paid calibration is read from its already-pinned Git blob, not recalibrated. No original
+asset was changed. These two local staging copies can be reclaimed after complete reading;
+the original canonical assets remain required consumers' evidence. Exact source publication
+precedes the single admitted local worker→reader operation; acceptance/results do not exist
+at this preparation entry.
