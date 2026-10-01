@@ -340,3 +340,126 @@ status interval,1500s checkpoint window, state directory
 First drain exposed an actual accepted/running/consistent observation, not registration alone.
 The native DM stays active through same-handle drain/rearm and full result reading. No second
 launch, retry, checkpoint selection or fit has been authorized by acceptance.
+
+<a id="b01-complete-reading"></a>
+## 2026-10-01 — B01 complete worker and complete saved-data reading
+
+The sole operation exited0 with a valid native witness at2026-10-01T14:39:48.434Z;
+the14:40:03Z status found both native processes absent and all records consistent.
+Worker is`COMPLETE`, full reader is`VERIFIED`:4started/completed fits,4,096 training
+episodes,736 endpoints,4,832 complete H256 episodes,1,236,992 native steps,
+6,184,960 UAV-ticks,1,024 directions/1,798,144 normal coordinates and64 updates.
+No production failure, retry, extra center rollout or dropped world occurred.
+All four final centers and all37 prescribed contrasts remain in
+`runs/uav_episode_policy_search/b01_episode_search_a01/publication.json`.
+
+The independent reader consumed all4,832 raw episodes and1,092 search artifacts,
+reconstructed1,551,072 physical states/7,755,360 observation rows and418,789,440
+logical power links, checked3,102,144 pre-effect attempt records and all64 updates,
+and regenerated the20,000 shared world-bootstrap samples/640,000 indices. It made
+zero native steps, fits or optimizer updates. Worker and reader each verified all81,920
+paid zero-head contexts with maximum probability error0, and the34,715 FP32 P0 parameters
+had exactly zero movement. Head/native/helper counters agreed. This establishes the specified
+executable comparison and saved-data reconstruction; scientific judgment follows separately.
+
+Checkpoint generations1/2 were drained at14:01:33/14:26:47Z and rearmed on the same handle.
+The generation3 `READY` event was read at14:40:03Z, consumed with generation4, and the observer
+stopped. Every attempted Codex queue delivery reported the known unloaded-native-child
+rejection; deterministic in-turn observation read all events, so no wake or result was lost.
+No worker or Send was repeated. The native DM remained active throughout.
+
+### Complete fixed endpoint facts
+
+All numbers below average the two private tapes within each of32 fresh worlds; C_A has one
+episode/world. Service is team users/tick; travel is metres/UAV over H256. Intervals are the
+predeclared pointwise percentile world bootstrap conditional on the realized training blocks
+and this one P0, with no training-population, simultaneous-comparison or equivalence coverage.
+
+| Final program | J | Mean service | Mean SINR quality | Travel/UAV | Team service p10 | Team service minimum |
+|---|---:|---:|---:|---:|---:|---:|
+| P0_A | .394652 |24.309570|.181059|2974.251|21.523438|12.453125|
+| Bstar0_A | .408544 |25.391479|.176878|4437.824|21.617188|12.031250|
+| Hdirect_A | .395513 |24.305725|.184108|3178.593|21.343750|12.734375|
+| G_A | .378600 |23.034607|.187053|3403.770|19.437500|12.453125|
+| C_A | .344822 |20.694092|.183683|2676.292|19.703125|12.656250|
+| P0_ZERO | .398321 |24.606323|.179440|2976.872|21.640625|13.656250|
+| Bstar0_ZERO | .414239 |25.765381|.178412|4360.296|21.757812|13.093750|
+| Hdirect_ZERO | .405459 |25.035034|.183230|2904.658|21.859375|13.937500|
+| CAL0 | .401739 |24.809265|.181365|3057.724|21.632812|12.468750|
+| CONT0 | .390615 |24.021912|.181027|2902.089|21.320312|12.359375|
+| CAL1 | .392098 |24.076599|.183417|3226.316|20.875000|12.390625|
+| CONT1 | .399490 |24.647949|.181396|3288.691|21.000000|12.140625|
+
+| Fixed contrast | Delta J [world interval] | Delta service | Lower-J worlds/32 |
+|---|---:|---:|---:|
+| CAL0−P0_A |+.007087[+.001821,+.012625]|+.499695|14|
+| CONT0−P0_A |−.004037[−.009640,+.001477]|−.287659|20|
+| CAL1−P0_A |−.002554[−.010635,+.005054]|−.232971|18|
+| CONT1−P0_A |+.004839[−.002729,+.012123]|+.338379|15|
+| CONT0−CAL0 |−.011124[−.017364,−.005093]|−.787354|23|
+| CONT1−CAL1 |+.007393[+.001157,+.013612]|+.571350|13|
+| CAL0−Bstar0_A |−.006805[−.018531,+.004295]|−.582214|16|
+| CONT0−Bstar0_A |−.017929[−.029653,−.006611]|−1.369568|23|
+| CAL1−Bstar0_A |−.016447[−.030900,−.003505]|−1.314880|21|
+| CONT1−Bstar0_A |−.009054[−.022301,+.003202]|−.743530|16|
+
+The compact publication retains the other27 contrasts, all17 outcome/diagnostic columns,
+all32 world vectors and adverse-world identities, not just this display. Every learner−G_A
+and learner−C_A J interval is positive; all four learner−Bstar0_ZERO intervals are negative.
+Learner−Hdirect_A intervals cross zero. ZERO−A J is+.003669[−.002446,+.010073] for P0,
++.005695[−.000748,+.012007] for Bstar0 and+.009947[+.001343,+.020118] for Hdirect. ZERO
+uses richer transmitter rights: mean active ticks are1276.125/1275.6875/1276.6875 of1280,
+versus1280 for every all-ON controller. The rights were never given to the learners.
+
+All736 endpoints have zero observed team-zero-service steps/streaks. This says nothing about
+individual-user continuity or unobserved worlds. CAL1−P0_A team-service-p10 is
+−.648438[−1.203125,−.156250]; CONT1's corresponding mean is−.523438 with an interval crossing
+zero. CAL1/CONT1 travel increments over P0_A are+252.065[+115.562,+393.372]/
++314.440[+148.452,+489.591]m per UAV. CAL0/CONT0 travel differences are+83.473/−72.161m,
+both unresolved by their world intervals. No physical-energy conclusion is attached.
+
+Movement is observed, not an inactive update: final CAL0/CONT0/CAL1/CONT1 parameter L2 is
+.195037/2.333289/.209392/2.370377, with all28/3484 coordinates nonzero respectively.
+Their mean same-history category changes are3.609375/3.9375/11.203125/13.71875 of320
+actor decision clocks, and one-tick clipped-command differences are13.625/15.5625/43.375/
+52.828125 of1280 UAV-ticks. These are measured at candidate-visited histories and do not
+identify the usefulness or necessity of hidden-state context, or a shadow-policy trajectory.
+
+### Actual cost and unique retained evidence
+
+Worker CPU1691.708488s, full-reader CPU2137.241428s, complete-chain CPU3829.297205s
+(1.063694h), chain wall3663.596882s(1.017666h). Sequential process peak RSS was472,000KiB
+at worker completion and500,924KiB after reader(0.47772GiB). Staging, launcher preflight,
+startup before main and cumulative human/model support were not instrumented; the original
+14–24 support-hour-equivalent forecast remains a forecast, not an actual billed measurement.
+The measured chain is below the1.36–4.55CPU-h/1.5–6wall-h estimates; cheaper realization does
+not purchase extra work. Earlier engineering checks and inherited acquisition remain charged.
+
+Per worker and again per reader:856,950 actual P0 forward rows,1,392,640 head requests,
+81,920 zero-head reconstructions,907,983 C paths/3,631,932 modeled ticks and28,451,173
+controller power links. Actual P0/CONT/zero-head MAC-coordinate terms are
+29,506,502,400/2,406,481,920/141,557,760 per pass. These are arithmetic counts, not FLOPs or
+energy. Native physical work and setter refresh counters remain separately published.
+Full endpoints retain per-program timing/work fields in canonical`reading.json`.
+The inherited fleet B02–B10 bill remains22fits+2calibrations/4,055,080steps; its P0/Bstar
+components are not added again, and earlier B01/actual-S2 failures are still additional.
+
+Canonical unique evidence remains onwsl_4070 at the accepted output path above. The final
+tree has3,805,425,188 logical file bytes/3,818,041,344 allocated file bytes before cleanup:
+raw4,832files/3,474,491,180bytes; search1,092files/16,163,145bytes. No bulk copy was created.
+Raw identities are bound by`episodes.jsonl` and were rehashed by the complete reader;
+search identities are also in the compact publication. The following digests pin the full
+canonical readings rather than silently trimming them for Git:
+
+| Canonical file | Bytes | SHA256 |
+|---|---:|---|
+| summary.json |6570965|`e36157c20ddaf92ecf5ae70b7f4e0e28d17aa59f278b41e0b82d9b757c719e55`|
+| reading.json |6394151|`b892b020fa14b04a9364924bfc17d438fc5043d9adca8c6ecf27e17af1aae5b1`|
+| episodes.jsonl |21594006|`90c32f3cd6681246f3246308600073885fbfe76c08799df6472ac4c5f7998855`|
+| attempts.jsonl |279069504|`f81bb238e665eab3f55f6ab777a2699e35fca7ba88ce8fd3ee0fbfc2d2e37192`|
+| publication.json |1123036|`4a928bb63855f958dc38b06e6318ff6f44d44df626d9d3fe82715d5777d10c48`|
+
+Collected compact files matched remote byte counts and SHA256. The independent scientific
+ResearchCritic is reading the actual result and original supporting/adverse sources in a
+separate context; no DM result interpretation was supplied to that reviewer. The fixed batch
+has no remaining execution or saved-data-reader work, and no continuation has been selected.
