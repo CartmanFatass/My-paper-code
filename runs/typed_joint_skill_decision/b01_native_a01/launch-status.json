@@ -1,0 +1,76 @@
+{
+  "admission": {
+    "claim_state": "accepted",
+    "state": "accepted"
+  },
+  "artifacts": {
+    "stderr": {
+      "path": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b01_native_a01/stderr.log",
+      "state": "present"
+    },
+    "stdout": {
+      "path": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b01_native_a01/stdout.log",
+      "state": "present"
+    },
+    "summary": {
+      "path": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b01_native_a01/summary.json",
+      "state": "present"
+    }
+  },
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/e878da79cba0e96f9665be7fff8faa95385fb9a862405eea092392509d49d27a.json",
+  "direction": "typed_joint_skill_decision",
+  "execution": {
+    "exit_code": 0,
+    "exit_witness": {
+      "exit_code": 0,
+      "finished_at_epoch": 1790878475.489098,
+      "path": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b01_native_a01/process-exit.json",
+      "state": "valid",
+      "termination": "process_exit"
+    },
+    "runner": {
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 1270534,
+        "session_id": 1270533,
+        "start_ticks": 121349123
+      },
+      "state": "absent"
+    },
+    "state": "exited",
+    "supervisor": {
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 1270533,
+        "session_id": 1270533,
+        "start_ticks": 121349120
+      },
+      "state": "absent"
+    }
+  },
+  "explicit_retry": {
+    "eligible": false,
+    "reasons": [
+      "parent has no consistent terminal nonzero native exit"
+    ],
+    "scientific_authorization": false,
+    "successor_ref": null,
+    "supported": true
+  },
+  "explicit_retry_available": false,
+  "kind": "hmasd_operation_status",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b01_native_a01/launch-manifest.json",
+  "node": "wsl_4070_typed_joint",
+  "observed_at": "2026-10-01T18:14:53.914280Z",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/e878da79cba0e96f9665be7fff8faa95385fb9a862405eea092392509d49d27a.json",
+  "output_root": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b01_native_a01",
+  "record_consistency": {
+    "mismatches": [],
+    "state": "consistent"
+  },
+  "schema_version": 1,
+  "sha": "61a2dfa9cde0178d482d0a079c5629c3bcb7789e",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/489ded1e05434035bce1033b7b92db5c"
+}

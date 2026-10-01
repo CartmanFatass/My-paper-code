@@ -783,3 +783,61 @@ audits had completed identically. Native labels were collecting (3 completed wor
 evidence, not the scientific comparison. Actual counted global allocation was
 7,635,656,704bytes at that reading, below the earlier conservative source forecast.
 No duplicate, restart, changed exposure or result interpretation is selected.
+
+Observer checkpoint1 was manually drained at17:05UTC. Queue delivery returned
+`-32600 direct app-server input is not allowed for unloaded spawned sub-agents`;
+process observation stayed healthy/consistent. Event`ebe3f0c9d7397378618fb27c`
+was consumed and the same handle rearmed as generation2, no worker restart.
+Progress:341/1,152 worlds,1,416,000steps,176,224static calls,1,709.94CPU-s,
+7,767,949,312peak allocated bytes. These are partial counts, not model results.
+
+Checkpoint2 at17:30UTC: same accepted native identities; event
+`71732bee4ad65d0a6c81e531` consumed, generation3 rearmed. Queue delivery again
+returned-32600; native/manual observation remains the actual return path.
+655/1,152worlds,2,699,500steps,294,580static calls,0model/fit,3,200.54CPU-s,
+7,890,894,848peak allocated bytes; block2 test/full-planner stage. No blocker.
+
+Checkpoint3 at17:57UTC: same operation consistent/running; event
+`2ac9e4e65b0f34e262b0977d` consumed, generation4 rearmed (same-32600 queue
+limitation).965/1,152worlds,3,996,500steps,525,982static calls,4,756.30CPU-s,
+8,014,655,488peak bytes; block3 training. No fitting or model-forward exposure yet.
+
+### B01 native terminal collection and learning transition
+
+The same accepted native operation ended2026-10-01T18:14:35Z, exit0; observer
+READY event`1bc77d6bb40bf9a9baa4dc9c` was read and consumed at18:27UTC.
+Both recorded runner and supervisor are absent and the status records agree.
+No retry or duplicate collection occurred. All1,152 worlds,9,216 candidate
+and384 full-planner episodes plus16 identity audits completed:4,808,000 native
+steps and783,749 actual static calls. CPU was5,785.135967s, GPU/model/fit/update
+zero, peak RSS459,710,464bytes; observed global allocated peak8,091,283,456bytes.
+Scientific reading and the selected six fits remain pending.
+
+Every retained manifest object was independently SHA256/size-checked using
+standard-library file reads:23,426 retained scientific files,440,271,374bytes,
+plus16 exact audit aliases. The final23,458-row manifest is5,704,811bytes with
+SHA256`f38fa0f8159ccd45874771886b0977eab15ea2e1978cb94fa41630874b8aca0d`.
+The one canonical bulk root remains
+`hmasd-wsl-node:/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b01_native_a01`
+(509,898,752 allocated bytes). Compact summary, exit witness and status are
+published under the matching local run directory; bulk traces were not copied.
+The summary's encoded-data counter includes uncompressed trace writes and is not
+physical retained size.
+
+[Native input locator](B01_NATIVE_INPUT.json),SHA256
+`afad9a832fc6f020b8d0cbe01993d9e15f1f23bfaa2f8637429283f0221740db`,
+and [cumulative ledger](B01_AFTER_NATIVE_LEDGER.json),SHA256
+`7f38fc2a57af17a9c8903f6ab0c037f4ca50f5821fc7fc167260ec8c144b35ad`,
+are byte-identical at`/home/wu/hmasd-inputs/typed_joint_skill_decision/`.
+The ledger carries exact counters and conservatively rounds prior measured CPU
+up to5,786s; this charge is distinct from measured CPU. Same frozen scientific
+source`61a2dfa9cde0178d482d0a079c5629c3bcb7789e` proceeds to the already-declared
+learning phase, with no additional native labels, contexts, fits or endpoints.
+
+The maintained exact-target snapshot collector first refused an inaccessible
+same-user system process; its authorized read-only`--sudo-process-scan` then
+verified eligibility. Apply removed native source snapshot
+`489ded1e05434035bce1033b7b92db5c`; absence was checked. Its measured allocated
+bytes fell from820,711,424 to0, releasing820,711,424bytes before the next snapshot.
+Canonical outputs, operation claim and exit witness remain. Collection/hash/GC
+support work is separate from admitted scientific CPU and was not fully metered.
