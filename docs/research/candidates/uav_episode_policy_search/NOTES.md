@@ -251,3 +251,65 @@ admission or workload benchmarks. The remote canonical checkout has longstanding
 control overlays and historical status edits. Root owns synchronizing the selected direction
 rows/pause there; this DM does not overwrite those shared controls or alter unrelated evidence.
 Fresh node admission remains part of the actual launch.
+
+### Direct primary-passage check during implementation
+
+I read the load-bearing passages myself, without a new experiment or design revision:
+[Salimans et al., arXiv1703.03864](https://arxiv.org/pdf/1703.03864), PDF pp2–6, sections2–3:
+Gaussian parameter-smoothed return permits stochastic policies/discrete actions and complete
+episode fitness. Their deployed implementation also uses rank shaping and weight decay;
+neither is imported here. The smoothed objective and finite center deployment remain distinct.
+[Sehnke et al., ICANN2008](https://people.idsia.ch/~juergen/icann2008sehnke.pdf), PDF pp2–4,
+section2/Eqs6–10: episode-level parameter sampling factors history likelihood conditional on
+the sampled parameter. Their principal construction uses deterministic continuous control;
+its variance claim is not transferred to our stochastic coupled local controllers.
+[Mania, Guy and Recht, arXiv1803.07055](https://arxiv.org/pdf/1803.07055), PDF pp5–7,
+sections2.2–3.2/Algorithms1–2: both finite-difference and policy-gradient procedures query
+complete policy rollouts; return scaling is an added finite algorithmic choice. Our within-pair
+centering and bounded categorical readout are declared departures from ARS, preserving the
+same-information comparator reasoning rather than a convergence or efficiency claim. These
+readings support the narrow construction analogy already reviewed; they do not add evidence
+of a learning advantage or alter the fixed purchase.
+
+<a id="b01-engineering-acceptance"></a>
+### Final engineering acceptance and exact external input
+
+The bounded Implementer produced 11 source and three test files only within this direction.
+I read the complete collector/search/reader path and accepted the final implementation after
+independent `hmasd-reviewer` review in `/root/dm_episode_search/review_episode_search`.
+The Reviewer found no material reachable correctness defect and requested no repair. It
+checked the exact four-fit episode order, independent perturbation addresses and shared
+sign/family worlds/tapes, one-row FP32 frozen body, FP64 heads and updates, both tau clips,
+old-row/four-tick semantics, reference rights, full independent physical/policy/update
+reconstruction, artifact/parameter identities, attempt journal and all37 contrasts.
+
+The final reviewed 14-file manifest SHA256 is
+`b0803ad882e22445135859cd63df15e0ea93da8507bb4f2632f38c3d33c99a6f`,
+over sorted compact JSON mapping owned relative Python paths to their SHA256. DM rehash
+matched the Reviewer's complete manifest. All44 declared scientific source identities satisfy
+their inherited pins. Final Implementer suite:20passed/15.81s; independent Reviewer rerun:
+20passed/16.82s. These are the final check timings, not the cumulative support bill.
+Each complete fixture suite contains110 Python-only synthetic episodes/880 adapter steps,
+eight updates and16 directions/28,096 normal coordinates, plus an interrupted attempt with
+zero completed steps. Earlier development checks also occurred. No fixture used the native
+factory or pinned production P0, and none is a scientific fit or extra deployment rollout.
+
+Residual limits are retained: the fixtures' scalar-state synthetic environment is plumbing
+evidence, not an independent native-versus-scalar physics validation. Actual-node arithmetic,
+pinned P0 production behavior and measured workload remain for the selected production plus
+complete reader. Same-history displacement compares a one-tick clipped P0 command on the
+candidate-visited state; it is not a divergent four-tick counterfactual trajectory. The raw
+format retains paid logits/hidden/innovation, reconstructs normalized hidden vectors, and
+saves each of17 centers per fit once; directions bind center digests. No scientific change
+or new selection consultation resulted from these engineering corrections.
+
+The original checkpoint lies inside the remote author root and is ignored by Git. Because
+the snapshot launcher remaps author-root inputs, its exact424,487 bytes were copied once to
+`/home/wu/hmasd-inputs/uav_episode_policy_search/b01_episode_search_a01/S.pt` onwsl_4070.
+Both canonical and consumption bytes matched the declared P0 SHA. The copy occupies425,984
+allocated bytes and is the only newly retained input copy; its receipt is
+`runs/uav_episode_policy_search/b01_episode_search_a01/input-staging.json`. It is outside the
+snapshot-remapped root and will be removed after its accepted worker/reader consumers end.
+The canonical original remains unchanged. Exact source publication precedes the single
+`b01_episode_search_a01` production request; supervisor acceptance, kernel admission and
+scientifically read completion remain separate facts.

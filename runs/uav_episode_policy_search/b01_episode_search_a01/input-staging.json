@@ -1,0 +1,10 @@
+{
+  "canonical": "/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b02_inheritance_a01/assets/S.pt",
+  "consumption_copy": "/home/wu/hmasd-inputs/uav_episode_policy_search/b01_episode_search_a01/S.pt",
+  "bytes": 424487,
+  "sha256": "b9e25fca68109bb50fa64fadfc90939ad6a4669058c1c0ccd1351c8bbcefe12a",
+  "allocated_bytes": 425984,
+  "created": true,
+  "host": "LAPTOP-U9TDKC8A",
+  "scope": "One necessary external consumption copy outside snapshot-remapped author root; original P0 retained; delete copy after accepted consumer and full reader terminate."
+}

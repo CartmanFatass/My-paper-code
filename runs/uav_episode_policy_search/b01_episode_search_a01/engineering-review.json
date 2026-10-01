@@ -1,0 +1,40 @@
+{
+  "reviewer": "/root/dm_episode_search/review_episode_search",
+  "role": "hmasd-reviewer",
+  "verdict": "No material engineering finding remains; no repair requested; DM accepts.",
+  "reviewed_head": "73a504357881714d125446d72677c649f4f46916",
+  "manifest_sha256": "b0803ad882e22445135859cd63df15e0ea93da8507bb4f2632f38c3d33c99a6f",
+  "source_and_test_sha256": {
+    "experiments/candidates/uav_episode_policy_search/b01/__init__.py": "153e6acd10c13ed1ad6d6479297e456875f82c5c320dde19664432020ff6a949",
+    "experiments/candidates/uav_episode_policy_search/b01/audit.py": "fff584c8fa12dc61e733ccf8685e743b8acd76cc39be6a50b4dfbd39216334ff",
+    "experiments/candidates/uav_episode_policy_search/b01/collect.py": "6985018c8f8be73dcd71d0d0eaf9bc78da82aaad331df5a5bc831b8b02b7dda0",
+    "experiments/candidates/uav_episode_policy_search/b01/contract.py": "243b232380df70040c919178d7ef78e7ff1cafe5a20c44ecc3f9441c4cc425c1",
+    "experiments/candidates/uav_episode_policy_search/b01/policies.py": "a5d78508b010092270396c612bb05d727a68e516cf65f1cc1f2b5f0c9304a65c",
+    "experiments/candidates/uav_episode_policy_search/b01/read.py": "6d7cff24b1f267f8f458fd3143e2e295ce5f3cd4e6ce16f11d86c3240b46f744",
+    "experiments/candidates/uav_episode_policy_search/b01/reading.py": "69b5985c4d699358af6038f07ce88ad1b74fa8b52018e2929fdfd843dcdc4be9",
+    "experiments/candidates/uav_episode_policy_search/b01/reference.py": "4626d8708463c93c2e53b4fc8d9fb3ca1a332ca953709fb77a654ebc0820aa34",
+    "experiments/candidates/uav_episode_policy_search/b01/run.py": "bbf1f8e24e94fae3c4926b82484110d5f52fd44455734b5d0c847c4b76f21c93",
+    "experiments/candidates/uav_episode_policy_search/b01/search.py": "7cd083b253f252778055279a43e09333d90654203e5ff01d75994fcfb0d92421",
+    "experiments/candidates/uav_episode_policy_search/b01/study.py": "b63e91884033188f80e2fd59deeee8deda58c70f3d884505d3f1b005b0c3c1d6",
+    "tests/experiments/candidates/uav_episode_policy_search/b01/conftest.py": "162e5b397012c451a47692bbf5c2119b9ee873bde237d620b068d027aa6a5211",
+    "tests/experiments/candidates/uav_episode_policy_search/b01/test_pipeline.py": "4de91b41c175b7b1129928439dcfd80744415cc52383138e28f6cff9bf348aea",
+    "tests/experiments/candidates/uav_episode_policy_search/b01/test_search.py": "37873d53a61533bcd0fff7a77f034ea0f67612a1c7677da10771dfc9051ed100"
+  },
+  "source_bindings_verified": 44,
+  "final_implementer_tests": {
+    "passed": 20,
+    "seconds": 15.81
+  },
+  "final_reviewer_tests": {
+    "passed": 20,
+    "seconds": 16.82
+  },
+  "native_fixture_episodes": 0,
+  "pinned_P0_fixture_forwards": 0,
+  "scientific_fits": 0,
+  "limits": [
+    "Synthetic scalar-state adapter and Student do not independently establish native physical agreement or pinned-P0 production behavior.",
+    "Actual node admission and measured resource costs remain for production.",
+    "One-tick same-history displacement does not claim a divergent four-tick counterfactual trajectory."
+  ]
+}
