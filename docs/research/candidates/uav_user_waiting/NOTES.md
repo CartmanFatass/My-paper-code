@@ -6413,3 +6413,142 @@ impossible, the original service/continuity price unavoidable, or any learned co
 successful/unlearnable. The parent question remains open; no automatic repair, replication,
 extra arm or model-fit purchase is selected. Independent ResearchCritic diagnosis and any
 material dissent follow in the existing notebook before final standing is published.
+
+
+<a id="b07-independent-review-and-disposition"></a>
+### B07 original independent scientific review and resolved disposition — 2026-10-01 UTC
+
+The dedicated ResearchCritic continued its own separate evidence-first context (no DM/Root
+conversation inheritance), using the original B07 contract/question/advice and complete
+B06 supporting/adverse analysis plus all B07 sources/outcomes. Its assigned question was
+complete C2 program usefulness against all four LRS references, explanation revision and
+retention/stop/next-investment judgment; it was explicitly not asked to defend a preferred
+mechanism or launch any continuation. Original complete final advice follows verbatim:
+
+> Retain C2 as an inexpensive capacity control and a substantive adverse continuity result. Stop the unchanged recipe and make no immediate follow-on purchase. S_F:LRS remains the stronger tested continuity option; C2 does not establish that manager memory is necessary, nor that the broader service-preserving continuity question is impossible.
+>
+> This review continued in my independent reviewer context, without a DM/Root conversation fork. I reconstructed the protocol, source and outcomes before reading the original selection/adviser discussion, and reused my B06 analysis where its premises remained applicable.
+>
+> The matched comparison is clear. Across the same 64 development worlds:
+>
+> | Episode-level quantity, averaged over worlds | C2:LRS | S_F:LRS | S:LRS | M:LRS | U:LRS |
+> |---|---:|---:|---:|---:|---:|
+> | Maximum unserved gap | 92.484 | 12.156 | 35.094 | 43.375 | 33.172 |
+> | F_user | 26.834 | 2.468 | 6.285 | 9.125 | 5.808 |
+> | Mean individual age | 3.401 | 1.546 | 2.299 | 2.289 | 2.259 |
+> | Mean users served per tick | 19.946 | 16.946 | 21.180 | 24.736 | 21.667 |
+> | Mean service quality | 0.2221 | 0.2266 | 0.1612 | 0.1665 | 0.1594 |
+> | LRS-evaluated J | 0.3459 | 0.3052 | 0.3449 | 0.3963 | 0.3512 |
+>
+> The frozen primary contrast, C2−S_F maximum gap, is **+80.328 ticks**, with paired t interval **[67.767, 92.889]** and fixed-bootstrap interval **[68.656, 93.236]**. All 64 worlds are adverse, including the least adverse world, which deteriorates from 13 to 27 ticks. Maximum-gap differences against S, M and U are respectively +57.391, +49.109 and +59.313 ticks; their paired intervals also exclude zero.
+>
+> The strongest useful positive is real. C2 provides **+3.000 served users per tick against S_F**, interval **[2.499, 3.501]**, improving 59/64 worlds. Its service-count tenth percentile is 20 in every world; 16,243 of 16,256 post-start ticks serve exactly 20 users. LRS-evaluated J rises by 0.040663 against S_F, improving 61/64 worlds. Quality’s mean difference is −0.004451 with an interval spanning zero; that does not establish quality equivalence. C2 also travels less on average: about 7,299 metres per UAV versus 7,946 for S_F.
+>
+> These positives support retaining a cheap, stable service-capacity control. They do not support calling it a successful continuity replacement or a generally superior policy. Against M:LRS, both service count and J deteriorate in every world. C2 has some favourable continuity outcomes against the older controls—maximum gap improves against M in seven worlds—but those do not overturn its adverse mean or supply service-preserving success. Nor is C2 simply dominated on every conceivable objective: its quality and computational-work advantages must remain visible.
+>
+> The individual evidence makes the primary result more consequential:
+>
+> - C2 worsens maximum gap for 2,416 of 3,200 matched users; 578 improve and 206 tie.
+> - Mean age improves for 1,691 users but deteriorates for 1,506. Large harms outweigh numerous small benefits; an average improvement count would conceal this.
+> - Every world contains individual age and gap harm against S_F.
+> - All users receive service at least once, yet that coverage statistic misses severe subsequent starvation.
+>
+> For example, world 29426031’s user 1 receives one grant at tick 4, followed by a 251-tick terminal gap: one denial tick and 250 ticks without an eligible native link. Its maximum gap under S_F is 10 ticks. World 29426062 contains a **closed**, 186-tick gap, comprising two denial ticks and 184 no-link ticks. More generally, maximum closed gap is worse than S_F in all 64 worlds. The adverse result therefore does not depend on retaining terminal censoring, although those censored intervals remain part of the declared outcome.
+>
+> My supported diagnosis is that **accurate short-horizon capacity optimisation can repeatedly neglect temporal coverage of particular users**.
+>
+> This was an active intervention, not nonactivation or insufficient exposure. Every post-start tick has two active UAVs; all 4,096 decisions arrive on time. The rule actually evaluates its declared 15-mask menu and delivers changed actions. Gross service-count forecast error is also a poor explanation: comparing every selected forecast block with saved native LRS grants, only one block differs, by one user-tick in total.
+>
+> Nevertheless, the maximum native no-link interval increases against S_F by **78.781 ticks on average**, adverse in all 64 worlds. C2’s maximum gap exceeds its same-world maximum no-link interval by only 2.594 ticks on average. Allocation changes on the fixed C2 paths cannot recreate most of S_F’s approximately 80-tick advantage. This is a constraint from absent opportunities, not evidence that the existing allocation rule is globally optimal.
+>
+> Saved candidate records sharpen the explanation without requiring new counterfactual queries. For world 29426031’s user 1, some candidate forecasts eligibility at every one of the 64 decisions, but the selected candidate does so only once. At 20 decisions, a candidate offering that user eligibility has the same predicted service count as the selected candidate. At report tick 4, for example, the selected mask forecasts 80 service opportunities across the block and 41 distinct eligible users while excluding user 1; an alternative forecasts the same 80 opportunities and 39 distinct users while including it. The rule follows its declared ranking correctly.
+>
+> That is evidence against “the manager simply could not represent any relevant alternative.” It identifies an objective-level selection mechanism: short-horizon count and distinct-user cardinality can reject an individual who has little subsequent service. It does **not** prove that choosing the alternative would produce a grant, improve the complete native trajectory, or preserve service after future decisions change. At other decisions, offering eligibility requires a lower-capacity candidate, so opportunity is not uniformly free.
+>
+> The evidence revises the competing interpretations as follows:
+>
+> 1. **Low concurrency plus local fairness is insufficient in this tested form.** It yields nearly saturated two-UAV service without reproducing S_F’s regularity.
+> 2. **Manager age history remains a plausible contributor, not an identified cause.** C2 simultaneously changes the objective, action restrictions and physical-control recipe relative to S_F. The comparison cannot assign the difference exclusively to history, motion overrides, or their interaction.
+> 3. **“Memoryless” needs its declared scope.** C2 lacks manager age/grant history; local LRS retains service timestamps, current C retains its existing navigation state, and mask-change ranking uses the current mask. This is not a comparison with a wholly stateless system.
+> 4. **Learnability remains untested.** There are zero fits. Additional episodes would not become independent training replications, and no learning claim follows from these development-world results.
+>
+> There is also an important allocation correction. With two all-on startup ticks and at most two active UAVs thereafter, C2’s mean service count cannot exceed
+>
+> \[
+> (2\times50+254\times20)/256=20.234375.
+> \]
+>
+> That ceiling is already below the observed S, M and U mean service counts. The selected study could legitimately ask whether C2 offered an attractive cheaper tradeoff against S_F; it could not satisfy the broader service-preserving objective against those incumbents. Another cap-two age patch would retain that structural limitation.
+>
+> I therefore recommend **stopping immediate spending**, rather than automatically buying a memory repair, ablation, learner or additional seed batch. The smallest worthwhile observation for the selected question—the complete paired native comparison with individual outcomes and costs—has been obtained. There is no declared utility or binding hardware constraint that makes the observed continuity deterioration an acceptable price for cheaper planning; both C2 and S_F met their deadlines. Repeating C2 would refine a magnitude whose present uncertainty does not change this choice.
+>
+> There is a constructive opening, but it is not an obligation to run. A policy that trades some immediate capacity for temporal coverage of specific users makes a distinct prediction: shorter native no-link tails. If Root later selects that broader question, the consequential result would be continuity improvement while preserving the chosen service objective against a competent comparator such as M:LRS, with information, action and timing rights accounted for. Improvement only through reduced service would establish another tradeoff. No improvement would reject that particular continuation, not prove history useless. No such successor has been costed or selected in this review.
+>
+> The cost record should preserve the following distinctions:
+>
+> - **Fit cost:** zero. **New native exposure:** 16,384 steps over 64 worlds.
+> - C2 evaluates 61,440 mask candidates, including 243,840 fleet-SINR forecasts and approximately 60.96 million modeled link evaluations, in addition to current-C work.
+> - Full-round scheduler CPU totals **22.757 seconds**, or 0.356 seconds per episode. The **5.809 seconds of C CPU are nested within that total**, not additive. Maximum observed full-round wall time is 0.02043 seconds against the 1.436-second budget.
+> - Successful worker plus reader recorded **110.858 CPU seconds**, including waited-child CPU. A01 adds 1.219 CPU seconds and was a zero-query infrastructure failure, caused by missing sparse-snapshot input, not an adverse policy run.
+> - The source-hydration diagnostic adds approximately 0.216 recorded CPU seconds. Implementation, tests, staging and reviewer support are not comprehensively metered; these figures are not a complete project-cost total.
+> - Worker and reader peak RSS are respectively 564,696 and 574,520 KiB. Historical S_F timing came from a different runtime/node context, so neither a matched speed ratio nor a memory-saving claim is established.
+> - New raw and outcome payloads total **30,193,881 bytes**. Temporary full-reference staging contributes another approximately 124.2 MB. Cleanup accounting belongs to the subsequent collection record.
+>
+> For evidence scope, I checked source identity **54320ab7adfdce4c31effbb30f6f551470fe97c2**, including 103 source/dependency blob identities, and verified that the policy-bearing files remained unchanged from the initial frozen source through the IO repair. I checked the [worker summary](/home/fires/hmasd-wsl/runs/uav_user_waiting/b07_cap_two_a02/summary.json), [reader result](/home/fires/hmasd-wsl/runs/uav_user_waiting/b07_cap_two_read_a02/reading.json), all 64 new raw hashes and all 320 full outcome-file hashes. I reconstructed the consequential paired vectors, aggregate gap/no-link/denial summaries and fixed bootstrap; checked matched reset/report/proposal inputs and factual prefixes against S_F; compared all selected forecast counts with native grants; and independently reconstructed the full individual summaries from saved arrays for 400 users across eight diagnostic worlds. I examined saved candidate alternatives for six consequential cases.
+>
+> I did not rerun native physics, allocators or modeled candidates. The accepted reader supplies the exhaustive execution reconstruction; my independent work used saved evidence and arithmetic. Generalisation beyond these reused development worlds, longer horizons and different channel/user regimes remains unverified. My posthoc support CPU was unmetered. All raw-data consumers are released.
+>
+> **MATERIAL_DISSENT: no.** The direct evidence supports retaining C2’s capacity/cost benefit and adverse continuity result, preserving S_F’s conditional standing, and stopping this recipe. It supports neither a successful continuity-replacement claim nor a claim that manager memory is necessary.
+
+DM response and belief update: adopt the no-spend/retain decision, with no material dissent.
+The substantive added evidence is that4095/4096 selected block capacity predictions match
+native LRS service exactly (one remaining block−1user-tick), yet individual no-link tails
+explode. Thus gross block-count model error and nonactivation are poor explanations here.
+An excluded user can be represented by saved alternative candidates: in29426031/user1,
+the same-count alternative at report4 loses on41-versus39distinct users. That establishes a
+selection limitation of the declared objective; it does not establish the counterfactual
+complete-program value of that alternative or an exclusive memory mechanism. In29426062,
+user16's186tick interval[15,201) is closed, with2denial/184no-link ticks, so censor treatment
+is not the source of the adverse conclusion. All cases and alternative-source arrays remain
+in the unique canonical evidence; the reviewer made0new model/native/allocator queries.
+Its additional saved-output/bootstrap/400-user reconstruction and six-case inspection costs
+were unmetered and separate from the accepted worker/reader and measured compact extraction.
+
+Keep C2 as an inexpensive capacity comparator and preserve its useful executable code/tests
+and full adverse evidence, alongside S_F's conditional continuity capability and M/S/U's
+service/quality/cost operating points. End the unchanged C2 recipe and select no immediate
+replication, cap/age repair, ablation, learner or additional seed batch. Both complete programs
+already met their deadlines, so lower work alone does not supply a missing application utility.
+The original service-preserving question is open, not empirically refuted. A later worthwhile
+Root-selected question would need its own prospective complete comparison against a competent
+service reference such as M:LRS, honest information/action/timing rights and a native temporal
+eligibility prediction; cap-two patches retain the existing service ceiling. No such successor
+is costed or selected, and there is no live producer or fabricated external dependency.
+
+This adequate independent review covers the consequential disposition; there is no unresolved
+scientific disagreement or distinct Pro question requiring another round. Final RESEARCH
+standing/background will state this scope and idle condition. The review's original local
+summary/reading links refer to verified temporary collection copies; their durable canonical
+remote paths, exact bytes and hashes are in the compact result. Cleanup will preserve those
+original remote files while removing redundant collection copies.
+
+
+<a id="post-b07-source-assessment"></a>
+### Post-B07 bounded source/feasibility support selected by Root — 2026-10-01 UTC
+
+Root original native assignment, received during B07 final publication/cleanup:
+
+> Root has now read the entire original final from /root/dm_user_waiting/scientific_reading and your complete B07 outcomes/cost. I adopt stopping unchanged C2, retaining its capacity/computation positive, S_F's conditional continuity and all M/S/U tradeoffs; no memory necessity, general impossibility or new query is inferred. Preserve the full original critic/disposition and finish your own result/index/cleanup publication without awaiting me. Root will replace its selected-plan prose, leaving your row/background/routing to you.
+>
+> Your next substantive responsibility is bounded source/feasibility support for Astra Max /root/age_control_interface on whether one complete approach can improve extreme individual continuity while retaining competent M:LRS service under lawful delayed rights, or whether that investment should stop/reallocate. Oracle has the detailed new assignment and will contact you for exact facts/full cost; this is not another C2 patch, another result critic or an automatically selected experiment. No new native/model/C query, saved-output reduction, fit, prototype or implementation is authorized by this source assignment. Preserve B07 all64 harms and service/cost positive; cap20.234 makes unchanged cap-two incapable of answering service preservation against M/S/U. Existing source and saved published results suffice for initial assessment. New fixed experiment, if worthwhile, will be selected by Root after the complete recommendation.
+
+Prospective scope: finish B07 publication/cleanup first while retaining the original admitted
+inputs and complete positive/adverse evidence. Then provide existing source/interface facts
+and a complete prospective cost to the independent Oracle's actual requested approach, using
+current published Topic2 and B05–B07 evidence. This is source assessment only:0new native,
+model, current-C, allocation, saved-output reduction, training, prototype or implementation
+queries are selected. The ordinary service reference is competent M:LRS; neither a cap-two
+repair nor a tiny residual around a weak comparator is presumed. Mathematical feasibility
+and prospective arithmetic must expose the actual information/action/timing contract and
+all worker/reader/verification costs. Source inspection does not approve a new fixed study.
+Root owns the eventual scientific allocation after the complete independent recommendation.
