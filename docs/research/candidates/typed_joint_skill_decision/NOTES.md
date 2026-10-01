@@ -570,3 +570,101 @@ the real numerical/RNG/restore/identity risks before native execution; the same 
 be reused for the later representation/learner changes. Scientific review above does not
 substitute for engineering correctness. No additional scientific selection round is required
 for an unchanged in-scope implementation. Current B01 scientific counters remain zero.
+
+### B01 implementation clarification: representation precedes all labels
+
+The decomposition above does not waive the B00 no-loss input requirement. The collector first
+prepares the **same 1,152 declared outcome-free menus once**, saves their exact assigned targets,
+and validates the complete table/option identities with the pinned tokenizer at 4096/192.
+Only after every record passes may the native-label loop consume those saved targets. This
+adds no world, native episode, fit or full model forward. Resets, construction, tokenization,
+CPU and disk are nevertheless counted. A failure retains the exact failed input and length
+evidence; no clipping or alternate format is selected from its outcome. Independent model-path
+implementation may proceed in parallel, but native labels cannot precede this full validation.
+Root independently identified the same ordering requirement during the publication read.
+
+DM-owned companion L0: `codec.py` and a byte-identical pinned `vendor/laya_common.py` plus its
+Apache license, with pure serialization fixtures under matching tests. The codec uses a fixed
+compact table, `.17g` round-trip coordinates and short unique plan references, parses back to
+the exact allowed record, calls the upstream sequence constructor and refuses every truncated
+state/instruction/option or marker collision. No learned, scored or source-identity field is
+rendered. Tokenizer/native calls occur only after admission; pure structural fixtures require
+no tokenizer/model/native query. The later representation implementation shares this codec.
+
+**Numerical implementation fixed before effects.** Materialize the root checkpoint's saved
+float16 values into float32 parameters and use float32 forward/training/cache arithmetic for
+both arms, with TF32 disabled and no autocast/quantization/compile. This explicitly differs
+from the upstream agent's configured bf16 inference preference; it preserves its architecture
+and saved parameter values while making the cached scorer and full-source correctness path
+use one numerical contract. The source constructor selects SDPA. No precision alternative is
+automatically licensed if the fixed 4096 forward exceeds the selected memory/time bounds.
+The first paid source-forward correctness comparisons establish actual compatibility; metadata
+and imports alone do not. Source-derived size/time reasoning remains a forecast.
+
+**L0-2: representation, six fixed fits and saved-artifact reader (next bounded code task).**
+Owned future helper files are `models.py`, `run_b01_learning.py` and `read_b01.py`, plus matching
+pure/mocked checks. Reuse the accepted native collector/contract and DM codec rather than
+copying the host. The learning runner verifies complete native dataset, artifact/source/cache
+digests and cumulative bill before effects, extracts the 1,152 canonical and 384 reversed-test
+post-head representations, and uses at most16 additional full forwards for actual upstream
+versus adapter/cache correctness. No fresh native episode, extra fit or endpoint selection.
+The six final-endpoint fits and readings use exactly the declared seeds, optimizer/exposure
+and masks; preserve initial/final scorer weights, every update/exposure/loss record, optimizer
+identity, frozen-component hashes and selection inversion. Label access is confined to soft
+targets/loss and declared reading; no outcome enters features, display order or normalization.
+
+The separate admitted reader reads all native traces and training/update records, rebuilds
+Q/q and ordinary/fixed policies, then independently evaluates saved state dictionaries with
+functional layer arithmetic on the exact numeric records or bound float32 post-head cache.
+It does not call the candidate's saved prediction as proof, initialize another fit or replay
+the encoder. Its 2,688 scorer contexts/arm are the previously priced full train+test reader.
+Record numerical discrepancies and their actual choice/native consequences; do not silently
+replace the runner's executed choices. Full encoder reconstruction remains outside its scope.
+All failure records, blocks and worlds stay in the readout. Helpers own no NOTES/index/Git,
+launch, package setup or scientific test execution; the DM accepts and publishes reviewed code.
+
+### B01 preparation and L0-1 acceptance, 2026-10-01
+
+The one root Laya weight object is now verified at its fixed 842,609,210 bytes / SHA256
+`891102d372688fc2a094dac56a384bc537b87c63f21f9f3dac0be2b7cbc8d86c`; configurations,
+tokenizer and model-card bytes match the six fixed identities. `RUNTIME_ASSETS.json` records
+the canonical node path, complete dependency versions, license/source provenance, ordinary
+import checks, package-copy identities and setup limitations. No model/tokenizer instance,
+native environment, forward or fit was run for this preparation.
+
+The isolated CPython3.10.21 environment is `/home/wu/.venvs/hmasd-typed-joint-31021` on
+LAPTOP-U9TDKC8A, same GPU UUID `GPU-294302a9-40ff-1a09-43b0-5fd98e06b557` /8188MiB.
+Torch2.7.0+cu118, NumPy1.26.3, transformers5.0.0, tokenizers0.22.2, HFhub1.3.4,
+safetensors0.7.0; actual class imports and `pip check` pass. There is no shared `.pth` or
+accepted-environment package change. Setup encountered failed old-pip normalization and
+truncated large HTTP transfers. Selected existing scientific distributions were instead
+copied independently with source RECORD identities; model ranges completed the **same**
+partial object and only the whole expected SHA licensed its final rename. These are setup
+failures/transport costs, not attempted fits or empirical negatives.
+
+Measured final setup allocation is 5,914,005,504 environment bytes plus846,622,720 model/
+metadata bytes. Early pip temporary directories were sampled and disappeared after the owned
+installer stopped; later small-wheel transient has a conservative100MiB bound. Sampling is
+not continuous peak telemetry. One full source snapshot adds a source-derived ~1.78GB file
+allocation forecast and must be counted in the actual global bill. Reuse that one immutable
+snapshot across native/learning/reader phases, preserving it until all consumers finish.
+New Bill bindings include the trusted admitted source root as well as output/model/runtime;
+this narrowly extends L0-2's counter integration and will be reviewed with it.
+
+L0-1 Implementer returned the native collector/contract/streaming bill and pure tests.
+DM read the complete changed path and accepted it following independent Engineering Reviewer
+`/root/dm_typed_joint_skill/b01_engineering_review`: **no material finding remains**,24 pure/
+mock tests passed in2.40s, reviewed native-runner SHA
+`c47ecd0fc7528eb98fcf190eb374bca3944c45752e24f74d6a1a14359d6e2cd0`.
+The reviewer traced actual frozen reset/RNG, assignment/executor, static/full-planner counts,
+feature separation, all-world preparation, audit aliases and failure retention; independently
+byte-matched upstream vendor/license. It caught an external-input binding gap, repaired by
+requiring manifest/ledger SHA arguments bound into admitted argv before parsing. DM also
+corrected launcher-created output handling and excessive full-disk scans before acceptance.
+
+Review limits remain explicit: no actual tokenizer/context, native identity, model, fit or
+reader runtime was tested; declared disk roots must cover deployment. L0-2 model/training/
+reader code and the shared Bill extension require their own actual-diff review by this same
+independent reviewer. The B01 scientific counters are still zero. Root owns publication of
+the already-authorized additive same-physical-node compute profile; no new research approval
+is requested. This is implementation acceptance, not an accepted scientific operation/result.

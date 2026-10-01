@@ -1,0 +1,353 @@
+{
+  "schema": 1,
+  "repository": "convaiinnovations/laya",
+  "revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
+  "model_root": "/home/wu/hmasd-inputs/typed_joint_skill_decision/laya-55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
+  "license": "Apache-2.0 per pinned model card",
+  "files": {
+    "rl_agent_config.json": {
+      "sha256": "ae287b56bbcf5f8c4f4541ae9dfd00c914c4c48b940b8398c3058af37ba92bbd",
+      "bytes": 745
+    },
+    "encoder/config.json": {
+      "sha256": "bf3ab80598fdccf414855a2ce80f22859e4492d06ca8a62ddd1cfb63972f8979",
+      "bytes": 2083
+    },
+    "tokenizer/tokenizer.json": {
+      "sha256": "6c8aaa9a542084f2457eab775d4eeb51f92a70c0fd9de28d5edb0ddec3c08d30",
+      "bytes": 3583228
+    },
+    "tokenizer/tokenizer_config.json": {
+      "sha256": "50044de60daaa73df97d262e15a40d4faf0160e7d742df64b377877a1320dd12",
+      "bytes": 308
+    },
+    "README.md": {
+      "sha256": "00355613796b3f5860b0d5b20392381d26580ec242e04a1fd150c7f116858602",
+      "bytes": 23187
+    },
+    "model.safetensors": {
+      "sha256": "891102d372688fc2a094dac56a384bc537b87c63f21f9f3dac0be2b7cbc8d86c",
+      "bytes": 842609210
+    }
+  },
+  "download_wall_seconds": 14.813805971993133,
+  "completed_range_transfer_wall_seconds": 285.81980014801957,
+  "execution_environment": {
+    "schema": 1,
+    "verified_utc": "2026-10-01T15:30:24.052067+00:00",
+    "verification_scope": "ordinary package/class imports and metadata only; no model/tokenizer instantiation, weight load, native environment or RNG/model result query",
+    "host": "LAPTOP-U9TDKC8A",
+    "python": "/home/wu/.venvs/hmasd-typed-joint-31021/bin/python",
+    "python_realpath": "/home/wu/.local/opt/hmasd-cpython-3.10.21-gcc/bin/python3.10",
+    "python_version": "3.10.21",
+    "prefix": "/home/wu/.venvs/hmasd-typed-joint-31021",
+    "sys_path": [
+      "",
+      "/home/wu/.local/opt/hmasd-cpython-3.10.21-gcc/lib/python310.zip",
+      "/home/wu/.local/opt/hmasd-cpython-3.10.21-gcc/lib/python3.10",
+      "/home/wu/.local/opt/hmasd-cpython-3.10.21-gcc/lib/python3.10/lib-dynload",
+      "/home/wu/.venvs/hmasd-typed-joint-31021/lib/python3.10/site-packages",
+      "/tmp/tmplddylk6r"
+    ],
+    "site_pth_files": [
+      "/home/wu/.venvs/hmasd-typed-joint-31021/lib/python3.10/site-packages/distutils-precedence.pth"
+    ],
+    "packages": {
+      "Farama-Notifications": "0.0.6",
+      "Jinja2": "3.1.6",
+      "MarkupSafe": "3.0.3",
+      "PyYAML": "6.0.3",
+      "Pygments": "2.21.0",
+      "annotated-doc": "0.0.5",
+      "anyio": "4.15.1",
+      "certifi": "2026.7.22",
+      "cloudpickle": "3.1.2",
+      "exceptiongroup": "1.3.1",
+      "filelock": "3.32.5",
+      "fsspec": "2026.7.0",
+      "gymnasium": "1.0.0",
+      "h11": "0.16.0",
+      "hf-xet": "1.6.0",
+      "httpcore": "1.0.9",
+      "httpx": "0.28.1",
+      "huggingface_hub": "1.3.4",
+      "idna": "3.20",
+      "markdown-it-py": "4.2.0",
+      "mdurl": "0.1.2",
+      "mpmath": "1.3.0",
+      "networkx": "3.2.1",
+      "ninja": "1.13.2",
+      "numpy": "1.26.3",
+      "nvidia-cublas-cu11": "11.11.3.6",
+      "nvidia-cuda-cupti-cu11": "11.8.87",
+      "nvidia-cuda-nvrtc-cu11": "11.8.89",
+      "nvidia-cuda-runtime-cu11": "11.8.89",
+      "nvidia-cudnn-cu11": "9.1.0.70",
+      "nvidia-cufft-cu11": "10.9.0.58",
+      "nvidia-curand-cu11": "10.3.0.86",
+      "nvidia-cusolver-cu11": "11.4.1.48",
+      "nvidia-cusparse-cu11": "11.7.5.86",
+      "nvidia-nccl-cu11": "2.21.5",
+      "nvidia-nvtx-cu11": "11.8.86",
+      "packaging": "26.3",
+      "pettingzoo": "1.24.3",
+      "pip": "25.3",
+      "psutil": "6.1.1",
+      "pybind11": "2.13.6",
+      "regex": "2026.9.29",
+      "rich": "15.0.0",
+      "safetensors": "0.7.0",
+      "setuptools": "79.0.1",
+      "shellingham": "1.5.4",
+      "sympy": "1.14.0",
+      "tokenizers": "0.22.2",
+      "tomli": "2.4.1",
+      "torch": "2.7.0+cu118",
+      "tqdm": "4.70.1",
+      "transformers": "5.0.0",
+      "triton": "3.3.0",
+      "typer": "0.27.2",
+      "typer-slim": "0.24.0",
+      "typing_extensions": "4.16.0"
+    },
+    "cuda_runtime": "11.8",
+    "torch_file": "/home/wu/.venvs/hmasd-typed-joint-31021/lib/python3.10/site-packages/torch/__init__.py",
+    "numpy_file": "/home/wu/.venvs/hmasd-typed-joint-31021/lib/python3.10/site-packages/numpy/__init__.py",
+    "transformers_file": "/home/wu/.venvs/hmasd-typed-joint-31021/lib/python3.10/site-packages/transformers/__init__.py",
+    "modernbert_class_import": "transformers.models.modernbert.modeling_modernbert.ModernBertModel",
+    "gpu_probe": "NVIDIA GeForce RTX 4070 Laptop GPU, GPU-294302a9-40ff-1a09-43b0-5fd98e06b557, 8188 MiB, 7948 MiB",
+    "python_config": "home = /home/wu/.local/opt/hmasd-cpython-3.10.21-gcc/bin\ninclude-system-site-packages = false\nversion = 3.10.21\n",
+    "ninja_version": "1.13.2.git.kitware.jobserver-pipe-1",
+    "pip_check": "No broken requirements found.",
+    "path_prefix": "/home/wu/.venvs/hmasd-typed-joint-31021/bin:/home/wu/.local/bin:/usr/lib/wsl/lib"
+  },
+  "package_source": {
+    "kind": "independent copied selected distributions; no symlinks/shared .pth",
+    "source_site_packages": "/home/wu/.venvs/hmasd/lib/python3.10/site-packages",
+    "target_site_packages": "/home/wu/.venvs/hmasd-typed-joint-31021/lib/python3.10/site-packages",
+    "payload_entries": 15743,
+    "payload_bytes_with_namespace_overlap": 5663951910,
+    "already_identical_entries": 2069,
+    "wall_seconds": 10.036729788174853,
+    "cpu_seconds": 8.51806,
+    "distributions": [
+      {
+        "name": "sympy",
+        "version": "1.14.0",
+        "record_sha256": "02dd08ac66ce11cd0c16c0e86440ab53f3fe56a7e28fe79a086866badc0c4662",
+        "omitted_bytecode_or_external_scripts_count": 2
+      },
+      {
+        "name": "triton",
+        "version": "3.3.0",
+        "record_sha256": "725e935324bea2a3ede071c8ef99234b82ef332c7322d320a5acdc51adc372ac",
+        "omitted_bytecode_or_external_scripts_count": 2
+      },
+      {
+        "name": "cloudpickle",
+        "version": "3.1.2",
+        "record_sha256": "b15abde97368750ad6b0bb6359f8c09edf3b753dcbe4d65f4bfc80d4ac619df5",
+        "omitted_bytecode_or_external_scripts_count": 0
+      },
+      {
+        "name": "mpmath",
+        "version": "1.3.0",
+        "record_sha256": "fc20dee3d4c32557ebd0e2e2d720128cf90d6bef4a8278aee351b05c8d925e54",
+        "omitted_bytecode_or_external_scripts_count": 0
+      },
+      {
+        "name": "nvidia-cudnn-cu11",
+        "version": "9.1.0.70",
+        "record_sha256": "811d2cf107c8b5a6a56b269e8dacaf3a1d44c492e0b0c12a37cc0d9a8ec88571",
+        "omitted_bytecode_or_external_scripts_count": 0
+      },
+      {
+        "name": "nvidia-nvtx-cu11",
+        "version": "11.8.86",
+        "record_sha256": "9618a2776ebc4df34087db8bd9f3f9e71948a504deb2061ed4f712162ba280ac",
+        "omitted_bytecode_or_external_scripts_count": 0
+      },
+      {
+        "name": "fsspec",
+        "version": "2026.7.0",
+        "record_sha256": "c1a9f62931083102f63aa4826a54072f4518a085fe15aa38e048de0a33ca209b",
+        "omitted_bytecode_or_external_scripts_count": 0
+      },
+      {
+        "name": "pybind11",
+        "version": "2.13.6",
+        "record_sha256": "11db9fbd1e11fd106560f6b9d95132942176f36814ead4d5d63e2a800963ed8a",
+        "omitted_bytecode_or_external_scripts_count": 1
+      },
+      {
+        "name": "nvidia-nccl-cu11",
+        "version": "2.21.5",
+        "record_sha256": "2db4e3463815d70bf1a150dc48a5145c506cfcef506b31366543f0db4f257705",
+        "omitted_bytecode_or_external_scripts_count": 0
+      },
+      {
+        "name": "filelock",
+        "version": "3.32.5",
+        "record_sha256": "48efcc55465e0a2accdc913115422a8684ae7e2684130eaee0f0a5d534fbfd64",
+        "omitted_bytecode_or_external_scripts_count": 0
+      },
+      {
+        "name": "nvidia-cuda-nvrtc-cu11",
+        "version": "11.8.89",
+        "record_sha256": "61f349a9234cbfc7eb47e2c8b89fab07085dbadcc08a66c97ef5b9a999623929",
+        "omitted_bytecode_or_external_scripts_count": 0
+      },
+      {
+        "name": "nvidia-cuda-cupti-cu11",
+        "version": "11.8.87",
+        "record_sha256": "3ec9546dd807e9a5942c163bcf04b37c4e5759c294ef9b5c53d235312c4f625f",
+        "omitted_bytecode_or_external_scripts_count": 0
+      },
+      {
+        "name": "Jinja2",
+        "version": "3.1.6",
+        "record_sha256": "b96efaa65ed1c8a890b214a4aa1ce2cabe82b5cd3313d5fb27a99f3fb486bfd5",
+        "omitted_bytecode_or_external_scripts_count": 0
+      },
+      {
+        "name": "networkx",
+        "version": "3.2.1",
+        "record_sha256": "4d79bb488d63b096e9e4209155ac79ce93908b5906694050e7f3b97f11d2f088",
+        "omitted_bytecode_or_external_scripts_count": 0
+      },
+      {
+        "name": "nvidia-cublas-cu11",
+        "version": "11.11.3.6",
+        "record_sha256": "e8fa4755e897134414f2c1f4e5fdb35370d027366aee76638388328ccffd210e",
+        "omitted_bytecode_or_external_scripts_count": 0
+      },
+      {
+        "name": "nvidia-cusparse-cu11",
+        "version": "11.7.5.86",
+        "record_sha256": "103cdba55e7367c1a83508de6482fd87f6059d6436aa4aa9241e7d1b55cbd17b",
+        "omitted_bytecode_or_external_scripts_count": 0
+      },
+      {
+        "name": "nvidia-cuda-runtime-cu11",
+        "version": "11.8.89",
+        "record_sha256": "ee40f97b4084973852373c8c59d3a4a7c0f2a2372cda8264710f3247b0e6e84b",
+        "omitted_bytecode_or_external_scripts_count": 0
+      },
+      {
+        "name": "nvidia-cusolver-cu11",
+        "version": "11.4.1.48",
+        "record_sha256": "e09a2a6e00f2321ae9f62cb6c032fc1ea2c210ea19d19cbd9a9a0f4c3c523f92",
+        "omitted_bytecode_or_external_scripts_count": 0
+      },
+      {
+        "name": "nvidia-cufft-cu11",
+        "version": "10.9.0.58",
+        "record_sha256": "9073644aa157eceaeb4f64a355a43f365e4d1c8ff2f9b0e848c6418040f569ed",
+        "omitted_bytecode_or_external_scripts_count": 0
+      },
+      {
+        "name": "numpy",
+        "version": "1.26.3",
+        "record_sha256": "52775f5d371555ff69d78a9940529f3e09f2baa4da48faa84aa8c1b1c91d8b12",
+        "omitted_bytecode_or_external_scripts_count": 2
+      },
+      {
+        "name": "Farama-Notifications",
+        "version": "0.0.6",
+        "record_sha256": "0145d003ec1e3e593d81380b16b88a361b05c5e295c8ab31729a91edf7a05e3d",
+        "omitted_bytecode_or_external_scripts_count": 0
+      },
+      {
+        "name": "ninja",
+        "version": "1.13.2",
+        "record_sha256": "f7222b928643409a99ee8c2a122998d042ff9a130a7f7794c23c012d86a8102b",
+        "omitted_bytecode_or_external_scripts_count": 1
+      },
+      {
+        "name": "gymnasium",
+        "version": "1.0.0",
+        "record_sha256": "8f49181a5569c982a564417c3f0c74b1ecdb2180325ca8bb4557e9b54e999fac",
+        "omitted_bytecode_or_external_scripts_count": 0
+      },
+      {
+        "name": "nvidia-curand-cu11",
+        "version": "10.3.0.86",
+        "record_sha256": "4226e4e2e3d6479ac96352b51580c7eea1d7b3374871cb1c1d8ad6f1f0b0aa30",
+        "omitted_bytecode_or_external_scripts_count": 0
+      },
+      {
+        "name": "tomli",
+        "version": "2.4.1",
+        "record_sha256": "66bc405dde4ab2a7672059f0d08c1d32cb51f0727d18ede14d047b64faad5ec9",
+        "omitted_bytecode_or_external_scripts_count": 0
+      },
+      {
+        "name": "pettingzoo",
+        "version": "1.24.3",
+        "record_sha256": "ef78dc1ed5241ff28e27e1df07b39f62b3991a16baa9449b739ccb50eb89325a",
+        "omitted_bytecode_or_external_scripts_count": 0
+      },
+      {
+        "name": "MarkupSafe",
+        "version": "3.0.3",
+        "record_sha256": "be0c5500bf264a3a38710299ff58ab983eb7ca732ace6cd330b3fd2d7ee2a329",
+        "omitted_bytecode_or_external_scripts_count": 0
+      },
+      {
+        "name": "torch",
+        "version": "2.7.0+cu118",
+        "record_sha256": "7ea3194ca08cc8639ff4afd032211cc754399c9cbde3f4aec140a3be91f5d34b",
+        "omitted_bytecode_or_external_scripts_count": 2
+      },
+      {
+        "name": "typing_extensions",
+        "version": "4.16.0",
+        "record_sha256": "34f5092350122aec6eb4885dd0c90bf534d0d54c7843c0ea2fafc4c956a22373",
+        "omitted_bytecode_or_external_scripts_count": 0
+      },
+      {
+        "name": "psutil",
+        "version": "6.1.1",
+        "record_sha256": "03805e55f6ab3e3c0e24b2c3c8e560d75365d9a87632bde9069c2d206da92254",
+        "omitted_bytecode_or_external_scripts_count": 0
+      }
+    ]
+  },
+  "setup": {
+    "scientific_queries": {
+      "native_steps": 0,
+      "static_calls": 0,
+      "model_forwards": 0,
+      "fits": 0
+    },
+    "ordinary_imports_only": true,
+    "transport_failures_retained": "pip23.0.1 resolver rejected normalized package names; isolatedpip25.3; largePyTorch and HF connections truncated/timedout, stopped own transfers after terminal reconciliation; no result attempt existed. Selected installed distribution bytes copied independently, not symlinked/shared; overlapping namespace entries required exacthash equality. Pinned model completed in same .part object using verified HTTP ranges, then wholeSHA verified and renamed.",
+    "temporary_cache_policy": "pip --no-cache-dir; /tmp/pip-* observed during live install and absent after terminal; no model weight cache/replica",
+    "setup_cpu_scope": "package-copy8.51806CPU seconds measured; earlier installation/import/support CPU not fully measured, not zero; not result attempts",
+    "observed_allocated_bytes": {
+      "isolated_environment": 5914005504,
+      "canonical_model_and_setup_metadata": 846622720
+    },
+    "setup_disk_samples": 21,
+    "early_transfer_observed_peak_bytes": 845225984,
+    "final_observed_total_bytes": 6760628224,
+    "transient_bound_note": "earlier failed downloads ended and their temps disappeared before package copying; final addon wheels totaled under100MiB, so final observed footprint plus100MiB conservatively bounds unsampled addon transient. No continuous peak claim.",
+    "model_completed_range_count": 226,
+    "model_sequential_prefix_bytes": 369738674,
+    "source_snapshot_forecast": {
+      "head": "41adf784e8c0e81085cfaccc86ec9a7fe943c9d8",
+      "tracked_files": 22281,
+      "logical_blob_bytes": 1724535981,
+      "allocated_4KiB_file_floor": 1776820224,
+      "scope": "source arithmetic forecast, actual admitted source snapshot counted by Bill; reuse one snapshot for all three phases"
+    },
+    "raw_setup_metadata_sha256": {
+      "asset-manifest.json": "840bc3b03d64021b6ed7a2d214b582eab083f2d03f4c6865baec2e529b87b29e",
+      "runtime-pip-report.json": "26f444f1b8620b7a75b1395e3c3a8ca9db5c8e26b3e8066fcf4e099fc3739dc1",
+      "model-transfer-progress.json": "2d0ff1fffb3b7c5e66f867207534229c394a483ba6cd02eca11303f40d6fab08",
+      "setup-disk-observations.jsonl": "3fdd282e4774c1a987cc3b123aa66fe7553f6b8e4bb436320497e06779c6f120",
+      "runtime-manifest.json": "217206e55b45828dbfa8e42264599326f0b31cd00dcec24d863f9b5bfaddfbbb",
+      "runtime-package-source.json": "f196b1301f1b628bc7706eca32fcf751b031e792d91941542a0a21314a3e2af1"
+    }
+  }
+}
