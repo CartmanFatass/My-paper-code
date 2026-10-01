@@ -9504,3 +9504,156 @@ END ROOT ADOPTION / ARTIFACT CLOSEOUT
 END ONE COMPLETE ORIGINAL-PRESERVATION HANDOFF.
 
 --- END COMPLETE ORIGINAL ORACLE HANDOFF ---
+
+<a id="b09-engineering-check-ledger"></a>
+### B09 implementation acceptance and finite correctness ledger
+
+The bounded Implementer delivered only `context.py`, `learning.py` and their two
+mirrored tests. The DM read the implementation and test evidence and accepts the
+module behavior, subject to full collector/reader integration. The independent
+engineering Reviewer then read the contract, sources and tests and reported no
+material finding in this bounded numerical scope. Both final invocations passed
+37 synthetic tests. This review does not yet cover the full worker/reader pipeline.
+
+The helper reproduced a nonzero-head collection/replay logit discrepancy of
+7.450581e-09 caused by the differing NumPy-backed/Torch-owned row layout. Both
+paths now clone the context259 and base-logits27 into standalone contiguous
+Torch storage before the same FP32 matrix-vector, bias and bounded-tanh program.
+The scale, coordinates, loss and random addresses are unchanged. This adds286
+FP32 element copies per head forward; the original numerical contract remains.
+Final head objects retain `requires_grad=True` with evaluation/inference mode;
+the reader reconstructs their law directly from saved immutable state tensors.
+No parameter on a fixed peer or P0/P1 is made trainable.
+
+Cumulative helper checks across five invocations, including reproduced failures
+and repair:554 successful head forward rows/562 attempts,320 head backward rows;
+500 critic forward rows/312 backward rows;78 head+76 critic Adam steps;32 tracker
+ingests/26 pair gates. Independent Reviewer invocation adds224 successful head
+rows/228 attempts,120 head backward rows;196 critic forward/116 backward rows;
+29 head+28 critic steps;16 successful tracker ingests/13 pair gates (24 attempts).
+Neither used a Student forward, native/C query, live checkpoint or result fit.
+Helper final wall1.86s and reviewer pytest wall3.53s are check timings, not complete
+support labor. Prior failed checks retain their counted exposure here.
+
+**Prospective integration detail, before its first execution.** The already
+selected32-episode H8 synthetic fixture uses a fake environment, original random
+layout construction and the previously verified scalar radio function to
+materialize finite arrays. Its one constructor plus32 resets/256 fake transitions
+therefore add289 scalar state materializations/78030 directed scalar power links;
+the separately selected complete reader adds288 states/77760 links. Neither calls
+the native simulator. This fixture tests the complete mixed-roster/cache/update/
+state-retention/reader path; its physical implementation correctness relies on
+existing independent B08/native evidence, not on comparing that function to itself.
+The primitive local/critic clock remains t/256 even though fixture termination is
+H8. All12 egos and both rosters occur with one fake final world/tape; no scientific
+asset, panel or performance selection is used. Small direct policy/privacy and
+reader-tamper cases may add synthetic forward/scalar calls within the declared
+unit allowance, reported by their instrumented fixture. No second complete
+integration execution is automatic; a concrete defect can justify a focused
+repair and repeat with its extra exposure retained.
+
+Original Oracle handoff transfer was deleted after exact-byte verification and
+publication at2a3a1ab89e760febabfb9eaaf615d072d2b1a879: actual target
+`temp/directions/uav_fleet_adaptation/b09_oracle_original_handoff.txt`, net49152
+allocated bytes reclaimed. The one canonical original text remains in this
+notebook; this is artifact-transfer cleanup, not final B09 closure.
+
+**First complete synthetic integration: passed.** The one planned fixture and
+six adjoining source/privacy/schema/refusal checks passed7 tests in7.42s.
+Instrumented actual costs were348 synthetic Student forwards;99 live-head
+forwards plus40 reader-head forwards;96 critic rows;16 head+16 critic optimizer
+steps;288 MemoC rankings plus8 live V/R and8 independent V/R rankings (304 total
+C-family rankings);289 fake radio state materializations,256 fake transitions,
+and288 full-reader scalar states. Native simulator/canonical P0/P1 calls were0.
+The304 rankings are the complete fixture's separately incurred worker+reader
+cost, beyond the earlier unit-only planning allowance. All32 episodes,4 saved
+pregroup states+4 finals,24 final levels,68 contrasts and8 history-zero diagnostic
+head calls were checked. No repeat was needed. Pytest-owned scratch was removed
+normally. Saved arrays in this check were synthetic; its32 episodes are not
+added to scientific episode or fit counts.
+
+The full implementation now uses the unchanged host factory with all transmitters
+ON, separately constructs every member each episode, and forwards only private
+local inputs into policies. The complete reader uses independent association,
+V/R ranking and focal-head expressions, original fixed-policy references and
+scalar native reconstruction; early training policies and critics use their
+saved precollection states. It does not replay later-epoch optimizers. First-epoch
+PPO density/loss and complete suffix-return/advantage arithmetic, hash/step chains
+and all final group-state movements are checked. Critic reconstruction permits
+2e-6×max(1,abs(value)) for its FP32 three-layer value only and records actual
+maximum error; policy logits, history descriptors, categories and physical paths
+remain exact. The initial synthetic reader's maximum errors are retained by its
+checks; no tolerance is chosen from a native outcome.
+
+**Next engineering review scope.** The existing independent Reviewer now receives
+the completed full worker/reader path plus the passing synthetic fixture. A
+read-only repeat of the existing7-test pipeline, if useful to its independent
+assessment, is prospectively charged at the same32fake-episode/256transition,
+348Student/139head/96critic-row,304C-ranking,16+16step and577scalar-state exposure.
+There is no new result-bearing arm or scientific query. Any additional necessary
+reproduction must name its behavior and report actual cost; no performance pilot
+or actual native validation is being purchased.
+
+**Full engineering review repairs, before the reserved repeat.** The Reviewer found
+an unused standalone reader CLI that lacked the selected runner's admission and
+runtime checks and also had broken relative imports. It has been removed;
+`run.py` remains the sole selected admitted production entry and invokes the
+unchanged `read_result` API after collection. The Reviewer also found that copied
+inflight counter snapshots could omit known work if an ingest/history assertion
+or focal-head exception occurred before the next successful query. An outer
+reader exception boundary now snapshots every live member's counters before
+propagating the original error. Successful scientific arithmetic is unchanged.
+
+Two focused regressions are added to the already priced one full synthetic
+pipeline repeat: a first-tick V history tamper after its ranking, and an injected
+focal-head exception after its frozen Student/helper forward. They reuse the
+same synthetic fixture, add two scalar initial-state reconstructions/540 links,
+one V ranking/27 paths/108 modeled ticks and one Student/helper request, and add
+zero native transitions, successful head/critic forwards, optimizer steps or
+scientific asset queries. Expected complete invocation:349 Student rows,
+139 head rows,96 critic rows,305 C-family rankings,579 scalar states and16+16
+optimizer steps. The injected failure attempts are separately identified; no
+new result, evaluation world or fit is authorized by these checks.
+
+**Full independent engineering review accepted.** The original Reviewer returned:
+
+> No material finding remains in the assigned B09 diff.
+>
+> Both findings are resolved: the unused standalone reader entrypoint was removed,
+> and audit failures now preserve completed work counters. Both failure regressions pass.
+>
+> Validation:9 pipeline tests passed in8.30s; prior numerical review passed37 tests.
+> This repeat incurred349 Student rows,139 head rows,96 critic rows,305 rankings,
+> and16 head/16 critic updates.
+>
+> Limits:synthetic fixtures only;zero native or canonical-asset calls. Full production
+> execution was not exercised. No reviewed code was edited.
+
+The DM accepts the repaired implementation and this independent review. The first
+pipeline check and this one reserved review repeat are both incurred; neither is
+scientific evidence of useful F/H behavior. A final AST/whitespace check parsed
+all16 owned Python sources without importing or executing their modules. No
+actual-node synthetic repeat, performance pilot or extra native fixture is added.
+The head/critic/tracker module tests cover the numerical program; the full
+synthetic fixture covers the selected collector/retained-state/reader integration;
+the actual admitted result remains the first native execution of this B09 program.
+
+**Node and immutable-input preparation.** Read-only inspection on2026-10-01 UTC
+found configured preferred `wsl_4070` host LAPTOP-U9TDKC8A with13,447,143,424
+available RAM bytes and844,166,336,512 filesystem-available bytes; no agent-task
+row had an active tmux supervisor. These are preliminary facts, not an admission
+receipt or a reservation. Immediate launcher admission still applies. The node's
+current compute config and maintained launcher hashes equal the current local
+published files. Its canonical direction row has unchanged exploring/lead rights
+but stale B06 standing; only this owned row will be synchronized from published
+main before launch, preserving other remote edits and live controls.
+
+Both original canonical files were byte-checked without loading/querying a model:
+P0 and P1 are424487 bytes each, at the previously bound b9e25fca…/cb67a3d4… hashes.
+For the snapshot's explicit external inputs, make one temporary immutable copy of
+each in `/home/wu/hmasd-inputs/uav_fleet_adaptation/b09_focal_response_a01/`
+(`P0.pt`,`P1.pt`), outside the author/source root, then verify both digests. These
+copies will be removed after collection and consumer checks; the original unique
+assets remain. This is848974 copied file bytes plus filesystem allocation, not a
+new model population or scientific query. The selected result is one sequential
+worker/full-reader invocation at `runs/uav_fleet_adaptation/b09_focal_response_a01`.
