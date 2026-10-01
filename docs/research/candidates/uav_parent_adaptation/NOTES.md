@@ -6827,3 +6827,56 @@ residual MSE 0.0002985870953075247 / 0.00013567024840798906; world-mean terms
 0.00003627333546274275 / 0.00002908971830738154. No data from that reading
 trains or tunes the bound fit. The original source, fit inputs, per-world arrays
 and candidate predictions retain the audit path for this descriptive arithmetic.
+
+<a id="b07-final-cleanup"></a>
+### B07 final cleanup and idle boundary
+
+The full result and original independent diagnosis were published as
+`8bb2e56089a3251d1b82d2306dfbcad781ad9ee3` before retirement. The same accepted
+operation is terminal with valid exit0; its observer is stopped and the critic
+has released its inputs. The native exact-target snapshot collector independently
+found the snapshot eligible after a complete read-only process scan, then removed
+it with `--snapshot c110bfbadd8241c6920763a323e1ea25 --sudo-process-scan --apply`.
+Claims, manifests, compact readings and original required evidence remain intact.
+
+Actual deleted targets and their pre-deletion allocated sizes (`st_blocks × 512`,
+including directory blocks and without following symlinks) are:
+
+| Deleted target, relative to the main checkout | Allocated bytes removed |
+| --- | ---: |
+| `.git/hmasd-launch-sources/c110bfbadd8241c6920763a323e1ea25/` | 1,735,802,880 |
+| `.git/worktrees/c110bfbadd8241c6920763a323e1ea25/` | 3,575,808 |
+| `experiments/candidates/uav_parent_adaptation/b07_shortlist_amortization/__pycache__/` | 151,552 |
+| `tests/experiments/candidates/uav_parent_adaptation/b07_shortlist_amortization/__pycache__/` | 57,344 |
+| `experiments/candidates/uav_parent_adaptation/b06_continuation_amortization/__pycache__/` | 110,592 |
+| `experiments/candidates/uav_parent_adaptation/b04_joint_sampling/__pycache__/` | 73,728 |
+| `temp/directions/uav_parent_adaptation/` (only the stopped B07 observer request) | 8,192 |
+
+All listed targets are actually absent: gross allocated reduction is
+**1,739,780,096 bytes**, with zero remaining bytes at those paths. After subtracting
+**4,096 bytes** of growth in this cleanup record and the owned RESEARCH
+publication, the measured net reduction is **1,739,776,000 allocated bytes**.
+The temporary measurement scratch is deleted after recording these facts; its
+creation/removal is not counted as extra reclamation. The earlier disposable
+24,576-byte source-exploration text is also excluded from this cleanup total.
+This is a measured reduction of the listed working-tree/snapshot/registration
+scope, not a claim about Git object storage, concurrent outputs or physical host
+capacity. Moving the required bulk copy contributed zero reclamation.
+
+Retained: useful committed source/tests and their inherited imports; compact
+positive/adverse evidence, original advice/disposition and all source/fit IDs;
+exactly one canonical 90,731,614-byte raw-plus-summary evidence copy at the
+location above; and its original run-path symlinks. No redundant bulk was kept,
+no complete-worktree backup was created and no other direction's files or
+accepted operations were changed. No unused new B07 entrypoint remains outside
+the retained executable comparison and its tests. **There is no cleanup blocker.**
+The remote sparse-input limitation recorded before launch remains a concrete
+constraint on future remote use of those bound inputs; the completed local B07
+study is not waiting on that repair.
+
+Own standing is reserve and shared topics 3/4 incorporate the scoped ordinary
+frontier and prediction/ranking distinction. No active producer, observer,
+unread result, outstanding review or selected successor remains. B07's fixed
+comparison and its authorized boundary are complete. The parent question stays
+open under the re-entry reasoning above; this idle state creates no new run or
+external waiting obligation.
