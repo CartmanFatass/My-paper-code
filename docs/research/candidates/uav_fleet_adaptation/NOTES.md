@@ -10819,3 +10819,32 @@ All16 new source/test Python files pass AST parsing with0 model/native
 queries. Total three correctness invocations used26.70s wall/20.59s CPU;
 372268KiB is the maximum per-process peak, not summed simultaneous memory.
 Exact source and evidence publication follows before production execution.
+
+
+Exact B10 scientific source published normally as
+`73278079be41ad8068b73594a32cde5841119032`; remote fetch and all maintained
+launcher/admission/platform/resource/snapshot dependencies match published
+main. Only the two owned remote RESEARCH standing/routing lines were synced
+from this publication; every other remote line and existing edit was preserved.
+
+The first outer `agent-task` submission, `fleet_b10_joint_control_a01`,
+accepted at08:54:25UTC but terminated immediately with exit66 before the
+admission kernel: `flock: cannot open lock file .git/hmasd-main-writer.lock:
+No such file or directory`. The recorded runner command and supervisor
+source reconstruct the error: supervisor joins its argv with `$*`; separate
+`zsh -lic` argv lost the nested command quoting, so `cd` alone ran inside zsh
+and the outer `flock` ran from the wrong directory. This is a reproduced
+wrapper-serialization error, not a training failure. PID1232615 is absent,
+its tmux is inactive, the B10 output directory is absent and the canonical
+claim store contains no B10/output/source claim. Scientific exposure0; no
+accepted native operation or snapshot was created. Original supervisor
+status/log/runner remain in its native task directory.
+
+Prospective correction passes ONE shell-quoted command string to the same
+configured supervisor (which preserves the necessary inner quoting through
+its join), using separate outer name `fleet_b10_joint_control_a01_submit2`
+to retain the failed wrapper record. The exact original scientific source,
+arguments, output tag, node and fit/episode price are unchanged. This first
+actual kernel submission is not a duplicate/retry of any native operation;
+no `--retry-of` applies because no kernel acceptance existed. Normal fresh
+admission remains mandatory.
