@@ -2117,10 +2117,10 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 <a id="root-successor-designs-20260930"></a>
 **Four native DMs retain four substantive assignments.** Fleet transmission now owns the
 selected marginal-matched C/Q10 joint-renewal comparison, after full B06 publication and cleanup.
-Fleet adaptation has fully closed T/H and supplies source/cost facts for Astra Max Oracle's
-next constructive learned-development assessment, currently examining a different local binary
-transmitter-control contract. That source work selects no queries, targets, reductions, fits,
-implementation or result run; Root will read the full recommendation before choosing.
+Fleet adaptation has fully closed T/H and now owns the selected local binary transmitter-gate
+study over frozen motion, following the complete Astra Max recommendation and source/cost
+challenge. All four assignments are result-bearing studies; their workers still require actual
+resource admission, and implementation or reading work is not an admitted native run.
 `dm_parent_adaptation` continues the selected exact G2/A2 saved-history computation comparison,
 and `dm_user_waiting` continues S_F:LRS physical planning against paid fair references. Oracle
 owns detailed idea discovery and independent challenge using cumulative records, all three
@@ -2194,8 +2194,8 @@ retains useful quality/minimum/path tradeoffs. Preserve that capability without 
 or an automatic replication. Target TV≤.1 is no uniform bound on the trained policies.
 
 Root adopts the independent stop of unchanged T/H: no extra fit, stronger tilt, DAgger,
-optimization extension or episode panel. The broader learned-development question stays open
-for the source-only Oracle reassessment above. Actual new cost is2fits/172032native steps,
+optimization extension or episode panel. The broader learned-development question continues
+through the separately selected local gate below. Actual new cost is2fits/172032native steps,
 560.463enclosing CPU seconds/561.756wall seconds, plus incompletely metered support. Direct
 programs compute both target vectors before deploying one; measured direct CPU is honest
 implementation cost, not a minimal baseline or demonstrated net amortization. All adverse
@@ -2203,6 +2203,81 @@ worlds and earlier outages survive the new panel's absence of total-service outa
 [Complete result and original review](candidates/uav_fleet_adaptation/NOTES.md#b07-original-independent-result-review),
 [DM disposition](candidates/uav_fleet_adaptation/NOTES.md#b07-independent-disposition),
 [retired exact selection and price](archive/2026-10-01/RESEARCH-stochastic-target-and-cadence-completion.md#retired-stochastic-target-selection).
+
+<a id="local-transmitter-gate-selected-20261001"></a>
+**Selected: can native experience learn useful local transmitter control over frozen motion?**
+Root read the complete Astra Max recommendation, the DM's source challenges through
+3e339fcf68a99b238224d85878cd0567fe16b1d1 and consequential primary passages, and selects one
+bounded pivot. Central radio-management gains motivate testing control rights, but their
+registered maps/reports/mask search and sometimes fewer than four active transmitters do not
+establish this local contract's headroom. The constructive conjecture is that local demand and
+interference predict a consequential binary choice, with P0's frozen nonlinear features making
+the tradeoff more accessible. The strongest ordinary alternative is that simple permission to
+silence, or a raw-input regression, supplies the useful gain. T/H's stop and all prior positive,
+adverse and failed evidence remain controlling; actual-S2 and transfer stay unselected.
+
+Keep original N5/U50/H256 reset and four-tick motion holds. At boundary t, only member
+r=(t/4)%5 may be OFF; all other four are ON. Shared rank/clock are explicit equal coordination
+resources. All five motion proposals and the eligible gate use OLD-mask observations, followed
+by one mask installation and four transitions. There is no all-on sensing refresh or second
+decision from setter-returned observations; a previously silent member proposes from its
+censored row before reactivation. Preserve original114-feature P0 arithmetic, helper/private
+navigation, all27 categories and a fresh indexed motion draw on cache hits, with gate draws
+in a separate domain. No map, reports, peer actions, grant ACK or evaluator truth enter the gate.
+Frozen weights do not fix trajectories. Four active transmitters do not guarantee service;
+instantaneous actuation omits delivery, synchronization, guard-time and switching-energy costs.
+
+Acquire512 fresh worlds, eight at each of64 decision clocks, with two complete paid H256 branches
+per world. Both use P0 and a random .5 gate before/after one forced OFF versus ON decision;
+retain every full native J_OFF−J_ON target, including zeros. Fit exactly two FP64 ridge heads
+on those512 pairs: RAW has original114 inputs plus11-way capped visible-user-count encoding;
+HIDDEN adds the original128 second-ReLU activations from the already-paid forward/cache.
+Training-only centering/population SD, constant scale1, unpenalized intercept and unit penalty
+in sum-SSE units are fixed; OFF iff prediction>0, ties ON. HIDDEN is a deterministic feature
+expansion of the same input, not new information or history. One shared dataset and pretrained
+parent are not independent training replications. No tuning, encoder update or dataset extension.
+
+The final32-world panel has two tapes for stochastic programs: P0 × A/O/R/ZERO/RAW/HIDDEN
+(384episodes), Bstar0/Hdirect/G/Q10 × A/ZERO (512), deterministic C × A/ZERO (64).
+A keeps all ON; O always silences the eligible member; R uses .5 probability; ZERO silences
+only when its count of positive user-slot SINR fields, capped at ten, is zero.
+These16 levels and37 declared contrasts include primary HIDDEN−RAW, both learned gates against
+all14 unfitted programs, each parent's ZERO−A, and P0 O−A/R−A. Average tapes inside32 world
+clusters. Read complete J/service/quality/tails/outages/path/height, on-time/switches/censoring,
+gate activation, queries/CPU and every signed adverse world. Freeze addresses, force-clock
+assignment, processing order and uncertainty before exposure. Training targets use random
+continuation; repeated learned deployment changes its own histories, so regression fit is not
+policy improvement. Conditional learned or ordinary capability, a narrow feature result below
+competent packages, active failure and nonactivation have separate dispositions. None licenses
+automatic tuning, extra worlds, confirmation or deployment.
+
+The full purchase is **2 fits / 1,984 episodes / 507,904 native steps**, including960 final
+episodes. Worker ceilings include634880 motion requests,126976 gate opportunities,532480 neural
+forwards,491520 standalone helpers and143360 C-family requests;3870720 C paths/15482880 modeled
+ticks;68812800 helper/323993600 C link evaluations. Motion/gate draws total614400/69632.
+Hdirect makes40960 law calls, each constructing T and H (81920 vectors total); its nonminimal
+implementation stays charged. Only P0 needs possible424487-byte staging. The explicit original
+N5 adapter requires synthetic arithmetic/RNG checks; source feasibility is not equivalence.
+The full independent scalar reader covers all post-step radio/assignments, mask refreshes,
+old-mask/terminal observations, actual policy/cache/navigation/draws, paired prefixes/targets,
+scalers and ridge residuals, and all outcomes. It may repeat the full query/model ceiling with
+zero new native steps or refits; the same native radio kernel is not an independent reconstruction.
+
+Root accepts source estimates **.5–2 combined worker/reader CPU hours and6–12 support hours**,
+.4–1.0GiB RSS per streaming process,.7–1.5GiB new canonical bulk and separate1–3GiB working
+headroom. Snapshot allocation remains unmeasured; the historical1.75GB is an anchor. These are
+not measured caps or admission. The DM owns prospective declaration, implementation/review,
+published inputs, actual-node admission, complete result reading/independent diagnosis,
+publication and measured cleanup, while preserving the two already accepted studies.
+[Full source/cost challenges and original recommendation](candidates/uav_fleet_adaptation/NOTES.md#post-b07-local-gate-source-facts).
+
+The literature limits this inference: cost-to-go regression motivates consequential labels but
+its iterative aggregation guarantees do not cover this single batch; local channel observations
+and shared coordination must be distinguished; learned distributed power control already exists
+with richer feedback. This is a native capability question, not algorithmic novelty.
+[Ross–Bagnell §2](https://arxiv.org/pdf/1406.5979),
+[B03 §§2.3.3/6.2.4](https://www.fransoliehoek.net/docs/OliehoekAmato16book.pdf),
+[Nasir–Guo §IV-C](https://arxiv.org/pdf/1808.00490).
 
 <a id="temporal-source-allocation-20261001"></a>
 <a id="temporal-use-and-economy-selected-20261001"></a>
