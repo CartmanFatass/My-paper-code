@@ -454,3 +454,25 @@ that tree. A fresh actual-node check at each launch still governs acceptance. Th
 suite runs once after exact-source publication; then only the two H8 fixtures and fixed
 64H256 worker/full reader are selected. Runtime overlap costs are retained, not isolated
 speed claims.
+
+
+<a id="b01-synthetic-reading"></a>
+## 2026-10-01 — Fixed synthetic checks passed at published source a80e2be9e
+
+Exact source `a80e2be9e3341b3bebfa743dacfda5e4ff13d977` was committed and pushed
+before the one selected synthetic invocation. It passed13pytest items:12typed/codec/
+boundary/moment cases plus the single eight-round grouped case. The eight actual manager
+rounds and eight same-record independent prefix readings paid1684fleet scores each;
+together with24pure scalar/batched references, total3392fleet evaluations/848000dense
+user entries. Four artificial deadline cutoffs retained the old commands and mask;
+the complete rounds included both final-block lengths and inclusive deadline boundaries.
+The PRIOR wire reader rejected injected decoded loss evidence without another candidate,
+native, C or RNG query. Native steps/resets/constructors, C calls, RNG samples, fits and
+updates were all0. This is correctness evidence, not a runtime feasibility benchmark.
+
+[Complete counts](../../../../runs/uav_radio_information_cost/b01_synthetic_a01/summary.json)
+and the one invocation's log/resource record are retained. Whole process1.18s wall,
+.80s user+.13s system CPU, peak56572KiB. Pytest reported.75s for its measured test phase;
+the full process cost is used here. Test scratch cleaned through the standard pytest
+lifecycle. No failure, retry, extra case or scientific pilot occurred. Next remains
+the two admitted H8 streams on the unchanged published source.

@@ -1,0 +1,23 @@
+	Command being timed: "env PATH=/home/fires/.venvs/hmasd-linux-cpu/bin:/home/fires/.local/bin:/home/fires/.codex/packages/app-server-daemon/releases/0.159.3-x86_64-unknown-linux-musl/codex-path:/home/fires/.local/bin:/home/fires/.grok/bin:/home/fires/.local/bin:/home/fires/.cargo/bin:/home/fires/.codex/tmp/arg0/codex-arg0LdXMQ6:/home/fires/.codex/packages/app-server-daemon/releases/0.159.3-x86_64-unknown-linux-musl/codex-path:/home/fires/.codex/tmp/arg0/codex-arg0sgnzzq:/home/fires/.codex/packages/app-server-daemon/releases/0.159.2-x86_64-unknown-linux-musl/codex-path:/home/fires/.codex/tmp/arg0/codex-arg0hXcsaK:/home/fires/.codex/packages/app-server-daemon/releases/0.159.1-x86_64-unknown-linux-musl/codex-path:/home/fires/.codex/tmp/arg0/codex-arg0RlxYEq:/home/fires/.codex/packages/app-server-daemon/releases/0.159.0-x86_64-unknown-linux-musl/codex-path:/home/fires/.codex/tmp/arg0/codex-arg0qqd68c:/home/fires/.codex/packages/app-server-daemon/releases/0.157.1-x86_64-unknown-linux-musl/codex-path:/home/fires/.codex/tmp/arg0/codex-arg0IMR3DY:/home/fires/.codex/packages/standalone/releases/0.157.1-x86_64-unknown-linux-musl/codex-path:/home/fires/.local/bin:/home/fires/.grok/bin:/home/fires/.local/bin:/home/fires/.cargo/bin:/home/fires/.local/bin:/home/fires/.grok/bin:/home/fires/.nvm/versions/node/v24.20.0/bin:/home/fires/.local/bin:/home/fires/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 /home/fires/.venvs/hmasd-linux-cpu/bin/python -m pytest -q -s tests/experiments/candidates/uav_radio_information_cost/b01/test_protocol_manager.py"
+	User time (seconds): 0.80
+	System time (seconds): 0.13
+	Percent of CPU this job got: 78%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:01.18
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 56572
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 27
+	Minor (reclaiming a frame) page faults: 10390
+	Voluntary context switches: 1003
+	Involuntary context switches: 7
+	Swaps: 0
+	File system inputs: 142656
+	File system outputs: 8
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
