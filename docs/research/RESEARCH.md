@@ -2115,19 +2115,18 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 ### Parallel allocation: independent work and rolling succession
 
 <a id="root-successor-designs-20260930"></a>
-**Four native DMs retain four substantive assignments.** The fleet-adaptation and
-fleet-transmission DMs have completed the T/H learning and H4/E/H1 cadence studies, including
-full interpretation and independent scientific review; they finish owned publication/cleanup
-and supply bounded source/cost facts for the next question. Astra Max Oracle separately
-assesses constructive learned development and an independent temporal/deployment or broader
-UAV question using cumulative records, all three libraries and primary passages. These source
-assignments select no new queries, targets, reductions, fits, implementation or result runs;
-a justified stop remains possible. Root chooses the next investments after the full advice.
+**Four native DMs retain four substantive assignments.** Fleet transmission now owns the
+selected marginal-matched C/Q10 joint-renewal comparison, after full B06 publication and cleanup.
+Fleet adaptation has fully closed T/H and supplies source/cost facts for Astra Max Oracle's
+next constructive learned-development assessment, currently examining a different local binary
+transmitter-control contract. That source work selects no queries, targets, reductions, fits,
+implementation or result run; Root will read the full recommendation before choosing.
 `dm_parent_adaptation` continues the selected exact G2/A2 saved-history computation comparison,
-and `dm_user_waiting` continues the selected S_F:LRS physical-planning comparison against paid
-fair references. Helpers are not extra DMs; this allocation implies neither four admitted
-workers nor scientific value from filling capacity. Existing leads retain question continuity;
-Claude's pause/ownership and all unselected reserves remain unchanged.
+and `dm_user_waiting` continues S_F:LRS physical planning against paid fair references. Oracle
+owns detailed idea discovery and independent challenge using cumulative records, all three
+libraries and primary passages. Helpers are not extra DMs; the allocation implies neither four
+admitted workers nor scientific value from filling capacity. Existing leads retain question
+continuity. Claude's pause/ownership and all unselected reserves remain unchanged.
 
 Root read the complete count B06, parent B07 and ordinary G B05 results, original independent
 criticisms and DM responses. It adopts the exact count-mixture and fixed learned-shortlist
@@ -2231,7 +2230,61 @@ requiring monetary prices for every component; no such new contract is invented 
 [Full result and independent disposition](candidates/uav_fleet_transmission/NOTES.md#b06-complete-reading),
 [original complete selection review](archive/2026-10-01/RESEARCH-temporal-use-and-planning-economy.md#decision),
 [retired cadence selection](archive/2026-10-01/RESEARCH-stochastic-target-and-cadence-completion.md#retired-cadence-selection).
-The continuing B08 contract below is unchanged and was not retired with completed cadence work.
+
+<a id="joint-renewal-selected-20261001"></a>
+**Selected: does dispersed renewal add native value beyond ordinary action randomization?**
+Root read the complete new Astra Max recommendation, the DM's source assessment at 1d3d786d7
+and consequential primary passages, and selects one ordinary-control study. B06 motivates
+cadence-dependent trajectories; prior B04 fixed-action-marginal coupling and peer-forecast
+adverses oppose assuming that less simultaneous change is beneficial. The constructive
+conjecture is that separated renewals use the physical consequences of earlier teammate
+choices. Ordinary randomization and individual persistence may already supply the useful
+redirection. This study answers a joint-timing question, not a learned-termination, best-policy,
+coordination-mechanism or algorithmic-novelty claim.
+
+Keep original N5/U50/all-on/H256, C and Q10 (.9 on C, .1/26 on each other category), four-tick
+forecast, current local observation and private navigation. Phase p queries at 0 then
+4+p, 8+p, ..., 252+p: exactly 64 per member, with first/terminal holds 4+p/4−p. SYNC assigns
+all members phase q; DISPERSED assigns (q+r_i)%4 for a prospectively independently seeded
+per-world permutation of {0,0,1,2,3}. Run every q=0..3, sharing that permutation across
+q/tapes/treatments. This matches each member's complete query-clock multiset, including
+boundary durations, while retaining one repeated pair per world. Keep private draw addresses
+[tape_root,world,actual_tick,agent] without adding phase/schedule. Queries at a tick share the
+same pre-step observations, navigation advances once per query, and nonquery commands hold.
+No phase or peer commitment enters C's input. Joint startup/terminal effects remain in the
+whole-mission estimand; realized action marginals need not match on different histories.
+
+The fixed complete panel is 32 fresh worlds × 4 offsets × 2 schedules × (C once + Q10 twice):
+**768 episodes / 196,608 native steps / 0 fits**. Freeze addresses, reset/layout bindings,
+interleaved order and descriptive uncertainty before outcome exposure. Primary is C's
+DISPERSED−SYNC mean J; read service, the matched Q10 effect and their interaction with all
+quality/p10/minimum/outage/longest-zero/path/CPU outcomes and signed adverse worlds. Average
+offsets and Q tapes inside each world, leaving 32 clusters. Save scheduled, categorical and
+physical changes without shadow-policy or counterfactual native queries. A C gain reduced by
+Q10 is consistent with substitution; a Q-only gain is an interaction; broader gains retain conditional
+timing capability. Sparse, adverse or unresolved outcomes can end this purchase without a
+phase/trigger/horizon sweep, extra panel, learner or automatic confirmation.
+
+Complete logical cost includes 245,760 worker C rankings, 163,840 private draws, 768+1 resets
+and 54,278,675 native dense-power slots. Uncached worker ceilings are 6,635,520 candidate paths,
+26,542,080 modeled ticks and 530,841,600 candidate + 24,576,000 setup link evaluations. The
+full reader reconstructs every 245,760 C decision including deployment hits, with the same
+model/link ceiling, and all native telemetry/clock/nav/RNG/reductions; it adds zero native steps
+or actor/helper calls. Root accepts estimated **5–15 combined CPU minutes / 4–7 support hours**,
+.2–.6 GB canonical raw, .4–.9 GiB RSS and 1.7–2.0 GB temporary source storage. These are not
+measurements, caps or admission. There is no S asset staging; actual cache work and complete
+cost remain measured. Physical clock provisioning, drift and energy remain unmeasured.
+[Complete source, cost and original advice in the direction notebook](candidates/uav_fleet_transmission/NOTES.md#post-b06-staggered-source-assessment).
+
+This is an empirical conjecture. MARL-0530's asynchronous credit assignment treats continuing
+actions, SeqComm supplies communicated earlier actions before simultaneous execution, and the
+ICLR-2025 staggered-inference paper treats actual compute delay. None supplies this physical
+schedule's improvement guarantee. Primary passages checked:
+[MARL-0530 §4](https://www.ijcai.org/proceedings/2025/0020.pdf),
+[SeqComm §§2–4](https://papers.neurips.cc/paper_files/paper/2024/file/d6be51e667e0b263e89a23294b57f8cf-Paper-Conference.pdf),
+[ICLR-2025 61715c… §§2–3](https://arxiv.org/html/2412.14355).
+
+**Continuing exact planning economy:** B08 remains selected with its accepted inputs unchanged.
 
 Parent B08 compares original/reuse G2 and A2 on all16original B04 worlds:
 **64complete H500 controller replays/0new native steps, worlds or fits**. Fresh private state and
