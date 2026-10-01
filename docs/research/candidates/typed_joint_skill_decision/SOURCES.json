@@ -1,0 +1,230 @@
+{
+  "schema": 1,
+  "status": "source-only B00; no load, forward, RNG result draw, native query, test or fit",
+  "snapshot_head": "c8630a6138bc6b5acf6f73472cb55f8279d9f180",
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "bytes": 12829,
+      "sha256": "8466f610218b59c4ff5678a03e4fd886e2bdbe25083e778f27a0fa3214b9eb64"
+    },
+    {
+      "path": "docs/AGENTS.md",
+      "bytes": 2364,
+      "sha256": "8698b18e44dda9dc6c7acd2ce5b147d5e4b6abae33a10191178864d81fd204b0"
+    },
+    {
+      "path": "docs/project/OPERATING_CONSTITUTION.md",
+      "bytes": 40288,
+      "sha256": "2bfbbb4503613e5ed4360a9cf827841b255f90ae214ea3e49fcf1c935b963453"
+    },
+    {
+      "path": "docs/research/RESEARCH.md",
+      "bytes": 544266,
+      "sha256": "369626a7ab64f69ba68a304a2d44a39da29672e01fd268ad3e4f5504ece01e59"
+    },
+    {
+      "path": ".agents/skills/hmasd-scientific-tools/SKILL.md",
+      "bytes": 28967,
+      "sha256": "3523b4a00a675001a539ac9a5218f083ef3315d81da821874b7492efd8a55d32"
+    },
+    {
+      "path": ".agents/skills/hmasd-research-engineering/SKILL.md",
+      "bytes": 25169,
+      "sha256": "b0e39a5634716e884c2f17bcaa440ef1420cbee34e0a2f8a738e99a334dae42e"
+    },
+    {
+      "path": "hmasd/networks.py",
+      "bytes": 92971,
+      "sha256": "e358deb1d0ecb8c6bccf12d9be620ed57e00c7278b4c61670b50ae278c783955"
+    },
+    {
+      "path": "experiments/candidates/coupled_host_joint_skills_stage1/host.py",
+      "bytes": 11470,
+      "sha256": "92b75c0317009380108bd45429892e49ca857b901ae1adbcd5bfe483d89ef469"
+    },
+    {
+      "path": "experiments/candidates/coupled_host_joint_skills_stage1/planner.py",
+      "bytes": 46084,
+      "sha256": "5c23f4c8a25df55052fa6eb4bb0da65fcf0f079560789b8abd7db416222a0aa6"
+    },
+    {
+      "path": "experiments/candidates/coupled_host_joint_skills_stage1/menus.py",
+      "bytes": 11520,
+      "sha256": "15b818e0250141b45a47480d5acaa6b0f217c8ce8fe8c35ef6a7abb765102886"
+    },
+    {
+      "path": "envs/pettingzoo/uav_env.py",
+      "bytes": 68827,
+      "sha256": "fb67554cf911adc9d3260a2a7f16d1773921c295646cb46beb4ba1247fec599e"
+    },
+    {
+      "path": "envs/pettingzoo/scenario2.py",
+      "bytes": 36830,
+      "sha256": "277374f365e8eeda882de53d53cc051c1534fe210622fee74d7b5a8f9d2cf2f2"
+    },
+    {
+      "path": "experiments/candidates/coupled_host_replan_timing/event_host.py",
+      "bytes": 14481,
+      "sha256": "f50128decf75291443c6e74ef0f85b49ac34643657731e246f43ef9b239c9743"
+    },
+    {
+      "path": "experiments/candidates/coupled_host_replan_timing/rules.py",
+      "bytes": 37936,
+      "sha256": "8f590bf0b668a249e6ce9dfbda35ab6cdfaeb0c42bc70367c22e2ae0fafa2c33"
+    },
+    {
+      "path": "docs/research/candidates/coupled_host_joint_skills_stage1/NOTES.md",
+      "bytes": 477812,
+      "sha256": "601364bc708a4027ee90be0679f968d3cd04852d76f5b6c4b23500c89a66a3a7"
+    },
+    {
+      "path": "docs/research/candidates/coupled_host_planner_distillation/NOTES.md",
+      "bytes": 43297,
+      "sha256": "0bccb0347d36656e180786f2ec3dc84461f8aef93d8059af6e1fbf54d669711b"
+    },
+    {
+      "path": "docs/research/candidates/coupled_host_replan_timing/NOTES.md",
+      "bytes": 80596,
+      "sha256": "3a96fde00238e5fc40405995e970344d31d657a25dc2fc33bb9e3857b1e4efcf"
+    },
+    {
+      "path": "runs/coupled_host_replan_timing/r1lite_dev_a01/summary.json",
+      "bytes": 114645,
+      "sha256": "a604dacd011b6f3349fd0727da82f05efa7c5dd4ba11a9dc9313aafc0f5bbf47"
+    },
+    {
+      "path": "runs/coupled_host_replan_timing/r1lite_holdout_a01/summary.json",
+      "bytes": 113813,
+      "sha256": "bd292320380a6bbb0bc2f282c5595189991e8ae5f51122b6d8a0512c36a4acea"
+    },
+    {
+      "path": "docs/research/designs/R30_FIXED_CLOCK_AR_EDIT_DESIGN_20260714.md",
+      "bytes": 12704,
+      "sha256": "502ea67df79a0f37991a7d95d712da297ef7e7648e6a5cf25d6f90c972bb04b6"
+    },
+    {
+      "path": "docs/external-review/gpt5_6_pro/20260717_r54_hfsr_result/R54_HFSR_RESULT.json",
+      "bytes": 8876,
+      "sha256": "429ea6d44060d2ea4ba27b0f521c3ca354d7a49557568c2184c472307afd0e9a"
+    },
+    {
+      "path": "docs/external-review/gpt5_6_pro/20260717_r54_hfsr_result/GPT5_6_PRO_RESPONSE_RAW.md",
+      "bytes": 19409,
+      "sha256": "52200fc44b5ad7f5774d1738ef5d1851699c32bbfd7d44cdc7ecc4d25ac55887"
+    },
+    {
+      "path": "docs/external-review/gpt5_6_pro/20260716_r51_amdt_result/FINAL_DISPOSITION.md",
+      "bytes": 1512,
+      "sha256": "35f5338994187638e8dba1236465be3ff3536c2d67634de62e4aaf27ea690bc6"
+    },
+    {
+      "path": "docs/new-libs/LIBRARY_INDEX.md",
+      "bytes": 13080,
+      "sha256": "5e270737ed251585ff042fe8c81d5e1a2dfcc03c705104939e63945387d3d529"
+    },
+    {
+      "path": "docs/new-libs/corpus/papers/P17/metadata.json",
+      "bytes": 1818,
+      "sha256": "8705a4109acd7a488c462d195202e8f9ee43e20fdf3181c14184789279eb4162"
+    },
+    {
+      "path": "docs/research/candidates/typed_joint_skill_decision/OWNER_PROPOSAL_20261001.md",
+      "bytes": 61373,
+      "sha256": "2b7e95dee3d0d4b5a08b28ec150799a816a433e8cbc23df8e2e1c1f231a19e38"
+    },
+    {
+      "path": "/home/fires/projects/Inst-sci/papers/MyLib/json/MARL-0524.json",
+      "bytes": 170583,
+      "sha256": "eafdd7cb160b4362e63f941be4344a0e9488a2a62d5f8ab5c5298ed8c6483c16"
+    },
+    {
+      "path": "/home/fires/projects/Inst-sci/papers/MyLib/pdf/MARL-0524.pdf",
+      "bytes": 778680,
+      "sha256": "7d64c6e299bdcc3f129db48e0cd3c91034b1bb4dae48b07f8505547156258d4b"
+    },
+    {
+      "path": "/mnt/c/Projects/My-lib/.local-formal-capture/corpus/papers/neurips-2025/f404c0259def290306159047b0b52584/arxiv-2409.03811.pdf",
+      "bytes": 1724541,
+      "sha256": "430c1102cf3582039a7202ef7416d87cb8663587f4be62d837f6bb319b703e0e"
+    },
+    {
+      "path": ".codex/hmasd-compute.toml",
+      "bytes": 3542,
+      "sha256": "2bb704e31e08a6a3489e80ea6851826740dfbf71461e0f7e70c4394694e65e6f"
+    },
+    {
+      "path": "scripts/hmasd_launch.py",
+      "bytes": 94003,
+      "sha256": "6a22fef75e7bbc0997b2f4b0096d278de793d43e466497b36bba49884cab23f9"
+    },
+    {
+      "path": "scripts/hmasd_admission.py",
+      "bytes": 19793,
+      "sha256": "0faa5d53fba5af9b1a2fc4979bde5bd50bcbcaac2dbef938e90a64680156cf4d"
+    }
+  ],
+  "saved_world_records": [
+    {
+      "path": "runs/coupled_host_replan_timing/r1lite_dev_a01/worlds",
+      "files": 32,
+      "ordered_digest_sha256": "6d28ba5dca2405cd288f34010fd67ba261aac294fd54444c11b13e212e74437d",
+      "digest_format": "sorted filename:sha256\\n"
+    },
+    {
+      "path": "runs/coupled_host_replan_timing/r1lite_holdout_a01/worlds",
+      "files": 32,
+      "ordered_digest_sha256": "f5ec9684c7d220a84057cfc0513ad46317aceb50d0b54e9f1c73d9c47d326501",
+      "digest_format": "sorted filename:sha256\\n"
+    }
+  ],
+  "external": {
+    "laya_github": {
+      "url": "https://github.com/NandhaKishorM/laya",
+      "revision": "6d942c92081fbc139e736bbd9ac0023223c29b7f",
+      "passages": [
+        "laya/common.py::build_sequence",
+        "laya/common.py::DecisionModel",
+        "research/scripts/finetune_single_device.py::soft CE"
+      ]
+    },
+    "laya_hf": {
+      "url": "https://huggingface.co/convaiinnovations/laya",
+      "revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851",
+      "declared_license": "Apache-2.0",
+      "parameter_metadata": 421293830,
+      "weights_bytes_metadata": 842609210,
+      "weights_downloaded": false,
+      "rl_agent_config_sha256": "ae287b56bbcf5f8c4f4541ae9dfd00c914c4c48b940b8398c3058af37ba92bbd",
+      "encoder_config_sha256": "bf3ab80598fdccf414855a2ce80f22859e4492d06ca8a62ddd1cfb63972f8979",
+      "checkpoint_caps": [
+        512,
+        192
+      ],
+      "encoder_positions": 8192
+    },
+    "MAVEN": {
+      "paper_id": "P17",
+      "local_index": "docs/new-libs/corpus/papers/P17/metadata.json",
+      "indexed_pdf_absent": true,
+      "primary_read_url": "https://proceedings.neurips.cc/paper/2019/file/f816dc0acface7498e10496222e9db10-Paper.pdf",
+      "primary_pages": [
+        4,
+        5
+      ]
+    }
+  },
+  "scope_note": "Hashes bind read source/evidence; no executable experiment or acceptance manifest is created by this file.",
+  "focused_review": {
+    "role": "Root independent ResearchCritic",
+    "runtime_uuid": "01a0f77c-49e7-7292-91a3-2d8fa8fb1975",
+    "rollout": "/mnt/c/Users/fires/.codex/sessions/2026/10/01/rollout-2026-10-01T05-41-52-01a0f77c-49e7-7292-91a3-2d8fa8fb1975.jsonl",
+    "event_line": 818,
+    "event_type": "task_complete",
+    "turn_id": "01a0f7ce-b95f-7bf1-9da7-b8475de66bbe",
+    "message_bytes": 5889,
+    "message_sha256": "76b403c85ed8e412d6d56fb08d3de8e7a9b049fde4887367c1b1cc21ac075eae",
+    "event_line_sha256": "9f494d43511e96829168a663acb0a23661c352943146d4b432361c13100ceb31",
+    "retained_in": "NOTES.md between canonical critic final delimiters"
+  }
+}
