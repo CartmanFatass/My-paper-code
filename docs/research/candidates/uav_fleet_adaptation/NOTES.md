@@ -9035,3 +9035,472 @@ head/critic states and the final states; no optimizer replay is included. This
 input-ablation diagnostic tests the final fitted action law on its observed
 histories, not the native value of an ablated deployed policy. The provisional
 time/RSS/storage/support allowances remain broad estimates with this addition.
+
+<a id="b09-root-selected-contract"></a>
+### 2026-10-01 — B09 selected: one focal controller among responsive heterogeneous teammates
+
+Root selected this as the direction's one next result-bearing study after the
+complete source assessment above. The following is the original native adoption,
+kept separate from the Oracle's original advice and the DM's implementation scope.
+
+--- BEGIN ORIGINAL ROOT ADOPTION ---
+
+Root SELECTS the Oracle's ONE bounded mixed-controller focal-response study as your next result-bearing work (B09 is the natural tag). I read the COMPLETE original final from /root/oracle_next_capability, your full source/price appendix and both descriptor/reader corrections through current bf3527fcb, the original controller_composition B03 complete readings/decision, and Fictitious Co-Play primary §§2.1–2.4. Reuse that adequate independent source/design assessment; no extra selection critic/Pro round absent a new material disagreement. You remain the same scientific owner, may challenge premises, and own prospective NOTES/L0, implementation/delegation, engineering review, exact-source publication, fresh actual-node admission, accepted-operation observation, full reading/independent result interpretation, own index/background publication and measured cleanup. Routine execution does not await Root ACK.
+
+Purpose: can changing ONLY one UAV controller produce useful complete native response to independently acting heterogeneous teammates, and does lawful recent peer motion improve that response beyond current context? Select finite capability evidence, not general ad-hoc-teamwork, unseen-family or new-algorithm claims. This is a stronger question than another fixed-library mixture ratio: both learned arms see the SAME partner mixture. Prior B03 adverse mixture-vs-fixed results and all own-learning positives remain load-bearing. B08 gate is closed; its conditional feature positive is retained without a gate rescue. Parent actual-S2 has different control/information rights and keeps its separate ownership; no duplicate S2 study or prerequisite inference. Unknown partner labels alone do not prove need for memory, type identification, recurrent networks or learning. The sparse historical peer exposure and high support cost are genuine objections, not reasons to invent exposure or require a pilot.
+
+Keep the original N5/U50/all-ON/H256/SINR3/free-space/cap10/27-command/four-tick-hold host. Only physical slot0 is trainable. All five members keep private observations/nav/held commands/cache/reset; immutable P0 weights may be shared but no trainable object, private nav or cache can leak across members. T roster {C,C,P0,P0} is used in training and final; X {G,G,P1,P1} is final-only, with P1 the EXACT retained S_L1 asset. Each episode uniformly selects one of six distinct assignments to slots1–4 using a separately addressed paired random domain, fixed for that episode. The same assignment does NOT freeze or share responsive trajectories. No identity/type/peer commands/observations/global truth reaches the actor; no joins, new physical capability, communication or transmitter rights. X is a training-excluded composition of previously retained related ingredients, not an unseen policy family or fresh partner population. Bind exact P0/P1 original assets and all source dependencies, presence/hash-check them in the accepted snapshot before scientific queries.
+
+F/H: common current context = original114 features + frozen128 second-ReLU + public t/256. Append16 slots, one clipped dx,dy,dz/30 and valid bit per current peer rank (up to4); F zeros these16. Both zero-init259→27 linear heads,7020 parameters, P0_logits + .5*tanh(head), original flatFP64 CDF decoder. Preserve original114/hidden coordinates unchanged and the explicitly stated clock/displacement scalings; no learned normalizer or extra fit. History uses the exact existing mutually unique consecutive-tick componentwise≤30.001m gate, sub-.001 zeroing, ±30clipping and reset; no identity through disappearance. Factor tracker-only association, not an unused V/R planner. Call on every native tick; current-row-only keys cannot cache H residuals and no trainable output survives an optimizer update. Equal shape is not equal effective information/optimization or isolated information-value proof. Initial head/decoder must reproduce P0's law exactly before relying on P0 as the shared zero-init final control.
+
+Purchase TWO independent training blocks × F/H,256 H256 episodes/fit:4fits,1024 training episodes/262144 native steps. Pair within each block training worlds, assignment addresses, initial critic/head state and action innovations; retain each arm's own generated histories. Fresh independent blocks share inherited P0 and are NOT independent parent-pretraining replications. Adopt128 two-episode groups,4 full-rollout epochs, full suffix macro-return /256 with zero terminal bootstrap, fresh136→128→128→1 critic with original global/previous joint-command/hold rights. Freeze the exact B04 optimizer/clipping/advantage conventions and source identities in NOTES before queries, adapting actor term explicitly to EGO ONLY rather than reusing the summed-five-agent loss or B05's offline fitter. Critics/trunk/fixed peers remain separate/detached; no actor privileged training input. This is bounded exploratory exposure (16384ego decisions/fit), not sufficient/converged training by inheritance. No checkpoint selection.
+
+Final: all4 endpoints plus C/Q10/G/V/R/P0/Bstar0/Hdirect,32 fresh common worlds×2tapes×2rosters,1536 complete episodes. Deterministic egos still use2tapes for stochastic teammates. Every V/R receives primitive observations. Total2560episodes/655360native steps before separately declared finite correctness checks and constructor overhead. No extra initial-policy episodes, pilot, target acquisition, partner fit, independent shadow planner, fresh population or sweep. Primary H−F is read SEPARATELY for each training block and roster, with tapes averaged within world; retain all4 corresponding vectors/pointwise paired-world uncertainty. Read each endpoint vsP0 and all8 competent controls, all absolute levels, J/service/quality/p10/minima/outages/path and costs. No pooling worlds into training replication, posthoc preferred-block selection, energy-from-travel or universal-training statement.
+
+Use original Oracle outcome implications: useful F without H retains current-context response; H must offer useful full-program tradeoffs against F AND retained controls, not merely beat a weak learned F. H-only-onT, opposite blocks, sparse history/action sensitivity or active losses preserve their limited meanings and end this purchase with no automatic rescue/visibility increase/newseed/confirmation. Native reward and service share components, not independent corroboration. No deployment utility or new tolerance is invented. Any later substantial generalization/partner-generation purchase returns to Root.
+
+Complete full physical/policy/training-evidence reader is selected:657920states/3289600localrows/177638400scalar radio links at full length, all819200decision requests and nav/cache/tracker/assignment/tape continuity with the original policy ceilings repeated. Retain ALL512 precollection head AND critic states (plus finals) and replay actual early policies/65536critic rows, suffix targets/advantages/probabilities/updates ledger/hash chain; no optimizer replay or extra fit. Add the explicitly priced16384final H head-only history-zero calls from saved contexts+same innovations; reader114688head rows, full collection/update/reader475136head and393216critic rows. This is observed-history action sensitivity, not deployed ablation value or mediation. Log feature exposure, density/parameters/categories and actual physical actions without adding new native branches.
+
+Accepted prospective source bill:450560worker frozen forwards,442368helpers,376832C rankings/10174464paths/40697856modeledticks,851640320C power links +61931520helper links +5242880V/R links;565248motion draws (roster addressed draws additional),16384Hdirect T/H vectors,106496G tails,262144tracker ticks/4177920pair gates. Reader repeats applicable ceilings, optimizer2048head+2048critic steps and262144replay rows each. Source estimates0.5–2workerCPUh +0.5–2readerCPUh,0.5–1.5GiB streaming process RSS,4–5GB UNCOMPRESSED array payload,11–22supporth; source/selection support already spent is additional. These are unbenchmarked forecasts, not reservations, hard limits or wall-time claims. Compression/actualallocateddisk/source snapshots/transfer/publication overhead must be separately recorded. Use configured node preference plus fresh actual feasibility; no migration of other accepted work and no automatic concurrent four-fit assumption.
+
+Before exposure, bind a proportionate finite engineering-check scope and its actual extra model/native/update cost in NOTES/L0. Prefer synthetic/stored-input checks for private-state ownership, six assignments, RNG domains, initial-law equality, losses/grad isolation, tracker/cache updates and reader coverage; do not hide native validation or treat tests as free. Necessary bounded correctness work within this selected design does not require Root's routine approval, but no performance-driven pilot or new result-bearing arm is authorized. Independent numerical/engineering review must cover new ego-only optimization and all identity/private-state boundaries. Preserve one canonical evidence copy and measured net cleanup, all failed attempts, old B08 originals and archived controller_composition standing. Please preserve the Oracle's full original question/answer/source corrections separately from this Root adoption in your existing notebook.
+
+--- END ORIGINAL ROOT ADOPTION ---
+
+**DM acceptance and scientific exposure.** I accept this finite focal-response
+comparison. The decisive intervention is the trainable slot0 law against the
+same responsive roster process in F/H, with X a changed composition at final
+evaluation. Full native return and strong ordinary controls determine package
+use; additional feature exposure or action sensitivity is only an intermediate
+reading. The current source assessment already exposed the actual actor/critic,
+clock, anonymous-history, private-state and decision interfaces. It identified
+no host obstruction, but does identify new ego-only learning and reader work;
+this is not unchanged invocation of B04/B05. Root's source/design assessment
+covers the chosen comparison; no new material scientific objection has appeared.
+No extra selection review or Pro question is purchased. All B01–B08 costs and
+adverses, including B08's retained conditional positive, remain unchanged.
+
+<a id="b09-l0"></a>
+### B09 prospective implementation scope and fixed numerical/randomness details
+
+**Deliverable and ownership.** One admitted, sequential worker followed by its
+complete saved-data reader under
+`experiments/candidates/uav_fleet_adaptation/b09_focal_response/`, with mirrored
+tests, output `runs/uav_fleet_adaptation/b09_focal_response_a01/`, and temporary
+work only under this direction's `temp/`. The DM owns this notebook, contract,
+collector, orchestration, reader, acceptance and all Git mutations. A bounded
+Implementer may own only the new `context.py`, `learning.py` and their two test
+files: the behavior is a lawful259-coordinate focal head and its ego-only
+on-policy update. No shared core or historical source is edited. No native
+study/launch, source selection, notebook/index writing, Git mutation, extra
+subagent or access to live production checkpoints belongs to that helper.
+
+**Frozen update.** Four fits, each256 complete H256 episodes in128 groups of2;
+within a group the head/critic remain fixed while collecting both episodes.
+For each of4 full-rollout epochs, use the B04 numerical order: convert saved
+FP64 macro rewards to FP32; reverse cumulative sum/256 with zero terminal
+bootstrap; subtract collected FP32 critic values; normalize advantages with
+group mean and population std plus1e-8. Replay each ego context through exactly
+one FP32 matrix-vector259→27 operation plus bias and `.5*tanh`, add the frozen
+FP32 P0 logits, then form probabilities from FP64 shifted exponentials in the
+original order. Actor loss is explicitly
+`-mean(min(ratio*advantage, clip(ratio,.8,1.2)*advantage))`
+over the two episodes'128 **ego** decisions, without a five-agent sum, entropy
+bonus, KL auxiliary, target weighting or optimizer state from P0. Each head
+and its separate critic use Adam(lr=3e-4, betas=(.9,.999), eps=1e-8,
+weight_decay=0, amsgrad=False, foreach=False, fused=False). Apply separate
+gradient L2 clipping at.5 with nonfinite-error checks. Step the head before
+the critic as in B04; critic loss is `.5*mean((value-target)^2)`. Preserve
+FP32 parameter/gradient and FP64 density arithmetic. Freeze and record exact
+dependency hashes in the production contract before scientific queries.
+
+The critic is the existing136→128→128→1 implementation with native global
+state116 and previous joint commands/remaining holds20; at four-tick decisions
+all holds have expired. At t=0 previous commands are zeros. It is a separate
+trainable object per fit, never an actor input; head/trunk/fixed teammate
+parameters share no optimizer. B04's initial probability/ratio checks and
+finite-gradient/parameter checks remain. Save all512 precollection head and
+critic states plus finals, state/optimizer-step hash chains, return/advantage/
+loss diagnostics and actual replay counts. No optimizer replay is performed by
+the final reader. The descriptor, tracker and full reader are exactly the
+selected Root contract above; inference residuals are recomputed per decision,
+and only immutable P0 analyses/hidden/logits may be memoized.
+
+**Addressed worlds, rosters and order.** Block0 training worlds29991000..29991255;
+block1 training worlds29992000..29992255; common final worlds29993000..29993031.
+These are separate from the original P0/P1 and B01–B08 domains. Master29994000:
+actor-constructor seed29994001; fresh critic seeds29994011/29994012;
+training action roots29994021/29994022; final tape roots29994031/29994032;
+training assignment roots29994041/29994042; final assignment root29994051;
+bootstrap root29994061; environment-constructor seed29994071. Within a block,
+F/H use identical initial critic bytes and matched worlds/action/assignment
+addresses, but separate mutable objects and independently generated histories.
+All four training fits share only immutable P0. No evaluation world is used
+in training, fitting, calibration or selection.
+
+The six assignment indices enumerate the two slots for the first law as
+`(1,2),(1,3),(1,4),(2,3),(2,4),(3,4)`; remaining slots receive the second law.
+T first/second laws are C/P0; X are G/P1. At each episode start, one
+`default_rng(SeedSequence([assignment_root,world,tape,panel])).integers(0,6)`
+chooses its index; training uses tape0/panel0 and its block root, final uses
+tape0/1 and panel0/1. This is2560 actual assignment calls at640 unique paired
+addresses, separate from565248 motion uniforms. Motion innovations retain
+`indexed_uniform(action_root,world,tick,physical_agent)`; no arm or roster
+name is added to that address. Reusing an address never reuses a private
+trajectory/cache/nav or an executed command. Train block0 F then H, block1 H
+then F, each in ascending world order, without interleaving updates across
+fits. Final base order is F0,H0,F1,H1,C,Q10,G,V,R,P0,Bstar0,Hdirect; form all
+48 arm/tape/roster conditions for a world, rotate by world index modulo48,
+and reverse odd world indices. The exact flattening order is arm, then roster
+T/X, then tape0/1. Each episode is complete before the next starts.
+
+**Readings.** Read24 absolute arm/roster levels and68 paired contrasts: H−F
+separately in each of2 blocks×2 rosters, and every one of4 endpoints minus each
+of8 controls separately on each roster. Average the two tapes within a world;
+retain every signed32-world vector and adverse world/tape identities. Use20000
+common32-world bootstrap index rows with root29994061 and pointwise2.5/97.5
+percentiles, explicitly conditional on these fitted assets and no simultaneous
+coverage/training-population claim. Primary and all component/tail/path/outage
+readings remain at their fixed scope. No metric, arm, world, fit or diagnostic
+is selected from observed performance. The final H history-zero reading adds
+only the priced16384 head rows/decodes on observed histories; no native branch
+or new deployment contrast follows from it.
+
+**Finite engineering checks and charged exposure.** Initial checks use synthetic
+rows/weights and a deterministic fake environment; no canonical P0/P1 forward,
+native constructor/step or scientific fit is called. Focused cases cover the
+six assignments and address pairing; distinct caches/nav/parameter ownership;
+FP32 zero-head identity and extreme finite density; consecutive anonymous
+matching, ambiguity/disappearance/reset and current-rank packing; changed
+history at equal current rows; correct ego loss/gradient and frozen-peer/trunk
+isolation; group target/advantage/step accounting; and full-reader schema,
+failure evidence and saved-state reconstruction. The one planned complete
+synthetic integration fixture uses4 short trajectories of head updating, each
+2 fake H8 episodes, plus all12 final egos×2 rosters×one fake world/tape:32
+synthetic episodes/256 fake transitions,16 head+16 critic optimizer steps and64
+replay rows each. Its full physical-array reference covers288 synthetic states/
+77760 scalar radio links. These are nonscientific correctness costs, not four
+additional research fits. Unit forward/backward/model/lookahead calls and any
+necessary focused repeat after a defect will be reported as actual check costs;
+the first planning allowance is at most2048 synthetic Student forward rows,
+4096 head rows and256 C-family requests, plus the stated tiny optimizer fixture.
+This forecast is not a hard test-count quota. If a new necessary behavior check
+needs other exposure, declare it before that check and preserve its actual cost;
+no performance-driven pilot or live native validation is included by default.
+
+An independent engineering Reviewer must inspect the new numerical update,
+private-state/identity/RNG boundaries and complete worker/reader evidence path,
+using focused existing synthetic checks where useful. The DM reviews the diff
+and check evidence and accepts it. Launch inputs are committed/published before
+actual result execution; configured preferred node wsl_4070 is considered first
+at fresh admission, without acquiring a node or migrating any other operation
+now. One canonical evidence copy, actual allocation/CPU/RSS/transfer/check costs,
+terminal collection/full independent reading and measured cleanup are part of
+the deliverable. Any technical failure preserves actual exposure and identity;
+no automatic performance rescue or duplicate accepted launch is authorized.
+
+<a id="b09-original-oracle-advice"></a>
+### B09 original independent source/design advice and attributed corrections
+
+The following is the complete original artifact handoff from the separate-context
+Oracle, preserved verbatim and separately from Root's selected contract above.
+The DM's complete source/price reasoning remains at
+[#post-b08-partner-heterogeneity-source-facts](#post-b08-partner-heterogeneity-source-facts)
+(published bf3527fcbdb996099320c5ac1e8e5b2463455603); that source appendix is not
+replaced by the short exchanges quoted here. The received handoff is45472UTF-8
+bytes, SHA256f20ce819a9ec30a93d96d1c210dffc9fbed3db9baf43139dfb6cc0ab246e7ab0.
+
+--- BEGIN COMPLETE ORIGINAL ORACLE HANDOFF ---
+
+ONE ARTIFACT-ONLY ORIGINAL-PRESERVATION HANDOFF, requested by Root. This is not a new source pass, review, selection or approval request. Preserve the complete original Root question and complete original Oracle final below, with the original source/correction exchanges and failure-host correction separately attributed. Your canonical full source-price appendix at bf3527fcbdb996099320c5ac1e8e5b2463455603, docs/research/candidates/uav_fleet_adaptation/NOTES.md#post-b08-partner-heterogeneity-source-facts, already preserves the complete underlying source/price reasoning; retain that one canonical text and link it rather than treating a short native message as its replacement. Root adoption is a separate section at the end. You already have Root's full selection and need not wait for an ACK to implement, obtain engineering review, publish or seek admission. Once this original material is preserved and published, return the immutable notebook commit/anchor so I can close this artifact handoff; no ACK loop or further review is requested.
+
+BEGIN ORIGINAL ROOT SOURCE/IDEA ASSIGNMENT
+
+Root new bounded SOURCE/IDEA assignment for the same fleet-adaptation owner after its fully closed B08 gate result. I am choosing a materially different scientific question to assess, not reopening the fixed gate recipe: can this UAV programme make a useful contribution on cooperation with teammates whose behavior or capabilities are not fixed copies/a known unchanged controller? Assess a concrete ad-hoc teaming or partner-heterogeneity capability if justified, or recommend no purchase. Detailed idea discovery/innovation and literature synthesis belong to you; Root will choose the investment after your full source-grounded recommendation.
+
+Relevant gap: current fleet-count interpolation changed count but remained a closed prescribed-policy setting and did not expose >2 visible peers; parent N8 reuse found no designated persistent unknown law; the new actual-S2 study tests local proposals through a known fixed coordinator. None directly answers adaptation to a genuinely different teammate. This does NOT establish that private memory, partner identification, a recurrent network or new learning is needed. A nominal hidden parameter, presence event or newly editable module is not a scientific opportunity by itself. Start from an important cooperative planning/decision difficulty and a plausible use contract, then find a meaningful native comparison with competent current-state/history-aware ordinary and retained alternatives given the same lawful rights. Existing hosts/assets are preferred when suitable; any narrow extension must be justified by the task rather than manufactured to advantage a learner.
+
+Reconstruct and retain the relevant whole-project evidence: RESEARCH topics2–4 and current plans; original G0 `uav_roster_memory`/`uav_availability_recovery` (real leave/return but absent positions still interfere, useful no-response witness, two actively harmful fits), VNFC/S4/N7 permanent loss distinct from joins; fixed-N interpolation/mixture adverses; B08 HIDDEN's conditional learned feature/use positive and unresolved strong-package increment/tail costs; prior legal peer-forecast results and information/history limits. Claude-owned/paused directions stay owned and paused: reading their evidence does not authorize takeover or relaunch. Questions families are not permanent monopolies, but any real scope overlap must be identified to Root rather than bypassed by renaming. B08's final original critic and DM disposition are in fleet-adaptation NOTES#b08-original-independent-result-review / #b08-independent-disposition at afe375657; the additional Oracle source advice correctly recommends no immediate on-policy gate or unchanged replication purchase. Do not treat that limited stop as exhaustion of all cooperative learning.
+
+Use July records/external reviews, ALL THREE local libraries and directly read consequential primary passages/web where needed. Identify nearest known methods and what the proposed work could actually add without claiming novelty from search misses. Give one strongest concrete question or reasoned stop; actual source behavior, observation/identity/history/action/communication rights, train/deploy exposure, causal conjecture versus simpler account, smallest COMPLETE discriminating comparison and outcome implications, and full prospective fits/native/query/reader/support/storage bill. New partner generation, acquisition, recurrent state, cross-play, privileged training signals, sampled partner distribution and unseen-family claims must be priced and distinguished when used. Do not require a pilot or exhaustive attribution before a worthwhile direct learning experiment; equally no repeated source passes until a positive proposal appears.
+
+Other ownership: parent DM's actual-S2 CAL/CONT development is selected and implementing; waiting C/cap-two/LRS is selected and in complete reading; fleet-transmission DM + /root/deep_report_review own continuous-user-motion/changing-demand SOURCE work. Preserve accepted scopes; if the best question overlaps substantively, explain the real joint allocation rather than artificially shrinking it. The fleet-adaptation DM can supply bounded source/feasibility/pricing facts after its current publication, and owns the notebook. ZERO new actor/model/native queries, new outcome reductions, targets, fits, implementations, profiling/benchmark or result runs under this source assignment. Return the full original answer to Root; no new experiment is selected.
+
+END ORIGINAL ROOT SOURCE/IDEA ASSIGNMENT
+
+BEGIN COMPLETE ORIGINAL ORACLE FINAL RECOMMENDATION
+
+**Recommend a bounded pivot to mixed-controller cooperation: can one UAV learn a useful native-return response to heterogeneous, independently acting teammates, and does lawful recent peer motion improve that response beyond current observations?**
+
+I would buy one complete exploratory comparison: **four response fits, 2,560 H256 episodes and 655,360 native steps**, including strong ordinary and retained learned controls. The prospective complete cost is **1–4 CPU-hours, 11–22 support hours and roughly 4–5 GB of uncompressed evidence**. These are forecasts, not guarantees. No experiment is selected or authorized by this review.
+
+The contribution would be a measured capability under a finite partner distribution. It would establish neither general ad-hoc teaming nor adaptation to unseen policy families. I recommend this narrower question because it changes who can be controlled and what must be accommodated, while using existing native physics and lawful observations. I do not recommend a new partner population, physical-capability variable, identity channel or recurrent architecture now.
+
+**The cooperative difficulty and use contract**
+
+The plausible use is replacing the controller on one member of an existing fleet whose other members keep their own software. The focal UAV controls its movement, observes its own local radio scene and shares the team’s service objective. Its four teammates respond to their own observations and private navigation state. Their future movement changes interference, discovery and coverage, but their controller identities, observations and commands are unavailable to the focal actor.
+
+This is a consequential planning difficulty even with homogeneous hardware: the focal UAV must choose movement while other autonomous controllers react to the evolving situation. It cannot reproduce those reactions from a frozen trajectory or assume that everyone executes its own policy.
+
+The existing source supports this contract without a simulator change. `MultiUAVEnv.step` accepts separate commands for the five physical UAVs. The original N5/U50, all-on, H256 host retains its 27 movement commands, four-tick holds, free-space radio law, SINR threshold 3 and capacity 10. Distinct policy objects can own separate navigation, caches and histories while sharing immutable network weights where appropriate.
+
+The local row contains own position, 20 user slots, 10 peer slots and clock. Users and peers are ordered by SINR, with physical-index tie breaking; **slot position is not a persistent identity**. There is no explicit peer ID, controller label, command or private-state channel. With five UAVs, at most four peer rows can be nonzero. The evaluator’s physical indices and global state remain outside actor inputs. The [DM’s complete source and price appendix](/home/fires/hmasd-wsl/docs/research/candidates/uav_fleet_adaptation/NOTES.md:8683) establishes these interfaces and their limitations.
+
+Opportunity remains uncertain. Existing measurements show sparse visible peers and sparse consequential uses of ordinary motion forecasts. Heterogeneity could increase useful encounters, leave them rare, or principally alter outcomes through interference already reflected in current SINR. No source fact establishes a need for partner identification, memory or learning.
+
+**What the inherited evidence supports**
+
+The closest predecessor is **controller_composition B02/B03**, not the recent fleet-count study. That work already trained three-member responders against retained partner policies. Its initial excluded-partner positive was uncertain and accompanied by a seen-partner loss. In the two subsequent training blocks, mixed training lost mean J and service to fixed-partner training on all three evaluated partners:
+
+| B03 training block | Mixed minus fixed J, across three partners |
+|---|---|
+| First | −.017342, −.009056, −.009834 |
+| Second | −.047450, −.054193, −.049463 |
+
+All twelve own-training comparisons nevertheless had positive mean J and service changes. Thus the result rejects the tested mixture advantage, while preserving evidence that native response learning occurred. The supposedly excluded third partner was an existing, previously observed library asset. New training blocks and a new evaluation panel changed together, limiting causal diagnosis. This was an N6/S1, different-threshold, H500 study; its numbers must not be pooled with the proposed N5 panel. I checked its frozen protocol, complete recorded reading and [retained B03 summary](/home/fires/hmasd-retained-runs/controller_composition/b03_partner_replication_20260925/summary.json).
+
+The proposed treatment would differ: **both learned arms receive the same mixed-partner training distribution**. The comparison concerns useful current versus recent-motion response, rather than buying another mixed-versus-fixed training comparison. Only one actor learns; teammates retain fixed parameters but remain responsive during execution. This removes simultaneous adaptation among learned teammates from this particular experiment.
+
+Other consequential evidence is:
+
+- **B08 supplies a real feature/use positive.** HIDDEN−RAW was +.007318 J, with descriptive interval [.002490, .012068], and +.522 mean served users. Yet HIDDEN−Hdirect_ZERO was only +.000097, with an interval spanning zero; HIDDEN−Bstar0_ZERO was −.004507, also unresolved. Against P0_A, HIDDEN gained mean J/service but lost .789 service-p10 and .781 episode-minimum users, while adding about 821 m/UAV of travel. Its useful conditional result does not establish a complete-package upgrade or justify renewing the gate recipe. The frozen feature encoder itself was not newly learned. [Original result review and disposition](/home/fires/hmasd-wsl/docs/research/candidates/uav_fleet_adaptation/NOTES.md:8310).
+
+- **Legal peer prediction already demonstrates representation without reliable complete benefit.** On its own 203 moving-peer/current-user samples, R reduced four-step geometric error from the stationary prediction’s 69.738 m to 29.025 m. Nevertheless, R−C complete J was −.001195; V−C was +.004691, both with intervals spanning zero. V/R changed only 5/9 physical choices among 10,240 decisions each. Their favorable and adverse trajectories remain important. Better prediction cannot substitute for native service, nor can sparse changes be called complete nonactivation. [Original saved summary](/home/fires/hmasd-wsl/runs/uav_local_peer_forecast/b01_cv_reversal_a01/summary.json).
+
+- **Ordinary randomization and inherited learning are competent alternatives.** Q10/I already supplies useful mean native gains over deterministic C, with travel and within-episode tail costs. P0 and Bstar retain further conditional capabilities. A new response policy beating C alone would be insufficient. Previous continuation, consequence-head and count-mixture adverses do not identify a common failure mechanism. B06 also never exposed more than two visible peers, so it did not test the anticipated larger visible-set problem. [Current cumulative evidence](/home/fires/hmasd-wsl/docs/research/RESEARCH.md:61).
+
+- **G0 distinguishes real events from useful adaptation.** The roster host implemented controlled leave/return, including a new lifecycle handle, while absent positions continued to contribute interference. The availability experiment had one endpoint that always staged/held and two that always dispatched reserves, with the latter actively harmful. The hold endpoint’s gain over the planner was not established against its own initialization, and ordinary hold was already a useful witness. These outcomes neither demonstrate a need for entity memory nor exhaust cooperative learning. I checked the original scope, reading, costs and retained per-world records. [G0 complete reading](/home/fires/hmasd-wsl/docs/research/candidates/uav_availability_recovery/NOTES.md:417).
+
+- **The failure hosts must remain distinct.** VNFC/R09/N7 uses permanent physical deletion. Native S7-S4 decrements failure timers and restores availability; its configured durations are 20–60 ticks. G0 has a separate controlled leave/return contract. Root accepted this correction to the assignment’s shorthand. None by itself supplies an unknown-partner-policy or genuine new-member capability.
+
+The earlier anonymous user-history work also matters: legal caching sometimes changed decisions and produced useful examples, but its complete C/H comparisons remained uncertain, and the subsequent from-scratch set-policy recipe was strongly adverse against ordinary control. The July G35 record similarly retained a useful current-state learned controller without establishing the recurrent increment under its declared margin. These are reasons to compare competent current-state and history-aware programs, not reasons to prescribe or prohibit memory.
+
+**Nearest methods and the limited contribution**
+
+I searched all three libraries and read the consequential primary passages.
+
+The foundations treatment of joint-action learning and type-based reasoning makes partner modeling an ordinary decision resource: useful beliefs can be maintained without a neural requirement, and their value depends on changed decisions. Its examples also expose information assumptions, including observed actions. [B01, relevant discussion around printed pp.132–136](/home/fires/hmasd-wsl/docs/new-libs/papers/B01_Albrecht_MARL_Foundations_2024.pdf).
+
+Fictitious Co-Play trains a responder against a frozen population, including intermediate checkpoints, to diversify behavior without adapting those partners during responder training. Population generation and responder learning are both paid work. Our retained assets avoid **new** population-generation cost; they do not provide the breadth of that method’s population or its generalization evidence. [Fictitious Co-Play, §§2.1–2.4](https://proceedings.neurips.cc/paper_files/paper/2021/file/797134c3e42371bb4979a462eb2f042a-Paper.pdf).
+
+The Inst-sci CEC paper distinguishes partner variation across algorithms from new seeds of a training method and studies environmental diversity as a way to improve cooperation. Its substantial training programme is not a cheap recipe that can be imported by naming two retained policies a population. [CEC primary paper](https://proceedings.mlr.press/v267/jha25b.html), [MARL-0457 structured source](/home/fires/projects/Inst-sci/papers/MyLib/json/MARL-0457.json). The rational-policy-gradient work also cautions that unconstrained diversity can produce unhelpful partners; it supplies no certificate that our retained controllers are optimal or suitably diverse. [MARL-0661 primary extraction](/home/fires/projects/Inst-sci/papers/MyLib/json/MARL-0661.json).
+
+The My-lib MAP-Elites passage uses behavioral trajectory descriptors and explicitly evaluates generated population members. It supports distinguishing behavioral diversity from parameter diversity and charging repertoire construction. It is a single-agent repertoire method, not evidence that a UAV partner population would be free or effective. [ICLR-2023 virtual-10728, pp.3–5](/mnt/c/Projects/My-lib/.local-formal-capture/corpus/papers/iclr-2023/iclr-2023-virtual-10728/arxiv-2303.12803.pdf).
+
+GPL addresses unknown teammates using learned agent models and value decomposition, but the original formulation has stronger state/action observation assumptions. Its partially observable extension uses training-time global state and teammate-action supervision; the particle-model preprocessing also assumes a known agent set and IDs. Those resources differ materially from anonymous local rows. Importing the algorithm would require a new information, training and computation contract. [GPL](https://proceedings.mlr.press/v139/rahman21a/rahman21a.pdf), [PO-GPL, §6.5 and Appendix D.1](https://jmlr.org/papers/volume24/22-099/22-099.pdf).
+
+The July and external-review records already distinguish variable counts, lifecycle events and controller learning. They provide useful framing, not authority to launch or evidence of novelty.
+
+Accordingly, the defensible addition is **native, costed evidence about a single controller’s useful response to mixed autonomous teammates under anonymous local observations**. There is no claim of a new ad-hoc-teamwork algorithm.
+
+**The concrete comparison I recommend**
+
+Use the unchanged N5/U50/all-on/H256 host. Train only physical slot 0. Every teammate has its own observation, navigation, held command, cache and reset.
+
+Two roster distributions are fixed prospectively:
+
+| Roster | Four teammates | Exposure |
+|---|---|---|
+| T | `{C, C, P0, P0}` | Response training and final evaluation |
+| X | `{G, G, P1, P1}` | Final evaluation only |
+
+Each episode uniformly assigns its multiset to the four teammate slots. There are six distinct assignments. Assignment uses a separate addressed random domain, paired across compared programs; it remains fixed within the episode. Teammates then run their actual responsive policies. Sharing an assignment or randomness does not share their subsequent trajectories.
+
+P1 is the retained second Student lineage. G is the existing score-shaped C randomization. **X excludes this composition from response training; it is not an unseen-family test.** Its ingredients are already retained and related to those used in T. There are no joins, physical capability differences or within-episode controller switches.
+
+Compare two response packages:
+
+- **F, current-context response:** original 114 features, frozen P0’s 128 second-ReLU features, and public `t/256`.
+- **H, recent-motion response:** the same 243 coordinates plus 16 coordinates: for each of the four current peer ranks, clipped `dx,dy,dz / 30` and a match-valid bit.
+
+Both have a zero-initialized linear **259→27** head with 7,020 parameters, using  
+`P0_logits + 0.5 * tanh(head(context))`. F’s final 16 inputs are zero. Both initially express exactly P0 under the original decoder. This is a matched finite feature-package comparison; equal array shape does not establish equal effective information, optimization behavior or representational capacity.
+
+The history descriptor uses the existing mutually unique, componentwise ≤30.001 m association between consecutive visible peer positions. Unmatched entries are zero, small displacement is zeroed, and components are clipped. It receives every native-tick observation. It carries no identity through disappearance and estimates previous motion, not partner type. At a synchronized decision boundary, the peer can choose a new command, so extrapolating the previous block is fallible.
+
+The tracker must be factored from the existing implementation: calling `MotionController.act` just to obtain history would also buy an unused planner. Immutable P0 features may be cached; history-conditioned outputs must not be cached under a current-row-only key or across head updates.
+
+Use **two independent training blocks × F/H**, with 256 complete episodes per fit. Within a block, pair worlds, assignment addresses, initial head/critic state and action innovations; each policy still generates its own training history. The two blocks have independent training worlds and training randomness. They share inherited P0, so they are two response-training instances, not independent replication of pretraining.
+
+Adapt B04’s explicit finite rule:
+
+- 128 two-episode groups per fit;
+- four full-rollout epochs per group;
+- complete suffix macro-return divided by 256, with zero terminal bootstrap;
+- a fresh 136-input critic using global state, previous joint commands and holds;
+- the existing optimizer/clipping conventions, with **only the ego’s policy term** in the actor loss.
+
+The critic’s privileged inputs never reach the actor. Fixed teammates and the P0 trunk remain detached. B04’s all-five full-actor updater and B05’s paired-counterfactual fitter cannot be reused unchanged. This requires a new ego-only adapter.
+
+Each fit obtains 16,384 ego decisions—one fifth of B04’s actor rows per fit. The budget is an exploratory exposure, not a convergence claim or an inherited successful history-training protocol.
+
+Evaluate all four endpoints and eight retained ego controls:
+
+| Controls | Purpose |
+|---|---|
+| C, Q10, G | Competent local planning and ordinary stochastic alternatives |
+| V, R | Existing lawful two-frame motion-use rules |
+| P0, Bstar0, Hdirect | Inherited learned capability and strong retained decoding/mixing alternatives |
+
+V/R receive every consecutive native observation. Even deterministic egos receive two evaluation tapes because their teammates are stochastic.
+
+The final panel is **32 fresh worlds × two tapes × two rosters × twelve ego programs = 1,536 episodes**. Together with training, this gives 2,560 episodes. Exact source hashes, addresses, normalization, decoder, loss and reader schema must be frozen before an accepted launch; none is permission to add exposure.
+
+S2 remains an important richer-contract alternative. It requires shared proposals, coordination and radio-control resources absent from this single-controller replacement use. Its strong existing native gains should remain visible, but it cannot be silently treated as a same-rights ego controller. The selected actual-S2 study and this question share engineering and a broad learning motive; their estimands differ.
+
+**Predictions and decisions**
+
+The primary scientific comparison is H−F, reported **separately by roster and training block**, alongside each endpoint versus P0 and all retained competitors. Average tapes within world. The 32 worlds support descriptive conditional uncertainty; four endpoints and repeated episodes do not establish population training reliability.
+
+Read mean native J together with service, quality, within-episode tails, minima, outages and travel. Travel is measured movement, not an energy estimate. No retention-equivalence margin or deployment utility has been specified.
+
+The competing explanations make different predictions:
+
+| Observation | Consequence |
+|---|---|
+| H improves over F in both training blocks and provides a useful complete tradeoff against retained controls, including on X | Supports further consideration of the finite recent-motion response capability. It would justify assessing a separate replication/generalization purchase, not automatically launching one. |
+| F improves over retained controls; H adds no useful increment | Supports current-context native response learning. Retain that positive without a memory or partner-identification claim. |
+| H beats F but does not improve the complete comparison with ordinary/retained controls | Preserve the conditional feature result; stop this purchase without calling it a useful deployed upgrade. |
+| Gains occur only on T, or one training block reverses the other | Preserve the conditional successes and limits; no X-transfer or stable training claim. |
+| Both learners actively alter behavior and lose | End this recipe. Finite optimization, objective alignment and information limitations remain possible explanations, without an identified repair. |
+| History exposure or physical choice sensitivity is sparse | Report sparse exposure rather than infer either information sufficiency or active harm. It supplies no automatic reason to enlarge visibility, add IDs or train longer. |
+
+Record feature exposure, parameter movement, probabilities, requested categories and physical actions. The stronger reader additionally evaluates each final H decision once with its 16 history coordinates zeroed, using saved current context and the same action innovation. This costs **16,384 head-only calls**. It identifies action-law sensitivity on observed histories; it does not estimate the native value of deploying the ablated policy.
+
+The main simpler explanation remains strong: current SINR, ordinary randomization and inherited policy competence may already absorb most useful response. Another is that native-return training improves objective alignment without inferring teammate behavior. F and the retained controls make those alternatives consequential to the decision.
+
+**Complete prospective bill**
+
+The DM derived these counts from the actual callbacks and the specified exposure. They are ceilings before cache savings, not measured execution.
+
+| Work | Complete proposed count |
+|---|---:|
+| Response fits / fresh partner fits | 4 / 0 |
+| Training / final episodes | 1,024 / 1,536 |
+| Native joint steps | 655,360 |
+| Physical UAV moves | 3,276,800 |
+| All-member decision requests | 819,200 |
+| Learned-head collection/final rows | 98,304 |
+| Frozen Student forward ceiling | 450,560 |
+| Analytic helper requests | 442,368 |
+| C-family ranking requests | 376,832 |
+| C candidate paths / modeled ticks | 10,174,464 / 40,697,856 |
+| Categorical motion draws | 565,248 |
+| Hdirect T/H vectors | 16,384 |
+| G score-tail laws | 106,496 |
+| Tracker native-tick ingests | 262,144 |
+| Anonymous pair-gate ceiling | 4,177,920 |
+| Head / critic optimizer steps | 2,048 / 2,048 |
+| Head / critic update replay rows | 262,144 / 262,144 |
+| Collected critic rows | 65,536 |
+
+C’s source ceiling is 851,640,320 power-link evaluations; standalone helpers add at most 61,931,520, and V/R moving-peer work adds at most 5,242,880. Native resets and transitions involve 180,928,000 dense power slots, plus constructor initialization. Candidate SINR-array work is a separate implementation count. These must not be interpreted as independent physical interactions or added as interchangeable FLOPs.
+
+The **full reader is additional paid work**. It reconstructs 657,920 states, 3,289,600 local rows and 177,638,400 scalar radio links, plus all service, quality, reward, movement, holds, resets, roster assignments and tails. Budget the same policy/helper/planner ceilings again for policy reconstruction, with:
+
+- 114,688 head rows, including the final history-zero diagnostic;
+- 65,536 critic rows;
+- all 512 precollection head and critic states retained;
+- no native transitions, new episodes or optimizer replay.
+
+Collection, updates and reading total **475,136 head rows and 393,216 critic rows**. Initial density checks are included in the relevant update rows, not an extra training allowance.
+
+The 512 group head states contain 14,376,960 raw FP32 parameter bytes; critic states contain 69,994,496. P0/P1 together require 848,974 canonical asset-file bytes. Their original training remains incurred. There is no new partner acquisition, predictor fit, target-label programme or population generation.
+
+The final source-priced planning allowances are:
+
+| Resource | Forecast |
+|---|---|
+| Worker CPU | 0.5–2 hours |
+| Complete reader CPU | 0.5–2 hours |
+| Streaming process peak RSS | 0.5–1.5 GiB |
+| Evidence | About 4–5 GB uncompressed array payload |
+| Engineering, review, launch, reading, publication and cleanup support | 11–22 hours |
+
+Compression, allocated disk space, snapshot and temporary publication costs remain separate unknowns. CPU ranges do not promise elapsed wall time. Actual node admission and concurrent work remain required.
+
+B08’s measured 638.832 worker and 849.524 reader CPU-seconds are only an implementation anchor. This proposal adds different head/critic replay and cache behavior. The current price is a newly stated engineering forecast, **not B08’s old development estimate reused as a rerun price**. Existing source and scientific-review effort is additional and unmetered. [Final descriptor and reader price correction](/home/fires/hmasd-wsl/docs/research/candidates/uav_fleet_adaptation/NOTES.md:8998).
+
+**Why I recommend this purchase, and its strongest objection**
+
+The strongest objection is that it could become another small-library learning exercise with sparse interaction, arbitrary finite optimization and no generalization beyond known ingredients. The 11–22 support-hour bill makes that objection material. The proposed host does not itself establish substantial single-ego headroom.
+
+I still recommend the bounded comparison because it can change a concrete judgment: whether native response learning offers useful control when only one fleet member can be changed, and whether recent anonymous motion adds value beyond a competent current-context learner. Both learning arms receive the same partner mixture, strong retained competitors remain in the native panel, and every outcome has a meaningful retention or stopping consequence. The study does not depend on first discovering a positive toy, identifying every previous failure or manufacturing a latent capability parameter.
+
+I would decline expansion into new partner generation or open joins now. Those would change both the scientific contract and the price substantially. A positive here would not silently authorize either.
+
+The fleet-adaptation DM can own this successor if Root selects it. The archived controller-composition lead stays archived. Claude-owned pauses remain intact. Actual-S2, waiting and the separately assigned moving-demand work keep their accepted scopes. Shared implementation opportunities may reduce effort, but that saving is not assumed in the price, and no result is borrowed across contracts.
+
+For this assessment I directly read the consequential frozen protocols, saved summaries, positive/adverse records, controller interfaces, source/configuration facts and primary passages described above. I checked B08’s existing reading and underlying saved summary, B03’s retained summary, G0 per-world records and the peer-forecast summary. I did not repeat the completed readers, reconstruct every raw trajectory, execute policies, reduce new outcomes or verify optimizer arithmetic. I made no code/record edits or experimental calls.
+
+This was a cumulative separate-context source assessment, not a fresh blinded B08 result review. No DM/Root conversation fork was inherited at the review’s creation; the assignment supplied prior dispositions, and a document-location read exposed interpretive text before completion of the new B08 reconstruction. I reused the original adequate result review with that limitation explicit.
+
+**MATERIAL_DISSENT: no — I recommend this bounded four-fit successor for Root’s investment choice, retain B08’s limited positive and stop disposition, and reject any claim that the proposed finite retained-library test would establish general ad-hoc teaming or a need for memory.**
+
+END COMPLETE ORIGINAL ORACLE FINAL RECOMMENDATION
+
+BEGIN ORIGINAL SUBSTANTIVE SOURCE/CORRECTION EXCHANGES
+
+Oracle → DM, initial source request:
+
+Root assigned me bounded SOURCE/IDEA work after your completed B08: assess one materially different ad-hoc teaming/partner-heterogeneity capability or no purchase, with no new model/native queries, reductions, fits, code or runs. I am reconstructing old controller_composition B01–B03, local C/V/R, G0 and current assets before selecting any idea. Please supply only bounded source/feasibility facts in your existing notebook: which retained current N5 controller families (P0, C, Q/Q10, Bstar0, Hdirect, other compatible assets) can lawfully be assigned to fixed *different physical teammates* within one episode without changing the native host; each family’s private persistent state, observation/identity/history rights and reset; whether agents can have distinct law identities unknown to an ego while preserving all existing interfaces; precise available per-agent source callback/asset identifiers and any barrier. No recipe or new execution requested. If straightforward, also give source-derived rather than benchmark estimates for a small matched feedforward/history-aware response study and ordinary two-frame C/V/R comparator under a heterogeneous roster, including minimum engineering/read-support bill. I will send a narrower prospective exposure bill only if that task contract proves worthwhile. Parent actual-S2, waiting cap-two and fleet-transmission continuous-demand source remain separately owned.
+
+DM → Oracle, initial source feasibility:
+
+Source feasibility is positive: native MultiUAVEnv.step already accepts a separate action for each fixed uav_i, and fleet B08 Policy(parent, actor, world, agent, sampling_root).query(row, tick, nav) is explicitly one physical agent’s instance. P0/Bstar0/Hdirect/G/Q10/C can therefore be mixed without host changes; the existing B08 collector/contract is homogeneous and frozen, so a new bounded roster collector is still required. Geometry rows omit peer IDs and policy labels (SINR-ranked slots can change); each actor gets only its own row and own private nav/cache. V/R are existing MotionController('V'/'R').act(row,t) callbacks, but require all consecutive t=0..255 rows and private previous-peer geometry, not just four-tick decisions. Matching is anonymous mutually unique <=30.001m/component across adjacent ticks. I’m completing precise bindings, reset/cost algebra and support limitations in the existing notebook; no model/native call or reduction has been made.
+
+Oracle → DM, concrete unselected envelope:
+
+Thanks; I am evaluating a direct complete exploration, not a pilot or a selected experiment. Please source-price this concrete envelope if feasible: original N5/U50/all-on/H256, ego physical slot0 only trained, other four responsive policies independently own nav/cache. Each episode permutes the fixed multiset {C,C,P0,P0} across slots1–4; no IDs/law labels/peer observations reach ego. Train two matched blocks × two response heads (current-context versus lawful history-context; immutable P0 trunk, zero residual initialization), 256 complete episodes per fit, 64 ego decisions/episode. History candidate uses existing anonymous two-frame tracker at all ticks; no target/predictor fit, no fresh partner training, no GRU presumed necessary. Equal contextual-head optimizer bill can reuse B04/B05 bounded head machinery if compatible. Evaluate 4 endpoints and 8 retained ego controls C,Q10,G,V,R,P0,Bstar0,Hdirect on 32 new worlds ×2 indexed tapes ×2 fixed roster panels: trained-family {C,C,P0,P0} and a training-excluded composition {G,G,S_L1,S_L1}. No broad unseen-family claim (G is C-derived; S_L1 is same training family). This is 1024 train+1536 final =2560 H256 episodes/655360 native steps before constructor/test support. Need honest query/model/native/full-reader/storage/support ceilings and feasibility barriers, not measured benchmark or invented numbers. If 256 focal episodes have no credible inherited training protocol, state that limitation. I may still recommend no purchase if this is only a fixed-library relabel; no coding or queries authorized.
+
+DM → Oracle, count and learner limitation:
+
+Your envelope arithmetic is correct: 4 fits, 1,024 training +1,536 final episodes, 655,360 native steps, 819,200 agent decisions. Under per-agent caches, sampled learned egos, factored tracker-only history (no hidden planner), source ceilings are 442,368 analytic-helper requests, 450,560 frozen Student forwards (including Hdirect), 376,832 C-family rankings =10,174,464 paths /40,697,856 model ticks /≤851,640,320 power links; helper links≤61,931,520. V/R adds≤5,242,880 moving-peer links. Hdirect constructs16,384 T/H vectors; G has106,496 score-tail laws; categorical draws565,248. Training+endpoint history and V/R total262,144 native-tick tracker ingests, ≤4,177,920 anonymous pair gates. I am preserving full derivation/read/support limitations now. Critical: B05 gives reusable zero-init ±.5 tanh head, but its fitter consumes paired counterfactual data, not on-policy return; B04 is full-actor/all-five. 256 episodes matches B04’s episode count but yields only16,384 focal decisions per fit, one fifth of its actor rows, and no successful inherited ego-only history-head training protocol has been demonstrated. A source-bound new ego loss/replay adapter is needed; this is a limitation, not a requirement for a preliminary experiment.
+
+Oracle → DM, complete price request:
+
+I have your source ceilings and ego-only adapter limitation. Please include the prospective updater/critic/reader scope in the preserved full pricing answer: a concrete direct bounded comparison can use two independent F/H pairs, zero-init ±.5 residual logits on frozen P0, 256 H256 episodes per fit, with the existing B04 group/epoch recipe only where lawful ego-row losses and 4-tick rewards permit. Do not query anything new; state unresolved recipe details and which per-fit rows/replays/updates are calculable from source, plus honest worker/reader/support/storage ranges. I am completing one recommendation, not requesting another source search or a pilot.
+
+Oracle → DM, correction of return-rule shorthand:
+
+One source correction to my own shorthand: I reread B04 frozen NOTES 2215–2260. It uses 128 two-episode groups × four full-rollout epochs, complete suffix macro-return/256 (not GAE), fresh 136→128→128→1 critic with previous joint commands/holds, and 512 actor +512 critic steps per fit. An ego-only adaptation gives 65,536 head replay rows and 65,536 critic replay rows per fit (262,144 each across four), with 65,536 collected critic rows overall. I will preserve that native-return convention and charge the new loss/cache adapter, not describe unchanged reuse. Actor never receives privileged critic inputs.
+
+Oracle → DM, final linear descriptor specification:
+
+I have read your full source-price appendix through its conclusion. For my concrete recommendation I will use the reusable *linear* bounded head (not invent a multilayer head): original 114 features + frozen 128 second-ReLU + public t/256 =243 current coordinates, append 16 two-frame coordinates (4 current-peer ranks × clipped dx,dy,dz/30 and match-valid bit). Current arm zeros those 16; both arrays 259→27, 7,020 parameters, zero initialization, ±.5 tanh, same B04 suffix-return cadence adapted to ego only. No persistent ID, type label or recurrent state. This fixes q=131 for your formula, preserves all query/exposure counts and adds only ordinary descriptor/group-state storage. I will explicitly call it a finite feature-package comparison, not an isolated proof of information necessity. No more source pass or extra verification requested.
+
+Oracle → DM, full reader and sensitivity scope:
+
+For complete prospective reading I will choose your stronger retained-group replay scope: keep all 512 precollection head and critic states, add 65,536 reader critic rows, no optimizer replay. I will also explicitly price 16,384 additional head-only reader calls: each final H decision once with its 16 history coordinates zeroed, using saved current context/hidden/logits and addressed draw, to distinguish history exposure from action sensitivity without new native episodes. This is a proposed final diagnostic, not a request to execute or search. Query ceilings otherwise unchanged; reader learned-head ceiling becomes 114,688 rather than 98,304. It cannot establish a causal deployment benefit of that ablation.
+
+DM → Oracle, final source-price correction:
+
+Your 259→27 linear specification and stronger reader scope are now preserved verbatim with corrected pricing in the same appendix, #post-b08-partner-heterogeneity-source-facts (publishing next). Both heads have7,020 parameters;512 group head states14,376,960 FP32 bytes and512 critic states69,994,496. Final H ablation adds16,384 head-only rows: full reader114,688 head rows +65,536 critic rows, no optimizer replay; collection+updates+reader total475,136 head /393,216 critic rows. All other operation counts stand. Planning allowances are explicitly forecasts, not ceilings:0.5–2 worker CPU-hours +0.5–2 full-reader CPU-hours,0.5–1.5GiB streaming RSS,4–5GB uncompressed evidence arrays and11–22 support hours. Existing B08 telemetry is only an implementation anchor; unknown cache/implementation/I/O cost can exceed ranges. No new source pass, verification run or query was made for these final specifications.
+
+DM → Oracle, canonical publication:
+
+Published the complete original request/envelope/clarifications plus all source, count, learner, full-reader, storage and support reasoning at bf3527fcbdb996099320c5ac1e8e5b2463455603; origin/main verified and my NOTE clean. Exact target: docs/research/candidates/uav_fleet_adaptation/NOTES.md#post-b08-partner-heterogeneity-source-facts. Final corrections preserve259→27 /7,020 parameters,512 head+critic snapshots,114,688 reader head rows including16,384 same-history ablations,65,536 reader critic rows, no optimizer replay. 4fits/2,560episodes/655,360steps remains a feasible proposed complete exploration with a genuinely new ego-only loss/cache/roster reader adapter;256 focal episodes is not a demonstrated sufficient inherited protocol. No new model/native/query/fit/reduction/code was performed. All original source-price text and your final specifications are preserved separately; no second review or source search is pending.
+
+END ORIGINAL SUBSTANTIVE SOURCE/CORRECTION EXCHANGES
+
+BEGIN ORIGINAL FAILURE-HOST CORRECTION AND ROOT DISPOSITION
+
+Oracle → Root:
+
+One source distinction for the eventual recommendation: VNFC/R09/N7 is permanent physical deletion, while the S7-S4 path in configs/config_1.py:543–545 enables .001 failure probability with (20,60)-tick durations, and envs/pettingzoo/relay/energy_aware.py:_update_uav_failures decrements timers and restores availability. Thus those should not all be grouped as permanent-loss hosts. G0 adds a different controlled leave/return contract; none by itself establishes an unknown teammate policy or newly joining physical UAV. This is read-only source correction, with Claude-owned scopes unchanged.
+
+Root → Oracle:
+
+Accepted source correction: VNFC/R09/N7 permanent physical deletion; native S7-S4 timed unavailability/restoration; G0 controlled leave/return with retained absent-position interference are distinct. My original assignment's shorthand grouping was too broad; preserve your correction with it. None supplies an unknown-partner-policy or genuine new-member contract by itself. Current Root index names only VNFC as permanent loss; no selected study or paused ownership changes.
+
+END ORIGINAL FAILURE-HOST CORRECTION AND ROOT DISPOSITION
+
+BEGIN ROOT ADOPTION / ARTIFACT CLOSEOUT — SEPARATE FROM ORIGINAL ORACLE ADVICE
+
+Artifact-only closeout, no further science/queries/review: Root read your COMPLETE original final and full DM price/corrections, the original B03 complete reading/decision and FCP primary §§2.1–2.4; Root has selected the single exact four-fit finite mixed-controller response comparison for SAME /root/dm_fleet_adaptation. Please deliver ONE complete original-preservation handoff to that DM: initial Root source question, your full final recommendation, original substantive source/correction exchanges, and the known failure-host correction, keeping your original advice separate from Root adoption. DM already has my full selection, should not wait on an ACK for implementation/engineering/publication/admission. Selection follows your259-input two-block F/H/T/X/12ego/control/full-reader/16384history-zero scope and fullcost; no new partner family, general ad-hoc/novelty or memory requirement. Root additionally specifies original114/hidden scales unchanged with only declaredclock/displacement scaling (no new normalizerfit), all4 H-F block×roster contrasts read separately, and finite correctness work fully priced before its exposure. This is one handoff for preservation, not a request for another source pass or new review. Return the immutable notebook pointer once published; do not relay an ACK loop.
+
+END ROOT ADOPTION / ARTIFACT CLOSEOUT
+
+END ONE COMPLETE ORIGINAL-PRESERVATION HANDOFF.
+
+--- END COMPLETE ORIGINAL ORACLE HANDOFF ---
