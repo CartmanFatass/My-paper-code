@@ -6554,3 +6554,78 @@ queried by tests. No extra native fixture is purchased. Independent engineering
 review covers numeric loss/target/RNG, static archive binding, full reader and
 admission before one published launch. After acceptance use the original status
 handle and deterministic observer through full result reading; no duplicate run.
+
+<a id="b07-implementation-and-review"></a>
+### B07 implementation, required-input staging and prelaunch checks
+
+The complete original selection advice, fixed numerical loss and prospective L0
+were preserved and the selected active standing published in `66a62437765dac8be213fa2e31342e8f84567312`
+before any fit or native query. The named bounded Implementer supplied only the
+pure T/H law/loss and, in a second sequential task, static-data phase training,
+each with synthetic tests. I read and accepted both implementations. The DM
+implemented the remaining source binding, target construction, policy/collector,
+training integration, native/archive reader and full endpoint diagnostics in the
+owned B07 package; all frozen B02/B06/G files remain unchanged.
+
+Required local consumption staging is
+`temp/directions/uav_fleet_adaptation/b07_inputs/`, containing exactly261 source
+files:256F0 raw trajectories, three F0 phase datasets, original P0 and final F0.
+All were individually rehashed against metadata extracted only after verifying
+the original summary SHA-256 `0d1fc9af270a376f3836fe256cee93c31bc698ae9cd131339d80960ee92d4073`.
+Source-bound selected metadata is `b07_stochastic_targets/f0_inputs.json`,812802bytes,
+SHA-256 `31b0762abda4348179851ba09bc9beb9d14d6d1eb876a10b30a08f18dc07c71c`.
+The261 input files total25750748logical bytes. Staging plus file list occupied
+26324992allocated bytes before its compact receipt; transfer/verification took
+3.517219wall-s, .039637local parent CPU-s and .441605local child CPU-s. Remote
+metadata extraction used .059041CPU-s/.058546wall-s. No policy, C/helper, target,
+optimizer or native outcome query was made during staging. The original remote
+canonical files remain in place; this consumption copy is a closure deletion
+target after all readers finish, not a new retention archive.
+
+The first complete synthetic B07 suite passed136tests in3.16s on the configured
+local CPU runtime, with all scratch under the owned temporary directory. It
+covers pure numerical laws/gradients, continuing Adam/full batches/count-zero,
+all11 programs' artificial complete saved-history reconstruction, corruption
+refusal for native and direct-law records, cache-hit fresh private sampling,
+direct C-feature reuse, external path/hash refusal, and mocked admission→worker→
+reader ordering. No production input was queried by these tests. A source-only
+hash check matched all48 bound old/new executable and metadata files. Local
+Adam exposes `decoupled_weight_decay=False`; I added explicit validation of that
+unchanged default to both training and saved-state reading, with a refusal test.
+Its targeted check and the independent high-risk engineering review follow.
+Actual resource admission and all result execution remain ahead.
+
+The targeted Adam/read-boundary suite passed45tests in2.40s after the explicit
+unchanged-default check. Independent `hmasd-reviewer` inspected all14new modules,
+five test files, the source manifest and all29 inherited source hashes; its
+independent full synthetic check passed137tests in2.92s. It found two medium
+reader lifecycle issues: a check-then-create reservation race could admit two
+readers, and an exception could discard completed/partial C/helper cache-work
+counts kept only in local variables. I accepted both findings before launch.
+The reader now acquires `reading-progress.json` with exclusive creation before
+it owns any failure record. Live per-agent C/helper counters are attached before
+reconstruction; a `finally` fold preserves each completed or interrupted prefix
+once, and failed readings retain actual cache misses, paths, modeled ticks and
+power links. Progress also retains the current work ledger. Added artificial
+visible-user cases cover nonflat direct laws, and fault injections test both
+archive and final-reader accounting. The focused repaired audit/boundary suite
+passed49tests in2.61s; the independent Reviewer repeated it at49passed/2.63s.
+No production input/model/native query was used for these checks.
+
+Original engineering final disposition:
+> No material finding remains in the B07 implementation.
+>
+> Both medium findings are resolved:
+>
+> - `read.py:109` exclusively reserves the reader before failure-record ownership; a competing invocation cannot publish or overwrite its results.
+> - `audit.py:24` preserves live C/helper counters and folds completed or interrupted work exactly once. `read.py` persists those totals on failure.
+>
+> Independent checks: earlier full suite **137 passed**; repaired audit/boundary suite **49 passed in 2.63s**, including concurrent reservation, interrupted archive/final replay, and all 11 arms with visible-user synthetic inputs.
+>
+> Limits: no production checkpoint queries, native execution, training, or full production reader run. Review was read-only.
+
+I accept this engineering disposition and the bounded implementations. The exact
+owned inputs will now be published before the one fresh local admission. The
+selected scientific question, target formula, loss, phase exposure, native panel,
+full reading and stop branches are unchanged. This is launch readiness only;
+there is still no B07 scientific result.
