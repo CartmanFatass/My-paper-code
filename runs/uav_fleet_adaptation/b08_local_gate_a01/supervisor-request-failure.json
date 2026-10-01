@@ -1,0 +1,11 @@
+{
+  "kind": "supervisor_command_parse_failure_before_launcher",
+  "task": "fleet_b08_local_gate_a01",
+  "exit_code": 2,
+  "admission_accepted": false,
+  "scientific_process_started": false,
+  "native_status_return": "status reference does not exist",
+  "log": "=== Task 'fleet_b08_local_gate_a01' started at 2026-10-01T11:47:52+08:00 ===\n/home/wu/.agent-tasks/fleet_b08_local_gate_a01/runner.sh: eval: line 8: syntax error near unexpected token `('\n/home/wu/.agent-tasks/fleet_b08_local_gate_a01/runner.sh: eval: line 8: `/home/wu/.venvs/hmasd-gcc-31021/bin/python /home/wu/projects/HMASD/scripts/hmasd_launch.py launch --node wsl_4070 --source-root /home/wu/projects/HMASD --snapshot --direction uav_fleet_adaptation --lead Codex DM (native child) --sha 21de06cd2cd465d3962bbe95183bbfc7c3eddeb1 --output /home/wu/projects/HMASD/runs/uav_fleet_adaptation/b08_local_gate_a01 -- experiments/candidates/uav_fleet_adaptation/b08_local_gate/run.py --out /home/wu/projects/HMASD/runs/uav_fleet_adaptation/b08_local_gate_a01 --launch-sha 21de06cd2cd465d3962bbe95183bbfc7c3eddeb1 --seed 29832000 --parent /home/wu/projects/HMASD/runs/uav_fleet_adaptation/b02_inheritance_a01/assets/S.pt'\n=== Task 'fleet_b08_local_gate_a01' exited with code 2 at 2026-10-01T11:47:52+08:00 (Duration: 0s) ===\n",
+  "cause": "agent-task joins its argv with $*; a lead argument containing spaces and parentheses lost shell quoting before eval",
+  "correction": "pass one pre-quoted complete launcher command string; preserve failed supervisor under its original name"
+}

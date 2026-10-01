@@ -7978,3 +7978,31 @@ finding remains in B08.” The DM accepts the reviewed implementation for the
 fixed purchase. The review's scope remains syntheticH8 correctness; it is not
 production H256 evidence or a result. Source/input publication and actual-node
 admission remain separate next actions.
+
+**Pre-admission request corrections, zero scientific exposure.** Exact reviewed
+inputs were published as `21de06cd2cd465d3962bbe95183bbfc7c3eddeb1`.
+The first remote supervisor request exited2 at shell parsing before invoking
+the admission launcher: `agent-task` joins argv with `$*`, which discarded the
+lead argument's quoting. Source inspection identified that concrete cause;
+passing one fully quoted command string fixes it. Its original task/log and
+[compact failure](../../../../runs/uav_fleet_adaptation/b08_local_gate_a01/supervisor-request-failure.json)
+are retained. The corrected supervisor invoked the launcher, which refused
+before admission because the canonical ignored P0 file lies inside the author
+root and is absent from the published source snapshot. Native status confirmed
+that no output/operation reference existed after each refusal; no worker,
+production model load, world query or fit occurred.
+
+That actual snapshot-input constraint corrects the earlier forecast that no
+staging was needed. One exact424487-byte P0 consumption copy is now declared
+at `wsl_4070:/home/wu/hmasd-inputs/uav_fleet_adaptation/b08_local_gate_a01/S.pt`,
+outside the source root. Original and copy were SHA256-verified against the
+already frozen P0 digest; no source/model/world semantics change.
+[Staging identity and allocated size](../../../../runs/uav_fleet_adaptation/b08_local_gate_a01/input-staging.json),
+[pre-admission refusal](../../../../runs/uav_fleet_adaptation/b08_local_gate_a01/snapshot-input-refusal.json).
+The next request keeps the same scientific output tag and published source;
+it is the first possible scientific admission, not a duplicate accepted run.
+The pre-admission source snapshot and the temporary consumption copy will be
+checked for live consumers and reclaimed at closure. Remote fetch succeeded
+and verified the published source, while Git's unrelated automatic maintenance
+reported an existing bad-tree/repack warning; no repository repair or history
+change was attempted, and snapshot preparation itself succeeded.

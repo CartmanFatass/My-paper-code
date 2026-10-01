@@ -1,0 +1,9 @@
+{
+  "canonical_node": "wsl_4070",
+  "canonical_path": "/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b02_inheritance_a01/assets/S.pt",
+  "consumption_path": "/home/wu/hmasd-inputs/uav_fleet_adaptation/b08_local_gate_a01/S.pt",
+  "bytes": 424487,
+  "sha256": "b9e25fca68109bb50fa64fadfc90939ad6a4669058c1c0ccd1351c8bbcefe12a",
+  "allocated_bytes": 425984,
+  "reason": "launcher snapshot rejects untracked absolute author-root input; one exact digest-bound consumption copy outside source root"
+}

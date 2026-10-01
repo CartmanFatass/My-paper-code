@@ -1,0 +1,10 @@
+{
+  "kind": "pre_admission_snapshot_input_refusal",
+  "task": "fleet_b08_local_gate_a01_quoted",
+  "exit_code": 4,
+  "admission_accepted": false,
+  "scientific_process_started": false,
+  "native_status_return": "status reference does not exist",
+  "log": "=== Task 'fleet_b08_local_gate_a01_quoted' started at 2026-10-01T11:49:05+08:00 ===\nhmasd launch refused: absolute author input is absent from published snapshot: /home/wu/projects/HMASD/runs/uav_fleet_adaptation/b02_inheritance_a01/assets/S.pt\n=== Task 'fleet_b08_local_gate_a01_quoted' exited with code 4 at 2026-10-01T11:49:18+08:00 (Duration: 13s) ===\n",
+  "correction": "one exact P0 consumption copy at configured external staging root; digest and scientific inputs unchanged"
+}
