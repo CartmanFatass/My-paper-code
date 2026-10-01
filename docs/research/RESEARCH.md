@@ -8,7 +8,8 @@
 **本轮收尾后交接（owner，2026-10-01 UTC）：** 按原操作身份完成正在执行的 S7 及已开始的
 三份后续选题评估，不打断当前工作；本轮结束后先交接，不启动下一轮实验。Root 写总览，
 四位 DM 分别写自己的部分，共同形成一个[独立 handoff 文件](HANDOFF_20261001_ROOT_AND_FOUR_DMS.md)。
-当前文件正在整理，不能当作已完成交接；S7 的完整读出、独立判读和收尾责任保持。
+三份选题评估及三位 DM 的本人交接章节已完成并发表；S7 的完整读出、独立判读和收尾仍在进行。
+整个 handoff 尚未完成；最后一位 DM 写完后，Root 再完成总览与停止状态。
 后续候选保留为未选定选项，交接完成后本 Root 范围等待 owner 明确继续。
 这不改变 Claude 的独立权限、其他明确暂停或已经冻结的证据。
 
@@ -2355,42 +2356,72 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 ### Parallel allocation: independent work and rolling succession
 
 <a id="root-successor-designs-20260930"></a>
-**Four native DMs retain responsibility: one accepted study and three successor assessments.**
-Fleet transmission owns the unchanged S7 C/H/F service-prediction comparison through its
-complete reader and scientific interpretation. Its accepted operation continues. The P/U32,
-P_FULL/P_PRIOR and fleet B10 joint-control studies have completed full reading, independent
-scientific review, publication and measured cleanup. Root has read each complete original
-critic and DM response and adopts their scoped stops, preserving U32's conditional objective
-gain and waiting harms, FULL's adverse package value and opposite waiting witnesses, and
-retained local-control competence including B08 HIDDEN and B10's immediate CJ witnesses.
-These results neither identify one common failure cause nor close their broader questions.
+**Four native DMs retain responsibility: S7 continues; three successor assessments are complete.**
+Fleet transmission retains its accepted C/H/F operation through full numerical reading,
+independent scientific diagnosis, publication and measured cleanup. The P/U32, P_FULL/P_PRIOR
+and fleet B10 studies are already complete. Root has read their full original critics and
+DM responses: retain U32's conditional objective gain and individual waiting harms, FULL's
+adverse package value and mixed waiting evidence, and inherited local-control competence
+including B08 HIDDEN and B10's immediate CJ witnesses. These results identify no common
+failure cause and do not exhaust the broader questions.
 
-The same parent DM supplies feasibility for the RF/information Oracle assessment: what
-complete use or understanding could justify another acquisition, timing, uncertainty-use or
-continuity comparison after both RF results? The same fleet-adaptation DM supplies feasibility
-for the local-control Oracle assessment: can lawful retained information or a separately
-priced observation contract make useful silence survive its next-observation consequences?
-The same former waiting DM supplies feasibility for the policy-development Oracle assessment:
-does a materially different objective, data use, representation or decision contract have a
-source-backed rationale and competent complete comparison after the accumulated development
-adverses? Each assessment may reject further investment; no new native comparison is selected.
+The three requested source assessments have also concluded. Root read each complete original
+DM source/feasibility/price response, the full independent recommendation and the separate
+DM response. Each final recommendation supports retaining one bounded future option; Root
+accepts that advice as preparation only. **All three remain UNSELECTED.** None has a new
+implementation, pilot, result operation or assigned execution budget, and this round starts
+no successor. The three responsible DMs have written and published their own sections in the
+[owner-requested single handoff](HANDOFF_20261001_ROOT_AND_FOUR_DMS.md); the S7 DM and Root
+will complete it after the accepted study finishes. Then this Root and its four DMs stop
+until the owner explicitly continues.
 
-Detailed discovery and independent challenge use the actual question, cumulative records,
-all three local libraries and load-bearing primary passages. Each Oracle may request one
-concrete source-only price from its assigned DM; existing-code reading and count arithmetic
-are allowed, but no pilot, model/controller query, saved-output reduction, implementation or
-launch is selected by that request. A prospective price includes the complete worker, fits,
-search/teacher work, reader, correctness, support, memory and storage; unknown costs remain
-unknown. Under the owner's new round-closing instruction, finish these assessments and
-preserve their full advice and source prices as UNSELECTED successor options for handoff.
-No next experiment is selected or launched before that handoff; a later resumed Root will
-make the cross-question choice. Source work is not four concurrent scientific runs.
+| Unselected question and what a complete comparison would add | Prospective complete native exposure | Forecast marginal CPU and support |
+| --- | --- | --- |
+| [Ordinary self-silence commitments](candidates/uav_fleet_adaptation/NOTES.md#post-b10-original-oracle-recommendation): can one lawful stored command preserve CJ's immediate gain over a complete episode? Compare C_ZERO, CJ, CJ_KEEP, CJ_RETURN and Hdirect_ZERO. | 0 fits; 192 H256 episodes / 49,152 steps. Full physics/policy/memory reader included in the price; finite fake fixtures are separately proposed, not executed. | Production 180–720 CPU-s; 8–16 focused support-hour equivalents; RSS .4–1.0 GiB and .12–.25 GB canonical evidence. |
+| [Complete paid RF program](candidates/uav_radio_information_cost/NOTES.md#b02-original-independent-selection-review): does literal U32_FULL earn its full sensing/report/delivery purchase against competent P_PRIOR? The two old panels cannot be subtracted to answer this. | 0 fits; 32 paired H256 worlds plus one paired H8 fixture: 66 episodes / 16,400 steps. Both full reconstruction paths and fixed checks are priced. | .7–1.5 CPU-h; 6–12 support-hour equivalents; RSS .5–1.5 GiB and .15–.35 GB canonical evidence. |
+| [Whole-episode policy search](candidates/uav_radio_uncertainty/NOTES.md#episode-search-original-advice): can frozen-P0 contextual readout development exceed equally exposed global calibration and retained strong controls? This changes the finite update/data-use construction, not whether earlier studies saw complete returns. | 4 fits in two paired blocks; 4,096 training and 736 endpoint H256 episodes / 1,236,992 steps. All final centers, 37 contrasts and full policy/update/physics reconstruction. | 1.36–4.55 CPU-h including proposed correctness; 14–24 support-hour equivalents; RSS .5–1.5 GiB and 3–6 GB compressed canonical evidence. |
 
-Actual-S2, mixed-teammate B09, S7 C/M/V and the parent lower-motion assessment remain closed.
-All four original nonarchived leads continue; no fifth DM, archived-session restoration or
-paused-direction transfer is involved. Helpers are not extra DMs; source/support work is real
-cost. Actual node admission applies to any future execution, and Claude's pause/ownership
-remains unchanged.
+These forecasts have not been benchmarked, and support-hour equivalents are not measured
+labor or Codex elapsed time. The source bills also retain all model/search/RNG/reader work,
+correctness and storage peaks, inherited acquisition and cumulative cost. Equal native
+exposure is not equal compute; zero new fits is not zero cost. Fresh node admission, final
+identities, finite fixtures and implementation correctness remain future engineering work
+only after a later selection. No hidden model/controller/RNG query or saved-outcome reduction
+was performed to price these options.
+
+The narrowed silence question uses only the agent's own observation/action history; it buys
+no new sensor or ACK. The five old CJ origins would give KEEP and RETURN the same zero
+command, and world30012030 rules out blaming every loss on the silent member's next motion.
+Guard frequency, separation and complete utility remain unknown. The RF adviser qualitatively
+expects PRIOR may retain its advantage; a favorable paid-program J result must still be read
+with its measured waiting outcomes and prior harms, while adverse or unresolved value closes
+that fixed purchase. Policy search
+must retain CAL and the corrected all-ON A references; ZERO has richer transmitter rights.
+Its 3,484-dimensional contextual search may be ineffective at 16 updates, and neighborhood
+fitness need not improve the deployed center. None is an established repair of B10 or a
+cross-project priority ranking. Existing B04–B10, waiting, actual-S2 and S7 C/M/V stops remain.
+
+Final independent advice was checked against actual Astra/max turns. The earlier RF
+age_control_interface helper was a Luna/medium Scout: Root's Astra label was erroneous.
+Its original advice and a separate provenance correction remain in the notebook; the later
+Astra reviewer reconstructed the evidence independently. This model correction supplies no
+new empirical replication. Root's bounded primary reading supports only the formulation:
+[B03, histories and finite controllers, §§2.1.2/2.2 and 6.2–6.2.1](https://www.fransoliehoek.net/docs/OliehoekAmato16book.pdf),
+[Salimans et al., whole-policy smoothed return, §§2–3](https://arxiv.org/pdf/1703.03864),
+and [Mania et al., random search and return scaling, §§2–3](https://arxiv.org/pdf/1803.07055).
+The RF cost/information passages and all advisers' actual three-library, July and external
+review coverage, omissions and source corrections remain in the full original advice;
+Root does not claim whole-library reading or novelty. No theorem supplies the proposed UAV gain.
+
+Complete source bills and independently preserved originals:
+[fleet source/price and advice at855046e1](https://github.com/CartmanFatass/My-paper-code/blob/855046e1f165a3deb13571367215effc47e47555/docs/research/candidates/uav_fleet_adaptation/NOTES.md#post-b10-blind-return-source-assessment),
+[RF source/price at6fea0a36](https://github.com/CartmanFatass/My-paper-code/blob/6fea0a3650535b015474092dcdaa1b2210db4d36/docs/research/candidates/uav_radio_information_cost/NOTES.md#b02-integrated-package-source-only),
+[RF original Astra review at42b0fe1d](https://github.com/CartmanFatass/My-paper-code/blob/42b0fe1d8a5cf9645455dbce9e9705b4e6c41959/docs/research/candidates/uav_radio_information_cost/NOTES.md#b02-original-independent-selection-review),
+[policy-search source/price at623ab06f](https://github.com/CartmanFatass/My-paper-code/blob/623ab06fb29cba36299e0a3e385267ce3feb2a6f/docs/research/candidates/uav_radio_uncertainty/NOTES.md#episode-search-complete-source-price),
+[policy-search complete advice/response atd9183bdf](https://github.com/CartmanFatass/My-paper-code/blob/d9183bdf99b1e17f35e568bb6494f30861cdf3dc/docs/research/candidates/uav_radio_uncertainty/NOTES.md#episode-search-original-advice).
+The [superseded assessment assignment](archive/2026-10-01/RESEARCH-successor-assessments-completion.md)
+retains its original scope. All four nonarchived leads and launch-bound lead values remain;
+helpers are not extra DMs, and Claude's pause/ownership and other owner holds are unchanged.
 
 Root read the complete count B06, parent B07 and ordinary G B05 results, original independent
 criticisms and DM responses. It adopts the exact count-mixture and fixed learned-shortlist
