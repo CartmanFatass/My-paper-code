@@ -1307,3 +1307,152 @@ no-purchase disposition and RF-information B01 remain closed; the proposed RF B0
 unselected. There is no new accepted operation, experimental code, unused scratch or cleanup
 blocker. The handoff is documentation, not resumption authority. Root controls the exclusive
 section-writing order; this DM will write only its granted section after that turn is issued.
+
+<a id="b02-selected-contract"></a>
+## 2026-10-01 — B02 selected complete paid-program purchase; prospective contract
+
+Owner explicitly resumed the Codex handoff scope and appointed Root
+`01a0f779-ace2-74e1-85ad-e0997b61d505`; published control revision
+`fdf5514fdd32ca3bb8f9769d608b03596d4e5afe` records this. Root selected the already
+priced literal U32_FULL/P_PRIOR comparison and assigned this new native DM
+`/root/dm_rf_purchase`, actual UUID `01a0f780-270c-7302-842e-9302428ef43f`.
+Its first actual turn is gpt-6-astra/max, verified at line 8 of
+`/mnt/c/Users/fires/.codex/sessions/2026/10/01/rollout-2026-10-01T05-46-06-01a0f780-270c-7302-842e-9302428ef43f.jsonl`.
+The predecessor completed its handoff and has no accepted operation to resume. The old
+NOTES, handoff, failed/adverse evidence and stopped parent recipes remain unchanged.
+Only B02 is an active result-bearing study; the parent development and RF-uncertainty
+directions are read-only dependencies, not assignments to reopen them.
+
+### Question, inherited evidence and decision exposure
+
+Does literal U32, with its complete paid all-link CSI acquisition/report/delivery program,
+earn that purchase against competent P_PRIOR on fresh paired complete native episodes?
+The contribution is program usefulness and empirical understanding, not a learning,
+component-causal, novelty, optimal-inference, continuity or physical-field claim.
+The complete [independent selection review](#b02-original-independent-selection-review)
+and [source price, including separate errata](#b02-integrated-package-source-only) are
+read and reused: they cover this exact question, programs, panel, companions and fixed
+cost. No repeated selection review or Pro consultation is added. A new material premise
+or scientific objection will return to Root and block only its dependent new effect.
+
+Published RESEARCH at `fdf5514fd`, topic 2's RF integration and acquisition paragraphs,
+and topic 8's cost/information distinctions govern the comparison: U32's positive
+same-sensing increment is real conditional capability with waiting harm; FULL's adverse
+P purchase leaves a strong lower-cost PRIOR reference. Separate panels cannot estimate
+the new bundle contrast by subtraction. The main qualitative forecast leans toward
+PRIOR retaining mean payload-J, without a numerical probability. The competing prediction
+is that nonlinear joint-outcome integration and resulting motion/mask feedback suffice
+to make the paid complete program valuable. We measure the bundle and forgo causal
+attribution of CSI age, sounding, quantization, Monte Carlo, search or trajectory effects.
+
+P_PRIOR retains known stationary radio law, public geometry, legal current local C
+observations/proposals/navigation and the same joint search rights. No central pilot
+does not mean no information. It is not an optimal posterior over all indirect evidence.
+There is no weak baseline substitution, third arm, free-sensing reference or new fit.
+These are central coordinators over five local C proposal controllers; coupled motion,
+interference and capacity-limited assignment are preserved, without teammate learning.
+
+### Fixed exposure, identities and interpretation
+
+| Item | Fixed value |
+| --- | --- |
+| Outer programs | `U32_FULL`, `P_PRIOR`; raw arm remains respectively `U32`, `P_PRIOR` |
+| Inherited source | protocol V5 U32 `9b6f493b343c2939b374a1ce21384266d3257456`; V6 PRIOR `a80e2be9e3341b3bebfa743dacfda5e4ff13d977` |
+| Main | N5/U50, 32 worlds 29661000–29661031, both H256 programs, alternating order starting U32_FULL; constructor 29661999 |
+| Integration | exactly one paired H8 world 29661900, constructor 29661998, U32_FULL then P_PRIOR, complete saved-byte reading |
+| Total | 66 episodes / 16,400 native steps / 0 fits, parameter updates, calibration or teacher queries |
+| Physical RNG | Philox/NumPy1.26.3, [0x52465048,29640001,world,state_tick] |
+| U32 model RNG | [0x52464d43,29640002,world,report_tick], 16 antithetic base particles / 32 signed particles; one fixed stream per world |
+| Primary | complete payload-weighted J/H; all 32 U32_FULL−P_PRIOR world differences, both levels, mean ±1.96 SE |
+| Proposed output | `b02_integrated_package_a01`, `b02_integrated_package_read_a01`, `b02_integrated_package_check_a01` under this direction's runs |
+
+The selected seed integers occur only in the earlier source proposal in inspected current
+experimental/test/direction-result records (integer-token search, not numeric substrings).
+No old panel or checkpoint is an input. Initial geometry and physical innovation addresses
+are paired. Path-dependent residuals can diverge when motion diverges; the reader must
+not require their later equality. Worlds are independent units; users and model particles
+are nested observations, not additional n.
+
+U32_FULL retains 250 measured links/report, .1 s sounding, 391 B recurring wire,
+three-tick delivery, 1.336 s whole-round compute allowance, report-tick payload .9
+and complete-H256 weight 249.6. PRIOR retains no central codes/sounding, 141 B,
+two-tick delivery, 1.436 s allowance and payload weight 256. Both pay their unchanged
+400 B map setup outside the outcome window. Preserve 27 commands, 31 nonempty masks,
+S2/two-order search and atomic old-command/mask fallback with all partial work charged.
+The fixed current local C observation has 104 components, not a 104 m radius. Whole-round
+timing includes C, sensor/codec, manager and finalization; no frozen constant is monkeypatched.
+Arrival and final shortened candidate suffixes remain different by program.
+
+Report all raw/payload J, service and quality; all 50 users' mean ages, age arrays,
+service counts, max gaps and closed/left/right-censored gap witnesses; never-served,
+minimum/p10 service, outages, complete path and transmitter exposure, sensor clipping,
+proposal/command/mask/navigation differences, deadlines/fallback and actual resources.
+Explicit startup (first 3/2 native ticks by program) and common final 4-tick readings
+will be retained from already saved arrays, alongside the complete-H primary; the
+remaining suffix and last delivery tick counts are checked, not substituted for H256.
+The all-world ±1.96 SE interval is descriptive, not a learning-seed or field guarantee.
+Positive J with worse waiting is a measured tradeoff, not automatic adoption. Active
+negative or unresolved results end this fixed purchase while preserving PRIOR and prior
+U32 capability. Technical failure remains missingness, not active scientific loss.
+No automatic extra particles, sample panel, objective, deadline or selective-pilot revision.
+
+### Complete cost and execution sequence
+
+The full source-price tables above are the selected bill. Main plus fixed check have
+4,100 reports, two constructors and 66 explicit plus two discarded constructor resets.
+Worker plus full reader: 61,500 C calls / 1,660,500 C candidate paths / 6,642,000 C model
+ticks / at most 138,990,000 C link evaluations; 30,479,724–59,889,984 candidate fleet
+scores and 7,619,931,000–14,972,496,000 dense score entries. Model base-normal
+materializations total 114,800,000, signed values 229,600,000. Each side accounts for
+4,117,000 physical normals, 7,820 geometry uniforms and 20,568 radio states. Actual
+purchase: 512,500 measured links, 102,500 slots/205 simulated sounding seconds,
+1,090,600 recurring wire bytes and 26,400 setup bytes. Actual trajectory-dependent
+candidate work and deadline-partial work are reported rather than replaced by upper bounds.
+The reader adds no new native episode but reconstructs all executed candidates, physics,
+two C-information passes and individual outcomes; its computational cost is real.
+
+Conditional estimate remains .7–1.5 CPU-hours including complete reader and checks,
+.5–1.5 GiB per sequential process and .15–.35 GB one-copy canonical evidence; 6–12
+focused support-hour equivalents is an estimate, not measured human/model labor or
+a resource allowance. Current source/review/support time is incompletely metered.
+Prefer configured wsl_4070 CPython3.10.21/NumPy1.26.3, one Torch/BLAS thread; actual
+memory/disk and node admission precede each real launch. Main worker and reader are
+sequential. Exact inputs are committed/pushed before any result-bearing check. After
+acceptance arm hmasd_wait on that same status handle and remain an active native child
+through collection and reading. No acceptance-only return, observer-triggered relaunch or
+duplicate retry. No new source snapshot beyond accepted-launch lifecycle is authorized.
+
+<a id="b02-l0"></a>
+### L0 — literal-program orchestration and complete paired reader
+
+Deliver one bounded implementation in
+`experiments/candidates/uav_radio_information_cost/b02_integrated_package/` with matching
+`tests/experiments/candidates/uav_radio_information_cost/b02_integrated_package/`.
+Entrypoints `check.py`, `run.py`, `read.py` enforce runner admission before effects,
+explicit launch identity and fixed seeds; add configuration, outer program dispatch,
+source-content bindings, complete-pair aggregation and full reconstruction orchestration.
+Reuse both published per-episode collect/outcomes/verify_episode functions by qualified
+module reference. Keep literal raw/packet/row arm identities and add a distinct outer
+program field; never call old fixed-panel aggregators, relabel packets or replace decoders.
+Source guards cover both inherited transitive local source closures and their original
+commits; no shared/core or RF-uncertainty edit. Source manifests are experiment inputs,
+not another research record. All completed and failed work persists before reduction.
+
+Reader binds the exact worker summary digest/source, config, artifact bytes and the
+complete expected order/count; refuses missing, duplicate, incomplete or aliased arms.
+It routes each literal episode to its own independent reconstruction, checks constructor,
+paired initial state/innovation identities, all aggregate counters, differences and
+companion reductions. Save all primitive/gap/age arrays and compact per-world/per-user
+values; do not omit particle candidate reconstruction or partial work for speed.
+Startup/tail and program-pair comparisons use saved arrays only. Preserve raw identities
+when handing a row to its original verifier. Existing io/resource helpers may be reused.
+
+Checks inherit the original verified numerical/particle/codec/type/fallback suites and
+add at most eight data-only orchestration tests (doubles for dispatch, alias rejection,
+order, source guard, incomplete reading, pairing and check routing), zero scientific
+queries. Independent engineering review covers the new high-risk identity/dispatch path
+before the single H8 paired check. The only new native correctness exposure is the
+priced two H8 streams and their full reader. A real defect requiring more scientific
+queries gets a separate prospective cost/meaning decision rather than an unlimited retry.
+The Implementer owns only these new code/test paths, no index/commits/NOTES or launch;
+DM reviews its diff/checks and accepts. Other writers share main and must be preserved.
