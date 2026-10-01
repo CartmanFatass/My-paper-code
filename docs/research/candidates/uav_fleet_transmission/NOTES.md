@@ -3296,3 +3296,33 @@ completeness, partial worker and reader costs, and admission-before-output. No n
 was inserted. The remaining production check is the selected complete run on the actual
 remote node, subject to fresh admission. No seed, arm, horizon, stopping rule, output contract,
 fit/calibration count or scientific interpretation changed.
+
+<a id="b05-accepted-operation"></a>
+### 2026-10-01 — B05 accepted remote worker and complete-reader chain
+
+Published exact inputs are `54c57af8d2e3860f25a278850055a6aa020e5beb`. The fixed operation was
+accepted at00:23:23UTC on wsl_4070. Its original command, source snapshot, node and native
+identities are in the [launch manifest](../../../../runs/uav_fleet_transmission/b05_score_sampling_a01/launch-manifest.json);
+[fresh actual-node preflight](../../../../runs/uav_fleet_transmission/b05_score_sampling_a01/admission-preflight.json)
+passed both4GiB floors with14,673,215,488available bytes. This is the selected416episode/
+106496step worker plus its full reader in one process, not a pilot or extra panel.
+
+Remote preparation encountered an existing mixed canonical checkout: HEAD was older, while
+compute/launcher overlays already matched current published main. A normal fast-forward
+refused without overwriting those edits. I preserved that branch and all other edits, syncing
+only this direction's stale remote table row from published main; current pause/lead matched.
+Two non-login Git reads stalled on network/lazy object retrieval and their exact owned HTTP
+helpers were stopped before any launch. The configured zsh login network environment resolved
+retrieval. Git also reported an existing historical bad-tree/repack warning; no repository
+repair or cleanup was attempted. These were source preparation facts, with zero native work.
+The configured supervisor accepted one launch request; it then returned the native accepted
+manifest. No duplicate scientific request was submitted.
+
+The old completed observer was drained and rearmed from14to15. New observer registration
+initially rejected the relative executable `ssh`; replacing it with existing absolute
+`/usr/bin/ssh` registered **generation16**, job`launch-b05-score-sampling-a01`, against this
+same output/status handle. First observed facts at00:24:39UTC confirm accepted admission,
+live matching runner/supervisor identities and consistent records, with0probe errors. The
+request remains under temp/directions/uav_fleet_transmission/b05/observer-request.json.
+The native child stays active with deterministic waiting and same-handle drain/rearm through
+complete reading; queue delivery is not assumed. No outcome prefix has been interpreted.
