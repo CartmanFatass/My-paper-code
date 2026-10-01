@@ -4337,3 +4337,56 @@ The core, mapped runtime files, canonical failed/partial A01 records,
 original B04 evidence and complete unique A02 outputs remain required;
 only source copies, staging and redundant scratch are selected for
 deletion. Measured removal is recorded below after it actually occurs.
+
+<a id="b05-final-cleanup"></a>
+### B05 — publication and measured closure (2026-10-01 UTC)
+
+The complete result, native records, independent diagnosis/disposition and
+revised shared background/own standing were published at
+`5715b7469b052f5380d51efa8b846f1d7d4850a5`. Useful allocation and independent
+reader code/tests remain published for the retained capability and its
+verification. No additional result execution or interpretation is pending.
+
+After source/config recoverability checks and the explicit consumer
+releases above, the supported exact-target collector removed these
+terminal source trees **and their Git worktree registrations**:
+
+| Node | Snapshot | Source tree allocated bytes | Registration allocated bytes |
+| --- | --- | ---: | ---: |
+| local_linux | `f558b8cd2a9c4b29a199f298bb7af1ff` (A02 producer) | 1,745,420,288 | 3,584,000 |
+| local_linux | `754b66a479994bbfb898f76066019ea5` (A02 reader) | 1,745,412,096 | 3,584,000 |
+| wsl_4070 | `9b680a5b7dee471e865759e84a49a043` (failed A01) | 813,965,312 | 3,612,672 |
+
+It then removed these exact redundant local targets after a read-only
+privileged process scan found no file/map/cwd consumer and no inspection
+denial:
+
+- `temp/directions/uav_user_waiting/b05/`:279,908,352 allocated bytes,
+  including194 byte-identical staged B04 inputs, source-membership list,
+  consumed observer requests and gap-reading scratch already in the result.
+- `experiments/candidates/uav_user_waiting/b05/__pycache__/`:53,248 bytes.
+- `tests/experiments/candidates/uav_user_waiting/b05/__pycache__/`:69,632 bytes.
+- `runs/uav_user_waiting/b05_local_allocation_read_a02/progress.json`:
+  4,096 bytes; the complete bound reader is retained.
+
+All selected targets are now absent, including the three Git registrations.
+The measured target allocation fell from4,595,613,696 bytes to zero:
+3,778,035,712 local and817,577,984 remote. The newly retained
+[cleanup record](../../../../runs/uav_user_waiting/b05_local_allocation_a02/cleanup.json)
+uses12,288 allocated bytes, giving **4,595,601,408 net allocated bytes
+reclaimed** for this cleanup scope. No relocation, archive or replacement
+copy was made. This is an exact-target working-tree/registration measure,
+not whole-host free space under concurrent activity or Git object-store
+reclamation. The earlier1,568,768-byte A01 duplicate cleanup remains a
+separate completed deletion and is not counted again here.
+
+Post-deletion checks confirm unchanged hashes for the full A02 summary,
+full reader and published compact result, with all192 contact/outcome
+pairs present. The remote B04 full summary/reader and original crash core
+retain their hashes; all256 B04 raw files,90 failed A01 contact/outcome
+pairs and A01's unchanged atomic summary remain. Required mapped runtime
+files and native claims/manifest/exit witnesses were not deletion targets.
+These are intentional unique evidence, not cleanup blockers. There is no
+concrete tool refusal or leftover selected deletion. B05 is closed/read/
+published/cleaned, with no live producer, unread advice or selected next
+batch; the retained question remains in reserve under the disposition above.

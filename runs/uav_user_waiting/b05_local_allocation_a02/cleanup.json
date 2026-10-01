@@ -1,0 +1,200 @@
+{
+  "schema_version": 1,
+  "phase": "complete",
+  "result_commit": "5715b7469b052f5380d51efa8b846f1d7d4850a5",
+  "source_binding_checks": {
+    "a01": {
+      "sha": "de238594dc9d64d7be246e7b9628a63f6a53b272",
+      "verified_files": 21
+    },
+    "a02": {
+      "sha": "4de05b0da41827cf945587003a2476584dac480e",
+      "verified_files": 21
+    }
+  },
+  "consumer_release": "Root completed A01 core diagnosis and released its source snapshot; scientific Critic completed review and closed all source/staging handles. Exact-target collector previews eligible for all three snapshots.",
+  "local_before": {
+    "targets": [
+      {
+        "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/f558b8cd2a9c4b29a199f298bb7af1ff",
+        "exists": true,
+        "entries": 25137,
+        "allocated_bytes": 1745420288
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/754b66a479994bbfb898f76066019ea5",
+        "exists": true,
+        "entries": 25137,
+        "allocated_bytes": 1745412096
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/.git/worktrees/f558b8cd2a9c4b29a199f298bb7af1ff",
+        "exists": true,
+        "entries": 10,
+        "allocated_bytes": 3584000
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/.git/worktrees/754b66a479994bbfb898f76066019ea5",
+        "exists": true,
+        "entries": 10,
+        "allocated_bytes": 3584000
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/temp/directions/uav_user_waiting/b05",
+        "exists": true,
+        "entries": 203,
+        "allocated_bytes": 279908352
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/experiments/candidates/uav_user_waiting/b05/__pycache__",
+        "exists": true,
+        "entries": 6,
+        "allocated_bytes": 53248
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/tests/experiments/candidates/uav_user_waiting/b05/__pycache__",
+        "exists": true,
+        "entries": 3,
+        "allocated_bytes": 69632
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/runs/uav_user_waiting/b05_local_allocation_read_a02/progress.json",
+        "exists": true,
+        "entries": 1,
+        "allocated_bytes": 4096
+      }
+    ],
+    "total_allocated_bytes": 3778035712
+  },
+  "remote_before": {
+    "targets": [
+      {
+        "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/9b680a5b7dee471e865759e84a49a043",
+        "exists": true,
+        "entries": 17375,
+        "allocated_bytes": 813965312
+      },
+      {
+        "path": "/home/wu/projects/HMASD/.git/worktrees/9b680a5b7dee471e865759e84a49a043",
+        "exists": true,
+        "entries": 14,
+        "allocated_bytes": 3612672
+      }
+    ],
+    "total_allocated_bytes": 817577984
+  },
+  "scope": "Allocated st_blocks*512 for exact selected source trees, Git registrations, redundant staging/scratch/caches and reader progress, deduplicated by inode per host; not whole-host free space under concurrent work.",
+  "preserved": [
+    "canonical A01 failure/core/partial output and mapped runtime files on wsl_4070",
+    "original B04 complete canonical source data, including K adverse evidence",
+    "canonical full A02 summary/reading and192 unique contact/outcome pairs on local_linux",
+    "published useful implementation/tests and compact positive/adverse records; native claims/manifests/exit records"
+  ],
+  "local_collector": {
+    "command": [
+      "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+      "scripts/hmasd_snapshot_gc.py",
+      "--sudo-process-scan",
+      "--apply",
+      "--snapshot",
+      "f558b8cd2a9c4b29a199f298bb7af1ff",
+      "--snapshot",
+      "754b66a479994bbfb898f76066019ea5"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"mode\": \"apply\",\n  \"snapshots\": [\n    {\n      \"claim\": \"/home/fires/hmasd-wsl/.git/hmasd-admission/aedcfdcf8446788c90abd34b6d0f0ec00b655bafe7674443be4c46e1402ffb6b.json\",\n      \"durable_ref\": \"refs/heads/main\",\n      \"eligible\": true,\n      \"output\": \"/home/fires/hmasd-wsl/runs/uav_user_waiting/b05_local_allocation_a02\",\n      \"path\": \"/home/fires/hmasd-wsl/.git/hmasd-launch-sources/f558b8cd2a9c4b29a199f298bb7af1ff\",\n      \"removed\": true,\n      \"sha\": \"4de05b0da41827cf945587003a2476584dac480e\",\n      \"snapshot\": \"f558b8cd2a9c4b29a199f298bb7af1ff\"\n    },\n    {\n      \"claim\": \"/home/fires/hmasd-wsl/.git/hmasd-admission/c3a5d5e1e8e400c1d909232d95bb520cff082abeb148fe1cbd187ad9e45cf6be.json\",\n      \"durable_ref\": \"refs/heads/main\",\n      \"eligible\": true,\n      \"output\": \"/home/fires/hmasd-wsl/runs/uav_user_waiting/b05_local_allocation_read_a02\",\n      \"path\": \"/home/fires/hmasd-wsl/.git/hmasd-launch-sources/754b66a479994bbfb898f76066019ea5\",\n      \"removed\": true,\n      \"sha\": \"4de05b0da41827cf945587003a2476584dac480e\",\n      \"snapshot\": \"754b66a479994bbfb898f76066019ea5\"\n    }\n  ]\n}\n",
+    "stderr": ""
+  },
+  "remote_collector": {
+    "command": [
+      "/home/wu/.venvs/hmasd-gcc-31021/bin/python",
+      "/home/wu/projects/HMASD/scripts/hmasd_snapshot_gc.py",
+      "--repo",
+      "/home/wu/projects/HMASD",
+      "--sudo-process-scan",
+      "--apply",
+      "--snapshot",
+      "9b680a5b7dee471e865759e84a49a043"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"mode\": \"apply\",\n  \"snapshots\": [\n    {\n      \"claim\": \"/home/wu/projects/HMASD/.git/hmasd-admission/7de44725cfde81bad5e5065bd41f21f23aee83d724a0c97def62c8280447e3c6.json\",\n      \"durable_ref\": \"refs/remotes/origin/HEAD\",\n      \"eligible\": true,\n      \"output\": \"/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a01\",\n      \"path\": \"/home/wu/projects/HMASD/.git/hmasd-launch-sources/9b680a5b7dee471e865759e84a49a043\",\n      \"removed\": true,\n      \"sha\": \"de238594dc9d64d7be246e7b9628a63f6a53b272\",\n      \"snapshot\": \"9b680a5b7dee471e865759e84a49a043\"\n    }\n  ]\n}\n",
+    "stderr": ""
+  },
+  "redundant_target_live_consumer_scan": {
+    "references": [],
+    "permission_denials": []
+  },
+  "removed_redundant_targets": [
+    "/home/fires/hmasd-wsl/temp/directions/uav_user_waiting/b05",
+    "/home/fires/hmasd-wsl/experiments/candidates/uav_user_waiting/b05/__pycache__",
+    "/home/fires/hmasd-wsl/tests/experiments/candidates/uav_user_waiting/b05/__pycache__",
+    "/home/fires/hmasd-wsl/runs/uav_user_waiting/b05_local_allocation_read_a02/progress.json"
+  ],
+  "local_after": {
+    "targets": [
+      {
+        "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/f558b8cd2a9c4b29a199f298bb7af1ff",
+        "exists": false,
+        "allocated_bytes": 0
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/754b66a479994bbfb898f76066019ea5",
+        "exists": false,
+        "allocated_bytes": 0
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/.git/worktrees/f558b8cd2a9c4b29a199f298bb7af1ff",
+        "exists": false,
+        "allocated_bytes": 0
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/.git/worktrees/754b66a479994bbfb898f76066019ea5",
+        "exists": false,
+        "allocated_bytes": 0
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/temp/directions/uav_user_waiting/b05",
+        "exists": false,
+        "allocated_bytes": 0
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/experiments/candidates/uav_user_waiting/b05/__pycache__",
+        "exists": false,
+        "allocated_bytes": 0
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/tests/experiments/candidates/uav_user_waiting/b05/__pycache__",
+        "exists": false,
+        "allocated_bytes": 0
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/runs/uav_user_waiting/b05_local_allocation_read_a02/progress.json",
+        "exists": false,
+        "allocated_bytes": 0
+      }
+    ],
+    "total_allocated_bytes": 0,
+    "required_evidence_checks": "Full A02 summary/reading and compact result hashes unchanged;192 contact/outcome pairs remain; both snapshot Git registrations absent."
+  },
+  "remote_after": {
+    "targets": [
+      {
+        "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/9b680a5b7dee471e865759e84a49a043",
+        "exists": false,
+        "allocated_bytes": 0
+      },
+      {
+        "path": "/home/wu/projects/HMASD/.git/worktrees/9b680a5b7dee471e865759e84a49a043",
+        "exists": false,
+        "allocated_bytes": 0
+      }
+    ],
+    "total_allocated_bytes": 0,
+    "required_evidence_checks": "B04 summary/full reading and original core hashes match;256 B04 raw files and90 A01 contact/outcome pairs remain; A01 atomic-summary hash unchanged; snapshot Git registration absent."
+  },
+  "blockers": [],
+  "gross_allocated_bytes_removed": 4595613696,
+  "new_retained_cleanup_record_allocated_bytes": 12288,
+  "net_allocated_bytes_reclaimed": 4595601408,
+  "net_scope": "Measured exact-target reduction less this newly retained cleanup record; no file relocation or replacement archive. Excludes Git object storage and unrelated concurrent host writes."
+}
