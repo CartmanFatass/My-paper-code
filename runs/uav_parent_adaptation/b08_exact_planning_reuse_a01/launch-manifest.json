@@ -1,0 +1,102 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-10-01T02:05:03.189766Z",
+  "bootstrap_command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/c060d43367b841d2b1852d9aefd4b26a/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/c060d43367b841d2b1852d9aefd4b26a/experiments/candidates/uav_parent_adaptation/b08_exact_planning_reuse/run.py",
+    "--output",
+    "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b08_exact_planning_reuse_a01",
+    "--",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b08_exact_planning_reuse_a01",
+    "--launch-sha",
+    "ba18513feec96ed4de8d7cf111f6587e99df8271",
+    "--seed",
+    "29368991",
+    "--original-records",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/c060d43367b841d2b1852d9aefd4b26a/runs/uav_fleet_transmission/b04_temporal_complementarity_a01",
+    "--original-bulk",
+    "/home/fires/hmasd-artifacts/uav_fleet_transmission/b04_temporal_complementarity_a01"
+  ],
+  "claim_key": "7b3713525a20bdb83e76a5e952cf89de8a6f2a8d6e95e65056f1da476192489d",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/7b3713525a20bdb83e76a5e952cf89de8a6f2a8d6e95e65056f1da476192489d.json",
+  "command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/c060d43367b841d2b1852d9aefd4b26a/experiments/candidates/uav_parent_adaptation/b08_exact_planning_reuse/run.py",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b08_exact_planning_reuse_a01",
+    "--launch-sha",
+    "ba18513feec96ed4de8d7cf111f6587e99df8271",
+    "--seed",
+    "29368991",
+    "--original-records",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/c060d43367b841d2b1852d9aefd4b26a/runs/uav_fleet_transmission/b04_temporal_complementarity_a01",
+    "--original-bulk",
+    "/home/fires/hmasd-artifacts/uav_fleet_transmission/b04_temporal_complementarity_a01"
+  ],
+  "command_sha256": "cdef0bf3d2977fb44b4e81c179b4f50082bb40b1fc1dcb2668064e8660035147",
+  "control_observation": {
+    "observed_at": "2026-10-01T02:05:02.956115Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "ba18513feec96ed4de8d7cf111f6587e99df8271"
+  },
+  "control_root": "/home/fires/hmasd-wsl",
+  "created_at": "2026-10-01T02:05:02.977314Z",
+  "cwd": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/c060d43367b841d2b1852d9aefd4b26a",
+  "direction": "uav_parent_adaptation",
+  "host_identity": "Jacob",
+  "identity_command": [
+    "/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10",
+    "experiments/candidates/uav_parent_adaptation/b08_exact_planning_reuse/run.py",
+    "--launch-sha",
+    "ba18513feec96ed4de8d7cf111f6587e99df8271",
+    "--seed",
+    "29368991",
+    "--original-records",
+    "<SOURCE>/runs/uav_fleet_transmission/b04_temporal_complementarity_a01",
+    "--original-bulk",
+    "/home/fires/hmasd-artifacts/uav_fleet_transmission/b04_temporal_complementarity_a01"
+  ],
+  "lead": "Codex DM (native child)",
+  "manifest_ref": "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b08_exact_planning_reuse_a01/launch-manifest.json",
+  "node": "local_linux",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/7b3713525a20bdb83e76a5e952cf89de8a6f2a8d6e95e65056f1da476192489d.json",
+  "output_root": "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b08_exact_planning_reuse_a01",
+  "preflight": "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b08_exact_planning_reuse_a01/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+      "kind": "linux_pid_start_ticks",
+      "pid": 1394962,
+      "session_id": 1394962,
+      "start_ticks": 25889902
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 1394962,
+    "process_group_id": 1394962
+  },
+  "process_exit": "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b08_exact_planning_reuse_a01/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+      "kind": "linux_pid_start_ticks",
+      "pid": 1394964,
+      "session_id": 1394962,
+      "start_ticks": 25889906
+    },
+    "pid": 1394964,
+    "process_group_id": 1394962,
+    "supervisor_pid": 1394962
+  },
+  "schema_version": 1,
+  "sha": "ba18513feec96ed4de8d7cf111f6587e99df8271",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/c060d43367b841d2b1852d9aefd4b26a",
+  "stderr": "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b08_exact_planning_reuse_a01/stderr.log",
+  "stdout": "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b08_exact_planning_reuse_a01/stdout.log"
+}

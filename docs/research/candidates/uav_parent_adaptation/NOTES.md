@@ -7387,3 +7387,30 @@ collection. Final timing-metadata rewrites, shared summary updates, paired-histo
 checks and final aggregation remain paid enclosing-worker overhead. The separate
 reader and common input/source verification are also measured; no uncharged claim
 of native throughput or complete operational latency is made.
+
+<a id="b08-accepted-operation"></a>
+### B08 original accepted replay→reader operation
+
+Exact source was published as `ba18513feec96ed4de8d7cf111f6587e99df8271`.
+The single configured local operation was accepted at2026-10-01T02:05:03Z;
+its native identity, immutable snapshot, command and output binding are in the
+[original launch manifest](../../../../runs/uav_parent_adaptation/b08_exact_planning_reuse_a01/launch-manifest.json).
+Fresh actual-node admission observed6,409,424,896 available bytes above the
+4,294,967,296-byte floor; the [preflight](../../../../runs/uav_parent_adaptation/b08_exact_planning_reuse_a01/admission-preflight.json)
+is retained. This accepts the64-history worker and its whole independent reader,
+not a completed result or further work.
+
+Before admission I reconciled both preceding native-chain handles at02:04:06Z:
+fleet B06 and T/H B07 each had a consistent native exit0 witness and absent runner
+and supervisor. Their native worker/reader windows had ended before this replay
+started. Later local workload is not reserved away; this worker samples scientific
+process identities/load at history boundaries and retains those actual conditions.
+
+The assigning native child's existing deterministic observer was previously
+stopped with consumed B07 events. A new arm correctly refused that stopped state;
+I drained it (generation26, no pending event), rearmed it to27 and added only the
+accepted B08 status handle, producing generation28. No worker was relaunched.
+Observation uses the same child/session and30-second read-only native probes,
+with1500-second checkpoints. I keep this child turn active through collection,
+same-handle drain/rearm and full reading; queue registration does not establish
+future native-child wake delivery.
