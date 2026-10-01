@@ -1364,11 +1364,30 @@
     "retained_unique_bytes": 8953742,
     "retained_unique_files": 129,
     "snapshot": {
-      "deleted": false,
+      "allocated_bytes_after": 0,
+      "allocated_bytes_before": 1750900736,
+      "deleted": true,
+      "native_collector_result": {
+        "mode": "apply",
+        "snapshots": [
+          {
+            "claim": "/home/fires/hmasd-wsl/.git/hmasd-admission/7b3713525a20bdb83e76a5e952cf89de8a6f2a8d6e95e65056f1da476192489d.json",
+            "durable_ref": "refs/heads/main",
+            "eligible": true,
+            "output": "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b08_exact_planning_reuse_a01",
+            "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/c060d43367b841d2b1852d9aefd4b26a",
+            "removed": true,
+            "sha": "ba18513feec96ed4de8d7cf111f6587e99df8271",
+            "snapshot": "c060d43367b841d2b1852d9aefd4b26a"
+          }
+        ]
+      },
+      "net_allocated_bytes_reclaimed": 1750900736,
       "preview_eligible": true,
       "target": ".git/hmasd-launch-sources/c060d43367b841d2b1852d9aefd4b26a"
     },
-    "target_net_allocated_bytes_reclaimed": 386764800
+    "target_net_allocated_bytes_reclaimed": 386764800,
+    "total_net_allocated_bytes_reclaimed": 2137665536
   },
   "cost_ratios": {
     "A2_reuse/A2_original": {
@@ -1399,6 +1418,7 @@
     "all_original_scientific_payload_bits_and_records_equal": true,
     "all_recurrence_keys_sources_and_actual_work_independently_reconstructed": true
   },
+  "evidence_publication_sha": "8a5df94af87584b42ebb32fd2196aa28ab80c1b4",
   "execution_context": {
     "additional_scientific_worker_pid": 1483826,
     "fleet_joint_renewal_root_reported_UTC": [
@@ -5862,5 +5882,5 @@
     "wall_seconds": 0.041732394020073116
   },
   "source_sha": "ba18513feec96ed4de8d7cf111f6587e99df8271",
-  "status": "complete_reading_and_unique_retention"
+  "status": "complete_reading_publication_cleanup"
 }

@@ -7786,3 +7786,32 @@ files remain published; no extra backup, archive or copied worktree was created.
 The terminal accepted source snapshot has passed native collector preview; its
 exact-target deletion and final net measurement follow publication of this compact
 reading. No concrete cleanup tool blocker is present.
+
+<a id="b08-final-cleanup"></a>
+### B08 final publication and measured closure
+
+Compact complete evidence and the original independent criticism/DM disposition
+were published as **`8a5df94af87584b42ebb32fd2196aa28ab80c1b4`**. I then used
+the supported native exact-target collector to delete the terminal accepted input
+snapshot `.git/hmasd-launch-sources/c060d43367b841d2b1852d9aefd4b26a` after its
+fresh process scan and durable-main check. Native output reports `removed: true`;
+the target is absent. Its allocated usage fell from **1,750,900,736 bytes to 0**.
+Claim, launch manifest and result records remain for operation recovery.
+
+Together with the precisely listed output/scratch/cache deletions above, measured
+net allocated target usage decreased by **2,137,665,536 bytes**. This is actual
+deletion, not moving retained evidence or claiming a decrease in Git object
+storage. The one canonical unique evidence copy remains hash-verified. All five
+owned output/scratch/cache targets and the exact source snapshot are absent;
+useful source/tests, compact positive/adverse records and the sole original B04
+science remain. **No concrete cleanup blocker or leftover obsolete target remains.**
+The recorded launch/source paths in immutable historical configs are not rewritten;
+canonical original-record aliases and their matching hashes are in `result.json`.
+
+B08 is now fully read, independently diagnosed, published and cleaned. There is
+no live worker/reader/observer, unread advice, uncollected result or selected next
+operation. Retain the exact implementations and the scoped ordinary/anticipatory
+capability; the broader parent question remains open without an automatic next
+purchase. The direction returns to reserve. The RESEARCH standing/routing and the
+directly affected shared planning-cost judgment are updated at this substantive
+boundary; B06/B07's adverse learned-decision diagnosis is unchanged.
