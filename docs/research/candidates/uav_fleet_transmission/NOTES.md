@@ -3463,3 +3463,154 @@ consequence. Representation and possible further learning remain untested by thi
 prior failed learning increments remain adverse. Independent ResearchCritic is reconstructing
 these original results and prior sources separately; final fixed-law disposition follows that
 reading below. No next experiment, retuning or replication is selected meanwhile.
+
+<a id="b05-independent-disposition"></a>
+### 2026-10-01 — B05 independent diagnosis and fixed-study disposition
+
+The dedicated ResearchCritic `/root/dm_fleet_transmission/b05_result_diagnosis`, created
+with no inherited DM/Root conversation, returned the complete answer below at 00:37:43 UTC.
+Its assignment supplied the actual fixed question, source/config/summary/reading, canonical
+raw locations, original construction and failed-development evidence, and the original
+selection answer. The critic reconstructed original evidence before reading my completed
+interpretation; the fixed administrative stopping boundary was visible throughout. It ran
+no new policy/model/native evaluation or fit. Its independent checks and their limits are
+part of the answer, rather than an assertion that every source was independently replayed.
+
+**Original scientific review, verbatim:**
+
+> **Recommend stopping the fixed B05 study and retaining its conditional capabilities.** S_L1 retains useful native value beyond G; S_L0’s reward advantage remains unresolved. G adds useful ordinary service-tail, quality and cost tradeoffs without establishing a mean-reward improvement over Q10 or Q05. No automatic retuning, additional fit or confirmation is warranted.
+>
+> I received no inherited DM/Root conversation. I reconstructed the frozen comparison and native evidence before reading the original selection answer and DM’s completed interpretation. The assigned stopping boundary was visible from the outset.
+>
+> I checked source `54c57af8d2e3860f25a278850055a6aa020e5beb`, all 26 configuration source hashes against the committed and local files, both canonical actor-file hashes, the pinned calibration blob, and terminal records. I reconstructed all 21 paired contrast vectors for nine consequential metrics from the 416 episode records and exactly reproduced the declared bootstrap intervals for both primaries, G−Q10, G−Q05 and Bstar_L0−G. I directly read and hash-checked 39 canonical raw episodes: every arm/tape in worlds 29630011, 29630013 and 29630017. These include the strongest primary adverse world, all zero-service episodes and a strong positive world. Connections, service, SINR quality, reward, path, motion, all-on transmission and common initial geometry agreed.
+>
+> I did **not** independently repeat the complete controller/actor replay or inspect every raw episode. The original complete reader reports 71,680 ordinary-query replays, 61,440 student-row checks and zero new native steps. My raw checks also reproduced six G-versus-Q10 saved-history category/proxy comparisons. The compact local files matched their remote counterparts. [Configuration](/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b05_score_sampling_a01/config.json), [summary](/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b05_score_sampling_a01/summary.json), [complete reading](/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b05_score_sampling_a01/reading.json).
+>
+> The primary evidence supports separate asset judgments:
+>
+> | Contrast | Mean J difference [descriptive 95% interval] | Other consequential differences |
+> |---|---:|---|
+> | S_L0−G | +.013616 [−.000949, +.027997] | Service +1.270/tick; within-episode service-p10 +1.156; path −416m/UAV; quality −.013889 |
+> | S_L1−G | +.023431 [+.012843, +.033524] | Service +1.868/tick; p10 +1.516; path −267m, with its interval crossing zero; quality −.009068 |
+> | Bstar_L0−G | +.029987 [+.019919, +.040386] | Service +2.451/tick; p10 +.984; path +663m/UAV; complete episode CPU +.042765s |
+> | G−Q10 | +.003428 [−.007610, +.014797] | Unresolved mean service; p10 +1.391; quality +.006928; path −385m/UAV; CPU −.015985s |
+> | G−Q05 | +.000743 [−.009557, +.010863] | Unresolved mean service; p10 +.930; quality +.006884; path +275m/UAV; CPU +.012431s |
+>
+> These intervals describe 32 paired world clusters after averaging the two stochastic tapes. They are conditional on the fixed assets, with no equivalence or multiplicity-adjusted confirmation claim.
+>
+> S_L1−G improves J in 27/32 worlds; S_L0−G improves it in 21/32. Both retain positive J intervals against Q10, while S_L0−Q05 remains unresolved. Bstar_L0’s positive reward increment over unchanged S_L0, +.016371, costs approximately 1,080 additional metres per UAV; its p10 improvement is not established. Bstar_L0−S_L1 remains unresolved in J and adds 930m/UAV. Bstar_L1 is exactly S_L1, so it supplies no additional replication.
+>
+> The strongest adverse evidence must remain beside those means. In world 29630013:
+>
+> | Retained program | Zero-service ticks, tape 0 / tape 1 |
+> |---|---:|
+> | S_L0 | 8 / 1 |
+> | S_L1 | 2 / 7 |
+> | Bstar_L0 | 1 / 1 |
+>
+> Every ordinary arm has zero such ticks on this panel. All six retained-policy outage episodes are genuine native observations. In world 29630011, S_L0−G loses .091119 J and S_L1−G loses .057153 J. Conversely, world 29630017 supplies a substantial S_L1 gain on both tapes. These cases prevent universal dominance or reliability claims without cancelling the complete positive comparison. Absence of ordinary outages here does not establish ordinary-policy safety. Average service-p10 also does not measure individual-user continuity. Quality averages different served-user sets, so its decrease does not identify harm to the same users.
+>
+> G was meaningfully active. Of 20,480 saved G decisions, only 350 had all scores tied. The hypothetical Q10 choice on those same histories differed in 1,904 categories and 1,845 physical holds. The conditional expected proxy gain averaged +.002786660, and the realized saved-history proxy difference averaged +.002665725. No positive category lost all finite-grid sampling mass on this panel. Nevertheless, the complete G−Q10 mean J/service difference remains unresolved.
+>
+> This is neither nonactivation nor evidence of an actively harmful native intervention. It is a realized proxy improvement with uncertain mean native benefit and useful secondary tradeoffs. The 163 changed departure events also matter: common uniforms and equal nominal departure probability do not isolate tail content while holding departure events fixed. Saved-history geometry supplies no counterfactual native reward.
+>
+> The strongest simpler explanation remains **useful state-dependent stochastic control inherited through imitation**, with its action distribution and resulting trajectories differing from C/Q/G. C’s local forecast freezes peers and approximates censored interference while actual agents move jointly. Reweighting its alternatives can improve that forecast without improving the complete coupled trajectory. G’s realized physical departures are also fewer than Q10’s despite the shared nominal .1 categorical departure probability. These observations make forecast limitations and physical aliasing plausible explanations; they do not identify either as the cause.
+>
+> The stronger ordinary comparison weakens the claim that any competent stochastic use of C would absorb the retained capability: the specified G does not absorb S_L1’s gain. It does not establish that learning is necessary, that S learned coordination, or that no better ordinary law exists. G is a competent, prospectively fixed comparator; an exhaustive tuning search is unnecessary for this conditional result.
+>
+> The resulting scientific update should distinguish three judgments:
+>
+> - **Representation:** this strengthens demonstrated capability of the existing lawful helper-plus-network representation, particularly S_L1, against a stronger ordinary comparator. I would narrow the DM’s statement that representation is “untested”: representational limits were not tested, but an implemented policy’s capability received new evidence.
+> - **Learnability:** B05 adds zero fits and no new evidence of training-population reliability or useful further development. Original construction evidence survives. The earlier active PPO and consequence-head continuations remain adverse: B04 R−S was −.040278/−.005212 J; B05 CONT−S was −.005135/−.005498. Their physical interventions occurred, so inactivity does not explain those results. Repeated evaluation of the same assets does not add independent training units. [B04 evidence](/home/fires/hmasd-wsl/runs/uav_fleet_adaptation/b04_native_development_a01/summary.json), [B05 consequence evidence](/home/fires/hmasd-wsl/runs/uav_fleet_adaptation/b05_native_consequence_a01/summary.json).
+> - **Complete package value:** retain S_L1’s conditional reward/service capability, S_L0’s service/path capability, and the paid temperature option’s reward–travel tradeoff. Retain G alongside Q05/Q10 as an ordinary reference. No supplied utility prices travel, computation, quality and outages sufficiently to select a universal deployment winner.
+>
+> The original selection predictions were discriminating. A G improvement that displaced S would have changed the preferred ordinary reference; an additional S gain would preserve learned-package value; an active G loss would reject this fixed law; uncertainty alone would not purchase more evaluation. The observed result combines retained S_L1 value, ordinary secondary benefits and unresolved G mean improvement. It does not justify describing G as either a general replacement or a failed controller.
+>
+> The completed 416-episode panel is an adequate complete observation for that decision. There is no missing primary comparison requiring repair. I recommend no further native run now. More worlds would refine conditional asset means but would not resolve training variation or price the observed tradeoffs. A future replication is worthwhile only if its possible outcomes change a stated use or scientific decision. A future learning question needs independent training units and a constructive prediction beyond preserving competent starting assets; the present result does not automatically supply that prediction. Any richer information or control contract should give the ordinary comparator the same addition.
+>
+> Measured new cost is **106,496 native steps, zero fits, 103.248 worker CPU seconds and 36.723 reader CPU seconds**; enclosing totals are **140.041 CPU seconds and 140.955 wall seconds**. Peak process RSS is 434,952KiB; raw evidence occupies 179,862,927 logical bytes. G’s lower episode CPU than Q10 includes different trajectories and cache misses, rather than a matched-input kernel speedup. Support, admission, consultation and publication labor remain unmetered; the prospective 4–8 hours is not an actual measurement. The selected inherited chain now totals **8 fits, 2 calibrations, 1,794,048 native steps and 2,483.157 measured CPU seconds**, across differing timer scopes and hosts. Other historical branches remain separate incurred costs.
+>
+> I find no material objection to the DM’s substantive reading or to stopping this fixed study. The correction is to preserve the positive ordinary tradeoffs and demonstrated representational capability while withholding broader learning, reliability and adoption claims. Stopping this purchase does not close the parent scientific question.
+>
+> **MATERIAL_DISSENT: no — supported for stopping the fixed B05 study, retaining the conditional capabilities and selecting no automatic extension.**
+
+**DM response and resolved choice.** I read and accept the complete independent answer.
+It changes one phrase in my provisional reading: the existing helper/network representation's
+demonstrated capability is strengthened, especially S_L1 beyond G; only its representational
+limits and potential for reliable further learning remain untested here. This correction is
+recorded without rewriting the earlier entry. The fixed study strengthens the original
+learned-package capability and the usefulness of G's secondary tradeoffs. It does not supply
+an explanation of S's benefit, a claim of learned coordination, a general learning advantage,
+a training-population replication or a universally preferred deployed controller.
+
+The actual categorical departures on each program's own histories are G 2,067 / Q10 2,047 /
+Q05 1,049; their four-tick physical departures from C's corresponding command are 1,483 /
+1,941 / 998. These are distinct from Q10's 2,054 hypothetical categorical departures on G histories. Equal nominal
+.1 therefore does not match either realized departure events or physical intervention rates.
+The saved-history score improvement and native mean uncertainty leave forecast error,
+physical aliases and changed coupled trajectories unseparated. None is promoted to a causal
+diagnosis or a reason for an automatic temperature/epsilon repair. Student departures relative
+to their own modal category, if used, are a different comparison and are not C departures.
+
+Stop the completed fixed B05 purchase and keep the capabilities with their adverse cases:
+S_L1's conditional J/service gain; S_L0's useful service/path behavior and unresolved J gain;
+paid Bstar_L0's reward–travel tradeoff; and G/Q05/Q10/C's different ordinary costs and tails.
+The whole panel and reader are complete. No further world, fit, calibration, tau/epsilon
+choice, confirmation or new question is selected. Additional fixed-asset evaluation would
+mainly refine means without resolving training variation or the unpriced deployment tradeoffs.
+A future learning allocation needs a substantive constructive prediction and independent
+training units; a richer-contract comparison must give the ordinary controller the same new
+rights/resources. That is a possible future question, not an active continuation or required
+approval. Root owns cross-question allocation at this returned boundary. The parent question
+remains open, with prior PPO/consequence/count adverse evidence and all N8 findings intact.
+
+The original selection review and this separate-context result diagnosis cover this decision.
+No unresolved disagreement or distinct Pro expertise was identified, so no duplicate Pro
+consultation is added. This is a DM disposition with no material dissent and requires no
+per-result Root acknowledgment. I directly update this direction's RESEARCH standing and topic 4 to
+retain demonstrated capability, ordinary tradeoffs and the difference between an evaluated
+asset and further learnability. Source is `54c57af8d2e3860f25a278850055a6aa020e5beb`; complete
+compact evidence was published at `fbf908d9571268638f573e747edae0b9fffbedba` before cleanup.
+
+<a id="b05-final-cleanup"></a>
+### 2026-10-01 — B05 measured cleanup and final publication boundary
+
+The source, full compact result, original terminal records and byte-verified raw locator were
+published before removal. Both accepted native processes were absent with exit 0; the same
+observer was drained and stopped, and the original result review is fully read above. There
+is no live B05 worker, reader, observer, pending advice or selected successor. Read-only
+consumer checks found the fleet-adaptation stochastic-target source assessment explicitly
+using `b05_score_sampling/policies.py` and its contract. The compact kernel, harness, complete
+reader and synthetic checks remain useful and are retained at their existing owned paths;
+the reader's source bindings require the complete versioned implementation. Upstream actors,
+other directions' live work and all required positive/adverse evidence remain intact.
+
+The supported exact-snapshot collector initially could not inspect another process's cwd
+(`EACCES`, pid 660). Its documented `--sudo-process-scan` read-only scan resolved that tool
+limitation; preview and apply then proved terminal ownership, no live consumer, published
+source and external durable outputs. It removed both the terminal source snapshot and Git
+registration. No backup, relocation, archive chain or source rewrite was made.
+
+| Actually deleted target | Allocated bytes before | After | Net reclaimed |
+|---|---:|---:|---:|
+| wsl_4070 `/home/wu/projects/HMASD/.git/hmasd-launch-sources/3c5fa3efbb72442c9b0325280bde2352` | 813826048 | 0 | 813826048 |
+| wsl_4070 `/home/wu/projects/HMASD/.git/worktrees/3c5fa3efbb72442c9b0325280bde2352` | 3608576 | 0 | 3608576 |
+| local `/home/fires/hmasd-wsl/temp/directions/uav_fleet_transmission/` — only the stopped B05 observer request remained | 12288 | 0 | 12288 |
+| local `runs/uav_fleet_transmission/b05_score_sampling_a01/stdout.log` and `stderr.log` — empty redundant collection copies | 0 | 0 | 0 |
+
+All exact targets were absent after deletion. Remote reduction is 817,434,624 allocated bytes;
+local reduction is 12,288 bytes; **combined net reclamation is 817,446,912 allocated bytes**.
+No owned Python cache existed to remove. The original empty logs remain with the canonical
+remote run. Required raw evidence remains one canonical 416-file copy, 179,862,927 logical /
+180,719,616 allocated bytes, at the locator and manifest digest in the complete-reading entry.
+Those retained files are evidence, not a cleanup blocker. The unrelated remote Git autogc
+warning did not prevent the supported snapshot removal and is not an outstanding B05 cleanup
+dependency. No concrete cleanup blocker remains.
+
+The direction returns to reserve with a completed, independently read result and no producer.
+Re-entry requires a selected substantive question whose possible answers change a scientific
+or use decision; it is not recurring polling or an owner approval fabricated from idle state.
+The final publication updates only this notebook, this direction's standing/routing, directly
+affected shared topic 4 and the completed selected-plan section. The superseded substantive
+plan is retained once in the dated research archive; other directions and owner controls are
+preserved.
