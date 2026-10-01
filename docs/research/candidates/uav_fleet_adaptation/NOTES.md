@@ -12349,3 +12349,167 @@ to registered `/root/dm_silence_commitment/read_b11_science`, fork_turns=none,
 with original contract, source and raw positive/adverse evidence. Its original
 answer and the DM's resolved interpretation follow; no further run is authorized
 by technical completion or by this descriptive reading.
+
+<a id="b11-original-independent-result-review"></a>
+### B11 original independent scientific result review
+
+Registered ResearchCritic `/root/dm_silence_commitment/read_b11_science`,
+separate context with fork_turns=none, returned the following complete original
+answer after its evidence-first reconstruction. No Pro was added: this adequate
+independent review addressed the actual result/closing decision without a distinct
+unresolved expertise or disagreement need. Advice is not empirical replication.
+
+BEGIN COMPLETE ORIGINAL REVIEW
+
+**Retain B11’s narrow ordinary-control findings and stop this fixed commitment purchase.** Neither memory program establishes the stipulated improvement over CJ. RETURN does demonstrate useful retained-command behavior in three worlds, which should remain visible alongside the substantial adverse cases.
+
+No DM/Root conversation was inherited. I reconstructed the contract, source and saved results before reading the earlier advice and DM’s completed descriptive reading. The assignment and frozen contract disclosed the hypotheses and prior counterexamples; this was not an allocation-blinded review.
+
+The consequential fixed comparisons are:
+
+| Contrast | Mean ΔJ [pointwise 95% interval] | Worlds +/−/= |
+|---|---:|---:|
+| CJ − C_ZERO | +.004024 [.000063, .010583] | 4/1/27 |
+| KEEP − CJ | −.003406 [−.008995, .000195] | 1/3/28 |
+| RETURN − CJ | +.000671 [−.006428, .007770] | 3/2/27 |
+| RETURN − KEEP | +.004077 [0, .010313] | 3/0/29 |
+| KEEP − C_ZERO | +.000618 [−.000338, .001967] | 2/3/27 |
+| RETURN − C_ZERO | +.004695 [.000146, .010851] | 4/1/27 |
+| CJ − Hdirect_ZERO | −.024122 [−.042234, −.006976] | 10/22/0 |
+| KEEP − Hdirect_ZERO | −.027529 [−.045039, −.010783] | 8/24/0 |
+| RETURN − Hdirect_ZERO | −.023452 [−.040682, −.006767] | 9/23/0 |
+
+These use all 32 worlds, with Hdirect’s tapes averaged within world. They describe the fixed programs and retained parent, without simultaneous-comparison, independent-parent, training-population or equivalence coverage. I checked their underlying point estimates and world reductions; I inspected the bootstrap implementation and retained its reported intervals without rerunning it. [Complete evidence](/home/fires/hmasd-wsl/runs/uav_fleet_adaptation/b11_silence_commitment_a01/publication.json).
+
+**The strongest useful positive is actual RETURN/KEEP separation.** KEEP created and consumed 21 commitments; RETURN created and consumed 20. Both activated in the same five worlds, with no terminal pending commitments. RETURN executed five nonzero retained commands in worlds 30021005/09/30; every one produced four moving ticks and 120 metres of travel without clipping.
+
+At the first RETURN/KEEP difference in each of those worlds, the preceding physical state was shared. Complete RETURN−KEEP J was respectively **+.060787, +.000300 and +.069379**, with higher mean service in all three. The other 29 worlds had identical execution in the reported complete behavioral comparison. Thus the added retained C command sometimes matters beyond simple zero holding. The pooled interval’s lower endpoint is exactly zero, and two worlds supply nearly all the gain. All three positive worlds lose served-user quality relative to KEEP; two add travel.
+
+This updates the original exposure uncertainty: the five old B10 origins all stored zero, but distinct useful RETURN choices now exist. It supports retaining this particular ordinary capability. It does not establish a population-level RETURN advantage or useful learned memory.
+
+**The strongest consequential objection is to crediting RETURN’s positive comparison with C_ZERO to an established commitment increment.** CJ already improves over C_ZERO on this panel. RETURN−CJ remains unresolved, while both memory programs cause active adverse consequences:
+
+- In **30021000**, KEEP and RETURN each lose **.021362 J** against CJ and finish below C_ZERO.
+- In **30021026**, both make twelve repeated zero commitments and lose **.075616 J and 5.867188 served users per tick** against CJ. Their first changed four-tick block actually improves J by .009636 before the later loss.
+- In **30021005**, RETURN gains .042511 J over CJ, but its episode minimum remains three users lower. KEEP loses .018276 J and seven service-p10 users.
+- In **30021030**, RETURN gains **.075635 J** over CJ, with a substantial service improvement and lower served-user quality.
+
+These are consequential interventions, not nonactivation. Exposure is nevertheless sparse: five activated worlds are not 41 independent replications, and repeated commitments in one trajectory do not increase the independent world count.
+
+The competing predictions are now distinguishable. The constructive retained-plan conjecture predicted meaningful RETURN/KEEP separation; the three positive worlds support that narrow prediction. The broader conjecture that commitment preserves CJ’s useful complete value predicted an increment over CJ and C_ZERO; B11 does not establish it. The ordinary alternative—changing a blind return alters subsequent movement, radio conditions and visited states, with gains or losses—fits the mixed complete effects. It remains a package-level explanation, without an identified single mediator or repair.
+
+I directly rechecked the inherited **30012030** counterexample: at the next boundary the previously silent UAV issues zero in both CJ and C_ZERO, while peers 1 and 4 choose different commands and the installed masks differ. The next-block service sequences are `[18,17,18,18]` and `[25,25,24,23]`. At all five old first-OFF origins, the original C category is indeed zero. B11 neither overturns those facts nor diagnoses B10’s learning losses.
+
+The stronger ordinary reference also remains consequential. RETURN loses **1.886719 served users per tick** against Hdirect_ZERO, with a negative interval, alongside its negative J comparison. Hdirect is not a Pareto winner: RETURN has higher mean quality and lower measured episode CPU, while travel and service-tail differences remain uncertain. All 192 B11 episodes have zero zero-service ticks; this supplies no outage discrimination and does not erase earlier outages. Team service p10/minimum do not measure individual-user continuity.
+
+**I recommend retaining the evidence and selecting no further run for this recipe.** The complete observation needed to judge this purchase has already been obtained. More worlds would refine sparse fixed-program effects; they would not establish a B10 repair or learning result. RETURN’s three positives warrant preservation, but currently supply no demonstrated complete advantage over CJ or a reason to replace Hdirect for J/service.
+
+A later use criterion or distinct constructive conjecture could justify further exploration without first identifying every cause or inventing an architecture. Any added sensing, timing or control rights should also reach the competent ordinary comparator. This review selects no such continuation, confirmation or tuning exercise.
+
+The actual production price was **0 fits, 192 episodes and 49,152 native steps**. Worker wall/CPU was **51.524/52.550 seconds**; reader **82.502/85.167**; enclosing chain **134.184/137.863**, with peak RSS **452,080 KiB**. Acceptance-to-exit elapsed time was 139.449 seconds, a separate scope. Each worker/reader pass incurred 448,983 C candidate paths, 1,795,932 modeled ticks and 12,247 frozen-network rows; the reader additionally reconstructed 61,632 scalar states. Forty-one bypasses do not imply a large radio-compute saving. Correctness work, staging, publication and scientific support are additional; the 8–16 support-hour estimate remains a forecast. Cumulative B02–B11 exposure remains **22 fits, two calibrations and 4,104,232 native steps**, plus B01 and separately recorded support/failures.
+
+My independent checks covered:
+
+- All **51 source hashes** against launch-commit blobs, local files and the accepted remote snapshot; configuration, admission and exit bindings.
+- Canonical and staged P0 artifact hashes, metadata and all **34,715 FP32 parameters**, including the tensor digest matching recorded initial/final worker identities.
+- All **192 episode identities and execution order**, common initial-state bindings, tape roots, and independent reductions of consequential native/cost metrics across all nine contrasts.
+- Hashes and saved-array checks for **28 B11 raw episodes**: all four deterministic programs in every activated world, one inactive world, and both Hdirect tapes in two selected worlds. I reconstructed service/quality/reward, clipping and travel, plus all 41 memory origin/consumption recurrences without querying a controller.
+- Hdirect’s saved probability mixture, addressed uniforms and chosen categories on **1,280 decisions**, including cache hits, without new neural forwards.
+- All **ten historical CJ/C_ZERO raw files** underlying the five B10 first-divergence cases.
+- Canonical summary, reading and episode-log hashes, and equality of worker/reader/publication comparisons.
+
+I relied on the accepted full reader for exhaustive physics and policy reconstruction outside those checks, and did not repeat every raw hash or bootstrap. The reader’s C replay reuses pinned C; it is not an independent proof of that planner. I made no native episodes, model/controller queries, optimizer calls, production-reader reruns or record edits. Historical literature and all earlier batches were not re-audited.
+
+**MATERIAL_DISSENT: no — the evidence supports closing this fixed purchase while retaining CJ’s conditional gain, RETURN’s distinct useful cases and every adverse outcome. It does not support an established commitment upgrade, a B10 repair claim or automatic additional investment.**
+
+END COMPLETE ORIGINAL REVIEW
+
+<a id="b11-independent-disposition"></a>
+### B11 resolved interpretation, investment and measured cleanup
+
+I adopt the independent diagnosis and stop this fixed commitment purchase. B11
+is fully read, not merely technically finished. Neither KEEP nor RETURN satisfies
+the prospective rule for an established complete-J increment over both CJ and
+C_ZERO. RETURN−C_ZERO is positive but CJ already contributes the relevant ordinary
+capability; RETURN−CJ remains unresolved. KEEP is actively adverse in three
+worlds, and both commitments can sacrifice CJ's complete gain. This conclusion
+keeps the explicit uncertainty rather than labeling the full commitment idea
+refuted or its population increment zero.
+
+The useful update is narrower and real: retained nonzero old C plans are now
+exposed, produce physical motion and improve complete RETURN/KEEP J/service in
+three worlds. Their quality losses, two-world concentration and exact-zero lower
+interval stay attached. This preserves an ordinary capability; it establishes
+neither learned memory value nor an optimal/sufficient local state. Complete
+coupled consequences remain necessary: even the first favorable commitment block
+in30021026 precedes a large full-episode loss. B10world30012030 still prevents
+claiming the silent actor's own next movement explains all continuation losses.
+No causal optimization/credit/representation explanation of B10 was purchased.
+
+Adoption, empirical support and further investment are distinct. Hdirect remains
+the stronger J/service control with a higher measured CPU bill; CJ/RETURN retain
+higher average quality. No use criterion currently trades that J/service loss
+for the small CPU saving. The fixed experiment has answered its assigned question
+well enough to decline additional worlds, tuning, first-block tests, learned
+memory, confirmation or B10 repair. Full native episodes cost less than forecast;
+cheap compute alone does not justify reopening a weakly motivated investment.
+A future concrete use criterion or different constructive prediction may justify
+an appropriately matched complete comparison; no proof, exhaustive diagnosis or
+new architecture is a prerequisite. Added sensing/timing/control rights must also
+reach the competent ordinary comparator.
+
+The broad learning/cooperation question in RESEARCH remains open; B01–B10's useful
+assets, failed learning increments, outages and cumulative costs keep their
+original meanings. This direction returns to reserve with no active operation or
+pending producer, not a fabricated dependency or a question-family closure. Within
+this assignment no successor run is selected. My cross-question recommendation to
+Root is to use the returned marginal investment on its already selected complete
+RF and CAL/CONT questions, then judge their actual results, rather than infer a
+new learning project from RETURN's three cases. This is consistent with the
+applicable allocation review, not a claim about unread results or permission to
+launch another direction. Root owns that next question choice. A future fleet
+re-entry needs a concrete use decision or distinct expected comparison outcome
+that could change investment; there is no automatic periodic check.
+
+Complete numeric evidence was committed/published as18999254360364549f579125ab3c16ce8d722a0d
+before cleanup. All three bounded helpers are finished. Scientific Reviewer
+explicitly finished consuming the staged P0 and source snapshot; all original
+workers and the observer are stopped, and no new native/model/controller work was
+performed during saved-data interpretation. The original canonical P0 and all192
+unique raw episodes/full reader remain necessary evidence for the retained useful
+and adverse cases. Useful B11 implementation/tests remain published for recovery
+and interpretation; no obsolete independent runner or additional scratch script
+was introduced.
+
+Cleanup on the executing node first received a read-only collector refusal for
+protected `/proc/660/cwd`. The documented existing-passwordless-sudo **read-only**
+process scan resolved this, found no live reference, and the collector verified
+terminal exit, consistent original claim/source, clean snapshot, external outputs
+and durable `refs/remotes/origin/HEAD` reachability. Applying only snapshot
+`4b40d322a0cb4b869941c82e63111b98` removed its managed linked worktree. The directory
+is confirmed absent; claim/manifest/exit/output remain. Its allocated size was
+not measured before deletion, so its reclaimed bytes are deliberately not quoted
+or included in the measured figure below. There is no unresolved GC tool blocker;
+the preexisting repository auto-GC bad-tree warning was not repaired or used as
+permission for broader removal.
+
+The original canonical P0 was rehashed before removal of the staged duplicate.
+An elevated read-only own-user `/proc` scan found no stage consumers. Exact measured
+targets were removed, with allocated bytes before→after:
+
+- Remote `/home/wu/hmasd-inputs/uav_fleet_adaptation/b11_silence_commitment_a01/`:
+  430,080→0bytes (only424,487logical-byte staged `P0.pt` plus its directory).
+- Local `experiments/candidates/uav_fleet_adaptation/b11_silence_commitment/__pycache__/`:
+  98,304→0bytes.
+- Local `tests/experiments/candidates/uav_fleet_adaptation/b11_silence_commitment/__pycache__/`:
+  61,440→0bytes.
+- Local `temp/directions/uav_fleet_adaptation/b11_wait_request.json`:
+  4,096→0bytes, after the same-handle event was consumed and observation stopped.
+
+Measured target allocation decreased by593,920bytes total:430,080remote plus
+163,840local. The separately deleted source snapshot adds unmetered reclamation;
+this is a target-scoped allocated-byte measurement, not a claim about concurrent
+whole-node free-space change. No tar, backup chain, copied tree or duplicated raw
+retention was made. Remaining artifacts are the one canonical evidence directory,
+original P0, compact published result/recovery records, original claim and consumed
+observer state; other directions and inherited historical outputs were untouched.
