@@ -57,5 +57,35 @@
     "worker_artifact_bytes": 150807102,
     "reader_path": "/home/wu/projects/HMASD/runs/uav_radio_uncertainty/b01_correlated_shadow_read_a01/reading.json",
     "reader_sha256": "099d634bc5ee3536193f36e3e2a76382ca9cb6e0edf9d8f9448d52bab38721dd"
-  }
+  },
+  "local_cleanup": {
+    "at": "2026-10-01T09:04:12.283045+00:00",
+    "before_allocated_bytes": {
+      "temp/directions/uav_radio_uncertainty": 688128,
+      "runs/uav_radio_uncertainty/b01_correctness_a01/stdout.log": 0,
+      "runs/uav_radio_uncertainty/b01_correctness_a01/stderr.log": 0,
+      "runs/uav_radio_uncertainty/b01_correlated_shadow_a01/stdout.log": 0,
+      "runs/uav_radio_uncertainty/b01_correlated_shadow_a01/stderr.log": 0,
+      "runs/uav_radio_uncertainty/b01_correlated_shadow_read_a01/stdout.log": 0,
+      "runs/uav_radio_uncertainty/b01_correlated_shadow_read_a01/stderr.log": 0
+    },
+    "after_allocated_bytes": {
+      "temp/directions/uav_radio_uncertainty": 0,
+      "runs/uav_radio_uncertainty/b01_correctness_a01/stdout.log": 0,
+      "runs/uav_radio_uncertainty/b01_correctness_a01/stderr.log": 0,
+      "runs/uav_radio_uncertainty/b01_correlated_shadow_a01/stdout.log": 0,
+      "runs/uav_radio_uncertainty/b01_correlated_shadow_a01/stderr.log": 0,
+      "runs/uav_radio_uncertainty/b01_correlated_shadow_read_a01/stdout.log": 0,
+      "runs/uav_radio_uncertainty/b01_correlated_shadow_read_a01/stderr.log": 0
+    },
+    "all_targets_absent": true,
+    "net_reclaimed_bytes": 688128,
+    "observer_generation": 65,
+    "observer_stopped": true,
+    "observer_unconsumed_events": 0,
+    "retained_source_consumer": "Published uav_radio_information_cost b01 code imports remain; its active operation/reviewer consumers were subsequently released at publication 0052b7dd5. Retain the useful P/U32 capability and numerical readers.",
+    "source_files_deleted": []
+  },
+  "prior_correctness_snapshot_reclaimed_bytes": 818282496,
+  "total_snapshot_and_local_target_reclaimed_bytes": 2455527424
 }

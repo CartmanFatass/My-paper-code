@@ -813,3 +813,77 @@ repair here. The broader question remains open. Concrete re-entry would require 
 use decision with a specified continuity criterion or a direct cheaper-reference comparison,
 not simply an invitation to repeat the positive. The one adequate independent reading
 covers this scoped closure; no distinct unresolved disagreement warrants a second Pro pass.
+
+
+<a id="b01-final-cleanup"></a>
+## 2026-10-01 09:04 UTC — published evidence and measured closure
+
+Complete outcomes, the numerical reader and full original scientific advice/disposition
+are published at `1e363409be4502f81fb1f91a847d83162a38a325`. Useful P/U32 source remains
+published at9b6f493b. Direct import inspection confirms a live selected consumer in
+`uav_radio_information_cost/b01`: its host, model, protocol, I/O and readers use this
+package. The conditional U32 capability, its executable checks and the independent
+readers also remain useful retained code. No source file was deleted or refactored
+under that consumer; no required canonical positive/adverse evidence was discarded.
+
+The supported exact-target collector previewed then reclaimed the worker and reader
+source snapshots after checking terminal identities, clean inputs, process references
+and durable Git reachability. Their directories and worktree registrations are absent.
+Deleted targets, measured allocated bytes before→after:
+
+- `/home/wu/projects/HMASD/.git/hmasd-launch-sources/2df8b39b75684520824fa178ccb43788`
+  (the earlier completed H8 cleanup):818282496→0.
+- `/home/wu/projects/HMASD/.git/hmasd-launch-sources/58bb94a971024c3eb35b5215eaa224ef`
+  (main worker):818274304→0.
+- `/home/wu/projects/HMASD/.git/hmasd-launch-sources/c7d012083adb4ec3a05a57514b71f91d`
+  (full reader):818282496→0.
+- `/home/fires/hmasd-wsl/temp/directions/uav_radio_uncertainty/`:688128→0.
+  This held the verified temporary worker-summary copy, three consumed observer-request
+  files and empty primary/tests directories.
+- Empty local `stdout.log`/`stderr.log` in the correctness, main-worker and reader run
+  directories were removed; these six redundant zero-byte files reclaimed0allocated bytes.
+
+Net measured allocation reclaimed across those targets is**2455527424bytes**;
+there is no moved/archive copy or concrete cleanup blocker. This is target allocated
+usage, not a claim about Git-object pruning or total filesystem capacity. The
+[cleanup record](../../../../runs/uav_radio_uncertainty/b01_correlated_shadow_a01/cleanup.json)
+contains before/after values and exact current collector results. After removal, all129
+canonical main artifacts were rehashed successfully (150807102bytes), and the worker
+summary and reader still match their recorded hashes. The nine unique H8 evidence files
+(330780bytes) remain in their canonical remote run root. These retained files support
+the complete fixed contract, positive/adverse traces and active host consumer; no second
+raw-data copy was created. Compact local Git evidence is retained, including the exact
+165233byte result projection and277952byte original reader report.
+
+The final same-session observer drain shows generation65,stopped=true,no unconsumed
+events and all three RF operation statuses ready. Workers/readers are terminal, no
+scientific helper holds a raw-data consumer and no open adviser remains. Publication
+of the direction standing and changed shared-model judgment follows this closure on
+shared main. This is a complete read result; no collection or interpretation is pending.
+
+
+### 2026-10-01 09:10 UTC — concurrent acquisition result read before standing publication
+
+While I waited for the other direction's shared-index transaction, its complete
+P_FULL/P_PRIOR evidence and original independent scientific diagnosis were published at
+[0052b7dd5de658ac24b911a3ca9847a5602d632f](https://github.com/CartmanFatass/My-paper-code/blob/0052b7dd5de658ac24b911a3ca9847a5602d632f/docs/research/candidates/uav_radio_information_cost/NOTES.md#b01-complete-reading).
+I read its full paired results, cost, opposite censored tails, original critique and DM
+resolution. FULL−PRIOR payload-J is −.015929915 [−.019169458,−.012690371], negative in
+all32 new worlds including a near tie; payload service is −.994323730/tick. FULL has
+scoped waiting positives, with opposite203/150tick right-censored adverse spells across
+both arms. Its current lead closed the fixed purchase and released all active source,
+worker/reader/critic consumers; the useful acquisition code and its exact RF imports
+remain retained. No source or evidence of that direction was changed here.
+
+This realizes the adverse branch already addressed by my original reviewer above. It
+strengthens the need for any eventual U32 deployment claim to confront the cheaper
+ordinary PRIOR package directly. It does not invalidate the measured U32−P increment,
+identify a shared causal failure or supply a direct U32−PRIOR effect. The panels,
+information acquisition and timing differ; no arithmetic addition/subtraction of their
+effects is a tested controller comparison. My adopted closure and conditional capability
+standing therefore remain unchanged. No extra fit, query, reduction, new review round or
+successor is selected; Root owns the next cross-question allocation. The broad acquisition
+question is now also idle, so it is neither a pending producer nor a dependency of this
+completed RF study. Retained reusable P/U32 implementation, explicit acquisition imports,
+checks and full numerical readers justify keeping the published RF package; no active
+operation is asserted by those code dependencies.
