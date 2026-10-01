@@ -3240,3 +3240,59 @@ assets, and cannot pass the production admission path. Record actual test reques
 costs; do not treat these as native results. Reuse unchanged host checks. Independent numerical/
 RNG/reader/launch review is required before result execution. The DM accepts that review and
 the bounded change, then commits/pushes exact inputs and performs remote-first fresh admission.
+
+<a id="b05-implementation-acceptance"></a>
+### 2026-10-01 — B05 implementation accepted; no production exposure yet
+
+The bounded Implementer supplied only policies.py and test_policies.py; I read both and
+accept the unchanged source-C/navigation/cache and original-S bindings. The DM implemented
+the fixed contract/assets, collector, saved-array metrics, full replay reader and admitted
+entry in the owned b05_score_sampling package. There is no new learner or fixture CLI.
+The complete collector saves all requested original observations, score/service vectors,
+student logits, random draws, densities, navigation/cache state and native arrays; failures
+retain partial arrays and actual attempted/completed work. The reader reconstructs each C
+query on saved actual histories, every student one-row logit (including deployment cache
+hits), native/feature/navigation reductions and the full paired-world reading. It records
+partial replay work on failure. Runtime Python/NumPy/Torch and actual thread/determinism
+settings are retained. The two original actor files remain canonical remote inputs.
+
+Independent engineering Reviewer /root/dm_fleet_transmission/b05_engineering_review inspected
+the actual source and original dependencies in a separate context. Its conclusion was
+“no material finding remains”; it checked law/ties, source C/navigation/cache, S lineage/T1/
+T1/T2, indexed RNG, precision, clipped exposure, complete reader, paired bootstrap, immutable
+asset/calibration inputs, partial failure and admission-before-assets. The original paid
+calibration is read from its pinned Git blob so sparse checkout omission cannot silently
+change B*. All26 source identities and the exact calibration hash/choice were verified.
+After the narrow runtime-metadata changes and the new actual-reader corruption regression,
+the Reviewer explicitly retained that conclusion. I accept the implementation. These are
+engineering checks, not scientific evidence or a changed selection review.
+
+Synthetic checks and their scope:
+
+- Kernel helper: final73passed/1.14s; one earlier assertion tolerance was corrected from
+  less than one FP64 ulp to four epsilon, with no production-law change. Across its two
+  invocations:169 FixedPolicy attempts/139 successes,128 MemoC calls and70 original-student
+  calls, including nested/reference work.
+- DM integration:3passed/2.44s, then4passed/2.03s, then final4passed/2.00s. The second added
+  reader failure accounting/CLI checks; the last added actual mid-reader score-corruption
+  counters and production-fixture refusal. All changes were then inspected independently.
+- Reviewer: complete76passed/2.25s before the last additions; changed integration4passed/
+  2.15s afterward. Its kernel counters were98attempts/83successes,78MemoC/35original-student.
+  Its final narrow inspection repeated no tests.
+- The five integration invocations each used26fabricated episodes/208synthetic transitions,
+  260worker policy queries,120helper-replay requests and237actor rows including reader work.
+  MemoC calls were294each except295in the final DM corruption check. Each invocation also
+  ran one failing fixture with5ordinary queries,3fabricated step attempts/2completions.
+  Thus the integration support used1050completed fabricated steps/1055attempts,1325worker
+  query calls,1496MemoC calls including reader/corruption checks,600feature requests and
+  1185actor rows. These counters overlap by construction; they are not independent episodes.
+  Every policy row/actor/world was fabricated, with zero native transitions and zero fitted
+  asset loads. Source inspection and checksum reads are additional support costs.
+
+The tests exercise unequal/tied scores, tiny53-bit bins, copied caches/fresh draws, original
+T1/T2 behavior and RNG isolation, all27 categories at clipped aliases, worker→raw→reader,
+corrupt draws/scores/commands/features/navigation/probabilities/source/metrics, paired-panel
+completeness, partial worker and reader costs, and admission-before-output. No native pilot
+was inserted. The remaining production check is the selected complete run on the actual
+remote node, subject to fresh admission. No seed, arm, horizon, stopping rule, output contract,
+fit/calibration count or scientific interpretation changed.
