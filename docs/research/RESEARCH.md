@@ -10,7 +10,7 @@
 当前 Root 为 `01a0f779-ace2-74e1-85ad-e0997b61d505`（[完成Root交接并继续任务](codex://threads/01a0f779-ace2-74e1-85ad-e0997b61d505)），
 已读取前任完成的[单一 handoff](HANDOFF_20261001_ROOT_AND_FOUR_DMS.md)，接手 Codex 科学管理、选题与后继安排。
 上一轮四项研究及三项资料评估的完成／停止结论保持；旧操作不重启，历史 handoff 不改写。
-本次明确继续解除该轮 Codex 交接暂停；现已选择三项完整比较，第四位 DM 负责 S7 的 source-only 构造与计价，见[当前分配](#root-selected-successors-20261001)。
+本次明确继续解除该轮 Codex 交接暂停；三项完整比较正在推进，第四位 DM 已完成 S7 构造与计价，Root 采纳独立评审、本轮不购买该候选，见[当前分配](#root-selected-successors-20261001)。
 Claude 的独立权限和当前暂停、FSD/PPC 暂停、G33 冻结及 Milan 数据依赖保持原范围。
 
 **历史恢复：2026-09-29 21:59 UTC，owner明确要求“阅读handoff 我们继续工作”；该轮次现已完成并暂停。**
@@ -2377,24 +2377,28 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 
 <a id="root-successor-designs-20260930"></a>
 <a id="root-selected-successors-20261001"></a>
-**2026-10-01 PDT — owner 恢复后，Root 已选择三项完整研究，并委托第四位 DM 构造 S7 的具体后继。**
+**2026-10-01 PDT — owner 恢复后，三项完整研究已选并推进；第四位 DM 完成 S7 的具体构造，Root 决定本轮不购买。**
 上一轮四项结果／独立判读／清理已完成，原[handoff](HANDOFF_20261001_ROOT_AND_FOUR_DMS.md)保持历史原文。
 新 Root 读取了三项完整原建议及 DM 回应，复用适用的独立科学审阅；新增跨题 reviewer
 `/root/successor_allocation_review` 已完整返回，Root 读完并采纳，MATERIAL_DISSENT: no。
 支持投入冲突时优先 RF、再 CAL/CONT、最后静默承诺；这不是正分排序，也不阻止独立工作并行。
-[完整原问答、实际检查范围与 Root 处置](archive/2026-10-01/RESEARCH-successor-allocation-review.md)保留；S7 具体合同以同一审阅的 focused follow-up 核对有变化部分。
+[完整原问答、实际检查范围与 Root 处置](archive/2026-10-01/RESEARCH-successor-allocation-review.md)保留；同一 reviewer 的 focused follow-up 已完整核对 S7 实际合同与机会成本，Root 采纳暂不购买，MATERIAL_DISSENT: no。
+[具体构造](candidates/uav_fleet_transmission/NOTES.md#post-b09-c-backed-prediction-design-20261001)及[完整后续评审与处置](candidates/uav_fleet_transmission/NOTES.md#post-b09-focused-root-disposition-20261001)保留。
 
 | 本次分配与要改变的判断 | 已选完整比较／成本预测 | 当前责任 |
 | --- | --- | --- |
 | 完整 RF 付费程序是否值得购买？旧 U32−P 与 FULL−PRIOR 面板不能相减代替。 | literal U32_FULL／P_PRIOR，32 paired H256 worlds＋paired H8；66 episodes／16,400 steps／0 fits；.7–1.5 CPU-h，6–12 support-hour equivalents。主 payload-J 与全部个人等待、删失、服务、timing、成本共同判读。 | `/root/dm_rf_purchase`，独占 `uav_radio_information_cost` 后继。 |
 | 自身静默后的合法命令承诺能否保留完整回合用途？不把个体下一动作当所有损失的原因。 | C_ZERO／CJ／CJ_KEEP／CJ_RETURN／Hdirect_ZERO，32 worlds、192 H256 episodes／49,152 steps／0 fits；production 180–720 CPU-s，8–16 support-hour equivalents。原 guard、9 contrasts、有限 memory reader 保持。 | `/root/dm_silence_commitment`，独占 `uav_fleet_adaptation` 后继。 |
 | 完整当前联合策略的参数搜索，能否超过同曝光普通校准及保留强参照？ | `uav_episode_policy_search`：CAL／CONT 两 paired blocks、4 fits；4,096 training＋736 endpoints／1,236,992 steps；1.36–4.55 CPU-h，14–24 support-hour equivalents。保留 37 contrasts 和 A／ZERO 权利区别。 | `/root/dm_episode_search`，新方向专属路径。 |
-| 如何把 S7 已显示的预测用途与普通路线建立结合，值得买哪一个完整比较？ | **只选有界 source-only 构造与完整计价，未选新结果批次。** 查明源接口、普通替代、区别性预测和全成本；无 native/model/controller/RNG 查询或保存结果再 reduction。 | `/root/dm_s7_prediction_use`，独占 `uav_fleet_transmission` 问题连续性；具体设计返回 Root 作跨题选择。 |
+| 如何把 S7 已显示的预测用途与普通路线建立结合，值得买哪一个完整比较？ | **source-only 构造／计价与 focused 独立评审已完成；本轮不购买。** 保留未选 C/H_C/F_C：96 H3000 任务／288,000 步／0 fit，预计8–24 CPU-h＋12–20 support-hour equivalents；无新结果查询，不自动排在前三项之后运行。 | `/root/dm_s7_prediction_use` 保留 `uav_fleet_transmission` 问题连续性；本次设计任务完成，无运行／未读意见。 |
 
 选择理由有区别：RF 直接补齐已展示能力的完整采用比较；策略搜索实质改变有限更新／数据使用单位，
 保留高维搜索无效及 neighborhood fitness 不改善最终 center 的风险；静默承诺的科学范围较窄，
-但一次完整小面板可回答合法历史是否保留即时作用。S7 先把未报价建议写成实际程序和价格，不能自动重开 H/F。
-四位 DM 并行推进实质工作，不等于同时占用四批训练，也不因一线等待阻止其他独立工作。
+但一次完整小面板可回答合法历史是否保留即时作用。S7 的实际 C 承诺继承修正有意义，三臂也能区分普通组合与预测增量；
+但零预测服务触发只覆盖已知损失的一部分，world29890012 已有路由仍严重受损，修复 world29890021 不足以填补整体 F−C 缺口。
+其预计机器成本高于前三项原报价合计，支持负担相当于另一项完整实现，因此本轮把投入用于三项已选问题。
+这不是已证新组合失败、机器不足或否定预测能力，也不要求新增前置诊断。保留完整候选及 C/P_BS 原有默认限制；
+以后重新购买需新的明确跨题选择。第四个有价值的设计任务完成，不产生凑数实验；其余三位 DM 并行自主推进。
 
 以上数值是已发表 source bills 的未基准测试预测，support-hour equivalents 不是已测劳动或 Codex elapsed。
 各 DM 前瞻声明精确输入／seeds／失败和有限 correctness，完成适用工程审阅并发表后，经实际节点准入执行。
