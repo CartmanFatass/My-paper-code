@@ -8679,3 +8679,359 @@ chosen comparison, information rights, strongest ordinary alternative and full
 price must come from that source assessment; unknown facts and costs stay unknown.
 The completed B08 record, original critique, all gains/adverses and measured
 cleanup remain the inherited evidence.
+
+<a id="post-b08-partner-heterogeneity-source-facts"></a>
+### 2026-10-01 — fixed heterogeneous teammates: source interfaces and conditional price
+
+**Scope and original request.** This is the bounded source task assigned above,
+not a selected study, new result, implementation or extension of B08. Current
+published main was `4f8475d1f6f925fd8049c16ac3cbe6a1d1faff02`; the source paths
+below and this notebook were clean against that revision. I read the current
+RESEARCH local-history/peer-forecast background, G0 scope and controller-composition
+judgments (Topics 2, 3 and 8), and the current Root allocation. They constrain
+what source compatibility establishes: different fixed laws need not require a
+learned response, a useful geometric prediction need not improve complete service,
+and the earlier fixed-library mixed-response gains did not recur. They do not
+veto a materially different complete comparison. Oracle owns original literature/
+outcome reconstruction and recommendation; Root owns selection. None of the
+separately owned actual-S2, waiting or changing-demand work is consumed or changed.
+
+Original native question from `/root/oracle_next_capability`:
+
+> Root assigned me bounded SOURCE/IDEA work after your completed B08: assess one materially different ad-hoc teaming/partner-heterogeneity capability or no purchase, with no new model/native queries, reductions, fits, code or runs. I am reconstructing old controller_composition B01–B03, local C/V/R, G0 and current assets before selecting any idea. Please supply only bounded source/feasibility facts in your existing notebook: which retained current N5 controller families (P0, C, Q/Q10, Bstar0, Hdirect, other compatible assets) can lawfully be assigned to fixed *different physical teammates* within one episode without changing the native host; each family’s private persistent state, observation/identity/history rights and reset; whether agents can have distinct law identities unknown to an ego while preserving all existing interfaces; precise available per-agent source callback/asset identifiers and any barrier. No recipe or new execution requested. If straightforward, also give source-derived rather than benchmark estimates for a small matched feedforward/history-aware response study and ordinary two-frame C/V/R comparator under a heterogeneous roster, including minimum engineering/read-support bill. I will send a narrower prospective exposure bill only if that task contract proves worthwhile. Parent actual-S2, waiting cap-two and fleet-transmission continuous-demand source remain separately owned.
+
+The Oracle subsequently supplied this concrete **unselected** envelope:
+
+> Thanks; I am evaluating a direct complete exploration, not a pilot or a selected experiment. Please source-price this concrete envelope if feasible: original N5/U50/all-on/H256, ego physical slot0 only trained, other four responsive policies independently own nav/cache. Each episode permutes the fixed multiset {C,C,P0,P0} across slots1–4; no IDs/law labels/peer observations reach ego. Train two matched blocks × two response heads (current-context versus lawful history-context; immutable P0 trunk, zero residual initialization), 256 complete episodes per fit, 64 ego decisions/episode. History candidate uses existing anonymous two-frame tracker at all ticks; no target/predictor fit, no fresh partner training, no GRU presumed necessary. Equal contextual-head optimizer bill can reuse B04/B05 bounded head machinery if compatible. Evaluate 4 endpoints and 8 retained ego controls C,Q10,G,V,R,P0,Bstar0,Hdirect on 32 new worlds ×2 indexed tapes ×2 fixed roster panels: trained-family {C,C,P0,P0} and a training-excluded composition {G,G,S_L1,S_L1}. No broad unseen-family claim (G is C-derived; S_L1 is same training family). This is 1024 train+1536 final =2560 H256 episodes/655360 native steps before constructor/test support. Need honest query/model/native/full-reader/storage/support ceilings and feasibility barriers, not measured benchmark or invented numbers. If 256 focal episodes have no credible inherited training protocol, state that limitation. I may still recommend no purchase if this is only a fixed-library relabel; no coding or queries authorized.
+
+Two subsequent original Oracle clarifications bound this same price; they do
+not request another source search or a selected experiment:
+
+> I have your source ceilings and ego-only adapter limitation. Please include the prospective updater/critic/reader scope in the preserved full pricing answer: a concrete direct bounded comparison can use two independent F/H pairs, zero-init ±.5 residual logits on frozen P0, 256 H256 episodes per fit, with the existing B04 group/epoch recipe only where lawful ego-row losses and 4-tick rewards permit. Do not query anything new; state unresolved recipe details and which per-fit rows/replays/updates are calculable from source, plus honest worker/reader/support/storage ranges. I am completing one recommendation, not requesting another source search or a pilot.
+
+> One source correction to my own shorthand: I reread B04 frozen NOTES 2215–2260. It uses 128 two-episode groups × four full-rollout epochs, complete suffix macro-return/256 (not GAE), fresh 136→128→128→1 critic with previous joint commands/holds, and 512 actor +512 critic steps per fit. An ego-only adaptation gives 65,536 head replay rows and 65,536 critic replay rows per fit (262,144 each across four), with 65,536 collected critic rows overall. I will preserve that native-return convention and charge the new loss/cache adapter, not describe unchanged reuse. Actor never receives privileged critic inputs.
+
+**Direct interface facts.** `MultiUAVEnv.step(actions)` already accepts a
+separate command for every fixed `uav_i`; it integrates all five positions before
+refreshing the shared channel/reward. `make_real` in
+`experiments/candidates/ucope/uav_motion_prefix_b01/environment.py:8` supplies
+the unchanged N5/U50, free-space, all-on, H256 interface with 30 m per component
+per tick, bounds [0,1000]×[0,1000]×[50,150], 20 user slots and 10 peer slots.
+At four-tick control there are 64 decisions per member. No simulator change,
+physical removal, transmitter gating or invented capability variable is needed
+to install distinct **policy laws** on slots1–4. Hardware speed/power/capacity
+remain homogeneous under this host; policy heterogeneity is not physical
+capability heterogeneity.
+
+The local FP32 row has own position3, user slots20×3, peer slots10×4 and clock1.
+`uav_env.py:405–510,598–612` orders visible users/peers by descending SINR,
+with stable physical-index tie order, but packs no user or peer ID, policy name,
+action, peer observation or peer private state. At N5 at most four peer rows
+are nonzero. Slot order can change; a row index is not a persistent entity ID.
+The evaluator/adapter knows physical indices and global state; those are not
+actor rights. It can retain roster assignment as metadata without passing it
+to ego. This establishes absence of an explicit law/identity channel, not
+statistical impossibility of inferring behavior or an unseen-partner claim.
+
+| Retained law / exact callback | Private state and reset | Inputs and consequence |
+|---|---|---|
+| P0 / `b02.policies.StudentPolicy(actor, world=..., agent=..., sampled=True, sampling_root=...).query(row,tick,nav)`; B08's `policies.Policy("P0",...)` exposes the same law and paid hidden row | One episode-local exact row/nav cache and counters; caller owns the navigation index and held command. New instance or its `reset()` clears the base cache. B08's outer wrapper has no reset: reconstruct it each episode. | Original FP32 114→128→128→27 Student. Features are ordered row[:103], own predecision nav one-hot10 and analytic fallback1. Clock is excluded. Immutable actor weights may be shared synchronously, caches/nav never are. |
+| Bstar0 / B08 `Policy("Bstar0",...)` | Same private cache/nav; P0 weights unchanged | Softmax of FP64 P0 logits divided by2. It is a retained decoding law, not another trained partner asset. |
+| C / `b02.controllers.MemoC().query(row,tick,nav)` or B08 `Policy("C",None,...,sampling_root=None)` | Exact row[:103] bytes plus nav key, private original `LocalController(history=False)` and counters; own nav is advanced on fallback. Reset/new instance clears state. | Original 27-command, four-tick local radio planner. The stationary-peer approximation uses only own visible row and unresolved interference inferred from own observed user SINR. No absent-user history. |
+| Q10 / B08 `Policy("Q10",None,...)` or fleet-transmission B05 `FixedPolicy("Q10",None,...)` | Private MemoC and fresh addressed uniform at every decision, including cache hits | C gets .9 mass; each other command gets .1/26. This is the existing Q / random-C / I law, not an independent learned family. |
+| G / B08 `Policy("G",None,...)` | Private MemoC; fresh per-decision draw | C gets .9; other26 share .1 via C-score softmax at .014. Flat scores give Q10. |
+| Hdirect / B08 `Policy("Hdirect",P0,...)` | Private MemoC plus its own exact row/nav P0 logit/hidden cache | Law is `.9*p_P0 + .1*one_hot(C)`. The retained `build_targets` constructs both T and H at each request; both are charged even though only H acts. It is not the user-point-history H controller. |
+| V/R / `uav_local_peer_forecast.controller.MotionController("V"/"R").act(row,t)` | Private previous visible peer xyz, clock, anonymous matches/deltas, own nav, held command and counters. New instance or `reset()` clears all. | Must receive every consecutive native t=0..255 row. It plans at t%4=0 and holds between. It cannot be called only at the64 decision ticks. It uses current user points only. |
+| P1 = fleet-transmission S_L1 | Same StudentPolicy interface, separate immutable B03 Student asset | An available second trained lineage with the same architecture/rights. It is not a held-out method family; `b05_score_sampling/contract.py:87` selects model1 for S_L1. |
+
+The exact law implementations are
+`experiments/candidates/uav_fleet_adaptation/b08_local_gate/policies.py:67–120`,
+`b02/{controllers,policies}.py`,
+`experiments/candidates/uav_fleet_transmission/b05_score_sampling/policies.py:26–109`
+and `b07_stochastic_targets/targets.py:31–57`.
+The B08 outer wrapper restricts parent names but validates only a compatible
+original Student class, not an actor's lineage identity; a new collector must
+bind the intended asset itself. B08 `assets.load_parent` deliberately accepts
+only P0 and cannot load P1 unchanged. None of the frozen B08, forecast B01 or
+B05 whole-study CLIs accepts an arbitrary heterogeneous roster: their collectors,
+contracts and readers are homogeneous. Reuse these small callbacks with a new
+owned collector/reader; do not relabel or mutate an accepted historical contract.
+
+Already recorded canonical bindings on `wsl_4070` (read here as metadata, no
+new checkpoint load or model call):
+
+| Asset | Canonical path | File bytes / SHA256 | Tensor digest / source launch |
+|---|---|---|---|
+| P0 | `/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b02_inheritance_a01/assets/S.pt` |424487 / `b9e25fca68109bb50fa64fadfc90939ad6a4669058c1c0ccd1351c8bbcefe12a`|`6fa2eddc542d8f5293f5daf6a989b97a9d7d5f56f484f1eb6bddc6a87d27de0c` / `e945483b85c7f8ddfc315c57f36938d6c14201c7`|
+| P1 / S_L1 | `/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b03_inheritance_recurrence_a01/assets/S.pt` |424487 / `cb67a3d46fe9628e1dfef1ef081b89091a13fde3a92295fe198f27555c67364d`|`c6286dd32097d37b2c2c3039e487a24b756398e3ddffa9dc9e1ec3ef66170699` / `4909c9553300a4a4de6eb79476e818d7b1ceab53`|
+
+`b04_native_development/contract.py:36–47` binds these originals. Temporary
+B04/B08 staging copies were deleted at closure; the canonical originals remain.
+Only848974 file bytes of immutable inputs are needed for the proposed two rosters;
+Bstar0/Hdirect/current/history heads share P0's immutable trunk. The original
+optimizer states are not inherited for new head training. C7 and Q05 are also
+compatible callbacks, and `LocalController(history=True)` is a legal, private
+64-point user-history controller, but none is added to the Oracle's envelope.
+The old local-history B02 SetActor instead requires context107 plus64×7 cached
+user points and masks; it is not a drop-in 114-input peer-history counterpart.
+
+**What the two-frame component actually provides.**
+`uav_local_peer_forecast/controller.py:9–21,32–61` associates current and previous
+visible absolute xyz only when the componentwise displacement is ≤30.001 m
+and the match is mutually unique. Otherwise the delta is zero; differences
+below.001 are zeroed and components clipped to ±30. There is no true identity,
+law lookup, memory through disappearance or access to invisible peers. V predicts
+four future positions with that displacement; R reverses its sign. The estimate
+at a shared decision boundary describes the previous held block, while peers
+may now choose a new command. More accurate identity-free geometry is therefore
+not source proof of useful response or a policy-type estimate.
+
+For a history **feature** head, the source component is `associate` plus a private
+previous-peer buffer and existing `_parse`, not an unchanged call to
+`MotionController.act`: `act` additionally performs the whole C/V/R planner at
+decision ticks. The price below assumes the tracker is factored without buying
+that unused planner. A new adapter would preserve native row order and apply the
+same timing/gates/reset; the exact finite history descriptor and current-control
+descriptor still need definition. Cache immutable P0 features/logits by row/nav;
+never cache a history-conditioned residual under only that key, nor retain a
+trainable head's cached output across an optimizer update. This is a reachable
+correctness issue even though the trunk itself is unchanged.
+
+**Learning feasibility and the256-episode limitation.** B05
+`learning.Head("CONT")` is an existing zero-initialized FP32 linear128→27
+residual with `z + .5*tanh(W h+b)`; its implementation preserves P0 at zero.
+It can supply the bounded-output construction, not an unchanged history head:
+new context width/normalization and matched current/history representations are
+unspecified. If q extra feature coordinates are used with that construction,
+each head has3483+27q parameters. Equal update/row counts alone do not establish
+equal parameter capacity, information, or total computation. No GRU is required
+by the stated two-frame resource.
+
+B05's `fit_head` optimizes an offline paired-counterfactual objective over
+`{hidden,logits,mu,action_a,action_b,delta_j,weight}`. The proposed on-policy
+complete episodes do not supply that dataset. B04
+`learning.update_group` uses two full episodes/group, four PPO epochs, a separate
+136-input critic and full five-agent114-input actor replay. It cannot silently
+train a frozen-trunk ego-only head. A new ego-only loss/rollout adapter is required;
+fixed peers must remain detached and their optimizer states absent. Sharing an
+immutable trunk among inference agents is lawful; training an object shared with
+a supposedly fixed teammate is not this intervention.
+
+256 episodes per fit equals B04's episode count but here supplies only16384
+focal decisions, one fifth of B04's81920 actor rows per fit. B04's adverse result
+and B05's different loss do not establish a successful inherited protocol for
+this ego-only history response. Thus256 is a bounded exploratory exposure, not
+a source-supported convergence or sufficiency claim. This limitation does not
+impose a preliminary pilot, positive toy or another fit. The learning rule must
+be chosen and read as a new method package if Root selects it.
+
+For **conditional accounting only**, adapting B04's two-episode/four-epoch
+cadence would give128 groups and512 head steps plus512 critic steps per fit;
+over four fits,2048 head and2048 critic steps,262144 replay rows for each,65536
+collected critic rows and65536 initial-density identity rows. The original target
+is the complete suffix sum of four-tick macro rewards divided by256, not GAE.
+The fresh critic is136→128→128→1 and includes previous joint commands/holds;
+those privileged training inputs must not enter either actor. The original
+advantage is target minus collected value, normalized across the group, with
+PPO ratio clipping [.8,1.2], four full-rollout epochs and separate Adam updates.
+Replacing its five-agent summed actor loss with an ego-row loss is a real
+adapter/scale choice. Each fit would have65536 head and65536 critic replay rows.
+Cached immutable
+trunk outputs need not be re-forwarded during those head epochs. No such cadence,
+loss, normalization or critic-rights contract is selected here. The P0 control
+can cover the identical zero-residual initialization without extra initial
+episodes only if the eventual new heads/decoder really preserve that exact
+initial law; this requires correctness evidence, not a new scientific rollout.
+
+**Exact envelope and source ceilings.** All counts below are algebra on the
+Oracle's declared exposure, not reductions of an outcome dataset or benchmarks.
+Assumptions: one trained ego at slot0; final learned policies sampled with the
+original flat FP64 CDF; C/V/R deterministic egos but still two tapes because their
+teammates are stochastic; one private cache per physical member/episode; the
+four learned endpoints are all included; no extra target acquisition, partner fit,
+mask setter, local model rollout of the native environment, shadow planner or
+diagnostic evaluation is added. C-family cache ceilings assume no cache hits.
+
+| Quantity | Training | Final | Complete purchase |
+|---|---:|---:|---:|
+| Fits / fresh partner fits |4 /0|0 /0|4 /0|
+| Complete H256 episodes |1024|1536|2560|
+| Native steps |262144|393216|655360|
+| All-member decision requests |327680|491520|819200|
+| Learned ego head decisions |65536|32768|98304|
+| Analytic P0/P1 helper requests |196608|245760|442368|
+| Frozen Student forward ceiling, including Hdirect |196608|253952|450560|
+| C-family ranking requests, including V/R and Hdirect |131072|245760|376832|
+| Categorical motion draws |196608|368640|565248|
+
+Final1536 = (4 endpoints+8 controls)×32 worlds×2 tapes×2 rosters. Every final
+ego variant has128 episodes; each roster panel has768. Final fixed teammates
+contribute98304 requests each for C, P0, G and P1. Training fixed teammates add
+131072 C and131072 P0 requests. Final C/Q10/G/V/R/Hdirect ego each adds8192
+ranking requests; P0/Bstar0 and the four endpoints supply the remaining simple
+Student/helper requests. Hdirect adds8192 frozen forwards without a separate
+analytic helper, and16384 constructed T/H vectors. G executes106496 score-tail
+laws (98304 teammate +8192 ego). No count treats a cheaper unchanged law as a new fit.
+
+Each C miss enumerates27 paths/108 model ticks. With n≤20 visible users and
+p≤4 visible peers its power-link work is `(108+1+p)*n≤2260`; its candidate
+SINR array contains at most108×5×20=10800 cells. Across the purchase this is
+at most10174464 C paths,40697856 modeled ticks,851640320 power-link evaluations
+and4069785600 candidate SINR cells. The standalone P0/P1 helper has
+`(1+p)*n+2*n≤140` power links/request, hence≤61931520. These are distinct
+implementation work counts, not independent physical interactions or measured FLOPs.
+
+The two history fits account for512 training episodes; their two endpoints add256.
+V/R add another256 final episodes. Therefore the tracker-only design performs
+262144 native-tick ingests across1024 episodes,261120 adjacent transitions and
+at most4177920 anonymous pair gates (three component comparisons per gate).
+Only the actual V/R egos add their moving-peer radio calculation:16384 decision
+calls, each at most4×4×20=320 extra power links, total≤5242880. Calling the full
+V/R planner for the768 history-head episodes would additionally buy49152
+rankings and is **excluded** from this price. Matching current/head tracking
+compute or adding a stationary C shadow would likewise require explicit extra
+counts; it is not silently free.
+
+There are655360 native joint ticks and3276800 physical UAV moves. Resets plus
+steps cover657920 physical states,180928000 dense native power slots (275/state,
+including the peer diagonal), plus275 per constructor channel initialization.
+There is no mask refresh. Explicit episode resets are2560. Roster sampling needs
+a separate address domain and paired assignment across response arms/controls;
+the exact permutation algorithm/domain is not yet defined. At most one assignment
+construction per episode means2560 such constructions; reusing a common assignment
+does not reuse a responsive teammate's subsequent trajectory or private state.
+Number of distinct permutation draws depends on the still-unfixed world/block/tape
+addressing and is not included in the565248 motion draws.
+
+**Complete reader is additional work.** A full B08-style independent physical
+and policy reconstruction for this all-on object would read all657920 states,
+3289600 local rows and177638400 scalar radio links (164480000 user plus13158400
+off-diagonal peer links), as well as all native service/quality/reward, per-UAV
+path, episode tails, outages, holds, resets and roster identities. It would replay
+the819200 policy decisions and private cache/nav/tracker continuity. Budget up to
+the same450560 trunk forwards,442368 helper calls,376832 C rankings,98304 learned
+head calls, tracker/moving-peer work and law-vector work **again**; no native
+step, optimizer update or new episode is necessary for that reader. A descriptor
+check alone is not a replay of the head's behavior.
+
+For full training-policy replay at the conditional B04 cadence, retain512
+precollection group head states (plus final states), not only final endpoints or
+hashes. Their FP32 parameter payload is `512*4*(3483+27q)` bytes before container
+overhead. If all training critic values are also independently re-forwarded,
+retain those512 group critic states (about70 MB of raw FP32 parameters at34177
+each), and charge65536 additional critic rows. The inherited B04 reader explicitly
+algebra-checks saved early logits/critic outputs without those early forward
+replays; it cannot be described as providing this stronger coverage unchanged.
+Optimizer counts, finite values, movement, initial density, target arithmetic,
+saved states and the hash chain can be checked without performing another fit.
+Replaying every optimizer update is a different, unpriced verification scope.
+
+**Storage, memory and support.** A concrete generous raw layout can be priced
+without guessing compression: per episode, all257 FP32 five-agent observations,
+FP64 positions/user positions,256 FP32 commands, all257 user/peer SINR matrices
+and connection matrices, and three FP64 native metrics total1217354 array bytes.
+Adding decision features114, FP32 logits27, FP64 probabilities27 and pre/post
+nav for all five agents gives1472074 bytes/episode, or3768509440 bytes for2560.
+This is an illustrative array payload, not an implemented mandatory schema or a
+compressed-disk prediction; it deliberately permits dense fields for ordinary
+arms. Head-hidden/descriptor traces, actual C-score vectors where not already
+derivable, critic inputs/values, identity metadata, group states and checkpoints
+are additional. A streamed single evidence copy of roughly4–5 GB **uncompressed
+array payload** is a reasonable provisional storage allowance for small q and
+these fields; exact bytes require the final schema. Compression ratio, filesystem
+allocation, source snapshot and publication/scratch space are separate, unknown
+quantities. Existing original assets add848974 file bytes and need no permanent
+second copy.
+
+The raw episode need not be held with all2560 other episodes. A sequential
+collector/reader and two-episode update buffer keep tensor payload small; P0/P1
+each have138860 bytes of FP32 weights, and each current/history head has
+`4*(3483+27q)` weight bytes (gradients and Adam moments are additional). These
+facts do not establish a process peak-RSS ceiling: Python/PyTorch, graph retention,
+serialization and chosen replay layout remain relevant. For the Oracle's requested
+planning ranges, **assuming a small two-frame descriptor (q≤32), the conditional
+two-episode/four-epoch update, sequential CPU/one-thread execution, and a streaming
+full physical/policy reader**, allow roughly0.5–2 worker CPU-hours and0.5–2 reader
+CPU-hours, with0.5–1.5 GiB process peak RSS as a provisional planning range. These
+are deliberately broad engineering estimates, not source-proved ceilings,
+benchmarks, reserved capacity or guarantees. The already measured B08 chain
+(638.832 worker and849.524 reader CPU seconds,566320 KiB chain high-water RSS)
+is only an existing implementation anchor: this envelope adds head/critic replay,
+has different cache behavior and up to10174464 C paths, while its177638400 scalar
+reader links are similar in count to B08's175137600. These differences motivate
+additional allowance, not a calibrated throughput model. q, implementation,
+graph lifetime, I/O and ordinary cache misses can move actual cost outside these
+ranges; a strict time/RSS ceiling cannot be established from source alone.
+No new benchmark or node admission was performed. Actual resource admission
+belongs to a selected launch, with all concurrent work charged. The exact
+operation ceilings above remain more defensible than a time estimate based only
+on the old two tiny B08 ridge solves.
+
+The minimum engineering **work content** is a mixed-roster collector with private
+resets/RNG/identity-safe traces; a factored two-frame input and matched head
+definition; an ego-only frozen-trunk on-policy loss/critic adapter; full scalar,
+policy and training-evidence reader with group-state retention; focused synthetic
+correctness checks, independent numerical/engineering review; and launch,
+complete reading/publication/cleanup support. As a new rough planning judgment,
+allow2–4 support hours for collection/interfaces,3–6 for head/learning integration,
+3–5 for the reader,1–3 for independent review/fixes and2–4 for launch/read/publication/
+cleanup:11–22 support hours total. This is not a measured minimum, hard ceiling,
+promised elapsed duration, or an inherited B08 rerun price. Source/scientific-review
+effort already incurred is additional and unmetered. Unfixed q/normalization,
+loss, roster-address pairing and reader scope can change this forecast; they are
+concrete remaining specification work, not a need for another preliminary study.
+
+**Source conclusion and boundary.** The heterogeneous fixed-law host is feasible
+with existing decentralized actor rights and no native simulator change. The
+specific four-fit question remains a new focal-response learning experiment,
+not execution of an already successful history protocol; its substantive value
+and purchase decision remain with the Oracle/Root. All strong retained controls
+and both rosters fit within the declared1536 final episodes. This assessment made
+zero model, policy, native, target-generation, fit or new outcome-reduction calls;
+only source/metadata reading and prospective integer arithmetic were performed.
+No code, run, RESEARCH standing, accepted operation or existing adverse result
+was changed. B08 remains closed/reserve and no successor is selected here.
+
+**Oracle's final descriptor specification and price correction before publication.**
+After reading the full appendix above, the Oracle supplied this original message:
+
+> I have read your full source-price appendix through its conclusion. For my concrete recommendation I will use the reusable *linear* bounded head (not invent a multilayer head): original 114 features + frozen 128 second-ReLU + public t/256 =243 current coordinates, append 16 two-frame coordinates (4 current-peer ranks × clipped dx,dy,dz/30 and match-valid bit). Current arm zeros those 16; both arrays 259→27, 7,020 parameters, zero initialization, ±.5 tanh, same B04 suffix-return cadence adapted to ego only. No persistent ID, type label or recurrent state. This fixes q=131 for your formula, preserves all query/exposure counts and adds only ordinary descriptor/group-state storage. I will explicitly call it a finite feature-package comparison, not an isolated proof of information necessity. No more source pass or extra verification requested.
+
+This supersedes the earlier unspecified/small-q assumption for **this recommendation**;
+it is not a Root selection. The common input is243 current coordinates plus16
+history coordinates (zeros for current), so q=131,7020 parameters and28080 FP32
+weight bytes/head. The conditional512 group head snapshots have14376960 raw
+parameter bytes;512 critic snapshots have69994496. Storing the full259-coordinate
+head context for98304 collection/final head decisions would add101842944 raw
+bytes if stored in addition to the illustrative earlier schema; the current114
+part need not be duplicated in an efficient actual schema. The four final head
+weight payloads add112320 bytes before optimizer/container metadata. The larger
+linear input does not add frozen-trunk, helper, native, tracker, target or optimizer
+calls; all operation/row counts above remain unchanged. Matching nominal shape
+does not make the current arm's16 zero coordinates an active information resource.
+
+For this now259-input linear head I retain the **rough planning allowances** of
+0.5–2 worker CPU-hours,0.5–2 full-reader CPU-hours,0.5–1.5 GiB streaming process
+RSS,4–5 GB uncompressed evidence payload and11–22 support hours. The small added
+parameter/context storage fits those allowances; they remain estimates, not
+benchmarks or rigorous time/memory ceilings, and no new timing/model/source query
+was used to endorse them. The final current/history descriptor is now specified;
+the exact roster-address pairing, ego-only loss implementation/normalization and
+reader snapshot/schema contract still need an implementation-level binding if
+selected. This final correction is part of the same bounded source-price answer.
+
+The Oracle then fixed the prospective reader scope within the same recommendation:
+
+> For complete prospective reading I will choose your stronger retained-group replay scope: keep all 512 precollection head and critic states, add 65,536 reader critic rows, no optimizer replay. I will also explicitly price 16,384 additional head-only reader calls: each final H decision once with its 16 history coordinates zeroed, using saved current context/hidden/logits and addressed draw, to distinguish history exposure from action sensitivity without new native episodes. This is a proposed final diagnostic, not a request to execute or search. Query ceilings otherwise unchanged; reader learned-head ceiling becomes 114,688 rather than 98,304. It cannot establish a causal deployment benefit of that ablation.
+
+The count is consistent: two final history endpoints×128 episodes×64 decisions
+=16384 additional head-only rows and same-innovation CDF decodes. It adds no
+frozen-trunk, analytic helper, C ranking, native episode, independent random tape
+or optimizer step. The full reader now has114688 head rows and65536 critic rows;
+collection plus conditional update replay plus reader totals475136 head rows
+and393216 critic rows. The original98304 reader head rows above describe full-law
+replay before this separately charged diagnostic. Retain all512 precollection
+head/critic states and the final states; no optimizer replay is included. This
+input-ablation diagnostic tests the final fitted action law on its observed
+histories, not the native value of an ablated deployed policy. The provisional
+time/RSS/storage/support allowances remain broad estimates with this addition.
