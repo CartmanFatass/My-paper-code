@@ -11502,3 +11502,318 @@ result-bearing study, no producer/observer/unread review and no selected next
 run. This closes the assigned B10 boundary and its cleanup; it does not close
 the broader local-control question, transfer another direction's ownership or
 select an automatic repair. Root owns any future cross-question task choice.
+
+
+<a id="post-b10-blind-return-source-assessment"></a>
+### Post-B10 source-only assessment and owner-requested handoff (2026-10-01 UTC)
+
+B10 remains closed exactly as above. After closure, Root authorized one
+source/feasibility/complete-price response to the independent next-question
+adviser. This exchange used static source, existing published results and
+integer/byte arithmetic only: no new native, model, controller, allocator,
+teacher or RNG query; no saved-outcome reduction, test, benchmark, prototype,
+fit or launch. The request originally prohibited record edits during that
+assessment. After the single response was complete, the owner's closing
+instruction, published in RESEARCH at
+cb390ca906c1e2ae414e04cf1901b49019a65f1c, required preservation of the complete
+original exchange and final advice, followed by this DM's section of the one
+shared handoff. That documentation is the current work; no successor is selected.
+
+The complete original request and complete original source/price response follow
+unchanged. Their source links point to the existing implementation. Feasibility
+and price are prospective; they neither establish correctness of an unbuilt
+program nor supply an executed positive pilot. The original adviser recommendation
+and the separate DM response are recorded below after the assessment concluded.
+
+<a id="post-b10-original-source-question"></a>
+#### Original adviser request — complete, 2026-10-01 10:07 UTC
+
+<!-- POST_B10_SOURCE_REQUEST_BEGIN -->
+ONE Root-authorized SOURCE/FEASIBILITY/COMPLETE-PRICE request after your recorded B10 publication and cleanup. No new study is selected. Return one complete response natively to /root/oracle_next_capability. Static source, existing published facts and pure algebra only: do not edit records/code, import/run native/controller/model/allocator/RNG/teacher code, reduce saved outcomes, test, benchmark, prototype or fit. I have read the complete original B10 critic/disposition and directly inspected the already-identified five CJ/C_ZERO first-divergence and next-boundary raw slices; no further result reconstruction is requested.
+
+The candidate question is empirical understanding: under the unchanged rotating-mask/old-row host, can a useful local silence decision retain complete-episode value when its one blind reactivation decision uses a lawful precommitted command rather than current-row navigation fallback? Stronger simpler alternative: the loss is coupled teammate/radio/visitation behavior that these local commitments do not improve. World30012030 already prevents attributing all consequences to the silent agent's own next motion. No B10-learning cause or repair, gate tuning, architecture, additional observation or hardware claim.
+
+Price this ONE complete ordinary comparison on original N5/U50/H256 static-user/free-space host,4-tick holds, old-mask rows queried once before ONE new-mask install, r=(tick//4)%5 alone eligibleOFF, other4forcedON; no refreshed-row use, ACK, identity, peer action, reward feedback or global-state actor input. Preserve all original C navigation, native command order/aliases, zero-service exceptions and CJ OFF/tie rules on ordinary decision boundaries.
+
+Five final programs: exact C_ZERO; exact CJ; CJ_KEEP; CJ_RETURN; exact Hdirect_ZERO. CJ_KEEP/CJ_RETURN only change the next decision after their OWN previous eligible action turned OFF while its observed current-user count was positive (equivalently a strict positive-service CJ OFF win; please verify this equivalence or state the distinction). The private guard comes from that agent's own prior row/action, never from global mask truth. Its next boundary is necessarily ineligible and forcedON by the existing public rotation. Both versions record a one-use command at the OFF boundary and execute it for that next four-tick hold BEFORE reactivation, then clear the pending flag. They receive and record the actual censored row but obtain no new measurement. All zero-count OFF fallbacks remain exactly the original program, so these are not generic navigation-hold changes.
+
+CJ_KEEP stores the actually issued OFF command (zero under CJ's positive-OFF tie rule). CJ_RETURN stores the original C ON command selected BEFORE CJ replaces it with OFF/zero (answer['c_index'] / corresponding COMMANDS entry), using the original C stable ties/fallback and its already-updated next_nav. On the one pending return boundary, skip C scoring and its zero-row waypoint mutation: execute the stored command, preserve that private nav state, force no OFF request, consume the flag. Other agents and all later decisions run the original law. Store command/index, reason, originating local row/time, C ON selection, prior n_current, nav transition and pending-consumption evidence. No extra model/controller shadow queries are selected.
+
+This explicitly compares two one-step finite-memory commitments, not an inferred sufficient state or an online posterior. Because a positive CJ OFF command is zero, own pose is unchanged through that silence block; reranking the SAME retained users/peers/calibration with the same static-peer model would often just recover the already-computed C ON decision. Please check when this is exact under source/nav/rounding semantics and when not; do not implement a retained-geometry replanner or claim numerical verification. Existing LocalController(history=True) uses no-hearing censor constraints appropriate to its all-ON experiment; applying that absent-user inference to known self-silence would require a changed law, not a free baseline reuse. Identify any stronger existing same-rights comparator that materially changes this candidate.
+
+C_ZERO and Hdirect_ZERO also have the same lawful opportunity to retain their own row/action/command, but this positive-count-OFF guard never fires under ZERO gating. If source confirms this, their memory-enabled versions are identically the exact retained programs; no redundant episodes. Do not assume identity without checking the actual count/gate rule. The matched question is CJ-family complete value, with Hdirect_ZERO as a strong retained complete-control reference; no universal dominance or learning claim.
+
+Use32 fresh common worlds, four deterministic programs once/world (128episodes) and Hdirect_ZERO on two addressed motion tapes/world (64episodes):192H256episodes=49,152 native steps,0fits/teacher targets/optimizer steps. Prospective placeholder disjoint integers can be worlds30021000–30021031, two Hdirect motion roots30022031/32, bootstrap30022041, constructor30022051; flag an actual binding conflict if known, do not draw from them. Average Hdirect tapes within world, retain all32 worlds, pointwise20,000 shared world-bootstrap draws with B10 metrics including J/service/quality/p10/minimum/outages/path/exposure/switching/CPU, and explicit guard/consumption/categorical-versus-physical activation. Nine predeclared paired contrasts: CJ−C_ZERO; KEEP−CJ; RETURN−CJ; RETURN−KEEP; KEEP−C_ZERO; RETURN−C_ZERO; CJ−Hdirect_ZERO; KEEP−Hdirect_ZERO; RETURN−Hdirect_ZERO. No winner-selected endpoint, added worlds after rare/nonactivation, extra pilot, cross-arm model query or native suffix branch. All192complete trajectories/fullreader are required; a first-block positive alone is insufficient. The complete same-world KEEP/RETURN-versus-CJ contrast changes the program at blind return, while later teammate/mask effects remain part of its complete effect, not isolated mediators.
+
+Return source legality/edge cases and exact dominant worker/reader reset, transition, mask, observation, controller/CJ/feature-helper/frozen-P0/cache/draw/search costs, including skipped pending-return calls versus ceilings; exact needed inherited assets/staging and data/checkpoint schema burden; native scalar/policy/memory-state reader scope and full cost; synthetic/native correctness/support cost forecasts without running anything; CPU/wall/RSS/storage/engineering range anchored in your measured B10/earlier runs with gaps explicit. State whether adequate reader reuse is feasible and its limits. A code feasibility reply is not an executed correctness/positive pilot. Keep all B08–B10 adverse findings/stops and actual19zero-service-ticks/sixepisodes unchanged. ONE response only; I will decide purchase or stop and give Root the complete original recommendation. No launch or follow-on is authorized.
+<!-- POST_B10_SOURCE_REQUEST_END -->
+
+<a id="post-b10-original-source-price"></a>
+#### Original DM source/feasibility/complete-price response — complete, 2026-10-01 10:26 UTC
+
+<!-- POST_B10_SOURCE_RESPONSE_BEGIN -->
+Complete SOURCE/FEASIBILITY/PRICE response. I inspected current source and the published B10 reading/standing, and did pure integer/byte/cost arithmetic. I made no native, controller, model, allocator, teacher or RNG query; no saved-outcome reduction, test, benchmark, prototype, code/record edit or launch. This is feasible as a new, bounded ordinary-program comparison, subject to the implementation and reader work below. It is not an executed correctness check or positive pilot.
+
+1. The positive-count guard is source-equivalent to a strict positive-service CJ OFF win. In b10_joint_control/policies.py:41–48, CJ first handles the joint zero-service exception: if all C ON candidate services and OFF service are zero, it returns C's existing selection and requests OFF iff capped current count is zero. Otherwise OFF requires OFF service > 0 AND OFF score strictly greater than max ON score, and the command becomes ZERO_INDEX. capped_count is min(number of positive validity fields in the original local user slots, 10), so capped_count > 0 iff n_current > 0. OFF service > 0 also requires a nonempty current-user set. Thus eligible requested OFF + prior n_current > 0 has exactly the proposed meaning in this law. Keep the exact strict comparison, stable ON ties and all-zero-service exception; do not substitute an epsilon or use an argmax over a differently ordered joint list. ZERO_INDEX is 0 in the original norm-then-lexicographic COMMANDS order, not 13. The existing answer['c_index'] preserves the original C ON choice after CJ overwrites action_index/command, so RETURN does not require another C search. [CJ source](/home/fires/hmasd-wsl/experiments/candidates/uav_fleet_adaptation/b10_joint_control/policies.py:25), [count definition](/home/fires/hmasd-wsl/experiments/candidates/uav_fleet_adaptation/b08_local_gate/fit.py:7).
+
+The record must be armed from this agent's own eligible row and issued/requested action. The fixed host guarantees that the eligible requested bit is installed; the reader checks this guarantee. The actor must not read global mask truth or receive an installation acknowledgement. At boundary k+1 the previous eligible member k mod 5 is necessarily ineligible, so the pending command is chosen from the actual old OFF row, before the ONE setter. That setter forces this member ON, and its next four native movements take place ON. “Before reactivation” must mean command selection/issuance before the setter, not four additional OFF movement ticks. Native masking censors both its user and peer slots; own pose/time remain available. At the pending return, bypass C before it can score or mutate nav, issue the stored category/command, preserve the post-origin C nav, set requested_off=False and clear the pending record. Do not call C and then undo its output. Keep the five private contexts separate; no episode-crossing pending state or cached full-wrapper answer keyed only by row/nav. The existing underlying MemoC cache remains safe for ordinary calls because history=False and each miss explicitly installs the supplied nav before acting. [Old-row/setter sequence](/home/fires/hmasd-wsl/experiments/candidates/uav_fleet_adaptation/b10_joint_control/collect.py:96), [native setter](/home/fires/hmasd-wsl/envs/pettingzoo/uav_env.py:224), [masked peer matrix](/home/fires/hmasd-wsl/envs/pettingzoo/uav_env.py:952).
+
+The final eligible boundary is tick 252. A positive OFF there creates a terminal unconsumed commitment; there is no tick-256 decision to execute it. Record that state, then clear it on reset without extending the episode. Per memory program, across 32 worlds, creations A <= 2,048 and consumptions K <= 2,016, with A−K equal to terminal pending flags (0…32). KEEP and RETURN have their own A/K values; changed trajectories can change subsequent activation. A pending event may recur later in an episode; this is one use per event, not a one-event-per-episode restriction.
+
+2. The retained-geometry observation is stronger than “often,” under a precise input condition. Positive CJ OFF issues exactly zero motion, so native own pose stays unchanged through the four OFF ticks. If a hypothetical reranking uses the identical retained FP32 row / reconstructed users, observed SINRs, visible peers and calibration, the same original C arithmetic and command order, it has the same ON scores. C history=False does not use t in its score. With the original predecision nav it consequently recovers exactly the original selection. Using the already-updated next_nav also preserves the fallback selection here: fallback nav advances only within 60 m of its waypoint, while consecutive original waypoints are at least 200 m apart. At the unchanged pose it cannot advance a second time to another waypoint. Nonfallback nav never advanced. This also covers the source-allowed case where every ON candidate has zero service but OFF service is positive: C's original fallback/nav update still happens before CJ's positive OFF replacement.
+
+This is a conditional source/algebra identity, not numerical verification of a new replanner. It does not hold automatically if one incorporates current visible peers, changes calibration or the subset/order of users, reconstructs/re-encodes coordinates with different rounding, substitutes exact global pose for the original quantized local pose, changes arithmetic/reduction order, or uses a different navigation/history law. Actual peers and radio conditions can change while the UAV is silent, so identical retained inputs do not imply the retained plan is currently accurate. [Original C trajectories, scoring and navigation](/home/fires/hmasd-wsl/experiments/candidates/uav_local_history/b01/controller.py:135), [calibration and cache key](/home/fires/hmasd-wsl/experiments/candidates/uav_fleet_adaptation/b02/controllers.py:58).
+
+There is an additional existing-evidence limitation for distinguishing KEEP from RETURN: the published B10 reading says all five strict positive OFF first divergences had identical held commands in CJ and C_ZERO, while CJ's command was zero. Therefore the original C ON command was zero at all five recorded origins. KEEP and RETURN would store the same command at those origins. This does not prove their complete new trajectories or fresh-world programs identical: a later changed-history guard or a new world may have another C ON choice. The source does not impose c_index==ZERO_INDEX on every positive OFF win, and I have not established universal identity. Their categorical and physical separation is therefore an outcome to retain, not a capability already demonstrated by those five examples.
+
+3. C_ZERO and Hdirect_ZERO do not need duplicate memory-enabled arms. Both use exactly requested_off=(capped_count==0) at their eligible boundary; their base features preserve the raw user validity slots. Their positive-count OFF guard is always false. Starting with empty memory, a wrapper whose only behavioral change is that guard leaves their actions, nav, masks, addressed Hdirect draws and trajectories identical by induction. Extra logging can have a small runtime cost; this is behavioral identity, not an assertion of bit-identical timing.
+
+Hdirect_ZERO is a material complete-control reference: it already combines the original P0 law and C's legal current-row guidance and had the strongest mean J among the B10 retained programs listed in that reading. That historical ordering is not a future-panel dominance claim. P0_ZERO/Bstar0_ZERO/G_ZERO remain retained capabilities, but this scoped CJ-family understanding question does not require expanding to an exhaustive leaderboard. I found no already-bound implementation of the exact self-silence commitment exception in the inspected C/MemoC/B08–B10 interfaces; that is a scoped source statement, not a novelty claim. LocalController(history=True) is not a drop-in stronger matched baseline: its absent-user handling enforces no-hearing SINR constraints and an unknown-peer prior, and also pays shadow-current work. Applying that inference after known self-silence changes the law and can treat actuator censoring as environmental absence. [History censor treatment](/home/fires/hmasd-wsl/experiments/candidates/uav_local_history/b01/controller.py:200).
+
+KEEP/CJ and RETURN/CJ change the command and suppression of the blind boundary's ordinary nav mutation, with later teammate/mask/visitation effects included. They do not isolate a motion-only mediator. RETURN−KEEP is a useful narrower program comparison when their stored commands differ, but it is still a complete policy effect after their histories separate. World 30012030 and all previous adverse cases remain reasons not to explain every complete consequence through the silent UAV's immediate next movement.
+
+4. The stated five-program panel and nine contrasts are arithmetically consistent: four deterministic programs × 32 = 128 episodes, Hdirect_ZERO × 32 × 2 = 64; total 192 episodes, 49,152 native transitions, zero fits/optimizer steps/new acquisition targets. Preserve all 32 worlds, average the two Hdirect tapes inside world, and use the same 20,000×32 bootstrap index matrix for every metric and contrast. The nine listed contrasts are distinct. Intervals are pointwise world uncertainty conditional on the one retained P0; they do not give simultaneous dominance, independent-parent inference or equivalence. Nonactivation, identical commitments and terminal-only guards remain results, not reasons for extra worlds or a pilot. A static search of local candidate Python/notebooks and run config/protocol/manifest files found no match in the proposed 30021xxx/30022xxx namespace; this is not a global reservation service. Final launch/master and isolated frozen-model-constructor bookkeeping must also be explicitly bound if selected; constructing and fully loading P0 adds no policy-fit randomness or training.
+
+For activation, record guard creation, consumption, terminal nonconsumption, originating C category, committed category, executed category, nav before/after and actual four-tick displacement. Distinguish a used commitment, a nonzero/different category and physical movement after clipping. Do not silently price a fresh C query at every pending row just to report “would-C-have-chosen.” A same-context contrast can use the actual saved CJ trajectory while the compared programs still share their prefix; after divergence, cross-program action differences are descriptive differences between visited histories. The full reader can verify the committed category and actual movement without any shadow query.
+
+5. Dominant worker counts, retaining the B10 factory/collector timing:
+
+| Work | Exact count or stated ceiling |
+| --- | ---: |
+| Explicit episode resets / extra unscored constructor reset | 192 / 1 |
+| Native transitions / UAV ticks | 49,152 / 245,760 |
+| Native reset-plus-transition channel epochs, including constructor | 49,345 |
+| Baseline dense user/peer SINR slots | 13,569,875 |
+| Unique path-loss distances in those epochs | 12,829,700 |
+| Mask installs / additional refresh SINR slots | 12,288 / 3,379,200 |
+| Additional path-loss misses from these mask installs | 0 |
+| Native observation rows built, including discarded refreshed rows and constructor | 308,165 |
+| Policy wrapper requests / eligible gate opportunities | 61,440 / 12,288 |
+| Hdirect requests and addressed motion uniforms | 20,480 each |
+| Separate gate draws, HIDDEN predictions, analytic FeatureMemo/analyze calls | 0 each |
+| CJ-family OFF-score calls / logical OFF model ticks | 6,144 / 24,576 |
+
+The total native dense-slot bill is 16,949,075; the refresh slots are additional, not free because mask state changes without movement. Initializations create 960 private episode-agent contexts per pass (320 of them memory-enabled) and 960 initial-nav computations. The native factory has one reset; the adapter only seeds itself and does not add a second reset. Every native reset uses 115 layout uniform variates, hence 22,195 including the constructor. Keeping existing per-episode layout verification adds 192 original-layout reconstructions / 22,080 uniform variates in each worker/reader pass. The private Hdirect sampler draws once at every boundary for every agent, including cache hits. Worker and reader each also generate 640,000 bootstrap index integers; no draw has been taken for this assessment.
+
+Let K and R be KEEP and RETURN's actual consumed events, and M be the total ordinary C cache misses. Then total C base requests are 61,440−K−R: C_ZERO 10,240; CJ 10,240; KEEP 10,240−K; RETURN 10,240−R; Hdirect_ZERO 20,480. Each private cache miss pays 27 C paths, 108 modeled ticks/objective reductions, 108n candidate powers and (1+p)n setup powers, with n<=20 and p<=4. Thus paths=27M, modeled ticks=108M, and the exact controller power cost is the sum of [108n+(1+p)n] over actual C misses plus (1+p)n over all 6,144 eligible CJ-family OFF evaluations. Each C score ranks the original 27×4 candidate-time rows with stable top-ten station service; OFF performs one stationary score and represents four identical logical ticks. Do not run 27 OFF trajectories.
+
+Without crediting unknown cache hits or guard use, the ceilings per worker are 1,658,880 C paths, 6,635,520 modeled ticks, 132,710,400 candidate power links, 6,144,000 C setup links and 614,400 repeated CJ setup links: 139,468,800 controller power links total. A conditional coarse ceiling replaces the C request count by 61,440−K−R. However, each skipped pending row is censored with n=p=0; relative to actually evaluating C on that same row, its radio-power cost would be zero. Skipping saves a request and potentially an empty-row 27-path search/nav mutation, not a guaranteed 2,260 power links. It may also have been a cache hit. Actual counters must distinguish wrapper requests, bypasses, C requests, C misses and radio work rather than infer savings from guard count.
+
+Hdirect needs one original frozen P0 forward per new private C key: M_H<=20,480 rows per pass, equal to its C-miss count; fresh contexts imply at least 320 first-key rows across its 64 episodes. It reuses C's already-computed 114 features, so there is no separate analytic-helper search. The unchanged implementation constructs both T and H law vectors on EVERY Hdirect request, even though only H is deployed: 40,960 vectors per pass. These are paid policy-law computations, not new collected teacher targets or fits. Frozen logits and second-ReLU128 are cached; laws and draws are not. [Hdirect and reuse](/home/fires/hmasd-wsl/experiments/candidates/uav_fleet_adaptation/b08_local_gate/policies.py:85), [independent direct-law reconstruction](/home/fires/hmasd-wsl/experiments/candidates/uav_fleet_adaptation/b08_local_gate/reference.py:59).
+
+For cache payload, each C entry retains 900 ndarray bytes plus a 413-byte key, excluding Python/container overhead. Hdirect adds 620 ndarray bytes and retains a second 413-byte key in its neural cache; the inherited cache_key_bytes counter only charges the C key, so it is not a complete physical-memory measurement. At 320 distinct keys in one episode, raw arrays plus keys are <=420,160 B for a C family episode and <=750,720 B for Hdirect. Caches reset per episode; do not multiply this into simultaneous batch RSS. Pending state is one small private record per agent, not a retained geometry search cache.
+
+6. Full-reader reuse is feasible, but the B10 executable is not directly callable for this panel. Its program registry, training/endpoints, asset loader, schemas, expected counts and comparison set are frozen to B10. A bounded new adapter needs its own five-program contract/collector and independent memory-reference state machine while reusing unchanged scalar physics, original C, Hdirect reference formulas, identity checks and metrics. The reader must not call the new candidate memory wrapper as its answer oracle, treat saved pending fields as proof, or invoke C at a skipped return.
+
+The reader would load all 192 actual raw episodes, verify fresh/world/tape/ordering/asset/source bindings and common initial layouts, and reconstruct every initial, post-step and mask-refresh physical state: 61,632 scalar states; 308,160 local rows; 16,640,640 scalar power links; 16,024,320 scalar distance evaluations; 16,948,800 logical dense SINR slots. It has zero native reset/transition, optimizer or refit calls. It replays all 61,440 actual private decisions, including an independently reconstructed guard/consume/clear/nav recurrence. Its C searches, OFF scores, private cache misses, Hdirect forwards, law vectors and addressed uniforms repeat the worker bill on saved histories; these are additional reader costs, not included in native-step counts. Physics reconstruction verifies original stable assignment, local packing, -infinity silent rows, old-row timing, one setter, held commands, clipping, reward/components and terminal flags. The original C replay remains reuse of the pinned C implementation; independent scalar radio and new memory recurrence do not constitute a wholly independent proof of C's planner. The B08 independent H formula and B10 independent OFF scalar expression are suitable existing pieces. [Complete physical/policy audit structure](/home/fires/hmasd-wsl/experiments/candidates/uav_fleet_adaptation/b10_joint_control/audit.py:79), [scalar physics](/home/fires/hmasd-wsl/experiments/candidates/uav_fleet_adaptation/b08_local_gate/physics.py:72).
+
+New memory evidence must distinguish ordinary C-evaluated rows from pending rows. Store guard reason/origin local row and clock, original C ON category, issued OFF command, prior actual/capped count, original nav transition, pending before/after, stored command/category, consumption and terminal pending state. Use explicit unavailable/evaluated tags for current C scores/selection on a bypass; zero placeholders must not be represented as an executed C search. Preserve actual n_current/n_peers and the received censored row even on a bypass. Keep ordinary fallback/navigation metrics semantically separate from “an empty row was observed.” This schema/reference work is the substantive correctness burden. There are no new trained weights, group checkpoints, critics, Adam states or training-ledger reconstruction in this proposal.
+
+7. The only learned asset needed is original P0, not HIDDEN.npz, P1, INIT90, B10 endpoints or any training archive. Canonical P0 is wsl_4070 (hmasd-wsl-node): /home/wu/projects/HMASD/runs/uav_fleet_adaptation/b02_inheritance_a01/assets/S.pt; 424,487 B; SHA256 b9e25fca68109bb50fa64fadfc90939ad6a4669058c1c0ccd1351c8bbcefe12a; actor-state SHA256 6fa2eddc542d8f5293f5daf6a989b97a9d7d5f56f484f1eb6bddc6a87d27de0c; original source e945483b85c7f8ddfc315c57f36938d6c14201c7. Verify metadata/digest before constructing/loading it, freeze all 34,715 FP32 actor parameters (138,860 tensor bytes), and retain the parent identity before/after each pass. Price one frozen Student construction/load in the worker and one in the reader; its initialized parameters are completely overwritten, no inherited optimizer is used. The current B10 loader insists on both P0/HIDDEN and therefore needs a narrow P0-only adaptation, not an unnecessary HIDDEN staging copy.
+
+On the configured remote node, use one external-to-author-tree staged P0 copy if the launcher requires it; B10 measured 425,984 allocated file bytes, plus directory/receipt overhead. A local run instead needs the same 424,487-byte transfer. Preserve canonical P0; remove the staging copy after all consumers finish. No B10 raw transfer is needed. Commit/publish exact new source before any selected result execution, with one admitted worker/full-reader chain and its same-handle observer; none is admitted or selected now.
+
+Retaining the B10 ordinary raw schema verbatim as an explicit size anchor gives 1,924,306 uncompressed ndarray bytes per C-family episode and 2,191,826 per Hdirect episode: 386,588,032 B for this 192-episode panel before new memory fields. This is static shape arithmetic, not new NPZ data. Storing one full FP32 origin row per possible positive guard adds at most 1,703,936 B across the two memory programs, plus indices/flags/nav records; dense repeated pending rows would cost more and are unnecessary. Preserve one complete raw evidence set, episode ledger, source/input bindings, worker/full-reader summaries and compact publication. There is no need for 258 model checkpoints or any replay dataset. B10 metrics can supply J/service/quality/p10/minimum/outages/travel/silent travel/exposure/switches/first-later behavior/CPU; comparison and common scalar-column schema must be adapted explicitly to the new deterministic tuple and nine contrasts. B08's old startswith('C_') deterministic shortcut is unsuitable for CJ/KEEP/RETURN; use the explicit four-program tuple. Native CPU timing is measured in each executed program, not a counter-derived speedup.
+
+8. Forecast, not measurement. On the same configured one-thread CPU setup as B10, using the published C_ZERO=.261053, CJ=.281734 and Hdirect_ZERO=.424277 episode CPU means gives a rough 62.55 CPU-second episode-body anchor if KEEP/RETURN cost like CJ. It is not their measured runtime. Scaling B10's 918.283 reader CPU-seconds by 192/1,376 gives 128.13 seconds, but program composition, cache behavior, bootstrap/serialization and removal of training/state audits differ. A reasonable complete forecast is worker about 60–240 CPU-s, full reader about 100–360 CPU-s, enclosing production about 180–720 CPU-s (0.05–0.20 CPU-hours); wall roughly 4–20 minutes on an otherwise suitable node, excluding unpredictable admission/queue delay and human/scientific support. These are ranges, not a timeout or retry allowance. B10's enclosing 1,780.046 CPU-s / 1,717.667 perf-counter wall-s and 731,560 KiB peak RSS are the measured anchors, not a guarantee about this batch.
+
+Forecast peak RSS about 0.4–1.0 GiB, with fresh actual-node admission still required; the absence of optimizers/group states reduces memory but does not remove framework/reader overhead. New canonical output roughly 0.12–0.25 GB is plausible from the 386.6 MB uncompressed schema and B10's observed compression, with actual trajectories and metadata controlling compression. The B10 managed source snapshot occupied 819,224,576 allocated B. If the current published tree has similar snapshot allocation, temporary snapshot+new output+one staged P0 is about 0.95–1.2 GB; current tree growth and filesystem allocation must be measured at an actual future launch. No second output/backup tree is part of the price. Native-parent acquisition and B08–B10 costs remain incurred, not amortized away because the new proposal has zero fits.
+
+Correctness/support also has a price. No extra native pilot is intrinsically necessary: the unchanged host already has the B08/B10 full physics reader, and the selected 192 complete trajectories would carry its native correctness checks. New synthetic checks should force positive/nonpositive guards, exact ties, both zero-service exceptions, RETURN's pre-overwrite c_index, all five rotating roles, one-use consumption, terminal pending, reset clearing, waypoint/nav suppression, clipping aliases and cache/RNG nonuse on bypass; corrupt origin/other-agent/clock/nav records should be rejected by the independent reader. One possible finite pipeline budget is two artificial worlds × the six per-world program/tape cells at H=24: 12 fake episodes, 288 fake transitions, 360 policy rows per worker/reader, 72 masks and 372 reader scalar states/100,440 scalar power links, with <=120 fabricated frozen-network forwards and 36 OFF-score calls per pass, plus separately counted guard/corruption unit fixtures. This is a forecast example to bind prospectively if selected, not an executed or automatically authorized test batch. It adds zero native transitions, fits or optimizer steps. Synthetic timing would plausibly be seconds to a few CPU-minutes; exact calls and repair invocations must be recorded rather than hidden as setup. Independent engineering review is warranted for the memory/provenance/reference changes. I would price approximately 5–10 support-hour-equivalents for implementation/checks/engineering review plus 3–6 for complete reading, independent scientific result review, publication and measured cleanup: 8–16 total, a planning forecast rather than measured labor.
+
+The main unresolved facts are future positive-guard frequency, KEEP/RETURN separation, complete native benefit and actual cache/runtime behavior. No source fact supplies a positive prediction strong enough to call this a repair of B10's learned loss. B08–B10 findings/stops remain unchanged, including B10's 19 final zero-service ticks in six episodes and the retained-prior adverse. This reply supplies the complete feasible bill and its limitations for your independent purchase-or-stop recommendation; it selects no experiment.
+<!-- POST_B10_SOURCE_RESPONSE_END -->
+
+<a id="post-b10-original-oracle-recommendation"></a>
+#### Original independent adviser recommendation — complete, 2026-10-01 UTC
+
+The following is the entire artifact-only delivery from the same independent
+adviser after reading the source-price response. The adviser also returned this
+recommendation directly to Root. Root's published handoff records its verified
+Astra/max runtime; its actual context and evidence coverage are disclosed in
+the original below. This is selection advice, not a new result review or an
+empirical replication. All source, price and original-result limitations remain.
+
+<!-- POST_B10_ORACLE_FINAL_BEGIN -->
+Artifact-only delivery, as Root requested: preserve the complete advice below verbatim beside my original source/price request and your complete response. Those original native messages already contain the source question, exact prospective panel and full price. This adds no scientific query, implementation or execution. I am returning the same substantive advice directly to Root. My evidence consumption is complete.
+
+Recommend the ordinary self-silence commitment comparison as a worthwhile, finite successor: five programs, 192 complete episodes, zero new fits. Preserve it as UNSELECTED at the owner’s handoff stop. This recommendation does not select implementation or another native round.
+
+The contribution would be empirical understanding of a specific control problem: whether retaining a legal pre-silence command through one predictably blind return can turn an immediate radio benefit into complete-episode value. The evidence supports asking that question. It does not yet support a repair, a learned-state architecture, or a cause of B10’s learning losses.
+
+I retained my separate adviser context, initially created without a fork of Root/DM conversation. This follow-up reuses my earlier selection work and received Root’s proposed interpretation explicitly; it is not a blinded B10 result review. I read the complete original B10 critic and disposition, then inspected the identified first-divergence and next-boundary slices in all ten CJ/C_ZERO raw files for worlds 30012002/17/20/26/30. I checked the relevant action, count, navigation, masking and Hdirect source. I reused the existing complete result reconstruction rather than repeat it. The new source/price response came afterward.
+
+The underlying observations are unusually useful but narrow. The original critic’s posthoc CJ diagnostic reports:
+
+| World | First four-tick ΔJ | First four-tick Δserved | Complete ΔJ |
+| --- | ---: | ---: | ---: |
+| 30012002 | +.039984 | +2.25 | −.025874 |
+| 30012017 | +.055082 | +3.00 | +.031938 |
+| 30012020 | +.091826 | +6.25 | −.000277 |
+| 30012026 | +.043784 | +2.50 | +.017314 |
+| 30012030 | +.019484 | +1.25 | −.003784 |
+
+At each origin the commands and ensuing four-tick positions match; the eligible transmitter bit differs. These are executed immediate native gains. Complete CJ−C_ZERO nevertheless has two positive, three negative and 27 identical worlds, mean J +.000604. This remains the original posthoc diagnostic, not an added frozen B10 primary.
+
+The strongest consequential objection is that the silent member’s next motion cannot explain all subsequent losses. In world 30012030 that member issues zero motion in both CJ and C_ZERO at the next boundary, while other agents’ commands and the next mask differ. Native service then differs. More generally, silence changes teammates’ observations and future decisions as well as the silent member’s own input. A local commitment can change that coupled trajectory; it cannot be presumed to preserve all the immediate gain.
+
+There is a second limitation: at all five recorded origins, the original C ON command was also zero. KEEP and RETURN would therefore store the same first command in every one of those examples. The source permits a nonzero C ON choice during a positive CJ OFF win, but neither its future frequency nor a useful KEEP/RETURN separation has been demonstrated. Fresh-panel equality is an admissible result, not a reason to add worlds until the programs differ.
+
+The constructive conjecture is correspondingly modest. A known self-induced empty row need not be processed as an ordinary invitation to resume navigation. An agent can retain its own already-computed command and private navigation state for one return, without observing anything new. This may avoid an adverse blind reroute. The competing explanation is that later peer/radio responses, stale local scoring and changed visitation dominate; both commitments may be neutral or adverse. KEEP additionally tests whether simple commitment suffices. Only a separated RETURN advantage would support the added value of retaining C’s particular pre-silence plan.
+
+The proposed complete comparison is:
+
+| Program | Decision law |
+| --- | --- |
+| C_ZERO | Exact retained C with OFF only at zero current count. |
+| CJ | Exact retained joint C/physical-transmitter rule. |
+| CJ_KEEP | CJ, but after an eligible positive-count OFF, retain the actually issued zero command for the next decision hold. |
+| CJ_RETURN | CJ, but after the same guard, retain the original C ON command computed before CJ’s zero-command replacement. |
+| Hdirect_ZERO | Exact retained P0/C mixture with ZERO gating, on two addressed motion tapes. |
+
+For both memory programs, the pending return bypasses C scoring and the empty-row navigation mutation, preserves the post-origin private navigation state, issues the stored command, requests no OFF, and consumes the flag. Other decisions retain the original law. Zero-count OFF fallbacks remain unchanged. Memory is private to an episode and agent; later positive-count OFF events can arm another one-use commitment.
+
+The timing is essential. All five decisions still use old-mask rows. The previously silent member chooses its pending command before the single mask setter; it is now ineligible and the setter forces it ON. Its next four movements occur ON. This is not another four OFF ticks, an observation refresh, or a changed receiver-hardware claim. At tick 252 a new commitment can remain unconsumed at termination; record and clear it without extending H256.
+
+The source confirms that the guard has the intended meaning. Positive current count plus an eligible CJ OFF request is exactly the strict positive-service OFF branch. Preserve the strict score comparison, stable C ties and zero-service exception. ZERO_INDEX is 0, and answer['c_index'] already retains the pre-replacement ON choice. Neither a new C query nor an acknowledgement/global-mask input is needed. The reader must verify that the host installs the eligible requested bit; the actor knows only its own row/action and the public rotation.
+
+A retained-geometry replanner would add no necessary capability to this particular construction. Under identical retained FP32 inputs, calibration, arithmetic and command order, zero own movement preserves C’s ON scores. The post-origin navigation state yields the same fallback choice too: adjacent waypoints are at least 200 m apart, whereas advancement requires being within 60 m. This is a conditional source/algebra identity, not a numerical pilot or a claim that the stale plan remains accurate. Re-encoding coordinates, incorporating changed peers or changing history/calibration would be another law.
+
+The comparison meets the richer-rights requirement without duplicate baseline episodes. C_ZERO and Hdirect_ZERO receive the same opportunity to retain their own information, but their positive-count OFF guard is impossible under ZERO gating. Starting with empty memory, their wrapped behavior is identical by induction. Hdirect_ZERO is a competent complete reference, historically strong on native J; its future ordering is unknown. P0/Bstar0/G remain retained capabilities, and this question does not claim exhaustive superiority over them.
+
+Existing all-ON local history is not a free replacement baseline. Its remembered-point absence calculation imposes no-hearing SINR constraints and an unknown-peer prior, and its original observation-ingestion frequency differs. Treating known self-silence as that kind of environmental absence would require a new law. Earlier local-history and B09 results also supply no established history upgrade to assume here.
+
+Use all 32 fresh common worlds. Run the four deterministic programs once per world and Hdirect_ZERO twice, averaging its tapes within world: 192 H256 episodes and 49,152 native transitions. The proposed identifiers remain prospective: worlds 30021000–30021031; Hdirect roots 30022031/32; bootstrap 30022041; isolated constructor 30022051. The lead’s static search found no local conflict, not a global reservation. Exact launch/master/constructor bindings would still need publication if this successor is selected later.
+
+Retain the nine declared contrasts: CJ−C_ZERO; KEEP−CJ; RETURN−CJ; RETURN−KEEP; KEEP−C_ZERO; RETURN−C_ZERO; CJ−Hdirect_ZERO; KEEP−Hdirect_ZERO; RETURN−Hdirect_ZERO. Use one shared 20,000×32 world-bootstrap index matrix and the original complete metrics: J, service, quality, p10, minimum, outages, travel, silent travel, transmitter exposure, switches and CPU. Preserve all worlds, both commitments and adverse outcomes. Pointwise intervals condition on these fixed programs and the one retained P0; they do not supply simultaneous dominance, equivalence or independent-parent replication.
+
+The reading should separate the following outcomes rather than choose a winning endpoint after seeing the panel:
+
+- A commitment improves complete J over both CJ and C_ZERO, with a positive pointwise interval for each contrast: conditional evidence that this ordinary package retains useful episode-scale gating value. Inspect and retain service/tail/travel harms; J improvement alone is not practical dominance. If KEEP and RETURN behave alike, credit ordinary commitment/navigation handling, not richer representation.
+- RETURN improves over KEEP with actual distinct choices: support for this particular retained C plan over simple holding. RETURN−KEEP still measures a complete program effect after histories separate, not a pure mediator or an optimal belief state.
+- A commitment improves over CJ but remains adverse or unresolved against C_ZERO: mitigation, not established retained gating value. A gain over C_ZERO while trailing Hdirect is useful empirical understanding, without a complete-controller upgrade. Conversely, improvement over Hdirect would raise the priority of a separately priced broader comparison; it would not select one or establish superiority to unmeasured retained programs.
+- Both commitments materially intervene and remain adverse or unhelpful: end this purchase without turning the result into a memory-architecture or PPO repair request. The broad partially observed control question remains open.
+- No guards, terminal-only guards, identical commands/state effects, or sparse physical separation: report the actual exposure and unresolved comparison. Do not label it an active failed intervention, an equivalence result, or grounds for automatic expansion.
+
+A pending flag alone is not behavioral activation. Save its origin, raw/capped count, pre-replacement C category, stored/issued category, navigation transition, creation, consumption and terminal state; distinguish category differences from physical displacement after clipping. Use actual paired prefixes for same-context comparisons. After trajectories separate, action differences concern different visited histories. Do not buy shadow C queries on every skipped row merely to manufacture an activation counter.
+
+This is the smallest complete observation I recommend. A selected first-block check cannot answer the question, and another fit would add an unmotivated learning mechanism. The whole 192-episode panel can either support a finite ordinary capability or close this purchase. Neither a favorable toy nor an identified repair is required before undertaking that bounded exploration.
+
+The complete prospective price is material mainly in support work:
+
+| Work | Per production pass unless stated otherwise |
+| --- | ---: |
+| New fits / optimizer steps / acquisition targets | 0 / 0 / 0 |
+| Worker explicit resets / extra constructor reset | 192 / 1 |
+| Worker transitions / UAV ticks | 49,152 / 245,760 |
+| Mask installs / policy requests | 12,288 / 61,440 |
+| CJ-family OFF scores / logical OFF model ticks | 6,144 / 24,576 |
+| Hdirect addressed uniforms / T-and-H law vectors | 20,480 / 40,960 |
+| Worker native dense SINR slots, including refresh | 16,949,075 |
+| Worker native path-loss distances | 12,829,700 |
+| Worker native observation rows, including discarded refreshes | 308,165 |
+| Reader scalar states / local rows | 61,632 / 308,160 |
+| Reader scalar power links / distances | 16,640,640 / 16,024,320 |
+| Reader dense SINR slots | 16,948,800 |
+
+Let K and R be actual consumed KEEP/RETURN events and M the total ordinary C cache misses. Each of K and R is at most 2,016; each arm can create at most 2,048 flags, with creations minus consumptions equal to terminal flags. Base C requests are 61,440−K−R; C paths are 27M and modeled ticks 108M. The no-hit/no-bypass ceilings are 1,658,880 C paths, 6,635,520 modeled ticks and 139,468,800 controller power links, including CJ’s repeated setups. The reader repeats applicable C/OFF/policy work on saved histories, in addition to its scalar reconstruction.
+
+Those ceilings are not actual paid work or guaranteed savings. A skipped return has no users/peers, so its hypothetical C radio-power work is zero and it may have been a cache hit. Count requests, bypasses, misses, candidate paths and links separately. Each pass has 320–20,480 frozen P0 forward rows for Hdirect, depending on its private cache; no separate analytic feature-helper search is needed. The unchanged Hdirect implementation still builds both law vectors on every request. Cache payload ceilings per episode are about 420,160 bytes for C-family programs and 750,720 for Hdirect before Python overhead; they are not batch RSS.
+
+The worker also pays 193×115=22,195 native layout uniforms including construction. Existing layout verification adds 192 reconstructions/22,080 uniforms in each worker/reader pass. Each pass regenerates 640,000 bootstrap index integers. There are 960 private episode-agent contexts per pass, 320 with pending memory. Separate gate draws, HIDDEN predictions and new teacher-target collection are zero. The source assessment drew none of these samples.
+
+The only learned input is original P0: remote canonical runs/uav_fleet_adaptation/b02_inheritance_a01/assets/S.pt, 424,487 bytes, SHA256 b9e25fca68109bb50fa64fadfc90939ad6a4669058c1c0ccd1351c8bbcefe12a, original source e945483b85c7f8ddfc315c57f36938d6c14201c7. Freeze all 34,715 FP32 actor parameters and check identity before/after both passes. Price one fully overwritten Student construction/load in worker and one in reader. No HIDDEN, B10 endpoint, optimizer, group checkpoint or training archive is required. One external staged P0 copy is about 425,984 allocated bytes before receipt/directory overhead; preserve the canonical parent and remove the staging copy after consumption.
+
+Reader reuse is feasible, but the frozen B10 executable cannot simply be pointed at these arms. A new bounded adapter needs an explicit deterministic-program tuple, P0-only loader, registry/count/comparison changes, and independent pending-state reconstruction. The substantive engineering burden is proving origin/consume/nav semantics while representing skipped C fields as unavailable, not fabricated executed scores. The reader must derive memory from source-bound rows and actions, not trust the new wrapper or its saved flags. Reused scalar physics and independent H/OFF formulas support the audit; reused C remains the pinned C implementation, not an independent proof of its planner.
+
+The static ordinary raw-schema anchor is 386,588,032 uncompressed ndarray bytes. One full FP32 origin row per possible guard adds at most 1,703,936 bytes across the memory arms, plus small state records. Forecast one canonical compressed evidence set of about 0.12–0.25 GB. A B10-sized managed source snapshot plus this output and staged P0 would use roughly 0.95–1.2 GB temporarily; current tree size and allocated bytes require actual measurement. No duplicate output or checkpoint archive belongs in this price.
+
+On the same one-thread setup, the lead forecasts worker 60–240 CPU-seconds, reader 100–360, enclosing production 180–720 CPU-seconds, roughly 4–20 minutes wall before uncertain admission/queue time, and 0.4–1.0 GiB peak RSS. The measured anchors are B10’s 1,780.046 CPU-seconds, 1,717.667 reported enclosing wall-seconds and 731,560 KiB RSS, plus its program-specific episode timings. These are forecasts, not measurements or retry allowances.
+
+Support is forecast at 8–16 hour-equivalents: 5–10 for implementation/checks/engineering review, 3–6 for complete reading, scientific result review, publication and measured cleanup. A prospective small fake pipeline could use two artificial worlds × six cells at H24: 12 fake episodes, 288 fake transitions, 360 policy rows per pass, 72 masks and 372 reader scalar states; at most 120 fabricated-input frozen forwards and 36 OFF-score calls per pass. Guard/tie/terminal/reset/cache/corruption fixtures add separately counted work. This is an example budget to bind before any later selected implementation, not an executed or authorized check batch. No native pilot is necessary in the proposed scientific panel. Exact fixture/repair invocations and support time remain unmeasured.
+
+The literature supports the problem formulation, not the predicted gain. New primary coverage for this follow-up was:
+
+- Foundations B03, Oliehoek–Amato, A Concise Introduction to Decentralized POMDPs, 2015 author preprint: §§2.1.2/2.2, printed pp.13–16, and §§6.2–6.2.1, pp.68–70. Action/observation history and finite-state policies justify a legal memory controller. The catalogued local PDF was unavailable; I read the author’s primary PDF: https://www.fransoliehoek.net/docs/OliehoekAmato16book.pdf. Local record: docs/new-libs/corpus/papers/B03/structure.json. No optimality or performance guarantee transfers.
+- Inst-sci MARL-0389, MA²E, primary JSON pp.3–4: /home/fires/projects/Inst-sci/papers/MyLib/json/MARL-0389.json, with PDF /home/fires/projects/Inst-sci/papers/MyLib/pdf/MARL-0389.pdf. Its decentralized execution uses local history, while global reconstruction information is paid during centralized training. That distinguishes lawful execution from free inferred truth; it does not select that architecture here.
+- My-lib neurips-2023-20e6b4dd2b1f82bc599c593882f67f75, Active Vision Reinforcement Learning under Limited Visual Observability, arXiv:2306.00975v2, primary pp.1–3: /mnt/c/Projects/My-lib/.local-formal-capture/corpus/papers/neurips-2023/20e6b4dd2b1f82bc599c593882f67f75/arxiv-2306.00975.pdf. Its sensory-action/motor-action distinction is a useful bridge. Our transmitter action additionally changes team service and teammates’ observations, so its assumptions and empirical results do not transfer directly.
+
+I reused the earlier primary reading of July G30, the R54 contract/result and the cited external-review passages, plus the existing richer-rights radio/CADC comparisons. Information availability, representation access, finite learnability and native benefit remain different questions. Library locators and adviser opinions are not novelty or repair evidence. I make no novelty claim and did not reproduce those papers or historical experiments.
+
+Historical findings remain intact: B08 HIDDEN−RAW +.007318 and HIDDEN−P0_A +.010576 are conditional gains with comparator/tail/travel limits; B09 supplies no established executed-history improvement; both B10 fits lose J/service against actual INIT90 and competent retained controls despite active updates and substantial silence. Their opposite changes in OFF frequency do not identify a common optimizer, credit or representation cause. B10’s 19 final zero-service ticks in six episodes remain. Its 22 cumulative B02–B10 fits, two calibrations and 4,055,080 steps, plus B01 and support, are incurred costs—not removed by proposing a zero-fit successor.
+
+The B10 source is 73278079be41ad8068b73594a32cde5841119032; result publication is 4a0db1166d00511f45a4ee40689e67190a67ea87. The compact evidence is runs/uav_fleet_adaptation/b10_joint_control_a01/publication.json, SHA256 a78ebbe0318fcb48f9b16f5dffdf5b88cc59cf5a538a5e14ff0d202798ce6f2c. I relied on the original accepted reader/critic for exhaustive reconstruction and prior hash verification; my new raw inspection was limited to the ten identified boundary traces. Future guard frequency, program separation, complete benefit, cache costs, runtime and implementation correctness remain unverified. This assessment added zero fits, native transitions, model/controller/RNG queries, saved-outcome reductions, tests or prototypes. Source/literature/support time was not fully metered.
+
+My correction is therefore to revise the broad “silence loses its next observation” idea into this ordinary, source-legal commitment question; retain all existing adverse findings; and reserve one complete zero-fit comparison for a later allocation decision. At the present owner boundary, record it and stop. No second scientific-selection pass, Pro request or automatic follow-on is needed.
+
+MATERIAL_DISSENT: no — Root has selected neither a successor nor a B10 repair. Direct evidence supports the narrowed exploratory question while rejecting attribution of all losses to the silent member’s next motion. The recommended comparison remains unselected at the handoff stop.
+<!-- POST_B10_ORACLE_FINAL_END -->
+
+<a id="post-b10-assessment-disposition"></a>
+#### DM response and final handoff scope
+
+I read the complete original final advice. I agree that the narrowed ordinary
+commitment question is feasible and worth retaining as an unselected option,
+given its complete-panel comparison and explicit support cost. My own source
+inspection establishes the guard, old-row/one-setter timing, conditional retained-
+input identity, impossible ZERO baseline guard and exact count formulas; the
+already-published B10 full reading establishes the cited five immediate gains
+and adverse complete continuations. The additional primary-paper coverage is
+the adviser's attributed reading above, not a new DM paper audit or empirical
+support for the conjectured improvement. No source fact promises fresh guards,
+KEEP/RETURN separation, useful complete value or a learning repair.
+
+The material correction is to test a lawful finite-memory program effect,
+including suppressed empty-row navigation and later coupled responses, rather
+than claim that the silent member's next motion explains all losses. At all
+five old origins KEEP and RETURN would store the same command. A new-panel
+null or identical behavior must therefore remain admissible; additional worlds,
+shadow queries, a replanner or a learned memory model are not completion work.
+Hdirect_ZERO remains the strong same-rights complete reference, and retained
+P0/Bstar/G plus service/tail/travel harms prevent an exhaustive-upgrade claim.
+
+There is no material scientific dissent to route. Recommendation, selection
+and execution remain distinct: the owner has requested the current round's
+handoff before any next round, and neither Root nor this DM has selected this
+successor. The source exchange and advice are now complete. B10's stop,
+publication, exact positive/adverse evidence and measured cleanup are unchanged.
+No producer, reader, observer, unread advice or new data consumer remains for
+this DM. No implementation, native episode, model/controller/RNG query, saved-
+outcome reduction, test or prototype was added by this source assessment or its
+documentation. Source/literature/support time was not completely metered.
+
+The next work here is only the owner-requested fleet section in the shared
+handoff, under Root's granted exclusive section-writing turn. After publication
+this DM stops at the handoff boundary. A future owner continuation and Root
+allocation may select the retained comparison or another justified question;
+reading the handoff, status requests and unused capacity do not resume research.
+
+Original preservation identities (UTF-8 payload between each BEGIN/END marker,
+excluding the markers and their delimiter newlines):
+
+| Original payload | Characters | UTF-8 bytes | SHA256 |
+| --- | ---: | ---: | --- |
+| Adviser source/price request | 6881 | 6903 | 1884df1a1907ddc1001e4785c8ca90c39b0840f3ab20791b75d975cf45e678f1 |
+| DM source/feasibility/complete-price reply | 24939 | 25009 | 07a4f822164693b99256fd7455a156d792547a2476223c1bb641ad2b8ccccaeb |
+| Complete final adviser delivery | 21119 | 21248 | fe7b6db530e5e1a03ffd2ab270a69aafe5454535c63634889b27371856ecc23c |
+
+Root then read the complete original DM reply and complete recommendation and
+returned the following allocation disposition. This is kept separate from the
+adviser's original, without rewriting either into agreement:
+
+> I have now read your complete original source/feasibility/price reply to oracle_next_capability and the complete Oracle recommendation. Retain the narrowed ordinary own-history commitment comparison (CJ_KEEP/CJ_RETURN), including world 30012030 and the five origins where KEEP/RETURN initially coincide; do not retain the broader missing-observation story as an established explanation. This is a priced UNSELECTED future option, with no new experiment/fixture authorized. You still have the exclusive handoff-file turn; publish full originals/response first as planned, then your own section and return the commit/release.
+
+This agrees with the scoped DM disposition above. The original B10 records and
+all outside bytes of the shared handoff section are preserved. Documentation
+checks are limited to append-only/original-block integrity, links, owned-path
+diff and section boundaries; no scientific checks or new fixture exposure occur.
+
+The final handoff filesystem/process recheck again found the original B10
+runner/supervisor absent, observer44 stopped and all declared cleanup targets
+absent. The four canonical publication/summary/reading/ledger hashes and both
+original P0/HIDDEN hashes still match; the one required B10 output still holds
+1647 files/1115774100 logical/1119678464 allocated bytes. This was a read-only
+retention check, not another scientific reader invocation or raw-outcome reduction.
+All handoff repository/Git evidence links resolve, and every byte outside the
+granted fleet section matches the current published handoff. No new scratch or
+redundant artifact was created, so there is no additional deletion to claim.
