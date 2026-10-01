@@ -1,0 +1,76 @@
+{
+  "admission": {
+    "claim_state": "accepted",
+    "state": "accepted"
+  },
+  "artifacts": {
+    "stderr": {
+      "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_read_a02/stderr.log",
+      "state": "present"
+    },
+    "stdout": {
+      "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_read_a02/stdout.log",
+      "state": "present"
+    },
+    "summary": {
+      "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_read_a02/summary.json",
+      "state": "absent"
+    }
+  },
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/8f1d811e00a14600913a2393e0da8911d5d7d1018e8ab0b21b6dba042113b72b.json",
+  "direction": "uav_user_waiting",
+  "execution": {
+    "exit_code": 0,
+    "exit_witness": {
+      "exit_code": 0,
+      "finished_at_epoch": 1790830154.691827,
+      "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_read_a02/process-exit.json",
+      "state": "valid",
+      "termination": "process_exit"
+    },
+    "runner": {
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 1193260,
+        "session_id": 1193259,
+        "start_ticks": 117257902
+      },
+      "state": "absent"
+    },
+    "state": "exited",
+    "supervisor": {
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 1193259,
+        "session_id": 1193259,
+        "start_ticks": 117257899
+      },
+      "state": "absent"
+    }
+  },
+  "explicit_retry": {
+    "eligible": false,
+    "reasons": [
+      "parent has no consistent terminal nonzero native exit"
+    ],
+    "scientific_authorization": false,
+    "successor_ref": null,
+    "supported": true
+  },
+  "explicit_retry_available": false,
+  "kind": "hmasd_operation_status",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_read_a02/launch-manifest.json",
+  "node": "wsl_4070",
+  "observed_at": "2026-10-01T04:49:17.405463Z",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/8f1d811e00a14600913a2393e0da8911d5d7d1018e8ab0b21b6dba042113b72b.json",
+  "output_root": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_read_a02",
+  "record_consistency": {
+    "mismatches": [],
+    "state": "consistent"
+  },
+  "schema_version": 1,
+  "sha": "54320ab7adfdce4c31effbb30f6f551470fe97c2",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/6e96f336a31a449c9d9072f4bf64865c"
+}

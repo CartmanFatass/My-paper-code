@@ -6258,3 +6258,158 @@ Independent engineering reviewer closure (original final):
 DM accepts the focused IO repair and its covered limitations. The pinned blob content was
 read/hashed on the remote node as separately recorded above; actual revised runtime use
 remains part of the newly admitted a02, not a synthetic claim of an already executed study.
+
+
+<a id="b07-a02-execution-and-reading"></a>
+### B07 a02 accepted execution and fixed independent reading — 2026-10-01 UTC
+
+The revised source54320ab7adfdce4c31effbb30f6f551470fe97c2 was published before the new
+[accepted manifest](../../../../runs/uav_user_waiting/b07_cap_two_a02/launch-manifest.json).
+Actual remote-node admission at04:44:30.230588Z passed with14,680,510,464effective available
+bytes. The a02 worker completed64episodes/16384native steps/20480current-C calls and all
+61440mask plans/243840modeled radio ticks, with0fits/targets/updates; native exit0 has consistent
+terminal identities. Its47.453704087s wall,47.019979s lifetime self CPU,0.022791s waited child
+CPU and564,696KiB peakRSS are worker snapshots before the final write tail. Both exact Git
+blob reads were VERIFIED at this accepted source, without network fetch, for5,365,829bytes
+combined. Zero-query a01 costs remain separate. These are technical completion facts, not
+yet a scientific interpretation.
+
+Same-session observer generation54 returned READY event3bf2bad7b8f7ae556af11d94; native child
+queue wake19892f50-9f67-4f91-8bc9-23fc6559c3d1 was rejected/unknown(-32600). This turn stayed
+active, read all terminal facts and consumed/rearmed to55 without restarting the worker.
+The first arm command ran before the separately copying request file existed and failed
+locally before registration; the subsequent arm is the only actual a02 registration.
+
+Collected summary SHA256979c3c3c1a96e34356becd2c77e6a6c6cf6ab41a50deba396d3b07ffeee4dd9d
+and config SHA256ee1f83b0e2cf7430f929a96db72d1d986d5c015ab59a01f66b8e7cf0d6403309 bind the
+already selected full independent reader. It uses the same published54320ab7a source, all64
+saved C2 trajectories, all four immutable reference outcomes and the full originally priced
+40960C/243840candidate-radio/16256geometry/16384native-physics reconstruction. It creates
+0new native worlds or baseline allocations. A fresh reader operation will receive its own
+actual-node admission; no scientific choice depends on incomplete worker-score inspection.
+
+
+B07 reader accepted at04:48:10.588534Z with15,292,297,216effective bytes, using its own
+[manifest](../../../../runs/uav_user_waiting/b07_cap_two_read_a02/launch-manifest.json).
+It completed VERIFIED_COMPLETE64/64 at native exit0, checking40960C calls,243840modeled
+radio ticks,16256modeled geometries,16384native physics/LRS steps and16448observations,
+with0new native worlds. Full reading SHA2569d981dd8e8aa22dbd609d6110ae2e826676392d6402ea07a6be2eba549c86c65
+is collected locally; exact fields checked1,615,157, floating39,641, maximum absolute
+floating discrepancy1.4210854715202004e-14. Same-handle observer generation56 READY event
+55f9a3db3318ce5f907bee92 had rejected/unknown native-child queue delivery3b74867b-6972-4599-8436-3b43933fd724;
+this active turn read it and consumed/rearmed57, then stopped observation with all accepted
+operations terminal. No process restart or extra experiment was made.
+
+Reading scope addition before compact extraction: reduce only saved, hash-bound full
+outcomes and already verified paired records, producing complete signed world vectors,
+per-user harm counts across all four references, every world's maximal gap/censor witness,
+physical activation/height and explicit source/reader/IO cost. Retain original worker/full
+reader unchanged. The extraction is disposable direction-local analysis,0new policy/model/
+allocator/native queries or fits; profile this extraction separately and make no causal
+isolation or new statistical-test selection. Native full raw/outcomes remain at the configured
+remote canonical run; the64JSON collection copies (5,392,660bytes) permit local interpretation
+and independent ResearchCritic access, then will be removed once no consumer remains.
+
+
+<a id="b07-complete-reading"></a>
+### B07 complete read: cheap capacity/coverage does not recover extreme continuity — 2026-10-01 UTC
+
+The entire64-world worker and independent reader are complete at the fixed54320ab7a
+source. [Compact full reading](../../../../runs/uav_user_waiting/b07_cap_two_a02/result.json)
+retains every signed world vector for all four references and all prespecified metrics,
+all50-user vectors, censor categories, every world's maximal-gap events, source/outcome
+identities, native/reader status and cost. [Reader result](../../../../runs/uav_user_waiting/b07_cap_two_read_a02/result.json)
+retains all64 verification rows and the full-reading locator. These are adaptively reused
+development worlds; intervals are descriptive, with no confirmation, equivalence or adoption
+threshold added after seeing the result.
+
+| LRS complete program | Episode maximum gap | Worst-user mean age F_user | Mean users served/step | Fair-LRS quality | Fair-LRS J |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| C2:LRS | 92.484375 | 26.834290 | 19.946289 | 0.222127 | 0.345886 |
+| S_F:LRS | 12.156250 | 2.467712 | 16.946411 | 0.226578 | 0.305223 |
+| S:LRS | 35.093750 | 6.285339 | 21.180481 | 0.161247 | 0.344901 |
+| M:LRS | 43.375000 | 9.125000 | 24.736206 | 0.166544 | 0.396270 |
+| U:LRS | 33.171875 | 5.807617 | 21.666870 | 0.159392 | 0.351154 |
+
+Primary C2−S_F maximum-gap difference is+80.328125ticks, paired t95
+[+67.767168,+92.889082], bootstrap95[+68.656250,+93.235547]; all64 worlds worsen,
+range+14 to+238. F_user likewise worsens64/64, mean+24.366577. Service increases
++2.999878[+2.498640,+3.501116]users/step,59 gains/5 losses; fair-LRS J increases
++.040663[+.034797,+.046529],61 gains/3 losses. Quality difference−.004451 has a
+descriptive interval spanning0. The five service losses and three J losses are retained.
+The fixed prediction of lower work and greater service than S_F is supported; preserving
+S_F's extreme continuity is decisively unsupported by this complete selected program.
+
+Against S/M/U:LRS, C2 maximum-gap differences are+57.390625/+49.109375/+59.312500,
+with3/7/2 favorable worlds and61/57/62 adverse. Service differences are−1.234192/
+−4.789917/−1.720581, with50/64/58 losses (one tie versusS). C2 quality increases versus
+all three at the mean; J is+.000985 versusS and−.005268 versusU with intervals spanning0,
+and−.050384 versusM with all64 losses. Therefore this is neither a full-metric dominance
+claim nor an S_F replacement justified by one improved aggregate. The prospective timely
+service ceiling20.234375 remains below all S/M/U mean service levels; observedC2 is19.946289.
+
+All50 users are eventually served in every world, but that does not protect continuity.
+The mean longest physical no-link interval is89.890625ticks, leaving only2.59375ticks
+of average room below C2's92.484375 maximum-gap endpoint for any same-path allocator.
+S_F's corresponding values are11.109375 and12.15625. C2 closed maximum gaps average
+73.765625, startup-censored maxima26.859375 and terminal-censored maxima55.046875;
+closed, left and right gaps are all retained, rather than treating the horizon as a completed
+waiting time. There are232865closed,2413left-censored and1920right-censored unserved
+intervals across all3200 users. The lower bound is about fixed eligibility sequences, not a
+frontier theorem for motion/radio control; denial/no-link labels are observational counts,
+not separable causal contributions.
+
+Relative to S_F,2416/3200users have a worse maximum gap,578 improve and206 tie;1506
+have worse mean age while1691 improve and3 tie. Service counts decrease for1005, increase
+for2166 and tie for29. Individual benefits remain real despite every world losing on the
+maximum: in29426062/user28, C2 gap4 and mean age.230469 compare with S_F12/1.835938,
+and service206 versus83. The same program's worst observed witness29426031/user1 receives
+only one grant: its right-censored gap[5,256) is251ticks, containing1capacity denial and
+250no-link ticks. S_F gives this user48grants, max gap10 and mean age2.96875; C2 mean age
+is123.578125. M/S/U user-specific records and full gaps are retained alongside both witnesses.
+In29426001/user23, both C2 and S_F deliver53grants, but maximum gaps are101 versus7 and
+mean ages22.1015625 versus2.0078125: grant totals alone miss their temporal arrangement.
+
+C2 has fewer total no-link user-ticks than S/M/U at the mean (3362.984375 versus
+5669.843750/5435.921875/5690.703125) while its extreme no-link streak is much longer.
+Against S_F it has more no-link ticks (S_F2597.09375) but fewer capacity denials
+(4330.765625 versus5864.625). These patterns make aggregate capacity and within-block
+distinct-user coverage insufficient descriptions of the tested continuity behavior. They
+do not isolate the responsible motion, radio choice, model-history or objective component.
+
+The intervention is active in all64 worlds. First executed command-or-mask divergence from
+S_F is at tick2/6/10 in47/16/1 worlds; position divergence follows at3/7/11/15 in28/20/14/2.
+All current-C proposals remain unedited; changed masks alter the subsequent closed loop.
+No deadline is missed; max measured whole C+manager round is.020431639s, within1.436s.
+After two startup ticks, all delivered masks have exactly two transmitters. Whole-episode
+mean active transmitters2.0234375 is *higher* than S_F1.765625, so a cap-two construction
+is not a matched lower-mean-concurrency intervention. Mean height is50.127641m versus
+S_F51.347289m;81528/81920C2 UAV-ticks are at the lower boundary,0at the upper. These
+physical differences support whole-program activation, not component attribution.
+
+The complete worker/reader purchase was61440current-C calls,487680mask-radio evaluations
+(121920000SINR entries),32512geometry snapshots (8128000link entries),16384new native
+steps and0fits/targets/updates. Combined successful process self CPU is110.806311s plus
+.051802s waited child CPU; summed process wall110.428156s. Peak individual process RSS
+is574520KiB; peaks are not summed into a simultaneous memory claim. Current-C CPU5.808584s
+is nested inside full report-round CPU22.757328s and must not be added to it. Offline LRS
+CPU1.648452s excludes gap reduction and does not establish integrated allocation latency.
+The full15-mask logical workload is lower than S_F's joint motion/mask search, but B06 ran
+on a different node, so the observed22.76-versus486.36round CPU totals are not a controlled
+hardware speed ratio. Zero-query a01 separately cost1.218674self CPU seconds; its failure
+remains an infrastructure outcome. Canonical new raw24,801,221bytes plus full outcomes
+5,392,660bytes remain remote; the declared320-file124,165,095-byte reference stage and
+5,365,829compact metadata transport are additional temporary-input/source costs.
+Saved-output extraction cost2.159968s wall/2.132253CPU, peak748992KiB before serialization.
+Other implementation/review/check/transfer/control/publication support remains unmetered,
+not zero. Exact source snapshots and temporary-copy reclamation are recorded at closure.
+
+Provisional DM interpretation before independent scientific disposition: retain S_F as the
+conditional ordinary extreme-continuity capability, keep M/S/U operating points and C2's
+positive service/compute evidence, and stop this unchanged cap-two program as a continuity
+replacement. Its result strengthens a constraint against selecting only within-block capacity
+and coverage on this C trajectory; it does not prove memory necessary, low concurrency
+impossible, the original service/continuity price unavoidable, or any learned controller
+successful/unlearnable. The parent question remains open; no automatic repair, replication,
+extra arm or model-fit purchase is selected. Independent ResearchCritic diagnosis and any
+material dissent follow in the existing notebook before final standing is published.
