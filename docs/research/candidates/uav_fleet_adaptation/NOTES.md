@@ -7349,3 +7349,95 @@ originally given; neither range is a measured runtime or hard limit. No
 sampled-coverage exception or benchmark is proposed by this clarification.
 Final source selection, actual arithmetic counts and measured runtime would
 belong to a separately selected and reviewed implementation.
+
+**Final source-price correction: retain Hdirect in place of P1.** Before
+returning its recommendation, the Oracle replaced the128 final P1 A/ZERO
+episodes by128 Hdirect A/ZERO episodes. Its stated reason was to retain the
+consequential ordinary Hdirect capability under the new mask histories;
+B07's all-on ordering against Bstar0 does not determine their new composed
+outcomes. This substitution remains prospective and adds no episode or fit.
+The final priced motion references are therefore P0, Bstar0, Hdirect, G, Q10
+and C; the two gate fits remain RAW and augmented HIDDEN. The earlier P1
+pricing above is historical, superseded by this paragraph.
+
+Source inspection of
+[B07 Policy.query](../../../../experiments/candidates/uav_fleet_adaptation/b07_stochastic_targets/policies.py#L31)
+and [build_targets](../../../../experiments/candidates/uav_fleet_adaptation/b07_stochastic_targets/targets.py#L31)
+found no all-on assertion in Hdirect's local law. MemoC supplies original C
+scores, selected category, fallback/navigation and114 lawful features from
+the actual masked row. A private exact-input logit cache supplies one-row
+FP32 P0 inference on those **C-derived features**, followed by original
+FP64 temperature-one probabilities. H construction multiplies `(1-.1)*p`
+then adds `.1` at C's index. The existing implementation constructs both T/H
+at every law call, including cache hits, selects H and takes a fresh original
+flat-CDF/right-search draw. Probabilities, sampled categories and innovations
+are not cached. Calling StudentPolicy as an additional feature helper would
+add work and change this source pipeline; Hdirect obtains its feature/nav
+result from MemoC.
+
+The existing B07 wrapper imports B06's count-aware MemoC/actor interface and
+calls `actor(features,[5])`; original B02 Student accepts only `features`.
+[CountStudent](../../../../experiments/candidates/uav_fleet_adaptation/b06_count_development/model.py#L16)
+sets its added pre-ReLU count feature to zero at N5 and uses the original
+network tensors. No learned count behavior or new count information is
+required for this proposed use, but an explicit N5 adapter would still have
+to preserve the C-derived features, navigation, one-row actor arithmetic,
+FP64 constructor and decoder. The B07 class cannot simply be passed the
+original Student without resolving that signature. These are source facts,
+not a new masked-checkpoint numerical or bitwise-equivalence certification;
+implementation and meaningful synthetic checking remain unselected.
+
+| Revised full-panel source count | Count |
+|---|---:|
+| Episodes / native steps, unchanged | 1984 / 507904 |
+| All motion requests / gate opportunities, unchanged | 634880 / 126976 |
+| Neural forward ceiling, unchanged | 532480 |
+| Standalone analytic-helper request ceiling | 491520 |
+| C-family requests, including Hdirect | 143360 |
+| C no-hit paths / modeled ticks | 3870720 / 15482880 |
+| Analytic-helper link ceiling / C link ceiling | 68812800 / 323993600 |
+| Hdirect law calls / both constructed target vectors | 40960 / 81920 |
+| Fresh motion uniforms, unchanged | 614400 |
+| Required original-P0 input consumption bytes if staged | 424487 |
+
+A full reader reproducing each actual query can add the same request/vector
+ceilings again, with cache misses measured rather than presumed. Native
+priming, setter, endpoint and observation counts are unchanged. Hdirect's
+neural calls replace P1's calls, while C ranking replaces its standalone
+analytic helper; **both target-vector construction is still charged**, so
+this is not a minimal H-only runtime claim. P0 also supplies Bstar0 and
+Hdirect, so the P1 input copy is no longer needed. The rough0.5–2 combined
+CPU-hour range with full independent scalar native reconstruction,
+6–12 support hours and0.7–1.5 GiB new durable bulk remains a reasonable
+planning allowance; all are unmeasured and schema/runtime dependent.
+The changed dominant counts were returned to the Oracle before publication.
+No model, controller, helper or constructor was queried, no target was
+constructed, and no result outcome was reduced for this correction.
+
+**Streaming RAM and final gate-draw convention.** At Root's request relayed
+by the Oracle, the source-only peak-RSS planning estimate is **0.4–1.0 GiB per
+streaming worker or reader process**, unmeasured and not a hard cap. The
+candidate streams episode production/reading, retains only512 paired training
+rows and two small designs plus32-world summaries, resets caches per episode,
+and runs worker and reader sequentially. There is no source requirement to
+retain the entire raw panel in memory. One or two episode records and at most
+320 distinct motion-input addresses per H256 episode are small compared with
+runtime overhead; Hdirect retains separate C-result and logit dictionaries
+for those addresses. The largest512×254 FP64 design is about1.04 MB, with
+small Gram/solver workspaces. Frozen P0 has34715 FP32 parameters. Independent
+scalar radio reconstruction increases work without requiring run-wide arrays.
+This forecast assumes records/files/caches are released as streaming advances.
+
+Published peaks are B04's430004 KiB and B07's593324 KiB, the latter including
+larger archived-target fitting arrays. Neither isolates baseline runtime or
+measures the new object. Fresh actual-node admission must independently read
+effective memory and concurrent load, with headroom beyond the forecast;
+source snapshots, durable data and scratch disk are separate from RSS.
+
+The Oracle fixed the private gate convention to **draw and record the normal
+R uniform at the forced acquisition boundary, then override its decision**.
+Thus acquisition makes65536 gate draws and final R4096, for69632 total. This
+supersedes the earlier conditional omitted-force-draw count, while leaving
+the original614400 motion draws,1984 episodes,507904 native steps and two
+prospective regression fits unchanged. This correction is still source
+pricing and contract clarification, with no result execution selected here.
