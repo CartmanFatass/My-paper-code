@@ -464,5 +464,233 @@ RESEARCH 的 owner pause／lead，复用仍适用的完整科学审阅，写前�
 <!-- DM_USER_WAITING_BEGIN -->
 ## DM：用户等待、无线不确定性与后续策略发展候选
 
-待 /root/dm_user_waiting 完成当前资料评估后本人填写。
+本人为同一未归档 native DM `/root/dm_user_waiting`。先前负责 `uav_user_waiting`
+B01–B07，随后由 Root 明确分配 `uav_radio_uncertainty` B01；两条结果线现均已完整
+读出、独立判读、发表并收尾，处于 reserve。研究问题从“怎样改善个人等待且保留
+服务”延续到“对共同获得的无线测量，联合不确定性积分是否有完整控制价值”。
+后者没有被用来解释前者的确定性宿主失败。最新策略发展工作只是 Root 分配的
+资料和完整计价评估，**未实现、未选定、未启动**。本节完成后遵守 owner 交接停止边界。
+
+### 等待研究留下的能力与负面约束
+
+这些研究区分最差用户的平均年龄、平均用户的最长间隔、全回合最大间隔和总服务。
+它们不能互相替代。B01–B04 各有完整配对世界；B05–B07 复用 B04 的 64 个已曝光
+开发世界，不能称为新世界确认。表中的差值均按所写顺序，等待指标越小越好。
+
+| 研究与完整证据 | 保留的结果 | 必须一起保留的限制 |
+| --- | --- | --- |
+| [B01 累积负担 R](../../runs/uav_user_waiting/b01_burden_a01/result.json) | R−O 最差用户平均年龄 −1.889343，描述性区间 [−3.013856,−.764831]；服务 +2.873962、J +.038074，后两项 64 世界均正 | 平均用户最大间隔 +3.387500、年龄 p95 +2.499219。时间平均负担改善没有保护连续等待；相对 W/M 仍付服务代价 |
+| [B02 连续性 A/S](../../runs/uav_user_waiting/b02_continuity_a03/result.json) | 普通 S−M 回合最大间隔 −8.953125、最差用户平均年龄 −3.078491，并有较低调度成本 | A−M 主指标“平均用户最大间隔” +.628750，区间跨零；A 的延伸预测未挣回指定用途。S−M 服务 −3.662537、J 在 64 世界均负；98 tick 闭合间隔反例的年龄和累积负担在全部锚点都正确 |
+| [B03 剩余中断价值 LR/LN](../../runs/uav_user_waiting/b03_value_a01/result.json) | 已训练、已进入决策的负面结果；普通 S 的部分极端尾部优势仍保留 | LN−M 平均用户最大间隔 +11.902813，64 世界全差；LN−G0 +8.317188，59 差/5 好。不是未训练或未激活，也不能据此归因于缺 ACK、历史或某一个优化器 |
+| [B04 扩展搜索 U、局部服务底线 K](../../runs/uav_user_waiting/b04_service_floor_a01/result.json) | U−S 服务 +.486389、最差用户平均年龄 −1.599670、J +.005405；这是有用普通能力 | 最大间隔增量尚不确定，计算/质量仍有代价。K 的模型服务底线每次成立，K−M 的服务 −.036499、最大间隔 −2.562500 和最差平均年龄 −1.018494 区间却均跨零，未通过完整服务保留的固定联合判读 |
+| [B05 同路径本地分配 RR/LRS](../../runs/uav_user_waiting/b05_local_allocation_a02/result.json) | LRS 在 M/S/U 三条物理路径上逐 tick 保留联系总数，三种路径各 64 世界的最差用户平均年龄全改善；均值差 −3.857300/−4.676819/−3.554871 | 每条路径的质量和 J 均在全部世界下降；重分配不能创造本不存在的物理联系。路径与分配的权利不同于旧冻结合同 |
+| [B06 将实际 LRS 纳入普通 S_F 规划](../../runs/uav_user_waiting/b06_fair_model_a01/result.json) | S_F:LRS 最大间隔 12.156250；S_F−S 为 −22.937500 [−25.663278,−20.211722]，64 世界全好，闭合间隔也全好；每回合服务全部用户且无零服务 tick | 服务 −4.234070，63 世界下降；J −.039678，62 世界下降。保留极端连续性能力及真实服务价格，不称为无损升级 |
+| [B07 便宜 C2:LRS](../../runs/uav_user_waiting/b07_cap_two_a02/result.json) | 相对 S_F，服务 +2.999878、J +.040663，分别 59/61 世界改善，模型搜索明显更少 | 最大间隔 +80.328125 [67.767168,92.889082]，64 世界全差；C2 平均最大间隔 92.484375。最长无联系区间平均 89.890625，同路径换分配几乎没有补救空间。29426031/user1 仅获一次服务，随后 [5,256) 为右删失 251 tick 间隔，其中 250 tick 无联系 |
+
+七次完整独立判读均保留这些正面、负面和不同用途，不把“所有用户最终被服务”
+当连续性保证。C2 的全回合平均开启数 2.0234375 还高于 S_F 的 1.765625，
+所以 B07 也不是单独识别“较低平均并发”的因果实验。原样 C2 连续性替代和其后
+较长规划器提案已停止；后者是投入判断，非长规划或合法未来 C 模型的经验反证。
+完整原始审查、DM 决议、失败与后续不购买理由在
+[等待 NOTES](candidates/uav_user_waiting/NOTES.md#b07-independent-review-and-disposition)及
+[后续原始往来](candidates/uav_user_waiting/NOTES.md#post-b07-original-continuity-advice)。
+
+较早成本不因 RF 转向而归零。以下是各记录已发表的主要科学曝光及 worker/reader
+CPU；计时范围、节点和核验深度不同，不能当同质性能基准，正确性、失败及未计量
+支持费用另见各次 Complete cost：
+
+| 等待研究 | 新科学曝光 | 已记录 worker/reader CPU 秒 |
+| --- | --- | ---: |
+| B01 | 256 回合 /65,536 步，0 fit | 1,824.068 |
+| B02 | 完整面板 65,536 步，另保留失败前缀，0 fit | 2,651.306173；另有未测完整 CPU 的失败/支持 |
+| B03 | 512 回合 /131,072 步，2 fit | 6,475.228561 |
+| B04 | 256 回合 /65,536 步，0 fit | 2,342.870991 |
+| B05 | 192 旧路径、576 分配结果；0 新 native 步/fit | 成功 A02 65.478097；A01 不完整账单另保留 |
+| B06 | 64 回合 /16,384 步，0 fit | 987.521216 |
+| B07 | 64 回合 /16,384 步，0 fit | 110.806311 自身 +.051802 等待子进程；另 A01 零查询失败 1.218674 |
+
+等待证据保持一份 canonical 副本：B01–B04 和 B07 主数据在配置节点 `wsl_4070`
+的 `/home/wu/projects/HMASD/runs/uav_user_waiting/`；B05 A02、B06 原始数据在
+`local_linux` 本工作区对应 runs 目录。上表 compact result 保存精确路径、哈希、
+完整输出/reader 定位和所有世界符号，不能把已删除的本地阅读副本当 canonical。
+B05 A01 的崩溃 core 和必要原始 snapshot 属于 Root 保留的故障取证，A02 成功没有
+解释或修复它。B07 最终清理净回收 **2,594,779,136 allocated bytes**：三个已终结
+source snapshot、320 个临时输入副本、重复本地结果/观察和提取 scratch；留下
+130 个唯一 raw/outcome/summary/reading 文件、31,865,551 payload bytes。
+[精确清理记录](../../runs/uav_user_waiting/b07_cap_two_a02/cleanup.json)与 notebook
+最终更正优先于早先少 4,096 bytes 的临时总数。等待研究没有活跃 worker、reader、
+未读建议或自动续跑；保留代码是能力/证据复用，不是运行中的依赖。
+
+### RF B01：条件性 U32 目标收益，以及等待损失
+
+固定问题是在同一有成本测量/通信权利下，积分联合 RF 结果能否优于已有正确随机
+规律的平均功率控制 P。宿主为 N5/U50/H256、静态用户、原生贪心分配和 J；用户链路
+额外损耗标准差 4.14 dB，相关系数为 `exp(−实际三维位移/17.62)`，悬停冻结残差。
+这是声明的近似 Markov 信道，不是已校准的真实空间场。A2A 不变。
+
+P 与 U32 都获得 0.5 dB 量化的全 250 链路当前测量、相同地图和 C 提案；每轮
+391 bytes/2,000 bit/s 加 0.1 s sounding，共 1.664 s，三 tick 后交付，留下
+1.336 s 全轮计算余量，命令保持四 tick。P 用解析期望接收功率；U32 用 16 条
+Gaussian tape 及 16 条反向 tape 积分完整分配/J。两者沿相同两顺序、轮换单机
+27 运动×31 mask 的受限搜索，完整时每轮 116 请求。采样数不是独立世界数。
+报告 tick 的 payload 权重为 .9，其余为 1；错过期限则旧命令和 mask 原子保留。
+
+32 个新配对世界 29641000…29641031 全部完成。固定主判读是每回合 payload-J/256
+的 U32−P；以下区间均为描述性 mean±1.96SE：
+
+| 指标 | U32−P |
+| --- | ---: |
+| payload-J | **+.007529588 [.004058439,.011000736]**；26 正/6 负 |
+| payload 服务数/tick | +.259631 [−.034786,+.554048]，仍不确定 |
+| 平均用户年龄 | **+.940410** [.1350,1.7458] |
+| 回合最大未服务间隔 | **+18.40625** [6.7631,30.0494] |
+| 最差用户平均年龄 | **+4.7302** [1.3276,8.1329] |
+
+正收益不能抹掉个人伤害。29641005 的 J +.0324744、服务 +1.953125，同时最大
+间隔 28→129，user28 的 [118,247) 是闭合间隔；29641020 也有闭合 127 tick
+间隔。29641019 的 J 增加，但 user34 在 [118,256) 持续不服务，138 tick 是
+右删失观察长度。最差 J 世界 29641031 则下降 .0163034，最大间隔却从 51 改善
+为 35。没有全队零服务 tick、没有从未服务用户，均不等于连续性满意。
+
+全部 **4,096** 决策按时，模型与动作确实改变；此前担心的计算期限失败在这次
+实现/节点上没有发生。每任务累计全轮计算均值 P 1.3823 s、U32 9.4351 s。
+完整独立 ResearchCritic 建议且本人接受：保留有限 U32 相对同信息 P 的条件性
+payload 目标能力，关闭固定购买，不自动复制/加粒子/调期限/改连续性目标。
+结果没有隔离“精确积分”、有限 Monte Carlo 搜索路径和后续轨迹相互作用；
+悬停残差持久性与无个人等待惩罚可能同时帮助稳定受益者和持续排除，仍不是已识别
+中介机制。它不是学习、场景实证、服务保留或默认部署结论。
+
+另一 DM 已发表 FULL−PRIOR 的 payload-J −.015929915、32 世界全负，这要求将来
+讨论 U32 的实际购买价值时认真面对便宜 PRIOR。但两个面板/信息/延迟不同，
+**不能相加或相减得到 U32_FULL−P_PRIOR**。这没有推翻这里的 U32−P 正结果。
+
+**证据、完整成本和终态。** 冻结执行源 `9b6f493b343c2939b374a1ce21384266d3257456`；
+完整结果/原始独立审查发布 `1e363409be4502f81fb1f91a847d83162a38a325`；
+最后 standing/cleanup 发布 `d2cc6a4ed89fa58228b3a82c693d541898e6d09c`。
+入口为 [compact result](../../runs/uav_radio_uncertainty/b01_correlated_shadow_a01/result.json)、
+[完整数值 reader](../../runs/uav_radio_uncertainty/b01_correlated_shadow_read_a01/reading.json)、
+[原始科学审查与 DM 决议](candidates/uav_radio_uncertainty/NOTES.md#b01-independent-review-and-disposition)。
+
+本批 0 fit/更新；64 个 H256 科学回合、16,384 步，另四个 H8 正确性回合/32 步，
+共 **16,416 native 步**。Worker 380.244 wall /392.749 CPU-s，reader
+2,678.822 wall /2,761.467 CPU-s；峰值 RSS 分别 426,208/402,112 KiB。
+各 pass 都核算 20,529,026 候选 fleet scores，完整 reader 不是免费验证。
+正确性另 4.512 CPU-s、synthetic checks 另 7.949 child CPU-s；source/advice、
+失败启动壳、工程、传输/发表支持未全面计量。二者均支付声明的测量/流量/sounding/
+交付成本，没有实验性的采集价值比较被暗中加入。
+
+唯一主 bulk 在 `wsl_4070:/home/wu/projects/HMASD/runs/uav_radio_uncertainty/b01_correlated_shadow_a01/`，
+129 个 canonical artifacts 共 150,807,102 bytes；`summary.json` SHA256
+`6dca1d6ed767d689b36bcd7aa932e8076a616613ececfeadafb111a03341c140`。
+reader 在同级 `b01_correlated_shadow_read_a01/reading.json`，SHA256
+`099d634bc5ee3536193f36e3e2a76382ca9cb6e0edf9d8f9448d52bab38721dd`。
+另九个 H8 evidence 文件 330,780 bytes 原位保留。compact result 及完整小 reader
+在 Git；原始正面、负面和删失记录没有因结论而删减。
+
+已删除远端 `.git/hmasd-launch-sources/` 下
+`2df8b39b75684520824fa178ccb43788`、`58bb94a971024c3eb35b5215eaa224ef`、
+`c7d012083adb4ec3a05a57514b71f91d`，以及本地
+`temp/directions/uav_radio_uncertainty/`（688,128 bytes）；六个空日志额外回收 0 bytes。
+这些目标净回收 **2,455,527,424 allocated bytes**，无工具阻塞、无移动备份。
+[cleanup.json](../../runs/uav_radio_uncertainty/b01_correlated_shadow_a01/cleanup.json)保留
+精确目标、终态和删除后哈希验证。观察器最后已 drain/stop，无未消费事件；worker、
+reader、科学审查和其他 raw 消费者全结束。P/U32 源码/测试保留，因为它们仍是有用
+能力且 information-cost 包有实际 import；源依赖不表示还有运行中研究。
+
+### 已完整评估、尚未选择的策略搜索候选
+
+资料任务现已完成。本人完整 source/price 在
+[623ab06fb 原始账单](https://github.com/CartmanFatass/My-paper-code/blob/623ab06fb29cba36299e0a3e385267ce3feb2a6f/docs/research/candidates/uav_radio_uncertainty/NOTES.md#episode-search-complete-source-price)；
+Astra/max 独立评估的完整原答、实际阅读覆盖及本人回应在
+[d9183bdf 原始建议](https://github.com/CartmanFatass/My-paper-code/blob/d9183bdf99b1e17f35e568bb6494f30861cdf3dc/docs/research/candidates/uav_radio_uncertainty/NOTES.md#episode-search-original-advice)。
+它是同一独立会话中的 follow-up，复用了其先前审查，不是新盲审；三库/原论文与
+July/G50 阅读的页段、遗漏及限度都保留。本人没有把 adviser 共识当新实验。
+
+建议保留一个未来可考虑购买的问题：**完整回合参数搜索能否让冻结 P0 上的小幅
+上下文读出，优于等 native 曝光的全局校准和已有强普通参照？** Oracle 支持将来
+owner 恢复且 Root 分配后的一次完整探索；Root 已完整阅读并明确 **本次不选择新
+run 或 claim**。`uav_episode_policy_search` 仍 unowned/unactivated/UNSELECTED，
+未创建目录、代码、测试、reader 或实验句柄。
+
+候选合同足够具体，恢复者不应把它改写成任意 ES 配方：原 B08 N5/U50/free-space/
+H256、训练全部发射机 ON、27 运动、四 tick 决策；保留 P0 的 114 合法字段及
+34,715 个冻结参数，用同一次原始 FP32 单行 forward 获得 l0 和第二 ReLU h128。
+定义 `hbar=h/max(1,||h||2)`；CAL 为 `l0/exp(tau)+tanh(b)`，28 参数；CONT 为
+`l0/exp(tau)+tanh(b+W hbar)`，3,484 参数。新参数全零，无 actor 新信息/历史、
+公用动作 coin、teacher、critic 或 Adam。新 head/归一化/fitness/更新用 FP64。
+
+两独立配对 block 各有 CAL/CONT，共四 fit；每 fit 16 iteration，每次 16 Gaussian
+方向，尺度 .05，每方向两全新世界/tape 在正负号和两家族间共享。方向用各 fit
+独立地址流，不将不同维度扰动说成相同。每个扰动策略在完整回合控制全部五 actor；
+fitness 是两世界完整 native J 均值。令 `d_k=(Jplus−Jminus)/2`，scale 为
+`max(sqrt(sum(d_k²)/16),1e−8)`，更新为 `.02/(16*scale)*sum((Jplus−Jminus)*delta_k)`，
+所有方向均保留；**每个扰动策略内部**及更新后中心均把 tau 限于 ±ln2。
+只评四个最终中心，无部分 fitness、排序精英、验证/调参、checkpoint 选择或额外
+中心 rollout。它是 ARS-inspired 明示改造，不是精确 ARS-V1、无偏原始 J 梯度或
+保证单调改进的方法。邻域 fitness 与最终中心存在实质差别。
+
+本次资料审查纠正了一个关键合同错误：**A 为全 ON；ZERO 是物理静默规则**，
+轮换 eligible actor 的 capped 可见用户数为零才关闭该发射机，不是实际服务数。
+沿用 B08 的旧观测后装 mask 语义。匹配参照为 P0_A、已付校准的 temperature-two
+Bstar0_A、Hdirect_A；另保留 G_A、C_A，以及更丰富动作权利的
+P0_ZERO/Bstar0_ZERO/Hdirect_ZERO，不能混称全部 ON。Hdirect 支付 C+P0 及其实际
+T/H 两向量计算；G 随机、C 确定。三个 ZERO 的实践比较不能自动给 learner 增加 gate。
+
+端点评估用 32 全新世界×两固定私有 tape，11 随机程序各 64 回合，C_A 32 回合；
+四 endpoint 对八参照、两 CONTb−CALb、三 ZERO−A，共 **37 contrasts**，20,000 次
+共享 world-bootstrap/640,000 indices，按世界平均 tape、分别保留 block 与所有符号。
+完整读 J、服务/质量、travel、team p10/minimum/zero-service 和计算成本，不加个人
+连续性或物理能源结论。另在每 worker/reader 已付首轮上下文执行 81,920 次零 head
+对照，复用 l0/h/innovation，0 额外 native/P0/RNG；这是有限上下文初始化核验，
+不是初始策略完整 rollout 或全域精确一致断言。
+
+**拟购完整价格：**4 fit；4,096 训练 +736 endpoint =4,832 回合，**1,236,992 team
+steps**、6,184,960 UAV ticks、1,546,240 actor 请求、1,536,000 categorical draws；
+1,024 独立训练世界，32 新评价世界。每 worker 及完整 policy-replay 各支付
+1,392,640 head 请求、至多 1,515,520 P0 forward、71,680 full-C 请求/
+1,935,360 paths/7,741,440 model ticks，helper+C 链路上界 368,435,200。
+CONT 每 pass 读出乘加上界 2,406,481,920；P0 上界 52,182,384,640；
+1,024 方向/1,798,144 normal 坐标、64 次中心更新及其完整重构也在账内。
+标量 reader 另核验 **1,551,072 状态、7,755,360 局部行、418,789,440 power links**，
+所有物理/旧行/mask/政策/更新/完整 return 绑定，不只查 hash。
+
+预算是 worker **.6–2.0 CPU-h**、full reader **.75–2.5 CPU-h**、synthetic 正确性
+**.01–.05 CPU-h**，合计 **1.36–4.55 machine CPU-h**；顺序 node-wall **1.5–6h**，
+另 **14–24 focused support-hour equivalents**，不等于已测人时或 Codex elapsed。
+RSS **.5–1.5GiB/process**；单份 canonical **3–6GB compressed /9–12GB uncompressed**，
+工作空间 **12–16GB**。这些是由 B08/B10 推算的未基准测试估计，不是上限、节点
+准入或免费支持承诺；正确性 native 额外回合当前计为零，未来具体需求须先计价。
+
+继承费用保留：P0 B02 1 fit/114,688 步、81,920 labels、8,000 updates/
+4,096,000 presentations、107.543822 worker+reader CPU-s；Bstar0 已付 256 校准
+回合/65,536 步及 32 final 世界，139.828009 CPU-s 是两个 lineage 校准合计而非
+可对半归属。Hdirect/G/ZERO 无须重 fit，但原始 B07、transmission B05、B08 投入
+以及新每请求 model work 均非免费。Fleet B02–B10 历史合计 **22 fit、2 calibration、
+4,055,080 步**，不能再把其中单批费用重复相加；更早 B01 与 actual-S2 父方向另计。
+
+主要未解决因素是 3,484 维/16 更新是否能取得有信息的搜索，以及普通 CAL 是否
+已经吸收实际增量。完整回合 fitness 没有诊断旧 PPO/critic 失败；B04/B10/S2 也已
+使用完整回合。旧 B05 的 critic-free 完整反事实及其负面结果必须保留。若 CAL
+匹配/胜过 CONT，保留校准价值；若胜 P0 却不胜 Bstar/Hdirect，则强普通参照仍是
+用途判断；若只在较窄权利下胜而输 ZERO，分开表述能力与采用。混合 block、区间
+不确定、稀疏/无动作改变、活跃损害均结束该有限购买，不自动加 seeds、步数、
+head、gate 或修复。确切 seeds、失败规则、序列化/输入绑定和有限 fixtures 尚待
+将来选中后的 L0；现在没有任何新政策收益、运行时间或初始化一致性测量。
+
+### 继续时的边界与所有权
+
+本次资料工作仅有 source/记录读取和整数成本计算，0 新实验、native/model/C/
+allocator/RNG 查询、保存结果 reduction、test/prototype；交接没有启动下一轮。
+Root 原文 disposition 另保存在 [RF NOTES](candidates/uav_radio_uncertainty/NOTES.md#episode-search-dm-response)
+末尾，和 Oracle 建议分开。无悬而未决的科学分歧，无等待生产者或需补读结果。
+
+交接后须 owner 明确继续；状态询问、阅读本节或空余算力不会恢复工作。若将来
+选择策略搜索，先核对当时 RESEARCH 的 pause/lead、原建议前提和强参照，再由
+Root 作投入分配。未归档时可复用此 DM；已归档则依 owner 规则新建 DM、继承
+全部正负证据。建议方向拥有 `experiments/candidates/uav_episode_policy_search/b01/`、
+对应 tests、`docs/research/candidates/uav_episode_policy_search/`、runs 和 temp 路径；
+这些仅是拟议所有权，不接管 fleet、parent、静默/信息或 Claude 的其他问题。
+精确输入发表、适用工程审查和实际节点准入在任何未来执行前完成；旧终态句柄、
+已删 source snapshots 和完成操作不重启。没有外部数据或他人 ACK 是本节尚未
+完成的依赖：**本轮完成，停在 handoff 边界。**
 <!-- DM_USER_WAITING_END -->
