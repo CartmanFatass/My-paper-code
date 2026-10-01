@@ -1,0 +1,76 @@
+{
+  "admission": {
+    "claim_state": "accepted",
+    "state": "accepted"
+  },
+  "artifacts": {
+    "stderr": {
+      "path": "/home/fires/hmasd-wsl/runs/uav_user_waiting/b06_fair_model_read_a01/stderr.log",
+      "state": "present"
+    },
+    "stdout": {
+      "path": "/home/fires/hmasd-wsl/runs/uav_user_waiting/b06_fair_model_read_a01/stdout.log",
+      "state": "present"
+    },
+    "summary": {
+      "path": "/home/fires/hmasd-wsl/runs/uav_user_waiting/b06_fair_model_read_a01/summary.json",
+      "state": "absent"
+    }
+  },
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/6b799786b8d4e9c7c5d6a6eeca49ff91f5f5087b607c7cd31f383c927e1578ee.json",
+  "direction": "uav_user_waiting",
+  "execution": {
+    "exit_code": 0,
+    "exit_witness": {
+      "exit_code": 0,
+      "finished_at_epoch": 1790823776.2936964,
+      "path": "/home/fires/hmasd-wsl/runs/uav_user_waiting/b06_fair_model_read_a01/process-exit.json",
+      "state": "valid",
+      "termination": "process_exit"
+    },
+    "runner": {
+      "recorded_identity": {
+        "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+        "kind": "linux_pid_start_ticks",
+        "pid": 1458133,
+        "session_id": 1458132,
+        "start_ticks": 26192966
+      },
+      "state": "absent"
+    },
+    "state": "exited",
+    "supervisor": {
+      "recorded_identity": {
+        "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+        "kind": "linux_pid_start_ticks",
+        "pid": 1458132,
+        "session_id": 1458132,
+        "start_ticks": 26192963
+      },
+      "state": "absent"
+    }
+  },
+  "explicit_retry": {
+    "eligible": false,
+    "reasons": [
+      "parent has no consistent terminal nonzero native exit"
+    ],
+    "scientific_authorization": false,
+    "successor_ref": null,
+    "supported": true
+  },
+  "explicit_retry_available": false,
+  "kind": "hmasd_operation_status",
+  "manifest_ref": "/home/fires/hmasd-wsl/runs/uav_user_waiting/b06_fair_model_read_a01/launch-manifest.json",
+  "node": "local_linux",
+  "observed_at": "2026-10-01T03:05:07.840497Z",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/6b799786b8d4e9c7c5d6a6eeca49ff91f5f5087b607c7cd31f383c927e1578ee.json",
+  "output_root": "/home/fires/hmasd-wsl/runs/uav_user_waiting/b06_fair_model_read_a01",
+  "record_consistency": {
+    "mismatches": [],
+    "state": "consistent"
+  },
+  "schema_version": 1,
+  "sha": "69347051d55f31cc8a5c9ed71239aabd5d1d9ee6",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/639d93e82dd6450f8bb2ef425902d586"
+}

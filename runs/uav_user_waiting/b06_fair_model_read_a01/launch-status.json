@@ -1,0 +1,11 @@
+{
+  "claim_key": "6b799786b8d4e9c7c5d6a6eeca49ff91f5f5087b607c7cd31f383c927e1578ee",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/6b799786b8d4e9c7c5d6a6eeca49ff91f5f5087b607c7cd31f383c927e1578ee.json",
+  "manifest_ref": "/home/fires/hmasd-wsl/runs/uav_user_waiting/b06_fair_model_read_a01/launch-manifest.json",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/6b799786b8d4e9c7c5d6a6eeca49ff91f5f5087b607c7cd31f383c927e1578ee.json",
+  "pid": 1458132,
+  "runner_pid": 1458133,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-10-01T02:55:33.793055Z"
+}

@@ -5038,3 +5038,299 @@ This DM accepts the implementation for the fixed single B06 comparison.
 Source-level integration and synthetic checks are complete; native
 collection and the full scientific reader remain unexecuted. No useful
 result, activation or deadline outcome is inferred from these checks.
+
+### B06 accepted operation — 2026-10-01 UTC
+
+Published source `69347051d55f31cc8a5c9ed71239aabd5d1d9ee6` was accepted
+at02:45:12.333732Z on `local_linux` for the fixed64-world worker:
+[native manifest](../../../../runs/uav_user_waiting/b06_fair_model_a01/launch-manifest.json),
+[fresh node admission](../../../../runs/uav_user_waiting/b06_fair_model_a01/admission-preflight.json).
+Effective available memory was5,590,331,392 bytes against the4GiB floor.
+The contemporaneous occupancy check still showed the accepted parent B08
+runner active; this overlap is retained as runtime context, with no
+matched-speed claim against the historical remote S/M/U timings.
+
+Same-handle deterministic observation was armed for
+`launch-b06-fair-model-a01` in this native DM's wait state, generation47;
+the first drain at02:45:56Z established consistent running identities,
+not just registration. No worker was restarted. This turn stays active
+through complete collection, the separately admitted full reader and
+independent scientific diagnosis. Early saved episodes and zero observed
+errors do not constitute a read result or authorize a scope change.
+
+### B06 worker collected; full reader accepted — 2026-10-01 UTC
+
+The worker exited0 at02:54:19Z; the same-handle observer established a
+consistent terminal witness at02:54:33Z. It retained all64 complete
+worlds,16,384 native steps,20,480 attempted/completed current-C calls,
+0failed C calls,0fits/targets/updates and no incomplete raw or accounting
+error. Its immutable full summary is1,251,142 bytes, SHA256
+`d434849b6c2fc27ebcb3f6a202686f0a63ea84965624cb4c6b306a6ba91238c8`.
+This is collection completeness, pending the independent result reading.
+The worker process snapshot measured546.425592 wall seconds,
+545.844109 CPU seconds and414,552KiB peak RSS; final serialization and
+other support remain outside the previously declared measurement scope.
+
+The complete reader was separately accepted from the same published
+source at02:55:33.781627Z on `local_linux`, with5,449,162,752 effective
+available bytes above the4GiB floor:
+[reader manifest](../../../../runs/uav_user_waiting/b06_fair_model_read_a01/launch-manifest.json).
+It binds the exact worker digest above and the same64 staged S originals;
+no new native trajectories, baselines or fits are authorized. The parent
+B08 runner was still present at this reader admission. Observer generation47
+returned worker READY; its native-child queue attempt returned code−32600,
+so the live DM drained that event and rearmed the same state through48/49
+for `launch-b06-fair-model-reader-a01`. No operation was restarted or
+migrated. Reading and scientific interpretation remain in progress.
+
+<a id="b06-complete-reading"></a>
+### B06 complete reading — model the deployed fair law, with the full service price (2026-10-01 UTC)
+
+The fixed comparison completed at source
+`69347051d55f31cc8a5c9ed71239aabd5d1d9ee6`: one new S_F physical program
+on all64 previously exposed B04 worlds,16,384 native team steps and0fits.
+The independent reader exited0 at03:02:56Z and returned `VERIFIED_COMPLETE`
+for all64. Its immutable [full reading](../../../../runs/uav_user_waiting/b06_fair_model_read_a01/reading.json)
+is340,560 bytes, SHA256
+`c667a77eaecce043c11d42063e0d4795d754e765f8ed74b4c0f294e6df89b99a`.
+[Compact result](../../../../runs/uav_user_waiting/b06_fair_model_a01/result.json)
+retains all64 signed metric vectors, per-user vectors, source identities,
+full artifact locators, actual cost and the descriptive saved-gap reading.
+The original full worker summary remains immutable at its digest recorded
+above. The sole new raw/outcome copies stay on configured `local_linux`
+under those canonical run paths:64raw files85,882,929 bytes and64full
+outcomes5,105,651 bytes. No new M/S/U trajectory was collected.
+
+Reading covered every native/report/current-C/history/local-grant/age/key/
+search/output record and independently reconstructed all native LRS
+outcomes, full censored gaps, no-link intervals and denial counts. All
+candidate arithmetic was checked from saved compact grants; independent
+physics/priority covered every winner, settlement/prefix and all visited
+candidates at the fixed reports0/60/124/248, not every candidate's physics.
+The reader used40,960 additional C calls,1,105,920C paths/4,423,680C model
+ticks,16,384 native physics checks and133,936 modeled physics checks.
+It rebuilt751,600 local LRS rows (native and selected modeled reading),
+16,384 native fleet allocations and819,200 user-age updates, with0new
+environment constructor/reset/step, fit or baseline allocation replay.
+The1,495,373 exact and32,979 floating result-field checks passed; maximum
+reported floating discrepancy was1.4210854715202004e−14. This does not
+claim independent exhaustive candidate physics or an exact native model.
+
+Both native process identities are now absent. The reader READY event was
+drained on the same generation49 observer despite its code−32600 native
+child queue rejection, consumed at50, and observation was stopped with no
+new producer. Scientific independent diagnosis is being completed below.
+
+**Primary and complete operating points.** The primary is the mean across
+worlds of the episode maximum unserved gap, not the maximum of pooled
+worlds or a training-replication outcome. Each column below is a mean of
+the same64 worlds. Descriptive paired intervals and the fixed10,000-pair
+bootstrap use the prospectively frozen order/seed. These adaptively reused
+development worlds provide neither fresh confirmation nor a population
+protection guarantee.
+
+| Metric | S_F:LRS | S:LRS | M:LRS | U:LRS |
+|---|---:|---:|---:|---:|
+| Episode maximum gap | 12.156250 | 35.093750 | 43.375000 | 33.171875 |
+| Worst-user mean age F_user | 2.467712 | 6.285339 | 9.125000 | 5.807617 |
+| Mean user maximum gap G | 6.855000 | 14.911250 | 15.362188 | 14.878125 |
+| Overall mean age A | 1.545627 | 2.298601 | 2.288806 | 2.259182 |
+| Age p95 | 4.437500 | 9.140625 | 10.421875 | 9.046875 |
+| Mean served users/tick | 16.946411 | 21.180481 | 24.736206 | 21.666870 |
+| Mean quality | 0.226578 | 0.161247 | 0.166544 | 0.159392 |
+| Native J | 0.305223 | 0.344901 | 0.396270 | 0.351154 |
+| Maximum closed gap | 12.156250 | 32.625000 | 41.796875 | 32.125000 |
+| Maximum left-censored gap | 7.078125 | 21.578125 | 26.359375 | 21.125000 |
+| Maximum right-censored gap | 5.609375 | 16.171875 | 18.265625 | 13.734375 |
+| Mean path length m/UAV | 7946.496855 | 8334.169501 | 7800.975175 | 8345.874759 |
+| Transmitter-on UAV ticks | 452.000000 | 637.062500 | 737.062500 | 653.875000 |
+| Capacity-denied user ticks | 5864.625000 | 1707.953125 | 1031.609375 | 1562.578125 |
+| No-link user ticks | 2597.093750 | 5669.843750 | 5435.921875 | 5690.703125 |
+
+S_F−S primary is−22.937500ticks, descriptive paired t95
+[−25.663278,−20.211722], bootstrap95[−25.625000,−20.358984]; all64 worlds
+improve, none tie or worsen (individual differences−53 to−7). S_F−M and
+S_F−U are−31.218750[−34.128905,−28.308595] and−21.015625
+[−23.331034,−18.700216], respectively, with all64 favorable in each.
+F_user, G, overall age, age p95 and mean quality also improve in every
+world against each of these three paid fair references. Closed maximum
+gap improves in all64 versus S, so the gain is not confined to initial
+left-censored waits. S_F's episode maximum ranges9–16ticks; every episode
+serves all50 users and has no zero-service tick.
+
+The service price is material. S_F−S mean service is−4.234070users/tick,
+t95[−4.702665,−3.765475], bootstrap95[−4.688297,−3.781410];63worlds lose
+service and29426053 alone gains+.546875. Against M/U, all64 lose service,
+means−7.789795/−4.720459. Mean quality gains versus S/M/U are
++.065331/+.060033/+.067186 in all64 worlds, but native J decreases by
+−.039678/−.091047/−.045931; J loses in62/64,64/64 and62/64, respectively.
+These are the recomputed LRS J values, not the frozen collector's auxiliary
+greedy J. Quality here can rise across changed physical paths while LRS
+still obeys the same-path greedy quality ceiling. The service term in J
+outweighs that cross-path quality gain.
+
+S_F uses452 transmitter-on UAV ticks per episode versus637.0625 for S,
+737.0625 for M and653.875 for U; every world uses fewer. Mean path length
+is387.672646m/UAV lower than S (44lower/20higher),399.377904 lower than U
+(45lower/19higher), and145.521680 higher than M (38higher/26lower), with
+the latter interval[−14.045798,+305.089157] crossing0. New mean postmove
+height is51.347289m, with1,246.5625/1,280UAV ticks per episode at50m and
+3.90625 at150m. These geometry/Tx changes are observed package behavior;
+there was no separate intervention isolating which change caused the gain.
+
+**Physical activation and remaining model error.** All64 first change an
+executed command or transmitter mask at tick2 while physical/observation
+histories still coincide with the saved S path.37 change both command and
+mask;27 change only the mask at that first tick. Positions first differ
+at tick3 in37worlds, tick7 in26 and tick11 in29426015. Thus waiting for
+motion divergence alone would miss real physical activation. Later whole
+trajectories differ on16,144 command ticks and15,670 mask ticks; they are
+not same-state S counterfactuals. No old-S shadow was run at S_F states.
+
+The new lawful modeled LRS history has3,865false-positive and3,862false-
+negative global contact/user-tick entries across16,384settled ticks and
+819,200user ticks; the recorded per-UAV grant mismatch counts are the same
+in this panel. All terminal settlement ticks were retained.
+This is an absolute consistency reading for the new arm, not a measured
+old-to-new proxy improvement, nor evidence that quantized model state is
+exact. Planner state never received actual private grants, native SINR or
+true positions. The collector retained its frozen greedy measurement law,
+and the saved-SINR LRS replay is valid under the checked absence of grant
+feedback into the physical controller.
+
+**Censored and individual adverse evidence.** All3,200 new per-user
+records and205,940 gap intervals remain available:201,516closed,
+2,413left-censored and2,011right-censored. S_F's longest no-link interval
+per episode averages11.109375ticks versus S/M/U's34.218750/42.750000/
+31.890625. The new mean maximum-gap excess above that fixed-eligibility
+lower bound is1.046875ticks. The physical eligibility sequence has changed;
+this does not violate B05's fixed-path near-floor result or prove global
+optimality. No-link user ticks fall while capacity-denied user ticks rise
+in all64 worlds against each fair reference. These are mutually exclusive
+observed waiting counts, not an additive causal decomposition of what a
+different control/allocation policy would fix.
+
+Every-world aggregate improvement is not every-user protection. Against S,
+3,108user-world maximum gaps improve,54tie and38worsen; mean user ages
+improve for2,543, tie for14 and worsen for643. Against M,267individual
+maximum gaps and1,328mean ages worsen; against U,44maximum gaps and724mean
+ages worsen. These exact vectors and extreme individual changes are in
+`gap_reading.per_user_contrasts`. Against S, the maximum left-censored gap
+worsens by1tick in29426013/54 and maximum right-censored gap by1tick in
+29426047. Nine worlds worsen terminal mean age. No episode or adverse
+user is dropped because the primary is favorable.
+
+For concrete saved-record checks,29426059/user37 has the largest new
+closed gap16 on[110,126), all16ticks without a link.29426023/user3 worsens
+from S's8tick maximum to12 on[126,138), all no-link, while service count
+falls129→77 and mean age rises1.222656→2.171875.29426041/user34 has the
+largest mean-age loss to S:1.761719→3.113281, service136→48 and maximum
+gap12→15; its new[148,163) gap has3denial/12no-link ticks. Conversely,
+29426031/user1 falls from an initial66tick no-link gap to maximum10 and
+mean age13.949219→2.968750. The result's saved witnesses retain exact
+intervals, censor flags and both programs' user records. These examples
+explain scope; they do not identify a unique causal mediator.
+
+**All64 primary/service pairs.** Units are ticks and mean users served per
+tick; row order was fixed before the first query. The full result also
+retains all M/U vectors and the remaining outcomes.
+
+| World seed | S_F max gap | S max gap | Difference | S_F service | S service | Difference |
+|---|---:|---:|---:|---:|---:|---:|
+| 29426000 | 13.000000 | 22.000000 | -9.000000 | 17.195312 | 20.851562 | -3.656250 |
+| 29426001 | 11.000000 | 51.000000 | -40.000000 | 12.125000 | 19.464844 | -7.339844 |
+| 29426002 | 13.000000 | 63.000000 | -50.000000 | 15.753906 | 19.484375 | -3.730469 |
+| 29426003 | 9.000000 | 30.000000 | -21.000000 | 12.593750 | 21.179688 | -8.585938 |
+| 29426004 | 13.000000 | 35.000000 | -22.000000 | 17.421875 | 22.027344 | -4.605469 |
+| 29426005 | 14.000000 | 28.000000 | -14.000000 | 17.742188 | 19.722656 | -1.980469 |
+| 29426006 | 12.000000 | 38.000000 | -26.000000 | 16.601562 | 21.539062 | -4.937500 |
+| 29426007 | 13.000000 | 42.000000 | -29.000000 | 15.699219 | 20.816406 | -5.117188 |
+| 29426008 | 12.000000 | 33.000000 | -21.000000 | 20.019531 | 22.152344 | -2.132812 |
+| 29426009 | 11.000000 | 32.000000 | -21.000000 | 13.710938 | 22.828125 | -9.117188 |
+| 29426010 | 14.000000 | 35.000000 | -21.000000 | 16.992188 | 20.449219 | -3.457031 |
+| 29426011 | 14.000000 | 57.000000 | -43.000000 | 16.921875 | 19.945312 | -3.023438 |
+| 29426012 | 11.000000 | 53.000000 | -42.000000 | 16.175781 | 19.066406 | -2.890625 |
+| 29426013 | 13.000000 | 24.000000 | -11.000000 | 17.066406 | 19.628906 | -2.562500 |
+| 29426014 | 12.000000 | 36.000000 | -24.000000 | 16.359375 | 19.894531 | -3.535156 |
+| 29426015 | 14.000000 | 36.000000 | -22.000000 | 14.484375 | 19.957031 | -5.472656 |
+| 29426016 | 11.000000 | 34.000000 | -23.000000 | 18.859375 | 21.601562 | -2.742188 |
+| 29426017 | 12.000000 | 39.000000 | -27.000000 | 16.906250 | 22.371094 | -5.464844 |
+| 29426018 | 11.000000 | 44.000000 | -33.000000 | 15.062500 | 20.750000 | -5.687500 |
+| 29426019 | 11.000000 | 20.000000 | -9.000000 | 15.183594 | 18.976562 | -3.792969 |
+| 29426020 | 14.000000 | 21.000000 | -7.000000 | 15.683594 | 18.453125 | -2.769531 |
+| 29426021 | 15.000000 | 28.000000 | -13.000000 | 18.812500 | 20.042969 | -1.230469 |
+| 29426022 | 13.000000 | 41.000000 | -28.000000 | 19.238281 | 21.621094 | -2.382812 |
+| 29426023 | 12.000000 | 32.000000 | -20.000000 | 17.671875 | 21.386719 | -3.714844 |
+| 29426024 | 10.000000 | 28.000000 | -18.000000 | 15.667969 | 21.535156 | -5.867188 |
+| 29426025 | 11.000000 | 27.000000 | -16.000000 | 14.574219 | 19.933594 | -5.359375 |
+| 29426026 | 12.000000 | 32.000000 | -20.000000 | 16.472656 | 22.011719 | -5.539062 |
+| 29426027 | 12.000000 | 21.000000 | -9.000000 | 16.785156 | 19.855469 | -3.070312 |
+| 29426028 | 11.000000 | 24.000000 | -13.000000 | 16.039062 | 19.824219 | -3.785156 |
+| 29426029 | 12.000000 | 30.000000 | -18.000000 | 20.734375 | 22.109375 | -1.375000 |
+| 29426030 | 11.000000 | 30.000000 | -19.000000 | 16.789062 | 24.289062 | -7.500000 |
+| 29426031 | 13.000000 | 66.000000 | -53.000000 | 16.402344 | 22.257812 | -5.855469 |
+| 29426032 | 13.000000 | 32.000000 | -19.000000 | 18.449219 | 21.175781 | -2.726562 |
+| 29426033 | 12.000000 | 57.000000 | -45.000000 | 18.769531 | 22.593750 | -3.824219 |
+| 29426034 | 11.000000 | 30.000000 | -19.000000 | 15.605469 | 21.371094 | -5.765625 |
+| 29426035 | 11.000000 | 23.000000 | -12.000000 | 17.789062 | 21.457031 | -3.667969 |
+| 29426036 | 11.000000 | 55.000000 | -44.000000 | 16.902344 | 20.000000 | -3.097656 |
+| 29426037 | 13.000000 | 52.000000 | -39.000000 | 16.382812 | 21.410156 | -5.027344 |
+| 29426038 | 10.000000 | 28.000000 | -18.000000 | 17.554688 | 21.292969 | -3.738281 |
+| 29426039 | 13.000000 | 25.000000 | -12.000000 | 16.972656 | 20.242188 | -3.269531 |
+| 29426040 | 12.000000 | 28.000000 | -16.000000 | 16.875000 | 21.703125 | -4.828125 |
+| 29426041 | 15.000000 | 44.000000 | -29.000000 | 16.800781 | 20.515625 | -3.714844 |
+| 29426042 | 11.000000 | 27.000000 | -16.000000 | 18.578125 | 21.667969 | -3.089844 |
+| 29426043 | 14.000000 | 23.000000 | -9.000000 | 17.914062 | 21.925781 | -4.011719 |
+| 29426044 | 14.000000 | 26.000000 | -12.000000 | 15.417969 | 20.718750 | -5.300781 |
+| 29426045 | 12.000000 | 31.000000 | -19.000000 | 18.238281 | 21.691406 | -3.453125 |
+| 29426046 | 11.000000 | 25.000000 | -14.000000 | 14.074219 | 19.074219 | -5.000000 |
+| 29426047 | 11.000000 | 40.000000 | -29.000000 | 17.292969 | 22.179688 | -4.886719 |
+| 29426048 | 11.000000 | 30.000000 | -19.000000 | 12.972656 | 19.332031 | -6.359375 |
+| 29426049 | 11.000000 | 25.000000 | -14.000000 | 17.660156 | 25.625000 | -7.964844 |
+| 29426050 | 12.000000 | 36.000000 | -24.000000 | 17.355469 | 22.281250 | -4.925781 |
+| 29426051 | 11.000000 | 31.000000 | -20.000000 | 17.460938 | 24.535156 | -7.074219 |
+| 29426052 | 9.000000 | 40.000000 | -31.000000 | 16.851562 | 21.492188 | -4.640625 |
+| 29426053 | 13.000000 | 50.000000 | -37.000000 | 22.007812 | 21.460938 | 0.546875 |
+| 29426054 | 14.000000 | 35.000000 | -21.000000 | 20.070312 | 22.214844 | -2.144531 |
+| 29426055 | 11.000000 | 36.000000 | -25.000000 | 18.359375 | 21.664062 | -3.304688 |
+| 29426056 | 10.000000 | 34.000000 | -24.000000 | 14.468750 | 21.066406 | -6.597656 |
+| 29426057 | 14.000000 | 40.000000 | -26.000000 | 19.519531 | 22.484375 | -2.964844 |
+| 29426058 | 12.000000 | 45.000000 | -33.000000 | 17.800781 | 21.203125 | -3.402344 |
+| 29426059 | 16.000000 | 32.000000 | -16.000000 | 21.718750 | 24.765625 | -3.046875 |
+| 29426060 | 11.000000 | 24.000000 | -13.000000 | 12.523438 | 20.183594 | -7.660156 |
+| 29426061 | 13.000000 | 30.000000 | -17.000000 | 18.765625 | 20.164062 | -1.398438 |
+| 29426062 | 12.000000 | 24.000000 | -12.000000 | 17.433594 | 20.753906 | -3.320312 |
+| 29426063 | 14.000000 | 56.000000 | -42.000000 | 18.238281 | 21.277344 | -3.039062 |
+
+**Actual complete cost.** Worker+reader process snapshots total987.521216CPU
+seconds(0.274311CPUh) and988.383696summed wall seconds. Worker/reader peaks
+were414,552/379,248KiB separately, not a simultaneous summed peak. Snapshot
+counters precede final writes; implementation, scientific/engineering
+review, staging, launch/control and other support are unmetered, not zero.
+The small compact saved-output extraction separately measured.287070CPU
+seconds/.287407wall seconds before final serialization. Its host Python
+process peak was747,200KiB; that is not the native worker's RSS.
+
+Worker C paid20,480calls/552,960paths/2,211,840model ticks and12,837,012
+link evaluations. The physical program paid4,096manager rounds,
+475,136pre-cache requests and357,740actual candidate plans. Its model
+paid1,444,018fleet ticks and7,220,090local LRS row selections, including
+all256terminal settlement fleet ticks across64episodes; it used463,488
+geometry snapshots and361,004,500SINR link entries. No future C call,
+target, fit or optimizer/parameter update occurred. Worker scheduler CPU
+was486.356068seconds, current C6.777131, and raw serialization25.331418.
+All4,096 manager decisions were complete and timely, with0deadline misses;
+maximum measured manager wall was.243515seconds. Current C used its
+ordinary fallback13,270times/53,080UAV ticks, not deadline fallback.
+Report traffic stayed141bytes/round(577,536recurring bytes across the
+batch), with the unchanged400-byte preinstalled map per episode.
+
+The new scheduler's7.599314CPU seconds/episode and historical remote
+S/M/U's3.870323/5.031795/5.223771 are different runtime contexts, not a
+matched-speed experiment. New offline LRS grants/native/age replay totaled
+1.906182CPU/1.905457wall seconds, excluding gap reduction, and was not
+integrated in the native allocation deadline. Parent B08 overlapped both
+accepted B06 processes. Source staging was78,207,842temporary bytes and
+will be removed only after the independent saved-input reader releases it.
+No repair, additional world, true-state ACK, horizon sweep, learner or
+confirmation is selected by this completed comparison.
