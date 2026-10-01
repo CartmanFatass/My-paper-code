@@ -1,0 +1,8 @@
+{
+  "source": "9b6f493b343c2939b374a1ce21384266d3257456",
+  "exit_code": 0,
+  "wall_seconds": 13.187272507988382,
+  "child_cpu_seconds": 7.948977999999999,
+  "peak_child_rss_kib": 258648,
+  "scope": "one frozen pure/synthetic pytest invocation; zero native episodes/current C calls"
+}

@@ -1,0 +1,31 @@
+...................{"reader": {"reference_anchor_geometry_attempts": 7, "reference_anchor_geometry_snapshots": 7, "reference_anchor_link_entries": 1750, "reference_candidate_fleet_scores": 32832, "reference_candidate_fleet_updates": 8014, "reference_candidate_geometry_attempts": 357, "reference_candidate_geometry_link_entries": 89250, "reference_candidate_geometry_snapshots": 357, "reference_candidate_grant_calls": 32832, "reference_candidate_grant_calls_attempted": 32832, "reference_candidate_kinematic_ticks": 357, "reference_candidate_plans": 449, "reference_candidate_plans_attempted": 449, "reference_candidate_service_calls": 32832, "reference_candidate_service_calls_attempted": 32832, "reference_candidate_sinr_entries": 8208000, "reference_candidate_user_sinr_calls": 32832, "reference_candidate_user_sinr_calls_attempted": 32832, "reference_decisions": 7, "reference_model_normal_blocks": 5, "reference_model_normal_blocks_attempted": 5, "reference_model_normal_values": 140000, "reference_model_normal_values_attempted": 140000, "reference_model_signed_values": 224000, "reference_partial_decisions": 4, "reference_prefix_fleet_updates": 390, "reference_prefix_kinematic_ticks": 18, "reference_prefix_update_attempts": 18}, "reader_attempts": 8, "synthetic_rounds": 8, "worker": {"anchor_geometry_attempts": 7, "anchor_geometry_link_entries": 1750, "anchor_geometry_snapshots": 7, "candidate_batch_attempts": 449, "candidate_batch_calls": 449, "candidate_cache_hits": 16, "candidate_conditional_fleet_updates": 8014, "candidate_fleet_scores": 32832, "candidate_geometry_attempts": 357, "candidate_geometry_link_entries": 89250, "candidate_geometry_snapshots": 357, "candidate_kinematic_ticks": 357, "candidate_plans": 449, "candidate_requests": 466, "candidate_sinr_entries": 8208000, "candidate_uncached_requests": 450, "command_bytes_encoded": 64, "command_bytes_sent": 48, "model_normal_blocks": 5, "model_normal_blocks_attempted": 5, "model_normal_values": 140000, "model_signed_normal_values": 280000, "prefix_conditional_fleet_updates": 390, "prefix_kinematic_ticks": 18, "prefix_updates_attempted": 18, "report_bytes_encoded": 2625, "report_bytes_sent": 2625}}
+........................
+=============================== warnings summary ===============================
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:64
+  /home/fires/.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:64: PyparsingDeprecationWarning: 'oneOf' deprecated - use 'one_of'
+    prop = Group((name + Suppress("=") + comma_separated(value)) | oneOf(_CONSTANTS))
+
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:85
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:85
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:85
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:85
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:85
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:85
+  /home/fires/.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:85: PyparsingDeprecationWarning: 'parseString' deprecated - use 'parse_string'
+    parse = parser.parseString(pattern)
+
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:89
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:89
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:89
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:89
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:89
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:89
+  /home/fires/.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:89: PyparsingDeprecationWarning: 'resetCache' deprecated - use 'reset_cache'
+    parser.resetCache()
+
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_mathtext.py:45
+  /home/fires/.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_mathtext.py:45: PyparsingDeprecationWarning: 'enablePackrat' deprecated - use 'enable_packrat'
+    ParserElement.enablePackrat()
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+43 passed, 14 warnings in 10.96s

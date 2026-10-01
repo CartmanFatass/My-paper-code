@@ -1,0 +1,19 @@
+{
+  "source": "9b6f493b343c2939b374a1ce21384266d3257456",
+  "argv": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-s",
+    "--showlocals",
+    "--keep-scratch-on-failure",
+    "--basetemp",
+    "temp/directions/uav_radio_uncertainty/tests/source_checks_a01",
+    "tests/experiments/candidates/uav_radio_uncertainty/b01"
+  ],
+  "host": "Jacob",
+  "native_episodes": 0,
+  "current_c_queries": 0,
+  "synthetic_normal_envelope": 393500
+}
