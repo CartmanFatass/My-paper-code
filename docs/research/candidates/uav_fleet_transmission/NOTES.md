@@ -3614,3 +3614,309 @@ The final publication updates only this notebook, this direction's standing/rout
 affected shared topic 4 and the completed selected-plan section. The superseded substantive
 plan is retained once in the dated research archive; other directions and owner controls are
 preserved.
+
+<a id="post-b05-temporal-source-assessment"></a>
+### 2026-10-01 — Source-only assessment of local hold termination; no study selected
+
+Root read and adopted the completed B05 disposition at `175acdfd7`, then assigned one
+substantive source-only successor assessment: can lawful observation-triggered early
+termination of a four-tick local motion hold preserve useful retained S behavior while
+avoiding harmful continued motion or aggregate outages? This is a temporal-control/use
+question, not another score/temperature/epsilon fit and not a patch evaluated on world
+29630013. No native, policy, model or target query, new outcome reduction, fit, code, fixture,
+pilot, profile or launch is authorized or performed. The arithmetic below uses only source
+dimensions and previously published cost facts. B05 remains closed. Fleet-adaptation's
+separately selected S-prior T/H work is an actual consumer of the retained B05 kernels; its
+controls and immutable assets stay untouched. Waiting's allocation replay and the parent's
+N8 completion/redecision source question remain separate owned work.
+
+I read current published RESEARCH at `4de05b0da41827cf945587003a2476584dac480e`, especially
+topics 2/4 and the completed duration/roster allocation. Their concrete effects are to retain
+competent ordinary fast feedback, distinguish native aggregate service from individual
+continuity, and price changed control rights separately from learning. Root's independent
+`/root/deep_report_review` owns the literature/innovation and selection judgment for this
+source assessment; no duplicate B05 result critic or new learning round is opened.
+
+**Actual observation and action interface.** The current native factory is
+`experiments/candidates/ucope/uav_motion_prefix_b01/environment.py:8`: N5/U50, H256,
+static uniform users, free-space radio, no shadowing, all transmitters on, non-FDMA,
+30 metres per axis per one-second tick and clipping to x/y [0,1000], z [50,150].
+`MultiUAVEnv.step` moves the five submitted commands, recomputes radio/assignments, computes
+the reward, increments the clock and supplies five fresh local rows. There is no acceleration,
+inertia, modeled communication delay or source-enforced four-tick command lock. The native
+interface accepts changed commands on every primitive tick. A command chosen at time t
+controls transition t→t+1; observation at time t reflects the preceding t transitions.
+An off-boundary reaction at t=1 cannot prevent the first transition's outage.
+
+Each existing row is 104 FP32 values: three own-position coordinates; 20 ordered user slots
+of relative x/y and normalized own-link SINR; 10 ordered peer slots of relative x/y/z and
+link SINR; and t/256. User/peer lists contain only links at or above native 3 dB, sorted by
+descending SINR with stable index ties; unused slots are zero. User SINR is encoded as
+clip((dB+10)/50,0,1), so a valid user slot has a strictly positive third field (at least .26).
+Users and peers are anonymous in the row; global identities, team connections, complete
+positions and per-user ages are not supplied. High SINR is clipped, and a full 20-user list
+does not reveal all eligible users. The environment's `info` contains much richer per-agent
+and global diagnostics, but B05's policy boundary passes only that agent's row, own nav,
+absolute tick and private randomness. Diagnostic availability is not actor permission.
+
+There is nevertheless a useful exact count deduction specific to this contract. Let P_i
+be a UAV's received power at one user and let noise be positive. Eligibility requires
+P_i ≥ r(sum of other powers + noise), with r=10^(3/10)>1. Two different UAVs cannot both
+satisfy this inequality for the same user. The native all-on, non-FDMA eligible sets are
+therefore disjoint; global greedy assignment reduces to each station's top ten eligible
+users. The local view contains its top twenty, so
+
+`own_served(t) = min(10, count_nonzero(row[3:63].reshape(20,3)[:,2] > 0))`.
+
+This is a source/algebra deduction, not an evaluated trigger or a new outcome measurement.
+It uses slot presence rather than reconstructing a rounded SINR threshold. It determines
+the current own connection count, including exact own-zero service, despite censoring.
+It neither identifies team service nor says whether a vanished link was handed to another
+UAV. Stable user identity/continuous waiting cannot be inferred from this count. The deduction
+must not be exported unchanged to FDMA, a different threshold/allocation rule, or a sensor
+cap below capacity. The pure radio and assignment source, including its positive noise and
+all-other-transmitter interference, was read directly.
+
+**Where the four-tick restriction actually lives.** B05 `collect.py:51–72` receives and records
+the intervening observations but invokes policies and replaces held commands/navigation only
+at absolute t%4=0. Every episode starts with fresh private policy caches, nearest-waypoint
+nav from its own reset row and a zero command before the t=0 query. There is one common
+predecision observation snapshot; sequential agent queries cannot see other agents' new
+commands before the joint native step.
+
+The restriction is repeated in `b02/controllers._tick`, `FeatureMemo.query`,
+`StudentPolicy.query` and `indexed_uniform`; merely changing the collector would fail.
+The original `LocalController.act` also ingests a row but only calls `_decide` at t%4=0.
+MemoC's `_miss` delegates to that act method. A new temporal wrapper would need an explicit
+off-boundary decision entry, not a fictitious t'=4t, a rounded sampling address or a mutation
+of these frozen modules. `history=False` C replaces its visible-user set at a query; it has
+no persistent unseen-user map. Its model ranks all 27 clipped constant-command four-tick
+trajectories using visible users, stationary visible peers and inferred unknown interference.
+
+Both original S actors are feed-forward, with 114 inputs: row[:103], ten-way current nav,
+and the original analytic fallback flag. They receive neither clock, held command, remaining
+duration nor a recurrent hidden state. The feature/logit cache key is the exact first 103
+FP32 bytes plus nav. Deterministic cached values may be reused, but every sampled decision
+draws anew. Current `indexed_uniform(root,world,t,agent)` uses a private SeedSequence and
+rejects off-grid t; a new version could admit every true integer tick while preserving the
+old construction exactly at multiples of four. No new fit is needed to evaluate the immutable
+actors, but earlier queries change their deployment/commitment distribution.
+
+Nav changes only when an actual decision's fallback is true and the current waypoint is
+within 60m, advancing one waypoint cyclically. The fallback is whether all modeled C commands
+have zero service, not whether the current native own count is zero. S's cheaper analytic
+helper reproduces that flag/nav transition; it is not a free full C score query. A count-only
+gate need not run either helper or full C between decisions. Off-boundary redecision must
+apply the existing nav transition once when it actually queries, keep nav unchanged on a
+continued hold, and never reset navigation/history because of an interruption. The held
+command remains private own state. These details also apply to C/Q/G under any new right.
+
+A source-feasible query adapter can preserve the exact four-step score kernel: on a C miss,
+set the private original controller's nav, parse the current row, call its history-false
+`_ingest(xy, actual_t)`, then call `_decide` directly instead of the cadence-dispatching `act`.
+Recover the original command/scores/served/fallback/next-nav and use the same exact memo key.
+This creates no new physics or score law and avoids falsifying the clock. On a student miss,
+call unchanged `analyze(row,nav)` and the same one-row FP32 actor; query-hit behavior retains
+fresh draws. Synthetic boundary equivalence, private-state/cache restoration, exact nav and
+draw addresses would need verification if implemented. This is a proposed adapter route,
+not tested code or permission to edit the shared/frozen kernels.
+
+**Prior evidence changes the proposal.** [UCOPE B10](../ucope/NOTES.md#2026-09-21-0554-utc--b10-complete-real-paired-credit-does-not-earn-a-retained-policy-gain)
+already tested actual held-velocity KEEP/END choices, every-tick observations, ordinary fresh
+feedback and paid real alternative suffix credit. Nine gate fits / 4,915,200 ticks gave mean
+R_CF−ordinary G J −.0000731732 and failed its original investment rule; positive/negative
+branch effects and deployment exceptions remained. This rules out presenting another adaptive
+termination head or cleaner-credit repair as a new rationale. Its max-two-tick deterministic
+recurrent foundations differ from these useful categorical four-tick S/C/G laws, so it does
+not empirically settle this zero-fit cadence-use question. The distinction is the retained
+capability and actual control contract, not an assertion that UCOPE lacked feedback.
+
+The [completed duration/roster review](../../archive/2026-09-30/RESEARCH-duration-roster-allocation.md)
+declined another purchase, retained ordinary feedback and required a substantive commitment
+reason. Our own [N8 temporal comparison](#b04-complete-reading) and
+[unselected completion-timing assessment](#post-b04-source-only-design) concerned long,
+multi-agent relocation plans and report-aligned redecision; they provide neither an N5
+effect size nor permission to extend those operations. Their local-positive/complete-negative
+and anticipation evidence make full trajectory consequences essential here.
+
+[Registered-service B02](../uav_registered_service/NOTES.md#b02-complete-reading) retained a
+service/path gain while adding seven missed obligations and longer closed gaps; false model
+completion alone did not explain all losses. [Service-age B01](../uav_service_age/NOTES.md#b01-complete-reading)
+retained ordinary W/M and the learner's own-initialization gain, but lawful age was already
+represented in a long adverse gap and L1 lost mean age to both references.
+[Waiting B04](../uav_user_waiting/NOTES.md#b04-complete-reading) satisfied its modeled service
+floor at every decision without establishing complete service preservation; useful U's
+extreme-tail gains carried service/quality/compute costs. These used richer map/report/mask
+contracts and cannot be transferred as N5 local policy scores. They directly weaken any
+argument that an observed own-count drop, a local floor, or a higher p10 certifies continued
+motion is harmful or protects individual users.
+
+**Feasible candidate, with a narrower question.** The most coherent version to cost is
+opportunistic same-policy redecision after a local service loss, compared with ordinary
+every-tick feedback. Its intended contribution would be task use/empirical understanding:
+does limited extra feedback preserve useful committed stochastic behavior at less query
+cost than full feedback? It is not an outage shield or a learned termination method.
+Source evidence establishes feasibility and a real local signal; it does not establish that
+holding caused B05's outages or that this proposal will improve native value.
+
+**Initial DM source proposal, preserved.** One possible extra query per agent per original
+four-tick block: at b=0,4,…,252, query the parent and record s_i(b). At the first off-grid
+t in that block with s_i(t)<s_i(b), query the SAME parent once from its actual row/nav and
+actual-tick uniform; hold the replacement through b+3. Spend the extra query even on the
+old category or a physical alias. Mandatory renewal remains b+4; no same-tick retry,
+zero-motion rescue or threshold tuning. This initial proposal used a block-start count and
+was source reasoning, not a tested or selected controller.
+
+**Final prospective revision from the independent Oracle; still unselected.** Retain the
+one-extra-query budget, but trigger on s_i(t)<s_i(t−1) from CONSECUTIVE fresh observations
+at off-grid t, while the extra is unspent. I accept the source-based correction: a contact
+first gained mid-hold and then lost is missed by a block-start/last-query-zero reference.
+This reasoning uses no outage trace. Every agent stores one previous-count integer, updated
+from the fresh row EVERY tick, including after the extra was spent and at mandatory boundaries.
+Reset has no previous sample and performs the mandatory t=0 query. At t%4=0 query exactly
+once, reset the per-block extra-used flag and do not add a second query for a simultaneous
+count drop. On an off-grid event query the same parent once, apply its nav update once,
+consume a fresh actual-tick uniform and spend the extra even when action/geometry is unchanged.
+Hold that replacement until the next absolute boundary. There is no rolling deadline restart.
+
+Thus the final E has at most one extra query per agent/block and at most one query per
+agent/tick; an initially zero count can rise and then fall before expiry and trigger. The
+Oracle briefly considered an uncapped event variant during the live source exchange, but
+its final prospective recommendation retains this economy budget. The capped bill below
+applies to the final consecutive-count rule. No version was implemented, queried or run,
+and Root has not selected a result study.
+
+H4 keeps the original four-tick program. H1 queries the same parent every primitive tick.
+Both provide necessary comparisons: E−H4 tests added event feedback; E−H1 tests whether its
+selectivity/commitment buys value or lower cost relative to ordinary fast renewal. More query
+times also change stochastic persistence and nav opportunities, so this is the complete
+cadence package, not pure causal value of observation content. H1 redraws the original law
+on every actual query; its per-query epsilon/temperature is unchanged. Neither a new
+exploration-hazard conversion nor repeated use of a block's uniform is silently substituted.
+
+C/Q/G receive the same E and H1 rights, the same row-count gate and own memory, and pay their
+full score queries when they redecide. Ordinary Q05 and Q10 both remain, alongside fixed G
+and C. C/G keep their existing four-step local lookahead even when the issued replacement
+lasts one to three ticks; H1 is receding four-step lookahead. S keeps its original four-step
+trained law with the same changed execution duration. This explicitly separates forecast
+horizon from execution commitment. Late H1/E queries would extrapolate four model ticks even
+when fewer than four mission ticks remain, because the inherited time-free law ignores
+that boundary; actual execution always stops at H256. A truncated-horizon ordinary law is
+a different possible comparison, not an undocumented change to the fixed kernel.
+
+A model-free brake-to-zero would have a lower query bill, but after a loss it can freeze a
+poor position and suppress a useful handoff or recovery. A count-loss signal does not predict
+which new velocity is better. Using C to override only S would instead add a teacher rescue
+package. I would not prioritize either as a supposed safety repair. The original current-only
+parents may also forget a just-lost user at requery; no new memory/map is smuggled into E.
+
+**What could change a decision.** For each immutable S lineage, retain E−H4 and H1−H4,
+and separately E−H1; compare retained S within E/H1 against matched G, Q05/Q10 and C,
+without selecting a per-world best ordinary envelope. Keep the original paid Bstar_L0/T2
+at H4 as a practical alternative; Bstar_L1/H4 is exactly S_L1/H4. An event rule that improves
+native J/service or relevant outages while remaining economical beyond fast controls would
+be a useful conditional package. If ordinary E/H1 captures the gain, retain that ordinary
+capability. If H1 matches or improves on E's value at acceptable cost, event selectivity has
+not earned a special role. If E changes motion but loses complete value, end the rule; an
+observed count drop was not enough to choose a beneficial redecision. Inactive, rare-outage
+or unresolved panels would remain valid boundaries without a sweep, extra worlds or a fit.
+
+The intermediate prediction is actual before-expiry redecision with changed remaining motion
+on some own-count losses, using at most twice H4's logical policy queries and at most half
+H1's. Different visited states/cache misses mean that a corresponding CPU saving is not
+established by the query bound and must be read in the complete comparison.
+The native conjecture is better retention of service/J with shorter or fewer aggregate
+outages, not simply a better local score. Each may fail independently. Complete outcomes
+must retain all per-world/tape J, service/p10/minimum, zero-service count and longest zero
+run, quality, path/boundary/zero-displacement, query/cache work and CPU/wall. The gate's
+eligibility, requests, actual category and remaining-hold physical differences are separate.
+No old-outage trajectory, single-step counterfactual or positive activation screen is needed.
+Fresh complete trajectories are necessary because joint motion changes interference, later
+observations, random redecisions and handoffs. Team outage improvement would still not be
+individual continuity; any such additional outcome claim needs actual per-user gaps/ages
+read from evaluator connections, never supplied to the gate.
+
+**Complete prospective bill for that candidate; not a launch contract.** A complete exploratory
+panel could use 32 fresh worlds, two private stochastic tapes, immutable S_L0/S_L1 and the
+four ordinary C/Q10/Q05/G laws, each under H4/E/H1. Each deterministic C mode needs one
+episode/world; the other five laws need two. That is 33 episodes/world, plus two Bstar_L0/H4
+episodes: **1,120 H256 episodes / 286,720 native transitions / zero new fits, training labels,
+optimizer calls or calibrations**. No seed range is reserved by this assessment. The original
+29630000 panel is excluded as a new final panel; actual fresh seeds and fixed contrasts belong
+to a later selection. Both inherited fit histories and paid calibration costs remain incurred.
+
+| Work in the proposed complete worker | Source-derived count or ceiling |
+|---|---:|
+| Policy queries per H4 / E / H1 episode | 320 / at most 640 / 1280 |
+| Ordinary C/Q/G queries, before memo savings | at most 501760 |
+| Student queries including the paid H4 reference | at most 307200 |
+| Total queries / indexed stochastic draws | at most 808960 / 737280 |
+| G score-tail probability constructions | at most 143360 |
+| Ordinary candidate trajectories / modeled ticks | at most 13547520 / 54190080 |
+| Ordinary candidate / setup radio links | at most 1083801600 / 50176000 |
+| Student analytic setup+extreme links / one-row forwards | at most 43008000 / 307200 |
+| Potential off-boundary E gate checks | 337920 |
+| E own-count decodes, including block starts | 450560 (9011200 slot-presence comparisons) |
+| Native explicit resets plus factory reset | 1120 + 1 |
+| Native dense radio power slots, including resets | 79156275 |
+
+The radio ceilings deliberately assume every query is a miss with 20 users and four peers;
+they are conservative and do not assert that all agents can simultaneously attain that
+geometry. The gate itself uses no analytic helper, full C, actor or shadow rollout. All
+1,433,600 scored observation rows already come from native steps; their 104-float payload
+is 596,377,600 bytes before compression. This is an in-process data volume, not a claimed
+radio transmission budget. There is no modeled sensor energy or physical processing delay;
+additional gate/query CPU is measured and cannot be called free deployment sensing.
+
+The full reader must reconstruct the variable decision/hold/nav state machine from every
+saved row, independently recover own counts and actual native connections, replay every
+ordinary decision on its actual history, reconstruct every S helper and one-row actor output
+(including deployed cache hits), and check all distributions/absolute-tick addresses,
+physical aliases, native metrics and paired contrasts. It adds the same worst-case ordinary
+model work and up to 307,200 actor rows, plus all native-array reductions, with zero new
+environment steps. The source count proof should receive focused synthetic checks and the
+new scheduler/RNG/replay path independent engineering review if selected; none is run now.
+All trigger bookkeeping, storage/compression, bootstrap/readback and asset/source verification
+belong in the bill, not just neural inference.
+
+B05's published 140.041 enclosing CPU seconds for 416 episodes supplies a scale, not a timing
+prediction for new off-grid cache/geometry regimes. The new panel has 2.69 times its native
+exposure, up to seven times its ordinary requests and five times its full-reader student rows;
+full-C misses and link work can grow further. Allow roughly **5–20 worker plus 3–15 reader
+CPU minutes (8–35 combined)**, **6–10 active support hours** for implementation/checks,
+independent engineering review, scientific reading and publication, **0.7–1.3 GB canonical
+raw**, **1–2 GB temporary accepted-source snapshot**, and **0.6–1.2 GiB process memory**.
+These are uncalibrated planning estimates, not hard runtime bounds or resource admission.
+No remote profiling/repair is needed for this source task; the known GCC recurrence remains
+a separate actual-launch consideration. No backup or duplicate raw-retention chain is priced.
+
+Selected inherited evidence through closed B05 has already incurred eight fits, two paid
+calibrations, 1,794,048 native transitions and 2,483.157 measured CPU seconds under differing
+timing scopes/hosts; older UCOPE/N8/parent/count branches and unmetered support remain
+separate sunk costs. If this full candidate later completed, the selected inherited native
+total would become 2,080,768 with the fit/calibration counts unchanged. A learning gate or new
+actor fit is not justified by the source question and is not hidden in the estimate.
+
+**Recommendation to the allocation review.** The interface supports a genuine, inexpensive
+local service-loss trigger with no new observation field. It requires a new temporal control
+and query contract, and a complete matched fast-feedback comparison. I recommend this
+bounded zero-fit cadence-use formulation over an outage-shield claim, a brake-only repair or
+another termination learner if Root chooses to buy the temporal question. I do not infer that
+the added right is likely to help from the B05 outage witness, or recommend spending without
+the ordinary H1 comparison. Declining this purchase is scientifically defensible given UCOPE's
+negative development history, the lack of evidence that four-tick holding caused the losses,
+and the support bill; it would not refute early feedback or close the retained-control question.
+Root's ongoing independent allocation review compares that value with the separate N8 source
+candidate. This note completes the authorized source answer and selects no result operation.
+
+The load-bearing current code bytes are recoverable at the published revision above and the
+unchanged B05 source `54c57af8d`. SHA256: native environment `fb67554cf911adc9d3260a2a7f16d1773921c295646cb46beb4ba1247fec599e`;
+pure radio `db3464803b1a5aa9c9504096810dc971266a6bd7eba1c31dfe79e7d8d903f3cc`;
+adapter `8b42c1c3e7ef44cb814f79225b4af944b1018ad764dfeb17e9e1cc294df79d40`;
+original C `b5fdfbfe2718ee693c9ed1d7aeb8bbb6c5c59964ec6c56c5bb35be8b685f23d2`;
+fleet helper/MemoC `a2bbbdb877bd988590472a41c336d934a0431b5c560c7e80225cbb630fc3d522`;
+fleet policies `fba732164b07d80fc2f901e6545e6ca281c7db39cd89f9e61cc49bdb40ba4efd`;
+B05 collector `d5b0fd092eab4ef10c617aee2622a97c14c6af178fedf22f277f27599478b044`;
+B05 kernel `b6a018614df3ee4e32d41d6fd5550850deb8bfe0ec02cf53b6b5efd1291bb986`.
+Only source/records and static count algebra were inspected in this assessment. No old raw
+array was reduced and no policy/model/actor/environment was imported or queried.
