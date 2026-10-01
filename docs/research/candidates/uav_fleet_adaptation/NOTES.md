@@ -12088,3 +12088,36 @@ through all worker/reader consumers; remove it at measured final cleanup.
 The selected output tag is `b11_silence_commitment_a01`. Exact source is published
 by the following owned-path commit before fresh actual-node admission. No result
 has been launched yet and there is no accepted B11 handle to retry or migrate.
+
+
+<a id="b11-accepted-operation"></a>
+### B11 one accepted production worker/full-reader chain
+
+Exact source9746096f10070ec8646a8155c0ad183edf703920 was committed and published
+before execution. The configured remote fetched that object successfully.
+Its existing Git automatic-GC warning remains `bad tree object
+dfe82c9813ee82191abb8385cc12a6886fd0a77b; failed to run repack`; no control/Git
+repair was attempted here. Fetch, current source materialization and admission
+succeeded, so this is not a B11 execution refusal. Shell gitstatus startup
+warnings likewise did not change the accepted command or input bytes.
+
+The single outer supervisor `fleet_b11_silence_commitment_a01` correctly passed
+one shell-quoted command string; at13:20:13.550407UTC the native B11 kernel
+accepted the one fixed worker/reader on wsl_4070. [Native manifest](../../../../runs/uav_fleet_adaptation/b11_silence_commitment_a01/launch-manifest.json),
+[preflight](../../../../runs/uav_fleet_adaptation/b11_silence_commitment_a01/admission-preflight.json),
+and [exact config](../../../../runs/uav_fleet_adaptation/b11_silence_commitment_a01/config.json)
+are collected. Native manifest remains authoritative for argv/node/process/source.
+Fresh physical/effective memory14639087616bytes passed4294967296byte floor.
+All expected192episodes/49152steps/0fits and original P0 digest match the contract.
+
+Claim: `/home/wu/projects/HMASD/.git/hmasd-admission/79fc1427521e90dda2b970b0949b5c94940837cc1912ead025fe6a0e8dbd0fe9.json`.
+Managed input snapshot `4b40d322a0cb4b869941c82e63111b98` and the one staged P0
+remain live through collection. Canonical bulk stays at the manifest's remote
+run directory; initial local collection contains only compact bindings.
+
+`tools/hmasd_wait.py` was armed against this exact handle, generation1,
+PID2312882, with the owned request
+`temp/directions/uav_fleet_adaptation/b11_wait_request.json`. First drain
+observed accepted/consistent/running original runner and supervisor,0probe
+errors. Native child remains active through the complete reading. No future
+queue delivery or scientific conclusion is inferred from registration.
