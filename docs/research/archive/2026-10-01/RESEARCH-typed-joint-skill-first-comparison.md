@@ -37,4 +37,3 @@ Root 同时授权一个必要的窄共享配置例外：如需依赖隔离，在
 允许安装必要隔离依赖并下载唯一固定 Laya 权重／tokenizer；任何模型／原生技术探针仍用已发表源和实际准入。
 Claude旧方向只读复用、所有权与暂停不变；FSD/PPC、G33、Milan范围不变。此前 RF、静默承诺与 CAL/CONT 均已完整收尾。
 [原提案](https://github.com/CartmanFatass/My-paper-code/blob/09a69ed0e7bd349e1f1b0cf1d80b549d5bd2d72e/docs/research/candidates/typed_joint_skill_decision/OWNER_PROPOSAL_20261001.md)、[资产与完整构造](https://github.com/CartmanFatass/My-paper-code/blob/09a69ed0e7bd349e1f1b0cf1d80b549d5bd2d72e/docs/research/candidates/typed_joint_skill_decision/NOTES.md#b00-asset-and-first-comparison)、[已选合同／原评审与处置](https://github.com/CartmanFatass/My-paper-code/blob/09a69ed0e7bd349e1f1b0cf1d80b549d5bd2d72e/docs/research/candidates/typed_joint_skill_decision/NOTES.md#b01-selected-contract)。
-
