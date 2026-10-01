@@ -140,3 +140,4 @@ conditional-action models do not guarantee this local PPO result or make 54 cate
 are preserved in full, with the original 13-program price, revised 15-program recommendation
 and Root adoption kept separate. [Retained B08 capability and ordinary alternatives](../../candidates/uav_fleet_adaptation/NOTES.md#b08-complete-reading).
 
+The completed-result interpretation is linked from the current index above.
