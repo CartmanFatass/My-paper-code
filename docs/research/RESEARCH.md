@@ -2048,107 +2048,159 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 ### Parallel allocation: independent work and rolling succession
 
 <a id="root-successor-designs-20260930"></a>
-**Four native DMs continue substantive work across the next learning/use choice, local
-service allocation, planner amortization and ordinary stochastic control.** Fleet B06 is fully
-read, independently diagnosed, published and cleaned. Root read the complete result, original
-Critic and DM response and adopts the exact-mixture stop while retaining the conditional P/B*
-capabilities and positive component evidence. The same `dm_fleet_adaptation` now owns the
-bounded stochastic-target source question below with Astra Max Oracle; no successor fit,
-implementation or result study is selected there. `dm_user_waiting` owns the selected M/S/U saved-path
-allocator comparison, `dm_parent_adaptation` the fixed learned-top2 computation comparison,
-and `dm_fleet_transmission` the fixed score-directed ordinary G comparison.
-The existing leads retain question continuity; Oracle/helpers are not DMs and four substantive
-assignments do not imply four admitted workers. Forecast and service-age remain reserve.
+**Four native DMs retain substantive assignments: one selected learning study, one selected
+allocation replay and two bounded source/design questions.** The same `dm_fleet_adaptation`
+owns the S-prior stochastic-target comparison selected below; `dm_user_waiting` owns the
+unchanged full M/S/U allocation comparison through a separately selected local A02 recovery.
+`dm_parent_adaptation` assesses exact reuse for the already-positive two-opportunity planner;
+`dm_fleet_transmission` assesses lawful early termination of local motion holds. The latter
+two assignments select no result study. Astra Max Oracle owns detailed innovation and
+independent challenge using the cumulative records, all three libraries and needed primary
+web passages. Helpers are not extra DMs, and four substantive assignments do not imply four
+admitted workers. Existing leads retain their questions; Claude's pause/ownership is unchanged.
 
-Astra Max Oracle owns detailed idea discovery and independent criticism using cumulative
-research, all three local libraries and needed primary web passages. Root read the complete
-waiting allocation recommendation and its source-derived cost response, directly checked the
-radio/observation/history premises, and selects the bounded replay below. The new local right
-can change continuity while preserving fixed-path service counts; highest-SINR allocation
-already maximizes fixed-path quality/J. Tail benefit and its quality price remain empirical.
-Original M/U/S/K results and contrary cases remain intact. No live timing/integration or learned
-follow-on is implicit in the purchase.
+Root read the complete count B06, parent B07 and ordinary G B05 results, original independent
+criticisms and DM responses. It adopts the exact count-mixture and fixed learned-shortlist
+stops while retaining useful P/B*, ordinary planning and scoped learned evidence. Parent
+L2_E−K2_E is −.000885878J [−.002373417,+.000136034], with one gain, three losses and twelve
+identical worlds at similar complete CPU; the suffix-tail witness prevents blanket dominance.
+G retains useful tail/quality/path tradeoffs without established mean-J superiority over Q10;
+S_L1−G retains +.023431J [+.012843,+.033524], while S_L0's J increment is unresolved.
+All retained-policy outages remain adverse evidence. These completed comparisons change
+capability/use judgments, not the number of independent training instances. Each DM has
+published and cleaned its completed study; no added evaluation or refit follows automatically.
+[Parent complete reading](candidates/uav_parent_adaptation/NOTES.md#b07-complete-reading),
+[G complete diagnosis](candidates/uav_fleet_transmission/NOTES.md#b05-independent-disposition).
 
-Root also read the complete N8 next-allocation review and both original N8/parent result
-critics. It retains the demonstrated anticipation capability and declines the priced earlier-
-replanning extension now: that narrower renewal-law question has a substantial engineering
-bill and does not address the newly exposed decision-economics difficulty. The [complete
-question, independent answer and resolved decision](archive/2026-09-30/RESEARCH-n8-next-allocation.md)
-are preserved. Oracle `deep_report_review` then completed the separate ordinary stochastic
-control assessment; Root read its entire answer, the DM's full source price and response,
-verified the score/decoder premises, and selects G's complete comparison below. This tests
-ordinary use and changes the reference for future learning; it does not explain S's gains.
-No count comparator, accepted operation or other owner's scope changes mid-study.
-DMs own implementation, review, actual-node admission, complete interpretation, publication
-and cleanup without per-step Root acknowledgment.
+The local allocator purchase remains a separate causal lever on already-demonstrated motion
+and radio programs. Its richer local subset-choice right can change individual continuity
+while preserving fixed-path served counts; highest-SINR already maximizes fixed-path quality/J.
+Its complete outcome and quality price remain unread until the selected recovery and reader
+finish. No learned follow-on, live integration or hardware deadline claim is implicit.
 
-Root read the complete October1 independent next-allocation recommendation and DM source
-assessment and **selects neither actual-S2 learning nor transfer-only evaluation now**. The
-managed-proposal conjecture remains distinct, and all fixed transfer assets are available; this
-is a marginal-value choice after complete all-on and count results, not a technical blockage
-or a refutation of managed learning. The two-fit comparison remains2560H256 episodes/655360
-steps, estimated2–4worker CPUh+15–45reader minutes and5–9support hours, with same-data CAL
-and transferred all-on CAL/CONT/B* controls. The optional transfer-only purchase remains384
-episodes/98304steps/0fits,30–60worker+10–25reader CPU minutes and3–6support hours. Neither
-is an obligatory gate. This decision stands independently of G’s eventual outcome.
-[Complete reserved design and original independent corrections](https://github.com/CartmanFatass/My-paper-code/blob/1eceb000eb2955e4c7f9f09000025775e3eb5bf9/docs/research/candidates/uav_parent_adaptation/NOTES.md#s2-development-independent-disposition),
-[completed source/feasibility challenge](candidates/uav_fleet_adaptation/NOTES.md#post-b06-source-allocation).
+**Actual-S2 learning and transfer-only evaluation remain unselected.** Root retains the complete
+October1 independent recommendation and DM challenge. The managed-proposal conjecture and all
+fixed assets survive; this is a marginal-value decision, not a technical blockage or refutation.
+The two-fit design remains2560H256 episodes/655360steps, estimated2–4worker CPUh plus15–45reader
+minutes and5–9support hours. Transfer-only remains384episodes/98304steps/0fits,30–60worker plus
+10–25reader CPU minutes and3–6support hours. Neither is an obligatory gate, and G's completed
+result does not automatically reopen either.
+[Reserved design and original corrections](https://github.com/CartmanFatass/My-paper-code/blob/1eceb000eb2955e4c7f9f09000025775e3eb5bf9/docs/research/candidates/uav_parent_adaptation/NOTES.md#s2-development-independent-disposition),
+[complete source challenge](candidates/uav_fleet_adaptation/NOTES.md#post-b06-source-allocation).
 
-A separate independent review found no worthwhile new duration/roster purchase at this boundary.
-Root accepts that value/cost judgment while retaining the positive capabilities, adverse evidence
-and broader questions; Claude’s paused ownership is untouched. The [complete original review and
-Root decision](archive/2026-09-30/RESEARCH-duration-roster-allocation.md) are retired as a completed
-review. Its strongest charging-scheduling candidate substantially overlaps the already completed
-persistent-service B05, whose outage repair did not satisfy the full service/energy use contract.
-
-The completed static-count comparison supports revised-interface parameter reuse while
-ending its finite mixture recipe. The allocator purchase tests a distinct causal lever on
-already-demonstrated motion/radio capabilities. Root accepts the substantial support costs
-for these selected questions. G adds an ordinary use/reference comparison, while L2_E tests
-allocation of a fixed planning budget. The failed parent retention target remains contrary
-evidence. Actual-S2 remains an unselected reserve. The fourth DM’s current substantive work
-is the bounded source question below, with detailed innovation and independent criticism by
-Astra Max Oracle. No new acquisition or fifth DM is selected.
+The earlier G_E/A_E option-completion timing proposal remains declined at its documented
+knowledge/cost boundary. Root corrected the initial wording of the new parent source question
+when it overlapped that exact proposal; a completed ranker failure does not reopen it. The
+[original full review and decision](archive/2026-09-30/RESEARCH-n8-next-allocation.md) remain the
+basis for this limit. The separate [duration/roster review](archive/2026-09-30/RESEARCH-duration-roster-allocation.md)
+also remains applicable; neither review permanently forbids a substantively different question.
+DMs own implementation, review, admission, full interpretation, publication and cleanup without
+per-step Root acknowledgment. Root owns the cross-question investment choices recorded here.
 
 <a id="stochastic-target-source-root-question-20261001"></a>
-**Changed training target: source-only question, no selected experiment.** Can learning a useful
-stochastic control distribution develop retained local-policy capability beyond unchanged reuse?
-P exceeds deterministic C in the completed native comparison, and further one-hot imitation
-does not supply an improvement objective merely by reducing label loss. That motivates a
-different target, without identifying entropy or imitation as B06’s failure cause. Hypothetical
-exact cloning under matched interfaces would reproduce C; whether C is determined by the
-student’s features, representable by its network or reached by CE fitting remains unestablished.
+<a id="stochastic-target-selected-root-decision-20261001"></a>
+**Selected: two fixed-data fits of a modest S-prior control change, with direct-use controls.**
+Root read the complete new Oracle recommendation, the DM's source-derived feasibility/bill and
+consequential primary passages. C's N5 `history=False` decision is source-determined by the
+student's lawful observation slice and predecision navigation. That does not prove finite-MLP
+realizability or CE convergence. P's native advantage over C and hard-continuation losses motivate
+preserving useful stochastic behavior, without identifying entropy or imitation as the cause.
 
-The same fleet-adaptation DM supplies lawful feature/target interfaces and complete source-derived
-costs. Oracle checks prior project attempts, all three libraries and needed primary passages,
-constructs a consequential comparison or recommends stopping. Existing G/Q laws are possible
-teacher/reference candidates, not assumed superior targets or extra arms in the accepted G study.
-Unchanged S, identity-like self-distillation, ordinary smoothing/entropy control and direct reuse
-are relevant simpler alternatives. Successful cloning need not improve on its teacher; better
-local model scores need not improve native J. A proposal must say what useful knowledge or
-capability it could add, with distinct outcome implications and all original adverse evidence.
+For original P0's decoded FP64 law p, C's27 local four-tick scores s and selected category c,
+use r proportional to p*exp((s−max(s))/.014), then T=.9p+.1r. The matched ordinary learned
+target is H=.9p+.1delta_c. Exactly flat scores return p.copy() for T. Retain all27 ordered
+categories, physical aliases, zero support, original private one-uniform flat-CDF decoding,
+each direct teacher's actual history/navigation and private score cache. Direct T/H reuse
+MemoC's already-computed lawful features; redundant analytic-helper work must not inflate an
+amortization claim. The native conjecture is useful limited guidance beyond unchanged P,
+not higher proxy value than H: H's conditional proxy expectation is at least T's. The score is
+not native continuation value; the target TV bound of.1 does not constrain off-data fitted
+behavior or Adam parameter displacement. T/H differ in strength and fallback as well as score
+information, so their comparison identifies the complete target package, not entropy or an
+isolated full-score mechanism.
 
-This assignment buys source reasoning only:0new fits, native/model/controller/actor queries,
-outcome reductions or implementation. Source-review/support time is unmetered, not zero. If a
-concrete experiment is proposed, acquisition, labels, fitting, native/model work, full reader,
-support and retention must be priced before Root selects it. A reasoned stop is valid; neither
-a new architecture nor a positive pilot is required. The other three selected studies keep their
-owners, inputs and interpretation contracts.
+Reuse the paid F0 N5 archive and P0 tensors with the original zero count branch: phase sizes
+40960/61440/81920,30/20/20epochs,8000updates and4096000presentations per fit, original F0
+shuffle order, Adam/clip and full-network exposure. This is **2fits/16000updates/8192000
+presentations**, with0new acquisition or calibration. Later old rows came from F0's greedy
+predecessors, not the new teachers. Both new fits use the same soft CE: FP32 network logits
+cast to FP64, FP64 log_softmax/targets, per-row weighted sum and batch mean, with gradients
+back to FP32 parameters. Paid F0 remains the same archive/init/order/exposure hard-target
+reference, but its original FP32 hard-CE kernel differs; an F0 contrast is not a bitwise
+loss-kernel-isolated target effect. No third numerical-control refit is selected.
 
-**Actual compute placement.** The configured local_linux and wsl_4070 are distinct physical
-Windows hosts (AMD Ryzen 7 8745H and Intel Core i9-13900H). The earlier waiting and fleet-count
-worker/reader chains have completed on wsl_4070; N8 T/G2/A2 and parent B06 also finished their
-accepted local chains. All four prior studies are fully read, independently diagnosed, published
-and cleaned. New selected work uses the configured remote-first placement with fresh actual-node
-admission; an actual remote input or resource constraint may justify local use. Existing accepted
-operations keep their node and identity.
-Any new overlap needs fresh memory/occupancy admission and explicitly conditional timing.
-Preserve actual interpreter, node identity and published source; do not create a new resource
-management mechanism. Completed real-deadline comparisons retain their recorded hardware,
-accepted windows and observed fallbacks.
+The complete fresh panel is32common N5/U50/H256worlds with two private tapes for P0, B*0,
+paid F0, learned T/H, direct T/H, G, Q10 and Q05; deterministic C runs once per world:
+**672episodes/172032new native steps**. All arms use the B06 initializer. Equal numeric seeds
+do not pair these layouts with the completed G study. Freeze new world/tape addresses, cyclic
+arm order and world-cluster bootstrap before outcomes. The primary learnedT−learnedH native J
+is read with all retained/direct/ordinary references, service, quality, p10/minima/outages,
+travel, signed adverse worlds, target/fit activation and complete computation. Average tapes
+within worlds. One parent/data instance with two objectives is not independent training
+replication, reliability, or a claim that learning is necessary.
+
+The complete target construction pays163840target rows and at most81920shared P0 forwards;
+final T/H diagnostics pay163840endpoint rows. The worker makes112640full-C requests and at
+most225280neural rows outside fitting. The full reader reconstructs all81920old C/feature/target
+records and all928old/new files/237568saved ticks, paying194560C requests and389120neural rows,
+with0new native transitions. Source-derived uncached ceilings include3041280worker and5253120
+reader candidate paths; actual cache work and serialization/transfer costs remain measured.
+No optimizer replay, learned-history C/P shadows or counterfactual native branches are added.
+
+Root accepts **10–30 combined worker/reader CPU minutes** and **6–10 support hours** as estimates,
+not admission, caps or measured runtime; new canonical evidence is estimated.4–.8GB and process
+memory.8–1.5GiB, plus a measured temporary snapshot and necessary hash-verified input staging.
+The old F0 archive remains canonical. Broader B02–B06 plus this study would total14fits,
+2calibrations and2539560native steps, adding measured new CPU to the prior3323.067seconds;
+older B01 and other branches/support remain separate incurred costs. The support bill is the
+principal investment; Root buys it for a constructive change of learning objective with paid
+data and strong learned/direct ordinary alternatives.
+
+A useful gain beyond retained references at a worthwhile native/cost position would support
+considering a separately selected independent replication. A useful H alone favors ordinary
+preservation-plus-C supervision. Useful direct T/H without useful actors preserves an ordinary
+capability and ends this finite fitting route. Only beating damaged F0, merely preserving P,
+proxy-only gains, active adverse results or uncertainty end this purchase without automatic
+DAgger, architecture/target repair, tuning or more worlds. No positive teacher pilot is required.
+[Complete source/price and original advice retained by the DM](candidates/uav_fleet_adaptation/NOTES.md#stochastic-target-concrete-price).
+This applies familiar distillation and regularized-improvement constructions; it is not an
+algorithmic novelty claim or a transfer of native-value guarantees.
+[Policy Distillation §§3.2–4.2](https://arxiv.org/pdf/1511.06295),
+[CSIL primary pp.3–5, NeurIPS2023 id2f0435cffef91068ced08d7c7d8e643e](https://arxiv.org/pdf/2305.16498).
+
+<a id="temporal-source-allocation-20261001"></a>
+**Two bounded source questions, no new result execution.** Parent DM and Astra Max Oracle assess
+whether exact segment/state/barrier reuse can make the already-positive two-opportunity A2
+planner economical while preserving its complete decisions, reports and outcomes. The old
+review already says B06's recurrence evaluator is not drop-in and estimates3–6adapter/support
+hours; this assessment must use that fact and the uncompressed reader bill, not price it as
+free or repeat the declined G_E/A_E timing proposal. Fleet-transmission DM and the same Oracle
+assess whether lawful observation-triggered early termination of a4-tick local motion hold is
+a useful distinct control question, with all extra sensing/query/decision rights and costs
+matched for ordinary C/Q/G. Known outage worlds cannot serve as a selected fresh evaluation.
+
+These assignments permit reading source and paid evidence only:0new model/policy/native
+queries, outcome reductions, fits, targets, implementation, prototypes or benchmarks. Prior
+service-age, waiting, temporal and July/external-review coverage must be checked; all three
+libraries supply primary evidence rather than novelty by omission. Full comparison, distinct
+outcome implications and complete worker/reader/support/retention costs precede any selection.
+A justified stop or materially better adjacent proposal is valid; DM count creates no obligation
+to manufacture experiments. The selected T/H and allocator studies remain independent.
+
+**Actual compute placement.** local_linux and wsl_4070 are distinct physical Windows hosts
+(AMD Ryzen7 8745H and Intel Core i9-13900H). Parent B07 and G B05 have finished their original
+local/remote chains. The remote GCC interpreter then failed in waiting A01; the bounded
+[recurrence diagnosis](../../runs/runtime_repair/cpython_20261001_recurrence/diagnosis.json)
+localizes the fault without identifying a cause. Root selected a new local A02 allocation
+recovery and local placement for T/H, each subject to fresh actual-node admission and complete
+input bindings. This operation-specific placement does not change global runtime configuration
+or establish that local execution cures the remote fault. Accepted operations keep their node
+and identity; new overlap requires fresh memory/occupancy evidence and conditional timing.
+Completed deadline comparisons retain their recorded hardware, windows and observed fallbacks.
 
 The [retired initial four-study allocation](archive/2026-09-30/RESEARCH-four-study-initial-allocation.md)
 preserves its complete selection reasons, costs, resource decisions and source revision.
+
 
 <a id="n8-planner-amortization-root-decision-20260930"></a>
 **`uav_parent_adaptation`: B06 complete; retain planning and conditional prediction capability.**
@@ -2641,6 +2693,33 @@ Completed continuity selection, including the full independent review, Pro answe
 [已完成建设性探索方法审查、独立异议及双方实际修改](archive/2026-09-28/RESEARCH-constructive-exploration-method.md)。
 
 ### Shared runtime diagnosis
+
+**2026-10-01 recurrence: the GCC mitigation has not eliminated interpreter failures.**
+The remote waiting B05A01 exited SIGSEGV at00:27:41UTC. Version-matched Python frames place
+it in `json/encoder.py:296`, traversing the per-trace progress summary. Core-backed object/type
+slots and registers show a function object where FOR_ITER requires an iterator, followed by a
+NULL iterator-method call. The prior corruption/incorrect operand production remains unknown;
+this localizes the failure without diagnosing JSON, NumPy, the compiler or hardware.
+
+Mapped core-backed GNU notes bind the new GCC interpreter, NumPy and libc to their disk build
+IDs. Torch is absent from this core's mappings. The entire executable `.text` range is absent
+from core-backed pages: preliminary GDB disassembly used disk fallback. The earlier claim of
+resident instruction bytes was corrected, and `compare-sections` mismatch is not evidence of
+code corruption. The version-matched helper was hash-verified and used only in memory.
+
+Owner's load/throttling hypothesis remains unverified. Five-to-six-minute post-fault Linux and
+Windows snapshots show low current load, but cannot recover fault-time frequency/temperature.
+No matching new firmware-limit/WHEA event was returned; older daily firmware events do not
+establish contemporaneity or exclude hardware instability. G B05 had completed at00:25:44.891,
+before this failure, rather than running concurrently. Its success does not clear the runtime.
+
+Root preserves A01/core/snapshot and selects one separately bound local A02 recovery of the
+unchanged full allocation comparison, plus local placement for the new T/H study with fresh
+admission. No automatic remote retry, global runtime/power change or new stress test is selected.
+The incomplete A01 is a technical failure with retained partial cost, not a scientific negative.
+[Complete diagnosis, evidence limits and placement decision](../../runs/runtime_repair/cpython_20261001_recurrence/diagnosis.json),
+[post-fault Linux snapshot](../../runs/runtime_repair/cpython_20261001_recurrence/host_observation.json),
+[Windows counters and event XML](../../runs/runtime_repair/cpython_20261001_recurrence/windows_observation.json).
 
 **2026-09-30 owner要求的共享运行环境修复：临时缓解已部署，根因尚未确定。**
 Root在独立工程复核后发表`6c930e5c5`，将wsl_4070后续启动切换到独立GCC13.3构建的同版本

@@ -1,0 +1,370 @@
+{
+  "schema": "hmasd.runtime_recurrence.windows_observation.v1",
+  "utc_start": "2026-10-01T00:33:46.277829+00:00",
+  "utc_end": "2026-10-01T00:33:48.304112+00:00",
+  "wall_seconds": 2.026297511998564,
+  "returncode": 0,
+  "stderr": "#< CLIXML\r\n<Objs Version=\"1.1.0.1\" xmlns=\"http://schemas.microsoft.com/powershell/2004/04\"><Obj S=\"progress\" RefId=\"0\"><TN RefId=\"0\"><T>System.Management.Automation.PSCustomObject</T><T>System.Object</T></TN><MS><I64 N=\"SourceId\">1</I64><PR N=\"Record\"><AV>����׼���״�ʹ��ģ�顣</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S=\"progress\" RefId=\"1\"><TNRef RefId=\"0\" /><MS><I64 N=\"SourceId\">1</I64><PR N=\"Record\"><AV>����׼���״�ʹ��ģ�顣</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S=\"progress\" RefId=\"2\"><TNRef RefId=\"0\" /><MS><I64 N=\"SourceId\">1</I64><PR N=\"Record\"><AV>����׼���״�ʹ��ģ�顣</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj></Objs>",
+  "scope": "read-only post-failure observation; corrects UTF8 decoding of first Windows retrieval; no fault-time load/frequency inferred",
+  "powershell_script": "\n$utf8=New-Object System.Text.UTF8Encoding($false)\n[Console]::OutputEncoding=$utf8\n$OutputEncoding=$utf8\n$ProgressPreference='SilentlyContinue'\n$ErrorActionPreference='Stop'\n$since=[DateTimeOffset]::Parse('2026-10-01T00:00:00Z').LocalDateTime\n$result=[ordered]@{utc=[DateTime]::UtcNow.ToString('o')}\ntry {$result.processor=@(Get-CimInstance Win32_Processor | Select-Object DeviceID,Name,CurrentClockSpeed,MaxClockSpeed,LoadPercentage,NumberOfCores,NumberOfLogicalProcessors)} catch {$result.processor_error=$_.Exception.Message}\ntry {$result.performance=@(Get-CimInstance Win32_PerfFormattedData_Counters_ProcessorInformation | Select-Object Name,ProcessorFrequency,PercentofMaximumFrequency,PercentProcessorPerformance,PercentProcessorUtility,PercentProcessorTime,Timestamp_Sys100NS)} catch {$result.performance_error=$_.Exception.Message}\ntry {$events=@(Get-WinEvent -FilterHashtable @{LogName='System';ProviderName='Microsoft-Windows-Kernel-Processor-Power';Id=37;StartTime=$since} -ErrorAction Stop);$result.firmware_events_since_utc_0000=@($events | ForEach-Object {[ordered]@{utc=$_.TimeCreated.ToUniversalTime().ToString('o');record_id=$_.RecordId;id=$_.Id;xml=$_.ToXml();message=$_.Message}})} catch {$result.firmware_events_query=$_.Exception.Message}\ntry {$events=@(Get-WinEvent -FilterHashtable @{LogName='System';ProviderName='Microsoft-Windows-Kernel-Processor-Power';Id=37} -MaxEvents 20 -ErrorAction Stop);$result.latest_firmware_events=@($events | ForEach-Object {[ordered]@{utc=$_.TimeCreated.ToUniversalTime().ToString('o');record_id=$_.RecordId;id=$_.Id;xml=$_.ToXml();message=$_.Message}})} catch {$result.latest_firmware_query=$_.Exception.Message}\ntry {$events=@(Get-WinEvent -FilterHashtable @{LogName='System';ProviderName='Microsoft-Windows-WHEA-Logger';StartTime=$since} -ErrorAction Stop);$result.whea_since_utc_0000=@($events | ForEach-Object {[ordered]@{utc=$_.TimeCreated.ToUniversalTime().ToString('o');record_id=$_.RecordId;id=$_.Id;xml=$_.ToXml();message=$_.Message}})} catch {$result.whea_query=$_.Exception.Message}\ntry {$result.power_scheme=(& powercfg.exe /GETACTIVESCHEME | Out-String)} catch {$result.power_scheme_error=$_.Exception.Message}\n$result | ConvertTo-Json -Depth 7 -Compress\n",
+  "data": {
+    "utc": "2026-10-01T00:33:46.0140265Z",
+    "processor": [
+      {
+        "DeviceID": "CPU0",
+        "Name": "13th Gen Intel(R) Core(TM) i9-13900H",
+        "CurrentClockSpeed": 2600,
+        "MaxClockSpeed": 2600,
+        "LoadPercentage": 1,
+        "NumberOfCores": 14,
+        "NumberOfLogicalProcessors": 20
+      }
+    ],
+    "performance": [
+      {
+        "Name": "0,0",
+        "ProcessorFrequency": 2600,
+        "PercentofMaximumFrequency": 70,
+        "PercentProcessorPerformance": 134,
+        "PercentProcessorUtility": 6,
+        "PercentProcessorTime": 0,
+        "Timestamp_Sys100NS": null
+      },
+      {
+        "Name": "0,1",
+        "ProcessorFrequency": 2600,
+        "PercentofMaximumFrequency": 47,
+        "PercentProcessorPerformance": 126,
+        "PercentProcessorUtility": 0,
+        "PercentProcessorTime": 6,
+        "Timestamp_Sys100NS": null
+      },
+      {
+        "Name": "0,10",
+        "ProcessorFrequency": 2600,
+        "PercentofMaximumFrequency": 91,
+        "PercentProcessorPerformance": 70,
+        "PercentProcessorUtility": 0,
+        "PercentProcessorTime": 0,
+        "Timestamp_Sys100NS": null
+      },
+      {
+        "Name": "0,11",
+        "ProcessorFrequency": 2600,
+        "PercentofMaximumFrequency": 100,
+        "PercentProcessorPerformance": 123,
+        "PercentProcessorUtility": 5,
+        "PercentProcessorTime": 0,
+        "Timestamp_Sys100NS": null
+      },
+      {
+        "Name": "0,12",
+        "ProcessorFrequency": 1900,
+        "PercentofMaximumFrequency": 34,
+        "PercentProcessorPerformance": 77,
+        "PercentProcessorUtility": 2,
+        "PercentProcessorTime": 0,
+        "Timestamp_Sys100NS": null
+      },
+      {
+        "Name": "0,13",
+        "ProcessorFrequency": 1900,
+        "PercentofMaximumFrequency": 37,
+        "PercentProcessorPerformance": 54,
+        "PercentProcessorUtility": 0,
+        "PercentProcessorTime": 11,
+        "Timestamp_Sys100NS": null
+      },
+      {
+        "Name": "0,14",
+        "ProcessorFrequency": 1900,
+        "PercentofMaximumFrequency": 37,
+        "PercentProcessorPerformance": 45,
+        "PercentProcessorUtility": 0,
+        "PercentProcessorTime": 53,
+        "Timestamp_Sys100NS": null
+      },
+      {
+        "Name": "0,15",
+        "ProcessorFrequency": 1900,
+        "PercentofMaximumFrequency": 39,
+        "PercentProcessorPerformance": 47,
+        "PercentProcessorUtility": 0,
+        "PercentProcessorTime": 35,
+        "Timestamp_Sys100NS": null
+      },
+      {
+        "Name": "0,16",
+        "ProcessorFrequency": 1900,
+        "PercentofMaximumFrequency": 34,
+        "PercentProcessorPerformance": 100,
+        "PercentProcessorUtility": 3,
+        "PercentProcessorTime": 0,
+        "Timestamp_Sys100NS": null
+      },
+      {
+        "Name": "0,17",
+        "ProcessorFrequency": 1900,
+        "PercentofMaximumFrequency": 43,
+        "PercentProcessorPerformance": 67,
+        "PercentProcessorUtility": 0,
+        "PercentProcessorTime": 35,
+        "Timestamp_Sys100NS": null
+      },
+      {
+        "Name": "0,18",
+        "ProcessorFrequency": 1900,
+        "PercentofMaximumFrequency": 35,
+        "PercentProcessorPerformance": 49,
+        "PercentProcessorUtility": 0,
+        "PercentProcessorTime": 29,
+        "Timestamp_Sys100NS": null
+      },
+      {
+        "Name": "0,19",
+        "ProcessorFrequency": 1900,
+        "PercentofMaximumFrequency": 34,
+        "PercentProcessorPerformance": 85,
+        "PercentProcessorUtility": 1,
+        "PercentProcessorTime": 11,
+        "Timestamp_Sys100NS": null
+      },
+      {
+        "Name": "0,2",
+        "ProcessorFrequency": 2600,
+        "PercentofMaximumFrequency": 85,
+        "PercentProcessorPerformance": 56,
+        "PercentProcessorUtility": 0,
+        "PercentProcessorTime": 23,
+        "Timestamp_Sys100NS": null
+      },
+      {
+        "Name": "0,3",
+        "ProcessorFrequency": 2600,
+        "PercentofMaximumFrequency": 53,
+        "PercentProcessorPerformance": 0,
+        "PercentProcessorUtility": 0,
+        "PercentProcessorTime": 6,
+        "Timestamp_Sys100NS": null
+      },
+      {
+        "Name": "0,4",
+        "ProcessorFrequency": 2600,
+        "PercentofMaximumFrequency": 100,
+        "PercentProcessorPerformance": 196,
+        "PercentProcessorUtility": 70,
+        "PercentProcessorTime": 23,
+        "Timestamp_Sys100NS": null
+      },
+      {
+        "Name": "0,5",
+        "ProcessorFrequency": 2600,
+        "PercentofMaximumFrequency": 100,
+        "PercentProcessorPerformance": 191,
+        "PercentProcessorUtility": 0,
+        "PercentProcessorTime": 6,
+        "Timestamp_Sys100NS": null
+      },
+      {
+        "Name": "0,6",
+        "ProcessorFrequency": 2600,
+        "PercentofMaximumFrequency": 100,
+        "PercentProcessorPerformance": 198,
+        "PercentProcessorUtility": 1,
+        "PercentProcessorTime": 11,
+        "Timestamp_Sys100NS": null
+      },
+      {
+        "Name": "0,7",
+        "ProcessorFrequency": 2600,
+        "PercentofMaximumFrequency": 100,
+        "PercentProcessorPerformance": 199,
+        "PercentProcessorUtility": 90,
+        "PercentProcessorTime": 35,
+        "Timestamp_Sys100NS": null
+      },
+      {
+        "Name": "0,8",
+        "ProcessorFrequency": 2600,
+        "PercentofMaximumFrequency": 51,
+        "PercentProcessorPerformance": 49,
+        "PercentProcessorUtility": 0,
+        "PercentProcessorTime": 64,
+        "Timestamp_Sys100NS": null
+      },
+      {
+        "Name": "0,9",
+        "ProcessorFrequency": 2600,
+        "PercentofMaximumFrequency": 51,
+        "PercentProcessorPerformance": 0,
+        "PercentProcessorUtility": 0,
+        "PercentProcessorTime": 6,
+        "Timestamp_Sys100NS": null
+      },
+      {
+        "Name": "0,_Total",
+        "ProcessorFrequency": 2320,
+        "PercentofMaximumFrequency": 62,
+        "PercentProcessorPerformance": 176,
+        "PercentProcessorUtility": 9,
+        "PercentProcessorTime": 17,
+        "Timestamp_Sys100NS": null
+      },
+      {
+        "Name": "_Total",
+        "ProcessorFrequency": 2320,
+        "PercentofMaximumFrequency": 62,
+        "PercentProcessorPerformance": 176,
+        "PercentProcessorUtility": 9,
+        "PercentProcessorTime": 17,
+        "Timestamp_Sys100NS": null
+      }
+    ],
+    "firmware_events_query": "找不到任何与指定的选择条件匹配的事件。",
+    "latest_firmware_events": [
+      {
+        "utc": "2026-09-30T05:51:17.6502209Z",
+        "record_id": 321756,
+        "id": 37,
+        "xml": "<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Kernel-Processor-Power' Guid='{0f67e49f-fe51-4e9f-b490-6f2948cc6027}'/><EventID>37</EventID><Version>0</Version><Level>3</Level><Task>7</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-09-30T05:51:17.6502209Z'/><EventRecordID>321756</EventRecordID><Correlation/><Execution ProcessID='4' ThreadID='36096'/><Channel>System</Channel><Computer>LAPTOP-U9TDKC8A</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='Group'>0</Data><Data Name='Number'>19</Data><Data Name='CapDurationInSeconds'>86401</Data><Data Name='PpcChanges'>0</Data><Data Name='TpcChanges'>0</Data><Data Name='PccChanges'>0</Data></EventData></Event>",
+        "message": "The speed of processor 19 in group 0 is being limited by system firmware. The processor has been in this reduced performance state for 86401 seconds since the last report."
+      },
+      {
+        "utc": "2026-09-30T05:51:17.6351433Z",
+        "record_id": 321755,
+        "id": 37,
+        "xml": "<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Kernel-Processor-Power' Guid='{0f67e49f-fe51-4e9f-b490-6f2948cc6027}'/><EventID>37</EventID><Version>0</Version><Level>3</Level><Task>7</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-09-30T05:51:17.6351433Z'/><EventRecordID>321755</EventRecordID><Correlation/><Execution ProcessID='4' ThreadID='36096'/><Channel>System</Channel><Computer>LAPTOP-U9TDKC8A</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='Group'>0</Data><Data Name='Number'>14</Data><Data Name='CapDurationInSeconds'>86401</Data><Data Name='PpcChanges'>0</Data><Data Name='TpcChanges'>0</Data><Data Name='PccChanges'>0</Data></EventData></Event>",
+        "message": "The speed of processor 14 in group 0 is being limited by system firmware. The processor has been in this reduced performance state for 86401 seconds since the last report."
+      },
+      {
+        "utc": "2026-09-30T05:51:17.6351276Z",
+        "record_id": 321754,
+        "id": 37,
+        "xml": "<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Kernel-Processor-Power' Guid='{0f67e49f-fe51-4e9f-b490-6f2948cc6027}'/><EventID>37</EventID><Version>0</Version><Level>3</Level><Task>7</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-09-30T05:51:17.6351276Z'/><EventRecordID>321754</EventRecordID><Correlation/><Execution ProcessID='4' ThreadID='8336'/><Channel>System</Channel><Computer>LAPTOP-U9TDKC8A</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='Group'>0</Data><Data Name='Number'>13</Data><Data Name='CapDurationInSeconds'>86401</Data><Data Name='PpcChanges'>0</Data><Data Name='TpcChanges'>0</Data><Data Name='PccChanges'>0</Data></EventData></Event>",
+        "message": "The speed of processor 13 in group 0 is being limited by system firmware. The processor has been in this reduced performance state for 86401 seconds since the last report."
+      },
+      {
+        "utc": "2026-09-30T05:51:17.6350872Z",
+        "record_id": 321753,
+        "id": 37,
+        "xml": "<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Kernel-Processor-Power' Guid='{0f67e49f-fe51-4e9f-b490-6f2948cc6027}'/><EventID>37</EventID><Version>0</Version><Level>3</Level><Task>7</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-09-30T05:51:17.6350872Z'/><EventRecordID>321753</EventRecordID><Correlation/><Execution ProcessID='4' ThreadID='34112'/><Channel>System</Channel><Computer>LAPTOP-U9TDKC8A</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='Group'>0</Data><Data Name='Number'>12</Data><Data Name='CapDurationInSeconds'>86401</Data><Data Name='PpcChanges'>0</Data><Data Name='TpcChanges'>0</Data><Data Name='PccChanges'>0</Data></EventData></Event>",
+        "message": "The speed of processor 12 in group 0 is being limited by system firmware. The processor has been in this reduced performance state for 86401 seconds since the last report."
+      },
+      {
+        "utc": "2026-09-30T05:51:17.6350838Z",
+        "record_id": 321752,
+        "id": 37,
+        "xml": "<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Kernel-Processor-Power' Guid='{0f67e49f-fe51-4e9f-b490-6f2948cc6027}'/><EventID>37</EventID><Version>0</Version><Level>3</Level><Task>7</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-09-30T05:51:17.6350838Z'/><EventRecordID>321752</EventRecordID><Correlation/><Execution ProcessID='4' ThreadID='35176'/><Channel>System</Channel><Computer>LAPTOP-U9TDKC8A</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='Group'>0</Data><Data Name='Number'>18</Data><Data Name='CapDurationInSeconds'>86401</Data><Data Name='PpcChanges'>0</Data><Data Name='TpcChanges'>0</Data><Data Name='PccChanges'>0</Data></EventData></Event>",
+        "message": "The speed of processor 18 in group 0 is being limited by system firmware. The processor has been in this reduced performance state for 86401 seconds since the last report."
+      },
+      {
+        "utc": "2026-09-30T05:51:17.6350777Z",
+        "record_id": 321751,
+        "id": 37,
+        "xml": "<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Kernel-Processor-Power' Guid='{0f67e49f-fe51-4e9f-b490-6f2948cc6027}'/><EventID>37</EventID><Version>0</Version><Level>3</Level><Task>7</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-09-30T05:51:17.6350777Z'/><EventRecordID>321751</EventRecordID><Correlation/><Execution ProcessID='4' ThreadID='34704'/><Channel>System</Channel><Computer>LAPTOP-U9TDKC8A</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='Group'>0</Data><Data Name='Number'>16</Data><Data Name='CapDurationInSeconds'>86401</Data><Data Name='PpcChanges'>0</Data><Data Name='TpcChanges'>0</Data><Data Name='PccChanges'>0</Data></EventData></Event>",
+        "message": "The speed of processor 16 in group 0 is being limited by system firmware. The processor has been in this reduced performance state for 86401 seconds since the last report."
+      },
+      {
+        "utc": "2026-09-30T05:51:17.6350724Z",
+        "record_id": 321750,
+        "id": 37,
+        "xml": "<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Kernel-Processor-Power' Guid='{0f67e49f-fe51-4e9f-b490-6f2948cc6027}'/><EventID>37</EventID><Version>0</Version><Level>3</Level><Task>7</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-09-30T05:51:17.6350724Z'/><EventRecordID>321750</EventRecordID><Correlation/><Execution ProcessID='4' ThreadID='30632'/><Channel>System</Channel><Computer>LAPTOP-U9TDKC8A</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='Group'>0</Data><Data Name='Number'>17</Data><Data Name='CapDurationInSeconds'>86401</Data><Data Name='PpcChanges'>0</Data><Data Name='TpcChanges'>0</Data><Data Name='PccChanges'>0</Data></EventData></Event>",
+        "message": "The speed of processor 17 in group 0 is being limited by system firmware. The processor has been in this reduced performance state for 86401 seconds since the last report."
+      },
+      {
+        "utc": "2026-09-30T05:51:17.6350157Z",
+        "record_id": 321749,
+        "id": 37,
+        "xml": "<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Kernel-Processor-Power' Guid='{0f67e49f-fe51-4e9f-b490-6f2948cc6027}'/><EventID>37</EventID><Version>0</Version><Level>3</Level><Task>7</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-09-30T05:51:17.6350157Z'/><EventRecordID>321749</EventRecordID><Correlation/><Execution ProcessID='4' ThreadID='23672'/><Channel>System</Channel><Computer>LAPTOP-U9TDKC8A</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='Group'>0</Data><Data Name='Number'>15</Data><Data Name='CapDurationInSeconds'>86401</Data><Data Name='PpcChanges'>0</Data><Data Name='TpcChanges'>0</Data><Data Name='PccChanges'>0</Data></EventData></Event>",
+        "message": "The speed of processor 15 in group 0 is being limited by system firmware. The processor has been in this reduced performance state for 86401 seconds since the last report."
+      },
+      {
+        "utc": "2026-09-29T05:51:16.4141146Z",
+        "record_id": 320568,
+        "id": 37,
+        "xml": "<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Kernel-Processor-Power' Guid='{0f67e49f-fe51-4e9f-b490-6f2948cc6027}'/><EventID>37</EventID><Version>0</Version><Level>3</Level><Task>7</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-09-29T05:51:16.4141146Z'/><EventRecordID>320568</EventRecordID><Correlation/><Execution ProcessID='4' ThreadID='35140'/><Channel>System</Channel><Computer>LAPTOP-U9TDKC8A</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='Group'>0</Data><Data Name='Number'>19</Data><Data Name='CapDurationInSeconds'>86401</Data><Data Name='PpcChanges'>0</Data><Data Name='TpcChanges'>0</Data><Data Name='PccChanges'>0</Data></EventData></Event>",
+        "message": "The speed of processor 19 in group 0 is being limited by system firmware. The processor has been in this reduced performance state for 86401 seconds since the last report."
+      },
+      {
+        "utc": "2026-09-29T05:51:16.3987682Z",
+        "record_id": 320567,
+        "id": 37,
+        "xml": "<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Kernel-Processor-Power' Guid='{0f67e49f-fe51-4e9f-b490-6f2948cc6027}'/><EventID>37</EventID><Version>0</Version><Level>3</Level><Task>7</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-09-29T05:51:16.3987682Z'/><EventRecordID>320567</EventRecordID><Correlation/><Execution ProcessID='4' ThreadID='35140'/><Channel>System</Channel><Computer>LAPTOP-U9TDKC8A</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='Group'>0</Data><Data Name='Number'>15</Data><Data Name='CapDurationInSeconds'>86401</Data><Data Name='PpcChanges'>0</Data><Data Name='TpcChanges'>0</Data><Data Name='PccChanges'>0</Data></EventData></Event>",
+        "message": "The speed of processor 15 in group 0 is being limited by system firmware. The processor has been in this reduced performance state for 86401 seconds since the last report."
+      },
+      {
+        "utc": "2026-09-29T05:51:16.3987066Z",
+        "record_id": 320566,
+        "id": 37,
+        "xml": "<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Kernel-Processor-Power' Guid='{0f67e49f-fe51-4e9f-b490-6f2948cc6027}'/><EventID>37</EventID><Version>0</Version><Level>3</Level><Task>7</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-09-29T05:51:16.3987066Z'/><EventRecordID>320566</EventRecordID><Correlation/><Execution ProcessID='4' ThreadID='20564'/><Channel>System</Channel><Computer>LAPTOP-U9TDKC8A</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='Group'>0</Data><Data Name='Number'>18</Data><Data Name='CapDurationInSeconds'>86401</Data><Data Name='PpcChanges'>0</Data><Data Name='TpcChanges'>0</Data><Data Name='PccChanges'>0</Data></EventData></Event>",
+        "message": "The speed of processor 18 in group 0 is being limited by system firmware. The processor has been in this reduced performance state for 86401 seconds since the last report."
+      },
+      {
+        "utc": "2026-09-29T05:51:16.3987035Z",
+        "record_id": 320565,
+        "id": 37,
+        "xml": "<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Kernel-Processor-Power' Guid='{0f67e49f-fe51-4e9f-b490-6f2948cc6027}'/><EventID>37</EventID><Version>0</Version><Level>3</Level><Task>7</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-09-29T05:51:16.3987035Z'/><EventRecordID>320565</EventRecordID><Correlation/><Execution ProcessID='4' ThreadID='31300'/><Channel>System</Channel><Computer>LAPTOP-U9TDKC8A</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='Group'>0</Data><Data Name='Number'>16</Data><Data Name='CapDurationInSeconds'>86401</Data><Data Name='PpcChanges'>0</Data><Data Name='TpcChanges'>0</Data><Data Name='PccChanges'>0</Data></EventData></Event>",
+        "message": "The speed of processor 16 in group 0 is being limited by system firmware. The processor has been in this reduced performance state for 86401 seconds since the last report."
+      },
+      {
+        "utc": "2026-09-29T05:51:16.3986972Z",
+        "record_id": 320564,
+        "id": 37,
+        "xml": "<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Kernel-Processor-Power' Guid='{0f67e49f-fe51-4e9f-b490-6f2948cc6027}'/><EventID>37</EventID><Version>0</Version><Level>3</Level><Task>7</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-09-29T05:51:16.3986972Z'/><EventRecordID>320564</EventRecordID><Correlation/><Execution ProcessID='4' ThreadID='11952'/><Channel>System</Channel><Computer>LAPTOP-U9TDKC8A</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='Group'>0</Data><Data Name='Number'>17</Data><Data Name='CapDurationInSeconds'>86401</Data><Data Name='PpcChanges'>0</Data><Data Name='TpcChanges'>0</Data><Data Name='PccChanges'>0</Data></EventData></Event>",
+        "message": "The speed of processor 17 in group 0 is being limited by system firmware. The processor has been in this reduced performance state for 86401 seconds since the last report."
+      },
+      {
+        "utc": "2026-09-29T05:51:16.3836648Z",
+        "record_id": 320563,
+        "id": 37,
+        "xml": "<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Kernel-Processor-Power' Guid='{0f67e49f-fe51-4e9f-b490-6f2948cc6027}'/><EventID>37</EventID><Version>0</Version><Level>3</Level><Task>7</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-09-29T05:51:16.3836648Z'/><EventRecordID>320563</EventRecordID><Correlation/><Execution ProcessID='4' ThreadID='35140'/><Channel>System</Channel><Computer>LAPTOP-U9TDKC8A</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='Group'>0</Data><Data Name='Number'>13</Data><Data Name='CapDurationInSeconds'>86401</Data><Data Name='PpcChanges'>0</Data><Data Name='TpcChanges'>0</Data><Data Name='PccChanges'>0</Data></EventData></Event>",
+        "message": "The speed of processor 13 in group 0 is being limited by system firmware. The processor has been in this reduced performance state for 86401 seconds since the last report."
+      },
+      {
+        "utc": "2026-09-29T05:51:16.3836522Z",
+        "record_id": 320562,
+        "id": 37,
+        "xml": "<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Kernel-Processor-Power' Guid='{0f67e49f-fe51-4e9f-b490-6f2948cc6027}'/><EventID>37</EventID><Version>0</Version><Level>3</Level><Task>7</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-09-29T05:51:16.3836522Z'/><EventRecordID>320562</EventRecordID><Correlation/><Execution ProcessID='4' ThreadID='11952'/><Channel>System</Channel><Computer>LAPTOP-U9TDKC8A</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='Group'>0</Data><Data Name='Number'>14</Data><Data Name='CapDurationInSeconds'>86401</Data><Data Name='PpcChanges'>0</Data><Data Name='TpcChanges'>0</Data><Data Name='PccChanges'>0</Data></EventData></Event>",
+        "message": "The speed of processor 14 in group 0 is being limited by system firmware. The processor has been in this reduced performance state for 86401 seconds since the last report."
+      },
+      {
+        "utc": "2026-09-29T05:51:16.3835554Z",
+        "record_id": 320561,
+        "id": 37,
+        "xml": "<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Kernel-Processor-Power' Guid='{0f67e49f-fe51-4e9f-b490-6f2948cc6027}'/><EventID>37</EventID><Version>0</Version><Level>3</Level><Task>7</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-09-29T05:51:16.3835554Z'/><EventRecordID>320561</EventRecordID><Correlation/><Execution ProcessID='4' ThreadID='20564'/><Channel>System</Channel><Computer>LAPTOP-U9TDKC8A</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='Group'>0</Data><Data Name='Number'>12</Data><Data Name='CapDurationInSeconds'>86401</Data><Data Name='PpcChanges'>0</Data><Data Name='TpcChanges'>0</Data><Data Name='PccChanges'>0</Data></EventData></Event>",
+        "message": "The speed of processor 12 in group 0 is being limited by system firmware. The processor has been in this reduced performance state for 86401 seconds since the last report."
+      },
+      {
+        "utc": "2026-09-28T05:51:15.1289864Z",
+        "record_id": 319954,
+        "id": 37,
+        "xml": "<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Kernel-Processor-Power' Guid='{0f67e49f-fe51-4e9f-b490-6f2948cc6027}'/><EventID>37</EventID><Version>0</Version><Level>3</Level><Task>7</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-09-28T05:51:15.1289864Z'/><EventRecordID>319954</EventRecordID><Correlation/><Execution ProcessID='4' ThreadID='7396'/><Channel>System</Channel><Computer>LAPTOP-U9TDKC8A</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='Group'>0</Data><Data Name='Number'>19</Data><Data Name='CapDurationInSeconds'>86401</Data><Data Name='PpcChanges'>0</Data><Data Name='TpcChanges'>0</Data><Data Name='PccChanges'>0</Data></EventData></Event>",
+        "message": "The speed of processor 19 in group 0 is being limited by system firmware. The processor has been in this reduced performance state for 86401 seconds since the last report."
+      },
+      {
+        "utc": "2026-09-28T05:51:15.1135420Z",
+        "record_id": 319953,
+        "id": 37,
+        "xml": "<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Kernel-Processor-Power' Guid='{0f67e49f-fe51-4e9f-b490-6f2948cc6027}'/><EventID>37</EventID><Version>0</Version><Level>3</Level><Task>7</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-09-28T05:51:15.1135420Z'/><EventRecordID>319953</EventRecordID><Correlation/><Execution ProcessID='4' ThreadID='7396'/><Channel>System</Channel><Computer>LAPTOP-U9TDKC8A</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='Group'>0</Data><Data Name='Number'>18</Data><Data Name='CapDurationInSeconds'>86401</Data><Data Name='PpcChanges'>0</Data><Data Name='TpcChanges'>0</Data><Data Name='PccChanges'>0</Data></EventData></Event>",
+        "message": "The speed of processor 18 in group 0 is being limited by system firmware. The processor has been in this reduced performance state for 86401 seconds since the last report."
+      },
+      {
+        "utc": "2026-09-28T05:51:15.1135348Z",
+        "record_id": 319952,
+        "id": 37,
+        "xml": "<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Kernel-Processor-Power' Guid='{0f67e49f-fe51-4e9f-b490-6f2948cc6027}'/><EventID>37</EventID><Version>0</Version><Level>3</Level><Task>7</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-09-28T05:51:15.1135348Z'/><EventRecordID>319952</EventRecordID><Correlation/><Execution ProcessID='4' ThreadID='32380'/><Channel>System</Channel><Computer>LAPTOP-U9TDKC8A</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='Group'>0</Data><Data Name='Number'>16</Data><Data Name='CapDurationInSeconds'>86401</Data><Data Name='PpcChanges'>0</Data><Data Name='TpcChanges'>0</Data><Data Name='PccChanges'>0</Data></EventData></Event>",
+        "message": "The speed of processor 16 in group 0 is being limited by system firmware. The processor has been in this reduced performance state for 86401 seconds since the last report."
+      },
+      {
+        "utc": "2026-09-28T05:51:15.1135322Z",
+        "record_id": 319951,
+        "id": 37,
+        "xml": "<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Kernel-Processor-Power' Guid='{0f67e49f-fe51-4e9f-b490-6f2948cc6027}'/><EventID>37</EventID><Version>0</Version><Level>3</Level><Task>7</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-09-28T05:51:15.1135322Z'/><EventRecordID>319951</EventRecordID><Correlation/><Execution ProcessID='4' ThreadID='30356'/><Channel>System</Channel><Computer>LAPTOP-U9TDKC8A</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='Group'>0</Data><Data Name='Number'>17</Data><Data Name='CapDurationInSeconds'>86401</Data><Data Name='PpcChanges'>0</Data><Data Name='TpcChanges'>0</Data><Data Name='PccChanges'>0</Data></EventData></Event>",
+        "message": "The speed of processor 17 in group 0 is being limited by system firmware. The processor has been in this reduced performance state for 86401 seconds since the last report."
+      }
+    ],
+    "whea_query": "找不到任何与指定的选择条件匹配的事件。",
+    "power_scheme": "电源方案 GUID: 6fecc5ae-f350-48a5-b669-b472cb895ccf  (Turbo)\r\n"
+  },
+  "stderr_decoding": "PowerShell CLIXML progress stderr was decoded as UTF-8 with replacement; not used as fault evidence. JSON stdout decoded as strict UTF-8 after explicit Console.OutputEncoding."
+}

@@ -1,0 +1,128 @@
+{
+  "schema": "hmasd.runtime_recurrence.diagnosis.v1",
+  "date_utc": "2026-10-01",
+  "status": "RECURRENCE_LOCALIZED_ROOT_CAUSE_UNRESOLVED",
+  "scope": "Owner-requested investigation upon recurrence; bounded read-only examination of the original core and post-failure host records. No scientific replay, stress test, new runtime installation or power-setting change.",
+  "failed_operation": {
+    "direction": "uav_user_waiting",
+    "tag": "b05_local_allocation_a01",
+    "node": "wsl_4070",
+    "launch_sha": "de238594dc9d64d7be246e7b9628a63f6a53b272",
+    "runner_pid": 1179774,
+    "runner_start_ticks": 115712019,
+    "supervisor_pid": 1179773,
+    "supervisor_start_ticks": 115712016,
+    "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+    "reported_exit_utc": "2026-10-01T00:27:41Z",
+    "exit_code": -11,
+    "accepted_to_exit_seconds": 14.906944751739502,
+    "source_snapshot": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/9b680a5b7dee471e865759e84a49a043",
+    "direction_record": "../../uav_user_waiting/b05_local_allocation_a01/result.json",
+    "scientific_disposition": "Incomplete technical failure; no independent B05 reader ran and no partial-panel scientific verdict is assigned. Partial costs and outputs remain in the original direction record."
+  },
+  "core": {
+    "path_on_node": "/mnt/c/Users/wu/AppData/Local/Temp/wsl-crashes/wsl-crash-1790814460-1179774-_home_wu_.local_opt_hmasd-cpython-3.10.21-gcc_bin_python3.10-11.dmp",
+    "bytes": 35643392,
+    "sha256": "a06e26819a28ca65630bccadcdc72205d8cacb541f0eba460e31ac2365ec9cec",
+    "retention": "Original retained in place; no full core copy or upload made."
+  },
+  "runtime_identity": {
+    "executable": "/home/wu/.local/opt/hmasd-cpython-3.10.21-gcc/bin/python3.10",
+    "current_executable_sha256": "039033f129d33a69044ceff71ca87b109ad99d511b59946f81ffc3f728b1a3a1",
+    "build": "CPython 3.10.21, GCC 13.3, O2, no PGO/LTO; deployed as a provisional mitigation on 2026-09-30",
+    "core_backed_mapped_gnu_build_ids_match_disk": {
+      "executable": "29a513003f3f7f648ed30b7706d9cfeb771aebce",
+      "numpy_multiarray_umath": "6248641b6cc6c5958d7bd1c0315651a6e2f00686",
+      "libc": "a4a7992a8e66555c8141ab2a08a8465ff6e0ea65"
+    },
+    "binding_method": "ELF64 PT_LOAD-backed mapped GNU note bytes, with NT_FILE mappings; main executable note at file/runtime offset 0x368, length 36 bytes. Outer core notes alone contain NT_* records, not these mapped GNU notes.",
+    "torch_mapping_present": false,
+    "limit": "Build identity does not attest every mapped code byte or establish a culprit among the mapped modules."
+  },
+  "python_stack": {
+    "helper_source_url": "https://www.python.org/ftp/python/3.10.21/Python-3.10.21.tar.xz",
+    "source_tar_sha256": "a0da1e72132e950154eca0f6f47d5db828454700de20e5113667940d81e0db04",
+    "helper_member": "Python-3.10.21/Tools/gdb/libpython.py",
+    "helper_bytes": 65727,
+    "helper_sha256": "106c2928c9c5f7243c6508fce895471caab428332b303d7c2be169097326503c",
+    "method": "Verified source downloaded and extracted in memory, helper loaded through anonymous remote memfd into gdb -nx -nh --batch; debuginfod and auto-load off. Bounded py-bt and py-list; no bulk locals/heap output. No support file or cache left.",
+    "frames_inner_to_outer": [
+      "json/encoder.py:296 _iterencode_list: for value in lst:",
+      "json/encoder.py:405 _iterencode_dict",
+      "json/encoder.py:405 _iterencode_dict",
+      "json/encoder.py:325 _iterencode_list: yield from chunks",
+      "json/encoder.py:405 _iterencode_dict",
+      "json/encoder.py:431 _iterencode",
+      "json/__init__.py:179: for chunk in iterable",
+      "frozen experiments/candidates/uav_user_waiting/b05/protocol.py:84: json.dump(...) in write_json",
+      "frozen experiments/candidates/uav_user_waiting/b05/study.py:420: p.write_json(out / 'summary.json', result)",
+      "frozen experiments/candidates/uav_user_waiting/b05/run.py:41/46"
+    ],
+    "location": "Per-source-trace progress summary JSON traversal. The previous atomic RUNNING summary contains 89 source traces / 267 law outcomes; the 90th source has complete output files and summary.json.tmp is incomplete."
+  },
+  "fault_operand": {
+    "program_counter": "0x0",
+    "evaluator_site": "_PyEval_EvalFrameDefault+10469, FOR_ITER opcode 93",
+    "receiver_register": "r15",
+    "receiver_address": "0x7cadfbeb90d0",
+    "receiver_type_address": "0x63b77180bc20",
+    "receiver_type": "PyCFunction_Type",
+    "tp_iternext_offset": "0xe0",
+    "tp_iternext_value": "NULL",
+    "name_cross_reference": "Core-resident method-definition pointer cross-references to isinstance in the mapped executable. The pointed-to name string is not itself core-backed, so the specific name is a mapped-file cross-reference, not resident string evidence.",
+    "supported_conclusion": "A function object occupies the evaluator operand position requiring an iterator. Core-backed object/type slots, registers, PC and recovered frames support the invalid iterator operand and NULL tp_iternext call at this instant.",
+    "limit": "The antecedent corruption or incorrect operand production is unknown. The finding does not establish a JSON, NumPy, compiler, CPython or hardware defect."
+  },
+  "executable_text_correction": {
+    "rx_load_virtual_address": "0x63b77150e000",
+    "rx_load_p_filesz": 0,
+    "rx_load_p_memsz": "0x1ea000",
+    "text_runtime_start": "0x63b771510c70",
+    "text_runtime_end": "0x63b7716f7f0e",
+    "text_bytes": 1995422,
+    "text_core_backed_bytes": 0,
+    "corrected_earlier_interpretation": "The preliminary report incorrectly described fault-site disassembly as resident instruction bytes matching disk. GDB had fallen back to the executable file. Its compare-sections .text MIS-MATCHED output does not demonstrate resident code corruption or an ASLR mismatch: the entire text range is absent from core-backed pages.",
+    "disk_source_interpretation": "The build-matched return site disassembles as mov 8(r15),rax; mov r15,rdi; call *0xe0(rax). This interprets the core-backed register/type/NULL-slot facts but is not an attestation of resident instruction bytes."
+  },
+  "load_frequency_evidence": {
+    "owner_hypothesis": "Possible relation to load and frequency throttling; still unverified.",
+    "linux_observation": "host_observation.json",
+    "windows_observation": "windows_observation.json",
+    "linux_sample_utc": "2026-10-01T00:32:46Z",
+    "linux_loadavg": [0.79, 0.50, 0.27],
+    "linux_memory_available_kib": 15253592,
+    "linux_cpu_pressure_avg10_avg60_avg300": [0.0, 0.0, 0.0],
+    "windows_sample_utc": "2026-10-01T00:33:46Z",
+    "windows_processor": "Intel Core i9-13900H, 14 cores / 20 logical processors",
+    "windows_win32_processor_load_percent": 1,
+    "windows_total_provider_counters": {
+      "ProcessorFrequency": 2320,
+      "PercentofMaximumFrequency": 62,
+      "PercentProcessorPerformance": 176,
+      "PercentProcessorUtility": 9,
+      "PercentProcessorTime": 17
+    },
+    "windows_events_since_20261001_0000_utc": "Queries returned no matching Kernel-Processor-Power event 37 or WHEA event.",
+    "latest_firmware_event_utc": "2026-09-30T05:51:17Z",
+    "event_limit": "Older daily firmware-limiting reports are not contemporaneous with this fault; no matching event does not exclude hardware or thermal instability.",
+    "sampling_limit": "These are snapshots five to six minutes after failure. Guest MHz and differing Windows provider counters are not reconstructed instantaneous physical frequency. No fault-time temperature, voltage or power measurement exists. No causal conclusion or load-related exclusion is supported."
+  },
+  "nearby_operations": {
+    "fleet_score_sampling": "uav_fleet_transmission/b05_score_sampling_a01 completed its worker and full reader on the same configured remote runtime at 00:25:44.891 UTC, before the waiting failure; 416 episodes / 106496 native steps, exit 0. It was not concurrent at the fault. Success does not clear intermittent failure.",
+    "parent_shortlist": "uav_parent_adaptation/b07_shortlist_amortization_a01 independently completed locally at 00:25:21 UTC; a different physical node."
+  },
+  "root_disposition": {
+    "runtime_verdict": "The GCC rebuild did not eliminate the observed class of interpreter-state failures. A shared underlying cause across incidents is not established; the specific new fault is localized, not fixed.",
+    "failed_operation": "Retain original A01 core, snapshot and partial evidence. No automatic remote retry, partial scientific aggregate or fault-erasing replacement.",
+    "selected_recovery": "Separately authorize one new local A02 operation for the unchanged full192-source allocation comparison and full reader, with committed input-location bindings, fresh local admission and full repeated-cost accounting. This is not an assertion that local success diagnoses or cures the remote problem.",
+    "other_selected_work": "The newly selected S-prior T/H study uses the configured local node with fresh admission, priced input staging and complete source bindings. Accepted operations keep their original node and identity. No global configuration, power plan or package bytes changed.",
+    "further_diagnosis": "No additional stress test, interpreter rebuild or scientific replay is selected. Any next technical check should discriminate a concrete cause and include contemporaneous evidence where available, instead of treating missing executable pages or post-fault load as diagnosis."
+  },
+  "new_scientific_work_for_this_diagnosis": {
+    "fits": 0,
+    "native_steps": 0,
+    "policy_or_model_queries": 0,
+    "stress_test_bytes": 0,
+    "support_time": "Read-only analysis and host queries are additional unmetered support work, not zero cost."
+  }
+}
