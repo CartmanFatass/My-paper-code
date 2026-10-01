@@ -757,3 +757,29 @@ independent encoder or optimizer-trajectory replay is represented as purchased.
 The initial ledger states41 zero scientific counters and the exact three durable
 disk roots; the admitted source root is added dynamically. This publication
 authorizes no duplicate operation and adds no scientific exposure to B01.
+
+### B01 native collection accepted, same-handle observation
+
+Exact inputs were published as `61a2dfa9cde0178d482d0a079c5629c3bcb7789e`.
+The sole supervisor request `typed-joint-b01-native-a01` returned successfully
+after the kernel accepted the detached scientific runner at2026-10-01T16:36:32Z.
+[Native manifest](../../../../runs/typed_joint_skill_decision/b01_native_a01/launch-manifest.json)
+and [actual-node preflight](../../../../runs/typed_joint_skill_decision/b01_native_a01/admission-preflight.json)
+pin the full command, immutable source, output, interpreter and native identities.
+Fresh physical/effective availability was14,641,782,784bytes against4GiB floor.
+Operation reference:
+`/home/wu/projects/HMASD/.git/hmasd-admission/e878da79cba0e96f9665be7fff8faa95385fb9a862405eea092392509d49d27a.json`.
+
+Observer generation1 is registered and adopted under this DM UUID after its first
+status read found the same accepted runner/supervisor running with consistent
+identities. An initial observer-only request used a nonabsolute ssh executable and
+was refused before registration; correcting it to `/usr/bin/ssh` created the one
+observer, not another run. Native child remains active through collection/reading.
+
+At16:38:01Z the complete1,152-world input preparation had passed no-loss codec
+validation; all9,216 plans were assigned and the16 paid reverse-order full-episode
+audits had completed identically. Native labels were collecting (3 completed worlds,
+23,500steps); model/fit/optimizer counters remained zero. This is technical/progress
+evidence, not the scientific comparison. Actual counted global allocation was
+7,635,656,704bytes at that reading, below the earlier conservative source forecast.
+No duplicate, restart, changed exposure or result interpretation is selected.
