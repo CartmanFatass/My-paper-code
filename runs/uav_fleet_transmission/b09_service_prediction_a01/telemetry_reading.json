@@ -1,0 +1,3008 @@
+{
+  "scope": "Retrospective saved-array reading only; no model/native/controller calls or foreign-history counterfactuals. User/BS truth is evaluation-only. Groups are descriptive, not causal strata.",
+  "launch_sha": "93166e7ac6cffa3c76da113afdc84e7317bb585c",
+  "manifest_sha256": "2c2f58b6c58de4281f54e911e2fe0dc6ce8f4b728b7353680c36c8e17e6afe8e",
+  "raw_files_read": 96,
+  "new_model_calls": 0,
+  "new_native_steps": 0,
+  "new_fits": 0,
+  "totals": {
+    "C": {
+      "plans": 3200,
+      "empty_user_plans": 99,
+      "modeled_plans": 0,
+      "candidate_count": 0,
+      "native_bs_connected_uav_steps": 352032,
+      "guard_checked_actions": 441687,
+      "guard_blocked_actions": 31730,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 796,
+        "observed-current": 1492,
+        "observed-memory": 912
+      },
+      "worlds_with_observed_bs_plan": 25,
+      "mean_plan_users": 20.855937499999996
+    },
+    "H": {
+      "plans": 3200,
+      "empty_user_plans": 173,
+      "modeled_plans": 3027,
+      "candidate_count": 243276,
+      "native_bs_connected_uav_steps": 509147,
+      "guard_checked_actions": 415777,
+      "guard_blocked_actions": 21884,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 1323,
+        "observed-current": 1276,
+        "observed-memory": 601
+      },
+      "worlds_with_observed_bs_plan": 25,
+      "mean_plan_users": 13.3775
+    },
+    "F": {
+      "plans": 3200,
+      "empty_user_plans": 156,
+      "modeled_plans": 3044,
+      "candidate_count": 242468,
+      "native_bs_connected_uav_steps": 488738,
+      "guard_checked_actions": 424486,
+      "guard_blocked_actions": 21869,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 1370,
+        "observed-current": 1255,
+        "observed-memory": 575
+      },
+      "worlds_with_observed_bs_plan": 24,
+      "mean_plan_users": 13.799999999999999
+    }
+  },
+  "by_world_arm": [
+    {
+      "seed": 29890001,
+      "arm": "C",
+      "plans": 100,
+      "empty_user_plans": 4,
+      "mean_plan_users": 18.99,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 0,
+      "candidate_count": 0,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 100,
+        "observed-current": 0,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": null,
+      "mean_plan_bs_error_m": 919.4101898328842,
+      "max_plan_bs_error_m": 919.410189832884,
+      "native_bs_connected_uav_steps": 7979,
+      "guard_checked_actions": 13522,
+      "guard_blocked_actions": 897,
+      "fallback_codes": {
+        "-1": 100
+      }
+    },
+    {
+      "seed": 29890001,
+      "arm": "H",
+      "plans": 100,
+      "empty_user_plans": 4,
+      "mean_plan_users": 18.87,
+      "min_plan_users": 0,
+      "max_plan_users": 29,
+      "modeled_plans": 96,
+      "candidate_count": 7836,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 65,
+        "observed-current": 1,
+        "observed-memory": 34
+      },
+      "first_observed_bs_plan_tick": 1950,
+      "mean_plan_bs_error_m": 597.6166458976977,
+      "max_plan_bs_error_m": 919.410189832884,
+      "native_bs_connected_uav_steps": 10719,
+      "guard_checked_actions": 18189,
+      "guard_blocked_actions": 2581,
+      "fallback_codes": {
+        "0": 96,
+        "1": 4
+      }
+    },
+    {
+      "seed": 29890001,
+      "arm": "F",
+      "plans": 100,
+      "empty_user_plans": 4,
+      "mean_plan_users": 19.76,
+      "min_plan_users": 0,
+      "max_plan_users": 29,
+      "modeled_plans": 96,
+      "candidate_count": 7476,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 100,
+        "observed-current": 0,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": null,
+      "mean_plan_bs_error_m": 919.4101898328842,
+      "max_plan_bs_error_m": 919.410189832884,
+      "native_bs_connected_uav_steps": 9173,
+      "guard_checked_actions": 17149,
+      "guard_blocked_actions": 1049,
+      "fallback_codes": {
+        "0": 96,
+        "1": 4
+      }
+    },
+    {
+      "seed": 29890002,
+      "arm": "C",
+      "plans": 100,
+      "empty_user_plans": 2,
+      "mean_plan_users": 18.69,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 0,
+      "candidate_count": 0,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 6,
+        "observed-current": 68,
+        "observed-memory": 26
+      },
+      "first_observed_bs_plan_tick": 180,
+      "mean_plan_bs_error_m": 31.012684762087364,
+      "max_plan_bs_error_m": 516.8757816588682,
+      "native_bs_connected_uav_steps": 11683,
+      "guard_checked_actions": 13210,
+      "guard_blocked_actions": 1030,
+      "fallback_codes": {
+        "-1": 100
+      }
+    },
+    {
+      "seed": 29890002,
+      "arm": "H",
+      "plans": 100,
+      "empty_user_plans": 2,
+      "mean_plan_users": 10.96,
+      "min_plan_users": 0,
+      "max_plan_users": 17,
+      "modeled_plans": 98,
+      "candidate_count": 7772,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 11,
+        "observed-current": 89,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": 330,
+      "mean_plan_bs_error_m": 56.85646740255061,
+      "max_plan_bs_error_m": 516.8757816588682,
+      "native_bs_connected_uav_steps": 15986,
+      "guard_checked_actions": 17948,
+      "guard_blocked_actions": 1236,
+      "fallback_codes": {
+        "0": 98,
+        "1": 2
+      }
+    },
+    {
+      "seed": 29890002,
+      "arm": "F",
+      "plans": 100,
+      "empty_user_plans": 2,
+      "mean_plan_users": 10.65,
+      "min_plan_users": 0,
+      "max_plan_users": 17,
+      "modeled_plans": 98,
+      "candidate_count": 7748,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 9,
+        "observed-current": 91,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": 270,
+      "mean_plan_bs_error_m": 46.51895709709505,
+      "max_plan_bs_error_m": 516.8757816588682,
+      "native_bs_connected_uav_steps": 15709,
+      "guard_checked_actions": 18041,
+      "guard_blocked_actions": 1618,
+      "fallback_codes": {
+        "0": 98,
+        "1": 2
+      }
+    },
+    {
+      "seed": 29890003,
+      "arm": "C",
+      "plans": 100,
+      "empty_user_plans": 2,
+      "mean_plan_users": 20.13,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 0,
+      "candidate_count": 0,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 2,
+        "observed-current": 95,
+        "observed-memory": 3
+      },
+      "first_observed_bs_plan_tick": 60,
+      "mean_plan_bs_error_m": 15.860716530315399,
+      "max_plan_bs_error_m": 793.0292651544436,
+      "native_bs_connected_uav_steps": 14175,
+      "guard_checked_actions": 14819,
+      "guard_blocked_actions": 904,
+      "fallback_codes": {
+        "-1": 100
+      }
+    },
+    {
+      "seed": 29890003,
+      "arm": "H",
+      "plans": 100,
+      "empty_user_plans": 2,
+      "mean_plan_users": 17.6,
+      "min_plan_users": 0,
+      "max_plan_users": 26,
+      "modeled_plans": 98,
+      "candidate_count": 7940,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 2,
+        "observed-current": 98,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": 60,
+      "mean_plan_bs_error_m": 15.860693162987804,
+      "max_plan_bs_error_m": 793.0292651544436,
+      "native_bs_connected_uav_steps": 19870,
+      "guard_checked_actions": 16950,
+      "guard_blocked_actions": 434,
+      "fallback_codes": {
+        "0": 98,
+        "1": 2
+      }
+    },
+    {
+      "seed": 29890003,
+      "arm": "F",
+      "plans": 100,
+      "empty_user_plans": 2,
+      "mean_plan_users": 14.11,
+      "min_plan_users": 0,
+      "max_plan_users": 19,
+      "modeled_plans": 98,
+      "candidate_count": 8696,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 2,
+        "observed-current": 98,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": 60,
+      "mean_plan_bs_error_m": 15.860703051902917,
+      "max_plan_bs_error_m": 793.0292651544436,
+      "native_bs_connected_uav_steps": 21977,
+      "guard_checked_actions": 18550,
+      "guard_blocked_actions": 281,
+      "fallback_codes": {
+        "0": 98,
+        "1": 2
+      }
+    },
+    {
+      "seed": 29890004,
+      "arm": "C",
+      "plans": 100,
+      "empty_user_plans": 3,
+      "mean_plan_users": 19.61,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 0,
+      "candidate_count": 0,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 0,
+        "observed-current": 8,
+        "observed-memory": 92
+      },
+      "first_observed_bs_plan_tick": 0,
+      "mean_plan_bs_error_m": 0.00015282944764577336,
+      "max_plan_bs_error_m": 0.00023348327066504055,
+      "native_bs_connected_uav_steps": 9842,
+      "guard_checked_actions": 14048,
+      "guard_blocked_actions": 1101,
+      "fallback_codes": {
+        "-1": 100
+      }
+    },
+    {
+      "seed": 29890004,
+      "arm": "H",
+      "plans": 100,
+      "empty_user_plans": 4,
+      "mean_plan_users": 4.27,
+      "min_plan_users": 0,
+      "max_plan_users": 13,
+      "modeled_plans": 96,
+      "candidate_count": 7956,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 0,
+        "observed-current": 3,
+        "observed-memory": 97
+      },
+      "first_observed_bs_plan_tick": 0,
+      "mean_plan_bs_error_m": 0.00020207141333539923,
+      "max_plan_bs_error_m": 0.00023348327066504055,
+      "native_bs_connected_uav_steps": 20377,
+      "guard_checked_actions": 9853,
+      "guard_blocked_actions": 42,
+      "fallback_codes": {
+        "0": 96,
+        "1": 4
+      }
+    },
+    {
+      "seed": 29890004,
+      "arm": "F",
+      "plans": 100,
+      "empty_user_plans": 4,
+      "mean_plan_users": 4.29,
+      "min_plan_users": 0,
+      "max_plan_users": 13,
+      "modeled_plans": 96,
+      "candidate_count": 8004,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 0,
+        "observed-current": 3,
+        "observed-memory": 97
+      },
+      "first_observed_bs_plan_tick": 0,
+      "mean_plan_bs_error_m": 0.00020207141333539923,
+      "max_plan_bs_error_m": 0.00023348327066504055,
+      "native_bs_connected_uav_steps": 20478,
+      "guard_checked_actions": 9858,
+      "guard_blocked_actions": 182,
+      "fallback_codes": {
+        "0": 96,
+        "1": 4
+      }
+    },
+    {
+      "seed": 29890005,
+      "arm": "C",
+      "plans": 100,
+      "empty_user_plans": 1,
+      "mean_plan_users": 18.28,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 0,
+      "candidate_count": 0,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 1,
+        "observed-current": 94,
+        "observed-memory": 5
+      },
+      "first_observed_bs_plan_tick": 30,
+      "mean_plan_bs_error_m": 8.33874221821546,
+      "max_plan_bs_error_m": 833.8525484085895,
+      "native_bs_connected_uav_steps": 14748,
+      "guard_checked_actions": 16693,
+      "guard_blocked_actions": 1435,
+      "fallback_codes": {
+        "-1": 100
+      }
+    },
+    {
+      "seed": 29890005,
+      "arm": "H",
+      "plans": 100,
+      "empty_user_plans": 3,
+      "mean_plan_users": 4.69,
+      "min_plan_users": 0,
+      "max_plan_users": 17,
+      "modeled_plans": 97,
+      "candidate_count": 8200,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 1,
+        "observed-current": 88,
+        "observed-memory": 11
+      },
+      "first_observed_bs_plan_tick": 30,
+      "mean_plan_bs_error_m": 8.338639801519554,
+      "max_plan_bs_error_m": 833.8525484085895,
+      "native_bs_connected_uav_steps": 20480,
+      "guard_checked_actions": 7260,
+      "guard_blocked_actions": 0,
+      "fallback_codes": {
+        "0": 97,
+        "1": 3
+      }
+    },
+    {
+      "seed": 29890005,
+      "arm": "F",
+      "plans": 100,
+      "empty_user_plans": 3,
+      "mean_plan_users": 4.54,
+      "min_plan_users": 0,
+      "max_plan_users": 14,
+      "modeled_plans": 97,
+      "candidate_count": 7900,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 1,
+        "observed-current": 90,
+        "observed-memory": 9
+      },
+      "first_observed_bs_plan_tick": 30,
+      "mean_plan_bs_error_m": 8.338673090637487,
+      "max_plan_bs_error_m": 833.8525484085895,
+      "native_bs_connected_uav_steps": 22049,
+      "guard_checked_actions": 6801,
+      "guard_blocked_actions": 0,
+      "fallback_codes": {
+        "0": 97,
+        "1": 3
+      }
+    },
+    {
+      "seed": 29890006,
+      "arm": "C",
+      "plans": 100,
+      "empty_user_plans": 4,
+      "mean_plan_users": 21.61,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 0,
+      "candidate_count": 0,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 0,
+        "observed-current": 44,
+        "observed-memory": 56
+      },
+      "first_observed_bs_plan_tick": 0,
+      "mean_plan_bs_error_m": 0.00017117046650340717,
+      "max_plan_bs_error_m": 0.000338984090842426,
+      "native_bs_connected_uav_steps": 13166,
+      "guard_checked_actions": 13346,
+      "guard_blocked_actions": 1105,
+      "fallback_codes": {
+        "-1": 100
+      }
+    },
+    {
+      "seed": 29890006,
+      "arm": "H",
+      "plans": 100,
+      "empty_user_plans": 4,
+      "mean_plan_users": 19.75,
+      "min_plan_users": 0,
+      "max_plan_users": 24,
+      "modeled_plans": 96,
+      "candidate_count": 7524,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 0,
+        "observed-current": 65,
+        "observed-memory": 35
+      },
+      "first_observed_bs_plan_tick": 0,
+      "mean_plan_bs_error_m": 0.00016784434841652025,
+      "max_plan_bs_error_m": 0.000222030157246442,
+      "native_bs_connected_uav_steps": 20497,
+      "guard_checked_actions": 17533,
+      "guard_blocked_actions": 363,
+      "fallback_codes": {
+        "0": 96,
+        "1": 4
+      }
+    },
+    {
+      "seed": 29890006,
+      "arm": "F",
+      "plans": 100,
+      "empty_user_plans": 4,
+      "mean_plan_users": 21.06,
+      "min_plan_users": 0,
+      "max_plan_users": 26,
+      "modeled_plans": 96,
+      "candidate_count": 6984,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 0,
+        "observed-current": 18,
+        "observed-memory": 82
+      },
+      "first_observed_bs_plan_tick": 0,
+      "mean_plan_bs_error_m": 0.00024665139318736095,
+      "max_plan_bs_error_m": 0.00033219411499974525,
+      "native_bs_connected_uav_steps": 15911,
+      "guard_checked_actions": 16279,
+      "guard_blocked_actions": 872,
+      "fallback_codes": {
+        "0": 96,
+        "1": 4
+      }
+    },
+    {
+      "seed": 29890007,
+      "arm": "C",
+      "plans": 100,
+      "empty_user_plans": 4,
+      "mean_plan_users": 23.22,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 0,
+      "candidate_count": 0,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 6,
+        "observed-current": 87,
+        "observed-memory": 7
+      },
+      "first_observed_bs_plan_tick": 180,
+      "mean_plan_bs_error_m": 20.833328764809522,
+      "max_plan_bs_error_m": 347.2203272312346,
+      "native_bs_connected_uav_steps": 14336,
+      "guard_checked_actions": 15317,
+      "guard_blocked_actions": 379,
+      "fallback_codes": {
+        "-1": 100
+      }
+    },
+    {
+      "seed": 29890007,
+      "arm": "H",
+      "plans": 100,
+      "empty_user_plans": 4,
+      "mean_plan_users": 19.3,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 96,
+      "candidate_count": 8196,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 60,
+        "observed-current": 40,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": 1800,
+      "mean_plan_bs_error_m": 208.33224707965084,
+      "max_plan_bs_error_m": 347.2203272312346,
+      "native_bs_connected_uav_steps": 19077,
+      "guard_checked_actions": 17802,
+      "guard_blocked_actions": 443,
+      "fallback_codes": {
+        "0": 96,
+        "1": 4
+      }
+    },
+    {
+      "seed": 29890007,
+      "arm": "F",
+      "plans": 100,
+      "empty_user_plans": 4,
+      "mean_plan_users": 18.3,
+      "min_plan_users": 0,
+      "max_plan_users": 28,
+      "modeled_plans": 96,
+      "candidate_count": 8376,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 72,
+        "observed-current": 28,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": 2160,
+      "mean_plan_bs_error_m": 249.99866198522835,
+      "max_plan_bs_error_m": 347.2203272312346,
+      "native_bs_connected_uav_steps": 17441,
+      "guard_checked_actions": 18167,
+      "guard_blocked_actions": 1030,
+      "fallback_codes": {
+        "0": 96,
+        "1": 4
+      }
+    },
+    {
+      "seed": 29890008,
+      "arm": "C",
+      "plans": 100,
+      "empty_user_plans": 2,
+      "mean_plan_users": 22.49,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 0,
+      "candidate_count": 0,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 3,
+        "observed-current": 81,
+        "observed-memory": 16
+      },
+      "first_observed_bs_plan_tick": 90,
+      "mean_plan_bs_error_m": 14.46356611870701,
+      "max_plan_bs_error_m": 482.11377500527874,
+      "native_bs_connected_uav_steps": 14541,
+      "guard_checked_actions": 14240,
+      "guard_blocked_actions": 779,
+      "fallback_codes": {
+        "-1": 100
+      }
+    },
+    {
+      "seed": 29890008,
+      "arm": "H",
+      "plans": 100,
+      "empty_user_plans": 3,
+      "mean_plan_users": 5.74,
+      "min_plan_users": 0,
+      "max_plan_users": 9,
+      "modeled_plans": 97,
+      "candidate_count": 7612,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 17,
+        "observed-current": 83,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": 510,
+      "mean_plan_bs_error_m": 81.95950540940412,
+      "max_plan_bs_error_m": 482.11377500527874,
+      "native_bs_connected_uav_steps": 19491,
+      "guard_checked_actions": 9232,
+      "guard_blocked_actions": 6,
+      "fallback_codes": {
+        "0": 97,
+        "1": 3
+      }
+    },
+    {
+      "seed": 29890008,
+      "arm": "F",
+      "plans": 100,
+      "empty_user_plans": 3,
+      "mean_plan_users": 5.74,
+      "min_plan_users": 0,
+      "max_plan_users": 9,
+      "modeled_plans": 97,
+      "candidate_count": 7612,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 17,
+        "observed-current": 83,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": 510,
+      "mean_plan_bs_error_m": 81.95950540940412,
+      "max_plan_bs_error_m": 482.11377500527874,
+      "native_bs_connected_uav_steps": 19491,
+      "guard_checked_actions": 9232,
+      "guard_blocked_actions": 6,
+      "fallback_codes": {
+        "0": 97,
+        "1": 3
+      }
+    },
+    {
+      "seed": 29890009,
+      "arm": "C",
+      "plans": 100,
+      "empty_user_plans": 2,
+      "mean_plan_users": 22.07,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 0,
+      "candidate_count": 0,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 2,
+        "observed-current": 98,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": 60,
+      "mean_plan_bs_error_m": 26.376460398677573,
+      "max_plan_bs_error_m": 1318.8172076847359,
+      "native_bs_connected_uav_steps": 15596,
+      "guard_checked_actions": 14399,
+      "guard_blocked_actions": 1191,
+      "fallback_codes": {
+        "-1": 100
+      }
+    },
+    {
+      "seed": 29890009,
+      "arm": "H",
+      "plans": 100,
+      "empty_user_plans": 3,
+      "mean_plan_users": 16.19,
+      "min_plan_users": 0,
+      "max_plan_users": 24,
+      "modeled_plans": 97,
+      "candidate_count": 7816,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 2,
+        "observed-current": 98,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": 60,
+      "mean_plan_bs_error_m": 26.376488911061134,
+      "max_plan_bs_error_m": 1318.8172076847359,
+      "native_bs_connected_uav_steps": 20248,
+      "guard_checked_actions": 14886,
+      "guard_blocked_actions": 1345,
+      "fallback_codes": {
+        "0": 97,
+        "1": 3
+      }
+    },
+    {
+      "seed": 29890009,
+      "arm": "F",
+      "plans": 100,
+      "empty_user_plans": 3,
+      "mean_plan_users": 16.99,
+      "min_plan_users": 0,
+      "max_plan_users": 26,
+      "modeled_plans": 97,
+      "candidate_count": 7936,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 2,
+        "observed-current": 98,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": 60,
+      "mean_plan_bs_error_m": 26.376455805967908,
+      "max_plan_bs_error_m": 1318.8172076847359,
+      "native_bs_connected_uav_steps": 20449,
+      "guard_checked_actions": 15568,
+      "guard_blocked_actions": 1685,
+      "fallback_codes": {
+        "0": 97,
+        "1": 3
+      }
+    },
+    {
+      "seed": 29890010,
+      "arm": "C",
+      "plans": 100,
+      "empty_user_plans": 4,
+      "mean_plan_users": 22.49,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 0,
+      "candidate_count": 0,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 100,
+        "observed-current": 0,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": null,
+      "mean_plan_bs_error_m": 1397.013271076488,
+      "max_plan_bs_error_m": 1397.013271076488,
+      "native_bs_connected_uav_steps": 10372,
+      "guard_checked_actions": 14028,
+      "guard_blocked_actions": 968,
+      "fallback_codes": {
+        "-1": 100
+      }
+    },
+    {
+      "seed": 29890010,
+      "arm": "H",
+      "plans": 100,
+      "empty_user_plans": 10,
+      "mean_plan_users": 4.27,
+      "min_plan_users": 0,
+      "max_plan_users": 9,
+      "modeled_plans": 90,
+      "candidate_count": 7788,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 100,
+        "observed-current": 0,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": null,
+      "mean_plan_bs_error_m": 1397.013271076488,
+      "max_plan_bs_error_m": 1397.013271076488,
+      "native_bs_connected_uav_steps": 20334,
+      "guard_checked_actions": 11140,
+      "guard_blocked_actions": 193,
+      "fallback_codes": {
+        "0": 90,
+        "1": 10
+      }
+    },
+    {
+      "seed": 29890010,
+      "arm": "F",
+      "plans": 100,
+      "empty_user_plans": 10,
+      "mean_plan_users": 4.27,
+      "min_plan_users": 0,
+      "max_plan_users": 9,
+      "modeled_plans": 90,
+      "candidate_count": 7788,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 100,
+        "observed-current": 0,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": null,
+      "mean_plan_bs_error_m": 1397.013271076488,
+      "max_plan_bs_error_m": 1397.013271076488,
+      "native_bs_connected_uav_steps": 20334,
+      "guard_checked_actions": 11140,
+      "guard_blocked_actions": 193,
+      "fallback_codes": {
+        "0": 90,
+        "1": 10
+      }
+    },
+    {
+      "seed": 29890011,
+      "arm": "C",
+      "plans": 100,
+      "empty_user_plans": 3,
+      "mean_plan_users": 22.22,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 0,
+      "candidate_count": 0,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 0,
+        "observed-current": 5,
+        "observed-memory": 95
+      },
+      "first_observed_bs_plan_tick": 0,
+      "mean_plan_bs_error_m": 0.00024073744608676392,
+      "max_plan_bs_error_m": 0.00024597700295175037,
+      "native_bs_connected_uav_steps": 6843,
+      "guard_checked_actions": 12512,
+      "guard_blocked_actions": 1050,
+      "fallback_codes": {
+        "-1": 100
+      }
+    },
+    {
+      "seed": 29890011,
+      "arm": "H",
+      "plans": 100,
+      "empty_user_plans": 4,
+      "mean_plan_users": 14.28,
+      "min_plan_users": 0,
+      "max_plan_users": 26,
+      "modeled_plans": 96,
+      "candidate_count": 7008,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 0,
+        "observed-current": 3,
+        "observed-memory": 97
+      },
+      "first_observed_bs_plan_tick": 0,
+      "mean_plan_bs_error_m": 0.00012321368108547543,
+      "max_plan_bs_error_m": 0.00024597700295175037,
+      "native_bs_connected_uav_steps": 12941,
+      "guard_checked_actions": 11722,
+      "guard_blocked_actions": 1236,
+      "fallback_codes": {
+        "0": 96,
+        "1": 4
+      }
+    },
+    {
+      "seed": 29890011,
+      "arm": "F",
+      "plans": 100,
+      "empty_user_plans": 4,
+      "mean_plan_users": 16.02,
+      "min_plan_users": 0,
+      "max_plan_users": 26,
+      "modeled_plans": 96,
+      "candidate_count": 6864,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 0,
+        "observed-current": 14,
+        "observed-memory": 86
+      },
+      "first_observed_bs_plan_tick": 0,
+      "mean_plan_bs_error_m": 0.00012330023398178375,
+      "max_plan_bs_error_m": 0.00024597700295175037,
+      "native_bs_connected_uav_steps": 11768,
+      "guard_checked_actions": 13017,
+      "guard_blocked_actions": 630,
+      "fallback_codes": {
+        "0": 96,
+        "1": 4
+      }
+    },
+    {
+      "seed": 29890012,
+      "arm": "C",
+      "plans": 100,
+      "empty_user_plans": 1,
+      "mean_plan_users": 21.92,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 0,
+      "candidate_count": 0,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 1,
+        "observed-current": 61,
+        "observed-memory": 38
+      },
+      "first_observed_bs_plan_tick": 30,
+      "mean_plan_bs_error_m": 4.328522936532813,
+      "max_plan_bs_error_m": 432.8396940932191,
+      "native_bs_connected_uav_steps": 12673,
+      "guard_checked_actions": 13541,
+      "guard_blocked_actions": 717,
+      "fallback_codes": {
+        "-1": 100
+      }
+    },
+    {
+      "seed": 29890012,
+      "arm": "H",
+      "plans": 100,
+      "empty_user_plans": 3,
+      "mean_plan_users": 5.39,
+      "min_plan_users": 0,
+      "max_plan_users": 10,
+      "modeled_plans": 97,
+      "candidate_count": 7180,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 1,
+        "observed-current": 62,
+        "observed-memory": 37
+      },
+      "first_observed_bs_plan_tick": 30,
+      "mean_plan_bs_error_m": 4.328613400504347,
+      "max_plan_bs_error_m": 432.8396940932191,
+      "native_bs_connected_uav_steps": 17632,
+      "guard_checked_actions": 6783,
+      "guard_blocked_actions": 291,
+      "fallback_codes": {
+        "0": 97,
+        "1": 3
+      }
+    },
+    {
+      "seed": 29890012,
+      "arm": "F",
+      "plans": 100,
+      "empty_user_plans": 3,
+      "mean_plan_users": 5.39,
+      "min_plan_users": 0,
+      "max_plan_users": 10,
+      "modeled_plans": 97,
+      "candidate_count": 7180,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 1,
+        "observed-current": 62,
+        "observed-memory": 37
+      },
+      "first_observed_bs_plan_tick": 30,
+      "mean_plan_bs_error_m": 4.328613400504347,
+      "max_plan_bs_error_m": 432.8396940932191,
+      "native_bs_connected_uav_steps": 17632,
+      "guard_checked_actions": 6783,
+      "guard_blocked_actions": 291,
+      "fallback_codes": {
+        "0": 97,
+        "1": 3
+      }
+    },
+    {
+      "seed": 29890013,
+      "arm": "C",
+      "plans": 100,
+      "empty_user_plans": 3,
+      "mean_plan_users": 20.67,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 0,
+      "candidate_count": 0,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 4,
+        "observed-current": 60,
+        "observed-memory": 36
+      },
+      "first_observed_bs_plan_tick": 120,
+      "mean_plan_bs_error_m": 40.80853261020656,
+      "max_plan_bs_error_m": 1020.2114017148964,
+      "native_bs_connected_uav_steps": 12090,
+      "guard_checked_actions": 14067,
+      "guard_blocked_actions": 909,
+      "fallback_codes": {
+        "-1": 100
+      }
+    },
+    {
+      "seed": 29890013,
+      "arm": "H",
+      "plans": 100,
+      "empty_user_plans": 22,
+      "mean_plan_users": 3.41,
+      "min_plan_users": 0,
+      "max_plan_users": 12,
+      "modeled_plans": 78,
+      "candidate_count": 7236,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 64,
+        "observed-current": 36,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": 1920,
+      "mean_plan_bs_error_m": 652.9353574048725,
+      "max_plan_bs_error_m": 1020.2114017148964,
+      "native_bs_connected_uav_steps": 19273,
+      "guard_checked_actions": 9410,
+      "guard_blocked_actions": 102,
+      "fallback_codes": {
+        "0": 78,
+        "1": 22
+      }
+    },
+    {
+      "seed": 29890013,
+      "arm": "F",
+      "plans": 100,
+      "empty_user_plans": 22,
+      "mean_plan_users": 3.41,
+      "min_plan_users": 0,
+      "max_plan_users": 12,
+      "modeled_plans": 78,
+      "candidate_count": 7236,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 64,
+        "observed-current": 36,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": 1920,
+      "mean_plan_bs_error_m": 652.9353574048725,
+      "max_plan_bs_error_m": 1020.2114017148964,
+      "native_bs_connected_uav_steps": 19273,
+      "guard_checked_actions": 9410,
+      "guard_blocked_actions": 102,
+      "fallback_codes": {
+        "0": 78,
+        "1": 22
+      }
+    },
+    {
+      "seed": 29890014,
+      "arm": "C",
+      "plans": 100,
+      "empty_user_plans": 4,
+      "mean_plan_users": 22.39,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 0,
+      "candidate_count": 0,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 100,
+        "observed-current": 0,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": null,
+      "mean_plan_bs_error_m": 1006.8781099244632,
+      "max_plan_bs_error_m": 1006.8781099244633,
+      "native_bs_connected_uav_steps": 13417,
+      "guard_checked_actions": 13480,
+      "guard_blocked_actions": 600,
+      "fallback_codes": {
+        "-1": 100
+      }
+    },
+    {
+      "seed": 29890014,
+      "arm": "H",
+      "plans": 100,
+      "empty_user_plans": 4,
+      "mean_plan_users": 22.1,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 96,
+      "candidate_count": 7416,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 100,
+        "observed-current": 0,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": null,
+      "mean_plan_bs_error_m": 1006.8781099244632,
+      "max_plan_bs_error_m": 1006.8781099244633,
+      "native_bs_connected_uav_steps": 15478,
+      "guard_checked_actions": 14291,
+      "guard_blocked_actions": 187,
+      "fallback_codes": {
+        "0": 96,
+        "1": 4
+      }
+    },
+    {
+      "seed": 29890014,
+      "arm": "F",
+      "plans": 100,
+      "empty_user_plans": 4,
+      "mean_plan_users": 22.58,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 96,
+      "candidate_count": 7836,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 100,
+        "observed-current": 0,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": null,
+      "mean_plan_bs_error_m": 1006.8781099244632,
+      "max_plan_bs_error_m": 1006.8781099244633,
+      "native_bs_connected_uav_steps": 15985,
+      "guard_checked_actions": 16412,
+      "guard_blocked_actions": 482,
+      "fallback_codes": {
+        "0": 96,
+        "1": 4
+      }
+    },
+    {
+      "seed": 29890015,
+      "arm": "C",
+      "plans": 100,
+      "empty_user_plans": 3,
+      "mean_plan_users": 18.6,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 0,
+      "candidate_count": 0,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 100,
+        "observed-current": 0,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": null,
+      "mean_plan_bs_error_m": 916.0726154078578,
+      "max_plan_bs_error_m": 916.0726154078576,
+      "native_bs_connected_uav_steps": 8777,
+      "guard_checked_actions": 13569,
+      "guard_blocked_actions": 1785,
+      "fallback_codes": {
+        "-1": 100
+      }
+    },
+    {
+      "seed": 29890015,
+      "arm": "H",
+      "plans": 100,
+      "empty_user_plans": 4,
+      "mean_plan_users": 17.22,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 96,
+      "candidate_count": 7848,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 100,
+        "observed-current": 0,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": null,
+      "mean_plan_bs_error_m": 916.0726154078578,
+      "max_plan_bs_error_m": 916.0726154078576,
+      "native_bs_connected_uav_steps": 6528,
+      "guard_checked_actions": 15309,
+      "guard_blocked_actions": 1426,
+      "fallback_codes": {
+        "0": 96,
+        "1": 4
+      }
+    },
+    {
+      "seed": 29890015,
+      "arm": "F",
+      "plans": 100,
+      "empty_user_plans": 4,
+      "mean_plan_users": 15.83,
+      "min_plan_users": 0,
+      "max_plan_users": 25,
+      "modeled_plans": 96,
+      "candidate_count": 7500,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 100,
+        "observed-current": 0,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": null,
+      "mean_plan_bs_error_m": 916.0726154078578,
+      "max_plan_bs_error_m": 916.0726154078576,
+      "native_bs_connected_uav_steps": 5402,
+      "guard_checked_actions": 14580,
+      "guard_blocked_actions": 688,
+      "fallback_codes": {
+        "0": 96,
+        "1": 4
+      }
+    },
+    {
+      "seed": 29890016,
+      "arm": "C",
+      "plans": 100,
+      "empty_user_plans": 3,
+      "mean_plan_users": 22.19,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 0,
+      "candidate_count": 0,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 5,
+        "observed-current": 95,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": 150,
+      "mean_plan_bs_error_m": 14.921015587240872,
+      "max_plan_bs_error_m": 298.41918208261455,
+      "native_bs_connected_uav_steps": 13632,
+      "guard_checked_actions": 14011,
+      "guard_blocked_actions": 1015,
+      "fallback_codes": {
+        "-1": 100
+      }
+    },
+    {
+      "seed": 29890016,
+      "arm": "H",
+      "plans": 100,
+      "empty_user_plans": 3,
+      "mean_plan_users": 20.61,
+      "min_plan_users": 0,
+      "max_plan_users": 26,
+      "modeled_plans": 97,
+      "candidate_count": 7972,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 10,
+        "observed-current": 90,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": 300,
+      "mean_plan_bs_error_m": 29.84198634706396,
+      "max_plan_bs_error_m": 298.41918208261455,
+      "native_bs_connected_uav_steps": 19833,
+      "guard_checked_actions": 18594,
+      "guard_blocked_actions": 1628,
+      "fallback_codes": {
+        "0": 97,
+        "1": 3
+      }
+    },
+    {
+      "seed": 29890016,
+      "arm": "F",
+      "plans": 100,
+      "empty_user_plans": 3,
+      "mean_plan_users": 20.8,
+      "min_plan_users": 0,
+      "max_plan_users": 26,
+      "modeled_plans": 97,
+      "candidate_count": 7900,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 9,
+        "observed-current": 91,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": 270,
+      "mean_plan_bs_error_m": 26.85776978600873,
+      "max_plan_bs_error_m": 298.41918208261455,
+      "native_bs_connected_uav_steps": 20194,
+      "guard_checked_actions": 18649,
+      "guard_blocked_actions": 1154,
+      "fallback_codes": {
+        "0": 97,
+        "1": 3
+      }
+    },
+    {
+      "seed": 29890017,
+      "arm": "C",
+      "plans": 100,
+      "empty_user_plans": 3,
+      "mean_plan_users": 20.11,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 0,
+      "candidate_count": 0,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 2,
+        "observed-current": 97,
+        "observed-memory": 1
+      },
+      "first_observed_bs_plan_tick": 60,
+      "mean_plan_bs_error_m": 17.425325654157465,
+      "max_plan_bs_error_m": 871.2607300201362,
+      "native_bs_connected_uav_steps": 14955,
+      "guard_checked_actions": 15137,
+      "guard_blocked_actions": 997,
+      "fallback_codes": {
+        "-1": 100
+      }
+    },
+    {
+      "seed": 29890017,
+      "arm": "H",
+      "plans": 100,
+      "empty_user_plans": 3,
+      "mean_plan_users": 9.57,
+      "min_plan_users": 0,
+      "max_plan_users": 20,
+      "modeled_plans": 97,
+      "candidate_count": 7984,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 2,
+        "observed-current": 98,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": 60,
+      "mean_plan_bs_error_m": 17.425383356890237,
+      "max_plan_bs_error_m": 871.2607300201362,
+      "native_bs_connected_uav_steps": 21642,
+      "guard_checked_actions": 13989,
+      "guard_blocked_actions": 524,
+      "fallback_codes": {
+        "0": 97,
+        "1": 3
+      }
+    },
+    {
+      "seed": 29890017,
+      "arm": "F",
+      "plans": 100,
+      "empty_user_plans": 3,
+      "mean_plan_users": 9.45,
+      "min_plan_users": 0,
+      "max_plan_users": 18,
+      "modeled_plans": 97,
+      "candidate_count": 7924,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 2,
+        "observed-current": 98,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": 60,
+      "mean_plan_bs_error_m": 17.42536234988062,
+      "max_plan_bs_error_m": 871.2607300201362,
+      "native_bs_connected_uav_steps": 20557,
+      "guard_checked_actions": 13562,
+      "guard_blocked_actions": 475,
+      "fallback_codes": {
+        "0": 97,
+        "1": 3
+      }
+    },
+    {
+      "seed": 29890018,
+      "arm": "C",
+      "plans": 100,
+      "empty_user_plans": 5,
+      "mean_plan_users": 16.87,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 0,
+      "candidate_count": 0,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 7,
+        "observed-current": 52,
+        "observed-memory": 41
+      },
+      "first_observed_bs_plan_tick": 210,
+      "mean_plan_bs_error_m": 46.50795807874008,
+      "max_plan_bs_error_m": 664.3971395239392,
+      "native_bs_connected_uav_steps": 9731,
+      "guard_checked_actions": 12032,
+      "guard_blocked_actions": 824,
+      "fallback_codes": {
+        "-1": 100
+      }
+    },
+    {
+      "seed": 29890018,
+      "arm": "H",
+      "plans": 100,
+      "empty_user_plans": 5,
+      "mean_plan_users": 19.2,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 95,
+      "candidate_count": 6980,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 59,
+        "observed-current": 41,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": 1770,
+      "mean_plan_bs_error_m": 391.9943951373089,
+      "max_plan_bs_error_m": 664.3971395239392,
+      "native_bs_connected_uav_steps": 11397,
+      "guard_checked_actions": 16440,
+      "guard_blocked_actions": 707,
+      "fallback_codes": {
+        "0": 95,
+        "1": 5
+      }
+    },
+    {
+      "seed": 29890018,
+      "arm": "F",
+      "plans": 100,
+      "empty_user_plans": 5,
+      "mean_plan_users": 18.86,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 95,
+      "candidate_count": 6896,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 59,
+        "observed-current": 41,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": 1770,
+      "mean_plan_bs_error_m": 391.9943665575131,
+      "max_plan_bs_error_m": 664.3971395239392,
+      "native_bs_connected_uav_steps": 10478,
+      "guard_checked_actions": 16529,
+      "guard_blocked_actions": 876,
+      "fallback_codes": {
+        "0": 95,
+        "1": 5
+      }
+    },
+    {
+      "seed": 29890019,
+      "arm": "C",
+      "plans": 100,
+      "empty_user_plans": 5,
+      "mean_plan_users": 21.37,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 0,
+      "candidate_count": 0,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 0,
+        "observed-current": 4,
+        "observed-memory": 96
+      },
+      "first_observed_bs_plan_tick": 0,
+      "mean_plan_bs_error_m": 0.0001272330659742266,
+      "max_plan_bs_error_m": 0.0001974025030401181,
+      "native_bs_connected_uav_steps": 7038,
+      "guard_checked_actions": 12895,
+      "guard_blocked_actions": 1220,
+      "fallback_codes": {
+        "-1": 100
+      }
+    },
+    {
+      "seed": 29890019,
+      "arm": "H",
+      "plans": 100,
+      "empty_user_plans": 23,
+      "mean_plan_users": 3.97,
+      "min_plan_users": 0,
+      "max_plan_users": 7,
+      "modeled_plans": 77,
+      "candidate_count": 7172,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 0,
+        "observed-current": 4,
+        "observed-memory": 96
+      },
+      "first_observed_bs_plan_tick": 0,
+      "mean_plan_bs_error_m": 0.0001272330659742266,
+      "max_plan_bs_error_m": 0.0001974025030401181,
+      "native_bs_connected_uav_steps": 19261,
+      "guard_checked_actions": 9548,
+      "guard_blocked_actions": 82,
+      "fallback_codes": {
+        "0": 77,
+        "1": 23
+      }
+    },
+    {
+      "seed": 29890019,
+      "arm": "F",
+      "plans": 100,
+      "empty_user_plans": 23,
+      "mean_plan_users": 3.97,
+      "min_plan_users": 0,
+      "max_plan_users": 7,
+      "modeled_plans": 77,
+      "candidate_count": 7172,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 0,
+        "observed-current": 4,
+        "observed-memory": 96
+      },
+      "first_observed_bs_plan_tick": 0,
+      "mean_plan_bs_error_m": 0.0001272330659742266,
+      "max_plan_bs_error_m": 0.0001974025030401181,
+      "native_bs_connected_uav_steps": 19261,
+      "guard_checked_actions": 9548,
+      "guard_blocked_actions": 82,
+      "fallback_codes": {
+        "0": 77,
+        "1": 23
+      }
+    },
+    {
+      "seed": 29890020,
+      "arm": "C",
+      "plans": 100,
+      "empty_user_plans": 4,
+      "mean_plan_users": 24.34,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 0,
+      "candidate_count": 0,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 100,
+        "observed-current": 0,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": null,
+      "mean_plan_bs_error_m": 1393.2348971879846,
+      "max_plan_bs_error_m": 1393.2348971879842,
+      "native_bs_connected_uav_steps": 10276,
+      "guard_checked_actions": 14486,
+      "guard_blocked_actions": 556,
+      "fallback_codes": {
+        "-1": 100
+      }
+    },
+    {
+      "seed": 29890020,
+      "arm": "H",
+      "plans": 100,
+      "empty_user_plans": 4,
+      "mean_plan_users": 25.5,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 96,
+      "candidate_count": 8124,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 100,
+        "observed-current": 0,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": null,
+      "mean_plan_bs_error_m": 1393.2348971879846,
+      "max_plan_bs_error_m": 1393.2348971879842,
+      "native_bs_connected_uav_steps": 11186,
+      "guard_checked_actions": 18242,
+      "guard_blocked_actions": 1097,
+      "fallback_codes": {
+        "0": 96,
+        "1": 4
+      }
+    },
+    {
+      "seed": 29890020,
+      "arm": "F",
+      "plans": 100,
+      "empty_user_plans": 4,
+      "mean_plan_users": 24.74,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 96,
+      "candidate_count": 8088,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 100,
+        "observed-current": 0,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": null,
+      "mean_plan_bs_error_m": 1393.2348971879846,
+      "max_plan_bs_error_m": 1393.2348971879842,
+      "native_bs_connected_uav_steps": 8364,
+      "guard_checked_actions": 17584,
+      "guard_blocked_actions": 1508,
+      "fallback_codes": {
+        "0": 96,
+        "1": 4
+      }
+    },
+    {
+      "seed": 29890021,
+      "arm": "C",
+      "plans": 100,
+      "empty_user_plans": 4,
+      "mean_plan_users": 20.76,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 0,
+      "candidate_count": 0,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 100,
+        "observed-current": 0,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": null,
+      "mean_plan_bs_error_m": 1159.5599445006317,
+      "max_plan_bs_error_m": 1159.5599445006312,
+      "native_bs_connected_uav_steps": 4750,
+      "guard_checked_actions": 12060,
+      "guard_blocked_actions": 1313,
+      "fallback_codes": {
+        "-1": 100
+      }
+    },
+    {
+      "seed": 29890021,
+      "arm": "H",
+      "plans": 100,
+      "empty_user_plans": 4,
+      "mean_plan_users": 17.04,
+      "min_plan_users": 0,
+      "max_plan_users": 28,
+      "modeled_plans": 96,
+      "candidate_count": 6996,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 100,
+        "observed-current": 0,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": null,
+      "mean_plan_bs_error_m": 1159.5599445006317,
+      "max_plan_bs_error_m": 1159.5599445006312,
+      "native_bs_connected_uav_steps": 0,
+      "guard_checked_actions": 0,
+      "guard_blocked_actions": 0,
+      "fallback_codes": {
+        "0": 96,
+        "1": 4
+      }
+    },
+    {
+      "seed": 29890021,
+      "arm": "F",
+      "plans": 100,
+      "empty_user_plans": 4,
+      "mean_plan_users": 17.04,
+      "min_plan_users": 0,
+      "max_plan_users": 28,
+      "modeled_plans": 96,
+      "candidate_count": 6996,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 100,
+        "observed-current": 0,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": null,
+      "mean_plan_bs_error_m": 1159.5599445006317,
+      "max_plan_bs_error_m": 1159.5599445006312,
+      "native_bs_connected_uav_steps": 0,
+      "guard_checked_actions": 0,
+      "guard_blocked_actions": 0,
+      "fallback_codes": {
+        "0": 96,
+        "1": 4
+      }
+    },
+    {
+      "seed": 29890022,
+      "arm": "C",
+      "plans": 100,
+      "empty_user_plans": 3,
+      "mean_plan_users": 22.02,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 0,
+      "candidate_count": 0,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 100,
+        "observed-current": 0,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": null,
+      "mean_plan_bs_error_m": 585.0181996528952,
+      "max_plan_bs_error_m": 585.0181996528952,
+      "native_bs_connected_uav_steps": 4467,
+      "guard_checked_actions": 13586,
+      "guard_blocked_actions": 1078,
+      "fallback_codes": {
+        "-1": 100
+      }
+    },
+    {
+      "seed": 29890022,
+      "arm": "H",
+      "plans": 100,
+      "empty_user_plans": 3,
+      "mean_plan_users": 20.25,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 97,
+      "candidate_count": 7384,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 100,
+        "observed-current": 0,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": null,
+      "mean_plan_bs_error_m": 585.0181996528952,
+      "max_plan_bs_error_m": 585.0181996528952,
+      "native_bs_connected_uav_steps": 3851,
+      "guard_checked_actions": 15451,
+      "guard_blocked_actions": 595,
+      "fallback_codes": {
+        "0": 97,
+        "1": 3
+      }
+    },
+    {
+      "seed": 29890022,
+      "arm": "F",
+      "plans": 100,
+      "empty_user_plans": 3,
+      "mean_plan_users": 19.58,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 97,
+      "candidate_count": 7240,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 100,
+        "observed-current": 0,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": null,
+      "mean_plan_bs_error_m": 585.0181996528952,
+      "max_plan_bs_error_m": 585.0181996528952,
+      "native_bs_connected_uav_steps": 4014,
+      "guard_checked_actions": 15254,
+      "guard_blocked_actions": 600,
+      "fallback_codes": {
+        "0": 97,
+        "1": 3
+      }
+    },
+    {
+      "seed": 29890023,
+      "arm": "C",
+      "plans": 100,
+      "empty_user_plans": 3,
+      "mean_plan_users": 21.44,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 0,
+      "candidate_count": 0,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 10,
+        "observed-current": 69,
+        "observed-memory": 21
+      },
+      "first_observed_bs_plan_tick": 300,
+      "mean_plan_bs_error_m": 144.03055535279705,
+      "max_plan_bs_error_m": 1440.3041749154725,
+      "native_bs_connected_uav_steps": 12818,
+      "guard_checked_actions": 13986,
+      "guard_blocked_actions": 966,
+      "fallback_codes": {
+        "-1": 100
+      }
+    },
+    {
+      "seed": 29890023,
+      "arm": "H",
+      "plans": 100,
+      "empty_user_plans": 4,
+      "mean_plan_users": 18.7,
+      "min_plan_users": 0,
+      "max_plan_users": 25,
+      "modeled_plans": 96,
+      "candidate_count": 7344,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 68,
+        "observed-current": 26,
+        "observed-memory": 6
+      },
+      "first_observed_bs_plan_tick": 2040,
+      "mean_plan_bs_error_m": 979.4068807058597,
+      "max_plan_bs_error_m": 1440.3041749154725,
+      "native_bs_connected_uav_steps": 18380,
+      "guard_checked_actions": 16154,
+      "guard_blocked_actions": 785,
+      "fallback_codes": {
+        "0": 96,
+        "1": 4
+      }
+    },
+    {
+      "seed": 29890023,
+      "arm": "F",
+      "plans": 100,
+      "empty_user_plans": 4,
+      "mean_plan_users": 20.19,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 96,
+      "candidate_count": 6816,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 77,
+        "observed-current": 23,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": 2310,
+      "mean_plan_bs_error_m": 1109.0342575529462,
+      "max_plan_bs_error_m": 1440.3041749154725,
+      "native_bs_connected_uav_steps": 14904,
+      "guard_checked_actions": 15009,
+      "guard_blocked_actions": 673,
+      "fallback_codes": {
+        "0": 96,
+        "1": 4
+      }
+    },
+    {
+      "seed": 29890024,
+      "arm": "C",
+      "plans": 100,
+      "empty_user_plans": 5,
+      "mean_plan_users": 20.83,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 0,
+      "candidate_count": 0,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 9,
+        "observed-current": 49,
+        "observed-memory": 42
+      },
+      "first_observed_bs_plan_tick": 270,
+      "mean_plan_bs_error_m": 98.53252055937101,
+      "max_plan_bs_error_m": 1094.8045037189856,
+      "native_bs_connected_uav_steps": 8172,
+      "guard_checked_actions": 12301,
+      "guard_blocked_actions": 745,
+      "fallback_codes": {
+        "-1": 100
+      }
+    },
+    {
+      "seed": 29890024,
+      "arm": "H",
+      "plans": 100,
+      "empty_user_plans": 5,
+      "mean_plan_users": 21.32,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 95,
+      "candidate_count": 7256,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 45,
+        "observed-current": 39,
+        "observed-memory": 16
+      },
+      "first_observed_bs_plan_tick": 1350,
+      "mean_plan_bs_error_m": 492.6621105448919,
+      "max_plan_bs_error_m": 1094.8045037189856,
+      "native_bs_connected_uav_steps": 8124,
+      "guard_checked_actions": 17198,
+      "guard_blocked_actions": 1491,
+      "fallback_codes": {
+        "0": 95,
+        "1": 5
+      }
+    },
+    {
+      "seed": 29890024,
+      "arm": "F",
+      "plans": 100,
+      "empty_user_plans": 5,
+      "mean_plan_users": 20.92,
+      "min_plan_users": 0,
+      "max_plan_users": 29,
+      "modeled_plans": 95,
+      "candidate_count": 7052,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 38,
+        "observed-current": 56,
+        "observed-memory": 6
+      },
+      "first_observed_bs_plan_tick": 1140,
+      "mean_plan_bs_error_m": 416.0257916387076,
+      "max_plan_bs_error_m": 1094.8045037189856,
+      "native_bs_connected_uav_steps": 6979,
+      "guard_checked_actions": 16717,
+      "guard_blocked_actions": 832,
+      "fallback_codes": {
+        "0": 95,
+        "1": 5
+      }
+    },
+    {
+      "seed": 29890025,
+      "arm": "C",
+      "plans": 100,
+      "empty_user_plans": 5,
+      "mean_plan_users": 22.71,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 0,
+      "candidate_count": 0,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 0,
+        "observed-current": 3,
+        "observed-memory": 97
+      },
+      "first_observed_bs_plan_tick": 0,
+      "mean_plan_bs_error_m": 7.794010949800551e-05,
+      "max_plan_bs_error_m": 7.917247511585116e-05,
+      "native_bs_connected_uav_steps": 5816,
+      "guard_checked_actions": 13122,
+      "guard_blocked_actions": 1471,
+      "fallback_codes": {
+        "-1": 100
+      }
+    },
+    {
+      "seed": 29890025,
+      "arm": "H",
+      "plans": 100,
+      "empty_user_plans": 6,
+      "mean_plan_users": 8.66,
+      "min_plan_users": 0,
+      "max_plan_users": 23,
+      "modeled_plans": 94,
+      "candidate_count": 7204,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 0,
+        "observed-current": 3,
+        "observed-memory": 97
+      },
+      "first_observed_bs_plan_tick": 0,
+      "mean_plan_bs_error_m": 7.794010949800551e-05,
+      "max_plan_bs_error_m": 7.917247511585116e-05,
+      "native_bs_connected_uav_steps": 16918,
+      "guard_checked_actions": 10936,
+      "guard_blocked_actions": 566,
+      "fallback_codes": {
+        "0": 94,
+        "1": 6
+      }
+    },
+    {
+      "seed": 29890025,
+      "arm": "F",
+      "plans": 100,
+      "empty_user_plans": 6,
+      "mean_plan_users": 8.37,
+      "min_plan_users": 0,
+      "max_plan_users": 23,
+      "modeled_plans": 94,
+      "candidate_count": 7228,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 0,
+        "observed-current": 3,
+        "observed-memory": 97
+      },
+      "first_observed_bs_plan_tick": 0,
+      "mean_plan_bs_error_m": 7.794010949800551e-05,
+      "max_plan_bs_error_m": 7.917247511585116e-05,
+      "native_bs_connected_uav_steps": 17301,
+      "guard_checked_actions": 11238,
+      "guard_blocked_actions": 416,
+      "fallback_codes": {
+        "0": 94,
+        "1": 6
+      }
+    },
+    {
+      "seed": 29890026,
+      "arm": "C",
+      "plans": 100,
+      "empty_user_plans": 2,
+      "mean_plan_users": 20.77,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 0,
+      "candidate_count": 0,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 5,
+        "observed-current": 67,
+        "observed-memory": 28
+      },
+      "first_observed_bs_plan_tick": 150,
+      "mean_plan_bs_error_m": 69.25551626141453,
+      "max_plan_bs_error_m": 1385.1058011584682,
+      "native_bs_connected_uav_steps": 13497,
+      "guard_checked_actions": 14117,
+      "guard_blocked_actions": 1103,
+      "fallback_codes": {
+        "-1": 100
+      }
+    },
+    {
+      "seed": 29890026,
+      "arm": "H",
+      "plans": 100,
+      "empty_user_plans": 3,
+      "mean_plan_users": 19.03,
+      "min_plan_users": 0,
+      "max_plan_users": 28,
+      "modeled_plans": 97,
+      "candidate_count": 7720,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 100,
+        "observed-current": 0,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": null,
+      "mean_plan_bs_error_m": 1385.1058011584682,
+      "max_plan_bs_error_m": 1385.1058011584682,
+      "native_bs_connected_uav_steps": 18262,
+      "guard_checked_actions": 17427,
+      "guard_blocked_actions": 936,
+      "fallback_codes": {
+        "0": 97,
+        "1": 3
+      }
+    },
+    {
+      "seed": 29890026,
+      "arm": "F",
+      "plans": 100,
+      "empty_user_plans": 3,
+      "mean_plan_users": 18.39,
+      "min_plan_users": 0,
+      "max_plan_users": 23,
+      "modeled_plans": 97,
+      "candidate_count": 8080,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 100,
+        "observed-current": 0,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": null,
+      "mean_plan_bs_error_m": 1385.1058011584682,
+      "max_plan_bs_error_m": 1385.1058011584682,
+      "native_bs_connected_uav_steps": 19566,
+      "guard_checked_actions": 18276,
+      "guard_blocked_actions": 1493,
+      "fallback_codes": {
+        "0": 97,
+        "1": 3
+      }
+    },
+    {
+      "seed": 29890027,
+      "arm": "C",
+      "plans": 100,
+      "empty_user_plans": 3,
+      "mean_plan_users": 18.46,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 0,
+      "candidate_count": 0,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 7,
+        "observed-current": 38,
+        "observed-memory": 55
+      },
+      "first_observed_bs_plan_tick": 210,
+      "mean_plan_bs_error_m": 35.71219428067697,
+      "max_plan_bs_error_m": 510.172981301537,
+      "native_bs_connected_uav_steps": 4685,
+      "guard_checked_actions": 13328,
+      "guard_blocked_actions": 992,
+      "fallback_codes": {
+        "-1": 100
+      }
+    },
+    {
+      "seed": 29890027,
+      "arm": "H",
+      "plans": 100,
+      "empty_user_plans": 3,
+      "mean_plan_users": 9.62,
+      "min_plan_users": 0,
+      "max_plan_users": 21,
+      "modeled_plans": 97,
+      "candidate_count": 7228,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 78,
+        "observed-current": 22,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": 2340,
+      "mean_plan_bs_error_m": 397.9349391966342,
+      "max_plan_bs_error_m": 510.172981301537,
+      "native_bs_connected_uav_steps": 1212,
+      "guard_checked_actions": 3683,
+      "guard_blocked_actions": 1347,
+      "fallback_codes": {
+        "0": 97,
+        "1": 3
+      }
+    },
+    {
+      "seed": 29890027,
+      "arm": "F",
+      "plans": 100,
+      "empty_user_plans": 3,
+      "mean_plan_users": 9.49,
+      "min_plan_users": 0,
+      "max_plan_users": 21,
+      "modeled_plans": 97,
+      "candidate_count": 7060,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 78,
+        "observed-current": 22,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": 2340,
+      "mean_plan_bs_error_m": 397.93496658429007,
+      "max_plan_bs_error_m": 510.172981301537,
+      "native_bs_connected_uav_steps": 1247,
+      "guard_checked_actions": 3209,
+      "guard_blocked_actions": 937,
+      "fallback_codes": {
+        "0": 97,
+        "1": 3
+      }
+    },
+    {
+      "seed": 29890028,
+      "arm": "C",
+      "plans": 100,
+      "empty_user_plans": 3,
+      "mean_plan_users": 19.78,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 0,
+      "candidate_count": 0,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 5,
+        "observed-current": 71,
+        "observed-memory": 24
+      },
+      "first_observed_bs_plan_tick": 150,
+      "mean_plan_bs_error_m": 66.45132361052276,
+      "max_plan_bs_error_m": 1329.0248262222424,
+      "native_bs_connected_uav_steps": 11773,
+      "guard_checked_actions": 14227,
+      "guard_blocked_actions": 973,
+      "fallback_codes": {
+        "-1": 100
+      }
+    },
+    {
+      "seed": 29890028,
+      "arm": "H",
+      "plans": 100,
+      "empty_user_plans": 3,
+      "mean_plan_users": 16.83,
+      "min_plan_users": 0,
+      "max_plan_users": 24,
+      "modeled_plans": 97,
+      "candidate_count": 7876,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 7,
+        "observed-current": 93,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": 210,
+      "mean_plan_bs_error_m": 93.03188109494346,
+      "max_plan_bs_error_m": 1329.0248262222424,
+      "native_bs_connected_uav_steps": 18272,
+      "guard_checked_actions": 17353,
+      "guard_blocked_actions": 1042,
+      "fallback_codes": {
+        "0": 97,
+        "1": 3
+      }
+    },
+    {
+      "seed": 29890028,
+      "arm": "F",
+      "plans": 100,
+      "empty_user_plans": 3,
+      "mean_plan_users": 20.63,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 97,
+      "candidate_count": 7180,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 6,
+        "observed-current": 88,
+        "observed-memory": 6
+      },
+      "first_observed_bs_plan_tick": 180,
+      "mean_plan_bs_error_m": 79.7416474316782,
+      "max_plan_bs_error_m": 1329.0248262222424,
+      "native_bs_connected_uav_steps": 13577,
+      "guard_checked_actions": 16780,
+      "guard_blocked_actions": 628,
+      "fallback_codes": {
+        "0": 97,
+        "1": 3
+      }
+    },
+    {
+      "seed": 29890029,
+      "arm": "C",
+      "plans": 100,
+      "empty_user_plans": 3,
+      "mean_plan_users": 22.78,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 0,
+      "candidate_count": 0,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 5,
+        "observed-current": 58,
+        "observed-memory": 37
+      },
+      "first_observed_bs_plan_tick": 150,
+      "mean_plan_bs_error_m": 38.96748578472603,
+      "max_plan_bs_error_m": 779.3468292131549,
+      "native_bs_connected_uav_steps": 11848,
+      "guard_checked_actions": 13096,
+      "guard_blocked_actions": 952,
+      "fallback_codes": {
+        "-1": 100
+      }
+    },
+    {
+      "seed": 29890029,
+      "arm": "H",
+      "plans": 100,
+      "empty_user_plans": 3,
+      "mean_plan_users": 12.94,
+      "min_plan_users": 0,
+      "max_plan_users": 23,
+      "modeled_plans": 97,
+      "candidate_count": 7816,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 73,
+        "observed-current": 27,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": 2190,
+      "mean_plan_bs_error_m": 568.9232333282783,
+      "max_plan_bs_error_m": 779.3468292131549,
+      "native_bs_connected_uav_steps": 19849,
+      "guard_checked_actions": 12508,
+      "guard_blocked_actions": 532,
+      "fallback_codes": {
+        "0": 97,
+        "1": 3
+      }
+    },
+    {
+      "seed": 29890029,
+      "arm": "F",
+      "plans": 100,
+      "empty_user_plans": 3,
+      "mean_plan_users": 13.11,
+      "min_plan_users": 0,
+      "max_plan_users": 23,
+      "modeled_plans": 97,
+      "candidate_count": 7780,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 75,
+        "observed-current": 14,
+        "observed-memory": 11
+      },
+      "first_observed_bs_plan_tick": 2250,
+      "mean_plan_bs_error_m": 584.5101547251038,
+      "max_plan_bs_error_m": 779.3468292131549,
+      "native_bs_connected_uav_steps": 19470,
+      "guard_checked_actions": 12407,
+      "guard_blocked_actions": 455,
+      "fallback_codes": {
+        "0": 97,
+        "1": 3
+      }
+    },
+    {
+      "seed": 29890030,
+      "arm": "C",
+      "plans": 100,
+      "empty_user_plans": 2,
+      "mean_plan_users": 20.13,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 0,
+      "candidate_count": 0,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 1,
+        "observed-current": 69,
+        "observed-memory": 30
+      },
+      "first_observed_bs_plan_tick": 30,
+      "mean_plan_bs_error_m": 9.605538454188041,
+      "max_plan_bs_error_m": 960.5350044729097,
+      "native_bs_connected_uav_steps": 13238,
+      "guard_checked_actions": 14267,
+      "guard_blocked_actions": 912,
+      "fallback_codes": {
+        "-1": 100
+      }
+    },
+    {
+      "seed": 29890030,
+      "arm": "H",
+      "plans": 100,
+      "empty_user_plans": 3,
+      "mean_plan_users": 6.39,
+      "min_plan_users": 0,
+      "max_plan_users": 15,
+      "modeled_plans": 97,
+      "candidate_count": 7816,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 1,
+        "observed-current": 59,
+        "observed-memory": 40
+      },
+      "first_observed_bs_plan_tick": 30,
+      "mean_plan_bs_error_m": 9.60558095943476,
+      "max_plan_bs_error_m": 960.5350044729097,
+      "native_bs_connected_uav_steps": 21661,
+      "guard_checked_actions": 9193,
+      "guard_blocked_actions": 60,
+      "fallback_codes": {
+        "0": 97,
+        "1": 3
+      }
+    },
+    {
+      "seed": 29890030,
+      "arm": "F",
+      "plans": 100,
+      "empty_user_plans": 3,
+      "mean_plan_users": 6.39,
+      "min_plan_users": 0,
+      "max_plan_users": 16,
+      "modeled_plans": 97,
+      "candidate_count": 7984,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 1,
+        "observed-current": 59,
+        "observed-memory": 40
+      },
+      "first_observed_bs_plan_tick": 30,
+      "mean_plan_bs_error_m": 9.605584816913368,
+      "max_plan_bs_error_m": 960.5350044729097,
+      "native_bs_connected_uav_steps": 22455,
+      "guard_checked_actions": 9374,
+      "guard_blocked_actions": 151,
+      "fallback_codes": {
+        "0": 97,
+        "1": 3
+      }
+    },
+    {
+      "seed": 29890031,
+      "arm": "C",
+      "plans": 100,
+      "empty_user_plans": 2,
+      "mean_plan_users": 21.53,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 0,
+      "candidate_count": 0,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 0,
+        "observed-current": 56,
+        "observed-memory": 44
+      },
+      "first_observed_bs_plan_tick": 0,
+      "mean_plan_bs_error_m": 0.00018219060951122336,
+      "max_plan_bs_error_m": 0.00034113958594908256,
+      "native_bs_connected_uav_steps": 11490,
+      "guard_checked_actions": 13714,
+      "guard_blocked_actions": 705,
+      "fallback_codes": {
+        "-1": 100
+      }
+    },
+    {
+      "seed": 29890031,
+      "arm": "H",
+      "plans": 100,
+      "empty_user_plans": 19,
+      "mean_plan_users": 4.19,
+      "min_plan_users": 0,
+      "max_plan_users": 10,
+      "modeled_plans": 81,
+      "candidate_count": 7140,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 0,
+        "observed-current": 66,
+        "observed-memory": 34
+      },
+      "first_observed_bs_plan_tick": 0,
+      "mean_plan_bs_error_m": 0.00021555615003057,
+      "max_plan_bs_error_m": 0.00032067840209228175,
+      "native_bs_connected_uav_steps": 18784,
+      "guard_checked_actions": 7494,
+      "guard_blocked_actions": 308,
+      "fallback_codes": {
+        "0": 81,
+        "1": 19
+      }
+    },
+    {
+      "seed": 29890031,
+      "arm": "F",
+      "plans": 100,
+      "empty_user_plans": 3,
+      "mean_plan_users": 15.85,
+      "min_plan_users": 0,
+      "max_plan_users": 29,
+      "modeled_plans": 97,
+      "candidate_count": 7780,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 0,
+        "observed-current": 92,
+        "observed-memory": 8
+      },
+      "first_observed_bs_plan_tick": 0,
+      "mean_plan_bs_error_m": 0.00018293762538717148,
+      "max_plan_bs_error_m": 0.0003761914936428568,
+      "native_bs_connected_uav_steps": 16926,
+      "guard_checked_actions": 13716,
+      "guard_blocked_actions": 1956,
+      "fallback_codes": {
+        "0": 97,
+        "1": 3
+      }
+    },
+    {
+      "seed": 29890032,
+      "arm": "C",
+      "plans": 100,
+      "empty_user_plans": 2,
+      "mean_plan_users": 17.92,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 0,
+      "candidate_count": 0,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 15,
+        "observed-current": 63,
+        "observed-memory": 22
+      },
+      "first_observed_bs_plan_tick": 450,
+      "mean_plan_bs_error_m": 138.95453744389374,
+      "max_plan_bs_error_m": 926.3628330822414,
+      "native_bs_connected_uav_steps": 13608,
+      "guard_checked_actions": 14531,
+      "guard_blocked_actions": 1058,
+      "fallback_codes": {
+        "-1": 100
+      }
+    },
+    {
+      "seed": 29890032,
+      "arm": "H",
+      "plans": 100,
+      "empty_user_plans": 3,
+      "mean_plan_users": 10.22,
+      "min_plan_users": 0,
+      "max_plan_users": 27,
+      "modeled_plans": 97,
+      "candidate_count": 7936,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 57,
+        "observed-current": 42,
+        "observed-memory": 1
+      },
+      "first_observed_bs_plan_tick": 1710,
+      "mean_plan_bs_error_m": 528.0268584589526,
+      "max_plan_bs_error_m": 926.3628330822414,
+      "native_bs_connected_uav_steps": 21584,
+      "guard_checked_actions": 13259,
+      "guard_blocked_actions": 299,
+      "fallback_codes": {
+        "0": 97,
+        "1": 3
+      }
+    },
+    {
+      "seed": 29890032,
+      "arm": "F",
+      "plans": 100,
+      "empty_user_plans": 2,
+      "mean_plan_users": 10.88,
+      "min_plan_users": 0,
+      "max_plan_users": 27,
+      "modeled_plans": 98,
+      "candidate_count": 8156,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 57,
+        "observed-current": 43,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": 1710,
+      "mean_plan_bs_error_m": 528.0268850093199,
+      "max_plan_bs_error_m": 926.3628330822414,
+      "native_bs_connected_uav_steps": 20373,
+      "guard_checked_actions": 15647,
+      "guard_blocked_actions": 524,
+      "fallback_codes": {
+        "0": 98,
+        "1": 2
+      }
+    }
+  ],
+  "zero_service_world_29890021": [
+    {
+      "seed": 29890021,
+      "arm": "C",
+      "plans": 100,
+      "empty_user_plans": 4,
+      "mean_plan_users": 20.76,
+      "min_plan_users": 0,
+      "max_plan_users": 30,
+      "modeled_plans": 0,
+      "candidate_count": 0,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 100,
+        "observed-current": 0,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": null,
+      "mean_plan_bs_error_m": 1159.5599445006317,
+      "max_plan_bs_error_m": 1159.5599445006312,
+      "native_bs_connected_uav_steps": 4750,
+      "guard_checked_actions": 12060,
+      "guard_blocked_actions": 1313,
+      "fallback_codes": {
+        "-1": 100
+      },
+      "true_bs_xyz": [
+        7920.309914209623,
+        7127.589187835166,
+        30.0
+      ],
+      "plan_bs_unique": [
+        [
+          7156.452178955078,
+          8000.0
+        ]
+      ]
+    },
+    {
+      "seed": 29890021,
+      "arm": "H",
+      "plans": 100,
+      "empty_user_plans": 4,
+      "mean_plan_users": 17.04,
+      "min_plan_users": 0,
+      "max_plan_users": 28,
+      "modeled_plans": 96,
+      "candidate_count": 6996,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 100,
+        "observed-current": 0,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": null,
+      "mean_plan_bs_error_m": 1159.5599445006317,
+      "max_plan_bs_error_m": 1159.5599445006312,
+      "native_bs_connected_uav_steps": 0,
+      "guard_checked_actions": 0,
+      "guard_blocked_actions": 0,
+      "fallback_codes": {
+        "0": 96,
+        "1": 4
+      },
+      "true_bs_xyz": [
+        7920.309914209623,
+        7127.589187835166,
+        30.0
+      ],
+      "plan_bs_unique": [
+        [
+          7156.452178955078,
+          8000.0
+        ]
+      ],
+      "selected_records": 96,
+      "selected_kind_counts": {
+        "0": 17,
+        "2": 65,
+        "3": 11,
+        "4": 3
+      },
+      "selected_score": {
+        "minimum": -12.163506491330063,
+        "mean": -0.35481354899204054,
+        "maximum": 0.0
+      },
+      "selected_qos": {
+        "minimum": 0.0,
+        "mean": 0.0,
+        "maximum": 0.0
+      },
+      "selected_return_cost": {
+        "minimum": 0.0,
+        "mean": 0.005913559149867343,
+        "maximum": 0.21993605631695778
+      },
+      "first_selected": [
+        {
+          "tick": 120,
+          "index": 3,
+          "kind": 3,
+          "q": 12,
+          "score": 0.0,
+          "qos": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "targets": [
+            [
+              4237.318515777588,
+              1573.0334520339966,
+              100.00000149011612
+            ],
+            [
+              4294.853210449219,
+              1899.1488218307495,
+              100.00000149011612
+            ],
+            [
+              4550.165176391602,
+              2482.7351570129395,
+              100.00000149011612
+            ],
+            [
+              4396.052837371826,
+              1535.4773998260498,
+              100.00000149011612
+            ],
+            [
+              4651.6547203063965,
+              2166.569471359253,
+              100.00000149011612
+            ],
+            [
+              4828.92370223999,
+              2617.107391357422,
+              100.00000149011612
+            ],
+            [
+              4665.432929992676,
+              1801.038384437561,
+              100.00000149011612
+            ],
+            [
+              4946.274280548096,
+              2396.2559700012207,
+              100.00000149011612
+            ]
+          ]
+        },
+        {
+          "tick": 150,
+          "index": 2,
+          "kind": 2,
+          "q": 12,
+          "score": 0.0,
+          "qos": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "targets": [
+            [
+              4237.318515777588,
+              1573.0334520339966,
+              100.00000149011612
+            ],
+            [
+              4294.853210449219,
+              1899.1488218307495,
+              100.00000149011612
+            ],
+            [
+              4550.165176391602,
+              2482.7351570129395,
+              100.00000149011612
+            ],
+            [
+              4396.052837371826,
+              1535.4773998260498,
+              100.00000149011612
+            ],
+            [
+              4651.6547203063965,
+              2166.569471359253,
+              100.00000149011612
+            ],
+            [
+              4828.92370223999,
+              2617.107391357422,
+              100.00000149011612
+            ],
+            [
+              4665.432929992676,
+              1801.038384437561,
+              100.00000149011612
+            ],
+            [
+              4946.274280548096,
+              2396.2559700012207,
+              100.00000149011612
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 29890021,
+      "arm": "F",
+      "plans": 100,
+      "empty_user_plans": 4,
+      "mean_plan_users": 17.04,
+      "min_plan_users": 0,
+      "max_plan_users": 28,
+      "modeled_plans": 96,
+      "candidate_count": 6996,
+      "bs_sources": {
+        "absent": 0,
+        "inferred": 100,
+        "observed-current": 0,
+        "observed-memory": 0
+      },
+      "first_observed_bs_plan_tick": null,
+      "mean_plan_bs_error_m": 1159.5599445006317,
+      "max_plan_bs_error_m": 1159.5599445006312,
+      "native_bs_connected_uav_steps": 0,
+      "guard_checked_actions": 0,
+      "guard_blocked_actions": 0,
+      "fallback_codes": {
+        "0": 96,
+        "1": 4
+      },
+      "true_bs_xyz": [
+        7920.309914209623,
+        7127.589187835166,
+        30.0
+      ],
+      "plan_bs_unique": [
+        [
+          7156.452178955078,
+          8000.0
+        ]
+      ],
+      "selected_records": 96,
+      "selected_kind_counts": {
+        "0": 17,
+        "2": 65,
+        "3": 11,
+        "4": 3
+      },
+      "selected_score": {
+        "minimum": -12.163506491330063,
+        "mean": -0.35481354899204054,
+        "maximum": 0.0
+      },
+      "selected_qos": {
+        "minimum": 0.0,
+        "mean": 0.0,
+        "maximum": 0.0
+      },
+      "selected_return_cost": {
+        "minimum": 0.0,
+        "mean": 0.005913559149867343,
+        "maximum": 0.21993605631695778
+      },
+      "first_selected": [
+        {
+          "tick": 120,
+          "index": 3,
+          "kind": 3,
+          "q": 12,
+          "score": 0.0,
+          "qos": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "targets": [
+            [
+              4237.318515777588,
+              1573.0334520339966,
+              100.00000149011612
+            ],
+            [
+              4294.853210449219,
+              1899.1488218307495,
+              100.00000149011612
+            ],
+            [
+              4550.165176391602,
+              2482.7351570129395,
+              100.00000149011612
+            ],
+            [
+              4396.052837371826,
+              1535.4773998260498,
+              100.00000149011612
+            ],
+            [
+              4651.6547203063965,
+              2166.569471359253,
+              100.00000149011612
+            ],
+            [
+              4828.92370223999,
+              2617.107391357422,
+              100.00000149011612
+            ],
+            [
+              4665.432929992676,
+              1801.038384437561,
+              100.00000149011612
+            ],
+            [
+              4946.274280548096,
+              2396.2559700012207,
+              100.00000149011612
+            ]
+          ]
+        },
+        {
+          "tick": 150,
+          "index": 2,
+          "kind": 2,
+          "q": 12,
+          "score": 0.0,
+          "qos": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "targets": [
+            [
+              4237.318515777588,
+              1573.0334520339966,
+              100.00000149011612
+            ],
+            [
+              4294.853210449219,
+              1899.1488218307495,
+              100.00000149011612
+            ],
+            [
+              4550.165176391602,
+              2482.7351570129395,
+              100.00000149011612
+            ],
+            [
+              4396.052837371826,
+              1535.4773998260498,
+              100.00000149011612
+            ],
+            [
+              4651.6547203063965,
+              2166.569471359253,
+              100.00000149011612
+            ],
+            [
+              4828.92370223999,
+              2617.107391357422,
+              100.00000149011612
+            ],
+            [
+              4665.432929992676,
+              1801.038384437561,
+              100.00000149011612
+            ],
+            [
+              4946.274280548096,
+              2396.2559700012207,
+              100.00000149011612
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "resources": {
+    "cpu_seconds": 0.18730918899999982,
+    "wall_seconds": 0.29333916096948087,
+    "peak_rss_kib": 56388
+  }
+}

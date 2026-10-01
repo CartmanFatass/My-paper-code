@@ -7198,3 +7198,193 @@ Source is `93166e7ac6cffa3c76da113afdc84e7317bb585c`. All 32 frozen worlds / 96 
 The collected 11 top-level JSON files plus the two empty logs match remote SHA-256 and size (5,847,688 bytes before the collection record). A fresh streaming verification of every manifest entry found no mismatch: 192 canonical raw/progress files use 906,262,386 stored bytes / 906,805,248 allocated bytes; the 96 NPZ files alone use 906,213,874 stored / 906,412,032 allocated bytes and represent 6,954,552,608 uncompressed array bytes. The sole required bulk stays at `wsl_4070:/home/wu/projects/HMASD/runs/uav_fleet_transmission/b09_service_prediction_a01/raw/`; no local bulk replica was made. Collection verification is in `runs/uav_fleet_transmission/b09_service_prediction_a01/collection.json`. Manifest SHA-256 `2c2f58b6c58de4281f54e911e2fe0dc6ce8f4b728b7353680c36c8e17e6afe8e`; summary `382c9dfece3d6fe9d10fd9134aa0c4d40d9148d54cec5078af63886cfc60ced2`; full reading `be5173390e9c9632adc3603ad240daebdb6b89f076eb2388900c690b90a3d909`; per-world reading `48b83e463b662c61ee3b12dd2a7bbe0771ce2f2de2d62e59d226f7556222eda3`.
 
 Scientific worker body CPU sum 18,465.250576 s; reader body CPU sum 10,287.260157 s. Reaped CPU including worker/reader startup and serialization is 18,476.495185 + 10,291.558094 s; with parent chain CPU 6.174499 s, full recorded chain total is **28,774.227778 CPU s (7.993 h)**. Worker-parent wall 4,531.465171 s, reader-parent wall 5,032.932096 s, full chain wall 9,566.774583 s (2.657 h). Worker peak RSS max 619,936 KiB, reader max 652,304 KiB, parent 484,704 KiB; these are per-process maxima, not a simultaneous sum. Admission, support, independent scientific reading and publication remain additional, unmeasured costs, with finite checks/engineering costs retained above. These occupied-node measurements are not isolated performance benchmarks or a real-time deployment guarantee.
+
+
+### B09 bounded static telemetry reading scope — 2026-10-01
+
+To distinguish search nonactivation from a service/route failure in the complete result, inspect only already saved arrays from the 96 canonical NPZ files: plan user counts, BS source and estimate, candidate-count/fallback fields, native BS-connection and guard summaries. For the complete-zero-service world 29890021, also read its saved selected candidate scores and QoS and compare recorded native route/service facts. This is retrospective descriptive inspection on the existing own histories, not a controller counterfactual or a new outcome; at most 96 saved files, zero model/proposal/RF/native calls, zero fits. Preserve all worlds and do not turn an observed subgroup or residual into an identified cause. Keep a compact reading with source/manifest binding; no second raw corpus.
+
+
+<a id="b09-complete-reading"></a>
+### B09 complete reading — scoped anticipation benefit, adverse complete package — 2026-10-01
+
+**Read result:** retain a useful F−H native service/J increment within the frozen service-aware planner; retain C/P_BS as the conditional complete-performance reference; do not adopt H or F as an upgrade. This is the prespecified positive-without-C-superiority branch. All 32 worlds and 96 complete H3000 missions are read, including the six identical F/H worlds and the full-mission zero-service adverse. There is no selected extra world, fit, tuning, confirmation or successor. The owner's round-stop/handoff boundary applies after this publication and measured closure.
+
+Published raw collection/full-replay evidence is `6da7fe816561ce42091dbf69518df559b2526608`, with unchanged launch source `93166e7ac6cffa3c76da113afdc84e7317bb585c`. Full `reading.json` is VERIFIED with no errors, missing decision fields, partial/inflight work or unverified ranking flags. The reader independently reconstructs every one of 485,744 actually executed candidate records, all 288,000 actual proposals/feedback calls and native reductions. All 38 launch bindings match source. Complete user paths agree on all 3,001 boundaries within every world. No actor/fit/label/update or new native step is created by the reader. The independently reduced paired output equals the worker's paired output exactly. This numerical verification does not make the approximate model an exact native continuation or identify a physical cause.
+
+The fixed estimand is the paired-world total effect of each deployed program, conditional on the frozen S7-S2 N8/U30/H3000 setup, source, seeds 29890001–29890032 and free pooling of eight lawful observations. H/F have the same estimated-current map and search/control contract; H holds it into the future and F extrapolates at 10/20/30. H is not B08 M. Later histories can diverge as a consequence of the intervention. Descriptive paired t95 intervals use 31 degrees of freedom; worlds are not training replications, forecast samples are not independent world units, J/QoS are related endpoints, secondary intervals are unadjusted, and no equivalence or confirmation is claimed.
+
+| Contrast | Native J mean [t95] | Cumulative QoS mean [t95] | J positive/negative/tied | J median |
+| --- | ---: | ---: | ---: | ---: |
+| F-H | +65.974167 [+12.280699, +119.667636] | +60.769416 [+9.616908, +111.921924] | 17/9/6 | +3.968212 |
+| H-C | -520.251396 [-698.775304, -341.727487] | -511.608173 [-685.056175, -338.160171] | 3/29/0 | -461.131016 |
+| F-C | -454.277229 [-640.311654, -268.242803] | -450.838757 [-630.752413, -270.925101] | 6/26/0 | -420.728316 |
+
+F−H meets the declared service companion: +60.769416 cumulative QoS contributes most of +65.974167 J, with approximately +5.253451 from lower return penalties and −.048699 from potential. The gain is not merely reduced return cost. It is about +.02025647 QoS per step over H, while F remains −.15027959 below C. The F−H median is much smaller than its mean; worlds 28 and 31 contribute about 51% of its signed aggregate gain. This concentration is retained, not a posthoc subgroup or reason to remove worlds.
+
+The complete signed world table follows. All 42 level/contrast metric descriptors, user/UAV arrays and complete signed vectors remain in `summary.json`, `perworld.json`, `reading.json` and `reading_worlds.json`; the table does not replace them.
+
+| World | F−H J | F−H QoS | H−C J | H−C QoS | F−C J | F−C QoS |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 29890001 | +150.747687 | +151.207294 | -81.748024 | -83.167777 | +68.999663 | +68.039517 |
+| 29890002 | -87.266740 | -114.908755 | -87.980040 | -63.295446 | -175.246780 | -178.204201 |
+| 29890003 | -87.328368 | -87.622252 | -532.087690 | -532.023955 | -619.416058 | -619.646207 |
+| 29890004 | +27.165582 | +27.181309 | -833.950814 | -838.969921 | -806.785232 | -811.788612 |
+| 29890005 | -15.116329 | -14.417295 | -915.160739 | -918.721355 | -930.277068 | -933.138650 |
+| 29890006 | +108.371226 | +108.325709 | -195.568932 | -197.937200 | -87.197705 | -89.611492 |
+| 29890007 | -17.481585 | -17.952680 | -166.470260 | -167.431435 | -183.951845 | -185.384115 |
+| 29890008 | +0.000000 | +0.000000 | -1160.554351 | -1165.061219 | -1160.554351 | -1165.061219 |
+| 29890009 | +128.580616 | +133.483783 | -606.125113 | -608.136702 | -477.544498 | -474.652919 |
+| 29890010 | +0.000000 | +0.000000 | -581.596110 | -585.308442 | -581.596110 | -585.308442 |
+| 29890011 | +114.562739 | +59.118491 | -189.198912 | -135.316418 | -74.636173 | -76.197927 |
+| 29890012 | +0.000000 | +0.000000 | -1261.300794 | -985.646992 | -1261.300794 | -985.646992 |
+| 29890013 | +0.000000 | +0.000000 | -1205.784485 | -1194.260146 | -1205.784485 | -1194.260146 |
+| 29890014 | +242.574488 | +244.594212 | -159.018932 | -163.250259 | +83.555556 | +81.343954 |
+| 29890015 | -95.579130 | -95.182246 | -149.153624 | -146.677971 | -244.732754 | -241.860217 |
+| 29890016 | -27.277160 | -27.007798 | -60.644853 | -62.425495 | -87.922014 | -89.433293 |
+| 29890017 | +35.245797 | +34.941680 | -832.579971 | -833.552367 | -797.334174 | -798.610687 |
+| 29890018 | -48.859208 | -50.243351 | +187.846901 | +188.280231 | +138.987694 | +138.036880 |
+| 29890019 | +0.000000 | +0.000000 | -574.148268 | -576.467111 | -574.148268 | -576.467111 |
+| 29890020 | +38.986502 | +36.625669 | +319.206693 | +320.330930 | +358.193195 | +356.956600 |
+| 29890021 | +0.000000 | +0.000000 | -1633.244823 | -1610.209798 | -1633.244823 | -1610.209798 |
+| 29890022 | -23.217064 | -22.997420 | -42.913516 | -46.993954 | -66.130579 | -69.991374 |
+| 29890023 | +212.184431 | +211.489406 | -255.659273 | -341.494797 | -43.474842 | -130.005391 |
+| 29890024 | +110.728371 | +109.493661 | +202.467000 | +201.198314 | +313.195371 | +310.691975 |
+| 29890025 | +20.725804 | +18.135190 | -424.677829 | -424.300984 | -403.952024 | -406.165794 |
+| 29890026 | +165.669592 | +154.023482 | -329.016516 | -319.877402 | -163.346924 | -165.853920 |
+| 29890027 | +5.941857 | +6.104211 | -1380.889254 | -1381.554762 | -1374.947396 | -1375.450551 |
+| 29890028 | +465.547406 | +448.635848 | -389.011272 | -406.603583 | +76.536134 | +42.032265 |
+| 29890029 | +1.994567 | +2.154497 | -497.584204 | -531.869487 | -495.589637 | -529.714991 |
+| 29890030 | -3.442233 | -3.447745 | -899.246295 | -904.540482 | -902.688528 | -907.988227 |
+| 29890031 | +602.079479 | +547.227423 | -1039.584088 | -982.548249 | -437.504608 | -435.320826 |
+| 29890032 | +85.635023 | +85.658990 | -872.666278 | -873.627299 | -787.031255 | -787.968310 |
+
+| Consequential native level (world mean) | C | H | F |
+| --- | ---: | ---: | ---: |
+| J_total | 2156.274328 | 1636.022932 | 1701.997099 |
+| cumulative_qos | 2194.991927 | 1683.383754 | 1744.153170 |
+| qos_per_planned_step | 0.731664 | 0.561128 | 0.581384 |
+| qos_p10 | 0.547016 | 0.394181 | 0.413009 |
+| user_cumulative_qos_minimum | 1511.078112 | 775.513615 | 828.978804 |
+| user_cumulative_qos_p10 | 1706.720243 | 1005.144565 | 1076.833352 |
+| user_longest_zero_delivery_spell | 378.781250 | 1144.906250 | 1060.281250 |
+| user_zero_delivery_steps | 5866.687500 | 15545.031250 | 14980.593750 |
+| users_without_any_delivery | 0.000000 | 1.031250 | 1.000000 |
+| zero_service_steps | 30.343750 | 183.125000 | 183.125000 |
+| longest_zero_service_spell | 29.843750 | 183.125000 | 183.125000 |
+| travel_per_uav_m | 19318.162260 | 8274.198909 | 8381.931956 |
+| native_consumed_wh | 1387.117821 | 1239.261283 | 1240.642440 |
+| native_charged_wh | 421.197917 | 263.715278 | 269.279514 |
+| native_charging_uav_steps | 1516.312500 | 949.375000 | 969.406250 |
+| native_minimum_battery_ratio | 0.100622 | 0.097584 | 0.099294 |
+| native_reserve_uav_steps | 116.312500 | 278.343750 | 147.625000 |
+| native_final_reserve_uav_count | 0.656250 | 1.843750 | 0.937500 |
+| longest_low_reserve_spell | 16.656250 | 36.906250 | 18.781250 |
+| maximum_charging_wait_steps | 41.406250 | 55.875000 | 47.406250 |
+| native_route_uav_steps | 22601.937500 | 22310.000000 | 22289.000000 |
+| return_constraint_cost_sum | 4.094188 | 8.688441 | 6.061716 |
+| graph_potential_delta_sum | -30.529222 | -29.983939 | -30.032639 |
+| proposal_cpu_seconds | 0.902542 | 172.093440 | 171.809754 |
+| worker_cpu_seconds | 81.917934 | 247.375415 | 247.745731 |
+
+**Service and energy do not collapse into the J mean.** F−C lowers the minimum user's cumulative QoS by 682.099308 on average, with an entirely adverse descriptive interval; the user-p10 deficit is 629.886891. F−C longest individual zero-delivery spells increase by 681.5 ticks [370.365,992.635]; 21 worlds worsen, 10 improve and one ties. F−H individual-tail changes remain uncertain. There are no never-served users under C; H has 33 across the panel and F 32. H/F world 29890021 leaves all 30 users unserved throughout; world 29890012 leaves two each; H additionally leaves one in world 29890031. Mean aggregate zero-service counts and longest spells are identical for H/F in every world, so F's mean-service increment is not evidence of resolving those complete outages.
+
+Both H and F travel less and consume less propulsion energy than C in every world, but deliver substantially less service on average. This is not efficiency at matched service. All cutoff/depletion/post-cutoff counts are zero; reserve risk is not zero and safety is not established. In world 12 both H/F reach battery fraction .0689383, accumulate 3,202 reserve UAV-steps and finish with all eight below reserve, despite observed/memorized BS coordinates. C has one reserve UAV-step and no final reserve member there. F−H world 2 loses 114.908755 cumulative QoS even as reserve exposure falls from 845 to zero. The lower-motion/energy capability and adverse reserve/service tradeoffs must survive any future comparison. Route/connectivity counts alone are not end-to-end service.
+
+**Forecast representation and control exposure.** F's 132,480 origin/horizon records (44,160 at each horizon; 2,757 remembered records) are all bound, with no ambiguous/unbound/future-censored forecast origin. Its own-history mean errors at 10/20/30 are .374733/1.207599/2.483608 m, versus holding the same estimated-current points at 21.653838/43.129961/64.449695 m. Pooled mean is 1.355313 versus 43.077831 m; RMSE 9.507183 versus 47.490345 m. Every one of the 96 world×horizon mean comparisons improves. There are 130,214 individually improved, 2,008 worsened and 258 tied records, with worst error 183.9284 m in world 29890022 at t2250, age26, horizon30 (held-current error128.9805). These records are conditional on represented users, not all unknown users; they do not identify accuracy as the mediator. H's own 128,424 records have mean errors21.645773/43.110104/64.410298 at10/20/30. Primitive binding retains eight ambiguous canonical points in each H/F arm, six/seven identity switches and1,940/1,927 track births, with no unbound current points or duplicate track-time bindings. Rare important tracking errors remain possible.
+
+H/F each execute3,200 scheduled plans, with3,027/3,044 modeled rounds and243,276/242,468 scored candidates; empty fallbacks occur173/156 times. F/H first physically diverge in26worlds, boundaries61–2431; six full-trajectory ties remain in worlds08,10,12,13,19,21. Those ties still execute77–97 modeled rounds each, so they are absent incremental realized control effects inside active search, not absent planning. H−C/F−C physically diverge in all32worlds. Mean users per plan are20.85594/13.3775/13.8 under C/H/F (C uses current canonical users, H/F tracked users); different induced histories prevent reading that difference as a matched information ablation.
+
+**Bounded saved-array telemetry.** `telemetry_reading.json` reads96already-required NPZ files without model/RF/controller/native calls, CPU.187309s/wall.293339s/peak56,388KiB. It retains all per-world BS sources, direct-BS connections, guard outcomes, represented counts and candidate counts, source/manifest binding and the selected-layout rows for world21. Across C/H/F, no plan lacks a lawful BS estimate; inferred/current/memory counts are796/1492/912,1323/1276/601,1370/1255/575. Lower guard-blocked counts do not identify guard causality.
+
+World21 narrows a failure explanation: all three arms use the same inferred BS for all100plans, at1159.5599445m error; none ever observes the genuine BS. C nevertheless obtains4,750 direct-BS-connected UAV-steps and1610.210 cumulative QoS. H/F have zero direct-BS connections, zero route UAV-steps, no guard checks, and zero native service throughout. Each has96nonempty modeled rounds/6,996candidates; every **selected** candidate forecasts zero QoS at all three horizons. First t120 chooses current position, next t150 carried; selected kinds across the mission are17 H1,65 carried,11 current,3 pattern. This is neither nonactivation nor positive selected-score service optimism. It does not assert every unselected candidate was zero or identify the wrong prior as the cause; C succeeds with the same wrong prior. Short-horizon route establishment, candidate/tie behavior and the complete information-to-control composition remain plausible limitations, not a selected repair. Positive examples also remain: worlds14/24 beat H and C and improve individual service; no lawful prospective selector for them has been established.
+
+**Explanation update.** B08's accurate ordinary representation now has a demonstrated native use within a service-scored planner: a blanket claim that prediction never converts to native value is weakened. H/F's much poorer complete outcome rejects adopting this planner over C and does not retroactively identify B08's failure cause. The strongest constructive account is beneficial anticipation under the shared H/F planner. A competing explanation for the complete losses is finite short-horizon optimization of an incomplete represented population selecting locally low-motion choices that fail to establish or sustain mission service. Neither account identifies a unique model error or necessary learned mechanism. Unknown-user contention omission, uncertain BS, reset association history, omitted backhaul guard/intermediate association, rounded inputs, energy order and omitted native potential/event terms remain declared model/native mismatches; zero unknown-user service is not a lower bound when their contention is omitted. Free observation pooling is inherited and unpriced. No physical real-time, safety, general-history, sufficient-state, information-value-bound or learning claim follows.
+
+**Full cost and evidence.** Science alone is96missions/288,000native steps/192stream-probe constructions/96resets/0fits; worker and reader each repeat485,744candidate forecasts,14,572,320joint nominal ticks and1,457,232RF/service calls (combined971,488/29,144,640/2,914,464) with128private models. Engineering adds244native steps, eight stream/probe constructions/four resets/four model constructions. Finite correctness checks add420candidate/standalone executions,12,554joint ticks,1,259RF attempts and21real models plus one mocked constructor failure, preserving first-run fixture failures. Total real model constructions are153; total native steps288,244, with no native steps in the full reader or finite checks. These are computational calls, not additional empirical worlds or fits.
+
+Scientific full-chain CPU28,774.227778s includes reaped worker/reader startup/serialization plus parent; worker body18,465.250576 and reader body10,287.260157s are nested, not added again. Full-chain wall9,566.774583s under4worker/2reader parallelism differs in scope from accepted-to-exit elapsed time. Engineering11.887242s plus finite checks21.96s gives recorded28,808.075021CPU s (8.002243h), with static telemetry .187309s additional. Worker/reader/parent RSS maxima619,936/652,304/484,704KiB are not a simultaneous sum. Support, source/design, review, admission, publication and cleanup remain additional incompletely metered work;24–40person-hour equivalents was a forecast, not measured labor. Proposal CPU C/H/F is.902542/172.093440/171.809754s per mission; the roughly190× planner/C difference is a complete occupied-node observation, not isolated latency or compute priced in J.
+
+Keep the sole canonical remote96NPZ+96progress corpus (906,805,248allocated bytes,6,954,552,608uncompressed scientific ndarray bytes) and compact collected evidence; collection and hashes are above. No bulk replica or deletion of the source of a retained adverse is selected. Scientific review/disposition and measured closure follow; no claim note or confirmation is created for this exploratory result.
+
+
+<a id="b09-original-result-critic"></a>
+### B09 complete original independent scientific diagnosis — 2026-10-01
+
+The dedicated `hmasd-research-critic` `/root/dm_fleet_transmission/b09_result_diagnosis` received a separate context with no inherited DM/Root conversation and the actual frozen question, original supporting/adverse evidence, source and fixed reading boundary. Its complete final answer is preserved verbatim below. This review adds no fit/native/model/controller experiment; its own stated checks and limits apply. Adviser agreement is not independent empirical replication.
+
+---
+
+**Recommend retaining the demonstrated F–H forecasting benefit, retaining C/P_BS as the conditional performance comparator, and stopping this fixed H/F purchase without adopting either package.** B09 establishes useful future extrapolation *within this planner*. Its complete service-control package is substantially worse than C. The owner’s stop-and-handoff instruction is compatible with that scientific disposition; it is not evidence against the broader question.
+
+I received no inherited DM or Root conversation. The assignment disclosed the design and stopping boundary, so this was not blinded. I reconstructed B09’s frozen contract and native results before reading the complete original Oracle recommendation/source-price exchange, Root adoption, and B08 diagnosis. I subsequently checked the additional saved-array telemetry.
+
+I independently checked all 96 episode records, all 126 stored signed-world/mean contrast reductions, the primary intervals, all 38 launch-source bindings, the 26 frozen dependency hashes, and collected-file hashes. I inspected consequential controller, identity-binding, native-reduction and replay semantics. The complete reader verifies 288,000 transitions, 288,000 actual proposals/feedback calls and 485,744 candidate records without missing or unverified work. It checks common initial observations/geometry and identical complete 3,001-boundary user paths in every paired world. Engineering records additionally establish C/reference identity on their 61-step prefix.
+
+I did **not** reopen every remote NPZ, rerun controllers/models, independently resimulate native RF, or duplicate engineering review. The remote corpus verification and complete raw reconstruction remain the recorded collector/reader’s scope. I read `telemetry_reading.json` directly and checked its aggregate totals, candidate counts and guard totals against existing episode records; its finer selected-layout facts remain the saved-array extraction’s evidence. At inspection that supplementary artifact was not yet committed.
+
+All missions reached H3000 and truncated normally. There are no failed scientific episodes, replacement worlds, early-terminal censoring, fits, labels or optimizer updates.
+
+Mean native J for C/H/F is **2156.274 / 1636.023 / 1701.997**; mean QoS per step is **.731664 / .561128 / .581384**.
+
+| Contrast | Total native J, mean [descriptive t95] | Cumulative QoS, mean [descriptive t95] | Positive / negative / tied worlds, both endpoints |
+|---|---:|---:|---:|
+| F−H, primary | **+65.974 [12.281, 119.668]** | **+60.769 [9.617, 111.922]** | 17 / 9 / 6 |
+| F−C | **−454.277 [−640.312, −268.243]** | **−450.839 [−630.752, −270.925]** | 6 / 26 / 0 |
+| H−C | **−520.251 [−698.775, −341.727]** | **−511.608 [−685.056, −338.160]** | 3 / 29 / 0 |
+
+The intended F−H prediction is met at its declared conditional scope: native service improves alongside J. Approximately **60.769** of the J increment comes from QoS, **5.253** from reduced return penalties, and **−.049** from potential differences. This is not a return-only reward gain. It corresponds to about **2.03 percentage points** of mean QoS over H. F nevertheless remains about **15.03 percentage points below C**.
+
+The uncertainty needs careful interpretation. These are paired exogenous worlds for fixed programs; they are not independent training replications. The t intervals describe variation under this fixed world-generation/design assumption, not model-selection uncertainty, another host, or a learned-policy population. J and QoS share components and are not independent confirmations. The F−H median is only **+3.968 J / +4.129 QoS**; worlds 29890028 and 29890031 contribute approximately **51% of the signed aggregate gain**. That concentration does not invalidate the prespecified mean, but it prevents describing a reliable per-world advantage or a prospectively identified beneficial subgroup. Secondary tail intervals are descriptive and unadjusted.
+
+The stronger representation result also survives. On F’s **own** histories, mean forecast errors at 10/20/30 ticks are **.375 / 1.208 / 2.484 m**, versus **21.654 / 43.130 / 64.450 m** for holding the same estimated-current points. H’s actual held forecasts on its own histories have errors **21.646 / 43.110 / 64.410 m**. Thus the comparison does not improperly evaluate F’s forecasts on H’s later observations.
+
+All **132,480 F origin/horizon records** are bound and evaluated, with no ambiguous, unbound or future-censored forecast origins. Every F world has lower mean forecast error than its same-origin current-position alternative. Nevertheless, pooled RMSE is **9.507 m**, the largest retained error is **183.928 m**, and **2,008 forecasts are worse**, with 258 ties. Primitive tracking retains **7 F / 6 H identity switches** and eight ambiguous current points in each arm. These results establish accurate prediction of represented users under this motion law, not perfect identity, complete knowledge of unseen users, independent replication across forecast records, or causal mediation by accuracy.
+
+Decision exposure is substantial but not universal. H/F execute **3,027 / 3,044 modeled rounds** and **243,276 / 242,468 candidate evaluations**. F and H physically diverge in **26/32 worlds**, while each differs from C in all 32. The six F/H-identical worlds—08, 10, 12, 13, 19 and 21—still execute **77–97 modeled rounds each**. Their identical outcomes therefore reflect no realized incremental control effect from F within substantial search, not an absent planner. Several also use genuinely observed or memorized BS coordinates. Keep those six worlds in the complete estimand.
+
+The adverse native evidence is consequential:
+
+- **World 29890021:** H and F deliver nothing to all 30 users for all 3,000 steps; native routes and BS connections remain absent. Each executes **96 modeled rounds and 6,996 candidates**. Every **selected** candidate predicts zero QoS at all three sample times. The first selection is current position, followed by carried position. C obtains **1610.210 cumulative QoS** and 4,750 direct-BS-connected UAV-steps while using the **same inferred BS throughout**, with the same approximately 1159.56 m estimation error. This is active planning that fails to establish service. It is neither an empty-search failure nor, for those selected layouts, optimistic positive-service prediction. The shared prior error alone does not explain the between-controller difference. These records do not prove that all unselected candidates had zero service or identify a sufficient repair.
+- **World 29890012:** H/F leave two users entirely unserved, finish with all eight UAVs below the reserve threshold, accumulate **3,202 reserve UAV-steps**, and reach minimum battery **.06894**. C has no entirely unserved user, one reserve UAV-step and no final reserve member. This adverse case persists despite H/F having observed/memorized BS information.
+- Across worlds, mean minimum-user cumulative QoS is **1511.078 / 775.514 / 828.979** for C/H/F. F−C loses **682.099** on that endpoint and **629.887** at the user p10. Mean longest individual zero-delivery spell rises from **378.781 s under C to 1060.281 s under F**. F−H individual-tail improvements remain uncertain even though its team mean improves.
+- F−H is not uniformly favorable even when energy risk improves. In world 29890002 it loses **114.909 cumulative QoS** while reducing reserve exposure from **845 to zero UAV-steps**. Conversely, the largest F−H gain, world 29890031, still leaves F **437.505 J / 435.321 QoS below C**.
+
+Useful positive cases must also remain. In world 29890024, F exceeds H by **110.728 J / 109.494 QoS** and C by **313.195 J / 310.692 QoS**, with no reserve exposure and improved individual service. World 29890014 also improves both comparators and individual service. These demonstrate achievable favorable outcomes of the tested program, but no lawful advance selector for them has been established.
+
+The lower-motion capability is real. Mean team travel is **154.545 / 66.194 / 67.055 km**, and propulsion is **1387.118 / 1239.261 / 1240.642 Wh**, for C/H/F. Both planners consume less propulsion energy in every world. They also charge less: **421.198 / 263.715 / 269.280 Wh**. This is a service–motion tradeoff, not established efficiency at matched service. Lower consumption does not prevent the adverse reserve cases: mean reserve exposure is **116.313 / 278.344 / 147.625 UAV-steps**. Cutoff and depletion are zero throughout; that does not establish safety or reliable cycling beyond H3000. Route counts, charging waits and inherited short charging spells likewise do not rescue the complete service comparison.
+
+My supported diagnosis is **a useful anticipation increment inside a deficient complete planning policy**. The strongest constructive explanation is that lawful velocity estimates alter future service evaluations and the resulting closed-loop trajectories beneficially on average. H/F share the current estimator, rights, search recipe, nominal dynamics, shield and clock, making F−H an informative intervention on future extrapolation within that program. Later differences in observations and search trajectories are consequences of the intervention; they do not invalidate its total policy effect.
+
+The strongest simpler competing explanation concerns the planner’s complete behavior: finite short-horizon optimization over an incomplete represented population can settle on locally acceptable, low-motion choices that fail to establish or maintain useful mission service. World 21 provides a concrete instance of repeated zero-service selections despite available ordinary control succeeding. Mean represented users per plan are only **13.38 / 13.80 for H/F**, versus **20.86 current users for C**; this is an endogenous trajectory descriptor, not proof that information coverage caused the losses.
+
+Unknown-user contention omission, BS uncertainty, reset association history, guard omission and nominal/native ordering remain real model limitations. None is isolated as the dominant cause. In particular, world 21 rules out using optimistic positive selected-service scores as a universal explanation. Finite search, horizon and tie behavior are plausible contributors, not diagnosed repairs. Good coordinate prediction does not guarantee a useful value model.
+
+I checked the consequential inherited ordinary alternatives in their stored outputs. P_BS’s B02/B03 increments support C’s competence, while world 28100224 preserves its default-adoption restriction. Privileged R’s positive R−G result and O’s active but adverse/unresolved O−R result retain incompatible information rights and reserve counterexamples. D2’s cold-replanning positive belongs to its changed full-information relocation law. None supplies lawful B09 headroom. B09 does not retrospectively establish H1’s objective as B08’s failure cause, and its zero fits say nothing about learnability or a need for learned prediction. I relied on no new literature-derived mechanism claim requiring additional primary-paper retrieval.
+
+The full cost is material:
+
+- Science worker and full reader **each** perform 485,744 forecasts, 14,572,320 nominal joint ticks and 1,457,232 RF/service calls. Combined: **971,488 forecasts, 29,144,640 ticks and 2,914,464 calls**.
+- Engineering adds 244 native steps; finite checks add **420 candidate/standalone nominal executions, 12,554 ticks and 1,259 RF attempts**, including failed checks. Total native execution is **288,244 steps**, with zero fits. There are 200 stream/probe constructions, 100 resets, and **153 real private/reference model constructions across science, replay, engineering and checks**, plus one mocked constructor failure.
+- Scientific execution/readback costs **28,774.228 CPU-seconds**, including reaped worker/reader overhead, and **9,566.775 seconds wall time** under four workers followed by two readers. Engineering and finite checks bring recorded CPU to **28,808.075 seconds, or 8.002 hours**; the supplementary telemetry read adds .187 seconds. Admission, source work, independent reviews, publication and cleanup are additional and incompletely measured. The original 24–40 person-hour-equivalent support estimate remains a forecast, not measured expenditure.
+- Controller CPU per mission is **.903 / 172.093 / 171.810 seconds** for C/H/F; whole worker CPU is **81.918 / 247.375 / 247.746 seconds**. F’s marginal arithmetic is inexpensive relative to H’s common search, but the complete search package is costly relative to C.
+- Worker/reader/parent RSS maxima are **619,936 / 652,304 / 484,704 KiB**, not a simultaneous total. Canonical scientific raw/progress evidence occupies **906,805,248 allocated bytes**, representing 6.955 GB of uncompressed arrays. Preserve its sole necessary remote copy. These occupied-node measurements are not an isolated speed benchmark or a real-time deployment guarantee.
+
+The smallest worthwhile complete observation selected for this question is now available. **No unchanged replication, extra worlds, predictor tuning, learner or confirmation is justified by the present adoption decision.** The frozen interpretation explicitly anticipated F−H benefit without superiority to C; this is that branch.
+
+A constructive continuation remains **UNSELECTED**. If the question is reopened, a substantive hypothesis could concern preserving ordinary route-establishing behavior when the short model supplies no service, while retaining useful anticipation after service becomes reachable. It would need a prospective, priced complete comparison. C versus a revised package suffices for a package-use claim; matched revised H/F plus C would be needed to claim a forecast increment as well. Improvement shared by revised H/F would support ordinary control repair; an additional F gain alongside superiority to C would support the new anticipation composition; persistent complete losses would weaken that route. Another accuracy-only success would change neither adoption nor investment. Such a design has unresolved source, selection, cost and feasibility choices and is not authorized by this review. Any richer information contract must give the competent ordinary comparator the same addition and account for its acquisition cost.
+
+**MATERIAL_DISSENT: no — the complete evidence supports retaining the scoped F−H native positive, rejecting H/F as a complete upgrade over C, and ending this purchase with no selected successor. It does not support declaring forecasting useless, identifying a unique repair, or removing C/P_BS’s existing default-adoption restriction.**
+
+---
+
+<a id="b09-independent-disposition"></a>
+### B09 DM response and resolved stopping decision — 2026-10-01
+
+I read the entire original ResearchCritic answer and accept its recommendation without material disagreement. Retain the F−H native positive and ordinary prediction capability at the matched planner scope; do not promote either H/F above the competent C/P_BS complete-use reference. The positive forecast effect is not a universal per-world gain, individual-continuity improvement, learning result or default-adoption permission. All concentrated gains, six ties, nine primary adverse worlds, full-zero-service world21 and energy/user adverse world12 remain. The common inferred BS error cannot by itself explain world21 because C succeeds with the same estimate; equally, the observation does not prove all candidates were zero or diagnose a sufficient route/horizon/guard repair. Keep the approximate-model and free-pooling limitations explicit.
+
+The prior B08 result is strengthened only in its constructive continuation: accurate lawful representation can matter to native control under a changed, service-scored interface. It does not establish H1 as B08's failure cause. Broad task opportunity and learning remain open; another predictor or longer search is not owed. C/P_BS still carries its original world28100224 reserve/default-adoption objection. Neither new H/F losses nor the relative C win erases that adverse.
+
+The critic's possible ordinary route-establishment composition is retained here as **UNSELECTED and unpriced**, with source feasibility and total support cost unresolved. It is not a fourth completed source assessment, an approved next study or a reason to run a zero-service rescue. A future choice must identify what complete outcome would change a decision, compare the capable ordinary alternative under any added rights, declare costs, and obtain applicable focused scientific review for its actual design. At the current owner boundary, no source investigation or empirical extension is selected. End this fixed B09 purchase and move the direction to reserve after publication/cleanup, with no live producer or fabricated external dependency. Re-entry requires the owner's explicit continuation and Root's later allocation within the native trial; reading/status/workflow edits do not lift that stop.
+
+Root separately read the complete original critic, terminal collection at6da7fe816 and stored primary signed-world/interval/major-tail evidence, and adopted this same scoped disposition by native message: preserve F−H J/service value, C-relative losses and the world21/world12 counterexamples without a unique repair. Root requested no additional run/review and confirmed autonomous completion of this publication, measured cleanup and the exclusive handoff section. This is coordination and adoption, not new empirical support or a permission gate for direction publication.
