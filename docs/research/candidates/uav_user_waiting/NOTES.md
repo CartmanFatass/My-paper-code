@@ -5556,3 +5556,280 @@ at least four active members and no reports; no merger or expansion of
 that work is requested. Any actual requested source facts and their
 scope will stay in this notebook. There is no new result-bearing idea,
 new direction record or automatic confirmation.
+
+
+<a id="post-b06-low-concurrency-source-facts"></a>
+### Requested low-concurrency source facts and full prospective cost — 2026-10-01 UTC
+
+**Scope and status.** Root's source-only assignment and the Oracle's exact
+request ask for one specified causal ordinary rule, its comparison and
+complete cost, or an honest failure to identify one. The following is a
+source-derived proposal for that decision, **not a selected experiment,
+implemented program, measured result or novelty claim**. No controller,
+model, native, allocator, target or outcome query/reduction, fit, test,
+benchmark or launch was executed for this answer. Reading source and
+already published costs, and scalar arithmetic on the proposed loop
+sizes, are the only computations. This entry records the answer as Root
+requested; it does not change executable source.
+
+The directly relevant published background is RESEARCH topic2 at
+420580f6fc52d9c4660081fa1d9901d25ce19b26. Its concrete design consequence is
+to keep S_F:LRS as a demonstrated ordinary continuity capability, preserve
+M/S/U:LRS service operating points, and test a simpler complete physical
+program only if its usefulness warrants the purchase. B01–B04 learning,
+burden, continuation and service-price adverses, B05's fixed-path
+no-link bound/quality price, and B06's individual-user/service/J losses
+remain in force. Low concurrency is a competing package explanation,
+not a known causal mediator or a new learning bottleneck.
+
+**One fully specified source-supported rule: cap-two capacity control
+with unchanged C.** This is a plausible competent ordinary comparator in
+the structural sense: it exhausts its small allowed mask set, maximizes
+the exact modeled service cardinality available to LRS, uses the same
+lawful report/map resources, and preserves the existing motion controller.
+There is no already measured simple-controller result establishing its
+continuity competence. The construction below is new source-level design,
+not an assertion that an existing module already implements it.
+
+1. Keep N5/U50/H256, static uniform users, free-space/non-FDMA radio,
+   threshold3dB, capacity10 per UAV, fixed 400-byte rounded registered map,
+   and five unchanged `LocalController(history=False)` instances. Each C
+   sees its own existing 104-value observation and acts only at
+   t=0,4,...,252. Its local waypoint state, current-user scoring and empty
+   discovery fallback are unchanged. No true sites/positions, saved
+   baseline continuation, native reward/grant, another UAV's private grant
+   timestamps, future C call or world seed reaches the mask manager.
+2. Use exactly the existing version4 reports: five25-byte messages with
+   rounded own XYZ, actual command, new C proposal and post-C navigation
+   index. Decode those packets, not an unrounded side channel. The manager
+   can ignore the navigation index without removing its byte cost. For
+   each report, dead-reckon two clipped steps using the actual held
+   commands, then forecast the new C proposals unchanged for
+   L=min(4,256-t-2) postmove service transitions. Thus candidate positions
+   are at state indices t+3,...,t+2+L; no motion alternatives are queried.
+3. Enumerate all15 masks with one or two set bits, in increasing integer
+   order. For each forecast position and mask, use the frozen radio
+   formula on the rounded map. Let E[j,i,u] indicate SINR>=3dB and
+   n[j,i]=sum_u E[j,i,u]. Rank masks lexicographically by
+   `(sum_{j,i} min(10,n[j,i]), number of distinct users eligible in any
+   forecast slot, -popcount(mask XOR entering_mask), -mask_integer)`.
+   The second key is a coverage tie, not a service-age estimate; the third
+   avoids gratuitous switching when modeled capacity/coverage tie. There
+   is no tunable weight, age state, LRS forecast, adaptive cap or selected
+   cardinality sweep. At3dB under the non-FDMA kernel, a user cannot be
+   eligible at two UAVs simultaneously. Therefore the first key is exactly
+   the predicted LRS served count, regardless of LRS priority, rather than
+   a greedy-SINR surrogate for fair quality. Eligibility disjointness must
+   still be checked in the eventual independent reader.
+4. Return the selected mask in the existing16-byte command. Its rotating
+   member field is `(t//4)%5`, and its q is exactly that member's C proposal
+   index, so every returned movement command equals the decoded C proposal.
+   Apply at t+2 and hold until the next delivery four ticks later. At t=0,
+   all five radios and the initial C proposals execute for transitions0/1,
+   exactly as in B06. Total scheduled traffic remains141bytes/round,
+   .564seconds at2kbit/s; the1.436second compute deadline includes the five
+   current C calls. Check before/through computation, command encoding and
+   final return. A deadline miss retains **both entering actual commands
+   and entering mask**, sends no late or partially searched command, and
+   records the paid partial work. Malformed inputs/numerical failures are
+   failures, not silent policy repairs. Subsequent rounds continue their
+   unchanged clock. All report/first-delivery/fallback events are read.
+5. Give the physical program exactly B05/B06 local LRS rights: each UAV
+   receives only its current eligible registered IDs/SINRs, tick and own
+   50-entry last-grant array initialized to-1. Order by oldest own grant,
+   then higher current SINR, then lower registered ID; grant up to10 and
+   update only that UAV's granted entries. Ineligible/OFF time does not
+   reset its history. There is no global service-age report or actual-grant
+   ACK. Existing source separation still permits frozen greedy native
+   collection followed by this one LRS replay of saved SINR: actual grant
+   choice does not affect C's observation, reported variables or motion/
+   radio dynamics. The fair program's J/quality come from its LRS grants;
+   collector greedy reward is auxiliary. This retains the earlier lack of
+   an integrated native LRS latency measurement.
+6. Start age and own-grant state at the same B05 boundary, score every
+   native transition including0/1, and retain every user's initial, closed
+   and right-censored unserved intervals. Do not trim startup, pretend
+   terminal service, discard a never-served user, or score two nonexistent
+   final forecast transitions: the report at252 has only transitions254/255.
+   Masks become zero only for an individual OFF UAV, never for the whole
+   fleet. An empty eligible set gets zero grants, preserves own timestamps,
+   and remains an ordinary factual observation.
+
+The source anchors are `uav_local_history/b01/controller.py` (current C),
+`uav_user_waiting/b02/protocol.py:41–94` (reports/commands/deadline),
+`uav_radio_activation/b03/protocol.py:100–125` (prefix and delivered state
+indices), `uav_user_waiting/b04/study.py:76–154` (collection/delivery),
+`uav_user_waiting/b06/scheduler.py:127–264` (deadline fallback),
+`uav_user_waiting/b05/allocation.py` (own LRS), and
+`envs/pettingzoo/uav_radio.py` (radio/capacity). The B05 separation argument
+and B06 frozen-interface reading above remain applicable. These are
+source inferences; none is a test of this unimplemented program.
+
+**What this comparison could and could not answer.** The smallest complete
+one-program purchase would be64 new trajectories on the already exposed
+worlds29426000–29426063, compared with the immutable paid S_F/S/M/U:LRS
+outcomes. Bind/reset-check actual sites, initial positions, rounded map,
+initial observation and frozen dependencies against canonical local B06
+inputs before the first policy query. Do not rerun any old physical arm or
+old allocator and do not restore the deleted B04 S staging. Primary
+comparative reading would be the64 paired episode-maximum-gap differences
+against S_F:LRS, accompanied by all F_user/mean/typical/terminal/censored
+and per-user adverse readings, native LRS service/quality/J, path/height,
+mask/transmission/concurrency, fallback/deadline and complete resource
+cost. S/M/U stay visible as service and cost alternatives. A fixed adoption
+margin or a use case calling two gaps “comparable” is **not yet selected**;
+Root's actual question choice must resolve that before any result query.
+
+This changes mask cardinality/search/objective **and** removes S_F's
+manager motion overrides and modeled age/LRS state. It tests whether a
+simpler complete controller offers a useful operating point; it does not
+identify low concurrency, history or motion as the unique cause. Successful
+reuse could weaken the practical need for the more expensive package on
+this panel, not establish a universal controller necessity claim. An
+unrestricted same-C capacity arm or an age-only ablation would be a
+separate additional purchase, absent here. No inference of cap causality
+is bought by giving this one-arm proposal that label.
+
+There is also a useful source-level negative constraint. With timely
+first delivery and no later cap violation, at most20 users can be served
+per transition from tick2 onward. Even granting the maximum50 in each
+initial all-on transition, episode mean service is at most
+`(2*50 + 254*20)/256 = 20.234375`. This lies below the already published
+S/M/U:LRS means21.180481/24.736206/21.666870. Consequently this cap-two
+proposal **cannot solve the original mean-service-preserving question
+against those references**. It may still improve S_F's16.946411 service or
+cost at a useful continuity level; neither outcome is known. If initial
+misses extend all-on time, report them and the changed cap exposure rather
+than applying the timely-run bound or calling the program a cap-only test.
+This substantially narrows its possible scientific/use value for Root's
+comparison with a better independent question or stopping.
+
+**Full logical bill if this exact one-program comparison were selected.**
+Numbers below are complete, all-timely quantities or explicit ceilings,
+not measured work, a spending allowance or launch authority. Do not count
+model ticks as native transitions. An interruption retains actual attempted
+and completed counts. The proposed reader checks every small-menu mask's
+physics, rather than borrowing B06's different bounded candidate audit.
+
+| Work | Prospective quantity |
+| --- | ---: |
+| New complete episodes / native steps / UAV ticks |64 /16,384 /81,920 |
+| Constructors / explicit resets / constructor reset |1 /64 /1 |
+| Native radio refreshes beyond16,384step updates |4,096 mask refreshes plus65 setup resets |
+| Report rounds / worker current C calls |4,096 /20,480 |
+| C paths / internal model ticks, worker |552,960 /2,211,840 |
+| Worker C link-evaluation ceiling |46,284,800 (20,480×(2,160+100)) |
+| Candidate masks, no cache needed |61,440 (15×4,096) |
+| Candidate fleet radio/count reductions |243,840 (15×254×64) |
+| Candidate SINR link entries |60,960,000 (243,840×250) |
+| Shared candidate geometry snapshots / geometry links |16,256 /4,064,000 |
+| Prefix kinematic fleet steps, no prefix radio/allocation |8,192 |
+| Candidate per-UAV eligibility count reductions |1,219,200 (243,840×5) |
+| Coverage Boolean entries processed, conservative slot scan |60,960,000 |
+| Modeled history settlement / candidate LRS or age updates |0 /0 |
+| New native-path LRS replay |16,384 fleet ticks /81,920 own-row selections |
+| New per-user age updates |819,200; complete nonempty gaps at most409,600 |
+| Reader C passes / calls |2 /40,960 |
+| Reader C paths / internal model ticks |1,105,920 /4,423,680 |
+| Reader C link-evaluation ceiling |92,569,600 |
+| Reader native observations / native radio checks |16,448 /16,384 |
+| Reader all-candidate independent radio checks |243,840, plus16,256 shared geometry snapshots |
+| Reader candidate SINR / geometry link entries |60,960,000 /4,064,000 |
+| Reader independent native LRS replay |16,384 fleet ticks /81,920 own-row selections |
+| Reader native age updates / full gap reconstruction |819,200 /all64worlds×50users |
+| New old-arm native/policy/allocator reruns |0 |
+| Future C / targets / fits / optimizer updates |0 /0 /0 /0 |
+
+Worker plus reader therefore entails61,440 C calls,1,658,880 C paths,
+6,635,520 C model ticks, and a138,854,400 C link-evaluation ceiling,
+in addition to487,680 manager-mask fleet radio checks/121,920,000 SINR
+entries,32,512 candidate geometry snapshots/8,128,000 geometry links,
+and the native physics/observations and two fair-outcome passes in the
+table. The C links depend on the new path's visible users/peers; do not
+substitute B06's measured link count for an unobserved new count. For
+prospective paired descriptive intervals, retaining10,000 bootstrap draws
+for maximum gap/F_user/service over four references entails
+4×3×10,000×64=7,680,000 sampled scalar contributions per independent
+worker/reader reduction, plus full per-metric signed64-vectors. This is
+analysis work, not extra worlds or independent experimental units.
+
+The reader must verify current C, reports/rounding, proposal-only executed
+motion, deadline/hold/prefix/terminal semantics, every15-mask selection
+and tie, native physical traces, all own-LRS recurrences, native fair
+outcomes and complete per-user gaps. Reset/reference artifacts are read
+and hash-bound in place; their old outcomes are not recomputed. No old-S
+shadow at new states, exhaustive native counterfactual replay, new pilot
+or extra baseline is included. Reusing the two existing C verification
+passes is priced explicitly; no unimplemented pass fusion is credited.
+
+**Measurements used to anchor the estimate.** B06's local worker/reader
+process snapshots were545.844109/441.677107 CPU seconds, total987.521216
+(.274311CPUh), and546.425592/441.958104 wall seconds. Peaks were414,552/
+379,248KiB separately. Its worker scheduler used486.356068CPU seconds;
+worker C used6.777131 and serialization25.331418. The worker residual after
+subtracting scheduler time is59.488041seconds, including those other
+components; these terms must not be added twice. B06 paid1,444,018 manager
+fleet model ticks/7,220,090 modeled local LRS rows and463,488 geometry
+snapshots. Its independent reader paid133,936 model-physics ticks but also
+all-candidate arithmetic and751,600 reference LRS row selections. B06's
+new raw/outcome payload was90,988,580bytes. These measurements precede
+final process writes and exclude unmetered support. They are not timings
+for this proposal.
+
+**Prospective resources, explicitly estimated.** On the same configured
+local CPU runtime, estimate **.05–.20 combined CPU hours (180–720seconds)
+for worker plus complete reader**, and **.5–1GiB peak RSS per process**.
+The reduced manager has about17% as many fleet radio evaluations as B06
+and no modeled LRS/history; however, the proposed reader independently
+checks about1.82times B06's model-physics ticks, retains both C passes and
+complete native/outcome reading. Thus a simple ratio of native steps or
+mask counts is not a timing prediction. The broad range allows for
+Python array/loop overhead, serialization and the different reader. No
+speed benchmark or new result query supports it. Wall time, deployment
+allocation latency, actual cache/compression behavior and host contention
+remain unknown; actual node admission would be needed only for a selected
+result launch.
+
+Separately estimate **.01–.05CPUh for synthetic correctness tests**, with
+no native result pilot or benchmark, and **4–7 support hours** for a bounded
+collector/manager/reader implementation, test design and independent
+engineering review, scientific reading/disposition, publication and
+cleanup. The present source/Oracle/selection assessment has a separate
+**.5–1.5 support-hour estimate**, not metered labor. This is not a drop-in
+replacement of the frozen collector: its unconditional modeled-history
+settlement/final fields would otherwise add work or invent semantics.
+A direction-owned specialization must preserve the actual native/control
+loop and remove genuinely unused modeled-state machinery, with review.
+No shared environment or native allocator port is needed.
+
+Estimate **.06–.15GB new canonical evidence**, streaming one episode at a
+time. Retain native arrays/LRS grants and full gaps, report bytes, one
+geometry path per round, per-mask/slot eligibility counts and exact tie
+keys; full candidate SINR or timestamp copies are unnecessary. Retain
+one canonical copy and publish compact readings. Charge approximately
+**3.6–4.0GB transient accepted-source snapshots** if worker and reader have
+separate copies (B06 measured1,760,686,080allocated bytes each), plus up
+to.1GB disposable scratch. Existing local S_F raw plus paid compact
+references permit reset binding without another B04 remote bulk copy.
+A different node would require a separately declared minimal staging and
+new cost estimate, not a silent transfer of this local budget. Released
+snapshots/scratch would be removed after required consumers finish.
+
+**Cleanup fact supplied to the Oracle.** B06 consumer release and closure
+are published at420580f6; full evidence is6aa6a393. Both native worker and
+reader completed and released their inputs, the independent critic
+released all saved-input/snapshot consumers, and the observer stopped.
+The two accepted-source snapshots, temporary64-S-input directory and
+wait files, redundant reader progress and owned caches are gone.
+Measured net allocated reduction was3,600,408,576bytes, no target leftovers,
+no concrete tool blocker. Unique canonical evidence remains in its recorded
+location. This source-only answer does not revive a cleaned operation.
+
+**DM judgment for the requested feasibility response.** A fully specified
+lawful ordinary rule is identifiable without new queries. Its practical
+competence remains a conjecture, and its strict capacity ceiling means
+its possible value is a simpler conditional operating point relative to
+S_F, not resolution of the parent service-preserving question. The current
+positive capability needs no such comparison to remain supported. Root's
+independent Oracle and cross-question allocation own the next choice;
+there is no selected result operation or automatic implementation here.
