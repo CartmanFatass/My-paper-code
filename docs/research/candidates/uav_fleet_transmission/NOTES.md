@@ -4567,3 +4567,127 @@ Parent B08 and waiting S_F remain with their current leads and accepted inputs. 
 the adviser has not asked a concrete new feasibility question; I do not invent one or duplicate
 its library/source assessment. The direction is reserve for result execution, with this bounded
 source support available through the native parent task.
+
+<a id="post-b06-staggered-source-assessment"></a>
+
+### Post-B06 source assessment — marginal-matched joint renewal clocks, not selected
+
+2026-10-01 UTC, after complete B06 closure at `f20dfface3afdc6bfe481e24579b55f59d394de9`.
+Root's independent adviser asked a concrete source-only question while comparing a distinct
+ordinary-control purchase with STOP. Its first proposal retained a common t0 query and then
+used per-agent phase p in0..3 at `4+p,8+p,...,252+p`. This gives exactly64 queries per agent
+at H256, with first hold4+p and final hold4−p. I reported that the actual-clock interface
+supports it, but a direct H4-versus-dispersed comparison changes individual marginal clocks
+and startup trajectories as well as joint timing. Five agents also cannot occupy four phases
+without a repeated role. That was a substantive comparator objection, not a software failure.
+
+The adviser corrected the candidate before any selection: for each of32 fresh worlds and
+each common offset q in0..3, compare **SYNC**, all phases q, with **DISPERSED**, phases
+`(q+r_i)%4`, where r is a prospectively bound per-world permutation of `{0,0,1,2,3}`.
+Average all four offsets before the world contrast. Use deterministic C once and the already
+competent Q10 on two private action tapes under both schedules. Its substantive question is
+whether joint renewal alignment adds to or substitutes for this ordinary randomization; it
+does not test S, best-ordinary control, peer-prediction causality or learning. This remains
+a candidate versus STOP, with no seed assignment, new result study, implementation or launch.
+
+I used current published [RESEARCH topic2](../../RESEARCH.md#2-部分可观测性要求处理信息不要求每次都重新训练)
+and [topic5](../../RESEARCH.md#5-技能和异步性是组织决策的方式其收益需要证据) at revision`f20dfface`.
+B06 makes fixed-policy cadence/persistence a live explanation while withholding special
+learned-timing claims. Parent B04's active fixed-action-marginal A/B intervention failed its
+prediction; that contrary evidence prevents assuming desynchronization is beneficial. The
+new candidate changes the joint distribution of renewal clocks, while that earlier study
+changed action sampling at fixed common clocks. This is a scope distinction, not a novelty
+claim or dismissal of the earlier negative. The adviser owns the requested July/library/primary
+source assessment; I did not duplicate that reading or claim its coverage as my own.
+
+#### Interface and comparator facts
+
+At source`df149ac620`, `b06_cadence/policies.py:41–45,48–85,121–173` supplies arbitrary
+actual nonnegative integer query ticks, private episode/agent caches and original parent laws.
+On an ordinary miss, C ingests the current local row at its real tick and performs the original
+history=False four-step ranking. A cache hit returns its unchanged deterministic local result,
+including next-nav. The collector applies that private navigation transition exactly once per
+scheduled query; it never advances navigation on intervening held ticks. There is no need for
+fictitious time, a sampled-action cache, shared global state or frozen-source edits.
+
+`b02/controllers.py:58–66` keys the exact first103 FP32 observation values plus one nav byte
+and forms the original114 features; actor/helper inputs omit the clock. For this C/Q10-only
+candidate there is no actor forward or separate analytic-helper query at all. The Q10 law
+already derives its category distribution from C, then uses the original private addressed
+uniform. Keep the action address exactly `[tape_root, world, actual_tick, agent]`: adding q,
+phase, schedule or query ordinal would change this proposed contract. Across the four q
+offsets, each agent has the same entire query-clock multiset and addressed-uniform sequences
+under the two treatments. All t0 decisions share the same initial row/nav and action draw.
+The phase permutation must be independently seeded from world geometry and action tapes and
+shared across treatments, q offsets and action tapes. The repeated pair is fixed within a world;
+q rotates its phase value, while the per-world permutation varies the duplicated role across
+worlds. Neither phase nor peer commitments enter the policy input.
+
+`b06_cadence/collect.py:53–90` already holds each nonquery agent's command and submits one
+full command array per native tick. Thus asynchronous renewals require no native host change.
+They do require a new owned schedule/contract/collector-reader version: frozen B06 `Cadence`,
+remaining-hold diagnostics and independent reader eligibility explicitly use absolute `tick%4`.
+They cannot be silently relabeled as the new schedule. The new reader would reconstruct each
+agent's own next deadline, query/nav/cache/RNG and complete native telemetry. Forecast remains
+four ticks; first holds can be seven ticks and late forecasts extend beyond H256. Matching q
+controls these marginal boundary durations; it does not remove startup/terminal joint coupling
+or identify an interior steady-state effect. The full mission remains the estimand.
+
+The corrected marginal-clock comparison resolves my original objection for the stated joint
+timing question. Joint trajectories and later observations deliberately differ; their realized
+action marginals need not remain equal. The ordinary comparators are C and Q10 under BOTH
+schedules. G/Q05 retain known useful tradeoffs, but are not a mandatory additional panel for
+whether dispersion adds to/substitutes for this specified competent Q10 law. S/Bstar would
+expand the question and are unnecessary if no retained-student or best-policy claim is made.
+The phase comparison within each law and their interaction must be read together. Average
+four q offsets and the Q10 tapes within each world:32 world clusters, not128/256 independent
+observations. No automatic phase search, seed sweep, or advantage from scheduling CPU load
+follows from the interface.
+
+#### Prospective complete cost, not a measured result
+
+The adviser's exact proposed bill checks algebraically:
+
+| Program across both schedules and four q offsets | Episodes | Native steps | Ordinary C-ranking queries | Categorical draws |
+|---|---:|---:|---:|---:|
+| C, one deterministic tape |256|65,536|81,920|0|
+| Q10, two private tapes |512|131,072|163,840|163,840|
+| Total |768|196,608|245,760|163,840|
+
+Each episode contains320 total agent queries. There would be768 explicit resets plus one
+constructor reset, giving54,278,675 native dense-power slots under the existing N5 accounting.
+There are0 actor/analytic-helper queries, fits, labels, calibrations, optimizer updates or
+training transitions. The ordinary C answer still constructs its original local feature row;
+that is included source work, not an omitted neural/helper stage.
+
+The worker's no-hit ceiling is245,760 full C decisions,6,635,520 trajectories and26,542,080
+modeled ticks. With at most20 current users and four visible peers, candidate-link evaluations
+are at most530,841,600 plus24,576,000 setup links. Actual worker misses and cache visitation
+must be reported, since equal logical counts do not imply equal CPU. The complete independent
+reader would additionally reconstruct all245,760 original C queries, including worker hits,
+with the same full modeled-tick count/link ceiling; it adds no native transition or actor.
+It also checks196,608 team and983,040 agent motion ticks, exact phase/query counts, sources,
+all sampled choices and the full paired reductions. Reading CPU/storage/serialization belong
+to the purchase, alongside J/service/quality/p10/minimum/outages/longest-zero/path and every
+adverse world, both per-law phase effects and their interaction. No new actor checkpoint or
+S input staging is required.
+
+My prospective estimate is **5–15 combined worker/full-reader CPU minutes,4–7 support hours**
+for the versioned schedule and reader, synthetic phase/nav/cache/RNG checks, high-risk engineering
+review, complete scientific reading, publication and cleanup. Estimate new compressed raw at
+**0.2–0.6GB**, RSS at **0.4–0.9GiB**, and one immutable source snapshot at **1.7–2.0GB**.
+These are scenario estimates informed by the already-paid B06755.536CPU-s/414.5MB raw result,
+not a timing probe, proportional savings claim or runtime cutoff. Imported support and old
+research costs remain incurred; C/Q10 deployment itself needs no student-training asset.
+The previous selected chain remains8fits/2calibrations/2,080,768native steps and approximately
+3238.693scoped CPU seconds. If this candidate were selected, it would add196,608steps and
+its actual measured runtime, making2,277,376steps for that accounting chain; nothing has
+been added now. Independent training-population claims are outside the question.
+
+I returned these source facts, corrected comparison and complete estimate through native
+communication. The interface is feasible and the marginal-matched design removes the initial
+clock confound, but whether its remaining knowledge justifies4–7 support hours rather than
+STOP belongs to the independent adviser and Root's allocation. No proxy activation prerequisite
+or exhaustive mechanism check is proposed. All work in this entry was source/document reading
+and static arithmetic: zero new policy/model/native calls, outcome reductions, code, tests,
+timing probes, data staging or launches. The completed B06 verdict and measured cleanup stand.
