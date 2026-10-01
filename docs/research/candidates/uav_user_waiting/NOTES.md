@@ -7206,3 +7206,17 @@ was added. This completes the one source price. No new fit, native/model/control
 allocator query, saved-outcome reduction, test, benchmark, implementation or study
 was performed or selected. Root/Oracle own the next scientific selection; the full
 original recommendation and Root disposition will remain separate from this bill.
+
+
+<a id="radio-uncertainty-selected-successor"></a>
+## 2026-10-01 — RF comparison selected in a new question; waiting moves to reserve
+
+Root selected the complete costed P/U32 comparison for the same nonarchived DM in
+`uav_radio_uncertainty`. The [new notebook](../uav_radio_uncertainty/NOTES.md#b01-selected-contract)
+preserves its original independent recommendation and separate Root disposition. The complete
+source facts and eight-part bill remain canonical here at the immutable links above.
+B07, its measured cleanup and the scoped longer-planner stop remain closed. The broader
+service-preserving continuity question is open in reserve, with no active study or producer.
+This does not reinterpret deterministic-host losses as RF-error evidence. One active study
+now belongs to the distinct RF question; no historical input, outcome, ownership of other
+directions or accepted operation is changed.
