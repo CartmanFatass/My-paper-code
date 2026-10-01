@@ -3920,3 +3920,145 @@ B05 collector `d5b0fd092eab4ef10c617aee2622a97c14c6af178fedf22f277f27599478b044`
 B05 kernel `b6a018614df3ee4e32d41d6fd5550850deb8bfe0ec02cf53b6b5efd1291bb986`.
 Only source/records and static count algebra were inspected in this assessment. No old raw
 array was reduced and no policy/model/actor/environment was imported or queried.
+
+<a id="b06-prospective-cadence"></a>
+## 2026-10-01 — B06 selected: complete use of retained policies at H4, loss-triggered E and H1
+
+Root selected this bounded comparison on 2026-10-01 01:20 UTC after reading the full source
+assessment and independent Astra Max advice. This is the sole active result study in this
+direction; B05 remains closed. The question is whether changing commitment/query timing
+improves the complete native usefulness of retained categorical S assets, relative to equally
+enabled competent ordinary policies and to every-tick feedback. It is a task-use and empirical
+cadence question, not a new termination learner, an outage protection guarantee or a novelty claim.
+
+I read the COMPLETE original independent answer from `/root/deep_report_review` before
+implementation. Root preserves the complete original cross-question prompt, material correction
+and full answer once in [the canonical temporal-use/planning-economy review](../../archive/2026-10-01/RESEARCH-temporal-use-and-planning-economy.md).
+I adopt the N5 recommendation without material dissent. The consecutive-tick comparison corrects
+my initial block-start signal because a contact can be acquired then lost inside one original
+block. The one-extra-query bound retains the agreed fixed scope. The source proof establishes
+own served-count truth under this host; it does not give the sign of a redecision's team effect.
+S_L1's retained B05 gain makes useful policy deployment worth testing, while UCOPE's adverse
+termination-learning history rules out treating interruption as a newly discovered learning
+opportunity. The original B05 outage world establishes neither a cause nor a design panel.
+The selected comparison pays for H1 and ordinary E/H1 so a useful ordinary or fast-feedback
+result can change the practical choice. Sparse activation, unresolved effects or adverse
+outcomes can end this purchase without a fit, threshold search or expanded world panel.
+
+Relevant published-main background topics 2 and 4, the duration review, prior UCOPE/B02/
+service-age/waiting evidence and their concrete implications are already read and linked in
+[the source assessment](#post-b05-temporal-source-assessment). Those unchanged readings apply.
+The latest topic-4 B05 revision retains conditional S capability beyond G, ordinary G tail/
+quality/path tradeoffs and all outages without adding training units. This design changes lawful
+temporal control/query opportunities; it adds no observation field, identity, global service,
+future observation, training label or actor feature. Extra sampling/nav opportunities and changed
+visitation remain competing explanations of any complete package effect.
+
+**Fixed intervention.** Native N5/U50, all-on/non-FDMA, threshold 3 dB, capacity 10, H256.
+At each E tick let `q_i=min(10,count(row[3:63].reshape(20,3)[:,2]>0))`. This equals own native
+served count by the positive-noise/non-FDMA uniqueness and capacity argument already recorded.
+At absolute `t=0,4,...`, query the same parent once, reset the extra-used flag, and never make a
+second query for a simultaneous count loss. At `t=4k+1,4k+2,4k+3`, query once if the current
+count is smaller than the preceding native-tick count and this block's extra is unused. Spend
+the extra even if the selected category or physical remaining hold is unchanged. Update the
+previous count EVERY tick, including block starts and after the allowance is used. Hold a
+replacement only until the original next boundary; there is no rolling restart or rescue action.
+H4 queries only on the original grid; H1 queries every tick. All laws reset private state at
+episode start. The first loss can be observed only after its transition; no first-tick protection
+is claimed. A local loss can be a useful handoff or can remove a contact from current-only input.
+
+**Frozen panel and random addresses.** Object `UAV-CADENCE-USE-B06`, implementation directory
+`experiments/candidates/uav_fleet_transmission/b06_cadence/`, intended run
+`runs/uav_fleet_transmission/b06_cadence_a01/`. Fresh world seeds are the 32 integers
+`29670000..29670031`; master seed `29670100`; private action-tape roots `29670101,29670102`;
+actor-constructor seeds `29670111,29670112` (forked initialization only, overwritten by immutable
+S tensors); paired bootstrap seed `29670191`, 10,000 resamples and percentile 95% intervals.
+These addresses are fixed before any query or outcome. No old outage world is selected.
+For each world, list parents `C,Q10,Q05,G,S_L0,S_L1` in that order, each mode `H4,E,H1`, each
+stochastic tape `0,1` (C once with tape -1), then `Bstar_L0/H4` tapes `0,1`. Rotate this 35-cell
+list left by world-index modulo 35. This deterministic cyclic ordering is fixed prospectively.
+`Bstar_L1/H4` aliases `S_L1/H4`; no Bstar E/H1 episode is selected. C/Q/G scoring always forecasts
+four ticks, even when executing only one to three remaining ticks. Late H1/E queries still
+forecast past the native mission end; shortening that model horizon would change the parent law.
+
+The complete purchase is EXACTLY **1120 H256 episodes / 286720 native transitions / zero new
+fits, optimizer updates, training labels or calibrations**. Every parent/mode receives the same
+lawful count memory and query rights. Fixed Q epsilon values .10/.05 and G tau .014 are inherited.
+Original S/Bstar tensors and paid Bstar temperatures are immutable. Both stochastic tapes use
+the actual address `(root,world,actual_tick,agent)` independently of cache hits; a new owned
+uniform function extends the original SeedSequence law off-grid without pretending the tick is
+another boundary. Actor computation remains one-row FP32; feature width/order stays 114 and
+clock, held category, count history and remaining duration are not fed into S. Episode-private
+caches store decisions/features/logits, never sampled actions. Original C/history=False is
+ingested at the real tick and `_decide` is invoked directly by the owned adapter. Navigation
+advances exactly once per actual query under the existing full-C fallback rule.
+
+**Predictions and complete reading.** Primary within-lineage contrasts are `S_Lx/E−H4` and
+`S_Lx/E−H1`; also read H1−H4 for each parent and every same-mode S versus C/Q10/Q05/G comparison.
+Read paid Bstar_L0/H4 against S_L0/H4 and each S_L0 deployment as an available-use reference.
+No per-world winning-ordinary selector is created. Average the two tapes within each world;
+bootstrap paired WORLD clusters with the same indices across endpoints and contrasts. Intervals
+are conditional/descriptive across 32 worlds, not training-population, individual continuity or
+reliability inference. Read J, served count, served-user quality, service p10/minimum, total
+zero-service ticks, longest zero run, path and complete query/CPU costs together. Inspect every
+adverse world, not only mean or outage witnesses. Preserve all B05 and inherited adverse evidence.
+
+Keep eligible off-grid count losses, allowed extra queries, changed categories and changed
+remaining clipped physical holds as SEPARATE quantities. The physical counterfactual is only
+an exact command-geometry comparison from the same starting position to the next original
+boundary, not a native reward counterfactual. E's intermediate prediction is selective extra
+queries with some changed remaining motion; its native consequence must still be measured.
+If E retains useful complete value with favorable full cost relative to H1, retain that conditional
+option. If ordinary E/H1 captures the value, retain the ordinary capability. If H1's tradeoff is
+preferable, retain fast feedback. If E harms complete outcomes, stop this rule. Sparse or
+unresolved findings authorize no automatic tuning or additional purchase.
+
+**Full cost.** The accepted source-derived ceiling is 808960 worker queries: 501760 ordinary
+and 307200 student, with 737280 indexed draws, 143360 G distributions, 13547520 ordinary
+trajectories/54190080 modeled ticks, 1083801600 candidate and 50176000 setup links, at most
+43008000 student helper links and 307200 one-row forwards. E adds 337920 off-boundary gate
+checks and 450560 count decodes/9011200 slot tests. Native resets are 1120 explicit plus one
+factory reset; dense native radio slots total 79156275. Full reading independently reconstructs
+all actual ordinary queries, every helper and one-row S output INCLUDING deployed cache hits,
+all gate/nav/hold/RNG/native arrays and reductions, with zero additional native steps. Its worst
+ordinary/query work matches the worker ceiling. The source counts and costs are detailed in
+the preceding assessment; logical saved queries are not assumed to imply measured CPU savings.
+Planning estimates accepted by Root are 8–35 combined worker/reader CPU minutes, 6–10 active
+support hours, .7–1.3 GB canonical raw, .6–1.2 GiB process RSS and 1–2 GB temporary source
+snapshot. These are estimates, not admission or result cutoffs. Inherited selected-chain cost
+is 8 fits, 2 calibrations, 1794048 native steps and 2483.157 scoped CPU-s; B06 completion would
+raise native total to 2080768 with fits/calibration unchanged. Other branches and unmetered
+support remain separate. Extra gate/query CPU and serialization/readback are measured; the
+simulator has no physical sensing latency/energy bill to infer from them.
+
+<a id="b06-l0"></a>
+**L0 implementation scope.** Deliver a versioned off-grid adapter, the fixed three-mode
+scheduler, exact complete panel collector and independently reconstructing reader under the
+owned B06 directory and matching tests. Main checkout `/home/fires/hmasd-wsl`, branch `main`;
+only the DM edits this notebook and shared standing. Frozen C/G/S/T-H source files stay unchanged.
+One bounded Implementer at a time may own only `b06_cadence/policies.py` and its focused policy
+tests: preserve full original query semantics while allowing actual off-grid ticks. The DM owns
+the gate, contract, assets, collector, summaries, independent reader and runner, with no concurrent
+writes to helper-owned paths. No helper index mutation, notebook write, child or result launch.
+
+The adapter returns the B05 diagnostics and private counters using unchanged four-step scores,
+one-row actor arithmetic and actual-clock addressed draws. Check old-grid equality on synthetic
+contexts, off-grid decision/nav/fallback arithmetic, cache privacy/hit behavior, no sampled-action
+caching, category ordering and RNG/global-stream invariance. DM checks count uniqueness/capacity/
+truncation, consecutive-tick gate/reset/boundary/one-extra/spent-on-alias semantics, full panel
+inventory, synthetic end-to-end saved-data reading and tamper rejection. Tests use managed
+pytest scratch. **No native correctness fixture, pilot or profile is selected.** All numerical/
+RNG/reader/identity/launch changes receive independent high-risk engineering review before the
+DM accepts and publishes exact inputs. Source/asset identities bind old modules and all new
+modules; local staging contains only the two exact required S files, digest checked against
+their canonical originals. Asset location changes do not change tensors or policy arithmetic.
+
+Execute one admitted worker followed by its complete reader on configured `local_linux`, as
+Root selected because the remote GCC recurrence remains unresolved. Use the native launcher,
+fresh actual-node memory admission, published exact input SHA and one immutable source snapshot.
+Arm deterministic observation on the same accepted handle, keep this native child active, collect
+and read without duplicate retry. Technical failure preserves partial exposures and stops that
+attempt; it is not a negative scientific result. The full independent scientific diagnosis,
+owned standing/background publication and measured exact-target cleanup complete the boundary.
+No substantial implementation, result query, fit, model query or native transition has occurred
+at the time of this prospective entry.
