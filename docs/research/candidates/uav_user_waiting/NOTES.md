@@ -6807,3 +6807,402 @@ one substantive comparison. It owns the independent question construction and pr
 assessment; I own source/feasibility corrections and prospective complete costing. Root
 owns the subsequent selection and any new direction assignment. There is no reserved run,
 borrowed paused ownership, automatic continuation or claim of novelty from the source search.
+
+
+<a id="radio-uncertainty-complete-source-price"></a>
+### One prospective P/U32 RF comparison: original contract and full source price — 2026-10-01 UTC
+
+This is the single narrowed source/feasibility response requested by the independent
+Oracle. It selects no experiment or implementation. The preceding source response remains
+at0136d45b06e4bd71e0eb0e8b5a035529ba0ecf9a.
+
+#### Oracle's complete prospective contract (verbatim)
+
+> Please price ONE narrowed prospective comparison, source/metadata only, and challenge its material fit/feasibility gaps. It remains unselected. No native/model/C/controller/allocator queries, saved-output reductions, tests/benchmarks/fits/implementation. The question is complete use of an ordinary distribution-integrating joint controller versus a competent adaptive certainty-equivalent controller under measured-scale correlated shadowing, not old-C2 repair, a learner, or a robustness leaderboard.
+>
+> Proposed exact scientific contract to price:
+> • New direction-owned N5/U50/H256 adapter of the current masked MultiUAVEnv. Keep existing free-space mean law,2GHz/23dBm/−80dBm,3dB eligibility,cap10,greedy assignment,static users,1000m/height50–150/componentwise30m/s/native local104,non-FDMA/native J. Add only user-link dB excess loss z. z0=σ·ε0, z_next(i,u)=ρ_i z(i,u)+σ sqrt(1−ρ_i²) ε(t,i,u), ρ_i=exp(−actual 3D displacement_i/dc), σ=4.14dB, dc=17.62m. These two scales come prospectively from Zhang et al., Computer Networks237(2023)110055, Table3 UE1/70m; I read the measurement/method, not just a hint. Original free-space mean and this path-length Markov approximation are deliberate simplifications, NOT reproduction/validation of that campus/3.5GHz experiment. This is evolving correlated realization with known parameters, NOT a hidden fixed map: a return to a location need not reproduce its old loss. Hover givesρ1. Physical ε is namespace/world/tick/UAV/user bound, all250 draws consumed every tick even ifρ1 or radioOFF; paired arms share ε and initialization, NOT action-dependent realized z. A2A unchanged. Mask changes/observations consume no channel draws. Model sampler is separate and cannot see future native ε.
+> • Explicit richer current-measurement contract: each report round has calibrated reciprocal pilot estimates of CURRENT total user-link path loss for every registered link, including payload-silent UAVs. This is an idealized current large-scale-CSI sensor, not native evaluator access silently supplied to an old actor, not future channel truth, and not already empirically acquired hardware data. Encode each total loss as uint8: round((L−40dB)/.5dB), clip0..255; decode40+.5code. Native/evaluator retain saturation. Same registered400-byte rounded XY map/positions/proposal/nav reports for both arms. Extra250bytes/round on existing2000bit/s OOB link gives391bytes total if reusing141-byte report format. Reserve an explicitly modeled .1s pilot resource each four-tick report round (50×2ms sounding slots); both programs pay it. At report transitions, retain raw native J/service and also .9-weighted payload J/service (other transitions weight1); primary is complete payload-J/H256. No energy/bitrate/safety claim; ideal calibration/sounding reliability and these physical-resource assumptions remain application-fit gaps, not free measurements.
+> • Delivery latency must be THREE ticks, holdFOUR, because .1s pilots +391*8/2000=1.664s leaves1.336s whole C+manager compute before3s. This is a NEW matched timing/physics/measurement contract, not frozen S2. Preserve complete atomic hold-old-command/mask fallback, startup3 and final actual truncation. If the141-byte payload counts or pipeline ordering need correction, return the exact facts rather than silently overriding.
+> • P and U both use the existing S2 two-order rotating-single-member27-command/nonempty31-mask search (116 logical requests/≤112 unique plans per round) and unchanged current local C proposals as the common proposal mechanism. C is not the sole comparator; P's manager knows the correct shadow law and uses measured/decoded per-link residuals, proper motion/prefix, lognormal expected received powers, and full native greedy score. Both derive current residual z_hat=decoded L−free_space(decoded ownXYZ, registeredXY), treating this small quantization/geometry residual as a common point estimate; do NOT claim exact Bayesian filtering. Both propagate the THREE-tick actual commitment prefix and four candidate ticks with the same known Gaussian recurrence conditional on this decoded initial residual. P computes analytic E[received power]=nominal_power*exp(−a μ+.5a²v), a=ln10/10, before coupled SINR/assignment/J. This is deliberately stronger than plugging mean dB into the old free-space model.
+> • U uses32 joint conditional channel trajectories per decision to average actual coupled native J/served/quality of each candidate. Generate16 Gaussian tapes plus their antithetic negatives, common across every candidate at that decision; draw all3+4 future ticks for every link, propagate candidate-dependentρ, and integrate only the delivered candidate block (including fixed terminal shortening/pilot weights). Same search/ties as P using means; no CVaR coefficient, severity/particle sweep, posterior learner, extra action/menu or outside physical query. Proposal C retains its current-only104 input/source; richer CSI goes only to both matched managers. Finite MC/search/quantization/closed-loop feedback remain combined; no universal optimality or mechanism attribution.
+> • One complete P/U comparison on32 prospectively fresh independent geometry+channel worlds, one declared model RNG per U/world, alternating arm order.64H256 episodes/16,384native steps,0fits/labels/training/calibration-data acquisition/optimizer updates (the ideal sensor is costed separately each round). No deterministic-world third arm or retained-policy leaderboard; no obligation to fit. Primary U−P payload-J; all raw J, payload/raw served/quality, all50-user waits/maxgap/initial+terminal censoring, outage/p10/minimum service, path, transmitter exposure, deadlines/fallbacks, per-world levels/deltas and full costs. Activation = changed delivered physical command/mask, not changed model scores. Descriptive paired-world intervals, no training replication/equivalence/adoption margin.
+> • Full offline reader reconstructs ALL actual native RF updates from saved exogenous ε/address/source, loss/SINR/greedy grants/native104/actions/reward/airtime weights; checks both C/nav/report paths and all actually executed P/U candidate/MC/tie calculations from separate model streams, not new native branches. Check paired initialization and common exogenous ε, never demand same realized RF after motion diverges. Partial/deadline work stays paid. No shadow alternative controller on other-arm histories or extra native counterfactual panels. Save compact per-candidate means/choices/counts and generator identities; avoid giant all-particle score tensors if deterministic reconstruction suffices.
+> • Engineering price should include four fixed H8 correctness episodes (32extra native steps): original free-space versus newσ0 with identical fixed commands/masks (2episodes), plus one P/U correlated pipeline fixture (2episodes), and a separately bounded synthetic test workload for RNG/quantization/OU algebra/mask reuse/partial deadlines/reader rejection. These are future engineering checks only, NOT authorized now. Please count constructors/unscored resets, all real/controller/radio/model/pilot draws, full reader CPU/RSS/canonical+peak storage, source/implementation/review/launch/publication/support time, and sunk evidence versus marginal cost; use historical timing only with its scope limitations. If full U32 misses the1.336s feasibility estimate, state it; do not benchmark or tune the sample count. Source/engineering cost alone can justify declining this purchase.
+
+#### DM full source/feasibility response
+
+**Source verdict.** This is a concrete, implementable comparison of two ordinary
+programs on a new approximate RF host, with an explicit richer sensor. The wire and
+three-tick pipeline are consistent. The material unresolved engineering issue is timely
+execution of all U32 scores: a source-faithful serial repetition of the existing S2
+scorer exceeds the proposed1.336s window by the historical work-rate estimate below.
+A particle-batched exact scorer could change that; it has neither been implemented nor
+measured. Do not label U32 deadline-ready, or general implementation impossible, from
+this source assessment. Retaining32 and recording atomic fallback is a complete program,
+but a mostly timed-out program would not establish useful execution of the intended
+full distribution integration. No sample-count tuning or new timing trial was performed.
+
+All following counts are prospective complete-work counts or stated bounds from the
+supplied contract. Reading existing source/metadata and scalar arithmetic produced them;
+no controller, native environment, model, allocator, test or benchmark was executed,
+and no saved scientific outcome was reduced.
+
+**1. Wire, clock and objective.** Waiting's report is25bytes, including its post-C
+navigation byte; original S2 uses24. The proposed five75-byte reports plus one16-byte
+command therefore total391bytes. This needs a new versioned protocol with DELIVERY=3,
+including report/command validation and forecasting; importing the old DELIVERY=2
+constant unchanged would be incorrect. The current frozen files remain untouched.
+Serial pilot/uplink/downlink cost is .1+375×8/2000+16×8/2000=1.664s, leaving1.336s for
+all five current C calls, encoding/decoding, propagation, sampling, candidate scoring,
+selection and command validation. The pilot charge is not hidden inside that CPU timer.
+
+The source clock is: report at state t; execute already committed commands for
+transitions t,t+1,t+2; deliver atomically at state t+3; score the new command on
+transitions t+3 through t+6, whose postmove states are t+4 through t+7. At t=0 the
+existing startup uses current C proposals with all radios on for the prefix. There are
+64 reports/episode, final report252, final arrival255 and only one final candidate
+transition. Thus the scored-length sum is253=63×4+1, not254 or256. A future C call at
+t+4 could first take effect at t+7, outside the scored block, so this particular
+contract needs zero future C queries; that is a consequence of this clock, not a
+general prohibition on modeled future C.
+
+For a precise implementation, take the sensor's current loss at the report-boundary
+state and model the .1s sounding as the declared airtime charge, without inventing
+sub-tick movement or another RF evolution. Apply .9 to the outcome of transition t
+when t is a report boundary; raw physical grants, SINR and J remain available. Full
+payload-time weight is249.6 per episode. A complete four-step scored block contains
+one charged report transition; the final one-step block contains none, so the sum of
+candidate-block payload weights is246.7 and the startup-prefix weight is2.9.
+Per-user waiting/censoring remains based on positive native payload service per
+one-second transition; a .9 payload fraction is still service, not a new zero-service
+event. This resolution does not measure100ms gaps. Weighted quality is airtime-weighted
+native utility, not degraded SINR or a measured data rate.
+
+The exact inherited S2 rank is J, served, equality to the rotating member's C proposal,
+mask population count, negative mask id, negative command id. Price both programs
+using the declared payload-weighted J/served means in that rank, with quality already
+inside J. Fix rounding (the existing wire uses round-to-nearest/ties-to-even), field
+ordering, generator/normal-transform/version, floating precision and boundary indexing
+in any selected card. These are explicit engineering conventions for this price,
+not a request for another scientific search.
+
+**2. Native, current-controller, sensor and RNG bill — result panel only.**
+
+| Work | Complete prospective quantity |
+| --- | ---: |
+| P/U episodes; result native transitions; UAV ticks |32+32;16,384;81,920 |
+| Reused worker environment; explicit episode resets; discarded constructor reset |1;64;1 |
+| Report rounds / scheduled delivery setters |4,096 /4,096 |
+| Worker current C calls |20,480 |
+| Worker C paths / model ticks / user-link ceiling |552,960 /2,211,840 /46,284,800 |
+| Fits, labels, training, optimizer/parameter updates, future C calls |0 |
+| Episode physical Gaussian values consumed, including z0 |4,112,000 |
+| Distinct paired-world physical Gaussian addresses, including z0 |2,056,000 |
+| Additional discarded constructor Gaussian values |250 |
+| Native reset geometry uniform variates, including constructor |7,475 (=65×115) |
+| Physical channel states, including constructor |16,449 |
+| Full native radio refreshes, including delivery setters |20,545 |
+| Dense user-SINR entries at those refreshes |5,136,250 |
+| Noiseless current link measurements / quantized CSI values |1,024,000 |
+| Sounding slots / aggregate simulated sounding seconds |204,800 /409.6 |
+| Full successful recurring traffic / preinstalled map bytes |1,601,536 /25,600 |
+
+Each reset draws15 UAV-coordinate and100 user-coordinate uniform variates in the
+current native source. The new shadow sampler must have a separate namespace and must
+not perturb this geometry stream. Gaussian counts mean scalar normal values, not an
+assertion about how many underlying PRNG words a chosen normal transformation consumes.
+All250 innovations are consumed per physical tick even when their coefficient is zero
+or a UAV is payload-silent. Constructor/reset distinctions must be recorded rather than
+concealed by pairing. Recreating rather than reusing environments increases the setup
+bill; the table prices the concrete one-worker-instance plan.
+
+The two arms share the world-addressed epsilon tape and initialization. They consume
+the same exogenous values twice, but their subsequent z values can differ because
+displacement differs. Common addresses are not two independent channel worlds. The
+reader should check this coupling, not require equality of post-divergence losses.
+Mask updates recompute deterministic radio/assignment at the existing loss state and
+consume zero physical channel innovations. Getter calls consume none. A2A has no new
+stochastic draws. Native dense A2A matrices have25 slots per refresh, of which20 are
+off-diagonal links; these are deterministic radio work, not random samples.
+
+Current C is deterministic and introduces no action-sampling RNG. Its27 paths/108
+model ticks per call remain paid, even though P/U share that source. The link ceiling
+is2,260/call; realized visible-user/peer work cannot be known without execution.
+The pilot sensor adds zero measurement-noise/calibration RNG in this idealized contract;
+its1,024,000 link readings and204,800 sounding slots are real modeled resource costs,
+not an acquired calibration dataset.
+
+The1,601,536byte figure is the successful/full-packet value. Existing atomic deadline
+fallback can emit no command packet, and can fail before report serialization. If that
+behavior is retained, record actual attempted/sent bytes separately; do not claim391
+bytes actually sent on every failed round. The fixed sounding reservation and deadline
+budget still apply. Do not silently add an old-command packet to make the accounting
+constant. Reusing the observation dictionary returned by set_transmitter_mask avoids
+the legacy collector's second redundant observation extraction; either choice consumes
+no extra RF draws and must not be counted as another physical transition.
+
+**3. Manager work, including full conditional trajectories.** The complete two-order
+S2 search makes116 logical score requests per round. With the existing (q,mask) cache,
+its unique count Q is57,83,87 or112, depending on whether the two chosen rows/columns
+coincide. Thus the panel has475,136 logical requests and233,472–458,752 unique
+candidate identities. No observed candidate count is asserted for the new host.
+
+Let L_r=min(4,256−4r−3), r=0..63. For each arm the exact complete score count before
+particles is sum over its32 worlds and64 rounds of Q_(world,r)×L_r. P uses one
+expected-power score per such fleet tick; U uses32 particle scores. Their score
+counts need not be equal because their searches can select different rows/columns.
+
+| Complete manager work | P | U32 |
+| --- | ---: | ---: |
+| Logical requests |237,568 |237,568 |
+| Candidate fleet SINR/greedy/J evaluations |461,472–906,752 |14,767,104–29,016,064 |
+| Dense candidate user-SINR entries |115,368,000–226,688,000 |3,691,776,000–7,254,016,000 |
+| Three-step prefix kinematic fleet ticks |6,144 |6,144 |
+| 27-way suffix geometry fleet snapshots |218,592 |218,592 |
+| Prefix plus suffix conditional fleet-state propagation |224,736 moment states |7,191,552 particle states |
+| Conditional link-state propagation |56,184,000 mean/variance pairs |1,797,888,000 particle-link states |
+| Fresh base model normal variates |0 |57,344,000 |
+
+The32U trajectories use16×7×250=28,000 fresh normal variates per decision, plus
+their antithetic negatives. This produces114,688,000 signed model-noise entries over
+the U panel but only57,344,000 fresh normal values. These tapes are shared across all
+candidate pairs, never multiplied by Q. All seven noise slots are generated as specified
+even for the final shortened block; only physically relevant prefix/scored propagation
+is evaluated. Prefix propagation can be shared once across every q/mask. Suffix
+geometry and conditional shadow paths can be cached by q because shadow evolution
+does not depend on the mask. No prefix SINR/allocation calculation is needed just to
+propagate this OU state; no local-LRS model/history settlement belongs in this price.
+
+The conditional-state counts describe the straightforward32-path propagation with the
+existing27-way geometry cache. Additional algebraic reuse of antithetic deviations or
+identical clipped geometry can lower arithmetic without adding observations or altering
+the trajectory count; report actual primitive counters if implemented. The complete
+candidate radio/greedy work is15,228,576–29,922,816 fleet evaluations, or
+3,807,144,000–7,480,704,000 dense user-SINR entries. These are model calculations,
+not new native transitions. An implementation that materializes all837 q/mask pairs
+for convenience would add undeclared work; the price is the stated S2 search.
+
+**4. Complete reader.** Price an independent offline reader with no environment
+constructor/reset/step, no opposite-arm policy on another history and no additional
+native worlds. It regenerates every actual epsilon/address and all16,384 physical
+transitions, reset states and delivery-refresh radio states, checks recorded loss,
+SINR, stable greedy grants, both observation phases where needed, commands, C/nav and
+wire fields, payload weights, all50-user waits/gaps/censoring and per-world contrasts.
+It checks the actual RNG/partial-work/deadline ledger, rather than reproducing observed
+wall time by running a new live clock.
+
+The priced reader also reconstructs the discarded constructor snapshot with pure
+kernels:4,112,250 physical normal values and7,475 reset-geometry uniform variates,
+plus20,545 radio-state calculations for the result worker including that unscored
+state. None is another native environment call. Keeping that initial snapshot and
+its address identity makes the setup bill auditable instead of silently dropping it.
+
+Using the existing two-pass C audit—once on saved and once on independently
+reconstructed observations—costs40,960 additional C calls,1,105,920 paths,
+4,423,680 C model ticks and at most92,569,600 C link evaluations. That is an explicitly
+priced engineering choice, not an extra scientific comparator. Worker plus reader
+therefore pay61,440 C calls,1,658,880 paths,6,635,520 C model ticks and at most
+138,854,400 C link evaluations. All arithmetic/diagnostics of every actual candidate
+must be checked. Unlike the older S2 reader's sampled candidate-physics checks, this
+proposed reader reconstructs ALL actual P/U candidate/particle physics.
+
+For a fully completed search panel, the reader repeats the entire table in section3:
+another15,228,576–29,922,816 candidate fleet evaluations and57,344,000 model base
+normal values. Worker plus reader therefore total7,614,288,000–14,961,408,000
+candidate user-SINR entries, plus native reconstruction and C work. No all-candidate
+check is replaced by rechecking only the selected pair. For deadline interruption,
+read exactly every attempted/completed partial calculation and preserve the missing
+remainder; do not finish unexecuted decisions as extra policy counterfactuals.
+Using the existing deterministic paired mean/1.96SE descriptive interval convention
+requires no bootstrap RNG. Any different statistical procedure would be named in the
+selected plan. All runtime/state/count and per-world evidence must retain failures.
+
+**5. Four H8 engineering episodes and bounded synthetic checks.** A concrete economical
+construction plan is one H8 old free-space instance, one H8 new sigma0 instance and one
+H8 correlated instance reused for P and U, in addition to the H256 worker above.
+Each base constructor currently performs one discarded reset. With the four explicit
+fixture resets, this gives four total constructors,68 explicit resets and four
+constructor resets across the proposed result plus correctness work. Total actual
+native transitions are16,416, of which32 are engineering exposure. Geometry setup
+consumes8,280 uniform variates. If the sigma0 adapter consumes its addressed normal
+values even when multiplying them by zero, the entire result+fixture+constructor
+purchase consumes4,119,500 physical normal values; the old free-space instance itself
+draws no shadow variates.
+
+For this bill, the fixed-command/mask pair exercises two scripted mask setters at
+states3/7 per H8 episode; the P/U fixture exercises its two real arrivals each.
+That adds eight setter refreshes. The fixed pair makes zero C/manager queries.
+The two P/U episodes add four report rounds,20 worker C calls,464 logical manager
+requests,9,405–18,480 total P/U particle fleet scores, and56,000 model base normals.
+They add200 sounding slots/.4simulated seconds and1,564 successful recurring bytes,
+with maps for the two managed episodes. A complete offline check doubles their actual
+model work and adds40 reader C calls. Result+H8 C work is20,500 worker plus41,000
+reader calls;61,500 combined calls/1,660,500 C paths/6,642,000 C model ticks, with
+138,990,000 C-link ceiling. The original/source identity and all actual fixture
+attempts must be retained. If a different fixture construction/setter schedule is
+chosen, revise these explicit engineering counts; do not call them measurements.
+
+A separately bounded, sufficient *price envelope*, not an already written suite:
+12 pure kernel/address cases (zero variance, hover, moving and clipped displacement,
+independent addresses, map/loss quantization endpoints and saturation, antithetic
+algebra, mask/getter reuse and stable allocation ties), plus at most eight synthetic
+single-round P/U pipeline/search cases and their eight reader checks. The latter cover
+full completion, terminal shortening, deadlines at distinct partial-work boundaries
+and rejection of altered source/RNG/measurement/command/count evidence. Use fake
+clocks and synthetic states; no extra native episode or current-C decision.
+Bounding all16 manager/reader attempts by a full U32 four-step round gives at most
+229,376 candidate fleet evaluations/57,344,000 SINR entries and448,000 model normal
+values; bounding each pure-kernel case by16×7×250 adds at most336,000 normals.
+For the concrete result+four-H8 schedule above, the reader repeats all4,119,500
+physical normal values and8,280 reset-geometry uniform variates through pure kernels;
+worker+reader total8,239,000 physical-normal materializations and16,560 geometry
+uniform variates. There are20,592 radio-state calculations per side, including the
+engineering and discarded constructor states. Complete result+H8 manager replay
+uses114,800,000 fresh model normal values across worker and reader; adding the
+stated synthetic upper bounds gives at most115,584,000 model/kernel normal values.
+These distinguish repeated materializations from distinct exogenous world addresses
+and from deterministic radio arithmetic.
+
+These are ceilings for a fixed future correctness task, not permission for a new
+result panel, optimizer search, prototype sweep or repeated timing batch.
+Budget roughly .02–.10 CPUh for the H8 and bounded synthetic correctness work,
+separate from the result worker/reader; no such check was run for this answer.
+
+**6. CPU, deadline, memory, disk and support.** The closest available ordinary greedy
+scorer anchor is radio B03 S2:64H256 worlds,4,096 decisions,302,953 unique candidates,
+1,202,360 mask-state reductions,257.177695 scheduler CPU-s including current C,
+277.046641 complete episode CPU-s and .179326s maximum planner wall time.
+Source is the original retained radio B03, not an RF/U32 benchmark. The table is in
+uav_radio_activation/NOTES.md, Cost and Exposure after b03-complete-reading.
+
+A linear *serial-kernel work proxy* divides257.177695s by1,202,360 old fleet scores
+and applies it to the new count bounds. It gives roughly3,257–6,400 scheduler CPU-s
+for the P/U worker and1.542–3.030s per U round averaged over the panel. This proxy
+includes old overhead, changes cache behavior and uses a different host/runtime/load;
+it is not a lower bound or a benchmark. Nevertheless, the source-faithful serial U32
+implementation **misses the proposed1.336s feasibility estimate**, even at the low
+unique-pair count. Simply multiplying the old maximum by32 gives5.738s, another
+loose warning rather than an exact tail prediction.
+
+Vectorizing the particle dimension while preserving each sample's native stable
+greedy score could remove much of the Python-loop overhead. This would be core new
+engineering requiring independent review and the declared checks; no speedup is
+currently measured. The3dB disjoint-eligibility property may support exact batched
+allocation, but it must reproduce full selected SINR quality/ties, not replace native J
+with a capacity count. No additional action or sample count is proposed. If selected,
+whole-round timing includes proposal C and every partial operation; fallback work is
+not free. A deadline-limited worker will often execute less than the complete score
+ceiling, while its64 physical trajectories still need full reading.
+
+For planning, use **2–5 combined CPUh for complete worker plus full offline reader**,
+plus the separately stated correctness cost. This is a broad source-based engineering
+estimate for the full-work task, not a resource reservation, timing guarantee or
+measured quote for an optimized U32. A successful batching implementation could be
+cheaper; a deadline-dominated run spends less work but also changes what capability
+was actually deployed. State that limitation before deciding whether to buy it.
+Relevant additional measured anchors are waiting B06 worker545.844109s plus
+reader441.677107s (987.521216s total), whose manager used486.356068s for1,444,018
+LRS-model fleet ticks; B07's complete worker/reader used110.858113s including waited
+children but a much simpler capacity scorer and a different runtime. Neither is a
+controlled speed ratio for this RF comparison, and B06's partially sampled physical
+reader cannot stand in for the proposed all-particle reader.
+
+With one episode/round streamed at a time, plan **.5–1.5GiB RSS per process**.
+A16×7×5×50 float64 base tape is224,000bytes; a full32-path,27-q,4-tick,250-link
+float64 suffix array is6,912,000bytes. Several such arrays remain small beside
+runtime imports. These sizes do not require retaining every candidate across the
+whole panel. B06 worker/reader peaks414,552/379,248KiB and B07
+564,696/574,520KiB are measured separate-process anchors, not additive simultaneous
+RSS or a memory reservation.
+
+Plan **.10–.20GB of canonical new evidence**, with exact hashes/locators and only
+compact summaries in Git. As an uncompressed scale check, actual observations occupy
+34,211,840bytes, loss states32,896,000, native SINR32,768,000, grants4,096,000,
+positions1,973,760, peer SINR3,289,600 and all candidate3-component means at most
+11,010,048, before packets/actions/counts/censored-outcome metadata. These total about
+120.25MB, and compression is not assumed guaranteed. Save seed/address/normal-source
+identities rather than all model tapes. Storing every U particle's every-tick3-component
+score alone would add up to696,385,536bytes; storing all fresh U model normals would
+add458,752,000bytes. Neither bulk tensor is required for deterministic full reading.
+Keep the actual native loss/SINR and current sensor saturation evidence, not only
+aggregate means.
+
+Historical remote source snapshots are about.82GB allocated each: a worker/reader
+pair adds about1.64GB temporary source footprint. Plan roughly **2–3GB remote peak
+incremental disk** including canonical evidence, one-episode scratch and an optional
+separate fixture snapshot; on the observed local snapshot layout the analogous
+temporary pair was about3.52GB, so roughly4–5GB. These are source-size estimates,
+not fresh disk admission. No125MB copy of old S/M/U/S_F/C2 raw inputs is needed for
+this fresh two-arm comparison. No fit checkpoint or full-tree backup is required.
+Release accepted snapshots and redundant scratch after full reading and consumer
+checks; retain one necessary evidence copy, all adverse/failed records and compact code.
+
+Support-time estimates are separate from CPU: **6–12h** host/protocol/P/U implementation,
+**4–8h** independent full reader, **2–4h** correctness and engineering review, and
+**2–4h** launch/collection/scientific reading/publication/cleanup, totaling **14–28h**
+of further support. This does not include automatically repeating selection review.
+Source/Oracle/selection work is already real work; a .5–2h source-support planning
+allowance is reasonable but has not been comprehensively metered, and adviser/Root
+time must not be called zero. These are effort estimates, not observed human labor
+or an execution allowance. The publication/source admission and actual node-memory
+check would occur only after Root selects a question and ownership; no node is reserved.
+
+**7. Material interpretation and fit limits.** I accept the proposed sigma/distance
+numbers as fixed prospective inputs supplied by your primary-source reading; this
+cost response does not independently certify the Zhang table or validate the new
+host against that experiment. The current mean is free-space at2GHz across50–150m
+altitude, whereas the cited scale comes from a particular UE/height/campus/3.5GHz
+measurement. Independent per-link Gaussian innovations, path-length Markov
+decorrelation, no spatial return consistency, no inter-link obstacle correlation
+and permanent freeze under hover are deliberate host approximations, not measured
+laws of all UAV links. A gain would be conditional use on this stated host.
+
+One concrete consequence follows without a simulation: a30m displacement gives
+rho≈.182207; three unclipped30m prefix steps leave the current residual mean with
+coefficient exp(−90/17.62)≈.006049. Three maximum diagonal steps leave≈.000143809.
+Hover/clipping can instead preserve it exactly. Much of the moving-link current CSI
+can therefore decorrelate before delivery. This frames the likely tested distinction
+as nonlinear threshold/interference integration under known dynamics, alongside
+motion-dependent persistence, rather than evidence of long-lived RF-map memory or
+Bayesian identification. It does not prove that the comparison has no use.
+
+For fully decorrelated variance sigma², P's analytic mean-power correction is about
+1.575168 times the free-space power at zero mean excess dB. This confirms that P is
+not merely the old mean-dB controller. It still applies nonlinear SINR/threshold/
+capacity/quality after expectation, whereas U averages that nonlinear native result.
+Finite Monte Carlo winner selection, the restricted two-order search, report
+quantization, geometry rounding and subsequent trajectories remain combined in any
+native difference. Current C's free-space proposal model limits both managers'
+common menu—only one member gets a27-way override—but it is not the sole comparator.
+Do not generalize a P/U difference to every competent ordinary controller or change
+the proposal mechanism within this priced purchase.
+
+The ideal reciprocal sensor also requires all50 registered users to sound and all
+five payload-silent or active UAV receivers to obtain calibrated current estimates.
+The explicit .1s charge and OOB bytes make this an honest specified resource, but do
+not establish hardware reliability, acquisition overhead, channel reciprocity error,
+coherence during sounding, energy or delivered bit rate. A positive result could
+justify studying those application limits later; no such later work is included or
+owed now. Source/engineering cost and the conditional application value may justify
+declining this proposal. They are different from an empirical refutation of uncertain
+RF cooperation, from the prior continuity stop, or from a requirement to train a learner.
+
+**8. Source identities and completion.** Source bytes checked against published
+54c099048e742af0483765882dca62cea585f4f3:
+
+- radio_activation/b02/scheduler.py:5c748f097a7597806f0adb3e5b49a242f000391c7da9ab7eedb2f7efce7535e7
+- radio_activation/b03/scheduler.py:41cdda90f1bb677c16f1ca12ee57cef2ac656b9b597a146cf8b4e6be9039d54f
+- radio_activation/b03/protocol.py:3561dd0c2ea274a7e24e5a8bc6da3d6ee03b21fcec8768d18adb45b4f524b2c1
+- waiting/b02/protocol.py:038bddbfa0f694e9b5aa2a6c3f0e659d945369a951b55497a1da2a9ec839e1d4
+- waiting/b04/study.py:c16a83bdf3b1d26874a91ee5347326d7e21bf36079057ca6736ceeaa0eb004f0
+- envs/pettingzoo/uav_env.py:fb67554cf911adc9d3260a2a7f16d1773921c295646cb46beb4ba1247fec599e
+- envs/pettingzoo/uav_radio.py:db3464803b1a5aa9c9504096810dc971266a6bd7eba1c31dfe79e7d8d903f3cc
+
+The full first five paths have the experiments/candidates prefix (waiting means
+uav_user_waiting; radio_activation means uav_radio_activation). Exact source and
+the full native radio B03/waiting B06/B07 cost records were read; only scalar arithmetic
+was added. This completes the one source price. No new fit, native/model/controller/
+allocator query, saved-outcome reduction, test, benchmark, implementation or study
+was performed or selected. Root/Oracle own the next scientific selection; the full
+original recommendation and Root disposition will remain separate from this bill.
