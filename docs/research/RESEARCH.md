@@ -2278,16 +2278,18 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 ### Parallel allocation: independent work and rolling succession
 
 <a id="root-successor-designs-20260930"></a>
-**Four native DMs retain four substantive assignments: one selected study and three source assessments.**
-The former waiting DM implements the selected correlated-RF P/U32 comparison. Parent
-adaptation and fleet adaptation have now completed, independently read, published and cleaned
-their actual-S2 and mixed-teammate B09 studies; Root adopts both bounded stops and preserves
-their conditional positives. The same nonarchived parent DM supports an Astra Max assessment
-of useful retained capability versus a simple lower-motion explanation. The same fleet DM
-supports a distinct assessment of joint decentralized motion/transmission development against
-competent ordinary/composed control. Fleet transmission supports the existing assessment of
-task-relevant use of accurate ordinary user prediction after its completed S7 C/M/V study.
-None of these three assessments selects a successor experiment.
+**Four native DMs retain four substantive assignments: two selected studies and two source assessments.**
+The former waiting DM owns the selected correlated-RF P/U32 comparison through complete
+reading; the original main worker has been admitted after its fixed correctness checks.
+Fleet transmission owns one selected S7 C/H/F comparison of task-relevant prediction use,
+with the full planner/reader cost accepted below. Parent and fleet adaptation have completed,
+independently read, published and cleaned their actual-S2 and mixed-teammate B09 studies;
+both bounded stops and their conditional positives remain. Root also closes the parent
+lower-motion source assessment without buying another panel. That same nonarchived parent
+DM now supports a distinct Astra Max assessment of whether acquiring current radio state
+is worth its pilot, payload, delay and computation cost. The same fleet DM supports the
+assessment of joint decentralized motion/transmission development against competent
+ordinary/composed control. Neither source assessment selects a successor experiment.
 Detailed idea discovery and independent challenge use cumulative records, all three libraries
 and load-bearing primary passages. Helpers are not extra DMs; source/support work is real cost.
 Actual resource admission applies, capacity supplies no scientific premise, and Claude's
@@ -2482,7 +2484,7 @@ extra actor right or changed host, and it does not diagnose B09's failure. Check
 external reviews and all three libraries; read primary passages and obtain one bounded
 source/complete-price response after narrowing. No new native/model/controller/allocator
 query, saved-outcome reduction, implementation, prototype, test, benchmark or fit is selected.
-The parent capability-use assessment, S7 prediction-use assessment and RF study remain distinct.
+The radio-information source assessment and selected S7 prediction-use and RF studies remain distinct.
 [Complete result](candidates/uav_fleet_adaptation/NOTES.md#b09-complete-reading),
 [original independent diagnosis and DM resolution](https://github.com/CartmanFatass/My-paper-code/blob/71af384c3176ecc8976579b4442d00b2cafe69c5/docs/research/candidates/uav_fleet_adaptation/NOTES.md#b09-independent-disposition),
 [measured closure](candidates/uav_fleet_adaptation/NOTES.md#b09-final-cleanup),
@@ -2533,22 +2535,100 @@ raw/metadata bytes. Both snapshots, unused study drivers/tests, caches and stopp
 are absent; net allocated target storage fell1,635,348,480bytes, with no cleanup blocker.
 Useful controller code and10 rule tests remain; frozen execution source is recoverable in Git.
 
-**Next allocation is source/feasibility only.** The same DM supports one independent Astra Max
-Oracle assessment: can the proven ordinary motion representation justify a complete native
-cooperative-service comparison through a task-relevant decision interface, or should immediate
-investment in this family stop in favor of a materially different question? A service-aware
-planner is a possibility to challenge against stopping, not an identified remedy or selected
-experiment. Reuse the completed result diagnosis and all three libraries/July/external records;
-verify load-bearing primary passages and request one concrete same-DM source/price after
-narrowing. No new native/controller/model/allocator query, saved-outcome reduction, prototype,
-implementation, test, benchmark or fit is selected. Any proposed comparison must state lawful
-information/control rights, its consequential prediction and full execution/reader/support/
-memory/storage price; source uncertainty alone is not a value judgment or a demand for a pilot.
-Other accepted studies and paused directions retain their ownership and scope.
 [Complete result and signed worlds](candidates/uav_fleet_transmission/NOTES.md#b08-complete-reading),
 [original independent diagnosis and disposition](candidates/uav_fleet_transmission/NOTES.md#b08-independent-disposition),
 [measured closure](candidates/uav_fleet_transmission/NOTES.md#b08-final-cleanup),
 [retired full selection and prospective bill](archive/2026-10-01/RESEARCH-anonymous-tracking-completion.md#retired-anonymous-user-tracking-selection).
+
+<a id="forecast-service-use-selected-20261001"></a>
+**Selected: can accurate ordinary user prediction improve native service through a service-aware decision rule?**
+Root read the complete independent Astra Max recommendation, the original same-DM source/price
+response and the load-bearing primary passages. One complete C/H/F comparison is selected
+under the same fleet-transmission DM. Its value is to distinguish future extrapolation within
+one lawful planner from the complete package's usefulness against competent C. This is a
+new control-interface comparison, not an identified explanation of B08's loss or a guarantee
+that better prediction must help. The B08 stop, accurate-representation positive, privileged
+R capability, joint-transition O adverses, D2 ordinary-replanning positive and earlier costs
+remain applicable with their original rights and limitations. No learner or pilot is selected.
+
+Use unchanged fault-free S7-S2 N8/U30/H3000, dt1,1Mbps, native demand/radio/routing/energy/
+reward/termination and the original30-step shield clock. Three fixed programs on32 new paired
+worlds mean96missions/288000 scientific native steps/0fits. Freeze unused world addresses,
+arm-order rotation, source and independent model seeds before exposure. C is exact B08 C/P_BS,
+including genuine-current>genuine-memory>lawful-fixed-prior BS precedence. H/F retain exact
+B08 canonicalization and anonymous tracking at every tick. Both estimate the present as
+clip(last_xy+age*v) in track order; H holds this current estimate, while F projects to
+clip(last_xy+(age+tau)*v), tau10/20/30. H is not B08's held-last-sighting M. Existing free
+pooling of eight lawful observations is inherited; native truth/IDs/future/RNG stay unavailable.
+
+For nonempty tracks and lawful BS, both planners retain R's four ordered starting layouts
+(H1, best-of-eight G, carried, current), including duplicates; k=min(6,q), two relay targets,
+original assignment/ring conventions and prior-F positions fixed at their current locations.
+Two ordered pattern sweeps500m/50m then125m/25m in six directions yield at most4+12m<=100
+scored layouts, where m counts non-prior-F UAVs. No deduplication or search extension.
+Zero tracks use the original ring fallback; nonempty tracks without lawful BS use original
+LOCAL centroids-plus-ring. Both fallbacks skip search/RF, preserving unsupported-information
+cases instead of an accidental empty-map hover preference.
+
+Score each candidate using30 joint nominal D-motion/energy/charging ticks and
+10*sum_tau(modeledQoS-2*capped_return_cost), return scale.05, with original target-travel
+tie-breaking. Execute its selected target through the unchanged actual shield. The public-
+configuration RF model is constructed independently, never copied from live state; it has
+no reset/step calls. Explicitly replace every q-shaped user/serving/history/demand/rate array,
+UAV/BS state, fault flag and geometry/channel/route cache before scoring. Unknown users receive
+zero modeled service with denominator30 and create no phantom capacity contention. This is
+not a lower bound: omitting unknown contention can make represented-user service optimistic.
+All eight UAVs retain native interference; F/charging status alone does not disable radio.
+Declare rounded FP32 inputs, FP64 forecasts/FP32 actions, omitted backhaul guard/intermediate
+radio association, cutoff/charging order approximations and omitted PBRS/event penalties.
+The nominal forecast is not an exact native continuation.
+
+Primary F-H native J requires its cumulative-QoS companion; read H-C/F-C, all32 signed worlds,
+conditional descriptive uncertainty, service tails/outages, physical paths/routes, energy/
+charging/return/reserve/cutoff/depletion/termination and first/later command changes.
+Origin-bound10/20/30 forecast errors use each arm's own histories and retain ambiguity,
+censoring and worst cases; B08 t+15 accuracy is not a new-horizon guarantee. J improvement
+with falling service does not establish the proposed service-prediction capability.
+The full reader reconstructs every actually executed candidate's30 nominal ticks, RF/service
+scores, search order/ranks/ties and bounded records, alongside lawful control and native
+telemetry. It does not query another program on another arm's history or invent unexecuted
+search after an interruption. Exact tolerances and provenance are fixed before exposure.
+
+The complete bill includes four REF/C/H/F61-tick correctness streams:288244 total native
+steps,200 stream/probe constructors,100 resets and132 private model constructors with zero
+model resets/steps. Worker/reader scopes include576488 proposal/shield calls,19224 plans,
+390656 canonicalizations,384244 associations and at most121720 H1/Lloyd solves. Scientific
+worker ceilings are640000 candidate evaluations/19.2M nominal joint ticks/1.92M RF snapshots;
+the full reader repeats actual candidate work, giving38.4M ticks/3.84M snapshots combined.
+With fixed engineering and the additional finite synthetic checks, ceilings are38451360
+nominal ticks/3845648 RF calls. Additional checks include at most1024 each canonicalization,
+association and proposal/shield calls,256 projections,512 Lloyd solves,512 candidate executions
+including replays,512 extra RF adapter/reference calls and64 models, with no extra native
+reset/step. Necessary correctness repairs are prospectively counted, not extra empirical pilots.
+
+Forecast7-14 worker plus5-12 reader CPUh, engineering.02-.15CPUh; four workers then two readers
+take an estimated4.5-10wallh, or2+2 about6.5-14h. Expected RSS is.7-1.25GiB/process plus
+.5-.75GiB parent; actual node admission and RF-study overlap control placement, with no
+isolated-speed claim. Support is24-40 focused person-hour equivalents, an uncalibrated forecast
+covering source3-5, implementation4-7, reader7-12, checks/review5-8 and closure5-8; source/adviser
+work is additional and not model elapsed time. Canonical raw forecast is8GiB uncompressed,
+provision10GiB, approximately2-5GB compressed and14-18GiB peak including one source snapshot.
+Candidate records are bounded at2KiB each, including1216B returned forecast fields plus digests;
+full RF internal tensors are not purchased. Keep one necessary bulk copy and compact local
+evidence below50MB. These estimates are not measured outcomes or a spend entitlement.
+
+Useful F-H J/service plus F-C retains a conditional anticipation package; H-C without F gain
+retains ordinary service planning and closes this future-use purchase. F-H gain without C
+superiority retains only within-planner capability. Active adverse, unresolved or sparse-change
+results end the fixed purchase without automatic tracker/horizon/guard/search tuning, new
+worlds or fits. Technical defects receive bounded correctness treatment separately.
+The same DM owns implementation, independent engineering review, published inputs, admission,
+complete execution/reading, independent result diagnosis, publication and measured cleanup.
+Root personally read B01 printed51-54/PDF80-83, MARL-0016 observation-sufficiency/known-reward
+premises pp2-3, PSP2412.05766 pp2-5 and MAZero2405.11778 pp2-5. Those passages motivate the
+comparison's distinctions, not S7 efficacy or a guarantee for the approximate model. The
+Oracle's wider actual three-library/July/external coverage is preserved separately.
+[Complete original source/price](https://github.com/CartmanFatass/My-paper-code/blob/1236a46ff/docs/research/candidates/uav_fleet_transmission/NOTES.md#post-b08-source-feasibility).
 
 <a id="managed-proposal-learning-selected-20261001"></a>
 **Actual-S2 B09 complete: retain a lower-travel asset; end this development purchase.**
@@ -2589,15 +2669,35 @@ additional. After charging canonical local growth, net allocated reclamation is
 1,634,500,608bytes plus225,280cache bytes; required remote compact witnesses remain.
 Both snapshots and unused staging/scratch are absent, with no live consumer or blocker.
 
-**Next allocation is source/feasibility only.** An independent Astra Max Oracle assesses
-whether a consequential capability/use question deserves another purchase, including the
-retained lower-travel point versus a simple global movement/persistence explanation, or
-whether immediate investment should stop. Its one ordinary-comparator source/price request
-is not a selected travel study, utility, replication or repair. The broader native-learning
-question remains open; the same DM supplies read-only source/algebra/feasibility support.
-Use complete project positives/adverses, July/external reviews and primary passages from
-all three libraries. No new native/model/controller/allocator query, saved-outcome reduction,
-prototype, implementation, test, benchmark or fit is selected by this assessment.
+**Lower-motion source assessment complete: no further purchase.** Root read the full original
+Oracle answer and same-DM price, preserving both separately from its adoption. The feasible
+ordinary0.9S+0.1STAY rule would require a new192-episode/49152-step/0-fit comparison,10-25worker
+plus2-6reader CPU minutes and3-6support hours. That extra ordinary point does not presently
+settle a consequential question that outranks the other investments. Retain CONT, S, ordinary
+C_S2/C_T2, B02 U3 and all adverse lineages; no calibration, recurrence or B09 repair follows.
+A deployment utility is not a universal prerequisite: a worthwhile empirical-understanding
+question could also justify later work. Broader learning is not exhausted.
+[Original correspondence, actual catalog coverage and separate adoption](https://github.com/CartmanFatass/My-paper-code/blob/71e40520d/docs/research/candidates/uav_parent_adaptation/NOTES.md#post-b09-source-allocation-closeout).
+
+**Next allocation is radio-information source/feasibility only.** The same parent DM and
+independent Astra Max Oracle assess when current-channel observation is worth paying for,
+given sounding airtime, report payload, delivery delay, finite computation and motion-induced
+decorrelation, against a lawful lower-information predictor. P/U both receive the same ideal
+CSI and cannot answer this acquisition-cost question. This assessment does not await a positive
+P/U result or alter that accepted study. Under its source law, each link has4.14dB stationary
+scale and rho=exp(-actual3Dpath/17.62); ideal quantized250-link CSI costs391bytes at2000bps
+plus.1s sounding, totaling1.664s, leaving1.336s for the whole manager within the three-tick
+delivery/four-tick commitment contract. Rapid decorrelation during motion is a conjectured
+value limit, not a measured result; hover preserves state. Native C/104-field navigation
+information stays lawful. Neither free true RF nor an exact hidden-state belief is supplied
+to the lower-information controller; stationary marginal and policy-conditioned belief are
+different objects. Changing sounding/payload may change timing and control rights, so the
+comparison must price the complete package rather than claim isolated information causality.
+Narrow to one consequential comparison with full worker/reader/search/support/RSS/storage cost
+or stop. Use all three libraries, primary passages, July/external records and prior uncertainty
+adverses. No new query, saved-outcome reduction, implementation, prototype, test, benchmark or
+fit is selected. Any eventual study needs its own named direction/owned paths and explicit
+shared-source dependency; the parent DM does not edit or duplicate the accepted RF study.
 [Complete result](candidates/uav_parent_adaptation/NOTES.md#b09-complete-reading),
 [original independent recommendation and DM response](candidates/uav_parent_adaptation/NOTES.md#b09-independent-disposition),
 [measured closure](candidates/uav_parent_adaptation/NOTES.md#b09-final-cleanup),
@@ -2893,9 +2993,11 @@ interleaving in the reading, without an isolated-speed claim or rerun. Cap-two's
 and reader completed on the configured remote node. Anonymous-tracking B08 has also completed
 its recorded remote execution/readback and snapshot cleanup. Managed-proposal B09 has finished
 its remote worker/reader and canonical local collection; mixed-controller B09 has finished its
-local worker/reader. Both accepted operations and cleanup are complete. Selected RF-uncertainty
-work uses configured node preference, current feasibility and fresh actual-node admission;
-the three source-only successor assessments reserve no node capacity.
+local worker/reader. Both accepted operations and cleanup are complete. RF-uncertainty's fixed
+H8 correctness panel passed and its unchanged9b6f493b main32-world worker was admitted on
+wsl_4070 at2026-10-01 07:52:05UTC. The selected S7 service-prediction study chooses a configured
+host from its complete cost and fresh actual-node admission, accounting for any RF overlap.
+The two source-only successor assessments reserve no node capacity.
 This operation-specific placement changes no global runtime configuration and establishes no
 runtime cure. Accepted operations retain their node/identity; new overlap requires fresh
 memory/occupancy evidence, without a standing reservation.
