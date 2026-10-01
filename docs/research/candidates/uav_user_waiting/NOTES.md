@@ -6597,3 +6597,9 @@ copy, archive or retention chain was made. All selected targets are absent; ther
 concrete cleanup tool blocker. This closure ends B07 execution/reading/cleanup, while the
 new Root-selected source-only assessment remains the current responsibility; no new study
 or source implementation follows automatically.
+
+Final allocated-byte reconciliation after the cleanup paragraph was finalized: the notebook
+occupies the same512,000 allocated bytes as before this closure. The compact cleanup record
+uses135,168 bytes. The final net reclamation is **2,594,779,136 allocated bytes**; this
+supersedes the conservative preceding total by4,096 bytes. Targets and retained evidence
+are unchanged.

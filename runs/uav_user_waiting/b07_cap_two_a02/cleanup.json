@@ -2962,7 +2962,7 @@
   "measurement_scope": "Sum of allocated st_blocks*512 across exact removed target trees/files and launcher-worktree metadata, plus net new local compact cleanup record and notebook growth. Not a claim about Git object pruning, VHD compaction or global host free space; concurrent other-direction changes excluded.",
   "notes_allocated_before_append": 512000,
   "gross_deleted_allocated_bytes": 2594914304,
-  "notes_allocated_growth_bytes": 4096,
+  "notes_allocated_growth_bytes": 0,
   "cleanup_record_allocated_bytes": 135168,
-  "net_reclaimed_allocated_bytes": 2594775040
+  "net_reclaimed_allocated_bytes": 2594779136
 }
