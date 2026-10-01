@@ -1456,3 +1456,50 @@ priced two H8 streams and their full reader. A real defect requiring more scient
 queries gets a separate prospective cost/meaning decision rather than an unlimited retry.
 The Implementer owns only these new code/test paths, no index/commits/NOTES or launch;
 DM reviews its diff/checks and accepts. Other writers share main and must be preserved.
+
+### Completed cross-question review and DM response
+
+Root's separate-context registered ResearchCritic completed its cross-question allocation
+review, preserved in full at published `f1ec9d95e` in
+[the existing project-review archive](../../archive/2026-10-01/RESEARCH-successor-allocation-review.md).
+I read its complete original answer and Root disposition. It found no premise drift or
+material dissent requiring another selection pass, prioritized RF for the unresolved
+complete purchase, and retained the strong PRIOR comparator and closed/censored individual
+tail counterexamples. I accept this scoped selection; it does not predict a positive
+result, add an attribution arm or authorize a follow-up program. The fixed contract above
+is unchanged. This B02 temporarily consumes the unchanged RF-uncertainty, local-history C
+and user-waiting kernels read-only; Root has recorded that live dependency for cleanup.
+
+<a id="b02-engineering-acceptance"></a>
+### Implementation, independent engineering review and DM acceptance
+
+The registered Implementer delivered the new B02 package and exactly eight data-only
+tests in its assigned paths, without index, shared-code or notebook writes. All eight
+passed in 2.39 s with configured `/home/fires/.venvs/hmasd-linux-cpu/bin/python`;
+pytest-owned scratch was automatically removed. All 12 new Python files parsed.
+The immutable manifest binds 34 files for the V5 U32 local dependency closure and
+42 for V6 PRIOR, including package initializers; all original Git blobs match current
+bytes. No native, controller, allocator, model, RNG, fit or result launch occurred.
+The final label explicitly defines the existing normalized payload_J rather than
+suggesting another division by H; that wording-only change needed no repeat test.
+
+The separate-context registered engineering Reviewer returned this complete answer:
+
+> No material finding remains in the completed B02 package, including the corrected normalization label. No repair requested.
+>
+> Verified admission-before-effects, literal V5/V6 dispatch, fixed exposure, full inherited episode reconstruction, independent pairing/companions, aggregate counters, artifact identity rejection and failed-work persistence.
+>
+> Checks: 12 Python files parsed without imports; all 34 U32 and 42 PRIOR source bindings match current bytes and original commits; no missing static local imports. Reviewed the eight data-only tests; their **8 passed / 2.39 s** result is DM-provided evidence.
+>
+> Residual limit: no native/model/controller/allocator/RNG execution was performed. Runtime integration and deadline behavior remain for the already-priced paired H8 check. DM owns acceptance.
+
+DM acceptance: I read the new configuration/source guard, literal dispatcher, admitted
+entries, worker persistence, independent full reader, scalar companion/pair reductions
+and test evidence. The only correction was the primary label; the computation remains
+sum(payload_weight * native_J)/H. I accept this implementation for the fixed H8 check
+and, if that integration is complete, the unchanged main/reader purchase. The source
+review is not numerical evidence or a resource reservation. The entry guards preserve
+the source identities and reject optimized Python that would disable inherited asserts.
+The main reader creates no environment or new trajectory. It verifies all expected
+program/world rows and saved artifact identities, then routes to the full inherited
+native/model/C/outcome checks; no selected-candidate shortcut was introduced.
