@@ -2192,15 +2192,16 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 
 <a id="root-successor-designs-20260930"></a>
 **Four native DMs retain four substantive assignments.** Parent adaptation owns the selected
-actual-S2 proposal-development study; waiting owns unchanged-C/cap-two/LRS. Fleet transmission
-owns source/feasibility work on continuous user motion and changing service demand. Fleet
-adaptation has completed local gating and now owns source/feasibility for a materially different
-question: useful cooperation with teammates whose policies or capabilities are not fixed copies
-or a known unchanged controller. Two selected studies and two bounded source assignments retain
-four DMs. Neither source question has a selected experiment. Detailed idea discovery and
-independent challenge belong to Astra Max Oracles using cumulative records, all three libraries
-and primary passages; helpers are not extra DMs. Actual resource admission applies, capacity
-supplies no scientific premise, and Claude's pause/ownership remains unchanged.
+actual-S2 proposal-development study; fleet transmission owns the selected ordinary C/M/V
+anonymous-tracking comparison on the existing continuously moving S7 users. Waiting has read
+and independently diagnosed cap-two/LRS and now supplies source/feasibility for useful
+service-preserving individual continuity. Fleet adaptation has completed local gating and
+supplies source/feasibility for useful cooperation with teammates using different retained
+controller families. Two selected studies and two bounded source assignments retain four DMs;
+neither source question has a selected experiment. Detailed idea discovery and independent
+challenge belong to Astra Max Oracles using cumulative records, all three libraries and primary
+passages; helpers are not extra DMs. Actual resource admission applies, capacity supplies no
+scientific premise, and Claude's pause/ownership remains unchanged.
 
 Root read the complete count B06, parent B07 and ordinary G B05 results, original independent
 criticisms and DM responses. It adopts the exact count-mixture and fixed learned-shortlist
@@ -2227,6 +2228,79 @@ The successful producer/reader cost65.478097CPU seconds with0new native/model/C 
 the failed remote prefix remains additional cost. This changes the useful physical-control
 comparison without diagnosing prior learning failures or selecting a learner/native port.
 [Full result and independent disposition](candidates/uav_user_waiting/NOTES.md#b05-independent-review-and-disposition).
+
+<a id="anonymous-user-tracking-selected-20261001"></a>
+**Selected: does lawful anonymous user history improve complete service on existing moving users?**
+Root read the full original Astra Max recommendation, source/price/order corrections at
+4f8475d1f and load-bearing coverage-control primary passages. The same fleet-transmission DM
+owns one C/M/V comparison, with no additional selection-review round. P_BS's useful BS prior
+and memory remain the competent reference, along with its low-reserve/energy harms. Privileged
+current-user information previously gave only a modest unresolved increment, and S1 history
+and peer-forecast comparisons did not establish reliable complete gains. The prior anonymous
+constant-velocity idea was recorded then withdrawn without execution. This is a close,
+fully costed ordinary-control investment, not a novelty claim or evidence of large headroom.
+
+Use unchanged fault-free S7-S2: eight UAVs, thirty users, H3000, dt1s, 3m/s user/cluster motion,
+fixed1Mbps/user and original radio, routing, battery, charging and termination. C is exact
+P_BS at d6151ff5155d8bf3f3289bba727ee5148f6b76a6 with ee9c6c8aca0ee13e3d7a02416ff4acf85766f274
+canonical H1 dependencies: genuine BS sightings precede retained sightings and the frozen
+station-based prior. All arms inherit free pooling of eight lawful observations, 30-step
+planning and primitive feedback/shield; this is a centralized-team information contract.
+Truth-informed R and TransitHold P have different rights and are not additional required arms.
+
+M/V canonicalize lawful anonymous user xy every primitive tick, continuing only mutually
+unique associations within3*elapsed+.5m. Ambiguous detections start zero-velocity tracks;
+old feasible-but-uncontinued hypotheses are discarded. Expire old tracks before matching at
+age>30s; current points precede freshest retained old tracks up to the public30-user cap.
+M supplies last sightings. V uses the same tracks and order, clipping last_xy+(age+15s)*v to
+the arena, with norm(v)<=3m/s from two consecutive unambiguous sightings, otherwise zero.
+C's canonical current-point prefix is preserved exactly; V neither resorts nor remerges
+predicted positions. No true identities, velocities, waypoints, pause or future states enter
+control. V-M therefore combines stale-position correction and anticipation, not isolated
+forecast value. The15s midpoint follows a constant-velocity fixed-assignment squared-distance
+surrogate; native service, visibility, routing and energy do not inherit that model's guarantee.
+
+Freeze32 fresh common worlds and C/M/V once each: **96 complete H3000 missions, up to288000
+scientific native steps,0fits/labels/updates**. Primary V-M is total native J with cumulative
+native service as the consequential companion; read M-C/V-C, all levels and signed paired-world
+uncertainty. Retain actual elapsed times and early termination, cumulative outcomes and fixed
+H3000 normalization, without replacing worlds or padding a terminated trajectory. Read QoS,
+service tails/outages, reserve/depletion/return/charging, path/height and complete cost. J and
+service share components and do not supply independent corroboration. Useful M without V
+retains ordinary memory; V must add complete value over both M and C to support useful V.
+Better prediction alone, sparse activation or V-M gains over a harmful M do not establish use.
+Adverse or unresolved outcomes end this purchase without automatic extra worlds, horizons,
+S4, learner or confirmation. No posthoc acceptable-risk margin or default-safe claim.
+
+One offline reader replays each actual controller/shield from the full lawful inputs, tracks,
+plan inputs/targets and proposed/submitted commands. It checks native motion and recorded
+radio/routing/service/energy/termination, exogenous user-path equality on observed paired
+prefixes and all endpoints. Exact native user coordinates remain separate reader-only data;
+contemporaneous visibility/order provenance binds forecast identities, retaining ambiguity
+and unbound denominators rather than matching to the nearest future user. Forecast errors,
+changed choices and first physical divergence are descriptive. No other-arm shadow planning,
+counterfactual native branches or mandatory independent full RF simulation is added.
+
+The full bill includes288000 scientific proposal/shield calls and9600 plans; C3200 canonical
+passes, M/V192000 canonical and association passes, at most172.8M association distances and
+1.3824B scalar merge comparisons. V has3200 arrays/up to96000 projections. The reader repeats
+each actual policy call. Four61-step streams on one separate engineering world compare frozen
+P_BS, wrapped C, M and V, followed by exact replay:244 additional native steps, not a pilot.
+Full-length combined bounds are288244 native steps,576488 proposal/shield calls,19224 plans,
+390656 canonical and384244 association passes,200 constructions/100 resets. Additional finite
+synthetic ceilings are1024 canonical/1024 association/256 projection checks; actual reruns and
+failures remain costed. Addresses, ordering, uncertainty and hashes precede scientific queries.
+
+Accept the unbenchmarked estimate3-10single-thread CPUh,1-4node wallh,8-14focused implementation/
+reader/check/review/publication/cleanup supporth, plus source/adviser work already spent.
+Up to4 workers and2 readers remain conditional on fresh actual-node admission; estimated
+<=1GiB/process plus.5-1GiB parent,6GiB canonical and about10GiB peak disk are not reservations.
+Keep full8x365FP32 lawful observations and separate FP64 user paths in one canonical bulk tree;
+measure actual work and allocated cleanup. Existing P_BS finite native equality and input
+snapshot presence/hash checks precede scientific runs. No other accepted operation moves.
+[Full original recommendation and corrections](candidates/uav_fleet_transmission/NOTES.md#changing-demand-original-recommendation),
+[Root selection](candidates/uav_fleet_transmission/NOTES.md#b08-root-selection),
+[prospective contract and L0](candidates/uav_fleet_transmission/NOTES.md#b08-prospective-contract).
 
 <a id="managed-proposal-learning-selected-20261001"></a>
 **Selected: develop local motion proposals under the actual S2 execution contract.** Root read
@@ -2459,14 +2533,10 @@ full C/nav/RNG/clock reader; native radio was checked through recorded invariant
 independent full RF resimulation. Recorded support remains additional. All canonical evidence
 is retained; six obsolete targets are absent and net allocated storage fell1,764,622,336bytes.
 No phase/trigger/horizon sweep, extra worlds or learner follows. The common actual-S2
-source assessment produced one parent-owned selected study, not a fleet duplicate. The same
-fleet DM now supports Astra Max Oracle's bounded changing-demand question: whether a useful
-cooperative capability can be developed when user movement or service demand evolves within
-a mission, against competent current-state and lawful-history control. Motion, demand rate
-and objective reweighting are distinct contracts; source work must choose and fully price a
-meaningful comparison rather than assume prediction/learning is needed. Existing H3000
-energy/routing and history/forecast adverses matter. This source investment uses all three
-libraries and original primary/project evidence; no new host, query, fit or run is selected.
+source assessment produced one parent-owned selected study, not a fleet duplicate. Root's
+subsequent moving-demand source assessment found that S7 already contains continuously moving
+users. It selected the [ordinary anonymous-history comparison](#anonymous-user-tracking-selected-20261001) on that unchanged host;
+no new demand-rate law, objective reweighting, S4 acceleration or learner is selected.
 [Complete result and original independent diagnosis](candidates/uav_fleet_transmission/NOTES.md#b07-complete-reading),
 [retired full selection and price](archive/2026-10-01/RESEARCH-joint-renewal-and-planning-reuse-completion.md#retired-joint-renewal-selection).
 
@@ -2540,63 +2610,48 @@ no extra worlds, ACK, horizon/allocator sweep, learner or confirmation.
 [retired exact selection and full prospective cost](archive/2026-10-01/RESEARCH-fair-physical-planning-completion.md#retired-selected-comparison).
 
 <a id="cap-two-local-allocation-selected-20261001"></a>
-**Selected: can unchanged C motion with a simpler cap-two radio rule add a useful service/continuity point?**
-Root read the full original Astra Max advice, the complete DM source bill at1ea5f332a and
-load-bearing primary passages. One ordinary program is worth a bounded purchase against
-retained S_F/S/M/U:LRS, at its full support cost. This develops a practical control alternative;
-it is neither needed to retain S_F nor evidence for learning or a low-concurrency/history
-mechanism. It also removes S_F's motion overrides and modeled age state, and changes its mask
-objective. The strongest opposing explanation is that those joint motions created the useful
-contacts and short myopic capacity forecasts with C motion will not sustain user continuity.
+**Cap-two complete: retain cheap capacity control and the adverse continuity result.** Root
+read all complete outcomes and the original independent ResearchCritic diagnosis, adopting
+stop of unchanged C2 with no immediate repair or replication. Across64 reused H256 development
+worlds,0fits/16384native steps, primary C2-S_F:LRS maximum gap is+80.328ticks
+[+67.767,+92.889], adverse64/64. C2 maximum gap92.484 and F_user26.834 compare with
+S_F12.156/2.468; M:LRS retains43.375/9.125. Service19.946 versus S_F16.946 and J+.040663
+retain genuine capacity positives. M's service/J means are24.736/.396270, and C2 loses both
+paired differences in all64 worlds.
+Quality/computational-work tradeoffs remain; no full-metric dominance or equivalence claim.
 
-Keep original C104 current observations/private navigation/four-tick proposals, the400-byte
-rounded map and141-byte report/downlink round, two-tick delivery and four-tick hold. Manager
-gets no actual grants/ages, truth coordinates, seed or future C outputs. Forecast two clipped
-entering-command steps followed by the current C proposals for L=min(4,256−t−2) transitions.
-Choose among all15 one/two-ON masks by total predicted sum min(10,eligible users), then
-distinct users across forecast slots, fewer entering-mask flips and lowest mask integer.
-At3dB non-FDMA the eligibility sets are disjoint, making the first score modeled LRS service
-cardinality; the reader checks it. Return the rotating member's unchanged C proposal. Initial
-all-on/C applies at ticks0/1; the last delivery covers254/255. The1.436s compute deadline
-includes C and selection; a miss retains both actual commands and mask, with spent work paid.
-Own local LRS last-grant arrays persist through OFF; no manager acknowledgment right is added.
+All3200 users eventually receive service, yet2416 have worse maximum gaps against S_F and
+maximum closed gaps also worsen in every world. A251tick terminal gap and a186tick closed gap
+remain visible. C2's mean longest no-link interval89.891 leaves only2.594ticks below its
+maximum-gap endpoint for any allocator on those fixed paths. Every post-start mask has two
+transmitters, every round meets its deadline and selected count forecasts differ from native
+grants in only one block by one user-tick. This is an active, accurately modeled capacity
+intervention with poor temporal coverage, not evidence of an unactivated rule. Saved equal-count
+alternatives sometimes offer a neglected user eligibility, but do not prove a free complete
+trajectory improvement. Mean transmitter count2.023 is higher than S_F1.766; multiple physical/
+objective differences prevent isolating manager memory or low concurrency as the cause.
 
-Under timely operation, mean service cannot exceed(2×50+254×20)/256=20.234375. This is below
-S/M/U:LRS21.180481/24.736206/21.666870 and above S_F16.946411: the design cannot solve the
-original service-preserving goal against those three references. Missed delivery requires
-reading actual cap exposure instead of applying this bound unconditionally. Higher service
-with worse gaps gives a potential conditional point; lower gaps and higher service support
-this simpler package on this panel; unresolved is not equivalent and active losses can end
-this rule. No acceptable margin, service floor, default adoption or necessity theorem is invented.
+The timely cap20.234 is below M/S/U service levels; another unchanged cap-two patch cannot
+answer service preservation against those references. Root retains S_F's conditional
+continuity, M/S/U's service operating points and C2's inexpensive capacity point, without
+inferring an unavoidable price, history necessity or a learning result. The same waiting DM
+now supports Astra Max's bounded source/idea question: can a complete lawful temporal-coverage
+policy improve extreme individual continuity while retaining competent service, or should
+that investment stop/reallocate? No new query, reduction, fit or implementation is selected.
+The existing result critique is adequate; successor construction is a different source task.
 
-Run one complete H256 path in each same64 exposed B06 worlds29426000–63: **16,384 native
-steps/0 fits**, with immutable full S_F/S/M/U:LRS outcomes and no old replay/new worlds.
-Freeze the primary paired maximum-gap difference versus S_F, signed world vectors and
-uncertainty before queries; report all service/quality/J, age/gap censoring, per-user harms,
-path/height/mask, deadline and cost outcomes. These outcome-informed development worlds/design
-provide no confirmation. Unchanged native greedy telemetry and offline LRS outcomes stay distinct.
-
-Full combined worker/reader bill includes61,440 C calls/1,658,880 candidate paths/6,635,520
-modeled ticks/138,854,400 C-link ceiling,487,680 candidate fleet-radio evaluations/121,920,000
-SINR entries and32,512 geometry snapshots/8,128,000 links. Worker has4096 reports/61,440 mask
-choices; reader reconstructs all candidate and native physics, LRS/grants/gaps and reference
-comparisons. Root accepts estimated.05–.20 combinedCPUh plus.01–.05 synthetic-checkCPUh,
-4–7 implementation-through-cleanup supporth and.5–1.5 already-incurred source/selection supporth;
-these are estimates, not measurements. RSS.5–1GiB/process, canonical.06–.15GB, temporary source
-snapshots3.6–4GB and≤.1GB scratch are not reservations. Logical planning reduction does not
-establish matched speed, allocation latency or energy savings; no timing-comparator batch is
-selected. B06's separate cleanup reclaimed3,600,408,576allocated bytes with no obsolete target left.
-
-Kadota's symmetric broadcast result assumes equal channel reliability and user weights;
-Talak's general-interference formulation has fixed source/destination links and exogenous
-channel success. Neither covers mask/motion-dependent eligibility or finite-horizon maximum
-gaps here. Their ordinary scheduling ideas motivate a comparator, not this rule's guarantee.
-[arXiv1801.01803 §§II–III](https://arxiv.org/pdf/1801.01803),
-[arXiv1803.06467v2 §§II–III](https://arxiv.org/html/1803.06467v2),
-[full source contract, cost and original advice](candidates/uav_user_waiting/NOTES.md#post-b06-low-concurrency-source-facts).
-No cap/mask/horizon sweep, extra arm, learner or confirmation is selected. Fleet adaptation's
-own-Tx gate with at least four active transmitters, greedy host and no map/reports remains a
-different selected question. Ordinary in-scope implementation and publication need no Root ACK.
+Complete worker/reader cost110.858CPU-s including waited children; zero-query a01 separately
+cost1.219CPU-s after a sparse-snapshot input failure. Source hydration adds about.216CPU-s and
+saved-output extraction2.132CPU-s; other support remains incompletely metered. Full manager
+rounds cost22.757CPU-s including5.809C CPU-s; max round.02043s is below the1.436s deadline.
+S_F used a different node/runtime, so a controlled speed ratio is not established. New raw/
+outcomes total30,193,881logical bytes; reference staging124,165,095bytes and compact metadata
+5,365,829bytes are additional temporary costs. DM retains original evidence and owns final
+publication/verified cleanup; pending cleanup is not counted as reclaimed space.
+[Complete native reading](candidates/uav_user_waiting/NOTES.md#b07-complete-reading),
+[original independent diagnosis and disposition](candidates/uav_user_waiting/NOTES.md#b07-independent-review-and-disposition),
+[full prospective contract and source identities](candidates/uav_user_waiting/NOTES.md#b07-selected-contract),
+[retired original selection and bill](archive/2026-10-01/RESEARCH-cap-two-completion.md#retired-cap-two-selection).
 
 **Actual compute placement.** local_linux and wsl_4070 are distinct physical Windows hosts
 (AMD Ryzen7 8745H and Intel Core i9-13900H). Parent B07 and G B05 have finished their original
@@ -2607,9 +2662,10 @@ recovery and reader are complete. T/H, cadence, S_F:LRS, joint renewal and saved
 complete on configured local execution. The economy timing includes waiting's worker
 02:45:12–02:54:19Z, reader02:55:33–03:02:56Z and fleet B07's worker/reader03:09:41–03:15:27Z
 on October1; all those accepted identities have ended. Keep actual boundary samples and
-interleaving in the reading, without an isolated-speed claim or rerun. Cap-two/managed-proposal
-work uses configured node preference, current feasibility and fresh actual-node
-admission; no source estimate reserves capacity.
+interleaving in the reading, without an isolated-speed claim or rerun. Cap-two's new worker
+and reader completed on the configured remote node. Managed-proposal and anonymous-tracking
+work use configured node preference, current feasibility and fresh actual-node admission;
+no source estimate reserves capacity.
 This operation-specific placement changes no global runtime configuration and establishes no
 runtime cure. Accepted operations retain their node/identity; new overlap requires fresh
 memory/occupancy evidence, without a standing reservation.
