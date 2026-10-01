@@ -8749,3 +8749,26 @@ This cleanup changes no exposure or behavior. The accepted A01 snapshot remains
 immutable. The next action is publication of this correction and the original
 failure record, then one fresh admitted A02 operation using the fixed scientific
 contract and the already hashed outside-root consumption files.
+
+
+<a id="b09-a02-accepted-operation"></a>
+#### B09 A02 admitted corrected worker and complete-reader chain
+
+The correction, fixed A02 entry and original failed evidence were published as
+`8e5659881dc1f3e8419f9c406cabdf07abe1a5a1`. The corrected operation was accepted
+at2026-10-01T05:31:07.082UTC, with its original
+[manifest](../../../../runs/uav_parent_adaptation/b09_managed_development_a02/launch-manifest.json)
+and [preflight](../../../../runs/uav_parent_adaptation/b09_managed_development_a02/admission-preflight.json)
+collected unchanged. Fresh available/effective memory was14677045248B against
+the4294967296B floor. A02 uses the same three explicitly hashed consumption
+files declared for A01; no second staging copy was made.
+
+The stopped A01 observer was explicitly resumed35→36 before registering A02;
+generation37 is adopted. Its first native observation at05:31:49.949UTC reports
+accepted/running/consistent with both original processes present and no exit
+witness. A01 remains a separate terminal failed identity. The native child
+stays active through this worker and sequential complete saved-data reader,
+using long deterministic waits and same-handle drain/rearm at checkpoints.
+No source, seed, episode, epoch, comparator or science stopping rule changes
+follow from this healthy initial observation. Technical acceptance is not a
+read scientific result.
