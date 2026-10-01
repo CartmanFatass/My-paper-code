@@ -2211,9 +2211,10 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 actual-S2 proposal-development study; fleet transmission owns the selected ordinary C/M/V
 anonymous-tracking comparison on the existing continuously moving S7 users. Fleet adaptation
 owns the selected single-UAV response comparison with mixed retained teammate controllers.
-Waiting has read and independently diagnosed cap-two/LRS and now supplies source/feasibility
-for useful service-preserving individual continuity. Three selected studies and one bounded
-source assignment retain four DMs; waiting's successor has no selected experiment. Detailed
+Waiting has closed cap-two/LRS and the immediate longer-planner investment assessment; the
+same DM now supplies source/feasibility for useful cooperation under physically meaningful
+radio-link uncertainty. Three selected studies and one bounded source assignment retain four
+DMs; the new uncertainty question has no selected experiment. Detailed
 idea discovery and independent challenge belong to Astra Max Oracles using cumulative records, all three libraries and primary
 passages; helpers are not extra DMs. Actual resource admission applies, capacity supplies no
 scientific premise, and Claude's pause/ownership remains unchanged.
@@ -2725,11 +2726,33 @@ objective differences prevent isolating manager memory or low concurrency as the
 The timely cap20.234 is below M/S/U service levels; another unchanged cap-two patch cannot
 answer service preservation against those references. Root retains S_F's conditional
 continuity, M/S/U's service operating points and C2's inexpensive capacity point, without
-inferring an unavoidable price, history necessity or a learning result. The same waiting DM
-now supports Astra Max's bounded source/idea question: can a complete lawful temporal-coverage
-policy improve extreme individual continuity while retaining competent service, or should
-that investment stop/reallocate? No new query, reduction, fit or implementation is selected.
-The existing result critique is adequate; successor construction is a different source task.
+inferring an unavoidable price, history necessity or a learning result. Root's subsequent
+bounded source assessment considered a longer receding-horizon LRS-aware physical planner
+with a modeled M service floor. It chooses no purchase now after M/U/K/S_F/C2: a longer
+model floor remains a distinct hypothesis, but its incremental complete use does not yet
+justify the extra search, engineering and reading investment. K's prior local floor failed
+to establish complete service preservation; that is adverse precedent, not a proof against
+a longer rollout or the broader service-preserving continuity question.
+
+The original recommendation and revisions retain two corrections: M already makes O/W
+joint-motion/radio choices, and no-future-C was an adviser proposal, not a Root/owner ban.
+Lawful modeled future C may be considered with its approximation/cost; privileged real future
+commands are different. Root does not adopt the47.5M per-tick future-C illustration as a
+complete algorithm price: C actually refreshes every four ticks. The source1-3CPUh/8-16supporth
+range remains conditional on a limited search, not an estimate for the unspecified family.
+No new query, reduction, fit or implementation was purchased. The adequate B07 result review
+and both original successor recommendations stay distinct; the source stop is not impossibility.
+
+The same nonarchived DM now owns source/feasibility support for Astra Max's separate question:
+can useful lawful cooperation be retained or developed under physically meaningful radio-link
+propagation uncertainty, against competent ordinary control with matched uncertainty knowledge?
+First establish actual host options and prior coverage using cumulative records, all three
+libraries and load-bearing primary passages. Physical RF uncertainty differs from transport
+loss/delay, moving users and member failure. Do not infer that it caused earlier losses under
+accurate models, invent hidden state to force learning, or compare against a deliberately
+wrong-model ordinary controller. A justified owned host extension is possible only with an
+explicit matched contract and complete price. This is one comparison-or-stop source assignment,
+not a corruption sweep, new experiment or transfer of any paused direction.
 
 Complete worker/reader cost110.858CPU-s including waited children; zero-query a01 separately
 cost1.219CPU-s after a sparse-snapshot input failure. Source hydration adds about.216CPU-s and
@@ -2737,10 +2760,14 @@ saved-output extraction2.132CPU-s; other support remains incompletely metered. F
 rounds cost22.757CPU-s including5.809C CPU-s; max round.02043s is below the1.436s deadline.
 S_F used a different node/runtime, so a controlled speed ratio is not established. New raw/
 outcomes total30,193,881logical bytes; reference staging124,165,095bytes and compact metadata
-5,365,829bytes are additional temporary costs. DM retains original evidence and owns final
-publication/verified cleanup; pending cleanup is not counted as reclaimed space.
+5,365,829bytes were additional temporary costs. Final cleanup at4fccb7265 removed all three
+snapshots,320 temporary input copies and obsolete local copies/scratch, with no target left
+or blocker. Net allocated storage fell2,594,779,136bytes;130 unique remote files containing
+31,865,551payload bytes remain hash-verified. This is measured reclamation, not a move or
+Git-object/VHD capacity claim.
 [Complete native reading](candidates/uav_user_waiting/NOTES.md#b07-complete-reading),
 [original independent diagnosis and disposition](candidates/uav_user_waiting/NOTES.md#b07-independent-review-and-disposition),
+[measured closure](candidates/uav_user_waiting/NOTES.md#b07-final-cleanup),
 [full prospective contract and source identities](candidates/uav_user_waiting/NOTES.md#b07-selected-contract),
 [retired original selection and bill](archive/2026-10-01/RESEARCH-cap-two-completion.md#retired-cap-two-selection).
 
