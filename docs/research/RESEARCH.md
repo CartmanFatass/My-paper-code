@@ -5,6 +5,13 @@
 
 阅读入口：[研究背景与共享认识](#研究背景与共享认识) · [方向状态](#active) · [现行计划](#current-research-plan) · [任务路由](#session-routing)。
 
+**本轮收尾后交接（owner，2026-10-01 UTC）：** 按原操作身份完成正在执行的 S7 及已开始的
+三份后续选题评估，不打断当前工作；本轮结束后先交接，不启动下一轮实验。Root 写总览，
+四位 DM 分别写自己的部分，共同形成一个[独立 handoff 文件](HANDOFF_20261001_ROOT_AND_FOUR_DMS.md)。
+当前文件正在整理，不能当作已完成交接；S7 的完整读出、独立判读和收尾责任保持。
+后续候选保留为未选定选项，交接完成后本 Root 范围等待 owner 明确继续。
+这不改变 Claude 的独立权限、其他明确暂停或已经冻结的证据。
+
 **本Root工作流已恢复：2026-09-29 21:59 UTC，owner明确要求“阅读handoff 我们继续工作”。**
 本次解除21:25 UTC的本Root及三个Codex方向暂停；原已接受研究及后续A/B、G/N两轮均已完整判读、发表和收尾。
 Root继续owner委托的轮次循环：累计原生服务年龄研究已完成1fit、960回合／245760步，完整核验、独立判读和清理均完成；保留普通W/M能力及学习自身增益，结束未超过普通参照的原选择器配方，无已选追加运行。[完整结果](candidates/uav_service_age/NOTES.md#b01-complete-reading)。原责任恢复保留全部Lead／源码／原操作身份。
@@ -2374,8 +2381,10 @@ concrete source-only price from its assigned DM; existing-code reading and count
 are allowed, but no pilot, model/controller query, saved-output reduction, implementation or
 launch is selected by that request. A prospective price includes the complete worker, fits,
 search/teacher work, reader, correctness, support, memory and storage; unknown costs remain
-unknown. Root will choose the next questions after reading complete advice and feasibility,
-rather than count source work as four concurrent scientific runs.
+unknown. Under the owner's new round-closing instruction, finish these assessments and
+preserve their full advice and source prices as UNSELECTED successor options for handoff.
+No next experiment is selected or launched before that handoff; a later resumed Root will
+make the cross-question choice. Source work is not four concurrent scientific runs.
 
 Actual-S2, mixed-teammate B09, S7 C/M/V and the parent lower-motion assessment remain closed.
 All four original nonarchived leads continue; no fifth DM, archived-session restoration or
