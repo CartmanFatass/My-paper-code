@@ -7318,3 +7318,34 @@ fit/target was computed, no test or implementation was run, and no new bulk or
 scratch artifact was created. Source-support labor is unmetered. The factual
 response and corrections were returned through native child communication;
 Root/Oracle retain the next-question decision, including a justified stop.
+
+**Reader-scope clarification after the first source appendix publication.**
+The Oracle asked whether the0.5–1 combined CPU-hour estimate included complete
+saved native physics and all actual policy rows. The intended coverage was
+full, not a sampled radio subset. For the same1984-episode object, explicit
+logical work includes507904 post-step radio/assignment reconstructions,
+126976 boundary mask-refresh reconstructions if a setter is called at every
+boundary, old-mask decision observations at all126976 boundaries and1984
+terminal observations. All634880 motion-law requests must be checked with
+their original per-episode cache semantics and private draws, together with
+every actual helper/actor/gate output. The512 paired prefix identities and
+labels, both frozen feature scalers and ridge-objective/normal-equation
+residuals (without re-solving), every final outcome and adverse world are
+also included. There is no extra native suffix, all-on sensing probe or
+optimizer replay. Reusing an exactly shared recorded prefix can save actual
+reader arithmetic only if explicitly counted; it does not remove logical
+coverage or refund the two fully executed acquisition branches.
+
+An independence limitation of the reusable source was made explicit:
+`uav_radio_activation/b01/read.py:radio` calls the same pure user-radio kernel
+used by the native backend. Its separate scalar peer/observation assembly
+does not make that imported user-radio formula an independently written
+scalar implementation. Full-state coverage and implementation independence
+are distinct. If the selected reader is to use independent scalar user-radio
+and assignment arithmetic at **every** saved endpoint and mask refresh, as
+well as the complete policy checks, the more conservative planning range is
+**0.5–2 combined CPU-hours**. The earlier0.5–1 estimate is retained above as
+originally given; neither range is a measured runtime or hard limit. No
+sampled-coverage exception or benchmark is proposed by this clarification.
+Final source selection, actual arithmetic counts and measured runtime would
+belong to a separately selected and reviewed implementation.
