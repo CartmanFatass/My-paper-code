@@ -7572,3 +7572,51 @@ Root will reuse that same independent critic for a focused reading of this actua
 **Recommendation:** buy at most this one complete three-arm exploratory comparison if Root allocates the support after the currently selected three; otherwise leave the candidate unselected. Do not buy unchanged H/F, a cheaper two-arm experiment while claiming a forecast increment, or diagnostic replays sold as proof of a full repair. The expected new knowledge is whether a particular ordinary route-building/predictive-service composition can turn an already-demonstrated conditional forecast capability into useful complete control, with a matched H combination distinguishing the forecast increment. Source inspection cannot answer that empirical question. This source assignment is complete and the next action is Root's allocation with its existing critic, not a running dependency or an automatic experiment.
 
 No new code or scratch was created, no existing evidence was deleted, and net disk reclaimed in this source phase is0 bytes. Earlier B09's measured1,641,795,584-byte cleanup remains its own historical fact; the sole required B09 remote evidence and useful sources remain intact. No cleanup or publication blocker is asserted.
+
+
+<a id="post-b09-focused-root-disposition-20261001"></a>
+### Focused original review, DM response and Root decision — source task closed without purchase — 2026-10-01 PDT
+
+The same independent ResearchCritic that performed the cross-question selection review completed a focused follow-up on the concrete [C/H_C/F_C construction and full price](#post-b09-c-backed-prediction-design-20261001), published at `3a8233f446761be9b047fbd8879dcd8fac0fdf91`. The complete earlier assignment/review is retained in [the original allocation archive](../../archive/2026-10-01/RESEARCH-successor-allocation-review.md); this is the changed-contract/opportunity-cost follow-up, not a second selection-review panel or new empirical evidence.
+
+#### Exact original focused answer and provenance
+
+Reviewer `/root/successor_allocation_review`, UUID `01a0f77c-49e7-7292-91a3-2d8fa8fb1975`, registered `hmasd-research-critic`, originally launched in independent context and verified by Root as `gpt-6-astra` / `max`. The text between the markers below is extracted mechanically, without trimming or paraphrase, from the latest `event_msg` / `task_complete` payload's `last_agent_message` in `/mnt/c/Users/fires/.codex/sessions/2026/10/01/rollout-2026-10-01T05-41-52-01a0f77c-49e7-7292-91a3-2d8fa8fb1975.jsonl`, line257, timestamp `2026-10-01T13:19:20.245Z`. Its UTF-8 length is4,037 bytes and SHA256 is `df1394ffcd394f7a6c92418c57a279706506470a185b628887916c9a16c02083`. The earlier complete answer is the distinct line193 event. Original absolute file links, wording, result limitations and trailing newlines are preserved. The source text's statement that Root had not decided is historical; the subsequent disposition is recorded separately below.
+
+<!-- FOCUSED_ORIGINAL_REVIEW_BEGIN -->
+建议**本轮推迟购买，保留已完成的 C/H_C/F_C 构造为未选候选**。不新增前置诊断，也不让它自动排在前三项之后开跑。前三项继续推进；第四个 DM 完成有价值的设计判断即可，不需要对应第四批实验。
+
+新合同是一个可辨认、可执行的科学比较。我重点核对了[完整构造与计价](/home/fires/hmasd-wsl/docs/research/candidates/uav_fleet_transmission/NOTES.md:7464)，以及 B09 控制器的调用时钟、搜索、carried layout、分配迟滞、C 的持续状态和最终 feedback 路径。**实际执行的 C targets 进入下一轮 carried layout 和迟滞状态**这一修正有实质意义：否则拒绝掉的模型方案仍会影响后续搜索，不能称为按合同持续执行 C。每 tick 更新两个组件、保持 30 tick 选择、只施加一次实际 shield、不重置预测状态，也与所问问题一致。没有发现必须新增一轮诊断或改变科学比较才能继续的缺陷；这些是源码支持的实施路径，尚非实现正确性的认证。
+
+保留构造的理由是 B09 的正结果确实有用：F−H 的完整 native J 平均约 +65.97，主要伴随 QoS 增益，预测能力并非仅有代理指标改善。新比较能回答“普通 C 的持续运行是否使这项能力成为有用的完整控制”。C/H_C/F_C 三臂也能区分组合本身与加入预测后的增量。F_C−H_C 应读为包含触发、历史和轨迹变化的完整策略差异，不能进一步解释成单独的预测精度效应。
+
+但现在购买的机会成本超过了其证据支持的优先级。F−C 的平均缺口约 −454.28 J；只挽救 world21 的零服务情况不足以填补。world12 已有路由仍严重亏损，说明“选中模型方案的三个 QoS 样本全零”没有直接针对全部已知损失。切回模型的一点正样本值，也不保证原生服务或持续建路；混合轨迹上的 C shadow 不等于完整 C 策略的轨迹。这些不是已证明的新策略失败，而是当前购买主要仍在押注一个较窄修复能产生足够广的完整收益。
+
+[完整价格](/home/fires/hmasd-wsl/docs/research/candidates/uav_fleet_transmission/NOTES.md:7545)为 **96 个 H3000 科学任务、288,000 步、0 fit，科学 worker＋reader 预计 8–24 CPU 小时，另加工程检查与 12–20 支持小时等价量**。这是估计，不能把它当成上限或已测工时。完整 reader 后至多约 128 万次科学候选评估；C shadow 并不节省 H/F 搜索。机器报价已高于前三项原报价合计，支持负担也相当于另一项完整实现。最强普通替代是保留 C 及已建立的预测能力，把当前支持投入已经选中的工作；这里无需声称机器资源不足，也不借用三项旧面板相减来证明总收益。
+
+若以后 Root 明确购买，现有三臂完整比较可保留，不建议用两臂降价后仍声称预测增量。各结果实际改变的选择应是：
+
+- **F_C 同时优于 H_C、C，且服务/能源尾部可接受：**支持这个组合在声明范围内的实用价值及预测增量。
+- **H_C 有用而 F_C 没有额外收益：**保留普通组合，不把收益记给预测。
+- **F_C 优于 H_C，却仍逊于 C：**保留预测的条件能力，停止购买这个构造的原样扩展。
+- **触发稀少、整体无效或出现显著不利尾部：**结束这次固定购买；不能靠事后挑选触发世界挽救完整结果。
+
+本次只审新增合同和机会成本，复用了此前对 B09 正、负原始证据和完整 critic 的核查，没有重新审前三项，也没有运行任何模型、控制器或原生环境查询。尚未验证新实现、实际触发频率、运行耗时、内存与压缩规模；这些不构成购买前必须追加实验的理由。Claude、FSD/PPC 暂停、G33 冻结和 Milan 依赖保持不变。
+
+**MATERIAL_DISSENT: no。** Root 尚无购买决定，DM 明列了保持未选的分支；我的明确处置建议是采用该分支，本轮不购买。
+
+<!-- FOCUSED_ORIGINAL_REVIEW_END -->
+
+#### Separate DM response
+
+I read the whole focused answer and accept its explicit **defer this round** recommendation. This updates my prior lower-priority willingness to consider a purchase into a resolved no-purchase decision for the current allocation. The meaningful retained output is an executable scientific contract with a real carried-target/assignment-hysteresis correction, a matched forecast comparator and a complete prospective bill. Source feasibility does not establish implementation correctness, actual branch exposure, a repaired mission or an expected native gain. No further diagnosis is required to make the investment choice.
+
+The decisive judgment is opportunity cost rather than a new empirical refutation. The proposed zero-selected-service rule addresses a concrete B09 failure, but the8–24 CPU-hour worker/reader forecast plus engineering and12–20 support-hour equivalents is substantial for the narrower supported premise. World29890012's losses with existing routes remain outside that premise, a positive surrogate sample can interrupt route construction, and C on a mixed actual history does not inherit the standalone C trajectory. These reasons justify retaining the priced proposal without purchasing it now; they do not show that H_C/F_C would fail. The B09 F−H native capability, F−C/H−C losses, world29890021, all B01–B08 capabilities/adverses, and C/P_BS's world28100224 reserve/default-adoption restriction remain unchanged. The original three-arm estimand and adverse-result branches remain available if a future explicit allocation revisits the proposal; no two-arm downgrade is relabeled as a forecast test.
+
+There is no material scientific disagreement to escalate. The focused reviewer found no scientific-contract defect requiring another diagnostic, while explicitly distinguishing source support from implementation certification. I am not adding a pilot, branch-frequency query, alternative gate, prototype, model/RNG/native/controller query, saved-outcome reduction or scheduled revisit to obtain a more favorable investment answer.
+
+#### Separate Root disposition and actual closure
+
+Root `/root`, actual thread `01a0f779-ace2-74e1-85ad-e0997b61d505`, explicitly adopted the focused critic's defer recommendation in the native follow-up assigning this publication: **this round does not buy C/H_C/F_C; keep the completed, priced construction unselected; no precursor diagnostic or launch; no automatic queue after the other three studies.** Root continues the three already-authorized studies and owns the top/current-allocation prose. This DM updates only its direction's standing/routing and this append. This is source-task closure, not an owner pause, and it does not change any other direction's authorization or inherited holds.
+
+The direction returns to reserve with no active result producer, accepted operation, unread result/advice, selected successor or external dependency. A future purchase would require a new explicit Root investment decision; completion of the other three studies, elapsed time or this archived proposal does not select it. All old workers and evidence handles remain closed. No code, scratch or new result artifacts were created for this follow-up; new fits/native steps/model/controller/RNG queries remain zero. The only checks are exact review extraction, append-only/owned-row integrity, links and publication. No targets were deleted and net disk reclaimed is0 bytes; prior measured cleanup and the sole required B09 evidence remain separate historical facts. No cleanup or publication blocker remains.
