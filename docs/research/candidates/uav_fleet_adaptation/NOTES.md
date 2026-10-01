@@ -10886,3 +10886,38 @@ P0.pt424487B/SHA256`b9e25fca68109bb50fa64fadfc90939ad6a4669058c1c0ccd1351c8bbcef
 Original canonical files are untouched. Outer submit3 accepted the corrected
 supervisor command; actual admission/operation facts are recorded separately
 below after its native handshake, not inferred from outer acceptance.
+
+
+<a id="b10-accepted-operation"></a>
+### B10 one accepted worker/reader operation
+
+The single native B10 operation was accepted at2026-10-01 08:59:50.523080UTC
+on configured wsl_4070 from source73278079be41ad8068b73594a32cde5841119032.
+[Native manifest](../../../../runs/uav_fleet_adaptation/b10_joint_control_a01/launch-manifest.json),
+[fresh actual-node preflight](../../../../runs/uav_fleet_adaptation/b10_joint_control_a01/admission-preflight.json)
+and[exact input config](../../../../runs/uav_fleet_adaptation/b10_joint_control_a01/config.json)
+are collected as compact records. The manifest is authoritative for native
+claim/process/source/argv identities. Fresh effective/physical available
+memory was13438349312B against4294967296B floor, passed. Config confirms
+48 source files and both exact original asset identities. No prior submission
+was admitted; this is the one selected scientific purchase.
+
+The accepted claim is
+`/home/wu/projects/HMASD/.git/hmasd-admission/c93d6664a4df8fb5e48ff9f3bccd1f00188a9582ab7f4dd83d83b61f0fdc64fd.json`.
+The same worker will perform the two fits,864 final episodes and full reader;
+no extra invocation/replay/fit is selected. Managed input snapshot
+`80bde676266946438831245ee20f8634` and the required staging directory are live
+consumers and must remain intact through reading. Canonical bulk output is
+the manifest’s remote `runs/uav_fleet_adaptation/b10_joint_control_a01/`;
+only compact metadata is collected locally at acceptance.
+
+Deterministic observation is armed on this exact remote native handle,
+local request `temp/directions/uav_fleet_adaptation/b10_wait_request.json`,
+observer generation42/PID1879558. First observation at09:01:42UTC confirms
+consistent accepted/running identities and no probe errors. Registration
+setup first refused a relative executable name, then the prior stopped
+generation40; both were observer-only with0 native effects. After using
+absolute `/usr/bin/ssh`, draining the empty old queue and rearming40→41,
+the new job registered generation42. No historical job was resumed.
+As a native child I keep this turn active through the same-handle terminal
+reading; a registration or exit-zero alone is not a scientific conclusion.
