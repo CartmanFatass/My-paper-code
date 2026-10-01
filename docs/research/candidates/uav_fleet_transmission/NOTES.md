@@ -5480,3 +5480,55 @@ rebuildable caches, measuring actual bytes. Preserve canonical raw and original 
 consumed by parent B08. Final native return to Root will identify the published read result,
 changed explanation, unresolved broader question and actual cleanup; it will not seek a per-fit
 ACK or present a technical exit as a scientific conclusion.
+
+
+<a id="b07-final-cleanup"></a>
+
+### B07 publication and measured cleanup — 2026-10-01 UTC
+
+The complete result, full original independent diagnosis, substantive DM response, owned
+RESEARCH standing and directly affected shared timing judgment were published on main at
+**`7012107b736290dcde8fe6c5e5ed6271e14f398c`** before disposal. Its eight compact run records
+retain all768 per-episode metrics/raw identities, every level/contrast/world vector, source and
+processing-order bindings, admission/manifest/status/exit and the complete reader. Scientific
+source remains published at`2261ccb709b8f5d166902a602f9c7ba33d510e8a`.
+
+Consumer inspection retains the small checked B07 clock/collector/reader package and tests.
+Its full reader's44 configured source bindings include these modules and required unchanged
+C/Q/native dependencies; removing a required module would break the retained verification.
+There is no unused B07 implementation outside this useful package. The earlier B04/N8 raw
+and all sources used by parent B08 remain untouched. No other direction's data or authoring
+checkout was cleaned. The B06 cache below was regenerated at03:03 by the B07 synthetic imports;
+it contains only rebuildable `.pyc` files, with required Python source preserved.
+
+The accepted runner/supervisor and stopped observer were positively absent. The maintained
+exact-target collector's ordinary preview refused to inspect protected `/proc/383/cwd`; its
+supported `--sudo-process-scan` performed the read-only process check and found no reference.
+Preview and fresh apply accepted the consistent terminal operation, clean snapshot and durable
+main source. This resolved process-scan refusal is not a remaining cleanup blocker. The tool
+removed only the named accepted source snapshot and its Git registration, without force;
+the admission claim, manifest, exit witness and canonical output remain.
+
+| Actually deleted target, relative to shared main | Allocated bytes before | After |
+|---|---:|---:|
+|`.git/hmasd-launch-sources/21297a5f24be4894bc94afd2d7109477/`|1,760,841,728|0|
+|`.git/worktrees/21297a5f24be4894bc94afd2d7109477/`|3,600,384|0|
+|`temp/directions/uav_fleet_transmission/b07/` — stopped observer request|8,192|0|
+|`experiments/candidates/uav_fleet_transmission/b07_joint_renewal/__pycache__/`|69,632|0|
+|`tests/experiments/candidates/uav_fleet_transmission/b07_joint_renewal/__pycache__/`|45,056|0|
+|`experiments/candidates/uav_fleet_transmission/b06_cadence/__pycache__/` — regenerated import cache|57,344|0|
+
+All six targets are actually absent. **Net allocated target storage reclaimed:1,764,622,336
+bytes.** No archive, duplicate raw, replacement snapshot, backup or retention chain was made.
+This measures these targets, not host-wide free space under concurrent sessions or Git-object
+storage. The canonical768-file raw inventory still totals271,926,713 logical bytes, and
+config/summary/reading hashes remain exactly those in the complete-reading entry. Required
+unique positive/adverse evidence, useful executable checks and prior live-consumer inputs remain.
+No cleanup target or concrete tool blocker remains; earlier unrelated source caches and required
+historical artifacts are outside this operation's disposal scope, not claimed reclaimed.
+
+B07 is fully read, independently diagnosed, published and cleaned. The direction is reserve:
+no worker, observer, unread result/advice, selected successor or pending owner approval. The
+fixed schedule investment ends under the resolved scientific reasoning above; the broader
+timing question remains open and no further run is implied. Return this meaningful read-result
+boundary to the assigning Root through the existing native child, without an App relay.
