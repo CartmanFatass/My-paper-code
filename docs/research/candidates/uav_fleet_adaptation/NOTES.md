@@ -8303,3 +8303,262 @@ bulk consumption copies will be deleted only after independent reading ends;
 canonical originals, compact positive/adverse evidence, learned gates and
 original P0 are retained. Exact terminal-snapshot/scratch deletion and measured
 net allocation changes are recorded at closure, separately from any blocker.
+
+
+<a id="b08-original-independent-result-review"></a>
+### B08 original independent scientific result diagnosis — 2026-10-01 UTC
+
+The configured ResearchCritic `b08_result_review` received the actual frozen
+question, original Root/Oracle selection and source exchanges, current published
+background, prior B07 evidence and original B08 outputs in a separate context
+(`fork_turns=none`). It received no DM preferred verdict. The full original
+answer follows, including its disclosure that it saw opening selection-advice
+paragraphs while locating sources. Its original local `summary.json` link
+identified a verified temporary consumption copy; after cleanup the canonical
+remote file and its exact digest in the preceding reading remain authoritative.
+Reviewer agreement is not additional empirical replication.
+
+--- BEGIN ORIGINAL RESEARCHCRITIC ANSWER ---
+
+**Retain the conditional HIDDEN result and close this B08 purchase without additional fitting or evaluation.** The evidence selects the fourth prospective branch: HIDDEN improves over RAW, but useful added value over the competent complete alternatives remains unestablished. This is a positive finite feature-package result with consequential tradeoffs—not grounds for ending the broader local-control question.
+
+No DM/Root conversation history was inherited. An initial document-location read exposed the opening selection-advice paragraphs before I completed reconstruction, so this was not fully blinded to allocation advice. I reconstructed B08’s primary outcomes before reading the remaining recommendation and Root adoption; no DM B08 result interpretation was supplied.
+
+The consequential native results are:
+
+| Comparison | Mean ΔJ | Pointwise descriptive 95% world interval | Positive/negative worlds |
+|---|---:|---:|---:|
+| HIDDEN−RAW | +.007318 | [.002490, .012068] | 22/10 |
+| HIDDEN−P0_A | +.010576 | [.002280, .019356] | 22/10 |
+| HIDDEN−P0_O | +.014668 | [.008671, .020632] | 27/5 |
+| HIDDEN−P0_R | +.008916 | [.003315, .014562] | 24/8 |
+| HIDDEN−P0_ZERO | +.007243 | [−.001748, .017029] | 19/13 |
+| HIDDEN−Bstar0_A | −.002939 | [−.010514, .004319] | 16/16 |
+| HIDDEN−Bstar0_ZERO | −.004507 | [−.012158, .003100] | 16/16 |
+| HIDDEN−Hdirect_A | +.001552 | [−.006143, .009484] | 12/20 |
+| HIDDEN−Hdirect_ZERO | +.000097 | [−.009169, .010041] | 11/21 |
+
+These describe one acquired dataset and one inherited parent, on 32 worlds with stochastic tapes averaged within world. They provide neither training-population replication, equivalence nor simultaneous coverage of 37 comparisons. [Complete saved result](/home/fires/hmasd-wsl/runs/uav_fleet_adaptation/b08_local_gate_a01/summary.json).
+
+The strongest useful positive deserves preservation. HIDDEN−RAW gains **.522 mean served users and .594 service-p10**, with positive descriptive intervals; quality changes by only +.000044 with an interval spanning zero, and mean episode-minimum difference is zero. HIDDEN also improves complete J over unchanged P0 and the tested always-OFF/random rules. Thus this is more than improved training error or an inactive added head.
+
+The positive is narrower than the intended complete-package upgrade. RAW establishes no increment over P0_A, P0_R or P0_ZERO, and loses J to Bstar0_A/ZERO by −.010258/−.011825, with negative descriptive intervals. HIDDEN closes part of that gap, but does not establish superiority over Bstar0 or Hdirect. HIDDEN’s J comparisons with G_A/ZERO also remain unresolved. Its positive J comparisons with Q10 and C do not remove the stronger alternatives.
+
+**The strongest consequential objection is the combination of comparator uncertainty and adverse service/travel components.** Relative to P0_A, HIDDEN gains .750 mean users but loses **.789 service-p10 and .781 mean episode minimum**, while adding **821 m/UAV** of travel. All three latter descriptive intervals exclude zero. Against P0_ZERO, it loses **1.070 p10 and 1.594 minimum**, adding **851 m/UAV**, while the J increment remains unresolved. Against Hdirect_ZERO, it loses **1.711 p10 and 1.500 minimum**, adding **859 m/UAV**.
+
+There is no blanket dominance in the other direction either. HIDDEN travels approximately **522 m/UAV less than Bstar0_ZERO** and uses substantially less transmitter on-time. Its mean J/service are lower, however, and its p10/minimum deficits to Bstar0_ZERO have negative intervals. G and C retain quality and service-tail advantages: for example, HIDDEN−G_ZERO gains .893 mean users while losing .009579 quality, 1.172 p10 and 1.125 minimum. HIDDEN−C_ZERO gains J/service but loses quality, p10 and minimum and adds about 1,800 m/UAV. These are genuine competing capabilities, without a selected utility that resolves them into a deployment default.
+
+HIDDEN uses **89.395% of transmitter ticks**, compared with 100% for A and 99.600% for P0_ZERO. It executes about **67.4 mask-bit switches per episode**. Lower transmitter exposure is worth retaining as a measured capability, but does not establish energy savings: travel rises against P0/Hdirect, and switching, communication, synchronization and physical actuation costs are unmodeled. Heights remain near the lower bound; HIDDEN’s mean is 50.156 m. There is no measured physical safety or timing guarantee.
+
+Adverse worlds are material. HIDDEN−RAW loses in ten worlds, reaching **−.023344 J in 29831002**; its largest gain is +.036852 in 29831018. HIDDEN−P0_A reaches **−.042085 in 29831031**. HIDDEN loses to Hdirect_ZERO in 21 of 32 worlds despite its near-zero positive mean difference. All remain in the reading.
+
+The final panel contains **seven zero-service ticks across six episodes**:
+
+- P0_O: one tick in world 29831002, tape 0.
+- P0_A, P0_R, P0_ZERO and P0_HIDDEN: one tick each in world 29831016, tape 1.
+- Bstar0_A: two consecutive ticks in world 29831020, tape 1.
+
+Other final programs have none. Acquisition adds **38 zero-service ticks in 13 episodes**, with longest streak four. I checked the native outage records directly. HIDDEN’s outage occurs at tick 2 under an **all-ON mask**, also occurring for P0_A; it should not be described as harm caused by a contemporaneous OFF action. Conversely, acquisition records show four active transmitters with four consecutive zero-service ticks. Four-active eligibility is not a service guarantee. Absence of outages in another finite panel does not erase these or earlier adverse outcomes.
+
+The supported explanation separates four judgments:
+
+1. **Actuation opportunity:** useful local gating is plausible and receives conditional support from HIDDEN−A/R/O. But simple permission to silence is insufficient as a general explanation: O−A is −.004092 and R−A +.001660, both unresolved, with worse service tails and more travel. Every parent’s ZERO−A J interval spans zero. ZERO exposure is sparse—roughly 1.6–3.4% of eligible decisions—so these contrasts do not establish that selective silence generally lacks value.
+
+2. **Finite learning:** both regressions genuinely learned. All 512 labels were retained: 210 positive, 302 negative, no exact zeros. Their mean is −.0000915 and SD .008852; this average is not an attainable-policy-value estimate. RAW/HIDDEN have 77/183 nonzero coefficients. Their declared objectives are .035062/.031032, and independently calculated stationarity residuals are approximately \(10^{-14}\). Additional optimization of these same convex objectives is not a supported repair.
+
+3. **Representation increment:** the frozen HIDDEN expansion helped this finite ridge comparison. It adds no information or history. Appending standardized nonlinear features also changes capacity and effective regularization, so this does not isolate uniquely learned semantic knowledge against arbitrary nonlinear feature maps. Such an attribution control is unnecessary to retain the observed package effect.
+
+4. **Complete usefulness:** HIDDEN supplies conditional native improvement over unchanged P0, but no established increment over the strongest complete alternatives once the measured consequences are kept visible. Neither “nothing was learned” nor “a useful general upgrade was established” fits the evidence.
+
+Both gates actively choose OFF in every final episode: RAW executes **2,164/4,096** eligible OFF decisions and HIDDEN **2,172/4,096**, with episode ranges 17–50 and 17–49. No final fitted prediction is exactly zero. Nonactivation therefore does not explain the result. The nearly equal aggregate OFF rates are consistent with differences in state-dependent choices and ensuing histories mattering; they do not identify a pure interference mechanism.
+
+The declared random-continuation mismatch remains real, but **is not a diagnosed cause of the unresolved package comparison**. Labels concern one forced action under R continuation; deployment repeatedly applies the fitted gate. Moreover, silence changes other agents’ visibility and the previously silent member’s next motion input. Frozen weights therefore do not freeze motion. The constructive interpretation is that the hidden basis makes a useful consequence distinction accessible; the competing explanation is a finite, dataset-dependent policy change whose benefit remains smaller or less attractive than ordinary alternatives. Neither has been resolved across independent training acquisitions. Ross–Bagnell’s iterative acquisition/aggregation procedure does not give this single-batch procedure an improvement guarantee. [Primary algorithm, §2.2](https://arxiv.org/pdf/1406.5979).
+
+The six prospective branches therefore resolve as follows:
+
+- **HIDDEN beats RAW and competent packages:** not established.
+- **RAW supplies the useful gain without HIDDEN:** not the observed pattern.
+- **Ordinary gates explain the gain:** not established by the tested gate increments.
+- **Narrow HIDDEN−RAW positive without established superiority to Bstar0/Hdirect:** **the applicable branch**.
+- **Active adverse/unhelpful switching:** important component and world-level evidence remains, but cannot erase the HIDDEN positives.
+- **Scarcely activated fitted gates:** contradicted by actual execution.
+
+**I recommend no new B08 purchase now.** Preserve HIDDEN alongside RAW, P0, Bstar0, Hdirect and the ordinary controls; publish the conditional gain and tradeoffs. This is an investment decision, not proof that the broader question is exhausted.
+
+The alternatives have distinct purposes and prices:
+
+- **Unchanged replication** could test whether the HIDDEN−RAW and HIDDEN−A gains recur with a fresh acquisition. Recurrence would strengthen that narrow claim; reversal would weaken it. Only a favorable complete comparison would materially raise the package’s development priority. More evaluation worlds on these same fitted gates would improve conditional precision, not supply training replication. The implemented complete repeat costs two fits, 1,984 episodes and 507,904 native steps; its observed approximately 25 CPU-minutes and 1.53 GB raw footprint are useful anchors, not guarantees. Keeping P0 fixed would still leave inherited-parent generalization untested. I do not recommend buying that recurrence result solely because the primary interval is positive.
+
+- **Revised acquisition or gating** could be worthwhile under a concrete new conjecture. Learner-distribution acquisition, altered regularization or a different eligibility contract changes the experiment. Better prediction error alone would not justify it; the revision must predict a useful complete native consequence against the ordinary references. New paired acquisition and complete evaluation remain material costs; engineering and exact exposure would require pricing. The existing mismatch supplies no automatic aggregation, threshold or richer-control purchase.
+
+- **Retained ordinary capability** requires no new fitting or acquisition. Bstar0 and Hdirect remain competent conditional references with different service, quality, travel and compute consequences. HIDDEN’s reduced transmitter exposure also remains available for a future purpose. None becomes a default through this review.
+
+- **Idle on B08** is the preferred present choice: no new scientific exposure while retaining the result for a consequential future use or comparison. The current published plan separately assigns actual-S2 development to parent adaptation; B08 closure should not propose a duplicate or carry its historical “unselected” wording into current allocation prose. This does not prejudge that separate experiment.
+
+The complete bill is far larger than two tiny solves. B08 incurred **2 fits, 1,984 H256 episodes, 507,904 native steps and zero P0 updates**. The fit walls total **.217 seconds**; worker wall/CPU are **625.715/638.832 seconds**, reader **832.796/849.524**, and enclosing chain **1,458.957/1,488.812 seconds**. Nested timings must not be added again.
+
+Worker actual work includes **634,880 motion requests, 126,976 gate opportunities, 443,512 neural rows, 421,044 helper calls, 2,033,937 C candidate paths and 8,135,748 modeled ticks**. Hdirect’s 40,960 law calls construct **81,920 T/H vectors**, including unused T work. Controller power links total 43,335,004, alongside 140,219,475 native dense power slots and 34,918,400 mask-refresh SINR slots. The complete reader repeats the actual policy work and reconstructs **636,864 scalar states**, with no native steps or refits. [Reader evidence](/home/fires/hmasd-wsl/runs/uav_fleet_adaptation/b08_local_gate_a01/reading.json).
+
+Measured episode CPU is approximately **.319 s for HIDDEN**, .318 RAW, .276 P0_A, .278 P0_ZERO, .325 Bstar0_ZERO and .311 Hdirect_ZERO. There is no demonstrated inference-speed benefit over Hdirect, even with its nonminimal constructor. These include episode/evidence work and are not physical controller latency.
+
+Process high-water RSS is **566,320 KiB**. Raw evidence is **1,528,144,689 logical bytes** in its canonical remote location. My read-only allocation check found 1,532,334,080 bytes for raw, 816,574,464 for the accepted source snapshot and 425,984 for the staged P0 copy; these are occupied bytes, not cleanup savings. The two pre-admission technical refusals started no scientific worker and are not failed learning attempts. Support, admission, publication and cleanup labor remain incompletely metered; the 6–12-hour forecast is not an actual measurement. Cumulative B02–B08 exposure is **16 fits, two calibrations and 3,047,464 native steps**, with older B01 and support additional.
+
+My checks covered all 33 source hashes against the accepted commit and current files; config/protocol/parent bindings; collected-file and selected remote artifact hashes; successful exit and both refusal records; all episode-derived scalar world levels/contrasts; all 512 saved label differences and initial-state bindings; and independent reproduction of the 530 published metric intervals. Targeted raw checks covered positive/adverse endpoints, every final outage, the longest acquisition outages, extreme-label and late-force prefixes, masks, holds and native reward components. I independently checked both saved ridge equations without solving them again.
+
+I relied on the accepted complete reader for exhaustive scalar physics and policy reconstruction beyond those selected raw checks. I did not rerun policies, native trajectories, training, or the production reader. The adequate B07 review remains applicable to B07; its stopped recipe does not dictate B08’s outcome.
+
+**MATERIAL_DISSENT: no — the direct evidence supports the original narrow-feature branch and no immediate B08 extension. It supports retaining the conditional learned-gate positive, but not a complete-package upgrade, general unlearnability, or a diagnosed repair.**
+
+--- END ORIGINAL RESEARCHCRITIC ANSWER ---
+
+<a id="b08-independent-disposition"></a>
+### B08 DM disposition — retain the positive, end the fixed purchase, reserve the broader question
+
+I read and accept the independent reconstruction and its no-extension
+recommendation. There is no material scientific dissent to escalate and no
+unresolved expertise question that would justify a duplicate Pro consultation.
+The original selection review and this separate-context result review together
+cover this study's selection and disposition; they are advice, not additional
+empirical evidence. Source and compact complete reading are published at
+`e6b14fca1b8555ea64ff6a6ebacb71a7b9346056`.
+
+The main belief change is constructive and bounded. A locally legal, supervised
+binary controller over frozen motion can improve native reward/service over
+unchanged P0 here, and the already-paid hidden features help this particular
+finite ridge package over RAW. This adds positive learning evidence beyond the
+older failed development increments. It does not establish a general development
+method, recurrence across acquisition/parent instances, an extra-information
+benefit or superiority over the competent complete alternatives. I retain
+HIDDEN and RAW artifacts and original P0/Bstar0/Hdirect/G/Q10/C evidence, not
+only a negative verdict or an automatically adopted new controller.
+
+The criticism changes the decision to invest, without erasing that support.
+The HIDDEN gain over P0 trades worse service tails and roughly821m more travel
+per UAV; the P0_ZERO/Bstar0/Hdirect comparisons and tail/travel differences leave
+no established complete-package upgrade. Lower transmitter exposure remains a
+possible useful capability, without a selected energy/risk utility that prices
+its extra movement and switching. Both ridge systems solved their prescribed
+objectives and deployed actively. Neither nonactivation nor more optimization
+of the same convex systems is an evidenced repair. The random-continuation/
+repeated-deployment difference is a real limitation, not a demonstrated cause
+or automatic instruction to aggregate more data.
+
+I also checked the saved acquisition rows after the review's adverse finding:
+13 acquisition episodes contain38 zero-service ticks, longest streak4, at
+worlds29830177/29830273/29830306/29830384/29830477/29830479/29830484 (both
+branches except only OFF in29830384). These and the final seven ticks/six
+episodes stay in the evidence. The review's direct raw check shows that four
+active transmitters can coincide with four consecutive zero-service ticks;
+the eligibility rule is no service guarantee. Final RAW/HIDDEN OFF totals and
+episode ranges match2164/2172 of4096, ranges17–50/17–49. This retains actual
+exposure and adverse outcomes instead of inferring them from mean values.
+
+The reviewed next-action comparison is idle on this fixed B08 purchase. Another
+complete unchanged run would buy conditional recurrence at2fits/507904native
+steps plus the measured approximately1489CPU-s/1.53GB raw anchor and additional
+support; it would not automatically improve the stronger-package comparison.
+More worlds would only sharpen the same fitted-policy estimand. A changed
+acquisition or gate contract could test a distinct constructive conjecture,
+but neither improved regression fit nor the known distribution mismatch is a
+sufficient present prediction of useful native consequences. None is selected.
+The retained assets make a future consequential comparison possible without
+requiring a proof, positive pilot, exhaustive mechanism diagnosis or new
+architecture first. A concrete useful service/transmitter/travel tradeoff or a
+new comparison predicting improvement beyond the current ordinary alternatives
+would be a substantive re-entry condition; absent that, the direction is reserve,
+not blocked on a fabricated producer or a pending per-fit approval.
+
+Current published background was refreshed for this choice. Topic4's distinction
+between fitting, same-information representation and complete value applies,
+but its fleet-development evidence now needs this positive conditional gate
+increment beside B04–B07 adverses. Topics2/3 already require matched information,
+actual joint histories and competent ordinary alternatives; B08 uses that scope
+and supplies no new central-control or communication theorem. Topic4 will be
+revised with this evidence and its limits, not a claim of information insufficiency.
+Root has meanwhile separately assigned actual-S2 development to parent adaptation;
+B08's original statement that S2 was unselected stays historical in the frozen
+selection, not current allocation. I neither duplicate nor prejudge that work,
+resume B07 T/H, nor launch the transfer reserve. Cross-question continuation is
+returned to Root at this completed native-child boundary. No new B08 operation,
+fit, confirmation, world panel or open advice remains. Final measured cleanup
+and the direction's standing/background publication complete this closure.
+
+
+<a id="b08-final-cleanup"></a>
+### B08 measured closure — canonical evidence retained, redundant targets deleted
+
+The original worker/reader and independent scientific review are complete;
+no operation, unread advice or selected B08 continuation remains. The native
+observer is stopped in generation36 with no pending wake. Useful implementation
+and checks were published at21de06cd2, and compact complete evidence at
+e6b14fca1. All14 B08 source modules and five tests participate in the preserved
+entry/collector/reader or its executable checks; they remain useful and no
+unused experimental entrypoint was identified. Shared and prior source modules
+remain for their actual readers and selected cross-direction uses. No other
+direction's edits or older scientific evidence were removed.
+
+Fresh remote hashes match the published summary/episode ledger/reader/result,
+paired dataset and both fitted gates. The staged P0 again matches the original
+canonical B02 file at its frozen digest. Exact-target snapshot previews found
+no live references, clean source, durable published commit and outputs outside
+the source. The first snapshot is explicitly unclaimed after the recorded
+pre-admission refusal; the second has the terminal valid exit witness. Under
+the remote shared writer lock, the maintained `hmasd_snapshot_gc.py` collector
+removed both with its documented exact-ID path and read-only elevated process
+scan. The staged P0 directory had no live consumer and contained only that one
+verified redundant file; it was removed after the source collector completed.
+
+Remote deleted targets and measured allocated bytes:
+
+| Exact target | Before bytes | After |
+|---|---:|---:|
+| `/home/wu/projects/HMASD/.git/hmasd-launch-sources/027f86835fc24cc88be8260a0447387b` |816574464|absent|
+| `/home/wu/projects/HMASD/.git/hmasd-launch-sources/74aa489c067b43cf970655f6f8863929` |816574464|absent|
+| `/home/wu/projects/HMASD/.git/worktrees/027f86835fc24cc88be8260a0447387b` |3624960|absent|
+| `/home/wu/projects/HMASD/.git/worktrees/74aa489c067b43cf970655f6f8863929` |3637248|absent|
+| `/home/wu/hmasd-inputs/uav_fleet_adaptation/b08_local_gate_a01/` |430080|absent|
+
+Remote net target allocation decreases**1640841216bytes**. The original
+canonical P0 and all1984 unique raw files remain. Operation/admission/native
+receipts retain their original source identities even though their completed
+source working copies have been reclaimed; source is recoverable from Git.
+
+Local independent reading was complete before deleting its consumption copies.
+Their hashes still matched the canonical collection. Git confirmed no target
+was tracked. The first unprivileged process scan refused protected`/proc/383/cwd`
+before any deletion; the existing documented read-only sudo scan returned no
+references for every target, resolving that refusal. No deletion restriction
+was bypassed and there is no remaining process-scan blocker.
+
+Local targets relative to`/home/fires/hmasd-wsl/`:
+
+| Deleted target | Before allocated bytes | After |
+|---|---:|---:|
+| `temp/directions/uav_fleet_adaptation/` (consumed B08 wait request and empty test scratch) |16384|absent|
+| `runs/uav_fleet_adaptation/b08_local_gate_a01/summary.json` |16736256|absent|
+| `runs/uav_fleet_adaptation/b08_local_gate_a01/episodes.jsonl` |8122368|absent|
+| `runs/uav_fleet_adaptation/b08_local_gate_a01/progress.json` |4096|absent|
+| `runs/uav_fleet_adaptation/b08_local_gate_a01/reading-progress.json` |4096|absent|
+| `runs/uav_fleet_adaptation/b08_local_gate_a01/stdout.log` |0|absent|
+| `runs/uav_fleet_adaptation/b08_local_gate_a01/stderr.log` |0|absent|
+| `experiments/candidates/uav_fleet_adaptation/__pycache__/` |8192|absent|
+| `experiments/candidates/uav_fleet_adaptation/b04_native_development/__pycache__/` |20480|absent|
+| `experiments/candidates/uav_fleet_adaptation/b06_count_development/__pycache__/` |45056|absent|
+| `experiments/candidates/uav_fleet_adaptation/b07_stochastic_targets/__pycache__/` |12288|absent|
+| `experiments/candidates/uav_fleet_adaptation/b02/__pycache__/` |65536|absent|
+| `experiments/candidates/uav_fleet_adaptation/b08_local_gate/__pycache__/` |126976|absent|
+| `tests/experiments/candidates/uav_fleet_adaptation/b08_local_gate/__pycache__/` |102400|absent|
+
+Local net target allocation decreases**25264128bytes**. Combined B08 measured
+reclamation is**1666105344allocated bytes**; all19 listed targets are absent.
+This is target allocation actually deleted, not a tarball, moved directory,
+whole-tree backup, Git-object-size estimate or host-wide free-space claim.
+Earlier batches' cleanup is separate and is not counted again.
+
+Retained required unique evidence is the remote full summary/episode ledger,
+1984 raw trajectories,512-pair dataset, two tiny fitted gates, original P0,
+compact Git readings/config/source/terminal records and all positive/adverse/
+failed outcomes. No raw backup or second retention package was created. No
+B08 cleanup target or tool blocker remains. The direction is ready for its
+reserve standing/shared-background publication and completed native-parent
+return; there is no recurring check, future wake or additional fit implied.
