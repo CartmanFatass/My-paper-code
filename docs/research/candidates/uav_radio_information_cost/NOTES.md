@@ -520,3 +520,217 @@ The DM accepts this fixed correctness boundary. The already-selected64H256 main 
 was submitted unchanged through the same configured supervisor; supervisor submission is
 not native acceptance. Complete main worker/reader collection and scientific interpretation
 remain outstanding.
+
+
+<a id="b01-complete-reading"></a>
+## 2026-10-01 — Complete fixed package comparison and full independent reconstruction
+
+The unchanged published source `a80e2be9e3341b3bebfa743dacfda5e4ff13d977` completed
+all64H256 episodes on32 fresh paired worlds,16384 native transitions and0fits/updates.
+The [complete worker summary](../../../../runs/uav_radio_information_cost/b01_pilot_package_a01/summary.json)
+and [full reader](../../../../runs/uav_radio_information_cost/b01_pilot_package_read_a01/reading.json)
+are collected and size/hash verified against their canonical remote outputs. Both native
+operations have consistent exit0 witnesses and absent workers/supervisors. The reader is
+VERIFIED_COMPLETE for all64 episodes: every actual constructor/reset/channel transition,
+arrival refresh, observation/SINR/grant/raw+payload outcome, all1323304executed candidate
+fleets, all4096searches and two current-C/nav passes passed. It made0new native steps/resets
+or constructors and0model RNG draws. Physical replay does materialize the prescribed
+physical innovations again, and is charged below. No missing pair or retry occurred.
+
+Worker summary SHA256 `d16d488a384a339f0374f95c8b67a3a3b4689cee58833464e5720f0ab2e8783a`,
+667846bytes; reader SHA256 `e5dec257f082b98ff726eec87408d592cd6f1ea7d4f7336cf2c0e7e2bf614409`,
+278732bytes. Native operation/source/output identities are in the worker and reader
+launch manifests beside those records. The same-handle observer read main READY at
+generation45, rearmed46, then reader READY at47 and rearmed48. Native-child queue−32600
+was handled by the continuously active session, without restarting or repeating either run.
+
+### Complete effects and retained exceptions
+
+FULL has lower primary payload-J in all32 worlds: mean−.015929914563 with descriptive
+1.96SE interval[−.019169457985,−.012690371141]. These are fixed-program, independent-world
+summaries, not a training population, confirmation, equivalence or universal dominance.
+World29651015's difference is only−.0000004512691347824; retain that near tie rather than
+rounding all negative signs into a substantial loss in every world. Payload service is
+lower in30 worlds and higher in2. Raw J and raw service also have negative mean intervals.
+
+The observed accounting difference includes FULL's realized raw-to-payload J reduction
+.011414443917 per tick; the remaining raw-J difference is−.004515470646. This is an
+arithmetic decomposition on realized trajectories, not a counterfactual removal of the
+pilot charge or a causal attribution to airtime, information, delay or path decorrelation.
+The two programs would choose and visit differently under changed contracts.
+
+Waiting is not uniformly worse under FULL. It has lower mean age in24worlds and lower
+worst-user mean age in20; their aggregate mean intervals cross zero. FULL uses fewer
+transmitter-on ticks on average but travels farther; neither count measures energy.
+The complete retained service/tail readings follow. Every interval is descriptive mean
+±1.96SE over the32paired worlds; signs are literal FULL−PRIOR, not a generic win count.
+
+| Metric | FULL mean | PRIOR mean | FULL−PRIOR mean | Descriptive 1.96SE | + / − / 0 |
+| --- | ---: | ---: | ---: | --- | --- |
+| `F_user` | 8.586303711 | 11.015380859 | -2.429077148 | [-7.337238800, +2.479084503] | 12/20/0 |
+| `age_p95` | 12.187500000 | 11.750000000 | +0.437500000 | [-5.243486096, +6.118486096] | 8/21/3 |
+| `attempted_bytes` | 25024.000000000 | 9024.000000000 | +16000.000000000 | [+16000.000000000, +16000.000000000] | 32/0/0 |
+| `c_cpu_seconds` | 0.087269625 | 0.088913224 | -0.001643599 | [-0.003796929, +0.000509730] | 12/20/0 |
+| `candidate_fleet_scores` | 20805.812500000 | 20547.437500000 | +258.375000000 | [-153.892711432, +670.642711432] | 18/14/0 |
+| `candidate_plans` | 5267.312500000 | 5176.656250000 | +90.656250000 | [-13.561533792, +194.874033792] | 20/11/1 |
+| `candidate_sinr_entries` | 5201453.125000000 | 5136859.375000000 | +64593.750000000 | [-38473.177858042, +167660.677858042] | 18/14/0 |
+| `command_bytes_sent` | 1024.000000000 | 1024.000000000 | +0.000000000 | [+0.000000000, +0.000000000] | 0/0/32 |
+| `deadline_misses` | 0.000000000 | 0.000000000 | +0.000000000 | [+0.000000000, +0.000000000] | 0/0/32 |
+| `delivered_command_changes` | 63.375000000 | 63.187500000 | +0.187500000 | [-0.238560110, +0.613560110] | 7/6/19 |
+| `delivered_mask_changes` | 22.000000000 | 16.906250000 | +5.093750000 | [+2.744848500, +7.442651500] | 21/9/2 |
+| `longest_zero_service` | 0.000000000 | 0.000000000 | +0.000000000 | [+0.000000000, +0.000000000] | 0/0/32 |
+| `mask_flips` | 40.656250000 | 30.625000000 | +10.031250000 | [+5.324349443, +14.738150557] | 22/8/2 |
+| `max_closed_gap` | 41.562500000 | 47.437500000 | -5.875000000 | [-12.569144227, +0.819144227] | 11/20/1 |
+| `max_left_censored_gap` | 15.312500000 | 15.593750000 | -0.281250000 | [-3.268596829, +2.706096829] | 17/15/0 |
+| `max_right_censored_gap` | 23.531250000 | 27.937500000 | -4.406250000 | [-17.253362436, +8.440862436] | 13/18/1 |
+| `max_unserved_gap` | 45.656250000 | 52.031250000 | -6.375000000 | [-18.281531651, +5.531531651] | 12/19/1 |
+| `mean_age` | 2.349279785 | 2.406584473 | -0.057304687 | [-0.865628534, +0.751019159] | 8/24/0 |
+| `mean_path_length_m` | 6696.672451443 | 5912.932944549 | +783.739506894 | [+482.284332430, +1085.194681357] | 28/4/0 |
+| `mean_quality` | 0.227459152 | 0.228457173 | -0.000998021 | [-0.005008138, +0.003012097] | 14/18/0 |
+| `mean_served` | 27.675659180 | 27.976806641 | -0.301147461 | [-0.535958988, -0.066335934] | 10/22/0 |
+| `mean_user_max_gap` | 16.249375000 | 17.090000000 | -0.840625000 | [-3.638780623, +1.957530623] | 9/23/0 |
+| `min_served` | 15.125000000 | 14.875000000 | +0.250000000 | [-0.102026392, +0.602026392] | 5/3/24 |
+| `model_normal_values` | 0.000000000 | 0.000000000 | +0.000000000 | [+0.000000000, +0.000000000] | 0/0/32 |
+| `never_served` | 0.000000000 | 0.000000000 | +0.000000000 | [+0.000000000, +0.000000000] | 0/0/32 |
+| `payload_J` | 0.444282530 | 0.460212445 | -0.015929915 | [-0.019169458, -0.012690371] | 0/32/0 |
+| `payload_quality` | 0.221759232 | 0.228457173 | -0.006697941 | [-0.010679636, -0.002716246] | 7/25/0 |
+| `payload_served` | 26.982482910 | 27.976806641 | -0.994323730 | [-1.230176042, -0.758471419] | 2/30/0 |
+| `raw_J` | 0.455696974 | 0.460212445 | -0.004515471 | [-0.007734471, -0.001296470] | 11/21/0 |
+| `report_bytes_sent` | 24000.000000000 | 8000.000000000 | +16000.000000000 | [+16000.000000000, +16000.000000000] | 32/0/0 |
+| `round_cpu_seconds` | 1.600492771 | 1.569922492 | +0.030570279 | [-0.004051558, +0.065192117] | 23/9/0 |
+| `round_max_wall_seconds` | 0.044735252 | 0.043573360 | +0.001161892 | [-0.002327368, +0.004651152] | 19/13/0 |
+| `round_wall_seconds` | 1.552016552 | 1.522329328 | +0.029687225 | [-0.003667563, +0.063042012] | 23/9/0 |
+| `sent_bytes` | 25024.000000000 | 9024.000000000 | +16000.000000000 | [+16000.000000000, +16000.000000000] | 32/0/0 |
+| `service_p10` | 24.750000000 | 25.031250000 | -0.281250000 | [-0.767157811, +0.204657811] | 7/12/13 |
+| `terminal_max_age` | 23.531250000 | 27.937500000 | -4.406250000 | [-17.253362436, +8.440862436] | 13/18/1 |
+| `terminal_mean_age` | 3.788750000 | 2.715625000 | +1.073125000 | [-2.060566710, +4.206816710] | 13/17/2 |
+| `transmitter_on_ticks` | 855.156250000 | 890.625000000 | -35.468750000 | [-57.203348142, -13.734151858] | 9/22/1 |
+| `zero_service_steps` | 0.000000000 | 0.000000000 | +0.000000000 | [+0.000000000, +0.000000000] | 0/0/32 |
+
+All50-user mean ages, maximum gaps and service counts for each arm/world are in the
+complete worker rows; age/gap streams with left/right censor flags remain in each
+canonical outcome NPZ. Neither arm has a never-served user or a zero-team-service tick,
+which does not eliminate long individual outages. PRIOR's world29651010/user45 has a
+203tick maximum gap and mean age81.1640625 (20service ticks); FULL's worst mean age there
+is8.921875 and its fleet mean age is5.447265625 lower despite worse J/service. Conversely,
+FULL's world29651029/user31 has a150tick maximum gap and mean age44.69140625 (66service
+ticks); FULL's fleet mean age is11.314296875 higher than PRIOR there. FULL also has users
+with140/136/132/131tick gaps in that world. PRIOR's own world29651029 worst-user mean age
+is18.5625 and gap95. These adverse tails are not erased by the primary comparison.
+Positive .9 service still resets the fixed one-second waiting metric; no100ms outage
+or all-user continuity guarantee is inferred.
+
+The complete32world signed primary/service/age/travel values are below; the summary
+retains every other metric and both full arm levels.
+
+| World | FULL payload-J | PRIOR payload-J | Δ payload-J | Δ payload-served | Δ raw-served | Δ mean age | Δ F-user | Δ max user gap | Δ path m/UAV |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 29651000 | 0.444159584 | 0.459815021 | -0.015655437 | -0.756250000 | -0.050781250 | -0.322265625 | -1.003906250 | -4.000000000 | 312.553844590 |
+| 29651001 | 0.434189958 | 0.438268114 | -0.004078156 | -0.301171875 | 0.351562500 | 0.066718750 | 2.109375000 | 5.000000000 | 164.801708558 |
+| 29651002 | 0.451782433 | 0.456311045 | -0.004528612 | -0.176953125 | 0.519531250 | 0.876953125 | 11.140625000 | 26.000000000 | 131.075265058 |
+| 29651003 | 0.474512508 | 0.511172280 | -0.036659771 | -2.190625000 | -1.425781250 | -0.223750000 | -3.902343750 | -6.000000000 | 269.846451304 |
+| 29651004 | 0.421730084 | 0.441386705 | -0.019656621 | -1.889062500 | -1.234375000 | -1.606640625 | -6.832031250 | -29.000000000 | 2707.696925353 |
+| 29651005 | 0.416169911 | 0.432184017 | -0.016014106 | -1.104296875 | -0.457031250 | -0.944375000 | -5.824218750 | -4.000000000 | 1152.780601915 |
+| 29651006 | 0.429452497 | 0.437648356 | -0.008195859 | -0.569531250 | 0.101562500 | 1.057343750 | 7.402343750 | 28.000000000 | -535.141263706 |
+| 29651007 | 0.464526958 | 0.488602000 | -0.024075042 | -1.016015625 | -0.292968750 | -0.741328125 | -6.570312500 | -35.000000000 | 1814.214699019 |
+| 29651008 | 0.460055969 | 0.478596013 | -0.018540044 | -0.914843750 | -0.203125000 | -0.065468750 | 1.367187500 | 11.000000000 | 1731.126894882 |
+| 29651009 | 0.432503489 | 0.444148551 | -0.011645062 | -0.750000000 | -0.070312500 | -0.148046875 | 1.257812500 | 0.000000000 | 629.709358672 |
+| 29651010 | 0.450659607 | 0.483049917 | -0.032390310 | -2.328906250 | -1.617187500 | -5.447265625 | -72.242187500 | -163.000000000 | 1636.855572290 |
+| 29651011 | 0.431783185 | 0.450659347 | -0.018876162 | -1.143359375 | -0.468750000 | -0.324453125 | -1.750000000 | -13.000000000 | 933.615156006 |
+| 29651012 | 0.430952885 | 0.449382235 | -0.018429350 | -1.089062500 | -0.425781250 | 0.397031250 | 2.125000000 | 17.000000000 | 850.202051452 |
+| 29651013 | 0.454513621 | 0.459881548 | -0.005367927 | -0.546093750 | 0.160156250 | 0.368906250 | 0.824218750 | 7.000000000 | -30.057306307 |
+| 29651014 | 0.454941269 | 0.477085532 | -0.022144263 | -1.018750000 | -0.292968750 | -0.727968750 | -5.652343750 | -18.000000000 | 2977.686154285 |
+| 29651015 | 0.452248457 | 0.452248908 | -0.000000451 | 0.179687500 | 0.875000000 | -0.190703125 | 0.828125000 | 16.000000000 | 858.215907645 |
+| 29651016 | 0.433160180 | 0.438996934 | -0.005836754 | -0.078515625 | 0.593750000 | -0.408515625 | -1.628906250 | -2.000000000 | -973.507373997 |
+| 29651017 | 0.420541468 | 0.447965024 | -0.027423556 | -1.641796875 | -0.984375000 | -0.597578125 | -3.742187500 | -3.000000000 | 1423.446910415 |
+| 29651018 | 0.440132433 | 0.465348845 | -0.025216412 | -1.650781250 | -0.957031250 | 0.298984375 | -1.695312500 | 13.000000000 | 112.751560269 |
+| 29651019 | 0.471704373 | 0.498520735 | -0.026816362 | -2.125781250 | -1.382812500 | -0.123906250 | -2.742187500 | -17.000000000 | 1257.780480294 |
+| 29651020 | 0.437915780 | 0.457206363 | -0.019290583 | -1.192578125 | -0.496093750 | -0.770156250 | -3.203125000 | -22.000000000 | 1591.770619312 |
+| 29651021 | 0.437504067 | 0.459049978 | -0.021545911 | -1.457421875 | -0.769531250 | -0.326328125 | -0.417968750 | -13.000000000 | 515.832407101 |
+| 29651022 | 0.438370065 | 0.446399941 | -0.008029877 | -0.890234375 | -0.210937500 | -0.266093750 | -1.472656250 | -1.000000000 | 479.731090192 |
+| 29651023 | 0.446753857 | 0.449103832 | -0.002349975 | 0.172656250 | 0.871093750 | 0.176875000 | 0.898437500 | 15.000000000 | 346.454172717 |
+| 29651024 | 0.438246466 | 0.456625835 | -0.018379369 | -1.117968750 | -0.421875000 | -1.054453125 | -3.886718750 | -21.000000000 | 1832.490871311 |
+| 29651025 | 0.470129931 | 0.484703572 | -0.014573641 | -1.008593750 | -0.285156250 | -0.028984375 | -0.136718750 | -3.000000000 | 636.279226529 |
+| 29651026 | 0.445518441 | 0.456148735 | -0.010630295 | -0.557421875 | 0.128906250 | -1.113984375 | -8.089843750 | -35.000000000 | 1116.106659760 |
+| 29651027 | 0.434172122 | 0.458524918 | -0.024352795 | -1.718359375 | -1.062500000 | -0.076953125 | -1.691406250 | -6.000000000 | 219.211137383 |
+| 29651028 | 0.454864761 | 0.456361540 | -0.001496780 | -0.033984375 | 0.679687500 | -0.432890625 | 1.992187500 | 13.000000000 | 732.740317149 |
+| 29651029 | 0.459424154 | 0.467803430 | -0.008379275 | -0.382421875 | 0.332031250 | 11.314296875 | 26.128906250 | 55.000000000 | 220.757882253 |
+| 29651030 | 0.444931585 | 0.468218288 | -0.023286703 | -1.766015625 | -1.082031250 | -0.261718750 | -3.046875000 | -16.000000000 | -153.521133260 |
+| 29651031 | 0.439488874 | 0.455380677 | -0.015891803 | -0.753906250 | -0.058593750 | -0.187031250 | 1.726562500 | 1.000000000 | 116.157372153 |
+
+### Actual exposure, correctness and cost
+
+All4096rounds completed before their fixed deadlines. The maximum observed complete
+C-plus-manager round was.055267783s for FULL and.060319379s for PRIOR, versus1.336/1.436s
+allowances. Fixed delivery remains3/2ticks; measured compute
+slack is not evidence of minimum feasible latency, and no changed timing was executed.
+FULL bought512000link values/102400slots/204.8simulated sounding seconds. All measurement
+clipping and endpoint-code counts were0; PRIOR has no sensor-code/saturation arrays.
+Both preserve their entire startup and last-block outcomes,249.6/256payload weights per
+episode. Actual and attempted recurring bytes coincide:800768FULL+288768PRIOR, plus25600
+map bytes/102.4simulated setup seconds outside the service windows.
+
+The programs were behaviorally different: commands differ at8017/8192paired mission
+ticks (32809UAV-ticks), masks at6724ticks (14897transmitter-bit ticks), proposals at1999/2048
+report boundaries and post-C navigation at5714entries. Later differences include legitimate
+feedback through their own histories; they do not establish isolated CSI mediation.
+FULL delivered2028changed command sets/704changed masks; PRIOR2022/541. Zero manager
+misses, zero clipping and complete intervention rule out technical nonexecution as this
+result's explanation; they do not identify a unique physical/statistical failure mechanism.
+
+Main worker paid475136logical requests/334207unique plans/1323304fleet scores and330826000
+candidate user entries; the scalar reader repeated each actual fleet score. It paid438048
+suffix geometries/109512000links,10240prefix moves,2048FULL anchors/512000links. FULL has
+218592suffix+6144prefix moment recurrences; PRIOR219456suffix+4096prefix stationary reuses
+and2048initializations, not likelihood inference. Worker C20480calls/552960paths/2211840
+ticks/13718572actual links; reader40960calls/1105920paths/4423680ticks/27437144links.
+Physical4112250normals/7475geometry uniforms/20545radio states occur on each worker/reader
+side, including the one discarded constructor reset and all64explicit resets. Reader age
+work covers819200user-tick updates and106927gap rows. All original bill units remain visible.
+
+Including the two H8 streams:66episodes/16400native steps,2constructors/66explicit resets,
+4117000physical normals/7820geometry uniforms/20568native radio states per worker/reader
+side;61500combined C calls/1660500paths/6642000ticks/41187498actual C links. Candidate work
+is1324449fleet scores per side,662224500dense entries across worker+reader. The separate
+fixed synthetic suite adds3392fleet evaluations/848000entries, not another native mission.
+Only FULL purchases512500measured links/102500slots/205simulated sounding seconds; recurring
+bytes1090600 plus26400map bytes. Zero fits, optimizer updates, labels, calibration, particles,
+future-C evaluations or model-normal tapes occur.
+
+Main worker resource record:135.721601959s entry wall,139.915588s process CPU plus.001146s
+waited-childCPU, peak435940KiB. Reader:278.181986378s entry wall,288.223320s process CPU
+plus.004210s waited-childCPU, peak406560KiB. The distinct CPU and wall scopes are preserved:
+RUSAGE includes the process bootstrap before the scientific entry clock. Native acceptance-
+to-exit spans139.950299s/287.572746s, respectively. With H8 and the whole local synthetic
+process, own CPU430.588630s plus waited-childCPU.010114s is about.1196CPUh; summed entry/test
+walls416.636237s are not calendar batch elapsed or simultaneous-node occupancy. Separate RSS
+peaks are not summed. Source/adviser/review/launch staging, the stalled preparatory fetch,
+transfers, publication and cleanup are additional real work and incompletely metered. The
+8–16support-hour-equivalent forecast is not a measured labor/model-time figure. Neither the
+conservative forecast nor this overlapping-node observation establishes an isolated speedup.
+
+Main129canonical NPZs total150820976bytes; with the5H8NPZs,134files/151033826bytes remain
+as one necessary raw/outcome evidence copy on wsl_4070, all bound by path/bytes/hash in the
+unchanged summaries. No raw tree was copied or archived. Compact main/reader/native status,
+source, config, all world/individual-user readings and their identities are published here.
+
+### Working explanation before independent result diagnosis
+
+The selected paid FULL package fails its complete primary/value prediction against this
+competent stationary-prior coordinator. PRIOR retains native local information indirectly
+through C/proposals/nav, and is neither information-free nor a policy-conditioned Bayesian
+optimum. The result strengthens the distinction between useful information and useful
+paid deployment, not a theorem that CSI, uncertainty or sensing is useless. Task opportunity
+for this broader question remains; no learner or representation class was tested. Delay,
+pilot payload accounting, finite expected-power control, quantization/point-estimate and
+induced histories remain coupled. An airtime-only explanation is incomplete even as observed
+accounting because raw J/service also decline on average; a specific decorrelation-causal
+claim is not identified. FULL's waiting/exposure positives and both arms' long-tail adverses
+remain usable conditional evidence.
+
+The fixed adverse-result rule points toward closing this purchase and retaining PRIOR as
+an ordinary reference, while the broader question stays open. Independent scientific
+Reviewer `critic_rf_package_result` was assigned the original question/contract, complete
+worker/reader bytes and contrary evidence in a separate context before this interpretation;
+its complete recommendation and the resolved disposition follow below. No further native
+work, timing/filter/severity/sensor revision, extra world or confirmation is selected.

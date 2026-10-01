@@ -1,0 +1,90 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-10-01T08:36:01.201104Z",
+  "bootstrap_command": [
+    "/home/wu/.venvs/hmasd-gcc-31021/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/a6c37c7d307f42dfb91cdf24b5b79a5e/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/a6c37c7d307f42dfb91cdf24b5b79a5e/experiments/candidates/uav_radio_information_cost/b01/run.py",
+    "--output",
+    "/home/wu/projects/HMASD/runs/uav_radio_information_cost/b01_pilot_package_a01",
+    "--",
+    "--out",
+    "/home/wu/projects/HMASD/runs/uav_radio_information_cost/b01_pilot_package_a01",
+    "--launch-sha",
+    "a80e2be9e3341b3bebfa743dacfda5e4ff13d977",
+    "--seed",
+    "29651000"
+  ],
+  "claim_key": "c8bb24c13bdb4836625004360611eab29bffeee3acf7ac8211d2980e962a3050",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/c8bb24c13bdb4836625004360611eab29bffeee3acf7ac8211d2980e962a3050.json",
+  "command": [
+    "/home/wu/.venvs/hmasd-gcc-31021/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/a6c37c7d307f42dfb91cdf24b5b79a5e/experiments/candidates/uav_radio_information_cost/b01/run.py",
+    "--out",
+    "/home/wu/projects/HMASD/runs/uav_radio_information_cost/b01_pilot_package_a01",
+    "--launch-sha",
+    "a80e2be9e3341b3bebfa743dacfda5e4ff13d977",
+    "--seed",
+    "29651000"
+  ],
+  "command_sha256": "5adbf919af1b695e2861aac4cfb027a3bfce00c5d99fdc59187e595cc2ae8502",
+  "control_observation": {
+    "observed_at": "2026-10-01T08:36:01.073024Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "0f644c089da402a2ff2acdbaa2023ea837efcc97"
+  },
+  "control_root": "/home/wu/projects/HMASD",
+  "created_at": "2026-10-01T08:36:01.085493Z",
+  "cwd": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/a6c37c7d307f42dfb91cdf24b5b79a5e",
+  "direction": "uav_radio_information_cost",
+  "host_identity": "LAPTOP-U9TDKC8A",
+  "identity_command": [
+    "/home/wu/.local/opt/hmasd-cpython-3.10.21-gcc/bin/python3.10",
+    "experiments/candidates/uav_radio_information_cost/b01/run.py",
+    "--launch-sha",
+    "a80e2be9e3341b3bebfa743dacfda5e4ff13d977",
+    "--seed",
+    "29651000"
+  ],
+  "lead": "Codex DM (native child)",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/uav_radio_information_cost/b01_pilot_package_a01/launch-manifest.json",
+  "node": "wsl_4070",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/c8bb24c13bdb4836625004360611eab29bffeee3acf7ac8211d2980e962a3050.json",
+  "output_root": "/home/wu/projects/HMASD/runs/uav_radio_information_cost/b01_pilot_package_a01",
+  "preflight": "/home/wu/projects/HMASD/runs/uav_radio_information_cost/b01_pilot_package_a01/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 1227370,
+      "session_id": 1227370,
+      "start_ticks": 118587760
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 1227370,
+    "process_group_id": 1227370
+  },
+  "process_exit": "/home/wu/projects/HMASD/runs/uav_radio_information_cost/b01_pilot_package_a01/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 1227371,
+      "session_id": 1227370,
+      "start_ticks": 118587763
+    },
+    "pid": 1227371,
+    "process_group_id": 1227370,
+    "supervisor_pid": 1227370
+  },
+  "schema_version": 1,
+  "sha": "a80e2be9e3341b3bebfa743dacfda5e4ff13d977",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/a6c37c7d307f42dfb91cdf24b5b79a5e",
+  "stderr": "/home/wu/projects/HMASD/runs/uav_radio_information_cost/b01_pilot_package_a01/stderr.log",
+  "stdout": "/home/wu/projects/HMASD/runs/uav_radio_information_cost/b01_pilot_package_a01/stdout.log"
+}

@@ -1,0 +1,206 @@
+{
+  "arms": [
+    "P_FULL",
+    "P_PRIOR"
+  ],
+  "constructor_seed": 29651999,
+  "correlation_metres": 17.62,
+  "dependency_commit": "9b6f493b343c2939b374a1ce21384266d3257456",
+  "direction": "uav_radio_information_cost",
+  "horizon": 256,
+  "launch_sha": "a80e2be9e3341b3bebfa743dacfda5e4ff13d977",
+  "model_address": null,
+  "numpy": "1.26.3",
+  "order": [
+    [
+      "P_FULL",
+      "P_PRIOR"
+    ],
+    [
+      "P_PRIOR",
+      "P_FULL"
+    ],
+    [
+      "P_FULL",
+      "P_PRIOR"
+    ],
+    [
+      "P_PRIOR",
+      "P_FULL"
+    ],
+    [
+      "P_FULL",
+      "P_PRIOR"
+    ],
+    [
+      "P_PRIOR",
+      "P_FULL"
+    ],
+    [
+      "P_FULL",
+      "P_PRIOR"
+    ],
+    [
+      "P_PRIOR",
+      "P_FULL"
+    ],
+    [
+      "P_FULL",
+      "P_PRIOR"
+    ],
+    [
+      "P_PRIOR",
+      "P_FULL"
+    ],
+    [
+      "P_FULL",
+      "P_PRIOR"
+    ],
+    [
+      "P_PRIOR",
+      "P_FULL"
+    ],
+    [
+      "P_FULL",
+      "P_PRIOR"
+    ],
+    [
+      "P_PRIOR",
+      "P_FULL"
+    ],
+    [
+      "P_FULL",
+      "P_PRIOR"
+    ],
+    [
+      "P_PRIOR",
+      "P_FULL"
+    ],
+    [
+      "P_FULL",
+      "P_PRIOR"
+    ],
+    [
+      "P_PRIOR",
+      "P_FULL"
+    ],
+    [
+      "P_FULL",
+      "P_PRIOR"
+    ],
+    [
+      "P_PRIOR",
+      "P_FULL"
+    ],
+    [
+      "P_FULL",
+      "P_PRIOR"
+    ],
+    [
+      "P_PRIOR",
+      "P_FULL"
+    ],
+    [
+      "P_FULL",
+      "P_PRIOR"
+    ],
+    [
+      "P_PRIOR",
+      "P_FULL"
+    ],
+    [
+      "P_FULL",
+      "P_PRIOR"
+    ],
+    [
+      "P_PRIOR",
+      "P_FULL"
+    ],
+    [
+      "P_FULL",
+      "P_PRIOR"
+    ],
+    [
+      "P_PRIOR",
+      "P_FULL"
+    ],
+    [
+      "P_FULL",
+      "P_PRIOR"
+    ],
+    [
+      "P_PRIOR",
+      "P_FULL"
+    ],
+    [
+      "P_FULL",
+      "P_PRIOR"
+    ],
+    [
+      "P_PRIOR",
+      "P_FULL"
+    ]
+  ],
+  "packages": {
+    "P_FULL": {
+      "compute_seconds": 1.336,
+      "delivery": 3,
+      "payload_report_weight": 0.9,
+      "pilot_seconds": 0.1,
+      "pilot_slots": 50,
+      "report_bytes": 75,
+      "round_bytes": 391
+    },
+    "P_PRIOR": {
+      "compute_seconds": 1.436,
+      "delivery": 2,
+      "payload_report_weight": 1.0,
+      "pilot_seconds": 0.0,
+      "pilot_slots": 0,
+      "report_bytes": 25,
+      "round_bytes": 141
+    }
+  },
+  "physical_address": [
+    1380339784,
+    29640001,
+    "world",
+    "state_tick"
+  ],
+  "sigma_db": 4.14,
+  "tag": "b01_pilot_package_a01",
+  "worlds": [
+    29651000,
+    29651001,
+    29651002,
+    29651003,
+    29651004,
+    29651005,
+    29651006,
+    29651007,
+    29651008,
+    29651009,
+    29651010,
+    29651011,
+    29651012,
+    29651013,
+    29651014,
+    29651015,
+    29651016,
+    29651017,
+    29651018,
+    29651019,
+    29651020,
+    29651021,
+    29651022,
+    29651023,
+    29651024,
+    29651025,
+    29651026,
+    29651027,
+    29651028,
+    29651029,
+    29651030,
+    29651031
+  ]
+}

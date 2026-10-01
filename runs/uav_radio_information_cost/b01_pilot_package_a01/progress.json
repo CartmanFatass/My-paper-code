@@ -1,0 +1,14 @@
+{
+  "completed": 64,
+  "current": {
+    "arm": "P_FULL",
+    "world": 29651031
+  },
+  "resources": {
+    "cpu_seconds": 139.899085,
+    "peak_rss_kib": 435940,
+    "peak_rss_scope": "this Linux process",
+    "waited_child_cpu_seconds": 0.0011459999999999999,
+    "wall_seconds": 135.70560129592195
+  }
+}
