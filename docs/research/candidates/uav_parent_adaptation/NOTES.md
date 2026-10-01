@@ -8517,3 +8517,113 @@ query occurs before exact published inputs, active ownership and fresh actual-no
 admission. Remote-first admission does not inherit another accepted job's memory
 sample. After acceptance keep the same handle through deterministic observation,
 full reading, result review/publication and measured cleanup.
+
+<a id="b09-engineering-preparation"></a>
+#### B09 implementation and outcome-blind checks
+
+Selection/prospective publication is `1c15935a3b2ef62c6e6130d3e9def932a2609848`.
+The bounded Implementer owned only `b09_managed_development/learning.py` and its
+matching `test_learning.py`; the DM read and accepted the complete implementation
+and owned the other modules and integration tests. Before edits, source inspection
+corrected two shorthand errors in that assignment: the retained `Head` is fleet
+B05 `native_consequence/learning.py`, and normalized native116 preserves xy/users
+`/1000` plus altitude `(z−50)/100`, rather than scaling all115 coordinates alike.
+Neither changes the selected normalized-native baseline or the head mathematics.
+
+The updater consumes private copies of collected hidden/base-logit rows, preserves
+the original four-epoch FP64 nominal-density PPO math, and records successful and
+attempted optimizer work on failures. All rollout-group heads, fresh/final
+critics, continuing Adam state and target/update records are retained. The
+collector captures the critic before current proposals/nav advance and the
+startup command replacement, with its CPU included outside the deployed local
+timer. `ManagedTeam` reuses the inherited five-distribution/two-private-integer
+barrier and copies its learning context before the coin provider is exposed.
+The reader independently reconstructs the linear/ReLU/head algebra, native
+formulas, wire/search/arrival arithmetic and pre-action baseline inputs. Critic
+initialization and parameter/checkpoint/optimizer provenance are checked; no
+critic forward or optimizer replay is claimed.
+
+The fixed complete loops bound exposure; the70–120/15–40 CPU-minute worker/reader
+figures are estimates, not automatic science-truncation rules. S2's1.456-second
+deployment deadline is unchanged and is checked on every report. Any actual
+failure preserves partial raw data, counters, update diagnostics and changed
+parameters. No restart or resume interface is added.
+
+The Implementer's48 synthetic tests passed in3.92s; two evolving runs total11.59s
+reported pytest time. CAL and CONT matched the frozen B04 optimizer computation
+bit for bit on synthetic cached H8 contexts, including final head/critic
+parameters, losses, ratios and gradient norms. Tests cover matched fresh
+initialization/RNG isolation, immutable caches, nominal density guards,
+continuing Adam and failure accounting. The first integrated invocation was
+64 passed/1 failed in17.39s: the reader compared a worker FP32 vector-norm
+diagnostic to an independent FP64 accumulation with an unjustified1e−9 absolute
+tolerance. The read now derives a rounding bound from FP32 and the actual vector
+length while preserving exact checkpoint/state identities. Its focused
+integration rerun passed17 tests in13.26s. These durations are test wall reports,
+not a production timing benchmark or complete support-time measurement.
+
+The H8 integration uses four synthetic training worlds and two synthetic final
+worlds: two groups per head, reversed second-group arm order and the complete
+nine-level final arrangement. The40 pure-NumPy fixture episodes are not native
+production episodes. Full reading reconstructs320 helper/backbone rows,160 new
+head/80 transfer head/40 paid-temperature applications,440 native/report/terminal
+formula states and16 critic-input/return rows. Native host steps, full C rankings,
+Adam and the updater are forbidden during the reader test. Additional checks
+cover missing staged assets before model loading, saved context corruption,
+pre-query baseline exclusion, late/partial search, startup/terminal delivery,
+immutable pre-coin context, and partial transition-failure evidence. Scientific
+exposure remains0 fits/0 native steps at this preparation boundary.
+
+**Bound external input staging.** Read-only byte checks confirmed the original
+S file at its remote canonical B02 path. Original B05 CAL0/CONT0 remain in the
+fleet owner's canonical local run; neither source was moved or modified. The
+three consumption copies were staged outside the sparse source checkout at
+`wsl_4070:/home/wu/hmasd-inputs/uav_parent_adaptation/b09_managed_development_a01/`:
+
+| Staged file | Bytes | SHA256 | Allocated file bytes |
+|---|---:|---|---:|
+| `S.pt` |424487|`b9e25fca68109bb50fa64fadfc90939ad6a4669058c1c0ccd1351c8bbcefe12a`|425984|
+| `CAL_all.pt` |15395|`5b4a91a483239ac97e0dfa44cd1edbeb8b2c2e2050a58bf5587d383e0f4c026f`|16384|
+| `CONT_all.pt` |56753|`f179c83a9f07e78eaea0fbd78b3ec3895d79f5cd4669f22dab15569e23c65eb5`|57344|
+
+All three destination files matched, totaling499712 allocated file bytes before
+directory overhead. The runner's explicit `--input-dir` and frozen file/state
+digests bind them; its accepted-process preflight checks every file before any
+model creation or native query. These byte checks performed no model query.
+After complete reading, retire only the consumed B09 staging copy, preserving
+the unique original S/head evidence. Independent high-risk engineering review
+is now assigned to the registered Reviewer over the complete new code and tests;
+no scientific operation has been accepted.
+
+<a id="b09-engineering-acceptance"></a>
+#### Independent engineering review and DM acceptance
+
+The registered Reviewer returned the following complete original result after
+reading the actual new source, both test files and required inherited paths:
+
+> No material engineering finding remains. No repairs required.
+>
+> Reviewed the B09 source and both test files against the published selected contract/L0, including the inherited policy, head, PPO, scheduler, native adapter, and reader paths. Reviewed source hashes remained unchanged.
+>
+> Confirmed:
+>
+> - The critic captures pre-query state, delivered commands/mask, and pre-advance navigation; its forward precedes the local deadline clock.
+> - All five distributions precede private innovations. Training retains sampled proposals through S2 overrides, aliases, and fallback.
+> - Cached head-only PPO preserves the selected numerical semantics, immutable two-episode groups, optimizer continuity, and exposure counts.
+> - S2 deadline handling, two-tick delivery, startup, late retention, and terminal delivery match the inherited scheduler.
+> - Input preflight, checkpoint provenance, partial-failure evidence, and no-repeat guards are connected correctly.
+> - Reader claims match its bounded reconstruction scope; final comparisons average tapes within worlds.
+>
+> Validation: the authorized synthetic suite passed **65 tests in 14.01 seconds**, including bit-for-bit frozen PPO comparisons, late-search paths, tampering rejection, and failures before and after optimizer mutation.
+>
+> Residual limits: no production assets or native episodes were queried, so H256 runtime, real-node deadlines, and memory remain unmeasured. The reader deliberately does not replay critic forwards or optimizer updates. An injected-clock regression explicitly separating critic time from proposal time would strengthen coverage; current deadline wiring is correct by inspection.
+
+**DM acceptance.** I read this original review and accept the implementation and
+its bounded verification coverage. The optional additional timing regression is
+not needed to resolve a finding: both inspection and the collector ordering put
+critic work before `local_wall`; actual-node timing remains a measured outcome
+of the admitted complete study. No scientific claim follows from these synthetic
+checks. The next action is exact input publication, fresh remote admission and
+one complete worker/reader operation on the selected1024-episode contract, with
+the already staged and independently file-hashed assets. No exposure, seed,
+comparator or outcome rule changes were made by engineering review.
