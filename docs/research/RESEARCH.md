@@ -2278,14 +2278,16 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 ### Parallel allocation: independent work and rolling succession
 
 <a id="root-successor-designs-20260930"></a>
-**Four native DMs retain four substantive assignments: three selected studies and one source assessment.**
-Parent adaptation owns actual-S2 proposal development; fleet adaptation owns the finite
-single-UAV response study with mixed retained teammates; the former waiting DM owns the
-selected correlated-RF P/U32 comparison. Fleet transmission has completed, independently read,
-published and cleaned the S7 C/M/V study. Its same nonarchived DM now supports a bounded
-Astra Max source assessment of whether the demonstrated ordinary prediction capability has
-a worthwhile task-relevant control use, or whether a materially different question deserves
-the next investment. No successor experiment is selected by that assessment.
+**Four native DMs retain four substantive assignments: one selected study and three source assessments.**
+The former waiting DM implements the selected correlated-RF P/U32 comparison. Parent
+adaptation and fleet adaptation have now completed, independently read, published and cleaned
+their actual-S2 and mixed-teammate B09 studies; Root adopts both bounded stops and preserves
+their conditional positives. The same nonarchived parent DM supports an Astra Max assessment
+of useful retained capability versus a simple lower-motion explanation. The same fleet DM
+supports a distinct assessment of joint decentralized motion/transmission development against
+competent ordinary/composed control. Fleet transmission supports the existing assessment of
+task-relevant use of accurate ordinary user prediction after its completed S7 C/M/V study.
+None of these three assessments selects a successor experiment.
 Detailed idea discovery and independent challenge use cumulative records, all three libraries
 and load-bearing primary passages. Helpers are not extra DMs; source/support work is real cost.
 Actual resource admission applies, capacity supplies no scientific premise, and Claude's
@@ -2436,81 +2438,55 @@ The [complete original Oracle question, recommendation and source coverage](http
 are published separately from Root's disposition; selection advice is not a new empirical result.
 
 <a id="mixed-controller-response-selected-20261001"></a>
-**Selected: can replacing one UAV controller improve cooperation with autonomous mixed teammates?**
-Root read the complete original Astra Max recommendation, source/price/corrections at
-bf3527fcb, controller_composition B03's full recorded outcome/decision and the primary FCP
-method. It selects one four-fit study for the same fleet-adaptation DM. Both learned arms
-receive the same mixed-partner distribution: this is not another mixed-versus-fixed exposure
-comparison. Prior B03 mixed-response losses in both new blocks and its real own-learning
-positives remain load-bearing. Sparse historical peer exposure and the11-22support-hour bill
-make opportunity uncertain. The purchase can change a concrete finite capability judgment;
-it claims no new algorithm, general ad-hoc teaming, unseen policy family or memory necessity.
+**Mixed-teammate B09 complete: retain competence; end the bounded response-head purchase.**
+Root read the complete native result, full original independent ResearchCritic answer, DM
+resolution and measured cleanup. Four fits completed 2,560 H256 episodes/655,360 native steps,
+with the complete physical/policy/learning-state reader verified. All four block-by-roster
+H-F J intervals cross zero: block0 T+.000113/X-.000857; block1 T-.001199/X+.002052.
+World intervals condition on the fitted endpoints; two response-training blocks share P0.
+All eight learned-endpoint/Bstar mean J differences are adverse and unresolved. No endpoint
+establishes a positive J increment over unchanged P0; all X means are adverse. Gains over
+C on T preserve competence but do not establish the requested complete upgrade.
 
-Keep N5/U50/all-ON/H256, original SINR3/free-space/capacity10,27-command/four-tick control.
-Only slot0 learns. Each responsive teammate retains its private observation/nav/cache/hold;
-immutable weights may be shared, private state and trainable objects may not. Training roster
-T={C,C,P0,P0}; final-only X={G,G,P1,P1}, with P1 the retained second Student lineage. Uniformly
-choose one of six assignments to slots1-4 each episode using a separately addressed domain,
-paired across programs and fixed within the episode. Related known ingredients make X a
-training-excluded composition, not a new partner family. No IDs/law labels/peer commands or
-observations/global truth reach the actor; no new physical capability, joins, radio control
-or communication right. S2's stronger shared control has different rights and remains visible
-as a separate alternative, not a same-interface focal controller or duplicated study.
+H0-F0 saves195.353m/UAV on T and134.093m on X with negative descriptive intervals; H1 does
+not reproduce that difference. H0-P0 travel is-5.327/+28.649m and unresolved. Preserve this
+conditional fitted-program result, all large favorable/adverse worlds and the seven final
+one-tick zero-service episodes, which also include P0. No energy saving, useful service
+preservation, preferred training block or automatic deployment rule follows.
 
-F/H share original114 features, frozen P0 second-ReLU128 and public t/256. Append16 current-
-peer-rank coordinates: clipped dx/dy/dz divided by30 and valid bit; F zeros these coordinates.
-Both zero-init259-to27 linear heads have7020parameters and logits P0+.5*tanh(head), using
-the original flat FP64 decoder. Original feature/hidden scales stay fixed, with no fitted
-normalizer. H uses the existing consecutive-tick mutually unique anonymous match and its
-componentwise30.001m/.001m gates; no identity persists through disappearance. Factor tracker
-work without an unused V/R planner. History outputs cannot use a current-row-only cache or
-survive updates. Equal shape is not equal effective information or optimization. Exact
-zero-head P0-law agreement is checked before treating P0 as the common initialization control.
+All heads and critics moved and every declared update completed. History is sparse rather
+than absent, but zeroing its coordinates in all16,384 saved final H contexts changes zero
+modes, sampled categories or physical commands under the same innovations. Small probability
+changes remain. Thus H0's travel result cannot be credited to decisive executed history
+responses on this panel; learning-time effects on other coefficients remain possible.
+This is observed-context sensitivity, not a native ablation, expected-value or mediation
+result. The bounded residual cannot reproduce every stronger stochastic reference, a real
+scope limit rather than evidence that widening it would help. Current-information sufficiency,
+general response unlearnability and a common cause of earlier losses remain unestablished.
 
-Two independent response-training blocks each contain F/H,256complete episodes/fit. Within
-block pair worlds, assignments, initial head/critic and action innovations, while collecting
-each actual policy's histories; both blocks inherit the same P0. Use128two-episode groups,
-four epochs, complete suffix macro-return/256, terminal bootstrap0, a fresh136-input critic
-and B04 optimizer/clipping/advantage conventions, explicitly adapting the loss to ego only.
-No B05 offline fitter or unchanged five-actor loss. Actor receives no privileged critic input;
-fixed partners and trunk remain detached. The16384ego decisions/fit are exploratory exposure,
-not convergence evidence. Freeze exact source/addresses/loss/schema before queries; no endpoint
-selection from intermediate checkpoints.
+Root adopts the exact stop with no additional fits, worlds, partners, visibility, residual
+retuning or confirmation. Retain P0/P1, all ordinary alternatives, fitted assets and signed
+outcomes. Enclosing execution/readback cost3027.478CPU-s/3047.324wall-s; peak process RSS
+716,940KiB. Canonical evidence uses1,354,358,784allocated bytes. Additional engineering,
+staging, final writing and support remain separately incurred. Measured disposable-target
+reclamation is1,093,632bytes; the additionally deleted source snapshot was not measured
+before deletion and earns no numerical credit. No cleanup target or consumer remains.
 
-All4 endpoints and C/Q10/G/V/R/P0/Bstar0/Hdirect are evaluated on32fresh common worlds,
-2tapes and both rosters:1536final plus1024training episodes, **4fits/2560episodes/655360native
-steps**. V/R ingest primitive observations; deterministic egos still have stochastic partners.
-Primary H-F is read separately for each block/roster, averaging tapes within world. Preserve
-all endpoint-P0/control comparisons, absolute J/service/quality, tails/minima/outages/travel,
-all signed world vectors and descriptive paired-world intervals. Worlds are not training
-replicates. Useful F with no H increment retains current-context learning; H-F alone cannot
-establish a useful upgrade over competent controls. T-only or block-specific gains, sparse
-sensitivity and active losses retain their scope. No automatic fit, new seeds/partners,
-visibility increase, sweep, confirmation or deployment tolerance follows any outcome.
-
-Full reader reconstructs657920states/3289600rows/177638400scalar radio links and each actual
-policy/nav/cache/tracker/tape/roster. Retain all512precollection head and critic states plus
-finals, replay early policies and65536critic rows, and check targets/advantages/update ledgers;
-no optimizer replay. Separately priced16384final H history-zero head calls from saved inputs
-and the same innovation measure action-law sensitivity, not deployed ablation value. Total
-collection/update/reader work is475136head and393216critic rows. All training curves and
-physical actions remain read, not merely the final descriptor or network hashes.
-
-Worker ceilings include450560frozen forwards,442368helpers,376832C rankings/10174464candidate
-paths/40697856modeled ticks,565248motion draws plus separately counted roster draws,262144
-tracker ingests/4177920pair gates. Reader repeats applicable policy work; the head and critic
-each perform2048optimizer steps over262144replay rows in total. Exact full link/query/storage arithmetic is in
-the source appendix. Forecast .5-2worker CPUh plus.5-2reader CPUh, .5-1.5GiB streaming RSS,
-4-5GB uncompressed array evidence and11-22support hours; source/selection effort is additional.
-These are estimates, not reservations or elapsed-time guarantees. Compression, allocated
-storage, snapshots/transfers and actual constructor/correctness-check work remain separately
-charged. Bind proportionate finite checks before exposure, including any extra native/model
-calls; no performance pilot. Actual-node admission and independent engineering review cover
-ego optimization, private-state/RNG boundaries and complete reading. Keep one canonical
-necessary evidence copy and measure actual net cleanup. No other accepted operation moves.
-[Full source/price and descriptor/reader corrections](candidates/uav_fleet_adaptation/NOTES.md#post-b08-partner-heterogeneity-source-facts),
-[closest predecessor and all outcomes](candidates/controller_composition/NOTES.md#2026-09-25--b03-complete-partner3-gain-does-not-recur-both-new-mixed-responders-trail-f2),
-[FCP's existing frozen-partner response method, sections2.1-2.4](https://proceedings.neurips.cc/paper_files/paper/2021/file/797134c3e42371bb4979a462eb2f042a-Paper.pdf).
+**Next allocation is source/feasibility only.** The same DM and independent Astra Max Oracle
+assess whether jointly learning decentralized motion and transmission has a consequential
+complete comparison against competent same-information ordinary/composed control, or is
+already answered/unpromising from project evidence. B08's conditional learned-gate positive
+is constructive evidence, while its stronger-control uncertainty and all previous joint/
+development adverses constrain the proposal. This does not select a learner, architecture,
+extra actor right or changed host, and it does not diagnose B09's failure. Check July,
+external reviews and all three libraries; read primary passages and obtain one bounded
+source/complete-price response after narrowing. No new native/model/controller/allocator
+query, saved-outcome reduction, implementation, prototype, test, benchmark or fit is selected.
+The parent capability-use assessment, S7 prediction-use assessment and RF study remain distinct.
+[Complete result](candidates/uav_fleet_adaptation/NOTES.md#b09-complete-reading),
+[original independent diagnosis and DM resolution](https://github.com/CartmanFatass/My-paper-code/blob/71af384c3176ecc8976579b4442d00b2cafe69c5/docs/research/candidates/uav_fleet_adaptation/NOTES.md#b09-independent-disposition),
+[measured closure](candidates/uav_fleet_adaptation/NOTES.md#b09-final-cleanup),
+[retired full selection and prospective bill](archive/2026-10-01/RESEARCH-mixed-controller-response-completion.md#retired-mixed-controller-response-selection).
 
 <a id="anonymous-user-tracking-selected-20261001"></a>
 **C/M/V complete: retain accurate ordinary prediction; end this control-package purchase.**
@@ -2575,100 +2551,57 @@ Other accepted studies and paused directions retain their ownership and scope.
 [retired full selection and prospective bill](archive/2026-10-01/RESEARCH-anonymous-tracking-completion.md#retired-anonymous-user-tracking-selection).
 
 <a id="managed-proposal-learning-selected-20261001"></a>
-**Selected: develop local motion proposals under the actual S2 execution contract.** Root read
-both complete original Astra Max recommendations, their original source exchanges and the
-single full fleet-DM price at e80cb994f0. One revised study belongs to the existing parent DM;
-there is no second fleet study or required review consensus. It replaces the unexecuted
-paired-label proposal for current investment, retaining that proposal's full historical scope.
+**Actual-S2 B09 complete: retain a lower-travel asset; end this development purchase.**
+Root read the full native result, complete original independent ResearchCritic recommendation,
+DM response and measured cleanup. Corrected A02 completed two head/critic systems,1,024 H256
+episodes/262,144 native steps and the declared full reader. The A01 technical failure remains
+one separate started fit attempt with two native steps and zero updates; it is not a negative
+scientific outcome. All nine levels,36 contrasts,40 metrics and signed world/tape rows remain.
 
-The constructive question is whether a bounded contextual head can improve complete native
-consequences when S2 actually changes masks and delivered motion, beyond global calibration,
-retained transfers and competent ordinary control. Old S_S2−C_S2 J is −.004497 and service
-−.349, with shorter S paths; stronger C_T2 gains further service at greater compute cost.
-Native mask/visibility/override histories differ from all-on collection. This supplies a
-meaningful learning comparison, not demonstrated headroom or a diagnosed visitation repair.
-Prior full-actor, contextual-head, count, target and ranker adverses lower the expectation of
-success. Retained learning positives and ordinary capabilities remain part of the decision.
+CONT-CAL J is+.000094[t31-.005340,+.005528], CONT-S-.000550[-.005529,+.004429],
+and CAL-S-.000644[-.001805,+.000517]. The primary positive prediction is unestablished;
+one fitted realization per arm supplies neither training-population precision nor equivalence.
+CONT's path reduction is substantive: -555.084m/UAV versus CAL and-596.464m versus S,
+with negative descriptive intervals and shorter travel in27/32 worlds. The latter is about
+15.8% of S's mean. CONT-S service is-.088989 with an interval crossing zero; substantial
+adverse service worlds and tail losses remain. Distance is not measured energy and no
+service-preservation margin or deployment utility was selected.
 
-Freeze original L0 S, SHA256 b9e25fca68109bb50fa64fadfc90939ad6a4669058c1c0ccd1351c8bbcefe12a,
-and train the existing zero-initialized CAL(28) and CONT(3,483) bounded .5*tanh logit heads.
-Each actor–critic system receives 256 full H256 training episodes: 256 fresh common worlds,
-one indexed I tape per world, identical two-episode groups/order and matched fresh critic
-initialization. Use the retained four-epoch PPO law, native suffix returns/H256, normalized
-team advantages, sum-over-agent surrogate, .8–1.2 ratio clipping, Adam3e−4 and gradientclip.5;
-there is no entropy or KL term. Final checkpoints only. Immutable hidden/logit caching avoids
-655,360 otherwise additional backbone passes, with all rollout-group head identities retained.
+Ordinary C_S2 has+.006204J[+.000097,+.012310] and+.611816users/tick versus CONT, at
+3.601 versus3.567complete CPU-s/episode, while travelling1363.672m more and having a lower
+mean episode minimum. This is no uniform dominance. C_T2-C_S2 J+.000652 is unresolved
+while adding28.117CPU-s/episode; stronger search does not guarantee greater native value.
+S-Q J+.006528[+.002184,+.010872] preserves inherited capability. CONT's J increments over
+paid CAL_all, CONT_all and Bstar also remain unresolved, despite shorter travel.
 
-Actors retain only 103 local observation entries, ten navigation entries and the fallback bit.
-All five distributions precede current private innovations; preserve B05's two-integer I decoder.
-S2 retains its rounded 400-byte map, five24-byte reports, 136-byte round, original search/ties/
-rotation, two-tick delivery, four-tick commitment and1.456s deadline including actor/head work.
-The learned action is the pre-S2 proposal, including overridden, aliased and zero-effect choices.
-Startup, prior-command prefix, late fallback and last two-tick delivery stay in native returns.
-No map, mask, other proposal, clock or delivered-command input is added to the local actor.
+Learning was active: both heads/critics moved,512 steps per network completed, and CONT
+changes commands/positions/masks in all64 paired final episodes. Fewer requested departures
+and physical command changes are consistent with greater persistence, without identifying
+contextual necessity or an optimizer/representation/visitation cause. All1,024 episodes meet
+their deadlines. The final10 zero-service episodes/12 ticks occur at startup in one world;
+this supplies no individual-continuity guarantee. Root adopts the bounded stop without extra
+fits, epochs, critics, worlds, automatic replication or an invented travel objective.
 
-The training-only 186-input MC critic uses normalized native116, delivered commands15, mask5
-and pre-query navigation50. Capture it before current queries/navigation/startup assignment;
-no delivery is pending at report boundaries. Its128–128tanh network has40,577 parameters.
-Meter it outside the deployed timer while charging all development CPU. This is an action-
-independent finite baseline, not an exact physical/hardware Markov certificate. Nominal policy
-scores can credit proposals through a fixed coordinator without differentiating its search;
-finite-bit decoding, joint shared-head updates and actual timing limit that bridge. Neither
-clipping nor bounded offsets guarantees trajectory-value retention.
-[Sutton1999 §§1/3](https://proceedings.neurips.cc/paper/1999/file/464d828b85b0bed98e80ade0a5c43b0f-Paper.pdf),
-[PPO §§2–3](https://arxiv.org/pdf/1707.06347),
-[P16/HATRPO §§2.3–3.2](https://arxiv.org/html/2109.11251).
+A02 worker plus reader cost4814.172CPU-s, with updates only62.500CPU-s nested inside it;
+RSS peaks605,596/715,516KiB are separate process measurements. Collection retains all1,550
+original files/744,998,114logical bytes at the canonical local run. A01 and support remain
+additional. After charging canonical local growth, net allocated reclamation is
+1,634,500,608bytes plus225,280cache bytes; required remote compact witnesses remain.
+Both snapshots and unused staging/scratch are absent, with no live consumer or blocker.
 
-The complete final panel has 32 disjoint fresh worlds: C_S2/C_T2 once each; Q/S/newCAL/newCONT/
-fixedCAL_all→S2/fixedCONT_all→S2/paidB*=S_T2→S2 twice each. This is **512 training +512 final
-H256 episodes/262,144 native steps/2 actor–critic fits**, with320 unique I tapes/288 maps and
-all1024 episode resets/provisions paid. Freeze unused RNG domains/identities, ordering and
-uncertainty before exposure. Primary is CONT_S2−CAL_S2 mean J; CONT−S and CAL−S distinguish
-useful development from merely less damage. Read all ordinary/transfer comparisons, service/
-quality/height/path/CPU/masks/deadlines/p10/minima/outages and adverse worlds. Average tapes
-inside32 world clusters. One training realization per arm remains exploratory; team tails
-supply no individual-user protection. Equal budgets do not mean equal on-policy histories,
-and comparisons with transferred heads also change estimator/exposure: no pure S2-data cause.
-
-Complete work includes32,768 MC return targets but0 extra paired/expert labels or calibration
-searches;1,024 head plus1,024 critic updates,655,360 head gradient rows and131,072 critic replay
-rows. Local requests total327,680, including286,720 learned/helper/backbone rows and40,960 C/Q
-rankings. C pays1,105,920 paths/4,423,680 modeled ticks. S2/T2 pay7,364,608/1,714,176 score
-requests; coordinator geometry totals7,022,592 matrices/1,755,648,000 user links. Communication
-ceiling is8,912,896 recurring bytes plus409,600 provisioned-map bytes;614,400 private integers
-are read. The full original bill retains helper/native/refresh/link/initialization ceilings.
-
-The reader checks every trajectory/source/asset/report/arrival/native outcome and all saved
-search arithmetic:328,704 formula states, the declared≤1,300,480 independent candidate-state
-reductions, full286,720 backbone/helper rows and all fitted/transferred heads/B* transforms.
-It retains all256 group identities and critic input/target/provenance/count/movement checks;
-no native/full-C/optimizer replay or exhaustive unselected candidate physics is claimed.
-Estimated cost is **70–120 worker +15–40 reader CPU minutes/5–9 support hours**, .5–1.5GiB
-streaming RSS, .5–1.5GB durable evidence and~1.7GB temporary source snapshot. The3844.665CPU-s
-point extrapolation precedes new updates/serialization and is not a benchmark. Full training
-hidden/logit payload is101,580,800 uncompressed bytes. Admission remains actual-node specific;
-B08's N8 reuse and old failed/acquisition work are neither a discount nor erased sunk costs.
-
-A useful CONT increment beyond CAL/S and available assets can justify pricing further
-independent training; useful CAL or transfers retain their simpler capability. An S-relative
-gain with an ordinary-controller tradeoff remains conditional. Active adverse or unresolved
-results close this fixed program without automatic epochs, new heads/critics or extra worlds.
-No all-on factorial, transfer prerequisite, population claim, novelty claim or default adoption
-is selected. The unchanged transfer-only alternative remains384 episodes/98,304steps/0fits,
-30–60 worker+10–25 reader CPU minutes/3–6 support hours; it does not answer new development.
-[Owning notebook](candidates/uav_parent_adaptation/NOTES.md),
-[complete original source/price exchange](candidates/uav_fleet_transmission/NOTES.md#post-b07-s2-source-facts),
-[retired paired-label reserve and its original full-source links](archive/2026-10-01/RESEARCH-paired-label-s2-reserve-supersession.md#retired-reserve-paragraph).
-
-The earlier G_E/A_E option-completion timing proposal remains declined at its documented
-knowledge/cost boundary. Root corrected the initial wording of the parent source question
-when it overlapped that exact proposal; the selected exact-economy study preserves A2 timing.
-A completed ranker failure does not reopen the declined proposal. The
-[original full review and decision](archive/2026-09-30/RESEARCH-n8-next-allocation.md) remain the
-basis for this limit. The separate [duration/roster review](archive/2026-09-30/RESEARCH-duration-roster-allocation.md)
-also remains applicable; neither review permanently forbids a substantively different question.
-DMs own implementation, review, admission, full interpretation, publication and cleanup without
-per-step Root acknowledgment. Root owns the cross-question investment choices recorded here.
+**Next allocation is source/feasibility only.** An independent Astra Max Oracle assesses
+whether a consequential capability/use question deserves another purchase, including the
+retained lower-travel point versus a simple global movement/persistence explanation, or
+whether immediate investment should stop. Its one ordinary-comparator source/price request
+is not a selected travel study, utility, replication or repair. The broader native-learning
+question remains open; the same DM supplies read-only source/algebra/feasibility support.
+Use complete project positives/adverses, July/external reviews and primary passages from
+all three libraries. No new native/model/controller/allocator query, saved-outcome reduction,
+prototype, implementation, test, benchmark or fit is selected by this assessment.
+[Complete result](candidates/uav_parent_adaptation/NOTES.md#b09-complete-reading),
+[original independent recommendation and DM response](candidates/uav_parent_adaptation/NOTES.md#b09-independent-disposition),
+[measured closure](candidates/uav_parent_adaptation/NOTES.md#b09-final-cleanup),
+[retired full selection and prospective bill](archive/2026-10-01/RESEARCH-managed-proposal-learning-completion.md#retired-managed-proposal-learning-selection).
 
 <a id="stochastic-target-source-root-question-20261001"></a>
 <a id="stochastic-target-selected-root-decision-20261001"></a>
@@ -2958,9 +2891,11 @@ complete on configured local execution. The economy timing includes waiting's wo
 on October1; all those accepted identities have ended. Keep actual boundary samples and
 interleaving in the reading, without an isolated-speed claim or rerun. Cap-two's new worker
 and reader completed on the configured remote node. Anonymous-tracking B08 has also completed
-its recorded remote execution/readback and snapshot cleanup. Managed-proposal, mixed-controller
-and RF-uncertainty work use configured node preference, current feasibility and fresh actual-node
-admission; the source-only successor assessment reserves no node capacity.
+its recorded remote execution/readback and snapshot cleanup. Managed-proposal B09 has finished
+its remote worker/reader and canonical local collection; mixed-controller B09 has finished its
+local worker/reader. Both accepted operations and cleanup are complete. Selected RF-uncertainty
+work uses configured node preference, current feasibility and fresh actual-node admission;
+the three source-only successor assessments reserve no node capacity.
 This operation-specific placement changes no global runtime configuration and establishes no
 runtime cure. Accepted operations retain their node/identity; new overlap requires fresh
 memory/occupancy evidence, without a standing reservation.
