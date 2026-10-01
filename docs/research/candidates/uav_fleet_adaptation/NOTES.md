@@ -11999,3 +11999,92 @@ only for a genuine shared-path/semantic conflict and return facts, preserving wo
 Root follow-up after selection publication776d7093f explicitly leaves the owned
 RESEARCH exploring update with this DM; the standing is updated here while the
 launch-bound lead remains `Codex DM (native child)`. No extra approval is pending.
+
+
+### B11 implementation checks and applicable allocation review
+
+The complete cross-question Scientific Reviewer answer, independently assigned
+by Root, is preserved at [successor-allocation review](../../archive/2026-10-01/RESEARCH-successor-allocation-review.md)
+(published f1ec9d95e). I read the original answer and Root's separate disposition.
+It reports no material dissent and supports the exact finite B11 comparison,
+while ranking it after the two broader RF/learning purchases if implementation
+support actually conflicts. I accept that qualified allocation: no conflict has
+required a larger or changed B11 purchase. It reiterates30012030 and the five
+zero-command origins, plus the mitigation-versus-complete-value distinction.
+This is advice, not independent empirical replication or a new premise for gain.
+
+Implementer `/root/dm_silence_commitment/implement_b11` owns only the new B11
+source/tests; no Git or notebook changes were delegated. It implemented the
+fixed adapter, P0-only loader, complete collector, independent scalar/policy/
+private-memory reader, event displacement readings and all nine paired contrasts.
+No old B10 driver/shared implementation changed. The DM read all new source and
+checks. Initial review found two pre-execution reporting/integration defects:
+(1) total dense SINR slots excluded separately counted setter refreshes;
+(2) output creation refused the directory that the admission launcher necessarily
+precreates. Both were repaired before any result execution. The latter now allows
+only the five launcher metadata/log names and rejects prior scientific payload.
+Policy error maxima are actually measured, rather than labeled zero without
+recording tolerated numeric differences. Origin/clock/agent/nav/category corruption
+checks and actual clipped event displacement are included, without shadow C.
+
+Finite correctness exposure, two revisions: first invocation39passed/1accounting
+failure,4.92s pytest wall; fixture2.351072wall/2.329129CPU-s. Second invocation55passed,
+4.86s pytest wall; fixture2.844020wall/2.841034CPU-s. Each invocation has exactly
+12fakeH24 episodes/288fake transitions,372worker scalar states and372full-reader
+states,360policy rows/pass,119fabricated P0 forwards/pass,36OFF scores/pass,
+2memory creates/2consumptions per pass. First corruption support adds1reader
+state. Revised corruption checks add131partial reader scalar states,151reference
+policy requests,3267C paths/13068modeled ticks and30OFF scores; no extra P0
+forwards. Total576fake transitions,0native result steps/0fits. These clocks are
+fixture scope; pytest/import and other support remain additional. Tests use
+pytest-managed scratch and are not favorable native evidence.
+
+The new source is now stable for registered independent engineering review
+`/root/dm_silence_commitment/review_b11` in a separate context. This is an actual
+high-risk executable check, separate from scientific selection and result reading.
+The configured remote canonical controls were reconciled by Root: original dirty
+compute/launcher overlays equal published blobs; only current three selected
+rows/pause were synchronized. This DM did not overwrite remote shared controls.
+The exact original P0 file hash was rechecked read-only; no B11 result launch
+has yet occurred.
+
+
+### B11 independent engineering acceptance and execution inputs
+
+The Implementer's exact command for both recorded invocations was
+`PATH=/home/fires/.venvs/hmasd-linux-cpu/bin:$PATH /home/fires/.venvs/hmasd-linux-cpu/bin/python -m pytest -q -s tests/experiments/candidates/uav_fleet_adaptation/b11_silence_commitment`.
+Each full fake pass pays8964C paths/35856modeled ticks; per-pipeline compressed
+raw1066522bytes was pytest scratch and removed. Initial partial corruption work
+adds1C request; all additional revised support counts remain as above. Final
+production P0 loading/native execution were intentionally not run as a pilot.
+Test peak RSS was not instrumented.
+
+Original registered independent engineering Reviewer response, complete:
+
+> No material engineering finding remains. No repairs requested.
+>
+> Reviewed all 12 B11 source files and three test files against the fixed contract, including actual C/Hdirect callers, native adapter/setter, launcher output lifecycle, and independent scalar reader.
+>
+> - KEEP/RETURN retain the correct originating command and navigation; consumption precedes scoring/navigation mutation, requests ON, and occurs once. Terminal pending state is preserved.
+> - Reader memory recurrence derives from observations and independently reconstructed decisions, without trusting candidate flags.
+> - Fixed panel/order, private sampling, P0 identity/freezing, raw integrity, complete counters, nine contrasts, and shared paired-world bootstrap match the contract.
+> - The repaired output-directory handling matches the launcher's five metadata/log filenames.
+>
+> Checks: read the recorded **55-pass** evidence and its bounded exposure; independently parsed all 15 files and verified all five frozen host/C source pins. Added **0 transitions, 0 model queries, 0 fits**; did not rerun the fake pipeline.
+>
+> Residual limit: no native production execution was performed during this review. DM retains acceptance and launch responsibility.
+
+DM acceptance: I read the implementation and checks, including the concrete
+repairs and independent review. The fixed contract is implemented; no further
+code change is selected before the one full production purchase. Scientific
+value remains entirely unmeasured. No material scientific premise changed.
+
+The only staged learned input is
+`wsl_4070:/home/wu/hmasd-inputs/uav_fleet_adaptation/b11_silence_commitment_a01/P0.pt`.
+Both canonical and staged file hash match the prospectively fixed P0 SHA;
+424487logical/425984allocated file bytes,430080allocated bytes including its
+one staging directory. The canonical source remains untouched. Keep this staging
+through all worker/reader consumers; remove it at measured final cleanup.
+The selected output tag is `b11_silence_commitment_a01`. Exact source is published
+by the following owned-path commit before fresh actual-node admission. No result
+has been launched yet and there is no accepted B11 handle to retry or migrate.
