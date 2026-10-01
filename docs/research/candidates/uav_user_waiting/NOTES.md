@@ -3728,3 +3728,88 @@ native DM remains active through complete reading and publishes its own
 disposition/background/standing. New live integration, rule elaboration,
 fresh-world confirmation or learning requires a substantive new choice;
 finishing this replay grants none of them.
+
+<a id="b05-engineering-acceptance"></a>
+### B05 implementation, independent engineering review and launch input contract — 2026-10-01 UTC
+
+The bounded Implementer delivered only its five producer modules and two
+test files; the DM read and accepts that implementation and owns the
+independent reader/CLI/test file. All ten new executable/test files remain
+inside the declared B05 paths. The final combined synthetic suite passed
+**60 tests in1.70s**; the independent engineering Reviewer reran all60 in
+1.42s. These include the complete producer/reader assembly on one synthetic
+H8 world, all nine packages/36 comparisons, contact/gap/source tampering,
+mission reset, handoff-local memory, input truncation, partial-law failure,
+and admission before scientific effects. The test-only reduced assembly
+uses pytest dependency injection; the production CLI exposes only the
+fixed64-world/H256 contract. Synthetic allocator arithmetic and repeated
+test/support work are additional incompletely metered support, not part of
+the result exposure. All new native, environment, C/model and fit/update
+counts are still zero; no production raw arrays have been consumed by B05.
+
+The reviewed implementation makes these equivalent mechanical choices:
+
+- RR sorts current eligible IDs by cyclic distance from its own cursor.
+  This yields the same ordered grants and next cursor as the prescribed
+  ascending modulo50 scan; there is no new policy or data access.
+- The producer calls the frozen original greedy kernel49,152 times and
+  each fair local selector245,760 times. The independent reader uses
+ 245,760 separate per-UAV original sorts after checking disjoint eligibility,
+  rather than importing that kernel as its proof; it also repeats both fair
+  laws. The conceptual294,912 fleet/1,474,560 UAV decisions and14,745,600
+  user-tick age updates across both passes are unchanged. The producer
+  makes two full threshold scans per tick; the reader shares one across its
+  three independently reconstructed laws. Thus the implemented complete
+  bill is36,864,000 threshold entries, within the declared49,152,000 bound.
+- Fourteen frozen source files are checked, including the originally
+  identified causal paths plus B02 protocol/predictor/collector dependencies.
+  None of the old environment, controller, scheduler or predictor is
+  instantiated. Full gap/censor/exclusion records are streamed to192
+  per-trace JSON files; the summary keeps scalar endpoints and per-user
+  vectors. Each trace has one NPZ containing its two fair contact streams,
+  with source and completed-prefix identities. Original raw data stay in
+  their existing canonical location.
+
+The Reviewer found one material failure-accounting defect: a rejected
+trace's independently measured allocation time was dropped because only
+successfully returned trace timings were summed. The DM accepted and
+fixed it with an accumulator updated during every measured selector.
+The full assembly regression now rehashes a corrupted gap record and
+checks that the failed first trace retains24 paid fleet allocations and
+all three nonzero selector CPU readings in `reading.json`, while reporting
+zero verified traces. Original/fair outcome counts and measured work are
+separate. The Reviewer's focused return found no remaining material issue;
+the reviewed ten-file aggregate SHA256 (sorted relative path, NUL, binary
+file digest) is`eb71831c60ea0f561a7ae8461bece84196518062f0c02589523aa529006ba7a3`.
+Full192-input verification, actual node resources and any scientific
+outcomes remain unexecuted, so synthetic checks supply none of those claims.
+
+**External inputs under immutable launcher snapshots.** Inspection of
+`scripts/hmasd_launch.py` shows that the maintained `--generic-summary`
+argument preserves a canonical data path while ordinary absolute
+author-root arguments are rewritten into the source snapshot. B05 adopts
+that supported route with its own declared hash contract, without changing
+the shared launcher, creating filesystem aliases or copying bulk data:
+
+- Producer `b05/run.py` receives the canonical B04 `summary.json` through
+  `--generic-summary` and its fixed49754e61…c47 digest through
+  `--generic-summary-sha256`. After admission it checks that digest, derives
+  the already-declared sibling `b04_service_floor_read_a01/reading.json`,
+  verifies its fixed69787803…9513 digest, and checks frozen code in its own
+  immutable source `ROOT`.
+- Reader `b05/read.py` receives the new canonical B05 `summary.json` through
+  the same path/hash arguments plus the producer's exact launch SHA. After
+  admission and worker digest validation, the original B04 summary/reader
+  paths come from that bound worker config; its own immutable `ROOT` must
+  still match the frozen code identities. No source or data path is inferred
+  from a lost observer, alternate task or unbound filename.
+
+The planned actual-node operations retain the declared producer and reader
+tags, lead `Codex DM (native child)`, configured remote interpreter, published
+source SHA, `--snapshot`, and canonical author-root outputs. Source
+publication and fresh pause/ownership/memory/duplicate admission precede
+execution. The current index still says owner pause lifted and this lead's
+direction exploring. No retry, pilot, live integration or science revision
+has been added by these implementation corrections. Runtime resource
+fields are measured at final record assembly; final JSON serialization,
+Python teardown and external support are not claimed as zero cost.
