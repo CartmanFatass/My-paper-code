@@ -1,0 +1,152 @@
+{
+  "admission": {
+    "accepted_at_epoch": 1790814203.585582,
+    "child_pid": 1178528,
+    "command_sha256": "89217937c49400948cdcb7ac4f0206dd04a303d77d6f22aabed5b4c78c8191ba",
+    "direction": "uav_fleet_transmission",
+    "parent_pid": 1178527,
+    "schema_version": 1,
+    "sha": "54c57af8d2e3860f25a278850055a6aa020e5beb"
+  },
+  "aliases": {
+    "Bstar_L1": "S_L1"
+  },
+  "assets": [
+    {
+      "bytes": 424487,
+      "inherited_optimizer_loaded": false,
+      "launch_sha": "e945483b85c7f8ddfc315c57f36938d6c14201c7",
+      "lineage": 0,
+      "parameters": 34715,
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b02_inheritance_a01/assets/S.pt",
+      "sha256": "b9e25fca68109bb50fa64fadfc90939ad6a4669058c1c0ccd1351c8bbcefe12a",
+      "state_sha256": "6fa2eddc542d8f5293f5daf6a989b97a9d7d5f56f484f1eb6bddc6a87d27de0c"
+    },
+    {
+      "bytes": 424487,
+      "inherited_optimizer_loaded": false,
+      "launch_sha": "4909c9553300a4a4de6eb79476e818d7b1ceab53",
+      "lineage": 1,
+      "parameters": 34715,
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b03_inheritance_recurrence_a01/assets/S.pt",
+      "sha256": "cb67a3d46fe9628e1dfef1ef081b89091a13fde3a92295fe198f27555c67364d",
+      "state_sha256": "c6286dd32097d37b2c2c3039e487a24b756398e3ddffa9dc9e1ec3ef66170699"
+    }
+  ],
+  "calibration": {
+    "evidence_commit": "978c622c37207067dd673247cf6729d786383304",
+    "launch_sha": "98307b0c5cb6e42763458d780568d105d3f631af",
+    "new_calibrations": 0,
+    "reading_path": "runs/uav_fleet_adaptation/b04_native_development_a01/reading.json",
+    "reading_sha256": "93c681eba38f8fcd7fd9059eb9eaa75142771d085bf645e831099bed63b25a50",
+    "winners": [
+      "S_T2",
+      "S_T1"
+    ]
+  },
+  "expected": {
+    "calibrations": 0,
+    "complete_episodes": 416,
+    "constructor_resets": 1,
+    "explicit_resets": 416,
+    "fits": 0,
+    "labels": 0,
+    "native_step_calls": 106496,
+    "native_steps": 106496,
+    "optimizer_updates": 0,
+    "ordinary_queries": 71680,
+    "sampled_draws": 122880,
+    "score_tail_evaluations": 20480,
+    "student_queries": 61440,
+    "training_native_steps": 0
+  },
+  "launch_sha": "54c57af8d2e3860f25a278850055a6aa020e5beb",
+  "object": "UAV-SCORE-SAMPLING-B05",
+  "precision": "CPU 1 thread, FP32 actor/commands; FP64 scores/decoder/native coordinates",
+  "protocol": {
+    "actor_constructor_seeds": [
+      29630111,
+      29630112
+    ],
+    "bootstrap_resamples": 10000,
+    "bootstrap_seed": 29630191,
+    "horizon": 256,
+    "sampling_roots": [
+      29630101,
+      29630102
+    ],
+    "worlds": [
+      29630000,
+      29630001,
+      29630002,
+      29630003,
+      29630004,
+      29630005,
+      29630006,
+      29630007,
+      29630008,
+      29630009,
+      29630010,
+      29630011,
+      29630012,
+      29630013,
+      29630014,
+      29630015,
+      29630016,
+      29630017,
+      29630018,
+      29630019,
+      29630020,
+      29630021,
+      29630022,
+      29630023,
+      29630024,
+      29630025,
+      29630026,
+      29630027,
+      29630028,
+      29630029,
+      29630030,
+      29630031
+    ]
+  },
+  "runtime": {
+    "deterministic_algorithms": true,
+    "numpy": "1.26.3",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "python": "3.10.21",
+    "torch": "2.7.0+cu118",
+    "torch_interop_threads": 1,
+    "torch_threads": 1
+  },
+  "scientific_invocation": true,
+  "source_identities": {
+    "envs/pettingzoo/env_adapter.py": "8b42c1c3e7ef44cb814f79225b4af944b1018ad764dfeb17e9e1cc294df79d40",
+    "envs/pettingzoo/uav_env.py": "fb67554cf911adc9d3260a2a7f16d1773921c295646cb46beb4ba1247fec599e",
+    "experiments/candidates/uav_fleet_adaptation/b02/__init__.py": "acb5ecf84dabf7c006af3c2658d6ee8ef587cf3338d15898df75011c4c0a0970",
+    "experiments/candidates/uav_fleet_adaptation/b02/collect.py": "62a691a3d2b3e0579b84aca73b64fe61cdc11aee64ac2bd2d298db6ba59b44ef",
+    "experiments/candidates/uav_fleet_adaptation/b02/contract.py": "4f312ecbbe653c1d00632be4cd2f1ea6d48f7f98ce50eb28cf405f06e9fbe1a3",
+    "experiments/candidates/uav_fleet_adaptation/b02/controllers.py": "a2bbbdb877bd988590472a41c336d934a0431b5c560c7e80225cbb630fc3d522",
+    "experiments/candidates/uav_fleet_adaptation/b02/model.py": "c9b95b6718262c65591ed106ca81da0abb15b48ef6a8439438618365efc39934",
+    "experiments/candidates/uav_fleet_adaptation/b02/policies.py": "fba732164b07d80fc2f901e6545e6ca281c7db39cd89f9e61cc49bdb40ba4efd",
+    "experiments/candidates/uav_fleet_adaptation/b02/read.py": "6d07435ebeac57ace0a8696d69b1ff5f97cd4e3a15dc5f7486793ce6ba9ab336",
+    "experiments/candidates/uav_fleet_adaptation/b02/reading.py": "e70428557b90fb58fbe45ecdb832c1678328799b4382add92d47389a06e518a0",
+    "experiments/candidates/uav_fleet_adaptation/b02/run.py": "7e84a11c2c7e15ada65f0f050917864b40adc1cbb5c62ded943d1d6109a0e7aa",
+    "experiments/candidates/uav_fleet_adaptation/b02/study.py": "ed564b337e3d3f80cc96e50ec7b72c92f910014a31678143d6fc85bb905bef4d",
+    "experiments/candidates/uav_fleet_adaptation/b04_native_development/contract.py": "55155fbc690fc7030978849e3c6e8052745ad9f2bd0efe4fe188c4852ea9de36",
+    "experiments/candidates/uav_fleet_transmission/b05_score_sampling/__init__.py": "3c02b8ff4fc28f2fae70cb815d89fc58a180537d172899316da5c8a81a1f388f",
+    "experiments/candidates/uav_fleet_transmission/b05_score_sampling/assets.py": "0335d86dbff4461baf66bfa4d266d0bcb21cb2807c203209cea4ccf5378f78f0",
+    "experiments/candidates/uav_fleet_transmission/b05_score_sampling/collect.py": "d5b0fd092eab4ef10c617aee2622a97c14c6af178fedf22f277f27599478b044",
+    "experiments/candidates/uav_fleet_transmission/b05_score_sampling/contract.py": "f3bf864008424b22968a32ec82021e3572adf45c3dc69918d1b4b70378109d8f",
+    "experiments/candidates/uav_fleet_transmission/b05_score_sampling/policies.py": "b6a018614df3ee4e32d41d6fd5550850deb8bfe0ec02cf53b6b5efd1291bb986",
+    "experiments/candidates/uav_fleet_transmission/b05_score_sampling/read.py": "ca68914cc89232e8884952e6acb8ee75e596d9ba8d77da4bddbbad44f52f8da8",
+    "experiments/candidates/uav_fleet_transmission/b05_score_sampling/reading.py": "2729df2fa8735c3cca46007f3a0c46086d68c45da69b26581e3c70e048a8da1e",
+    "experiments/candidates/uav_fleet_transmission/b05_score_sampling/run.py": "b4adb959c55bdc8a72d5a8263e10c5ecf407c7a11bf4f1953ee5acc22011b033",
+    "experiments/candidates/uav_fleet_transmission/b05_score_sampling/study.py": "e5a19dea585b00bf9d8592e3e93d94ff8c1a8682e8edf67fa1032932fc0773b0",
+    "experiments/candidates/uav_local_history/b01/controller.py": "b5fdfbfe2718ee693c9ed1d7aeb8bbb6c5c59964ec6c56c5bb35be8b685f23d2",
+    "experiments/candidates/uav_local_history/b01/study.py": "5fb3a1538a29bc5dd613a49fdd469d351876e8b070794171956a290651cdb8ec",
+    "experiments/candidates/ucope/uav_motion_prefix_b01/environment.py": "fb25e48857cc8531ac9b80f13243ccd6ca88fa5bf2b194a43dffed21c80690e6",
+    "experiments/candidates/ucope/uav_motion_prefix_b01/policy.py": "e324640251d0d025549705ff7541b765e7b96733f422c48ee9c2f5bd07709614"
+  },
+  "timing_scope": "worker entry includes imports and asset loading; component timings are episode-local and disjoint"
+}

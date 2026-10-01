@@ -1,0 +1,76 @@
+{
+  "admission": {
+    "claim_state": "accepted",
+    "state": "accepted"
+  },
+  "artifacts": {
+    "stderr": {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b05_score_sampling_a01/stderr.log",
+      "state": "present"
+    },
+    "stdout": {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b05_score_sampling_a01/stdout.log",
+      "state": "present"
+    },
+    "summary": {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b05_score_sampling_a01/summary.json",
+      "state": "present"
+    }
+  },
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/63c8256fbd8e3e3f05b7e3c8480f267b82ef64e9ab8d7dbfdc1a46c9db52e32e.json",
+  "direction": "uav_fleet_transmission",
+  "execution": {
+    "exit_code": 0,
+    "exit_witness": {
+      "exit_code": 0,
+      "finished_at_epoch": 1790814344.8912065,
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b05_score_sampling_a01/process-exit.json",
+      "state": "valid",
+      "termination": "process_exit"
+    },
+    "runner": {
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 1178528,
+        "session_id": 1178527,
+        "start_ticks": 115687750
+      },
+      "state": "absent"
+    },
+    "state": "exited",
+    "supervisor": {
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 1178527,
+        "session_id": 1178527,
+        "start_ticks": 115687747
+      },
+      "state": "absent"
+    }
+  },
+  "explicit_retry": {
+    "eligible": false,
+    "reasons": [
+      "parent has no consistent terminal nonzero native exit"
+    ],
+    "scientific_authorization": false,
+    "successor_ref": null,
+    "supported": true
+  },
+  "explicit_retry_available": false,
+  "kind": "hmasd_operation_status",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b05_score_sampling_a01/launch-manifest.json",
+  "node": "wsl_4070",
+  "observed_at": "2026-10-01T00:27:35.658685Z",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/63c8256fbd8e3e3f05b7e3c8480f267b82ef64e9ab8d7dbfdc1a46c9db52e32e.json",
+  "output_root": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b05_score_sampling_a01",
+  "record_consistency": {
+    "mismatches": [],
+    "state": "consistent"
+  },
+  "schema_version": 1,
+  "sha": "54c57af8d2e3860f25a278850055a6aa020e5beb",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/3c5fa3efbb72442c9b0325280bde2352"
+}

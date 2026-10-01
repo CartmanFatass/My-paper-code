@@ -3326,3 +3326,140 @@ live matching runner/supervisor identities and consistent records, with0probe er
 request remains under temp/directions/uav_fleet_transmission/b05/observer-request.json.
 The native child stays active with deterministic waiting and same-handle drain/rearm through
 complete reading; queue delivery is not assumed. No outcome prefix has been interpreted.
+
+<a id="b05-complete-reading"></a>
+### 2026-10-01 — B05 complete: conditional score-tail tradeoffs and retained S value
+
+The one accepted worker/full-reader chain exited0 at00:25:44.891UTC; observation returned
+READY at00:26:11UTC with absent original processes and consistent records. Generation16's
+READY event`2f1bdc4477804205a25cca8b`/wake`30f79673-4a70-4ea9-b478-4a677e9547f3`
+was drained, consumed by rearm17, and observation stopped. App queue again explicitly rejected
+native-child delivery(-32600); active deterministic waiting supplied the terminal fact. There
+was no rerun, replacement read, partial panel or additional fit. The unrelated same-node
+waiting-study SIGSEGV reported later at00:27:41 does not change this run's observed exit0 and
+full verification; this successful operation does not diagnose or clear that runtime problem.
+
+[Original complete summary](../../../../runs/uav_fleet_transmission/b05_score_sampling_a01/summary.json),
+[full reading](../../../../runs/uav_fleet_transmission/b05_score_sampling_a01/reading.json),
+[configuration/source bindings](../../../../runs/uav_fleet_transmission/b05_score_sampling_a01/config.json),
+and [native terminal status](../../../../runs/uav_fleet_transmission/b05_score_sampling_a01/launch-status.json)
+are collected byte-identically. All416episodes/106496native transitions are present, with
+0new fits, optimizer updates, training steps, labels or calibrations. Both immutable source
+actors and the paid B* Git blob passed before/after checks. Every original C decision was
+replayed on its actual saved local history; all61440student decision rows received fresh
+one-row actor checks, including deployed cache hits. Full shapes, original scores/service,
+features/navigation, caches, addresses/CDFs/densities, native reductions/motion/clocks,
+paired geometry and all21contrasts passed. The reader added0native steps.
+
+Each stochastic level below averages two tapes within each of32worlds; C has one episode per
+world. Intervals below are the fixed10000-resample paired-world descriptive percentile95%
+intervals, conditional on these two fitted assets. They are neither training replications nor
+an equivalence/adoption rule. All per-tape/per-world observations, signed differences and
+losses remain in the original JSON; no endpoint or metric was selected away.
+
+| Fixed deployed program | Mean J | Service/tick | Service-p10 | Served-user quality | Path m/UAV | Policy-query CPU s/episode | Complete episode CPU s |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| C | .341131 | 20.341431 | 19.078125 | .187836 | 2801.868 | .019046 | .163884 |
+| Q10 | .357544 | 21.570068 | 17.117188 | .185210 | 4074.037 | .097916 | .255717 |
+| Q05 | .360229 | 21.760925 | 17.578125 | .185254 | 3413.453 | .075797 | .227301 |
+| G | .360972 | 21.666443 | 18.507812 | .192139 | 3688.557 | .085962 | .239732 |
+| S_L0/T1 | .374588 | 22.936646 | 19.664062 | .178249 | 3272.185 | .088964 | .245271 |
+| S_L1/T1 = Bstar_L1 | .384403 | 23.534424 | 20.023438 | .183071 | 3421.793 | .091756 | .247024 |
+| Bstar_L0 = S_L0/T2 | .390959 | 24.117432 | 19.492188 | .177715 | 4351.792 | .121701 | .282497 |
+
+**Primary retained-package comparisons.** S_L0−G is J+.013616[−.000949,+.027997],
+21positive/11negative worlds; service+1.270203[+.203368,+2.304039] and p10+1.156250
+[+.039063,+2.242383]. Path is416.372m shorter[−772.845,−53.614], but mean served-user
+quality is−.013889[−.019642,−.008301]. Its mean J advantage over this stronger reference
+remains unresolved, not equivalent. S_L1−G is J+.023431[+.012843,+.033524],27positive/
+5negative; service+1.867981[+1.077617,+2.606001] and p10+1.515625[+.500000,+2.421875].
+Its path point is266.765m shorter but interval[−695.938,+116.712] crosses zero; quality is
+−.009068[−.013615,−.004719]. Both advantages in mean service coexist with quality losses;
+this quality averages only served users and does not identify harm to the same fixed users.
+S_L0/S_L1−Q10 J remains+.017044[+.001261,+.033260]/+.026859[+.015302,+.038930].
+Against Q05, S_L0's J interval also crosses zero; S_L1 is+.024174[+.013635,+.034666].
+These are separate fixed assets, not a pooled new learning result.
+
+**Ordinary-law comparison.** G−Q10 gives J+.003428[−.007610,+.014797] and service+.096375
+[−.715413,+.935858], with18/14J and16/16service signs. The intermediate score weighting
+therefore did not establish a mean native J/service upgrade. It does supply a conditional
+p10/path/quality tradeoff: p10+1.390625[+.648438,+2.156250], quality+.006928
+[+.002847,+.011311], path−385.480m[−595.125,−180.430], and complete CPU−.015985s
+[−.020649,−.011568]. G−Q05 remains unresolved in J(+.000743) and service(−.094482),
+while p10+.929688[+.164063,+1.906250] and quality+.006884 accompany275.104m extra path
+[+19.963,+534.345] and+.012431s complete CPU. Q05 remains a serious lower-path/lower-CPU
+ordinary option. G−C J is+.019841[+.000287,+.039811], but service's interval crosses zero,
+p10 is−.570313 and path+886.689m[+510.287,+1234.997]. There is no ordinary default winner
+priced by J, which excludes travel/compute; deterministic C's much cheaper cache-heavy route
+and every G/Q/C loss remain part of the complete comparison.
+
+**Paid reference and adverse tails.** Bstar_L0−G is J+.029987[+.019919,+.040386],
+service+2.450989[+1.725192,+3.201546], p10+.984375[+.171875,+1.797070], but quality
+−.014424, path+663.235m[+364.725,+961.666] and CPU+.042765s. Bstar_L0−S_L0 improves
+mean J+.016371[+.006474,+.027418] while adding1079.607m/UAV; p10's point is−.171875
+and unresolved. Bstar_L0−S_L1 J+.006555[−.001612,+.015284] does not establish superiority
+and adds930.000m/UAV. Bstar_L1 is exactly S_L1, not an extra episode/asset. Neither paid
+calibration choice becomes a new default from this panel.
+
+All ordinary arms have no total-service-zero tick here. At world29630013 the two S_L0 tapes
+have8/1zero-service ticks, S_L1 has2/7, and Bstar_L0 has1/1. Thus both original students and
+the paid temperature option retain a concrete outage counterexample against G/C/Q; aggregate
+p10 improvement is not reliability or individual-user continuity. Worst world29630011 loses
+.091119J/6.505859service/6.75p10 for S_L0−G, and.057153J/4.287109service/8.75p10 for S_L1−G.
+S_L0−G has9service and10p10-loss worlds; S_L1−G has5service and6p10-loss worlds. G−Q10 has
+14J/16service/5p10-loss worlds, including−.056547J at29630020 and−4.726563service at29630021.
+All21pairwise signed series, extrema, boundaries, fallbacks and zero-displacement readings
+were retained and read; these examples do not replace the complete adverse evidence.
+
+**Intervention exposure and its limit.** On20480actual G decision histories, Q10's same-uniform
+category differs1904times;1845produce different four-tick physical holds/endpoints,59are
+physical aliases. There are350exact all-score ties;0positive float categories lose all53-bit
+grid mass on this realized panel. Mean conditional expected score gain is+.002786660, its
+minimum is0; grid-exact expectation agrees to floating precision. The realized same-history
+score difference averages+.002665725. G departs from C2067times versus2054for the hypothetical
+Q10 at those G histories, with163changed departure events. The actual independently visited
+Q10 episodes have2047departures, a different object. This is genuine decision/physical
+exposure and the predicted proxy improvement, not a sparse-activation failure. The81920saved
+geometric agent ticks use no radio/controller/native shadow and supply no alternative reward.
+Better conditional local scores plus uncertain complete native J/service cannot identify the
+proxy error, joint interference, censoring or exploration mechanism; no causal mediation or
+pure tail-content effect at fixed departure events is claimed.
+
+**Actual cost.** The worker made71680ordinary and61440student requests,122880indexed draws,
+20480score-tail evaluations,416explicit resets plus1constructor reset. Ordinary memo misses
+were37692, charging1,017,684candidate trajectories/4,070,736model ticks,16,819,272candidate
+and169,899setup links. Student misses/one-row forwards were41724; analytic helpers used
+202923setup and378330extreme links. The full reader adds the same C/helper reconstruction
+and61440actor rows, not free validation. Query CPU totals36.583563s, reset.286514s, native
+steps49.541658s and raw compression/hash6.191928s; complete episodes total101.086969s.
+Complete worker entry is103.247538CPU/104.186117wall seconds; reader36.723201CPU/36.697300wall;
+enclosing entry-to-read chain140.041000CPU/140.954939wall seconds, including recorded gaps.
+The shared-process high-water mark is434952KiB, not a sum of per-stage peaks. Native dense
+power slots total29,401,075 including resets. No speed claim extrapolates beyond this host/
+load; G's lower realized CPU than Q10 includes different visited histories and cache misses,
+not a matched-input kernel benchmark. S query CPU is similar to G and remains much above C.
+This study raises the selected B02–B05 inherited-chain exposure to1,794,048steps with8fits/
+2paid calibrations unchanged, and the sum of previously scoped CPU readings to2483.157s;
+other B01/count/parent branches and unmetered engineering/advice remain separate, not erased.
+
+Canonical unique raw evidence stays at wsl_4070:/home/wu/projects/HMASD/runs/uav_fleet_transmission/
+b05_score_sampling_a01/raw/:416files,179862927logical bytes/180719616allocated bytes. Every file
+was rehashed against the original summary during collection. SHA256 of sorted lines
+`relative_path<TAB>bytes<TAB>sha256<NEWLINE>` is
+`2ad9e833a5a7d4772a99157af46ed999539d90ea7edd99e32340d85425c948cf`.
+Local compact config/summary/reading/exit SHA256 values are respectively
+`823f63c6d4581ea1e7d41f628c567a57a699eed3bc3eaf4c3713023c868ac658`,
+`349a2ca0a1ea10924089ecd1482d3c1025367b1ddcc9dcd32e8e008292c4b70b`,
+`91ed776d2234a20c44a6f660d6a7dcc5eaeaab77a0672a1e42ba7587c1897926`,
+`f63bcb790b24dc3257fcd61a3ea1dbab919951abb16521f8b5f5c9b79981fc51`.
+Both original logs are empty. No local raw duplicate was made.
+
+My current reading strengthens the conditional S_L1 package capability beyond this competent
+ordinary G and retains S_L0's service/path capability while weakening a uniform mean-J claim
+for both assets against stronger ordinary controls. G adds a useful ordinary quality/tail/path
+choice, not a clear mean-J/service replacement for Q10/Q05 and not an explanation that absorbs
+all S value. The analytic proxy prediction materialized but did not establish its native mean
+consequence. Representation and possible further learning remain untested by this0fit study;
+prior failed learning increments remain adverse. Independent ResearchCritic is reconstructing
+these original results and prior sources separately; final fixed-law disposition follows that
+reading below. No next experiment, retuning or replication is selected meanwhile.
