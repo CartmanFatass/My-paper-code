@@ -1,0 +1,23 @@
+{
+  "complete_episodes": 768,
+  "counts": {
+    "actor_rows": 0,
+    "analytic_helper_queries": 0,
+    "calibrations": 0,
+    "complete_episodes": 768,
+    "constructor_resets": 1,
+    "explicit_resets": 768,
+    "fits": 0,
+    "labels": 0,
+    "native_step_calls": 196608,
+    "native_steps": 196608,
+    "optimizer_updates": 0,
+    "ordinary_queries": 245760,
+    "sampled_draws": 163840,
+    "schedule_checks": 983040,
+    "score_tail_evaluations": 0,
+    "student_queries": 0,
+    "training_native_steps": 0
+  },
+  "state": "COMPLETE"
+}

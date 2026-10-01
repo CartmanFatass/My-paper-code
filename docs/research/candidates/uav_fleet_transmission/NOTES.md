@@ -5061,3 +5061,422 @@ keeping Root's selected question, owner pause, exact lead, all source bytes and 
 exposure unchanged. This is a documentation correction, not a runtime repair or new scientific
 attempt. After publishing it, submit/reconcile the same source/request/output through the
 maintained launcher; any existing claim still governs, and no duplicate or retry tag is granted.
+
+<a id="b07-accepted-operation"></a>
+
+#### B07 accepted operation and same-handle observation
+
+2026-10-01T03:09:41Z: the unchanged scientific source`2261ccb709b8f5d166902a602f9c7ba33d510e8a`
+was accepted by the maintained local launcher after the owned status-label correction
+`a9a44aa5b3c6fe3b5f359f6a4225dd876640555e`. The first refused request had created no run
+directory; this is B07's single accepted result operation, with the original panel and tag.
+The [native manifest](../../../../runs/uav_fleet_transmission/b07_joint_renewal_a01/launch-manifest.json)
+is authoritative for invocation, source snapshot, process identities and operation reference.
+The [actual-node receipt](../../../../runs/uav_fleet_transmission/b07_joint_renewal_a01/admission-preflight.json)
+measured6192222208 effective/physical available bytes against4294967296 required; it passed.
+The selected placement remains configured `local_linux`, with unchanged CPU/dtype/thread/RNG
+semantics and the recorded unresolved remote-runtime reason. No node reservation is implied.
+
+I drained the previously stopped generation20 (no pending event/wake), rearmed it, and registered
+the single B07 launch-status job. Current deterministic observer generation22 was then drained:
+it had actually observed the admitted runner and supervisor running with matching native identities,
+consistent records and no exit witness. Thus adoption is backed by an observed handle, not just
+registration. The observer probes this same operation every30s with a20s probe timeout and1500s
+checkpoint window. The native DM remains active through worker, full reader and scientific reading;
+the previously observed App queue rejection for unloaded native children is not assumed fixed.
+Any wake-delivery fact will be separated from process observation. No worker rebind/relaunch or
+alternate App address is authorized by a checkpoint or lost observation. At this entry execution
+is running; no complete result, CPU saving, timing benefit or scientific conclusion is claimed.
+
+#### B07 primary-source scope check during accepted collection
+
+I directly read the consequential primary passages used by the selection advice, while leaving
+the accepted comparison unchanged. This is reading for interpretation, not a new selection gate.
+Foundations **B01**, Chapter3 opening footnote (PDF p72 in
+`docs/new-libs/papers/B01_Albrecht_MARL_Foundations_2024.pdf`), distinguishes turn-taking action
+selection from simultaneous-move game models. That distinction supplies vocabulary, not a
+prediction that dispersed renewal improves this UAV controller.
+
+**MARL-0530**, §4/printed pp172–173 ([official primary paper](https://www.ijcai.org/proceedings/2025/0020.pdf),
+library record `/home/fires/projects/Inst-sci/papers/MyLib/json/MARL-0530.json`), separates agents
+making a new decision from agents continuing an existing action and constructs virtual proxies
+for credit assignment. My inference: this supports retaining the ongoing-action semantics in
+B07's joint dynamics. It supplies neither a gain guarantee for a fixed phase schedule nor evidence
+about our untrained C/Q10 comparison.
+
+**MARL-0588/SeqComm**, §4.3/printed p7 ([official primary paper](https://papers.neurips.cc/paper_files/paper/2024/file/d6be51e667e0b263e89a23294b57f8cf-Paper-Conference.pdf),
+library record `/home/fires/projects/Inst-sci/papers/MyLib/json/MARL-0588.json`), conditions later
+decisions on communicated earlier agents' actual chosen actions, then executes the joint action
+simultaneously. B07 has no such messages or action-prefix conditioning. Its physical consequences
+may become visible on later ticks, but SeqComm's information contract and guarantees cannot be
+imported as support for B07's conjecture.
+
+**ICLR2025 `61715c5379f9061abc9d8efe3f1723e4`**, §§2–3
+([primary text](https://arxiv.org/html/2412.14355); local PDF
+`/mnt/c/Projects/My-lib/.local-formal-capture/corpus/papers/iclr-2025/61715c5379f9061abc9d8efe3f1723e4/arxiv-2412.14355.pdf`),
+explicitly allows environmental evolution during inference and studies delayed action availability
+and staggered compute processes. B07 advances a native tick only after its scheduled queries;
+measured CPU is a resource cost, not a simulated inference delay or a realtime responsiveness
+endpoint. This confirms the scope separation in the original advice. These focused primary reads
+do not repeat all three library searches, claim novelty or add empirical support to the prediction.
+
+
+<a id="b07-complete-reading"></a>
+
+### B07 complete reading — joint renewal changed, native benefit unresolved — 2026-10-01 UTC
+
+The single accepted operation completed both stages with exit0 at2026-10-01T03:15:27Z.
+Worker768/768 episodes is COMPLETE; the complete reader is VERIFIED. Executed source is
+`2261ccb709b8f5d166902a602f9c7ba33d510e8a`, with admission control publication
+`a9a44aa5b3c6fe3b5f359f6a4225dd876640555e`. The earlier control-label refusal incurred no
+native exposure and was not another result attempt. Read the immutable
+[config](../../../../runs/uav_fleet_transmission/b07_joint_renewal_a01/config.json),
+[all per-episode results and raw identities](../../../../runs/uav_fleet_transmission/b07_joint_renewal_a01/summary.json)
+and [full independent reconstruction and paired world vectors](../../../../runs/uav_fleet_transmission/b07_joint_renewal_a01/reading.json).
+This is the entire prospectively fixed panel, not a selected phase/tape subset.
+
+The original prediction did not receive support: dispersed renewal has negative observed
+mean J and service changes for both C and Q10, with descriptive intervals crossing zero.
+It substantially reduces coincident physically consequential renewals, so this is not a
+missing intervention or merely a relabelled clock. The native consequence remains mixed.
+There is no established positive C timing effect for Q10 to replace; the near-zero interaction
+does not establish substitution, equivalence or no interaction. The independent scientific
+reading and resolved investment judgment follow separately below.
+
+All four offsets and Q10's two tapes are averaged **within each of32 worlds**. The reported
+95% intervals are the declared10000-resample world-percentile descriptions conditional on
+these fixed programs and streams. Offsets/tapes are not extra independent worlds or fits.
+The estimand is the complete H256 mission, including joint startup/terminal coupling. Individual
+full clock/draw exposure matches, not realized action distributions on diverged histories,
+realized physical interventions or deployment CPU. This is neither a steady-state-only timing
+estimate nor a learned-termination or best-policy study.
+
+#### Complete levels and comparisons
+
+Levels below are means of the32 world reductions. Path is mean distance per UAV; service p10
+and minimum describe aggregate service across time within an episode, then average across
+q/tapes/worlds. They are not individual-user continuity or safety guarantees.
+
+| Metric | C SYNC | C DISPERSED | Q10 SYNC | Q10 DISPERSED |
+|---|---:|---:|---:|---:|
+| J | 0.335879554 | 0.332049383 | 0.358952808 | 0.357787966 |
+| Mean served users/tick | 20.124755859 | 19.818847656 | 21.762939453 | 21.683776855 |
+| Coverage reward | 0.281746582 | 0.277463867 | 0.304681152 | 0.303572876 |
+| SINR quality | 0.180443240 | 0.181951721 | 0.180905520 | 0.180716966 |
+| Quality reward | 0.054132972 | 0.054585516 | 0.054271656 | 0.054215090 |
+| Service p10 | 19.027343750 | 18.914062500 | 16.765625000 | 16.818359375 |
+| Minimum service | 9.820312500 | 9.765625000 | 8.859375000 | 8.886718750 |
+| Zero-service ticks | 0.093750000 | 0.265625000 | 0.066406250 | 0.000000000 |
+| Longest zero run | 0.093750000 | 0.195312500 | 0.039062500 | 0.000000000 |
+| Mean path m/UAV | 2516.849241843 | 2351.608765519 | 4118.082712366 | 3987.358998708 |
+| Categorical changes after initial | 92.757812500 | 86.375000000 | 168.316406250 | 163.000000000 |
+| Changed clipped holds after initial | 91.351562500 | 85.078125000 | 161.863281250 | 156.542968750 |
+| Ticks with multiple categorical changes | 28.523437500 | 7.609375000 | 52.312500000 | 17.324218750 |
+| Ticks with multiple changed clipped holds | 28.437500000 | 7.179687500 | 51.031250000 | 15.941406250 |
+| Zero-displacement UAV ticks | 895.835937500 | 919.875000000 | 685.433593750 | 703.593750000 |
+| XY-boundary UAV ticks | 167.328125000 | 160.273437500 | 204.710937500 | 201.847656250 |
+| Lower-altitude UAV ticks | 1274.781250000 | 1274.726562500 | 1197.378906250 | 1198.109375000 |
+| Fallback queries | 12.500000000 | 13.804687500 | 14.421875000 | 15.320312500 |
+| Cache hits /320 queries | 283.945312500 | 282.507812500 | 87.578125000 | 60.753906250 |
+| Decision-query CPU s/episode | 0.025849166 | 0.028173826 | 0.117571318 | 0.127616692 |
+| Complete episode CPU s | 0.220028191 | 0.221553930 | 0.330545166 | 0.344148510 |
+
+Each episode has320 queries,315 post-initial renewals and64 ticks with at least two querying
+agents. The last count alone hides the treatment: after the common initial query SYNC has
+five-member query batches, while DISPERSED has one repeated pair and three singleton phases.
+Q10's exact entropy is.650892627 nats at every query in both schedules; C's is zero.
+
+| Declared contrast | J mean [descriptive95%] | J +/− worlds | Service mean [descriptive95%] | Service +/− worlds |
+|---|---|---:|---|---:|
+| C phase, primary | -0.003830170 [-0.012628063, +0.004367954] | 17/15 | -0.305908203 [-0.963630676, +0.297929382] | 18/14 |
+| Q10 phase | -0.001164842 [-0.006645982, +0.004176774] | 16/16 | -0.079162598 [-0.457000732, +0.284242249] | 17/15 |
+| Q10 phase minus C phase | +0.002665328 [-0.007568929, +0.013389441] | 14/18 | +0.226745605 [-0.539384842, +1.035003281] | 14/18 |
+| Q10−C in SYNC | +0.023073254 [+0.010835016, +0.035362020] | 22/10 | +1.638183594 [+0.780521011, +2.487826538] | 22/10 |
+| Q10−C in DISPERSED | +0.025738582 [+0.014010277, +0.037612653] | 23/9 | +1.864929199 [+1.050348663, +2.688099670] | 23/9 |
+
+C's quality contribution changes+.000452544 while coverage changes−.004282715. Q10's
+coverage/quality changes are−.001108276/−.000056566. Thus neither negative timing mean
+can be called a hidden service benefit masked by this reward decomposition. C phase service
+ranges−4.818359 to+3.003906 users/tick; J ranges−.066148687 to+.048242244. Q10 phase
+service ranges−2.630371 to+2.298340; J ranges−.037251281 to+.034244031. Full signed vectors
+and all ancillary intervals remain in the complete reading.
+
+The constructive ordinary alternative remains useful: Q10−C improves mean J/service in both
+schedules, with the descriptive mean intervals above zero. It retains9/10 adverse J worlds
+(DISPERSED/SYNC). This additional panel supports conditional average-service capability of
+ordinary randomization, not a universal or complete-package preference. Q10 lowers service
+p10 by2.095703/2.261719 and minimum by.878906/.960938 in DISPERSED/SYNC, with their
+intervals below zero; it adds1635.750/1601.233m per UAV and.122595/.110517 episode CPU
+seconds. These tail, travel and computation costs remain part of the result. No energy or
+physical-clock deployment measurement was made.
+
+#### Exposure, offsets and adverse episodes
+
+C's mean changed clipped holds fall91.351562→85.078125; Q10's fall161.863281→156.542969.
+These correspond to approximately29.0%→27.0% and51.4%→49.7% of315 post-initial queries.
+The much larger alignment changes are ticks with at least two changed clipped holds:
+C28.4375→7.1796875 (31/32 worlds lower), Q1051.03125→15.94140625 (32/32 lower).
+The kinematic exposure check compares continuing the old versus issuing the selected command
+through that member's next deadline or mission end, under clipping; it makes no extra native
+query and does not identify counterfactual reward or a mediation effect. The treatment reached
+physical commands but did not deliver the predicted complete mean gain. C path declines by
+165.240m/UAV with an interval crossing zero; Q10 path declines130.724m with descriptive
+interval[−244.052,−16.497]. Lower travel alone does not make the schedule beneficial on the
+selected J/service question.
+
+Every prospectively required q/tape is retained. Mean C phase J at q0/1/2/3 is
++.001394719/−.007412081/+.003063683/−.012367003; mean service is
+−.025635/−.573853/+.295044/−.919189. Q10 tape0's q means are
+−.005188665/+.000013866/+.000019957/+.008443787 J, and tape1's are
+−.015393985/+.000624913/+.001632437/+.000528950. Selecting the favourable offset would
+break the individual-clock matching design. The unaggregated128 C and256 Q10 phase pairs
+have66/62 and132/124 positive/negative J differences; these are dependent cell counts,
+not replication n. C's worst cell is world29750005/q3 at−.167852841J/−12.843750 service,
+while its best is world29750025/q0 at+.172472959/+11.089844. Q10's worst cell is
+world29750004/q1/tape1 at−.123049704/−8.644531, and its best is
+world29750018/q1/tape0 at+.118644327/+8.296875. This heterogeneity supplies no post-hoc
+phase-selection or repair entitlement.
+
+All zero-service episodes are named, including the new adverse dispersed-C event:
+
+| Program/schedule | World/q/tape | Zero ticks | Longest run |
+|---|---|---:|---:|
+| C DISPERSED |29750005/2/−1|34|25|
+| C SYNC |29750017/0/−1|12|12|
+| Q10 SYNC |29750017/0/1|16|9|
+| Q10 SYNC |29750020/3/0|1|1|
+
+No other episode has zero service, including all256 Q10 DISPERSED episodes. These sparse
+counts do not establish an outage advantage or safety. C world29750005/q2 has J.143221181,
+mean service7.417969 and p10=0; its full raw evidence is retained. C phase averages add
+.171875 zero ticks and.1015625 longest-run ticks; Q10 phase averages remove.06640625 and
+.0390625. Means and bootstrap descriptions do not erase the event-specific adverse evidence.
+
+#### Full verification, actual bill and evidence retention
+
+The complete reader rebuilt all245760 original C rankings including worker cache hits,
+163840 indexed draws, every private-navigation and phase/deadline/held-command transition,
+all480 cross-q individual clock/draw multisets,196608 native team ticks and983040 UAV motion
+ticks. It verified source/raw identities, common reset geometry, saved native eligibility,
+capacity, unique assignment, local-count/clock provenance, service/quality/reward reductions,
+processing order and every declared world reduction. Native radio is **not independently
+resimulated**. The961920 clipped-hold comparison ticks contain two kinematic path updates
+per comparison tick. There are zero reader native steps or actor/analytic-helper queries.
+
+The fixed bill is768 explicit resets+1 constructor,196608 native steps,54278675 dense
+power slots,245760 worker ordinary queries and163840 draws. Fits, labels, calibrations,
+optimizer updates, training-native steps, student/actor/helper/score-tail queries are all zero.
+Deployed C caching has110479 hits/135281 misses; actual miss work is3652587 trajectories,
+14610348 modeled ticks/objective reductions,60954660 candidate and611943 setup links.
+Cache entries/array/key totals are sums over episodes, not simultaneous RSS. Reader work is
+6635520 trajectories,26542080 modeled ticks/objective reductions,112549176 candidate and
+1129885 setup links (113679061 total), with10981 fallback decisions. Equal query counts do
+not equal actual work: DISPERSED lowers Q10 cache hits by26.824219/episode and adds
+.010045374 decision CPU seconds (positive in all32 worlds); C query CPU also rises. These
+costs weaken a complete-package timing adoption case independently of the unresolved means.
+
+Worker CPU/wall is232.636504/232.999452s; full reader112.867894/112.883838s. The complete
+runner chain including entry/imports/serialization is345.586312 CPU/345.965256 wall seconds,
+excluding the last self-report write and engineering/admission/review/publication support.
+Worker high-water RSS is301656KiB; final same-process high water309888KiB, not their sum.
+Measured runtime was within the prospective5–15 CPU-minute planning range; measured peak
+RSS was below its estimate, not a retroactive reservation or bound. From selection to this
+reading was roughly one hour of elapsed authoring/implementation/review/execution; support
+CPU and human-equivalent effort were not exhaustively metered. The inherited selected chain
+is now8 fits/2 calibrations/2277376 native steps/~3584.279 scoped CPU seconds; prior paid
+learning is historical research cost, not a prerequisite to deploying these C/Q10 programs.
+Other historical branches keep their separately recorded costs.
+
+One canonical raw copy remains at configured `local_linux`:
+`/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b07_joint_renewal_a01/raw/`.
+I independently streamed all768 NPZ files after full reading; every size/SHA256 matches its
+summary entry and the actual directory contains exactly those files. Raw logical bytes:
+271926713; allocated file bytes273494016 (273543168 including the directory). SHA256 of
+sorted `relative_path TAB byte_count TAB sha256 LF` inventory lines is
+`7eb2ce23be3781acd26422d0af81a5f56327006ef91615d698ff82ba7e4dc1f4`.
+Summary2420648bytes/SHA256
+`9949879dc80f91c998710e156eb808e4a2d0e1d3592a543b6238fc06075bd392`;
+reading417078bytes/SHA256
+`bed850ff8f80de13c449e4bd1155c6e85f862469cee0d85590f66f9136ad7946`;
+config100517bytes/SHA256
+`8d5f72677b426470fd597a8f58aea3d956f1007a3742e5fdc2548036e836dbbc`.
+Compact config/summary/reading and native records will be published, with no second raw
+copy, archive or new evidence registry. Earlier B04/N8 data remain live inputs and untouched.
+
+The deterministic observer saw terminal READY at03:15:29Z. Generation22 event
+`e419bee7dfac676d6a0d7ce3` and wake`d0804cd9-5404-4c45-a555-649c1f312ab5` recorded
+`delivery_unknown`, exit1: `direct app-server input is not allowed for multi-agent v2
+sub-agents (code -32600)`. This transport failure did not lose the result: the native child
+remained active and drained the same accepted handle. I consumed the event with same-handle
+rearm to generation23, then stopped observation; state is stopped=true, wake=null and its
+PID1492197 is absent. Native worker1483826 and supervisor1483805 have terminal exit witnesses.
+No worker was relaunched and no alternate App destination was used. Scientific diagnosis,
+final owned standing and measured snapshot/scratch retirement follow before closure.
+
+
+<a id="b07-independent-disposition"></a>
+
+### B07 original independent scientific diagnosis and DM disposition — 2026-10-01 UTC
+
+The dedicated `hmasd-research-critic` ran as `/root/dm_fleet_transmission/b07_result_diagnosis`
+in a separate context, without DM/Root conversation inheritance. Its assignment supplied the
+actual fixed question, complete contract/source/output locators and original supporting/adverse
+B06, parent B04 and peer-forecast evidence, plus current shared topics. It received technical
+completion facts, not a preferred B07 outcome interpretation, and was asked to reconstruct
+outcomes before prior advice. Its scope allowed saved-array verification and reasoning, with
+no new scientific queries, code/record edits, helpers or launched work. I read its complete
+original final answer, reproduced verbatim below, rather than relying on a summary.
+
+#### Complete original ResearchCritic answer
+
+> **Recommend closing B07 without another run.** Retain the ordinary Q10 capability, dispersion’s conditional travel benefit, and all adverse outcomes. The fixed comparison is complete: dispersion substantially changed physical renewal patterns, but its predicted mean reward/service benefit did not appear. This closes the tested schedule purchase, not the broader timing question.
+>
+> I received the bounded assignment and source locators without inherited DM/Root conversation. I reconstructed B07’s contract, source and saved outcomes before reading its original selection advice and DM response. No code, records or Git state were edited; no controller, actor, helper, environment, training or benchmark queries were executed.
+>
+> I independently checked:
+>
+> - All **44 configured source hashes** against both current files and committed source `2261ccb709b8f5d166902a602f9c7ba33d510e8a`.
+> - All **768 raw-file hashes and sizes**, common initial states within worlds, native service/quality/reward reductions, saved radio eligibility and capacity invariants, executed motion, path and physical-hold diagnostics.
+> - The **480 individual clock/draw multiset matches** across compulsory offsets.
+> - All four levels and five contrasts: their 32-world vectors and frozen bootstrap intervals across **36 recorded outcome, exposure and timing metrics**.
+> - All signed world outcomes, every outage episode, and the per-offset/tape exceptions.
+>
+> The original full reader supplies exhaustive original-C reconstruction, navigation, probability and regenerated-RNG checks; I inspected that implementation and its verified results without repeating policy execution. Neither my checks nor that reader independently resimulates native radio. Episode timings are recorded measurements, not independently repeated benchmarks. [Configuration]( /home/fires/hmasd-wsl/runs/uav_fleet_transmission/b07_joint_renewal_a01/config.json), [complete summary](/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b07_joint_renewal_a01/summary.json), [verified reading](/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b07_joint_renewal_a01/reading.json).
+>
+> The complete package levels are:
+>
+> | Program | Mean J | Service/tick | Service-p10 | Episode minimum | Path, m/UAV | Episode CPU, s |
+> |---|---:|---:|---:|---:|---:|---:|
+> | C/SYNC | .335880 | 20.1248 | 19.0273 | 9.8203 | 2,516.8 | .22003 |
+> | C/DISPERSED | .332049 | 19.8188 | 18.9141 | 9.7656 | 2,351.6 | .22155 |
+> | Q10/SYNC | .358953 | 21.7629 | 16.7656 | 8.8594 | 4,118.1 | .33055 |
+> | Q10/DISPERSED | .357788 | 21.6838 | 16.8184 | 8.8867 | 3,987.4 | .34415 |
+>
+> The declared comparisons give:
+>
+> | Contrast | ΔJ [descriptive 95% interval] | Δservice/tick [interval] | J worlds +/− |
+> |---|---|---|---:|
+> | C DISP−SYNC, primary | **−.003830 [−.012628, +.004368]** | **−.3059 [−.9636, +.2979]** | 17/15 |
+> | Q10 DISP−SYNC | −.001165 [−.006646, +.004177] | −.0792 [−.4570, +.2842] | 16/16 |
+> | Interaction: Q10 effect−C effect | +.002665 [−.007569, +.013389] | +.2267 [−.5394, +1.0350] | 14/18 |
+> | Q10−C, SYNC | +.023073 [+.010835, +.035362] | +1.6382 [+.7805, +2.4878] | 22/10 |
+> | Q10−C, DISPERSED | +.025739 [+.014010, +.037613] | +1.8649 [+1.0503, +2.6881] | 23/9 |
+>
+> These are conditional evaluation-world descriptions, with offsets and Q tapes averaged **inside** each world. They establish neither equivalence nor training replication. The primary constructive prediction fails at its point estimates; uncertainty still permits either sign. The interaction also fails to establish the predicted substitution direction. Q10’s smaller absolute timing effect is insufficient to claim that randomness absorbed a useful dispersion effect.
+>
+> **The intervention reached physical behavior.** All 128 C and 256 Q10 same-offset/tape schedule pairs have different command and position trajectories. Their initial commands agree; their first different stored positions occur at indices 5–7. This is substantial trajectory intervention, while also demonstrating why joint startup effects remain part of the result.
+>
+> Each episode has 315 renewals after initialization. Mean changed categories/physical holds are:
+>
+> | Program | Changed categories | Changed physical holds | Ticks with multiple physical changes |
+> |---|---:|---:|---:|
+> | C/SYNC | 92.758 | 91.352 | 28.438 |
+> | C/DISPERSED | 86.375 | 85.078 | 7.180 |
+> | Q10/SYNC | 168.316 | 161.863 | 51.031 |
+> | Q10/DISPERSED | 163.000 | 156.543 | 15.941 |
+>
+> Thus dispersion sharply reduces coincident physical changes without producing the predicted mean benefit. Its lack of benefit cannot reasonably be described as complete nonactivation or wholesale clipping aliasing.
+>
+> The unchanged count of 64 “multiagent query ticks” is potentially misleading: SYNC has 64 five-agent queries; DISPERSED has the shared initial query, 63 repeated-pair queries and 189 singleton queries. The physical-hold diagnostic compares a new command with retaining the previous command on its actual position. It supplies no counterfactual service or reward.
+>
+> The strongest useful positive beyond ordinary Q10 is **lower Q10 travel under dispersion**: −130.7m/UAV, interval [−244.1, −16.5], with lower travel in 20/32 worlds. Its price is +.01360 episode CPU seconds [.00953, .01799], while reward/service preservation remains unestablished. C’s −165.2m travel estimate has an interval crossing zero. Neither comparison measures battery savings.
+>
+> Q10 itself retains a clear mean-service capability under both schedules, with consequential costs. Relative to C, service-p10 falls **2.262/2.096** users under SYNC/DISPERSED, and mean episode minimum falls **.961/.879**; all four descriptive intervals are negative. Travel increases **1,601/1,636m/UAV**, and episode CPU increases **.1105/.1226s**, in every world. Mean quality changes remain unresolved. This is a service–tail–travel–compute tradeoff, not universal Q10 superiority.
+>
+> Concrete exceptions prevent the averages from becoming an adoption rule:
+>
+> - **World 29750017:** C dispersion removes the observed SYNC outage, yet loses **.066149 J and 4.8184 service/tick**, with lower service-p10 and episode minimum. Removing an outage does not ensure a better complete mission.
+> - **World 29750005, C/DISPERSED, q2:** **34 zero-service ticks**, including a longest run of **25** at scored ticks 107–131, followed by nine more at 135–143. C/SYNC has no outage in this world.
+> - **World 29750028:** C dispersion gains .005081 J and .3604 service/tick while losing **2.375 service-p10**. Positive mean service can conceal a lower-tail loss.
+> - Useful positive worlds remain: C dispersion gains **.048242 J/+3.0039 service** in 29750025; Q10 dispersion gains **.034244/+2.2983** in 29750018. Q10 dispersion nevertheless loses **.037251/−2.6304** in 29750007.
+>
+> Across the complete panel, C/SYNC has 12 zero-service ticks, C/DISPERSED 34, Q10/SYNC 17 and Q10/DISPERSED zero. The Q10/SYNC zeros occur in only two episodes. These sparse finite outcomes support preserving the witnesses, not an outage-protection claim.
+>
+> Per-offset results also resist a selected-phase rescue. C’s q0–q3 mean J effects are **+.001395, −.007412, +.003064, −.012367**. Q10’s offset/tape effects range from **−.015394** at q0/tape1 to **+.008444** at q3/tape0. Selecting favorable offsets would discard the full-clock matching that makes B07 interpretable.
+>
+> My supported diagnosis is **ordinary stochastic trajectory redirection with policy-dependent consequences of renewal alignment**. The evidence favors ordinary Q10 as the source of the demonstrated mean-service increment. It does not identify a beneficial asynchronous coordination mechanism. Indeed, Q10/SYNC improves mean reward while having *more* simultaneous physical-change ticks than C/SYNC; dispersion then sharply reduces those coincidences without improving either program’s mean reward. Coincidence count is therefore an inadequate value proxy here.
+>
+> This does not identify why individual worlds improve or deteriorate. Changed visitation, interference, observation availability, motion persistence, the fixed four-tick forecast and joint startup/terminal effects remain entangled. B07 does not establish that synchronization caused B06’s H1 losses: B06 changed individual renewal frequency and execution duration, whereas B07 matches full individual clocks across offsets.
+>
+> The historical evidence supports this narrower correction. I directly checked the earlier source-bound summaries and reader records, while reusing their applicable independent reviews rather than re-auditing all historical raw files:
+>
+> - B06’s H1−H4 mean J losses occur for all six C/Q/G/S parents, including deterministic C.
+> - Parent B04’s Q_A eliminates simultaneous categorical departures; S_A executes **3,051 physical departures**, yet S_A−S_I remains **−.002998 J** with worse mean service-p10.
+> - Peer-forecast R improves broad geometric prediction but changes only nine physical decisions and has unresolved adverse mean native effects.
+>
+> B07 adds a distinct, strongly activated timing comparison to those constraints. These studies cannot be pooled as replications of one mechanism. Their useful S capabilities and other positive outcomes remain intact.
+>
+> The resulting judgments are:
+>
+> - **Opportunity:** clock alignment can materially redirect complete trajectories, including beneficial worlds. The tested unconditional dispersion rule has no demonstrated average reward/service advantage.
+> - **Representation:** B07 changes external scheduling while retaining C’s original lawful inputs and navigation. It neither proves their sufficiency nor diagnoses a missing history, commitment or timing representation.
+> - **Learnability:** zero fits supply no new learning evidence. Finite optimization cannot explain this fixed-program result, and a termination learner is not an implied repair.
+> - **Complete package value:** retain Q10’s mean benefit and costs, plus dispersion’s conditional Q10 travel benefit. C/Q10 are appropriate matched controls for this timing question, not a claim to the best available deployment policy.
+>
+> I find **no material flaw in the frozen comparison**. The consequential correction is to retire “fewer simultaneous renewals should improve mean service” as a sufficient reason for another unchanged phase purchase. The active-exposure, unresolved/adverse branch of the prospective contract has occurred. Additional worlds would chiefly refine conditional means; a phase sweep would change the question after exposure.
+>
+> The existing 768-episode panel is the smallest worthwhile complete observation needed for the present decision, and it is already available. I recommend **no replication, sweep, extra arm, learner or confirmation now**. This is an investment decision, not proof that timing cannot help.
+>
+> A later real service floor, travel constraint or computation constraint could make the Q10 schedule choice consequential. Its constructive prediction would be useful motion savings while meeting that requirement; failure to meet it would reject the proposed use, and unresolved compliance would remain unresolved. A complete comparison would retain whole missions and compulsory offsets, not select favorable worlds. Exact monetary prices are unnecessary. A materially different learning or information contract could also justify exploration, but it would need its own comparison; richer information or control rights must be given to the competent ordinary alternative and their acquisition costs counted. No such successor is recommended or authorized by this review.
+>
+> The actual B07 bill is **196,608 native steps, 245,760 C requests, 163,840 Q draws and zero fits**. Worker CPU is **232.637s**, reader CPU **112.868s**, enclosing chain **345.586 CPU-s/345.965 wall-s**. Memoization leaves **135,281 worker misses**, **3,652,587 candidate trajectories** and **14,610,348 modeled ticks**. The full reader additionally reconstructs all original requests, totaling **26,542,080 modeled ticks**.
+>
+> Peak same-process RSS is **309,888KiB**; the verified raw inventory is **271,926,713 logical bytes**. My principal saved-array reconstruction added approximately **5.73 CPU-s**, separately from the recorded chain. Engineering, admission, review, publication and cleanup remain additional support, incompletely metered; the prospective 4–7 support hours are not an actual measurement. Physical clock provisioning, drift, inference-delay consequences and flight energy remain unmeasured.
+>
+> Retain the canonical evidence and useful positive/adverse records, publish the scoped conclusion, and perform the already assigned cleanup without touching B04 evidence consumed elsewhere.
+>
+> **MATERIAL_DISSENT: no — the complete, physically active comparison supports closing B07’s fixed purchase without further investment. It supports neither a dispersion-benefit claim nor closure of the broader timing question.**
+
+
+#### DM response and resolved choice
+
+I accept the recommendation and its scope, with **no material disagreement**. My own complete
+reading and the independent reconstruction agree on all primary/consequential means, adverse
+worlds and the exposure result. I additionally checked the world29750017 C vector: eliminating
+the SYNC zero event coexists with−.066148687J/−4.818359 service,−1.875 p10 and−2.75 minimum;
+world29750028's+.360352 mean service coexists with−2.375 p10. The saved29750005/q2 served
+array directly confirms zero scored ticks107–131 and135–143. These are concrete reasons to
+keep native mission/tail consequences alongside aggregate renewal diagnostics. I rely on the
+critic's separately reconstructed full-trajectory comparisons as independent evidence; its
+approximately5.73 saved-array CPU seconds are additional support, not included in the
+345.586312 runner-chain measurement or a new fit/native exposure.
+
+The working explanation changes at the **complete-use layer**: reducing coincident decisions
+is now an empirically weakened sufficient rationale for repeating this fixed dispersed rule.
+The intervention changes real motion and leaves useful positive worlds, so lack of exposure
+cannot rescue the prediction. Q10 supplies the demonstrated conditional mean-service increment,
+but its lower tails, travel and computation remain costs. Its benefit with more simultaneous
+physical changes further weakens using coincidence count as a value proxy. I retain the
+Q10-dispersion travel reduction as a measured capability, while service preservation is unresolved;
+there is no selected operating requirement that turns it into an adoption or confirmation rule.
+
+Task opportunity remains conditional: timing can redirect complete trajectories, but this
+unconditional schedule has no demonstrated average J/service advantage. Representation remains
+untested beyond lawful current-only C and private navigation; the experiment does not diagnose
+missing commitment/history inputs. Learnability remains untouched because there was no learner
+or optimization. Competing explanations for mixed native consequences—visitation/interference,
+observation availability, forecast/persistence and startup/terminal interaction—are unresolved;
+they are not equally strong excuses for another purchase. B06's cadence result, parent B04's
+coupling adverse, peer-forecast limitations and all useful earlier S/E capabilities remain as
+recorded. In particular, B07 does not isolate simultaneity as the cause of B06's H1 losses.
+
+The resolved next action is **publish and close this fixed B07 investment**, with the direction
+in reserve after cleanup. No replication, selected-offset test, phase/trigger/horizon sweep,
+extra arm, learned termination, added fit or confirmation is selected. The assigned complete
+observation already answers the present investment question; an additional panel would mainly
+narrow these conditional means, while a sweep would change the exposed question. The broader
+joint-timing/duration question remains open, with no active producer or invented dependency.
+A concrete later service/travel/compute requirement, or a materially different question whose
+information/control rights are also supplied to its competent ordinary comparator, could supply
+a reason for Root to allocate new work. That is a conditional re-entry rationale, not a pending
+owner approval, selected successor or automatic follow-up from this negative result. Adequate
+independent diagnosis covers this closure; an additional Pro round offers no identified distinct
+unresolved value here. Preserve the original review's dissent field and all adverse evidence.
+
+Publish the useful versioned schedule/collector/full-reader package, complete compact results,
+the owned RESEARCH standing and the directly affected shared timing judgment. Check live
+consumers and remove this operation's disposable source snapshot, stopped observer request and
+rebuildable caches, measuring actual bytes. Preserve canonical raw and original B04/N8 evidence
+consumed by parent B08. Final native return to Root will identify the published read result,
+changed explanation, unresolved broader question and actual cleanup; it will not seek a per-fit
+ACK or present a technical exit as a scientific conclusion.
