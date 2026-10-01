@@ -1,0 +1,86 @@
+{
+  "admission": {
+    "claim_state": "accepted",
+    "state": "accepted"
+  },
+  "artifacts": {
+    "stderr": {
+      "path": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b01_learning_a01/stderr.log",
+      "state": "present"
+    },
+    "stdout": {
+      "path": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b01_learning_a01/stdout.log",
+      "state": "present"
+    },
+    "summary": {
+      "path": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b01_learning_a01/summary.json",
+      "state": "absent"
+    }
+  },
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/de7d2a2115696e5c0391064a1bc1b3b79addfcfb094afa5a51d3987b2220b5a8.json",
+  "direction": "typed_joint_skill_decision",
+  "execution": {
+    "exit_witness": {
+      "path": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b01_learning_a01/process-exit.json",
+      "state": "absent"
+    },
+    "runner": {
+      "observed_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 1278984,
+        "session_id": 1278983,
+        "start_ticks": 122002913
+      },
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 1278984,
+        "session_id": 1278983,
+        "start_ticks": 122002913
+      },
+      "state": "running"
+    },
+    "state": "running",
+    "supervisor": {
+      "observed_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 1278983,
+        "session_id": 1278983,
+        "start_ticks": 122002909
+      },
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 1278983,
+        "session_id": 1278983,
+        "start_ticks": 122002909
+      },
+      "state": "running"
+    }
+  },
+  "explicit_retry": {
+    "eligible": false,
+    "reasons": [
+      "parent has no consistent terminal nonzero native exit"
+    ],
+    "scientific_authorization": false,
+    "successor_ref": null,
+    "supported": true
+  },
+  "explicit_retry_available": false,
+  "kind": "hmasd_operation_status",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b01_learning_a01/launch-manifest.json",
+  "node": "wsl_4070_typed_joint",
+  "observed_at": "2026-10-01T18:32:24.781821Z",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/de7d2a2115696e5c0391064a1bc1b3b79addfcfb094afa5a51d3987b2220b5a8.json",
+  "output_root": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b01_learning_a01",
+  "record_consistency": {
+    "mismatches": [],
+    "state": "consistent"
+  },
+  "schema_version": 1,
+  "sha": "61a2dfa9cde0178d482d0a079c5629c3bcb7789e",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/9dd81ae5eba4450da18da28dd5186a25"
+}

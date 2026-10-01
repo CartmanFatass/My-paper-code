@@ -841,3 +841,21 @@ verified eligibility. Apply removed native source snapshot
 bytes fell from820,711,424 to0, releasing820,711,424bytes before the next snapshot.
 Canonical outputs, operation claim and exit witness remain. Collection/hash/GC
 support work is separate from admitted scientific CPU and was not fully metered.
+
+### B01 learning phase accepted
+
+At2026-10-01T18:31:34Z the sole`typed-joint-b01-learning-a01` request was admitted
+on`wsl_4070_typed_joint`, unchanged scientific source61a2dfa9c and the published
+native locator/ledger. Operation
+`/home/wu/projects/HMASD/.git/hmasd-admission/de7d2a2115696e5c0391064a1bc1b3b79addfcfb094afa5a51d3987b2220b5a8.json`
+and [manifest](../../../../runs/typed_joint_skill_decision/b01_learning_a01/launch-manifest.json)
+bind source snapshot`9dd81ae5eba4450da18da28dd5186a25` and canonical output
+`/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b01_learning_a01`.
+The outer supervisor completed acceptance; the scientific runner continues.
+
+Observer generation6 registered and its first read adopted the matching live
+runner1278984/start122002913 and supervisor1278983/start122002909, with no
+inconsistency. Initial progress had150 completed full frozen forwards, no fits,
+no new native/static calls; actual float32 checkpoint loading and representation
+forward are executing. Correctness agreement and full reading are still pending.
+No scientific outcome was inspected for tuning or selection.
