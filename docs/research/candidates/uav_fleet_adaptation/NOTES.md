@@ -6258,3 +6258,299 @@ no accepted producer, unread owned result, outstanding cleanup or selected fit.
 The Root-assigned Oracle's independent recommendation goes directly to Root;
 Root chooses the next investment. This is a completed feasibility/price, not
 an experimental conclusion or permission to implement the proposed study.
+
+<a id="b07-original-selection-review"></a>
+
+### 2026-10-01 — complete original stochastic-target review and selected response
+
+Root’s original question, followed by its explicit premise correction:
+
+> Root read your complete final answer837788647/window01a0f4c0-c857-7211-8ca2-da2625cca8a7 plus DM full post-B06 assessment. I adopt no further B06/actual-S2/transfer purchase now; retain your full recommendation and those reserves. A new bounded SOURCE-ONLY innovation question changes the proposed learning target, not merely S2's execution map: can training toward a useful stochastic control distribution develop the retained policy beyond unchanged reuse, where further one-hot imitation of C has a demonstrably inferior limiting control target? This is a constructive conjecture, NOT an identified entropy/BC cause of B06 or a selected fit. P>C and F deterioration motivate considering the target; they do not show that any soft-target recipe helps. G's score-directed law and Q's ordinary randomization are already specified and currently owned by the other DM. They may be teacher/reference candidates, not assumed better-than-S targets or permission to add queries to that study. Exact self-distillation of S may be an identity/no-new-capability alternative; hard-label continuation, ordinary smoothing/entropy control and direct reuse must be considered honestly.
+> Please own detailed innovation and independent challenge for this changed question using the cumulative original/July/external records, all three libraries and load-bearing primary passages. Check whether soft/stochastic distillation or its decision-relevant variant has already been tested here, whether the conjecture is merely known distillation without consequential use, and whether a target can supply value rather than just redistribute a fixed policy. Do not assume that successful cloning improves on its teacher, that score-proxy quality improves native J, or that entropy alone caused prior outcomes. A different worthwhile target construction may be preferable; no architecture/new-idea/positive recommendation is owed. Preserve all prior head/full-network failures and the all-on/managed/count distinctions.
+> The same fleet-adaptation DM will supply source/interface/feasibility/full-cost facts after its completed boundary. Neither of you may launch, query policies/controllers/models/native kernels, reduce new outcomes, implement code or purchase fits. Reuse paid saved summaries and source semantics only. If a concrete comparison is worthwhile, state what it teaches or enables beyond fixed-asset ranking, its strongest ordinary controls, distinct possible outcomes, actual information rights, acquisition/label/fit/native/model/full-reader costs, support cost and stop alternative. G's eventual result may change allocation but is not an invented required gate. If this new conjecture does not justify experimentation, say so with its actual reason; Root will not call source work an active result study. Return one complete recommendation; use the existing source partner, no parallel duplicate review or additional role.
+
+> One precision correction to my seed framing: C itself is the observed weaker native reference. Only hypothetical exact reproduction under matched interface/history would reproduce C; I have not established that C is representable from the student's retained features, or that the population/finite CE optimum equals C. Please challenge that identifiability/representation premise explicitly. Do not let 'inferior limiting target' become an unsupported theorem or causal explanation.
+
+The independent Oracle’s complete final answer:
+
+> I recommend **revising the target and selecting one two-fit exploratory comparison**. The useful question is whether a modest, model-guided change to retained S can be learned into its existing actor while preserving useful native behavior. Plain G-cloning, entropy restoration and further C imitation do not by themselves supply that rationale.
+>
+> This recommendation preserves the completed B06 verdict and the unselected actual-S2/transfer reserves. I performed source and saved-evidence review only: no policy queries, target calculations, new outcome reductions, implementation or experiments.
+>
+> **The supported diagnosis**
+>
+> C’s N5 decision is determined by information already present in the student’s input: ordered `obs[:103]`, predecision navigation and public constants. `history=False` C has no omitted observation history relevant to its ranking. This establishes information sufficiency of the source program. It does **not** establish exact representation by the finite MLP or convergence of population or finite-sample CE to C. The corrected Root premise is therefore appropriate. [Controller source](/home/fires/hmasd-wsl/experiments/candidates/uav_fleet_adaptation/b02/controllers.py:58)
+>
+> The positive retained asset is sampled P/S. The adverse evidence remains substantial: active full-network RL, native-consequence heads and full-network hard-label continuations failed to establish the desired development benefit. B06’s mixed continuation softened some fixed-count continuation losses, while its mean native result remained below inherited P and included greater travel. Those observations motivate preserving useful inherited behavior; they do not identify entropy, imitation, capacity or credit assignment as the cause.
+>
+> The broader record also cautions against treating every supervised-objective change as futile. Planning-compression B03’s saved summary reports original weighting beating ordinary BC by 14 and 17 completed jobs across its two 256-context panels, with adverse worlds and unchanged packet counts. That is a small, conditional positive on another host—not evidence for this proposal. R54’s supervised full-set reference failed its access rule; energy-relay imitation’s revised loss produced unresolved native gains and adverse tails; coupled-host distillation failed its declared purchase rule. [B03 evidence](/home/fires/hmasd-wsl/runs/planning_policy_compression/b03_osbc_archived_s926001_20260926/summary.json), [R54 evidence](/home/fires/hmasd-wsl/docs/external-review/gpt5_6_pro/20260717_r54_hfsr_result/R54_HFSR_RESULT.json), [energy-relay corrections](/home/fires/hmasd-wsl/docs/research/candidates/energy_relay_imitation/NOTES.md:739)
+>
+> The relevant original, July and external-review records do not show this categorical soft-target comparison already executed. B02/B03/B06 use hard CE; B04 and B05 test different learning objectives. That is a bounded coverage finding, not an exhaustive novelty claim.
+>
+> **The proposed target**
+>
+> For a lawful N5 input \(x\), let \(p(a|x)\) be retained P0’s original sampled categorical law, \(s_a(x)\) C’s four-tick local score and \(c(x)\) C’s selected category. Define:
+>
+> \[
+> r(a|x)=
+> \frac{p(a|x)\exp((s_a-\max_b s_b)/0.014)}
+> {\sum_b p(b|x)\exp((s_b-\max_j s_j)/0.014)}
+> \]
+>
+> \[
+> T=0.9p+0.1r,\qquad H=0.9p+0.1\delta_c.
+> \]
+>
+> Train one actor toward **T**, and one toward **H**, the ordinary comparator that mixes C’s choice into S. H is also an ordinary soft supervision objective: 90% preservation of P’s distribution plus 10% hard C imitation.
+>
+> For exactly flat scores, T returns `p.copy()` directly. General T preserves P’s decoded FP64 masses and zeros, uses specified max-subtracted arithmetic, retains all 27 categories and uses the existing ordered flat CDF with one fresh private uniform per decision. Physical aliases remain separate. Both direct teachers follow their own histories and navigation.
+>
+> The target supplies information beyond identity self-distillation: C’s relative action scores alter P’s distribution. It preserves P completely where those scores provide no distinction. The intended native conjecture is that this conditional, limited change can retain useful movement while improving some local decisions.
+>
+> The strongest objection is consequential:
+>
+> \[
+> \mathbb E_s[H]\ \geq\ \mathbb E_s[T]\ \geq\ \mathbb E_s[p]
+> \]
+>
+> outside fallback; all-score-tie fallback gives equal proxy expectations. Thus **T cannot be justified as maximizing the local proxy better than H**. Its possible advantage is in complete native behavior despite pursuing that proxy less aggressively.
+>
+> Moreover:
+>
+> - T and H differ in intervention strength and fallback behavior as well as preference distribution. A T win would establish a package effect, not isolate richer score information or entropy.
+> - C’s score is not native continuation value. Simultaneous teammates, interference and changed visitation can reverse its preference.
+> - The target’s total-variation distance from P is at most 0.1. That bound does not constrain the finitely trained actor away from the training data. Adam also does not turn a 0.1-scaled initial gradient into a guaranteed small parameter step.
+>
+> These are limitations of the proposed experiment, not prerequisites for another diagnostic study.
+>
+> **What the literature supports**
+>
+> This is an application of known distillation and regularized policy-improvement ideas. Rusu et al. explicitly compare hard-action, value-regression and KL distillation targets and report conditional student improvements; their results do not imply that cloning improves on every teacher. [Policy Distillation, §§3.2–4.2](https://arxiv.org/pdf/1511.06295)
+>
+> All three libraries were checked, with load-bearing primary passages read:
+>
+> - **new-libs P13:** multiplicative updates use actual marginalized utilities in static potential games. Our local score is not that quantity, so its convergence result does not transfer. The catalogued local PDF was absent; I retrieved the primary paper directly. [P13 catalog](/home/fires/hmasd-wsl/docs/new-libs/corpus/papers/P13/metadata.json), [primary §§2–3](https://arxiv.org/pdf/2204.05466)
+> - **Inst-sci MARL-0524:** PTDE distills personalized global features into local inputs using MSE. It neither supplies missing local information here nor establishes this action-distribution target’s value. [Primary PDF, §§3.3–3.4](/home/fires/projects/Inst-sci/papers/MyLib/pdf/MARL-0524.pdf)
+> - **My-lib, NeurIPS 2023, `2f0435cffef91068ced08d7c7d8e643e`:** CSIL derives prior-weighted exponential policy updates using value information and additional MDP knowledge. That supplies a useful construction, with the native-value assumption explicitly missing here. [Primary PDF, pp.3–5](/mnt/c/Projects/My-lib/.local-formal-capture/corpus/papers/neurips-2023/2f0435cffef91068ced08d7c7d8e643e/arxiv-2305.16498.pdf)
+>
+> I also checked the closed-form policy-improvement and distilled-ensemble passages. Neither makes an ensemble, self-distillation or a score tilt an automatic improvement. Exact unchanged-S self-distillation supplies no new improvement signal; temperature modification already has a competent paid direct-use comparator, B*0.
+>
+> **The smallest worthwhile complete comparison**
+>
+> Use the already-paid **F0 N5 archive**, with both new actors initialized from the same P0 tensors and existing zero count branch. Preserve F0’s phase datasets, shuffle order, optimizer and full-network exposure:
+>
+> - Datasets: 40,960 / 61,440 / 81,920 rows.
+> - Epochs: 30 / 20 / 20.
+> - Each fit: 8,000 Adam updates and 4,096,000 presentations.
+> - Two fits total; no fresh acquisition or new interactive aggregation.
+>
+> The paid hard F0 endpoint is an exact fixed-data objective control under these bindings. Its later acquisition states were generated by F0’s greedy predecessors, so this experiment evaluates learning on that archive. It does not reproduce T’s or H’s own acquisition distribution. [Training source](/home/fires/hmasd-wsl/experiments/candidates/uav_fleet_adaptation/b06_count_development/model.py:79)
+>
+> Evaluate P0, B*0, F0, learned T, learned H, direct T, direct H, G, Q.10 and Q.05 on 32 fresh common worlds with two private tapes; evaluate deterministic C once per world. This is **672 H256 episodes**. All arms use the same B06 N5 initializer and adapter. Numeric seeds alone cannot pair these outcomes with the original G study.
+>
+> This is one parent/data instance with two matched objectives, not two independent training replicates. It needs no preceding teacher-success pilot and no invented requirement to await G’s result. G’s eventual evidence may nevertheless change Root’s allocation.
+>
+> Read native J, service, quality, travel, adverse worlds and complete deployment cost together, averaging tapes within worlds. Also read actual updates and movement, target displacement/entropy, and each final actor’s error on every saved training row. No shadow C queries on learned-student evaluation histories or counterfactual native branches are needed.
+>
+> The outcomes would change decisions as follows:
+>
+> | Observation | Consequence |
+> |---|---|
+> | Learned T improves on P0/B*0 and learned H, with a useful benefit/cost position against direct controllers | Supports a conditional development capability; independent replication becomes a possible next investment. |
+> | Learned H provides the useful gain and T adds none | Prefer ordinary preservation-plus-C supervision; no full-score-target increment established. |
+> | Direct T/H help, but their learned actors do not retain that benefit | Preserve the ordinary controller result; this archive/fit fails to amortize it. No automatic DAgger or capacity repair. |
+> | New actors only beat damaged F0, or merely reproduce P0 | Preservation was achieved, but development beyond reuse was not. End this purchase. |
+> | Better target fit or local scores accompany adverse native outcomes | Reject the package’s native-use prediction at this exposure. |
+> | T is mostly unchanged P | Record limited intervention exposure; do not call it an active adverse score intervention or automatically enlarge it. |
+>
+> A faster actor with native losses remains a measured tradeoff. Successful cloning alone is not sufficient.
+>
+> **Complete prospective price**
+>
+> The DM verified archive/header/hash bindings and supplied source-derived counts and timing estimates. I checked the consequential source semantics and saved summaries; I have not recomputed targets or tested the proposed runtime.
+>
+> | Work | Prospective cost |
+> |---|---:|
+> | New fits | 2; 16,000 updates; 8,192,000 presentations |
+> | Target construction | 163,840 target rows from 81,920 reused records; 81,920 P0 probability requests shared across targets |
+> | New native evaluation | 672 episodes; 172,032 team steps; 860,160 UAV ticks |
+> | Final decisions / private draws | 215,040 / 204,800 |
+> | Worker full-C requests | 112,640 |
+> | Worker neural rows outside fitting | At most 225,280, including target construction |
+> | Complete reader | 928 old/new files; 237,568 saved native ticks; 194,560 C requests; 389,120 neural rows |
+> | Total neural rows outside fitting | At most 614,400 |
+> | Worker + reader CPU | **Estimated 10–30 minutes**, not a bound or admission |
+> | Implementation, checks, review, publication and cleanup | **Estimated 6–10 support hours** |
+> | New canonical evidence / memory | Approximately 0.4–0.8 GB / 0.8–1.5 GiB |
+>
+> Uncached C ceilings are 3,041,280 worker and 5,253,120 reader modeled paths—12,165,120 and 21,012,480 modeled ticks respectively—with approximately 254.6 million and 439.7 million radio-link calculations. Actual cache work must be recorded. The old F0 archive had 81,920 requests but only 9,238 misses; new-law visitation is unmeasured.
+>
+> Direct T/H should obtain their features from MemoC’s already-computed result, preserving feature equality. They should not perform redundant analytic helper work to manufacture an amortization advantage. Pure-student worker helper requests are then 102,400, with at most 14,336,000 helper links. The full reader conservatively permits 31,539,200 helper links for reconstruction.
+>
+> The corrected new native dense-slot count is **47,678,675**, including both parts of the B06 reset procedure. The old archive remains in its existing canonical location. Historical costs are retained: this purchase would bring B02–B06 plus this study to **14 fits, two calibrations and 2,539,560 native steps**, adding the estimated new CPU to the measured 3,323.067 seconds. Older B01 remains separate.
+>
+> The support estimate is the principal investment cost. Stopping remains defensible if Root judges that cost excessive. My preference is this bounded comparison because it tests a changed, constructive objective using a demonstrated asset, paid data, a strong ordinary learned control and direct-controller alternatives. It can produce useful positive or negative knowledge without asserting that the preceding failures have been explained.
+>
+> **MATERIAL_DISSENT: no — the corrected premise and current source-only boundary are sound. I recommend the revised two-fit comparison for Root’s investment decision; no native-improvement, entropy-cause or run-authorization claim is made.**
+
+**DM response and Root selection.** I accept this revised target-package question and its
+full limitations. It uses a retained constructive capability, whereas plain G
+cloning did not itself justify the earlier purchase. My source objections about
+H’s greater proxy expectation, intervention strength, fallback, finite fitting
+and direct-baseline efficiency are retained in the original recommendation.
+Root has now selected exactly two fits and the672-episode complete comparison,
+with no new acquisition, calibration, teacher-success pilot or G-result gate.
+This is B07, a new result-bearing study; B06 and no-S2/transfer dispositions stay
+closed. A coherent learned gain may motivate later separate replication;
+preservation-only, direct-only, adverse or uncertain outcomes end this purchase
+without repair, retuning, aggregation or appended evaluation.
+
+Root fixes both new fits to the SAME numerical soft-CE kernel: FP32 logits
+cast to FP64, FP64 log_softmax and targets, weighted per-row sum then batch
+mean, gradients returned to FP32 parameters. F0 remains the exact archive,
+initialization, shuffle and exposure reference, but its old FP32 hard-CE kernel
+differs. No pure hard-versus-soft-content attribution or third numerical-control
+refit is authorized. All actor/helper/score/navigation/alias and private-CDF
+contracts remain as specified above; flat T returns p.copy() exactly.
+
+The selected operation uses configured local_linux after fresh actual-node
+admission. Root reports recurrent remote GCC3.10.21 failure, including waiting
+A01 during JSON traversal without Torch mapped; its cause is unresolved.
+Local placement is an operation-specific choice, not a runtime diagnosis or
+shared configuration change. Only required canonical F0 inputs will be staged
+with byte hashes, transfer/disk cost recorded, and redundant staging removed
+at closure. The complete frozen worker→reader chain and publication/cleanup
+remain this DM’s responsibility. Prospective details and L0 follow before code.
+
+<a id="b07-selected-contract"></a>
+### B07 fixed prospective contract — S-prior stochastic-target development
+
+Current published main `8ee48a5d21538caf647769d7f505dff0501590a5` includes the
+completed G comparison. I read its complete original diagnosis, not only Root’s
+summary. It retains S_L1−G J+.023431[+.012843,+.033524], S_L0’s unresolved J
+but useful service/path differences, G’s secondary p10/quality/path/CPU tradeoffs,
+and every student outage. G’s1845 physically changed saved-history holds and
+proxy improvement did not establish a mean native upgrade over Q10. This changes
+B07’s design use of background: keep G/Q05 alongside Q10 and P0/B*0, read all
+quality/path/outage tradeoffs, and never promote improved score targets to a
+native prediction already verified. The repeated empirical value of inherited
+stochastic control remains constructive motivation, not an entropy diagnosis.
+The independent review and Root’s explicit loss clarification above cover this
+selected finite exploratory study; no duplicate selection critic/Pro is needed.
+
+**Object and identities.** `UAV-STOCHASTIC-TARGET-DEVELOPMENT-B07`, owned package
+`experiments/candidates/uav_fleet_adaptation/b07_stochastic_targets/`, initial
+run tag `b07_stochastic_targets_a01`. Namespace search found no existing use of
+the exact new eight-digit seed block before this entry. Fixed final worlds are
+29710000..29710031, layout root29711001, master29711000, private tapes29711101
+and29711102, constructor-only native seed29711205, bootstrap root29711991.
+The two fits retain original F0 actor-constructor seed29514201 (copied P0 tensors,
+zero count branch) and shuffle root29514101; their meanings are inherited, not
+new stochastic training replicas. No endpoint selection or extra root is allowed.
+
+Arms are ordered C,Q10,Q05,G,P0,Bstar0,F0,T,H,Tdirect,Hdirect. C is deterministic
+once per world; the other ten run tape0 then tape1. Rotate this21-episode order
+by the world’s index before collection, retaining labels regardless of order.
+All use native N5/U50/all-on/H256 with the B06 explicit paired-layout reset,
+4-tick holds, unchanged114-feature/helper/count adapter and fixed27 commands.
+P0 is the original B02 S asset under that adapter; Bstar0 is its paid temperature2
+law. F0 is the paid B06 endpoint. Learned T/H use temperature1. G and Q10/Q05
+retain their existing ordinary laws. Direct T/H evaluate the original P0 on
+MemoC’s already-paid lawful features, avoiding a redundant analytic helper.
+Each program maintains its own episode/agent-private cache and navigation;
+one new indexed private uniform is used at every stochastic decision, including
+cache hits. Flat-score direct T returns the exact P0 probability array copy.
+No policy receives global evaluator information, C’s future decisions or another
+program’s realized history.
+
+Both new fits use identical fixed F0 chunks/order, copied P0 initialization,
+zero count branch, all34,843 trainable FP32 parameters, continuing fresh Adam,
+original batch/epochs/clipping/shuffles and exactly8000 updates/4096000
+presentations. Their targets differ only through the fixed T/H construction;
+both use Root’s same FP64 soft-CE kernel. Frozen parent probabilities are computed
+once per archived context and shared across targets, never from a changing
+learner. No new native acquisition, labels, calibration or hard-control refit.
+Recorded F0 data were adaptively acquired by F0’s greedy predecessors; the new
+comparison is conditional on that complete static archive. Its original FP32
+hard CE remains a numerical difference from the new soft kernel.
+
+**Outcome and inference.** Primary is learned T−learned H mean native J. For
+all55 unique pairwise contrasts among11 programs, average the two tapes within
+each of32 worlds (C once), retain the signed32-vector and descriptive percentile
+95% paired-world bootstrap with10000 resamples, root29711991, reusing one index
+matrix across contrasts/metrics. No pooled training inference, multiplicity-adjusted
+confirmation, equivalence rule or unpriced deployment utility is claimed. Read
+P0/Bstar0/F0/direct T/direct H/G/Q10/Q05/C comparisons, service/quality/p10/minimum,
+zero-service ticks/worlds, path, boundaries/zero displacement, all adverse worlds
+and complete timing/cache work together. Beating damaged F0 alone is insufficient.
+
+Read all targets’ displacement, entropy, local-score response, flat-score exposure
+and support; original and final weights/gradients/count-branch activation; complete
+70-epoch optimization traces per fit; and one full frozen-endpoint pass over all
+81920 rows for each learned model. Those training-row errors are not held-out
+generalization. Direct-target and learned native trajectories already test the
+complete packages; no C/P shadows on learned histories, optimizer replay or
+counterfactual native branches are added. TV and local-score identities describe
+the targets, not learned or native guarantees. Scope/cost and stop branches are
+exactly those preserved above. No automatic extra fit, retuning, aggregation,
+evaluation or repeated reader after a completed purchase.
+
+**Inputs, local placement and full reading.** Before launch, stage exactly256
+canonical F0 raw files, its three phase datasets, original P0 and final F0 assets,
+plus compact source-bound F0 metadata. The old source summary’s recorded hash
+must match before extracting its selected metadata; every staged file is rehashed.
+Existing original evidence stays canonical on the remote node; local staging is
+an explicitly priced temporary consumption copy, not a new retention archive.
+Raw/data/assets alone total approximately25.8MB (metadata additional); exact
+bytes, allocated disk, transfer wall/CPU and paths will be recorded. No remote
+worker is restarted and sparse snapshots are not assumed to hydrate these inputs.
+The new admitted source refers to the declared local staging root by absolute
+path and digest; staging is removed only after the complete new reader and all
+live consumers finish, with required old evidence preserved remotely.
+
+The configured local scientific runtime is Python3.10.20/Clang22.1.3,
+NumPy1.26.3/Torch2.7.0+cpu; one Torch/inter-op/BLAS thread and deterministic
+algorithms. This differs from old remote Python3.10.21/GCC/Torch2.7.0+cu118;
+all new arms share the local runtime and retain old exact asset bytes. No
+cross-runtime bit identity of new execution is assumed. Existing operations
+are already reconciled closed; admission must check fresh local memory and
+concurrent consumers immediately before launch. Preserve the remote failure
+facts without treating local success as a root-cause test.
+
+The chain includes target creation, two fits, all672 new episodes and exactly
+one complete independent saved-data reader. It reconstructs all81920 old C,
+helper/feature/nav/target records and all928 old+new files/237568saved native
+ticks, every actual final C/neural/direct probability and private-CDF law,
+all endpoint diagnostics, source/asset/data/shuffle identities and complete
+native reductions. It makes no native transition or optimizer update. Reader
+cost includes194560 C requests and389120 neural rows; deterministic cache reuse
+changes actual calculations, never row coverage. The exact source-derived
+request/link/target counts,10–30CPU-minute and6–10support-hour estimates above
+remain binding planning scope, not runtime cutoffs. Actual work and failure
+exposure are retained. Full imports, transfer, readback and publication are
+included or explicitly separately timed, never silently omitted.
+
+<a id="b07-l0"></a>
+### L0 — one source-bound static-data target comparison and complete reader
+
+Implement the fixed B07 object in its owned package/tests, with a compact pinned
+F0 input manifest, hash-checked staged inputs, fresh admitted entry, partial-failure
+records, raw outputs, two phase-trained actors and full reader. Import unchanged
+B02/B06/G source helpers; do not edit their frozen files, environment, launcher,
+shared controls or other directions. Direction NOTES/RESEARCH and Git index are
+DM-owned. One bounded Implementer may own only `targets.py` and its matching
+`test_targets.py`: pure T/H numerical laws plus the selected shared soft-CE loss.
+The DM owns protocol, assets/staging, policy/collector, trainer integration,
+reader, entry and remaining tests, and reviews/accepts the Implementer result.
+No helper may edit the notebook, stage/commit, run production inputs or launch.
+
+Checks use synthetic arrays/models/environments only: exact flat-T identity,
+parent zero-support and valid nonflat/tied/extreme-lawful score cases, scalar
+independent target arithmetic, one-hot and identical-target FP64 loss/gradient
+agreement, count-zero branch, unchanged actor weights, independent RNG addresses,
+cache-hit fresh sampling/aliases, saved target/raw/source corruption refusal and
+mocked-admission end-to-end production call ordering. Production data are not
+queried by tests. No extra native fixture is purchased. Independent engineering
+review covers numeric loss/target/RNG, static archive binding, full reader and
+admission before one published launch. After acceptance use the original status
+handle and deterministic observer through full result reading; no duplicate run.
