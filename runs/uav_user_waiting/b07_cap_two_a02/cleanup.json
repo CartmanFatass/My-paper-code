@@ -1,0 +1,2968 @@
+{
+  "object": "uav_user_waiting_b07_final_cleanup",
+  "status": "COMPLETE",
+  "completed_at": "2026-10-01T05:20:16.831526+00:00",
+  "scientific_result_commit": "defe6ef216535c920124e557a2a63d39bcc43445",
+  "independent_disposition_commit": "02d4f2ae307c4c813b5adfd10d3bc2d508803a36",
+  "consumer_release": "Both accepted worker/reader processes and the failed zero-query invocation are positively terminal; dedicated scientific reviewer completed and released all raw/full-outcome consumers; remote elevated scan finds no references to affected run roots; local process inventory has no B07 scientific consumer.",
+  "remote": {
+    "status": "COMPLETE",
+    "completed_at": "2026-10-01T05:18:11.934245+00:00",
+    "canonical_retained": [
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426000.npz",
+        "bytes": 375582,
+        "sha256": "036569b8a6abc4128faecdc84c5b7e5befa3a18938098a3a0348867ac0c165cd",
+        "allocated_bytes": 376832
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426001.npz",
+        "bytes": 433326,
+        "sha256": "747cd147f3fe761407ffaae51f119d005d5429ef1354372768f7925a9ff72cf4",
+        "allocated_bytes": 434176
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426002.npz",
+        "bytes": 359372,
+        "sha256": "2dfdf3ad3d9f8f7003584567bba492f1b8595fe9cd5f56c955f0caa60c685bf1",
+        "allocated_bytes": 360448
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426003.npz",
+        "bytes": 432952,
+        "sha256": "60fca71a9715bb6b6c6b84bd37bb8feb01888460172b81057616549e58370310",
+        "allocated_bytes": 434176
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426004.npz",
+        "bytes": 418520,
+        "sha256": "628bb1525ef035c75e703e21a22931fc5c91cef29f69158a57a34b79555bf173",
+        "allocated_bytes": 421888
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426005.npz",
+        "bytes": 419696,
+        "sha256": "c0371089bf09ebe7fa04500e2bec02a3793665afc3986580c04ad80351627808",
+        "allocated_bytes": 421888
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426006.npz",
+        "bytes": 392783,
+        "sha256": "5222be431ead1ce0fa4ba0677b34053e871b33bbb0c635eb79f2993597a968ba",
+        "allocated_bytes": 393216
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426007.npz",
+        "bytes": 395263,
+        "sha256": "48def4969c21511c361dc03bb7be7331ea64bdea8729a3dd4c91048cc90db700",
+        "allocated_bytes": 397312
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426008.npz",
+        "bytes": 391262,
+        "sha256": "cdfc3ca55fd9dedc336f5c345e4a0094379d8c03125cc77519ee8db4e2c58411",
+        "allocated_bytes": 393216
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426009.npz",
+        "bytes": 388553,
+        "sha256": "3422c8c7e3d66bfc804b50207d223bd21147d322675457adda9ee45a171fb004",
+        "allocated_bytes": 389120
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426010.npz",
+        "bytes": 421805,
+        "sha256": "4f38d91bddc8f397477041236e53ed1e2b71fbc4f718db9b0d6306a41a412e7b",
+        "allocated_bytes": 421888
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426011.npz",
+        "bytes": 346712,
+        "sha256": "bf0777f5c5856cd920bf4d08f53d44abb0a361afc7b58298819a7c49b45c7c9d",
+        "allocated_bytes": 348160
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426012.npz",
+        "bytes": 418961,
+        "sha256": "7f278fe1ba1d2e7cb9748b16f415160afff18b794887cbe8cb1dce48b0ad3d4a",
+        "allocated_bytes": 421888
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426013.npz",
+        "bytes": 373847,
+        "sha256": "14269e2a131bb9dc6a7d91b17a80cdc18daa73ce040ff18f17b9f8ce9e213548",
+        "allocated_bytes": 376832
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426014.npz",
+        "bytes": 417349,
+        "sha256": "e284436980b6d9e4b2846c3529857fbaae69e100037a76944857c57494f54fee",
+        "allocated_bytes": 417792
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426015.npz",
+        "bytes": 414081,
+        "sha256": "2ba5540561778c58eaff8254eab2f1c4f39beb04066ea1eb4a9f0d7418cc2c65",
+        "allocated_bytes": 417792
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426016.npz",
+        "bytes": 391498,
+        "sha256": "15d829caa5cceff35ae50a1b7746251bddf6a2f60ab9713f43b1bfaadeff83c7",
+        "allocated_bytes": 393216
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426017.npz",
+        "bytes": 409104,
+        "sha256": "25e16d9ccaa4ab0072cbeec4cd1f0052716340dc1a7b5a24fed596727cf8aa0d",
+        "allocated_bytes": 409600
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426018.npz",
+        "bytes": 307071,
+        "sha256": "68053ceae845116fa23ab4e617f2b36f94f4e23a7e1166140f54da02d812d365",
+        "allocated_bytes": 307200
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426019.npz",
+        "bytes": 367562,
+        "sha256": "b5123043f5fb805a9a1abedbe95e0c7fcc7dbe723d9d9234b9d8233aaffee92b",
+        "allocated_bytes": 368640
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426020.npz",
+        "bytes": 408950,
+        "sha256": "3bdf47bc6ca1933bdb0e2de847a63a8d16eed93ff21937a4ce8ce0501aa1f1c3",
+        "allocated_bytes": 409600
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426021.npz",
+        "bytes": 423753,
+        "sha256": "f0cea74cece45a5186c44fa703df32bb57fb58b61d547dda4aac04da79d8a50d",
+        "allocated_bytes": 425984
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426022.npz",
+        "bytes": 413994,
+        "sha256": "65eebf737aaf7e696cfd0e253d2db0333a922cb97b3080b8380003b40c7ea93d",
+        "allocated_bytes": 417792
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426023.npz",
+        "bytes": 368749,
+        "sha256": "c6a2dec0a7451777a026731f312ce2045099b116182f165e80d81712b6920aab",
+        "allocated_bytes": 372736
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426024.npz",
+        "bytes": 354099,
+        "sha256": "324b179dfb7cb34e22aac14fa6054e3c0c98f871c368bbb6b0f31a027d5d8837",
+        "allocated_bytes": 356352
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426025.npz",
+        "bytes": 376069,
+        "sha256": "f0c29337fb9add75a95bda1a6267ffcba137c72d7b49c33b01b504a8aa6c130d",
+        "allocated_bytes": 376832
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426026.npz",
+        "bytes": 333183,
+        "sha256": "e5a87f41cdd393f7f2c2a66c6aa89e773969b2f6394da08dbeb6990b6c947307",
+        "allocated_bytes": 335872
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426027.npz",
+        "bytes": 380231,
+        "sha256": "bbd86d45b3c45a6640a9a28b218b6def084b12aa3744b809e135c1aee639e865",
+        "allocated_bytes": 380928
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426028.npz",
+        "bytes": 391481,
+        "sha256": "f583629f6182481adeea19d6d4fa07ab6242ef625ebf67646c0a471c08d45977",
+        "allocated_bytes": 393216
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426029.npz",
+        "bytes": 413514,
+        "sha256": "4b71f38570f4bf7093435f9cd390ee7856360d162f7b877dd212383694cc3a07",
+        "allocated_bytes": 413696
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426030.npz",
+        "bytes": 361750,
+        "sha256": "f67c5049580cbb262ae2be22f3b571ccee29ff2df2f0a0a92b74c2a4af3cb259",
+        "allocated_bytes": 364544
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426031.npz",
+        "bytes": 295306,
+        "sha256": "7685109f20a1246b32e94531450204aae2b0947e8ac38593d20865127a01ba99",
+        "allocated_bytes": 299008
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426032.npz",
+        "bytes": 390009,
+        "sha256": "497278ab74333b01f35accf22a1269ae573cc30cbc7c7adbeea309a6ae0e379b",
+        "allocated_bytes": 393216
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426033.npz",
+        "bytes": 420156,
+        "sha256": "5e008037a2001b6f049bb098a38305cbc20458c84f114bebdae7c5015027c03d",
+        "allocated_bytes": 421888
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426034.npz",
+        "bytes": 407140,
+        "sha256": "9b5c9c2e2d4259812d18a3b9f9959af4caf744da967ec745b670f9d7c07d62ac",
+        "allocated_bytes": 409600
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426035.npz",
+        "bytes": 412133,
+        "sha256": "6d377140859197625e9126bedf7a86d51a8b576e39e06f6a798e366d53353954",
+        "allocated_bytes": 413696
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426036.npz",
+        "bytes": 422600,
+        "sha256": "7e096302174a620f37d6e3a2050d837c58a522e59d4ba6421f291e2b4b941fe6",
+        "allocated_bytes": 425984
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426037.npz",
+        "bytes": 310625,
+        "sha256": "8c7de32b0ae65a950583fcbd7dd7ccd8c52e76085b6bda656f2d2041e87f508c",
+        "allocated_bytes": 311296
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426038.npz",
+        "bytes": 423838,
+        "sha256": "036c43b1dfe02a4d48620f311c54214ac48672fa8beee947c353333a5191c81e",
+        "allocated_bytes": 425984
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426039.npz",
+        "bytes": 386460,
+        "sha256": "cc4f4e6fc45175f2bc61cb8f06c5084712e1f12446336eb07bb8d265c0271fab",
+        "allocated_bytes": 389120
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426040.npz",
+        "bytes": 402080,
+        "sha256": "88280589d27349ad7377e10563de157a4551e9b36024156f3f82863f56011fb8",
+        "allocated_bytes": 405504
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426041.npz",
+        "bytes": 234902,
+        "sha256": "f3705f91b1b88782de9e543729b5fb33e4cd521ad3a6666006da27db1dce77ae",
+        "allocated_bytes": 237568
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426042.npz",
+        "bytes": 369801,
+        "sha256": "2a8fae5e2c58ff56e25f9993d1f5147f389ac65e7a8ba75332fb7b35ba2f6cc6",
+        "allocated_bytes": 372736
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426043.npz",
+        "bytes": 384977,
+        "sha256": "1b2d52e015befd3085aa06a37e1ec9ea70b957c8dacec687907a0309cb3d8722",
+        "allocated_bytes": 385024
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426044.npz",
+        "bytes": 415767,
+        "sha256": "aa3c89fed13793334ccfb33ae45f23d27429bb14865653fac8268a4190ab1742",
+        "allocated_bytes": 417792
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426045.npz",
+        "bytes": 407580,
+        "sha256": "01d0a834184549e7eb44da178a8d769b6b8fb3e4c393a09f777ffe4c6ceb4268",
+        "allocated_bytes": 409600
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426046.npz",
+        "bytes": 365856,
+        "sha256": "d42c638ba0d0aaf618a1159ea663e2208e861f933c43166cdadb5752a5f24d41",
+        "allocated_bytes": 368640
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426047.npz",
+        "bytes": 395955,
+        "sha256": "19720443e102cedc3f6f7a6384c13c46ef3b066e10cbbdfe76625f1e134383ed",
+        "allocated_bytes": 397312
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426048.npz",
+        "bytes": 407140,
+        "sha256": "2836a4f46d7405dfb12ad43cb9b964ef5859a8952ed402469d939878b4677b17",
+        "allocated_bytes": 409600
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426049.npz",
+        "bytes": 409744,
+        "sha256": "9a71e0d7afb4316099e5dee216f2356c4dab9d52138d24b3768f3842b2ed94d9",
+        "allocated_bytes": 413696
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426050.npz",
+        "bytes": 429567,
+        "sha256": "08e2d5d3d3cd9b381e7d6d208c59a9a564db79692866994843bd3ec54ac281b8",
+        "allocated_bytes": 430080
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426051.npz",
+        "bytes": 401839,
+        "sha256": "197d54f382c5ae3213485da525bc542c9dff94fc9b95ed7e6f060b21d13055e9",
+        "allocated_bytes": 405504
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426052.npz",
+        "bytes": 404343,
+        "sha256": "20f92081b70f270bbf3ffd31bd165328b858e9e2e3001198367487175d2e7e69",
+        "allocated_bytes": 405504
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426053.npz",
+        "bytes": 207564,
+        "sha256": "9d9c48074a7c480eaf5c561180a93e1fb1e6e1e825028454ce14f232d8b4e2bb",
+        "allocated_bytes": 208896
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426054.npz",
+        "bytes": 399995,
+        "sha256": "fa5d28bd353c49784a46f5ad31f6d083e91e95edf76e40114a1e64646b45a380",
+        "allocated_bytes": 401408
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426055.npz",
+        "bytes": 281617,
+        "sha256": "ff7b202fe85f116ebd36fe7f2df79cdb2be6ee2578285aec6cdc7efa1f2bc47b",
+        "allocated_bytes": 282624
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426056.npz",
+        "bytes": 415851,
+        "sha256": "3471a134803e873a20c989789034f43ce9d2a5c5fae221439be7be1025e503b8",
+        "allocated_bytes": 417792
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426057.npz",
+        "bytes": 413414,
+        "sha256": "96a4173842bd11e33082a5ef128e14a037451085568a2fc630d3932f37cd4322",
+        "allocated_bytes": 413696
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426058.npz",
+        "bytes": 421854,
+        "sha256": "c9a72c7019075bcbe4c87a0f373de28f4f06c6dcbab57992f7133c6080abdcc3",
+        "allocated_bytes": 421888
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426059.npz",
+        "bytes": 414284,
+        "sha256": "0ce843a8c8829b9677c0ffc563b340ddffb928838a48b0b92ea0bc0bdd72e1d3",
+        "allocated_bytes": 417792
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426060.npz",
+        "bytes": 435160,
+        "sha256": "152bb7ff64d2a33b689d36a72094ab599075c758f11b4c29799d091a0eaf0c4e",
+        "allocated_bytes": 438272
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426061.npz",
+        "bytes": 370328,
+        "sha256": "e8dc58e4dd349d5db67ea85fd7caf59412da0c37e46c7b3215ef5d10e860c8c8",
+        "allocated_bytes": 372736
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426062.npz",
+        "bytes": 412029,
+        "sha256": "b4324a676421ce44ca211987934ff76e278f2a51c28db4b903bd326c8e2098c6",
+        "allocated_bytes": 413696
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/raw/C2_29426063.npz",
+        "bytes": 430235,
+        "sha256": "1dc6191e85b2801e52442b803e47fe2b60138f59ec256e69e1e89c566e2bd5b5",
+        "allocated_bytes": 434176
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426000.json",
+        "bytes": 89213,
+        "sha256": "a0f9085b5fa8e426432873f9f029d8cb246fdf49a13505d1a9ed53f0bbe106a7",
+        "allocated_bytes": 90112
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426001.json",
+        "bytes": 79268,
+        "sha256": "0080cded03da1aa8a61c15d74f02046538e363a34347bf07802c5241fda4e00a",
+        "allocated_bytes": 81920
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426002.json",
+        "bytes": 82723,
+        "sha256": "c66f4af4bab54ff8ac1716714413990e645ded1c6811d6734c8f08d900ba905b",
+        "allocated_bytes": 86016
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426003.json",
+        "bytes": 83026,
+        "sha256": "f3333e769f24e4c7dfd198f0e08b46f1fe52f6c8d25f6140f969726a304a0eae",
+        "allocated_bytes": 86016
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426004.json",
+        "bytes": 81851,
+        "sha256": "e34411e100deadc4337d3f247c0eeabf6c797e2d8794a99db14284912bce5eef",
+        "allocated_bytes": 81920
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426005.json",
+        "bytes": 91712,
+        "sha256": "f4f18623cc7e83f95b79ce89c75ad6b0bd6a50ce638ee6e4c0834319cacd92aa",
+        "allocated_bytes": 94208
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426006.json",
+        "bytes": 82249,
+        "sha256": "060bc08f4b30dc68e7e1f05ca28711c58696811c180e705c1eb1a7be3482ea4e",
+        "allocated_bytes": 86016
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426007.json",
+        "bytes": 78361,
+        "sha256": "1bf88300d96ccd29018c5ac8f29f2e67f278d5fa10c97d1c9eeecef9e32632ff",
+        "allocated_bytes": 81920
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426008.json",
+        "bytes": 91859,
+        "sha256": "0208e835d343e1abc078f2e268504b9de55a031d1b03b17274f64b637e722366",
+        "allocated_bytes": 94208
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426009.json",
+        "bytes": 86453,
+        "sha256": "3d5fb0aea5ca5efc1805d332c77fca4678e561e586ac1a53aa59467b9e1c11be",
+        "allocated_bytes": 90112
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426010.json",
+        "bytes": 87283,
+        "sha256": "85a2497b302aebc2f6d61d17de294ef658daca82af43907f2693e19ca843ba94",
+        "allocated_bytes": 90112
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426011.json",
+        "bytes": 86602,
+        "sha256": "b688d68e6468c9aceb4c359886237bd14bcd3b68db028234802c638f64027bd9",
+        "allocated_bytes": 90112
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426012.json",
+        "bytes": 83584,
+        "sha256": "84eb862308a44b430b0f4a6e4e2226878e2b80c20329eb248ab63744a73f5a90",
+        "allocated_bytes": 86016
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426013.json",
+        "bytes": 83134,
+        "sha256": "7752ff4e17383b21c9c430b0d1c8c69590d64e7ba1e23cbc8a85c11b816b0803",
+        "allocated_bytes": 86016
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426014.json",
+        "bytes": 81152,
+        "sha256": "783f53cb1416a21aae711f3be44ab99ab1440cbe3cbf546669979e5bc4ee6c4f",
+        "allocated_bytes": 81920
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426015.json",
+        "bytes": 83542,
+        "sha256": "95eec3798106a3dc8d7463478b2e8fc7a602b9965179355c70b48395ceda9df4",
+        "allocated_bytes": 86016
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426016.json",
+        "bytes": 90503,
+        "sha256": "db87f6c9990de26a7afa176ad27e4ac743043d7a9d40ad1bf3a9d70264a94b0d",
+        "allocated_bytes": 94208
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426017.json",
+        "bytes": 85311,
+        "sha256": "bea13d5768508b80ceced97b11d8fd4fdd72c3b43dc6e0b8423b15165bbfd2c1",
+        "allocated_bytes": 86016
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426018.json",
+        "bytes": 92076,
+        "sha256": "60522ef449f2bf3a7538cbb93512f326b28d081afcc60ed385a3baf29b65c904",
+        "allocated_bytes": 94208
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426019.json",
+        "bytes": 80836,
+        "sha256": "db5e7f3189bca6de121f0cfd69a43156294f0cb1368edb6bcad66094ddc68676",
+        "allocated_bytes": 81920
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426020.json",
+        "bytes": 79412,
+        "sha256": "54f57c6121b8032758996f7201c889549f03eee075ef195345224e49698c5ab8",
+        "allocated_bytes": 81920
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426021.json",
+        "bytes": 86644,
+        "sha256": "e51a755b27647f26803395342626831306d7cbca752821dfc2f0d3aff9a53ff7",
+        "allocated_bytes": 90112
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426022.json",
+        "bytes": 81307,
+        "sha256": "49ee385a1fafeacd76dc831d71f8244c29f610b1eef544c6bdaf5d4ebb0ae188",
+        "allocated_bytes": 81920
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426023.json",
+        "bytes": 84019,
+        "sha256": "4a90886747e5ac5d45361479817495629e5b846172f485c2de8293c7c8b20df5",
+        "allocated_bytes": 86016
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426024.json",
+        "bytes": 87866,
+        "sha256": "711deea22d3d29add83d108a44a02b991419b64d15d87d7825f8c6237e551415",
+        "allocated_bytes": 90112
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426025.json",
+        "bytes": 82177,
+        "sha256": "3703b196eeab43cf2d863c002e3c1b2dc34ffdb5b2fad50f76fdffbebcb8ce1c",
+        "allocated_bytes": 86016
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426026.json",
+        "bytes": 81718,
+        "sha256": "dcd7abede69bb58d5bb92e950304074c74031f18a8ee281d682b3a712846467f",
+        "allocated_bytes": 81920
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426027.json",
+        "bytes": 80329,
+        "sha256": "7e091c5a77715e3557df3eeee223d8a246328bdb1e2e705b67010a05dc56f653",
+        "allocated_bytes": 81920
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426028.json",
+        "bytes": 83477,
+        "sha256": "25ffe70428b5eadfcc4a7c61ee829af040e6efd141514a2fd1378317360be109",
+        "allocated_bytes": 86016
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426029.json",
+        "bytes": 91273,
+        "sha256": "53e1ff034311ea7c2a348367d6ba6e136bc5dd3bbee59af1c5a3822a1a64d222",
+        "allocated_bytes": 94208
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426030.json",
+        "bytes": 89322,
+        "sha256": "47a17b663405a4981ac87996cf3792e3ff12bb36badd9db0b1d5d29cc67fcdb1",
+        "allocated_bytes": 90112
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426031.json",
+        "bytes": 76769,
+        "sha256": "efc93341e472a4c57543a8f079a7c3bc8827c6d1800b1c782e35a9a0b1b6804b",
+        "allocated_bytes": 77824
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426032.json",
+        "bytes": 91780,
+        "sha256": "cc3cbbd534d935716ec9e3dac7dd2b130327fe118c91e6064fe2faf4bbb25440",
+        "allocated_bytes": 94208
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426033.json",
+        "bytes": 83054,
+        "sha256": "3b4dd8e32c671827d18ac8e6d981b6b6f331849cb6885e0cf956274f7deaddec",
+        "allocated_bytes": 86016
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426034.json",
+        "bytes": 85078,
+        "sha256": "881dbc4749ef1bd7cad03a281c49d13ca940c8160b47684ad8a48cd96105ef3a",
+        "allocated_bytes": 86016
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426035.json",
+        "bytes": 92404,
+        "sha256": "7515a9881b0d1fe7bfff6c81473894ce62380140e541f6b77d181e723529622b",
+        "allocated_bytes": 94208
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426036.json",
+        "bytes": 84113,
+        "sha256": "fa489846b5b820dee8c4a010085cd4097cae213fcdb6dd9a5664b6717db7647e",
+        "allocated_bytes": 86016
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426037.json",
+        "bytes": 89666,
+        "sha256": "de284fee7ef441514223506ded61691826151d26a72d6b63686e9ad04102c17d",
+        "allocated_bytes": 90112
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426038.json",
+        "bytes": 85941,
+        "sha256": "a694b7c080cfbb7d38c340d022312af59bdf4137fce0bd0a8e11ee24c960877a",
+        "allocated_bytes": 86016
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426039.json",
+        "bytes": 81879,
+        "sha256": "13d5afa8cdb985fee09e74cc1ebaf02ef61523cae753a369eb722e56d9b4d8ae",
+        "allocated_bytes": 81920
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426040.json",
+        "bytes": 86564,
+        "sha256": "a57cefe74b18aa1b4e80555a15f4962dabc83d0dafed05c7778662d3fca7f194",
+        "allocated_bytes": 90112
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426041.json",
+        "bytes": 90151,
+        "sha256": "1f5ff4f7093301cd898b5e25eee9ef5e3396c9a97fe8f6ad9d360ce6c50c6ef4",
+        "allocated_bytes": 94208
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426042.json",
+        "bytes": 89263,
+        "sha256": "1b6c6faae7c57ff272de5eb82df30f8898d6da922c50611a44b2cbd4bc787403",
+        "allocated_bytes": 90112
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426043.json",
+        "bytes": 81744,
+        "sha256": "b963a1406900d7953cd59091e4cfd2b70e877a2be65c09f56f0ae90ff6914894",
+        "allocated_bytes": 81920
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426044.json",
+        "bytes": 84833,
+        "sha256": "476caf9d8b2793b36390a2c5e61c74f2dda743ec115e5297898d48efeb3b6eb8",
+        "allocated_bytes": 86016
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426045.json",
+        "bytes": 80197,
+        "sha256": "fee56816f68dcce477e4b263799e26dca94928802153c11ec534a2de26cf8ca3",
+        "allocated_bytes": 81920
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426046.json",
+        "bytes": 78830,
+        "sha256": "e7bca620169ebf436e132fde624fd2fdea86aab22352c7df2958395172418573",
+        "allocated_bytes": 81920
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426047.json",
+        "bytes": 83913,
+        "sha256": "e3588438304902fe01725471e8460ad7f9dc92b48cbfee6f6b176d917449a9a7",
+        "allocated_bytes": 86016
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426048.json",
+        "bytes": 74841,
+        "sha256": "fc9ac82317703f0234cbcbaf5d0b4193de96b7e0a5aeadb3916f41cb4e730a74",
+        "allocated_bytes": 77824
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426049.json",
+        "bytes": 85778,
+        "sha256": "997761ad21fe5f6e56eeebee4b840275fc452fd117a3a96046fe84e141c68fda",
+        "allocated_bytes": 86016
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426050.json",
+        "bytes": 82913,
+        "sha256": "46734f4967834677366d4775dd44ef1b6aedb258d98b61a0ac43547af04856fd",
+        "allocated_bytes": 86016
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426051.json",
+        "bytes": 80722,
+        "sha256": "67dc19f6c1a3d6bc7180edbd7002e5740005f813169aec2d69a44ce2db028572",
+        "allocated_bytes": 81920
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426052.json",
+        "bytes": 71776,
+        "sha256": "8995ac1cd7a298602cf05490ee38c5eceb07c785c4519a9e87ab7498dfd18ab6",
+        "allocated_bytes": 73728
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426053.json",
+        "bytes": 90004,
+        "sha256": "eae58adee6214c7f2c4e727cc95f8a7665134149da68ce544ce7bd4471f6d045",
+        "allocated_bytes": 90112
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426054.json",
+        "bytes": 84694,
+        "sha256": "745f0af56658c815151d6b9886ea7dcf895c442e1af7fc6ec9be317299f83815",
+        "allocated_bytes": 86016
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426055.json",
+        "bytes": 97275,
+        "sha256": "609914f59e1a8fa8896c3a77a1de1b6d403f65cef37588b16bee6bc85ec40c52",
+        "allocated_bytes": 98304
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426056.json",
+        "bytes": 80277,
+        "sha256": "2ddbac380ed9777b5df7f02d0246a9516bc7a661f3ebfcf54a93bf98398c3987",
+        "allocated_bytes": 81920
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426057.json",
+        "bytes": 76164,
+        "sha256": "5cc1bec5c4a182c0f49b4b3f6b79d7175124324b4f015e1a8fafbbbab88cae67",
+        "allocated_bytes": 77824
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426058.json",
+        "bytes": 86402,
+        "sha256": "7c8bd7282c451157454a876b972732b26946b82e3311efa52531c37ac70c01eb",
+        "allocated_bytes": 90112
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426059.json",
+        "bytes": 76282,
+        "sha256": "7b991cc12adad26e399f388dbe7ee44dfd4effea1749da1bfab389fbc1f87c01",
+        "allocated_bytes": 77824
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426060.json",
+        "bytes": 81276,
+        "sha256": "d4fae466faa94ed6ef36788593023602b67a7fe9216537a97baff5359cb1f030",
+        "allocated_bytes": 81920
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426061.json",
+        "bytes": 82573,
+        "sha256": "5ce3cf2e6d7c3b01cfc701b27877f0eaecabb104eb5890373ce60ab30fd1e5bf",
+        "allocated_bytes": 86016
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426062.json",
+        "bytes": 85829,
+        "sha256": "15968864fd5350199830ecaa1f92de7b6742b3b27ce1bb8f7168a05ad645cec2",
+        "allocated_bytes": 86016
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/outcomes/C2_29426063.json",
+        "bytes": 81393,
+        "sha256": "5985dfd81bcc8c5ee807a432e3f9fcfbf7113b339e121b8655abe9bf850392fd",
+        "allocated_bytes": 81920
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02/summary.json",
+        "bytes": 1293694,
+        "sha256": "979c3c3c1a96e34356becd2c77e6a6c6cf6ab41a50deba396d3b07ffeee4dd9d",
+        "allocated_bytes": 1294336
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_read_a02/reading.json",
+        "bytes": 377976,
+        "sha256": "9d981dd8e8aa22dbd609d6110ae2e826676392d6402ea07a6be2eba549c86c65",
+        "allocated_bytes": 380928
+      }
+    ],
+    "canonical_payload_bytes": 31865551,
+    "data_consumer_scan": [
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02",
+        "references": []
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01",
+        "references": []
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02",
+        "references": []
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_read_a02",
+        "references": []
+      }
+    ],
+    "snapshot_preview": {
+      "mode": "preview",
+      "snapshots": [
+        {
+          "claim": "/home/wu/projects/HMASD/.git/hmasd-admission/56f1e3253e25f85dbb264d74dc2d5d2a587f366c2a62734997ab3a50e417a097.json",
+          "durable_ref": "refs/remotes/origin/HEAD",
+          "eligible": true,
+          "output": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a01",
+          "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/a18d26cc245a4352b817ff080aaea63c",
+          "sha": "8fd6ee5470ba350414850984a2b7408297750d6c",
+          "snapshot": "a18d26cc245a4352b817ff080aaea63c"
+        },
+        {
+          "claim": "/home/wu/projects/HMASD/.git/hmasd-admission/dfe9c35775c42aa19442147ed825f2c52b9cab8f2be84646b3e065a7cb2ab7a0.json",
+          "durable_ref": "refs/remotes/origin/HEAD",
+          "eligible": true,
+          "output": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02",
+          "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/dd35a883e5de4ebda0cc6a2ccac6def3",
+          "sha": "54320ab7adfdce4c31effbb30f6f551470fe97c2",
+          "snapshot": "dd35a883e5de4ebda0cc6a2ccac6def3"
+        },
+        {
+          "claim": "/home/wu/projects/HMASD/.git/hmasd-admission/8f1d811e00a14600913a2393e0da8911d5d7d1018e8ab0b21b6dba042113b72b.json",
+          "durable_ref": "refs/remotes/origin/HEAD",
+          "eligible": true,
+          "output": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_read_a02",
+          "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/6e96f336a31a449c9d9072f4bf64865c",
+          "sha": "54320ab7adfdce4c31effbb30f6f551470fe97c2",
+          "snapshot": "6e96f336a31a449c9d9072f4bf64865c"
+        }
+      ]
+    },
+    "snapshot_apply": {
+      "mode": "apply",
+      "snapshots": [
+        {
+          "claim": "/home/wu/projects/HMASD/.git/hmasd-admission/56f1e3253e25f85dbb264d74dc2d5d2a587f366c2a62734997ab3a50e417a097.json",
+          "durable_ref": "refs/remotes/origin/HEAD",
+          "eligible": true,
+          "output": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a01",
+          "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/a18d26cc245a4352b817ff080aaea63c",
+          "removed": true,
+          "sha": "8fd6ee5470ba350414850984a2b7408297750d6c",
+          "snapshot": "a18d26cc245a4352b817ff080aaea63c"
+        },
+        {
+          "claim": "/home/wu/projects/HMASD/.git/hmasd-admission/dfe9c35775c42aa19442147ed825f2c52b9cab8f2be84646b3e065a7cb2ab7a0.json",
+          "durable_ref": "refs/remotes/origin/HEAD",
+          "eligible": true,
+          "output": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_a02",
+          "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/dd35a883e5de4ebda0cc6a2ccac6def3",
+          "removed": true,
+          "sha": "54320ab7adfdce4c31effbb30f6f551470fe97c2",
+          "snapshot": "dd35a883e5de4ebda0cc6a2ccac6def3"
+        },
+        {
+          "claim": "/home/wu/projects/HMASD/.git/hmasd-admission/8f1d811e00a14600913a2393e0da8911d5d7d1018e8ab0b21b6dba042113b72b.json",
+          "durable_ref": "refs/remotes/origin/HEAD",
+          "eligible": true,
+          "output": "/home/wu/projects/HMASD/runs/uav_user_waiting/b07_cap_two_read_a02",
+          "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/6e96f336a31a449c9d9072f4bf64865c",
+          "removed": true,
+          "sha": "54320ab7adfdce4c31effbb30f6f551470fe97c2",
+          "snapshot": "6e96f336a31a449c9d9072f4bf64865c"
+        }
+      ]
+    },
+    "snapshot_apply_returncode": 0,
+    "snapshot_stderr": "",
+    "snapshots": [
+      {
+        "snapshot": "a18d26cc245a4352b817ff080aaea63c",
+        "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/a18d26cc245a4352b817ff080aaea63c",
+        "metadata_path": "/home/wu/projects/HMASD/.git/worktrees/a18d26cc245a4352b817ff080aaea63c",
+        "source_allocated_before": 816840704,
+        "metadata_allocated_before": 3641344,
+        "source_allocated_after": 0,
+        "metadata_allocated_after": 0,
+        "source_absent": true,
+        "metadata_absent": true,
+        "net_allocated_reclaimed_bytes": 820482048
+      },
+      {
+        "snapshot": "dd35a883e5de4ebda0cc6a2ccac6def3",
+        "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/dd35a883e5de4ebda0cc6a2ccac6def3",
+        "metadata_path": "/home/wu/projects/HMASD/.git/worktrees/dd35a883e5de4ebda0cc6a2ccac6def3",
+        "source_allocated_before": 817004544,
+        "metadata_allocated_before": 3641344,
+        "source_allocated_after": 0,
+        "metadata_allocated_after": 0,
+        "source_absent": true,
+        "metadata_absent": true,
+        "net_allocated_reclaimed_bytes": 820645888
+      },
+      {
+        "snapshot": "6e96f336a31a449c9d9072f4bf64865c",
+        "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/6e96f336a31a449c9d9072f4bf64865c",
+        "metadata_path": "/home/wu/projects/HMASD/.git/worktrees/6e96f336a31a449c9d9072f4bf64865c",
+        "source_allocated_before": 817000448,
+        "metadata_allocated_before": 3641344,
+        "source_allocated_after": 0,
+        "metadata_allocated_after": 0,
+        "source_absent": true,
+        "metadata_absent": true,
+        "net_allocated_reclaimed_bytes": 820641792
+      }
+    ],
+    "removed_reference_input_files": [
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426000.npz",
+        "bytes": 1419162,
+        "sha256": "1641749390f047ef2e077522d6c025a9856f0fa5f593fbae1536cab3df756958",
+        "allocated_bytes": 1421312
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426000.json",
+        "bytes": 79750,
+        "sha256": "4f43bf9afb92f3a43640710def03805db20efbb270049c8be77619e3e29e9570",
+        "allocated_bytes": 81920
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426001.npz",
+        "bytes": 1070969,
+        "sha256": "077319316cfcb4f34ca842350c7561cb622f1e9f0bd769a500f5fe2b0b5fe1a1",
+        "allocated_bytes": 1073152
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426001.json",
+        "bytes": 65077,
+        "sha256": "a7babc9ec18ae85c9225c32c84f7ae9ddc0684a512d08b09c18db3b795c15502",
+        "allocated_bytes": 65536
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426002.npz",
+        "bytes": 1274753,
+        "sha256": "99e7ff00c88bba330409e2734de98dc8071b1d7a19b9826812925a0c6b3a7dff",
+        "allocated_bytes": 1277952
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426002.json",
+        "bytes": 72385,
+        "sha256": "5a0184e86acad42224abfa3a12e06dacb8c73db83ccf67299bc75d5824d987f0",
+        "allocated_bytes": 73728
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426003.npz",
+        "bytes": 1142512,
+        "sha256": "5d97246e7537e010286dd7b230403f4dfc989f4d52526c5b85b7f39d7236c938",
+        "allocated_bytes": 1142784
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426003.json",
+        "bytes": 67900,
+        "sha256": "e03ac7fbd66096963ebe92887d244e890774e0c30d8b89198d0667d417be665e",
+        "allocated_bytes": 69632
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426004.npz",
+        "bytes": 1364440,
+        "sha256": "7652ac2accb5380a97785da789567d24cf474ef20e7d76f70b2f9ade070d3f5d",
+        "allocated_bytes": 1368064
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426004.json",
+        "bytes": 82546,
+        "sha256": "770f93dd3c44ff66faeaec8aed309551ecbc94a543a0695398b1c9031abee7d5",
+        "allocated_bytes": 86016
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426005.npz",
+        "bytes": 1401767,
+        "sha256": "a8a17221ef5b40a9efd550b3c6673561b174f321c790a693b5d6f0d947520dda",
+        "allocated_bytes": 1404928
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426005.json",
+        "bytes": 83003,
+        "sha256": "e64fa4219f6c7bbceffecac8ab35da211cfae0587d48c714cec48fa0ba3176c3",
+        "allocated_bytes": 86016
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426006.npz",
+        "bytes": 1329398,
+        "sha256": "c05e4f040c481c1fa971a14b17846372c13f5a895e875a617fb7b81e9e4641fa",
+        "allocated_bytes": 1331200
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426006.json",
+        "bytes": 78863,
+        "sha256": "0065f69d55209fa50dc63daa83eaba48bae3f0ca02f818befb45081e34c292b3",
+        "allocated_bytes": 81920
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426007.npz",
+        "bytes": 1230538,
+        "sha256": "edb659c19ab73d193f73cdb674707f5aefdccd24a2c05645e9d16cd29a6e6507",
+        "allocated_bytes": 1232896
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426007.json",
+        "bytes": 78430,
+        "sha256": "a094ca425165b082c650bba462f2c2244fe1978d181bca04e87c8560db4bc9a0",
+        "allocated_bytes": 81920
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426008.npz",
+        "bytes": 1506699,
+        "sha256": "dcb870803d03eeefae6a9a0b4b789a1e0bb6f02d11a6e6d87b4a9812f1beff27",
+        "allocated_bytes": 1507328
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426008.json",
+        "bytes": 90706,
+        "sha256": "1ec5d29080b733f49e11fae2ee02d49f6380f6b144bc13585865a060c69de3c7",
+        "allocated_bytes": 94208
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426009.npz",
+        "bytes": 1155506,
+        "sha256": "9e168ff8d9573a8849c49f0d4cf7d2554aaa00a817fc54811fd5cb82c3eeca8c",
+        "allocated_bytes": 1159168
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426009.json",
+        "bytes": 71509,
+        "sha256": "e76f26523a2e12be201cdf56b52d396225353a7cce47da6eac30ef3e9da21712",
+        "allocated_bytes": 73728
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426010.npz",
+        "bytes": 1387609,
+        "sha256": "897692ae1a9985aa340107f2b032650b67892bff5a6d0683af3f4dce16a1e215",
+        "allocated_bytes": 1388544
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426010.json",
+        "bytes": 80757,
+        "sha256": "281576235d59f6703a78b7383d67c697c8751373b36aeca31a8ea63582c6ea1f",
+        "allocated_bytes": 81920
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426011.npz",
+        "bytes": 1349626,
+        "sha256": "539b5c870be0f398307649718a86b98c4b8a42b5bb2120dcb646b75c51846253",
+        "allocated_bytes": 1351680
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426011.json",
+        "bytes": 83100,
+        "sha256": "1e53501094f40f93af43a5825dd39a03aea1a4832f272722ad2d7b4946761630",
+        "allocated_bytes": 86016
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426012.npz",
+        "bytes": 1324881,
+        "sha256": "df08d69f7a6864186c243da5e99c0592c0ddcd1a727ee65d404b13636d2c9d10",
+        "allocated_bytes": 1327104
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426012.json",
+        "bytes": 79145,
+        "sha256": "3cdc92db1afdd8da093da577729460c6d8512375e1f066516f73d08405f74fbd",
+        "allocated_bytes": 81920
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426013.npz",
+        "bytes": 1377707,
+        "sha256": "ce63fc87ff08cff3e6921f9a917e4c3664731b50a1e5fa462c2a97405ad1d2c4",
+        "allocated_bytes": 1380352
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426013.json",
+        "bytes": 79117,
+        "sha256": "4157486835e527ef3697707b00a587873e64104d033d9b75b4a60c1149b5ae1a",
+        "allocated_bytes": 81920
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426014.npz",
+        "bytes": 1336877,
+        "sha256": "4581e0281b46d0aa7986a278adaeade46aeba13be2a601b8da9465850224490c",
+        "allocated_bytes": 1339392
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426014.json",
+        "bytes": 78168,
+        "sha256": "31db3610621fba6fa8dc5c9b8fc0781169b93f0eeceaf80bf3bca436962dc168",
+        "allocated_bytes": 81920
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426015.npz",
+        "bytes": 1193442,
+        "sha256": "d7266e6b2e557220e810df6aae5d8277e4fc6e1c8bb39a2ed16a2a9fb3d5aedc",
+        "allocated_bytes": 1196032
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426015.json",
+        "bytes": 73418,
+        "sha256": "bb8138fc23e48092c816baa4403a7642ed660d73391f5ce2bef77a73778da479",
+        "allocated_bytes": 73728
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426016.npz",
+        "bytes": 1414302,
+        "sha256": "4e0b5ccbc751ae23e750459068fd33ebb8c8acf5a5ee8bb42bdfd31f427c0eb7",
+        "allocated_bytes": 1417216
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426016.json",
+        "bytes": 89574,
+        "sha256": "be5f9e3438195f4e9cbccec53fc40c2f50a2066b412cea26f460adbbd32aecbe",
+        "allocated_bytes": 90112
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426017.npz",
+        "bytes": 1331892,
+        "sha256": "190f33c0dd2368cf52a857429ecd85c7e572816b5473c3038c2bfdcf89b5ee9c",
+        "allocated_bytes": 1335296
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426017.json",
+        "bytes": 79642,
+        "sha256": "00b641ba7d41817b3fdcae797d0d24f7f9e225d5137c4adaf8e19e1a4cbb3eee",
+        "allocated_bytes": 81920
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426018.npz",
+        "bytes": 1272678,
+        "sha256": "5b4be7fc76d715f8283612c13e1641ec405d0467cc4039d8689276886a290922",
+        "allocated_bytes": 1273856
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426018.json",
+        "bytes": 76735,
+        "sha256": "b709370a9ca7b6f25ee3ec40bf97e6112acf221a42d6dcef2aca269112502c6b",
+        "allocated_bytes": 77824
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426019.npz",
+        "bytes": 1303468,
+        "sha256": "55f23467ba2580b291f15001da34b99e526271b41fdbc06a80094dbd13dace9d",
+        "allocated_bytes": 1306624
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426019.json",
+        "bytes": 75697,
+        "sha256": "17f3bc2567fa2a90a0325969e9ac01fea8e3b205bc0bd73b1dfb3518f5f70451",
+        "allocated_bytes": 77824
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426020.npz",
+        "bytes": 1310858,
+        "sha256": "6e1a232d920a9e930b550ed1d835bdb3b40ee48502215398966aeddae085d7ae",
+        "allocated_bytes": 1314816
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426020.json",
+        "bytes": 70963,
+        "sha256": "bf1d26e465e06d1cff316ddc787f02aa5619e146e18cd849474e343d6fa3f3c8",
+        "allocated_bytes": 73728
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426021.npz",
+        "bytes": 1434593,
+        "sha256": "463f1a8bd53f8e386125e37748753d6d4242c4fe06e48139f9059781960ec52b",
+        "allocated_bytes": 1437696
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426021.json",
+        "bytes": 88024,
+        "sha256": "09ed2156ecfa5e7c27eae4dfb727d86551d882d77b34d17bac28c380ba0f2b33",
+        "allocated_bytes": 90112
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426022.npz",
+        "bytes": 1414739,
+        "sha256": "4ddddbc414123130661f8ba1b261d07d846e04a348b096907d063b612090d234",
+        "allocated_bytes": 1417216
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426022.json",
+        "bytes": 86777,
+        "sha256": "4e468cedf82841aa2c15e4e01cba9f34a96dd396c644b88afbd279e4b426fa3b",
+        "allocated_bytes": 90112
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426023.npz",
+        "bytes": 1405676,
+        "sha256": "2be2d06a3046e86e302c27237c8f26075f3a463b5037bc464220f074b88df379",
+        "allocated_bytes": 1409024
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426023.json",
+        "bytes": 82233,
+        "sha256": "e1e2fd591f9ac6761175a9840d72314de751ea7ea77eaaf428a4c3cd4e667b0f",
+        "allocated_bytes": 86016
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426024.npz",
+        "bytes": 1289687,
+        "sha256": "9320adc74e53b93aa892733f8598ac6be40176352be3dc103d24dddfef44af4e",
+        "allocated_bytes": 1290240
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426024.json",
+        "bytes": 77832,
+        "sha256": "8573291a7b6e4aad4c16e55fe8c1ceefa515d46bdd14afa558c7299ec86333bc",
+        "allocated_bytes": 81920
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426025.npz",
+        "bytes": 1249303,
+        "sha256": "8261c4c38202b4f094e375f183ee4a39fa7fe6aff3d7305b0443b66bc9454882",
+        "allocated_bytes": 1253376
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426025.json",
+        "bytes": 74572,
+        "sha256": "5e76ee1ca9abc0d8a68266081dd694267a1fb87192e12f1ded7d24f1bfedd53b",
+        "allocated_bytes": 77824
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426026.npz",
+        "bytes": 1310312,
+        "sha256": "9d584f706726973717044d0c4fc6d065f06a308d2140b3c007702547fb74e3ce",
+        "allocated_bytes": 1310720
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426026.json",
+        "bytes": 74835,
+        "sha256": "55ce9ddb53dcafc3523491c18b85207435440b3049a2b85bb1ad523ed4d0684a",
+        "allocated_bytes": 77824
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426027.npz",
+        "bytes": 1373773,
+        "sha256": "6cd6bedba538ad3cdc6cb801c7816f1d396dfa39ce515b1d98d5b2cef18982fe",
+        "allocated_bytes": 1376256
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426027.json",
+        "bytes": 79553,
+        "sha256": "9a4fd54514d0659bcb89d27aa94d74810a218e0cb35014305cbbccb37d25e6ee",
+        "allocated_bytes": 81920
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426028.npz",
+        "bytes": 1294804,
+        "sha256": "1e1a08f2e829bdfea24c88b886872c7551a4f8244874dc676f2a5046a53e6060",
+        "allocated_bytes": 1298432
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426028.json",
+        "bytes": 78960,
+        "sha256": "8797dc03a62c719a822e47b5661b72dcae17ed65e3a274b2cb3df6f391db1d83",
+        "allocated_bytes": 81920
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426029.npz",
+        "bytes": 1488204,
+        "sha256": "e4c963a7cbf7a4614004bb4bfe8db83f29eead6901b52bc552bccb26fda096cf",
+        "allocated_bytes": 1490944
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426029.json",
+        "bytes": 90839,
+        "sha256": "e9d0b8372005499e35cf41a6442d3fbb6ab45ade0da5f7a496db868fc3560d5d",
+        "allocated_bytes": 94208
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426030.npz",
+        "bytes": 1349813,
+        "sha256": "a8fdda9a00810bb6280fdaae95e667092952956147ac12fd055e6836076c6c8b",
+        "allocated_bytes": 1351680
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426030.json",
+        "bytes": 80711,
+        "sha256": "889b9027a6d434f67a0a6f1243e205b0a952bd941a56c1e90059c222fbb3a26d",
+        "allocated_bytes": 81920
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426031.npz",
+        "bytes": 1343159,
+        "sha256": "83dd21a5b9265d121113213e26194c091a86bc81b4b4a9fa34790603dc705528",
+        "allocated_bytes": 1343488
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426031.json",
+        "bytes": 81048,
+        "sha256": "396f6270b00e060d979e55e7af5e3456a29be0cac4aec37f04b0d55d8048879d",
+        "allocated_bytes": 81920
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426032.npz",
+        "bytes": 1424725,
+        "sha256": "4f9d57f6546ddc0fa238eac0ba82bcfa6539115c5fe99103fd49cf8d8d9a2f2e",
+        "allocated_bytes": 1425408
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426032.json",
+        "bytes": 82933,
+        "sha256": "a08589f36b4b021de7b6eea5439a6582e98f964943e89f23f9895a32d42ccede",
+        "allocated_bytes": 86016
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426033.npz",
+        "bytes": 1431694,
+        "sha256": "a426e447a5b007345babfc2f24a0ee8b949fd200a4e45de38e317f670c5f1b78",
+        "allocated_bytes": 1433600
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426033.json",
+        "bytes": 88073,
+        "sha256": "277d395870917091fa060d7256df7e77cd9a0c1074451b9e21e12cc89961aca3",
+        "allocated_bytes": 90112
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426034.npz",
+        "bytes": 1279751,
+        "sha256": "1b8fb1eec41f7c4a5605129f241962ddf8d7f737625848672e4ce6083d714a32",
+        "allocated_bytes": 1282048
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426034.json",
+        "bytes": 75685,
+        "sha256": "2eac4753c47bbfde13e57b334f6bbd2e65bf8b47b4e12db1a7dc40bc9fe3a8d6",
+        "allocated_bytes": 77824
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426035.npz",
+        "bytes": 1358776,
+        "sha256": "b03665fb5106e89cf53cdd7071c6ce90e765feaf113251e971b3afca63d8c084",
+        "allocated_bytes": 1359872
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426035.json",
+        "bytes": 84631,
+        "sha256": "0a1bdbc9a8aa20be2ad5862aad14185634f1bc879c4214ca6516cf753b5a2ebb",
+        "allocated_bytes": 86016
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426036.npz",
+        "bytes": 1350250,
+        "sha256": "1d8eea901dcb73038ee1bf5ee41ede4280aad859d832a89c41d0a2570ce28b3a",
+        "allocated_bytes": 1351680
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426036.json",
+        "bytes": 81209,
+        "sha256": "401dedacc9fc63dc5fa6baae31e2f5c49063ac00f51c8196af5d1b18c3e1684d",
+        "allocated_bytes": 81920
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426037.npz",
+        "bytes": 1290934,
+        "sha256": "dc2bc61b9b4318f600d5cdaf819286b95e65b33c060aa250ac2f3529fd11b7bf",
+        "allocated_bytes": 1294336
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426037.json",
+        "bytes": 77344,
+        "sha256": "288ab862b05126ffa2093639d07488d456c25ae7f9dbf5f5051c49781dc7bb05",
+        "allocated_bytes": 77824
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426038.npz",
+        "bytes": 1407983,
+        "sha256": "86ae3bd6157b0b9faa76c8c05e768f4605e7097e86431201d50eb3a14aeae4ce",
+        "allocated_bytes": 1409024
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426038.json",
+        "bytes": 84002,
+        "sha256": "554550ad7c87e5e93a8a490c74845db67b78e23dcd29c80e5add7de514571a77",
+        "allocated_bytes": 86016
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426039.npz",
+        "bytes": 1332047,
+        "sha256": "184768413887d2b1c063f630e8a7f3aef04557a60f9420732d5d2ec5e03abbad",
+        "allocated_bytes": 1335296
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426039.json",
+        "bytes": 76951,
+        "sha256": "53794bb1b7be6f6f1772bd61d580cf5f84c57e2ecbb529cd5424fda7f4c550b2",
+        "allocated_bytes": 77824
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426040.npz",
+        "bytes": 1369876,
+        "sha256": "2917c7a797a0ba6f5766c5a5a9879136518751d0c189fe4a92c0d692649f4d59",
+        "allocated_bytes": 1372160
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426040.json",
+        "bytes": 80085,
+        "sha256": "6b571ff041ed51644f26d7f6f964c3db0934aadea3f04bea133907c84d34de40",
+        "allocated_bytes": 81920
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426041.npz",
+        "bytes": 1340625,
+        "sha256": "399d176126683b1b7fb42793020395adaece2f8af2416bf6fd199f5c91298d93",
+        "allocated_bytes": 1343488
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426041.json",
+        "bytes": 84385,
+        "sha256": "c98e002e09b1effd4be1cdba726d5ed406f610c534975028a3dc7433415e1905",
+        "allocated_bytes": 86016
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426042.npz",
+        "bytes": 1432920,
+        "sha256": "ea0b041c7ef233199d9059b57c5525c9966f4c9490b6db1bf9388cf76d2b9e99",
+        "allocated_bytes": 1433600
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426042.json",
+        "bytes": 85809,
+        "sha256": "21f92075f72d37d4d45809221a057d1ecfea403a28012b538d66f44a9764dcab",
+        "allocated_bytes": 86016
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426043.npz",
+        "bytes": 1437407,
+        "sha256": "59ac35123c08c577cb4980f6c70fc2307d122911040ca19a012e3ccbeef12159",
+        "allocated_bytes": 1437696
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426043.json",
+        "bytes": 83202,
+        "sha256": "226f3489c605ca8868792a59a06120f0cff33839ad50c2d229fd888c56e6e587",
+        "allocated_bytes": 86016
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426044.npz",
+        "bytes": 1292133,
+        "sha256": "0647a37ad194d3b5e7d6d9ee4a323570d996e26a4e651719812f5515ec0b5934",
+        "allocated_bytes": 1294336
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426044.json",
+        "bytes": 74831,
+        "sha256": "877b27c5135385965cdf5650041c80ccb2db11ec639dd83f030b7625ec08cf89",
+        "allocated_bytes": 77824
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426045.npz",
+        "bytes": 1398181,
+        "sha256": "8e7eb75e3a711c0b6b048cfbf7ea2cf0e667bbb3ef9bfb855a8bf87f2fb0e6f0",
+        "allocated_bytes": 1400832
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426045.json",
+        "bytes": 82051,
+        "sha256": "9d95c6b0e6d48dc32e90f231d6a572ecc276224a77ade3839d72ae32f2721b64",
+        "allocated_bytes": 86016
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426046.npz",
+        "bytes": 1278603,
+        "sha256": "721336887f96e76d15c03b33df02de08daa92ecb07b6fc9f426d516ca31a5d13",
+        "allocated_bytes": 1282048
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426046.json",
+        "bytes": 72550,
+        "sha256": "2abdc5f96258e4e13ee2f4b6b9acc05044c85e0abc3cd7b6458f7f27986ea78c",
+        "allocated_bytes": 73728
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426047.npz",
+        "bytes": 1375554,
+        "sha256": "58dbc85647c848f250985a394dec6f3a29e3785f709d046649aaa7baf18eaebd",
+        "allocated_bytes": 1376256
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426047.json",
+        "bytes": 82472,
+        "sha256": "34859ad3ab5804fb97b4fd9d826628ed2e32490bebd1ee55e6b2750822ca550f",
+        "allocated_bytes": 86016
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426048.npz",
+        "bytes": 1168237,
+        "sha256": "b6787c63a13057e043349f81f9f1cca47459f219d32077b0adc16616032e227e",
+        "allocated_bytes": 1171456
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426048.json",
+        "bytes": 67284,
+        "sha256": "c8ff3432d612441a168e34b28a70a3b78a4e6845dbad1173f1d6a3f6add0f44f",
+        "allocated_bytes": 69632
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426049.npz",
+        "bytes": 1374594,
+        "sha256": "d52cfdf919b7b2c404989f46e647004692cdb95c05ffb82e44edce8ceae44614",
+        "allocated_bytes": 1376256
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426049.json",
+        "bytes": 83949,
+        "sha256": "a1136ba656ef917f4e036c9b8cc974513a60ff748ad39752f4e80424c6ee90b0",
+        "allocated_bytes": 86016
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426050.npz",
+        "bytes": 1366007,
+        "sha256": "99fda49c9c3960591bbcda00697ca7cc826eba8f22c9ecf8161d88f4af23c247",
+        "allocated_bytes": 1368064
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426050.json",
+        "bytes": 80612,
+        "sha256": "72ab96ff7da2c7356770377c452a10e217f4d2772a7be8dec340e0b474b113ef",
+        "allocated_bytes": 81920
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426051.npz",
+        "bytes": 1331394,
+        "sha256": "699986bf4d0dd2311334e9cc48485e33361affdb13a2ed0df09e368e785856e1",
+        "allocated_bytes": 1335296
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426051.json",
+        "bytes": 78474,
+        "sha256": "6687abcdbd26c48007608a3bec96b7d3460beea5ef3e59f8dedb86391eb8eb29",
+        "allocated_bytes": 81920
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426052.npz",
+        "bytes": 1296142,
+        "sha256": "9d60152623c49e27d5b94e0145afef151b9e353fc269bcf925c8b50a53f19dbb",
+        "allocated_bytes": 1298432
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426052.json",
+        "bytes": 75511,
+        "sha256": "d44374f842398624c908e313b19c357dd207b59eee40810c1ba51dfcd930fd48",
+        "allocated_bytes": 77824
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426053.npz",
+        "bytes": 1492504,
+        "sha256": "756a0d8d97d64d490c54b609a0d3c7601a63a6df2965428b19cad7a4b0a1e065",
+        "allocated_bytes": 1495040
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426053.json",
+        "bytes": 80601,
+        "sha256": "3beb9656ae4ec5a5f9f7dde0086b4b239d61d941c21cab62aa5dd2d488b31288",
+        "allocated_bytes": 81920
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426054.npz",
+        "bytes": 1468572,
+        "sha256": "29c4f7cc12491c319e28f1cff18b0b7d9351bfcb513f17ba31a1b1b60ecf8bee",
+        "allocated_bytes": 1470464
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426054.json",
+        "bytes": 83753,
+        "sha256": "7189bb3db328ddde842d0e178c28c5fc1f901f7dacf27b9148fa592684900159",
+        "allocated_bytes": 86016
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426055.npz",
+        "bytes": 1389838,
+        "sha256": "848bca36cddf76e22f999b98b8f2bf21e502f7cf9a2e1b6fd395b6adf8c635d6",
+        "allocated_bytes": 1392640
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426055.json",
+        "bytes": 86612,
+        "sha256": "bd9aee9c3757d943a44ad339c28dc562fa7f892655898e84084063ac2b749f6d",
+        "allocated_bytes": 90112
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426056.npz",
+        "bytes": 1235791,
+        "sha256": "0ee6d1ca3b42ec76000a5822b2178cd89e6d6c479004bbc30eb9b7715761837f",
+        "allocated_bytes": 1236992
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426056.json",
+        "bytes": 74059,
+        "sha256": "0d414be1cb936c4553ec5b4703d2162a424ffa8e1af8712e3876ab9beccd9ebf",
+        "allocated_bytes": 77824
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426057.npz",
+        "bytes": 1427842,
+        "sha256": "645894c0b0d04e10c78510a25b463425bdc964d2e833adda6f4af55a93cb1b81",
+        "allocated_bytes": 1429504
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426057.json",
+        "bytes": 82316,
+        "sha256": "2f0f588bd2d3d6d78848a2c1ac0131714948b52c52164e8fadfa0aefc2821709",
+        "allocated_bytes": 86016
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426058.npz",
+        "bytes": 1357114,
+        "sha256": "e31a30ee03cc168e2e5b89ce7482e7245e085570e9123f64f3733d044f8ba412",
+        "allocated_bytes": 1359872
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426058.json",
+        "bytes": 83548,
+        "sha256": "76aa4003e91b69d91099fbb4630504f5021f35b48068d894b5c05663f629f72b",
+        "allocated_bytes": 86016
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426059.npz",
+        "bytes": 1468896,
+        "sha256": "361a929de30f280bd3797a9e1690301f3b627b2bc21f826a705c9dc3205a40e0",
+        "allocated_bytes": 1470464
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426059.json",
+        "bytes": 81305,
+        "sha256": "52f1f9cc36d48b0269639f315f43dbf9e4d0e36811d351b246362a9ec65cb690",
+        "allocated_bytes": 81920
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426060.npz",
+        "bytes": 1093441,
+        "sha256": "6e31e6a200a397003a6114cc3d4db922738e719bdf1e0af5c642296da3a892e7",
+        "allocated_bytes": 1093632
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426060.json",
+        "bytes": 65299,
+        "sha256": "077d16a6f20e7fc1abd991b3ed7123b3f1dda6d75c8d312f5a2ae7fa168f359f",
+        "allocated_bytes": 65536
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426061.npz",
+        "bytes": 1411311,
+        "sha256": "d8a0f05547f71bf7eede41e2cd35f8f60a7a91ce33826f459543cc06c24e04be",
+        "allocated_bytes": 1413120
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426061.json",
+        "bytes": 91075,
+        "sha256": "a43430b8c9471ce216ea190af006830de25142e7c3228afe871dd5147023be0e",
+        "allocated_bytes": 94208
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426062.npz",
+        "bytes": 1407515,
+        "sha256": "ee1d6d6b1403e0278ed62519d6c4a488fed64944f2e536e767d488e94f375032",
+        "allocated_bytes": 1409024
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426062.json",
+        "bytes": 82363,
+        "sha256": "a8857a4ef95c9517c29dfef465af4b2f3f2639915369a28466b942389a6fe388",
+        "allocated_bytes": 86016
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw/S_F_29426063.npz",
+        "bytes": 1339125,
+        "sha256": "02a65e18f899d300fb5fade4ce5c74d8ba5e34ada56b49a9d5a8036d91182bb3",
+        "allocated_bytes": 1339392
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes/S_F_29426063.json",
+        "bytes": 80808,
+        "sha256": "73db9b2dfd4f36e6afae056c6b4c64b36f3b06f829e3d8a96a684c6f099feeee",
+        "allocated_bytes": 81920
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426000.json",
+        "bytes": 187760,
+        "sha256": "21d60fd494cf9a0ca2294c6a6e01af89fa5e1edb56a2ccda271a0bc532da870f",
+        "allocated_bytes": 188416
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426001.json",
+        "bytes": 180078,
+        "sha256": "2207b7af34a9c4c6c1c59e8e3cc9c06a907da5fd332992cc619e03a1c82160de",
+        "allocated_bytes": 180224
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426002.json",
+        "bytes": 174736,
+        "sha256": "9c751de7cf9c0ac58ce97d5359f3e8a2be104146270be2a4292d78253d858ccd",
+        "allocated_bytes": 176128
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426003.json",
+        "bytes": 179839,
+        "sha256": "8cbcdec857fe018a51a1c14d9b71839425d570c1eed5386197ca6ee691883f92",
+        "allocated_bytes": 180224
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426004.json",
+        "bytes": 181503,
+        "sha256": "bc58ad1617d63e40a782d8b71fe7f1f0972f0ae0d78ee0b3116849b9397f16a3",
+        "allocated_bytes": 184320
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426005.json",
+        "bytes": 182504,
+        "sha256": "efb370703b6b3baf4e71d7fa04b4bed89425f70da8c9d3c9f0c6f6d709f6aa7d",
+        "allocated_bytes": 184320
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426006.json",
+        "bytes": 175235,
+        "sha256": "3c363029b0a8d3ec86ee1b26c74a9156f7455007a0a55a9ee0797302bc8f3086",
+        "allocated_bytes": 176128
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426007.json",
+        "bytes": 182058,
+        "sha256": "738dcb70447e0f90c8df76fda80a8e19f59d788797466e8409ef7fd5c474c995",
+        "allocated_bytes": 184320
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426008.json",
+        "bytes": 174210,
+        "sha256": "043f643465620f90f99066ea43c8bb26c1cf7c83062cb675cf10ae57453da5b3",
+        "allocated_bytes": 176128
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426009.json",
+        "bytes": 173538,
+        "sha256": "54655c288c4ef4afb46bb5cce540234bd333c26ce0ffcbc3df51edcb3c74bad3",
+        "allocated_bytes": 176128
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426010.json",
+        "bytes": 183968,
+        "sha256": "61dff52b0932156efc528e1752abe8f0a192e871e9505a4e5fe58b55b3c873bc",
+        "allocated_bytes": 184320
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426011.json",
+        "bytes": 179961,
+        "sha256": "ecbd81f40488401fd4ec6617a85f89b24c1b68f41f8d8624fae85a16b177eb2b",
+        "allocated_bytes": 180224
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426012.json",
+        "bytes": 175535,
+        "sha256": "39c5a79b4f1f283568e706c4b35ec5ec31a3b3ac126f54d34e6f3262921d72ac",
+        "allocated_bytes": 176128
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426013.json",
+        "bytes": 187185,
+        "sha256": "a3bb3a29d149fee0c6f8f6b76906ec2f078e833f19672e7ee4e45098074afd2e",
+        "allocated_bytes": 188416
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426014.json",
+        "bytes": 173105,
+        "sha256": "b96ae1b3327db6590988f5bfea3089fbc4e07527f217bb5ed0e273e91584b500",
+        "allocated_bytes": 176128
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426015.json",
+        "bytes": 176081,
+        "sha256": "a96818a2546b796e570c3e11cb0d8d25784c2c99da812c89644930e425658869",
+        "allocated_bytes": 176128
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426016.json",
+        "bytes": 182665,
+        "sha256": "24f638ce1d50051bb6e7c6de057521426d03ca44e10879d30c4c10306c66a076",
+        "allocated_bytes": 184320
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426017.json",
+        "bytes": 171622,
+        "sha256": "dcea5e1611231d6be088db93d2b955a426d508d1ae159373a6499da919aca285",
+        "allocated_bytes": 172032
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426018.json",
+        "bytes": 176619,
+        "sha256": "43b54969e7dd5fd28d0438cac0cc13ea4a14bc163d4504dc3111aa5a725b2b2c",
+        "allocated_bytes": 180224
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426019.json",
+        "bytes": 179168,
+        "sha256": "4a8feac7062db36c582b1a6f3448193e4524557111a4f4f7bf72d2d56c129853",
+        "allocated_bytes": 180224
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426020.json",
+        "bytes": 189636,
+        "sha256": "4573754e122910affcbfb9859613ee8fa8d40fad9f93b86b81baace40f112152",
+        "allocated_bytes": 192512
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426021.json",
+        "bytes": 189158,
+        "sha256": "c53c766b0ea39d6c8a4395427e71674a3cdca8d5fe0d09569a3615d650e3448c",
+        "allocated_bytes": 192512
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426022.json",
+        "bytes": 178381,
+        "sha256": "15d0cecf0cab288989f69694ff973871fde8ba6f85e42543cc41a5fa751b9262",
+        "allocated_bytes": 180224
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426023.json",
+        "bytes": 177943,
+        "sha256": "7259acaa04068056b087dd2e6885ef001c8a7a21861915a6e4d9b43f3153802a",
+        "allocated_bytes": 180224
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426024.json",
+        "bytes": 175115,
+        "sha256": "5b4dc073a2b61044ad6d50017d4c288d753442ab1b2067fec8b3d84323cc6bde",
+        "allocated_bytes": 176128
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426025.json",
+        "bytes": 183756,
+        "sha256": "43f5edbc67b5843a723b4b0280f5b7ab4c48074e43caed4ab7b98e2b6451f86f",
+        "allocated_bytes": 184320
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426026.json",
+        "bytes": 179113,
+        "sha256": "94381767ee6a0245baa07bd02546dd25e1cef7021439bc31b44cdf57dbe7cf0b",
+        "allocated_bytes": 180224
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426027.json",
+        "bytes": 191203,
+        "sha256": "5f36d72978dfc80812dca6cb9ae9d688d710687fa553fe07f3861a5f51703a17",
+        "allocated_bytes": 192512
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426028.json",
+        "bytes": 184247,
+        "sha256": "e805125ac2ec6c73aa48fcd0024db321a169b649175fd91c468532d480f50c1a",
+        "allocated_bytes": 184320
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426029.json",
+        "bytes": 177243,
+        "sha256": "acc96ce24d436bf0605e0f90f7a93598e6a862197f4bd227f27440a3b630a1c8",
+        "allocated_bytes": 180224
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426030.json",
+        "bytes": 177392,
+        "sha256": "46d8878ce651cbb351ad822be78fa1fdcf43f4adef84289c188593734512948c",
+        "allocated_bytes": 180224
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426031.json",
+        "bytes": 175786,
+        "sha256": "51e73d311bc07a76d31ac92c31097bddc4b1c576b203dca3d05381211ea9843c",
+        "allocated_bytes": 176128
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426032.json",
+        "bytes": 180707,
+        "sha256": "c8de41811e5f2a2b47e4b64453163726e2de41602ec2c3a96864003d5f09f76f",
+        "allocated_bytes": 184320
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426033.json",
+        "bytes": 174829,
+        "sha256": "27ee0112da28d034e4fe4298e2400a3603a20440ddb4b582d30ac43a1c871782",
+        "allocated_bytes": 176128
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426034.json",
+        "bytes": 170598,
+        "sha256": "e425f2ea3b87c1835f6998bf9bb658ac8714f4a9f58b509d73a4b5fbba164db5",
+        "allocated_bytes": 172032
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426035.json",
+        "bytes": 180623,
+        "sha256": "eec8e283e455ccd7dc6a1986eafcc8226c8dd050a1fad89a98d1a81af74c3d68",
+        "allocated_bytes": 184320
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426036.json",
+        "bytes": 180365,
+        "sha256": "428cc53cab3dab180c86a529f352c2bd40dedabbd7a14d9671506ef596031324",
+        "allocated_bytes": 184320
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426037.json",
+        "bytes": 175680,
+        "sha256": "d6af7cbbc0d9f74b992d3a7db138f8f1f170e4a8b2671aa7fe2783f37c340a18",
+        "allocated_bytes": 176128
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426038.json",
+        "bytes": 187205,
+        "sha256": "6635c4195f18f87e78be3e06c75a06a2550c9451311c6384b7b00453890e0794",
+        "allocated_bytes": 188416
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426039.json",
+        "bytes": 187068,
+        "sha256": "81984c8cb772c2f37e86d0c7668ec39e723f026199de9492c284a0ec1dd4f052",
+        "allocated_bytes": 188416
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426040.json",
+        "bytes": 173944,
+        "sha256": "be15b398229278050587b132d79acd920f590c8920d6bc22e7eba3264035b2dc",
+        "allocated_bytes": 176128
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426041.json",
+        "bytes": 171092,
+        "sha256": "7037a52234ec4bc523cd287026f38b09dd35b30edee722687b24cb9d789c3c75",
+        "allocated_bytes": 172032
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426042.json",
+        "bytes": 180711,
+        "sha256": "95ca07788a2f57bd7a0eede748578d0cfef996a6c50601adec62573d27692e0e",
+        "allocated_bytes": 184320
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426043.json",
+        "bytes": 176789,
+        "sha256": "8232d0b233f818b71a5b9f937d6275a8984020d04c80ab6b3c77e5f0d9707406",
+        "allocated_bytes": 180224
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426044.json",
+        "bytes": 182829,
+        "sha256": "606a9196b6e4d85fbfeffd21ba3bcab65e64e3585f7117e1dc6c49a4fc4eddde",
+        "allocated_bytes": 184320
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426045.json",
+        "bytes": 176030,
+        "sha256": "7ebff5974f291a72e937db23eefd22309dd68a0fdaf4530bb7b0f2bc6dd23c5a",
+        "allocated_bytes": 176128
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426046.json",
+        "bytes": 187151,
+        "sha256": "dff149f7643f0f00710de151c866c31adaa311dbb82efc27b643c1b47edd9bc8",
+        "allocated_bytes": 188416
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426047.json",
+        "bytes": 177497,
+        "sha256": "9a90dbee7e693c091739cf11dc767eb3ec7423e16aeeaabfd83879eb072d1f26",
+        "allocated_bytes": 180224
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426048.json",
+        "bytes": 176832,
+        "sha256": "109e600058225355c90b5084c26cd9e89dab047a6d6b23a1e24c65753856e1a2",
+        "allocated_bytes": 180224
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426049.json",
+        "bytes": 163761,
+        "sha256": "0e31008b35dbecd266475b5926d63f3d25c8684114034b3e7cd177796c69086e",
+        "allocated_bytes": 163840
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426050.json",
+        "bytes": 179383,
+        "sha256": "03a692e4e599dbd3158cc90a57cc1170f84a7ec26ae5c97748a6964ad8978494",
+        "allocated_bytes": 180224
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426051.json",
+        "bytes": 162889,
+        "sha256": "697ec160798fbdd085b9bcccb94e58dfd7d0c5b8346acb58cf3fd88f731f7522",
+        "allocated_bytes": 163840
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426052.json",
+        "bytes": 177431,
+        "sha256": "20716f31899cfda91ce57dd6e28b6a997adcdcac4a83ddf5c68ece6d681bbedb",
+        "allocated_bytes": 180224
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426053.json",
+        "bytes": 170343,
+        "sha256": "b69e48d4e10e4d9dc78f035bea864441f8b8d834a8d8685b3657d1cafd74adfd",
+        "allocated_bytes": 172032
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426054.json",
+        "bytes": 177075,
+        "sha256": "adc0981f1f97e5cc66457c8e5d2728720a027c951d11e4402e3a7926eda88bc4",
+        "allocated_bytes": 180224
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426055.json",
+        "bytes": 180326,
+        "sha256": "2529bae286f57ad7f28f7bcf1dc70772a17c33e8de9d876a94adfbf519c6aa40",
+        "allocated_bytes": 184320
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426056.json",
+        "bytes": 177884,
+        "sha256": "538782b03b207734032c1f169e46abceadcc2379ed9d2dc342d03258d7b0f741",
+        "allocated_bytes": 180224
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426057.json",
+        "bytes": 174790,
+        "sha256": "9ea9d0bb891ad973727d89abcf2e91f4a6e833011fda63b395f581b5a16af3ba",
+        "allocated_bytes": 176128
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426058.json",
+        "bytes": 176868,
+        "sha256": "dfda997c66520194d373afd3dfc7932e90e5f8c177503e279fe6d43c763c25de",
+        "allocated_bytes": 180224
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426059.json",
+        "bytes": 175136,
+        "sha256": "3b19d4ecb82183c3daeced7e946f0663e8df59d8e5fa5f135a1c4688f250de77",
+        "allocated_bytes": 176128
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426060.json",
+        "bytes": 187075,
+        "sha256": "ecca078980f4126c56afc55e6813770a72ef73c1672db691fa13ac0e913d2d67",
+        "allocated_bytes": 188416
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426061.json",
+        "bytes": 177505,
+        "sha256": "8a0ae529d8bdb7e8d691088fad9d7942086720031ef0faff3d1dd324195fb335",
+        "allocated_bytes": 180224
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426062.json",
+        "bytes": 186029,
+        "sha256": "dad6996b0e589802b17600af057da3036fdeeaef62e6863df5276a9aa745a800",
+        "allocated_bytes": 188416
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/S_29426063.json",
+        "bytes": 177385,
+        "sha256": "b6fc4a1f9335fc86ed5dc08d9a4d5b09a98612ff8896522f8f9eed46c5b74dc8",
+        "allocated_bytes": 180224
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426000.json",
+        "bytes": 169995,
+        "sha256": "8c080b7d1ae177866fb100f378f3bb51c7fcc0ffc3b8ad5c3b54c49b666e30e4",
+        "allocated_bytes": 172032
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426001.json",
+        "bytes": 138689,
+        "sha256": "3c73f518752b8a0485dc101db0d9f1374d27409857d6939457a2c475ab340fa9",
+        "allocated_bytes": 139264
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426002.json",
+        "bytes": 167399,
+        "sha256": "b2e8d1a29c863b1c7c1f37d38669a94885d6144ea7d6f2ab5f0836b31af3370e",
+        "allocated_bytes": 167936
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426003.json",
+        "bytes": 161074,
+        "sha256": "11d95a222bdfc6c0e1d7e91c8207379a0b43dc5d22e126d8e49cf040fee7b60d",
+        "allocated_bytes": 163840
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426004.json",
+        "bytes": 152522,
+        "sha256": "bc58be9dc85c1bf887d45d7f8440c0592440ed59f3561573c02003f37735c5d8",
+        "allocated_bytes": 155648
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426005.json",
+        "bytes": 167495,
+        "sha256": "bd9a1a62bdc79dcf8c250aa1f9fa32de3dcd40a5225442d69ff327f9b3a7535d",
+        "allocated_bytes": 167936
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426006.json",
+        "bytes": 157554,
+        "sha256": "1e888b4faa75e1bc1a86137a16871396a198e399a04baf5b20bf2f3ca64c9f61",
+        "allocated_bytes": 159744
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426007.json",
+        "bytes": 167644,
+        "sha256": "c84e71f32365625a2a7466f74cdd173a4e2afa604faf64f58dd823cd7ebaea3c",
+        "allocated_bytes": 167936
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426008.json",
+        "bytes": 160350,
+        "sha256": "33572d9878fa14c8493bbbd4fd96b7547bde942385c789f15d119df28fe7a94b",
+        "allocated_bytes": 163840
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426009.json",
+        "bytes": 151687,
+        "sha256": "2be9ad9043c25cc59577660e6cd8556b184cf9329a9c099e236e36e9fc108b5e",
+        "allocated_bytes": 155648
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426010.json",
+        "bytes": 161683,
+        "sha256": "de45045bd65fdaae2cef33d00a709b6ccf7a93c3939c4ed87dde2cf86fb4146c",
+        "allocated_bytes": 163840
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426011.json",
+        "bytes": 165668,
+        "sha256": "49c7bcf2d89c5bfe76f911467abe35dbddaf2e7bb7dba0ee51232cb5607a6d8d",
+        "allocated_bytes": 167936
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426012.json",
+        "bytes": 169290,
+        "sha256": "5740d8cc23b9caeb87a6f2778376dcd9681a25a9d353150b78301a526b28ac67",
+        "allocated_bytes": 172032
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426013.json",
+        "bytes": 169650,
+        "sha256": "6367fd702a3d0493d8b02c83b934767c57ab72e4f09e324affd1d60ec7d5cd02",
+        "allocated_bytes": 172032
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426014.json",
+        "bytes": 165913,
+        "sha256": "15a35d514f1181f31c69c0178178671802b125f28ada1d2aaa46928b46e895f1",
+        "allocated_bytes": 167936
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426015.json",
+        "bytes": 170024,
+        "sha256": "a859cbec4aa153569d4912842d5ee5d4d3050b4bf4b9ab7b901a377ea77b861b",
+        "allocated_bytes": 172032
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426016.json",
+        "bytes": 170501,
+        "sha256": "9edbe8fd6ef98d352736358ced6e3bbca72cb555b32a8ccb28df78ecfbb58b23",
+        "allocated_bytes": 172032
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426017.json",
+        "bytes": 157919,
+        "sha256": "d548f3b3d84bbcc1edda85e34b90703cca43e6a05a4cb7dd07880defd41b7107",
+        "allocated_bytes": 159744
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426018.json",
+        "bytes": 175298,
+        "sha256": "1ac5801bf52d2e72a2d6fe5b1ab83fa109fd6ac66a9677617e3b161fb085e8ba",
+        "allocated_bytes": 176128
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426019.json",
+        "bytes": 175531,
+        "sha256": "02fe70049aa9ebcb0cb30b224dae454423c984f6a611af43611b357555a4a0e5",
+        "allocated_bytes": 176128
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426020.json",
+        "bytes": 178599,
+        "sha256": "904929ee403251e47819b42922d5e5ea3a5ce1a61cda55b67e76cd13d17cf2cb",
+        "allocated_bytes": 180224
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426021.json",
+        "bytes": 180534,
+        "sha256": "48eec0b3243f6d398e1760254d991c4cff23a2f359b8944ee0c301f0d946be8a",
+        "allocated_bytes": 184320
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426022.json",
+        "bytes": 157555,
+        "sha256": "774bfc6fcbb87a1a2f85f7c305b888bd33b459d628acde8a50bda3d5400e1d33",
+        "allocated_bytes": 159744
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426023.json",
+        "bytes": 149948,
+        "sha256": "228681eb7f5aefd77d075f8c578694426cfbcdbf4d1ba85d4e106182f4045fc2",
+        "allocated_bytes": 151552
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426024.json",
+        "bytes": 160586,
+        "sha256": "a11046feed61a5cac62032047fbac82d35a7a1d5c1fdc6677fc64c3b0e840bd9",
+        "allocated_bytes": 163840
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426025.json",
+        "bytes": 165911,
+        "sha256": "38f23d10332b474657e6b811c3200b0c5ec42031edba8feb477c7b8cb11afaa2",
+        "allocated_bytes": 167936
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426026.json",
+        "bytes": 149611,
+        "sha256": "a3cefb4e62008d0345ea46e4e7c9aa58b5077fbf465a273a12ec20fbeedc0633",
+        "allocated_bytes": 151552
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426027.json",
+        "bytes": 172199,
+        "sha256": "63342e32c7768742303a430de2ef83e29f1eaba9c1755c50c91ad91847a0d5dc",
+        "allocated_bytes": 176128
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426028.json",
+        "bytes": 175189,
+        "sha256": "4071adba30a63980c69b58fcfd0dcc657ef89b020fe1c8fae7f593cf6dc64272",
+        "allocated_bytes": 176128
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426029.json",
+        "bytes": 148271,
+        "sha256": "f9c3d07438d53f8ee3906a71b684a75edde28f416fb71b5712de61bfc39b73c9",
+        "allocated_bytes": 151552
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426030.json",
+        "bytes": 155795,
+        "sha256": "fd279dd01ad48ff3c1c3ac090885566deb40dff255d66430592c91d2dcfa25e8",
+        "allocated_bytes": 159744
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426031.json",
+        "bytes": 159900,
+        "sha256": "49c21ac9281bd3c85b0ca728aa9f1a3ea377690a2cbb05de8679926dbbe88841",
+        "allocated_bytes": 163840
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426032.json",
+        "bytes": 169418,
+        "sha256": "79ff9f29cacbfe3d87af79d44804318e5dd7b443eaf5fc603892bfe31df4a395",
+        "allocated_bytes": 172032
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426033.json",
+        "bytes": 167107,
+        "sha256": "fa941239d01cb0d8102eb78eea78a24ddeabae567e6475328766947b0b3561ee",
+        "allocated_bytes": 167936
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426034.json",
+        "bytes": 151964,
+        "sha256": "5bc37956430721943b75e02a71de4848fe58893c4d2073d97f3895ecacfb3026",
+        "allocated_bytes": 155648
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426035.json",
+        "bytes": 172452,
+        "sha256": "39dfbe19dd74f515aebc0979130e911f0d611e31447a324ff3de6fbc63631967",
+        "allocated_bytes": 176128
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426036.json",
+        "bytes": 164608,
+        "sha256": "11b5f2951184ed430df082a2f7c5a4945cea8594d2b58c1ff4ebb2e1fac43a16",
+        "allocated_bytes": 167936
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426037.json",
+        "bytes": 159671,
+        "sha256": "cccc07a9facf719adc0518ce4a8cbbf654f0578190f1f745b76ae926b0da9bf3",
+        "allocated_bytes": 159744
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426038.json",
+        "bytes": 168889,
+        "sha256": "adf9687815c939dc223b0dc035beff80dc2bbe8c839477f8192edc728eb7ff92",
+        "allocated_bytes": 172032
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426039.json",
+        "bytes": 167218,
+        "sha256": "bd1c0470cfa5c570a1d30b81e5358732cb6b64000812547b8ff8147f3b5bb495",
+        "allocated_bytes": 167936
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426040.json",
+        "bytes": 165800,
+        "sha256": "e5d63014aaf83eb95633c53a74fc45b0f8692952f8cf24170256576a76a2e33a",
+        "allocated_bytes": 167936
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426041.json",
+        "bytes": 169616,
+        "sha256": "50dfd943b2fc51e81a4d09febc6382d176d34be32c3bf15b9e7713f59fe28cdc",
+        "allocated_bytes": 172032
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426042.json",
+        "bytes": 171226,
+        "sha256": "e43941d2791aee55d855cf4b130a59e025b692779ee5288dbb8cd5ec1c153ab9",
+        "allocated_bytes": 172032
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426043.json",
+        "bytes": 154943,
+        "sha256": "a7fefde7bb74b54841646b97007e56b340aff42e656815e038d68726622cf1c5",
+        "allocated_bytes": 155648
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426044.json",
+        "bytes": 159064,
+        "sha256": "c16eca3284c445658b2f14ea304734d6a82fbec67916afa1b7aef57c9eebfe9f",
+        "allocated_bytes": 159744
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426045.json",
+        "bytes": 155855,
+        "sha256": "51507df68a14fb367da5a33f016d12073cd2260f9e054af57b0c2d9537f29189",
+        "allocated_bytes": 159744
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426046.json",
+        "bytes": 184798,
+        "sha256": "17090031503303ea3e2e2dc7fc52bc0ece82da93824c1c378c5f98df15edfe18",
+        "allocated_bytes": 188416
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426047.json",
+        "bytes": 164068,
+        "sha256": "f01041ff65625a01359e479ce541be893d71b36395f1786544d8365cedd8dd0a",
+        "allocated_bytes": 167936
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426048.json",
+        "bytes": 170593,
+        "sha256": "12079830d4766cecc25fd7d2b0dd6653b391ae4bb87ef4989cb6cec41b065c86",
+        "allocated_bytes": 172032
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426049.json",
+        "bytes": 141911,
+        "sha256": "3b19de38d796d6d4b1323f4b1fde8df6a01a8cd8fdfd8457ac51f8cc274a5fb6",
+        "allocated_bytes": 143360
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426050.json",
+        "bytes": 159112,
+        "sha256": "04a1bebbf89c20f2482cb46197d1ead0b6e130f63612f139142c26a803b2cc77",
+        "allocated_bytes": 159744
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426051.json",
+        "bytes": 141115,
+        "sha256": "ca3e2fd75b8988708cbed53d2de62cb099d62b2bb82423da8c17514c6d06c1dc",
+        "allocated_bytes": 143360
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426052.json",
+        "bytes": 172832,
+        "sha256": "d48ad82d6ee9defa7ee9a773932ff0d555e5fecf99d82ef837b9c8ba4e528ae1",
+        "allocated_bytes": 176128
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426053.json",
+        "bytes": 158911,
+        "sha256": "81ac2a1bb2b0795241d82c05b67c43f3e0ca3ac715026fcc67086b458aa33a82",
+        "allocated_bytes": 159744
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426054.json",
+        "bytes": 159663,
+        "sha256": "4c910b2a6d0b5a7cfe35a1f6ad2c8f2b0781628b7b3fe5465cebdba14561dc70",
+        "allocated_bytes": 159744
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426055.json",
+        "bytes": 163432,
+        "sha256": "b837dcc8b5fd1a097f4c3222d4aae32790251138edb40c8b8237fa757f7f90c5",
+        "allocated_bytes": 163840
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426056.json",
+        "bytes": 152546,
+        "sha256": "5519890c57a8c8ccb9e86b02620eca5e8b672cebd5fc375c96b41537feee7a9c",
+        "allocated_bytes": 155648
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426057.json",
+        "bytes": 156638,
+        "sha256": "64b1f7054515322bd980532873851bf3524de807f3604b6f865584a0c7beae87",
+        "allocated_bytes": 159744
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426058.json",
+        "bytes": 162984,
+        "sha256": "3f292288d6c7676726a1eaa1f21ca6419e8d42a3272f1aa100f850e5b10272be",
+        "allocated_bytes": 163840
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426059.json",
+        "bytes": 136343,
+        "sha256": "154876275503a08c8e959d771f5dbca1252a048aad911027aa62c7ed399f1f52",
+        "allocated_bytes": 139264
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426060.json",
+        "bytes": 172275,
+        "sha256": "6590c7409772ce6cbe4b0c082b46e16f1f74c7dc93bda6b7930dd630cd6f7ed6",
+        "allocated_bytes": 176128
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426061.json",
+        "bytes": 168815,
+        "sha256": "2551ab9156a4cbbd2c24c65e50c73f835ede069820415c4b677f7da56638ead2",
+        "allocated_bytes": 172032
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426062.json",
+        "bytes": 161172,
+        "sha256": "9136ac6b697638a52af909afec4b799465ba0a78a064847f9d96dbcbaadba217",
+        "allocated_bytes": 163840
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/M_29426063.json",
+        "bytes": 160598,
+        "sha256": "e5509ccc0372da21cf19bfd008b4599e4895b12b2bcd0d81789b8ad17429cf82",
+        "allocated_bytes": 163840
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426000.json",
+        "bytes": 177896,
+        "sha256": "e549d73666b0b257005bd5496e02120c601b5022b771ecc0365b03dcf50706ff",
+        "allocated_bytes": 180224
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426001.json",
+        "bytes": 168808,
+        "sha256": "7c750724d098f0e50efba406db9f5b56a2e9f470d1a3f32d5bdb2f763f5b4539",
+        "allocated_bytes": 172032
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426002.json",
+        "bytes": 177466,
+        "sha256": "93b729c3575118ab05e0cc866c6da05866377a6b0b493c9a6777a79cc01d789a",
+        "allocated_bytes": 180224
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426003.json",
+        "bytes": 183289,
+        "sha256": "19eea2284e5bc1aa3f8848c9e36fb21a75a82c61eeeb3c0fc9e38feb0273646e",
+        "allocated_bytes": 184320
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426004.json",
+        "bytes": 176536,
+        "sha256": "b5c8737e1893aad0ffdf911506880cb329c0d38208882c7f0585eb80303856b4",
+        "allocated_bytes": 180224
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426005.json",
+        "bytes": 174102,
+        "sha256": "c6a48215a195bbb10da12960ea7265a3f2b6cfa005658d59002b5b0dcf0b6098",
+        "allocated_bytes": 176128
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426006.json",
+        "bytes": 173529,
+        "sha256": "48e4f8a1678a6b31d0d42472b1f24b7aae943044d25de19558884f850007a3d1",
+        "allocated_bytes": 176128
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426007.json",
+        "bytes": 178065,
+        "sha256": "a9bd84a8c14dfe834b24139b21833ab601262fe2f23429f8575b5a89e87e7e6c",
+        "allocated_bytes": 180224
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426008.json",
+        "bytes": 185552,
+        "sha256": "4b5dbccf88eba6376b89407fa09329d3143dc05f1fb46a0256bd2c65097df2a9",
+        "allocated_bytes": 188416
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426009.json",
+        "bytes": 166369,
+        "sha256": "29d49fac7d3376a1432879f8f50ccde31a5feed44d83a22a9f07e3b06250d0c7",
+        "allocated_bytes": 167936
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426010.json",
+        "bytes": 175231,
+        "sha256": "e1a932f8217756272e243849f158f5804db6673864c0a49a24b30afa45ee381e",
+        "allocated_bytes": 176128
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426011.json",
+        "bytes": 173646,
+        "sha256": "42446832352871c3987b7cee381c018f549480d229a3f44bd8480151d1800f0d",
+        "allocated_bytes": 176128
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426012.json",
+        "bytes": 176981,
+        "sha256": "51a78096d295fcc337553bfc0b9567789a354dc2c4b3b634a3ec71af50e453f8",
+        "allocated_bytes": 180224
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426013.json",
+        "bytes": 181781,
+        "sha256": "e438ef481759b7b4f684eeb0af97852cc35bdfaf612b36155f8bb4805978551b",
+        "allocated_bytes": 184320
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426014.json",
+        "bytes": 179540,
+        "sha256": "2a2d47a8008c2c42d434b005c9b9f5c9d8e39d283e2750584fc34e713c066b4d",
+        "allocated_bytes": 180224
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426015.json",
+        "bytes": 174643,
+        "sha256": "b9eb4638cf524f6b426fccf85e345df3c7f7d786c9406d025be382adcdf5af85",
+        "allocated_bytes": 176128
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426016.json",
+        "bytes": 182748,
+        "sha256": "ddf34da116d50be731eee46a71a88a665f0792fd7ae6c913db377bbdbd1cbd84",
+        "allocated_bytes": 184320
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426017.json",
+        "bytes": 175308,
+        "sha256": "9aec6876ed5295aafe7dc80a6d43735a9f4970b0d3345894c3527dd556a7d374",
+        "allocated_bytes": 176128
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426018.json",
+        "bytes": 179994,
+        "sha256": "8c09c4243c9380d298098aeab442406c7a68e6c4cbe7ae2d89a7f8da7c7538cc",
+        "allocated_bytes": 180224
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426019.json",
+        "bytes": 184330,
+        "sha256": "57a492a47e3f3e931a8ec9497a044c8465efae775e74ef48678831b9d01f3b2e",
+        "allocated_bytes": 188416
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426020.json",
+        "bytes": 186853,
+        "sha256": "7ae056d5cf2ff762c00b6cebd904e35b28d591fa4487c6f3b9bfd3d32069b675",
+        "allocated_bytes": 188416
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426021.json",
+        "bytes": 179570,
+        "sha256": "7f2c531626cb43e2a7972bcf9f0e97590d916a2f00644c0f1f95835b31e0c552",
+        "allocated_bytes": 180224
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426022.json",
+        "bytes": 178890,
+        "sha256": "bffdcd3e2db4dc13d8b01e20414c9b623fb51897708d819356ea295cbfd83cf6",
+        "allocated_bytes": 180224
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426023.json",
+        "bytes": 173800,
+        "sha256": "e1c8609b99b519edb0af18f002912dbfd4324c41e3b0d5cf45eda9e019d30cc2",
+        "allocated_bytes": 176128
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426024.json",
+        "bytes": 174602,
+        "sha256": "aa8278af265eeb1d6f8a6342623b101046e6b80aac940af4038fea9e59cb5045",
+        "allocated_bytes": 176128
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426025.json",
+        "bytes": 180284,
+        "sha256": "f105729ec2e6d7891887363f29ebed70a5f6edc1030b323901aea34edd2d4f3a",
+        "allocated_bytes": 184320
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426026.json",
+        "bytes": 175433,
+        "sha256": "9191fbea79357b1782f3635f45ee8f48f16a4be370b1d51558e597f052030265",
+        "allocated_bytes": 176128
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426027.json",
+        "bytes": 186773,
+        "sha256": "9fe88924d7d482d02d6ef91cf69c7425a7fdf79c5c65a58a3d440a0759d8c2db",
+        "allocated_bytes": 188416
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426028.json",
+        "bytes": 177684,
+        "sha256": "4e80d0d34903621c00acdb11e764c447791e8dc39787cea7754301bf10b51bad",
+        "allocated_bytes": 180224
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426029.json",
+        "bytes": 174874,
+        "sha256": "dc4263c2ed5f4ec9dc8c44a0d9f4472023328c128a379e7c8069b2dce7c520c5",
+        "allocated_bytes": 176128
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426030.json",
+        "bytes": 177223,
+        "sha256": "21630f878e3e862907231313b8cf26d30839fde20c6fec2e55aa862a556c4667",
+        "allocated_bytes": 180224
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426031.json",
+        "bytes": 173562,
+        "sha256": "69e3b193ece0ab245886b903089cb82a81bc8ada5d9f5ad02e4f743e9f3a5b33",
+        "allocated_bytes": 176128
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426032.json",
+        "bytes": 184787,
+        "sha256": "89067c8bbc054e03ba32c78813a500f2f2666937e08f67f4ef557de952bda8cf",
+        "allocated_bytes": 188416
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426033.json",
+        "bytes": 179617,
+        "sha256": "6a701b131e388dcaade009f1819be148d1ff70e0fe4043f1ea93c0926c5544d3",
+        "allocated_bytes": 180224
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426034.json",
+        "bytes": 175221,
+        "sha256": "acbc3c9610a3259d5c1fb2fcd11f64e8158ebf90aececf3598152fc2325fcdd9",
+        "allocated_bytes": 176128
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426035.json",
+        "bytes": 179081,
+        "sha256": "a42f6dcf53653c93b6fe658ec6bca7c6020cef9c9412df3bf124e681a646afd4",
+        "allocated_bytes": 180224
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426036.json",
+        "bytes": 176118,
+        "sha256": "84e4241303daa980112b6f615b89f3bda88cb2ee6d8e54a312740f648db9c1e9",
+        "allocated_bytes": 176128
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426037.json",
+        "bytes": 171262,
+        "sha256": "e05e58dd02c42aa213f72a88cc782af1edb2ce8f2c12e5723cb2e8f3ba36e9b6",
+        "allocated_bytes": 172032
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426038.json",
+        "bytes": 181243,
+        "sha256": "3dce93ac21b22cae224d48fe29af743414a2a0938accbf680a6b6f8ebf5a1819",
+        "allocated_bytes": 184320
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426039.json",
+        "bytes": 175465,
+        "sha256": "003ebdd9b9ebf6b32bf0e19329ea5587f6d1b6f1e078161cc8ef89b2c12cfc32",
+        "allocated_bytes": 176128
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426040.json",
+        "bytes": 173975,
+        "sha256": "a99d4e197a30aeb461d5de1be05f16b18eb9a6cf4e674c9ed436d4b704a5b9f5",
+        "allocated_bytes": 176128
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426041.json",
+        "bytes": 173550,
+        "sha256": "055de89f513bdb01a56f06831a5e855a19947f148cd21afe7e697b7b488be420",
+        "allocated_bytes": 176128
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426042.json",
+        "bytes": 175281,
+        "sha256": "9adb6166b4f168402607599f669c986920a2eece1f9ce7d20496a30ec3bf4982",
+        "allocated_bytes": 176128
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426043.json",
+        "bytes": 178411,
+        "sha256": "f80f4b7af1f16e22290cd63d460e66f79b5aa5c25a093bb04e7f929edbbbf828",
+        "allocated_bytes": 180224
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426044.json",
+        "bytes": 181590,
+        "sha256": "c7b0d4be6f2f93018fdb540cc5bf55ad6cf1f19e64541efc1a82b18325025984",
+        "allocated_bytes": 184320
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426045.json",
+        "bytes": 175745,
+        "sha256": "abdf77f4447a10157d6ea90889ca1433eff5680ad15464d66abfdca03e09f446",
+        "allocated_bytes": 176128
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426046.json",
+        "bytes": 186608,
+        "sha256": "2fc088bb7daf88de419cbaab91ee251119bd6f7546f185bb370411a56e56976d",
+        "allocated_bytes": 188416
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426047.json",
+        "bytes": 172189,
+        "sha256": "3d1265985ac45e396d2ae01eb32bd5217b466ac2248199a1263e402938cb6f4d",
+        "allocated_bytes": 176128
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426048.json",
+        "bytes": 184591,
+        "sha256": "e2db5130c8edea262f853e0e451a592b9d59fce93f1bd6dc0495d9287e2142a3",
+        "allocated_bytes": 188416
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426049.json",
+        "bytes": 161923,
+        "sha256": "48e632beaa60c8e197f9b464c42a1ad62b0a58757440cdfe579f6231d6dc24a8",
+        "allocated_bytes": 163840
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426050.json",
+        "bytes": 177878,
+        "sha256": "b4bf8315c025eb30a7a673a74a34f58b687650e7fdd2ecec9a3c0665da94cca1",
+        "allocated_bytes": 180224
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426051.json",
+        "bytes": 161876,
+        "sha256": "223c37cc70e38d8cf03eac90e9d212f0337a76f5861a838f547ccc31a9ca39c8",
+        "allocated_bytes": 163840
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426052.json",
+        "bytes": 176251,
+        "sha256": "e4eaa5e3aff5f6205a89e524347f215cdf47a5eb9af9b5f23029e798024cd8ac",
+        "allocated_bytes": 180224
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426053.json",
+        "bytes": 172934,
+        "sha256": "2886279264da0ae29be6fd94bca0d4843b0f92f7fc5a3b8cf58486443b683116",
+        "allocated_bytes": 176128
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426054.json",
+        "bytes": 177303,
+        "sha256": "77c31c45c4dcc46060ccb3bd239df363cbb76781a42d3cba77443d1896b4a65f",
+        "allocated_bytes": 180224
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426055.json",
+        "bytes": 177637,
+        "sha256": "4ec1ee7abe48e7f9dca12aa51bbb6292b663b21638987c962820b29a3a830b82",
+        "allocated_bytes": 180224
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426056.json",
+        "bytes": 169430,
+        "sha256": "502235506a149ca83279466a132b77e2cbf9298452633ae37c1c532b45828ea2",
+        "allocated_bytes": 172032
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426057.json",
+        "bytes": 175526,
+        "sha256": "29f443ef8de6778a902bf7bd8c81049a2c52bf4ece5bbddf6c3b9d39cc5cefc0",
+        "allocated_bytes": 176128
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426058.json",
+        "bytes": 182379,
+        "sha256": "a4a58b156637c8a646bfe8352ddb7adecad666a51e8f73a5ef92b07484e9709c",
+        "allocated_bytes": 184320
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426059.json",
+        "bytes": 164797,
+        "sha256": "8926bea74da6ae6df1bc3dd362e6428e405a513dc0ebdc6829fbddb90b616c20",
+        "allocated_bytes": 167936
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426060.json",
+        "bytes": 180236,
+        "sha256": "897214690127fe1a5af50fe0beea18e390192f4d88f69e2f08a83051d31693f4",
+        "allocated_bytes": 184320
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426061.json",
+        "bytes": 177020,
+        "sha256": "67908a98c323792fe3ba6d43dff8df49e3440725faadb503aa9568d78bc65f1c",
+        "allocated_bytes": 180224
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426062.json",
+        "bytes": 178065,
+        "sha256": "1cfa6b95a00dd2603ea73bb4e76f177d88520c89772c4bdf4d2ae8805b867d84",
+        "allocated_bytes": 180224
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes/U_29426063.json",
+        "bytes": 177370,
+        "sha256": "1d53a246b524391e9e3ec01a7ac58cb2466055e5cfd080c0969822c5e785a2e9",
+        "allocated_bytes": 180224
+      }
+    ],
+    "reference_directories": [
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02/outcomes",
+        "allocated_before": 12288,
+        "absent": true,
+        "allocated_after": 0
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/outcomes",
+        "allocated_before": 4096,
+        "absent": true,
+        "allocated_after": 0
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01/raw",
+        "allocated_before": 4096,
+        "absent": true,
+        "allocated_after": 0
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b05_local_allocation_a02",
+        "allocated_before": 4096,
+        "absent": true,
+        "allocated_after": 0
+      },
+      {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b06_fair_model_a01",
+        "allocated_before": 4096,
+        "absent": true,
+        "allocated_after": 0
+      }
+    ],
+    "reference_input_leftovers": [],
+    "reference_input_net_allocated_reclaimed_bytes": 124866560,
+    "snapshot_net_allocated_reclaimed_bytes": 2461769728
+  },
+  "local_deleted_targets": [
+    {
+      "path": "/home/fires/hmasd-wsl/runs/uav_user_waiting/b07_cap_two_a02/outcomes",
+      "allocated_before": 5521408,
+      "purpose": "redundant verified collection copy, rebuildable bytecode, or completed-operation scratch",
+      "allocated_after": 0,
+      "absent": true
+    },
+    {
+      "path": "/home/fires/hmasd-wsl/runs/uav_user_waiting/b07_cap_two_a02/summary.json",
+      "allocated_before": 1294336,
+      "purpose": "redundant verified collection copy, rebuildable bytecode, or completed-operation scratch",
+      "allocated_after": 0,
+      "absent": true
+    },
+    {
+      "path": "/home/fires/hmasd-wsl/runs/uav_user_waiting/b07_cap_two_a02/stdout.log",
+      "allocated_before": 12288,
+      "purpose": "redundant verified collection copy, rebuildable bytecode, or completed-operation scratch",
+      "allocated_after": 0,
+      "absent": true
+    },
+    {
+      "path": "/home/fires/hmasd-wsl/runs/uav_user_waiting/b07_cap_two_a02/stderr.log",
+      "allocated_before": 0,
+      "purpose": "redundant verified collection copy, rebuildable bytecode, or completed-operation scratch",
+      "allocated_after": 0,
+      "absent": true
+    },
+    {
+      "path": "/home/fires/hmasd-wsl/runs/uav_user_waiting/b07_cap_two_read_a02/reading.json",
+      "allocated_before": 380928,
+      "purpose": "redundant verified collection copy, rebuildable bytecode, or completed-operation scratch",
+      "allocated_after": 0,
+      "absent": true
+    },
+    {
+      "path": "/home/fires/hmasd-wsl/runs/uav_user_waiting/b07_cap_two_read_a02/reading-progress.json",
+      "allocated_before": 73728,
+      "purpose": "redundant verified collection copy, rebuildable bytecode, or completed-operation scratch",
+      "allocated_after": 0,
+      "absent": true
+    },
+    {
+      "path": "/home/fires/hmasd-wsl/runs/uav_user_waiting/b07_cap_two_read_a02/stdout.log",
+      "allocated_before": 4096,
+      "purpose": "redundant verified collection copy, rebuildable bytecode, or completed-operation scratch",
+      "allocated_after": 0,
+      "absent": true
+    },
+    {
+      "path": "/home/fires/hmasd-wsl/runs/uav_user_waiting/b07_cap_two_read_a02/stderr.log",
+      "allocated_before": 0,
+      "purpose": "redundant verified collection copy, rebuildable bytecode, or completed-operation scratch",
+      "allocated_after": 0,
+      "absent": true
+    },
+    {
+      "path": "/home/fires/hmasd-wsl/experiments/candidates/uav_user_waiting/b07/__pycache__",
+      "allocated_before": 253952,
+      "purpose": "redundant verified collection copy, rebuildable bytecode, or completed-operation scratch",
+      "allocated_after": 0,
+      "absent": true
+    },
+    {
+      "path": "/home/fires/hmasd-wsl/tests/experiments/candidates/uav_user_waiting/b07/__pycache__",
+      "allocated_before": 86016,
+      "purpose": "redundant verified collection copy, rebuildable bytecode, or completed-operation scratch",
+      "allocated_after": 0,
+      "absent": true
+    },
+    {
+      "path": "/home/fires/hmasd-wsl/temp/directions/uav_user_waiting/b07",
+      "allocated_before": 651264,
+      "purpose": "redundant verified collection copy, rebuildable bytecode, or completed-operation scratch",
+      "allocated_after": 0,
+      "absent": true
+    }
+  ],
+  "local_removed_allocated_bytes": 8278016,
+  "retained": "Published useful B07 capacity-control code and59 checks; compact full positive/adverse results; all original operation/config/exit records; one canonical remote copy of64 raw and64 full outcomes, summary and reading(31,865,551 payload bytes). B05/B06 local canonical originals remain hash-verified. Git cached source blobs retained.",
+  "unused_code_deleted": [],
+  "unused_code_reason": "All B07 source/tests retain a concrete consumer as the inexpensive capacity benchmark. Only disposable support scripts and rebuildable caches were unused.",
+  "concrete_tool_blockers": [],
+  "target_leftovers": [],
+  "measurement_scope": "Sum of allocated st_blocks*512 across exact removed target trees/files and launcher-worktree metadata, plus net new local compact cleanup record and notebook growth. Not a claim about Git object pruning, VHD compaction or global host free space; concurrent other-direction changes excluded.",
+  "notes_allocated_before_append": 512000,
+  "gross_deleted_allocated_bytes": 2594914304,
+  "notes_allocated_growth_bytes": 4096,
+  "cleanup_record_allocated_bytes": 135168,
+  "net_reclaimed_allocated_bytes": 2594775040
+}

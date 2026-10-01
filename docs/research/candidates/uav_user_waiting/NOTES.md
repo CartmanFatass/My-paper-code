@@ -6552,3 +6552,48 @@ repair nor a tiny residual around a weak comparator is presumed. Mathematical fe
 and prospective arithmetic must expose the actual information/action/timing contract and
 all worker/reader/verification costs. Source inspection does not approve a new fixed study.
 Root owns the eventual scientific allocation after the complete independent recommendation.
+
+
+<a id="b07-final-cleanup"></a>
+### B07 measured final cleanup and retained evidence — 2026-10-01 UTC
+
+The complete scientific result is published at `defe6ef216535c920124e557a2a63d39bcc43445`;
+the full original independent diagnosis, resolved stop and scoped RESEARCH/background update
+are published at `02d4f2ae307c4c813b5adfd10d3bc2d508803a36`. The failed first invocation
+remains a zero-query infrastructure failure with its original source/identity; it is not a
+scientific adverse episode or an unrecorded retry. Every native process is terminal, the
+same-handle observer has been drained and stopped, and the scientific reviewer has released
+its raw/full-outcome consumers. Fresh elevated read-only process scans on the compute node
+found no references to the affected data roots; local inventory found no B07 scientific
+consumer. No accepted operation is moved or restarted.
+
+The exact-target native collector preview and apply removed all three eligible snapshots
+`a18d26cc245a4352b817ff080aaea63c`, `dd35a883e5de4ebda0cc6a2ccac6def3` and
+`6e96f336a31a449c9d9072f4bf64865c`, including their Git worktree metadata, reclaiming
+**2,461,769,728 allocated bytes**. On `wsl_4070`, the 320 temporary B05/B06 input copies
+(64 S_F raw,64 S_F outcomes,192 S/M/U outcomes) and their five now-empty staging directories
+were removed: **124,866,560 allocated bytes**. Their local canonical originals were
+hash-verified immediately before removal and remain untouched. The collector rechecked
+source cleanliness, durable reachability, native exit identities and process references;
+it reported no refusal. No claim, manifest or original exit witness was deleted.
+
+Local duplicate C2 outcome/summary copies, duplicate reader reading/progress/logs, completed
+B07 observer/transfer/extraction/cleanup scratch and rebuildable B07 test/source bytecode were
+removed. These local removals reclaim **8,278,016 allocated bytes**. After charging the
+new compact cleanup record and notebook growth, the total net reduction is
+**2,594,775,040 allocated bytes** across the exact remote/local targets; this is not a
+Git-object-pruning or host/VHD free-space claim. The exact deleted targets and allocated-byte measurements are recorded in
+[`cleanup.json`](../../../../runs/uav_user_waiting/b07_cap_two_a02/cleanup.json).
+The unique remote64 raw files,64 full outcomes, original summary and full reading were
+verified again after deletion:130 files,31,865,551 payload bytes, unchanged hashes.
+Their canonical node/path/hash locators remain in the compact result and cleanup record.
+These are the one retained evidence copy needed to audit all candidate masks, native physics,
+private C proposals and individual counterexamples. Original review links to local temporary
+full-summary/reading copies now resolve through these explicitly retained remote locators.
+
+Useful B07 capacity-control source and all59 meaningful checks remain published: there is
+no unused executable to delete beyond disposable support scripts and bytecode. No full-tree
+copy, archive or retention chain was made. All selected targets are absent; there is no
+concrete cleanup tool blocker. This closure ends B07 execution/reading/cleanup, while the
+new Root-selected source-only assessment remains the current responsibility; no new study
+or source implementation follows automatically.
