@@ -5621,3 +5621,70 @@ transmission comparisons have separate owners and are not successor slots here.
 Root owns a cross-question selection; this reading and own publication need no
 routine Root acknowledgment. The immediate remaining B06 work is publication
 of evidence/standing/shared scope and measured retirement of disposable targets.
+
+
+<a id="b06-final-cleanup"></a>
+### B06 publication and measured final cleanup — 2026-10-01 UTC
+
+The complete read result, full original independent diagnosis and accepted
+reuse/stop disposition are published at
+`8072064fc3bb4d07e2a4c3b67942a242d6ebeb0c`. The successful fixed reader's
+aggregate/per-world/epoch record is retained unchanged in Git; the large original
+summary and all unique trajectories/datasets/checkpoints retain one canonical
+remote copy at the locators above. Immediately before deleting the temporary
+local summary, remote `summary.json` and `reading.json` hashes were rechecked;
+raw2,661/873,616,739 bytes, assets12/5,168,100 bytes and data12/2,613,751 bytes
+were present. The original Critic had completed its use of local inputs, and the
+Root Oracle was told the canonical location before the redundant copy was removed.
+
+Both workers/supervisors were terminal; the observer was stopped at generation30
+with no pending wake or unconsumed event. The supported snapshot collector's
+preview and apply used exact IDs with its elevated read-only process scan, under
+the remote main-writer lock. Both were eligible, had no live reference, and their
+sources were durable on published main. Claims, manifests, failed/successful
+records and canonical outputs remain. Actual remote deleted targets and allocated
+bytes were:
+
+| Deleted target under `/home/wu/projects/HMASD/` | Allocated bytes before | After |
+|---|---:|---:|
+| `.git/hmasd-launch-sources/e86f2d465d0b45aaa82eb63d138b5e78` |813,219,840|absent|
+| `.git/worktrees/e86f2d465d0b45aaa82eb63d138b5e78` |3,600,384|absent|
+| `.git/hmasd-launch-sources/e35ec2ed8f434892ab9350874c1eb55e` |813,293,568|absent|
+| `.git/worktrees/e35ec2ed8f434892ab9350874c1eb55e` |3,604,480|absent|
+
+Remote net allocated-byte reduction is**1,633,718,272**. The pre-existing remote
+Git automatic-object-GC bad-tree warning appeared during fetch, but did not block
+the maintained snapshot collector; no object-store repair was attempted and no
+collector refusal was bypassed.
+
+The same read-only process reference scan returned empty for every local target;
+Git confirmed none was tracked. Actual deleted local targets were:
+
+| Deleted target under `/home/fires/hmasd-wsl/` | Allocated bytes before | After |
+|---|---:|---:|
+| `temp/directions/uav_fleet_adaptation/` (only two consumed B06 observer requests) |12,288|absent|
+| `runs/uav_fleet_adaptation/b06_count_development_a02/summary.json` |12,775,424|absent|
+| `runs/uav_fleet_adaptation/b06_count_development_a02/stdout.log` |0|absent|
+| `runs/uav_fleet_adaptation/b06_count_development_a02/stderr.log` |0|absent|
+| `runs/uav_fleet_adaptation/b06_count_development_a01/progress.json` |4,096|absent|
+| `experiments/candidates/uav_fleet_adaptation/__pycache__/` |8,192|absent|
+| `experiments/candidates/uav_fleet_adaptation/b02/__pycache__/` |53,248|absent|
+| `experiments/candidates/uav_fleet_adaptation/b04_native_development/__pycache__/` |20,480|absent|
+| `experiments/candidates/uav_fleet_adaptation/b06_count_development/__pycache__/` |122,880|absent|
+| `tests/experiments/candidates/uav_fleet_adaptation/b06_count_development/__pycache__/` |110,592|absent|
+
+Local net reduction is**13,107,200** allocated bytes; combined actual B06 cleanup
+is**1,646,825,472 bytes**. All14 listed targets are absent. This is deleted
+allocated storage, not a moved directory, tarball or retained backup. Together
+with the earlier recorded B01–B05 cleanup, cumulative reclaimed bytes are
+9,215,295,488; earlier figures are not a second deletion in this batch.
+
+The small published B06 count-aware interface, collector, fixed reader and tests
+remain useful for reading the retained claim evidence and source-only interface
+work. All B06 executable files participate in that fixed source/reader contract;
+no orphan experimental entry or scratch implementation was found. Frozen B02–B05
+and shared helpers have live or evidentiary consumers and remain unchanged.
+Canonical raw/checkpoint/data are required unique evidence, not disposable leftovers.
+There is no cleanup blocker, unread result, live producer or pending B06 review.
+The current authorized continuation is only Root's source/interface/full-cost
+assessment with its Oracle; no next result study has been selected.
