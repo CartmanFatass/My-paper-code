@@ -1,0 +1,11 @@
+{
+  "claim_key": "9ad48feccdfea0b7eb14ba9931ea7338660e7f1c4d63a931ebf8c43bde388602",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/9ad48feccdfea0b7eb14ba9931ea7338660e7f1c4d63a931ebf8c43bde388602.json",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/uav_radio_information_cost/b02_integrated_package_read_a01/launch-manifest.json",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/9ad48feccdfea0b7eb14ba9931ea7338660e7f1c4d63a931ebf8c43bde388602.json",
+  "pid": 1256578,
+  "runner_pid": 1256579,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-10-01T13:30:05.295917Z"
+}

@@ -1602,3 +1602,286 @@ snapshot `6ed40097716a4e108328b0deab9a5bc8`; it is absent and allocated bytes fe
 819,814,400 -> 0. No output/claim was removed, no cleanup blocker or backup copy.
 The main contract now proceeds once at the unchanged executable source `547e2200c`;
 32 paired H256 worlds and separate complete reader remain the next operations.
+
+### B02 main collected; full reconstruction accepted on the same fixed purchase
+
+Main `b02_integrated_package_a01` was admitted on wsl_4070 at 13:21:48.423 UTC,
+source `547e2200cbe261174ed392d66fcc56340c2588b2`, after actual available memory
+14,967,443,456 B passed the 4 GiB floor. Claim
+`b6dc68cbced4caf14f6669cea5a9df8c432e7bfa1a909c1fe19e1631826427e1`, worker
+1255100/supervisor1255099, exited 0 at 13:28:21.174 UTC. All 64 H256 episodes /
+16,384 native steps / 0 fits completed, with no omitted or failed row. Main worker
+used 376.824815 s entry wall, 391.945706 process CPU s, 0.005589 waited-child CPU s,
+peak RSS 449,000 KiB. Outer launcher elapsed 24 s. Worker summary SHA256
+`ddd88730bd657ee75392f4546f23be583503a08642a343aca03302ed673d95c2` has 1,199,183 B;
+all eight collected JSON files and all 129 remote NPZ artifact hashes/sizes matched.
+Canonical artifacts total 141,400,275 B; the remote worker run total was 142,620,020 B
+across 139 files. Raw/outcome data remain once at
+`wsl_4070:/home/wu/projects/HMASD/runs/uav_radio_information_cost/b02_integrated_package_a01`.
+The local complete JSON is a read copy; compact publication will bind the unchanged
+canonical full summary, rather than mutate its identity.
+
+Main waiter generation 3 exposed READY event `0b9a63e83fa772a127e16221` / wake
+`6000b81c-a552-43a8-a692-b217dd4688d6`. An attempted rearm based on the daemon state
+file alone was safely rejected (`events must be returned by drain before rearm`);
+a real drain then exposed the event and generation 4 consumed it. No worker or Send
+was repeated. App delivery again rejected unloaded-child queue input; active native
+DM collection remains the actual return path. After verified collection the supported
+collector preview/apply removed completed main source snapshot
+`c4b8d0d58fff463d8a3454b4b03c10bf`; allocated bytes 819,834,880 -> 0, target absent.
+The running reader uses its own distinct admitted snapshot and canonical worker outputs.
+
+Full reader `b02_integrated_package_read_a01` at the same executable source was accepted
+13:30:05.291 UTC after actual available memory 15,235,203,072 B passed. It binds the
+exact worker hash above and makes no environment/reset/native-step/fit calls. Claim
+`9ad48feccdfea0b7eb14ba9931ea7338660e7f1c4d63a931ebf8c43bde388602`, worker
+1256579/supervisor1256578, source snapshot `6384ac9510f441caa3bfbfc23c77f0b6`.
+Deterministic job `rf-b02-read-a01` is registered against that exact native handle
+(generation 5); this DM stays active through terminal collection and reading. At this
+entry, complete numerical verification and its actual resource bill are still pending.
+
+The registered separate-context ResearchCritic `/root/dm_rf_purchase/review_b02_result`
+was given the actual question, prospective contract, frozen inputs, full worker evidence,
+positive/adverse/failed predecessors and known costs, without a DM preferred explanation.
+It is doing independent saved-evidence scientific reconstruction while the all-candidate
+numerical reader runs; its complete recommendation must cover the eventual terminal facts.
+This overlaps independent work, not a second selection review or another experiment.
+
+<a id="b02-complete-reading"></a>
+## 2026-10-01 — B02 complete: the literal U32 paid package does not earn its cost against PRIOR
+
+The fixed purchase is complete and numerically read: the direct 32-paired-world comparison
+supports retaining the cheaper competent PRIOR package for this payload objective. U32_FULL
+has six favorable worlds, higher mean raw quality and fewer transmitter-on ticks, but its
+complete paid payload-J and payload service decline. Personal waiting is mixed and imprecise,
+with severe censored tails on both sides; there is no uniform continuity ordering. This is a
+complete ordinary-program comparison and empirical understanding, not a learning-method result.
+It neither negates the earlier equal-sensing U32 increment nor permits cross-panel subtraction.
+
+### Exact completion and verification
+
+Frozen executable source remains `547e2200cbe261174ed392d66fcc56340c2588b2` throughout.
+The full reader ended exit 0 at 14:17:58.122 UTC with both native identities absent. Its
+`reading.json` is VERIFIED_COMPLETE, 508,572 B, SHA256
+`0600f27cd92f8ea5fdc6a0f31f2c64d71c29d86c81715b0d2c17d163b1e6c3c1`.
+All eight collected reader JSON files match fresh canonical byte hashes. It checked all 64
+ordered episodes / 4,096 decisions / 0 partial decisions, 20,168,580 actual candidate fleet
+scores / 5,042,145,000 candidate SINR entries, both current-C passes (40,960 calls), all
+16,384 native transitions, 819,200 user-age updates and 95,302 gap rows. It made no new
+environment, reset, native-step, fit or optimizer call. The complete paired tree equals the
+bound worker exactly. Initial geometry and addressed physical innovations are paired; later
+residuals depend on the different paths and are not required to match.
+
+The compact `runs/uav_radio_information_cost/b02_integrated_package_a01/result.json` retains
+all scalar/per-world contrasts, nested user differences, action differences, full cost counts
+and artifact identities. The complete unchanged worker summary, full reader and all raw/outcome
+NPZs stay in their canonical remote run directories, not rewritten into a new identity.
+The only extra DM calculations are saved-JSON reductions and targeted saved-gap reads; no new
+scientific episode, policy query or counterfactual trajectory was bought. The independent
+Reviewer also checked saved evidence as detailed in its original answer below.
+
+### Complete endpoint and companions
+
+The endpoint is `sum(payload_weight * native_J) / 256`, already normalized once. The independent
+unit is the paired world (32); users and 32 signed particles are nested. The following intervals
+are the declared descriptive mean ± 1.96 SE, not additional confirmatory tests.
+
+| Metric | U32_FULL mean | P_PRIOR mean | U32_FULL minus PRIOR [1.96 SE interval] | Positive / negative worlds |
+|---|---:|---:|---:|---:|
+| payload_J | 0.456132630 | 0.465883141 | -0.009750512 [-0.015241302, -0.004259721] | 6 / 26 |
+| raw_J | 0.467846567 | 0.465883141 | +0.001963425 [-0.003602085, +0.007528936] | 18 / 14 |
+| payload_served | 27.428076172 | 28.232788086 | -0.804711914 [-1.206848030, -0.402575798] | 6 / 26 |
+| mean_served | 28.132202148 | 28.232788086 | -0.100585938 [-0.507796866, +0.306624991] | 16 / 16 |
+| payload_quality | 0.240465212 | 0.235413694 | +0.005051518 [-0.002973800, +0.013076835] | 20 / 12 |
+| mean_quality | 0.246652455 | 0.235413694 | +0.011238761 [+0.003107657, +0.019369865] | 26 / 6 |
+| mean_age | 3.722321777 | 3.578068848 | +0.144252930 [-2.193508691, +2.482014550] | 15 / 17 |
+| F_user | 18.840942383 | 15.429565430 | +3.411376953 [-7.453422809, +14.276176715] | 14 / 18 |
+| max_unserved_gap | 67.843750000 | 66.843750000 | +1.000000000 [-23.240506422, +25.240506422] | 12 / 19 |
+| mean_user_max_gap | 20.555625000 | 21.771875000 | -1.216250000 [-7.588773775, +5.156273775] | 14 / 18 |
+| max_closed_gap | 50.562500000 | 56.125000000 | -5.562500000 [-17.495084007, +6.370084007] | 11 / 19 |
+| max_left_censored_gap | 17.187500000 | 19.781250000 | -2.593750000 [-6.620818236, +1.433318236] | 11 / 19 |
+| max_right_censored_gap | 45.656250000 | 35.437500000 | +10.218750000 [-13.635703309, +34.073203309] | 17 / 15 |
+| age_p95 | 19.003125000 | 20.064062500 | -1.060937500 [-14.518926014, +12.397051014] | 13 / 17 |
+| terminal_mean_age | 6.878125000 | 6.271250000 | +0.606875000 [-6.451207327, +7.664957327] | 14 / 18 |
+| service_p10 | 25.437500000 | 25.078125000 | +0.359375000 [-0.339480478, +1.058230478] | 14 / 10 |
+| mean_path_length_m | 5962.549694678 | 5518.424602963 | +444.125091714 [+44.835896534, +843.414286894] | 22 / 10 |
+| transmitter_on_ticks | 802.937500000 | 869.562500000 | -66.625000000 [-97.807011913, -35.442988087] | 6 / 25 |
+
+Both programs have zero never-served users and zero fleet-wide zero-service ticks. This does
+not establish individual continuity. Mean age improves in 17 worlds and worsens in 15; the
+mean difference is only +.144253 with a wide interval. The 1,600 nested user mean-age differences
+include 860 improvements, 739 worsenings and one tie; these describe redistribution and do not
+supply 1,600 independent experimental units. Full per-user mean-age, service-tick and maximum-gap
+vectors were retained and read, including all signs and within-world extremes.
+
+Concrete positive and adverse evidence is preserved, not averaged away:
+
+- In 29661008, payload-J increases .025069928, but user13 has [51,256), a205-tick
+  right-censored gap; users26/15 have187/178-tick right-censored gaps. PRIOR's largest gap is44.
+- In 29661016, payload-J increases .014589427 while user38 has [35,256),221 ticks right-censored.
+- In 29661022, payload-J increases .018146838, mean age rises29.6375, and user45 has
+  [29,256),227 ticks right-censored. That user is served only4/256 ticks versus PRIOR81;
+  20 U32 users end with ages182–227, while the paired PRIOR maximum gap is80.
+- In 29661001, the small J increase .000931133 coexists with a closed146-tick gap for
+  user42, [62,208), and a closed139-tick gap for user17, [62,201).
+- In 29661017, U32 loses .040191879 payload-J but lowers mean age17.740859 and largest
+  gap197->48. PRIOR user20's [59,256) gap is right-censored197;20 PRIOR users end at147–197.
+- The favorable 29661026 is retained: J +.001818289, mean age −.524688 and largest gap40->32.
+  PRIOR also has a closed140-tick gap in29661015; neither package is a continuity guarantee.
+
+Censoring means duration beyond the horizon is unknown. The discrete age resets on any
+positive service in a tick, including .9-payload report ticks, and does not measure subsecond
+interruption. These saved adverse examples do not identify a waiting mechanism or a usable
+online selector of favorable worlds.
+
+Startup is three ticks for U32 and two for PRIOR, with payload2.9/2.0; its mean contrasts
+are descriptive exposures, not same-time effects. In particular startup raw-J +.011118 cannot
+be called a treatment benefit across unequal windows. The common final-four-tick payload-J
+contrast is −.015586540 [−.026822785,−.004350296], payload service −1.09921875
+[−1.88338385,−.31505365], while mean-age +.7953125 remains unresolved. Ages retain preceding
+history at tail entry. Last report252 reaches delivery255/254 and has1/2 candidate ticks;
+scored suffix253/254 ticks has246.7/254 payload time. No endpoint trimming or common-delay
+counterfactual replaces the complete endpoint.
+
+### Actual choices, legal information and cost
+
+Programs are active: commands differ8,035/8,192 paired ticks (31,132/40,960 UAV-ticks), masks
+6,774/8,192, and proposals1,998/2,048 report pairs. Post-C navigation differs5,543/10,240 entries.
+The stationary-prior package keeps public geometry, known-law planning, current lawful local-C
+information/proposals and the same joint-search rights. It is not an information-free or
+optimal-posterior baseline. U32 retains its original all-link current report and conditional
+32-particle trajectory integration, along with all physical timing costs.
+
+All4,096 main rounds were timely. Absolute round-wall maxima are U32 .329395020 s / PRIOR
+.054786314 s against1.336/1.436 s allowances. Mean accumulated round wall per mission is
+9.366311/1.280887 s (CPU9.738326/1.336202 s). U32 sends25,024 recurring bytes/mission versus
+9,024, measures16,000 links in64 reports, and buys6.4 simulated seconds of sounding; each pays
+400 setup bytes. Payload time is249.6 versus256. Sensor clipping/edge counts are allzero.
+Local C had3,826/3,284 sweep fallback choices when all local candidates predict zero service,
+not manager deadline failure. Its inherited calibration-discrepancy-row counters6,123/4,683
+are retained; full numerical reconstruction has no mismatch. Mixed `report_loss_codes_encoded=0`
+is a V6 PRIOR-only counter (V5 U32 does not emit that key), not zero U32 acquisition.
+
+Native J is .7*(served/50)+.3*quality. The observed payload deduction is arithmetic:
+Δpayload-J = +.001963425 raw-J difference − .011713937 U32 realized deduction.
+It is not a no-sounding counterfactual; removing sounding would change delivery, choices and
+histories. Nor does a timely round imply that changing delays, particles or estimation would
+improve the complete package. Raw quality improves with fewer transmitter-on ticks, but path
+length rises444.125m/UAV; there is no energy/battery model that combines these into net savings.
+Finite integration/search, acquisition, timing and trajectory consequences remain bundled.
+
+Full actual purchase, including the one paired H8 check and complete numerical readings:
+66 episodes /16,400 native steps /0 fits or updates;40,370,708 candidate fleet scores /
+10,092,677,000 candidate SINR entries;61,500 total C execution/replay calls /
+1,660,500 C paths /6,642,000 C model ticks /42,119,748 actual C link evaluations.
+Main+H8 acquisition is512,500 links /102,500 pilot slots /205 simulated seconds /
+1,090,600 recurring bytes +26,400 setup bytes. Worker+reader materialize114,800,000 base
+normal values /229,600,000 signed particle values. The raw/outcome NPZ evidence total is
+141,607,190 B (main141,400,275 +H8 206,915), retained once on the canonical node.
+
+Measured main reader2872.853818 own CPU s /2754.407461 entry-wall s /407,500 KiB peakRSS;
+main worker391.945706 CPU s /376.824815 wall /449,000 KiB; complete H8 check+reader4.337093
+CPU s /4.768434 wall /372,540 KiB. H8's nested worker is not added again. Totals are
+3269.136617 own CPU s (.908094 CPU-h) +.014692 waited-child CPU s, and3136.000710 additive
+entry-wall seconds, not end-to-end elapsed time or isolated node occupancy. Maxima are
+per-process RSS, not summed memory. The .7–1.5 CPU-h and6–12 support-hour-equivalent quote
+was a forecast; support equivalence was not measured. Initial refusal13s, actual launch
+shell elapsed, data-only test suites2.39s and1.69s, source/review/publication, transfer and
+observation work are additional overhead with incomplete CPU/support metering. Prior RF and
+information-cost investments remain incurred in their original records; this is not a cost reset.
+
+### Explanation update and bounded disposition
+
+The earlier equal-sensing U32−P positive and FULL−PRIOR adverse result remain separate,
+useful contrasts. B02 now resolves the missing direct package choice: the selected nonlinear
+integrator did not recover this acquisition/timing package's price on the complete payload
+objective. This is stronger than leaving that question missing, narrower than rejecting CSI,
+uncertainty integration, different sensing contracts or learning. It is an active adverse
+intervention, not an unexposed policy or computation-deadline failure.
+
+Waiting's new panel is heterogeneous and its mean effects uncertain, not a replication of
+uniform waiting harm. J lacks an individual waiting term and this approximate RF law can
+preserve residuals under hover; persistent beneficiary concentration remains plausible, not
+identified mediation. Preserve raw-quality/lower-transmitter capability, specific favorable
+worlds and both sides' long censored/closed gaps. Decline automatic adoption and close this
+fixed purchase; no extra panel, particle/target/sensor/timing tuning or attribution study is
+selected. The next cross-question allocation belongs Root. A future changed cost, mission
+utility or continuity contract must name its consequential use and retain a competent ordinary
+comparator with matching added rights; it is a proposal to evaluate, not a queued repair.
+
+<a id="b02-independent-disposition"></a>
+### Complete original independent scientific result review
+
+The following is the verbatim native final from the registered separate-context ResearchCritic, mechanically copied from its delivered message after full-reader completion.
+
+```text
+**Stop this fixed U32_FULL purchase and retain P_PRIOR as the ordinary reference.** Preserve U32’s demonstrated conditional capability and its positive quality/transmitter findings. The completed evidence supports this disposition without another panel, tuning step or attribution experiment.
+
+I received no inherited DM/Root conversation. The prospective contract and current index supplied the selection forecast and inherited standing; I reconstructed the new result before reading the earlier result interpretations and independent criticisms. This was a separate-context review, not a fully blinded study.
+
+The [worker summary](/home/fires/hmasd-wsl/runs/uav_radio_information_cost/b02_integrated_package_a01/summary.json) and [completed reader](/home/fires/hmasd-wsl/runs/uav_radio_information_cost/b02_integrated_package_read_a01/reading.json) bind to source `547e2200cbe261174ed392d66fcc56340c2588b2`. Their hashes match the supplied identities. The reader is `VERIFIED_COMPLETE`, with exit zero, all 64 ordered episodes, 4,096 decisions and no partial decisions. Its entire paired-result tree equals the worker’s.
+
+The fixed complete-H256 result is adverse. Differences below are U32_FULL−P_PRIOR; intervals are the declared paired-world mean±1.96SE.
+
+| Outcome | U32_FULL | P_PRIOR | Difference [interval] |
+|---|---:|---:|---:|
+| Payload J | .456133 | .465883 | **−.009751 [−.015241, −.004260]** |
+| Payload served/tick | 27.428076 | 28.232788 | **−.804712 [−1.206848, −.402576]** |
+| Raw J | .467847 | .465883 | +.001963 [−.003602, +.007529] |
+| Raw quality | .246652 | .235414 | **+.011239 [+.003108, +.019370]** |
+| Payload quality | .240465 | .235414 | +.005052 [−.002974, +.013077] |
+| Mean user age | 3.722322 | 3.578069 | +.144253 [−2.193509, +2.482015] |
+| Worst-user mean age | 18.840942 | 15.429565 | +3.411377 [−7.453423, +14.276177] |
+| Mean path, m/UAV | 5962.550 | 5518.425 | **+444.125 [+44.836, +843.414]** |
+| Transmitter-on UAV-ticks | 802.938 | 869.563 | **−66.625 [−97.807, −35.443]** |
+
+Payload J improves in six worlds and declines in 26. These are 32 independent paired worlds evaluating fixed programs, with zero training fits. Users and Monte Carlo particles do not increase the independent sample size.
+
+This is an **active adverse package comparison**. Commands differ in 8,035/8,192 paired ticks and masks in 6,774. All manager rounds meet their deadlines; the largest observed round is .329395 seconds. Sensor clipping and endpoint-code counts are zero. The 7,110 local-C fallbacks are sweep choices when all locally predicted candidate service is zero, distinct from the zero manager deadline fallbacks. The mixed counter `report_loss_codes_encoded=0` belongs to PRIOR’s schema; it does not erase U32’s 512,000 main-panel link measurements.
+
+Waiting does not support a uniform ordering. Both arms avoid never-served users and fleet-wide zero-service ticks, yet both produce severe individual deprivation:
+
+- **World 29661008:** U32 gains .025070 payload J, while user 13 has a **205-tick right-censored gap**, versus PRIOR’s maximum gap of 44.
+- **World 29661022:** U32 gains .018147 payload J, while user 45 receives service only **4/256 ticks** and ends with a **227-tick right-censored gap**. PRIOR serves that user 81 times; its maximum gap is 80.
+- **World 29661017:** U32 loses .040192 payload J but reduces worst-user mean age from 76.886719 to 7.917969 and maximum gap from 197 to 48.
+- **World 29661026:** the small positive is worth retaining: U32 gains .001818 payload J while reducing worst-user mean age and maximum gap.
+
+Terminal gaps remain censored; service restoration beyond H256 is unknown. Positive .9-weight service resets the declared discrete age metric, so these outcomes do not establish subsecond continuity. Across 1,600 nested user comparisons, mean age improves for 860 and worsens for 739, with one tie. These counts describe redistribution, not additional replication.
+
+Startup comparisons need particular care: U32’s window contains three ticks and PRIOR’s two. The six directly inspected pairs have identical first-two-tick raw rewards. Consequently, the reported startup raw-J advantage is not a same-time treatment benefit. The common final-four-tick payload-J difference is −.015587 [−.026823, −.004350]; this remains a companion to the complete endpoint.
+
+The strongest simpler explanation is sufficient for the decision: **competent ordinary PRIOR control already supplies substantial service, and this richer finite program does not earn its additional purchase under the declared payload objective.** PRIOR retains stationary-law knowledge, public geometry, current local-C observations/proposals/navigation and joint search rights. It is neither information-free nor an optimal posterior conditioned on all indirect evidence.
+
+The realized accounting identity is:
+
+`Δpayload J = +.001963425 raw-J difference − .011713937 U32 payload deduction.`
+
+This explains the arithmetic, not a causal no-sounding counterfactual. Information, nonlinear integration, finite sampling/search, delivery and induced trajectories remain combined. Zero deadline misses weaken a failed-computation explanation. They do not establish that faster delivery or another particle count would help. Hover-persistent channel residuals and J’s lack of an individual waiting term remain plausible explanations for beneficiary concentration; this comparison does not identify their causal contributions.
+
+The inherited findings remain intact. I checked the original hash-matched summaries supporting old U32−P **+.007529588** and old FULL−PRIOR **−.015929915**, then read their substantive criticisms. B02 supplies the previously missing direct package contrast. It neither cancels the same-sensing positive nor licenses subtracting effects across panels.
+
+The strongest constructive positive is improved raw quality with fewer transmitter-on ticks, plus genuine favorable individual worlds. That supports retaining the controller as a scoped capability. It does not supply a lawful selector for favorable worlds, dependable continuity protection or an energy benefit: travel increases, and no deployment utility or energy model prices these competing outcomes.
+
+The complete execution and verification bill is:
+
+- **66 episodes, 16,400 native steps, zero fits/updates**, including the paired H8 check.
+- **3,269.136617 own CPU-seconds**, plus .014692 waited-child CPU-seconds. H8’s cumulative 4.337093 seconds is counted once.
+- **3,136.000710 summed entry-wall seconds**, not end-to-end elapsed time or isolated node occupancy.
+- Main worker/reader peaks of **449,000/407,500 KiB**, separately measured.
+- **40,370,708 candidate fleet scores** across worker and reader including H8; verification is additional study cost.
+- **141,607,190 bytes** of canonical NPZ evidence. The initial refusal had zero scientific exposure and 13 seconds recorded overhead; source, engineering, review, transfer and other support remain incompletely metered.
+
+Per H256 mission, U32 sends 25,024 recurring bytes versus 9,024, buys 6.4 simulated seconds of sounding, and delivers one tick later; both pay 400 setup bytes. These costs reinforce the scoped decision without manufacturing a single deployment-utility score.
+
+**The smallest worthwhile complete observation for this purchase is now complete.** An unchanged repeat would buy recurrence precision without resolving a current decision obstacle. Attribution work could explain components while leaving this purchase decision unchanged. A future acquisition, timing or continuity comparison could be worthwhile if selected for a consequential new use: positive complete benefit with acceptable service costs would support that changed contract; another active adverse result would weaken it; technical failure would remain missing evidence. No such successor is selected by this review.
+
+I independently checked all scalar paired means/intervals; source bindings for 76 program-file entries covering 46 unique inherited files; B02’s published-source identity; comparator, timing, payload and age/gap semantics; H8/refusal records; and **24 hash-matched raw/outcome NPZs covering six paired worlds**. From those saved arrays I reconstructed rewards, contacts, individual ages and censored gaps and inspected decision records. Paired initial states match, and recovered common innovations agree within `9e−16` despite later residual divergence. I also checked the final certificate’s ordered episode flags, raw bindings, counters and both C passes.
+
+I relied on the completed numerical reader for remaining physical and candidate reconstruction. I did not independently repeat every candidate score, rehash every canonical artifact, establish physical calibration, evaluate another runtime or determine an acceptable waiting/energy tradeoff.
+
+**MATERIAL_DISSENT: no — direct verified evidence supports ending this fixed purchase while retaining PRIOR, U32’s scoped positives and both programs’ adverse service evidence. It does not support a broader claim that sensing or uncertainty integration is useless.**
+```
+
+### DM disposition of the full original answer
+
+I read the complete answer and accept its no-dissent recommendation. The important correction is to retain mixed, uncertain mean waiting effects and severe opposite individual tails rather than present B02 as uniform waiting harm. The startup windows are unequal, and the realized payload deduction is accounting rather than identified pilot causation. The old equal-sensing positive and the new raw-quality/transmitter positives remain capabilities, while complete paid package value is now directly adverse. I close this fixed purchase and retain competent PRIOR as the ordinary reference for this objective. No further study, repair or broad sensing/learning rejection follows. Full numerical correctness, scoped empirical support, adoption and next investment are separate conclusions; the next cross-question choice returns to Root.
