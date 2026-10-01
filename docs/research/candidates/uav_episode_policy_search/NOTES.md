@@ -313,3 +313,30 @@ snapshot-remapped root and will be removed after its accepted worker/reader cons
 The canonical original remains unchanged. Exact source publication precedes the single
 `b01_episode_search_a01` production request; supervisor acceptance, kernel admission and
 scientifically read completion remain separate facts.
+
+### Accepted B01 operation and observation
+
+Exact inputs were published as `f1ad0b848c9490feea6635c7484322d45da32f1a` before
+the sole production request. Configured `agent-task` accepted
+`episode-search-b01-a01`; its correctly quoted single command invoked the maintained
+admission kernel in the configured network shell. The outer supervisor finished exit0 after
+starting the detached kernel-owned chain, not after scientific completion. The source fetch
+succeeded; an existing remote background-GC bad-tree warning was preserved in tool output,
+and no unrelated repository repair or source substitution was attempted.
+
+Kernel admission on2026-10-01T13:35:56Z passed the4GiB floor with14,371,028,992 available
+bytes onwsl_4070. Accepted operation:
+`/home/wu/projects/HMASD/.git/hmasd-admission/6c52dc4c2805f2e66b46cdf40d73223c1c1333c99566ee43a3e25319cd612270.json`.
+Immutable source:
+`/home/wu/projects/HMASD/.git/hmasd-launch-sources/ff72eff671b846fb869ff96dd7bff12c`.
+Output: `wsl_4070:/home/wu/projects/HMASD/runs/uav_episode_policy_search/b01_episode_search_a01`.
+The retained native manifest/preflight and initial status pin runner1258504/start120316761,
+supervisor1258503/start120316759, boot`bb732fcb-1a33-4659-a786-331110ae41d3`.
+The2026-10-01T13:36:22Z status was accepted/running/consistent with no exit witness.
+
+`tools/hmasd_wait.py` generation1 was armed against that same operation,30s read-only
+status interval,1500s checkpoint window, state directory
+`/home/fires/.local/state/hmasd-wait/01a0f781-65d4-7ba3-b412-beacc031237f`.
+First drain exposed an actual accepted/running/consistent observation, not registration alone.
+The native DM stays active through same-handle drain/rearm and full result reading. No second
+launch, retry, checkpoint selection or fit has been authorized by acceptance.
