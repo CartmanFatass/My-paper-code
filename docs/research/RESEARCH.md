@@ -1,29 +1,28 @@
 # HMASD research index
 
-当前研究背景、共享认识、项目状态与研究计划，更新于 2026-10-01 UTC（2026-09-30 PDT）。治理依据为
+当前研究背景、共享认识、项目状态与研究计划，更新于 2026-10-01 UTC（2026-10-01 PDT）。治理依据为
 [constitution](../project/OPERATING_CONSTITUTION.md)；本页维护现状，历史过程见[日期归档](archive/)。
 
 阅读入口：[研究背景与共享认识](#研究背景与共享认识) · [方向状态](#active) · [现行计划](#current-research-plan) · [任务路由](#session-routing)。
 
-**本轮收尾后交接（owner，2026-10-01 UTC）：** 按原操作身份完成正在执行的 S7 及已开始的
-三份后续选题评估，不打断当前工作；本轮结束后先交接，不启动下一轮实验。Root 写总览，
-四位 DM 分别写自己的部分，共同形成一个[独立 handoff 文件](HANDOFF_20261001_ROOT_AND_FOUR_DMS.md)。
-三份选题评估及三位 DM 的本人交接章节已完成并发表；S7 的完整读出、独立判读和收尾仍在进行。
-整个 handoff 尚未完成；最后一位 DM 写完后，Root 再完成总览与停止状态。
-后续候选保留为未选定选项，交接完成后本 Root 范围等待 owner 明确继续。
-这不改变 Claude 的独立权限、其他明确暂停或已经冻结的证据。
+**本轮完成并暂停（owner，2026-10-01 UTC）：** 已接受的 S7 与另外三项研究均已完成
+运行、完整读取、独立判读、发表和测量清理；三份已开始的后续选题评估也已完成。
+Root 总览与四位 DM 本人章节共同构成已完成的[单一 handoff](HANDOFF_20261001_ROOT_AND_FOUR_DMS.md)。
+本 Root 与四位 DM 无运行中操作、未读意见或已选后继，停在交接边界，等待 owner 明确继续。
+三项定价候选仍为 UNSELECTED；状态询问、读交接和工作流编辑均不恢复研究。
+Claude 的独立权限和当前暂停、FSD/PPC 暂停、G33 冻结及 Milan 数据依赖保持原范围。
 
-**本Root工作流已恢复：2026-09-29 21:59 UTC，owner明确要求“阅读handoff 我们继续工作”。**
+**历史恢复：2026-09-29 21:59 UTC，owner明确要求“阅读handoff 我们继续工作”；该轮次现已完成并暂停。**
 本次解除21:25 UTC的本Root及三个Codex方向暂停；原已接受研究及后续A/B、G/N两轮均已完整判读、发表和收尾。
-Root继续owner委托的轮次循环：累计原生服务年龄研究已完成1fit、960回合／245760步，完整核验、独立判读和清理均完成；保留普通W/M能力及学习自身增益，结束未超过普通参照的原选择器配方，无已选追加运行。[完整结果](candidates/uav_service_age/NOTES.md#b01-complete-reading)。原责任恢复保留全部Lead／源码／原操作身份。
+该次恢复后完成的研究包括：累计原生服务年龄研究已完成1fit、960回合／245760步，完整核验、独立判读和清理均完成；保留普通W/M能力及学习自身增益，结束未超过普通参照的原选择器配方，无已选追加运行。[完整结果](candidates/uav_service_age/NOTES.md#b01-complete-reading)。原责任恢复保留全部Lead／源码／原操作身份。
 这不改变Claude独立授权、FSD/PPC暂停、G33冻结或Milan数据依赖。[恢复范围](#resume-20260929)、[原暂停交接](#paused-handoff-20260929)。
 
-**Owner pause: lifted** 项目历史解除与本次Root范围恢复并存；其他明确暂停仍有效。
+**Owner pause: lifted** 仅指项目历史全局解除；当前本 Root 与四位 DM 按上方 owner 指令暂停，其他明确暂停仍有效。
 Owner 于 2026-09-23 进一步要求本任务作为科学项目管理者，给予 DM 更高自由度与韧性：失败后可以回顾整个项目，提出更广的建议并继续。当前科学选题与转向授权见 [constitution §2](../project/OPERATING_CONSTITUTION.md#2-who-does-what)，不再把结束一个配方等同于结束 DM 责任。
 具体新比较仍在 NOTES 中前瞻声明；既有负证据、负责人及已接受实验保持可恢复。
 **Claude 的 FSD session 仍暂时停止，仅由 owner 手动开启；G33 保持冻结。**
 
-**当前科学项目管理：** Owner于2026-09-27 PDT（2026-09-28 UTC）指定本会话接任Root，负责四个已收尾Codex DM的周期复盘与下一轮计划，
+**研究恢复后的分工（当前交接暂停优先）：** Owner于2026-09-27 PDT（2026-09-28 UTC）指定本会话接任Root，负责四个已收尾Codex DM的周期复盘与下一轮计划，
 维护问题计划、跨方向取舍与后继安排；Root只协调。Owner于2026-09-28 UTC取消Codex DM／研究线固定数量上限，
 2026-09-29进一步要求通常维持3–4个有实质工作的Codex DM，并由Astra max Oracle筛选有依据的备选；
 不足时不强行标为promising，Oracle／scout／reviewer不计入DM数。真实节点资源准入、Claude自身授权范围与既有暂停不变。
@@ -2375,24 +2374,21 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 ### Parallel allocation: independent work and rolling succession
 
 <a id="root-successor-designs-20260930"></a>
-**Four native DMs retain responsibility: S7 continues; three successor assessments are complete.**
-Fleet transmission retains its accepted C/H/F operation through full numerical reading,
-independent scientific diagnosis, publication and measured cleanup. The P/U32, P_FULL/P_PRIOR
-and fleet B10 studies are already complete. Root has read their full original critics and
-DM responses: retain U32's conditional objective gain and individual waiting harms, FULL's
-adverse package value and mixed waiting evidence, and inherited local-control competence
-including B08 HIDDEN and B10's immediate CJ witnesses. These results identify no common
-failure cause and do not exhaust the broader questions.
+**This round is complete; Root and all four DMs are paused at the owner handoff boundary.**
+All four studies have complete numerical reading, original independent scientific diagnosis,
+DM publication and measured cleanup. Root read the complete critics and responses, retaining
+S7 F−H's native J/service positive while rejecting H/F as an upgrade over C; U32's conditional
+objective gain and waiting harms; FULL's adverse purchase and mixed waiting evidence; and
+inherited local-control competence alongside B10's active learning losses. All adverse worlds
+and prior C/P_BS restrictions remain. These results identify no common failure cause.
 
-The three requested source assessments have also concluded. Root read each complete original
-DM source/feasibility/price response, the full independent recommendation and the separate
-DM response. Each final recommendation supports retaining one bounded future option; Root
-accepts that advice as preparation only. **All three remain UNSELECTED.** None has a new
-implementation, pilot, result operation or assigned execution budget, and this round starts
-no successor. The three responsible DMs have written and published their own sections in the
-[owner-requested single handoff](HANDOFF_20261001_ROOT_AND_FOUR_DMS.md); the S7 DM and Root
-will complete it after the accepted study finishes. Then this Root and its four DMs stop
-until the owner explicitly continues.
+Root also read all three complete source/price exchanges, final independent recommendations
+and separate DM responses. The three priced options below remain **UNSELECTED**, without new
+implementation, result operation or execution budget. S7's route-establishment suggestion is
+separately unpriced/unselected. All four DMs authored their own sections and Root completed the
+[single handoff](HANDOFF_20261001_ROOT_AND_FOUR_DMS.md). No live operation, unread advice or
+selected successor remains in this Root scope. Wait for explicit owner continuation before
+any new allocation; status, documentation and idle resources do not resume research.
 
 | Unselected question and what a complete comparison would add | Prospective complete native exposure | Forecast marginal CPU and support |
 | --- | --- | --- |
