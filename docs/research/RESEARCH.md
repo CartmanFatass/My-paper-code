@@ -2133,12 +2133,12 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 <a id="root-successor-designs-20260930"></a>
 **Four native DMs retain four substantive assignments.** Fleet transmission now owns the
 selected marginal-matched C/Q10 joint-renewal comparison, after full B06 publication and cleanup.
-Fleet adaptation has fully closed T/H and now owns the selected local binary transmitter-gate
-study over frozen motion, following the complete Astra Max recommendation and source/cost
-challenge. All four assignments are result-bearing studies; their workers still require actual
-resource admission, and implementation or reading work is not an admitted native run.
-`dm_parent_adaptation` continues the selected exact G2/A2 saved-history computation comparison,
-and `dm_user_waiting` continues S_F:LRS physical planning against paid fair references. Oracle
+Fleet adaptation owns the selected local binary transmitter-gate study over frozen motion,
+and `dm_parent_adaptation` continues the selected exact G2/A2 saved-history computation comparison.
+Waiting has completed S_F:LRS with a useful continuity/service tradeoff and now supplies bounded
+source/cost facts for Astra Max Oracle's next-value assessment. The three selected studies and
+one source assignment retain four substantive DMs; no further waiting experiment is selected.
+Workers still require actual resource admission. Oracle
 owns detailed idea discovery and independent challenge using cumulative records, all three
 libraries and primary passages. Helpers are not extra DMs; the allocation implies neither four
 admitted workers nor scientific value from filling capacity. Existing leads retain question
@@ -2258,7 +2258,7 @@ The final32-world panel has two tapes for stochastic programs: P0 × A/O/R/ZERO/
 A keeps all ON; O always silences the eligible member; R uses .5 probability; ZERO silences
 only when its count of positive user-slot SINR fields, capped at ten, is zero.
 These16 levels and37 declared contrasts include primary HIDDEN−RAW, both learned gates against
-all14 unfitted programs, each parent's ZERO−A, and P0 O−A/R−A. Average tapes inside32 world
+all14 programs without a new gate fit, each parent's ZERO−A, and P0 O−A/R−A. Average tapes inside32 world
 clusters. Read complete J/service/quality/tails/outages/path/height, on-time/switches/censoring,
 gate activation, queries/CPU and every signed adverse world. Freeze addresses, force-clock
 assignment, processing order and uncertainty before exposure. Training targets use random
@@ -2398,68 +2398,65 @@ throughput/deadline/generalization claim or automatic deeper search/JIT/ranker i
 
 <a id="fair-physical-eligibility-source-20261001"></a>
 <a id="fair-model-planning-selected-20261001"></a>
-**Selected: one S_F:LRS physical-planning arm against paid fair references.** Root read the
-complete DM source assessment at84dccca60 and original Astra Max recommendation, and checked
-the consequential settlement, private candidate and search source. Existing S/U still plan
-with greedy-grant ages; their LRS evaluation leaves that model unchanged. The new conjecture
-is that using the deployed fair rule throughout prediction can improve actual eligible-link
-sequences. The contrary explanation remains: old greedy-model urgency may encourage useful
-physical refreshing, while fair-law prediction or metre quantization can worsen continuity.
-[Source, prior coverage and complete price](candidates/uav_user_waiting/NOTES.md#post-b05-physical-contact-source-assessment).
-The DM retains the full original question/answer, substantive response and fixed contract in
-its notebook. This applies known ordinary control; it claims neither novelty nor a need to learn.
+**S_F:LRS complete: retain strong conditional continuity and its substantial service price.**
+Root read the complete B06 result, the entire original independent ResearchCritic return and
+the DM response, adopting retention and closure. One physical program on all64 reused B04
+worlds/16,384native steps/0fits reduces mean episode maximum gap from35.09375 to12.15625
+versus S:LRS:−22.9375ticks, descriptive t95[−25.663278,−20.211722], all64 favorable.
+M:LRS/U:LRS also lose every primary pair, and every-world quality and age gains include
+closed gaps. These development worlds do not provide confirmation or userwise protection.
 
-Keep S's 400-byte registered map, 141-byte report/command round, two-tick delivery, four-tick
-hold, C proposals, rotating member and 116 pre-cache coordinate-search requests. Carry a
-modeled 5×50 own-UAV last-grant matrix from −1 through settled history, committed prefix and
-private candidates, using exact B05 LRS. Recompute both squared-age cost and native tie terms
-under those grants. Global last service alone cannot recover local priorities. This adds no
-wire or actual-grant feedback: no truth timestamps/native SINR enter the planner. The matrix
-is a model, not exact native history. Do not purchase the 250-byte timestamp addition, another
-allocator, future-C query, changed horizon, learning or native allocation port.
+Service versus S falls4.234070users/tick, with63/64 losses; higher quality+.065331 does not
+offset the native-J loss−.039678. Service also falls in every world versus M/U. Retain M as
+the higher-service reference and the intermediate S/U operating points. Against S,38 individual
+maximum gaps and643 mean ages worsen among3200 user-world records;2617 users receive fewer
+service ticks. World29426053 improves both service and J, so the tradeoff is not proved
+unavoidable. No default adoption, service guarantee, learned benefit or energy claim follows.
 
-Buy **64 H256 trajectories / 16,384 native steps / zero fits**, on all already exposed B04
-worlds 29426000–29426063. Bind exact reset positions, users/map and frozen dependencies rather
-than seed names alone. Apply LRS to the new saved native SINR; collector greedy rewards remain
-auxiliary. Paid S:LRS is primary, with M:LRS/U:LRS retained as service/tail alternatives and
-no baseline rerun. The primary is mean episode maximum gap versus S:LRS; retain F_user, other
-age/gap/censoring and no-link/denial outcomes, service, quality/J, motion, transmitter exposure,
-deadlines and full cost. Pair the 64 world vectors descriptively; these are adaptively reused
-development worlds, not confirmation. Activation includes executed mask changes as well as
-commands/motion. Only the coincident-history prefix supports first-decision comparison;
-no old-S shadow queries at new states are selected.
+All64 first depart through an executed mask at transition2; commands also depart then in37.
+The common source/reset/prefix checks retain tiny cross-runtime SINR differences with identical
+eligibility and connections; later trajectories are not matched-state counterfactuals.
+Longest no-link intervals fall34.21875→11.109375ticks on average. Fewer concurrent transmitters,
+less interference, altered motion and regular LRS grants plausibly explain more unserved
+user-ticks alongside shorter gaps. This supports physical opportunity plus regular allocation,
+without identifying a unique history/accuracy mechanism. Modeled contacts remain imperfect,
+and no old-S shadow on new states was purchased. B05's fixed-path near-floor result survives.
 
-The bill includes 4,096 rounds, 20,480 worker C calls, 475,136 candidate requests and at most
-1,910,272 manager modeled fleet ticks / 9,551,360 local LRS row selections. History settlement
-covers all 256 ticks, including four terminal ticks; the summed candidate horizon is 254.
-Reading adds 40,960 C calls, full new native/report/history/grant-recurrence/key/search/outcome
-checks and independent native LRS reconstruction. Candidate arithmetic is checked throughout;
-independent candidate physics/priority covers every winner plus all visited candidates at
-reports 0/60/124/248, at most 134,016 ticks. This is not exhaustive candidate-physics repetition.
-Root accepts estimated **.25–.75 combined worker/reader CPU hours**, up to .1 CPU hours of
-synthetic checks, **5–9 support hours**, and the preceding .5–1.5 source-review hours as separate
-estimates. New canonical evidence is .15–.4 GB, process memory .5–1 GiB, with up to 3.5 GB
-released source snapshots and .1 GB scratch. Declare exact minimal temporary input staging
-if local consumers require it; retain existing baseline evidence in its one canonical location.
-Historical remote timings are context, not matched local speed controls or integrated LRS
-latency. All implementation, reading, storage and deadline consequences remain paid and measured.
+Complete worker/reader snapshots cost987.521216CPU seconds/.274311CPUh; unmetered support and
+final-write tails remain additional. The reader covers all candidate arithmetic with the declared
+bounded independent candidate physics, all native fair outcomes and original-source bindings.
+All4096 manager decisions were timely; offline LRS replay is not integrated allocation latency,
+and historical remote S/M/U CPU is not a matched local comparison. End this fixed purchase with
+no extra worlds, ACK, horizon/allocator sweep, learner or confirmation.
+[Complete result](candidates/uav_user_waiting/NOTES.md#b06-complete-reading),
+[original scientific diagnosis and disposition](candidates/uav_user_waiting/NOTES.md#b06-independent-review-and-disposition),
+[retired exact selection and full prospective cost](archive/2026-10-01/RESEARCH-fair-physical-planning-completion.md#retired-selected-comparison).
 
-No executed command/mask activation adds no demonstrated control capability. Useful primary
-continuity with a worthwhile complete S/M/U tradeoff supports a conditional ordinary option;
-shorter no-link intervals without better service waiting do not establish the prediction.
-Active adverse/unresolved outcomes end unchanged S_F investment; service/quality/path/deadline
-losses remain explicit even with a favorable waiting endpoint. No automatic repair, ACK,
-horizon sweep, fresh worlds, confirmation or learner follows. Existing B01–B05 failures and
-positive capabilities remain; source consistency does not diagnose them.
+**Next waiting assignment is source-only.** Root asks Astra Max Oracle to judge one worthwhile
+successor or a justified stop/better independent UAV question, using the full audit, all three
+libraries, July/external records and primary passages. Assess the critic's simpler causal
+low-concurrency radio-control suggestion against current C and the same LRS rights: useful
+continuity at lower complete planning cost or higher service would change practical use.
+A failed simple rule would not prove modeled history necessary. The exact competent rule,
+information/delivery/hold contract and full worker/reader/support/storage price remain unselected.
+The critic's64episodes/16,384steps is not a complete bill. No new native/policy/model/allocator
+queries, targets, outcome reductions, fits, implementation or result run follow from this source
+assignment. The same DM supplies requested facts after cleanup and owns its notebook; Root will
+read the full original recommendation before choosing. Fleet adaptation's already selected
+one-eligible-OFF P0 gate (at least four active transmitters, greedy host, no map/reports) remains
+a different question, as do the all-on phase and exact planning-economy studies.
 
 **Actual compute placement.** local_linux and wsl_4070 are distinct physical Windows hosts
 (AMD Ryzen7 8745H and Intel Core i9-13900H). Parent B07 and G B05 have finished their original
 local/remote chains. The remote GCC interpreter then failed in waiting A01; the bounded
 [recurrence diagnosis](../../runs/runtime_repair/cpython_20261001_recurrence/diagnosis.json)
 localizes the fault without identifying a cause. The separately bound local A02 allocation
-recovery and reader are complete. T/H, local cadence, saved-history A2 economy and S_F:LRS use
-configured local execution with fresh actual-node admission and full bindings. Arrange the A2 timing
-window after the native chains where practical, otherwise retain actual overlap/interleaving.
+recovery and reader are complete. T/H, local cadence and S_F:LRS completed on configured local
+execution; saved-history A2 economy retains its accepted node and inputs. Its recorded overlap
+includes waiting's worker02:45:12–02:54:19Z and reader02:55:33–03:02:56Z on October1; neither
+identity remains active. Keep these occupancy boundaries and interleaving in the timing reading,
+without a new matched-speed claim or a rerun. New phase/gate work uses configured node preference,
+current feasibility and fresh actual-node admission; no source estimate reserves capacity.
 This operation-specific placement changes no global runtime configuration and establishes no
 runtime cure. Accepted operations retain their node/identity; new overlap requires fresh
 memory/occupancy evidence, without a standing reservation.
