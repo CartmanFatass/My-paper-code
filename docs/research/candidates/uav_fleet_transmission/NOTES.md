@@ -5049,3 +5049,15 @@ within-schedule Q10−C reductions are explicitly prospective context for the or
 the primary timing estimand and panel are unchanged. The current step is source publication;
 this entry is not a launch receipt, actual-node admission or a result. Exact-source launch,
 deterministic observation, full reading, independent scientific diagnosis and cleanup remain.
+
+#### B07 initial control-label refusal, before acceptance
+
+2026-10-01 UTC. Scientific source published at `2261ccb709b8f5d166902a602f9c7ba33d510e8a`.
+The first local admission request exited4 with `direction 'uav_fleet_transmission' has
+unrecognized active state 'active'`. The owned RESEARCH row used my incorrect descriptive
+state label; the existing kernel recognizes `exploring`/`confirming`. No run directory,
+manifest or accepted B07 worker was created. I corrected only this owned state to `exploring`,
+keeping Root's selected question, owner pause, exact lead, all source bytes and prospective
+exposure unchanged. This is a documentation correction, not a runtime repair or new scientific
+attempt. After publishing it, submit/reconcile the same source/request/output through the
+maintained launcher; any existing claim still governs, and no duplicate or retry tag is granted.
