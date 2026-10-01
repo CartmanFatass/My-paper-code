@@ -7897,3 +7897,84 @@ environment adds275 native dense power slots for this one priming reset;
 1984 explicit episode resets and all scientific counts remain unchanged.
 A focused constructor test will enforce the actual topology. This corrects
 an unexecuted bookkeeping assumption, not the original reset population.
+
+**B08 bounded reader implementation handoff, before execution.** The existing
+Implementer also owns `b08_local_gate/reference.py` and `test_reference.py` for
+one additional behavior: reconstruct every motion answer and original policy
+counter from saved old-mask rows using the original B02 policy/MemoC and the
+frozen analytic laws, without importing the new collector or `Policy` as its
+proof. This lends only those two paths; it does not change the scientific
+scope, fits, exposure, interface, or the DM's reader acceptance. The DM keeps
+all scalar, pair, fit, result-reduction and runner integration code. Checks
+use synthetic assets/off-panel rows, including censored rows, fallbacks,
+cache hits and fresh addressed draws. No production query, launch, Git index
+mutation or child is authorized by this bounded handoff.
+
+<a id="b08-engineering-acceptance"></a>
+### B08 implementation and prelaunch engineering reading — 2026-10-01 UTC
+
+The Implementer's original `policies.py`/`fit.py` change and the separately
+bounded `reference.py` reconstruction have been inspected and accepted by
+the DM. Synthetic tests establish original FP32 one-row logits/second-ReLU
+capture without an extra forward, private caches and fresh innovations,
+all27 categorical addresses, the six motion laws, deterministic gate ties,
+training-only population scaling and sum-SSE/unit-ridge stationarity. The
+reference independently constructs both T and H on every Hdirect law call,
+including cache hits; its two-vector cost is actual replay work as well as
+reconstruction of the worker's charge.
+
+DM integration now executes the complete prescribed acquisition, two solves,
+final panel and independent reader. Raw records distinguish old decision rows,
+setter refresh rows and scored endpoints; every forced pair keeps its complete
+prefix and full native label. A short off-panel fixture uses synthetic actor
+seed90829, two training worlds90811/90812 and final world90813 atH8, covering
+all30 final program/tape cells. Each such fixture invocation is34episodes /
+272native fixture steps and two synthetic ridge solves, separate from the
+selected scientific2fits/1984H256episodes. It is a correctness fixture, not
+production P0 evaluation or a result-bearing pilot. The reader test forbids
+`np.linalg.solve`, then verifies every saved scalar state/policy and all fixed
+statistics. Tamper tests cover old-versus-refreshed rows, scalar SINR, pair
+prefix, fit diagnostics, world identities and artifact hashes; production
+rejects no admission, existing scientific output, fixture population and a
+second reader reservation.
+
+The combined suite passed71tests in4.14s on the configured local scientific
+interpreter, with14 pre-existing Matplotlib/pyparsing deprecation warnings.
+The independent engineering Reviewer separately ran71tests in4.22s and read
+all14 source modules, all five test files, the directly needed original host,
+adapter/controller/model/radio dependencies and all five original source pins.
+Its one medium finding was failure accounting: after a complete episode audit,
+a subsequent pair-ledger assertion could fail before the just-completed
+branch's policy totals entered the persistent report. The DM accepted the
+finding and moved that publication immediately after the episode audit.
+The added regression changes only a pair's reported target and checks that
+both completed branches' replay costs survive exactly once. The focused
+integration suite passed8tests in4.09s; original partial-episode counters
+remain in the inflight failure record. Independent patch closure follows
+before source acceptance for launch. No motion, gate, fitting, RNG, scalar
+assignment or frozen-exposure defect was found in the rest of the review.
+
+**Prospective placement, before result execution.** The configured primary
+`wsl_4070` is suitable for this new single-threaded CPU worker/reader and has
+the canonical424487-byte P0 file at its original B02 location (existence/size
+checked, no model loaded or queried). At03:40–03:42UTC the destination reported
+load0/0/0, about14GiB available memory and791GiB filesystem free. Its configured
+GCC Python3.10.21, NumPy1.26.3 and Torch2.7.0+cu118 imported successfully with
+one CPU numeric thread. The earlier remote interpreter failures remain
+unresolved; these checks do not establish a cure. Current published placement
+allows new gate work on configured preference with fresh feasibility/admission.
+The remote canonical compute config and maintained launch script match the
+current published bytes; the existing local pause/active/lead control fields
+also agree, while historical standing prose is older. Existing remote checkout
+edits and accepted operations are preserved; only a launcher-owned committed
+source snapshot will execute the new inputs. No asset staging copy is needed.
+Fresh actual-node memory admission will occur at release, and failure preserves
+its original attempt without an automatic retry. No B08 result operation,
+production asset load, learned-gate fit or production world query has occurred.
+
+**Independent patch closure:** the Reviewer verified the reordered report
+publication and the injected pair-ledger regression, and returned “No material
+finding remains in B08.” The DM accepts the reviewed implementation for the
+fixed purchase. The review's scope remains syntheticH8 correctness; it is not
+production H256 evidence or a result. Source/input publication and actual-node
+admission remain separate next actions.
