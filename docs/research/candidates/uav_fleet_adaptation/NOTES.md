@@ -10634,3 +10634,188 @@ revival of B09. The source exchange performed no native/model/controller query
 or outcome reduction. Routine correctness and complete result reading follow
 the prospective L0; no additional scientific fit, tuning or confirmation is
 implied by this preservation.
+
+
+### B10 initial synthetic learner verification (prospective)
+
+The written 58-case `test_learning.py` is now source-reviewed. One complete
+initial invocation is selected: Student1, JointActor1142, Critic146209 forward
+rows, plus5 rejected actor-forward attempts; actor500/critic88 backward rows;
+23 actor/20 critic Adam steps;609 NumPy/529 Torch density rows;7 additional
+raw-density gradient rows;16 CDF attempts (10 valid,6 rejected). It constructs
+35 synthetic Students,36 joint actors and31 critics under102 isolated/restored
+Torch RNG forks (3689320 initialized parameter elements, not PRNG-word counts),
+plus one actor deepcopy. Thirty synthetic cached groups represent60 H8 cached
+episodes:5 successful groups,4 deliberate partial failures and21 pre-update
+rejections. No native/controller/canonical query, empirical fit, external actor
+sampling RNG or NumPy RNG draw occurs. Fixed data/uniforms and independent
+scalar density/gradient expressions cover all-five summed surrogates, exact
+OFF unavailability, warm copying, actual dtype ordering, continuing Adam and
+partial failure accounting. Record actual counters and CPU/wall/RSS below;
+no routine repetition is selected.
+
+The finite categorical54 convention uses FP64 cumulative sums clamped above
+at1, closes from the last strictly positive category onward, and selects with
+`searchsorted(..., side="right")`; this prevents a rounding tail from choosing
+a masked OFF category. The density is shifted-exp(FP64 raw) times the frozen
+.9/.1 prior before normalization. The independent reader also checks the
+weighted-logit formulation within FP64 roundoff and requires identical actual
+categories; neither formulation adds a gate draw.
+
+The original-advice transfer was verified embedded exactly once after commit
+`6717c0ed99669b3d727993f9805486b9a6c8130b` was pushed and verified. The assigned
+`temp/directions/uav_fleet_adaptation/b10_original_advice_transfer.md` was then
+deleted:65536 allocated bytes reclaimed,0 transfer leftovers. An initial
+record-writing invocation found no `python` command and executed no script;
+`python3` performed the successful record operation, with0 scientific work.
+
+
+B10 learner initial verification completed57 passed/1 failed in8.16s. The
+failure was the test bound on inherited B04’s FP32 concatenated clipped-norm
+diagnostic:0.500001072883606 versus0.500001. No native/canonical/controller
+work occurred. Actual exposure:Student1/joint1042/critic189 forward rows
+(1047 actor attempts), actor420/critic72 backward rows,19/16 Adam steps,
+35/36/31 constructors,589 NumPy/449 Torch density rows,16 CDF attempts.
+The second continuity group was not reached. `/usr/bin/time`:9.56s wall,
+3.55s user+.58s system,305132KiB process peakRSS,exit1.
+
+Prospective targeted repair verifies the actual clipped gradient tensors in
+FP64 at each step boundary and allows scale-appropriate FP32 diagnostic
+roundoff; the learning rule remains unchanged. One repeat of that failing
+continuity test is selected:0 Student/200 joint/40 critic forward rows,
+160/32 backward rows,8 actor+8 critic Adam steps,one constructor each
+(three isolated RNG forks),40 NumPy/160 Torch density rows. Independent
+FP64 gradient norms require no extra model call. No other test repeat, native
+query or empirical exposure is added. Return measured clipping errors before
+any further adjustment if this narrower check fails.
+
+
+The one learner repair passed (1 passed/57 deselected,3.26s pytest); all58
+written cases now have passing evidence without rerunning the unaffected57.
+The independent FP64 actual clipped norm reached0.5000014478038413, excess
+1.4478038412590877e-6 (about2.90ppm). The inherited FP32 diagnostic reached
+0.5000016689300537. This is small real FP32 clipping error as well as diagnostic
+roundoff, not merely a reporting error. The selected B04 optimizer program
+is unchanged. The reader uses0.50001 as a diagnostic bound, independently
+reviewed as proportionate; this neither changes the requested threshold nor
+claims gradient replay. Repair actual costs exactly match prospectivity;
+wall4.47s/user3.66s/system.48s,peakRSS300128KiB. Cumulative two invocations:
+Student1/joint1242/critic229 forwards (1247 actor attempts),580/104 backward
+rows,27/24 Adam steps,36/37/32 constructors,629/609 density rows,CDF16;
+14.03s wall/8.27s CPU. Both pytest scratch directories are gone. DM accepts
+the two returned files; independent full-path review continues.
+
+Reviewer identified before integration exposure that freezing reader-critic
+`requires_grad` would trigger B04’s trainable-parameter guard. The reader now
+keeps the prescribed critic flags and executes only under `inference_mode`,
+as in the prior reader;0 optimizer effect. This source-only repair adds0
+model/native queries and will be covered by the initial integration test.
+
+### B10 initial pipeline and policy-interface verification (prospective)
+
+One invocation of the written `test_pipeline.py` and `test_policies.py` is
+selected. The module fixture performs the previously declared62 fake H8
+episodes/496 fake transitions (8 training+54 final),16+16 Adam steps,
+80 collected/320 replay actor rows,16 collected/64 replay critic rows,
+620 motion requests/124 mask installs/560 categorical draws per worker,
+then one complete682-state/3410-local-row/184140-power-link reader. The fake
+array generator uses683 scalar states including one unscored constructor;
+this tests collector/reader wiring, not independently the native simulator.
+That unchanged physical contract retains B08’s original native verification.
+One pipeline has at most200 joint+320 frozen collection forwards, the same
+reader policy ceilings and16 reader critic rows:720 joint/640 frozen/96
+critic rows across collection/replay/read. Actual caches/counters are printed.
+No production asset, world, native constructor or native step is queried.
+
+Additional written interface tests use one synthetic Student and one joint
+constructor;5 policy requests plus1 separate reference request,3 joint
+forwards+1 independent joint forward,4 frozen forwards,6 private categorical
+draws,4 helper misses (empty-user rows,0 power links). They check changing
+body versus original frozen HIDDEN features, private caches, repeated-row
+eligibility changes, fresh uniforms and global RNG isolation. CJ has5
+pure algebra selections and4 OFF-score expressions (empty/one-peer rows,
+4 total power links representing16 held ticks),0 extra ON search.
+Three separate malformed/schema/order/production refusal checks add0 model
+or physics queries. The integration’s one synthetic Student plus6 joint
+(3 worker/3 reader) and4 critic constructors, and the interface’s two
+constructors, all use isolated/restored Torch roots. Source roster algebra,
+paired reductions and two bootstrap computations use declared local RNG.
+
+The source-order zero command is category0 (commands are sorted by squared
+length then lexicographic order), so the published diagnostic derives its
+index from COMMANDS instead of assuming the unsorted Cartesian index13.
+CJ’s executable selector already used that exact derived zero command.
+Readiness still requires this invocation and resolved independent review;
+no scientific pilot or launch is implied.
+
+
+B10 initial pipeline/interface invocation passed7/7 in11.14s pytest:
+12.67s wall,11.01s user+1.31s system,372268KiB peakRSS,exit0. Actual
+pipeline exposure matched the declared full fixture:62 fake H8 episodes,
+496 transitions,16 actor/16 critic updates,520 worker+replay joint rows,
+200 independent reader joint rows,640 frozen rows,96 critic rows,683 fake
+scalar states including construction and682 reader states. Worker and reader
+policy ledgers matched exactly:620 requests/560 draws,200joint+320frozen
+forwards each,400 helper calls,5940 C paths/23760 modeled ticks,70638
+controller power links including14 CJ repeated-setup links,4 OFF scores,
+16 OFF logical ticks,48 HIDDEN predictions,160 Hdirect target vectors,
+80 G score-tail calls and16 initialization-fidelity rows. The scoped fixture
+raw arrays were4301604B uncompressed/2836066B compressed. Additional interface
+exposure matched its separate declaration. No native/canonical query occurred;
+all7 tests and both negative/refusal paths completed, pytest scratch was removed.
+
+Independent Engineering Reviewer original final (native separate context):
+
+> No material finding remains in the assigned B10 diff.
+>
+> The reader-critic failure is repaired in read.py:158. The `.50001` diagnostic tolerance is proportionate to FP32 rounding and leaves clipping unchanged.
+>
+> Reviewed all executable modules, dependencies, and tests. Author evidence: 7/7 integration/interface checks passed, plus the targeted learner-test repair passed.
+>
+> Review remained static: no edits, reruns, model queries, or native/canonical calls. Full production execution remains untested.
+
+DM accepts the corrected implementation and proportionate check evidence.
+No scientific design change or material unresolved engineering dissent remains.
+Production is still0 fits/episodes at this point. The first remote suitability
+read on2026-10-01 08:48:46UTC found15,615,528,960B available RAM,
+842,838,974,464B free filesystem space and no heavy visible worker. Both
+canonical remote original assets freshly match their exact selected hashes
+and total429606B. The remote canonical checkout has existing tracked control/
+status changes, which are preserved; source/control synchronization suitability
+is being reconciled before any launch.
+
+
+### B10 node and publication boundary (prospective)
+
+Select configured `wsl_4070` for the unchanged single-thread CPU program and
+one sequential full reader. Fresh remote inspection above shows ample RAM
+and disk and no heavy visible worker. The later local check found only
+3071688704B available (below4GiB admission floor), nearly full swap and
+other active workloads; no local scientific launch is attempted. Remote
+fetch succeeded. Its background Git housekeeping separately reported
+`fatal: bad tree object dfe82c9813ee82191abb8385cc12a6886fd0a77b` and
+`fatal: failed to run repack`; no Git repair, deletion or source workaround
+was performed. New source availability/snapshot creation still must pass
+normal admission. Existing remote tracked modifications are preserved.
+The remote compute and launcher bytes are identical to newly fetched
+`origin/main`; its older RESEARCH standing is B06, but the applicable
+pause=lifted/state=exploring/lead=`Codex DM (native child)` already agrees.
+Only this direction’s row/routing will be synchronized from published
+main under the shared index lock, preserving all other remote text.
+
+Both original inputs will be consumed read-only at their canonical remote
+paths, already freshly byte/hash-verified: no staging copy or inherited Adam.
+Fresh actual-node admission must repeat resource/pause/source/duplicate checks.
+At current shared main193ab3d3711510cf868563218373f3217908854f the tracked
+source tree is22128 blobs/1710970696 logical bytes, plus170944B of new B10
+Python. Forecast one managed input snapshot1.7–1.9GB allocated, canonical
+output1.0–2.4GB, temporary serialization at most0.2GB (forecast, not a hard
+limit), combined incremental node peak roughly2.7–4.5GB. Original429606B
+assets already exist; no bulk transfer/duplicate is planned, only verified
+compact result collection. Runtime/RSS forecasts remain prospective and
+contention-scoped; final actual bytes/times will replace them.
+
+All16 new source/test Python files pass AST parsing with0 model/native
+queries. Total three correctness invocations used26.70s wall/20.59s CPU;
+372268KiB is the maximum per-process peak, not summed simultaneous memory.
+Exact source and evidence publication follows before production execution.
