@@ -8029,3 +8029,277 @@ worker and its sequential scalar/policy/fit reader; checkpoint rearming will
 observe this same operation, never restart it. Acceptance and healthy initial
 observation are not a scientific result. The exact1984episodes/twofits and
 one full reader remain the stopping contract.
+
+
+<a id="b08-complete-reading"></a>
+### B08 complete reading — conditional feature benefit with an unresolved complete-package increment
+
+The one accepted operation from published source
+`21de06cd2cd465d3962bbe95183bbfc7c3eddeb1` completed the frozen two-fit purchase
+and its full independent reader. Worker state is `COMPLETE`, reader state
+`VERIFIED`, and the original native worker exited0 at2026-10-01T04:20:18.204UTC.
+A fresh same-handle status read at04:30:50UTC confirms the original runner and
+supervisor absent, a valid exit witness and consistent native records. The
+accepted `launch-status.json` remains the original acceptance receipt; terminal
+facts are in [process-exit.json](../../../../runs/uav_fleet_adaptation/b08_local_gate_a01/process-exit.json).
+No result episode, fit or reader was retried. The two earlier pre-admission
+refusals remain zero-exposure technical records, not scientific failures.
+
+The assigning child's deterministic observer reached READY in generation35.
+Its attempted App wake was rejected with`-32600` because this is a native child;
+the child stayed active, consumed the terminal event locally, rearmed35→36 to
+clear it and stopped observation. No replacement launch or alternate App
+recipient was used. Technical completion is now accompanied by complete DM
+reading below; independent scientific disposition follows in its own appendix.
+
+**Exact completed exposure and reading.** There are512 paired targets from1024
+full acquisition episodes, two ridge fits, and all960 fixed final episodes:
+1984 complete H256 episodes /507904 native steps, with zero motion-network
+updates or gradient-optimizer steps. The one constructor priming reset and1984
+explicit resets are charged. All634880 motion requests,126976 gate opportunities
+and mask installations,614400 motion uniforms,69632 gate uniforms and1024
+forced branch decisions match the frozen bill. Both forced branches kept their
+common prefixes and recomputed their own continuation after divergence.
+
+The scalar reader independently reconstructs636864 saved states: all507904
+post-step states,126976 mask refreshes and1984 initial states. It checks all
+3184320 local rows, assignments, old-decision/new-step masks, motion laws,
+private navigation/cache updates, indexed draws, holds, gate predictions,
+512 pair prefixes/labels, both training scalers and fixed ridge normal equations,
+and all16 program levels/37 contrasts. It adds no native reset/step, label,
+refit or optimizer update. Maximum absolute radio/observation/prediction error
+is0; reward error is1.6653345369377348e−16. Discrete assignments, threshold
+eligibility, categories, navigation and gates agree exactly. This is independent
+scalar and policy reconstruction of the executed finite run, not a population
+or general semantic-equivalence claim.
+[Full reader](../../../../runs/uav_fleet_adaptation/b08_local_gate_a01/reading.json),
+[compact result and signed world vectors](../../../../runs/uav_fleet_adaptation/b08_local_gate_a01/publication.json),
+[frozen source/runtime contract](../../../../runs/uav_fleet_adaptation/b08_local_gate_a01/config.json).
+
+**All program levels.** J is mean native reward; service is mean served users per
+tick. p10 and minimum are within-episode team-service statistics, averaged over
+worlds/tapes, not individual-user continuity. Travel is mean metres per UAV;
+CPU is measured complete episode CPU including native transitions and evidence
+writing. OFF is the eligible member's decision fraction, not fleet-wide silence.
+
+| Program | J | Service | Quality | p10 | Minimum | Travel m/UAV | OFF fraction | Episode CPU-s |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| P0_A | 0.383397 | 23.535828 | 0.179650 | 20.500000 | 11.250000 | 3088.263290 | 0.000000 | 0.276374 |
+| P0_O | 0.379305 | 23.270752 | 0.178381 | 17.828125 | 9.281250 | 4564.696624 | 1.000000 | 0.313271 |
+| P0_R | 0.385056 | 23.639465 | 0.180345 | 18.531250 | 9.765625 | 3819.153510 | 0.499512 | 0.321233 |
+| P0_ZERO | 0.386729 | 23.805542 | 0.178173 | 20.781250 | 12.062500 | 3058.083202 | 0.020020 | 0.278147 |
+| P0_RAW | 0.386654 | 23.763916 | 0.179865 | 19.117188 | 10.468750 | 3906.208404 | 0.528320 | 0.317535 |
+| P0_HIDDEN | 0.393973 | 24.285706 | 0.179909 | 19.710938 | 10.468750 | 3909.243567 | 0.530273 | 0.318970 |
+| Bstar0_A | 0.396912 | 24.550598 | 0.177346 | 20.367188 | 10.453125 | 4441.612511 | 0.000000 | 0.324893 |
+| Bstar0_ZERO | 0.398480 | 24.655884 | 0.177658 | 20.632812 | 11.609375 | 4430.940183 | 0.021484 | 0.325284 |
+| Hdirect_A | 0.392420 | 24.118713 | 0.182527 | 21.265625 | 11.140625 | 3006.774456 | 0.000000 | 0.306097 |
+| Hdirect_ZERO | 0.393875 | 24.212891 | 0.182983 | 21.421875 | 11.968750 | 3050.120449 | 0.015625 | 0.311099 |
+| G_A | 0.388283 | 23.692078 | 0.188646 | 20.742188 | 10.906250 | 3259.430697 | 0.000000 | 0.265192 |
+| G_ZERO | 0.384339 | 23.392334 | 0.189488 | 20.882812 | 11.593750 | 3393.998396 | 0.016357 | 0.265007 |
+| Q10_A | 0.372554 | 22.726257 | 0.181289 | 18.890625 | 9.843750 | 3802.270882 | 0.000000 | 0.278172 |
+| Q10_ZERO | 0.372545 | 22.703308 | 0.182328 | 18.906250 | 10.593750 | 3849.657825 | 0.033936 | 0.279003 |
+| C_A | 0.357502 | 21.477783 | 0.189377 | 21.171875 | 11.031250 | 2021.999494 | 0.000000 | 0.187262 |
+| C_ZERO | 0.365767 | 22.104858 | 0.187665 | 21.750000 | 11.843750 | 2109.431287 | 0.022461 | 0.186522 |
+
+**All37 declared native-J contrasts.** The same20,000 bootstrap index draws
+resample32 independent worlds after averaging the two stochastic tapes within
+world; C contributes its single deterministic trajectory. These are pointwise,
+descriptive percentile intervals conditional on this one acquired dataset and
+one P0 parent. They provide no training-population, simultaneous-comparison,
+confirmation, equivalence or retention guarantee. A zero-crossing interval
+is not evidence of equality. Every signed world value, service/quality/tail/
+travel contrast and adverse identity remains in the original evidence.
+
+| Contrast | Mean ΔJ | Descriptive95% interval | Positive / negative / zero worlds |
+|---|---:|---:|---:|
+| P0_HIDDEN-P0_RAW | +0.007318 | [+0.002490, +0.012068] | 22/10/0 |
+| P0_RAW-P0_A | +0.003258 | [-0.006171, +0.013025] | 17/15/0 |
+| P0_RAW-P0_O | +0.007350 | [+0.001689, +0.012962] | 22/10/0 |
+| P0_RAW-P0_R | +0.001598 | [-0.002644, +0.005692] | 20/12/0 |
+| P0_RAW-P0_ZERO | -0.000075 | [-0.010301, +0.010741] | 14/18/0 |
+| P0_RAW-Bstar0_A | -0.010258 | [-0.017682, -0.003267] | 11/21/0 |
+| P0_RAW-Bstar0_ZERO | -0.011825 | [-0.019230, -0.004613] | 10/22/0 |
+| P0_RAW-Hdirect_A | -0.005766 | [-0.014239, +0.002718] | 12/20/0 |
+| P0_RAW-Hdirect_ZERO | -0.007221 | [-0.016669, +0.002345] | 10/22/0 |
+| P0_RAW-G_A | -0.001629 | [-0.012150, +0.008639] | 18/14/0 |
+| P0_RAW-G_ZERO | +0.002315 | [-0.007653, +0.012123] | 18/14/0 |
+| P0_RAW-Q10_A | +0.014100 | [+0.003957, +0.023946] | 23/9/0 |
+| P0_RAW-Q10_ZERO | +0.014110 | [+0.005394, +0.022660] | 22/10/0 |
+| P0_RAW-C_A | +0.029152 | [+0.012973, +0.045061] | 24/8/0 |
+| P0_RAW-C_ZERO | +0.020887 | [+0.004333, +0.036812] | 21/11/0 |
+| P0_HIDDEN-P0_A | +0.010576 | [+0.002280, +0.019356] | 22/10/0 |
+| P0_HIDDEN-P0_O | +0.014668 | [+0.008671, +0.020632] | 27/5/0 |
+| P0_HIDDEN-P0_R | +0.008916 | [+0.003315, +0.014562] | 24/8/0 |
+| P0_HIDDEN-P0_ZERO | +0.007243 | [-0.001748, +0.017029] | 19/13/0 |
+| P0_HIDDEN-Bstar0_A | -0.002939 | [-0.010514, +0.004319] | 16/16/0 |
+| P0_HIDDEN-Bstar0_ZERO | -0.004507 | [-0.012158, +0.003100] | 16/16/0 |
+| P0_HIDDEN-Hdirect_A | +0.001552 | [-0.006143, +0.009484] | 12/20/0 |
+| P0_HIDDEN-Hdirect_ZERO | +0.000097 | [-0.009169, +0.010041] | 11/21/0 |
+| P0_HIDDEN-G_A | +0.005690 | [-0.005281, +0.016762] | 19/13/0 |
+| P0_HIDDEN-G_ZERO | +0.009633 | [-0.001799, +0.020843] | 19/13/0 |
+| P0_HIDDEN-Q10_A | +0.021418 | [+0.009808, +0.032746] | 25/7/0 |
+| P0_HIDDEN-Q10_ZERO | +0.021428 | [+0.011398, +0.031550] | 25/7/0 |
+| P0_HIDDEN-C_A | +0.036471 | [+0.017720, +0.055088] | 24/8/0 |
+| P0_HIDDEN-C_ZERO | +0.028205 | [+0.009546, +0.046291] | 21/11/0 |
+| P0_ZERO-P0_A | +0.003333 | [-0.006055, +0.011407] | 15/7/10 |
+| Bstar0_ZERO-Bstar0_A | +0.001568 | [-0.003919, +0.007326] | 12/13/7 |
+| Hdirect_ZERO-Hdirect_A | +0.001455 | [-0.003093, +0.005965] | 11/11/10 |
+| G_ZERO-G_A | -0.003944 | [-0.013150, +0.004181] | 9/12/11 |
+| Q10_ZERO-Q10_A | -0.000009 | [-0.007461, +0.006745] | 18/14/0 |
+| C_ZERO-C_A | +0.008266 | [-0.002658, +0.020265] | 13/7/12 |
+| P0_O-P0_A | -0.004092 | [-0.016259, +0.008185] | 13/19/0 |
+| P0_R-P0_A | +0.001660 | [-0.008364, +0.011984] | 17/15/0 |
+
+**Consequential components and adverse cases.** HIDDEN−RAW improves J+.007318,
+mean service+.521790[+.164423,+.881900] and p10+.593750[+.117188,+1.078125].
+Mean quality changes+.0000435 with an interval crossing zero; episode minimum
+has mean difference0 with interval[−.421875,+.421875]. Travel differs+3.035m
+[−133.9,+146.2], and fleet on-time differs−.000391[−.007716,+.006836]. These
+unresolved components are not equivalent. The result supports a conditional
+increment of the complete HIDDEN feature/regularization package over RAW;
+it does not identify the inherited representation as uniquely better than
+other nonlinear features or isolate a causal mediator.
+
+Relative to unchanged P0_A, HIDDEN raises mean J+.010576 and service+.749878,
+but p10 falls.789063[−1.515625,−.039063], mean minimum falls.781250
+[−1.484375,−.125000], and travel rises820.981m[+512.8,+1122.2] per UAV.
+Against P0_ZERO the J increment+.007243 remains unresolved, while p10 falls
+1.070313, minimum1.593750 and travel rises851.161m, each with a descriptive
+interval excluding zero. Against Bstar0_ZERO, HIDDEN has lower mean J/service
+(−.004507/−.370178), with intervals crossing zero, lower p10/minimum
+(−.921875/−1.140625, intervals below zero) and521.697m less travel. Against
+Hdirect_ZERO, J+.000097 and service+.072815 remain unresolved, while p10/minimum
+fall1.710938/1.500000 and travel increases859.124m, with intervals excluding
+zero. HIDDEN−Hdirect_ZERO loses J in21 of32 worlds despite its small positive
+mean. No competent complete-package superiority or default adoption follows.
+
+Both fitted gates beat Q10_A/Q10_ZERO and C_A/C_ZERO on conditional mean J;
+those comparisons do not remove the Bstar0/Hdirect challenge. HIDDEN's quality
+is lower than G_A/G_ZERO by.008738/.009579 and C_A/C_ZERO by.009468/.007756,
+with negative descriptive intervals. Its higher J/service against C coexists
+with lower p10. RAW's J increment over P0_A/P0_R/P0_ZERO is unresolved and its
+Bstar0_A/Bstar0_ZERO J deficits have intervals below zero. Ordinary ZERO−A
+mean-J intervals span zero for all six parents. Nevertheless all six ZERO
+compositions improve mean episode minimum, with their descriptive intervals
+above zero; this retains a conditional simple-rule tail capability without
+establishing global J improvement. P0 always-OFF/random likewise show no clear
+J gain over A, lower p10/minimum and substantially more travel. Permission to
+silence alone is therefore not a sufficient explanation of HIDDEN's result.
+
+Primary HIDDEN−RAW J losses occur in worlds29831000/02/06/10/15/16/21/23/24/25;
+the largest is−.023343523 in29831002, with−1.466797 mean served users. HIDDEN's
+largest P0_A loss is−.042084568 in29831031 (service−3.181641/p10−5.0).
+Its Bstar0_A and Bstar0_ZERO worst world is29831010, J−.047393852; the
+Hdirect_ZERO worst is29831024, J−.047302203. World29831002 loses.098469905J
+and6.623047 mean users/12.5 p10 users against C_A/C_ZERO. ZERO is also not a
+universal repair: P0_ZERO−P0_A reaches−.101360859J in29831011 despite the
+positive average episode-minimum effect. All such cases remain included.
+
+Six final episodes have zero total service. P0_A, P0_R, P0_ZERO and HIDDEN
+atworld29831016/tape1 each have one zero tick/streak1; P0_O at29831002/tape0
+has one; Bstar0_A at29831020/tape1 has two consecutive zero ticks. RAW and
+all other program levels have no zero-service episode on this finite panel.
+The independent review's targeted raw check identifies the HIDDEN29831016
+outage at tick2 under all-ON, also present for P0_A. It is retained evidence,
+not a harm attributed to switching OFF. Absence in another finite arm is not
+a reliability guarantee; all previous B04–B07 tail findings remain unchanged.
+
+**Activation and lawful feedback.** RAW/HIDDEN request and execute OFF at
+52.8320%/53.0273% of eligible decisions; predictions vary with both signs and no
+zero prediction in final fitted-gate decisions. Their mean per-episode
+prediction SDs are.004844/.005898, with nonzero fitted coefficient norms.
+This is active use, not a threshold/nonactivation excuse. Fleet-wide active
+fractions are.894336/.893945; the remaining four transmitters stay ON, and
+silent members still move. RAW/HIDDEN have67.125/67.406 mean bit switches and
+33.313/33.469 old-mask censored decision rows per episode. Mean fallback motion
+counts rise from P0_A8.078 of320 to RAW39.000/HIDDEN38.750; old masked rows
+are genuinely consumed before reactivation. These history changes are part
+of the tested package, not a separately identified cause of the benefit or loss.
+
+All per-UAV travel, mean/end height, lower/upper-bound occupancy, active ticks,
+switches, XY-boundary and zero-displacement counts were read. Neural P0 gate
+arms remain predominantly at50m lower height (mean50.155–50.171m); HIDDEN's
+mean end height50.002m does not establish an energy consequence. Individual
+HIDDEN UAV travel means range3633.8–4146.0m and active time228.38–229.62ticks.
+Rank/clock gives UAV4 one fewer eligibility than UAV0–3 overH256; it is shared
+by every arm. Q10's larger mean height53.75–53.77m, G's stronger quality and
+C's shorter travel remain measured differences, not safety or utility prices.
+
+**Learning and limits.** The512 labels contain210 positive/302 negative/zero
+zero targets; mean−.000091468, SD.008851644, range[−.050278,+.051026]. No target
+was discarded. RAW125/HIDDEN253 have77/183 nonzero coefficients and norms
+.01216255/.03638846. Their training SSEs are.034913924/.029707776 and ridge
+objectives.035061852/.031031896; normal-equation relative residuals are
+2.7928e−17/2.7296e−17 against1.4552e−11 tolerance. Conditioning4298.85/19979.4
+and complete reader checks support numerical completion of the specified
+FP64 objectives, not population optimality. The parent state digest is exactly
+unchanged. The added hidden coordinates are deterministic functions of the
+same RAW input and retained navigation fields, acquired without extra forward,
+information, memory or encoder training. More features and their regularization
+geometry change the finite estimator; this is not an isolated nonlinear
+representation mechanism test.
+
+Each label evaluates one forced OFF-versus-ON decision under random-gate future
+continuation; final deployment repeatedly uses its fitted gate on its own
+changing histories. The regression objective therefore does not guarantee
+joint repeated policy improvement. The fresh complete rollouts supply the
+conditional gain over RAW/P0_A; they do not diagnose an information bottleneck,
+exhaust learnability or explain the older PPO/consequence/target failures.
+The prospective branch-four reading is supported: retain the narrow positive,
+with the unresolved stronger-package comparison and lower-tail costs explicit.
+An independent result critique and the final investment disposition follow;
+no additional data, tune, threshold change, fit or evaluation is selected here.
+
+**Complete incurred bill.** Worker actual cost includes443512 neural rows,
+421044 standalone helper calls,2033937 C paths/8135748 model ticks and43335004
+controller links. The40960 Hdirect laws construct81920 T/H vectors even on
+cache hits; that nonminimal implementation cost remains charged. Native power
+work is140219475 dense slots, with132571140 unique distance-pair requests and
+34918400 mask-refresh SINR slots. The reader repeats all actual policy work,
+plus159216000 scalar user-distance links,6368640 peer pairs and175137600 logical
+dense SINR slots. Cache hits never remove prescribed fresh uniforms.
+
+RAW/HIDDEN fit scopes cost.109963/.107052 wall-s and.107079/.108796 CPU-s;
+these include scaler/solve/diagnostic/artifact work, not acquisition. Acquisition
+episodes total334.589CPU-s and final episodes279.499CPU-s. Complete worker CPU/
+reported monotonic wall are638.832151/625.714741s; reader849.524016/832.796301s.
+The enclosing sequential chain is1488.812103CPU-s (0.413559h) and1458.957281
+reported monotonic wall-s, with worker peak511572KiB and same-process chain
+high-water566320KiB. UTC entry-to-reader-finish is about1488.310s, differing
+from the reported monotonic scope; no cross-clock timing cause or guarantee
+is asserted. Final writes, staging/admission, publication and scientific/
+engineering support are additional incompletely metered work. The forecast
+6–12 support hours was a forecast, not an observed bill.
+
+HIDDEN's complete episode CPU.318970s exceeds P0_A.276374, Hdirect_A.306097,
+Hdirect_ZERO.311099 and C_A.187262, while Bstar0_A/ZERO cost.324893/.325284.
+Query CPU is.129027 for HIDDEN, versus.096389 P0_A,.125908 Hdirect_ZERO and
+.020184 C_A; fitted gate CPU alone is.003201 versus RAW.002910. These are
+this implementation's observed cached trajectories, not a minimal Hdirect
+floor or a net speed/energy claim. Small solve cost does not refund paired
+native acquisition or full reading. B02–B08 now totals16 scientific fits,
+two paid calibrations and3047464 native steps; the earlier distinct B01,
+failed-request support and other historical costs remain incurred.
+
+**One canonical evidence location.** Durable raw and bulk outputs remain at
+`wsl_4070:/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b08_local_gate_a01/`.
+All1984 unique raw files (1528144689 logical bytes) were read by the accepted
+reader; per-file identities are in the original summary. Local collection
+hashes match remote originals; no raw trajectory copy was made locally.
+The344317-byte `data/acquisition.npz` is SHA256
+`bd6b250b9a997931a8a0ceccf8f5a0b25487b3c249bebf0a924f568753537138`;
+RAW2680bytes is`c1918e03414181352106155092c06b7ef1a9fa557f642a523c0d661c517d8363`,
+HIDDEN5119bytes is`e8f6ecea525d7892edc1e82c407070d14ea234dae3c90c6c054ce16804eaa026`.
+Those remain at their original `assets/` paths with the dataset and full raw.
+
+Bulk `summary.json` is16732816bytes, SHA256
+`ab3ba14326924c85debf8921b0c4b356f5c95fc0e8c093f074dde4cf8d2e943c`;
+`episodes.jsonl` is8122315bytes, SHA256
+`7530649fba309545c3e96fa4fc5b9f802e141ceb17567775cf0520ec498ce474`.
+They contain all112 numeric metrics and signed world vectors for all16levels/
+37contrasts. Compact `publication.json`573531bytes and full `reading.json`
+37717bytes are published without rewriting the bulk originals. The local
+bulk consumption copies will be deleted only after independent reading ends;
+canonical originals, compact positive/adverse evidence, learned gates and
+original P0 are retained. Exact terminal-snapshot/scratch deletion and measured
+net allocation changes are recorded at closure, separately from any blocker.

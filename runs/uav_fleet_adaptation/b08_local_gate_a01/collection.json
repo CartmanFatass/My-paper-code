@@ -1,0 +1,58 @@
+{
+  "canonical_node": "wsl_4070",
+  "canonical_root": "/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b08_local_gate_a01",
+  "verified_local_files": {
+    "summary.json": {
+      "bytes": 16732816,
+      "sha256": "ab3ba14326924c85debf8921b0c4b356f5c95fc0e8c093f074dde4cf8d2e943c"
+    },
+    "reading.json": {
+      "bytes": 37717,
+      "sha256": "5123f21b3bc9bafe4243abb6b4e7aa1d300e81b1c89380e5aca5b510ea2936cf"
+    },
+    "publication.json": {
+      "bytes": 573531,
+      "sha256": "3b215c2e4c4ee67a327dccdf1838e21a9cf78f06765acea652dddb47807dee29"
+    },
+    "config.json": {
+      "bytes": 15741,
+      "sha256": "5ed4adc47219ec69080162ee3028b054c6f41eb9ea1f4b9243826cd8a07bc013"
+    },
+    "episodes.jsonl": {
+      "bytes": 8122315,
+      "sha256": "7530649fba309545c3e96fa4fc5b9f802e141ceb17567775cf0520ec498ce474"
+    },
+    "process-exit.json": {
+      "bytes": 557,
+      "sha256": "203bacec396ea93cd93d7e48411cbc50104d04e44a39e2ded1e82c7ed428d917"
+    },
+    "launch-status.json": {
+      "bytes": 604,
+      "sha256": "d093d9e86acd0d8283e3a7a82fd5fd432a8e54339bdef3a3656835b4cb9df990"
+    },
+    "stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "reader-start.json": {
+      "bytes": 66,
+      "sha256": "e62073ff3f40e37b854eeca697894858297f1fb5ce3c2d1acd5f98b472011d4a"
+    },
+    "progress.json": {
+      "bytes": 1181,
+      "sha256": "a1397d3d2e9892cf845603805d559308509aafc3aa24c668e5501bbe57a889ee"
+    },
+    "reading-progress.json": {
+      "bytes": 755,
+      "sha256": "7410fc8bc613f05edfd1e29bcba53d074d5deff56e0dc170348ecbcfe77e4e91"
+    }
+  },
+  "raw_files": 1984,
+  "raw_bytes": 1528144689,
+  "raw_identities_in": "summary.json rows[].raw; all independently read before successful native exit",
+  "local_raw_copy": false
+}
