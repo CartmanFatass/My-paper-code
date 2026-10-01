@@ -1,6 +1,6 @@
 # HMASD research index
 
-当前研究背景、共享认识、项目状态与研究计划，更新于 2026-09-30 UTC（2026-09-30 PDT）。治理依据为
+当前研究背景、共享认识、项目状态与研究计划，更新于 2026-10-01 UTC（2026-09-30 PDT）。治理依据为
 [constitution](../project/OPERATING_CONSTITUTION.md)；本页维护现状，历史过程见[日期归档](archive/)。
 
 阅读入口：[研究背景与共享认识](#研究背景与共享认识) · [方向状态](#active) · [现行计划](#current-research-plan) · [任务路由](#session-routing)。
@@ -2000,13 +2000,15 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 ### Parallel allocation: independent work and rolling succession
 
 <a id="root-successor-designs-20260930"></a>
-**Four native DMs continue substantive work across static-count development, local service
-allocation, planner amortization and ordinary stochastic control.** `dm_fleet_adaptation` owns
-the four-fit count-development result through full scientific interpretation, independent
-review, publication and cleanup; its producer and bounded reader are complete. Root selects
-the M/S/U saved-trajectory allocator comparison for `dm_user_waiting`, fixed learned-top2
-computation allocation for `dm_parent_adaptation`, and the fixed score-directed ordinary G
-comparison for the same `dm_fleet_transmission` lead after its completed N8 study.
+**Four native DMs continue substantive work across the next learning/use choice, local
+service allocation, planner amortization and ordinary stochastic control.** Fleet B06 is fully
+read, independently diagnosed, published and cleaned. Root read the complete result, original
+Critic and DM response and adopts the exact-mixture stop while retaining the conditional P/B*
+capabilities and positive component evidence. The same `dm_fleet_adaptation` now contributes
+source/interface/full-cost reasoning to Astra Max Oracle’s next-allocation assessment; no
+successor result study is selected there. `dm_user_waiting` owns the selected M/S/U saved-path
+allocator comparison, `dm_parent_adaptation` the fixed learned-top2 computation comparison,
+and `dm_fleet_transmission` the fixed score-directed ordinary G comparison.
 The existing leads retain question continuity; Oracle/helpers are not DMs and four substantive
 assignments do not imply four admitted workers. Forecast and service-age remain reserve.
 
@@ -2049,22 +2051,22 @@ Root decision](archive/2026-09-30/RESEARCH-duration-roster-allocation.md) are re
 review. Its strongest charging-scheduling candidate substantially overlaps the already completed
 persistent-service B05, whose outage repair did not satisfy the full service/energy use contract.
 
-Static-count development remains selected with its complete ordinary controls and fairly
-shared revised count interface; the frozen N5 package is not count-portable. The new allocator
-purchase tests a distinct causal lever on already-demonstrated motion/radio capabilities.
-Root accepts the substantial support costs for these distinct questions. G adds a bounded
-ordinary use/reference comparison, while L2_E tests allocation of a fixed planning budget.
-The failed parent retention target is evidence, not an unfinished prerequisite or automatic repair.
-Detailed innovation remains with Astra Max Oracle; no transfer-only gate, S2 acquisition or
-fifth DM is selected.
+The completed static-count comparison supports revised-interface parameter reuse while
+ending its finite mixture recipe. The allocator purchase tests a distinct causal lever on
+already-demonstrated motion/radio capabilities. Root accepts the substantial support costs
+for these selected questions. G adds an ordinary use/reference comparison, while L2_E tests
+allocation of a fixed planning budget. The failed parent retention target remains contrary
+evidence. Astra Max Oracle is assessing the next worthwhile learning/use question against
+complete cost and stopping; actual-S2 remains deferred during that assessment. No transfer-only
+gate, new acquisition or fifth DM is selected.
 
 **Actual compute placement.** The configured local_linux and wsl_4070 are distinct physical
-Windows hosts (AMD Ryzen 7 8745H and Intel Core i9-13900H). Waiting's verified worker/reader
-completion released wsl_4070 at22:11:37 UTC on September30. Fleet B06 therefore uses the owner's
-configured remote-first placement, with fresh actual-node admission; an actual remote constraint
-may justify local use. N8 T/G2/A2 and parent B06 also finished their accepted local worker/readers;
-their independent readings, publication and measured cleanup are complete. No operation was
-migrated or repeated.
+Windows hosts (AMD Ryzen 7 8745H and Intel Core i9-13900H). The earlier waiting and fleet-count
+worker/reader chains have completed on wsl_4070; N8 T/G2/A2 and parent B06 also finished their
+accepted local chains. All four prior studies are fully read, independently diagnosed, published
+and cleaned. New selected work uses the configured remote-first placement with fresh actual-node
+admission; an actual remote input or resource constraint may justify local use. Existing accepted
+operations keep their node and identity.
 Any new overlap needs fresh memory/occupancy admission and explicitly conditional timing.
 Preserve actual interpreter, node identity and published source; do not create a new resource
 management mechanism. Completed real-deadline comparisons retain their recorded hardware,
