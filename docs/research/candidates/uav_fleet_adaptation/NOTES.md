@@ -7441,3 +7441,459 @@ supersedes the earlier conditional omitted-force-draw count, while leaving
 the original614400 motion draws,1984 episodes,507904 native steps and two
 prospective regression fits unchanged. This correction is still source
 pricing and contract clarification, with no result execution selected here.
+
+<a id="b08-original-selection-review"></a>
+## 2026-10-01 — B08 original independent selection advice and Root adoption
+
+The following complete original question, recommendation and consequential
+correction exchange were delivered by the existing Root Oracle before any B08
+implementation. Its continuing context, scope and limits are disclosed in the
+answer. The source-only restriction ended only with Root's separate selected
+B08 assignment; the historical wording below is preserved. The completed B07
+stop, all positive/adverse evidence and unselected actual-S2/transfer reserves
+remain intact. No second selection review is being substituted for this advice.
+
+BEGIN ORIGINAL ROOT QUESTION — 2026-10-01 02:15 UTC
+
+Root source-only next investment task after completed B07. Keep your Astra Max Oracle responsibility for detailed idea discovery and independent challenge. First read the complete B07 result, original new ResearchCritic answer and DM response at docs/research/candidates/uav_fleet_adaptation/NOTES.md#b07-complete-reading and #b07-original-independent-result-review (result source c2b2cd27276e49458b18ca69216b3525f281ea47, evidence publication e1275959e1e117c433b0279c1ae1bc26ca94f284). Root has fully read these and adopts stopping unchanged T/H: active modest targets and full learning, no useful T gain over P/B*, ordinary Hdirect conditional positive, all component/adverse/CPU limitations retained. Do not redo its adequate result audit or send another Pro question. The broader question is now where a bounded learned-development investment can add useful capability beyond competent retained S/P/B*, G/Q, direct H and paid ordinary planning, if anywhere. Reconsider whether a materially different constructive question is worth buying now, rather than an objective/entropy/optimization rescue. Actual-S2 learning and transfer-only remain unselected reserves, not blocked or mandatory gates; review their complete original advice and DM challenge in the current plan before reconsidering them. No fresh-label/DAgger/longer-training/stronger-tilt study is implied. A justified stop or an independent question with higher marginal value is valid.
+
+Use relevant cumulative project evidence, July/external reviews, all three local libraries, and load-bearing primary web passages as needed. Root's owner asks four substantive DMs, but spare capacity is not a scientific premise. Your concrete deliverable is one strongest worthwhile next question (or stop with the unresolved opportunity explained), causal conjecture versus strongest ordinary alternative, information/action/use contract, smallest complete discriminating comparison, opposite predictions, prospective full fit/query/native/reader/support/storage cost and what each outcome changes. Detail innovation belongs to you, not a request merely to rank the same fixed assets. Do not require a positive pilot or exhaustively diagnose all past failures. The running parent B08 exact G2/A2 reuse and waiting B06 S_F:LRS are already selected; do not overlap or change them. Fleet B06 cadence has complete saved results and is undergoing its original independent result review, so treat its new conclusion as provisional until that is published. You may obtain bounded source/feasibility facts directly from the existing fleet-adaptation DM after its closure work; do not burden the other studies or authorize execution. ZERO new policy/model/native queries, target generation, new outcome reductions, fits, implementation, benchmarks or result-bearing runs under this assignment. Return your full original recommendation here; Root will select cross-question work after reading it, and the existing DM retains all record/publication ownership.
+
+END ORIGINAL ROOT QUESTION
+
+BEGIN ENTIRE ORIGINAL ORACLE RECOMMENDATION — 2026-10-01 02:50 UTC
+
+I recommend **one bounded pivot to learning a local transmitter gate over frozen P0 motion**. The question is whether native experience can produce a useful, map-free interference-control decision beyond simple transmitter rules and the retained P0/Bstar0/Hdirect/G/Q10/C programs. This develops a new control head; it does not update the motion network or reopen T/H.
+
+The complete proposed purchase is **two regression fits, 1,984 H256 episodes and 507,904 native steps**, including acquisition and final evaluation. I judge it worth one exploration because either a learned gate or an ordinary gate could supply a useful capability under substantially smaller deployment information rights than the existing central radio managers. Expectations should remain modest.
+
+This is a continuing review in the originally isolated context. It retains my earlier advice and Root’s dispositions; it is not a newly blinded reassessment. I reused the adequate original B07 and cadence result audits, read their complete readings, criticism and responses, and independently inspected the consequential mask, observation, policy and sampling source. I made no new scientific queries, reductions, fits or implementation.
+
+**The evidence supports changing the decision being learned.** B07 actively changed targets and network parameters, yet T−P0 was only +0.000060 J with an interval spanning zero; exact Tdirect also established no improvement. Hdirect’s conditional +0.007329 over P0 remains useful evidence, alongside its adverse worlds and deficit to Bstar0. These observations weaken an optimization-only rescue. They do not establish that P0’s representation is useless or that all useful learning has ended. The [complete B07 reading and original review](/home/fires/hmasd-wsl/docs/research/candidates/uav_fleet_adaptation/NOTES.md#b07-complete-reading) remain controlling evidence.
+
+Radio management supplies a constructive opportunity, with a major qualification. The published managed composition improved S_S2 over S_all by +0.093665 J across its 32 worlds, while the older central radio programs also produced substantial gains. Those programs had registered-map, report and mask-selection rights absent here. Some averaged roughly 3.4 active transmitters; the proposed contract always keeps at least four active. Their gains therefore neither predict this gate’s gain nor measure its headroom.
+
+The newly completed cadence study also matters: changing observation and action timing substantially changed travel, while E−H4 reward effects remained unresolved and the 19-tick outage persisted. This supports treating censoring and subsequent motion as consequential feedback. It does not supply a transmitter-learning result or an automatic scheduler repair. I retain its published stop and conditional capabilities.
+
+I reread the complete actual-S2 proposal and DM challenge. It remains a legitimate reserve, with approximately 655,360 native steps and a materially larger managed-runtime bill. I prefer this question now because it tests a distinct deployment capability and gives every learned decision a direct binary native contrast. That preference does not convert actual-S2 or transfer-only into blocked work, required gates or scientifically rejected approaches. The selected parent B08 and waiting B06 remain untouched.
+
+The relevant literature offers a bridge, not a guarantee. Ross and Bagnell’s cost-to-go regression framework motivates learning from consequential action comparisons, but its aggregation and learning assumptions do not establish improvement for this single acquisition batch under a fixed continuation policy. [Primary paper, §§2–3](https://arxiv.org/pdf/1406.5979). I checked all three local stores and the relevant July/external records:
+
+- Foundations B03 distinguishes local information from shared coordination devices. The local catalog’s PDF was unavailable, so I read the author’s primary preprint, particularly §§2.3.3 and 6.2.4. [B03 catalog](/home/fires/hmasd-wsl/docs/new-libs/corpus/catalog.jsonl), [author preprint](https://www.fransoliehoek.net/docs/OliehoekAmato16book.pdf).
+- DeCOM, MARL-0007, communicates neighboring base actions and updates a materially different decomposed policy. It is an antecedent for modular control, not evidence for this frozen, no-report gate. [Primary structured text, pp.3–4](/home/fires/projects/Inst-sci/papers/MyLib/json/MARL-0007.json).
+- CFPI uses continuous-action, value-gradient assumptions that this binary regression does not inherit. [Primary PDF, pp.2–4](/mnt/c/Projects/My-lib/.local-formal-capture/corpus/papers/icml-2023/pmlr-v202-li23av/arxiv-2211.15956.pdf).
+
+Distributed learned power control is already established work, including implementations with richer neighbor feedback. I claim no algorithmic novelty or inherited near-optimality. [Nasir and Guo, primary paper](https://arxiv.org/pdf/1808.00490). July’s label-learning failures also prevent treating available information as demonstrated learnability.
+
+The proposed contract is precise enough to select:
+
+1. **Host and eligibility.** Use the original N5/U50/H256 reset factory and four-tick motion hold, not B06’s alternative initializer. At boundary `t`, only member `r=(t/4) mod 5` may switch OFF for the coming block; the other four must be ON. The shared rank and clock are preinstalled coordination resources, given to every arm. Four active transmitters are not a service guarantee.
+
+2. **Decision timing.** All five motion proposals use the current, old-mask observations. Then the eligible member chooses its gate, the mask is installed once, and motion/mask are held for four transitions. Setter-returned observations cannot trigger another decision. In particular, the previously silent vehicle makes its next motion proposal from its censored observation before reactivation. No temporary all-on sensing refresh is allowed.
+
+3. **Information.** The gate receives only its own original P0 input vector and the declared additional features below. It receives no map, reports, other agents’ observations or proposed actions, global outcomes, grant ACK, or evaluator truth. Define `c` as the number of positive user-slot SINR fields, capped at ten. This is a visible-user count, not supplied service feedback.
+
+4. **Frozen motion.** Preserve original P0 weights, helper/navigation behavior, FP32 actor arithmetic, FP64 temperature-one probabilities and one fresh indexed flat-CDF draw per stochastic decision, including cache hits and all 27 categories. Gate randomness has a separate address domain. Fixed weights do not mean fixed trajectories: silence changes observations, navigation and later motion.
+
+5. **Physical scope.** This is immediate own-transmitter actuation under a predetermined eligibility schedule. It does not model command delivery, switching energy, synchronization failures or hardware guard times. Transmitter on-time and switching counts are useful measurements, not measured energy savings.
+
+The strongest constructive conjecture is that local service demand and interference conditions contain a predictable binary tradeoff, and P0’s frozen nonlinear features make that tradeoff more accessible to a small fitted head. The strongest ordinary alternative is that the benefit comes mostly from permission to silence one transmitter: an always-OFF, random, zero-visible-user or raw-input rule may capture it.
+
+The acquisition should contain **512 fresh worlds, eight assigned to each of the 64 decision clocks**. Each world produces two complete H256 branches. Both use P0 motion and an independent 0.5-probability gate baseline, except that the assigned decision forces OFF in one branch and ON in the other. Subsequent gates and motion use paired private random tapes on each branch’s actual history. Execute and charge both full prefixes; do not copy future commands between diverged histories.
+
+The target is the complete native difference
+
+\[
+y=J_{\mathrm{OFF}}-J_{\mathrm{ON}},\qquad
+J=\frac1{256}\sum_t\left(0.7\,\frac{\mathrm{served}_t}{50}+0.3\,\mathrm{quality}_t\right).
+\]
+
+Retain every pair, including zero targets. Draw and record the ordinary gate uniform at the forced boundary before overriding it. These within-world differences remove the common return level from the label; they do not remove continuation-policy mismatch.
+
+Fit exactly two shared gates on those same 512 pairs:
+
+| Gate | Inputs |
+|---|---|
+| RAW | Original 114 P0 inputs plus 11-way capped-count encoding: 125 features |
+| HIDDEN | The same 125 features plus P0’s original 128-dimensional second-ReLU output: 253 features |
+
+Use FP64 ridge with training-only centering and population-standard-deviation scaling, constant-column scale one, an unpenalized intercept and unit coefficient penalty in **sum-of-squared-error units**. Choose OFF iff the prediction is positive; exact ties choose ON. There is no tuning, validation-based selection, encoder update or iterative dataset extension. HIDDEN’s activations come from the already-paid original forward/cache.
+
+This is a matched comparison of two finite feature packages. HIDDEN contains no additional information beyond the raw observation history encoded by its inputs, and superiority would not isolate a uniquely learned-representation mechanism against every possible nonlinear feature map. The two fits also share one acquisition dataset and one pretrained parent; they are not independent training replications.
+
+The smallest complete final panel I recommend is:
+
+| Frozen motion program | Gate rules | Final episodes |
+|---|---|---:|
+| P0 | All ON, eligible always OFF, random 0.5, ZERO, RAW, HIDDEN | 384 |
+| Bstar0, Hdirect, G, Q10 | All ON and ZERO, each | 512 |
+| Deterministic C | All ON and ZERO | 64 |
+| **Total** | 16 programs on 32 fresh worlds | **960** |
+
+Stochastic programs receive two motion tapes per world; deterministic C needs one. ZERO switches OFF only when `c=0`. Hdirect replaces the less consequential P1 control: B07’s ordering does not establish Hdirect’s ordering under these new mask histories.
+
+The main attribution contrast is HIDDEN−RAW. Both fitted gates must also face P0’s four unfitted rules and all ten ordinary-parent A/ZERO combinations. Read each parent’s ZERO−all-ON contrast, plus P0’s always-OFF and random contrasts. This gives 37 declared contrasts and 16 program levels, without a full factorial of fitted gates across parents. World-level paired summaries should average the two tapes before descriptive resampling; 64 episodes are not 64 independent worlds.
+
+Read complete J, service and quality, lower service tails, episode minima, zero-service episodes/streaks, travel and relevant height measures, transmitter on-time/switches, censoring, actual gate choices, controller queries and measured CPU. Preserve every adverse world. Neither higher training fit nor a favorable mean alone establishes practical adoption; no new universal service floor or MEI is being invented.
+
+The outcomes would change different decisions:
+
+- **HIDDEN improves over RAW and the competent complete alternatives:** retain a conditional capability of the composed learned gate. A fresh-data replication could then be worth considering; neither deployment nor confirmation follows automatically.
+- **RAW supplies the useful gain and HIDDEN adds none:** retain ordinary supervised local gating and end the representation purchase.
+- **ZERO, always-OFF or random explains the gain, especially on another retained parent:** retain the ordinary radio capability. This would support the changed control rights without establishing a need for gate learning.
+- **HIDDEN beats RAW but neither challenges Bstar0/Hdirect or their ZERO compositions:** record the narrow feature-package result; it does not justify expanding a weaker complete package.
+- **Active learned switching is adverse or unhelpful:** end this one-batch purchase. The result would not identify insufficient local information, a bad representation or a particular repair.
+- **The fitted gates scarcely activate:** distinguish nonactivation from harmful intervention. The always-OFF/random arms still provide actual intervention evidence, but no automatic threshold adjustment or extra fitting follows.
+
+The principal scientific limitation is consequential: labels measure one forced decision under random-gate continuation, while deployment repeatedly uses the fitted gate. This changes future observations and the distribution on which the head acts. Full final rollouts are therefore essential. A good regression fit cannot establish policy improvement. The restricted one-silent-member contract and modest sample size are further limits, not reasons to demand a positive pilot first.
+
+The revised full price, including Hdirect, is source-derived and published at `3e339fcf68a99b238224d85878cd0567fe16b1d1` in the [source-support appendix](/home/fires/hmasd-wsl/docs/research/candidates/uav_fleet_adaptation/NOTES.md#post-b07-local-gate-source-facts):
+
+| Item | Prospective cost |
+|---|---:|
+| Fits | 2 ridge fits; no motion-network training |
+| Acquisition | 1,024 episodes / 262,144 native steps / 512 paired targets |
+| Final evaluation | 960 episodes / 245,760 native steps |
+| Total motion requests / gate opportunities | 634,880 / 126,976 |
+| Neural forward ceiling | 532,480 |
+| Standalone helper requests / C-family requests | 491,520 / 143,360 |
+| C candidate paths / modeled ticks, no-hit ceiling | 3,870,720 / 15,482,880 |
+| Helper links / C links, ceilings | 68,812,800 / 323,993,600 |
+| Motion uniforms / gate uniforms | 614,400 / 69,632 |
+| Hdirect law calls / constructed target vectors | 40,960 / 81,920 |
+| Worker plus full independent scalar reader | **0.5–2 CPU-hours, estimated** |
+| Implementation, checks, review and reading | **6–12 support hours, estimated** |
+
+Hdirect must reuse MemoC’s C-derived features and navigation, followed by its private original-P0 logit cache. Calling StudentPolicy again for features would add an unnecessary helper query and alter the source pipeline. The retained constructor computes both T and H even though Hdirect uses only H; that work remains charged. This is not a claim about a minimal H-only implementation.
+
+The current B07 wrapper uses the count-aware actor signature. An explicit N5 adapter is required to preserve original one-row arithmetic, feature construction and sampling with the original Student. Source inspection establishes feasibility, not a new masked-checkpoint equivalence result. Only P0 needs staging: **424,487 bytes**; Bstar0 and Hdirect reuse it.
+
+The reader is part of the purchase. It must cover all 507,904 post-step radio/assignment states, all 126,976 mask refreshes and old-mask decisions, terminal observations, actual policy requests, private draws, held commands, 512 paired prefixes and targets, scalers and regression residuals, and complete final/adverse summaries. Use independently written scalar user-radio and assignment arithmetic throughout; importing the native pure radio kernel would provide coverage without that implementation independence. Full policy reconstruction can add the same request ceilings again, with **zero new native transitions or optimizer updates**.
+
+Native scored resets and steps account for 140,219,200 dense power slots; mask refreshes add 34,918,400 dense SINR slots using existing path loss. Additional constructor priming must be counted at 275 power slots per reset. Actual cache misses, constructor topology and arithmetic counts remain to be measured.
+
+For streaming sequential worker/reader execution, the source-only peak-RSS forecast is **0.4–1.0 GiB per process**, not a measured cap. This assumes episode records and caches are released as processing advances; only the 512-row designs and compact world summaries remain. The largest design is approximately 1.04 MB. Fresh actual-node admission must inspect effective memory and concurrent load with headroom beyond this forecast.
+
+Separately, allow **0.7–1.5 GiB of new durable bulk** and approximately **1–3 GiB of working-output/scratch headroom**, without interpreting that as a second retained raw copy. Future source-snapshot allocation is unmeasured; B07’s historical 1.75 GB snapshot plus Git administration is an anchor, not the new object’s size.
+
+These costs are substantial despite the small regressions. The recommendation is justified by the different scientific and deployment question, not by spare capacity or a cheap fit count. Existing native interfaces and source arithmetic make it feasible; new masked adapters, full scalar reading, actual runtime/RSS, hardware actuation costs and generalization beyond one acquisition instance remain unverified. No source check here authorizes execution.
+
+**MATERIAL_DISSENT: no.** I recommend selecting this bounded pivot while retaining the completed stops. There is no disputed approved investment; a claim that the gate already improves native value, guarantees service or yields measured energy savings would exceed the direct evidence.
+
+END ENTIRE ORIGINAL ORACLE RECOMMENDATION
+
+BEGIN CONSEQUENTIAL CORRECTION EXCHANGE
+
+ORACLE TO DM — 02:42 UTC
+
+Final comparison correction before returning Root recommendation: replace P1 A/ZERO by retained Hdirect A/ZERO in the same 960-final/1,984-total episode panel. Root explicitly asks beyond Hdirect as well as P/Bstar/G/Q, and B07's historical Hdirect<Bstar does not order them under new mask histories; P1 is less consequential and was not an independent training replication of our gate. No extra episodes or fits. I read current B07 Policy.query via CodeGraph: DIRECT uses MemoC features plus P0 actor and constructs both T/H vectors. Please give bounded source facts only: can the unchanged Hdirect law run through original N5 reset/masking while retaining original flat CDF and numerical actor semantics; revised helper/C/NN, modeled-link/path, both-vector counts and single-P0 staging bytes; does this alter your 0.5–2 CPU-hour/full independent-scalar reader/support/durable estimate materially? My arithmetic suggests NN ceiling still 532,480, helper 491,520, C-family 143,360, C paths 3,870,720, C ticks 15,482,880; 40,960 Hdirect law calls/81,920 target vectors. Please correct if needed and preserve this final source correction in your existing appendix. Still no implementation/query/reduction/run. Thank you.
+
+ROOT TO ORACLE — cost clarification
+
+I have fully read the published local-gate source facts and the independent-scalar reader clarification, including old-mask timing, censored-motion feedback, RAW125/HIDDEN253, 1,984 episodes and the original P1 bill. Please make the Hdirect replacement's changed C/helper/actor work and efficient same-law feature reuse explicit in the final price; the old P1 counts/staging no longer directly apply. Include a streaming peak-RSS estimate (or a clearly stated unresolved estimate with admission consequence), separately from the .7–1.5 GiB durable raw and snapshot/storage figures. No new query or benchmark is needed for these source estimates. I will make the selection from the complete original final, not this provisional headline.
+
+DM TO ORACLE — 02:45 UTC
+
+Your revised arithmetic is correct. Replacing128 P1 episodes by128 Hdirect episodes preserves1,984/507,904 and634,880 motion requests,532,480 NN-forward ceiling,614,400 motion draws and126,976 gate opportunities. Standalone analytic-helper requests become491,520; C-family requests become143,360 (C/G/Q10/Hdirect). No-hit ceilings:3,870,720 C paths,15,482,880 modeled ticks,323,993,600 C links; helper links≤68,812,800. Hdirect has40,960 law calls and81,920 constructed target vectors, including the unused T vector as in B07. A full same-query reader can add the same ceilings again. Native/refresh counts are unchanged. Only original P0 staging is needed:424,487 bytes; Bstar0 and Hdirect reuse it.
+
+Source feasibility: yes, no all-on assertion exists in Hdirect's law. Its MemoC sees the actual masked104-row, supplies ORIGINAL C ranking/fallback/navigation and114 features; direct P0 inference is one FP32 row on those C-derived features, followed by original FP64 T=1 softmax, build_targets and H=.9p+.1delta_C (multiply then add .1 at C), then the original one-uniform flat CDF/right-search. Do not route Hdirect through StudentPolicy.query as an extra analytic-helper query: its features/nav come from MemoC, and its private logit cache resets per episode. The source currently computes BOTH T/H even on cache hits; preserve/charge that implementation if retaining the unchanged constructor. No probabilities or draws are cached.
+
+One adapter qualification: current B07 Policy imports B06 MemoC/count-aware actor and calls actor(features,[5]); original N5 Student accepts only features. N=5 sets CountStudent's pre-ReLU count feature to zero and uses the same original network tensors, so no learned count behavior or count-dependent information is needed. The selected implementation would still need an explicit N5 adapter preserving C-derived features, one-row arithmetic, FP64 construction and sampler; importing B07 Policy unchanged into an original-Student wrapper would fail its signature. Source feasibility is not a new empirical or bitwise-equivalence certification on masked checkpoints. No production query was used here.
+
+The broader0.5–2 combined CPU-hour/full independent-scalar reader estimate remains reasonable as an unmeasured planning range; C work rises while standalone helper work falls.6–12support hours and0.7–1.5GiB durable bulk remain rough/unmeasured with the same full schema obligation, not fit-only costs or hard limits. I will publish this final panel correction as an appended source note, retaining the prior P1 pricing historically.
+
+ORACLE TO DM — 02:45 UTC
+
+Root requests a streaming peak-RSS planning estimate, separate from durable/snapshot disk. Please append a bounded source estimate with the Hdirect correction if feasible, no benchmark. Proposed object streams episode production and full reading, retains only 512 paired training rows/two small designs and 32-world metrics, resets policy caches each episode, and runs worker/reader sequentially. B07's measured 593,324 KiB peak included larger archive training arrays; my conservative source-only forecast is roughly 0.4–1.0 GiB per streaming worker or reader process, unmeasured/not a hard cap, with fresh actual-node admission explicitly needing headroom above that range plus concurrent load. Correct the estimate if source reveals a different dominant retained array or process topology. Gate convention also final: draw and record the normal private R uniform at forced clocks, then override, so 65,536 acquisition gate draws plus 4,096 final R =69,632; motion law untouched.
+
+DM TO ORACLE — 02:47 UTC
+
+The proposed0.4–1.0GiB peak RSS per streaming worker or reader is a reasonable conservative source-only forecast, not a measured cap. I see no required dominant retained array beyond the Python/NumPy/PyTorch runtime: one or two episode records, episode-private caches (at most320 motion input entries per full H256 episode),512 paired feature rows, the512×254 FP64 largest design (~1.04MB), small Gram/solve workspaces and32-world summaries. Frozen P0 is34,715 FP32 parameters; its numeric weights are small relative to runtime overhead. Independent scalar radio work increases CPU rather than requiring run-wide arrays. The forecast assumes raw files and policy caches are released/closed as streaming advances, and worker/reader do not overlap. Historical anchors are B04's430,004KiB peak and B07's593,324KiB; neither isolates baseline runtime or proves the new process peak. Admission must separately inspect actual-node effective memory and concurrent load, with headroom beyond this forecast; source snapshot/durable disk must not be counted as RSS. I will append that and your final gate-draw convention:65,536 acquisition R draws including both forced clocks, plus4,096 final R=69,632; no motion-draw change.
+
+DM TO ORACLE — final source publication
+
+Final Hdirect substitution, updated counts, single-P0 staging, streaming RAM and forced-clock draw convention are published at3e339fcf68a99b238224d85878cd0567fe16b1d1 (origin/main verified), same NOTES#post-b07-local-gate-source-facts anchor. Last92lines supersede the P1 pricing: NN532480/helper491520/C143360, Hdirect40960law/81920vectors, C3870720paths/15482880ticks, staging424487B; gate draws69632. Peak-RSS forecast0.4–1.0GiB per sequential streaming worker/reader, with actual-node/concurrent-load admission and disk separate. Full independent scalar scope remains0.5–2CPU-hours plus6–12support hours and0.7–1.5GiB durable bulk, all estimates. Nothing executed or implemented.
+
+END CONSEQUENTIAL CORRECTION EXCHANGE
+
+BEGIN ROOT ADOPTION AND WORDING CLARIFICATION — separate from the original recommendation
+
+Root has fully read and selects your final local transmitter-gate recommendation unchanged, after reading your cited primary passages and DM source bill through3e339fcf68a99b238224d85878cd0567fe16b1d1. The same fleet-adaptation DM now owns the complete selected2-fit/1984episode/507904step study; no further idea discovery or selection review is requested. One bounded handoff only: forward the EXACT original Root02:15 source question, your ENTIRE02:50 final recommendation and the consequential P1→Hdirect/cost-correction exchange to /root/dm_fleet_adaptation so it can preserve the full originals in its own append-only NOTES before implementation. No need to summarize the answer, collect new evidence, ACK/relay, or send another Pro question. Root adoption retains modest expectations, all original limitations/outcome paths, central-control rights differences, random-continuation mismatch, honest Hdirect/reader/support/storage costs and unselected S2/transfer. Clarification of wording only: HIDDEN is a deterministic feature expansion of the identical RAW current input including original nav features, not an additional observation-history or memory resource. No new information or learned-history claim. Your original answer should remain intact alongside that Root clarification.
+
+END ROOT ADOPTION AND WORDING CLARIFICATION
+
+
+<a id="b08-selected-contract"></a>
+### B08 DM prospective contract: local binary transmitter gating
+
+I have read the complete selection advice and accept Root's selected purchase.
+There is no material scientific dissent. This changes the **decision being
+learned**: a local binary transmitter choice with paid native consequential
+labels, while P0 motion remains frozen. It does not rescue the ended T/H
+recipe. The intended contribution is conditional task usefulness and empirical
+understanding of finite local gate learning; no algorithmic novelty,
+representation necessity or reliable deployment claim is proposed.
+
+The relevant current published background was read at main
+`2ef5236252d5ed75eddfcbde0d99da403059f03b`. [Topic2](../../RESEARCH.md#2-部分可观测性要求处理信息不要求每次都重新训练)
+preserves the registered-map/report rights, capacity changes, native reversals
+and useful ordinary radio controls. It makes the smaller local contract a
+different capability question, not a measured fraction of S2 headroom.
+[Topic3](../../RESEARCH.md#3-marl-增加的是联合行为和信息结构) separates local
+information from common rank/clock and shared policy parameters. Every arm
+gets the same eligibility schedule; no coordination gain is attributed to the
+gate features alone. [Topic4](../../RESEARCH.md#4-学习理论表示能力和有限训练结果处在不同层面)
+and the [B07 stop](#b07-independent-disposition) require competent ordinary
+controls, native outcomes and the original conditional limits. Thus RAW125 is
+the matched information comparator, and Bstar0/Hdirect/G/Q10/C plus their ZERO
+compositions remain complete-package challenges. HIDDEN253 is a deterministic
+expansion of the same current input and private navigation state, not another
+information/history resource. A narrower HIDDEN−RAW positive alone would not
+establish a useful complete package.
+
+I checked the load-bearing primary passages: Ross–Bagnell
+[arXiv:1406.5979 §§2.2–2.4](https://arxiv.org/pdf/1406.5979) describes
+cost-to-go examples, regression and iterative aggregation on the current
+learner's distribution. The bridge used here is consequential binary labels;
+its guarantees do not apply to one fixed random-continuation acquisition.
+B03, catalog `docs/new-libs/corpus/catalog.jsonl`, was checked in the
+[authors' primary book §§2.3.3/6.2.4](https://www.fransoliehoek.net/docs/OliehoekAmato16book.pdf):
+send/withhold decisions and shared coordination devices are established
+objects, with different observations. DeCOM MARL-0007 was read directly in
+`/home/fires/projects/Inst-sci/papers/MyLib/json/MARL-0007.json`, pp3–4
+(PDF `pdf/MARL-0007.pdf` in that store): communicated neighboring base
+actions and learned base/perturbation updates differ from this local frozen
+motion contract. CFPI, `pmlr-v202-li23av` / arXiv:2211.15956, was read at
+`/mnt/c/Projects/My-lib/.local-formal-capture/corpus/papers/icml-2023/pmlr-v202-li23av/arxiv-2211.15956.pdf`,
+pp2–4; its continuous-action Taylor/value-gradient and Gaussian assumptions
+do not justify the binary ridge gate. Nasir–Guo
+[arXiv:1808.00490 §III](https://arxiv.org/pdf/1808.00490) explicitly uses
+receiver and neighboring-transmitter feedback. It prevents a novelty claim
+and is not a matched-information performance guarantee here. The Oracle's
+three-store/July/external reading remains its disclosed supporting search,
+not a new exhaustive novelty certification by this DM.
+
+The constructive conjecture is that the old local row contains a useful
+prediction of the complete OFF−ON consequence, and retained nonlinear P0
+features help a finite ridge learner exploit it. The strongest competing
+explanation is simpler: extra actuation rights and an ordinary rule or RAW
+regression supply the gain. This is a package exploration, without a
+prerequisite positive toy or attribution claim. Silence changes all agents'
+interference/discovery and subsequent trajectories despite frozen motion
+weights. The shared policy is trained from pooled local examples and team
+returns; no return, map, peer action or other agent's row enters deployment.
+
+**Frozen population, order and random domains, before any B08 data exposure.**
+The host is the original N5/U50/H256 free-space S1 factory/reset, threshold3,
+capacity10, no shadowing/FDMA/paper-height reward and four-tick motion hold.
+Each episode uses `env.reset(seed=world)` with the original legacy reset:
+five UAV positions and then50 users from the original `RandomState(world)`
+stream. No B06 seven-agent layout insertion/extra layout refresh is permitted.
+One reusable native environment will be constructed for the worker, with
+its two factory/adapter priming resets measured separately from1984 explicit
+scored resets; the constructor uses29832061. The original P0 artifact alone
+is bound to SHA256
+`b9e25fca68109bb50fa64fadfc90939ad6a4669058c1c0ccd1351c8bbcefe12a`,
+424487bytes, state digest
+`6fa2eddc542d8f5293f5daf6a989b97a9d7d5f56f484f1eb6bddc6a87d27de0c`,
+source `e945483b85c7f8ddfc315c57f36938d6c14201c7`.
+Its canonical path is the earlier remote B02 `assets/S.pt`; a declared
+consumption copy is allowed only if the selected node needs it.
+
+| Prospective item | Frozen identity/rule |
+|---|---|
+| Training worlds | 29830000…29830511 inclusive,512 worlds |
+| Final worlds | 29831000…29831031 inclusive,32 disjoint worlds |
+| Assigned force tick for training index i | `4*(i %64)`, eight worlds per decision clock |
+| Training motion root | 29832011 |
+| Final motion roots, tapes0/1 | 29832021 /29832022 |
+| Training gate root | 29832031 |
+| Final R gate roots, tapes0/1 | 29832041 /29832042 |
+| Descriptive bootstrap root | 29832051 |
+| Synthetic actor construction/load seed | 29832061, no training/random selection |
+| Acquisition order | Ascending world; OFF then ON for even i, ON then OFF for odd i |
+| Fitting order/data order | RAW then HIDDEN; both512 rows in ascending world order |
+| Base final program order | P0_A/P0_O/P0_R/P0_ZERO/P0_RAW/P0_HIDDEN/Bstar0_A/Bstar0_ZERO/Hdirect_A/Hdirect_ZERO/G_A/G_ZERO/Q10_A/Q10_ZERO/C_A/C_ZERO |
+| Final execution order | Ascending world; flatten program order with tapes0 then1 per stochastic program and one None tape per C program, producing30 cells; rotate this list left by world-index modulo30; reverse the rotated list for odd world-index |
+| Stopping | Exactly1024 acquisition+960 final episodes, exactly2 ridge fits and one complete reader; terminal technical failures preserved, no automatic replacement or added exposure |
+
+These identity ranges have no declared match in the scoped current candidate
+notebooks checked before selection of the exact values. They are new
+prospective identities, not a claim that every decimal occurrence in every
+historical raw file is a world seed. The native layout seed is the world
+itself. Motion uses the original addressed scalar uniform at
+`[motion_root,world,tick,agent]`. R gate randomness uses
+`[gate_root,world,tick,eligible_agent]`, a separate root and no mutable
+shared stream. Both full acquisition branches draw and record R at all64
+boundaries, including the forced boundary, then override only that decision.
+Post-divergence motion is freshly computed on each actual history. C motion
+and all non-R gate rules take no random draw.
+
+**Decision and acquisition semantics.** At each boundary, copy the OLD mask
+and the returned old-mask observations. Query all five private motion
+policies once, retaining their original pre-navigation114 features and
+updating each private navigation state. The eligible index is `(tick//4)%5`.
+Use that eligible answer's already-computed features/second-ReLU output and
+its old local row to choose the gate; the gate does not receive the sampled
+motion command, other rows, evaluator metrics or future mask observations.
+Construct a fresh mask with all four noneligible members ON and the eligible
+bit chosen, install it exactly once, then hold all commands and this mask for
+four native transitions. Setter-returned rows are saved for verification but
+never used for another decision. Copy SINR, connections and scored endpoint
+metrics before any later setter mutates the native arrays. A previously
+silent member still moves and uses its censored row before reactivation.
+
+For each training world, execute two complete P0/R trajectories with identical
+addressed randomness, forcing OFF versus ON only at the assigned tick. Save
+one pair's common pre-force features and `mean_J_OFF-mean_J_ON`, using all256
+native scored ticks in each branch. Preserve all512 pairs and every zero
+target. Pair validity includes identical complete prefixes through the force
+decision, identical features/navigation/proposals at that point, and distinct
+applied forced bits; no copying of future states/actions is allowed. The
+fixed R=.5 continuation is not the deployed repeated fitted gate and creates
+the principal distribution/decision mismatch to be tested in final rollouts.
+
+Exactly two FP64 ridge solutions use the same512 examples: RAW125 =
+original114 plus one-hot `min(positive user-slot SINR count,10)`; HIDDEN253
+appends P0's second128-ReLU output from the same paid original forward/cache.
+No P0 parameter update, extra representation query, critic, validation,
+tuning, additional label, second dataset or iterative aggregation is selected.
+Both minimize sum squared residuals plus unit coefficient squared norm, with
+an unpenalized intercept and training-only mean/population-SD scaling;
+constant columns have scale1. Each deterministic gate chooses OFF only for
+a strictly positive prediction, so exact zero chooses ON. Native training
+targets are not service ACK inputs at deployment. Fit counts are2; gradient
+optimizer steps and motion-parameter updates are0.
+
+**Readings and uncertainty.** Sixteen levels and precisely37 contrasts are
+fixed: primary P0_HIDDEN−P0_RAW; each fitted gate minus the four P0 unfitted
+rules and ten other-parent A/ZERO programs (28); each of six parents'
+ZERO−A (6); and P0_O−P0_A /P0_R−P0_A (2). Stochastic tapes are averaged
+within each of32 worlds before any interval; C's single trajectory is paired
+to that world, not duplicated into independent observations. Use one fixed
+`default_rng(29832051)` integer index matrix of shape(20000,32), reusing it
+for every level and contrast; report pointwise2.5/97.5 percentile bootstrap
+intervals with NumPy's linear quantile convention. These are descriptive
+world intervals conditional on one acquisition instance and one inherited
+parent, without training-population, simultaneous37-comparison or equivalence
+coverage. Keep the32 signed world values and all adverse worlds, including
+mixed component outcomes. No MEI, universal service floor, late weighting
+change or after-the-fact default policy selection is introduced.
+
+Every level/contrast includes native mean J, service, quality; within-episode
+service p10 and minimum; zero-service steps/episode incidence and longest
+team-zero-service streak; per-UAV mean travel, mean/end heights and relevant
+height-bound visits; active-transmitter ticks/fraction and mask bit switches;
+old-mask censored decision rows, visible-user/peer counts, eligible c==0 and
+fallback exposure; gate requests/OFF choices and prediction/activation
+diagnostics; actual controller/helper/neural/model/link/draw/cache counts;
+query/gate/native/write/complete CPU and wall readings with their scopes.
+Episode and world outputs retain program identities, seeds, artifacts,
+failures, all final adverses and acquisition pair details. These are team
+service measures; they do not establish individual-user continuity, battery
+savings or physical timing guarantees.
+
+The independent scalar reader is included from the start: all507904
+post-step user/peer radio and greedy assignment states, all126976 setter
+refreshes, old-mask decision observations and terminal observations; every
+actual motion/helper/C/logit/hidden/cache/navigation/private-draw/held-command
+and gate law; all512 pair prefixes/features/native labels; both scalers,
+objective/predictions and normal-equation residuals without a new solve;
+the full16 levels/37 contrasts and signed adverses. It imports no native
+radio/assignment routine as its numerical proof and performs0 environment
+steps/0 optimizer steps/0 refits. Actual policy reconstruction can incur the
+same complete policy/model ceilings again. Discrete assignments/eligibility/
+selected categories must match; small continuous numerical tolerances will
+be justified from scalar/vector arithmetic in the engineering checks, never
+used to excuse a changed scientific action.
+
+The accepted full price and all six outcome branches remain as in the
+original advice. The two-fit/1984-episode purchase adds507904native steps to
+the retained B02–B07 bill of14fits/two calibrations/2539560native steps
+(plus separately retained older B01 and support). Those cumulative counts
+do not turn budgets into allowances or create a retry entitlement. Estimated
+worker+complete-reader CPU is0.5–2h, support6–12h, streaming RSS0.4–1.0GiB
+per process, new canonical durable bulk0.7–1.5GiB and separate working disk
+headroom1–3GiB; all estimates, no hard cap or measured guarantee. Worker and
+reader run sequentially, single-threaded numeric libraries. Source snapshot
+size is unmeasured. Current remote-first feasibility and fresh actual-node
+memory/load admission will be assessed at the real launch boundary; existing
+parent B08 and waiting B06 handles remain untouched.
+
+The expected intermediate change is a nonconstant native consequence
+prediction with actual requested/executed gate choices; the native prediction
+is a conditional HIDDEN increment over RAW and useful comparison with the
+competent complete alternatives. Failure of that pattern weakens this finite
+purchase, not local-information sufficiency or all learning. A RAW/simple-rule
+positive is a capability to retain. HIDDEN-only narrow superiority, active
+adverses, unresolved intervals and nonactivation follow the original distinct
+branches without rescue thresholds, extra worlds or fits. Any later
+replication or different question returns to Root's cross-question choice.
+
+<a id="b08-l0"></a>
+### B08 L0: implement the frozen local gate study and complete scalar reader
+
+Deliverable: a direction-local, admitted detached worker plus sequential
+complete reader for the exact contract above, with streaming raw/evidence,
+honest counters/resources and all required scalar/policy/fit checks. New
+entrypoints are
+`experiments/candidates/uav_fleet_adaptation/b08_local_gate/run.py` and
+`read.py`; implementation/tests remain in matching `b08_local_gate/`
+directories. Existing core, other directions, frozen source/assets and their
+entrypoints are read-only dependencies.
+
+One bounded Implementer assignment owns **only** `b08_local_gate/policies.py`,
+`fit.py` and their `test_policies.py` / `test_fit.py`. Its behavior change
+is the original N5 motion law with same-forward hidden extraction plus the
+two fixed gate feature/fit/prediction laws. The DM owns `contract.py`,
+native collection, independent scalar reconstruction, reduction, assets,
+runner/reader integration, all other tests and NOTES/RESEARCH. The helper
+gets no Git index/commit, notebook, launch, scientific selection or child
+ownership. Author on the shared main checkout; other writers' edits are
+preserved. Interfaces are explicit: motion `Policy(parent,actor,world,
+agent,sampling_root).query(old_row,tick,nav)` returns original law fields,
+features and cached hidden for neural parents; gate features are125/253 FP64
+vectors derived only from that local answer; ridge artifacts carry scaler,
+coefficients/intercept, predictions/objective and residual telemetry.
+
+Preserve the original114 FP32 one-row actor operations, helper/nav and
+27-category FP64 softmax/private right-search CDF. Bstar0 uses temperature2;
+Hdirect uses MemoC-derived features/nav, one private P0 logit cache and the
+existing both-T/H constructor on every law call, with no duplicate analytic
+helper. C/Q10/G retain their original laws and cache semantics. The new
+original-Student adapter has no count branch. Synthetic identity checks
+against the original/zero-count N5 paths must cover masked rows, fallback,
+cache hits with fresh uniforms, aliases and deterministic zero/ties. Capturing
+the second ReLU must not invoke a second forward or change FP32 grouping.
+
+Focused checks cover original reset/layout identity and constructor count;
+old decision versus applied/refresh masks; forced pair prefixes and separate
+RNG domains; censorship/reactivation and four-tick holds; independent scalar
+user/peer SINR, assignment/observation/reward and threshold/tie behavior;
+correct sum-SSE lambda and unpenalized intercept, constant-column scaling,
+finite residual bounds and no reader refit; streaming raw completeness,
+tamper detection, fixed counts/37 contrasts and production admission/refusal
+of fixture/duplicate/scientific-output substitution. Tests use synthetic
+assets and small correctness fixtures under the existing pytest scratch
+lifecycle, with no production worlds/assets or result-bearing pilot.
+
+The DM will inspect the returned diff/checks, finish integration, and obtain
+independent high-risk engineering review of masking, numerical identity,
+RNG, replay, input identity and the complete scalar reader before acceptance.
+Source/input publication precedes result execution. An accepted operation
+keeps its original status handle and deterministic observer; the native child
+turn remains active through collection and full reading. A separate
+ResearchCritic diagnoses the complete result, then the DM publishes its
+standing/directly affected background and measured cleanup. Stop only the
+dependent action on a concrete semantics/resource/writer/uncertain-effect
+conflict; no repair changes the frozen scientific exposure automatically.
+
+**Prospective constructor-count correction, before implementation/exposure.**
+The direct source check of `ParallelToArrayAdapter.__init__/seed` shows that
+it seeds its own Gym generator but does not reset the native environment.
+The original factory therefore performs **one** base-constructor priming
+reset, not the two forecast in the paragraph above. The selected reusable
+environment adds275 native dense power slots for this one priming reset;
+1984 explicit episode resets and all scientific counts remain unchanged.
+A focused constructor test will enforce the actual topology. This corrects
+an unexecuted bookkeeping assumption, not the original reset population.
