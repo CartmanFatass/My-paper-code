@@ -262,3 +262,20 @@ entry and measured cleanup. Routine progress requires no Root acknowledgment.
 The completed waiting allocation result remains a separate richer-right causal intervention.
 Its subsequent source-only question does not add an experiment to this review or amend these
 selected contracts. T/H likewise remains separately bound.
+
+### Source-checked clarification of the selected cache boundary
+
+During B08 implementation the DM identified an ambiguity in Root's phrase "clearing at
+t=120 and each segment". Root checked frozen B04 `TemporalProgram.select` and
+`_anticipated_selection`, plus B03 `ContinuationProgram.select`, and resolved it as follows.
+G2's t=40 search evaluates B03 C-only continuations through H500; those modeled branches
+have no second selection at t=120. Existing verified B06 whole-continuation reuse therefore
+remains valid inside each such branch, without an artificial numeric-t=120 cache flush.
+The actual G2 re-selection at t=120 starts separate fresh work. A2 explicitly ends its
+prefix at t=120 and starts fresh inner/outer suffix segments, each with private caches.
+Thus the restriction follows actual modeled-program barriers, not a numeric clock condition
+inserted into the ordinary comparator. The generalized B04 adapter need not accept unused
+40→500 segment calls. This clarification changes no scientific output, logical request bill,
+required exactness check or selected result exposure. The DM records it in B08 NOTES and
+includes it in independent engineering review; the original review and selection above
+remain preserved as delivered.
