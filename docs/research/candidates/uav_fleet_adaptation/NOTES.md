@@ -5688,3 +5688,126 @@ Canonical raw/checkpoint/data are required unique evidence, not disposable lefto
 There is no cleanup blocker, unread result, live producer or pending B06 review.
 The current authorized continuation is only Root's source/interface/full-cost
 assessment with its Oracle; no next result study has been selected.
+
+
+<a id="post-b06-source-allocation"></a>
+### Post-B06 bounded source assessment — actual S2 versus no new purchase
+
+**Assignment and scope,2026-10-01 UTC.** B06's full read/review/publication/cleanup
+boundary is complete at `e49ddeb2db9f19e58eccf6a5e903d75691559a97`. Root asked
+this same DM to supply source/interface/full-cost facts to its existing
+`/root/oracle_next_capability`, which owns the separate-context next-allocation
+challenge. Its current focused comparison is the already-costed actual-S2
+acquisition design versus no new purchase. The Oracle explicitly asked not to
+routinely reprice/redraft that settled design, and asked for a substantive
+challenge to its tentative no-purchase preference if warranted. This entry is
+that DM contribution, not a new selected study or a substitute independent
+review. No new scientific query, trajectory reduction, fit, code or run occurred.
+
+I read the complete existing
+[actual-S2 source design](../uav_parent_adaptation/NOTES.md#s2-development-source-design)
+and its [original independent corrections/disposition](../uav_parent_adaptation/NOTES.md#s2-development-independent-disposition),
+including the two-context objective, paid B* addition, exact transfer controls,
+reader scope and optional transfer-only price. Current published
+[topic2](../../RESEARCH.md#2-部分可观测性要求处理信息不要求每次都重新训练) and
+[topic4](../../RESEARCH.md#4-学习理论表示能力和有限训练结果处在不同层面) at
+`e49ddeb2db9f19e58eccf6a5e903d75691559a97` change the marginal judgment through
+retained P competence, adverse managed composition, completed CAL/CONT and the
+new count result. The actual-S2 design was originally deferred before those
+fleet readings; none is reinterpreted as an S2 experiment.
+
+**Feasibility facts that are now settled.** The load-bearing parent B05
+`LocalTeam.decide` and collector, plus radio B03 protocol/scheduler, are unchanged
+from the reserved design's published source `b0731ce69`. Code/source inspection
+confirms that all five lawful local distributions are constructed before current
+private innovations, proposals are formed before reports/S2, and current local
+query time counts toward the actual S2 deadline. At startup the proposals execute
+for two ticks; later the previous commands continue until the two-tick delivery.
+S2 may replace the rotating member's command and chooses the mask jointly with
+the remaining proposals; on lateness it preserves the prior actual commands/mask.
+A proposal can change search order or the resulting mask even when its own motion
+is overwritten. Therefore the proposed intervention point is real and material:
+change the selected proposal before report/search, not the delivered command.
+The actor still lacks the coordinator's map, other proposals, rotation label,
+current mask and pending command. This is a partial-information proposal-policy
+problem, not a newly informed centralized controller.
+
+Both preselected L0 all-on transfer heads are now complete, published and present
+in the one canonical local B05 run. Byte-only checks verified
+`assets/CAL0.pt` (15,395 bytes,SHA-256
+`5b4a91a483239ac97e0dfa44cd1edbeb8b2c2e2050a58bf5587d383e0f4c026f`)
+and `assets/CONT0.pt` (56,753 bytes,SHA-256
+`f179c83a9f07e78eaea0fbd78b3ec3895d79f5cd4669f22dab15569e23c65eb5`)
+under `runs/uav_fleet_adaptation/b05_native_consequence_a01/`, source
+`2e22a2ccf6cafbde5b85a6658077ddcb2bbfcf94`. No asset forward was run.
+Original S and the fixed B*0 temperature2 reference also remain available at
+their previously verified locations. Thus unavailable assets or unfinished
+all-on evidence are no longer grounds for deferral. The design's common B05
+I decoder must still be retained: importing an all-on sampler wholesale would
+change the operational law. B06's count-aware all-on helper is not a replacement
+for the fixed N5 managed interface. No implementation is authorized by this
+source observation.
+
+**What a successful direct purchase would add.** S2 changes the proposal-to-team
+consequence mapping, and that is a genuine constructive conjecture even after
+the all-on losses. Fixed S2 can make a proposal useful through the rotating member's delivered
+command, the shared mask, the sequential search result or subsequent visits.
+A contextual S2-trained head that adds complete native value beyond unchanged
+S, fixed B*, same-data CAL and transferred all-on heads would demonstrate useful
+finite development in this coupled execution. It would not need to prove an
+entropy/credit/representation explanation first. The original controls are
+appropriate: merely improving S would not show that buying S2-conditioned
+acquisition was necessary, and comparison only with C_S2 would omit the measured
+C_T2 challenge. No positive pilot, exact headroom proof or exhaustive branch
+screen is needed to admit this direct experiment if Root chooses its value.
+
+**Why I do not recommend that purchase now.** The completed all-on B05 is the
+most directly relevant adverse evidence: both CONT heads fit their empirical
+objective and change physical choices, yet neither established added native
+value over S or a recurring contextual increment over same-data CAL. That does
+not refute S2 alignment, but lowers the expected return from reusing the same
+single-address-perturbation/full-return labels,1,024-world dataset and bounded
+frozen-backbone head family for another host. Actual S2 supplies a different
+consequence map, not more independent contexts, a new information right or an
+identified remedy for finite joint deployment. The two-context timing correction
+keeps the intended comparison honest; it is not a new empirical capability or
+an exact hardware-gradient guarantee.
+
+B06 adds a distinct negative constraint without diagnosing B05: large full-network
+movement and active count learning still failed to establish development beyond
+reused P, while M's quality and L1 conditional gains survive. Neither tiny heads
+alone nor complete optimization inactivity explains all these outcomes, and no
+single mechanism is established. The parent managed B05 result already preserves
+useful motion/compute tradeoffs and an ordinary reference that is stronger on
+service/J. No new deployment requirement or newly evidenced intervention link
+currently makes the narrower one-lineage S2 head comparison more consequential
+than its known bill. This is a finite value-of-information judgment, not a rule
+that every future experiment requires a diagnosed failure or all three of method,
+task and mechanism contributions.
+
+I reuse the complete settled price: **2fits,2,560H256 episodes/655,360 native
+steps,2–4worker CPU hours plus15–45reader minutes and5–9support hours**.
+The fixed managed search dominates collection; B06's cheaper observed runtime
+does not justify lowering this price. Its reader/support and the previously
+incurred original acquisition/B04/B05/B06 costs remain material. The optional
+transfer-only comparison is a separate already-priced384-episode/98,304-step,
+0fit purchase, not free diagnosis or a required first stage. I recommend neither
+purchase now. No new source estimate or benchmark was generated.
+
+The already-selected ordinary G question may change a useful future ordinary
+proposal reference, but it does not test S2-conditioned learning and is not a
+scientific admission prerequisite. My no-purchase recommendation stands without
+waiting for G. Likewise, the separately owned waiting-allocation and parent
+shortlist studies should proceed on their own merits; I propose no duplicate
+or small offshoot merely to keep this direction occupied. I have no clearly
+stronger source-grounded alternative to propose from this bounded assessment.
+
+**Return to Root's Oracle.** Recommend no additional fleet/actual-S2 investment
+at this boundary, retaining the full direct and optional-transfer designs and
+all useful/adverse assets. A future concrete managed-use or learning conjecture
+whose expected answer warrants the full cost can re-open direct exploration,
+even after negative all-on/G evidence; there is no obligatory result dependency,
+periodic poll, representation overhaul or renewed mechanism-screen campaign.
+Root owns the cross-question decision, with its original independent Oracle
+reviewing the actual new evidence. This source task introduces no result-bearing
+operation and does not revise the completed B06 disposition.
