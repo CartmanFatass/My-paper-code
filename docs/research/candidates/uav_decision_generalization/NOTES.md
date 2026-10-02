@@ -1709,3 +1709,143 @@ actor inputs remain at their canonical locations. If the actual lifecycle needs
 overlap, measure and revise that preparation resource estimate rather than
 silently treat two 1.67 GiB snapshots as one. This does not change the scientific
 query, episode, CPU or fitting envelope.
+
+
+<a id="b02-selection-review-and-disposition"></a>
+### B02 independent selection and resolved disposition
+
+Root read the entire preceding contract and original independent ResearchCritic
+answer, then selected this single eight-program purchase. The complete answer
+below is mechanically retained without shortening: 7,746 UTF-8 bytes, SHA256
+`caf8fa4ab65234f2f1a53b896e417a06c09f0e006f3276117b556a4e10def2da`;
+actual turn `01a0fa7d-0e2f-7652-8d5b-e8d6726dfc5f`, Astra/max as verified by
+Root. Reviewer `/root/next_study_review` had separate context and original
+supporting/adverse sources; its disclosed scope is part of the original answer.
+
+<!-- BEGIN ORIGINAL B02 INDEPENDENT SELECTION REVIEW -->
+**建议采纳 `e2e0f252b` 的修订合同，购买这一次 S/C 完整协作用途比较；暂缓 A 早停与 R 菜单迁移。** 选择理由是它能检验一个具体、可撤回的用途判断，并保留强普通竞争者。零新拟合降低了新增成本，但不意味着免费，也不支持新学习能力宣称。[完整合同](/home/fires/hmasd-wsl/docs/research/candidates/uav_decision_generalization/NOTES.md:1221)
+
+我没有继承 Root/DM 的完整会话，但指派已经透露拟议路线与优先级，旧结果段也包含 DM 解读，因此不称盲审。我核对了 B05/B06 的冻结合同、26/36 个源码文件与对应 Git 字节、终态、两份 canonical S 文件哈希及付费温度选择的原始记录；从全部 episode 汇总重建了关键配对均值，并直接检查 **27 条 B05、46 条 B06 完整原始轨迹**，覆盖正例、强反例和中断。检查包括原生连接、服务、奖励、合法 own-count 对齐，及相关几何绑定与移动记录。未重复完整 controller/actor reader、全部历史原始文件或无线物理仿真；没有新增模型、控制器、RNG 或原生查询。
+
+旧证据支持继续使用 S，也限制这次续向的解释：
+
+| 证据 | 本次投资含义 |
+|---|---|
+| B05 S_L1−G：J **+.023431**，描述区间 **[+.012843,+.033524]**；服务 **+1.868/步**，27/32 世界 J 改善 | 有值得保留、组合的已训练行为 |
+| B05 S_L0−G：服务、p10、路径有用，J 区间跨零；两 S 均损失部分 served-user quality | 两条谱系须分别判读，不能只展示 S_L1 |
+| B06 H4 下 S_L0/S_L1−G 均值仍为 **+.010681/+.012066** | 加强固定资产的条件用途证据，没有增加训练复制 |
+| B06 E 改变了实际移动并显著节省路径，但 E−H4 的 J/服务未确定改善，19 步归零仍存在 | 真实反馈和物理干预都不保证任务收益 |
+
+原始反例尤其重要。B05 世界 `29630013` 的 C 没有团队归零，却有 **35/50 用户从未服务**；B06 世界 `29670024` 的 C/H4 有 **38/50**，而发生19步归零的 S_L0/H4/tape0 有 **17/50**。另一方面，B05 世界 `29630017` 的 S_L1 在两个采样带都明显胜过 G，并减少从未服务人数。团队连续性、个体覆盖和平均服务确实可以分离；这些选取案例不能当作完整面板公平性估计。[B05 汇总](/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b05_score_sampling_a01/summary.json)、[B06 汇总](/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b06_cadence_a01/summary.json)
+
+**最重要的源码诊断已进入新合同：每次接管都是无联系人状态下的确定性航点扫描。** Gate 包含当前 `q(t)=0`，故当前合法用户槽为空；C/history=False 的候选服务与分数全零，执行原 waypoint fallback。它没有在这些接管点利用当前用户的无线排序。相同 row/nav 下，学生 helper 的 next-nav 与 C 相同；G 则精确退化为 C 类别概率 .9、其余26类合计 .1。因此最强普通解释是：**选择性地抑制无联系人状态的随机导航，改变探索、访问分布和机间干扰。** 它可能改善恢复，也可能削弱 S 已有的有用探索。[原 C 分支](/home/fires/hmasd-wsl/experiments/candidates/uav_local_history/b01/controller.py:229)
+
+这保留了[旧 teacher-rescue 异议](/home/fires/hmasd-wsl/docs/research/candidates/uav_fleet_transmission/NOTES.md:3807)：C 没有获得安全专家地位，旧中断也没有被诊断为应由 C 修复。新比较值得购买的变化是保持 H4、改变控制源，并给普通 G 相同历史和切换权。它检验完整用途，不重跑 B06 的额外时刻重查询。同世界、同采样带的父程序与 Z 前四步必然相同，首段已发生的中断无法被 Z 避免。
+
+八个程序足够回答这个有限问题，无需增加混合率、当前计数 gate 或旧反例试跑：
+
+- `Z(S_i)−S_i` 检验增加这条规则的完整净作用。
+- `Z(S_i)−Z(G)` 检验相同新增权利下，冻结 S 包是否仍有增量。
+- `Z(G)−G` 检验普通反馈控制的收益；C 和 Bstar_L0 保留全时确定性控制及已付强参照。
+- 合同加入的 `(Z(S_i)−S_i)−(Z(G)−G)` 有助于区分普通规则收益与原 S 优势的叠加。它无需显著才能保留有用程序，也不能单独识别协作机制。
+
+因此，即使四个主比较都为正，也不证明历史规则独特、学习是必要条件或 S 学会了合作。常量混合或其他普通规则仍可能解释部分收益；在当前用途主张下，不必购买完整因果析因。两条冻结谱系分开、两带先在世界内平均、全部32世界进入读取是合适的；新增世界不增加训练重复。专家协作论文提供联合系统损失的思路，但其 iid 分类结论不能移植为本闭环保证。[Mozannar 与 Sontag，§3–4](https://proceedings.mlr.press/v119/mozannar20b/mozannar20b.pdf)
+
+合同的曝光与服务读取已经充分具体：只查询实际选中源、延续一条真实 nav 状态、定址采样不因 C 接管而移位；reader 的父策略重建仅解释同历史类别和四步裁剪路径，不提供反事实奖励。全50用户 mask、never-served、包含首尾区间的最长未服务段，以及首段和后续团队归零分别保留，能防止用团队均值掩盖个体代价。Gate 后恢复率仍是内生访问状态上的描述。
+
+我独立复算的完整价格与发表合同一致：
+
+| 新购买 | 数量或边界 |
+|---|---:|
+| 主面板＋工程审计 | 480＋16 个 H256，**126,976 原生步** |
+| 新 fit、训练标签、校准、GPU | **全部0** |
+| 学生单行前向上界，含 reader/工程 | **211,456** |
+| C 候选路径／模型步上界，含工程 | **5,120,712／20,482,848** |
+| C／helper 无线链接上界 | **240,680,960／29,603,840** |
+| CPU | **.1–.5小时预测**；累计1小时停止重估边界 |
+| 支持工作／新增峰值磁盘 | **8–12小时预测／≤3 GiB准备范围** |
+
+这些是分项上界，不假定同时达到；缓存不能抵销 reader 成本。接管处额外 C 调用没有无线链接计算，但仍有几何路径工作。旧 B05/B06 实测完整成本分别为140.041/755.536 CPU秒，只能支持规划预测，不能证明新实现的速度。此前 S 构造、失败续训、校准和 A/R 成本均继续计入各自历史。新实现、实际节点运行时间及资源峰值尚未验证，属于正常工程执行边界。
+
+结果应改变以下具体判断：
+
+- **Z(S) 改善父程序，并保留超过 Z(G) 的 J 增量，同时个体连续性和完整成本可接受：**保留该谱系的具体联合程序；不升级为安全或训练可靠性结论。
+- **普通 Z(G) 获益，而 S 的匹配增量未保留：**保留普通反馈能力，结束该 S 融合配方的追加理由；原 S 正面资产继续保留。
+- **均值、个体缺口、团队中断或路径互有得失：**保留明确用途取舍，不宣布通用采用优势。
+- **稀少接管、物理别名、未定或主动负效应：**完成后结束这条固定规则；不自动加世界、改四步阈值、调温度或训练 gate。技术未完成则保留未完成状态，不计作科学负面。
+
+A 早停仍是检验普通有限优化解释的有区分力方案；暂缓它不会使 R 的结构归因成立。当前没有必须立即维护的结构因果主张，因而先发展已有原生用途的 S 是合理的一次机会成本选择。R 菜单迁移的语义问题也仍未解决。三 DM 配置不构成继续购买任何后继的理由。
+
+**MATERIAL_DISSENT: no — 支持按 `e2e0f252b` 修订合同购买这一次完整0-fit比较；不支持将其解释为安全修复、历史特有机制或新学习增量。**
+<!-- END ORIGINAL B02 INDEPENDENT SELECTION REVIEW -->
+
+I read the complete original answer and accept the recommendation and all its
+interpretation limits; MATERIAL_DISSENT:no. The ordinary explanation is selective
+suppression of empty-contact stochastic navigation, with possible exploration
+and interference costs. Original S value is an asset to develop, not a promise
+that this switch helps. Keep the four primary comparisons, both lineages,
+first-segment invariance, all-user coverage/censored gaps, complete costs and
+strong C/G/Bstar alternatives. Inactive, adverse or unresolved results end this
+fixed rule without automatic threshold/seed/model expansion. The independent
+review and Root's cross-question choice select the declared126,976-step,
+zero-fit purchase; no per-stage Root approval is needed. A/R early stopping and
+candidate transfer remain deferred alternatives, not refuted or queued runs.
+The appended all-on interference and sequential-snapshot clarification changes
+no scientific effect/query envelope. Selection is not launch acceptance.
+
+<a id="b02-l0"></a>
+### B02 L0: implement the fixed selected cooperation comparison
+
+Deliver one faithful fixed-program comparison and independent saved-trace reader
+under `experiments/candidates/uav_decision_generalization/b02_feedback_cooperation/`,
+with numerical/RNG/collector/reader tests only under the matching
+`tests/experiments/candidates/uav_decision_generalization/b02_feedback_cooperation/`.
+Use an explicit module entry supporting bounded synthetic checks, the fixed
+16-episode audit plus480-episode main worker, and a no-native full reader.
+The preceding prospective contract is the exact science; do not select methods,
+seeds, arms, models, query shortcuts or endpoints during implementation.
+
+Reuse original C, helper, frozen actor, categorical law and host by imports;
+no frozen/shared/env code edits. The original C hash and actual import closure,
+canonical external actor hashes/state identities and paid Bstar temperature
+identity must be validated before effects. The worker receives only original
+local rows and one actual nav state per agent. Only Z programs maintain the
+four-primitive-count window. At t0 query the parent; at t≥4 H4 boundaries use C
+iff all four current/past counts are zero; otherwise the parent. Query one source,
+update actual nav once, preserve original private memoization and stateless
+world/tick/agent sampling. Never query a shadow actor online or move a sample
+stream on a C segment. Apply all joint actions after all agent decisions use the
+same pretransition observation matrix. Preserve original ordered FP32 commands,
+FP64 scores/probabilities/geometry, CPU FP32 one-row actor arithmetic and H4
+commitment through H256.
+
+Log enough actual state, observations, source/trigger decisions, nav transitions,
+probabilities/logits or C scores, commands/positions, native SINR/connections,
+all-user masks and counters to independently reconstruct every chosen query.
+Reader C recomputation is one per actual C/G decision; reuse that independently
+verified C result for hypothetical parent G on Z(G) takeover. Reader additionally
+reconstructs S only at Z(S) takeovers, discards hypothetical state and compares
+four-step clipped paths without any native counterfactual rollout. Validate
+first-four-transition identity with each parent, all257-row q/native alignment,
+all-user gap boundary cases and the complete exact count formula. Report all
+predeclared levels, pairs/interactions, paths, tails and disjoint runtime counts.
+No read result is complete while promised native traces/reader fields are absent.
+
+The total selected exposure/cost is the preceding table, including the16 full
+native audit missions. Synthetic/interface verification may use at most256 full
+original C calls,256 one-row frozen-actor forwards and10,000 count decodes across
+implementation and reviewer reproductions; instrument/report actual consumption.
+Mock/fake wiring checks are separately identified, never reported as native or
+frozen-actor validation. They choose no result panel. No result/native launch is
+within an Implementer's assignment. Actual node admission follows publication,
+focused numerical/RNG engineering review and DM acceptance. Count new process
+entry/import/test/worker/reader CPU, enforce the cumulative1CPUh boundary between
+complete records, and preserve failure prefixes without automatic rerun.
+
+The Implementer owns only the new code/test paths on shared main, writes no
+notebook/index/run records, changes no Git index/branch and spawns no helper.
+Other writers are active: preserve their edits. Return the diff, exact checks and
+scientific-call consumption, deviations and open risks to the DM. I retain
+notebook, shared standing, node/snapshot preparation, actual launch/observation,
+collection, independent diagnosis and cleanup responsibilities. No CLAIM is
+created for this exploratory fixed-asset use study.
