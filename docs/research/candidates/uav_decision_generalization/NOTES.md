@@ -3819,3 +3819,96 @@ and6480000 UAV movement ticks in44.539615CPU seconds before entering the frozen
 mission reconstruction. Frozen models/physical checks, complete scientific
 reading, independent diagnosis and final retention remain outstanding. This
 is still progress, not a completed scientific verdict.
+
+
+<a id="b03-reader-failure-and-repair-l0"></a>
+### B03 reader failure, reproduced arithmetic cause and bounded completion L0 — 2026-10-02 UTC
+
+The original worker remains complete and unchanged. Reader `read_a01`, source
+4fe4d7b10, exited1 at12:05:51.106813UTC during O/world109220001's movement check,
+with exact-array maximum difference2.220446049250313e-16. All135 training rollouts
+and167 frozen missions already have durable completed check files: these include
+all166 neural missions/83000 model-team forwards plus O/world109220000. The
+failure occurs before service, reward or physical reconstruction of the next O
+mission. There is no final reading yet. Original summary/exit/status remain under
+`runs/uav_decision_generalization/b03_joint_window_read_a01`; failed CPU is
+2396.885812s, cumulative52308.029953088s, wall659.753977s, peak719600KiB. All actual
+forward/check counts remain charged. Consuming the generation9 BLOCKED event
+advances observation to10 without resuming either terminal job.
+
+[Saved-raw reproduction](../../../../runs/uav_decision_generalization/b03_engineering_a01/motion-failure-reproduction.json)
+used the original node/runtime and O/world109220001 bytes. At action10/UAV5,
+`[.6478229245445858,-.7603696056554017,.04651366713073793]`, a large-array row
+view gives norm1.0 whereas its independent copy gives1.0000000000000002. Both
+are float64/stride8; their addresses have different alignment. The original host
+and recorder each copy the three-vector before norm; the reader retained a view.
+Copying each row reproduces all saved executed commands and successor positions
+exactly (zero error). This is an actual saved-byte reproduction, not an inference
+that generic vectorization changes the sum. Measured repetition cost .013453583
+CPU seconds; the first identical read-only invocation lost its stdout because the
+local destination directory was mistyped, so its CPU is unmeasured and retained
+as support cost, not zero. Neither invocation constructed an environment/model,
+queried RF nor advanced a controller.
+
+**L0.** Deliver one read-only completion of the originally selected reader over
+unchanged worker evidence. Owned changes are the B03 reader's per-command copy,
+explicit SHA-bound reuse of its135+167 completed check files, and focused tests;
+no worker, host, learner, task, seeds, model, tolerances or service/payment rules
+change. The exact old reader failure/source/summary and every reused check hash
+are inputs. Only reader entry/reconstruction/prefix-loading source may differ;
+all other worker source bytes must match. Recheck repaired movement arithmetic on
+every reused raw mission, and verify its raw/metadata/check identities; no neural
+or training check is counted as newly executed. Check the remaining65 ordinary
+missions fully, then produce the original full232/2160-mission reductions and
+coverage accounting. This combines certified read coverage, not partial native
+runs or a resumed fit.
+
+New effects are0 native/fit/optimizer/model-forward. Residual ordinary work is
+195000 command reconstructions,32565 physical states/10453365 distance relations,
+32500 ledger advances/1625000 user indicators,195000 movement UAV-ticks; repeated
+prefix movement costs6981000 UAV-ticks separately. Completed-prefix counts stay
+separate from new counts and are combined only for full promised coverage.
+Expected additional reader CPU is1–4minutes; engineering/review/support actuals
+are added, with no automatic retry on another failure. Preserve original failed
+outputs, check the numerical/identity diff with the existing independent
+engineering reviewer, publish exact completion inputs, use fresh actual-node
+admission, and retain same-handle observation. This repair creates no new
+scientific comparison or additional selection gate.
+
+The narrow repair is now implemented. All unchanged43 worker files remain
+identical; only `independent.py`, `run.py` and new `reader_prefix.py` differ, with
+exact before/after hashes in [B03_READER_PREFIX.json](B03_READER_PREFIX.json).
+The new [completion study input](B03_READER_COMPLETION_INPUT.json) pins46 source
+files and the unchanged scientific contract. The prefix locator binds every one
+of302 old check files (16440026 logical bytes) at its original canonical location;
+there is no copy of the bulk output. Every reused raw movement is rechecked,
+while old neural/physics/reward checks keep the old source identity. No ULP or
+other tolerance changed. The failed ordinary mission is among65 fully unchecked
+missions to be read under the corrected arithmetic.
+
+Focused tests13/13 passed, including an owned-copy norm regression, strict
+one-ULP rejection, complete prefix roster/hash/source/cumulative-cost rejection,
+and separate movement accounting for both recorded dtypes. Tests used1.62CPU
+seconds/.70wall seconds and55116KiB peak, no scientific forward/native/update.
+Metadata collection used.024476030CPU seconds. The
+[after-failure ledger](B03_AFTER_READER_FAILURE_LEDGER.json) starts at
+52309.687882701 measured cumulative CPU seconds, retaining all worker and failed
+reader counters. Source authoring, engineering review, publication/control and
+the first lost-output diagnostic have unmeasured support cost, not zero.
+
+**Original independent engineering increment review**, existing registered
+Astra/high `/root/dm_decision_generalization/review_ar_engineering`, read-only:
+
+> No material finding remains in this bounded increment.
+>
+> - Per-vector copying matches the host’s arithmetic without loosening equality.
+> - Reuse binds the failed reader, all 135+167 completed checks, and unchanged raw/metadata identities. Source exceptions are limited to the three reviewed reader files.
+> - Reused coverage plus 65 new ordinary checks matches the original totals. The 6,981,000 repeated movement checks are counted separately; failed-reader counts and CPU remain in cumulative cost.
+>
+> I inspected the existing tests, reproduction record and failed-reader summary. No tests, model/native/RF calls or launches were performed. Static-read CPU was unmetered. Final locator hashes remain for DM publication verification.
+
+**DM disposition:** accepted after reading the diff, test output and actual
+saved-byte reproduction. Exact old source and failure are preserved; the change
+repairs the reader's copy semantics, not the worker, numerical scientific rule
+or comparison. Publish these inputs and admit one read-only completion. Another
+failure returns to its actual evidence rather than licensing a native retry.

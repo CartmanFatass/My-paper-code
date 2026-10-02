@@ -18,9 +18,9 @@ def parser():
     result.add_argument('--seed',required=True,type=int)
     result.add_argument('--launch-sha',required=True)
     result.add_argument('--out',required=True,type=Path)
-    for name in ('study-input','budget-ledger','worker-input'):
-        result.add_argument('--'+name,type=Path,required=name!='worker-input')
-        result.add_argument('--'+name+'-sha256',required=name!='worker-input')
+    for name in ('study-input','budget-ledger','worker-input','prefix-input'):
+        result.add_argument('--'+name,type=Path,required=name in ('study-input','budget-ledger'))
+        result.add_argument('--'+name+'-sha256',required=name in ('study-input','budget-ledger'))
     return result
 
 
@@ -69,6 +69,7 @@ def main(argv=None):
     args=parser().parse_args(argv)
     if args.seed!=c.MASTER:raise ValueError('fixed master seed required')
     if (args.worker_input is None)!=(args.worker_input_sha256 is None) or (args.mode=='reader')!=(args.worker_input is not None):raise ValueError('reader requires exactly one bound canonical worker locator')
+    if (args.prefix_input is None)!=(args.prefix_input_sha256 is None) or args.prefix_input is not None and args.mode!='reader':raise ValueError('a bound prefix is only valid for reader mode')
     from scripts.hmasd_admission import ENVIRONMENT_KEY,require_admission
     paths=json.loads(os.environ.get(ENVIRONMENT_KEY,'{}'))
     admission=require_admission(__file__,direction='uav_decision_generalization')
@@ -87,9 +88,14 @@ def main(argv=None):
         context={'meter':meter,'config':config,'study_input':study,'source_sha256':sources}
         if args.mode=='reader':
             context.update(worker_context(e.bound_json(args.worker_input,args.worker_input_sha256)));config['worker_input']=e.identity(args.worker_input)
-            if context['worker_config']['source_sha256']!=sources:raise ValueError('worker and reader source bytes differ')
+            if args.prefix_input is None:
+                if context['worker_config']['source_sha256']!=sources:raise ValueError('worker and reader source bytes differ')
+            else:
+                from experiments.candidates.uav_decision_generalization.b03_joint_window.reader_prefix import validate_prefix
+                config['prefix_input']=e.identity(args.prefix_input)
+                context['reader_prefix']=validate_prefix(e.bound_json(args.prefix_input,args.prefix_input_sha256),context,prior)
             cost=context['worker_summary']['cost'];expected={key:cost['prior']['prior_counts'].get(key,0)+value for key,value in cost['counts'].items()}
-            if any(prior['prior_counts'].get(key)!=value for key,value in expected.items()) or prior['prior_cpu_seconds']<cost['resources']['cumulative_cpu_seconds']:raise ValueError('reader ledger omits bound cumulative worker cost')
+            if any((prior['prior_counts'].get(key,0)<value if args.prefix_input is not None else prior['prior_counts'].get(key)!=value) for key,value in expected.items()) or prior['prior_cpu_seconds']<cost['resources']['cumulative_cpu_seconds']:raise ValueError('reader ledger omits bound cumulative worker cost')
         e.write_json(out/'config.json',config)
         if args.mode=='worker':
             from experiments.candidates.uav_decision_generalization.b03_joint_window import worker

@@ -20,18 +20,15 @@
   "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/3c2304fb1119d6da9ad827bbe006fbd4aa12841e59fecd5f1c4eac416a719401.json",
   "direction": "uav_decision_generalization",
   "execution": {
+    "exit_code": 1,
     "exit_witness": {
+      "exit_code": 1,
+      "finished_at_epoch": 1790942751.1068132,
       "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/process-exit.json",
-      "state": "absent"
+      "state": "valid",
+      "termination": "process_exit"
     },
     "runner": {
-      "observed_identity": {
-        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
-        "kind": "linux_pid_start_ticks",
-        "pid": 1338533,
-        "session_id": 1338532,
-        "start_ticks": 128141599
-      },
       "recorded_identity": {
         "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
         "kind": "linux_pid_start_ticks",
@@ -39,17 +36,10 @@
         "session_id": 1338532,
         "start_ticks": 128141599
       },
-      "state": "running"
+      "state": "absent"
     },
-    "state": "running",
+    "state": "exited",
     "supervisor": {
-      "observed_identity": {
-        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
-        "kind": "linux_pid_start_ticks",
-        "pid": 1338532,
-        "session_id": 1338532,
-        "start_ticks": 128141596
-      },
       "recorded_identity": {
         "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
         "kind": "linux_pid_start_ticks",
@@ -57,23 +47,21 @@
         "session_id": 1338532,
         "start_ticks": 128141596
       },
-      "state": "running"
+      "state": "absent"
     }
   },
   "explicit_retry": {
-    "eligible": false,
-    "reasons": [
-      "parent has no consistent terminal nonzero native exit"
-    ],
+    "eligible": true,
+    "reasons": [],
     "scientific_authorization": false,
     "successor_ref": null,
     "supported": true
   },
-  "explicit_retry_available": false,
+  "explicit_retry_available": true,
   "kind": "hmasd_operation_status",
   "manifest_ref": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/launch-manifest.json",
   "node": "wsl_4070",
-  "observed_at": "2026-10-02T11:56:19.846104Z",
+  "observed_at": "2026-10-02T12:06:30.583436Z",
   "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/3c2304fb1119d6da9ad827bbe006fbd4aa12841e59fecd5f1c4eac416a719401.json",
   "output_root": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01",
   "record_consistency": {

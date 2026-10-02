@@ -173,6 +173,9 @@ def clipped_actions(raw):
     flat = actions.reshape(-1, 3)
     events = np.zeros(len(flat), dtype=bool)
     for index, command in enumerate(flat):
+        # The host copies each three-vector. A row view can have different
+        # alignment and round its BLAS norm across the exact >1 branch.
+        command = command.copy()
         norm = float(np.linalg.norm(command))
         if not np.isfinite(norm):
             raise ValueError('nonfinite raw action')
@@ -696,6 +699,7 @@ def run(root, out, args, context):
     if alias['source_sha256'] != context['worker_config']['source_sha256']:
         raise AssertionError('initial alias scientific source identity')
     results, training = [], []
+    prefix = context.get('reader_prefix')
     progress = {'schema': 1, 'status': 'STARTED', 'new_native_steps': 0, 'new_fits': 0, 'optimizer_steps': 0,
                 'worker_manifest': context['manifest_identity'], 'frozen_checked': 0, 'training_rollouts_checked': 0}
     def publish():
@@ -706,6 +710,11 @@ def run(root, out, args, context):
         meter.phase = 'reader/training'
         for row in sorted(manifest['training'], key=lambda r: (c.ARMS.index(r['arm']), r['rollout'])):
             arm, rollout = row['arm'], int(row['rollout'])
+            if prefix:
+                from .reader_prefix import reuse_training
+                training.append(reuse_training(prefix, row, worker_root, meter))
+                progress['training_rollouts_checked'] += 1
+                continue
             progress['inflight'] = {'kind': 'training', 'arm': arm, 'rollout': rollout}
             publish()
             metadata = json.loads(checked_file(worker_root, row['metadata']).read_bytes())
@@ -750,6 +759,11 @@ def run(root, out, args, context):
         agent, payload, current_checkpoint = None, None, None
         for row in manifest['frozen']:
             programme, world = row['programme'], int(row['world'])
+            if prefix and (programme, world) in prefix['frozen']:
+                from .reader_prefix import reuse_frozen
+                results.append(reuse_frozen(prefix, row, worker_root, meter))
+                progress['frozen_checked'] += 1
+                continue
             progress['inflight'] = {'kind': 'frozen', 'programme': programme, 'world': world, 'phase': row['phase']}
             meter.phase = 'reader/' + programme
             publish()
@@ -819,8 +833,15 @@ def run(root, out, args, context):
                     'reader_H_held_team_rows': 49900, 'reader_ordinary_O_commands': 99000,
                     'reader_ordinary_B_commands': 99000, 'reader_O_permutation_comparisons': 23826,
                     'reader_O_matching_distances': 1320}
+        reused_counts = prefix['counts'] if prefix else {}
         for key, value in expected.items():
-            same(meter.counts.get(key, 0), value, 'complete reader exposure ' + key)
+            same(meter.counts.get(key, 0) + reused_counts.get(key, 0), value,
+                 'complete reader exposure including bound prefix ' + key)
+        if prefix:
+            same(meter.counts.get('reader_prefix_movement_recheck_uav_ticks'), 6981000,
+                 'all reused movement rechecked under host-copy semantics')
+            if meter.counts.get('model_constructions', 0) or meter.counts.get('reader_model_team_steps', 0):
+                raise AssertionError('prefix completion must not repeat neural queries')
         if any(meter.counts.get('optimizer_' + key, 0) for key in e.OPTIMIZERS):
             raise AssertionError('reader must not perform an optimizer step')
         reading = {'schema': 1, 'object': c.OBJECT, 'worker_manifest': context['manifest_identity'],
@@ -830,6 +851,10 @@ def run(root, out, args, context):
                    'frozen_results': [{key: value for key, value in r.items() if key not in ('policy', 'max_errors')}
                                       for r in results],
                    'scope': 'All232 frozen and2160 training missions read; no environment/controller counterfactual rollout or optimizer replay.'}
+        if prefix:
+            reading['reused_prefix'] = prefix['identity']
+            reading['coverage_counts'] = expected
+            reading['reused_counts'] = reused_counts
         # Full per-user interval histories live once in checks/frozen, whose paths
         # and original masks remain available; the published reading stays compact.
         for result in reading['frozen_results']:
@@ -839,6 +864,10 @@ def run(root, out, args, context):
         progress.update(status='COMPLETE', inflight=None, reading=e.identity(out / 'reading.json', out),
                         declared_reader_counts=expected, native_worker_steps=1196000, worker_fits=3,
                         worker_optimizer_steps=615600)
+        if prefix:
+            progress.update(reused_prefix=prefix['identity'], reused_counts=reused_counts,
+                            new_frozen_checked=65, reused_frozen_checked=167,
+                            reused_training_rollouts_checked=135)
         publish()
         return progress
     except BaseException as exc:

@@ -1,0 +1,58 @@
+{
+  "schema": 1,
+  "kind": "saved_raw_motion_failure_reproduction",
+  "numpy": "1.26.3",
+  "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_a01/raw/frozen/O_109220001.npz",
+  "sha256": "15c26d9a22a8e038e4e5b806101103e72405854a3c37ca8d03ae73f015411e30",
+  "raw_shape": [
+    500,
+    6,
+    3
+  ],
+  "raw_dtype": "float64",
+  "raw_stride": [
+    144,
+    24,
+    8
+  ],
+  "reader_mismatch_components": 3,
+  "reader_mismatch_rows": 1,
+  "reader_max_error": 2.220446049250313e-16,
+  "copied_exact": true,
+  "copied_max_error": 0.0,
+  "copied_motion_exact": true,
+  "examples": [
+    {
+      "tick": 10,
+      "uav": 5,
+      "raw": [
+        0.6478229245445858,
+        -0.7603696056554017,
+        0.04651366713073793
+      ],
+      "saved": [
+        0.6478229245445857,
+        -0.7603696056554015,
+        0.04651366713073792
+      ],
+      "reader": [
+        0.6478229245445858,
+        -0.7603696056554017,
+        0.04651366713073793
+      ],
+      "copied": [
+        0.6478229245445857,
+        -0.7603696056554015,
+        0.04651366713073792
+      ],
+      "norm_view": 1.0,
+      "norm_copy": 1.0000000000000002,
+      "view_stride": [
+        8
+      ],
+      "view_alignment": 40,
+      "copy_alignment": 0
+    }
+  ],
+  "cpu_seconds": 0.013453582999999998
+}
