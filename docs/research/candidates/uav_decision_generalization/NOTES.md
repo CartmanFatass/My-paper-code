@@ -1936,3 +1936,34 @@ single-snapshot3GiB peak forecast. Full snapshot preparation uses configured
 `zsh -lic`; no remote sparse/HEAD/dirty-overlay changes. Actual admission and
 resource checks are still to occur after exact source publication. Selection
 and engineering acceptance are not launch acceptance or a result.
+
+
+<a id="b02-worker-accepted"></a>
+### B02 accepted worker — 2026-10-02 04:02 UTC
+
+Exact inputs were published as`e33a024ee0fc4258ba1ec9ac25fae811218b807f`.
+The configured `agent-task` preparation `dmgen-b02-cooperation-a01` finished
+exit0 after26s; it is only preparation, not native completion. Actual admitted
+worker acceptance is04:02:29.582314UTC on`wsl_4070`, from14,641,598,464B freshly
+available physical memory against4GiB floor. Native supervisor/runnerPIDs
+1309205/1309206 have matching boot/start identities in the
+[original manifest](../../../../runs/uav_decision_generalization/b02_cooperation_a01/launch-manifest.json).
+Operation/claim is
+`/home/wu/projects/HMASD/.git/hmasd-admission/cafd9b189a91f0d841fad8ae722641df904fb442b7e4d251dc8c50e06e0a31fc.json`;
+source snapshot is`.git/hmasd-launch-sources/bdb5d9b61c8e438eb07f1a833ab93dfa`;
+canonical output is
+`/home/wu/projects/HMASD/runs/uav_decision_generalization/b02_cooperation_a01`.
+The manifest,preflight and config were collected and SHA-verified against the
+canonical files; configSHA256
+`d1df7df988de2e2a16239bb1e189af225cfd2ebcf3f8f6f07497a67081b4f354`.
+No canonical checkpoint/raw was copied. Existing remote Git background-gc
+warning (`bad tree object dfe82c9813ee82191abb8385cc12a6886fd0a77b`) did not
+prevent exact source materialization/admission; no Git repair or sparse/HEAD
+change was attempted as part of this study.
+
+The assigning DM armed`tools/hmasd_wait.py` for this exact operation, job
+`b02-cooperation-a01`, generation1,45-second deterministic status probes and
+600-second checkpoint window. The first drained fact established accepted/
+running and consistent native identities, not a result. The native child stays
+active and will drain/rearm this same handle through terminal collection. Any
+correctness or one-CPU-hour stop preserves its prefix without automatic restart.
