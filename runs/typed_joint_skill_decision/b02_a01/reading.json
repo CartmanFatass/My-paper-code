@@ -5405,6 +5405,13 @@
     }
   },
   "manifest_sha256": "7f8edf2c0043cc38e92e2c4839c8d450d112512a2d402fc5f9889e7d3dd5b3c2",
+  "postcollection_aggregate_recheck": {
+    "interval_atol": 1e-08,
+    "mean_sd_se_t63_all_declared_comparisons": true,
+    "scalar_atol": 1e-10,
+    "scalars_checked": 258,
+    "source": "separate stdlib arithmetic from saved complete per-world.json; zero queries/fits"
+  },
   "posthoc_local_arithmetic_wall_seconds": 0.012752115995681379,
   "reading_scope": "Fixed saved-result arithmetic only. No additional native/static queries, fits, model forwards, or independent train replication. All worlds retained; sign counts use 1e-12 zero tolerance. Native branch values exist only for executed G/L/P layouts, not all three possible starts.",
   "schema": 1,

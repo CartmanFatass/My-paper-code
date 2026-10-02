@@ -2028,3 +2028,165 @@ arm or selected follow-up, nor proof that learning cannot help. A new learning
 attempt needs a reason to change consequential ordering beyond pointwise MSE
 and must pay a competent same-information ordinary comparison. No additional
 fit/query has been started while that substantive next choice is being made.
+
+
+<a id="b02-independent-disposition"></a>
+## 2026-10-01 PDT — complete original B02 independent result advice and DM disposition
+
+Reviewer `/root/dm_typed_joint_skill/b01_result_critic` continued its original
+independent context (UUID`01a0f8f3-a3f1-7f12-a0d9-d81a67c03d53`), not the
+Root's temporary constructive Oracle. The following is the complete unedited
+native `task_complete.payload.last_agent_message` from
+`/mnt/c/Users/fires/.codex/sessions/2026/10/01/rollout-2026-10-01T12-31-52-01a0f8f3-a3f1-7f12-a0d9-d81a67c03d53.jsonl`,
+line495, turn`01a0fa61-87f7-7891-911c-5f6417efbea3`.
+Original UTF8bytes11838; SHA256
+`17a50dbc685105b700ad5c1dc6c7ee9980e375990bf0807d4361d2965ba6fd68`.
+
+<!-- BEGIN ORIGINAL B02 RESULT CRITIC -->
+**Recommendation: stop this exact ridge recipe, retain the G/P quality–cost tradeoff, and favor completing the fixed 36-query prefix comparison as the next bounded investment.** B02 demonstrates parameter learning and some useful choices, but no established fresh-world selection benefit. Its failure is already visible in static branch ordering; flight consequences add another limitation rather than supplying the whole explanation.
+
+I reused my separate reviewer context and reconstructed the evidence before reading the DM’s published interpretation. I checked the prospective contract, source/configuration and terminal records; all training rows and saved predictions; all 64 fresh-world records; all 192 original native series; and all 64 original reference searches. I independently hash-checked the latter records and the temporary model/training/per-world files. For six consequential worlds, I read 12 complete raw traces and reconstructed coverage, routing membership, reward, team reward, RNG continuity, motion bounds and terminal arrival across 6,000 saved steps. No new evaluation, fit, test or edit occurred. I did not repeat the entire engineering reader or independently implement the radio model.
+
+The admitted operation completed at source `eb897c79a9bd8327d473d4c26ca788a4ac0f9f58`, with consistent exit zero and absent runner/supervisor identities. Collection records verify all 1,119 manifest artifacts; all 356,314 saved checks passed. These establish the declared current-source comparison. They do not establish historical/current runtime equivalence.
+
+The complete native and online observations are:
+
+| Program | H500 J | \(C_{\mathrm{bh}}\) | Cold decision seconds | Static calls/world |
+|---|---:|---:|---:|---:|
+| G = B | .531080 | .747046 | .931870 | 1,331.125 |
+| L | .529493 | .745182 | .960554 | 1,341.266 |
+| P | .537922 | .753615 | 1.365994 | 2,001.594 |
+
+L−G J is **−.001587**, with the declared paired-world 95% interval **[−.005935, +.002761]**; coverage is **−.001864 [−.017104, +.013375]**. L adds approximately 28.7 ms of cold decision time. These observations fail to establish useful increment for this artifact; they establish neither equivalence nor population inferiority.
+
+Learning occurred. Training gain MSE fell from .00343126 to .00027690, and training static regret fell from .01226625 to .00578976. Training selected reward improved over G by .00647650. Saved coefficient movement and normal-equation residuals support a completed, numerically accurate fit, not an inactive learner.
+
+The consequential generalization failure is more specific than “prediction did not improve”:
+
+- Fresh pooled gain MSE improves **68.7%**, from .00419289 to .00131398.
+- Fresh within-world-centered MSE **worsens 59.2%**, from .00030162 to .00048032.
+- Reduction of world-mean error accounts for **106.2% of the net pooled MSE improvement**; relative branch errors offset part of that improvement.
+- Fresh static L−G reward is **−.00269429**, with 13 gains, 21 losses and 30 equal outcomes. Regret increases from G’s .01194715 to L’s .01464143.
+
+Thus the fitted package predicts much of the common gain level without preserving the relative gains needed for selection. Training centered error improved, so useful relative fitting was possible on the archive; it did not carry through to the fresh panel. This supports ending this archive/basis/target recipe. It does not identify which representation, regularization, data or source difference caused that gap.
+
+This was an active intervention. L requested ranks 0/1/2 in 27/19/18 worlds. Its 37 nonzero-rank requests produced **34 different executed layouts**, with three layout aliases. Of G’s 29 best-static worlds, L loses that status in 13; among the other 35 worlds, L finds the best static outcome in 11. The native result has 14 gains, 20 losses and 30 exact ties. Neither nonactivation nor one exceptional world explains the adverse mean: removing any single world leaves its sign negative, although the full interval remains unresolved.
+
+The positive and adverse capabilities should remain explicit:
+
+- **107100031:** L selects rank 1 and matches P, gaining .048952 native J and .053448 static reward over G. Both transient and settled performance improve.
+- **107100021:** L selects rank 1 and loses .056683 native J and .066906 static reward against G. Its arrival is slightly earlier, so delayed arrival is not the explanation.
+- **107100048:** L correctly selects P’s best-static rank 2, gaining .014531 static reward but losing .036792 H500 J. Both layouts finish travel at step 117. L’s first-100-step J is .152305 versus G’s .328268: equal arrival time does not imply equal service along the route.
+- **107100006:** L gains .003636 J while losing .21916 coverage.
+- **107100059:** L gains .28524 coverage while losing .016814 J and approximately 381.39 mean frontend Mbps. These opposite tradeoffs prevent treating either headline metric as universal service improvement.
+- **107100034:** the declared incumbent rule activates. Rank 1 finishes at .575369, below rank-0 initial .582223; L executes that initial layout. The rule preserves the paid static incumbent, but L still trails G’s completed branch by .002586 native J.
+
+Static and native L−G signs agree in 25 of the 34 changed worlds and reverse in nine: four positive-static/negative-native and five negative-static/positive-native. Static ordering therefore matters substantially, but optimizing it does not fully specify the native objective. Switching immediately to a native target would not constitute an identified repair for the earlier ordering failure.
+
+Ordinary G is a useful retained capability. Relative to P it saves **33.5% of calls, 31.8% of cold decision time and 19.1% of complete child CPU**, while losing .006842 mean J **[−.011024, −.002659]**. Every world saves calls and measured decision time. G nevertheless beats P’s native J in nine worlds; P is a static-search reference, not a native oracle. L’s savings against P mostly reproduce this ordinary omission mechanism and cannot be credited to learning.
+
+The scope limits remain material. There is one fitted artifact and 64 independent training contexts, not 192 independent contexts or 64 fitted replications. Sixteen fresh feature rows across eight worlds leave a training coordinate range, but the largest adverse choices occur within those ranges. Every fresh initial potential is zero. These observations weaken a simple explanation based solely on conspicuous out-of-range inputs; they do not isolate the quadratic representation’s statistical behavior. Historical labels remain bound to the older source, whereas current-source branch and executor agreement passed. That unisolated version difference remains a limit, not an evidenced explanation of the loss.
+
+The measured scientific bill is **one fit, 102,000 native steps, 523,429 static calls and approximately 621.61 CPU-seconds**, with no new training-label queries or GPU work. I reconciled the static bill as 299,135 online main calls plus 224,294 reader calls. Peak incremental allocation was 1,958,223,872 bytes, including source and staging. The fit itself took about four milliseconds; that is not the experiment’s price. Subsequent reading and partly unmetered support remain additional, and the old 128,288 label-acquisition calls remain sunk exposure.
+
+For continuation, the fixed **36-query ordinary prefix rule now has stronger support than another ridge adjustment**. I applied exactly the previously proposed rule to B02’s already-paid reference histories: observe each start’s reward after 36 evaluations, choose the highest with lower-rank tie breaking, and continue that branch under its original share.
+
+Its projected static result is:
+
+- Q−G **+.00382746**, with 16 gains, five losses and 43 ties.
+- Static regret **.00811968**, versus G’s .01194715.
+- **90,257 complete online calls**, or 1,410.265625 per world: approximately 79 extra calls per world over G, assuming exact prefix continuation.
+
+This repeats the direction of the two older archive observations, without fitting another predictor. It supports the conjecture that a small amount of actual branch-progress information improves allocation. It does not establish native benefit or experience-trained assistance.
+
+For **57 of the 64 worlds**, Q’s selected layout exactly matches an already executed G/L/P layout. Those observed outcomes contribute a J-difference sum of +.128909, with 11 gains, four losses and 42 ties. Their coverage-difference sum is −.07772. **This is incomplete, selected coverage—not a Q result.**
+
+The seven missing native outcomes are:
+
+`107100000, 107100011, 107100025, 107100027, 107100032, 107100033, 107100036`.
+
+They include Q’s worst static loss, **−.037257 at 107100000**, as well as gains and a static tie with different geometry. They cannot be omitted or assigned zero native difference.
+
+I recommend a **new, explicitly declared completion study on this exposed 64-world panel**, rather than another fit or automatic fresh three-arm repetition. Execute and price Q’s actual online program on all 64 worlds; reuse existing native outcomes only after exact world, assigned-layout, executor and source identity checks; obtain all seven missing H500 outcomes. The minimum new scientific native work is therefore **3,500 steps**, plus whatever bounded correctness work is prospectively necessary. This is exploratory completion using exposed evidence, not fresh confirmation and not a retroactive B02 arm.
+
+The main feasibility issue is exact continuation. A 36-query prefix can stop inside a sweep. Resumption must preserve loop position, step schedule, accepted state, remaining original share and convergence semantics. Restarting descent from the prefix endpoint would define another policy. Likewise, online Q must pay its prefix queries; archived full-search outcomes may support the reader, never its online choice.
+
+Full cost comparison also needs care. Q-only timing against older G/P timings supports an absolute implementation measurement, not a matched latency difference. If that difference matters to adoption, run balanced **selection-only G/Q/P timing controls**, reusing the native G/P evidence. Their projected total selection calls are 303,551; necessary reader replay and audits must be added. A provisional budget of roughly **0.5 CPU-hour and 4–8 support hours** appears reasonable from B02, but the DM should close it against the chosen continuation/readback implementation. Support complexity may favor a simpler complete Q execution over aggressive reuse; minimizing native steps is not the only cost criterion.
+
+The outcomes would change an actual decision:
+
+- Useful native Q−G improvement at modest cost would retain an ordinary feedback-based allocation capability and strengthen the comparator for future experience use.
+- Static improvement without useful native consequences would end this Q use case and make another static-gain learner a poorly supported immediate investment.
+- Excess cost or service harm would favor retaining G/P for their distinct tradeoffs.
+- None would establish that learning cannot help. A later learner using prefix evidence would need to improve over Q at the same information boundary; B02 does not currently justify that fit.
+
+I agree with the DM’s published result diagnosis after comparing it with this reconstruction. The enduring question remains active; ending the ridge purchase is compatible with advancing a better-supported decision interface.
+
+**MATERIAL_DISSENT: no.** I support ending the exact ridge recipe and recommend the bounded Q completion above, preserving all seven missing/adverse outcomes and its exposed-panel scope. No new operation is authorized by this review.
+<!-- END ORIGINAL B02 RESULT CRITIC -->
+
+### DM response and continuation boundary
+
+I accept the exact-recipe stop, the separate G/P quality/compute capability,
+and the constructive recommendation. There is no material scientific dissent.
+The within-world error decomposition is now independently recomputed from the
+saved values and published in `reading.json`; all258 declared aggregate means,
+SD/SE and paired-comparison intervals were also recomputed by separate stdlib
+arithmetic. B02 was a functioning fitted intervention with mixed local effects;
+its pointwise prediction improvement did not become useful fresh selection.
+That narrows the explanation before flight without identifying a universal cause.
+Native transients and conflicting service components remain an additional,
+measured limitation, not a post hoc excuse replacing the ordering failure.
+
+The broader question remains exploring under this DM. I favor a new prospective
+complete fixed-Q comparison over another ridge/basis/target modification: actual
+search progress is a concrete additional legal input with repeated static support,
+whereas another initial-feature predictor currently lacks a supported change in
+consequential ordering. Q would establish an ordinary capability and a stronger
+same-information reference for later experience use, not a learned-method result.
+The seven missing/adverse outcomes must be purchased and all64 retained; the
+57 matched saved outcomes cannot alone be reported as Q's result. This does not
+extend or relabel B02. A separate B03 contract must fix exact paused-loop/resume
+semantics, alias identity and full online reader/timing costs before effects.
+
+The review's 0.5CPUh and4–8support-hours are provisional forecasts. For the
+concrete successor I am closing the source-only feasibility and exact byte-identity
+mapping; identical assigned target/world/executor/source is required to reuse a
+saved trajectory. Numerical near-equality is not an automatic native alias. If
+matched latency is bought, balanced fresh-process G/Q/P **selection-only** controls
+can be measured without repeating their already-known native episodes. Existing
+raw streams may verify all candidate/query/branch semantics but may not supply
+Q's online choices. No new Q operation, fit or outcome query has occurred.
+
+Root is independently using its temporary Oracle for cross-question next-work
+allocation; this does not replace this result review or make the helper an
+ongoing approval dependency. Any overlap/material question pivot returns to Root;
+ordinary in-scope implementation, publication and admission remain the DM's work.
+
+### Measured B02 disposable-resource retirement
+
+After complete publication and hash verification, the maintained exact-target
+snapshot collector preview and apply both passed, using the already-authorized
+read-only elevated process scan. Deleted only source snapshot
+`hmasd-wsl-node:/home/wu/projects/HMASD/.git/hmasd-launch-sources/aae959bd3245421eb0cf20182351da63`
+(1,793,310,720 allocated bytes). Native identities were terminal, no live source
+consumer existed, and exact source remains published in Git.
+
+Both local original and staged64 archived input files were individually checked
+against the published B02 manifest. No live command used the staging input root.
+Deleted the redundant
+`hmasd-wsl-node:/home/wu/hmasd-inputs/typed_joint_skill_decision/b02_archive`
+(21,684,224 allocated bytes), preserving every Claude-owned original and required
+B02 model/training row. Both exact targets are absent. The measured combined
+allocation falls1,959,694,336 →144,699,392bytes: **1,814,994,944net bytes reclaimed**.
+The remaining144,699,392bytes are the canonical full B02 outputs, claim/manifest
+and evidence; these remain necessary for the result and contemplated exact reuse.
+
+The post-termination pre-cleanup total1,959,694,336 is slightly above the runner's
+last sampled peak1,958,223,872 because final diagnostic/summary writes followed
+its sample. Both are below the2GiB ceiling; the reported sampled peak is not a
+claim of byte-exact continuous disk monitoring. No global Git GC/repack/ref edit,
+canonical checkout change, package/profile change or other direction's deletion
+was made. No cleanup tool blocker remains. Local review scratch and useful
+prospective reuse code await the immediate continuation decision; no redundant
+bulk copy is being made as a cleanup condition.
