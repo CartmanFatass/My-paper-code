@@ -3725,3 +3725,241 @@ native transitions**; the431145-or-more saved static radio evaluations are real
 work. Keep that qualification in future summaries. Technical reading is complete;
 any further system-evidence work is a concrete Root-coordinated dependency, not a
 pending automatic scientific continuation.
+
+
+<a id="b04-measured-cleanup"></a>
+## 2026-10-02 UTC — failed-operation source/scratch cleanup completed
+
+The maintained actual-node collector first refused protected`/proc/660/cwd`
+inspection. Its existing read-only`--sudo-process-scan`route then verified the
+terminal claim, published durable source, absent live consumers, externally
+retained outputs and clean snapshot; apply removed exactly
+`ec8727c4c6d6404ab539eec55cc8a0ec`. Measured scope fell3601244160→1789431808B,
+**1811812352B net reclaimed**;43 original evidence-file digests, all direction
+runs and the single retained model remained identical. The[preview](../../../../runs/typed_joint_skill_decision/b04_a01/cleanup-preview.json)
+and[actual measurement](../../../../runs/typed_joint_skill_decision/b04_a01/remote-cleanup.json)
+are retained. No shared Git-object cleanup, interpreter or canonical overlay edit.
+
+Local stopped generation2 observer and launch/control scratch were also deleted
+only after verifying no matching daemon. Their45056B allocation was replaced by
+one4096B compact receipt: **40960B net local reclamation**. The exact deleted
+paths and retained reader-source identity are in[local-cleanup.json](../../../../runs/typed_joint_skill_decision/b04_a01/local-cleanup.json).
+Useful B04 source/tests/manifest remain published for the unresolved question;
+all unique partial/adverse data remain in one original node copy. No whole-tree
+backup or duplicate data package was created for cleanup.
+
+<a id="b04-existing-core-forensics"></a>
+## 2026-10-02 UTC — bounded existing-core investigation; no new effect
+
+Root selected one finite read-only system-evidence task after the technical
+terminal. We found the exact existing WSL capture under
+`/mnt/c/Users/wu/AppData/Local/Temp/wsl-crashes/`, filename
+`wsl-crash-1790919914-1318047-_home_wu_.local_opt_hmasd-cpython-3.10.21-gcc_bin_python3.10-11.dmp`.
+Its[immutable metadata/hash reading](../../../../runs/typed_joint_skill_decision/b04_a01/existing-core-identity.json)
+records638087168 logical and DrvFs allocated bytes,mtime1790919921.2095013,
+SHA256`c3f0dc6f88534beec4260dc0d4ca14fc9bb73e63c257637a5cc25a4760056aa5`.
+It is an original automatically generated Windows artifact, not a second run or
+a copied retention package. That extra638087168B lay **outside** the original
+explicit Linux disk-scope counter; it is now added to the actual full cost record.
+The post-terminal two-filesystem footprint before source reclamation was
+4239331328B by reconstruction, not continuous peak telemetry. The core remains
+at its original temporary location; no permanent-retention guarantee is invented.
+
+Artifact lookup examined only the named crash/report roots and top-level Temp
+metadata. One WER subentry was permission denied, so that store was not
+exhaustively ruled out. The exact matching WSL core was found without requiring
+that exclusion. Unrelated application dump names were omitted from compact
+published metadata. No core copy, tool installation, configuration change,
+interpreter execution probe or new teacher/native/model/fit effect occurred.
+
+The original complete engineering answer follows mechanically from native
+`task_complete`, not a rewritten summary. Provenance: rollout
+`rollout-2026-10-01T08-23-15-01a0f810-0818-74f0-b103-1654ae954025.jsonl`,
+line1358/ordinal1357,turn`01a0fb46-3b93-7ff0-adfc-bd19f674d2ed`,
+completed2026-10-02T06:30:54.614Z;4791UTF8bytes,SHA256
+`e8f41b11e81ee30b38f147b5f9b8959ce74533a1b796a54d7c55135604ec1c8c`.
+Exact commands and original returned output, including unsuccessful read attempts,
+are preserved in[core-read-evidence.json](../../../../runs/typed_joint_skill_decision/b04_a01/core-read-evidence.json).
+
+<!-- BEGIN exact B04 bounded core/ELF engineering answer -->
+**现存 core 已把该崩溃状态绑定到 runner 1318047，并把活动 Python 路径定位到 journal 的数据转换/编码阶段；仍不能确定坏指针的来源或提出有证据支持的代码修复。**
+
+只读取了指定的一个 core：
+`/mnt/c/Users/wu/AppData/Local/Temp/wsl-crashes/wsl-crash-1790919914-1318047-_home_wu_.local_opt_hmasd-cpython-3.10.21-gcc_bin_python3.10-11.dmp`。
+
+**身份与指令证据：**
+
+- GDB 从 core 得到唯一 LWP `1318047`、SIGSEGV、`si_code=1`、`si_addr=0x1`。RIP、日志列出的全部通用寄存器和 EFLAGS 均与 kernel PID `1328707` 那条记录一致。这支持“同一崩溃状态”的绑定；两种 PID 数值之间的 namespace/转换机制仍未重建。
+- 当前 executable SHA256 为 `039033f129d33a69044ceff71ca87b109ad99d511b59946f81ffc3f728b1a3a1`，与崩溃前 [deployment.json:31](/home/fires/hmasd-wsl/runs/runtime_repair/cpython_20260930/deployment.json:31)、[diagnosis.json:50](/home/fires/hmasd-wsl/runs/runtime_repair/cpython_20260930/diagnosis.json:50) 一致。
+- 当前 GNU Build ID 为 `29a513003f3f7f648ed30b7706d9cfeb771aebce`。core 的首个 executable ELF 页确实保存了该 Build ID：`PT_LOAD` 文件偏移 `0x15000`、保存长度 `0x1000`；从 core 偏移 `0x15378` 直接读取的20字节完全相同。因此不只是用当前文件哈希倒推崩溃身份。
+- executable 的代码段在 core 中 `FileSiz=0`。代码字节证据来自 kernel 摘录与当前 ELF 的一致，而不是完整的 core-resident 代码；没有建立整个崩溃时内存映像的哈希等价。
+
+地址计算为：
+
+```text
+RIP                       0x5b0a78c48774
+kernel executable映射起点 0x5b0a78bf2000
+段内偏移                  0x56774
+ELF R-X PT_LOAD地址        0x58000
+ELF虚拟地址                0xae774
+```
+
+`nm` 将其定位到 `_PyTuple_FromArray+0x34`；`addr2line` 返回内联 `_Py_INCREF`（`Include/object.h:472`），位于 `Objects/tupleobject.c:473`。指令为：
+
+```text
+ae770: mov  (%r12,%rdx,8),%rcx
+ae774: addq $1,(%rcx)
+```
+
+core 中 `RCX=1、RDX=0、R12=0x75ee2a1a66c0`，该输入地址的首个机器字确为 `1`。这确定了立即失败的非法引用计数访问，**没有确定是谁写入了这个值**。
+
+**有限调用栈：**
+
+C unwind 到 `_PyTuple_FromArray → _PyEval_MakeFrameVector` 后出现未知/无效帧，不能继续相信优化后的参数。该 C 帧显示的 `tstate` 与实际 runtime 当前指针不一致。
+
+从 `_PyRuntime.gilstate.tstate_current=0x5b0a8dbd4350` 读取的 Python 帧链则连续可读，共15帧：
+
+```text
+evidence.plain 的 listcomp/dictcomp 递归（帧0–9）
+→ evidence.encoded      firstlineno=42,  f_lasti=4
+→ Trace.write           firstlineno=168, f_lasti=11
+→ bank.build_bank       firstlineno=50,  f_lasti=109
+→ run.main
+→ run模块
+→ NULL
+```
+
+文件路径均指向 admitted snapshot `ec8727c4c6d6404ab539eec55cc8a0ec`。这些是代码起始行和指令位置，不能把它们冒充已解码的当前源码行。
+
+因此，可以将此前宽泛的失败边界收窄到 **journal 行进入 `encoded()` 后的递归 `plain()` 转换**，而不是 core 中正在执行 static physics 的帧。但没有读取出这条行的 world/type；不能把最后保存的 `109402501/165 labels` 直接当作崩溃行，更不能将普通 Python 转换函数认定为内存破坏原因。原有计数下界和末尾缓冲不确定性保持不变。
+
+实际命令均经 `ssh hmasd-wsl-node`，外层及远端分别使用 `/usr/bin/time`。主要读取命令为：
+
+```sh
+readlink -f "$exe"
+stat -Lc 'path=%n size=%s inode=%i mtime=%y ctime=%z' "$exe"
+sha256sum "$exe"
+readelf -h -l -n "$exe"
+addr2line -f -C -i -e "$exe" 0xae774
+objdump -d --start-address=0xae740 --stop-address=0xae7b0 "$exe"
+nm -n "$exe" | grep -E '^00000000000ae[0-9a-f]{3} '
+file "$core"
+readelf -lW "$core"
+readelf -n "$core"
+dd if="$core" bs=1 skip=86904 count=20 status=none | od -An -tx1
+```
+
+GDB 均采用以下只读配置，执行 `info threads/proc mappings/registers`、`bt 20`、`p $_siginfo`、指定内存读取及上述有界帧字段读取；没有 `run`、`call` 或目标内存写入：
+
+```sh
+gdb -nx -nh -q -batch \
+  -iex 'set auto-load off' \
+  -iex 'set debuginfod enabled off' \
+  -iex 'set history save off' \
+  ... "$exe" "$core"
+```
+
+计入全部成功及失败的查看命令，`time` 显示的远端 CPU 合计 **19.95秒**（user 17.69、system 2.26），本地命令/SSH CPU **0.56秒**。远端各组 wall 合计7.51秒。包含一次 GDB 多行 `-ex` 语法失败、一次 `/dev/stdin` 命令源不支持，以及帧链末端越过 NULL 后的读取错误；均未执行目标程序。
+
+没有复制 core/bulk、安装工具、改变设置、编辑文件或开展任何实验。取证到此结束。
+<!-- END exact B04 bounded core/ELF engineering answer -->
+
+
+DM disposition after reading the whole answer and its original command outputs:
+the same-crash/core/executable binding and the serialization-path localization
+are supported. The unsupported extrapolation would be to call ordinary`plain()`
+logic defective, to name CPython or a package as root cause, or to equate the last
+saved row with the faulting row. No such correction is selected. The bounded
+existing-core task is now **finished**, with no further automatic search/replay.
+The latest core provides a stronger location than the initial terminal reading,
+but does not recover final work counters or authorize continuation of B04.
+
+I also read the complete existing[2026-09-30 diagnosis](../../../../runs/runtime_repair/cpython_20260930/diagnosis.json)
+and[deployment record](../../../../runs/runtime_repair/cpython_20260930/deployment.json).
+The oldCPython3.10.21 Clang22.1.3/PBS runtime failed in`PyErr_Format`while
+DECreffing a pre-existing exception pointer7. This same-version GCC13.3.0 build
+(`-O2 -g -fno-omit-frame-pointer`,noPGO/LTO) now fails while INCREFing a tuple
+input pointer1. Different invalid low object pointers and contexts are not a
+shared-cause diagnosis. Both old/new bounded historical replays passed; the
+compiler replacement was expressly provisional and not cause isolation.
+Current recurrence establishes that the mitigation did not ensure elimination
+of crashes. It does not establish that the old failure and this one share a
+writer, that the compiler change was useless, or that every operation is invalid.
+No contemporaneous hardware/load evidence here settles the owner's older thermal
+hypothesis. Scientific runtime suitability needs an explicit Root judgment;
+“shared runtime repaired” is not a supported premise.
+
+Measured read costs remain separate from failed scientific work: the original
+terminal-data reconstruction5.214888remote CPU-s; core/ELF Reviewer19.95remote
+CPU-s plus0.56local command/SSH CPU-s (including failed viewing commands);
+artifact metadata scan0.38remote CPU-s; core hash0.367027remote CPU-s; local
+runtime file metadata0.036994CPU-s. Initial shell metadata commands rounded below
+0.01s at their time precision. Unmetered coordination/agent support is unknown,
+not zero; these command figures are not a whole-session support-hour measurement.
+The exact automatic-core cost and all zero-effect limits above remain explicit.
+
+<a id="b04-runtime-next-choice"></a>
+### Proposed engineering next observation — not selected or executed
+
+Root asked for a concrete distinction between ordinary-data reproduction and an
+available alternative runtime. My recommendation is one bounded **two-process
+serialization comparison**, not a repeat of B04. It would use only the1025 intact
+JSON records recovered from the bound partial journal, in original order and
+with original line-byte identities; it would not synthesize the missing tail or
+use a training-bank prefix as a learning result. Call the exact source-bound
+`encoded()`/`plain()`path on a freshly decoded ordinary row, check exact encoded
+bytes, and record attempted/completed ordinal and digest. No host/native/radio,
+NumPy/Torch/model, world RNG or teacher is needed for this proposed program.
+
+The two configured executions would be current`wsl_4070`GCC3.10.21 and
+`local_linux`'s already present CPython3.10.20. Source-only file metadata confirms
+the latter resolves to`/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10`,
+SHA256`3303d2b5dc566818e412d2b5b6cd8e792bd360865da47593429a635f72668226`,
+with installed NumPy1.26.3/Torch2.7.0+cpu metadata. This is[existing file evidence](../../../../runs/typed_joint_skill_decision/b04_a01/existing-local-runtime-metadata.json),
+not a new import/compatibility/throughput test. The existing32pure/mock B04 tests
+used that configured CPU interpreter; they establish no CUDA/native learning
+compatibility. Host and interpreter differ in this proposed comparison, so a
+difference would be a package/node observation, not compiler-cause attribution.
+
+Prospective maximum: one process per configured node,1000chronological cycles
+of1025records each, **2050000 total encode attempts**, stopped earlier at300CPU-s
+or600wall-s per process with partial/failure evidence; no retry or cycle increase.
+The stop amount must be reported, not called a complete fixed-count pass if a cap
+intervenes. Source publication/admission and a narrow independent engineering
+review precede any execution. Price:0fits/forwards/teacher/static/native steps;
+≤600CPU-s combined worker ceiling and20min combined wall ceilings; support
+forecast1–2h; one116876B bound input plus≤32MiB ordinary records/outputs. Complete
+source snapshots forecast~1.81GB per node (~3.62GB aggregate temporary source),
+then measured cleanup. Proposed process address-space cap512MiB and per-node
+incremental disk cap3GiB include that snapshot, compact records/staging and up to
+1GiB allowance for one automatically captured failure core; both nodes together
+≤6GiB incremental temporary allocation. Core generation and shared Git hydration
+must be measured separately; a bound/compatibility failure ends that process and
+is retained. Existing retained B04/model/core bytes remain separately visible,
+not charged as newly created bytes. No new profile/package/model object is needed
+for that comparison. These are proposal prices, not measured replay costs or
+permission to execute.
+
+Its discriminating value is limited but concrete. A failure on this pure-data
+path would establish that active teacher/physics/model calls are not necessary
+for that reproduction and provide a compact engineering case. A node difference
+could guide further compatibility work without identifying its causal component.
+Both passing would weaken the claim that ordinary row content plus this path is
+sufficient under the bounded exposures; it would **not** exclude earlier native
+heap damage, a different missing row, rare runtime/hardware faults or justify B04
+retry. This comparison deliberately does not recreate the B04 process's preceding
+430k-plus physics calls or exact object/heap lifetime. Negative replay is not a
+new universal-health gate or reason for an unbounded diagnostic series.
+
+Alternative deployment judgment from current evidence: the old Clang3.10.21
+runtime is present but already has adverse evidence; rollback is not an established
+repair. The local3.10.20 CPU runtime is a real engineering comparator and a
+possible future CPU-data/evaluation resource, but **cannot execute the unchanged
+CUDA-bound B04 contract**. Native numerical/reset/source compatibility, final
+checkpoint/scorer equivalence, cost of full CPU work and a suitable GPU runtime
+remain unmeasured for a changed deployment. The original B04 manifest expressly
+pins Python3.10.21,Torch2.7.0+cu118 andcuda:0. There is no evidenced drop-in
+alternative for the whole selected six-fit study, and no authority here to copy
+an interpreter, reinstall Laya, alter profiles or repartition the scientific
+operation. Root owns that next execution/investment choice; the learning question
+and all prior evidence remain with this DM.

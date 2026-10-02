@@ -1,0 +1,41 @@
+{
+  "command": "/usr/bin/time -f 'READ_CPU user=%U system=%S wall=%e rss=%M' /home/wu/.venvs/hmasd-gcc-31021/bin/python -",
+  "exit": 0,
+  "stderr": "READ_CPU user=0.08 system=0.30 wall=4.76 rss=11040\n",
+  "observations": [
+    {
+      "root": "/mnt/c/Users/wu/AppData/Local/CrashDumps",
+      "entry_count": 10,
+      "matching_B04_names": [],
+      "latest_mtime_epoch": 1789310847.281662,
+      "unrelated_filenames_omitted": true
+    },
+    {
+      "root": "/mnt/c/ProgramData/Microsoft/Windows/WER/ReportArchive",
+      "limitation": "A child entry was permission denied; this root was not exhaustively excluded. No contents of unrelated reports were read."
+    },
+    {
+      "root": "/mnt/c/ProgramData/Microsoft/Windows/WER/ReportQueue",
+      "entry_count": 2,
+      "matching_B04_names": [],
+      "latest_mtime_epoch": 1722960312.3120449,
+      "unrelated_filenames_omitted": true
+    },
+    {
+      "root": "/mnt/c/Users/wu/AppData/Local/Temp",
+      "top_level_entries_examined": 4504,
+      "filter": "name wsl/crash/python or modification after1790919540",
+      "found_directory": "/mnt/c/Users/wu/AppData/Local/Temp/wsl-crashes",
+      "existing_core_count": 5,
+      "matching_B04_core": [
+        {
+          "name": "wsl-crash-1790919914-1318047-_home_wu_.local_opt_hmasd-cpython-3.10.21-gcc_bin_python3.10-11.dmp",
+          "bytes": 638087168,
+          "mtime_epoch": 1790919921.2095013,
+          "is_dir": false
+        }
+      ]
+    }
+  ],
+  "scope": "Metadata only; unrelated application crash filenames omitted from retained compact evidence."
+}

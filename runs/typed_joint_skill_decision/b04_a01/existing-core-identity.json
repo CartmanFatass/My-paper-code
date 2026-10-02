@@ -1,0 +1,17 @@
+{
+  "path": "/mnt/c/Users/wu/AppData/Local/Temp/wsl-crashes/wsl-crash-1790919914-1318047-_home_wu_.local_opt_hmasd-cpython-3.10.21-gcc_bin_python3.10-11.dmp",
+  "bytes": 638087168,
+  "allocated_bytes": 638087168,
+  "mtime_epoch": 1790919921.2095013,
+  "ctime_epoch": 1790919921.2095013,
+  "sha256": "c3f0dc6f88534beec4260dc0d4ca14fc9bb73e63c257637a5cc25a4760056aa5",
+  "first_64_bytes_hex": "7f454c4602010100000000000000000004003e000100000000000000000000004000000000000000000000000000000000000000400038000c02000000000000",
+  "stable_size_mtime": true,
+  "no_copy_or_mutation": true,
+  "scope": "existing WSL automatic Windows core artifact; additional to previously declared Linux scope; not a second scientific operation",
+  "read_cost": {
+    "cpu_seconds": 0.367026549,
+    "wall_seconds": 2.0666048999410123,
+    "peak_rss_kib": 29440
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "before": {
+    "source": 1811812352,
+    "direction_runs": 943181824,
+    "retained_model": 846249984,
+    "direction_scratch": 0
+  },
+  "after": {
+    "source": 0,
+    "direction_runs": 943181824,
+    "retained_model": 846249984,
+    "direction_scratch": 0
+  },
+  "net_scoped_allocated_bytes_reclaimed": 1811812352,
+  "collector": {
+    "mode": "apply",
+    "snapshots": [
+      {
+        "claim": "/home/wu/projects/HMASD/.git/hmasd-admission/3e4367a5d2791d7e143f7ddd6cabe98f7d781b977e30ec5f43b20cccd824e0de.json",
+        "durable_ref": "refs/remotes/origin/HEAD",
+        "eligible": true,
+        "output": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b04_a01",
+        "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/ec8727c4c6d6404ab539eec55cc8a0ec",
+        "removed": true,
+        "sha": "b19508a5c2825359e66a36b4fdc1db68b60cc809",
+        "snapshot": "ec8727c4c6d6404ab539eec55cc8a0ec"
+      }
+    ]
+  },
+  "preserved_evidence_files": 43,
+  "preserved_all_digest_equality": true,
+  "source_path_absent": true,
+  "scope": "exact source plus all direction runs/model/scratch; shared Git object store not reclaimed"
+}

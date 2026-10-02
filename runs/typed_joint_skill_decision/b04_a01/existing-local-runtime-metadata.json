@@ -1,0 +1,20 @@
+{
+  "kind": "existing_file_metadata_only",
+  "pyvenv_cfg": "home = /home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin\nimplementation = CPython\nuv = 0.12.5\nversion_info = 3.10.20\ninclude-system-site-packages = false\n",
+  "configured_python": "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+  "resolved_executable": "/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10",
+  "exe_sha256": "3303d2b5dc566818e412d2b5b6cd8e792bd360865da47593429a635f72668226",
+  "packages": {
+    "numpy": {
+      "path": "/home/fires/.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/numpy-1.26.3.dist-info/METADATA",
+      "version": "1.26.3"
+    },
+    "torch": {
+      "path": "/home/fires/.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/torch-2.7.0+cpu.dist-info/METADATA",
+      "version": "2.7.0+cpu"
+    }
+  },
+  "no_runtime_execution": true,
+  "read_cpu_seconds": 0.036994467,
+  "read_wall_seconds": 0.0456725429976359
+}

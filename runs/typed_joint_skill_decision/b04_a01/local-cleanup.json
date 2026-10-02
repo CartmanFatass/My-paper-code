@@ -1,0 +1,15 @@
+{
+  "deleted_targets": {
+    "/home/fires/hmasd-wsl/temp/directions/typed_joint_skill_decision/b04-observer": 12288,
+    "/home/fires/hmasd-wsl/temp/directions/typed_joint_skill_decision/b04-control": 32768
+  },
+  "observer_generation": 2,
+  "observer_stopped": true,
+  "recorded_daemon_pid": 439617,
+  "matching_live_observer": false,
+  "all_pending_events_consumed": true,
+  "preserved_reconstruction_source_sha256": "1c7c5dbbc472604d4e105dd4ba7cf3afeedc5ccc12f04ccefa456348993b0d26",
+  "targets_absent": true,
+  "new_receipt_allocated_bytes": 4096,
+  "net_allocated_bytes_reclaimed": 40960
+}

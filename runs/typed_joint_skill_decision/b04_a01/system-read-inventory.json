@@ -1,0 +1,41 @@
+{
+  "crash_helper_metadata": {
+    "argv": [
+      "/usr/bin/time",
+      "-f",
+      "READ_CPU user=%U system=%S wall=%e rss=%M",
+      "/bin/sh",
+      "-c",
+      "ls -l /wsl-capture-crash; file /wsl-capture-crash; readlink -f /wsl-capture-crash; cat /proc/sys/kernel/core_pattern; cat /proc/sys/kernel/core_uses_pid"
+    ],
+    "exit": 0,
+    "stdout": "/wsl-capture-crash: cannot open `/wsl-capture-crash' (No such file or directory)\n/wsl-capture-crash\n|/wsl-capture-crash %t %E %p %s\n0\n",
+    "stderr": "ls: cannot access '/wsl-capture-crash': No such file or directory\nREAD_CPU user=0.00 system=0.00 wall=0.01 rss=2400\n"
+  },
+  "available_windows_interfaces": {
+    "argv": [
+      "/usr/bin/time",
+      "-f",
+      "READ_CPU user=%U system=%S wall=%e rss=%M",
+      "/bin/sh",
+      "-c",
+      "command -v cmd.exe powershell.exe wsl.exe; ls -ld /mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe /mnt/c/Windows/System32/cmd.exe /mnt/c/Users/*/AppData/Local/CrashDumps /mnt/c/ProgramData/Microsoft/Windows/WER/ReportArchive /mnt/c/ProgramData/Microsoft/Windows/WER/ReportQueue"
+    ],
+    "exit": 0,
+    "stdout": "drwxrwxrwx 1 wu wu    512 Oct  2 02:01 /mnt/c/ProgramData/Microsoft/Windows/WER/ReportArchive\ndrwxrwxrwx 1 wu wu    512 Oct  2 02:01 /mnt/c/ProgramData/Microsoft/Windows/WER/ReportQueue\ndrwxrwxrwx 1 wu wu    512 Sep 13 22:47 /mnt/c/Users/wu/AppData/Local/CrashDumps\n-r-xr-xr-x 2 wu wu 495616 Sep  9 02:03 /mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe\n-r-xr-xr-x 2 wu wu 344064 Sep  9 02:03 /mnt/c/Windows/System32/cmd.exe\n",
+    "stderr": "READ_CPU user=0.00 system=0.00 wall=0.02 rss=2560\n"
+  },
+  "current_namespace_metadata": {
+    "argv": [
+      "/usr/bin/time",
+      "-f",
+      "READ_CPU user=%U system=%S wall=%e rss=%M",
+      "/bin/sh",
+      "-c",
+      "cat /proc/self/status; readlink /proc/self/ns/pid; readlink /proc/1/ns/pid; cat /proc/1/status"
+    ],
+    "exit": 0,
+    "stdout": "Name:\tcat\nUmask:\t0002\nState:\tR (running)\nTgid:\t1319434\nNgid:\t0\nPid:\t1319434\nPPid:\t1319433\nTracerPid:\t0\nUid:\t1000\t1000\t1000\t1000\nGid:\t1000\t1000\t1000\t1000\nFDSize:\t64\nGroups:\t4 24 27 30 46 100 989 1000 \nNStgid:\t1319434\nNSpid:\t1319434\nNSpgid:\t1319432\nNSsid:\t1319432\nKthread:\t0\nVmPeak:\t    3272 kB\nVmSize:\t    3272 kB\nVmLck:\t       0 kB\nVmPin:\t       0 kB\nVmHWM:\t    1600 kB\nVmRSS:\t    1600 kB\nRssAnon:\t       0 kB\nRssFile:\t    1600 kB\nRssShmem:\t       0 kB\nVmData:\t     360 kB\nVmStk:\t     132 kB\nVmExe:\t      20 kB\nVmLib:\t    1752 kB\nVmPTE:\t      48 kB\nVmSwap:\t       0 kB\nHugetlbPages:\t       0 kB\nCoreDumping:\t0\nTHP_enabled:\t1\nuntag_mask:\t0xffffffffffffffff\nThreads:\t1\nSigQ:\t1/63165\nSigPnd:\t0000000000000000\nShdPnd:\t0000000000000000\nSigBlk:\t0000000000000000\nSigIgn:\t0000000000000000\nSigCgt:\t0000000000000000\nCapInh:\t0000000000000000\nCapPrm:\t0000000000000000\nCapEff:\t0000000000000000\nCapBnd:\t000001ffffffffff\nCapAmb:\t0000000000000000\nNoNewPrivs:\t0\nSeccomp:\t2\nSeccomp_filters:\t1\nSpeculation_Store_Bypass:\tthread vulnerable\nSpeculationIndirectBranch:\tconditional enabled\nCpus_allowed:\tfffff\nCpus_allowed_list:\t0-19\nMems_allowed:\t00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000001\nMems_allowed_list:\t0\nvoluntary_ctxt_switches:\t0\nnonvoluntary_ctxt_switches:\t0\npid:[4026532225]\nName:\tsystemd\nUmask:\t0000\nState:\tS (sleeping)\nTgid:\t1\nNgid:\t0\nPid:\t1\nPPid:\t0\nTracerPid:\t0\nUid:\t0\t0\t0\t0\nGid:\t0\t0\t0\t0\nFDSize:\t256\nGroups:\t \nNStgid:\t1\nNSpid:\t1\nNSpgid:\t1\nNSsid:\t1\nKthread:\t0\nVmPeak:\t   22444 kB\nVmSize:\t   22316 kB\nVmLck:\t       0 kB\nVmPin:\t       0 kB\nVmHWM:\t   12436 kB\nVmRSS:\t    7288 kB\nRssAnon:\t    3172 kB\nRssFile:\t    4116 kB\nRssShmem:\t       0 kB\nVmData:\t    3272 kB\nVmStk:\t     132 kB\nVmExe:\t      44 kB\nVmLib:\t   12208 kB\nVmPTE:\t      84 kB\nVmSwap:\t       0 kB\nHugetlbPages:\t       0 kB\nCoreDumping:\t0\nTHP_enabled:\t1\nuntag_mask:\t0xffffffffffffffff\nThreads:\t1\nSigQ:\t2/63165\nSigPnd:\t0000000000000000\nShdPnd:\t0000000000000000\nSigBlk:\t7fefc1fe28014a03\nSigIgn:\t0000000000001000\nSigCgt:\t00000000000004ec\nCapInh:\t0000000000000000\nCapPrm:\t000001ffffffffff\nCapEff:\t000001ffffffffff\nCapBnd:\t000001ffffffffff\nCapAmb:\t0000000000000000\nNoNewPrivs:\t0\nSeccomp:\t2\nSeccomp_filters:\t1\nSpeculation_Store_Bypass:\tthread vulnerable\nSpeculationIndirectBranch:\tconditional enabled\nCpus_allowed:\tfffff\nCpus_allowed_list:\t0-19\nMems_allowed:\t00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000001\nMems_allowed_list:\t0\nvoluntary_ctxt_switches:\t1148569\nnonvoluntary_ctxt_switches:\t4849\n",
+    "stderr": "READ_CPU user=0.00 system=0.00 wall=0.00 rss=1600\n"
+  }
+}
