@@ -1215,3 +1215,478 @@ The [shared learning/representation topic](../../RESEARCH.md#learning-representa
 now records this finite-data capability, the training-fit reversal and the
 unresolved ordinary finite-optimization explanation. The own direction standing ends this fixed purchase and preserves
 the long-lived question and unselected continuation choices above.
+
+
+<a id="b02-source-and-prospective-cooperation"></a>
+## B02 source reconstruction and prospective frozen-policy cooperation
+
+2026-10-02 UTC / 2026-10-01 PDT. **Design for one independent selection review;
+no new fit, controller/model query, native episode or implementation has begun.**
+Root assigned this DM the development of the demonstrated conditional S_L0/S_L1
+capability with ordinary control. This is a new complete-use comparison within
+the continuing learned-decision question, not another A/R fit, a reopening of
+B06 cadence, or a takeover of the peer-owned adaptation/transmission directions.
+The namespace remains `uav_decision_generalization`; all A/R findings, endpoints,
+adverse cases and measured costs above remain unchanged.
+
+I read the complete temporary Oracle's
+[rolling successor advice](../../archive/2026-10-01/RESEARCH-three-dm-rolling-successors.md)
+(published `6bcb1a69e7dcff8f83e675baa3d153167ce626bb`), including its proposed
+eight-program comparison. The original answer is 10,508 UTF-8 bytes, SHA256
+`268559deeeca08a5afc029aaeb58421d3a7224a2fbc022fd473cd12746d71032`, actual turn
+`01a0fa64-fe2d-7b40-aefc-fe8234562fce`, Astra/max as verified by Root. It is a
+proposal, not independent evidence or an ongoing approval role. Root has assigned
+the actual independent selection to `/root/next_study_review`, which independently
+reconstructed original B05/B06 sources and raw traces before reading that advice.
+This notebook entry supplies the closed comparison for that same review. No
+second scientific review, activation pilot or extra fit is requested.
+
+### Question, inherited evidence and the competing ordinary explanation
+
+Can a frozen learned local decision module retain its useful coverage behavior
+while a fixed lawful switch to ordinary navigation improves complete service and
+continuity on new missions? The contribution sought is conditional usefulness of
+the combined control program. It is not a new learning algorithm, an identified
+cause of old outages, special value of history, a safety guarantee or a claim
+that a teacher must repair its student.
+
+The relevant current background is the shared
+[learning/finite-data topic](../../RESEARCH.md#learning-representation-finite-data)
+and the N5 sampled-policy/cadence evidence in RESEARCH topics 2 and 4. A/R retained
+a finite-data learned capability but did not establish deployment superiority or
+pure structure causality. Here the load-bearing positive assets are instead the
+two original local S policies. Their legal information, task, reward and costs
+are different from A/R; their J values must not be subtracted across hosts.
+
+I read the complete original B05 contract, results and independent disposition,
+and B06 source assessment, contract, results and original independent diagnosis:
+[B05](../uav_fleet_transmission/NOTES.md#b05-complete-reading),
+[B05 independent disposition](../uav_fleet_transmission/NOTES.md#b05-independent-disposition),
+[B06](../uav_fleet_transmission/NOTES.md#b06-complete-reading),
+[B06 independent disposition](../uav_fleet_transmission/NOTES.md#b06-independent-disposition).
+The original adaptation acquisition/recurrence contracts and asset bindings were
+also read. The following inherited findings affect this design:
+
+- On B05's 32 paired fresh worlds, S_L1−G J was +.023431 with descriptive interval
+  [.012843,.033524], service +1.867981 and p10 service +1.515625. S_L0−G J
+  +.013616 remained unresolved, while service, p10 and path had useful tradeoffs.
+  Neither lineage's gain establishes uniformly better served-user quality.
+- Bstar_L0, the already paid temperature-2 policy, had stronger mean J/service
+  than S_L0 and about 1,080 m more travel per UAV. It remains a complete comparator;
+  no new calibration is purchased. C, G and the omitted Q controls retain their
+  own quality, path and CPU advantages. G is a competent ordinary comparator,
+  not a universally best ordinary policy.
+- B06's original off-grid count-decline requery did not resolve E−H4 J/service for
+  either S lineage, although it substantially reduced travel. The 19-tick team
+  outage in S_L0/H4 and E, world 29670024/tape0, preceded E's first extra query at
+  t=30. H1's different earlier history is not a same-prefix rescue experiment.
+- The original source assessment explicitly declined to prioritize a student-only
+  teacher-rescue package as a safety repair. I retain that objection. The proposed
+  comparison changes the control source at the original H4 boundaries and applies
+  the identical switch to G; it asks a different, complete-use question. It does
+  not retroactively turn the failed cadence explanation into evidence for C.
+- The current independent review's original-raw reconstruction reports that C's
+  zero team-outage episodes can still omit many users: 35/50 never served on
+  B05 world29630013 and 38/50 for C/H4 on B06 world29670024. The 19-outage-tick
+  S_L0/H4/tape0 episode on the latter world had 17/50 never served. These are
+  selected adverse examples, not a panel fairness estimate. They require the
+  complete all-user accounting below rather than equating team continuity with
+  better service. The final independent original answer will be retained here.
+
+The decisive source correction is that every proposed takeover includes current
+q(t)=0. The original local row encodes valid current users in 20 slots, and
+`q=min(10, number of valid slots)`. Thus n_current=0 at every takeover. C with
+`history=False` clears its current-user set; all 27 predicted candidate scores
+and served values are zero. It chooses its existing **deterministic waypoint
+sweep fallback**. It still constructs and scores 27 four-tick geometric paths,
+but current-user setup and candidate radio-link counts are zero. The student
+helper likewise has fallback=true. At this same row/pre-nav, C and the student's
+helper compute the same next-nav transition. G's equal-score branch is exactly
+.9 probability on C's choice and .1 spread over the other 26 categories. Z(G)
+therefore suppresses that random tail at the selected boundaries.
+
+I independently checked these implications in the original `_parse`, `_ingest`,
+`_score`, `_sweep_choice`, `analyze`, `_next_nav` and G probability source. The
+intervention is consequently deterministic navigation after a whole H4 segment
+without legal contacts, not current-user radio re-ranking. It can change physical
+motion but can also reduce useful exploration. The ordinary explanation is that
+any useful gain comes from selective suppression of stochastic navigation. A
+four-tick persistence rule is a fixed conjecture; a current-only rule or constant
+mixture could also suffice. No history-specific or S-specific mechanism claim is
+licensed by this panel, and no additional threshold/mixture grid is attached.
+
+This finite complete-use experiment currently has better decision value per new
+purchase than automatically refitting A. The proposed train-CE-matched A would
+require three real fits, up to 1,536 updates/49,152 exposures and up to 49,152
+monitoring contexts before its new endpoint and reader. Frozen candidate transfer
+remains an interesting different question with unresolved candidate semantics.
+Those mechanism/reuse alternatives are deferred, not empirically refuted. The
+present comparison develops an existing useful learned asset with zero fitting
+and tests a consequential complete service tradeoff against the same added
+information/control right. B03 prefix search is assigned to the other DM and is
+not duplicated here.
+
+### Frozen host, lawful switch and exact program semantics
+
+Keep the original N5/U50 static-user mission: all transmitters on, non-FDMA,
+3 dB service threshold, capacity10 per UAV, original local FP32 rows of width104,
+H256, original 27 ordered commands and per-coordinate native clipping. Every
+policy decision remains at t=0,4,...,252, held for the next four primitive
+transitions. J remains the native mean of .7*served/50 + .3*served-user SINR
+quality. There is no added reward, fault, global observation or shorter horizon.
+
+For a parent P in {G,S_L0,S_L1}, define Z(P) independently for each agent:
+
+1. Observe only that agent's original row before each primitive transition and
+   maintain its last four q values. At t=0 choose P. At a regular boundary t≥4,
+   choose C for the next H4 segment iff q(t−3),q(t−2),q(t−1),q(t) are all zero;
+   otherwise choose P. At non-boundaries retain the current command. The window
+   is four primitive observations, not four decision boundaries. At t=4 it uses
+   observations after transitions 0,1,2,3. It never uses a future transition.
+2. Query **only the chosen source** online. An ordinary takeover does not query
+   the actor, construct its probabilities or generate its unused uniform. G and
+   C use the original full 27-path calculation, including the empty-user branch;
+   no new shortcut or rewritten fallback law is introduced.
+3. Keep one actual per-agent navigation index, initialized by the original nearest
+   waypoint rule. Pass the actual row/pre-nav to the chosen source and apply its
+   returned next-nav once. There is no reset on a switch, recurrent hidden state,
+   shadow student navigation trajectory or unchosen-source update. Although both
+   sources' next-nav agrees at a takeover row, later visited states can differ
+   from the unswitched parent's own episode.
+4. Each agent/source has its own episode-local original memo cache. The cache key
+   is the first103 ordered FP32 row values plus one nav byte, excluding the clock.
+   A hit reuses deterministic analysis/logits, never a sampled command. The
+   actor is unchanged CPU FP32, one row per miss, eval/inference mode. Sampling
+   is original FP64 softmax/categorical code, T1 for S and T2 for Bstar_L0.
+5. A stochastic query uses the original stateless uniform addressed by
+   `SeedSequence([sampling_root, world, tick, agent])`. Arms on the same world
+   and tape share this address. C substitution consumes no stochastic query;
+   it cannot shift any later address. Actual draws and reader-only hypothetical
+   parent draws are counted separately. No shared RNG stream or action carryover
+   is silently substituted.
+
+For the same world/tape, Z(P) and P must have exactly the same first four native
+transitions: both query P at t=0 and the first possible takeover is t=4. The
+reader will check this invariant. Z cannot protect a zero-service event that
+already happened in that first segment, including tick0 in old adverse cases.
+Report first-segment and subsequent team-zero ticks separately while retaining
+the complete mission; no implicit expectation of eliminating every outage is
+introduced. Last-segment and all-user trailing gaps remain in the accounting.
+
+The switch sees neither native connections/user identities nor SINR matrices,
+positions of invisible users, evaluator rewards, teammate histories or future
+counts. Under this exact N5/all-on/threshold contract, original B06 source/raw
+checks establish q equals native own served count; the reader will verify it on
+every recorded row again. This equality is not generalized to other hosts.
+The online count history is computed only for the three Z programs. Baseline
+programs retain their original call paths and costs; all programs' native
+counts/user masks can be derived offline for evaluation.
+
+### Complete panel, addresses, predictions and interpretation
+
+The eight programs are C, G, Z(G), S_L0, Z(S_L0), S_L1, Z(S_L1), Bstar_L0.
+On each of 32 new worlds, C runs once and each of the seven stochastic programs
+runs on two addressed tapes: **480 complete H256 episodes, 122,880 native steps**.
+No Bstar_L1 duplicate is needed because its paid temperature is1 and it aliases
+S_L1. Q05/Q10 are not added to this finite purchase: G is the fixed same-law
+ordinary parent, Z(G) gets exactly the same added count history and switching
+right, C supplies deterministic full-time control and Bstar supplies the paid
+stronger learned alternative. This selection does not erase Q's previous useful
+tradeoffs or prove that no ordinary program can do better.
+
+Freeze prospective main worlds **108310000–108310031**, sampling roots
+**108311001,108311002**, actor-constructor seeds **108311011,108311012**,
+bootstrap seed **108311091**, master **108311000**. A precise integer-boundary
+search of current published research notes, candidate Python/config files and
+run configs found no 1083xxxxx identities before this entry. The tempting
+107100000 range was rejected because the other DM already uses it. This is a
+repository-address check, not a claim about unknown external exposure. Main
+episodes use a fixed base arm/tape list in the order above, C tape−1 and other
+tapes0,1, rotated left by world index modulo15. Seeds/order never depend on
+results. All world observations are fresh for this chosen intervention; old
+B05/B06 panels remain exposed development evidence.
+
+The four primary whole-mission J comparisons are Z(S_Li)−S_Li and
+Z(S_Li)−Z(G), i=0,1, with both lineages kept separate. The prospective useful
+pattern is positive parent and ordinary-matched J increments without hiding
+loss of all-user coverage or continuity. Specifically, the intervention predicts
+some changed four-tick paths, positive Z(S_i)−S_i J, and reduced mean per-user
+longest unserved gap; it also predicts Z(S_i)−Z(G) J>0. These components may fail
+separately. No effect-size threshold or interval sign automatically grants
+adoption, and no positive trigger/learnability pilot is required.
+
+Retain Z(G)−G, comparisons with C/Bstar_L0, all eight complete levels and all
+28 unordered program-pair contrasts as descriptive readings. Also compute,
+without any new query, `(Z(S_i)−S_i)−(Z(G)−G)` separately for each lineage. Even
+positive primary differences can combine an ordinary switch benefit with an
+already-existing S advantage; the interaction is explanatory arithmetic, not a
+required significance test or an identified cooperation mechanism.
+
+Average the two tapes within each world before differences and uncertainty.
+Use 10,000 common paired-world bootstrap resamples and percentile95 intervals,
+with the fixed bootstrap seed. All 32 worlds enter, including inactive or adverse
+ones. These are descriptive conditional-world intervals for two fixed learned
+assets, not 64 independent worlds, new training replications, confirmation,
+equivalence or a reliability guarantee. Show paired values and both tapes for
+strong positive/adverse worlds; never select a favorable lineage or metric and
+hide the other. No threshold, temperature, new seed, extra panel or rerun is
+triggered by an inconclusive or inactive result.
+
+For every episode retain native J and return, mean/p10/min served users, team-zero
+ticks and longest team-zero run, coverage and quality reward components, served-
+user SINR quality, mean per-UAV path, boundary/low-altitude and zero-displacement
+ticks, all query/cache/work counts, measured CPU/wall components and RSS. Quality
+averages can change through who is served, not only radio quality for fixed users.
+Travel is a reported cost, not a newly invented reward or battery/safety measure.
+
+The **all-50-user service mask** is fixed as
+`connections[t, :, user].any()` for all 256 scored post-transition states and all
+50 original world user indices. Preserve the full native connection matrix and
+this derived mask. Report each user's served ticks/fraction, number/fraction
+never served, p10/min user served fraction, and for each user the longest
+consecutive zero run inside the mission. Longest runs include leading and
+trailing runs; a never-served user has longest gap256. Report the mean/p90/max
+of these 50 longest gaps, each user's leading/trailing lengths, and lengths of
+closed internal zero runs with explicit left/right mission-boundary censoring
+flags. They are observed mission gaps, not estimated premission/postmission
+waiting times. The mean of all50 longest gaps is the predeclared continuity
+summary; never-served users cannot disappear from the denominator. Initial reset
+service is retained for row alignment but is not an extra scored tick. None of
+these per-user fields enters a policy or the switch.
+
+### Independent reader and bounded correctness work
+
+The reader independently checks all chosen C source outputs and all chosen
+student helper/logit outputs on their actual recorded rows/pre-nav, even on
+worker cache hits. At every Z(S) takeover it additionally reconstructs the
+unchosen S parent using that same actual row/pre-nav and addressed uniform.
+At a Z(G) takeover the independently verified chosen C scores already suffice
+to reconstruct the hypothetical G probabilities/choice; do not purchase a
+second 27-path calculation. Hypothetical next-nav/cache state is discarded.
+This is an action reconstruction on actual histories, not the parent program's
+alternative episode, and it supplies no counterfactual reward.
+
+Compare selected and hypothetical parent categories and their entire four-tick
+clipped geometric paths from the actual predecision position. A different
+category need not be different motion at a boundary. Record actual following-H4
+own counts, first regained contact and continued-zero length descriptively;
+selection on endogenous histories precludes a causal recovery claim. The reader
+checks all257 rows (initial, 255 intermediate and terminal), native own count,
+per-user masks, original reward arithmetic, all-on/static-user invariants,
+motion/termination, nav transitions, addresses, source selection, costs and
+same-world initial identities. It performs **zero native transitions or new
+radio-environment queries**; verification from saved native SINR/connections is
+distinguished from independent resimulation.
+
+Reserve exactly **16 correctness H256 episodes** on worlds **108310900,108310901**:
+two worlds × eight arms × one tape, using audit root **108319001** for stochastic
+arms. C runs once per world. Each phase creates one native environment with its
+first phase world, then explicitly resets once per episode: two constructor
+resets plus496 explicit resets across audit/main. Audit outcomes never select
+worlds, assets, gate thresholds or whether the planned opportunity is attractive.
+Correctness failures stop and preserve their prefix; audit trigger inactivity is
+not a scientific veto. No old-outage-world probe or extra native fixture is added.
+
+Before native audit, bounded synthetic/interface checks may spend at most
+**256 full original C source calls and 256 one-row frozen-actor forwards**, counting
+reference calls and reviewer reproductions, plus at most10,000 synthetic lawful
+count decodes. They have zero native transitions, fits and labels. Their targets
+are exact t=4 window alignment, q0 fallback, selected-source-only queries,
+nav continuity, cache-hit fresh draws/stateless address invariance, clipping,
+all-user censored gaps and incorrect asset/source rejection. Synthetic rows are
+not training data or scientific result worlds. This is a total allowance to be
+counted, not permission to rerun full suites without accounting. No such call
+has yet been made for this study. Numerical/RNG/interface engineering receives
+the one applicable engineering review after a concrete bounded implementation;
+it does not replace the current independent scientific selection.
+
+### Full prospective bill and sunk-cost context
+
+Let m be main Z(S_L0/S_L1) takeovers and g main Z(G) takeovers. The first boundary
+cannot trigger, so m≤40,320 and g≤20,160. For the 16 audit episodes let
+m_a≤1,260 and g_a≤630. Set M=m+m_a≤41,580 and Gtake=g+g_a≤20,790. Counts below
+are source requests; worker cache misses determine actual full calculations.
+The reader deliberately redoes each listed source calculation without relying
+on worker cache outputs.
+
+| Scope | Main 480 | Audit 16 | Combined |
+|---|---:|---:|---:|
+| Native transitions | 122,880 | 4,096 | 126,976 |
+| H4 agent decision slots | 153,600 | 5,120 | 158,720 |
+| Worker C requests | 51,200+m | 1,920+m_a | 53,120+M |
+| Reader C source calculations | 51,200+m | 1,920+m_a | 53,120+M |
+| Worker S requests, including Bstar | 102,400−m | 3,200−m_a | 105,600−M |
+| Reader S helper/one-row forwards | 102,400 | 3,200 | 105,600 |
+| Worker sampled draws | 143,360−m−g | 4,480−m_a−g_a | 147,840−M−Gtake |
+| Reader actual+shadow sampling addresses | 143,360 | 4,480 | 147,840 |
+| Worker G probability constructions | 40,960−g | 1,280−g_a | 42,240−Gtake |
+| Reader G probability constructions | 40,960 | 1,280 | 42,240 |
+| Online Z count decodes | 245,760 | 7,680 | 253,440 |
+| Online noninitial Z gate checks | 60,480 | 1,890 | 62,370 |
+| Reader all257-row count decodes | 616,800 | 20,560 | 637,360 |
+
+Thus worker+reader student source requests are **211,200−M**, at most211,200
+before synthetic checks; actual row forwards are no greater because worker
+cache hits avoid a forward. C calculations are at most2*(53,120+M), hence at most
+**189,400 full C calculations / 5,113,800 candidate trajectories /
+20,455,200 modeled ticks and objective reductions**. The extra synthetic ceiling
+gives **189,656 C calls / 5,120,712 trajectories / 20,482,848 modeled ticks**, and
+at most **211,456 student row forwards**. These are component ceilings, not a
+claim that the different extrema are attained together. Cache savings do not
+erase source requests, reader work or CPU.
+
+The q0 takeover fact matters to radio accounting. The M extra C requests in each
+pass have **zero current-user radio links**, despite their full geometric work.
+Using n≤20 and visible peers≤4 for all remaining original C requests, the two
+passes have at most229,478,400 candidate and10,624,000 setup link evaluations
+(240,102,400 total; Gtake's empty-user cases can only lower this). Adding the256
+synthetic C ceiling gives **240,680,960 C radio-link evaluations**. Student
+helper setup+extreme links are ≤140 per nonempty query; shadow S takeovers have
+zero links. The ceiling is29,568,000 before tests and **29,603,840** including
+256 synthetic rows. Native dense power work is separately
+275*(126,976+496+2)=**35,055,350 slots**. It is not the C/helper link count.
+At most62,370 same-history takeover comparisons each simulate four geometric
+steps, **249,480 geometric comparison steps**, with no radio/native rollout.
+Native per-user extraction reads496*256*5*50=31,744,000 saved connection entries.
+Online+reader slot-presence work is20*(253,440+637,360)=17,816,000 slot tests,
+plus at most200,000 synthetic slot tests. These bookkeeping calculations used
+source dimensions only, with no effect query.
+
+New fitting, optimizer updates, training contexts/labels, calibration searches,
+LLM forwards, model downloads and GPU time are all **zero**. Forecast total
+audit/main/reader/test scientific work is **.1–.5 CPU hour**, guided by the paid
+B05/B06 timings, with a **1 cumulative CPU-hour stop/re-estimation boundary**
+checked between episodes/reader files. This is not an outcome stopping rule;
+an incomplete panel remains incomplete, with no silent truncation, altered
+algorithm or duplicate retry. Include process entry/import/load, reader and
+test CPU separately; record wall time and unmetered support honestly. Expected
+support is **8–12 hours**, not zero. Forecast process RSS .6–1 GiB and new
+canonical evidence .3–.6 GiB; a fully materialized detached input snapshot is
+about1.67 GiB in addition. Use ≤3 GiB new peak disk as the preparation envelope
+and measure it on the actual node. These are forecasts, not allocations inferred
+from an idle GPU or permission to overrun another accepted study.
+
+The existing assets are paid knowledge: each original S lineage used8,000
+supervised updates /4,096,000 presentations, 65,536 label-acquisition native
+steps and81,920 expert requests. The complete original B02/B03 pair used2fits,
+832episodes/212,992 native steps and205.046 measured worker/reader CPU seconds;
+the separate paid Bstar selection used512episodes/131,072 steps and139.828
+episode CPU seconds, excluding some setup/reader work. The broader selected
+chain through transmission B06 was8fits,2calibrations,2,080,768 native steps
+and3,238.693 scoped CPU seconds, excluding separately recorded branches/support.
+B05 alone cost106,496 native steps/140.041 CPU seconds; B06 cost286,720/755.536.
+Those are inherited costs, not repeated here or a claim that the whole project
+costs only that subtotal. A/R's separate6fits/1,736,000 native steps/.814449
+measured CPU hour remain in B01 above. Zero new fits does not mean free learning.
+
+### Source identities, external inputs and retention
+
+No frozen peer code or asset is edited. The exact old B05 source is
+`54c57af8d2e3860f25a278850055a6aa020e5beb`, result
+`fbf908d9571268638f573e747edae0b9fffbedba`; B06 source is
+`df149ac620a90931d81fac727fe91a898b9ab760`. The current36 files in the B06
+[source map](../../../../runs/uav_fleet_transmission/b06_cadence_a01/config.json)
+were checked by SHA256 against that retained config: zero mismatches. This is
+source inspection, not a run or a reason to import every old module into the
+new implementation. Bind the actual original dependency closure at publication.
+The load-bearing modules are:
+
+- original C `experiments/candidates/uav_local_history/b01/controller.py`, SHA256
+  `b5fdfbfe2718ee693c9ed1d7aeb8bbb6c5c59964ec6c56c5bb35be8b685f23d2`;
+- S/C helper `experiments/candidates/uav_fleet_adaptation/b02/controllers.py`,
+  `a2bbbdb877bd988590472a41c336d934a0431b5c560c7e80225cbb630fc3d522`;
+- actor/sampling `experiments/candidates/uav_fleet_adaptation/b02/policies.py`,
+  `fba732164b07d80fc2f901e6545e6ca281c7db39cd89f9e61cc49bdb40ba4efd`;
+- original model `experiments/candidates/uav_fleet_adaptation/b02/model.py`,
+  `c9b95b6718262c65591ed106ca81da0abb15b48ef6a8439438618365efc39934`;
+- G/Bstar law `experiments/candidates/uav_fleet_transmission/b05_score_sampling/policies.py`,
+  `b6a018614df3ee4e32d41d6fd5550850deb8bfe0ec02cf53b6b5efd1291bb986`;
+- lawful q definition `experiments/candidates/uav_fleet_transmission/b06_cadence/gate.py`,
+  `22fbc4d955c17afb95341fcca9aef8bce334f0f78d1a947c0c2ab3abb46d181c`.
+
+Both actors are original34,715-parameter FP32 114→128→128→27 ReLU networks.
+Read-only file presence/size/hash were verified on the canonical node, without
+loading either model. Each file is424,487 bytes:
+
+- S_L0: `/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b02_inheritance_a01/assets/S.pt`,
+  file SHA256 `b9e25fca68109bb50fa64fadfc90939ad6a4669058c1c0ccd1351c8bbcefe12a`,
+  state SHA256 `6fa2eddc542d8f5293f5daf6a989b97a9d7d5f56f484f1eb6bddc6a87d27de0c`,
+  source `e945483b85c7f8ddfc315c57f36938d6c14201c7`.
+- S_L1: `/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b03_inheritance_recurrence_a01/assets/S.pt`,
+  file SHA256 `cb67a3d46fe9628e1dfef1ef081b89091a13fde3a92295fe198f27555c67364d`,
+  state SHA256 `c6286dd32097d37b2c2c3039e487a24b756398e3ddffa9dc9e1ec3ef66170699`,
+  source `4909c9553300a4a4de6eb79476e818d7b1ceab53`.
+
+B05 canonical raw is on `hmasd-wsl-node` under
+`/home/wu/projects/HMASD/runs/uav_fleet_transmission/b05_score_sampling_a01/raw/`:
+416NPZ,179,862,927 logical bytes, sorted path/size/SHA inventory digest
+`2ad9e833a5a7d4772a99157af46ed999539d90ea7edd99e32340d85425c948cf`.
+The compact local [B05 summary](../../../../runs/uav_fleet_transmission/b05_score_sampling_a01/summary.json)
+has SHA256 `349a2ca0a1ea10924089ecd1482d3c1025367b1ddcc9dcd32e8e008292c4b70b`.
+B06 canonical raw exists locally under
+`/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b06_cadence_a01/raw/`:
+1,120NPZ,414,546,359 logical bytes, inventory digest
+`a58026dd50668a1f0a4c44349aea182c37696acc7ee986024c3a1bfd8cf448db`;
+[summary](../../../../runs/uav_fleet_transmission/b06_cadence_a01/summary.json)
+SHA256 `36ad2bd66ce59f162144525c79136fec51680108380dfd25ea6996d52fc4d4f8`.
+These old traces are evidence, not new execution inputs or fresh test worlds.
+
+A selected implementation would occupy only
+`experiments/candidates/uav_decision_generalization/b02_feedback_cooperation/`
+and matching tests/runs/temp plus this notebook: fixed contract/asset bindings,
+switch/private-state wrapper, complete collector and independent reader. Import
+retained kernels rather than copy or revise them; no environment or shared
+compute mutation is anticipated. Publish exact code and SHA-bound external
+canonical actor locators before any result execution, and use the configured
+CPU path on the actual node with fresh admission. Canonical assets need no
+duplicate/download. New snapshots use the published full-materialization helper
+fix and configured whole-preparation `zsh -lic`; never alter canonical dirty Git,
+sparse settings or another accepted snapshot. Keep one canonical complete raw
+set, compact source/summary/reader/identity evidence in Git, all adverse/failure
+prefixes and both frozen assets. Remove only owned redundant scratch/finished
+snapshots after checking consumers and measuring net reclaimed bytes.
+
+### Primary reasoning and historical checks
+
+The three local stores and relevant July/external records were checked before
+calling this a contribution. The load-bearing passages were read directly:
+
+- Foundations B01, Albrecht et al., *Multi-Agent Reinforcement Learning:
+  Foundations and Modern Approaches*,
+  `docs/new-libs/papers/B01_Albrecht_MARL_Foundations_2024.pdf`, PDF80–83
+  (printed51–54): a POSG agent can condition its policy on its lawful observation
+  history; that does not make a four-count window a sufficient belief state or
+  demonstrate that learned memory is necessary. This supports the information
+  contract and its limits.
+- InstSci `MARL-0016`, *Models as Agents*,
+  `/home/fires/projects/Inst-sci/papers/MyLib/json/MARL-0016.json`, primary pages2–4,
+  with `pdf/MARL-0016.pdf` as source: model-to-return reasoning depends on its
+  stated joint-observation/action and reward assumptions. Those assumptions do
+  not turn C's local stationary-peer forecast or this count gate into a
+  guaranteed closed-loop controller for interacting UAVs.
+- My-lib `neurips-2024-f96af360d2a1b1585c3e3a5b82ba4ef7`, *Going Beyond Heuristics
+  by Imposing Policy Improvement as a Constraint*, arXiv2507.05328, PDF2–4 at
+  `/mnt/c/Projects/My-lib/.local-formal-capture/corpus/papers/neurips-2024/f96af360d2a1b1585c3e3a5b82ba4ef7/arxiv-2507.05328.pdf`:
+  its expected-return improvement constraint motivates comparing complete task
+  performance with the heuristic. The constrained trained method and its
+  guarantees are not this frozen hand switch; this is the stored arXiv version.
+- Mozannar and Sontag (2020), [*Consistent Estimators for Learning to Defer to an
+  Expert*](https://proceedings.mlr.press/v119/mozannar20b/mozannar20b.pdf), PDF1–4,
+  especially §3 joint system loss and §4 consistency: evaluate the combined
+  decision system and expert cost, not expert/student accuracy in isolation.
+  Its iid classification setup does not establish a sequential, coupled UAV
+  improvement guarantee or make ordinary C a safe expert.
+- July [G35 construction](../../designs/CONTINUOUS_ROSTER_REACTIVE_REDUCTION_G35.md)
+  and the original
+  [external audit](../../../external-review/rounds/20260726_continuous_roster_reactive_reduction_g35_design_assertion_audit/21_PRO_OPEN_RAW.md)
+  distinguish constructive current-information action from intrinsic history
+  necessity. The roster host is different. The
+  [July iteration5 disposition](../../../external-review/rounds/20260719_iteration5_postmortem_portfolio/50_DISPOSITION.md)
+  also prevents turning useful control into a renewed unsupported skill-channel
+  claim. These are evidence and counterarguments, not historical approval gates.
+
+The proposed scope now has a concrete source-level action distinction, complete
+ordinary competition and full price. Selection still belongs to the one current
+independent review plus Root's cross-question investment resolution. I will
+preserve that original recommendation/dissent and my disposition here. There
+is no accepted operation to observe and no new result to report at this point.
