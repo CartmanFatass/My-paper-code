@@ -1,0 +1,108 @@
+{
+  "attribution": "Shared Git object delta is an interval observation; concurrent other-direction publication is possible. Old original remote B04 core is prior retained unique evidence and not reread.",
+  "core_directory": "/mnt/c/Users/fires/AppData/Local/Temp/wsl-crashes",
+  "core_files": [
+    {
+      "allocated_bytes": 343556096,
+      "bytes": 343556096,
+      "inode": 13510798882195044,
+      "mtime_ns": 1790833336562265400,
+      "name": "wsl-crash-1790833334-1660430-_home_fires_.local_opt_godot_Godot_v4.7.2-stable_linux.x86_64-6.dmp"
+    },
+    {
+      "allocated_bytes": 21102592,
+      "bytes": 21102592,
+      "inode": 11821949021931136,
+      "mtime_ns": 1790866642553485600,
+      "name": "wsl-crash-1790866642-2468805-_usr_bin_git-7.dmp"
+    },
+    {
+      "allocated_bytes": 732393472,
+      "bytes": 732393472,
+      "inode": 12666373952063105,
+      "mtime_ns": 1790869030429969500,
+      "name": "wsl-crash-1790869026-2511635-_home_fires_.local_opt_godot_Godot_v4.7.2-stable_linux.x86_64-6.dmp"
+    },
+    {
+      "allocated_bytes": 1448222720,
+      "bytes": 1448222720,
+      "inode": 24206847997200159,
+      "mtime_ns": 1790869605912692000,
+      "name": "wsl-crash-1790869596-2531909-_home_fires_.local_opt_godot_Godot_v4.7.2-stable_linux.x86_64-6.dmp"
+    },
+    {
+      "allocated_bytes": 3722022912,
+      "bytes": 3722022912,
+      "inode": 24206847997210272,
+      "mtime_ns": 1790871178887549100,
+      "name": "wsl-crash-1790871159-2258088-_mnt_c_Users_fires_.codex_bin_wsl_65bf23c0b8844a0d_codex-7.dmp"
+    },
+    {
+      "allocated_bytes": 1671168,
+      "bytes": 1671168,
+      "inode": 58828270132820412,
+      "mtime_ns": 1790871371056476700,
+      "name": "wsl-crash-1790871371-489-_usr_lib_xorg_Xorg-6.dmp"
+    },
+    {
+      "allocated_bytes": 1671168,
+      "bytes": 1671168,
+      "inode": 37436171902521003,
+      "mtime_ns": 1790871371311355900,
+      "name": "wsl-crash-1790871371-537-_usr_lib_xorg_Xorg-6.dmp"
+    },
+    {
+      "allocated_bytes": 1675264,
+      "bytes": 1675264,
+      "inode": 86412817850283403,
+      "mtime_ns": 1790871371468845300,
+      "name": "wsl-crash-1790871371-604-_usr_lib_xorg_Xorg-6.dmp"
+    },
+    {
+      "allocated_bytes": 1671168,
+      "bytes": 1671168,
+      "inode": 16325548649301553,
+      "mtime_ns": 1790871371742842300,
+      "name": "wsl-crash-1790871371-640-_usr_lib_xorg_Xorg-6.dmp"
+    },
+    {
+      "allocated_bytes": 1671168,
+      "bytes": 1671168,
+      "inode": 17451448556144205,
+      "mtime_ns": 1790871371919744800,
+      "name": "wsl-crash-1790871371-681-_usr_lib_xorg_Xorg-6.dmp"
+    }
+  ],
+  "core_pattern": "|/wsl-capture-crash %t %E %p %s",
+  "metadata_cpu_seconds": 0.12105549700000001,
+  "metadata_wall_seconds": 0.2837115099973744,
+  "new_static_native_model_queries": 0,
+  "phase": "source_preparation_no_result_operation",
+  "rlimit_core": [
+    0,
+    -1
+  ],
+  "scope": {
+    "new_output": {
+      "allocated_bytes": 0,
+      "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b05_data_bank_a01"
+    },
+    "own_scratch": {
+      "allocated_bytes": 0,
+      "path": "/home/fires/hmasd-wsl/temp/directions/typed_joint_skill_decision/b05-data-bank"
+    },
+    "reference": {
+      "allocated_bytes": 48750592,
+      "path": "/home/fires/hmasd-wsl/temp/directions/typed_joint_skill_decision/b05-data-reference"
+    },
+    "shared_git_objects": {
+      "allocated_bytes": 4223344640,
+      "path": "/home/fires/hmasd-wsl/.git/objects"
+    },
+    "source_records": {
+      "allocated_bytes": 20480,
+      "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b05_data_bank_source"
+    }
+  },
+  "time_ns": 1790930367077943732
+}
