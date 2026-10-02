@@ -1,0 +1,147 @@
+{
+  "actual_launcher_runner_identity": {
+    "boot_id": "f359a2d7-72f8-4eb1-b898-bc0abf61bed6",
+    "kind": "linux_pid_start_ticks",
+    "pid": 603775,
+    "session_id": 603774,
+    "start_ticks": 8622262
+  },
+  "dependent_consumer": "not launched; stopped at first genuine technical failure",
+  "effect_accounting": {
+    "GPU_child_seconds": 0,
+    "bank_reconstruction_static_calls": 0,
+    "basis": "source-pinned pre-counter/pre-child branch plus complete original output and valid exit; not fabricated shared counters",
+    "fits": 0,
+    "launcher_transport_hash_support": "additional_incompletely_metered",
+    "model_forwards": 0,
+    "native_steps": 0,
+    "new_producer_labels": 0,
+    "numeric_children": 0,
+    "runner_CPU_seconds": "unmeasured_not_zero"
+  },
+  "failing_expression": "launch[runner_process][identity] != e.process_identity(os.getpid())",
+  "frozen_b05_identity_function_keys": [
+    "pid",
+    "start_ticks"
+  ],
+  "input_sha256": "da2cce0fb6de823aa273c6375d6fae8f4a38cf60286aefefb2cbf46651a3f246",
+  "interpretation": "New adapter precondition uses incompatible identity mapping schemas; no fixed-bank validation, learning, physical-runtime health or SIGSEGV/CUDA cause result",
+  "known_this_parent_read_CPU_seconds": 0.001307133000000002,
+  "launch_sha": "a0331219351fd9f19a624e4ee4821b8a6383d186",
+  "native_exit_code": 1,
+  "native_terminal_status": {
+    "admission": {
+      "claim_state": "accepted",
+      "state": "accepted"
+    },
+    "artifacts": {
+      "stderr": {
+        "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a01/stderr.log",
+        "state": "present"
+      },
+      "stdout": {
+        "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a01/stdout.log",
+        "state": "present"
+      },
+      "summary": {
+        "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a01/summary.json",
+        "state": "absent"
+      }
+    },
+    "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/5f54ee2203fa863041fd3d19217b00f9cd8bf129aced88b6b79c380ed5465ee7.json",
+    "direction": "typed_joint_skill_decision",
+    "execution": {
+      "exit_code": 1,
+      "exit_witness": {
+        "exit_code": 1,
+        "finished_at_epoch": 1790958617.245746,
+        "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a01/process-exit.json",
+        "state": "valid",
+        "termination": "process_exit"
+      },
+      "runner": {
+        "recorded_identity": {
+          "boot_id": "f359a2d7-72f8-4eb1-b898-bc0abf61bed6",
+          "kind": "linux_pid_start_ticks",
+          "pid": 603775,
+          "session_id": 603774,
+          "start_ticks": 8622262
+        },
+        "state": "absent"
+      },
+      "state": "exited",
+      "supervisor": {
+        "recorded_identity": {
+          "boot_id": "f359a2d7-72f8-4eb1-b898-bc0abf61bed6",
+          "kind": "linux_pid_start_ticks",
+          "pid": 603774,
+          "session_id": 603774,
+          "start_ticks": 8622259
+        },
+        "state": "absent"
+      }
+    },
+    "explicit_retry": {
+      "eligible": true,
+      "reasons": [],
+      "scientific_authorization": false,
+      "successor_ref": null,
+      "supported": true
+    },
+    "explicit_retry_available": true,
+    "kind": "hmasd_operation_status",
+    "manifest_ref": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a01/launch-manifest.json",
+    "node": "local_linux",
+    "observed_at": "2026-10-02T16:34:18.579090Z",
+    "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/5f54ee2203fa863041fd3d19217b00f9cd8bf129aced88b6b79c380ed5465ee7.json",
+    "output_root": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a01",
+    "record_consistency": {
+      "mismatches": [],
+      "state": "consistent"
+    },
+    "schema_version": 1,
+    "sha": "a0331219351fd9f19a624e4ee4821b8a6383d186",
+    "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/c50f00e6e7594703a6885bdc9b957fc3"
+  },
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/5f54ee2203fa863041fd3d19217b00f9cd8bf129aced88b6b79c380ed5465ee7.json",
+  "original_files": {
+    "admission-preflight.json": {
+      "bytes": 773,
+      "sha256": "0887f3418a43ae02f3816c327133bfd6509917aff44843351b0e9b4378bff512"
+    },
+    "launch-manifest.json": {
+      "bytes": 4591,
+      "sha256": "d7bd00d53aac45fba189b2c595278b04727bd2ca91bde652d2972464c951cfc3"
+    },
+    "launch-status.json": {
+      "bytes": 609,
+      "sha256": "3976f13a13e1daa0593d231924a07e578bf3d36b63546713a572ad9f25e19458"
+    },
+    "process-exit.json": {
+      "bytes": 547,
+      "sha256": "296c20204d0cfc543337d576bdc2455b8ab00ee1b2528101b9e64d53da41b388"
+    },
+    "stderr.log": {
+      "bytes": 612,
+      "sha256": "2f074f730c8166806f789b60eb9298b4b2ac765c0f93bf1e6b0a0224aa4956e4"
+    },
+    "stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "read_at": "2026-10-02T16:34:18.589804+00:00",
+  "record_kind": "DM terminal saved-evidence reading, not a runner summary or certificate",
+  "reproduction": "Saved actual launcher identity compared with exact declared B05 function schema; no live PID, numerical reconstruction or runner invocation",
+  "retry_or_repair_run": false,
+  "runner_summary_present": false,
+  "saved_identity_projection": {
+    "pid": 603775,
+    "start_ticks": 8622262
+  },
+  "schema": 1,
+  "shared_counter_present": false,
+  "source_location": "experiments/candidates/typed_joint_skill_decision/b07_fixed_bank/run.py:240",
+  "status": "technical_failure_before_counter_setup",
+  "whole_mapping_equality": false
+}

@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/c50f00e6e7594703a6885bdc9b957fc3/experiments/candidates/typed_joint_skill_decision/b07_fixed_bank/run.py", line 326, in <module>
+    if __name__=='__main__':raise SystemExit(main())
+  File "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/c50f00e6e7594703a6885bdc9b957fc3/experiments/candidates/typed_joint_skill_decision/b07_fixed_bank/run.py", line 243, in main
+    raise ValueError('durable parent admission/source/output/node binding mismatch')
+ValueError: durable parent admission/source/output/node binding mismatch

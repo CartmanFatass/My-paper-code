@@ -4851,3 +4851,69 @@ Exact original-check preservation paid.020345744CPU-s, engineering-answer preser
 tails remain unknown. All preparation remains separate from the selected execution
 caps and from previous direction costs. Next is publication of these exact inputs,
 fresh actual local admission and the one new full reader, with same-handle observation.
+
+<a id="b07-technical-reading"></a>
+## 2026-10-02 — B07 first real reader attempt fails before setup; dependent consumer stopped
+
+Exact implementation/input publication is `a0331219351fd9f19a624e4ee4821b8a6383d186`.
+The one new `local_linux` launch `b07_fixed_bank_reader_a01` was accepted at
+16:30:17.237822UTC, following fresh actual-node admission with10,947,604,480B
+available against4,294,967,296B floor. Its native manifest is
+`runs/typed_joint_skill_decision/b07_fixed_bank_reader_a01/launch-manifest.json`;
+operation reference is
+`/home/fires/hmasd-wsl/.git/hmasd-admission/5f54ee2203fa863041fd3d19217b00f9cd8bf129aced88b6b79c380ed5465ee7.json`.
+Retained source snapshot is
+`/home/fires/hmasd-wsl/.git/hmasd-launch-sources/c50f00e6e7594703a6885bdc9b957fc3`.
+Runner603775/start8622262 and supervisor603774/start8622259 have valid matching
+native exit evidence and are both absent. This was accepted execution, not a
+pre-admission refusal. **Exit1 occurred immediately before counter/setup creation.**
+
+The [complete terminal saved-evidence reading](../../../../runs/typed_joint_skill_decision/b07_fixed_bank_reader_a01/technical-reading.json)
+binds all six original output files, source/input and native status. Stderr raises
+`ValueError: durable parent admission/source/output/node binding mismatch` at new
+`b07_fixed_bank/run.py:243`; no runner summary, shared counter block, numeric child
+or raw output exists. Source control flow and this complete output establish
+0new reconstructed static calls,0new labels,0fits/forward/native/GPU-child effects;
+these are not invented shared counters. The brief runner CPU and launcher/support
+cost are unmeasured, **not zero**. Memory admission passed and says nothing about
+the unexecuted numerical/CUDA paths.
+
+The new adapter contains a deterministic identity-schema bug. `run.py:240`
+compares the whole native launcher identity (`boot_id,kind,pid,session_id,start_ticks`)
+to unchanged B05 `process_identity()`, which returns only `pid,start_ticks`.
+Even the same process cannot satisfy that dictionary equality. Saved actual
+launcher bytes reproduce the unequal mapping without running a process or physics.
+The new compact reader also compares its two-field `context.parent_identity`
+wholesale to that five-field native identity at `read.py:71`; this second refusal
+is source-established and was not reached. The two affected synthetic fixtures
+gave the launcher only two fields, so102/34pass did not cover its actual schema.
+
+I accept responsibility for missing this in DM review. The same independent
+engineering Reviewer has [explicitly corrected its original answer](../../../../runs/typed_joint_skill_decision/b07_source/engineering-review-correction.json):
+original2937UTF8bytes, SHA256
+`0855e5683343a44a6649d43bfbada4e41332ef485d9ae9a91c3931f86ec30fcd`.
+It confirms both P1 defects, the false fixture premise and its review miss. Original
+passing receipts and original no-finding review remain preserved. No source repair,
+new test, runtime probe or retry was bought to make this failure disappear.
+
+This is a newly introduced deterministic adapter failure, separate from original
+B04 SIGSEGV and B05 old-teacher incompatibility. It establishes no fixed-version
+validation, learning curve, failure of learning, numerical-runtime health or CUDA
+feasibility. B05 remains original exit2/uncertified. Under the selected first-failure
+rule, **this operation and the dependent consumer stop**; unused caps are not a
+continuation allowance. Root received the failure and concrete diagnosis promptly.
+Independent scientific disposition of this boundary is pending in the same original
+critic context; no renewed effect purchase is selected.
+
+Deterministic observer604448 adopted the same operation and recorded its valid
+terminal failure. Its attempted own-session queue delivery was rejected with
+`direct app-server input is not allowed for multi-agent v2 sub-agents (code -32600)`;
+the active native DM read the saved event directly. Event9d26c5c6a273ff772e161b8e
+under generation1/wake1fb84114-7680-4df1-8e9a-a7e7a003ad79 was consumed into
+generation2 without resuming a job, then observation stopped. Both observer604448
+and the brief consume/stop controller609818 are absent;0pending events remain.
+The [full observer record](../../../../runs/typed_joint_skill_decision/b07_fixed_bank_reader_a01/observer-terminal.json)
+distinguishes failed delivery from healthy same-handle observation. No worker restart,
+another address, duplicate launch or source migration occurred. Terminal reading
+recorded.001307133parentCPU-s; correction preservation.018771987CPU-s; other
+status/observer/support costs remain additional incompletely metered work.

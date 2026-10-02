@@ -1,0 +1,11 @@
+{
+  "claim_key": "5f54ee2203fa863041fd3d19217b00f9cd8bf129aced88b6b79c380ed5465ee7",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/5f54ee2203fa863041fd3d19217b00f9cd8bf129aced88b6b79c380ed5465ee7.json",
+  "manifest_ref": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a01/launch-manifest.json",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/5f54ee2203fa863041fd3d19217b00f9cd8bf129aced88b6b79c380ed5465ee7.json",
+  "pid": 603774,
+  "runner_pid": 603775,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-10-02T16:30:17.248354Z"
+}
