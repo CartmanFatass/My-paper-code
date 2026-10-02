@@ -1,0 +1,47 @@
+{
+  "absent": {
+    "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/__pycache__": true,
+    "temp/directions/uav_fleet_transmission/b12_engineering_gc_preview.json": true,
+    "temp/directions/uav_fleet_transmission/b12_engineering_request.json": true,
+    "temp/directions/uav_fleet_transmission/b12_engineering_wait.json": true,
+    "temp/directions/uav_fleet_transmission/b12_scientific_gc_preview.json": true,
+    "temp/directions/uav_fleet_transmission/b12_scientific_request.json": true,
+    "temp/directions/uav_fleet_transmission/b12_scientific_wait.json": true,
+    "tests/experiments/candidates/uav_fleet_transmission/b12_resource_assignment/__pycache__": true
+  },
+  "after_allocated_bytes": {
+    "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/__pycache__": 0,
+    "temp/directions/uav_fleet_transmission/b12_engineering_gc_preview.json": 0,
+    "temp/directions/uav_fleet_transmission/b12_engineering_request.json": 0,
+    "temp/directions/uav_fleet_transmission/b12_engineering_wait.json": 0,
+    "temp/directions/uav_fleet_transmission/b12_scientific_gc_preview.json": 0,
+    "temp/directions/uav_fleet_transmission/b12_scientific_request.json": 0,
+    "temp/directions/uav_fleet_transmission/b12_scientific_wait.json": 0,
+    "tests/experiments/candidates/uav_fleet_transmission/b12_resource_assignment/__pycache__": 0
+  },
+  "before_allocated_bytes": {
+    "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/__pycache__": 45056,
+    "temp/directions/uav_fleet_transmission/b12_engineering_gc_preview.json": 4096,
+    "temp/directions/uav_fleet_transmission/b12_engineering_request.json": 4096,
+    "temp/directions/uav_fleet_transmission/b12_engineering_wait.json": 4096,
+    "temp/directions/uav_fleet_transmission/b12_scientific_gc_preview.json": 4096,
+    "temp/directions/uav_fleet_transmission/b12_scientific_request.json": 4096,
+    "temp/directions/uav_fleet_transmission/b12_scientific_wait.json": 4096,
+    "tests/experiments/candidates/uav_fleet_transmission/b12_resource_assignment/__pycache__": 45056
+  },
+  "cpu_seconds": 0.0026210389999999917,
+  "net_reclaimed_bytes": 114688,
+  "observer_generation": 25,
+  "observer_stopped": true,
+  "pending_events": 0,
+  "removed_file_sha256": {
+    "temp/directions/uav_fleet_transmission/b12_engineering_gc_preview.json": "bb691827c0c490e9ffb9e88079b74719f360b30588b39c565d7ae046cd01606d",
+    "temp/directions/uav_fleet_transmission/b12_engineering_request.json": "b0ac5a31c7a45b31a61d7af4b0d834a6803c9ba2fd3eee1e9bd1921e6269e41f",
+    "temp/directions/uav_fleet_transmission/b12_engineering_wait.json": "35d35f96eb0faeaa5e4b146eef2a9a289ecd765e7b05628afcc355610917ee31",
+    "temp/directions/uav_fleet_transmission/b12_scientific_gc_preview.json": "26149f4d72690cdbc4cef93562d8286f1135d327890ceac4e78d6301c499fd71",
+    "temp/directions/uav_fleet_transmission/b12_scientific_request.json": "7685b994a666f21fea37fb9a4927b71ebd1542bfeac288de6897ab98a0fd8247",
+    "temp/directions/uav_fleet_transmission/b12_scientific_wait.json": "4ac7ec751436f12dc3fb39513906f29891bb2fcfd85bde03adb4cdec1fd39625"
+  },
+  "scope": "Only consumed B12 launch/observer requests and previews plus rebuildable direction caches. Unique raw, compact evidence, current source and other directions preserved.",
+  "wall_seconds": 0.014649770004325546
+}
