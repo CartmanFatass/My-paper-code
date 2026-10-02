@@ -101,6 +101,7 @@ class Env:
         self.hold = 0
         self.last_window = None
         self.windows_hit = 0
+        self.site_hits = [0] * len(SITES)
         self.ext_total = 0.0
         return self.state()
 
@@ -153,6 +154,7 @@ class Env:
                     if self.hold >= HOLD:
                         self.satisfied[w] = True
                         self.windows_hit += 1
+                        self.site_hits[WINDOWS[w][0]] += 1
                         ext += 1.0
                 else:
                     self.hold = 0
@@ -362,17 +364,19 @@ class Learner:
             r = ext + self.intrinsic(env, Z, zs)
             trajectory.append((grads, r))
         self.update(trajectory)
-        return env.ext_total, env.windows_hit
+        return env.ext_total, env.windows_hit, list(env.site_hits)
 
 
 def run_learner(arm, episodes, dense_decoy, seed, bin_size=250, final_window=500):
     env = Env(dense_decoy)
     learner = Learner(arm, seed)
-    totals, hits = [], []
+    totals, hits, sites = [], [], []
     for _ in range(episodes):
-        tot, h = learner.episode(env)
+        tot, h, sh = learner.episode(env)
         totals.append(tot)
         hits.append(h)
+        sites.append(sh)
+    final_sites = [sum(s[i] for s in sites[-final_window:]) / final_window for i in range(len(SITES))]
     curve = [sum(totals[i:i + bin_size]) / len(totals[i:i + bin_size])
              for i in range(0, episodes, bin_size)]
     final = summarize(totals[-final_window:], hits[-final_window:])
@@ -384,6 +388,7 @@ def run_learner(arm, episodes, dense_decoy, seed, bin_size=250, final_window=500
         "all_mean_ext": sum(totals) / episodes,
         "first_rewarded_episode": next((i for i, h in enumerate(hits) if h > 0), None),
         "distinct_configs": len(learner.seen),
+        "final_site_windows": final_sites,  # windows satisfied per episode by site, final window
     }
 
 
@@ -432,7 +437,9 @@ def main():
                 out["learners"].append(res)
                 print(f"[learn] decoy={decoy} {arm:13s} seed={seed} final_ext={res['final_mean_ext']:.3f} "
                       f"windows={res['final_mean_windows']:.3f} any={res['final_frac_any_window']:.3f} "
-                      f"first_hit={res['first_rewarded_episode']} ({res['wall_seconds']:.0f}s)", flush=True)
+                      f"first_hit={res['first_rewarded_episode']} "
+                      f"by_site={[round(v, 2) for v in res['final_site_windows']]} ({res['wall_seconds']:.0f}s)",
+                      flush=True)
                 with open(args.out, "w") as f:
                     json.dump(out, f, indent=1)
     out["total_wall_seconds"] = time.time() - t0

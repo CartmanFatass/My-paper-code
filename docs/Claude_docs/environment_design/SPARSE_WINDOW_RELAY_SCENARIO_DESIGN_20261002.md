@@ -57,14 +57,14 @@ comparison with the ten dense-reward fits is as clean as a changed objective all
 | Sparse reward | Window b pays +1 at the first tick at which the served condition has held for H_hold = 20 consecutive ticks inside the window; at most 4 per episode. Team reward per tick is the sparse term plus w_dense × the existing contract reward, w_dense ∈ {0, .01}; per-agent reward is the team scalar divided by 6, as in scenario 2. | new `_compute_reward` in the direction's host subclass |
 | Travel feasibility | Base station to a corner cluster is about 2.5 km, 83 ticks at 30 m/s; plus the 20-tick hold this fits a 125-tick window, and the known schedule allows pre-positioning. Verified by the zero-fit floor stage: the known-window scheduler must satisfy at least 3.5 of 4 windows on the dev worlds, otherwise the window length is raised to 166 ticks (three windows). | zero-fit stage |
 | Learner information | The standard observation and state vectors plus schedule features appended to both: open cluster one-hot (5), ticks remaining in the window (scaled), next cluster one-hot (5). Identical for every learned arm and for the scheduler. | `hmasd/agent.py` normalisation handles the extra dimensions |
-| Learned arms | (1) HMASD defaults: n_Z = 6, n_z = 6, k = 10, λ_e = 1, λ_D = .05, λ_d = .02, entropy defaults. (2) HMASD with `disable_discriminator_rewards = True` (hierarchy only). (3) Flat SET at the same interface and exposure (the b02/b03 recipe). (4) Optional: flat + count-based bonus on a coarse team configuration, only if the project learner gains that option without touching shared code paths used by other directions. | `configs/config_1.py`, existing cells |
+| Learned arms | (1) HMASD defaults: n_Z = 6, n_z = 6, k = 10, λ_e = 1, λ_D = .05, λ_d = .02, entropy defaults. (1b) HMASD with the discriminator weights raised four-fold (λ_D = .2, λ_d = .08): in the toy the mechanism showed only at this weight in the sparse reward scale (section 3). (2) HMASD with `disable_discriminator_rewards = True` (hierarchy only). (3) Flat SET at the same interface and exposure (the b02/b03 recipe). (4) Optional: flat + count-based bonus on a coarse team configuration, only if the project learner gains that option without touching shared code paths used by other directions. | `configs/config_1.py`, existing cells |
 | Zero-fit references | Random slot program; sticky-random (the project's I-style hold); near-camping planner (the frozen planner restricted to the near cluster, the decoy's attractor); O_W, the frozen planner given the schedule, re-planning at each decision for the current or next open cluster with the objective restricted to that cluster's users (pre-positioning). | `planner.py::search_placement`, `menus.py` |
 | Worlds | 64 dev worlds for floors and training, 32 fresh hold-out worlds for the reading; common worlds across arms. | `scripts/hmasd_launch.py` admission, direction-owned seeds |
 
 **Exposure and price.** One instance per learned arm at 360k native steps, the b03 exposure that cost
-1.79 CPU-h on `local_linux`: three arms ≈ 5.4 CPU-h, plus floors ≈ .1 CPU-h and the hold-out evaluation
-≈ .3 CPU-h. Under the 10 CPU-h sizing line for the first round. Seeds are added only after an activation,
-never to rescue a floor-level instance.
+1.79 CPU-h on `local_linux`: four arms (1, 1b, 2, 3) ≈ 7.2 CPU-h, plus floors ≈ .1 CPU-h and the hold-out
+evaluation ≈ .3 CPU-h. Under the 10 CPU-h sizing line for the first round. Seeds are added only after an
+activation, never to rescue a floor-level instance.
 
 **Pre-declared reading (to be written as a rule in the direction's NOTES before any fit).**
 
@@ -123,12 +123,29 @@ does not even hold in the abstraction, and the real-host fits should not be boug
 Run: `python3 swr_toy.py --r-access 1 --out results_raccess1.json` (and `--r-access 2`); all seeds fixed;
 about 5 ms per episode in CPython 3.11.
 
+**What the toy found (full tables in the toy's `RESULTS.md`; 5,000 episodes, five seeds, five arms, two
+decoy settings, two rungs, about 12 minutes per rung).** At the needle rung no arm left the random floor
+in 5,000 episodes: the one-chain-per-corner geometry gives a 2% hit rate that REINFORCE over 121-way
+policies cannot turn into credit, whatever the exploration device. At the wider rung every arm learns,
+and the arms separate: the hierarchy with four-fold discriminator weights activates earliest and in all
+five seeds (about 2.0 of 5 windows, the two windows of site 0), the count-bonus arm reaches the same
+level later, flat PPO's analog is a little lower and more variable, the hierarchy at the project's default
+weights is no better than flat, and the hierarchy without discriminators is the worst and least reliable
+arm. Two lessons carry to the real host: the discriminator reward is an exploration device whose effect
+depends on its weight relative to the sparse reward, so the default weights need a stronger companion arm
+(arm 1b above); and the task's sparsity must be calibrated before any fit, because a needle that random
+exploration hits in 2% of episodes is unlearnable at affordable exposure while one hit in 13% of episodes
+is learnable by every arm.
+
 ## 4. Order of work on the real host, if the owner takes this up
 
 1. Zero fit (≈ .1 CPU-h): implement the host subclass and the schedule features; run the four references
    on the 64 dev worlds. Room condition: O_W − sticky ≥ 2.0 windows and O_W ≥ 3.5; near-camping ≈ 0 windows
-   with high contract reward (the decoy is real). If the room condition fails, fix the geometry or the
-   window length before any fit.
+   with high contract reward (the decoy is real). Sparsity calibration (the toy's rung lesson): the random
+   slot program must satisfy between 5% and 20% of windows; below 1% the needle is too narrow for
+   affordable exposure, so loosen the served condition (6 of 10 users) or lengthen the hold before any fit;
+   above 30% the objective is not sparse and the question is moot. If either condition fails, fix the
+   geometry, the served condition or the window length before any fit.
 2. One fit per learned arm at the b03 exposure, in the pure-sparse variant (w_dense = 0), read by the
    pre-declared rule. The decoy variant is bought only if at least one arm activates.
 3. Seeds for the active arms only; then the exposure curve (the owner's idea 1) on this host.
