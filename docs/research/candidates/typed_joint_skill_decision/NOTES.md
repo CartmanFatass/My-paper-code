@@ -1207,3 +1207,122 @@ replacement source tree was created. All four targets are absent. The compact
 CSV was normalized to the repository's LF convention without changing values.
 
 Author-host owned-root allocation including the expanded notebook fell4,882,432→839,680bytes, a net4,042,752bytes reclaimed. No cleanup tool blocker or selected follow-up remains.
+
+
+<a id="b02-enduring-question-and-interface-audit"></a>
+## 2026-10-01 — Owner resumes an enduring decision-assistance question; source-only interface audit
+
+The owner explicitly directs: “将开源类Jev决策模型辅助决策作为一个长期探索的方向占有一个dm 不要仅测试好laya就结束了 决策模型只是一个idea请你泛化一下 继续研究”.
+Root delegates this broader question to the same DM/runtime and paths. The B01
+six-fit comparison, adverse outcomes, cleanup and exact-recipe stop above remain
+unchanged; this is a new prospective investment boundary, not a restart or
+retroactive extension. The enduring object is **how reusable, pretrained or
+task-learned open decision-assistance modules can cooperate with actual UAV
+control/planning to develop useful fresh-scenario decisions, data use, complete
+service consequences or computational tradeoffs**. Candidate/plan proposal,
+consequence evaluation, search guidance and policy initialization/distillation
+are possible interfaces; none is selected merely by naming it. The question is
+not bounded by a language model, model brand, eight-plan bank or t0-only control.
+A strong ordinary method is a comparator and constructive asset, not a universal
+veto on learning capability. Positive results and endless repairs are not owed.
+
+Latest Root allocation separates the sibling `uav_decision_generalization`
+question (B01 relational/geometry/permutation structure at matched exposure)
+from this DM's decision-assistance responsibility. Do not independently duplicate
+that scorer study. A temporary Root-assigned Astra/max Oracle at
+`/root/successor_allocation_review` is constructing this allocation's actual
+research proposals. This DM supplies source/asset/cost facts; its existing
+separate-context `b01_result_critic` will review the resulting concrete proposal,
+not start a parallel invention queue. Oracle is a temporary design helper, not a
+standing approval or ownership dependency. The DM keeps scientific responsibility,
+challenge, implementation, execution and complete reading after selection.
+
+The current published background at35332c2ce, especially topics3/4, changes the
+scope as follows. B01's near-zero N training regret with approximately .10 fresh
+regret cannot be merged with L-F's weaker training fit; its order sensitivity
+and local native positives remain. Most of that particular eight-plan native
+opportunity is already captured by static coverage, limiting the practical value
+of reproducing that score. Parent B06/B07 further distinguish aggregate MSE
+from useful ranking and preserve strong ordinary exact-reuse references. Paused
+PPC's bounded supervised positive does not authorize its continuation or establish
+UAV transfer. Claude's coupled-host/distillation/replan assets remain read-only,
+with original ownership/holds; FSD/PPC/G33/Milan are unchanged. Root is publishing
+the current broader exploring question/routing; no result launch is attempted
+against the former reserve row.
+
+### Facts supplied to the temporary Oracle; no new empirical query
+
+The B01 complete reading, full8528-byte original result critic and disposition
+are at the three preceding stable anchors. Compact original summary, lossless
+named-field384-world CSV and cost projection remain in
+`runs/typed_joint_skill_decision/b01_read_a01/`. A read-only node metadata check
+reconfirmed all three canonical manifest hashes from the completed records:
+native`f38fa0f8…`, learning`16aca6b9…`, reader`d211d941…`. The sole evidence roots
+remain under`hmasd-wsl-node:/home/wu/projects/HMASD/runs/typed_joint_skill_decision/`.
+No copy or re-collection was made.
+
+- Native lawful inputs remain in`b01_native_a01/prepared/b{1,2,3}/{train,test}/{world}/features.json`:
+  BS, initial UAVs,50users, complete assigned plans and masks. Full consequences
+  remain in`worlds/`and the original traces. No missing evaluation may be filled
+  from labels on a different state or horizon.
+- Frozen representation caches remain in`b01_learning_a01/cache/b*/train/*.pt`
+  (256perblock) and`test/*.pt`(128canonical plus128reverse perblock):1536files,
+  54,117,888logical bytes. The six initial/final scorer pairs remain in`fits/`.
+  No model was loaded in this audit. The one pinned55cf4c4checkpoint/tokenizer,
+  configuration/license records and842,609,210-byte weight object remain at the
+  previously recorded input root. The dedicated environment/profile remain retired.
+- Pinned`planner.py::build_candidates` creates outcome-free layouts. The
+  `search_placement` interface accepts legal`extra_candidates`, a query`budget`,
+  `n_starts`and`xy_steps_m`. Extras must be queried and displace generated entries
+  when the budget is short. Current top3 starts are ranked **after** all admitted
+  candidate static evaluations; substituting that ranking while retaining the
+  calls does not save their cost. Remaining budget is split across starts, and
+  unused shares are not redistributed. Accepted reward improvements or equal-
+  reward plateau improvements move the current layout; an unsuccessful full
+  sweep decreases the step size. This source allows proposal/search assistance
+  without treating old six-slot permutations as the only possible interface.
+- `compute_menu` pays flat then relay+flat-incumbent search, each3000ceiling,
+  and retains the relay layout. It discards detailed`PlacementResult`histories.
+  Accordingly B01's783,749billed calls are **not** a saved full search training
+  archive. B01 retained the selected full layout,counts and native episode.
+- A standard-library-only read of the existing64stage1 gate JSON files found
+  18,244candidate static records,9,967history entries and384start records from
+  128,288billed static evaluations, counting both flat and relay. Each candidate
+  has its coordinates and static outcome. History records candidate/start events
+  and accepted moves; it lacks rejected-trial values. Accepted layouts can be
+  reconstructed from original coordinates and moves without queries, but full
+  all-action or full-horizon targets cannot. Final-descent labels cover only the
+  originally chosen top3 starts. Both old panels are already exposed; neither is
+  an untouched evaluation population. Paths are
+  `runs/coupled_host_joint_skills_stage1/b01_gate_{dev,holdout}_a01/worlds/*.json`.
+- Search mutates its environment to the last trial, not necessarily its returned
+  incumbent. Native execution must restore/reset complete world/executor identity;
+  candidate/search RNG must remain separate. The original source is reused read-only.
+
+Measured B01 component facts supplied for pricing: pooled nested static wall
+285.286122s/783,749calls = .364002ms/call; this mixes geometries and includes
+instrumentation, not an isolated CPU benchmark. The eight-menu ordinary package
+(including initial-state evaluation, reset/copy and ranking) averages4.31416ms;
+with construction/matching its384-world segmented mean is32.825ms. Full
+`compute_menu`mean is821.730ms. L's full original source call averages282.265ms,
+codec3.560ms,cold source load3.792s; cached adaptation does not remove online
+encoder cost. N's segmented29.112ms is not a complete online deployment benchmark.
+These are wall segments; per-segment CPU was not separately measured. Existing
+process CPU/reader costs remain the authoritative complete bill above.
+
+Support time remains unmetered, not zero. Conditional on reusing the native
+host/source contract and standard numerical dependencies, a new search-assistance
+comparison with complete H500 reading is provisionally forecast at8–14support
+hours for implementation, engineering review, collection, scientific reading and
+publication. This is a planning estimate to revise against an actual contract,
+not a budget authorization or measured price. New pretrained dependencies or a
+new host would require an explicit additional estimate. The original configured
+wsl_4070 numerical interpreter remains available; no new model environment is
+necessary merely to reason about this interface.
+
+This source audit adds **0 fits,0 model forwards,0 native/static result queries,
+0 tests,0 downloads and0 installs**. Existing JSON arithmetic and metadata/hash
+reads are its only new computation. A concrete complete comparison and its
+independent scientific reading remain the next substantive work; neither the
+end of B01 nor the absence of a preselected recipe ends this owner's long-term
+assignment. No new experiment is implied by this audit alone.
