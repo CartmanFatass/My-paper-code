@@ -1849,3 +1849,28 @@ scientific-call consumption, deviations and open risks to the DM. I retain
 notebook, shared standing, node/snapshot preparation, actual launch/observation,
 collection, independent diagnosis and cleanup responsibilities. No CLAIM is
 created for this exploratory fixed-asset use study.
+
+Implementation sequencing clarification, before any scientific call: the worker
+collects the16 audit missions, then runs the independent reader core on those
+16 saved traces exactly once before main collection. It persists an
+`audit_reading.json` bound to its source/config/raw identities and separate
+reader counters/CPU. A correctness or budget failure stops; inactivity or an
+adverse score does not. The final admitted reader replays the480 main traces
+and verifies/adopts the bound audit reading and raw hashes without repeating
+those16 source replays. Together they cover all496 episodes with exactly the
+preceding total query/native budget. Fresh main environment/policy state and
+immutable actor checks prevent audit reading from affecting the deployed main
+program. This orders the already paid correctness work, not a new experiment
+or scientific selection gate.
+
+Stable implementation CLI is the owned `b02_feedback_cooperation/run.py`, mode
+worker or reader, fixed master seed108311000, launch SHA/output, a SHA-bound
+actor-input JSON and cumulative-budget JSON; reader additionally receives a
+SHA-bound canonical-worker locator. The two original canonical asset records
+were extracted with AST literal parsing, without importing a model or querying
+a policy, into [B02_ACTOR_INPUT.json](B02_ACTOR_INPUT.json), SHA256
+`76aec08610f2ec4844eb43d84ae880e9935c921a64c0535f5ec6d15e655ceaf9`.
+The existing paid calibration file is present and has the expected SHA256
+`93c681eba38f8fcd7fd9059eb9eaa75142771d085bf645e831099bed63b25a50`;
+the full input snapshot can verify those original bytes without a new
+calibration or a scientific worker's lazy network Git lookup.

@@ -1,0 +1,19 @@
+{
+  "assets": [
+    {
+      "bytes": 424487,
+      "launch_sha": "e945483b85c7f8ddfc315c57f36938d6c14201c7",
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b02_inheritance_a01/assets/S.pt",
+      "sha256": "b9e25fca68109bb50fa64fadfc90939ad6a4669058c1c0ccd1351c8bbcefe12a",
+      "state_sha256": "6fa2eddc542d8f5293f5daf6a989b97a9d7d5f56f484f1eb6bddc6a87d27de0c"
+    },
+    {
+      "bytes": 424487,
+      "launch_sha": "4909c9553300a4a4de6eb79476e818d7b1ceab53",
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b03_inheritance_recurrence_a01/assets/S.pt",
+      "sha256": "cb67a3d46fe9628e1dfef1ef081b89091a13fde3a92295fe198f27555c67364d",
+      "state_sha256": "c6286dd32097d37b2c2c3039e487a24b756398e3ddffa9dc9e1ec3ef66170699"
+    }
+  ],
+  "schema": 1
+}
