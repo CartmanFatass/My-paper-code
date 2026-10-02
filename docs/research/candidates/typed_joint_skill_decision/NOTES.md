@@ -2406,3 +2406,20 @@ normal published-source admission. Independent engineering review of numerical,
 RNG, information flow, alias/executor and resume paths is required; reuse applicable
 B02 checks without repeating an unbounded test suite. Final entrypoint prints no
 premature scientific conclusion and never restarts a failed child.
+
+
+B02 local disposable closure after original review and B03 contract publication: the
+stopped/consumed generation2 observer daemon363159 was absent. Deleted exact owned
+`temp/directions/typed_joint_skill_decision/` targets `b02-observer/`, `b02-reading/`,
+`b02-observer-request.json`, `b02-cleanup-before.json`, `b02-cleanup-after.json`,
+`b02-original-result-critic-provenance.json`, `b02-original-result-critic.txt` and
+`b03-alias-clarification.json`. Complete originals/provenance are already mechanically
+preserved in NOTES or the canonical B02 run; no backup chain was made. These exact
+targets fell from819200 allocated bytes to0, all absent. B02 source is kept because
+the selected B03 explicitly reuses its unchanged executor/evidence primitives, not
+merely for hypothetical future use. B02 has no active worker/observer/unread review
+or cleanup blocker; B03 implementation is the direction's sole current study.
+
+B03 host clarification: the paid prefix feedback is static search-oracle progress
+before flight, not native service-history adaptation. Planning wall delay is a
+separate measured cost and does not advance the fixed host H500 clock.
