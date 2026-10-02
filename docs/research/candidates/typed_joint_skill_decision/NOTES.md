@@ -2423,3 +2423,60 @@ or cleanup blocker; B03 implementation is the direction's sole current study.
 B03 host clarification: the paid prefix feedback is static search-oracle progress
 before flight, not native service-history adaptation. Planning wall delay is a
 separate measured cost and does not advance the fixed host H500 clock.
+
+
+B03 pre-launch timing clarification: the immutable selection record includes the
+complete execution-identity reset, performed before the parent first reads old
+outcomes. `execution_identity_reset_seconds` records that work separately, and
+the cold spawn-to-selection-ready measurement pays it for every G/Q/P child.
+This is a matched contemporaneous B03 scope. B02 ended its selection timing
+before executor reset, so absolute B02/B03 timings are not identical-scope
+measurements and will not be directly interpreted as an implementation speed
+change. The independent engineering reviewer agrees this clarification preserves
+the intended comparison and strengthens the before-outcome identity check; no
+extra query, native episode or pilot is added.
+
+
+<a id="b03-engineering-acceptance"></a>
+## 2026-10-01 PDT / 2026-10-02 UTC — B03 implementation accepted before its sole launch
+
+The existing bounded Implementer supplied five B03 modules and one focused test
+file without changing B02/upstream/shared code, controls or the Git index. DM
+read the complete implementation and tests, compared all final hashes, and
+accepts the actual behavior under the declared L0. The existing independent
+engineering Reviewer separately reconstructed source/information flow and found
+no remaining material defect. The Implementer reports29 pure/mock checks passing
+in1.09s and AST parsing all six files; the Reviewer independently reports29
+passing in1.01s, exit0. These are mock/literal arithmetic checks, no native host,
+controller/RNG result query, fit or model forward. They cover true mid-sweep
+resume after acceptance/potential computation, clipped/early/share stopping,
+original mocked branch equivalence, complete Q request ordering, legal-only
+child context, selection evidence before old outcomes, signed-zero/assignment
+identity, complete500-row reuse reaggregation, attempt/CPU/disk limits, partial
+failure retention and no retry. Pytest-owned scratch uses normal teardown;
+check CPU was not separately metered.
+
+The reader preserves all rejected search trials and full compressed diagnostics,
+and adds the promised arrival/service transitions and Q−P comparison. Bill has36
+explicit counters, source/prior/output roots counted once, and cumulative pending
+chunk reservations plus metadata/failure headroom. Actual admitted duplex-spawn
+execution, current-native agreement with the full stored streams and resource
+completion remain unobserved; the selected complete operation buys those checks.
+No pilot or extra reference replay is added. Pinned upstream radio remains the
+physics trust boundary.
+
+Final owned source identities:
+- `experiments/candidates/typed_joint_skill_decision/b03/__init__.py`: SHA256`5d514faae1879363b38c2d2038e2346e2efe2486d6efb47fcc0a7a3e048de6ff`.
+- `experiments/candidates/typed_joint_skill_decision/b03/budget.py`: SHA256`2b5c4a1e2cccb572b758450719f2a3ff76306dba967b93688f5a4e63ab1e7bab`.
+- `experiments/candidates/typed_joint_skill_decision/b03/prefix.py`: SHA256`6b3240a0e7bc370c91f0684a9f6da3ca096d38450c2aecb64b11f09f3f8eae1e`.
+- `experiments/candidates/typed_joint_skill_decision/b03/reader.py`: SHA256`a09aa96377a11ecca4f5cbb7ca45ad094834fcabb30ddb73d53146d19b0563ab`.
+- `experiments/candidates/typed_joint_skill_decision/b03/run.py`: SHA256`4d926d2a54ebee2c00be5983c456ee1b8710572cc48a35928326b09756a9a494`.
+- `tests/experiments/candidates/typed_joint_skill_decision/b03/test_b03.py`: SHA256`890c0729e615fb28d19c603d6d88ebc21afe435e0baae1792fc5dc0d07dab2a1`.
+
+The single entry is`experiments/candidates/typed_joint_skill_decision/b03/run.py`,
+with`--seed 0 --input-manifest docs/research/candidates/typed_joint_skill_decision/B03_INPUT.json
+--input-manifest-sha256 e811e9c596210a4e9c7a3c2b2be1c66422ce305aa4a3de6cd8444e7e8ade5864`,
+plus exact published`--launch-sha`and canonical`--out`bound by the launcher.
+The fresh tag is`runs/typed_joint_skill_decision/b03_a01`. Original configured
+`wsl_4070`interpreter and published full source snapshot are used; no shared
+environment/profile modification. No B03 result operation is accepted yet.
