@@ -2634,3 +2634,18 @@ Original result ResearchCritic has accepted this full evidence for independent
 diagnosis and constructive continuation judgment. No new result operation or
 fit is selected by this intermediate DM reading; final disposition follows the
 complete independent answer in this same notebook.
+
+
+Measured B03 remote disposal after complete verified collection: the maintained
+`scripts/hmasd_snapshot_gc.py`exact snapshot preview and apply (read-only elevated
+process scan) confirmed terminal native identities, no live source consumers,
+clean snapshot and durable Git source804dac52b. Removed only
+`hmasd-wsl-node:/home/wu/projects/HMASD/.git/hmasd-launch-sources/064bf00745de48ae8e72dfab8d2e56c1`,
+1794961408allocated bytes→0, actual absence confirmed. Original new output
+104243200B and prior B02 root144699392B remain unchanged. Net remote reduction
+1794961408B; no archive/copy/backup chain. Measured source+prior+output just
+before disposal totaled2043904000B, larger than the last sampled2039803904B
+but still below2.5GiB. No continuous-peak claim is made. No cleanup blocker.
+The active scientific reviewer uses retained canonical raw/Git source, not the
+disposable snapshot. Local reading scratch remains temporarily until its reader
+consumer ends; final selected-code retirement is considered with the next choice.
