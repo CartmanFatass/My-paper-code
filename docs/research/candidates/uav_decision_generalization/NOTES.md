@@ -3792,3 +3792,30 @@ all canonical result evidence and admission/exit records remain. A final local
 source-manifest comparison confirms all45 scientific files still match the
 worker input exactly. Cleanup of this disposable source does not turn native
 completion into a scientific result or release required unique evidence.
+
+
+<a id="b03-reader-accepted"></a>
+### B03 exact complete reader accepted — 2026-10-02 11:54 UTC
+
+Exact reader inputs were published in `4fe4d7b10d28184c25590d5448f7c6eae5100880`;
+all45 scientific sources remain worker300c58-identical. The configured supervisor
+preparation `dmgen-b03-joint-window-read-prep-a01` completed exit0 after31s.
+The original selected reader was accepted at11:54:30.485075UTC, operation
+`/home/wu/projects/HMASD/.git/hmasd-admission/3c2304fb1119d6da9ad827bbe006fbd4aa12841e59fecd5f1c4eac416a719401.json`.
+Its native supervisor/runner are1338532/1338533 with original boot/start identities
+in the manifest; canonical output is
+`/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01`,
+source snapshot `.git/hmasd-launch-sources/89f42cc796054e9883dbaafc384af1ec`.
+Fresh available physical/effective RAM15330312192B passed the selected8GiB request.
+Runtime, information, exposure and all input identities are unchanged. ConfigSHA
+`f64dac6b3edc33e902e3710efe3d2aa4c09b470c7c540ecc1781d0c97435f253`
+and compact acceptance files were collected and verified against canonical bytes.
+
+I added exactly this read-only status job `b03-joint-window-read-a01` to the
+original observer state, generation9, and drained actual running/consistent facts.
+The completed worker job remains terminal; no relaunch or duplicate reader exists.
+Initial reader progress checked all135 training rollouts/1080000 training ledgers
+and6480000 UAV movement ticks in44.539615CPU seconds before entering the frozen
+mission reconstruction. Frozen models/physical checks, complete scientific
+reading, independent diagnosis and final retention remain outstanding. This
+is still progress, not a completed scientific verdict.

@@ -1,5 +1,26 @@
 # Joint-window direction — in-progress handoff snapshot
 
+**Update — 2026-10-02 11:54 UTC:** the same worker completed exit0 at11:18:16UTC,
+with3fits/1196000native/615600optimizer steps,135 training rollouts and232 frozen
+missions. Its canonical output remains; disposable worker snapshot was removed
+by verified GC, reclaiming1813323776B. Complete reader is now accepted/running:
+source`4fe4d7b10d28184c25590d5448f7c6eae5100880` (same45 scientific hashes),
+operation`/home/wu/projects/HMASD/.git/hmasd-admission/3c2304fb1119d6da9ad827bbe006fbd4aa12841e59fecd5f1c4eac416a719401.json`,
+output`/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01`,
+snapshot`.git/hmasd-launch-sources/89f42cc796054e9883dbaafc384af1ec`,
+supervisor/runner1338532/1338533. Use this operation for current status;
+worker's original operation is terminal and must never be restarted. Observer
+is the same owned state below, generation9, job`b03-joint-window-read-a01`,
+request`reader-request.json`; actual running facts were drained. New exact
+inputs are`B03_WORKER_INPUT.json`/`B03_AFTER_WORKER_LEDGER.json`, bound in
+[reader admission](NOTES.md#b03-reader-accepted). Reader has0native/fit/optimizer
+scope; all135 training rollouts checked, frozen reconstruction still underway.
+The scientific result, independent diagnosis and final cleanup are not complete.
+The original09:47 snapshot below is retained as history; this update and subsequent
+live state supersede its process/progress descriptions. All no-restart, ownership
+and frozen-contract limits continue.
+
+
 Owner requested this document during an accepted operation. Snapshot read at
 **2026-10-02 09:47:05.525703 UTC**. This is not a pause, a transfer of ownership,
 a terminal result, or permission to terminate/restart the worker. The existing
