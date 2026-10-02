@@ -1,0 +1,11 @@
+{
+  "claim_key": "07d3d379db4eeb1a5d2e8bb533e579864a80ed75e1877634d5eab9d03115303d",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/07d3d379db4eeb1a5d2e8bb533e579864a80ed75e1877634d5eab9d03115303d.json",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b12_resource_assignment_a01/launch-manifest.json",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/07d3d379db4eeb1a5d2e8bb533e579864a80ed75e1877634d5eab9d03115303d.json",
+  "pid": 1322040,
+  "runner_pid": 1322041,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-10-02T07:25:29.903568Z"
+}

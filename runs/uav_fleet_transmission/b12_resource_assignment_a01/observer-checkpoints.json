@@ -1,0 +1,31 @@
+[
+  {
+    "generation": 23,
+    "wake_id": "ad675964-f5d8-455c-b55f-95964afa3561",
+    "events": [
+      {
+        "id": "17b041d97dcfba0e94caa6d3",
+        "kind": "CHECKPOINT",
+        "evidence": {
+          "generation": 23,
+          "jobs": [
+            "b12-resource-scientific-a01"
+          ]
+        },
+        "created": 1790927509.6132035,
+        "consumed": false
+      }
+    ],
+    "delivery": {
+      "id": "ad675964-f5d8-455c-b55f-95964afa3561",
+      "status": "delivery_unknown",
+      "created": 1790927509.6354861,
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Error: failed to queue session message: thread/queue/add failed: direct app-server input is not allowed for unloaded spawned sub-agents (code -32600)\n",
+      "exposed_ids": [
+        "17b041d97dcfba0e94caa6d3"
+      ]
+    }
+  }
+]

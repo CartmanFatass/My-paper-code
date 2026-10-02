@@ -1,0 +1,560 @@
+{
+  "cpu_review_limit_seconds": 21600.0,
+  "direction": "uav_fleet_transmission",
+  "fits": 0,
+  "frozen_reference": {
+    "groups": [
+      {
+        "descriptor": {
+          "arms": [
+            "C",
+            "H_A"
+          ],
+          "compact": {
+            "config.json": {
+              "bytes": 18820,
+              "sha256": "bf55d98d991904c9850c6a9d107876c1a144499306c7ef06d847bf092b10b8a4"
+            },
+            "manifest.json": {
+              "bytes": 35136,
+              "sha256": "981f7aa06a097a79c90b343b6e215053bd6127eaf0c11ce7c756da7849c24bc0"
+            },
+            "perworld.json": {
+              "bytes": 3209855,
+              "sha256": "31ff7e7210cf7efbdb2f40366e1f5fd6371dc0047890a12bbe2b48071e0228d3"
+            },
+            "reading.json": {
+              "bytes": 1744500,
+              "sha256": "cad25ae780f6a79d36795ddfba687f1afe862c9ccb5af2cf9168971377ad0ae1"
+            }
+          },
+          "launch_sha": "ee7190daebd9e9e3554e7c821ee06ea88c9a9cae",
+          "run": "runs/uav_fleet_transmission/b10_service_assignment_a01"
+        },
+        "directory": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01"
+      },
+      {
+        "descriptor": {
+          "arms": [
+            "H_T"
+          ],
+          "compact": {
+            "config.json": {
+              "bytes": 14926,
+              "sha256": "8fd86a64226f7970122da7bdebf75b242aa7bdfdcab5e688564008bb3bce23df"
+            },
+            "manifest.json": {
+              "bytes": 12209,
+              "sha256": "a52b1411d67be252451ad56866b48f5aad765077452dc251277958c46431b421"
+            },
+            "perworld.json": {
+              "bytes": 1799822,
+              "sha256": "7e34e61fce846a3b3f15d8cf29ad69b500b584e592844a9e56687d224a6e40d1"
+            },
+            "reading.json": {
+              "bytes": 1016987,
+              "sha256": "0a6f8f02b882b56e8639fe12e5285aa835205409e21c09e0359016abbc3bc2d7"
+            }
+          },
+          "launch_sha": "6344ca4398bab3692e3593b0125c24135c7a563d",
+          "run": "runs/uav_fleet_transmission/b11_travel_ties_a01"
+        },
+        "directory": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b11_travel_ties_a01"
+      }
+    ],
+    "new_controller_calls": 0,
+    "new_model_calls": 0,
+    "new_native_calls": 0,
+    "phase": "scientific",
+    "root": "/home/wu/projects/HMASD"
+  },
+  "horizon": 3000,
+  "jobs": [
+    {
+      "arm": "E",
+      "job_key": "29910001/E",
+      "limit": 3000,
+      "seed": 29910001
+    },
+    {
+      "arm": "B",
+      "job_key": "29910001/B",
+      "limit": 3000,
+      "seed": 29910001
+    },
+    {
+      "arm": "B",
+      "job_key": "29910002/B",
+      "limit": 3000,
+      "seed": 29910002
+    },
+    {
+      "arm": "E",
+      "job_key": "29910002/E",
+      "limit": 3000,
+      "seed": 29910002
+    },
+    {
+      "arm": "E",
+      "job_key": "29910003/E",
+      "limit": 3000,
+      "seed": 29910003
+    },
+    {
+      "arm": "B",
+      "job_key": "29910003/B",
+      "limit": 3000,
+      "seed": 29910003
+    },
+    {
+      "arm": "B",
+      "job_key": "29910004/B",
+      "limit": 3000,
+      "seed": 29910004
+    },
+    {
+      "arm": "E",
+      "job_key": "29910004/E",
+      "limit": 3000,
+      "seed": 29910004
+    },
+    {
+      "arm": "E",
+      "job_key": "29910005/E",
+      "limit": 3000,
+      "seed": 29910005
+    },
+    {
+      "arm": "B",
+      "job_key": "29910005/B",
+      "limit": 3000,
+      "seed": 29910005
+    },
+    {
+      "arm": "B",
+      "job_key": "29910006/B",
+      "limit": 3000,
+      "seed": 29910006
+    },
+    {
+      "arm": "E",
+      "job_key": "29910006/E",
+      "limit": 3000,
+      "seed": 29910006
+    },
+    {
+      "arm": "E",
+      "job_key": "29910007/E",
+      "limit": 3000,
+      "seed": 29910007
+    },
+    {
+      "arm": "B",
+      "job_key": "29910007/B",
+      "limit": 3000,
+      "seed": 29910007
+    },
+    {
+      "arm": "B",
+      "job_key": "29910008/B",
+      "limit": 3000,
+      "seed": 29910008
+    },
+    {
+      "arm": "E",
+      "job_key": "29910008/E",
+      "limit": 3000,
+      "seed": 29910008
+    },
+    {
+      "arm": "E",
+      "job_key": "29910009/E",
+      "limit": 3000,
+      "seed": 29910009
+    },
+    {
+      "arm": "B",
+      "job_key": "29910009/B",
+      "limit": 3000,
+      "seed": 29910009
+    },
+    {
+      "arm": "B",
+      "job_key": "29910010/B",
+      "limit": 3000,
+      "seed": 29910010
+    },
+    {
+      "arm": "E",
+      "job_key": "29910010/E",
+      "limit": 3000,
+      "seed": 29910010
+    },
+    {
+      "arm": "E",
+      "job_key": "29910011/E",
+      "limit": 3000,
+      "seed": 29910011
+    },
+    {
+      "arm": "B",
+      "job_key": "29910011/B",
+      "limit": 3000,
+      "seed": 29910011
+    },
+    {
+      "arm": "B",
+      "job_key": "29910012/B",
+      "limit": 3000,
+      "seed": 29910012
+    },
+    {
+      "arm": "E",
+      "job_key": "29910012/E",
+      "limit": 3000,
+      "seed": 29910012
+    },
+    {
+      "arm": "E",
+      "job_key": "29910013/E",
+      "limit": 3000,
+      "seed": 29910013
+    },
+    {
+      "arm": "B",
+      "job_key": "29910013/B",
+      "limit": 3000,
+      "seed": 29910013
+    },
+    {
+      "arm": "B",
+      "job_key": "29910014/B",
+      "limit": 3000,
+      "seed": 29910014
+    },
+    {
+      "arm": "E",
+      "job_key": "29910014/E",
+      "limit": 3000,
+      "seed": 29910014
+    },
+    {
+      "arm": "E",
+      "job_key": "29910015/E",
+      "limit": 3000,
+      "seed": 29910015
+    },
+    {
+      "arm": "B",
+      "job_key": "29910015/B",
+      "limit": 3000,
+      "seed": 29910015
+    },
+    {
+      "arm": "B",
+      "job_key": "29910016/B",
+      "limit": 3000,
+      "seed": 29910016
+    },
+    {
+      "arm": "E",
+      "job_key": "29910016/E",
+      "limit": 3000,
+      "seed": 29910016
+    },
+    {
+      "arm": "E",
+      "job_key": "29910017/E",
+      "limit": 3000,
+      "seed": 29910017
+    },
+    {
+      "arm": "B",
+      "job_key": "29910017/B",
+      "limit": 3000,
+      "seed": 29910017
+    },
+    {
+      "arm": "B",
+      "job_key": "29910018/B",
+      "limit": 3000,
+      "seed": 29910018
+    },
+    {
+      "arm": "E",
+      "job_key": "29910018/E",
+      "limit": 3000,
+      "seed": 29910018
+    },
+    {
+      "arm": "E",
+      "job_key": "29910019/E",
+      "limit": 3000,
+      "seed": 29910019
+    },
+    {
+      "arm": "B",
+      "job_key": "29910019/B",
+      "limit": 3000,
+      "seed": 29910019
+    },
+    {
+      "arm": "B",
+      "job_key": "29910020/B",
+      "limit": 3000,
+      "seed": 29910020
+    },
+    {
+      "arm": "E",
+      "job_key": "29910020/E",
+      "limit": 3000,
+      "seed": 29910020
+    },
+    {
+      "arm": "E",
+      "job_key": "29910021/E",
+      "limit": 3000,
+      "seed": 29910021
+    },
+    {
+      "arm": "B",
+      "job_key": "29910021/B",
+      "limit": 3000,
+      "seed": 29910021
+    },
+    {
+      "arm": "B",
+      "job_key": "29910022/B",
+      "limit": 3000,
+      "seed": 29910022
+    },
+    {
+      "arm": "E",
+      "job_key": "29910022/E",
+      "limit": 3000,
+      "seed": 29910022
+    },
+    {
+      "arm": "E",
+      "job_key": "29910023/E",
+      "limit": 3000,
+      "seed": 29910023
+    },
+    {
+      "arm": "B",
+      "job_key": "29910023/B",
+      "limit": 3000,
+      "seed": 29910023
+    },
+    {
+      "arm": "B",
+      "job_key": "29910024/B",
+      "limit": 3000,
+      "seed": 29910024
+    },
+    {
+      "arm": "E",
+      "job_key": "29910024/E",
+      "limit": 3000,
+      "seed": 29910024
+    },
+    {
+      "arm": "E",
+      "job_key": "29910025/E",
+      "limit": 3000,
+      "seed": 29910025
+    },
+    {
+      "arm": "B",
+      "job_key": "29910025/B",
+      "limit": 3000,
+      "seed": 29910025
+    },
+    {
+      "arm": "B",
+      "job_key": "29910026/B",
+      "limit": 3000,
+      "seed": 29910026
+    },
+    {
+      "arm": "E",
+      "job_key": "29910026/E",
+      "limit": 3000,
+      "seed": 29910026
+    },
+    {
+      "arm": "E",
+      "job_key": "29910027/E",
+      "limit": 3000,
+      "seed": 29910027
+    },
+    {
+      "arm": "B",
+      "job_key": "29910027/B",
+      "limit": 3000,
+      "seed": 29910027
+    },
+    {
+      "arm": "B",
+      "job_key": "29910028/B",
+      "limit": 3000,
+      "seed": 29910028
+    },
+    {
+      "arm": "E",
+      "job_key": "29910028/E",
+      "limit": 3000,
+      "seed": 29910028
+    },
+    {
+      "arm": "E",
+      "job_key": "29910029/E",
+      "limit": 3000,
+      "seed": 29910029
+    },
+    {
+      "arm": "B",
+      "job_key": "29910029/B",
+      "limit": 3000,
+      "seed": 29910029
+    },
+    {
+      "arm": "B",
+      "job_key": "29910030/B",
+      "limit": 3000,
+      "seed": 29910030
+    },
+    {
+      "arm": "E",
+      "job_key": "29910030/E",
+      "limit": 3000,
+      "seed": 29910030
+    },
+    {
+      "arm": "E",
+      "job_key": "29910031/E",
+      "limit": 3000,
+      "seed": 29910031
+    },
+    {
+      "arm": "B",
+      "job_key": "29910031/B",
+      "limit": 3000,
+      "seed": 29910031
+    },
+    {
+      "arm": "B",
+      "job_key": "29910032/B",
+      "limit": 3000,
+      "seed": 29910032
+    },
+    {
+      "arm": "E",
+      "job_key": "29910032/E",
+      "limit": 3000,
+      "seed": 29910032
+    }
+  ],
+  "labels": 0,
+  "launch_sha": "65caed8708a33782b942bf74fd66ee2a31aee3b2",
+  "model_contract": "all actual analytic edges/leximin criteria counted and replayed once; zero old RF/private model",
+  "model_native_steps": 0,
+  "model_resets": 0,
+  "numeric_threads": 1,
+  "object": "fleet-b12-energy-leximin-assignment-v1",
+  "optimizer_updates": 0,
+  "phase": "scientific",
+  "primary": "paired B-E native J with QoS; E/B versus frozen C/H_A/H_T complete uses",
+  "prior_cost_evidence": [
+    {
+      "allocated_bytes": 12288,
+      "bytes": 9988,
+      "cpu_seconds": 4.99295893,
+      "kind": "all finite/static/mock/failed checks",
+      "path": "runs/uav_fleet_transmission/b12_resource_checks_a01/checks.json",
+      "sha256": "152ca4bee45e16642f13681d90fd7041f5895674cbaf85058e176e99e7101fa8"
+    },
+    {
+      "allocated_bytes": 16384,
+      "bytes": 14498,
+      "cpu_seconds": 288.35607905700004,
+      "kind": "complete engineering workers and reader",
+      "path": "runs/uav_fleet_transmission/b12_resource_engineering_a01/reading.json",
+      "sha256": "b7c3055d897c353788061570960bdbadf89679b9f01b5b12def16fc5f0cb291c"
+    }
+  ],
+  "prior_cpu_seconds": 293.34903798700003,
+  "shield": {
+    "enter_margin": 0.0,
+    "exit_margin": 0.05
+  },
+  "source_binding": {
+    "construction_contract_sha": "6fc708f745de10c5b9dcaf0e93fc6ff9dab161bc",
+    "files": {
+      "configs/config_1.py": "f55b5f148c2664334b455305dea094591799eb0c0544237f7bb717bd1401ccb8",
+      "envs/pettingzoo/env_adapter.py": "8b42c1c3e7ef44cb814f79225b4af944b1018ad764dfeb17e9e1cc294df79d40",
+      "envs/pettingzoo/native/uav_geometry_backend.cpp": "1ff1eecb1c4a69ec402f4f2a506dca830e140844f8ed9c56f52e2c99c94791dd",
+      "envs/pettingzoo/relay/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "envs/pettingzoo/relay/belief_map.py": "b27750f09706cad0b97ec2689b703228e3f28a711877b4dd15707c8571b4ce04",
+      "envs/pettingzoo/relay/channel_geometry.py": "c16121dd5ecf82d5f706c236b71b8d1805446d0d9e483a8a4d5258b2657acb69",
+      "envs/pettingzoo/relay/energy_aware.py": "f6836b7b8d26e73b83888fa2eb5cb7d02e9ec565e35ddc3de0098c9746f367cf",
+      "envs/pettingzoo/relay/forced_relay.py": "79a61f1ed07ae9bb52d9cfb6163041b13fff13ecb9e3e30b0a97709f622bd973",
+      "envs/pettingzoo/relay/local_view.py": "560c8de76599c649b921be7c2324f5983c8ad48bf5ca93fe4e1871d2c4f46657",
+      "envs/pettingzoo/relay/progressive.py": "176ce4856725d2b2a8857aa42e80730c5e020996bf3411c8249494d49a8910f8",
+      "envs/pettingzoo/relay/routed_core.py": "f67869ae1de05c4f0d7e05e0dac0e4f13008d2f17251d07e20dc97c4ea44abf0",
+      "envs/pettingzoo/relay/routing.py": "1956f4cabbb3a2660fdbff9a4892327dfd16f02b2d497f64faef2f02a24645d5",
+      "envs/pettingzoo/uav_cpp_backend.py": "59b9915cf232d263930b2521eff2a933aeb2bca218eb2958dfce81ff52fc822c",
+      "experiments/candidates/energy_relay_benchmark/b01/evaluation.py": "15391e2eafff0876dd0bfa94a0d8f9f96558c76254e8d73cb8e55426735eccd7",
+      "experiments/candidates/energy_relay_benchmark/b01/feedback.py": "0cb8cc14d7d63ea6dd6bbc84c830e01c06837507acd70b8fd29ae6411a6c13d2",
+      "experiments/candidates/energy_relay_benchmark/b01/heuristic.py": "f82bbcc1d6586ae41acbb720b225b294c3dff812246e88f15f699b2d9146351e",
+      "experiments/candidates/energy_relay_benchmark/b01/observation.py": "baa416c9067504fdeb2656b376768ed06c3febe440c358c92c7281922791536f",
+      "experiments/candidates/uav_fleet_transmission/b08_anonymous_memory/controller.py": "4f8469b053e70e63ca93ad9636122a6f32ae9eb150802c671f005e25cef78933",
+      "experiments/candidates/uav_fleet_transmission/b09_service_prediction/__init__.py": "e65636c372960506ff434ea18275c4abfca459a16f71a3d56cf8121a50cf08cb",
+      "experiments/candidates/uav_fleet_transmission/b09_service_prediction/contract.py": "e1fa8bea71cb0e1f4096b81986dd8a81356be46c2a52cfa55bd9ee38624b10df",
+      "experiments/candidates/uav_fleet_transmission/b09_service_prediction/controller.py": "fea7ad943e94e509bb4bd08bf0d94a5f26a647e28e4969bd8006f5673dbfbeca",
+      "experiments/candidates/uav_fleet_transmission/b09_service_prediction/frozen_sources.json": "dbd930420ae0688ed317ccdbb60f609b5e5219a0402f1527a8e0e00425db56c5",
+      "experiments/candidates/uav_fleet_transmission/b09_service_prediction/model.py": "a090e8714d3a6d4e6f4a9f53bb6356aa51302036831cca3d2ed90f22c697423c",
+      "experiments/candidates/uav_fleet_transmission/b09_service_prediction/nominal.py": "53607818394218f050ead61db5f257ae9ebcb865159269ea08c07f5f56e542dc",
+      "experiments/candidates/uav_fleet_transmission/b09_service_prediction/trace.py": "ada90960da66bec85cdaaf015de65afece66fd95993ea96748e200c584231293",
+      "experiments/candidates/uav_fleet_transmission/b10_service_assignment/__init__.py": "51461302071dfd2955d107bb5c5a381667030d8975bb987d0ba8fbddaa5de5fc",
+      "experiments/candidates/uav_fleet_transmission/b10_service_assignment/budget.py": "a5db8fe3ebcb610951c95a33021bacb56869db1e0eb213278103d7197bd2599e",
+      "experiments/candidates/uav_fleet_transmission/b10_service_assignment/capture.py": "cf6902fa577f6ff8ff2a1dfdfa257bc449a952232b82fc5b9e9f18c9a9d1586d",
+      "experiments/candidates/uav_fleet_transmission/b10_service_assignment/contract.py": "bf137d987dc021fec5e80b38d61b22067703ac61eb570bb25bafa3029605d34e",
+      "experiments/candidates/uav_fleet_transmission/b10_service_assignment/controller.py": "346d513a850a7561c3310de2e98d5ea4474e6a1a0b02ca452dff9a872ad79501",
+      "experiments/candidates/uav_fleet_transmission/b10_service_assignment/metrics.py": "66a92c3d87b99447e902df2a174d35efbaa215504bfec5b0d36f419f8b78e860",
+      "experiments/candidates/uav_fleet_transmission/b10_service_assignment/nominal.py": "3191b045b2540d16948382150d57268ca0f32484d4682d0fa4dd80e351e2ae07",
+      "experiments/candidates/uav_fleet_transmission/b10_service_assignment/reader.py": "137b887322f9382e23189005ed0e71707e1b37379e686bf196e8157556febd22",
+      "experiments/candidates/uav_fleet_transmission/b10_service_assignment/run.py": "3d9027cf78e4b23991f5307b0e9cbe03b80457e3be5731888861cee5977f2727",
+      "experiments/candidates/uav_fleet_transmission/b10_service_assignment/study.py": "ffbec647a96b6acb62aa32c95e8215f119ce056ed83b79890e3a4a9e36566991",
+      "experiments/candidates/uav_fleet_transmission/b10_service_assignment/trace.py": "bdebf08f99509053f69748625fae40e2841afe4429f8889bde39c9f49c54dea1",
+      "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/__init__.py": "f1513ee81c75b21cc4ed6ed2bd6addfe5d3421e6d7d5027e79bd2d0c6fc70b2b",
+      "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/capture.py": "62b933211c7f6a36d152c6faa13649cd9d473d0623b2dedc74ef5c70212d76bb",
+      "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/checks.py": "7270ccadbf1131e166aa99fc813ff1ca82f00095747c5cb6d3997ace29afbd0c",
+      "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/contract.py": "f457ef57e64de893476335b1b9fddc4d46b6e6426cd4293a323d56cb40990c01",
+      "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/controller.py": "b9bb8832dd7d07d604a8e890543cb8584f1133cd7d2ce0bf5b0828cd8860da69",
+      "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/energy.py": "5b7c079dd4a2641d110d20b51f567bb664a74e7b0d72fc536a203b1fffeac2ee",
+      "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/metrics.py": "f8b56f4f37c21a9d1487a2d58c7f518ccd7324b0fb15e2463adfc1f6aef911c9",
+      "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/reader.py": "75336faff0256fbd857fef2ed30a2bb5d450362d35aca9127b77cc3069e8599c",
+      "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/references.json": "ca395cb62b9adada14e067fec7d74e5f5a6901805bf45a8701bfc1a2a377207f",
+      "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/run.py": "48384e62b685d04b00b0fdd583fd1e37457974c393a7882d18dc3499dc342dfb",
+      "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/study.py": "08b194b3d7766fb11ca3569208e097018c8d98eb1daf916864951ded32a7923d",
+      "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/trace.py": "d5be11ff136f585ccef6d4458a29523185dd9ea34986068c73f99e6b8d93cdf6",
+      "experiments/candidates/uav_information_value/b02/controller.py": "6046f3db724c6893c16d1e256ff05603e5148c6239b37ead266e1446988bce3d",
+      "experiments/candidates/uav_information_value/batch.py": "ffa9e3b462e59134347da677f5c5ac4aa68265f3132c502919c5ca50bf5becfb",
+      "experiments/candidates/uav_information_value/controllers.py": "3f06d1a98f24ff6348ba4fb6bc505729f9c7df55b6cedac867d4a4eb5064cac2",
+      "experiments/candidates/uav_joint_transition/controllers.py": "57bfe8a3847f6864c5f2ef97c97aef80ef414e5dd6c5ff6c628ff68370749715",
+      "experiments/candidates/uav_joint_transition/motion.py": "d333c163a816f139b7d71ab4679553d50f742ef4c5aa7633a932c33f9732dbb5",
+      "experiments/candidates/uav_radio_placement/b01/placement.py": "6682930810fec111fa68e165bbb2790117627d986fbb61057742837dee504b4f",
+      "experiments/candidates/uav_service_auxiliary/b01/native.py": "873024b6f3e01705c07005d0dcc19185da2073f871dd93ae4cb739c5e739f990",
+      "experiments/candidates/uav_service_auxiliary/b04/evaluation.py": "0a3695e958c31b1eb97f6bbf38a1d41727f1c7f6cc679b4c046fcfda4b5487af",
+      "tests/experiments/candidates/uav_fleet_transmission/b12_resource_assignment/test_controller.py": "e66041c10bfa5e44e250612777c48d73503695bfd11cbc00bdc2a8b046bd8a3f",
+      "tests/experiments/candidates/uav_fleet_transmission/b12_resource_assignment/test_support.py": "1506080d94d0322eb2a5360c2a60781fc5dd0510980d049764b12dcde9a9c5bf"
+    },
+    "original_source_sha": "94f08627050b7d495b4c9e9af18db02ab17a5c1e",
+    "selection_l0_sha": "ded373e8a73f936e2467b100b7ed00837662a688"
+  },
+  "trace_timing": "Row t of own_xyz, return_margin, nearest_station, nearest_station_distance_m, station_occupancy, station_queue and target_xy is decoded from the legal observation the controller and shield act on at step t (decision time, same as mode/entered/exited). charging, waiting_steps and battery row t are decoded from the post-step observation (t+1), so station_occupancy[t].sum() pairs with charging[t-1].sum(). guard_checked/guard_blocked row t count the guard actions of step t.",
+  "truth_rights": "read-only capture/reader; every action uses only the original lawful observations",
+  "uncertainty": "descriptive two-sided paired-world Student-t 95%, df=31 for science",
+  "workers": 4
+}
