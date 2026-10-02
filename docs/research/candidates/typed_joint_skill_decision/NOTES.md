@@ -5384,3 +5384,37 @@ The frozen preparation subtotal is71.987048560 measured CPU-s from explicitly di
 The actual source will be published before the one configured `wsl_4070` admission. The remote launcher, source-snapshot helper and compute config already have exactly the current published bytes; unrelated old canonical index prose does not change its matching explicit pause-lift, active direction or exact `Codex DM (native child)` lead, all of which the launcher compares again with fresh published main. No remote branch reset, sparse change, runtime upgrade or health pilot is involved. Fresh actual-node memory/GPU/disk observation is still required immediately before launch.
 
 The first consumer output is `runs/typed_joint_skill_decision/b07_consumer_a01`, with actual snapshot/output, the one staged bank/proof and owned scratch `temp/directions/typed_joint_skill_decision/b07-consumer` charged to the6GiB normal storage cap. The unchanged package is six fits/24,576 updates, six final seals before fresh labels, one fresh endpoint,1,152 cold deployments and the full CPU reader/16 native audits (584,000 native steps total). Limits remain28,800 CPU-s,14,400 full GPU-child seconds,57,600 wall-s. Whole remaining static ceiling is1,383,760, with no further producer or full physical bank rebuild. CUDA feasibility and original SIGSEGV cause remain unresolved; external abnormal dump peak is not bounded by normal storage. The first genuine technical, identity, physical, counter or resource failure stops all dependent effects, with no retry, replacement or prefix continuation.
+
+<a id="b07-consumer-supervisor-failure"></a>
+### B07 consumer supervisor failure before native admission — 2026-10-02 UTC
+
+The first `typed-b07-consumer-a01` request was sent once through configured `/usr/local/bin/agent-task`; supervisor acceptance was not native admission. Its actual task log reports Python could not open `/home/wu/scripts/hmasd_launch.py`. Read-only reconciliation of the same request found no remote consumer output, no native claim for the exact source/output, no matching process and no wrapper PID1352290. Native `status` returned the absent-reference refusal; no launch manifest, shared scientific counters or native exit witness exists. This establishes that the launcher file never opened and no consumer scientific effect ran; it is a code-path conclusion, not invented zero-valued counters. `agent-task status` says `terminated`/tmux absent with exit_code null. The actual numeric process exit remains unrecorded, and this status is not evidence of SIGSEGV or signal termination.
+
+The exact generated wrapper and installed interface diagnose the cause. `agent-task` joins the command arguments with `COMMAND="$*"`, then evaluates that string. My multi-argument `zsh -lic <inner-command>` submission lost the inner grouping: the wrapper evaluated `zsh -lic cd /home/wu/projects/HMASD && exec ...python...`. Zsh received only `cd` as its command; the repository path became a shell argument, and the child’s directory change could not affect the outer wrapper. Outer `exec` then replaced the wrapper with Python at `/home/wu`, also bypassing later exit/status writing. This is my launch-command construction failure. It changes no B06/B07 numerical conclusion and neither diagnoses the earlier SIGSEGV nor tests CUDA feasibility. Full actual request/native-absence/process/task-file evidence is in `runs/typed_joint_skill_decision/b07_consumer_a01/supervisor-failure.json`; original task log is alongside it. Installed supervisor SHA256 is `a7b8c1ff1691e11527cadf6adc677fd2caf00efe1bc0185ada524a5467455553`.
+
+The agreed first-genuine-failure stop is enforced: no resend, quote repair launch, replacement, native observer registration against an absent handle or dependent effect followed. The selected consumer remains scientifically incomplete:0fits/forward/static/native calls from this submission, support CPU unknown except the recorded reading/transport wrappers. The successful fixed-version A02 reader remains valid and independently reusable evidence; no new reader or producer is implied. Root has received the actual failure boundary through native communication. A separately selected remaining consumer could use a single command-string argument with explicit retained inner quoting and an absolute launcher path, subject to the same exact inputs/fresh admission; that option is a proposal, not present authority or a runtime-tested result.
+
+The independent engineering original is preserved below and in `engineering-diagnosis.json`; the full result’s scientific disposition is pending.
+
+<details><summary>Complete independent engineering diagnosis</summary>
+
+**P1: the submitted command lost its shell grouping at the `agent-task` interface. This is a launch-command construction defect, not a B06/B07 scientific or numerical defect.**
+
+I read the complete [failure receipt](/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_consumer_a01/supervisor-failure.json), [request](/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_source/consumer-launch-request.json), and node-before record. A read-only remote inspection confirmed installed `agent-task` SHA256 `a7b8c1ff1691e11527cadf6adc677fd2caf00efe1bc0185ada524a5467455553`.
+
+The source and generated wrapper establish the failure:
+
+1. `agent-task` line 37 joins remaining arguments using `COMMAND="$*"`, discarding their original boundaries.
+2. The generated `eval` therefore executes `zsh -lic cd /home/wu/projects/HMASD && exec …python …`. The zsh command string is only `cd`; the repository path becomes a positional shell argument. That child’s directory change cannot change the wrapper’s directory.
+3. The outer wrapper then executes Python from `/home/wu`. The actual log reports that Python cannot open `/home/wu/scripts/hmasd_launch.py`.
+4. That outer `exec` also replaces the wrapper, bypassing its subsequent exit-code/status writes. This explains the missing witness and stale `running` file. `agent-task status` synthesizes `terminated` when tmux is absent; it does **not** establish signal termination.
+
+The saved reconciliation found no native output, matching claim, matching process, or wrapper PID. The launcher script never opened, so zero consumer scientific effects is a supported code-path conclusion—not counter evidence. The exact process exit code remains unrecorded.
+
+A future separately selected submission using **one command-string argument containing preserved quoting around the complete `zsh -lic` command**, with an absolute launcher path, would address this specific parsing/cwd defect. Keeping `exec` inside that quoted child command would also leave the supervisor wrapper available to record its exit. This changes no B06/B07 science, but has not been runtime-tested and establishes no admission or CUDA feasibility.
+
+No edits, tests, Git operations, or replacement launch were performed. First-failure stop remains in force; this diagnosis supplies no retry authorization.
+
+</details>
+
+DM response: Accepted. The DM constructed a multi-argument submission at a string-joining supervisor interface and did not inspect that exact boundary before Send. This is a DM launch-command defect. Preserve missing numeric exit witness; terminated status is not evidence of a fatal signal. No B06/B07 source defect or CUDA/physics claim follows, and no automatic retry is authorized.

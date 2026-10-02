@@ -1,0 +1,2 @@
+=== Task 'typed-b07-consumer-a01' started at 2026-10-03T06:48:34+08:00 ===
+/home/wu/.venvs/hmasd-gcc-31021/bin/python: can't open file '/home/wu/scripts/hmasd_launch.py': [Errno 2] No such file or directory

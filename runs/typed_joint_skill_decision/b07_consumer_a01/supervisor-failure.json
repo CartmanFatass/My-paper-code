@@ -1,0 +1,58 @@
+{
+  "agent_task_sha256": "a7b8c1ff1691e11527cadf6adc677fd2caf00efe1bc0185ada524a5467455553",
+  "at": "2026-10-02T22:50:20.055733+00:00",
+  "captured_at_epoch": 1790981419.7965922,
+  "fit_forward_static_native_counts_basis": "The submitted interpreter could not open the launch script before any launcher or scientific runner code; no native output/claim or matching process. This is a code-path conclusion, not synthesized counter evidence.",
+  "input_sha256": "be5700ce4ac73a8a8e99d7b8f12d72506a11015717f3646b39b0acd81ab2b39b",
+  "launch_request": "runs/typed_joint_skill_decision/b07_source/consumer-launch-request.json",
+  "local_child_transport_cpu_seconds": 0.060666,
+  "local_parent_read_cpu_seconds": 0.0006234650000000036,
+  "local_read_wall_seconds": 0.7378904700017301,
+  "matching_native_claims": [],
+  "matching_processes": [],
+  "native_launcher_started": false,
+  "native_status": {
+    "returncode": 4,
+    "stderr": "hmasd launch refused: status reference does not exist: /home/wu/projects/HMASD/runs/typed_joint_skill_decision/b07_consumer_a01\n",
+    "stdout": ""
+  },
+  "no_retry_or_continuation": true,
+  "remote_output_exists": false,
+  "runner_support_cpu": "unknown_not_zero",
+  "schema": 1,
+  "source_sha": "c0cae5b738d6e3a79a7cafc29c96ade3fddd6e68",
+  "supervisor_files": {
+    "pid": {
+      "bytes": 8,
+      "sha256": "41ee8c4474342b18e1a03c9db02b582c0621d63de121cce3b6171231848a558c",
+      "text": "1352290\n"
+    },
+    "runner.sh": {
+      "bytes": 1652,
+      "sha256": "489d1b7cca22611920e2b3831d308e675a0680a876cdf39de3ebed40661d1cfb",
+      "text": "#!/usr/bin/env bash\necho $$ > \"/home/wu/.agent-tasks/typed-b07-consumer-a01/pid\"\nSTART_TS=$(date +%s)\necho \"=== Task 'typed-b07-consumer-a01' started at $(date -Iseconds) ===\" >> \"/home/wu/.agent-tasks/typed-b07-consumer-a01/task.log\"\n\n# Execute command capturing output\nset +e\neval 'zsh -lic cd /home/wu/projects/HMASD && exec /home/wu/.venvs/hmasd-gcc-31021/bin/python -B scripts/hmasd_launch.py launch --node wsl_4070 --source-root /home/wu/projects/HMASD --snapshot --direction typed_joint_skill_decision --lead '\\''Codex DM (native child)'\\'' --sha c0cae5b738d6e3a79a7cafc29c96ade3fddd6e68 --output runs/typed_joint_skill_decision/b07_consumer_a01 -- experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/run.py --out runs/typed_joint_skill_decision/b07_consumer_a01 --seed 0 --launch-sha c0cae5b738d6e3a79a7cafc29c96ade3fddd6e68 --input-manifest docs/research/candidates/typed_joint_skill_decision/B07_CONSUMER_INPUT.json --input-manifest-sha256 be5700ce4ac73a8a8e99d7b8f12d72506a11015717f3646b39b0acd81ab2b39b' >> \"/home/wu/.agent-tasks/typed-b07-consumer-a01/task.log\" 2>&1\nEXIT_CODE=$?\nset -e\n\nEND_TS=$(date +%s)\necho $EXIT_CODE > \"/home/wu/.agent-tasks/typed-b07-consumer-a01/exit_code\"\nif [ $EXIT_CODE -eq 0 ]; then\n    echo \"finished\" > \"/home/wu/.agent-tasks/typed-b07-consumer-a01/status\"\nelse\n    echo \"failed\" > \"/home/wu/.agent-tasks/typed-b07-consumer-a01/status\"\nfi\necho \"=== Task 'typed-b07-consumer-a01' exited with code $EXIT_CODE at $(date -Iseconds) (Duration: $((END_TS - START_TS))s) ===\" >> \"/home/wu/.agent-tasks/typed-b07-consumer-a01/task.log\"\n\n# Keep session alive briefly for inspection, then exit\nsleep 1\n"
+    },
+    "start_time": {
+      "bytes": 11,
+      "sha256": "413aca58d94f83e0bb04764d4a4ce412f0eb3eb6d31e9b8f4c3e8a8339c34e6c",
+      "text": "1790981314\n"
+    },
+    "status": {
+      "bytes": 8,
+      "sha256": "a4ecc5c87d811bbff7a118c17ef8cf83318cb623a103c15b8549089aa2a7f0ac",
+      "text": "running\n"
+    },
+    "task.log": {
+      "bytes": 207,
+      "sha256": "d123c6c96c34d1d739166a494eab2ca2b3877153ef8fe9c9c1bd54cb742abadb",
+      "text": "=== Task 'typed-b07-consumer-a01' started at 2026-10-03T06:48:34+08:00 ===\n/home/wu/.venvs/hmasd-gcc-31021/bin/python: can't open file '/home/wu/scripts/hmasd_launch.py': [Errno 2] No such file or directory\n"
+    }
+  },
+  "supervisor_pid_1352290_exists": false,
+  "supervisor_status": {
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\"task\": \"typed-b07-consumer-a01\", \"status\": \"terminated\", \"exit_code\": null, \"pid\": 1352290, \"uptime_seconds\": 105, \"tmux_active\": false}\n"
+  },
+  "supervisor_submission_count": 1
+}
