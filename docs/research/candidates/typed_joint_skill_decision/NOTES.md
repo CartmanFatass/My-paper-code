@@ -3628,3 +3628,82 @@ static calls;0fits/model presentations/native steps;74.443115 cumulative CPU-s;
 3563610112B sampled allocated peak over the full declared scope. Labels, six
 fits, all native programs and the full reader remain pending. This is launch/
 progress evidence, not an interpretable learning result.
+
+
+<a id="b04-technical-terminal"></a>
+## 2026-10-02 UTC — B04 SIGSEGV before learning; complete technical reading
+
+The sole exact-source B04 operation ended with signal11/exit−11 at
+05:45:21.475626UTC. The[original native witness](../../../../runs/typed_joint_skill_decision/b04_a01/process-exit.json)
+and[terminal status](../../../../runs/typed_joint_skill_decision/b04_a01/terminal-status.json)
+agree: runner1318047/start125972158 and supervisor1318046/start125972155 are
+absent, records consistent. No operation was restarted, no bank prefix resumed,
+no interpreter replaced and no new result probe executed. The original
+source`b19508a5c2825359e66a36b4fdc1db68b60cc809`, inputSHA
+`000588aa756405e25e9e3dbebec99b95927277b6a85ee38275947f322f4a12a3`
+and runtimePython3.10.21/NumPy1.26.3/Torch2.7.0+cu118 remain bound.
+
+**What exists.** Hash/shape/address/source/metadata/label-count inspection of all
+39 closed bank shards verifies2496 worlds109400000–109402495 and430126 saved
+labels. The original unclosed`0039-partial.jsonl.gz`has SHA256
+`a6dd341a5c827b78d69b3f2bdbeef97e4ef361f38c596356e54a7a205c35c282`,
+116876bytes, no complete gzip trailer, and1025 valid decompressed JSON records.
+It preserves five further complete candidate-label sets at worlds109402496–500
+and165/172 labels for prepared world109402501 (last saved raw index164).
+Those1019 additional saved labels give a **431145 completed-label lower bound**,
+not an exact final attempt total. There are2501 worlds with all labels retained,
+but the additional five are partial-journal records, not closed compact shards.
+No fresh bank, label-rebuild reader, model forward, fit, update, cold choice or
+H500 trajectory was reached. The declared complete scientific reader did not run.
+
+The[full finite output reconstruction](../../../../runs/typed_joint_skill_decision/b04_a01/terminal-reconstruction.json)
+retains every closed-shard identity/count and partial-world details, with the
+exact read-only reader source. It made0new effect queries;5.214888CPU-s,
+5.889784wall-s and200128KiB peak RSS are separately measured support cost.
+Original raw evidence remains as one copy at
+`hmasd-wsl-node:/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b04_a01`.
+No partial gzip repair, bulk copy or label regeneration was performed. The
+original worker manifest did not register the in-flight journal before SIGSEGV;
+its hash is therefore bound by this post-terminal reconstruction, not falsely
+attributed to a completed worker manifest.
+
+**Costs and missingness.** The final saved progress is only a checkpoint:
+2496 worlds/430126 static calls,306.264725CPU-s,3601137664B sampled disk peak.
+Lost in-memory counters and buffered records prevent an exact terminal attempt
+count and final CPU total;306.264725CPU-s is a measured lower bound. The complete
+witness spans about316.41s from acceptance through exit, including crash handling,
+not an exact CPU measure. Read-only terminal allocation is48926720B for this run,
+943181824B for all direction runs,1811812352B for the source snapshot,846249984B
+for the single retained model,0direction scratch:3601244160B total declared scope.
+No evidence identifies CPU/GPU/disk ceiling enforcement or OOM as the cause.
+Zero model/native/fit work is a phase fact, not a claim of zero preparation cost.
+
+**Cause boundary.** The[kernel window](../../../../runs/typed_joint_skill_decision/b04_a01/kernel-window.log)
+at13:45:14+08 records a python segfault and then WSL CaptureCrash explicitly
+binding pid1318047 and`hmasd-cpython-3.10.21-gcc/bin/python3.10`,signal11. The
+kernel's separate PID1328707 has not been namespace-disambiguated. The configured
+core pattern is`|/wsl-capture-crash %t %E %p %s`;`coredumpctl`is not installed.
+Stderr contains only a resource-tracker leaked-semaphore shutdown warning, no
+Python traceback. These facts establish termination and executable identity;
+they do not identify CPython, NumPy, application code or that warning as the cause.
+The last saved label is an evidence boundary, not a demonstrated crashing input.
+
+The deterministic observer recorded the terminal failure in generation1. Its
+native-child wake was rejected with the known unloaded-subagent queue error;
+the same handle was manually drained, event3118dda04f951600e15848a7 consumed
+under wakee463d231-5f11-46b8-8ac9-717f58cbc32d, and generation2 stopped. There is
+no live producer or pending accepted continuation. Full[observer evidence](../../../../runs/typed_joint_skill_decision/b04_a01/terminal-observation.json)
+is retained.
+
+DM disposition: **technical incomplete, no learning-curve answer.** The broader
+question and selected scientific comparison remain worthwhile but unobserved;
+B01–B03 capabilities/adverse findings and the B04 independent review are unchanged.
+No zero score, fitting diagnosis, failed hypothesis or automatic retry follows.
+Root coordinates any shared-runtime investigation or material re-investment.
+A bounded reused engineering source review is checking whether these existing
+records support a concrete correction; it runs no tests or effect queries. Useful
+remaining evidence questions are whether the existing WSL-captured crash can
+supply a bound stack/core and whether its instruction can be mapped in the exact
+retained executable. Neither missing stack nor missing coredumpctl authorizes a
+replay. Keep source/raw consumers while those concrete evidence questions remain;
+no extra environment, model or duplicate bank is required by current work.

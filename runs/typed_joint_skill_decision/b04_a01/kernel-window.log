@@ -1,0 +1,52 @@
+Oct 02 13:39:08 LAPTOP-U9TDKC8A unknown: WSL (288) ERROR: CheckConnection: getaddrinfo() failed: -5
+Oct 02 13:39:19 LAPTOP-U9TDKC8A unknown: WSL (288) ERROR: CheckConnection: getaddrinfo() failed: -5
+Oct 02 13:39:26 LAPTOP-U9TDKC8A unknown: WSL (288) ERROR: CheckConnection: getaddrinfo() failed: -5
+Oct 02 13:39:41 LAPTOP-U9TDKC8A unknown: WSL (288) ERROR: CheckConnection: getaddrinfo() failed: -5
+Oct 02 13:39:46 LAPTOP-U9TDKC8A unknown: WSL (288) ERROR: CheckConnection: getaddrinfo() failed: -5
+Oct 02 13:40:04 LAPTOP-U9TDKC8A unknown: WSL (288) ERROR: CheckConnection: getaddrinfo() failed: -5
+Oct 02 13:40:18 LAPTOP-U9TDKC8A unknown: WSL (288) ERROR: CheckConnection: getaddrinfo() failed: -5
+Oct 02 13:40:35 LAPTOP-U9TDKC8A unknown: WSL (288) ERROR: CheckConnection: getaddrinfo() failed: -5
+Oct 02 13:40:56 LAPTOP-U9TDKC8A unknown: WSL (288) ERROR: CheckConnection: getaddrinfo() failed: -5
+Oct 02 13:41:22 LAPTOP-U9TDKC8A unknown: WSL (288) ERROR: CheckConnection: getaddrinfo() failed: -5
+Oct 02 13:41:28 LAPTOP-U9TDKC8A unknown: WSL (288) ERROR: CheckConnection: getaddrinfo() failed: -5
+Oct 02 13:41:41 LAPTOP-U9TDKC8A unknown: WSL (288) ERROR: CheckConnection: getaddrinfo() failed: -5
+Oct 02 13:41:46 LAPTOP-U9TDKC8A unknown: WSL (288) ERROR: CheckConnection: getaddrinfo() failed: -5
+Oct 02 13:42:01 LAPTOP-U9TDKC8A unknown: WSL (288) ERROR: CheckConnection: getaddrinfo() failed: -5
+Oct 02 13:42:06 LAPTOP-U9TDKC8A unknown: WSL (288) ERROR: CheckConnection: getaddrinfo() failed: -5
+Oct 02 13:42:25 LAPTOP-U9TDKC8A unknown: WSL (288) ERROR: CheckConnection: getaddrinfo() failed: -5
+Oct 02 13:42:44 LAPTOP-U9TDKC8A unknown: WSL (288) ERROR: CheckConnection: getaddrinfo() failed: -5
+Oct 02 13:42:56 LAPTOP-U9TDKC8A unknown: WSL (288) ERROR: CheckConnection: getaddrinfo() failed: -5
+Oct 02 13:43:04 LAPTOP-U9TDKC8A unknown: WSL (288) ERROR: CheckConnection: getaddrinfo() failed: -5
+Oct 02 13:43:16 LAPTOP-U9TDKC8A unknown: WSL (288) ERROR: CheckConnection: getaddrinfo() failed: -5
+Oct 02 13:43:22 LAPTOP-U9TDKC8A unknown: WSL (288) ERROR: CheckConnection: getaddrinfo() failed: -5
+Oct 02 13:43:34 LAPTOP-U9TDKC8A unknown: WSL (288) ERROR: CheckConnection: getaddrinfo() failed: -5
+Oct 02 13:43:41 LAPTOP-U9TDKC8A unknown: WSL (288) ERROR: CheckConnection: getaddrinfo() failed: -5
+Oct 02 13:43:54 LAPTOP-U9TDKC8A unknown: WSL (288) ERROR: CheckConnection: getaddrinfo() failed: -5
+Oct 02 13:44:00 LAPTOP-U9TDKC8A unknown: WSL (288) ERROR: CheckConnection: getaddrinfo() failed: -5
+Oct 02 13:44:19 LAPTOP-U9TDKC8A unknown: WSL (288) ERROR: CheckConnection: getaddrinfo() failed: -5
+Oct 02 13:44:34 LAPTOP-U9TDKC8A unknown: WSL (288) ERROR: CheckConnection: getaddrinfo() failed: -5
+Oct 02 13:44:42 LAPTOP-U9TDKC8A unknown: WSL (288) ERROR: CheckConnection: getaddrinfo() failed: -5
+Oct 02 13:44:58 LAPTOP-U9TDKC8A unknown: WSL (288) ERROR: CheckConnection: getaddrinfo() failed: -5
+Oct 02 13:45:14 LAPTOP-U9TDKC8A unknown: WSL (288) ERROR: CheckConnection: getaddrinfo() failed: -5
+Oct 02 13:45:14 LAPTOP-U9TDKC8A kernel: python[1328707]: segfault at 1 ip 00005b0a78c48774 sp 00007ffda3db0be0 error 6 in python3.10[5b0a78bf2000+1ea000] likely on CPU 18 (core 9, socket 0)
+Oct 02 13:45:14 LAPTOP-U9TDKC8A kernel: Code: 00 00 00 55 48 89 e5 41 54 49 89 fc 48 89 f7 53 48 89 f3 e8 8e e8 ff ff 48 85 c0 74 5c 48 85 db 7e 1a 31 d2 66 90 49 8b 0c d4 <48> 83 01 01 48 89 4c d0 18 48 83 c2 01 48 39 d3 75 ea 48 8b 15 cb
+Oct 02 13:45:14 LAPTOP-U9TDKC8A kernel: python3.10: python: potentially unexpected fatal signal 11.
+Oct 02 13:45:14 LAPTOP-U9TDKC8A kernel: CPU: 18 PID: 1328707 Comm: python Not tainted 6.6.87.2-microsoft-standard-WSL2 #1
+Oct 02 13:45:14 LAPTOP-U9TDKC8A kernel: RIP: 0033:0x5b0a78c48774
+Oct 02 13:45:14 LAPTOP-U9TDKC8A kernel: Code: 00 00 00 55 48 89 e5 41 54 49 89 fc 48 89 f7 53 48 89 f3 e8 8e e8 ff ff 48 85 c0 74 5c 48 85 db 7e 1a 31 d2 66 90 49 8b 0c d4 <48> 83 01 01 48 89 4c d0 18 48 83 c2 01 48 39 d3 75 ea 48 8b 15 cb
+Oct 02 13:45:14 LAPTOP-U9TDKC8A kernel: RSP: 002b:00007ffda3db0be0 EFLAGS: 00010246
+Oct 02 13:45:14 LAPTOP-U9TDKC8A kernel: RAX: 000075ee29c68fd0 RBX: 0000000000000001 RCX: 0000000000000001
+Oct 02 13:45:14 LAPTOP-U9TDKC8A kernel: RDX: 0000000000000000 RSI: 0000000000000001 RDI: 000075ee29c68fd0
+Oct 02 13:45:14 LAPTOP-U9TDKC8A kernel: RBP: 00007ffda3db0bf0 R08: 000075ee2a1a64d0 R09: 0000000000000000
+Oct 02 13:45:14 LAPTOP-U9TDKC8A kernel: R10: 000075eeeed50dd0 R11: 0000000000000001 R12: 000075ee2a1a66c0
+Oct 02 13:45:14 LAPTOP-U9TDKC8A kernel: R13: 000075ee2a1a64d0 R14: 0000000000000001 R15: 0000000000000001
+Oct 02 13:45:14 LAPTOP-U9TDKC8A kernel: FS:  000075eeefa8f740 GS:  0000000000000000
+Oct 02 13:45:14 LAPTOP-U9TDKC8A unknown: WSL (1329174 - CaptureCrash): Capturing crash for pid: 1318047, executable: !home!wu!.local!opt!hmasd-cpython-3.10.21-gcc!bin!python3.10, signal: 11, port: 50005
+Oct 02 13:45:56 LAPTOP-U9TDKC8A unknown: WSL (288) ERROR: CheckConnection: getaddrinfo() failed: -5
+Oct 02 13:46:01 LAPTOP-U9TDKC8A unknown: WSL (288) ERROR: CheckConnection: getaddrinfo() failed: -5
+Oct 02 13:46:13 LAPTOP-U9TDKC8A unknown: WSL (288) ERROR: CheckConnection: getaddrinfo() failed: -5
+Oct 02 13:46:21 LAPTOP-U9TDKC8A unknown: WSL (288) ERROR: CheckConnection: getaddrinfo() failed: -5
+Oct 02 13:46:34 LAPTOP-U9TDKC8A unknown: WSL (288) ERROR: CheckConnection: getaddrinfo() failed: -5
+Oct 02 13:46:41 LAPTOP-U9TDKC8A unknown: WSL (288) ERROR: CheckConnection: getaddrinfo() failed: -5
+Oct 02 13:46:53 LAPTOP-U9TDKC8A unknown: WSL (288) ERROR: CheckConnection: getaddrinfo() failed: -5
+Oct 02 13:46:58 LAPTOP-U9TDKC8A unknown: WSL (288) ERROR: CheckConnection: getaddrinfo() failed: -5

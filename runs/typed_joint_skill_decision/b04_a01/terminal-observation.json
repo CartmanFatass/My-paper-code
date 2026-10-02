@@ -1,0 +1,196 @@
+{
+  "generation": 1,
+  "wake_id": "e463d231-5f11-46b8-8ac9-717f58cbc32d",
+  "events": [
+    {
+      "id": "3118dda04f951600e15848a7",
+      "kind": "BLOCKED",
+      "evidence": {
+        "job_id": "typed-joint-b04-a01",
+        "status": "failed",
+        "facts": {
+          "admission": {
+            "claim_state": "accepted",
+            "state": "accepted"
+          },
+          "artifacts": {
+            "stderr": {
+              "path": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b04_a01/stderr.log",
+              "state": "present"
+            },
+            "stdout": {
+              "path": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b04_a01/stdout.log",
+              "state": "present"
+            },
+            "summary": {
+              "path": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b04_a01/summary.json",
+              "state": "absent"
+            }
+          },
+          "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/3e4367a5d2791d7e143f7ddd6cabe98f7d781b977e30ec5f43b20cccd824e0de.json",
+          "direction": "typed_joint_skill_decision",
+          "execution": {
+            "exit_code": -11,
+            "exit_witness": {
+              "exit_code": -11,
+              "finished_at_epoch": 1790919921.475626,
+              "path": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b04_a01/process-exit.json",
+              "state": "valid",
+              "termination": "signal"
+            },
+            "runner": {
+              "recorded_identity": {
+                "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+                "kind": "linux_pid_start_ticks",
+                "pid": 1318047,
+                "session_id": 1318046,
+                "start_ticks": 125972158
+              },
+              "state": "absent"
+            },
+            "state": "exited",
+            "supervisor": {
+              "recorded_identity": {
+                "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+                "kind": "linux_pid_start_ticks",
+                "pid": 1318046,
+                "session_id": 1318046,
+                "start_ticks": 125972155
+              },
+              "state": "absent"
+            }
+          },
+          "explicit_retry": {
+            "eligible": true,
+            "reasons": [],
+            "scientific_authorization": false,
+            "successor_ref": null,
+            "supported": true
+          },
+          "explicit_retry_available": true,
+          "kind": "hmasd_operation_status",
+          "manifest_ref": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b04_a01/launch-manifest.json",
+          "node": "wsl_4070",
+          "observed_at": "2026-10-02T05:46:14.248053Z",
+          "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/3e4367a5d2791d7e143f7ddd6cabe98f7d781b977e30ec5f43b20cccd824e0de.json",
+          "output_root": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b04_a01",
+          "record_consistency": {
+            "mismatches": [],
+            "state": "consistent"
+          },
+          "schema_version": 1,
+          "sha": "b19508a5c2825359e66a36b4fdc1db68b60cc809",
+          "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/ec8727c4c6d6404ab539eec55cc8a0ec"
+        }
+      },
+      "created": 1790919975.021498,
+      "consumed": false
+    }
+  ],
+  "jobs": {
+    "typed-joint-b04-a01": {
+      "spec": {
+        "id": "typed-joint-b04-a01",
+        "protocol": "launch",
+        "argv": [
+          "/usr/bin/ssh",
+          "hmasd-wsl-node",
+          "/home/wu/.venvs/hmasd-gcc-31021/bin/python /home/wu/projects/HMASD/scripts/hmasd_launch.py status /home/wu/projects/HMASD/.git/hmasd-admission/3e4367a5d2791d7e143f7ddd6cabe98f7d781b977e30ec5f43b20cccd824e0de.json"
+        ],
+        "cwd": "/home/fires/hmasd-wsl",
+        "interval": 60,
+        "timeout": 25
+      },
+      "status": "failed",
+      "due": 1790920035.0211358,
+      "errors": 0,
+      "last": {
+        "admission": {
+          "claim_state": "accepted",
+          "state": "accepted"
+        },
+        "artifacts": {
+          "stderr": {
+            "path": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b04_a01/stderr.log",
+            "state": "present"
+          },
+          "stdout": {
+            "path": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b04_a01/stdout.log",
+            "state": "present"
+          },
+          "summary": {
+            "path": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b04_a01/summary.json",
+            "state": "absent"
+          }
+        },
+        "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/3e4367a5d2791d7e143f7ddd6cabe98f7d781b977e30ec5f43b20cccd824e0de.json",
+        "direction": "typed_joint_skill_decision",
+        "execution": {
+          "exit_code": -11,
+          "exit_witness": {
+            "exit_code": -11,
+            "finished_at_epoch": 1790919921.475626,
+            "path": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b04_a01/process-exit.json",
+            "state": "valid",
+            "termination": "signal"
+          },
+          "runner": {
+            "recorded_identity": {
+              "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+              "kind": "linux_pid_start_ticks",
+              "pid": 1318047,
+              "session_id": 1318046,
+              "start_ticks": 125972158
+            },
+            "state": "absent"
+          },
+          "state": "exited",
+          "supervisor": {
+            "recorded_identity": {
+              "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+              "kind": "linux_pid_start_ticks",
+              "pid": 1318046,
+              "session_id": 1318046,
+              "start_ticks": 125972155
+            },
+            "state": "absent"
+          }
+        },
+        "explicit_retry": {
+          "eligible": true,
+          "reasons": [],
+          "scientific_authorization": false,
+          "successor_ref": null,
+          "supported": true
+        },
+        "explicit_retry_available": true,
+        "kind": "hmasd_operation_status",
+        "manifest_ref": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b04_a01/launch-manifest.json",
+        "node": "wsl_4070",
+        "observed_at": "2026-10-02T05:46:14.248053Z",
+        "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/3e4367a5d2791d7e143f7ddd6cabe98f7d781b977e30ec5f43b20cccd824e0de.json",
+        "output_root": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b04_a01",
+        "record_consistency": {
+          "mismatches": [],
+          "state": "consistent"
+        },
+        "schema_version": 1,
+        "sha": "b19508a5c2825359e66a36b4fdc1db68b60cc809",
+        "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/ec8727c4c6d6404ab539eec55cc8a0ec"
+      },
+      "observed": 1790919975.0211358
+    }
+  },
+  "delivery": {
+    "id": "e463d231-5f11-46b8-8ac9-717f58cbc32d",
+    "status": "delivery_unknown",
+    "created": 1790919975.029506,
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Error: failed to queue session message: thread/queue/add failed: direct app-server input is not allowed for unloaded spawned sub-agents (code -32600)\n",
+    "exposed_ids": [
+      "3118dda04f951600e15848a7"
+    ]
+  },
+  "stopped": false
+}
