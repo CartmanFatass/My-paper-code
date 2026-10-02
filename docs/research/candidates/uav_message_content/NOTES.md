@@ -4855,3 +4855,358 @@ identity is in owned scratch and will be stopped once native admission finishes.
 The scientific execution SHA remains the published corrected c2f37121a, with the
 unchanged selected manifest and code; this later notebook publication adds only
 preparation/continuity facts. No a02 supervisor request has yet been sent.
+
+
+<a id="b07-accepted-a02"></a>
+### B07 corrected package accepted and observed, 2026-10-02 UTC
+
+The one corrected request was accepted by the native kernel on wsl_4070 under
+source `c2f37121a092116c92fe5db7809bfc4710d4da55`. Its authoritative source, argv,
+node, fresh admission and runner/supervisor identities are in
+`runs/uav_message_content/b07_codec_a02/launch-manifest.json` and
+`admission-preflight.json`; supervisor submission and the first native
+reconciliation are retained beside them. The operation reference is
+`/home/wu/projects/HMASD/.git/hmasd-admission/fba788864f2f08058545806ed93a2d68ca0fe8307a3bd40326ed0659e63fc630.json`.
+This acceptance is the first scientific execution of B07, not a repeat of a01.
+
+The same child/session armed `tools/hmasd_wait.py` generation1 against that operation
+at30s intervals and20s per-probe bounds; first drain showed consistent accepted,
+live native identities and zero observation errors. Observer registration and
+request identity are retained in the run/scratch records. Its25-minute checkpoint
+rearms the same handle and never launches another worker. The DM remains active
+through collection and reading; acceptance does not imply a completed result.
+
+The temporary source/admission SOCKS process was terminated after native acceptance;
+its identity/start ticks were checked, and the remote loopback listener was verified
+absent. It modified no persistent control/network setting and has no live consumer.
+An initial routine progress read saw12/12 codec fits and720 Adam updates completed,
+with0 native episodes persisted at that instant; these are partial counters, not
+a final scientific conclusion. The recorded worker resource snapshot was161.250s
+wall/159.883s process CPU,664,652 KiB lifetime peak RSS, one Torch/inter-op thread;
+full native/reader and final cost accounting remain pending.
+
+
+<a id="b07-complete-reading"></a>
+### B07 complete finite-message comparison and reading, 2026-10-02 UTC
+
+**Retain the three ordinary eight-bit codec assets; end this task-aware fitting
+recipe and select no further experiment.** The complete frozen comparison supplies
+conditional aggregate compression capability and a useful adverse learning result.
+It does not establish equivalence, task-aware superiority, preserved individual
+service or a physical-network saving. The independent result review below concurs;
+the broader finite-message learning question remains open without an active purchase.
+
+**Evidence and completion.** Corrected a02, source
+`c2f37121a092116c92fe5db7809bfc4710d4da55`, finished with valid exit0 and absent
+runner/supervisor identities. The earlier effect-free a01 source-location refusal
+is preserved separately and is not a failed scientific repetition. All12 codec
+fits,720 Adam updates,256 complete H256 native episodes and the full independent
+saved-state neural/radio/transport reader finished. The source, input manifests,
+preflight, exit/status, full artifact inventory and
+`runs/uav_message_content/b07_codec_a02/reading-compact.json` are the compact record.
+The compact reading preserves all8 arm levels,16 paired contrasts and17 metrics,
+world/adverse extrema, individual-service cases, all12 fit summaries and bindings.
+
+One canonical bulk evidence copy remains on `wsl_4070` at
+`/home/wu/projects/HMASD/runs/uav_message_content/b07_codec_a02/`:278 files,
+70,696,096 logical bytes/71,290,880 allocated tree bytes at collection. It includes
+all256 trajectories and12 dictionaries, including unselected and adverse outcomes.
+The artifact index binds every file by size and SHA256. Original bulk files are:
+
+| File | Bytes | SHA256 |
+|---|---:|---|
+| summary.json | 918366 | ece8db6796359cc5bffed8a1df38870d7ad94939f65c4f592231c5ab051c02c4 |
+| reading.json | 3959690 | fa060759569824762c1e0ba709a646719f14011721bc6411c64ab0065d5de931 |
+| fit-updates.jsonl | 181709 | 0eb3958650405f6f8ec3191c63aa874e5252abe30f54ff62f83831031b2ca188 |
+
+The DM verified the complete JSON/counts, all256 native/reader J/service/Q
+agreements and every raw/dictionary binding against the canonical inventory.
+Initial/final/after-exit frozen hashes agree. Common initial scene/users, channel,
+motion innovations and native RNG witnesses agree across8 arms in every world.
+The independent reader's maximum neural density error is3.1792704e-6 at original
+tolerances; no tolerance changed after outcomes. Old-bank uncompressed replay mean
+Gaussian KL is9.1566039e-16, maximum mean gap2.3841858e-7 and density gap2.145767e-6.
+Stored old targets remain unchanged; these tiny differences were reported, not
+subtracted. The critic independently inspected21 canonical raw files spanning
+positive/adverse/tail pairs, without new model/environment calls; its scope is
+distinguished from the runner's complete256-trajectory replay.
+
+**Observed aggregate endpoints.** Service means connected users per tick; waiting
+age is the declared post-tick reset-to-zero measurement, averaged over50 users and
+H256. All data below condition on one selected D19702 parent and this fresh32-world
+panel. O/L numbers denote the three fixed codec seeds19811/19812/19813, selected
+solely by old development KL; there is no fresh-panel seed selection.
+
+| Arm | Net J | Service | Q | Never-served users/world | Mean waiting age |
+|---|---:|---:|---:|---:|---:|
+| full D | .235203099 | 14.098267 | .129424555 | 6.37500 | 46.779834 |
+| full B | .235191529 | 14.125732 | .128104252 | 6.03125 | 47.049868 |
+| O1 | .235063491 | 14.094360 | .129141486 | 6.53125 | 47.071399 |
+| O2 | .235302233 | 14.113403 | .129048621 | 6.46875 | 46.877217 |
+| O3 | .235367932 | 14.117188 | .129091023 | 6.53125 | 46.965554 |
+| L1 | .234982121 | 14.082886 | .129405735 | 6.56250 | 47.146819 |
+| L2 | .235079113 | 14.094238 | .129199255 | 6.43750 | 46.977798 |
+| L3 | .235349005 | 14.113159 | .129215920 | 6.43750 | 47.118259 |
+
+| Contrast | Mean delta J | Mean delta service | Interpretation |
+|---|---:|---:|---|
+| L1−O1 | −.000081370 | −.011475 | 17 J-adverse worlds |
+| L2−O2 | −.000223120 | −.019165 | 18 J-adverse worlds |
+| L3−O3 | −.000018927 | −.004028 | 17 J-adverse worlds |
+| Mean L−O | −.000107806 | −.011556 | Conditional df2 intervals [−.000367726,+.000152114]/[−.030358,+.007246] |
+| O1−D | −.000139608 | −.003906 | Ordinary adverse mean retained |
+| O2−D | +.000099134 | +.015137 | Ordinary favorable mean retained |
+| O3−D | +.000164833 | +.018921 | Ordinary favorable mean retained |
+| Mean O−D | +.000041453 | +.010050 | Conditional df2 intervals [−.000356525,+.000439431]/[−.020341,+.040442] |
+| full D−B | +.000011569 | −.027466 | World df31 intervals [−.005193395,+.005216534]/[−.396008,+.341077] |
+
+Each L−O and O−D paired-world J/service interval crosses zero. The three codec
+initializations are not independent parent training; neither the256 trajectories
+nor the32 worlds multiply the training sample. Separately, averaging the three
+fixed O−D contrasts in each world gives descriptive intervals
+[−.000889527,+.000972433] J/[−.057919,+.078019] service. The DM recomputed these
+from the original per-world arrays, along with the review's waiting-age interval,
+using only saved readings. No equivalence margin was registered; proximity and
+intervals crossing zero do not certify equivalence. J combines service and Q:
+mean O−D gains.010050 service while Q falls.000330845. No new default is selected.
+
+**Prediction and changed explanation.** All six selected programs used unit
+scaling. O development KL is.000165098/.000163020/.000182382; matched L is
+.000168112/.000172625/.000176128: +1.83%,+5.89%,−3.43%, with mean L1.25% worse.
+Two inverse-SD L fits improve development loss but remain worse than selected unit
+fits. Selected L dictionaries move.9258/.8786/.8611 in norm, finite gradients are
+nonzero, and online first-to-last epoch means fall about11–14%; these are not
+independent fixed-endpoint rescoring. All32 action-sequence hashes differ for each
+L/O pair. Thus fitting and deployment activate, but the predicted held-out
+improvement is absent on average before native rollout. A blanket explanation
+that a better proxy was erased by trajectory shift is contradicted by this
+selection record. Generalization and imperfect surrogate optimization remain
+possible; no particular repair is identified. Binding roundoff near1e-15 KL
+does not plausibly explain codec losses near1e-4.
+
+Ordinary geometry already preserves enough distinctions for this controller's
+observed aggregate performance at256 codewords. This strengthens an ordinary
+compression explanation without identifying smoothness, redundant local/history
+information, stochastic-policy tolerance or causal message necessity. It supplies
+a conditional capability and empirical understanding, not a superior communication
+learning method or an RGMComm theorem transfer.
+
+The fresh full-D/B comparison also qualifies the parent premise. D's earlier
+positive B06 and correction-compression panels remain intact, but their mean
+increment does not recur here even before compression. Full D−B has17 J-adverse
+worlds, with service−1.980469 inworld17 and+2.488281 inworld15; higher Q compensates
+slightly lower average service. B07 retains observed D-level aggregate performance,
+not a stable D-over-B surplus. This neither proves degradation/equality nor
+refutes bounded adaptation or learned variation generally.
+
+**Individual service and adverse outcomes.** Full D has204 never-served user/world
+cases; O1/O2/O3 have209/207/209. Their mean waiting-age increases are
+.291565/.097383/.185720 ticks even though total team-zero ticks improve22→18/19/18.
+Team-zero counts do not protect each user's service continuity. L−O increases
+mean wait.075420/.100581/.152705 ticks; its df2 average interval is positive,
+but the distinct fixed-three-program world interval[−.082369,+.301507] crosses
+zero. Do not convert the conditional pattern into a population tail-harm claim.
+
+- O1−D/world26 loses.010126929 J/.664063 service; user34 loses14 served ticks
+  to zero, mean wait54.574219→128.5, longest gap153→256.
+- O1−D/world18 gains.191406 service while user15 loses its single connection;
+  mean wait64.046875→128.5 and observed gap131→256. A125-tick gap increase is
+  not125 lost served ticks.
+- O1−D/world19/user33 falls79→48 served ticks, mean wait6.816406→11.324219
+  and gap38→49.
+- L1−O1/world18/user34 is served once in both, at tick248 versus136; mean wait
+  rises56.4375 ticks and longest gap136→248.
+- The positive L3−O3/world3 gains.004464212 J/.320313 service; user43 gains two
+  connections and its gap256→122. L1/L2 introduce a team-zero tick inworld5
+  absent from their O comparators; other zero outcomes improve.
+
+These finite-H256 gaps include declared censored prefixes/suffixes; never-served
+age is128.5 and gap256. These are service observations, not physical safety.
+The full compact contrasts and canonical raw data preserve opposite cases. No
+post-hoc requirement that every user improve is added.
+
+**Complete bit and computation account.** The stream uses one8-bit codeword,
+2 header bytes and2 public beacon bytes per team tick:5 B versus28 B for the
+competent lossless six-FP32-field contract including the same overhead.
+Each256-tick episode is1,280 versus7,168 B; installation is6,168 B/device or
+30,840 B/team. The23 B/tick difference amortizes one common codebook broadcast
+at269 ticks, or five unicasts at1,341 ticks: a single H256 mission does not
+amortize even the former. D's inherited actor is56,201 parameters/224,804
+FP32 bytes per device. This is a serialized-bit ledger, not a fee, delay,
+radio-energy or J saving. The simulator keeps the fee/delay fixed.
+
+Every arm attempted8,192 packets across32 worlds, delivered8,076 and left116
+pending at horizon; max pending5,0 collisions, mean observed cache age4.981543.
+Full encode/decode timers total about.1094/.1093 CPU-s per32-world panel;
+O/L encoding.5865–.6067 and decoding.1746–.1823 CPU-s. The implementation
+decodes once then populates four peer caches, so these are simulator costs,
+not independent five-device latency or networking economics.
+
+The declared scientific cost completed exactly:6 ordinary fits×25 Lloyd updates
+and6 learned fits×120 Adam updates,12 total codec fits/720 Adam/150 Lloyd.
+No policy, receiver or critic fit, new teacher rollout or GPU call occurred.
+Native steps65,536; saved-state reader steps65,536 are reconstruction, not
+additional native transitions. Actor rows are3,686,400 fitting+122,880
+development+40,960 binding+327,680 native+327,680 reader=4,505,600; nearest-center
+comparisons475,004,928. Worker since-main time331.606216s wall/330.154160s CPU;
+peak RSS664,652 KiB, one Torch/inter-op thread,0 GPU-s. Waited-child CPU is
+.004552s; its max-RSS high-water mark is not an additive simultaneous peak.
+Metered final output70,694,580 B precedes final-status writes; verified terminal
+inventory is70,696,096 B. First constructor cost.20924 CPU-s versus about
+.0015–.002s thereafter; cold receiver load.012952s. These times are below the
+prospective range but do not turn total engineering/source/review cost into zero.
+
+Inherited cost remains33 policy fits+3 predictor fits/4,751,360 persisted native
+steps plus0..256 interrupted steps with missing original CPU; the separate
+correction-compression57,344 steps stay separate. Four engineering check
+invocations added4 synthetic ordinary/4 short synthetic learned fits and480
+Adam updates,25.24s wall/23.49s CPU, not additional real-bank fits. Collection
+transfer took3.466s local wall, canonical hashing.050601s wall/.049802s CPU,
+initial compact extraction.06899s/.06900s. Source-refusal, source transport,
+agent/review support and offline elapsed time are separately recorded or
+unmetered, not included in the331.606s worker claim.
+
+**Observation closure.** The deterministic observer reached READY for the valid
+terminal witness, but its queue delivery actually failed with
+`direct app-server input is not allowed for multi-agent v2 sub-agents`
+(code−32600), despite this native child remaining active. The DM's deterministic
+same-handle wait found READY, drained and collected; it acknowledged generation1
+and stopped generation2 after terminal collection. The observation failure did
+not restart scientific work or route a wake elsewhere. Both observer PID785401
+and temporary proxy PID769059 were absent at closure inspection. Exact terminal
+and closure facts are in the run records; registration is not proof of delivery.
+
+<a id="b07-independent-disposition"></a>
+### Independent B07 result review and resolved disposition, 2026-10-02 UTC
+
+The original separate-context ResearchCritic was reused for the changed result.
+It received source and original positive/adverse evidence, not the DM's result
+diagnosis or desired continuation. It returned the complete answer below at
+21:57:57 UTC. One adequate independent review covers this closure; no distinct
+unresolved question warrants an additional Pro round.
+The complete original answer is12,276 characters/12,383 UTF-8 bytes, SHA256
+`41b7f03a0a55d06267af695a22afb4f54479568dfa813d3cfcceb42f3e5aecca`
+(answer text only, without a trailing newline).
+
+<!-- B07 original result ResearchCritic answer begins -->
+**Recommendation: retain the ordinary eight-bit codec assets, end this task-aware fitting recipe, and select no additional experiment now.** B07 provides useful conditional evidence that ordinary quantization can preserve this controller’s aggregate performance. It does not support the predicted task-aware increment. Individual-service changes prevent a broader preservation claim, and the fresh panel does not reproduce D’s earlier mean advantage over B.
+
+This reading reuses the original independent selection review and checks the changed evidence. No post-result DM explanation or preferred continuation was supplied.
+
+I verified the summary, reading and update-stream hashes; source identity against `c2f37121a092116c92fe5db7809bfc4710d4da55`; all native summary/reader endpoint agreements; development selection; frozen-parameter hashes; common scene/user/channel/innovation witnesses; and the complete fit histories. The update stream contains **150 Lloyd records plus 720 Adam records**, matching the twelve fits.
+
+I also independently read **21 canonical NPZ files covering eleven positive, adverse and tail comparisons**. Their hashes, reward decomposition, connected-user counts, previous-action inputs, byte headers, delivery times, cache updates, censoring and selected individual-service outcomes agree. This included 5,376 actual packets and repeated codeword/cache consistency checks. I made no model, native-environment or radio calls. Neural and radio reconstruction across all 256 trajectories remains the completed runner reader’s check, whose relevant source I inspected; I did not repeat it. Canonical evidence is bound by the [artifact index](/home/fires/hmasd-wsl/runs/uav_message_content/b07_codec_a02/artifact-index.json).
+
+**The failed prediction starts at development selection, before fresh native evaluation.** Every selected O and L candidate uses the unit metric:
+
+| Codec seed | O development KL | L development KL | L change | Native L−O J | Native L−O users/tick |
+|---|---:|---:|---:|---:|---:|
+| 19811 | .000165098 | .000168112 | +1.83% | −.000081370 | −.011475 |
+| 19812 | .000163020 | .000172625 | +5.89% | −.000223120 | −.019165 |
+| 19813 | .000182382 | .000176128 | −3.43% | −.000018927 | −.004028 |
+
+L’s mean selected development loss is **1.25% higher**, not lower. The unselected inverse-SD candidates retain favorable cases: L improves two development losses, but those candidates remain worse than the selected unit-metric dictionaries.
+
+This was active fitting. Selected L dictionaries moved approximately .86–.93 in parameter norm; gradients were finite and nonzero; first-to-last training-epoch mean losses declined roughly 11–14%. Those epoch means describe learning during each epoch, not an independently rescored fixed-policy training endpoint. Every matched L/O pair has different action-sequence hashes in all 32 fresh worlds. Nonactivation is therefore not the explanation.
+
+The supported diagnosis is **no demonstrated held-out or native increment from this finite task-aware procedure over a competent ordinary quantizer**. Training loss improvement with mixed development behavior is consistent with limited generalization or imperfect surrogate optimization. The evidence does not distinguish these causes, and it supplies no specific repair. Describing the whole result as “better proxy prediction erased by trajectory shift” would be inaccurate; only selected L3 improved its development proxy.
+
+The uncompressed binding replay’s mean KL is approximately **9.16×10⁻¹⁶**, with maximum mean discrepancy **2.38×10⁻⁷**. Old-target/runtime roundoff is negligible beside codec development losses around 10⁻⁴, so it is not a persuasive explanation for the missing increment.
+
+**Ordinary compression is a useful retained capability, with a limited claim.** Full D averages **.235203099 J and 14.098267 users/tick**. O1/O2/O3 change these by:
+
+| Ordinary codec versus full D | ΔJ | Δ users/tick |
+|---|---:|---:|
+| O1 | −.000139608 | −.003906 |
+| O2 | +.000099134 | +.015137 |
+| O3 | +.000164833 | +.018921 |
+
+Their average differences are **+.000041453 J/+ .010050 users/tick**. The conditional codec-seed intervals cross zero. Separately, averaging the three fixed endpoint differences within each world gives descriptive world intervals of approximately **[−.0008895,+.0009724] J** and **[−.057919,+.078019] service**.
+
+These are small observed aggregate changes under the declared eight-bit payload, frozen receiver and delayed RR contract. They support retaining the three ordinary codecs as demonstrated artifacts. They do not establish equivalence, a universal eight-bit requirement, message necessity, or preservation of every user’s service. There was no frozen equivalence margin, and no retrospective seed winner should be selected from this panel.
+
+For the primary L−O comparison, the conditional mean is **−.000107806 J/−.011556 service**, with descriptive df2 intervals **[−.000367726,+.000152114]** and **[−.030358,+.007246]**. All three sample means are negative, but this is not proof of population-wide inferiority. It is sufficient reason to decline further expenditure on the recipe: its predicted advantage is absent while the ordinary alternative already supplies the useful aggregate capability.
+
+**The full-D/B reference changes the interpretation of what was preserved.** On this fresh panel:
+
+- Full D−full B is **+.000011569 J/−.027466 users/tick**.
+- Its world intervals are **[−.005193,+.005217] J** and **[−.396008,+.341077] service**.
+- The near-zero J difference combines slightly lower service with higher Q.
+- Direct raw checks retain substantial heterogeneity: world17 loses **1.980469 users/tick**, while world15 gains **2.488281**.
+
+B07 therefore cannot claim that compression preserves a robust D-over-B increment demonstrated on this new panel: that increment is absent even before compression. Earlier positive panels remain valid evidence. This result weakens confidence in a stable advantage of this selected D asset over B, without establishing degradation, equivalence or failure of bounded adaptation generally.
+
+**Individual service materially qualifies the aggregate positive.** Full D has 204 never-served user/world cases across the 32 worlds. O1/O2/O3 have **209/207/209**. Their mean waiting-age increases versus D are **.291565/.097383/.185720 ticks**. Yet their total team-zero ticks are **18/19/18**, below D’s 22. Fewer completely unserved team ticks does not imply better service continuity for each user.
+
+L−O mean waiting age increases in all three pairs: **.075420/.100581/.152705 ticks**. The codec-seed interval for their average is positive, but the separate fixed-three-program world interval crosses zero, approximately **[−.082369,+.301507]**. This distinction prevents a conditional pattern from becoming a general tail-harm claim.
+
+The raw cases make the tradeoff concrete:
+
+- **O1 versus D, world26:** service falls .664063 users/tick and J falls .010126929. User34 loses all fourteen served ticks; observed mean waiting age rises from 54.574219 to 128.5.
+- **O1 versus D, world18:** aggregate service improves .191406 users/tick, while user15 loses its single connection. Its observed longest gap rises from 131 to 256 ticks.
+- **L1 versus O1, world18/user34:** both serve that user once, but at tick248 versus tick136. Longest gap rises from 136 to 248, and mean waiting age rises by 56.4375 ticks.
+- Favorable L cases remain: **L3 versus O3, world3** gains .320313 users/tick and .004464212 J; user43 gains two connections, reducing its longest gap from 256 to 122 ticks.
+
+L1 and L2 also introduce a team-zero tick in world5 absent from their matched O programs. Conversely, several other zero-service counts improve. These are observed, window-censored outcomes, not physical-safety measurements. They neither justify declaring universal tail preservation nor impose an undeclared requirement that every user improve.
+
+The strongest simpler explanation is now strengthened: **a fitted ordinary geometry dictionary already preserves enough distinctions for this fixed controller’s aggregate task performance at the tested resolution**. Task-aware fitting did not improve that complete package. This does not establish why ordinary compression works—smoothness, redundancy with local observations/history, stochastic-policy tolerance and other mechanisms remain possible. No causal-message or information-bound claim follows.
+
+The appropriate contribution is consequently **conditional capability and empirical understanding**, rather than a superior communication-learning method. The useful finding includes both sides: ordinary compression can leave aggregate performance nearly unchanged, while particular users’ rare service events and waits change appreciably.
+
+The accepted work completed its declared price: **12 codec fits, 720 Adam updates, 65,536 new native steps, 65,536 saved-state reader reconstructions, 4,505,600 actor-row presentations and 475,004,928 center comparisons**. Reader work is not another 65,536 native rollouts. Worker time was **331.606 seconds wall/330.154 seconds CPU**, with **664,652 KiB** peak RSS. The canonical output inventory contains 278 files and 70,696,096 logical bytes.
+
+This is below the planning range, but it excludes a complete accounting of engineering, synthetic checks, source-refusal/transport preparation and review support. The effect-free a01 refusal remains separate; a02 was the first scientific execution. One successful package also does not diagnose or resolve prior runtime failures.
+
+The byte claim remains **28 to 5 modeled bytes/team tick**, including header and beacon, plus **6,168 installed codec bytes/device**. Fees and delays remained unchanged. Codec encoding/decoding consumed more CPU than full-precision serialization in the recorded simulator timers; those timers also perform one decode before populating four peer caches. They are not measurements of five-device deployment latency, radio energy or complete network economics.
+
+My investment recommendation is a **justified stop**, not a repair proposal. More precision about this small unresolved L−O difference would not presently change the choice of the ordinary codec for the demonstrated use. A bitrate sweep, larger teacher bank, surrogate tuning or receiver adaptation would be a new study without a presently established need. The positive ordinary assets should remain available; ending this recipe need not discard the capability or declare the broader question exhausted.
+
+A future purchase would need a consequential decision—for example, an actual byte-constrained application or a specified individual-service preference—whose outcome could change use. Its competent ordinary comparator should inherit the same added resources and information. That is a future Root allocation choice, not an automatic continuation or a prerequisite diagnostic demanded here.
+
+Suggested standing for the existing direction:
+
+> **B07 complete; retain ordinary eight-bit codec assets and end the tested task-aware recipe.** On one selected D parent and a fresh common 32-world panel, ordinary codecs have small aggregate J/service differences from full D, with mixed world and individual-service changes. Task-aware fitting does not improve selected development loss on average or demonstrate a native increment. Full D’s earlier mean advantage over B does not recur on this panel. No equivalence, general learning superiority or physical-network saving is established; no further experiment is selected.
+
+The directly reusable background revision belongs primarily in topic5’s communication discussion. Preserve earlier B06 and correction-compression positives, then add this conditional compression result and its adverse service cases. Topic3’s information restrictions remain unchanged. Any topic8 addition should be narrow: aggregate preservation under a smaller packet alphabet does not identify communication necessity or preserve individual continuity.
+
+**MATERIAL_DISSENT: no — the completed frozen comparison is valid. My recommendation is ordinary-asset retention with no further purchase on this L recipe; the evidence does not support an expanded retention claim, task-aware advantage, or automatic continuation.**
+
+<!-- B07 original result ResearchCritic answer ends -->
+
+**DM response and resolved choice.** Accept the recommendation and all stated
+scope restrictions; MATERIAL_DISSENT remains no. The critic's independent raw
+sampling and distinction between training-seed and fixed-program world intervals
+strengthen confidence in this reading's validity. The additional descriptive
+world intervals were recomputed from original arrays and recorded in the compact
+reading. No new forward, fit or trajectory was needed.
+
+The task-aware prediction failed first in mean held-out selection; complete native
+results supply no increment to rescue it. Active parameter movement is evidence
+of execution, not validation of the mechanism. Retain all three ordinary assets
+as demonstrated conditional capabilities without selecting a fresh-panel winner;
+preserve the six learned dictionaries, unselected ordinary dictionaries and all
+favorable/adverse trajectories as necessary evidence of the complete comparison.
+The competent ordinary option already supplies the aggregate use demonstrated
+here. More precision on a very small unresolved L−O effect would not presently
+change that choice, so no replication, bitrate sweep, larger-bank fit, surrogate
+repair or receiver adaptation is selected. The lower-than-planned CPU cost does
+not by itself make another investment worthwhile.
+
+No equality or universal eight-bit claim follows. Individual rare connections and
+waits materially restrict aggregate preservation; no added tail requirement is
+invented. D's missing fresh-panel surplus weakens the stable-parent-advantage
+premise while preserving B06 and correction-compression positives. Ordinary
+geometry sufficiency, local/history redundancy and policy tolerance remain
+possible explanations, not coequal excuses requiring exhaustive diagnosis.
+
+The enduring question stays open, but this direction has no active idea or
+producer after publication/cleanup. A future worthwhile comparison would need a
+consequential actual byte-constrained use or specified individual-service
+preference whose result could change use, with the ordinary comparator inheriting
+the same extra resources/information. Such a new cross-question purchase belongs
+to Root's allocation; this is a re-entry condition, not a current dependency or
+a request for permission. The directly affected topic5 will receive this narrow
+judgment and preserve earlier positive evidence. Topic3 information restrictions
+and unrelated directions do not change. Useful B07 codec/transport/replay/reader
+code remains published; final consumer checks and measured duplicate/scratch
+deletion follow this evidence publication.

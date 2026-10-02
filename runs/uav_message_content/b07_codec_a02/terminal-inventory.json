@@ -1,0 +1,169 @@
+{
+  "summary_keys": [
+    "object",
+    "schema_version",
+    "status",
+    "launch_sha",
+    "counts",
+    "expected_counts",
+    "frontier",
+    "fits",
+    "selection",
+    "native",
+    "limits",
+    "configuration",
+    "input_manifest",
+    "inherited_cost",
+    "resources",
+    "inputs",
+    "cold_receiver_load_cpu_seconds",
+    "frozen_initial_hashes",
+    "deployment",
+    "binding_replay",
+    "constructor_cpu_seconds",
+    "reading",
+    "frozen_final_hashes",
+    "total_actor_rows",
+    "frozen_after_exit_hashes",
+    "fit_update_stream",
+    "partial_artifacts"
+  ],
+  "summary": {
+    "status": "COMPLETE",
+    "counts": {
+      "fits_started": 12,
+      "fits_completed": 12,
+      "adam_updates": 720,
+      "fit_actor_rows": 3686400,
+      "dev_actor_rows": 122880,
+      "binding_actor_rows": 40960,
+      "native_actor_rows": 327680,
+      "reader_actor_rows": 327680,
+      "native_steps": 65536,
+      "native_episodes": 256,
+      "reader_steps": 65536,
+      "motion_vectors": 327680,
+      "packets": 65536,
+      "beacon_bytes": 131072,
+      "packet_bytes": 573440,
+      "nearest_center_comparisons": 475004928,
+      "policy_updates": 0,
+      "critic_calls": 0,
+      "gpu_calls": 0,
+      "new_teacher_labels": 0,
+      "binding_actor_calls": 8192,
+      "dev_actor_calls": 24576,
+      "fit_actor_calls": 184320,
+      "constructors": 8,
+      "explicit_resets": 256,
+      "native_actor_calls": 65536,
+      "native_step_calls": 65536,
+      "reader_actor_calls": 65536,
+      "reader_physical_states": 65536
+    },
+    "expected_counts": {
+      "fits_started": 12,
+      "fits_completed": 12,
+      "adam_updates": 720,
+      "fit_actor_rows": 3686400,
+      "dev_actor_rows": 122880,
+      "binding_actor_rows": 40960,
+      "native_actor_rows": 327680,
+      "reader_actor_rows": 327680,
+      "native_steps": 65536,
+      "native_episodes": 256,
+      "reader_steps": 65536,
+      "motion_vectors": 327680,
+      "packets": 65536,
+      "beacon_bytes": 131072,
+      "packet_bytes": 573440,
+      "nearest_center_comparisons": 475004928,
+      "policy_updates": 0,
+      "critic_calls": 0,
+      "gpu_calls": 0,
+      "new_teacher_labels": 0
+    },
+    "frontier": {
+      "phase": "complete"
+    },
+    "resources": {
+      "wall_seconds": 331.6062160250731,
+      "process_cpu_seconds": 330.154159999,
+      "process_lifetime_cpu_seconds": 330.167554,
+      "process_lifetime_peak_rss_kib_linux": 664652,
+      "child_lifetime_cpu_seconds": 0.004552,
+      "completed_children_peak_rss_kib_linux": 664652,
+      "child_cpu_scope": "RUSAGE_CHILDREN lifetime user+system, waited-for descendants",
+      "child_rss_scope": "RUSAGE_CHILDREN Linux maximum child high-water mark; not simultaneous total RSS",
+      "child_wall_seconds": "unmeasured; external supervisor measures worker lifetime",
+      "output_bytes": 70694580,
+      "torch_threads": 1,
+      "torch_interop_threads": 1,
+      "cpu_scope": "RUSAGE_SELF since main entry, including admission and cold scientific imports; interpreter startup excluded",
+      "rss_scope": "Linux RUSAGE_SELF lifetime high-water mark; not incremental by phase",
+      "gpu_seconds": 0
+    }
+  },
+  "reading_keys": [
+    "panels",
+    "comparisons",
+    "conditional_codec_seed",
+    "retention",
+    "actor_rows",
+    "native_rollouts_added"
+  ],
+  "reading_status": {},
+  "files": [
+    {
+      "name": "stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "admission-preflight.json",
+      "bytes": 763,
+      "sha256": "b4dc9147f16ab2d1f04e85a4089b9d5a7dc634ff89e8d0bc0e663fa6b76f5cf2"
+    },
+    {
+      "name": "summary.json",
+      "bytes": 918366,
+      "sha256": "ece8db6796359cc5bffed8a1df38870d7ad94939f65c4f592231c5ab051c02c4"
+    },
+    {
+      "name": "launch-manifest.json",
+      "bytes": 5588,
+      "sha256": "6e48caa234340ae0b953339d1ce43f56aca13da9984eaa9a4cdc707426db31cd"
+    },
+    {
+      "name": "launch-status.json",
+      "bytes": 598,
+      "sha256": "2a02a447a92c3e61007a56fdfe981c5e7fffcb5a6a1099dea2d6ebf14905fc29"
+    },
+    {
+      "name": "reading.json",
+      "bytes": 3959690,
+      "sha256": "fa060759569824762c1e0ba709a646719f14011721bc6411c64ab0065d5de931"
+    },
+    {
+      "name": "process-exit.json",
+      "bytes": 557,
+      "sha256": "cb120f70f9de06d96fc9cadb3ffd11440c6f5da4724a80b6fdddbed8f6356a02"
+    },
+    {
+      "name": "fit-updates.jsonl",
+      "bytes": 181709,
+      "sha256": "0eb3958650405f6f8ec3191c63aa874e5252abe30f54ff62f83831031b2ca188"
+    },
+    {
+      "name": "stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "progress.json",
+      "bytes": 1840,
+      "sha256": "480a1c6520c7827d1e9297ad7395d842f5c84028230fb1b5b89fcc045c41ffe5"
+    }
+  ],
+  "stderr": ""
+}

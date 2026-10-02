@@ -1,0 +1,5 @@
+{
+  "ssh_returncode": 0,
+  "stdout": "{\"supervisor_returncode\": 0, \"stdout\": \"Task 'uav-message-b07-c2f37121a-a02' started in tmux session 'agent_uav-message-b07-c2f37121a-a02'. Output: /home/wu/.agent-tasks/uav-message-b07-c2f37121a-a02/task.log\\n\", \"stderr\": \"\", \"task\": \"uav-message-b07-c2f37121a-a02\", \"source_sha\": \"c2f37121a092116c92fe5db7809bfc4710d4da55\", \"request_sent\": true}\n",
+  "stderr": ""
+}
