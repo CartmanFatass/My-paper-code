@@ -4731,3 +4731,76 @@ byte decoding on delivery, exact frozen-parameter checks, all declared counters
 and an explicitly non-resumable failure frontier. The next operation is the one
 selected admitted B07 package after exact source publication; acceptance is neither
 a scientific result nor an extra permission checkpoint.
+
+
+<a id="b07-source-input-refusal"></a>
+### B07 first source-input refusal and one corrected admission, 2026-10-02 UTC
+
+Accepted implementation was published at `2d41535bde95c9c168fc1f63113855363c35f646`.
+The remote supervisor accepted task `uav-message-b07-2d41535bd-a01` at16:22:14 UTC;
+its launcher exited4 at16:22:24 UTC. Exact refusal:
+`absolute author input is absent from published snapshot: /home/wu/projects/HMASD/runs/uav_message_content/b02_preserved_scalar/19451/B/final.pt`.
+The launcher maps absolute inputs beneath the author root into the immutable source
+snapshot, whereas this retained B checkpoint is canonical untracked bulk. This was
+a source-input resolution error after snapshot creation and **before native claim,
+admission, runner, model forward, codec fit, native step or reader step**. The remote
+native output directory was absent; native status refused that absent handle.
+Supervisor status was terminal failed/exit4, tmux inactive and recorded PID1346340
+absent. Complete original wrapper/log/status/source identity and refusal frontier
+are in `runs/uav_message_content/b07_codec_a01/launch-refusal.json`. Supervisor
+wall was10s; launcher/remote preparation CPU was unmeasured, not zero. The original
+request is retained and will not be resent or represented as a scientific result.
+
+The remote canonical author checkout could not fast-forward because its control
+files were already dirty; no shared reset/stash/checkout or repair was attempted.
+Its compute configuration, launcher and source-snapshot working bytes matched the
+published versions. Under its shared writer lock, only this direction's stale
+reserve row was mechanically updated to its published active/native-child row;
+other dirty rows and owner-pause controls were preserved. The source commit was
+fetched and available. A pre-existing remote Git GC warning about another bad tree
+was left untouched. None of this established scientific runtime health.
+
+Root explicitly selected one corrected, prospectively named request for the same
+scientific package after reading the refusal: stage only the identical463,357 B
+B19451 checkpoint outside the author root, correct its manifest/CLI location,
+publish the new exact source, reuse applicable reviews and perform targeted
+path/byte/binding checks. This authority covers this identified source-input error;
+it does not authorize an automatic retry after an actual effect failure, another
+health/model/native probe, new labels or a changed study. D,32 paid raw trajectories,
+fixed teacher bytes,12 codec fits/720 updates,65,536 native steps and the complete
+reader remain unchanged. The new output tag is `b07_codec_a02`.
+
+Before cleanup, the source-snapshot collector's explicit `--unclaimed-source`
+preview and apply found exact snapshot `7ce384456e3d488986b07d1611036535` eligible,
+clean, unclaimed and unconsumed, with source2d41535bd durably reachable. A read-only
+privileged process scan was included. Removal of
+`wsl_4070:/home/wu/projects/HMASD/.git/hmasd-launch-sources/7ce384456e3d488986b07d1611036535`
+was verified both on disk and in Git worktree registration. Allocated usage fell
+from1,827,467,264 to0 B: **1,827,467,264 net allocated bytes reclaimed**. The exact
+record is `runs/uav_message_content/b07_codec_a01/source-cleanup.json`; there is no
+cleanup blocker. Required refusal records, original manifest and live selected
+inputs remain; no other snapshot or direction was touched.
+
+B19451 now additionally resides at
+`/home/wu/hmasd-inputs/uav_message_content/b07_codec_a01/B/final.pt`, with original
+SHA256 `34871c49874ec716c21438581facfaeca8a25930304a39eb26e001fb2b259da2` and463,357 B
+verified before and after copy. The corrected compact manifest is
+`runs/uav_message_content/b07_codec_a02/input-manifest.json`,84,565 B, SHA256
+`f2e50cfcbd96d35003fef37d8260379f4304eadba64e467a6cdf8f1a30f13d40`, staged as
+`/home/wu/hmasd-inputs/uav_message_content/b07_codec_a01/input-manifest-a02.json`.
+Only `parent_b.path` and `staged_payload_bytes` differ from the preserved original
+manifest. All34 bound checkpoint/raw inputs were checked as absolute external
+paths with original sizes/hashes; total10,092,601 B. No model was loaded. Complete
+staging is36 files/10,261,750 logical B/10,346,496 allocated tree B including both
+small request manifests. B copy/readback took.443s local call wall (.0007s measured
+remote copy/hash wall); corrected-manifest transfer and all input hashes took.952s
+local call wall. Remote CPU was not independently metered. Detailed identities
+and targeted checks are in `runs/uav_message_content/b07_codec_a02/input-staging.json`.
+
+No executable source or scientific premise changed, so the original independent
+scientific and engineering reviews are reused without a redundant test suite.
+The corrected request receives fresh actual-node admission once, after publication.
+An accepted launch is not the read-result boundary; the same-handle observer must
+remain active through terminal collection and full interpretation. A first actual
+effect failure preserves partial counters/evidence and returns the unresolved
+boundary without another automatic run.

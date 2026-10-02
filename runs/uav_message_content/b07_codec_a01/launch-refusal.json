@@ -1,0 +1,31 @@
+{
+  "task_status": {
+    "task": "uav-message-b07-2d41535bd-a01",
+    "status": "failed",
+    "exit_code": 4,
+    "pid": 1346340,
+    "uptime_seconds": 281,
+    "tmux_active": false
+  },
+  "task_log": "=== Task 'uav-message-b07-2d41535bd-a01' started at 2026-10-03T00:22:14+08:00 ===\nhmasd launch refused: absolute author input is absent from published snapshot: /home/wu/projects/HMASD/runs/uav_message_content/b02_preserved_scalar/19451/B/final.pt\n=== Task 'uav-message-b07-2d41535bd-a01' exited with code 4 at 2026-10-03T00:22:24+08:00 (Duration: 10s) ===\n",
+  "wrapper": "#!/usr/bin/env bash\necho $$ > \"/home/wu/.agent-tasks/uav-message-b07-2d41535bd-a01/pid\"\nSTART_TS=$(date +%s)\necho \"=== Task 'uav-message-b07-2d41535bd-a01' started at $(date -Iseconds) ===\" >> \"/home/wu/.agent-tasks/uav-message-b07-2d41535bd-a01/task.log\"\n\n# Execute command capturing output\nset +e\neval 'cd /home/wu/projects/HMASD && /home/wu/.venvs/hmasd-gcc-31021/bin/python scripts/hmasd_launch.py launch --node wsl_4070 --source-root /home/wu/projects/HMASD --snapshot --direction uav_message_content --lead '\\''Codex DM (native child)'\\'' --sha 2d41535bde95c9c168fc1f63113855363c35f646 --output runs/uav_message_content/b07_codec_a01 -- experiments/candidates/uav_message_content/b07/run.py --out /home/wu/projects/HMASD/runs/uav_message_content/b07_codec_a01 --launch-sha 2d41535bde95c9c168fc1f63113855363c35f646 --seed 19811 --input-manifest /home/wu/hmasd-inputs/uav_message_content/b07_codec_a01/input-manifest.json --input-manifest-sha256 71195b30edd1b2ccf2e46098ac3371d35aa99739804ff94fce925e0ef095937e --d-checkpoint /home/wu/hmasd-inputs/uav_message_content/b07_codec_a01/D/final.pt --d-checkpoint-sha256 1a0de628a6c324a5cd0c69f4857b37b4bc1f47c51dc80d2a9a233e7ee7f69840 --b-checkpoint /home/wu/projects/HMASD/runs/uav_message_content/b02_preserved_scalar/19451/B/final.pt --b-checkpoint-sha256 34871c49874ec716c21438581facfaeca8a25930304a39eb26e001fb2b259da2' >> \"/home/wu/.agent-tasks/uav-message-b07-2d41535bd-a01/task.log\" 2>&1\nEXIT_CODE=$?\nset -e\n\nEND_TS=$(date +%s)\necho $EXIT_CODE > \"/home/wu/.agent-tasks/uav-message-b07-2d41535bd-a01/exit_code\"\nif [ $EXIT_CODE -eq 0 ]; then\n    echo \"finished\" > \"/home/wu/.agent-tasks/uav-message-b07-2d41535bd-a01/status\"\nelse\n    echo \"failed\" > \"/home/wu/.agent-tasks/uav-message-b07-2d41535bd-a01/status\"\nfi\necho \"=== Task 'uav-message-b07-2d41535bd-a01' exited with code $EXIT_CODE at $(date -Iseconds) (Duration: $((END_TS - START_TS))s) ===\" >> \"/home/wu/.agent-tasks/uav-message-b07-2d41535bd-a01/task.log\"\n\n# Keep session alive briefly for inspection, then exit\nsleep 1\n",
+  "source_sha": "2d41535bde95c9c168fc1f63113855363c35f646",
+  "matching_snapshot_records": [
+    "worktree /home/wu/projects/HMASD/.git/hmasd-launch-sources/7ce384456e3d488986b07d1611036535\nHEAD 2d41535bde95c9c168fc1f63113855363c35f646\ndetached\nlocked added with --lock"
+  ],
+  "snapshot_path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/7ce384456e3d488986b07d1611036535",
+  "snapshot_birth_ctime": 1790958144.4748297,
+  "task_pid_still_present": false,
+  "native_output_exists": false,
+  "native_status_ref": "absent; hmasd_launch status refused with exit4",
+  "refusal_scope": "source input resolution before claim/admission/runner creation",
+  "scientific_exposure": {
+    "codec_fits_started": 0,
+    "model_forwards": 0,
+    "native_steps": 0,
+    "reader_steps": 0
+  },
+  "launcher_wall_seconds_from_supervisor": 10,
+  "launcher_cpu_seconds": "unmeasured; not zero",
+  "root_repair_selection": "One specifically corrected external B checkpoint staging/new manifest path/new prospectively named admission; same source bytes and full scientific package; no general retry permission."
+}

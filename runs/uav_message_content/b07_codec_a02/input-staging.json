@@ -1,0 +1,26 @@
+{
+  "source": "/home/wu/projects/HMASD/runs/uav_message_content/b02_preserved_scalar/19451/B/final.pt",
+  "destination": "/home/wu/hmasd-inputs/uav_message_content/b07_codec_a01/B/final.pt",
+  "bytes": 463357,
+  "sha256": "34871c49874ec716c21438581facfaeca8a25930304a39eb26e001fb2b259da2",
+  "remote_copy_verify_wall_seconds": 0.0007042980287224054,
+  "staging_allocated_bytes": 10346496,
+  "local_call_wall_seconds": 0.4428925140091451,
+  "corrected_manifest_local_path": "runs/uav_message_content/b07_codec_a02/input-manifest.json",
+  "corrected_manifest_bytes": 84565,
+  "corrected_manifest_sha256": "f2e50cfcbd96d35003fef37d8260379f4304eadba64e467a6cdf8f1a30f13d40",
+  "manifest_only_changes": [
+    "parent_b.path",
+    "staged_payload_bytes"
+  ],
+  "scientific_contract_identical": true,
+  "manifest_remote_path": "/home/wu/hmasd-inputs/uav_message_content/b07_codec_a01/input-manifest-a02.json",
+  "manifest_sha256": "f2e50cfcbd96d35003fef37d8260379f4304eadba64e467a6cdf8f1a30f13d40",
+  "bound_input_count": 34,
+  "bound_input_bytes": 10092601,
+  "all_bound_paths_external": true,
+  "all_bound_bytes_verified": true,
+  "staging_files": 36,
+  "staging_logical_bytes": 10261750,
+  "manifest_stage_and_all_input_verify_wall_seconds": 0.9517559930100106
+}

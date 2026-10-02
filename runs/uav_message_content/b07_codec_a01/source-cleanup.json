@@ -1,0 +1,23 @@
+{
+  "target": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/7ce384456e3d488986b07d1611036535",
+  "before_allocated_bytes": 1827467264,
+  "after_allocated_bytes": 0,
+  "net_reclaimed_allocated_bytes": 1827467264,
+  "argv": [
+    "/home/wu/.venvs/hmasd-gcc-31021/bin/python",
+    "/home/wu/projects/HMASD/scripts/hmasd_snapshot_gc.py",
+    "--repo",
+    "/home/wu/projects/HMASD",
+    "--snapshot",
+    "7ce384456e3d488986b07d1611036535",
+    "--unclaimed-source",
+    "--sudo-process-scan",
+    "--apply"
+  ],
+  "returncode": 0,
+  "stdout": "{\n  \"mode\": \"apply\",\n  \"snapshots\": [\n    {\n      \"durable_ref\": \"refs/remotes/origin/HEAD\",\n      \"eligible\": true,\n      \"kind\": \"unclaimed_source_only\",\n      \"path\": \"/home/wu/projects/HMASD/.git/hmasd-launch-sources/7ce384456e3d488986b07d1611036535\",\n      \"removed\": true,\n      \"sha\": \"2d41535bde95c9c168fc1f63113855363c35f646\",\n      \"snapshot\": \"7ce384456e3d488986b07d1611036535\"\n    }\n  ]\n}\n",
+  "stderr": "",
+  "target_exists": false,
+  "worktree_registered": false,
+  "wall_seconds": 0.4654051619581878
+}
