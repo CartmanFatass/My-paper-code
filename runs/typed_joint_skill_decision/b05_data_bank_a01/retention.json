@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "canonical_root": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b05_data_bank_a01",
+  "source_sha": "c271c7370c6948b06f0a4a6fd783eddff0d8731a",
+  "input_sha256": "dd2bf2e7f54b0070587529559a1963438fa62fb8fb9bfe7db46202932e303394",
+  "artifact_manifest_sha256": "f18dcef40b320755e5b3bdfd94c4cc5be7869a7b549f58e0eccbe4090d6886e8",
+  "bound_artifacts": 2429,
+  "bound_logical_bytes": 337184206,
+  "scientific_status": "uncertified complete acquisition; partial independent reader; failure evidence, no six-fit permission",
+  "unique_bulk": "raw/ stays once at this canonical root; no source/worktree/archive replica required",
+  "required_consumers": "future explicitly selected handling of the bank/compatibility failure and B06 interface; not currently admissible as a complete bank",
+  "old_reference_temporary": {
+    "allocated_bytes": 48750592,
+    "path": "/home/fires/hmasd-wsl/temp/directions/typed_joint_skill_decision/b05-data-reference"
+  },
+  "old_unique_remote_source": "hmasd-wsl-node:/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b04_a01",
+  "original_core": "retained only at original remote Windows path; not copied/deleted"
+}

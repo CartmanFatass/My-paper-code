@@ -1,0 +1,5088 @@
+{
+  "schema": 1,
+  "observed_at": "2026-10-02T10:26:20.228010+00:00",
+  "source_reader_sha256": "d04383e8e1b68b5c2712d28d41a9b0b745c6acb1ea43621e5f01b47c2048f2a0",
+  "artifact_manifest_sha256": "f18dcef40b320755e5b3bdfd94c4cc5be7869a7b549f58e0eccbe4090d6886e8",
+  "scope": "all existing child witnesses/check rows plus failed-world stored arithmetic only; zero regenerated worlds/static/native/model/fit",
+  "operation_status": "partial_or_failed",
+  "counts": {
+    "audit_episodes": 0,
+    "child_setup_attempts": 268,
+    "child_setup_completed": 268,
+    "compatibility_attempts": 631,
+    "compatibility_label_attempts": 108434,
+    "compatibility_labels": 108434,
+    "compatibility_worlds": 630,
+    "fits": 0,
+    "fits_completed": 0,
+    "frontend_capacity_calls": 24374492,
+    "frontend_capacity_completed": 24374492,
+    "gpu_seconds": 0,
+    "hosts": 17147,
+    "hosts_completed": 17147,
+    "link_update_calls": 2969964,
+    "link_update_completed": 2969964,
+    "main_episodes": 0,
+    "matching_calls": 0,
+    "matching_completed": 0,
+    "model_forwards": 0,
+    "native_completed": 0,
+    "native_import_attempts": 268,
+    "native_import_completed": 268,
+    "native_steps": 0,
+    "numpy_import_attempts": 268,
+    "numpy_import_completed": 268,
+    "parent_resource_checks": 11360,
+    "path_loss_matrix_calls": 5939928,
+    "path_loss_matrix_completed": 5939928,
+    "permutation_completed": 16,
+    "permutation_reads": 16,
+    "producer_shards_completed": 258,
+    "producer_worlds_attempted": 16512,
+    "producer_worlds_completed": 16512,
+    "radio_refresh_calls": 2969964,
+    "radio_refresh_completed": 2969964,
+    "raw_completed": 17143,
+    "raw_constructions": 17143,
+    "reader_check_attempts": 222547,
+    "reader_checks": 222547,
+    "reader_shards_completed": 9,
+    "reader_state_checks": 0,
+    "reader_worlds_attempted": 631,
+    "reader_worlds_completed": 630,
+    "refused_effects": 0,
+    "resets": 17147,
+    "resets_completed": 17147,
+    "resource_checks": 175293,
+    "reward_calls": 2952817,
+    "reward_completed": 2952817,
+    "rng_completed": 17143,
+    "rng_streams": 17143,
+    "routing_calls": 2969964,
+    "routing_completed": 2969964,
+    "scalar_sinr_calls": 106918704,
+    "scalar_sinr_completed": 106918704,
+    "setup_attempts": 1,
+    "setup_completed": 1,
+    "spawn_attempts": 268,
+    "spawn_completed": 268,
+    "static_calls": 2952817,
+    "static_completed": 2952817
+  },
+  "producer_worlds": 16512,
+  "producer_labels": 2844367,
+  "producer_M_range": [
+    133,
+    210
+  ],
+  "phase_reaped_cpu_seconds": {
+    "producer": 1964.399836,
+    "reader": 136.75407899999982
+  },
+  "phase_cpu_scope": "increments in recorded cumulative RUSAGE_CHILDREN; first increment includes any prior setup child CPU; parent final-write tail separately unknown",
+  "children": [
+    {
+      "stage": "producer",
+      "shard": 0,
+      "pid_identity": {
+        "pid": 492145,
+        "start_ticks": 6169282
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.183714,
+      "child_last_record_cpu_seconds": 6.156173,
+      "child_wall_seconds": 6.302422776003368,
+      "max_rss_kib": 148480,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 1,
+      "pid_identity": {
+        "pid": 492171,
+        "start_ticks": 6169926
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.097282,
+      "child_last_record_cpu_seconds": 6.074376,
+      "child_wall_seconds": 6.154599934001453,
+      "max_rss_kib": 148072,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 2,
+      "pid_identity": {
+        "pid": 492173,
+        "start_ticks": 6170550
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.184678,
+      "child_last_record_cpu_seconds": 6.15946,
+      "child_wall_seconds": 6.241383015003521,
+      "max_rss_kib": 149260,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 3,
+      "pid_identity": {
+        "pid": 492175,
+        "start_ticks": 6171194
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.2335499999999975,
+      "child_last_record_cpu_seconds": 6.201454,
+      "child_wall_seconds": 6.680359489000693,
+      "max_rss_kib": 149552,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 4,
+      "pid_identity": {
+        "pid": 492207,
+        "start_ticks": 6171878
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.279130000000002,
+      "child_last_record_cpu_seconds": 6.249357,
+      "child_wall_seconds": 6.766920595000556,
+      "max_rss_kib": 149756,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 5,
+      "pid_identity": {
+        "pid": 492209,
+        "start_ticks": 6172568
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.276754,
+      "child_last_record_cpu_seconds": 6.250182000000001,
+      "child_wall_seconds": 7.200666630000342,
+      "max_rss_kib": 149376,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 6,
+      "pid_identity": {
+        "pid": 492253,
+        "start_ticks": 6173322
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.228462999999998,
+      "child_last_record_cpu_seconds": 6.202540999999999,
+      "child_wall_seconds": 7.175561177995405,
+      "max_rss_kib": 148868,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 7,
+      "pid_identity": {
+        "pid": 492266,
+        "start_ticks": 6174054
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.129646000000001,
+      "child_last_record_cpu_seconds": 6.099898,
+      "child_wall_seconds": 6.983026169997174,
+      "max_rss_kib": 148672,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 8,
+      "pid_identity": {
+        "pid": 492268,
+        "start_ticks": 6174787
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.311816,
+      "child_last_record_cpu_seconds": 6.283815,
+      "child_wall_seconds": 7.190172975999303,
+      "max_rss_kib": 150832,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 9,
+      "pid_identity": {
+        "pid": 492276,
+        "start_ticks": 6175535
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.367402000000006,
+      "child_last_record_cpu_seconds": 6.3425,
+      "child_wall_seconds": 7.24888626900065,
+      "max_rss_kib": 150872,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 10,
+      "pid_identity": {
+        "pid": 492297,
+        "start_ticks": 6176289
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.435882999999997,
+      "child_last_record_cpu_seconds": 6.410849000000001,
+      "child_wall_seconds": 7.442457602002833,
+      "max_rss_kib": 151200,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 11,
+      "pid_identity": {
+        "pid": 492299,
+        "start_ticks": 6177061
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.2990020000000015,
+      "child_last_record_cpu_seconds": 6.2719759999999996,
+      "child_wall_seconds": 7.5459095210026135,
+      "max_rss_kib": 149268,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 12,
+      "pid_identity": {
+        "pid": 492414,
+        "start_ticks": 6177835
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.257362999999998,
+      "child_last_record_cpu_seconds": 6.232118,
+      "child_wall_seconds": 8.027403776002757,
+      "max_rss_kib": 149724,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 13,
+      "pid_identity": {
+        "pid": 492432,
+        "start_ticks": 6178671
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.321736999999999,
+      "child_last_record_cpu_seconds": 6.296601,
+      "child_wall_seconds": 7.425318599001912,
+      "max_rss_kib": 148804,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 14,
+      "pid_identity": {
+        "pid": 492505,
+        "start_ticks": 6179443
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.3437490000000025,
+      "child_last_record_cpu_seconds": 6.3177010000000005,
+      "child_wall_seconds": 7.342347696001525,
+      "max_rss_kib": 150536,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 15,
+      "pid_identity": {
+        "pid": 492543,
+        "start_ticks": 6180192
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.389353999999997,
+      "child_last_record_cpu_seconds": 6.362882000000001,
+      "child_wall_seconds": 7.370954099998926,
+      "max_rss_kib": 150348,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 16,
+      "pid_identity": {
+        "pid": 492563,
+        "start_ticks": 6180947
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.374816999999993,
+      "child_last_record_cpu_seconds": 6.3448389999999995,
+      "child_wall_seconds": 7.676215850995504,
+      "max_rss_kib": 151608,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 17,
+      "pid_identity": {
+        "pid": 492591,
+        "start_ticks": 6181746
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.259212000000005,
+      "child_last_record_cpu_seconds": 6.229199,
+      "child_wall_seconds": 7.515440082999703,
+      "max_rss_kib": 149736,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 18,
+      "pid_identity": {
+        "pid": 492593,
+        "start_ticks": 6182517
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.37097,
+      "child_last_record_cpu_seconds": 6.341858,
+      "child_wall_seconds": 7.462565585003176,
+      "max_rss_kib": 151104,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 19,
+      "pid_identity": {
+        "pid": 492595,
+        "start_ticks": 6183295
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.514721000000009,
+      "child_last_record_cpu_seconds": 6.489875,
+      "child_wall_seconds": 7.46660253200389,
+      "max_rss_kib": 152748,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 20,
+      "pid_identity": {
+        "pid": 492599,
+        "start_ticks": 6184067
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.359082999999984,
+      "child_last_record_cpu_seconds": 6.3333330000000005,
+      "child_wall_seconds": 7.361340677998669,
+      "max_rss_kib": 149492,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 21,
+      "pid_identity": {
+        "pid": 492629,
+        "start_ticks": 6184819
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.444568000000004,
+      "child_last_record_cpu_seconds": 6.415367,
+      "child_wall_seconds": 7.3730914409970865,
+      "max_rss_kib": 149684,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 22,
+      "pid_identity": {
+        "pid": 492741,
+        "start_ticks": 6185590
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.550944000000015,
+      "child_last_record_cpu_seconds": 6.51858,
+      "child_wall_seconds": 7.695287110997015,
+      "max_rss_kib": 149800,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 23,
+      "pid_identity": {
+        "pid": 492776,
+        "start_ticks": 6186383
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.139689000000004,
+      "child_last_record_cpu_seconds": 7.111669,
+      "child_wall_seconds": 7.9398913080003695,
+      "max_rss_kib": 150692,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 24,
+      "pid_identity": {
+        "pid": 493059,
+        "start_ticks": 6187194
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.707549999999998,
+      "child_last_record_cpu_seconds": 6.680048,
+      "child_wall_seconds": 7.615156817999377,
+      "max_rss_kib": 151692,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 25,
+      "pid_identity": {
+        "pid": 493166,
+        "start_ticks": 6187985
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.777488000000005,
+      "child_last_record_cpu_seconds": 6.748153,
+      "child_wall_seconds": 9.032048193999799,
+      "max_rss_kib": 151484,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 26,
+      "pid_identity": {
+        "pid": 493208,
+        "start_ticks": 6188918
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.99073199999998,
+      "child_last_record_cpu_seconds": 6.955641,
+      "child_wall_seconds": 8.041745677001018,
+      "max_rss_kib": 151428,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 27,
+      "pid_identity": {
+        "pid": 493435,
+        "start_ticks": 6189751
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.529318999999987,
+      "child_last_record_cpu_seconds": 6.497903,
+      "child_wall_seconds": 7.330931674994645,
+      "max_rss_kib": 150628,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 28,
+      "pid_identity": {
+        "pid": 493477,
+        "start_ticks": 6190505
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.6325330000000235,
+      "child_last_record_cpu_seconds": 6.601138,
+      "child_wall_seconds": 7.397652638996078,
+      "max_rss_kib": 149464,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 29,
+      "pid_identity": {
+        "pid": 493537,
+        "start_ticks": 6191275
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.4178210000000036,
+      "child_last_record_cpu_seconds": 6.390315,
+      "child_wall_seconds": 7.220254198000475,
+      "max_rss_kib": 149520,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 30,
+      "pid_identity": {
+        "pid": 493539,
+        "start_ticks": 6192030
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.642787999999996,
+      "child_last_record_cpu_seconds": 6.615403,
+      "child_wall_seconds": 7.6603385459966375,
+      "max_rss_kib": 150000,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 31,
+      "pid_identity": {
+        "pid": 493579,
+        "start_ticks": 6192820
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.497450000000015,
+      "child_last_record_cpu_seconds": 6.470034999999999,
+      "child_wall_seconds": 7.024112535000313,
+      "max_rss_kib": 147932,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 32,
+      "pid_identity": {
+        "pid": 493607,
+        "start_ticks": 6193546
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.6483189999999865,
+      "child_last_record_cpu_seconds": 6.6156440000000005,
+      "child_wall_seconds": 6.65273817400157,
+      "max_rss_kib": 149640,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 33,
+      "pid_identity": {
+        "pid": 493686,
+        "start_ticks": 6194232
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.461162999999999,
+      "child_last_record_cpu_seconds": 6.434032,
+      "child_wall_seconds": 6.531038205997902,
+      "max_rss_kib": 148388,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 34,
+      "pid_identity": {
+        "pid": 493798,
+        "start_ticks": 6194899
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.412187999999986,
+      "child_last_record_cpu_seconds": 6.387296,
+      "child_wall_seconds": 6.455363878005301,
+      "max_rss_kib": 149012,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 35,
+      "pid_identity": {
+        "pid": 493804,
+        "start_ticks": 6195565
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.607208000000014,
+      "child_last_record_cpu_seconds": 6.579667,
+      "child_wall_seconds": 6.766444510998554,
+      "max_rss_kib": 151376,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 36,
+      "pid_identity": {
+        "pid": 493808,
+        "start_ticks": 6196251
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.717655999999977,
+      "child_last_record_cpu_seconds": 6.689127,
+      "child_wall_seconds": 7.474581003996718,
+      "max_rss_kib": 151512,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 37,
+      "pid_identity": {
+        "pid": 493878,
+        "start_ticks": 6197023
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.80867200000003,
+      "child_last_record_cpu_seconds": 6.778871,
+      "child_wall_seconds": 7.881332413999189,
+      "max_rss_kib": 149208,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 38,
+      "pid_identity": {
+        "pid": 494057,
+        "start_ticks": 6197835
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.123706999999996,
+      "child_last_record_cpu_seconds": 7.091965,
+      "child_wall_seconds": 7.195248675001494,
+      "max_rss_kib": 150864,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 39,
+      "pid_identity": {
+        "pid": 494243,
+        "start_ticks": 6198561
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.7453029999999785,
+      "child_last_record_cpu_seconds": 6.7150859999999994,
+      "child_wall_seconds": 6.817154352000216,
+      "max_rss_kib": 150304,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 40,
+      "pid_identity": {
+        "pid": 494257,
+        "start_ticks": 6199267
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.886134000000027,
+      "child_last_record_cpu_seconds": 6.8578529999999995,
+      "child_wall_seconds": 6.9538748980048695,
+      "max_rss_kib": 151452,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 41,
+      "pid_identity": {
+        "pid": 494364,
+        "start_ticks": 6199974
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.756600999999989,
+      "child_last_record_cpu_seconds": 6.719373,
+      "child_wall_seconds": 6.814464568000403,
+      "max_rss_kib": 150016,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 42,
+      "pid_identity": {
+        "pid": 494405,
+        "start_ticks": 6200680
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.639967000000013,
+      "child_last_record_cpu_seconds": 6.606089,
+      "child_wall_seconds": 6.738095070999407,
+      "max_rss_kib": 151360,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 43,
+      "pid_identity": {
+        "pid": 494410,
+        "start_ticks": 6201367
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.746235000000013,
+      "child_last_record_cpu_seconds": 6.718991,
+      "child_wall_seconds": 6.826612568998826,
+      "max_rss_kib": 151568,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 44,
+      "pid_identity": {
+        "pid": 494421,
+        "start_ticks": 6202073
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.531846999999971,
+      "child_last_record_cpu_seconds": 6.500359,
+      "child_wall_seconds": 6.624029184997198,
+      "max_rss_kib": 148420,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 45,
+      "pid_identity": {
+        "pid": 494451,
+        "start_ticks": 6202760
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.504068999999959,
+      "child_last_record_cpu_seconds": 6.476825,
+      "child_wall_seconds": 6.5925508639993495,
+      "max_rss_kib": 150516,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 46,
+      "pid_identity": {
+        "pid": 494453,
+        "start_ticks": 6203427
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.552524000000005,
+      "child_last_record_cpu_seconds": 6.527819,
+      "child_wall_seconds": 6.635252112006128,
+      "max_rss_kib": 149300,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 47,
+      "pid_identity": {
+        "pid": 494464,
+        "start_ticks": 6204113
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.545507000000043,
+      "child_last_record_cpu_seconds": 6.510441999999999,
+      "child_wall_seconds": 6.630403694005508,
+      "max_rss_kib": 149072,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 48,
+      "pid_identity": {
+        "pid": 494468,
+        "start_ticks": 6204800
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.648024999999961,
+      "child_last_record_cpu_seconds": 6.621557,
+      "child_wall_seconds": 6.738139225002669,
+      "max_rss_kib": 150188,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 49,
+      "pid_identity": {
+        "pid": 494475,
+        "start_ticks": 6205486
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.599158000000045,
+      "child_last_record_cpu_seconds": 6.572538,
+      "child_wall_seconds": 6.70815043499897,
+      "max_rss_kib": 149656,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 50,
+      "pid_identity": {
+        "pid": 494522,
+        "start_ticks": 6206173
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.563477999999975,
+      "child_last_record_cpu_seconds": 6.536554,
+      "child_wall_seconds": 6.650607737996324,
+      "max_rss_kib": 151180,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 51,
+      "pid_identity": {
+        "pid": 494527,
+        "start_ticks": 6206859
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.620119000000045,
+      "child_last_record_cpu_seconds": 6.5928889999999996,
+      "child_wall_seconds": 6.698738390005019,
+      "max_rss_kib": 151008,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 52,
+      "pid_identity": {
+        "pid": 494530,
+        "start_ticks": 6207545
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.598000999999954,
+      "child_last_record_cpu_seconds": 6.56627,
+      "child_wall_seconds": 6.694024943004479,
+      "max_rss_kib": 150184,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 53,
+      "pid_identity": {
+        "pid": 494543,
+        "start_ticks": 6208232
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.753802000000007,
+      "child_last_record_cpu_seconds": 6.72896,
+      "child_wall_seconds": 6.883217173002777,
+      "max_rss_kib": 150588,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 54,
+      "pid_identity": {
+        "pid": 494563,
+        "start_ticks": 6208939
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.646679000000006,
+      "child_last_record_cpu_seconds": 6.618747,
+      "child_wall_seconds": 6.6919298190041445,
+      "max_rss_kib": 147876,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 55,
+      "pid_identity": {
+        "pid": 494569,
+        "start_ticks": 6209626
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.677759999999978,
+      "child_last_record_cpu_seconds": 6.645525,
+      "child_wall_seconds": 7.343451168999309,
+      "max_rss_kib": 150076,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 56,
+      "pid_identity": {
+        "pid": 494571,
+        "start_ticks": 6210380
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.5372540000000186,
+      "child_last_record_cpu_seconds": 6.509599000000001,
+      "child_wall_seconds": 7.393392374993709,
+      "max_rss_kib": 148796,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 57,
+      "pid_identity": {
+        "pid": 494579,
+        "start_ticks": 6211132
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.534425000000056,
+      "child_last_record_cpu_seconds": 6.506463,
+      "child_wall_seconds": 7.6905290900031105,
+      "max_rss_kib": 148516,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 58,
+      "pid_identity": {
+        "pid": 494622,
+        "start_ticks": 6211929
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.708914999999934,
+      "child_last_record_cpu_seconds": 6.682328,
+      "child_wall_seconds": 7.392164865996165,
+      "max_rss_kib": 150108,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 59,
+      "pid_identity": {
+        "pid": 494632,
+        "start_ticks": 6212676
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.711662000000047,
+      "child_last_record_cpu_seconds": 6.686226,
+      "child_wall_seconds": 6.757350702995609,
+      "max_rss_kib": 148332,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 60,
+      "pid_identity": {
+        "pid": 494641,
+        "start_ticks": 6213363
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.604779999999948,
+      "child_last_record_cpu_seconds": 6.579949,
+      "child_wall_seconds": 6.651513231001445,
+      "max_rss_kib": 150156,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 61,
+      "pid_identity": {
+        "pid": 494651,
+        "start_ticks": 6214049
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.754198000000031,
+      "child_last_record_cpu_seconds": 6.7288879999999995,
+      "child_wall_seconds": 6.807964544001152,
+      "max_rss_kib": 151748,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 62,
+      "pid_identity": {
+        "pid": 494664,
+        "start_ticks": 6214736
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.860525999999993,
+      "child_last_record_cpu_seconds": 6.828502,
+      "child_wall_seconds": 6.9237441290024435,
+      "max_rss_kib": 150064,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 63,
+      "pid_identity": {
+        "pid": 494692,
+        "start_ticks": 6215444
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.7427110000000425,
+      "child_last_record_cpu_seconds": 6.718170000000001,
+      "child_wall_seconds": 6.805656403994362,
+      "max_rss_kib": 150584,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 64,
+      "pid_identity": {
+        "pid": 494694,
+        "start_ticks": 6216131
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.744952999999953,
+      "child_last_record_cpu_seconds": 6.714751,
+      "child_wall_seconds": 6.811745525003062,
+      "max_rss_kib": 151052,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 65,
+      "pid_identity": {
+        "pid": 494698,
+        "start_ticks": 6216818
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.928730999999971,
+      "child_last_record_cpu_seconds": 6.891846,
+      "child_wall_seconds": 6.97713775900047,
+      "max_rss_kib": 150684,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 66,
+      "pid_identity": {
+        "pid": 494702,
+        "start_ticks": 6217526
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.936756000000003,
+      "child_last_record_cpu_seconds": 6.901444,
+      "child_wall_seconds": 6.995664914000372,
+      "max_rss_kib": 150340,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 67,
+      "pid_identity": {
+        "pid": 494746,
+        "start_ticks": 6218233
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.783293000000015,
+      "child_last_record_cpu_seconds": 6.7531490000000005,
+      "child_wall_seconds": 6.820905428001424,
+      "max_rss_kib": 149692,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 68,
+      "pid_identity": {
+        "pid": 494758,
+        "start_ticks": 6218941
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.131365000000017,
+      "child_last_record_cpu_seconds": 7.105444,
+      "child_wall_seconds": 7.178519916997175,
+      "max_rss_kib": 148180,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 69,
+      "pid_identity": {
+        "pid": 494793,
+        "start_ticks": 6219669
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.88212900000002,
+      "child_last_record_cpu_seconds": 6.8536719999999995,
+      "child_wall_seconds": 6.921686522997334,
+      "max_rss_kib": 150492,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 70,
+      "pid_identity": {
+        "pid": 494802,
+        "start_ticks": 6220377
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.232656999999961,
+      "child_last_record_cpu_seconds": 7.19408,
+      "child_wall_seconds": 7.2793835410047905,
+      "max_rss_kib": 151844,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 71,
+      "pid_identity": {
+        "pid": 494826,
+        "start_ticks": 6221125
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.600592000000063,
+      "child_last_record_cpu_seconds": 7.562024,
+      "child_wall_seconds": 7.865389311999024,
+      "max_rss_kib": 149960,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 72,
+      "pid_identity": {
+        "pid": 494838,
+        "start_ticks": 6221940
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.1372879999999554,
+      "child_last_record_cpu_seconds": 7.090871,
+      "child_wall_seconds": 8.165567176998593,
+      "max_rss_kib": 149604,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 73,
+      "pid_identity": {
+        "pid": 494848,
+        "start_ticks": 6222779
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.1494559999999865,
+      "child_last_record_cpu_seconds": 7.104886,
+      "child_wall_seconds": 8.034636206000869,
+      "max_rss_kib": 151016,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 74,
+      "pid_identity": {
+        "pid": 494872,
+        "start_ticks": 6223617
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.112927000000013,
+      "child_last_record_cpu_seconds": 7.085084,
+      "child_wall_seconds": 8.060091161998571,
+      "max_rss_kib": 151096,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 75,
+      "pid_identity": {
+        "pid": 494894,
+        "start_ticks": 6224454
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.92599899999999,
+      "child_last_record_cpu_seconds": 6.896199,
+      "child_wall_seconds": 8.057211990002543,
+      "max_rss_kib": 150712,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 76,
+      "pid_identity": {
+        "pid": 494921,
+        "start_ticks": 6225288
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.7883620000000064,
+      "child_last_record_cpu_seconds": 6.761026,
+      "child_wall_seconds": 7.692058994005492,
+      "max_rss_kib": 147664,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 77,
+      "pid_identity": {
+        "pid": 494929,
+        "start_ticks": 6226084
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.99161399999997,
+      "child_last_record_cpu_seconds": 6.960041,
+      "child_wall_seconds": 8.053338943005656,
+      "max_rss_kib": 150652,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 78,
+      "pid_identity": {
+        "pid": 494949,
+        "start_ticks": 6226917
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.020038,
+      "child_last_record_cpu_seconds": 6.986564,
+      "child_wall_seconds": 7.215769055001147,
+      "max_rss_kib": 150720,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 79,
+      "pid_identity": {
+        "pid": 494979,
+        "start_ticks": 6227645
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 6.945271000000048,
+      "child_last_record_cpu_seconds": 6.919632999999999,
+      "child_wall_seconds": 7.067803060002916,
+      "max_rss_kib": 150788,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 80,
+      "pid_identity": {
+        "pid": 495006,
+        "start_ticks": 6228374
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.214993999999933,
+      "child_last_record_cpu_seconds": 7.179857999999999,
+      "child_wall_seconds": 7.240221867003129,
+      "max_rss_kib": 149668,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 81,
+      "pid_identity": {
+        "pid": 495035,
+        "start_ticks": 6229122
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.664459000000079,
+      "child_last_record_cpu_seconds": 7.62926,
+      "child_wall_seconds": 7.66396063099819,
+      "max_rss_kib": 151068,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 82,
+      "pid_identity": {
+        "pid": 495084,
+        "start_ticks": 6229912
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.653852999999913,
+      "child_last_record_cpu_seconds": 7.620468000000001,
+      "child_wall_seconds": 7.697266587994818,
+      "max_rss_kib": 150460,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 83,
+      "pid_identity": {
+        "pid": 495118,
+        "start_ticks": 6230702
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.281987000000072,
+      "child_last_record_cpu_seconds": 7.248792999999999,
+      "child_wall_seconds": 7.379390923000756,
+      "max_rss_kib": 149292,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 84,
+      "pid_identity": {
+        "pid": 495129,
+        "start_ticks": 6231450
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.228412999999932,
+      "child_last_record_cpu_seconds": 7.202643999999999,
+      "child_wall_seconds": 7.233420393997221,
+      "max_rss_kib": 150284,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 85,
+      "pid_identity": {
+        "pid": 495141,
+        "start_ticks": 6232199
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.308505000000082,
+      "child_last_record_cpu_seconds": 7.266627,
+      "child_wall_seconds": 7.290411841000605,
+      "max_rss_kib": 150484,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 86,
+      "pid_identity": {
+        "pid": 495189,
+        "start_ticks": 6232948
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.547318000000018,
+      "child_last_record_cpu_seconds": 7.506049000000001,
+      "child_wall_seconds": 7.5630977969995,
+      "max_rss_kib": 148704,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 87,
+      "pid_identity": {
+        "pid": 495191,
+        "start_ticks": 6233718
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.61934999999994,
+      "child_last_record_cpu_seconds": 7.581951,
+      "child_wall_seconds": 7.702522733998194,
+      "max_rss_kib": 151208,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 88,
+      "pid_identity": {
+        "pid": 495195,
+        "start_ticks": 6234508
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.474102000000016,
+      "child_last_record_cpu_seconds": 7.4388570000000005,
+      "child_wall_seconds": 7.852793294994626,
+      "max_rss_kib": 150076,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 89,
+      "pid_identity": {
+        "pid": 495198,
+        "start_ticks": 6235318
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.454801999999972,
+      "child_last_record_cpu_seconds": 7.414388,
+      "child_wall_seconds": 7.459395006000705,
+      "max_rss_kib": 147896,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 90,
+      "pid_identity": {
+        "pid": 495218,
+        "start_ticks": 6236088
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.584418000000028,
+      "child_last_record_cpu_seconds": 7.544035,
+      "child_wall_seconds": 7.622594282001955,
+      "max_rss_kib": 151092,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 91,
+      "pid_identity": {
+        "pid": 495221,
+        "start_ticks": 6236858
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.481326000000081,
+      "child_last_record_cpu_seconds": 7.442285,
+      "child_wall_seconds": 7.6082744919986,
+      "max_rss_kib": 150244,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 92,
+      "pid_identity": {
+        "pid": 495234,
+        "start_ticks": 6237628
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.3955459999999675,
+      "child_last_record_cpu_seconds": 7.36468,
+      "child_wall_seconds": 7.453776048998407,
+      "max_rss_kib": 148604,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 93,
+      "pid_identity": {
+        "pid": 495236,
+        "start_ticks": 6238398
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.445797999999968,
+      "child_last_record_cpu_seconds": 7.408499,
+      "child_wall_seconds": 7.452987659999053,
+      "max_rss_kib": 149092,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 94,
+      "pid_identity": {
+        "pid": 495256,
+        "start_ticks": 6239167
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.662168000000065,
+      "child_last_record_cpu_seconds": 7.615679999999999,
+      "child_wall_seconds": 7.6870516240014695,
+      "max_rss_kib": 150584,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 95,
+      "pid_identity": {
+        "pid": 495296,
+        "start_ticks": 6239958
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.130355999999892,
+      "child_last_record_cpu_seconds": 8.091065,
+      "child_wall_seconds": 8.229999561997829,
+      "max_rss_kib": 150400,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 96,
+      "pid_identity": {
+        "pid": 495480,
+        "start_ticks": 6240788
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.359307000000058,
+      "child_last_record_cpu_seconds": 7.331957,
+      "child_wall_seconds": 7.448992794001242,
+      "max_rss_kib": 149792,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 97,
+      "pid_identity": {
+        "pid": 495533,
+        "start_ticks": 6241558
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.514598999999976,
+      "child_last_record_cpu_seconds": 7.48559,
+      "child_wall_seconds": 7.543573078997724,
+      "max_rss_kib": 149832,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 98,
+      "pid_identity": {
+        "pid": 495569,
+        "start_ticks": 6242327
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.3596639999999525,
+      "child_last_record_cpu_seconds": 7.328781,
+      "child_wall_seconds": 7.40335023800435,
+      "max_rss_kib": 150484,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 99,
+      "pid_identity": {
+        "pid": 495572,
+        "start_ticks": 6243077
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.429392000000007,
+      "child_last_record_cpu_seconds": 7.3952659999999995,
+      "child_wall_seconds": 7.544603054004256,
+      "max_rss_kib": 148528,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 100,
+      "pid_identity": {
+        "pid": 495586,
+        "start_ticks": 6243846
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.469600000000014,
+      "child_last_record_cpu_seconds": 7.434056,
+      "child_wall_seconds": 7.5284912409988465,
+      "max_rss_kib": 150900,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 101,
+      "pid_identity": {
+        "pid": 495588,
+        "start_ticks": 6244615
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.370229999999992,
+      "child_last_record_cpu_seconds": 7.341727,
+      "child_wall_seconds": 7.373732708001626,
+      "max_rss_kib": 149336,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 102,
+      "pid_identity": {
+        "pid": 495615,
+        "start_ticks": 6245365
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.361664000000019,
+      "child_last_record_cpu_seconds": 7.3224149999999995,
+      "child_wall_seconds": 7.390548080998997,
+      "max_rss_kib": 150368,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 103,
+      "pid_identity": {
+        "pid": 495618,
+        "start_ticks": 6246115
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.659244000000058,
+      "child_last_record_cpu_seconds": 7.628712999999999,
+      "child_wall_seconds": 8.643732691001787,
+      "max_rss_kib": 149592,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 104,
+      "pid_identity": {
+        "pid": 495650,
+        "start_ticks": 6247018
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.326949999999897,
+      "child_last_record_cpu_seconds": 7.287946,
+      "child_wall_seconds": 8.527479557000333,
+      "max_rss_kib": 150796,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 105,
+      "pid_identity": {
+        "pid": 495683,
+        "start_ticks": 6247895
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.205080000000066,
+      "child_last_record_cpu_seconds": 7.169448,
+      "child_wall_seconds": 8.240275077005208,
+      "max_rss_kib": 147648,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 106,
+      "pid_identity": {
+        "pid": 495685,
+        "start_ticks": 6248756
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.529249999999934,
+      "child_last_record_cpu_seconds": 7.493904000000001,
+      "child_wall_seconds": 7.665760886004136,
+      "max_rss_kib": 150456,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 107,
+      "pid_identity": {
+        "pid": 495695,
+        "start_ticks": 6249545
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.778331000000094,
+      "child_last_record_cpu_seconds": 7.72626,
+      "child_wall_seconds": 7.824555914005032,
+      "max_rss_kib": 149080,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 108,
+      "pid_identity": {
+        "pid": 495757,
+        "start_ticks": 6250355
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.5314879999999675,
+      "child_last_record_cpu_seconds": 7.495914,
+      "child_wall_seconds": 7.56620623699564,
+      "max_rss_kib": 150120,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 109,
+      "pid_identity": {
+        "pid": 496039,
+        "start_ticks": 6251126
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.593731999999932,
+      "child_last_record_cpu_seconds": 7.563105999999999,
+      "child_wall_seconds": 7.5475984570002765,
+      "max_rss_kib": 150532,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 110,
+      "pid_identity": {
+        "pid": 496048,
+        "start_ticks": 6251896
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.538422000000082,
+      "child_last_record_cpu_seconds": 7.493236,
+      "child_wall_seconds": 7.4724179780023405,
+      "max_rss_kib": 149652,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 111,
+      "pid_identity": {
+        "pid": 496106,
+        "start_ticks": 6252667
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.537499999999909,
+      "child_last_record_cpu_seconds": 7.5063580000000005,
+      "child_wall_seconds": 7.6145510300048045,
+      "max_rss_kib": 151936,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 112,
+      "pid_identity": {
+        "pid": 496109,
+        "start_ticks": 6253437
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.107695000000035,
+      "child_last_record_cpu_seconds": 7.081892,
+      "child_wall_seconds": 7.1946112289952,
+      "max_rss_kib": 148612,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 113,
+      "pid_identity": {
+        "pid": 496137,
+        "start_ticks": 6254166
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.01735599999995,
+      "child_last_record_cpu_seconds": 6.991045,
+      "child_wall_seconds": 6.993740086996695,
+      "max_rss_kib": 149560,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 114,
+      "pid_identity": {
+        "pid": 496139,
+        "start_ticks": 6254876
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.286205000000109,
+      "child_last_record_cpu_seconds": 7.242145,
+      "child_wall_seconds": 7.258104643995466,
+      "max_rss_kib": 150900,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 115,
+      "pid_identity": {
+        "pid": 496149,
+        "start_ticks": 6255625
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.03424700000005,
+      "child_last_record_cpu_seconds": 6.999817999999999,
+      "child_wall_seconds": 7.090123335998214,
+      "max_rss_kib": 147824,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 116,
+      "pid_identity": {
+        "pid": 496151,
+        "start_ticks": 6256356
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.208566999999903,
+      "child_last_record_cpu_seconds": 7.172853,
+      "child_wall_seconds": 7.332491817003756,
+      "max_rss_kib": 148884,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 117,
+      "pid_identity": {
+        "pid": 496182,
+        "start_ticks": 6257108
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.465176000000042,
+      "child_last_record_cpu_seconds": 7.438463,
+      "child_wall_seconds": 7.434166503000597,
+      "max_rss_kib": 150660,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 118,
+      "pid_identity": {
+        "pid": 496234,
+        "start_ticks": 6257878
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.389003000000002,
+      "child_last_record_cpu_seconds": 7.341766,
+      "child_wall_seconds": 8.136700490002113,
+      "max_rss_kib": 150656,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 119,
+      "pid_identity": {
+        "pid": 496245,
+        "start_ticks": 6258715
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.41094899999996,
+      "child_last_record_cpu_seconds": 7.373431,
+      "child_wall_seconds": 8.378427087998716,
+      "max_rss_kib": 151608,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 120,
+      "pid_identity": {
+        "pid": 496252,
+        "start_ticks": 6259575
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.317739999999958,
+      "child_last_record_cpu_seconds": 7.279889,
+      "child_wall_seconds": 8.426108041996486,
+      "max_rss_kib": 150496,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 121,
+      "pid_identity": {
+        "pid": 496283,
+        "start_ticks": 6260436
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.569114000000013,
+      "child_last_record_cpu_seconds": 7.529712,
+      "child_wall_seconds": 8.469244515996252,
+      "max_rss_kib": 150408,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 122,
+      "pid_identity": {
+        "pid": 496298,
+        "start_ticks": 6261317
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.718974000000003,
+      "child_last_record_cpu_seconds": 7.681125,
+      "child_wall_seconds": 8.51679696499923,
+      "max_rss_kib": 150504,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 123,
+      "pid_identity": {
+        "pid": 496411,
+        "start_ticks": 6262198
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.493333000000007,
+      "child_last_record_cpu_seconds": 7.445412,
+      "child_wall_seconds": 8.431959633999213,
+      "max_rss_kib": 149612,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 124,
+      "pid_identity": {
+        "pid": 496445,
+        "start_ticks": 6263074
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.65093800000011,
+      "child_last_record_cpu_seconds": 7.608082,
+      "child_wall_seconds": 7.912787585002661,
+      "max_rss_kib": 150004,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 125,
+      "pid_identity": {
+        "pid": 496473,
+        "start_ticks": 6263886
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.918952999999874,
+      "child_last_record_cpu_seconds": 7.874231,
+      "child_wall_seconds": 7.8321732679978595,
+      "max_rss_kib": 151608,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 126,
+      "pid_identity": {
+        "pid": 496505,
+        "start_ticks": 6264677
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.979801000000066,
+      "child_last_record_cpu_seconds": 7.9347460000000005,
+      "child_wall_seconds": 7.957743038001354,
+      "max_rss_kib": 150544,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 127,
+      "pid_identity": {
+        "pid": 496587,
+        "start_ticks": 6265490
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.866923999999926,
+      "child_last_record_cpu_seconds": 8.825206999999999,
+      "child_wall_seconds": 8.890432754000358,
+      "max_rss_kib": 150696,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 128,
+      "pid_identity": {
+        "pid": 496840,
+        "start_ticks": 6266403
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.227991000000088,
+      "child_last_record_cpu_seconds": 8.193687,
+      "child_wall_seconds": 8.24777566800185,
+      "max_rss_kib": 151300,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 129,
+      "pid_identity": {
+        "pid": 496850,
+        "start_ticks": 6267235
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.054899999999975,
+      "child_last_record_cpu_seconds": 8.015295,
+      "child_wall_seconds": 7.9445732930034865,
+      "max_rss_kib": 151168,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 130,
+      "pid_identity": {
+        "pid": 497006,
+        "start_ticks": 6268047
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.440592999999922,
+      "child_last_record_cpu_seconds": 7.408752,
+      "child_wall_seconds": 7.440490526998474,
+      "max_rss_kib": 149980,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 131,
+      "pid_identity": {
+        "pid": 497012,
+        "start_ticks": 6268798
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.4820530000000645,
+      "child_last_record_cpu_seconds": 7.446902,
+      "child_wall_seconds": 7.577903710996907,
+      "max_rss_kib": 149508,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 132,
+      "pid_identity": {
+        "pid": 497032,
+        "start_ticks": 6269570
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.486470999999938,
+      "child_last_record_cpu_seconds": 7.458518,
+      "child_wall_seconds": 7.514022376002686,
+      "max_rss_kib": 148824,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 133,
+      "pid_identity": {
+        "pid": 497071,
+        "start_ticks": 6270342
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.379563000000076,
+      "child_last_record_cpu_seconds": 7.34809,
+      "child_wall_seconds": 7.335318208002718,
+      "max_rss_kib": 150576,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 134,
+      "pid_identity": {
+        "pid": 497088,
+        "start_ticks": 6271091
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.725462999999991,
+      "child_last_record_cpu_seconds": 7.680902,
+      "child_wall_seconds": 7.670434029998432,
+      "max_rss_kib": 150648,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 135,
+      "pid_identity": {
+        "pid": 497265,
+        "start_ticks": 6271882
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.782294999999976,
+      "child_last_record_cpu_seconds": 7.7553350000000005,
+      "child_wall_seconds": 8.589289379997354,
+      "max_rss_kib": 151732,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 136,
+      "pid_identity": {
+        "pid": 497293,
+        "start_ticks": 6272766
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.690643000000023,
+      "child_last_record_cpu_seconds": 7.658876,
+      "child_wall_seconds": 8.542858732995228,
+      "max_rss_kib": 152556,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 137,
+      "pid_identity": {
+        "pid": 497297,
+        "start_ticks": 6273647
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.37407799999994,
+      "child_last_record_cpu_seconds": 7.347423,
+      "child_wall_seconds": 8.466291192002245,
+      "max_rss_kib": 150756,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 138,
+      "pid_identity": {
+        "pid": 497301,
+        "start_ticks": 6274526
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.465483000000063,
+      "child_last_record_cpu_seconds": 7.42516,
+      "child_wall_seconds": 8.489406426000642,
+      "max_rss_kib": 151156,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 139,
+      "pid_identity": {
+        "pid": 497321,
+        "start_ticks": 6275407
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.730303999999933,
+      "child_last_record_cpu_seconds": 7.687371,
+      "child_wall_seconds": 8.011823146000097,
+      "max_rss_kib": 149848,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 140,
+      "pid_identity": {
+        "pid": 497334,
+        "start_ticks": 6276219
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.584223000000065,
+      "child_last_record_cpu_seconds": 7.550142,
+      "child_wall_seconds": 8.011568392001209,
+      "max_rss_kib": 150656,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 141,
+      "pid_identity": {
+        "pid": 497337,
+        "start_ticks": 6277036
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.590820000000008,
+      "child_last_record_cpu_seconds": 7.555148,
+      "child_wall_seconds": 8.604749780999555,
+      "max_rss_kib": 152892,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 142,
+      "pid_identity": {
+        "pid": 497357,
+        "start_ticks": 6277917
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.436580999999933,
+      "child_last_record_cpu_seconds": 7.4075880000000005,
+      "child_wall_seconds": 7.962550645999727,
+      "max_rss_kib": 149752,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 143,
+      "pid_identity": {
+        "pid": 497369,
+        "start_ticks": 6278729
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.452111000000059,
+      "child_last_record_cpu_seconds": 7.41742,
+      "child_wall_seconds": 7.510108684000443,
+      "max_rss_kib": 150808,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 144,
+      "pid_identity": {
+        "pid": 497373,
+        "start_ticks": 6279499
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.638655999999969,
+      "child_last_record_cpu_seconds": 7.6017920000000005,
+      "child_wall_seconds": 7.683557083000778,
+      "max_rss_kib": 149896,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 145,
+      "pid_identity": {
+        "pid": 497375,
+        "start_ticks": 6280291
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.7085160000000315,
+      "child_last_record_cpu_seconds": 7.679836,
+      "child_wall_seconds": 7.727905668994936,
+      "max_rss_kib": 151584,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 146,
+      "pid_identity": {
+        "pid": 497395,
+        "start_ticks": 6281081
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.538432000000057,
+      "child_last_record_cpu_seconds": 7.503993,
+      "child_wall_seconds": 7.582725079002557,
+      "max_rss_kib": 151028,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 147,
+      "pid_identity": {
+        "pid": 497407,
+        "start_ticks": 6281853
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.081023999999843,
+      "child_last_record_cpu_seconds": 8.042365,
+      "child_wall_seconds": 8.133433717004664,
+      "max_rss_kib": 150592,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 148,
+      "pid_identity": {
+        "pid": 497411,
+        "start_ticks": 6282685
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.736295000000155,
+      "child_last_record_cpu_seconds": 7.708604,
+      "child_wall_seconds": 7.809830199999851,
+      "max_rss_kib": 150312,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 149,
+      "pid_identity": {
+        "pid": 497414,
+        "start_ticks": 6283478
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.549576999999999,
+      "child_last_record_cpu_seconds": 7.519898,
+      "child_wall_seconds": 7.5935864450002555,
+      "max_rss_kib": 150768,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 150,
+      "pid_identity": {
+        "pid": 497512,
+        "start_ticks": 6284249
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.788598000000093,
+      "child_last_record_cpu_seconds": 7.749124,
+      "child_wall_seconds": 7.763606131004053,
+      "max_rss_kib": 149832,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 151,
+      "pid_identity": {
+        "pid": 497518,
+        "start_ticks": 6285041
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.239321999999902,
+      "child_last_record_cpu_seconds": 7.210919,
+      "child_wall_seconds": 7.239369543996872,
+      "max_rss_kib": 147020,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 152,
+      "pid_identity": {
+        "pid": 497520,
+        "start_ticks": 6285772
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.318408999999974,
+      "child_last_record_cpu_seconds": 7.287122999999999,
+      "child_wall_seconds": 7.657056079995527,
+      "max_rss_kib": 150052,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 153,
+      "pid_identity": {
+        "pid": 497522,
+        "start_ticks": 6286569
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.933950999999979,
+      "child_last_record_cpu_seconds": 7.899649999999999,
+      "child_wall_seconds": 9.332639555999776,
+      "max_rss_kib": 151024,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 154,
+      "pid_identity": {
+        "pid": 497616,
+        "start_ticks": 6287524
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.865238999999974,
+      "child_last_record_cpu_seconds": 8.816678999999999,
+      "child_wall_seconds": 8.86159734299872,
+      "max_rss_kib": 151772,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 155,
+      "pid_identity": {
+        "pid": 497661,
+        "start_ticks": 6288420
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.323591999999962,
+      "child_last_record_cpu_seconds": 8.278399,
+      "child_wall_seconds": 8.330972528005077,
+      "max_rss_kib": 150076,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 156,
+      "pid_identity": {
+        "pid": 497777,
+        "start_ticks": 6289274
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.053579000000127,
+      "child_last_record_cpu_seconds": 8.01433,
+      "child_wall_seconds": 8.083676718000788,
+      "max_rss_kib": 150900,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 157,
+      "pid_identity": {
+        "pid": 497803,
+        "start_ticks": 6290107
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.248931000000084,
+      "child_last_record_cpu_seconds": 8.211031,
+      "child_wall_seconds": 8.802172381998389,
+      "max_rss_kib": 149352,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 158,
+      "pid_identity": {
+        "pid": 497853,
+        "start_ticks": 6291011
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.9599309999998695,
+      "child_last_record_cpu_seconds": 7.908117000000001,
+      "child_wall_seconds": 10.484202034000191,
+      "max_rss_kib": 150592,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 159,
+      "pid_identity": {
+        "pid": 497957,
+        "start_ticks": 6292067
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.960692999999992,
+      "child_last_record_cpu_seconds": 7.927846000000001,
+      "child_wall_seconds": 7.953221779003798,
+      "max_rss_kib": 148252,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 160,
+      "pid_identity": {
+        "pid": 497978,
+        "start_ticks": 6292880
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.07008299999984,
+      "child_last_record_cpu_seconds": 8.032259,
+      "child_wall_seconds": 8.89616650199605,
+      "max_rss_kib": 150384,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 161,
+      "pid_identity": {
+        "pid": 497995,
+        "start_ticks": 6293796
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.104167000000189,
+      "child_last_record_cpu_seconds": 8.069886,
+      "child_wall_seconds": 8.099900986999273,
+      "max_rss_kib": 150060,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 162,
+      "pid_identity": {
+        "pid": 498010,
+        "start_ticks": 6294628
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.961858999999777,
+      "child_last_record_cpu_seconds": 7.916788,
+      "child_wall_seconds": 8.844530374000897,
+      "max_rss_kib": 148004,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 163,
+      "pid_identity": {
+        "pid": 498182,
+        "start_ticks": 6295522
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.000196000000187,
+      "child_last_record_cpu_seconds": 7.963649,
+      "child_wall_seconds": 8.192877610999858,
+      "max_rss_kib": 150120,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 164,
+      "pid_identity": {
+        "pid": 498210,
+        "start_ticks": 6296370
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 7.978290000000015,
+      "child_last_record_cpu_seconds": 7.942772,
+      "child_wall_seconds": 9.257178321000538,
+      "max_rss_kib": 150320,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 165,
+      "pid_identity": {
+        "pid": 498245,
+        "start_ticks": 6297334
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.757240999999794,
+      "child_last_record_cpu_seconds": 8.720042,
+      "child_wall_seconds": 9.673234231006063,
+      "max_rss_kib": 149904,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 166,
+      "pid_identity": {
+        "pid": 498251,
+        "start_ticks": 6298313
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.17079300000023,
+      "child_last_record_cpu_seconds": 8.136175,
+      "child_wall_seconds": 8.156729631002236,
+      "max_rss_kib": 148896,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 167,
+      "pid_identity": {
+        "pid": 498272,
+        "start_ticks": 6299147
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.362257999999883,
+      "child_last_record_cpu_seconds": 8.327127,
+      "child_wall_seconds": 8.322876687001553,
+      "max_rss_kib": 147968,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 168,
+      "pid_identity": {
+        "pid": 498276,
+        "start_ticks": 6300000
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.230298000000175,
+      "child_last_record_cpu_seconds": 8.190812000000001,
+      "child_wall_seconds": 9.05851657900348,
+      "max_rss_kib": 151792,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 169,
+      "pid_identity": {
+        "pid": 498283,
+        "start_ticks": 6300923
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.038491000000022,
+      "child_last_record_cpu_seconds": 7.992028,
+      "child_wall_seconds": 8.094310654996661,
+      "max_rss_kib": 150092,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 170,
+      "pid_identity": {
+        "pid": 498285,
+        "start_ticks": 6301757
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.070442999999841,
+      "child_last_record_cpu_seconds": 8.032241,
+      "child_wall_seconds": 9.025218520997441,
+      "max_rss_kib": 149484,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 171,
+      "pid_identity": {
+        "pid": 498317,
+        "start_ticks": 6302684
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.255641999999852,
+      "child_last_record_cpu_seconds": 8.216961,
+      "child_wall_seconds": 9.541634120003437,
+      "max_rss_kib": 150776,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 172,
+      "pid_identity": {
+        "pid": 498326,
+        "start_ticks": 6303660
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.583736000000272,
+      "child_last_record_cpu_seconds": 8.539634,
+      "child_wall_seconds": 8.561594167003932,
+      "max_rss_kib": 148904,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 173,
+      "pid_identity": {
+        "pid": 498380,
+        "start_ticks": 6304537
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.121024999999918,
+      "child_last_record_cpu_seconds": 8.081890999999999,
+      "child_wall_seconds": 8.851241223994293,
+      "max_rss_kib": 149712,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 174,
+      "pid_identity": {
+        "pid": 498409,
+        "start_ticks": 6305431
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.170499999999947,
+      "child_last_record_cpu_seconds": 8.130599,
+      "child_wall_seconds": 8.306281135999598,
+      "max_rss_kib": 148072,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 175,
+      "pid_identity": {
+        "pid": 498443,
+        "start_ticks": 6306294
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.401649000000134,
+      "child_last_record_cpu_seconds": 8.369605,
+      "child_wall_seconds": 9.426709467996261,
+      "max_rss_kib": 151720,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 176,
+      "pid_identity": {
+        "pid": 498469,
+        "start_ticks": 6307263
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.229559999999765,
+      "child_last_record_cpu_seconds": 8.175844,
+      "child_wall_seconds": 9.281205131002935,
+      "max_rss_kib": 149464,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 177,
+      "pid_identity": {
+        "pid": 498489,
+        "start_ticks": 6308225
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.179163000000244,
+      "child_last_record_cpu_seconds": 8.134144000000001,
+      "child_wall_seconds": 9.179440006999357,
+      "max_rss_kib": 150816,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 178,
+      "pid_identity": {
+        "pid": 498511,
+        "start_ticks": 6309171
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.202595999999858,
+      "child_last_record_cpu_seconds": 8.159698,
+      "child_wall_seconds": 9.236526688997401,
+      "max_rss_kib": 150900,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 179,
+      "pid_identity": {
+        "pid": 498522,
+        "start_ticks": 6310120
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.10512000000017,
+      "child_last_record_cpu_seconds": 8.064124999999999,
+      "child_wall_seconds": 9.119967664999422,
+      "max_rss_kib": 150208,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 180,
+      "pid_identity": {
+        "pid": 498552,
+        "start_ticks": 6311062
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.228740000000016,
+      "child_last_record_cpu_seconds": 8.188374,
+      "child_wall_seconds": 8.324435993999941,
+      "max_rss_kib": 150216,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 181,
+      "pid_identity": {
+        "pid": 498563,
+        "start_ticks": 6311919
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.046492999999828,
+      "child_last_record_cpu_seconds": 8.016472,
+      "child_wall_seconds": 8.022643434997008,
+      "max_rss_kib": 149868,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 182,
+      "pid_identity": {
+        "pid": 498574,
+        "start_ticks": 6312733
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.169061000000056,
+      "child_last_record_cpu_seconds": 8.130036,
+      "child_wall_seconds": 8.135371069998655,
+      "max_rss_kib": 151232,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 183,
+      "pid_identity": {
+        "pid": 498586,
+        "start_ticks": 6313567
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.305643000000146,
+      "child_last_record_cpu_seconds": 8.272672,
+      "child_wall_seconds": 8.688864873001876,
+      "max_rss_kib": 149644,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 184,
+      "pid_identity": {
+        "pid": 498606,
+        "start_ticks": 6314466
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.240481999999702,
+      "child_last_record_cpu_seconds": 8.203523,
+      "child_wall_seconds": 8.356534784994437,
+      "max_rss_kib": 150500,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 185,
+      "pid_identity": {
+        "pid": 498610,
+        "start_ticks": 6315321
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.526475000000119,
+      "child_last_record_cpu_seconds": 8.485858,
+      "child_wall_seconds": 8.576880462998815,
+      "max_rss_kib": 151664,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 186,
+      "pid_identity": {
+        "pid": 498721,
+        "start_ticks": 6316199
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.527654999999868,
+      "child_last_record_cpu_seconds": 8.479621,
+      "child_wall_seconds": 8.555173200002173,
+      "max_rss_kib": 148328,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 187,
+      "pid_identity": {
+        "pid": 498761,
+        "start_ticks": 6317074
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.384457999999995,
+      "child_last_record_cpu_seconds": 8.345614,
+      "child_wall_seconds": 8.453222850999737,
+      "max_rss_kib": 151136,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 188,
+      "pid_identity": {
+        "pid": 498765,
+        "start_ticks": 6317929
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.381827000000158,
+      "child_last_record_cpu_seconds": 8.345657,
+      "child_wall_seconds": 8.451315418999002,
+      "max_rss_kib": 150172,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 189,
+      "pid_identity": {
+        "pid": 498774,
+        "start_ticks": 6318783
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.485348000000158,
+      "child_last_record_cpu_seconds": 8.440233,
+      "child_wall_seconds": 8.369264540997392,
+      "max_rss_kib": 151220,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 190,
+      "pid_identity": {
+        "pid": 498821,
+        "start_ticks": 6319638
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.304627999999639,
+      "child_last_record_cpu_seconds": 8.270888,
+      "child_wall_seconds": 8.359491312003229,
+      "max_rss_kib": 149848,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 191,
+      "pid_identity": {
+        "pid": 498846,
+        "start_ticks": 6320496
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.455271000000266,
+      "child_last_record_cpu_seconds": 8.42153,
+      "child_wall_seconds": 8.54265405300248,
+      "max_rss_kib": 152248,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 192,
+      "pid_identity": {
+        "pid": 498882,
+        "start_ticks": 6321372
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.177165000000059,
+      "child_last_record_cpu_seconds": 8.137051,
+      "child_wall_seconds": 8.336894289997872,
+      "max_rss_kib": 150948,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 193,
+      "pid_identity": {
+        "pid": 498884,
+        "start_ticks": 6322228
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.566710999999941,
+      "child_last_record_cpu_seconds": 8.533085,
+      "child_wall_seconds": 8.567434921002132,
+      "max_rss_kib": 151984,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 194,
+      "pid_identity": {
+        "pid": 498922,
+        "start_ticks": 6323102
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.368215999999848,
+      "child_last_record_cpu_seconds": 8.337328,
+      "child_wall_seconds": 8.967038974005845,
+      "max_rss_kib": 151688,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 195,
+      "pid_identity": {
+        "pid": 498926,
+        "start_ticks": 6324029
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.223165000000108,
+      "child_last_record_cpu_seconds": 8.187975,
+      "child_wall_seconds": 9.273533234998467,
+      "max_rss_kib": 150008,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 196,
+      "pid_identity": {
+        "pid": 498940,
+        "start_ticks": 6324978
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.181020999999873,
+      "child_last_record_cpu_seconds": 8.145855,
+      "child_wall_seconds": 9.289362499999697,
+      "max_rss_kib": 150068,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 197,
+      "pid_identity": {
+        "pid": 498965,
+        "start_ticks": 6325940
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.186313000000155,
+      "child_last_record_cpu_seconds": 8.152683,
+      "child_wall_seconds": 8.391634399995382,
+      "max_rss_kib": 150612,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 198,
+      "pid_identity": {
+        "pid": 498969,
+        "start_ticks": 6326795
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.167275999999902,
+      "child_last_record_cpu_seconds": 8.123059,
+      "child_wall_seconds": 8.167676882003434,
+      "max_rss_kib": 150324,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 199,
+      "pid_identity": {
+        "pid": 499000,
+        "start_ticks": 6327633
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.212271999999984,
+      "child_last_record_cpu_seconds": 8.178696,
+      "child_wall_seconds": 8.302585464000003,
+      "max_rss_kib": 148880,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 200,
+      "pid_identity": {
+        "pid": 499014,
+        "start_ticks": 6328489
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.170018000000027,
+      "child_last_record_cpu_seconds": 8.138546,
+      "child_wall_seconds": 8.146952898001473,
+      "max_rss_kib": 150056,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 201,
+      "pid_identity": {
+        "pid": 499056,
+        "start_ticks": 6329324
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.14666299999999,
+      "child_last_record_cpu_seconds": 8.113606,
+      "child_wall_seconds": 8.048948121002468,
+      "max_rss_kib": 150764,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 202,
+      "pid_identity": {
+        "pid": 499072,
+        "start_ticks": 6330139
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.769559999999956,
+      "child_last_record_cpu_seconds": 8.726747,
+      "child_wall_seconds": 8.799688494997099,
+      "max_rss_kib": 151932,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 203,
+      "pid_identity": {
+        "pid": 499079,
+        "start_ticks": 6331036
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.744929000000184,
+      "child_last_record_cpu_seconds": 8.707824,
+      "child_wall_seconds": 8.74375424900063,
+      "max_rss_kib": 149496,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 204,
+      "pid_identity": {
+        "pid": 499257,
+        "start_ticks": 6331935
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.455619999999954,
+      "child_last_record_cpu_seconds": 8.412588,
+      "child_wall_seconds": 8.35273305100418,
+      "max_rss_kib": 151260,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 205,
+      "pid_identity": {
+        "pid": 499267,
+        "start_ticks": 6332791
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.42924999999991,
+      "child_last_record_cpu_seconds": 8.38749,
+      "child_wall_seconds": 8.423350535995269,
+      "max_rss_kib": 149972,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 206,
+      "pid_identity": {
+        "pid": 499279,
+        "start_ticks": 6333647
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.368277000000035,
+      "child_last_record_cpu_seconds": 8.3235,
+      "child_wall_seconds": 8.368975992001651,
+      "max_rss_kib": 150788,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 207,
+      "pid_identity": {
+        "pid": 499315,
+        "start_ticks": 6334503
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.430789000000004,
+      "child_last_record_cpu_seconds": 8.379162,
+      "child_wall_seconds": 8.373223308000888,
+      "max_rss_kib": 149904,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 208,
+      "pid_identity": {
+        "pid": 499346,
+        "start_ticks": 6335358
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.511283000000049,
+      "child_last_record_cpu_seconds": 8.462434,
+      "child_wall_seconds": 9.670698705995164,
+      "max_rss_kib": 149724,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 209,
+      "pid_identity": {
+        "pid": 499356,
+        "start_ticks": 6336343
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.420043999999962,
+      "child_last_record_cpu_seconds": 8.385809,
+      "child_wall_seconds": 9.573986231000163,
+      "max_rss_kib": 150048,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 210,
+      "pid_identity": {
+        "pid": 499412,
+        "start_ticks": 6337323
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.744552000000112,
+      "child_last_record_cpu_seconds": 8.712218,
+      "child_wall_seconds": 8.802127851995465,
+      "max_rss_kib": 151024,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 211,
+      "pid_identity": {
+        "pid": 499436,
+        "start_ticks": 6338219
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.415725999999722,
+      "child_last_record_cpu_seconds": 8.381564,
+      "child_wall_seconds": 8.432210988998122,
+      "max_rss_kib": 149804,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 212,
+      "pid_identity": {
+        "pid": 499468,
+        "start_ticks": 6339077
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.55134100000032,
+      "child_last_record_cpu_seconds": 8.515766,
+      "child_wall_seconds": 8.564089131999935,
+      "max_rss_kib": 149260,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 213,
+      "pid_identity": {
+        "pid": 499531,
+        "start_ticks": 6339953
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.799760999999762,
+      "child_last_record_cpu_seconds": 8.749749999999999,
+      "child_wall_seconds": 9.123342231003335,
+      "max_rss_kib": 147740,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 214,
+      "pid_identity": {
+        "pid": 499546,
+        "start_ticks": 6340893
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.502804000000197,
+      "child_last_record_cpu_seconds": 8.472523,
+      "child_wall_seconds": 8.506265987001825,
+      "max_rss_kib": 149836,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 215,
+      "pid_identity": {
+        "pid": 499576,
+        "start_ticks": 6341769
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.72240399999987,
+      "child_last_record_cpu_seconds": 8.68374,
+      "child_wall_seconds": 8.662649177000276,
+      "max_rss_kib": 150472,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 216,
+      "pid_identity": {
+        "pid": 499579,
+        "start_ticks": 6342645
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.552824999999984,
+      "child_last_record_cpu_seconds": 8.516027,
+      "child_wall_seconds": 8.50653783800226,
+      "max_rss_kib": 148832,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 217,
+      "pid_identity": {
+        "pid": 499586,
+        "start_ticks": 6343520
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.701794999999947,
+      "child_last_record_cpu_seconds": 8.646935,
+      "child_wall_seconds": 8.64371135100373,
+      "max_rss_kib": 151320,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 218,
+      "pid_identity": {
+        "pid": 499608,
+        "start_ticks": 6344399
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.520389999999907,
+      "child_last_record_cpu_seconds": 8.485193,
+      "child_wall_seconds": 9.32041287500033,
+      "max_rss_kib": 151348,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 219,
+      "pid_identity": {
+        "pid": 499610,
+        "start_ticks": 6345360
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.529048999999986,
+      "child_last_record_cpu_seconds": 8.4903,
+      "child_wall_seconds": 9.591969189001247,
+      "max_rss_kib": 148528,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 220,
+      "pid_identity": {
+        "pid": 499622,
+        "start_ticks": 6346348
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 9.248252999999977,
+      "child_last_record_cpu_seconds": 9.207163,
+      "child_wall_seconds": 9.648279499997443,
+      "max_rss_kib": 149500,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 221,
+      "pid_identity": {
+        "pid": 499651,
+        "start_ticks": 6347328
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.663424000000077,
+      "child_last_record_cpu_seconds": 8.619525,
+      "child_wall_seconds": 8.654730390000623,
+      "max_rss_kib": 150436,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 222,
+      "pid_identity": {
+        "pid": 499662,
+        "start_ticks": 6348205
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.635093999999981,
+      "child_last_record_cpu_seconds": 8.586494,
+      "child_wall_seconds": 8.604040733996953,
+      "max_rss_kib": 150708,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 223,
+      "pid_identity": {
+        "pid": 499672,
+        "start_ticks": 6349084
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.390665000000126,
+      "child_last_record_cpu_seconds": 8.349571,
+      "child_wall_seconds": 8.666229256006773,
+      "max_rss_kib": 149804,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 224,
+      "pid_identity": {
+        "pid": 499713,
+        "start_ticks": 6349974
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.460367000000133,
+      "child_last_record_cpu_seconds": 8.418847,
+      "child_wall_seconds": 9.465682430003653,
+      "max_rss_kib": 150096,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 225,
+      "pid_identity": {
+        "pid": 499726,
+        "start_ticks": 6350939
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.944511999999804,
+      "child_last_record_cpu_seconds": 8.897187,
+      "child_wall_seconds": 10.191503020003438,
+      "max_rss_kib": 151724,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 226,
+      "pid_identity": {
+        "pid": 499735,
+        "start_ticks": 6351980
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.7870190000001,
+      "child_last_record_cpu_seconds": 8.749680999999999,
+      "child_wall_seconds": 8.762649758995394,
+      "max_rss_kib": 150232,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 227,
+      "pid_identity": {
+        "pid": 499815,
+        "start_ticks": 6352877
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.670475000000124,
+      "child_last_record_cpu_seconds": 8.638313,
+      "child_wall_seconds": 8.651739525004814,
+      "max_rss_kib": 150500,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 228,
+      "pid_identity": {
+        "pid": 499986,
+        "start_ticks": 6353753
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.323251999999911,
+      "child_last_record_cpu_seconds": 8.28257,
+      "child_wall_seconds": 8.677373751001141,
+      "max_rss_kib": 151308,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 229,
+      "pid_identity": {
+        "pid": 500031,
+        "start_ticks": 6354634
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.288087999999789,
+      "child_last_record_cpu_seconds": 8.2558,
+      "child_wall_seconds": 8.50398810900515,
+      "max_rss_kib": 150008,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 230,
+      "pid_identity": {
+        "pid": 500041,
+        "start_ticks": 6355514
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.255545000000211,
+      "child_last_record_cpu_seconds": 8.212672999999999,
+      "child_wall_seconds": 9.1214414030037,
+      "max_rss_kib": 150332,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 231,
+      "pid_identity": {
+        "pid": 500063,
+        "start_ticks": 6356457
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.32207799999992,
+      "child_last_record_cpu_seconds": 8.290981,
+      "child_wall_seconds": 10.044296790001681,
+      "max_rss_kib": 150760,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 232,
+      "pid_identity": {
+        "pid": 500084,
+        "start_ticks": 6357482
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.606451000000106,
+      "child_last_record_cpu_seconds": 8.567464000000001,
+      "child_wall_seconds": 9.930418413001462,
+      "max_rss_kib": 151264,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 233,
+      "pid_identity": {
+        "pid": 500086,
+        "start_ticks": 6358508
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.580933999999843,
+      "child_last_record_cpu_seconds": 8.538933,
+      "child_wall_seconds": 9.868895906001853,
+      "max_rss_kib": 152320,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 234,
+      "pid_identity": {
+        "pid": 500109,
+        "start_ticks": 6359517
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.39481499999988,
+      "child_last_record_cpu_seconds": 8.366491,
+      "child_wall_seconds": 9.310424672999943,
+      "max_rss_kib": 149696,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 235,
+      "pid_identity": {
+        "pid": 500135,
+        "start_ticks": 6360480
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.449069000000236,
+      "child_last_record_cpu_seconds": 8.421414,
+      "child_wall_seconds": 9.563260323993745,
+      "max_rss_kib": 151544,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 236,
+      "pid_identity": {
+        "pid": 500144,
+        "start_ticks": 6361465
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.634178999999904,
+      "child_last_record_cpu_seconds": 8.594178,
+      "child_wall_seconds": 9.095247605997429,
+      "max_rss_kib": 150400,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 237,
+      "pid_identity": {
+        "pid": 500166,
+        "start_ticks": 6362385
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.392104000000245,
+      "child_last_record_cpu_seconds": 8.365358,
+      "child_wall_seconds": 8.407591743998637,
+      "max_rss_kib": 149516,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 238,
+      "pid_identity": {
+        "pid": 500176,
+        "start_ticks": 6363243
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.62969999999973,
+      "child_last_record_cpu_seconds": 8.600644,
+      "child_wall_seconds": 8.648064886998327,
+      "max_rss_kib": 151976,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 239,
+      "pid_identity": {
+        "pid": 500188,
+        "start_ticks": 6364119
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.353004000000055,
+      "child_last_record_cpu_seconds": 8.323653,
+      "child_wall_seconds": 8.316435993998311,
+      "max_rss_kib": 151784,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 240,
+      "pid_identity": {
+        "pid": 500209,
+        "start_ticks": 6364976
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.649620999999797,
+      "child_last_record_cpu_seconds": 8.614483,
+      "child_wall_seconds": 8.624810893001268,
+      "max_rss_kib": 150800,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 241,
+      "pid_identity": {
+        "pid": 500213,
+        "start_ticks": 6365857
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.562430000000177,
+      "child_last_record_cpu_seconds": 8.521788,
+      "child_wall_seconds": 8.551612752002256,
+      "max_rss_kib": 151248,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 242,
+      "pid_identity": {
+        "pid": 500226,
+        "start_ticks": 6366736
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.604587999999922,
+      "child_last_record_cpu_seconds": 8.567328,
+      "child_wall_seconds": 8.600867679997464,
+      "max_rss_kib": 150696,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 243,
+      "pid_identity": {
+        "pid": 500228,
+        "start_ticks": 6367613
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.278195000000323,
+      "child_last_record_cpu_seconds": 8.240329,
+      "child_wall_seconds": 8.279873138999392,
+      "max_rss_kib": 148460,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 244,
+      "pid_identity": {
+        "pid": 500262,
+        "start_ticks": 6368451
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.25751299999979,
+      "child_last_record_cpu_seconds": 8.218104,
+      "child_wall_seconds": 8.250397206000343,
+      "max_rss_kib": 150072,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 245,
+      "pid_identity": {
+        "pid": 500270,
+        "start_ticks": 6369288
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.423072999999931,
+      "child_last_record_cpu_seconds": 8.392109,
+      "child_wall_seconds": 8.444010404004075,
+      "max_rss_kib": 150824,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 246,
+      "pid_identity": {
+        "pid": 500279,
+        "start_ticks": 6370148
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.454730000000154,
+      "child_last_record_cpu_seconds": 8.416827,
+      "child_wall_seconds": 8.970348159993591,
+      "max_rss_kib": 151876,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 247,
+      "pid_identity": {
+        "pid": 500305,
+        "start_ticks": 6371078
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.205279000000019,
+      "child_last_record_cpu_seconds": 8.168718,
+      "child_wall_seconds": 9.38721813599841,
+      "max_rss_kib": 151524,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 248,
+      "pid_identity": {
+        "pid": 500307,
+        "start_ticks": 6372045
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.416749999999865,
+      "child_last_record_cpu_seconds": 8.385719,
+      "child_wall_seconds": 9.468274593004026,
+      "max_rss_kib": 151668,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 249,
+      "pid_identity": {
+        "pid": 500316,
+        "start_ticks": 6373013
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.459469000000126,
+      "child_last_record_cpu_seconds": 8.421172,
+      "child_wall_seconds": 8.674218653002754,
+      "max_rss_kib": 151064,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 250,
+      "pid_identity": {
+        "pid": 500326,
+        "start_ticks": 6373895
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 9.061318999999912,
+      "child_last_record_cpu_seconds": 9.020464,
+      "child_wall_seconds": 9.084763213002589,
+      "max_rss_kib": 151324,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 251,
+      "pid_identity": {
+        "pid": 500353,
+        "start_ticks": 6374813
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.950435000000198,
+      "child_last_record_cpu_seconds": 8.909207,
+      "child_wall_seconds": 8.98953800000163,
+      "max_rss_kib": 154040,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 252,
+      "pid_identity": {
+        "pid": 500355,
+        "start_ticks": 6375734
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.392891999999847,
+      "child_last_record_cpu_seconds": 8.36449,
+      "child_wall_seconds": 8.464748242004134,
+      "max_rss_kib": 152096,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 253,
+      "pid_identity": {
+        "pid": 500361,
+        "start_ticks": 6376592
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.655948999999964,
+      "child_last_record_cpu_seconds": 8.618269,
+      "child_wall_seconds": 8.690042929003539,
+      "max_rss_kib": 150168,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 254,
+      "pid_identity": {
+        "pid": 500391,
+        "start_ticks": 6377469
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 9.13673300000005,
+      "child_last_record_cpu_seconds": 9.091562,
+      "child_wall_seconds": 9.130625655998301,
+      "max_rss_kib": 151908,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 255,
+      "pid_identity": {
+        "pid": 500516,
+        "start_ticks": 6378391
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.556797999999844,
+      "child_last_record_cpu_seconds": 8.528916,
+      "child_wall_seconds": 8.627089965993946,
+      "max_rss_kib": 151824,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 256,
+      "pid_identity": {
+        "pid": 500604,
+        "start_ticks": 6379268
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.267146000000139,
+      "child_last_record_cpu_seconds": 8.23649,
+      "child_wall_seconds": 8.311826015997212,
+      "max_rss_kib": 151360,
+      "error": null
+    },
+    {
+      "stage": "producer",
+      "shard": 257,
+      "pid_identity": {
+        "pid": 500645,
+        "start_ticks": 6380125
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 8.315106000000014,
+      "child_last_record_cpu_seconds": 8.28608,
+      "child_wall_seconds": 8.359028008999303,
+      "max_rss_kib": 151712,
+      "error": null
+    },
+    {
+      "stage": "reader",
+      "shard": 0,
+      "pid_identity": {
+        "pid": 500651,
+        "start_ticks": 6380982
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 13.065665999999965,
+      "child_last_record_cpu_seconds": 13.026583,
+      "child_wall_seconds": 13.031307122997532,
+      "max_rss_kib": 190800,
+      "error": null
+    },
+    {
+      "stage": "reader",
+      "shard": 1,
+      "pid_identity": {
+        "pid": 500665,
+        "start_ticks": 6382308
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 13.18127800000002,
+      "child_last_record_cpu_seconds": 13.139396999999999,
+      "child_wall_seconds": 13.94844511699921,
+      "max_rss_kib": 190920,
+      "error": null
+    },
+    {
+      "stage": "reader",
+      "shard": 2,
+      "pid_identity": {
+        "pid": 500694,
+        "start_ticks": 6383722
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 13.604499999999916,
+      "child_last_record_cpu_seconds": 13.551056,
+      "child_wall_seconds": 14.738707841999712,
+      "max_rss_kib": 191648,
+      "error": null
+    },
+    {
+      "stage": "reader",
+      "shard": 3,
+      "pid_identity": {
+        "pid": 501069,
+        "start_ticks": 6385218
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 14.640309000000116,
+      "child_last_record_cpu_seconds": 14.600089,
+      "child_wall_seconds": 14.95116166400112,
+      "max_rss_kib": 192652,
+      "error": null
+    },
+    {
+      "stage": "reader",
+      "shard": 4,
+      "pid_identity": {
+        "pid": 501250,
+        "start_ticks": 6386730
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 13.595527999999831,
+      "child_last_record_cpu_seconds": 13.552275000000002,
+      "child_wall_seconds": 14.020899525996356,
+      "max_rss_kib": 192404,
+      "error": null
+    },
+    {
+      "stage": "reader",
+      "shard": 5,
+      "pid_identity": {
+        "pid": 501255,
+        "start_ticks": 6388167
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 13.737806999999975,
+      "child_last_record_cpu_seconds": 13.693822,
+      "child_wall_seconds": 14.150519298003928,
+      "max_rss_kib": 192624,
+      "error": null
+    },
+    {
+      "stage": "reader",
+      "shard": 6,
+      "pid_identity": {
+        "pid": 501292,
+        "start_ticks": 6389595
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 13.819211000000223,
+      "child_last_record_cpu_seconds": 13.760387,
+      "child_wall_seconds": 13.704597091003961,
+      "max_rss_kib": 190536,
+      "error": null
+    },
+    {
+      "stage": "reader",
+      "shard": 7,
+      "pid_identity": {
+        "pid": 501307,
+        "start_ticks": 6390982
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 14.17261899999994,
+      "child_last_record_cpu_seconds": 14.119975,
+      "child_wall_seconds": 14.050693785997282,
+      "max_rss_kib": 189888,
+      "error": null
+    },
+    {
+      "stage": "reader",
+      "shard": 8,
+      "pid_identity": {
+        "pid": 501329,
+        "start_ticks": 6392412
+      },
+      "exit": 0,
+      "status": "complete",
+      "reaped_cpu_increment_seconds": 14.659519999999702,
+      "child_last_record_cpu_seconds": 14.600616,
+      "child_wall_seconds": 14.537937417000649,
+      "max_rss_kib": 192608,
+      "error": null
+    },
+    {
+      "stage": "reader",
+      "shard": 9,
+      "pid_identity": {
+        "pid": 501542,
+        "start_ticks": 6393887
+      },
+      "exit": 2,
+      "status": "failed",
+      "reaped_cpu_increment_seconds": 12.27764100000013,
+      "child_last_record_cpu_seconds": 12.227504,
+      "child_wall_seconds": 12.188728062996233,
+      "max_rss_kib": 192048,
+      "error": {
+        "error": "exact data identity mismatch: 109400630 old compatibility lower-index teacher",
+        "traceback": "Traceback (most recent call last):\n  File \"/home/fires/hmasd-wsl/.git/hmasd-launch-sources/219cfcc60b3b4b1facb301593338723e/experiments/candidates/typed_joint_skill_decision/b05_data_bank/run.py\", line 131, in worker\n    result=data.rebuild(store,native,bank,saved,value,ROOT)\n  File \"/home/fires/hmasd-wsl/.git/hmasd-launch-sources/219cfcc60b3b4b1facb301593338723e/experiments/candidates/typed_joint_skill_decision/b05_data_bank/data.py\", line 198, in rebuild\n    compare_world(current,compatibility[n],bank_module,diagnostics,f'{world} old compatibility')\n  File \"/home/fires/hmasd-wsl/.git/hmasd-launch-sources/219cfcc60b3b4b1facb301593338723e/experiments/candidates/typed_joint_skill_decision/b05_data_bank/data.py\", line 136, in compare_world\n    exact(teacher(actual['infos']),saved['best'],label+' lower-index teacher',diagnostics)\n  File \"/home/fires/hmasd-wsl/.git/hmasd-launch-sources/219cfcc60b3b4b1facb301593338723e/experiments/candidates/typed_joint_skill_decision/b05_data_bank/data.py\", line 99, in exact\n    if not okay:raise AssertionError('exact data identity mismatch: '+name)\nAssertionError: exact data identity mismatch: 109400630 old compatibility lower-index teacher\n",
+        "type": "AssertionError"
+      }
+    }
+  ],
+  "full_recorded_diagnostics": {
+    "rows": 222547,
+    "passed": 222546,
+    "failed": [
+      {
+        "path": "raw/label-reader/train/0009-checks.jsonl.gz",
+        "row": {
+          "actual": 50,
+          "check": "109400630 old compatibility lower-index teacher",
+          "comparison": "exact original serialized identity",
+          "expected": 57,
+          "passed": false
+        }
+      }
+    ],
+    "scope_max_abs_errors": {
+      "new_bank_reconstruction": {
+        "info.avg_hops": 0,
+        "info.contract_reward": 0,
+        "info.coverage_access": 0,
+        "info.coverage_backhauled": 0,
+        "info.frontend_capacity_with_path_mbps": 0,
+        "info.mean_relays_per_routed_uav": 0,
+        "info.original_normalized_reward": 0,
+        "info.throughput_term": 0
+      },
+      "old_compatibility": {
+        "info.avg_hops": 0,
+        "info.contract_reward": 2.220446049250313e-16,
+        "info.coverage_access": 0,
+        "info.coverage_backhauled": 0,
+        "info.frontend_capacity_with_path_mbps": 3.694822225952521e-13,
+        "info.mean_relays_per_routed_uav": 0,
+        "info.original_normalized_reward": 1.887379141862766e-15,
+        "info.throughput_term": 3.0531133177191805e-16
+      }
+    },
+    "failure_world_max_abs_errors": {
+      "old_compatibility": {
+        "info.avg_hops": 0,
+        "info.contract_reward": 1.1102230246251565e-16,
+        "info.coverage_access": 0,
+        "info.coverage_backhauled": 0,
+        "info.frontend_capacity_with_path_mbps": 8.526512829121202e-14,
+        "info.mean_relays_per_routed_uav": 0,
+        "info.original_normalized_reward": 4.440892098500626e-16,
+        "info.throughput_term": 5.551115123125783e-17
+      }
+    },
+    "failure_world_exact_checks": [
+      {
+        "check": "109400630 independent reset/RNG/geometry",
+        "comparison": "exact original serialized identity",
+        "passed": true
+      },
+      {
+        "check": "109400630 ordered raw features",
+        "comparison": "exact original serialized identity",
+        "passed": true
+      },
+      {
+        "check": "109400630 construction",
+        "comparison": "exact original serialized identity",
+        "passed": true
+      },
+      {
+        "check": "109400630 lower-index teacher",
+        "comparison": "exact original serialized identity",
+        "passed": true
+      },
+      {
+        "check": "109400630 old compatibility world identity",
+        "comparison": "exact original serialized identity",
+        "passed": true
+      },
+      {
+        "check": "109400630 old compatibility ordered outcome-free features",
+        "comparison": "exact original serialized identity",
+        "passed": true
+      },
+      {
+        "check": "109400630 old compatibility raw metadata/RNG",
+        "comparison": "exact original serialized identity",
+        "passed": true
+      },
+      {
+        "check": "109400630 old compatibility complete candidate count",
+        "comparison": "exact original serialized identity",
+        "passed": true
+      },
+      {
+        "actual": 50,
+        "check": "109400630 old compatibility lower-index teacher",
+        "comparison": "exact original serialized identity",
+        "expected": 57,
+        "passed": false
+      }
+    ]
+  },
+  "failure_world": {
+    "world": 109400630,
+    "old_file_sha256": "e25585f2c0fd886baa43d6bcca0983d2a75cb09ded6edaddae65e24e85468594",
+    "new_file_sha256": "829d26f0abb21454793148bd3c9232d1150d171ad8a14b0f0675d8f840be8689",
+    "identities_exact": true,
+    "initial_user_bs_geometry_exact": true,
+    "ordered_layouts_exact": true,
+    "construction_RNG_exact": true,
+    "candidate_50_57_identical_ordered_layout": false,
+    "candidate_50_57_same_sorted_sites": true,
+    "new_reader_all169_infos_exact_to_new_producer": true,
+    "metadata_identity": {
+      "agents": [
+        "uav_0",
+        "uav_1",
+        "uav_2",
+        "uav_3",
+        "uav_4",
+        "uav_5"
+      ],
+      "current_step": 0,
+      "native_rng_sha256": "96e3baf4cc01d08a88d57a8314c07a3bc9812ea7ddf0d2bf380ee2fe55fe0fa5",
+      "transmitter_mask": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "world": 109400630
+    },
+    "layout_sha256": "2fa7f24dd39deb4bbc4036990461da379dc3bda6b4a74a22ac594b6835d1921f",
+    "observed": {
+      "old": {
+        "source_sha": "b19508a5c2825359e66a36b4fdc1db68b60cc809",
+        "input_sha256": "000588aa756405e25e9e3dbebec99b95927277b6a85ee38275947f322f4a12a3",
+        "teacher": 57,
+        "candidate_count": 169,
+        "exact_maximizers": [
+          57
+        ],
+        "top_J_repr": "0.5460125613694844",
+        "top_J_hex": "0x1.178ef55c93028p-1",
+        "J_57_minus_50": 1.1102230246251565e-16,
+        "J_57_minus_50_in_top_ULPs": 1.0,
+        "top_nonmax_gap": 1.1102230246251565e-16,
+        "selected_candidates": {
+          "50": {
+            "J_repr": "0.5460125613694843",
+            "J_hex": "0x1.178ef55c93027p-1",
+            "info": {
+              "a2a_enabled": true,
+              "avg_hops": 1.6666666666666667,
+              "backhauled_users": 40,
+              "connected_users": 40,
+              "contract_reward": 0.5460125613694843,
+              "coverage_access": 0.8,
+              "coverage_backhauled": 0.8,
+              "frontend_capacity_with_path_mbps": 349.28165659243814,
+              "mean_relays_per_routed_uav": 0.6666666666666666,
+              "original_normalized_reward": 1.0,
+              "original_reward_source": "parent call: UAVCooperativeNetworkEnv._compute_reward",
+              "routed_uavs": 6,
+              "throughput_term": 0.2920251227389686,
+              "uav_connection_count": 6
+            },
+            "raw_metadata": {
+              "index": 50,
+              "k": 6,
+              "kind": "subset_relay",
+              "leftover_target": 1,
+              "relays": {
+                "2": 2,
+                "5": 1
+              },
+              "roles": [
+                "service:2",
+                "relay:2:0",
+                "relay:2:1",
+                "service:5",
+                "relay:5:0",
+                "extra_service:1"
+              ],
+              "served": [
+                2,
+                5
+              ]
+            },
+            "layout_xyz": [
+              [
+                4710.8530381139235,
+                1067.1886817061786,
+                100.0
+              ],
+              [
+                3236.9510127046415,
+                2022.3962272353929,
+                100.0
+              ],
+              [
+                3973.9020254092825,
+                1544.7924544707857,
+                100.0
+              ],
+              [
+                2385.810080305199,
+                292.3332203626242,
+                100.0
+              ],
+              [
+                2442.6308026508864,
+                1390.8646971588578,
+                100.0
+              ],
+              [
+                2537.1850485466434,
+                1498.6228056177763,
+                100.0
+              ]
+            ]
+          },
+          "57": {
+            "J_repr": "0.5460125613694844",
+            "J_hex": "0x1.178ef55c93028p-1",
+            "info": {
+              "a2a_enabled": true,
+              "avg_hops": 1.6666666666666667,
+              "backhauled_users": 40,
+              "connected_users": 40,
+              "contract_reward": 0.5460125613694844,
+              "coverage_access": 0.8,
+              "coverage_backhauled": 0.8,
+              "frontend_capacity_with_path_mbps": 349.2816565924382,
+              "mean_relays_per_routed_uav": 0.6666666666666666,
+              "original_normalized_reward": 1.0,
+              "original_reward_source": "parent call: UAVCooperativeNetworkEnv._compute_reward",
+              "routed_uavs": 6,
+              "throughput_term": 0.29202512273896863,
+              "uav_connection_count": 6
+            },
+            "raw_metadata": {
+              "index": 57,
+              "k": 6,
+              "kind": "subset_relay",
+              "leftover_target": 4,
+              "relays": {
+                "1": 0,
+                "2": 2,
+                "5": 1
+              },
+              "roles": [
+                "service:1",
+                "service:2",
+                "relay:2:0",
+                "relay:2:1",
+                "service:5",
+                "relay:5:0"
+              ],
+              "served": [
+                1,
+                2,
+                5
+              ]
+            },
+            "layout_xyz": [
+              [
+                2537.1850485466434,
+                1498.6228056177763,
+                100.0
+              ],
+              [
+                4710.8530381139235,
+                1067.1886817061786,
+                100.0
+              ],
+              [
+                3236.9510127046415,
+                2022.3962272353929,
+                100.0
+              ],
+              [
+                3973.9020254092825,
+                1544.7924544707857,
+                100.0
+              ],
+              [
+                2385.810080305199,
+                292.3332203626242,
+                100.0
+              ],
+              [
+                2442.6308026508864,
+                1390.8646971588578,
+                100.0
+              ]
+            ]
+          }
+        }
+      },
+      "new_producer": {
+        "source_sha": "c271c7370c6948b06f0a4a6fd783eddff0d8731a",
+        "input_sha256": "dd2bf2e7f54b0070587529559a1963438fa62fb8fb9bfe7db46202932e303394",
+        "teacher": 50,
+        "candidate_count": 169,
+        "exact_maximizers": [
+          50,
+          57
+        ],
+        "top_J_repr": "0.5460125613694843",
+        "top_J_hex": "0x1.178ef55c93027p-1",
+        "J_57_minus_50": 0.0,
+        "J_57_minus_50_in_top_ULPs": 0.0,
+        "top_nonmax_gap": 0.010941868806394695,
+        "selected_candidates": {
+          "50": {
+            "J_repr": "0.5460125613694843",
+            "J_hex": "0x1.178ef55c93027p-1",
+            "info": {
+              "a2a_enabled": true,
+              "avg_hops": 1.6666666666666667,
+              "backhauled_users": 40,
+              "connected_users": 40,
+              "contract_reward": 0.5460125613694843,
+              "coverage_access": 0.8,
+              "coverage_backhauled": 0.8,
+              "frontend_capacity_with_path_mbps": 349.28165659243814,
+              "mean_relays_per_routed_uav": 0.6666666666666666,
+              "original_normalized_reward": 1.0,
+              "original_reward_source": "parent call: UAVCooperativeNetworkEnv._compute_reward",
+              "routed_uavs": 6,
+              "throughput_term": 0.2920251227389686,
+              "uav_connection_count": 6
+            },
+            "raw_metadata": {
+              "index": 50,
+              "k": 6,
+              "kind": "subset_relay",
+              "leftover_target": 1,
+              "relays": {
+                "2": 2,
+                "5": 1
+              },
+              "roles": [
+                "service:2",
+                "relay:2:0",
+                "relay:2:1",
+                "service:5",
+                "relay:5:0",
+                "extra_service:1"
+              ],
+              "served": [
+                2,
+                5
+              ]
+            },
+            "layout_xyz": [
+              [
+                4710.8530381139235,
+                1067.1886817061786,
+                100.0
+              ],
+              [
+                3236.9510127046415,
+                2022.3962272353929,
+                100.0
+              ],
+              [
+                3973.9020254092825,
+                1544.7924544707857,
+                100.0
+              ],
+              [
+                2385.810080305199,
+                292.3332203626242,
+                100.0
+              ],
+              [
+                2442.6308026508864,
+                1390.8646971588578,
+                100.0
+              ],
+              [
+                2537.1850485466434,
+                1498.6228056177763,
+                100.0
+              ]
+            ]
+          },
+          "57": {
+            "J_repr": "0.5460125613694843",
+            "J_hex": "0x1.178ef55c93027p-1",
+            "info": {
+              "a2a_enabled": true,
+              "avg_hops": 1.6666666666666667,
+              "backhauled_users": 40,
+              "connected_users": 40,
+              "contract_reward": 0.5460125613694843,
+              "coverage_access": 0.8,
+              "coverage_backhauled": 0.8,
+              "frontend_capacity_with_path_mbps": 349.28165659243814,
+              "mean_relays_per_routed_uav": 0.6666666666666666,
+              "original_normalized_reward": 1.0,
+              "original_reward_source": "parent call: UAVCooperativeNetworkEnv._compute_reward",
+              "routed_uavs": 6,
+              "throughput_term": 0.2920251227389686,
+              "uav_connection_count": 6
+            },
+            "raw_metadata": {
+              "index": 57,
+              "k": 6,
+              "kind": "subset_relay",
+              "leftover_target": 4,
+              "relays": {
+                "1": 0,
+                "2": 2,
+                "5": 1
+              },
+              "roles": [
+                "service:1",
+                "service:2",
+                "relay:2:0",
+                "relay:2:1",
+                "service:5",
+                "relay:5:0"
+              ],
+              "served": [
+                1,
+                2,
+                5
+              ]
+            },
+            "layout_xyz": [
+              [
+                2537.1850485466434,
+                1498.6228056177763,
+                100.0
+              ],
+              [
+                4710.8530381139235,
+                1067.1886817061786,
+                100.0
+              ],
+              [
+                3236.9510127046415,
+                2022.3962272353929,
+                100.0
+              ],
+              [
+                3973.9020254092825,
+                1544.7924544707857,
+                100.0
+              ],
+              [
+                2385.810080305199,
+                292.3332203626242,
+                100.0
+              ],
+              [
+                2442.6308026508864,
+                1390.8646971588578,
+                100.0
+              ]
+            ]
+          }
+        }
+      }
+    },
+    "causal_boundary": "stored old/new numeric values differ within fixed float tolerance yet exact argmax changes; version/node/process changes not causally separated; no tolerance/tie repair or new query"
+  },
+  "permutation_reads": [
+    {
+      "difference_J": 0.0,
+      "raw_J": 0.6124613427512706,
+      "row_permutation": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "scope": "row-permutation differences retained as science; no invariance gate",
+      "static": {
+        "a2a_enabled": true,
+        "avg_hops": 2.0,
+        "backhauled_users": 47,
+        "connected_users": 47,
+        "contract_reward": 0.6124613427512706,
+        "coverage_access": 0.94,
+        "coverage_backhauled": 0.94,
+        "frontend_capacity_with_path_mbps": 340.7866647214799,
+        "mean_relays_per_routed_uav": 1.0,
+        "original_normalized_reward": 1.0,
+        "original_reward_source": "parent call: UAVCooperativeNetworkEnv._compute_reward",
+        "routed_uavs": 6,
+        "throughput_term": 0.2849226855025413,
+        "uav_connection_count": 5
+      },
+      "teacher": 30,
+      "world": 109400000
+    },
+    {
+      "difference_J": 0.0,
+      "raw_J": 0.6124613427512706,
+      "row_permutation": [
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "scope": "row-permutation differences retained as science; no invariance gate",
+      "static": {
+        "a2a_enabled": true,
+        "avg_hops": 2.0,
+        "backhauled_users": 47,
+        "connected_users": 47,
+        "contract_reward": 0.6124613427512706,
+        "coverage_access": 0.94,
+        "coverage_backhauled": 0.94,
+        "frontend_capacity_with_path_mbps": 340.7866647214799,
+        "mean_relays_per_routed_uav": 1.0,
+        "original_normalized_reward": 1.0,
+        "original_reward_source": "parent call: UAVCooperativeNetworkEnv._compute_reward",
+        "routed_uavs": 6,
+        "throughput_term": 0.2849226855025413,
+        "uav_connection_count": 5
+      },
+      "teacher": 30,
+      "world": 109400000
+    },
+    {
+      "difference_J": 0.0,
+      "raw_J": 0.6124613427512706,
+      "row_permutation": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        0
+      ],
+      "scope": "row-permutation differences retained as science; no invariance gate",
+      "static": {
+        "a2a_enabled": true,
+        "avg_hops": 2.0,
+        "backhauled_users": 47,
+        "connected_users": 47,
+        "contract_reward": 0.6124613427512706,
+        "coverage_access": 0.94,
+        "coverage_backhauled": 0.94,
+        "frontend_capacity_with_path_mbps": 340.78666472147984,
+        "mean_relays_per_routed_uav": 1.0,
+        "original_normalized_reward": 1.0,
+        "original_reward_source": "parent call: UAVCooperativeNetworkEnv._compute_reward",
+        "routed_uavs": 6,
+        "throughput_term": 0.28492268550254124,
+        "uav_connection_count": 5
+      },
+      "teacher": 30,
+      "world": 109400000
+    },
+    {
+      "difference_J": 0.0,
+      "raw_J": 0.6124613427512706,
+      "row_permutation": [
+        4,
+        5,
+        2,
+        3,
+        1,
+        0
+      ],
+      "scope": "row-permutation differences retained as science; no invariance gate",
+      "static": {
+        "a2a_enabled": true,
+        "avg_hops": 2.0,
+        "backhauled_users": 47,
+        "connected_users": 47,
+        "contract_reward": 0.6124613427512706,
+        "coverage_access": 0.94,
+        "coverage_backhauled": 0.94,
+        "frontend_capacity_with_path_mbps": 340.7866647214799,
+        "mean_relays_per_routed_uav": 1.0,
+        "original_normalized_reward": 1.0,
+        "original_reward_source": "parent call: UAVCooperativeNetworkEnv._compute_reward",
+        "routed_uavs": 6,
+        "throughput_term": 0.2849226855025413,
+        "uav_connection_count": 5
+      },
+      "teacher": 30,
+      "world": 109400000
+    },
+    {
+      "difference_J": 0.0,
+      "raw_J": 0.527327702079774,
+      "row_permutation": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "scope": "row-permutation differences retained as science; no invariance gate",
+      "static": {
+        "a2a_enabled": true,
+        "avg_hops": 1.3333333333333333,
+        "backhauled_users": 40,
+        "connected_users": 40,
+        "contract_reward": 0.527327702079774,
+        "coverage_access": 0.8,
+        "coverage_backhauled": 0.8,
+        "frontend_capacity_with_path_mbps": 304.5849637552247,
+        "mean_relays_per_routed_uav": 0.3333333333333333,
+        "original_normalized_reward": 1.0,
+        "original_reward_source": "parent call: UAVCooperativeNetworkEnv._compute_reward",
+        "routed_uavs": 6,
+        "throughput_term": 0.25465540415954796,
+        "uav_connection_count": 3
+      },
+      "teacher": 8,
+      "world": 109400001
+    },
+    {
+      "difference_J": 0.0,
+      "raw_J": 0.527327702079774,
+      "row_permutation": [
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "scope": "row-permutation differences retained as science; no invariance gate",
+      "static": {
+        "a2a_enabled": true,
+        "avg_hops": 1.3333333333333333,
+        "backhauled_users": 40,
+        "connected_users": 40,
+        "contract_reward": 0.527327702079774,
+        "coverage_access": 0.8,
+        "coverage_backhauled": 0.8,
+        "frontend_capacity_with_path_mbps": 304.58496375522463,
+        "mean_relays_per_routed_uav": 0.3333333333333333,
+        "original_normalized_reward": 1.0,
+        "original_reward_source": "parent call: UAVCooperativeNetworkEnv._compute_reward",
+        "routed_uavs": 6,
+        "throughput_term": 0.2546554041595479,
+        "uav_connection_count": 3
+      },
+      "teacher": 8,
+      "world": 109400001
+    },
+    {
+      "difference_J": 0.0,
+      "raw_J": 0.527327702079774,
+      "row_permutation": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        0
+      ],
+      "scope": "row-permutation differences retained as science; no invariance gate",
+      "static": {
+        "a2a_enabled": true,
+        "avg_hops": 1.3333333333333333,
+        "backhauled_users": 40,
+        "connected_users": 40,
+        "contract_reward": 0.527327702079774,
+        "coverage_access": 0.8,
+        "coverage_backhauled": 0.8,
+        "frontend_capacity_with_path_mbps": 304.58496375522463,
+        "mean_relays_per_routed_uav": 0.3333333333333333,
+        "original_normalized_reward": 1.0,
+        "original_reward_source": "parent call: UAVCooperativeNetworkEnv._compute_reward",
+        "routed_uavs": 6,
+        "throughput_term": 0.2546554041595479,
+        "uav_connection_count": 3
+      },
+      "teacher": 8,
+      "world": 109400001
+    },
+    {
+      "difference_J": 0.0,
+      "raw_J": 0.527327702079774,
+      "row_permutation": [
+        2,
+        3,
+        1,
+        4,
+        5,
+        0
+      ],
+      "scope": "row-permutation differences retained as science; no invariance gate",
+      "static": {
+        "a2a_enabled": true,
+        "avg_hops": 1.3333333333333333,
+        "backhauled_users": 40,
+        "connected_users": 40,
+        "contract_reward": 0.527327702079774,
+        "coverage_access": 0.8,
+        "coverage_backhauled": 0.8,
+        "frontend_capacity_with_path_mbps": 304.58496375522463,
+        "mean_relays_per_routed_uav": 0.3333333333333333,
+        "original_normalized_reward": 1.0,
+        "original_reward_source": "parent call: UAVCooperativeNetworkEnv._compute_reward",
+        "routed_uavs": 6,
+        "throughput_term": 0.2546554041595479,
+        "uav_connection_count": 3
+      },
+      "teacher": 8,
+      "world": 109400001
+    },
+    {
+      "difference_J": 0.0,
+      "raw_J": 0.5767373537888658,
+      "row_permutation": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "scope": "row-permutation differences retained as science; no invariance gate",
+      "static": {
+        "a2a_enabled": true,
+        "avg_hops": 2.1666666666666665,
+        "backhauled_users": 43,
+        "connected_users": 43,
+        "contract_reward": 0.5767373537888658,
+        "coverage_access": 0.86,
+        "coverage_backhauled": 0.86,
+        "frontend_capacity_with_path_mbps": 351.0154574007579,
+        "mean_relays_per_routed_uav": 1.1666666666666667,
+        "original_normalized_reward": 1.0,
+        "original_reward_source": "parent call: UAVCooperativeNetworkEnv._compute_reward",
+        "routed_uavs": 6,
+        "throughput_term": 0.29347470757773175,
+        "uav_connection_count": 4
+      },
+      "teacher": 24,
+      "world": 109400002
+    },
+    {
+      "difference_J": 0.0,
+      "raw_J": 0.5767373537888658,
+      "row_permutation": [
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "scope": "row-permutation differences retained as science; no invariance gate",
+      "static": {
+        "a2a_enabled": true,
+        "avg_hops": 2.1666666666666665,
+        "backhauled_users": 43,
+        "connected_users": 43,
+        "contract_reward": 0.5767373537888658,
+        "coverage_access": 0.86,
+        "coverage_backhauled": 0.86,
+        "frontend_capacity_with_path_mbps": 351.0154574007579,
+        "mean_relays_per_routed_uav": 1.1666666666666667,
+        "original_normalized_reward": 1.0,
+        "original_reward_source": "parent call: UAVCooperativeNetworkEnv._compute_reward",
+        "routed_uavs": 6,
+        "throughput_term": 0.29347470757773175,
+        "uav_connection_count": 4
+      },
+      "teacher": 24,
+      "world": 109400002
+    },
+    {
+      "difference_J": 0.0,
+      "raw_J": 0.5767373537888658,
+      "row_permutation": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        0
+      ],
+      "scope": "row-permutation differences retained as science; no invariance gate",
+      "static": {
+        "a2a_enabled": true,
+        "avg_hops": 2.1666666666666665,
+        "backhauled_users": 43,
+        "connected_users": 43,
+        "contract_reward": 0.5767373537888658,
+        "coverage_access": 0.86,
+        "coverage_backhauled": 0.86,
+        "frontend_capacity_with_path_mbps": 351.0154574007579,
+        "mean_relays_per_routed_uav": 1.1666666666666667,
+        "original_normalized_reward": 1.0,
+        "original_reward_source": "parent call: UAVCooperativeNetworkEnv._compute_reward",
+        "routed_uavs": 6,
+        "throughput_term": 0.29347470757773175,
+        "uav_connection_count": 4
+      },
+      "teacher": 24,
+      "world": 109400002
+    },
+    {
+      "difference_J": 0.0,
+      "raw_J": 0.5767373537888658,
+      "row_permutation": [
+        5,
+        2,
+        4,
+        3,
+        0,
+        1
+      ],
+      "scope": "row-permutation differences retained as science; no invariance gate",
+      "static": {
+        "a2a_enabled": true,
+        "avg_hops": 2.1666666666666665,
+        "backhauled_users": 43,
+        "connected_users": 43,
+        "contract_reward": 0.5767373537888658,
+        "coverage_access": 0.86,
+        "coverage_backhauled": 0.86,
+        "frontend_capacity_with_path_mbps": 351.01545740075784,
+        "mean_relays_per_routed_uav": 1.1666666666666667,
+        "original_normalized_reward": 1.0,
+        "original_reward_source": "parent call: UAVCooperativeNetworkEnv._compute_reward",
+        "routed_uavs": 6,
+        "throughput_term": 0.2934747075777317,
+        "uav_connection_count": 4
+      },
+      "teacher": 24,
+      "world": 109400002
+    },
+    {
+      "difference_J": 0.0,
+      "raw_J": 0.4786923085246175,
+      "row_permutation": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "scope": "row-permutation differences retained as science; no invariance gate",
+      "static": {
+        "a2a_enabled": true,
+        "avg_hops": 1.8333333333333333,
+        "backhauled_users": 37,
+        "connected_users": 37,
+        "contract_reward": 0.4786923085246175,
+        "coverage_access": 0.74,
+        "coverage_backhauled": 0.74,
+        "frontend_capacity_with_path_mbps": 260.00659959841704,
+        "mean_relays_per_routed_uav": 0.8333333333333334,
+        "original_normalized_reward": 1.0,
+        "original_reward_source": "parent call: UAVCooperativeNetworkEnv._compute_reward",
+        "routed_uavs": 6,
+        "throughput_term": 0.21738461704923503,
+        "uav_connection_count": 6
+      },
+      "teacher": 41,
+      "world": 109400003
+    },
+    {
+      "difference_J": 0.0,
+      "raw_J": 0.4786923085246175,
+      "row_permutation": [
+        5,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "scope": "row-permutation differences retained as science; no invariance gate",
+      "static": {
+        "a2a_enabled": true,
+        "avg_hops": 1.8333333333333333,
+        "backhauled_users": 37,
+        "connected_users": 37,
+        "contract_reward": 0.4786923085246175,
+        "coverage_access": 0.74,
+        "coverage_backhauled": 0.74,
+        "frontend_capacity_with_path_mbps": 260.00659959841704,
+        "mean_relays_per_routed_uav": 0.8333333333333334,
+        "original_normalized_reward": 1.0,
+        "original_reward_source": "parent call: UAVCooperativeNetworkEnv._compute_reward",
+        "routed_uavs": 6,
+        "throughput_term": 0.21738461704923503,
+        "uav_connection_count": 6
+      },
+      "teacher": 41,
+      "world": 109400003
+    },
+    {
+      "difference_J": 0.0,
+      "raw_J": 0.4786923085246175,
+      "row_permutation": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        0
+      ],
+      "scope": "row-permutation differences retained as science; no invariance gate",
+      "static": {
+        "a2a_enabled": true,
+        "avg_hops": 1.8333333333333333,
+        "backhauled_users": 37,
+        "connected_users": 37,
+        "contract_reward": 0.4786923085246175,
+        "coverage_access": 0.74,
+        "coverage_backhauled": 0.74,
+        "frontend_capacity_with_path_mbps": 260.00659959841704,
+        "mean_relays_per_routed_uav": 0.8333333333333334,
+        "original_normalized_reward": 1.0,
+        "original_reward_source": "parent call: UAVCooperativeNetworkEnv._compute_reward",
+        "routed_uavs": 6,
+        "throughput_term": 0.21738461704923503,
+        "uav_connection_count": 6
+      },
+      "teacher": 41,
+      "world": 109400003
+    },
+    {
+      "difference_J": 0.0,
+      "raw_J": 0.4786923085246175,
+      "row_permutation": [
+        5,
+        0,
+        1,
+        3,
+        4,
+        2
+      ],
+      "scope": "row-permutation differences retained as science; no invariance gate",
+      "static": {
+        "a2a_enabled": true,
+        "avg_hops": 1.8333333333333333,
+        "backhauled_users": 37,
+        "connected_users": 37,
+        "contract_reward": 0.4786923085246175,
+        "coverage_access": 0.74,
+        "coverage_backhauled": 0.74,
+        "frontend_capacity_with_path_mbps": 260.00659959841704,
+        "mean_relays_per_routed_uav": 0.8333333333333334,
+        "original_normalized_reward": 1.0,
+        "original_reward_source": "parent call: UAVCooperativeNetworkEnv._compute_reward",
+        "routed_uavs": 6,
+        "throughput_term": 0.21738461704923503,
+        "uav_connection_count": 6
+      },
+      "teacher": 41,
+      "world": 109400003
+    }
+  ],
+  "remaining": {
+    "reader_worlds_not_constructed": 15881,
+    "reader_worlds_not_counted_complete": 15882,
+    "reader_shards_not_completed": 249,
+    "old_compatibility_worlds_unattempted": 1870,
+    "old_compatibility_worlds_not_passed": 1871,
+    "fresh_reader_worlds_unattempted": 512
+  },
+  "reader_cpu_seconds": 1.895473275,
+  "reader_wall_seconds": 2.159024896005576,
+  "max_rss_kib": 812460,
+  "unmeasured_support": "unknown, not zero"
+}

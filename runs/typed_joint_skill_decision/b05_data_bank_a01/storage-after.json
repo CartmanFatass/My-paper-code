@@ -1,0 +1,1994 @@
+{
+  "phase": "after_terminal_and_full_zero_query_reading_before_cleanup",
+  "observed_at": "2026-10-02T10:30:50.494137+00:00",
+  "scope": {
+    "new_output": {
+      "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b05_data_bank_a01",
+      "allocated_bytes": 343261184
+    },
+    "own_scratch": {
+      "path": "/home/fires/hmasd-wsl/temp/directions/typed_joint_skill_decision/b05-data-bank",
+      "allocated_bytes": 24576
+    },
+    "reference": {
+      "path": "/home/fires/hmasd-wsl/temp/directions/typed_joint_skill_decision/b05-data-reference",
+      "allocated_bytes": 48750592
+    },
+    "shared_git_objects": {
+      "path": "/home/fires/hmasd-wsl/.git/objects",
+      "allocated_bytes": 4228218880
+    },
+    "source_records": {
+      "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b05_data_bank_source",
+      "allocated_bytes": 36864
+    },
+    "source_snapshot": {
+      "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/219cfcc60b3b4b1facb301593338723e",
+      "allocated_bytes": 1823232000
+    }
+  },
+  "core_directory": "/mnt/c/Users/fires/AppData/Local/Temp/wsl-crashes",
+  "core_files": [
+    {
+      "name": "wsl-crash-1790833334-1660430-_home_fires_.local_opt_godot_Godot_v4.7.2-stable_linux.x86_64-6.dmp",
+      "bytes": 343556096,
+      "allocated_bytes": 343556096,
+      "inode": 13510798882195044,
+      "mtime_ns": 1790833336562265400
+    },
+    {
+      "name": "wsl-crash-1790866642-2468805-_usr_bin_git-7.dmp",
+      "bytes": 21102592,
+      "allocated_bytes": 21102592,
+      "inode": 11821949021931136,
+      "mtime_ns": 1790866642553485600
+    },
+    {
+      "name": "wsl-crash-1790869026-2511635-_home_fires_.local_opt_godot_Godot_v4.7.2-stable_linux.x86_64-6.dmp",
+      "bytes": 732393472,
+      "allocated_bytes": 732393472,
+      "inode": 12666373952063105,
+      "mtime_ns": 1790869030429969500
+    },
+    {
+      "name": "wsl-crash-1790869596-2531909-_home_fires_.local_opt_godot_Godot_v4.7.2-stable_linux.x86_64-6.dmp",
+      "bytes": 1448222720,
+      "allocated_bytes": 1448222720,
+      "inode": 24206847997200159,
+      "mtime_ns": 1790869605912692000
+    },
+    {
+      "name": "wsl-crash-1790871159-2258088-_mnt_c_Users_fires_.codex_bin_wsl_65bf23c0b8844a0d_codex-7.dmp",
+      "bytes": 3722022912,
+      "allocated_bytes": 3722022912,
+      "inode": 24206847997210272,
+      "mtime_ns": 1790871178887549100
+    },
+    {
+      "name": "wsl-crash-1790871371-489-_usr_lib_xorg_Xorg-6.dmp",
+      "bytes": 1671168,
+      "allocated_bytes": 1671168,
+      "inode": 58828270132820412,
+      "mtime_ns": 1790871371056476700
+    },
+    {
+      "name": "wsl-crash-1790871371-537-_usr_lib_xorg_Xorg-6.dmp",
+      "bytes": 1671168,
+      "allocated_bytes": 1671168,
+      "inode": 37436171902521003,
+      "mtime_ns": 1790871371311355900
+    },
+    {
+      "name": "wsl-crash-1790871371-604-_usr_lib_xorg_Xorg-6.dmp",
+      "bytes": 1675264,
+      "allocated_bytes": 1675264,
+      "inode": 86412817850283403,
+      "mtime_ns": 1790871371468845300
+    },
+    {
+      "name": "wsl-crash-1790871371-640-_usr_lib_xorg_Xorg-6.dmp",
+      "bytes": 1671168,
+      "allocated_bytes": 1671168,
+      "inode": 16325548649301553,
+      "mtime_ns": 1790871371742842300
+    },
+    {
+      "name": "wsl-crash-1790871371-681-_usr_lib_xorg_Xorg-6.dmp",
+      "bytes": 1671168,
+      "allocated_bytes": 1671168,
+      "inode": 17451448556144205,
+      "mtime_ns": 1790871371919744800
+    }
+  ],
+  "core_difference": {
+    "added": [],
+    "removed": [],
+    "changed": []
+  },
+  "core_pattern": "|/wsl-capture-crash %t %E %p %s",
+  "core_pattern_changed": false,
+  "metadata_parent_cpu_seconds": 0.016107979999999994,
+  "metadata_child_cpu_seconds": 0.369758,
+  "metadata_wall_seconds": 3.995869501006382,
+  "shared_git_objects_allocated_interval_delta": 4874240,
+  "attribution": "shared Git changes include concurrent publications; core metadata only, no core copy/open or runtime modification",
+  "working_children_absent": 268,
+  "working_child_identity_checks": [
+    {
+      "identity": {
+        "pid": 492145,
+        "start_ticks": 6169282
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 492171,
+        "start_ticks": 6169926
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 492173,
+        "start_ticks": 6170550
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 492175,
+        "start_ticks": 6171194
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 492207,
+        "start_ticks": 6171878
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 492209,
+        "start_ticks": 6172568
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 492253,
+        "start_ticks": 6173322
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 492266,
+        "start_ticks": 6174054
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 492268,
+        "start_ticks": 6174787
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 492276,
+        "start_ticks": 6175535
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 492297,
+        "start_ticks": 6176289
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 492299,
+        "start_ticks": 6177061
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 492414,
+        "start_ticks": 6177835
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 492432,
+        "start_ticks": 6178671
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 492505,
+        "start_ticks": 6179443
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 492543,
+        "start_ticks": 6180192
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 492563,
+        "start_ticks": 6180947
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 492591,
+        "start_ticks": 6181746
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 492593,
+        "start_ticks": 6182517
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 492595,
+        "start_ticks": 6183295
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 492599,
+        "start_ticks": 6184067
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 492629,
+        "start_ticks": 6184819
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 492741,
+        "start_ticks": 6185590
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 492776,
+        "start_ticks": 6186383
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 493059,
+        "start_ticks": 6187194
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 493166,
+        "start_ticks": 6187985
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 493208,
+        "start_ticks": 6188918
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 493435,
+        "start_ticks": 6189751
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 493477,
+        "start_ticks": 6190505
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 493537,
+        "start_ticks": 6191275
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 493539,
+        "start_ticks": 6192030
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 493579,
+        "start_ticks": 6192820
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 493607,
+        "start_ticks": 6193546
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 493686,
+        "start_ticks": 6194232
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 493798,
+        "start_ticks": 6194899
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 493804,
+        "start_ticks": 6195565
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 493808,
+        "start_ticks": 6196251
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 493878,
+        "start_ticks": 6197023
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 494057,
+        "start_ticks": 6197835
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 494243,
+        "start_ticks": 6198561
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 494257,
+        "start_ticks": 6199267
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 494364,
+        "start_ticks": 6199974
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 494405,
+        "start_ticks": 6200680
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 494410,
+        "start_ticks": 6201367
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 494421,
+        "start_ticks": 6202073
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 494451,
+        "start_ticks": 6202760
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 494453,
+        "start_ticks": 6203427
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 494464,
+        "start_ticks": 6204113
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 494468,
+        "start_ticks": 6204800
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 494475,
+        "start_ticks": 6205486
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 494522,
+        "start_ticks": 6206173
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 494527,
+        "start_ticks": 6206859
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 494530,
+        "start_ticks": 6207545
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 494543,
+        "start_ticks": 6208232
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 494563,
+        "start_ticks": 6208939
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 494569,
+        "start_ticks": 6209626
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 494571,
+        "start_ticks": 6210380
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 494579,
+        "start_ticks": 6211132
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 494622,
+        "start_ticks": 6211929
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 494632,
+        "start_ticks": 6212676
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 494641,
+        "start_ticks": 6213363
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 494651,
+        "start_ticks": 6214049
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 494664,
+        "start_ticks": 6214736
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 494692,
+        "start_ticks": 6215444
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 494694,
+        "start_ticks": 6216131
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 494698,
+        "start_ticks": 6216818
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 494702,
+        "start_ticks": 6217526
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 494746,
+        "start_ticks": 6218233
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 494758,
+        "start_ticks": 6218941
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 494793,
+        "start_ticks": 6219669
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 494802,
+        "start_ticks": 6220377
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 494826,
+        "start_ticks": 6221125
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 494838,
+        "start_ticks": 6221940
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 494848,
+        "start_ticks": 6222779
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 494872,
+        "start_ticks": 6223617
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 494894,
+        "start_ticks": 6224454
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 494921,
+        "start_ticks": 6225288
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 494929,
+        "start_ticks": 6226084
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 494949,
+        "start_ticks": 6226917
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 494979,
+        "start_ticks": 6227645
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 495006,
+        "start_ticks": 6228374
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 495035,
+        "start_ticks": 6229122
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 495084,
+        "start_ticks": 6229912
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 495118,
+        "start_ticks": 6230702
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 495129,
+        "start_ticks": 6231450
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 495141,
+        "start_ticks": 6232199
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 495189,
+        "start_ticks": 6232948
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 495191,
+        "start_ticks": 6233718
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 495195,
+        "start_ticks": 6234508
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 495198,
+        "start_ticks": 6235318
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 495218,
+        "start_ticks": 6236088
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 495221,
+        "start_ticks": 6236858
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 495234,
+        "start_ticks": 6237628
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 495236,
+        "start_ticks": 6238398
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 495256,
+        "start_ticks": 6239167
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 495296,
+        "start_ticks": 6239958
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 495480,
+        "start_ticks": 6240788
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 495533,
+        "start_ticks": 6241558
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 495569,
+        "start_ticks": 6242327
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 495572,
+        "start_ticks": 6243077
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 495586,
+        "start_ticks": 6243846
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 495588,
+        "start_ticks": 6244615
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 495615,
+        "start_ticks": 6245365
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 495618,
+        "start_ticks": 6246115
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 495650,
+        "start_ticks": 6247018
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 495683,
+        "start_ticks": 6247895
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 495685,
+        "start_ticks": 6248756
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 495695,
+        "start_ticks": 6249545
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 495757,
+        "start_ticks": 6250355
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 496039,
+        "start_ticks": 6251126
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 496048,
+        "start_ticks": 6251896
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 496106,
+        "start_ticks": 6252667
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 496109,
+        "start_ticks": 6253437
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 496137,
+        "start_ticks": 6254166
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 496139,
+        "start_ticks": 6254876
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 496149,
+        "start_ticks": 6255625
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 496151,
+        "start_ticks": 6256356
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 496182,
+        "start_ticks": 6257108
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 496234,
+        "start_ticks": 6257878
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 496245,
+        "start_ticks": 6258715
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 496252,
+        "start_ticks": 6259575
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 496283,
+        "start_ticks": 6260436
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 496298,
+        "start_ticks": 6261317
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 496411,
+        "start_ticks": 6262198
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 496445,
+        "start_ticks": 6263074
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 496473,
+        "start_ticks": 6263886
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 496505,
+        "start_ticks": 6264677
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 496587,
+        "start_ticks": 6265490
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 496840,
+        "start_ticks": 6266403
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 496850,
+        "start_ticks": 6267235
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 497006,
+        "start_ticks": 6268047
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 497012,
+        "start_ticks": 6268798
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 497032,
+        "start_ticks": 6269570
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 497071,
+        "start_ticks": 6270342
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 497088,
+        "start_ticks": 6271091
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 497265,
+        "start_ticks": 6271882
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 497293,
+        "start_ticks": 6272766
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 497297,
+        "start_ticks": 6273647
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 497301,
+        "start_ticks": 6274526
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 497321,
+        "start_ticks": 6275407
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 497334,
+        "start_ticks": 6276219
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 497337,
+        "start_ticks": 6277036
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 497357,
+        "start_ticks": 6277917
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 497369,
+        "start_ticks": 6278729
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 497373,
+        "start_ticks": 6279499
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 497375,
+        "start_ticks": 6280291
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 497395,
+        "start_ticks": 6281081
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 497407,
+        "start_ticks": 6281853
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 497411,
+        "start_ticks": 6282685
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 497414,
+        "start_ticks": 6283478
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 497512,
+        "start_ticks": 6284249
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 497518,
+        "start_ticks": 6285041
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 497520,
+        "start_ticks": 6285772
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 497522,
+        "start_ticks": 6286569
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 497616,
+        "start_ticks": 6287524
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 497661,
+        "start_ticks": 6288420
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 497777,
+        "start_ticks": 6289274
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 497803,
+        "start_ticks": 6290107
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 497853,
+        "start_ticks": 6291011
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 497957,
+        "start_ticks": 6292067
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 497978,
+        "start_ticks": 6292880
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 497995,
+        "start_ticks": 6293796
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 498010,
+        "start_ticks": 6294628
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 498182,
+        "start_ticks": 6295522
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 498210,
+        "start_ticks": 6296370
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 498245,
+        "start_ticks": 6297334
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 498251,
+        "start_ticks": 6298313
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 498272,
+        "start_ticks": 6299147
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 498276,
+        "start_ticks": 6300000
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 498283,
+        "start_ticks": 6300923
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 498285,
+        "start_ticks": 6301757
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 498317,
+        "start_ticks": 6302684
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 498326,
+        "start_ticks": 6303660
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 498380,
+        "start_ticks": 6304537
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 498409,
+        "start_ticks": 6305431
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 498443,
+        "start_ticks": 6306294
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 498469,
+        "start_ticks": 6307263
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 498489,
+        "start_ticks": 6308225
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 498511,
+        "start_ticks": 6309171
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 498522,
+        "start_ticks": 6310120
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 498552,
+        "start_ticks": 6311062
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 498563,
+        "start_ticks": 6311919
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 498574,
+        "start_ticks": 6312733
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 498586,
+        "start_ticks": 6313567
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 498606,
+        "start_ticks": 6314466
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 498610,
+        "start_ticks": 6315321
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 498721,
+        "start_ticks": 6316199
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 498761,
+        "start_ticks": 6317074
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 498765,
+        "start_ticks": 6317929
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 498774,
+        "start_ticks": 6318783
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 498821,
+        "start_ticks": 6319638
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 498846,
+        "start_ticks": 6320496
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 498882,
+        "start_ticks": 6321372
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 498884,
+        "start_ticks": 6322228
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 498922,
+        "start_ticks": 6323102
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 498926,
+        "start_ticks": 6324029
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 498940,
+        "start_ticks": 6324978
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 498965,
+        "start_ticks": 6325940
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 498969,
+        "start_ticks": 6326795
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 499000,
+        "start_ticks": 6327633
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 499014,
+        "start_ticks": 6328489
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 499056,
+        "start_ticks": 6329324
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 499072,
+        "start_ticks": 6330139
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 499079,
+        "start_ticks": 6331036
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 499257,
+        "start_ticks": 6331935
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 499267,
+        "start_ticks": 6332791
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 499279,
+        "start_ticks": 6333647
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 499315,
+        "start_ticks": 6334503
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 499346,
+        "start_ticks": 6335358
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 499356,
+        "start_ticks": 6336343
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 499412,
+        "start_ticks": 6337323
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 499436,
+        "start_ticks": 6338219
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 499468,
+        "start_ticks": 6339077
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 499531,
+        "start_ticks": 6339953
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 499546,
+        "start_ticks": 6340893
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 499576,
+        "start_ticks": 6341769
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 499579,
+        "start_ticks": 6342645
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 499586,
+        "start_ticks": 6343520
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 499608,
+        "start_ticks": 6344399
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 499610,
+        "start_ticks": 6345360
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 499622,
+        "start_ticks": 6346348
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 499651,
+        "start_ticks": 6347328
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 499662,
+        "start_ticks": 6348205
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 499672,
+        "start_ticks": 6349084
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 499713,
+        "start_ticks": 6349974
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 499726,
+        "start_ticks": 6350939
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 499735,
+        "start_ticks": 6351980
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 499815,
+        "start_ticks": 6352877
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 499986,
+        "start_ticks": 6353753
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 500031,
+        "start_ticks": 6354634
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 500041,
+        "start_ticks": 6355514
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 500063,
+        "start_ticks": 6356457
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 500084,
+        "start_ticks": 6357482
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 500086,
+        "start_ticks": 6358508
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 500109,
+        "start_ticks": 6359517
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 500135,
+        "start_ticks": 6360480
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 500144,
+        "start_ticks": 6361465
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 500166,
+        "start_ticks": 6362385
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 500176,
+        "start_ticks": 6363243
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 500188,
+        "start_ticks": 6364119
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 500209,
+        "start_ticks": 6364976
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 500213,
+        "start_ticks": 6365857
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 500226,
+        "start_ticks": 6366736
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 500228,
+        "start_ticks": 6367613
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 500262,
+        "start_ticks": 6368451
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 500270,
+        "start_ticks": 6369288
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 500279,
+        "start_ticks": 6370148
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 500305,
+        "start_ticks": 6371078
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 500307,
+        "start_ticks": 6372045
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 500316,
+        "start_ticks": 6373013
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 500326,
+        "start_ticks": 6373895
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 500353,
+        "start_ticks": 6374813
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 500355,
+        "start_ticks": 6375734
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 500361,
+        "start_ticks": 6376592
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 500391,
+        "start_ticks": 6377469
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 500516,
+        "start_ticks": 6378391
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 500604,
+        "start_ticks": 6379268
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 500645,
+        "start_ticks": 6380125
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 500651,
+        "start_ticks": 6380982
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 500665,
+        "start_ticks": 6382308
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 500694,
+        "start_ticks": 6383722
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 501069,
+        "start_ticks": 6385218
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 501250,
+        "start_ticks": 6386730
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 501255,
+        "start_ticks": 6388167
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 501292,
+        "start_ticks": 6389595
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 501307,
+        "start_ticks": 6390982
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 501329,
+        "start_ticks": 6392412
+      },
+      "status": "absent"
+    },
+    {
+      "identity": {
+        "pid": 501542,
+        "start_ticks": 6393887
+      },
+      "status": "absent"
+    }
+  ]
+}

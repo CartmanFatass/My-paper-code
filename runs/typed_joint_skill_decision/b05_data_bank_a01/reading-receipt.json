@@ -1,0 +1,19 @@
+{
+  "command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/219cfcc60b3b4b1facb301593338723e/experiments/candidates/typed_joint_skill_decision/b05_data_bank/read.py",
+    "--run-root",
+    "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b05_data_bank_a01",
+    "--artifact-manifest-sha256",
+    "f18dcef40b320755e5b3bdfd94c4cc5be7869a7b549f58e0eccbe4090d6886e8"
+  ],
+  "script_sha256": "1b9e1d6171b69a67a0bc59e291469d9ebb2f2a867783692d952197f870ba037a",
+  "artifact_manifest_sha256": "f18dcef40b320755e5b3bdfd94c4cc5be7869a7b549f58e0eccbe4090d6886e8",
+  "exit_code": 0,
+  "parent_cpu_seconds": 0.0008377349999999922,
+  "reader_child_cpu_seconds": 1.1667669999999999,
+  "wall_seconds": 1.8251360900030704,
+  "child_max_rss_kib": 23664,
+  "real_effects": 0,
+  "scope": "one fixed terminal byte/counter reader; no physical/scorer replay; reader exit0 is not bank certification"
+}

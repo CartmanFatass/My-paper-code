@@ -1,0 +1,74 @@
+{
+  "admission": {
+    "claim_state": "accepted",
+    "state": "accepted"
+  },
+  "artifacts": {
+    "stderr": {
+      "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b05_data_bank_a01/stderr.log",
+      "state": "present"
+    },
+    "stdout": {
+      "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b05_data_bank_a01/stdout.log",
+      "state": "present"
+    },
+    "summary": {
+      "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b05_data_bank_a01/summary.json",
+      "state": "present"
+    }
+  },
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/1eedcf2aa6e082fc3654b3f88b9474ff0341c7ac2d4663edfaa50c801b4f90b2.json",
+  "direction": "typed_joint_skill_decision",
+  "execution": {
+    "exit_code": 2,
+    "exit_witness": {
+      "exit_code": 2,
+      "finished_at_epoch": 1790935795.8742757,
+      "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b05_data_bank_a01/process-exit.json",
+      "state": "valid",
+      "termination": "process_exit"
+    },
+    "runner": {
+      "recorded_identity": {
+        "boot_id": "f359a2d7-72f8-4eb1-b898-bc0abf61bed6",
+        "kind": "linux_pid_start_ticks",
+        "pid": 492119,
+        "session_id": 492118,
+        "start_ticks": 6169220
+      },
+      "state": "absent"
+    },
+    "state": "exited",
+    "supervisor": {
+      "recorded_identity": {
+        "boot_id": "f359a2d7-72f8-4eb1-b898-bc0abf61bed6",
+        "kind": "linux_pid_start_ticks",
+        "pid": 492118,
+        "session_id": 492118,
+        "start_ticks": 6169217
+      },
+      "state": "absent"
+    }
+  },
+  "explicit_retry": {
+    "eligible": true,
+    "reasons": [],
+    "scientific_authorization": false,
+    "successor_ref": null,
+    "supported": true
+  },
+  "explicit_retry_available": true,
+  "kind": "hmasd_operation_status",
+  "manifest_ref": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b05_data_bank_a01/launch-manifest.json",
+  "node": "local_linux",
+  "observed_at": "2026-10-02T10:10:23.244839Z",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/1eedcf2aa6e082fc3654b3f88b9474ff0341c7ac2d4663edfaa50c801b4f90b2.json",
+  "output_root": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b05_data_bank_a01",
+  "record_consistency": {
+    "mismatches": [],
+    "state": "consistent"
+  },
+  "schema_version": 1,
+  "sha": "c271c7370c6948b06f0a4a6fd783eddff0d8731a",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/219cfcc60b3b4b1facb301593338723e"
+}

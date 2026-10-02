@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "kind": "full B06 narrow follow-up after DM found consumed-admission-env defect; original PASS preserved separately",
+  "provenance": {
+    "rollout": "/mnt/c/Users/fires/.codex/sessions/2026/10/01/rollout-2026-10-01T18-10-06-01a0fa29-505d-7340-ab35-b55b5db2ba9f.jsonl",
+    "line": 824,
+    "turn_id": "01a0fc1f-f110-7bf3-ab5c-6f6dc7239319",
+    "event": "task_complete",
+    "timestamp": "2026-10-02T10:21:11.470Z",
+    "agent": "/root/dm_s7_prediction_use/b10_engineering_review"
+  },
+  "answer_utf8_bytes": 2734,
+  "answer_sha256": "19dbe82362f6623fc7a11132d5575854c673dd7b93b63737f54e994c6a4629c7",
+  "answer": "**本次 B06 准入入口修复复核通过，未发现该 delta 中仍未解决的实质问题。** 此前 PASS 漏检了真实 admission 的环境变量消费行为；这是我的审阅遗漏，原结论及本次纠正应同时保留。\n\n原缺陷确实存在：[hmasd_admission.py:104](/home/fires/hmasd-wsl/scripts/hmasd_admission.py:104) 使用 `os.environ.pop()` 消费 `HMASD_ADMISSION_V1`。旧 B06 在 `require_admission()` 返回后再读取它，会在准入成功后发生 `KeyError`，无法到达预期的 PendingCertification。\n\n修复后的 [run.py:280](/home/fires/hmasd-wsl/experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/run.py:280) 使用实际返回 grant，并与 durable launch manifest、当前 runner PID/start_ticks、实际 supervisor 父 PID核对。我检查了真实返回字段及 launcher 写入顺序：`runner_process.identity` 在 grant 前已持久保存，接口可以衔接。随后仍按 investment、preparation、冻结科学身份、真实 bank certification 的顺序检查，没有重新读取已消费环境变量。\n\n已完整读取增量检查原始收据：**3 passed，44 deselected，exit 0**。mock 确实删除 admission 环境变量；正确身份到达真实 PendingCertification 且不创建 consumer 输出，错误 runner 身份被拒绝。九个文件均与收据哈希一致，其余七个文件保持上一轮绑定。\n\n```text\nrun.py\n5c15aae9d10e0c6155e6ecdd5044324195f0dadd08ccfba6b0926a4d201f9397\n\ntest_consumer.py\n4cb92b8c57448a288f1454041cc0c2ec76cfc69cd327850c27dcd3f94e53454c\n```\n\n本次检查记录为 **0.246021492 aggregate CPU 秒、0.247538027 wall 秒**，峰值 RSS **39,060 KiB**，采样 scratch **24,576 字节**，正常清理完成。累计已记录准备检查成本为 **4.023958304 CPU 秒**。我没有重跑测试或执行真实 admission、native、模型、GPU、kill；本次源码/收据读取和哈希核验的支持 CPU 未完整计量，仍为 **unknown，不是零**。\n\n真实 B05 认证及部署投资仍 pending；冻结科学语义与原审阅的运行未验证边界不变。本结论仅闭合准备源码的入口修复，不证明真实准入或科学链已经运行通过。\n\n新增原文 provenance：\n\n- Reviewer UUID：`01a0fa29-505d-7340-ab35-b55b5db2ba9f`\n- 本轮 turn：`01a0fc1f-f110-7bf3-ab5c-6f6dc7239319`，实际 `gpt-6-astra/high`\n- Reviewer rollout：`/mnt/c/Users/fires/.codex/sessions/2026/10/01/rollout-2026-10-01T18-10-06-01a0fa29-505d-7340-ab35-b55b5db2ba9f.jsonl`，`turn_context` **line 780**，`2026-10-02T10:19:07.556Z`\n- 增量检查收据：DM 指定 rollout **line 6367**；独立核实 **2252 UTF-8 字节**，SHA256 `24493620378de34db90f0042e9508f12d18c2a314a183519bfe163d94bbabeca`。"
+}
