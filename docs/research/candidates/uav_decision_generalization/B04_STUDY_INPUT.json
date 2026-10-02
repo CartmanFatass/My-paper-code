@@ -1,0 +1,1477 @@
+{
+  "schema": 1,
+  "contract": {
+    "schema": 1,
+    "object": "UAV-SET-MEAN-B04",
+    "master": 109230101,
+    "inference_mode": "deterministic_mean",
+    "programmes": [
+      "SET-initial-mean",
+      "SET-final-mean"
+    ],
+    "worlds": [
+      109220000,
+      109220001,
+      109220002,
+      109220003,
+      109220004,
+      109220005,
+      109220006,
+      109220007,
+      109220008,
+      109220009,
+      109220010,
+      109220011,
+      109220012,
+      109220013,
+      109220014,
+      109220015,
+      109220016,
+      109220017,
+      109220018,
+      109220019,
+      109220020,
+      109220021,
+      109220022,
+      109220023,
+      109220024,
+      109220025,
+      109220026,
+      109220027,
+      109220028,
+      109220029,
+      109220030,
+      109220031
+    ],
+    "audit_world": 109229000,
+    "horizon": 500,
+    "missions": 66,
+    "native_steps": 33000,
+    "fits": 0,
+    "optimizer_steps": 0,
+    "checkpoint_map": {
+      "initial": {
+        "path": "checkpoints/SET/initial.pt",
+        "bytes": 21418427,
+        "sha256": "ba2eb18a78abfbe4383d105292a53d81d777d71d6549dfa279c9ab30ff765586"
+      },
+      "final": {
+        "path": "checkpoints/SET/final.pt",
+        "bytes": 21418155,
+        "sha256": "9be9c88f867b2dc6a8749bda099429a471731ee041fd01b878486139a407f463"
+      }
+    },
+    "worker_counts": {
+      "native_step_attempts": 33000,
+      "native_steps": 33000,
+      "frozen_native_steps": 33000,
+      "frozen_model_steps": 33000,
+      "model_constructions": 2
+    },
+    "reader_counts": {
+      "reader_ledger_updates": 33000,
+      "reader_user_indicator_reads": 1650000,
+      "reader_movement_uav_ticks": 198000,
+      "reader_physical_states": 33066,
+      "reader_distance_relations": 10614186,
+      "reader_model_team_steps": 33000,
+      "reader_actor_agent_rows": 198000,
+      "reader_critic_agent_rows": 198000,
+      "model_constructions": 2
+    },
+    "cpu_watchdog_seconds": 7200,
+    "operation_wall_watchdog_seconds": 7200,
+    "development_exposed": true,
+    "baseline_sampled_W_gain": 0.0625,
+    "action": "original Gaussian mean; inherited copied-vector projection and native motion",
+    "inference_seed": "world+51 after construction and reset"
+  },
+  "source_sha256": {
+    "configs/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "configs/config_1.py": "f55b5f148c2664334b455305dea094591799eb0c0544237f7bb717bd1401ccb8",
+    "envs/pettingzoo/__init__.py": "d247e986e573c70196b7674d05a28ae229028d858ca4fb9c7ddf684c8c6d12c3",
+    "envs/pettingzoo/env_adapter.py": "8b42c1c3e7ef44cb814f79225b4af944b1018ad764dfeb17e9e1cc294df79d40",
+    "envs/pettingzoo/scenario1.py": "e5b3eb7d755a7d7866cc7cd01531383bee821f0c6d72a81a3d4fa9cb5954939e",
+    "envs/pettingzoo/scenario2.py": "277374f365e8eeda882de53d53cc051c1534fe210622fee74d7b5a8f9d2cf2f2",
+    "envs/pettingzoo/uav_env.py": "fb67554cf911adc9d3260a2a7f16d1773921c295646cb46beb4ba1247fec599e",
+    "envs/pettingzoo/uav_radio.py": "db3464803b1a5aa9c9504096810dc971266a6bd7eba1c31dfe79e7d8d903f3cc",
+    "experiments/candidates/coupled_host_joint_skills_stage1/__init__.py": "cd04efaf83fd1e78651ba67b60cb5a816e76efcb7f16aa513ad298662cd76b44",
+    "experiments/candidates/coupled_host_joint_skills_stage1/adapter.py": "06326c635b4ad2333d4b08b8f370c5620336ee388b77a656831d8127b229b335",
+    "experiments/candidates/coupled_host_joint_skills_stage1/configuration.py": "68ea26d61eed348427d083ba9a2701fbd077d87838314b43715488b21e255d8c",
+    "experiments/candidates/coupled_host_joint_skills_stage1/host.py": "92b75c0317009380108bd45429892e49ca857b901ae1adbcd5bfe483d89ef469",
+    "experiments/candidates/coupled_host_joint_skills_stage1/macro_models.py": "cc3747c874829e56f3ff0fda33f89b47d5ecbc59c2ee0aafd601d972d31a7c88",
+    "experiments/candidates/coupled_host_joint_skills_stage1/macro_runner.py": "3a1c699f3b80669a6a8058193f55e2e0fb2426970396bf769edeebe7d8e57179",
+    "experiments/candidates/coupled_host_joint_skills_stage1/menus.py": "15b818e0250141b45a47480d5acaa6b0f217c8ce8fe8c35ef6a7abb765102886",
+    "experiments/candidates/coupled_host_joint_skills_stage1/models.py": "9349b840ddb9a2224a1524a4828db1b59f38742ff76ddcaf09e46d2fbd4b50a6",
+    "experiments/candidates/coupled_host_joint_skills_stage1/planner.py": "5c23f4c8a25df55052fa6eb4bb0da65fcf0f079560789b8abd7db416222a0aa6",
+    "experiments/candidates/coupled_host_joint_skills_stage1/run_gate.py": "b5f669597db920242bd89955821d738f569199f6e9245004cae445ff0cfb00ef",
+    "experiments/candidates/coupled_host_joint_skills_stage1/runner.py": "4020dbef217b751fb4efea14b915b4981f1fbc0fdc3a988400f9520b833a87a9",
+    "experiments/candidates/uav_decision_generalization/__init__.py": "47bd95bf72ebe1f03f015fb2e8e8fe2083835d5d87fb303eaf5ef350d07ba213",
+    "experiments/candidates/uav_decision_generalization/b03_joint_window/__init__.py": "0923815e4459f8cd2149463afd070ee92c90e1a52533fe2a9b9352d2aa1d979f",
+    "experiments/candidates/uav_decision_generalization/b03_joint_window/adapter.py": "05ecfbfe80634f4772e75dac57cc1461147a2b52d2ef76a28d87875dc30708a0",
+    "experiments/candidates/uav_decision_generalization/b03_joint_window/configuration.py": "d38ce74da78023a8e8eb818ca40c59514a4db992b5cada1aec35d64b57966951",
+    "experiments/candidates/uav_decision_generalization/b03_joint_window/contract.py": "fb4bdd7b55caf6a47c1f3866a7482c7e9e847d8fcf2c870aa367b12be4968791",
+    "experiments/candidates/uav_decision_generalization/b03_joint_window/evidence.py": "cd89a11662a2356429c45c5f19e838bbe31e62cd841954e9a9f2f5714f078e65",
+    "experiments/candidates/uav_decision_generalization/b03_joint_window/independent.py": "d1ffecdf6283d567a8988b4b8ef4a01a10aba8893ef6d9159d31c625642aa202",
+    "experiments/candidates/uav_decision_generalization/b03_joint_window/metrics.py": "cc735880b6fddee9d8ce66ddc9fc17c6caafa0984d03f81ef86714df2f6a48c7",
+    "experiments/candidates/uav_decision_generalization/b03_joint_window/models.py": "5a67bd5be2587d0760bc6c45fa6b17a4daa6753ff5bdceb901605b76d345c24c",
+    "experiments/candidates/uav_decision_generalization/b03_joint_window/ordinary.py": "804006e58efe51428d879e81df57e8c899efb1bb3119ddf009310dd909446060",
+    "experiments/candidates/uav_decision_generalization/b03_joint_window/reader_prefix.py": "b23b64291e449aeb9e2862cd4b10044ecfe253661017584e461a30f5ae7ae321",
+    "experiments/candidates/uav_decision_generalization/b03_joint_window/run.py": "29ef62f9b27b545951927080441631f17540a1987ceb0abfaacc17250033b5a8",
+    "experiments/candidates/uav_decision_generalization/b03_joint_window/task.py": "4c35760fa7d4419739fe8ae3c2aae541e9d533e0599e59d1d104f97be4b1c677",
+    "experiments/candidates/uav_decision_generalization/b03_joint_window/trace.py": "65d5a912215789b0e96bbab0f9541f4c66f41f5b349953ceeb3458f6a4ae0a8e",
+    "experiments/candidates/uav_decision_generalization/b03_joint_window/worker.py": "65f7f3309edb9a221f6b908574af00176c5431828f284e420e8e5c4cbd4a5ec5",
+    "experiments/candidates/uav_decision_generalization/b04_set_mean/__init__.py": "b4c40181abcff17d618dd4335159680776f878b01f435de050b2a1f30297bf9e",
+    "experiments/candidates/uav_decision_generalization/b04_set_mean/bindings.py": "94d31698f9b7b8001d5a6b63b8c5e8aabd386c979dbc564bf1752ef78b5a79ff",
+    "experiments/candidates/uav_decision_generalization/b04_set_mean/contract.py": "256cd049d2ba121878ccfc37f659cf8a40ec40d01bcebc749075d5e512ce27a3",
+    "experiments/candidates/uav_decision_generalization/b04_set_mean/reader.py": "e468a094ff62725ae9d908935c3fd71d80950ca80c50d56b66a4c56305decf3b",
+    "experiments/candidates/uav_decision_generalization/b04_set_mean/run.py": "5da0fa586472353749572d27528acdd77505a4058aee1052bbb9d3173b06d9e2",
+    "experiments/candidates/uav_decision_generalization/b04_set_mean/worker.py": "2f69d5e3c605a06a054e0b24262dc05105da63215b11a3c9f482685d39b7e3bd",
+    "hmasd/agent.py": "a1ca04dfc6ff9bfaae883c9b16bdfc3b539cf29abaebcb9bff186735043ce607",
+    "hmasd/baselines.py": "efc506f96c0140042eb7a0dd17e797386248f20676f8be0c9b08d952d1aa4106",
+    "hmasd/ha_ctse.py": "23b4d0884f3e062595dd61f8b83788f2f3061b4d515fd0652cc635bb2111cd70",
+    "hmasd/logging.py": "29e35026e09ff1828d6ff771f97f29cefcbc8519c1cb4d8b130ece29fd3f3b1b",
+    "hmasd/networks.py": "e358deb1d0ecb8c6bccf12d9be620ed57e00c7278b4c61670b50ae278c783955",
+    "hmasd/process_exploration.py": "9e24b1bf3d0344bc75f2c1a5390ea08c9c36ec009a5422391b8daab35f2ac40b",
+    "hmasd/r_mappo_utils.py": "b953c49b7ab5d64e6cf52c7d201104914659386b0d9535c2b66e7845d21e15b5",
+    "hmasd/sb3_integration.py": "665fbdb83830d4e66c72e45d37a85c94319e51605351ea250972bec56cd7d4b5",
+    "hmasd/utils.py": "9c75de4dd3c9a118ec1d2700acba56d0e29fcb5cedb5bc1e9d025e1a1ce8a4b7",
+    "scripts/hmasd_admission.py": "0faa5d53fba5af9b1a2fc4979bde5bd50bcbcaac2dbef938e90a64680156cf4d",
+    "scripts/hmasd_platform.py": "f9e1fd0a88f9c0eef9b706802ae3aaceac4bc2f8ea394e895d01146e8e17865b",
+    "scripts/hmasd_resource_preflight.py": "cb0525e9247f1c7262c198bf051e542282f5928982137b3023d36d5d69eda4dc"
+  },
+  "ancestor": {
+    "schema": 1,
+    "root": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_a01",
+    "config_sha256": "0bc410effb3e254ea38f5f23186e5ed975a5492251f333ad059c56932e228e88",
+    "summary_sha256": "2fe984bf5c203b2b450237c1304a0b074f24c604e7adfe7153f02f1a9a263ae9",
+    "manifest_sha256": "6d572b218c091ccd5ca2b8e305c0b1dc074f45efdd24c51029d4edbaa5ac1c95"
+  },
+  "baseline_reading": {
+    "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/reading.json",
+    "bytes": 1567197,
+    "sha256": "eab3cdeff541f4849f6086e5752d0ea9ad59b6e29ab7765a9b047bce5d356c69"
+  },
+  "baseline_checks": [
+    {
+      "programme": "SET-initial",
+      "world": 109220000,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-initial_109220000.json",
+        "bytes": 11110,
+        "sha256": "a136f911aaef493d61da35752126447a46dcead01b2a9603a6a5bccfce62e89a"
+      }
+    },
+    {
+      "programme": "SET-initial",
+      "world": 109220001,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-initial_109220001.json",
+        "bytes": 10330,
+        "sha256": "36dca27bf78d4e25e413c15dac4c6016f55381c126cf928508f34d8a872c2b11"
+      }
+    },
+    {
+      "programme": "SET-initial",
+      "world": 109220002,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-initial_109220002.json",
+        "bytes": 16186,
+        "sha256": "710f31020709f96a956bddde2081c4dcf112455586ad48621bbeed9b6d712edb"
+      }
+    },
+    {
+      "programme": "SET-initial",
+      "world": 109220003,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-initial_109220003.json",
+        "bytes": 11109,
+        "sha256": "a9bbac1a8704af34d8758be03f2ea93b626d6c83ef35e38eedfacd9043602dcc"
+      }
+    },
+    {
+      "programme": "SET-initial",
+      "world": 109220004,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-initial_109220004.json",
+        "bytes": 30626,
+        "sha256": "99edbb6c97bb7c19f575fe1869282ae1f5ddbadc2fe73f752f4926a67c9d44ab"
+      }
+    },
+    {
+      "programme": "SET-initial",
+      "world": 109220005,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-initial_109220005.json",
+        "bytes": 10333,
+        "sha256": "f3909f3f96ef408c421449799f6665f7f703c7f253db884b7282bea432909717"
+      }
+    },
+    {
+      "programme": "SET-initial",
+      "world": 109220006,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-initial_109220006.json",
+        "bytes": 30447,
+        "sha256": "929bf798867b7b3238723f7fb167d5beb6da0b03425c4241c1b7a9d490e6a865"
+      }
+    },
+    {
+      "programme": "SET-initial",
+      "world": 109220007,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-initial_109220007.json",
+        "bytes": 13887,
+        "sha256": "ef4bb37d9d1bde3b6e69513d847a68d8f977032afd8e8261887263dc885a1f37"
+      }
+    },
+    {
+      "programme": "SET-initial",
+      "world": 109220008,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-initial_109220008.json",
+        "bytes": 12846,
+        "sha256": "873399b7c0ec1a1816fdcb5730d1f023c725cc5bf3e81cf01c3fb2896fa58453"
+      }
+    },
+    {
+      "programme": "SET-initial",
+      "world": 109220009,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-initial_109220009.json",
+        "bytes": 29155,
+        "sha256": "55bfca530e1ad05a7ecaf62c6c2865746e44395b8bd81e5b1c292b84df6f629b"
+      }
+    },
+    {
+      "programme": "SET-initial",
+      "world": 109220010,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-initial_109220010.json",
+        "bytes": 10330,
+        "sha256": "c84de01b0edaf2c22efdbbccaa9f66ca66ca806cee6565f54959a7b3276a7c43"
+      }
+    },
+    {
+      "programme": "SET-initial",
+      "world": 109220011,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-initial_109220011.json",
+        "bytes": 10325,
+        "sha256": "edfc9499dee70538f1b12fad27fdf65332c2f56f5414543c8c052cd0c7e5d77a"
+      }
+    },
+    {
+      "programme": "SET-initial",
+      "world": 109220012,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-initial_109220012.json",
+        "bytes": 10331,
+        "sha256": "252886fa807d0dce1056364dbf12314d22cbf93828fc1335a07baeeb1b6e4dc8"
+      }
+    },
+    {
+      "programme": "SET-initial",
+      "world": 109220013,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-initial_109220013.json",
+        "bytes": 18500,
+        "sha256": "9ec72535b56a1cc487f9e012d3bd95722756b6f2067fe9cf367e77cfea72547c"
+      }
+    },
+    {
+      "programme": "SET-initial",
+      "world": 109220014,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-initial_109220014.json",
+        "bytes": 23209,
+        "sha256": "33a1ead63f06c3d682f41a170a4f07d6cbf2fbb1fd3350fa1b8dbe9f29839e4f"
+      }
+    },
+    {
+      "programme": "SET-initial",
+      "world": 109220015,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-initial_109220015.json",
+        "bytes": 10333,
+        "sha256": "a0179117dc8028c3160f1b507dd97971ed86cc814fe7da2ce2cd8ad3cfd2ffd2"
+      }
+    },
+    {
+      "programme": "SET-initial",
+      "world": 109220016,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-initial_109220016.json",
+        "bytes": 10335,
+        "sha256": "4055e62d5f823c2a7e92ffbe21db5dffd9ab2eebb5d45ee73e3da39edaf3493f"
+      }
+    },
+    {
+      "programme": "SET-initial",
+      "world": 109220017,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-initial_109220017.json",
+        "bytes": 10329,
+        "sha256": "67a8a463c37e4ba893932561a37d56ac8e06e5bfc16585d8421ad5f13f3f6be5"
+      }
+    },
+    {
+      "programme": "SET-initial",
+      "world": 109220018,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-initial_109220018.json",
+        "bytes": 21664,
+        "sha256": "6120336dbb14afc406d2831cbde084befe56c591783ff6048acbdd076635e4e5"
+      }
+    },
+    {
+      "programme": "SET-initial",
+      "world": 109220019,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-initial_109220019.json",
+        "bytes": 10332,
+        "sha256": "acf037da3f3eb6b1462a32f83fcd0bde3e11ffd30baa28fdcd545bdd360b8b2b"
+      }
+    },
+    {
+      "programme": "SET-initial",
+      "world": 109220020,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-initial_109220020.json",
+        "bytes": 17447,
+        "sha256": "ab80138d0df8a4bc00334c84c223763dc631fb2669235d8f27bd208ddebeb2b7"
+      }
+    },
+    {
+      "programme": "SET-initial",
+      "world": 109220021,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-initial_109220021.json",
+        "bytes": 14919,
+        "sha256": "398fedfad6047d30b2f53bc2a80f643ccf83dc793048030bdc3f3ec96efbdd66"
+      }
+    },
+    {
+      "programme": "SET-initial",
+      "world": 109220022,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-initial_109220022.json",
+        "bytes": 10334,
+        "sha256": "05da49a62ef5f52eea188f6755ae9ab2700a132cc8aef8a3c1ad9e8fb767b574"
+      }
+    },
+    {
+      "programme": "SET-initial",
+      "world": 109220023,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-initial_109220023.json",
+        "bytes": 11107,
+        "sha256": "c4b6276af1964132a6367e21715c1c216519f78cfb7bc430559ebc5d261d51b6"
+      }
+    },
+    {
+      "programme": "SET-initial",
+      "world": 109220024,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-initial_109220024.json",
+        "bytes": 11108,
+        "sha256": "13eb44483d5c46f31f2949460d54a9d28654cdbd65296afacfb71c1e15a5cbbe"
+      }
+    },
+    {
+      "programme": "SET-initial",
+      "world": 109220025,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-initial_109220025.json",
+        "bytes": 13112,
+        "sha256": "3a4ed4bcb2a54312af9484ea1df9275117e821f629317419ef96539c9f131f89"
+      }
+    },
+    {
+      "programme": "SET-initial",
+      "world": 109220026,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-initial_109220026.json",
+        "bytes": 13666,
+        "sha256": "fecb2d89ac6da04efaf1c741fb7aaef8dec3f6918d668340c513f03caa19ccb9"
+      }
+    },
+    {
+      "programme": "SET-initial",
+      "world": 109220027,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-initial_109220027.json",
+        "bytes": 10331,
+        "sha256": "d081cd422c2ae9aee2d6f4c665e5cae33c14b1075865d717ddefb07724f1453a"
+      }
+    },
+    {
+      "programme": "SET-initial",
+      "world": 109220028,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-initial_109220028.json",
+        "bytes": 13529,
+        "sha256": "d74bbd98620ffc47ecf1cf6b5b9b0ce9e7e74e55ac7c69263b1d0e99826bcc3c"
+      }
+    },
+    {
+      "programme": "SET-initial",
+      "world": 109220029,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-initial_109220029.json",
+        "bytes": 18471,
+        "sha256": "be1dcfb11647dd7126b73cb9bd54ef21048822fc21bfaf7da38aa7fbbac44446"
+      }
+    },
+    {
+      "programme": "SET-initial",
+      "world": 109220030,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-initial_109220030.json",
+        "bytes": 10335,
+        "sha256": "99f011cb3bbcf7f7b99159e119a635c3565913eae36c515f3b0448273e42fa70"
+      }
+    },
+    {
+      "programme": "SET-initial",
+      "world": 109220031,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-initial_109220031.json",
+        "bytes": 10334,
+        "sha256": "dba2f85a37076cfb48572ae216f9d9b4ce3d0f09ee6a7506b01ccedc7cd35566"
+      }
+    },
+    {
+      "programme": "SET-initial",
+      "world": 109229000,
+      "phase": "audit",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-initial_109229000.json",
+        "bytes": 10336,
+        "sha256": "22b2306e2ec5a78c8fa92d3c0485595be42eb5895a61bf9d48835966508291fe"
+      }
+    },
+    {
+      "programme": "SET-final",
+      "world": 109220000,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-final_109220000.json",
+        "bytes": 11105,
+        "sha256": "d06aad333dd376ab38af72fe052f6ae326e14b68e8b0b072f1aa660100a834bb"
+      }
+    },
+    {
+      "programme": "SET-final",
+      "world": 109220001,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-final_109220001.json",
+        "bytes": 14054,
+        "sha256": "672809e20c4b035eff0b11b1bb9f1fc8108632eaa055676dd089e841850ad52c"
+      }
+    },
+    {
+      "programme": "SET-final",
+      "world": 109220002,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-final_109220002.json",
+        "bytes": 10552,
+        "sha256": "d86d6317d19a75c7b7b1fae2a77be4047fdc28b10e61bb393bfab85b2ceb0418"
+      }
+    },
+    {
+      "programme": "SET-final",
+      "world": 109220003,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-final_109220003.json",
+        "bytes": 11104,
+        "sha256": "1ee70c36dd89c7f1b89984e2e4c3a6d63dd5fcced2eb8d1ec7199f5c5000404f"
+      }
+    },
+    {
+      "programme": "SET-final",
+      "world": 109220004,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-final_109220004.json",
+        "bytes": 12719,
+        "sha256": "57dbb4bb53f6ab46dd8eb88bb5fed62b253f5f06a9add4af8136ce210bae2402"
+      }
+    },
+    {
+      "programme": "SET-final",
+      "world": 109220005,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-final_109220005.json",
+        "bytes": 12027,
+        "sha256": "c1c4c6ba57d7ba72177029716165e41baa204113690483320b9753dfd7b2332c"
+      }
+    },
+    {
+      "programme": "SET-final",
+      "world": 109220006,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-final_109220006.json",
+        "bytes": 13023,
+        "sha256": "325da2e704d1c6471e2188acb2764f9ce9388eca8d3023a401e8a6a3aad677ba"
+      }
+    },
+    {
+      "programme": "SET-final",
+      "world": 109220007,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-final_109220007.json",
+        "bytes": 19932,
+        "sha256": "f1d52fe296e6c244cad6b97b7c55bf56e8d29d3137570d1cc89950d85de09fa3"
+      }
+    },
+    {
+      "programme": "SET-final",
+      "world": 109220008,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-final_109220008.json",
+        "bytes": 10410,
+        "sha256": "22cdf7732ba991c17fc1f00cb9fd36285f6dc9f818616d72bc3c4fa135588112"
+      }
+    },
+    {
+      "programme": "SET-final",
+      "world": 109220009,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-final_109220009.json",
+        "bytes": 15086,
+        "sha256": "d2a813ed0d550ccad3c40ad8cb835385b8607287d1d61d97c715db2cabcf4417"
+      }
+    },
+    {
+      "programme": "SET-final",
+      "world": 109220010,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-final_109220010.json",
+        "bytes": 14965,
+        "sha256": "42f0d70805764ec23ee0aba7d03bd91357ad6f88c073698622987f98440d3a4e"
+      }
+    },
+    {
+      "programme": "SET-final",
+      "world": 109220011,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-final_109220011.json",
+        "bytes": 15787,
+        "sha256": "328208c3ff24507678ff179da6be768bd92a5e28981f96579689bbf40cd496d2"
+      }
+    },
+    {
+      "programme": "SET-final",
+      "world": 109220012,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-final_109220012.json",
+        "bytes": 11549,
+        "sha256": "70e54e798636dade59e785f25b3a8fee09a4597c6289c45c7a43a045ce197fd0"
+      }
+    },
+    {
+      "programme": "SET-final",
+      "world": 109220013,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-final_109220013.json",
+        "bytes": 11101,
+        "sha256": "ecc6055c961e687bdc536115419a7b45f9282dc2d54af6a78fcb02fb28d01aff"
+      }
+    },
+    {
+      "programme": "SET-final",
+      "world": 109220014,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-final_109220014.json",
+        "bytes": 26573,
+        "sha256": "8c0d06fa1da47fc09eae5757a04a2cef4af91a5b72cf8059777afda60a6bc3c9"
+      }
+    },
+    {
+      "programme": "SET-final",
+      "world": 109220015,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-final_109220015.json",
+        "bytes": 12308,
+        "sha256": "95a6efb97704b4db31cddf9e292338f85f0ef5702f3fdc7d2918189364ad757a"
+      }
+    },
+    {
+      "programme": "SET-final",
+      "world": 109220016,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-final_109220016.json",
+        "bytes": 11162,
+        "sha256": "4968741e9a0c339b6572a78d3d30126d96be859cf04ac20147fd17c565ee4fe2"
+      }
+    },
+    {
+      "programme": "SET-final",
+      "world": 109220017,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-final_109220017.json",
+        "bytes": 11166,
+        "sha256": "701160d3e44b6948df7d626d1d90136fe281e822ef29531e765cb6027bff9f01"
+      }
+    },
+    {
+      "programme": "SET-final",
+      "world": 109220018,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-final_109220018.json",
+        "bytes": 21124,
+        "sha256": "a92e2e65806aeb63439b7d6b6eef21bba65f52e83aaa1ee9eb7657078c1709d4"
+      }
+    },
+    {
+      "programme": "SET-final",
+      "world": 109220019,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-final_109220019.json",
+        "bytes": 14720,
+        "sha256": "fb4b63ff84dfcf0ce5109e9f1e14279be3a7c0123fa12aae48beae4b4b90844f"
+      }
+    },
+    {
+      "programme": "SET-final",
+      "world": 109220020,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-final_109220020.json",
+        "bytes": 12912,
+        "sha256": "43bc7910798ce889dd22d6c2b6e7a2f2949fddbf16b43f6078faa52db2807760"
+      }
+    },
+    {
+      "programme": "SET-final",
+      "world": 109220021,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-final_109220021.json",
+        "bytes": 14839,
+        "sha256": "998acab42772af99c69a4d5d8b28185dccc2c59273249c71f6d4f4d0fc6bb6d4"
+      }
+    },
+    {
+      "programme": "SET-final",
+      "world": 109220022,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-final_109220022.json",
+        "bytes": 15099,
+        "sha256": "20190208e0e6170dd92277dbd85b43effb0e5c8df52e8eca2aadf4005ec04a8f"
+      }
+    },
+    {
+      "programme": "SET-final",
+      "world": 109220023,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-final_109220023.json",
+        "bytes": 20689,
+        "sha256": "9c5093cef6f35dea4250099da63998fa0f137a1a38ae8eca752d195ed9d6aa00"
+      }
+    },
+    {
+      "programme": "SET-final",
+      "world": 109220024,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-final_109220024.json",
+        "bytes": 11106,
+        "sha256": "f06a53e04ed0042d960316accb5491a2235be3849284e0034f3ef7a3d2f94535"
+      }
+    },
+    {
+      "programme": "SET-final",
+      "world": 109220025,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-final_109220025.json",
+        "bytes": 11929,
+        "sha256": "715aa366dbdf65e6caf4e361747781fc81bfb34f9b57fab4535d64cab46d0bc8"
+      }
+    },
+    {
+      "programme": "SET-final",
+      "world": 109220026,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-final_109220026.json",
+        "bytes": 12707,
+        "sha256": "eba1ff7d6d9f069931f1f946cb0156d1fd83b0b8794f114473c32cc73d64aaab"
+      }
+    },
+    {
+      "programme": "SET-final",
+      "world": 109220027,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-final_109220027.json",
+        "bytes": 13712,
+        "sha256": "af4d3873ae06a14fef17c5cd88f2e941897aaddfecfb38d2131ed801b1c7d1a9"
+      }
+    },
+    {
+      "programme": "SET-final",
+      "world": 109220028,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-final_109220028.json",
+        "bytes": 14385,
+        "sha256": "72db354e7687c6dcc716f3f594657f220fb97b0c33ffeb40ec50c7a076ba13c2"
+      }
+    },
+    {
+      "programme": "SET-final",
+      "world": 109220029,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-final_109220029.json",
+        "bytes": 23277,
+        "sha256": "2095ca1f8a4127deef0ddd6346ed64868e786ead1e466086a4cfd81d16e2f9cb"
+      }
+    },
+    {
+      "programme": "SET-final",
+      "world": 109220030,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-final_109220030.json",
+        "bytes": 20811,
+        "sha256": "7bdc25c3beaa5c1fd7eb84a7b8eee6f9ecd2459a096849249cc322c23df5fbf9"
+      }
+    },
+    {
+      "programme": "SET-final",
+      "world": 109220031,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-final_109220031.json",
+        "bytes": 10331,
+        "sha256": "7c7197a869a3372887d1825687066a92b763af1778088ee4c564d33e688d07c8"
+      }
+    },
+    {
+      "programme": "SET-final",
+      "world": 109229000,
+      "phase": "audit",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/SET-final_109229000.json",
+        "bytes": 13179,
+        "sha256": "cd9cbf7f3f01fed60d838e8a8b16d84056cfe581fdd5e6f9f06351cb29b7d249"
+      }
+    },
+    {
+      "programme": "O",
+      "world": 109220000,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01/checks/frozen/O_109220000.json",
+        "bytes": 12213,
+        "sha256": "6dd5ecbd4b76256964a9b99aad5e705bf8c32f5b4ffd7feba2de250cccb0ad48"
+      }
+    },
+    {
+      "programme": "O",
+      "world": 109220001,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/O_109220001.json",
+        "bytes": 12994,
+        "sha256": "9596a9d4663ad16611a7b1ef9d0eefb5aeccd1afdb830fdba842eefc63414080"
+      }
+    },
+    {
+      "programme": "O",
+      "world": 109220002,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/O_109220002.json",
+        "bytes": 12398,
+        "sha256": "e2557949d7f8f01b1388b46e391108a09adca3c9afb0c66af0ace276bd9fffe5"
+      }
+    },
+    {
+      "programme": "O",
+      "world": 109220003,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/O_109220003.json",
+        "bytes": 13001,
+        "sha256": "4cc8c3d51f144b88b77d5a5c3fcada3a196e9d8cbcd4664e31041fb27b7c63c2"
+      }
+    },
+    {
+      "programme": "O",
+      "world": 109220004,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/O_109220004.json",
+        "bytes": 11397,
+        "sha256": "78c65fb9073252f1d32a18974ff9f5722371fb8bc8fdb2028226902cb2318bf5"
+      }
+    },
+    {
+      "programme": "O",
+      "world": 109220005,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/O_109220005.json",
+        "bytes": 12169,
+        "sha256": "00b17ac87e919ef50deb8eb3303138183396b35c1f388d482881c154a7ed1496"
+      }
+    },
+    {
+      "programme": "O",
+      "world": 109220006,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/O_109220006.json",
+        "bytes": 12204,
+        "sha256": "6c73bb8de204b21f34d95726bc6ad57f734a11cc212a8121a213bb2ed46f9d49"
+      }
+    },
+    {
+      "programme": "O",
+      "world": 109220007,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/O_109220007.json",
+        "bytes": 11409,
+        "sha256": "95ba08c4ebe24fdc9f194eb8ff66e9e4acb26d2f23e3cc345fd9a49d28d560c7"
+      }
+    },
+    {
+      "programme": "O",
+      "world": 109220008,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/O_109220008.json",
+        "bytes": 12159,
+        "sha256": "f3f4c9d530db9a6a5765c3452b1ec905f3ace8ebc7740068dec81ff29cb38b72"
+      }
+    },
+    {
+      "programme": "O",
+      "world": 109220009,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/O_109220009.json",
+        "bytes": 12193,
+        "sha256": "950f46bc49fbcf8614607e84c8c21540378a716e20e24606b6ffcee2c8d4faf9"
+      }
+    },
+    {
+      "programme": "O",
+      "world": 109220010,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/O_109220010.json",
+        "bytes": 13011,
+        "sha256": "679e006405149a552d3edf80a41e72af1b25f993a75356f4cc3f006cf5f02c6f"
+      }
+    },
+    {
+      "programme": "O",
+      "world": 109220011,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/O_109220011.json",
+        "bytes": 12173,
+        "sha256": "b6ee9f4960ded6551806a76d4bdd1bc17653f9b4c3940f750ef6bd1579b172c3"
+      }
+    },
+    {
+      "programme": "O",
+      "world": 109220012,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/O_109220012.json",
+        "bytes": 12165,
+        "sha256": "f26910ada327458ff82156d540cc6bddd4a52526c5fe706c1a4a944cf446926e"
+      }
+    },
+    {
+      "programme": "O",
+      "world": 109220013,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/O_109220013.json",
+        "bytes": 13775,
+        "sha256": "48c8a2db41be909cf2c615d3046936d9b485eb2e7c6b54910c6b1d1058fb87ea"
+      }
+    },
+    {
+      "programme": "O",
+      "world": 109220014,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/O_109220014.json",
+        "bytes": 12366,
+        "sha256": "3cf4a2f4335cb06f3e3989ba97149af1f25364286e9b4c7f891e615d9422c98b"
+      }
+    },
+    {
+      "programme": "O",
+      "world": 109220015,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/O_109220015.json",
+        "bytes": 12199,
+        "sha256": "ad3c1c7ab8dff374148b722f9832e08823c02b185fa3cc3c814e00dda4a5784c"
+      }
+    },
+    {
+      "programme": "O",
+      "world": 109220016,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/O_109220016.json",
+        "bytes": 13020,
+        "sha256": "1bc0f75bd0ba4ead977833a2dba0f645525659d30626de7c6504c24b001b3bde"
+      }
+    },
+    {
+      "programme": "O",
+      "world": 109220017,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/O_109220017.json",
+        "bytes": 12236,
+        "sha256": "d8fdeec20701ef8e4046ebcabae32ecac5043928376c5f0f412b7bab2ef552ed"
+      }
+    },
+    {
+      "programme": "O",
+      "world": 109220018,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/O_109220018.json",
+        "bytes": 12962,
+        "sha256": "3c07f6cb6ae244833b85748f8947d94d9b98758981f2ca57683cea15c23ffdaf"
+      }
+    },
+    {
+      "programme": "O",
+      "world": 109220019,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/O_109220019.json",
+        "bytes": 12243,
+        "sha256": "3cd6b75cb95e99cabf8a5ccb3e6b1918f9f68257b995f08f2a1ebd938803b643"
+      }
+    },
+    {
+      "programme": "O",
+      "world": 109220020,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/O_109220020.json",
+        "bytes": 12987,
+        "sha256": "46a92ec1837d98f919a39abbeb09111b1c2c99eeb56c9000ea2100525026ecbc"
+      }
+    },
+    {
+      "programme": "O",
+      "world": 109220021,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/O_109220021.json",
+        "bytes": 13871,
+        "sha256": "f4b764f0576975eb15e0bb47050c7320b0adb7ede2685a097db32db5927dab3d"
+      }
+    },
+    {
+      "programme": "O",
+      "world": 109220022,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/O_109220022.json",
+        "bytes": 12254,
+        "sha256": "ba78cf0820e56c578f003c8bfaded0d6748839475ff4e0b4678f50550dc13391"
+      }
+    },
+    {
+      "programme": "O",
+      "world": 109220023,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/O_109220023.json",
+        "bytes": 13743,
+        "sha256": "0ead9e6fd54e5c07d2b2d2603fa7668ace8d1ac97a85675643efdd2bd5eef449"
+      }
+    },
+    {
+      "programme": "O",
+      "world": 109220024,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/O_109220024.json",
+        "bytes": 12956,
+        "sha256": "65a64fc836a3ee26347063837db14b22db6e94091fdb25d931e82b2b94a267ad"
+      }
+    },
+    {
+      "programme": "O",
+      "world": 109220025,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/O_109220025.json",
+        "bytes": 12182,
+        "sha256": "52dc867d5b55082b0d1d8fda84d5ec3c6a23c9ffdb2024de220c2e038de8e50f"
+      }
+    },
+    {
+      "programme": "O",
+      "world": 109220026,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/O_109220026.json",
+        "bytes": 12192,
+        "sha256": "6f3c229f03f5138451b847389e4f9508c704a75b0506b71e62c5824be5b56488"
+      }
+    },
+    {
+      "programme": "O",
+      "world": 109220027,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/O_109220027.json",
+        "bytes": 12252,
+        "sha256": "5439ca5aafb103a7b1fb53b576c975eb59d24bc56556e9c99c90390f79a32462"
+      }
+    },
+    {
+      "programme": "O",
+      "world": 109220028,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/O_109220028.json",
+        "bytes": 13006,
+        "sha256": "cd2af2098c9cce2661646c149c1ce355f2540c17597f66808e1cbfea41128c0a"
+      }
+    },
+    {
+      "programme": "O",
+      "world": 109220029,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/O_109220029.json",
+        "bytes": 12213,
+        "sha256": "187ead8c7ec32cfb0a3e0faa76c15b3479a100e7751bb59a18b9b4a51a0c846c"
+      }
+    },
+    {
+      "programme": "O",
+      "world": 109220030,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/O_109220030.json",
+        "bytes": 12177,
+        "sha256": "8543973339ccebc0c333f8b1e898722d43cdfb399933d28168da2f5f72b600d6"
+      }
+    },
+    {
+      "programme": "O",
+      "world": 109220031,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/O_109220031.json",
+        "bytes": 12212,
+        "sha256": "9c964b9cad58efcbc40b5b97a2224dd24a70999e827fa9f851c7838e34d66e91"
+      }
+    },
+    {
+      "programme": "O",
+      "world": 109229000,
+      "phase": "audit",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/O_109229000.json",
+        "bytes": 12242,
+        "sha256": "7c5bd8603e79b903a1e9f548a9f3caef5c64910df6e10de048c8ba4abebf6628"
+      }
+    },
+    {
+      "programme": "B",
+      "world": 109220000,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/B_109220000.json",
+        "bytes": 16072,
+        "sha256": "4a713274ff53b5e544bc0beb36a051d830c2fdc40d977254d96885e4b3826b9b"
+      }
+    },
+    {
+      "programme": "B",
+      "world": 109220001,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/B_109220001.json",
+        "bytes": 14771,
+        "sha256": "65930f64ce3fceb18a7463b347bb3c3664f3d956c76aa16cfbb52aeb4e387be8"
+      }
+    },
+    {
+      "programme": "B",
+      "world": 109220002,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/B_109220002.json",
+        "bytes": 11897,
+        "sha256": "8e3ecde60dc49e71572c700706b8c0122e84af07bc4b68850d7c7fe3850b87cc"
+      }
+    },
+    {
+      "programme": "B",
+      "world": 109220003,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/B_109220003.json",
+        "bytes": 18563,
+        "sha256": "0cf771b9c820cd3ad45ac0e05a1890a858d272cbfe0c2973f1ea208fd69bf81b"
+      }
+    },
+    {
+      "programme": "B",
+      "world": 109220004,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/B_109220004.json",
+        "bytes": 17037,
+        "sha256": "a0bb0a947995fcf0dc10ddc3276d6a2687f1aeb2d4d8a009cd2ccf3c1a0ba9d6"
+      }
+    },
+    {
+      "programme": "B",
+      "world": 109220005,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/B_109220005.json",
+        "bytes": 16496,
+        "sha256": "52985f3651e241b548f076a9019d9e1b87cec306b32b5287b0eece941427e900"
+      }
+    },
+    {
+      "programme": "B",
+      "world": 109220006,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/B_109220006.json",
+        "bytes": 16761,
+        "sha256": "6de2537fc07d4d0f399c5086ba0d91a507abd6d17f2ec3d2625568eb052893a5"
+      }
+    },
+    {
+      "programme": "B",
+      "world": 109220007,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/B_109220007.json",
+        "bytes": 16489,
+        "sha256": "ab760364c6af4ac1314eff81c6fbf68b065580912e04e398b8edad39c93ac610"
+      }
+    },
+    {
+      "programme": "B",
+      "world": 109220008,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/B_109220008.json",
+        "bytes": 14806,
+        "sha256": "d492260d8cc967220a1499fc34706b1198e9b7e31977022724d6e03fb4d15f42"
+      }
+    },
+    {
+      "programme": "B",
+      "world": 109220009,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/B_109220009.json",
+        "bytes": 16947,
+        "sha256": "d61abd105a882f750f5b368db87963c1d4a3bb8e85eef3b3a666b26dd17305df"
+      }
+    },
+    {
+      "programme": "B",
+      "world": 109220010,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/B_109220010.json",
+        "bytes": 15196,
+        "sha256": "3fa7b5299053cf5dac6fd51f35c0a327dcf17b2a920b81291e8a9cd29060657b"
+      }
+    },
+    {
+      "programme": "B",
+      "world": 109220011,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/B_109220011.json",
+        "bytes": 13870,
+        "sha256": "e7e19edb47a029ffb9bbbc126145d41742ab0386c028111466d06b5609176d88"
+      }
+    },
+    {
+      "programme": "B",
+      "world": 109220012,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/B_109220012.json",
+        "bytes": 13209,
+        "sha256": "a9c952e70766d7d3ec485dd00fc21f1d32d4402e25b91272f000512901afdc47"
+      }
+    },
+    {
+      "programme": "B",
+      "world": 109220013,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/B_109220013.json",
+        "bytes": 17926,
+        "sha256": "699001a1cd0dae57949ab71560be4645412d4307c006f6f5708483a1a74ed8f2"
+      }
+    },
+    {
+      "programme": "B",
+      "world": 109220014,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/B_109220014.json",
+        "bytes": 15530,
+        "sha256": "a725157ed369f73a87f2fde4a5f6bffeaf9ce8f11724c7e8dbf2cdb0dab80c80"
+      }
+    },
+    {
+      "programme": "B",
+      "world": 109220015,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/B_109220015.json",
+        "bytes": 15220,
+        "sha256": "28bf31c941c6e1b89a6862c1ad8b2350095d0b439fc0c2edf64e5d09c03f5543"
+      }
+    },
+    {
+      "programme": "B",
+      "world": 109220016,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/B_109220016.json",
+        "bytes": 13741,
+        "sha256": "3433886687d798318521a7fb9caae526e81060b48c58e7f0c1ef7d445cf04dfc"
+      }
+    },
+    {
+      "programme": "B",
+      "world": 109220017,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/B_109220017.json",
+        "bytes": 12571,
+        "sha256": "fc64ca9edc6fc721536b1da7a8061a206b4ec674a6c733c8d35d803b578be3ad"
+      }
+    },
+    {
+      "programme": "B",
+      "world": 109220018,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/B_109220018.json",
+        "bytes": 12742,
+        "sha256": "ddcdb21583b0a746d5e14ae0206cfc03d757069899ac1ca12bffb41dfd7e7c26"
+      }
+    },
+    {
+      "programme": "B",
+      "world": 109220019,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/B_109220019.json",
+        "bytes": 11509,
+        "sha256": "2c091ce6d2e7eee18984e76f09e11a53170b1f44877c782ea8d48dfe81938589"
+      }
+    },
+    {
+      "programme": "B",
+      "world": 109220020,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/B_109220020.json",
+        "bytes": 14894,
+        "sha256": "309274fe7d5c0f4f53f7e28617aad9b105667750171959579f27f70f6dfe224d"
+      }
+    },
+    {
+      "programme": "B",
+      "world": 109220021,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/B_109220021.json",
+        "bytes": 13394,
+        "sha256": "58f6e423d5c58c47bec1a05b4af8efa497172a42af150a2a6cc647743ed1fe87"
+      }
+    },
+    {
+      "programme": "B",
+      "world": 109220022,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/B_109220022.json",
+        "bytes": 11718,
+        "sha256": "114561009d6d31bb767bbed521a8eb3afad127532ef86815479b4292224faefd"
+      }
+    },
+    {
+      "programme": "B",
+      "world": 109220023,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/B_109220023.json",
+        "bytes": 17465,
+        "sha256": "564f16a101fb28dd3a02f9e744c88ea46425f990684cd7fe705b60686eec5d1b"
+      }
+    },
+    {
+      "programme": "B",
+      "world": 109220024,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/B_109220024.json",
+        "bytes": 15706,
+        "sha256": "d6e6defb99fb4eeb448232ce0dcb8f1edc7e8e9b92e43a50c5f22f70144e27dc"
+      }
+    },
+    {
+      "programme": "B",
+      "world": 109220025,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/B_109220025.json",
+        "bytes": 14256,
+        "sha256": "8022963c06ac0d0df4c67be78739265268785a05655d125c53a17c99b8aec613"
+      }
+    },
+    {
+      "programme": "B",
+      "world": 109220026,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/B_109220026.json",
+        "bytes": 14171,
+        "sha256": "36a6959ec4c9d739e0cdd2d6f92e9816417805cb4ef35ef746b3fb63c4b01f8d"
+      }
+    },
+    {
+      "programme": "B",
+      "world": 109220027,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/B_109220027.json",
+        "bytes": 16073,
+        "sha256": "f88cd8c8662b960a75c2cfe1968e652a68d6a8b82e7722f0a88f1d7afe8aada4"
+      }
+    },
+    {
+      "programme": "B",
+      "world": 109220028,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/B_109220028.json",
+        "bytes": 19245,
+        "sha256": "a39beac4ba8467608e066ba85d9452cd03fe53b6836ec0bd6b3743fecf4f4820"
+      }
+    },
+    {
+      "programme": "B",
+      "world": 109220029,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/B_109220029.json",
+        "bytes": 16927,
+        "sha256": "54b77d2acbc40d0f843eb43a556b2a4a4e026586a1d73b89c25fb9dd7cb54ca8"
+      }
+    },
+    {
+      "programme": "B",
+      "world": 109220030,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/B_109220030.json",
+        "bytes": 14267,
+        "sha256": "c8542034727b1024a3b87c30a7c15491820e99d31f85a6687022f231930718a0"
+      }
+    },
+    {
+      "programme": "B",
+      "world": 109220031,
+      "phase": "main",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/B_109220031.json",
+        "bytes": 11805,
+        "sha256": "a420dc87da1483bd68bef62003626eb78837c1b63daee78d2ad0e2f64ab7a0af"
+      }
+    },
+    {
+      "programme": "B",
+      "world": 109229000,
+      "phase": "audit",
+      "identity": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02/checks/frozen/B_109229000.json",
+        "bytes": 15301,
+        "sha256": "41988c384733be924b922bc9971e5bbe8f787a13559ec91c7f3f47d08f967e94"
+      }
+    }
+  ]
+}

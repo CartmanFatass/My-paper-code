@@ -4943,3 +4943,222 @@ optimizer-loss averages for SET rollout1 and rollout45
 (4.3561312556266785 and9.205397963523865), not separately measured frozen
 initial/final policy entropies. This leaves the co-occurrence diagnosis and
 recommendation unchanged.
+
+
+<a id="b04-selected-contract"></a>
+## 2026-10-02 15:36 UTC — B04 selected frozen SET mean comparison and L0
+
+Root read the complete original critic and DM disposition, adopted the specific
+investment dissent and selected **only** the complete mean comparison in its
+native return, subsequently published at
+`e7352cd5afbcc7beb05bbb175347f5c60e88286a`. This resolves the prior selection
+boundary: B04 is the one active result-bearing study. It does not reopen the
+819000-native/two-fit physical-action purchase or an old operation. I continue
+through implementation, review, admission, collection, complete reading,
+applicable independent result judgment, own publication and cleanup. No further
+per-step Root acknowledgment is needed.
+
+The scientific contract is alternative1 plus the complete original review above.
+Its exact endpoints are the two original SET checkpoint hashes; scored worlds
+109220000…109220031 and one audit109229000 per endpoint give66H500 missions/
+33000 native. The scored panel is development-exposed. Native and reader each
+make33000 model-team calls/198000 actor and critic rows each. The independent
+reader reconstructs33066 physical states/10614186 distance relations, movement,
+all1650000 user indicators, twenty-tick window payments, recurrent inputs, held
+state/rows, raw/projected commands and full individual tails. Reuse the already
+read sampled SET initial/final and O/B worlds at their fixed identities; no new
+ordinary mission, update, label, training attempt, head variant or checkpoint
+search. Native inference returns the raw Gaussian mean; the original copied-
+vector projection and host arithmetic remain the executed command. RNG starts
+after factory/reset at world+51, with actual pre/post states recorded; there is
+no stochastic-tape equivalence claim across modes.
+
+**L0 deliverable and ownership.** Add the admitted B04 worker/reader entry under
+`experiments/candidates/uav_decision_generalization/b04_set_mean/` and focused
+tests under its matching test directory. Reuse the current B03 implementation
+and independent physics/ledger/metric reader. Permit only the necessary explicit
+keyword extension of B03 `worker.frozen_mission` and `independent.replay_model`
+for deterministic inference, retaining sampled `False` as their default. Record
+the mean mode and terminal RNG explicitly, reject a reader/mode mismatch, and
+leave historical B03 records and frozen source identities unchanged. This is one
+bounded behavior change, not a general deployment framework. No shared core,
+launcher or another direction edit is authorized. DM exclusively owns NOTES,
+study/locator/budget inputs, run collection and index/publication. A registered
+Implementer may own only the stated code/test paths, with no Git index mutation,
+no result launch, no model/host health call and no children. Main/shared checkout
+remains the sole authoring location; concurrent work must be preserved.
+
+**State/identity contract.** The original worker is the canonical remote root
+`/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_a01`.
+Its config/summary/manifest hashes are respectively
+`0bc410effb3e254ea38f5f23186e5ed975a5492251f333ad059c56932e228e88`,
+`2fe984bf5c203b2b450237c1304a0b074f24c604e7adfe7153f02f1a9a263ae9`,
+`6d572b218c091ccd5ca2b8e305c0b1dc074f45efdd24c51029d4edbaa5ac1c95`.
+Load the two canonical21.4MB checkpoint files there without copying them into
+a new evidence root. Bind their arm, endpoint, original launch identity, complete
+configuration/modules/normalizers and state digest before use; require unchanged
+parameters/normalizers and zero optimizer calls after each mission and replay.
+The existing final B03 reading is
+`runs/uav_decision_generalization/b03_joint_window_read_a02/reading.json` with
+sha256`eab3cdeff541f4849f6086e5752d0ea9ad59b6e29ab7765a9b047bce5d356c69`.
+All46 source paths recorded by that reading currently match published main
+exactly. Bind unchanged inherited source bytes against it; only the two explicit
+mode extensions above may differ. The B04 source manifest additionally includes
+all B04 source files and its actual static dependency closure. Worker and reader
+must use identical selected source bytes, input contract and checkpoint binding.
+The raw episode remains the inherited B03 task object, while the new study/config/
+summary identifies B04 and its mean deployment; no old sampled result is relabeled.
+
+**Implementation/check scope.** Add a strict66-row roster, fresh-output refusal,
+exact accepted source/output/launch checks and admission before every scientific
+effect. Preserve attempted/completed native counts and partial trace on failure.
+Return summary/manifest, complete raw NPZ and per-mission metadata; the reader
+checks all66 files and retains compact full per-world/user/window readings. Its
+principal contrast is mean-final minus mean-initial and mode interaction minus
+the already-paid sampled+.0625W/mission; include mean versus sampled and O/B
+service, geometry-acquisition, travel and user-gap contrasts with adverse worlds.
+No fitted statistical model or new random bootstrap query is needed; reuse the
+existing descriptive paired-world reducer, with no training-replication claim.
+
+Focused tests cover the new admission and duplicate/output guards, exact roster
+and external identities, explicit mean/default-sampled dispatch, terminal RNG
+and immutable-state checks, preserved numerical motion replay, wrong-mode/hash/
+roster refusal, zero-effect counter failures and reference joins. Tests use
+mock agents/admission/host and synthetic arrays; no actual checkpoint/model
+forward, RF/native episode or health pilot is selected outside the66 missions.
+Reuse applicable old checks for unchanged physical/recurrent semantics and run
+only the relevant tests, recording measured check CPU/wall and coverage gaps.
+Independent engineering review is required for the numerical/RNG/recurrent/
+identity effects before scientific execution; it does not repeat the scientific
+investment review.
+
+**Execution budget and stop.** Select configured remote `wsl_4070`, CPU device,
+Python3.10.21/Torch2.7.0+cu118/NumPy1.26.3, four Torch and one interop/BLAS thread.
+No package, device or host change and no health probe is part of this choice.
+The full study forecast remains.5–1CPUh,0GPU,.25–1compute wall-hour plus4–8
+support hours,.3–.6GiB unique evidence/~2.5–3GiB additional peak disk. Node
+admission requests8GiB available physical/effective RAM and at least4GiB free
+disk for the new source/output working set, in addition to the normal kernel
+floor; the canonical old evidence remains read-only and charged to its own
+retained scope. Source publication precedes launch. Worker and reader are two
+detached admitted operations with identical scientific source/input, collected
+and fully read; release the worker's source snapshot after verified durable
+collection and before the reader snapshot so temporary source copies do not
+silently double the declared peak.
+
+Hard scientific exposure is66 full missions/33000 native and one complete
+33000-step neural reader, with0fits/updates. There is no extra audit/pilot or
+rerun allowance. A conservative emergency operating boundary is7200 new-study
+CPU-seconds across worker/reader/checks and7200wall-seconds per operation,
+checked at bounded mission/replay boundaries; these are watchdogs above the
+forecast, not permission to add samples. Report and preserve first failure,
+partial evidence and actual paid effects; technical failure is not a scientific
+negative and does not authorize a duplicate. No source/identity or numerical
+tolerance relaxation is implied. Old B03/A-R/S/Claude costs remain as recorded
+above; new-study metering is separate and added, never a reset of sunk costs.
+Authoring/transport/review support not metered by the process ledger stays
+explicitly unmeasured. Accepted handles use the same-node deterministic observer
+and this native child remains active through complete reading.
+
+
+<a id="b04-implementation-review"></a>
+### B04 implementation acceptance and independent engineering review
+
+The registered Implementer `/root/dm_joint_service/mean_implementer` completed
+the one L0 change in the shared main checkout, without Git mutations, result
+launches, actual checkpoint deserialization/model/host queries or children. I
+read all six new B04 modules, both B03 diffs and the complete focused test file.
+The new path reuses B03 collection and physical/neural replay through an explicit
+`deterministic=False` default, binding mean mode and terminal RNG when selected.
+It checks the full mean reset context, exact programme/world/phase roster,
+original weight/config/normalizer identities, hook-observed actor/critic rows,
+zero updates, guarded admission and fresh output, failure prefixes and the
+cumulative ledger. The full reference join uses132 already-paid check files
+from their real a01/a02 roots; no baseline raw replay or episode is added.
+
+All scientific tests were synthetic arrays/mock agents, host and admission.
+The command family was configured local scientific Python
+`/home/fires/.venvs/hmasd-linux-cpu/bin/python -m pytest -q`, targeting
+`tests/experiments/candidates/uav_decision_generalization/b04_set_mean/test_mean.py`
+and the three existing B03 test files. Actual reported checks were:
+
+| Check | Outcome | CPU seconds | Wall seconds |
+|---|---|---:|---:|
+| B04 plus three B03 files |41passed,2new mock-fixture failures |5.999787|5.652098|
+| After repairing the fixtures |18passed|4.041918|2.926729|
+| Expanded complete B04 checks |22passed|6.231500|5.056803|
+| Final affected `frozen_dispatch or worker_context` checks |3passed|3.228425|2.187957|
+
+Total check cost is19.501630CPU-s/15.823587wall-s; maximum pytest-process peak
+RSS336932KiB. The28 inherited B03 checks passed, including unchanged numerical
+fixtures. The two initial failures were test-fixture defects, preserved in this
+cost record; they were not result attempts or scientific outcomes. Pytest owned
+and removed its scratch. I read these checks rather than rerunning unchanged
+ones. After review I clarified three output/error strings only: the comparator
+scope now says initial/final endpoints of **one** training instance, and two
+shared error labels say frozen rather than sampled policy. No numerical or
+control-flow behavior changed. `git diff --check` passes.
+
+The separate registered read-only engineering Reviewer
+`/root/dm_joint_service/mean_engineering_review` inspected the actual new files,
+the two extensions, tests and reachable inherited paths. Original return:
+
+````text
+No material engineering finding remains in the assigned diff.
+
+Reviewed the six new B04 modules, both B03 extensions, focused tests, and reachable inherited paths. Verified:
+
+- Deterministic dispatch reaches the original Gaussian mean; projection and float32 velocity arithmetic remain inherited.
+- Worker and reader preserve world order, recurrent resets, ten-tick held inputs, seed placement, terminal RNG checks, and immutable checkpoint state.
+- Checkpoint, source, baseline-prefix, worker-locator, and episode identities are bound before dependent work.
+- Exact exposure counters, actual actor/critic hooks, cumulative ledger, watchdogs, admission, duplicate-output refusal, and partial-failure evidence remain connected.
+- Comparisons exclude audit worlds and retain matched user/window details.
+
+I relied on the supplied passing checks and inspected their coverage; no redundant tests or scientific/runtime queries were launched. No files were changed.
+
+Residual limits: the exact study/ledger/locator JSONs were not yet authored, and remote checkpoint loading, native execution, and numerical replay remain unvalidated at runtime. This review does not establish execution success or scientific acceptance.
+````
+
+I accept the implementation subject to the recorded runtime checks and the
+narrow exact-input follow-up, not as a successful scientific observation. The
+source manifest now binds52 paths: all46 inherited dependencies, with only the
+two reviewed mode-extension exceptions, plus the six new B04 files. The exact
+study and known-cost inputs are [B04_STUDY_INPUT.json](B04_STUDY_INPUT.json) and
+[B04_BUDGET_LEDGER.json](B04_BUDGET_LEDGER.json). The latter starts at
+21.957492084 known new-work CPU-s:19.501630 checks,.094517782+.414156379 earlier
+paid-metadata reads,.035135747 canonical asset hashing,.027456176 full-reference
+hashing/join, and1.884596 local source/contract preparation. The four recorded
+metadata-read invocations are the timed remote subset, not every unmetered local
+inspection. Other authoring, transport, review and support remain unmeasured,
+not zero; the B03 final14.544662177CPUh and other disjoint inherited bills remain
+separate and do not become a new allowance.
+
+Canonical input hashing read the original eight worker/checkpoint/reader files
+without deserializing a checkpoint. All132 full baseline checks (1,861,338B)
+matched the final reading's lineage and scalar metrics; SET66 and the first O
+world come from the bound failed-reader prefix, the remaining O/B65 from the
+completion reader. Neither failure history nor the original copy repair is
+erased by reusing their accepted checks. The new study performs only its own66
+mean missions and equal reader.
+
+The same engineering Reviewer completed the narrow exact-input follow-up,
+without a new full review or scientific/runtime query. Original return:
+
+````text
+No material input-binding finding.
+
+Verified exact schemas and contract, all 52 current source hashes, original checkpoint/ancestor/reading identities, 132 unique baseline rows split 67/65, inherited 44 unchanged sources, all compact lineage joins, 67 prefix-check identities, and the sampled `+.0625` contrast. Remaining full-check byte identities rely on your reported canonical verification.
+
+The ledger correctly sums the supplied costs to `21.957492084` CPU-seconds, separately from B03 sunk costs. These two additional read-only verification blocks measured `0.484222446` CPU-seconds; carry that forward before launch, yielding `22.441714530` known CPU-seconds. Other unmetered support remains unmeasured.
+
+Study SHA-256: `94f72b7bf74fe941f16ef3ab4b9752843e7ae3f4396d0fc6b309a634668c86c2`.
+
+No source writes, scientific queries, or runtime/health probes performed. Terminal worker-locator validation remains deferred until that output exists.
+````
+
+I accept that check and carry its.484222446CPU-s and two verification blocks
+into the pre-worker ledger: **22.441714530 known new-work CPU-s**. The study
+input/source bytes are unchanged; only the known-cost ledger increases. No
+actual scientific or native health query was used to validate execution in
+advance. The exact worker-locator values will be read from its terminal output,
+then published before the reader.

@@ -559,12 +559,19 @@ def _write(path, value):
     partial.replace(path)
 
 
-def replay_model(agent, payload, raw, metadata, meter):
+def replay_model(agent, payload, raw, metadata, meter, *, deterministic=False):
     """Same pinned neural implementation, independently reconstructed legal inputs."""
     import torch
     from . import evidence as e
+    mode = 'deterministic_mean' if deterministic else 'sampled'
+    if metadata.get('inference_mode', 'sampled') != mode or deterministic and 'terminal_rng' not in metadata:
+        raise AssertionError('deployment inference mode/terminal RNG binding')
     world = int(metadata['world'])
     agent.reset_env_state(0)
+    if deterministic:
+        from .trace import reset_context
+        if reset_context(agent) != metadata['reset_context']:
+            raise AssertionError('mean deployment complete recurrent reset context')
     e.seed_rng(world + 51)
     if e.rng_state() != metadata['pre_world_rng']:
         raise AssertionError('deployment RNG does not equal the fixed per-world seed state')
@@ -576,12 +583,12 @@ def replay_model(agent, payload, raw, metadata, meter):
     with e.instrument_agent(agent, meter) as optimizers, torch.no_grad():
         for tick in range(500):
             actions, _, data = agent.step(raw['states'][tick][None], raw['observations'][tick][None],
-                                          np.asarray([tick]), np.asarray([False]), deterministic=False,
+                                          np.asarray([tick]), np.asarray([False]), deterministic=deterministic,
                                           return_step_data=True, build_infos=False)
             meter.add('reader_model_team_steps')
             meter.add('reader_actor_agent_rows', 6)
             meter.add('reader_critic_agent_rows', 6)
-            maximum['raw_actions'] = max(maximum['raw_actions'], same(actions[0], raw['raw_actions'][tick], 'sampled policy action replay', atol=2e-5, rtol=1e-6))
+            maximum['raw_actions'] = max(maximum['raw_actions'], same(actions[0], raw['raw_actions'][tick], 'frozen policy action replay', atol=2e-5, rtol=1e-6))
             for key in c.STEP_FIELDS:
                 saved = 'step__' + key
                 if (key in data) != (saved in raw):
@@ -619,6 +626,8 @@ def replay_model(agent, payload, raw, metadata, meter):
             raise AssertionError('reader replay performed optimization')
     if e.digest_agent(agent) != before:
         raise AssertionError('reader replay modified model or normalizer state')
+    if 'terminal_rng' in metadata and e.rng_state() != metadata['terminal_rng']:
+        raise AssertionError('deployment terminal RNG replay')
     return {'max_errors': maximum, 'frozen_state_digest': before, 'optimizer_calls': optimizers,
             'neural_replay_scope': 'pinned factory/native inference reused; physics/information/ordinary/ledger independently reconstructed'}
 

@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "prior_cpu_seconds": 22.44171453,
+  "prior_counts": {
+    "engineering_test_invocations": 4,
+    "engineering_test_case_attempts": 86,
+    "engineering_test_case_passes": 84,
+    "engineering_test_case_failures": 2,
+    "paid_metadata_read_invocations": 4,
+    "paid_baseline_check_rows_read": 132,
+    "source_contract_preparation_invocations": 1,
+    "engineering_review_readonly_blocks": 2
+  }
+}

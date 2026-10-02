@@ -60,7 +60,7 @@ class Store:
             e.write_npz(self.out/'partial'/f'inflight_lane_{lane:02}.npz',item.arrays())
 
 
-def frozen_mission(store,programme,world,phase,agent=None,checkpoint=None):
+def frozen_mission(store,programme,world,phase,agent=None,checkpoint=None,*,deterministic=False):
     from .adapter import make_env
     import torch
     meter=store.meter;meter.phase='frozen/'+programme+'/'+phase
@@ -80,12 +80,13 @@ def frozen_mission(store,programme,world,phase,agent=None,checkpoint=None):
                   'pre_world_rng':rng,'reset_context':context,'initial_host_rng':item.initial_host_rng,'initial_state_sha256':item.initial_digest(),
                   'checkpoint':checkpoint,'state_digest':digest,'sampling_seed':world+51,'source_sha256':store.config['source_sha256'],
                   'worker_config_sha256':e.hash_file(store.out/'config.json')}
+        metadata['inference_mode']='deterministic_mean' if deterministic else 'sampled'
         guard=e.instrument_agent(agent,meter) if agent is not None else __import__('contextlib').nullcontext({})
         with guard as optimizer_counts,torch.no_grad():
             for tick in range(500):
                 if agent is not None:
-                    actions,_,data=agent.step(state[None],obs[None],np.array([tick]),np.array([False]),deterministic=False,return_step_data=True,build_infos=False)
-                    e.finite((actions,data),'frozen sampled policy')
+                    actions,_,data=agent.step(state[None],obs[None],np.array([tick]),np.array([False]),deterministic=deterministic,return_step_data=True,build_infos=False)
+                    e.finite((actions,data),'frozen policy')
                     if agent.d2_enabled:
                         decision=tick%10==0
                         if bool(data['d2_sample_Z'][0])!=decision or not np.array_equal(data['d2_sampled_mask'][0],np.full(6,decision)):raise AssertionError('inline fixed ten-step/six-agent audit clock')
@@ -99,7 +100,7 @@ def frozen_mission(store,programme,world,phase,agent=None,checkpoint=None):
                 if term!=(tick==499) or trunc:raise AssertionError('frozen cadence/terminal')
             if any(optimizer_counts.values()):raise AssertionError('frozen inference trained')
         if agent is not None and e.digest_agent(agent)!=digest:raise AssertionError('frozen full model or normalizer changed')
-        metadata.update(cpu_seconds=time.process_time()-start,host_counts=env.host.event_counts.copy(),counts_delta={k:v-before_counts.get(k,0) for k,v in meter.counts.items()},metrics=item.summary(),optimizer_steps=0)
+        metadata.update(terminal_rng=e.rng_state(),cpu_seconds=time.process_time()-start,host_counts=env.host.event_counts.copy(),counts_delta={k:v-before_counts.get(k,0) for k,v in meter.counts.items()},metrics=item.summary(),optimizer_steps=0)
         if controller is not None:
             metadata['ordinary']={key:e.jsonable(value) for key,value in vars(controller).items() if key!='rng'}
             if programme=='B':metadata['ordinary']['terminal_rng']=e.jsonable(controller.rng.bit_generator.state)
