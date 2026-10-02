@@ -340,14 +340,14 @@ def test_source_admission_and_no_science_before_gates():
     main = next(node for node in tree.body if isinstance(node, ast.FunctionDef) and node.name == "main")
     calls = sorted((node.lineno, ast.unparse(node.func)) for node in ast.walk(main) if isinstance(node, ast.Call))
     before = {name: min(line for line, actual in calls if actual == name)
-              for name in ("require_admission", "c.investment", "c.certify_bank", "e.ParentStore", "run_pipeline")}
-    assert before["require_admission"] < before["c.investment"] < before["c.certify_bank"] < before["e.ParentStore"] < before["run_pipeline"]
+              for name in ("require_admission", "c.selected_investment", "c.certify_bank", "e.ParentStore", "run_pipeline")}
+    assert before["require_admission"] < before["c.selected_investment"] < before["c.certify_bank"] < before["e.ParentStore"] < before["run_pipeline"]
     source = (ROOT / "experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/worker.py").read_text()
     worker = ast.parse(source)
     main = next(node for node in worker.body if isinstance(node, ast.FunctionDef) and node.name == "main")
     calls = sorted((node.lineno, ast.unparse(node.func)) for node in ast.walk(main) if isinstance(node, ast.Call))
     assert next(line for line, name in calls if name == "checked_context") < min(line for line, name in calls if name in ("c.threads", "scientific_stage"))
-    assert "training.fit_once" in source and "training.endpoint" in source and "reader.complete" in source and "case_main(wire" in source
+    assert "training.fit_once" in source and "training.endpoint" in source and "summary = complete(" in source and "case_main(wire" in source
     assert "build_bank(" not in source and "rebuild_bank(" not in source and "engineering_static(" not in source
     assert "optimizer" not in source  # Full checkpoints passed untouched; no crop/replay path.
     assert "torch" not in sys.modules
@@ -551,10 +551,12 @@ def test_consumed_admission_reaches_pending_bank(tmp_path, monkeypatch, wrong_ru
     prep = synthetic_preparation()
     prep["evidence"] = [{"path": str(prep_file.relative_to(ROOT)), "sha256": c.sha(prep_file),
                          "bytes": prep_file.stat().st_size}]
-    binding = {"investment": {"selected": True, "limits": {"cpu_seconds": 300., "gpu_child_seconds": 300.,
-               "wall_seconds": 300., "disk_bytes": 20 * 1024 ** 2}}, "preparation_cost": prep,
+    binding = {"investment": {"selected": True, "limits": {"cpu_seconds": 28800, "gpu_child_seconds": 14400,
+               "wall_seconds": 57600, "disk_bytes": 6442450944}}, "preparation_cost": prep,
                "scientific_source_sha": c.SCIENCE_SHA, "scientific_input_sha256": c.SCIENCE_INPUT,
                "frozen_sources": c.FROZEN_DIGESTS, "bank": {"status": "pending"}}
+    from experiments.candidates.typed_joint_skill_decision.b07_fixed_bank import contract as fixed
+    binding["executable_sources"] = {name: c.sha(ROOT / name) for name in fixed.READER_FILES | fixed.CONSUMER_FILES | set(fixed.FROZEN_B05)}
     input_path = tmp_path / "input.json"
     input_path.write_bytes(c.encoded(binding))
     monkeypatch.setenv("HMASD_ADMISSION_V1", c.encoded({"single_use": True}).decode())
@@ -568,7 +570,7 @@ def test_consumed_admission_reaches_pending_bank(tmp_path, monkeypatch, wrong_ru
     argv = ["--out", str(out), "--seed", "0", "--launch-sha", grant["sha"],
             "--input-manifest", str(input_path), "--input-manifest-sha256", c.sha(input_path)]
     expected = ValueError if wrong_runner else c.PendingCertification
-    message = "runner/source/output" if wrong_runner else "B05 complete producer certification"
+    message = "runner/source/output" if wrong_runner else "actual published B07"
     with pytest.raises(expected, match=message):
         run.main(argv)
     assert len(calls) == 1 and "HMASD_ADMISSION_V1" not in run.os.environ

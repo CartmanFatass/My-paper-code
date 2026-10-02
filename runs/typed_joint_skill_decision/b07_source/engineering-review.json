@@ -1,0 +1,26 @@
+{
+  "actual_turns": [
+    {
+      "effort": "high",
+      "line": 9,
+      "model": "gpt-6-astra",
+      "turn_id": "01a0fd68-4cd8-75c3-8c7e-e8107681a8ba"
+    }
+  ],
+  "dm_response": "Accepted after own source/diff/input/check reading. No material finding or requested repair. Scientific selection remains the prior independent ResearchCritic plus Root complete purchase. Real admitted operation and physical/CUDA feasibility remain untested.",
+  "known_ast_hash_cpu_seconds": 0.015742381,
+  "native_uuid": "01a0fd68-4ca6-7960-97be-ac8239564849",
+  "original_answer": "**No material engineering finding remains in the assigned delta. No repair requested.** This is a read-only engineering conclusion; acceptance remains with the DM.\n\nI verified:\n\n- [data.py](/home/fires/hmasd-wsl/experiments/candidates/typed_joint_skill_decision/b07_fixed_bank/data.py:8) preserves strict self-argmax, full vectors and all three comparisons, with unchanged physical tolerances and exact ordered/discrete identities.\n- [read.py](/home/fires/hmasd-wsl/experiments/candidates/typed_joint_skill_decision/b07_fixed_bank/read.py:14) distinguishes canonical full-byte verification from compact proof verification, retaining native/source bindings, complete denominators and raw digests.\n- [worker.py](/home/fires/hmasd-wsl/experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/worker.py:31) checks the actual proof, selected investment, executable identities and disk scope before scientific effects. Train/cold request boundaries remain intact.\n- [reader.py](/home/fires/hmasd-wsl/experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/reader.py:18) verifies ordinary choices against their actual paid responses and separately reports bank, online and matched values. Comparing the complete function against B04 confirmed preservation of the remaining scientific reading.\n\nThe exact B07 input digest matches `da2cce0fb6de823aa273c6375d6fae8f4a38cf60286aefefb2cbf46651a3f246`; reviewed executable bytes match the final bindings.\n\nI inspected the original **102-pass** receipt and subsequent **34-pass** receipt covering the final B07 binding changes. Recorded costs were respectively **8.801751671 CPU-s / 7.995701826 wall-s** and **7.393642544 CPU-s / 6.243563847 wall-s**. These used synthetic/mock checks with zero real scientific or effect-child executions.\n\nResidual limits remain: real process/limit behavior, physical reconstruction, CUDA feasibility and abnormal dumps were not tested here. Actual reader success and full-byte reading must precede publication of the dynamically bound consumer input.\n\nI made no edits, launches or test reruns. My source-only AST/hash check used **0.015742381 CPU-s**; remaining review support was not fully metered.",
+  "original_answer_sha256": "ddbb7cc65c5cadcb075c8f6f8429c167e9e497586f433342c065ac2d175a49a1",
+  "original_answer_utf8_bytes": 2193,
+  "preservation_cpu_seconds": 0.02014542400000001,
+  "reviewer": "/root/dm_decision_assistance/b07_identity_engineering_review",
+  "role": "hmasd-reviewer",
+  "schema": 1,
+  "scientific_calls": 0,
+  "scope": "independent focused engineering delta review, original102/34pass outputs read; no edits/launch/dynamic test rerun",
+  "source_record": {
+    "line": 218,
+    "path": "/home/fires/.codex/sessions/2026/10/02/rollout-2026-10-02T09-17-46-01a0fd68-4ca6-7960-97be-ac8239564849.jsonl"
+  }
+}

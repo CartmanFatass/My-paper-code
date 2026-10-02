@@ -1,22 +1,25 @@
-# B06 consumer preparation
+# B06 consumer using the B07 fixed producer version
 
-This package is implementation-only and **cannot launch a real study**. The parent
-`contract.certify_bank()` and worker `checked_context()` both have explicit pending refusal
-paths. No CLI flag, fake passing record or mock callback can certify production inputs.
+The parent and every actual worker now require the published B07 full-read manifest,
+input/source identities, native exit0 and all258 compact child contexts/configs/summaries,
+manifests/reap witnesses and final counters. Immutable B05 producer source/input/manifest/
+summary identities and original exit2 remain explicit. No status Boolean or mock callback
+is production certification. `b07_fixed_bank.read.full()` verifies all canonical raw bytes;
+`receipt()` verifies portable compact evidence and preserves raw digests without claiming
+to have transported/rechecked them. The DM binds the actual full result before consumer
+publication. Bank shards are actually hashed before parent acceptance and on every load.
 
-The actual prospective binding is the producer's published stdlib
-`b05_data_bank.read.read(root, artifact_manifest_digest)`, requiring its real
-`complete_compatible_bank` terminal result. The final reader source/publication identity,
-actual B05 producer source, full manifest digest, actual certification bytes/cost and Root's
-selected CPU/GPU-child/wall/disk deployment remain missing. `CertifiedBank` is an internal
-handoff type, not a newly invented producer certificate. A future narrow reviewed binding
-must close both parent validation and legal child receipt validation before execution.
+The complete fixed investment is reader2CPUh/4wallh, consumer8CPUh/4GPU-childh/16wallh.
+Consumer normal disk is6GiB. Prior reader/failed producer/preparation costs are separate;
+unknown external CUDA dump risk stays separate. Consumer input must pin all executable
+B06/B07 files plus frozen B05 helpers and the existing B04/upstream science. Original
+B04/B05 code, labels and failed outcomes remain unchanged.
 
 `run.py` is the stdlib parent (`--out`, `--seed 0`, `--launch-sha`, `--input-manifest`,
 `--input-manifest-sha256`). Admission and selected explicit investment precede any output
 creation or scientific import. Frozen B04 input bytes and all thirteen B04 modules are checked
 against original b195 source SHA256 constants; native dependencies retain original input pins.
-The consumer input/launch identity, original scientific identity and real B05 record identities
+The consumer input/launch identity, original scientific identity and real B05/B07 record identities
 are separate. Checkpoints retain the original scientific input digest and actual consumer
 launch SHA; Bank receives the actual producer source/input, never rewritten identities.
 
@@ -32,7 +35,13 @@ Full16000 TrainingBank loading remains seven times.
 Only the first fit requests original 8GPU+8CPU scorer checks. Neither acquisition, raw-bank
 physical rebuild, B05 permutation checks nor Adam replay runs in this consumer.
 
-`worker.py` calls frozen `fit_once`, `endpoint`, `case_main` and `reader.complete` directly.
+`worker.py` calls frozen `fit_once`, `endpoint`, `case_main` and the local complete-reader composition. Its unchanged B04 routines still read every
+sampling/update/endpoint/functional/frame/audit/P-cache result. Ordinary branches require
+the exact winner of their actual paid responses, not the bank winner; they check complete
+query chronology/layout/state, actual decision.scores and unchanged physical/discrete
+criteria. Bank J at the chosen row, paid online J and matched J have separate fields, with
+matched−bank and matched−online differences. Students get no extra online score; P retains
+its out-of-pool paid value. Fresh512 Raw8J is labelled offline; native128 is online.
 The endpoint serializes a hash-bound outcome-free commitment per each of128 cold worlds after all final
 assets are sealed, without an additional forward/host/static query. Parent access to it waits
 for immutable cold selection_ready; identity/reset/feature/construction/raw-row/GPU choice
@@ -51,8 +60,8 @@ ownership. No old Store initializer or whole-root overwrite is used. Seals are i
 
 Billing retains all original attempted/completed/internal counters in a crash-visible
 sequential mmap block. Actual raw construction attempts are observed via a delegating wrapper;
-new bank acquisition/rebuild stay zero. Prior producer certification cost stays separate.
-The future published input must also bind paid preparation evidence/known CPU and explicitly
+new bank acquisition/rebuild stay zero. Prior producer/full-reader cost stays separate.
+The published input also binds paid preparation evidence/known CPU and explicitly
 choose whether those prior seconds consume the selected consumer CPU cap or are reported
 separately. No default zero exists; every bill reports their inclusive known consumer total,
 while unmetered support stays unknown. Actual values/cap scope remain a deployment dependency.
@@ -64,9 +73,10 @@ partial artifacts and counter bytes without parsing/recomputing incomplete scien
 immutable manifest and bound to its digest; terminal collection must bind it. Its own final
 write/counter-close tail is explicitly unmeasured, not zero (64KiB space reserved).
 
-Tests are pure/opaque synthetic control-plane checks under pytest tmp_path; no Torch/model,
-real bank/world/weights, PRNG, forward, fit, native/static call or GPU probe. The JUnit property
-`b06_pure_mock_counts` reports callbacks/failures and measured fixture CPU/wall; preparation
-support remains unknown. Only static AST/source checks were run by the Implementer. The DM
-owns the one finite test batch (combined preparation bound300CPU-s/20MiB scratch), independent
-engineering review, acceptance and publication. Runtime/reader correctness is untested here.
+Tests are pure synthetic/control checks under pytest tmp_path. They cover exact self
+winners with ties/one-ULP cross-execution differences, unchanged physical/discrete identity,
+258+2501 completion denominators, compact witness/source tampering, paid-response choice,
+three static values, admission, information boundaries and first-failure composition.
+They execute no real bank/world/model/native/GPU child. Actual OS/runtime/scientific chain
+and CUDA feasibility remain untested preparation gaps; independent review and DM acceptance
+precede publication/execution.

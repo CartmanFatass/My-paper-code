@@ -134,7 +134,7 @@ def run_pipeline(store, bill, transport, parent, bank, original_input):
     """Internal composition for admitted inputs; opaque callbacks permit zero-query mock tests.
 
     This function is not a public certification entry point. CLI and actual worker both
-    refuse pending certification. Neither tests nor a synthetic bank confer run authority.
+    require actual fixed-version certification. Tests/synthetic banks confer no authority.
     """
     assets, initials, cases = [], {}, []
     final_seal = None
@@ -227,7 +227,8 @@ def run_pipeline(store, bill, transport, parent, bank, original_input):
                                bill=bill.snapshot(), diagnostics=result["diagnostics"],
                                bank_producer_source_sha=bank["producer_source_sha"],
                                bank_producer_input_sha256=bank["producer_input_sha256"],
-                               bank_manifest_sha256=bank["manifest_sha256"])
+                               bank_manifest_sha256=bank["manifest_sha256"],
+                               fixed_version_validation=bank.get("certification"))
                 bill.seal_counts(store)
                 store.write("summary.json", summary)
                 store.seal()
@@ -294,20 +295,17 @@ def main(argv=None):
             or admission["parent_pid"] != os.getppid()):
         raise ValueError("actual admitted runner/source/output/launch identity mismatch")
     binding = c.bound_json(args.input_manifest, args.input_manifest_sha256)
-    limits = c.investment(binding.get("investment"))
+    limits = c.selected_investment(binding.get("investment"))
+    c.executable_binding(binding, ROOT)
     paid_preparation = c.preparation_cost(binding.get("preparation_cost"), ROOT)
     original = c.scientific_binding(binding, ROOT)
-    certified = c.certify_bank(binding.get("bank"))  # Always refuses until real final interface is bound.
-    roots = {str(Path(value).resolve()) for value in binding["disk_roots"]}
-    expected_roots = {str(ROOT), str(args.out.resolve()), str(Path(certified.root).resolve()),
-                      str(Path(binding["own_scratch"]).resolve())}
-    if roots != expected_roots or args.out.resolve() == Path(certified.root).resolve():
-        raise ValueError("one declared bank/source/output/scratch scope; no old asset or per-child bank replicas")
+    certified = c.certify_bank(binding.get("bank"), ROOT)
+    disk = c.disk_scope(binding, ROOT, out, certified.root)
     c.guard_parent()
     c.threads()
-    os.environ["CUDA_CACHE_PATH"] = str(Path(binding["own_scratch"]) / "b06-cuda-cache")
+    os.environ["CUDA_CACHE_PATH"] = str(Path(disk["own_scratch"]) / "b06-cuda-cache")
     store = e.ParentStore(args.out)
-    deployment = {"limits": limits, "disk_roots": binding["disk_roots"],
+    deployment = {"limits": limits, "disk_roots": disk["roots"],
                   "started_monotonic": started, "prior_bank_cost": certified.prior_cost,
                   "prior_preparation_cost": paid_preparation}
     shared = billing.Shared(args.out / "shared-counters.bin", create=True)
@@ -316,10 +314,10 @@ def main(argv=None):
               "launch_sha": args.launch_sha, "source_binding": {key: binding[key] for key in
                     ("scientific_source_sha", "scientific_input_sha256", "frozen_sources")},
               "investment": binding["investment"], "deployment": deployment,
-              "consumer_input_sha256": args.input_manifest_sha256,
+              "consumer_input_sha256": args.input_manifest_sha256, "consumer_input_path": str(args.input_manifest.resolve(strict=True)),
               "counter_path": str(args.out / "shared-counters.bin")}
-    # Scope/real certification publication is still pending; no default roots or budgets.
-    store.write("config.json", {"launch_sha": args.launch_sha, "consumer_input_sha256": args.input_manifest_sha256,
+    # Exact selected budgets and real fixed-version proof are validated above.
+    store.write("config.json", {"launch_sha": args.launch_sha, "consumer_input_sha256": args.input_manifest_sha256, "consumer_input_path": str(args.input_manifest.resolve(strict=True)),
                               "scientific_source_sha": c.SCIENCE_SHA, "scientific_input_sha256": c.SCIENCE_INPUT,
                               "binding": binding, "admission": admission})
     error = None

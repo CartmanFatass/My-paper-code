@@ -71,7 +71,7 @@ def bound_json(path, digest):
 
 @dataclass(frozen=True)
 class CertifiedBank:
-    # Internal handoff type for a future real validator, not a certificate schema.
+    # Internal extracted real producer/proof fields; no standalone certificate schema.
     root: str
     files: dict
     producer_source_sha: str
@@ -81,18 +81,54 @@ class CertifiedBank:
     certification: dict
 
 
-def certify_bank(binding):
-    """Pending real B05 config/summary/witness/258+258 reader/2501 compatibility binding.
+def certify_bank(binding,source=None):
+    """Require the real published B07 full-reader witnesses over immutable exit2 B05.
 
-    Intentionally no success branch and no injectable CLI validator. Do not turn arbitrary
-    fields or the internal CertifiedBank test type into a production passing certificate.
+    Remote compact proof retains all raw digests; canonical full() precedes DM's
+    publication of this actual reader manifest. No Boolean or mock certificate path.
     """
-    if not isinstance(binding, dict) or binding.get("status") in (None, "pending", "partial", "unknown"):
-        raise PendingCertification("B05 complete producer certification is missing/pending/partial/unknown")
-    # Future narrow binding: published B05 read.read(root, actual_manifest_digest), then
-    # require complete_compatible_bank and extract actual config.launch_sha/input_sha256.
-    # That reader source publication + real digest + deployment are not yet supplied.
-    raise PendingCertification("B05 read.read terminal interface has no bound published source/actual artifact digest")
+    if not isinstance(binding,dict) or set(binding)!={'reader','producer_root'}:
+        raise PendingCertification("actual published B07 reader/input/native evidence required")
+    from experiments.candidates.typed_joint_skill_decision.b07_fixed_bank import contract as fixed,read
+    source=Path(source) if source is not None else Path(__file__).resolve().parents[4]
+    proof=read.receipt(binding['reader'],source)
+    producer_binding={**proof['input']['producer'],'root':binding['producer_root']}
+    producer=fixed.producer(producer_binding,verify_payload=False)
+    for name,entry in producer['files'].items():verify(producer['root'],name,entry)
+    return CertifiedBank(root=producer['root'],files=producer['files'],producer_source_sha=fixed.PRODUCER_SHA,
+        producer_input_sha256=fixed.PRODUCER_INPUT,manifest_sha256=fixed.PRODUCER_MANIFEST,
+        prior_cost={'original_failed_b05':producer['summary']['bill'],'new_full_reader':proof['summary']['bill'],
+                    'original_native_exit_code':2,'prior_unmetered_support':'unknown_not_zero'},
+        certification={'reader':binding['reader'],'status':fixed.STATUS,'original_native_exit_code':2})
+
+
+def selected_investment(value):
+    limits=investment(value)
+    if limits!={'cpu_seconds':28800,'gpu_child_seconds':14400,'wall_seconds':57600,'disk_bytes':6442450944}:
+        raise ValueError('exact selected complete B07 consumer limits required')
+    return limits
+
+
+def disk_scope(binding,source,out,producer_root):
+    """Published paths plus the actually admitted snapshot/output chosen at launch."""
+    disk=binding['disk_scope']
+    if (set(disk)!={'producer_root','reader_root','own_scratch','include_current_source_snapshot','shared_interpreter_copied'}
+        or disk['include_current_source_snapshot'] is not True or disk['shared_interpreter_copied'] is not False
+        or disk['producer_root']!=producer_root or disk['reader_root']!=binding['bank']['reader']['root']):
+        raise ValueError('one explicit staged bank/compact proof and actual source/output disk scope')
+    for name in ('producer_root','reader_root','own_scratch'):
+        p=Path(disk[name])
+        if not p.is_absolute() or str(p.resolve())!=disk[name]:raise ValueError('absolute canonical deployed disk roots')
+    bank=Path(producer_root);proof=Path(disk['reader_root'])
+    if bank not in proof.parents:raise ValueError('compact reader proof must be within the one bank staging root')
+    if Path(out).resolve() in (bank,Path(source).resolve()):raise ValueError('exclusive actual output distinct from bank/source')
+    return {'roots':list(dict.fromkeys([str(Path(source).resolve()),str(Path(out).resolve()),producer_root,disk['own_scratch']])),
+            'own_scratch':disk['own_scratch'],'published_scope':disk}
+
+
+def executable_binding(binding,source):
+    from experiments.candidates.typed_joint_skill_decision.b07_fixed_bank.contract import sources
+    sources(binding['executable_sources'],source,consumer_stage=True)
 
 
 def investment(value):

@@ -1,0 +1,113 @@
+{
+  "core_pattern": "|/wsl-capture-crash %t %E %p %s",
+  "dump_directory": "/mnt/c/Users/fires/AppData/Local/Temp/wsl-crashes",
+  "dump_directory_exists": true,
+  "dump_entries": [
+    {
+      "allocated_bytes": 1117855744,
+      "bytes": 1117855744,
+      "is_file": true,
+      "is_symlink": false,
+      "mtime_ns": 1790940314916468000,
+      "name": "wsl-crash-1790940309-517959-_home_fires_.omp_puppeteer_chrome_linux-150.0.7871.24_chrome-linux64_chrome-5.dmp"
+    },
+    {
+      "allocated_bytes": 1118347264,
+      "bytes": 1118347264,
+      "is_file": true,
+      "is_symlink": false,
+      "mtime_ns": 1790940359108285400,
+      "name": "wsl-crash-1790940353-518123-_home_fires_.omp_puppeteer_chrome_linux-150.0.7871.24_chrome-linux64_chrome-5.dmp"
+    },
+    {
+      "allocated_bytes": 1117757440,
+      "bytes": 1117757440,
+      "is_file": true,
+      "is_symlink": false,
+      "mtime_ns": 1790940458037337400,
+      "name": "wsl-crash-1790940397-518257-_home_fires_.omp_puppeteer_chrome_linux-150.0.7871.24_chrome-linux64_chrome-5.dmp"
+    },
+    {
+      "allocated_bytes": 24395776,
+      "bytes": 24395776,
+      "is_file": true,
+      "is_symlink": false,
+      "mtime_ns": 1790952416985069200,
+      "name": "wsl-crash-1790952417-559105-_usr_bin_python3.12-6.dmp"
+    },
+    {
+      "allocated_bytes": 24395776,
+      "bytes": 24395776,
+      "is_file": true,
+      "is_symlink": false,
+      "mtime_ns": 1790952468687739500,
+      "name": "wsl-crash-1790952468-560428-_usr_bin_python3.12-6.dmp"
+    },
+    {
+      "allocated_bytes": 24395776,
+      "bytes": 24395776,
+      "is_file": true,
+      "is_symlink": false,
+      "mtime_ns": 1790954565377906400,
+      "name": "wsl-crash-1790954564-571680-_usr_bin_python3.12-6.dmp"
+    },
+    {
+      "allocated_bytes": 24395776,
+      "bytes": 24395776,
+      "is_file": true,
+      "is_symlink": false,
+      "mtime_ns": 1790954571915121600,
+      "name": "wsl-crash-1790954571-571773-_usr_bin_python3.12-6.dmp"
+    },
+    {
+      "allocated_bytes": 24395776,
+      "bytes": 24395776,
+      "is_file": true,
+      "is_symlink": false,
+      "mtime_ns": 1790956818646405800,
+      "name": "wsl-crash-1790956818-586230-_usr_bin_python3.12-6.dmp"
+    },
+    {
+      "allocated_bytes": 24395776,
+      "bytes": 24395776,
+      "is_file": true,
+      "is_symlink": false,
+      "mtime_ns": 1790957470533086000,
+      "name": "wsl-crash-1790957470-590227-_usr_bin_python3.12-6.dmp"
+    },
+    {
+      "allocated_bytes": 24395776,
+      "bytes": 24395776,
+      "is_file": true,
+      "is_symlink": false,
+      "mtime_ns": 1790957477966646100,
+      "name": "wsl-crash-1790957478-590399-_usr_bin_python3.12-6.dmp"
+    }
+  ],
+  "host": "Jacob",
+  "metadata_cpu_seconds": 0.074529856,
+  "project_volume_available_bytes": 744323788800,
+  "scientific_calls": 0,
+  "scope": "preparation baseline only; no fresh node admission or hard external-dump ceiling",
+  "scopes": [
+    {
+      "allocated_bytes": 343310336,
+      "exists": true,
+      "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b05_data_bank_a01"
+    },
+    {
+      "allocated_bytes": 48750592,
+      "exists": true,
+      "path": "/home/fires/hmasd-wsl/temp/directions/typed_joint_skill_decision/b07-data-reference"
+    },
+    {
+      "allocated_bytes": 0,
+      "exists": false,
+      "path": "/home/fires/hmasd-wsl/temp/directions/typed_joint_skill_decision/b07-fixed-bank"
+    }
+  ],
+  "selected_local_normal_bytes": 4294967296,
+  "selected_reader_abnormal_reserve_bytes": 2147483648,
+  "utc": "2026-10-02T16:21:12.606518+00:00",
+  "windows_volume_available_bytes": 370167484416
+}

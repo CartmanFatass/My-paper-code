@@ -4787,3 +4787,67 @@ internal/source/count/witness bindings and all producer bank shards actually use
 Large reader diagnostics remain canonical locally, with their digests retained in
 both child and full manifests. A bare success field is insufficient. This preserves
 the proposed compact remote evidence scope and does not regenerate physics.
+
+DM implementation inspection found the prepared consumer's old `disk_roots` input
+could not bind an as-yet uncreated launcher snapshot. The corrected input declares
+`disk_scope` with `include_current_source_snapshot:true`, rather than guessing a
+snapshot id. After actual admission/source/output identity checks, it derives and
+bills that exact source/output plus one producer/proof root and scratch. Remote
+staging is `/home/wu/hmasd-inputs/typed_joint_skill_decision-b07-a01`, with compact
+proof in its `validation/` child and scratch
+`/home/wu/projects/HMASD/temp/directions/typed_joint_skill_decision/b07-consumer`.
+Both parent and actual children recheck this scope; proof outside the counted input
+root refuses. Reader input paths resolve explicitly against the admitted source,
+so original local-reader provenance survives storage relocation without embedding
+an unknowable future snapshot path. These are executable binding corrections,
+with unchanged science, selected limits and single-copy transport price.
+
+<a id="b07-engineering-acceptance"></a>
+### Exact implementation, original checks and engineering acceptance
+
+The bounded Implementer returned the new six-file `b07_fixed_bank` package,
+the narrow B06 parent/worker/complete-reader adapter and matching tests. Frozen
+B04/B05/upstream science and original inputs remain unchanged. It used no result
+launch, actual bank reconstruction, model/native/CUDA query or scientific child.
+The [complete original six check records](../../../../runs/typed_joint_skill_decision/b07_source/checks.json)
+preserve commands, stdout, costs and both initial stale-test expectation failures.
+Subsequent suites passed99, then102; after only the final B07 parent/receipt identity
+changes, the B07 subset passed34. The selected mock rebuild/old-helper checks passed5;
+source parsing and all frozen pins passed. Mock rebuild used128 callbacks, zero real
+physics. Metered wrappers total34.343533321CPU-s/31.208295724wall-s. Batch5's raw
+−1.734723475976807e-18 child-CPU subtraction roundoff is retained and is not negative
+compute. Scratch teardown completed; startup and other support remain unmetered.
+
+Independent engineering Reviewer `/root/dm_decision_assistance/b07_identity_engineering_review`
+(actual Astra/high) inspected the real diff, final B07 input and both original102/34
+receipts. Its [complete unedited2193-byte answer](../../../../runs/typed_joint_skill_decision/b07_source/engineering-review.json),
+SHA256 `ddbb7cc65c5cadcb075c8f6f8429c167e9e497586f433342c065ac2d175a49a1`,
+reports **no material engineering finding; no repair requested**. It checked exact
+self-argmax/three-pair physical reading, full-versus-compact proof, actual child
+input/source/scope gates, lawful information boundaries, paid ordinary authority,
+separate static quantities and preservation of the original complete reading.
+Its source-only check paid.015742381CPU-s; it ran no tests or effects. Actual
+process/limit behavior, full physical reconstruction and CUDA feasibility remain
+unverified by this preparation; original runtime/dump risks are unchanged.
+
+I read the diff/source, original check outputs, review and final input, and accept
+this implementation within the selected L0. DM's [actual byte-binding check](../../../../runs/typed_joint_skill_decision/b07_source/input-binding-check.json)
+verified all original failed B05 artifact bytes/native exit2, the258 bank shards/
+321,771,896payloadB, source maps and staged old references with0science calls,
+1.497017467CPU-s/2.066091255wall-s. Separate DM AST/hash/diff checking paid about
+.035799CPU-s. The committed [B07 reader input](B07_READER_INPUT.json) is15,541bytes,
+SHA256 `da2cce0fb6de823aa273c6375d6fae8f4a38cf60286aefefb2cbf46651a3f246`.
+It explicitly binds this fixed producer, exact old failure, full reader source,
+runtime, reference relocation and selected limits. No future reader-success record
+or consumer input digest has been invented; consumer binding follows real terminal
+success and canonical full-byte reading, under the already selected complete purchase.
+
+The local [pre-execution storage baseline](../../../../runs/typed_joint_skill_decision/b07_source/local-storage-before.json)
+records existing external WSL dumps without attributing or deleting them, canonical
+B05 scope343,310,336allocatedB and temporary reference48,750,592allocatedB.
+Its.074529856CPU-s metadata read is not fresh node admission or a hard dump bound.
+Exact original-check preservation paid.020345744CPU-s, engineering-answer preservation
+.020145424CPU-s and input preparation.002442288CPU-s; other extraction/writing/tool
+tails remain unknown. All preparation remains separate from the selected execution
+caps and from previous direction costs. Next is publication of these exact inputs,
+fresh actual local admission and the one new full reader, with same-handle observation.

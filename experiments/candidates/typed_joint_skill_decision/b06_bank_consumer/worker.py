@@ -1,4 +1,4 @@
-"""Lazy frozen scientific adapters. Real child certification receipt is still unbound."""
+"""Lazy frozen scientific adapters bound to the admitted B07 complete investment."""
 from __future__ import annotations
 import argparse
 import contextlib
@@ -42,11 +42,43 @@ def checked_context(request):
     if launch["sha"] != parent["launch_sha"] or launch["command_sha256"] != parent["admission"]["command_sha256"]:
         raise RuntimeError("child launcher/source identity mismatch")
     c.scientific_binding(parent["source_binding"], ROOT)
-    c.investment(parent["investment"])
-    if request["job"]["stage"] == "cold" and any(k in request for k in ("bank", "fresh", "endpoints", "commitments")):
+    c.selected_investment(parent["investment"])
+    if request["job"]["stage"] == "cold" and any(k in request for k in ("bank", "fresh", "endpoints", "commitments", "inherited_files", "receipt", "labels")):
         raise ValueError("cold request must contain only legal world/constants/checkpoint and effect accounting")
-    # No production passing receipt yet. Cannot bypass by placing mock fields in a file.
-    raise c.PendingCertification("B06 child receipt binding to published final B05 read.read remains pending")
+    job=request['job'];expected=next((j for j in c.jobs() if j['id']==job['id']),None)
+    if expected is None:raise ValueError('undeclared complete-package job')
+    if expected['stage']=='fit':expected['new_stream']=job['id'] in ('fit-R1000s0','fit-R4000s1')
+    if job!=expected:raise ValueError('original complete-package job fields changed')
+    fields={'parent','job','original_input','prior_parent_cpu_seconds'}
+    fields|={'fit':{'bank','initial_hashes'},'endpoint':{'bank','assets','final_seal','inherited_files'},
+             'cold':{'checkpoint_path','checkpoint_sha256'},'reader':{'bank','assets','cases','inherited_files'}}[job['stage']]
+    if set(request)!=fields:raise ValueError('exact legal stage request; no hidden bank/label/receipt payload')
+    # Input path/digest is an identity, not a label-bearing bank or receipt payload.
+    # Recheck compact proof on every actual exec, with no producer or reader raw replay.
+    binding=c.bound_json(parent['consumer_input_path'],parent['consumer_input_sha256'])
+    c.executable_binding(binding,ROOT)
+    c.scientific_binding(binding,ROOT)
+    limits=c.selected_investment(binding['investment'])
+    if binding['investment']!=parent['investment'] or limits!=parent['deployment']['limits']:
+        raise ValueError('child selected investment/input differs from admitted parent')
+    from experiments.candidates.typed_joint_skill_decision.b07_fixed_bank import contract as fixed,read
+    proof=read.receipt(binding['bank']['reader'],ROOT)
+    producer=fixed.producer({**proof['input']['producer'],'root':binding['bank']['producer_root']},verify_payload=False)
+    disk=c.disk_scope(binding,ROOT,parent['out'],producer['root'])
+    if parent['deployment']['disk_roots']!=disk['roots']:raise ValueError('child actual deployed disk scope differs from parent')
+    stage=request['job']['stage']
+    if stage not in ('fit','endpoint','cold','reader'):raise ValueError('unknown admitted stage')
+    if stage!='cold':
+        bank=request['bank']
+        expected={k:v for k,v in producer['files'].items() if stage!='fit' or k.startswith('raw/bank/train/')}
+        if (bank['files']!=expected or bank['root']!=producer['root']
+            or bank['producer_source_sha']!=fixed.PRODUCER_SHA or bank['producer_input_sha256']!=fixed.PRODUCER_INPUT
+            or bank['manifest_sha256']!=fixed.PRODUCER_MANIFEST or bank['certification']['reader']!=binding['bank']['reader']):
+            raise ValueError('actual child train/full bank proof identity mismatch')
+    original=c.scientific_binding(binding,ROOT)
+    if request['original_input']!=original:raise ValueError('child scientific input bytes changed')
+    return proof
+
 
 
 class Wire:
@@ -162,7 +194,8 @@ def scientific_stage(request, store, wire):
             fresh = bank_view(request["bank"], "fresh")
             view = bank.TrainingBank(train)  # Seventh original full16000 load, never optimized.
             cases = {(row["world"], row["arm"]): row for row in request["cases"]}
-            summary = reader.complete(store, train, view, fresh, request["assets"], cases, diagnostics)
+            from .reader import complete
+            summary = complete(store, train, view, fresh, request["assets"], cases, diagnostics)
             return {"summary": summary, "diagnostics": {"path": diagnostics.relative, "count": len(diagnostics)}}
         finally:
             diagnostics.close()
@@ -177,7 +210,7 @@ def main(argv=None):
     parser.add_argument("--write-fd", required=True, type=int)
     args = parser.parse_args(argv)
     request = c.bound_json(args.request, args.request_sha256)
-    checked_context(request)  # Currently always refuses before scientific imports/effects.
+    checked_context(request)  # Every exec rechecks actual input/source/compact witnessed validation.
     c.threads()
     shared = billing.Shared(request["parent"]["counter_path"])
     bill = billing.Bill(shared, request["parent"]["deployment"], child=True,

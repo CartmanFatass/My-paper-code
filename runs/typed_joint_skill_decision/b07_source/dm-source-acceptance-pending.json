@@ -1,0 +1,92 @@
+{
+  "ast_and_hash_cpu_seconds": 0.03550471400000001,
+  "files": [
+    {
+      "bytes": 76,
+      "path": "experiments/candidates/typed_joint_skill_decision/b07_fixed_bank/__init__.py",
+      "sha256": "8da87e0c47800bae776ce71c14139f841346d2517d1dab927ac41f4c7d7ac6a5"
+    },
+    {
+      "bytes": 8820,
+      "path": "experiments/candidates/typed_joint_skill_decision/b07_fixed_bank/contract.py",
+      "sha256": "3882b01aa16106a94d6e5f781297685a9ffe74afec1e95048965d7f2842442b4"
+    },
+    {
+      "bytes": 7504,
+      "path": "experiments/candidates/typed_joint_skill_decision/b07_fixed_bank/data.py",
+      "sha256": "d4e6d62e53f4886bc18d4702119e04446ff2b3d118c566d8224b1b1c56664ec3"
+    },
+    {
+      "bytes": 2873,
+      "path": "experiments/candidates/typed_joint_skill_decision/b07_fixed_bank/evidence.py",
+      "sha256": "8d87b4b74563ea15c6a011302f359aab06c7c6b72c53cccbd645ee3dbe487adb"
+    },
+    {
+      "bytes": 10718,
+      "path": "experiments/candidates/typed_joint_skill_decision/b07_fixed_bank/read.py",
+      "sha256": "a18142161b14c4819e0e5808f581cc3d75411693fd8147398149ebff4fcd7303"
+    },
+    {
+      "bytes": 23468,
+      "path": "experiments/candidates/typed_joint_skill_decision/b07_fixed_bank/run.py",
+      "sha256": "d7ce3ad11ab26bbfe579e287874d2aa8071569d1a24c914e0f120ded1b20a0a8"
+    },
+    {
+      "bytes": 88,
+      "path": "experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/__init__.py",
+      "sha256": "f73e07b0aaea41546bf0aa98c10a99c26a436d845dc68871514a8cd51faa214a"
+    },
+    {
+      "bytes": 7983,
+      "path": "experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/billing.py",
+      "sha256": "5373b74e697c8504022320ca85aadd05727d2eab7dfc5c2248e95bbecfa2137e"
+    },
+    {
+      "bytes": 2655,
+      "path": "experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/commitment.py",
+      "sha256": "fcbb581e354e37d7ad6d19f62b902d7115b722762ac71be1a52903bfdef652a7"
+    },
+    {
+      "bytes": 12731,
+      "path": "experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/contract.py",
+      "sha256": "70e68bc4df90ae16ba5370a8d7a73981e88901babacaaf8f98ebd6546392339d"
+    },
+    {
+      "bytes": 7482,
+      "path": "experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/evidence.py",
+      "sha256": "5f3b463be7774f9dd589fad18b801d435be71f23de50395ec9c795e99bfa9ddd"
+    },
+    {
+      "bytes": 15999,
+      "path": "experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/reader.py",
+      "sha256": "96bfeb1b5a8c26710cce3eb4b0f5e887cfc687b90208bd16b46dc209ebb3b6eb"
+    },
+    {
+      "bytes": 20026,
+      "path": "experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/run.py",
+      "sha256": "625aa9d0e78f29953ddc7059e4675f2cf074e1a70bef4904b1d3140863bbb527"
+    },
+    {
+      "bytes": 13373,
+      "path": "experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/worker.py",
+      "sha256": "33b88af6fcbae899c5611a945e249e7ff0b86ad88e92bde78c486813930d250a"
+    },
+    {
+      "bytes": 20150,
+      "path": "tests/experiments/candidates/typed_joint_skill_decision/b07_fixed_bank/test_fixed.py",
+      "sha256": "675e717bfd6c6f880e42d6df4ded3ef3dd73e5f79b9ee41c97632872c3a93ed4"
+    },
+    {
+      "bytes": 30599,
+      "path": "tests/experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/test_consumer.py",
+      "sha256": "c58dd50b71c876017aae25b83a5c96f30b18a8a3c387174099964ab6627dc5e1"
+    },
+    {
+      "bytes": 9795,
+      "path": "tests/experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/test_fixed_reader.py",
+      "sha256": "c0690a52b7a97d46cbed10692a255565f9d00225f76328ec25d0e5aebbfd0040"
+    }
+  ],
+  "scientific_calls": 0,
+  "status": "syntax_and_diff_clean_review_pending"
+}

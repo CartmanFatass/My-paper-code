@@ -1,0 +1,29 @@
+{
+  "bound_bank_bytes": 321771896,
+  "bound_bank_shards": 258,
+  "cpu_seconds": 1.497017467,
+  "executable_sources": {
+    "experiments/candidates/typed_joint_skill_decision/b05_data_bank/__init__.py": "65a0fd28b3c570530f5f2f7925bbd6c160290ac9da27da648dcb4d832e9276a7",
+    "experiments/candidates/typed_joint_skill_decision/b05_data_bank/contract.py": "24bce02b7a7bc4598145e41de3c7da0a3968db858b5e56da2f1a45b57e3741d3",
+    "experiments/candidates/typed_joint_skill_decision/b05_data_bank/data.py": "ed071814f2a64470072e6eb9d99492889f75f441e245c528399035d76e3a8111",
+    "experiments/candidates/typed_joint_skill_decision/b05_data_bank/evidence.py": "7f822526c643034b789d892da767a542280bce92eb287550d270c55c6c5868e8",
+    "experiments/candidates/typed_joint_skill_decision/b05_data_bank/read.py": "1b9e1d6171b69a67a0bc59e291469d9ebb2f2a867783692d952197f870ba037a",
+    "experiments/candidates/typed_joint_skill_decision/b05_data_bank/run.py": "747e0461f1c0d6b1a5f45ac3eafae44b989ef41ef1fdf97783066fe4399208a5",
+    "experiments/candidates/typed_joint_skill_decision/b07_fixed_bank/__init__.py": "8da87e0c47800bae776ce71c14139f841346d2517d1dab927ac41f4c7d7ac6a5",
+    "experiments/candidates/typed_joint_skill_decision/b07_fixed_bank/contract.py": "3882b01aa16106a94d6e5f781297685a9ffe74afec1e95048965d7f2842442b4",
+    "experiments/candidates/typed_joint_skill_decision/b07_fixed_bank/data.py": "d4e6d62e53f4886bc18d4702119e04446ff2b3d118c566d8224b1b1c56664ec3",
+    "experiments/candidates/typed_joint_skill_decision/b07_fixed_bank/evidence.py": "8d87b4b74563ea15c6a011302f359aab06c7c6b72c53cccbd645ee3dbe487adb",
+    "experiments/candidates/typed_joint_skill_decision/b07_fixed_bank/read.py": "a18142161b14c4819e0e5808f581cc3d75411693fd8147398149ebff4fcd7303",
+    "experiments/candidates/typed_joint_skill_decision/b07_fixed_bank/run.py": "d7ce3ad11ab26bbfe579e287874d2aa8071569d1a24c914e0f120ded1b20a0a8"
+  },
+  "input_bytes": 15541,
+  "input_path": "docs/research/candidates/typed_joint_skill_decision/B07_READER_INPUT.json",
+  "input_sha256": "da2cce0fb6de823aa273c6375d6fae8f4a38cf60286aefefb2cbf46651a3f246",
+  "numeric_imports": [],
+  "original_producer_exit_code": 2,
+  "producer_source_sha": "c271c7370c6948b06f0a4a6fd783eddff0d8731a",
+  "scientific_calls": 0,
+  "status": "passed_actual_byte_binding_only",
+  "support": "hash/schema/unchanged original terminal verification only; no new bank reconstruction or runtime health claim",
+  "wall_seconds": 2.0660912549938075
+}
