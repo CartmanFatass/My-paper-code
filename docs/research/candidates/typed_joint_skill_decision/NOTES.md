@@ -4142,3 +4142,559 @@ Retained output grew343306240→343310336allocatedB including the cleanup receip
 Cleanup preview cost0.000539711parent+0.580131childCPU-s. Apply/removal/initial metadata cost0.019863903parent+1.325004childCPU-s through its final recorded sample, including the source collector's1.011271childCPU-s and both process scans; final record/measurement tails are not separately metered. Post-removal artifact hashing paid0.741104011CPU-s/1.449396845wall-s,0scientific calls. Other final prose/Git/support remains unmetered rather than free. These support amounts supplement the already recorded B05 acquisition/partial reader and B06 preparation bills; they are not new labels, fits, model calls or another scientific reader.
 
 The [owner-requested existing handoff](HANDOFF_20261002_DECISION_ASSISTANCE.md) is now updated to this terminal boundary. There is no live B05 producer/reader/observer or uncollected terminal event, no certified bank and no authorized B06 execution. This closes the selected B05 operation and bounded B06 preparation, not the broader decision-assistance responsibility or original unanswered learning question. Root is considering a separate explicit use/versioning of the complete acquisition; no new reconstruction, epsilon/tie change, label splice, fit or runtime probe is selected by this closure. A future choice must account for teacher-index effects on best-plus15 sampling and the original online Raw8J/RawJ-to-bank identity checks, rather than make the current failed certification pass by changing its reading.
+
+<a id="b07-fixed-data-proposed-contract"></a>
+## 2026-10-02 — B07 proposed fixed-data learning comparison: design/investment only
+
+Successor native DM `/root/dm_decision_assistance` now owns the enduring question and all
+typed direction paths, including the returned B06 preparation. Root is
+`01a0ef2b-a391-7693-a748-60e24be246ae`; the launch lead remains exactly
+`Codex DM (native child)`. This is successor responsibility after all old operations
+closed, not recovery of an accepted operation. Root assigned this bounded design and
+one independent scientific review. **No new physical reader, model/fit/native query,
+health probe or consumer launch is selected by this entry.** The source inspection and
+saved-record arithmetic below buy no new scientific observation. B07 names the complete
+prospective investment, not another direction or a renamed successful B05.
+
+I read the complete total/startup handoff, this direction's terminal handoff, the S7/B06
+handoff, both October 2 investment archives, the original B04 selection and its complete
+15,555-byte critic answer, B05 contract/terminal evidence, and both original B06 engineering
+answers (including the missed admission defect). Published main was `c3a31d403` at first
+fetch and `1ef16a5dc` at this entry. Current [topic 4](../../RESEARCH.md#learning-representation-finite-data)
+separates R's conditional capability, N's training/fresh gap, the weaker Laya fit,
+within-world ranking from pooled error, and B05 technical missingness. That evidence
+supports retaining a finite learning question with Raw8J/RawJ/P, while ruling out a
+shared learning-failure diagnosis or another tiny eight-menu residual purchase.
+[Topic 8](../../RESEARCH.md#structural-research-background) makes the scope explicit:
+this changes the finite learner's use of a fixed lawful joint-action menu and experience,
+not information rights, teammate learning or the physical policy class. No novelty,
+symmetry, universal-runtime-health or scaling-law claim is proposed.
+
+### Question, prediction and complete comparison
+
+The contribution sought is empirical understanding and a possibly reusable approximation
+capability: with a fixed optimization budget, does spreading experience across more worlds
+improve complete-menu selection on fresh worlds, and does any resulting capability have
+native service or computation value? The strongest ordinary explanation remains that a
+small number of numerical queries or full ordinary search is better and cheaper. A learned
+static approximation need not beat its teacher to be a capability, but it cannot be called
+a useful deployment merely because it saves static queries.
+
+Retain the original [B04 input](B04_INPUT.json), SHA256
+`000588aa756405e25e9e3dbebec99b95927277b6a85ee38275947f322f4a12a3`, and
+[resolved original scientific contract](#b04-independent-selection), except for the
+explicit data-version/reader and deployment changes below. Six R205441 final assets use
+nested first 1,000/4,000/16,000 worlds of 109400000–109415999, two streams, 4,096
+updates each, 32 worlds/update and exact producer-best plus 15 different uniformly
+sampled negatives, sorted by original raw index. AdamW, temperature .02, full-menu
+chunk64, float32, TF32-off, architecture/features and original source identities remain.
+No native-return label, initial-position scorer feature, label feature, candidate
+canonicalization, pretraining, alternative loss or extra fit is added.
+
+Fit order remains R1000s0, R4000s1, R16000s0, R1000s1, R4000s0, R16000s1.
+Stream0/1 model seeds are 109491001/2, order seeds 109492001/2, subset seeds
+109493001/2; each size restarts its declared generators and shares the stream's exact
+initializer. The common training probe is worlds 109400000–109400511. All six finals
+seal before fresh evaluation on 109420000–109420511. The first 128 fresh worlds have
+all nine programs: six students plus Raw8J, RawJ and P, rotated in original arm order.
+Every main program has a fresh cold child and full H500; the original 16 audits remain.
+One choice at t0 and the unchanged closed-loop low-level executor remain the policy
+interface; planning latency is measured separately and does not advance H500.
+
+The positive prediction is lower fresh fixed-bank static regret at larger N in both
+streams, accompanied by actual update/parameter movement and readable probe/exposure
+data. Each fit has 131,072 world presentations: mean repetition 131.072/32.768/8.192
+passes, with fewer opportunities to sample each nonwinner as N grows. This is a
+diversity/repetition allocation comparison at fixed updates, not data amount at equal
+convergence. Two streams on one nested bank are optimization repeats, not independent
+banks or confirmation. The 512-world common probe is not the whole training-bank fit.
+Retain target entropy, CE−H(q), every world's visits, candidate exposure including zero,
+full probe/fresh errors/ranks and complete curves. No failed point becomes zero or is
+replaced; no extra epoch, seed, 64k bank or architecture rescue follows automatically.
+
+### Immutable data and exactly one new reader
+
+The training truth is the immutable **B05 producer version**, source
+`c271c7370c6948b06f0a4a6fd783eddff0d8731a`, input SHA256
+`dd2bf2e7f54b0070587529559a1963438fa62fb8fb9bfe7db46202932e303394`.
+Its original manifest SHA256 is
+`f18dcef40b320755e5b3bdfd94c4cc5be7869a7b549f58e0eccbe4090d6886e8`.
+All 258 shards contain 16,512 worlds and 2,844,367 labels, with M133–210.
+The bank payload is exactly 321,771,896 logical bytes (311,662,606 train,
+10,109,290 fresh), while the complete original failed operation binds 2,429 artifacts
+and 337,184,206 logical bytes. Its summary SHA256
+`90a0da52143b132ca3a718a77df8c549ae195e820574f45854c39399b3f4b221`, original
+exit2, partial reader and terminal reading remain unchanged. A later usable-data result
+must never be written as `complete_compatible_bank` in that old record.
+
+Proposed new output `runs/typed_joint_skill_decision/b07_fixed_bank_reader_a01/`
+would be one new admitted reader operation, 258 fresh sequential CPU children of
+64 worlds, **zero producer calls**. It reconstructs every world/raw pool and scores
+every candidate once, even the 631 previously attempted worlds. That approximately
+3.8% repeated coverage avoids splicing progress from a failed reader; it is not an old
+operation retry. No repeated B05 permutation check is included; reuse its 16 bound
+observations. No fresh-bank result is used to alter the already fixed learner.
+
+The full reader must establish:
+
+- Exact bytes/digests, schema/dtypes/shapes, source/input and complete chronological
+  world addresses; finite full score vectors; each stored best strictly equals the
+  exact argmax of **its own stored vector**, ties lower original raw index.
+- Exact reset/RNG/agent/discrete identity, initial/users/BS geometry, full ordered raw
+  layouts, outcome-free features and construction metadata against independently rebuilt
+  inputs. Integer/string/bool/type identities remain exact. Every physical floating
+  field keeps the original finite `atol=rtol=1e-10`, `equal_nan=False` comparison.
+- Each rebuilt score vector determines its own strict argmax by the same lower-index
+  rule. Its equality to the producer's winner is **reported, not required**. Preserve
+  both winners, exact-max sets/margins, complete J/C/frontend vectors, all numeric flags,
+  cross-evaluated static values and original row identities. No near-tie epsilon,
+  relabeling, sorting of layouts, unordered-set equivalence or omitted mismatch.
+- Complete saved-data comparisons for the original 2,501 B04 worlds/430,980 labels,
+  with exact geometry/RNG/ordered/discrete checks and original physical tolerance,
+  but separately report old/producer/rebuild winner differences. Compare original
+  saved B04 and B05 fields as well as the rebuilt fields; these extra comparisons of
+  saved values add no static calls. The incomplete old world 109402501 stays excluded
+  from this complete-world denominator, with its 165/172 saved labels preserved.
+- Complete attempt/completion, shard, diagnostics and original-terminal bindings in
+  its own new summary/manifest. A distinct fixed-producer-version validation result
+  references B05's exit2; it does not convert that exit or claim original certification.
+
+New reading is independent reconstruction using the pinned radio implementation,
+not independent physical laws. All source/identity/nonfinite/physical failures stop
+the new operation with partial evidence. A winner difference satisfying the exact
+self-argmax checks is the prospectively declared observation, not a failure to hide.
+For score vectors differing by maximum δ, cross-selected static regret is at most
+2δ by algebra; that bound says nothing about best+15 exposure, matching or H500.
+The producer winner determines training inclusion and the candidate-subset RNG map
+at every presentation. A one-ULP label change can therefore change inputs to learning;
+no equivalence to a hypothetical B04-trained model will be asserted.
+
+### Consumer/reader source delta and retained authority
+
+Reuse B06 preparation at `8ee71c5aff93abc22aecdb49f1da3a4d38667f6d`, with B04
+scientific source `b19508a5c2825359e66a36b4fdc1db68b60cc809` and its original modules
+and seven physical upstream hashes kept explicit. This proposal supplies no executable
+passing record today. A new B07 input/source publication would separately bind original
+science, actual B05 producer bytes/failed bill, the new reader source/input/output and
+the actual consumer/checkpoints. The prospective source delta is confined to:
+
+1. A data-only full-reader adapter under `b07_fixed_bank/`, reusing unchanged B05 shard,
+   physical comparison and failure-accounting methods, but with no producer path, no
+   repeated permutation calls and the new winner-comparison semantics above. Original
+   B05 `data.py`/`read.py` and all old outputs remain unchanged.
+2. B06 parent `contract.certify_bank`, worker `checked_context`, explicit input/summary
+   binding and billing: require the real new full-read result at its own source/digest,
+   complete immutable producer identity and actual old cost instead of the impossible
+   old `complete_compatible_bank` premise. Bind every child to the admitted parent and
+   selected complete package. A boolean or synthetic certificate cannot bypass this.
+   Train receives only train shard addresses; no label-bearing bank/receipt payload
+   enters cold requests. Parent/worker source and manifest checks remain mandatory.
+3. A narrow B06 complete-reading adapter for the ordinary branch in original
+   `b04.reader.complete`, reusing the original sampling, endpoint, functional, frame,
+   audit, planner-cache and aggregation routines. Keep the old B04 strict reader
+   recoverable and unchanged; do not monkeypatch `exact()` or replace reference labels
+   to make it pass. The new composition's difference must be reviewable against the
+   original complete function; immutable B04 module hashes still hold.
+
+`b04.online.select` already makes the correct legal choice and need not change. For
+each Raw8J/RawJ case, the new reader verifies complete ordered query indices/layouts,
+query count, actual `decision.scores` equality to the recorded paid responses and
+chosen index equal to the exact argmax of **those responses**. It checks all their
+physical fields against the fixed bank at the original tolerance and all discrete
+fields exactly, then reports whether the online and fixed-bank winners differ.
+Raw8J uses its outcome-free source-index shortlist, scores and executes original rows;
+RawJ scores all M. Neither program receives a free bank label nor is forced to use an
+offline choice. P retains its complete paid query/cache-control replay, no second
+physical search or restriction of its out-of-pool decisions.
+
+The old reader's `raw_static_J` comes from the bank. The new reading must explicitly
+separate **bank J at the actually chosen row**, **online paid J at that row** and
+**matched-endpoint J**. Report matched−bank and matched−online differences separately
+where the online score exists; students have no free online raw score. The full512
+Raw8J comparison derived from bank scores remains an offline reference, not 512
+measured online deployments. Static winner differences join actual assignments,
+trajectories and user endpoints descriptively. **No counterfactual bank-winner flight
+or causal attribution of a native change to one ULP is bought.**
+
+GPU endpoint choices remain authoritative; cold student choice must exactly match its
+bound endpoint, and `world_gate`, source/weights and ordered-layout identity remain
+exact. Original CPU functional tolerances (`atol1e-6/rtol1e-5`) retain every flag and
+choice consequence without widening them; radio and position tolerances remain
+`1e-10/1e-10` and `1e-8`. All six optimizer/update/sampling traces are read, but Adam
+replay is still not bought. Full native J/C/throughput, routes, association changes,
+backhaul losses, arrival/travel, identity-specific never/always/first service,
+censored and longest gaps and outages remain mandatory, including every adverse world.
+
+These are materially changed numerical/identity semantics, so a focused engineering
+review of the actual later diff and pure/mock checks is necessary if Root selects
+implementation. The sufficient original architecture/exposure review and corrected B06
+engineering work are reused, not rerun as another pilot. No real model/physics health
+check is proposed in preparation. Full original scientific ResearchCritic advice on
+this changed purchase is requested separately below; engineering review does not replace it.
+
+### Exact prospective effects and cumulative exposure
+
+| New complete-package work | Quantity, on successful completion unless marked ceiling |
+| --- | ---: |
+| New producer / new bank labels acquired | 0 |
+| New independent bank static calls | 2,844,367 |
+| Consumer online Raw8J/RawJ/P | ≤797,440 static |
+| Consumer matched endpoints | 1,152 static |
+| Consumer native-frame verification | 585,168 static =1,168×501 |
+| Total new static | ≤4,228,127 |
+| Fits / optimizer updates / training-world presentations | 6 /24,576 /786,432 |
+| Training candidate presentations (all actual M≥16) | 12,582,912 |
+| GPU final probe+fresh / functional CPU contexts | 6,144 /6,144 |
+| Cold neural contexts / engineering contexts | 768 /16 (8 GPU+8 CPU) |
+| Total candidate presentations including readers | ≤15,471,824 |
+| Main H500 / original full audits / native transitions | 1,152 /16 /584,000 |
+| Direct reader children / consumer children | 258 /1,160 sequential |
+| Consumer GPU children | 775: 6 fits+1 endpoint+768 cold |
+| New hosts / resets / raw builds / matching calls | 18,976 /21,296 /18,048 /2,464 |
+
+Internal RF/link/routing/pathloss/frontend/SINR/reward entries remain attempted and
+completed separately; their counts are not added to static queries or CPU a second
+time. Reader contributes16,512 hosts/resets/raw streams; consumer source bills
+2,464 hosts,4,784 resets,1,536 raw builds and2,464 matches. No hidden old bank
+acquisition or reconstruction counters are filled into the consumer's zero fields.
+
+Source-only arithmetic over the bound producer-count file
+`raw/parent/shards.json.gz` (117,428 B, SHA256
+`f8a394d99fcc73d30e179b7c6526dca11f2b9023c06b9bc6486fede0585097e6`) makes the
+expected neural row count more concrete: sums M are87,851 on the common train512,
+89,058 on fresh512,22,352 on native128 and694 on engineering4. Thus unchanged full
+completion should present **14,842,708** rows:12,582,912 training +1,061,454 GPU
+endpoints +1,061,454 functional CPU +134,112 cold +2,776 engineering. This is a
+prospective consequence of saved M, not performed forwards or a new smaller allowance;
+the original15,471,824 ceiling remains. A different rebuilt menu fails exact identity,
+not a license to substitute a new denominator. The count arithmetic imported only
+stdlib and paid0.009080111 CPU-s; preceding manifest/schema arithmetic paid
+0.004944415+.002040512+.008124440 CPU-s. Ordinary tool/reading support is additional
+and incompletely metered.
+
+| Retained previous direction work | Fits / optimizer updates | Native steps | Explicit static work |
+| --- | ---: | ---: | ---: |
+| B01 complete | 6 /3,072 | 4,808,000 | 783,749 |
+| B02 complete ridge | 1 /0 gradient updates (one ridge fit) | 102,000 | 523,429 |
+| B03 fixed ordinary prefix | 0 /0 | 4,500 | 307,058 |
+| B04 failed acquisition | 0 /0 | 0 | ≥431,145 saved labels; final attempts unknown |
+| B05 complete producer+partial reader+16 checks | 0 /0 | 0 | 2,952,817 |
+| Closed JSON diagnosis / B06 pure preparation | 0 /0 | 0 | 0 |
+
+Hence the historical direction has7 started fits,3,072 gradient updates,4,914,500
+native steps and a **saved/known static floor4,998,198**, not an exact final static
+total. The B04+B05 data route alone has a floor3,383,962; every additional planned
+call above is new work. The original128,288 precursor archive queries reused by B02
+remain a separately linked ancestral cost, not silently free or double-counted as
+B02 new work. B01 separately paid1,552 full frozen encoder forwards and5,376 reader
+scorer contexts; its scorer/training presentations remain in its original bill and
+are not interchangeable units with B07 rows. No B04/B05/B06 model forward ever ran.
+Successful B07 would bring direction totals to13 fits/27,648 gradient updates/
+5,498,500 native; do not add a new ceiling to an unknown old tail and call it an exact
+grand total or upper bound.
+
+### Runtime, full cold deployment and proposed resource purchase
+
+Propose the new reader on configured `local_linux` CPython3.10.20/NumPy1.26.3,
+using the existing CPU interpreter and no Torch/CUDA/learner import. The complete
+producer bank already lives here, so only the39 original remote B04 shards
+(48,649,770 logical B) plus bound partial/compact metadata need a temporary reference
+copy, removed after this declared reader. This is the task-suitable data node;
+choosing it changes no frozen physical module or package family.
+
+Propose the consumer on configured `wsl_4070`, original GCC CPython3.10.21,
+NumPy1.26.3, Torch2.7.0+cu118, cuda:0 and the recorded GPU UUID. No runtime/profile
+upgrade, environment copy, CPU learning substitution or old operation migration.
+Fresh actual-node memory/source/ownership admission belongs to the selected launch,
+not this design. Original B04 crashed on this runtime before learning; the cause is
+unknown. Two ordinary-JSON negative replays and the pure B06 tests establish no
+real CUDA health or batch-memory result. Fresh per-fit processes and parent-death
+binding contain lifetime/failure; they are not an identified repair. Root's purchase
+must explicitly accept this remaining technical risk or decline it, without another
+open-ended health diagnostic.
+
+Six fits independently parse the entire16k TrainingBank, and the CPU reader parses it
+again:557,760,000 B arrays per materialization,3,904,320,000 B cumulatively across
+seven loads, before libraries/activations. These are neither seven simultaneous
+RSS contributions nor seven disk copies. Do not silently load only smaller prefixes.
+One sealed-fresh endpoint child and1,152 fresh cold children remain. Cold timing
+starts before spawn and ends at immutable selection-ready arrival; it includes
+imports, construction and loading the **full optimizer-containing final.pt**, host,
+candidate/features/scoring, matching and reset. Post-arrival verification is separate.
+CUDA context/allocator residence through H500 and child exit is billed for every
+GPU child even after network deletion/empty_cache. Resident scorer time, GPU phase
+time and complete GPU-child lifetime remain different observations. Sum of child
+CPU and parent CPU is counted once; record stage walls, complete batch wall, RSS
+scope, CUDA memory and source/transport/hash/readback cost where measured.
+
+Forecasts, **not measurements or currently selected limits**: new reader0.7–1.3CPUh
+anchored to B05's136.754079 reaped reader CPU-s for631 attempted worlds; full
+package roughly4–10CPUh,1–3 conservative GPU-childh and8–16 support-hour equivalents.
+Extra saved-data comparison/record costs and real consumer throughput are unmeasured.
+No sampler microbenchmark or new query is needed to make that uncertainty explicit.
+
+For Root's complete investment choice I propose these explicit new execution stops:
+reader2 aggregate CPUh/4wallh, numeric child120CPU-s/240wall-s with the original
+512MiB-parent/1GiB-child address-space plan; consumer8 aggregate CPUh/4GPU-childh/
+16wallh. Thus the new declared execution package would be at most10 aggregateCPUh,
+4GPU-childh and20 sequential wallh, plus separately recorded preparation/support.
+These are a requested finite purchase, **not a claim of authority, a throughput
+estimate or extension of B04/B05's expired limits**. Prior preparation and prior bank
+CPU are reported separately from the new execution caps and in an inclusive known
+cost field. First genuine technical/counter/resource failure ends its operation and
+dependent work; no duplicate attempt, incomplete-prefix continuation or fit replacement.
+
+Normal storage forecast retains one canonical B05 output locally (last measured
+343,310,336 allocated B); new reader output roughly0.2–0.8GiB, one~1.82GB source,
+~49MB temporary old reference and small scratch. A **proposed4GiB local normal scope**
+includes those paths and the existing local B05 root, but not every historic direction
+asset. After reader-source/reference cleanup, stage one hash-verified bank payload
+copy (~0.300GiB) plus compact validation evidence remotely for the real GPU consumer.
+One remote source~1.82GB, unique consumer output forecast0.5–2GiB and≤.25GiB temporary
+scratch give roughly2.75–4.25GiB new remote normal scope; propose6GiB normal bound.
+Keep source, canonical output, staging, scratch, shared Git hydration and existing
+old B04/core/model assets separately visible. The local canonical bank and one remote
+consumer copy coexist during consumption; never replicate it per child. Forecasts
+are approximate allocated sizes, not guarantees from compressed payload bytes.
+
+**Automatic abnormal dumps are a separate unknown price.** Original core638,087,168 B
+remains unique. The reader's prior2GiB abnormal reserve can be requested in addition
+to its4GiB normal scope; it is not observed usage or a proof that WSL's external dump
+writer obeys Linux limits. CUDA-child dump peak is not bounded by the normal6GiB or
+by known RSS: no honest finite dump ceiling has been established. The purchase would
+accept this named residual risk, retain before/after existing dump-directory metadata,
+and stop at the first failure, without changing system core settings or probing a
+crash. An available-space check at actual admission and normal output bounds cannot
+be advertised as enforcement over an external abnormal dump. Root can decline this
+risk; do not conceal it inside a nominal total disk cap.
+
+Prior paid CPU remains: B04 last-checkpoint306.264725s lower bound; core/terminal
+analysis and original support separately recorded; JSON workers142.269441s lower
+bound plus their readers/checks/cleanup; B05 last sample2,129.878646s lower bound,
+terminal reading1.166767+.000838s and record analysis1.895473s, plus all recorded
+preparation/cleanup and unmetered tails. B06 checks4.023958304CPU-s, provenance
+extraction1.591260251s and receiving-DM.553100s are preserved alongside the original
+PASS and explicit missed-defect correction. Their full receipts remain linked above;
+neither estimates nor technical closure reset any bill.
+
+### Outcomes that change the next investment
+
+My provisional recommendation is to buy this **complete bounded comparison once**
+if Root judges the stated runtime/dump risk acceptable against other questions.
+It has an unanswered finite-learning estimand, inherited positive and adverse
+representation evidence, competent ordinary references and now a concrete consumer;
+sunk cost or the desire to complete a bank is not the reason. Declining the package
+would leave technical missingness, not refute the learning question. No new Pro
+consultation is presently needed beyond one adequate focused independent critic;
+the original Oracle originals are constructive sources, not independent clearance.
+
+- Full reader passes physical/identity/self-argmax checks: usable fixed producer
+  version under this new contract only. This is no learner gain, B04 compatibility
+  result or general-runtime certificate. Reader success does not independently
+  purchase fits; Root must choose the complete package in advance.
+- Identity/nonfinite/physical check or real execution fails: preserve missingness,
+  exact failure and actual cost; no tolerance change, filter, relabel, new producer
+  or automatic retry. A partial curve is a partial observation.
+- Coherent fresh improvement in both streams: retain fixed-data/fixed-update
+  capability; judge service/tails and cold cost separately before considering use.
+  If all sizes work similarly, the smaller purchase may suffice; no64k default.
+- Good common probe but flat/high fresh regret: this coverage allocation did not
+  solve generalization for the package. Weak probe or divergent streams instead
+  limits finite fitting/optimization. Neither diagnoses a unique representation,
+  sample-size or compute cause; end automatic data expansion either way.
+- Static gain with adverse native service, row-matching consequences or cold cost:
+  retain the demonstrated approximation capability and refuse the corresponding
+  deployment inference. Occasional native wins over RawJ are preserved but do not
+  establish learned trajectory prediction from static labels.
+
+At this design boundary there is no live producer/observer and no cleanup target
+created by the design. Independent review and Root's cross-question purchase choice
+are the remaining owners of the stated decision; ordinary implementation/collection
+after a complete selected package would not acquire per-fit approval requirements.
+
+Source-check clarification before the independent answer: stdlib AST/hash inspection
+confirmed all13 B04 module digests, all7 upstream digests and both original input
+digests against the published bindings (0.002274776CPU-s, no scientific imports or
+execution). Consumer memory remains the inherited **unmeasured** forecast2–4GiB host
+RSS and2–5GiB GPU allocation, distinct from557,760,000B training arrays and the
+configured8,188MiB device capacity. No1GiB data-child address-space limit is inherited
+by CUDA children. Actual-node admission, then the unchanged batch's actual resource
+measurements, must establish feasibility; a real OOM is a retained technical failure,
+not authority for a smaller batch. The4GPU-child-hour proposal uses complete marked
+child lifetimes, not an assertion of four hours of exclusive hardware utilization.
+
+
+<a id="b07-independent-selection"></a>
+### B07 complete original independent scientific answer
+
+The dedicated ResearchCritic `/root/dm_decision_assistance/fixed_data_version_critic`
+used `fork_turns="none"`: no DM or Root conversation inheritance. It received the
+actual candidate and original evidence and reconstructed the latter first; this is
+independent-context review, not a blinded experiment. Original UUID
+`01a0fd1c-f9fe-7d11-af10-f826049fb58d`, actual `gpt-6-astra/max`, turn
+`01a0fd1c-fa37-7140-989c-597774d7b43f`. The answer was mechanically extracted from
+`event_msg.task_complete.last_agent_message`, line269 of
+`/home/fires/.codex/sessions/2026/10/02/rollout-2026-10-02T07-55-29-01a0fd1c-f9fe-7d11-af10-f826049fb58d.jsonl`,
+completed2026-10-02T15:16:14.453Z. Exact original14,166 UTF-8 bytes, SHA256
+`90303892107f9c61ee5fc98aee449572dc1750577ef4e4b416ab69badb40e3a6`.
+Reviewed proposal26,931bytes/SHA256
+`fe9cf113c68deab0f80594972e79857cdb434d4b6e96ecb5bb8dd9b8253e24bd`,
+including the source-check/memory clarification. Its selected saved-data arithmetic
+paid0.694181CPU-s; other review/support remains unknown. No scientific calls or edits.
+
+<!-- BEGIN exact B07 independent scientific review -->
+I recommend **retaining B07 and buying its complete bounded comparison once**, using the proposed reader and consumer limits, if Root accepts the explicitly stated runtime and abnormal-dump risk. The changed data contract is scientifically coherent. The latest proposal addresses the consequential consumer-reading problems I found; I have no remaining material objection to its scientific scope. This recommendation does not select or authorize execution.
+
+I reviewed [the complete B07 proposal](/home/fires/hmasd-wsl/docs/research/candidates/typed_joint_skill_decision/NOTES.md#b07-fixed-data-proposed-contract), 26,931 UTF-8 bytes, SHA256 `fe9cf113c68deab0f80594972e79857cdb434d4b6e96ecb5bb8dd9b8253e24bd`. This was a separate context without inherited DM or Root conversation. The assignment supplied the candidate contract, so this was not a blinded review. I reconstructed the original contract, source and consequential B05 evidence before reading the handoff, investment archives and earlier advice. I reuse the sufficient original architecture/exposure review.
+
+**The supported diagnosis is an exact-label compatibility failure with an unanswered learning question.**
+
+I independently checked the original remote B04 shard and the retained B05 producer shard, failed-reader journal and diagnostics for world `109400630`:
+
+- B04 stored raw50 J=`0.5460125613694843` and raw57 J=`0.5460125613694844`; its own exact winner is 57.
+- B05 stored both values as `0.5460125613694843`; its own exact lower-index winner is 50.
+- All 169 failed-world reader information records equal the B05 producer records.
+- Candidates 50 and 57 have different ordered layouts despite containing the same unordered sites.
+- The failed shard’s 19,521 recorded diagnostics contain the declared old-teacher mismatch. The original source makes that mismatch fatal.
+
+Both executions followed their own strict argmax rule. The observations establish neither an incorrect winner calculation nor a changed physical law. They also do not identify the numerical component responsible for the difference.
+
+I separately checked all 258 producer summaries against their manifest hashes and reconstructed their chronological world/count totals: 16,512 worlds, 2,844,367 labels, M133–210. Acquisition was complete. Original certification was not: nine reader shards completed; 631 worlds received label reconstruction, 630 passed old compatibility, and one failed. The remaining 1,870 old complete worlds and all 512 fresh worlds had not received the required comparison.
+
+B04’s SIGSEGV and B05’s exit2 remain different technical outcomes. Neither produced a fit, model forward or H500 result. The JSON replays and B06 mock checks supply no general runtime-health result or identified SIGSEGV repair.
+
+**Freezing B05 is a legitimate prospective scientific change, with a consequential limit.**
+
+A fixed numerical dataset can define this supervised-learning comparison without requiring every later numerical execution to reproduce its exact winning index. The appropriate requirements are the ones now declared: immutable producer bytes, complete source/world/ordered-input binding, strict internal winner consistency, unchanged physical tolerances and complete reporting of cross-execution differences.
+
+Winner identity matters here. `training.subset_indices` forces the exact best candidate into every presentation and samples the other 15 from the remaining ordered indices. Changing best can change candidate exposure and the mapping of subset draws, even when score differences are tiny. B07 therefore answers the allocation question **conditional on this fixed B05 realization**. It cannot establish equivalence to hypothetical training on B04 labels.
+
+The stated \(2\delta\) bound is correct for cross-selected static regret when complete score vectors differ by at most \(\delta\). It gives no corresponding bound on training trajectories, matching, H500 return or individual service. The proposal preserves this distinction.
+
+The change supplies no additional deployment information or control rights. Students retain their lawful outcome-free features; ordinary programs retain their paid current scoring. This is an approximation and computation-use comparison, with native consequences measured separately.
+
+**The strongest ordinary explanation remains credible, and the strongest positive remains worth testing.**
+
+The earlier primary summaries support both:
+
+- N achieved training regret around `.0005–.0008` while fresh regret remained around `.10`.
+- R generalized better than A in all three block means for coverage, but its training regret remained approximately `.0457–.0575`.
+- R−A native J was approximately `+.019857, +.023172, −.000553`; the third block retained worse service continuity, including a maximum 435-step zero-service run.
+- Ordinary static selection remained substantially stronger.
+
+These observations motivate a shared relation scorer without establishing a data bottleneck or predicting that the new endpoint interface will fit. The new R205441 model is a new target/interface package, not another observation of the old trained R.
+
+The useful positive conjecture is that broader world coverage improves a reusable approximation under fixed optimization expenditure. The simpler adverse explanation is that Raw8J or RawJ already offers better quality at lower complete cost, while sampled-negative coverage, finite fitting or cold deployment makes the student unattractive.
+
+The six fits can discriminate the allocation’s practical value. They cannot isolate data amount at convergence: repetition falls from 131.072 to 32.768 to 8.192 presentations per world, changing negative exposure simultaneously. The retained entropy-aware losses and exposure/error joins are consequential. Two streams on one nested bank remain exploratory optimization repetitions.
+
+**The consumer changes are necessary and now adequately specified.**
+
+The original `b04.reader.complete` required ordinary choices to equal the offline bank winner. It also derived `raw_static_J` from the bank and subtracted that from the runtime matched score. Leaving those meanings unchanged would undermine the new contract.
+
+B07 now addresses the relevant consequences:
+
+1. **Bind ordinary choices to actual paid evidence.** Verify complete ordered query identities/counts, `decision.scores` against those responses, and exact argmax of those responses. Comparing floating fields with the bank does not replace this decision check.
+2. **Separate the available quantities.** Raw8J/RawJ can report bank-at-chosen-row, online-raw and matched scores separately. Students have no paid online raw-static score; their matched-minus-bank quantity combines assignment and cross-execution differences. It cannot isolate a matching effect.
+3. **Keep populations and execution modes explicit.** Raw8J on the full fresh512 bank is offline arithmetic. Actual online and native comparisons cover the declared 128 worlds.
+4. **Preserve authority and source boundaries.** Stored producer best controls training; GPU endpoints control student choices; cold student choice must match its endpoint exactly. Functional CPU discrepancies retain the original tolerances, flags and choice consequences.
+5. **Preserve the complete result.** Sampling/update checks, functional scoring, P’s paid-cache control replay, matching, native frames, audits, user-specific tails and adverse worlds remain required.
+
+No counterfactual bank-winner flight is needed for this purchase. Without such flights, associations between winner differences and observed native outcomes remain descriptive.
+
+The distinct new validation result must bind the failed B05 operation and its immutable acquisition. It must not fabricate the old `complete_compatible_bank` status. The new implementation and its actual diff remain unverified; focused engineering review should cover that delta while preserving the frozen modules.
+
+**The proposed remaining quantities are internally consistent.**
+
+| Complete new work | Checked quantity |
+|---|---:|
+| Bank reconstruction | 2,844,367 static calls |
+| Consumer static ceiling | 1,383,760 |
+| Combined static ceiling | 4,228,127 |
+| Fits / updates / training-world presentations | 6 / 24,576 / 786,432 |
+| Expected neural candidate presentations | 14,842,708 |
+| Retained neural ceiling | 15,471,824 |
+| Native steps | 584,000 |
+| Reader / consumer children | 258 / 1,160 |
+| Consumer GPU children | 775 |
+
+The consumer static ceiling includes 797,440 online calls, 1,152 matched diagnostics and 585,168 native-frame reads. I independently reconstructed the expected neural count from all producer summaries: 12,582,912 training, 1,061,454 GPU endpoints, 1,061,454 functional CPU, 134,112 cold and 2,776 engineering presentations. These are prospective quantities, not completed effects.
+
+The full TrainingBank arrays occupy 557,760,000 bytes per materialization. Six fit loads plus the reader give seven materializations, not seven simultaneous memory contributions or disk copies. The proposal correctly includes full optimizer-containing checkpoint loads and CUDA-child residence through H500 and exit. Resident scoring time cannot substitute for cold service time or GPU-child lifetime.
+
+The new reader deliberately repeats approximately 3.8% of previously attempted worlds. That is reasonable containment of reconstruction complexity; it does not splice failed progress into a completed result.
+
+Previous costs remain consequential. B04 retained at least 431,145 labels and 306.264725 recorded CPU-seconds; B05 paid 2,952,817 static calls and at least 2,129.878646 CPU-seconds, with terminal, diagnostic, preparation and support work additional. I checked the B01–B03 summary counters underlying the proposal’s historical totals. The historical static floor is a lower bound, not an exact total to which a new ceiling creates an exact grand total.
+
+**The feasibility uncertainty is real but does not require a preliminary health experiment.**
+
+The requested stops—reader 2 CPUh/4 wallh and consumer 8 CPUh/4 GPU-childh/16 wallh—define a finite purchase. The 4–10 CPUh, 1–3 GPU-childh and 8–16 support-hour forecasts are not measured consumer throughput. Memory feasibility for the exact batches, complete reader throughput and real CUDA execution remain unknown.
+
+The revised storage description resolves the two-node snapshot ambiguity: local reader source/reference cleanup precedes remote consumer source staging; the canonical local bank and one remote consumer copy coexist. The proposed local and remote normal scopes are explicit.
+
+The external CUDA abnormal-dump peak remains unbounded by those normal scopes. That limitation should remain part of Root’s concrete risk decision. Neither process isolation nor available-space admission proves it away. Acceptance of that risk can support bounded exploration; declining it would be an investment decision, not evidence against learning.
+
+**The smallest worthwhile observation is the complete declared package.**
+
+A reader-only success establishes a usable fixed-data asset under the new contract and does not answer the learning question. The original six-fit allocation, strong ordinary references, complete native panel and full reading remain the smallest already-designed observation that answers the selected question without inventing a replacement study.
+
+The outcome branches should change action as follows:
+
+- **Fresh regret improves coherently in both streams:** retain the conditional allocation benefit. Native service and complete cost determine whether a concrete use deserves further consideration.
+- **All sizes perform similarly well:** the smaller training allocation may suffice; larger-data expenditure has little demonstrated value.
+- **Good common-probe performance with high or flat fresh regret:** end automatic expansion of this fixed package. The observation constrains generalization without identifying representation as its unique cause.
+- **Weak probe fit or materially divergent streams:** retain a finite-fitting limitation and actual exposure evidence. No optimizer extension or architecture repair follows automatically.
+- **Static improvement with worse native service, tails or cost:** preserve approximation capability and reject the corresponding deployment inference.
+- **Technical, physical, identity or resource failure:** retain the incomplete observation and actual cost. It is not a negative learning curve or authority to replace the failed point.
+
+Root’s prioritization is reasonable for this concrete bounded candidate. The evidence does not establish its dominance over every other project question, nor does an unanswered question by itself justify indefinite expenditure.
+
+My actual check scope was source inspection, primary summaries, all producer-summary identities/counts, selected manifest hashes, the consequential original/new failing-world records, and saved-data arithmetic. I reused the original review’s unchanged architecture/exposure and native-trajectory analysis. I did not reconstruct all bank physics, independently repeat every terminal diagnostic, compare all 2,501 old worlds, run the original reader, or execute any model, controller, fit, native episode or health probe. Four explicitly timed read-only arithmetic scripts recorded **0.694181 CPU-seconds**; other reading, wrapper and review support remains incompletely metered. No code, research record or artifact was edited.
+
+Native provenance: `/root/dm_decision_assistance/fixed_data_version_critic`; UUID `01a0fd1c-f9fe-7d11-af10-f826049fb58d`; turn `01a0fd1c-fa37-7140-989c-597774d7b43f`; actual `gpt-6-astra/max`, verified in turn-context line 9 of `/home/fires/.codex/sessions/2026/10/02/rollout-2026-10-02T07-55-29-01a0fd1c-f9fe-7d11-af10-f826049fb58d.jsonl`.
+
+**MATERIAL_DISSENT: no.** I support one complete B07 purchase under the reviewed contract and explicit risk disposition. The source-backed objections to offline winner authority and mixed raw/matched reporting are addressed in that contract; old failure meanings and remaining feasibility gaps stay intact.
+<!-- END exact B07 independent scientific review -->
+
+<a id="b07-design-disposition"></a>
+### DM response and bounded design delivery
+
+I read the entire original answer, verified its proposal digest and source-linked
+consequences, and adopt the recommendation to retain this complete B07 candidate
+for one purchase. MATERIAL_DISSENT:no. The review's decisive corrections are already
+in the reviewed contract: ordinary self-argmax is bound to paid query responses;
+bank, online raw and matched scores have distinct meanings; students do not receive
+an unbought raw-static query;512 offline Raw8J and128 online deployments are distinct;
+local and remote source snapshots are sequentially reclaimed/staged. No arm, world,
+query, counterfactual flight or extra review is added in this disposition.
+
+The judgment changed from an unresolved data-use boundary to a scientifically
+well-defined **prospective fixed-version comparison**, with exactly specified
+cross-execution checks and complete consumer price. Original B05 remains exit2 and
+uncertified under its old contract; B04's SIGSEGV cause and real CUDA feasibility
+remain unresolved. No empirical learning prediction has been supported or refuted
+by this design work. The broad assistance question remains active; its next
+investment is this finite coverage/repetition comparison, not runtime-cause hunting
+or a requirement to force an ordinary-control win.
+
+Return the source-pinned full proposal and this unfiltered independent original to
+Root for the assigned cross-question decision, explicitly accepting or declining
+the known remote-runtime and unknown abnormal-dump risk. My recommendation is one
+complete package under the proposed10aggregateCPUh/4GPU-childh stops, original six
+fits and complete native/cold reading, with the stated separate preparation/support
+bill. The scientific review is adequate for this delta; no additional Pro/selection
+loop or routine per-fit Root acknowledgment is needed. **Root has not selected
+execution at this publication boundary.** A later selection would authorize its
+bounded implementation, focused engineering checks/review, exact-source publication
+and actual-node admission, followed by one new full reader and the originally
+selected consumer without extra approval between healthy phases. Any genuine
+technical failure retains its missingness and ends dependent effects as declared.
+
+Design delivery paid0 new physics/static/native/model/fit/optimizer queries; only
+source/saved-record reading and arithmetic. Mechanical original extraction and
+proposal-hash checking paid0.013677925CPU-s; all unmetered writing/Git/tool/review
+support remains additional unknown. No source/runtime was modified and no observer
+or result operation exists. No disposable bulk/scratch was created or deleted:
+actual deleted targets none, net allocated disk reclaimed0B, no cleanup tool blocker.
+The retained unique B05 bank/B04 adverse evidence and useful B06 code have the
+explicit prospective consumer described above and remain in their canonical scopes.
