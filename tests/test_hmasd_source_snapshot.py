@@ -49,8 +49,9 @@ def test_snapshot_environment_does_not_import_author_python_paths(monkeypatch):
 
 
 @pytest.mark.parametrize('worktree_config', [False, True])
+@pytest.mark.parametrize('cone', [False, True])
 def test_snapshot_materializes_sparse_inputs_without_changing_other_worktrees(
-    tmp_path, worktree_config,
+    tmp_path, worktree_config, cone,
 ):
     root = tmp_path / 'repo'
     root.mkdir()
@@ -76,11 +77,13 @@ def test_snapshot_materializes_sparse_inputs_without_changing_other_worktrees(
     if worktree_config:
         git(root, 'config', 'extensions.worktreeConfig', 'true')
         git(root, 'config', '--worktree', 'core.sparseCheckout', 'true')
+        git(root, 'config', '--worktree', 'core.sparseCheckoutCone', str(cone).lower())
     else:
         git(root, 'config', 'core.sparseCheckout', 'true')
+        git(root, 'config', 'core.sparseCheckoutCone', str(cone).lower())
     patterns = root / '.git' / 'info' / 'sparse-checkout'
     patterns.parent.mkdir(exist_ok=True)
-    patterns.write_text('/code/\n')
+    patterns.write_text('/*\n!/*/\n/code/\n' if cone else '/code/\n')
     git(root, 'read-tree', '-mu', 'HEAD')
     assert not (root / excluded).exists()
     (root / 'code' / 'input.py').write_text('author editing')

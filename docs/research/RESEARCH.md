@@ -2532,8 +2532,20 @@ canonical的sparse配置、dirty控制文件和既有snapshot不改，科学合�
 修复在创建命令上暂时覆盖core.sparseCheckout／core.sparseCheckoutCone，不永久写Git配置。
 两种真实Git回归（shared与worktree-local sparse）在旧代码均复现缺文件，修复后4项通过；独立工程审查实际追踪后续准入，
 共7项snapshot／launcher整合检查通过（Git2.43、配置的control-plane Python），无material finding。
+随后Root补充cone／non-cone交叉覆盖，6项snapshot测试通过；该扩展未改变生产修复代码。
 验证含已提交排除路径、原dirty文件／配置／模式及旧sibling保持、退出临时覆盖后的完整普通status与准入。
-实际远端物化仍待部署后核验；Root未重启失败operation、未改变已接受A/R的snapshot，也未新增科学步骤。
+修复发表于5d4b0619b，节点仅更新该helper（SHA256 `83b22ec927b5dd452290a2a331db5b39d62385d831fb867f0c5dae26a254b11d`），
+没有pull／merge／reset canonical，也没有改变既有accepted snapshot。第一次Root远端验证在非配置网络shell中触发partial-clone lazy fetch并超时；
+确认仅该未admit probe的checkout进程后终止、移除target／admin，释放40,960 allocated bytes；0fits／0native，CPU未测。
+第二次将整个prepare放在配置的`zsh -lic`内成功：原科学source `488c72115a3033a9c01c58bd9510896b82a206bf` 的22,356个tracked entries全部物化，
+0skip-worktree，普通status及实际`_validate_source_local`通过；checks.json SHA256为
+`49bc5a7c3729fdee26710aae8cb5578d3aa5b007198fadef10cbb07d4e33be72`。
+验证probe `0b6bb1edfcc9471c9d838933417d36a4` 未admit，已移除target／admin，释放1,796,685,824 allocated bytes；
+本次同时为shared Git objects增加173,236,224 allocated bytes，作为后续完整输入所需存储保留，不把probe删除写成整个存储净减少。
+本次wall55.135s（非CPU），0fits／0native；canonical HEAD、sparse配置／模式、compute、launcher、RESEARCH及旧失败snapshot核对未变。
+全部新建snapshot须将完整prepare置于配置网络环境，并按约1.67GiB实测source占用重估峰值，不能沿用旧sparse大小。
+三位DM已获可继续的修复证据：S7由本DM记录明确retry-of再做工程阶段，B02正常准入，A/R保持原accepted handle。
+Root未重启任何科学operation或新增科学步骤；失败记录与科学合同保留。
 
 <a id="typed-joint-skill-selection-20261001"></a>
 **2026-10-01 PDT — owner 新提联合布局学习的首轮比较已完整结束。**
