@@ -3912,3 +3912,59 @@ saved-byte reproduction. Exact old source and failure are preserved; the change
 repairs the reader's copy semantics, not the worker, numerical scientific rule
 or comparison. Publish these inputs and admit one read-only completion. Another
 failure returns to its actual evidence rather than licensing a native retry.
+
+
+<a id="b03-reader-complete"></a>
+### B03 complete saved-data reading — 2026-10-02 12:38 UTC
+
+The first completion preparation stopped before admission when a lazy Git
+commit-object check timed out after30s. The exact published source was then
+fetched through the configured whole-command `zsh -lic`; the second preparation
+repeated the same unaccepted request, with no code/input/output change. Its
+[zero-effect refusal](../../../../runs/uav_decision_generalization/b03_engineering_a01/completion-preparation-a01.json)
+is retained. Remote automatic-GC stderr also reported an existing bad-tree/repack
+warning; fetch itself exited0. I did not change the canonical checkout, sparse
+selection, Git history or shared runtime.
+
+The one completion reader was accepted at12:36:34.195198UTC, source
+`2056aa1fa12cab3cb42fae13f495fad54422b1a6`, operation
+`/home/wu/projects/HMASD/.git/hmasd-admission/75c596fb189b0d94432f813b52d1a21474e1d836fd539100b214d97340655a66.json`,
+canonical output
+`/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02`.
+Its supervisor/runner1340545/1340546 are now absent with consistent valid exit0
+at12:37:28.537646UTC. Source snapshot is
+`.git/hmasd-launch-sources/1bc44712a941417aa1cb34de52b600d5`.
+Original observation was armed/drained at generation11; its READY was consumed
+into12 without resuming either terminal reader or the worker.
+
+All135 training rollouts/2160 training missions and232 frozen missions now have
+complete verified coverage. The published
+[reading](../../../../runs/uav_decision_generalization/b03_joint_window_read_a02/reading.json)
+is1567197B/SHA256`eab3cdeff541f4849f6086e5752d0ea9ad59b6e29ab7765a9b047bce5d356c69`;
+[summary](../../../../runs/uav_decision_generalization/b03_joint_window_read_a02/summary.json)
+is51501B/SHA256`968f1f5458dee44ad7d93010a155eadf35719eac167e80d7644eaca47929d15d`.
+Original302 prefix checks remain in `read_a01/checks/`;65 new ordinary checks
+remain in `read_a02/checks/frozen/`. The reading binds their old/new source and
+raw identities; no duplicate canonical raw, checkpoint or old check copy was made.
+All6981000 reused UAV movement ticks passed exact copied-vector reconstruction.
+The original equality rule remains: no movement, service, route or payment
+comparison was relaxed. Both full initial audit traces agree on every saved field.
+
+New counts exactly match the declared remainder:32500 ledgers,1625000 user
+indicators,195000 movement UAV-ticks,32565 physical states,10453365 distance
+relations,96000 O/99000 B commands,23104 matching comparisons and1280 matching
+distances. The original failed reader's83000 model-team forwards/498000 actor
+and critic rows remain the only neural replay. This completion has0 new model,
+native, fit, optimizer or discriminator queries. Combined coverage satisfies all
+original complete-reader count assertions; repeated prefix movement is separately
+charged, not substituted for new native data.
+
+Completion CPU50.777541s, wall51.117571s, peak437624KiB,0GPU. Its terminal summary
+cumulative is52360.465423701CPU seconds; subsequent compact collection used
+.002290127s, making52360.467713828s (14.544574365h) measured B03 cumulative so far.
+This includes the failed reader, engineering/tests and measured collections;
+self-report excludes its last write/shutdown, and authoring/review/control support
+is unmetered. The earlier forecast18–26CPUh was a prediction, not a hard cap.
+Worker1196000 native/3fits/615600optimizer remain unchanged. Complete independent
+scientific diagnosis and DM result interpretation/cleanup follow below; exit0
+alone is not the final scientific disposition.

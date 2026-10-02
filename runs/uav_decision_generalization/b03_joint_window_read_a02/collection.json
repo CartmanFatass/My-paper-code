@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "canonical_root": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a02",
+  "files": {
+    "reading.json": {
+      "bytes": 1567197,
+      "sha256": "eab3cdeff541f4849f6086e5752d0ea9ad59b6e29ab7765a9b047bce5d356c69"
+    },
+    "summary.json": {
+      "bytes": 51501,
+      "sha256": "968f1f5458dee44ad7d93010a155eadf35719eac167e80d7644eaca47929d15d"
+    },
+    "process-exit.json": {
+      "bytes": 557,
+      "sha256": "faccb68b15085c7d08e876e932933b5e352e2283faded122f6caf4b83fadd63b"
+    }
+  },
+  "collection_cpu_seconds": 0.0022901269999999994
+}
