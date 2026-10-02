@@ -8176,3 +8176,34 @@ Own only the new direction-local B11 module/tests, matching run/temp paths and t
 The registered Implementer owns only `b11_travel_ties/controller.py` and `tests/experiments/candidates/uav_fleet_transmission/b11_travel_ties/test_controller.py`: implement the exact final tie selector/real-state hook and bounded mocked correctness fixtures from this L0. It may statically parse its code, but must not run a test/controller/model/native query or launch; DM will execute one metered finite batch. DM owns contract/binding/runner/collection/reader/cost integration and the notebook. No helper Git staging/commit, shared-file write, child spawning, scientific selection or result interpretation. Every writer preserves others' edits; short shared writer lock and explicit owned-path commits remain mandatory.
 
 After acceptance of the Implementer diff, use the registered independent engineering Reviewer for the actual tie/state/source/reference/reader/budget change, reuse its previous B10 coverage, and resolve any material new scientific deviation rather than quietly changing this contract. Publish exact implementation/check/review inputs before actual-node admission. Whole remote source preparation uses configured `zsh -lic`; canonical remote checkout remains its controlled old-HEAD overlay and must never be pulled/reset or have sparse selection changed. Observe only the accepted operation via hmasd_wait and keep the native DM turn active through full reading. Prospective tags are `b11_travel_ties_checks_a01`, `b11_travel_ties_engineering_a01` and `b11_travel_ties_a01`; tags are identities, not retry permission.
+
+
+<a id="b11-engineering-acceptance-and-inputs"></a>
+### B11 implemented inputs and independent engineering acceptance — 2026-10-01 PDT
+
+Implemented the selected rule in direction-local `b11_travel_ties/`; frozen B10/controller/native/model/guard source is unchanged. The registered Implementer supplied only the new controller and its six bounded mocked fixtures, with static AST/source comparison and no dynamic work. DM reviewed/accepted that diff and implemented the fixed panel, capture additions, source-bound reference descriptor, complete H_T reader and cost/launch integration. The new boundary uses the frozen H_A candidate query once per candidate; all later plans consume actual H_T commitments. A narrow replay-only wrapper defers the old completed-query prefix stop until strict-score provisional flags are restored, then stops before unrecorded final selection. No missing candidate or native suffix is synthesized.
+
+The complete reader independently checks literal H_T choice and actual target/pair state. It then passes a temporary old-winner **audit view** to the unchanged B10 menu/provenance checker; real H_T records are neither rewritten nor used as old-H execution. New H_T receives one full policy/model replay. C/H_A reference raw receives only byte binding, native endpoint reduction and complete common-world comparisons, with zero comparator controller/model/native re-execution. Original same-user/gap/censoring, routes/guard, motion/energy/charging/reserve endpoints remain in the full reader and compact rows. Historical C/H cost is explicitly not a fresh simultaneous speed comparison.
+
+[The single finite attempt](../../../../runs/uav_fleet_transmission/b11_travel_ties_checks_a01/checks.json) passed8 tests,3.79873399 CPU seconds. Its732 proposals/36 plans/768 canonicalizations/732 associations and40 assignment calls/36 Lloyd solves are actual scripted controller work. It made512 mocked candidate attempts(510 complete),15360 mocked nominal ticks,1535 mocked score calls(1534 complete),12 mock-model constructions,**0 actual RF/private models/native steps/resets/fits**. The two expected interruption cases retain a third-RF incomplete query and a completed candidate table before final selection; they are correctness fixtures, not failed result missions. Source writing/AST/hashing, review and transport CPU outside that measured process is unmetered support, not zero. The full prospective ceilings and4CPUh checkpoint remain unchanged; no dynamic finite rerun was performed.
+
+The reused registered independent engineering Reviewer `/root/dm_s7_prediction_use/b10_engineering_review` read all new source, descriptors and both test files, the complete eight-pass transcript, and independently verified all56 declared source/test hashes plus8 reference compact hashes/lengths. Its complete substantive verdict was:
+
+> **No material engineering finding remains in the B11 delta.** No repair or additional reproduction is requested.
+>
+> Reviewed all new implementation files, reference descriptors, and both tests against the selected contract and frozen B10 dependencies. The review supports:
+>
+> - Literal base-first maximum selection, then minimum travel and candidate-index ties.
+> - Separate strict-score incumbent and final H_T selected flags.
+> - Commitment to actual C state before one inherited action; unchanged clock, feedback, guard, and nominal semantics.
+> - Failed-prefix replay without executing missing queries.
+> - Independent H_T commitment checks before the temporary old-winner audit view.
+> - Hash-bound C/H references read without controller/model replay, and cumulative14,400-second budget enforcement.
+>
+> Read the DM’s **8-pass** finite-check evidence:3.79873399 CPU seconds,732 proposals,512 candidate attempts, and zero actual private-model/native/RF calls. Independently verified all56 declared source/test hashes and eight compact reference hashes/lengths.
+>
+> Reviewed checks.json SHA256:7781fe209b2b5054b9ba94150b7956d75e4c45acd021aebe0fcda0d72574beeb.
+>
+> Residual limits: the two declared full engineering missions must establish native capture/replay/reference integration. This review performed no dynamic probes, test reruns, old raw reads, edits, or launches. Static review/hash CPU was not separately metered. Technical acceptance remains with the DM.
+
+DM accepts the implementation and review without a science change. Fresh read-only node evidence showed15,571,099,648 available memory bytes and834,561,196,032 free filesystem bytes; this is feasibility evidence, not launch admission. Canonical remote HEAD remains570fd45646ea62f4e28d86c74770e835b2e0a963 with its retained controlled overlays. Next is exact published-source snapshot preparation entirely under configured `zsh -lic`, fresh actual-node admission for the two H_T engineering missions and one complete reader, followed by the fixed32 scientific missions only if correctness integration is complete. No activation/performance threshold selects that panel, no native operation has yet been accepted, and no duplicate/retry is implied.

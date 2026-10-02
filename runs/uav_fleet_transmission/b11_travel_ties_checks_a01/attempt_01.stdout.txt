@@ -1,0 +1,30 @@
+........                                                                 [100%]
+=============================== warnings summary ===============================
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:64
+  /home/fires/.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:64: PyparsingDeprecationWarning: 'oneOf' deprecated - use 'one_of'
+    prop = Group((name + Suppress("=") + comma_separated(value)) | oneOf(_CONSTANTS))
+
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:85
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:85
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:85
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:85
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:85
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:85
+  /home/fires/.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:85: PyparsingDeprecationWarning: 'parseString' deprecated - use 'parse_string'
+    parse = parser.parseString(pattern)
+
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:89
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:89
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:89
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:89
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:89
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:89
+  /home/fires/.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:89: PyparsingDeprecationWarning: 'resetCache' deprecated - use 'reset_cache'
+    parser.resetCache()
+
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_mathtext.py:45
+  /home/fires/.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_mathtext.py:45: PyparsingDeprecationWarning: 'enablePackrat' deprecated - use 'enable_packrat'
+    ParserElement.enablePackrat()
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+8 passed, 14 warnings in 4.05s
