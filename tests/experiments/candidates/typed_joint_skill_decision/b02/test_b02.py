@@ -1,5 +1,6 @@
 """Pure/synthetic/mock regressions only: no native host, radio call, real archive fit, or RNG draw."""
 from copy import deepcopy
+import gzip
 import json
 from pathlib import Path
 import threading
@@ -332,3 +333,40 @@ def test_world_uncertainty_retains_adverse_tails_and_is_one_fit():
     assert result["n"] == 64 and result["negative"] == 1 and result["min"] == -.2
     assert result["t63_95_interval"] is not None
     assert "one fitted asset" in result["uncertainty_scope"]
+
+
+def test_lossless_deterministic_json_gzip_manifest_and_actual_byte_reservation(monkeypatch, tmp_path):
+    bill, out = make_bill(tmp_path)
+    store = evidence.Store(out, bill)
+    diagnostics = [{"check": "full literal diagnostic", "passed": False, "actual": .17,
+                    "expected": .18, "failure": "retained without aggregation", "fields": [None, True, 0]}] * 500
+    raw = evidence.encoded(diagnostics)
+    compressed = gzip.compress(raw, compresslevel=1, mtime=0)
+    reservations = []
+    original_check = bill.check
+    def checked(**kwargs):
+        reservations.append(kwargs["pending"])
+        original_check(**kwargs)
+    monkeypatch.setattr(bill, "check", checked)
+    first = store.write_gzip("raw/checks.json.gz", diagnostics)
+    second = store.write_gzip("raw/same-checks.json.gz", diagnostics)
+    assert gzip.decompress(first.read_bytes()) == raw
+    assert first.read_bytes() == second.read_bytes() == compressed
+    assert first.read_bytes()[4:8] == b"\x00\x00\x00\x00"
+    assert reservations == [len(compressed) + 65536] * 2
+    assert len(compressed) < len(raw)
+    metadata = store.files["raw/checks.json.gz"]
+    assert metadata == {"sha256": evidence.sha(first), "bytes": len(compressed), "content_format": "gzip-json",
+                        "uncompressed_bytes": len(raw), "record_count": 500}
+    evidence.verify_outputs(out, store.files)
+    assert json.loads((out / "artifact-manifest.json").read_bytes())["files"]["raw/checks.json.gz"] == metadata
+    with pytest.raises(FileExistsError):
+        store.write_gzip("raw/checks.json.gz", diagnostics)
+    def refuse(**kwargs):
+        assert kwargs["pending"] == len(compressed) + 65536
+        raise RuntimeError("fixture disk budget refusal")
+    monkeypatch.setattr(bill, "check", refuse)
+    with pytest.raises(RuntimeError, match="disk budget refusal"):
+        store.write_gzip("refused/checks.json.gz", diagnostics)
+    assert not (out / "refused").exists()
+    assert gzip.decompress(first.read_bytes()) == raw

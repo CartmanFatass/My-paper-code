@@ -201,9 +201,23 @@ class Store:
         self.register(relative)
         return path
 
-    def register(self, relative):
+    def write_gzip(self, relative, value):
         path = relative_path(self.root, relative)
-        self.files[str(relative)] = {"sha256": sha(path), "bytes": path.stat().st_size}
+        data = encoded(value)
+        compressed = gzip.compress(data, compresslevel=1, mtime=0)
+        self.bill.check(pending=len(compressed) + 65536)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with path.open("xb") as f:
+            f.write(compressed)
+            f.flush()
+            os.fsync(f.fileno())
+        self.register(relative, content_format="gzip-json", uncompressed_bytes=len(data),
+                      record_count=len(value) if isinstance(value, list) else None)
+        return path
+
+    def register(self, relative, **metadata):
+        path = relative_path(self.root, relative)
+        self.files[str(relative)] = {"sha256": sha(path), "bytes": path.stat().st_size, **metadata}
         (self.root / "artifact-manifest.json").write_bytes(encoded({"schema": 1, "files": self.files}))
 
     def progress(self, phase, **fields):

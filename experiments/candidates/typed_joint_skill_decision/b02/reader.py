@@ -485,10 +485,12 @@ def complete_reader(store, native, records, rows, fit):
                           for arm in ("G", "L", "P")}
         return {"training": train, "absolute_native_means": absolute, "comparisons": comparisons, "choices": choices,
                 "absolute_costs": absolute_costs,
+                "diagnostics": {"path": "raw/reader/checks.json.gz", "content_format": "gzip-json",
+                                "record_count": len(diagnostics), "lossless": True},
                 "B_alias": "G", "B_minus_G": 0, "fitted_assets": 1, "fresh_worlds": 64,
                 "reader_seconds": time.perf_counter() - started,
                 "trust_boundary": "independent branch/feature/label/state reconstruction uses pinned upstream radio, not an independent physics engine; historical-to-current source shift not runtime-certified",
                 "interpretation": "conditional one-fit capability and full cold cost; no training replication, causal/pretraining attribution, or best ordinary frontier claim",
                 "support_cost": "implementation/review/preparation/support work partly unmetered; unknown is not zero"}
     finally:
-        store.write("raw/reader/checks.json", diagnostics)
+        store.write_gzip("raw/reader/checks.json.gz", diagnostics)

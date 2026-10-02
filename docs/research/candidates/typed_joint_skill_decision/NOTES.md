@@ -1809,3 +1809,36 @@ included docs tree and old data are in verified external staging. The canonical
 node remains an old checkout plus controlled overlays; no pull/reset/sparse
 change is attempted. This is a concrete shared launch dependency, not scientific
 dissent or a changed one-fit contract. No B02 operation has yet been accepted.
+
+### Full snapshot price and lossless diagnostic compression before admission
+
+Root published/reviewed the shared snapshot correction5d4b0619b and actual-node
+witnessa8b1f68eb: full22256-entry materialization passed source validation; its
+unadmitted probe was removed. Measured full source allocation1796685824bytes
+replaces the old sparse≈820MB estimate. Root separately reports173236224bytes
+of shared Git object hydration as control work,0fits/native; this is not a
+new science result or free project preparation.
+
+With21684224bytes of staged inputs, a comparable source leaves329113600bytes
+inside B02's unchanged2147483648-byte peak ceiling. Exact new-source/output size
+will be measured at runtime. To preserve useful margin, the complete existing
+reader checklist now writes losslessly as`raw/reader/checks.json.gz`, level1,
+mtime0. Decompressed bytes equal the former encoded JSON exactly: no field,
+check, failure or observation is dropped. Manifest records compressed hash/size,
+uncompressed size, format and count. Reservation uses actual compressed bytes
+plus64KiB before exclusive/fsynced writing. Native/query traces were already
+compressed. Full disk compliance remains unobserved, not guaranteed by this
+source-level reduction. The hard ceiling and scientific counts are unchanged.
+
+DM inspected and accepted this57-insertion/3-deletion three-file refinement;
+independent engineering delta review found no material issue and independently
+passed its one focused regression(23deselected)in0.11s, reusing the prior full
+review. Implementer full pure/synthetic/mock suite passed24in1.09s. Only the
+following final identities replace those in the previous source snapshot:
+
+- `experiments/candidates/typed_joint_skill_decision/b02/evidence.py`: SHA256`1709ed3e9ed188943620b21a7c5a7428689616446591e2bf9ba9f5b9f62f914b`.
+- `experiments/candidates/typed_joint_skill_decision/b02/reader.py`: SHA256`e36f62714591603c47c9d9d9e62e5e4fb0e342f0939b0324e6fc1aabc922e66d`.
+- `tests/experiments/candidates/typed_joint_skill_decision/b02/test_b02.py`: SHA256`45b21ac14519f80eb5eb726331fd37db2e989e1eff07a06e7a12d89c55756709`.
+
+Root's concrete shared-launch dependency is resolved; normal actual-node
+admission follows exact source publication. No B02 result effect preceded it.
