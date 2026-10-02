@@ -1,0 +1,63 @@
+{
+  "artifacts": {
+    "config.json": {
+      "allocated_bytes": 16384,
+      "bytes": 13119,
+      "sha256": "5706d267a877ccbd80e3f196916dd06a5091d250b41fe978cc4b525c86cbd069"
+    },
+    "perworld.json": {
+      "allocated_bytes": 405504,
+      "bytes": 405392,
+      "sha256": "fb56f993ce25ecc5eb52a529e42cb3764d4819d2c57cc3757982c1130534b659"
+    },
+    "summary.json": {
+      "allocated_bytes": 4096,
+      "bytes": 2257,
+      "sha256": "c111b325c8b3eaca6e2a9d5ff699837c80b09ea560802e05a86b4bb6c0a9a971"
+    }
+  },
+  "launch_sha": "002b063d5068b9d904555bc9b1b8371c2dd11988",
+  "object": "fleet-b12-energy-leximin-assignment-v1",
+  "raw": {
+    "raw/29910091_B.npz": {
+      "allocated_bytes": 10321920,
+      "bytes": 10321596,
+      "sha256": "9e80fdd836ad066b9946711f4c1bbe5784f27ce44ac9a6151eb99d27ce9941a4"
+    },
+    "raw/29910091_B.progress.json": {
+      "allocated_bytes": 4096,
+      "bytes": 878,
+      "sha256": "6037bad5d3809f7313558d136cb0ad3f20f6b0f2cf333f85d3e266baa30de567"
+    },
+    "raw/29910091_E.npz": {
+      "allocated_bytes": 10330112,
+      "bytes": 10326122,
+      "sha256": "954799dea985666ffa4464d534e01ac9d7606a4bbdd1b3af78abdd70f9ae03f3"
+    },
+    "raw/29910091_E.progress.json": {
+      "allocated_bytes": 4096,
+      "bytes": 878,
+      "sha256": "3faeebdac824d83ae2fae0fc918f5bf5663aec52607d5f2b826f8093a20e44b1"
+    },
+    "raw/29910092_B.npz": {
+      "allocated_bytes": 10608640,
+      "bytes": 10606619,
+      "sha256": "bdea51cb1d0115d46c2a86f70348242b1c762bdae85c46b3c835d60d37648c2b"
+    },
+    "raw/29910092_B.progress.json": {
+      "allocated_bytes": 4096,
+      "bytes": 878,
+      "sha256": "14747053720eaaa08ecc80a6a2ec3843af95b86f8162b5e1a70fce458f2d39e0"
+    },
+    "raw/29910092_E.npz": {
+      "allocated_bytes": 10612736,
+      "bytes": 10609926,
+      "sha256": "defff7b09de09c6dbf9514c88cdaf07a117d1f64c2c642fac736577939598e9f"
+    },
+    "raw/29910092_E.progress.json": {
+      "allocated_bytes": 4096,
+      "bytes": 878,
+      "sha256": "4f76e2bfe267acf416adec6758dec8966ca35ed0aa377dfda8a9343cca99a265"
+    }
+  }
+}

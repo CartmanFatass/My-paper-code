@@ -1,0 +1,141 @@
+{
+  "node": "wsl_4070",
+  "canonical_root": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b12_resource_engineering_a01",
+  "files": {
+    "admission-preflight.json": {
+      "sha256": "3a1515c6c160350efd0cab115c73e3fb11efbeb4351472c0c69adaa32b5cae25",
+      "bytes": 766,
+      "allocated_bytes": 4096
+    },
+    "config.json": {
+      "sha256": "5706d267a877ccbd80e3f196916dd06a5091d250b41fe978cc4b525c86cbd069",
+      "bytes": 13119,
+      "allocated_bytes": 16384
+    },
+    "launch-manifest.json": {
+      "sha256": "119425b1a53ceb7a6583bba3a8a4e5f5ebe62b21d14c4352766fce7ae40e91ec",
+      "bytes": 4556,
+      "allocated_bytes": 8192
+    },
+    "launch-status.json": {
+      "sha256": "b2570db9712c5fe09bdd1a6ee0b2200c5e88ff4b963b97652ffcb1b4c10a9f02",
+      "bytes": 616,
+      "allocated_bytes": 4096
+    },
+    "manifest.json": {
+      "sha256": "e4d33320dd4b9cbddb87fc58ff65622488e6284a0ccbdc86c9262811daacd2e6",
+      "bytes": 2079,
+      "allocated_bytes": 4096
+    },
+    "perworld.json": {
+      "sha256": "fb56f993ce25ecc5eb52a529e42cb3764d4819d2c57cc3757982c1130534b659",
+      "bytes": 405392,
+      "allocated_bytes": 405504
+    },
+    "process-exit.json": {
+      "sha256": "4a9fbe40a6b8bb63811931bf9394ac3702520005f45f3925c9f06e3146f7f28c",
+      "bytes": 557,
+      "allocated_bytes": 4096
+    },
+    "progress.json": {
+      "sha256": "9975aba972ed8a5499dfe978d009beedf9071a20a412aa019afa28217306123d",
+      "bytes": 173,
+      "allocated_bytes": 4096
+    },
+    "raw/29910091_B.npz": {
+      "sha256": "9e80fdd836ad066b9946711f4c1bbe5784f27ce44ac9a6151eb99d27ce9941a4",
+      "bytes": 10321596,
+      "allocated_bytes": 10321920
+    },
+    "raw/29910091_B.progress.json": {
+      "sha256": "6037bad5d3809f7313558d136cb0ad3f20f6b0f2cf333f85d3e266baa30de567",
+      "bytes": 878,
+      "allocated_bytes": 4096
+    },
+    "raw/29910091_E.npz": {
+      "sha256": "954799dea985666ffa4464d534e01ac9d7606a4bbdd1b3af78abdd70f9ae03f3",
+      "bytes": 10326122,
+      "allocated_bytes": 10330112
+    },
+    "raw/29910091_E.progress.json": {
+      "sha256": "3faeebdac824d83ae2fae0fc918f5bf5663aec52607d5f2b826f8093a20e44b1",
+      "bytes": 878,
+      "allocated_bytes": 4096
+    },
+    "raw/29910092_B.npz": {
+      "sha256": "bdea51cb1d0115d46c2a86f70348242b1c762bdae85c46b3c835d60d37648c2b",
+      "bytes": 10606619,
+      "allocated_bytes": 10608640
+    },
+    "raw/29910092_B.progress.json": {
+      "sha256": "14747053720eaaa08ecc80a6a2ec3843af95b86f8162b5e1a70fce458f2d39e0",
+      "bytes": 878,
+      "allocated_bytes": 4096
+    },
+    "raw/29910092_E.npz": {
+      "sha256": "defff7b09de09c6dbf9514c88cdaf07a117d1f64c2c642fac736577939598e9f",
+      "bytes": 10609926,
+      "allocated_bytes": 10612736
+    },
+    "raw/29910092_E.progress.json": {
+      "sha256": "4f76e2bfe267acf416adec6758dec8966ca35ed0aa377dfda8a9343cca99a265",
+      "bytes": 878,
+      "allocated_bytes": 4096
+    },
+    "reading.json": {
+      "sha256": "b7c3055d897c353788061570960bdbadf89679b9f01b5b12def16fc5f0cb291c",
+      "bytes": 14498,
+      "allocated_bytes": 16384
+    },
+    "reading_raw/29910091.progress.json": {
+      "sha256": "fb8ef9548e939a618e330cf74119548bcba7a1fed50d5c5f04d3104621b84385",
+      "bytes": 117,
+      "allocated_bytes": 4096
+    },
+    "reading_raw/29910092.progress.json": {
+      "sha256": "6e384dc401ab9dec04064f1d27b8dad9a828ef40e75096625624b5677fca40b0",
+      "bytes": 117,
+      "allocated_bytes": 4096
+    },
+    "reading_worlds.json": {
+      "sha256": "5a0539f31d67acb37d59bd18d0c4aa9a2d44b02b8c0f8823d214aeec823b760d",
+      "bytes": 57229,
+      "allocated_bytes": 57344
+    },
+    "stderr.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "allocated_bytes": 0
+    },
+    "stdout.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "allocated_bytes": 0
+    },
+    "summary.json": {
+      "sha256": "c111b325c8b3eaca6e2a9d5ff699837c80b09ea560802e05a86b4bb6c0a9a971",
+      "bytes": 2257,
+      "allocated_bytes": 4096
+    }
+  },
+  "compact_copies": [
+    "admission-preflight.json",
+    "config.json",
+    "launch-manifest.json",
+    "launch-status.json",
+    "manifest.json",
+    "perworld.json",
+    "process-exit.json",
+    "progress.json",
+    "reading.json",
+    "reading_worlds.json",
+    "stderr.log",
+    "stdout.log",
+    "summary.json"
+  ],
+  "raw_copies": 0,
+  "remote_hash_cpu_seconds": 0.023614287999999997,
+  "remote_hash_wall_seconds": 0.022878075949847698,
+  "local_parent_cpu_seconds": 0.006977481999999993,
+  "wall_seconds": 0.7345651950017782
+}
