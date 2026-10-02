@@ -2968,3 +2968,51 @@ including this retained documentation. Original canonical B01/B02/B03 evidence,
 compact local readings and the single pinned Laya object remain; no backup chain
 or raw-evidence deletion was made. Remote snapshot disposal above is a separate
 1794961408B reduction. No cleanup blocker and no new scientific effect.
+
+
+### Imported Claude assessment and additional source-price clarification
+
+Read the entire212-line original Claude note imported by Root in8bc5f9c93 at
+`docs/Claude_docs/research_notes/OPEN_DECISION_MODELS_FOR_HMASD_20261002.md`,
+SHA256`e1da1d8d1f341debfe91b446b37b183d9dde1525ed7f28fa316a92c7c6c7a362`.
+It is preserved unchanged as an assessment at its historical branch base, not an
+execution contract. Its B02-admission-pending and A/R-pending statements are now
+superseded by the complete published results. Its world-level hindsight gates
+bound selecting between those complete fixed programs on those exposed panels;
+they do not bound within-episode collaboration, other program constructions or
+all hosts. The observed finite-fit gaps do not identify a unique common bottleneck
+or prove that the existing readout cannot matter. B01 L-F weak training fit and
+N train/test separation remain different observations. These limits are relevant
+to interpreting the proposed larger-data question without dismissing the useful
+ordinary-competence and full-cost warnings in the note. No pause or Claude ownership
+changes follow from reading it.
+
+One native source-facts message to the temporary Oracle incorrectly described N
+as jointly flattening all eight candidates. Corrected promptly after direct reread
+of frozen `models.py::numeric_rows` at61a2dfa9 and the original contract above:
+N already shares a153→256→256→1 scorer per candidate (139 geometry +14 metadata),
+and has0/384 display-reversal choice changes. The prior public notebook was correct.
+Variable M alone therefore does not require an unshared-to-shared architecture
+change; the proposed new teacher, layouts, input metadata/matching boundary and
+exposure still define a new recipe. That distinction must survive the next contract.
+
+The already published B01 `cost-summary.json` gives additional measured wall-time
+anchors on1152worlds: complete raw build+shadow copy+eight-menu extraction.0113473584s,
+eight min-makespan assignments.0175962979s, and nine static evaluations+shadow
+package.00431416216s. Frozen `run_b01_native.py` explicitly builds the entire raw
+pool before selecting eight. These are perf-counter segments, not isolated CPU
+prices, and include their stated common overhead. They support storing unassigned
+raw plans and paying one assignment after choice if that becomes the selected
+interface; using per-candidate assigned targets as inputs would instead pay all M
+matches and change the bill. Physical permutation/numerical equivalence still needs
+the prospectively bounded correctness and native reading of the actual implementation.
+
+Source arithmetic storage bounds for a16000-world raw bank:16000×221×6×3×8 =
+509184000 bytes for float64 candidate coordinates; naively repeating139 float32
+geometry values per candidate would use1966016000bytes before labels/metadata.
+Keep shared world geometry once in a compact candidate/label bank rather than
+copying full native state per static query. Exact evidence, independent static
+reader scope and full-training/scorer/read costs remain to be frozen. Six fits can
+still make hundreds of millions of candidate presentations at variable M; six is
+an asset count, not a compute forecast. No new result effect occurred in these
+source/record reads, and no model or fitted asset was selected here.
