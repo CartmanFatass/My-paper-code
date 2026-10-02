@@ -2503,15 +2503,15 @@ Root读完Claude完整评估与六项建议、两份最新原始结果critic和�
 
 | 科学责任 | 当前实质工作与边界 | 负责人 |
 | --- | --- | --- |
-| 广义开源／可学习决策辅助，长期持有 | 优先构造较宽raw联合布局的数据规模学习曲线：新16k-world银行nested1k/4k/16k、可达raw static-J标签、固定共享关系scorer、2初始化×3尺寸共6探索fit、512共用新评价与预定128完整H500世界。raw条目是完整6×3布局，fullplanner另列质量／成本。DM正在闭合准确合同并进行一次独立科学选择；尚无新fit／操作。此为学习能力与价格问题，不复活旧8-menu残差或要求先胜teacher。 | 原DM `/root/dm_typed_joint_skill`，独占 `typed_joint_skill_decision` 对应路径。 |
+| 广义开源／可学习决策辅助，长期持有 | 优先构造较宽raw联合布局的数据规模学习曲线：新16k-world银行nested1k/4k/16k、可达raw static-J标签、固定共享关系scorer、2初始化×3尺寸共6探索fit、512共用新评价与预定128完整H500世界。raw条目是完整6×3布局，fullplanner另列质量／成本。准确B04合同与唯一独立选择审查已完成并发表于30e8b917d，MATERIAL_DISSENT:no；Raw8J／RawJ／P为普通参照，正在有界实施，尚无新fit／操作。此为学习能力与价格问题，不复活旧8-menu残差或要求先胜teacher。 | 原DM `/root/dm_typed_joint_skill`，独占 `typed_joint_skill_decision` 对应路径。 |
 | 发展已保留的学习决策能力及其完整用途 | 已选冻结S_L0/S_L1协作比较继续：四primitive自身零服务后在原H4边界使用C确定性waypoint，保留Z(G)、C/Bstar、原S、全50用户服务与删失gap。 bounded实施与独立工程核对后按原126976native／0fit合同自主准入；无新科学范围或追加A/R fit。 | 原DM `/root/dm_decision_generalization`，独占 `uav_decision_generalization`；旧S/C资产只读。 |
-| 发展已保留的普通服务与预测控制能力 | 选择一次H_T完整探索：沿用H_A全部评分与状态，只在严格胜base的literal最高同分中选已算名义旅行最少，最终原编号；base最高则保留base。已有独立B10结果审查覆盖此选择，DM精确声明／工程后自主执行。32已曝光世界+2工程共102000新native／0fit，冻结C/H只绑定复用；读真实J、服务、同身份用户与能源尾部，不把同分或nominal节省当已证实收益。 | 原DM `/root/dm_s7_prediction_use`，保持 `uav_fleet_transmission` 所有权。 |
+| 发展已保留的普通服务与预测控制能力 | [已选B11 H_T合同](candidates/uav_fleet_transmission/NOTES.md#b11-travel-ties-prospective-contract)：沿用H_A全部评分与状态，只在严格胜base的literal最高同分中选已算名义旅行最少，最终原编号；base最高则保留base。已有独立B10结果审查覆盖此选择，DM精确声明／工程后自主执行。32已曝光世界+2工程共102000新native／0fit，冻结C/H只绑定复用；读真实J、服务、同身份用户与能源尾部，不把同分或nominal节省当已证实收益。 | 原DM `/root/dm_s7_prediction_use`，保持 `uav_fleet_transmission` 所有权。 |
 
 **完整建议、取舍与被替代计划：** [本次完整归档](archive/2026-10-01/RESEARCH-learning-curve-and-cost-aware-successors.md)保存未经删改的Oracle15,399-byte原文、Owner转来Claude六建议4,245-byte原文、实际Astra/max身份、Root承重primary-source阅读和全部取舍。
 [Claude完整note](../Claude_docs/research_notes/OPEN_DECISION_MODELS_FOR_HMASD_20261002.md)已按owner要求从bc116366逐字导入main8bc5f9c93，保留其原有状态／结论而不回写。
 Oracle这次临时任务结束；它仅服务Root设计／分配，不是第四位DM、独立科学审查者或每次运行批准者。Root处理跨问题投入与实质分歧；DM自主收敛合同、适用独立审查、实施、发表、准入、全读及接续。
 
-**价格与可解释范围：** 学习曲线目前是设计报价：6fits／24576updates／786432world呈现／12582912优化candidate呈现；含全标签重算、读取和普通参照约8.3Mstatic、约15.5Mcandidate呈现，128×9×H500+16audit共584000native，0H500训练标签。CPU3–8h／GPU.5–2h、支持14–22h、峰4–7GiB均待DM精确闭合；建议累计8CPUh／4GPUh停止重估，实际节点准入仍独立约束。固定updates使每例曝光随数据量变化；2初始化共用一个bank，不能叫6独立数据重复、规模定律或唯一瓶颈鉴别。
+**价格与可解释范围：** [B04最终合同及独立处置](candidates/typed_joint_skill_decision/NOTES.md#b04-independent-selection)固定6fits／24576updates／786432world呈现／12582912优化candidate呈现；含全标签重算、逐帧读取和Raw8J／RawJ／P参照，明确上限8682080static、15471824神经candidate呈现、128×9×H500+16audit共584000native，0H500训练标签。512共用训练probe不是全16k训练endpoint；保存逐candidate曝光及CE减目标熵，P读器以独立搜索控制重构付过的query/response，不伪称重算全部P无线值。CPU3–8h／GPU.5–2h、支持14–22h仍是预测；累计8CPUh／4reserved-GPUh与整个声明scope7GiB是停止重估边界，实际节点准入仍独立约束。固定updates使每例及候选覆盖随数据量变化；2初始化共用一个bank，不能叫6独立数据重复、规模定律或唯一瓶颈鉴别。raw到matching的真实目标变化作为科学结果保留，与同输入重构错误分开。Root已完整读完15555-byte原独立意见并采纳已落实修订，无新增选择循环或逐fit审批。
 H_T已核价的worker+reader上界108800candidates／3264000nominal／326400RF／68模型；连同有限mock检查保守109376／3281280／328128／80，实际与mock分列。CPU1.5–3h预测、4CPUh停止重估、支持5–8h、新raw.35–.6GiB、含source峰2.5–4GiB。其暴露面板不是新世界确认，H_T也不是较大E/B资源分配候选的必过门。S/C原CPU.1–.5h、1h停止重估与支持8–12h保持；不因一个方向省钱扩展另一个合同。
 
 **决定所依据的已读能力：** [Q完整独立处置](candidates/typed_joint_skill_decision/NOTES.md#b03-independent-disposition)保留Q−G J+.000838[−.002410,+.004087]、12正/9负/43同，静态排名增益与G/P成本质量取舍；新增7缺口1正/5负/1同不能删去。旧8-menu改用正确terminal-J普通对照后native-J余量仅约.000637，Root采纳原critic反对该菜单quadrature＋残差的新fit；这是该候选的投资理由不足，不是对更宽学习曲线的审查结论。B03完整0fit／4500新native／307058static／266.887543CPU秒，旧数据与支持另计。
