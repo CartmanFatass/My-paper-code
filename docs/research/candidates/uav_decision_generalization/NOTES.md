@@ -3275,3 +3275,266 @@ MAVEN 的持续 latent 与轨迹多样性给出“协调探索可能有用”的
 <!-- END JOINT-WINDOW ORACLE ORIGINAL UTF8 -->
 
 </details>
+
+
+<a id="b03-selected-disposition"></a>
+## B03 selected joint-window comparison — 2026-10-02 UTC
+
+Root selected the one complete comparison at
+`6a8da6e5351fbcc518a173156686c028a02dd273` after reading the actual prospective
+contract and the complete independent scientific selection. I have now read that
+entire original, preserved below without abbreviation. It is the reused
+`/root/next_study_review` context, actual `gpt-6-astra/max`, turn
+`01a0fb33-300c-7f40-908f-7dc3a947d587`; it is independent substantive judgment,
+not blind context and not Oracle self-review. MATERIAL_DISSENT:no covers this
+three-instance purchase; the original criticism of the different four-arm,
+7.6CPUh/weight-transfer/calibration proposal remains. No second selection is
+needed for ordinary implementation.
+
+I accept the limited scientific investment and both source/interpretation
+corrections. The original DiagGaussian in `hmasd/r_mappo_utils.py:73–109`
+initializes logstd at zero and directly exponentiates it. The nominal −20/2
+configuration values are ignored on this path. B03 preserves that unbounded
+head, its native host clip and its actual entropy/likelihood behavior; it does
+not add a variance clamp or substitute TanhDiagGaussian. The prospective mention
+of min/max must be read as unused configuration, not an effective bound.
+
+O has stronger structural support than a generic random floor. The declared
+geometry bounds arbitrary initial box-to-slot travel by roughly186 ticks and
+the t130 reassigned pair's arrival by roughlyt316, leaving substantial later
+window opportunity. These are analytic bounds, not measured completion or an
+optimality claim. If O performs poorly, the first reading is its already-paid
+same-world positions/arrival, association, routing and once-only ledger. A weak O
+score alone cannot support the prospective draft's overly broad task-opportunity
+explanation; distinguish an ordinary-program limitation or implementation failure
+from native reachability. No O pilot, geometry retuning or additional mission is
+added by this correction.
+
+The adverse learning prior remains substantial. The review reconstructed old
+per-step H/SET final holdout coverage around.211–.235/.132–.225 and roughly
+2809–2926 clipped UAV steps per3000 in deterministic missions; SET already had
+held global information. The new sparse external R/6 can make this worse. Those
+facts constrain optimism without requiring another preliminary fit, changing the
+unbounded head, or erasing S0/S1's separately demonstrated capabilities. The
+comparison is selected because a different, explicit persistent joint-service
+use can make learning meaningful, with matched noD, complete SET, initial-policy
+and competent ordinary controls. A positive result is not owed. B04's separate
+pre-fit SIGSEGV is a technical event, not learning evidence for B03.
+
+The fixed purchase remains3 fits,1,196,000 native transitions and615,600 optimizer
+steps; H/noD initial identity is deduplicated by source/state/input/RNG identity,
+not an empirical guess. The forecast remains18–26CPUh and16–28support hours,
+0GPU. All users, start/end censored gaps, complete task, travel, model/reader
+and failed-work costs remain required. A material implementation deviation or
+cost change will be exposed before dependent effects. The ordinary execution
+path is now selected, subject to exact source publication and actual-node
+admission; no worker has been admitted by this note. Existing source/asset
+ownership, Claude pause and other accepted operations remain untouched.
+
+<a id="b03-l0"></a>
+### B03 L0 — one admitted native comparison and its complete saved-state reader
+
+Deliverable: a new direction-local package
+`experiments/candidates/uav_decision_generalization/b03_joint_window/`, matching
+`tests/experiments/candidates/uav_decision_generalization/b03_joint_window/`,
+compact records under `runs/uav_decision_generalization/b03_*`, and exact owned
+input/ledger files under this notebook's directory. Do not alter B01/B02,
+Claude's `coupled_host_joint_skills_stage1` files, `hmasd/`, `envs/`, shared
+configuration or launchers. Reuse frozen host/core helpers read-only. The DM
+remains the sole notebook/index writer and publisher.
+
+The new `run.py` has explicit worker/reader entry modes, declared seed,
+launch SHA, output and SHA-bound input/ledger arguments. It calls runner-side
+admission before effects. The worker executes exactly the three fits once,
+the seven unique32-world endpoint programmes and eight declared audit missions;
+ordinary construction and all physics/reset/model/optimizer events are metered.
+The reader binds canonical worker output through a SHA-bound locator's contents,
+not a raw absolute argv path that the launcher may rebase to a snapshot. It
+reconstructs the232 frozen missions' inputs/actions/RNG and physical service,
+and every training window ledger, without native rollout or optimizer replay.
+Each accepted worker or reader gets one native handle and same-handle observation;
+uncertain/failed acceptance never starts a duplicate.
+
+Invariants are the selected contract above: fixed generated world law/IDs and
+404-byte extra packet; obs211/state154/SET1637; original per-step H/noD/SET and
+Gaussian semantics; d2 caps10/+infinity; native high/low reward separation and
+SMDP discounts; noD classifier training retained; once-only post-routing reward,
+R/6 units and w_dense0; fixed sampled deployment; exact initial-state/RNG aliases;
+full user masks and censored gaps; ray-chain O and sticky B exactly as declared.
+No additional learner, fit, seed, bonus, clock, gate, difficulty search or outcome
+selection belongs in this implementation. Preserve sampled versus host-executed
+actions, original GRU masks, terminal successors and zero terminal bootstrap.
+
+Use a compact trace schema with a raw manifest and hashes. Store each training
+rollout's initial/post-step positions, raw/executed actions, association/routed
+user masks, skills, external/intrinsic reward components, window counters/payment
+and native service/movement diagnostics; store the full frozen mission inputs,
+channel/association/route evidence and action/recurrent replay fields needed by
+the independently written reader. Retain initial/final module+normalizer states,
+exact configurations, input identities, RNG addresses and optimizer counters.
+Do not add full training SINR/observation duplication where the declared reader
+does not require it. Measure real bytes and construction parameter counts; source
+manifest includes every runtime-consumed scientific dependency, not just the entry.
+Partial artifacts survive an exception. No missing trace is repaired by rerunning
+an already consumed mission.
+
+Checks before actual result execution are source/schema/config and pure synthetic
+ledger/geometry/normalization/control tests using pytest-owned scratch; no extra
+environment mission, RF scorer or learner fit. Model construction/shape checks are
+separately metered engineering work, with no optimizer or policy forward beyond
+the charged audit/inference path. The8 actual audits cover the initial/final
+policy sources and complete O/B and are inside1196000; they are correctness
+checks, not outcome gates. An independent registered engineering Reviewer checks
+reward placement, recurrent/terminal state, RNG, noD identity, source/checkpoint
+binding, reader independence and the cost/count ledger. Its purpose is technical;
+it does not revisit the accepted science. The DM owns repair and acceptance.
+
+Implementation delegation is bounded to the native worker, schema, task/ordinary
+adapters and matching pure tests. The registered Implementer writes only that
+new package except DM-owned `independent.py` and its dedicated test, returns a
+diff/check costs and deviations, and launches/commits nothing. DM writes the
+saved-state independent reader, reviews the worker and owns integration. These
+are separate behavior responsibilities sharing a declared trace schema, not
+concurrent writers to the same files. Both preserve all other sessions' edits;
+all shared Git mutations remain DM-serialized with explicit paths.
+
+Stop the current technical attempt on an identity, count, nonfinite, missing-data
+or contract failure and retain the exact partial state. Do not silently clamp,
+change runtime, extend exposure or retry. Diagnose the actual failure and record
+any materially revised attempt prospectively. Ordinary code repairs and source
+publication need no per-fit Root ACK. CPU18–26h is a forecast, not a universal
+hard cutoff or unlimited license; actual phase telemetry will support a public
+re-estimate if material. Node memory/disk/profile admission precedes actual
+execution, with one fit at a time initially and no claim that all selected
+projects can occupy the node concurrently.
+
+<a id="b03-independent-selection-original"></a>
+### Complete independent scientific selection, retained unedited
+
+The original below is copied byte-for-byte from the published archive at
+`6a8da6e5351fbcc518a173156686c028a02dd273`,
+`docs/research/archive/2026-10-01/RESEARCH-window-resource-independent-selection.md`.
+Original13093UTF8 bytes, SHA256
+`62787648765ac42ad7f07470e8cff62d6305fac562b1b675ea3626185f017799`.
+Source rollout `/mnt/c/Users/fires/.codex/sessions/2026/10/01/rollout-2026-10-01T17-23-45-01a0f9fe-de22-7d73-82c2-129a0cadede6.jsonl`,
+line1959, terminal `2026-10-02T06:23:01.661Z`. Its E/B portion does not assign this
+DM another direction. My scientific disposition and L0 are above.
+
+<details>
+<summary>Original independent selection</summary>
+
+<!-- BEGIN B03 INDEPENDENT SELECTION ORIGINAL -->
+建议购买两项各一次冻结的完整比较：**E/B 的用途判断更直接、成本较低；联合窗口学习值得作为一次风险较高的能力探索。** 不增加前置效果筛查、权重臂或训练重复。当前合同已能承载这两项判断，但须纠正 Gaussian 参数的实际语义，并收紧普通 O 失败时的解释。
+
+本评审复用了我对 B02、B10、B11 的上下文，我也曾提出 H_T；上下文中包含 Root、DM 和 Oracle 的既往解释。因此这不是盲审，也不声称是未受这些解释影响的全新独立上下文。以下结论来自对本次实际合同、承重源码和已付证据的重新核对，不以此前共识为依据。
+
+**一、E/B：支持完整购买，研究对象成立。**
+
+实际对象是 [B12 合同](/home/fires/hmasd-wsl/docs/research/candidates/uav_fleet_transmission/NOTES.md:8505)，提交 `6fc708f745de10c5b9dcaf0e93fc6ff9dab161bc`。
+
+这不是再微调 H_T。它问的是：在普通 C 已生成的服务目标集合内，分配预计资源负担，能否比只节省飞行能量提供更好的完整任务用途。E 是合适且有竞争力的普通挑战者：与 B 拥有相同合法输入、可动成员和完整置换机会；不需要再添一组“电量盲”臂才能购买这个用途问题。
+
+我核对了实际 Hungarian 行列来源、C 的目标延续与动作生成、公开功率公式、合法电量/站点解码和原生返航余量定义。合同选择完整 leximin 有实质意义。固定成员与目标多重集时，
+
+\[
+\sum_i s_{i,\pi(i)}
+=\sum_i b_i-\frac{\sum_i E^{fly}_{i,\pi(i)}+\sum_jE^{return}_j}{160}-m\rho .
+\]
+
+因此最大化总 slack 会退化成最小飞行能量。完整排序向量才真正改变低资源负担的分配；这不是给 E 换一个名字。
+
+不过，最强竞争解释必须保留：
+
+- **E−C 包含取消部分原分配迟滞的影响。** 原 C 用水平距离并给延续目标约 300 米优惠；E/B 可覆盖这个选择。改善可能来自重新分配或改变持续移动，而不能单独归功于精细能量计算。
+- **B−E 不是电量信息的唯一作用。** 两臂输入相同，改变的是分布目标及目标返航要求的使用方式。即使电量接近，return 项也可能改变 B 的排序。
+- **各自到达时的 slack 不是同一未来时刻的完整队伍状态。** 它没有计入到达后的悬停服务、下一次规划、实际 guard、返航释放、充电竞争和途中改道。服务成员仍可能是真实路径中的中继；固定 C 的 relay 标签不固定原生路由。
+- 每次保持的是**本臂当时**的 C 目标多重集。后续历史、迟滞和布局都会分歧，不能把逐计划代理改善相加为实际节省。
+
+这些限制说明完整原生比较必要，并不构成先买诊断链的理由。合同已经包含从标签、坐标、提交到实际运动的曝光，以及同身份用户的服务和删失缺口，能够区别未激活、标签别名和主动有害的干预。
+
+旧正面资产没有因此失效。H 的服务能力、H_T 对 H 的实际路径约 −559 米/UAV、能耗约 −8.09 Wh 和返航代价改善应保留；H_T 最差用户 QoS 下降、完整 J 优势未确定，以及对 C 仍更费移动和能量，也都必须保留。B09 条件预测收益及完整 F−C 缺口继续有效。E/B 获得资源优势不会自动取代这些不同用途。
+
+我建议按以下结果改变选择：
+
+| 完整结果 | 应改变的判断 |
+|---|---|
+| B 相对 E 改善资源，并保持或改善服务、个体尾部 | 保留资源分配准则的条件用途；是否扩大，另看收益与全价 |
+| B 节省资源但损害服务或拉长同用户缺口 | 保留明确取舍，不称服务公平、安全或默认升级 |
+| E 有完整用途，B 没有增量 | 优先保留更简单的 E，降低对 slack 分布目标的投入 |
+| 只有到达代理改善，或新臂没有有用的完整取舍 | 结束这个固定配方的自动投入，不自动补权重、预测或样本 |
+
+最小有用观察就是合同中的完整 H3000 比较；一次短期 slack 展示不能替代它。
+
+**二、联合持续窗口：支持购买三实例，但这是能力探索，机制结论要窄。**
+
+实际对象是 [联合窗口合同](/home/fires/hmasd-wsl/docs/research/candidates/uav_decision_generalization/NOTES.md:2446)，提交 `1c1ba086fb1275eb9ee9de07d6260a9e880a456f`。
+
+这次任务改变了什么，现已说清：固定注册地图和完整日程，要求远簇的团队回程服务连续达到阈值；每簇只开放一次，四个窗口不能靠反复完成同一簇获得高分。它与旧静态 dense coverage、监督 S 策略和 B04 布局选择不同，值得直接研究。
+
+按 scientific-tools 的更丰富合同比较方法，公开注册信息是允许的新任务条件。404 字节只是额外任务载荷，不是完整通信价格。普通 O、随机 B 与学习程序得到相同外部权利；因此不必自动增加“没有地图”的全因子对照。相应地，新结果不能解释为对旧信息合同的改进，或真实无线通信零成本。
+
+几个承重设计是成立的：
+
+- 有界几何与公开自由空间法则支持远用户需要中继的结构判断，不依赖筛选世界或调随机命中率。我复核了约 2657 米的远用户距 BS 下界及 ray-chain 链路界。
+- `CoupledRelayHost` 确实会在一次 primitive step 内多次计算诊断奖励。把窗口 ledger 放在最终 post-routing step 后、每步只推进一次，是必要的正确接口。
+- H 的 d2 高层使用段内折扣外部 `R/6`，跨段使用 `gamma^elapsed`；低层才加入判别器项。不能把 toy 的全层共同回报移植解释到这里。
+- noD 只关闭判别器奖励，保留分类器训练及同样的模块结构，是有意义的匹配干预。
+- H/noD 初始面板按完整模块、状态、输入和随机数身份去重合理。一个审计世界只能验证接线，不能替代这个身份论证；合同已经区分二者。
+- O 已是完整普通程序：预置三对 ray slots、明确匹配次序和 t130 转移，不是一个尚未定义却被称为上界的“规划器”。
+
+**最强不利先验仍然很重。** 我重新读取了旧逐步 H/SET 六份原 summary。最终 holdout H 的回程覆盖约 .211–.235，SET 约 .132–.225；确定性面板每回合约 2809–2926/3000 个 UAV-step 被限幅。它们没有形成有用的普通规划替代。SET 当时已获得 held 全局快照，不能把旧失败全部归为缺少中央信息。其他已付有界头、目标接口等阴性结果也仍然约束乐观预期。
+
+新合同继续原 Gaussian 和熵系数，外部奖励又变为罕见的 `R/6`，因而三臂都没有任务能力是可信的结果分支。**这笔投资值得的理由不是 toy 保证成功，而是新任务确实给持续联合行为一个不同的用途，并有直接 noD、SET、初始策略和普通 O 对照。** 一次固定购买可以改变对这个用途的投入；不需要先证明学习能够成功，但也不能在失败后自动重新解释为“只差更多训练”。
+
+需要作两项具体澄清：
+
+1. **Gaussian 方差没有声明中的配置夹持。** [DiagGaussian 源码](/home/fires/hmasd-wsl/hmasd/r_mappo_utils.py:73)以零 logstd 初始化，随后直接 `exp`，不读取 `continuous_logstd_min/max`；夹持只存在于 TanhDiagGaussian。合同中的 −20/2 应写明是该路径不使用的配置字段。保持原 unbounded 头，不在实现时悄悄补 clamp。这是源语义修正，不是购买新头。
+2. **O 接近零不能直接证明整个任务缺乏机会。** 已定边界使任意 box 位置到 ray slot 的保守到达时间约不超过 186 步；t130 转移的那对约至 t316 可到达，而另外两对已预置。结合 FDMA 和静态链的几何余量，O 是有相当强结构依据的参照。若它仍接近零，应先用本批已有轨迹对齐到达、关联、路由和单次 ledger；也可能是 O 程序自身的限制。不能把弱 O 结果直接升级为任务不可达或学习机会不存在。这里没有要求新 O gate，也没有把未运行的 O 称为已测高分或全局最优。
+
+窗口结果应这样使用：
+
+- H 超过共同初始和 noD，并在不同簇形成完成能力：保留这一次判别器奖励干预的条件增量。不能仅凭它归因于探索，或宣称训练种子稳健。
+- H/noD 都学会且优于 SET：提高对层级程序的兴趣，但不能从“不显著差异”得到两者等价，也不能唯一归因于承诺机制。
+- SET 学会或更好：保留普通学习能力，改变对层级复杂性的优先级。
+- 学习程序低于 O 但确有完整能力：能力结果仍成立；是否继续取决于可复用性、效率或实际用途，不要求先赢普通教师。
+- 三者均无能力而 O 有：结束这个固定任务—配方—曝光组合的自动投入。它不唯一识别稀疏程度、优化、表示或判别器作用，更不关闭长期学习问题。
+
+一臂一个 fit、H/noD 共用初始化，仍只有一个训练比较块。32 个新世界提供的是条件于这些训练实例的部署差异；不能充当 32 次算法重复。完成窗口也不等于同八个人连续受益：全 50 用户、从未服务和首末删失 gap 是完整用途的一部分，不能退为附属指标。
+
+**三、完整价格值得保留，不能用便宜版本替代。**
+
+我独立重算了主要整数账，并核对旧原生 summary 的成本字段：
+
+| 项目 | E/B | 联合窗口 |
+|---|---:|---:|
+| 新 native | 204,000，68 回合 | 1,196,000，2392 回合 |
+| 新 fit / GPU | 0 / 0 | 3 / 0 |
+| 主要额外计算 | ≤9,830,880 置换、491,376 边；旧证据读取另计 | 615,600 optimizer steps；低 actor、critic 各 97.2M 更新呈现 |
+| 完整 reader | 新任务及绑定旧 C/H/H_T；不重飞旧策略 | 232 冻结任务的 forward/几何重建，加全部训练 ledger |
+| CPU 预测 | 2–5 小时 | 18–26 小时 |
+| 停止边界 | 6 已计量 CPU 小时，保留不完整 prefix | 18–26 是预测；明显超支须公开重估，不能当无限续跑许可 |
+| 支持工作预测 | 10–16 小时 | 16–28 小时 |
+
+窗口 noD 保留判别器训练，所以不能按“删除整个判别器”估便宜价格。旧逐步 H 是 5.66–6.05 CPUh，逐步 SET 是 4.32–4.55 CPUh；宏动作 SET-T 的 1.79 CPUh 不适用。新 reader 的约 3731 万几何关系、模型回放、存储和采集也不是零成本。E/B 的零旧 RF 调用同样不等于零新分析模型计算。
+
+这些仍是预测，尤其窗口的输入扩展、完整保存和 reader 尚未实测。源快照、唯一证据、副进程 CPU、失败尝试、实际内存和磁盘峰值都应按合同记账。两题保持三个 DM 的责任分工，不要求它们同时占用节点；实际准入仍须服从可用资源。B04 的新 SIGSEGV 是无训练的技术失败，不进入本次学习负证据，也不授权重启或重审其配方。
+
+**四、Claude 原稿的正价值与实质分歧都应留下。**
+
+Claude 修订稿已经给出具体联合任务和 toy，不能说它没有建设性方案。toy 宽版的学习能力也是真实已付资产。但我独立检查源与两个保存 JSON 后，不支持由它直接推出四臂约 7.6 CPUh 的原生购买：
+
+- `.131` 是五窗口任务的平均完成数，窗口比例为 2.62%；`.125` 是至少命中过一次的任务比例。
+- toy 的回报进入全部策略层，原生 H 的奖励路径和单位不同，不能强制转移 ×4。
+- 默认 toy H 没有建立相对 flat 的优势；×4 对 count-bonus 的最终水平差也未建立技能专属解释。
+- 原始两个 JSON 没有后加的 per-site 结果字段。因此重复 site0 的后续分析可保留为报告中的诊断，不能称本次已从这两份 raw 独立重建。
+- 对固定轨迹，延长连续保持要求不会降低难度。
+- 七月已有稀疏访问研究记录；新成功也不会抹掉 S0/S1 等已保留能力，或成为项目“首次学习能力”。
+
+当前实际三臂合同已经避开这些问题。我支持它，而不支持原稿的强制校准、调难度、×4 进入链。
+
+本次直接核对了两份完整合同、窗口四个声明源 SHA、原生动作/无线/关联/路由/奖励接口、d2 与 noD 路径、七份原成本 summary、Claude 源和保存数据，并复用了此前亲自完成的 B02/B10/B11 正反原生审读；没有重新机械扫描全部旧 raw。未验证的仍包括新实现、完整依赖 manifest、实际运行成本与节点状态。只做了读取和已有数据/公式算术，没有新环境、控制器、模型、RF、fit 或 toy 查询。审查总 CPU 没有完整计量，不能写作零。
+
+**MATERIAL_DISSENT: no——针对本次 E/B 与联合窗口三臂两份实际合同的有限完整投资；以上 Gaussian 源语义及 O 失败解释应明确修正。对 Claude 原稿的 7.6 CPUh 直接购买、强制 ×4 和命中率校准链保留实质反对；这些已不是当前两份合同所购买的内容。**
+<!-- END B03 INDEPENDENT SELECTION ORIGINAL -->
+
+</details>
