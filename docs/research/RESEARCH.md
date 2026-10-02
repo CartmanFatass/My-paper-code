@@ -1,6 +1,6 @@
 # HMASD research index
 
-当前研究背景、共享认识、项目状态与研究计划，更新于 2026-10-02 UTC（2026-10-01 PDT）。治理依据为
+当前研究背景、共享认识、项目状态与研究计划，更新于 2026-10-02 UTC（2026-10-02 PDT）。治理依据为
 [constitution](../project/OPERATING_CONSTITUTION.md)；本页维护现状，历史过程见[日期归档](archive/)。
 
 阅读入口：[研究背景与共享认识](#研究背景与共享认识) · [方向状态](#active) · [现行计划](#current-research-plan) · [任务路由](#session-routing)。
@@ -11,7 +11,7 @@
 已读取前任完成的[单一 handoff](HANDOFF_20261001_ROOT_AND_FOUR_DMS.md)，接手 Codex 科学管理、选题与后继安排。
 上一轮四项研究及三项资料评估的完成／停止结论保持；旧操作不重启，历史 handoff 不改写。
 本次明确继续解除该轮 Codex 交接暂停；静默承诺、RF 完整购买与参数搜索均已完整判读、发表和清理。S7 构造与计价也已完成，Root 采纳独立评审、本轮不购买该候选；见[首轮完成处置](#root-selected-successors-20261001)。
-Owner 提供的开放 Jev/Laya 计划首轮6-fit比较已完整结束，两个精确配方的停止与全部证据保留。Owner随后明确要求将开源决策辅助作为一个DM长期探索的问题、泛化超出Laya并继续研究；同时目标改为3个有实质工作的DM，Oracle Astra Max只作为临时服务Root的设计与调度建议者。三位DM现持续滚动推进：冻结学生协作与S7旅行同分已完整独立判读，保留原学习资产、服务与资源取舍并结束两条固定配方自动追加。B04原唯一操作在标签阶段SIGSEGV，0fit／模型前向／H500任务，技术终态和partial均已发表；有限core取证已完成，原DM进入仅重放已存普通记录的两节点工程比较；无新标签/模型/回合，也无B04自动重启。另两位原DM的联合持续窗口学习与E/B资源分配实际合同已完成独立选择，Root已投入各一次完整比较，进入实现与验证。Claude最新报告/提示/设计及toy证据已逐字导入，临时Oracle及独立critic完整意见均已读取；两份实际合同已选定，新fit/native仍须准确发布和实际节点准入。一次配方收尾不重新暂停研究，也不消除以前的正面能力；见[当前长期分工](#three-dm-decision-assistance-20261001)与[B01处置](#typed-joint-skill-selection-20261001)。
+Owner要求将广义开源／可学习决策辅助作为一个DM长期持有的问题，并维持3个有实质工作的DM；Oracle Astra Max只临时为Root提供设计与调度建议。Claude最新报告、研究提示、联合窗口设计及toy证据已逐字导入。联合窗口三实例学习正在原已接受操作上推进；E/B资源分配已完成完整任务/reader，原DM与独立critic正读全结果。B04原操作因SIGSEGV技术终止、0fit；有限core取证与两节点普通JSON比较均已收尾，尚未识别原因。Root现选中一次全新CPU数据银行采集与全量读取，服务于仍未回答的原学习曲线问题，不自动恢复原op或进入六fit。前序学习/服务/资源正面资产与反例保持；一次配方结束不重新暂停研究。见[当前长期分工](#three-dm-decision-assistance-20261001)与[新数据投资](archive/2026-10-02/RESEARCH-separated-data-bank-investment.md)。
 Claude 的独立权限和当前暂停、FSD/PPC 暂停、G33 冻结及 Milan 数据依赖保持原范围。
 
 **历史恢复：2026-09-29 21:59 UTC，owner明确要求“阅读handoff 我们继续工作”；该轮次现已完成并暂停。**
@@ -2530,26 +2530,23 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 ### Parallel allocation: independent work and rolling succession
 
 <a id="three-dm-decision-assistance-20261001"></a>
-**长期决策辅助与当前3DM工作（2026-10-02 UTC／10-01 PDT）：** Root已读完B02冻结学生协作、B11旅行同分的完整DM判读与原独立意见，均已发表和完成清理；结束这两个固定配方的自动追加，保留其正面能力、个体代价与长期问题。不是owner暂停。Oracle Astra Max本次临时建议已完整读取并结束；两项实际合同已通过一次充分的独立科学选择，Root选定各一次完整比较，原DM进入有界实现/验证/发布/实际准入；尚无这两项新运行的接受记录。B04原操作技术终止；已存core定位记录转换活动栈但坏指针来源未知，DM保留长期问题并执行一次有界纯数据工程比较。
+**长期决策辅助与当前3DM工作（2026-10-02 UTC／PDT）：** 三个原DM继续持有各自问题。B02冻结学生协作与B11旅行同分已完整独立判读、发表和清理，固定配方结束，条件能力与个体代价保留。B12 E/B完整任务与reader已结束，独立科学判读正在进行；联合窗口B03在唯一原操作上训练。B04仍是0fit的技术缺失；有限core取证与两节点普通JSON比较均已收尾，没有识别崩溃原因。Root已选择一个用途明确的新CPU数据工件投资，原DM继续实施；不是owner暂停或原操作恢复。
 
 | 科学责任 | 当前实质工作与边界 | 负责人 |
 | --- | --- | --- |
-| 广义开源／可学习决策辅助，长期持有 | B04唯一操作源b19508a5c／handle3e4367a5d279…于05:45:21UTC SIGSEGV。39完整shards为2496world／430126标签；未完journal保留另5完整world及下一world165/172，合计431145已存标签下界。0fit／模型前向／H500，未得到学习曲线。原进程与observer已终止，无自动重启或prefix续跑；有限core/ELF取证已完成：同crash寄存器/BuildID与plain→encoded→Trace.write栈绑定，不定位坏指针来源。Root选中current wsl4070与configured local_linux各1进程、原1025普通JSON行、各≤1000cycles/300CPU-s/600wall-s先到止的工程比较；≤2050000 worker编码/600worker CPU秒，有限检查另计，0teacher/static/native/forward/fit；双阴性不是健康证明/重启许可。每节点增量3GiB含单source和自动core预留，原638087168B Windows core另保留；source净实减1811812352B、scratch40960B。[完整技术终态](candidates/typed_joint_skill_decision/NOTES.md#b04-technical-terminal)。 | 原DM `/root/dm_typed_joint_skill`，独占 `typed_joint_skill_decision` 对应路径。 |
-| 学习能否形成时序联合服务能力 | 单一三臂实际合同已发表1c1ba086f：逐步HMASD／同层级关闭判别器奖励／同外部信息权利的逐步SET；N6/U50/H500，四窗各125步、至少8/10回程服务连续20步首次奖1。固定404B新增任务注册、真实d2回报链、一次post-routing记奖、ordinary ray-chain与sticky参照、初始H/noD身份绑定去重；Root与独立critic完整读后已选定3fit比较；实现前澄清Gaussian未使用min/max字段、保留原无clamp头，并修正O低分不证明任务无机会。由DM实现/验证/准入，不按命中率调难度。[完整合同](candidates/uav_decision_generalization/NOTES.md#joint-window-prospective-contract)。 | 原DM `/root/dm_decision_generalization`，当前 `uav_decision_generalization` NOTES；Claude宿主等旧资产只读。 |
-| 完整服务与资源分配 | E/B实际合同已发表6fc708f74：本臂当次C service目标标签多重集上，E最小公开飞抵Wh，B完整排序返航slack作leximin后按E/base/列号消歧；后续C历史/布局可分歧。B−E比较完整准则，不唯一归因电量信息；完整服务/资源/个体尾部一起读。68H3000／204000native／0fit，精确能耗、状态写回、绑定旧参照和全价已收敛并获选；由DM实现/工程审查/准入，尚无新效果。[完整合同](candidates/uav_fleet_transmission/NOTES.md#b12-resource-assignment-prospective-contract)。 | 原DM `/root/dm_s7_prediction_use`，保持 `uav_fleet_transmission` 所有权。 |
+| 广义开源／可学习决策辅助，长期持有 | 原B04的SIGSEGV与431145保存标签下界、2501完整world和未完下一world均保留，0fit/forward/H500。两个现有环境各完成1025000次普通JSON编码、逐字一致/exit0/无新core；此有限诊断结束，不证明runtime健康。选中原16512world的全新CPU银行采集＋完整重建：固定原地址/raw顺序/J/tie/读取规则，现有local3.10.20/NumPy1.26.3，每64world新进程且数据阶段不import Torch；最多7298320静态调用，0fit/forward/H500/GPU。旧2501world只作兼容参照，不拼接；首次失败结束整批。DM闭合合同/依赖/实际资源后执行，完成后另行决定六fit部署。[技术证据](candidates/typed_joint_skill_decision/NOTES.md#b04-technical-terminal)、[有限工程读数](candidates/typed_joint_skill_decision/NOTES.md#b04-serialization-complete-reading)、[新投资及完整Oracle](archive/2026-10-02/RESEARCH-separated-data-bank-investment.md)。 | 原DM `/root/dm_typed_joint_skill`，独占 `typed_joint_skill_decision` 对应路径。 |
+| 学习能否形成时序联合服务能力 | 已选的H/noD/SET三个逐步学习实例在唯一精确source操作上推进；四个125tick窗口要求8/10回程服务连续20tick，固定404B新增任务信息、实际d2回报链和普通O/B参照不变。原无clamp Gaussian保留，O低分须由已付到达/关联/路由/ledger解释。整批3fits/1196000native/615600optimizer steps；当前训练进度不是科学结果，不因中间得分改臂/曝光/难度。[完整合同](candidates/uav_decision_generalization/NOTES.md#joint-window-prospective-contract)、[选择与L0](candidates/uav_decision_generalization/NOTES.md#b03-selected-disposition)。 | 原DM `/root/dm_decision_generalization`，当前 `uav_decision_generalization` NOTES；Claude宿主等旧资产只读。 |
+| 完整服务与资源分配 | E/B已完成64正式＋4工程H3000任务/204000native/0fit，完整reader VERIFIED，0旧参照重飞。Root已读保存compact：E/B均真实改变全部32world轨迹；B−E实际能耗+22.002Wh描述区间为正，J+6.354与QoS−21.463区间均跨零；B−C最差用户QoS/H+.015308区间为正。这不构成完整默认升级或无效等价结论。原DM完成全文/反例/成本/清理，复用一次独立结果critic，不追加仿真或配方。[完整合同](candidates/uav_fleet_transmission/NOTES.md#b12-resource-assignment-prospective-contract)、[完整DM读数](candidates/uav_fleet_transmission/NOTES.md#b12-complete-reading)。 | 原DM `/root/dm_s7_prediction_use`，保持 `uav_fleet_transmission` 所有权。 |
 
-**新材料与决定：** Owner转来的Claude77c02de662894a951ab1939ebb4ffacc9ae1dea8已于main420381b1a逐字导入9个新增/更新路径，包括[完整报告](../Claude_docs/deliverables/BRANCH_REPORT_claude_inspiring_ritchie_2kj46g_20261002.md)、[研究提示](../Claude_docs/deliverables/CODEX_PROMPT_SPARSE_WINDOW_RELAY_20261002.md)、[S2-W设计](../Claude_docs/environment_design/SPARSE_WINDOW_RELAY_SCENARIO_DESIGN_20261002.md)及toy源/两个原始JSON/读数；原bc116366决策note保持原字节。未运行toy或按提示自动新建/启动方向。新稿确已列四臂和报价，不能继续概括为没有方案；Root选择发展联合任务问题，但不直接采用四臂7.6CPUh、强制×4权重与按随机命中率调难度的执行链。
-[完整Oracle原文、核查、取舍及被替代计划](archive/2026-10-01/RESEARCH-joint-window-and-resource-allocation-successors.md)保留16805-byte原答、Astra/max实际身份和MATERIAL_DISSENT:yes的准确对象。Oracle是建设性顾问，不是独立裁定。[完整独立选择与Root取舍](archive/2026-10-01/RESEARCH-window-resource-independent-selection.md)已保留13093-byte原答、Astra/max实际身份及非盲边界；MATERIAL_DISSENT:no针对两份实际合同，Gaussian/O解释两项修正采纳，对原四臂便宜报价/权重转移/校准链的分歧仍在。Root选择E/B较直接的用途比较与联合窗口较高风险的能力探索；各原DM按合同自主实现/检查/独立工程审查/发布/实际准入/完整判读，不加前置效果筛查或逐fit Root许可。真实节点资源决定并发，不以3DM责任数强制同开进程。
+**新材料与决定：** Claude77c02de662894a951ab1939ebb4ffacc9ae1dea8已于main420381b1a逐字导入9个路径，包括[完整报告](../Claude_docs/deliverables/BRANCH_REPORT_claude_inspiring_ritchie_2kj46g_20261002.md)、[研究提示](../Claude_docs/deliverables/CODEX_PROMPT_SPARSE_WINDOW_RELAY_20261002.md)、[S2-W设计](../Claude_docs/environment_design/SPARSE_WINDOW_RELAY_SCENARIO_DESIGN_20261002.md)及toy源/两个原始JSON/读数；原bc116366决策note原字节不变。Root发展联合任务问题，但未购买原四臂7.6CPUh、强制×4权重或按随机命中率调难度的链。
+[Oracle构造意见](archive/2026-10-01/RESEARCH-joint-window-and-resource-allocation-successors.md)和[独立科学选择](archive/2026-10-01/RESEARCH-window-resource-independent-selection.md)保留完整原文、实际Astra/max身份、非盲边界和准确异议对象。新数据工件建议及Root取舍已[完整归档](archive/2026-10-02/RESEARCH-separated-data-bank-investment.md)：Oracle是临时顾问，不替代DM或独立Reviewer；原B04充分科学选择对未改问题仍适用，实际依赖/数值执行由适用工程审阅处理，不制造新逐进程许可。所有新输入仍先发布，再按真实节点资源准入；3DM责任数不强迫同开进程。
 
-**价格与解释：** B04原选择为6fits／584000native／static上限8682080／神经candidate15471824，8CPUh／4reserved-GPUh／7GiB边界；这些是原计划而非已发生账目。失败操作最后checkpoint306.264725CPU-s仅下界，另已计只读复算5.214888CPU-s；未知尾部计数/CPU不填零。技术失败不改变原有限数据比较的识别边界，也不产生新准入。[原科学合同](candidates/typed_joint_skill_decision/NOTES.md#b04-independent-selection)。
-联合窗口实际草案为3×360000训练native、7个唯一主程序各32H500及8审计，合计1196000native／3fits／615600 optimizer steps／0外部监督标签。H/noD共享初始policy需完整源/状态/normalizer/RNG身份绑定；一个审计世界不能替代身份论证。全链预测18–26CPUh／0GPU，支持16–28h，新唯一证据2–4GiB加一次约1.8GiB source，实际准入另核。原1.79CPUh来自宏动作SET-T，不能套逐步H/SET；没有统一10CPUh或fit额度。
-E/B实际草案包含有限检查最多9830880置换／491376能量-slack边，另记录return/power/旧raw reading；预测2–5CPUh，6已计量执行/检查/reader CPUh停止重估（未计support不冒称为零或受此硬帽覆盖），支持10–16h。新raw.8–1.5GiB、含单source增量峰3–5GiB，实际RSS/准入仍待实现。0旧RF/short-model不等于0新模型计算；原32曝光世界为development，不是确认或H_T必过门。
+**价格与后继边界：** 新CPU银行预测1.5–4CPUh、8–14支持小时、0.5–1.5GiB唯一数据、约1.8GB单source，工作盘峰3–5GiB；数值RSS和异常core须实际闭合，不能用JSON进程代替。原六fit问题依然值得回答，但当前数据投资不自动启动它：剩余584000native、最多1383760静态调用、约1547万神经candidate呈现及独立训练/冷部署/reader价格需重新绑定；GPU运行环境的未解风险仍在，全CPU替代吞吐未知。原失败CPU最后checkpoint306.264725秒仅下界，未计尾部不填零。
+联合窗口18–26CPUh/16–28支持小时是整批预测，2–4GiB唯一证据加单source；目前进度符合预测而非最终费用。B12已测检查/工程/正式任务/reader共6517.883985CPU秒（约1.8105h），DM保存表算术另4.205592秒，完整支持费用另列；既定6CPUh停止边界未触发。仅保留唯一证据，工程双节点source/自有scratch已净实减3627139072B，B12清理另由原DM测量。
 
-**已经保留的能力与反证：** [S/C完整独立处置](candidates/uav_decision_generalization/NOTES.md#b02-independent-disposition)显示S0/S1对G的J约+.015207／+.022376，服务增加且路径减少；S1同时平均多1.71875个从未服务用户。Bstar用更多移动改善覆盖/缺口。Z(S0)−S0未确定，Z(S1)−S1 J−.007453、服务−.544617且区间为负；普通ZG也受损。真实接管不等于新增用途，不能只凭Z(S)>ZG宣布合作。全批126976native／0fit／已测306.282345CPU秒，实减3608285184B，唯一证据保留。
-[S7 B11完整独立处置](candidates/uav_fleet_transmission/NOTES.md#b11-independent-disposition)保留H_T对H路径−558.605m/UAV、耗能−8.093Wh、返航代价−13.293的资源能力，但J+19.929区间跨零、最差用户QoS/H−.016485区间为负。世界23消除79tick团队断供却使同一用户末端右删失gap452→508。首共同分歧31世界模型三点QoS/return同值，真实30步20升11降，不能把模型同分当短期或长期服务等价。全批102000native／0fit／已知1.236170CPUh，实减5422624768B，唯一证据保留。
-H原服务能力、B09条件预测收益及完整F−C缺口、A/R条件能力、Q普通搜索/成本取舍、同价U32、公平分配和全部个体反例继续有效；不同任务J不横向相减。固定整回合程序的逐世界包络只约束所列程序/世界/指标，不能关闭在线切换、成本节省或整个模型家族。
-
-通信受限编码、额外count-bonus、四倍判别器、decoy、cadence新效果和toy延长仍未选；不因一个配方结束自动填充运行。Claude暂停与peer所有权、FSD/PPC、G33和Milan范围不变。
+**已经保留的能力与反证：** [B02独立处置](candidates/uav_decision_generalization/NOTES.md#b02-independent-disposition)保留S0/S1对G的J约+.015207/+.022376、服务增加/路径减少；S1平均多1.71875个从未服务用户。Bstar用更多移动改善覆盖/缺口；Z(S1)−S1 J−.007453、服务−.544617区间为负。全批126976native/0fit、已测306.282345CPU秒、实减3608285184B。
+[B11独立处置](candidates/uav_fleet_transmission/NOTES.md#b11-independent-disposition)保留H_T对H路径−558.605m/UAV、耗能−8.093Wh、返航代价−13.293，但J+19.929不确定、最差用户QoS/H−.016485区间为负；首共同分歧三点模型QoS/return同值，真实30步20升11降。全批102000native/0fit、已知1.236170CPUh、实减5422624768B。B12不消除H/H_T的这些条件用途，也不把名义到达代理改善换算成完整服务收益。
+B09条件预测收益与完整F−C缺口、A/R条件能力、Q普通搜索/成本取舍、同价U32、公平分配和全部个体反例继续有效；不同任务J不横向相减。固定整回合程序包络只约束所列程序/世界/指标，不关闭在线切换、成本节省或整个模型家族。通信受限编码、count-bonus、四倍判别器、decoy和toy延长均未选；Claude暂停与peer所有权、FSD/PPC、G33和Milan范围不变。
 
 <a id="snapshot-materialization-repair-20261001"></a>
 **共享启动输入修复（2026-10-02 UTC／10-01 PDT）：** S7 B10工程a01已接受后在读取已提交checks.json时退出1；
