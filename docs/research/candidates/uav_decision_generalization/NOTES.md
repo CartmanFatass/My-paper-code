@@ -3708,3 +3708,18 @@ snapshot the worker had3500 initial-policy transitions,2actual model
 constructions and0fit/update; this is progress, not an outcome or selection gate.
 The one fixed worker may finish or fail; neither case authorizes an automatic
 extra fit or replay of already consumed missions.
+
+
+<a id="b03-owner-handoff-snapshot"></a>
+### Owner-requested in-progress handoff — 2026-10-02 09:47 UTC
+
+At the owner's explicit handoff request, I wrote
+[HANDOFF_20261002_JOINT_WINDOW.md](HANDOFF_20261002_JOINT_WINDOW.md), preserving
+scientific history, exact accepted identities, latest09:47:05UTC progress,
+observer ownership/method, remaining reader/critique/cleanup and frozen boundaries.
+This supplementary document is requested by the owner, not a new routine registry
+or completion report. H is technically complete and H-noD has26/45 updates;
+total601500 native,28913.067836 workerCPU seconds, error null. No full study
+reading or independent result judgment exists yet. The same accepted worker and
+native DM observation continue; writing the snapshot does not pause, transfer,
+terminate, restart or expand this purchase. Later live state takes precedence.
