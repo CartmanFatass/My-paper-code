@@ -1874,3 +1874,65 @@ The existing paid calibration file is present and has the expected SHA256
 `93c681eba38f8fcd7fd9059eb9eaa75142771d085bf645e831099bed63b25a50`;
 the full input snapshot can verify those original bytes without a new
 calibration or a scientific worker's lazy network Git lookup.
+
+
+<a id="b02-engineering-acceptance"></a>
+### B02 engineering acceptance and exact execution inputs — 2026-10-02 UTC
+
+The bounded Implementer returned the10-module worker/reader and focused tests.
+I read every production module and the complete test file, independently checked
+native observation/termination arithmetic, the gate window, chosen-source-only
+queries, one actual navigation state, addressed draws, immutable actors, source
+bindings, censored50-user gaps, all comparisons and the cumulative counter table.
+The separate registered engineering Reviewer found oneP2 evidence-completeness
+gap: Z-parent reset checks alone could accept an internally consistent shifted
+SL1/ZSL1 pair or C-only world. This was missing instrumentation, not an observed
+native mismatch. The accepted repair validates every raw reset digest and one
+common identity per world across all programs/tapes before prefix checks; the
+reset identity also binds already saved peer-SINR consistently in collector and
+reader. Two pure handcrafted corruption fixtures reject the joint-pair, C-only
+and stale peer-SINR cases with zero queries. Reviewer inspected that exact patch
+and concluded: **the soleP2 is resolved; no material engineering finding remains**.
+I accept the implementation within the selected prospective contract. The actual
+16-episode audit is still required; local fake wiring is not frozen-model/native
+validation. No new scientific-selection gate or diagnostic purchase was added.
+
+Checks:15 initial focused cases passed across bounded invocations; eight were
+independently reproduced, then two new corruption cases passed. The initial
+local test-root lookup error was corrected and its isolated rerun passed; it was
+not a scientific runtime failure. The actual launcher source guard, frozen
+source hashes, calibration identity, AST and whitespace checks passed. Final
+source/test inventory fingerprint (compact sorted-key JSON rows of path/SHA256/
+bytes/lines) is
+`6386472b96b77a8949d9a26204df9697e9fa3a3a43dfc8073101f4368d032de3`.
+EntrySHA256 is
+`53737a4b43189be430f8535a0088c8445bfe6db22cb7482ccf3dfa2d062ef7be`;
+readerSHA256 is
+`76a46d751ca0dcbfaa3969be4da8c909ab5ae7d572c9bf6658afa71239f2ddae`.
+
+Measured checks total **40.66CPU seconds /23.58 summed scoped wall seconds**:
+Implementer30.71/16.47, original independent review4.92/3.51, repair5.01/3.55,
+focused review.02/.05. There were **172 actual synthetic originalC calls,
+0 frozen actor forwards,0 native transitions**. Count-decoder budget is charged
+conservatively1238;1058 completed decodes and180 precharged early-failure fixture
+slots distinguish execution from reservation. Separately, fake wiring used180
+fake-actor rows and128 fake-environment steps; these are not scientific exposures.
+Source reading, command help, hash extraction, publication and node preparation
+remain unmetered support, not zero-cost work. The whole-study256C/256frozen-row/
+10000decoder synthetic allowance is unchanged, with84C calls remaining.
+
+[B02_INITIAL_LEDGER.json](B02_INITIAL_LEDGER.json) starts cumulative CPU at40.66s
+and carries that conservative synthetic usage; SHA256
+`1dd31407e2d7555ee6a5cc8eefe37278d90fc4aebc4f6652e0718f3719e3e4a8`.
+The already published original actor locator remains unchanged, and no checkpoint
+was copied, downloaded, loaded or forwarded during implementation/review. Worker
+will use fresh tag`b02_cooperation_a01`; final reader`b02_read_a01`, with no
+production check mode. Both are0-fit CPU-only admitted operations under this
+same fixed purchase. The source snapshot repair deployed on the actual node is
+verified SHA256`83b22ec927b5dd452290a2a331db5b39d62385d831fb867f0c5dae26a254b11d`.
+Canonical control retains lifted pause/exploring/stable lead; its old prose is
+not substituted for the current published contract. Available disk exceeds the
+single-snapshot3GiB peak forecast. Full snapshot preparation uses configured
+`zsh -lic`; no remote sparse/HEAD/dirty-overlay changes. Actual admission and
+resource checks are still to occur after exact source publication. Selection
+and engineering acceptance are not launch acceptance or a result.
