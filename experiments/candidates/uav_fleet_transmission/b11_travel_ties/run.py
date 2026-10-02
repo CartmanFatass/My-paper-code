@@ -16,13 +16,16 @@ if str(ROOT) not in sys.path:
 
 def prior_costs(checks_path, engineering_dir, phase):
     from experiments.candidates.uav_fleet_transmission.b11_travel_ties.contract import (
-        OBJECT, identity, source_binding, jobs, equal)
+        OBJECT, identity, source_binding, jobs, equal, failed_setup_costs)
     checks=json.loads(checks_path.read_text())
     if checks["object"]!=OBJECT or checks["status"]!="passed" or checks["source_binding"]!=source_binding():
         raise ValueError("finite checks do not bind the current source")
     cpu=float(checks["cpu_seconds"])
     evidence=[dict(kind="all finite/static/mock/failed check attempts",path=str(checks_path),
                    **identity(checks_path),cpu_seconds=cpu)]
+    failed_cpu,failed_evidence=failed_setup_costs()
+    cpu+=failed_cpu
+    evidence+=failed_evidence
     if phase=="scientific":
         if engineering_dir is None:
             raise ValueError("scientific phase requires complete selected engineering evidence")
@@ -57,7 +60,6 @@ def main(argv=None):
     parser.add_argument("--reader-workers",required=True,type=int,choices=(1,2))
     parser.add_argument("--checks",required=True,type=Path)
     parser.add_argument("--engineering-dir",type=Path)
-    parser.add_argument("--reference-root",required=True,type=Path)
     args=parser.parse_args(argv)
     if args.seed!=29910000 or (args.phase=="engineering" and (args.workers!=1 or args.reader_workers!=1)):
         parser.error("fixed B11 addresses; serial full engineering missions")
@@ -70,7 +72,7 @@ def main(argv=None):
     import torch
     torch.set_num_threads(1)
     torch.set_num_interop_threads(1)
-    from experiments.candidates.uav_fleet_transmission.b11_travel_ties.contract import write_json,telemetry,reference_evidence,CPU_REVIEW_SECONDS
+    from experiments.candidates.uav_fleet_transmission.b11_travel_ties.contract import write_json,telemetry,reference_evidence,reference_root_for_output,CPU_REVIEW_SECONDS
     from experiments.candidates.uav_fleet_transmission.b10_service_assignment.budget import CpuBudget,children_cpu
     from experiments.candidates.uav_fleet_transmission.b11_travel_ties.study import run_batch
     from experiments.candidates.uav_fleet_transmission.b11_travel_ties.reader import read_result
@@ -78,7 +80,7 @@ def main(argv=None):
     budget=CpuBudget(args.out,prior,cpu_origin=0.,child_origin=children_cpu(),limit=CPU_REVIEW_SECONDS)
     budget.prior_evidence=evidence
     try:
-        reference=reference_evidence(args.reference_root,args.phase)
+        reference=reference_evidence(reference_root_for_output(args.out),args.phase)
         if not budget.poll():
             raise RuntimeError("CPU review boundary during reference integrity reading")
         batch=run_batch(args.out,args.launch_sha,args.phase,args.workers,budget,reference)

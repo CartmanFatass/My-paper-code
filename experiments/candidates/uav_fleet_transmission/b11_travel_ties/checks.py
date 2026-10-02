@@ -18,6 +18,7 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--out",required=True,type=Path)
     parser.add_argument("--attempt",required=True,type=int)
+    parser.add_argument("--scope",choices=("all","support"),default="all")
     args=parser.parse_args()
     for name in ("OMP_NUM_THREADS","OPENBLAS_NUM_THREADS","MKL_NUM_THREADS","NUMEXPR_NUM_THREADS"):
         os.environ[name]="1"
@@ -34,13 +35,14 @@ def main():
     tests={str(p.relative_to(ROOT)):sha256(p) for p in sorted(testdir.glob("test_*.py"))}
     import pytest
     with (out/(stem+".stdout.txt")).open("w") as log,contextlib.redirect_stdout(log),contextlib.redirect_stderr(log):
-        code=int(pytest.main(["-q",str(testdir),"--junitxml="+str(out/(stem+".xml"))]))
+        target=testdir if args.scope=="all" else testdir/"test_support.py"
+        code=int(pytest.main(["-q",str(target),"--junitxml="+str(out/(stem+".xml"))]))
     suite=ET.parse(out/(stem+".xml")).getroot()
     counts={}
     for prop in suite.iter("property"):
         if prop.attrib.get("name")=="b11_scripted_mock_counts":counts=json.loads(prop.attrib["value"])
     after=source_binding()
-    record=dict(object=OBJECT,attempt=args.attempt,exit_code=code,
+    record=dict(object=OBJECT,attempt=args.attempt,scope=args.scope,exit_code=code,
         status="passed" if code==0 and before==after else "failed",
         cpu_seconds=time.process_time()-cpu,wall_seconds=time.perf_counter()-wall,
         peak_rss_kib=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,

@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/home/wu/projects/HMASD/.git/hmasd-launch-sources/76c36407b97f425d8109d4493136a31d/experiments/candidates/uav_fleet_transmission/b11_travel_ties/run.py", line 108, in <module>
+    main()
+  File "/home/wu/projects/HMASD/.git/hmasd-launch-sources/76c36407b97f425d8109d4493136a31d/experiments/candidates/uav_fleet_transmission/b11_travel_ties/run.py", line 81, in main
+    reference=reference_evidence(args.reference_root,args.phase)
+  File "/home/wu/projects/HMASD/.git/hmasd-launch-sources/76c36407b97f425d8109d4493136a31d/experiments/candidates/uav_fleet_transmission/b11_travel_ties/contract.py", line 77, in reference_evidence
+    actual=identity(path)
+  File "/home/wu/projects/HMASD/.git/hmasd-launch-sources/76c36407b97f425d8109d4493136a31d/experiments/candidates/uav_fleet_transmission/b09_service_prediction/contract.py", line 69, in identity
+    stat = Path(path).stat()
+  File "/home/wu/.local/opt/hmasd-cpython-3.10.21-gcc/lib/python3.10/pathlib.py", line 1097, in stat
+    return self._accessor.stat(self, follow_symlinks=follow_symlinks)
+FileNotFoundError: [Errno 2] No such file or directory: '/home/wu/projects/HMASD/.git/hmasd-launch-sources/76c36407b97f425d8109d4493136a31d/runs/uav_fleet_transmission/b10_service_assignment_engineering_a02/raw/29910091_C.npz'

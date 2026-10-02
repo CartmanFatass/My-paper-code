@@ -1,0 +1,492 @@
+{
+  "generation": 11,
+  "wake_id": "6a1f8524-8b81-4aa2-a865-23af29c3e6d6",
+  "events": [
+    {
+      "id": "0f69ee919b6c914892af1b74",
+      "kind": "BLOCKED",
+      "evidence": {
+        "job_id": "b11-travel-ties-engineering-a01",
+        "status": "failed",
+        "facts": {
+          "admission": {
+            "claim_state": "accepted",
+            "state": "accepted"
+          },
+          "artifacts": {
+            "stderr": {
+              "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b11_travel_ties_engineering_a01/stderr.log",
+              "state": "present"
+            },
+            "stdout": {
+              "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b11_travel_ties_engineering_a01/stdout.log",
+              "state": "present"
+            },
+            "summary": {
+              "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b11_travel_ties_engineering_a01/summary.json",
+              "state": "absent"
+            }
+          },
+          "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/c3c764c76ec8433a0584c01ef1d3d7311a1fe975a97963f3bd9d51ad6ec7f37a.json",
+          "direction": "uav_fleet_transmission",
+          "execution": {
+            "exit_code": 1,
+            "exit_witness": {
+              "exit_code": 1,
+              "finished_at_epoch": 1790914907.5946836,
+              "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b11_travel_ties_engineering_a01/process-exit.json",
+              "state": "valid",
+              "termination": "process_exit"
+            },
+            "runner": {
+              "recorded_identity": {
+                "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+                "kind": "linux_pid_start_ticks",
+                "pid": 1310408,
+                "session_id": 1310407,
+                "start_ticks": 125514101
+              },
+              "state": "absent"
+            },
+            "state": "exited",
+            "supervisor": {
+              "recorded_identity": {
+                "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+                "kind": "linux_pid_start_ticks",
+                "pid": 1310407,
+                "session_id": 1310407,
+                "start_ticks": 125514098
+              },
+              "state": "absent"
+            }
+          },
+          "explicit_retry": {
+            "eligible": true,
+            "reasons": [],
+            "scientific_authorization": false,
+            "successor_ref": null,
+            "supported": true
+          },
+          "explicit_retry_available": true,
+          "kind": "hmasd_operation_status",
+          "manifest_ref": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b11_travel_ties_engineering_a01/launch-manifest.json",
+          "node": "wsl_4070",
+          "observed_at": "2026-10-02T04:22:29.278708Z",
+          "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/c3c764c76ec8433a0584c01ef1d3d7311a1fe975a97963f3bd9d51ad6ec7f37a.json",
+          "output_root": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b11_travel_ties_engineering_a01",
+          "record_consistency": {
+            "mismatches": [],
+            "state": "consistent"
+          },
+          "schema_version": 1,
+          "sha": "69394fc8d6d09ddfac0c3286c1783492ed2a6eed",
+          "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/76c36407b97f425d8109d4493136a31d"
+        }
+      },
+      "created": 1790914949.5333939,
+      "consumed": false
+    }
+  ],
+  "jobs": {
+    "b10-service-assignment-engineering-a01": {
+      "spec": {
+        "id": "b10-service-assignment-engineering-a01",
+        "protocol": "launch",
+        "argv": [
+          "/usr/bin/ssh",
+          "hmasd-wsl-node",
+          "/home/wu/.venvs/hmasd-gcc-31021/bin/python",
+          "/home/wu/projects/HMASD/scripts/hmasd_launch.py",
+          "status",
+          "/home/wu/projects/HMASD/.git/hmasd-admission/15022f69c95816f3efb5f9daa8c2377cd3952e326d31fe1941994fd7153ae626.json"
+        ],
+        "cwd": "/home/fires/hmasd-wsl",
+        "interval": 30,
+        "timeout": 20
+      },
+      "status": "failed",
+      "due": 1790904717.492678,
+      "errors": 0,
+      "last": {
+        "admission": {
+          "claim_state": "accepted",
+          "state": "accepted"
+        },
+        "artifacts": {
+          "stderr": {
+            "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_engineering_a01/stderr.log",
+            "state": "present"
+          },
+          "stdout": {
+            "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_engineering_a01/stdout.log",
+            "state": "present"
+          },
+          "summary": {
+            "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_engineering_a01/summary.json",
+            "state": "absent"
+          }
+        },
+        "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/15022f69c95816f3efb5f9daa8c2377cd3952e326d31fe1941994fd7153ae626.json",
+        "direction": "uav_fleet_transmission",
+        "execution": {
+          "exit_code": 1,
+          "exit_witness": {
+            "exit_code": 1,
+            "finished_at_epoch": 1790904551.532439,
+            "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_engineering_a01/process-exit.json",
+            "state": "valid",
+            "termination": "process_exit"
+          },
+          "runner": {
+            "recorded_identity": {
+              "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+              "kind": "linux_pid_start_ticks",
+              "pid": 1289284,
+              "session_id": 1289283,
+              "start_ticks": 124498203
+            },
+            "state": "absent"
+          },
+          "state": "exited",
+          "supervisor": {
+            "recorded_identity": {
+              "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+              "kind": "linux_pid_start_ticks",
+              "pid": 1289283,
+              "session_id": 1289283,
+              "start_ticks": 124498200
+            },
+            "state": "absent"
+          }
+        },
+        "explicit_retry": {
+          "eligible": true,
+          "reasons": [],
+          "scientific_authorization": false,
+          "successor_ref": null,
+          "supported": true
+        },
+        "explicit_retry_available": true,
+        "kind": "hmasd_operation_status",
+        "manifest_ref": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_engineering_a01/launch-manifest.json",
+        "node": "wsl_4070",
+        "observed_at": "2026-10-02T01:31:27.364334Z",
+        "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/15022f69c95816f3efb5f9daa8c2377cd3952e326d31fe1941994fd7153ae626.json",
+        "output_root": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_engineering_a01",
+        "record_consistency": {
+          "mismatches": [],
+          "state": "consistent"
+        },
+        "schema_version": 1,
+        "sha": "488c72115a3033a9c01c58bd9510896b82a206bf",
+        "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/d3dd732803824388be3f7bf25618f8db"
+      },
+      "observed": 1790904687.492678
+    },
+    "b10-service-assignment-engineering-a02": {
+      "spec": {
+        "id": "b10-service-assignment-engineering-a02",
+        "protocol": "launch",
+        "argv": [
+          "/usr/bin/ssh",
+          "hmasd-wsl-node",
+          "/home/wu/.venvs/hmasd-gcc-31021/bin/python",
+          "/home/wu/projects/HMASD/scripts/hmasd_launch.py",
+          "status",
+          "/home/wu/projects/HMASD/.git/hmasd-admission/aeafc73ff00a0807bf17244f687f03b7e494535242f49cf2f8d74bbdef5b4b6c.json"
+        ],
+        "cwd": "/home/fires/hmasd-wsl",
+        "interval": 30,
+        "timeout": 20
+      },
+      "status": "ready",
+      "due": 1790906738.6534545,
+      "errors": 0,
+      "last": {
+        "admission": {
+          "claim_state": "accepted",
+          "state": "accepted"
+        },
+        "artifacts": {
+          "stderr": {
+            "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_engineering_a02/stderr.log",
+            "state": "present"
+          },
+          "stdout": {
+            "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_engineering_a02/stdout.log",
+            "state": "present"
+          },
+          "summary": {
+            "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_engineering_a02/summary.json",
+            "state": "present"
+          }
+        },
+        "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/aeafc73ff00a0807bf17244f687f03b7e494535242f49cf2f8d74bbdef5b4b6c.json",
+        "direction": "uav_fleet_transmission",
+        "execution": {
+          "exit_code": 0,
+          "exit_witness": {
+            "exit_code": 0,
+            "finished_at_epoch": 1790906685.972041,
+            "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_engineering_a02/process-exit.json",
+            "state": "valid",
+            "termination": "process_exit"
+          },
+          "runner": {
+            "recorded_identity": {
+              "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+              "kind": "linux_pid_start_ticks",
+              "pid": 1292626,
+              "session_id": 1292625,
+              "start_ticks": 124633855
+            },
+            "state": "absent"
+          },
+          "state": "exited",
+          "supervisor": {
+            "recorded_identity": {
+              "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+              "kind": "linux_pid_start_ticks",
+              "pid": 1292625,
+              "session_id": 1292625,
+              "start_ticks": 124633852
+            },
+            "state": "absent"
+          }
+        },
+        "explicit_retry": {
+          "eligible": false,
+          "reasons": [
+            "parent has no consistent terminal nonzero native exit"
+          ],
+          "scientific_authorization": false,
+          "successor_ref": null,
+          "supported": true
+        },
+        "explicit_retry_available": false,
+        "kind": "hmasd_operation_status",
+        "manifest_ref": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_engineering_a02/launch-manifest.json",
+        "node": "wsl_4070",
+        "observed_at": "2026-10-02T02:05:08.557705Z",
+        "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/aeafc73ff00a0807bf17244f687f03b7e494535242f49cf2f8d74bbdef5b4b6c.json",
+        "output_root": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_engineering_a02",
+        "record_consistency": {
+          "mismatches": [],
+          "state": "consistent"
+        },
+        "retry_of": {
+          "claim_key": "15022f69c95816f3efb5f9daa8c2377cd3952e326d31fe1941994fd7153ae626",
+          "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/15022f69c95816f3efb5f9daa8c2377cd3952e326d31fe1941994fd7153ae626.json"
+        },
+        "schema_version": 1,
+        "sha": "488c72115a3033a9c01c58bd9510896b82a206bf",
+        "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/824e041961384db0a19f7a1aa9591b9b"
+      },
+      "observed": 1790906708.6534545
+    },
+    "b10-service-assignment-scientific-a01": {
+      "spec": {
+        "id": "b10-service-assignment-scientific-a01",
+        "protocol": "launch",
+        "argv": [
+          "/usr/bin/ssh",
+          "hmasd-wsl-node",
+          "/home/wu/.venvs/hmasd-gcc-31021/bin/python",
+          "/home/wu/projects/HMASD/scripts/hmasd_launch.py",
+          "status",
+          "/home/wu/projects/HMASD/.git/hmasd-admission/f48b8950e02344a606488dd313be9f256693c00dc6cf1bd1c356d8ef27424c11.json"
+        ],
+        "cwd": "/home/fires/hmasd-wsl",
+        "interval": 30,
+        "timeout": 20
+      },
+      "status": "ready",
+      "due": 1790910311.585003,
+      "errors": 0,
+      "last": {
+        "admission": {
+          "claim_state": "accepted",
+          "state": "accepted"
+        },
+        "artifacts": {
+          "stderr": {
+            "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/stderr.log",
+            "state": "present"
+          },
+          "stdout": {
+            "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/stdout.log",
+            "state": "present"
+          },
+          "summary": {
+            "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/summary.json",
+            "state": "present"
+          }
+        },
+        "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/f48b8950e02344a606488dd313be9f256693c00dc6cf1bd1c356d8ef27424c11.json",
+        "direction": "uav_fleet_transmission",
+        "execution": {
+          "exit_code": 0,
+          "exit_witness": {
+            "exit_code": 0,
+            "finished_at_epoch": 1790910261.7535136,
+            "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/process-exit.json",
+            "state": "valid",
+            "termination": "process_exit"
+          },
+          "runner": {
+            "recorded_identity": {
+              "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+              "kind": "linux_pid_start_ticks",
+              "pid": 1299037,
+              "session_id": 1299036,
+              "start_ticks": 124742533
+            },
+            "state": "absent"
+          },
+          "state": "exited",
+          "supervisor": {
+            "recorded_identity": {
+              "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+              "kind": "linux_pid_start_ticks",
+              "pid": 1299036,
+              "session_id": 1299036,
+              "start_ticks": 124742530
+            },
+            "state": "absent"
+          }
+        },
+        "explicit_retry": {
+          "eligible": false,
+          "reasons": [
+            "parent has no consistent terminal nonzero native exit"
+          ],
+          "scientific_authorization": false,
+          "successor_ref": null,
+          "supported": true
+        },
+        "explicit_retry_available": false,
+        "kind": "hmasd_operation_status",
+        "manifest_ref": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/launch-manifest.json",
+        "node": "wsl_4070",
+        "observed_at": "2026-10-02T03:04:41.420598Z",
+        "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/f48b8950e02344a606488dd313be9f256693c00dc6cf1bd1c356d8ef27424c11.json",
+        "output_root": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01",
+        "record_consistency": {
+          "mismatches": [],
+          "state": "consistent"
+        },
+        "schema_version": 1,
+        "sha": "ee7190daebd9e9e3554e7c821ee06ea88c9a9cae",
+        "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/6ca9449d8558449b88b7a269831fe145"
+      },
+      "observed": 1790910281.585003
+    },
+    "b11-travel-ties-engineering-a01": {
+      "spec": {
+        "id": "b11-travel-ties-engineering-a01",
+        "protocol": "launch",
+        "argv": [
+          "/usr/bin/ssh",
+          "hmasd-wsl-node",
+          "/home/wu/.venvs/hmasd-gcc-31021/bin/python",
+          "/home/wu/projects/HMASD/scripts/hmasd_launch.py",
+          "status",
+          "/home/wu/projects/HMASD/.git/hmasd-admission/c3c764c76ec8433a0584c01ef1d3d7311a1fe975a97963f3bd9d51ad6ec7f37a.json"
+        ],
+        "cwd": "/home/fires/hmasd-wsl",
+        "interval": 30,
+        "timeout": 20
+      },
+      "status": "failed",
+      "due": 1790914979.5327353,
+      "errors": 0,
+      "last": {
+        "admission": {
+          "claim_state": "accepted",
+          "state": "accepted"
+        },
+        "artifacts": {
+          "stderr": {
+            "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b11_travel_ties_engineering_a01/stderr.log",
+            "state": "present"
+          },
+          "stdout": {
+            "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b11_travel_ties_engineering_a01/stdout.log",
+            "state": "present"
+          },
+          "summary": {
+            "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b11_travel_ties_engineering_a01/summary.json",
+            "state": "absent"
+          }
+        },
+        "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/c3c764c76ec8433a0584c01ef1d3d7311a1fe975a97963f3bd9d51ad6ec7f37a.json",
+        "direction": "uav_fleet_transmission",
+        "execution": {
+          "exit_code": 1,
+          "exit_witness": {
+            "exit_code": 1,
+            "finished_at_epoch": 1790914907.5946836,
+            "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b11_travel_ties_engineering_a01/process-exit.json",
+            "state": "valid",
+            "termination": "process_exit"
+          },
+          "runner": {
+            "recorded_identity": {
+              "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+              "kind": "linux_pid_start_ticks",
+              "pid": 1310408,
+              "session_id": 1310407,
+              "start_ticks": 125514101
+            },
+            "state": "absent"
+          },
+          "state": "exited",
+          "supervisor": {
+            "recorded_identity": {
+              "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+              "kind": "linux_pid_start_ticks",
+              "pid": 1310407,
+              "session_id": 1310407,
+              "start_ticks": 125514098
+            },
+            "state": "absent"
+          }
+        },
+        "explicit_retry": {
+          "eligible": true,
+          "reasons": [],
+          "scientific_authorization": false,
+          "successor_ref": null,
+          "supported": true
+        },
+        "explicit_retry_available": true,
+        "kind": "hmasd_operation_status",
+        "manifest_ref": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b11_travel_ties_engineering_a01/launch-manifest.json",
+        "node": "wsl_4070",
+        "observed_at": "2026-10-02T04:22:29.278708Z",
+        "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/c3c764c76ec8433a0584c01ef1d3d7311a1fe975a97963f3bd9d51ad6ec7f37a.json",
+        "output_root": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b11_travel_ties_engineering_a01",
+        "record_consistency": {
+          "mismatches": [],
+          "state": "consistent"
+        },
+        "schema_version": 1,
+        "sha": "69394fc8d6d09ddfac0c3286c1783492ed2a6eed",
+        "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/76c36407b97f425d8109d4493136a31d"
+      },
+      "observed": 1790914949.5327353
+    }
+  },
+  "delivery": {
+    "id": "6a1f8524-8b81-4aa2-a865-23af29c3e6d6",
+    "status": "delivery_unknown",
+    "created": 1790914949.540874,
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Error: failed to queue session message: thread/queue/add failed: direct app-server input is not allowed for unloaded spawned sub-agents (code -32600)\n",
+    "exposed_ids": [
+      "0f69ee919b6c914892af1b74"
+    ]
+  },
+  "stopped": false
+}

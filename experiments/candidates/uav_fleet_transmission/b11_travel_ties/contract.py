@@ -80,3 +80,37 @@ def reference_evidence(reference_root, phase, *, verify_raw=True):
     return dict(root=str(root),directory=str(folder),phase=phase,
                 descriptor=descriptor,rows=rows,raw_hashes_verified=bool(verify_raw),
                 new_controller_calls=0,new_model_calls=0,new_native_calls=0)
+
+
+def reference_root_for_output(out):
+    """The admitted output stays canonical; absolute author inputs are rebased.
+
+    Both original B10 references live next to this new direction output. The
+    launcher validated that output root and preserves it outside its snapshot.
+    Reading their bytes is still guarded by the fixed descriptor, never trusted
+    just because a path exists. No shared launcher exception or alias is needed.
+    """
+    out=Path(out).resolve()
+    if out.parent.name!=DIRECTION or out.parent.parent.name!="runs":
+        raise ValueError("reference locator requires canonical direction output")
+    return out.parent.parent.parent
+
+
+def failed_setup_costs():
+    descriptor=json.loads(Path(__file__).with_name("references.json").read_text())["failed_setup_a01"]
+    folder=ROOT/descriptor["run"]
+    for name,expected in descriptor["artifacts"].items():
+        actual=identity(folder/name)
+        if any(actual[k]!=expected[k] for k in ("sha256","bytes")):
+            raise AssertionError("failed setup evidence changed: "+name)
+    failed=json.loads((folder/"failure.json").read_text())
+    manifest=json.loads((folder/"launch-manifest.json").read_text())
+    terminal=json.loads((folder/"process-exit.json").read_text())
+    if (manifest["sha"]!=descriptor["sha"] or manifest["operation_ref"]!=descriptor["operation_ref"]
+            or terminal["exit_code"]!=1):
+        raise AssertionError("failed setup identity differs")
+    cpu=float(failed["resources"]["cpu_seconds"])
+    if not 0<=cpu<CPU_REVIEW_SECONDS:raise ValueError("invalid failed startup CPU")
+    evidence=[dict(kind="failed a01 external-reference startup; no native/model dispatch",
+        path=str(folder/"failure.json"),**identity(folder/"failure.json"),cpu_seconds=cpu)]
+    return cpu,evidence

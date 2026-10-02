@@ -1,0 +1,15 @@
+{
+  "generation": 11,
+  "job_id": "b11-travel-ties-engineering-a01",
+  "status": "failed",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/c3c764c76ec8433a0584c01ef1d3d7311a1fe975a97963f3bd9d51ad6ec7f37a.json",
+  "observed": 1790914949.5327353,
+  "queue_delivery": {
+    "id": "6a1f8524-8b81-4aa2-a865-23af29c3e6d6",
+    "status": "delivery_unknown",
+    "created": 1790914949.540874,
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Error: failed to queue session message: thread/queue/add failed: direct app-server input is not allowed for unloaded spawned sub-agents (code -32600)\n"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "status": "terminal-failure-collected",
+  "canonical_directory": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b11_travel_ties_engineering_a01",
+  "remote_files": {
+    "admission-preflight.json": {
+      "sha256": "57bb6f65674994a93bfebcba0ba38e8c428ded08e91ce4b5b2e970b6a2f5731e",
+      "bytes": 766,
+      "allocated_bytes": 4096
+    },
+    "failure.json": {
+      "sha256": "614c02933132ffd2e3126cfd2cd44c2d9d4c746b4ace23c0083f169975b058c6",
+      "bytes": 1867,
+      "allocated_bytes": 4096
+    },
+    "launch-manifest.json": {
+      "sha256": "677bcae8296d6a58f7e1d0e2c1a4d7f981271e5c1f191e043a89c0c57b95ef93",
+      "bytes": 4838,
+      "allocated_bytes": 8192
+    },
+    "launch-status.json": {
+      "sha256": "ad7296f3c5de19d5dbbc4258dc9143989183a131b90437567f334e24bfc2ec35",
+      "bytes": 619,
+      "allocated_bytes": 4096
+    },
+    "process-exit.json": {
+      "sha256": "058114fbffbb81f398dd0ba2f694b1add7bc492ea4d3f6382be3aa1a6e798d56",
+      "bytes": 557,
+      "allocated_bytes": 4096
+    },
+    "stderr.log": {
+      "sha256": "c40d0fccf6dba5091c6ec34fa3d5db0e18afb6c480df353724392adeda609042",
+      "bytes": 1320,
+      "allocated_bytes": 4096
+    },
+    "stdout.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "allocated_bytes": 0
+    }
+  },
+  "remote_hash_cpu_seconds": 0.0005198949999999994,
+  "raw_files": 0,
+  "new_native_model_controller_calls": 0
+}

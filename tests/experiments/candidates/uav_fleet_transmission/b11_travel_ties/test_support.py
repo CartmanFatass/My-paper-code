@@ -70,3 +70,13 @@ def test_reference_binding_and_panel_are_read_only():
     assert COST_ENVELOPE["native_steps"]==34*3000
     assert COST_ENVELOPE["candidate_forecasts"]==34*100*16*2+576
     assert binding["construction_contract_sha"]=="95ecc08021c0f0a3fffd1efe94323fb77ff31f24"
+
+
+def test_output_based_external_reference_locator():
+    from experiments.candidates.uav_fleet_transmission.b11_travel_ties.contract import reference_root_for_output,failed_setup_costs
+    canonical=Path("/home/wu/projects/HMASD")
+    out=canonical/"runs/uav_fleet_transmission/b11_travel_ties_engineering_a02"
+    assert reference_root_for_output(out)==canonical
+    with pytest.raises(ValueError):reference_root_for_output(canonical/"arbitrary/path")
+    cpu,evidence=failed_setup_costs()
+    assert cpu==1.931557566 and len(evidence)==1
