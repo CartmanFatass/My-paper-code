@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "supervisor_task": "dmgen-b03-joint-window-a01",
+  "status": "terminated",
+  "exit_code": null,
+  "pid": 1322939,
+  "pid_absent": true,
+  "tmux_active": false,
+  "log_error": "/home/wu/.venvs/hmasd-gcc-31021/bin/python: can't open file '/home/wu/scripts/hmasd_launch.py': [Errno 2] No such file or directory",
+  "root_cause": "agent-task joins its argv with spaces, losing nested shell argument quoting; unquoted zsh -lic cd ran cd alone and outer exec ran from home",
+  "output_exists": false,
+  "matching_admission_claims": [],
+  "new_native_steps": 0,
+  "new_model_constructions": 0,
+  "new_fits": 0,
+  "cpu_seconds": null,
+  "cpu_status": "unmeasured preparation/control work",
+  "next": "same published scientific request; corrected single shell command argument; new preparation task only"
+}

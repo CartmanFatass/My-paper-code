@@ -3640,3 +3640,28 @@ Configured wsl_4070 runtime and8GiB available physical/effective memory plus8GiB
 free disk are checked before effects; no node or operation has yet been admitted.
 
 Input hashes: study`1ef2de83078f508afbea8b023bff35fa9bb5587ef176c5e8b138b85182d43783`; initial ledger`800d51f79bad915acf7e26143dc27393c15c28afe3793b9e637512e433c8279e`. Scientific source manifest contains45 files.
+
+
+<a id="b03-preparation-refusals"></a>
+### B03 preparation refusals, before any scientific operation — 2026-10-02 UTC
+
+Exact scientific inputs were published as `300c58af8e5648fb1c98edbd3618f8f964052dda`.
+The first remote supervisor task `dmgen-b03-joint-window-a01` terminated before
+opening the launcher: `agent-task` joins argv with spaces, so nested `zsh -lic`
+argument quoting was lost and an outer `exec` tried `/home/wu/scripts/hmasd_launch.py`.
+Its PID1322939 is absent, tmux is absent, and neither a B03 output directory nor
+admission claim exists. Preserve null supervisor exit code rather than inventing
+one. The corrected invocation passes one already-shell-quoted complete command
+to `agent-task`, keeping the whole preparation in the configured `zsh -lic`.
+
+Second preparation `dmgen-b03-joint-window-prep-a02` reached the maintained launcher
+and exited4 after7 seconds before source admission/output/claim. I reproduced its
+policy-parser error on both current and published RESEARCH: my prior direction
+row had omitted its final pipe, causing the Active parser to skip it. This is my
+documentation defect, not a pause or changed ownership. Root was already writing
+shared RESEARCH, so I requested its one-character row closure without touching
+that concurrent edit or changing state/lead. Scientific input bytes remain fixed.
+Both preparation failures consumed0native/model/fit/optimizer effects; their CPU
+and control-network work are unmetered, not zero. Compact failure facts are saved
+in the engineering run directory. No scientific operation has yet been accepted,
+and a control repair does not authorize duplicate or additional exposure.

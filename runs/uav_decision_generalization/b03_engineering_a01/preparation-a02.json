@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "supervisor_task": "dmgen-b03-joint-window-prep-a02",
+  "status": "failed",
+  "exit_code": 4,
+  "pid": 1323284,
+  "tmux_active": false,
+  "wall_seconds": 7,
+  "log_error": "hmasd launch refused: direction 'uav_decision_generalization' must appear exactly once in the Active table",
+  "reconstructed_cause": "DM-owned published Active table row omitted closing pipe; maintained parser intentionally skips rows without a closing pipe",
+  "output_exists": false,
+  "matching_admission_claims": [],
+  "new_native_steps": 0,
+  "new_model_constructions": 0,
+  "new_fits": 0,
+  "cpu_seconds": null,
+  "cpu_status": "unmeasured preparation/control work",
+  "repair_owner": "Root is writing shared RESEARCH; asked for exactly one closing pipe preserving all other edits"
+}
