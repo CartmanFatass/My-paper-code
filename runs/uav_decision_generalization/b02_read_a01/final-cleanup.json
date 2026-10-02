@@ -1,0 +1,113 @@
+{
+  "scope": "Exact finished preparation directories, stopped direction scratch and rebuildable owned caches; no model/native query and no new evidence copies.",
+  "remote": {
+    "host": "wsl_4070",
+    "observed_epoch": 1790918724.9468071,
+    "process_references": [],
+    "deleted": [
+      {
+        "target": "/home/wu/.agent-tasks/dmgen-b02-cooperation-a01",
+        "status": "finished",
+        "exit_code": 0,
+        "preparation_pid": 1308700,
+        "preparation_pid_absent": true,
+        "files_removed": 6,
+        "before_allocated_bytes": 32768,
+        "after_allocated_bytes": 0,
+        "absent": true,
+        "net_allocated_bytes_reclaimed": 32768
+      },
+      {
+        "target": "/home/wu/.agent-tasks/dmgen-b02-read-a01",
+        "status": "finished",
+        "exit_code": 0,
+        "preparation_pid": 1314790,
+        "preparation_pid_absent": true,
+        "files_removed": 6,
+        "before_allocated_bytes": 32768,
+        "after_allocated_bytes": 0,
+        "absent": true,
+        "net_allocated_bytes_reclaimed": 32768
+      }
+    ],
+    "retained": {
+      "b02_cooperation_a01": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b02_cooperation_a01",
+        "allocated_bytes": 247660544,
+        "npz_count": 496,
+        "check_json_count": 16
+      },
+      "b02_read_a01": {
+        "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b02_read_a01",
+        "allocated_bytes": 4857856,
+        "npz_count": 0,
+        "check_json_count": 480
+      }
+    },
+    "net_allocated_bytes_reclaimed": 65536
+  },
+  "local": {
+    "host": "authoring_wsl",
+    "observed_epoch": 1790918725.0879536,
+    "observer_checks": [
+      {
+        "state": "/home/fires/hmasd-wsl/temp/directions/uav_decision_generalization/b02_worker_wait_state/state.json",
+        "daemon_pid": 410735,
+        "daemon_absent": true,
+        "generation": 2,
+        "stopped": true,
+        "compact_record": "runs/uav_decision_generalization/b02_cooperation_a01/observer-record.json",
+        "compact_sha256": "95ef2c0fb7df31906f96cc17302e744d4ebdf8dc9aec0a52c10dca9db3c5c0a3"
+      },
+      {
+        "state": "/home/fires/hmasd-wsl/temp/directions/uav_decision_generalization/b02_reader_wait_state/state.json",
+        "daemon_pid": 414175,
+        "daemon_absent": true,
+        "generation": 2,
+        "stopped": true,
+        "compact_record": "runs/uav_decision_generalization/b02_read_a01/observer-record.json",
+        "compact_sha256": "1c11b2966d7a7e6b20f837e2d8501ca1a1d2df6687f75ba1957c7ec0b2ac353a"
+      }
+    ],
+    "process_references": [],
+    "deleted": [
+      {
+        "target": "/home/fires/hmasd-wsl/temp/directions/uav_decision_generalization",
+        "before_allocated_bytes": 90112,
+        "after_allocated_bytes": 0,
+        "absent": true,
+        "files_removed": 19,
+        "net_allocated_bytes_reclaimed": 90112
+      },
+      {
+        "target": "/home/fires/hmasd-wsl/experiments/candidates/uav_decision_generalization/b02_feedback_cooperation/__pycache__",
+        "before_allocated_bytes": 135168,
+        "after_allocated_bytes": 0,
+        "absent": true,
+        "files_removed": 13,
+        "net_allocated_bytes_reclaimed": 135168
+      },
+      {
+        "target": "/home/fires/hmasd-wsl/experiments/candidates/uav_decision_generalization/__pycache__",
+        "before_allocated_bytes": 12288,
+        "after_allocated_bytes": 0,
+        "absent": true,
+        "files_removed": 2,
+        "net_allocated_bytes_reclaimed": 12288
+      },
+      {
+        "target": "/home/fires/hmasd-wsl/tests/experiments/candidates/uav_decision_generalization/b02_feedback_cooperation/__pycache__",
+        "before_allocated_bytes": 61440,
+        "after_allocated_bytes": 0,
+        "absent": true,
+        "files_removed": 1,
+        "net_allocated_bytes_reclaimed": 61440
+      }
+    ],
+    "net_allocated_bytes_reclaimed": 299008
+  },
+  "prior_source_snapshot_reclamation": 3607920640,
+  "additional_allocated_bytes_reclaimed": 364544,
+  "b02_total_allocated_bytes_reclaimed": 3608285184,
+  "retention": "Useful frozen source and tests, sole canonical 496 raw missions, 480 main/16 audit checks, old actors and compact positive/adverse records remain."
+}

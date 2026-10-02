@@ -2186,3 +2186,258 @@ as compact run records. The exact zero-query DM arithmetic source is retained
 in the result record alongside its hash; temporary scratch cleanup follows the
 independent reading. Original actors, all worker raw, both canonical manifests,
 all480main/16audit checks and adverse outcomes remain available.
+
+
+<a id="b02-independent-result-review"></a>
+### B02 original independent result diagnosis — 2026-10-02 UTC
+
+Root reused the existing independent ResearchCritic `/root/next_study_review`
+for this actual result, after its source/evidence reconstruction. This is one
+substantive result review, not a second experiment or an engineering re-review.
+The reviewer explicitly discloses the earlier selection context and visible DM
+summary; it is independent diagnosis but not blinded. It reconstructed all480
+endpoints/all28 paired vectors, inspected70 complete raw missions and all1181
+takeover checks, then compared my published explanation. Its exact scope and
+limits are retained below. No new native/model/C queries were purchased.
+
+Root mechanically extracted the complete final answer from
+`/mnt/c/Users/fires/.codex/sessions/2026/10/01/rollout-2026-10-01T17-23-45-01a0f9fe-de22-7d73-82c2-129a0cadede6.jsonl`,
+line1400, timestamp`2026-10-02T05:18:46.283Z`, actual turn
+`01a0fafb-c970-71d3-91df-233235b91b72`, actual runtime`gpt-6-astra/max`.
+The original UTF-8 answer is12967bytes, SHA256
+`495c7dd77b027fb01eb28d72e672915be45ec8ea8760b7f8edb15d7c280e6967`.
+The following bytes are unabridged; the source extraction file was
+`/tmp/hmasd-root-b02-cooperation-result-critic-20261001.txt`, with metadata in
+`/tmp/hmasd-root-b02-cooperation-result-critic-meta-20261001.json`.
+
+<!-- BEGIN B02 ORIGINAL RESULT CRITIC -->
+我的建议是：**结束这条固定零接触接管规则的新增投入，保留原 S0/S1 的服务与路径能力，以及 Bstar0 的个体覆盖用途；当前不买门控修补、追加面板或新 fit。** B02 确实执行了合作，但没有证明合作带来平均新增用途；S1 和普通 G 的接管版本均出现有证据的损失。这不否定冻结学生，也不结束广义学习决策与协作问题。
+
+本轮沿用我此前的 S/C 选题上下文，并可见任务消息中的 DM 摘要，因此不是盲审。我先完成下面的源码、端点及原生轨迹重建，再对照 DM 已发表解释；没有继承其解释作为结论。
+
+**证据边界。** 我核对了冻结合同、worker `e33a024ee0fc4258ba1ec9ac25fae811218b807f`、reader `024d325366ffedd3af6ef8f8a2a08271d981d37f`，逐项比较绑定的32个源码文件，两个版本的相应字节均吻合；直接核对了远端 S0/S1 checkpoint 的 SHA。完整 reader 的 SHA 为指定的 `98b3e648…e4236`，终态 exit0，480主任务 VERIFIED，另采用16个完整审计。
+
+我从原始 episodes 数据独立复算了全部28组成对比较的逐世界向量与均值，未发现差异；独立读取了70个完整主任务 NPZ，包括主要正例、损失极值、全部程序的同世界对照和团队零服务世界。核对内容包括文件身份、共同初始几何、all-on、逐步裁剪运动、局部 own-count、全部50用户服务 mask、原生奖励、路径、从未服务及最长缺口、接管窗口、首四步一致性。没有发现改变比较意义的错配。
+
+我没有重新执行模型、C、环境或 bootstrap，也没有机械重建全部496份 raw 的每个计算。冻结 bootstrap 区间依据已核对的实现和现存结果；全数源重放的工程保证仍来自完整 reader，而非我的第二次实验。入口是[原始 reading](/home/fires/hmasd-wsl/runs/uav_decision_generalization/b02_read_a01/reading.json)及[合同和完整记录](/home/fires/hmasd-wsl/docs/research/candidates/uav_decision_generalization/NOTES.md:2027)。
+
+所有下述区间都是固定两个资产条件下的32世界区间：先平均同世界两条 tape，再作配对统计。两条 tape 不是训练复制，S0/S1 也不是本轮新训练的独立确认实例。
+
+四个主比较重建如下：
+
+| 比较 | J 差及95%区间 | 每步服务人数差 | 平均用户最长缺口差 |
+|---|---:|---:|---:|
+| Z(S0)−S0 | −0.0004045 [−0.0080097, +0.0060650] | −0.011719 | +0.802188 |
+| Z(S1)−S1 | −0.0074530 [−0.0173516, −0.0011588] | −0.544617 | +1.564375 |
+| Z(S0)−Z(G) | +0.0195218 [+0.0077204, +0.0322549] | +1.561829 | −1.644062 |
+| Z(S1)−Z(G) | +0.0196423 [+0.0088041, +0.0317819] | +1.555298 | −3.620937 |
+
+S0 的合作增量未确定，不是等效证明；S1 的 J 和服务人数区间均为负。更关键的是，**Z(G)−G 本身也损失 J −0.0047189 [−0.0111748, −0.0002012]**，服务减少0.340149，平均用户最长缺口增加2.239375，后者区间也排除零。
+
+所以 Z(S) 超过 Z(G) 不能承担“合作成功”的结论。原学生已经超过 G，而接管还损害了普通对照。预写的交互差：
+
+- `(Z(S0)−S0)−(Z(G)−G)`：+0.0043144 [−0.0030641, +0.0118713]；
+- S1 对应差：−0.0027341 [−0.0146405, +0.0073032]。
+
+两者都没有识别学生特有的协作增益。
+
+**值得保留的学习资产很具体。** S0−G 的 J 为 +0.0152073 [+0.0033496, +0.0272557]，每步服务 +1.233398，路径减少632.582米/UAV；S1−G 为 +0.0223764 [+0.0129531, +0.0331250]，服务 +1.759766，路径减少520.636米/UAV。两学生也超过 C。S1 的既有正能力在这批新世界继续出现，S0 本轮也有清楚的条件性优势。
+
+这是固定资产在该 N5、静态用户、H256/H4 使用合同上的原生用途。它不是新学习出来的合作，更不能单凭超过 G，就认定收益来自某种独有的学习表示。普通随机导航、访问分布及采样律仍是强竞争解释。原生质量分量也没有同步提高：S1−G 为 −0.007535，S0−G 为 −0.006867；较高 J 主要伴随更多服务人数。
+
+个体服务进一步改变了用途判断：
+
+| 程序 | 每步服务人数 | 从未服务用户数 | 平均用户最长缺口 | 路径，米/UAV |
+|---|---:|---:|---:|---:|
+| C | 21.4529 | 20.8125 | 136.9050 | 2817.523 |
+| G | 23.1844 | 8.5156 | 110.7906 | 3669.647 |
+| S0 | 24.4178 | 9.7188 | 110.5838 | 3037.065 |
+| S1 | 24.9442 | 10.2344 | 107.8447 | 3149.010 |
+| Bstar0 | 24.7697 | 5.4375 | 93.6797 | 4450.787 |
+
+这些缺口包含全部50用户以及任务首尾的删失段；从未服务用户的最长缺口记为256，没有把他们排除来改善均值。
+
+S1 虽然服务更多，却比 G 平均多 **1.71875 [0.296875, 3.234375]** 个全程未服务用户。因此应保留“聚合服务与路径优势”，不能改写成普遍连续服务优势。
+
+已有 Bstar0 是有实际证据的另一种用途。相对 S0，它平均少4.28125个从未服务用户，最长缺口减少16.9041步，且**全部32个世界的平均用户最长缺口均更短**；代价是路径增加1413.723米/UAV。相对 S1，它少4.796875个从未服务用户、缺口减少14.165步、路径增加1301.777米/UAV。这些覆盖、缺口和路径区间均排除零。Bstar0 与 S0/S1 的 J 差区间跨零，不能称为无损替代，也不能称为普遍更优。它是已付费的覆盖—移动成本取舍，无需再训练才能保留。
+
+**接管是稀疏但真实的主动干预。** Z(S0)、Z(S1)、Z(G) 分别发生294、248、639次接管，改变241、131、53条完整四步裁剪路径。两个学生版本分别在20、22个世界激活；不能把结果归因于未激活。类别改变不必然改变物理路径，这一点已通过完整四步路径而非仅动作编号处理。
+
+源码与 raw 一致表明：触发时当前合法用户集合为空，C 的27个候选服务评分均为零，实际走原有 waypoint 分支。因此这里的 C 接管是**用确定性空用户导航替换父策略的采样行为**，并非发现了更优的当前无线服务动作。G 的原分布为约0.9选择 C，其余动作分摊0.1；同样的接管会取消它的探索性导航。
+
+接管后四步内重新出现本机接触的次数为 S0 55/294、S1 69/248、G 75/639。这些是各自策略诱导状态中的描述，不能当作可比较的救援成功率，更不是同历史 native 反事实。
+
+完整轨迹保留了有用正例，也排除了几个过于方便的统一解释：
+
+- **强烈损失，world108310000/tape0：** Z(S0) 有122次接管，J 从0.362072降至0.198114，服务从22.3594降至9.6602，平均用户最长缺口从130增至196.02；31个用户服务次数下降。另一 tape 与父策略完全相同。不能用接近零的总体均值抹平这类损失。
+- **少量干预也能明显有害，world108310016：** Z(S1) 两条 tape 的 J 分别从0.442098降至0.325336、从0.409546降至0.260485。前一条只有**四次接管**，仍少服务7.9141人/步；后一条有140次接管，少服务10.1094人/步。两条均没有团队零服务。这直接反对“损失只是连续接管过久，缩短就能修好”的诊断。
+- **普通程序同样失败，world108310006：** Z(G) 两条 tape 都对同一 UAV 接管63次，该 UAV 全任务保持 own-count 为零；原 G 则重新获得接触。两条 J 各损失约0.085。学习器并不是这种不良闭环的必要条件。
+- **真实正例，world108310001/tape0：** S0 的一次接管带来 J +0.085371、团队服务 +5.804688，平均最长缺口121.6→88.36。不过被接管 UAV 自身平均服务反而由6.4844降至4.5859，另有13个用户服务减少。局部 own-count 恢复既不是团队收益的充分条件，也不是必要表征。
+- **正 J 仍可损失覆盖，world108310007/tape0：** Z(S1) 的 J +0.026138，但从未服务用户由4增至6。
+
+这支持“接管改变导航、后续占位与耦合服务结果”的工作解释；它没有区分探索不足、后续几何与干扰各自的因果贡献。没有必要把未识别的机制包装成一个待修复的已知 bug。
+
+团队零服务的事实也应单独保留。全部这类任务集中在 world108310012，C 本轮也出现了零服务。两个学生 Z 各消除了父轨迹中一个首段之后的零服务 tick，首四步仍完全一致。但是：
+
+- Z(S0)/tape0 的 J 提高并消除一 tick 零服务，同时从未服务用户9→14；
+- Z(S1)/tape1 消除一 tick 零服务，同时 J 0.362298→0.354463、服务22.602→21.207。
+
+这保留了局部连续性正例，却不构成安全修复。旧 B05 的 S1−G 正能力、B06 的反例和原“不能优先把仅 S→C 当作安全救援”异议均成立。新旧面板不应相减成修复幅度。
+
+**计算价格已闭合到足以作投资判断。** 本轮480主任务加16审计，共126,976 native steps；零 fit、更新、校准、新训练标签、LLM 调用和 GPU 使用。实际计算包括：
+
+- 170,728个冻结 actor 行前向；
+- 78,700次完整原 C 计算，合计2,124,900条候选轨迹、8,499,600个模型运动步；
+- 另172次工程 C 调用，增加4,644条轨迹和18,576个模型步；
+- 完整源 reader、接管处同历史父命令读取，以及全用户服务重建。
+
+缓存与只查询选中控制源确实减少了在线前向，但不能把“0 fit”称为零计算。q=0 时没有当前用户无线评分，并不免除 C 的几何轨迹工作。
+
+较晚终态 summary 的累计 CPU 为303.294591秒，加入 DM 全量 raw 算术2.987754秒，计量范围合计 **306.282345秒，即0.0850784 CPU小时**。较早 reading 内的302.987546秒不能替代终态数。微秒级分项差保留，不影响判断。该数不包含未计量的人类/代理支持时间和终端自报尾部；8–12小时支持预算仍不能冒充实际测量。
+
+在线任务均值为 C 0.1728秒、G 0.2512秒、S1 0.2490秒、Z(S1) 0.2567秒、Bstar0 0.2928秒，包含环境及存储工作，不能称为纯策略延迟。接管没有证明部署计算节省。历史 S 链取得成本也必须继续保留，不能因本轮冻结复用而归零。两份终态源码 snapshot 的清理记录合计回收3,607,920,640 allocated bytes；必要模型、原生证据和检查记录保留。
+
+我的方向修正是以下三点。
+
+第一，**结束固定 Z 规则的追加投资**。不采用它作为默认合作，不按本批极值修窗口或加锁定时间，不因 S0 区间跨零而自动补 seeds，也不把一次正例变成学生专属救援方案。我们已经获得了原选题所需的完整区分：物理介入存在、局部有益、总体新增用途未建立、普通控制和 S1 都会受损。无需穷尽机制才能停止这一配方。
+
+第二，**将既有能力作为完整程序保留，而不是继续救援它们**。S1 是该合同下聚合服务及路径的有力参考，Bstar0 是更广个体覆盖与更短缺口的参考，G 是不可省略的普通随机导航参照。保留这些用途不意味着在线切换它们；那会是另一项尚未测量的合作程序。实际采用哪个程序必须面对路径、服务量与漏服务之间的取舍，不能事后改 J 或补一个“安全”称谓来制造统一赢家。
+
+第三，**当前不为 B02 分支购买新的 native 或 fit**。下一笔投入不应由“门控失败，所以需要学习门控”自动推出，也不应由本批结束自动转成 A 早停或 R 菜单迁移。这里最小而有用的观察已经完成：父策略、相同合法反馈下的普通程序、完整合作程序和已付费覆盖替代品都有直接对照。再买同样的面板主要会缩小已知差异的不确定性，不足以改变目前的行动选择。
+
+若以后重新提出合作，真正能改变判断的应是一个明确的新用途比较：新程序相对自己的父程序增加完整服务价值，并在全部用户缺口和移动/计算代价下仍值得用，同时接受相同信息权利的普通反馈程序挑战。若只超过普通合作而不超过父程序，继续保留学习资产、拒绝新增合作；若普通反馈同样获益，保留普通用途而不归因于学习特有协同；若新增用途成立，再决定是否值得对新训练实例复制。当前没有这样一个具体、已闭合的新干预，所以没有理由捏造新的 fit 数、seed 数或执行预算。
+
+我与 DM 本次“不采用 Z、不调阈值或扩面板，保留 S 与 Bstar 条件用途”的实质处置一致。最需要防止的解释偏移，是把 Z(S)>Z(G) 写成合作成功，或者把损失解释成已识别的“接管太多”并据此自动排队修补；两者都被直接对照和完整轨迹限制。
+
+**MATERIAL_DISSENT: no。** 同意结束该固定配方的新增投入，并保留上述正能力、个体代价及长期问题；不支持由本结果自动批准任何门控修补、额外面板或新训练。
+<!-- END B02 ORIGINAL RESULT CRITIC -->
+
+<a id="b02-independent-disposition"></a>
+### B02 DM disposition and standing after independent diagnosis
+
+I have read the whole original answer and accept the substantive disposition.
+Root independently read it and reported`MATERIAL_DISSENT:no`. The fixed Z
+purchase ends here: no default switch, extra worlds/tapes, gate-duration repair,
+learned gate or new fit follows from this result. S_L0/S_L1 retain conditional
+aggregate service and shorter-path value against G; Bstar_L0 retains wider
+individual reach and shorter gaps at a materially larger travel cost. Neither
+is a universal default, safety result, improved quality component or a new
+training replication. Broader learned decision assistance remains an open
+question; ending this use law does not reject the frozen capabilities.
+
+The review strengthens two constraints on my working explanation. In the
+already-read compact world108310016/tape0, only four ZSL1 takeovers accompany
+J.442098→.325336 and mean served27.4453→19.5313. The other tape's140 takeovers
+are not a common explanation for both losses. “Too much takeover” therefore
+cannot be treated as the identified defect that licenses a shorter-window
+repair. The critic's independently reconstructed world108310001/tape0 further
+shows that the gated UAV's own mean service falls6.4844→4.5859 despite the
+team's J+.085371 and served+5.804688. A complete team gain need not follow that
+UAV's own average service; this limits a local-restoration narrative without
+identifying exploration, position or interference as the causal mediator.
+The positive and adverse same-user cases, including users losing service in
+positive-J missions, remain evidence rather than exclusions.
+
+The mechanism prediction reached physical action changes, but its proposed
+native consequence failed. The complete parent contrasts determine that
+judgment; positive Z(S)−Z(G) cannot substitute for them when G's own switch
+also loses. Both interaction intervals cross zero. I retain task opportunity
+and the original learned program's package value, while weakening this
+particular local-feedback collaboration hypothesis. Representation necessity,
+training-distribution generality and the causes of individual failures remain
+unresolved; none requires more queries before ending the fixed recipe.
+
+The next investment is not automatically another gate or the previously
+unselected A early-stop/menu-transfer ideas. A useful continuation must state a
+new consequential complete-service comparison, the additional information and
+experience it needs, an ordinary program with those same rights, and its full
+price. It should exploit the demonstrated aggregate-service or coverage
+capability rather than imply the frozen assets need rescue. Root's temporary
+Oracle is currently comparing such next questions; this is cross-question
+allocation, not a standing approval dependence or a selected new run. I have
+supplied existing source and cost facts. There is no active worker, observer,
+unread result/advice for B02, or unpriced continuation.
+
+<a id="b02-final-cleanup"></a>
+### B02 final measured cleanup and retained evidence
+
+The two completed source snapshots were already removed after their exact
+supported GC checks, reclaiming3,607,920,640allocated bytes. Final cleanup checked
+both finished preparation tasks, their exit0 records, absent preparation/native
+PIDs, no referencing process and the stopped/consumed generation2 observers.
+It deleted these exact additional targets:
+
+- Remote `/home/wu/.agent-tasks/dmgen-b02-cooperation-a01`:32,768allocated bytes.
+- Remote `/home/wu/.agent-tasks/dmgen-b02-read-a01`:32,768allocated bytes.
+- Local `temp/directions/uav_decision_generalization/`:90,112allocated bytes.
+- Owned code caches under `experiments/candidates/uav_decision_generalization/`
+  and its `b02_feedback_cooperation/`:12,288+135,168allocated bytes.
+- Owned test cache under `tests/experiments/candidates/uav_decision_generalization/b02_feedback_cooperation/`:
+  61,440allocated bytes.
+
+All six targets are absent. The final deletion reclaimed364,544allocated bytes;
+combined B02 target reclamation is **3,608,285,184allocated bytes**, with no
+archive, backup, duplicate bulk or new evidence copy. This is measured allocation
+of the deleted targets, not a claim about filesystem capacity or Git object-store
+shrinking. [Exact final cleanup witness](../../../../runs/uav_decision_generalization/b02_read_a01/final-cleanup.json)
+records live-consumer checks and before/after values. No tool blocker or leftover
+disposable target remains.
+
+One necessary canonical worker evidence set remains at
+`wsl_4070:/home/wu/projects/HMASD/runs/uav_decision_generalization/b02_cooperation_a01`
+(496unique raw missions,16audit checks,247,660,544allocated bytes), and the
+reader at the sibling`b02_read_a01` (480main checks,4,857,856allocated bytes).
+Their manifest/exit/summary identities and all retained positives/adverses
+remain published. The two historical actor files stay in their original
+canonical locations, unchanged and uncopied. Frozen worker/reader code and
+focused tests remain useful for the retained complete-use evidence and its
+independent reconstruction; no unused alternate implementation remains.
+The compact run records and notebook retain original observer failures and
+all exact source identities after disposable launch support is gone.
+
+The final scientific purchase remains126976native steps,0fits/updates/labels/
+calibrations/LLM/GPU,170728actual frozen actor rows and78700full C computations
+plus172synthetic C calls. The already-published measured computation is
+306.282345CPU-s; final documentation/inspection/cleanup support is not included
+in that scope and is not asserted zero. The two source-snapshot witnesses and
+this final cleanup do not change any native or learner result. B02 is complete,
+independently diagnosed, published and cleaned; the scientific question and its
+retained capabilities continue under the same DM ownership.
+
+### Source-only clarification supplied for possible next investment
+
+The original S_L0/L1 acquisition is supervised imitation, not an existing
+policy-gradient learner with GAE or a value head. Frozen source
+`experiments/candidates/uav_fleet_adaptation/b02/model.py:63–139` takes114-feature
+rows and integer27-command labels, uses cross-entropy and one continuing Adam;
+`study.py:107–180` collects each whole phase before fitting, with C roll-in first
+and the current student's roll-in for the two aggregate phases. Saved BC/D1/S
+endpoints are copied/frozen; the original fit starts from a new random student,
+not from the frozen S now used by B02. Thus a terminal64-tick service return
+cannot be passed into the existing trainer unchanged. A new learning method and
+its costs would need a separate complete contract; no such fit is selected here.
+
+Each original acquisition fit uses65536training native steps,81920C labels,
+8000updates and4096000sample presentations. The saved L0/L1 summaries at
+`runs/uav_fleet_adaptation/b02_inheritance_a01/summary.json` and
+`b03_inheritance_recurrence_a01/summary.json` respectively report complete worker
+CPU101.990389962/92.334372074seconds, including their different evaluation panels
+(49152/32768extra native steps). Recorded training-episode CPU plus optimizer
+phase CPU is60.927847905/60.715340245seconds, excluding shared imports and
+summary overhead; it is not a substitute for complete acquisition/reader/check
+cost. The historical source and outcome identities remain owned by that direction.
+
+Registered-service F is currently evaluator-only: its
+`b01/metrics.py:26–55` reduces native256×50contacts to four64-tick distinct-user
+completion windows, F∈[0,200]. Its scheduler separately has a400byte ordered
+integer-metre map via`uav_radio_activation/b01/protocol.py:28–44`, decoded
+position reports and known executed commands/masks. Registered-service
+`b01/history.py:49–107` reconstructs predicted history from those inputs with the
+model; no true per-user ACK is available. The native connections obtained by
+`b01/study.py:119–173` remain on the evaluator side. Current S's104-local-row
+plus10helper-feature interface has neither registered map nor true completion
+bits. A training-only scalar F could preserve actor information rights if
+explicitly declared; giving the actor a map, completion bits or true ACK adds
+an information/communication interface and needs equally supplied ordinary
+comparators. These are feasibility facts for Root's allocation, not a new
+architecture selection or an invitation to access evaluator truth online.
