@@ -3998,3 +3998,576 @@ attempt files retain the inventories recorded above. Required trajectories, stre
 checkpoints and useful reconstruction/checking code remain; unrelated writers are
 untouched. B06 is read and closed, the direction is reserve/idle, and the optional
 next scientific allocation belongs to Root without an automatic continuation.
+
+<a id="b07-finite-message-design"></a>
+## 2026-10-02 - B07 prospective finite-message comparison, source-only selection
+
+**State: one bounded design for Root's cross-question choice; no new scientific
+execution is selected.** Native successor `/root/dm_message_budget`, actual UUID
+`01a0fd1a-8a66-7ba1-b7c3-74be96008f0a`, parent Root
+`01a0ef2b-a391-7693-a748-60e24be246ae`, adopts only this direction's paths on shared
+main. RESEARCH at `1ef16a5dc5b7a0f521ec189085755ddeb45ee763` records the adoption.
+The B06 terminal reading/cleanup above and prior `dm_calibration_recovery` route
+both explicitly say no live operation, unread advice or remaining consumer; the
+current native tree contains no contrary old lead. This is succession after complete
+closure, not recovery of an old run. Codex pause is lifted; Claude's pause and all
+other ownership remain unchanged. No S7, typed-bank or correction-compression edit
+ownership is inherited. This turn has performed source/metadata/hash/primary-passage
+reads only: **0 fits, 0 model forwards, 0 static radio calls, 0 native steps, 0 new
+data acquisitions**. No pricing pilot, health query, critic model call or effect is
+hidden in the design.
+
+### Question and evidence that changes this choice
+
+The enduring question is whether a finite message can retain a useful cooperative
+controller, and whether task-aware encoding adds value over competent ordinary
+encoding with the same lawful information, bits and delayed transport. The proposed
+contribution is **empirical understanding of a capability/communication tradeoff**,
+not a new communication theorem, proven message-mediated coordination or a physical
+network saving. The particular study is a lossy retrofit of an existing packet and
+frozen receiver, rather than another full policy/content co-adaptation fit.
+
+Current published RESEARCH [topic 3](../../RESEARCH.md#3-marl-增加的是联合行为和信息结构),
+[topic 5](../../RESEARCH.md#5-技能和异步性是组织决策的方式其收益需要证据), and
+[topic 8](../../RESEARCH.md#structural-research-background) were read at the above
+revision. They change this design concretely: keep RR transport and action timing;
+retain the stronger useful frozen D asset rather than discard its positive result;
+give the ordinary quantizer the same paid observations, policy knowledge and tuning
+panel; and require complete own-history service evaluation after any offline proxy
+improvement. Neither lower reconstruction error nor a smaller code alphabet proves
+closed-loop utility. Shared reward, a shared codebook and a central training loss
+do not by themselves establish useful coordination.
+
+Inherited evidence is B01-B06, including their full costs and adverse readings:
+B01 C/H/L each learned, but replacement L lost to C/H; B02 retained-field L had a
+positive average with seed reversals; B03 retained B19451, O19452 and L19452's new-world
+gains over C and provisionally selected B19451. B04 learned forecasts improved their
+own prediction errors without a resolved F-over-O native increment, and its continued
+geometry controls could lose the parent capability. B05/B06 bounded continuation
+retained conditional gains and active ordinary calibration, while message causality
+and D-versus-K continuation superiority remained unresolved. B06's six fits, interrupted
+prefix and evaluation recovery are not free or new data generated for B07.
+
+The later [correction-compression reading](../uav_correction_compression/NOTES.md#b01-complete-reading)
+is relevant read-only evidence: replacing each D by its old-panel mean lost service/J;
+D19702 retained a positive conditional B40 increment on another panel, but no new
+default was adopted. That is a reason to preserve its varying controller while testing
+its message representation. It is not proof that its variation uses message content.
+The ordinary alternative is that a small geometry codebook already preserves the
+necessary distinctions, making task-aware optimization unnecessary. A second plausible
+outcome is that teacher-history imitation improves while trajectory changes erase the
+benefit, as proxy/native separation already occurred in this direction.
+
+### Actual host, sender, receiver and paid data
+
+CodeGraph/source reconstruction used the current CADC `channel.py`/`model.py` and
+this direction's `b05/channel.py`, `b05/model.py`, `b05/collector.py`, and
+`b06/model.py`/`collector.py`. The original N5/U50/H256 host has static anonymous
+users, a 1000 m square, 50-150 m height and primitive sampled motion every tick.
+The local actor receives raw104 (own xyz, up to20 anonymous visible-user relative
+xy/SINR rows, up to10 anonymous visible-peer xyz/SINR rows, clock), its previous
+executed command3, zero remaining1, and the common63 transport fields. These are
+current GOOD/BAD, own physical ID, t-mod5, own pending bit, and fixed-sender cache
+records containing payload7, validity, send tick and age. No user identity, true
+served/connection status, unseen map or another agent's hidden state is actor input.
+
+The source packet is `(sender x,y,z; visible-user centroid x,y; 0; count/20)`.
+It has six variable FP32 numbers. B04-B06 appended three forecast floats; B06 D/K/B40
+set all three to zero. Thus original28 B and later40 B contracts must not be conflated;
+even a lossless ordinary serializer can omit their known zeros and use24 payload B.
+B07's source vector is exactly fields `[0,1,2,3,4,6]`, in `[0,1]^6`; sender codec
+uses this vector only. This deliberately holds the packet source interface fixed
+for the retrofit question. Both methods have the same access restriction, while
+the frozen receiver retains its whole legal local history. This is not an information
+bound on codecs that use richer sender history or on jointly adapted controllers.
+
+At each tick, due messages arrive before actor inference. Only `t mod5` sends;
+send-time GOOD/BAD gives delay1/5, with independent .05 regime-flip probability.
+The five-tick packet clears before its next slot; every tick has one accepted packet,
+no collision and fee.001. All four other agents receive identical payload bytes;
+self cache stays invalid. There is no central uplink, scheduler query, receiver ACK
+or extra round. Terminal in-flight packets are censored. The native objective remains
+`J_net=.014*mean(served_users)+.3*mean(Q)-.001`; Q conditions on actually connected
+users and does not stand in for individual service continuity.
+
+The proposed main parent/teacher is **D19702**, frozen in every arm: local canonical
+`runs/uav_message_content/b06_calibration/19702/D/final.pt`,568164 B, SHA256
+`1a0de628a6c324a5cd0c69f4857b37b4bc1f47c51dc80d2a9a233e7ee7f69840`.
+It contains B19451's39942 actor parameters plus16259 correction parameters
+(56201 FP32 actor parameters,224804 raw parameter B), the same GRU64 and variance.
+Critic parameters are retained in the file but never queried or updated by B07.
+The actor/GRU/correction/log-std are frozen, with episode hidden state reset to zero.
+The bounded residual still receives input186 and the base recurrent output; the
+extra15 forecast inputs are reconstructed zeros. Both encoder and decoder codebook
+change only in the codec fit; there is **no receiver or policy adaptation**.
+
+The full-payload B19451 reference stays available at canonical
+`wsl_4070:/home/wu/projects/HMASD/runs/uav_message_content/b02_preserved_scalar/19451/B/final.pt`,
+463357 B, SHA256 `34871c49874ec716c21438581facfaeca8a25930304a39eb26e001fb2b259da2`.
+Its source is `02ede8a4a75cc83e6e18d8b6619f1cfa84bc8d92`; its inherited C is
+`456832faaa94afb22cf3faa00bb97b0f129e2f5b72b2eedbb1148523b088cdad`.
+Read-only SSH rehashed B, O19452 (`90760a722081dec5442aeec85c9302ae3992dcfb96f0bf919aa81389815aa684`)
+and L19452 (`c8df7428611608ae0c2786b6b9e395e8183d3b79b30fcdd197e4fcdc9c643f59`)
+to their recorded hashes. O/L are retained capabilities, not needed training inputs
+or additional scored programs for this retrofit. All six local B06 K/D final bytes
+were also rehashed; no weights were loaded or evaluated.
+
+The actual proposed dataset is the **32 existing D19702 final trajectories**, under
+`runs/uav_message_content/b06_calibration/19702/D/raw/final_00.npz` through
+`final_31.npz`. All32 file hashes were checked against the saved summary:9061080
+compressed B;65029376 uncompressed NPY member B. The ordered filename/NUL/size/NUL/
+hash/newline inventory is `a0eaac8dea65434625b9a6778b7b7f147b1698de68a137b622b93a2f3fb04311`.
+Summary SHA256 is `c642411146305d20716bec3f9fba510e8021adf9076876079799141b637e2211`;
+full episode stream SHA256 is `a61a5b4d367ed8679066c9b580a8b5fa8cf1e8fff47d772704d89a2714fdd0f5`.
+NPY headers and collector source establish actor_input `(256,5,186)`, packet `(256,10)`,
+composed_mean `(256,5,3)`, sender/due/good, records, physical positions, log_std,
+and connected_users `(256,50)`. Full training trajectories were **not** retained;
+the512 compact training episode rows are not an offline observation bank. No attempt
+to fabricate them or collect another bank is included.
+
+Use old episode indices0-23 for fitting (6144 sends,30720 actor rows) and24-31 for
+development (2048 sends,10240 actor rows). The old physical/channel/motion seed bases
+are1970002000/1970007000/1970003000. These panels were already exposed in B06 and
+may now supply paid development data; they are not fresh confirmation. The stored
+**composed** means supply all teacher targets, so no new teacher-label acquisition,
+critic/Q evaluation or rollout is required. A single32-episode frozen replay would
+check those target/input bindings inside the complete purchase; that is8192 batch-of5
+actor steps, not zero model work. The alternative B40 data are intact locally (32
+hashed files,8573139 B), but they are not silently mixed into D's visitation dataset.
+
+### Complete finite alphabet and transport bill
+
+Choose **one256-symbol alphabet, fixed8-bit payload per scheduled send**, no entropy
+coding or variable length. The ordinary and task-aware codecs each install a common
+`256 x6` FP32 codebook (6144 B) plus six FP32 metric scales (24 B). Encoder chooses
+the nearest codeword in that fixed diagonal metric; decoder looks up the same six
+floats and reinstates the four known zeros for the B06 receiver. Codebook rows are
+shared by all physical senders, not five free sender-specific dictionaries. Lowest
+index breaks exact ties. No dictionary or embedding is transmitted with each packet.
+
+The full modeled serialization bill is explicit, despite the simulator's abstract
+link: payload8 bits + sender3 + send_tick8 + valid1 + four reserved zero bits =
+**24 bits/3 B per packet**. Timestamp0-255 is unambiguous within one synchronized
+H256 episode; resets discard all old packets. Age is calculated from current clock
+and delivered send_tick, not a hidden additional float. Validity is stored per cache
+slot, initially false; the header's valid bit is one for a received data packet.
+Own ID uses3 installed bits per agent and RR rank follows the common clock. To avoid
+calling the public channel and clock free bandwidth, separately count a conservative
+common beacon of tick8 + current GOOD/BAD1 + seven zero padding bits =16 bits/2 B
+per primitive tick. Thus the modeled team transmission ledger is **40 bits/5 B per
+tick**, or1280 B/H256, under one broadcast medium. This beacon is the already-supplied
+public process, not a new learned signal or a changed delay. Each data broadcast
+has four logical deliveries, not four independent on-air copies; public beacon reaches
+all five. A BS relay/unicast distribution network would have a different bill and is
+not assumed. Clock synchronization, reset discipline and reliable broadcast are
+explicit exogenous facilities; actual PHY framing/CRC/radio energy are unmodeled.
+
+Under the same header/beacon convention, original28 B is32 B/team tick, original
+40 B is44 B/team tick, and competent lossless omission of known zeros is28 B/team tick.
+The honest finite-precision reduction is therefore28-to5 B versus that lossless
+reference, not40-to1 B. Native fee,1/5 delays, arrival process and send opportunities
+stay unchanged: **no J fee saving, faster delivery, throughput or radio-energy claim**
+follows from this ledger. Report codec encode/decode CPU separately from the imposed
+simulator ticks; compute latency is not smuggled into a different transport model.
+
+One installed codec adds6168 B/device,30840 B across five devices, apart from a small
+fixed serialization specification and ID/reset setup. If the codebook must be sent
+from a coordinator once, charge6168 B for one reliable broadcast or30840 B for five
+unicasts, explicitly outside the per-episode packet stream. Saving23 B/tick against
+lossless full geometry amortizes these at269 ticks (two H256 episodes) or1341 ticks
+(six episodes), respectively; this is byte accounting, not measured energy/payback.
+Frozen D actor deployment additionally carries224804 parameter B per device,1,124,020 B
+across five; the full568164-B checkpoint/critic need not be deployed, but cold loader
+time and actual artifact bytes must be measured. The ordinary and task-aware codec
+have the same installed dictionary/scale size and search/lookup form. A six-symbol
+alternative would need at least3 payload bits and all this other information; it is
+not selected and `log2(6)` does not price this program.
+
+### One complete comparison and equal ordinary rights
+
+Proposed programs on the same32 fresh complete worlds: full D19702; full B19451;
+three ordinary-codebook D programs O1/O2/O3; and three task-aware-codebook D programs
+L1/L2/L3. The primary contrast is paired Lr-Or; each also reports against full D and
+B. Full D is the wider-message reference and full B reveals loss of the retained
+correction capability; neither is mislabeled as a matched-bit comparator.
+
+O is a competent same-data vector quantizer. For each of three independent codec
+initializations19811/19812/19813, fit256-center k-means++ followed by exactly25 Lloyd
+updates in each of two declared metrics: unit range coordinates, or diagonal inverse
+training SD with each SD floored at.05. Empty clusters deterministically take the
+largest-current-error unused training row, ties by source row index. Centroids stay
+in `[0,1]^6`. The ordinary program may exploit known geometry/scales, the frozen
+policy and its teacher outputs: choose between its two fitted dictionaries by the
+same held-out development action-distribution loss used below, exact ties by unit
+metric. Thus it is not forced to ignore planner/policy knowledge or use an obviously
+weak one-bit-per-coordinate grid. Its quantizer training objective is ordinary source
+distortion; that objective, rather than denial of information, is the comparator.
+
+L starts from each corresponding fitted O dictionary and uses the same metric,
+data split, dictionary dimensions and two-way development selection right. Optimize
+the dictionary for exactly20 epochs over all24 fitting trajectories,4 complete
+episodes per minibatch,120 Adam updates per fit (lr.001, betas.9/.999, eps1e-8,
+no weight decay, norm clip1, project codeword coordinates to `[0,1]` after updates).
+Forward messages are **hard nearest-codeword bytes**. Backward uses the explicitly
+biased straight-through soft-distance reconstruction, temperature geometrically
+annealed.25 to.025 over20 epochs. No stochastic message, Gumbel draw, entropy bonus,
+new actor feature, new policy optimizer or online adaptation is added. Because the
+shared dictionary also defines its Voronoi cells, the sender partition and receiver
+reconstruction change together; this is task-aware learned encoding/decoding, not
+only a learned post-decoder applied to an unchanged encoder. O itself is fitted, so
+the claim would be task-aware fitting versus ordinary quantization, not learning
+versus an untrained straw comparator.
+
+For each stored complete trajectory, reconstruct all compressed message deliveries
+causally and unroll the frozen receiver's own GRU from zero. Retain recorded private
+observations and previous executed commands. With stored teacher mean mu and common
+fixed sigma, minimize mean Gaussian KL `sum_d((mu_codec-mu_teacher)/sigma)^2 /2`
+over all actor rows; tanh uses the same transform but native clipping/trajectory
+effects are not certified by this proxy. No state-value critic is treated as a Q
+function. Gradients must pass through frozen receiver inputs, including the base
+actor; removing its current `no_grad` wrapper for offline input differentiation may
+not change the forward function or update any receiver tensor. This is a specific
+high-risk engineering check, not implementation permission in this design turn.
+
+The offline inputs remain teacher histories. Recomputed hidden state handles the
+receiver's memory of decoded packets, but the old physical observations and previous
+commands do not branch with its new policy. That distribution limitation is central:
+only complete native evaluation determines the closed-loop result. No success on
+the offline loss is a gate before running the preselected full comparison. All12
+codec fits and all eight evaluation programs are bought together or none are.
+
+### Prediction, complete reading and investment branches
+
+Prediction: task-aware fitting lowers development mean-action KL beyond its matched
+ordinary quantizer and yields a smaller complete J/service loss to full D, on average
+over the three codec initializations. An ordinary book may already preserve enough
+to leave no useful L increment. Learning lower offline KL without native retention
+would weaken this particular teacher-history-distillation route, not prove a message
+information bound or justify automatic receiver adaptation.
+
+New evaluation tuples are fixed prospectively as physical1981002000+e,
+channel1981007000+e and motion1981003000+e, e=0..31. Sample the inherited motion
+distribution; codec is deterministic. All programs execute their own observations,
+commands, hidden states and message caches. Common scene/channel/innovation witnesses
+must match, not just seed labels. No old panel is pooled with the fresh panel.
+Codec selection uses only the eight old development episodes; no final-world tuning,
+checkpoint selection, retransmission, extra bit budget or changed transport follows.
+
+Read per-program J_net/J_physical, users/tick, Q, path/height/boundary occupancy,
+worst-tick and p10 team service, zero-team-service ticks/longest run. The retained
+connected-user bits permit a required **individual-service** reading: each user's
+total served ticks, never-served count, mean waiting age, longest gap including both
+censored edges, world worst-user values and signed same-user differences. Report
+all adverse worlds and concrete longest-gap cases; aggregate J/absence of team-zero
+ticks cannot certify fairness or persistent individual service. There is no energy,
+collision-safety or mobile-user claim on this host.
+
+Report three paired codec-seed effects with a descriptive df2 interval, conditional
+on this selected D/data; the32-world intervals describe deployment variation of
+fixed programs and do not become32 learning seeds or independent parents. The
+development best-of-two selection is part of each algorithm's paid exposure. This
+is exploration, not confirmation. No general equivalence/adoption claim is made from
+a small mean or a nonsignificant difference. For the retention question report the
+full paired loss and uncertainty rather than silently choose a post-result margin.
+
+- O retains useful J/service with little native loss and L adds no resolved advantage:
+  retain the ordinary finite-message capability; no reason for automatic task-aware
+  or receiver training. A deployment with an actual bit-priced link can be separately
+  proposed; this study does not certify its economics.
+- L's proxy improvement is accompanied by joint native J/service improvement over O
+  and useful retention versus D/B: retain that conditional task-aware capability and
+  its full training/setup cost. Broader parent/data replication is a later investment,
+  not an automatic continuation or a causal message-content claim.
+- Both compressions substantially lose the retained D/B capability, or L only wins
+  by trading worse individual service: preserve the complete tradeoff/adverses and
+  end this8-bit/frozen-receiver purchase. Neither widening bits nor adapting the
+  receiver is appended as a repair. Uncertain effects can justify stopping without
+  being called equivalence or impossibility.
+- Technical missingness preserves the actual fit/forward/native frontier and all
+  partial files; it does not become a negative learning result or an automatic retry.
+
+### Full prospective price and present recommendation before review
+
+This resolves the previously unknown **fit count and dominant work** without running
+a pricing experiment. Fixed budget is **12 codec fits:6 ordinary codebook fits plus
+6 task-aware dictionary fits;0 policy/receiver/critic/predictor fits**. Ordinary fits
+are real started fitting attempts and do not disappear from the fit ledger. Three
+seed units each contain two metric candidates per method, then one selected endpoint.
+
+| Work | Complete proposed purchase |
+| --- | ---: |
+| New data-acquisition native / static / teacher-label forwards | 0 /0 /0 |
+| Existing data consumed | 32 H256 D trajectories;8192 sends;40960 actor rows |
+| K-means++/Lloyd fits | 6, each6144 samples,256 centers,25 centroid updates |
+| Task-aware codec fits / Adam updates | 6 /720 (20 epochs,24 complete episodes each) |
+| Differentiable receiver presentations | 737280 team rows /3686400 actor rows |
+| Old development scoring | 12 dictionaries x8 H256 =24576 team /122880 actor rows |
+| One full saved-teacher binding replay | 8192 team /40960 actor rows |
+| Fresh native evaluation | 8 programs x32 H256 =256 episodes /65536 steps |
+| Native evaluation actor / motion / send counts | 327680 rows /327680 motion draws /65536 packets |
+| Full new reader neural reconstruction | 65536 batch-of5 steps /327680 actor rows |
+| Full new reader physical reconstruction | 65536 saved action/radio states;0 added native rollouts |
+| Total new receiver forward-row presentations | 4505600, including fitted-input, dev, native and reader work |
+| Value/Q/planner/counterfactual suffix calls / GPU | 0 /0 |
+
+Book-distance accounting uses direct6-coordinate distances:6 ordinary initializations
+and25 Lloyd updates plus final assignment =254803968 center comparisons; six20-epoch
+task-aware fits188743680; development6291456; selected-codec native and reader work
+25165824. Total **475004928 six-coordinate center comparisons**, plus reductions,
+softmax and720 backward/update steps. No all-actions Q labeling or hidden simulator
+branch search is required. All readback is part of the purchase; a pure reader and
+the explicitly priced neural reconstruction have different costs and must be recorded.
+
+Preferred prospective node is configured `local_linux`, CPU FP32, one Torch/inter-op/
+BLAS thread, sequential fits/programs, no GPU. D19702's earlier full training+evaluation
+cell cost476.206156 CPU-s,347052 KiB lifetime RSS; the local B40 final32-world cell
+cost13.234506 CPU-s, and B06's complete224-trajectory reader55.93 CPU-s. These anchors
+imply about106 CPU-s for the eight native panels at the old B40 rate and about64 CPU-s
+for similarly scoped reader work, **before** codec costs and cold startup. They do
+not benchmark the new full-unroll gradient or nearest-code search. The explicit
+planning range is **0.5-2 CPUh for implementation's complete scientific chain and
+roughly0.5-2.5h occupied local worker wall**, not a measured throughput or entitlement.
+Full cold import/build/load, byte encoding, delivery lookup, all child lifetimes,
+support/test/reviewer calls and output/hash publication must be metered separately;
+unknown throughput remains an uncertainty, not zero. No pilot is purchased to narrow
+this range. Planned implementation/check/review/read/publication support is **8-14
+agent-hours**, itself an estimate; this design/criticism is additional support.
+
+Existing canonical data stay one copy. Required proposed inputs are D568164 B and
+B463357 B plus the9.06 MB existing raw dataset and compact binding metadata. Do not
+copy the whole old direction or recovery tree. A needed local B staging copy adds
+463357 B until terminal cleanup; D/data already reside here. Twelve codebooks/scales
+add74016 raw B; compact fit history/selected artifacts stay below a few MB. At the
+old D trace rate256 fresh traces are about72.5 MB compressed/520.2 MB uncompressed
+if all old diagnostic fields were retained; the implementation should retain the
+required codec/inputs/actions/user-service witnesses without promising a smaller
+unmeasured file size. Plan **0.1-0.2 GiB durable new output**, about0.1 GiB temporary
+data/work buffers, and roughly1.6-1.8 GB immutable source snapshot based on this
+direction's retired snapshots; source remains additional to scientific data. Allow
+roughly **2 GiB additional peak disk and1 GiB process RSS planning**, to be checked
+at actual admission. Code review must bound per-batch tensors instead of materializing
+the whole fit xepoch xcodebook graph. Snapshot/core-dump/log failures cannot silently
+escape the storage accounting. These are planning figures, not measured resource
+guarantees; actual node memory/disk and source bytes are checked only for a selected launch.
+
+Inherited direction investment remains **33 policy fits+3 predictors,4751360 persisted
+native steps plus0..256 interrupted steps**, with missing original B06 CPU and support
+telemetry left unknown. Correction-compression's224 episodes/57344 steps and its
+engineering/read costs are separate inherited evidence, not erased by choosing D.
+The proposed result would add12 codec fits and65536 new native steps, not rebrand
+them as zero-fit because no motion policy is trained. All failed/adverse records remain.
+
+My present recommendation is to offer this **single complete frozen-parent codec
+comparison** for selection, ahead of another from-scratch joint communication fit:
+it can establish an ordinary small-message capability or identify a task-aware
+increment while reusing paid targets. Stopping remains a serious alternative because
+this abstract link has no measured bit-related bottleneck and full physical economics
+would require a separately selected contract. The independent scientific review below
+must judge whether that empirical value warrants the support cost, challenge the
+ordinary comparison and the single-teacher visitation premise, and can recommend
+no purchase. No implementation has started and no effect follows this draft.
+
+### Verified primary-source bridge and limits
+
+The concrete literature need was whether decision-sensitive message clustering has
+a primary-source basis, and what information its construction actually needs. The
+three local locating stores were consulted narrowly: foundations index P15 (IMAC,
+message sufficiency/bandwidth); Inst-sci catalog/structured source MARL-0049; and the
+My-lib title/abstract search for RGMComm/discrete-communication terms, which found no
+matching entry under that conjunctive query. That miss is only query/store coverage,
+not absence of prior art. No novelty claim or whole-corpus re-review is made.
+
+I independently read **MARL-0049 RGMComm, PDF pages3-5**, cross-checked the same
+structured pages at `/home/fires/projects/Inst-sci/papers/MyLib/json/MARL-0049.json`
+and PDF `/home/fires/projects/Inst-sci/papers/MyLib/pdf/MARL-0049.pdf`, and verified
+the [AAAI primary publication](https://ojs.aaai.org/index.php/AAAI/article/view/29680)
+(Chen, Lan and Joe-Wong,2024, DOI10.1609/aaai.v38i16.29680). Their construction
+clusters source observations using joint action-value vectors and visitation weights;
+the matrix-game example distinguishes observations that favor the same receiving
+action. The useful bridge is to preserve decision distinctions rather than insist on
+uniform observation fidelity. Their Q/optimal-policy bound is **not** available from
+our state-value critic, and their synchronous/current-observation analysis does not
+certify this delayed recurrent continuous-control retrofit. B07 substitutes an explicitly
+weaker, directly available teacher-action KL objective. That is a conjectural design
+mapping, not a theorem transfer, performance guarantee or new empirical result.
+
+### Prospective node correction before selection review returns
+
+Root supplied the current owner's **remote-first** preference after reading the
+draft. I adopt it: the proposed node is **configured `wsl_4070`**, using
+`/home/wu/.venvs/hmasd-gcc-31021/bin/python`, CPU FP32 and one Torch/inter-op/BLAS
+thread. This supersedes the draft's `local_linux` preference and local wall wording;
+it does not change any effect count, fit horizon, asset, message or endpoint.
+Stage only the local D checkpoint568164 B and its32 input traces9061080 B plus
+compact bindings (9629244 B before metadata) on that node. B19451 is already
+canonical there. Necessary temporary input duplication, transfers/hash checks and
+cold process lifetime are paid and deleted after verified terminal collection;
+no entire direction copy or local fallback operation is implied. The rough2 GiB
+extra-disk plan now includes these roughly9.63 MB of input staging.
+
+The old local CPU timings remain labeled anchors, not a remote throughput promise.
+Full-GRU input backpropagation, nearest-code search, imports/builds and actual child
+lifetimes are unmeasured on the chosen runtime;0.5-2 CPUh/0.5-2.5 occupied-worker h
+remain explicit uncertain planning ranges, and8-14 support hours remain an estimate.
+The known remote interpreter failures and mitigation history are not declared
+resolved. Fresh admission would apply only after selection; no runtime health,
+forward benchmark or pilot is authorized or useful merely to narrow this price.
+
+The stored D means define a fixed paid teacher-data version; no target regeneration
+is proposed. The priced one-pass teacher replay checks exact model/input/record
+identity and reports numerical mean/density differences across runtimes in full.
+Cross-runtime numerical identity is not assumed from a matching checkpoint digest.
+Scientific selection review is asked to assess the appropriate binding/reading
+contract; no failed reader, epsilon change, new teacher or source edit is preauthorized.
+All native programs would execute together on the same selected runtime. No result
+here has depended on an unperformed cross-runtime forward.
+
+<a id="b07-independent-selection"></a>
+### Independent scientific selection review — complete original answer
+
+Registered `hmasd-research-critic` child
+`/root/dm_message_budget/finite_message_selection_critic`, separate context with
+`fork_turns=none`, returned the following complete answer on 2026-10-02 UTC. It had
+the actual question, original supporting/adverse records and the concrete proposal;
+the remote-first correction was supplied while it was reading. It owned no files,
+launched no effects and spawned no children. The original response is preserved
+below without replacing its recommendation by the DM's interpretation.
+
+```text
+**Recommendation: retain this single complete comparison for Root’s purchase decision, with the runtime-binding and interpretation clarifications below.** I favor it over another joint policy/message training attempt. It asks a different, useful question using an existing capability: whether ordinary quantization suffices, and whether task-aware fitting preserves more of that capability at the same message budget. It warrants bounded exploration, not confirmation or a communication-system deployment claim. My recommendations add no fits, native episodes, pilot or additional review.
+
+This review used a separate context without inherited DM/Root conversation. The assignment disclosed the proposed recipe and later supplied the remote-node change; I reconstructed the original evidence before reading the full B07 proposal. I did not read the archived Oracle advice.
+
+I independently checked:
+
+- The channel, actor and collector sources, including RR scheduling, lawful packet construction, delayed delivery, zero forecast fields, frozen-base semantics and the state-value critic.
+- D19702’s checkpoint digest; all 32 D and 32 B40 raw-file hashes; native reward/service reconstruction; common initial states, channel sequences and recorded innovation bindings. Reconstructed innovations agree within FP32 arithmetic.
+- D’s complete saved actor-input bank: packets reconstruct exactly from lawful sender observations, cached records match actor inputs, previous-command inputs match each trajectory’s executed actions, and the forecast tail is zero.
+- B06’s consequential contrasts, configuration, exposure and resource records; correction-compression’s native summary rows and its positive/adverse reading; the earlier B01–B05 evidence needed to preserve the lineage’s mixed outcomes.
+- The prospective work and byte arithmetic, and MARL-0049’s relevant primary passage.
+
+I did not perform model forwards, experiments or runtime health checks. I did not independently reconstruct the later correction-compression remote NPZ bank, reload checkpoint tensors, or repeat every earlier B01–B05 raw reading. Cross-runtime numerical compatibility and prospective throughput remain unverified.
+
+The saved evidence supports preserving D as a useful conditional asset. On the original B06 panel, D19702−B40 is **+.009377844 J and +.702636719 users/tick**, with 11 service-adverse worlds. Across all three D continuations, the conditional mean gains are +.008147 J/+ .628866 service; the D−K intervals still cross zero. On correction-compression’s fresh panel, D19702−B40 remains positive, +.007748583 J/+ .529541016 service, while losing service in 18 of 32 worlds. Thus “useful controller” is supported; uniform improvement is not. The relevant primary outputs are the [B06 reading](/home/fires/hmasd-wsl/runs/uav_message_content/b06_eval_recovery_a02/reading.json) and [correction-compression summary](/home/fires/hmasd-wsl/runs/uav_correction_compression/b01_mean_deployment_a02/summary.json).
+
+The later constant substitution matters causally, but narrowly. C19702−D19702 lost .002117960 J and .143554688 users/tick; all three tested substitutions had negative J/service intervals and failed their frozen retention rules. Small variation in a correction therefore cannot be dismissed merely because its constant component dominates its squared magnitude. This supports retaining the varying function over those particular means. It does not identify message-mediated coordination, prove every constant inferior, or resolve D versus competently trained K.
+
+The earlier record also remains consequential: B01 learned content lost against ordinary alternatives; B02 produced positive averages with unstable continuation rankings; B03 retained useful B/O/L assets; B04 improved prediction without demonstrating its native increment; B05’s bounded continuation gained conditionally while its forecast increment remained unresolved. These observations argue against another automatic content-learning rescue. They do not already answer this frozen-controller quantization question.
+
+**The strongest ordinary explanation is that a shared 256-center geometry quantizer already preserves the distinctions this fixed, stochastic controller needs.** The proposed ordinary comparator is competent for that question: fitted vector quantization, two reasonable metrics, matched data and initialization exposure, and selection using the same development action loss and policy knowledge. No additional baseline search is needed. A task-aware victory would concern this finite fitting package, including its extra optimization, rather than learning versus an uninformed comparator.
+
+There is also a constructive reason to try L. Different packet errors can have different effects on the frozen receiver, so minimizing geometry distortion can spend codewords on distinctions that barely change its actions. Optimizing action loss can redistribute that error. Reconstructing deliveries and unrolling the receiver’s GRU throughout each complete recorded trajectory makes this objective more directly relevant to preservation than B04’s forecast error. It is still evaluated on one selected teacher’s old visitation distribution. Small average row loss can accumulate across **1,280 actor rows per episode**, and eight old development episodes cannot establish generalization.
+
+The literature bridge is appropriately limited. MARL-0049 constructs communication using action-value vectors and visitation weighting; the current scalar state-value critic cannot provide those quantities. Teacher-action KL is a legitimate different objective, without inheriting RGMComm’s return guarantee. I checked the relevant passage in [MARL-0049 PDF, pages 3–5](/home/fires/projects/Inst-sci/papers/MyLib/pdf/MARL-0049.pdf), with its [structured source](/home/fires/projects/Inst-sci/papers/MyLib/json/MARL-0049.json) and [primary publication](https://ojs.aaai.org/index.php/AAAI/article/view/29680).
+
+Two clarifications should accompany the retained design.
+
+First, **separate immutable teacher data from execution-runtime identity**. Keep the old composed means fixed. Exact bindings should cover checkpoint/data bytes, configuration, input ordering, delivery reconstruction and frozen parameters. The priced replay on the chosen runtime should report its uncompressed D means and densities against those old labels. Nonzero cross-runtime floating-point differences should not automatically become a failed scientific comparison or trigger target regeneration.
+
+Report the uncompressed replay loss beside codec losses as a reference discrepancy; do not subtract it as though squared errors decomposed additively. Native full D, full B and all codecs must run on the same selected runtime, so their native comparison remains well defined. A substantial old/new discrepancy would weaken the description “preserves the previously demonstrated numerical controller” and the interpretation of the imitation objective. Wrong bindings, nonfinite outputs or changed forward semantics are technical failures. None authorizes a post-result epsilon change, replacement teacher or automatic retry. This clarification uses the already-priced replay.
+
+Second, **treat retention as a measured loss distribution, not an undeclared equivalence certificate**. The proposal explicitly declines a prospective retention margin, which is acceptable for exploration. Its answer should consequently quantify losses and uncertainty rather than announce binary preservation from nonsignificance. Likewise, one worse user or world must not become a retrospective unanimity requirement. Report the individual-service tradeoffs and keep any later adoption preference separate. Waiting-age initialization and censored-edge conventions should be fixed in the reader specification before exposure.
+
+The smallest worthwhile complete observation is the proposed one: three paired codec initializations, both declared metric candidates, the fixed old train/development split, and the eight programs on one fresh common 32-world panel. Full D establishes compression loss; full B shows whether the retained correction capability survives. Neither replaces matched-bit O. No preliminary proxy-success gate, no-message control or additional diagnostic batch is necessary for this estimand.
+
+The outcomes would change the following judgments:
+
+- **O preserves useful performance and L adds no clear native increment:** retain the ordinary finite-message capability and end task-aware investment in this recipe. This would be a useful answer, without proving message irrelevance.
+- **L improves development KL and joint native J/service over O, with acceptable disclosed service tradeoffs relative to D/B:** retain a conditional task-aware capability. Replication across another parent/data source becomes a testable future option, not an automatic purchase.
+- **KL improves but native outcomes do not:** lower confidence in this teacher-history fitting procedure’s practical increment. Do not infer an information bound or automatically adapt the receiver.
+- **Both compressed packages materially lose useful capability:** end this particular eight-bit, frozen-receiver attempt. Wider alphabets and receiver adaptation remain separate investments.
+- **Effects remain uncertain or execution is incomplete:** preserve that outcome and actual exposure. Neither requires more episodes or a retry.
+
+I found **no material arithmetic error** in the declared price. Twelve codec fits, 720 Adam updates, 65,536 fresh native steps, 4,505,600 actor-row presentations and 475,004,928 six-coordinate center comparisons reconcile. The honest modeled stream comparison is **28 versus 5 bytes/team tick**, including header and beacon, with 6,168 installed codec bytes/device. The 269-tick broadcast and 1,341-tick five-unicast setup amortizations also reconcile. These are byte accounts under declared facilities; unchanged fees and delays provide no measured transport benefit.
+
+The remote-first delta preserves the scientific comparison. Its roughly 9.63 MB D/data staging is appropriately explicit. The 0.5–2 CPU-hour and 8–14 agent-hour estimates are planning prices, not validated bounds. Full recurrent input backpropagation, cold startup, current-runtime reliability and actual peak memory remain feasibility uncertainties. Earlier runtime failures are technical risk, not adverse evidence against compression. Historical learning, readback, staging, snapshots and support remain paid costs; zero new policy fits does not erase them.
+
+My strongest consequential reservation is therefore **investment value**, rather than comparator validity: this host has no measured bit-related bottleneck, and one rate on one selected parent cannot establish general communication efficiency. Root should purchase it for conditional understanding of controller preservation, with the substantial support cost visible. I nevertheless favor this bounded purchase: it can produce a useful ordinary capability, a task-aware increment, or a meaningful finite failure without reopening joint policy training. It should not displace a more valuable competing project merely because its native execution is cheap.
+
+**MATERIAL_DISSENT: no — I support the proposed complete comparison with the clarifications above, unchanged fit/native price, and no authorization for execution implied by this review.**
+```
+
+<a id="b07-selection-disposition"></a>
+### DM response, fixed reading conventions and substantive return
+
+I accept the recommendation and both clarifications. The changed judgment is that
+the available paid data and a competent ordinary codebook support a coherent
+frozen-controller preservation study; earlier content-learning failures do not
+already answer it. No empirical compression gain has been observed. The leading
+ordinary explanation remains sufficient geometric quantization; off-policy teacher
+histories and one selected parent remain the principal scientific limitations.
+The lack of a measured bit-priced bottleneck and the 8–14 support-hour price remain
+serious allocation reservations. Root receives this as one complete candidate
+purchase, not a duty to implement a favorable review. There is no material dissent
+to self-clear and no separate Pro question has distinct unresolved value here.
+
+The immutable target bank remains the old stored composed means. On the selected
+remote runtime, exact identity applies to checkpoint/data hashes, input order,
+configuration, packet reconstruction and unchanged frozen weights. The already
+priced one-pass uncompressed D replay reports mean/density differences and its
+Gaussian KL against that fixed bank alongside the O/L losses. **Do not subtract
+the replay KL from codec KL**: those squared losses do not decompose additively.
+Nonzero roundoff alone does not fail this comparison or regenerate teacher labels.
+Changed bindings/forward semantics or nonfinite outputs do fail their dependent
+claim. A substantial discrepancy remains a disclosed limitation on preservation
+of the old numerical controller and on the offline objective; all eight native
+programs still execute on the same runtime. No changed epsilon, new target bank,
+source repair plus retry, or extra replay is authorized by a failed observation.
+
+Fix individual-service reading before any new data: for each user and episode,
+`age[-1]=0`; after tick t, `age[t]=0` if connected at t and otherwise
+`age[t]=age[t-1]+1`. Mean waiting age averages these **post-tick** values over all
+256 observed ticks, then reports both per-user and per-world summaries. Total
+service counts true connected bits. Longest gap is the longest consecutive false
+run within the 256 observations, including prefix and suffix runs; all-served is0
+and never-served is256. Mark both boundary runs as censored by the observation
+window; do not assert any unobserved prehistory or continuation. Preserve the
+same-user mapping within each common world and report signed differences, min
+served ticks and max longest gap across users. These metrics do not enter training,
+codec selection or the actor's information set.
+
+Retention remains an observed paired loss distribution with conditional codec-seed
+and fixed-program world uncertainty. The earlier phrases “useful retention,”
+“substantially lose” and “worse individual service” describe investment judgments,
+not hidden numeric margins, equivalence tests or a rule that every user/world must
+improve. Native J/service and individual-tail tradeoffs are reported together; a
+single adverse user cannot be turned into a retrospective unanimity requirement.
+Any future adoption preference or confirmation margin is a separate prospective
+choice, not selected from this panel.
+
+If selected, the engineering scope must enforce literal hard codeword lookup in
+the learned codec's forward path, including fitting, rather than assume floating
+point soft-plus-detached cancellation reproduces the transmitted codeword exactly.
+Its surrogate backward is explicitly biased. Input differentiation through the
+frozen recurrent base must preserve forward semantics and all weight bytes; the
+new direction-local B07 adapter should not modify frozen B05/B06 contracts. Own
+pending status is maintained from the sender's known send tick and send-time public
+regime/deterministic delay, without an unpriced ACK. These correctness requirements
+add no result-bearing pilot, metric candidate, fit, native episode or claim.
+
+The complete proposed price is unchanged: **12 codec fits,720 Adam steps,0 policy/
+receiver/critic/predictor fits,65,536 new native steps,4,505,600 actor-row presentations,
+475,004,928 six-coordinate center comparisons**, full reader and individual-service
+reading, with no new label acquisition. Prospective node is `wsl_4070`, CPU FP32,
+one Torch/inter-op/BLAS thread;0 GPU. Planning ranges remain0.5–2 CPUh/0.5–2.5 occupied
+worker hours plus8–14 support agent-hours,0.1–0.2 GiB durable output and roughly2 GiB
+additional peak disk/1 GiB process RSS. These are uncertain prices, not measured
+caps or proof of remote runtime health. Exact-input publication, proportionate
+engineering checks/review and fresh actual-node admission apply only if purchased.
+
+At this design boundary there is **no accepted worker, observer, Pro operation,
+code implementation or generated bulk/scratch** to drain or delete. The bounded
+critic has returned and is terminal. Existing canonical evidence remains in place;
+no new duplicate retention was created. Actual deleted targets: none. Net disk
+bytes reclaimed: **0**. There is no cleanup tool blocker. Existing source/data
+links, work/byte arithmetic and the documentation diff were self-checked; no model,
+physical or training check was substituted for the authorized source-only work.
+Next action is Root's cross-question purchase/no-purchase choice on this exact
+complete package. No result execution follows merely from review or publication.
+
+Original advice payload is11,458 UTF-8 bytes (excluding its fence/newline), SHA256
+`7fdcefcd55e8e1458c68d9930614761c3457d9c068fcffa596b8c55d35562619`.
+Design/source/review support occupied roughly41 minutes of this DM's turn from
+14:53 to15:34 UTC; the critic's accepted-to-return span was14m42s and overlapped it.
+These are session elapsed times, not measured inference CPU or additive worker
+hours. Tool/support CPU was not comprehensively metered and remains unknown.
