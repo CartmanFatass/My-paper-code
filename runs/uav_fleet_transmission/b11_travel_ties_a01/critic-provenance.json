@@ -1,0 +1,20 @@
+{
+  "rollout": "/mnt/c/Users/fires/.codex/sessions/2026/10/01/rollout-2026-10-01T17-23-45-01a0f9fe-de22-7d73-82c2-129a0cadede6.jsonl",
+  "line": 1573,
+  "timestamp": "2026-10-02T05:31:51.398Z",
+  "runtime": {
+    "turn_id": "01a0fb0e-18c8-75a0-af2a-7495185d43b1",
+    "model": "gpt-6-astra",
+    "effort": "max"
+  },
+  "bytes": 14438,
+  "sha256": "e04fe89a864733a0a0227bc87e6675e6f7b547a619985cafcb77b8ff0efb0f78",
+  "file": "/tmp/hmasd-root-b11-result-critic-20261001.txt",
+  "preservation": "Full original unchanged between B11 markers in owned NOTES; no paraphrase replacement",
+  "root_copy_matches_native": true,
+  "dm_read_complete": true,
+  "material_dissent": false,
+  "review_scope": "same original B10 critic; not blind, author of H_T proposal; independent reconstruction",
+  "new_native_controller_model_RF_queries": 0,
+  "critic_reading_CPU": "unmetered additional support"
+}

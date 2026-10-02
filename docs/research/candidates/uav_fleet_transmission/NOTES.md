@@ -8339,3 +8339,164 @@ The scientific exact-source snapshot062b0c5f86474e34bab6fa4016fa897c and matchin
 The local observer is stopped atgeneration18 with all recorded jobs terminal. Its three B11 request files matched the retained terminal job specifications before deletion. Removed only `temp/directions/uav_fleet_transmission/b11_engineering_wait.json`, `b11_engineering_a02_wait.json`, `b11_scientific_wait.json`, and B11 module/test `__pycache__` directories; their measured allocation114688→0bytes is in the [local receipt](../../../../runs/uav_fleet_transmission/b11_travel_ties_a01/local-cleanup.json). Support CPU.002602787s. The temporary standalone preview receipt was discarded after its full preview/support/hash facts were incorporated into the final single cleanup receipt; no evidence backup chain was retained.
 
 Together with the previously reclaimed two engineering snapshots/registrations, actual B11 source-plus-scratch target allocation fell **5422530560bytes**. There is no cleanup-tool blocker or live result operation. Required unique scientific/engineering raw stays in one canonical node copy, and the full execution source remains in published Git. Current code is retained through the pending independent source/result review; final unused-driver disposition will follow that real consumer, rather than deleting inputs while they are being read. This cleanup does not resume any old operation or close the parent research question.
+
+
+<a id="b11-independent-disposition"></a>
+### B11 independent original diagnosis, DM response and resolved scope — 2026-10-01 PDT
+
+The original B10 selection/result critic `/root/next_study_review` (UUID01a0f9fe-de22-7d73-82c2-129a0cadede6) was reused once for the complete B11 result. This was a separate scientific context from the DM, but **not a blind review**: the critic retained earlier context, had proposed H_T and encountered part of the DM summary while locating evidence. Its independent reconstruction, limitations and revision of its own stronger expectation are preserved in the unabridged final below; agreement is not an extra experiment.
+
+Mechanical provenance: native rollout `/mnt/c/Users/fires/.codex/sessions/2026/10/01/rollout-2026-10-01T17-23-45-01a0f9fe-de22-7d73-82c2-129a0cadede6.jsonl`, line1573, `event_msg.payload.type=task_complete`, timestamp2026-10-02T05:31:51.398Z, `last_agent_message`. Corresponding actual turn01a0fb0e-18c8-75a0-af2a-7495185d43b1 is gpt-6-astra/max. I mechanically verified the native payload against Root's exact extraction: **14438UTF8 bytes, SHA256e04fe89a864733a0a0227bc87e6675e6f7b547a619985cafcb77b8ff0efb0f78**. The original bytes between the following markers are unchanged; [provenance](../../../../runs/uav_fleet_transmission/b11_travel_ties_a01/critic-provenance.json) preserves the runtime/source identity. Root read the full answer and accepted MATERIAL_DISSENT:no before this disposition.
+
+<!-- BEGIN B11 ORIGINAL INDEPENDENT RESULT FINAL -->
+**B11 建立了降低 H 移动与资源代价的能力，但没有建立“保留 H 服务质量的完整升级”。** 我建议保留 H_T 作为条件性的资源取舍方案，保留 H 原有服务及低端用户能力，结束这条固定同分规则的自动追加投入。当前证据不支持默认替换 H，也不支持自动增加 epsilon、权重、面板或预测臂。
+
+这是沿用本人 B10 选题及结果上下文的后续审阅，不是盲审。检索锚点时还提前看到了一部分 DM 解释摘要；以下结论经过独立源码、端点和原生证据重建，但不能声称从未接触其解释。尤其需要承认：H_T 是我此前建议的具体继续方案，结果要求修正其较强预期，不能因提案出自本人而降低判断标准。
+
+**实际检查的范围。** 我核对了冻结合同、科学 source `6344ca4398bab3692e3593b0125c24135c7a563d`、原 operation 和 exit0，以及54个绑定源码文件的 Git 字节；没有差异。原 C/H 科学及工程 compact 分别与冻结描述符逐项匹配，科学参照仍是 B10 source `ee7190da…`，没有重跑或替换比较器。
+
+我独立复算了全部135组成对指标的32世界向量、均值及 t95，全部一致；核对了96份科学 raw 的 SHA，并完整读取78份原生轨迹：32份 H_T、32份 H、14个关键世界的 C。检查包括共同初始观察和几何、外生用户路径、完整奖励与 QoS、运动、能耗及电池递推、逐用户服务和所有缺口、候选选择、实际提交及物理变化。另18份 C raw 本轮做了字节核对，其完整源读取采用已验证 reader 和先前 B10 判读。本轮没有重算 RF、运行控制器或模型，也没有新 native/RNG 查询。
+
+完整工程与科学 reader 均 VERIFIED；两工程任务加32科学任务共102,000新 native steps、0 fit。结果入口是[完整 reading](/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b11_travel_ties_a01/reading.json)、[全部端点](/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b11_travel_ties_a01/perworld.json)和[冻结合同及结果记录](/home/fires/hmasd-wsl/docs/research/candidates/uav_fleet_transmission/NOTES.md:8143)。
+
+这些是**原 B10 已曝光世界上的探索性结果**。描述性 t 区间不消除选题使用了旧面板的影响，不能当作新世界确认或服务等效证明。
+
+完整价值的重建结果为：
+
+| 比较 | Native J 差 [t95] | 累计 QoS 差 [t95] | J 正/负/同 |
+|---|---:|---:|---:|
+| H_T−H | +19.9291 [−16.7238, +56.5819] | −6.6577 [−40.7145, +27.3992] | 17/14/1 |
+| H_T−C | +39.9924 [−5.2293, +85.2142] | +44.0510 [−0.7620, +88.8641] | 20/12/0 |
+| 原 H−C | +20.0634 [−25.3729, +65.4996] | +50.7087 [+8.7265, +92.6909] | 18/14/0 |
+
+H_T−H 的 J 中位数为 +14.7369，QoS 中位数为 −13.1058。平均 J 增益仍不确定；QoS 跨零也不是服务保持。原 H 的服务收益仍成立，不能因为换了排序规则就自动转移给 H_T。
+
+**资源能力是实际原生效果，应保留。**
+
+| H_T−H | 均值 [t95] |
+|---|---:|
+| 实际路径，米/UAV | −558.6046 [−944.4716, −172.7375] |
+| 团队消耗能量，Wh | −8.0934 [−13.6183, −2.5685] |
+| 返航约束代价 | −13.2933 [−22.9307, −3.6559] |
+| 低储备暴露，UAV-steps | −417.8438 [−707.9180, −127.7695] |
+| 最大充电等待，steps | −8.7188 [−17.2350, −0.2025] |
+
+路径和能耗都是23世界下降、8世界上升、1世界相同。低储备暴露改善具有明显尾部贡献：均值减少417.84，但中位数只减少2.5。任务内最低电量有所改善；末端最低电量没有确定改善，充电输入差 −3.0295 Wh 的区间也跨零。因此不能把所有资源指标概括为统一改善。
+
+对普通 C 的机会成本仍然明显：**H_T 在全部32世界都走得更远、消耗更多能量**，平均多2852.6158米/UAV、40.5523 Wh/团队，两个区间均为正。它减少了 H 的部分资源溢价，没有取得相对 C 的完整成本优势。
+
+Native J 不直接扣除路径或消耗 Wh。本批没有 cutoff/depletion 罚项，因此均值账目为：
+
+\[
+\Delta J
+=\Delta QoS-2\Delta return\_cost+\Delta graph
+=-6.657660+26.586566+0.000169.
+\]
+
+这是不同完整轨迹的奖励分项恒等式，不是“节能导致 J 增益”的因果分解。省下8.09 Wh 不能再额外计入 J。
+
+**个体服务代价足以阻止“保留服务的默认升级”解释。** H_T−H 的最差用户任务平均 QoS 为 **−0.0164847 [−0.0305895, −0.0023799]**，12世界改善、19恶化、1相同；用户 p10 为 −0.0065055，区间跨零。H 原先相对 C 的 minimum/p10 正能力，不能称为被 H_T 完整保留。
+
+直接按原生用户身份配对，H_T 对 H 有463个用户改善、467个恶化、30个相同；对 C 为549改善、411恶化。这些960身份嵌套在32世界内，不是960个独立实验单位。最差用户指标也可能在两臂对应不同身份，不能替代同用户读取。
+
+三臂均没有全程未服务用户、cutoff 或 depletion，但仍有明显连续性与储备尾部：
+
+- C/H/H_T 最长观测个体缺口为473/473/508步。
+- 右删失缺口为184/122/132条；508步缺口在任务结束时仍未恢复，不能当作已完成恢复时间。
+- 末端处于储备区的世界数为12/14/11，末端储备 UAV 总数为68/97/69。
+- H_T 相对 H 的实际路由使用和 service-role 中继参与也发生变化；相应平均差区间跨零。固定 C 的几何 relay 角色从来不保证原生路由不变。
+
+最有决定性的正反轨迹如下，均读取了完整任务：
+
+| 世界 | H_T−H 的主要事实 | 判断含义 |
+|---|---|---|
+| 29910002 | J +230.693，QoS +229.825，路径 −2521.686米/UAV，能耗 −35.316 Wh；24用户改善、6恶化 | 服务与资源可以同时受益，保留真实建设性机会 |
+| 29910009 | J −125.110，QoS −157.621；储备暴露987→0，但24用户恶化 | 降低储备风险不保证完整服务价值 |
+| 29910014 | QoS −171.363，返航代价 −63.762，J 仍 −43.838；实际路径反而增加 | 返航分项抵消部分损失，不能称为修复；逐次较短不保证整任务较短 |
+| 29910020 | J +86.083，但 QoS −83.697，20用户恶化 | 单看 J 会隐藏服务损失 |
+| 29910023 | 消除 H 的79步团队断供，J +42.974、QoS +42.571；同一用户13末端缺口452→508步 | 团队 outage 改善与同用户连续性改善不是一回事 |
+| 29910007 | 路径下降，但 J −108.967、QoS −106.275，最坏个体缺口316→423步 | 资源改善与个体服务损失可以同时出现 |
+
+World23 的用户13在 H_T 中从2492到3000一直没有交付，属于右删失；C/H 对应末端缺口为420/452步。其全任务 QoS 只略降，也说明累计服务量不能替代最长断供读取。
+
+另两种对照不能遗漏。World29910015 完全没有 H_T 改选，H 与 H_T 原生轨迹相同；它相对 C 的 J +422.440、QoS +430.581 是**继承的 H 能力**。World29910016 的 H_T 虽大幅改善 H，仍比 C 少80.878 J，尽管 QoS 多56.852，且储备暴露为2380对0。超过较差的 H 轨迹，不等于超过普通 C。
+
+**这不是未激活，也不是物理别名。** H_T 自己的3200次计划中，1714次评分、1486次保持稀疏 fallback；413次存在严格优于 base 的最高同分集合，295次因此改变旧 H 的选择，分布在31世界。共911次选中 swap，坐标别名为零。全部31世界都改变了提交动作和物理轨迹；world15 是唯一完全相同者。Base 达到最高分时仍优先保留，共803次，符合冻结合同。
+
+我补充了两项现存 raw 能直接支持的解释边界。
+
+第一，**名义同分甚至不保证本次30步的原生服务相同，不只是长期闭环积累才出现差别。** 对31世界首次 H_T 改选，改选前的完整历史、观察和候选表均与旧 H 相同。我逐项核对两候选的三个模型 QoS 和返航代价：全部相同。然而随后真实30步累计 QoS 是20升11降；29/31连对应10/20/30的三个原生采样时点也不是全相同。
+
+这排除了“同分已经保证短期服务相同，只是漏计采样点之间收益”的简单解释。另一方面，首窗口实际团队路径在30/31世界减少，且多数与名义路径差很接近，保留了移动计算的实际作用。模型的移动指导能力与服务价值辨别能力应分开评价。
+
+这些首窗口仍不能代替完整任务：world02 首窗口 QoS −0.28967，整任务却 +229.825；world17 首窗口 +2.42097，整任务却 −151.207。不能据此把短窗口改成新的主要终点或自动延长模型。
+
+第二，**295次 literal 改选不等于295次具有实质距离差的机会。** 其中3次名义 travel 差只有浮点尾数大小：
+
+- world09/t330：−2.728484×10⁻¹²米；
+- world14/t1200：−1.909939×10⁻¹¹米；
+- world32/t180：−1.818989×10⁻¹¹米。
+
+它们符合预先冻结的精确比较规则，不是工程偏离；也不能把整批效果归为浮点现象，其余改选多数有明显距离差。此前“改选相对 base 的 score gain 没有低于10⁻¹²”不能替代对 secondary travel 差的检查。这个发现**不自动授权加 epsilon**。
+
+292/295次改选的三个模型 QoS 逐项相同，全部295次的三个 return-cost 逐项相同。其余三次还包含时间抵消，例如 world32/t330 的模型 QoS 差为 `[0, +0.1333333, −0.1333333]`，总分仍完全相同。精确总分相同的含义比“服务过程相同”更窄。
+
+上述都是旧数组的只读算术，0新增控制器、模型、RF 或 native 调用；本次 critic 的读取 CPU 未逐调用计量，不能写成0 CPU。
+
+**最强竞争解释与需要修正的判断。** 现有证据支持一个较具体的解释：短模型把不同的原生服务后果压进了相同评分，随后按距离选择确实改变了资源使用，也同时改变了未被评分充分辨别的服务机会及后续状态。匿名当前用户、静态 H 用户地图、三点采样、名义运动与实际 guard/关联/补能闭环共同构成这个有限模型；本批没有单独识别哪一项造成每个损失。
+
+因此，不应继续坚持“任意同分排序只是无用移动，去掉它就能无损修复 H”的较强预期。**它确实含可避免的移动，但不能将整组候选看成原生服务等价，再把最短者当作免费改进。** 我此前方案的资源预测得到支持，服务保持及完整价值预测没有得到足够支持，最差用户端点还有明确不利证据。
+
+同样不能反向推论资源感知控制没有价值。World02 的共同改善，以及平均路径、能耗、返航与储备暴露减少，都是应保存的能力。也不能据此恢复“预测不准所以没用”的旧故事：B11 没有测试新的预测增量，B10 的准确预测与真实动作曝光事实仍在。
+
+**实际价格。** 科学部署及其一次 reader 各使用23,092个候选；加两工程任务及其 reader，合计：
+
+- 102,000 native steps，34次 reset，68次环境/shape-probe construction；
+- 49,062个实际候选预测，1,471,860名义运动步，147,186 RF samples，68个私有模型构造；
+- 204,000次 proposal/feedback，0 fit、更新或新训练标签；
+- 另有512个 mock 候选及相应 mock 工作，不能混记为实际 RF；
+- 原失败工程 a01 是 locator setup 失败，0 native/model，1.931558 CPU秒已保留并计入，没有隐藏失败或重复比较器。
+
+科学 worker/reader 链为4220.839767 CPU秒；加有限检查、失败启动和完整工程，已计量检查点合计 **4450.210941秒，1.236170 CPU小时**，低于4小时边界。DM saved-row 算术另0.072300秒，收集、清理及其他支持按各自范围另计；5–8小时支持预算不是实际工时测量。
+
+H_T 科学 proposal 平均23.470 CPU秒/任务，完整 worker 平均103.958秒；原 H/C 的时间是历史记录，不是同期速度试验。这个 tie selector 不增加候选模型调用，但完整 H_T 仍支付 H 类搜索成本，不能称作相对 C 的免费方案。
+
+新科学与工程 raw 共398,409,728 allocated bytes，仅保留原节点一份。已公布的 source/scratch 清理合计回收5,422,530,560 allocated bytes；没有以删除正反证据换取成本下降。
+
+我的具体处置建议是：
+
+1. **保留 H、H_T、C 三个有不同用途的完整程序。** H 的服务与低端用户优势、H_T 相对 H 的资源减少、C 的低移动和低计算成本分别成立。不要用一个均值排名覆盖这些差异，也不要未经测试在线组合它们。
+2. **结束固定 H_T 配方的自动后续投入。** 当前不值得为了把 J 区间推过零而补面板，也不应依据三个浮点尾数改选自动买 epsilon 版本。已有比较已经改变了科学判断，机制未穷尽不是继续购买的理由。
+3. **把下一项问题从“怎样无损打破同分”移向完整服务与资源决策，但不在本轮另造实验。** 新方案必须说明它改变哪个有价值的完整选择，接受具备相同信息和动作机会的普通方法挑战，并保留逐用户和末端后果。若只改善资源而损害服务，应按用途取舍保留；若只是预测误差更低而完整收益未变，不能称预测价值成立；若服务与资源共同改善，才有进一步投入的实质理由。这里不要求先买诊断或正面试跑，也不自动批准 E/B。
+4. **保留旧正反资产与长期问题。** B09 的 F−H 原生正收益及完整 F−C 缺口、world29890012 的全路由但服务不足反例、B08 的预测能力与完整收益限制均不变。旧未购买的 zero-trigger 方案仍是未购买，不是负结果。B11 结束不关闭预测或学习决策问题，H_T 是否成为后续参照也不构成更宽资源分配研究的进入门槛。
+
+我与 DM 当前“保留服务/资源取舍，不默认升级、不自动扩展”的处置一致。新增修正是把同分的语义限制推进到**共同历史上的首个真实30步**，并明确三次次级距离浮点尾数改选。这些修正改变对机制的理解，但不改变完整主比较，也不产生新执行授权。
+
+**MATERIAL_DISSENT: no。** 支持保留资源能力并结束本固定规则的自动追加投入；不支持服务保持、成本支配或安全修复的升级主张，也不支持由本批结果自动开启新方案。
+<!-- END B11 ORIGINAL INDEPENDENT RESULT FINAL -->
+
+#### DM response and Root disposition
+
+I read the full original and accept its four substantive recommendations without material disagreement. Keep C's lower motion/online cost, H's original service/low-user capability and H_T's measured reduction of H resource use as different complete-policy tradeoffs; **do not default-adopt H_T or call its service preserved**. End automatic further investment in this exact tie recipe. No extra panel, forecast arm, weight, near-tie epsilon, horizon change or precursor query is selected. Root's final disposition agrees. Scientific responsibility for useful complete service/prediction continues; ending this selected batch does not impose an owner pause or make broader resource allocation conditional on H_T passing.
+
+The independent reconstruction strengthens the evidence boundary beyond my earlier full-path interpretation. The critic rebuilt135 complete paired vectors/means/t95,54 frozen source hashes and96 scientific raw hashes, then read all32 H_T/all32 H plus14 complete C raw trajectories. Its first-intervention comparison uses already-retained paths with identical prior history, observation and candidate table. In all31 such worlds, the selected and old H candidate have **individually equal three-point nominal QoS and return values**, yet actual next30tick cumulative QoS rises in20 and falls in11;29/31 also differ at the corresponding native10/20/30 sample points. This directly rules out the simple claim that nominal equality already guarantees service equality at those times and only inter-sample rewards explain the difference. It does not isolate guard, association, charging, current-user visibility or static-user-model errors. Short nominal service equivalence is weaker than previously implied; complete policy conclusions remain those of the fixed H3000 comparison.
+
+The simultaneous local movement prediction did have value: first-window actual team distance falls in30/31 cases. This cannot replace full-mission movement/value: world02 has first-window QoS−.28967 but full QoS+229.825; world17 has first-window+2.42097 but full−151.207. Nor is the mean reserve reduction uniform: the critic notes mean−417.84 versus median−2.5UAV-steps and uncertain terminal-minimum-battery/charging changes. The cost reduction is real but has a substantial tail contribution. This supports retaining a capability, not a uniform risk/safety guarantee.
+
+I also adopt the numerical-semantic correction. **295 is the number of actual literal-policy changes, not295 substantively different nominal travel opportunities.** Three recorded differences are only floating-point tails: world29910009/t330−2.728484e−12m, world29910014/t1200−1.909939e−11m, world29910032/t180−1.818989e−11m. They obey the exact prospective rule and are not an engineering deviation. The critic's1e−6m descriptive scale is not a proposed policy threshold. My earlier changed-choice score-gain check concerned the primary score relative to base; it could not establish the size of the secondary travel difference. The majority of travel changes are not tiny, so this also does not explain away the whole result as a rounding artifact. Preserve all three worlds/choices and the unchanged literal rule, with no post-hoc exclusion or epsilon repair.
+
+Across all295 changes,292 have componentwise identical three-point model QoS; the other3 include temporal cancellation (world32/t330 `[0,+.1333333,−.1333333]`), while all295 have componentwise identical modeled return cost. Equal aggregate score thus does not even always imply equal sampled service sequence. These are the critic's existing-array readings, not new model/native evidence. Its reading/reduction CPU is unmetered additional support and is explicitly not0CPU. No second actual reader or controller replay was purchased by the DM to recheck this already independent arithmetic.
+
+The resolved explanation is more specific than “forecasting failed” or “the tie rule was inactive”: short-model service scores fail to discriminate some native service consequences even from a common real starting history, while their motion calculations can still guide resource reductions. Resource use, total service and individual continuity must remain separate use criteria. B09 F−H positive value, F−C loss and world29890012/29890021 constraints; B10 accurate forecasting without established F−H value; B08 and all earlier capability/adverse records; and the inherited C/P_BS adoption restriction remain. The unbought zero-trigger design remains untested. A distinct resource/service allocation question may be worth investment on its own concrete comparison, but this result neither purchases it nor supplies a new prediction claim. Root is considering that cross-question choice with temporary Oracle advice; this DM provides source/cost facts without starting another result-bearing study.
+
+
+<a id="b11-final-cleanup"></a>
+### B11 final publication/cleanup boundary — 2026-10-01 PDT
+
+The original independent source/result read is complete and fully preserved above, with resolved MATERIAL_DISSENT:no. No source consumer needs the completed fixed batch driver. A repository runtime-import scan found no B11 dependency outside its own package/test; all live result/read processes and the observer are terminal. Keep the complete useful `b11_travel_ties/controller.py` policy, package initializer and its six bounded controller fixtures. They retain the exact literal rule, committed C state and failed-prefix behavior; no policy code or surviving fixture was changed or dynamically rerun. C/H implementations and needed shared/native dependencies remain.
+
+Removed only the completed B11 one-batch `capture.py`, `checks.py`, `contract.py`, `metrics.py`, `reader.py`, `references.json`, `run.py`, `study.py` and support-only `test_support.py`. Their exact identities and **94208allocated bytes→0** are in [code-cleanup.json](../../../../runs/uav_fleet_transmission/b11_travel_ties_a01/code-cleanup.json). Static parsing of the three retained Python files and the bounded external import scan paid no controller/model/native/test work. The full original executable experiment, schemas, price/reference contract and reader remain recoverable at published source6344ca4398bab3692e3593b0125c24135c7a563d; removing consumed driver files does not change the frozen run or authorize another execution. These are unused execution scaffolds, not discarded positive/negative policy evidence.
+
+Across the three actual source snapshots/registrations, stopped B11 requests/caches and now these unused code targets, net measured allocation fell **5422624768bytes**. All declared targets are absent; there is no cleanup blocker. Unique scientific/engineering raw remains398409728allocated bytes on the original node, with all109 scientific output hashes unchanged after source collection. Published compact readings, full critic original/provenance, finite/mock evidence and failed a01 are retained. No archive/copy-of-copy was created as a cleanup condition.
+
+This closes the selected B11 study's implementation, full collection, interpretation, independent diagnosis, publication and cleanup. The parent service/prediction question remains with this DM. The fixed H_T recipe has no automatic extension; the next concrete cross-question investment is Root's pending distinct resource/service allocation choice, with no current launch, fit, model/query or unresolved acceptance. Existing capabilities/default restrictions and adverse evidence remain the inputs to that choice, not a reset of the research history.

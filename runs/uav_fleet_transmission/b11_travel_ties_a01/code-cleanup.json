@@ -1,0 +1,76 @@
+{
+  "status": "deleted-and-measured",
+  "frozen_complete_source": "6344ca4398bab3692e3593b0125c24135c7a563d",
+  "before_allocated": {
+    "experiments/candidates/uav_fleet_transmission/b11_travel_ties/capture.py": 4096,
+    "experiments/candidates/uav_fleet_transmission/b11_travel_ties/checks.py": 8192,
+    "experiments/candidates/uav_fleet_transmission/b11_travel_ties/contract.py": 8192,
+    "experiments/candidates/uav_fleet_transmission/b11_travel_ties/metrics.py": 4096,
+    "experiments/candidates/uav_fleet_transmission/b11_travel_ties/reader.py": 32768,
+    "experiments/candidates/uav_fleet_transmission/b11_travel_ties/references.json": 4096,
+    "experiments/candidates/uav_fleet_transmission/b11_travel_ties/run.py": 8192,
+    "experiments/candidates/uav_fleet_transmission/b11_travel_ties/study.py": 16384,
+    "tests/experiments/candidates/uav_fleet_transmission/b11_travel_ties/test_support.py": 8192
+  },
+  "after_allocated": {
+    "experiments/candidates/uav_fleet_transmission/b11_travel_ties/capture.py": 0,
+    "experiments/candidates/uav_fleet_transmission/b11_travel_ties/checks.py": 0,
+    "experiments/candidates/uav_fleet_transmission/b11_travel_ties/contract.py": 0,
+    "experiments/candidates/uav_fleet_transmission/b11_travel_ties/metrics.py": 0,
+    "experiments/candidates/uav_fleet_transmission/b11_travel_ties/reader.py": 0,
+    "experiments/candidates/uav_fleet_transmission/b11_travel_ties/references.json": 0,
+    "experiments/candidates/uav_fleet_transmission/b11_travel_ties/run.py": 0,
+    "experiments/candidates/uav_fleet_transmission/b11_travel_ties/study.py": 0,
+    "tests/experiments/candidates/uav_fleet_transmission/b11_travel_ties/test_support.py": 0
+  },
+  "reclaimed_bytes": 94208,
+  "deleted_identities": {
+    "experiments/candidates/uav_fleet_transmission/b11_travel_ties/capture.py": {
+      "bytes": 1426,
+      "sha256": "a5cd7f0f05a3d6bd38f4e43b7ac6398e81be120df1594ed4d68eff727b0f4dea"
+    },
+    "experiments/candidates/uav_fleet_transmission/b11_travel_ties/checks.py": {
+      "bytes": 4125,
+      "sha256": "148f4de1e2b00b0190bc9a5beedc7ee4869ecd7dcb7c56a31115ddd264f428fd"
+    },
+    "experiments/candidates/uav_fleet_transmission/b11_travel_ties/contract.py": {
+      "bytes": 5983,
+      "sha256": "c99dfa92fe15057ad2a20bcb18dff4558853c2058322e6e3c00b706f0e941c8f"
+    },
+    "experiments/candidates/uav_fleet_transmission/b11_travel_ties/metrics.py": {
+      "bytes": 2508,
+      "sha256": "889beaab6c38a3e29b11d920bdaa62758e6fae872d25f6fd33b04db9ee647bde"
+    },
+    "experiments/candidates/uav_fleet_transmission/b11_travel_ties/reader.py": {
+      "bytes": 30614,
+      "sha256": "60515eceb0ee2647e9d7349d522288d631156c31444bbc0fefcddf6909c04443"
+    },
+    "experiments/candidates/uav_fleet_transmission/b11_travel_ties/references.json": {
+      "bytes": 2266,
+      "sha256": "c7c01662e9d2ec2b4d3902ced75dad10e55cfdc242edadc9cedc8992501d469f"
+    },
+    "experiments/candidates/uav_fleet_transmission/b11_travel_ties/run.py": {
+      "bytes": 6214,
+      "sha256": "1d569e6ea437a0984fd8d0873a574a583e56b0a0aa3a3c61d001d9a5ed3866fc"
+    },
+    "experiments/candidates/uav_fleet_transmission/b11_travel_ties/study.py": {
+      "bytes": 13747,
+      "sha256": "99f1ad174bc0895dc62f16e62e42a9e64f50fedc9087dfa9d045d2cc178eb6c8"
+    },
+    "tests/experiments/candidates/uav_fleet_transmission/b11_travel_ties/test_support.py": {
+      "bytes": 4904,
+      "sha256": "54cc6d06cb76422bb87168ebc3f3493ef14562e1cfa8c0d095d73fa06b6343cf"
+    }
+  },
+  "retained_files": {
+    "experiments/candidates/uav_fleet_transmission/b11_travel_ties/__init__.py": "6ff30743ac448b88a758bcf94691bc0ff5be45aba94e22e610fef95f036e7176",
+    "experiments/candidates/uav_fleet_transmission/b11_travel_ties/controller.py": "4f1660b362dfe29780f49428c75b36cb7bd21cd62e960742d2e7328384ff6a84",
+    "tests/experiments/candidates/uav_fleet_transmission/b11_travel_ties/test_controller.py": "3d5eaca0f2dd040a5034b7697036b25d300ff668716c4e36be842561c54adc0c"
+  },
+  "external_runtime_import_scan": "no B11 imports outside retained controller test and retired B11 package",
+  "independent_source_review_finished": true,
+  "no_active_result_or_reader": true,
+  "static_AST_checks": 3,
+  "new_tests_controller_model_native_calls": 0,
+  "cpu_seconds": 0.007225313999999997
+}
