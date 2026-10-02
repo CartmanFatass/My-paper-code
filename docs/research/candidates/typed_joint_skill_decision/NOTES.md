@@ -2190,3 +2190,219 @@ canonical checkout change, package/profile change or other direction's deletion
 was made. No cleanup tool blocker remains. Local review scratch and useful
 prospective reuse code await the immediate continuation decision; no redundant
 bulk copy is being made as a cleanup condition.
+
+
+<a id="b03-selected-contract"></a>
+## 2026-10-01 PDT — B03 selected fixed-prefix complete exposed-panel comparison
+
+Root read the complete B02 result and original independent advice, accepted the
+ridge stop/G-P capability, and explicitly supports this in-scope B03 without
+waiting for the temporary Oracle or another routine approval. This is a separate
+prospective study; B02 stays complete with unchanged arms/results. The independent
+result review above covers this bounded direction choice. No material dissent,
+new fit, native query or result operation precedes this declaration.
+
+**Question and reason.** Can a small, actually paid observation of local-search
+progress improve complete native quality over ordinary rank0 omission at modest
+online cost? The ordinary Q capability would become a meaningful same-information
+reference for future experience use. It tests a richer legal input than B02's
+initial-feature ridge; it is not a rescue fit or evidence of learned assistance.
+Current published RESEARCH at`e3d9f962b`, topic4, supplies the prediction/relative
+ordering distinction: world-mean MSE gain need not change a useful within-world
+choice. B01's failed finite numerical/typed packages and B02's fit/ranking gap,
+all positive examples and full support bills persist. The9 static/native sign
+reversals require full native consequences, not a static score-only verdict.
+
+The rule was specified in the original B02 review before these64 results, but
+this investment follows exposed B02 outcomes and new archive arithmetic. All64
+worlds107100000–107100063 are development/exploratory reuse, not fresh confirmation.
+Fixed Q's static+.00382746 over G across this panel is motivation, not a complete
+native result. The missing set includes its worst static loss at107100000.
+
+### Exact stored evidence and alias feasibility, before implementation
+
+The reviewer clarified its original57-layout check as follows. This complete
+factual handback is mechanically preserved from the same rollout, line508,
+turn`01a0fa71-1a8b-7e50-8906-ff65fa28c1d5`, 759UTF8bytes,
+SHA256`dc515dd59b115fb71a199c9b63ed932b6d2cc8fc122248b770f7241fc97ad21f`; it is not a second scientific review.
+
+<!-- BEGIN ORIGINAL B03 ALIAS FACT HAND BACK -->
+The exact comparison was:
+
+```python
+if s["positions_xyz"] == positions:
+```
+
+Both were nested Python lists of parsed JSON floats. `positions` was reconstructed from the initial candidate and accepted moves, with clipping and the declared fallback.
+
+**No tolerance or `allclose` was used. However, this did not compare assigned-target float64 bytes or matching permutations.** Python numeric equality also treats `+0.0` and `-0.0` as equal. Thus 57 establishes exact numeric equality of unassigned layouts, not complete execution identity.
+
+No complete alias map was saved. The read-only script printed aggregates and seven missing worlds. Inputs remain under canonical B02 raw:
+
+- `reader/<world>/original-search.json`
+- `main/<world>/<G|L|P>/selection.json`
+<!-- END ORIGINAL B03 ALIAS FACT HAND BACK -->
+
+DM then performed only fixed-version saved-data arithmetic, using NumPy1.26.3
+on the configured interpreter, without importing the host/planner, environment,
+model or RNG and without a result query. Initial+accepted moves/clipping/fallback
+were reconstructed for every selected branch; min-makespan assignment used the
+original float64 norm, max/sum reduction and first-permutation tie rule. Every
+unassigned and assigned target was compared as little-endian float64 bytes,
+and every permutation and saved world/user/BS/initial-coordinate identity was
+checked. Exactly57 remain aliases; no numerical-only near match remains.
+Source arithmetic cost2.635164CPU-s/1.133133elapsed-s is support, not a fitted
+model or native result. Strict online reset/executor/source validation remains
+necessary during B03; this arithmetic is not a substitute for it.
+
+The published reader-only[alias map](B03_ALIAS.json), SHA256
+`69c9daaea4c9739c71e5498de2681318767e03eaba4074fad08ab86278984ea5`,
+binds every rank, prefix reward, original-share query projection, permutation,
+assigned/unassigned byte digest, and first available alias in fixed G/L/P order.
+It does not choose aliases by outcome. The[input contract](B03_INPUT.json),
+SHA256`e811e9c596210a4e9c7a3c2b2be1c66422ce305aa4a3de6cd8444e7e8ade5864`,
+binds B02's canonical artifact manifest
+`7f8edf2c0043cc38e92e2c4839c8d450d112512a2d402fc5f9889e7d3dd5b3c2`,
+all upstream/source identities and the exact seven missing worlds:
+107100000,107100011,107100025,107100027,107100032,107100033,107100036.
+No prior raw tree is copied: required B02 raw inputs remain at their one canonical
+node location. The old source snapshot/staging deletion does not remove them.
+
+### Programs, information boundary and real pause/resume semantics
+
+G and P remain B02's frozen ordinary programs. G runs rank0 under its original
+one-third remaining relay share, with the original paid-initial fallback. P runs
+the complete flat→relay+flat-incumbent, three-start original planner. Every
+program independently pays full flat search, all relay initial scoring and final
+metadata/matching. No arm shares current online queries or final P outcomes.
+
+Q builds exactly the same original top3 and shares. It runs each branch for at
+most36 **actual non-clipped-away static evaluations**, or its earlier original
+termination/share exhaustion, in rank0,1,2 order. Choose the highest current
+accepted reward after those prefixes, exact numeric ties to lower original rank.
+Continue only that branch, using its remaining original share; its prefix36 is
+part of that share. Other prefixes are paid and discarded, and unused shares
+are not redistributed. Final endpoint below rank0 initial reward−1e-12 uses the
+same already-paid initial-layout fallback; selected search is still fully paid.
+
+A pause can occur inside the UAV/move sweep. The suspended branch must preserve
+accepted position/reward/potential, `moved`, UAV and move iterator position,
+xy-step index, used/share count and convergence state. It must yield **after**
+computing trial potential and acceptance, because switching to another branch
+changes the environment's most recently evaluated trial. Restarting a descent
+loop from the prefix endpoint is a different policy and is forbidden. Preserve
+original movement/clip,100/50/25xy schedule,±50z,1e-12reward/1e-9potential
+acceptance, stopping and tie semantics. Every current request/response must
+match the corresponding original B02 flat/initial/branch stream exactly.
+
+The online child receives only world address, arm, immutable source/constants
+and output/admission context. It never reads B02 outputs, alias-map rows or future
+branch values to choose a branch. Commit/write its selection evidence and record
+selection-ready time first. Only then may the parent/reader use old outcomes and
+expected fields to verify identity. Before a new native step or a reused native
+outcome, compare current world, initial positions/users/BS, agents, transmitter
+mask, full reset state/RNG, chosen assigned-target float64 bytes/permutation,
+executor source and dependency identities. Unexpected mismatch terminates the
+study with technical evidence; it does not change Q, choose another stored row,
+execute an eighth missing episode or extend a cap.
+
+### Complete service panel, matched online cost and reader
+
+Run192 fresh serial spawn processes: G/Q/P once per world, cyclic left rotation
+of that order by world offset modulo3. All are selection-only until selection is
+recorded; G/P reuse their already-paid full native trajectories. Q reuses the57
+strict matching native trajectories and executes full H500 for all7 missing
+worlds with the unchanged B02 low-level straight-fly/hold executor. No learned
+artifact is fit or scored. Reused L trajectories are physical aliases, not Q's
+use of L's decisions or a second fitted asset. Query/read/reset work is charged.
+
+Q's complete64-world native J, C_bh, frontend capacity, relay use, arrival and
+service transitions are re-aggregated from entire500-step records for all worlds.
+Primary paired comparisons Q−G and Q−P retain every world, all tails/fallbacks,
+and static/native sign reversals. No positive subgroup selects the panel. Report
+paired-world mean/SD/SE, descriptive df63 interval, sign counts and all per-world
+values; this exposed adaptive investment is not a confirmatory generalization
+claim or64 independently trained assets. No CLAIM/MEI result is being bought.
+
+Balanced fresh selection-only G/Q/P controls provide contemporaneous cold
+spawn-to-selection-ready wall/CPU/query costs, including imports, construction,
+matching, required instrumentation and evidence serialization as in B02. Timing
+stops before alias lookup/native replay; skipping57 flights is an evaluation
+saving, not an online controller speedup. No new full-episode CPU measurement is
+claimed for reused trajectories. If combining new decision CPU with old executor
+CPU, label that an accounting estimate, not a new matched end-to-end timing.
+
+The complete reader hashes every used prior/new artifact, reconstructs the Q
+prefix rank and exact paused continuation from all64 original accepted histories,
+and compares **every current static request/response**, including rejected trials,
+to the corresponding pre-paid B02 streams (flat, initial,3prefixes, chosen suffix,
+final metadata). G/P complete selection streams/endpoints must match their B02
+originals. Old future information is available only here after choices. No new
+full original-search replay is needed when those exact full streams already exist.
+For reused episodes, verify all identity conditions and re-read/re-aggregate the
+entire original trajectory, inheriting B02's paid per-state physics checks and
+stated trust boundary. For7 new episodes independently reconstruct all501 states
+with paid static evaluation:3507 new static checks. Additionally replay the
+original executor for Q on fixed107100000 and107100036, two full H500 audits,
+checking actions, all state/metrics and terminal behavior. These1000 correctness
+steps are included, not an extra pilot. Preserve all raw query/native streams,
+full toleranced diagnostics and failures. Reuse B02 tolerances and exact discrete
+identity rules; do not silently relax them or call an independent physics model.
+
+### Full prospective price, stopping and interpretation
+
+There are0fits,0new training labels,0GPU/model forwards, no weight/environment
+installation, no newly sampled evaluation worlds. New science comprises7 native
+Q episodes+2 whole audits = **4500 native steps**. The57 Q and128 G/P prior
+full episodes remain sunk paid exposure, explicitly attributed to B02.
+Projected actual online queries are90257Q+85192G+128102P=**303551**;
+plus3507 new-state reader calls gives**307058 expected static calls**. The hard
+conservative budget is64×3×6001+3507=**1155699 static attempts**,4500native,
+0fits. An unused cap does not permit extra queries, audit episodes, retries or
+alternative rules. All internal radio/reset/matching calls and failures are counted
+separately from explicit static calls, as in B02.
+
+Configured original`wsl_4070`/Python3.10.21/NumPy1.26.3, numerical threads1;
+no retired Laya profile/environment is restored. Scientific worker+full reader
+forecast5–15CPU-minutes, **1800CPU-s hard cumulative ceiling**; support4–8hours
+is a forecast, with actually metered work separate and unmetered work unknown.
+Peak cap **2684354560bytes (2.5GiB)** covers the entire full source snapshot,
+this new output and the already-retained B02 input root counted once, with no
+new bulk copy. This is a new explicitly priced B03 ceiling, not a change to B02's
+2GiB cap. Source-only alias arithmetic, original B02 work/128288 historical label
+calls, and all B01 costs remain in cumulative evidence rather than disappearing.
+Hard-bound or identity failures preserve partial evidence/attempt counters and
+terminate; no automatic retry or same-study repair run is selected.
+
+Useful native Q−G quality with a modest measured selection premium would retain
+an ordinary feedback allocation capability and a stronger comparator for future
+learning at the same information boundary. Static improvement without useful
+native consequence ends this Q use case and weakens another immediate static-gain
+learner. Excess cost/service harm favors G/P's separate tradeoffs. A null/unresolved
+result does not prove all decision assistance impossible, nor automatically buy
+new fits. No current parameter study or source change may be picked using the
+seven new outcomes. After the complete read, preserve all adverse evidence and
+make the next substantive choice under the enduring question.
+
+<a id="b03-l0"></a>
+### B03 L0 — one admitted complete prefix program and exact evidence-reuse comparison
+
+Implement only under`experiments/candidates/typed_joint_skill_decision/b03/`
+and matching tests; B02/upstream source is read-only. Reuse unchanged B02 native,
+trace/storage/accounting/reader primitives when their fixed contracts fit; use an
+explicit B03 bill/limits object rather than mutating B02 module globals. No shared
+launcher/config/environment edit. One guarded parent entry, published manifest
+arguments,192 serial fresh selection children, parent post-choice identity gate,
+7 new episodes,2 whole original-executor audits, integrated complete reader and
+exclusive outputs. No fit/model/skip-reader/retry/alternate-prefix knobs.
+
+The verifiable behavior change is preserving a true suspended original branch
+through a36-query prefix, paying all three prefixes, then continuing exactly one
+original-share suffix. Pure/saved/mock checks cover mid-sweep acceptance/plateau,
+clipped moves, early convergence/share exhaustion, ties, exact selected query
+sequence and cost, alias byte/RNG/source rejection, native-count/CPU/disk attempt
+bounds and missing/failed child evidence. No scientific host/model probe outside
+normal published-source admission. Independent engineering review of numerical,
+RNG, information flow, alias/executor and resume paths is required; reuse applicable
+B02 checks without repeating an unbounded test suite. Final entrypoint prints no
+premature scientific conclusion and never restarts a failed child.

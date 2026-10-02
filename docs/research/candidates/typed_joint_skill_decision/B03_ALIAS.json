@@ -1,0 +1,1782 @@
+{
+  "arithmetic_cpu_seconds": 2.635164,
+  "arithmetic_wall_seconds": 1.1331329389940947,
+  "canonical_prior_root": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b02_a01",
+  "missing_worlds": [
+    107100000,
+    107100011,
+    107100025,
+    107100027,
+    107100032,
+    107100033,
+    107100036
+  ],
+  "numpy": "1.26.3",
+  "prefix_queries": 36,
+  "prior_manifest_sha256": "7f8edf2c0043cc38e92e2c4839c8d450d112512a2d402fc5f9889e7d3dd5b3c2",
+  "projected_online_Q_queries": 90257,
+  "rows": [
+    {
+      "assigned_f64le_sha256": "58a3674cf868b446616eca920b256bce224178593bf59818233bf36dce3116c5",
+      "exact_saved_aliases": [],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": null,
+      "prefix_rewards": [
+        0.4218641979335903,
+        0.43956340614985917,
+        0.4395634061498592
+      ],
+      "query_count": 1607,
+      "rank": 2,
+      "reader_reference": "raw/reader/107100000/original-search.json",
+      "target_permutation": [
+        3,
+        1,
+        0,
+        4,
+        5,
+        2
+      ],
+      "unassigned_f64le_sha256": "8992412a0430e1c4e1f2f8c37397efb6539272acbe1f066fd66d0cd368108c95",
+      "world": 107100000
+    },
+    {
+      "assigned_f64le_sha256": "17d82847eaa894c6b6ce9a78b3793cc2df0e80db29c1d179e57d41a9cf7f41d6",
+      "exact_saved_aliases": [
+        "G"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "G",
+      "prefix_rewards": [
+        0.5071307111545811,
+        0.4894667554958372,
+        0.48591260514511636
+      ],
+      "query_count": 1218,
+      "rank": 0,
+      "reader_reference": "raw/reader/107100001/original-search.json",
+      "target_permutation": [
+        1,
+        4,
+        2,
+        5,
+        3,
+        0
+      ],
+      "unassigned_f64le_sha256": "54eb56b4d9cf8c6541684bf5ec95bae1723171f9bd9a11f0fbee7fed304f86b4",
+      "world": 107100001
+    },
+    {
+      "assigned_f64le_sha256": "22e715d29e44623aa6faf84f5552099377160e35d53e0f1d674b773ce9d88ce4",
+      "exact_saved_aliases": [
+        "G",
+        "L",
+        "P"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "G",
+      "prefix_rewards": [
+        0.5792971503921343,
+        0.5749419627692649,
+        0.5749419627692649
+      ],
+      "query_count": 1621,
+      "rank": 0,
+      "reader_reference": "raw/reader/107100002/original-search.json",
+      "target_permutation": [
+        3,
+        0,
+        4,
+        2,
+        1,
+        5
+      ],
+      "unassigned_f64le_sha256": "51703020c7e64a7183bc91cd1f83f4e06ddd78494f86310022f109c905906ef6",
+      "world": 107100002
+    },
+    {
+      "assigned_f64le_sha256": "fdaf8a5d2cc9dbdca54b255d992bd406faf9c3a81473b74a417f414c7f5123b1",
+      "exact_saved_aliases": [
+        "G"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "G",
+      "prefix_rewards": [
+        0.5345616221302604,
+        0.5080439398889783,
+        0.4821134763832192
+      ],
+      "query_count": 1149,
+      "rank": 0,
+      "reader_reference": "raw/reader/107100003/original-search.json",
+      "target_permutation": [
+        2,
+        1,
+        3,
+        0,
+        4,
+        5
+      ],
+      "unassigned_f64le_sha256": "c305e3ddc25a0ab473454fb2d50d061afbad7774f1f8bbd01f341ba641526873",
+      "world": 107100003
+    },
+    {
+      "assigned_f64le_sha256": "2bd0dd9a74f5e1b6e93b0cdffbe9662f12499cf827ada77f5b554167bd4df94e",
+      "exact_saved_aliases": [
+        "G",
+        "L"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "G",
+      "prefix_rewards": [
+        0.5434518472707912,
+        0.5111657560757922,
+        0.5045647524998502
+      ],
+      "query_count": 1593,
+      "rank": 0,
+      "reader_reference": "raw/reader/107100004/original-search.json",
+      "target_permutation": [
+        2,
+        0,
+        5,
+        1,
+        4,
+        3
+      ],
+      "unassigned_f64le_sha256": "cc03b41c8f682aa0e77bc5bb7a868413dc544859999dc20f933776d655085d9f",
+      "world": 107100004
+    },
+    {
+      "assigned_f64le_sha256": "d8d1d2d36a46d5ab76259cedaaabfb79734d5ec75be905dbc04e9d1effd766bd",
+      "exact_saved_aliases": [
+        "P"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "P",
+      "prefix_rewards": [
+        0.5380571299062269,
+        0.5450664596743507,
+        0.5236060513756264
+      ],
+      "query_count": 1197,
+      "rank": 1,
+      "reader_reference": "raw/reader/107100005/original-search.json",
+      "target_permutation": [
+        4,
+        2,
+        0,
+        5,
+        3,
+        1
+      ],
+      "unassigned_f64le_sha256": "5e3b3f115e7e84429007bc34a3e36fc4439c4bf15008bd99517254b9867553fd",
+      "world": 107100005
+    },
+    {
+      "assigned_f64le_sha256": "3c594395a527b24e43e151b3135e8f1416a012d37a150afb1b6cc438bd949ddc",
+      "exact_saved_aliases": [
+        "G",
+        "P"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "G",
+      "prefix_rewards": [
+        0.5131787490792135,
+        0.5098730629412408,
+        0.48753019481356796
+      ],
+      "query_count": 1488,
+      "rank": 0,
+      "reader_reference": "raw/reader/107100006/original-search.json",
+      "target_permutation": [
+        3,
+        5,
+        4,
+        1,
+        0,
+        2
+      ],
+      "unassigned_f64le_sha256": "38ceece89a2e5fb1b41c6cabcd5436ab153f4b0b412481793d81e56cb24e6004",
+      "world": 107100006
+    },
+    {
+      "assigned_f64le_sha256": "4f2b58ddf26dbd27f9fa00f3cff551c67aa842e6397875d7b36e0bc40f3f577f",
+      "exact_saved_aliases": [
+        "G",
+        "L",
+        "P"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "G",
+      "prefix_rewards": [
+        0.6091555903331556,
+        0.5488915424327403,
+        0.5499891069807532
+      ],
+      "query_count": 1388,
+      "rank": 0,
+      "reader_reference": "raw/reader/107100007/original-search.json",
+      "target_permutation": [
+        2,
+        4,
+        3,
+        0,
+        1,
+        5
+      ],
+      "unassigned_f64le_sha256": "606b70209695e34649d3321a8dc73f329b866c6ac07bc84f449521959197be61",
+      "world": 107100007
+    },
+    {
+      "assigned_f64le_sha256": "ecd2e27dfe7ae0254b4bf18dc1a067e8521462efd581d63f237e4916baf474b0",
+      "exact_saved_aliases": [
+        "G"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "G",
+      "prefix_rewards": [
+        0.5145472822747582,
+        0.5052050073762062,
+        0.46386847163208433
+      ],
+      "query_count": 1297,
+      "rank": 0,
+      "reader_reference": "raw/reader/107100008/original-search.json",
+      "target_permutation": [
+        0,
+        4,
+        2,
+        3,
+        1,
+        5
+      ],
+      "unassigned_f64le_sha256": "ef84f4bdbbfe24428407f27bc083eda71fa5f3334dac8d965828662353123128",
+      "world": 107100008
+    },
+    {
+      "assigned_f64le_sha256": "8a417f408e176da45030265d0335fcc69238eb93bf3a9c01ab00c695d6a48373",
+      "exact_saved_aliases": [
+        "G",
+        "L",
+        "P"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "G",
+      "prefix_rewards": [
+        0.4991846117594254,
+        0.4802665825537916,
+        0.467519726585061
+      ],
+      "query_count": 1216,
+      "rank": 0,
+      "reader_reference": "raw/reader/107100009/original-search.json",
+      "target_permutation": [
+        1,
+        5,
+        0,
+        2,
+        3,
+        4
+      ],
+      "unassigned_f64le_sha256": "e7ca3f81b7f597e1af80a41f0068e2edd987805df5834a3bd6d73e2b9c2d0208",
+      "world": 107100009
+    },
+    {
+      "assigned_f64le_sha256": "05e16ccbfb0f0514f9aa4624ff2988e90c7c12de925df4014febd62baa3d8d46",
+      "exact_saved_aliases": [
+        "G",
+        "L",
+        "P"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "G",
+      "prefix_rewards": [
+        0.5514647236746283,
+        0.525896149936675,
+        0.5346473004380534
+      ],
+      "query_count": 1516,
+      "rank": 0,
+      "reader_reference": "raw/reader/107100010/original-search.json",
+      "target_permutation": [
+        3,
+        2,
+        4,
+        0,
+        1,
+        5
+      ],
+      "unassigned_f64le_sha256": "84219b40664b130c2fb2c6bf5b0e031801c1f745371adf72650c261160ab597d",
+      "world": 107100010
+    },
+    {
+      "assigned_f64le_sha256": "b6040ed6ac45f07bd1f3747e6908c8ccdb261da975a39d679b6b5bf8eb9bdbdf",
+      "exact_saved_aliases": [],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": null,
+      "prefix_rewards": [
+        0.6005739842906824,
+        0.6099421584773517,
+        0.6099421584773517
+      ],
+      "query_count": 1325,
+      "rank": 1,
+      "reader_reference": "raw/reader/107100011/original-search.json",
+      "target_permutation": [
+        1,
+        4,
+        3,
+        5,
+        0,
+        2
+      ],
+      "unassigned_f64le_sha256": "2489735d06a40bbc53b7112972d616d150dd7cfaa93ff565b956adf64f79df4c",
+      "world": 107100011
+    },
+    {
+      "assigned_f64le_sha256": "088073d19aedf140fbedc5b3d5ebccddcc1630335156e4a6378162cc9524f5a6",
+      "exact_saved_aliases": [
+        "G",
+        "P"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "G",
+      "prefix_rewards": [
+        0.5653171593900606,
+        0.5361413691458963,
+        0.5508818318884662
+      ],
+      "query_count": 1591,
+      "rank": 0,
+      "reader_reference": "raw/reader/107100012/original-search.json",
+      "target_permutation": [
+        1,
+        2,
+        4,
+        0,
+        5,
+        3
+      ],
+      "unassigned_f64le_sha256": "5d019430a426c2bbc9886355deaad2c66c42fbeffb06f64da83962a3633b74dc",
+      "world": 107100012
+    },
+    {
+      "assigned_f64le_sha256": "f30295e5ed4d8c0b1430145da3f8812ac37c8268ad24a87cde14fe0bd8d5c0a5",
+      "exact_saved_aliases": [
+        "G"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "G",
+      "prefix_rewards": [
+        0.574961246299778,
+        0.5551524560207427,
+        0.5551524560207426
+      ],
+      "query_count": 1507,
+      "rank": 0,
+      "reader_reference": "raw/reader/107100013/original-search.json",
+      "target_permutation": [
+        5,
+        3,
+        1,
+        4,
+        2,
+        0
+      ],
+      "unassigned_f64le_sha256": "430c01cb4fdbc28fe2e3c01b38a566899231007e70c55d0e92712313d36f2913",
+      "world": 107100013
+    },
+    {
+      "assigned_f64le_sha256": "b258d6d083a6d97548507249ea9cff817450a9751e272adcff39d24f5e6586a7",
+      "exact_saved_aliases": [
+        "P"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "P",
+      "prefix_rewards": [
+        0.48313651143220454,
+        0.5181935811750986,
+        0.4547368142888828
+      ],
+      "query_count": 1125,
+      "rank": 1,
+      "reader_reference": "raw/reader/107100014/original-search.json",
+      "target_permutation": [
+        5,
+        3,
+        1,
+        4,
+        0,
+        2
+      ],
+      "unassigned_f64le_sha256": "b6dab03122ee50d482590c41ecd59b9e35137dec46b08c2738f6aa9c24050d64",
+      "world": 107100014
+    },
+    {
+      "assigned_f64le_sha256": "9ff3e8cdfa57361c2702816bc3b4780a4e3e88dca351800a5257ee000396011d",
+      "exact_saved_aliases": [
+        "G",
+        "P"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "G",
+      "prefix_rewards": [
+        0.5758659561914743,
+        0.57145360447617,
+        0.5579133997428344
+      ],
+      "query_count": 1538,
+      "rank": 0,
+      "reader_reference": "raw/reader/107100015/original-search.json",
+      "target_permutation": [
+        5,
+        2,
+        3,
+        1,
+        0,
+        4
+      ],
+      "unassigned_f64le_sha256": "a57abc30a8d5a0456d4948b144fca59453e809d7c4d67c62dc93ae0210b03a4c",
+      "world": 107100015
+    },
+    {
+      "assigned_f64le_sha256": "20966fe89d9477b8532161212423b4ca5250325d2f0221543eab208980dc680a",
+      "exact_saved_aliases": [
+        "P"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "P",
+      "prefix_rewards": [
+        0.5210614380276068,
+        0.5318707053443746,
+        0.4899481948381149
+      ],
+      "query_count": 1302,
+      "rank": 1,
+      "reader_reference": "raw/reader/107100016/original-search.json",
+      "target_permutation": [
+        3,
+        5,
+        4,
+        1,
+        0,
+        2
+      ],
+      "unassigned_f64le_sha256": "89dcdfaebc341c1fe0c6cdf9d9e425770268c8515990cda7420624894959ff6a",
+      "world": 107100016
+    },
+    {
+      "assigned_f64le_sha256": "ec9e6c7b0b7b9976c35e49da05bc6dfa6fe4855b01b8cb713fd28a38804bd621",
+      "exact_saved_aliases": [
+        "G"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "G",
+      "prefix_rewards": [
+        0.6206841152731182,
+        0.6197658107139106,
+        0.5894158931199572
+      ],
+      "query_count": 1377,
+      "rank": 0,
+      "reader_reference": "raw/reader/107100017/original-search.json",
+      "target_permutation": [
+        0,
+        1,
+        4,
+        3,
+        5,
+        2
+      ],
+      "unassigned_f64le_sha256": "2898de128ef1dc74e9fc254ea924a33bbfa703ebc9c44458587d137fd7966530",
+      "world": 107100017
+    },
+    {
+      "assigned_f64le_sha256": "2879037d2cb18d2899a2235bb98f7405a6726d5a639b168243dadb8a8f0009d0",
+      "exact_saved_aliases": [
+        "P"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "P",
+      "prefix_rewards": [
+        0.5574685812053112,
+        0.550590626077806,
+        0.5595219283020314
+      ],
+      "query_count": 1593,
+      "rank": 2,
+      "reader_reference": "raw/reader/107100018/original-search.json",
+      "target_permutation": [
+        4,
+        1,
+        0,
+        3,
+        2,
+        5
+      ],
+      "unassigned_f64le_sha256": "4a24a1ab4e61e9ba4fdee91b2dd8f943418a7deec5cf494acfac4d1c64e46fa0",
+      "world": 107100018
+    },
+    {
+      "assigned_f64le_sha256": "55fea7514e03b79d6aff08ba1e11c7d7e871a3c78fc988f2ad0b5db17e2448d9",
+      "exact_saved_aliases": [
+        "G",
+        "P"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "G",
+      "prefix_rewards": [
+        0.5856737721192115,
+        0.579050301421776,
+        0.5856737721192113
+      ],
+      "query_count": 1587,
+      "rank": 0,
+      "reader_reference": "raw/reader/107100019/original-search.json",
+      "target_permutation": [
+        0,
+        5,
+        1,
+        4,
+        2,
+        3
+      ],
+      "unassigned_f64le_sha256": "cd9bcc9029f668ebe0ab54396f0e520cf76b556c8f4755dba15755ea6230acb8",
+      "world": 107100019
+    },
+    {
+      "assigned_f64le_sha256": "a801c7eab2c23910e9332b7e5329591eca85f9ddc72eac57f5b8a6281bd16915",
+      "exact_saved_aliases": [
+        "G",
+        "L",
+        "P"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "G",
+      "prefix_rewards": [
+        0.6204138693658463,
+        0.6043052022096796,
+        0.5979497886910078
+      ],
+      "query_count": 1241,
+      "rank": 0,
+      "reader_reference": "raw/reader/107100020/original-search.json",
+      "target_permutation": [
+        5,
+        3,
+        0,
+        1,
+        4,
+        2
+      ],
+      "unassigned_f64le_sha256": "051bea2e3f64363915cc0cc9cce7b06c9df8a352262f7464279eec96c16e2e37",
+      "world": 107100020
+    },
+    {
+      "assigned_f64le_sha256": "818233036fbb4e6608ea7051b0e3cac224a7023bf0830034d69e5f01f3e61ee5",
+      "exact_saved_aliases": [
+        "G"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "G",
+      "prefix_rewards": [
+        0.6163664705289982,
+        0.5577505335310784,
+        0.5588367122119549
+      ],
+      "query_count": 1230,
+      "rank": 0,
+      "reader_reference": "raw/reader/107100021/original-search.json",
+      "target_permutation": [
+        3,
+        4,
+        0,
+        2,
+        1,
+        5
+      ],
+      "unassigned_f64le_sha256": "1b03d7a55d49c8689c4f1a9af339d99156b037dfbd761d173493f22b88f44986",
+      "world": 107100021
+    },
+    {
+      "assigned_f64le_sha256": "61d5b27477e026f52f9b5b2241e50dd76055fa6ddd6f57840433250c72facfe2",
+      "exact_saved_aliases": [
+        "G",
+        "L",
+        "P"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "G",
+      "prefix_rewards": [
+        0.6146464890775121,
+        0.5632707042297078,
+        0.5675914888116361
+      ],
+      "query_count": 1652,
+      "rank": 0,
+      "reader_reference": "raw/reader/107100022/original-search.json",
+      "target_permutation": [
+        3,
+        4,
+        2,
+        0,
+        5,
+        1
+      ],
+      "unassigned_f64le_sha256": "141446101b88756ae13afccab673be61b09cade4daba3b824504aa3dedcd833b",
+      "world": 107100022
+    },
+    {
+      "assigned_f64le_sha256": "f1dc2015878f86177950f211ca382663044ddb6944b302b39e6269862caacdb1",
+      "exact_saved_aliases": [
+        "G",
+        "P"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "G",
+      "prefix_rewards": [
+        0.5273772202800104,
+        0.5242239453226054,
+        0.5149972941836479
+      ],
+      "query_count": 1405,
+      "rank": 0,
+      "reader_reference": "raw/reader/107100023/original-search.json",
+      "target_permutation": [
+        4,
+        5,
+        0,
+        3,
+        1,
+        2
+      ],
+      "unassigned_f64le_sha256": "924676c164f060f7187497afd7132bb13d98b99b8ef0e949352698eda28d67ce",
+      "world": 107100023
+    },
+    {
+      "assigned_f64le_sha256": "21e2874085fe7a7a1ade54898dd3bfc6cd84934f3c24d2b905f021991384a830",
+      "exact_saved_aliases": [
+        "G",
+        "L"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "G",
+      "prefix_rewards": [
+        0.6623343422965017,
+        0.6558597338190981,
+        0.6424221523921195
+      ],
+      "query_count": 1232,
+      "rank": 0,
+      "reader_reference": "raw/reader/107100024/original-search.json",
+      "target_permutation": [
+        5,
+        3,
+        4,
+        0,
+        1,
+        2
+      ],
+      "unassigned_f64le_sha256": "bfb81979e163f02061d52487073141d2698033b6d94952bb09ec2a05f95475ac",
+      "world": 107100024
+    },
+    {
+      "assigned_f64le_sha256": "36bdbb550f9fc871a559b56d738f9432e8aa9429e906532d2c9d6aa43fd0dfba",
+      "exact_saved_aliases": [],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": null,
+      "prefix_rewards": [
+        0.5750191580311912,
+        0.5760914235874053,
+        0.5698907875640846
+      ],
+      "query_count": 1667,
+      "rank": 1,
+      "reader_reference": "raw/reader/107100025/original-search.json",
+      "target_permutation": [
+        5,
+        4,
+        1,
+        2,
+        3,
+        0
+      ],
+      "unassigned_f64le_sha256": "34c56d3ad4cac3aaa03c63d785441ce7fa7723e533a190ea53d71799bc04cfce",
+      "world": 107100025
+    },
+    {
+      "assigned_f64le_sha256": "f38e42239204f61ef0510c0743f07dd88c00ade25d39d8dacf2c91b9fb6bdcfb",
+      "exact_saved_aliases": [
+        "P"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "P",
+      "prefix_rewards": [
+        0.5892750566040831,
+        0.5894238752791606,
+        0.5925674534996641
+      ],
+      "query_count": 1368,
+      "rank": 2,
+      "reader_reference": "raw/reader/107100026/original-search.json",
+      "target_permutation": [
+        2,
+        4,
+        3,
+        0,
+        5,
+        1
+      ],
+      "unassigned_f64le_sha256": "f6ec4061965f2ada6390a3a221aae6ab96007b90c29bb3bf9955e3ea46644aaa",
+      "world": 107100026
+    },
+    {
+      "assigned_f64le_sha256": "6e11a797ef6b3afdafc87c7cddc6eda1fd13d7d993bea7c5a79eb880192236d8",
+      "exact_saved_aliases": [],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": null,
+      "prefix_rewards": [
+        0.5293989732062739,
+        0.5293989732062739,
+        0.5587579313415119
+      ],
+      "query_count": 2032,
+      "rank": 2,
+      "reader_reference": "raw/reader/107100027/original-search.json",
+      "target_permutation": [
+        5,
+        1,
+        4,
+        3,
+        0,
+        2
+      ],
+      "unassigned_f64le_sha256": "f65bb6b5c70ece2d4974f51469f79d4656778b4f59fc8741768ee4e97a6b83d8",
+      "world": 107100027
+    },
+    {
+      "assigned_f64le_sha256": "f9fff57d199e58d8d7794e7ad050eb52b167549235de671086bf09d7151de904",
+      "exact_saved_aliases": [
+        "P"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "P",
+      "prefix_rewards": [
+        0.5234902442446006,
+        0.5113172335658541,
+        0.5285925461332839
+      ],
+      "query_count": 1163,
+      "rank": 2,
+      "reader_reference": "raw/reader/107100028/original-search.json",
+      "target_permutation": [
+        4,
+        0,
+        3,
+        2,
+        1,
+        5
+      ],
+      "unassigned_f64le_sha256": "de307efbbca583e9bf40858f974606b2cd6d5730976547063fff24e94c456382",
+      "world": 107100028
+    },
+    {
+      "assigned_f64le_sha256": "c53505f5aaede048ac5f7a33a4dd865eade773095b2810226ab6791715afdfe2",
+      "exact_saved_aliases": [
+        "G"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "G",
+      "prefix_rewards": [
+        0.5326929871397402,
+        0.5289035735247585,
+        0.5289035735247585
+      ],
+      "query_count": 1412,
+      "rank": 0,
+      "reader_reference": "raw/reader/107100029/original-search.json",
+      "target_permutation": [
+        2,
+        3,
+        1,
+        4,
+        0,
+        5
+      ],
+      "unassigned_f64le_sha256": "16bddfff6f624d02607e112022da325e114d9951f5de0a2222e0392dc7b58bac",
+      "world": 107100029
+    },
+    {
+      "assigned_f64le_sha256": "19b10ff52a68a33b29939495b27fd36a0cffb81f570941f761566538328d2fcd",
+      "exact_saved_aliases": [
+        "G",
+        "P"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "G",
+      "prefix_rewards": [
+        0.5354677580742593,
+        0.5354677580742593,
+        0.5328905665205921
+      ],
+      "query_count": 1220,
+      "rank": 0,
+      "reader_reference": "raw/reader/107100030/original-search.json",
+      "target_permutation": [
+        1,
+        5,
+        3,
+        4,
+        0,
+        2
+      ],
+      "unassigned_f64le_sha256": "167abf1a0d70861b0bc1a3f58ba45fb954b88e8effe547c1f330a3fe743390c8",
+      "world": 107100030
+    },
+    {
+      "assigned_f64le_sha256": "a17225bb7d8517587e5da79e4ee9537914827574c0f45d8f94f4b4b1a8ed5e8b",
+      "exact_saved_aliases": [
+        "L",
+        "P"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "L",
+      "prefix_rewards": [
+        0.5300906282545912,
+        0.5324531075715875,
+        0.5031756841199141
+      ],
+      "query_count": 1665,
+      "rank": 1,
+      "reader_reference": "raw/reader/107100031/original-search.json",
+      "target_permutation": [
+        1,
+        2,
+        4,
+        3,
+        0,
+        5
+      ],
+      "unassigned_f64le_sha256": "f8e89d7bb3f7171dd380f508c91add2d3619b028a9b78b4a99dd50c47259e223",
+      "world": 107100031
+    },
+    {
+      "assigned_f64le_sha256": "09caff5c932182b563193e6fa93a4e8137acd643e7d8740c0994ea2e1eefbd0d",
+      "exact_saved_aliases": [],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": null,
+      "prefix_rewards": [
+        0.5099742460058311,
+        0.5113588896912904,
+        0.4864882693799845
+      ],
+      "query_count": 1101,
+      "rank": 1,
+      "reader_reference": "raw/reader/107100032/original-search.json",
+      "target_permutation": [
+        2,
+        3,
+        1,
+        4,
+        0,
+        5
+      ],
+      "unassigned_f64le_sha256": "ddf54e79ea62552ffe1eca9f13f35c4aaf17af9d467e2a9246464057d5dbd7fe",
+      "world": 107100032
+    },
+    {
+      "assigned_f64le_sha256": "5022fe0137596e4e40ba859b2a38654c43e1c0f117aba3cf84e0680b9394acee",
+      "exact_saved_aliases": [],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": null,
+      "prefix_rewards": [
+        0.569685859032432,
+        0.5750795790092224,
+        0.536766466901982
+      ],
+      "query_count": 1606,
+      "rank": 1,
+      "reader_reference": "raw/reader/107100033/original-search.json",
+      "target_permutation": [
+        1,
+        0,
+        5,
+        2,
+        4,
+        3
+      ],
+      "unassigned_f64le_sha256": "df7cd0ab2222c9592594fdf0b1f42afc00d99ac2e34d0fd13f1659f90bc12d62",
+      "world": 107100033
+    },
+    {
+      "assigned_f64le_sha256": "ee0e31c1bfaf6bcdb83fe8eb1c1c0fd154b223600f8f26eb024f3c7e2905d859",
+      "exact_saved_aliases": [
+        "G"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "G",
+      "prefix_rewards": [
+        0.5840634838610536,
+        0.571063103940924,
+        0.5830493556034524
+      ],
+      "query_count": 1505,
+      "rank": 0,
+      "reader_reference": "raw/reader/107100034/original-search.json",
+      "target_permutation": [
+        3,
+        5,
+        1,
+        0,
+        4,
+        2
+      ],
+      "unassigned_f64le_sha256": "b4fff77eb13a8296a36a97e1cbf3bb8496863c1f93dca5ad14d0e637244f3096",
+      "world": 107100034
+    },
+    {
+      "assigned_f64le_sha256": "a4e048f4b11c198c357e615068e9988acfa0fe9ecddff6f953f307aa82761cf9",
+      "exact_saved_aliases": [
+        "G"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "G",
+      "prefix_rewards": [
+        0.5420739965367714,
+        0.5117406633933742,
+        0.5212601333866178
+      ],
+      "query_count": 1564,
+      "rank": 0,
+      "reader_reference": "raw/reader/107100035/original-search.json",
+      "target_permutation": [
+        0,
+        5,
+        3,
+        4,
+        1,
+        2
+      ],
+      "unassigned_f64le_sha256": "ab218892014446274c9d12845b699c0dfbf89612e47b9fb0d29b66cdef7f9be5",
+      "world": 107100035
+    },
+    {
+      "assigned_f64le_sha256": "a4bb8223f0b8d92ad5dcd15e274fabb5ad1339bdb2b19f85bf102fbe1ac03458",
+      "exact_saved_aliases": [],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": null,
+      "prefix_rewards": [
+        0.5622493174970574,
+        0.5552926135331921,
+        0.5648288045461198
+      ],
+      "query_count": 1344,
+      "rank": 2,
+      "reader_reference": "raw/reader/107100036/original-search.json",
+      "target_permutation": [
+        4,
+        1,
+        5,
+        3,
+        2,
+        0
+      ],
+      "unassigned_f64le_sha256": "40daa3d7fe94296c0b736716e8cb642a4949d6127ee387f93dac547d6fbbd9ec",
+      "world": 107100036
+    },
+    {
+      "assigned_f64le_sha256": "2101221b44a96fdcf377ad2afd5f086fa11b80944fd4f67a2167ba5602fbc400",
+      "exact_saved_aliases": [
+        "G",
+        "L",
+        "P"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "G",
+      "prefix_rewards": [
+        0.5643464998906327,
+        0.5424328589235694,
+        0.5499425682377909
+      ],
+      "query_count": 1452,
+      "rank": 0,
+      "reader_reference": "raw/reader/107100037/original-search.json",
+      "target_permutation": [
+        2,
+        3,
+        0,
+        5,
+        4,
+        1
+      ],
+      "unassigned_f64le_sha256": "17ac9da672695bfb9b0f307cdf185f0bbc37f824f69f180b0353ab0acb5f2804",
+      "world": 107100037
+    },
+    {
+      "assigned_f64le_sha256": "e4197254ad6fc576e0778799b5b7432bf2ec99a87d7a39c07e02ab55b1caa6ce",
+      "exact_saved_aliases": [
+        "G",
+        "L",
+        "P"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "G",
+      "prefix_rewards": [
+        0.5156950740994585,
+        0.47964697943841944,
+        0.47624033672277166
+      ],
+      "query_count": 1604,
+      "rank": 0,
+      "reader_reference": "raw/reader/107100038/original-search.json",
+      "target_permutation": [
+        3,
+        5,
+        1,
+        0,
+        4,
+        2
+      ],
+      "unassigned_f64le_sha256": "5a1c687f0e9647845130decb83dc1a2fa4ddbdee2125944d0be845d62f4b4fd9",
+      "world": 107100038
+    },
+    {
+      "assigned_f64le_sha256": "b6ec94cb115f5bd48f9e48e729a48d8cfb3f52dcb3d9ed772e9d921851a855da",
+      "exact_saved_aliases": [
+        "L"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "L",
+      "prefix_rewards": [
+        0.6177933760200641,
+        0.6240185318461776,
+        0.6123431557820573
+      ],
+      "query_count": 1302,
+      "rank": 1,
+      "reader_reference": "raw/reader/107100039/original-search.json",
+      "target_permutation": [
+        4,
+        1,
+        5,
+        2,
+        0,
+        3
+      ],
+      "unassigned_f64le_sha256": "373df872d5fe85d6c870f41f4de067072fe5fa4442059ce050531ed4fbac9425",
+      "world": 107100039
+    },
+    {
+      "assigned_f64le_sha256": "e741d4d6354e5d9913e5e4bda698782296e477198066d2c93bf750cccc99dc35",
+      "exact_saved_aliases": [
+        "P"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "P",
+      "prefix_rewards": [
+        0.5663384983719055,
+        0.578547951691284,
+        0.5620115734238511
+      ],
+      "query_count": 1092,
+      "rank": 1,
+      "reader_reference": "raw/reader/107100040/original-search.json",
+      "target_permutation": [
+        4,
+        0,
+        1,
+        3,
+        5,
+        2
+      ],
+      "unassigned_f64le_sha256": "bb3eed02cc38220dbe69bfb3285beb4393a4f9b83e96239582a7c7eac90d0d19",
+      "world": 107100040
+    },
+    {
+      "assigned_f64le_sha256": "c017abe0f0b62f784522d7dbb0e2b7bd0f7263a36dd1942d798eabf5eaae8a29",
+      "exact_saved_aliases": [
+        "G",
+        "L",
+        "P"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "G",
+      "prefix_rewards": [
+        0.6005090169413129,
+        0.57172577631123,
+        0.5819735188028745
+      ],
+      "query_count": 1762,
+      "rank": 0,
+      "reader_reference": "raw/reader/107100041/original-search.json",
+      "target_permutation": [
+        2,
+        5,
+        3,
+        4,
+        0,
+        1
+      ],
+      "unassigned_f64le_sha256": "1926712d611d92404108cd30bb12a4e9a6820ab0597a14dc6bbf46c19809fd69",
+      "world": 107100041
+    },
+    {
+      "assigned_f64le_sha256": "509e6f305a7f4eb67764330d073b94fac911ee037b2b1f332d8471b7b6cba303",
+      "exact_saved_aliases": [
+        "G",
+        "L"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "G",
+      "prefix_rewards": [
+        0.612495363422646,
+        0.5736566790652116,
+        0.5555366368465279
+      ],
+      "query_count": 1625,
+      "rank": 0,
+      "reader_reference": "raw/reader/107100042/original-search.json",
+      "target_permutation": [
+        5,
+        4,
+        2,
+        3,
+        0,
+        1
+      ],
+      "unassigned_f64le_sha256": "d1cc40034a0668c4304780d13bb43b749435d3375e898a49533960bcfa569b7b",
+      "world": 107100042
+    },
+    {
+      "assigned_f64le_sha256": "751b8c782582854fca3606f13124563f243061f68897c02bc2fdfe448b507bfe",
+      "exact_saved_aliases": [
+        "G",
+        "L"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "G",
+      "prefix_rewards": [
+        0.5626665163362988,
+        0.5539788403639496,
+        0.540227466274802
+      ],
+      "query_count": 1545,
+      "rank": 0,
+      "reader_reference": "raw/reader/107100043/original-search.json",
+      "target_permutation": [
+        2,
+        3,
+        4,
+        5,
+        1,
+        0
+      ],
+      "unassigned_f64le_sha256": "81c01f12437ceaea5462243786846aca9cc37082d6f7cf828f3d7b2c5f5b64ca",
+      "world": 107100043
+    },
+    {
+      "assigned_f64le_sha256": "dbaa878ea6f6e88d2ecb2c95e228cea6491a27922f700fa9052bf98ca3f329ff",
+      "exact_saved_aliases": [
+        "L",
+        "P"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "L",
+      "prefix_rewards": [
+        0.5772909364073354,
+        0.5880806144199251,
+        0.5752165105253532
+      ],
+      "query_count": 1406,
+      "rank": 1,
+      "reader_reference": "raw/reader/107100044/original-search.json",
+      "target_permutation": [
+        1,
+        4,
+        0,
+        5,
+        3,
+        2
+      ],
+      "unassigned_f64le_sha256": "01560666da28508902d3e79241019f1a82828a2080c611bceff637b26762e36f",
+      "world": 107100044
+    },
+    {
+      "assigned_f64le_sha256": "6ef02b73f67856be686a4add6843f7e099920be5fb2120a699441626a549944d",
+      "exact_saved_aliases": [
+        "L",
+        "P"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "L",
+      "prefix_rewards": [
+        0.543328805046831,
+        0.5784557019828638,
+        0.5246533251554223
+      ],
+      "query_count": 1283,
+      "rank": 1,
+      "reader_reference": "raw/reader/107100045/original-search.json",
+      "target_permutation": [
+        1,
+        4,
+        5,
+        3,
+        2,
+        0
+      ],
+      "unassigned_f64le_sha256": "a284cef9e1f688eca0abeec6c09e84ab0f3228ca4590a11795be667c6f50d018",
+      "world": 107100045
+    },
+    {
+      "assigned_f64le_sha256": "4643397cb7460e8cc9284f68d3cdcb8f7cc63adcc829c66611ab022049a8dd35",
+      "exact_saved_aliases": [
+        "G",
+        "P"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "G",
+      "prefix_rewards": [
+        0.5680602164557407,
+        0.5607884131461695,
+        0.5496210400445273
+      ],
+      "query_count": 1430,
+      "rank": 0,
+      "reader_reference": "raw/reader/107100046/original-search.json",
+      "target_permutation": [
+        3,
+        1,
+        4,
+        2,
+        0,
+        5
+      ],
+      "unassigned_f64le_sha256": "42af19bcbcf176a332df4088fc948dd9fa754e720d949e9419b41395471dee61",
+      "world": 107100046
+    },
+    {
+      "assigned_f64le_sha256": "0eaef9a4eede8f54d71a92e0d99bd40666301d5b665f1627bcb6b3672ff72398",
+      "exact_saved_aliases": [
+        "P"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "P",
+      "prefix_rewards": [
+        0.5125929414450497,
+        0.5127468587366587,
+        0.5127468587366587
+      ],
+      "query_count": 1508,
+      "rank": 1,
+      "reader_reference": "raw/reader/107100047/original-search.json",
+      "target_permutation": [
+        3,
+        1,
+        0,
+        4,
+        5,
+        2
+      ],
+      "unassigned_f64le_sha256": "55a3db49229b39d91f5928ecdb4a7bb7b333cbdb57eb5e8f3f820af2782fa80d",
+      "world": 107100047
+    },
+    {
+      "assigned_f64le_sha256": "b9ac13b231fd1b65b7268b6318fdfd3e56d22566f26ce99e42cb92854643b287",
+      "exact_saved_aliases": [
+        "L",
+        "P"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "L",
+      "prefix_rewards": [
+        0.6152297832043042,
+        0.6152297832043042,
+        0.6171752424369826
+      ],
+      "query_count": 1492,
+      "rank": 2,
+      "reader_reference": "raw/reader/107100048/original-search.json",
+      "target_permutation": [
+        3,
+        5,
+        0,
+        4,
+        2,
+        1
+      ],
+      "unassigned_f64le_sha256": "4c7c8b4bc8cd7a14269966c02a14e78f62597ef6b649f06da7ea3193c8bac31d",
+      "world": 107100048
+    },
+    {
+      "assigned_f64le_sha256": "4d6eb7e441345b8205f04b8a10fbd0f22fd88d1fd6809aea9685a4d7fd2d3315",
+      "exact_saved_aliases": [
+        "G",
+        "L"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "G",
+      "prefix_rewards": [
+        0.579322041956491,
+        0.5460987029111315,
+        0.5412369050431229
+      ],
+      "query_count": 1525,
+      "rank": 0,
+      "reader_reference": "raw/reader/107100049/original-search.json",
+      "target_permutation": [
+        0,
+        2,
+        1,
+        5,
+        3,
+        4
+      ],
+      "unassigned_f64le_sha256": "60a779e878ee1072a24a96e86803d0e79db2749eb4aa331c54d3bc727097a860",
+      "world": 107100049
+    },
+    {
+      "assigned_f64le_sha256": "aad35c4fe6bfcb0e5413ced50f82db8c934e1ca9d60489fcb3d57f4838834f6c",
+      "exact_saved_aliases": [
+        "G",
+        "L",
+        "P"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "G",
+      "prefix_rewards": [
+        0.5872828959062723,
+        0.5617573790227679,
+        0.5575826074395936
+      ],
+      "query_count": 1202,
+      "rank": 0,
+      "reader_reference": "raw/reader/107100050/original-search.json",
+      "target_permutation": [
+        1,
+        5,
+        0,
+        3,
+        4,
+        2
+      ],
+      "unassigned_f64le_sha256": "304ecbd2f6a44a1d9ba7e22a1b0c67e25677a1dec6abf4f790514610b1e8399e",
+      "world": 107100050
+    },
+    {
+      "assigned_f64le_sha256": "d7188f91aac8ea54f11edec5ca0f3665fd1ddd4cd707d7ba02f141a6b08b3c98",
+      "exact_saved_aliases": [
+        "G",
+        "P"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "G",
+      "prefix_rewards": [
+        0.5108223376782736,
+        0.504301065750919,
+        0.504301065750919
+      ],
+      "query_count": 1171,
+      "rank": 0,
+      "reader_reference": "raw/reader/107100051/original-search.json",
+      "target_permutation": [
+        0,
+        1,
+        5,
+        4,
+        2,
+        3
+      ],
+      "unassigned_f64le_sha256": "730cfff3871f375483939dfacf6eb8cdfa207a833bc1678d3234999b46254bb3",
+      "world": 107100051
+    },
+    {
+      "assigned_f64le_sha256": "b51a7736d8f39001285cb86a855e6adb54c3d0a53a35e5ac17fe7109112608cd",
+      "exact_saved_aliases": [
+        "P"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "P",
+      "prefix_rewards": [
+        0.4746898333283659,
+        0.4751051038028137,
+        0.474515995693513
+      ],
+      "query_count": 1275,
+      "rank": 1,
+      "reader_reference": "raw/reader/107100052/original-search.json",
+      "target_permutation": [
+        3,
+        2,
+        0,
+        1,
+        5,
+        4
+      ],
+      "unassigned_f64le_sha256": "2cf68ecf05ae7bbd0960f7f3bfb4f02f9b49b14591d55b8d459a9cc2e14c7dd2",
+      "world": 107100052
+    },
+    {
+      "assigned_f64le_sha256": "b91f155cc91303d0d98d0a728bc91b83023ada33a32a8f718a05531b5d85c9ac",
+      "exact_saved_aliases": [
+        "G",
+        "P"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "G",
+      "prefix_rewards": [
+        0.5898056067475927,
+        0.5659035286087584,
+        0.5603736205189487
+      ],
+      "query_count": 1432,
+      "rank": 0,
+      "reader_reference": "raw/reader/107100053/original-search.json",
+      "target_permutation": [
+        0,
+        3,
+        1,
+        4,
+        2,
+        5
+      ],
+      "unassigned_f64le_sha256": "3db35838d0b19039f89558f35fbf8203716de409e2c8a08919076e2b102f2b9c",
+      "world": 107100053
+    },
+    {
+      "assigned_f64le_sha256": "a84e6505dd270bef302e4d646953413313e562679fc1af7cd355ee31c7294508",
+      "exact_saved_aliases": [
+        "P"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "P",
+      "prefix_rewards": [
+        0.5809416617952461,
+        0.5557658850704471,
+        0.5810460142012669
+      ],
+      "query_count": 1329,
+      "rank": 2,
+      "reader_reference": "raw/reader/107100054/original-search.json",
+      "target_permutation": [
+        0,
+        3,
+        2,
+        1,
+        4,
+        5
+      ],
+      "unassigned_f64le_sha256": "abe5b0498476f70afb0714127e8f3c0fef413b27cac6a95a955ed3bd175f232d",
+      "world": 107100054
+    },
+    {
+      "assigned_f64le_sha256": "d8a59ca9741c9c9075d1b115de8a5a837df64fe26f05de7f7d308dbe63a15d97",
+      "exact_saved_aliases": [
+        "G",
+        "L",
+        "P"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "G",
+      "prefix_rewards": [
+        0.4752841793514958,
+        0.46164596932516605,
+        0.45309714114260824
+      ],
+      "query_count": 1024,
+      "rank": 0,
+      "reader_reference": "raw/reader/107100055/original-search.json",
+      "target_permutation": [
+        4,
+        2,
+        3,
+        0,
+        5,
+        1
+      ],
+      "unassigned_f64le_sha256": "8f71f3d58c3fcad04af1132d790335ed617cd659f959e67a5ba0e84db53535fc",
+      "world": 107100055
+    },
+    {
+      "assigned_f64le_sha256": "654da487f3fbdbeb20e2c6454ff830eab9acc10deb48f58ca055e30ac4ecb64e",
+      "exact_saved_aliases": [
+        "G"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "G",
+      "prefix_rewards": [
+        0.5402826859947247,
+        0.5402826859947247,
+        0.521344568418582
+      ],
+      "query_count": 1488,
+      "rank": 0,
+      "reader_reference": "raw/reader/107100056/original-search.json",
+      "target_permutation": [
+        0,
+        4,
+        2,
+        3,
+        1,
+        5
+      ],
+      "unassigned_f64le_sha256": "c8d8bcc5eff6ab11927c0d02222197117f0a0c0ae7af74dcfc3d55e3c21841f7",
+      "world": 107100056
+    },
+    {
+      "assigned_f64le_sha256": "6fe4e3e9fb68573d7a29faaf3d44006ef724b7ffead171e22fa97b6dd9824776",
+      "exact_saved_aliases": [
+        "G"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "G",
+      "prefix_rewards": [
+        0.6326389080406264,
+        0.6064265953806381,
+        0.6213278012077043
+      ],
+      "query_count": 1454,
+      "rank": 0,
+      "reader_reference": "raw/reader/107100057/original-search.json",
+      "target_permutation": [
+        4,
+        2,
+        3,
+        0,
+        1,
+        5
+      ],
+      "unassigned_f64le_sha256": "75a77231200ba05b37e131e4d21695d388c65438357b24bfd283f98cb42a3492",
+      "world": 107100057
+    },
+    {
+      "assigned_f64le_sha256": "2d72ec7956ad62558d502015fb1c40a4577c7455a4e41913d305296e1ad6a946",
+      "exact_saved_aliases": [
+        "G",
+        "P"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "G",
+      "prefix_rewards": [
+        0.5748157402208367,
+        0.5694687930095279,
+        0.5618124134809444
+      ],
+      "query_count": 1199,
+      "rank": 0,
+      "reader_reference": "raw/reader/107100058/original-search.json",
+      "target_permutation": [
+        4,
+        1,
+        0,
+        2,
+        3,
+        5
+      ],
+      "unassigned_f64le_sha256": "c7d2c689542de48b35a04e7e449604fda3a2596ca38f385549cb44af9f84e9f0",
+      "world": 107100058
+    },
+    {
+      "assigned_f64le_sha256": "e2a755b49d6659c93ea4f72bc6b40081446400770fd1410d0cc8e04998858817",
+      "exact_saved_aliases": [
+        "G",
+        "P"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "G",
+      "prefix_rewards": [
+        0.5116573407516729,
+        0.4799689413755037,
+        0.49396719429438707
+      ],
+      "query_count": 1302,
+      "rank": 0,
+      "reader_reference": "raw/reader/107100059/original-search.json",
+      "target_permutation": [
+        0,
+        5,
+        2,
+        1,
+        4,
+        3
+      ],
+      "unassigned_f64le_sha256": "30050f71f22ba749abf9c428d51eba2aca8da01af40c8681e3d2717ff39dee71",
+      "world": 107100059
+    },
+    {
+      "assigned_f64le_sha256": "5e9e950815f4b4734c3a181b8b25b317cafd1e95bbe83bf3af94b4c24d814f18",
+      "exact_saved_aliases": [
+        "G"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "G",
+      "prefix_rewards": [
+        0.558630464656709,
+        0.558630464656709,
+        0.5537686830361476
+      ],
+      "query_count": 1491,
+      "rank": 0,
+      "reader_reference": "raw/reader/107100060/original-search.json",
+      "target_permutation": [
+        4,
+        3,
+        2,
+        0,
+        5,
+        1
+      ],
+      "unassigned_f64le_sha256": "c9a4d12a52f8793b2caa544e1c5c6f4ee8f6d2b7860b4fa58bbc75e9952dd968",
+      "world": 107100060
+    },
+    {
+      "assigned_f64le_sha256": "30a5f6f852ae5f946481e7eaa8faefbff7168feb3d7f92f70628a7cb11a560d8",
+      "exact_saved_aliases": [
+        "G",
+        "P"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "G",
+      "prefix_rewards": [
+        0.563430048305507,
+        0.5520270409827994,
+        0.5504273448127295
+      ],
+      "query_count": 1470,
+      "rank": 0,
+      "reader_reference": "raw/reader/107100061/original-search.json",
+      "target_permutation": [
+        1,
+        4,
+        2,
+        3,
+        0,
+        5
+      ],
+      "unassigned_f64le_sha256": "23f9937c2213699dab210d880f58121c76b6e5e45f4bd89d1283bdf6ff312c0b",
+      "world": 107100061
+    },
+    {
+      "assigned_f64le_sha256": "af1d2d3709b3c98abc938f78ee2876860770537a1ab3d1efdb4de6e0ce12494f",
+      "exact_saved_aliases": [
+        "G",
+        "L"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "G",
+      "prefix_rewards": [
+        0.5294359198443945,
+        0.5121623685543233,
+        0.4974763731163133
+      ],
+      "query_count": 1281,
+      "rank": 0,
+      "reader_reference": "raw/reader/107100062/original-search.json",
+      "target_permutation": [
+        2,
+        0,
+        4,
+        5,
+        1,
+        3
+      ],
+      "unassigned_f64le_sha256": "3d31bda358bebedfed895ba426e786fc0daf716ded22406d3a646e6f73a20bad",
+      "world": 107100062
+    },
+    {
+      "assigned_f64le_sha256": "0a0342c7c445f0dc72b239fd5aafd8fb76184aed6a23cbfc3ca7d78a048f60f2",
+      "exact_saved_aliases": [
+        "G",
+        "L"
+      ],
+      "fallback": false,
+      "numeric_but_not_complete_byte_aliases": [],
+      "preferred_alias": "G",
+      "prefix_rewards": [
+        0.6090697695649435,
+        0.5927050848686763,
+        0.6014873441229996
+      ],
+      "query_count": 1471,
+      "rank": 0,
+      "reader_reference": "raw/reader/107100063/original-search.json",
+      "target_permutation": [
+        2,
+        0,
+        4,
+        5,
+        1,
+        3
+      ],
+      "unassigned_f64le_sha256": "3715bef6bd39656b0ecdc959a3d6d465d43d0253391a861cdbf2df91a0d4ccfb",
+      "world": 107100063
+    }
+  ],
+  "schema": 1,
+  "scope": "Fixed-version arithmetic on already-paid B02 records; no environment/model/RNG/result queries or fit. This map is reader-only and must never provide online choices.",
+  "source_sha": "eb897c79a9bd8327d473d4c26ca788a4ac0f9f58"
+}
