@@ -5139,3 +5139,82 @@ incomplete and fully collected/read. The newly received Root decision chooses on
 explicitly renewed full comparison after this publication; it is not a continuation
 or restart of this accepted operation. Its prospective entry and actual corrected
 input/source will follow separately, retaining all previous exposure and costs.
+
+<a id="b07-renewed-purchase"></a>
+## 2026-10-02 — Root explicitly renews the unchanged complete B07 comparison after failure closure
+
+Root read the complete technical evidence, original10,401-byte scientific review,
+DM response and cleanup record. Its new native instruction explicitly selects one
+renewed complete comparison after the failed attempt's publication/cleanup. That
+closure is now published in `5983a7168c3270f18c807f9ca1d9aa7ae0e2f2c8`, with original
+native evidence in `ca0efae198d44695c1d672897d6d584da59ae4a1`; net scoped reclamation
+is1,876,369,408allocatedbytes. Nothing in the failed a01 operation is reopened.
+
+Root's reason is the locally understood interface obstruction plus the still-useful
+coverage/generalization/complete-use comparison supported by earlier conditional R
+capability. It is not recovery of sunk cost. The separate-context scientific
+review above directly covers this choice; its recommendation is adopted, with no
+material dissent or repeated scientific/Pro round. The current published shared
+background on lawful interfaces, ordinary alternatives and B05 exact-teacher
+incompatibility remains applicable. This technical result changes no shared learning
+judgment; the actual comparison, immutable labels, exact per-execution argmax,
+physical tolerance, ordinary rights, model, seeds, fitting exposure and complete
+native/cold/individual-service contract remain as in `#b07-fixed-data-proposed-contract`.
+
+Root explicitly renews acceptance of the original remote SIGSEGV's unknown cause,
+unmeasured actual CUDA feasibility and externally captured CUDA-dump peak without
+a known finite upper bound. This is an investment choice, not a health verdict.
+Remaining full effects are≤4,228,127static,6fits/24,576updates/584,000native, with
+reader2CPUh/4wallh and consumer8CPUh/4GPU-childh/16wallh execution stops. The
+4–10CPUh/1–3GPU-childh/8–16supporth forecasts remain uncertain; all old producer,
+reader, source/check, failed-launch, diagnosis, cleanup and new correction costs
+stay cumulative. Local4GiB normal+2GiB reader abnormal reserve and remote6GiB
+normal remain the original accounting scopes, not a bound on external CUDA dumps.
+The first new genuine technical/identity/physical/counter/resource failure stops
+that operation and every dependent effect. There is no automatic second retry,
+replacement fit, favorable prefix, relabel, changed threshold or health pilot.
+Healthy phases proceed without another Root acknowledgment.
+
+### L0 — correct only the two native-identity schema boundaries
+
+**Behavior.** At B07 parent startup and receipt reading, compare the minimal
+`pid,start_ticks` identity with the corresponding projection of the actual native
+five-field identity. Keep the native identity's complete terminal-witness comparisons
+unchanged. Wrong PID and wrong start ticks must each refuse independently. The
+frozen B05 helper remains unchanged; no physics, numeric tolerances, source/argv
+checks, counter/resource limits, labels, outputs or batch order change.
+
+**Owned delta.** The bounded Implementer may edit only
+`experiments/candidates/typed_joint_skill_decision/b07_fixed_bank/run.py`,
+`experiments/candidates/typed_joint_skill_decision/b07_fixed_bank/read.py`, and
+`tests/experiments/candidates/typed_joint_skill_decision/b07_fixed_bank/test_fixed.py`.
+Use the original saved launcher record's five-field schema in both relevant
+fixtures. Reuse that schema faithfully; avoid a shared mock assumption that removes
+producer fields. The Implementer owns no NOTES, other code, input manifest, Git
+index/commit or launch; DM alone binds the corrected source/input and accepts it.
+All helpers remain in this shared main checkout with disjoint ownership and preserve
+other sessions' edits. Helpers spawn no children.
+
+**Checks and acceptance.** Synthetic/mocked startup and compact-receipt success
+under the native five-field schema plus independent PID/start-time negatives at both
+boundaries; relevant B07 and B06 synthetic regression coverage as needed. No actual
+bank reconstruction, numerical host, model/native/CUDA probe or effect child. Record
+original commands, all failures/pass outputs, metered wrapper CPU/wall and scratch
+teardown. A focused Engineering Reviewer checks the actual two-boundary delta,
+real launcher producer schema, frozen helper and preserved full native witnesses,
+using original saved native evidence and actual test receipts. DM reads the diff,
+checks and review, then accepts and publishes the exact corrected source/input.
+No scientific Reviewer repeat is needed for this unchanged correction/comparison.
+
+**Execution identity and staging.** Original a01 input/outputs/source remain frozen.
+DM will author a separate `B07_READER_A02_INPUT.json` that pins the actual corrected
+code while preserving every unchanged scientific field. The proposed new output is
+`runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02`. Changed source/input
+means a new expressly purchased operation; it is not a `--retry-of` request with
+unchanged scientific identity, nor an attempt to evade the duplicate claim by tag.
+Fresh actual-node admission still applies. The deleted old-reference staging may
+be copied once from the verified canonical remote originals and billed anew; no
+producer acquisition or partial-reader prefix is regenerated. Consumer input will
+exist only after an actually successful full reader and canonical byte reading.
+Observe the same accepted handle without replacement and stay active through full
+collection, independent result interpretation, publication and measured cleanup.
