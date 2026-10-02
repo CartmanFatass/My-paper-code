@@ -1,0 +1,42 @@
+{
+  "direction": "typed_joint_skill_decision",
+  "input": {
+    "bytes": 116876,
+    "complete_bytes": 1056813,
+    "complete_rows": 1025,
+    "complete_sha256": "f64bf50d0102cde03e0dd594adda924db263348785cc11060f7770e56f67a409",
+    "gzip_eof": false,
+    "path": "docs/research/candidates/typed_joint_skill_decision/b04_serialization/0039-partial.jsonl.gz",
+    "sha256": "a6dd341a5c827b78d69b3f2bdbeef97e4ef361f38c596356e54a7a205c35c282"
+  },
+  "limits": {
+    "address_space_bytes": 536870912,
+    "core_reserve_bytes": 1073741824,
+    "cpu_seconds": 300,
+    "cycles": 1000,
+    "incremental_disk_bytes": 3221225472,
+    "ordinary_output_bytes_per_node": 16777216,
+    "wall_seconds": 600
+  },
+  "nodes": {
+    "local_linux": {
+      "executable_realpath": "/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10",
+      "executable_sha256": "3303d2b5dc566818e412d2b5b6cd8e792bd360865da47593429a635f72668226",
+      "hostname": "Jacob",
+      "python_version": "3.10.20"
+    },
+    "wsl_4070": {
+      "executable_realpath": "/home/wu/.local/opt/hmasd-cpython-3.10.21-gcc/bin/python3.10",
+      "executable_sha256": "039033f129d33a69044ceff71ca87b109ad99d511b59946f81ffc3f728b1a3a1",
+      "hostname": "LAPTOP-U9TDKC8A",
+      "python_version": "3.10.21"
+    }
+  },
+  "schema": 1,
+  "study": "b04_ordinary_json_serialization",
+  "target": {
+    "function": "encoded",
+    "path": "experiments/candidates/typed_joint_skill_decision/b04/evidence.py",
+    "sha256": "74c197cf2ab1db82e8899ba9ad4c7c04d0decc93476731eefb4161bc21f10583"
+  }
+}
