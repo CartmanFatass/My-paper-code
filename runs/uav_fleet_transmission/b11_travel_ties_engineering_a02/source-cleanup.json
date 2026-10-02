@@ -1,0 +1,64 @@
+{
+  "preview": {
+    "mode": "preview",
+    "snapshots": [
+      {
+        "claim": "/home/wu/projects/HMASD/.git/hmasd-admission/5adafb21ea03d6bc9fb957821507362a22c985e2aef1f82262fc9fb178349d8b.json",
+        "durable_ref": "refs/remotes/origin/HEAD",
+        "eligible": true,
+        "output": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b11_travel_ties_engineering_a02",
+        "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/5012b987dffd498fb60449a7821d669c",
+        "sha": "192383ab2d06984a628099a8f6f405b18e27cd04",
+        "snapshot": "5012b987dffd498fb60449a7821d669c"
+      }
+    ]
+  },
+  "apply": {
+    "mode": "apply",
+    "snapshots": [
+      {
+        "claim": "/home/wu/projects/HMASD/.git/hmasd-admission/5adafb21ea03d6bc9fb957821507362a22c985e2aef1f82262fc9fb178349d8b.json",
+        "durable_ref": "refs/remotes/origin/HEAD",
+        "eligible": true,
+        "output": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b11_travel_ties_engineering_a02",
+        "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/5012b987dffd498fb60449a7821d669c",
+        "removed": true,
+        "sha": "192383ab2d06984a628099a8f6f405b18e27cd04",
+        "snapshot": "5012b987dffd498fb60449a7821d669c"
+      }
+    ]
+  },
+  "before_allocated": {
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/5012b987dffd498fb60449a7821d669c": 1803649024,
+    "/home/wu/projects/HMASD/.git/worktrees/5012b987dffd498fb60449a7821d669c": 3702784
+  },
+  "after_allocated": {
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/5012b987dffd498fb60449a7821d669c": 0,
+    "/home/wu/projects/HMASD/.git/worktrees/5012b987dffd498fb60449a7821d669c": 0
+  },
+  "reclaimed_bytes": 1807351808,
+  "all_output_hashes_unchanged": {
+    "stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "admission-preflight.json": "e780566c034b9cc021f706e7d5c0f074dcf5af8e890d59c7444780214192f6a7",
+    "summary.json": "188868471443192620b89b06400958130be05b262400078f4909f436ffd85cb1",
+    "launch-manifest.json": "ff9e79676b2ec8c84cff199eb31b67900742b806d3039ab029710ddd9b66c379",
+    "launch-status.json": "993b5515428a4de16bb76601f54c048715d4b71ad8506395d9f0e57b2a07b073",
+    "reading_worlds.json": "5280c2db946e9fc3cc818a6b38331713aa24cb87d585971bc0874d459a4471b4",
+    "config.json": "bb2479458cbafc17d9327bc0b4dc73a87ef702c56258cd96dd94c09a92a4426b",
+    "manifest.json": "80836f8a5ef4e5631f836ffe343a509ac8eaa4c7ea764f19319ab443d9222dbb",
+    "perworld.json": "a6e0c65d146a1ca9d7046b04243593112838c6e8f52624d9efa01b938bf013ca",
+    "reading.json": "4de628228684e0c6040f07054403b1be3d31dc5c33917f990cf736a321c2ecb9",
+    "process-exit.json": "9104a187d9f25427ea544781e0b93d57795fb0e07e868f2bb2aa96719d88f376",
+    "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "progress.json": "cf43904aa06aa1113f8edb1d05ed565f23a4dd87bd44092d99142e95160b7a5f",
+    "raw/29910092_H_T.progress.json": "a5977d1a455ca089966fd44a4ecab4a204d70fb28570ac485dcb4a063af6bac9",
+    "raw/29910091_H_T.progress.json": "0fc89ea6b0010baf1e759f2d80d7f8508ecf1f828e2e5ff7db36cf9ee3982b07",
+    "raw/29910092_H_T.npz": "dfcc93ced0de2d1f1c5ca1d167c72c2808cdf20fdcb759d2ae224305d11f724d",
+    "raw/29910091_H_T.npz": "04fecda1861d13ef13343609db9672e2ff7e38e1057eef60c006490c129d6a40",
+    "reading_raw/29910092.progress.json": "8efd709692f6761a92882dd50de431d9ed5936fb764fa4896a92bda2ac183190",
+    "reading_raw/29910091.progress.json": "f72d1d5de04f58eecf23d0560bd16a0c366d492f9f2ae1b95e1256af95c148b1"
+  },
+  "parent_cpu_seconds": 0.14710788000000002,
+  "reaped_child_cpu_seconds": 0.7291019999999999,
+  "wall_seconds": 0.8429338168352842
+}
