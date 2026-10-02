@@ -2503,3 +2503,134 @@ allocated bytes including source/prior/output. Reader and2whole audits remain
 pending. This is acceptance/progress evidence, not a scientific result. The old
 canonical GC warning recurred but exact source materialization/admission passed;
 its log/objects and canonical overlays were preserved without repair or reset.
+
+
+<a id="b03-complete-reading"></a>
+## 2026-10-02 UTC — fixed Q complete panel, original evidence and DM reading
+
+The same sole operation exited0 at03:09:18.830UTC; runner/supervisor identities
+are absent and the native witness is consistent. Observer generation1 READY
+`b3ec5069000afd9129ab0a83`, wake`b2067086-1a69-418f-988b-f1e727e5003b`,
+was manually drained after the known native-child App queue refusal−32600,
+consumed into generation2 and stopped. No relaunch or retry.
+
+[Original summary](../../../../runs/typed_joint_skill_decision/b03_a01/summary.json),
+[complete64-world compact reading](../../../../runs/typed_joint_skill_decision/b03_a01/reading.json),
+[config](../../../../runs/typed_joint_skill_decision/b03_a01/config.json),
+[manifest](../../../../runs/typed_joint_skill_decision/b03_a01/artifact-manifest.json)
+and original native status/exit/progress are collected. Unique raw data remain at
+`hmasd-wsl-node:/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b03_a01`;
+the used B02 inputs retain their original canonical root. Manifest SHA256
+`24d33c574b9c1354963f9d5af92618838104992c2fd99bca9681ab9716116097`.
+DM verified all792 listed new artifacts/101558511logical bytes, plus all648
+actually used prior artifacts/77982875bytes, against their original hashes.
+This is no additional search, model, fit or native query.
+
+### Full64-world results, without dropping aliases or missing outcomes
+
+| program | native J | C_bh | frontend Mbps | cold selection seconds | child selection CPU seconds | static calls/world |
+|---|---:|---:|---:|---:|---:|---:|
+| G | .5310797863 | .7470462500 | 376.896694 | .847098294 | .855408406 | 1331.125000 |
+| Q | .5319181409 | .7484925000 | 377.172339 | .891771012 | .901728938 | 1410.265625 |
+| P | .5379215122 | .7536150000 | 385.406355 | 1.213871592 | 1.230077656 | 2001.593750 |
+
+Q−G J=+.0008383546, descriptive df63 interval[−.0024099923,+.0040867015],
+12positive/9negative/43equal; C=+.00144625,[−.00597286,+.00886536].
+Static reward improves+.003827461,[+.000648078,+.007006845],16+/5−/43same;
+static regret relative P falls.011947146→.008119685. Q requests ranks42/14/8,
+no fallback. World032 requests rank1 yet has identical assigned targets and
+all500actions/service masks/reward-info versus G; its unassigned/permutation
+identity differs, so the declared stricter alias rule correctly paid one new
+episode. Thus22nonzero-rank requests produce21physical/native changes.
+
+Q−P J=−.0060033713,[−.0097865912,−.0022201514],5+/21−/38same;
+C=−.00512250,[−.01577102,+.00552602]. All intervals describe this exposed
+adaptively reused panel; no fresh-world confirmation, repeated fitted asset or
+MEI claim. G/P native values reproduce B02 through explicitly attributed reuse.
+
+The57 previously known aliases contributed sum(Q−G J)=+.1289092843. All7
+missing outcomes contribute−.0752545902:1positive/5negative/1same, reducing
+the complete sum to+.0536546941. Neither set is selected as a stand-alone
+population result. Every missing world, including the worst loss, was retained:
+
+| new Q world | Q−G J | Q−G C_bh | Q rank |
+|---|---:|---:|---:|
+|107100000|−.0545886130|+.105000|2|
+|107100011|−.0047752724|+.026200|1|
+|107100025|+.0079292633|+.025640|1|
+|107100027|−.0089707751|+.006760|2|
+|107100032|0|0|1|
+|107100033|−.0042827338|+.001080|1|
+|107100036|−.0105664592|+.005600|2|
+
+### Positive capability, adverse trajectories and what the intermediate result means
+
+DM read every world/metric and additional entire original traces for all7new
+worlds plus014/031/048; the saved-data per-user and temporal arithmetic is in
+reading.json. Q finds P's useful branch at031: J+.0489515280, static+.05344847,
+arrival74vs75, frontend+91.024Mbps. At014 J+.0314092895/C+.02936 and arrival
+108vs124 improve, yet never-served users increase4→16 and all-team-unserved
+steps23→30. Mean service and aggregate reward do not imply every-user benefit.
+At025 Q improves over G J+.0079292633 and over P+.0092407973 although its
+endpoint static value is below P by.000306073. Its first100J=.291442 vs
+G.266509/P.244014; no all-team-zero step vs18/8 and6fully-served users vs0/0.
+This is a real conditional trajectory advantage, not proof of universal dominance.
+
+At000, Q arrival111vs79 and first100J.103674vs.223377 accompany J−.054588613
+and frontend−256.170345Mbps despite C+.105 and never-served users9→6.
+Prefix ranks1/2 differ by one floating-point ulp (.43956340614985917/
+.4395634061498592), so the declared exact rule selects2; their original full
+static outcomes are both.4704826638078135, below rank0.5077392655372611.
+The ulp fact alone does not explain the static regret or license a new tie rule.
+At036 static+.012524927 becomes J−.010566459: first100J.301803vs.404483,
+arrival103vs72; final100 reverses to Q.587173vsG.574648. At048 Q=P has
+static+.014531111 but J−.036791952, equal arrival117, first100J.152305vs
+.328268; equal arrival is insufficient to characterize path service. Never-
+served users1→0, yet all-team-unserved steps0→12, another distinct tradeoff.
+All four Q/G static-positive/native-negative worlds028/036/040/048 remain,
+and Q/P static/native reversals001/025/043/057/063 are also reported.
+
+Prefix feedback improves conditional static ranking over initial rank0 on this
+panel; it does not eliminate mistaken early branch choices or convert endpoint
+quality into complete service. The complete native mean increment is small and
+unresolved, with material positive/adverse cases. This observation neither
+attributes B02 ridge failure solely to objective mismatch nor proves all
+experience-assisted decisions ineffective. It supplies a stronger ordinary
+information-use reference, with a narrower native benefit than its static gain.
+
+### Complete cost and correctness, with scope preserved
+
+Q pays+79.140625queries/world(+5.9454%) and+44.672717ms cold wall(+5.2736%)
+relative G; timing interval[33.229645,56.115790]ms. Q saves591.328125queries
+(29.5429%) and.322100580s cold wall(26.5350%) relative P, in every world.
+The G/P cost-quality tradeoff remains; no learner produced these savings.
+Cold times include measured identity reset(about1.407ms mean for Q), fresh
+spawn/imports, instrumentation/serialization and precede all alias lookup.
+Different B02 absolute timing scope and live conditions prevent a direct
+cross-study speedup claim. Reused flights provide evaluation savings only;
+there is no contemporaneous new full-episode CPU measurement for them.
+
+Final progress records192completed selections,185fully reread old episodes,
+7newH500+2whole original audits=4500native,307058explicit static attempts and
+completions,3507new-state static checks,0new full reference searches,0fits,
+0GPU/weights/training-label queries. Selection calls areG85192/Q90257/P128102.
+994633/994633diagnostics pass,8795numerical comparisons have nonzero error;
+maxabsolute9.094947e−13 under frozen tolerances. Exact query/discrete identity
+checks pass. Full checks are3979676compressed/146565056uncompressed bytes,
+SHA256`f0efb1539d87ca3203cdd24210ec59abdf7cbc39bb1abdbb99819301bcc57adf`.
+Aliases inherit B02's paid physics checks; new checks reuse pinned radio, not an
+independent physical law. No passing-check count is treated as scientific benefit.
+
+Final cumulative run+reader CPU266.887543s, wall263.976331s; summary's earlier
+CPU snapshot266.884339s is not silently substituted. Integrated full reader
+31.316530s. Parent maxRSS1043504KiB and max child161132KiB are separate maxima,
+not a simultaneous sum. Sampled disk peak2039803904B includes source+prior+new
+output, below the2.5GiB cap. Unmetered final teardown remains unknown. Artifact/
+whole-panel read support1.788853CPU-s and selected original trace reading
+.897740CPU-s are additional; other support not metered is not zero. B02/B01,
+old128288training/sourcecalls and2.635164CPU-s alias arithmetic remain sunk.
+
+Original result ResearchCritic has accepted this full evidence for independent
+diagnosis and constructive continuation judgment. No new result operation or
+fit is selected by this intermediate DM reading; final disposition follows the
+complete independent answer in this same notebook.
