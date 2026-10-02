@@ -159,5 +159,5 @@ metric; the toy and the floors supply its facts.
 | --- | --- |
 | Toy (both rungs, five seeds, five arms, two decoy settings) | minutes of CPython in this container, 0 node resources |
 | Real-host zero-fit floors | ≈ .1 CPU-h, ≈ 4–6 engineering hours including the subclass and tests |
-| First round of fits (three arms, one instance each) | ≈ 5.4 CPU-h + .3 CPU-h evaluation |
+| First round of fits (four arms 1, 1b, 2, 3, one instance each) | ≈ 7.2 CPU-h + .3 CPU-h evaluation |
 | Seeds and exposure curve | only after activation; priced then |

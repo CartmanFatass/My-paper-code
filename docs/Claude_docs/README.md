@@ -135,6 +135,14 @@ whose corrections are incorporated. No experiment was run and no scientific obje
 
 ### research_notes/
 
+- `OPEN_DECISION_MODELS_FOR_HMASD_20261002.md` — owner-requested assessment of Jev-like open
+  decision models (Laya, this-that-model, LAVOIR, Chinese-Jev, openjev) for HMASD: what the repository
+  already measured (TJSD B01's frozen-Laya scorer and numeric scorer both below a fixed construction
+  rule), the three separable ingredients of the methodology, zero-cost per-world oracle deferral
+  envelopes on every assisted-versus-ordinary panel (≤ ~1.5% of the ordinary reference), the mapping
+  onto HMASD's interfaces, four [DECIDE] items with defaults. Imported unchanged to `main` by Root at
+  `8bc5f9c9`, which also recorded a scoped disagreement (the envelopes bound the fixed policies and
+  panels they were computed on, not online switching). 0 fits.
 - `REASONING_FIRST_RESEARCH_METHOD_20260927.md` — owner-requested (2026-09-27) research method
   going forward, v2 synthesised with the Codex Root draft (RESEARCH.md anchor
   `innovation-method-root-20260927`) after one independent scientific review: innovation claim,
@@ -283,6 +291,15 @@ whose corrections are incorporated. No experiment was run and no scientific obje
 
 ### environment_design/
 
+- `SPARSE_WINDOW_RELAY_SCENARIO_DESIGN_20261002.md` — scenario S2-W: a sparse-reward service task on
+  the existing coupled relay host (far corner clusters reachable only through a relay chain, a known
+  schedule of four 125-tick windows, +1 only when a joint chain has served the open cluster for 20
+  consecutive ticks, optional dense decoy). Question: does HMASD's discriminator-driven skill discovery
+  reach the sparse reward more reliably than flat SET and than the same hierarchy with discriminators
+  disabled. Four learned arms (HMASD defaults, four-fold discriminator weights, no discriminators, flat
+  SET; optional count bonus), four zero-fit references including the schedule-aware planner ceiling,
+  64 dev / 32 hold-out worlds, pre-declared activation and mechanism bands, a zero-fit room and
+  sparsity calibration stage, first round ≈ 7.6 CPU-h. Design advice only; nothing launched.
 - `TOY_HOST_AND_UAV_ENV_DESIGN_ADVICE_20260901.md` — inventory of the five first-wave hosts and
   the UAV family, diagnosis D1–D6, host principles P1–P8, the proposed relay-corridor parametric
   family, UAV recommendations U1–U7, and an invitation for the owner to write the one-page ADR.
@@ -294,6 +311,20 @@ whose corrections are incorporated. No experiment was run and no scientific obje
   window identifiability, k-step model composition versus direct prediction, role coverage
   probability, single-loss coverage gap, joint-assignment versus composition counts.
 - `RESULTS.md` — the tables the research note quotes, with the study's stated limits.
+
+### toy_studies/sparse_window_relay/
+
+- `swr_toy.py` — standard-library gridworld with the S2-W structure (relay chains to corner sites,
+  known windows, sparse +1 per held window, optional decoy), zero-learning references and tabular
+  REINFORCE analogs of flat PPO, count-based exploration, hierarchy without discriminators and
+  HMASD-style hierarchy with discriminator rewards at the project's weights and at four-fold weights;
+  about 5 ms per episode, every draw seeded.
+- `README.md`, `results_raccess1.json`, `results_raccess2.json` — run instructions and the outputs of
+  the two difficulty rungs (five seeds, five arms, two decoy settings, 5,000 episodes each).
+- `RESULTS.md` — the readings: at the needle rung no arm leaves the random floor; at the wider rung
+  every arm learns, the four-fold-weight hierarchy activates earliest and in all seeds, the count bonus
+  reaches the same level later, the default-weight hierarchy is no better than flat, the hierarchy
+  without discriminators is the worst arm; activated learners find only the first mission's chain.
 
 ### experiments/
 
@@ -325,6 +356,21 @@ whose corrections are incorporated. No experiment was run and no scientific obje
   Send from Claude Code through Agentify Desktop to ChatGPT 6 Pro (matched `Latest` / `Pro`,
   reply `READY`, receipt `COMPLETE`), the three Agentify defects it exposed and their patches,
   and the consequence for unattended dispatch.
+
+### deliverables/
+
+- `BRANCH_REPORT_claude_inspiring_ritchie_2kj46g_20261002.md` — report on the 2026-10-02 cloud-session
+  branch: the four owner requests and what each produced, how `main` used the decision-model note
+  (verbatim import, Root's scoped disagreement, ideas 1+5 → the TJSD B04 learning curve, idea 3 kept
+  as an unpriced candidate), the S2-W specification and how it answers Root's recorded conditions, the
+  toy's readings, the round-boundary statement of what changed, open items with defaults, file index.
+- `CODEX_PROMPT_SPARSE_WINDOW_RELAY_20261002.md` — the prompt the owner can paste to the Codex Root (or
+  a new Codex DM) to evaluate and, if judged worth it, execute the S2-W comparison: read order, the
+  comparison in one paragraph, the toy's lessons, the points to weigh, the ordered task A–E with stop
+  points, optional zero-cost items, constraints, and what to return to the owner.
+- `CLAUDE_DM_RESTART_HANDOFF_20260927.md`, `CLAUDE_DM_RESTART_HANDOFF_20260928.md`,
+  `2026-09-18-research-support-and-visualization-suite.md`, `research_support_screens/` — earlier
+  handoffs and the research-support suite record.
 
 ### artifacts/
 
