@@ -1,0 +1,49 @@
+{
+  "owned_fetch_pid": 1347933,
+  "process_elapsed": "03:46",
+  "leader_cpu_seconds": 0.01,
+  "child_cpu_seconds_recorded_by_parent": 0.0,
+  "native_output_exists": false,
+  "supervisor_task_directory_exists": false,
+  "remote_tracking_sha": "2d41535bde95c9c168fc1f63113855363c35f646",
+  "action": "terminate only owned pending fetch process group; no launch or worker exists",
+  "intended_source_sha": "c2f37121a092116c92fe5db7809bfc4710d4da55",
+  "scientific_exposure": {
+    "codec_fits_started": 0,
+    "model_forwards": 0,
+    "native_steps": 0,
+    "reader_steps": 0
+  },
+  "transport_probe": {
+    "argv": [
+      "curl",
+      "-I",
+      "--connect-timeout",
+      "5",
+      "--max-time",
+      "10",
+      "--silent",
+      "--show-error",
+      "https://github.com/CartmanFatass/My-paper-code.git/info/refs?service=git-upload-pack"
+    ],
+    "exit_code": 28,
+    "stderr": "curl: (28) SSL connection timeout"
+  },
+  "prior_readonly_ancestry_check": {
+    "owned_pid": 1347567,
+    "action": "terminated after it triggered a Git promisor lazy fetch against stale origin/main; no launch was submitted",
+    "cpu_seconds": "unmeasured; not zero"
+  },
+  "status": "corrected scientific request not yet submitted; source transport pending",
+  "resume_source_sync": {
+    "advertised": "5983a7168c3270f18c807f9ca1d9aa7ae0e2f2c8\trefs/heads/main",
+    "fetch_stdout": "",
+    "fetch_stderr": "From https://github.com/CartmanFatass/My-paper-code\n * branch                    main       -> FETCH_HEAD\n   2d41535bde9..5983a7168c3  main       -> origin/main\nAuto packing the repository in background for optimum performance.\nSee \"git help gc\" for manual housekeeping.\nwarning: The last gc run reported the following. Please correct the root cause\nand remove .git/gc.log\nAutomatic cleanup will not be performed until the file is removed.\n\nfatal: bad tree object dfe82c9813ee82191abb8385cc12a6886fd0a77b\nfatal: failed to run repack\n\n",
+    "source_type": "commit",
+    "tracking_sha": "5983a7168c3270f18c807f9ca1d9aa7ae0e2f2c8",
+    "wall_seconds": 4.001556365052238,
+    "git_config_count_already_present": false,
+    "transport": "temporary loopback reverse SSH SOCKS through control host; native GitHub HTTPS TLS and actual published checks retained",
+    "persistent_configuration_changed": false
+  }
+}

@@ -4804,3 +4804,54 @@ An accepted launch is not the read-result boundary; the same-handle observer mus
 remain active through terminal collection and full interpretation. A first actual
 effect failure preserves partial counters/evidence and returns the unresolved
 boundary without another automatic run.
+
+
+The corrected source/input publication is `c2f37121a092116c92fe5db7809bfc4710d4da55`.
+Before submitting its a02 supervisor request, remote source fetching encountered a
+new transport problem. Remote `origin/main` remained2d41535bd; a subsequent owned
+read-only ancestry check against the missing new commit initiated a promisor lazy
+fetch and was terminated with its own process group (PID1347567). A direct fetch
+with Git HTTP low-speed bounds also remained pending; it was terminated with only
+its own process group (PID1347933) after3m46s. Fetch-leader CPU was.01s; its recorded
+waited-child CPU0s excludes live-child consumption, so total preparation CPU is
+unmeasured, not zero. An independent bounded HTTPS HEAD of this repository's refs
+endpoint failed with `curl: (28) SSL connection timeout` (exit28;5s connection,
+10s total bounds). No network configuration, interpreter, source contents or
+admission condition was changed. The corrected remote supervisor task directory
+and native output directory both remained absent: **no a02 launch request,
+admission or scientific effect**. Exact facts are in
+`runs/uav_message_content/b07_codec_a02/source-preparation.json`.
+
+The incomplete first fetch wrapper did not preserve its inner stderr; it is not
+assigned an invented cause. The later missing-source/SSL observations are the
+load-bearing transport evidence. Root received these concrete facts through native
+communication. The complete selected scientific package remains prepared; remote
+GitHub source connectivity is the current shared-control dependency, not empirical
+failure or a reason to alter the hypothesis. The prepared observer request under
+owned scratch is not armed in the absence of an accepted native handle.
+
+
+On actual owner-scheduled resumption at21:24 UTC, Root reselected continuation of
+the same complete B07 package and authorized verifiable source synchronization
+within the engineering method. Reconciliation found a01 still terminal exit4,
+its old snapshot absent, a02 supervisor `not_found`, and no a02 native output.
+The exact new source and fresh remote GitHub reference still timed out. Source
+copying alone would not satisfy the launcher's separate fresh-published-control
+check. Therefore the DM created one temporary **loopback-only reverse SSH SOCKS**
+transport through the working control host, over the configured node SSH channel.
+Git retained normal HTTPS/TLS to the actual GitHub repository and normal publication
+checks. Proxy selection is invocation-local Git configuration; no persistent Git,
+network, policy or interpreter configuration was altered and no dirty controls
+were replaced. This is source/admission transport, not a model/native health test.
+
+The real remote `ls-remote` advertised
+`5983a7168c3270f18c807f9ca1d9aa7ae0e2f2c8 refs/heads/main`; normal fetch updated
+`origin/main` from2d41535bd to that head, materialized c2f37121a as a commit and
+verified its ancestry. The combined source synchronization took4.002s remote
+wall. The already-known unrelated remote GC bad-tree warning remained untouched;
+fetch itself succeeded. Structured evidence is appended in the existing
+`b07_codec_a02/source-preparation.json`. The temporary transport's exact process
+identity is in owned scratch and will be stopped once native admission finishes.
+The scientific execution SHA remains the published corrected c2f37121a, with the
+unchanged selected manifest and code; this later notebook publication adds only
+preparation/continuity facts. No a02 supervisor request has yet been sent.
