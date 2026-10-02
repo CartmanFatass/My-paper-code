@@ -1,0 +1,11 @@
+{
+  "claim_key": "3e4367a5d2791d7e143f7ddd6cabe98f7d781b977e30ec5f43b20cccd824e0de",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/3e4367a5d2791d7e143f7ddd6cabe98f7d781b977e30ec5f43b20cccd824e0de.json",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b04_a01/launch-manifest.json",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/3e4367a5d2791d7e143f7ddd6cabe98f7d781b977e30ec5f43b20cccd824e0de.json",
+  "pid": 1318046,
+  "runner_pid": 1318047,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-10-02T05:40:05.067713Z"
+}

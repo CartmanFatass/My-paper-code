@@ -3600,3 +3600,31 @@ No old bulk input path is passed through launcher argv. External retained roots
 are only declared disk-accounting locators inside the hashed manifest; source
 and canonical data are not conflated. No new profile/package/environment change.
 B04 remains0effects and has no accepted producer at this publication boundary.
+
+
+<a id="b04-admitted-operation"></a>
+## 2026-10-02 UTC — sole B04 operation accepted; same-handle observation
+
+Configured`agent-task`request`typed-joint-b04-a01`completed launcher preparation;
+the scientific runner was accepted2026-10-02T05:40:05.062963Z at exact published
+SHA`b19508a5c2825359e66a36b4fdc1db68b60cc809`. Full source snapshot
+`ec8727c4c6d6404ab539eec55cc8a0ec`, original configured`wsl_4070`interpreter,
+and actual-node resource admission passed. GPU identity remains
+`GPU-294302a9-40ff-1a09-43b0-5fd98e06b557`; read-only prelaunch occupancy was0MiB.
+No global environment or canonical checkout overlay changed.
+
+The[original manifest](../../../../runs/typed_joint_skill_decision/b04_a01/launch-manifest.json)
+binds canonical output`/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b04_a01`
+and operation`/home/wu/projects/HMASD/.git/hmasd-admission/3e4367a5d2791d7e143f7ddd6cabe98f7d781b977e30ec5f43b20cccd824e0de.json`.
+Runner1318047/start125972158 and supervisor1318046/start125972155 were
+consistently running at05:41:10UTC. Deterministic observer generation1 is armed
+at`temp/directions/typed_joint_skill_decision/b04-observer`,60s read-only status
+interval,25min checkpoint window. Its first observed identity was drained and
+matches the accepted handle. This native DM remains active through collection
+and full reading; no duplicate, resumed fit or replacement operation.
+
+First saved progress:576/16000 training-bank worlds;98921 attempted/completed
+static calls;0fits/model presentations/native steps;74.443115 cumulative CPU-s;
+3563610112B sampled allocated peak over the full declared scope. Labels, six
+fits, all native programs and the full reader remain pending. This is launch/
+progress evidence, not an interpretable learning result.
