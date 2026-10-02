@@ -3306,3 +3306,74 @@ no fit extension follows automatically. Static gains with adverse complete servi
 reject an immediate native upgrade while preserving learning. A slow but competent
 student is a capability result without compute adoption. This complete result then
 informs the next substantive use of the long-term assistance question.
+
+### B04 selection-review clarifications before effects
+
+The original independent critic reconstructed the actual source and prior evidence,
+including R's positive and adverse native traces, and is completing this one
+selection review. Its concrete changes below replace the affected draft clauses;
+the full final answer and DM disposition will follow mechanically. No B04 static,
+native, model-forward, RNG-result or fit effect has occurred.
+
+**Replace Plain3 with Raw8J**, retaining nine programs, six fits,128 native worlds
+and16 audits. The existing outcome-free B01 `select_menu` rule is the reference:
+preferred plain k4/5/6, relay k4/5/6, a fourth distinct relay and one flat; rank
+candidates by negative served-subset cardinality, SHA256 of numerically sorted
+`.17g` coordinate rows, then original source index. Deduplicate by that exact
+canonical key, retaining first preferred slots, and fill empty slots in relay,
+flat,plain order with the same rank. Keep at most eight entries. Here use this
+rule **only to obtain original source indices** from the complete, world-seeded
+raw pool. Score and execute `raw[source_index]` in its original row order; do not
+execute the shortlist helper's canonicalized coordinates. Store all shortlist
+construction/fill/dedup provenance. Raw8J pays at most eight true static-J calls
+and selects maximum J with ties to lower original raw index. This is an explicit
+adaptation on the new bank, not reuse of B01's RNG0 outcomes or an assertion that
+canonical row permutation preserves this host's routing. The raw teacher is
+unchanged and all candidates remain eligible for learned selection.
+
+Raw8J takes Plain3's native audit at world109420000. Online ordinary calls now have
+the ceiling1024+28288+768128=797440; all other counts stay fixed. Thus the final
+static ceiling is **8682080**, an increase of640 over the fully priced draft.
+The neural ceiling remains15471824 and native ceiling584000. Raw8J is a stronger
+low-query ordinary reference; neither it nor RawJ/P establishes an exhausted
+ordinary quality/compute frontier.
+
+**Finite exposure and training reading.** Save target entropy H(q) alongside soft
+CE and prediction entropy, and read CE−H(q)=KL(q||p). Raw CE changes alone mix
+prediction quality with the entropy of the selected teacher subset. This uses
+already computed labels/subsets and requires no new forward. For each of the
+512 common training-probe worlds retain every candidate's actual training count,
+including zero, and join full-menu final score/error/rank records to those counts.
+Also retain full candidate-level errors on all512 fresh worlds. Read never/rarely
+sampled nonwinner errors, world exposure and candidate coverage separately. At
+M221 a world seen8/9times in the16k fit can leave many nonwinner entries unseen;
+the curve trades broader world coverage against less repeated within-world
+candidate exposure. No full-menu training or a data-only causal interpretation is
+claimed. A hypothetical all-prefix final endpoint would require9282000 total
+production candidate presentations, replacing678912 common-probe presentations
+and therefore adding8603088, plus an equal reader increment; that work is not
+bought. This corrects the draft's ambiguous use of “add9.282M”.
+
+**Raw-label and execution identity are distinct checks.** A min-makespan row
+permutation may genuinely change static J because the pinned implementation's
+stable greedy routing can use row order. Retain the complete raw-label→matched
+endpoint differences and their native consequences as scientific observations.
+Such a difference alone is not a technical failure or an invalid world. Same-input
+source/hash/reset/RNG/executor reconstruction failures are technical; neither
+class permits silently changing labels, row order or the decoder after outcomes.
+
+**Planner reading within the stated price.** Save P's ordered static-query inputs
+and responses, including the flat and relay stages and final metadata call.
+Independently replay its branch/control computation against this bound trace cache,
+verify exact query identities and complete consumption, and compare its final
+unassigned/assigned output and source binding. This replay buys no new physics
+queries and is explicitly conditional on the pinned planner and saved response
+values. The native-frame reader and matched-endpoint diagnostic separately verify
+executed service. The complete raw label recomputation can cross-check Raw8J/RawJ
+queries. No unpriced second6001-query P run is implied.
+
+The targeted primary-paper navigation check in all three local library indexes
+found no title match for Pointer Networks/Deep Sets/neural combinatorial terms;
+that is only this search's coverage. The directly read primary passages and prior
+July/external-review/library reconstruction remain the basis for the limited
+construction bridge, not a novelty verdict.
