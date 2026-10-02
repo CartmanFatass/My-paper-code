@@ -1,0 +1,16 @@
+{
+  "source": "/mnt/c/Users/fires/.codex/sessions/2026/10/01/rollout-2026-10-01T18-10-06-01a0fa29-505d-7340-ab35-b55b5db2ba9f.jsonl",
+  "line": 482,
+  "timestamp": "2026-10-02T07:04:04.344Z",
+  "original": "B12 工程源审闭合：**当前绑定源码无未解决的实质发现，可进入合同已选定的原生工程验证。**\n\n- 原 P2 已修复：[controller.py:242](/home/fires/hmasd-wsl/experiments/candidates/uav_fleet_transmission/b12_resource_assignment/controller.py:242) 在排名前检查保存的选择标志，避免回放未完成的排名后缀。\n- 新增 reader 计价记录核对通过：后续 replay/reduction 失败仍保留已完成的 native-array 检查成本；中断部分单列上界。\n- 已完整阅读 [checks.json](/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b12_resource_checks_a01/checks.json) 和 JUnit：41 passed，4.992958930 CPU 秒；58 个绑定文件与当前字节全部一致。\n- checks SHA256：`152ca4bee45e16642f13681d90fd7041f5895674cbaf85058e176e99e7101fa8`。\n\n本人仅做源码、证据读取及哈希核验，没有重复测试或执行候选/native/model。剩余限制是完整原生工程链尚未验证；本结论不包含科学结果判断。",
+  "turn": {
+    "turn_id": "01a0fb6b-d3a3-7533-932d-eb9561574f5e",
+    "model": "gpt-6-astra",
+    "effort": "high"
+  },
+  "original_bytes": 1005,
+  "original_sha256": "f0933bbf03a7381ffa3984a099bdd88e5ae86922ea963adc0bb902957d3f9616",
+  "direction": "uav_fleet_transmission",
+  "scope": "independent B12 engineering source and finite-evidence review; zero reviewer candidate execution",
+  "checks_sha256": "152ca4bee45e16642f13681d90fd7041f5895674cbaf85058e176e99e7101fa8"
+}
