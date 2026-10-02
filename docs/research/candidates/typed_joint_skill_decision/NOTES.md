@@ -3377,3 +3377,174 @@ found no title match for Pointer Networks/Deep Sets/neural combinatorial terms;
 that is only this search's coverage. The directly read primary passages and prior
 July/external-review/library reconstruction remain the basis for the limited
 construction bridge, not a novelty verdict.
+
+### B04 L0 — fixed bank-to-policy comparison implementation
+
+Deliver one executable implementation of the reviewed B04 contract, with runner
+`experiments/candidates/typed_joint_skill_decision/b04/run.py`, complete retained
+data/learner/native/reader evidence and focused pure/mock checks. The executable
+input manifest is `B04_INPUT.json` beside this notebook. Its seven upstream source
+hashes were verified against current bytes. The original B01 Raw8 helper file at
+61a2dfa9cde0178d482d0a079c5629c3bcb7789e has SHA256
+71c5eb1d904370cbb853ce1cbfbde652391bb78b25b3a42c4ecebaeb653d82fe;
+its four row/canonical/key/menu functions are source-identical to the current DM2
+copies. Keep the new original-row execution adaptation explicit.
+
+The existing Implementer owns only new `.../typed_joint_skill_decision/b04/` code
+and matching tests for this task; no NOTES, shared files, index or commit ownership.
+DM owns this notebook, the input manifest, acceptance, publication and launch.
+The helper is not alone in shared main, preserves others' edits and spawns no child.
+No result launch, native environment/RNG/model effect, fitted asset, installation
+or microbenchmark is delegated. Tests before admission use literal/mock objects;
+the declared16 real scorer contexts and16 static checks belong inside the admitted
+study. A genuine fixed-shape/device inability is returned, not silently repaired
+by smaller batches, different precision, new data, more updates or another seed.
+
+Use small modules for the actual bank/model/training/native/reader responsibilities,
+without a generic experiment framework. CLI carries `--out`, `--launch-sha`, fixed
+`--seed 0`, manifest path and digest. `require_admission` precedes every scientific
+effect. Imports have no model/env/RNG side effects. Exact published source and
+manifest identities, configured Python/NumPy/Torch/CUDA device, counters and limits
+are verified. The launcher rewrites canonical paths appearing as CLI inputs to
+its source snapshot: use the declared output binding and manifest-held absolute
+external disk-accounting locators; no old bulk input is needed or copied.
+
+State flow is bank build/full-label independent reconstruction → six final fits
+with each fixed training probe → common fresh endpoints → all rotated cold native
+programs/audits → complete independent reader/aggregate publication. Final fresh
+labels are unavailable to fit/model code. Each online child is fresh/spawned and
+receives only lawful world/constants/checkpoint plus its admitted-parent accounting
+context; it receives no label bank, endpoint decision or future trace. Freeze and
+send immutable selection-ready identity before any parent result/label comparison.
+Include all cold load/import/generation/feature/scorer/matching/reset work; separate
+instrumentation/trace-writing time from compute segments without calling a
+subtracted estimate an independently measured uninstrumented deployment.
+
+Keep compact world geometry once, numeric raw layouts/labels, full per-update
+subset/exposure traces and the six final checkpoints; avoid permanent expanded
+relation tensors or checkpoint-per-update copies. Record parameter movement and
+digest per update, two unique initial states, same-stream initializer equality,
+all candidate-level endpoint scores and errors, and train/fresh identity boundaries.
+Charge physically computed padding as well as report valid candidate rows. After
+training do no extra optimization. Functional CPU reconstruction uses independently
+constructed tensors and literal linear/GELU arithmetic, never the production
+forward. Planner cache replay must restore the saved positions/routing/connections
+needed by potential and final routing-role metadata, consume all ordered responses
+and execute zero new physics calls. This is a source/cache control reconstruction,
+not an independent radio model or a second training run.
+
+Native recording includes initial+500 full states, original per-user identity,
+actions, routed service masks, reward components, done flags and RNG/reset proofs.
+The independent reader verifies matching, original executor audits, all recorded
+radio frames, individual gaps/outages/arrival, every positive and adverse case,
+teacher versus matched endpoint differences and cold-choice versus GPU endpoint
+identity. Count attempts and completions, implicit host/reset/radio/reward work,
+native steps, all neural rows, fitted assets/updates, main plus child CPU, reserved
+GPU time and owned allocated disk separately. Failures retain original partial
+artifacts and phase/counter/error context. Hard caps remain8682080 static calls,
+584000 native steps,15471824 neural rows,6 fits/24576 updates,28800CPU-s,
+14400GPU-wall-s and7516192768 disk bytes. No retry is granted by this L0.
+
+Checks target raw-pool/shortlist row identity and ties; strict feature whitelist;
+continuous prefix world order and best-plus15 subset/padding law; soft-target
+entropy/KL; no future-label leakage; complete counters; checkpoint/source/child
+identity; unpriced-effect rejection; reset/action/termination and reader mismatch
+retention. Independent engineering review covers the full numerical/RNG/effect
+path and declared reader price after the Implementer returns. DM reads the diff
+and checks and accepts it; neither helper selects science or authorizes a launch.
+
+
+<a id="b04-independent-selection"></a>
+## B04 independent selection and DM disposition
+
+The complete original answer below was extracted mechanically from native `event_msg.task_complete.last_agent_message`, not reconstructed from intermediate messages. Original critic `/root/dm_typed_joint_skill/b01_result_critic`, UUID `01a0f8f3-a3f1-7f12-a0d9-d81a67c03d53`; original rollout `/mnt/c/Users/fires/.codex/sessions/2026/10/01/rollout-2026-10-01T12-31-52-01a0f8f3-a3f1-7f12-a0d9-d81a67c03d53.jsonl`, line1070/ordinal1069, turn `01a0face-90ca-77a2-a80a-edf5859b4c88`, timestamp2026-10-02T04:30:44.884Z. Exact UTF-8 bytes15555, SHA256 `8bf5392212b83f7e42454aa76b2e8e5044d2d52a86b41688d714ad4c23894087`. This is the existing separate critic context, with the scope and prior exposure it states.
+
+<!-- BEGIN exact B04 scientific review -->
+I recommend **one bounded B04 comparison under the revised contract**, including Raw8J in place of Plain3. The changed question is worth this investment: it tests how a fixed learner’s fresh decision quality changes when a fixed training budget is spread across more independent worlds. This is materially different from seeking a tiny improvement over the nearly sufficient eight-layout selector rejected after B03. No additional pilot, architecture arm, training run or full-training-bank endpoint evaluation is necessary before this comparison.
+
+This is the reused independent critic context, containing my earlier reviews and the assigning DM’s bounded messages; it is not a new blind review. I reconstructed the relevant original source and evidence before reading the B04 advice and contract. I read the complete prospective contract at `2f3b48059` and the accepted clarifications at `1e4395456`, the complete Root/Oracle archive, and the imported Claude note. I performed source inspection and arithmetic over saved evidence only. B04 implementation, actual runtime feasibility and numerical correctness remain for implementation and engineering review.
+
+The evidence supports trying this particular construction, while leaving substantial reasons it could fail.
+
+- The earlier R package demonstrated useful conditional behavior relative to A, alongside weak training fit and severe adverse decisions. Its three block-level native C differences were approximately `+.041575, +.035114, +.006254`; its J differences were `+.019857, +.023172, −.000553`. The C mean was positive, but the three-block interval crossed zero. Its training choice regrets remained approximately `.0457–.0575`, compared with fresh regrets `.0652–.0913`. These are evidence of a useful but limited package, not an established data bottleneck.
+- I checked consequential positive and adverse original trajectories. At world `106130087`, R’s chosen slot achieved C `.75676` and J `.491827`, versus `.38360` and `.279281` for the A/N choice. At world `106330029`, R achieved C `.00212`, J `.001966`, and 474 entirely unserved steps, versus C `.63028`, J `.453208`, and no entirely unserved steps for A/N. The four underlying 500-step files matched their recorded hashes; service-mask and reward arithmetic agreed to numerical precision. These observations prevent either “R cannot generalize” or “the relational package solves the task” from being a defensible premise.
+- The original raw-menu records expose substantially more static opportunity than the three plain layouts. Across the two old 32-world panels, raw-pool sizes averaged about 176 and 172. RawJ exceeded Plain3 in mean static J by `.189494` and `.242212`; the full planner exceeded RawJ by `.055494` and `.060405`. These are old-source static observations, not B04 outcomes or native headroom estimates.
+- Conversely, the paid B01 evidence strongly constrained the rejected eight-menu successor: terminal-J selection had pooled fresh native-J regret only about `.000637`. B04 does not erase that fact. It changes the reachable pool, target and scientific purpose, so that fact does not veto B04.
+
+The strongest favorable case is therefore specific: a shared scorer may learn a reusable approximation to a lawful joint-layout objective, and broader world coverage may improve its choices despite fewer repetitions per world. That would establish a finite learning capability even if RawJ remains better. The strongest adverse case is equally specific: this fixed-width learner and sampled training objective may remain poorly fitted, while its message-passing and cold-start costs exceed inexpensive numerical scoring. Buying more labeled worlds would then fail to produce a useful allocation of the stated training budget.
+
+The teacher and decision interface are sufficiently clear. Every candidate is a complete six-UAV layout. RawJ is the reachable static teacher over the complete returned raw pool; P can generate layouts outside that pool through local search and the searched flat incumbent. P therefore supplies an ordinary quality/cost reference, not an attainable class label or a requirement that the classifier exceed its teacher.
+
+The prospective input restriction is also meaningful. Users, BS, raw candidate coordinates, legal row identities and construction metadata can describe this frozen static objective without revealing its evaluated reward. Original UAV positions are withheld from the static scorer and used after selection for matching. Teacher-best inclusion during training is legitimate supervised information; it is not available as a deployment input. These choices permit a clear static-learning question, but they do not test learned travel consequences, repeated adaptation, transfer or language semantics.
+
+The endpoint R construction is a real new fit, not a continuation of the old R result. I checked the stated parameter arithmetic: 205,441 parameters. The prior R used different input dimensions and assignment-related information. Its positive evidence motivates this construction but supplies neither a fourth learning-curve point nor a guarantee that the new network can fit its target. Row identities also mean that success would not establish permutation invariance or isolate geometric reasoning from useful construction priors.
+
+A particularly important accepted clarification concerns **raw versus matched layouts**. The raw teacher scores original row order, whereas matching can change UAV identity assignments. Stable greedy radio assignment can make row order consequential in ties. A resulting raw-to-matched endpoint gap is an actual target/execution difference to retain. It is not automatically a technical failure. A replay disagreement for the same bound inputs, reset and source is a different matter. The final contract now makes that distinction correctly.
+
+The fixed-budget learning curve is interpretable, but its name and conclusions must retain the allocation being tested. Every fit receives 131,072 world presentations. Increasing the bank from 1k to 4k to 16k reduces average presentations per world from about 131 to 33 to 8. It simultaneously increases world diversity and reduces repetition and coverage of competing candidates. It is not a data-only intervention at equal training convergence.
+
+That candidate-coverage change is large. At the maximum 221 candidates, each presentation includes the best candidate and 15 of the other 220. Under the declared sampling, the expected fraction of nonwinning candidates encountered at least once is approximately:
+
+| Training worlds | Expected nonwinner coverage per world |
+|---:|---:|
+| 1,000 | 99.99% |
+| 4,000 | 90.11% |
+| 16,000 | 43.90% |
+
+These are design expectations, not measured B04 exposure. The accepted join between actual sampling counts and the existing full-probe candidate errors is therefore consequential. It can reveal whether failures concentrate among never or rarely encountered alternatives without purchasing another forward pass.
+
+The sampled soft-target loss is not intrinsically inconsistent with the desired ranking: an unrestricted scorer proportional to `J / τ`, plus a world-specific constant, would satisfy every subset and select the full-menu maximum. But finite capacity, finite optimization and uneven negative exposure can make the fitted subset objective behave differently from full-menu training. B04 must be read as the specified subset-training package. Recording target entropy and `CE − H(q)` is the correct revision; raw cross-entropy alone cannot distinguish poor prediction from a nonzero target-entropy floor.
+
+The common 512-world training probe makes the principal curves more readable without pretending to measure all training worlds. It remains a probe, especially for 16k. A good result on these 512 worlds does not establish full-bank fit, and a poor result is strong evidence that even a shared, repeatedly observed subset remains difficult for this recipe. The proposed full-prefix endpoint replacement would add 8,603,088 candidate presentations per production path, with an equal reader increment. It is properly excluded from this investment.
+
+The two initialization/order streams are justified by the previous adverse third block. They are optimization repetitions on one nested bank, not six independent training datasets. Fresh-world pairing helps measure differences between these six assets; it does not manufacture independent training replications. Three points also do not identify a scaling law.
+
+**Raw8J is a worthwhile replacement for Plain3.** It brings the established outcome-free menu-construction competence into the new pool and price comparison without adding an arm. Selecting source indices with the old rule, then scoring and executing the original raw rows, avoids silently substituting canonicalized layouts. This is a newly defined adaptation on the new world-seeded bank, not a reuse of B01 outcomes or a presumed permutation equivalence.
+
+Its relevance is stronger than a claim that eight queries must suffice here. Its quality and construction cost still need measurement. In particular, Raw8J’s complete cold cost includes the required candidate construction; eight physics calls do not mean eight units of total computation. RawJ and P remain necessary ordinary references. Together they are sufficient for this bounded selection, although they do not exhaust the ordinary computation/quality frontier. The already-paid 512-world label bank can also supply Raw8J’s static comparison on all 512 worlds without expanding online queries; measured cold and native comparisons remain the declared 128-world panel.
+
+The cost is substantial and should be reported as a complete scientific investment:
+
+| Item | Revised ceiling or scope |
+|---|---:|
+| New label bank | 16,000 training + 512 fresh worlds; all raw candidates |
+| Fits | 6 final assets; 24,576 total updates |
+| Candidate forward presentations | 15,471,824 |
+| Static evaluations, including readers | 8,682,080 |
+| Native transitions | 584,000 |
+| Native programs | 1,152 main episodes + 16 audits |
+| CPU / GPU hard limits | 8 CPU-hours / 4 reserved GPU-hours |
+| Incremental scoped disk | 7 GiB |
+| Forecast support work | 14–22 hours |
+
+The Raw8J substitution accounts for the additional 640 static calls. The native-frame reader bill correctly includes all 501 states of all 1,168 episodes. No H500 training labels are purchased.
+
+The cold-child measurement is important here: a student can save static calls and still lose in wall time, CPU use, GPU occupancy or operational simplicity. Imports, model loading, candidate generation, features, scoring, matching and reset belong in the comparison. Resident inference timing is useful subsidiary evidence, not a replacement. Planning time outside the H500 clock also means that native J alone omits a real operational cost.
+
+I accept the revised P reader boundary. Replaying independently written search control against the ordered, source-bound paid request/response stream can check branch decisions and accounting without an unpriced second physics search. It relies on those saved responses and the frozen evaluator; it is not independent verification of every P radio answer. Raw-bank labels receive full recomputation, and executed native service receives the separately priced checks. Likewise, functional CPU scoring and update-chain checks provide substantial evidence without claiming Adam replay. These limitations should remain visible in the result rather than be hidden behind the total check count.
+
+Actual throughput, GPU memory and disk behavior have not been established by this review. The configured 8 GiB-class GPU and the stated representation make source and memory engineering consequential. A hard-limit termination would yield an incomplete operation, not a scientific negative learning curve or authority to replace the failed fit.
+
+I disagree with extending the imported Claude note’s strongest general gate beyond its supported domain. Its paid failures and small fixed-policy quality envelopes are useful evidence. On a fixed panel, the average gain available from choosing between two unchanged complete policies bounds that particular one-time deferral choice. It does not bound a new trained policy, a changed action set, within-episode cooperation that changes future states, or computation savings at maintained quality. A zero quality envelope can coexist with a valuable cost reduction.
+
+Nor do the combined records locate one universal bottleneck. N’s strong training fit and weak generalization, R’s weaker fit with some better fresh decisions, and Laya’s weak fit leave different explanations active. The note also predates consequential completed results. Those limitations do not discard its evidence; they limit the inference. B04 can update the value of world coverage under one finite regime. It cannot establish that the project’s earlier failures were caused by its compute policy or that a particular model family is generally incapable.
+
+The prospective outcomes would change investment as follows:
+
+- **Fresh regret falls consistently in both streams as the bank grows.** Retain evidence that broader world exposure benefits this fixed-budget learner. If native behavior and complete cost are also competitive, that supports considering a concrete use. It does not automatically justify 64k worlds, more epochs or a new model.
+- **All sizes achieve low regret.** The smaller bank may already suffice for this frozen endpoint task. Retain that capability and favor the cheaper supported construction; a larger data purchase has little demonstrated value.
+- **Fresh regret remains high despite a good common probe.** Broader coverage has not solved generalization for this package. End automatic data expansion. This does not prove the physical objective unlearnable.
+- **The common probe remains poorly fitted, or streams disagree materially.** Report finite fitting or optimization limitations and the actual candidate exposures. A flat curve then cannot identify a representation limit or a unique need for more data. No routine optimizer or architecture rescue follows.
+- **Static regret improves while native J, service tails or cost worsen.** Retain the static capability and reject the corresponding adoption inference. Examine the already-paid matching and trajectory evidence; another static-data enlargement would not directly answer the exposed mismatch.
+- **A learner occasionally exceeds RawJ in native return.** Preserve the benefit, but do not call it learned full-episode consequence prediction. RawJ optimizes a different endpoint objective, and the learner receives no native-return training labels.
+
+These branches make the observation decision-relevant without requiring a positive result. The necessary revisions I identified—candidate exposure and entropy-aware reading, scientific retention of raw-to-matched differences, a relevant cheap ordinary reference, and a closed P replay bill—are now explicit in `1e4395456`. I recommend proceeding through bounded implementation, engineering review and actual resource admission with this revised contract. I do not recommend another selection loop or an added arm.
+
+**MATERIAL_DISSENT: no.** I support the revised B04 investment once. My consequential objection remains to extrapolating its finite-budget curve into a unique bottleneck, general scaling law or automatic larger follow-up; the present contract does not require those claims.
+<!-- END exact B04 scientific review -->
+
+DM disposition: read the entire original answer and adopt its recommendation once, with all revisions already published at1e4395456. Root selected the question and delegated this resolved in-scope construction; MATERIAL_DISSENT:no leaves no further scientific approval step. B04 now selects six final fits and the complete revised data/native/reader observation, not a positive verdict. Its fixed-budget coverage/repetition tradeoff is the intended estimand; common-probe weakness, never-sampled alternatives, divergent streams and native reversals remain readable limitations. No automatic follow-up or extrapolated single-bottleneck claim is selected.
+
+Two implementation clarifications keep the original advice precise. The7GiB cap is the complete allocated-byte scope declared in B04_INPUT.json, including this source snapshot, the direction canonical runs, the one retained model object and own scratch; it is not7GiB of freely additive new data on top of those retained bytes. P reading uses an independently written control reconstruction from the pinned search semantics and the paid ordered query/state/response trace, rather than calling the production selector as its own proof; it still does not independently recompute every P radio response. Raw8J static choices/regret on all512 fresh worlds can be read from the already-paid full label bank, without extra online queries; its cold/native measurements remain128 worlds. Main static-call counters refer to the explicit static_evaluate interface; implicit host/reset/radio/reward work is separately counted and CPU-priced.
+
+The L0 above and machine manifest give the bounded implementation task. Pure/mock checks precede launch; all real model/native/RNG correctness happens only under the published admitted study and the declared allowances. The exact7-source hash checks and Raw8 helper-function comparison in preparation created no scientific outcomes. B04 counts at selection:0fits,0static calls,0native steps,0model forwards.
