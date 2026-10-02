@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "observer_daemon_pid": 531710,
+  "observer_inactive": true,
+  "before_allocated_bytes": {
+    "temp/directions/uav_decision_generalization/b03_observation": 122880,
+    "experiments/candidates/uav_decision_generalization/b03_joint_window/__pycache__": 221184,
+    "tests/experiments/candidates/uav_decision_generalization/b03_joint_window/__pycache__": 81920
+  },
+  "after_allocated_bytes": {
+    "temp/directions/uav_decision_generalization/b03_observation": 0,
+    "experiments/candidates/uav_decision_generalization/b03_joint_window/__pycache__": 0,
+    "tests/experiments/candidates/uav_decision_generalization/b03_joint_window/__pycache__": 0
+  },
+  "deleted_target_bytes": 425984,
+  "retained_observation": "observation-final.json",
+  "note": "All jobs terminal and events consumed; source/test bytecode and obsolete preparation scratch only. No raw/checkpoint/check files removed.",
+  "this_record_allocated_bytes": 4096,
+  "net_allocated_bytes_reclaimed_after_this_record": 421888
+}

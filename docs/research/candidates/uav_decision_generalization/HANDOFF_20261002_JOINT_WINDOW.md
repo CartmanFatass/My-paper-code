@@ -1,332 +1,238 @@
-# Joint-window direction — in-progress handoff snapshot
+# Joint-window direction — final handoff boundary
 
-**Update — 2026-10-02 11:54 UTC:** the same worker completed exit0 at11:18:16UTC,
-with3fits/1196000native/615600optimizer steps,135 training rollouts and232 frozen
-missions. Its canonical output remains; disposable worker snapshot was removed
-by verified GC, reclaiming1813323776B. Complete reader is now accepted/running:
-source`4fe4d7b10d28184c25590d5448f7c6eae5100880` (same45 scientific hashes),
-operation`/home/wu/projects/HMASD/.git/hmasd-admission/3c2304fb1119d6da9ad827bbe006fbd4aa12841e59fecd5f1c4eac416a719401.json`,
-output`/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_read_a01`,
-snapshot`.git/hmasd-launch-sources/89f42cc796054e9883dbaafc384af1ec`,
-supervisor/runner1338532/1338533. Use this operation for current status;
-worker's original operation is terminal and must never be restarted. Observer
-is the same owned state below, generation9, job`b03-joint-window-read-a01`,
-request`reader-request.json`; actual running facts were drained. New exact
-inputs are`B03_WORKER_INPUT.json`/`B03_AFTER_WORKER_LEDGER.json`, bound in
-[reader admission](NOTES.md#b03-reader-accepted). Reader has0native/fit/optimizer
-scope; all135 training rollouts checked, frozen reconstruction still underway.
-The scientific result, independent diagnosis and final cleanup are not complete.
-The original09:47 snapshot below is retained as history; this update and subsequent
-live state supersede its process/progress descriptions. All no-restart, ownership
-and frozen-contract limits continue.
+**Final snapshot: 2026-10-02 13:17:59 UTC. B03 is technically and scientifically complete.**
+The three-fit worker, original failed reader and repaired completion reader are
+terminal; complete reading, DM interpretation, the sole independent scientific
+diagnosis and measured cleanup are published with this document. There is no
+live operation, unread result, pending observer event or selected B03 successor.
+This supersedes the09:47 and11:54 in-progress snapshots retained in Git history.
+It does not pause research, transfer the owner/lead, restart or migrate a worker,
+or authorize a new fit. Later actual state and current RESEARCH ownership/pause
+always take precedence. Root owns the consolidated handoff and next startup prompt.
 
+## Question, responsibility and disposition
 
-Owner requested this document during an accepted operation. Snapshot read at
-**2026-10-02 09:47:05.525703 UTC**. This is not a pause, a transfer of ownership,
-a terminal result, or permission to terminate/restart the worker. The existing
-DM continues authorized work. Subsequent on-node facts and the current owner
-pause/lead in `docs/research/RESEARCH.md` take precedence over this snapshot.
-Root owns its separate consolidated handoff and next-Root startup prompt.
-
-## Responsibility and current scientific question
-
-Direction: `uav_decision_generalization`, exploring; stable launch lead
-`Codex DM (native child)`. Actual native DM address:
+Direction `uav_decision_generalization` is reserve after its fixed purchase;
+stable lead is `Codex DM (native child)`. DM address
 `/root/dm_decision_generalization`, UUID
 `01a0f9f4-0ebf-7481-9bf4-3933f2e9fcd7`, registered
-`hmasd-direction-manager`, actual Astra/max. Parent Root UUID
-`01a0f779-ace2-74e1-85ad-e0997b61d505`. Do not replace an unfinished lead,
-create a duplicate DM, or assume a recorded address is an App-messaging permission.
-Internal native communication remains the assigned coordination route.
+`hmasd-direction-manager`, actual `gpt-6-astra/max`; parent Root UUID
+`01a0f779-ace2-74e1-85ad-e0997b61d505`. Internal native communication is the
+assigned route. A recorded App address is not permission to message it. If the
+owner later archives this completed DM, follow the current constitution/AGENTS
+successor rule instead of restoring it merely to create new work.
 
-The enduring responsibility is learned UAV decision capability and complete
-usefulness, including generalization and cooperation with ordinary control under
-explicit information/experience/compute rights. The one active result-bearing
-study is **UAV-JOINT-WINDOW-B03**: can original native hierarchical HMASD, the same
-hierarchy without discriminator reward, or the original complete SET learner
-acquire useful persistent joint service on a newly specified sparse-window task?
-One instance of each is bought, not an algorithm-level confirmation or 32
-independent fits. No positive result is owed, and failure does not silently buy
-more seeds, a new head, shaping, an easier world or a longer fit.
+The continuing question is whether learned UAV decision modules acquire reusable,
+complete service capability at explicit information, experience and computation
+costs. The completed B03 asked whether native H, the same hierarchy without
+its discriminator reward, or original full SET acquires useful sustained joint
+service. Each had one360k-step fit;32 deployment worlds are not training repeats.
 
-The complete prospective contract is
-[NOTES: joint-window-prospective-contract](NOTES.md#joint-window-prospective-contract),
-commit `1c1ba086fb1275eb9ee9de07d6260a9e880a456f`.
-Root and one applicable independent ResearchCritic selected it in
-`6a8da6e5351fbcc518a173156686c028a02dd273`; see
-[accepted disposition/L0](NOTES.md#b03-selected-disposition) and the full
-[unedited scientific opinion](NOTES.md#b03-independent-selection-original).
-The review reused its existing context, explicitly not blind; actual Astra/max
-turn `01a0fb33-300c-7f40-908f-7dc3a947d587`, original13093 UTF-8 bytes,
-SHA256 `62787648765ac42ad7f07470e8cff62d6305fac562b1b675ea3626185f017799`.
-MATERIAL_DISSENT:no for this actual contract; there is no second selection gate.
-Root handles cross-question changes/shared controls; ordinary authorized execution,
-reading, publication and cleanup require no per-fit Root approval.
+**O completed128/128 fresh windows; H/noD/SET final completed5/6/4**, versus
+H/noD initial5, SET initial2 and sticky B11. H−noD mean W is−.03125 with
+conditional t95[−.22518,.16268]; H−SET is+.03125[−.11309,.17559]. No useful
+complete learning gain or algorithm equivalence is established. End the unchanged
+three-fit purchase and adopt none of its learned finals. O supplies an actual
+lawful full-task capability and much shorter travel, but its mean world maximum
+same-user gap is364.344ticks: once-only windows do not mean all50 users stay
+continuously served. There is no path-optimality or energy/safety conclusion.
 
-## Claude proposal: adopted question, material changes preserved
+Training had62/71/62 real payments and substantial parameter movement. Yet
+121/120/120 of128 final windows never even reached eight active backhauled users.
+The result is chiefly failure to form qualifying joint configurations, not merely
+a19-versus20-tick holding failure. Rare genuine learned multihop improvements and
+strong adverse worlds are retained. All161 main paid segments actually contained
+at least eight same identities for20ticks, though the contract did not require it.
 
-The imported Claude proposal/report/prompt/toy are read-only assets at commit
-`420381b1a`, chiefly
+All45 H/noD pre-rollout RNG states and their starting RNG are exactly equal;
+the first whole rollout's actions, positions, skills and payments agree. The
+paired discriminator-reward intervention changes later policies and experience,
+not the saved RNG identity. Final raw entropy and clipping grow in all three
+fits, but this does not identify a common cause or an automatic head/entropy fix.
+
+Read [complete DM interpretation](NOTES.md#b03-complete-reading),
+[unaltered independent answer](NOTES.md#b03-independent-result-review),
+[DM disposition](NOTES.md#b03-independent-disposition) and
+[final cleanup/accounting](NOTES.md#b03-final-cleanup). The sole result critic is
+Root's `/root/next_study_review`, UUID`01a0f9fe-de22-7d73-82c2-129a0cadede6`,
+actual Astra/max turn`01a0fc74-3b8a-7213-a0bd-467a95dc6031`, completed
+2026-10-02 13:05:42.675UTC. Its15010-byte original has SHA256
+`35dba162884c32733abdf7e43367ab15c8186413f7869763325c0f3caf77988e`,
+MATERIAL_DISSENT:no for this disposition. This reused context was not blind.
+
+## Claude proposal and frozen native contract
+
+Read-only imported Claude proposal/report/prompt/toy source is`420381b1a`, chiefly
 `docs/Claude_docs/environment_design/SPARSE_WINDOW_RELAY_SCENARIO_DESIGN_20261002.md`
-and its `deliverables/BRANCH_REPORT_claude_inspiring_ritchie_2kj46g_20261002.md`.
-Claude remains paused and peer-owned. We adopted the useful idea of an explicit
-sparse, temporally sustained, joint relay-service use. This is not a verbatim run
-of its toy or its originally priced native recipe.
+and `deliverables/BRANCH_REPORT_claude_inspiring_ritchie_2kj46g_20261002.md`.
+Claude's paused direction remains untouched. We adopted its sustained joint relay
+question, with the following explicitly selected changes rather than copying the toy:
 
-The selected native instance is N6/U50/H500/k10 with primitive continuous actions,
-four125-tick windows, each visiting a different far cluster in a world-seeded
-permutation. A window pays1 on its first run of20 consecutive post-routing ticks
-with at least8 of its10 users backhauled; maximum4. The same eight users need not
-persist, so all50 individual service masks and first/last censored gaps remain
-required. Dense learning reward is0; each agent receives external R/6.
+- N6/U50/H500/k10, primitive continuous actions; four125-tick windows each visit
+  one of four different corner clusters in a seed-addressed permutation. First
+  run of20 completed post-routing ticks with≥8/10 active users backhauled pays1,
+  at most4. Retain all50 users' masks and first/last-censored gaps.
+- Bounded corner jitter±50m and disk100m replaced unbounded sampling; ten near-BS
+  users retained. No rejection sampling, random-hit calibration or extra toy.
+  Actual world identities are fixed in `B03_STUDY_INPUT.json`: training
+  109210000…109210719, fresh109220000…109220031, audit109229000.
+- Registered coordinates plus complete schedule add404B (400 little-endian int32
+  coordinate bytes plus4 order bytes), **not the full communication bill**.
+  Existing local direct-BS/hop information and10-tick held global snapshots remain.
+  H and SET retain their actual internal information routes. Inputs are obs211,
+  state154, SET actor1637; no actor receives true full ACK/routes/private ledger.
+- Ledger advances only once after native post-routing completion, never inside
+  multiply-called `_compute_reward`. Dense learning weight0; externalR/6.
+  Native d2 high level receives discounted external segment return with elapsed
+  bootstrap; only low level mixes discriminator rewards. The toy instead shared
+  one return across levels and counted intrinsic reward every10steps. Its.125
+  any-hit episode rate was not window rate (.131/5=.0262). No automatic×4,
+  count bonus, decoy, fourth arm or revised difficulty was adopted.
+- H/noD/SET each16×500×45=360000 train steps. noD removes only discriminator
+  reward while retaining classifier training. Complete initialization/input/RNG
+  identity permits H/noD initial-panel aliasing; the audit is wiring evidence,
+  not an accidental-equality proof. Original **unbounded DiagGaussian** is retained:
+  nominal−20/2 fields are ignored, no clamp added, host clips to the unit ball.
+- O is implemented scheduled ray-chain control, not a named theoretical ceiling:
+  BS-to-cluster1/3 and2/3 slots at z100, initial deadline-priority matching to
+  three pairs, first pair redirected at t130 to the fourth cluster. Steering and
+  matching use lawful decoded observation/held-state positions. Sticky B keeps
+  ordinary random waypoint targets with probability.9 per10-tick decision.
 
-Bounded corner clusters, fixed disk sampling and seed-addressed order replace
-unbounded Gaussian jitter and any random-hit-rate calibration. No rejection
-sampling, pilot difficulty tuning or O gate was bought. Analytic geometry rules
-out a single direct-BS UAV serving a far cluster, while the executable ray-chain
-ordinary programme offers a substantive joint opportunity. This does not prove
-learnability, certify O as an optimum, or establish its score before execution.
+Original prospective contract`1c1ba086fb1275eb9ee9de07d6260a9e880a456f` is
+[here](NOTES.md#joint-window-prospective-contract); selection`6a8da6e5351fbcc518a173156686c028a02dd273`
+and [accepted L0](NOTES.md#b03-l0) remain unchanged. No scientific selection was
+repeated for routine execution or the faithful reader-copy repair.
 
-The packet adds400 little-endian int32 coordinate bytes plus4 schedule bytes.
-**404B is additional task information, not total communication cost.** Existing
-local direct-BS/legacy-hop bits and every10-tick held global snapshot remain.
-Original H and complete SET retain their different internal routing of the same
-external rights. Actor inputs do not acquire true full ACK/routes or private
-progress/payment state. Input dimensions are obs211/state154; SET actor1637.
+## Evidence and operation identities
 
-Window accounting advances only once after a completed native post-routing step;
-`_compute_reward` can be called twice by the host and never advances the ledger.
-H d2 high-level reward uses segment-discounted external R/6 and gamma^elapsed
-bootstrap; only low-level reward mixes discriminator terms. The toy used a common
-return across levels and a different reward clock. Its .125 figure was an
-any-hit episode fraction, whereas .131/5=.0262 was window completion fraction.
-No mechanical ×4, count bonus, decoy arm, four-arm expansion or calibration chain
-was adopted. Original Gaussian logstd is unbounded: its nominal −20/2 config
-fields are ignored by DiagGaussian, and implementation must not add a clamp.
+Node is `wsl_4070`, SSH`hmasd-wsl-node`; canonical checkout
+`/home/wu/projects/HMASD`; configured interpreter
+`/home/wu/.venvs/hmasd-gcc-31021/bin/python` (Python3.10.21,NumPy1.26.3,
+Torch2.7.0+cu118). Execution was CPU,4torch/1interop/1BLAS,0GPU. The canonical
+remote checkout has old Git HEAD/controlled overlays/partial clone. Do not
+merge/reset it, change sparse checkout, alter shared runtime or recreate a source
+snapshot for convenience. Historical preparation used the configured whole
+`zsh -lic` shell to hydrate exact published Git objects.
 
-Three fits are H / H-noD / SET,360000 native each,16 lanes×500×45 rollouts. noD
-only suppresses discriminator reward and retains classifier training. H/noD share
-complete initialization and starting training RNG; natural post-intervention
-trajectory/random-stream divergence is allowed. Their initial evaluation alias
-is proven by complete module/normalizer/config/RNG/input identity, with an audit
-mission verifying wiring rather than proving identity by accidental equality.
+| Object | Source / terminal fact | Original operation filename under canonical `.git/hmasd-admission/` |
+|---|---|---|
+| Worker `b03_joint_window_a01` | `300c58af8e5648fb1c98edbd3618f8f964052dda`; exit0 at11:18:16.154592UTC | `d586acfdbb3862d3afd87e0d601bba0f91f350d860eb29073cea51ac68c87b93.json` |
+| First reader `b03_joint_window_read_a01` | `4fe4d7b10d28184c25590d5448f7c6eae5100880`; exit1 at12:05:51.106813UTC | `3c2304fb1119d6da9ad827bbe006fbd4aa12841e59fecd5f1c4eac416a719401.json` |
+| Completion `b03_joint_window_read_a02` | `2056aa1fa12cab3cb42fae13f495fad54422b1a6`; exit0 at12:37:28.537646UTC | `75c596fb189b0d94432f813b52d1a21474e1d836fd539100b214d97340655a66.json` |
 
-Ordinary O is the complete scheduled ray-chain: BS→cluster one-third/two-thirds
-slots at z100, deadline-priority matching of the initial six UAVs to the first
-three cluster pairs, first pair released at t130 for the fourth cluster, and
-fixed bounded steering. B is the specified sticky-random waypoint programme.
-Matching uses legal held float32-state positions decoded to float64; steering
-uses current own-observation positions. No privileged true position is supplied
-to either controller. If O is weak, inspect already-paid arrival/association/
-routing/ledger facts before claiming task opportunity was absent; do not retune it.
+All times are2026-10-02UTC. Original supervisor/runner pairs
+1324328/1324329,1338532/1338533,1340545/1340546 are absent with consistent valid
+exit witnesses. The original worker was never restarted, replaced or spliced.
+Canonical output roots are `/home/wu/projects/HMASD/runs/uav_decision_generalization/`
+plus the exact three tags above. In this checkout the same relative `runs/` paths
+contain compact admissions, configs, manifests, statuses, readings and receipts.
 
-## Prior positive and adverse evidence to inherit
+The immutable worker entry is
+`experiments/candidates/uav_decision_generalization/b03_joint_window/run.py --mode worker`.
+Study input`B03_STUDY_INPUT.json` SHA256
+`1ef2de83078f508afbea8b023bff35fa9bb5587ef176c5e8b138b85182d43783`.
+Worker config SHA256`0bc410effb3e254ea38f5f23186e5ed975a5492251f333ad059c56932e228e88`;
+manifest`6d572b218c091ccd5ca2b8e305c0b1dc074f45efdd24c51029d4edbaa5ac1c95`;
+summary`2fe984bf5c203b2b450237c1304a0b074f24c604e7adfe7153f02f1a9a263ae9`.
+The45 original scientific-source identities are in config/study input.
+`B03_WORKER_INPUT.json` binds the external canonical output, SHA256
+`6b71d289ad964b847c14337ba1c1b61df4f129c342cc1a09aa2f838be28a7e49`;
+this avoids launcher rebinding a raw path into a disposable source checkout.
 
-B01 A/R is complete, independently read and cleaned. It retains R's limited
-same-distribution fresh-world decision capability from already-paid training
-experience, while ordinary/static strength, only three training blocks and
-optimization/capacity-package alternatives constrain use. It did not isolate
-geometry or permutation as the cause, and its strong static comparator was only
-about4.3ms incremental compute. Old B01 test worlds were exposed development;
-no forward on that test panel was added by A/R. A/R early stopping/candidate
-migration were deferred, not disproved or automatically queued.
+The first reader failed at O/world109220001 exact executed-action equality,
+error2.220446049250313e−16. The host copies each three-vector before norm; the
+old reader used an array row view, whose alignment changed the norm around1 and
+the strict>1 branch. Source2056aa1fa adds the same copy, without tolerance changes.
+`B03_READER_PREFIX.json` binds every old302 completed check and old/new source;
+`B03_READER_COMPLETION_INPUT.json` binds46 source identities. All reused movement
+was rechecked exactly and65 remaining ordinary missions fully read, with no new
+native steps or repeated neural replay. Original failure, raw and prefix stay.
+See [failure/repair](NOTES.md#b03-reader-failure-and-repair-l0).
 
-B02 fixed S/C cooperation is also complete, independently read and cleaned:
-S0/S1−G native J was approximately+.015207/+.022376 with better service/path,
-while S1 had+1.71875 never-served users. Bstar retained a useful coverage/gap
-tradeoff at greater movement. Z(S0)−S0 was uncertain; Z(S1)−S1 was−.007453 J,
-and Z(G)−G was−.0047189. Z(S)>Z(G) was not newly established cooperation.
-A four-takeover counterexample and a positive team case with worsened local own
-service refute an explanation based solely on long takeover or own-count rescue.
-The fixed Z purchase ended; there is no automatic revised gate or extra fit.
-See [B02 independent disposition](NOTES.md#b02-independent-disposition).
+Final local/canonical `b03_joint_window_read_a02/reading.json` SHA256 is
+`eab3cdeff541f4849f6086e5752d0ea9ad59b6e29ab7765a9b047bce5d356c69`;
+summary SHA256`968f1f5458dee44ad7d93010a155eadf35719eac167e80d7644eaca47929d15d`.
+All232 frozen missions,135 training rollouts/2160 missions,28 pairwise comparisons,
+initial/final gaps and native tails are read. `dm-native-cases.json` binds70 full
+selected native examples. Canonical raw is `raw/frozen/<programme>_<world>.{json,npz}`
+and `raw/training/<arm>/rollout_01…45.{json,npz}`. Five distinct checkpoints,
+including both initial identities, remain under the worker root. noD initial is
+H initial by identity, not a missing sixth artifact.
 
-Old per-step H/SET had heavy clipping and poor ordinary-policy replacement:
-H holdout coverage about.211–.235, SET about.132–.225, and roughly2809–2926
-clipped UAV steps per3000 in deterministic missions. SET already had held global
-information. New sparse R/6 does not erase this adverse prior. Neither a task
-change nor a failed adoption rule erases S0/S1, Bstar or R's retained capabilities.
-The separate typed B04 pre-fit SIGSEGV is technical evidence, not a B03 learning
-negative or permission to modify the shared runtime.
+## Observation, exact cost and cleanup
 
-B01 A/R cost:6 fits,1736000 native, approximately.814449 measured CPUh and.03709
-reserved GPUh. B02 cost:0 fits,126976 native,306.282345 measured CPU seconds.
-Their unique evidence and cleanup records stay in NOTES/runs; current B03-specific
-accounting does not reset this question's accumulated investment.
+For an actual inconsistency, query an original handle, for example:
 
-## Exact accepted operation and inputs
-
-| Item | Frozen identity/location |
-|---|---|
-| Scientific source | `300c58af8e5648fb1c98edbd3618f8f964052dda` |
-| Entry | `experiments/candidates/uav_decision_generalization/b03_joint_window/run.py --mode worker` |
-| Study input | `docs/research/candidates/uav_decision_generalization/B03_STUDY_INPUT.json`, SHA256 `1ef2de83078f508afbea8b023bff35fa9bb5587ef176c5e8b138b85182d43783` |
-| Initial measured ledger | `docs/research/candidates/uav_decision_generalization/B03_INITIAL_LEDGER.json`, SHA256 `800d51f79bad915acf7e26143dc27393c15c28afe3793b9e637512e433c8279e` |
-| Wrapper seed identifier | `109230101`; per-arm/world RNG addresses are frozen in the study input |
-| Node | `wsl_4070`, SSH `hmasd-wsl-node`, canonical `/home/wu/projects/HMASD` |
-| Runtime | `/home/wu/.venvs/hmasd-gcc-31021/bin/python`, CPython3.10.21, NumPy1.26.3, Torch2.7.0+cu118; CPU4Torch/1interop/1BLAS,0GPU |
-| Worker output | `/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_a01` |
-| Operation/claim | `/home/wu/projects/HMASD/.git/hmasd-admission/d586acfdbb3862d3afd87e0d601bba0f91f350d860eb29073cea51ac68c87b93.json` |
-| Acceptance | `2026-10-02T07:40:45.355283Z` |
-| Supervisor/runner | PIDs1324328/1324329; use manifest boot/start identities, never PID alone |
-| Immutable source snapshot | `/home/wu/projects/HMASD/.git/hmasd-launch-sources/728d72485d07492e9ed7caefcf74c5d7` |
-| Manifest SHA256 | `51a801611b40ef8de14bdb197e6afa079f3e444d4efae99aef041377e5e6e6c6` |
-| Config SHA256 | `0bc410effb3e254ea38f5f23186e5ed975a5492251f333ad059c56932e228e88` |
-| Published acceptance records | `60c9bb4ac842e2c7d97b6d64c66dd65d0a04ed98`; local compact files under the same runs tag |
-
-Study input binds45 local scientific/dependency sources. H/noD retained parameters
-are5809237 each; SET5290059 includes its inactive coordinator. Local engineering
-was22.08 measured CPU seconds,3 model constructions,0 real forwards/native/fits/
-optimizer steps;24 distinct pure tests/35 staged executions. P2 direct PPO actor
-presentation accounting was repaired and independently re-read; no material
-engineering finding remained. Original factory bytes and unbounded head were
-retained. See [engineering acceptance](NOTES.md#b03-engineering-acceptance).
-
-Before admission, preparation-a01 lost nested shell quoting in agent-task and
-could not open the launcher; preparation-a02 was refused because my published
-Active row omitted its closing pipe. Both had0scientific effects and no claim.
-The current RESEARCH writer fixed the pipe in `f7522d3cd4e60c3795fcaa5d3d4b34dd54f2b07b`;
-science remained300c58. Third preparation finished exit0 in31s and produced the
-sole accepted operation above. Failed preparation records remain in
-`runs/uav_decision_generalization/b03_engineering_a01/`; do not confuse them with
-failed/duplicate scientific fits.
-
-The node's canonical checkout has an old HEAD and controlled dirty overlays.
-**Do not reset/merge it, change sparse selection, replace its interpreter, or edit
-an admitted snapshot.** Fresh preparation uses the configured `zsh -lic` for the
-whole command because its Git clone is partial. `agent-task` joins argv with
-spaces; pass one correctly shell-quoted complete command to that supervisor.
-The maintained source-materialization repair is already deployed. New snapshot
-peak is about1.8GiB, not the old sparse copy estimate. Current live policy must
-agree with published pause/state/lead even if its prose is older.
-
-## Progress at the snapshot, not a result
-
-At09:47:05UTC the canonical summary was STARTED, error null, with no exit witness.
-H fit was COMPLETE with45/45 saved rollouts and360000 training transitions; its
-33 final missions were also collected. H-noD was executing rollout27/45, with26
-complete. Thus1/3fits complete,2/3started, SET not yet started. Cumulative counts:
-601500 native =568000 training+33500 frozen;71 rollout updates;159750 actor and
-159750 critic optimizer steps;51.12M direct actor agent-tick presentations.
-Measured worker CPU was28913.067836s≈8.0314CPUh, cumulative with engineering
-28935.147836s, saved wall7274.186943s and peak RSS2955396KiB≈2.82GiB;0GPU.
-These counters describe technical progress. They are not an interpretation of
-learning, final policy quality or a completed three-way comparison.
-
-Full purchase remains3 fits,1196000 native and615600 optimizer steps:
-1080000 training plus7 unique programmes×32fresh worlds×500 and8audit×500.
-H/noD initial panel aliasing avoids exactly32×500=16000 redundant native
-transitions; the H-noD initial audit remains explicitly charged.
-Main fresh worlds are109220000…109220031, audit109229000; training worlds follow
-109210000+16episode+lane. Initial/final model panels are sampled, fixed-address
-RNG and zero-update. Endogenous discriminator labels are charged; “0new labels”
-only applies to external teacher labels, not those training targets.
-
-The total forecast remains18–26CPUh and16–28support hours,0GPU. Current pace does
-not require a material re-estimate. It is a forecast, not an unlimited extension
-or a universal10h cap. Storage forecast is2–4GiB unique evidence plus source
-snapshot; final actual retained/removed bytes remain to be measured. Unmetered
-source/review/publication/preparation support is not reported as zero. Available
-physical/effective RAM at runner start was12622876672B, above the8GiB request.
-
-## Observe the same operation; never replay it for convenience
-
-Read-only actual-node status works without relaunching:
-
-```bash
-ssh hmasd-wsl-node /home/wu/.venvs/hmasd-gcc-31021/bin/python \
-  /home/wu/projects/HMASD/scripts/hmasd_launch.py status \
-  /home/wu/projects/HMASD/.git/hmasd-admission/d586acfdbb3862d3afd87e0d601bba0f91f350d860eb29073cea51ac68c87b93.json
+```sh
+ssh hmasd-wsl-node /home/wu/.venvs/hmasd-gcc-31021/bin/python   /home/wu/projects/HMASD/scripts/hmasd_launch.py status   /home/wu/projects/HMASD/.git/hmasd-admission/d586acfdbb3862d3afd87e0d601bba0f91f350d860eb29073cea51ac68c87b93.json
 ```
 
-The DM's observer lives at
-`/home/fires/hmasd-wsl/temp/directions/uav_decision_generalization/b03_observation/state`;
-request is the adjacent `worker-request.json`. Stable job is
-`b03-joint-window-a01`,60s read-only probes,1500s checkpoint windows. At the
-snapshot it was generation4, running, not stopped, with no pending event/wake.
-The first three checkpoints were drained and rearmed against the same claim.
-Queue delivery to this spawned child reports `unloaded spawned sub-agents`;
-registration is not a reliable future wake. Keep the native turn active, use
-native waits and manually drain/rearm at checkpoints rather than return early.
+Do not launch a duplicate, retry the old failed reader, recompute the full panel,
+or copy bulk to regain context. Final deterministic observation is stored in
+`runs/uav_decision_generalization/b03_joint_window_read_a02/observation-final.json`:
+generation12, all events consumed,0events, stoppedtrue, daemon531710 inactive.
+The historical state path
+`temp/directions/uav_decision_generalization/b03_observation/state` was deleted
+after stop/drain. **There is now nothing to rearm.** The earlier same-handle
+`hmasd_wait.py` observation method remains in NOTES/history but is not a current
+wake guarantee or continuation instruction. Any future actual accepted operation
+needs its own bound observation; B03 has none pending.
 
-From **the original owning DM runtime**, use:
+Measured B03 CPU is52360.783838954s=14.544662177h,0GPU. It includes worker
+49889.033756s, failed reader2396.885812s, completion50.777541s and measured
+engineering/tests/collection/self-reading. Independent critic valid saved-data
+arithmetic is about2.75s separately; one invalid timing and incompletely measured
+authoring/control/review/cleanup support are not zero. Original forecasts
+18–26CPUh/16–28supporth are not exact retrospective totals or permission to spend
+more. Frozen totals:3fits,1196000native,615600optimizer steps,97.2M PPO actor
+presentations; reader83000 model-team steps and actor/critic498000 rows **each**.
+Failed reader work is charged; completion adds no model/native/fit/optimizer.
 
-```bash
-python3 tools/hmasd_wait.py drain \
-  --state-dir temp/directions/uav_decision_generalization/b03_observation/state
-python3 tools/hmasd_wait.py rearm \
-  --state-dir temp/directions/uav_decision_generalization/b03_observation/state \
-  --generation RETURNED_GENERATION --wake-id RETURNED_WAKE_ID \
-  --event-ids ALL_RETURNED_EVENT_IDS --window 1500
-```
+Verified cleanup removed all three terminated source snapshots (worker
+1813323776B, failed reader1824731136B, completion1824899072B), factory scratch
+23531520B and obsolete observer/bytecode425984B. Less4096B retained local receipt,
+**scoped net allocated reclaim is5486907392B=5.110081GiB**. This is not an
+uncontrolled whole-disk free-space claim. All targets and source registrations
+are gone; no live consumer was found. Read
+[cleanup details](NOTES.md#b03-final-cleanup) and the JSON receipts alongside the
+final reading. Required unique canonical evidence remains in place:
+worker1381232640B, failed-reader17018880B, completion2686976B allocated including
+directories, total1400938496B. No whole-tree backup/tar/retention chain exists.
+Useful implementation,734 raw/metadata files,five checkpoints,old302 and new65
+checks, adverse results and failed records are retained. There is no cleanup blocker.
 
-Read every returned event first. Use current returned identities, not generation4
-hardcoded from this document. A terminal event means collect/read, not rearm or
-restart the science. Handle unknown or failed observation against this same
-operation; never infer missing acknowledgement means no worker. The observer
-checks CODEX_THREAD_ID ownership. A different successor runtime must not spoof
-that variable or modify this owner's state; coordinate the actual role/observer
-handover, preserve the operation, reconcile/retire only the old observer, and if
-needed register one new read-only observer under the legitimately assigned
-runtime. This document alone does not transfer ownership or authorize that action.
+## Inherited evidence and next boundary
 
-Local acceptance/config/source files are SHA-verified compact copies. A local
-`summary.json` may be the old3500-transition progress copy; the canonical node
-summary and terminal witness are authoritative. Do not read it as a final result.
-No raw/checkpoint has been duplicated locally for convenience.
+B01 A/R retained R's limited same-distribution generalization on paid training
+experience, with strong ordinary/static competition, three training blocks and
+capacity/optimization-package alternatives. It did not identify geometry or
+permutation causally. B02 retained S0/S1 service/path and Bstar coverage/gap uses;
+fixed Z failed to improve S0 and harmed S1 while Z(G) itself worsened. Do not
+reopen Z or erase those capabilities because a different PPO task failed.
+Their paid costs stay: A/R6fits/1736000native/about.814449 measuredCPUh/.03709
+reservedGPUh; S/C0fits/126976native/306.282345 measuredCPU-s. Full positive/adverse
+sources and prior cleanups are linked in NOTES, not copied here.
 
-## Remaining work and what can change
+Old Claude native bounded-speed SET-V(.2099 coverage), target SET-T(.3571 versus
+random-target.3652) and zero-entropy SET-T(.3496,−.0075 paired versus prior) already
+changed clipping/noise without establishing useful learning. They are different
+dense-task contracts, not B03 counterfactuals; nevertheless no successor may call
+bounded actions, zero entropy or waypoints an untried obvious cure. Preserve the
+later correction that falling sigma does not prove an unused mean or failed
+precision. Do not edit Claude assets or its pause.
 
-1. Finish observing this sole worker. On exit, reconcile supervisor/runner boot
-   identities and original terminal witness, preserve any exception/partial raw,
-   and read native/model/optimizer counts before declaring technical completion.
-   Failure is not an automatic retry or authority to supplement missing missions.
-2. Verify the manifest's unique canonical raw and five distinct initial/final
-   checkpoint sources (H/noD initial alias plus three finals and SET initial),
-   all135 training rollouts and232 frozen missions. Collect compact evidence and
-   hashes; preserve original arrays and adverse/failed records in one location.
-3. Publish the declared canonical worker locator JSON and cumulative cost ledger,
-   then admit the separate reader at planned tag`b03_joint_window_read_a01` using
-   the frozen owned entry's `--mode reader`. The locator's contents hold the
-   canonical worker path/config/summary/manifest hashes; do not pass old canonical
-   raw paths as absolute argv, which source snapshots rebase. The implemented
-   reader requires the worker's45 scientific source hashes unchanged. A necessary
-   repair is recorded and priced explicitly, never silently bypasses that check.
-4. Reader reconstructs all232 saved missions' legal inputs, action/RNG/hidden
-   states, ordinary commands, movement, association, routes and37310472 frozen
-   geometric relations, plus every training ledger and d2 external-reward segment.
-   It performs0new native or optimizer work, but has real model/CPU cost. Read all
-   outcomes, all-user masks/censored gaps, conditional world contrasts and native
-   positive/adverse/zero cases. Distinguish gain from initialization, H−noD,
-   H−SET, ordinary usefulness and package/seed confounds.32 worlds are conditional
-   deployment samples; one fit per arm remains one training comparison block.
-5. Arrange one applicable independent substantive result diagnosis. Root has
-   `/root/next_study_review`, the original Astra/max ResearchCritic with actual
-   selection/source context, available for reuse. It should reconstruct original
-   evidence before comparing the DM's explanation. Do not stack a new selection
-   or duplicate critic; preserve its full original answer and the DM disposition
-   in NOTES, including uncertainty or dissent.
-6. Publish complete compact results, own RESEARCH standing and any useful directly
-   affected shared-background correction. Then measure retention and cleanup:
-   after terminal/collection/live-consumer checks, use maintained snapshot GC on
-   the exact source snapshot; remove only owned disposable scratch/caches and
-   redundant data. No whole-tree archive or backup chain. Keep required unique
-   raw/checkpoints and all adverse/failed evidence. Report actual targets and net
-   allocated bytes reclaimed separately from blockers. The factory scratch alone
-   has already reclaimed23531520B; worker snapshot is live and must remain.
-7. Return the substantive result boundary to Root with evidence, changed judgment,
-   unresolved alternatives and a reasoned next-investment recommendation. The
-   broader learning responsibility continues; a recipe finishing does not either
-   end the question or automatically authorize another fit. Cross-question pivots
-   go to Root. A weak O requires diagnosis from paid traces, not a new O pilot.
+Root owns the next cross-question allocation. The critic's frozen SET mean-action
+initial/final candidate has a32000-native core cost but no closed reader/audit/
+support budget; Root has **not purchased it**. No new head fit, seed, longer
+exposure, imitation or evaluation follows automatically. No unfinished B03 task
+needs another DM, critic or operator. A worthwhile successor must specify what
+new complete capability or understanding it can change and inherit this evidence;
+the ordinary scientific selection applies to that actual proposal.
 
-The DM may modify owned documentation, future compact readers/correctness repairs
-and result interpretations through the applicable methods. Frozen active-source
-bytes, world IDs, learner head/config/reward, endpoint selection, information,
-clock, ordinary programmes, exposure and accepted handle cannot be changed in
-place. Use only owned direction experiment/test/docs/runs/temp paths, preserve
-concurrent edits, serialize Git index/commit operations with
-`.git/hmasd-main-writer.lock`, and stage explicit paths on shared main. No authoring
-worktree, branch switch, force push, reset or shared-runtime change is part of this
-handoff. Claude's original direction/assets and the other active DMs remain owned
-by their existing leads.
+The lead may maintain its own append-only NOTES, compact records, standing and
+owned code/test paths, preserving other shared-main writers. Accepted scientific
+inputs/seeds/contracts, native/checkpoint artifacts and failures remain frozen.
+Git index/commit operations use `.git/hmasd-main-writer.lock` and explicit owned
+paths; no new authoring worktree, branch switch, reset, stash or shared-runtime edit.
+The owner-requested handoff is complete at this boundary, not a transfer itself.

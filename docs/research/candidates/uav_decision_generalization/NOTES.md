@@ -4142,3 +4142,323 @@ new capability/understanding it could establish, and receive its applicable
 scientific selection. No new architecture, proof, calibration or mandatory pilot
 is implied. The independent critic's final judgment and my response are retained
 in the next entry rather than replaced by this self-reading.
+
+**Explicit inherited action/entropy counterevidence.** Before any successor
+investment, retain the already-published Claude comparisons at
+[`coupled_host_joint_skills_stage1/NOTES.md`](../coupled_host_joint_skills_stage1/NOTES.md),
+2026-09-29 17:20/18:07 and2026-09-30 01:39, with the02:56 corrections.
+SET-V-b (`b02_fit_SETVb_932201_a01`, source889a7e28e) used the native tanh head,
+logstd−1/clamp[−5,0]; deterministic clipping fell from about2819 to.5 UAV-ticks,
+yet backhauled coverage was.2099 versus the original matched SET.2187. SET-T-b
+(`b02_fit_SETT_932201_a01`,186b8649e) used a10-tick absolute-target/straight-line
+executor package and reached.3571 versus its random-target floor.3652.
+SET-T-b′ (`b03_fit_SETT_932201_a01`,76d5d514b) removed only low entropy bonus
+within that macro/bounded package: sigma fell .368→about.20, but coverage.3496
+and paired difference−.0075 (SE.0140) did not establish useful recovery. Those
+scoped costs3.26/1.07/1.79CPUh and earlier failures remain inherited investment,
+not new B03 costs or secretly repeated experiments. The later accepted correction
+matters: lower sigma is lower noise scale, not lower precision; logged entropy0
+was a reporting branch; far-target rate does not prove the mean unused; shared
+reward was not identified as the cause. These were different dense-task/endpoint
+contracts, so they do not empirically refute a properly specified B03 successor.
+They do refute describing bounded actions, entropy removal or waypoint control
+as an untried obvious repair. No paused Claude asset or standing is changed here.
+
+
+<a id="b03-independent-result-review"></a>
+### B03 independent result diagnosis — complete original, 2026-10-02 UTC
+
+Root reused the one applicable ResearchCritic `/root/next_study_review`, UUID
+`01a0f9fe-de22-7d73-82c2-129a0cadede6`. This is independent scientific reconstruction
+with previously loaded comparison context and received status messages, not a
+blind review. It first read original worker/source evidence, then the complete
+reader, and only then compared my published `e5c56a80` explanation. No second
+result critic was commissioned. Root read and accepted the following complete
+answer; I have read it in full and respond immediately below.
+
+Mechanical provenance: session
+`/mnt/c/Users/fires/.codex/sessions/2026/10/01/rollout-2026-10-01T17-23-45-01a0f9fe-de22-7d73-82c2-129a0cadede6.jsonl`,
+actual turn `01a0fc74-3b8a-7213-a0bd-467a95dc6031`; line2311 `turn_context`
+verifies `gpt-6-astra/max`, line2653 `task_complete` at
+`2026-10-02T13:05:42.675Z` contains this unchanged15010-byte UTF-8 answer,
+SHA256 `35dba162884c32733abdf7e43367ab15c8186413f7869763325c0f3caf77988e`.
+[Compact provenance](../../../../runs/uav_decision_generalization/b03_joint_window_read_a02/independent-result-review-provenance.json)
+retains source-line hashes and the actual runtime fields. Original path/line
+citations inside the answer retain the critic's then-current location.
+
+<!-- B03 ORIGINAL RESULT CRITIC BEGIN -->
+建议结束原样 H/noD/SET 的 B03 投入，不采用三个最终学习策略；保留 O 的完整联合窗口能力、学习轨迹中的真实多跳正例，以及此前 R、S0/S1 的条件能力。当前证据支持这一处置，不能支持“联合服务不可学习”或“已找到共同失败原因”。
+
+本轮复用既往选题与结果审阅背景，收到过 Root/DM 的状态消息，**不是盲审或全新隔离上下文**。我先重建冻结源码、worker 端点和原生轨迹，待完整 reader 返回后核对，再读 DM 的 `e5c56a80` 解读。
+
+**1. 结果已完整闭合，原读取失败仍是证据的一部分。**
+
+科学 worker 源为 `300c58af8e`，完成三次各 45 rollout 的拟合、1,196,000 native steps、615,600 optimizer steps、135 个训练 rollout、232 个冻结 mission 和五个独立 checkpoint。原 reader 在 O/world `109220001` 的动作精确比较处失败，差值为 `2.220446049250313e−16`。
+
+我读了原失败记录、保存数组复现和 `2056aa1fa` 的完整修复差异。原宿主先复制单条三维动作，旧 reader 使用大数组行视图；其范数分别落在 `1.0000000000000002` 与 `1.0`，跨过严格 `>1` 分支。修复只增加单条动作复制，未放宽容差、服务门槛或支付规则。
+
+最终 reader 绑定旧 302 个检查文件，重新精确核对全部旧 movement，再补齐 65 个普通程序任务；没有重复模型或科学运行。最终 [reading.json](/home/fires/hmasd-wsl/runs/uav_decision_generalization/b03_joint_window_read_a02/reading.json) 的 SHA 为 `eab3cdeff541f4849f6086e5752d0ea9ad59b6e29ab7765a9b047bce5d356c69`。我核对了该身份、46 个源文件 hash、旧检查 hash，以及完整检查中的数值差异。232 个冻结任务的输入与 SINR 重建误差、166 个神经任务的动作/hidden/value 重放误差均为零。训练部分按合同核查保存 ledger、输入和回报，没有重新进行完整 RF 重算。
+
+因此，修复后的读取足以承载本次科学判断；不能删除原失败，亦不能把修复解释成改变科学容差。[原失败与修复边界](/home/fires/hmasd-wsl/docs/research/candidates/uav_decision_generalization/NOTES.md:3824)
+
+**2. 普通 O 获得完整能力；三个学习实例没有建立自身任务收益。**
+
+下表均来自相同 32 个冻结评价世界。成功窗总数的分母为 128；路径按每架 UAV 计；用户缺口包括首尾删失。
+
+| 程序 | 成功窗/128 | 平均回程服务用户数 | 从未服务用户/50 | 每用户最长缺口均值 | 路径 m/UAV |
+|---|---:|---:|---:|---:|---:|
+| H 初始＝noD 初始 | 5 | 8.421 | 37.000 | 405.076 | 13,551 |
+| H 最终 | 5 | 7.486 | 35.844 | 411.833 | 13,899 |
+| noD 最终 | 6 | 7.609 | 35.750 | 410.802 | 14,021 |
+| SET 初始 | 2 | 8.010 | 37.688 | 405.534 | 13,561 |
+| SET 最终 | 4 | 7.261 | 35.750 | 411.644 | 13,732 |
+| Sticky B | 11 | 10.773 | 15.719 | 326.519 | 9,295 |
+| Scheduled O | **128** | **36.182** | **0** | **129.089** | **2,208** |
+
+主要配对量，以每 mission 完成窗数 \(W\) 为单位：
+
+| 比较 | 平均差 | 条件配对 t95，df31 | 升/降/同 |
+|---|---:|---:|---:|
+| H 最终 − noD 最终 | −0.03125 | [−0.22518, 0.16268] | 4/5/23 |
+| H 最终 − SET 最终 | +0.03125 | [−0.11309, 0.17559] | 3/2/27 |
+| H 最终 − H 初始 | 0 | [−0.15862, 0.15862] | 3/3/26 |
+| noD 最终 −共同初始 | +0.03125 | [−0.13969, 0.20219] | 4/3/25 |
+| SET 最终 − SET 初始 | +0.06250 | [−0.06497, 0.18997] | 3/1/28 |
+
+三个最终策略每个 mission 最多完成一窗，O 在全部世界完成四窗。上述区间均条件于各自这一次拟合，不能把 32 世界当作训练复制，也不能据跨零建立等效性。
+
+次要 dense J 的最终均值为 H `.093123`、noD `.095584`、SET `.089209`，各自低于初始化均值；这些自身差异的区间仍跨零。相对 B，三个最终策略的 J 和平均服务均有负向条件区间，同时从未服务用户、用户最长缺口和路径明显更差。B 是具有目标持续性的普通移动程序；它提供的竞争解释比“网络有没有更新”更有分量。
+
+自身路径变化则较明确：H `+348.36 m`、noD `+469.60 m`、SET `+171.47 m`，三个配对区间均为正。增加的运动没有兑现为完整任务收益。这里没有能耗模型，不能把路径直接换算成能量损失。
+
+我从完整冻结端点独立复算了 **28 对 ×26 个标量＝728 组成对世界向量、均值、标准误与符号计数**，均与最终 reader 一致。
+
+**3. O 证明了合法普通方法的完整用途，也暴露了本任务的边界。**
+
+O 使用公开注册表、完整日程和合法位置输入，通过初始匹配、三对射线站位及 t130 的一次改派完成任务；没有查询私人支付 ledger 或未来服务真值。学习程序也得到公开注册表与日程，但各自的信息路由、表示和计算程序不同，不能称为架构因果控制。[任务与输入](/home/fires/hmasd-wsl/experiments/candidates/uav_decision_generalization/b03_joint_window/task.py:1)、[O 的源码](/home/fires/hmasd-wsl/experiments/candidates/uav_decision_generalization/b03_joint_window/ordinary.py:21)
+
+保存轨迹显示：
+
+- O 第一窗支付 action 在 27–104 之间；后三窗全部固定在 action 144、269、394 支付。
+- 后三窗各自全部 125 tick 都达到至少八名活动用户的回程服务。
+- 所有 128 个实际站位到达记录均存在，原生关联和多跳路径支持这些支付。
+
+这将“存在联合机会”落实为完整普通程序能力，削弱了任务不可达、窗口太短或缺少合法任务信息的解释。
+
+同时，O 的世界最大同用户缺口均值仍为 **364.344 tick**。第一对 UAV 按合同离开首簇，完成一次支付后可以长期不再服务该簇。O 实现了本合同的四窗目标及全用户至少一次服务；它没有建立全体用户持续连通，也没有建立全局路径最优或能源安全。
+
+O 已达到这个面板的任务分数上限，而且计算便宜。由此购买一个“模仿 O”的新拟合，需要另有可检验用途；不能仅因教师正确就推定压缩学习值得投入。
+
+**4. 本批存在真实学习过程和局部正例，尚未形成可复用的联合控制能力。**
+
+三臂训练期间分别获得 H **62**、noD **71**、SET **62** 次真实窗口支付，来自 720 个训练 mission/臂。H 和 SET 各有两窗成功的训练轨迹。优化确实发生，参数明显移动；这不是零正奖励、冻结权重或缺失更新导致的伪阴性。
+
+但几乎所有未成功窗口连联合服务门槛都没有到达：最终 H/noD/SET 的 128 窗中，分别 **121/120/120 窗从未出现一次 \(q\ge8\)**。主要缺口发生在形成合格联合配置之前；“只是坚持不到第 20 步”不是合适的主解释。
+
+我直接读过的原生正反例包括：
+
+- **109220007，H 的局部正面。** H 初始和 noD/SET 最终都没有支付，H 最终在 action149 完成一窗，十名同身份用户持续服务，通过真实多 UAV 路径回程。但其 team-zero 从初始的 0 增至 115 tick，仍有 30 人从未服务。局部窗口收益伴随别处服务损失。
+- **109220026，新增远簇服务。** H 初始没有远簇回程服务；H 最终增加真实远簇服务并在 action111 完成一窗。从未服务人数由 40 降到 30。O 同世界完成四窗。
+- **109220004，明显自身退化。** H 初始完成一窗、平均服务 16 人；最终没有支付、平均服务仅 1.154 人，team-zero 达 429 tick。
+- **109220029，能力丢失及身份差异。** SET 初始在第四窗成功，最终丢失该成功；noD 最终在第三窗服务另一簇并获得支付。相同总窗数或新增一次支付，不代表同一批用户的连续性改善。
+- **109220000，完整负例。** SET 最终移动约 12.3 km/UAV，却全 500 tick 零服务、50 人从未服务。O 在相同世界完成四窗，B 也完成一窗。
+
+一个应保留的正面细节是：虽然支付规则不要求固定的同八人，我重建的 **全部 161 个 main 支付段**实际上均含至少八名同身份用户连续服务 20 步。没有观察到通过快速轮换受益者取得支付的现象。这不能替代成功段以外的完整用户缺口。
+
+这些例子证明拟合后的策略有真实、改变过的联合服务行为；初始策略和 B 也会产生此类事件，完整配对结果尚不能把它们提升为可靠的任务学习增益。
+
+**5. 判别器比较比“共同初始化”更扎实，但其支持范围仍有限。**
+
+我另核对了 H/noD 的 **45 个 `pre_rollout_rng` 完整保存状态，全部严格相同**，训练起始 RNG 也相同；SET 的训练 RNG 不同。H/noD 第一整个 rollout 的动作、位置、技能和支付相同，其低层奖励不同。
+
+因此，H−noD 是一个有效的单次配对训练干预：noD 保留分类器训练，只移除判别器奖励。不能以“H/noD 随机流已经不同”解释结果。更新后的策略和经历不同是该干预的后果；这仍不识别固定同历史下某个技能或分类语义的独立贡献。
+
+源码与保存回报确认：
+
+- 外在奖励为真实窗口支付的 `R/6`。
+- d2 高层使用段内折扣外在回报，再按实际段长跨段折扣。
+- 判别器奖励进入低层，noD 的分类器更新和费用保留。
+
+H 没有建立优于 noD 的任务收益；noD 也没有恢复完整能力。较大的负判别器奖励均值不能直接推出梯度支配或共同失败原因。分类准确率、标签熵和参数运动也不能替代功能性技能证据。
+
+**6. 动作尺度是承重线索，历史反证禁止把它写成确定修复。**
+
+三臂训练的 raw Gaussian entropy 在全部 44 个相邻 rollout 变化中都上升：
+
+- H：4.326 → 8.089；
+- noD：4.325 → 9.344；
+- SET：4.356 → 9.205。
+
+最终原始动作范数均值约为 6.84/9.67/8.72，clip 事件约为每 3,000 个 UAV tick 中的 2,990/2,996/2,996。源码中的 Gaussian 未应用名义 logstd clamp；熵项作用于投影前分布，宿主随后做单位球投影。[Gaussian 实现](/home/fires/hmasd-wsl/hmasd/r_mappo_utils.py:73)、[训练熵项](/home/fires/hmasd-wsl/hmasd/agent.py:6860)
+
+这是一个具体的训练目标与执行行为关系：增大原始尺度可以增加原始分布熵，而执行幅度已经基本饱和。现有证据没有证明 PPO likelihood 错误，也没有证明该现象导致了全部服务失败；几何计算、表示、信用分配及有限优化仍未分离。
+
+我按 DM 提示直接补读了旧 coupled-host 的配置、完整 holdout panel 和修订记录：
+
+- 有界速度 SET-V：确定性覆盖 `.209905`；
+- 目标点 SET-T：`.357105`；
+- 去熵 SET-T：`.34956375`，相对原 SET-T 为 `−.00754125`。
+
+旧任务中，动作约束或噪声尺度确实改变过，服务没有因此成为强能力。尤其旧记录已纠正“σ 下降证明均值不会利用精度”的过强解释。这些旧结果不能替代新 B03 的反事实，但会降低“换有界头、去熵或改目标点就能修复”的投资依据。[旧配置及端点](/home/fires/hmasd-wsl/runs/coupled_host_joint_skills_stage1/b03_fit_SETT_932201_a01/panel_45_holdout_deterministic.json)、[历史更正](/home/fires/hmasd-wsl/docs/research/candidates/coupled_host_joint_skills_stage1/NOTES.md:1995)
+
+**7. 投资建议：当前零新增运行；保留一个明确、可放弃的模型复用问题。**
+
+我赞同 DM 结束本次原样三配方投入、不采用最终策略、保留 O 与完整正反资产的处置。没有理由自动追加种子、延长训练、改奖励尺度或安排熵/动作头扫描。先前 R 的有限泛化、S0/S1 的条件服务能力不受这组三个不同任务的 PPO 实例否定；不同任务的 J 不横向排名。
+
+若 Root 仍希望从本批已付模型中购买一个最小后继观察，较有区分力的候选是：**只比较冻结 SET 初始与最终的确定性均值执行，完整读原 32 世界，并复用既有 O/B 和 sampled 端点作参照。**选择 SET 可避免同时更改高层技能采样；这是新增执行程序的开发性比较，不能回写原 sampled 主结果。
+
+其结果会改变不同判断：
+
+- 最终均值明显优于初始均值，并有完整服务用途：保留“已学到部分均值控制、原采样执行未兑现”的有限资产。
+- 初始和最终均值共同提高，二者没有训练增量：优先解释为普通执行方式收益。
+- 两者仍弱：降低继续挖掘这两个 checkpoint 的价值，不自动接动作头 fit。
+
+核心费用为 **0 fit、64 个 H500 mission＝32,000 新 native steps**；完整 reader、工程审计和支持费用尚未闭合。这只是值得比较的候选，**不是本次选中的运行，也不是其他研究必须经过的诊断门槛**。结合旧确定性端点的负证据，保持 B03 无后继运行同样合理；我不建议现在购买新训练。
+
+**8. 实际价格与我的检查边界。**
+
+截至 DM 完整自读，B03 累计显式计量为 **52,360.762292094 CPU-s＝14.544656 小时，0 GPU**，包括：
+
+- worker 49,889.033756 CPU-s；
+- 原失败 reader 2,396.885812 CPU-s；
+- 修复 completion 50.777541 CPU-s；
+- 原工程、修复测试及已计量收集/自读。
+
+97.2M actor presentations、分类器标签与更新、83,000 个 reader model-team step、actor/critic **各**498,000 行重放均计价。原生仍为 1,196,000 steps，没有因读取修复增加。原宏动作 SET-T 的 1.79 CPUh 不能替代本次逐步学习价格。作者、审阅、控制、准备和部分收集支持未完全计量；18–26 CPUh 是原预测，不能据低于预测称全部支持免费。
+
+我的实际检查包括：全部冻结/训练 metadata 身份、224 个 main 保存 mask/支付 ledger、28 个完整冻结原生正反例、九个训练 raw、135 条训练曲线、全部最终端点和 728 组成对统计，以及完整 canonical checks 的承重字段。没有重演优化、模型或完整 physics reader，没有复制 bulk。神经重放仍使用原固定 factory，不能当成独立神经实现验证；训练 physics 没有逐 tick 重算；训练复现仍是一 fit/臂。
+
+本评审有效显式计时的保存数据算术约 **2.75 CPU-s**；另一次读取脚本因计时变量覆盖未获得有效耗时，静态阅读、SSH 和写答支持亦未完全计量，均不冒称零成本，未混入 DM 的累计账。
+
+**MATERIAL_DISSENT: no。** 对象是 DM 在 [B03 完整解读](/home/fires/hmasd-wsl/docs/research/candidates/uav_decision_generalization/NOTES.md:3973) 中“结束原样三配方、不采用学习最终策略、保留 O 与历史条件资产、不自动选择修复”的处置。直接依据是 O 的 128/128 完成、学习最终的 5/6/4、未建立的自身收益、完整用户缺口和实际费用。对任何尚未给出的新拟合方案，本答不构成认可。
+<!-- B03 ORIGINAL RESULT CRITIC END -->
+
+<a id="b03-independent-disposition"></a>
+### B03 DM disposition of the independent result diagnosis
+
+**MATERIAL_DISSENT: no.** I accept the independently reconstructed endpoint,
+rare real multihop gains, individual-service adverses and bounded interpretation.
+The unchanged three-fit purchase ends; none of its learned finals is adopted.
+O's complete four-window capability is retained with its364.344-tick mean world
+maximum same-user gap, once-only schedule and absence of a path-optimality or
+energy/safety claim. The finding is about these finite fits under this sampled
+deployment contract, not the learnability of joint service. Earlier R, S0/S1 and
+Bstar capabilities keep their own evidence and task boundaries.
+
+The critic adds a useful precision to the paired comparison: **all45 saved
+H/noD pre-rollout RNG states are exactly equal**, as is the initial training RNG;
+the first entire rollout's actions, positions, skills and payments are identical.
+SET's training RNG differs. The prospective allowance for naturally diverging
+trajectories did not assert that RNG states would diverge, and no RNG divergence
+is a negative-result explanation here. H/noD is a single paired reward
+intervention with retained discriminator training. Later policies and experiences
+are endogenous to the reward change, so this still does not identify a fixed-
+history skill mechanism. This source/raw finding strengthens the intervention's
+identity without turning one fit per arm into replication or equivalence.
+
+The original exact-action reader failure remains published. The copied-vector
+repair, unchanged strict comparisons, old302 checks and65 new ordinary checks
+support complete coverage without replacing the native experiment or repeating
+neural replay. The critic's728 independent paired reductions and28 full native
+cases complement my70 full native cases; they are inspections of paid evidence,
+not extra evaluation worlds. All161 paid main segments include at least eight
+same identities, but that favorable detail does not erase the full-user gaps.
+
+I retain the observed Gaussian scale/host projection relationship as an
+unseparated candidate explanation. The old bounded-speed, target-point and
+zero-entropy results above prevent treating a head or entropy edit as an obvious
+repair. Removing discriminator reward has already failed to establish a useful
+complete task gain in this purchase. Parameter change, nonzero successes and
+increasing entropy do not individually identify the cause of failure.
+
+The critic's SET-initial/final deterministic-mean comparison would be a new
+execution programme on outcome-exposed development worlds: its32000 native-step
+core price omits complete reader, audit and support costs. Root explicitly does
+not purchase it now; I agree that it is a conditional design candidate, not a
+mandatory diagnostic gate or automatic next cell. No action-head fit, additional
+seed, imitation fit, longer exposure, reward retuning or other B03 effect is
+selected. Wider cross-question allocation stays with Root; it is not an unfinished
+B03 collection dependency. A substantive future assignment must inherit these
+costs, ordinary opportunities, adverse outcomes and unchanged prior positive
+assets, then state the capability and comparison it can actually change.
+
+<a id="b03-final-cleanup"></a>
+### B03 terminal evidence, measured cleanup and handoff boundary
+
+The worker and both reader operations are terminal, with valid exit witnesses
+and absent original runner/supervisor identities. Worker exit0 finished
+2026-10-02 11:18:16.154592UTC; original reader exit1 finished12:05:51.106813UTC;
+completion reader exit0 finished12:37:28.537646UTC. All accepted native collection,
+full reading, my interpretation and the sole independent scientific disposition
+are now complete. There is no unread result, live scientific operation, pending
+observer event or selected follow-on producer in this direction.
+
+After consuming terminal events, the private observer was stopped at generation12
+and drained with zero pending events; daemon531710 was inactive. Its final state
+and all three original status commands are preserved in
+[observation-final.json](../../../../runs/uav_decision_generalization/b03_joint_window_read_a02/observation-final.json).
+The obsolete private state/scratch path was then deleted. Consequently the old
+in-progress handoff's drain/rearm instructions are historical: there is no live
+state to rearm, and the failed reader's mechanical retry eligibility is not
+permission to repeat a scientifically complete study. The native status handles
+remain available for read-only reconciliation; no worker is restarted.
+
+I checked durable published source, external canonical outputs and live consumers
+before deleting the two terminated reader snapshots through supported GC. The
+initial scan refused a protected `/proc/660/cwd`; the documented privileged
+read-only process scan resolved that visibility limitation, and verified apply
+then removed both targets and their Git worktree registrations. No shared
+canonical Git, runtime, partial-clone configuration or unrelated job was changed.
+The earlier preparation fetch's existing Git GC warning remains untouched and is
+not a scientific or cleanup blocker. Exact measured deletions are:
+
+| Deleted target (remote snapshot suffix or local relative path) | Allocated before | After | Net bytes reclaimed |
+|---|---:|---:|---:|
+| Worker `.git/hmasd-launch-sources/728d72485d07492e9ed7caefcf74c5d7` | 1813323776 | 0 | 1813323776 |
+| Failed reader `.git/hmasd-launch-sources/89f42cc796054e9883dbaafc384af1ec` | 1824731136 | 0 | 1824731136 |
+| Completion reader `.git/hmasd-launch-sources/1bc44712a941417aa1cb34de52b600d5` | 1824899072 | 0 | 1824899072 |
+| Earlier `temp/directions/uav_decision_generalization/b03_factory_a01` | 23531520 | 0 | 23531520 |
+| `temp/directions/uav_decision_generalization/b03_observation` | 122880 | 0 | 122880 |
+| Owned B03 source `__pycache__` | 221184 | 0 | 221184 |
+| Owned B03 tests `__pycache__` | 81920 | 0 | 81920 |
+
+Final local deletion425984B less its4096B retained cleanup receipt yields421888B
+net local reclaim. Together with the three snapshots and earlier factory scratch,
+these scoped cleanup measurements give **5486907392 net allocated bytes
+(5.110081GiB) reclaimed**. This is a measured target/receipt delta, not a claim
+about whole-filesystem free space while other authors write. Useful source and
+compact evidence remain; no raw, checkpoint, failed outcome or check was deleted.
+[Worker witness](../../../../runs/uav_decision_generalization/b03_joint_window_a01/worker-snapshot-cleanup.json),
+[two-reader witness](../../../../runs/uav_decision_generalization/b03_joint_window_read_a02/readers-snapshot-cleanup.json),
+[local witness](../../../../runs/uav_decision_generalization/b03_joint_window_read_a02/local-cleanup.json).
+
+The single canonical remote evidence copy remains at the original three run roots:
+worker749 files/1379496137logicalB/1381232640allocatedB;
+failed reader310 files/16479040logicalB/17018880allocatedB;
+completion74 files/2542645logicalB/2686976allocatedB. Total1400938496allocatedB
+includes directory blocks. The earlier worker file-only allocated figure excluded
+114688B of directory blocks, not additional scientific data. Keep all734 raw and
+metadata files, five distinct initial/final checkpoints, old302 checks and new65
+checks. [Retention receipt](../../../../runs/uav_decision_generalization/b03_joint_window_read_a02/retention.json)
+binds manifest/summary identities and every new check; old checks remain bound
+by `B03_READER_PREFIX.json`. There is no duplicate bulk archive or retention chain.
+A small empty owned temp directory may remain; it contains no running state.
+
+Final measured DM chain CPU is **52360.783838954s =14.544662177h**, including the
+last.021546860s retention hash/size collection. The critic separately reports
+about2.75CPU-s of valid saved-data arithmetic; its.197551768s RNG-state read is
+within its own scope and is not added again. One invalid critic timing and some
+DM diagnostic stdout-loss/support work remain unmeasured, not zero. Authoring,
+source inspection, SSH, admission/control, engineering/scientific review and
+writing/cleanup support were not comprehensively CPU-metered. Native totals remain
+1196000, three fits,615600 optimizer steps,0GPU, with failed-reader and repair
+costs explicitly retained above. The forecast18–26CPUh/16–28supporth is not a
+measured all-inclusive invoice and never authorized another run.
+
+The owner-requested [same handoff document](HANDOFF_20261002_JOINT_WINDOW.md) is
+updated to this terminal boundary rather than left as an in-progress snapshot.
+Direction standing is reserve after the fixed purchase, retaining its scientific
+question and current lead until a real reassignment. No owner pause is lifted,
+owner is not transferred, and no accepted operation is migrated. Further work
+requires a concrete worthwhile selected continuation; none is automatically
+queued by this completion.
