@@ -4698,3 +4698,92 @@ or result operation exists. No disposable bulk/scratch was created or deleted:
 actual deleted targets none, net allocated disk reclaimed0B, no cleanup tool blocker.
 The retained unique B05 bank/B04 adverse evidence and useful B06 code have the
 explicit prospective consumer described above and remain in their canonical scopes.
+
+<a id="b07-selected-implementation"></a>
+## 2026-10-02 — B07 complete investment selected; bounded implementation L0
+
+At15:23UTC Root read the complete published proposal/independent original/disposition
+at `6f56b935405126f1f3d951d1a323d0003735c7f3` and selected the **complete B07
+package once**: immutable B05 producer labels, one new full independent reader,
+the original1k/4k/16k×2 six fits and all ordinary/native/cold/individual-service
+reading. Root explicitly accepts the unresolved original remote SIGSEGV cause,
+unmeasured real CUDA feasibility and unknown finite peak of externally captured
+CUDA crash dumps. Fresh admission and available-space evidence do not repair that
+cause or establish a hard abnormal-dump bound. No health probe is added.
+
+Selected new execution stops are reader2aggregateCPUh/4wallh and consumer
+8aggregateCPUh/4GPU-childh/16wallh. Normal local4GiB and remote6GiB scopes, reader
+additional2GiB abnormal reserve, unknown CUDA abnormal-dump exposure and8–16supporth
+forecast remain separate as proposed. The original numeric reader-child120CPU-s/
+240wall-s and512MiB-parent/1GiB-child address-space bounds hold; CUDA children do
+not inherit the numeric-child address-space bound. Prior work stays separately
+paid. Healthy phase transitions need no new Root/owner permission. The first genuine
+technical, identity, physical, counter or resource failure stops that operation and
+dependent effects; there is no automatic retry, repaired prefix continuation or
+replacement fit. This selection does not rewrite B05's failed certification.
+
+**L0 deliverable and ownership.** One bounded implementation makes the selected
+fixed-version validation and consumer binding executable. On shared
+`/home/fires/hmasd-wsl`/`main`, the named Implementer may author only new
+`experiments/candidates/typed_joint_skill_decision/b07_fixed_bank/`, the existing
+`b06_bank_consumer/` adapter and their matching test directories. Entrypoints are
+the new admitted B07 full-reader `run.py` and existing B06 consumer `run.py`.
+It owns no notebook, shared file, Git index/commit/publication, launch or scientific
+choice; it spawns no helper. DM owns this notebook, final B07 input manifests,
+source/evidence binding, acceptance, publication and execution. Preserve concurrent
+writers and every original B04/B05 module/output. A small focused helper is enough;
+there is no new generic framework or copied scientific model.
+
+**Semantics and state flow.** Implement the preceding complete contract exactly.
+The new stdlib parent binds all immutable B05 bytes/original exit2 and all old complete
+B04 references, then sequentially admits258 fresh data-only reader children with
+no producer/permutation/model/native effects. Saved, rebuilt and original B04
+vectors each keep their own strict lower-index argmax. Three-pair comparison retains
+all exact geometry/RNG/ordered/discrete identities and original finite1e-10 physical
+tolerance; only cross-vector winner equality becomes an observed difference.
+New summary/manifest/witness prove full fixed-producer validation, never old
+`complete_compatible_bank`. Consumer parent and actual children require that real
+bound result, selected budgets and source/input identities before scientific effects;
+no mock receipt or Boolean can bypass them. Train requests contain only train
+addresses; cold requests contain no bank/label/receipt payload. All six finals seal
+before fresh use. Preserve original B04 modules/hashes and use a narrow B06 complete
+reader composition. Raw8J/RawJ choose the exact argmax of their recorded paid responses,
+checking ordered query identity and actual `decision.scores`; separately report bank
+J at chosen row, online paid J and matched J, with both meaningful differences.
+Students have no added online raw query. P cache replay, GPU endpoint/cold exact choice,
+CPU functional tolerance/flags, all original updates/exposure/native/user readings,
+full cold checkpoint load and complete GPU-child lifetime billing remain unchanged.
+
+**Checks, cost and stop.** Focused synthetic/mock checks cover a tied/1ULP differing
+winner that is legal only under the new contract, physical/nonfinite/discrete/order
+and source/receipt tampering refusals, all258+2501 denominators, train/cold information
+boundaries, ordinary paid-choice/three-value reporting and no extra scientific calls.
+Reuse unchanged B06 control tests and existing numerical authority checks; no real
+bank reconstruction, model forward, native step, CUDA probe or child effect runs
+during preparation. Record actual pure-check CPU/wall and unmetered support. A focused
+independent engineering reviewer reads the actual numerical/identity and executable
+binding delta plus exact inputs before DM accepts/publishes it. Source-only inspection,
+artifact transport/hash verification and ordinary preparation do not supply empirical
+science or authorize a different design. An implementation difficulty returns the
+concrete obstruction; it does not relax this contract or spend an unselected pilot.
+
+Preparation transport completed the39 old saved B04 shards from original remote
+`/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b04_a01` to the one temporary
+local `temp/directions/typed_joint_skill_decision/b07-data-reference` root. All39
+size/SHA identities match the original B05 reference map:48,649,770logicalB,
+48,750,592allocatedB including directories. Source files were not changed; the
+bound partial stays at its existing repository path. Transfer process575484 and
+scp child575485 have exited; final re-hashing paid.045937935CPU-s/0science calls.
+The transfer's own final resource stdout was not retained by its tool handle,
+so transport CPU/wall are unknown rather than zero; copying was not repeated.
+No B07 numerical child, model or result operation has started.
+
+The compact-consumer validation boundary is explicit: after the admitted full
+reader ends, DM's stdlib full reading verifies every canonical raw byte. Published
+consumer input then pins that actual full manifest and native terminal bytes.
+Remote validation carries all258 compact child context/config/summary/manifests/
+reaped witnesses plus the complete counters and full manifest; it verifies their
+internal/source/count/witness bindings and all producer bank shards actually used.
+Large reader diagnostics remain canonical locally, with their digests retained in
+both child and full manifests. A bare success field is insufficient. This preserves
+the proposed compact remote evidence scope and does not regenerate physics.
