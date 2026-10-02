@@ -967,3 +967,69 @@ metadata. Cumulative/source storage is reported separately at final measured cle
 The first two compact-summary arithmetic reads after collection used.002311164s
 and.002352691s process CPU,0model/native calls; source/transport/human reading and
 helper support time remain unmetered, not zero.
+
+### Additional complete-data reading and path correction
+
+Correction to the preceding canonical navigation: individual endpoint readings
+are in`raw/scorers/`, not`learning/`. Update-read aggregates are in the block/summary
+records; original optimizer update chains remain under the fit input's`fits/`.
+The terminal evidence identities and numerical results above are unchanged.
+
+The compact [DM reading](../../../../runs/uav_decision_generalization/b01_read_a01/dm_complete_reading.json)
+is descriptive post-collection arithmetic over the manifest-verified complete
+block/scorer/native records, with0model/native calls. It retains world
+distributions, numerical flags/timing and14retrospectively selected illustrative
+worlds. Selection rules per block were maximum/minimum R−A, maximum/minimum
+R−fixed and maximum R longest-zero-run (one overlap). These extreme examples
+explain scope and adverse decisions; they are not a new test set or causal test.
+
+R−A win/tie/loss counts are58/43/27,49/50/29,36/50/42 across the blocks. Thus
+block3 has more adverse than positive worlds even though its mean effect is
+positive. R differs from the frozen slot3 policy in73/85/69worlds; the conditional
+mean gain on those deviations is+.035319/+.039659/+.003042, with44/53/36positive
+deviations. This is learned conditional choice, with both beneficial and harmful
+decisions, rather than a result wholly explained by copying the fixed slot.
+Static attains the exact hindsight menu maximum in115/120/111worlds (346/384),
+with mean menu regret.001378125/.000375000/.001310938. The full planner is outside
+the eight-action menu, so its potentially negative menu-best-minus-policy gap is
+not called nonnegative menu regret.
+
+Positive cases are concrete. At106130087, R chooses relay slot5, Cbar_bh .75676,
+versus A/N/fixed slot3 at.38360; static chooses the same better complete layout.
+At106230071, R slot4 obtains.80136 versus fixed.42500, A.76860 and N.76108.
+At106330012, R slot4 obtains.77828 versus fixed.38380, A.69576 and N/static.77468.
+Those gains coexist with strong counterexamples: at106130014, R relay slot4
+obtains.62052 versus A/static slot5 at.88064; at106230018, R relay slot5 obtains
+.60276 versus A flat slot7 at.82548 and static plain slot1 at.90952. None of those
+comparisons changes the target assignment or executor.
+
+Block3 retains substantial failures. At106330029, R chooses plain slot1 and gets
+Cbar_bh .00212 with474zero-service steps and430consecutive zeros; A/N choose
+relay slot4 and get.63028, while fixed/static slot3 get.65560. At106330110, R
+again chooses plain slot1: Cbar_bh .01388,447zero-service steps and435consecutive
+zeros, versus A/N/static relay slot4 at.65540 with33zero-service steps. These
+are wrong complete selections under an unchanged executor. They do not establish
+which internal feature, capacity or optimization difference produced the scores.
+
+All75flagged CPU/GPU contexts retain identical choices; the largest absolute logit
+difference among these flagged contexts is.00001239776611328125, retained in the
+compact DM reading's original comparison fields. Measured GPU endpoint input+scorer
+time per fresh context is about1.323ms forA,2.753ms forR and.510ms forN, excluding common
+candidate construction/matching and complete deployment costs. This hardware-
+specific segment does not establish a useful deployment advantage over static.
+
+The detail extraction used.134698976s process CPU; its first manifest parse failed
+on audit-alias rows lacking`path`, before any scientific call, and was corrected
+to read only file entries. That failed parse's CPU is unmetered. The subsequent
+compact reformat/read used.001735447s CPU. Together with the two initial summary
+reads, measured additional arithmetic is.141098278s,0fits/forwards/native calls.
+All384formerly fresh outcomes are now exposed for any future design reasoning;
+the current study's prospective freshness is not transferable to a revised model.
+
+The terminal reader source snapshot passed supported preview/apply and is absent,
+including its Git worktree registration. Its measured allocated usage fell
+1,793,269,760→0bytes. All three terminal source snapshots therefore reclaimed
+**3,435,175,936net allocated bytes**. The one canonical copy of this study's unique
+run evidence currently occupies37,875,712learning +180,060,160native +12,705,792
+reader =230,641,664allocated bytes; inherited B01 assets remain separately owned
+and unchanged. Local compact records and final scratch cleanup are accounted next.
