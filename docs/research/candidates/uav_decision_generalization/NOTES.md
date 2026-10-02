@@ -5264,3 +5264,410 @@ I accept this limited check. The published pre-reader ledger carries
 scientific arithmetic and support will be reported separately. This closes
 the selected engineering input check, without a new scientific choice or
 authorization for additional effects.
+
+Reader inputs and compact worker evidence are published at
+`0f05d8ec5bdfe405a662359817b5a9cb45549815`; the final reader-ledger digest is
+`94ac8f95c1fea74c1bc1e70d1cd12801980b821fdbce3bf18c268deeb772828f`.
+Remote fetch exited0 and obtained this source. The existing automatic Git GC
+warning now reported `bad tree object dfe82c9813ee82191abb8385cc12a6886fd0a77b`
+and `failed to run repack`; no shared Git maintenance was attempted. One
+configured supervisor invocation `dmgen-b04-set-mean-read-a01` was submitted
+for the selected reader, pending native kernel acceptance. Scientific source
+and the original two checkpoint assets are unchanged.
+
+The native reader was accepted at16:16:49UTC, operation
+`/home/wu/projects/HMASD/.git/hmasd-admission/ae59a9a5d5255f8de5628389f7cdfea5c91546d51db21a0614d8ab603a253b02.json`,
+output `runs/uav_decision_generalization/b04_set_mean_read_a01/`, source
+snapshot `57cea9a364734982a798f0db050f4529`, supervisor1345443,
+runner1345444. The first native status was accepted/consistent/running.
+Same-session deterministic observation registered that exact handle as
+`b04-set-mean-reader-a01`, generation3,1500s window/30s probes. The child
+remains active through collection, complete reading and independent scientific
+disposition; published worker completion alone is not that result boundary.
+
+<a id="b04-complete-reading"></a>
+#### 2026-10-02 — complete mean comparison: the final mean does not recover joint service
+
+Both selected operations are terminal, collected and completely read. The
+reader exited0 at16:18:49UTC and independently reconstructed all66 missions:
+33066 physical states,10614186 distance relations,33000 ledger updates,
+1650000 user indicators and198000 movement UAV-ticks. Its pinned neural replay
+used33000 team steps and198000 actor plus198000 critic rows; no new native
+step, fit or optimizer call occurred. All66 check records have maximum
+observation/state/UAV-SINR/user-SINR errors0 and hidden-input/raw-action/value
+errors0, one immutable state digest per endpoint, and zero optimizer calls.
+The two-way mean-mode metadata/reset/RNG checks passed. Physics/information/
+ledger reconstruction is independent; neural replay deliberately reuses the
+pinned factory/inference implementation and is not a second neural algorithm.
+
+The full canonical reading is
+`wsl_4070:/home/wu/projects/HMASD/runs/uav_decision_generalization/b04_set_mean_read_a01/reading.json`,
+2678714B, sha256
+`acd3c5df08094396a8016c997387dc5372861a805686298a63dbc8e9583e1ff2`.
+Its66 full check files remain beside it with hash identities in
+[collection.json](../../../../runs/uav_decision_generalization/b04_set_mean_read_a01/collection.json).
+The full checks contain additional error/policy fields intentionally omitted
+from the reading's result rows; checking the common result fields matches
+exactly. A preliminary full-dictionary equality check returned false for that
+field-scope difference, not a numerical discrepancy. The complete reading's
+per-user gaps, censoring, all windows and paired tails were retained, including
+both audits outside the32-world estimands. No world or checkpoint was selected
+after results became visible.
+
+[Compact DM reading](../../../../runs/uav_decision_generalization/b04_set_mean_read_a01/dm-reading.json)
+retains all26 scalar summaries for all six programs, all nine paired
+comparisons and the mode interaction, all66 mean mission scalar rows, every
+qualifying mean window, audit windows, and individual-tail aggregates/extremes.
+Independent saved-JSON arithmetic checks416 scalar summaries,7488 paired
+world differences and832 interaction differences. This is arithmetic on paid
+evidence, with no extra model or physics evaluation. The32 original development
+worlds remain outcome-exposed; descriptive t intervals concern these conditional
+world contrasts and do not add training instances.
+
+| Program | Completed windows /128 | Windows ever q≥8 /128 | Qualified ticks | Mean backhauled coverage | Mean dense J | Mean team-zero ticks | Mean never-served users | Mean same-user longest gap |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| SET initial, sampled (paid) |2|6|271|.160191|.102053|121.000|37.688|405.534|
+| SET final, sampled (paid) |4|8|283|.145228|.089209|150.156|35.750|411.644|
+| SET initial, mean |5|5|625|.173879|.107883|123.063|40.656|413.061|
+| SET final, mean |2|6|98|.095151|.058789|269.094|33.313|432.433|
+| Sticky waypoint B (paid) |11|32|699|.215451|.137996|38.906|15.719|326.519|
+| Scheduled ray-chain O (paid) |128|128|14621|.723644|.451225|2.688|0|129.089|
+
+The principal final-minus-initial **mean** contrast is−.09375W/mission,
+3 negative worlds/29 ties/0 positive, descriptive t95
+[−.200522,.013022]. Its difference from the saved sampled training contrast
+(+.0625W/mission) is−.15625,6 negative/25 ties/1 positive, t95
+[−.317731,.005231]. These are not evidence of training-population inferiority
+or equivalence. They directly fail the constructive prediction that this final
+asset's mean deployment would uncover improved joint-window acquisition.
+
+Final mean minus saved final sampled gives−.0625W/mission (2 losses,30 ties,
+0 gains); mean initial minus sampled initial gives+.09375 (4 gains,1 loss,
+27 ties). A final-only mean observation would have missed this opposing
+initialization effect. Final mean is also below B by−.28125W (9 losses,23 ties)
+and below O by−3.9375W (all32 losses). The final mean gains no completed window
+over either its own initial mean or its saved final sampled deployment.
+Changing the evaluation mode is consequential; the direction of its effect
+does not establish trained acquisition.
+
+**Native window reading.** Initial mean's five completions are world004/window2,
+006/window3,007/window1,014/window0 and020/window0 (world prefix109220).
+All five sustain125 qualified ticks across the whole corresponding window.
+The trained mean loses the first three, never reaching q≥8 in those particular
+later windows. Its two retained completions are the same initial-world
+window0 cases014/020 at action19; qualified lengths fall to20/62. There is no
+new completed window. Final mean reaches q≥8 in four additional incomplete
+cases:007/window0 for7 consecutive ticks,008/window0 for5,
+015/window2 for3 and028/window1 for1. Thus ever-q≥8 counts increase5→6
+while qualified exposure collapses625→98 and completed windows fall5→2.
+Of128 final-mean windows,122 never reach q≥8 and only4 reach it without a
+twenty-tick payment. Rare persistence failures exist, but a sustain-only
+explanation still misses the overwhelming configuration-acquisition deficit.
+
+**Complete service and individual tails.** Final versus initial mean loses
+62982 of the139103 initial served-user ticks (final76121); mean backhauled
+coverage falls.0787275 and dense J falls.049093749. J has21 losing worlds,
+10 winning and1 tie; its descriptive t95 is[−.074481,−.023706]. Team-zero
+ticks rise146.031/mission (24 worse,7 better,1 tie), longest team-zero runs
+rise113.063, and mean same-user longest gaps rise19.372. Every mean mission
+still contains a never-served user with a full500-tick gap. This is not user
+continuity, and the once-only window reward is not a fairness guarantee.
+
+Retain the contrary individual benefit: never-served user-world pairs fall
+1301→1066. The trained mean newly serves236 previously unserved users and
+loses one previously served user (world002/user15, formerly35 ticks).
+Those236 new contacts total13256 served ticks;25 receive one tick only and
+123 receive fewer than20. Across all1600 paired user-world identities,253
+gain served ticks,282 lose and1065 tie;254 longest gaps shorten,281 lengthen
+and1065 tie. More users touched is compatible with less total service and
+longer interruptions. World028 is a real local improvement from zero service
+to.1472 backhauled coverage/J.091659,24 fewer never-served users and365 fewer
+team-zero ticks; it still completes no window. World000's19 new users each
+receive only one tick. World021 remains completely unserved under both means.
+The original mean's three lost completed-window worlds004/006/007 have
+coverage losses.23788/.32536/.18024, gaps longer114.18/152.90/66.66 ticks
+and119/356/163 additional team-zero ticks. These losses are not hidden by the
+smaller never-served count.
+
+Against final sampled deployment, final mean loses40061 user ticks, increases
+team-zero ticks118.938 and mean same-user longest gaps20.789; J is lower in25
+worlds and higher in7. Against B it loses96240 user ticks and increases mean
+gaps105.913. Against O every one of1600 user-world identities receives fewer
+served ticks, though20 longest gaps are shorter; O's distinct364.344-tick mean
+world maximum same-user gap remains a limitation, not erased by its large
+advantage. Audit world109229000 has W0 for both means; its mean deployment
+coverage/J also falls while never-served users fall40→20. Audits remain checks,
+not a33rd inferential world.
+
+**Executed action behavior.** Initial mean has0/3000 mean clip events per
+mission and travels200.835m/UAV; final mean has2770.844/3000 clip events
+(92.3615%) and travels8899.456m/UAV. Final sampled has2995.531 clips (99.8510%)
+and travels13732.420m/UAV. Removing evaluation action sampling therefore does
+not remove the trained mean's host projection. Final mean spends2331.531
+altitude-boundary and1167.813 xy-boundary UAV-ticks per mission versus
+903.375/192.094 under final sampled, while zero-displacement events rise to
+73.656. These are measured rollout behaviors, not matched-state causal
+mediators. Deterministic raw mean followed by the existing host projection is
+neither expected projected action nor a new physical-unit-ball policy.
+
+**Working explanation before independent result review.** The exact B03
+checkpoint pair does not contain the useful complete-service improvement that
+simple mean deployment was proposed to reveal. The result weakens an
+evaluation-noise-only concealment explanation and establishes that severe
+clipping of this final asset persists without action draws. It does not
+identify entropy, projection, sparse credit, optimizer behavior, representation
+or team coupling as the training cause; deleting evaluation draws does not
+undo how they affected the acquired weights. The lawful O capability still
+establishes task opportunity. The few newly reached configurations and user
+contacts establish limited behavioral differences, without a competitive
+learned deployment package or a general claim that joint service cannot be
+learned. Earlier R and S conditional capabilities and all old adverse outcomes
+remain intact.
+
+The fixed mean observation is complete, not a gate to the separately declined
+two-fit physical-action package. A replication would address training-instance
+variation but has no demonstrated useful recipe to replicate; a bound/entropy
+repair would still need its own native acquisition prediction and competent
+ordinary comparator, and nearby adverse packages continue to count. Reopening
+either is not justified merely by the remaining causal uncertainty. My
+provisional next judgment is to retain the exact evidence and useful reader,
+decline adoption of final mean and stop immediate B03 asset/entropy-head rescue
+investment. The broader learning question remains open for Root's substantive
+next-question choice. The original separate-context critic is reconstructing
+this result independently; its unabridged recommendation and any dissent will
+be preserved below before the final disposition.
+
+**Measured cost and retained evidence at this reading boundary.** Reader
+396.158241CPU-s/112.517071wall-s,671708KiB peakRSS and0GPU brings its
+closed cumulative ledger to920.825101240CPU-s. Subsequent collected-file
+hashing/content joins, seven saved-JSON readings, compact arithmetic and
+reader-source GC add1.726941969 measured CPU-s: known new DM cost is
+**922.552043209CPU-s=.256264456CPUh**, before later review/publication cleanup.
+Terminal-write/transport/authoring and other support remain incompletely
+metered, not zero. Worker+reader do66000 model team steps/396000 actor rows
+and396000 critic rows in total,4 model constructions,33000 actual native
+steps,0 new fits and0 optimizer steps. The original B03 three fits/1196000
+native steps/615600 optimizer steps and52360.783838954 measured DM CPU-s
+remain sunk, not erased by freezing SET; B03+B04 known DM CPU is currently
+14.800926634h. Earlier R/S studies and separate review/support bills retain
+their own recorded scope. The actual new measured CPU is below the.5–1h
+forecast; that observation does not erase the support cost or authorize another
+batch.
+
+The reader directory retains75 canonical files,3479100 logical and3633152
+allocated file bytes, including2678714B full reading and66 full check files.
+Together with the worker, new unique canonical evidence occupies325722112
+allocated file bytes; original B03 evidence/checkpoints remain in their bound
+locations. The local full-reading copy exists only for active DM/critic
+inspection and will be deleted after those consumers finish, while compact
+results remain published.
+
+Native event generation3 was fully drained and consumed by rearm to4; the
+attempted child queue delivery had the same unsupported-subagent rejection.
+Observation was then explicitly stopped, both jobs were ready/consumed and the
+observer process was absent. No producer or checkpoint remains running. After
+complete output verification, supported GC deleted reader snapshot
+`57cea9a364734982a798f0db050f4529`, allocating1827307520B before and0 after.
+Preview/apply used.185436895/.606498605CPU-s. Both new source snapshots are
+gone and **3654529024B** have been reclaimed so far, with no deletion blocker,
+bulk relocation or backup. Native claims, exits and unique outputs remain.
+
+<a id="b04-independent-result-review"></a>
+#### 2026-10-02 — original independent scientific result review
+
+Registered ResearchCritic `continuation_critic` returned this complete original
+answer at16:46:34UTC. The same separate reviewer context covered selection and
+now the completed evidence; this is not a blind review of its own earlier
+recommendation. No DM/Root conversation inheritance, new fit, native evaluation
+or neural/physical rerun occurred. The12465-character answer is preserved below
+without condensation; the original selection dissent remains above.
+
+````text
+**Recommend stop the frozen SET mean-action route, retain its complete result, and decline the separate two-fit action-distribution package.** B04 weakens the explanation that useful joint-service behavior was already present in SET’s mean and merely concealed by sampling. It preserves some partial geometric competence, but supplies no useful complete deployment benefit.
+
+This is a follow-up in the same independently created reviewer context used for selection. I reused the earlier B03 reconstruction; no DM/Root conversation history was inherited, and no preferred post-result explanation was supplied.
+
+I checked the original B04 reading, source/configuration bindings, all 66 new full checks, all 132 hash-bound baseline checks, all nine paired comparisons, their user/window details, and all 416 scalar mean/SE/interval summaries. I also inspected 20 distinct native mean-trajectory archives, covering the consequential positive and adverse cases. The source is `b04_set_mean_read_a01/reading.json`, SHA-256 `acd3c5df08094396a8016c997387dc5372861a805686298a63dbc8e9583e1ff2`; its durable copy remains under `/home/wu/projects/HMASD/runs/uav_decision_generalization/` on `wsl_4070`.
+
+The main results are:
+
+| Programme | Completed windows /128 | Windows never reaching q≥8 | Backhauled coverage | Never-served users, mean /50 | Mean user longest gap | Mean path per UAV, m |
+|---|---:|---:|---:|---:|---:|---:|
+| SET initial, mean | 5 | 123 | 0.173879 | 40.656 | 413.061 | 200.835 |
+| SET final, mean | 2 | 122 | 0.095151 | 33.313 | 432.433 | 8,899.456 |
+| SET initial, sampled | 2 | 122 | 0.160191 | 37.688 | 405.534 | 13,560.948 |
+| SET final, sampled | 4 | 120 | 0.145228 | 35.750 | 411.644 | 13,732.420 |
+| B | 11 | 96 | 0.215451 | 15.719 | 326.519 | 9,294.869 |
+| O | 128 | 0 | 0.723644 | 0 | 129.089 | 2,208.152 |
+
+The primary mean-action acquisition contrast is **−0.09375 windows per world**, with zero world-level wins, three losses and 29 ties. Its descriptive paired interval is `[−0.200522, 0.013022]`. The sampled acquisition contrast remains `+0.0625`; the mode interaction is `−0.15625`, with interval `[−0.317731, 0.005231]`. These intervals cross zero. They do not establish a population-wide negative training effect, but the complete observed asset comparison contains no positive primary world.
+
+The final mean also has zero W wins against final sampled SET, losing worlds `109220028` and `109220030`; zero wins and nine losses against B; and losses on all 32 worlds against O. Against sampled initialization it exchanges one win (`014`) for one loss (`029`). I checked the remaining initial-mean comparisons as well; none supplies a contrary complete-benefit result.
+
+The native window records explain what those counts mean:
+
+- Initial mean succeeds on worlds `004`, `006`, `007`, `014`, and `020`, with completion actions `269`, `394`, `144`, `19`, and `19`. Each qualifying scheduled window lasts all 125 ticks. These are favorable geometries already served near initialization, preserved by very small movements.
+- Final mean retains only `014` and `020`, both completing at action 19 from initially qualifying geometry. Their qualifying scheduled runs shrink from 125 ticks to 20 and 62. It acquires no new completed window.
+- Final mean reaches q≥8 without completion in four scheduled windows: `007` for seven ticks, `008` for five, `015` for three, and `028` for one. The other 122 windows never activate the qualifying geometry.
+- The `008` failure is specifically late arrival: service persists from actions `[120,184)`, but its scheduled window ends at 125. Calling every active failure “inability to hold geometry” would therefore be wrong.
+
+The individual-service positive is real, but insufficient. Compared with initial mean, final mean newly serves 236 world-user pairs and loses all service for only one. Of those 236 newly served pairs, 123 receive fewer than 20 service ticks, 31 receive at least 100, and none receives 400. They contribute 13,256 service ticks. Meanwhile, the 299 pairs served by initialization fall from 139,103 service ticks to 62,865.
+
+Thus “fewer never-served users” mainly records broader visitation alongside substantial loss of continuity. Total coverage falls by `0.0787275`; team-zero-service time rises from 123.063 to 269.094 ticks per world. Final mean has a 500-tick same-user gap in every world. These are horizon-censored observations, not claims about infinite-duration starvation.
+
+The comparison with final sampled SET is also adverse despite lower movement: coverage falls by `0.05007625`, mean user longest gap increases by `20.78875` ticks, and team-zero time increases by `118.9375`. Mean path falls by 4,832.963 m per UAV, but XY-boundary exposure rises in every world. Lower movement alone is not a native benefit here.
+
+I checked the strongest useful positive beyond the scheduled score. Reconstructing all four target-cluster service histories from saved user-gap records shows:
+
+| Diagnostic, ignoring schedule timing | Initial mean | Final mean | Initial sampled | Final sampled | B | O |
+|---|---:|---:|---:|---:|---:|---:|
+| World-clusters ever reaching q≥8 | 5 | 20 | 10 | 17 | 74 | 128 |
+| World-clusters sustaining q≥8 for ≥20 ticks | 5 | 7 | 7 | 7 | 30 | 128 |
+
+This is a **post hoc diagnostic, not a replacement reward or changed reading rule**. Final mean creates five new sustained visits, all outside the relevant scheduled window:
+
+- `008`, cluster 1: `[120,184)`, 64 ticks; only five count within its window.
+- `015`, cluster 1: `[448,468)`, 20 ticks; its window was `[0,125)`.
+- `023`, cluster 2: `[63,92)`, 29 ticks; its window was `[250,375)`.
+- `030`, cluster 1: `[45,81)`, 36 ticks; its window was `[125,250)`.
+- `031`, cluster 3: `[312,340)`, 28 ticks; its window was `[375,500)`.
+
+I checked those positives against native saved connection/path masks. Each contains at least eight identical users throughout its first 20 ticks. Final mean simultaneously loses three sustained geometries present at initialization.
+
+This supports partial geometric reach and occasional holding, and identifies timing as consequential in some cases. It does **not** establish learned schedule-conditioned coordination: sampled initialization already has seven untimed sustained visits, B has 30, and O has 128. Incidental visitation remains a strong simpler explanation. The positive is worth preserving without turning it into an obligation to repair the policy.
+
+My supported diagnosis is therefore narrower than “SET learned nothing”:
+
+1. **The unused useful-mean explanation is weakened substantially for this asset.** The decisive initial-to-final mean comparison is adverse on the frozen objective and on sustained service.
+2. **Sampling noise is not the sole source of problematic execution.** Final deterministic means still produce clipping on 92.36% of UAV action-ticks, versus zero for initial mean. The inspected final raw means have large norms even without sampling. This establishes problematic mean execution, not the training cause of those means.
+3. **The simpler account fits the evidence:** near-stationary initialization preserves some favorable placements; trained movement broadens visitation but destroys much existing service and rarely puts sustained service in the correct window.
+4. **Finite optimization, sparse reward exposure and training/deployment co-adaptation remain unresolved.** Switching to deterministic deployment does not isolate the causal effect of entropy, projection, initialization or optimization during training. B04 cannot refute a different learning recipe or all useful internal representations.
+5. **Opportunity remains established by O under the declared information contract.** O’s engineered task knowledge is a substantial computational advantage, not extra hidden observations. Its success establishes feasibility and competent baseline performance; it does not establish easy learnability. Nor does 128/128 make O a complete fairness solution: its retained mean world-maximum same-user gap remains about 364.344 ticks.
+
+The source and comparison checks support this interpretation. All 52 scientific source identities match between worker and reader; current inspected bytes match those manifests. The 198 metadata records across six programmes share the complete initial physical/information digest, initial host RNG and addressed pre-inference RNG within each world. Baseline identities, endpoint identities, audit exclusion and the complete 32-world roster are intact. The accepted reader reports zero observation/state/SINR and neural replay errors.
+
+I did not rerun neural or physical reconstruction. I independently checked saved evidence and arithmetic, and inspected selected raw service histories. Matching initial RNG does not imply a shared action-noise tape after the inference-mode change. The 32 outcome-exposed development worlds remain conditional observations from **one original SET training instance**, not independent training replications.
+
+The selected study has now supplied the smallest worthwhile complete observation for its question. A useful final-over-initial mean gain, with native service benefit, would have supported retaining the asset and considering replication. A generic improvement in both endpoints would mainly have implicated deployment variance. The observed adverse acquisition contrast, together with untimed partial competence, supports closure of this mean-action route.
+
+I do not recommend another frozen panel, a changed window rule, an entropy sweep or a mandatory repair. None is needed to interpret the completed comparison.
+
+The separately declined two-fit package remains genuinely untested. A direct unit-ball distribution could change learning, but it changes initialization, exploration, entropy and action geometry together. B04 does not empirically refute that package, and its negative result is not a failed gate that automatically triggers it. Its approximately **819,000 native steps, 405,000 optimizer updates, 8–14 CPU-hours and 12–20 support-hours** remain a separate investment. Given the competent ordinary controls, weak complete learned benefit, untargeted timing failures and prior dense-task bounded/no-entropy adverse evidence, I still judge its marginal value insufficient within this asset question. No new cross-question assignment is proposed here.
+
+Actual new study cost is 66 H500 missions, including two audits: **33,000 native steps, zero new fits and zero optimizer updates**. Worker CPU is `501.127710` seconds; reader CPU is `396.158241` seconds. The reader’s cumulative ledger is `920.825101240` CPU-seconds, including prechecks and known prior support, before terminal collection/review additions; GPU use is zero. Worker and reader each perform 33,000 model team-steps with 198,000 actor and 198,000 critic agent-rows. The retained B03 programme’s roughly 14.545 CPU-hours and original training costs remain inherited evidence costs, not zero-cost learning.
+
+My 16 metered saved-record arithmetic blocks consumed **2.921449218 CPU-seconds**. This excludes shell/Git/CodeGraph, orchestration, authoring and two failed read-only diagnostics: a removed-snapshot source locator and my initially omitted 10-user cluster offset. Both were corrected against canonical records and the frozen contract; neither involved model, controller, physics or native execution. This is not a complete support-time total.
+
+A supported shared-background update would be:
+
+> B04’s complete frozen SET mean comparison found 2/128 final versus 5/128 initial scheduled joint-service windows, with lower sustained coverage and longer service gaps; final sampled SET retained 4/128. Deterministic deployment did not reveal a task-useful mean in this original training instance. Five newly acquired off-schedule sustained cluster visits preserve partial geometric competence, but do not establish schedule-conditioned learning or complete native benefit. Close this frozen-asset route without a new fit; entropy/projection causality and broader learnability remain unresolved.
+
+**MATERIAL_DISSENT: no — on closing the frozen mean-action route and declining the separate two-fit package under this bounded interpretation.** The original selection dissent remains preserved and was resolved by executing B04. A claim that no geometry was acquired, that projection/entropy caused the failure, or that broader learning is impossible would exceed the evidence.
+````
+
+<a id="b04-independent-disposition"></a>
+#### 2026-10-02 — DM disposition: close this asset route, preserve partial geometry and timing evidence
+
+I read the complete12465-character original answer and accept its resolved
+recommendation: **do not adopt final mean; close the frozen SET mean-action
+route; retain its complete positive/adverse evidence and useful reader; decline
+the separately priced two-fit action-distribution package.** There is no
+material direction disagreement requiring Root resolution. This does not undo
+the reviewer's original selection dissent, which correctly led us to buy the
+initial/final deployment comparison instead of assuming its answer. The negative
+result is useful new evidence; it is not proof that the observation was a bad
+investment. One adequate independent scientific review covers this completed
+bounded decision; another Pro round has no identified distinct question here.
+
+The reviewer sharpened the explanation in a consequential way. My prior reading
+correctly retained the four scheduled qualifying-but-unpaid cases, but the
+whole saved trajectories show that **scheduled failure is not uniformly an
+inability to hold geometry**. I reconstructed service masks from every saved
+user's gap complement for all192 scored records (six programs×32 worlds), with
+the frozen contract's target users10+10j through19+10j. This independent
+arithmetic reproduces all scheduled qualified-tick counts and the reviewer's
+untimed diagnostic. No episode, controller, model, RF computation or fit was
+executed; the original calendar and score were not changed.
+
+| Ignoring calendar only as a post hoc diagnostic | Initial mean | Final mean | Initial sampled | Final sampled | B | O |
+|---|---:|---:|---:|---:|---:|---:|
+| World-clusters ever q≥8 |5|20|10|17|74|128|
+| World-clusters with a q≥8 run of at least20 ticks |5|7|7|7|30|128|
+
+Final mean adds five sustained world-cluster visits absent from initial mean
+and loses three initial sustained geometries. These five cases do not earn a
+payment under the original rule, which requires20 consecutive q≥8 post-action
+service ticks **inside that cluster's frozen125-tick window**, resetting the
+counter at every boundary. Intervals below are zero-based action addresses,
+half-open `[start,stop)`; corresponding post-state rows are action+1.
+
+| World suffix / cluster | Full saved q≥8 run | Frozen window | Qualified ticks inside its window | Payment |
+|---|---|---|---:|---:|
+|008 /1|[120,184),64 ticks|[0,125)|5|0|
+|015 /1|[448,468),20 ticks|[0,125)|0|0|
+|023 /2|[63,92),29 ticks|[250,375)|0|0|
+|030 /1|[45,81),36 ticks|[125,250)|0|0|
+|031 /3|[312,340),28 ticks|[375,500)|0|0|
+
+I also read and byte-verified all five corresponding saved native NPZs. For
+every500-action mask, `connections[1:]` joined to the saved nonempty route
+mask exactly equals both `routed_user_mask` and the gap reconstruction. The
+first20 ticks of each displayed run serve at least eight identical registered
+users (10/10/8/10/10 respectively). Saved schedules, active counts and payment
+arrays reproduce the zero payments above. These are saved-data readings, not
+new evaluations or suffix replays. The008 run genuinely holds for64 ticks but
+arrives too late for the20-tick within-window requirement; the other four are
+entirely early or late. The term “off-schedule” here means failure to fit a
+complete qualifying run inside the required window, not that every tick of008
+lies outside it. The exact raw identities and checks are retained in the
+compact reading's `posthoc_untimed_diagnostic`.
+
+This changes the working explanation from only a scheduled-geometry deficit
+to **limited broadened geometric reach, occasional sustained holding and poor
+alignment with the task calendar, alongside destruction of much initial
+service**. Preserve all the adverse context: final mean sustains only7/128
+world-clusters even when timing is ignored, equal to sampled initialization,
+versus B30 and O128. Its actual frozen W remains2/128 versus initial mean5,
+final sampled4, B11 and O128. The three lost initial sustained geometries
+are004/cluster2 (initial500ticks),006/cluster1 (500) and007/cluster2 (333),
+with final runs at most3/12/5ticks respectively. Untimed gains do not establish
+a controllable reusable skill or schedule-conditioned learning; incidental
+visitation remains a competent explanation. Nor should the236 newly touched
+users be described as all negligible:31 receive at least100ticks, while the
+299 originally served identities lose service from139103 to62865ticks.
+The complete net continuity loss and positive subcases both remain.
+
+The result distinguishes opportunity (lawful O), executed representation
+(different mean/sample behavior and partial visits), finite acquisition (no
+useful final-over-initial improvement in this one trained asset under either
+declared deployment reading) and complete package value (no adopted final).
+It does not identify why learning produced these weights, establish population
+inferiority/equivalence, or refute the broader learning question. High
+deterministic clipping falsifies neither a future distribution design nor all
+internal useful representations. The independent two-fit package still costs
+approximately819000native/405000optimizer steps/8–14CPUh/12–20support hours,
+has never been tested, and is declined on marginal investment value rather
+than relabelled an empirical failure of B04.
+
+**Next investment judgment.** No more frozen worlds, altered calendar,
+automatic timing adapter, entropy sweep or physical-head fit is selected. A
+replication would address seed variation but not a demonstrated useful method;
+an immediate repair would add a new package without a discriminating native
+prediction. Re-entry would require a separately selected substantive learning
+or deployment question connecting timely registered service and preservation
+of existing service, with a competent ordinary comparator and explicit total
+cost. The observed five visits can inform such a proposal, but do not reserve
+that research question or justify another repair by themselves. Root owns any
+new cross-question allocation. This direction is **reserve/idle with no live
+producer, unread result/advice, selected successor or external dependency**;
+this is not a fabricated wait for an owner decision. R/S capabilities and the
+open parent question remain, and this completed B04 purchase does not extend.
+
+The additional DM gap reconstruction used.366582099CPU-s; NPZ schema reading
+1.766343747CPU-s and the five complete saved-mask checks.093566242CPU-s.
+Known new DM cost is now924.778535297CPU-s (.256882926CPUh), before final
+cleanup; the scientific review separately reports2.921449218CPU-s for16
+arithmetic blocks with its explicitly excluded support/failed-read costs.
+These distinct reported scopes remain separate, and neither is a complete
+support-time total. The reviewer has finished, so the temporary local full
+reading and closed observation scratch have no remaining live consumer.
