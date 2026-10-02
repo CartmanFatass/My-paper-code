@@ -1,0 +1,1 @@
+reader_cpu_user=0.76 reader_cpu_system=0.01 reader_wall=0.76 reader_rss_kib=31476

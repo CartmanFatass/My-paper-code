@@ -1,0 +1,108 @@
+{
+  "compute_sha256": "2bb704e31e08a6a3489e80ea6851826740dfbf71461e0f7e70c4394694e65e6f",
+  "core_pattern": "|/wsl-capture-crash %t %E %p %s",
+  "core_rlimit": [
+    0,
+    -1
+  ],
+  "cores_directory": "/mnt/c/Users/wu/AppData/Local/Temp/wsl-crashes",
+  "existing_core_count_after": 5,
+  "existing_core_count_before": 5,
+  "git_delta_attribution": "shared objects changed during an interval with other direction publications; not isolated to this operation",
+  "git_objects_allocated_bytes": 1224237056,
+  "git_objects_before_allocated_bytes": 1201700864,
+  "git_objects_observed_delta_bytes": 22536192,
+  "metadata_cpu_seconds": 0.3463799999999999,
+  "metadata_wall_seconds": 0.3347638251725584,
+  "new_core_allocated_bytes": 0,
+  "new_or_changed_core_metadata": [],
+  "operation_output": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b04_serialization_wsl_a01",
+  "output_allocated_bytes": 8712192,
+  "output_files": [
+    {
+      "allocated_bytes": 4096,
+      "bytes": 770,
+      "name": "admission-preflight.json",
+      "sha256": "fa55915d277903cc61360af27b5f7f6a9e6c4345ec7c2071d66b26e1b8075350"
+    },
+    {
+      "allocated_bytes": 8200192,
+      "bytes": 8200000,
+      "name": "attempts.bin",
+      "sha256": "c2a1f307b7729de6d46d3656925c1413df9bcbc43c3437331a36b9c66bef29c1"
+    },
+    {
+      "allocated_bytes": 466944,
+      "bytes": 463324,
+      "name": "checkpoints.jsonl",
+      "sha256": "c7491e043f1ba58a3b48f37c85c22b03447722c3e7d6656eb6a9175ce612ee23"
+    },
+    {
+      "allocated_bytes": 4096,
+      "bytes": 3120,
+      "name": "config.json",
+      "sha256": "79357146a796d24a029d1d161a622a16174810293f7ddc36ff74801d109c367b"
+    },
+    {
+      "allocated_bytes": 0,
+      "bytes": 0,
+      "name": "fatal.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "allocated_bytes": 8192,
+      "bytes": 4737,
+      "name": "launch-manifest.json",
+      "sha256": "bbe3e2d6cc3adbccdc4178158059f024f931f2efcc1c828cecc5fef22ee22a0c"
+    },
+    {
+      "allocated_bytes": 4096,
+      "bytes": 617,
+      "name": "launch-status.json",
+      "sha256": "14f98ed311de0cc1a65320c1539cb08bb5dd6cac2d86bf527473b101cd15c357"
+    },
+    {
+      "allocated_bytes": 4096,
+      "bytes": 557,
+      "name": "process-exit.json",
+      "sha256": "bdb41958ed3f6acfa213783e01ce94f12c92c79974941e9640721e952b3ec212"
+    },
+    {
+      "allocated_bytes": 4096,
+      "bytes": 82,
+      "name": "reader-time.txt",
+      "sha256": "2573b489ed98ef42f1a81241857a9202985186aa763ce789698d9361dbcf5b23"
+    },
+    {
+      "allocated_bytes": 4096,
+      "bytes": 2705,
+      "name": "reading.json",
+      "sha256": "d1aeac5f3b5c6f36f2073992ecfc0000bcf2c8c23d22d43b1304d133218b3f5c"
+    },
+    {
+      "allocated_bytes": 0,
+      "bytes": 0,
+      "name": "stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "allocated_bytes": 0,
+      "bytes": 0,
+      "name": "stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "allocated_bytes": 8192,
+      "bytes": 5095,
+      "name": "summary.json",
+      "sha256": "31fb3bd7b9847892bcda3ff21e2bb861181fff5e5160a0ce5e8398440b28151f"
+    }
+  ],
+  "repo": "/home/wu/projects/HMASD",
+  "retained_core_b04": "c3f0dc6f88534beec4260dc0d4ca14fc9bb73e63c257637a5cc25a4760056aa5,638087168bytes,original remote Windows path; no new read/copy",
+  "runner_pid": 1325313,
+  "source_snapshot_allocated_bytes": 1813524480,
+  "source_snapshot_exists": true,
+  "source_snapshot_path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/a427833996d44d84adda6e5a045133a4",
+  "time_ns": 1790927297719736993
+}

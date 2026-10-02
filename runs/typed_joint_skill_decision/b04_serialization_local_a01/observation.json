@@ -1,0 +1,200 @@
+{
+  "deliveries": {
+    "18a120dc-6e47-4d88-a27e-d08d40cabf75": {
+      "consumed": 1790927105.703479,
+      "exit_code": 1,
+      "status": "delivery_unknown",
+      "stderr": "Error: failed to queue session message: thread/queue/add failed: direct app-server input is not allowed for unloaded spawned sub-agents (code -32600)\n",
+      "stdout": ""
+    }
+  },
+  "events": {
+    "ed60f4cb29e830c7107a3232": {
+      "consumed": true,
+      "created": 1790927071.4033475,
+      "evidence": {
+        "facts": {
+          "admission": {
+            "claim_state": "accepted",
+            "state": "accepted"
+          },
+          "artifacts": {
+            "stderr": {
+              "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b04_serialization_local_a01/stderr.log",
+              "state": "present"
+            },
+            "stdout": {
+              "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b04_serialization_local_a01/stdout.log",
+              "state": "present"
+            },
+            "summary": {
+              "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b04_serialization_local_a01/summary.json",
+              "state": "present"
+            }
+          },
+          "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/ae0c70a00e191cf3ae6dc23bd8018bc54367fc2d3f6d54c94e3a30ce12a5186a.json",
+          "direction": "typed_joint_skill_decision",
+          "execution": {
+            "exit_code": 0,
+            "exit_witness": {
+              "exit_code": 0,
+              "finished_at_epoch": 1790927050.3468785,
+              "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b04_serialization_local_a01/process-exit.json",
+              "state": "valid",
+              "termination": "process_exit"
+            },
+            "runner": {
+              "recorded_identity": {
+                "boot_id": "f359a2d7-72f8-4eb1-b898-bc0abf61bed6",
+                "kind": "linux_pid_start_ticks",
+                "pid": 463793,
+                "session_id": 463792,
+                "start_ticks": 5533033
+              },
+              "state": "absent"
+            },
+            "state": "exited",
+            "supervisor": {
+              "recorded_identity": {
+                "boot_id": "f359a2d7-72f8-4eb1-b898-bc0abf61bed6",
+                "kind": "linux_pid_start_ticks",
+                "pid": 463792,
+                "session_id": 463792,
+                "start_ticks": 5533029
+              },
+              "state": "absent"
+            }
+          },
+          "explicit_retry": {
+            "eligible": false,
+            "reasons": [
+              "parent has no consistent terminal nonzero native exit"
+            ],
+            "scientific_authorization": false,
+            "successor_ref": null,
+            "supported": true
+          },
+          "explicit_retry_available": false,
+          "kind": "hmasd_operation_status",
+          "manifest_ref": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b04_serialization_local_a01/launch-manifest.json",
+          "node": "local_linux",
+          "observed_at": "2026-10-02T07:44:31.168844Z",
+          "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/ae0c70a00e191cf3ae6dc23bd8018bc54367fc2d3f6d54c94e3a30ce12a5186a.json",
+          "output_root": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b04_serialization_local_a01",
+          "record_consistency": {
+            "mismatches": [],
+            "state": "consistent"
+          },
+          "schema_version": 1,
+          "sha": "87e2b1b61a9a2ab7fffc6c7341a8b28ba236de76",
+          "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/ffb78cff8a7a42af874b00337dd690e6"
+        },
+        "job_id": "b04_serialization_local_a01",
+        "status": "ready"
+      },
+      "id": "ed60f4cb29e830c7107a3232",
+      "kind": "READY"
+    }
+  },
+  "generation": 2,
+  "jobs": {
+    "b04_serialization_local_a01": {
+      "due": 1790927131.4030862,
+      "errors": 0,
+      "last": {
+        "admission": {
+          "claim_state": "accepted",
+          "state": "accepted"
+        },
+        "artifacts": {
+          "stderr": {
+            "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b04_serialization_local_a01/stderr.log",
+            "state": "present"
+          },
+          "stdout": {
+            "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b04_serialization_local_a01/stdout.log",
+            "state": "present"
+          },
+          "summary": {
+            "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b04_serialization_local_a01/summary.json",
+            "state": "present"
+          }
+        },
+        "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/ae0c70a00e191cf3ae6dc23bd8018bc54367fc2d3f6d54c94e3a30ce12a5186a.json",
+        "direction": "typed_joint_skill_decision",
+        "execution": {
+          "exit_code": 0,
+          "exit_witness": {
+            "exit_code": 0,
+            "finished_at_epoch": 1790927050.3468785,
+            "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b04_serialization_local_a01/process-exit.json",
+            "state": "valid",
+            "termination": "process_exit"
+          },
+          "runner": {
+            "recorded_identity": {
+              "boot_id": "f359a2d7-72f8-4eb1-b898-bc0abf61bed6",
+              "kind": "linux_pid_start_ticks",
+              "pid": 463793,
+              "session_id": 463792,
+              "start_ticks": 5533033
+            },
+            "state": "absent"
+          },
+          "state": "exited",
+          "supervisor": {
+            "recorded_identity": {
+              "boot_id": "f359a2d7-72f8-4eb1-b898-bc0abf61bed6",
+              "kind": "linux_pid_start_ticks",
+              "pid": 463792,
+              "session_id": 463792,
+              "start_ticks": 5533029
+            },
+            "state": "absent"
+          }
+        },
+        "explicit_retry": {
+          "eligible": false,
+          "reasons": [
+            "parent has no consistent terminal nonzero native exit"
+          ],
+          "scientific_authorization": false,
+          "successor_ref": null,
+          "supported": true
+        },
+        "explicit_retry_available": false,
+        "kind": "hmasd_operation_status",
+        "manifest_ref": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b04_serialization_local_a01/launch-manifest.json",
+        "node": "local_linux",
+        "observed_at": "2026-10-02T07:44:31.168844Z",
+        "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/ae0c70a00e191cf3ae6dc23bd8018bc54367fc2d3f6d54c94e3a30ce12a5186a.json",
+        "output_root": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b04_serialization_local_a01",
+        "record_consistency": {
+          "mismatches": [],
+          "state": "consistent"
+        },
+        "schema_version": 1,
+        "sha": "87e2b1b61a9a2ab7fffc6c7341a8b28ba236de76",
+        "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/ffb78cff8a7a42af874b00337dd690e6"
+      },
+      "observed": 1790927071.4030862,
+      "spec": {
+        "argv": [
+          "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+          "/home/fires/hmasd-wsl/scripts/hmasd_launch.py",
+          "status",
+          "/home/fires/hmasd-wsl/.git/hmasd-admission/ae0c70a00e191cf3ae6dc23bd8018bc54367fc2d3f6d54c94e3a30ce12a5186a.json"
+        ],
+        "cwd": "/home/fires/hmasd-wsl",
+        "id": "b04_serialization_local_a01",
+        "interval": 60,
+        "protocol": "launch",
+        "timeout": 25
+      },
+      "status": "ready"
+    }
+  },
+  "owner": "01a0f7ce-366f-7d91-93e7-e38693506d43",
+  "stopped": false,
+  "wake": null
+}
