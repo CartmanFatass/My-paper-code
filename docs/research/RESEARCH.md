@@ -2493,8 +2493,8 @@ Root已读两份完整结果、原始独立意见和临时Oracle完整建议，�
 
 | 科学责任 | 当前实质工作与边界 | 负责人 |
 | --- | --- | --- |
-| 广义开源／可学习决策辅助，长期持有 | B02精确ridge结束，保留学习发生、局部收益与G/P质量成本取舍。B03固定36-query prefix Q已选择并发表完整合同：真实在线搜索／暂停恢复，已曝光64世界完整读取，精确复用57条原生轨迹并补全部7缺口；同轮G/Q/P冷启动计价。正在实现与工程核对，尚无新accepted operation。不限定Laya、语言模型或静态菜单，Q本身是普通信息使用研究。 | 原DM `/root/dm_typed_joint_skill`，独占 `typed_joint_skill_decision` 对应路径；长期责任延续。 |
-| 发展已保留的学习决策能力及其完整用途 | A/R六fits结束，保留R有限条件泛化增量与第三块严重零服务反例，static／planner仍更强。下一设计优先发展冻结S_L0/S_L1与普通C的合法反馈协作；保留同规则Z(G)与强参照、真实导航和采样语义、个体服务与完整成本。DM正在闭合合同，独立critic重建B05/B06反对意见及原生事实；八臂初稿尚未选定为运行，不自动追加A/R fits。 | 原DM `/root/dm_decision_generalization`，继续独占 `uav_decision_generalization`，只读旧S/C资产，不改其他方向输入。 |
+| 广义开源／可学习决策辅助，长期持有 | B02精确ridge结束，保留学习发生、局部收益与G/P质量成本取舍。B03固定36-query prefix Q已选择并发表完整合同：真实在线搜索／暂停恢复，已曝光64世界完整读取，精确复用57条原生轨迹并补全部7缺口；同轮G/Q/P冷启动计价。已在source804dac52b、唯一op3ab88c01…准入，DM保持原句柄执行与完整读取。不限定Laya、语言模型或静态菜单，Q本身是普通信息使用研究。 | 原DM `/root/dm_typed_joint_skill`，独占 `typed_joint_skill_decision` 对应路径；长期责任延续。 |
+| 发展已保留的学习决策能力及其完整用途 | A/R六fits结束，保留R有限条件泛化增量与第三块严重零服务反例，static／planner仍更强。已选择e2e0f252b及08488e6bf澄清的冻结S/C八程序比较：无合法联系人持续四primitive步后，在原H4边界改用确定性waypoint导航。Root读完合同与7746-byte原独立意见并采纳；保留Z(G)、C/Bstar、原S、全50用户删失gap、真实nav/tape与完整成本。DM自主实施、工程核对及准入；目前选择不是接受，不自动追加A/R fits。 | 原DM `/root/dm_decision_generalization`，继续独占 `uav_decision_generalization`，只读旧S/C资产，不改其他方向输入。 |
 | 把已展示预测用途发展为完整控制能力 | B10 C/H_A/F_A工程核对通过（含C=REFERENCE），0fit／32新世界三臂H3000主面板在op f48b8950…收集。当前可见信息、真实solver角色、逐tick NaN语义、原source与合同保持；DM负责完整结果及独立判读。 | 原DM `/root/dm_s7_prediction_use`，保持 `uav_fleet_transmission` 所有权。 |
 
 本次滚动取舍与**完整10,508-byte原始Oracle答复**、实际Astra/max身份、Root primary-source阅读及被替代旧计划，
@@ -2514,7 +2514,14 @@ G相对P少670.47查询／.434s冷启动、J−.006842，普通质量成本能�
 [B03完整前瞻合同](candidates/typed_joint_skill_decision/NOTES.md#b03-selected-contract)发表于2f293841b：
 192同轮selection-only，7缺口+2完整审计=4,500新原生步，预计307,058／保守1,155,699静态调用，0fit／GPU；
 预计5–15 CPU分钟、1,800s边界、4–8支持h、完整source与既有输入计一次的2.5GiB峰值边界。
-旧面板已曝光，完整复用不改变B02合同，也不称新世界确认。S协作的122,880主面板步等仍为待审初稿，不能并入已接受账。
+旧面板已曝光，完整复用不改变B02合同，也不称新世界确认。
+[S/C完整前瞻合同](candidates/uav_decision_generalization/NOTES.md#b02-source-and-prospective-cooperation)已读并选择：
+32新世界108310000–108310031，480主+16完整审计，共126,976原生步，0fit／训练标签／GPU；
+含工程和reader至多211,456学生单行前向、5,120,712普通候选路径／20,482,848模型步。
+完整CPU预计.1–.5h、累计1h停止重估；8–12支持h、≤3GiB单source-snapshot准备范围均为预测价。
+独立原答SHA256 `caf8fa4ab65234f2f1a53b896e417a06c09f0e006f3276117b556a4e10def2da`，实际Astra/max已核对，MATERIAL_DISSENT:no。
+旧teacher-rescue安全修复异议继续有效；此次比较只购买完整用途。q0接管没有当前用户的无线重评分，但全体发射器仍开启，新路径会影响他人干扰；
+C的零team-outage也曾伴随35/50或38/50用户从未服务，不能以全队连续性取代个体结果。原S与Z首4步必同；没有自动调gate、增world或训练门控。
 S7原已选比较含工程312,000原生步，至多218,752候选／6,562,560 nominal ticks／656,256 RF samples／160私有模型，
 0fit；4–8 CPUh与12–18支持h是预测，12累计CPUh仍是停止／重估边界，不因其他题更省而扩展。
 
@@ -2544,6 +2551,8 @@ canonical的sparse配置、dirty控制文件和既有snapshot不改，科学合�
 全部新建snapshot须将完整prepare置于配置网络环境，并按约1.67GiB实测source占用重估峰值，不能沿用旧sparse大小。
 三位DM已获可继续的修复证据：S7由本DM记录明确retry-of再做工程阶段，B02正常准入，A/R保持原accepted handle。
 Root未重启任何科学operation或新增科学步骤；失败记录与科学合同保留。
+另一次实际节点read-only核对保留了旧`.git/gc.log`事实：2026-10-01T13:08:57Z的92-byte记录报告bad tree `dfe82c9813ee82191abb8385cc12a6886fd0a77b`／failed repack。
+后续fetch exit0及所用具体source完整物化／准入通过；这不是全库健康证明。原log／objects保留，未运行全库GC、repack或改refs。
 
 <a id="typed-joint-skill-selection-20261001"></a>
 **2026-10-01 PDT — owner 新提联合布局学习的首轮比较已完整结束。**
