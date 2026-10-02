@@ -8807,3 +8807,196 @@ The cleanup succeeded, but its local wrapper's final assertion initially compare
 Observer25 is stopped with0pending events and0running jobs. [Local receipt](../../../../runs/uav_fleet_transmission/b12_resource_assignment_a01/local-cleanup.json) records deletion of the six consumed B12 engineering/scientific request, wait and GC-preview JSON files plus both B12 implementation/test `__pycache__` directories: **114688allocated bytes→0**,.002621CPU seconds. Their needed argv/accepted identities, observation events, previews and failure reconciliation remain in the published run evidence. Together with the already documented engineering snapshot removal1816195072bytes, B12 has now reclaimed **3633078272allocated bytes** from exact owned targets. No cleanup tool blocker remains.
 
 Current B12 source and tests remain temporarily available to the independently assigned result critic; this is a real read consumer. After that read finishes, retire unused one-shot drivers/support tests from main while retaining the useful controller, energy law, typed trace and meaningful controller tests. This does not retain an execution queue or select a new study.
+
+
+<a id="b12-independent-disposition"></a>
+### B12 independent complete diagnosis and resolved disposition — 2026-10-02
+
+Root reused the applicable dedicated ResearchCritic `/root/next_study_review` once. The DM has read the entire original below and independently verified its bytes against the native `event_msg.task_complete.last_agent_message`, not a summary. Provenance: UUID01a0f9fe-de22-7d73-82c2-129a0cadede6; `/mnt/c/Users/fires/.codex/sessions/2026/10/01/rollout-2026-10-01T17-23-45-01a0f9fe-de22-7d73-82c2-129a0cadede6.jsonl`, line2164, timestamp2026-10-02T08:35:51.403Z; actual turn01a0fba6-c0c9-72e0-ab52-11d5f2bc836d, gpt-6-astra/max. This is a reused, nonblind context that participated in selection and prior H_T construction, not an additional blinded replication. [Small provenance record](../../../../runs/uav_fleet_transmission/b12_resource_assignment_a01/result-critic.json). The original is exactly **17358 UTF-8 bytes**, SHA256 **47996574b2498dc5c0d30a5a3cfa8a4cb9e5e5aa679ea4c6eec2b6c114cb4579**.
+
+The following original answer is preserved without editing, omission or paraphrase substitution. Its current-tree source links name the files used during review; the frozen source remains65caed8708a33782b942bf74fd66ee2a31aee3b2, including the [original reader](https://github.com/CartmanFatass/My-paper-code/blob/65caed8708a33782b942bf74fd66ee2a31aee3b2/experiments/candidates/uav_fleet_transmission/b12_resource_assignment/reader.py) and [metrics adapter](https://github.com/CartmanFatass/My-paper-code/blob/65caed8708a33782b942bf74fd66ee2a31aee3b2/experiments/candidates/uav_fleet_transmission/b12_resource_assignment/metrics.py), after obsolete one-shot current files are retired.
+
+````text
+**我的建议是：保留 B12 的条件能力与完整反例，结束 E/B 这两种固定准则的自动扩展；目前不采用任何一个作为 C 的默认替代，也不立即购买修补或确认批次。** 这不是资源分配问题已经失败。它说明：正确优化且充分激活的到达能量、到达余量准则，仍不足以推断完整任务中的服务、储备或 J 改善。
+
+本次沿用我参与 E/B 选题及 B10/B11 判读的上下文，**不是盲审，也不宣称没有先验偏好**。我先重建源码、端点和关键原生证据，再读 DM 在 `78e9b64b5898c2a7e3b7a0fc75a7ef0cc7355cf6` 发布的完整解释。以下主判断与 DM 一致；新增的共同历史读取使解释边界更明确。
+
+**证据与实际检查范围**
+
+冻结合同为 `6fc708f745de10c5b9dcaf0e93fc6ff9dab161bc`，科学源码为 `65caed8708a33782b942bf74fd66ee2a31aee3b2`，唯一科学 operation 为 `07d3d379…15303d`，终态 exit 0。64 个 E/B 科学任务全部 H3000，加四个工程任务，共 **204,000 新 native transitions、68 missions、0 fit**；没有科学失败前缀、补样本或未读尾段。
+
+我实际完成了以下独立检查：
+
+- 核对全部 58 个绑定源码文件及 13 个本地 compact 的内容身份；核对旧 B10/B11 `perworld` 身份。
+- 独立重算七个对照、45 个字段的 **全部 315 个配对结果**，包括每世界向量、均值、符号和描述性 t95 区间，与 reader 一致。
+- 阅读全部 32 世界 B/E **首次共同分歧**的保存输入、候选表、选择及随后 30 tick 原生数组。
+- 对世界 `29910008/09/17/20/24/27` 的 C/E/B，以及 `29910023` 的 C/E/B/H/H_T，共 **23 条完整 H3000 原生轨迹**，核对 raw SHA，读取用户服务、电量、移动、路由、guard、充电和返航记录，重算主要原生端点。
+- 之后全文阅读 [DM 完整判读](/home/fires/hmasd-wsl/docs/research/candidates/uav_fleet_transmission/NOTES.md:8701)，以及工程、读取、收集和清理记录。
+
+主要直接源码为 [energy.py](/home/fires/hmasd-wsl/experiments/candidates/uav_fleet_transmission/b12_resource_assignment/energy.py)、[controller.py](/home/fires/hmasd-wsl/experiments/candidates/uav_fleet_transmission/b12_resource_assignment/controller.py)、[metrics.py](/home/fires/hmasd-wsl/experiments/candidates/uav_fleet_transmission/b12_resource_assignment/metrics.py)、[reader.py](/home/fires/hmasd-wsl/experiments/candidates/uav_fleet_transmission/b12_resource_assignment/reader.py)，及承重的 [B10 assignment 来源](/home/fires/hmasd-wsl/experiments/candidates/uav_fleet_transmission/b10_service_assignment/controller.py)。
+
+完整端点见 [reading.json](/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b12_resource_assignment_a01/reading.json)、[perworld.json](/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b12_resource_assignment_a01/perworld.json) 和 [reading_worlds.json](/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b12_resource_assignment_a01/reading_worlds.json)。唯一新 raw 留在节点 `/home/wu/projects/HMASD/runs/uav_fleet_transmission/b12_resource_assignment_a01/raw/`，我没有复制 bulk。
+
+完整 reader 对全部新任务和旧参照进行了声明的检查；我没有机械重复其全部原生重建或功率检查。**本轮额外 controller、edge、public-power、RF、native、model 查询均为零。** 这仍不是对实现正确性的无限保证，工程检查与科学诊断的责任保持分开。
+
+**完整收益没有建立，但不能写成“无效”或“等价”。**
+
+以下都是同一批 **32 个已暴露世界**的配对结果。它们不是新世界确认，没有训练重复；用户、时间步和候选排列也不构成独立复制。区间为描述性配对世界 t95，未经多重比较修正。
+
+| 对照 | Δ native J [t95] | Δ累计 QoS [t95] | J 升/降世界 |
+|---|---:|---:|---:|
+| B−E | +6.354 [−48.950, 61.658] | −21.463 [−62.717, 19.792] | 13/19 |
+| E−C | −33.404 [−105.441, 38.633] | +24.553 [−10.464, 59.571] | 18/14 |
+| B−C | −27.050 [−69.876, 15.776] | +3.090 [−20.520, 26.701] | 18/14 |
+| E−H | −53.467 [−125.233, 18.298] | −26.155 [−73.215, 20.904] | 13/19 |
+| B−H | −47.113 [−94.076, −0.151] | −47.618 [−91.285, −3.951] | 13/19 |
+| E−H_T | −73.397 [−135.977, −10.817] | −19.498 [−62.678, 23.683] | 12/20 |
+| B−H_T | −67.042 [−115.409, −18.676] | −40.961 [−89.568, 7.647] | 10/22 |
+
+B−E 的正均值 J 不能代替服务判断。这里 QoS 减少 21.463，而原生 return cost 减少 13.908、系数为 2，因而账面 J 略升。E−C 则有 QoS 正均值，但 return cost 增加 28.978，抵消服务收益。选读轨迹中的原生恒等式核算一致。
+
+**Wh 不是这里的直接 J 项。** 上述是奖励分项记账，不能写成“节省这些能量导致这些 J”，也不能由此唯一识别移动、充电、路径或服务变化的原因。
+
+**资源表现比一个接近零的 J 均值更明确。**
+
+| 对照 | Δ旅行 m/UAV [t95] | Δ耗能 Wh/team [t95] | Δ低储备 UAV-ticks [t95] |
+|---|---:|---:|---:|
+| E−C | −132.051 [−431.108, 167.006] | −1.815 [−6.240, 2.610] | +631.594 [67.914, 1195.274] |
+| B−C | +1442.304 [959.130, 1925.477] | +20.187 [13.243, 27.131] | +352.500 [−107.548, 812.548] |
+| B−E | +1574.355 [1140.043, 2008.666] | +22.002 [15.718, 28.286] | −279.094 [−677.854, 119.666] |
+
+E 相对 C 的实际旅行符号是 16 升、16 降，耗能是 17 升、15 降；它没有建立完整任务节能，却增加低储备曝光及最长低储备连续段，后者为 **+88.344 ticks [8.721, 167.966]**。
+
+B 比 E 在 **30/32 世界**旅行和耗能更高，比 C 在 27/32 世界更高。B−E 充电时间增加 **80.531 UAV-ticks [47.733, 113.330]**，收到和净充入的能量也增加。相对 E 的返航代价、部分储备改善是真实资产，但不能称为全面资源改善：最终最低电量差的区间跨零，实际消费更高，最严重反例仍在。
+
+另一方面，E/B 相对 H/H_T 的低移动、低能耗能力应保留。E−H 的旅行减少 3543.271 m/UAV、耗能减少 50.461 Wh，全部 32 世界同向；E−H_T 平均减少 42.367 Wh。**问题是这些节省没有同时保住其完整服务/J，而且普通 C 已经是更强的低成本竞争解释。**
+
+**个体服务有值得保留的正面，也有不能用最低值掩盖的损失。**
+
+B−C 的世界内最差用户平均 QoS/H 提高 **0.015308 [0.000938, 0.029678]**，22 世界升、10 世界降。这是 B12 最明确的服务侧正面，应原样保留。它是次要端点，不能提升为电量 leximin 带来的用户公平保证。
+
+同身份用户的证据限制了这种解释：
+
+- B−C 的 960 个用户世界对中，492 个累计 QoS 提高、468 个降低；最长断服务段为 **247 个更长、167 个更短、546 个相同**。
+- B−E 有 454 个用户提高、506 个降低；p10 用户 QoS 的均值反而下降。
+- 全部程序均无 never-served 用户、无 depletion/cutoff 事件；这不是安全或连续服务保证。
+- 世界 `29910032` 用户 6 的 **473 tick 内部断服务段**仍出现在 C/H/E/B。
+- 世界 `29910023` 用户 13 的右删失末端断服务段，C/E/B 分别为 **420/388/454 ticks**。B 在这个世界提高了“世界最差用户”指标，却让该用户的 QoS 和末端连续性更差。
+
+因此不能把“最差用户指标变好”“团队零服务时间略少”“每个人至少服务过一次”合并为同一个覆盖或连续性能力。
+
+**干预是主动且充分暴露的；失败不能归为没有真正选择。**
+
+E/B 各有 3200 个计划边界，分别计分 1899/1764 次、改变实际坐标分配 **320/822 次**，没有所选坐标 alias，七个对照均在全部 32 世界产生真实提交和物理轨迹差异。
+
+E 的 320 次改变都严格降低自身候选表里的飞抵能量。B 的 822 次都严格改善完整排序 slack 向量，其中 **627 次提高最小值、195 次只提高后续分量**；752 次付出更高名义飞抵能量。这是实际执行的完整 leximin，不是 min-only，也不是低激活问题。
+
+每次只固定本臂当次 C 生成的目标多重集。选择写回真实历史，后续 C 目标布局会分歧。保留 C 指定的 relay/ring 成员，也不保留完整原生路由：被 C 标为 service 的 UAV 可以实际承担中继。B−E 通过这类成员的原生路径使用量显著改变。
+
+我额外检查的 **32 次首次共同分歧**提供了较直接的边界：
+
+- 两臂合法位置、电量、站点、普通 C 目标、base columns 和完整候选表全部相同。
+- B 全部选择严格更优的完整 slack，全部支付更高名义飞抵 Wh；30 次提高最小 slack，另外两次改善后续分量。
+- 随后 30 tick 原生 QoS 是 **13 升、15 降、4 平**；当时起始 F 均为零，首窗 return-cost 差均为零。
+- 23/32 首窗的实际耗能差绝对值小于 \(10^{-5}\) Wh。这只是描述数值尺度，不是新政策阈值。名义上飞至各自目的地的额外耗能，不能按比例解释当前 30 tick 的实际消费。
+
+这排除了“未激活”和“全部差异只在后期充电出现”。它也没有证明单一替代机制：共同历史上的不同 assignment 已经改变服务，但路径、空间覆盖和路由贡献仍没有被分别识别。首窗收益还会与完整任务反号，不能拿它替代主终点。
+
+**关键原生正反例支持的是多种取舍，不能收束成一个低电故事。**
+
+- **世界 08，保留 B 的个体服务能力及代价。** 同一个最差用户 4 的 QoS/H，C/E/B 为 **0.47234/0.50351/0.64179**。B−C 的 J 为 +31.551，但团队耗能增加 53.807 Wh；B−E 的累计 QoS反而减少 11.687，13 用户改善、17 用户变差。最低用户的明显改善是真实的，同时存在重新分配服务与资源的代价。
+- **世界 20，保留 E 的完整有益实例。** E−C 的 J **+190.268**、QoS +186.285、耗能 **−27.428 Wh**，储备曝光从 6 降为 0。这是资源准则确有条件用途的证据，不应被总体不确定均值抹掉；既有长断服务段仍未因此修复。
+- **世界 09，B 部分缓解 E，远未恢复 C。** C/E/B 的 J 为 **2460.780/1570.737/2049.258**，低储备曝光为 **137/6474/4359**。B−E 的 +478.520 J 很大，但 B−C 仍为 −411.522。E 最长低储备段 915 ticks，B 616，均延续到任务结束；这是严重风险尾部，不能因 B 优于 E 而淡化。
+- **世界 17，服务改善可以伴随更坏储备。** E 的储备曝光为零，但 QoS 仅 1755.224；B 提高至 2171.135，全部 30 用户 QoS 都提高，同时储备曝光增加到 1963。它否定“低储备解释全部服务损失”，也否定“服务改善来自更低储备”。
+- **世界 24，B 同时损害服务与资源。** B−E 的 J **−357.679**、QoS −127.746、低储备曝光 +2438、耗能 +35.836 Wh；21/30 用户 QoS 更差。名义 leximin 正确改善，并没有保护原生储备。
+- **世界 27，J 提高可以伴随服务下降。** B−E 的 J **+166.872**，但 QoS **−152.773**，23/30 用户变差；主要账面抵消来自 return cost 降低 159.825。把这个世界称为“服务改善”会直接读错原生结果。
+
+**最强竞争解释与尚未识别的机制**
+
+最强简单解释不是“电量信息没有价值”，而是：**普通 C 的距离与持续目标偏置已经提供有效协调；E/B 用新的局部准则覆盖它，改变了在移动中的服务几何和随后可用性，而局部目标没有表达完整任务价值。**
+
+具体限制如下：
+
+1. **E−C 不是纯粹的能量计算增量。** C 对继续目标有 300 m 迟滞优惠，E 的最终重排不保留该目标函数。新功率映射、取消此偏置及后续历史共同改变。数据没有识别其中哪一项主导损失。
+2. **B−E 不是纯电量信息价值。** 它同时改变完整 slack 排序、目标返航需求的作用和异步到达取舍。
+3. **arrival slack 不是未来同一时刻的机队储备。** 它没有完整计价到达后的服务、后续重规划、实际 guard、排队或充电。源码和本轮结果支持这一用途边界，却不证明“加入其中某一项就会修复”。
+4. **B 的用户最低值收益是实测的涌现结果。** 准则没有直接优化用户公平，不能从一次次 slack 提升推导用户公平增量。
+5. **B12 不涉及学习能力的否定。** 它是零拟合普通准则研究，没有测试新的表示、训练目标或可学习性。
+
+H 的服务能力、H_T 相对 H 的实际移动/能源节省及其最差用户损失继续成立。B09 的 F−H 条件增量及 F−C 缺口、B08 的预测准确而完整收益未建立也继续成立。**本批没有预测处理，不能给预测能力新增正负结论，更不能跨面板相减成“修复幅度”。**
+
+**完整价格与数值记录**
+
+科学链含 worker 和完整 reader，计量 CPU **6224.534947 s**；加有限检查和工程一次，计量执行/检查/读取账为 **6517.883985 s = 1.810523 CPUh**。它低于事前 2–5 CPUh 预测，但并非全项目支持成本。
+
+总量保留如下：
+
+| 范围 | 实际完成 |
+|---|---:|
+| 新 native / resets / constructions / fits | 204000 / 68 / 136 / 0 |
+| worker、reader、检查 proposal / 计划边界 | 408976 / 13648 |
+| 完成的排列准则计算 | 4325982，含 760 个 mock-input 计算 |
+| flight/slack edges / target-return 计算 | 241492 / 42688 |
+| 保存实际运动的功率检查行 | 4080000 |
+| 各范围合计标量功率参数行 | 4323105 |
+| 旧服务 nominal / RF / tracker / private-model 调用 | 全部 0 |
+
+原有限检查的两个 mock 失败函数尝试仍保留；它们不是科学任务失败。reader 已完成的功率检查没有在本审查中重做。
+
+DM 保存表算术另计 **4.205592 CPU s**；收集、观察、源码准备、清理、实现与科学支持另有成本，不能写零。10–16 支持小时是事前预测，不是已量测总工时。我的审查也未完整计量：两个关键远端保存数组脚本分别报告约 0.678 和 0.644 CPU s，其余读取、算术、一次 NumPy 布尔序列化失败及审查支持未完整计量；这些局部数不能冒充本次审查总成本。
+
+存在两个已明确保留的记录问题，均不要求重跑：
+
+- `chain_resources.cpu_seconds` 的 16.186 秒是 parent 范围，继承的 scope 文本却写成包含 descendants；应使用完整 chain/checkpoint 数值，不能再相加组件制造总价。
+- 清理 wrapper 曾把含 `allocated_bytes` 的字典与只含 SHA/bytes 的字典整体比较，产生 173 个伪 mismatch。保存值投影后 **173 个 SHA/bytes 全部相同**，原失败与解释均保留。
+
+64 个科学 raw 为 **644,059,136 allocated bytes**；含工程共 68 个必要 raw 为 **685,932,544 bytes**。源码及 scratch 清理记录实减 **3,633,078,272 allocated bytes**，没有删除唯一原始证据。进程峰值 RSS 有记录，但并发总峰值没有直接量测，不能把各进程最大值相加后称为实测。
+
+**下一投入的判断**
+
+我支持 DM 结束这两种固定资源准则的自动扩展，且认为本轮没有必须立即购买的修补。尤其不建议据此自动加入队列模型、改变 reserve 权重、加 epsilon、寻找阈值或加世界。也不建议先买一串迟滞/激活诊断：即使解释了 E 的一部分损失，也未必改变 C/H/H_T 已有的完整选择。
+
+方向修正应是：**下一提案必须说清它要改变哪一个实际控制器选择，以及为什么普通 C 或既有 H_T 不能回答；不能只承诺把到达代理做得更精细。** “同时处理服务和后期可用性”是应读取的后果，不是必须购买更复杂模型的结论。
+
+如果后续确有采用或复用普通控制器的实际决策，最窄、能够改变行动的问题是：**冻结的 H_T 相对 C，在未见世界上能否保留完整服务/J收益，其个体服务与资源代价是否适合指定用途？** 这是对已有正面资产的检验，不是救援 E/B。两臂、32 新世界、H3000 的原生部分为 192,000 steps、0 fit；工程及完整 reader 另计，H_T 的 nominal/RF 成本不能套用 B12 的 1.81 CPUh，须先形成完整价格。**我现在不把它列为自动待执行批次。**
+
+这样的观察只有在结果会改变使用选择时才值得买：
+
+- 若完整增益保留且代价可接受，H_T 成为更有根据的普通能力基线；
+- 若总体收益伴随持续的最差用户损失，只支持特定目标下的取舍；
+- 若增益不迁移，保留 C 的普通竞争力，不自动扩大确认或修补。
+
+在没有这类实际选择需求或更有区分力的完整后继合同前，**不购买新 S7 批次是合理结论**。保留方向责任、正面能力和问题，并不要求每批结果后立即再运行。
+
+**MATERIAL_DISSENT: no。** 对象是 DM 当前“保留条件资产、结束 E/B 固定准则自动扩展、暂无选定后继”的处置，我没有实质反对。我的补充限制是：不得把模型遗漏列表当成必须投入复杂修复的因果证据，也不得把 B 的最低用户收益、名义 slack 改善或相对 E 的恢复升级为完整默认控制器优势。
+````
+
+#### DM response and belief update; separate from the original answer
+
+**MATERIAL_DISSENT: no.** I accept the independent reconstruction and disposition, including its correction to any overly broad reading of my successor paragraph. Improving actual service during movement and later availability names consequences that a useful controller must be judged on; it does not establish that a larger queue/guard/service model must now be built. A list of omissions is not a diagnosed causal repair. The current evidence justifies ending automatic E/B proxy refinement, not an unpriced complex replacement, epsilon, weight, threshold, additional arm, seed or fitting purchase.
+
+The critic independently verifies all315 paired readings and their actual frozen sources, then adds two load-bearing limitations. First, the32 B/E common-history first divergences have identical legal state, ordinary targets, columns and complete candidate tables. B pays more intended flight Wh for strictly better full slack in all32 (30 higher minima,2 later components). Actual next30tick QoS goes13up/15down/4equal, with initial F=0 and return-cost difference0. This strengthens the conclusion that the intervention changes service before later return penalties; it excludes inactivity and a story in which all differences arise only from subsequent charging. It does **not** isolate coverage from routing or trajectory geometry, show that complete benefit is determined by the first window, or validate an early-window gate. The23/32 absolute actual energy differences below1e−5Wh merely describe the recorded scale; no threshold or epsilon is selected from it. Wh remains separate from the actual J decomposition.
+
+Second, world29910023 user13's right-censored terminal gaps C/E/B420/388/454ticks show that B can improve a world's minimum-user average while worsening a named user's service and terminal continuity. Keep this alongside the broader247 longer versus167 shorter individual maximum gaps under B−C and the retained473tick internal outage in world32. The B minimum-user result is a measured secondary capability, not universal fairness. In world08, the same weakest user4 improves from C.47234/E.50351 to B.64179 QoS/H, yet B−C consumes53.807Wh more and B−E loses11.687 total QoS. In world20 E jointly improves J/service/energy, whereas world24 B jointly worsens service/reserve/energy and world27 raises J166.872 while losing152.773QoS and hurting23/30users. These additions reinforce the full positive/adverse interpretation rather than replacing it with a mean ranking.
+
+The strongest ordinary competing explanation remains C's useful distance/continued-target coordination plus genuinely consequential service geometry and later state evolution. E overrides300m hysteresis as well as introducing energy criteria; B changes the full return/slack objective rather than battery information alone. Their observed intention improvements do not identify which component makes any world better or worse. Retain H/H_T's established complete tradeoffs and B09/B08 prediction evidence; B12 has0learning/forecast treatment and changes no learnability or forecasting claim. Existing C/P_BS restrictions and all original adverse worlds remain.
+
+The independent reading checked23 complete raw trajectories and all32 first-divergence windows from saved data, with0new controller/edge/public-power/RF/native/model queries and no bulk copy. Its two reported remote saved-array script CPU scopes are approximately.678s and.644s; the rest of reading/arithmetic, a NumPy Boolean serialization failure and scientific support were not completely metered. Preserve that failure and cost uncertainty: those two values are not the full review cost, and no extra fit/model/native work is inferred. The inherited CPU-label defect and cleanup-wrapper false dictionary mismatches remain explicit; neither changes the scientific endpoint or justifies repetition.
+
+The proposed fresh-world H_T-versus-C comparison is a **conditional candidate only**: if an actual adoption/use choice needs that evidence, a complete prospective price and claim-specific review would be needed. Its192000native two-arm subtotal is not a full bill; engineering, nominal/RF and reader costs cannot be priced as B12's cheaper analytical controller. Neither Root nor this DM selects that comparison here. The temporary Oracle is considering a different constructive question with prior gating/cadence evidence; there is no standing Oracle approval loop, no duplicate result critic, and no selected new query in this record. The present full B12 judgment is complete; scientific question responsibility continues.
+
+#### Root disposition received and adopted
+
+Root reported full original reading and accepted retaining the positive capabilities and complete counterexamples, ending E/B fixed-rule automatic expansion, and making no default-adoption or confirmation claim. Root agrees that model omissions alone do not purchase a complex repair. It explicitly leaves H_T/C fresh comparison unselected and is obtaining a temporary constructive successor recommendation while checking `uav_parent_adaptation`, `coupled_host_replan_timing` and this direction's B06 to avoid repurchasing gating/cadence. That cross-question construction does not restart a producer or pause this direction. This DM retains the complete service/resource question and owns ordinary in-scope publication/cleanup. No further scientific result operation has been accepted.
+
+
+<a id="b12-final-cleanup"></a>
+### B12 fixed comparison closed with complete evidence and measured cleanup — 2026-10-02
+
+The independent critic has finished, its complete original and resolved DM response are preserved above, and the temporary Oracle explicitly released its current B12 driver read dependency. The worker/reader are terminal, observer25 is stopped, there is no accepted or uncertain operation to rebind, and no additional result query/fit/confirmation is selected. Root still constructs the parent question's next investment; this source/result closure is not an owner pause, a replacement DM or a loss of scientific responsibility.
+
+After checking imports, entrypoints, tests, notebook references, both actual read consumers and durable source identities, [code retirement receipt](../../../../runs/uav_fleet_transmission/b12_resource_assignment_a01/code-cleanup.json) records removal of exactly eight B12 one-shot files—`capture.py`, `checks.py`, `contract.py`, `metrics.py`, `reader.py`, `references.json`, `run.py`, `study.py`—and matching `test_support.py`. Their committed bytes remain in [frozen scientific source](https://github.com/CartmanFatass/My-paper-code/tree/65caed8708a33782b942bf74fd66ee2a31aee3b2/experiments/candidates/uav_fleet_transmission/b12_resource_assignment) and [frozen tests](https://github.com/CartmanFatass/My-paper-code/tree/65caed8708a33782b942bf74fd66ee2a31aee3b2/tests/experiments/candidates/uav_fleet_transmission/b12_resource_assignment). The reusable `controller.py`, `energy.py`, `trace.py`, package initializer and meaningful `test_controller.py` remain byte-identical and were checked by AST without importing or running a controller/model. No effect test or third reader was bought for deletion.
+
+The nine retired current files occupied **86016allocated bytes**, now0 and all absent. Combined with engineering source/registration1816195072bytes, science source/registration1816768512bytes, and consumed local scratch/caches114688bytes, **B12 total exact-target allocated reclamation is 3633164288bytes**. This is measured removal of those targets, not a claim about global disk free space while other DMs write. No full-tree copy, tarball, retention chain or old-reference duplicate was created. All68 unique new raw files remain on the canonical node,685932544allocated bytes; all required compact positive/adverse/failed evidence and source identities are published. C/H/H_T/B09 and other directions' live source/raw are untouched. There is no remaining cleanup tool blocker or unused B12 execution queue.
+
+The stable scientific result is the complete32-exposed-world seven-contrast reading: no established E/B default J upgrade, real active assignment changes, E resource-tail loss versus C, B added travel/consumption versus E, retained B minimum-user/E-world/H-service/H_T-resource capabilities, and all first-window/censored/adverse cases. MATERIAL_DISSENT:no applies to that complete disposition, not to any unselected successor.

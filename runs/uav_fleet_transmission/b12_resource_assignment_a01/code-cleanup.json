@@ -1,0 +1,75 @@
+{
+  "absent": {
+    "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/capture.py": true,
+    "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/checks.py": true,
+    "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/contract.py": true,
+    "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/metrics.py": true,
+    "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/reader.py": true,
+    "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/references.json": true,
+    "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/run.py": true,
+    "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/study.py": true,
+    "tests/experiments/candidates/uav_fleet_transmission/b12_resource_assignment/test_support.py": true
+  },
+  "after_allocated_bytes": {
+    "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/capture.py": 0,
+    "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/checks.py": 0,
+    "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/contract.py": 0,
+    "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/metrics.py": 0,
+    "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/reader.py": 0,
+    "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/references.json": 0,
+    "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/run.py": 0,
+    "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/study.py": 0,
+    "tests/experiments/candidates/uav_fleet_transmission/b12_resource_assignment/test_support.py": 0
+  },
+  "before_allocated_bytes": {
+    "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/capture.py": 4096,
+    "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/checks.py": 4096,
+    "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/contract.py": 8192,
+    "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/metrics.py": 4096,
+    "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/reader.py": 32768,
+    "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/references.json": 4096,
+    "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/run.py": 8192,
+    "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/study.py": 16384,
+    "tests/experiments/candidates/uav_fleet_transmission/b12_resource_assignment/test_support.py": 4096
+  },
+  "complete_B12_target_reclamation_bytes": 3633164288,
+  "consumer_resolution": {
+    "independent_result_critic": "complete native final2026-10-02T08:35:51.403Z",
+    "observer": "generation25 stopped, no pending events/jobs",
+    "temporary_oracle": "native message explicitly states no remaining current B12 driver dependency; only retained B10/C interfaces needed",
+    "worker_reader": "valid terminal, recorded runner and supervisor absent"
+  },
+  "cpu_scope": "parent-only metadata/hash/AST; Git child and support CPU not fully metered",
+  "frozen_source": "65caed8708a33782b942bf74fd66ee2a31aee3b2",
+  "net_reclaimed_bytes": 86016,
+  "new_controller_or_model_or_native_or_fit_queries": 0,
+  "parent_cpu_seconds": 0.019664847,
+  "removed_sha256": {
+    "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/capture.py": "62b933211c7f6a36d152c6faa13649cd9d473d0623b2dedc74ef5c70212d76bb",
+    "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/checks.py": "7270ccadbf1131e166aa99fc813ff1ca82f00095747c5cb6d3997ace29afbd0c",
+    "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/contract.py": "f457ef57e64de893476335b1b9fddc4d46b6e6426cd4293a323d56cb40990c01",
+    "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/metrics.py": "f8b56f4f37c21a9d1487a2d58c7f518ccd7324b0fb15e2463adfc1f6aef911c9",
+    "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/reader.py": "75336faff0256fbd857fef2ed30a2bb5d450362d35aca9127b77cc3069e8599c",
+    "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/references.json": "ca395cb62b9adada14e067fec7d74e5f5a6901805bf45a8701bfc1a2a377207f",
+    "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/run.py": "48384e62b685d04b00b0fdd583fd1e37457974c393a7882d18dc3499dc342dfb",
+    "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/study.py": "08b194b3d7766fb11ca3569208e097018c8d98eb1daf916864951ded32a7923d",
+    "tests/experiments/candidates/uav_fleet_transmission/b12_resource_assignment/test_support.py": "1506080d94d0322eb2a5360c2a60781fc5dd0510980d049764b12dcde9a9c5bf"
+  },
+  "retained_sha256": {
+    "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/__init__.py": "f1513ee81c75b21cc4ed6ed2bd6addfe5d3421e6d7d5027e79bd2d0c6fc70b2b",
+    "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/controller.py": "b9bb8832dd7d07d604a8e890543cb8584f1133cd7d2ce0bf5b0828cd8860da69",
+    "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/energy.py": "5b7c079dd4a2641d110d20b51f567bb664a74e7b0d72fc536a203b1fffeac2ee",
+    "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/trace.py": "d5be11ff136f585ccef6d4458a29523185dd9ea34986068c73f99e6b8d93cdf6",
+    "tests/experiments/candidates/uav_fleet_transmission/b12_resource_assignment/test_controller.py": "e66041c10bfa5e44e250612777c48d73503695bfd11cbc00bdc2a8b046bd8a3f"
+  },
+  "scope": "Retire consumed one-shot B12 launch/capture/reader/contract/check scaffolds and their support-only tests; retain reusable exact core and meaningful controller tests.",
+  "static_AST_parsed": [
+    "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/__init__.py",
+    "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/controller.py",
+    "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/energy.py",
+    "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/trace.py",
+    "tests/experiments/candidates/uav_fleet_transmission/b12_resource_assignment/test_controller.py"
+  ],
+  "static_consumer_check": "rg over experiments/tests/scripts plus NOTES/RESEARCH found no external executable imports/calls of retired modules; only retired internal driver/support references. Frozen historical source linked in NOTES.",
+  "wall_seconds": 0.13097066799673485
+}

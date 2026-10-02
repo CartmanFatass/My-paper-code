@@ -1,0 +1,58 @@
+{
+  "agent_uuid": "01a0f9fe-de22-7d73-82c2-129a0cadede6",
+  "rollout": "/mnt/c/Users/fires/.codex/sessions/2026/10/01/rollout-2026-10-01T17-23-45-01a0f9fe-de22-7d73-82c2-129a0cadede6.jsonl",
+  "line": 2164,
+  "timestamp": "2026-10-02T08:35:51.403Z",
+  "turn_context": {
+    "turn_id": "01a0fba6-c0c9-72e0-ab52-11d5f2bc836d",
+    "root_turn_id": "01a0f9f0-0086-7b70-8d98-ed5843972a57",
+    "disabled_plugin_ids": [],
+    "cwd": "/home/fires/hmasd-wsl",
+    "workspace_roots": [
+      "/home/fires/hmasd-wsl",
+      "/mnt/c/Users/fires/.codex/visualizations/2026/10/01/01a0f779-ace2-74e1-85ad-e0997b61d505"
+    ],
+    "current_date": "2026-10-02",
+    "timezone": "America/Los_Angeles",
+    "approval_policy": "never",
+    "approvals_reviewer": "user",
+    "sandbox_policy": {
+      "type": "danger-full-access"
+    },
+    "permission_profile": {
+      "type": "disabled"
+    },
+    "active_permission_profile": {
+      "id": ":danger-full-access"
+    },
+    "model": "gpt-6-astra",
+    "comp_hash": "3000",
+    "personality": "pragmatic",
+    "collaboration_mode": {
+      "mode": "default",
+      "settings": {
+        "model": "gpt-6-astra",
+        "reasoning_effort": "max",
+        "developer_instructions": null
+      }
+    },
+    "multi_agent_version": "v2",
+    "realtime_active": false,
+    "cyber_access_program": "standard",
+    "effort": "max",
+    "summary": "detailed"
+  },
+  "task_complete": {
+    "type": "task_complete",
+    "turn_id": "01a0fba6-c0c9-72e0-ab52-11d5f2bc836d",
+    "started_at": 1790928405,
+    "completed_at": 1790930151,
+    "duration_ms": 1709275,
+    "time_to_first_token_ms": 19319
+  },
+  "utf8_bytes": 17358,
+  "sha256": "47996574b2498dc5c0d30a5a3cfa8a4cb9e5e5aa679ea4c6eec2b6c114cb4579",
+  "mechanically_verified_by_dm": true,
+  "original_retention": "docs/research/candidates/uav_fleet_transmission/NOTES.md#b12-independent-disposition",
+  "body_storage": "verbatim fenced block in NOTES; metadata only here"
+}
