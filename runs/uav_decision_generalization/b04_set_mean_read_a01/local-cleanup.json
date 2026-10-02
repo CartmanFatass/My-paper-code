@@ -1,0 +1,186 @@
+{
+  "schema": 1,
+  "recorded_at_utc": "2026-10-02T21:41:18.458738+00:00",
+  "direction": "uav_decision_generalization",
+  "study": "B04 frozen SET initial/final deterministic mean",
+  "published_scientific_result_commit": "17a02358a608b81f29bf8dd3a6d3a2daf341e8c8",
+  "local_root": "/home/fires/hmasd-wsl",
+  "deleted_targets": [
+    {
+      "path": "temp/directions/uav_decision_generalization/b04_observation",
+      "entries": 5,
+      "logical_bytes_before": 19521,
+      "allocated_bytes_before": 20480,
+      "target_exists_after": false,
+      "allocated_bytes_after": 0
+    },
+    {
+      "path": "temp/directions/uav_decision_generalization/b04_worker_observer_request.json",
+      "entries": 1,
+      "logical_bytes_before": 477,
+      "allocated_bytes_before": 4096,
+      "target_exists_after": false,
+      "allocated_bytes_after": 0
+    },
+    {
+      "path": "temp/directions/uav_decision_generalization/b04_reader_observer_request.json",
+      "entries": 1,
+      "logical_bytes_before": 477,
+      "allocated_bytes_before": 4096,
+      "target_exists_after": false,
+      "allocated_bytes_after": 0
+    },
+    {
+      "path": "temp/directions/uav_decision_generalization/b04_worker_drain.json",
+      "entries": 1,
+      "logical_bytes_before": 7670,
+      "allocated_bytes_before": 8192,
+      "target_exists_after": false,
+      "allocated_bytes_after": 0
+    },
+    {
+      "path": "temp/directions/uav_decision_generalization/b04_reader_drain.json",
+      "entries": 1,
+      "logical_bytes_before": 11425,
+      "allocated_bytes_before": 12288,
+      "target_exists_after": false,
+      "allocated_bytes_after": 0
+    },
+    {
+      "path": "temp/directions/uav_decision_generalization/b04_worker_gc_preview.json",
+      "entries": 1,
+      "logical_bytes_before": 704,
+      "allocated_bytes_before": 4096,
+      "target_exists_after": false,
+      "allocated_bytes_after": 0
+    },
+    {
+      "path": "temp/directions/uav_decision_generalization/b04_reader_gc_preview.json",
+      "entries": 1,
+      "logical_bytes_before": 701,
+      "allocated_bytes_before": 4096,
+      "target_exists_after": false,
+      "allocated_bytes_after": 0
+    },
+    {
+      "path": "temp/directions/uav_decision_generalization/b04_interstage_cost.json",
+      "entries": 1,
+      "logical_bytes_before": 243,
+      "allocated_bytes_before": 4096,
+      "target_exists_after": false,
+      "allocated_bytes_after": 0
+    },
+    {
+      "path": "temp/directions/uav_decision_generalization/b04_untimed_diagnostic.json",
+      "entries": 1,
+      "logical_bytes_before": 4657,
+      "allocated_bytes_before": 8192,
+      "target_exists_after": false,
+      "allocated_bytes_after": 0
+    },
+    {
+      "path": "experiments/candidates/uav_decision_generalization/b04_set_mean/__pycache__",
+      "entries": 7,
+      "logical_bytes_before": 36731,
+      "allocated_bytes_before": 49152,
+      "target_exists_after": false,
+      "allocated_bytes_after": 0
+    },
+    {
+      "path": "tests/experiments/candidates/uav_decision_generalization/b04_set_mean/__pycache__",
+      "entries": 2,
+      "logical_bytes_before": 44633,
+      "allocated_bytes_before": 45056,
+      "target_exists_after": false,
+      "allocated_bytes_after": 0
+    },
+    {
+      "path": "runs/uav_decision_generalization/b04_set_mean_a01/stdout.log",
+      "entries": 1,
+      "logical_bytes_before": 0,
+      "allocated_bytes_before": 0,
+      "target_exists_after": false,
+      "allocated_bytes_after": 0
+    },
+    {
+      "path": "runs/uav_decision_generalization/b04_set_mean_a01/stderr.log",
+      "entries": 1,
+      "logical_bytes_before": 753,
+      "allocated_bytes_before": 4096,
+      "target_exists_after": false,
+      "allocated_bytes_after": 0
+    },
+    {
+      "path": "runs/uav_decision_generalization/b04_set_mean_read_a01/stdout.log",
+      "entries": 1,
+      "logical_bytes_before": 0,
+      "allocated_bytes_before": 0,
+      "target_exists_after": false,
+      "allocated_bytes_after": 0
+    },
+    {
+      "path": "runs/uav_decision_generalization/b04_set_mean_read_a01/stderr.log",
+      "entries": 1,
+      "logical_bytes_before": 753,
+      "allocated_bytes_before": 4096,
+      "target_exists_after": false,
+      "allocated_bytes_after": 0
+    },
+    {
+      "path": "runs/uav_decision_generalization/b04_set_mean_read_a01/reading.json",
+      "entries": 1,
+      "logical_bytes_before": 2678714,
+      "allocated_bytes_before": 2678784,
+      "target_exists_after": false,
+      "allocated_bytes_after": 0
+    }
+  ],
+  "local_gross_reclaimed_bytes": 2850816,
+  "remote_snapshot_cleanup": [
+    {
+      "receipt": "runs/uav_decision_generalization/b04_set_mean_a01/worker-snapshot-cleanup.json",
+      "target": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/dc12271b49d24878badc6eea3f30976b",
+      "net_reclaimed_bytes": 1827221504
+    },
+    {
+      "receipt": "runs/uav_decision_generalization/b04_set_mean_read_a01/reader-snapshot-cleanup.json",
+      "target": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/57cea9a364734982a798f0db050f4529",
+      "net_reclaimed_bytes": 1827307520
+    }
+  ],
+  "remote_net_reclaimed_bytes": 3654529024,
+  "consumer_check": {
+    "root": "No live use or dependency on temporary full reading; native statement 2026-10-02.",
+    "successor_oracle": "No live use or future dependency on temporary full reading; native statement 2026-10-02.",
+    "scientific_reviewer": "Complete; original full answer and DM disposition published.",
+    "observer_stopped": true,
+    "observer_generation": 4,
+    "observer_daemon_pid_absent": 593649,
+    "consumed_events": [
+      "077d781b6f3c81d9b986d713",
+      "2c00001d77763569f2ee5554"
+    ]
+  },
+  "retained": {
+    "canonical_full_reading": "wsl_4070:/home/wu/projects/HMASD/runs/uav_decision_generalization/b04_set_mean_read_a01/reading.json",
+    "canonical_full_reading_sha256": "acd3c5df08094396a8016c997387dc5372861a805686298a63dbc8e9583e1ff2",
+    "canonical_worker_raw": "wsl_4070:/home/wu/projects/HMASD/runs/uav_decision_generalization/b04_set_mean_a01",
+    "compact_git_evidence": "runs/uav_decision_generalization/b04_set_mean_read_a01/dm-reading.json",
+    "code_and_tests": "Useful frozen-mode implementation/reader/tests retained; no unused experimental source introduced.",
+    "ancestor_weights": "Original B03 endpoints and all required adverse/positive evidence retained."
+  },
+  "bulk_relocation_or_backup": false,
+  "actual_leftovers": [],
+  "tool_blocker": null,
+  "accounting": {
+    "notes_allocated_bytes_before_final_cleanup": 430080,
+    "local_target_bytes_after": 0,
+    "notes_allocated_growth_bytes": 4096,
+    "new_receipt_allocated_bytes": 8192,
+    "local_net_after_record_and_notebook_bytes": 2838528,
+    "combined_net_after_record_and_notebook_bytes": 3657367552,
+    "scope": "Exact deleted target allocations plus final cleanup record and notebook allocation growth; excludes unrelated concurrent writes and Git object storage."
+  },
+  "cleanup_script_self_cpu_seconds": 0.010536494000000007,
+  "support_time_scope": "Script self CPU only; shell, Git, orchestration, filesystem inspection and authoring are unmetered, not zero."
+}

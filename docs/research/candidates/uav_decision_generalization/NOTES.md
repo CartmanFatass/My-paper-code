@@ -5671,3 +5671,50 @@ arithmetic blocks with its explicitly excluded support/failed-read costs.
 These distinct reported scopes remain separate, and neither is a complete
 support-time total. The reviewer has finished, so the temporary local full
 reading and closed observation scratch have no remaining live consumer.
+
+<a id="b04-final-cleanup"></a>
+#### 2026-10-02 — Published closure and measured final cleanup
+
+The complete B04 scientific result, full original independent answer, resolved
+disposition, compact reading and directly affected RESEARCH standing/background
+were published as `17a02358a608b81f29bf8dd3a6d3a2daf341e8c8` before deletion.
+Root subsequently incorporated that result in its own cross-question plan;
+the original direction lead and broader question ownership remain unchanged.
+Root's separate successor Oracle creates no new B04 effect or selected study.
+Both Root and that Oracle explicitly confirmed that they neither use nor need
+the temporary local full `reading.json`; the scientific reviewer is finished.
+This check concerns an actual possible consumer, not scientific approval.
+
+I removed all16 exact local targets listed in
+[`local-cleanup.json`](../../../../runs/uav_decision_generalization/b04_set_mean_read_a01/local-cleanup.json):
+the stopped `b04_observation/` directory; eight B04 observer/request/drain/GC/
+interstage/diagnostic scratch files; the two new B04 `__pycache__/` directories;
+four duplicate worker/reader stdout/stderr files; and the temporary full reader
+copy. Before deletion, the observer was stopped at generation4, both READY
+events were consumed, its wake was empty and PID593649 was absent. The logs and
+full reading matched their retained canonical collection identities. No target
+was tracked, and every named target is now absent. These local targets occupied
+2,850,816 allocated bytes. The receipt accounts separately for its own storage
+and this notebook's allocation growth.
+
+The earlier supported worker and reader snapshot GC receipts remain published:
+`dc12271b49d24878badc6eea3f30976b` reclaimed1,827,221,504 bytes and
+`57cea9a364734982a798f0db050f4529` reclaimed1,827,307,520 bytes, both with
+their exact targets absent. Thus the two remote source snapshots reclaimed
+3,654,529,024 allocated bytes. There was no bulk relocation, tarball, backup
+chain or replacement copy. The original B03 weights and required positive,
+adverse and failed evidence remain; B04's unique raw/check/full-reading evidence
+remains at the verified canonical `wsl_4070` run roots. The useful implementation,
+tests and compact Git reading remain published. No unused experimental source
+was introduced by this study. No cleanup target remains and no tool blocker
+remains.
+
+The final deletion script used0.010536494 CPU-s, bringing the known new DM
+metered subtotal to924.789071791 CPU-s (about0.257 CPU-hours). Final record/Git/
+authoring and otherwise unmetered support are not included and are not zero;
+the independent review's separately scoped2.921449218 CPU-s and inherited
+B03 cost remain separate. The closed scientific exposure remains66H500,
+33000 native steps,0 new fits,0 optimizer updates and0 GPU use. Cleanup adds
+no scientific execution and does not extend this batch. This completes the
+selected study's execution, full reading, independent judgment, publication
+and cleanup; any later investment requires Root's separate substantive choice.
