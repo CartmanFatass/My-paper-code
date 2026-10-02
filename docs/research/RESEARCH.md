@@ -2474,18 +2474,19 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 
 <a id="three-dm-decision-assistance-20261001"></a>
 **Owner长期决策辅助与3DM安排（2026-10-01 PDT）：** 当前具体工作是从已有证据构造并推进下一笔有价值的完整研究，
-不把B01的两个包结果当作开源决策模型／联合学习路线终点。下面三位DM已按实际原生地址启动；Root已读三项完整合同与各自原始独立意见，选择三项互补比较并交各DM自主推进。实验接受仍以原生准入句柄为准。
+不把B01的两个包结果当作开源决策模型／联合学习路线终点。三位DM持续持有下列问题；A/R与B02已完整收尾并保留正反能力，S7 B10主面板正在原接受句柄上运行。Root已读两项完整结果及原始独立意见，继续滚动选择；不存在新的owner暂停或等待统一下一轮的边界。实验接受仍以原生准入句柄为准。
 
 | 科学责任 | 当前有实质的工作与边界 | 负责人 |
 | --- | --- | --- |
-| 广义开源／可学习决策辅助，长期持有 | 研究可复用先验或任务学习模块如何与控制／规划协作，提高新场景原生决策、经验使用或质量／计算取舍。已选择用旧64世界的已付搜索经验选择一个尚未执行的relay分支，对普通rank0与完整搜索作G/L/P比较；训练选定固定rank与G精确相同，只报告别名。1个固定ridge资产，保留已付初始incumbent；完整合同及独立意见已读并采纳，DM自主推进。不限定Laya、语言模型、静态8-menu或t0选择。 | 原DM `/root/dm_typed_joint_skill`，稳定路径 `typed_joint_skill_decision`；长期负责人延续。 |
-| 学习辅助器的结构与新场景泛化 | 已选择同已付训练数据的A/R完整比较：A为几何关系展开MLP，R为共享实体／边消息计算，各3 fits，对保留的旧N端点及固定／静态规则在384新世界评价。已读完整独立意见并采纳，DM自主推进实现、工程核对、发布、准入与完整结果；这是有限数据泛化问题，不预先宣布几何是原因。 | 新DM `/root/dm_decision_generalization`，独占 `uav_decision_generalization` 对应路径。 |
-| 把已展示预测用途发展为完整控制能力 | 已选择B10 C/H_A/F_A在本臂普通C本次目标多重集内交换service UAV目标分配，检验预测的完整policy增量及相对C用途；0fit／32新世界三臂H3000，已采纳完整独立意见，DM自主推进实现、准入与完整判读。保留B09预测正效应、B08负例和完整控制缺口，不复活旧zero-trigger合同。 | 原DM `/root/dm_s7_prediction_use`，保留 `uav_fleet_transmission` 所有权。 |
+| 广义开源／可学习决策辅助，长期持有 | 研究可复用先验或任务学习模块如何与控制／规划协作，提高新场景原生决策、经验使用或质量／计算取舍。B02 G/L/P已完整结束：精确ridge未建立fresh选择增量，普通G相对P的省时／质量代价保留。已完整读独立意见并支持DM推进独立B03固定36-query prefix Q：在已曝光64世界完整执行和计价，精确复用已有native alias、补齐所有缺口；source／真实暂停恢复／完整价格正在闭合，尚无新accepted operation。不限定Laya、语言模型、静态8-menu或t0选择。 | 原DM `/root/dm_typed_joint_skill`，稳定路径 `typed_joint_skill_decision`；长期负责人延续。 |
+| 学习辅助器的结构与新场景泛化 | A/R六fits与384新世界全量reader已完成；Root采纳原独立意见，保留R相对A/N/fixed的有限条件泛化能力，结束本次固定购买。第三块较弱且有严重全队零服务反例，static／fullplanner仍明显更强；不归因于纯结构。DM继续问题责任与建设性续向比较；普通有限优化、候选迁移及发展其他正资产正交由临时Oracle综合权衡，尚未选择新fit。 | 新DM `/root/dm_decision_generalization`，独占 `uav_decision_generalization` 对应路径。 |
+| 把已展示预测用途发展为完整控制能力 | B10 C/H_A/F_A完整工程核对已通过（包括C=REFERENCE），0fit／32新世界三臂H3000主面板正在op f48b8950…收集；本臂普通C本次目标多重集内交换service UAV分配，检验预测增量及相对C用途。原source／handle／合同保持，DM自主完整读取与独立结果判读。保留B09预测正效应、B08负例和完整控制缺口，不复活旧zero-trigger合同。 | 原DM `/root/dm_s7_prediction_use`，保留 `uav_fleet_transmission` 所有权。 |
 
 本次临时Oracle复用 `/root/successor_allocation_review`，实际本轮gpt-6-astra/max已核对；它向Root提供具体方案、
 候选比较与分配建议，必要时只向DM取已有源事实。Root整合建议并解决首次交叉范围／实质投资异议；
 此后DM按已定范围自主推进，不设置逐fit批准。Oracle不是第4位DM，也不接续承担实施或长期监督。
-临时Oracle本次任务现已完整返回并结束；[完整原始答复、身份及Root阅读](archive/2026-10-01/RESEARCH-three-dm-oracle-design-advice.md)已保留。
+临时Oracle首次任务已完整返回并结束；[完整原始答复、身份及Root阅读](archive/2026-10-01/RESEARCH-three-dm-oracle-design-advice.md)已保留。
+在A/R与B02完整新结果后，Root又临时复用同一Oracle作下一步问题／分工建议；它不参与S7当前运行，不替代各题独立结果critic，也不成为DM推进已获科学支持Q比较的等待门槛。该次咨询待完整答复后即结束。
 当前三位DM分别进行可并行的证据／资产／成本工作；一项方案就绪后即可推进，不等待三题同步齐备。
 具体新增拟合、标签、在线推理／规划与读器均须前瞻计价，未声明任何自动多模型扫描或新批次。
 B01的已曝光测试面板不能重新包装成确认集；L-F训练拟合弱与N训练／测试落差不能合并诊断。
