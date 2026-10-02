@@ -4571,3 +4571,86 @@ Design/source/review support occupied roughly41 minutes of this DM's turn from
 14:53 to15:34 UTC; the critic's accepted-to-return span was14m42s and overlapped it.
 These are session elapsed times, not measured inference CPU or additive worker
 hours. Tool/support CPU was not comprehensively metered and remains unknown.
+
+<a id="b07-selected-contract-l0"></a>
+### Root selection and L0 — 2026-10-02 UTC
+
+After reading the complete published design and original review at `1ec302ab4`,
+Root selected **one complete B07 package** through this same native child and
+published the selection at `17a18bb4690af65b4352c07a4ae82145e53d9653`. It accepted
+the declared remote runtime/throughput/RSS uncertainty and the support price for
+conditional knowledge of ordinary message sufficiency and a task-aware increment.
+This supersedes the earlier design-only restriction. There is no new teacher bank,
+policy/receiver fit, no-message control, alphabet sweep or preliminary health/pilot
+purchase. All fixed fits/native/reader exposure and the preceding runtime-binding/
+retention clarifications remain unchanged. A real technical failure preserves
+actual exposure and missingness; it grants no automatic retry, changed target/
+tolerance or replacement fit. Root owns the cross-question allocation; the DM now
+owns implementation through result reading, publication and measured cleanup.
+
+**Deliverable.** Implement the finite-message retrofit as one direction-local B07
+package: lawful byte codec and delayed cache; differentiable frozen D receiver;
+fixed old-bank fitting/development/replay; complete native comparison; independent
+full trace/model/physical/individual-service reader; compact counters/resources and
+artifact identities. New entrypoints live in
+`experiments/candidates/uav_message_content/b07/`; tests mirror that directory.
+Use ordinary imports from retained B05/B06/CADC/host helpers where applicable,
+without modifying frozen contracts or shared core. The Implementer owns these new
+implementation/test paths only in `/home/fires/hmasd-wsl` on shared `main`; the DM
+keeps NOTES, RESEARCH, run records, launch/collection, review and the Git index.
+No helper commit, branch/index mutation, result launch, Pro or child delegation.
+Other sessions own their edits; preserve them.
+
+**Protected semantics.** D19702 and B19451 weights and declared asset hashes;
+six lawful source fields `[0,1,2,3,4,6]`;256 shared rows;3-byte compressed packet
+including header plus2-byte public beacon; known-zero reconstruction; no extra
+uplink/ACK or sender history; arrival-before-inference and1/5-tick delayed RR;
+current GOOD/BAD and send-time delay; zero self-cache; five separate3-vector motion
+draws per tick; own native histories; exact selected old-data split/seeds and fresh
+world tuples; all frozen parameter bytes; no critic/planner/Q calls. Full D/B use
+lossless six-FP32 payload plus the same metadata/beacon bill. Actual hard bytes
+travel through the delayed queue and the decoder runs on delivery, so no full
+precision payload is silently supplied to a compressed receiver.
+
+Fitting uses population SD (`ddof=0`) for the inverse-SD metric, scale
+`1/max(SD,.05)`, and squared distance `sum(((x-codeword)*scale)^2)`. Initialize
+each ordinary metric candidate with its named codec seed using an isolated RNG;
+fix20-epoch minibatch shuffling from a separate seed `codec_seed+10000`, with the
+same episode ordering for both metric candidates in each seed. Temperature is
+`.25*(.025/.25)**(epoch/19)`, epoch0..19. Exact nearest ties choose lowest index;
+zero-mass k-means++ fallback chooses the first as-yet-unselected source row.
+These deterministic implementation details spend no new candidates or outcomes.
+Task-aware hard lookup uses a soft reconstruction derivative as declared, without
+turning numerical soft/hard cancellation into a different forward message. Base,
+GRU, residual and log-std all permit input gradients while requiring no parameter
+gradients/updates. The dataset carries teacher physical/previous-action histories;
+only received values and recomputed recurrent memory change in offline fitting.
+
+**Checks.** Focused synthetic fixtures verify byte/header boundaries, deterministic
+nearest ties/empty clusters, packet delay/arrival/self-cache/age/pending/censoring,
+hard forward equality and an independent surrogate backward, input gradients
+through frozen base/GRU and zero frozen-parameter movement, complete recurrent
+state reset, isolated initialization/shuffle/motion RNG, fixed split/fit/update/
+row counters, mean-gap boundary conventions, parser and admission-before-effects,
+artifact identities and strict malformed-input failure. A mocked-admission bounded
+synthetic end-to-end test may cover runner/reader wiring; it is engineering work,
+not a scientific health/proxy gate and must be separately counted. All generated
+check files use pytest-owned `temp/` scratch. Use the configured local scientific
+interpreter for these checks, with no installation. Do not add paid-data scoring,
+fresh native pilots or a real fit to checks. Independent engineering review follows
+the diff and actual checks, focusing on numerics, delayed causality, RNG and reading.
+
+**Budget/stop and outputs.** The selected result package remains exactly12 codec
+fits/720 Adam updates,65,536 native steps plus already-priced development, binding
+replay and full reader. Entry must call `require_admission` before output creation,
+checkpoint loading/model construction or other scientific effects; launch SHA must
+match admission. Expose source SHA and input paths/hashes through explicit argparse;
+fixed scientific dimensions are not free sweep flags. Record phase/cell progress,
+started/completed fits/updates/forward rows/native calls, complete process CPU/wall/
+RSS and byte ledgers, and preserve partial output on failure. No resumption that
+repeats a started fit or accepted native effect is built in. A semantics or price
+conflict returns to DM before dependent work. The DM accepts the diff, publishes
+exact inputs, stages only declared remote inputs and admits the actual node; the
+Implementer supplies code/check evidence only. Keep compact summary/reading and
+failed/adverse facts; raw trajectories/dictionaries have explicit canonical paths,
+sizes and SHA256 rather than bulk Git additions.
