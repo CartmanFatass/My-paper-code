@@ -3968,3 +3968,177 @@ is unmetered. The earlier forecast18–26CPUh was a prediction, not a hard cap.
 Worker1196000 native/3fits/615600optimizer remain unchanged. Complete independent
 scientific diagnosis and DM result interpretation/cleanup follow below; exit0
 alone is not the final scientific disposition.
+
+
+<a id="b03-complete-reading"></a>
+### B03 DM complete scientific reading — 2026-10-02 UTC
+
+**The three trained instances do not establish useful acquisition of this joint
+window task. The constructive result is a strong lawful ordinary programme:** O
+completed all128/128 fresh windows, while H/H-noD/SET final completed5/6/4.
+The favorable H-over-noD prediction was not met. The fixed purchase is complete;
+this result does not automatically buy another seed, longer fit, entropy/head
+change, reward weight, easier geometry or teacher intervention. The broader
+learned-decision question and earlier R/S capabilities remain open. This is my
+own full reading before receiving the final independent result diagnosis below.
+
+I read the complete final reductions, all135 training-curve entries, every main
+endpoint's four window records and all primary/initial/final comparisons. The
+reader verified all232 frozen and2160 training missions; I additionally read70
+complete saved native trajectories across ten informative positive/adverse/zero
+worlds, all seven distinct programmes, with source-bound masks, payment timing,
+positions and full routes. These are selected examples, not a second endpoint
+panel. Their [compact factual extracts](../../../../runs/uav_decision_generalization/b03_joint_window_read_a02/dm-native-cases.json)
+bind the unchanged original raw SHA for each episode. This extra saved-data read
+used.294578266CPU seconds,0model/native/RF/optimizer calls; measured B03 cumulative
+is now52360.762292094s (14.544656192h), with unmeasured support kept separate.
+
+#### Complete task and individual-service outcome
+
+All numbers below average the same32 fresh worlds for the frozen deployable.
+Path is per-UAV metres over500ticks; the gap is each user's longest absence,
+including first/last censoring, then averaged over all50 users and worlds.
+
+| Programme | W /4 | Backhauled user fraction | Dense diagnostic J | Never served /50 | Mean user longest gap | Team-zero ticks | Mean path m |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| H initial (=noD initial) | .15625 | .16843 | .10527 | 37.000 | 405.076 | 116.281 | 13551.0 |
+| H final | .15625 | .14971 | .09312 | 35.844 | 411.833 | 158.344 | 13899.4 |
+| H-noD final | .18750 | .15219 | .09558 | 35.750 | 410.802 | 145.406 | 14020.6 |
+| SET initial | .06250 | .16019 | .10205 | 37.688 | 405.534 | 121.000 | 13560.9 |
+| SET final | .12500 | .14523 | .08921 | 35.750 | 411.644 | 150.156 | 13732.4 |
+| Sticky B | .34375 | .21545 | .13800 | 15.719 | 326.519 | 38.906 | 9294.9 |
+| Scheduled chain O | 4.00000 | .72364 | .45122 | 0.000 | 129.089 | 2.688 | 2208.2 |
+
+All28 pairwise comparisons, every world value and tails remain in the reading;
+this table does not replace them. O satisfies the declared score ceiling on this
+panel with substantially shorter travel, but it is not a global path optimum or
+a real-world energy/safety result. It serves every user sometime, not all50 users
+continuously: its mean world maximum same-user gap is364.34375ticks and its mean
+p90-user gap361.846875. The first pair intentionally leaves the first cluster at
+t130, consistent with a once-only four-window contract. Keep those censored tails
+when transferring its capability to a different service objective. Learned finals
+have a500-tick worst-user gap in every world. Secondary dense J was never a
+learning reward and is not the purchased primary endpoint.
+
+For H-final minus H-noD-final, mean W difference is−.03125 with conditional
+paired t95(df31)[−.225176,.162676], wins/losses/ties4/5/23. H-final minus SET-final
+is+.03125 [−.113093,.175593],3/2/27. The final-minus-initial W differences are
+H0 [−.158616,.158616], noD+.03125 [−.139692,.202192], SET+.0625
+[−.064970,.189970]. These intervals describe new-world variation conditional on
+three particular fits;32 worlds are not32 learning replications. They do not
+establish equivalence, an algorithm ranking, or that no amount/type of learning
+can solve the task. Each final has only0–1 payment per mission, whereas O has4.
+The useful conclusion is failure of this finite original-recipe acquisition
+purchase to produce a competitive complete deployable, including against the
+weakly informed but persistent B. Rare locally favorable worlds are retained.
+
+#### Opportunity, exposure and actual learning movement are distinct
+
+The ordinary opportunity is now measured, not just an analytic ray-chain claim.
+O's first payment action ranges27…104; its second/third/fourth payments are
+always144/269/394, with at least8 users served from each later window's first
+tick. Native association and BFS paths confirm actual multihop service. Thus
+neither absent joint opportunity nor an unattainable20-tick rule explains this
+panel. The full map/schedule and held snapshots were supplied and replay-checked
+according to each native programme's actual input routing. This is not the toy
+clock/reward flow, an off-policy label fit or an actor granted private ledger/ACK.
+
+All three learners encountered real successes while training: H62 completed
+windows across59/720 missions, noD71 across71/720, SET62 across61/720, each from
+2880 possible training windows. H and SET each reached2 in at least one training
+mission. The low external reward, d2 segment-discounted external-only high
+reward, episode terminal masks and retained noD discriminator updates all passed
+saved-data checks. No assertion that the learner received zero positive rewards
+is tenable. Conversely, these sparse encounters are not evidence of sufficient
+credit or systematic exploration. Nine-rollout-block mean W for H is
+.0833/.0694/.0764/.0764/.1250, noD .0972/.0903/.0903/.0833/.1319, and SET
+.0972/.0694/.0903/.0903/.0833; changing training worlds are not a fixed diagnostic
+panel. There is no sustained broad competence hidden by the endpoint.
+
+The parameters moved substantially and optimizer steps occurred. Final relative actor
+L2 motion is .997/.981/1.121 for H/noD/SET, critic .981/1.134/.692; H/noD
+coordinator .0626/.0681 and SET's inactive coordinator exactly0. This was three
+completed fits, not a frozen-weight or missing-update failure. All615600
+optimizer steps and original classifier exposure remain charged. H/noD's exact
+initial alias is established by complete state/RNG/input identities plus the
+full audit, not by equal aggregate outcomes.
+
+The more specific native deficit is usually **reaching a qualifying joint
+configuration at all**, not merely holding19ticks instead of20. Of128 final
+windows, H121, noD120 and SET120 never reached8 active backhauled users even once.
+H has no unpaid≥10-tick near-miss; SET has two11-tick runs. This rejects a
+sustain-only summary while leaving geometry, exploration, representation and
+credit/optimization as competing, unseparated contributors.
+
+#### Positive and adverse native examples
+
+- World109220016: H-final pays at action269 in window2/cluster0; its initial,
+  noD-final and SET-final pay0. Users10…19 all persist for20ticks. The complete
+  recorded route through UAV1→0→BS is real joint service; H covers20 users
+  sometime versus initial/noD10. It is a preserved local gain, not proof of
+  generalized schedule following: H still has30 never-served users, while O
+  completes all four windows and serves all50.
+- World109220002 reverses the reward-intervention story: H-final never serves a
+  scheduled cluster, whereas noD-final pays at222 for cluster0 through the
+  multi-UAV0→1→3→BS route. Both have substantial other missed service. The two
+  examples prevent a claim that discriminator reward is uniformly helpful or
+  uniformly destructive.
+- World109220028 is a flat-policy positive and H adverse: SET-final reaches
+  cluster2 and pays at240 with route0→5→1→BS; H-final serves no user throughout
+  the mission. O moves out of the same initial zero-service state and completes
+  all four. Initial geometry is not a universal doom condition.
+- World109220020 already offers early cluster0 service to initial policies.
+  H-initial pays at37; H-final and SET-final at19, noD at37. H-final's qualifying
+  segment retains eight identical users, but every learned programme misses the
+  remaining three windows. Faster payment in this favorable start must not be
+  mistaken for learned whole-schedule planning.
+
+The payment rule allowed different eight identities, yet the independent raw
+reconstruction found all161 main paid segments (including initial/ordinary)
+contained at least eight same identities throughout their20ticks. My selected
+raw examples agree. There is no observed payment exploitation by rapidly
+rotating recipients; all-user tails still expose the much larger continuity
+shortfall outside those successful segments.
+
+#### Explanation update and next investment boundary
+
+The original unbounded Gaussian entropy rises on all44 successive update
+intervals in every fit: H4.326→8.089, noD4.325→9.344, SET4.356→9.205. Final
+clipped UAV-tick means are2990.19/2996.28/2995.53 of3000, up from about2406/2412
+at initialization. The independently reported final raw norm means about
+6.84/9.67/8.72 are consistent with the saved trajectories I read. Original code
+rewards raw Gaussian entropy before the host's radial projection; the nominal
+logstd bounds do not apply. This is a consequential shared observed pathway and
+an alternative to a hierarchy-only explanation. It is **not an identified common
+cause**, proof of incorrect PPO likelihoods, or evidence that a bounded head,
+entropy change or a longer fit would improve native W.
+
+H's mean weighted discriminator components are around−.057 per low-level step
+late in training while its rare external component is about.0000625; the native
+value estimate follows that different mixed target. Those means alone do not
+quantify gradient dominance or causal harm. Removing the discriminator reward
+was actually tested here and did not rescue complete capability. The failure
+cannot be assigned solely to discriminator distraction, and the near-initial
+SET/noD endpoints do not show that hierarchy is the distinctive obstacle.
+
+I end the **unchanged three-fit B03 purchase** and retain the ordinary solver,
+explicit registered-window benchmark, source-bound rare multihop successes and
+all adverse trajectories. I do not adopt any learned final for this task. R's
+limited learned decision generalization and S/Bstar's earlier conditional service
+uses are not refuted by these different native PPO instances. The broader goal
+is still learned decision capability, not endlessly repairing this particular
+Gaussian/task combination. A raw-entropy/action-contract explanation could be a
+future explicit hypothesis only with a predicted native consequence and an
+ordinary/alternative comparison; it is not automatically selected by the visual
+symptom. Likewise imitation of a cheap solver is not automatically worthwhile
+merely because O now supplies a positive target.
+
+At this handoff boundary no new effect is selected. Root's pending cross-question
+allocation may compare a direct acquisition revision, development of retained
+positive assets, or leaving this purchase closed; it does not delay publication
+or make an idle direction a technical dependency. Any successor must inherit the
+actual3-fits/1196000-native cost and the prior A/R and S/C costs, identify what
+new capability/understanding it could establish, and receive its applicable
+scientific selection. No new architecture, proof, calibration or mandatory pilot
+is implied. The independent critic's final judgment and my response are retained
+in the next entry rather than replaced by this self-reading.
