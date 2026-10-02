@@ -1869,3 +1869,162 @@ no early native quality result is used to alter the fixed comparison.
 The retained canonical Git GC warning predates this study; Root confirmed its
 old92-byte log and requested preservation. Exact current-source validation
 succeeded, so no global GC/repack/ref or canonical sparse change was attempted.
+
+
+<a id="b02-complete-reading"></a>
+## 2026-10-01 PDT / 2026-10-02 UTC — B02 complete original run and scientific reading
+
+The sole operation ended normally at 02:08:30.502 UTC. Native runner and supervisor
+identities are absent with a consistent exit-0 witness; this is the same
+`ca4df15e…` operation and source `eb897c79a9bd8327d473d4c26ca788a4ac0f9f58`,
+not a retry. Observer generation1 delivered READY event `c9aa355889a34377fb1099f6`;
+its App queue attempt returned `-32600` (unloaded spawned child). The active DM
+manually drained and consumed that exact event/wake `fcf58477-cc3c-435c-9219-2ef6e70180d8`
+via generation2, then requested observation stop. No producer was restarted.
+
+[Original summary](../../../../runs/typed_joint_skill_decision/b02_a01/summary.json),
+[complete compact reading](../../../../runs/typed_joint_skill_decision/b02_a01/reading.json),
+[config](../../../../runs/typed_joint_skill_decision/b02_a01/config.json),
+[artifact manifest](../../../../runs/typed_joint_skill_decision/b02_a01/artifact-manifest.json)
+and native terminal records bind the result. The single canonical raw location is
+`hmasd-wsl-node:/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b02_a01`.
+All 1,119 manifest artifacts, 140,955,194 logical bytes, were read and individually
+size/SHA256 verified after termination; no mismatch. Manifest SHA256
+`7f8edf2c0043cc38e92e2c4839c8d450d112512a2d402fc5f9889e7d3dd5b3c2`.
+Temporary local original fit/per-world files are reading conveniences, not a
+second durable bulk retention. Compact reading includes every one of the 64 worlds,
+all three programs, adverse outcomes, and six selected raw trajectory readings.
+
+### Observed learning and complete deployment consequences
+
+Exactly one float64 ridge was fit to the bound 192 archived rows / 64 already
+exposed contexts. There was no new label query, optimizer sweep or second solve.
+Its coefficient movement from zero is .08323156; training gain MSE falls
+.0034312571 → .0002769031. The independently recomputed normal-equation relative
+residual is 1.8525e-15 (condition number 5421.74); numerical accuracy is not a
+statistical generalization guarantee. Fit wall time was .00419s, excluding
+archive reading, features, training matching and the much larger support bill.
+The training choices use ranks20/22/22. Their mean executed static gain over G is
++.00647650 (25 positive / 15 negative / 24 equal worlds); static regret falls
+.01226625 → .00578976. These are training descriptions, not fresh or independent
+fit replications.
+
+On all 64 fresh worlds, the pointwise gain MSE still improves against the zero-gain
+initialization (.00419289 → .00131398), but the consequential ordering does not:
+L−G executed static reward is −.00269429 (13 positive / 21 negative / 30 equal).
+The best fixed archived rank is exactly G as declared. L requests ranks27/19/18;
+37 nonzero-rank requests become 34 different executed layouts, including the one
+paid rank0-initial fallback at107100034. No world is filtered. Sixteen of192 fresh
+feature rows, across8 worlds, lie outside at least one training coordinate range;
+this is descriptive exposure, not an identified cause of the result.
+
+Independent critic highlighted a useful exact error decomposition, now checked
+against all saved three-start values: fresh within-world-centered gain MSE rises
+.00030162 → .00048032 while squared world-mean error falls .00389127 →
+.00083366. More than the pooled MSE improvement comes from that world-mean
+component, which cannot change a within-world ranking by itself. This localizes
+the observed prediction/selection mismatch before native flight; it does not
+identify why these features/finite fit miss the relative branch gains.
+
+| Program | Full-H500 native J | C_bh | Mean frontend Mbps | Cold decision s | Selection CPU s | Static calls |
+|---|---:|---:|---:|---:|---:|---:|
+| G = B | .53107979 | .74704625 | 376.89669 | .93186951 | .94578172 | 1331.12500 |
+| L | .52949296 | .74518187 | 375.33072 | .96055362 | .97467472 | 1341.26563 |
+| P | .53792151 | .75361500 | 385.40636 | 1.36599376 | 1.38685325 | 2001.59375 |
+
+L−G native J is −.00158682, df63 paired-world95% interval
+[−.00593504,+.00276140], with14 positive /20 negative /30 equal worlds.
+C_bh difference is −.00186438, interval[−.01710423,+.01337548]. L adds .02868411s
+cold decision time, interval[+.00838976,+.04897845], and10.14063 mean static
+calls. This does not establish equality or population inferiority; it fails to
+establish a useful increment for this one fixed learned package.
+
+G−P native J is −.00684173, interval[−.01102414,−.00265931], with9 positive /
+26 negative /29 equal worlds. G saves670.46875 calls and .43412425s cold time
+on average; all64 worlds save calls/time. Thus ordinary omission is a measured
+quality/compute option, not cost-free equivalence to P. L−P native J is
+−.00842855, interval[−.01324414,−.00361296], while saving660.32813 calls and
+.40544014s. These intervals concern worlds conditional on one fitted asset.
+They do not establish repeated-training reliability. Cold timings include fresh
+spawn/imports, host and model reading, feature matching, complete online search,
+required instrumentation and evidence serialization; they are not uninstrumented
+production timings or universally cold hardware measurements.
+
+L's matrix scoring itself averages .00020285s; features/matching .00699134s and
+model reading .00061750s. Every arm also pays the full flat search (about .50–.51s),
+initial relay scores and its actual branch(es). The observed complete timing
+contrast cannot be credited solely to neural/numerical inference speed.
+
+### Opportunity, contrary trajectories and limits of the explanation
+
+Full P has .01194715 mean static reward advantage over G and different layouts
+on35 worlds. The branch-choice opportunity is not empty. The fixed ridge reduces
+training regret but fails to preserve that advantage on new worlds. Its better
+pointwise MSE therefore cannot be called useful assistance. Finite experience,
+sparse quadratic features, conditional ranking error and the unisolated historical
+source shift remain possible contributors; this study does not identify one
+universal cause or merge B01 N and L-F's distinct diagnoses into this failure.
+
+Static and native L−G differences have descriptive correlation .82355, but nine
+worlds reverse sign (4 positive-static/negative-native and5 negative-static/
+positive-native). Native values exist for executed G/L/P layouts only, not all
+three possible branch continuations; P is not a native hindsight oracle.
+The full compact reading preserves every world, with these explicit contrary cases:
+
+- 107100031: L chooses rank1 and matches P; J improves .04895153 over G and static
+reward .05344847. Arrival is74 vs75 steps, with both transient and held benefit.
+- 107100021: L chooses rank1, losing .05668262 native J and .06690615 static reward
+against G; P rank2 is better still. G/L/P full-H500 J=.601842/.545159/.613726.
+- 107100048: L correctly selects P's best-static rank2, +.01453111 static reward,
+but loses .03679195 full J against G. Both arrive at117; first100 J is
+.152305 vs .328268 and the next100 .567341 vs .618932. Equal travel completion
+time does not make service along the coupled trajectory equal.
+- 107100006: L gains .00363632 J but loses .21916 C_bh; final C is .52 vs .82,
+with higher frontend capacity. In this post-result raw descriptive reading,
+14 vs6 users receive no backhauled service for the entire500 steps. J alone is
+not evidence that every service dimension improved.
+- 107100059: L gains .28524 C_bh but loses .01681385 J and381.38719 mean frontend
+Mbps. Its final C=.94 vs .60; whole-episode unserved users3 vs17. This opposite
+tradeoff is retained, not silently ranked as an unqualified loss or success.
+- 107100034: L pays rank1 search, whose .57536910 final static reward falls below
+rank0 initial .58222300, so the declared fallback executes that initial layout.
+It still loses .00258554 full J to G's rank0 final .58955923; incumbent protection
+worked exactly but was never a native no-regret guarantee.
+
+### Complete correctness, measured price and next decision
+
+All192 main episodes,12 whole original-executor audits,64 original full-search
+reference replays and96,192 initial/post-step state checks completed. All356,314
+saved numerical checks pass, maximum absolute discrepancy9.094947e-13; exact
+rank/origin/permutation and complete request/response stream checks also passed.
+The final compressed checklist is1,433,822 bytes representing54,854,509 exact
+JSON bytes. Its SHA256 is`a3060c67374f635f0a0b308ad7d3b1146130d2a1a6ab384b444574978c0a7257`.
+The reader reuses the pinned upstream radio source; this is not an independent
+physics engine or runtime byte-parity certification of the old archive version.
+
+Actual scientific work is1 fit,102,000 native steps and523,429 explicit static
+calls (all attempted calls completed),0 GPU/model-weight work and0 new training
+label queries. Static calls split299,135 online main +128,102 original reference
+search +96,192 state checks. The final progress sample records621.610131 CPU-s
+and611.113605 elapsed seconds, including children once, and1,958,223,872 sampled
+peak incremental allocated bytes (1.824GiB) for full source + staging + output.
+All declared ceilings held. Summary's slightly earlier CPU sample is621.606466;
+teardown after the final sample is not instrumented. The integrated reader took
+223.285s elapsed. Later manifest/check reading adds .940838 measured CPU-s and
+six-case raw trajectory/all-arrival reading .550176 CPU-s; local arithmetic and
+other support are separately partly unmetered, not zero. Preparation/support
+8–14h was a forecast, not a measured total. The128,288 old static label calls and
+B01's full previously recorded bill remain sunk exposure, not free evidence.
+
+Initial DM judgment: end this exact archive/feature/ridge recipe; retain its
+training learning, fresh pointwise prediction and local beneficial choices, the
+ordinary G tradeoff, all adverse outcomes and the unmet selection increment.
+This does not end the enduring decision-assistance question. The existing
+independent`b01_result_critic` is now reconstructing this complete result and
+comparing constructive continuations. In particular, the already identified
+ordinary36-query prefix competitor asks whether a little paid branch-progress
+information buys useful native quality at low cost; it is not yet an executed
+arm or selected follow-up, nor proof that learning cannot help. A new learning
+attempt needs a reason to change consequential ordering beyond pointwise MSE
+and must pay a competent same-information ordinary comparison. No additional
+fit/query has been started while that substantive next choice is being made.
