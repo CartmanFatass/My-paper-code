@@ -1842,3 +1842,30 @@ following final identities replace those in the previous source snapshot:
 
 Root's concrete shared-launch dependency is resolved; normal actual-node
 admission follows exact source publication. No B02 result effect preceded it.
+
+
+<a id="b02-admitted-operation"></a>
+## 2026-10-01 — B02 sole integrated operation admitted and observed
+
+The configured`agent-task`outer request`typed-joint-b02-a01`completed the
+launcher handshake at2026-10-02T01:58:09UTC,exit0. This is acceptance, not a
+completed scientific result. Exact scientific source is
+`eb897c79a9bd8327d473d4c26ca788a4ac0f9f58`; full snapshot
+`aae959bd3245421eb0cf20182351da63`is on the configured physical`wsl_4070`.
+Operation`/home/wu/projects/HMASD/.git/hmasd-admission/ca4df15e79248a40ecfb3bc4fa8cb791c0b98cc634c470818729c4b63c048b78.json`
+and[original manifest](../../../../runs/typed_joint_skill_decision/b02_a01/launch-manifest.json)
+bind canonical output`/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b02_a01`.
+Runner1295207/start124670136 and supervisor1295206/start124670133 were
+adopted by the deterministic observer against the same operation, consistent
+and running at01:59:12UTC. Observer generation1 lives in owned
+`temp/directions/typed_joint_skill_decision/b02-observer`; the DM stays active
+through complete reading. No duplicate/restart/changed-input launch occurred.
+
+Initial phase checkpoint:35/192main cases,one completed real archive fit,
+17500native steps,54471explicit static calls,72.966122CPU-s and
+1836707840sampled peak allocated bytes,0GPU/newtraining-label queries. Full
+reader and12audit episodes remain pending. These are cost/progress facts only;
+no early native quality result is used to alter the fixed comparison.
+The retained canonical Git GC warning predates this study; Root confirmed its
+old92-byte log and requested preservation. Exact current-source validation
+succeeded, so no global GC/repack/ref or canonical sparse change was attempted.
