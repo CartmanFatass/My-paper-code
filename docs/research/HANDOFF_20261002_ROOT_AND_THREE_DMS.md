@@ -109,7 +109,7 @@ B05 是另行明确选择的完整数据操作：原 16,000 train + 512 fresh �
 forward/H500/GPU。完整技术终读及 B06 接收发表于 `21e8b214a`，见
 [技术终读](candidates/typed_joint_skill_decision/NOTES.md#b05-technical-reading)。
 原 DM 正做无活消费者的精确清理；完整新数据保留为未认证资产。任何后续使用必须另行明确解决数据版本、
-兼容含义和完整验证，不能让 B06 的认证开关直接通过。Root 正请临时 Oracle 给一次后续方案建议，尚未选择新执行。
+兼容含义和完整验证，不能让 B06 的认证开关直接通过。Root 已完整读完临时 Oracle 的一次后续方案建议，并保留为下一候选，尚未选择新执行。
 
 ### B06：实现准备已完成，六次训练尚未选择执行
 
@@ -170,6 +170,15 @@ Claude 六项建议已有实质处置：数据曲线与更宽候选接口进入�
 和 Root 处置见 [数据投资](archive/2026-10-02/RESEARCH-separated-data-bank-investment.md) 与
 上方 B12/分工归档。Oracle 是帮助 Root 构造方案的临时顾问，不是第四 DM、独立盲审或逐 fit 批准者。
 已有充分独立科学审阅继续适用于未变的合同，不能因新 Root 接手再排一轮同样的审批。
+
+**B05 后的新候选，未选执行：** 临时 Oracle 已从原数据与训练/在线读取源重建问题，建议固定 B05
+producer 标签版本，另行声明完整全库 reader，分别严格检查每套实际分数自己的 exact argmax，并报告
+跨执行索引差异。best+15 的必入项会改变曝光；Raw8J/RawJ 必须按自己实际付费评分选择，不能被迫
+等于离线 bank 的 best。因此这是数据版本/验证含义的新前瞻选择，不能只给旧入口改 PASS。
+预计一次全库 reader 为 2,844,367 static、0.7–1.3 CPUh，0 producer；加原完整消费者，未来约
+4–10 CPUh、1–3 GPU-childh、6 fits/584,000 native。累计旧账与未知支持/设备风险仍计入。
+Root 接受它作为值得形成具体合同的下一候选，保留原 B05 严格失败，不在此次收尾中自动购买。
+[完整 11,862-byte 原答、实际 Astra/max 身份及 Root 处置](archive/2026-10-02/RESEARCH-bank-terminal-and-next-data-version.md)。
 
 **后续顺序由真实结果驱动，不预先保证购买：**
 

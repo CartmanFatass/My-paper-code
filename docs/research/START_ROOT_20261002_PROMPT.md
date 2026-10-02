@@ -17,7 +17,10 @@
    - `docs/research/candidates/typed_joint_skill_decision/HANDOFF_20261002_DECISION_ASSISTANCE.md`
    - `docs/research/candidates/uav_fleet_transmission/HANDOFF_20261002_S7_AND_B06.md`
    - `docs/research/candidates/uav_decision_generalization/HANDOFF_20261002_JOINT_WINDOW.md`
-4. 它们直接指向的当前 NOTES 合同、原运行身份与最新终态/进度。历史资料只按实际判断需要展开。
+4. 它们直接指向的当前 NOTES 合同、原运行身份与最新终态/进度。
+5. 若考虑继续学习曲线，读 `docs/research/archive/2026-10-02/RESEARCH-bank-terminal-and-next-data-version.md`
+   的 Root 处置和完整 Oracle 原答：固定 B05 标签版本、完整新 reader、各次评分自身 argmax 的候选尚未选执行。
+历史资料只按实际判断需要展开。
 
 先核对原 Root `01a0f779-ace2-74e1-85ad-e0997b61d505` 和三位原生 DM 的实际工作状态。
 若旧树仍运行，复用现有责任，不创建重复 DM 或第二个 writer。新原生树不可达旧 child 不表示它已结束。
@@ -61,6 +64,9 @@
 - 完成 B03 原合同的训练、评价、全部 reader 和独立科学判读，保留正反世界与完整成本。
 - B05 已完成技术终读但未获认证；核对其保全/清理和完整实际账，不重新执行原失败操作或终态reader。
   只有明确的新前瞻合同和投入选择才可处理剩余数据验证/使用；1ULP不自动授权忽略原失败，也不关闭学习问题。
+  新Oracle候选为固定B05生产标签版本、一次完整新reader（2844367static，预测0.7–1.3CPUh，0新producer），
+  并正确区分在线Raw8J/RawJ自身真实评分选择与离线银行。它改变验证语义，须明确合同及适用独立判断；
+  原B04未变的架构/曝光审阅复用。候选总价含消费者约4–10CPUh/1–3GPU-childh，当前仍未选择。
 - B06 原实现/工程准备已交付；不重复旧检查作为健康gate。先解决未认证数据版本/兼容含义与完整验证的新选择，
   保留原失败，再根据真实可用工件和实际部署价格作一次明确的六-fit完整投入决定。
   原比较为 1k/4k/16k 嵌套世界 × 两优化流，固定模型/更新及 Raw8J/RawJ/P 强参照。
