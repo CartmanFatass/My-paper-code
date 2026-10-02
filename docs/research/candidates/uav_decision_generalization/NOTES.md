@@ -799,3 +799,20 @@ absent. Its allocated usage fell820,944,896→0bytes: **820,944,896net bytes rec
 Required run outputs, manifests/claim and all inherited evidence remain intact;
 no copy/archive was made for this deletion. Git object-store size is outside this
 working-tree measurement.
+
+### B01 fresh native acceptance and observation
+
+Published source/input commit`6389a9488b76be3e0173dcf38655df443dbad460` preserves
+the reviewed numerical source bytes and binds the completed fit manifests.
+The sole supervisor request`uav-decision-generalization-b01-native-a01` returned
+accepted [native manifest](../../../../runs/uav_decision_generalization/b01_native_a01/launch-manifest.json)
+after fresh actual-node admission. It owns the selected384fresh worlds, all
+legal menu outcomes, full-planner reference and at most16correctness episodes;
+it adds no fitting or new training labels. All GPU fresh decisions precede native
+outcome collection within this phase.
+
+The same native handle is registered in private
+`temp/directions/uav_decision_generalization/wait-native.json`. Generation3 was
+drained and adopted with accepted/running, matching live process identities and
+consistent records; summary/exit witness were absent. The learning job remains
+terminal/consumed. This is collection in progress, not a read generalization result.
