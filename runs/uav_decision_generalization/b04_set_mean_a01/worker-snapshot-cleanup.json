@@ -1,0 +1,27 @@
+{
+  "target": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/dc12271b49d24878badc6eea3f30976b",
+  "before_allocated_bytes": 1827221504,
+  "after_allocated_bytes": 0,
+  "net_reclaimed_bytes": 1827221504,
+  "target_exists": false,
+  "gc_exit_code": 0,
+  "gc": {
+    "mode": "apply",
+    "snapshots": [
+      {
+        "claim": "/home/wu/projects/HMASD/.git/hmasd-admission/281ab737ce51a3598aee694402e18074ea1cc44127b57771ae579581c21843aa.json",
+        "durable_ref": "refs/remotes/origin/HEAD",
+        "eligible": true,
+        "output": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b04_set_mean_a01",
+        "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/dc12271b49d24878badc6eea3f30976b",
+        "removed": true,
+        "sha": "ba30ca0f3fb861f86b766b134d93d5a27a06dcab",
+        "snapshot": "dc12271b49d24878badc6eea3f30976b"
+      }
+    ]
+  },
+  "gc_stderr": "",
+  "bulk_relocation_or_backup": false,
+  "source_sha": "ba30ca0f3fb861f86b766b134d93d5a27a06dcab",
+  "cpu_seconds": 0.633048105
+}

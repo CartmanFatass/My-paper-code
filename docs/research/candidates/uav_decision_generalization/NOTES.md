@@ -5162,3 +5162,105 @@ input/source bytes are unchanged; only the known-cost ledger increases. No
 actual scientific or native health query was used to validate execution in
 advance. The exact worker-locator values will be read from its terminal output,
 then published before the reader.
+
+Exact code and inputs are published at
+`ba30ca0f3fb861f86b766b134d93d5a27a06dcab`. Study input sha256 is
+`94f72b7bf74fe941f16ef3ab4b9752843e7ae3f4396d0fc6b309a634668c86c2`;
+pre-worker ledger sha256 is
+`42d67b777cd57b2cc2858134b5a78e78b640ba86b8026d00eff056c95413cd85`.
+The remote configured `zsh -lic` fetch exited0 and advanced origin/main to that
+source. Its existing noninteractive zsh/gitstatus warnings and automatic Git GC
+warning (`e0b4af9d04f8a4a53368e3ca0055007c82141449 exists in commit-graph but
+not in the object database`) are retained as preparation facts. No source/
+checkpoint/native operation was started by that fetch, and no shared Git,
+shell or runtime configuration was repaired or replaced. Control preparation
+CPU/transport remains unmetered; this is not an extra fit or health pilot.
+
+<a id="b04-worker-acceptance"></a>
+#### 2026-10-02 16:08 UTC — fixed mean worker accepted
+
+The configured remote supervisor `dmgen-b04-set-mean-a01` accepted one kernel
+invocation; the native kernel then admitted the published `ba30ca0f3fb` source
+at16:07:33UTC. Stable operation/claim is
+`/home/wu/projects/HMASD/.git/hmasd-admission/281ab737ce51a3598aee694402e18074ea1cc44127b57771ae579581c21843aa.json`,
+output `runs/uav_decision_generalization/b04_set_mean_a01/`, retained source
+snapshot `dc12271b49d24878badc6eea3f30976b`, supervisor1344118 and
+runner1344119 with native birth identities in the collected launch manifest.
+The first status had accepted/consistent records and both processes running;
+this is execution acceptance, not a read scientific result.
+
+`tools/hmasd_wait.py` registered the exact native operation as
+`b04-set-mean-worker-a01` for this assigning child, generation1, with a1500s
+window and30s deterministic probes. Its state is direction-owned
+`temp/directions/uav_decision_generalization/b04_observation/`; the child
+remains active and will drain/rearm this handle, without duplicate launch.
+The original launch manifest and admission preflight are collected locally;
+raw evidence remains on the admitted node pending complete collection and
+verification. No later fit, altered controller or extra baseline is selected.
+
+#### 2026-10-02 16:15 UTC — worker terminal and exact reader inputs
+
+The original worker exited0 at16:09:54UTC; deterministic observation produced
+READY with consistent claim/manifest and absent runner/supervisor. This native
+child's attempted queue delivery was rejected (`direct app-server input is not
+allowed for multi-agent v2 sub-agents`); its still-active local deterministic
+wait returned the saved event, which I drained completely and consumed by
+same-state rearm to generation2. No work was restarted or moved.
+
+The complete worker reports66 missions,33000 native and frozen-model team
+steps,198000 actual actor and198000 critic rows,2 model constructions,0 fits
+and0 optimizer steps. Measured worker501.127710CPU-s/133.522782wall-s,
+675640KiB peakRSS,0GPU; prior22.441714530 brings worker cumulative to
+523.569424530CPU-s. The retained single-Z std-of-one diagnostic warnings
+remain in canonical stderr; no warning was treated as evidence of failure or
+silently fixed. Complete independent numerical/model/physics reading remains
+necessary and has not yet run.
+
+All132 raw/metadata files matched their closed manifest byte counts and hashes:
+321783169 logical bytes. The canonical worker directory contains141 files,
+321835422 logical/322088960 allocated bytes, at
+`wsl_4070:/home/wu/projects/HMASD/runs/uav_decision_generalization/b04_set_mean_a01`.
+No raw/checkpoint copy was created. Compact config, summary, manifest and
+native records were collected into the matching local run directory;
+`collection.json` binds their hashes and the remote evidence location. Metadata
+collection/verification consumed.183210609CPU-s, without model/RF/native effects.
+
+After that verification, supported source GC independently checked terminal
+native identities, no live references, clean source and durable publication.
+It deleted only snapshot `dc12271b49d24878badc6eea3f30976b`; allocated bytes
+fell1827221504 to0, net **1827221504B reclaimed**. Preview/apply cost
+.195848455/.633048105CPU-s. Claims, raw, metadata and original checkpoints
+remain; no backup or retention copy was created. The worker and planned reader
+therefore do not retain simultaneous full source snapshots.
+
+The reader uses `B04_READER_WORKER_INPUT.json`, which binds the canonical worker
+root and exact config/summary/manifest digests; sha256
+`24ddd8e07d97f153d9397c400d4aaa8c464f2c2a78f15d6faa4cf8ffb00c23a9`.
+All52 scientific source hashes still match the worker. The separate reader
+ledger carries the exact original prior counts plus all worker counts, without
+inventing another effect, and **524.651696902 known cumulative CPU-s** before
+the narrow deferred engineering input check (including.070165203 preparation
+CPU-s). Additional support/transport remains incompletely metered, not zero.
+The planned full reader performs exactly33000 replay model team steps,
+198000 actor/critic rows each and33066 complete reconstructed physical states,
+with0 new native steps and no new baseline collection; audits stay outside the
+32-world estimands. No scientific inference is made from terminal status alone.
+
+The existing engineering Reviewer completed the deferred terminal binding
+check. Original return, preserved in full:
+
+````text
+No material locator, ledger, or source-binding issue.
+
+Verified the locator schema and three hashes against collected files and `collection.json`; terminal 66-row roster and counts; checkpoint, ancestor, and study identities; all 52 current source hashes; and exact worker-prior-plus-counts ledger carryforward.
+
+The `524.651696902` CPU-second prior matches the supplied cost components and exceeds worker cumulative CPU. This check measured another `0.015163338` CPU-seconds: update prior CPU only to **`524.666860240`**, preserving counts.
+
+Raw-file verification relies on the reported canonical collection. No scientific/runtime queries or edits performed.
+````
+
+I accept this limited check. The published pre-reader ledger carries
+524.666860240CPU-s and unchanged exact prior counts; later reader collection,
+scientific arithmetic and support will be reported separately. This closes
+the selected engineering input check, without a new scientific choice or
+authorization for additional effects.

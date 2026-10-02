@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "prior_cpu_seconds": 524.66686024,
+  "prior_counts": {
+    "engineering_review_readonly_blocks": 2,
+    "engineering_test_case_attempts": 86,
+    "engineering_test_case_failures": 2,
+    "engineering_test_case_passes": 84,
+    "engineering_test_invocations": 4,
+    "paid_baseline_check_rows_read": 132,
+    "paid_metadata_read_invocations": 4,
+    "source_contract_preparation_invocations": 1,
+    "frozen_model_steps": 33000,
+    "frozen_native_steps": 33000,
+    "host_constructor_calls": 66,
+    "host_dense_reward_entries": 66000,
+    "host_native_step_calls": 33000,
+    "host_native_steps": 33000,
+    "host_parent_reward_entries": 66000,
+    "host_reset_calls": 132,
+    "model_constructions": 2,
+    "native_step_attempts": 33000,
+    "native_steps": 33000
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "admission": {
+    "claim_state": "accepted",
+    "state": "accepted"
+  },
+  "artifacts": {
+    "stderr": {
+      "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b04_set_mean_a01/stderr.log",
+      "state": "present"
+    },
+    "stdout": {
+      "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b04_set_mean_a01/stdout.log",
+      "state": "present"
+    },
+    "summary": {
+      "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b04_set_mean_a01/summary.json",
+      "state": "present"
+    }
+  },
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/281ab737ce51a3598aee694402e18074ea1cc44127b57771ae579581c21843aa.json",
+  "direction": "uav_decision_generalization",
+  "execution": {
+    "exit_code": 0,
+    "exit_witness": {
+      "exit_code": 0,
+      "finished_at_epoch": 1790957394.8588574,
+      "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b04_set_mean_a01/process-exit.json",
+      "state": "valid",
+      "termination": "process_exit"
+    },
+    "runner": {
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 1344119,
+        "session_id": 1344118,
+        "start_ticks": 129594052
+      },
+      "state": "absent"
+    },
+    "state": "exited",
+    "supervisor": {
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 1344118,
+        "session_id": 1344118,
+        "start_ticks": 129594049
+      },
+      "state": "absent"
+    }
+  },
+  "explicit_retry": {
+    "eligible": false,
+    "reasons": [
+      "parent has no consistent terminal nonzero native exit"
+    ],
+    "scientific_authorization": false,
+    "successor_ref": null,
+    "supported": true
+  },
+  "explicit_retry_available": false,
+  "kind": "hmasd_operation_status",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b04_set_mean_a01/launch-manifest.json",
+  "node": "wsl_4070",
+  "observed_at": "2026-10-02T16:10:25.137219Z",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/281ab737ce51a3598aee694402e18074ea1cc44127b57771ae579581c21843aa.json",
+  "output_root": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b04_set_mean_a01",
+  "record_consistency": {
+    "mismatches": [],
+    "state": "consistent"
+  },
+  "schema_version": 1,
+  "sha": "ba30ca0f3fb861f86b766b134d93d5a27a06dcab",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/dc12271b49d24878badc6eea3f30976b"
+}

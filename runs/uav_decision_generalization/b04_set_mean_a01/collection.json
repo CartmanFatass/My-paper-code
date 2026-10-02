@@ -1,0 +1,46 @@
+{
+  "node": "wsl_4070",
+  "canonical_root": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b04_set_mean_a01",
+  "compact_files": {
+    "config.json": {
+      "bytes": 14025,
+      "sha256": "adaff0cd429cb998c5331c34afc95ee5c41d8f439aefb7b6eb2e4c326d78f16f"
+    },
+    "summary.json": {
+      "bytes": 5531,
+      "sha256": "86580feb432e12a818742915b3d733855de3484ecf54c4839aba1a4e56c24fd2"
+    },
+    "manifest.json": {
+      "bytes": 24741,
+      "sha256": "ed55d7fab4e586ad74e6f96e40cc7aa7e416ac075d2a06818bbb56faba7b770e"
+    },
+    "launch-manifest.json": {
+      "bytes": 5266,
+      "sha256": "ea44fc6fa1e9fdfe7cf0213b1ff1d0a3ab13ae855972611639a5e17afb1cd2f9"
+    },
+    "process-exit.json": {
+      "bytes": 557,
+      "sha256": "f1dfe8e7abd525d764a0091d30dc7c593131df934cbdbf943abb6f29840a714a"
+    },
+    "admission-preflight.json": {
+      "bytes": 771,
+      "sha256": "368b3fe2f4d02a8484687c3a05e4851261dbf2ecffb897827d224e73d7eae1e6"
+    },
+    "stderr.log": {
+      "bytes": 753,
+      "sha256": "ff6cc1e4cdc870cad0e09cb511a91bc5d2c105231b40bee8e7b545d944b706f3"
+    },
+    "stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "frozen_rows": 66,
+  "verified_raw_metadata_files": 132,
+  "verified_raw_metadata_logical_bytes": 321783169,
+  "inventory_files": 141,
+  "inventory_logical_bytes": 321835422,
+  "inventory_allocated_bytes": 322088960,
+  "bulk_copied": false,
+  "metadata_collection_cpu_seconds": 0.183210609
+}
