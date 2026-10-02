@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "object": "UAV-JOINT-WINDOW-B03",
+  "scope": "DM synthetic saved-state reader correctness; no environment or RF scorer or actor/optimizer calls",
+  "invocations": [
+    {
+      "tests": "test_independent.py before integration completion",
+      "passed": 7,
+      "wall_seconds": 0.66,
+      "user_cpu_seconds": 0.42,
+      "system_cpu_seconds": 1.05,
+      "peak_rss_kib": 52556
+    },
+    {
+      "tests": "test_independent.py including d2 reward and paired-reader checks",
+      "passed": 9,
+      "wall_seconds": 0.32,
+      "user_cpu_seconds": 0.41,
+      "system_cpu_seconds": 0.97,
+      "peak_rss_kib": 55712
+    }
+  ],
+  "measured_cpu_seconds": 2.85,
+  "new_native_steps": 0,
+  "new_fits": 0,
+  "model_forwards": 0,
+  "ordinary_controller_calls": 0,
+  "synthetic_ledger_advances": 1000,
+  "notes": "time(1) measures full pytest processes including import and teardown; untimed py_compile/control reads are not claimed zero cost."
+}

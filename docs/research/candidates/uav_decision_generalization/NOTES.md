@@ -3538,3 +3538,105 @@ Claude 修订稿已经给出具体联合任务和 toy，不能说它没有建设
 <!-- END B03 INDEPENDENT SELECTION ORIGINAL -->
 
 </details>
+
+
+<a id="b03-engineering-acceptance"></a>
+### B03 implementation, independent engineering disposition and exact inputs — 2026-10-02 UTC
+
+I accept the bounded new package and independently written saved-state reader under
+[B03 L0](#b03-l0). The registered Implementer returned worker/task/adapter/ordinary,
+configuration/model-factory, trace/evidence and pure tests; I own integration and
+`independent.py`. No shared learner, host, launcher or paused Claude asset was edited.
+The registered Astra/high engineering Reviewer read the complete implementation,
+contract and checks in a separate bounded assignment. It found one P2 accounting
+defect: native PPO calls `actor.evaluate_actions` directly, bypassing module forward
+hooks, so actor training presentations were absent from the actual forward ledger.
+I added a single transparent method wrapper and T×B agent-tick count, with a pure
+mock test of argument/return preservation, single invocation and restoration after
+an exception. The same reviewer read that repair and returned:
+
+> P2 resolved. The wrapper records each direct PPO actor evaluation once, counts `T × B` contexts, preserves arguments/return values, and restores the original method on exit. The mock test also covers restoration after an exception.
+>
+> No material finding remains from this review. No additional tests or scientific queries were run; static-read CPU was unmetered.
+
+This technical acceptance does not add a scientific selection, probe or result.
+The sparse reward, unclamped original Gaussian, three instances and exposure remain
+as selected. Exact direct-PPO contexts are recorded separately from nested module
+hooks; summing every nested hook would double-count presentations.
+
+One local construction/serialization pass used the existing CPU runtime, with
+three complete model constructions and no environment, policy forward or optimizer.
+Complete H/noD initial module+normalizer digests and constructor RNG before/after
+were identical; their configuration difference is only disabled discriminator
+reward. This checks the factory contract locally, not identical RNG bits across
+Torch builds; the admitted worker repeats complete identity checks on its actual
+runtime before using the initial-panel alias. Original Gaussian logstd is zero and
+no bound/clamp is present. Nominal −20/2 fields remain ignored.
+
+| Instance | Coordinator | Discoverer | Team D | Individual D | Complete retained parameters |
+|---|---:|---:|---:|---:|---:|
+| H / H-noD | 3,884,366 | 1,053,511 | 415,764 | 455,596 | 5,809,237 |
+| SET | 3,877,956 | 1,412,103 | 0 | 0 | 5,290,059 |
+
+SET's constructed coordinator is inactive in its policy/training route. These are
+package totals, not matched active capacity. Temporary modules constructed then
+replaced are also counted separately in the construction record. The native
+factory, learner and normalization sources remain SHA-bound read-only imports.
+
+The ordinary implementation resolves finite-precision input semantics explicitly:
+O's matching uses legal held count-state coordinates decoded from float32 to
+float64; O/B steering uses each legal current own-observation coordinate decoded
+to float64. Neither reads privileged host positions. Reader arrival diagnostics
+use a 1 mm tolerance around the frozen slot, record the residual, and retain actual
+association/routes/payments; this is not a target, geometry or steering revision.
+Current own observations and held global inputs retain their originally different
+quantization/order semantics, including off-grid task-clock changes at t125.
+
+Raw mission/rollout evidence is compressed NumPy NPZ with explicit numeric/bool
+dtypes and no object arrays/pickle. Full frozen mission state includes original
+float64 positions and channels, association/route/transmitter facts, float32 legal
+observations/states, raw and host-executed action dtypes, hidden states, original
+policy/skill/logprob/value fields and the once-only ledger. Training saves all
+positions, associations/routes/masks, actions, reward components and d2 segment
+facts, without redundant full training channel/observation arrays. Initial/final
+checkpoints use strict complete module/normalizer state and weights-only loading;
+configuration, lineage and digest are checked. SHA-bound manifest entries point to
+one canonical raw/checkpoint location; no bulk duplication is part of collection.
+The separate reader verifies every promised training ledger and all 232 frozen
+missions, including all-user censored gaps, neural/ordinary action replay, routes,
+physical relations and complete paired outputs. It performs zero native or
+optimizer steps. No audit outcome selects whether to continue the fixed panel.
+
+Measured engineering checks total **22.08 CPU seconds**: Implementer pure fixtures
+12.57; independent reader fixtures2.85; full three-factory/serialization process
+5.14; P2 mock fixture1.52. The underlying records are in
+`runs/uav_decision_generalization/b03_engineering_a01/`. There are24 unique pure
+tests (35 executions across staged checks),3 actual model constructions,
+0 actual policy forwards/native transitions/fits/optimizer steps,1128 synthetic
+ledger advances,1444 synthetic O assignment comparisons/80 distances,
+4 O and84 B action calls. Fake wiring and 320 mocked PPO contexts are separately
+labeled, not scientific exposure. Source reading/editing, hash/publication/node
+preparation and static review support were not fully metered and are not zero.
+The earlier B01/B02 cumulative question costs remain in their original records;
+this ledger starts B03-specific cumulative measured computation, not a reset of
+research history or a claim that prior investment disappeared.
+
+Construction scratch `temp/directions/uav_decision_generalization/b03_factory_a01`
+was deleted after the factory process ended and identities were saved: allocated
+23,531,520 bytes before,0 after, net23,531,520 bytes reclaimed. No engineering
+checkpoint copy/backup remains; the compact serialization/digest witness suffices.
+
+[B03_STUDY_INPUT.json](B03_STUDY_INPUT.json) binds the full frozen contract and
+all runtime-consumed local source files found through the static import closure,
+including every direction package file and the original five host/factory sources.
+[B03_INITIAL_LEDGER.json](B03_INITIAL_LEDGER.json) binds22.08 measured CPU seconds
+and all prior engineering counters. Actual-node worker/reader use one accepted
+handle apiece; canonical worker output is later referenced through a bound locator
+inside JSON, not remapped absolute argv. Planned new worker tag is
+`b03_joint_window_a01`, reader `b03_joint_window_read_a01`. Forecast remains
+18–26CPUh,0GPU and2–4GiB unique new evidence plus roughly1.8GiB input snapshot;
+input expansion and complete reader costs remain actual-run uncertainties.
+Configured wsl_4070 runtime and8GiB available physical/effective memory plus8GiB
+free disk are checked before effects; no node or operation has yet been admitted.
+
+Input hashes: study`1ef2de83078f508afbea8b023bff35fa9bb5587ef176c5e8b138b85182d43783`; initial ledger`800d51f79bad915acf7e26143dc27393c15c28afe3793b9e637512e433c8279e`. Scientific source manifest contains45 files.

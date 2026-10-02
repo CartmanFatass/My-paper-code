@@ -1,0 +1,53 @@
+{
+  "schema": 1,
+  "scope": "Implementer reported pure worker fixtures; no native/RF/modelconstruction/policyforward/optimizer",
+  "source": "native Implementer final response; source files handed back before DM construction pass",
+  "invocations": [
+    {
+      "tests": "full worker module",
+      "passed": 10,
+      "cpu_seconds": 4.73,
+      "wall_seconds": 4.47
+    },
+    {
+      "tests": "resource/checkpoint/schema subset",
+      "passed": 4,
+      "cpu_seconds": 4.41,
+      "wall_seconds": 4.25
+    },
+    {
+      "tests": "adapter/ordinary/failure subset",
+      "passed": 3,
+      "cpu_seconds": 1.94,
+      "wall_seconds": 1.18
+    },
+    {
+      "tests": "intrinsic bookkeeping subset",
+      "passed": 1,
+      "cpu_seconds": 1.49,
+      "wall_seconds": 0.64
+    }
+  ],
+  "measured_cpu_seconds": 12.57,
+  "measured_wall_seconds": 10.54,
+  "new_native_steps": 0,
+  "new_fits": 0,
+  "model_constructions": 0,
+  "model_forwards": 0,
+  "optimizer_steps": 0,
+  "pure_arithmetic": {
+    "world_registries": 5,
+    "packet_decodes": 1,
+    "O_constructions": 2,
+    "O_actions": 4,
+    "O_assignment_comparisons": 1444,
+    "O_slot_distances": 80,
+    "B_constructions": 4,
+    "B_actions": 84,
+    "ledger_advances": 128,
+    "fake_parent_steps": 2,
+    "fake_failed_primitive": 1,
+    "mock_forward_bookkeeping_events": 3
+  },
+  "unmeasured_support": "source reading/edit/AST support before measured pytest"
+}
