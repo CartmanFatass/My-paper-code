@@ -1,0 +1,275 @@
+{
+  "status": "VERIFIED",
+  "canonical_bulk_location": "hmasd-wsl-node:/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_engineering_a02",
+  "remote_files": [
+    {
+      "path": "admission-preflight.json",
+      "bytes": 766,
+      "allocated_bytes": 4096,
+      "sha256": "192d2464eb7b520e4f5c9e58a0dbb6b29c8daead30c52fdce62dfea389382663"
+    },
+    {
+      "path": "config.json",
+      "bytes": 8933,
+      "allocated_bytes": 12288,
+      "sha256": "e577c26309dc8cfdf569f0e7a14707c148bae53ba46f07c9ee596e78cde7b183"
+    },
+    {
+      "path": "launch-manifest.json",
+      "bytes": 4917,
+      "allocated_bytes": 8192,
+      "sha256": "8a6ef33d1d69c3d0fd7689aa515e03ccf2b4ef70efea7fb4ddc070dba1e688b8"
+    },
+    {
+      "path": "launch-status.json",
+      "bytes": 870,
+      "allocated_bytes": 4096,
+      "sha256": "11b2b13628cb8b522c5e003e99b276a58adbf50f1eb388fab58f8956c2320ac4"
+    },
+    {
+      "path": "manifest.json",
+      "bytes": 3547,
+      "allocated_bytes": 4096,
+      "sha256": "43f6941654c5dfd8f4649df78848a994b5f82043e47eb3050456e7c9f1df9188"
+    },
+    {
+      "path": "perworld.json",
+      "bytes": 329822,
+      "allocated_bytes": 331776,
+      "sha256": "604ae8871f4a3c60e8f337a1520d43a61d6438fd17fd3fe154b16f8fd50fad83"
+    },
+    {
+      "path": "process-exit.json",
+      "bytes": 556,
+      "allocated_bytes": 4096,
+      "sha256": "9b8bb056b99e1b690a077774c8b961dd5bdedce6a8e79190999f5113de97c423"
+    },
+    {
+      "path": "progress.json",
+      "bytes": 269,
+      "allocated_bytes": 4096,
+      "sha256": "70e1b8c85c0daca0774d06faf23e74e7185e38aad8108290465c5f0854445888"
+    },
+    {
+      "path": "raw/29910091_C.npz",
+      "bytes": 9595493,
+      "allocated_bytes": 9596928,
+      "sha256": "1f0b97448b43db1fd07277ffa164720159d892346a0faeba412a15e9c5c67c7e"
+    },
+    {
+      "path": "raw/29910091_C.progress.json",
+      "bytes": 423,
+      "allocated_bytes": 4096,
+      "sha256": "f0b56017598e414b8c65ee4df4c4157ced0c038fdc111fb68da671ac482fdf33"
+    },
+    {
+      "path": "raw/29910091_F_A.npz",
+      "bytes": 12361860,
+      "allocated_bytes": 12365824,
+      "sha256": "ba5391cffceb61eb9011e9a6fd88be751e3c91a22421701c2f6554337c43456f"
+    },
+    {
+      "path": "raw/29910091_F_A.progress.json",
+      "bytes": 755,
+      "allocated_bytes": 4096,
+      "sha256": "4a7ef0dfa5b0050f0db91eab74222b415aea99ce97721a7eb176b5bf93b1632a"
+    },
+    {
+      "path": "raw/29910091_H_A.npz",
+      "bytes": 12387684,
+      "allocated_bytes": 12390400,
+      "sha256": "2811f85ae6a3c84706a9feeb5108a70c68942fbf666bb7d2c7884166d387d6e7"
+    },
+    {
+      "path": "raw/29910091_H_A.progress.json",
+      "bytes": 753,
+      "allocated_bytes": 4096,
+      "sha256": "9691f3f07ac934622b0d2d0884481d4ee1bf9d634bcd501ac6226fe48685e318"
+    },
+    {
+      "path": "raw/29910091_REFERENCE.npz",
+      "bytes": 9594908,
+      "allocated_bytes": 9596928,
+      "sha256": "b7f2afde3b02445e37cb685c1b36f0bf15213d50e91581a898b542ecf3cb71f7"
+    },
+    {
+      "path": "raw/29910091_REFERENCE.progress.json",
+      "bytes": 322,
+      "allocated_bytes": 4096,
+      "sha256": "f29f4e398e953032ce0e1f5cbafb1e20a857c5a98dc5276f4a7aca37e6512df6"
+    },
+    {
+      "path": "raw/29910092_C.npz",
+      "bytes": 9798449,
+      "allocated_bytes": 9801728,
+      "sha256": "db10ed60ed829329c2941568046d90419d0e3285b758d44fbd8516a59ef5e826"
+    },
+    {
+      "path": "raw/29910092_C.progress.json",
+      "bytes": 423,
+      "allocated_bytes": 4096,
+      "sha256": "0324987d824d664c0174b6d83006187fe897dcd0d60d9ee96f949ddea5c3f5b4"
+    },
+    {
+      "path": "raw/29910092_F_A.npz",
+      "bytes": 12655030,
+      "allocated_bytes": 12656640,
+      "sha256": "7a97a35df8c35e81f4efcbc7e242ffd6e62342569847bb0a45b1634ef029b38b"
+    },
+    {
+      "path": "raw/29910092_F_A.progress.json",
+      "bytes": 755,
+      "allocated_bytes": 4096,
+      "sha256": "a04a6d20cf6eeb99d110d190b9bbd06091397951532d9830da031490c0bc5334"
+    },
+    {
+      "path": "raw/29910092_H_A.npz",
+      "bytes": 12564216,
+      "allocated_bytes": 12566528,
+      "sha256": "866de57c3ddcb5fcf14f4980f1d85cf689dfba203a79ae2dd30b3cac45cae01f"
+    },
+    {
+      "path": "raw/29910092_H_A.progress.json",
+      "bytes": 753,
+      "allocated_bytes": 4096,
+      "sha256": "3702609368cc77cb2e01ef7e2fad018ec26dd4a443dc75da2ab8bc7521c51af8"
+    },
+    {
+      "path": "raw/29910092_REFERENCE.npz",
+      "bytes": 9798018,
+      "allocated_bytes": 9801728,
+      "sha256": "f9ac7c15dab8e2b0f052c5f104475dffc22d4f3d6029d54c37d44617f9c1f1fe"
+    },
+    {
+      "path": "raw/29910092_REFERENCE.progress.json",
+      "bytes": 322,
+      "allocated_bytes": 4096,
+      "sha256": "2c49cad61e1f21e153571190b3e8e1d41d5d92057539aeef6f212810ca7f29fc"
+    },
+    {
+      "path": "reading.json",
+      "bytes": 144881,
+      "allocated_bytes": 147456,
+      "sha256": "21cfe44f38fc5b57a832d1f010292e151e907de44cc049b16528243559f70968"
+    },
+    {
+      "path": "reading_raw/29910091.progress.json",
+      "bytes": 90,
+      "allocated_bytes": 4096,
+      "sha256": "d6229df0976fe6a0f51cc91bb09fda319cbeeabd27b57761e5ba4debf38efef8"
+    },
+    {
+      "path": "reading_raw/29910092.progress.json",
+      "bytes": 90,
+      "allocated_bytes": 4096,
+      "sha256": "099489896f416cd1a8f65ed4d9389d1057c48791df434083882108b4df6a1972"
+    },
+    {
+      "path": "reading_worlds.json",
+      "bytes": 152033,
+      "allocated_bytes": 155648,
+      "sha256": "deab9dd1cd36600edfc728fd56d6467f7a2d4ff4206338017dca819d500f8ec0"
+    },
+    {
+      "path": "stderr.log",
+      "bytes": 0,
+      "allocated_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "stdout.log",
+      "bytes": 0,
+      "allocated_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "summary.json",
+      "bytes": 2216,
+      "allocated_bytes": 4096,
+      "sha256": "99f6e144a88492186b59308c588e91d22ab5df5113d60767d07cb68485b04b3f"
+    }
+  ],
+  "compact_copies": [
+    {
+      "remote_path": "admission-preflight.json",
+      "local_path": "admission-preflight.json",
+      "sha256": "192d2464eb7b520e4f5c9e58a0dbb6b29c8daead30c52fdce62dfea389382663",
+      "bytes": 766
+    },
+    {
+      "remote_path": "config.json",
+      "local_path": "config.json",
+      "sha256": "e577c26309dc8cfdf569f0e7a14707c148bae53ba46f07c9ee596e78cde7b183",
+      "bytes": 8933
+    },
+    {
+      "remote_path": "launch-manifest.json",
+      "local_path": "launch-manifest.json",
+      "sha256": "8a6ef33d1d69c3d0fd7689aa515e03ccf2b4ef70efea7fb4ddc070dba1e688b8",
+      "bytes": 4917
+    },
+    {
+      "remote_path": "launch-status.json",
+      "local_path": "launch-status-native.json",
+      "sha256": "11b2b13628cb8b522c5e003e99b276a58adbf50f1eb388fab58f8956c2320ac4",
+      "bytes": 870
+    },
+    {
+      "remote_path": "manifest.json",
+      "local_path": "manifest.json",
+      "sha256": "43f6941654c5dfd8f4649df78848a994b5f82043e47eb3050456e7c9f1df9188",
+      "bytes": 3547
+    },
+    {
+      "remote_path": "perworld.json",
+      "local_path": "perworld.json",
+      "sha256": "604ae8871f4a3c60e8f337a1520d43a61d6438fd17fd3fe154b16f8fd50fad83",
+      "bytes": 329822
+    },
+    {
+      "remote_path": "process-exit.json",
+      "local_path": "process-exit.json",
+      "sha256": "9b8bb056b99e1b690a077774c8b961dd5bdedce6a8e79190999f5113de97c423",
+      "bytes": 556
+    },
+    {
+      "remote_path": "progress.json",
+      "local_path": "progress.json",
+      "sha256": "70e1b8c85c0daca0774d06faf23e74e7185e38aad8108290465c5f0854445888",
+      "bytes": 269
+    },
+    {
+      "remote_path": "reading.json",
+      "local_path": "reading.json",
+      "sha256": "21cfe44f38fc5b57a832d1f010292e151e907de44cc049b16528243559f70968",
+      "bytes": 144881
+    },
+    {
+      "remote_path": "reading_worlds.json",
+      "local_path": "reading_worlds.json",
+      "sha256": "deab9dd1cd36600edfc728fd56d6467f7a2d4ff4206338017dca819d500f8ec0",
+      "bytes": 152033
+    },
+    {
+      "remote_path": "stderr.log",
+      "local_path": "stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "remote_path": "stdout.log",
+      "local_path": "stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "remote_path": "summary.json",
+      "local_path": "summary.json",
+      "sha256": "99f6e144a88492186b59308c588e91d22ab5df5113d60767d07cb68485b04b3f",
+      "bytes": 2216
+    }
+  ],
+  "raw_copy_count": 1,
+  "all_raw_retained_on_original_node": true,
+  "additional_native_model_or_reader_queries": 0
+}

@@ -1,0 +1,103 @@
+{
+  "artifacts": {
+    "config.json": {
+      "allocated_bytes": 12288,
+      "bytes": 8933,
+      "sha256": "e577c26309dc8cfdf569f0e7a14707c148bae53ba46f07c9ee596e78cde7b183"
+    },
+    "perworld.json": {
+      "allocated_bytes": 331776,
+      "bytes": 329822,
+      "sha256": "604ae8871f4a3c60e8f337a1520d43a61d6438fd17fd3fe154b16f8fd50fad83"
+    },
+    "summary.json": {
+      "allocated_bytes": 4096,
+      "bytes": 2216,
+      "sha256": "99f6e144a88492186b59308c588e91d22ab5df5113d60767d07cb68485b04b3f"
+    }
+  },
+  "launch_sha": "488c72115a3033a9c01c58bd9510896b82a206bf",
+  "object": "fleet-b10-current-service-assignment-v1",
+  "raw": {
+    "raw/29910091_C.npz": {
+      "allocated_bytes": 9596928,
+      "bytes": 9595493,
+      "sha256": "1f0b97448b43db1fd07277ffa164720159d892346a0faeba412a15e9c5c67c7e"
+    },
+    "raw/29910091_C.progress.json": {
+      "allocated_bytes": 4096,
+      "bytes": 423,
+      "sha256": "f0b56017598e414b8c65ee4df4c4157ced0c038fdc111fb68da671ac482fdf33"
+    },
+    "raw/29910091_F_A.npz": {
+      "allocated_bytes": 12365824,
+      "bytes": 12361860,
+      "sha256": "ba5391cffceb61eb9011e9a6fd88be751e3c91a22421701c2f6554337c43456f"
+    },
+    "raw/29910091_F_A.progress.json": {
+      "allocated_bytes": 4096,
+      "bytes": 755,
+      "sha256": "4a7ef0dfa5b0050f0db91eab74222b415aea99ce97721a7eb176b5bf93b1632a"
+    },
+    "raw/29910091_H_A.npz": {
+      "allocated_bytes": 12390400,
+      "bytes": 12387684,
+      "sha256": "2811f85ae6a3c84706a9feeb5108a70c68942fbf666bb7d2c7884166d387d6e7"
+    },
+    "raw/29910091_H_A.progress.json": {
+      "allocated_bytes": 4096,
+      "bytes": 753,
+      "sha256": "9691f3f07ac934622b0d2d0884481d4ee1bf9d634bcd501ac6226fe48685e318"
+    },
+    "raw/29910091_REFERENCE.npz": {
+      "allocated_bytes": 9596928,
+      "bytes": 9594908,
+      "sha256": "b7f2afde3b02445e37cb685c1b36f0bf15213d50e91581a898b542ecf3cb71f7"
+    },
+    "raw/29910091_REFERENCE.progress.json": {
+      "allocated_bytes": 4096,
+      "bytes": 322,
+      "sha256": "f29f4e398e953032ce0e1f5cbafb1e20a857c5a98dc5276f4a7aca37e6512df6"
+    },
+    "raw/29910092_C.npz": {
+      "allocated_bytes": 9801728,
+      "bytes": 9798449,
+      "sha256": "db10ed60ed829329c2941568046d90419d0e3285b758d44fbd8516a59ef5e826"
+    },
+    "raw/29910092_C.progress.json": {
+      "allocated_bytes": 4096,
+      "bytes": 423,
+      "sha256": "0324987d824d664c0174b6d83006187fe897dcd0d60d9ee96f949ddea5c3f5b4"
+    },
+    "raw/29910092_F_A.npz": {
+      "allocated_bytes": 12656640,
+      "bytes": 12655030,
+      "sha256": "7a97a35df8c35e81f4efcbc7e242ffd6e62342569847bb0a45b1634ef029b38b"
+    },
+    "raw/29910092_F_A.progress.json": {
+      "allocated_bytes": 4096,
+      "bytes": 755,
+      "sha256": "a04a6d20cf6eeb99d110d190b9bbd06091397951532d9830da031490c0bc5334"
+    },
+    "raw/29910092_H_A.npz": {
+      "allocated_bytes": 12566528,
+      "bytes": 12564216,
+      "sha256": "866de57c3ddcb5fcf14f4980f1d85cf689dfba203a79ae2dd30b3cac45cae01f"
+    },
+    "raw/29910092_H_A.progress.json": {
+      "allocated_bytes": 4096,
+      "bytes": 753,
+      "sha256": "3702609368cc77cb2e01ef7e2fad018ec26dd4a443dc75da2ab8bc7521c51af8"
+    },
+    "raw/29910092_REFERENCE.npz": {
+      "allocated_bytes": 9801728,
+      "bytes": 9798018,
+      "sha256": "f9ac7c15dab8e2b0f052c5f104475dffc22d4f3d6029d54c37d44617f9c1f1fe"
+    },
+    "raw/29910092_REFERENCE.progress.json": {
+      "allocated_bytes": 4096,
+      "bytes": 322,
+      "sha256": "2c49cad61e1f21e153571190b3e8e1d41d5d92057539aeef6f212810ca7f29fc"
+    }
+  }
+}

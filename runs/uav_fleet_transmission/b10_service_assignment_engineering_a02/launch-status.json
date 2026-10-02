@@ -14,24 +14,21 @@
     },
     "summary": {
       "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_engineering_a02/summary.json",
-      "state": "absent"
+      "state": "present"
     }
   },
   "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/aeafc73ff00a0807bf17244f687f03b7e494535242f49cf2f8d74bbdef5b4b6c.json",
   "direction": "uav_fleet_transmission",
   "execution": {
+    "exit_code": 0,
     "exit_witness": {
+      "exit_code": 0,
+      "finished_at_epoch": 1790906685.972041,
       "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_engineering_a02/process-exit.json",
-      "state": "absent"
+      "state": "valid",
+      "termination": "process_exit"
     },
     "runner": {
-      "observed_identity": {
-        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
-        "kind": "linux_pid_start_ticks",
-        "pid": 1292626,
-        "session_id": 1292625,
-        "start_ticks": 124633855
-      },
       "recorded_identity": {
         "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
         "kind": "linux_pid_start_ticks",
@@ -39,17 +36,10 @@
         "session_id": 1292625,
         "start_ticks": 124633855
       },
-      "state": "running"
+      "state": "absent"
     },
-    "state": "running",
+    "state": "exited",
     "supervisor": {
-      "observed_identity": {
-        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
-        "kind": "linux_pid_start_ticks",
-        "pid": 1292625,
-        "session_id": 1292625,
-        "start_ticks": 124633852
-      },
       "recorded_identity": {
         "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
         "kind": "linux_pid_start_ticks",
@@ -57,7 +47,7 @@
         "session_id": 1292625,
         "start_ticks": 124633852
       },
-      "state": "running"
+      "state": "absent"
     }
   },
   "explicit_retry": {
@@ -73,7 +63,7 @@
   "kind": "hmasd_operation_status",
   "manifest_ref": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_engineering_a02/launch-manifest.json",
   "node": "wsl_4070",
-  "observed_at": "2026-10-02T01:52:53.283824Z",
+  "observed_at": "2026-10-02T02:06:26.205820Z",
   "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/aeafc73ff00a0807bf17244f687f03b7e494535242f49cf2f8d74bbdef5b4b6c.json",
   "output_root": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_engineering_a02",
   "record_consistency": {
