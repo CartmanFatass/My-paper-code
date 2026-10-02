@@ -1326,3 +1326,386 @@ reads are its only new computation. A concrete complete comparison and its
 independent scientific reading remain the next substantive work; neither the
 end of B01 nor the absence of a preselected recipe ends this owner's long-term
 assignment. No new experiment is implied by this audit alone.
+
+<a id="b02-search-branch-contract"></a>
+## 2026-10-01 — B02 prospective paid-experience search-branch comparison
+
+This is the concrete successor proposed by Root's temporary Oracle and assigned
+by Root for contract closure and one independent scientific review. The complete
+original adviser answer is preserved in
+`docs/research/archive/2026-10-01/RESEARCH-three-dm-oracle-design-advice.md`
+(e3532228b;13835UTF8bytes;SHA256
+`84df55fb2298b8ff2820f7518e7ac86bae1cca01b2b5bcf6400ff2127a7ad802`).
+That answer is constructive advice, not this DM's independent review or a run.
+The existing separate-context `b01_result_critic` is reviewing this exact
+investment. Its original final answer and the DM disposition will follow below.
+
+**Question and knowledge purchased.** Can already-paid experience predict which
+of a competent planner's three initial starts will produce a useful result,
+before paying those local searches, and improve fresh-world native quality at
+the cost of one ordinary branch? This tests task-learned decision assistance
+at an actual search-allocation interface. It does not reproduce the B01 cheap
+eight-layout score, retry its N/L-F recipes, or duplicate the sibling relational
+generalization study. It is one fitted asset tested on new worlds, not64fit
+replicates, an optimal search portfolio, a pretraining attribution or a new
+algorithm claim. The complete planner is a constructive reference, not a mean
+performance threshold for whether learning may be studied.
+
+Current RESEARCH topics3/4 at537c1880b and the complete B01 record motivate this
+choice: N's training/fresh gap and L-F's weak fit are different; neither implies
+that a much smaller task-learned assistant cannot use relevant prior searches.
+The B01 order and exact-geometry difficulties motivate physical, permutation-
+insensitive summaries here, without asserting that they repair either old model.
+Full native consequences still matter because descent optimizes a static score,
+and full generation/feature/search cost must be paid before claiming usefulness.
+Claude's source/evidence remains read-only; no old operation is resumed.
+
+The load-bearing external bridge is SATzilla, Xu et al., JAIR32(2008),
+`https://arxiv.org/pdf/1111.2249`, §§1.1–1.2 and2.1, read directly: instance
+features and previous algorithm performance can support a choice made before
+execution. Its quadratic ridge predicts log runtime and uses feature selection
+and validation; its small regularizer is not the basis for this fixed lambda1.
+Mapping a search start to an algorithm and predicting static gain are our
+conjectures, with multi-UAV native consequences still unproven. The three local
+library indexes were checked; the July/external-review bridge already recorded
+in B00 remains applicable within its stated limits. No novelty is claimed.
+
+### Training evidence and source binding
+
+All64historical stage1 gate worlds,1000–1031 and2000–2031, are exposed training/
+development evidence. Their192relay starts supply the sole new fit's labels.
+Required originals are the64JSONfiles at
+`runs/coupled_host_joint_skills_stage1/b01_gate_{dev,holdout}_a01/worlds/`:
+21529851logical bytes total, with individual digests in `B02_INPUT.json`.
+Only these necessary inputs may be staged on the result node. The originals
+and original direction ownership are unchanged. Rejected trial values are not
+present; final branch positions are reconstructed from each initial layout and
+its accepted moves. No claim of a complete rejected-trial dataset is made.
+
+Both original gate panels bind source
+`f589523191c670e215e3d719fc4f2cd01492c301`. Original and current `run_gate.py`,
+`host.py`, and`scenario2.py` are byte-identical. Planner changed from SHA256
+`02cf2d8e3283930468905159af7707ca8d3367fdb0f6da16758ac8ede8d58234`
+to`5c23f4c8a25df55052fa6eb4bb0da65fcf0f079560789b8abd7db416222a0aa6`:
+candidate construction is unchanged, default descent retains100/50/25m steps;
+an optional step schedule and extracted straight-line action helper were added.
+`menus.py` did not exist at the old SHA: old`run_gate.py` directly implemented
+the same flat→relay+flat-incumbent sequence.
+
+Transitive`uav_env.py` also changed: default-disabled transmitter masks and
+physical-channel reuse were added, and radio/association calculations were
+extracted into`uav_radio.py`. Source comparison shows that this host's free-space,
+FDMA, all-on, no-shadow configuration follows the original formulas and stable
+greedy assignment. This is a source finding, not a runtime equivalence certificate
+for the historical package. B02 binds the current committed transitive source
+explicitly and checks its adapter against its original full-search function;
+it does not promise bytewise recreation of every historical native trajectory.
+This possible historical-to-current target shift remains an interpretation limit.
+
+Existing raw arithmetic establishes only conditional static opportunity:
+rank0 wins after descent16/32and9/32; P−rank0 final static means are
+.00987890and.01465360. Both search types converged before3000in every old world.
+Their sunk total128288static queries,384starts,18244candidate rows and9967history
+records remain in the cumulative price. No fresh native headroom is asserted.
+
+### Frozen action mapping and ordinary references
+
+Use the existing six-UAV/fifty-cluster-user/5000m/free-space/FDMA host, its legal
+complete initial geometry, A2A service, min-makespan target assignment and500-step
+straight-line fly/hold executor. Native primary J is mean
+`contract_reward=.5*(C_bh+frontend_capacity_with_path/D)`; C_bh is co-reported.
+No one-time choice is called repeated high-level adaptation.
+
+Each deployed program independently performs the original full flat search
+(3000maximum), then outcome-free relay candidate construction, includes the
+flat result as the original extra incumbent, and pays **all** original relay
+initial static evaluations. Exact top3 ordering is`(-initial_reward,index)`.
+If R=3000−initial-query-count, start r keeps share`R//3 + int(r<R%3)`.
+Original clipping, UAV/move order,100/50/25m schedules, ±50m height moves,
+1e−12reward/1e−9potential comparisons and stopping rule are unchanged.
+Unused shares are not reassigned. Calling`n_starts=1` is explicitly invalid
+because it changes the budget and always chooses rank0.
+
+- G runs only original rank0's original-share branch.
+- B selects one fixed rank using all64training-world mean final static values,
+  with lower rank breaking a tie. Apply the complete fallback below before
+  averaging, retaining every world. Saved arithmetic gives means
+  [.594209344070036,.5941642025792714,.5927790659147725], so **B is G exactly**.
+  Report B as a logical alias, with B−G=0; do not duplicate its execution or
+  count it as replication. The very small rank0−rank1 archive margin .00004514149
+  is retained as a limitation, not tuned away.
+- L uses the single frozen ridge to choose the rank maximizing initial reward
+  plus predicted executable final gain; lower rank breaks a tie. Only that
+  original-share branch runs. Learned inference/model loading/feature costs count.
+- P is the original complete flat→relay+flat-incumbent search, all three relay
+  branches, then the original best final branch. It is not a hindsight choice
+  among native panels or a frequent replanner. The original final routing/static
+  metadata call is paid by every program.
+
+For G/B/L, protect the already-paid best initial layout: if the selected branch's
+final reward is smaller than rank0's initial reward by more than1e−12, execute
+rank0's **initial** layout; otherwise execute the selected branch's final layout.
+Always pay the selected branch. Apply the same rule to training labels and B's
+means. Record requested rank, selected branch outcome, executed layout origin,
+fallback and all costs. Three archive rank/world pairs need this fallback,
+including a .04538static loss; these adverse observations are preserved.
+This protects a static incumbent, not native flight/service quality. P stays
+unchanged. Source reference and adapter must reset the full native world and
+executor before flight: search leaves the environment at its last trial.
+
+### Exactly one fit and one fresh panel
+
+Fix15base features per initial start: initial reward; initial C_bh; initial
+plateau potential/5000; four kind indicators in order
+`kmeans_plain,subset_relay,subset_flat,flat_result_incumbent`; k/6(None→0);
+original rank/2; mean horizontal site-to-BS distance/5000; mean user-to-nearest-
+site horizontal distance/5000; horizontal layout radius of gyration/5000;
+mean height normalized as(z−50)/100; original min-makespan matching's maximum
+and mean3-D travel/5000. Kind must be one of the four declared values. Only
+legal pre-search layout/geometry and already-paid initial scores enter these
+features. Future outcome, query consumption, accepted moves and final positions
+are forbidden inputs. Matching and all geometry work count online.
+
+Fit float64 training-only population means/SDs(zero SD→1), standardize the15
+features, append120products xi*xj for i≤j in lexicographic order to the15linear
+terms, then standardize these135columns by training-only means/SDs. Fit one
+unpenalized intercept plus135ridge coefficients, minimizing **sum** squared
+errors plus1*sum(nonintercept coefficients squared). The target is
+fallback-adjusted executable final static reward minus that start's initial
+reward. No clipping, feature selection, validation sweep, refit or checkpoint
+choice. Save the initial zero-weight predictor, all192rows/targets, statistics,
+coefficients, rank decisions and numerical residuals. An intercept/closed-form
+ridge solve is one fit, not an optimizer-epoch count.
+
+167/192starts are subset_relay and191/192initial potentials are zero. Sparse
+indicators and their standardized interactions may have high leverage;135basis
+columns are not negligible compared with64independent contexts. These are
+honest risks of this fixed representation, not reasons to quietly delete fields
+or buy more fits after seeing the fresh panel.
+
+Fresh test addresses are **107100000–107100063**. A source/manifest/index scan
+found no prior use; Root's current sibling endpoints are disjoint. All64worlds
+are retained with one G/L/P program each, cyclically balanced arm order by world
+index. No test outcome selects weights, fields, baseline or stopping. Only one
+model asset is fitted. Report paired per-world differences/standard errors and
+t63 intervals as conditional-on-this-fit world uncertainty, with all tails,
+sign counts and raw differences; do not call these training replication.
+
+### Full service, timing and independent reader
+
+The admitted parent launches one fresh **spawned** Python worker process per
+world/arm, serially. This is bounded child computation of that admitted entry,
+not a new standalone unguarded result CLI. A child imports numerical/native
+code, creates the host, loads the frozen model when needed, pays its own flat/
+initial/search/feature/matching work and reports selection-ready to the parent.
+Parent spawn-start→selection-ready measures full cold decision wall latency,
+including interpreter/import overhead and notification; record internal segments
+and child CPU too. Caches from another arm's completed search are forbidden.
+Complete H500 flight and trace writing follow selection; report their cost
+separately as well as total process/reader cost. This avoids mistaking cached
+ridge inference or partial segments for complete deployment time. Runtime
+contention and cold process startup may dominate; retain timing dispersion.
+
+The192main episodes save every native state/action, user association, routing,
+reward components, returned team reward, termination and all500steps, plus
+search candidates, scores, shares, chosen/accepted path, final layout and counts.
+Train and inference feature arrays/source identities are saved. No new outcome
+labels feed back into the sole fit.
+
+The complete reader recomputes one original full flat/relay reference per fresh
+world with the frozen upstream function. It reconstructs all three branch final
+layouts from accepted moves and checks adapter candidates, original top3/share,
+selected branch path/count/endpoint, fallback and P against that independent
+path. Sharing this reader reference across the three stored arms is allowed:
+it is paid post-result checking and never supplies an online decision. Reader
+checks every main trace's kinematics, matching, association/routing and reward
+components using paid static evaluator calls at the recorded states, all native
+aggregates and all costs. This relies on pinned upstream radio formulas rather
+than an independently implemented physics engine.
+
+For first four fresh worlds, reader additionally executes the original upstream
+`closed_loop_execute` for all three reference-derived executed layouts:12whole
+H500episodes, checking the owned executor's full series and terminal behavior.
+These are engineering replays of declared worlds, not added scientific replicates
+or a preliminary headroom pilot. Training reader reconstructs labels/physical
+summaries and training-only transformations and verifies the normal-equation
+residual of the saved solution; it does not fit or solve a second model.
+Numerical tolerance is dtype/quantity-specific and includes choice consequences;
+failed checks remain visible and quarantine their dependent claims.
+
+### Complete forecast, limits and result-dependent decisions
+
+Selected scope will contain **1deterministic fit,0new training-label queries,
+0GPU forwards/weights,192main episodes+12whole audit episodes=102000native
+steps**. G=B alias reduces Oracle's duplicate four-arm price. Conservative
+static ceiling is **2448408=2*(192+12)*6001**, inclusive of attempts/correctness/
+reader. A tighter structural account is192main×6001 +64reader-reference×6001
++96000main-state checks+192initial checks=1632448; actual counts are measured,
+not replaced by either forecast. Constructor/reset/native internal radio calls
+are also counted as such and their CPU paid; they are not silently renamed
+explicit static queries. Unused cap grants no extra worlds, labels or fits.
+
+CPU forecast1–3hours, hard cumulative ceiling6CPUhours; support8–14hours forecast,
+including preparation, source/implementation/review, data staging, fitting,
+evaluation, complete reading/publication and cleanup. Support elapsed is tracked
+where available; earlier unmetered work stays unknown. Peak incremental disk
+ceiling2GiB includes source snapshot, necessary21.53MB input staging, traces,
+logs and outputs. No reinstall, model download or GPU dependency is needed.
+Use configured`wsl_4070` and its original interpreter; the retired Laya profile
+is not revived. Source, admission, actual process/child CPU, wall/RSS and disk
+measurements are retained. The old128288static training-source calls and B01's
+complete earlier bill remain sunk costs, not free new labels.
+
+- L improves full native quality over G/B at useful complete cost: retain
+  conditional evidence for archive-trained branch choice and compare a targeted
+  continuation against other ordinary search-allocation methods.
+- G and L are similar while both save versus P: credit ordinary branch reduction;
+  learned selection has not earned the saving.
+- Better static predictions/selected static scores but worse native service:
+  reject this static-target use; a prediction score alone does not establish help.
+- L cannot generalize or chooses worse despite train fit: end this exact asset/
+  basis/target recipe, separating possible historical-source shift, feature/
+  fit limitations and task opportunity. No automatic new fit or data expansion.
+- P wins quality at higher cost: retain the actual quality/cost frontier; no
+  forced adoption or mandatory planner superiority.
+- Technical failure or exceeded contract preserves partial raw evidence and
+  actual cost, without becoming a scientific negative or authorizing a retry.
+
+A specific stronger ordinary continuation remains a next-use competitor:
+archive-only arithmetic using each branch's first36queries to choose which one
+to continue suggests modest static gain over G at modest extra cost. Those
+prefix outcomes are new online information unavailable at L/G's declared
+choice boundary, and exact resume semantics/native benefit are untested.
+It is not added silently to this first comparison; G/L/P cannot establish the
+best ordinary search frontier. Long-term question ownership continues after
+this one study; the next investment follows complete evidence, not model loyalty.
+
+<a id="b02-l0"></a>
+### L0 — bounded implementation following scientific disposition
+
+Deliver one owned B02 numerical search assistant plus complete reader at
+`experiments/candidates/typed_joint_skill_decision/b02/`, tests at the matching
+`tests/experiments/candidates/typed_joint_skill_decision/b02/`, inputs/manifests
+under this doc directory, results`runs/typed_joint_skill_decision/b02_*`, scratch
+only`temp/directions/typed_joint_skill_decision/`. No shared or Claude source
+edits. Reuse original host/candidate generation/flat and full-search functions
+read-only; the one-start adapter must preserve their original branch semantics.
+Implementer owns only assigned code/tests, no NOTES/index/Git mutation, no launch,
+fit, native query or model probe. DM owns this contract, manifests and acceptance.
+Independent engineering review must cover branch allocation, future leakage,
+fallback/target alignment, ridge numerics, original-source reader independence,
+RNG/reset/executor identity, admission/child topology and complete costs.
+
+Focused source/mock tests cover original-share selection(including remainder),
+clip/tie/stop/fallback, feature invariance and unknown kinds, train-only scaling,
+fixed-rank alias, deterministic ridge equations without fitting real labels,
+admission-before-effects, child failure accounting and trace/reader tamper
+detection. Native source/adapter and executor checks consume the declared
+admitted correctness work, never an extra unpriced pilot. Publish exact sources
+and bound input digests before the sole result operation, observe its same handle
+through termination and complete reader, retain every failure/attempt and stop
+on limits. No automatic repair fit, blind retry or alternate scientific recipe.
+
+
+<a id="b02-independent-selection-review"></a>
+## 2026-10-01 — Complete original B02 independent scientific review
+
+Reviewer: `/root/dm_typed_joint_skill/b01_result_critic`, original separate-context
+runtime`01a0f8f3-a3f1-7f12-a0d9-d81a67c03d53`; resumed turn
+`01a0fa0f-f2fc-7c62-96e4-08289dca6d85`. Mechanically extracted from native`task_complete`
+at`/mnt/c/Users/fires/.codex/sessions/2026/10/01/rollout-2026-10-01T12-31-52-01a0f8f3-a3f1-7f12-a0d9-d81a67c03d53.jsonl`line336.
+Original UTF8bytes:10919;SHA256`f07eb7638fe6e863137008e82716137ede6a278a487e811452380dca6b1f2275`.
+The following text is unedited; DM response and Root selection are separate.
+
+<!-- BEGIN ORIGINAL B02 SELECTION CRITIC -->
+
+**Recommendation: revise and invest in one bounded G/L/P comparison, with B explicitly aliased to G.** The accepted incumbent correction and removal of duplicate execution resolve my concrete objections. This tests a useful new interface: using past search outcomes to choose a branch before paying for its descent. B01’s failure on an already-realized eight-layout menu does not decide this question.
+
+I reused my separate B01 reviewer context. The follow-up assignment already described the proposed recipe, so this review was evidence-led but not proposal-blind. I read the current owner scope, constitution, scientific-tools method and relevant RESEARCH topics; both original manifests and summaries; all 64 archived world JSONs; the frozen planner and relevant current source differences. Using saved moves, I reconstructed all 192 relay-start final layouts: each recorded planner winner matched exactly. I performed no fit, search query, native evaluation or code change. Engineering acceptance of the eventual adapter and transitive source binding remains outstanding.
+
+The paid archive establishes an opportunity, with important limits. Its 128,288 static calls produced final outcomes for the original top-three starts, not arbitrary candidates, rejected-action targets or H500 consequences for every start. Both old panels are now exposed training data.
+
+| Archive observation | Old dev | Old holdout |
+|---|---:|---:|
+| Initial rank 0 eventually wins | 16/32 | 9/32 |
+| Full planner minus rank-0 final static reward | .009879 | .014654 |
+| Mean spread across three final static rewards | .024961 | .029614 |
+| Full flat→relay search calls | 2,012.03 | 1,996.97 |
+| Flat→relay with only rank-0 descent | 1,364.97 | 1,359.72 |
+
+Thus ordinary G already removes about **32% of complete search calls**. All 128 archived flat/relay searches converged before their 3,000-call ceilings. Savings from omitting branches belong to G; learning must earn its increment over G.
+
+The opportunity is consequential in individual worlds. In world 1020, the three final static rewards were approximately .58876, .64001 and .64270; in world 2030 they were .53912, .61866 and .61205. Initial ranking can miss a substantially better basin. These records support testing conditional selection, but neither their spread nor their maximum is a measured native headroom bound. Different layouts have different travel and transient service consequences.
+
+The common incumbent correction is necessary and sufficient for the specific weakness I found. Without it, selecting and improving a lower-ranked branch can discard a better layout whose score was already paid for:
+
+| World, selected rank | Best initial reward | Branch final reward | Avoidable static loss |
+|---|---:|---:|---:|
+| 1004, rank 2 | .583030 | .561467 | .021563 |
+| 1005, rank 1 | .549075 | .544953 | .004121 |
+| 1024, rank 2 | .465714 | .420337 | .045378 |
+
+Use the agreed rule for G/B/L: after the selected branch consumes its original share, fall back to the original rank-0 initial layout when the branch finishes below its reward minus \(10^{-12}\). Search costs remain paid; final matching uses the original spawn. Applying the same rule to B’s training criterion and L’s targets avoids a train/deployment mismatch. Preserve searched rank, executed origin and fallback separately. This is a static incumbent rule, not a native safety guarantee.
+
+After this correction, the three fixed-rank training means are:
+
+`[0.594209344070036, 0.5941642025792714, 0.5927790659147725]`.
+
+B therefore remains rank 0, exactly G. The small rank-0/rank-1 margin also cautions against a population ranking claim. Execute G once; report B as its logical alias, with B−G identically zero and L−B identical to L−G.
+
+I also checked one concrete ordinary continuation alternative from saved history: inspect each start after its first 36 static evaluations, choose the highest current reward, then continue that branch under its original share. With the common incumbent rule, its archived final static improvement over G would be **+.003613/+.003311**, for approximately **75/63 additional calls** per world if prefixes were resumed exactly. It also makes three/four adverse choices, with a worst loss of .026959. These are arithmetic projections from exposed search histories, not native results or an implemented controller.
+
+This is a credible future competitor, and prevents claiming that G/L/P establishes the best ordinary quality–cost frontier. I agree with keeping it outside this first comparison: it purchases prefix outcomes unavailable at the specified pre-descent selection boundary and requires additional continuation semantics. G remains the direct control for archive-trained selection at that boundary; P supplies the complete ordinary reference. A favorable L result would make the short-probe alternative relevant to a subsequent use decision.
+
+The proposed ridge is a defensible single exploratory construction, but “low complexity” should describe its computational cost, not established statistical safety. There are 64 independent training contexts, 192 correlated start rows and 135 nominal predictors. Of those rows, 167 are `subset_relay`; plateau potential is zero on 191 of 192. Standardized quadratic interactions can amplify sparse descriptors and create redundant directions. Moreover, λ=1 on summed squared error corresponds to λ=1/192 under a mean-loss convention; it is not automatically strong regularization.
+
+I would retain this exact construction without adding a model sweep or mandatory linear arm. Its prediction is testable, and neither optimum architecture nor a guaranteed positive is required. A negative result would concern this archive, representation and fixed fit—not establish that branch choice cannot be learned. SATzilla supports the general bridge from instance features and past outcomes to pre-execution selection. Its quadratic ridge construction also used feature selection; it does not validate this particular unselected basis or establish UAV benefit. [SATzilla, §§1.1–2.1](https://arxiv.org/pdf/1111.2249)
+
+The complete comparison should preserve these interpretations:
+
+- **Primary capability:** paired fresh-world L−G native J and \(C_{\mathrm{bh}}\), accompanied by complete online cost. One trained artifact evaluated on 64 worlds supports a conditional fresh-world observation, not replication across training populations.
+- **Intermediate prediction:** selected-branch static reward and regret relative to the current full search. Pooled gain MSE is secondary. The Parent B06/B07 evidence makes actual within-world ordering and executed choices especially important.
+- **Practical tradeoff:** L−P quality, latency, CPU and calls. P need not be beaten in native quality for L to be useful, and P’s static selection is not a native upper bound.
+- **Decision exposure:** retain every world; distinguish choosing rank 0, choosing another rank, fallback and genuinely different executed layouts. Sparse changes or identical programs cannot be presented as repeated successful conditional decisions.
+
+On source identity, I do **not** require an additional old-package numerical replay merely to admit the paid labels. The inspected changes provide a reasonable basis for the bounded comparison: default search steps remain unchanged, and the relevant all-on/free-space/FDMA arithmetic appears preserved through extraction. Nevertheless, the training labels belong to `f589523191c670e215e3d719fc4f2cd01492c301`; the test system is the newly pinned current dependency closure. Current adapter agreement does not certify historical runtime equivalence. A material discrepancy in scoring, RNG, branch order or budget semantics must be resolved as a technical problem before interpreting dependent outcomes.
+
+The clarified reader is appropriately stronger than an aggregate check: one full reference search per fresh world reconstructs all three endpoints, every main native state receives reward/coverage/routing checks, and the first four worlds receive complete executor replay for all three programs. This still relies on pinned physical-law code; independently written branch logic does not constitute an independent radio model. Preserve that distinction. Similarly, `n_starts=1` remains unsuitable because it changes the selected-rank interface and budget allocation.
+
+The smallest worthwhile complete observation is now **one fit, zero new training labels, 64 fresh worlds × three programs**, plus 12 full correctness episodes: **102,000 native steps**. The accepted conservative static ceiling is **2,448,408 calls**; the clarified accounting forecasts at most approximately **1,632,448**, with all actual attempts charged and unused reserve providing no extra scope. Retain the 1–3 CPU-hour forecast, six-hour hard ceiling, 8–14 support-hour forecast, zero GPU/weight/install cost and expected incremental disk below 2 GiB. Support is the dominant prospective investment. Fresh-process timing should include startup, imports, model loading and all online construction; it describes this execution setting, not universally cold hardware.
+
+The result should change the next action as follows:
+
+- **L changes choices and improves fresh native consequences over G at useful cost:** retain a narrow experience-assisted search capability. Further investment may target comparison with short probing or recurrence across independently assembled training archives, whichever changes an actual use decision.
+- **L improves static selection but harms native J/service:** end this static-target/executor combination for the proposed use. Preserve the static prediction capability without calling it complete decision assistance.
+- **L mostly reproduces G:** ordinary branch omission supplies the demonstrated savings. The conditional selection hypothesis received little effective exposure; no automatic refit follows.
+- **L makes substantial adverse choices or fails to generalize:** stop this exact fitted recipe. Training error, contextual errors and rare-feature behavior may inform diagnosis, but do not automatically justify larger data or another model.
+- **G itself offers useful quality–cost savings against P:** retain that ordinary capability even if L adds nothing.
+
+The changed interface warrants this purchase because it moves experience to a genuinely unpaid decision and can distinguish a useful fitted selector from ordinary branch omission on complete native consequences. It does not warrant a sequence of rescue fits, a pretrained-model claim or a claim that the ordinary frontier has been exhausted.
+
+**MATERIAL_DISSENT: no.** I support the revised G/L/P investment with the accepted common incumbent rule, B alias, explicit quadratic-fit risk and limited frontier claim. The objections to discarded paid incumbents and duplicate B execution have been resolved.
+
+<!-- END ORIGINAL B02 SELECTION CRITIC -->
+
+### DM disposition and bounded price returned to Root
+
+I read the whole original answer and adopt its G/L/P comparison, shared paid-
+incumbent fallback and B=G alias. The fallback changes both training targets and
+deployment coherently; it buys no label or query. Omitting duplicate B execution
+reduces the proposed experiment to102000native steps while preserving every
+policy contrast. The exact136-coefficient ridge has computational simplicity,
+not demonstrated statistical safety; the rare-feature/interactions and weak
+fixed-rank separation remain concrete adverse possibilities. The36-query ordinary
+prefix continuation remains a serious next-use alternative, not a covert new
+arm or a reason to claim the ordinary frontier is exhausted.
+
+There is no material scientific dissent. I return this full original review
+and prospective contract to Root for the initial cross-question allocation.
+Within that selected scope, implementation/review/admission/collection/complete
+reading proceeds without per-fit approvals. Source and L0 work may continue;
+no result operation, new fit or query has been started. Current configuration
+requires no shared/environment changes. Forecast remains1–3CPUhours with6CPUh
+hard ceiling,8–14support hours,2GiB incremental disk,one fit,zero GPU/install,
+102000native steps and2448408explicit static queries inclusive of the reader.
+The enduring question remains active beyond disposition of this exact recipe.

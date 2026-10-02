@@ -1,0 +1,565 @@
+{
+  "aliases": {
+    "B": "G"
+  },
+  "arms": [
+    "G",
+    "L",
+    "P"
+  ],
+  "audit_worlds": [
+    107100000,
+    107100001,
+    107100002,
+    107100003
+  ],
+  "budget": {
+    "cpu_seconds": 21600,
+    "fits": 1,
+    "gpu_forwards": 0,
+    "incremental_disk_bytes": 2147483648,
+    "native_steps": 102000,
+    "new_training_labels": 0,
+    "static_calls": 2448408
+  },
+  "direction": "typed_joint_skill_decision",
+  "fit": {
+    "base_width": 15,
+    "basis_width": 135,
+    "dtype": "float64",
+    "intercept": true,
+    "lambda_sum_loss": 1.0,
+    "training_rows": 192,
+    "training_worlds": 64
+  },
+  "historical_source_sha": "f589523191c670e215e3d719fc4f2cd01492c301",
+  "independent_review_sha256": "f07eb7638fe6e863137008e82716137ede6a278a487e811452380dca6b1f2275",
+  "pinned_upstream_sources": {
+    "envs/pettingzoo/scenario2.py": "277374f365e8eeda882de53d53cc051c1534fe210622fee74d7b5a8f9d2cf2f2",
+    "envs/pettingzoo/uav_env.py": "fb67554cf911adc9d3260a2a7f16d1773921c295646cb46beb4ba1247fec599e",
+    "envs/pettingzoo/uav_radio.py": "db3464803b1a5aa9c9504096810dc971266a6bd7eba1c31dfe79e7d8d903f3cc",
+    "experiments/candidates/coupled_host_joint_skills_stage1/host.py": "92b75c0317009380108bd45429892e49ca857b901ae1adbcd5bfe483d89ef469",
+    "experiments/candidates/coupled_host_joint_skills_stage1/menus.py": "15b818e0250141b45a47480d5acaa6b0f217c8ce8fe8c35ef6a7abb765102886",
+    "experiments/candidates/coupled_host_joint_skills_stage1/planner.py": "5c23f4c8a25df55052fa6eb4bb0da65fcf0f079560789b8abd7db416222a0aa6",
+    "experiments/candidates/coupled_host_joint_skills_stage1/run_gate.py": "b5f669597db920242bd89955821d738f569199f6e9245004cae445ff0cfb00ef"
+  },
+  "schema": 1,
+  "study": "b02_search_branch",
+  "test_worlds": [
+    107100000,
+    107100001,
+    107100002,
+    107100003,
+    107100004,
+    107100005,
+    107100006,
+    107100007,
+    107100008,
+    107100009,
+    107100010,
+    107100011,
+    107100012,
+    107100013,
+    107100014,
+    107100015,
+    107100016,
+    107100017,
+    107100018,
+    107100019,
+    107100020,
+    107100021,
+    107100022,
+    107100023,
+    107100024,
+    107100025,
+    107100026,
+    107100027,
+    107100028,
+    107100029,
+    107100030,
+    107100031,
+    107100032,
+    107100033,
+    107100034,
+    107100035,
+    107100036,
+    107100037,
+    107100038,
+    107100039,
+    107100040,
+    107100041,
+    107100042,
+    107100043,
+    107100044,
+    107100045,
+    107100046,
+    107100047,
+    107100048,
+    107100049,
+    107100050,
+    107100051,
+    107100052,
+    107100053,
+    107100054,
+    107100055,
+    107100056,
+    107100057,
+    107100058,
+    107100059,
+    107100060,
+    107100061,
+    107100062,
+    107100063
+  ],
+  "training_record_bytes": 21529851,
+  "training_records": [
+    {
+      "bytes": 317192,
+      "former_panel": "dev",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_dev_a01/worlds/1000.json",
+      "sha256": "e76201c184afb1c1e5cd132e5f6b0ae16870b3e4dd169979a15bf6e23c2e9e89",
+      "world": 1000
+    },
+    {
+      "bytes": 340218,
+      "former_panel": "dev",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_dev_a01/worlds/1001.json",
+      "sha256": "d64784d3b2a482c4bee4826e9f8760935c50ac40838973f4818bbea71bb7bb16",
+      "world": 1001
+    },
+    {
+      "bytes": 326099,
+      "former_panel": "dev",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_dev_a01/worlds/1002.json",
+      "sha256": "f6143cdce1f072c9a79ba978fb26b26e866152319b2a4deab01da885aea7482b",
+      "world": 1002
+    },
+    {
+      "bytes": 360961,
+      "former_panel": "dev",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_dev_a01/worlds/1003.json",
+      "sha256": "ac60c7903632c4c64c7618fe6bc7f29d1b5d0e488ae95675c3154eb2a519c317",
+      "world": 1003
+    },
+    {
+      "bytes": 314523,
+      "former_panel": "dev",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_dev_a01/worlds/1004.json",
+      "sha256": "7c7bfa4e509d7088a625ef65d461cbc49a6cea923e79679925ec1a92139e323b",
+      "world": 1004
+    },
+    {
+      "bytes": 347269,
+      "former_panel": "dev",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_dev_a01/worlds/1005.json",
+      "sha256": "fb5af7052b5f653ef109abda31097e666f60f23583af756bec78a1e31516447d",
+      "world": 1005
+    },
+    {
+      "bytes": 343040,
+      "former_panel": "dev",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_dev_a01/worlds/1006.json",
+      "sha256": "5aceb3e87cf513e9f25f426f62af05a438a9e0580db090ad1563b4a4c5b71c9d",
+      "world": 1006
+    },
+    {
+      "bytes": 331104,
+      "former_panel": "dev",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_dev_a01/worlds/1007.json",
+      "sha256": "4c7a6a96824a0b5bf00b88e749e48e92220cf46bc7c36f47ed02f1a03d39a130",
+      "world": 1007
+    },
+    {
+      "bytes": 326996,
+      "former_panel": "dev",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_dev_a01/worlds/1008.json",
+      "sha256": "fd4110aaf0a947330d3ee6cc30eb407f01b728af3d201ef8876aab2a432abba4",
+      "world": 1008
+    },
+    {
+      "bytes": 359917,
+      "former_panel": "dev",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_dev_a01/worlds/1009.json",
+      "sha256": "6c44e872ec74692ea122b58fb5103d519412f33f92682211218f0f9441b5f816",
+      "world": 1009
+    },
+    {
+      "bytes": 350644,
+      "former_panel": "dev",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_dev_a01/worlds/1010.json",
+      "sha256": "ddf068c01d6706889d8cd453f08f17c631fc195b29f4e5fb75783962d6aadd2c",
+      "world": 1010
+    },
+    {
+      "bytes": 328521,
+      "former_panel": "dev",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_dev_a01/worlds/1011.json",
+      "sha256": "fff4b713cf03337e7b304b567fc25f52c821f5822f9860ef3a24897dd1e0c7b5",
+      "world": 1011
+    },
+    {
+      "bytes": 349146,
+      "former_panel": "dev",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_dev_a01/worlds/1012.json",
+      "sha256": "37a7de132f02506b69842f2cabeaf1c8cc0d8b0ff46e3e318e00051c5602fcd2",
+      "world": 1012
+    },
+    {
+      "bytes": 354762,
+      "former_panel": "dev",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_dev_a01/worlds/1013.json",
+      "sha256": "8e58f2f713f43075026a58aa65d5198b4cc18b5565bd057a2e72b8475b9e7953",
+      "world": 1013
+    },
+    {
+      "bytes": 357431,
+      "former_panel": "dev",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_dev_a01/worlds/1014.json",
+      "sha256": "9931f5e2946ceeae3dcdec6451c5902491452dcad287a8ad51f12dc236b1a22a",
+      "world": 1014
+    },
+    {
+      "bytes": 302014,
+      "former_panel": "dev",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_dev_a01/worlds/1015.json",
+      "sha256": "2c269e2e2e68f0eecb0b07befa9ee29392f50675ffdc97ade2e6ac29489c4fbe",
+      "world": 1015
+    },
+    {
+      "bytes": 329717,
+      "former_panel": "dev",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_dev_a01/worlds/1016.json",
+      "sha256": "9b827f98d322b6339d950edcf2b3bf3071a5008860c703c9b08e3c4185f6b9d0",
+      "world": 1016
+    },
+    {
+      "bytes": 356789,
+      "former_panel": "dev",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_dev_a01/worlds/1017.json",
+      "sha256": "652934c6f2eaeb5f04807fe94ff2fd6fa170c699a15d3d61a6acdc33ea859cc5",
+      "world": 1017
+    },
+    {
+      "bytes": 339903,
+      "former_panel": "dev",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_dev_a01/worlds/1018.json",
+      "sha256": "708b4363aae057bc086d17fe1699bba3342232c182e33a1dbce2f0df5a9c1c44",
+      "world": 1018
+    },
+    {
+      "bytes": 347021,
+      "former_panel": "dev",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_dev_a01/worlds/1019.json",
+      "sha256": "81ec3747eb2078f8c463395588de39e8effb4517ddad551874d4c207bb127990",
+      "world": 1019
+    },
+    {
+      "bytes": 340770,
+      "former_panel": "dev",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_dev_a01/worlds/1020.json",
+      "sha256": "9a24e1ede6b34e1586895b41cb963f0d725607e234f4fccef0868ad5c82893ad",
+      "world": 1020
+    },
+    {
+      "bytes": 319043,
+      "former_panel": "dev",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_dev_a01/worlds/1021.json",
+      "sha256": "dc86352007c5388331e81e614068256f9990b04bf36fae0950189c5a45d0f383",
+      "world": 1021
+    },
+    {
+      "bytes": 351350,
+      "former_panel": "dev",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_dev_a01/worlds/1022.json",
+      "sha256": "66d16997be8c213c4ba41a336f0052f5040213aebf730e796072c6b89cf50347",
+      "world": 1022
+    },
+    {
+      "bytes": 345345,
+      "former_panel": "dev",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_dev_a01/worlds/1023.json",
+      "sha256": "eb4874fe9de077dcd07d44e349da1ae439ec26e7cf2903c0f92b365e59d77e38",
+      "world": 1023
+    },
+    {
+      "bytes": 321451,
+      "former_panel": "dev",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_dev_a01/worlds/1024.json",
+      "sha256": "d7c37eb16b66fd3841585b3338d8d5fb4c902a9b1a103c0c8d60774e10056339",
+      "world": 1024
+    },
+    {
+      "bytes": 337143,
+      "former_panel": "dev",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_dev_a01/worlds/1025.json",
+      "sha256": "edd32781bcdef2a02ab6661733ccfff619b1d8ee5a551586cbe3f5e9a4994da9",
+      "world": 1025
+    },
+    {
+      "bytes": 319395,
+      "former_panel": "dev",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_dev_a01/worlds/1026.json",
+      "sha256": "a248f3185115b5eea974fb5f9104869c6acce2b0b9da3fce24c0380a7844f876",
+      "world": 1026
+    },
+    {
+      "bytes": 343746,
+      "former_panel": "dev",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_dev_a01/worlds/1027.json",
+      "sha256": "a9f5ffedf919028074608347ce9abdc4efe42fdeda87e5daba0c3af0da8a3deb",
+      "world": 1027
+    },
+    {
+      "bytes": 316141,
+      "former_panel": "dev",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_dev_a01/worlds/1028.json",
+      "sha256": "48cc07cd937e9e6920663e7c6bab59ab86681aa18b5cca42834c558209bc6415",
+      "world": 1028
+    },
+    {
+      "bytes": 348409,
+      "former_panel": "dev",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_dev_a01/worlds/1029.json",
+      "sha256": "07e125939da4f68a4f1545496b710e2b3c4fd9503f05141bcafd3a0b466451be",
+      "world": 1029
+    },
+    {
+      "bytes": 333825,
+      "former_panel": "dev",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_dev_a01/worlds/1030.json",
+      "sha256": "ac1401ad5f7bb7a51d50c1231ca8942a604af9fab9ff7ed45e23bf06e7d11313",
+      "world": 1030
+    },
+    {
+      "bytes": 328196,
+      "former_panel": "dev",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_dev_a01/worlds/1031.json",
+      "sha256": "3237ce79aa32785f0e426ffe8830bce782e3a804034d5400c2ac27248aa56cb2",
+      "world": 1031
+    },
+    {
+      "bytes": 352642,
+      "former_panel": "holdout",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_holdout_a01/worlds/2000.json",
+      "sha256": "d32c39f64ba4b2bd41c452837495cdbf5f743da8c9e5257005dc195b4a01a2e1",
+      "world": 2000
+    },
+    {
+      "bytes": 319094,
+      "former_panel": "holdout",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_holdout_a01/worlds/2001.json",
+      "sha256": "cc0f7dafcb58bb4da75797083f122b9f276d9b9921a965746cfc389659d0c7b6",
+      "world": 2001
+    },
+    {
+      "bytes": 318214,
+      "former_panel": "holdout",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_holdout_a01/worlds/2002.json",
+      "sha256": "5d99c73e2ae1fa6b60f8df20f2c130b72566db41f84be2f0d6a3921d90d95171",
+      "world": 2002
+    },
+    {
+      "bytes": 331097,
+      "former_panel": "holdout",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_holdout_a01/worlds/2003.json",
+      "sha256": "c22f96da05aa9a6c45c6a5a20dca98e7ca7e8b60663550515603d08edf38cb5f",
+      "world": 2003
+    },
+    {
+      "bytes": 309991,
+      "former_panel": "holdout",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_holdout_a01/worlds/2004.json",
+      "sha256": "a6d5e938b125b6e6a4e660bfec2c10709d7d577ddf9a144df62398cc9b0f8204",
+      "world": 2004
+    },
+    {
+      "bytes": 352431,
+      "former_panel": "holdout",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_holdout_a01/worlds/2005.json",
+      "sha256": "a487ee43b5c28c18f15f1c91237e186a476ab1e8361b9da7d56e5b68b156bf06",
+      "world": 2005
+    },
+    {
+      "bytes": 323151,
+      "former_panel": "holdout",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_holdout_a01/worlds/2006.json",
+      "sha256": "941d3352cc4a2156c751bab81ac43f199a6033245214c7a9411d1bc74c43b80d",
+      "world": 2006
+    },
+    {
+      "bytes": 340498,
+      "former_panel": "holdout",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_holdout_a01/worlds/2007.json",
+      "sha256": "f125303352e9503cec5f5f520d9eab383ddebc4033f5b13c0c50ff3e72cdb337",
+      "world": 2007
+    },
+    {
+      "bytes": 331245,
+      "former_panel": "holdout",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_holdout_a01/worlds/2008.json",
+      "sha256": "b21b4b6d77b6c700269dcd71cb38e89a592495d559b41c9156a56e3b194f4f4b",
+      "world": 2008
+    },
+    {
+      "bytes": 296779,
+      "former_panel": "holdout",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_holdout_a01/worlds/2009.json",
+      "sha256": "ecb3a28809e379fdb5f8c951120909e5cd372c5f696b6e6179cd81d113e83634",
+      "world": 2009
+    },
+    {
+      "bytes": 336161,
+      "former_panel": "holdout",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_holdout_a01/worlds/2010.json",
+      "sha256": "fcf2a8c21a872b40d8f75c765846d350f23b8d0d775b4f08760d90da2ab54a24",
+      "world": 2010
+    },
+    {
+      "bytes": 341978,
+      "former_panel": "holdout",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_holdout_a01/worlds/2011.json",
+      "sha256": "b143061c41c872e906911a874a604e2407aee00db36a4e55f5edb7997edde5f5",
+      "world": 2011
+    },
+    {
+      "bytes": 316686,
+      "former_panel": "holdout",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_holdout_a01/worlds/2012.json",
+      "sha256": "6abcedf143a32025f4fbcdf9e0778fc983d097b1e82e122192bbe92067cea8bd",
+      "world": 2012
+    },
+    {
+      "bytes": 338043,
+      "former_panel": "holdout",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_holdout_a01/worlds/2013.json",
+      "sha256": "176326d1672f2101d64fea9dca4ebe1511978767e217afc7a47ddf29997f9770",
+      "world": 2013
+    },
+    {
+      "bytes": 345946,
+      "former_panel": "holdout",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_holdout_a01/worlds/2014.json",
+      "sha256": "ab2bff3038d5bfb295297e349f93dc8ed4c173c50924b909b3ae11df3ab44557",
+      "world": 2014
+    },
+    {
+      "bytes": 319194,
+      "former_panel": "holdout",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_holdout_a01/worlds/2015.json",
+      "sha256": "bcc53d1e9da5060b6ad51f87a66b5322982465be6138fc3346c7421d483edc3c",
+      "world": 2015
+    },
+    {
+      "bytes": 349828,
+      "former_panel": "holdout",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_holdout_a01/worlds/2016.json",
+      "sha256": "ece80ea8402e7ec51221470302a88e1966cd4850189e1036d7ee0abf8414016a",
+      "world": 2016
+    },
+    {
+      "bytes": 334332,
+      "former_panel": "holdout",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_holdout_a01/worlds/2017.json",
+      "sha256": "8cc49f993f61bc66bfd26532fc72344275450d6cb86ca1771ff3767e5f51f18d",
+      "world": 2017
+    },
+    {
+      "bytes": 335738,
+      "former_panel": "holdout",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_holdout_a01/worlds/2018.json",
+      "sha256": "dcd5f454e946717c8e69e60dce8b4d882a43944663bd3f3b8099e791c3959f55",
+      "world": 2018
+    },
+    {
+      "bytes": 341684,
+      "former_panel": "holdout",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_holdout_a01/worlds/2019.json",
+      "sha256": "f37a6abe3cd1d04d713468d74452d3aaa18228d8c4321749274b1f748091b62d",
+      "world": 2019
+    },
+    {
+      "bytes": 327115,
+      "former_panel": "holdout",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_holdout_a01/worlds/2020.json",
+      "sha256": "adcb3f1362f56666425731bea22f40711653e56f8b367725ca90b98ab8c3f0e3",
+      "world": 2020
+    },
+    {
+      "bytes": 358579,
+      "former_panel": "holdout",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_holdout_a01/worlds/2021.json",
+      "sha256": "6374cd74002e3efce548438e7661720238314e8d57e9886785bfc41e947c2c0e",
+      "world": 2021
+    },
+    {
+      "bytes": 339862,
+      "former_panel": "holdout",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_holdout_a01/worlds/2022.json",
+      "sha256": "e516ca8de1ac43d175720a492382ec666ee611d811fcb9b3951b9160952f3d70",
+      "world": 2022
+    },
+    {
+      "bytes": 352436,
+      "former_panel": "holdout",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_holdout_a01/worlds/2023.json",
+      "sha256": "de85e8dc78802d4bfb7ddf2a33a3fc05c5859fc3eea559af7ba43060dd1ef46d",
+      "world": 2023
+    },
+    {
+      "bytes": 349579,
+      "former_panel": "holdout",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_holdout_a01/worlds/2024.json",
+      "sha256": "f136b3bedb8c8eb0ca1c67a11f446a390e86566f4dac4760262bf4b99414c94b",
+      "world": 2024
+    },
+    {
+      "bytes": 343678,
+      "former_panel": "holdout",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_holdout_a01/worlds/2025.json",
+      "sha256": "adbad0efdcc97d245a8f80b9b5156fbc67c2e877efb6f1138ba66dce56f25351",
+      "world": 2025
+    },
+    {
+      "bytes": 336621,
+      "former_panel": "holdout",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_holdout_a01/worlds/2026.json",
+      "sha256": "6c0eb5443c863ab33acdaea731463359cd84bf21217b4bdeebbe2678e61cd731",
+      "world": 2026
+    },
+    {
+      "bytes": 326357,
+      "former_panel": "holdout",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_holdout_a01/worlds/2027.json",
+      "sha256": "87293c7f3fa36fb19722952b2f5b04f0dfdbb068b93179a55faa3f9a348ac59c",
+      "world": 2027
+    },
+    {
+      "bytes": 352482,
+      "former_panel": "holdout",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_holdout_a01/worlds/2028.json",
+      "sha256": "bf002b5ac2829c0c9bc32e3cbb45e61ec0aad4cfc469a920f36da3f52ae82383",
+      "world": 2028
+    },
+    {
+      "bytes": 345043,
+      "former_panel": "holdout",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_holdout_a01/worlds/2029.json",
+      "sha256": "2a8456cf4d0113e480702a400d1973d6bc93dfb5397cba80cdbe30b7bf9ae526",
+      "world": 2029
+    },
+    {
+      "bytes": 337702,
+      "former_panel": "holdout",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_holdout_a01/worlds/2030.json",
+      "sha256": "54d6fdedef003679b0b5a6b8039afc49ca13b272c3108b32fd04a42c6f22434c",
+      "world": 2030
+    },
+    {
+      "bytes": 337584,
+      "former_panel": "holdout",
+      "path": "runs/coupled_host_joint_skills_stage1/b01_gate_holdout_a01/worlds/2031.json",
+      "sha256": "60213998b43f05d446d81edb605891aa1b6a6eda5c7bf34e440edb80974df66a",
+      "world": 2031
+    }
+  ]
+}
