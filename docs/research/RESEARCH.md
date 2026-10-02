@@ -11,7 +11,7 @@
 已读取前任完成的[单一 handoff](HANDOFF_20261001_ROOT_AND_FOUR_DMS.md)，接手 Codex 科学管理、选题与后继安排。
 上一轮四项研究及三项资料评估的完成／停止结论保持；旧操作不重启，历史 handoff 不改写。
 本次明确继续解除该轮 Codex 交接暂停；静默承诺、RF 完整购买与参数搜索均已完整判读、发表和清理。S7 构造与计价也已完成，Root 采纳独立评审、本轮不购买该候选；见[首轮完成处置](#root-selected-successors-20261001)。
-Owner 提供的开放 Jev/Laya 计划首轮6-fit比较已完整结束，两个精确配方的停止与全部证据保留。Owner随后明确要求将开源决策辅助作为一个DM长期探索的问题、泛化超出Laya并继续研究；同时目标改为3个有实质工作的DM，Oracle Astra Max只作为临时服务Root的设计与调度建议者。现已恢复／建立三位DM；结构泛化的有界6-fit比较已选定并交DM推进，预测分配与经验选择搜索分支的具体方案正在完成独立判读和合同。选择不等于运行已接受；见[当前长期分工](#three-dm-decision-assistance-20261001)与[B01处置](#typed-joint-skill-selection-20261001)。
+Owner 提供的开放 Jev/Laya 计划首轮6-fit比较已完整结束，两个精确配方的停止与全部证据保留。Owner随后明确要求将开源决策辅助作为一个DM长期探索的问题、泛化超出Laya并继续研究；同时目标改为3个有实质工作的DM，Oracle Astra Max只作为临时服务Root的设计与调度建议者。现已恢复／建立三位DM；结构泛化的有界6-fit比较与S7预测分配的0-fit完整比较均已选定并交各DM推进，经验选择搜索分支方案正在完成独立判读和合同。选择不等于运行已接受；见[当前长期分工](#three-dm-decision-assistance-20261001)与[B01处置](#typed-joint-skill-selection-20261001)。
 Claude 的独立权限和当前暂停、FSD/PPC 暂停、G33 冻结及 Milan 数据依赖保持原范围。
 
 **历史恢复：2026-09-29 21:59 UTC，owner明确要求“阅读handoff 我们继续工作”；该轮次现已完成并暂停。**
@@ -2465,13 +2465,13 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 
 <a id="three-dm-decision-assistance-20261001"></a>
 **Owner长期决策辅助与3DM安排（2026-10-01 PDT）：** 当前具体工作是从已有证据构造并推进下一笔有价值的完整研究，
-不把B01的两个包结果当作开源决策模型／联合学习路线终点。下面三位DM已按实际原生地址启动；Root已选择结构泛化比较，另两项具体方案正在独立判读和合同核对。实验接受仍以原生准入句柄为准。
+不把B01的两个包结果当作开源决策模型／联合学习路线终点。下面三位DM已按实际原生地址启动；Root已选择结构泛化与S7预测分配比较，经验选择搜索分支方案正在独立判读和合同核对。实验接受仍以原生准入句柄为准。
 
 | 科学责任 | 当前有实质的工作与边界 | 负责人 |
 | --- | --- | --- |
 | 广义开源／可学习决策辅助，长期持有 | 研究可复用先验或任务学习模块如何与控制／规划协作，提高新场景原生决策、经验使用或质量／计算取舍。当前具体候选用旧64世界的已付搜索经验选择一个尚未执行的relay分支，对普通rank0／训练选定固定rank／完整搜索比较；1次低复杂度拟合的合同及已有独立critic判读中，尚未选run。不限定Laya、语言模型、静态8-menu或t0选择。 | 原DM `/root/dm_typed_joint_skill`，稳定路径 `typed_joint_skill_decision`；长期负责人延续。 |
 | 学习辅助器的结构与新场景泛化 | 已选择同已付训练数据的A/R完整比较：A为几何关系展开MLP，R为共享实体／边消息计算，各3 fits，对保留的旧N端点及固定／静态规则在384新世界评价。已读完整独立意见并采纳，DM自主推进实现、工程核对、发布、准入与完整结果；这是有限数据泛化问题，不预先宣布几何是原因。 | 新DM `/root/dm_decision_generalization`，独占 `uav_decision_generalization` 对应路径。 |
-| 把已展示预测用途发展为完整控制能力 | 具体候选C/H_A/F_A在本臂普通C本次目标多重集内，只交换service UAV目标分配，检验预测的完整policy增量及相对C用途；0fit／32新世界三臂H3000的完整价格和源语义正与一次独立判读并行核对。保留B09预测正效应、B08负例和完整控制缺口，不复活旧zero-trigger合同。 | 原DM `/root/dm_s7_prediction_use`，保留 `uav_fleet_transmission` 所有权。 |
+| 把已展示预测用途发展为完整控制能力 | 已选择B10 C/H_A/F_A在本臂普通C本次目标多重集内交换service UAV目标分配，检验预测的完整policy增量及相对C用途；0fit／32新世界三臂H3000，已采纳完整独立意见，DM自主推进实现、准入与完整判读。保留B09预测正效应、B08负例和完整控制缺口，不复活旧zero-trigger合同。 | 原DM `/root/dm_s7_prediction_use`，保留 `uav_fleet_transmission` 所有权。 |
 
 本次临时Oracle复用 `/root/successor_allocation_review`，实际本轮gpt-6-astra/max已核对；它向Root提供具体方案、
 候选比较与分配建议，必要时只向DM取已有源事实。Root整合建议并解决首次交叉范围／实质投资异议；
@@ -2495,8 +2495,18 @@ A与R取得完全相同的raw坐标、身份、初始UAV→目标绑定、BS关�
 没有自动追加层数、数据、epochs或第四块。完整原始方案／意见与DM处置由该DM保存于
 [方向notebook](candidates/uav_decision_generalization/NOTES.md)，本选择不设逐run Root批准。
 
+**第二项投资处置（2026-10-02 UTC／10-01 PDT）：** Root已读S7 B10完整合同与原始独立意见，采纳一次C/H_A/F_A比较，MATERIAL_DISSENT:no。
+科学世界29910001–29910032、工程29910091/92；0fit，含8个完整工程回合共312,000原生步，
+最多218,752候选／6,562,560 nominal ticks／656,256 RF samples／160私有模型构造。
+保留当前可见用户、真实solver角色来源、literal strict大于与base平分优先、逐tick NaN保持当前xy／z100及单时钟／shield。
+固定指定relay目标不固定真实路由。原生J／服务、个体尾部、能源和物理曝光共同决定用途，不能以代理评分代替。
+预计4–8 CPUh、12–18支持h；12累计CPUh为停止／重估边界，触发时保留未完成证据，不自动扩展或作终局判断。
+F_A胜H_A而仍负于C只保留条件预测能力；低激活、未定或负作用不授权追加世界／门槛／更宽搜索，旧批次不能相减为修复比例。
+[完整合同、独立原文与DM接受](candidates/uav_fleet_transmission/NOTES.md#b10-selection-review-and-disposition)已由DM发表于72bf27b15。
+后续实现、工程审查、发布、实际准入、完整读出与处置由DM持续负责，无逐run Root批准。
+
 已有S_L1对普通G、普通完整后果控制、S7预测、同付费信息U32以及公平分配的正能力与各自代价继续有效；
-本轮结束的配方不取消这些成果，也不意味着每个正例均已有新运行。其余两项候选的选择以各自具体比较、
+本轮结束的配方不取消这些成果，也不意味着每个正例均已有新运行。剩余经验搜索候选的选择以其具体比较、
 证据与完整成本为准，三位DM的问题责任跨单个配方持续；Oracle本次建议返回后结束临时任务。
 所有已有操作完成边界、实际成本、数值标记、正面与不利事实继续生效。Claude暂停、FSD/PPC、G33和Milan范围不变。
 
@@ -3824,7 +3834,7 @@ Root 已向三个原会话各投递一次明确携带 `model="gpt-6-astra"`、`t
 | DM：RF 完整购买价值 | parent `01a0f779-ace2-74e1-85ad-e0997b61d505` / child `/root/dm_rf_purchase` / UUID `01a0f780-270c-7302-842e-9302428ef43f` | `/home/fires/hmasd-wsl` / `main` | 新注册 `hmasd-direction-manager`；Root 直接读本次 rollout session_meta 与首 turn_context，实际 gpt-6-astra / max。独占 `uav_radio_information_cost` 相应方向路径；B02完整比较、全数值核验与独立科学处置已完成，方向idle且无活动操作／排队后继；本 DM 保留证据连续性。保留前任已完成原操作和全部正负证据。[分配](#root-selected-successors-20261001)、[固定B02合同](candidates/uav_radio_information_cost/NOTES.md#b02-selected-contract)。 |
 | DM：静默命令承诺 | parent `01a0f779-ace2-74e1-85ad-e0997b61d505` / child `/root/dm_silence_commitment` / UUID `01a0f780-b068-7f01-b7f6-e4c32d327d40` | `/home/fires/hmasd-wsl` / `main` | 新注册 `hmasd-direction-manager`；Root 直接读本次 rollout session_meta 与首 turn_context，实际 gpt-6-astra / max。独占 `uav_fleet_adaptation` 相应方向路径；本轮完整比较、全部读取、独立科学处置、发表和测量清理已完成，方向 reserve；无活动操作、未读意见或已选追加。保留前任已完成原操作和全部正负证据。[分配](#root-selected-successors-20261001)。 |
 | DM：完整回合参数搜索 | parent `01a0f779-ace2-74e1-85ad-e0997b61d505` / child `/root/dm_episode_search` / UUID `01a0f781-65d4-7ba3-b412-beacc031237f` | `/home/fires/hmasd-wsl` / `main` | 新注册 `hmasd-direction-manager`；Root 直接读本次 rollout session_meta 与首 turn_context，实际 gpt-6-astra / max。独占 `uav_episode_policy_search` 相应方向路径；本轮完整比较、全部读取、独立科学处置、发表和测量清理已完成，方向 reserve；无活动操作、未读意见或已选追加。保留前任已完成原操作和全部正负证据。[分配](#root-selected-successors-20261001)。 |
-| 独立科学审查：当前方案选择 | parent `01a0f779-ace2-74e1-85ad-e0997b61d505` / child `/root/next_study_review` / UUID `01a0f9fe-de22-7d73-82c2-129a0cadede6` | `/home/fires/hmasd-wsl` / `main`，read-only | registered ResearchCritic，独立初始上下文；实际首turn gpt-6-astra/max已核对。A/R方案完整审查已结束并采纳；现复用作不同S7预测分配方案的一次有界审查，不重复A/R审查、不计入3DM。 |
+| 独立科学审查：当前方案选择 | parent `01a0f779-ace2-74e1-85ad-e0997b61d505` / child `/root/next_study_review` / UUID `01a0f9fe-de22-7d73-82c2-129a0cadede6` | `/home/fires/hmasd-wsl` / `main`，read-only | registered ResearchCritic，独立初始上下文；实际首turn gpt-6-astra/max已核对。A/R与S7预测分配两项有界审查均完整结束并由Root采纳；当前无委派任务，不重复审查、不计入3DM。 |
 | DM：S7 预测用途与完整控制 | parent `01a0f779-ace2-74e1-85ad-e0997b61d505` / child `/root/dm_s7_prediction_use` / UUID `01a0f77e-bce4-7471-9529-be2ba81a927a` | `/home/fires/hmasd-wsl` / `main` | 复用原registered DM，本次实际turn已核对gpt-6-astra/max；保留uav_fleet_transmission所有权。此前source-only构造/原focused答复与暂不购买均已发表；owner3DM安排后继续源证据/接口/成本工作，没有重启旧运行或自动购买旧合同。[既有完整处置](candidates/uav_fleet_transmission/NOTES.md#post-b09-focused-root-disposition-20261001)、[现行任务](#three-dm-decision-assistance-20261001)。 |
 | Prior completed DM: joint local motion/transmitter development | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_fleet_adaptation` | `/home/fires/hmasd-wsl` / `main` | Same nonarchived registered `hmasd-direction-manager`; actual first turn verified gpt-6-astra/max, native UUID01a0f1f4-bfe5-7ca0-8b1e-4945c185f49a. B10 is complete through the full native reader, independent scientific diagnosis, own publication and measured cleanup; result4a0db1166, reserve with no producer, unread advice or selected successor. Retain original assets, both adverse endpoints, useful joint/CJ code, all B01–B10 evidence and one canonical required bulk copy. Both exact B10 source snapshots, duplicate staging and scratch are gone;1639141376 allocated bytes reclaimed, no cleanup blocker. No accepted operation moves or ownership transfers. [Resolved result](candidates/uav_fleet_adaptation/NOTES.md#b10-independent-disposition), [cleanup](candidates/uav_fleet_adaptation/NOTES.md#b10-final-cleanup), [original advice and adoption](candidates/uav_fleet_adaptation/NOTES.md#b10-original-oracle-advice). |
 | Prior completed DM: radio uncertainty (formerly individual-user waiting) | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_user_waiting` | `/home/fires/hmasd-wsl` / `main` | Same nonarchived registered `hmasd-direction-manager`; first actual turn verified gpt-6-astra/max, native UUID01a0f1f5-8634-7e13-b931-e75abdb10d45. `uav_radio_uncertainty` B01 complete through full numerical/scientific reading, publication and measured cleanup; reserve with conditional U32 capability and all waiting harms retained. No running operation, open advice or selected successor. Source retained for useful P/U32 and acquisition-code imports; active consumers have finished. Waiting B01–B07 remain closed in reserve. [Full RF disposition](candidates/uav_radio_uncertainty/NOTES.md#b01-independent-review-and-disposition), [closure](candidates/uav_radio_uncertainty/NOTES.md#b01-final-cleanup), [original contract/advice](candidates/uav_radio_uncertainty/NOTES.md#b01-selected-contract). |
