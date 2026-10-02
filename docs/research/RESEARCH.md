@@ -9,7 +9,8 @@
 **Owner 要求的进行中交接（2026-10-02 PDT）：** 三位 DM 已各自撰写当前部分，Root 已完整读取并汇总
 [Root 与三 DM handoff](HANDOFF_20261002_ROOT_AND_THREE_DMS.md)及[下次启动 prompt](START_ROOT_20261002_PROMPT.md)。
 这次只准备交接，不暂停研究、不停止/重启已接受运行、不提前更换 Root/DM/launch lead。
-联合窗口 B03 与本地完整数据 B05 继续原操作；B06 继续已选实现准备，六 fit 执行仍未购买。
+联合窗口 B03 继续原操作；B05已因严格teacher兼容失败终止并技术全读，未认证；B06准备已交付，六fit未购买。
+Owner随后要求Root继续原生agent wait直到本次交接完整收尾，当前handoff仍不是最终完成声明。
 各文档为带时刻快照，接手先核对原操作与实际责任；较新的 NOTES/运行事实优先。Owner pause 仍为 lifted，其他独立暂停不变。
 
 <a id="resume-20261001"></a>
@@ -18,7 +19,7 @@
 已读取前任完成的[单一 handoff](HANDOFF_20261001_ROOT_AND_FOUR_DMS.md)，接手 Codex 科学管理、选题与后继安排。
 上一轮四项研究及三项资料评估的完成／停止结论保持；旧操作不重启，历史 handoff 不改写。
 本次明确继续解除该轮 Codex 交接暂停；静默承诺、RF 完整购买与参数搜索均已完整判读、发表和清理。S7 构造与计价也已完成，Root 采纳独立评审、本轮不购买该候选；见[首轮完成处置](#root-selected-successors-20261001)。
-Owner要求广义开源／可学习决策辅助长期由DM持有，并维持3DM实质并行。Claude联合窗口建议已形成并启动固定H/noD/SET三实例研究，当前训练中；其四倍权重/便宜四臂报价没有被直接照用。B12资源分配已完整独立收尾，保留条件用途和反例，结束固定准则自动扩展、不新增S7批次。现由两个原DM互补推进已有决策辅助问题：一位完成B05完整CPU数据工件，另一位在明确借用的新路径准备原六fit消费者实现与完整价格；原B04技术失败仍是0fit，无自动重启/六fit。Oracle本次建议已完整归档并结束，不是常设批准者。见[现行分工](#three-dm-decision-assistance-20261001)。
+Owner要求广义开源／可学习决策辅助长期由DM持有，并维持3DM实质并行。Claude联合窗口建议已形成并启动固定H/noD/SET三实例研究，当前训练中；其四倍权重/便宜四臂报价没有被直接照用。B12资源分配已完整独立收尾，保留条件用途和反例，结束固定准则自动扩展、不新增S7批次。两个原DM已互补完成决策辅助准备：B05全部获取后因旧teacher的1ULP身份差而技术终止，未认证；B06消费者实现/工程准备已交付，六fit未购买。原B04技术失败仍是0fit，B05也0fit，无自动重启/补齐。Oracle本次建议已完整归档并结束，不是常设批准者。见[现行分工](#three-dm-decision-assistance-20261001)。
 Claude 的独立权限和当前暂停、FSD/PPC 暂停、G33 冻结及 Milan 数据依赖保持原范围。
 
 **历史恢复：2026-09-29 21:59 UTC，owner明确要求“阅读handoff 我们继续工作”；该轮次现已完成并暂停。**
@@ -2539,12 +2540,12 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 ### Parallel allocation: independent work and rolling succession
 
 <a id="three-dm-decision-assistance-20261001"></a>
-**长期决策辅助与当前3DM工作（2026-10-02 UTC／PDT）：** B12资源分配已完整执行、独立判读、发表并清理；结束E/B固定准则自动扩展，保留正面能力与个体/资源反例。当前两个DM互补推进已有明确消费者的决策辅助工作：原owner完成B05银行，原S7 DM完成原六fit下游适配与有限工程准备；另一DM继续Claude启发的联合窗口三实例学习。没有新S7效果批次或自动六fit，原负责人/已接受操作保持稳定。
+**长期决策辅助与当前3DM工作（2026-10-02 UTC／PDT）：** B12资源分配已完整执行、独立判读、发表并清理；结束E/B固定准则自动扩展，保留正面能力与个体/资源反例。当前在owner要求的完整交接收尾中：B05已全量获取但严格旧teacher兼容失败，未认证；原S7 DM已交付B06有限实现/工程准备，实际六fit未选。联合窗口三实例学习继续原操作及既定完整读取。Root用原生agent wait收齐完整返回，临时Oracle针对数据版本边界给一次未来方案建议，不选新执行。没有新S7效果批次或自动六fit，原负责人/操作身份稳定。
 
 | 实质工作 | 当前选择与边界 | 负责人 |
 | --- | --- | --- |
-| 广义开源／可学习决策辅助：完整数据工件 | B04因SIGSEGV止于标签、0fit/forward/H500；普通JSON双节点2050000编码未复现，不证明原因或runtime健康。B05原16512world全新CPU采集＋完整重建已选：既有local3.10.20/NumPy1.26.3、每64world新进程、数据阶段无Torch，旧2501完整world仅作兼容参照。≤7298320static/0fit/0H500，首次技术失败结束，不拼接旧prefix；DM独占实际合同、实现/审阅/输入发布/准入/完整读数。[B05合同](candidates/typed_joint_skill_decision/NOTES.md#b05-data-bank-contract)、[完整投资判断](archive/2026-10-02/RESEARCH-separated-data-bank-investment.md)。 | 原长期owner `/root/dm_typed_joint_skill`，独占 `typed_joint_skill_decision` 路径与NOTES。 |
-| 同一既定学习问题：下游实现与全价准备 | 只读接口/计价已完成；Root现选中B06薄适配与有限工程准备，借用唯一新b06_bank_consumer代码/tests子目录给原S7 DM，原owner独占NOTES/B05/认证/科学lead。保留六fit科学输入、1160顺序工作进程、七次557760000B缓存构建、单写者清单、fresh隔离和完整GPU驻留计价；0新增world/model/native/fit，纯mock检查≤300CPU-s/≤20MiB scratch计入全账。未完整认证bank或未选结果界限时必须拒绝执行；实际六fit仍未购买，不自动采用候选8CPUh/4GPU-childh/16wall。[借用L0](candidates/typed_joint_skill_decision/NOTES.md#b06-consumer-preparation-l0)、[分工理由](archive/2026-10-02/RESEARCH-b12-closure-and-parallel-bank-consumer.md)。 | 原S7 DM `/root/dm_s7_prediction_use`，新路径为明确有界借用；保留S7证据与问题连续性。 |
+| 广义开源／可学习决策辅助：完整数据工件 | B05已获取16512world/2844367label，原兼容规则在world109400630因1ULP对应teacher57→50而停止exit2；630旧world通过、1失败/1870未尝试，全部512fresh未重建。完整技术终读已发表，0fit/forward/H500/GPU，银行未认证，不重启/放宽规则。原owner完成保全/清理及本人handoff，长期问题保留。[完整终读](candidates/typed_joint_skill_decision/NOTES.md#b05-technical-reading)。 | 原长期owner `/root/dm_typed_joint_skill`，独占 `typed_joint_skill_decision` 路径与NOTES。 |
+| 同一既定学习问题：下游实现与全价准备 | B06薄适配/独立工程准备已完整交付8ee71c5af；parent-death、冷选择计时、消耗式准入入口已修复，原PASS漏检与追加意见保留，纯mock合计4.023958304CPU-s/0科学效果。原typed owner已接受准备；B05实际未认证使入口继续拒绝，六fit未购买，候选执行界限仍未采用。[完整准备](candidates/typed_joint_skill_decision/NOTES.md#b06-preparation-complete)、[本人交接](candidates/uav_fleet_transmission/HANDOFF_20261002_S7_AND_B06.md)。 | 原S7 DM `/root/dm_s7_prediction_use` 已完成借用任务，保留S7证据与问题连续性。 |
 | 学习能否形成时序联合服务能力 | Claude联合窗口问题已发展成H/noD/SET三个逐步学习实例，在唯一精确source操作上正常推进。四窗各125tick、8/10用户回程服务连续20tick、404B新增任务信息、实际d2回报/原无clamp Gaussian/普通O和B参照保持；3fits/1196000native/615600optimizer steps，未读最终学习效果，不按中间命中率改难度/预算。[完整合同](candidates/uav_decision_generalization/NOTES.md#joint-window-prospective-contract)、[原操作记录](candidates/uav_decision_generalization/NOTES.md#b03-worker-accepted)。 | 原DM `/root/dm_decision_generalization`，独占 `uav_decision_generalization`。 |
 
 **Claude材料与独立选择：** 77c02de662894a951ab1939ebb4ffacc9ae1dea8的[完整报告](../Claude_docs/deliverables/BRANCH_REPORT_claude_inspiring_ritchie_2kj46g_20261002.md)、[提示](../Claude_docs/deliverables/CODEX_PROMPT_SPARSE_WINDOW_RELAY_20261002.md)、[设计](../Claude_docs/environment_design/SPARSE_WINDOW_RELAY_SCENARIO_DESIGN_20261002.md)及toy等9路径已逐字导入main420381b1a；原bc116366决策note不变。实际联合任务已获[一次充分独立科学选择](archive/2026-10-01/RESEARCH-window-resource-independent-selection.md)，未沿用Claude最新四臂训练约7.2CPUh（含floors/evaluation约7.6CPUh）的估价、强制×4或随机命中率校准链。Oracle的[数据建议](archive/2026-10-02/RESEARCH-separated-data-bank-investment.md)与[本轮后继取舍](archive/2026-10-02/RESEARCH-b12-closure-and-parallel-bank-consumer.md)完整原文和实际Astra/max身份均已保存；临时任务结束，不替代DM/独立Reviewer或形成逐run批准。

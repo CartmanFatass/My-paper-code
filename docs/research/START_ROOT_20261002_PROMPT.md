@@ -27,20 +27,21 @@
 保持 launcher 比较的 Lead runtime 值稳定，地址放在 routing block。真正接任后用你的实际 UUID
 更新 RESEARCH 和一条已提交的 Claude inbox HANDOVER 消息；不要沿用旧 UUID 冒充你的地址。
 
-进行中快照中有两项已经接受的操作，须先按原身份核对：
+记录中有两项已经接受的操作，一项仍在继续，一项已经失败终止，须先按原身份核对：
 
 - 联合持续服务学习 B03，DM `/root/dm_decision_generalization`，远端 `wsl_4070`：
   source `300c58af8e5648fb1c98edbd3618f8f964052dda`；
   operation `d586acfdbb3862d3afd87e0d601bba0f91f350d860eb29073cea51ac68c87b93`；
   `runs/uav_decision_generalization/b03_joint_window_a01`。
   H/noD/SET 三个固定 36 万步实例，普通参照和完整 reader 均已选定。
-  交接时 H 已完成、noD 进行中；你必须刷新现场，不把旧进度当当前状态。
+  最新正常里程碑 H/noD 都已完成，最后 SET fit 正在进行；你必须刷新现场，不把旧进度当当前状态。
 - 完整 CPU 数据获取 B05，长期 DM `/root/dm_typed_joint_skill`，`local_linux`：
   source `c271c7370c6948b06f0a4a6fd783eddff0d8731a`；
   operation `1eedcf2aa6e082fc3654b3f88b9474ff0341c7ac2d4663edfaa50c801b4f90b2`；
   `runs/typed_joint_skill_decision/b05_data_bank_a01`。
-  258 producer + 258 reader，全部 16,512 世界，0 fits/H500/GPU；旧 B04 失败前缀不是进度。
-  完成认证、旧数据兼容和实际全账后，才足以供下游投入判断。
+  已 exit2：258 producer 完成全部 16,512 世界，但第十个 reader 的旧 teacher 身份从57变50，
+  原因在已保存数值中是1ULP旧差距变成新同分。原容差/tie规则未放宽；完整数据未获认证。
+  技术终读已完成，原操作不能续跑或自动补齐。保留未认证资产与完整失败证据，按最新NOTES核对清理。
 
 使用各 DM 已记录的 `hmasd_wait` 状态目录和同一 operation 查询/排空/rearm。队列 `-32600` 或
 会话丢失不能作为重启理由。运行若仍在继续就观察；若已终态则核对 exit、进度和工件后完整读取。
@@ -51,14 +52,17 @@
 第三位 DM `/root/dm_s7_prediction_use` 已完成 S7 B12 的独立判读、发表和清理，当前借用
 `experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/` 与 matching tests，
 实现原六-fit问题的薄消费者；原 typed DM 独占 NOTES、B05、认证、科学合同与 lead。
-实现与有限纯 mock 工程检查已授权，**B06 六次训练尚未选择执行**。不要把通过测试、已有目录或
+实现与有限纯 mock 工程检查已完成并发表于8ee71c5aff93abc22aecdb49f1da3a4d38667f6d，
+原review漏掉的真实入口问题及修复复核均保留。**B06 六次训练尚未选择执行**。不要把通过测试、已有目录或
 外观看似完整的数据当成认证或启动许可。两位 DM 在互补路径并行，不重复生产数据。
 
 后续计划：
 
 - 完成 B03 原合同的训练、评价、全部 reader 和独立科学判读，保留正反世界与完整成本。
-- 完成 B05 获取、重建、兼容、认证和真实 CPU/内存/磁盘账。若技术失败，先保全并判断路径，不冒充学习负结果。
-- B06 完成现有实现/工程准备；在 B05 证据和真实接口到齐后，由你作一次明确的六-fit完整投入决定。
+- B05 已完成技术终读但未获认证；核对其保全/清理和完整实际账，不重新执行原失败操作或终态reader。
+  只有明确的新前瞻合同和投入选择才可处理剩余数据验证/使用；1ULP不自动授权忽略原失败，也不关闭学习问题。
+- B06 原实现/工程准备已交付；不重复旧检查作为健康gate。先解决未认证数据版本/兼容含义与完整验证的新选择，
+  保留原失败，再根据真实可用工件和实际部署价格作一次明确的六-fit完整投入决定。
   原比较为 1k/4k/16k 嵌套世界 × 两优化流，固定模型/更新及 Raw8J/RawJ/P 强参照。
   剩余量级 584,000 native、最多 1,383,760 static、最多 15,471,824 神经候选呈现；预测 3–8 CPUh、
   1–3 GPU-childh。候选 8 CPUh/4 GPU-childh/16 wallh 尚未采用，完整 GPU 子进程驻留、数据/源码/输出
