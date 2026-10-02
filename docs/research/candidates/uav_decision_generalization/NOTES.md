@@ -2441,3 +2441,837 @@ explicitly declared; giving the actor a map, completion bits or true ACK adds
 an information/communication interface and needs equally supplied ordinary
 comparators. These are feasibility facts for Root's allocation, not a new
 architecture selection or an invitation to access evaluator truth online.
+
+
+<a id="joint-window-prospective-contract"></a>
+## 2026-10-02 UTC — joint sustained service windows: source-bound prospective draft
+
+**State: one completed, zero-effect contract-preparation task for Root's next
+cross-question selection. This is not an accepted fit, native panel, calibration,
+implementation or new direction.** The existing B01/B02 evidence and dispositions
+above remain unchanged. Root assigned this bounded preparation after B02 closure;
+Claude's direction and pause remain peer-owned and read-only. The proposal would
+answer a new direct-learning question on a registered joint-service contract,
+not repair Z, relabel the old A/R results, or fine-tune the frozen S actors.
+No environment, model, controller, training, RF or toy query was made while
+preparing this entry. Work was source reading, existing-summary reading, integer
+and geometric arithmetic, literature retrieval, and documentation. Its support
+work is not asserted to have zero cost.
+
+The current programme at published `67df2f6066acfa78de63d753dac2709ebe704338`,
+[RESEARCH topics 1–2](../../RESEARCH.md#研究背景与共享认识), distinguishes complete
+service from local links, legal information from state, and retained learned
+capabilities from failed adoption rules. Those distinctions determine the task
+endpoint, the explicit information addition, the ordinary comparison and the
+interpretation below. The [B02 disposition](#b02-independent-disposition) remains
+a reason to read all users and travel: reducing one symptom or improving one
+team average does not establish continuity for every user. Its conditional S
+capabilities are retained; these supervised 27-command actors are not the native
+PPO learner proposed here. The inherited S chain cost 8 fits, 2 calibrations,
+2,080,768 native steps and 3238.693 scoped CPU-s; our separate A/R study cost
+6 fits, 1,736,000 native steps, .814449 CPUh and .03709 GPU-reserved-h; B02 cost
+126,976 native steps and 306.282345 scoped CPU-s. Those disjoint purchases are
+not reset, transferred into the new native budget, or re-bought as preliminary
+screens.
+
+### Evidence read and the change in question
+
+I read the complete imported Claude proposal, branch report, prompt, toy README,
+RESULTS, both saved JSON result sets and the complete toy source. Imported source
+is `420381b1a`; the relevant paths and current SHA256 identities are:
+
+| Source under `docs/Claude_docs/` | SHA256 |
+| --- | --- |
+| `environment_design/SPARSE_WINDOW_RELAY_SCENARIO_DESIGN_20261002.md` | `0aa1810546b466470b55572fb7eb8311af79791305035c6c2e753a75afd6eeec` |
+| `deliverables/BRANCH_REPORT_claude_inspiring_ritchie_2kj46g_20261002.md` | `52bad967292425341a87c019e9bddc3ab720d2ebc7e8d74706be3074bd0fdfdb` |
+| `deliverables/CODEX_PROMPT_SPARSE_WINDOW_RELAY_20261002.md` | `7f07264ea3273e45cc32df9a5998470ec769c565ad14eeec601f6f0d226f1764` |
+| `toy_studies/sparse_window_relay/swr_toy.py` | `893c7837ecbda7a0e0277722aed2000f71ace6c797a2e301a6b4eadd8a2b4800` |
+
+The toy is evidence for its own small target-selection process. It applies one
+common external-plus-intrinsic return to Z, z and target REINFORCE updates. Its
+intrinsic term is paid once per ten primitive steps; native H uses a different
+high/low reward flow and per-tick low reward. Its five-window sequence revisits
+site zero; a policy learning that site need not learn all four scheduled sites.
+The saved .125 statistic is the fraction of episodes with any hit; .131/5=.0262
+is the corresponding mean completed-window fraction. Neither quantity calibrates
+native random difficulty. No factor-four reward change, four-arm expansion,
+random-hit acceptance range or toy rerun follows from these data.
+
+The complete temporary Oracle answer, including the other DM's resource question,
+is preserved unabridged at [the end of this entry](#joint-window-oracle-original).
+Root also published it with its own disposition at
+[the durable archive](../../archive/2026-10-01/RESEARCH-joint-window-and-resource-allocation-successors.md).
+Oracle was the proposed-study adviser, not an independent reviewer. I accept its
+central correction: directly compare native H, H without discriminator reward,
+and native per-tick SET on one well-defined joint sparse task. I do not accept
+7.6 CPUh as the full cost, the toy as an exposure guarantee, or all-zero native
+performance as a prior empirical fact. My concrete additions below close the
+registration packet, primitive-time score, ordinary controller, source adapter,
+world identities, endpoint mode and accounting. They are part of this one draft
+for the same independent selection, not a separately selected study.
+
+Historical and primary-source reading changes the interpretation, too:
+
+- [R35/R36 source review](../../decisions/R35_R36_SPARSE_ACCESS_FAILURE_REVIEW_20260715.md)
+  already tested sparse access. A count bonus greatly expanded visitation without
+  achieving access, and actor-facing task identity/clock differed from critic
+  information. Thus sparse reward has been tried; this task explicitly supplies
+  the registered task and full clock, without claiming that information alone
+  makes it learnable. Old failures constrain extrapolation, not this task's score.
+- The September external review's
+  [HMASD discussion](../../../Claude_docs/reviews/FOUNDATIONS_AND_METHODOLOGY_CRITICAL_REVIEW_20260914.md)
+  distinguishes sparse exploration from dense coverage and preserves the real
+  Alice-and-Bob positive anchor. Its then-current negative inventory is historical,
+  not a licence to erase subsequent learned capabilities. Its recommended sequence
+  and seed quota are advice, not present instructions.
+- I read the load-bearing primary passage in **MARL-0553**, Yang et al.,
+  *Hierarchical Multi-Agent Skill Discovery*, PDF pp. 5–6, §3.2 and Overall Training:
+  `/home/fires/projects/Inst-sci/papers/MyLib/pdf/MARL-0553.pdf`, structured source
+  `/home/fires/projects/Inst-sci/papers/MyLib/json/MARL-0553.json`.
+  The coordinator selects joint skills from global state and joint observations;
+  the low policy is conditioned on local observation and assigned skill; external
+  and mutual-information rewards enter different training levels. That motivates
+  a direct task comparison, not a theorem that skills will solve this host.
+- All three local library indexes were consulted before any novelty inference.
+  `docs/new-libs/corpus/papers/P17/metadata.json` locates MAVEN, but its indexed PDF
+  and full-text chunk paths were not materialized here; its metadata is not used
+  as primary support. My-lib's `.local-llm-index/titles.tsv` returned sparse
+  achievement/temporal-skill candidates; title hits are retrieval leads, not
+  evidence or a novelty verdict. This study claims neither new hierarchy nor a
+  first sparse-reward experiment. MARL-0553's actual primary passage supplies the
+  modest mechanism bridge needed here.
+
+**Question and expected discrimination.** Can a native hierarchical learner turn
+its finite interaction budget into complete, newly sampled joint sustained-service
+windows, and does the original discriminator-reward package help relative to the
+same hierarchy without that reward and a competent flat learner? The proposed
+contribution is empirical learning capability and its boundary on a concrete
+coupled task, not a new architecture or a claim that learning beats all planning.
+Distinct relay positions and persistence might make skill diversity useful;
+that is a conjecture. The sharper favorable prediction is H-final exceeding
+H-noD-final in completed windows, accompanied by learning beyond the shared
+initial policy. H may instead lose because its intrinsic terms dominate rare
+external events, optimize distinguishability unrelated to useful relays, or make
+optimization harder. SET may learn equally well or better. The ordinary chain
+may solve most of the task cheaply. These are consequential alternatives rather
+than excuses requiring another fit before reporting the purchase.
+
+The parent question is not restricted to tiny residual gains over an ordinary
+policy, but practical adoption and learning evidence remain separate. H versus
+H-noD tests the effect of this reward intervention and all downstream changes in
+experience. H versus SET is a complete architecture/training/information-routing
+package comparison. Neither isolates exploration, permutation symmetry, a unique
+need for latent skills, or superiority to every generic exploration bonus.
+
+### One frozen proposed world law; structural feasibility without a query gate
+
+Use the original coupled-host physics: N=6, U=50, square 5000 m, heights 50–150 m,
+30 m/s, one-second primitive steps, H=500, free-space radio, 2 GHz, transmit powers
+23 dBm, noise −80 dBm, threshold 3 dB, FDMA, no shadowing, 10 associated users per
+UAV, one BS at (2500,2500,30), and original routing/association. All transmitters
+stay on. `max_hops=3` is retained with its actual BFS semantics (up to three
+intermediate UAV relays before BS); it is not described as three total edges.
+No energy, collision or packet-loss model is added or silently claimed.
+
+World seed `w` deterministically defines the following, with no rejection or
+score-dependent replacement:
+
+1. Keep the native initial UAV law and exact draw order: `RandomState(w)`, for
+   UAV IDs 0…5 draw x,y uniformly from [0,5000] and z from [50,150]. The native
+   reset draws these before users. The new user generator uses separate streams
+   and never consumes or advances this UAV stream.
+2. Four nominal far centers are (500,500), (4500,500), (4500,4500), (500,4500).
+   Add independent per-axis Uniform[−50,50] jitter, in that order, using
+   `PCG64(SeedSequence([w,1]))`. The near center is exactly the BS xy location.
+3. Each center has ten users. Use `PCG64(SeedSequence([w,2]))`; in row order draw
+   a pair (u,v) uniformly on [0,1)^2 and place a user at radius `100*sqrt(u)` and
+   angle `2*pi*v`. Round xy with `np.rint` to integer metres. Rows 0…9 are near;
+   rows 10…19,20…29,30…39,40…49 are far clusters 0…3. The host uses exactly these
+   decoded integer coordinates as float64, so the registry introduces no hidden
+   quantization discrepancy. No clipping is needed under these bounds.
+4. `PCG64(SeedSequence([w,3])).permutation(4)` supplies the four far-cluster window
+   order. Each cluster appears exactly once. Neither latent jittered centers nor
+   future service outcomes enter a policy packet.
+
+Training IDs are `109210000 + 16*e + lane`, e=0…44, lane=0…15: 720 distinct
+worlds, identical across all three fits. Fresh endpoint IDs are
+`109220000…109220031`. The engineering mission world is `109229000`, separate
+from both. No geometry has been generated or evaluated in this preparation.
+A literal-integer search of current experiments/tests/research/runs found no use
+of these prefixes; incidental float/hash substrings were excluded. This is an
+accessible-source identity check, not a claim to have searched unknown external
+storage. During implementation, the manifest will bind exact generator/source
+bytes and generated coordinates, with duplicate IDs rejected rather than silently
+replaced. There is no candidate-pool search or outcome-based seed selection.
+
+The source uses speed-of-light constant 3e8. Its free-space SNR threshold gives
+single-link radius `R=(3e8/(4*pi*2e9))*10^5 ≈1193.66 m`. With rounding displacement
+at most sqrt(.5) m, a far user's horizontal BS distance is at least
+`sqrt(1950^2+1950^2)−100−sqrt(.5) ≈2657.01 m > 2R`.
+By the triangle inequality, one UAV cannot both directly reach BS and serve that
+far user. This proves a structural need for at least a relay plus a service UAV;
+it says nothing about whether a learner discovers or holds such a configuration.
+
+A stationary two-UAV ray chain is geometrically available. Let c be a jittered
+center, m its ten registered users' mean, and set UAV xy at BS+(m−BS)/3 and
+BS+2(m−BS)/3, both at z=100. Let `r=100+sqrt(.5)` and
+`Dmax=sqrt(2050^2+2050^2)`. The horizontal first/second relay separation is at most
+`(Dmax+r)/3 <1000 m`; the first link adds only 70 m vertically. A user-to-outer-UAV
+horizontal distance is bounded by `Dmax/3+5*r/3`, and adding its 100 m altitude
+makes it <1138.63 m, below R. This uses the common center and mean rather than an
+incorrect independent worst-case bound. It establishes legal link geometry,
+not a globally optimal schedule, simultaneous user-assignment guarantee or a
+complete-mission score. Native association/capacity and travel are still executed.
+Uniform initial UAV positions can make the first deadline infeasible. Such
+worlds remain in every panel; no ordinary score is used to retain or discard them.
+All this feasibility work is analytic: **0 additional native/RF/optimization
+queries**. Actual travel and completion opportunity are measured inside the fixed
+ordinary missions, not a prior admission experiment.
+
+### Registered information, exact proposed tensors and action rights
+
+Every complete programme receives the same immutable reset packet: 50 ordered
+xy pairs as little-endian int32 (400 bytes), followed by four uint8 cluster IDs
+(4 bytes), **404 additional payload bytes per episode**. Cluster membership is
+fixed by public row block. A broadcast is 404 bytes; six logical copies are
+2424 bytes. These are the additional task registration bytes, not the full
+HMASD uplink/downlink or simulated radio traffic. Existing state/joint-observation
+snapshots and their ten-tick frequency remain. The host does not simulate the
+packet's airtime, transmission energy, losses or acknowledgements, so none is
+claimed free in a real communications system.
+
+At decision state time t=0…499 the policy knows its original clock t/500 and the
+full public schedule. At each local row append: 100 registered xy/5000 values;
+a 4×4 one-hot schedule flattened in window-major order (16 values); the active
+cluster one-hot (4); and `(125−(t mod125))/125` (1). These **121 deterministic
+features** give `obs_dim=90+121=211`. At terminal t=500, active and remaining
+fields are zero. Current-cluster and remaining-time features are computations
+from the schedule and clock, not hidden progress or extra reports.
+
+The original 133-state already includes all 50 user xy values and t/500. Append
+only schedule16+active4+remaining1, giving `state_dim=154`; do not duplicate its
+map. The same task information therefore reaches all existing state consumers.
+The count-stable StateSetEncoder keeps its shared UAV encoder and widths; its
+pooled input grows from 230 to 251 by concatenating the 21 task features after
+its existing pooled-UAV/user/time entries. Its hidden/output layers, nonlinearities
+and parameter ownership follow the original factory. The H actor takes its
+211-row and its original skill conditioning/GRU. The SET actor retains the exact
+original decomposition into current local row, held global state, held joint
+rows and ego ID: input width `211+154+6*211+6=1637`. Its 128-wide shared row encoder
+and 256-wide state feature/fusion are retained; fusion input is
+`2*128+1+2*211+256=935`. Configuration-derived core buffers use these widths.
+The direction-owned shape adapter must ensure every state encoder includes the
+21 added task features; silently truncating them would change the comparison.
+
+H's coordinator receives current state154 plus six current local211 rows at
+reset and t=10,20,…490. H's low actor receives the current own211 row plus its
+assigned z; its critic receives current state and the existing skill information.
+SET's low actor directly consumes the held state154 and six211 rows from the
+same ten-tick refresh, current own211 row and ego identity; its critic uses
+current state. Those complete-program information rights are comparable, but
+their internal routes are different and stay different. At a window boundary
+such as t=125, the current local task clock changes immediately while the held
+central snapshot/assigned H skills remain from t=120 until t=130. This timing is
+intentional; no off-grid coordinator query or special window-boundary action is
+introduced into H or SET.
+
+Original local entries are retained: own position; up to 20 legal user rows;
+up to six legal UAV rows; time; own direct-BS link bit; and the original hop field.
+Thus actors are **not** described as having no routing information. The complete
+`routing_paths` dictionary, true user ACK masks, paid-window bits and true
+consecutive-success counters remain evaluator/training-reward material, never
+new actor inputs. No previous reward or hidden counter is added to a GRU input.
+The scalar training reward is legal outcome feedback for learning. Both ordinary
+programmes receive the same packet, current local rows and held central snapshots;
+they have no privileged simulator look-ahead or true progress. Unused legal inputs
+are still permitted.
+
+All programmes output six continuous xyz velocity commands each primitive tick.
+The original host clips each command to the unit three-ball, multiplies by 30 m
+and applies height/box limits. H and SET retain the original unbounded Gaussian
+head, followed by this host clip; this is not the bounded-head or macro-target
+SET-T recipe. Raw sampled actions/log probabilities remain the learner's recorded
+actions; executed clipped commands and clipping rates are reported separately.
+
+### One post-routing window ledger and the real reward/update chain
+
+Index native actions by n=0…499; action n leads to post-state n+1. Window j uses
+n=125j…125j+124. For that transition, after native association and routing are
+complete, define `y_u(n)=1` iff some UAV i has native `connections[i,u]=1` and
+`i in routing_paths`. For the ten users in schedule[j], q(n)=sum y. A private
+counter increments when q≥8 and otherwise resets to zero. It resets at every
+window boundary. The first counter value 20 in that window emits team reward
+R(n)=1, otherwise R(n)=0, and no second payment is possible in that window.
+It need not be the same eight users on every tick. This is four 125-step windows,
+20 consecutive *primitive* transitions, at most four payments per episode.
+No dense or per-user shaping term enters learning (`w_dense=0`).
+
+The new ledger advances only once in a direction-owned wrapper after the full
+native `step` returns. It uses the final post-routing connections/routes, updates
+its own per-world state and replaces the returned per-agent reward by R(n)/6.
+`_compute_reward` remains a pure diagnostic computation with no window mutation.
+This is necessary because `uav_env.step` first invokes it with updated user links
+but old routes, then `scenario2.step` refreshes UAV links/routes and invokes it
+again. The current CoupledRelayHost itself calls the parent diagnostic within
+each invocation. Therefore a naive override advancing a counter in that method
+would double-count time and sometimes count obsolete routing. Reset clears the
+ledger but cannot pay; repeated diagnostic calls cannot alter it. The constructor's
+virtual-reset path must initialize window fields before parent use. These are
+prospective correctness requirements, not new scientific probes.
+
+The returned training scalar is R/6, preserving the real adapter's reward units.
+The complete episode score W=sum R is reported on [0,4], not confused with a
+per-agent return. Also retain normalized window fraction W/4. The original
+post-routing dense contract `J_dense=mean .5*(C_bh+frontend_capacity_with_path/D)`
+is recorded as a secondary native consequence, never added to the reward.
+Its throughput component is capacity of a front-end attached to a routed UAV;
+it is not an end-to-end bottlenecked traffic rate.
+
+The actual learner is `coupled_host_joint_skills_stage1/runner.py::run_fit`,
+`configuration.py` and `models.py`, with shared `hmasd/agent.py`, `networks.py`
+and `utils.py`; it is not `macro_runner.py` or the toy. Source at the preparation
+boundary has host SHA256 `92b75c0317009380108bd45429892e49ca857b901ae1adbcd5bfe483d89ef469`,
+runner `4020dbef217b751fb4efea14b915b4981f1fbc0fdc3a988400f9520b833a87a9`,
+configuration `68ea26d61eed348427d083ba9a2701fbd077d87838314b43715488b21e255d8c`,
+models `9349b840ddb9a2224a1524a4828db1b59f38742ff76ddcaf09e46d2fbd4b50a6`.
+Final executable input identities will be published before any selected launch;
+this source examination does not alter Claude's files.
+
+H retains the real d2 route with both interruption costs +infinity, individual
+and team cap10, age features off, HA-CTSE off, all six skills resampled together,
+6 team and 6 individual labels, and no outcome-triggered skill interruption.
+The low-level transition gets external R/6 plus the existing discriminator reward
+terms, with lambda_e=1, lambda_D=.05 and lambda_d=.02. Discriminators learn skill
+labels from the same actual interaction. The coordinator receives **external
+reward only**. More precisely, `_d2_store_transition` (`agent.py:2365–2507`)
+stores the segment sum `sum_u gamma^u*(R/6)`; D2 high-level GAE uses
+`gamma^elapsed` across those segments (`utils.py:1444–1508`). Thus a shorthand
+“accumulates external reward” must not be interpreted as an undiscounted sum.
+The high-level path does not multiply that scalar by the low-level lambda_e.
+This explicitly corrects the earlier source-discussion shorthand. The toy's
+common-return updates and once-per-k bonus cannot establish the scale of this
+native per-tick mixture.
+
+H-noD changes exactly `disable_discriminator_rewards=True`, keeping
+`disable_discriminator_training=False` and every other H setting. It still
+collects the same types of endogenous skill labels and trains both classifiers;
+it merely omits their contribution to low-level reward. In the batch path this
+skips the reward-logit forwards; it does not remove discriminator parameters,
+optimizers, high-level learning or alter action inference. H−H-noD therefore
+carries the cost of the same classifier-training machinery and isolates this
+reward intervention more narrowly than deleting the modules. It does not say
+whether another intrinsic bonus would be better.
+
+SET is the existing complete `algorithm=mappo` path with route off, n_Z=n_z=1,
+no high-level/discriminator training or discriminator reward, held central
+snapshot enabled, and k restored to10 after the algorithm switch. Low PPO,
+value learning, recurrent chunking and primitive action execution are real,
+not a target-selector surrogate. H−SET includes their different parameterization,
+latent coordination, optimizer work and internal information routing.
+
+Common settings follow the original per-tick FitSpec: hidden/GRU/embedding256,
+8 heads, two encoder/decoder layers where present; gamma .99, GAE lambda .95,
+15 PPO epochs, sequence batch32, coordinator batch1280, discriminator batch12000;
+Adam learning rates all 1e−4, weight decay0, clip .2, value-loss coefficient1,
+max gradient norm .5; value normalization on, observation/state normalization
+and LR/entropy schedules off. H high/low entropy coefficients .07/.05; SET
+high0/low.05. Gaussian logstd initial0, min−20, max2. No weight multiplier,
+bonus sweep, head change, longer training, count bonus or extra fit is implicit.
+The terminal successor is stored before reset and terminal bootstrap is zero;
+recurrent entry masks and terminal/ten-tick segment boundaries keep native
+semantics. Final parameter counts and optimizer ownership will be asserted from
+these dimensions during selected implementation; they are not outcome-selected
+architecture parameters or a new feasibility-fit requirement.
+
+### Complete ordinary programmes
+
+**Scheduled ray chain O.** Compute each cluster's registered ten-user mean m.
+For the first three scheduled clusters construct six slots in deadline order,
+inner then outer at 1/3 and 2/3 of the BS→m ray, altitude100. At t=0 enumerate
+all 6! assignments of UAV IDs to these six slots using the legal initial global
+positions. For assignment p, let a_j be the maximum of the two assigned UAVs'
+`ceil(Euclidean_distance/30)` for window j=0,1,2. Choose the lexicographically
+minimum tuple `(max(0,a_0−105), max(0,a_1−230), max(0,a_2−355),
+max_j a_j, sum of all six arrival times, assignment-ID tuple)`. This is an
+explicit deadline-first travel heuristic, not service-oracle optimization.
+The 105/230/355 targets leave twenty transitions before those window ends;
+actual payment may happen earlier while approaching a slot or fail despite
+the distance estimate. No outcomes enter the matching objective.
+
+At every primitive tick, for its current target x*, each UAV commands
+`a=(x*−x)/max(30, ||x*−x||)` using its lawful current own position. After arrival
+it commands zero. At t=130, the first ten-tick global refresh after window zero
+ends, release the first pair and send it to the two fourth-cluster ray slots.
+Use that same lawful held global snapshot to compare the two pair assignments;
+minimize maximum arrival time, then total distance, then UAV IDs. No other pair
+is released and there is no paid-window or service-responsive replanning. The
+complete programmed schedule is fixed at reset; there is no hidden planner call
+at an unscheduled time. Native box/height clipping, association, relay routes
+and service still determine the score. This preserves a concrete ordinary
+alternative with geometric task knowledge and identical external rights, without
+calling it a theoretical ceiling or claiming C safety.
+
+There are 720+2=722 assignment comparisons and 36+4=40 position-to-slot distances
+per O mission, with zero radio-score calls, candidate rollouts or learned labels.
+Both worker and reader repeat this exact small calculation on the actual input.
+O does not query the learner and does not discard a difficult first window.
+
+**Sticky random floor B.** At reset each UAV draws an independent target uniformly
+in xy [0,5000]^2 and height[50,150], then uses the same bounded straight-line
+per-tick steering formula. At t=10,20,…490, each UAV independently retains its
+target with probability .9; otherwise redraws it from the same distribution.
+Use a dedicated PCG64 stream seeded by `SeedSequence([w,4])`, process UAV IDs in
+order, and draw replacement coordinates only on replacement. B has the same
+allowed inputs and reads no hidden reward/counter; the public registry need not
+be used. It is a transparent untrained floor, never substituted for O as the
+competent ordinary control. Its activity is measured in the fixed panel; no
+hit-rate calibration or threshold tuning precedes learning.
+
+The original local C/G and frozen S/Bstar used N5/H256 and a different action,
+objective and information contract. Their old performance is not inserted as
+an unrun baseline on N6/H500. O and B above are the two actual proposed ordinary
+programmes, both with full native outcomes.
+
+### Fixed exposure, initial-policy identity and one endpoint mode
+
+Propose exactly three new 360,000-step fits: H, H-noD and SET. Each uses16 lanes,
+500 steps and45 rollouts/updates, hence720 episodes. All see the same ordered720
+training world IDs. H/H-noD initialize with seed109230101 and identical complete
+module/normalizer state; SET initializes with109230102. After factory creation,
+reset training Python/NumPy/Torch RNG with109230201 for both H and H-noD, and
+109230202 for SET. This couples H's initial randomness to its ablation, not three
+independent learning replications. Reward-induced updates and subsequent
+trajectories are allowed to diverge naturally; no cross-arm state, data or
+normalizer is synchronized after training starts. Different SET random-call
+structure is not represented as matched primitive noise.
+
+Keep initialization and final weights, with no score-selected checkpoint and no
+intermediate environment evaluation panels. Read all45 training rollouts for
+reward acquisition, counters, intrinsic/external magnitude, gradients, optimizer
+counts and complete native service/travel trajectories. Those on-policy curves
+are training-exposed evidence, not holdout performance. There is no early stop
+for a favorable or unfavorable scientific score. A correctness or resource
+failure preserves the prefix and counts the started fit; it is neither a
+scientific zero nor permission to restart it automatically.
+
+Evaluate **sampled deployment only**, fixed in advance, once per fresh world per
+unique programme. Run one world at a time to make per-world RNG binding
+independent of batching; reset recurrent states and all episode-local state.
+Before each world use `seed_rng(w+51)` for Python/NumPy/Torch and the exact bound
+checkpoint. H/H-noD use their original skill sampler and Gaussian action
+sampler, SET its original action sampler. This defines one stochastic deployment
+trajectory per world/programme, not a deterministic-versus-sampled selection or
+a paired-noise proof across differing architectures. Evaluation uses strict
+state loading, train(False)/no_grad, zero optimizer calls and unchanged complete
+parameter/normalizer digests. The native `step` path also computes critic values;
+those forwards are included in price.
+
+H-initial and H-noD-initial are the same deployment policy **by source and full
+input/state/RNG identity**, not because one audit happens to agree. Only the
+training reward flag differs. The flag affects `store_transition_batch` reward
+construction (`agent.py:4484–4490`), not the skill/action inference path;
+`use_discriminator_path` remains true because training stays enabled
+(`agent.py:564–567`). Bind identical actor, coordinator, critic, discriminator and
+normalizer states, initial skill/hidden/reset masks, core/adapter source hashes,
+world packet and sampler RNG state. The noD initial endpoint references the
+same 32 H-initial raw trajectories without a second native rollout. One separate
+audit world runs both initial configuration labels to verify this wiring; it
+cannot substitute for the identity argument. If source or state identity fails,
+this deduplication contract has failed: repair the binding before result execution,
+not reinterpret the one audit as proving equivalence or buy an unpriced panel.
+
+There are seven **physically evaluated** main programmes: H-initial (also noD
+initial), SET-initial, H-final, H-noD-final, SET-final, O and B. There are eight
+logical endpoint labels when the noD initial alias is shown. Each unique programme
+gets the same32 fresh worlds at500 steps:224 missions/112,000 native steps.
+The eight audit missions are initial H/noD/SET, final H/noD/SET, O and B on the
+separate declared audit world:8×500=4,000 steps. They are correctness evidence,
+not appended to the32-world estimand. Initial audits may precede fitting; final
+audits use the selected fit endpoints and do not create a new fit.
+
+The audit and direction tests must cover exact packet/tensor identity, native
+post-routing score, idempotent diagnostic reward calls, 19/20/21-length synthetic
+service sequences, window boundaries including125/250/375/500, once-only payment,
+zero dense learning term, clipping and terminal storage, legal snapshot clocks,
+no actor ACK/progress, and H/noD initial identity. Pure-mask/coordinate/config
+checks add no environment or RF query. Model-construction/shape inspections add
+no optimizer steps; actual inference is covered by these eight missions and
+its charged reader replay. No diagnostic fit or calibration panel is included.
+A materially necessary extra dynamic training test would be explicitly priced,
+not hidden as free engineering or automatically used as a learnability gate.
+
+### Full prospective accounting and resources
+
+The exact finite-effect proposal, after initial-policy deduplication, is:
+
+| Work | Native team steps | Episodes / other dominant work |
+| --- | ---: | --- |
+| Three fits,360k each | 1,080,000 | 2160 episodes;3 started fits;135 full update calls |
+| Seven unique main programmes×32×500 | 112,000 | 224 frozen missions |
+| Eight correctness missions×500 | 4,000 | 8 missions outside the estimand |
+| Result reader | 0 | all232 frozen missions;all training records;no rerun of the environment |
+| Calibration/search/external teacher labels/experimental LLM forwards | 0 | none |
+| **Total** | **1,196,000** | **2392 physical missions;7,176,000 UAV transition rows** |
+
+The Oracle's 1,212,000 arithmetic counted the two identical initial H labels as
+separate full panels. The reduction is exactly32×500=16,000 steps; it removes no
+logical comparison, final programme, world or audit. This is the draft's proposed
+price, not an accepted launch ledger. Window bookkeeping executes once per native
+step; preserving the host's diagnostic chain means2,392,000 dense-contract
+reward-method entries plus2,392,000 parent diagnostic entries. Those repeated
+computations are priced through native CPU, not called extra scientific samples.
+
+For each fit, the low buffer has16×500×6=48,000 agent-tick rows per rollout,
+4800 ten-step chunks. Batch32 means150 minibatches per epoch,2250 per rollout
+and **101,250 actor plus101,250 critic optimizer steps per fit**. Across three
+fits that is303,750 of each, and97.2 million agent-tick presentations to each
+low network (32.4M per fit). Native collection adds6.48M actor and6.48M critic
+rows before any endpoint or reader forwards.
+
+Each H-type fit has800 high-level team records per rollout. Fifteen epochs and
+batch1280 give675 coordinator optimizer steps/fit; two fits give1350 and1.08M
+team-record presentations, including their associated individual assignments.
+D2's held-coordinator evaluation still runs on499 of500 episode steps even with
+infinite costs: two fits add718,560 team-row evaluations, alongside72,000 actual
+team skill draws and432,000 individual skill assignments. Fixed caps do not
+make that internal path cost zero.
+
+Each H-type fit also collects360,000 endogenous team-skill labels and2,160,000
+individual labels. Its discriminator buffers clear after every update; original
+batch12000/15-epoch loops give675 team-D and2700 individual-D optimizer steps.
+Together H/H-noD therefore give1350 team-D and5400 individual-D steps,10.8M team
+and64.8M individual classifier row presentations. Total optimizer steps across
+all modules/arms are **615,600**. H alone additionally computes per-tick reward
+logits on360,000 team and2.16M individual rows; noD skips those reward forwards
+but retains all discriminator training above. There are **0 external supervised
+or teacher labels**, not “zero labels of every kind.” Initialization, buffer
+allocation and strict checkpoint/model construction remain CPU/RSS work.
+
+The endpoint/audit model missions comprise100 H-type and66 SET missions:
+83,000 team steps,498,000 low actor rows and498,000 critic rows in the worker.
+H contributes5000 team skill draws and49,900 held-coordinator team-row evaluations.
+The frozen reader replays those exact model/input/RNG paths once, adding the same
+counts, without gradients or native stepping. It checks actions/log probabilities,
+hidden/snapshot timing and parameter/normalizer digests. It does not train again
+or claim independent replication of every optimizer gradient.
+
+O and B each have33 worker missions (32 main+1 audit). Each produces99,000
+individual velocity commands; reader reconstruction repeats them. O's worker
+has23,826 assignment comparisons; worker+reader **47,652 comparisons** and2640
+position-to-slot distances. There is no static RF menu or planner sampling price
+hidden behind the name O. The reader's single geometry reconstruction per initial
+state and frozen transition is232×501=116,232 geometries; at300 user links,
+15 unordered UAV pairs and6 BS links this is **37,310,472 distinct distance/path-loss
+relations**, with both directions checked where native routing uses them. This
+is computation on stored states, not a new counterfactual policy/environment query.
+For all training and frozen records it independently reduces true user-mask/route
+records into1,196,000 window updates and59.8M per-user service indicators. Training
+RF is not replayed at every tick: its native records plus the eight correctness
+missions and common verified physics path support the training ledger. Any
+additional geometry/model replay must be visible in the final query/CPU ledger.
+
+Resets also perform channel work. Preserve explicit counts of constructor and
+explicit reset evaluations; the original style has at most752 per fit
+(16 construction+16 first resets+45×16 episode-end resets) and two per frozen
+mission, **2720 reset evaluations** total. The final unconsumed episode-end reset
+is not a training transition; its CPU/RF work is still charged. If the original
+eager final reset is retained, its unused IDs are109210720…109210735 (48 reset
+materializations across the three fits), not part of either endpoint or training
+return estimand. Terminal masks must exclude their values from learning targets.
+An implementation may avoid redundant resets without increasing any scientific
+exposure, recording actual counts. The model-row totals above enumerate collection,
+minibatch and frozen replay work; constructor, bootstrap and diagnostic forwards
+are additionally metered in the complete CPU/call ledger, not declared nonexistent.
+No timed probe is purchased to estimate the below runtime.
+
+The direct old cost evidence is `resources.cpu_seconds_in_run_fit` in these
+original summaries; the field includes that run's collection, optimization,
+model/checkpoint work and old panels, not just pure training:
+
+| Original run under `runs/coupled_host_joint_skills_stage1/` | CPU seconds | Recorded wall seconds | Peak RSS KiB |
+| --- | ---: | ---: | ---: |
+| `b01_fit_H_931201_a01/summary.json` | 21796.376754 | 5442.5108 | 2556868 |
+| `b01_fit_H_931307_a01/summary.json` | 20358.216432 | 5068.6177 | 2553112 |
+| `b01_fit_H_931413_a01/summary.json` | 21378.762714 | 5284.8161 | 2562960 |
+| `b01_fit_SET_932201_a01/summary.json` | 15697.134229 | 3991.3408 | 1112376 |
+| `b01_fit_SET_932307_a01/summary.json` | 15545.113997 | 3952.2655 | 1120724 |
+| `b01_fit_SET_932413_a01/summary.json` | 16386.693979 | 4165.3953 | 1138868 |
+| `b03_fit_SETT_932201_a01/summary.json` (macro, not this learner) | 6438.930791 | 2009.8438 | 503580 |
+
+Those are3 H and3 SET already-paid fits plus the distinct macro fit; none is new
+work or a fitted throughput model. The old per-tick panels cost192×500 steps per
+fit, more than this proposal's endpoint allocation, but new registered inputs,
+full trace recording and reader work add expense. H/H-noD retain expensive
+classifier updates. Merely applying the macro 1.79h rate to H is unjustified.
+
+**Prospective full-chain prediction:18–26 CPU hours**, including native training,
+initial/final/ordinary/audit execution, frozen forward/physics reading,
+construction and necessary checks; **0 GPU hours** under the original CPU path.
+This is a transparent forecast with source support and uncertainty, not a claimed
+measurement or an accepted cap. Predict roughly5–9 wall hours for computation
+with four Torch CPU threads when uncontended, plus **16–28 hours of agent support**
+across contract, bounded implementation/review, collection, complete reading,
+independent diagnosis, publication and cleanup; these scopes overlap in wall time
+and must not be summed as measured elapsed time. There is no inherited10-CPU-hour
+veto. A practical resource overrun or implementation change still needs a visible
+updated price, not automatic continuation or a disguised additional fit.
+
+Prefer configured `wsl_4070`, one fit at a time, CPU device, Torch threads4;
+OMP/MKL/OpenBLAS/NUMEXPR1 as in the measured source. The old environment identities
+are Python3.10.21/Torch2.7.0+cu118/NumPy1.26.3; a live available configured profile
+must be verified at actual admission, not assumed to survive cleanup. Provisionally
+request8 GiB available RAM and8 GiB free disk at each launch; this is a request
+for later real-node admission, not a node reservation now. Exact installed
+interpreter/profile and memory availability are remaining control facts for
+Root/DM at the selected launch boundary; do not modify a shared base environment
+or another direction's accepted operation to supply them.
+
+Storage prediction is2–4 GiB new unique evidence/checkpoints plus about1.8 GiB
+for one fully materialized source snapshot at a time; compression is not assumed
+for admission. Retain compact training records for every tick (positions/actions,
+packed association/route/user masks, skills, external/intrinsic reward components
+and window events), full232 frozen mission traces for the declared reader, initial
+and final states and one canonical copy of necessary reader evidence. Full 300-link
+training SINR matrices and duplicate full raw-observation arrays need not be
+stored when the declared reader only needs their source-bound native masks and
+geometry. Expanded low-level fields, exact serialization and checkpoint bytes
+will be measured during implementation and charged; the old .8–2GiB estimate is
+not asserted adequate without those measurements. Publish compact summaries,
+positive/adverse raw locators/hashes and source identities; keep unique bulk at
+one canonical node location. After live-consumer checks remove unused snapshots,
+scratch, cache and redundant artifacts and report measured allocated bytes, not
+an archival copy chain.
+
+### Full reading, decision and remaining boundaries
+
+Primary paired endpoints are H-final−H-noD-final and H-final−SET-final on W,
+reported as per-world differences, mean/median, wins/ties/losses and descriptive
+95% paired t intervals with32 worlds. Report H-noD−SET, each final−its declared
+initial, and all learned/initial programmes versus O and B without selecting the
+best arm or endpoint mode after seeing scores. These are32 deployment-world
+samples conditional on one trained instance per arm. They are not32 independent
+fits, evidence for training-seed robustness, a confirmation interval, or a reason
+to hide discreteness/floor effects. Preserve the actual vector of four completion
+bits, completion times and maximum unbroken qualifying run for every mission.
+No fabricated minimum-effect gate or pooled endpoint/fit sample count is used.
+
+Read all50 users: total backhauled ticks, never-served count, per-user longest
+zero-service run including the start/end censored gaps (500 for never served),
+and full user masks. Report near/far and scheduled-cluster service separately,
+team zero-service ticks/runs, access versus backhauled coverage, dense J, routed
+front-end capacity, routing/association changes, path length per UAV, clipping
+and boundary contact. A window can complete by rotating which eight users are
+served; it does not prove continuity for each of ten people. Travel is not an
+energy measurement in this host. Retain complete native positive, adverse and
+zero-window examples with the same users, including first-window travel failure,
+last-window unfinished runs and cases where W rises but unserved users or travel
+worsen. Opportunity, learned capability, mechanism and complete-use judgments
+remain separate.
+
+Training hit counts, first positive window, skill occupancy/recognition, movement,
+external/intrinsic magnitude and policy changes are explanatory observations.
+They cannot replace the frozen full-service endpoint or establish that MI-induced
+exploration caused a gain. The original high-level discounts and the rare R/6
+scale make reward competition a serious alternative, explicitly retained before
+seeing new data. If H improves over its initial and H-noD yet stays below O, this
+can support a limited learning contribution while leaving O the practical
+choice. If H/noD/SET all fail while O completes windows, report a fixed native
+learning-package/exposure boundary. If O also has little opportunity, report that
+complete task difficulty rather than assume an implementation failure, retune the
+world law or call learning disproved. No outcome automatically queues a multiplier,
+count bonus, extra seeds, fit extension, easier geometry or new gate.
+
+**Feasibility disposition.** Source inspection supplies a feasible direction-local
+host wrapper, task adapter, dimension extension and bounded runner/reader based
+on the real native learner. No shared learner or paused Claude asset mutation is
+currently necessary. The unresolved empirical questions—actual ordinary deadlines,
+random/initial hit rate, discovery and useful complete learning—belong inside this
+fixed purchase and are not missing prerequisite probes. Exact constructed parameter
+counts, serialization sizes, complete source dependency manifest, decoder/terminal
+checks and installed runtime availability remain ordinary implementation/admission
+facts, explicitly not established by this zero-effect task. If implementation
+exposes a material departure from the declared reward/interface/learner or price,
+return that departure; do not silently substitute a toy or macro learner.
+
+Root now owns the one cross-question investment decision and its applicable
+independent scientific selection review of the Claude proposal, full Oracle answer
+and this actual contract. The reviewer should specifically challenge whether this
+finite three-instance learning question is worth its18–26CPUh forecast compared
+with the remaining questions, whether the ordinary reference is competent for the
+added public information, and whether the original reward scaling is an acceptable
+fixed first comparison despite its clear failure alternative. Oracle is not that
+independent reviewer and is not a continuing approval dependency. There is no
+new L0 implementation or selected run yet. If selected, DM will own bounded
+implementation, appropriate engineering review, exact publication, fresh admission,
+accepted-operation collection, full reading, independent result diagnosis and
+measured cleanup without per-fit Root permission. The historical directions,
+existing B04 learning-curve fit set, accepted handles and Claude pause remain intact.
+
+<a id="joint-window-oracle-original"></a>
+### Complete temporary Oracle answer retained verbatim
+
+Source runtime: `/root/successor_allocation_review`, actual turn
+`01a0fb00-4f00-7c31-8c84-2f0859e636f9`, `gpt-6-astra/max`, timestamp
+`2026-10-02T05:42:38.287Z`. The source rollout is
+`/mnt/c/Users/fires/.codex/sessions/2026/10/01/rollout-2026-10-01T05-41-52-01a0f77c-49e7-7292-91a3-2d8fa8fb1975.jsonl`,
+line2403. Root mechanically extracted the original to
+`/tmp/hmasd-root-window-resource-oracle-20261001.txt`; metadata is
+`/tmp/hmasd-root-window-resource-oracle-meta-20261001.json`.
+Original UTF-8 bytes16805, SHA256
+`389055881afe6782a2dec70c2a1f4c07af31e78791b5a6671765ccefaf9089ba`, independently
+byte-checked here. The answer below is unabridged, including its separate DM3
+recommendation; that section grants this DM no ownership or execution scope.
+The draft above supplies my disposition and concrete source corrections.
+
+<details>
+<summary>Original Oracle final answer, unedited</summary>
+
+<!-- BEGIN JOINT-WINDOW ORACLE ORIGINAL UTF8 -->
+**建议保留当前分工：B04 按已选合同继续；DM2 完成一个联合持续服务窗口的三臂学习合同；DM3 完成 C 目标上的 E/B 资源分配合同。** 两项合同准备都有明确终点，均不需要先购买效果筛查。闭合后，我认为它们比修补 S/C 门控、继续改 H_T 同分规则或重复最近的静态排名更值得投入。
+
+这是有历史上下文的建设性建议。我参与过前序设计，也读过 Root、DM 和 critic 的解释，**不是独立盲审或实现正确性证明**。
+
+**新结果改变了什么。**
+
+B02 保留了实际学习能力：S_L0/S_L1 相对 G 的 native J 分别约提高 .0152/.0224，服务增加、路径减少。Bstar 则以更多移动换来较少未服务用户和较短缺口。这些是不同用途的正资产。四步 own-count-zero 接管对 S_L1 和 G 明确不利，而且发生了真实动作变化；正反例也排除了把全部现象归为“导航弱”“接管太晚”或“接管未激活”。当前应结束这个门控配方，保留学生及校准策略的能力。
+
+B11 同样提供了能力，而非默认升级：H_T 相对 H 减少路径约 559 米/UAV、消耗约 8.09 Wh、返航代价约 13.29；但最低用户任务平均 QoS 下降 .01648，完整 J 增益仍不确定。独立 critic 的新证据尤其重要：31 个共同首分歧处，两候选三点模型 QoS/return 相同，真实随后 30 步 QoS 却是 20 升、11 降，29/31 连相应采样时点也不同。**名义同分不意味着服务守恒，较短名义移动也不是无代价改善。** 三次浮点尾数级改选合法，但不构成自动加 epsilon 的理由。
+
+这些结果支持发展“学会联合任务”和“完整服务—资源分配”两个问题，而不是继续追逐最新配方的局部修补。B09 的 F−H 正能力、F−C 缺口，以及此前信息、连续性和普通规划的正反证据均保留。
+
+**第一项：DM2 研究明确任务信息下，技能多样性是否帮助学会跨窗口的联合持续服务。**
+
+我推荐采用下面这个具体实例收敛合同，而非直接执行 Claude 修订稿中的四臂方案。
+
+- 使用冻结 D2 的 N6/U50/H500、自由空间无线、逐 primitive 连续动作和 k=10 技能时钟。四个 125 步窗口分别开放四个远簇，顺序由世界 seed 随机排列，每簇只出现一次。
+- 在一个窗口内，**每步至少 8/10 用户有原生回程服务，连续达到 20 步时首次奖励 1**，每窗口最多一次、全任务最多 4。这不要求连续服务的是同八个人；必须同时读取全部 50 用户的服务与缺口，不能把窗口完成等同个体公平。
+- 首次采用纯窗口奖励，`w_dense=0`。不同时加入 decoy、count bonus、四倍判别器权重或难度搜索。
+- 三个学习臂为原逐步 HMASD 默认配方、同层级关闭判别器奖励、同权限完整 SET。各一个真实 fit、各 360k native steps；同一组训练世界、固定训练终点。它们是三个训练实例，不是三个独立重复。
+- H 与 SET 保持原有完整程序的信息分配及同频 held global snapshot。注册坐标、完整窗口顺序和时钟显式授权；真 ACK、路由、窗口进度真值不额外成为 actor 输入。SET 直接消费中央快照而 H 经技能编码使用它，本身就是架构差异，不能声称逐层表示完全相同。
+
+这同时检验一个有用正解释和两个普通解释：判别器可能形成便于复用的联合行为；也可能仅层级承诺就足够，或普通 flat 学习已能解决任务。三臂可以区分这些结果，**不能独立证明判别器优于所有探索奖励，也不能把 H/noD 差唯一归因于探索而排除优化或正则化作用。**
+
+为避免原文“任意单 UAV 不可服务”的无界验收，我建议采用一个明确、有界的世界生成法：四远簇中心为 `(500,500)、(4500,500)、(4500,4500)、(500,4500)`，中心每轴抖动 ±50 米，用户处于中心半径 100 米的圆盘内；初始 UAV 保留原 uniform 法则，近簇另固定公开分布。在当前自由空间常数下，
+
+\[
+R=\frac{c}{4\pi f}\,10^{(23-(-80)-3)/20}\approx1193.7\text{ m}.
+\]
+
+远用户到 BS 的距离下界约 2657 米，大于 \(2R\)，因此排除单架 UAV 同时直连 BS 并服务该用户。这是由公开传播法则得到的几何约束，**不是学习可达性或完整任务成功证明**；无需逐世界评分、拒绝采样或调到指定随机命中率。
+
+最强普通参照应成为实际程序。我建议一个知道完整日程的 **ray-chain 预置程序**：为前三个截止窗口分别设置 BS→簇中心的 1/3、2/3 两个站位，以时限优先规则完成六架 UAV 的匹配；第一组窗口结束后提前转往第四簇。DM 固定高度、匹配排序、释放时刻和动作公式，采用真实原生执行。它是有竞争力的普通规划参考，不是已经实现的 `O_W`，也不是全局最优上界。初始随机位置造成的首窗可达性不足应保留，不按参考得分筛掉世界。
+
+这个新问题不同于 B04：B04 学习静态完整布局选择及数据曲线；这里学习由实际窗口回报驱动的时序联合控制。也不同于旧 registered-service 的 F——旧 F 是每用户窗口内接触次数汇总，当前 S_L0/S_L1 又是监督学生，不能把它们直接接到一个不存在的 PPO/GAE 接口上。
+
+**主观察及处置。** 首次完整读取应包括训练首次获奖、获奖世界比例、各簇/各窗口完成分布，以及固定最终策略在 32 个 fresh 世界的完整任务。部署采样方式须事前固定；不能看完结果在 sampled、argmax 或温度之间择优。判别器准确率、访问面积或某个早期命中只能辅助解释。
+
+- H 比 noD、SET 有明确条件优势且跨不同簇完成任务：支持进一步研究技能包的经验利用和复现，尚不支持唯一机制或普遍算法优势。
+- H≈noD，二者优于 SET：优先保留层级与承诺解释，不继续自动加判别器权重。
+- SET 足够好或更好：保留普通学习能力，改变对层级投入的优先级。
+- 三者有学习但明显低于普通程序：仍可能是有价值的能力结果，下一步取决于数据效率或可复用性，而非必须胜过教师。
+- 三者均未形成任务能力：结束这个冻结任务—接口—曝光配方；不能唯一诊断任务过稀、表示失败，也不自动加 seed、延长训练或改窗口。
+
+**现在值得买的是一次有终点的合同闭合，而不是效果校准链。** DM2 应在约 4–6 支持小时内给出上述世界、输入、普通程序、奖励推进、训练和完整计价的一份准确合同。特别是 `_compute_reward` 在当前宿主会被多处调用；窗口计数应只在完成原生 post-routing step 后推进一次。原配置也有明确的观察/状态编码，不是任意追加维度就自动正确。这些是尚未确定的科学和实现输入，不能靠先跑随机命中率解决。
+
+拟议完整价格为：
+
+| 项目 | 建议账目 |
+|---|---:|
+| 三次训练 | 3 × 360,000 = **1,080,000 native** |
+| 三个初始、三个最终、普通程序、sticky reference；各 32×H500 | **128,000 native** |
+| 暂列八个完整审计任务 | **4,000 native** |
+| 总计 | **1,212,000 native，3 fits，0监督标签，0 GPU** |
+| 完整 CPU 预测 | **16–24 CPUh**，需按适配后的准确合同修订 |
+| 支持工作预测 | **16–28 小时**，包含上述合同准备 |
+| 存储初估 | 新证据约 **0.8–2 GiB**；保存粒度、reader 和 source 保留方式仍需定价 |
+
+这是初始投资估计，不是已接受边界。**超过 10 CPUh 不构成否决。** 若合同确实承载上述区分，约二十 CPU 小时本身可以值得；应依据正确全价判断，而不是依据错误便宜价购买。
+
+**Claude 77c02de6 的修订是实质新提案，但尚不能按 7.6 CPUh 直接执行。**
+
+它已明确列出四个学习臂，这一点应承认，不能继续说“根本没有计价”。但把各臂按 1.79 CPUh 估算仍用了不同接口的宏动作 SET-T。另有几项会改变比较：
+
+- Toy 的 12.5% 是“episode 至少命中过一次”；`.131/5≈2.62%` 才是 window 比例，不能支持设计中的 5–20% window 校准带。
+- Toy 把外在加内在回报用于三个策略层的更新；原 HMASD 高层使用外在回报，低层才加入判别器项。其每段一次的 tabular intrinsic 也不同于原逐 tick 神经判别器。四倍权重不是可直接移植的单位。
+- Toy 的主要成功集中在重复开放两次的 site 0，尚未建立跨四簇日程组合能力。
+- 原文 40 个用户的 xy FP32 坐标为 320B；400B 对应 50 个用户，仅坐标，不含日程等字段。信息合同必须明确。
+- 对固定动作轨迹，延长连续保持要求只会更严格，不能当作降低难度的通用办法。
+- 七月 R35/R36 已研究过稀疏访问；“此前只试过稠密任务”“静态规划器按构造最优”“新的正结果将是项目第一次能力”均超出证据。
+
+因此我建议三臂直接完整比较，删除强制 toy→命中率门→改难度→四臂这一进入链。新的合理预算可能更贵，但问题更清楚。
+
+Root 要求的原始价格定位如下。共同字段为 **`resources.cpu_seconds_in_run_fit`**；它包括该旧 `run_fit` 的实际工作，不是纯优化器时间，也不是 wall time。
+
+| 原 summary | CPU 秒 |
+|---|---:|
+| [H 931201](/home/fires/hmasd-wsl/runs/coupled_host_joint_skills_stage1/b01_fit_H_931201_a01/summary.json) | 21796.376754 |
+| [H 931307](/home/fires/hmasd-wsl/runs/coupled_host_joint_skills_stage1/b01_fit_H_931307_a01/summary.json) | 20358.216432 |
+| [H 931413](/home/fires/hmasd-wsl/runs/coupled_host_joint_skills_stage1/b01_fit_H_931413_a01/summary.json) | 21378.762714 |
+| [SET 932201](/home/fires/hmasd-wsl/runs/coupled_host_joint_skills_stage1/b01_fit_SET_932201_a01/summary.json) | 15697.134229 |
+| [SET 932307](/home/fires/hmasd-wsl/runs/coupled_host_joint_skills_stage1/b01_fit_SET_932307_a01/summary.json) | 15545.113997 |
+| [SET 932413](/home/fires/hmasd-wsl/runs/coupled_host_joint_skills_stage1/b01_fit_SET_932413_a01/summary.json) | 16386.693979 |
+| [宏动作 SET-T 932201](/home/fires/hmasd-wsl/runs/coupled_host_joint_skills_stage1/b03_fit_SETT_932201_a01/summary.json) | **6438.930791** |
+
+前三次逐步 H 为 5.66–6.05 CPUh，逐步 SET 为 4.32–4.55 CPUh。宏动作 SET-T 的 1.79 CPUh 不能按“同为 360k native”推广到它们。
+
+**第二项：DM3 研究同一 C 目标集合中，异质电量的分配是否比最省飞行能量更有完整价值。**
+
+我推荐 E/B，而不是另一轮 H_T 排序微调。它继承 B11 的资源能力及服务代价，同时移除旧短服务模型作为选择依据，询问一个不同的、可被普通方法挑战的问题。
+
+在每个 C 规划时刻，沿真实 assignment provenance 取 `SERVICE、非原 C 排除模式、finite target` 的成员，最多六架。保持该时刻 C 生成的目标多重集、relay/ring/NaN 目标和其他执行规则，仅选择这些 service 成员的目标标签置换。
+
+- **E：**最小化按公开 C 运动与功率法则计算的、不中途改计划的飞抵 Wh。
+- **B：**最大化飞抵后返航 slack 的排序向量，先最大化最小 slack，再第二小，依次；完全相同时以 E 次序、保留 base、固定列号消歧。
+
+可写为
+
+\[
+s_{ij}=b_i-\frac{E^{fly}_{ij}+E^{return}_{j}}{C_{\rm bat}}-\rho .
+\]
+
+必须采用分布目标而非 `sum(slack)`：在当前同容量宿主和固定目标多重集下，总初始电量及总目标返航项对置换不变，最大化 slack 总和会退化成最小化飞抵能量，根本没有测试电量异质性分配。
+
+B−E 是主要新对比；两者对旧 C/H/H_T 的完整结果提供用途与机会成本。E 是强普通竞争者，拥有相同成员、目标和完整置换机会。B 获得更多低储备收益却损害服务，完全可能。
+
+源接口已经足够具体：从 `AssignmentController("C")` 分支接 hook，可避免旧 tracker、short-service model 和 RF 评分；实际 Hungarian 行列及角色可用；选中后在唯一 `act` 之前写回 targets，进入本臂下一轮 C hysteresis。仍须由 DM 固定逐段飞行、最后短步、并行爬升等能量定义，并实现新的 permutation/实际状态 reader。arrival slack 不计后续 C 重规划、guard、充电排队和未来服务，不能称安全证明或精确完整 rollout。
+
+我推荐一次完整 E/B 比较，使用原 32 个已曝光世界，明确是 development；旧 C/H/H_T 只复用绑定的原生证据，不重复飞行。
+
+| 项目 | 初始完整价格 |
+|---|---:|
+| E/B 主任务与四个工程任务 | **68×H3000 = 204,000 新 native** |
+| planning epochs | **6,800** |
+| worker＋完整 reader 的置换上限 | **9,792,000** |
+| 预计算飞行/slack 边上限，含 reader | **489,600** |
+| 学习/旧预测调用 | **0 fit、0标签、0 GPU、0旧 short-service/RF/tracker 调用** |
+| CPU 预测 | **2–5 CPUh**，不是已测价格 |
+| 支持预测 | **10–16 小时** |
+| 新 raw 初估 | **0.8–1.5 GiB**；含一次 source 的保留峰值约 **3–5 GiB** |
+
+公开能量边和置换评价是新计算，不能因“0旧 RF”而记成零模型/零选择成本。每计划预计算至多 36 条边，避免每个置换重复积分；最终存储方式也必须纳入全价。
+
+这里最小有用观察是完整 H3000 的 native J、QoS、返航与储备、路径/Wh、同用户服务、低端用户和右删失缺口，而非证明 target slack 更高。若 B 比 E 改善资源且保留或改善服务，支持进一步发展资源分配；若只交换服务与资源，按用途保留；若连 E/C 都没有完整优势，则结束这套意图 slack 配方。以上任何分支都不自动授权调权、延长预测或加 epsilon。
+
+**为什么通信协议暂列下一候选，而非同时展开。**
+
+通信受限技能组合仍有价值，但当前六类 team skill 的 \(\log_2 6\) 不是完整通信账。还要包括 agent codes、帧头、时钟以及协调器取得全局状态/各 agent 观察的上行信息；原 B/O/L 的实际包也不是一个 team symbol。新的问题应是同 wire budget 下，学习编码与有竞争力的普通 cluster/codebook 协议相比能保留多少完整能力。它需要自己的信息、decoder 和训练合同，不能靠把现有标签重命名为“2.6 bits”得到。已有通信和窗口历史也使其不属于未探索领域。本轮先把窗口学习和 E/B 两个不同问题闭合，避免同时购买三种新接口。
+
+**原始文献桥及本次检查边界。**
+
+HMASD 原论文为 InstSci **MARL-0553，*Hierarchical Multi-Agent Skill Discovery***：
+
+- [结构化 JSON](/home/fires/projects/Inst-sci/papers/MyLib/json/MARL-0553.json)
+- [原论文 PDF](/home/fires/projects/Inst-sci/papers/MyLib/pdf/MARL-0553.pdf)
+
+我直接核对了 **PDF p.5 §3.2 “Skill Coordinator”**：输入全局状态和全体观察，自回归生成 team skill 与各 agent skill；以及 **p.6 “Overall Training and Execution” 的 Eq.(4) 前一段、Eq.(4)、Eq.(6)**：高层回报累积外在 team reward，低层加入两个判别器项。这是不能直接移植 toy 三层同回报或 ×4 权重的承重区别。
+
+MAVEN 的持续 latent 与轨迹多样性给出“协调探索可能有用”的桥，不给出这个 UAV 任务上的性能保证；已核其原论文 §4。[MAVEN 原论文](https://proceedings.neurips.cc/paper/2019/file/f816dc0acface7498e10496222e9db10-Paper.pdf)。通信候选参考 IMAC §4 的量化、编码及双向传输区分，不能以 latent 熵替代实际协议账。[IMAC 原论文](https://proceedings.mlr.press/v119/wang20i/wang20i.pdf)
+
+本次复用了仍适用的前序源审计，直接检查了新 B02/B11 compact、正反世界解释、两份完整独立 critic、Claude 77 修订 report/prompt/design/toy 源、上述七份 summary、相关宿主/配置/奖励/assignment 接口；检索了三库及相关七月和外审记录。没有独立重复重建整批原生 raw，也没有运行新策略、模型、RF、native、toy 或 fit。世界与特征适配、奖励单次推进、普通程序及准确 reader/CPU/存储合同仍交两个 DM 闭合。
+
+**MATERIAL_DISSENT: yes——针对把 Claude 77 修订直接视作约 7.6 CPUh 的可执行比较，以及由 toy 强制追加 ×4 和随机命中率准入；不针对联合窗口问题本身。对 B02/B11 保留能力、结束固定配方及 B04 继续执行没有实质异议。** 当前两项零效果合同准备是合适分配；后续选择和执行由 Root 与原 DM 按实际合同推进，本次临时顾问任务结束。
+
+
+<!-- END JOINT-WINDOW ORACLE ORIGINAL UTF8 -->
+
+</details>
