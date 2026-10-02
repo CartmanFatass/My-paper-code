@@ -11,7 +11,7 @@
 已读取前任完成的[单一 handoff](HANDOFF_20261001_ROOT_AND_FOUR_DMS.md)，接手 Codex 科学管理、选题与后继安排。
 上一轮四项研究及三项资料评估的完成／停止结论保持；旧操作不重启，历史 handoff 不改写。
 本次明确继续解除该轮 Codex 交接暂停；静默承诺、RF 完整购买与参数搜索均已完整判读、发表和清理。S7 构造与计价也已完成，Root 采纳独立评审、本轮不购买该候选；见[首轮完成处置](#root-selected-successors-20261001)。
-Owner 提供的开放 Jev/Laya 计划首轮6-fit比较已完整结束，两个精确配方的停止与全部证据保留。Owner随后明确要求将开源决策辅助作为一个DM长期探索的问题、泛化超出Laya并继续研究；同时目标改为3个有实质工作的DM，Oracle Astra Max只作为临时服务Root的设计与调度建议者。三位DM现持续滚动推进：冻结学生协作与S7旅行同分已完整独立判读，保留原学习资产、服务与资源取舍并结束两条固定配方自动追加。B04原唯一操作在标签阶段SIGSEGV，0fit／模型前向／H500任务，技术终态和partial均已发表；原DM正对既有系统崩溃证据做有终点的只读取证，无自动重启。另两位原DM的联合持续窗口学习与E/B资源分配实际合同已完成独立选择，Root已投入各一次完整比较，进入实现与验证。Claude最新报告/提示/设计及toy证据已逐字导入，临时Oracle及独立critic完整意见均已读取；两份实际合同已选定，新fit/native仍须准确发布和实际节点准入。一次配方收尾不重新暂停研究，也不消除以前的正面能力；见[当前长期分工](#three-dm-decision-assistance-20261001)与[B01处置](#typed-joint-skill-selection-20261001)。
+Owner 提供的开放 Jev/Laya 计划首轮6-fit比较已完整结束，两个精确配方的停止与全部证据保留。Owner随后明确要求将开源决策辅助作为一个DM长期探索的问题、泛化超出Laya并继续研究；同时目标改为3个有实质工作的DM，Oracle Astra Max只作为临时服务Root的设计与调度建议者。三位DM现持续滚动推进：冻结学生协作与S7旅行同分已完整独立判读，保留原学习资产、服务与资源取舍并结束两条固定配方自动追加。B04原唯一操作在标签阶段SIGSEGV，0fit／模型前向／H500任务，技术终态和partial均已发表；有限core取证已完成，原DM进入仅重放已存普通记录的两节点工程比较；无新标签/模型/回合，也无B04自动重启。另两位原DM的联合持续窗口学习与E/B资源分配实际合同已完成独立选择，Root已投入各一次完整比较，进入实现与验证。Claude最新报告/提示/设计及toy证据已逐字导入，临时Oracle及独立critic完整意见均已读取；两份实际合同已选定，新fit/native仍须准确发布和实际节点准入。一次配方收尾不重新暂停研究，也不消除以前的正面能力；见[当前长期分工](#three-dm-decision-assistance-20261001)与[B01处置](#typed-joint-skill-selection-20261001)。
 Claude 的独立权限和当前暂停、FSD/PPC 暂停、G33 冻结及 Milan 数据依赖保持原范围。
 
 **历史恢复：2026-09-29 21:59 UTC，owner明确要求“阅读handoff 我们继续工作”；该轮次现已完成并暂停。**
@@ -2530,11 +2530,11 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 ### Parallel allocation: independent work and rolling succession
 
 <a id="three-dm-decision-assistance-20261001"></a>
-**长期决策辅助与当前3DM工作（2026-10-02 UTC／10-01 PDT）：** Root已读完B02冻结学生协作、B11旅行同分的完整DM判读与原独立意见，均已发表和完成清理；结束这两个固定配方的自动追加，保留其正面能力、个体代价与长期问题。不是owner暂停。Oracle Astra Max本次临时建议已完整读取并结束；两项实际合同已通过一次充分的独立科学选择，Root选定各一次完整比较，原DM进入有界实现/验证/发布/实际准入；尚无这两项新运行的接受记录。B04原操作技术终止，DM保留长期问题并读取既有崩溃证据。
+**长期决策辅助与当前3DM工作（2026-10-02 UTC／10-01 PDT）：** Root已读完B02冻结学生协作、B11旅行同分的完整DM判读与原独立意见，均已发表和完成清理；结束这两个固定配方的自动追加，保留其正面能力、个体代价与长期问题。不是owner暂停。Oracle Astra Max本次临时建议已完整读取并结束；两项实际合同已通过一次充分的独立科学选择，Root选定各一次完整比较，原DM进入有界实现/验证/发布/实际准入；尚无这两项新运行的接受记录。B04原操作技术终止；已存core定位记录转换活动栈但坏指针来源未知，DM保留长期问题并执行一次有界纯数据工程比较。
 
 | 科学责任 | 当前实质工作与边界 | 负责人 |
 | --- | --- | --- |
-| 广义开源／可学习决策辅助，长期持有 | B04唯一操作源b19508a5c／handle3e4367a5d279…于05:45:21UTC SIGSEGV。39完整shards为2496world／430126标签；未完journal保留另5完整world及下一world165/172，合计431145已存标签下界。0fit／模型前向／H500，未得到学习曲线。原进程与observer已终止，无自动重启或prefix续跑；当前有终点地只读已有WSL capture／PID关系／exact ELF证据，不预断根因。[完整技术终态](candidates/typed_joint_skill_decision/NOTES.md#b04-technical-terminal)。 | 原DM `/root/dm_typed_joint_skill`，独占 `typed_joint_skill_decision` 对应路径。 |
+| 广义开源／可学习决策辅助，长期持有 | B04唯一操作源b19508a5c／handle3e4367a5d279…于05:45:21UTC SIGSEGV。39完整shards为2496world／430126标签；未完journal保留另5完整world及下一world165/172，合计431145已存标签下界。0fit／模型前向／H500，未得到学习曲线。原进程与observer已终止，无自动重启或prefix续跑；有限core/ELF取证已完成：同crash寄存器/BuildID与plain→encoded→Trace.write栈绑定，不定位坏指针来源。Root选中current wsl4070与configured local_linux各1进程、原1025普通JSON行、各≤1000cycles/300CPU-s/600wall-s先到止的工程比较；≤2050000 worker编码/600worker CPU秒，有限检查另计，0teacher/static/native/forward/fit；双阴性不是健康证明/重启许可。每节点增量3GiB含单source和自动core预留，原638087168B Windows core另保留；source净实减1811812352B、scratch40960B。[完整技术终态](candidates/typed_joint_skill_decision/NOTES.md#b04-technical-terminal)。 | 原DM `/root/dm_typed_joint_skill`，独占 `typed_joint_skill_decision` 对应路径。 |
 | 学习能否形成时序联合服务能力 | 单一三臂实际合同已发表1c1ba086f：逐步HMASD／同层级关闭判别器奖励／同外部信息权利的逐步SET；N6/U50/H500，四窗各125步、至少8/10回程服务连续20步首次奖1。固定404B新增任务注册、真实d2回报链、一次post-routing记奖、ordinary ray-chain与sticky参照、初始H/noD身份绑定去重；Root与独立critic完整读后已选定3fit比较；实现前澄清Gaussian未使用min/max字段、保留原无clamp头，并修正O低分不证明任务无机会。由DM实现/验证/准入，不按命中率调难度。[完整合同](candidates/uav_decision_generalization/NOTES.md#joint-window-prospective-contract)。 | 原DM `/root/dm_decision_generalization`，当前 `uav_decision_generalization` NOTES；Claude宿主等旧资产只读。 |
 | 完整服务与资源分配 | E/B实际合同已发表6fc708f74：本臂当次C service目标标签多重集上，E最小公开飞抵Wh，B完整排序返航slack作leximin后按E/base/列号消歧；后续C历史/布局可分歧。B−E比较完整准则，不唯一归因电量信息；完整服务/资源/个体尾部一起读。68H3000／204000native／0fit，精确能耗、状态写回、绑定旧参照和全价已收敛并获选；由DM实现/工程审查/准入，尚无新效果。[完整合同](candidates/uav_fleet_transmission/NOTES.md#b12-resource-assignment-prospective-contract)。 | 原DM `/root/dm_s7_prediction_use`，保持 `uav_fleet_transmission` 所有权。 |
 
