@@ -2022,3 +2022,167 @@ binding. [B02_AFTER_WORKER_LEDGER.json](B02_AFTER_WORKER_LEDGER.json), SHA256
 starts at208.599697 cumulativeCPU seconds, including byte verification, with
 unchanged conservative synthetic usage172C/0frozen/1238decodes. Source code and
 all frozen actors remain exactly unchanged; reader uses new tag`b02_read_a01`.
+
+
+<a id="b02-complete-reading"></a>
+### B02 complete reading — active navigation switch adds no mean use and harms L1
+
+The complete fixed purchase is technically read. Final reader source
+`024d325366ffedd3af6ef8f8a2a08271d981d37f` was admitted04:55:47.254979UTC,
+operation`366a9e55215a690b86219c7daffaf360780f6d743624ecce62d270258314b53f`,
+snapshot`28aceb68e6e24b3aa942e8eb3b2d666e`, native supervisor/runner1315258/1315259.
+It exited0 at04:57:23.673UTC:480/480 independent main source replays VERIFIED,
+16 bound audit readings adopted,0 repeated audit replays and0 new native steps.
+The reader's first drained state was running; same-handle READY was drained,
+consumed through generation2 and observation stopped. Its queue notification
+had the same spawned-child delivery limitation; no repeated scientific call.
+The original [reading](../../../../runs/uav_decision_generalization/b02_read_a01/reading.json),
+SHA256`98b3e648a3d663ad7740f83f7dd8b56857c51e8566855519b816e123759e4236`,
+contains all496 evidence identities, all28 unordered paired tables, four primary
+comparisons, both interactions, complete costs and same-world/prefix checks.
+
+I additionally read all480 main native traces without importing any policy,
+model or environment. Independent arithmetic verified6,240 native metric
+reductions, all24,000 per-user served/leading/trailing/longest-gap records and392
+paired metric vectors; every one of480 reader-check files was SHA/content checked.
+The [DM complete reading](../../../../runs/uav_decision_generalization/b02_read_a01/dm_complete_reading.json)
+retains complete levels, every team-zero episode and paired positive/adverse
+world/tape examples, with2.987754CPU seconds and0 new queries. Examples were
+selected post hoc as descriptive extrema, never as a new test panel.
+
+All means below first average the two tapes within world; C has one deterministic
+mission per world. Intervals are the frozen10,000-resample conditional32-world
+bootstrap; two inherited fixed actors are not new training replications or
+confirmation. Path is mean metres per UAV, not an energy/safety metric. Every
+user-gap denominator includes all50 users and both mission-boundary censored
+runs; a never-served user has gap256.
+
+| Program | J | Mean served | Service p10 | Never-served users | Mean user longest gap | Path m/UAV |
+|---|---:|---:|---:|---:|---:|---:|
+| C | 0.356256 | 21.4529 | 20.2969 | 20.8125 | 136.9050 | 2817.523 |
+| G | 0.381496 | 23.1844 | 19.4531 | 8.5156 | 110.7906 | 3669.647 |
+| ZG | 0.376777 | 22.8442 | 19.4141 | 8.9062 | 113.0300 | 3599.251 |
+| SL0 | 0.396703 | 24.4178 | 21.1172 | 9.7188 | 110.5838 | 3037.065 |
+| ZSL0 | 0.396299 | 24.4061 | 21.0859 | 9.9844 | 111.3859 | 2998.408 |
+| SL1 | 0.403872 | 24.9442 | 21.8203 | 10.2344 | 107.8447 | 3149.010 |
+| ZSL1 | 0.396419 | 24.3995 | 21.2266 | 10.3281 | 109.4091 | 3224.403 |
+| Bstar0 | 0.400950 | 24.7697 | 20.7812 | 5.4375 | 93.6797 | 4450.787 |
+
+| Primary difference | J mean [95 interval] | Mean-served difference | Mean user longest-gap difference |
+|---|---:|---:|---:|
+| ZSL0-SL0 | -0.0004045 [-0.0080097, +0.0060650] | -0.011719 | +0.802188 |
+| ZSL1-SL1 | -0.0074530 [-0.0173516, -0.0011588] | -0.544617 | +1.564375 |
+| ZSL0-ZG | +0.0195218 [+0.0077204, +0.0322549] | +1.561829 | -1.644062 |
+| ZSL1-ZG | +0.0196423 [+0.0088041, +0.0317819] | +1.555298 | -3.620937 |
+
+The intermediate prediction succeeded: the student switches made294 and248
+source takeovers on20 and22 worlds, changing241 and131 full four-tick physical
+paths respectively. They were not dormant. G's same switch made639 takeovers on
+18 worlds and changed53 physical paths (55 category changes; two aliased after
+clipping). Source reconstruction verifies every takeover has no current legal
+users and C takes its original waypoint branch. Next-four-tick contact appeared
+after55/294,69/248 and75/639 actual takeovers for ZSL0,ZSL1,ZG. These are selected
+on-policy descriptions, not causal rescue probabilities or comparable randomized
+subgroups.
+
+The consequential prediction failed. ZSL0−SL0 J is unresolved near zero and its
+mean user longest gap increases+.8022ticks. ZSL1−SL1 J and mean served decrease;
+service difference−.544617 has interval[−1.220284,−.111266], and longest-gap mean
+increases+1.5644ticks (interval crosses zero). Thus changed action paths did not
+convert into the proposed mean complete benefit or continuity improvement. ZG−G
+also loses J−.0047189[−.0111748,−.0002012], service−.340149 and worsens mean user
+gap+2.2394[+.1918,+5.0035]. The ordinary comparison is consequential: selectively
+removing its stochastic navigation can also hurt. This does not identify whether
+exploration, later occupancy or coupled interference causes any particular loss.
+
+Both Z students still exceed ZG in mean J/service, but the original parents
+already exceed G: SL0−G J+.0152073[+.0033496,+.0272557], service+1.233398 and
+path−632.582m; SL1−G J+.0223764[+.0129531,+.0331250], service+1.759766 and
+path−520.636m. The positive Z−ZG comparison therefore does not establish added
+cooperation value. The prewritten interaction is+.0043144[−.0030641,+.0118713]
+for L0 and−.0027341[−.0146405,+.0073032] for L1. Those arithmetic differences
+remain uncertain and do not identify a student-specific synergy.
+
+Coverage exposes a separate cost of the retained ability. Compared with G,
+SL1 leaves+1.71875[+.296875,+3.234375] more users never served despite higher
+mean served count. SL0's corresponding+1.203125 interval crosses zero. C leaves
+an average20.8125of50 users entirely unserved; all learned programs cover
+many more users than C, but neither C's old absence of team zeros nor greater
+aggregate student service implies individual continuity. Paid Bstar_L0 remains
+a distinct existing alternative: relative to SL0/SL1 its J differences are
++.004247/−.002922, both unresolved, while never-served users fall4.28125/4.796875,
+mean user longest gaps fall16.9041/14.1650ticks, and path rises1413.723/1301.777m.
+These gap/coverage and path intervals exclude zero. The more diffuse paid
+sampling law supplies a useful coverage/travel tradeoff, not blanket superiority.
+It adds no new fit or calibration here.
+
+All12 team-zero episodes occur in world108310012, including C and G. Both student
+Z programs remove exactly one post-first-segment zero tick in their corresponding
+parent missions; they retain the identical first four native transitions. ZG
+changes no team-zero count. Two removed late ticks across128 student missions
+cannot carry a general reliability claim, and C is not outage-free on this new
+panel. In world012/tape0, ZSL0 raises J from.331429 to.341223 and removes one zero
+tick, while increasing never-served users9→14. On world012/tape1, ZSL1 removes
+one late zero tick but lowers J.362298→.354463 and mean served22.602→21.207.
+Service, coverage and team continuity must remain separate.
+
+Large adverse examples are not explained away by the small average. On world
+108310000/tape0,122 ZSL0 takeovers accompany J.362072→.198114, mean served
+22.3594→9.6602 and mean user longest gap130→196.02; the other tape is identical
+to the parent. On world108310016, ZSL1 loses on both tapes: J.442098→.325336 and
+.409546→.260485, with mean-served losses7.9141/10.1094, despite no team-zero
+transition in any of these four missions. Positive cases remain: world001/tape0
+ZSL0 has one takeover, J+.085371 and service+5.804688; world007/tape0 ZSL1
+J+.026138 but never-served users4→6. These are complete program outcomes, not
+same-history native counterfactuals for individual gate events.
+
+Measured online episode CPU means C.1728s,G.2512s,ZG.2535s,SL0.2539s,ZSL0.2562s,
+SL1.2490s,ZSL1.2567s,Bstar0.2928s include resets/native stepping/raw storage;
+all query/cache/CPU components remain in the raw episode metadata. The gate is
+not a demonstrated deployment speed saving. The complete purchase costs
+126,976native steps,78,700 full originalC computations (2,124,900 trajectories /
+8,499,600 modeled ticks),170,728 actual frozen-actor rows and0fits/updates/labels/
+calibrations/LLM/downloads/GPU. Worker requests105,058S and53,662C; independent
+readers add105,600S rows and53,662C recomputations, with private online cache
+hits explaining actual computation differences. Separately,172 synthetic C
+calls add4,644 trajectories/18,576 modeled ticks; synthetic frozen rows remain0.
+All gates, decodes, radio links and mask entries are in the original cost table,
+including the conservative1238 synthetic decoder charge versus1058 completed.
+
+CPU ledger increments:40.66s checks +167.545232s worker +.394465s byte verification +
+94.694894s reader +2.987754s independent raw reading =
+**306.282345s (.0850784CPUh)** under the1CPUh boundary. Original summary fields
+retain microsecond component/snapshot timing differences; unmetered support and
+terminal self-report tails are not asserted zero. Peak worker/reader RSS is
+496432/401744KiB. This is a new0-fit use study, not zero total acquisition cost:
+the inherited S chain throughB06 still cost8fits/2calibrations/2,080,768native
+steps/3238.693 scoped CPU-s; the separate prior A/R direction study retains its
+6fits/1,736,000native steps/.814449CPUh/.03709GPU-reserved-h. These disjoint
+histories are not merged into a common task-performance estimand.
+
+Working interpretation before the independent result return: retain the original
+S assets' conditional complete service/travel capability and the paid Bstar
+coverage alternative; do not adopt this zero-contact C switch or add thresholds,
+seeds or a student-only rescue. Physical activation is established, mean package
+use and predicted continuity are not; L1's adverse result matters. The fixed
+purchase is complete. The broader question of useful learned modules remains
+open, with all-user coverage and competent ordinary use laws now stronger
+constraints on any constructive successor. A/R optimization control and menu
+transfer remain unselected alternatives rather than refutations or queued fits.
+The existing independent ResearchCritic is reading original evidence separately;
+its full result diagnosis and my disposition will follow here. No new effect is
+authorized by this provisional interpretation.
+
+
+Reader collection additionally verified all480 main-check file identities; its
+canonical allocated evidence is4,857,856B at the later completed-directory
+measurement. Supported terminal source-GC found no live consumer and removed
+exact reader snapshot`28aceb68e6e24b3aa942e8eb3b2d666e`, reclaiming
+**1,804,644,352 allocatedB**. Together both sequential snapshots reclaimed
+**3,607,920,640B**, with no evidence copy or source archive and both targets gone.
+[Reader deletion witness](../../../../runs/uav_decision_generalization/b02_read_a01/reader-snapshot-cleanup.json).
+Both observers' consumed/stopped native facts and notification errors are retained
+as compact run records. The exact zero-query DM arithmetic source is retained
+in the result record alongside its hash; temporary scratch cleanup follows the
+independent reading. Original actors, all worker raw, both canonical manifests,
+all480main/16audit checks and adverse outcomes remain available.
