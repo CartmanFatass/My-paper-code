@@ -4462,3 +4462,484 @@ question and current lead until a real reassignment. No owner pause is lifted,
 owner is not transferred, and no accepted operation is migrated. Further work
 requires a concrete worthwhile selected continuation; none is automatically
 queued by this completion.
+
+<a id="successor-investment-20261002"></a>
+## 2026-10-02 15:02 UTC — successor investment comparison, before selection
+
+Root assigned the successor native DM `/root/dm_joint_service` one bounded
+decision: compare frozen SET initial/final mean deployment, one direct physical
+action-distribution comparison, and no further purchase of these B03 assets.
+The continuing question remains acquisition/generalization of complete joint UAV
+service at explicit information, experience and compute cost. This entry is
+source/paid-evidence reading and design only: **0 new fits, native transitions,
+model/controller forwards, physics queries or health probes**. The former B03
+operations remain terminal; no observer or old session was restored. Stable lead
+remains `Codex DM (native child)`; Root owns current routing and cross-question
+allocation. No typed/B06 or paused Claude path is changed.
+
+I read the complete startup and Root/three-DM handoff, this direction's final
+handoff, the complete14,011-byte Oracle advice in
+[the successor archive](../../archive/2026-10-02/RESEARCH-three-dm-handoff-and-next-plan.md),
+and the full15,010-byte original B03 result critic and DM response above. Those
+unchanged result reviews are reused; one separate-context registered
+ResearchCritic `/root/dm_joint_service/continuation_critic`, `fork_turns=none`,
+is reviewing this actual investment choice. It receives original sources first,
+then prior interpretations, and owes neither another run nor agreement. Its full
+answer and my disposition will follow here. No additional Pro consultation is
+needed unless that review exposes a distinct unresolved need.
+
+### Evidence that changes the choice
+
+The relevant current published background is RESEARCH topics4,5,8 at
+`c3a31d4033637b423f1bd96ce359afeb1e8fa740`, unchanged in Root's new routing/control
+publication `1ef16a5dc`. The concrete design effects are: retain capable ordinary
+O/B; separate acquisition from deployment and complete individual continuity;
+require a native consequence beyond changed motion/entropy; and count a zero-fit
+observation's complete reading and support cost. A negative B03 purchase does
+not erase the [three R block gains](#b01-independent-disposition) or
+[S0/S1 and Bstar uses](#b02-complete-reading). Those are different decision objects,
+not evidence that either proposed B03 intervention will work.
+
+I re-read the primary B03 worker config/summary/manifest, final reader
+`reading.json`/summary and saved native case extracts. Direct reductions of all
+main rows reproduce O128/128, B11, H/noD/SET final5/6/4 and the121/120/120 windows
+never reaching eight active backhauled users. The final reading still hashes to
+`eab3cdeff541f4849f6086e5752d0ea9ad59b6e29ab7765a9b047bce5d356c69`.
+All135 training rows give62/71/62 real payments. Original native metadata also
+confirms all45 H/noD pre-rollout RNG states equal, not merely their initial state.
+Later policies/experiences differ after the reward intervention. There is one
+fit per arm, no equivalence inference, and no missing-update explanation.
+O's mean world maximum same-user gap remains364.34375ticks despite all windows
+and all50 users served sometime. The original reader failure, copied-vector
+arithmetic repair, all accepted exact comparisons and the failed-reader expense
+remain untouched.
+
+The stronger competing explanation is incomplete acquisition of useful geometry
+and joint configurations under these finite recipes. Lower motion noise may
+change occupancy without producing a scheduled relay arrangement. Most final
+windows never even have q>=8, so a sustain-only repair has little support.
+Mean execution could still reveal a conditional learned capability, but the
+existing sampled traces cannot evaluate that closed-loop counterfactual. Increasing
+raw Gaussian entropy, raw radius and clipping is a source-confirmed co-occurrence,
+not a common-cause diagnosis or an invalid-likelihood proof.
+
+I read the old Claude primary configs, summaries and deterministic holdout
+panels, not only their inherited descriptions:
+
+| Frozen run under `runs/coupled_host_joint_skills_stage1/` | Original source | Complete deterministic coverage | What changed and what it failed to establish |
+| --- | --- | ---: | --- |
+| `b02_fit_SETVb_932201_a01` | `889a7e28ea93cf05cc906adcc22eb3261715ab7a` | .209905 | Tanh box, logstd init−1/clamp[−5,0]; deterministic clip .5/3000 versus old2819, but no strong service recovery; sampled clip remained954/3000. |
+| `b02_fit_SETT_932201_a01` | `186b8649e6ddd90b6d4a009594cbd780131d833d` | .357105 | Target every10ticks plus straight-line executor and changed discount/update scale; below the same-interface random-target .3652. |
+| `b03_fit_SETT_932201_a01` | `76d5d514b76870f610646617103f3ea3b7bc5345` | .34956375 | Same target package with low-level entropy coefficient0; paired difference−.00754125 from SET-T, not recovered service. |
+
+Each was one360k fit. Their primary resource records give11734.065805,
+3867.041483 and6438.930791CPU-s respectively; probes and earlier exposures are
+additional inherited costs. The original dense-task/holdout contract differs
+from B03's sparse registered windows; these are **not B03 counterfactuals**.
+The later accepted correction in Claude NOTES,2026-09-30 02:56, is retained:
+sigma .37→.20 is less noise, not lost precision; logged entropy0 was a reporting
+branch; far-target counts do not prove an unused mean; shared reward was not
+identified as the cause. The evidence makes a generic head/noise cure a weak
+purchase argument without declaring every bounded distribution empirically
+refuted.
+
+### Alternative1: one complete mean-deployment asset-use question
+
+This would ask whether the *particular* final SET checkpoint contains useful
+deterministic closed-loop control beyond its initial checkpoint that its sampled
+deployment did not express. Its contribution would be empirical understanding
+and conditional asset use, not new learning or a general learning-method claim.
+Use only the canonical existing SET initial/final weights, respectively
+`ba2eb18a78abfbe4383d105292a53d81d777d71d6549dfa279c9ab30ff765586`
+and `9be9c88f867b2dc6a8749bda099429a471731ee041fd01b878486139a407f463`.
+No checkpoint search, fine-tuning, H/noD panel or new ordinary fit is needed.
+
+The original32 worlds109220000…109220031 are now outcome-exposed development
+worlds, not fresh confirmation. Execute each checkpoint's Gaussian mean at each
+primitive tick, with the existing recurrent reset, own211-row, held10-tick
+state154/joint rows, actor1637 and public404-byte registration addition. All
+singleton SET skills remain the one available label; no hierarchy sampling
+intervention is introduced. `DiagGaussian.forward(deterministic=True)` returns
+the latent/raw mean. The actual command is its host radial projection, **not**
+the expectation of the clipped stochastic action. Float32 command multiplication
+precedes addition to float64 position, the copied-three-vector norm and strict
+`>1` branch stay, and arena/altitude clipping follows. Density is not an endpoint
+or optimization objective here. The native call still computes critic values;
+omitting their cost would underprice the existing path.
+
+Keep the original world generator/RNG, seed inference at world+51 after
+factory/reset, save actual RNG and recurrent state. Mean execution removes
+Gaussian sampling; its RNG consumption need not equal sampled execution and
+must not be described as a paired exogenous action-noise tape. Environment
+geometry is shared, while closed-loop observations necessarily change. The
+reader must replay this declared mean mode on its own saved inputs and preserve
+the native movement arithmetic; it cannot infer new paths from old sampled
+trajectories. Frozen parameters, normalizers and0optimizer calls are checked.
+
+Core evaluation is64H500=32000native. Including one full correctness mission
+per checkpoint on the existing out-of-estimand audit world109229000 gives
+**66missions/33000native**. One complete reader adds33000 model-team replay
+steps/198000 actor and critic rows **each**,33066 saved-state geometries,
+**10614186** distance/path-loss relations,198000UAV movement ticks and1.65M user
+indicators. O/B and sampled initial/final retain their already-read original
+32-world records without another native panel. No new external labels, fits,
+gradient updates or calibration queries. A new reader/audit implementation is
+necessary; none is started here.
+
+The initial-to-final mean W contrast is the principal acquisition-use estimand;
+the interaction with the already-read sampled initial-to-final contrast locates
+mode dependence for these checkpoints. Read q>=8 arrival and paid windows,
+all-user first/last/longest gaps, never-served users, dense diagnostic service,
+path and full zero-service tails. A meaningful favorable pattern is final mean
+exceeding initial mean in completed windows with more qualifying configurations
+and a complete service capability, not just less motion or fewer clips. Retain
+O's measured four-window capability and B's persistence as lawful use references;
+there is no requirement to beat O to observe acquisition, and no case for
+deploying an inferior neural programme merely because it beats its own start.
+
+Outcome implications would differ: a final-only useful gain retains a narrow
+mean-control asset; a shared initial/final improvement favors a deployment-mode
+benefit without a training increment; continued weakness lowers the value of
+these two checkpoints. A small or mixed gain keeps that uncertainty. None would
+identify entropy during training as the cause, add training replication, rewrite
+B03's sampled verdict, or automatically buy a head fit. This observation is
+neither an admission gate nor a pilot for alternative2.
+
+**Full forecast, not measured throughput:** .5–1CPUh,0GPU, roughly.25–1compute
+wall-hour when available, and4–8agent-support hours across bounded wrapper/reader
+work, numerical/RNG review, checks, collection, full reading and publication.
+The paid SET main mission bodies sum234.366814832+235.457439795CPU-s; those
+469.824254627s exclude construction, write and reader work. The old failed
+reader cost2396.885812s for83000model-team steps plus its other checks; scaled
+only as an uncertain full-reader anchor, it is not new measured deterministic
+throughput. New source/init/reader/audit/support are in the forecast. Existing
+SET raw for64 sampled missions is312529276B plus4449509B metadata; predict
+.3–.6GiB new unique evidence, about1.7GiB temporary source snapshot and modest
+test scratch, approximately2.5–3GiB additional peak disk. Existing checkpoints
+stay at their canonical paths, with no duplicate bulk retention. Source hydration,
+queue/transport and support are not assumed free or included in the computation
+wall forecast. Actual node admission remains a later selected-launch fact.
+
+### Alternative2: direct physical action-distribution package
+
+This would ask whether a different complete sampling/entropy/optimization
+package acquires useful scheduled joint service at the same finite information
+and720000combined training-step exposure. Two fresh SET fits of360k each would
+compare the original Gaussian plus radial projection against one invertible
+radial map `a=z/sqrt(1+||z||²)` of a diagonal Gaussian. Keep one common720-world
+training law, one new32-world endpoint panel, the same registered task and
+actor/critic rights, rewardR/6, per-tick actions and10-tick held snapshots.
+Do not replay old fits or include H/noD. Four distinct initial/final programmes
+plus fresh O/B would receive32 full H500 missions each and one correctness
+mission each:720000+198×500=**819000native**, refining the Oracle's≈820k draft.
+Literal new seed addresses are not allocated because this comparison is not
+selected. The number of independent training instances remains one per package.
+
+The mathematical map has two tangential Jacobian eigenvalues
+`(1+||z||²)^(-1/2)` and one radial `(1+||z||²)^(-3/2)`; hence
+`log pi_A(a)=log pi_Z(z)+(5/2)log(1+||z||²)` and
+`H(A)=H(Z)-(5/2)E[log(1+||Z||²)]`. It covers the open physical unit ball,
+not its exact full-speed boundary, and physical differential entropy is bounded
+above by log(4pi/3). This derivation is not a verified numerical implementation
+or an empirical claim of useful control. Arena/height limits can still alias
+commands. Finite-precision outputs can reach a norm boundary, so the actual
+host projection and same copied-vector arithmetic must remain observable.
+
+A credible implementation would store the latent proposal together with the
+issued action and their change-of-variables identity, avoiding unstable inverse
+recovery near radius1. PPO ratios for a fixed stored latent/action cancel the
+fixed Jacobian; the original latent likelihood under a deterministic host map
+is not thereby declared wrong. Physical entropy needs a correct current-policy
+gradient, not an unweighted stale-action cross-entropy. One explicit option is
+the analytic Gaussian entropy minus a pathwise Jacobian expectation using one
+fresh3-D normal per presented actor row. That is32.4M additional3-D draws for
+the candidate update path, with a separately seeded/saved entropy RNG so those
+draws do not silently move the original rollout stream. Same latent initialization
+and common rollout draws still give different physical initial distributions
+and endogenous trajectories; no bit-identical policy or isolated entropy
+intervention is claimed. The coefficient.05 then weights a different entropy
+functional, another intended package difference. Numerical gradients, support,
+tail stability and RNG ownership would need engineering review before any effect.
+
+The distinctive intermediate conjecture is that the policy need not increase
+unbounded raw radial noise to earn the entropy bonus and can allocate useful
+interior velocities; low host clipping alone is largely built into the map and
+cannot count as success. The consequential prediction would be more q>=8 joint
+configurations, paid windows and complete service beyond its own initialization
+and the newly trained Gaussian reference, including later-window acquisition.
+Geometry, exploration, initialization, entropy and finite optimization change
+together. Old SET-V already changed bounded exploration and transformed entropy;
+the remaining exact ball-versus-box distinction has no current evidence of
+being the important service bottleneck. This is a legitimate untested package
+conjecture, with a weak marginal purchase case, not an obvious repair.
+
+Full work would include405000 actor/critic optimizer steps,64.8M actor and
+critic agent-tick presentations **each**,4.32M native training actor and critic
+rows each,66000 frozen model-team steps and their equal reader replay,
+396000 actor/critic rows each per frozen pass,31842558 reader distance relations
+and40.95M user-indicator reads. No external teacher labels, online planner
+search or experimental LLM query is required; ordinary O/B decisions and
+722matching comparisons/O mission remain real work. Training RF need not be
+recomputed at every saved tick for this package-use question, consistent with
+the old reader scope, but ledger/movement/updates and full frozen physics are read.
+
+**Full forecast:**8–14CPUh,0GPU, about2–5compute wall-hours with the inherited
+four-Torch/one-BLAS-thread path, plus12–20agent-support hours; the new density/
+gradient/reader overhead is unmeasured. Actual paid B03 SET collection/update
+sum is12632.806980858CPU-s per360k fit, not the old macro1.79h rate. Two such
+fits already imply7.018CPUh before the revised head, all endpoints, reader,
+source/setup and checks. Predict1.5–3GiB unique outputs plus about1.7GiB source
+snapshot and bounded test scratch, roughly3.5–5.5GiB additional peak disk.
+The declared comparison could retain a useful acquired capability on native
+gain, while only changed entropy/radius without q>=8/W improvement would end
+this distribution-package purchase. Neither outcome isolates entropy cause;
+an adverse or inconclusive package does not refute joint-service learning.
+There is no pre-selected sequence of another head or another seed.
+
+### Alternative3 and provisional DM investment judgment
+
+My provisional recommendation is **no new purchase of these B03 checkpoint or
+action-distribution alternatives**. This does not infer their unmeasured scores.
+The mean comparison is scientifically coherent and much cheaper in CPU, but its
+most likely consequential decisions are already available: do not deploy these
+sampled finals, retain O, and do not buy a generic bounded-head rescue. A positive
+mean result could add a narrow acquired-control asset; the source and paid
+traces do not currently supply a specific positive indication that it will do
+so, while the older deterministic/low-noise endpoints weaken that expectation.
+No planned consumer presently needs these two checkpoints under a new use law.
+That makes4–8support hours and a full development-panel reading poor marginal
+value compared with retaining the unresolved possibility. This is a value
+judgment, not a claim that information without adoption value is worthless.
+
+The two-fit alternative is more expensive and still concentrates on one
+implementation symptom after bounded-speed/target/no-entropy revisions under
+nearby contracts did not produce strong service. Its distinctive physical-entropy
+prediction is well defined, but its native acquisition prediction presently
+rests on conjecture beyond those adverse facts. The proposed pair could answer
+that conjecture; I do not judge that answer worth8–14CPUh and12–20support hours
+now. I do not require a mean-deployment gate, toy success or causal proof to
+reach that decision. A future demonstrated need for a transferable joint
+controller or a new native-predictive premise may justify a different purchase;
+none is manufactured to keep this asset family active.
+
+Stopping this purchase leaves0prospective fits/native/model/RF work and no
+producer to await. It preserves the open parent question, O/B and R/S abilities,
+all scarce rewards and local multihop positives, and every adverse result.
+Sunk costs remain: B03 threefits/1196000native/615600optimizer steps and
+14.544662177measured DM CPUh, with separate review/unmeasured support; A/R sixfits/
+1736000native/.814449CPUh/.03709reservedGPUh; B02 zero-fits/126976native/
+306.282345CPU-s; earlier Claude recipe costs retain their own disjoint ledgers.
+They are neither reset nor the reason to spend again. Root can compare this
+decline with its distinct fixed-data learning and communication questions;
+those other tasks are not a technical dependency of this one.
+
+The two timed remote reads of already-paid JSON used.094517782 and.414156379
+CPU-s respectively; other local reading, source inspection, arithmetic and
+design/review support were not comprehensively metered and are not zero. No
+new implementation, snapshot, bulk copy or scratch was created. This is the
+pre-review value judgment, not a final scientific disposition; the one critic's
+full recommendation and any dissent are preserved below before publication.
+
+
+<a id="successor-investment-review-20261002"></a>
+## 2026-10-02 15:18 UTC — original independent investment review
+
+Registered ResearchCritic `/root/dm_joint_service/continuation_critic` returned
+the following complete answer in its separate context. Its material dissent is
+preserved verbatim; it was against the provisional DM no-purchase judgment
+above. The critic performed source/paid-evidence reading only, no experiments
+or record edits. Original answer follows.
+
+````text
+I recommend **revising the no-purchase decision to select one complete frozen SET initial/final mean-deployment comparison: 64 scored H500 missions plus two audit missions, totaling 33,000 native steps and zero fits.** Decline the fresh two-fit action-distribution package.
+
+This is a standalone question about the paid checkpoints’ behavior. Its result would not trigger a head fit, reopen the original B03 purchase, or alter B03’s sampled-deployment verdict.
+
+I received no inherited DM or Root conversation. The assignment supplied the alternatives and factual summaries; I reconstructed the primary records and source semantics before reading the complete prior interpretations, Oracle answer, and DM’s new no-purchase recommendation. That establishes separate-context review, not freedom from model bias.
+
+**The supported diagnosis remains narrower than failure to acquire any useful control.**
+
+The primary evidence supports failure of the three tested sampled deployment programs to establish competitive joint-window capability:
+
+- O completed 128/128 windows; H/noD/SET final completed 5/6/4, versus initial H/noD 5 and SET 2.
+- H/noD/SET final never reached eight active backhauled users in 121/120/120 windows. The deficit usually precedes successful sustained service.
+- Training nevertheless produced 62/71/62 payments, substantial parameter movement and the declared updates. Neither absent rewards nor missing learning execution explains the result.
+- O establishes lawful complete-window opportunity. Its 364.34375-tick mean world maximum same-user gap also preserves the distinction between this once-only objective and continuous user service.
+
+These facts agree with the [complete reading](/home/fires/hmasd-wsl/runs/uav_decision_generalization/b03_joint_window_read_a02/reading.json). I retain the original review’s checked H/noD pairing: all 45 pre-rollout RNG states matched; later policies and experiences differed after the reward intervention. This remains one training instance per arm, without equivalence or population-ranking evidence.
+
+SET’s raw Gaussian entropy increased from 4.356 to 9.205; final sampled commands incurred approximately 2,995.53 clipping events per 3,000 UAV-ticks. The source confirms an unbounded Gaussian followed by native radial projection. These observations do **not** establish an incorrect PPO likelihood or identify the cause of failure. They do establish that evaluating the projected raw mean would implement a materially different closed-loop program.
+
+The strongest adverse reading is substantial: ordinary persistence already performs better than the sampled learners; training payments did not develop into broad competence; SET world `109220000` provides a complete zero-service adverse case. The strongest positive remains limited but real: SET world `109220028` achieved a paid joint-service segment, and fitted parameters changed under actual task experience. Neither pattern tells us what the frozen mean program does.
+
+**My consequential objection concerns the value assigned to the mean comparison.**
+
+The DM correctly acknowledges that a final-only mean-policy gain could reveal acquired control hidden by sampled execution. I disagree that the absence of a current downstream checkpoint consumer makes this question insufficiently valuable at **0.5–1 CPU-hour and 4–8 support hours**.
+
+The empirical distinction is itself central to the assigned question:
+
+1. Did this training instance produce useful control recoverable by a simple, fixed deployment rule?
+2. Or would quieter execution benefit initialization similarly, with little useful training increment?
+3. Or do both frozen mean programs remain weak?
+
+The initial checkpoint makes this more informative than merely trying deterministic deployment on the final checkpoint. Existing O/B programs provide complete-task references. The study preserves the actual six-agent joint configuration, recurrent control and twenty-tick service requirement.
+
+The nearby adverse experiments substantially weaken a generic noise-reduction repair story. I checked deterministic coverage of `.209905` for SET-V-b, `.357105` for SET-T-b, and `.34956375` for its no-entropy revision, against the target floor’s holdout `.365165`. Low clipping and lower sigma did not establish useful recovery. However, those experiments neither execute these B03 means nor estimate this initial/final deployment-mode interaction. Treating their negative implications as sufficient to decline this much smaller, directly discriminating observation gives them too much influence across changed contracts.
+
+I cannot assign a calibrated probability to a favorable result. My recommendation is an investment judgment: this bounded distinction is worth the full stated price even without immediate adoption. It is not justified by sunk costs, an obligation to obtain a positive, or a claim that deterministic control is likely to succeed.
+
+**The smallest complete observation I recommend is already close to the DM’s alternative 1.**
+
+Use only the canonical SET checkpoints:
+
+- Initial: `checkpoints/SET/initial.pt`, SHA256 `ba2eb18a78abfbe4383d105292a53d81d777d71d6549dfa279c9ab30ff765586`.
+- Final: `checkpoints/SET/final.pt`, SHA256 `9be9c88f867b2dc6a8749bda099429a471731ee041fd01b878486139a407f463`.
+
+Score both on all original worlds `109220000…109220031`. These are now outcome-exposed development worlds. Use `109229000` once per checkpoint for correctness auditing, excluded from the estimand. Reuse the existing sampled SET and O/B endpoints without new ordinary missions.
+
+The principal estimand is
+
+\[
+\Delta_{\rm mean}=\frac1{32}\sum_w
+[W(\mathrm{SET}_{final,mean},w)-W(\mathrm{SET}_{initial,mean},w)].
+\]
+
+Report the corresponding deployment-mode interaction against the existing sampled initial/final difference, which is `+0.0625 W/mission`. This is a conditional comparison of these artifacts and worlds. Descriptive paired-world uncertainty cannot supply independent training replication.
+
+Preserve the complete per-world reading: windows completed, windows ever reaching \(q\ge8\), qualified-run lengths, later-window behavior, all-user gaps including leading/trailing censoring, never-served users, dense service diagnostic, travel and zero-service tails. Do not select worlds, checkpoints or alternative mean transformations after exposure.
+
+The implementation semantics are specific:
+
+- Use the original `DiagGaussian` raw mean returned by `deterministic=True`. The executed command is its native projection, **not** the expectation of the projected stochastic command.
+- Preserve the copied three-vector norm, strict `>1` projection branch, float32 velocity arithmetic before addition to float64 positions, and subsequent arena/altitude clipping.
+- Preserve recurrent reset, current observation, ten-tick held joint snapshot and all existing information rights. I checked that SET’s saved configuration has `n_Z=n_z=1`, no high-level training and the ordinary fixed-clock route. Changing deterministic mode introduces no alternative skill choice.
+- Retain the original world construction and inference seeding after factory/reset. Record actual RNG state; do not claim identical sampling-noise consumption across deployment modes. The deterministic switch can change draw consumption even where categorical support is singleton.
+- Keep parameters and normalizers frozen, record zero optimizer calls, and retain the existing critic/value computation in the cost.
+- Replay the new trajectories in the declared mean mode. Old sampled trajectories cannot provide the counterfactual observations or recurrent histories.
+
+The current worker and reader hard-code sampled execution. The purchased engineering work therefore includes a bounded new evaluation/reader path with source, checkpoint and immutable-state checks. It is not a restart of an old operation.
+
+**The prospective prediction and consequences should remain explicit.**
+
+The constructive conjecture is that final mean deployment forms more qualifying joint configurations than both its own initialization and its sampled deployment, and converts that improvement into paid service. Reduced clipping or motion alone supplies no support.
+
+| Complete outcome | Scientific and investment consequence |
+|---|---|
+| Final mean shows a useful initial-to-final gain, including meaningful scheduled service | Retain a conditional acquired mean-control asset. This changes the asset judgment; it does not establish entropy causality, generalization or an HMASD advantage. |
+| Initial and final both improve, with little resolved training increment | Retain an execution-mode benefit as the main interpretation. Ordinary persistence remains a strong explanation; no learner continuation follows automatically. |
+| Both remain weak, or gains are isolated and accompanied by substantial service losses | End this checkpoint-use purchase. Preserve local positives and adverses; do not automatically proceed to a head fit. |
+| Technical failure prevents the complete observation | Record missing evidence and actual expense. Do not count it as a scientific negative. |
+
+O need not be beaten to observe acquired capability. Adoption is a separate judgment involving its much stronger complete service, travel and computation. Conversely, a few favorable worlds should not be promoted into useful complete control.
+
+**The full cost is material and should accompany selection.**
+
+I directly read canonical saved metadata and verified:
+
+- SET initial/final 32-world mission bodies: `234.366814832 + 235.457439795 = 469.824254627 CPU-s`.
+- Their saved raw/metadata: `312,529,276 + 4,449,509 bytes`.
+- SET’s original 45 training collections and updates: `1,590.435664233 + 11,042.371316625 CPU-s`.
+
+The first number excludes construction, writing and the reader. It is not the proposed study’s full price.
+
+The recommended scope totals **66 missions, 33,000 native steps, zero fits/updates/external labels**. Its complete reader adds 33,000 model-team replay steps, 198,000 actor rows and 198,000 critic rows, 33,066 physical states, 10,614,186 distance relations and 1.65 million user-indicator readings. Native inference is additional to those replay counts.
+
+The DM’s full forecast—**0.5–1 CPU-hour, zero GPU, 4–8 support hours, 0.3–0.6 GiB new evidence and roughly 2.5–3 GiB additional peak disk including the temporary source snapshot**—is a reasonable selection estimate grounded in the paid records. It remains unmeasured for the new implementation. Queue, source hydration and incompletely metered support must not become zero-cost claims. No health pilot is needed to make this investment choice; actual node admission remains an execution requirement after selection.
+
+B03’s existing three fits, 1,196,000 native steps, 615,600 optimizer steps and approximately 14.544662 measured CPU-hours remain charged, including the failed reader. Earlier A/R, S and Claude costs retain their separate ledgers.
+
+**I recommend declining the fresh action-distribution pair.**
+
+The radial-map density formula is algebraically correct in three dimensions: the Jacobian determinant is \((1+\|z\|^2)^{-5/2}\). The resulting policy covers the open unit ball and changes physical exploration, initialization, entropy and optimization geometry together. It does not isolate clipping or prove the old likelihood invalid.
+
+The proposed **819,000-native-step, 405,000-update, two-fit** comparison could test a legitimate package conjecture. Its **8–14 CPU-hours and 12–20 support hours**, plus unverified entropy-gradient, numerical and reader work, are a substantially larger purchase. The old bounded-speed and no-entropy adverses lower its marginal value, while the exact ball-versus-box distinction has no demonstrated native importance. I would decline this pair even if no mean observation were selected. The mean observation is therefore not its admission gate.
+
+I also do not infer that Root’s bank or communication alternatives are better simply because they were ranked higher in the Oracle answer. Their proposed acquisitions were outside this review’s primary-source verification.
+
+My checks covered the specified worker/config/manifest and complete-reader records, direct reductions of consequential endpoints, window-failure decomposition and training exposure, selected positive/adverse native-case extracts, critical source/hash bindings, frozen inference semantics, the original reader failure and repaired source, the three specified Claude primary configurations/summaries/holdout panels and corrected interpretation, the full original critic/disposition, complete handoff and Oracle archive, relevant current RESEARCH passages, and the new DM comparison. I reused the prior independent raw reconstruction for unchanged portions. I did not reread every canonical raw trajectory, rerun the reader, reconstruct optimization, load checkpoints into models, or validate a new implementation. No experiment or record edit occurred.
+
+Root should resolve this specific investment disagreement in the existing record. This review supplies a recommendation, not authorization to execute.
+
+**MATERIAL_DISSENT: yes — against the DM’s proposed decline of the single complete frozen SET mean-deployment observation.** The direct basis is the severe sampled projection, source-confirmed distinction between sampled and mean execution, the available initial/final control and O/B references, and the verified cost anchors. There is no dissent over B03’s completed reading, declining the fresh two-fit package, or preserving the broader learning question without promising a repair.
+````
+
+<a id="successor-investment-disposition-20261002"></a>
+### DM response and revised recommendation for Root allocation
+
+**Revised recommendation: purchase the one complete frozen SET initial/final
+mean-deployment observation; decline the fresh two-fit physical-action package.**
+I read the full answer and accept its correction to my investment judgment.
+The original `MATERIAL_DISSENT: yes` remains, rather than being rewritten as
+initial agreement. I have supplied the disagreement to Root and return this
+revised recommendation for the actual cross-question allocation/resolution.
+No new effect is selected or executed by this entry, and no implementation or
+health pilot has begun. This is the assigned substantive design boundary, not a
+new per-run approval rule.
+
+The changed judgment is about information value, not a predicted positive score.
+My provisional decline put too much weight on absence of a present checkpoint
+consumer and on the older dense-contract adverses when valuing this specific
+initial/final question. They still argue against buying a generic noise/head
+rescue and prevent treating reduced clipping as a sufficient native prediction.
+They do not answer whether these paid weights contain a useful mean-control
+increment. A complete acquisition-versus-execution distinction is itself useful
+empirical understanding within this assigned question. At the stated price, I
+now favor obtaining that distinction rather than leaving it unresolved. There is
+no new empirical evidence that mean execution will succeed and no calibrated
+probability claim. Adviser agreement after reconsideration is not new data.
+
+The recommended comparison remains exactly alternative1 above: the fixed two
+checkpoint hashes, all32 original now-exposed development worlds plus one audit
+world per checkpoint, the original sparse joint-window contract, lawful paid
+O/B and sampled initial/final references, full saved-trajectory reader and no
+fit. Its testable constructive prediction is final mean acquiring more q>=8
+configurations and paid service beyond both initial mean and final sampled
+execution. The principal acquisition-use difference is final mean minus initial
+mean; the mode interaction subtracts the observed sampled increment2/32 =
+.0625W/mission. All per-world losses, user gaps and service tails remain in the
+reading. Neither beating initialization nor fewer clips alone warrants adoption.
+These32 worlds cannot become fresh confirmation, and their uncertainty cannot
+replace independent training instances.
+
+For avoidance of any undercount, the66 native missions require33000 model-team
+steps and198000 actor/critic rows **each**, in addition to the equal complete
+reader replay: **66000 total model-team steps and396000 actor rows plus396000
+critic rows across native inference and reader**. The stated33066 physical
+states/10614186 relations/1.65M user indicators are the independent reader's
+work; actual native environment work is also present in the33000 transitions.
+The full forecast remains.5–1CPUh,0GPU,4–8support hours,.3–.6GiB unique evidence
+and2.5–3GiB additional peak disk, with source/init/reader/audits/checks included
+and queue/hydration/support uncertainty explicit. No new throughput was measured.
+The critic independently corroborated the paid metadata anchors; its support
+cost is separate and incompletely metered, not a zero-cost experiment.
+
+A useful final-only mean gain would retain a conditional acquired asset and
+change the checkpoint-use judgment. A common initial/final gain would principally
+support an execution-mode benefit. Weak, mixed or heavily adverse service would
+end this checkpoint-use purchase without erasing local positives or the parent
+learning question. Technical missingness would remain missingness. None of
+these outcomes buys a head fit, forces a replication or changes B03's sampled
+verdict; any materially new investment needs its own reason and price. The
+819000-native/two-fit alternative is declined independently of this observation.
+
+Root owns the current allocation choice; I retain continuity of the broader
+joint-service question. No bank or communication task is a technical dependency,
+and this recommendation does not rank them without their actual evidence. A
+Root decline of this purchase would leave no producer or recurring checkpoint
+review. A newly selected substantive question would be a distinct choice, not
+work manufactured to maintain a DM count.
+
+The current shared-background topics4/5/8 remain accurate: this review changes
+an investment judgment and exposes no new reusable empirical result or scope
+correction, so I do not manufacture a background edit. Only this direction's
+standing is updated. Original useful code, compact readings, unique bulk evidence
+and adverse outcomes remain at their canonical locations. This bounded design
+work created no source snapshot, scratch or new bulk; actual deleted targets:
+**none; disk bytes reclaimed:0**. There is no cleanup tool blocker or inherited
+operation requiring observation. The old B03 cleanup remains separately recorded.
+
+A source check on the review’s entropy numbers confirms they are recorded
+optimizer-loss averages for SET rollout1 and rollout45
+(4.3561312556266785 and9.205397963523865), not separately measured frozen
+initial/final policy entropies. This leaves the co-occurrence diagnosis and
+recommendation unchanged.
