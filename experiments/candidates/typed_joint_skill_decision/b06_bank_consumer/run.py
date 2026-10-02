@@ -278,13 +278,21 @@ def main(argv=None):
     args = parser().parse_args(argv)
     from scripts.hmasd_admission import require_admission
     admission = dict(require_admission(__file__, direction=c.DIRECTION))
-    spec = json.loads(os.environ.get("HMASD_ADMISSION_V1", "{}"))
-    if (Path(spec["source_root"]).resolve() != ROOT or Path(spec["output_root"]).resolve() != args.out.resolve()
-            or admission["sha"] != args.launch_sha):
-        raise ValueError("exact admitted source/output/launch identity required")
-    launch = json.loads((args.out / "launch-manifest.json").read_bytes())
-    if launch["sha"] != args.launch_sha or launch["command_sha256"] != admission["command_sha256"]:
-        raise ValueError("actual launcher identity mismatch")
+    # require_admission consumes its single-use environment. Bind its returned grant
+    # to the durable launch and actual runner; never read the consumed specification.
+    out = args.out.resolve(strict=True)
+    launch = json.loads((out / "launch-manifest.json").read_bytes())
+    runner_identity = c.process_identity(os.getpid())
+    if (launch["sha"] != args.launch_sha or admission["sha"] != args.launch_sha
+            or launch["command_sha256"] != admission["command_sha256"]
+            or Path(launch["source_root"]).resolve() != ROOT
+            or Path(launch["output_root"]).resolve() != out
+            or launch["direction"] != c.DIRECTION or admission["direction"] != c.DIRECTION
+            or admission["child_pid"] != runner_identity["pid"]
+            or any(launch["runner_process"]["identity"][key] != value for key, value in runner_identity.items())
+            or launch["process"]["identity"]["pid"] != admission["parent_pid"]
+            or admission["parent_pid"] != os.getppid()):
+        raise ValueError("actual admitted runner/source/output/launch identity mismatch")
     binding = c.bound_json(args.input_manifest, args.input_manifest_sha256)
     limits = c.investment(binding.get("investment"))
     paid_preparation = c.preparation_cost(binding.get("preparation_cost"), ROOT)
@@ -304,7 +312,7 @@ def main(argv=None):
                   "prior_preparation_cost": paid_preparation}
     shared = billing.Shared(args.out / "shared-counters.bin", create=True)
     bill = billing.Bill(shared, deployment)
-    parent = {"pid": os.getpid(), "identity": c.process_identity(os.getpid()), "admission": admission, "source_root": str(ROOT), "out": str(args.out),
+    parent = {"pid": os.getpid(), "identity": runner_identity, "admission": admission, "source_root": str(ROOT), "out": str(args.out),
               "launch_sha": args.launch_sha, "source_binding": {key: binding[key] for key in
                     ("scientific_source_sha", "scientific_input_sha256", "frozen_sources")},
               "investment": binding["investment"], "deployment": deployment,

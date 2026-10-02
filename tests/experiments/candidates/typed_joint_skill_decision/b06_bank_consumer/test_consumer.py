@@ -530,3 +530,47 @@ def test_paid_preparation_binding_and_cap_scope(tmp_path, monkeypatch):
                 **prep, "cpu_limit_scope": "inside_consumer_cpu_limit"}})
     finally:
         shared.close()
+
+
+@pytest.mark.parametrize("wrong_runner", [False, True])
+def test_consumed_admission_reaches_pending_bank(tmp_path, monkeypatch, wrong_runner):
+    # Real stdlib input/hash gates plus an opaque single-use grant; no launcher/worker.
+    import types
+    out = tmp_path / "out"
+    out.mkdir()
+    identity = {"pid": run.os.getpid(), "start_ticks": 77}
+    grant = {"sha": "a" * 40, "command_sha256": "b" * 64, "direction": c.DIRECTION,
+             "child_pid": identity["pid"], "parent_pid": run.os.getppid()}
+    launch = {"sha": grant["sha"], "command_sha256": grant["command_sha256"],
+              "source_root": str(ROOT), "output_root": str(out), "direction": c.DIRECTION,
+              "runner_process": {"identity": {**identity, "start_ticks": 78 if wrong_runner else 77}},
+              "process": {"identity": {"pid": grant["parent_pid"]}}}
+    (out / "launch-manifest.json").write_bytes(c.encoded(launch))
+    prep_file = tmp_path / "already-paid.json"
+    prep_file.write_bytes(c.encoded({"synthetic_preparation_cpu": 5.}))
+    prep = synthetic_preparation()
+    prep["evidence"] = [{"path": str(prep_file.relative_to(ROOT)), "sha256": c.sha(prep_file),
+                         "bytes": prep_file.stat().st_size}]
+    binding = {"investment": {"selected": True, "limits": {"cpu_seconds": 300., "gpu_child_seconds": 300.,
+               "wall_seconds": 300., "disk_bytes": 20 * 1024 ** 2}}, "preparation_cost": prep,
+               "scientific_source_sha": c.SCIENCE_SHA, "scientific_input_sha256": c.SCIENCE_INPUT,
+               "frozen_sources": c.FROZEN_DIGESTS, "bank": {"status": "pending"}}
+    input_path = tmp_path / "input.json"
+    input_path.write_bytes(c.encoded(binding))
+    monkeypatch.setenv("HMASD_ADMISSION_V1", c.encoded({"single_use": True}).decode())
+    calls = []
+    def admitted(path, *, direction):
+        calls.append((path, direction))
+        assert run.os.environ.pop("HMASD_ADMISSION_V1")
+        return dict(grant)
+    monkeypatch.setitem(sys.modules, "scripts.hmasd_admission", types.SimpleNamespace(require_admission=admitted))
+    monkeypatch.setattr(c, "process_identity", lambda pid: dict(identity))
+    argv = ["--out", str(out), "--seed", "0", "--launch-sha", grant["sha"],
+            "--input-manifest", str(input_path), "--input-manifest-sha256", c.sha(input_path)]
+    expected = ValueError if wrong_runner else c.PendingCertification
+    message = "runner/source/output" if wrong_runner else "B05 complete producer certification"
+    with pytest.raises(expected, match=message):
+        run.main(argv)
+    assert len(calls) == 1 and "HMASD_ADMISSION_V1" not in run.os.environ
+    assert list(out.iterdir()) == [out / "launch-manifest.json"]
+    assert "torch" not in sys.modules
