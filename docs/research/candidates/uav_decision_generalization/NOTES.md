@@ -1033,3 +1033,185 @@ including its Git worktree registration. Its measured allocated usage fell
 run evidence currently occupies37,875,712learning +180,060,160native +12,705,792
 reader =230,641,664allocated bytes; inherited B01 assets remain separately owned
 and unchanged. Local compact records and final scratch cleanup are accounted next.
+
+<a id="b01-independent-result-review"></a>
+### B01 original independent result review
+
+Root reused the original independent ResearchCritic context
+`/root/next_study_review`, without creating a duplicate reviewer. Root verified
+actual turn`01a0fa5f-3e85-7d52-ba1b-4c4571637547`as`gpt-6-astra/max`and supplied
+the mechanically extracted complete answer. Original UTF-8 payload:9,512bytes,
+SHA256`197e667dcf91fd5ed511d67f46bb488a3f66747a1a1af712a905c66485d3d0d1`.
+The following original text is unmodified. Its further42complete trajectory reads,
+54reset-identity checks and individual-user examples are independent saved-data
+reading, with0model/optimizer/native/static calls; helper arithmetic/support CPU
+was not metered into the scientific runner bill.
+
+<!-- BEGIN ORIGINAL B01 INDEPENDENT RESULT REVIEW -->
+**建议保留 R 的有限数据泛化能力，结束本次 A/R 固定购买；不把 A 作为几何增量方案继续扩展，也不把 R 升格为静态规则的替代品。** 下一项若继续研究结构作用，我优先比较“训练拟合程度受控的普通 A”与冻结 R，而不是直接给 R 加训练、数据或种子。
+
+本次沿用独立审稿上下文。收到的是任务、证据入口和原方案；我先重建合同、源码及结果，再读 DM 的完整解释。当前 DM 判读与我独立重建的主要事实一致。
+
+我核对了三个阶段的终态、输入摘要／manifest、15 项方向及原生源码绑定；对保留的 fit、fresh 和 reader manifest 文件做了完整字节校验。独立重算三块共 **69 条配对世界向量、81 条原生指标差向量**，核对全部 **4,992 个已保存 CPU/GPU argmax**，检查六条 512-update 链的连续性和有限非零梯度记录。另外读取 **10 个正反世界的 42 条完整 H500 原始轨迹**，重算覆盖、奖励、零服务区间，并从原生用户 mask 检查个体服务反例；另核对六个世界共 54 条轨迹的 reset 身份一致。没有运行模型、优化器、控制器、静态评分或原生环境。其余轨迹的全量重建仍属于已完成 reader 的范围；优化器轨迹没有被独立重演。[冻结合同](/home/fires/hmasd-wsl/docs/research/candidates/uav_decision_generalization/NOTES.md:544)、[完整结果](/home/fires/hmasd-wsl/runs/uav_decision_generalization/b01_read_a01/summary.json)。
+
+主要结果值得保留，但精度有限：
+
+| 新世界完整 C̄_bh | Block 1 | Block 2 | Block 3 |
+|---|---:|---:|---:|
+| A | .612607 | .603996 | .601403 |
+| R | .654181 | .639110 | .607658 |
+| 冻结 N | .608768 | .612851 | .593754 |
+| 训练选定 fixed | .634038 | .612774 | .606018 |
+| static | .718019 | .710429 | .697643 |
+| full planner | .782721 | .779728 | .777759 |
+| **R−A** | **+.041575** | **+.035114** | **+.006254** |
+| **R−fixed** | **+.020143** | **+.026336** | **+.001640** |
+
+三块 R−A 均值为 **+.027648，描述性 df2 t95 区间 [−.019071,+.074367]**。预定的三块同方向预测兑现；这不等于已经精确建立重复训练的总体优势。R−A 的升／同／降世界数为 **58/43/27、49/50/29、36/50/42**，三个中位数均为零，第三块甚至有更多下降世界。128 世界的块内区间条件于各自拟合，不能把 384 世界当成学习复制。
+
+R−N 与 R−fixed 的三个点估计也都为正，但三块区间同样跨零，分别约 **[−.010914,+.067965]**、**[−.015880,+.047959]**。因此合理结论是：**这三个独立训练／数据块显示了可保留的条件泛化增量，幅度和稳定性仍未定。**
+
+训练与新世界的差别清楚地限制了机制解释：
+
+| 菜单 regret | Block 1 | Block 2 | Block 3 |
+|---|---:|---:|---:|
+| A，训练 | .000476 | .000312 | .000607 |
+| A，新世界 | .106791 | .106808 | .097551 |
+| R，训练 | .045676 | .053486 | .057535 |
+| R，新世界 | .065216 | .071694 | .091297 |
+| N，新世界 | .110630 | .097953 | .105200 |
+
+A 几乎记住训练排序，却没有稳定超过旧 N；确定性距离展开这个包没有解决原来的泛化缺口。R 的训练拟合差得多，新世界表现反而较好，支持有用的结构／正则化包这一解释方向。**共享计算、聚合方式、有效自由度、深度、初始化和有限优化仍未分离。** 参数总数也不能解释为功能容量比，尤其 A 有大量固定身份输入。
+
+两臂相对自身初始化都学习了有用选择，但不能用初始化到终点的增量大小比较架构：R 的第一、三块初始化几乎偏向很差的 plain 构造，第二块初始化则几乎总选较好的 slot5。更强的正证据是 R 对训练选定 fixed 的增量和实际有益偏离，而不是恢复了一个差初始化。
+
+普通参照对用途判断仍有决定性意义。static 在 **346/384** 世界达到菜单最大值，三块 regret 仅 **.001378/.000375/.001311**；travel 与它非常接近。R 对 static 的均差为 **−.063838/−.071319/−.089986**。这不是未知未来 Q 泄漏：static 使用合同允许的已知无线规律，reader 未重新查询它，而是核对冻结来源和保存值。full planner 使用更宽的构造搜索，是另行付费的尺度参照，其差距不能全部解释成八菜单内的学习排序误差，也不是逐世界最优保证。
+
+原生正例排除了“R 只是复制 fixed，所以没有学到条件选择”的解释：
+
+- **106130087：**R 选 slot5，C̄_bh **.75676**；A/N/fixed 为 **.38360**。
+- **106230071：**R 为 **.80136**，fixed 为 **.42500**。原始用户 mask 显示，R 留下 **2** 名全程从未获得 backhaul 的用户，fixed 为 **19**。
+- **106330012：**R 为 **.77828**，fixed 为 **.38380**，A 为 **.69576**。
+
+但同样存在真实、严重的错误选择：
+
+- **106330029：**R 选 plain slot1，C̄_bh **.00212**，有 **474** 个全队零覆盖步、最长连续 **430** 步，最后 100 步均为零；A/N 为 **.63028**，fixed/static 为 **.65560**。R 有 **45/50** 名用户全程未获 backhaul，fixed 为 **8/50**。
+- **106330110：**R 为 **.01388**，**447** 个零覆盖步、最长 **435** 步；A/N/static 为 **.65540**。
+- **106130014：**R 为 **.62052**，A/static 为 **.88064**；从未获 backhaul 的用户数为 R **13**、A **2**。
+
+这些个体数字来自我对事后选取案例的原始 mask 读取，是反例与正例的补充，不是全 384 世界的新公平性推断。更一般地，团队从未归零不能保证每位用户持续获服务。
+
+其他端点也不支持全面占优。R−A 契约奖励为 **+.019857/+.023172/−.000553**，前端容量为 **−2.227/+13.430/−8.804 Mbps**。第三块 R 相对 N 平均多 **8.375** 个零服务步，最长零区间均值多 **7.789** 步。覆盖增益不能覆盖这些代价；本宿主也没有提供电池安全结论。
+
+数值标记不应删除，也没有证据用它们解释上述错误。共有 **75 个端点上下文、83 个 logit 分量**超出冻结容差：A 44 个上下文、N 31 个、R 为零。全部 **4,992 次 CPU/GPU 选择一致**，标记上下文最大绝对差约 **1.240×10⁻⁵**。原生结果按已保存 GPU 选择读取，未放宽容差；R 的两项严重失败不是 CPU/GPU 选择不一致。
+
+完整成本低于原预算，但并非免费：
+
+- **6 fits、3,072 updates、98,304 训练上下文**；复用原训练标签，新增训练标签和 LLM 前向均为零。
+- **1,736,000 原生步、786,045 静态查询、9,984 端点及 reader 上下文**。
+- 已计工程和科学链 **2,932.017 CPU 秒，即 .814449 CPU 小时**；GPU 预留窗口 **133.532 秒**，不是 GPU 核心活动时间。
+- 新鲜端点的输入构造加 GPU scorer 片段约为 A **1.323 ms**、R **2.753 ms**、N **.510 ms**。它们不含共同候选构造和完整部署成本，不能据此宣布优于 static 的净计算收益。
+- 支持工作仍未完整计时。DM 最新清理记录保留一份约 **230.64 MB allocated** 的三阶段证据；该目录分配及删除测量是 DM 的实测记录，我没有重复清理。
+
+最强的简单竞争解释是：**R 在当前有限训练量和 512 次更新下形成了较保守、较不易记忆样本的选择器；优势不一定需要三层消息传递所声称的关系计算。** R 更常选择强的 relay 构造，同时仍做有益和有害的场景选择。固定规则已经控制了“只学一个好 slot”的简单解释，但尚未控制普通 MLP 的训练程度／正则化解释。这是下一项比较应改变的地方。
+
+我的方向建议是：
+
+1. **保留三个 R 终点、完整正反证据及有用实现，结束本批次。** A 相对 N 没有建立稳定几何增量，不按原配方追加；R 的有限泛化能力继续作为后续参照。静态优势限制部署用途，不取消这项学习结果。
+2. **不优先购买第四块、更多 R epochs、更多层或更多标签。** 这些会增加投入，却不直接区分当前最强解释。
+3. 若继续回答“结构为何有用”，先构造一个有界普通对照：复用相同 A 输入、初始化和数据顺序，按**预先固定的训练拟合规则**选择较早终点，例如每块首次达到该块 R 最终训练 soft-CE 的 epoch，最多原来的 64 epochs；比较它与冻结 A-final/R-final、fixed/static。它检验普通有限优化是否足以获得类似泛化，仍不是纯结构因果实验。若较早 A 接近 R，应优先保留更简单、较便宜的方案；若 R 仍有完整优势，才增加继续投资共享表示的理由。
+4. 这项后继目前没有闭合监测前向、reader、支持成本和新评价面板，**尚不构成选定运行**。现在的 384 世界已经曝光，只能作为后续开发证据；不能重新包装成该修改的确认集。DM 可先闭合这一具体比较，也可依据完整机会成本选择不购买，不需要为了维持三个 DM 而立即增加效果实验。
+
+这结束的是当前 A/R 配方的购买，不是广义决策辅助、学习或共享表示问题的责任。
+
+**MATERIAL_DISSENT: no。DM 的主要事实与条件性保留判断得到独立证据支持。我的明确修正是：保留 R 的观察性泛化增量，同时把下一笔投资优先指向普通有限优化这个竞争解释；不从本结果直接推出结构因果、部署优势或自动追加 R 训练。**
+<!-- END ORIGINAL B01 INDEPENDENT RESULT REVIEW -->
+
+<a id="b01-independent-disposition"></a>
+### DM disposition after the complete independent review
+
+I read the entire original answer and accept its fact reconstruction and bounded
+retention judgment; MATERIAL_DISSENT:no. Root independently read and adopted that
+same interpretation. The critic's83flagged logit components refine the already
+retained75context count, with0changed choices. Its individual-user examples add
+an explicit limitation to my team-zero summaries: a team can retain some coverage
+while many users receive no service. Those selected examples are not a new
+whole-panel fairness estimate. The broader full-contract adverses stay visible.
+
+Keep the three trained R endpoints, useful shared-tensor/scorer/executor/reader
+implementation, numerical tests and the complete positive/adverse records. End
+this fixed six-fit purchase. A's nearly exact train fit plus unresolved A−N fresh
+contrast does not earn an unchanged geometry-flattening expansion. R's worse train
+fit is not itself a defect that demands more epochs. Its three positive fresh
+mean comparisons against A/N/fixed support conditional finite-data usefulness,
+while df2 uncertainty, strong ordinary controls, severe selected-world errors and
+block3 reward/continuity costs prevent a robust-magnitude, deployment, universal
+service or identified-structure claim. The old raw-N/Laya findings remain scoped
+as originally published; they are not rewritten as a common failure mechanism.
+
+The most useful belief change is that a learned complete-choice package can
+improve these same-data fresh means without approaching exact training fit.
+The unchanged added-distance flat A did not achieve that gain consistently.
+This favors studying inductive/regularizing packages over treating train-label
+fit as the target, but leaves ordinary finite optimization as a live, simple
+competitor to graph-specific explanations. Preserving the observed ability and
+its limits is separate from approving another purchase.
+
+For a possible next mechanism question, the critic's fixed train-CE stopping rule
+is more discriminating than simply extending R training. Its R thresholds are
+already known from the frozen train readings. However, existing A assets retain
+only initial/final weights, terminal optimizer state and per-update hashes, not
+intermediate epoch weights or complete train-CE monitors. Therefore it needs
+three real A refits, up to1,536updates/49,152training exposures plus up to49,152
+per-epoch monitoring contexts before independent reading/new evaluation; it is
+not a free choice among already-paid checkpoints. It also deliberately changes
+optimization exposure and still does not isolate pure invariance. No such fit,
+monitor or endpoint is selected or accepted.
+
+My alternative continuation candidate asks whether the frozen learned complete-
+choice ability transfers to a different lawful candidate-generation distribution,
+with the same original information and competent ordinary controls. That develops
+reuse rather than explaining one observed gap, but stable metadata/slot semantics
+and a genuinely new endpoint are substantive design constraints. It competes with
+ordinary optimization, replication for reliable magnitude, development of other
+positive assets, and no purchase on total cost and decision value. These candidates
+remain reasoning here, without a new registry, extra architecture or automatic
+seed. Root currently owns the concrete cross-question allocation and has assigned
+its temporary Oracle to compare those next investments; this is the actual current
+planning producer, not a per-run approval requirement. I retain scientific
+responsibility for this question through any selected successor.
+
+
+<a id="b01-final-cleanup"></a>
+### B01 final measured cleanup and publication
+
+All three operations are terminal exit0, all observer events consumed and the
+observer stopped; current-user open-file inspection found no consumer of the
+local deletion targets. The independent result critic has completed its reading.
+The earlier three supported remote snapshot removals reclaimed3,435,175,936
+allocated bytes. This final local pass removes33Python bytecode files, the four
+finished observer/diagnostic scratch files, three duplicate block summaries and
+each stage's duplicate manifest, progress and empty stdout/stderr files. No
+tracked file was deleted. All15local evidence copies were SHA256-matched to
+their retained canonical files immediately before deletion. An initial cleanup
+check compared local`blocks/`summaries with remote`raw/blocks/`world records and
+correctly failed without deleting anything; the corrected identical relative
+paths passed. This inspection is support work, not another scientific reader.
+
+Local allocated usage across all five owned namespaces, including this record
+and notebook addition, fell from3,477,504to630,784bytes: **2,846,720net bytes
+reclaimed**. Together with source snapshots the measured scoped reduction is
+**3,438,022,656bytes**. Every named target is absent; no tool blocker remains.
+The three canonical stages retain230,641,664allocated bytes in their original
+locations, including all initial/final A/R weights, optimizer/update evidence,
+complete fresh traces and independent readings. Inherited B01 assets remain
+peer-owned and unchanged. Useful ten-module implementation and four numerical
+test files remain; their code fingerprint is unchanged. The stopped observer's
+small recovery metadata remains outside the direction; no backup, tar or
+duplicate bulk retention was created.
+[Exact deletion targets, hashes and measurements](../../../../runs/uav_decision_generalization/b01_read_a01/cleanup.json).
+
+The [shared learning/representation topic](../../RESEARCH.md#learning-representation-finite-data)
+now records this finite-data capability, the training-fit reversal and the
+unresolved ordinary finite-optimization explanation. The own direction standing ends this fixed purchase and preserves
+the long-lived question and unselected continuation choices above.

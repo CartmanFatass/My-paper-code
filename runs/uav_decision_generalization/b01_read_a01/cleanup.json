@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "direction": "uav_decision_generalization",
+  "recorded_at_utc": "2026-10-02T02:33:57.883985+00:00",
+  "study": "b01",
+  "scientific_operations_complete": true,
+  "observer_stopped": true,
+  "unconsumed_observer_events": 0,
+  "current_user_open_file_consumers_of_deleted_targets": [],
+  "deleted_targets_allocated_before": {
+    "experiments/candidates/uav_decision_generalization/__pycache__": 610304,
+    "tests/experiments/candidates/uav_decision_generalization/__pycache__": 86016,
+    "temp/directions/uav_decision_generalization": 24576,
+    "runs/uav_decision_generalization/b01_read_a01/blocks": 126976,
+    "runs/uav_decision_generalization/b01_learning_a01/manifest.jsonl": 8192,
+    "runs/uav_decision_generalization/b01_learning_a01/stdout.log": 0,
+    "runs/uav_decision_generalization/b01_learning_a01/stderr.log": 0,
+    "runs/uav_decision_generalization/b01_learning_a01/progress.json": 4096,
+    "runs/uav_decision_generalization/b01_native_a01/manifest.jsonl": 1912832,
+    "runs/uav_decision_generalization/b01_native_a01/stdout.log": 0,
+    "runs/uav_decision_generalization/b01_native_a01/stderr.log": 0,
+    "runs/uav_decision_generalization/b01_native_a01/progress.json": 8192,
+    "runs/uav_decision_generalization/b01_read_a01/manifest.jsonl": 69632,
+    "runs/uav_decision_generalization/b01_read_a01/stdout.log": 0,
+    "runs/uav_decision_generalization/b01_read_a01/stderr.log": 0,
+    "runs/uav_decision_generalization/b01_read_a01/progress.json": 4096
+  },
+  "duplicate_files_verified_against_canonical": {
+    "b01_learning_a01/manifest.jsonl": {
+      "sha256": "c0af7e8079ee9b2e01ce94a88306d5d23c120a499dcd646ba08fd17821377607",
+      "canonical": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b01_learning_a01/manifest.jsonl"
+    },
+    "b01_learning_a01/stdout.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "canonical": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b01_learning_a01/stdout.log"
+    },
+    "b01_learning_a01/stderr.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "canonical": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b01_learning_a01/stderr.log"
+    },
+    "b01_learning_a01/progress.json": {
+      "sha256": "6b8bcc833e53c44d3e886f8dfec30113ce934f4931944f7ceb6f59f9f9cf2aa0",
+      "canonical": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b01_learning_a01/progress.json"
+    },
+    "b01_native_a01/manifest.jsonl": {
+      "sha256": "e03cd4b0d7a9cf8b1cdb39f9190ae24cd30715551d63c390d9742f53e3eb32a6",
+      "canonical": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b01_native_a01/manifest.jsonl"
+    },
+    "b01_native_a01/stdout.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "canonical": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b01_native_a01/stdout.log"
+    },
+    "b01_native_a01/stderr.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "canonical": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b01_native_a01/stderr.log"
+    },
+    "b01_native_a01/progress.json": {
+      "sha256": "6e8ed2dd87018e6e06c5c0dabd77a6dcab9ca414827ce9806e5af86cc6c14d44",
+      "canonical": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b01_native_a01/progress.json"
+    },
+    "b01_read_a01/manifest.jsonl": {
+      "sha256": "58d9414c1224f80875fd776b4ac491eeb32704109f0dfaf2f4940f99d52f9376",
+      "canonical": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b01_read_a01/manifest.jsonl"
+    },
+    "b01_read_a01/stdout.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "canonical": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b01_read_a01/stdout.log"
+    },
+    "b01_read_a01/stderr.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "canonical": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b01_read_a01/stderr.log"
+    },
+    "b01_read_a01/progress.json": {
+      "sha256": "251146e3255681caa2f856b90b207486cbd72bf47f35427d8ed844424ddfdb22",
+      "canonical": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b01_read_a01/progress.json"
+    },
+    "b01_read_a01/blocks/b1.json": {
+      "sha256": "e33f05558fce798b72130def71e85da78aa3301bcd782c814a114463189aa93a",
+      "canonical": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b01_read_a01/blocks/b1.json"
+    },
+    "b01_read_a01/blocks/b2.json": {
+      "sha256": "4f48e6d7c1c0e5487ee9af60a2014cca2196975b589cef6d0f00754500147bc6",
+      "canonical": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b01_read_a01/blocks/b2.json"
+    },
+    "b01_read_a01/blocks/b3.json": {
+      "sha256": "8a84acf6faedfa410588bfced2034456cfc59837add82d92024dcd4ff70ee3a3",
+      "canonical": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b01_read_a01/blocks/b3.json"
+    }
+  },
+  "local_scopes_before_allocated_bytes": {
+    "experiments/candidates/uav_decision_generalization": 757760,
+    "tests/experiments/candidates/uav_decision_generalization": 135168,
+    "runs/uav_decision_generalization": 2437120,
+    "temp/directions/uav_decision_generalization": 24576,
+    "docs/research/candidates/uav_decision_generalization": 122880
+  },
+  "local_scopes_after_allocated_bytes": {
+    "experiments/candidates/uav_decision_generalization": 147456,
+    "tests/experiments/candidates/uav_decision_generalization": 49152,
+    "runs/uav_decision_generalization": 311296,
+    "temp/directions/uav_decision_generalization": 0,
+    "docs/research/candidates/uav_decision_generalization": 122880
+  },
+  "local_scoped_net_bytes_reclaimed": 2846720,
+  "remote_source_snapshots_deleted": {
+    "e3329df307ae40388cf383a5b6527463": 820944896,
+    "cf3c8842fb3948ecb05e0ec921422495": 820961280,
+    "6ca7e9ec341d40bdb53df4e4e6177249": 1793269760
+  },
+  "remote_net_bytes_reclaimed": 3435175936,
+  "remote_unique_evidence_allocated_bytes": {
+    "b01_learning_a01": 37875712,
+    "b01_native_a01": 180060160,
+    "b01_read_a01": 12705792
+  },
+  "combined_scoped_net_bytes_reclaimed": 3438022656,
+  "blockers": [],
+  "measurement_scope": "Allocated du -s -B1 of five owned local namespaces, including this record and notebook addition; remote snapshot working-tree allocation separately. Git object store and unrelated paths excluded. Support inspection CPU is unmetered. No backup or evidence copy was made."
+}
