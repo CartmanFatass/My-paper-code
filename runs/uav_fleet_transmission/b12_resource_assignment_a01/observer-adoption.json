@@ -1,0 +1,11 @@
+{
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/07d3d379db4eeb1a5d2e8bb533e579864a80ed75e1877634d5eab9d03115303d.json",
+  "source_sha": "65caed8708a33782b942bf74fd66ee2a31aee3b2",
+  "observer_generation": 23,
+  "observer_job": "b12-resource-scientific-a01",
+  "observed_state": "running",
+  "prior_observer_stopped_generation": 21,
+  "prior_events_consumed": true,
+  "prior_running_jobs": 0,
+  "prior_cpu_seconds": 293.34903798700003
+}
