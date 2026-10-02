@@ -4654,3 +4654,80 @@ exact inputs, stages only declared remote inputs and admits the actual node; the
 Implementer supplies code/check evidence only. Keep compact summary/reading and
 failed/adverse facts; raw trajectories/dictionaries have explicit canonical paths,
 sizes and SHA256 rather than bulk Git additions.
+
+The selected scope and compact input manifest were published at
+`7cc04b370cc3d60e145c8f011e87b372f512f1fc`. Manifest
+`runs/uav_message_content/b07_codec_a01/input-manifest.json` is84,584 B, SHA256
+`71195b30edd1b2ccf2e46098ac3371d35aa99739804ff94fce925e0ef095937e`.
+It embeds original episode/seed/innovation/byte bindings without requiring remote
+access to the old local provenance paths. Declared D checkpoint and32 raw files
+are now staged at `wsl_4070:/home/wu/hmasd-inputs/uav_message_content/b07_codec_a01/D/`:
+33 files,9,629,244 logical B/9,691,136 allocated B, all hashes read back correctly;
+canonical remote B19451 also rehashed correctly. Staging cost4.738s local wall/.338s
+local child CPU; remote transfer/hash CPU was not separately metered. This is input
+staging, not a scientific launch or runtime-health result. The exact temporary
+staging target is owned by B07 and remains a live selected input until terminal
+collection; no other direction's files or sparse selection changed.
+
+Bounded registered Implementer `/root/dm_message_budget/b07_codec_implementer`
+owns only the new B07 implementation/tests under the scope above. DM retains
+notebook/index/source-publication and result-operation ownership. Its assignment
+permits synthetic correctness checks but no paid-data scoring or result execution.
+
+The runner's explicit absolute-manifest interface also needs the compact published
+manifest at the staging root; its84,584 bytes were copied and rehashed in1.154s
+local wall. Staging now contains **34 files/9,713,828 logical B/9,789,440 allocated
+tree B including directories**. This adds only declared compact metadata, not
+another checkpoint/raw-data copy. Actual runtime and result exposure remain zero.
+
+DM's initial source review caught a manifest `development`/`dev` spelling mismatch
+and the need to accept the launcher-created output directory while refusing prior
+scientific products. It also required ordinary dictionary displacement to use its
+actual k-means++ initialization, and child CPU/RSS to be separately reported. These
+are pre-execution corrections within the selected scope, not failed fits or retries;
+the Implementer is adding focused synthetic coverage before independent review.
+
+The stable Implementer return contains17 new B07 files/1,743 lines including tests
+and usage. Final local synthetic command was one-thread
+`/home/fires/.venvs/hmasd-linux-cpu/bin/python -m pytest -q tests/experiments/candidates/uav_message_content/b07`
+with bytecode disabled and `/usr/bin/time -v`: **37 passed**, pytest4.88s;
+outer6.64s wall/5.88s CPU/305,904 KiB lifetime peak RSS. Across its three invocations:
+19.52s wall/17.56s CPU. These included **three synthetic ordinary fits and three
+short-history learned fitting checks with360 Adam updates**, plus synthetic
+collector/reader and mocked package wiring. These engineering fitting attempts are
+paid separately from the12 selected real-bank codec fits; they are not extra
+scientific replicates or a successful runtime/host pilot. No real input checkpoint
+was loaded, no paid-bank actor scoring occurred and no actual native host ran.
+Pytest removed its owned scratch. Actual child wall remains explicitly unmeasured.
+
+The first synthetic suite independently reproduced a1-ULP centroid reconstruction
+error: the original FP32 sum divided by an int64 array promotes to FP64 before
+adding position and assigning FP32, whereas division by a Python integer can retain
+FP32. The reader now follows the actual mixed-dtype source construction; exact
+packet checks were retained. Its neural replay also reconstructs the receiver
+from frozen tensors/base GRU independently of the B07 forward adapter. The named
+read-only Engineering Reviewer `/root/dm_message_budget/b07_codec_engineering_review`
+is inspecting this stable implementation and its checks; DM acceptance/publication
+and the first result launch remain pending that review.
+
+The independent Engineering Reviewer returned **no material finding and no repair
+request** after checking the actual host/adapter consumers, hard-codeword forward
+and surrogate backward, frozen input gradients/recurrent order, delayed byte queue,
+pending and RNG witnesses, input/admission/failure identities, resource scopes and
+the independent physical/neural/service reader. It independently reran the same
+synthetic directory: **37 passed in4.86s**, outer5.72s wall/5.93s CPU/305,528 KiB
+lifetime peak RSS, with pytest-owned scratch clean. Thus four total engineering
+suite invocations cost25.24s wall/23.49s CPU and include **four synthetic ordinary
+fits plus four short-history learned fits/480 Adam updates**. They add no real-bank
+fit, scientific replicate, label acquisition or native host exposure.
+
+DM acceptance follows reading the implementation and tests plus that independent
+review. No further source change or redundant rerun is needed. Its residual limits
+remain: full package wiring is mocked, fitting checks use short synthetic histories,
+native-reader integration uses synthetic H256 D/B/compressed episodes, and the
+actual checkpoint/data replay, full selected exposure, remote runtime and resource
+estimates are not empirically exercised yet. The accepted code retains literal
+byte decoding on delivery, exact frozen-parameter checks, all declared counters
+and an explicitly non-resumable failure frontier. The next operation is the one
+selected admitted B07 package after exact source publication; acceptance is neither
+a scientific result nor an extra permission checkpoint.
