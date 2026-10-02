@@ -1,0 +1,45 @@
+{
+  "at": "2026-10-02T23:33:27.308823+00:00",
+  "canonical_control_hashes": {
+    ".codex/hmasd-compute.toml": "2bb704e31e08a6a3489e80ea6851826740dfbf71461e0f7e70c4394694e65e6f",
+    "docs/research/RESEARCH.md": "7ebec03bd6dcd3ab89bbc89a81c6d203233d2097ded5a9dfbca6fa0d8525ec6f",
+    "scripts/hmasd_launch.py": "6a22fef75e7bbc0997b2f4b0096d278de793d43e466497b36bba49884cab23f9",
+    "scripts/hmasd_source_snapshot.py": "83b22ec927b5dd452290a2a331db5b39d62385d831fb867f0c5dae26a254b11d"
+  },
+  "external_dump_metadata": {
+    "wsl-crash-1790535138-823176-_home_wu_.local_share_uv_python_cpython-3.10.21-linux-x86_64-gnu_bin_python3.10-11.dmp": {
+      "bytes": 2625273856,
+      "mtime_ns": 1790535168406528400
+    },
+    "wsl-crash-1790814460-1179774-_home_wu_.local_opt_hmasd-cpython-3.10.21-gcc_bin_python3.10-11.dmp": {
+      "bytes": 35643392,
+      "mtime_ns": 1790814461217066900
+    },
+    "wsl-crash-1790919914-1318047-_home_wu_.local_opt_hmasd-cpython-3.10.21-gcc_bin_python3.10-11.dmp": {
+      "bytes": 638087168,
+      "mtime_ns": 1790919921209501300
+    }
+  },
+  "external_dump_peak_bound": null,
+  "gpu": "GPU-294302a9-40ff-1a09-43b0-5fd98e06b557, NVIDIA GeForce RTX 4070 Laptop GPU, 8188, 7948, 0",
+  "gpu_compute_apps": "",
+  "host": "LAPTOP-U9TDKC8A",
+  "installed_supervisor_sha256": "a7b8c1ff1691e11527cadf6adc677fd2caf00efe1bc0185ada524a5467455553",
+  "local_child_cpu_seconds": 0.064097,
+  "local_parent_cpu_seconds": 0.0013381910000000025,
+  "local_policy_fields_match": true,
+  "local_wall_seconds": 1.3594295969960513,
+  "memory_available_bytes": 15576391680,
+  "own_scratch_absent": true,
+  "project_available_bytes": 832998809600,
+  "published_source_ancestor": true,
+  "remote_bank_allocated_bytes": 338259968,
+  "runtime_health_probe": false,
+  "schema": 1,
+  "science_calls": 0,
+  "scientific_output_absent": true,
+  "selected_peak_estimate_note": "Consumer CPU RSS2\u20134GiB/GPU2\u20135GiB is an unmeasured forecast. Available memory is not runtime-health evidence; fresh native memory admission still required.",
+  "supervisor_request_absent": true,
+  "unmetered_support": "unknown_not_zero",
+  "windows_available_bytes": 78018949120
+}

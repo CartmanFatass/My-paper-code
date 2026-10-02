@@ -1,0 +1,17 @@
+{
+  "schema": 1,
+  "request_path": "runs/typed_joint_skill_decision/b07_source/consumer-a02-launch-request.json",
+  "request_sha256": "b9b38f16349e40191babc0ba45a6bcdd349867c115bf858c1de83e0de1550a1c",
+  "request_publication": "922083d6e0b990738f84a30061fbe275cdb8e744",
+  "source_sha": "fd23772cc16dde537a5c90ae4659a0ac5f20f572",
+  "supervisor_task": "typed-b07-consumer-a02",
+  "status": "supervisor_response_received_native_acceptance_pending",
+  "sent_at": "2026-10-02T23:34:11.427385+00:00",
+  "retry": false,
+  "supervisor_command_exit": 0,
+  "supervisor_command_stdout": "Task 'typed-b07-consumer-a02' started in tmux session 'agent_typed-b07-consumer-a02'. Output: /home/wu/.agent-tasks/typed-b07-consumer-a02/task.log\n",
+  "supervisor_command_stderr": "",
+  "local_parent_cpu_seconds": 0.0009027949999999979,
+  "local_child_transport_cpu_seconds": 0.06376,
+  "send_wall_seconds": 0.41517757601104677
+}

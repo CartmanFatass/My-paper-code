@@ -1,0 +1,44 @@
+{
+  "at": "2026-10-02T23:36:42.350789+00:00",
+  "native_status": {
+    "returncode": 4,
+    "stdout": "",
+    "stderr": "hmasd launch refused: status reference does not exist: /home/wu/projects/HMASD/runs/typed_joint_skill_decision/b07_consumer_a02\n"
+  },
+  "supervisor_status": {
+    "returncode": 0,
+    "stdout": "{\"task\": \"typed-b07-consumer-a02\", \"status\": \"failed\", \"exit_code\": 4, \"pid\": 1353167, \"uptime_seconds\": 150, \"tmux_active\": false}\n",
+    "stderr": ""
+  },
+  "supervisor_files": {
+    "runner.sh": "#!/usr/bin/env bash\necho $$ > \"/home/wu/.agent-tasks/typed-b07-consumer-a02/pid\"\nSTART_TS=$(date +%s)\necho \"=== Task 'typed-b07-consumer-a02' started at $(date -Iseconds) ===\" >> \"/home/wu/.agent-tasks/typed-b07-consumer-a02/task.log\"\n\n# Execute command capturing output\nset +e\neval 'zsh -lic '\\''cd -- /home/wu/projects/HMASD && exec /home/wu/.venvs/hmasd-gcc-31021/bin/python -B /home/wu/projects/HMASD/scripts/hmasd_launch.py launch --node wsl_4070 --source-root /home/wu/projects/HMASD --snapshot --direction typed_joint_skill_decision --lead '\\''\"'\\''\"'\\''Codex DM (native child)'\\''\"'\\''\"'\\'' --sha fd23772cc16dde537a5c90ae4659a0ac5f20f572 --output runs/typed_joint_skill_decision/b07_consumer_a02 -- experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/run.py --out runs/typed_joint_skill_decision/b07_consumer_a02 --seed 0 --launch-sha fd23772cc16dde537a5c90ae4659a0ac5f20f572 --input-manifest docs/research/candidates/typed_joint_skill_decision/B07_CONSUMER_A02_INPUT.json --input-manifest-sha256 2b933a85273b42442c070ad1900ccc62b9571e44e875ca53d391003f0f5ef69e'\\''' >> \"/home/wu/.agent-tasks/typed-b07-consumer-a02/task.log\" 2>&1\nEXIT_CODE=$?\nset -e\n\nEND_TS=$(date +%s)\necho $EXIT_CODE > \"/home/wu/.agent-tasks/typed-b07-consumer-a02/exit_code\"\nif [ $EXIT_CODE -eq 0 ]; then\n    echo \"finished\" > \"/home/wu/.agent-tasks/typed-b07-consumer-a02/status\"\nelse\n    echo \"failed\" > \"/home/wu/.agent-tasks/typed-b07-consumer-a02/status\"\nfi\necho \"=== Task 'typed-b07-consumer-a02' exited with code $EXIT_CODE at $(date -Iseconds) (Duration: $((END_TS - START_TS))s) ===\" >> \"/home/wu/.agent-tasks/typed-b07-consumer-a02/task.log\"\n\n# Keep session alive briefly for inspection, then exit\nsleep 1\n",
+    "exit_code": "4\n",
+    "status": "failed\n",
+    "start_time": "1790984051\n",
+    "pid": "1353167\n",
+    "task.log": "=== Task 'typed-b07-consumer-a02' started at 2026-10-03T07:34:11+08:00 ===\nhmasd launch refused: runner must contain exactly one require_admission(__file__, direction='typed_joint_skill_decision') call before it can be spawned\n=== Task 'typed-b07-consumer-a02' exited with code 4 at 2026-10-03T07:34:28+08:00 (Duration: 17s) ===\n"
+  },
+  "output_exists": false,
+  "output_files": [],
+  "claim_root": "/home/wu/projects/HMASD/.git/hmasd-launch-claims",
+  "matching_claims": [],
+  "matching_snapshots": [
+    {
+      "root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/2dbbf46bcc6948778910848a98035834",
+      "sha": "fd23772cc16dde537a5c90ae4659a0ac5f20f572",
+      "allocated_bytes": 1829666816,
+      "status": ""
+    }
+  ],
+  "matching_processes": [],
+  "wrapper_pid_absent": true,
+  "science_calls": 0,
+  "installed_supervisor_sha256": "a7b8c1ff1691e11527cadf6adc677fd2caf00efe1bc0185ada524a5467455553",
+  "schema": 1,
+  "source_sha": "fd23772cc16dde537a5c90ae4659a0ac5f20f572",
+  "local_parent_cpu_seconds": 0.0008207589999999904,
+  "local_child_transport_cpu_seconds": 0.062445,
+  "other_support_cpu": "unknown_not_zero",
+  "exact_consumer_fit_count_basis": "No native claim/output/runner; any zero scientific effects are execution-path facts, not runner counter measurements.",
+  "retry": false
+}

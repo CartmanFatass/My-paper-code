@@ -1,0 +1,3 @@
+=== Task 'typed-b07-consumer-a02' started at 2026-10-03T07:34:11+08:00 ===
+hmasd launch refused: runner must contain exactly one require_admission(__file__, direction='typed_joint_skill_decision') call before it can be spawned
+=== Task 'typed-b07-consumer-a02' exited with code 4 at 2026-10-03T07:34:28+08:00 (Duration: 17s) ===
