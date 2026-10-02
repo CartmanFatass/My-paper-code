@@ -3665,3 +3665,46 @@ Both preparation failures consumed0native/model/fit/optimizer effects; their CPU
 and control-network work are unmetered, not zero. Compact failure facts are saved
 in the engineering run directory. No scientific operation has yet been accepted,
 and a control repair does not authorize duplicate or additional exposure.
+
+
+<a id="b03-worker-accepted"></a>
+### B03 sole native worker accepted — 2026-10-02 07:40 UTC
+
+Root clarified that the concurrent shared-index writer was the typed-joint DM;
+that writer published the single trailing-pipe repair in
+`f7522d3cd4e60c3795fcaa5d3d4b34dd54f2b07b`, with no direction state/lead/science
+change. I verified the maintained parser now reads lifted/exploring/our stable
+lead. This corrects the writer attribution in the preceding preparation note.
+The exact scientific source remains `300c58af8e5648fb1c98edbd3618f8f964052dda`.
+
+Third preparation `dmgen-b03-joint-window-prep-a03` completed exit0 after31 seconds;
+this is separate from the scientific worker. Native kernel acceptance was
+07:40:45.355283UTC on wsl_4070, claim/operation
+`/home/wu/projects/HMASD/.git/hmasd-admission/d586acfdbb3862d3afd87e0d601bba0f91f350d860eb29073cea51ac68c87b93.json`.
+Supervisor/runner PIDs1324328/1324329 and their boot/start identities are in the
+[original manifest](../../../../runs/uav_decision_generalization/b03_joint_window_a01/launch-manifest.json).
+Canonical output is
+`/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_a01`;
+immutable input snapshot is `.git/hmasd-launch-sources/728d72485d07492e9ed7caefcf74c5d7`.
+The entire preparation used configured zsh -lic; canonical HEAD/sparse selection,
+dirty overlay and other live operations were unchanged.
+
+Runner's fresh resource reading had12,622,876,672 available physical/effective
+bytes, exceeding the selected8GiB request, with the required free disk. Actual
+runtime is NumPy1.26.3/Torch2.7.0+cu118 on CPU,4Torch/1interop/1BLAS thread and
+0GPU; no runtime substitution. Config/manifest/preflight were collected with
+canonical SHA verification. ConfigSHA256 is
+`0bc410effb3e254ea38f5f23186e5ed975a5492251f333ad059c56932e228e88`;
+manifestSHA256 `51a801611b40ef8de14bdb197e6afa079f3e444d4efae99aef041377e5e6e6c6`.
+No raw/checkpoint bulk was copied.
+
+I armed tools/hmasd_wait.py job `b03-joint-window-a01` under the owned
+`temp/directions/uav_decision_generalization/b03_observation/state`, generation1,
+60-second read-only status probes and1500-second checkpoint window. First drain
+established matching running native identities and no terminal witness; it is
+not merely an unobserved registration. The native DM remains active through
+same-handle collection and complete reading. At the first collected progress
+snapshot the worker had3500 initial-policy transitions,2actual model
+constructions and0fit/update; this is progress, not an outcome or selection gate.
+The one fixed worker may finish or fail; neither case authorizes an automatic
+extra fit or replay of already consumed missions.

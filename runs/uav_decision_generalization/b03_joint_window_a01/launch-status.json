@@ -1,0 +1,86 @@
+{
+  "admission": {
+    "claim_state": "accepted",
+    "state": "accepted"
+  },
+  "artifacts": {
+    "stderr": {
+      "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_a01/stderr.log",
+      "state": "present"
+    },
+    "stdout": {
+      "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_a01/stdout.log",
+      "state": "present"
+    },
+    "summary": {
+      "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_a01/summary.json",
+      "state": "present"
+    }
+  },
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/d586acfdbb3862d3afd87e0d601bba0f91f350d860eb29073cea51ac68c87b93.json",
+  "direction": "uav_decision_generalization",
+  "execution": {
+    "exit_witness": {
+      "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_a01/process-exit.json",
+      "state": "absent"
+    },
+    "runner": {
+      "observed_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 1324329,
+        "session_id": 1324328,
+        "start_ticks": 126674232
+      },
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 1324329,
+        "session_id": 1324328,
+        "start_ticks": 126674232
+      },
+      "state": "running"
+    },
+    "state": "running",
+    "supervisor": {
+      "observed_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 1324328,
+        "session_id": 1324328,
+        "start_ticks": 126674229
+      },
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 1324328,
+        "session_id": 1324328,
+        "start_ticks": 126674229
+      },
+      "state": "running"
+    }
+  },
+  "explicit_retry": {
+    "eligible": false,
+    "reasons": [
+      "parent has no consistent terminal nonzero native exit"
+    ],
+    "scientific_authorization": false,
+    "successor_ref": null,
+    "supported": true
+  },
+  "explicit_retry_available": false,
+  "kind": "hmasd_operation_status",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_a01/launch-manifest.json",
+  "node": "wsl_4070",
+  "observed_at": "2026-10-02T07:41:53.687027Z",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/d586acfdbb3862d3afd87e0d601bba0f91f350d860eb29073cea51ac68c87b93.json",
+  "output_root": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_a01",
+  "record_consistency": {
+    "mismatches": [],
+    "state": "consistent"
+  },
+  "schema_version": 1,
+  "sha": "300c58af8e5648fb1c98edbd3618f8f964052dda",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/728d72485d07492e9ed7caefcf74c5d7"
+}
