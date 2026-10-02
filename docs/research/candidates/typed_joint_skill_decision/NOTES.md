@@ -3707,3 +3707,21 @@ supply a bound stack/core and whether its instruction can be mapped in the exact
 retained executable. Neither missing stack nor missing coredumpctl authorizes a
 replay. Keep source/raw consumers while those concrete evidence questions remain;
 no extra environment, model or duplicate bank is required by current work.
+
+
+The reused independent engineering Reviewer has now read the complete requested
+terminal records plus the admitted bank/native/evidence sources. It reports:
+“the saved evidence confirms terminal SIGSEGV during training-bank collection,
+but supports no causal code correction or specific failing candidate.” No tests,
+probes or edits were performed. The1025-record prefix is exactly a25-row flush
+boundary; further successful labels or preparation can have remained buffered.
+The counted return/serialization boundary therefore does not locate the fault
+in the next candidate or even inside static evaluation. Evaluation, bookkeeping,
+compression, later preparation and native-library/runtime execution remain
+unresolved possibilities. The independent review agrees with all lower-bound
+counts and the unestablished kernel PID mapping, and supplies no diagnosed repair
+or retry authority. “Zero native” in short status messages means **zero H500
+native transitions**; the431145-or-more saved static radio evaluations are real
+work. Keep that qualification in future summaries. Technical reading is complete;
+any further system-evidence work is a concrete Root-coordinated dependency, not a
+pending automatic scientific continuation.
