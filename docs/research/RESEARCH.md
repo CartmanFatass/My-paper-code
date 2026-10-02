@@ -2523,6 +2523,18 @@ L−G检查学习选择增量，L−P检查质量／完整冷启动成本取舍�
 本轮结束的配方不取消这些成果，也不意味着每个正例均已有新运行。三项选择各依其具体比较、证据与完整成本，三位DM的问题责任跨单个配方持续；Oracle本次建议任务已结束。
 所有已有操作完成边界、实际成本、数值标记、正面与不利事实继续生效。Claude暂停、FSD/PPC、G33和Milan范围不变。
 
+<a id="snapshot-materialization-repair-20261001"></a>
+**共享启动输入修复（2026-10-02 UTC／10-01 PDT）：** S7 B10工程a01已接受后在读取已提交checks.json时退出1；
+任何env／controller／model／native步骤之前即失败，启动CPU未测，不能记为0。原source488c72115、op15022f69…与
+snapshotd3dd732803824388be3f7bf25618f8db保留；[完整失败证据](candidates/uav_fleet_transmission/NOTES.md#b10-engineering-a01-setup-failure)已发表于4b3bb62d。
+Root拥有这一窄shared-code修复：仅新创建、尚未admit的snapshot完整物化指定SHA的tracked输入，保留common Git／claim store及锁；
+canonical的sparse配置、dirty控制文件和既有snapshot不改，科学合同不变。原因是worktree add继承sparse而遗漏runs中的输入。
+修复在创建命令上暂时覆盖core.sparseCheckout／core.sparseCheckoutCone，不永久写Git配置。
+两种真实Git回归（shared与worktree-local sparse）在旧代码均复现缺文件，修复后4项通过；独立工程审查实际追踪后续准入，
+共7项snapshot／launcher整合检查通过（Git2.43、配置的control-plane Python），无material finding。
+验证含已提交排除路径、原dirty文件／配置／模式及旧sibling保持、退出临时覆盖后的完整普通status与准入。
+实际远端物化仍待部署后核验；Root未重启失败operation、未改变已接受A/R的snapshot，也未新增科学步骤。
+
 <a id="typed-joint-skill-selection-20261001"></a>
 **2026-10-01 PDT — owner 新提联合布局学习的首轮比较已完整结束。**
 Root 已读完全部原生结果、8,528-byte原始独立 ResearchCritic 答复、DM处置和测量清理，

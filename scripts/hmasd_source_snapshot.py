@@ -18,7 +18,13 @@ def prepare(source: Path, common_dir: Path, sha: str, git) -> Path:
         raise ValueError("snapshot storage must not be redirected")
     target = parent / uuid.uuid4().hex
     # A linked worktree shares the original operation/claim store. Never clone.
-    git(source, "worktree", "add", "--detach", "--lock", str(target), sha, timeout=120.0)
+    # Source inputs may live outside the canonical checkout's sparse patterns.
+    # Override only this creation command; changing shared/worktree configuration
+    # would also change the authoring checkout or already accepted operations.
+    git(
+        source, "-c", "core.sparseCheckout=false", "-c", "core.sparseCheckoutCone=false",
+        "worktree", "add", "--detach", "--lock", str(target), sha, timeout=120.0,
+    )
     return target.resolve(strict=True)
 
 
