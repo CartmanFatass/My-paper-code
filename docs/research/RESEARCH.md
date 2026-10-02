@@ -11,7 +11,7 @@
 已读取前任完成的[单一 handoff](HANDOFF_20261001_ROOT_AND_FOUR_DMS.md)，接手 Codex 科学管理、选题与后继安排。
 上一轮四项研究及三项资料评估的完成／停止结论保持；旧操作不重启，历史 handoff 不改写。
 本次明确继续解除该轮 Codex 交接暂停；静默承诺、RF 完整购买与参数搜索均已完整判读、发表和清理。S7 构造与计价也已完成，Root 采纳独立评审、本轮不购买该候选；见[首轮完成处置](#root-selected-successors-20261001)。
-Owner 提供的开放 Jev/Laya 计划首轮6-fit比较已完整结束，两个精确配方的停止与全部证据保留。Owner随后明确要求将开源决策辅助作为一个DM长期探索的问题、泛化超出Laya并继续研究；同时目标改为3个有实质工作的DM，Oracle Astra Max只作为临时服务Root的设计与调度建议者。三位DM现持续滚动推进：结构泛化6-fit和经验选择分支1-fit已完整结束并独立判读；后续Q搜索及S7预测分配也已完整读取，正作独立结果诊断与接续设计；冻结学生与普通控制协作的0-fit比较已选并实施。一次配方收尾不重新暂停研究，也不消除以前的正面能力；见[当前长期分工](#three-dm-decision-assistance-20261001)与[B01处置](#typed-joint-skill-selection-20261001)。
+Owner 提供的开放 Jev/Laya 计划首轮6-fit比较已完整结束，两个精确配方的停止与全部证据保留。Owner随后明确要求将开源决策辅助作为一个DM长期探索的问题、泛化超出Laya并继续研究；同时目标改为3个有实质工作的DM，Oracle Astra Max只作为临时服务Root的设计与调度建议者。三位DM现持续滚动推进：结构泛化、ridge、Q及S7分配均已完整独立判读；当前分别构造更宽raw布局的学习曲线、实施冻结学生协作，以及准备已选H_T成本同分比较。Oracle已结合owner转来的Claude完整评估给出本次完整设计建议，Root已读并取舍。一次配方收尾不重新暂停研究，也不消除以前的正面能力；见[当前长期分工](#three-dm-decision-assistance-20261001)与[B01处置](#typed-joint-skill-selection-20261001)。
 Claude 的独立权限和当前暂停、FSD/PPC 暂停、G33 冻结及 Milan 数据依赖保持原范围。
 
 **历史恢复：2026-09-29 21:59 UTC，owner明确要求“阅读handoff 我们继续工作”；该轮次现已完成并暂停。**
@@ -2498,51 +2498,27 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 ### Parallel allocation: independent work and rolling succession
 
 <a id="three-dm-decision-assistance-20261001"></a>
-**Owner长期决策辅助与3DM安排（2026-10-02 UTC／10-01 PDT）：** 三位DM持续推进实质研究；单个配方结束不结束问题责任。
-A/R与B02已完成全量读取、独立判读及清理，正反能力保留。Q B03与S7 B10原操作均完整终止，结果诊断／接续设计仍在进行；冻结S/C比较在实施。
-Root已读S7完整发表证据，Q完整处置尚待DM发表与原critic返回；按下表滚动接续，不设等待统一“下一轮”的暂停边界。
+**Owner长期决策辅助与3DM安排（2026-10-02 UTC／10-01 PDT）：** 三位DM按问题连续推进。A/R、ridge、Q与S7 B10均已完整读取、独立判读并保留正反证据；一次配方结束不重新暂停研究。
+Root读完Claude完整评估与六项建议、两份最新原始结果critic和临时Oracle15,399-byte完整答复，作以下跨题安排。
 
 | 科学责任 | 当前实质工作与边界 | 负责人 |
 | --- | --- | --- |
-| 广义开源／可学习决策辅助，长期持有 | B02精确ridge结束，保留学习发生、局部收益与G/P质量成本取舍。B03固定36-query prefix Q已选择并发表完整合同：真实在线搜索／暂停恢复，已曝光64世界完整读取，精确复用57条原生轨迹并补全部7缺口；同轮G/Q/P冷启动计价。唯一op3ab88c01…已正常结束：DM报告192选择、4500新native、307058static全部读完，正在原critic独立诊断、正式发表及清理；Root不以单条进度消息替代完整处置。不限定Laya、语言模型或静态菜单，Q本身是普通信息使用研究。 | 原DM `/root/dm_typed_joint_skill`，独占 `typed_joint_skill_decision` 对应路径；长期责任延续。 |
-| 发展已保留的学习决策能力及其完整用途 | A/R六fits结束，保留R有限条件泛化增量与第三块严重零服务反例，static／planner仍更强。已选择e2e0f252b及08488e6bf澄清的冻结S/C八程序比较：无合法联系人持续四primitive步后，在原H4边界改用确定性waypoint导航。Root读完合同与7746-byte原独立意见并采纳；保留Z(G)、C/Bstar、原S、全50用户删失gap、真实nav/tape与完整成本。DM自主实施、工程核对及准入；目前选择不是接受，不自动追加A/R fits。 | 原DM `/root/dm_decision_generalization`，继续独占 `uav_decision_generalization`，只读旧S/C资产，不改其他方向输入。 |
-| 把已展示预测用途发展为完整控制能力 | B10已完整执行96个H3000回合、288000主原生步并通过32/32全量reader，发表8cc3a5cbc。H_A相对C服务均值+50.709且最低用户收益保留，但所有世界旅行／能耗增加、return与reserve代价更大；F_A预测更准且真实改变全部32世界，仍未建立F−H的完整增量。原critic正作独立结果诊断，DM继续清理与源据接续设计，无追加效果操作。 | 原DM `/root/dm_s7_prediction_use`，保持 `uav_fleet_transmission` 所有权。 |
+| 广义开源／可学习决策辅助，长期持有 | 优先构造较宽raw联合布局的数据规模学习曲线：新16k-world银行nested1k/4k/16k、可达raw static-J标签、固定共享关系scorer、2初始化×3尺寸共6探索fit、512共用新评价与预定128完整H500世界。raw条目是完整6×3布局，fullplanner另列质量／成本。DM正在闭合准确合同并进行一次独立科学选择；尚无新fit／操作。此为学习能力与价格问题，不复活旧8-menu残差或要求先胜teacher。 | 原DM `/root/dm_typed_joint_skill`，独占 `typed_joint_skill_decision` 对应路径。 |
+| 发展已保留的学习决策能力及其完整用途 | 已选冻结S_L0/S_L1协作比较继续：四primitive自身零服务后在原H4边界使用C确定性waypoint，保留Z(G)、C/Bstar、原S、全50用户服务与删失gap。 bounded实施与独立工程核对后按原126976native／0fit合同自主准入；无新科学范围或追加A/R fit。 | 原DM `/root/dm_decision_generalization`，独占 `uav_decision_generalization`；旧S/C资产只读。 |
+| 发展已保留的普通服务与预测控制能力 | 选择一次H_T完整探索：沿用H_A全部评分与状态，只在严格胜base的literal最高同分中选已算名义旅行最少，最终原编号；base最高则保留base。已有独立B10结果审查覆盖此选择，DM精确声明／工程后自主执行。32已曝光世界+2工程共102000新native／0fit，冻结C/H只绑定复用；读真实J、服务、同身份用户与能源尾部，不把同分或nominal节省当已证实收益。 | 原DM `/root/dm_s7_prediction_use`，保持 `uav_fleet_transmission` 所有权。 |
 
-本次滚动取舍与**完整10,508-byte原始Oracle答复**、实际Astra/max身份、Root primary-source阅读及被替代旧计划，
-见[已完成跨题安排](archive/2026-10-01/RESEARCH-three-dm-rolling-successors.md)。
-Oracle `/root/successor_allocation_review` 前次临时任务已结束并完整归档；现在因Q与S7新完整结果再次临时提供Root设计／取舍建议。它不是第四位DM、独立结果critic或后续批准者，建议本身不选择实验。
-前次[完整初始建议](archive/2026-10-01/RESEARCH-three-dm-oracle-design-advice.md)与各题原始科学意见继续保留。
-Root选择跨题投资和处理实际范围冲突；DM在已定问题内自主设计、实施、发布、准入、读证和接续，不需逐fit／run批准。
+**完整建议、取舍与被替代计划：** [本次完整归档](archive/2026-10-01/RESEARCH-learning-curve-and-cost-aware-successors.md)保存未经删改的Oracle15,399-byte原文、Owner转来Claude六建议4,245-byte原文、实际Astra/max身份、Root承重primary-source阅读和全部取舍。
+[Claude完整note](../Claude_docs/research_notes/OPEN_DECISION_MODELS_FOR_HMASD_20261002.md)已按owner要求从bc116366逐字导入main8bc5f9c93，保留其原有状态／结论而不回写。
+Oracle这次临时任务结束；它仅服务Root设计／分配，不是第四位DM、独立科学审查者或每次运行批准者。Root处理跨问题投入与实质分歧；DM自主收敛合同、适用独立审查、实施、发表、准入、全读及接续。
 
-**已读结果与下一笔价格：** R−A三块Cbar_bh均差+.041575/+.035114/+.006254，三块均值+.027648、描述t95跨0；
-R对N/fixed的三个点估计也为正，但静态规则明显更好，block3保留474／447个全队零覆盖步的严重个例。
-这是真实条件学习能力，未识别纯关系结构原因，也不是默认部署结论；早停A是有区分力但需要3次新fit的机制候选，暂缓而不抹去。
-B02 L−G J−.001587，描述区间跨0；pooled MSE改善同时伴随相对分支误差恶化，不能用预测精度替代决策收益。
-G相对P少670.47查询／.434s冷启动、J−.006842，普通质量成本能力保留。
-[完整A/R处置](candidates/uav_decision_generalization/NOTES.md#b01-independent-disposition)、
-[完整B02处置](candidates/typed_joint_skill_decision/NOTES.md#b02-independent-disposition)均含未删节独立原文。
+**价格与可解释范围：** 学习曲线目前是设计报价：6fits／24576updates／786432world呈现／12582912优化candidate呈现；含全标签重算、读取和普通参照约8.3Mstatic、约15.5Mcandidate呈现，128×9×H500+16audit共584000native，0H500训练标签。CPU3–8h／GPU.5–2h、支持14–22h、峰4–7GiB均待DM精确闭合；建议累计8CPUh／4GPUh停止重估，实际节点准入仍独立约束。固定updates使每例曝光随数据量变化；2初始化共用一个bank，不能叫6独立数据重复、规模定律或唯一瓶颈鉴别。
+H_T已核价的worker+reader上界108800candidates／3264000nominal／326400RF／68模型；连同有限mock检查保守109376／3281280／328128／80，实际与mock分列。CPU1.5–3h预测、4CPUh停止重估、支持5–8h、新raw.35–.6GiB、含source峰2.5–4GiB。其暴露面板不是新世界确认，H_T也不是较大E/B资源分配候选的必过门。S/C原CPU.1–.5h、1h停止重估与支持8–12h保持；不因一个方向省钱扩展另一个合同。
 
-[B03完整前瞻合同](candidates/typed_joint_skill_decision/NOTES.md#b03-selected-contract)发表于2f293841b：
-192同轮selection-only，7缺口+2完整审计=4,500新原生步，预计307,058／保守1,155,699静态调用，0fit／GPU；
-预计5–15 CPU分钟、1,800s边界、4–8支持h、完整source与既有输入计一次的2.5GiB峰值边界。
-旧面板已曝光，完整复用不改变B02合同，也不称新世界确认。
-[S/C完整前瞻合同](candidates/uav_decision_generalization/NOTES.md#b02-source-and-prospective-cooperation)已读并选择：
-32新世界108310000–108310031，480主+16完整审计，共126,976原生步，0fit／训练标签／GPU；
-含工程和reader至多211,456学生单行前向、5,120,712普通候选路径／20,482,848模型步。
-完整CPU预计.1–.5h、累计1h停止重估；8–12支持h、≤3GiB单source-snapshot准备范围均为预测价。
-独立原答SHA256 `caf8fa4ab65234f2f1a53b896e417a06c09f0e006f3276117b556a4e10def2da`，实际Astra/max已核对，MATERIAL_DISSENT:no。
-旧teacher-rescue安全修复异议继续有效；此次比较只购买完整用途。q0接管没有当前用户的无线重评分，但全体发射器仍开启，新路径会影响他人干扰；
-C的零team-outage也曾伴随35/50或38/50用户从未服务，不能以全队连续性取代个体结果。原S与Z首4步必同；没有自动调gate、增world或训练门控。
-S7原已选比较含工程312,000原生步，至多218,752候选／6,562,560 nominal ticks／656,256 RF samples／160私有模型，
-0fit；4–8 CPUh与12–18支持h是预测，12累计CPUh仍是停止／重估边界，不因其他题更省而扩展。
+**决定所依据的已读能力：** [Q完整独立处置](candidates/typed_joint_skill_decision/NOTES.md#b03-independent-disposition)保留Q−G J+.000838[−.002410,+.004087]、12正/9负/43同，静态排名增益与G/P成本质量取舍；新增7缺口1正/5负/1同不能删去。旧8-menu改用正确terminal-J普通对照后native-J余量仅约.000637，Root采纳原critic反对该菜单quadrature＋残差的新fit；这是该候选的投资理由不足，不是对更宽学习曲线的审查结论。B03完整0fit／4500新native／307058static／266.887543CPU秒，旧数据与支持另计。
+[S7 B10完整独立处置](candidates/uav_fleet_transmission/NOTES.md#b10-independent-disposition)保留H−C QoS+50.709[+8.726,+92.691]与低端用户收益，同时所有世界旅行／耗能更高、reserve+494.25UAV步；H−C J+20.063与F−H J−15.759的区间均跨0。预测误差改善和全部32世界实际激活不自动构成完整增量。全链312000native／0fit／已知3.279047CPUh，失败启动与支持未全测，清理实减4419653632B。B09条件预测收益、全部反例和C/P_BS使用限制保持，不能跨面板相减称修复。
+[A/R条件能力和处置](candidates/uav_decision_generalization/NOTES.md#b01-independent-disposition)、冻结S_L、普通完整控制、同价信息U32和公平分配的正能力均继续保留；不同任务J不横向相减。
 
-[S7 B10完整读数](candidates/uav_fleet_transmission/NOTES.md#b10-complete-reading)的F−H J−15.759[−53.080,+21.561]、H−C J+20.063[−25.373,+65.500]均未建立完整J优势；H−C QoS+50.709[+8.726,+92.691]是保留的服务能力。
-预测均值误差43.520→1.226m与全部32世界实际轨迹改变并存，不能用精度或未激活解释替代完整收益；H−C每UAV旅行+3411m、团队消耗+48.646Wh和reserve+494.25UAV步揭示代价。
-全链含工程312000原生步、96836真实candidate／2905080 nominal ticks／290508 RF samples／136模型，已知3.279047CPUh，另启动失败及支持CPU未全测。
-这些是固定面板描述，不把B09与B10跨面板相减称为修复；单次结果独立诊断仍未返回，默认使用限制继续。
-
-旧S_L、普通完整后果控制、S7预测、同付费信息U32和公平分配的正能力与各自代价继续有效。
-不同宿主／面板／目标的J不得横向相减。Claude暂停与peer所有权、FSD/PPC、G33和Milan范围均未变。
+通信协议与稀疏窗口学习作为具体后续候选保留：当前六元符号不等于完整2.6bit通信价；普通码本／合法信息受限规划器必须有相同信息信道，HMASD与flat的稀疏奖励比较须为双方计价。固定整回合程序的逐世界包络不约束回合内在线切换；小包络或平坦曲线都不能独自关闭更广问题。暂无通信／稀疏训练、cadence新效果、早停A、E/B、X或预训练模型筛选。论文定位另需具体贡献与竞争证据，不由记录数量自动决定。Claude暂停及peer所有权、FSD/PPC、G33和Milan范围不变。
 
 <a id="snapshot-materialization-repair-20261001"></a>
 **共享启动输入修复（2026-10-02 UTC／10-01 PDT）：** S7 B10工程a01已接受后在读取已提交checks.json时退出1；
@@ -3928,11 +3904,11 @@ Root 已向三个原会话各投递一次明确携带 `model="gpt-6-astra"`、`t
 | 完成Root交接并继续任务（当前 Root） | `01a0f779-ace2-74e1-85ad-e0997b61d505` / `local` | `/home/fires/hmasd-wsl` / `main` | Owner 明确接任并继续；维护 Codex 问题选择、跨题分配与共享控制。身份由运行环境与 native list_threads 同时核对。上一轮已完整收尾，未迁移或重启旧操作；四个新原生 DM 的首个实际 turn 已逐个核对为 gpt-6-astra / max。Claude peer 联系本地址。[恢复范围](#resume-20261001)。 |
 | DM：开源决策辅助长期探索 | parent `01a0f779-ace2-74e1-85ad-e0997b61d505` / child `/root/dm_typed_joint_skill` / UUID `01a0f7ce-366f-7d91-93e7-e38693506d43` | `/home/fires/hmasd-wsl` / `main` | 原registered DM持续持有广义问题，实际gpt-6-astra/max。B01–B03已完整读取及独立处置；当前source-only核nested静态teacher数据曲线与raw完整布局接口，无在跑producer或已选fit。保留Claude资产只读／暂停及DM2独立范围。[B03处置](candidates/typed_joint_skill_decision/NOTES.md#b03-independent-disposition)，[接口事实](candidates/typed_joint_skill_decision/NOTES.md#continued-interface-source-audit)。 |
 | DM：学习决策能力与完整用途 | parent `01a0f779-ace2-74e1-85ad-e0997b61d505` / child `/root/dm_decision_generalization` / UUID `01a0f9f4-0ebf-7481-9bf4-3933f2e9fcd7` | `/home/fires/hmasd-wsl` / `main` | 已注册 hmasd-direction-manager；Root核对session_meta与首turn_context，实际gpt-6-astra/max。独占uav_decision_generalization对应路径；B01六fits已完整判读、发表和清理。冻结S_L0/S_L1与普通控制协作的B02已完成独立审阅和Root本次投入选择；有界实施／工程进行中，没有新效果操作。旧S/C资产只读，原方向所有权不变。[前瞻合同](candidates/uav_decision_generalization/NOTES.md#b02-source-and-prospective-cooperation)。 |
-| 临时Oracle：Root科研设计与分配建议 | parent `01a0f779-ace2-74e1-85ad-e0997b61d505` / child `/root/successor_allocation_review` / UUID `01a0f77c-49e7-7292-91a3-2d8fa8fb1975` | `/home/fires/hmasd-wsl` / `main`，read-only建议 | 前两次完整建议已由Root读完并保存；因Q与S7新结果复用原Astra/max子代理做一次临时设计／取舍建议。只读、无执行或独立审查职责，不计入3DM。[Owner明确范围](#three-dm-decision-assistance-20261001)。 |
+| 临时Oracle：Root科研设计与分配建议 | parent `01a0f779-ace2-74e1-85ad-e0997b61d505` / child `/root/successor_allocation_review` / UUID `01a0f77c-49e7-7292-91a3-2d8fa8fb1975` | `/home/fires/hmasd-wsl` / `main`，read-only建议 | 本次15,399-byte完整建议已由Root读完、归档并完成投资取舍，实际turn为gpt-6-astra/max；临时任务结束。只读设计建议、不执行、不作自己方案的独立审查、不计入3DM。[完整本次建议及处置](archive/2026-10-01/RESEARCH-learning-curve-and-cost-aware-successors.md)。 |
 | DM：RF 完整购买价值 | parent `01a0f779-ace2-74e1-85ad-e0997b61d505` / child `/root/dm_rf_purchase` / UUID `01a0f780-270c-7302-842e-9302428ef43f` | `/home/fires/hmasd-wsl` / `main` | 新注册 `hmasd-direction-manager`；Root 直接读本次 rollout session_meta 与首 turn_context，实际 gpt-6-astra / max。独占 `uav_radio_information_cost` 相应方向路径；B02完整比较、全数值核验与独立科学处置已完成，方向idle且无活动操作／排队后继；本 DM 保留证据连续性。保留前任已完成原操作和全部正负证据。[分配](#root-selected-successors-20261001)、[固定B02合同](candidates/uav_radio_information_cost/NOTES.md#b02-selected-contract)。 |
 | DM：静默命令承诺 | parent `01a0f779-ace2-74e1-85ad-e0997b61d505` / child `/root/dm_silence_commitment` / UUID `01a0f780-b068-7f01-b7f6-e4c32d327d40` | `/home/fires/hmasd-wsl` / `main` | 新注册 `hmasd-direction-manager`；Root 直接读本次 rollout session_meta 与首 turn_context，实际 gpt-6-astra / max。独占 `uav_fleet_adaptation` 相应方向路径；本轮完整比较、全部读取、独立科学处置、发表和测量清理已完成，方向 reserve；无活动操作、未读意见或已选追加。保留前任已完成原操作和全部正负证据。[分配](#root-selected-successors-20261001)。 |
 | DM：完整回合参数搜索 | parent `01a0f779-ace2-74e1-85ad-e0997b61d505` / child `/root/dm_episode_search` / UUID `01a0f781-65d4-7ba3-b412-beacc031237f` | `/home/fires/hmasd-wsl` / `main` | 新注册 `hmasd-direction-manager`；Root 直接读本次 rollout session_meta 与首 turn_context，实际 gpt-6-astra / max。独占 `uav_episode_policy_search` 相应方向路径；本轮完整比较、全部读取、独立科学处置、发表和测量清理已完成，方向 reserve；无活动操作、未读意见或已选追加。保留前任已完成原操作和全部正负证据。[分配](#root-selected-successors-20261001)。 |
-| 独立科学审查：当前方案选择 | parent `01a0f779-ace2-74e1-85ad-e0997b61d505` / child `/root/next_study_review` / UUID `01a0f9fe-de22-7d73-82c2-129a0cadede6` | `/home/fires/hmasd-wsl` / `main`，read-only | registered ResearchCritic，独立初始上下文；实际gpt-6-astra/max已核对。既有A/R、S7和冻结S/C选择及A/R结果意见完整保留；当前只作B10完整结果独立重构／方向诊断，未再委派重复结果审查、不计入3DM。 |
+| 独立科学审查：当前方案选择 | parent `01a0f779-ace2-74e1-85ad-e0997b61d505` / child `/root/next_study_review` / UUID `01a0f9fe-de22-7d73-82c2-129a0cadede6` | `/home/fires/hmasd-wsl` / `main`，read-only | registered ResearchCritic，独立初始上下文；实际gpt-6-astra/max。A/R、S7、S/C选择与A/R/B10结果意见完整保留；本次B10原答12,071bytes已发表2015e86ed，MATERIAL_DISSENT:no，覆盖具体H_T继续建议。当前任务结束，不计入3DM。新学习曲线由DM原独立critic审阅，不重复排队。 |
 | DM：S7 预测用途与完整控制 | parent `01a0f779-ace2-74e1-85ad-e0997b61d505` / child `/root/dm_s7_prediction_use` / UUID `01a0f77e-bce4-7471-9529-be2ba81a927a` | `/home/fires/hmasd-wsl` / `main` | 复用原registered DM，实际gpt-6-astra/max；保留uav_fleet_transmission所有权。B10主面板已全部执行／读取／发表，当前独立结果诊断与清理／接续设计；无旧操作重启或自动新比较。[完整B10](candidates/uav_fleet_transmission/NOTES.md#b10-complete-reading)、[现行任务](#three-dm-decision-assistance-20261001)。 |
 | Prior completed DM: joint local motion/transmitter development | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_fleet_adaptation` | `/home/fires/hmasd-wsl` / `main` | Same nonarchived registered `hmasd-direction-manager`; actual first turn verified gpt-6-astra/max, native UUID01a0f1f4-bfe5-7ca0-8b1e-4945c185f49a. B10 is complete through the full native reader, independent scientific diagnosis, own publication and measured cleanup; result4a0db1166, reserve with no producer, unread advice or selected successor. Retain original assets, both adverse endpoints, useful joint/CJ code, all B01–B10 evidence and one canonical required bulk copy. Both exact B10 source snapshots, duplicate staging and scratch are gone;1639141376 allocated bytes reclaimed, no cleanup blocker. No accepted operation moves or ownership transfers. [Resolved result](candidates/uav_fleet_adaptation/NOTES.md#b10-independent-disposition), [cleanup](candidates/uav_fleet_adaptation/NOTES.md#b10-final-cleanup), [original advice and adoption](candidates/uav_fleet_adaptation/NOTES.md#b10-original-oracle-advice). |
 | Prior completed DM: radio uncertainty (formerly individual-user waiting) | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_user_waiting` | `/home/fires/hmasd-wsl` / `main` | Same nonarchived registered `hmasd-direction-manager`; first actual turn verified gpt-6-astra/max, native UUID01a0f1f5-8634-7e13-b931-e75abdb10d45. `uav_radio_uncertainty` B01 complete through full numerical/scientific reading, publication and measured cleanup; reserve with conditional U32 capability and all waiting harms retained. No running operation, open advice or selected successor. Source retained for useful P/U32 and acquisition-code imports; active consumers have finished. Waiting B01–B07 remain closed in reserve. [Full RF disposition](candidates/uav_radio_uncertainty/NOTES.md#b01-independent-review-and-disposition), [closure](candidates/uav_radio_uncertainty/NOTES.md#b01-final-cleanup), [original contract/advice](candidates/uav_radio_uncertainty/NOTES.md#b01-selected-contract). |
