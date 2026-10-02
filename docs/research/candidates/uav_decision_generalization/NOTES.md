@@ -3723,3 +3723,72 @@ total601500 native,28913.067836 workerCPU seconds, error null. No full study
 reading or independent result judgment exists yet. The same accepted worker and
 native DM observation continue; writing the snapshot does not pause, transfer,
 terminate, restart or expand this purchase. Later live state takes precedence.
+
+
+<a id="b03-worker-complete-reader-input"></a>
+### B03 full native collection and exact reader inputs — 2026-10-02 UTC
+
+The original source300c58 worker exited0 at11:18:16.154592UTC. Same-claim READY
+was drained in observer generation7: terminal witness is valid, original runner
+and supervisor are absent, record consistency has no mismatch. I consumed that
+terminal event; no worker rearm/restart was performed. The empty observation
+controller moved to generation8 awaiting the separate selected reader job.
+
+All3 fits completed45 rollouts each. Native counts are exactly1196000:
+1080000 training and116000 frozen; there are135 training rollout files and232
+frozen missions in the bound manifest. Actor/critic optimizer steps are303750
+each, coordinator1350, team discriminator1350 and individual discriminator5400,
+total615600. The direct PPO counter records97.2M agent-tick presentations.
+Endogenous labels are720000team and4320000individual across H/noD; H alone
+consumes360000/2160000 intrinsic-reward contexts. Host counts2720 resets,
+280 constructors,48 unused final-reset world materializations and2392000 original
+plus2392000 coupled dense diagnostic entries are retained. NoD still paid its
+classifier updates, while its reward forwards were absent as selected.
+
+Worker process self-report is49889.033756CPU seconds,12590.571796wall seconds,
+peak2955396KiB,0GPU; cumulative with22.08 engineering CPU seconds is49911.113756s.
+The scope excludes the final self-report write/shutdown and does not pretend
+unmetered support was zero. Runtime stderr contains only the original singleton
+skill-logit std diagnostic warnings from SET's n_Z/n_z1 path; no failed outcome
+or nonfinite saved scientific tensor was reported. Complete independent reader
+validation and scientific interpretation are still outstanding.
+
+I collected canonical summary223565B, manifest146558B, initial-alias proof64543B
+and original terminal witness557B with SHA checks, plus existing config/launch
+records. Unique canonical output totals1379496137 logical/1381117952 allocated
+bytes in749 files, including734 raw+metadata files and5 distinct checkpoints.
+Bulk stayed in its original node location. These are closed writer identities;
+the selected reader will independently verify every referenced file and all
+promised semantic checks. The compact
+[collection witness](../../../../runs/uav_decision_generalization/b03_joint_window_a01/collection.json)
+records sizes/hashes and.030385088CPU seconds of metadata collection.
+
+[B03_WORKER_INPUT.json](B03_WORKER_INPUT.json), SHA256
+`6b71d289ad964b847c14337ba1c1b61df4f129c342cc1a09aa2f838be28a7e49`,
+holds the canonical root and final config/summary/manifest identities. It is an
+external-input locator, not a duplicate or snapshot-relative raw location.
+[B03_AFTER_WORKER_LEDGER.json](B03_AFTER_WORKER_LEDGER.json), SHA256
+`cad8103ca5ac8803b9e687e74f3f8530fba0b448ae7e232e7c41055319355333`,
+starts reader measured cumulative CPU at49911.144141088s with all original
+engineering/worker counters. This includes measured metadata collection;
+publication, control and GC support remain separately unmetered.
+All45 scientific source hashes and the study input are unchanged. The next
+snapshot may have a newer publication SHA solely to contain these exact reader
+inputs. The fixed reader creates no native transitions, training labels or
+optimizer updates; its full planned model/ordinary/geometry/ledger readings and
+actual CPU still count. Its successful completion, not worker exit alone, is
+needed before a complete scientific result.
+
+
+The maintained snapshot GC preview verified terminal identities, absent live
+references, unchanged source, durable Git reachability and external canonical
+outputs. Its exact apply removed only
+`.git/hmasd-launch-sources/728d72485d07492e9ed7caefcf74c5d7`:
+allocated1813323776B before,0after, net1813323776B reclaimed; the target and its
+Git worktree registration are gone. No bulk evidence was moved, copied, tarred
+or deleted. [Measured GC witness](../../../../runs/uav_decision_generalization/b03_joint_window_a01/worker-snapshot-cleanup.json).
+This releases the previous input snapshot before creating the new reader snapshot;
+all canonical result evidence and admission/exit records remain. A final local
+source-manifest comparison confirms all45 scientific files still match the
+worker input exactly. Cleanup of this disposable source does not turn native
+completion into a scientific result or release required unique evidence.

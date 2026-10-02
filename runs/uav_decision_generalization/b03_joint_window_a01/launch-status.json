@@ -20,18 +20,15 @@
   "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/d586acfdbb3862d3afd87e0d601bba0f91f350d860eb29073cea51ac68c87b93.json",
   "direction": "uav_decision_generalization",
   "execution": {
+    "exit_code": 0,
     "exit_witness": {
+      "exit_code": 0,
+      "finished_at_epoch": 1790939896.1545916,
       "path": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_a01/process-exit.json",
-      "state": "absent"
+      "state": "valid",
+      "termination": "process_exit"
     },
     "runner": {
-      "observed_identity": {
-        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
-        "kind": "linux_pid_start_ticks",
-        "pid": 1324329,
-        "session_id": 1324328,
-        "start_ticks": 126674232
-      },
       "recorded_identity": {
         "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
         "kind": "linux_pid_start_ticks",
@@ -39,17 +36,10 @@
         "session_id": 1324328,
         "start_ticks": 126674232
       },
-      "state": "running"
+      "state": "absent"
     },
-    "state": "running",
+    "state": "exited",
     "supervisor": {
-      "observed_identity": {
-        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
-        "kind": "linux_pid_start_ticks",
-        "pid": 1324328,
-        "session_id": 1324328,
-        "start_ticks": 126674229
-      },
       "recorded_identity": {
         "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
         "kind": "linux_pid_start_ticks",
@@ -57,7 +47,7 @@
         "session_id": 1324328,
         "start_ticks": 126674229
       },
-      "state": "running"
+      "state": "absent"
     }
   },
   "explicit_retry": {
@@ -73,7 +63,7 @@
   "kind": "hmasd_operation_status",
   "manifest_ref": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_a01/launch-manifest.json",
   "node": "wsl_4070",
-  "observed_at": "2026-10-02T07:41:53.687027Z",
+  "observed_at": "2026-10-02T11:19:10.093778Z",
   "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/d586acfdbb3862d3afd87e0d601bba0f91f350d860eb29073cea51ac68c87b93.json",
   "output_root": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_a01",
   "record_consistency": {

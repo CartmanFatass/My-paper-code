@@ -1,0 +1,71 @@
+{
+  "node": "wsl_4070",
+  "canonical_root": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b03_joint_window_a01",
+  "compact_files": {
+    "summary.json": {
+      "bytes": 223565,
+      "sha256": "2fe984bf5c203b2b450237c1304a0b074f24c604e7adfe7153f02f1a9a263ae9"
+    },
+    "manifest.json": {
+      "bytes": 146558,
+      "sha256": "6d572b218c091ccd5ca2b8e305c0b1dc074f45efdd24c51029d4edbaa5ac1c95"
+    },
+    "process-exit.json": {
+      "bytes": 557,
+      "sha256": "eabfa97c59305e294e80309307fbdc4997fcdfb70557e73a9b500819cdd7856d"
+    },
+    "initial_alias.json": {
+      "bytes": 64543,
+      "sha256": "cad80354f319e1d67789b7f35fcac2896d2e5eeb89b7358691d31baa86477832"
+    }
+  },
+  "inventory": {
+    "files": 749,
+    "logical_bytes": 1379496137,
+    "allocated_bytes": 1381117952,
+    "top_level": {
+      "stdout.log": {
+        "bytes": 0
+      },
+      "admission-preflight.json": {
+        "bytes": 771
+      },
+      "summary.json": {
+        "bytes": 223565
+      },
+      "launch-manifest.json": {
+        "bytes": 5317
+      },
+      "raw": {
+        "files": 734
+      },
+      "launch-status.json": {
+        "bytes": 613
+      },
+      "logs": {
+        "files": 0
+      },
+      "config.json": {
+        "bytes": 17816
+      },
+      "manifest.json": {
+        "bytes": 146558
+      },
+      "process-exit.json": {
+        "bytes": 557
+      },
+      "checkpoints": {
+        "files": 5
+      },
+      "stderr.log": {
+        "bytes": 753
+      },
+      "initial_alias.json": {
+        "bytes": 64543
+      }
+    }
+  },
+  "metadata_collection_cpu_seconds": 0.030385088,
+  "bulk_copied": false,
+  "manifest_file_SHA_verification": "reserved for complete admitted reader; writer closed identities retained"
+}
