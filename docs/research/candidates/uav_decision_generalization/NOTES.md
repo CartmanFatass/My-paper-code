@@ -1690,3 +1690,22 @@ ordinary competition and full price. Selection still belongs to the one current
 independent review plus Root's cross-question investment resolution. I will
 preserve that original recommendation/dissent and my disposition here. There
 is no accepted operation to observe and no new result to report at this point.
+
+Prospective clarification before selection, with no additional execution:
+own q=0 does not make that UAV radio-inactive. All transmitters stay on; its
+new path can alter interference and other agents' service even while its own
+current row contains no users. Each agent chooses from the same pretransition
+observation matrix before the joint native action is applied. The full native
+team and all-user outcomes therefore remain essential; an apparent local
+reacquisition can coexist with losses elsewhere. The empty-user C calculation
+has no model evidence about those invisible users' prospective service.
+
+The ≤3 GiB new peak-disk forecast assumes at most one fully materialized source
+snapshot is retained at a time. Audit and main can share one published input
+snapshot while keeping their fixed phase counts; after its worker is terminal
+and evidence/consumers are checked, release that snapshot through its supported
+lifecycle before preparing a separate reader snapshot. Required unique raw and
+actor inputs remain at their canonical locations. If the actual lifecycle needs
+overlap, measure and revise that preparation resource estimate rather than
+silently treat two 1.67 GiB snapshots as one. This does not change the scientific
+query, episode, CPU or fitting envelope.
