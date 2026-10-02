@@ -5210,3 +5210,63 @@ judgment and preserve earlier positive evidence. Topic3 information restrictions
 and unrelated directions do not change. Useful B07 codec/transport/replay/reader
 code remains published; final consumer checks and measured duplicate/scratch
 deletion follow this evidence publication.
+
+
+<a id="b07-final-cleanup"></a>
+### B07 publication, consumer checks and measured closure, 2026-10-02 UTC
+
+Complete evidence, compact reading and the full original result review were
+published first at `83b947531b52e371f994ace0f2ee48fef8424280`; useful executable
+source remains at c2f37121a (code unchanged from2d41535bd). The final native status
+after retirement still reports a consistent valid exit0 and absent runner and
+supervisor, with its claim, manifest and durable output intact. Observer and proxy
+PIDs are absent; the independent critic and engineering helpers have finished.
+There is no unread result, new fit, pending advice or active producer.
+
+The exact snapshot collector preview and apply both accepted the terminal native
+claim, found no live snapshot consumers and verified a durable published source.
+A read-only privileged staging scan found no process using that input root; only
+the already-terminal a02 claim references it. All34 staged input identities and
+both manifests were checked. The original local D checkpoint and32 raw episodes
+were rehashed against the accepted manifest, as was canonical remote B19451.
+All278 canonical B07 outputs were rehashed before deletion. Compact unique proxy
+and observer-request identities were incorporated into the existing cleanup
+record; the full readings and trajectories were not duplicated or archived.
+
+Actual deleted targets and allocated tree bytes before→after:
+
+| Target | Allocated bytes removed |
+|---|---:|
+| wsl_4070 `/home/wu/projects/HMASD/.git/hmasd-launch-sources/88234550c731459082798e06e8526444` | 1,827,778,560→0 |
+| wsl_4070 `/home/wu/hmasd-inputs/uav_message_content/b07_codec_a01` | 10,346,496→0 |
+| local `/home/fires/hmasd-wsl/temp/directions/uav_message_content/b07_codec_a02` | 5,087,232→0 |
+
+The snapshot is also absent from Git worktree registration. These final targets
+reclaimed1,843,212,288 allocated bytes with no new bulk retention. Earlier a01's
+unclaimed source snapshot7ce384456e3d488986b07d1611036535 had already reclaimed
+1,827,467,264 bytes; both boundaries total3,670,679,552 deleted-target bytes.
+`runs/uav_message_content/b07_codec_a02/cleanup.json` gives before/after measurements,
+consumer checks and the separate adjustment for compact closure-documentation
+allocation. This is measured working-tree/run allocation, not a claim about Git
+object storage or concurrent whole-host free space.
+After24,576 additional allocated bytes for the compact cleanup record and closure
+documentation, **final net reclamation is1,843,187,712 allocated bytes**. The
+earlier a01 source-only deletion remains a separately measured boundary.
+
+The single canonical70,696,096-byte B07 output remains on wsl_4070, including all
+ordinary/learned dictionaries and all256 positive/adverse trajectories. Required
+old parent/teacher evidence remains in its original locations. Historical staged
+CLI paths are now deliberately absent: any future authorized reproduction must
+reconstruct exact inputs from these recorded canonical hashes; it is not an
+in-place resumable operation. B07 implementation and focused tests remain useful
+for the retained ordinary codec, transport and complete-reader contract; no unused
+module was identified or removed. No cache directory remained under its owned
+code/tests. Other directions' files and existing shared controls were preserved.
+
+**Disposition:** B07 is complete, fully read and independently reviewed; direction
+standing moves to reserve/idle with no active idea and no fabricated dependency.
+Topic5 receives the conditional capability, adverse service cases, failed learning
+prediction and fresh-parent qualification; all prior positive/adverse evidence
+remains. Root's future allocation may select a consequential new use, but no
+continuation is selected here. No cleanup tool blocker or disposable B07 target
+remains.

@@ -1,0 +1,324 @@
+{
+  "source_preview": {
+    "mode": "preview",
+    "snapshots": [
+      {
+        "claim": "/home/wu/projects/HMASD/.git/hmasd-admission/fba788864f2f08058545806ed93a2d68ca0fe8307a3bd40326ed0659e63fc630.json",
+        "durable_ref": "refs/remotes/origin/HEAD",
+        "eligible": true,
+        "output": "/home/wu/projects/HMASD/runs/uav_message_content/b07_codec_a02",
+        "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/88234550c731459082798e06e8526444",
+        "sha": "c2f37121a092116c92fe5db7809bfc4710d4da55",
+        "snapshot": "88234550c731459082798e06e8526444"
+      }
+    ]
+  },
+  "preservation_and_staging_checks": {
+    "local_original_inputs": [
+      {
+        "path": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration/19702/D/final.pt",
+        "bytes": 568164,
+        "sha256": "1a0de628a6c324a5cd0c69f4857b37b4bc1f47c51dc80d2a9a233e7ee7f69840"
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration/19702/D/raw/final_00.npz",
+        "bytes": 280783,
+        "sha256": "1541e33fd96f677e9ff7b3cccbba671b1b825441c12f7716a21bb5bd25f34b15"
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration/19702/D/raw/final_01.npz",
+        "bytes": 282003,
+        "sha256": "8c25b7f836ef894214d1b4174fb32a290ccf91a7677258f3cf0899f8cfb78ee2"
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration/19702/D/raw/final_02.npz",
+        "bytes": 293851,
+        "sha256": "81547f361fc758b367e339b90d3c74014c2d6ebe5f603ce45a077857675d7ca3"
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration/19702/D/raw/final_03.npz",
+        "bytes": 281517,
+        "sha256": "d0ddbf22f1c382dcbe8de63e2eeadab1b4ecf421d4d23bf8879d9cef4256639e"
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration/19702/D/raw/final_04.npz",
+        "bytes": 260371,
+        "sha256": "5ca4e0ca37cd119cc8ed639e2e068c4e581ea39a77d7795e7c1476342f50a07a"
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration/19702/D/raw/final_05.npz",
+        "bytes": 268270,
+        "sha256": "fc5d18df6e1ed52d0573c436f2e059dc4d48ee762aa45472e6837471072dfffd"
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration/19702/D/raw/final_06.npz",
+        "bytes": 282440,
+        "sha256": "a7585d5ad6d187f5f22eb4671032c2c814c5663b6271e7ffd9609009066e9705"
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration/19702/D/raw/final_07.npz",
+        "bytes": 284169,
+        "sha256": "6d1b06435d2837fa5d0931992a6cd67d5fafb614ad5ddf94ba962584dfa4b57c"
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration/19702/D/raw/final_08.npz",
+        "bytes": 272821,
+        "sha256": "5be8a62845b7f9780181bcb9a54f9a55073eea18bae122e12d6e27ddeb117bcf"
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration/19702/D/raw/final_09.npz",
+        "bytes": 281133,
+        "sha256": "36b993c63449b25e21d76b38206392bbb0100a28678f07a899231ae23627b6ee"
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration/19702/D/raw/final_10.npz",
+        "bytes": 294152,
+        "sha256": "8e33598d2f9572dfaae08ebd329c1ce1090aa6ef505a6df36637decc24ff13d0"
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration/19702/D/raw/final_11.npz",
+        "bytes": 291488,
+        "sha256": "34441285194aa6648931d187f3a069252ae19820676b66c3eeb1dd7447e6f6f8"
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration/19702/D/raw/final_12.npz",
+        "bytes": 274696,
+        "sha256": "7dd860dc75a497870c187de9460634f38a93802d5b65f78b123ab845ac870270"
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration/19702/D/raw/final_13.npz",
+        "bytes": 292268,
+        "sha256": "8802cc1a2a4536d84461191c72cb3d759a63b8ab99a618d37fda9062cde38fe0"
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration/19702/D/raw/final_14.npz",
+        "bytes": 275859,
+        "sha256": "b42f4fbcbb6b4002f7e5d1e7e2ea6857dbc9fa87f2a13d3f633392a1a414d635"
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration/19702/D/raw/final_15.npz",
+        "bytes": 282016,
+        "sha256": "9987edf817fc9b5f46692415b9505e05db70c65157fe45ac5ce965d489f0f1d4"
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration/19702/D/raw/final_16.npz",
+        "bytes": 286660,
+        "sha256": "9dc620dfb728193c1177c1adb42ce140bd87392cb700fa3d67b733d1060536f0"
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration/19702/D/raw/final_17.npz",
+        "bytes": 275496,
+        "sha256": "97cf35364797c3e25940fbdb41e098cc8ae1827b836bdd3e2ea872e6c396b077"
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration/19702/D/raw/final_18.npz",
+        "bytes": 280179,
+        "sha256": "040947b9245bdee2960aff3ec41e511d8acced078b8728807cda781744323966"
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration/19702/D/raw/final_19.npz",
+        "bytes": 273773,
+        "sha256": "5cb9af23dcd992b98a92db95dc54aa227467e0a73f64433fd92cfec044f81d9d"
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration/19702/D/raw/final_20.npz",
+        "bytes": 291175,
+        "sha256": "f5088649d2ed0f2f4020bf0a45f46809a596cdb2c69a59bc95df5504b3679dec"
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration/19702/D/raw/final_21.npz",
+        "bytes": 292115,
+        "sha256": "c93e03da305c2fdcb04585607d9baf8c3ffa766dd74bf6393f65e1d06afcbbbc"
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration/19702/D/raw/final_22.npz",
+        "bytes": 295671,
+        "sha256": "fb2388b3a895546355a0b4a357342cec774d856fd40f6419f3105bcd98edf706"
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration/19702/D/raw/final_23.npz",
+        "bytes": 297517,
+        "sha256": "22156416901605589137041a71b71bf9baa86a424b1f181cdf2074b0b5713c22"
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration/19702/D/raw/final_24.npz",
+        "bytes": 292235,
+        "sha256": "ba3d11f0478948109c78a178bdcf4efe2145167251d83733c6570bb7a2756816"
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration/19702/D/raw/final_25.npz",
+        "bytes": 282047,
+        "sha256": "45d446fd5e5ac566b646eaf98c41116ac0948fda8135a74d8ca503149cb9f168"
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration/19702/D/raw/final_26.npz",
+        "bytes": 272288,
+        "sha256": "2dfe03c8b0bebdc12c2ed6e1ca642a6d3a08d0020f52a8f66e875e75a4c0769a"
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration/19702/D/raw/final_27.npz",
+        "bytes": 279624,
+        "sha256": "6e3ae1b96a64ca67943c479830a6a8008d5b16bb013f96b9b8bcd91eda6c9425"
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration/19702/D/raw/final_28.npz",
+        "bytes": 294077,
+        "sha256": "95ce57125dd6e8f1ee0605d7a8c4d24a37c98af33a0de2af0ab611ac0a1b0f9e"
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration/19702/D/raw/final_29.npz",
+        "bytes": 268963,
+        "sha256": "472d19809901295bb7ec114b2e8c256e4206f76caaa63910061127e245b3af01"
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration/19702/D/raw/final_30.npz",
+        "bytes": 296632,
+        "sha256": "c8b97b60c76249f84fa97ebaffe333e017b74f0bb8bf5dfebb7c8ad8d6296825"
+      },
+      {
+        "path": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration/19702/D/raw/final_31.npz",
+        "bytes": 284791,
+        "sha256": "bcc9506bf1a6ad8ea8acca7a9d591c9b19ff616c19df234ddfa853c49ecdb4ab"
+      }
+    ],
+    "remote": {
+      "canonical_b_verified": "/home/wu/projects/HMASD/runs/uav_message_content/b02_preserved_scalar/19451/B/final.pt",
+      "staged_inputs_verified": 34,
+      "staged_manifests_verified": 2,
+      "canonical_output_files_verified": 278,
+      "staging_consumers": [],
+      "staging_referencing_claims": [
+        "/home/wu/projects/HMASD/.git/hmasd-admission/fba788864f2f08058545806ed93a2d68ca0fe8307a3bd40326ed0659e63fc630.json"
+      ],
+      "staging_allocated_tree_bytes": 10346496,
+      "staging_logical_bytes": 10261750,
+      "staging_file_count": 36
+    },
+    "helpers": "independent result critic completed; engineering helpers had completed",
+    "local_observer_pid_absent": true,
+    "local_proxy_pid_absent": true,
+    "evidence_published": "83b947531b52e371f994ace0f2ee48fef8424280"
+  },
+  "retired_scratch_identities": {
+    "source-proxy.json": {
+      "pid": 769059,
+      "start_ticks": "10371105",
+      "argv": [
+        "/usr/bin/ssh",
+        "-N",
+        "-T",
+        "-o",
+        "ExitOnForwardFailure=yes",
+        "-o",
+        "ServerAliveInterval=30",
+        "-o",
+        "ServerAliveCountMax=3",
+        "-R",
+        "127.0.0.1:0",
+        "hmasd-wsl-node"
+      ],
+      "remote_bind": "127.0.0.1",
+      "remote_port": 35719,
+      "stderr": "Allocated port 35719 for remote forward to socks:0\n",
+      "created_utc": "2026-10-02T21:27:33Z",
+      "purpose": "temporary source/admission GitHub TLS transport; no persistent configuration change",
+      "stopped_after_native_acceptance": true,
+      "stop_utc": "2026-10-02T21:33:09Z"
+    },
+    "observer-request.json": {
+      "jobs": [
+        {
+          "id": "launch-uav-message-b07-a02",
+          "protocol": "launch",
+          "argv": [
+            "/usr/bin/ssh",
+            "hmasd-wsl-node",
+            "/home/wu/.venvs/hmasd-gcc-31021/bin/python /home/wu/projects/HMASD/scripts/hmasd_launch.py status /home/wu/projects/HMASD/.git/hmasd-admission/fba788864f2f08058545806ed93a2d68ca0fe8307a3bd40326ed0659e63fc630.json"
+          ],
+          "cwd": "/home/fires/hmasd-wsl",
+          "interval": 30,
+          "timeout": 20
+        }
+      ]
+    }
+  },
+  "retired_proxy_stderr": "Allocated port 35719 for remote forward to socks:0\n",
+  "remote_deletion": {
+    "before_allocated_tree_bytes": {
+      "snapshot": 1827778560,
+      "staging": 10346496
+    },
+    "source_apply": {
+      "mode": "apply",
+      "snapshots": [
+        {
+          "claim": "/home/wu/projects/HMASD/.git/hmasd-admission/fba788864f2f08058545806ed93a2d68ca0fe8307a3bd40326ed0659e63fc630.json",
+          "durable_ref": "refs/remotes/origin/HEAD",
+          "eligible": true,
+          "output": "/home/wu/projects/HMASD/runs/uav_message_content/b07_codec_a02",
+          "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/88234550c731459082798e06e8526444",
+          "removed": true,
+          "sha": "c2f37121a092116c92fe5db7809bfc4710d4da55",
+          "snapshot": "88234550c731459082798e06e8526444"
+        }
+      ]
+    },
+    "snapshot_exists": false,
+    "snapshot_registered": false,
+    "staging_exists": false,
+    "after_allocated_tree_bytes": {
+      "snapshot": 0,
+      "staging": 0
+    },
+    "net_allocated_bytes_reclaimed": 1838125056,
+    "deleted_targets": [
+      "/home/wu/projects/HMASD/.git/hmasd-launch-sources/88234550c731459082798e06e8526444",
+      "/home/wu/hmasd-inputs/uav_message_content/b07_codec_a01"
+    ],
+    "new_remote_retention_bytes": 0
+  },
+  "local_deletion": {
+    "process_scan_scope": "same-UID processes; helpers complete and observer/proxy exact PIDs absent",
+    "live_references": [],
+    "before_allocated_tree_bytes": {
+      "/home/fires/hmasd-wsl/temp/directions/uav_message_content/b07_codec_a02": 5087232
+    },
+    "after_allocated_tree_bytes": {
+      "/home/fires/hmasd-wsl/temp/directions/uav_message_content/b07_codec_a02": 0
+    },
+    "net_allocated_bytes_reclaimed": 5087232,
+    "deleted_targets": [
+      "/home/fires/hmasd-wsl/temp/directions/uav_message_content/b07_codec_a02"
+    ],
+    "new_bulk_retention_bytes": 0
+  },
+  "final_cleanup_deleted_target_bytes": 1843212288,
+  "earlier_a01_deleted_target_bytes": 1827467264,
+  "whole_B07_deleted_target_bytes": 3670679552,
+  "blockers": [],
+  "closure_documentation_allocation_before": {
+    "docs/research/candidates/uav_message_content/NOTES.md": 376832,
+    "docs/research/RESEARCH.md": 589824,
+    "runs/uav_message_content/b07_codec_a02/cleanup.json": 0
+  },
+  "post_retirement_native_status": {
+    "observed_at": "2026-10-02T22:15:15.868228Z",
+    "state": "exited",
+    "exit_code": 0,
+    "exit_witness": "valid",
+    "runner": "absent",
+    "supervisor": "absent",
+    "record_consistency": "consistent",
+    "mismatches": [],
+    "summary_stdout_stderr": "present",
+    "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/fba788864f2f08058545806ed93a2d68ca0fe8307a3bd40326ed0659e63fc630.json"
+  },
+  "allocation_scope": "Allocated working-tree/run bytes in explicit deleted targets and these closure documents, not Git object storage or whole-host free space; earlier a01 subtotal remains a deleted-target measurement.",
+  "closure_documentation_allocation_after": {
+    "docs/research/candidates/uav_message_content/NOTES.md": 380928,
+    "docs/research/RESEARCH.md": 593920,
+    "runs/uav_message_content/b07_codec_a02/cleanup.json": 16384
+  },
+  "new_closure_documentation_allocated_bytes": 24576,
+  "final_cleanup_net_allocated_bytes_reclaimed_after_closure_documents": 1843187712
+}
