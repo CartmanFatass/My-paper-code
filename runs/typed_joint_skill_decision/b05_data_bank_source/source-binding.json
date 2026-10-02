@@ -1,0 +1,54 @@
+{
+  "cpu_seconds": 0.053907124000000015,
+  "dependency_metadata": {
+    "gymnasium": {
+      "metadata_path": "/home/fires/.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/gymnasium-1.0.0.dist-info/METADATA",
+      "metadata_sha256": "2121ca89ee0106506fe2c34ebe914c91a556de646e15ff0f2b238fcef9ac745a",
+      "version": "1.0.0"
+    },
+    "numpy": {
+      "metadata_path": "/home/fires/.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/numpy-1.26.3.dist-info/METADATA",
+      "metadata_sha256": "b313428e285562dc42aafad2a48ea2e7d9b3f73935cca8830cd3b636053d6433",
+      "version": "1.26.3"
+    },
+    "pettingzoo": {
+      "metadata_path": "/home/fires/.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/pettingzoo-1.24.3.dist-info/METADATA",
+      "metadata_sha256": "d3ee2bc1c41c8912eebf5e344901f1ee79e6944371c7fd584a0ee8d1309d4dbe",
+      "version": "1.24.3"
+    }
+  },
+  "git_show_children_cpu_seconds": 0.043472,
+  "input_manifest_sha256": "dd2bf2e7f54b0070587529559a1963438fa62fb8fb9bfe7db46202932e303394",
+  "kind": "source_and_existing_runtime_metadata_binding",
+  "native_static_model_queries": 0,
+  "package_imports": 0,
+  "pinned_sources_match_original_git": {
+    "envs/pettingzoo/__init__.py": "d247e986e573c70196b7674d05a28ae229028d858ca4fb9c7ddf684c8c6d12c3",
+    "envs/pettingzoo/scenario1.py": "e5b3eb7d755a7d7866cc7cd01531383bee821f0c6d72a81a3d4fa9cb5954939e",
+    "envs/pettingzoo/scenario2.py": "277374f365e8eeda882de53d53cc051c1534fe210622fee74d7b5a8f9d2cf2f2",
+    "envs/pettingzoo/uav_env.py": "fb67554cf911adc9d3260a2a7f16d1773921c295646cb46beb4ba1247fec599e",
+    "envs/pettingzoo/uav_radio.py": "db3464803b1a5aa9c9504096810dc971266a6bd7eba1c31dfe79e7d8d903f3cc",
+    "experiments/candidates/coupled_host_joint_skills_stage1/host.py": "92b75c0317009380108bd45429892e49ca857b901ae1adbcd5bfe483d89ef469",
+    "experiments/candidates/coupled_host_joint_skills_stage1/menus.py": "15b818e0250141b45a47480d5acaa6b0f217c8ce8fe8c35ef6a7abb765102886",
+    "experiments/candidates/coupled_host_joint_skills_stage1/planner.py": "5c23f4c8a25df55052fa6eb4bb0da65fcf0f079560789b8abd7db416222a0aa6",
+    "experiments/candidates/coupled_host_joint_skills_stage1/run_gate.py": "b5f669597db920242bd89955821d738f569199f6e9245004cae445ff0cfb00ef",
+    "experiments/candidates/typed_joint_skill_decision/b04/__init__.py": "f160546e36507cbb6da4357825a99298431ec6b487248409380b63007a6599df",
+    "experiments/candidates/typed_joint_skill_decision/b04/bank.py": "45cd06e8538b011a62fcdcaca8cea8416fa4a06ef78435f0d7513214ed65b173",
+    "experiments/candidates/typed_joint_skill_decision/b04/contract.py": "d555883a25030a6a1bcb89150b3823d0dc843d96f33085a6dba6329e364b5c7a",
+    "experiments/candidates/typed_joint_skill_decision/b04/evidence.py": "74c197cf2ab1db82e8899ba9ad4c7c04d0decc93476731eefb4161bc21f10583",
+    "experiments/candidates/typed_joint_skill_decision/b04/native.py": "43c78e5f0da727e0e529ca0a9583352a9c98d63cfcd6ad01e7a62fd4f824e3f8"
+  },
+  "runtime": {
+    "configured_python": "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "cpu_threads": 1,
+    "executable_sha256": "3303d2b5dc566818e412d2b5b6cd8e792bd360865da47593429a635f72668226",
+    "gymnasium_version": "1.0.0",
+    "node": "local_linux",
+    "numpy_version": "1.26.3",
+    "pettingzoo_version": "1.24.3",
+    "python_version": "3.10.20",
+    "resolved_executable": "/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10"
+  },
+  "scientific_source_sha": "b19508a5c2825359e66a36b4fdc1db68b60cc809",
+  "wall_seconds": 0.16692719400452916
+}

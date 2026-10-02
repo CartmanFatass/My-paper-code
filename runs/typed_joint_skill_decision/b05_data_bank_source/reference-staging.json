@@ -1,0 +1,327 @@
+{
+  "kind": "necessary_old_bank_reference_staging",
+  "source": "hmasd-wsl-node:/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b04_a01",
+  "destination": "/home/fires/hmasd-wsl/temp/directions/typed_joint_skill_decision/b05-data-reference",
+  "returncode": 0,
+  "stderr": "",
+  "files": {
+    "raw/bank/train/0000.npz": {
+      "sha256": "a801ff81380dd0967df88d6f654526fa34d1bebe2ecc59b75e32e87a2d8fb0de",
+      "bytes": 1228168,
+      "first_world": 109400000,
+      "last_world": 109400063,
+      "worlds": 64,
+      "complete_saved_labels": 10943
+    },
+    "raw/bank/train/0001.npz": {
+      "sha256": "155d51fe40c76b8a2243d29407c00bfc51ffe7f176fc592625e12b5bf07eea2e",
+      "bytes": 1226226,
+      "first_world": 109400064,
+      "last_world": 109400127,
+      "worlds": 64,
+      "complete_saved_labels": 10935
+    },
+    "raw/bank/train/0002.npz": {
+      "sha256": "53161f2be41a7cb9cf0e5464b0a536fd23d998210ce0184f4a75b471ad2d3d15",
+      "bytes": 1241956,
+      "first_world": 109400128,
+      "last_world": 109400191,
+      "worlds": 64,
+      "complete_saved_labels": 11011
+    },
+    "raw/bank/train/0003.npz": {
+      "sha256": "838fbd51648abca5cb95c2ca11362af4403a3e364d00f3d433d265e13572b88d",
+      "bytes": 1247416,
+      "first_world": 109400192,
+      "last_world": 109400255,
+      "worlds": 64,
+      "complete_saved_labels": 11038
+    },
+    "raw/bank/train/0004.npz": {
+      "sha256": "ea6827a322f56a818509a3ce83f062c77d900e601e350a465a7cb18cbd22a861",
+      "bytes": 1255440,
+      "first_world": 109400256,
+      "last_world": 109400319,
+      "worlds": 64,
+      "complete_saved_labels": 11061
+    },
+    "raw/bank/train/0005.npz": {
+      "sha256": "e11f0810b00b6d62349e62b3d707c7e21c7915bf5e57dae9c2e7403c43cafcec",
+      "bytes": 1260609,
+      "first_world": 109400320,
+      "last_world": 109400383,
+      "worlds": 64,
+      "complete_saved_labels": 11054
+    },
+    "raw/bank/train/0006.npz": {
+      "sha256": "cd35cb8efe0a3e4ad05bd2c9a8857cd0e5b435f2aa72baa21731af5bbd22089e",
+      "bytes": 1237455,
+      "first_world": 109400384,
+      "last_world": 109400447,
+      "worlds": 64,
+      "complete_saved_labels": 10917
+    },
+    "raw/bank/train/0007.npz": {
+      "sha256": "e83a714f905a38c4a94b1721a9818e23b4f2edcd4ab972be468ff0d90347f6c9",
+      "bytes": 1231784,
+      "first_world": 109400448,
+      "last_world": 109400511,
+      "worlds": 64,
+      "complete_saved_labels": 10892
+    },
+    "raw/bank/train/0008.npz": {
+      "sha256": "a3863ce52ef1d737962340ceaf136b8f55ff3cc68c6a57e45aa8982fecaf8148",
+      "bytes": 1266184,
+      "first_world": 109400512,
+      "last_world": 109400575,
+      "worlds": 64,
+      "complete_saved_labels": 11070
+    },
+    "raw/bank/train/0009.npz": {
+      "sha256": "e25585f2c0fd886baa43d6bcca0983d2a75cb09ded6edaddae65e24e85468594",
+      "bytes": 1240548,
+      "first_world": 109400576,
+      "last_world": 109400639,
+      "worlds": 64,
+      "complete_saved_labels": 11073
+    },
+    "raw/bank/train/0010.npz": {
+      "sha256": "2818ae3f85501fda9080bbfeda65a01f35a087285a68d71acf3b9356fa669a79",
+      "bytes": 1266923,
+      "first_world": 109400640,
+      "last_world": 109400703,
+      "worlds": 64,
+      "complete_saved_labels": 11104
+    },
+    "raw/bank/train/0011.npz": {
+      "sha256": "cf928114f436564d6b46065f091c75fc56154b0f80f00a8a1d185efe76fc1dea",
+      "bytes": 1250004,
+      "first_world": 109400704,
+      "last_world": 109400767,
+      "worlds": 64,
+      "complete_saved_labels": 10945
+    },
+    "raw/bank/train/0012.npz": {
+      "sha256": "f1a43ca41573e5f39a2b96b8d7f3d6677f81d8a9172a9e8b1be75aceeb3d9e8e",
+      "bytes": 1240196,
+      "first_world": 109400768,
+      "last_world": 109400831,
+      "worlds": 64,
+      "complete_saved_labels": 10996
+    },
+    "raw/bank/train/0013.npz": {
+      "sha256": "84f4ee2d3b23e6226e0509be5afe40bb09c9331ce599ccbc85ea2fb77ac01af1",
+      "bytes": 1216212,
+      "first_world": 109400832,
+      "last_world": 109400895,
+      "worlds": 64,
+      "complete_saved_labels": 10915
+    },
+    "raw/bank/train/0014.npz": {
+      "sha256": "24d9af120b3a9c62b95005abbebcb433a4d72379f779d11362727494b9f7c5c0",
+      "bytes": 1251875,
+      "first_world": 109400896,
+      "last_world": 109400959,
+      "worlds": 64,
+      "complete_saved_labels": 11047
+    },
+    "raw/bank/train/0015.npz": {
+      "sha256": "e78523e798005e7d174ffccb2fd06a4fc23fee0971fe999af1884b84efe15ade",
+      "bytes": 1245508,
+      "first_world": 109400960,
+      "last_world": 109401023,
+      "worlds": 64,
+      "complete_saved_labels": 11046
+    },
+    "raw/bank/train/0016.npz": {
+      "sha256": "b31539284e6ef6618bf781f62a0deeb1e152f8fd8d8527fd1fa936bc8d4ce20d",
+      "bytes": 1256388,
+      "first_world": 109401024,
+      "last_world": 109401087,
+      "worlds": 64,
+      "complete_saved_labels": 11136
+    },
+    "raw/bank/train/0017.npz": {
+      "sha256": "9daf8b2e0f7777c2a76fa3b0230d261fa4bb9b0772be1045310b76a1361952e6",
+      "bytes": 1250534,
+      "first_world": 109401088,
+      "last_world": 109401151,
+      "worlds": 64,
+      "complete_saved_labels": 10958
+    },
+    "raw/bank/train/0018.npz": {
+      "sha256": "64e745ddca9cd47a218d4eabf91abe95ca33447bbd3771a65cec2b945cf32ed2",
+      "bytes": 1251120,
+      "first_world": 109401152,
+      "last_world": 109401215,
+      "worlds": 64,
+      "complete_saved_labels": 11093
+    },
+    "raw/bank/train/0019.npz": {
+      "sha256": "2db97a9016119604d862c942ba5da3f5ed076b0aa8385c753cfe8c2d6dc22a5e",
+      "bytes": 1287241,
+      "first_world": 109401216,
+      "last_world": 109401279,
+      "worlds": 64,
+      "complete_saved_labels": 11286
+    },
+    "raw/bank/train/0020.npz": {
+      "sha256": "d1fe7367b7c94da1980ab05fa4660d80d036009e94c0d471963d070fbd3382db",
+      "bytes": 1230933,
+      "first_world": 109401280,
+      "last_world": 109401343,
+      "worlds": 64,
+      "complete_saved_labels": 10959
+    },
+    "raw/bank/train/0021.npz": {
+      "sha256": "87e69a3b9966185171def142e8f110b00c268e56e7de75a2d8a1258985f93124",
+      "bytes": 1239298,
+      "first_world": 109401344,
+      "last_world": 109401407,
+      "worlds": 64,
+      "complete_saved_labels": 10997
+    },
+    "raw/bank/train/0022.npz": {
+      "sha256": "f8ed7a68e9687a6489bbe4bc6436fac3ccc948f7b4950c4724f5b562aaed3f14",
+      "bytes": 1247241,
+      "first_world": 109401408,
+      "last_world": 109401471,
+      "worlds": 64,
+      "complete_saved_labels": 11013
+    },
+    "raw/bank/train/0023.npz": {
+      "sha256": "b44b6d95de10f33cdd02642358f7b6e73e787a56b36026c65df26614293ab084",
+      "bytes": 1266054,
+      "first_world": 109401472,
+      "last_world": 109401535,
+      "worlds": 64,
+      "complete_saved_labels": 11156
+    },
+    "raw/bank/train/0024.npz": {
+      "sha256": "b3145243183834544a64a9c3e5f2ba5a991990800108828b449cc5c6a03c3ee6",
+      "bytes": 1265021,
+      "first_world": 109401536,
+      "last_world": 109401599,
+      "worlds": 64,
+      "complete_saved_labels": 11120
+    },
+    "raw/bank/train/0025.npz": {
+      "sha256": "aa3a165c0a30d5fb9bb003491ea30f4420837d94c8644ca9a26bf8a586918453",
+      "bytes": 1268614,
+      "first_world": 109401600,
+      "last_world": 109401663,
+      "worlds": 64,
+      "complete_saved_labels": 11105
+    },
+    "raw/bank/train/0026.npz": {
+      "sha256": "ffc4d0786eab911a4626db41a6e24dc2e860405b515a7ce66541546d822c48ce",
+      "bytes": 1258518,
+      "first_world": 109401664,
+      "last_world": 109401727,
+      "worlds": 64,
+      "complete_saved_labels": 11109
+    },
+    "raw/bank/train/0027.npz": {
+      "sha256": "9d6a6821bd60302e7d98b72e9264f32439c1fa101f2f5512fabf7ce11d29585c",
+      "bytes": 1261812,
+      "first_world": 109401728,
+      "last_world": 109401791,
+      "worlds": 64,
+      "complete_saved_labels": 11138
+    },
+    "raw/bank/train/0028.npz": {
+      "sha256": "97d828e425e96696c550072a5dbe73232527fa3d92b256a3e844e1042d33a5a3",
+      "bytes": 1232929,
+      "first_world": 109401792,
+      "last_world": 109401855,
+      "worlds": 64,
+      "complete_saved_labels": 10992
+    },
+    "raw/bank/train/0029.npz": {
+      "sha256": "6529a8ce6ba1a11a66d3ac3b0e730e0f1355deff5242d6fa27960f9d8053982d",
+      "bytes": 1231919,
+      "first_world": 109401856,
+      "last_world": 109401919,
+      "worlds": 64,
+      "complete_saved_labels": 10963
+    },
+    "raw/bank/train/0030.npz": {
+      "sha256": "b401d99c2db53978b3663b4b9d0738ddbf18627dfe343fda0bdcdc7f560db76a",
+      "bytes": 1240779,
+      "first_world": 109401920,
+      "last_world": 109401983,
+      "worlds": 64,
+      "complete_saved_labels": 10982
+    },
+    "raw/bank/train/0031.npz": {
+      "sha256": "08ccd1a46fbb9f3f45f1f34baa21fb07bb3d831c421bcd6d473b6e037362cda5",
+      "bytes": 1227237,
+      "first_world": 109401984,
+      "last_world": 109402047,
+      "worlds": 64,
+      "complete_saved_labels": 10870
+    },
+    "raw/bank/train/0032.npz": {
+      "sha256": "cf4339694d376555666a9c2d262de027c95d315bcefce86d7123d917799493ab",
+      "bytes": 1242273,
+      "first_world": 109402048,
+      "last_world": 109402111,
+      "worlds": 64,
+      "complete_saved_labels": 10976
+    },
+    "raw/bank/train/0033.npz": {
+      "sha256": "fb2a86612da572c2162a6c7f39f6d6b386bdfc1f1998a5ea28a3282d1092782e",
+      "bytes": 1221933,
+      "first_world": 109402112,
+      "last_world": 109402175,
+      "worlds": 64,
+      "complete_saved_labels": 10910
+    },
+    "raw/bank/train/0034.npz": {
+      "sha256": "5cee4875498d82a40f2381d8f23a4a204a9f2432d2a58d1e7ef91fe00d16fcae",
+      "bytes": 1221234,
+      "first_world": 109402176,
+      "last_world": 109402239,
+      "worlds": 64,
+      "complete_saved_labels": 10931
+    },
+    "raw/bank/train/0035.npz": {
+      "sha256": "e8d0696101429d0dab80264594ba67e32d72187f0647d1180097b39a26d7b75a",
+      "bytes": 1279400,
+      "first_world": 109402240,
+      "last_world": 109402303,
+      "worlds": 64,
+      "complete_saved_labels": 11166
+    },
+    "raw/bank/train/0036.npz": {
+      "sha256": "af3dc9fdfd807dce8d574e1944e23244d83c7cd4dfb1917299e552cb7333603c",
+      "bytes": 1267841,
+      "first_world": 109402304,
+      "last_world": 109402367,
+      "worlds": 64,
+      "complete_saved_labels": 11182
+    },
+    "raw/bank/train/0037.npz": {
+      "sha256": "828ba33b4403d749086de5d6b180ea1413043b0b25f24ad346f18193bc68aa99",
+      "bytes": 1236928,
+      "first_world": 109402368,
+      "last_world": 109402431,
+      "worlds": 64,
+      "complete_saved_labels": 10967
+    },
+    "raw/bank/train/0038.npz": {
+      "sha256": "ae65463174ee83dc467b1365f9ca3c3a049bdc1b6e14dae5aba1fac422a3ba4c",
+      "bytes": 1258019,
+      "first_world": 109402432,
+      "last_world": 109402495,
+      "worlds": 64,
+      "complete_saved_labels": 11070
+    }
+  },
+  "bytes": 48649770,
+  "local_parent_cpu_seconds": 0.03872419300000002,
+  "local_child_cpu_seconds": 0.248707,
+  "wall_seconds": 23.8159797920016,
+  "remote_transport_cpu": "unmeasured",
+  "new_static_host_model_queries": 0
+}
