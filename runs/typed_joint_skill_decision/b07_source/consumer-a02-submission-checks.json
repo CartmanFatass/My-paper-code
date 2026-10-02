@@ -1,0 +1,20 @@
+{
+  "actual_hmasd_launcher_invocations": 0,
+  "exit_code": 0,
+  "parent_cpu_seconds": 0.20078458100000002,
+  "reaped_subprocess_cpu_seconds": 1.3715739999999998,
+  "remote_supervisor_submissions": 0,
+  "schema": 1,
+  "scientific_calls": 0,
+  "scope": "Actual installed COMMAND assignment and wrapper heredoc, local zsh parsing with empty private ZDOTDIR and harmless stdlib marker programs only; old broken grouping is an expected synthetic negative. No scientific/native/health pilot.",
+  "scratch_removed": true,
+  "scratch_root": "/home/fires/hmasd-wsl/temp/tests/pytest-92owtlof",
+  "source_sha256": {
+    "experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/submission.py": "99004431cd3bed9d83ffa118a1e894a7e9a79c4d66179a7b434200081336eb6e",
+    "tests/experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/fixtures/agent-task.sh": "a7b8c1ff1691e11527cadf6adc677fd2caf00efe1bc0185ada524a5467455553",
+    "tests/experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/test_submission.py": "f6fc9cbc8fdaa527686908a46412e5868b012d5d031ad5024ce909ea3ff3156c"
+  },
+  "stderr": "",
+  "stdout": "....                                                                     [100%]\n4 passed in 5.19s\n",
+  "wall_seconds": 5.357027580001159
+}

@@ -1,0 +1,110 @@
+{
+  "schema": 1,
+  "at": "2026-10-02T23:29:21.157313+00:00",
+  "scope": "Old frozen preparation subtotal plus only later disjoint recorded support, failed A01 and new selected A02 preparation. No prior science counted twice. This is not complete support accounting.",
+  "components": [
+    {
+      "source": "runs/typed_joint_skill_decision/b07_source/consumer-preparation-cost.json",
+      "field": "known_cpu_seconds",
+      "cpu_seconds": 71.98704855999998
+    },
+    {
+      "source": "runs/typed_joint_skill_decision/b07_source/consumer-binding-check.json",
+      "field": "parent_cpu_seconds",
+      "cpu_seconds": 0.621417703
+    },
+    {
+      "source": "runs/typed_joint_skill_decision/b07_consumer_a01/supervisor-failure.json",
+      "field": "local_child_transport_cpu_seconds",
+      "cpu_seconds": 0.060666
+    },
+    {
+      "source": "runs/typed_joint_skill_decision/b07_consumer_a01/supervisor-failure.json",
+      "field": "local_parent_read_cpu_seconds",
+      "cpu_seconds": 0.0006234650000000036
+    },
+    {
+      "source": "runs/typed_joint_skill_decision/b07_consumer_a01/engineering-diagnosis.json",
+      "field": "preservation_cpu_seconds",
+      "cpu_seconds": 0.009857553000000005
+    },
+    {
+      "source": "runs/typed_joint_skill_decision/b07_consumer_a01/scientific-review.json",
+      "field": "preservation_cpu_seconds",
+      "cpu_seconds": 0.016447208000000005
+    },
+    {
+      "source": "runs/typed_joint_skill_decision/b07_consumer_a01/scientific-review.json",
+      "field": "reviewer_recorded_saved_read_cpu_seconds",
+      "cpu_seconds": 3.289635472
+    },
+    {
+      "source": "runs/typed_joint_skill_decision/b07_consumer_a01/cleanup.json",
+      "field": "deletion_cpu_seconds",
+      "cpu_seconds": 0.044903214
+    },
+    {
+      "source": "runs/typed_joint_skill_decision/b07_consumer_a01/cleanup.json",
+      "field": "local_support_child_cpu_seconds",
+      "cpu_seconds": 0.060585999999999994
+    },
+    {
+      "source": "runs/typed_joint_skill_decision/b07_consumer_a01/cleanup.json",
+      "field": "local_support_parent_cpu_seconds",
+      "cpu_seconds": 0.0009382689999999916
+    },
+    {
+      "source": "runs/typed_joint_skill_decision/b07_source/consumer-a02-supervisor-source.json",
+      "field": "parent_cpu_seconds",
+      "cpu_seconds": 0.0013177929999999977
+    },
+    {
+      "source": "runs/typed_joint_skill_decision/b07_source/consumer-a02-supervisor-source.json",
+      "field": "transport_child_cpu_seconds",
+      "cpu_seconds": 0.060439999999999994
+    },
+    {
+      "source": "runs/typed_joint_skill_decision/b07_source/consumer-a02-submission-checks.json",
+      "field": "parent_cpu_seconds",
+      "cpu_seconds": 0.20078458100000002
+    },
+    {
+      "source": "runs/typed_joint_skill_decision/b07_source/consumer-a02-submission-checks.json",
+      "field": "reaped_subprocess_cpu_seconds",
+      "cpu_seconds": 1.3715739999999998
+    },
+    {
+      "source": "runs/typed_joint_skill_decision/b07_source/consumer-a02-engineering-review.json",
+      "field": "preservation_cpu_seconds",
+      "cpu_seconds": 2.3293000000007558e-05
+    },
+    {
+      "source": "runs/typed_joint_skill_decision/b07_source/consumer-a02-staging.json",
+      "field": "parent_cpu_seconds",
+      "cpu_seconds": 0.257087098
+    },
+    {
+      "source": "runs/typed_joint_skill_decision/b07_source/consumer-a02-staging.json",
+      "field": "child_transport_cpu_seconds",
+      "cpu_seconds": 3.5446389999999997
+    },
+    {
+      "source": "runs/typed_joint_skill_decision/b07_source/consumer-a02-staging.json",
+      "field": "verification/hash_cpu_seconds",
+      "cpu_seconds": 0.219418126
+    }
+  ],
+  "known_cpu_seconds": 81.74740733499998,
+  "separate_prior_science": "Original B05 actual 2129.878646 CPU-s and successful B07 full-reader 2570.461047 CPU-s are retained separately in bank prior_cost, not counted as preparation. Original B04 crash-prefix floor306.264725CPU-s, at least431145saved labels and all other earlier scientific cost remain in the original records; not overwritten by these three fields.",
+  "unknown_not_zero": [
+    "Original A01 runner CPU before counter setup",
+    "Startup, tool, edits, reviews and transport services not captured by these wrappers",
+    "Original B04 crash tail and previous support not fully metered",
+    "Consumer input/check/publication/admission and later support occur after this frozen subtotal",
+    "Remote read-only historical-object query was aborted before launch, including its owned fetch descendants; any partial Git hydration/support is unmeasured and shared objects retained",
+    "A01 unknown actual supervisor numeric exit and incompletely metered launcher-request/review/observation/support cost",
+    "A02 review, Git publication, remote scp/ssh services and later input binding/admission/support are additional, incompletely metered",
+    "One draft ledger construction used wrong existing capture field child_ssh_cpu_seconds, raised KeyError before writing input or effects; corrected to actual transport_child_cpu_seconds. Failed draft support CPU unmetered, not zero."
+  ],
+  "no_new_scientific_effects": true
+}

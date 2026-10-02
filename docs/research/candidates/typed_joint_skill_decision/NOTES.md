@@ -5540,3 +5540,35 @@ Deliver a small effect-free caller renderer under `experiments/candidates/typed_
 Capture/hash the actual installed supervisor source read-only. Exercise its actual COMMAND assignment and generated wrapper template locally with harmless marker programs under pytest-owned scratch, including correct working directory/argv boundaries and recorded success/nonzero exit. Reproduce the old grouping/outer-exec failure as an expected synthetic negative. This is a parsing/wrapper regression with0physics/model/native/admission/remote-task calls; no health or CUDA pilot. Use the existing independent engineering Reviewer for this concrete renderer/regression/request delta, and accept the result in this notebook. No repeated scientific review is needed for the unchanged chosen comparison.
 
 Use distinct consumer tag `b07_consumer_a02`, supervisor request `typed-b07-consumer-a02`, and one fresh staging root `/home/wu/hmasd-inputs/typed_joint_skill_decision-b07-a02`; scratch is `/home/wu/projects/HMASD/temp/directions/typed_joint_skill_decision/b07-consumer-a02`. A new consumer input carries the actual successful A02 proof and all previous costs, with new preparation additionally recorded. Publish exact source/input and the resolved request before Send, then use fresh actual-node admission. The old failed consumer has no native claim, so do not invent a `--retry-of` reference. Once a native handle is accepted, observe that exact operation deterministically and keep this native DM turn active through full collection/reading.
+
+<a id="b07-consumer-a02-engineering-acceptance"></a>
+### A02 caller acceptance — 2026-10-02 UTC
+
+Root’s selected package and this direction’s active lead are published at `a09c41ba6272a9af62caafedbe32de89ab105112`. The sole new executable is the effect-free caller renderer; scientific runtime sources are unchanged. The actual installed supervisor fixture and four local marker-only checks passed (1.572358581 CPU-s,5.35702758 wall-s), including the expected old-command failure. All scratch was removed. No actual supervisor/native launch, numerical model or physics call occurred. The complete independent engineering result follows; its exact native message and digest are also retained in `runs/typed_joint_skill_decision/b07_source/consumer-a02-engineering-review.json`.
+
+<details><summary>Complete focused engineering review</summary>
+
+**No P1+ finding remains in this submission boundary. The reviewed renderer supports acceptance by the DM.**
+
+[submission.py](/home/fires/hmasd-wsl/experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/submission.py:8) returns exactly four arguments. Applying `shlex.join()` to that complete list and passing the resulting string once to SSH preserves the fourth argument through remote parsing. Installed `COMMAND="$*"` then receives one intact command string; `cd` and `exec` remain inside the quoted zsh child, leaving the outer wrapper able to record termination.
+
+The guards require absolute repository/interpreter paths and the repository’s absolute `scripts/hmasd_launch.py launch` entry. No scientific parameters are rewritten.
+
+The regression faithfully extracts the actual installed assignment and wrapper heredoc. Fixture SHA matches the previously inspected supervisor. Tests cover:
+
+- Wrong outer cwd, spaces/apostrophes and literal shell metacharacters.
+- Recorded terminal codes **0 and 37**.
+- Reproduction of the old grouping failure and missing exit record.
+- Refusal of a relative launcher path.
+
+I verified source/test/fixture hashes against [the receipt](/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_source/consumer-a02-submission-checks.json): **4 passed**, **1.572358581 CPU-s / 5.35702758 wall-s**, scratch removed, zero actual supervisor submissions, launcher invocations or scientific calls. I did not rerun tests.
+
+Limits: this validates local parsing and wrapper behavior; it does not test remote startup files, tmux/SSH execution, admission or runtime health. The final published SHA/input-bound request was not yet available for bytewise review. The original A01 failure and diagnosis remain unchanged. No edits or submission were performed; review support CPU was not fully metered.
+
+</details>
+
+DM acceptance: the caller now preserves exactly one quoted command string across the installed supervisor’s actual interface, correct cwd, absolute launcher and outer exit recording. Accept this bounded fix, with final published request byte/hash checking still to do. This is no evidence about remote startup files, native admission, CUDA or runtime health. The four passing checks are reused rather than repeated; review support beyond the metered regression remains unknown, not zero.
+
+A02 input preparation is complete. `B07_CONSUMER_A02_INPUT.json` (13,797 bytes,SHA256 `2b933a85273b42442c070ad1900ccc62b9571e44e875ca53d391003f0f5ef69e`) retains all20 executable-runtime hashes,13 frozen B04 sources, original upstream/scientific inputs, successful actual A02 proof and runtime. Only selected stage/scratch addresses and paid preparation bindings change. The actual bank plus compact proof was transferred once:2,337 files/333,492,377 logical bytes/338,259,968 allocated bytes; every copied digest matches its canonical source. No reader bulk/vector reconstruction was copied or repeated. Staging used4.0211442239999995 metered CPU-s and97.71803064999403 wall-s; remote transport services are additional unknown cost.
+
+The cumulative known preparation subtotal is81.747407335 CPU-s, separate from the selected consumer limit; original B04/B05/A02 science remains separately charged. The bound ledger includes the failed consumer’s diagnosis/review/cleanup and this new caller regression/staging without double-counting the old71.987048560 subtotal. A draft ledger script initially used the wrong receipt field and stopped before input write/effects; the actual field was corrected, its unmetered support retained as unknown, not zero. The completed byte/input check used another0.620783547 CPU-s (outside the frozen subtotal), validated actual local bank/reader proof and exact source bindings, and passed the stdlib parent guard with0science/model/native calls. The original failure and selected first-real-failure stop are unchanged. Exact resolved request publication and fresh actual-node admission follow.

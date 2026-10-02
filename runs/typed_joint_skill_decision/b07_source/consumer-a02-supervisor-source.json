@@ -1,0 +1,15 @@
+{
+  "at": "2026-10-02T23:19:09.660696+00:00",
+  "bytes": 5793,
+  "capture": "Read-only installed bytes for a local no-science wrapper regression; not another installed/production supervisor",
+  "fixture": "tests/experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/fixtures/agent-task.sh",
+  "installed_source": "/usr/local/bin/agent-task",
+  "node": "wsl_4070",
+  "parent_cpu_seconds": 0.0013177929999999977,
+  "remote_supervisor_submissions": 0,
+  "schema": 1,
+  "scientific_calls": 0,
+  "sha256": "a7b8c1ff1691e11527cadf6adc677fd2caf00efe1bc0185ada524a5467455553",
+  "transport_child_cpu_seconds": 0.060439999999999994,
+  "wall_seconds": 0.6052192150091287
+}
