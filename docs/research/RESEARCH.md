@@ -2487,65 +2487,39 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 ### Parallel allocation: independent work and rolling succession
 
 <a id="three-dm-decision-assistance-20261001"></a>
-**Owner长期决策辅助与3DM安排（2026-10-01 PDT）：** 当前具体工作是从已有证据构造并推进下一笔有价值的完整研究，
-不把B01的两个包结果当作开源决策模型／联合学习路线终点。三位DM持续持有下列问题；A/R与B02已完整收尾并保留正反能力，S7 B10主面板正在原接受句柄上运行。Root已读两项完整结果及原始独立意见，继续滚动选择；不存在新的owner暂停或等待统一下一轮的边界。实验接受仍以原生准入句柄为准。
+**Owner长期决策辅助与3DM安排（2026-10-02 UTC／10-01 PDT）：** 三位DM持续推进实质研究；单个配方结束不结束问题责任。
+A/R与B02已完成全量读取、独立判读及清理，正反能力保留；S7 B10仍在原接受句柄上运行。
+Root已读两份完整结果、原始独立意见和临时Oracle完整建议，按下表滚动接续，不设等待统一“下一轮”的暂停边界。
 
-| 科学责任 | 当前有实质的工作与边界 | 负责人 |
+| 科学责任 | 当前实质工作与边界 | 负责人 |
 | --- | --- | --- |
-| 广义开源／可学习决策辅助，长期持有 | 研究可复用先验或任务学习模块如何与控制／规划协作，提高新场景原生决策、经验使用或质量／计算取舍。B02 G/L/P已完整结束：精确ridge未建立fresh选择增量，普通G相对P的省时／质量代价保留。已完整读独立意见并支持DM推进独立B03固定36-query prefix Q：在已曝光64世界完整执行和计价，精确复用已有native alias、补齐所有缺口；source／真实暂停恢复／完整价格正在闭合，尚无新accepted operation。不限定Laya、语言模型、静态8-menu或t0选择。 | 原DM `/root/dm_typed_joint_skill`，稳定路径 `typed_joint_skill_decision`；长期负责人延续。 |
-| 学习辅助器的结构与新场景泛化 | A/R六fits与384新世界全量reader已完成；Root采纳原独立意见，保留R相对A/N/fixed的有限条件泛化能力，结束本次固定购买。第三块较弱且有严重全队零服务反例，static／fullplanner仍明显更强；不归因于纯结构。DM继续问题责任与建设性续向比较；普通有限优化、候选迁移及发展其他正资产正交由临时Oracle综合权衡，尚未选择新fit。 | 新DM `/root/dm_decision_generalization`，独占 `uav_decision_generalization` 对应路径。 |
-| 把已展示预测用途发展为完整控制能力 | B10 C/H_A/F_A完整工程核对已通过（包括C=REFERENCE），0fit／32新世界三臂H3000主面板正在op f48b8950…收集；本臂普通C本次目标多重集内交换service UAV分配，检验预测增量及相对C用途。原source／handle／合同保持，DM自主完整读取与独立结果判读。保留B09预测正效应、B08负例和完整控制缺口，不复活旧zero-trigger合同。 | 原DM `/root/dm_s7_prediction_use`，保留 `uav_fleet_transmission` 所有权。 |
+| 广义开源／可学习决策辅助，长期持有 | B02精确ridge结束，保留学习发生、局部收益与G/P质量成本取舍。B03固定36-query prefix Q已选择并发表完整合同：真实在线搜索／暂停恢复，已曝光64世界完整读取，精确复用57条原生轨迹并补全部7缺口；同轮G/Q/P冷启动计价。正在实现与工程核对，尚无新accepted operation。不限定Laya、语言模型或静态菜单，Q本身是普通信息使用研究。 | 原DM `/root/dm_typed_joint_skill`，独占 `typed_joint_skill_decision` 对应路径；长期责任延续。 |
+| 发展已保留的学习决策能力及其完整用途 | A/R六fits结束，保留R有限条件泛化增量与第三块严重零服务反例，static／planner仍更强。下一设计优先发展冻结S_L0/S_L1与普通C的合法反馈协作；保留同规则Z(G)与强参照、真实导航和采样语义、个体服务与完整成本。DM正在闭合合同，独立critic重建B05/B06反对意见及原生事实；八臂初稿尚未选定为运行，不自动追加A/R fits。 | 原DM `/root/dm_decision_generalization`，继续独占 `uav_decision_generalization`，只读旧S/C资产，不改其他方向输入。 |
+| 把已展示预测用途发展为完整控制能力 | B10 C/H_A/F_A工程核对通过（含C=REFERENCE），0fit／32新世界三臂H3000主面板在op f48b8950…收集。当前可见信息、真实solver角色、逐tick NaN语义、原source与合同保持；DM负责完整结果及独立判读。 | 原DM `/root/dm_s7_prediction_use`，保持 `uav_fleet_transmission` 所有权。 |
 
-本次临时Oracle复用 `/root/successor_allocation_review`，实际本轮gpt-6-astra/max已核对；它向Root提供具体方案、
-候选比较与分配建议，必要时只向DM取已有源事实。Root整合建议并解决首次交叉范围／实质投资异议；
-此后DM按已定范围自主推进，不设置逐fit批准。Oracle不是第4位DM，也不接续承担实施或长期监督。
-临时Oracle首次任务已完整返回并结束；[完整原始答复、身份及Root阅读](archive/2026-10-01/RESEARCH-three-dm-oracle-design-advice.md)已保留。
-在A/R与B02完整新结果后，Root又临时复用同一Oracle作下一步问题／分工建议；它不参与S7当前运行，不替代各题独立结果critic，也不成为DM推进已获科学支持Q比较的等待门槛。该次咨询待完整答复后即结束。
-当前三位DM分别进行可并行的证据／资产／成本工作；一项方案就绪后即可推进，不等待三题同步齐备。
-具体新增拟合、标签、在线推理／规划与读器均须前瞻计价，未声明任何自动多模型扫描或新批次。
-B01的已曝光测试面板不能重新包装成确认集；L-F训练拟合弱与N训练／测试落差不能合并诊断。
+本次滚动取舍与**完整10,508-byte原始Oracle答复**、实际Astra/max身份、Root primary-source阅读及被替代旧计划，
+见[已完成跨题安排](archive/2026-10-01/RESEARCH-three-dm-rolling-successors.md)。
+Oracle `/root/successor_allocation_review` 这次临时任务已结束；它仅给Root方案建议，不是第四位DM、独立结果critic或后续批准者。
+前次[完整初始建议](archive/2026-10-01/RESEARCH-three-dm-oracle-design-advice.md)与各题原始科学意见继续保留。
+Root选择跨题投资和处理实际范围冲突；DM在已定问题内自主设计、实施、发布、准入、读证和接续，不需逐fit／run批准。
 
-**首项投资处置（2026-10-02 UTC／10-01 PDT）：** Root已读Oracle第一项完整方案、DM具体tensor／成本事实及
-独立ResearchCritic完整原文，采纳这一个A/R比较，MATERIAL_DISSENT:no。
-A与R取得完全相同的raw坐标、身份、初始UAV→目标绑定、BS关系及确定性关系张量；A348,417／R208,449参数，
-保留旧N105,473参数端点。A−N和R−A均为包比较，不是纯几何／对称性因果；A包含2,536个常数身份输入，
-其中2,480恒零，参数总数不能解释为功能容量比。
-完整前瞻价格为6fits／3,072updates／98,304训练上下文，0新增训练标签／LLM前向；
-最多1,736,000原生步、2,307,840静态调用、4,992端点评分＋4,992独立reader评分上下文，
-3,456个独立回合读出及声明的正确性／更新证据。旧test只作历史development，三训练块才是学习复制单位。
-预计1–3 CPUh、上限5 CPUh＋1 GPUh、支持10–16h及新增证据0.6–1GiB均为预算估计，不是实测。
-静态规则已在341/384旧世界达到菜单最优，新增评分约4.3ms；本次购买理由是可迁移学习能力，不能预设部署省时。
-超越固定构造但仍不如静态也可保留有界能力；训练内改善、严重尾部、跨块反转和未定效应均须完整读取，
-没有自动追加层数、数据、epochs或第四块。完整原始方案／意见与DM处置由该DM保存于
-[方向notebook](candidates/uav_decision_generalization/NOTES.md)，本选择不设逐run Root批准。
+**已读结果与下一笔价格：** R−A三块Cbar_bh均差+.041575/+.035114/+.006254，三块均值+.027648、描述t95跨0；
+R对N/fixed的三个点估计也为正，但静态规则明显更好，block3保留474／447个全队零覆盖步的严重个例。
+这是真实条件学习能力，未识别纯关系结构原因，也不是默认部署结论；早停A是有区分力但需要3次新fit的机制候选，暂缓而不抹去。
+B02 L−G J−.001587，描述区间跨0；pooled MSE改善同时伴随相对分支误差恶化，不能用预测精度替代决策收益。
+G相对P少670.47查询／.434s冷启动、J−.006842，普通质量成本能力保留。
+[完整A/R处置](candidates/uav_decision_generalization/NOTES.md#b01-independent-disposition)、
+[完整B02处置](candidates/typed_joint_skill_decision/NOTES.md#b02-independent-disposition)均含未删节独立原文。
 
-**第二项投资处置（2026-10-02 UTC／10-01 PDT）：** Root已读S7 B10完整合同与原始独立意见，采纳一次C/H_A/F_A比较，MATERIAL_DISSENT:no。
-科学世界29910001–29910032、工程29910091/92；0fit，含8个完整工程回合共312,000原生步，
-最多218,752候选／6,562,560 nominal ticks／656,256 RF samples／160私有模型构造。
-保留当前可见用户、真实solver角色来源、literal strict大于与base平分优先、逐tick NaN保持当前xy／z100及单时钟／shield。
-固定指定relay目标不固定真实路由。原生J／服务、个体尾部、能源和物理曝光共同决定用途，不能以代理评分代替。
-预计4–8 CPUh、12–18支持h；12累计CPUh为停止／重估边界，触发时保留未完成证据，不自动扩展或作终局判断。
-F_A胜H_A而仍负于C只保留条件预测能力；低激活、未定或负作用不授权追加世界／门槛／更宽搜索，旧批次不能相减为修复比例。
-[完整合同、独立原文与DM接受](candidates/uav_fleet_transmission/NOTES.md#b10-selection-review-and-disposition)已由DM发表于72bf27b15。
-后续实现、工程审查、发布、实际准入、完整读出与处置由DM持续负责，无逐run Root批准。
+[B03完整前瞻合同](candidates/typed_joint_skill_decision/NOTES.md#b03-selected-contract)发表于2f293841b：
+192同轮selection-only，7缺口+2完整审计=4,500新原生步，预计307,058／保守1,155,699静态调用，0fit／GPU；
+预计5–15 CPU分钟、1,800s边界、4–8支持h、完整source与既有输入计一次的2.5GiB峰值边界。
+旧面板已曝光，完整复用不改变B02合同，也不称新世界确认。S协作的122,880主面板步等仍为待审初稿，不能并入已接受账。
+S7原已选比较含工程312,000原生步，至多218,752候选／6,562,560 nominal ticks／656,256 RF samples／160私有模型，
+0fit；4–8 CPUh与12–18支持h是预测，12累计CPUh仍是停止／重估边界，不因其他题更省而扩展。
 
-**第三项投资处置（2026-10-02 UTC／10-01 PDT）：** Root已读63f166e5的B02完整合同、10,919-byte原始独立意见与DM处置，
-采纳修订的G/L/P一次完整比较，MATERIAL_DISSENT:no。已付rank0初始incumbent保留规则同时用于labels与部署；
-训练选定固定rank B与G精确相同，不重复运行。1个136系数固定ridge资产、64新世界107100000–107100063和12完整工程回放，
-共102,000原生步、保守2,448,408显式静态查询；0新训练标签／GPU／下载，既有128,288源查询仍列沉没成本。
-完整CPU预计1–3h、硬边界6h、支持8–14h、新增磁盘上限2GiB；失败／超界保留实际尝试和未完成证据，不授权自动重试。
-L−G检查学习选择增量，L−P检查质量／完整冷启动成本取舍；普通省略分支本身已有节省，不能归功学习。
-135个二阶predictors对64训练上下文仍有稀疏／高杠杆风险，计算便宜不保证统计泛化；旧今源漂移也保留为解释限制。
-已有36-query普通prefix方案是实质后继竞争者，本次不扩臂、不宣称普通方法边界已穷尽。
-[合同、完整独立原文和处置](candidates/typed_joint_skill_decision/NOTES.md#b02-search-branch-contract)由长期DM持有；
-实施、工程审查、精确源发表、实际节点准入、完整执行／读器、独立结果判断及收尾自主推进，无逐run Root批准。
-
-三项声明合计7fits、最多2,150,000原生步；预计完整CPU6–14h、支持30–48h均为预测价，非实测或可互换的额度。
-三位DM并行推进实质工作，producer并发服从实际节点资源；任何批次结束不自动结束其科学问题责任。
-
-已有S_L1对普通G、普通完整后果控制、S7预测、同付费信息U32以及公平分配的正能力与各自代价继续有效；
-本轮结束的配方不取消这些成果，也不意味着每个正例均已有新运行。三项选择各依其具体比较、证据与完整成本，三位DM的问题责任跨单个配方持续；Oracle本次建议任务已结束。
-所有已有操作完成边界、实际成本、数值标记、正面与不利事实继续生效。Claude暂停、FSD/PPC、G33和Milan范围不变。
+旧S_L、普通完整后果控制、S7预测、同付费信息U32和公平分配的正能力与各自代价继续有效。
+不同宿主／面板／目标的J不得横向相减。Claude暂停与peer所有权、FSD/PPC、G33和Milan范围均未变。
 
 <a id="snapshot-materialization-repair-20261001"></a>
 **共享启动输入修复（2026-10-02 UTC／10-01 PDT）：** S7 B10工程a01已接受后在读取已提交checks.json时退出1；
