@@ -7912,3 +7912,105 @@ The successful whole engineering chain measured765.471058352CPU seconds,753.2056
 At published ee7190daebd9e9e3554e7c821ee06ea88c9a9cae, the full scientific C/H_A/F_A panel passed fresh actual-node admission and is running with its declared4 worker/2 reader limit. Exact native identities, command, output, source snapshot and current control observation are in the [manifest](../../../../runs/uav_fleet_transmission/b10_service_assignment_a01/launch-manifest.json) and source-bound [config](../../../../runs/uav_fleet_transmission/b10_service_assignment_a01/config.json). The source carries only the newly published compact engineering evidence and shared control changes; all scientific implementation/check hashes remain unchanged. Observer generation6 adopted the scientific handle, not an engineering or old B09 producer. Acceptance/progress are not a result; the active DM continues through all96 missions, the one complete32-world reader and independent scientific diagnosis.
 
 The engineering source snapshot824e041961384db0a19f7a1aa9591b9b was no longer consumed: the scientific snapshot already contains its published required config/reading, and the unique raw remains outside either source. Exact collector preview/apply verified terminal identity, durable source, no live consumer and unchanged hashes for all31 engineering outputs, then removed only that source and its registration. Actual allocation decreased by **1,796,710,400 bytes** with no relocation or duplicate retained raw and no blocker; [measured receipt](../../../../runs/uav_fleet_transmission/b10_service_assignment_engineering_a02/source-cleanup.json). Combined with failed a01 source retirement, source/registration reclamation so far is2,621,595,648 allocated bytes. Current scientific source and all compact/bulk evidence remain.
+
+
+<a id="b10-complete-reading"></a>
+### B10 complete fixed-panel reading: ordinary assignment service capability, no established forecast increment — 2026-10-01 PDT
+
+The original scientific operation f48b8950e02344a606488dd313be9f256693c00dc6cf1bd1c356d8ef27424c11 exited0 at1790910261.7535136; its runner/supervisor are absent. All96 declared missions29910001–29910032×C/H_A/F_A reached H3000 truncation, with288,000 native transitions,96 resets,192 environment/probe constructions,0 fits/updates/labels. No world was filtered, stopped early, retried or added. The one complete reader verified all32 worlds/96 missions,288,000 recorded proposals/feedback calls/guard calls and native transitions, with0 errors, missing/unstarted jobs, uncertain attempts, incomplete candidate rankings, model-native steps or added native steps. Exogenous user trajectories agree at all3001 paired boundaries per world. C's identity to original REFERENCE was established by the two full engineering worlds; the scientific panel has the prewritten three arms, not an invented fourth reference.
+
+Science is bound to published ee7190daebd9e9e3554e7c821ee06ea88c9a9cae, the accepted source/check hashes and original prospective72bf27b15 contract. Reader validation covers all recorded actual candidates, ranking, solver roles, committed hysteresis, legal history/control/guard replay, native motion and saved route/service/energy/individual-gap derivations. It does **not** independently resimulate all native RF physics or establish nominal/native equality. The declared public-law nominal approximation remains unchanged. Compact artifacts are [summary.json](../../../../runs/uav_fleet_transmission/b10_service_assignment_a01/summary.json), [complete reading.json](../../../../runs/uav_fleet_transmission/b10_service_assignment_a01/reading.json), [all96 mission endpoints and individual gaps](../../../../runs/uav_fleet_transmission/b10_service_assignment_a01/perworld.json) and [all32 verification/exposure records](../../../../runs/uav_fleet_transmission/b10_service_assignment_a01/reading_worlds.json).
+
+#### Fixed primary and ordinary references
+
+Intervals below are the declared descriptive paired-world Student t95,31df. These are conditional fixed-program comparisons, not independent training replications, equivalence, mediation or confirmation. Primary F_A−H_A has an adverse mean and an interval spanning both loss and benefit; the constructive forecast-benefit prediction is not established. F_A−C likewise has no established J or service advantage. H_A−C retains a positive complete-service observation, but its native-J interval crosses zero and its energy/return price is material.
+
+| Contrast | J mean [t95] | J median; +/−/ties | QoS mean [t95] | QoS +/−/ties |
+|---|---:|---:|---:|---:|
+|F_A-H_A|-15.759198 [-53.079680,+21.561283]|-19.504876; 13/19/0|-20.989493 [-59.374934,+17.395948]|13/19/0|
+|H_A-C|+20.063373 [-25.372885,+65.499631]|+11.184857; 18/14/0|+50.708681 [+8.726467,+92.690895]|21/11/0|
+|F_A-C|+4.304175 [-42.663529,+51.271879]|+55.240270; 19/13/0|+29.719188 [-13.819452,+73.257828]|22/10/0|
+
+C/H_A/F_A mean J is2107.919577/2127.982951/2112.223752; mean cumulative QoS2154.859853/2205.568533/2184.579040. All signed worlds are retained below; suffixes identify new299100xx worlds and are not old298900xx B09 identities. Engineering worlds91/92 remain separately reported and are not pooled into the scientific32.
+
+| World | F−H J | F−H QoS | H−C J | H−C QoS | F−C J | F−C QoS |
+|---|---:|---:|---:|---:|---:|---:|
+|29910001|-11.450826|-10.450225|+170.582298|+168.809802|+159.131472|+158.359577|
+|29910002|+76.210364|+78.230877|-74.488147|-77.067314|+1.722217|+1.163563|
+|29910003|-3.303474|-3.686170|+36.904063|+34.740916|+33.600589|+31.054746|
+|29910004|+97.595684|+78.693738|+6.170781|+52.007584|+103.766465|+130.701322|
+|29910005|+45.029971|+49.985162|+54.308794|+48.310427|+99.338766|+98.295590|
+|29910006|-86.754450|-88.782563|-95.275578|-91.196809|-182.030029|-179.979372|
+|29910007|-99.505458|-96.355330|-18.231277|-19.131072|-117.736735|-115.486401|
+|29910008|+45.667195|+48.144633|+51.902539|+51.028329|+97.569734|+99.172962|
+|29910009|-205.218351|-236.886366|-40.479687|-11.925033|-245.698038|-248.811400|
+|29910010|-57.882249|-48.111105|+144.253246|+144.025787|+86.370997|+95.914682|
+|29910011|-32.751338|-35.132217|+228.023756|+228.922410|+195.272417|+193.790193|
+|29910012|+77.395308|+57.886360|+32.530624|+42.983794|+109.925932|+100.870154|
+|29910013|+7.767100|-82.752249|-84.833005|+71.735294|-77.065905|-11.016955|
+|29910014|-26.191276|+7.901155|+85.890034|+213.100081|+59.698758|+221.001236|
+|29910015|-371.657948|-358.071663|+422.439731|+430.581367|+50.781783|+72.509703|
+|29910016|+4.016545|+56.245232|-286.863966|-33.866532|-282.847420|+22.378700|
+|29910017|-52.090492|-52.789243|-42.418166|-70.056415|-94.508659|-122.845658|
+|29910018|-46.097503|-50.346433|-155.281807|-152.887583|-201.379309|-203.234016|
+|29910019|-61.225555|-80.079954|-45.500545|-24.449512|-106.726099|-104.529466|
+|29910020|-12.818477|-97.305534|+80.221486|+244.596979|+67.403008|+147.291444|
+|29910021|+175.516077|+181.313787|+6.207113|+5.019515|+181.723190|+186.333302|
+|29910022|-37.889750|-42.071377|-52.621475|-49.778872|-90.511225|-91.850248|
+|29910023|+9.290469|+8.048101|+98.139483|+92.877048|+107.429951|+100.925149|
+|29910024|-35.657172|-41.540563|-97.196906|+20.342371|-132.854078|-21.198192|
+|29910025|+166.469269|+181.148864|-48.330813|-49.773367|+118.138456|+131.375497|
+|29910026|-35.874743|-15.020275|+27.806611|+37.488937|-8.068132|+22.468661|
+|29910027|+3.487061|+3.547952|+129.430306|+126.182184|+132.917367|+129.730136|
+|29910028|+146.961022|+142.692117|-32.409999|-27.928431|+114.551023|+114.763686|
+|29910029|-93.546009|-94.370141|+16.162602|+15.755334|-77.383407|-78.614808|
+|29910030|-64.148432|-74.374040|-55.443205|+98.406710|-119.591637|+24.032670|
+|29910031|-65.365191|-64.963065|+147.096446|+85.400985|+81.731255|+20.437919|
+|29910032|+39.728285|+7.586764|+33.332606|+18.422866|+73.060891|+26.009630|
+
+#### Decision exposure and representation
+
+Each arm makes3200 scheduled plans. H_A scores1732 and F_A1753; the remaining1468/1447 are declared sparse-service-pair fallbacks. No plan lacks the lawful BS input. H/F select946/904 strict swaps,19–47 and17–46 per world, from22,900/22,773 actual modeled candidates. No selected swap is a coordinate alias. All32 worlds have changed proposed actions, shielded submissions and subsequent physical trajectories for every contrast: F−H first submission ticks90–1530, physical boundaries91–1531; H−C and F−C first submissions90–540, physical boundaries91–541. F−H differs in72,407 submitted rows and75,810 physical boundary rows across the32 complete pairs. The restricted menu therefore has substantial native exposure; “nothing could activate” does not explain this panel. These later-path differences do not identify a single beneficial or harmful decision.
+
+Each modeled arm has two scored plans with selected three-sample QoS all zero, and in those same two plans all enumerated candidates are zero. This B10 all-candidate fact is directly recorded and must not be projected backward onto B09 world29890021, where only the selected-layout all-zero statement was established. Strict model-score gains sum2375.805697/2411.577111 across H/F own paths, but this endogenous diagnostic is not a native advantage. Each decision preserves its own C target multiset/designated relay/ring/NaN rows; histories, later geometry and native routes diverge. Real routes use C-designated service members as intermediaries in every world, with C/H/F means6291.469/5828.000/5838.313 route-events. Fixed designated relay targets did not fix actual routing.
+
+F forecasts132,141 current-user horizon origins,44,047 at each10/20/30 horizon. All bind without ambiguous/unbound/censored origins; no remembered user is added to scoring. F mean errors are.305429/1.072975/2.298325m versus21.868990/43.580097/65.110972m held-current, with lower combined mean in every world. Combined mean1.225576m versus43.520020m and RMSE8.781296m versus47.935605m retain a real representation capability. The166.301011m worst forecast,1843 worse origins,3 F identity switches and6 ambiguous current points remain visible (H has5 switches/6 ambiguities). This diagnostic samples F's own actually represented current users; its row set is not a common cross-arm causal mediator or all30 users. Good prediction and full native activation coexist with no established complete prediction increment.
+
+#### Service, return and risk tradeoffs
+
+The reward decomposition is decisive for the ordinary-package mean, without identifying the cause of a particular trajectory. H−C service+50.708681 is reduced by twice the additional15.322922 return-cost units, while graph-potential difference is only+.000537, leaving J+20.063373. F−C service+29.719188 is reduced by twice12.707857 additional return cost, leaving J+4.304175. F−H instead **loses**20.989493 service while reducing return cost2.615065; this offsets part of the service loss and leaves J−15.759198. An energy-only story cannot explain F's service loss relative to H, nor does this accounting prove energy is the unique controllable bottleneck.
+
+All32 H−C and all32 F−C worlds increase travel and native consumed energy. Mean additional travel per UAV is3411.220/3429.156m; team consumption increases48.646/48.941Wh, and gross charge45.269/45.573Wh. H/F add162.969/164.063 charging UAV-steps. H−C return-cost t95 is[+2.878876,+27.766968], reserve exposure+494.250 UAV-steps[+102.644,+885.856] and longest low-reserve spell+69.219 ticks[+14.555,+123.882]; F−C reserve+416.688[+37.950,+795.425]. F−H travel/consumption/return/reserve intervals cross zero; its modest average reserve reduction does not turn into established service or J benefit.
+
+H−C's mean minimum-user QoS fraction increases+.029886[+.009283,+.050489], and user-p10+.022515[+.001392,+.043638]. F−C minimum-user+.020320[+.001651,+.038989] also remains a useful secondary observation, while its user-p10 interval crosses zero. F−H minimum-user−.009566 and p10−.011759 both span zero, with18/20 adverse worlds respectively. These multiple descriptive tails do not replace the primary endpoint or establish universal fairness. Total individual zero-delivery time has essentially no H−C mean improvement(+.3125 user-ticks), despite20 favorable and11 adverse worlds; F−H adds62.969 with a broad interval. Team zero-service means C/H/F32.625/34.906/31.781 ticks; no arm has a full zero-service mission or never-served user. All observed user-gap spells, including both observation-edge censoring flags, remain in perworld:3165/2424/2656 spells,838 left-censored in each arm and184/122/143 right-censored; maximum observed473 ticks in each. No unobserved suffix was imputed.
+
+No mission depletes or crosses the2% cutoff, but C/H/F end with at least one UAV at or below10% reserve in12/14/15 worlds. Mean final reserve-member counts are2.125/3.031/2.938; worst final minimum battery.083935/.078140/.076140. Mean maximum charging waits36.625/39.656/34.063 ticks and single-world maxima87/88/74 preserve practical delay costs. Zero cutoff/depletion is not a safety guarantee or relief of the inherited C/P_BS default restriction.
+
+Preserve both kinds of native positive and adverse examples. World29910021 has F−H J+175.516/QoS+181.314 and F−C+181.723/+186.333. World29910025 has F−H+166.469/+181.149 and exceeds C, yet finishes seven F UAVs in reserve versus zero for C/H. World29910015 has H−C+422.440J/+430.581QoS while F−H−371.658J/−358.072QoS; F still exceeds C there. World29910009 loses F−H−205.218J/−236.886QoS and F−C−245.698J/−248.811QoS even though F has **zero** reserve exposure versus987 for H and137 for C. World29910016 instead illustrates return-priced service: F−C QoS+22.379 but J−282.847, with3693 reserve UAV-steps versus0, seven final reserve UAVs versus0 and final minimum.076140 versus.106075. The distinct observations weaken a single energy-only or universally bad-forecast explanation; they do not provide a prospective beneficial-world selector.
+
+#### Complete exposure and measured price
+
+| Actual scope | Native steps / resets / stream-plus-probe constructions | Candidate forecasts / nominal ticks / RF samples / private models |
+|---|---:|---:|
+|Scientific deployment|288000 /96 /192|45673 /1370190 /137019 /64|
+|Scientific complete reader|0 /0 /0|45673 /1370190 /137019 /64|
+|Eight engineering missions plus their complete reader|24000 /8 /16|5490 /164700 /16470 /8|
+|**Complete native engineering + science**|**312000 /104 /208**|**96836 /2905080 /290508 /136**|
+
+All actual candidate/model attempts completed. The separately paid finite suite used592 mocked candidate attempts(588 completed),17714 nominal ticks,1769 mocked RF attempts(1768 completed) and20 mocked constructions; it added **zero actual RF/private/native calls**,0 fits and no data-dependent new test. Do not call those mock effects real RF or silently omit failed mock work. They stay within the218752/6562560/656256/160 conservative complete envelope. Scientific worker plus reader also paid576000 proposals,403200 canonicalizations,384000 associations,19200 plans,19956 assignment calls/18072 solves,18486 Lloyd solves and10518 future projections; engineering/finite counters and the uninstrumented REFERENCE assignment caveat remain in the prior complete-engineering entry.
+
+Scientific full-chain CPU is11031.677650961s and elapsed3179.283875392s(52.988min), with9255.194060346 summed worker CPU and1747.849160244 summed reader worker CPU; reaped-process and parent scopes remain separately recorded. Adding765.471058352 engineering and7.419366337 finite-check seconds gives **11804.568075650 known CPU seconds =3.279047CPUh** at the final Linux descendant checkpoint. The12CPUh review/stop boundary did not trigger. This is below the4–8CPUh forecast, not a benchmark claim against a different earlier panel. Failed a01 startup CPU remains unknown; shared repair/probe/Git download, implementation, review, JSON reading and publication/cleanup support are additional incompletely metered work. The original12–18 support-hour equivalents were a forecast, not measured human or agent labor. Later simple saved-JSON projection included one list/dict formatting error, with0 controller/model/native effect; no extra replay or diagnostic experiment was run.
+
+C/H/F proposal CPU averages.858752/23.443630/23.259118s per complete mission; full worker averages80.482346/104.652892/104.089576s. Worker/reader/parent peak RSS is608088/632568/494400KiB, each a separate process maximum, not a claimed simultaneous sum. The96 scientific NPZs contain1052608175 payload bytes,1052794880 allocated bytes and6251227257 uncompressed array bytes. Together with8 engineering NPZs, necessary raw allocation is1141571584 bytes in104 files. Compact local results are copied separately; the one canonical raw copy remains at `hmasd-wsl-node:/home/wu/projects/HMASD/runs/uav_fleet_transmission/` under the exact a01 scientific/a02 engineering tags. All237 scientific remote files and13 compact copies are SHA256 checked in [collection-receipt.json](../../../../runs/uav_fleet_transmission/b10_service_assignment_a01/collection-receipt.json). Collection additionally measured1.875929321 CPU seconds across its local Python/reaped commands/remote hashing, with other transport support unmetered. No full bulk duplicate or retention chain was created.
+
+Observer generation6 checkpointed64 missions; generation7 checkpointed96 missions with25/32 reader worlds; both were consumed/rearmed on the same operation. Generation8 delivered terminal READY after the full reader, event b2c20d66d5477cf4e6f34e6f. The active DM drained/consumed it and stopped generation9 observation. Native-child queue delivery again reported-32600; deterministic file observation and the still-active native turn preserved continuity without a new launch or App relay. Complete checkpoint/terminal receipts are retained with the run. Exact scientific source cleanup follows collection and consumer checks; the prior2621595648-byte source reclamation remains separate from new output growth.
+
+#### Working explanation and next scientific decision
+
+The pre-result claim was a possible **F−H native service/J benefit from useful transient assignment changes while retaining C's destination generator**. Transient changes and accurate prediction are established; that complete benefit is not. The stronger scoped positive is current-location short-model assignment H_A's service and minimum-user improvement, bought with extra movement, consumption, return penalties and low-reserve exposure. Retain this capability rather than calling the whole ordinary assignment family useless, while refusing an H_A/F_A default upgrade or an established J gain. The broad intervals are neither proof of no possible benefit nor an excuse to add worlds or thresholds to this fixed panel.
+
+B09's matched F−H+65.974J/+60.769QoS remains valid for its different search package alongside its F−C−454.277J and world29890012/29890021 harms. B08's accurate tracking without full mean control benefit remains relevant. No cross-panel subtraction establishes how much of B09's deficit this new architecture repaired. The unpurchased C/H_C/F_C zero-service composition remains a priced deferral, not an empirical failure. All B01–B08 capabilities/adverses and C/P_BS world28100224 adoption limits remain intact; this work does not transfer or reactivate Claude's paused question.
+
+Current local recommendation, pending the one independent result diagnosis, is to end this exact30-tick assignment purchase without new worlds, unchanged replication, threshold/horizon tuning, fitted predictor or confirmation. Continued scientific responsibility concerns how to preserve the demonstrated ordinary service opportunity while pricing the later joint energy/route consequences, and whether anticipation can add value there. The complete native tradeoff motivates examining a concrete cost-aware continuation or a different decision interface; it does **not** establish that adding a terminal penalty, repairing one forecast outlier or lengthening the model would help. A selected successor needs a distinct source-grounded prediction and full comparison/cost; no new result operation is queued by this paragraph. Root is reusing the existing independent selection critic for this single evidence-first result diagnosis; its original answer, dissent and my resolved response will be appended, without an additional overlapping critic queue.
+
+Exact collected primary hashes: summary.json SHA2567891ff49cf5679b66c05e3098d8767b912ab4d7cac2eb2d2e73ce1350cc1d492, reading.json SHA256cad25ae780f6a79d36795ddfba687f1afe862c9ccb5af2cf9168971377ad0ae1.

@@ -14,24 +14,21 @@
     },
     "summary": {
       "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/summary.json",
-      "state": "absent"
+      "state": "present"
     }
   },
   "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/f48b8950e02344a606488dd313be9f256693c00dc6cf1bd1c356d8ef27424c11.json",
   "direction": "uav_fleet_transmission",
   "execution": {
+    "exit_code": 0,
     "exit_witness": {
+      "exit_code": 0,
+      "finished_at_epoch": 1790910261.7535136,
       "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/process-exit.json",
-      "state": "absent"
+      "state": "valid",
+      "termination": "process_exit"
     },
     "runner": {
-      "observed_identity": {
-        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
-        "kind": "linux_pid_start_ticks",
-        "pid": 1299037,
-        "session_id": 1299036,
-        "start_ticks": 124742533
-      },
       "recorded_identity": {
         "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
         "kind": "linux_pid_start_ticks",
@@ -39,17 +36,10 @@
         "session_id": 1299036,
         "start_ticks": 124742533
       },
-      "state": "running"
+      "state": "absent"
     },
-    "state": "running",
+    "state": "exited",
     "supervisor": {
-      "observed_identity": {
-        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
-        "kind": "linux_pid_start_ticks",
-        "pid": 1299036,
-        "session_id": 1299036,
-        "start_ticks": 124742530
-      },
       "recorded_identity": {
         "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
         "kind": "linux_pid_start_ticks",
@@ -57,7 +47,7 @@
         "session_id": 1299036,
         "start_ticks": 124742530
       },
-      "state": "running"
+      "state": "absent"
     }
   },
   "explicit_retry": {
@@ -73,7 +63,7 @@
   "kind": "hmasd_operation_status",
   "manifest_ref": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/launch-manifest.json",
   "node": "wsl_4070",
-  "observed_at": "2026-10-02T02:11:17.026162Z",
+  "observed_at": "2026-10-02T03:06:10.436560Z",
   "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/f48b8950e02344a606488dd313be9f256693c00dc6cf1bd1c356d8ef27424c11.json",
   "output_root": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01",
   "record_consistency": {

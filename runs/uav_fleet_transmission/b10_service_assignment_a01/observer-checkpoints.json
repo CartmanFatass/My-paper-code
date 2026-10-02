@@ -1,0 +1,60 @@
+[
+  {
+    "generation": 6,
+    "wake_id": "2edd7a5e-7c0a-4879-af82-a9cff741761f",
+    "events": [
+      {
+        "id": "9b3688ab7d8e3d3477827b23",
+        "kind": "CHECKPOINT",
+        "evidence": {
+          "generation": 6,
+          "jobs": [
+            "b10-service-assignment-scientific-a01"
+          ]
+        },
+        "created": 1790908552.2177992,
+        "consumed": false
+      }
+    ],
+    "delivery": {
+      "id": "2edd7a5e-7c0a-4879-af82-a9cff741761f",
+      "status": "delivery_unknown",
+      "created": 1790908552.2266557,
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Error: failed to queue session message: thread/queue/add failed: direct app-server input is not allowed for unloaded spawned sub-agents (code -32600)\n",
+      "exposed_ids": [
+        "9b3688ab7d8e3d3477827b23"
+      ]
+    }
+  },
+  {
+    "generation": 7,
+    "wake_id": "eb07aff6-b3c7-42fe-8a1f-70ff438ea941",
+    "events": [
+      {
+        "id": "2e0d085118e06f336d781c7e",
+        "kind": "CHECKPOINT",
+        "evidence": {
+          "generation": 7,
+          "jobs": [
+            "b10-service-assignment-scientific-a01"
+          ]
+        },
+        "created": 1790910074.5977097,
+        "consumed": false
+      }
+    ],
+    "delivery": {
+      "id": "eb07aff6-b3c7-42fe-8a1f-70ff438ea941",
+      "status": "delivery_unknown",
+      "created": 1790910074.613676,
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Error: failed to queue session message: thread/queue/add failed: direct app-server input is not allowed for unloaded spawned sub-agents (code -32600)\n",
+      "exposed_ids": [
+        "2e0d085118e06f336d781c7e"
+      ]
+    }
+  }
+]
