@@ -862,3 +862,23 @@ snapshot uses this repaired helper and the configured`zsh -lic`for complete
 partial-clone preparation. Root's actual-node witness anticipates approximately
 1.67GiB source materialization, priced separately from new scientific evidence;
 its shared object hydration is Root's control cost, not a new fit/native purchase.
+
+### B01 independent reader acceptance
+
+Source/input commit`7a52ac7270ba96a70c1463704cf4140a0641a3bf` was published
+before the sole reader supervisor request`uav-decision-generalization-b01-read-a01`.
+Actual-node admission accepted at2026-10-02T01:55:37Z; the
+[native launch manifest](../../../../runs/uav_decision_generalization/b01_read_a01/launch-manifest.json)
+binds operation`36c1972a394b2de599a845377606265359e0f70c8bc70346bb3298e7902c338c`
+and immutable source`6ca7e9ec341d40bdb53df4e4e6177249`. The complete preparation
+used configured`zsh -lic`. Every exact reader entry/locator/ledger was verified
+present in that snapshot and SHA256-identical to published/local inputs; the
+scientific loader also verifies all external manifests before consuming data.
+
+Private observer request`temp/directions/uav_decision_generalization/wait-read.json`
+registers this original operation in generation6. The observer and active DM keep
+the same handle through terminal collection; launch acceptance does not complete
+the scientific reading. Root offered reuse of its original independent
+`/root/next_study_review` for actual-result diagnosis after full evidence arrives;
+no duplicate result Reviewer is assigned here. My own complete reading, costs,
+publication and cleanup continue independently of that advice delivery.

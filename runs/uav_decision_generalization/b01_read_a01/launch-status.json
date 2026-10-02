@@ -1,0 +1,11 @@
+{
+  "claim_key": "36c1972a394b2de599a845377606265359e0f70c8bc70346bb3298e7902c338c",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/36c1972a394b2de599a845377606265359e0f70c8bc70346bb3298e7902c338c.json",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b01_read_a01/launch-manifest.json",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/36c1972a394b2de599a845377606265359e0f70c8bc70346bb3298e7902c338c.json",
+  "pid": 1293914,
+  "runner_pid": 1293915,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-10-02T01:55:37.272053Z"
+}
