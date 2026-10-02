@@ -1,0 +1,61 @@
+{
+  "actual_deleted_targets": [
+    "/home/wu/hmasd-inputs/typed_joint_skill_decision-b07-a01"
+  ],
+  "all_three_b07_cleanup_events_total_net_bytes": 4091650048,
+  "at": "2026-10-02T22:54:55.594118+00:00",
+  "canonical_evidence_retained": "Full original B05 bank, full A02 reconstruction/verification raw, all original failures and source, plus actual complete supervisor evidence retained. No copy/archive or new source snapshot created for cleanup.",
+  "cleanup_blocker": null,
+  "deletion_cpu_seconds": 0.044903214,
+  "deletion_wall_seconds": 0.04494686797261238,
+  "final_accounting_at": "2026-10-02T23:04:12.167767+00:00",
+  "local_after_allocated_bytes": {
+    "/home/fires/hmasd-wsl/docs/research/candidates/typed_joint_skill_decision/NOTES.md": 507904,
+    "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b05_data_bank_a01": 343310336,
+    "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_consumer_a01": 45056,
+    "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02": 576778240,
+    "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_source": 122880
+  },
+  "local_before_allocated_bytes": {
+    "/home/fires/hmasd-wsl/docs/research/candidates/typed_joint_skill_decision/NOTES.md": 491520,
+    "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b05_data_bank_a01": 343310336,
+    "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_consumer_a01": 20480,
+    "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02": 576778240,
+    "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_source": 122880
+  },
+  "local_evidence_and_notes_growth_bytes": 40960,
+  "local_support_child_cpu_seconds": 0.060585999999999994,
+  "local_support_parent_cpu_seconds": 0.0009382689999999916,
+  "local_support_wall_seconds": 0.7947552800033009,
+  "measurement_scope": "Exact remote staged bank/proof deletion plus local canonical B05/A02/consumer/source records and NOTES growth. Excludes shared Git objects/metadata, original remote supervisor recovery metadata and unrelated concurrent allocations.",
+  "native_output_never_created": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b07_consumer_a01",
+  "net_allocated_bytes_reclaimed": 338219008,
+  "no_live_consumer": true,
+  "owned_scratch_never_created": "/home/wu/projects/HMASD/temp/directions/typed_joint_skill_decision/b07-consumer",
+  "reference_live_file_scan": {
+    "argv": [
+      "sudo",
+      "-n",
+      "lsof",
+      "-nP",
+      "+D",
+      "/home/wu/hmasd-inputs/typed_joint_skill_decision-b07-a01"
+    ],
+    "returncode": 1,
+    "stderr": "",
+    "stdout": ""
+  },
+  "remote_after_allocated_bytes": 0,
+  "remote_before_allocated_bytes": 338259968,
+  "remote_gross_and_net_deleted_bytes": 338259968,
+  "renewed_purchase_cleanup_total_net_bytes": 2215280640,
+  "retained_supervisor_metadata": {
+    "allocated_bytes": 24576,
+    "path": "/home/wu/.agent-tasks/typed-b07-consumer-a01",
+    "reason": "Original submitted request/supervisor status and absent-exit record remain recoverable; compact failure evidence, no live process."
+  },
+  "schema": 1,
+  "science_calls": 0,
+  "source_snapshot_created": false,
+  "status": "complete"
+}

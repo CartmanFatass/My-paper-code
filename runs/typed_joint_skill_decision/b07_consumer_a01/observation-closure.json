@@ -1,0 +1,15 @@
+{
+  "at": "2026-10-02T22:55:55.557718+00:00",
+  "consumer_observer": "Never armed because no native launch handle exists. Prior reader observer stopped only after its terminal event was consumed; work unchanged.",
+  "jobs": {
+    "launch-b07-fixed-bank-reader-a01": "failed",
+    "launch-b07-fixed-bank-reader-a02": "ready"
+  },
+  "observer": null,
+  "schema": 1,
+  "scientific_effects": 0,
+  "state_generation": 6,
+  "stopped": true,
+  "unconsumed_events": 0,
+  "wake": null
+}

@@ -5418,3 +5418,108 @@ No edits, tests, Git operations, or replacement launch were performed. First-fai
 </details>
 
 DM response: Accepted. The DM constructed a multi-argument submission at a string-joining supervisor interface and did not inspect that exact boundary before Send. This is a DM launch-command defect. Preserve missing numeric exit witness; terminated status is not evidence of a fatal signal. No B06/B07 source defect or CUDA/physics claim follows, and no automatic retry is authorized.
+
+<a id="b07-a02-independent-disposition"></a>
+### B07 A02 fixed-bank result and failed-consumer independent disposition — 2026-10-02 UTC
+
+The original dedicated ResearchCritic follow-up is preserved in full below and at `runs/typed_joint_skill_decision/b07_consumer_a01/scientific-review.json`. It reused the independent selection/disposition context, received original positive/adverse evidence, and did not inherit the DM conversation. The assignment disclosed the suspected supervisor failure cause; this was evidence checking, not blinded discovery. Original answer: 11206 UTF-8 bytes, SHA256 `f9fa1f3b132380dcb01234fbdb55854f44a4571455cf54da5798638a068d39dc`. The critic independently reconstructed all258 child totals/witness/counter bindings and inspected8 raw shards/512 worlds/88,192 labels containing every changed-winner world plus two fresh shards; it did not independently re-reduce all570,487,211 raw bytes. Its two timed saved-data reads used3.289635472 CPU-s; an initial failed archive-key lookup and other support remain incompletely metered. No new physical/static/model/native/fit or launch occurred.
+
+<details><summary>Complete original independent scientific disposition</summary>
+
+I recommend **retaining A02 as a completed fixed-bank validation, closing the failed consumer supervisor request, and separately selecting one remaining complete consumer study using that validated bank**. No new producer or full bank reconstruction is warranted. The current stop remains in force; this recommendation supplies no launch authority.
+
+This follow-up reuses my prior independent review and checks the changed evidence. The assignment supplied the suspected launch cause, so the diagnosis was not blinded.
+
+A02 materially improves the evidence available for this decision. Its native exit0, manifest, child records and counters support a completed reconstruction of **16,512 worlds and2,844,367 labels**, including all2,501 complete old B04 worlds and430,980 corresponding labels. I independently reconstructed the totals from all258 child summaries, checked their bound contexts/configurations/reaped witnesses, and matched the final counter block to the summary. The consumer input correctly binds the actual A02 manifest, original input and native terminal bytes.
+
+I also inspected eight raw shards containing512 worlds and88,192 labels, including every reported changed-winner world and two fresh shards. Within that sample, the reconstructed arrays, recorded producer vectors and original B05 producer arrays agree bit for bit. All six old-to-fixed winner changes and their cross-selected regrets reproduce from the saved vectors:
+
+| World | Old winner → fixed winner | Largest cross-selected J regret |
+|---|---:|---:|
+| 109400630 | 57 → 50 | 1.1102230246251565e−16 |
+| 109400756 | 162 → 161 | 1.1102230246251565e−16 |
+| 109401751 | 0 → 31 | 1.1102230246251565e−16 |
+| 109402026 | 15 → 22 | 1.1102230246251565e−16 |
+| 109402062 | 59 → 49 | 1.1102230246251565e−16 |
+| 109402230 | 25 → 18 | 5.551115123125783e−17 |
+
+The [complete saved-vector reading](/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/fixed-version-reading.json) reports identical producer/rebuilt three-column vectors throughout all16,512 worlds. Against the old complete worlds,2,479 vectors differ, with maximum absolute differences of2.220446049250313e−16 in J, zero in coverage and3.979039320256561e−13 in frontend capacity. My targeted raw check supports that reading; I did not independently repeat its entire vector reduction.
+
+The source preserves exact self-argmax, ordered features, world/construction/RNG binding and discrete identities. Physical floating comparisons retain `atol=rtol=1e-10` and reject failures. The two identity repairs are the only B07/B06 executable differences between the failed A01 source and A02. Current consumer source pins also match their input.
+
+These observations support **fixed-version validity under the declared numerical contract**. They leave several scientific distinctions intact:
+
+- **Bank:** the fixed B05 realization now has the completed prospective validation it previously lacked. Original B05 exit2 remains correct under its original compatibility rule.
+- **Task and opportunity:** the declared candidate menus and physical labels can be reconstructed consistently under the pinned simulator. This is not independent validation of its physical laws or evidence of additional native control opportunity.
+- **Representation:** the outcome-free features and interface remain well-defined. No new evidence establishes that the proposed scorer can represent the useful ranking adequately.
+- **Learnability:** no consumer fit or prediction has occurred. Data coverage, finite optimization and sampled-negative exposure remain competing explanations for future results.
+- **Complete usefulness:** native service, adverse tails, ordinary alternatives and cold deployment cost remain unmeasured for this package.
+
+The tiny cross-selected static regrets do not bound training divergence or native consequences. Exact winners affect candidate exposure; ordered layouts can differ despite near-identical static scores. A02 therefore strengthens the validity of this fixed-data comparison without establishing equivalence to hypothetical training on old B04 labels.
+
+The consumer failure has a separate, well-supported cause. I read the original [request](/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_source/consumer-launch-request.json), task log and generated wrapper captured in [the failure record](/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_consumer_a01/supervisor-failure.json), and directly inspected the installed supervisor’s command-construction code.
+
+`agent-task` joins its remaining arguments with `COMMAND="$*"` and later evaluates the resulting string. The submitted grouping became:
+
+`zsh -lic cd /home/wu/projects/HMASD && exec …python…`
+
+Consequently, the directory change occurred in a child shell while Python executed from the outer wrapper’s directory. The actual log records Python failing to open `/home/wu/scripts/hmasd_launch.py`. The outer `exec` also bypassed the wrapper’s later exit/status writes.
+
+This explains both the launch-path failure and missing numeric exit witness. The saved reconciliation reports no native output, matching claim, matching process or surviving wrapper. **No consumer launcher or scientific runner began.** Zero consumer fits, forwards, static calls and native steps are supported by that execution path and reconciliation, rather than by counters. The exact process exit code remains unrecorded; supervisor `terminated` does not identify a signal or SIGSEGV.
+
+The engineering diagnosis and DM interpretation agree with this reconstruction. Correcting the caller/supervisor string boundary can address this specific defect without changing the scientific code. It must preserve the intended repository directory, absolute launcher path and supervisor exit recording. That correction has not demonstrated native admission, CUDA feasibility or successful consumer execution.
+
+The strongest objection to another purchase is consequential: repeated preparation and launch mistakes consume attention and reduce confidence that the remaining integration will proceed smoothly. Ordinary scoring was already strong, and the expensive cold/native comparison still has no observed benefit. Zero failed fits does not make these attempts free.
+
+I nevertheless favor the remaining consumer purchase. Its prospective value is a concrete comparison between broader-world amortized approximation and competent ordinary selection, under fixed optimization expenditure and complete deployment accounting. Earlier conditional R capability supplies a useful positive conjecture; Raw8J/RawJ competence supplies a credible adverse alternative. A02 removes the previously unresolved data-validation prerequisite. The latest obstruction is localized before scientific execution and requires no new labels, architecture, tolerance, comparator or information rights.
+
+That is a reasoned remaining experiment, rather than an attempt to recover prior expenditure. Stopping would also preserve a useful validated asset, but this launch-interface failure alone provides little reason to abandon the unchanged scientific comparison. I cannot establish that it outranks other project investments; Root owns that allocation.
+
+The cost distinction should be explicit:
+
+| Scope | Actual or prospective cost |
+|---|---|
+| Completed A02 reconstruction | 2,570.461047 CPU-s;2,763.424668 wall-s, with final/support tails additional |
+| Original B05 | 2,129.878646 recorded CPU-s; original failure retained |
+| Original B04 | At least306.264725 recorded CPU-s plus unmeasured crash/support cost |
+| Frozen preparation subtotal | 71.987048560 CPU-s, including specified earlier failed/corrective work and A02 reading; later support additional |
+| Remaining consumer | Six fits,24,576 updates,≤1,383,760 static calls,1,152 cold deployments plus16 audits,584,000 native steps |
+| Consumer execution stops | Eight aggregate CPUh, four GPU-childh, sixteen wallh;6GiB normal storage scope |
+
+The preparation subtotal already includes its listed A02 reading costs; those should not be added again. The new failed supervisor request and subsequent diagnosis carry additional partially metered support. Historical fit/native costs also remain in the direction’s cumulative account.
+
+A02 demonstrates completion of this local numerical workload within its selected bounds. It does not resolve the old remote SIGSEGV, exact consumer memory/throughput feasibility, CUDA execution or external abnormal-dump exposure. The normal storage cap is not a bound on those dumps. Available GPU/RAM observations are admission inputs, not health evidence.
+
+The smallest worthwhile remaining scientific observation is **the original complete consumer**, with the already-validated bank:1k/4k/16k×two streams, all six finals sealed before fresh use, competent Raw8J/RawJ/P references, native and individual-service readings, and full cold costs. A reader repeat would buy no presently needed scientific observation. A positive pilot or a new model hypothesis is unnecessary merely to complete this unchanged comparison.
+
+Its outcomes should change action as follows:
+
+- Coherent fresh improvement across both streams supports a conditional allocation benefit; native service and full cost determine practical usefulness.
+- Similar good performance across sizes favors the smaller allocation.
+- Weak probe fit or divergent streams constrains this finite fitting package without uniquely diagnosing representation.
+- Good probe fit with poor fresh behavior constrains generalization and argues against automatic expansion.
+- Static gains with adverse native service, tails or cost retain approximation capability while limiting the deployment claim.
+- Another technical or resource failure ends the newly selected purchase with its incomplete evidence and actual cost; no replacement or retry follows automatically.
+
+The fixed reading rule remains appropriate. Two optimization streams on one nested bank are exploratory repetitions, not independent dataset replication. Ordinary methods must retain authority over their actual paid scores; bank, online and matched quantities must remain separate.
+
+My check did not repeat all570,487,211 canonical raw bytes, every physical diagnostic, or the remote staging hash pass. I relied on the complete bound main reading for those scopes, while independently checking the consequential child/counter evidence, source/input/terminal bindings and selected positive/adverse raw vectors. I executed no scientific query, test, fit, native episode or launch, and made no edits. Two timed saved-data reads recorded3.289635472 CPU-s; an initial failed archive-key lookup and other support remain incompletely metered.
+
+**MATERIAL_DISSENT: no.** A02’s fixed-bank validity and the consumer’s pre-admission failure are supported. I recommend retaining that result and separately purchasing only the remaining complete consumer, with the original stop and risk conditions. I oppose neither a reasoned opportunity-cost stop nor Root’s allocation authority, but the new evidence does not support a negative learning conclusion or an automatic retry.
+
+</details>
+
+DM response and resolved current disposition: Accepted, MATERIAL_DISSENT:no. Retain A02 as the completed prospective fixed-version validation, preserve original B05 exit2 and all six old winner discrepancies, and close this failed consumer submission with no automatic repair/retry. The independent check covers all child/counter/provenance facts and selected raw vectors, not a second whole raw reduction. Fixed-data validity is the changed judgment; task usefulness, scorer representation, learnability, native consequences and cold cost are still unanswered. The tiny old-to-fixed static regrets do not bound training or native effects. I recommend a separately selected remaining complete consumer on the already-validated bank, without another producer or full reader and without a pilot gate. That recommendation is prospective value against Raw8J/RawJ/P, not a demand to recover past expenditure. Root owns any renewed allocation; present execution authority has stopped. CUDA/SIGSEGV/abnormal-dump uncertainty and cumulative support cost carry forward. A reasoned opportunity-cost stop would retain a useful bank and would not refute learning.
+
+No new result-bearing idea is active after this purchase’s first-failure stop. The direction retains its open question and validated asset; the remaining consumer is a costed recommendation, not a queued producer or an owner-approval fiction. Re-entry is a new Root allocation of the unchanged complete consumer or another substantively justified comparison, inheriting all contrary evidence and paid costs. The applicable independent review already covers this recommendation; there is no extra review/pilot/health prerequisite or assertion that all runtime risk is cleared.
+
+<a id="b07-renewed-final-cleanup"></a>
+### B07 renewed purchase closure and measured cleanup — 2026-10-02 UTC
+
+The successful A02 canonical reader result is complete/read and retained. The only consumer submission failed before native admission; complete actual supervisor evidence and engineering diagnosis are published at `22feeb38cc5bf61e3fadaeb93c7e6ff0d62527e3`. No native consumer source snapshot or output was ever created, and the selected scratch/CUDA cache path stayed absent. A same-handle reconciliation confirmed the failed wrapper/tmux and all matching scientific processes absent; no counter/exit file has been invented. The prior reader observer’s terminal event is consumed; generation6 is now stopped with no observer, wake or unread event, and no nonexistent consumer handle was armed.
+
+After full evidence retention and the exact-path no-open-file scan, the one unused remote bank/proof staging tree `/home/wu/hmasd-inputs/typed_joint_skill_decision-b07-a01` was deleted, removing338,259,968 allocated bytes. The earlier A02 cleanup actually deleted local snapshot `.git/hmasd-launch-sources/da5c578b16c348fb874c9b1518c6f0e7` and reference copy `temp/directions/typed_joint_skill_decision/b07-data-reference`, with phase net1,877,061,632 bytes reclaimed. The final failed-consumer `cleanup.json` measures its net after all local evidence/review/notebook growth and also gives the sum for this renewed purchase; the separately closed first A01 net1,876,369,408 remains its own historical cleanup. No new archive, full-tree copy or backup chain was created. Original remote supervisor metadata is retained as the compact submission/recovery record, not an active process. There is no concrete deletion blocker.
+
+Useful unchanged B06/B07 source/tests remain to reproduce the validated fixed-version interface and the fully prepared but unexecuted scientific comparison. The one canonical B05 bank, full unique A02 raw verification/vector records, original B04 shards/incomplete record/core and all failed/positive evidence remain in their recorded locations. They have not been exchanged for a smaller successful prefix. No transient implementation/test scratch remains. The published source still references the former staging address as historical execution input; deletion does not authorize launch or retroactively alter its facts. There is no live consumer of these deleted targets.
+
+The shared-background paragraph on cross-runtime compatibility is directly affected: it must now distinguish old B05 incompatibility from the separately completed fixed-version validation. The update retains the six exact old winner differences and avoids claiming their tiny static regrets bound training or native consequences. The broader assistant question, original positive/adverse capabilities and ordinary alternatives remain. Current study is closed; only a new Root allocation can select the proposed remaining full consumer.
