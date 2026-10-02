@@ -1,0 +1,102 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-10-02T03:04:48.774156Z",
+  "bootstrap_command": [
+    "/home/wu/.venvs/hmasd-gcc-31021/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/064bf00745de48ae8e72dfab8d2e56c1/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/064bf00745de48ae8e72dfab8d2e56c1/experiments/candidates/typed_joint_skill_decision/b03/run.py",
+    "--output",
+    "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b03_a01",
+    "--",
+    "--out",
+    "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b03_a01",
+    "--launch-sha",
+    "804dac52b1e9ac904f0b86229f88992dd392cad0",
+    "--seed",
+    "0",
+    "--input-manifest",
+    "docs/research/candidates/typed_joint_skill_decision/B03_INPUT.json",
+    "--input-manifest-sha256",
+    "e811e9c596210a4e9c7a3c2b2be1c66422ce305aa4a3de6cd8444e7e8ade5864"
+  ],
+  "claim_key": "3ab88c01fe317fee8db07efb54668de8541bc79c59ab5933962c6543a07c8c74",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/3ab88c01fe317fee8db07efb54668de8541bc79c59ab5933962c6543a07c8c74.json",
+  "command": [
+    "/home/wu/.venvs/hmasd-gcc-31021/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/064bf00745de48ae8e72dfab8d2e56c1/experiments/candidates/typed_joint_skill_decision/b03/run.py",
+    "--out",
+    "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b03_a01",
+    "--launch-sha",
+    "804dac52b1e9ac904f0b86229f88992dd392cad0",
+    "--seed",
+    "0",
+    "--input-manifest",
+    "docs/research/candidates/typed_joint_skill_decision/B03_INPUT.json",
+    "--input-manifest-sha256",
+    "e811e9c596210a4e9c7a3c2b2be1c66422ce305aa4a3de6cd8444e7e8ade5864"
+  ],
+  "command_sha256": "23aeb46c09abab2bf22a8154e06cbcd63eff8175e5e3a2c12851f726d37e445a",
+  "control_observation": {
+    "observed_at": "2026-10-02T03:04:48.565013Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "804dac52b1e9ac904f0b86229f88992dd392cad0"
+  },
+  "control_root": "/home/wu/projects/HMASD",
+  "created_at": "2026-10-02T03:04:48.612608Z",
+  "cwd": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/064bf00745de48ae8e72dfab8d2e56c1",
+  "direction": "typed_joint_skill_decision",
+  "host_identity": "LAPTOP-U9TDKC8A",
+  "identity_command": [
+    "/home/wu/.local/opt/hmasd-cpython-3.10.21-gcc/bin/python3.10",
+    "experiments/candidates/typed_joint_skill_decision/b03/run.py",
+    "--launch-sha",
+    "804dac52b1e9ac904f0b86229f88992dd392cad0",
+    "--seed",
+    "0",
+    "--input-manifest",
+    "<SOURCE>/docs/research/candidates/typed_joint_skill_decision/B03_INPUT.json",
+    "--input-manifest-sha256",
+    "e811e9c596210a4e9c7a3c2b2be1c66422ce305aa4a3de6cd8444e7e8ade5864"
+  ],
+  "lead": "Codex DM (native child)",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b03_a01/launch-manifest.json",
+  "node": "wsl_4070",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/3ab88c01fe317fee8db07efb54668de8541bc79c59ab5933962c6543a07c8c74.json",
+  "output_root": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b03_a01",
+  "preflight": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b03_a01/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 1305577,
+      "session_id": 1305577,
+      "start_ticks": 125063181
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 1305577,
+    "process_group_id": 1305577
+  },
+  "process_exit": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b03_a01/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 1305578,
+      "session_id": 1305577,
+      "start_ticks": 125063184
+    },
+    "pid": 1305578,
+    "process_group_id": 1305577,
+    "supervisor_pid": 1305577
+  },
+  "schema_version": 1,
+  "sha": "804dac52b1e9ac904f0b86229f88992dd392cad0",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/064bf00745de48ae8e72dfab8d2e56c1",
+  "stderr": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b03_a01/stderr.log",
+  "stdout": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b03_a01/stdout.log"
+}

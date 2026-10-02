@@ -2480,3 +2480,26 @@ plus exact published`--launch-sha`and canonical`--out`bound by the launcher.
 The fresh tag is`runs/typed_joint_skill_decision/b03_a01`. Original configured
 `wsl_4070`interpreter and published full source snapshot are used; no shared
 environment/profile modification. No B03 result operation is accepted yet.
+
+
+<a id="b03-admitted-operation"></a>
+## 2026-10-02 UTC — B03 sole fixed operation admitted and observed
+
+The configured`agent-task`request`typed-joint-b03-a01`completed the launcher
+handshake, accepted2026-10-02T03:04:48.774156Z. The exact scientific SHA is
+`804dac52b1e9ac904f0b86229f88992dd392cad0`; complete source snapshot
+`064bf00745de48ae8e72dfab8d2e56c1`and original configured`wsl_4070`interpreter
+passed actual-node admission. The[original manifest](../../../../runs/typed_joint_skill_decision/b03_a01/launch-manifest.json)
+binds canonical output`/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b03_a01`
+and operation`/home/wu/projects/HMASD/.git/hmasd-admission/3ab88c01fe317fee8db07efb54668de8541bc79c59ab5933962c6543a07c8c74.json`.
+Runner1305578/start125063184 and supervisor1305577/start125063181 were
+observed consistently running at03:05:36UTC by the direction's deterministic
+observer, generation1 at`temp/directions/typed_joint_skill_decision/b03-observer`.
+The native DM remains active through the complete read; no duplicate/restart.
+
+First cost checkpoint:44/192 selections,1000native steps(2new episodes),
+69851static calls,0fits/GPU,53.404875cumulative CPU-s,1962258432sampled
+allocated bytes including source/prior/output. Reader and2whole audits remain
+pending. This is acceptance/progress evidence, not a scientific result. The old
+canonical GC warning recurred but exact source materialization/admission passed;
+its log/objects and canonical overlays were preserved without repair or reset.
