@@ -13,5 +13,41 @@
         "snapshot": "76c36407b97f425d8109d4493136a31d"
       }
     ]
-  }
+  },
+  "apply": {
+    "mode": "apply",
+    "snapshots": [
+      {
+        "claim": "/home/wu/projects/HMASD/.git/hmasd-admission/c3c764c76ec8433a0584c01ef1d3d7311a1fe975a97963f3bd9d51ad6ec7f37a.json",
+        "durable_ref": "refs/remotes/origin/HEAD",
+        "eligible": true,
+        "output": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b11_travel_ties_engineering_a01",
+        "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/76c36407b97f425d8109d4493136a31d",
+        "removed": true,
+        "sha": "69394fc8d6d09ddfac0c3286c1783492ed2a6eed",
+        "snapshot": "76c36407b97f425d8109d4493136a31d"
+      }
+    ]
+  },
+  "before_allocated": {
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/76c36407b97f425d8109d4493136a31d": 1803550720,
+    "/home/wu/projects/HMASD/.git/worktrees/76c36407b97f425d8109d4493136a31d": 3702784
+  },
+  "after_allocated": {
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/76c36407b97f425d8109d4493136a31d": 0,
+    "/home/wu/projects/HMASD/.git/worktrees/76c36407b97f425d8109d4493136a31d": 0
+  },
+  "reclaimed_bytes": 1807253504,
+  "failed_output_hashes_unchanged": {
+    "stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "admission-preflight.json": "57bb6f65674994a93bfebcba0ba38e8c428ded08e91ce4b5b2e970b6a2f5731e",
+    "launch-manifest.json": "677bcae8296d6a58f7e1d0e2c1a4d7f981271e5c1f191e043a89c0c57b95ef93",
+    "launch-status.json": "ad7296f3c5de19d5dbbc4258dc9143989183a131b90437567f334e24bfc2ec35",
+    "process-exit.json": "058114fbffbb81f398dd0ba2f694b1add7bc492ea4d3f6382be3aa1a6e798d56",
+    "failure.json": "614c02933132ffd2e3126cfd2cd44c2d9d4c746b4ace23c0083f169975b058c6",
+    "stderr.log": "c40d0fccf6dba5091c6ec34fa3d5db0e18afb6c480df353724392adeda609042"
+  },
+  "parent_cpu_seconds": 0.000877235000000004,
+  "reaped_child_cpu_seconds": 0.433646,
+  "wall_seconds": 0.4627882360946387
 }

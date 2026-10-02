@@ -1,0 +1,43 @@
+{
+  "artifacts": {
+    "config.json": {
+      "allocated_bytes": 12288,
+      "bytes": 11312,
+      "sha256": "bb2479458cbafc17d9327bc0b4dc73a87ef702c56258cd96dd94c09a92a4426b"
+    },
+    "perworld.json": {
+      "allocated_bytes": 155648,
+      "bytes": 154405,
+      "sha256": "a6e0c65d146a1ca9d7046b04243593112838c6e8f52624d9efa01b938bf013ca"
+    },
+    "summary.json": {
+      "allocated_bytes": 4096,
+      "bytes": 2078,
+      "sha256": "188868471443192620b89b06400958130be05b262400078f4909f436ffd85cb1"
+    }
+  },
+  "launch_sha": "192383ab2d06984a628099a8f6f405b18e27cd04",
+  "object": "fleet-b11-literal-score-travel-ties-v1",
+  "raw": {
+    "raw/29910091_H_T.npz": {
+      "allocated_bytes": 12382208,
+      "bytes": 12380162,
+      "sha256": "04fecda1861d13ef13343609db9672e2ff7e38e1057eef60c006490c129d6a40"
+    },
+    "raw/29910091_H_T.progress.json": {
+      "allocated_bytes": 4096,
+      "bytes": 753,
+      "sha256": "0fc89ea6b0010baf1e759f2d80d7f8508ecf1f828e2e5ff7db36cf9ee3982b07"
+    },
+    "raw/29910092_H_T.npz": {
+      "allocated_bytes": 12509184,
+      "bytes": 12507884,
+      "sha256": "dfcc93ced0de2d1f1c5ca1d167c72c2808cdf20fdcb759d2ae224305d11f724d"
+    },
+    "raw/29910092_H_T.progress.json": {
+      "allocated_bytes": 4096,
+      "bytes": 753,
+      "sha256": "a5977d1a455ca089966fd44a4ecab4a204d70fb28570ac485dcb4a063af6bac9"
+    }
+  }
+}

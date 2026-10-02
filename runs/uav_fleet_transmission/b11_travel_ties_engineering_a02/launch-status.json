@@ -1,0 +1,11 @@
+{
+  "claim_key": "5adafb21ea03d6bc9fb957821507362a22c985e2aef1f82262fc9fb178349d8b",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/5adafb21ea03d6bc9fb957821507362a22c985e2aef1f82262fc9fb178349d8b.json",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b11_travel_ties_engineering_a02/launch-manifest.json",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/5adafb21ea03d6bc9fb957821507362a22c985e2aef1f82262fc9fb178349d8b.json",
+  "pid": 1311595,
+  "runner_pid": 1311596,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-10-02T04:30:25.823366Z"
+}

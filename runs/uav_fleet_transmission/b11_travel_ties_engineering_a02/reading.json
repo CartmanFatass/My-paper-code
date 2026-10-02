@@ -1,0 +1,2374 @@
+{
+  "budget_checkpoint": {
+    "checkpoint_cpu_seconds": 228.981546062,
+    "limit_cpu_seconds": 14400.0,
+    "live_descendant_cpu_seconds": 49.93,
+    "live_descendants": 2,
+    "maximum_checkpoint_cpu_seconds": 228.981546062,
+    "parent_cpu_seconds": 2.292348922,
+    "prior_cpu_seconds": 8.09750314,
+    "reaped_descendant_cpu_seconds": 168.661694,
+    "scope": "prior declared checks/phases plus current parent and all live/reaped descendants; Linux process accounting",
+    "stable_reap_snapshot": true
+  },
+  "budget_stopped": false,
+  "chain_resources": {
+    "cpu_scope": "full parent process plus Linux reaped/live descendant CPU at final checkpoint",
+    "cpu_seconds": 2.29583694,
+    "peak_rss_kib": 472196,
+    "wall_seconds": 216.55444593913853
+  },
+  "chain_total_cpu_seconds": 221.273671192,
+  "cumulative_cpu_checkpoint": {
+    "checkpoint_cpu_seconds": 229.37117433199998,
+    "limit_cpu_seconds": 14400.0,
+    "live_descendant_cpu_seconds": 0.01,
+    "live_descendants": 1,
+    "maximum_checkpoint_cpu_seconds": 229.37117433199998,
+    "parent_cpu_seconds": 2.295832192,
+    "prior_cpu_seconds": 8.09750314,
+    "reaped_descendant_cpu_seconds": 218.967839,
+    "scope": "prior declared checks/phases plus current parent and all live/reaped descendants; Linux process accounting",
+    "stable_reap_snapshot": true
+  },
+  "deployment_reported_attempted_counts": {
+    "assignment_calls": 208,
+    "assignment_solves": 178,
+    "associations": 6000,
+    "candidate_forecasts": 1439,
+    "candidate_forecasts_completed": 1439,
+    "canonicalizations": 6200,
+    "current_projections": 0,
+    "future_projections": 0,
+    "joint_forecast_ticks": 43170,
+    "joint_forecast_ticks_completed": 43170,
+    "lloyd_solves": 193,
+    "model_constructions": 2,
+    "model_rf_calls": 4317,
+    "model_rf_calls_completed": 4317,
+    "model_score_calls": 4317,
+    "model_score_calls_completed": 4317,
+    "plans": 200,
+    "proposals": 6000
+  },
+  "deployment_unstarted_jobs": [],
+  "episodes": 2,
+  "errors": [],
+  "failed_replay_attempted_counts": {},
+  "forecast_by_world": [
+    {
+      "arm": "H_T",
+      "binding": "origin birth; contemporaneous stable native slot order and actual merge provenance",
+      "combined": {
+        "ambiguous": 0,
+        "better": 0,
+        "bound": 4590,
+        "censored": 0,
+        "current_mean_error_m": 44.18200618208782,
+        "current_rmse_m": 48.842268476068156,
+        "current_sum_m": 202795.4083757831,
+        "current_sum_sq_m2": 10949753.401587393,
+        "equal": 4590,
+        "evaluated": 4590,
+        "forecast_mean_error_m": 44.18200618208782,
+        "forecast_rmse_m": 48.842268476068156,
+        "forecast_sum_m": 202795.4083757831,
+        "forecast_sum_sq_m2": 10949753.401587393,
+        "last_seen_mean_error_m": 44.18200618208782,
+        "last_seen_rmse_m": 48.842268476068156,
+        "last_seen_sum_m": 202795.4083757831,
+        "last_seen_sum_sq_m2": 10949753.401587393,
+        "nonzero_velocity": 4578,
+        "origins": 4590,
+        "remembered": 0,
+        "unbound": 0,
+        "worse": 0,
+        "worst_rows": [
+          {
+            "age": 0,
+            "arm": "H_A",
+            "birth": 16,
+            "current_error_m": 89.9450409231379,
+            "current_xy": [
+              4885.144531726837,
+              3024.983286857605
+            ],
+            "forecast_error_m": 89.9450409231379,
+            "forecast_xy": [
+              4885.144531726837,
+              3024.983286857605
+            ],
+            "last_seen_error_m": 89.9450409231379,
+            "last_xy": [
+              4885.144531726837,
+              3024.983286857605
+            ],
+            "nonzero_velocity": true,
+            "remembered": false,
+            "t": 1080,
+            "tau": 30,
+            "truth_xy": [
+              4832.1872721869795,
+              3097.685687427965
+            ],
+            "user": 17
+          },
+          {
+            "age": 0,
+            "arm": "H_A",
+            "birth": 16,
+            "current_error_m": 89.9449485187045,
+            "current_xy": [
+              4302.612766623497,
+              3824.706733226776
+            ],
+            "forecast_error_m": 89.9449485187045,
+            "forecast_xy": [
+              4302.612766623497,
+              3824.706733226776
+            ],
+            "last_seen_error_m": 89.9449485187045,
+            "last_xy": [
+              4302.612766623497,
+              3824.706733226776
+            ],
+            "nonzero_velocity": true,
+            "remembered": false,
+            "t": 1410,
+            "tau": 30,
+            "truth_xy": [
+              4249.655532694801,
+              3897.4090381328365
+            ],
+            "user": 17
+          },
+          {
+            "age": 0,
+            "arm": "H_A",
+            "birth": 16,
+            "current_error_m": 89.94491343468322,
+            "current_xy": [
+              5255.846619606018,
+              2516.0686373710632
+            ],
+            "forecast_error_m": 89.94491343468322,
+            "forecast_xy": [
+              5255.846619606018,
+              2516.0686373710632
+            ],
+            "last_seen_error_m": 89.94491343468322,
+            "last_xy": [
+              5255.846619606018,
+              2516.0686373710632
+            ],
+            "nonzero_velocity": true,
+            "remembered": false,
+            "t": 870,
+            "tau": 30,
+            "truth_xy": [
+              5202.889288227457,
+              2588.7708278885016
+            ],
+            "user": 17
+          },
+          {
+            "age": 0,
+            "arm": "H_A",
+            "birth": 16,
+            "current_error_m": 89.94490847421353,
+            "current_xy": [
+              4620.357513427734,
+              3388.494163751602
+            ],
+            "forecast_error_m": 89.94490847421353,
+            "forecast_xy": [
+              4620.357513427734,
+              3388.494163751602
+            ],
+            "last_seen_error_m": 89.94490847421353,
+            "last_xy": [
+              4620.357513427734,
+              3388.494163751602
+            ],
+            "nonzero_velocity": true,
+            "remembered": false,
+            "t": 1230,
+            "tau": 30,
+            "truth_xy": [
+              4567.400117872353,
+              3461.196301384725
+            ],
+            "user": 17
+          },
+          {
+            "age": 0,
+            "arm": "H_A",
+            "birth": 16,
+            "current_error_m": 89.94489028054956,
+            "current_xy": [
+              5467.67633408308,
+              2225.26016831398
+            ],
+            "forecast_error_m": 89.94489028054956,
+            "forecast_xy": [
+              5467.67633408308,
+              2225.26016831398
+            ],
+            "last_seen_error_m": 89.94489028054956,
+            "last_xy": [
+              5467.67633408308,
+              2225.26016831398
+            ],
+            "nonzero_velocity": true,
+            "remembered": false,
+            "t": 750,
+            "tau": 30,
+            "truth_xy": [
+              5414.719011679158,
+              2297.962336723094
+            ],
+            "user": 17
+          }
+        ]
+      },
+      "counts": {
+        "ambiguous_current_points": 0,
+        "births": 78,
+        "bound_current_points": 70255,
+        "continuation_events": 70177,
+        "current_points": 70255,
+        "duplicate_bound_track_times": 0,
+        "forecast_ambiguous": 0,
+        "forecast_bound": 4590,
+        "forecast_evaluated": 4590,
+        "forecast_future_censored": 0,
+        "forecast_nonzero_velocity": 4578,
+        "forecast_origins": 4590,
+        "forecast_remembered": 0,
+        "forecast_unbound": 0,
+        "identity_switches": 0,
+        "reidentified_births": 48,
+        "silent_true_slots": 0,
+        "singleton_births": 78,
+        "singleton_continuations": 70177,
+        "slot_records": 271365,
+        "unbound_current_points": 0
+      },
+      "per_tau": {
+        "10": {
+          "ambiguous": 0,
+          "better": 0,
+          "bound": 1530,
+          "censored": 0,
+          "current_mean_error_m": 22.17604342844267,
+          "current_rmse_m": 22.695008687510246,
+          "current_sum_m": 33929.34644551729,
+          "current_sum_sq_m2": 788047.0315690332,
+          "equal": 1530,
+          "evaluated": 1530,
+          "forecast_mean_error_m": 22.17604342844267,
+          "forecast_rmse_m": 22.695008687510246,
+          "forecast_sum_m": 33929.34644551729,
+          "forecast_sum_sq_m2": 788047.0315690332,
+          "last_seen_mean_error_m": 22.17604342844267,
+          "last_seen_rmse_m": 22.695008687510246,
+          "last_seen_sum_m": 33929.34644551729,
+          "last_seen_sum_sq_m2": 788047.0315690332,
+          "nonzero_velocity": 1526,
+          "origins": 1530,
+          "remembered": 0,
+          "unbound": 0,
+          "worse": 0,
+          "worst_rows": [
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 16,
+              "current_error_m": 29.981762746882705,
+              "current_xy": [
+                4885.144531726837,
+                3024.983286857605
+              ],
+              "forecast_error_m": 29.981762746882705,
+              "forecast_xy": [
+                4885.144531726837,
+                3024.983286857605
+              ],
+              "last_seen_error_m": 29.981762746882705,
+              "last_xy": [
+                4885.144531726837,
+                3024.983286857605
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "t": 1080,
+              "tau": 10,
+              "truth_xy": [
+                4867.492226095596,
+                3049.217605567064
+              ],
+              "user": 17
+            },
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 16,
+              "current_error_m": 29.981670342224177,
+              "current_xy": [
+                4302.612766623497,
+                3824.706733226776
+              ],
+              "forecast_error_m": 29.981670342224177,
+              "forecast_xy": [
+                4302.612766623497,
+                3824.706733226776
+              ],
+              "last_seen_error_m": 29.981670342224177,
+              "last_xy": [
+                4302.612766623497,
+                3824.706733226776
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "t": 1410,
+              "tau": 10,
+              "truth_xy": [
+                4284.960486603418,
+                3848.940956271935
+              ],
+              "user": 17
+            },
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 16,
+              "current_error_m": 29.98163525757469,
+              "current_xy": [
+                5255.846619606018,
+                2516.0686373710632
+              ],
+              "forecast_error_m": 29.98163525757469,
+              "forecast_xy": [
+                5255.846619606018,
+                2516.0686373710632
+              ],
+              "last_seen_error_m": 29.98163525757469,
+              "last_xy": [
+                5255.846619606018,
+                2516.0686373710632
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "t": 870,
+              "tau": 10,
+              "truth_xy": [
+                5238.194242136074,
+                2540.3027460276003
+              ],
+              "user": 17
+            },
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 16,
+              "current_error_m": 29.9816302969596,
+              "current_xy": [
+                4620.357513427734,
+                3388.494163751602
+              ],
+              "forecast_error_m": 29.9816302969596,
+              "forecast_xy": [
+                4620.357513427734,
+                3388.494163751602
+              ],
+              "last_seen_error_m": 29.9816302969596,
+              "last_xy": [
+                4620.357513427734,
+                3388.494163751602
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "t": 1230,
+              "tau": 10,
+              "truth_xy": [
+                4602.70507178097,
+                3412.7282195238236
+              ],
+              "user": 17
+            },
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 16,
+              "current_error_m": 29.981612103425995,
+              "current_xy": [
+                5467.67633408308,
+                2225.26016831398
+              ],
+              "forecast_error_m": 29.981612103425995,
+              "forecast_xy": [
+                5467.67633408308,
+                2225.26016831398
+              ],
+              "last_seen_error_m": 29.981612103425995,
+              "last_xy": [
+                5467.67633408308,
+                2225.26016831398
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "t": 750,
+              "tau": 10,
+              "truth_xy": [
+                5450.023965587775,
+                2249.4942548621925
+              ],
+              "user": 17
+            }
+          ]
+        },
+        "20": {
+          "ambiguous": 0,
+          "better": 0,
+          "bound": 1530,
+          "censored": 0,
+          "current_mean_error_m": 44.23380321490012,
+          "current_rmse_m": 45.29480909446101,
+          "current_sum_m": 67677.71891879718,
+          "current_sum_sq_m2": 3138978.188282612,
+          "equal": 1530,
+          "evaluated": 1530,
+          "forecast_mean_error_m": 44.23380321490012,
+          "forecast_rmse_m": 45.29480909446101,
+          "forecast_sum_m": 67677.71891879718,
+          "forecast_sum_sq_m2": 3138978.188282612,
+          "last_seen_mean_error_m": 44.23380321490012,
+          "last_seen_rmse_m": 45.29480909446101,
+          "last_seen_sum_m": 67677.71891879718,
+          "last_seen_sum_sq_m2": 3138978.188282612,
+          "nonzero_velocity": 1526,
+          "origins": 1530,
+          "remembered": 0,
+          "unbound": 0,
+          "worse": 0,
+          "worst_rows": [
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 16,
+              "current_error_m": 59.96340183475675,
+              "current_xy": [
+                4885.144531726837,
+                3024.983286857605
+              ],
+              "forecast_error_m": 59.96340183475675,
+              "forecast_xy": [
+                4885.144531726837,
+                3024.983286857605
+              ],
+              "last_seen_error_m": 59.96340183475675,
+              "last_xy": [
+                4885.144531726837,
+                3024.983286857605
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "t": 1080,
+              "tau": 20,
+              "truth_xy": [
+                4849.839749141288,
+                3073.4516464975145
+              ],
+              "user": 17
+            },
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 16,
+              "current_error_m": 59.963309430267074,
+              "current_xy": [
+                4302.612766623497,
+                3824.706733226776
+              ],
+              "forecast_error_m": 59.963309430267074,
+              "forecast_xy": [
+                4302.612766623497,
+                3824.706733226776
+              ],
+              "last_seen_error_m": 59.963309430267074,
+              "last_xy": [
+                4302.612766623497,
+                3824.706733226776
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "t": 1410,
+              "tau": 20,
+              "truth_xy": [
+                4267.308009649109,
+                3873.174997202386
+              ],
+              "user": 17
+            },
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 16,
+              "current_error_m": 59.96327434608874,
+              "current_xy": [
+                5255.846619606018,
+                2516.0686373710632
+              ],
+              "forecast_error_m": 59.96327434608874,
+              "forecast_xy": [
+                5255.846619606018,
+                2516.0686373710632
+              ],
+              "last_seen_error_m": 59.96327434608874,
+              "last_xy": [
+                5255.846619606018,
+                2516.0686373710632
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "t": 870,
+              "tau": 20,
+              "truth_xy": [
+                5220.541765181765,
+                2564.536786958051
+              ],
+              "user": 17
+            },
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 16,
+              "current_error_m": 59.963269385582706,
+              "current_xy": [
+                4620.357513427734,
+                3388.494163751602
+              ],
+              "forecast_error_m": 59.963269385582706,
+              "forecast_xy": [
+                4620.357513427734,
+                3388.494163751602
+              ],
+              "last_seen_error_m": 59.963269385582706,
+              "last_xy": [
+                4620.357513427734,
+                3388.494163751602
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "t": 1230,
+              "tau": 20,
+              "truth_xy": [
+                4585.052594826661,
+                3436.962260454274
+              ],
+              "user": 17
+            },
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 16,
+              "current_error_m": 59.96325119195132,
+              "current_xy": [
+                5467.67633408308,
+                2225.26016831398
+              ],
+              "forecast_error_m": 59.96325119195132,
+              "forecast_xy": [
+                5467.67633408308,
+                2225.26016831398
+              ],
+              "last_seen_error_m": 59.96325119195132,
+              "last_xy": [
+                5467.67633408308,
+                2225.26016831398
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "t": 750,
+              "tau": 20,
+              "truth_xy": [
+                5432.3714886334665,
+                2273.728295792643
+              ],
+              "user": 17
+            }
+          ]
+        },
+        "30": {
+          "ambiguous": 0,
+          "better": 0,
+          "bound": 1530,
+          "censored": 0,
+          "current_mean_error_m": 66.13617190292067,
+          "current_rmse_m": 67.74967468139704,
+          "current_sum_m": 101188.34301146862,
+          "current_sum_sq_m2": 7022728.181735749,
+          "equal": 1530,
+          "evaluated": 1530,
+          "forecast_mean_error_m": 66.13617190292067,
+          "forecast_rmse_m": 67.74967468139704,
+          "forecast_sum_m": 101188.34301146862,
+          "forecast_sum_sq_m2": 7022728.181735749,
+          "last_seen_mean_error_m": 66.13617190292067,
+          "last_seen_rmse_m": 67.74967468139704,
+          "last_seen_sum_m": 101188.34301146862,
+          "last_seen_sum_sq_m2": 7022728.181735749,
+          "nonzero_velocity": 1526,
+          "origins": 1530,
+          "remembered": 0,
+          "unbound": 0,
+          "worse": 0,
+          "worst_rows": [
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 16,
+              "current_error_m": 89.9450409231379,
+              "current_xy": [
+                4885.144531726837,
+                3024.983286857605
+              ],
+              "forecast_error_m": 89.9450409231379,
+              "forecast_xy": [
+                4885.144531726837,
+                3024.983286857605
+              ],
+              "last_seen_error_m": 89.9450409231379,
+              "last_xy": [
+                4885.144531726837,
+                3024.983286857605
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "t": 1080,
+              "tau": 30,
+              "truth_xy": [
+                4832.1872721869795,
+                3097.685687427965
+              ],
+              "user": 17
+            },
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 16,
+              "current_error_m": 89.9449485187045,
+              "current_xy": [
+                4302.612766623497,
+                3824.706733226776
+              ],
+              "forecast_error_m": 89.9449485187045,
+              "forecast_xy": [
+                4302.612766623497,
+                3824.706733226776
+              ],
+              "last_seen_error_m": 89.9449485187045,
+              "last_xy": [
+                4302.612766623497,
+                3824.706733226776
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "t": 1410,
+              "tau": 30,
+              "truth_xy": [
+                4249.655532694801,
+                3897.4090381328365
+              ],
+              "user": 17
+            },
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 16,
+              "current_error_m": 89.94491343468322,
+              "current_xy": [
+                5255.846619606018,
+                2516.0686373710632
+              ],
+              "forecast_error_m": 89.94491343468322,
+              "forecast_xy": [
+                5255.846619606018,
+                2516.0686373710632
+              ],
+              "last_seen_error_m": 89.94491343468322,
+              "last_xy": [
+                5255.846619606018,
+                2516.0686373710632
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "t": 870,
+              "tau": 30,
+              "truth_xy": [
+                5202.889288227457,
+                2588.7708278885016
+              ],
+              "user": 17
+            },
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 16,
+              "current_error_m": 89.94490847421353,
+              "current_xy": [
+                4620.357513427734,
+                3388.494163751602
+              ],
+              "forecast_error_m": 89.94490847421353,
+              "forecast_xy": [
+                4620.357513427734,
+                3388.494163751602
+              ],
+              "last_seen_error_m": 89.94490847421353,
+              "last_xy": [
+                4620.357513427734,
+                3388.494163751602
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "t": 1230,
+              "tau": 30,
+              "truth_xy": [
+                4567.400117872353,
+                3461.196301384725
+              ],
+              "user": 17
+            },
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 16,
+              "current_error_m": 89.94489028054956,
+              "current_xy": [
+                5467.67633408308,
+                2225.26016831398
+              ],
+              "forecast_error_m": 89.94489028054956,
+              "forecast_xy": [
+                5467.67633408308,
+                2225.26016831398
+              ],
+              "last_seen_error_m": 89.94489028054956,
+              "last_xy": [
+                5467.67633408308,
+                2225.26016831398
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "t": 750,
+              "tau": 30,
+              "truth_xy": [
+                5414.719011679158,
+                2297.962336723094
+              ],
+              "user": 17
+            }
+          ]
+        }
+      },
+      "replay_status": "verified",
+      "seed": 29910091
+    },
+    {
+      "arm": "H_T",
+      "binding": "origin birth; contemporaneous stable native slot order and actual merge provenance",
+      "combined": {
+        "ambiguous": 0,
+        "better": 0,
+        "bound": 5010,
+        "censored": 0,
+        "current_mean_error_m": 41.08914211213514,
+        "current_rmse_m": 45.313073216669146,
+        "current_sum_m": 205856.60198179708,
+        "current_sum_sq_m2": 10286905.767739486,
+        "equal": 5010,
+        "evaluated": 5010,
+        "forecast_mean_error_m": 41.08914211213514,
+        "forecast_rmse_m": 45.313073216669146,
+        "forecast_sum_m": 205856.60198179708,
+        "forecast_sum_sq_m2": 10286905.767739486,
+        "last_seen_mean_error_m": 41.08914211213514,
+        "last_seen_rmse_m": 45.313073216669146,
+        "last_seen_sum_m": 205856.60198179708,
+        "last_seen_sum_sq_m2": 10286905.767739486,
+        "nonzero_velocity": 5004,
+        "origins": 5010,
+        "remembered": 0,
+        "unbound": 0,
+        "worse": 0,
+        "worst_rows": [
+          {
+            "age": 0,
+            "arm": "H_A",
+            "birth": 8,
+            "current_error_m": 89.92610979115453,
+            "current_xy": [
+              3789.7528409957886,
+              3852.9338240623474
+            ],
+            "forecast_error_m": 89.92610979115453,
+            "forecast_xy": [
+              3789.7528409957886,
+              3852.9338240623474
+            ],
+            "last_seen_error_m": 89.92610979115453,
+            "last_xy": [
+              3789.7528409957886,
+              3852.9338240623474
+            ],
+            "nonzero_velocity": true,
+            "remembered": false,
+            "t": 420,
+            "tau": 30,
+            "truth_xy": [
+              3732.1753112776023,
+              3922.0101101069963
+            ],
+            "user": 23
+          },
+          {
+            "age": 0,
+            "arm": "H_A",
+            "birth": 8,
+            "current_error_m": 89.92609577157799,
+            "current_xy": [
+              4077.6407122612,
+              3507.552921772003
+            ],
+            "forecast_error_m": 89.92609577157799,
+            "forecast_xy": [
+              4077.6407122612,
+              3507.552921772003
+            ],
+            "last_seen_error_m": 89.92609577157799,
+            "last_xy": [
+              4077.6407122612,
+              3507.552921772003
+            ],
+            "nonzero_velocity": true,
+            "remembered": false,
+            "t": 270,
+            "tau": 30,
+            "truth_xy": [
+              4020.063208439079,
+              3576.629211150723
+            ],
+            "user": 23
+          },
+          {
+            "age": 0,
+            "arm": "H_A",
+            "birth": 8,
+            "current_error_m": 89.92609148297811,
+            "current_xy": [
+              3617.0200407505035,
+              4060.1623356342316
+            ],
+            "forecast_error_m": 89.92609148297811,
+            "forecast_xy": [
+              3617.0200407505035,
+              4060.1623356342316
+            ],
+            "last_seen_error_m": 89.92609148297811,
+            "last_xy": [
+              3617.0200407505035,
+              4060.1623356342316
+            ],
+            "nonzero_velocity": true,
+            "remembered": false,
+            "t": 510,
+            "tau": 30,
+            "truth_xy": [
+              3559.4425729807162,
+              4129.23864948076
+            ],
+            "user": 23
+          },
+          {
+            "age": 0,
+            "arm": "H_A",
+            "birth": 8,
+            "current_error_m": 89.92605201142945,
+            "current_xy": [
+              4192.7958726882935,
+              3369.4006204605103
+            ],
+            "forecast_error_m": 89.92605201142945,
+            "forecast_xy": [
+              4192.7958726882935,
+              3369.4006204605103
+            ],
+            "last_seen_error_m": 89.92605201142945,
+            "last_xy": [
+              4192.7958726882935,
+              3369.4006204605103
+            ],
+            "nonzero_velocity": true,
+            "remembered": false,
+            "t": 210,
+            "tau": 30,
+            "truth_xy": [
+              4135.218367303661,
+              3438.476851568214
+            ],
+            "user": 23
+          },
+          {
+            "age": 0,
+            "arm": "H_A",
+            "birth": 8,
+            "current_error_m": 89.92603876539089,
+            "current_xy": [
+              4307.950973510742,
+              3231.24822974205
+            ],
+            "forecast_error_m": 89.92603876539089,
+            "forecast_xy": [
+              4307.950973510742,
+              3231.24822974205
+            ],
+            "last_seen_error_m": 89.92603876539089,
+            "last_xy": [
+              4307.950973510742,
+              3231.24822974205
+            ],
+            "nonzero_velocity": true,
+            "remembered": false,
+            "t": 150,
+            "tau": 30,
+            "truth_xy": [
+              4250.373526168224,
+              3300.3244919857048
+            ],
+            "user": 23
+          }
+        ]
+      },
+      "counts": {
+        "ambiguous_current_points": 0,
+        "births": 95,
+        "bound_current_points": 69240,
+        "continuation_events": 69145,
+        "current_points": 69240,
+        "duplicate_bound_track_times": 0,
+        "forecast_ambiguous": 0,
+        "forecast_bound": 5010,
+        "forecast_evaluated": 5010,
+        "forecast_future_censored": 0,
+        "forecast_nonzero_velocity": 5004,
+        "forecast_origins": 5010,
+        "forecast_remembered": 0,
+        "forecast_unbound": 0,
+        "identity_switches": 0,
+        "reidentified_births": 65,
+        "silent_true_slots": 0,
+        "singleton_births": 95,
+        "singleton_continuations": 69145,
+        "slot_records": 300568,
+        "unbound_current_points": 0
+      },
+      "per_tau": {
+        "10": {
+          "ambiguous": 0,
+          "better": 0,
+          "bound": 1670,
+          "censored": 0,
+          "current_mean_error_m": 20.641756388583936,
+          "current_rmse_m": 21.06967839135884,
+          "current_sum_m": 34471.73316893517,
+          "current_sum_sq_m2": 741365.3503505402,
+          "equal": 1670,
+          "evaluated": 1670,
+          "forecast_mean_error_m": 20.641756388583936,
+          "forecast_rmse_m": 21.06967839135884,
+          "forecast_sum_m": 34471.73316893517,
+          "forecast_sum_sq_m2": 741365.3503505402,
+          "last_seen_mean_error_m": 20.641756388583936,
+          "last_seen_rmse_m": 21.06967839135884,
+          "last_seen_sum_m": 34471.73316893517,
+          "last_seen_sum_sq_m2": 741365.3503505402,
+          "nonzero_velocity": 1668,
+          "origins": 1670,
+          "remembered": 0,
+          "unbound": 0,
+          "worse": 0,
+          "worst_rows": [
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 8,
+              "current_error_m": 29.97540312197259,
+              "current_xy": [
+                3789.7528409957886,
+                3852.9338240623474
+              ],
+              "forecast_error_m": 29.97540312197259,
+              "forecast_xy": [
+                3789.7528409957886,
+                3852.9338240623474
+              ],
+              "last_seen_error_m": 29.97540312197259,
+              "last_xy": [
+                3789.7528409957886,
+                3852.9338240623474
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "t": 420,
+              "tau": 10,
+              "truth_xy": [
+                3770.560364232466,
+                3875.9593235794932
+              ],
+              "user": 23
+            },
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 8,
+              "current_error_m": 29.975389102453484,
+              "current_xy": [
+                4077.6407122612,
+                3507.552921772003
+              ],
+              "forecast_error_m": 29.975389102453484,
+              "forecast_xy": [
+                4077.6407122612,
+                3507.552921772003
+              ],
+              "last_seen_error_m": 29.975389102453484,
+              "last_xy": [
+                4077.6407122612,
+                3507.552921772003
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "t": 270,
+              "tau": 10,
+              "truth_xy": [
+                4058.4482613939426,
+                3530.57842462322
+              ],
+              "user": 23
+            },
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 8,
+              "current_error_m": 29.975384813998534,
+              "current_xy": [
+                3617.0200407505035,
+                4060.1623356342316
+              ],
+              "forecast_error_m": 29.975384813998534,
+              "forecast_xy": [
+                3617.0200407505035,
+                4060.1623356342316
+              ],
+              "last_seen_error_m": 29.975384813998534,
+              "last_xy": [
+                3617.0200407505035,
+                4060.1623356342316
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "t": 510,
+              "tau": 10,
+              "truth_xy": [
+                3597.82762593558,
+                4083.187862953257
+              ],
+              "user": 23
+            },
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 8,
+              "current_error_m": 29.975345342217413,
+              "current_xy": [
+                4192.7958726882935,
+                3369.4006204605103
+              ],
+              "forecast_error_m": 29.975345342217413,
+              "forecast_xy": [
+                4192.7958726882935,
+                3369.4006204605103
+              ],
+              "last_seen_error_m": 29.975345342217413,
+              "last_xy": [
+                4192.7958726882935,
+                3369.4006204605103
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "t": 210,
+              "tau": 10,
+              "truth_xy": [
+                4173.603420258515,
+                3392.426065040711
+              ],
+              "user": 23
+            },
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 8,
+              "current_error_m": 29.97533209635391,
+              "current_xy": [
+                4307.950973510742,
+                3231.24822974205
+              ],
+              "forecast_error_m": 29.97533209635391,
+              "forecast_xy": [
+                4307.950973510742,
+                3231.24822974205
+              ],
+              "last_seen_error_m": 29.97533209635391,
+              "last_xy": [
+                4307.950973510742,
+                3231.24822974205
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "t": 150,
+              "tau": 10,
+              "truth_xy": [
+                4288.758579123079,
+                3254.2737054582017
+              ],
+              "user": 23
+            }
+          ]
+        },
+        "20": {
+          "ambiguous": 0,
+          "better": 0,
+          "bound": 1670,
+          "censored": 0,
+          "current_mean_error_m": 41.12635565111589,
+          "current_rmse_m": 42.012502540529866,
+          "current_sum_m": 68681.01393736353,
+          "current_sum_sq_m2": 2947634.1174291074,
+          "equal": 1670,
+          "evaluated": 1670,
+          "forecast_mean_error_m": 41.12635565111589,
+          "forecast_rmse_m": 42.012502540529866,
+          "forecast_sum_m": 68681.01393736353,
+          "forecast_sum_sq_m2": 2947634.1174291074,
+          "last_seen_mean_error_m": 41.12635565111589,
+          "last_seen_rmse_m": 42.012502540529866,
+          "last_seen_sum_m": 68681.01393736353,
+          "last_seen_sum_sq_m2": 2947634.1174291074,
+          "nonzero_velocity": 1668,
+          "origins": 1670,
+          "remembered": 0,
+          "unbound": 0,
+          "worse": 0,
+          "worst_rows": [
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 8,
+              "current_error_m": 59.9507564565322,
+              "current_xy": [
+                3789.7528409957886,
+                3852.9338240623474
+              ],
+              "forecast_error_m": 59.9507564565322,
+              "forecast_xy": [
+                3789.7528409957886,
+                3852.9338240623474
+              ],
+              "last_seen_error_m": 59.9507564565322,
+              "last_xy": [
+                3789.7528409957886,
+                3852.9338240623474
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "t": 420,
+              "tau": 20,
+              "truth_xy": [
+                3751.367837755034,
+                3898.9847168432448
+              ],
+              "user": 23
+            },
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 8,
+              "current_error_m": 59.95074243697002,
+              "current_xy": [
+                4077.6407122612,
+                3507.552921772003
+              ],
+              "forecast_error_m": 59.95074243697002,
+              "forecast_xy": [
+                4077.6407122612,
+                3507.552921772003
+              ],
+              "last_seen_error_m": 59.95074243697002,
+              "last_xy": [
+                4077.6407122612,
+                3507.552921772003
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "t": 270,
+              "tau": 20,
+              "truth_xy": [
+                4039.255734916511,
+                3553.6038178869717
+              ],
+              "user": 23
+            },
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 8,
+              "current_error_m": 59.95073814840628,
+              "current_xy": [
+                3617.0200407505035,
+                4060.1623356342316
+              ],
+              "forecast_error_m": 59.95073814840628,
+              "forecast_xy": [
+                3617.0200407505035,
+                4060.1623356342316
+              ],
+              "last_seen_error_m": 59.95073814840628,
+              "last_xy": [
+                3617.0200407505035,
+                4060.1623356342316
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "t": 510,
+              "tau": 20,
+              "truth_xy": [
+                3578.635099458148,
+                4106.213256217008
+              ],
+              "user": 23
+            },
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 8,
+              "current_error_m": 59.95069867680104,
+              "current_xy": [
+                4192.7958726882935,
+                3369.4006204605103
+              ],
+              "forecast_error_m": 59.95069867680104,
+              "forecast_xy": [
+                4192.7958726882935,
+                3369.4006204605103
+              ],
+              "last_seen_error_m": 59.95069867680104,
+              "last_xy": [
+                4192.7958726882935,
+                3369.4006204605103
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "t": 210,
+              "tau": 20,
+              "truth_xy": [
+                4154.410893781088,
+                3415.4514583044624
+              ],
+              "user": 23
+            },
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 8,
+              "current_error_m": 59.950685430806246,
+              "current_xy": [
+                4307.950973510742,
+                3231.24822974205
+              ],
+              "forecast_error_m": 59.950685430806246,
+              "forecast_xy": [
+                4307.950973510742,
+                3231.24822974205
+              ],
+              "last_seen_error_m": 59.950685430806246,
+              "last_xy": [
+                4307.950973510742,
+                3231.24822974205
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "t": 150,
+              "tau": 20,
+              "truth_xy": [
+                4269.566052645651,
+                3277.299098721953
+              ],
+              "user": 23
+            }
+          ]
+        },
+        "30": {
+          "ambiguous": 0,
+          "better": 0,
+          "bound": 1670,
+          "censored": 0,
+          "current_mean_error_m": 61.499314296705606,
+          "current_rmse_m": 62.855724447215906,
+          "current_sum_m": 102703.85487549836,
+          "current_sum_sq_m2": 6597906.299959839,
+          "equal": 1670,
+          "evaluated": 1670,
+          "forecast_mean_error_m": 61.499314296705606,
+          "forecast_rmse_m": 62.855724447215906,
+          "forecast_sum_m": 102703.85487549836,
+          "forecast_sum_sq_m2": 6597906.299959839,
+          "last_seen_mean_error_m": 61.499314296705606,
+          "last_seen_rmse_m": 62.855724447215906,
+          "last_seen_sum_m": 102703.85487549836,
+          "last_seen_sum_sq_m2": 6597906.299959839,
+          "nonzero_velocity": 1668,
+          "origins": 1670,
+          "remembered": 0,
+          "unbound": 0,
+          "worse": 0,
+          "worst_rows": [
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 8,
+              "current_error_m": 89.92610979115453,
+              "current_xy": [
+                3789.7528409957886,
+                3852.9338240623474
+              ],
+              "forecast_error_m": 89.92610979115453,
+              "forecast_xy": [
+                3789.7528409957886,
+                3852.9338240623474
+              ],
+              "last_seen_error_m": 89.92610979115453,
+              "last_xy": [
+                3789.7528409957886,
+                3852.9338240623474
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "t": 420,
+              "tau": 30,
+              "truth_xy": [
+                3732.1753112776023,
+                3922.0101101069963
+              ],
+              "user": 23
+            },
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 8,
+              "current_error_m": 89.92609577157799,
+              "current_xy": [
+                4077.6407122612,
+                3507.552921772003
+              ],
+              "forecast_error_m": 89.92609577157799,
+              "forecast_xy": [
+                4077.6407122612,
+                3507.552921772003
+              ],
+              "last_seen_error_m": 89.92609577157799,
+              "last_xy": [
+                4077.6407122612,
+                3507.552921772003
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "t": 270,
+              "tau": 30,
+              "truth_xy": [
+                4020.063208439079,
+                3576.629211150723
+              ],
+              "user": 23
+            },
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 8,
+              "current_error_m": 89.92609148297811,
+              "current_xy": [
+                3617.0200407505035,
+                4060.1623356342316
+              ],
+              "forecast_error_m": 89.92609148297811,
+              "forecast_xy": [
+                3617.0200407505035,
+                4060.1623356342316
+              ],
+              "last_seen_error_m": 89.92609148297811,
+              "last_xy": [
+                3617.0200407505035,
+                4060.1623356342316
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "t": 510,
+              "tau": 30,
+              "truth_xy": [
+                3559.4425729807162,
+                4129.23864948076
+              ],
+              "user": 23
+            },
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 8,
+              "current_error_m": 89.92605201142945,
+              "current_xy": [
+                4192.7958726882935,
+                3369.4006204605103
+              ],
+              "forecast_error_m": 89.92605201142945,
+              "forecast_xy": [
+                4192.7958726882935,
+                3369.4006204605103
+              ],
+              "last_seen_error_m": 89.92605201142945,
+              "last_xy": [
+                4192.7958726882935,
+                3369.4006204605103
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "t": 210,
+              "tau": 30,
+              "truth_xy": [
+                4135.218367303661,
+                3438.476851568214
+              ],
+              "user": 23
+            },
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 8,
+              "current_error_m": 89.92603876539089,
+              "current_xy": [
+                4307.950973510742,
+                3231.24822974205
+              ],
+              "forecast_error_m": 89.92603876539089,
+              "forecast_xy": [
+                4307.950973510742,
+                3231.24822974205
+              ],
+              "last_seen_error_m": 89.92603876539089,
+              "last_xy": [
+                4307.950973510742,
+                3231.24822974205
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "t": 150,
+              "tau": 30,
+              "truth_xy": [
+                4250.373526168224,
+                3300.3244919857048
+              ],
+              "user": 23
+            }
+          ]
+        }
+      },
+      "replay_status": "verified",
+      "seed": 29910092
+    }
+  ],
+  "forecast_totals": {
+    "H_T": {
+      "combined": {
+        "ambiguous": 0,
+        "better": 0,
+        "bound": 9600,
+        "censored": 0,
+        "current_mean_error_m": 42.56791774558126,
+        "current_rmse_m": 47.0335199278651,
+        "current_sum_m": 408652.01035758015,
+        "current_sum_sq_m2": 21236659.16932688,
+        "equal": 9600,
+        "evaluated": 9600,
+        "forecast_mean_error_m": 42.56791774558126,
+        "forecast_rmse_m": 47.0335199278651,
+        "forecast_sum_m": 408652.01035758015,
+        "forecast_sum_sq_m2": 21236659.16932688,
+        "last_seen_mean_error_m": 42.56791774558126,
+        "last_seen_rmse_m": 47.0335199278651,
+        "last_seen_sum_m": 408652.01035758015,
+        "last_seen_sum_sq_m2": 21236659.16932688,
+        "nonzero_velocity": 9582,
+        "origins": 9600,
+        "remembered": 0,
+        "unbound": 0,
+        "worse": 0,
+        "worst_rows": [
+          {
+            "age": 0,
+            "arm": "H_A",
+            "birth": 16,
+            "current_error_m": 89.9450409231379,
+            "current_xy": [
+              4885.144531726837,
+              3024.983286857605
+            ],
+            "forecast_error_m": 89.9450409231379,
+            "forecast_xy": [
+              4885.144531726837,
+              3024.983286857605
+            ],
+            "last_seen_error_m": 89.9450409231379,
+            "last_xy": [
+              4885.144531726837,
+              3024.983286857605
+            ],
+            "nonzero_velocity": true,
+            "remembered": false,
+            "seed": 29910091,
+            "t": 1080,
+            "tau": 30,
+            "truth_xy": [
+              4832.1872721869795,
+              3097.685687427965
+            ],
+            "user": 17
+          },
+          {
+            "age": 0,
+            "arm": "H_A",
+            "birth": 16,
+            "current_error_m": 89.9449485187045,
+            "current_xy": [
+              4302.612766623497,
+              3824.706733226776
+            ],
+            "forecast_error_m": 89.9449485187045,
+            "forecast_xy": [
+              4302.612766623497,
+              3824.706733226776
+            ],
+            "last_seen_error_m": 89.9449485187045,
+            "last_xy": [
+              4302.612766623497,
+              3824.706733226776
+            ],
+            "nonzero_velocity": true,
+            "remembered": false,
+            "seed": 29910091,
+            "t": 1410,
+            "tau": 30,
+            "truth_xy": [
+              4249.655532694801,
+              3897.4090381328365
+            ],
+            "user": 17
+          },
+          {
+            "age": 0,
+            "arm": "H_A",
+            "birth": 16,
+            "current_error_m": 89.94491343468322,
+            "current_xy": [
+              5255.846619606018,
+              2516.0686373710632
+            ],
+            "forecast_error_m": 89.94491343468322,
+            "forecast_xy": [
+              5255.846619606018,
+              2516.0686373710632
+            ],
+            "last_seen_error_m": 89.94491343468322,
+            "last_xy": [
+              5255.846619606018,
+              2516.0686373710632
+            ],
+            "nonzero_velocity": true,
+            "remembered": false,
+            "seed": 29910091,
+            "t": 870,
+            "tau": 30,
+            "truth_xy": [
+              5202.889288227457,
+              2588.7708278885016
+            ],
+            "user": 17
+          },
+          {
+            "age": 0,
+            "arm": "H_A",
+            "birth": 16,
+            "current_error_m": 89.94490847421353,
+            "current_xy": [
+              4620.357513427734,
+              3388.494163751602
+            ],
+            "forecast_error_m": 89.94490847421353,
+            "forecast_xy": [
+              4620.357513427734,
+              3388.494163751602
+            ],
+            "last_seen_error_m": 89.94490847421353,
+            "last_xy": [
+              4620.357513427734,
+              3388.494163751602
+            ],
+            "nonzero_velocity": true,
+            "remembered": false,
+            "seed": 29910091,
+            "t": 1230,
+            "tau": 30,
+            "truth_xy": [
+              4567.400117872353,
+              3461.196301384725
+            ],
+            "user": 17
+          },
+          {
+            "age": 0,
+            "arm": "H_A",
+            "birth": 16,
+            "current_error_m": 89.94489028054956,
+            "current_xy": [
+              5467.67633408308,
+              2225.26016831398
+            ],
+            "forecast_error_m": 89.94489028054956,
+            "forecast_xy": [
+              5467.67633408308,
+              2225.26016831398
+            ],
+            "last_seen_error_m": 89.94489028054956,
+            "last_xy": [
+              5467.67633408308,
+              2225.26016831398
+            ],
+            "nonzero_velocity": true,
+            "remembered": false,
+            "seed": 29910091,
+            "t": 750,
+            "tau": 30,
+            "truth_xy": [
+              5414.719011679158,
+              2297.962336723094
+            ],
+            "user": 17
+          }
+        ]
+      },
+      "per_tau": {
+        "10": {
+          "ambiguous": 0,
+          "better": 0,
+          "bound": 3200,
+          "censored": 0,
+          "current_mean_error_m": 21.375337379516395,
+          "current_rmse_m": 21.861870216197577,
+          "current_sum_m": 68401.07961445246,
+          "current_sum_sq_m2": 1529412.3819195735,
+          "equal": 3200,
+          "evaluated": 3200,
+          "forecast_mean_error_m": 21.375337379516395,
+          "forecast_rmse_m": 21.861870216197577,
+          "forecast_sum_m": 68401.07961445246,
+          "forecast_sum_sq_m2": 1529412.3819195735,
+          "last_seen_mean_error_m": 21.375337379516395,
+          "last_seen_rmse_m": 21.861870216197577,
+          "last_seen_sum_m": 68401.07961445246,
+          "last_seen_sum_sq_m2": 1529412.3819195735,
+          "nonzero_velocity": 3194,
+          "origins": 3200,
+          "remembered": 0,
+          "unbound": 0,
+          "worse": 0,
+          "worst_rows": [
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 16,
+              "current_error_m": 29.981762746882705,
+              "current_xy": [
+                4885.144531726837,
+                3024.983286857605
+              ],
+              "forecast_error_m": 29.981762746882705,
+              "forecast_xy": [
+                4885.144531726837,
+                3024.983286857605
+              ],
+              "last_seen_error_m": 29.981762746882705,
+              "last_xy": [
+                4885.144531726837,
+                3024.983286857605
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "seed": 29910091,
+              "t": 1080,
+              "tau": 10,
+              "truth_xy": [
+                4867.492226095596,
+                3049.217605567064
+              ],
+              "user": 17
+            },
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 16,
+              "current_error_m": 29.981670342224177,
+              "current_xy": [
+                4302.612766623497,
+                3824.706733226776
+              ],
+              "forecast_error_m": 29.981670342224177,
+              "forecast_xy": [
+                4302.612766623497,
+                3824.706733226776
+              ],
+              "last_seen_error_m": 29.981670342224177,
+              "last_xy": [
+                4302.612766623497,
+                3824.706733226776
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "seed": 29910091,
+              "t": 1410,
+              "tau": 10,
+              "truth_xy": [
+                4284.960486603418,
+                3848.940956271935
+              ],
+              "user": 17
+            },
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 16,
+              "current_error_m": 29.98163525757469,
+              "current_xy": [
+                5255.846619606018,
+                2516.0686373710632
+              ],
+              "forecast_error_m": 29.98163525757469,
+              "forecast_xy": [
+                5255.846619606018,
+                2516.0686373710632
+              ],
+              "last_seen_error_m": 29.98163525757469,
+              "last_xy": [
+                5255.846619606018,
+                2516.0686373710632
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "seed": 29910091,
+              "t": 870,
+              "tau": 10,
+              "truth_xy": [
+                5238.194242136074,
+                2540.3027460276003
+              ],
+              "user": 17
+            },
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 16,
+              "current_error_m": 29.9816302969596,
+              "current_xy": [
+                4620.357513427734,
+                3388.494163751602
+              ],
+              "forecast_error_m": 29.9816302969596,
+              "forecast_xy": [
+                4620.357513427734,
+                3388.494163751602
+              ],
+              "last_seen_error_m": 29.9816302969596,
+              "last_xy": [
+                4620.357513427734,
+                3388.494163751602
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "seed": 29910091,
+              "t": 1230,
+              "tau": 10,
+              "truth_xy": [
+                4602.70507178097,
+                3412.7282195238236
+              ],
+              "user": 17
+            },
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 16,
+              "current_error_m": 29.981612103425995,
+              "current_xy": [
+                5467.67633408308,
+                2225.26016831398
+              ],
+              "forecast_error_m": 29.981612103425995,
+              "forecast_xy": [
+                5467.67633408308,
+                2225.26016831398
+              ],
+              "last_seen_error_m": 29.981612103425995,
+              "last_xy": [
+                5467.67633408308,
+                2225.26016831398
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "seed": 29910091,
+              "t": 750,
+              "tau": 10,
+              "truth_xy": [
+                5450.023965587775,
+                2249.4942548621925
+              ],
+              "user": 17
+            }
+          ]
+        },
+        "20": {
+          "ambiguous": 0,
+          "better": 0,
+          "bound": 3200,
+          "censored": 0,
+          "current_mean_error_m": 42.61210401755023,
+          "current_rmse_m": 43.61268560333005,
+          "current_sum_m": 136358.73285616073,
+          "current_sum_sq_m2": 6086612.305711719,
+          "equal": 3200,
+          "evaluated": 3200,
+          "forecast_mean_error_m": 42.61210401755023,
+          "forecast_rmse_m": 43.61268560333005,
+          "forecast_sum_m": 136358.73285616073,
+          "forecast_sum_sq_m2": 6086612.305711719,
+          "last_seen_mean_error_m": 42.61210401755023,
+          "last_seen_rmse_m": 43.61268560333005,
+          "last_seen_sum_m": 136358.73285616073,
+          "last_seen_sum_sq_m2": 6086612.305711719,
+          "nonzero_velocity": 3194,
+          "origins": 3200,
+          "remembered": 0,
+          "unbound": 0,
+          "worse": 0,
+          "worst_rows": [
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 16,
+              "current_error_m": 59.96340183475675,
+              "current_xy": [
+                4885.144531726837,
+                3024.983286857605
+              ],
+              "forecast_error_m": 59.96340183475675,
+              "forecast_xy": [
+                4885.144531726837,
+                3024.983286857605
+              ],
+              "last_seen_error_m": 59.96340183475675,
+              "last_xy": [
+                4885.144531726837,
+                3024.983286857605
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "seed": 29910091,
+              "t": 1080,
+              "tau": 20,
+              "truth_xy": [
+                4849.839749141288,
+                3073.4516464975145
+              ],
+              "user": 17
+            },
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 16,
+              "current_error_m": 59.963309430267074,
+              "current_xy": [
+                4302.612766623497,
+                3824.706733226776
+              ],
+              "forecast_error_m": 59.963309430267074,
+              "forecast_xy": [
+                4302.612766623497,
+                3824.706733226776
+              ],
+              "last_seen_error_m": 59.963309430267074,
+              "last_xy": [
+                4302.612766623497,
+                3824.706733226776
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "seed": 29910091,
+              "t": 1410,
+              "tau": 20,
+              "truth_xy": [
+                4267.308009649109,
+                3873.174997202386
+              ],
+              "user": 17
+            },
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 16,
+              "current_error_m": 59.96327434608874,
+              "current_xy": [
+                5255.846619606018,
+                2516.0686373710632
+              ],
+              "forecast_error_m": 59.96327434608874,
+              "forecast_xy": [
+                5255.846619606018,
+                2516.0686373710632
+              ],
+              "last_seen_error_m": 59.96327434608874,
+              "last_xy": [
+                5255.846619606018,
+                2516.0686373710632
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "seed": 29910091,
+              "t": 870,
+              "tau": 20,
+              "truth_xy": [
+                5220.541765181765,
+                2564.536786958051
+              ],
+              "user": 17
+            },
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 16,
+              "current_error_m": 59.963269385582706,
+              "current_xy": [
+                4620.357513427734,
+                3388.494163751602
+              ],
+              "forecast_error_m": 59.963269385582706,
+              "forecast_xy": [
+                4620.357513427734,
+                3388.494163751602
+              ],
+              "last_seen_error_m": 59.963269385582706,
+              "last_xy": [
+                4620.357513427734,
+                3388.494163751602
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "seed": 29910091,
+              "t": 1230,
+              "tau": 20,
+              "truth_xy": [
+                4585.052594826661,
+                3436.962260454274
+              ],
+              "user": 17
+            },
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 16,
+              "current_error_m": 59.96325119195132,
+              "current_xy": [
+                5467.67633408308,
+                2225.26016831398
+              ],
+              "forecast_error_m": 59.96325119195132,
+              "forecast_xy": [
+                5467.67633408308,
+                2225.26016831398
+              ],
+              "last_seen_error_m": 59.96325119195132,
+              "last_xy": [
+                5467.67633408308,
+                2225.26016831398
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "seed": 29910091,
+              "t": 750,
+              "tau": 20,
+              "truth_xy": [
+                5432.3714886334665,
+                2273.728295792643
+              ],
+              "user": 17
+            }
+          ]
+        },
+        "30": {
+          "ambiguous": 0,
+          "better": 0,
+          "bound": 3200,
+          "censored": 0,
+          "current_mean_error_m": 63.71631183967718,
+          "current_rmse_m": 65.24146132276523,
+          "current_sum_m": 203892.19788696698,
+          "current_sum_sq_m2": 13620634.481695589,
+          "equal": 3200,
+          "evaluated": 3200,
+          "forecast_mean_error_m": 63.71631183967718,
+          "forecast_rmse_m": 65.24146132276523,
+          "forecast_sum_m": 203892.19788696698,
+          "forecast_sum_sq_m2": 13620634.481695589,
+          "last_seen_mean_error_m": 63.71631183967718,
+          "last_seen_rmse_m": 65.24146132276523,
+          "last_seen_sum_m": 203892.19788696698,
+          "last_seen_sum_sq_m2": 13620634.481695589,
+          "nonzero_velocity": 3194,
+          "origins": 3200,
+          "remembered": 0,
+          "unbound": 0,
+          "worse": 0,
+          "worst_rows": [
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 16,
+              "current_error_m": 89.9450409231379,
+              "current_xy": [
+                4885.144531726837,
+                3024.983286857605
+              ],
+              "forecast_error_m": 89.9450409231379,
+              "forecast_xy": [
+                4885.144531726837,
+                3024.983286857605
+              ],
+              "last_seen_error_m": 89.9450409231379,
+              "last_xy": [
+                4885.144531726837,
+                3024.983286857605
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "seed": 29910091,
+              "t": 1080,
+              "tau": 30,
+              "truth_xy": [
+                4832.1872721869795,
+                3097.685687427965
+              ],
+              "user": 17
+            },
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 16,
+              "current_error_m": 89.9449485187045,
+              "current_xy": [
+                4302.612766623497,
+                3824.706733226776
+              ],
+              "forecast_error_m": 89.9449485187045,
+              "forecast_xy": [
+                4302.612766623497,
+                3824.706733226776
+              ],
+              "last_seen_error_m": 89.9449485187045,
+              "last_xy": [
+                4302.612766623497,
+                3824.706733226776
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "seed": 29910091,
+              "t": 1410,
+              "tau": 30,
+              "truth_xy": [
+                4249.655532694801,
+                3897.4090381328365
+              ],
+              "user": 17
+            },
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 16,
+              "current_error_m": 89.94491343468322,
+              "current_xy": [
+                5255.846619606018,
+                2516.0686373710632
+              ],
+              "forecast_error_m": 89.94491343468322,
+              "forecast_xy": [
+                5255.846619606018,
+                2516.0686373710632
+              ],
+              "last_seen_error_m": 89.94491343468322,
+              "last_xy": [
+                5255.846619606018,
+                2516.0686373710632
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "seed": 29910091,
+              "t": 870,
+              "tau": 30,
+              "truth_xy": [
+                5202.889288227457,
+                2588.7708278885016
+              ],
+              "user": 17
+            },
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 16,
+              "current_error_m": 89.94490847421353,
+              "current_xy": [
+                4620.357513427734,
+                3388.494163751602
+              ],
+              "forecast_error_m": 89.94490847421353,
+              "forecast_xy": [
+                4620.357513427734,
+                3388.494163751602
+              ],
+              "last_seen_error_m": 89.94490847421353,
+              "last_xy": [
+                4620.357513427734,
+                3388.494163751602
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "seed": 29910091,
+              "t": 1230,
+              "tau": 30,
+              "truth_xy": [
+                4567.400117872353,
+                3461.196301384725
+              ],
+              "user": 17
+            },
+            {
+              "age": 0,
+              "arm": "H_A",
+              "birth": 16,
+              "current_error_m": 89.94489028054956,
+              "current_xy": [
+                5467.67633408308,
+                2225.26016831398
+              ],
+              "forecast_error_m": 89.94489028054956,
+              "forecast_xy": [
+                5467.67633408308,
+                2225.26016831398
+              ],
+              "last_seen_error_m": 89.94489028054956,
+              "last_xy": [
+                5467.67633408308,
+                2225.26016831398
+              ],
+              "nonzero_velocity": true,
+              "remembered": false,
+              "seed": 29910091,
+              "t": 750,
+              "tau": 30,
+              "truth_xy": [
+                5414.719011679158,
+                2297.962336723094
+              ],
+              "user": 17
+            }
+          ]
+        }
+      },
+      "scope": "recorded origin identities on this arm's own path; partial censoring retained"
+    }
+  },
+  "frozen_reference_verified": true,
+  "identity_totals": {
+    "H_T": {
+      "ambiguous_current_points": 0,
+      "births": 173,
+      "bound_current_points": 139495,
+      "continuation_events": 139322,
+      "current_points": 139495,
+      "duplicate_bound_track_times": 0,
+      "forecast_ambiguous": 0,
+      "forecast_bound": 9600,
+      "forecast_evaluated": 9600,
+      "forecast_future_censored": 0,
+      "forecast_nonzero_velocity": 9582,
+      "forecast_origins": 9600,
+      "forecast_remembered": 0,
+      "forecast_unbound": 0,
+      "identity_switches": 0,
+      "reidentified_births": 113,
+      "silent_true_slots": 0,
+      "singleton_births": 173,
+      "singleton_continuations": 139322,
+      "slot_records": 571933,
+      "unbound_current_points": 0
+    }
+  },
+  "launch_sha": "192383ab2d06984a628099a8f6f405b18e27cd04",
+  "model_native_steps": 0,
+  "model_resets": 0,
+  "model_vs_native": "declared FP32 decoding/FP64 nominal and post-energy sample; omitted guard/intermediate association/PBRS/event penalties; no equality imposed",
+  "native_transitions_checked": 6000,
+  "new_fits": 0,
+  "new_labels": 0,
+  "new_native_steps": 0,
+  "object": "fleet-b11-literal-score-travel-ties-v1",
+  "optimizer_updates": 0,
+  "phase": "engineering",
+  "preserved_unreplayed_attempted_or_uncertain_counts": {},
+  "reader_parent_cpu_seconds": 0.1106676900000001,
+  "reader_parent_peak_rss_kib": 472196,
+  "reader_parent_wall_seconds": 48.95363404904492,
+  "reader_shield_calls": 6000,
+  "reader_worker_cpu_seconds_sum": 48.477600948,
+  "reader_worker_peak_rss_kib_max": 581056,
+  "reader_worker_wall_seconds_sum": 47.135787709848955,
+  "reader_workers": 1,
+  "reaped_reader_cpu_seconds": 50.30614499999999,
+  "reference_controller_replays": 0,
+  "reference_model_queries": 0,
+  "reference_native_transitions_checked": 12000,
+  "replay_attempted_counts": {
+    "assignment_calls": 208,
+    "assignment_solves": 178,
+    "associations": 6000,
+    "candidate_forecasts": 1439,
+    "candidate_forecasts_completed": 1439,
+    "canonicalizations": 6200,
+    "current_projections": 0,
+    "future_projections": 0,
+    "joint_forecast_ticks": 43170,
+    "joint_forecast_ticks_completed": 43170,
+    "lloyd_solves": 193,
+    "model_constructions": 2,
+    "model_rf_calls": 4317,
+    "model_rf_calls_completed": 4317,
+    "model_score_calls": 4317,
+    "model_score_calls_completed": 4317,
+    "plans": 200,
+    "proposals": 6000
+  },
+  "replay_counts": {
+    "assignment_calls": 208,
+    "assignment_solves": 178,
+    "associations": 6000,
+    "candidate_forecasts": 1439,
+    "candidate_forecasts_completed": 1439,
+    "canonicalizations": 6200,
+    "current_projections": 0,
+    "future_projections": 0,
+    "joint_forecast_ticks": 43170,
+    "joint_forecast_ticks_completed": 43170,
+    "lloyd_solves": 193,
+    "model_constructions": 2,
+    "model_rf_calls": 4317,
+    "model_rf_calls_completed": 4317,
+    "model_score_calls": 4317,
+    "model_score_calls_completed": 4317,
+    "plans": 200,
+    "proposals": 6000
+  },
+  "source_binding": {
+    "construction_contract_sha": "95ecc08021c0f0a3fffd1efe94323fb77ff31f24",
+    "files": {
+      "configs/config_1.py": "f55b5f148c2664334b455305dea094591799eb0c0544237f7bb717bd1401ccb8",
+      "envs/pettingzoo/env_adapter.py": "8b42c1c3e7ef44cb814f79225b4af944b1018ad764dfeb17e9e1cc294df79d40",
+      "envs/pettingzoo/native/uav_geometry_backend.cpp": "1ff1eecb1c4a69ec402f4f2a506dca830e140844f8ed9c56f52e2c99c94791dd",
+      "envs/pettingzoo/relay/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "envs/pettingzoo/relay/belief_map.py": "b27750f09706cad0b97ec2689b703228e3f28a711877b4dd15707c8571b4ce04",
+      "envs/pettingzoo/relay/channel_geometry.py": "c16121dd5ecf82d5f706c236b71b8d1805446d0d9e483a8a4d5258b2657acb69",
+      "envs/pettingzoo/relay/energy_aware.py": "f6836b7b8d26e73b83888fa2eb5cb7d02e9ec565e35ddc3de0098c9746f367cf",
+      "envs/pettingzoo/relay/forced_relay.py": "79a61f1ed07ae9bb52d9cfb6163041b13fff13ecb9e3e30b0a97709f622bd973",
+      "envs/pettingzoo/relay/local_view.py": "560c8de76599c649b921be7c2324f5983c8ad48bf5ca93fe4e1871d2c4f46657",
+      "envs/pettingzoo/relay/progressive.py": "176ce4856725d2b2a8857aa42e80730c5e020996bf3411c8249494d49a8910f8",
+      "envs/pettingzoo/relay/routed_core.py": "f67869ae1de05c4f0d7e05e0dac0e4f13008d2f17251d07e20dc97c4ea44abf0",
+      "envs/pettingzoo/relay/routing.py": "1956f4cabbb3a2660fdbff9a4892327dfd16f02b2d497f64faef2f02a24645d5",
+      "envs/pettingzoo/uav_cpp_backend.py": "59b9915cf232d263930b2521eff2a933aeb2bca218eb2958dfce81ff52fc822c",
+      "experiments/candidates/energy_relay_benchmark/b01/evaluation.py": "15391e2eafff0876dd0bfa94a0d8f9f96558c76254e8d73cb8e55426735eccd7",
+      "experiments/candidates/energy_relay_benchmark/b01/feedback.py": "0cb8cc14d7d63ea6dd6bbc84c830e01c06837507acd70b8fd29ae6411a6c13d2",
+      "experiments/candidates/energy_relay_benchmark/b01/heuristic.py": "f82bbcc1d6586ae41acbb720b225b294c3dff812246e88f15f699b2d9146351e",
+      "experiments/candidates/energy_relay_benchmark/b01/observation.py": "baa416c9067504fdeb2656b376768ed06c3febe440c358c92c7281922791536f",
+      "experiments/candidates/uav_fleet_transmission/b08_anonymous_memory/controller.py": "4f8469b053e70e63ca93ad9636122a6f32ae9eb150802c671f005e25cef78933",
+      "experiments/candidates/uav_fleet_transmission/b09_service_prediction/__init__.py": "e65636c372960506ff434ea18275c4abfca459a16f71a3d56cf8121a50cf08cb",
+      "experiments/candidates/uav_fleet_transmission/b09_service_prediction/contract.py": "e1fa8bea71cb0e1f4096b81986dd8a81356be46c2a52cfa55bd9ee38624b10df",
+      "experiments/candidates/uav_fleet_transmission/b09_service_prediction/controller.py": "fea7ad943e94e509bb4bd08bf0d94a5f26a647e28e4969bd8006f5673dbfbeca",
+      "experiments/candidates/uav_fleet_transmission/b09_service_prediction/frozen_sources.json": "dbd930420ae0688ed317ccdbb60f609b5e5219a0402f1527a8e0e00425db56c5",
+      "experiments/candidates/uav_fleet_transmission/b09_service_prediction/model.py": "a090e8714d3a6d4e6f4a9f53bb6356aa51302036831cca3d2ed90f22c697423c",
+      "experiments/candidates/uav_fleet_transmission/b09_service_prediction/nominal.py": "53607818394218f050ead61db5f257ae9ebcb865159269ea08c07f5f56e542dc",
+      "experiments/candidates/uav_fleet_transmission/b09_service_prediction/trace.py": "ada90960da66bec85cdaaf015de65afece66fd95993ea96748e200c584231293",
+      "experiments/candidates/uav_fleet_transmission/b10_service_assignment/__init__.py": "51461302071dfd2955d107bb5c5a381667030d8975bb987d0ba8fbddaa5de5fc",
+      "experiments/candidates/uav_fleet_transmission/b10_service_assignment/budget.py": "a5db8fe3ebcb610951c95a33021bacb56869db1e0eb213278103d7197bd2599e",
+      "experiments/candidates/uav_fleet_transmission/b10_service_assignment/capture.py": "cf6902fa577f6ff8ff2a1dfdfa257bc449a952232b82fc5b9e9f18c9a9d1586d",
+      "experiments/candidates/uav_fleet_transmission/b10_service_assignment/contract.py": "bf137d987dc021fec5e80b38d61b22067703ac61eb570bb25bafa3029605d34e",
+      "experiments/candidates/uav_fleet_transmission/b10_service_assignment/controller.py": "346d513a850a7561c3310de2e98d5ea4474e6a1a0b02ca452dff9a872ad79501",
+      "experiments/candidates/uav_fleet_transmission/b10_service_assignment/metrics.py": "66a92c3d87b99447e902df2a174d35efbaa215504bfec5b0d36f419f8b78e860",
+      "experiments/candidates/uav_fleet_transmission/b10_service_assignment/nominal.py": "3191b045b2540d16948382150d57268ca0f32484d4682d0fa4dd80e351e2ae07",
+      "experiments/candidates/uav_fleet_transmission/b10_service_assignment/reader.py": "137b887322f9382e23189005ed0e71707e1b37379e686bf196e8157556febd22",
+      "experiments/candidates/uav_fleet_transmission/b10_service_assignment/run.py": "3d9027cf78e4b23991f5307b0e9cbe03b80457e3be5731888861cee5977f2727",
+      "experiments/candidates/uav_fleet_transmission/b10_service_assignment/study.py": "ffbec647a96b6acb62aa32c95e8215f119ce056ed83b79890e3a4a9e36566991",
+      "experiments/candidates/uav_fleet_transmission/b10_service_assignment/trace.py": "bdebf08f99509053f69748625fae40e2841afe4429f8889bde39c9f49c54dea1",
+      "experiments/candidates/uav_fleet_transmission/b11_travel_ties/__init__.py": "6ff30743ac448b88a758bcf94691bc0ff5be45aba94e22e610fef95f036e7176",
+      "experiments/candidates/uav_fleet_transmission/b11_travel_ties/capture.py": "a5cd7f0f05a3d6bd38f4e43b7ac6398e81be120df1594ed4d68eff727b0f4dea",
+      "experiments/candidates/uav_fleet_transmission/b11_travel_ties/checks.py": "148f4de1e2b00b0190bc9a5beedc7ee4869ecd7dcb7c56a31115ddd264f428fd",
+      "experiments/candidates/uav_fleet_transmission/b11_travel_ties/contract.py": "c99dfa92fe15057ad2a20bcb18dff4558853c2058322e6e3c00b706f0e941c8f",
+      "experiments/candidates/uav_fleet_transmission/b11_travel_ties/controller.py": "4f1660b362dfe29780f49428c75b36cb7bd21cd62e960742d2e7328384ff6a84",
+      "experiments/candidates/uav_fleet_transmission/b11_travel_ties/metrics.py": "889beaab6c38a3e29b11d920bdaa62758e6fae872d25f6fd33b04db9ee647bde",
+      "experiments/candidates/uav_fleet_transmission/b11_travel_ties/reader.py": "60515eceb0ee2647e9d7349d522288d631156c31444bbc0fefcddf6909c04443",
+      "experiments/candidates/uav_fleet_transmission/b11_travel_ties/references.json": "c7c01662e9d2ec2b4d3902ced75dad10e55cfdc242edadc9cedc8992501d469f",
+      "experiments/candidates/uav_fleet_transmission/b11_travel_ties/run.py": "1d569e6ea437a0984fd8d0873a574a583e56b0a0aa3a3c61d001d9a5ed3866fc",
+      "experiments/candidates/uav_fleet_transmission/b11_travel_ties/study.py": "99f1ad174bc0895dc62f16e62e42a9e64f50fedc9087dfa9d045d2cc178eb6c8",
+      "experiments/candidates/uav_information_value/b02/controller.py": "6046f3db724c6893c16d1e256ff05603e5148c6239b37ead266e1446988bce3d",
+      "experiments/candidates/uav_information_value/batch.py": "ffa9e3b462e59134347da677f5c5ac4aa68265f3132c502919c5ca50bf5becfb",
+      "experiments/candidates/uav_information_value/controllers.py": "3f06d1a98f24ff6348ba4fb6bc505729f9c7df55b6cedac867d4a4eb5064cac2",
+      "experiments/candidates/uav_joint_transition/controllers.py": "57bfe8a3847f6864c5f2ef97c97aef80ef414e5dd6c5ff6c628ff68370749715",
+      "experiments/candidates/uav_joint_transition/motion.py": "d333c163a816f139b7d71ab4679553d50f742ef4c5aa7633a932c33f9732dbb5",
+      "experiments/candidates/uav_radio_placement/b01/placement.py": "6682930810fec111fa68e165bbb2790117627d986fbb61057742837dee504b4f",
+      "experiments/candidates/uav_service_auxiliary/b01/native.py": "873024b6f3e01705c07005d0dcc19185da2073f871dd93ae4cb739c5e739f990",
+      "experiments/candidates/uav_service_auxiliary/b04/evaluation.py": "0a3695e958c31b1eb97f6bbf38a1d41727f1c7f6cc679b4c046fcfda4b5487af"
+    },
+    "original_source_sha": "94f08627050b7d495b4c9e9af18db02ab17a5c1e"
+  },
+  "status": "VERIFIED",
+  "submitted_worlds": [
+    "29910091",
+    "29910092"
+  ],
+  "unreported_attempted_count_lower_bound": {},
+  "unreported_job_evidence": [],
+  "unreported_jobs": [],
+  "verified_actual_proposals": 6000,
+  "verified_feedback_calls": 6000,
+  "worlds": 2
+}
