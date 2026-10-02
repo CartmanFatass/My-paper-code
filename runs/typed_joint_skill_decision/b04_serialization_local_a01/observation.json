@@ -96,6 +96,9 @@
       "kind": "READY"
     }
   },
+  "final_daemon_absent": true,
+  "final_daemon_pid": 464325,
+  "final_generation": 2,
   "generation": 2,
   "jobs": {
     "b04_serialization_local_a01": {
@@ -194,6 +197,7 @@
       "status": "ready"
     }
   },
+  "observation_stopped": true,
   "owner": "01a0f7ce-366f-7d91-93e7-e38693506d43",
   "stopped": false,
   "wake": null

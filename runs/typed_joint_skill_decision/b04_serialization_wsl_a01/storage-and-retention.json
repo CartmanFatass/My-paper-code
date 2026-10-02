@@ -8,6 +8,7 @@
   "cores_directory": "/mnt/c/Users/wu/AppData/Local/Temp/wsl-crashes",
   "existing_core_count_after": 5,
   "existing_core_count_before": 5,
+  "final_cores_metadata_sha256": "d865b03fa5c1ef91fa00612ffe194ba81edf0a2bf0d597d0c147d5874164ac02",
   "git_delta_attribution": "shared objects changed during an interval with other direction publications; not isolated to this operation",
   "git_objects_allocated_bytes": 1224237056,
   "git_objects_before_allocated_bytes": 1201700864,

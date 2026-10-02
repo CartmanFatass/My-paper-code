@@ -1,0 +1,17 @@
+{
+  "tool_exit": 0,
+  "stdout": "{\n  \"mode\": \"apply\",\n  \"snapshots\": [\n    {\n      \"claim\": \"/home/fires/hmasd-wsl/.git/hmasd-admission/ae0c70a00e191cf3ae6dc23bd8018bc54367fc2d3f6d54c94e3a30ce12a5186a.json\",\n      \"durable_ref\": \"refs/heads/main\",\n      \"eligible\": true,\n      \"output\": \"/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b04_serialization_local_a01\",\n      \"path\": \"/home/fires/hmasd-wsl/.git/hmasd-launch-sources/ffb78cff8a7a42af874b00337dd690e6\",\n      \"removed\": true,\n      \"sha\": \"87e2b1b61a9a2ab7fffc6c7341a8b28ba236de76\",\n      \"snapshot\": \"ffb78cff8a7a42af874b00337dd690e6\"\n    }\n  ]\n}\n",
+  "stderr": "",
+  "before_allocated_bytes": {
+    "source": 1813536768,
+    "output": 8736768
+  },
+  "source_exists_after": false,
+  "gc_child_cpu_seconds": 1.010261,
+  "gc_wall_seconds": 1.3935824719956145,
+  "after_allocated_bytes": {
+    "source": 0,
+    "output": 8740864
+  },
+  "net_scoped_reclaimed_bytes": 1813532672
+}

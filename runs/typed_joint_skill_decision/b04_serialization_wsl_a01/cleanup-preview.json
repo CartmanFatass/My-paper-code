@@ -1,0 +1,14 @@
+{
+  "mode": "preview",
+  "snapshots": [
+    {
+      "claim": "/home/wu/projects/HMASD/.git/hmasd-admission/6de3b85d54bdf7da7bcb9f85848345f931decb53d32db99c1f330792e798f830.json",
+      "durable_ref": "refs/remotes/origin/HEAD",
+      "eligible": true,
+      "output": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b04_serialization_wsl_a01",
+      "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/a427833996d44d84adda6e5a045133a4",
+      "sha": "87e2b1b61a9a2ab7fffc6c7341a8b28ba236de76",
+      "snapshot": "a427833996d44d84adda6e5a045133a4"
+    }
+  ]
+}

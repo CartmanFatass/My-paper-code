@@ -1,0 +1,38 @@
+{
+  "checked_local_preserved_files": [
+    "admission-preflight.json",
+    "attempts.bin",
+    "checkpoints.jsonl",
+    "config.json",
+    "fatal.log",
+    "launch-manifest.json",
+    "launch-status.json",
+    "process-exit.json",
+    "reader-time.txt",
+    "reading.json",
+    "stderr.log",
+    "stdout.log",
+    "summary.json"
+  ],
+  "source_cleanup_receipts": [
+    "../b04_serialization_local_a01/cleanup.json",
+    "../b04_serialization_wsl_a01/cleanup.json"
+  ],
+  "targets": [
+    {
+      "path": "temp/directions/typed_joint_skill_decision/b04-serialization-local-observer",
+      "allocated_bytes_before": 12288
+    },
+    {
+      "path": "temp/directions/typed_joint_skill_decision/b04-serialization-wsl-observer",
+      "allocated_bytes_before": 12288
+    },
+    {
+      "path": "temp/directions/typed_joint_skill_decision/b04-serialization-control",
+      "allocated_bytes_before": 65536
+    }
+  ],
+  "all_targets_absent": true,
+  "new_receipt_allocated_bytes": 4096,
+  "net_reclaimed_bytes": 86016
+}
