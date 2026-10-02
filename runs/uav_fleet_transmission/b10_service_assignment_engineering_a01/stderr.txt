@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/home/wu/projects/HMASD/.git/hmasd-launch-sources/d3dd732803824388be3f7bf25618f8db/experiments/candidates/uav_fleet_transmission/b10_service_assignment/run.py", line 104, in <module>
+    main()
+  File "/home/wu/projects/HMASD/.git/hmasd-launch-sources/d3dd732803824388be3f7bf25618f8db/experiments/candidates/uav_fleet_transmission/b10_service_assignment/run.py", line 76, in main
+    prior,evidence=prior_costs(args.checks,args.engineering_dir,args.phase)
+  File "/home/wu/projects/HMASD/.git/hmasd-launch-sources/d3dd732803824388be3f7bf25618f8db/experiments/candidates/uav_fleet_transmission/b10_service_assignment/run.py", line 20, in prior_costs
+    checks=json.loads(checks_path.read_text())
+  File "/home/wu/.local/opt/hmasd-cpython-3.10.21-gcc/lib/python3.10/pathlib.py", line 1134, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+  File "/home/wu/.local/opt/hmasd-cpython-3.10.21-gcc/lib/python3.10/pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+FileNotFoundError: [Errno 2] No such file or directory: 'runs/uav_fleet_transmission/b10_service_assignment_checks_a01/checks.json'

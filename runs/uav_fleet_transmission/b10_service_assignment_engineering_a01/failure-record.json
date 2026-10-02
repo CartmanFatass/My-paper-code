@@ -1,0 +1,62 @@
+{
+  "status": "TERMINAL_SETUP_FAILURE",
+  "performance_result": false,
+  "reason": "published tracked checks.json absent from inherited sparse launcher snapshot",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/15022f69c95816f3efb5f9daa8c2377cd3952e326d31fe1941994fd7153ae626.json",
+  "launch_sha": "488c72115a3033a9c01c58bd9510896b82a206bf",
+  "native_steps": 0,
+  "native_resets": 0,
+  "environment_constructions": 0,
+  "controller_calls": 0,
+  "private_model_constructions": 0,
+  "model_queries": 0,
+  "fits": 0,
+  "exposure_evidence": "traceback at prior_costs read before CpuBudget, run_batch, worker dispatch or any environment/controller construction",
+  "runner_startup_cpu_seconds": null,
+  "startup_cpu_scope": "not metered before CpuBudget initialization; not zero and not included in the known finite-check CPU",
+  "manifest_to_exit_wall_seconds": 2.6425058841705322,
+  "wall_scope": "manifest creation to terminal witness only; not measured CPU",
+  "failed_snapshot_input": "runs/uav_fleet_transmission/b10_service_assignment_checks_a01/checks.json",
+  "input_git_blob_at_source": "42eaeab7334ddd2439646ef95ddf232bc04744be",
+  "canonical_sparse_changed": false,
+  "retry_started": false,
+  "dependency_owner": "Root: shared new-snapshot materialization repair, validation and engineering review",
+  "original_logs": {
+    "stderr.txt": "stderr.log",
+    "stdout.txt": "stdout.log"
+  },
+  "compact_files": {
+    "supervisor-launch.txt": {
+      "bytes": 4882,
+      "sha256": "f9ffbe8b25ebe2b58aa88910a0a3963574a6d20752b0378408dc0c76a6ac9537"
+    },
+    "stderr.txt": {
+      "bytes": 1219,
+      "sha256": "ea700cfd3fdf10c9e1e5222816e077d77ef9a7bf46b17eb573d42ab82329ad87"
+    },
+    "observer-receipt.json": {
+      "bytes": 3968,
+      "sha256": "7d2ec507e56e789b6772911807af3225a237efee65964651274c0cb4a8af12b9"
+    },
+    "admission-preflight.json": {
+      "bytes": 766,
+      "sha256": "30645a836fa3ad5920ff6ed4face4cc0017af759aff2f5a0c3b53559ad40b9e1"
+    },
+    "launch-status.json": {
+      "bytes": 2612,
+      "sha256": "2f91248f0be204c874db7a845f9a45a5e138b8ed30e62d4a428f01a0491b81b0"
+    },
+    "launch-manifest.json": {
+      "bytes": 4673,
+      "sha256": "45afba55842c3a69968aa309b59f2ce97bd4ba70f90bf337e58b8d03179f58f2"
+    },
+    "process-exit.json": {
+      "bytes": 556,
+      "sha256": "f76f84f7c63fc6582bb595840345c7ff18427ac3e6fca8f6075dbbe30773c31c"
+    },
+    "stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "generation": 1,
+  "wake_id": "8a64a366-691a-4205-9da4-3811b7dd1b54",
+  "events": [
+    {
+      "id": "8efdb537d10949ab8e3acf85",
+      "kind": "BLOCKED",
+      "evidence": {
+        "job_id": "b10-service-assignment-engineering-a01",
+        "status": "failed",
+        "facts": {
+          "admission": {
+            "claim_state": "accepted",
+            "state": "accepted"
+          },
+          "artifacts": {
+            "stderr": {
+              "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_engineering_a01/stderr.log",
+              "state": "present"
+            },
+            "stdout": {
+              "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_engineering_a01/stdout.log",
+              "state": "present"
+            },
+            "summary": {
+              "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_engineering_a01/summary.json",
+              "state": "absent"
+            }
+          },
+          "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/15022f69c95816f3efb5f9daa8c2377cd3952e326d31fe1941994fd7153ae626.json",
+          "direction": "uav_fleet_transmission",
+          "execution": {
+            "exit_code": 1,
+            "exit_witness": {
+              "exit_code": 1,
+              "finished_at_epoch": 1790904551.532439,
+              "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_engineering_a01/process-exit.json",
+              "state": "valid",
+              "termination": "process_exit"
+            },
+            "runner": {
+              "recorded_identity": {
+                "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+                "kind": "linux_pid_start_ticks",
+                "pid": 1289284,
+                "session_id": 1289283,
+                "start_ticks": 124498203
+              },
+              "state": "absent"
+            },
+            "state": "exited",
+            "supervisor": {
+              "recorded_identity": {
+                "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+                "kind": "linux_pid_start_ticks",
+                "pid": 1289283,
+                "session_id": 1289283,
+                "start_ticks": 124498200
+              },
+              "state": "absent"
+            }
+          },
+          "explicit_retry": {
+            "eligible": true,
+            "reasons": [],
+            "scientific_authorization": false,
+            "successor_ref": null,
+            "supported": true
+          },
+          "explicit_retry_available": true,
+          "kind": "hmasd_operation_status",
+          "manifest_ref": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_engineering_a01/launch-manifest.json",
+          "node": "wsl_4070",
+          "observed_at": "2026-10-02T01:31:27.364334Z",
+          "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/15022f69c95816f3efb5f9daa8c2377cd3952e326d31fe1941994fd7153ae626.json",
+          "output_root": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_engineering_a01",
+          "record_consistency": {
+            "mismatches": [],
+            "state": "consistent"
+          },
+          "schema_version": 1,
+          "sha": "488c72115a3033a9c01c58bd9510896b82a206bf",
+          "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/d3dd732803824388be3f7bf25618f8db"
+        }
+      },
+      "created": 1790904687.4929643,
+      "consumed": false
+    }
+  ],
+  "delivery": {
+    "id": "8a64a366-691a-4205-9da4-3811b7dd1b54",
+    "status": "delivery_unknown",
+    "created": 1790904687.497334,
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Error: failed to queue session message: thread/queue/add failed: direct app-server input is not allowed for unloaded spawned sub-agents (code -32600)\n",
+    "exposed_ids": [
+      "8efdb537d10949ab8e3acf85"
+    ]
+  }
+}
