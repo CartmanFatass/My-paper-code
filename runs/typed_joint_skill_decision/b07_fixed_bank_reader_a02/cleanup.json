@@ -1,0 +1,103 @@
+{
+  "actual_deleted_targets": [
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/da5c578b16c348fb874c9b1518c6f0e7",
+    "/home/fires/hmasd-wsl/temp/directions/typed_joint_skill_decision/b07-data-reference"
+  ],
+  "after": {
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/da5c578b16c348fb874c9b1518c6f0e7": {
+      "allocated_bytes": 0,
+      "exists": false
+    },
+    "/home/fires/hmasd-wsl/docs/research/candidates/typed_joint_skill_decision/NOTES.md": {
+      "allocated_bytes": 479232,
+      "exists": true
+    },
+    "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b05_data_bank_a01": {
+      "allocated_bytes": 343310336,
+      "exists": true
+    },
+    "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02": {
+      "allocated_bytes": 576778240,
+      "exists": true
+    },
+    "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_source": {
+      "allocated_bytes": 94208,
+      "exists": true
+    },
+    "/home/fires/hmasd-wsl/temp/directions/typed_joint_skill_decision/b07-data-reference": {
+      "allocated_bytes": 0,
+      "exists": false
+    },
+    "/home/fires/hmasd-wsl/temp/directions/typed_joint_skill_decision/b07-fixed-bank": {
+      "allocated_bytes": 0,
+      "exists": false
+    }
+  },
+  "at": "2026-10-02T22:39:59.828560+00:00",
+  "before": {
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/da5c578b16c348fb874c9b1518c6f0e7": {
+      "allocated_bytes": 1828319232,
+      "exists": true
+    },
+    "/home/fires/hmasd-wsl/docs/research/candidates/typed_joint_skill_decision/NOTES.md": {
+      "allocated_bytes": 479232,
+      "exists": true
+    },
+    "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b05_data_bank_a01": {
+      "allocated_bytes": 343310336,
+      "exists": true
+    },
+    "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02": {
+      "allocated_bytes": 576770048,
+      "exists": true
+    },
+    "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_source": {
+      "allocated_bytes": 94208,
+      "exists": true
+    },
+    "/home/fires/hmasd-wsl/temp/directions/typed_joint_skill_decision/b07-data-reference": {
+      "allocated_bytes": 48750592,
+      "exists": true
+    },
+    "/home/fires/hmasd-wsl/temp/directions/typed_joint_skill_decision/b07-fixed-bank": {
+      "allocated_bytes": 0,
+      "exists": false
+    }
+  },
+  "cleanup_blocker": null,
+  "gross_deleted_allocated_bytes": 1877069824,
+  "measurement_scope": "Exact deleted targets, canonical B05/A02 run, B07 source evidence and NOTES, including cleanup record/notebook growth. Excludes shared Git metadata/objects and unrelated concurrent allocations.",
+  "net_allocated_bytes_reclaimed": 1877061632,
+  "never_created_targets": [
+    "/home/fires/hmasd-wsl/temp/directions/typed_joint_skill_decision/b07-fixed-bank"
+  ],
+  "original_reference_retention": "Same 39 original remote B04 shards are retained; this local copy had been verified byte-for-byte at renewed-reference-staging.json, and prior closure verified the remote originals. Original incomplete shard remains tracked. Canonical full B05 bank and all A02 unique raw verification outputs retained.",
+  "published_complete_reader_commit": "381e641f325bb077d630480e712e6ccde286c455",
+  "reference_live_file_scan": {
+    "argv": [
+      "sudo",
+      "-n",
+      "lsof",
+      "-nP",
+      "+D",
+      "/home/fires/hmasd-wsl/temp/directions/typed_joint_skill_decision/b07-data-reference"
+    ],
+    "interpretation": "No open files in exact local ext4 reference tree; warnings are two distinct external FUSE portal filesystems.",
+    "returncode": 1,
+    "stderr": "lsof: WARNING: can't stat() fuse.portal file system /run/user/1000/doc\n      Output information may be incomplete.\nlsof: WARNING: can't stat() fuse.portal file system /mnt/wslg/run/user/1000/doc\n      Output information may be incomplete.\n",
+    "stdout": ""
+  },
+  "retained_evidence_root": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02",
+  "schema": 1,
+  "science_calls": 0,
+  "snapshot_gc": {
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\n  \"mode\": \"apply\",\n  \"snapshots\": [\n    {\n      \"claim\": \"/home/fires/hmasd-wsl/.git/hmasd-admission/41e8503e3e97e022007582e5114a5b2351aeb5fe07a9f2429459d871bca9aa18.json\",\n      \"durable_ref\": \"refs/heads/main\",\n      \"eligible\": true,\n      \"output\": \"/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02\",\n      \"path\": \"/home/fires/hmasd-wsl/.git/hmasd-launch-sources/da5c578b16c348fb874c9b1518c6f0e7\",\n      \"removed\": true,\n      \"sha\": \"285eea780dcc63e000d336b65611d3c183b3c768\",\n      \"snapshot\": \"da5c578b16c348fb874c9b1518c6f0e7\"\n    }\n  ]\n}\n"
+  },
+  "source_git_registration_absent": true,
+  "status": "complete",
+  "support_child_cpu_seconds": 1.054938,
+  "support_parent_cpu_seconds": 0.34783268,
+  "support_wall_seconds": 1.4480915229942184
+}

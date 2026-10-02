@@ -1,0 +1,177 @@
+{
+  "at": "2026-10-02T22:46:02.226485+00:00",
+  "components": [
+    {
+      "cpu_seconds": 4.023958304,
+      "field": "known_check_cpu_including_static_seconds",
+      "source": "runs/typed_joint_skill_decision/b06_consumer_source/checks.json"
+    },
+    {
+      "cpu_seconds": 1.591260251,
+      "field": "reported_prior_receipt_extraction_cpu_seconds",
+      "source": "runs/typed_joint_skill_decision/b06_consumer_source/checks.json"
+    },
+    {
+      "cpu_seconds": 0.5530995320000001,
+      "field": "dm_preservation_cpu_seconds",
+      "source": "runs/typed_joint_skill_decision/b06_consumer_source/checks.json"
+    },
+    {
+      "cpu_seconds": 34.343533321,
+      "field": "known_wrapper_cpu_seconds",
+      "source": "runs/typed_joint_skill_decision/b07_source/checks.json"
+    },
+    {
+      "cpu_seconds": 0.020345744,
+      "field": "preservation_cpu_seconds",
+      "source": "runs/typed_joint_skill_decision/b07_source/checks.json"
+    },
+    {
+      "cpu_seconds": 0.03550471400000001,
+      "field": "ast_and_hash_cpu_seconds",
+      "source": "runs/typed_joint_skill_decision/b07_source/dm-source-acceptance-pending.json"
+    },
+    {
+      "cpu_seconds": 1.497017467,
+      "field": "cpu_seconds",
+      "source": "runs/typed_joint_skill_decision/b07_source/input-binding-check.json"
+    },
+    {
+      "cpu_seconds": 0.015742381,
+      "field": "known_ast_hash_cpu_seconds",
+      "source": "runs/typed_joint_skill_decision/b07_source/engineering-review.json"
+    },
+    {
+      "cpu_seconds": 0.02014542400000001,
+      "field": "preservation_cpu_seconds",
+      "source": "runs/typed_joint_skill_decision/b07_source/engineering-review.json"
+    },
+    {
+      "cpu_seconds": 0.074529856,
+      "field": "metadata_cpu_seconds",
+      "source": "runs/typed_joint_skill_decision/b07_source/local-storage-before.json"
+    },
+    {
+      "cpu_seconds": 0.018771987000000004,
+      "field": "preservation_cpu_seconds",
+      "source": "runs/typed_joint_skill_decision/b07_source/engineering-review-correction.json"
+    },
+    {
+      "cpu_seconds": 0.001307133000000002,
+      "field": "known_this_parent_read_CPU_seconds",
+      "source": "runs/typed_joint_skill_decision/b07_fixed_bank_reader_a01/technical-reading.json"
+    },
+    {
+      "cpu_seconds": 0.346707661,
+      "field": "preparation_parent_cpu_seconds",
+      "source": "runs/typed_joint_skill_decision/b07_fixed_bank_reader_a01/cleanup.json"
+    },
+    {
+      "cpu_seconds": 0.019160427000000008,
+      "field": "deletion_parent_cpu_seconds",
+      "source": "runs/typed_joint_skill_decision/b07_fixed_bank_reader_a01/cleanup.json"
+    },
+    {
+      "cpu_seconds": 0.040680913,
+      "field": "remote_original_reference/hash_cpu_seconds",
+      "source": "runs/typed_joint_skill_decision/b07_fixed_bank_reader_a01/cleanup.json"
+    },
+    {
+      "cpu_seconds": 10.926855038,
+      "field": "metered_wrapper_cpu_seconds",
+      "source": "runs/typed_joint_skill_decision/b07_source/renewed-checks.json"
+    },
+    {
+      "cpu_seconds": 0.000730313,
+      "field": "reviewer_receipt_hash_cpu_seconds",
+      "source": "runs/typed_joint_skill_decision/b07_source/renewed-engineering-review.json"
+    },
+    {
+      "cpu_seconds": 1.0615235040000002,
+      "field": "binding_cpu_seconds",
+      "source": "runs/typed_joint_skill_decision/b07_source/renewed-input-binding-check.json"
+    },
+    {
+      "cpu_seconds": 0.02646620000000001,
+      "field": "original_check_preservation_and_input_preparation_cpu_seconds",
+      "source": "runs/typed_joint_skill_decision/b07_source/renewed-input-binding-check.json"
+    },
+    {
+      "cpu_seconds": 0.04596306,
+      "field": "parent_cpu_seconds",
+      "source": "runs/typed_joint_skill_decision/b07_source/renewed-reference-staging.json"
+    },
+    {
+      "cpu_seconds": 0.253204,
+      "field": "child_cpu_seconds",
+      "source": "runs/typed_joint_skill_decision/b07_source/renewed-reference-staging.json"
+    },
+    {
+      "cpu_seconds": 0.03684646799999999,
+      "field": "metadata_cpu_seconds",
+      "source": "runs/typed_joint_skill_decision/b07_source/renewed-local-storage-before.json"
+    },
+    {
+      "cpu_seconds": 1.959933239,
+      "field": "byte_read_cpu_seconds",
+      "source": "runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/full-reading.json"
+    },
+    {
+      "cpu_seconds": 9.633406984,
+      "field": "cpu_seconds",
+      "source": "runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/fixed-version-reading.json"
+    },
+    {
+      "cpu_seconds": 0.074794762,
+      "field": "deterministic_file_waits/0/cpu_seconds",
+      "source": "runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/observer-terminal.json"
+    },
+    {
+      "cpu_seconds": 0.061225849,
+      "field": "deterministic_file_waits/1/cpu_seconds",
+      "source": "runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/observer-terminal.json"
+    },
+    {
+      "cpu_seconds": 0.34783268,
+      "field": "support_parent_cpu_seconds",
+      "source": "runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/cleanup.json"
+    },
+    {
+      "cpu_seconds": 1.054938,
+      "field": "support_child_cpu_seconds",
+      "source": "runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/cleanup.json"
+    },
+    {
+      "cpu_seconds": 0.010995883999999997,
+      "field": "parent_cpu_seconds",
+      "source": "runs/typed_joint_skill_decision/b07_source/consumer-staging.json"
+    },
+    {
+      "cpu_seconds": 3.5960020000000004,
+      "field": "child_transport_cpu_seconds",
+      "source": "runs/typed_joint_skill_decision/b07_source/consumer-staging.json"
+    },
+    {
+      "cpu_seconds": 0.271987732,
+      "field": "verification/hash_cpu_seconds",
+      "source": "runs/typed_joint_skill_decision/b07_source/consumer-staging.json"
+    },
+    {
+      "cpu_seconds": 0.022577732,
+      "field": "recorded advice preservation measurement",
+      "source": "docs/research/candidates/typed_joint_skill_decision/NOTES.md#b07-renewed-engineering-acceptance"
+    }
+  ],
+  "known_cpu_seconds": 71.98704855999998,
+  "no_new_scientific_effects": true,
+  "schema": 1,
+  "scope": "Disjoint recorded CPU support subtotal before consumer input construction; includes original failed preparation and corrective preparation, transfer, file reading and reader-phase cleanup. Wrapper totals are not added again from their component stdout. This does not claim complete support accounting.",
+  "separate_prior_science": "Original B05 actual 2129.878646 CPU-s and successful B07 full-reader 2570.461047 CPU-s are retained separately in bank prior_cost, not counted as preparation. Original B04 crash-prefix floor306.264725CPU-s, at least431145saved labels and all other earlier scientific cost remain in the original records; not overwritten by these three fields.",
+  "unknown_not_zero": [
+    "Original A01 runner CPU before counter setup",
+    "Startup, tool, edits, reviews and transport services not captured by these wrappers",
+    "Original B04 crash tail and previous support not fully metered",
+    "Consumer input/check/publication/admission and later support occur after this frozen subtotal",
+    "Remote read-only historical-object query was aborted before launch, including its owned fetch descendants; any partial Git hydration/support is unmeasured and shared objects retained"
+  ]
+}

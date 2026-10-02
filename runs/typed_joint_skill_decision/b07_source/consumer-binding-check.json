@@ -1,0 +1,29 @@
+{
+  "actual_reader_manifest_sha256": "2c1a7021a4f2e4cda32855eacd9030f8c68d9652010696d519bb8a0062d8e18e",
+  "actual_reader_source_sha": "285eea780dcc63e000d336b65611d3c183b3c768",
+  "bank_payload_bytes": 321771896,
+  "bank_payload_files": 258,
+  "canonical_binding_check_note": "Actual executable/scientific/preparation input identities checked; bank/proof certified over canonical local roots, with remote exact transported bytes independently verified in consumer-staging.json. Does not assert remote CUDA or runtime feasibility.",
+  "executable_files": 20,
+  "fixed_version_status": "fixed_producer_version_validated",
+  "input_bytes": 11397,
+  "input_path": "docs/research/candidates/typed_joint_skill_decision/B07_CONSUMER_INPUT.json",
+  "input_sha256": "be5700ce4ac73a8a8e99d7b8f12d72506a11015717f3646b39b0acd81ab2b39b",
+  "known_preparation_cpu_subtotal_seconds": 71.98704855999998,
+  "new_fits": 0,
+  "new_model_forwards": 0,
+  "new_native_steps": 0,
+  "new_static_calls": 0,
+  "numeric_effect_child_execs": 0,
+  "parent_cpu_seconds": 0.621417703,
+  "schema": 1,
+  "scientific_files": 13,
+  "selected_limits": {
+    "cpu_seconds": 28800,
+    "disk_bytes": 6442450944,
+    "gpu_child_seconds": 14400,
+    "wall_seconds": 57600
+  },
+  "status": "passed",
+  "wall_seconds": 0.6247260899981484
+}
