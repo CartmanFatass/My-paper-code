@@ -1709,3 +1709,36 @@ requires no shared/environment changes. Forecast remains1–3CPUhours with6CPUh
 hard ceiling,8–14support hours,2GiB incremental disk,one fit,zero GPU/install,
 102000native steps and2448408explicit static queries inclusive of the reader.
 The enduring question remains active beyond disposition of this exact recipe.
+
+<a id="b02-selected-contract"></a>
+## 2026-10-01 — Root selects B02; exact required input staging
+
+Root read the complete63f166e5a contract,10919-byte original review and DM
+disposition, then explicitly selected the revised G/L/P study with no material
+dissent. It accepted B=G alias, coherent training/deployment incumbent fallback,
+one136-coefficient fit,64fresh worlds,12complete audits,102000native steps,
+2448408static calls and6CPUh ceiling. The original response emphasizes rare
+quadratic-feature and historical/current-source risks, the retained36-query
+ordinary competitor, and no silent retry or expansion at a hard boundary.
+L0 implementation, engineering review, source publication, actual-node admission,
+execution, full reader, independent result diagnosis and useful next-action
+selection proceed autonomously. No Oracle or per-run Root approval is pending.
+
+The bounded existing Implementer owns only B02 code and matching tests; DM owns
+this notebook and inputs. It was told the exact contract, original-source
+independence, one-fit/count/cold-process requirements and prohibitions on
+scientific queries during implementation. Full code acceptance remains pending.
+
+Necessary64original training files were staged once with SCP into
+`hmasd-wsl-node:/home/wu/hmasd-inputs/typed_joint_skill_decision/b02_archive/`,
+preserving the manifest-relative paths. Every byte length and SHA256 was checked
+against`B02_INPUT.json`SHA256
+`0b672a2d77526561a7c9ae51de26859119f84186bfee914442ab488326352ed6`.
+Logical input size21529851bytes; measured staged allocation21684224bytes;
+staging wall6.910976s. No dataset beyond these bound inputs or model was copied.
+The configured host reports`LAPTOP-U9TDKC8A`, original Python3.10.21/GCC13.3.0,
+NumPy1.26.3,gymnasium1.0.0,pettingzoo1.24.3 from installed metadata. No package
+or shared-node setting changed. Compute SHA256 remains
+`2bb704e31e08a6a3489e80ea6851826740dfbf71461e0f7e70c4394694e65e6f`.
+This metadata/preparation is not result admission: new fits, static/native
+queries and launches remain0 at this checkpoint.
