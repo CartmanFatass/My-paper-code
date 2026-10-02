@@ -5273,3 +5273,94 @@ Next: publish these exact inputs, then fresh local admission and one A02 full re
 Consumer remains dependent on real reader success plus complete saved-byte reading;
 no consumer input or success record has been fabricated. The original a01 handle
 remains closed, and the renewed first-failure stop applies without another retry.
+
+<a id="b07-a02-launch"></a>
+### A02 accepted on its own exact source/input; same-handle observation active
+
+The renewed source/input publication is `285eea780dcc63e000d336b65611d3c183b3c768`.
+The one selected `local_linux` A02 full reader was accepted at21:42:32.420543UTC;
+fresh actual-node memory was11,579,314,176bytes against the4,294,967,296-byte floor.
+Native manifest is `runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/launch-manifest.json`;
+operation is `/home/fires/hmasd-wsl/.git/hmasd-admission/41e8503e3e97e022007582e5114a5b2351aeb5fe07a9f2429459d871bca9aa18.json`.
+Snapshot `da5c578b16c348fb874c9b1518c6f0e7` retains exact inputs. Runner779009/
+start10461047 and supervisor779008/start10461043 belong to the new native operation,
+not the old a01 handle. Launch acceptance is not full-bank validation or permission
+to skip complete reading. No consumer has launched.
+
+The existing own-session observer state initially refused adding A02 while explicitly
+stopped after a01. Its drain confirmed generation2/no pending events/no wake and
+only the old failed job. The supported same-state rearm (without `--resume-jobs`)
+moved to generation3; arming the distinct accepted A02 handle registered observer781013
+and generation4. The old failed job remains terminal and was not resumed. First
+actual A02 probe adopted the same native handle and observed both processes running,
+with no event/wake, not merely registration. Probe interval30s, timeout20s and
+window1500s retain deterministic observation. The initial arm refusal was observer
+lifecycle setup, not a failed result operation; no worker restart or duplicate launch
+was attempted. This native DM remains active through saved events, full reading and
+any healthy dependent phases. Observer/support overhead is incompletely metered.
+
+At the first1500s observation checkpoint, generation4/event4790e5d9b9b99d5eebb3d346,
+the same native reader and supervisor remain running with matching identities and
+no terminal witness/summary. Queue delivery again refused native-child App input
+(code−32600); active DM read the saved evidence directly. Wake54dc6f5e-7dfa-4437-8ae4-a44c120a082d
+was consumed and observation rearmed to generation5 on the same handle, with no
+job resume flag or worker restart. The deterministic in-turn file wait paid
+.074794762CPU-s over1286.211353wall-s; it only watched saved observer events and
+performed no new probe/science. Full result reading remains pending.
+
+<a id="b07-a02-full-reader"></a>
+### A02 full reader completes and its entire saved payload is verified
+
+The same operation exited0 at22:28:35.801UTC with a matching native witness and
+both runner/supervisor absent. Generation5/READY event7e5a4450d3d048754f7aca2b was
+read directly after the expected native-child queue rejection; wake29c35b57-f101-4675-ac6b-74439fd1f47a
+was consumed into generation6 without resuming a job. Observer records are retained
+in `runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/observer-terminal.json`.
+The second deterministic event wait paid.061225849CPU-s/1000.937041wall-s.
+
+The [full saved-byte reading](../../../../runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/full-reading.json)
+passes `b07_fixed_bank.read.full()` over all2,844manifest files/570,487,211logicalbytes,
+all258 complete child/native witnesses, original bank/reference/source bytes and
+actual counter denominators. Full-manifest SHA256 is
+`2c1a7021a4f2e4cda32855eacd9030f8c68d9652010696d519bb8a0062d8e18e`;
+[actual binding](../../../../runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/full-read-binding.json)
+pins source285eea780, A02 inputfb130f89, native launch54af5b62 and exit072b8090.
+All canonical output remains at this local run root. No raw was re-created for this
+reading. Byte verification paid1.959933239CPU-s/1.959852834wall-s with0new science.
+
+The paid reconstruction covers all16,512worlds,2,844,367static labels,258fresh numeric
+children and all2,501complete old B04 worlds/430,980labels. World109402501's165
+retained labels remain outside the complete compatibility denominator. All identity,
+RNG, ordered features/construction and discrete physical checks pass; float fields
+retain the originalatol=rtol=1e-10. There are0new producers, permutations, fits,
+model forwards, native steps, matching calls or GPU effects. Reported execution bill
+is2,570.461047CPU-s (35.003924parent+2,535.457123reaped children) and2,763.424668wall-s;
+final write/exit/support tails remain incompletely metered. Separate peak RSS is
+40,220KiB parent/204,924KiB child, not a simultaneous sum. Scoped disk peak is
+2,796,142,592allocatedbytes, within the selected normal bound; no general external
+core-dump guarantee follows.
+
+[Complete saved-vector reading](../../../../runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/fixed-version-reading.json)
+checks all16,512ordered world vectors and the menu133–210distribution. Rebuild and
+fixed B05 producer have exactly identical saved J/coverage/frontend vectors and
+exact self winners throughout. Each old/producer and old/rebuild pair has2,479 of
+2,501nonidentical three-column vectors, maximum absolute differences J2.220446049250313e-16,
+coverage0 and frontend3.979039320256561e-13. There are exactly six winner differences:
+old→fixed57→50 at109400630,162→161 at109400756,0→31 at109401751,15→22 at109402026,
+59→49 at109402062 and25→18 at109402230. Each execution keeps its own exact lower-index
+argmax, including its own exact ties; neither old labels nor tolerances were changed.
+The complete selected values/tie sets/regrets remain in the compact reading. Maximum
+cross-selected static regret is1.1102230246251565e-16 in either old/producer direction,
+within the saved-vector2delta algebraic bound. These are arithmetic observations,
+not native counterfactual consequences. Reading paid9.633406984CPU-s/9.522806249wall-s,
+with0new static/model/native queries; import/startup/support tails remain separate.
+
+This resolves the new fixed-version validation prerequisite for the already selected
+consumer. It does **not** turn original B05 exit2 into success: its original exact
+old-teacher contract still failed. It also establishes no learning curve, native
+service value, GPU feasibility or explanation of the old remote SIGSEGV. The
+prospective new-contract interpretation is unchanged and needs no new scientific
+selection round at this healthy phase. Next is compact evidence publication,
+reader source/reference cleanup, one declared remote bank/proof staging and the
+original six-fit/ordinary/native/cold complete consumer under fresh admission.
+No consumer effect has yet executed and no consumer input has been invented.

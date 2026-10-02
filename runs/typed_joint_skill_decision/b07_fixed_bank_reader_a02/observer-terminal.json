@@ -1,0 +1,750 @@
+{
+  "checkpoint_drain": {
+    "delivery": {
+      "created": 1790978965.996672,
+      "exit_code": 1,
+      "exposed_ids": [
+        "4790e5d9b9b99d5eebb3d346"
+      ],
+      "id": "54dc6f5e-7dfa-4437-8ae4-a44c120a082d",
+      "status": "delivery_unknown",
+      "stderr": "Error: failed to queue session message: thread/queue/add failed: direct app-server input is not allowed for multi-agent v2 sub-agents (code -32600)\n",
+      "stdout": ""
+    },
+    "events": [
+      {
+        "consumed": false,
+        "created": 1790978965.9755702,
+        "evidence": {
+          "generation": 4,
+          "jobs": [
+            "launch-b07-fixed-bank-reader-a02"
+          ]
+        },
+        "id": "4790e5d9b9b99d5eebb3d346",
+        "kind": "CHECKPOINT"
+      }
+    ],
+    "generation": 4,
+    "jobs": {
+      "launch-b07-fixed-bank-reader-a01": {
+        "due": 1790958673.7383835,
+        "errors": 0,
+        "last": {
+          "admission": {
+            "claim_state": "accepted",
+            "state": "accepted"
+          },
+          "artifacts": {
+            "stderr": {
+              "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a01/stderr.log",
+              "state": "present"
+            },
+            "stdout": {
+              "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a01/stdout.log",
+              "state": "present"
+            },
+            "summary": {
+              "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a01/summary.json",
+              "state": "absent"
+            }
+          },
+          "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/5f54ee2203fa863041fd3d19217b00f9cd8bf129aced88b6b79c380ed5465ee7.json",
+          "direction": "typed_joint_skill_decision",
+          "execution": {
+            "exit_code": 1,
+            "exit_witness": {
+              "exit_code": 1,
+              "finished_at_epoch": 1790958617.245746,
+              "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a01/process-exit.json",
+              "state": "valid",
+              "termination": "process_exit"
+            },
+            "runner": {
+              "recorded_identity": {
+                "boot_id": "f359a2d7-72f8-4eb1-b898-bc0abf61bed6",
+                "kind": "linux_pid_start_ticks",
+                "pid": 603775,
+                "session_id": 603774,
+                "start_ticks": 8622262
+              },
+              "state": "absent"
+            },
+            "state": "exited",
+            "supervisor": {
+              "recorded_identity": {
+                "boot_id": "f359a2d7-72f8-4eb1-b898-bc0abf61bed6",
+                "kind": "linux_pid_start_ticks",
+                "pid": 603774,
+                "session_id": 603774,
+                "start_ticks": 8622259
+              },
+              "state": "absent"
+            }
+          },
+          "explicit_retry": {
+            "eligible": true,
+            "reasons": [],
+            "scientific_authorization": false,
+            "successor_ref": null,
+            "supported": true
+          },
+          "explicit_retry_available": true,
+          "kind": "hmasd_operation_status",
+          "manifest_ref": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a01/launch-manifest.json",
+          "node": "local_linux",
+          "observed_at": "2026-10-02T16:30:43.530790Z",
+          "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/5f54ee2203fa863041fd3d19217b00f9cd8bf129aced88b6b79c380ed5465ee7.json",
+          "output_root": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a01",
+          "record_consistency": {
+            "mismatches": [],
+            "state": "consistent"
+          },
+          "schema_version": 1,
+          "sha": "a0331219351fd9f19a624e4ee4821b8a6383d186",
+          "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/c50f00e6e7594703a6885bdc9b957fc3"
+        },
+        "observed": 1790958643.7383835,
+        "spec": {
+          "argv": [
+            "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+            "/home/fires/hmasd-wsl/scripts/hmasd_launch.py",
+            "status",
+            "/home/fires/hmasd-wsl/.git/hmasd-admission/5f54ee2203fa863041fd3d19217b00f9cd8bf129aced88b6b79c380ed5465ee7.json"
+          ],
+          "cwd": "/home/fires/hmasd-wsl",
+          "id": "launch-b07-fixed-bank-reader-a01",
+          "interval": 30,
+          "protocol": "launch",
+          "timeout": 20
+        },
+        "status": "failed"
+      },
+      "launch-b07-fixed-bank-reader-a02": {
+        "due": 1790979011.2588696,
+        "errors": 0,
+        "last": {
+          "admission": {
+            "claim_state": "accepted",
+            "state": "accepted"
+          },
+          "artifacts": {
+            "stderr": {
+              "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/stderr.log",
+              "state": "present"
+            },
+            "stdout": {
+              "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/stdout.log",
+              "state": "present"
+            },
+            "summary": {
+              "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/summary.json",
+              "state": "absent"
+            }
+          },
+          "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/41e8503e3e97e022007582e5114a5b2351aeb5fe07a9f2429459d871bca9aa18.json",
+          "direction": "typed_joint_skill_decision",
+          "execution": {
+            "exit_witness": {
+              "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/process-exit.json",
+              "state": "absent"
+            },
+            "runner": {
+              "observed_identity": {
+                "boot_id": "f359a2d7-72f8-4eb1-b898-bc0abf61bed6",
+                "kind": "linux_pid_start_ticks",
+                "pid": 779009,
+                "session_id": 779008,
+                "start_ticks": 10461047
+              },
+              "recorded_identity": {
+                "boot_id": "f359a2d7-72f8-4eb1-b898-bc0abf61bed6",
+                "kind": "linux_pid_start_ticks",
+                "pid": 779009,
+                "session_id": 779008,
+                "start_ticks": 10461047
+              },
+              "state": "running"
+            },
+            "state": "running",
+            "supervisor": {
+              "observed_identity": {
+                "boot_id": "f359a2d7-72f8-4eb1-b898-bc0abf61bed6",
+                "kind": "linux_pid_start_ticks",
+                "pid": 779008,
+                "session_id": 779008,
+                "start_ticks": 10461043
+              },
+              "recorded_identity": {
+                "boot_id": "f359a2d7-72f8-4eb1-b898-bc0abf61bed6",
+                "kind": "linux_pid_start_ticks",
+                "pid": 779008,
+                "session_id": 779008,
+                "start_ticks": 10461043
+              },
+              "state": "running"
+            }
+          },
+          "explicit_retry": {
+            "eligible": false,
+            "reasons": [
+              "parent has no consistent terminal nonzero native exit"
+            ],
+            "scientific_authorization": false,
+            "successor_ref": null,
+            "supported": true
+          },
+          "explicit_retry_available": false,
+          "kind": "hmasd_operation_status",
+          "manifest_ref": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/launch-manifest.json",
+          "node": "local_linux",
+          "observed_at": "2026-10-02T22:09:41.050686Z",
+          "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/41e8503e3e97e022007582e5114a5b2351aeb5fe07a9f2429459d871bca9aa18.json",
+          "output_root": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02",
+          "record_consistency": {
+            "mismatches": [],
+            "state": "consistent"
+          },
+          "schema_version": 1,
+          "sha": "285eea780dcc63e000d336b65611d3c183b3c768",
+          "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/da5c578b16c348fb874c9b1518c6f0e7"
+        },
+        "observed": 1790978981.2588696,
+        "spec": {
+          "argv": [
+            "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+            "/home/fires/hmasd-wsl/scripts/hmasd_launch.py",
+            "status",
+            "/home/fires/hmasd-wsl/.git/hmasd-admission/41e8503e3e97e022007582e5114a5b2351aeb5fe07a9f2429459d871bca9aa18.json"
+          ],
+          "cwd": "/home/fires/hmasd-wsl",
+          "id": "launch-b07-fixed-bank-reader-a02",
+          "interval": 30,
+          "protocol": "launch",
+          "timeout": 20
+        },
+        "status": "running"
+      }
+    },
+    "stopped": false,
+    "wake_id": "54dc6f5e-7dfa-4437-8ae4-a44c120a082d"
+  },
+  "delivery_note": "Native child queue refused (-32600); active owning DM read and consumed all saved events on the same operation.",
+  "deterministic_file_waits": [
+    {
+      "cpu_seconds": 0.074794762,
+      "wall_seconds": 1286.2113531020004
+    },
+    {
+      "cpu_seconds": 0.061225849,
+      "wall_seconds": 1000.9370409370022
+    }
+  ],
+  "first_drain": {
+    "delivery": null,
+    "events": [],
+    "generation": 4,
+    "jobs": {
+      "launch-b07-fixed-bank-reader-a01": {
+        "due": 1790958673.7383835,
+        "errors": 0,
+        "last": {
+          "admission": {
+            "claim_state": "accepted",
+            "state": "accepted"
+          },
+          "artifacts": {
+            "stderr": {
+              "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a01/stderr.log",
+              "state": "present"
+            },
+            "stdout": {
+              "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a01/stdout.log",
+              "state": "present"
+            },
+            "summary": {
+              "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a01/summary.json",
+              "state": "absent"
+            }
+          },
+          "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/5f54ee2203fa863041fd3d19217b00f9cd8bf129aced88b6b79c380ed5465ee7.json",
+          "direction": "typed_joint_skill_decision",
+          "execution": {
+            "exit_code": 1,
+            "exit_witness": {
+              "exit_code": 1,
+              "finished_at_epoch": 1790958617.245746,
+              "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a01/process-exit.json",
+              "state": "valid",
+              "termination": "process_exit"
+            },
+            "runner": {
+              "recorded_identity": {
+                "boot_id": "f359a2d7-72f8-4eb1-b898-bc0abf61bed6",
+                "kind": "linux_pid_start_ticks",
+                "pid": 603775,
+                "session_id": 603774,
+                "start_ticks": 8622262
+              },
+              "state": "absent"
+            },
+            "state": "exited",
+            "supervisor": {
+              "recorded_identity": {
+                "boot_id": "f359a2d7-72f8-4eb1-b898-bc0abf61bed6",
+                "kind": "linux_pid_start_ticks",
+                "pid": 603774,
+                "session_id": 603774,
+                "start_ticks": 8622259
+              },
+              "state": "absent"
+            }
+          },
+          "explicit_retry": {
+            "eligible": true,
+            "reasons": [],
+            "scientific_authorization": false,
+            "successor_ref": null,
+            "supported": true
+          },
+          "explicit_retry_available": true,
+          "kind": "hmasd_operation_status",
+          "manifest_ref": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a01/launch-manifest.json",
+          "node": "local_linux",
+          "observed_at": "2026-10-02T16:30:43.530790Z",
+          "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/5f54ee2203fa863041fd3d19217b00f9cd8bf129aced88b6b79c380ed5465ee7.json",
+          "output_root": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a01",
+          "record_consistency": {
+            "mismatches": [],
+            "state": "consistent"
+          },
+          "schema_version": 1,
+          "sha": "a0331219351fd9f19a624e4ee4821b8a6383d186",
+          "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/c50f00e6e7594703a6885bdc9b957fc3"
+        },
+        "observed": 1790958643.7383835,
+        "spec": {
+          "argv": [
+            "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+            "/home/fires/hmasd-wsl/scripts/hmasd_launch.py",
+            "status",
+            "/home/fires/hmasd-wsl/.git/hmasd-admission/5f54ee2203fa863041fd3d19217b00f9cd8bf129aced88b6b79c380ed5465ee7.json"
+          ],
+          "cwd": "/home/fires/hmasd-wsl",
+          "id": "launch-b07-fixed-bank-reader-a01",
+          "interval": 30,
+          "protocol": "launch",
+          "timeout": 20
+        },
+        "status": "failed"
+      },
+      "launch-b07-fixed-bank-reader-a02": {
+        "due": 1790977551.536865,
+        "errors": 0,
+        "last": {
+          "admission": {
+            "claim_state": "accepted",
+            "state": "accepted"
+          },
+          "artifacts": {
+            "stderr": {
+              "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/stderr.log",
+              "state": "present"
+            },
+            "stdout": {
+              "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/stdout.log",
+              "state": "present"
+            },
+            "summary": {
+              "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/summary.json",
+              "state": "absent"
+            }
+          },
+          "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/41e8503e3e97e022007582e5114a5b2351aeb5fe07a9f2429459d871bca9aa18.json",
+          "direction": "typed_joint_skill_decision",
+          "execution": {
+            "exit_witness": {
+              "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/process-exit.json",
+              "state": "absent"
+            },
+            "runner": {
+              "observed_identity": {
+                "boot_id": "f359a2d7-72f8-4eb1-b898-bc0abf61bed6",
+                "kind": "linux_pid_start_ticks",
+                "pid": 779009,
+                "session_id": 779008,
+                "start_ticks": 10461047
+              },
+              "recorded_identity": {
+                "boot_id": "f359a2d7-72f8-4eb1-b898-bc0abf61bed6",
+                "kind": "linux_pid_start_ticks",
+                "pid": 779009,
+                "session_id": 779008,
+                "start_ticks": 10461047
+              },
+              "state": "running"
+            },
+            "state": "running",
+            "supervisor": {
+              "observed_identity": {
+                "boot_id": "f359a2d7-72f8-4eb1-b898-bc0abf61bed6",
+                "kind": "linux_pid_start_ticks",
+                "pid": 779008,
+                "session_id": 779008,
+                "start_ticks": 10461043
+              },
+              "recorded_identity": {
+                "boot_id": "f359a2d7-72f8-4eb1-b898-bc0abf61bed6",
+                "kind": "linux_pid_start_ticks",
+                "pid": 779008,
+                "session_id": 779008,
+                "start_ticks": 10461043
+              },
+              "state": "running"
+            }
+          },
+          "explicit_retry": {
+            "eligible": false,
+            "reasons": [
+              "parent has no consistent terminal nonzero native exit"
+            ],
+            "scientific_authorization": false,
+            "successor_ref": null,
+            "supported": true
+          },
+          "explicit_retry_available": false,
+          "kind": "hmasd_operation_status",
+          "manifest_ref": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/launch-manifest.json",
+          "node": "local_linux",
+          "observed_at": "2026-10-02T21:45:21.332348Z",
+          "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/41e8503e3e97e022007582e5114a5b2351aeb5fe07a9f2429459d871bca9aa18.json",
+          "output_root": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02",
+          "record_consistency": {
+            "mismatches": [],
+            "state": "consistent"
+          },
+          "schema_version": 1,
+          "sha": "285eea780dcc63e000d336b65611d3c183b3c768",
+          "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/da5c578b16c348fb874c9b1518c6f0e7"
+        },
+        "observed": 1790977521.536865,
+        "spec": {
+          "argv": [
+            "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+            "/home/fires/hmasd-wsl/scripts/hmasd_launch.py",
+            "status",
+            "/home/fires/hmasd-wsl/.git/hmasd-admission/41e8503e3e97e022007582e5114a5b2351aeb5fe07a9f2429459d871bca9aa18.json"
+          ],
+          "cwd": "/home/fires/hmasd-wsl",
+          "id": "launch-b07-fixed-bank-reader-a02",
+          "interval": 30,
+          "protocol": "launch",
+          "timeout": 20
+        },
+        "status": "running"
+      }
+    },
+    "stopped": false,
+    "wake_id": null
+  },
+  "terminal_consumed": {
+    "generation": 6,
+    "pid": 805483,
+    "window_seconds": 1500.0
+  },
+  "terminal_drain": {
+    "delivery": {
+      "created": 1790980136.3554885,
+      "exit_code": 1,
+      "exposed_ids": [
+        "7e5a4450d3d048754f7aca2b"
+      ],
+      "id": "29c35b57-f101-4675-ac6b-74439fd1f47a",
+      "status": "delivery_unknown",
+      "stderr": "Error: failed to queue session message: thread/queue/add failed: direct app-server input is not allowed for multi-agent v2 sub-agents (code -32600)\n",
+      "stdout": ""
+    },
+    "events": [
+      {
+        "consumed": false,
+        "created": 1790980136.3457918,
+        "evidence": {
+          "facts": {
+            "admission": {
+              "claim_state": "accepted",
+              "state": "accepted"
+            },
+            "artifacts": {
+              "stderr": {
+                "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/stderr.log",
+                "state": "present"
+              },
+              "stdout": {
+                "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/stdout.log",
+                "state": "present"
+              },
+              "summary": {
+                "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/summary.json",
+                "state": "present"
+              }
+            },
+            "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/41e8503e3e97e022007582e5114a5b2351aeb5fe07a9f2429459d871bca9aa18.json",
+            "direction": "typed_joint_skill_decision",
+            "execution": {
+              "exit_code": 0,
+              "exit_witness": {
+                "exit_code": 0,
+                "finished_at_epoch": 1790980115.8010218,
+                "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/process-exit.json",
+                "state": "valid",
+                "termination": "process_exit"
+              },
+              "runner": {
+                "recorded_identity": {
+                  "boot_id": "f359a2d7-72f8-4eb1-b898-bc0abf61bed6",
+                  "kind": "linux_pid_start_ticks",
+                  "pid": 779009,
+                  "session_id": 779008,
+                  "start_ticks": 10461047
+                },
+                "state": "absent"
+              },
+              "state": "exited",
+              "supervisor": {
+                "recorded_identity": {
+                  "boot_id": "f359a2d7-72f8-4eb1-b898-bc0abf61bed6",
+                  "kind": "linux_pid_start_ticks",
+                  "pid": 779008,
+                  "session_id": 779008,
+                  "start_ticks": 10461043
+                },
+                "state": "absent"
+              }
+            },
+            "explicit_retry": {
+              "eligible": false,
+              "reasons": [
+                "parent has no consistent terminal nonzero native exit"
+              ],
+              "scientific_authorization": false,
+              "successor_ref": null,
+              "supported": true
+            },
+            "explicit_retry_available": false,
+            "kind": "hmasd_operation_status",
+            "manifest_ref": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/launch-manifest.json",
+            "node": "local_linux",
+            "observed_at": "2026-10-02T22:28:56.133117Z",
+            "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/41e8503e3e97e022007582e5114a5b2351aeb5fe07a9f2429459d871bca9aa18.json",
+            "output_root": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02",
+            "record_consistency": {
+              "mismatches": [],
+              "state": "consistent"
+            },
+            "schema_version": 1,
+            "sha": "285eea780dcc63e000d336b65611d3c183b3c768",
+            "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/da5c578b16c348fb874c9b1518c6f0e7"
+          },
+          "job_id": "launch-b07-fixed-bank-reader-a02",
+          "status": "ready"
+        },
+        "id": "7e5a4450d3d048754f7aca2b",
+        "kind": "READY"
+      }
+    ],
+    "generation": 5,
+    "jobs": {
+      "launch-b07-fixed-bank-reader-a01": {
+        "due": 1790958673.7383835,
+        "errors": 0,
+        "last": {
+          "admission": {
+            "claim_state": "accepted",
+            "state": "accepted"
+          },
+          "artifacts": {
+            "stderr": {
+              "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a01/stderr.log",
+              "state": "present"
+            },
+            "stdout": {
+              "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a01/stdout.log",
+              "state": "present"
+            },
+            "summary": {
+              "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a01/summary.json",
+              "state": "absent"
+            }
+          },
+          "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/5f54ee2203fa863041fd3d19217b00f9cd8bf129aced88b6b79c380ed5465ee7.json",
+          "direction": "typed_joint_skill_decision",
+          "execution": {
+            "exit_code": 1,
+            "exit_witness": {
+              "exit_code": 1,
+              "finished_at_epoch": 1790958617.245746,
+              "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a01/process-exit.json",
+              "state": "valid",
+              "termination": "process_exit"
+            },
+            "runner": {
+              "recorded_identity": {
+                "boot_id": "f359a2d7-72f8-4eb1-b898-bc0abf61bed6",
+                "kind": "linux_pid_start_ticks",
+                "pid": 603775,
+                "session_id": 603774,
+                "start_ticks": 8622262
+              },
+              "state": "absent"
+            },
+            "state": "exited",
+            "supervisor": {
+              "recorded_identity": {
+                "boot_id": "f359a2d7-72f8-4eb1-b898-bc0abf61bed6",
+                "kind": "linux_pid_start_ticks",
+                "pid": 603774,
+                "session_id": 603774,
+                "start_ticks": 8622259
+              },
+              "state": "absent"
+            }
+          },
+          "explicit_retry": {
+            "eligible": true,
+            "reasons": [],
+            "scientific_authorization": false,
+            "successor_ref": null,
+            "supported": true
+          },
+          "explicit_retry_available": true,
+          "kind": "hmasd_operation_status",
+          "manifest_ref": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a01/launch-manifest.json",
+          "node": "local_linux",
+          "observed_at": "2026-10-02T16:30:43.530790Z",
+          "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/5f54ee2203fa863041fd3d19217b00f9cd8bf129aced88b6b79c380ed5465ee7.json",
+          "output_root": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a01",
+          "record_consistency": {
+            "mismatches": [],
+            "state": "consistent"
+          },
+          "schema_version": 1,
+          "sha": "a0331219351fd9f19a624e4ee4821b8a6383d186",
+          "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/c50f00e6e7594703a6885bdc9b957fc3"
+        },
+        "observed": 1790958643.7383835,
+        "spec": {
+          "argv": [
+            "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+            "/home/fires/hmasd-wsl/scripts/hmasd_launch.py",
+            "status",
+            "/home/fires/hmasd-wsl/.git/hmasd-admission/5f54ee2203fa863041fd3d19217b00f9cd8bf129aced88b6b79c380ed5465ee7.json"
+          ],
+          "cwd": "/home/fires/hmasd-wsl",
+          "id": "launch-b07-fixed-bank-reader-a01",
+          "interval": 30,
+          "protocol": "launch",
+          "timeout": 20
+        },
+        "status": "failed"
+      },
+      "launch-b07-fixed-bank-reader-a02": {
+        "due": 1790980166.3452916,
+        "errors": 0,
+        "last": {
+          "admission": {
+            "claim_state": "accepted",
+            "state": "accepted"
+          },
+          "artifacts": {
+            "stderr": {
+              "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/stderr.log",
+              "state": "present"
+            },
+            "stdout": {
+              "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/stdout.log",
+              "state": "present"
+            },
+            "summary": {
+              "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/summary.json",
+              "state": "present"
+            }
+          },
+          "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/41e8503e3e97e022007582e5114a5b2351aeb5fe07a9f2429459d871bca9aa18.json",
+          "direction": "typed_joint_skill_decision",
+          "execution": {
+            "exit_code": 0,
+            "exit_witness": {
+              "exit_code": 0,
+              "finished_at_epoch": 1790980115.8010218,
+              "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/process-exit.json",
+              "state": "valid",
+              "termination": "process_exit"
+            },
+            "runner": {
+              "recorded_identity": {
+                "boot_id": "f359a2d7-72f8-4eb1-b898-bc0abf61bed6",
+                "kind": "linux_pid_start_ticks",
+                "pid": 779009,
+                "session_id": 779008,
+                "start_ticks": 10461047
+              },
+              "state": "absent"
+            },
+            "state": "exited",
+            "supervisor": {
+              "recorded_identity": {
+                "boot_id": "f359a2d7-72f8-4eb1-b898-bc0abf61bed6",
+                "kind": "linux_pid_start_ticks",
+                "pid": 779008,
+                "session_id": 779008,
+                "start_ticks": 10461043
+              },
+              "state": "absent"
+            }
+          },
+          "explicit_retry": {
+            "eligible": false,
+            "reasons": [
+              "parent has no consistent terminal nonzero native exit"
+            ],
+            "scientific_authorization": false,
+            "successor_ref": null,
+            "supported": true
+          },
+          "explicit_retry_available": false,
+          "kind": "hmasd_operation_status",
+          "manifest_ref": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/launch-manifest.json",
+          "node": "local_linux",
+          "observed_at": "2026-10-02T22:28:56.133117Z",
+          "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/41e8503e3e97e022007582e5114a5b2351aeb5fe07a9f2429459d871bca9aa18.json",
+          "output_root": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02",
+          "record_consistency": {
+            "mismatches": [],
+            "state": "consistent"
+          },
+          "schema_version": 1,
+          "sha": "285eea780dcc63e000d336b65611d3c183b3c768",
+          "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/da5c578b16c348fb874c9b1518c6f0e7"
+        },
+        "observed": 1790980136.3452916,
+        "spec": {
+          "argv": [
+            "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+            "/home/fires/hmasd-wsl/scripts/hmasd_launch.py",
+            "status",
+            "/home/fires/hmasd-wsl/.git/hmasd-admission/41e8503e3e97e022007582e5114a5b2351aeb5fe07a9f2429459d871bca9aa18.json"
+          ],
+          "cwd": "/home/fires/hmasd-wsl",
+          "id": "launch-b07-fixed-bank-reader-a02",
+          "interval": 30,
+          "protocol": "launch",
+          "timeout": 20
+        },
+        "status": "ready"
+      }
+    },
+    "stopped": false,
+    "wake_id": "29c35b57-f101-4675-ac6b-74439fd1f47a"
+  },
+  "work_restarted": false
+}

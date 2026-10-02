@@ -1,0 +1,13 @@
+{
+  "input_manifest": {
+    "path": "docs/research/candidates/typed_joint_skill_decision/B07_READER_A02_INPUT.json",
+    "sha256": "fb130f8982a84c5c95d0b47b710652c9b66e3852871c46b9ffaa9cf7216c801f"
+  },
+  "manifest_sha256": "2c1a7021a4f2e4cda32855eacd9030f8c68d9652010696d519bb8a0062d8e18e",
+  "root": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02",
+  "source_sha": "285eea780dcc63e000d336b65611d3c183b3c768",
+  "terminal": {
+    "launch_manifest_sha256": "54af5b621ea17cb10d39bac4950078d4ad815b6b56eaa77707794c7a1ba8ef96",
+    "process_exit_sha256": "072b8090f389aac7c12779533130ae57ca5990f0b92c312339f1727f135eee76"
+  }
+}
