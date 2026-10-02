@@ -642,3 +642,100 @@ review covers actual numerical/RNG/result-identity/admission behavior after the
 diff exists. The DM reads the diff/checks, resolves findings and accepts it before
 publishing exact inputs and launching. This selection requires no further Root
 per-run acknowledgment.
+
+### Original adviser provenance and phase boundary
+
+Root subsequently published the temporary Oracle's complete final advice in
+[`RESEARCH-three-dm-oracle-design-advice.md`](../../archive/2026-10-01/RESEARCH-three-dm-oracle-design-advice.md),
+commit`e3532228b`; final-answer SHA256
+`84df55fb2298b8ff2820f7518e7ac86bae1cca01b2b5bcf6400ff2127a7ad802`.
+Its A/R section reports the concrete DM tensor instance and supports the already
+selected comparison. It is proposal provenance, not an independent review or
+implementation certificate. Its informal A≈R branch is read under the explicit
+independent-review limitation above: an unresolved contrast does not establish
+equivalence. The earlier Oracle relay was an initial proposal, not this final
+whole-task answer.
+
+Implementation uses three admitted phases: learning freezes all six initial/final
+A/R weight pairs and records3,072 train endpoint contexts; native collection binds
+that complete fit manifest before any fresh-world generation, then records1,920
+fresh endpoint contexts including frozen N; reading independently reconstructs
+all4,992 saved scorer contexts and the complete native/update evidence. The old
+test split receives no new forward. All phases consume digest-bound external
+locators and an exact cumulative bill; old canonical raw evidence is read in
+place rather than copied. Phase completion itself is not the scientific result.
+
+### Implementation handback and engineering cost, before result execution
+
+Registered bounded Implementer`/root/dm_decision_generalization/implement_ar_comparison`
+wrote only the assigned direction code/tests, then froze its source for independent
+engineering review. The DM read the numerical tensor/model, native collection,
+functional reader and binding paths. Two draft integration mistakes were corrected
+before any launch: entrypoints now contain the literal admission calls required by
+the launcher; the native-step ceiling is1,736,000, not the draft1,718,000 typo.
+Actual launch syntax uses the supported`--out` alias so source-snapshot output
+remapping and invocation identity apply. Relevant host/environment/configuration
+trees have no source diff from original`61a2dfa9c` to current published main.
+
+Final focused checks passed27 scientific tests and4 launcher/admission tests.
+The five measured pytest invocations, including resolved fixture/test-import
+failures, cost19.41s wall and19.96s process CPU in total. Their sequence was
+21passed/1failed(6.67s wall,6.87s CPU),3passed/1failed(.45/.31),
+24passed(6.45/6.04),4passed(.22/.22),27passed(5.62/6.52).
+The three numerical-suite invocations executed12 synthetic one-context AdamW
+updates,12 synthetic training contexts and18 separate candidate/functional-reader
+scorer contexts:30 synthetic scorer contexts including training forwards. They
+used0actual native/static/environment calls. These are engineering fixture costs,
+separate from the six scientific fits and9,984 scientific endpoint/reader contexts;
+the measured CPU is carried into the initial cumulative study ledger. Static
+compilation, source inspection and CLI-help checks were unmetered, not zero cost.
+
+Checks cover exact shared tensor values/IDs/counts, masks/ties, tiny deterministic
+gradient updates, independent layer arithmetic, changed-hash and wrong-address
+rejection, old-training-only access, mocked native count arithmetic and complete
+trace reading including469zero-service steps. They do not establish CUDA numerical
+behavior, actual-node admission or any native performance result. Independent
+read-only engineering Reviewer`/root/dm_decision_generalization/review_ar_engineering`
+is inspecting this actual fixed implementation; no result operation is active.
+
+### Independent engineering review and DM acceptance
+
+The registered independent Reviewer returned the following complete engineering
+answer, without DM conversation inheritance. This review is separate from the
+scientific selection review above.
+
+<!-- BEGIN ORIGINAL B01 ENGINEERING REVIEW -->
+
+**No material engineering finding remains in the reviewed implementation. No blocking repair identified.** DM retains acceptance.
+
+Checked the selected contract against all ten direction modules and their callers: admission precedes scientific effects; external manifests and sequential source identities bind each phase; all six fits and saved weights precede fresh generation; old-test records receive no new forward. Tensor construction, paired targets, masks, shuffle/model seeds, AdamW configuration, frozen N loading, GPU-authoritative choices, independent CPU reconstruction, complete native reading, update-chain reading, and count ceilings match the contract.
+
+The five pinned native files match their declared hashes and have no diff from `61a2dfa9c`. Native wrapper semantics are inherited unchanged apart from fresh addresses and phase integration.
+
+Validation:
+- **27 numerical/native/reader tests passed:** 5.59s wall, 6.62s process CPU, 317,804 KiB peak RSS.
+- **4 launcher/admission tests passed:** 0.23s wall, 0.22s process CPU.
+- Existing pytest scratch lifecycle completed normally. No source edits or result-bearing probes.
+
+Residual limits: CUDA execution, actual six-fit runtime/memory, remote external bytes, and the complete production phase sequence were not exercised. Optimizer verification intentionally checks saved chains and terminal state without replaying optimization.
+
+Reviewed package fingerprint: `144e0d73cf892057aceadeaed467af8db063ab24438e323fd943cbece6897bff`—SHA256 of newline-joined, filename-sorted `filename SHA256(bytes)` entries for direction `*.py`.
+
+<!-- END ORIGINAL B01 ENGINEERING REVIEW -->
+
+I accept this fixed implementation after reading its paths and checks and verifying
+the exact reviewed ten-module fingerprint. No scientific comparator, seed,
+endpoint or budget changed. The Reviewer's necessary independent rerun adds6.84s
+measured CPU and5.82s wall; cumulative measured engineering tests are26.80s CPU,
+25.23s wall,16 synthetic one-context updates/training contexts and24 separate
+synthetic scorer contexts (40including training forwards),0actual native calls.
+The initial ledger includes26.80s CPU and0GPU seconds; scientific counters remain
+zero. Unmetered source/CLI inspection stays explicitly unmeasured.
+
+The selected executing node is existing`wsl_4070` using its configured numerical
+interpreter, with no new environment/profile/download. Old source/data summaries
+and manifests were already presence/hash checked; admitted phase loaders verify
+all declared canonical input bytes in place before scientific consumption. First
+launch will publish this source and the exact three small locator/ledger inputs,
+then use fresh actual-node admission. Failure or uncertain acceptance is preserved
+under the same native handle, without automatic retry.
