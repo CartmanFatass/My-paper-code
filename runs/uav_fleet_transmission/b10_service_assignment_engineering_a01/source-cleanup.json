@@ -1,0 +1,17 @@
+{
+  "status": "REMOVED",
+  "method": "hmasd_snapshot_gc.py --snapshot d3dd732803824388be3f7bf25618f8db --sudo-process-scan; eligible preview then --apply",
+  "source_sha": "488c72115a3033a9c01c58bd9510896b82a206bf",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/15022f69c95816f3efb5f9daa8c2377cd3952e326d31fe1941994fd7153ae626.json",
+  "before_allocated_bytes": {
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/d3dd732803824388be3f7bf25618f8db": 821178368,
+    "/home/wu/projects/HMASD/.git/worktrees/d3dd732803824388be3f7bf25618f8db": 3706880
+  },
+  "after_allocated_bytes": 0,
+  "reclaimed_allocated_bytes": 824885248,
+  "allocation_scope": "exact deleted source plus Git worktree registration; no data relocation or replacement retention copy",
+  "output_unchanged": true,
+  "source_registration_absent": true,
+  "retained": "claim/manifest/terminal status/stdout/stderr/preflight stay at original remote output; compact verified record published on main",
+  "blockers": []
+}
