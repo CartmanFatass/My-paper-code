@@ -5218,3 +5218,58 @@ producer acquisition or partial-reader prefix is regenerated. Consumer input wil
 exist only after an actually successful full reader and canonical byte reading.
 Observe the same accepted handle without replacement and stay active through full
 collection, independent result interpretation, publication and measured cleanup.
+
+<a id="b07-renewed-engineering-acceptance"></a>
+### Renewed implementation accepted; exact A02 input before execution
+
+The bounded Implementer changed exactly the two production comparisons and the
+assigned fixture file. Both boundaries now project native `pid,start_ticks` to
+match the frozen helper/context; full native runner/supervisor witnesses remain
+whole-map comparisons. Real five-field fixture cases independently reject wrong
+PID/start ticks at each boundary, plus six negatives for changed boot/kind/session
+in either terminal identity. Original source,114-pass checks and all previous
+failed preparation evidence remain separately preserved.
+
+[Complete original renewed checks](../../../../runs/typed_joint_skill_decision/b07_source/renewed-checks.json)
+are14,605bytes, SHA256 `9f0410c19eec842c840f2886c0aa8761c8656a6b031dbde2624c5c42e822be7d`.
+The full B07/B06 synthetic suites passed114 in9.30s; source parsing, frozen B05
+hashes, saved native schema and scoped diff checks passed. Two measured wrappers
+paid10.926855038CPU-s/10.434987262wall-s;128mock rebuild callbacks and0actual science/
+effect-child executions. Test scratch was removed. No new physical bank reader,
+model, native or CUDA health probe ran, and no source changed after those checks.
+
+The same focused independent Engineering Reviewer traced actual native identity
+production through admission/launcher source and the saved a01 manifest, then
+read the actual corrected code, fixture delta, full original receipts and new
+input. Its [complete original2,007-byte answer](../../../../runs/typed_joint_skill_decision/b07_source/renewed-engineering-review.json),
+SHA256 `3a2e24a84c00901cb9b5a9ca348149e0da2d5396950231c9a4e94223b5b4ca1a`,
+finds both known defects resolved with no remaining material finding in this delta.
+It ran no repeated tests or scientific effects; receipt/hash inspection paid
+.000730313CPU-s, other support incompletely metered. This is not runtime-health or
+scientific-completeness evidence. I read the source diff, original checks, real
+binding check and whole review, and accept this bounded correction.
+
+The distinct [A02 input](B07_READER_A02_INPUT.json) is15,541bytes,
+SHA256 `fb130f8982a84c5c95d0b47b710652c9b66e3852871c46b9ffaa9cf7216c801f`.
+Only corrected `read.py` and `run.py` hashes differ from the original B07 input;
+every other field is identical. DM's [actual byte-only binding check](../../../../runs/typed_joint_skill_decision/b07_source/renewed-input-binding-check.json)
+passes against all frozen producer/source/reference bytes,258 original bank shards/
+321,771,896payloadbytes and original B05 native exit2. It pays1.061523504CPU-s/
+1.685492841wall-s with0physical calls. Original-check preservation/input preparation
+paid.026466200CPU-s and complete-review preservation.022577732CPU-s.
+
+The [one renewed reference copy](../../../../runs/typed_joint_skill_decision/b07_source/renewed-reference-staging.json)
+restaged only the39 canonical old B04 shards, reverified every original SHA and
+size, and retains48,750,592allocatedbytes. It paid.045963060parent+.253204child CPU-s
+and19.405592724wall-s; no producer or labels were regenerated. This is new staging
+after measured a01 deletion, charged to the renewed purchase. The [new local
+storage baseline](../../../../runs/typed_joint_skill_decision/b07_source/renewed-local-storage-before.json)
+records canonical B05/reference roots, absent A02 output/scratch, current external
+dumps and available space;.036846468metadata CPU-s. External unrelated changes
+are not counted as direction reclamation. These support costs add to the complete
+old ledger and remain separate from the selected actual execution limits.
+
+Next: publish these exact inputs, then fresh local admission and one A02 full reader.
+Consumer remains dependent on real reader success plus complete saved-byte reading;
+no consumer input or success record has been fabricated. The original a01 handle
+remains closed, and the renewed first-failure stop applies without another retry.

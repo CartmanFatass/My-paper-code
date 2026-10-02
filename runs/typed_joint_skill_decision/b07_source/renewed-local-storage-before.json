@@ -1,0 +1,96 @@
+{
+  "at": "2026-10-02T21:39:35.391367+00:00",
+  "core_pattern": "|/wsl-capture-crash %t %E %p %s",
+  "dump_directory": "/mnt/c/Users/fires/AppData/Local/Temp/wsl-crashes",
+  "dump_entries": [
+    {
+      "allocated_bytes": 24395776,
+      "bytes": 24395776,
+      "mtime_ns": 1790954565377906400,
+      "name": "wsl-crash-1790954564-571680-_usr_bin_python3.12-6.dmp"
+    },
+    {
+      "allocated_bytes": 24395776,
+      "bytes": 24395776,
+      "mtime_ns": 1790954571915121600,
+      "name": "wsl-crash-1790954571-571773-_usr_bin_python3.12-6.dmp"
+    },
+    {
+      "allocated_bytes": 24395776,
+      "bytes": 24395776,
+      "mtime_ns": 1790956818646405800,
+      "name": "wsl-crash-1790956818-586230-_usr_bin_python3.12-6.dmp"
+    },
+    {
+      "allocated_bytes": 24395776,
+      "bytes": 24395776,
+      "mtime_ns": 1790957470533086000,
+      "name": "wsl-crash-1790957470-590227-_usr_bin_python3.12-6.dmp"
+    },
+    {
+      "allocated_bytes": 24395776,
+      "bytes": 24395776,
+      "mtime_ns": 1790957477966646100,
+      "name": "wsl-crash-1790957478-590399-_usr_bin_python3.12-6.dmp"
+    },
+    {
+      "allocated_bytes": 24395776,
+      "bytes": 24395776,
+      "mtime_ns": 1790958737775126800,
+      "name": "wsl-crash-1790958738-606004-_usr_bin_python3.12-6.dmp"
+    },
+    {
+      "allocated_bytes": 350814208,
+      "bytes": 350814208,
+      "mtime_ns": 1790961522057944300,
+      "name": "wsl-crash-1790961520-638042-_home_fires_.grok_downloads_grok-1.0.41-linux-x86_64-6.dmp"
+    },
+    {
+      "allocated_bytes": 24395776,
+      "bytes": 24395776,
+      "mtime_ns": 1790971010172887500,
+      "name": "wsl-crash-1790971010-702013-_usr_bin_python3.12-6.dmp"
+    },
+    {
+      "allocated_bytes": 24395776,
+      "bytes": 24395776,
+      "mtime_ns": 1790976814233956800,
+      "name": "wsl-crash-1790976814-773014-_usr_bin_python3.12-6.dmp"
+    },
+    {
+      "allocated_bytes": 24395776,
+      "bytes": 24395776,
+      "mtime_ns": 1790976819472928800,
+      "name": "wsl-crash-1790976819-773104-_usr_bin_python3.12-6.dmp"
+    }
+  ],
+  "metadata_cpu_seconds": 0.03684646799999999,
+  "project_available_bytes": 741313269760,
+  "schema": 1,
+  "scientific_calls": 0,
+  "scope": "Renewed A02 support baseline, not actual-node admission or a hard dump bound",
+  "scopes": [
+    {
+      "allocated_bytes": 343310336,
+      "exists": true,
+      "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b05_data_bank_a01"
+    },
+    {
+      "allocated_bytes": 48750592,
+      "exists": true,
+      "path": "/home/fires/hmasd-wsl/temp/directions/typed_joint_skill_decision/b07-data-reference"
+    },
+    {
+      "allocated_bytes": 0,
+      "exists": false,
+      "path": "/home/fires/hmasd-wsl/temp/directions/typed_joint_skill_decision/b07-fixed-bank"
+    },
+    {
+      "allocated_bytes": 0,
+      "exists": false,
+      "path": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02"
+    }
+  ],
+  "selected_local_normal_bytes": 4294967296,
+  "selected_reader_abnormal_reserve_bytes": 2147483648
+}

@@ -1,0 +1,21 @@
+{
+  "all_original_bound_hashes_match": true,
+  "allocated_bytes": 48750592,
+  "at": "2026-10-02T21:34:01.329899+00:00",
+  "child_cpu_seconds": 0.253204,
+  "copy_count_this_purchase": 1,
+  "destination": "/home/fires/hmasd-wsl/temp/directions/typed_joint_skill_decision/b07-data-reference",
+  "files": 39,
+  "logical_bytes": 48649770,
+  "note": "New single reference staging after the original copy was measured and deleted; no producer regeneration or archive/backup.",
+  "parent_cpu_seconds": 0.04596306,
+  "schema": 1,
+  "scientific_calls": 0,
+  "scp_returncode": 0,
+  "scp_stderr": "",
+  "scp_stdout": "",
+  "source_map": "docs/research/candidates/typed_joint_skill_decision/B07_READER_INPUT.json b05_contract.reference.files",
+  "source_root": "hmasd-wsl-node:/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b04_a01/",
+  "support_not_scientific_effect": true,
+  "wall_seconds": 19.405592724011512
+}

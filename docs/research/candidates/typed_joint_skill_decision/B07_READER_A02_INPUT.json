@@ -1,0 +1,326 @@
+{
+  "b05_contract": {
+    "ceilings": {
+      "child_address_space_bytes": 1073741824,
+      "child_cpu_seconds": 120,
+      "child_wall_seconds": 240,
+      "core_reserve_bytes": 2147483648,
+      "cpu_seconds": 14400,
+      "fits": 0,
+      "gpu_seconds": 0,
+      "hosts": 33028,
+      "model_forwards": 0,
+      "native_steps": 0,
+      "normal_disk_bytes": 5368709120,
+      "parent_address_space_bytes": 536870912,
+      "raw_constructions": 33024,
+      "static_calls": 7298320,
+      "wall_seconds": 28800
+    },
+    "contract_anchor": "docs/research/candidates/typed_joint_skill_decision/NOTES.md#b05-data-bank-contract",
+    "direction": "typed_joint_skill_decision",
+    "disk_scope": {
+      "include_current_source_snapshot": true,
+      "own_scratch": "/home/fires/hmasd-wsl/temp/directions/typed_joint_skill_decision/b07-fixed-bank",
+      "reference_root": "/home/fires/hmasd-wsl/temp/directions/typed_joint_skill_decision/b07-data-reference",
+      "shared_interpreter_copied": false
+    },
+    "pinned_sources": {
+      "envs/pettingzoo/__init__.py": "d247e986e573c70196b7674d05a28ae229028d858ca4fb9c7ddf684c8c6d12c3",
+      "envs/pettingzoo/scenario1.py": "e5b3eb7d755a7d7866cc7cd01531383bee821f0c6d72a81a3d4fa9cb5954939e",
+      "envs/pettingzoo/scenario2.py": "277374f365e8eeda882de53d53cc051c1534fe210622fee74d7b5a8f9d2cf2f2",
+      "envs/pettingzoo/uav_env.py": "fb67554cf911adc9d3260a2a7f16d1773921c295646cb46beb4ba1247fec599e",
+      "envs/pettingzoo/uav_radio.py": "db3464803b1a5aa9c9504096810dc971266a6bd7eba1c31dfe79e7d8d903f3cc",
+      "experiments/candidates/coupled_host_joint_skills_stage1/host.py": "92b75c0317009380108bd45429892e49ca857b901ae1adbcd5bfe483d89ef469",
+      "experiments/candidates/coupled_host_joint_skills_stage1/menus.py": "15b818e0250141b45a47480d5acaa6b0f217c8ce8fe8c35ef6a7abb765102886",
+      "experiments/candidates/coupled_host_joint_skills_stage1/planner.py": "5c23f4c8a25df55052fa6eb4bb0da65fcf0f079560789b8abd7db416222a0aa6",
+      "experiments/candidates/coupled_host_joint_skills_stage1/run_gate.py": "b5f669597db920242bd89955821d738f569199f6e9245004cae445ff0cfb00ef",
+      "experiments/candidates/typed_joint_skill_decision/b04/__init__.py": "f160546e36507cbb6da4357825a99298431ec6b487248409380b63007a6599df",
+      "experiments/candidates/typed_joint_skill_decision/b04/bank.py": "45cd06e8538b011a62fcdcaca8cea8416fa4a06ef78435f0d7513214ed65b173",
+      "experiments/candidates/typed_joint_skill_decision/b04/contract.py": "d555883a25030a6a1bcb89150b3823d0dc843d96f33085a6dba6329e364b5c7a",
+      "experiments/candidates/typed_joint_skill_decision/b04/evidence.py": "74c197cf2ab1db82e8899ba9ad4c7c04d0decc93476731eefb4161bc21f10583",
+      "experiments/candidates/typed_joint_skill_decision/b04/native.py": "43c78e5f0da727e0e529ca0a9583352a9c98d63cfcd6ad01e7a62fd4f824e3f8"
+    },
+    "reference": {
+      "complete_labels": 430980,
+      "complete_worlds": 2501,
+      "files": {
+        "raw/bank/train/0000.npz": {
+          "bytes": 1228168,
+          "sha256": "a801ff81380dd0967df88d6f654526fa34d1bebe2ecc59b75e32e87a2d8fb0de"
+        },
+        "raw/bank/train/0001.npz": {
+          "bytes": 1226226,
+          "sha256": "155d51fe40c76b8a2243d29407c00bfc51ffe7f176fc592625e12b5bf07eea2e"
+        },
+        "raw/bank/train/0002.npz": {
+          "bytes": 1241956,
+          "sha256": "53161f2be41a7cb9cf0e5464b0a536fd23d998210ce0184f4a75b471ad2d3d15"
+        },
+        "raw/bank/train/0003.npz": {
+          "bytes": 1247416,
+          "sha256": "838fbd51648abca5cb95c2ca11362af4403a3e364d00f3d433d265e13572b88d"
+        },
+        "raw/bank/train/0004.npz": {
+          "bytes": 1255440,
+          "sha256": "ea6827a322f56a818509a3ce83f062c77d900e601e350a465a7cb18cbd22a861"
+        },
+        "raw/bank/train/0005.npz": {
+          "bytes": 1260609,
+          "sha256": "e11f0810b00b6d62349e62b3d707c7e21c7915bf5e57dae9c2e7403c43cafcec"
+        },
+        "raw/bank/train/0006.npz": {
+          "bytes": 1237455,
+          "sha256": "cd35cb8efe0a3e4ad05bd2c9a8857cd0e5b435f2aa72baa21731af5bbd22089e"
+        },
+        "raw/bank/train/0007.npz": {
+          "bytes": 1231784,
+          "sha256": "e83a714f905a38c4a94b1721a9818e23b4f2edcd4ab972be468ff0d90347f6c9"
+        },
+        "raw/bank/train/0008.npz": {
+          "bytes": 1266184,
+          "sha256": "a3863ce52ef1d737962340ceaf136b8f55ff3cc68c6a57e45aa8982fecaf8148"
+        },
+        "raw/bank/train/0009.npz": {
+          "bytes": 1240548,
+          "sha256": "e25585f2c0fd886baa43d6bcca0983d2a75cb09ded6edaddae65e24e85468594"
+        },
+        "raw/bank/train/0010.npz": {
+          "bytes": 1266923,
+          "sha256": "2818ae3f85501fda9080bbfeda65a01f35a087285a68d71acf3b9356fa669a79"
+        },
+        "raw/bank/train/0011.npz": {
+          "bytes": 1250004,
+          "sha256": "cf928114f436564d6b46065f091c75fc56154b0f80f00a8a1d185efe76fc1dea"
+        },
+        "raw/bank/train/0012.npz": {
+          "bytes": 1240196,
+          "sha256": "f1a43ca41573e5f39a2b96b8d7f3d6677f81d8a9172a9e8b1be75aceeb3d9e8e"
+        },
+        "raw/bank/train/0013.npz": {
+          "bytes": 1216212,
+          "sha256": "84f4ee2d3b23e6226e0509be5afe40bb09c9331ce599ccbc85ea2fb77ac01af1"
+        },
+        "raw/bank/train/0014.npz": {
+          "bytes": 1251875,
+          "sha256": "24d9af120b3a9c62b95005abbebcb433a4d72379f779d11362727494b9f7c5c0"
+        },
+        "raw/bank/train/0015.npz": {
+          "bytes": 1245508,
+          "sha256": "e78523e798005e7d174ffccb2fd06a4fc23fee0971fe999af1884b84efe15ade"
+        },
+        "raw/bank/train/0016.npz": {
+          "bytes": 1256388,
+          "sha256": "b31539284e6ef6618bf781f62a0deeb1e152f8fd8d8527fd1fa936bc8d4ce20d"
+        },
+        "raw/bank/train/0017.npz": {
+          "bytes": 1250534,
+          "sha256": "9daf8b2e0f7777c2a76fa3b0230d261fa4bb9b0772be1045310b76a1361952e6"
+        },
+        "raw/bank/train/0018.npz": {
+          "bytes": 1251120,
+          "sha256": "64e745ddca9cd47a218d4eabf91abe95ca33447bbd3771a65cec2b945cf32ed2"
+        },
+        "raw/bank/train/0019.npz": {
+          "bytes": 1287241,
+          "sha256": "2db97a9016119604d862c942ba5da3f5ed076b0aa8385c753cfe8c2d6dc22a5e"
+        },
+        "raw/bank/train/0020.npz": {
+          "bytes": 1230933,
+          "sha256": "d1fe7367b7c94da1980ab05fa4660d80d036009e94c0d471963d070fbd3382db"
+        },
+        "raw/bank/train/0021.npz": {
+          "bytes": 1239298,
+          "sha256": "87e69a3b9966185171def142e8f110b00c268e56e7de75a2d8a1258985f93124"
+        },
+        "raw/bank/train/0022.npz": {
+          "bytes": 1247241,
+          "sha256": "f8ed7a68e9687a6489bbe4bc6436fac3ccc948f7b4950c4724f5b562aaed3f14"
+        },
+        "raw/bank/train/0023.npz": {
+          "bytes": 1266054,
+          "sha256": "b44b6d95de10f33cdd02642358f7b6e73e787a56b36026c65df26614293ab084"
+        },
+        "raw/bank/train/0024.npz": {
+          "bytes": 1265021,
+          "sha256": "b3145243183834544a64a9c3e5f2ba5a991990800108828b449cc5c6a03c3ee6"
+        },
+        "raw/bank/train/0025.npz": {
+          "bytes": 1268614,
+          "sha256": "aa3a165c0a30d5fb9bb003491ea30f4420837d94c8644ca9a26bf8a586918453"
+        },
+        "raw/bank/train/0026.npz": {
+          "bytes": 1258518,
+          "sha256": "ffc4d0786eab911a4626db41a6e24dc2e860405b515a7ce66541546d822c48ce"
+        },
+        "raw/bank/train/0027.npz": {
+          "bytes": 1261812,
+          "sha256": "9d6a6821bd60302e7d98b72e9264f32439c1fa101f2f5512fabf7ce11d29585c"
+        },
+        "raw/bank/train/0028.npz": {
+          "bytes": 1232929,
+          "sha256": "97d828e425e96696c550072a5dbe73232527fa3d92b256a3e844e1042d33a5a3"
+        },
+        "raw/bank/train/0029.npz": {
+          "bytes": 1231919,
+          "sha256": "6529a8ce6ba1a11a66d3ac3b0e730e0f1355deff5242d6fa27960f9d8053982d"
+        },
+        "raw/bank/train/0030.npz": {
+          "bytes": 1240779,
+          "sha256": "b401d99c2db53978b3663b4b9d0738ddbf18627dfe343fda0bdcdc7f560db76a"
+        },
+        "raw/bank/train/0031.npz": {
+          "bytes": 1227237,
+          "sha256": "08ccd1a46fbb9f3f45f1f34baa21fb07bb3d831c421bcd6d473b6e037362cda5"
+        },
+        "raw/bank/train/0032.npz": {
+          "bytes": 1242273,
+          "sha256": "cf4339694d376555666a9c2d262de027c95d315bcefce86d7123d917799493ab"
+        },
+        "raw/bank/train/0033.npz": {
+          "bytes": 1221933,
+          "sha256": "fb2a86612da572c2162a6c7f39f6d6b386bdfc1f1998a5ea28a3282d1092782e"
+        },
+        "raw/bank/train/0034.npz": {
+          "bytes": 1221234,
+          "sha256": "5cee4875498d82a40f2381d8f23a4a204a9f2432d2a58d1e7ef91fe00d16fcae"
+        },
+        "raw/bank/train/0035.npz": {
+          "bytes": 1279400,
+          "sha256": "e8d0696101429d0dab80264594ba67e32d72187f0647d1180097b39a26d7b75a"
+        },
+        "raw/bank/train/0036.npz": {
+          "bytes": 1267841,
+          "sha256": "af3dc9fdfd807dce8d574e1944e23244d83c7cd4dfb1917299e552cb7333603c"
+        },
+        "raw/bank/train/0037.npz": {
+          "bytes": 1236928,
+          "sha256": "828ba33b4403d749086de5d6b180ea1413043b0b25f24ad346f18193bc68aa99"
+        },
+        "raw/bank/train/0038.npz": {
+          "bytes": 1258019,
+          "sha256": "ae65463174ee83dc467b1365f9ca3c3a049bdc1b6e14dae5aba1fac422a3ba4c"
+        }
+      },
+      "old_input_sha256": "000588aa756405e25e9e3dbebec99b95927277b6a85ee38275947f322f4a12a3",
+      "old_source_sha": "b19508a5c2825359e66a36b4fdc1db68b60cc809",
+      "partial": {
+        "bytes": 116876,
+        "complete_bytes": 1056813,
+        "complete_rows": 1025,
+        "complete_sha256": "f64bf50d0102cde03e0dd594adda924db263348785cc11060f7770e56f67a409",
+        "complete_worlds": [
+          109402496,
+          109402497,
+          109402498,
+          109402499,
+          109402500
+        ],
+        "gzip_eof": false,
+        "incomplete_candidates": 172,
+        "incomplete_labels": 165,
+        "incomplete_world": 109402501,
+        "path": "docs/research/candidates/typed_joint_skill_decision/b04_serialization/0039-partial.jsonl.gz",
+        "sha256": "a6dd341a5c827b78d69b3f2bdbeef97e4ef361f38c596356e54a7a205c35c282"
+      },
+      "root": "/home/fires/hmasd-wsl/temp/directions/typed_joint_skill_decision/b07-data-reference"
+    },
+    "runtime": {
+      "configured_python": "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+      "cpu_threads": 1,
+      "executable_sha256": "3303d2b5dc566818e412d2b5b6cd8e792bd360865da47593429a635f72668226",
+      "gymnasium_version": "1.0.0",
+      "node": "local_linux",
+      "numpy_version": "1.26.3",
+      "pettingzoo_version": "1.24.3",
+      "python_version": "3.10.20",
+      "resolved_executable": "/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10"
+    },
+    "schema": 1,
+    "scientific_input": {
+      "path": "docs/research/candidates/typed_joint_skill_decision/B04_INPUT.json",
+      "sha256": "000588aa756405e25e9e3dbebec99b95927277b6a85ee38275947f322f4a12a3"
+    },
+    "scientific_source_sha": "b19508a5c2825359e66a36b4fdc1db68b60cc809",
+    "study": "b05_complete_cpu_data_bank",
+    "worlds": {
+      "fresh_count": 512,
+      "fresh_start": 109420000,
+      "shard_worlds": 64,
+      "train_count": 16000,
+      "train_start": 109400000
+    }
+  },
+  "ceilings": {
+    "child_address_space_bytes": 1073741824,
+    "child_cpu_seconds": 120,
+    "child_wall_seconds": 240,
+    "core_reserve_bytes": 2147483648,
+    "cpu_seconds": 7200,
+    "fits": 0,
+    "gpu_seconds": 0,
+    "hosts": 16512,
+    "model_forwards": 0,
+    "native_steps": 0,
+    "normal_disk_bytes": 4294967296,
+    "parent_address_space_bytes": 536870912,
+    "raw_constructions": 16512,
+    "static_calls": 2844367,
+    "wall_seconds": 14400
+  },
+  "direction": "typed_joint_skill_decision",
+  "disk_scope": {
+    "include_current_source_snapshot": true,
+    "own_scratch": "/home/fires/hmasd-wsl/temp/directions/typed_joint_skill_decision/b07-fixed-bank",
+    "producer_root": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b05_data_bank_a01",
+    "reference_root": "/home/fires/hmasd-wsl/temp/directions/typed_joint_skill_decision/b07-data-reference",
+    "shared_interpreter_copied": false
+  },
+  "executable_sources": {
+    "experiments/candidates/typed_joint_skill_decision/b05_data_bank/__init__.py": "65a0fd28b3c570530f5f2f7925bbd6c160290ac9da27da648dcb4d832e9276a7",
+    "experiments/candidates/typed_joint_skill_decision/b05_data_bank/contract.py": "24bce02b7a7bc4598145e41de3c7da0a3968db858b5e56da2f1a45b57e3741d3",
+    "experiments/candidates/typed_joint_skill_decision/b05_data_bank/data.py": "ed071814f2a64470072e6eb9d99492889f75f441e245c528399035d76e3a8111",
+    "experiments/candidates/typed_joint_skill_decision/b05_data_bank/evidence.py": "7f822526c643034b789d892da767a542280bce92eb287550d270c55c6c5868e8",
+    "experiments/candidates/typed_joint_skill_decision/b05_data_bank/read.py": "1b9e1d6171b69a67a0bc59e291469d9ebb2f2a867783692d952197f870ba037a",
+    "experiments/candidates/typed_joint_skill_decision/b05_data_bank/run.py": "747e0461f1c0d6b1a5f45ac3eafae44b989ef41ef1fdf97783066fe4399208a5",
+    "experiments/candidates/typed_joint_skill_decision/b07_fixed_bank/__init__.py": "8da87e0c47800bae776ce71c14139f841346d2517d1dab927ac41f4c7d7ac6a5",
+    "experiments/candidates/typed_joint_skill_decision/b07_fixed_bank/contract.py": "3882b01aa16106a94d6e5f781297685a9ffe74afec1e95048965d7f2842442b4",
+    "experiments/candidates/typed_joint_skill_decision/b07_fixed_bank/data.py": "d4e6d62e53f4886bc18d4702119e04446ff2b3d118c566d8224b1b1c56664ec3",
+    "experiments/candidates/typed_joint_skill_decision/b07_fixed_bank/evidence.py": "8d87b4b74563ea15c6a011302f359aab06c7c6b72c53cccbd645ee3dbe487adb",
+    "experiments/candidates/typed_joint_skill_decision/b07_fixed_bank/read.py": "6a9eb9888ec40ba8b1c8dbac0f50f0f5a9588242a13b7377aa90c4175a6b046f",
+    "experiments/candidates/typed_joint_skill_decision/b07_fixed_bank/run.py": "18aca9120ecaa409b4d4145ec7bdbc3f366db391e9906a04ad21747e3acd16e3"
+  },
+  "producer": {
+    "input_sha256": "dd2bf2e7f54b0070587529559a1963438fa62fb8fb9bfe7db46202932e303394",
+    "manifest_sha256": "f18dcef40b320755e5b3bdfd94c4cc5be7869a7b549f58e0eccbe4090d6886e8",
+    "root": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b05_data_bank_a01",
+    "source_sha": "c271c7370c6948b06f0a4a6fd783eddff0d8731a",
+    "summary_sha256": "90a0da52143b132ca3a718a77df8c549ae195e820574f45854c39399b3f4b221",
+    "terminal": {
+      "launch_manifest_sha256": "7025f4f61cf38b0ac1f11ead7c5c9b809fa751e18d45e3969832c3afcd432ca3",
+      "process_exit_sha256": "a8bdf634c606bcd4d3286a284a7c831f37060f9cf492b2aaecd97ecbbb386937"
+    }
+  },
+  "runtime": {
+    "configured_python": "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "cpu_threads": 1,
+    "executable_sha256": "3303d2b5dc566818e412d2b5b6cd8e792bd360865da47593429a635f72668226",
+    "gymnasium_version": "1.0.0",
+    "node": "local_linux",
+    "numpy_version": "1.26.3",
+    "pettingzoo_version": "1.24.3",
+    "python_version": "3.10.20",
+    "resolved_executable": "/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10"
+  },
+  "schema": 1,
+  "scientific_input_sha256": "000588aa756405e25e9e3dbebec99b95927277b6a85ee38275947f322f4a12a3",
+  "scientific_source_sha": "b19508a5c2825359e66a36b4fdc1db68b60cc809",
+  "study": "b07_fixed_producer_reader",
+  "worlds": {
+    "fresh_count": 512,
+    "fresh_start": 109420000,
+    "shard_worlds": 64,
+    "train_count": 16000,
+    "train_start": 109400000
+  }
+}

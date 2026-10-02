@@ -237,7 +237,7 @@ def main(argv=None):
         or launch['command_sha256']!=admission['command_sha256'] or Path(launch['source_root']).resolve()!=ROOT
         or Path(launch['output_root']).resolve()!=out or launch['node']!='local_linux'
         or launch['host_identity']!=platform.node() or admission['child_pid']!=os.getpid()
-        or launch['runner_process']['identity']!=runner_identity or admission['parent_pid']!=os.getppid()
+        or {key:launch['runner_process']['identity'][key] for key in ('pid','start_ticks')}!=runner_identity or admission['parent_pid']!=os.getppid()
         or launch['process']['identity']['pid']!=admission['parent_pid']
         or launch['direction']!='typed_joint_skill_decision' or admission['direction']!='typed_joint_skill_decision'):
         raise ValueError('durable parent admission/source/output/node binding mismatch')

@@ -68,7 +68,7 @@ def receipt(binding,source_root):
         child_manifest=load(base+'/artifact-manifest.json');exit_record=load(base+'/process-exit.json')
         context_bytes=(root/(base+'/context.json')).read_bytes();digest=hashlib.sha256(context_bytes).hexdigest()
         if (context['stage']!='reader' or context['shard']!=index or context['launch_sha']!=manifest['launch_sha']
-            or context['input_sha256']!=manifest['input_sha256'] or context['parent_identity']!=launch['runner_process']['identity']
+            or context['input_sha256']!=manifest['input_sha256'] or context['parent_identity']!={key:launch['runner_process']['identity'][key] for key in ('pid','start_ticks')}
             or context['admission']!=config['admission'] or context['producer_root']!=value['producer']['root']
             or context['source_root']!=config['source_root'] or context['output_root']!=config['output_root']
             or context['context_relative']!=base+'/context.json'

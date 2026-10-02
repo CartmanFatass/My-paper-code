@@ -15,6 +15,12 @@ from experiments.candidates.typed_joint_skill_decision.b06_bank_consumer import 
 ROOT=Path(__file__).resolve().parents[5]
 
 
+def native_identity(pid,start_ticks):
+    # Five-field schema/metadata from saved b07_fixed_bank_reader_a01/launch-manifest.json.
+    return {'boot_id':'f359a2d7-72f8-4eb1-b898-bc0abf61bed6','kind':'linux_pid_start_ticks',
+        'pid':pid,'session_id':603774,'start_ticks':start_ticks}
+
+
 class Diagnostics:
     def __init__(self):self.rows=[];self.bill=self;self.counts={}
     def write(self,row):self.rows.append(row)
@@ -118,10 +124,10 @@ def synthetic_receipt(tmp_path):
     input_path.write_bytes(c.encoded(value));input_sha=c.sha(input_path)
     identity={'pid':12,'start_ticks':34};admission={'sha':source_sha,'command_sha256':'b'*64,'child_pid':12,'parent_pid':11}
     limits={'address_space':[536870912,1073741824],'cpu':[7190,7200]}
-    launch={'sha':source_sha,'direction':'typed_joint_skill_decision','runner_process':{'identity':identity},
-        'process':{'identity':{'pid':11,'start_ticks':33}},'source_root':str(ROOT),'output_root':str(out),'node':'local_linux','command_sha256':'b'*64}
+    launch={'sha':source_sha,'direction':'typed_joint_skill_decision','runner_process':{'identity':native_identity(**identity)},
+        'process':{'identity':native_identity(11,33)},'source_root':str(ROOT),'output_root':str(out),'node':'local_linux','command_sha256':'b'*64}
     put('launch-manifest.json',launch)
-    put('process-exit.json',{'status':'exited','exit_code':0,'process_identity':identity,'supervisor_identity':launch['process']['identity']})
+    put('process-exit.json',{'status':'exited','exit_code':0,'process_identity':launch['runner_process']['identity'],'supervisor_identity':launch['process']['identity']})
     config={'manifest':value,'producer':producer,'input_sha256':input_sha,'launch_sha':source_sha,'counter_schema':list(old_e.COUNTERS),
         'source_root':str(ROOT),'output_root':str(out),'admission':admission,'active_limits':limits,'imports':{'forbidden_modules':[]}}
     put('config.json',config)
@@ -215,6 +221,44 @@ def test_receipt_tampering_refused(synthetic_receipt,fault):
         read.receipt(binding,ROOT)
 
 
+@pytest.mark.parametrize('field',['pid','start_ticks'])
+def test_receipt_parent_identity_projection_refuses_changed_fields(synthetic_receipt,field):
+    binding,put,files,manifest=synthetic_receipt;out=Path(binding['root'])
+    base='raw/process/reader/0000'
+    context=json.loads((out/(base+'/context.json')).read_bytes())
+    context['parent_identity'][field]+=1
+    put(base+'/context.json',context);digest=files[base+'/context.json']['sha256']
+    child_config=json.loads((out/(base+'/config.json')).read_bytes())
+    child_config['context_sha256']=digest
+    child_summary=json.loads((out/(base+'/summary.json')).read_bytes())
+    child_summary['config']=child_config
+    exit_record=json.loads((out/(base+'/process-exit.json')).read_bytes())
+    exit_record.update(context_sha256=digest,parent_identity=context['parent_identity'])
+    # Keep all byte bindings and full child-witness equality valid: only the
+    # launch-to-context PID/start-tick projection differs.
+    for name,value in (('config.json',child_config),('summary.json',child_summary),('process-exit.json',exit_record)):
+        put(base+'/'+name,value)
+    for name in ('context.json','config.json','summary.json','process-exit.json'):
+        manifest['files'][base+'/'+name]=files[base+'/'+name]
+    put('artifact-manifest.json',manifest);binding['manifest_sha256']=c.sha(out/'artifact-manifest.json')
+    with pytest.raises(ValueError,match='actual child context/summary/source/reaped witness mismatch'):
+        read.receipt(binding,ROOT)
+
+
+@pytest.mark.parametrize('identity',['process_identity','supervisor_identity'])
+@pytest.mark.parametrize('field',['boot_id','kind','session_id'])
+def test_receipt_preserves_complete_native_terminal_identity(synthetic_receipt,identity,field):
+    binding,put,files,manifest=synthetic_receipt;out=Path(binding['root'])
+    witness=json.loads((out/'process-exit.json').read_bytes())
+    witness[identity][field]='changed' if field!='session_id' else witness[identity][field]+1
+    put('process-exit.json',witness)
+    manifest['files']['process-exit.json']=files['process-exit.json']
+    put('artifact-manifest.json',manifest);binding['manifest_sha256']=c.sha(out/'artifact-manifest.json')
+    binding['terminal']['process_exit_sha256']=c.sha(out/'process-exit.json')
+    with pytest.raises(ValueError,match='native terminal'):
+        read.receipt(binding,ROOT)
+
+
 def test_adapter_has_only_rebuild_and_original_no_permutation_calls():
     tree=ast.parse((ROOT/'experiments/candidates/typed_joint_skill_decision/b07_fixed_bank/data.py').read_text())
     rebuild=next(n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name=='rebuild')
@@ -278,7 +322,7 @@ def test_rebuild_composes_three_pairs_and_full_vectors_without_added_calls(tmp_p
     assert len(gzip.decompress(full.read_bytes()).splitlines())==128 and str(full.relative_to(tmp_path)) in store.files
 
 
-@pytest.mark.parametrize('fault',[None,'runner_start','supervisor'])
+@pytest.mark.parametrize('fault',[None,'runner_pid','runner_start','supervisor'])
 def test_parent_consumed_admission_identity_before_child_effects(tmp_path,monkeypatch,fault):
     import sys,types
     out=tmp_path/'output';out.mkdir();identity={'pid':run.os.getpid(),'start_ticks':77}
@@ -286,8 +330,8 @@ def test_parent_consumed_admission_identity_before_child_effects(tmp_path,monkey
     grant={'sha':'a'*40,'command_sha256':'b'*64,'child_pid':identity['pid'],'parent_pid':parent,'direction':'typed_joint_skill_decision'}
     launch={'sha':grant['sha'],'command_sha256':grant['command_sha256'],'source_root':str(ROOT),'output_root':str(out),
         'node':'local_linux','host_identity':run.platform.node(),'direction':'typed_joint_skill_decision',
-        'runner_process':{'identity':{**identity,'start_ticks':78 if fault=='runner_start' else 77}},
-        'process':{'identity':{'pid':parent+1 if fault=='supervisor' else parent}}}
+        'runner_process':{'identity':native_identity(identity['pid']+1 if fault=='runner_pid' else identity['pid'],78 if fault=='runner_start' else 77)},
+        'process':{'identity':native_identity(parent+1 if fault=='supervisor' else parent,76)}}
     (out/'launch-manifest.json').write_bytes(c.encoded(launch))
     input_path=tmp_path/'input.json';input_path.write_bytes(b'{}\n')
     monkeypatch.setenv('HMASD_ADMISSION_V1','synthetic single-use')
