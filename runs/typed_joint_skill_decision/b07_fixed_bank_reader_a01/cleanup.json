@@ -1,0 +1,125 @@
+{
+  "actual_deleted_targets": [
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/c50f00e6e7594703a6885bdc9b957fc3",
+    "/home/fires/hmasd-wsl/temp/directions/typed_joint_skill_decision/b07-data-reference"
+  ],
+  "after": {
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/c50f00e6e7594703a6885bdc9b957fc3": {
+      "allocated_bytes": 0,
+      "exists": false
+    },
+    "/home/fires/hmasd-wsl/docs/research/candidates/typed_joint_skill_decision/NOTES.md": {
+      "allocated_bytes": 458752,
+      "exists": true
+    },
+    "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b05_data_bank_a01": {
+      "allocated_bytes": 343310336,
+      "exists": true
+    },
+    "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a01": {
+      "allocated_bytes": 61440,
+      "exists": true
+    },
+    "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_source": {
+      "allocated_bytes": 61440,
+      "exists": true
+    },
+    "/home/fires/hmasd-wsl/temp/directions/typed_joint_skill_decision/b07-data-reference": {
+      "allocated_bytes": 0,
+      "exists": false
+    },
+    "/home/fires/hmasd-wsl/temp/directions/typed_joint_skill_decision/b07-fixed-bank": {
+      "allocated_bytes": 0,
+      "exists": false
+    }
+  },
+  "at": "2026-10-02T16:44:24.771449+00:00",
+  "before": {
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/c50f00e6e7594703a6885bdc9b957fc3": {
+      "allocated_bytes": 1827647488,
+      "exists": true
+    },
+    "/home/fires/hmasd-wsl/docs/research/candidates/typed_joint_skill_decision/NOTES.md": {
+      "allocated_bytes": 438272,
+      "exists": true
+    },
+    "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b05_data_bank_a01": {
+      "allocated_bytes": 343310336,
+      "exists": true
+    },
+    "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a01": {
+      "allocated_bytes": 53248,
+      "exists": true
+    },
+    "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_source": {
+      "allocated_bytes": 61440,
+      "exists": true
+    },
+    "/home/fires/hmasd-wsl/temp/directions/typed_joint_skill_decision/b07-data-reference": {
+      "allocated_bytes": 48750592,
+      "exists": true
+    },
+    "/home/fires/hmasd-wsl/temp/directions/typed_joint_skill_decision/b07-fixed-bank": {
+      "allocated_bytes": 0,
+      "exists": false
+    }
+  },
+  "cleanup_blocker": null,
+  "deleted_at": "2026-10-02T16:47:03.523189+00:00",
+  "deletion_parent_cpu_seconds": 0.019160427000000008,
+  "deletion_wall_seconds": 1.17702564499632,
+  "external_dump_note": "Changed entries are metadata facts only, not attributed to this study.",
+  "external_local_dump_changes": {
+    "wsl-crash-1790958738-606004-_usr_bin_python3.12-6.dmp": {
+      "bytes": 24395776,
+      "mtime_ns": 1790958737775126800
+    }
+  },
+  "final_measured_at": "2026-10-02T21:27:08.827463+00:00",
+  "gross_deleted_allocated_bytes": 1876398080,
+  "measurement_scope": "Exact deleted targets, canonical B05/B07 run/source evidence, and direction NOTES; includes new review/cleanup growth, excludes shared Git metadata/objects and unrelated concurrent allocation.",
+  "net_allocated_bytes_reclaimed": 1876369408,
+  "never_created_targets": [
+    "/home/fires/hmasd-wsl/temp/directions/typed_joint_skill_decision/b07-fixed-bank"
+  ],
+  "original_terminal_hashes_still_match": true,
+  "preparation_parent_cpu_seconds": 0.346707661,
+  "preparation_wall_seconds": 1.1864037469931645,
+  "published_terminal_commit": "ca0efae198d44695c1d672897d6d584da59ae4a1",
+  "reference_live_file_scan": {
+    "argv": [
+      "sudo",
+      "-n",
+      "lsof",
+      "-nP",
+      "+D",
+      "/home/fires/hmasd-wsl/temp/directions/typed_joint_skill_decision/b07-data-reference"
+    ],
+    "interpretation": "No open files in the exact local ext4 reference tree. Warnings concern two distinct FUSE portal filesystems outside that tree; no warning exemption or portal mutation used. First attempt stopped before deletion on these same warnings.",
+    "returncode": 1,
+    "stderr": "lsof: WARNING: can't stat() fuse.portal file system /run/user/1000/doc\n      Output information may be incomplete.\nlsof: WARNING: can't stat() fuse.portal file system /mnt/wslg/run/user/1000/doc\n      Output information may be incomplete.\n",
+    "stdout": ""
+  },
+  "remote_original_reference": {
+    "all_hashes_match": true,
+    "files": 39,
+    "hash_cpu_seconds": 0.040680913,
+    "logical_bytes": 48649770,
+    "original_core_bytes": 638087168,
+    "original_core_exists": true,
+    "root": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b04_a01",
+    "scientific_calls": 0
+  },
+  "resumption_reconciliation": "Same native operation still valid exit1/runner and supervisor absent/no successor at2026-10-02T21:24:48.172142Z; deleted targets and Git worktree registration absent. No repeat deletion or operation launch.",
+  "retained_code_reason": "Published B06/B07 complete comparison and actual failed boundaries remain reviewable; Root explicitly selected bounded correction after original failed-attempt closure.",
+  "schema": 1,
+  "science_calls": 0,
+  "snapshot_gc": {
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\n  \"mode\": \"apply\",\n  \"snapshots\": [\n    {\n      \"claim\": \"/home/fires/hmasd-wsl/.git/hmasd-admission/5f54ee2203fa863041fd3d19217b00f9cd8bf129aced88b6b79c380ed5465ee7.json\",\n      \"durable_ref\": \"refs/heads/main\",\n      \"eligible\": true,\n      \"output\": \"/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a01\",\n      \"path\": \"/home/fires/hmasd-wsl/.git/hmasd-launch-sources/c50f00e6e7594703a6885bdc9b957fc3\",\n      \"removed\": true,\n      \"sha\": \"a0331219351fd9f19a624e4ee4821b8a6383d186\",\n      \"snapshot\": \"c50f00e6e7594703a6885bdc9b957fc3\"\n    }\n  ]\n}\n"
+  },
+  "source_git_registration_absent": true,
+  "status": "complete",
+  "support_cost": "Additional child/transport/startup/tool tails not fully metered"
+}

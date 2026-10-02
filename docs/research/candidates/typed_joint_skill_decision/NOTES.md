@@ -4917,3 +4917,225 @@ distinguishes failed delivery from healthy same-handle observation. No worker re
 another address, duplicate launch or source migration occurred. Terminal reading
 recorded.001307133parentCPU-s; correction preservation.018771987CPU-s; other
 status/observer/support costs remain additional incompletely metered work.
+
+<a id="b07-independent-disposition"></a>
+## 2026-10-02 — Independent disposition of the stopped B07 attempt
+
+The same registered ResearchCritic `/root/dm_decision_assistance/fixed_data_version_critic`
+returned its result review after reusing the applicable original selection context.
+That context was originally separate from DM/Root conversation. For this follow-up,
+the assignment disclosed the suspected identity mismatch; the critic independently
+read native evidence/source before my interpretation and the corrected engineering
+opinion. It is independent verification, not blinded discovery. It ran no tests,
+numerical reconstruction, model, native or CUDA effects and made no edits; review
+support remains incompletely metered. The complete original answer below is10,401
+UTF-8bytes, SHA256 `9eaff7ee760bca1a810eabe7ab596e8394354565ce6fd6874d361bc68951b2ad`.
+Original selection advice remains above; this answer updates only the actual
+failure boundary and the proposed next investment.
+
+### Complete original ResearchCritic response
+
+I recommend **closing this B07 attempt as a technical failure, revising the two identity boundaries, and recommending one explicitly renewed purchase of the unchanged complete study**. The current operation and dependent consumer remain stopped. This recommendation does not authorize a repair run or reuse unused execution caps.
+
+I reused my earlier independent selection review and checked the new native evidence and source before reading the DM’s technical interpretation and corrected engineering opinion. The assignment already identified the suspected mismatch, so this was an independent verification, not a blinded discovery.
+
+**The supported cause is a deterministic adapter defect.**
+
+The accepted operation ran source `a0331219351fd9f19a624e4ee4821b8a6383d186`, with input SHA256 `da2cce0fb6de823aa273c6375d6fae8f4a38cf60286aefefb2cbf46651a3f246`. Its original stderr and matching native exit witness establish exit1 at the admission-binding check.
+
+The relevant source is decisive:
+
+- [run.py:240](/home/fires/hmasd-wsl/experiments/candidates/typed_joint_skill_decision/b07_fixed_bank/run.py:240) compares the entire launcher identity with `e.process_identity()`.
+- The actual launcher identity contains `boot_id`, `kind`, `pid`, `session_id` and `start_ticks`.
+- The frozen [B05 helper](/home/fires/hmasd-wsl/experiments/candidates/typed_joint_skill_decision/b05_data_bank/evidence.py:33) returns only `pid` and `start_ticks`.
+
+Those dictionaries cannot equal even for the correct process. This is a sufficient explanation of the observed rejection; another execution is unnecessary to establish it.
+
+There is also a consequential latent defect. [read.py:71](/home/fires/hmasd-wsl/experiments/candidates/typed_joint_skill_decision/b07_fixed_bank/read.py:71) compares the two-field child-context parent identity with the five-field launcher identity. Correcting only startup would leave a later deterministic refusal after potentially paying for the complete reconstruction. That second failure is established from source; it was not observed in execution.
+
+The admission and compact-receipt test fixtures supplied two-field launcher identities. Their successful checks therefore tested a false premise about the native interface. The original102/34 passes and engineering “no material finding” conclusion remain adverse preparation evidence. The corrected engineering diagnosis agrees with this reconstruction.
+
+**The operation failed before scientific exposure.**
+
+The exception precedes shared-counter creation and child spawning. The retained output contains no counter block, runner summary or numeric-child output. Together, the source and native evidence support:
+
+- zero reconstructed bank labels or static calls;
+- zero fits, model forwards, native steps and GPU-child effects;
+- unknown brief runner CPU, rather than zero CPU.
+
+These are source-supported effect counts, not fabricated instrumented counters. Passing memory admission supplies no evidence about the unexecuted physics, memory limits, CUDA path or old SIGSEGV cause.
+
+The [selected contract](/home/fires/hmasd-wsl/docs/research/candidates/typed_joint_skill_decision/NOTES.md#b07-selected-implementation) explicitly stops the operation and dependent effects at the first genuine technical failure. This was accepted execution followed by such a failure. It is not a healthy phase transition, a pre-admission refusal or permission for a corrected continuation.
+
+The DM’s present stop is warranted. The current research-index standing should also reflect the failed reader, stopped consumer and absence of a renewed purchase.
+
+**This changes engineering confidence, not the learning result.**
+
+The failure lowers confidence that synthetic checks and the original source review covered integration with the launcher. It adds preparation, diagnosis and opportunity cost. It does not provide a negative learning curve, validate the fixed producer, or identify a repair for the old runtime failure.
+
+The earlier scientific reading remains applicable:
+
+- B05 acquired a complete fixed producer bank but failed its original exact old-teacher compatibility rule.
+- Prospective validation of that immutable producer under the declared B07 contract is coherent; it must not become a retrospective B05 success certificate.
+- Exact producer winners affect training exposure. The resulting learning study remains conditional on this numerical dataset.
+- Broader world coverage may improve approximation under fixed optimization expenditure. Finite fitting, changing negative exposure and ordinary comparator competence remain strong alternatives.
+
+The strongest useful positive is still the possibility of a reusable relation scorer whose fresh-world quality improves with broader coverage and whose native benefit justifies its full cost. Earlier conditional R benefits make that conjecture worth testing, without establishing a data bottleneck. The strongest simpler alternative remains that Raw8J or RawJ already provides better decisions at lower complete cost.
+
+Neither interpretation received empirical exposure in this attempt. The distinct B04 runtime failure, B05 compatibility failure and B07 adapter failure also do not identify one shared cause or establish that model limitations caused the engineering failures.
+
+**A bounded correction is worth recommending, but the remaining study is still expensive.**
+
+Stopping further investment is defensible: repeated preparation failures consume attention, ordinary scoring remains strong, and real CUDA feasibility remains unmeasured. The reason I favor one renewed purchase is narrower. The newly observed obstruction is understood, local and checkable without numerical execution; it does not require changing labels, information rights, the comparator, tolerance or learning recipe. The complete comparison still addresses a concrete allocation decision.
+
+The correction should:
+
+1. Make the identity schemas explicit at **both** B07 boundaries, preserving PID/start-time binding and complete native terminal-witness comparisons. Preserve the frozen B05 helper.
+2. Use the actual five-field launcher schema in both relevant fixtures, including independent PID/start-time mismatch refusals. Merely adapting both sides to another shared mock assumption would repeat the failure.
+3. Preserve the failed source, input, native evidence, original checks and original review; bind any successor to its actual corrected source and input.
+4. Receive focused engineering verification of that correction. This does not require another scientific diagnosis round or a health pilot merely to establish the adapter behavior.
+
+The source change is small in scope; its support cost has not been measured. This is not a claim that the remaining research is cheap.
+
+The original preparation record already reports **34.343533321 CPU-seconds** in check wrappers, including failed checks, plus **1.497017467 CPU-seconds** for input binding and other separately recorded preparation costs. Startup, transport, observation and review support remain incompletely metered. Prior B04/B05 costs also remain paid; zero new fits does not erase them.
+
+Because no scientific work began, the complete prospective effects remain essentially unspent:
+
+| Remaining scientific work | Declared quantity |
+|---|---:|
+| Full fixed-bank reconstruction | 2,844,367 static calls |
+| Combined reader/consumer static ceiling | 4,228,127 |
+| Fits / updates | 6 / 24,576 |
+| Native steps | 584,000 |
+| Execution stops | Reader2 CPUh/4 wallh; consumer8 CPUh/4 GPU-childh/16 wallh |
+
+The earlier4–10 CPUh,1–3 GPU-childh and8–16 support-hour figures remain forecasts, not measurements of exact remaining cost. Corrective preparation and this failed attempt must be carried separately. Actual consumer throughput, exact-batch memory feasibility, CUDA execution and abnormal-dump exposure remain unresolved. Root’s earlier risk acceptance applied to the purchase that has now stopped; it does not automatically renew it.
+
+**The smallest worthwhile scientific observation remains the complete declared comparison.**
+
+A successful reader establishes a usable fixed-data asset under the new contract. It does not answer the learning question. If Root purchases the successor, retain the original six fits, strong ordinary references, complete native and individual-service reading, cold deployment accounting and first-failure stop. Do not substitute a favorable prefix or add replacement fits.
+
+The important outcome branches remain:
+
+- **Coherent fresh improvement in both streams:** retain conditional evidence for the allocation benefit; native service and complete cost decide whether there is a useful deployment case.
+- **Similar good performance across sizes:** the smaller allocation may suffice; additional data expenditure has little demonstrated value.
+- **Weak probe fit or divergent streams:** conclude that this finite fitting package is unreliable or inadequate, without identifying representation as the unique cause.
+- **Good probe fit with poor fresh behavior:** constrain generalization and end automatic expansion of this package.
+- **Static improvement with adverse native service, tails or cost:** preserve approximation capability while rejecting the corresponding deployment inference.
+- **Another technical or resource failure:** stop and retain the incomplete observation and actual cost. No replacement point or further retry follows automatically.
+
+Two streams on one nested bank remain exploratory optimization repetitions, not independent dataset replication. Additional native episodes would not change that.
+
+My new check scope covered the original stderr, launch manifest, native exit witness and admission evidence; the consequential source paths and frozen helper; both misleading fixtures; original check receipts; and the DM and corrected engineering readings after reconstruction. I did not run tests, execute a reader, reconstruct physics, inspect every downstream consumer path, or verify real CUDA behavior. I made no code or research-record edits. Review support is incompletely metered.
+
+**MATERIAL_DISSENT: no.** The DM’s diagnosis and stop are supported by direct evidence. I recommend a bounded correction and an explicitly renewed whole-study purchase; I do not support an automatic retry, a validated-bank claim, or a learning conclusion from this attempt.
+
+### DM response and current choice
+
+I adopt the diagnosis and **close this admitted B07 attempt and its dependent
+consumer as a technical failure**. Both identity boundaries are defective; the
+second is source-established rather than a second observed failure. Original102/34
+passing tests and the original no-finding engineering review remain in the record
+with the correction. My acceptance missed the native schema, and this lowers
+confidence in that integration coverage. It does not lower an empirically measured
+learning curve: none was observed. The brief runner/support cost remains unknown,
+not zero; all previously paid B04/B05/B06/B07 preparation and adverse evidence remain.
+
+The fixed producer is still the original uncertified B05 artifact. No B07 full-bank
+validation, approximation/generalization result, complete-package value or new
+native capability has been established. Task opportunity and the earlier conditional
+R capabilities remain; representation sufficiency and finite-package learnability
+remain separate unresolved questions. Strong ordinary Raw8J/RawJ remain the leading
+practical alternative. The three distinct failures do not supply one shared physical,
+numerical or learning explanation. There is no new reusable scientific judgment for
+the shared background topic, so its B01–B05 evidence and scope need no forced edit.
+
+I favor the critic's **bounded two-boundary correction and one explicitly renewed
+purchase of the unchanged complete study**, and have returned that recommendation
+to Root. The new obstruction is deterministic and can be corrected/tested against
+saved real native schema without a health probe or numerical pilot. That is why
+correction remains a credible next investment; sunk preparation is not its scientific
+reason. Stopping investment is also defensible given cumulative attention cost and
+the unchanged expensive/unmeasured runtime path. The positive conjecture still is
+that broader coverage at fixed optimization can improve fresh approximation enough
+to justify native and cold-deployment cost; the ordinary-scoring explanation remains
+strong. A smaller data prefix cannot answer the complete chosen comparison.
+
+At this disposition, **no corrected source, test run, renewed effect purchase or
+consumer input exists**. Root owns the next cross-question investment choice under
+the explicit first-failure stop; neither unused caps nor native retry eligibility nor
+this recommendation renews it. A selected successor would pin the actual corrected
+source/input, preserve both original identity witnesses and frozen B05 helper, use
+five-field fixtures with independent PID/start-time rejections, and receive focused
+engineering verification. This completed scientific review covers that unchanged
+comparison/correction; no extra scientific round or Pro consultation is justified
+merely to reconfirm the same diagnosis. Any material new premise would need its own
+applicable review. The original six fits, ordinary references, full native/individual
+reading, cold accounting and first-failure rule remain the proposed package.
+
+The remaining scientific price is still the full2,844,367-call independent reader,
+combined≤4,228,127static/6fits/24,576updates/584,000native. Reader2CPUh/4wallh and
+consumer8CPUh/4GPU-childh/16wallh are the prior selected stops, not carried-over
+allowances.4–10CPUh/1–3GPU-childh/8–16supporth remain forecasts, with corrective
+preparation additional and unmeasured. Actual CUDA feasibility, old remote SIGSEGV
+cause and unknown external CUDA-dump peak remain unresolved. All accepted effects
+and this failure have been collected; there is no live scientific producer or
+unread advice. Wider question ownership continues; no further run follows automatically.
+
+<a id="b07-failed-attempt-cleanup"></a>
+### B07 failed-attempt publication and measured cleanup
+
+Original native failure, technical reading, complete observer closure and engineering
+correction are published in `ca0efae198d44695c1d672897d6d584da59ae4a1`.
+The full original10,401-byte scientific review and DM response above are now part
+of this failure's final publication. Its preservation paid.030782080CPU-s, with0
+scientific calls. The later session interruption did not restart anything: on
+2026-10-02 at21:24:48UTC the same operation still had a valid consistent exit1,
+both native processes absent, no successor reference and no runner summary.
+The already-closed observer remains stopped with no pending event. No new effect,
+repair, test or identity-source edit has occurred during this failure's closeout.
+
+At16:47:03UTC the maintained snapshot collector removed only
+`.git/hmasd-launch-sources/c50f00e6e7594703a6885bdc9b957fc3`, including its Git
+registration; actual allocated size before deletion was1,827,647,488bytes.
+The one redundant `temp/directions/typed_joint_skill_decision/b07-data-reference`
+copy was also deleted, reclaiming48,750,592allocatedbytes. The collector's first
+unprivileged preview could not inspect protected process454; its supported
+`--sudo-process-scan` read-only preview/apply passed. The exact reference-file scan
+found no open file. Its two FUSE portal warnings concern other filesystems; those
+paths and their permissions were not changed. This is no remaining cleanup blocker.
+`temp/directions/typed_joint_skill_decision/b07-fixed-bank` was never created.
+No source backup, tarball, output migration, remote consumer staging or duplicate
+retention was created. Both deleted paths and the Git registration were rechecked
+absent after the interruption, without repeating removal.
+
+The [complete cleanup measurement](../../../../runs/typed_joint_skill_decision/b07_fixed_bank_reader_a01/cleanup.json)
+records gross deletion1,876,398,080allocatedbytes and **net1876369408bytes
+reclaimed** across those targets plus canonical B05/B07 evidence and this notebook,
+after accounting for this review/cleanup record growth. The scope excludes shared
+Git objects/metadata and unrelated concurrent host allocation; it is not a host-wide
+free-space delta. Canonical B05 remains343,310,336allocatedbytes. Its original
+uncertified bank, B04's saved evidence and all failed outcomes are retained. Before
+deleting the temporary reference, a read-only remote hash check verified all39
+original B04 shards/48,649,770logicalbytes at
+`/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b04_a01`; its original
+638,087,168-byte crash dump still exists. No new reader diagnostics or model bulk
+were produced. Published compact B06/B07 code/tests remain the reviewable prepared
+comparison, with the two admitted defects explicitly recorded; Root has now selected
+their bounded correction only after this failed-attempt closure.
+
+Local external-dump inspection found one new24,395,776-byte `/usr/bin/python3.12`
+entry since the source baseline, at16:32UTC. It is not the admitted Python3.10
+runner and was not attributed to this study or deleted; all other preexisting
+unattributed dumps were also preserved. It does not identify the old remote
+SIGSEGV cause or bound future CUDA dumps. Cleanup metadata/hash preparation paid
+.346707661local parent CPU-s plus.040680913remote hash CPU-s; deletion wrapper paid
+.019160427parent CPU-s. Child/transport/startup/tool tails and the initial aborted
+lsof wrapper remain incompletely metered. Net reclamation and preserved external
+evidence are distinct from those unknown support costs.
+
+The original complete B07 purchase is closed by its stop rule, scientifically
+incomplete and fully collected/read. The newly received Root decision chooses one
+explicitly renewed full comparison after this publication; it is not a continuation
+or restart of this accepted operation. Its prospective entry and actual corrected
+input/source will follow separately, retaining all previous exposure and costs.
