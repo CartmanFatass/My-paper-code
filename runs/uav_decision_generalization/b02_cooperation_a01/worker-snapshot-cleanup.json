@@ -1,0 +1,43 @@
+{
+  "target": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/bdb5d9b61c8e438eb07f1a833ab93dfa",
+  "preview": {
+    "mode": "preview",
+    "snapshots": [
+      {
+        "claim": "/home/wu/projects/HMASD/.git/hmasd-admission/cafd9b189a91f0d841fad8ae722641df904fb442b7e4d251dc8c50e06e0a31fc.json",
+        "durable_ref": "refs/remotes/origin/HEAD",
+        "eligible": true,
+        "output": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b02_cooperation_a01",
+        "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/bdb5d9b61c8e438eb07f1a833ab93dfa",
+        "sha": "e33a024ee0fc4258ba1ec9ac25fae811218b807f",
+        "snapshot": "bdb5d9b61c8e438eb07f1a833ab93dfa"
+      }
+    ]
+  },
+  "apply": {
+    "mode": "apply",
+    "snapshots": [
+      {
+        "claim": "/home/wu/projects/HMASD/.git/hmasd-admission/cafd9b189a91f0d841fad8ae722641df904fb442b7e4d251dc8c50e06e0a31fc.json",
+        "durable_ref": "refs/remotes/origin/HEAD",
+        "eligible": true,
+        "output": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b02_cooperation_a01",
+        "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/bdb5d9b61c8e438eb07f1a833ab93dfa",
+        "removed": true,
+        "sha": "e33a024ee0fc4258ba1ec9ac25fae811218b807f",
+        "snapshot": "bdb5d9b61c8e438eb07f1a833ab93dfa"
+      }
+    ]
+  },
+  "before": {
+    "exists": true,
+    "allocated_bytes": 1803276288
+  },
+  "after": {
+    "exists": false,
+    "allocated_bytes": 0
+  },
+  "net_allocated_bytes_reclaimed": 1803276288,
+  "retained_canonical_evidence": "/home/wu/projects/HMASD/runs/uav_decision_generalization/b02_cooperation_a01",
+  "new_evidence_copies": 0
+}

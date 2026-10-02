@@ -1967,3 +1967,58 @@ The assigning DM armed`tools/hmasd_wait.py` for this exact operation, job
 running and consistent native identities, not a result. The native child stays
 active and will drain/rearm this same handle through terminal collection. Any
 correctness or one-CPU-hour stop preserves its prefix without automatic restart.
+
+
+<a id="b02-worker-complete-reader-input"></a>
+### B02 complete native collection and bound final reader — 2026-10-02 UTC
+
+The original worker exited0 at04:05:18.922UTC with496/496 complete missions:
+16 audit plus480 main, exactly126,976 new native transitions,0fits/updates/GPU.
+The audit independently reconstructed its16 traces before main and verified
+complete fields/commands/counters/identities. Its lack of takeover events is
+not an activation screen; the accepted main panel ran unchanged. Main outcomes
+have not yet been independently read or interpreted.
+[Worker summary](../../../../runs/uav_decision_generalization/b02_cooperation_a01/summary.json)
+and[bound audit reading](../../../../runs/uav_decision_generalization/b02_cooperation_a01/audit_reading.json)
+retain separate times/counts. Worker CPU167.545230s; with prior engineering,
+cumulative208.205232s, plus.394465s measured canonical byte verification.
+The slight microsecond self-report difference is preserved as supplied. The
+worker component records126.312211s online episodes,2.786749s audit reader,
+.280220s constructors,.018943s actor loading and38.147108s import/identity/disk/
+serialization/other; peakRSS496,432KiB, native wall164.923s from budget creation.
+Self-report terminal tail and unmetered support retain their stated scope.
+
+[Canonical collection witness](../../../../runs/uav_decision_generalization/b02_cooperation_a01/collection.json)
+verifies all496 raw files, all16 audit-check files, the11,979,644-byte episodes
+manifest and compact records against their original SHA/size bindings. The
+unique canonical worker evidence is247,660,544 allocatedB /246,496,164 logicalB.
+Only compact metadata was collected; no full raw or actor copy was made.
+Observergeneration1 recorded READY at04:05:59UTC. The Codex queue returned
+`direct app-server input is not allowed for unloaded spawned sub-agents` despite
+the native turn waiting; subsequent same-state drain recovered the valid exit
+witness and consistent absent runner/supervisor. Event
+`0055f9a1432e138c8a1ace6b` was consumed through generation2 and observation stopped;
+no accepted operation was restarted or repeated. Long wait delayed collection,
+not the scientific work; delivery failure is distinct from native failure.
+
+After terminal and byte collection, supported snapshot-GC preview/apply with
+read-only sudo process inspection confirmed no live consumers and removed exact
+snapshot`bdb5d9b61c8e438eb07f1a833ab93dfa`, net allocated
+**1,803,276,288B reclaimed**; target now absent, canonical evidence preserved,
+no backup/archive/retention copy. [Measured witness](../../../../runs/uav_decision_generalization/b02_cooperation_a01/worker-snapshot-cleanup.json).
+This keeps only one full input snapshot present at a time.
+
+The final reader remains the originally selected480 source replays, adopting
+rather than repeating16 audit replays. Its input
+[B02_WORKER_INPUT.json](B02_WORKER_INPUT.json), SHA256
+`65ef728fc646a79f6a87a2af8197913735137f73ed3ef280e9cb64a443a021ce`,
+puts the canonical absolute worker root inside the SHA-bound JSON body;
+argv points only to this published locator file. Thus the launcher remaps the
+locator to the new snapshot but does not reinterpret its external root. The
+literal root and both config/summary digests match the just verified canonical
+files. No raw copy, native call or model probe is required to establish that
+binding. [B02_AFTER_WORKER_LEDGER.json](B02_AFTER_WORKER_LEDGER.json), SHA256
+`1746e5136523701a884c21e3fd6aa66d370b5645b1b9606b53c4493076097ed5`,
+starts at208.599697 cumulativeCPU seconds, including byte verification, with
+unchanged conservative synthetic usage172C/0frozen/1238decodes. Source code and
+all frozen actors remain exactly unchanged; reader uses new tag`b02_read_a01`.
