@@ -1,0 +1,85 @@
+{
+  "after_allocated_bytes": {
+    "observer_scratch": 0,
+    "old_reference_staging": 0,
+    "retained_output": 343310336,
+    "source_snapshot": 0
+  },
+  "artifact_manifest_sha256": "f18dcef40b320755e5b3bdfd94c4cc5be7869a7b549f58e0eccbe4090d6886e8",
+  "before_allocated_bytes": {
+    "observer_scratch": 24576,
+    "old_reference_staging": 48750592,
+    "retained_output": 343306240,
+    "source_snapshot": 1823232000
+  },
+  "child_cpu_seconds_before_final_record": 1.3250039999999998,
+  "completed_at": "2026-10-02T10:45:14.384575+00:00",
+  "manifest_field_type": "dict",
+  "net_reclaimed_bytes": 1872003072,
+  "observer_daemon_pid_503952_absent": true,
+  "parent_cpu_seconds_before_final_record": 0.019863903000000002,
+  "preserved_observer_record_sha256": "1e194ebd4d3b87f772c60911c6af19c4a360d353a8ee97b82782f0073227f387",
+  "removed_targets_absent": {
+    "observer_scratch": true,
+    "old_reference_staging": true,
+    "source_snapshot": true
+  },
+  "retained_artifact_verification": {
+    "all_hashes_and_sizes_match_original_manifest": true,
+    "cpu_seconds_before_record": 0.741104011,
+    "files": 2429,
+    "logical_bytes": 337184206,
+    "scientific_queries": 0,
+    "verified_at": "2026-10-02T10:46:17.588669+00:00",
+    "wall_seconds_before_record": 1.4493968449969543
+  },
+  "scientific_effects": 0,
+  "scope": {
+    "observer_scratch": "/home/fires/hmasd-wsl/temp/directions/typed_joint_skill_decision/b05-data-bank",
+    "old_reference_staging": "/home/fires/hmasd-wsl/temp/directions/typed_joint_skill_decision/b05-data-reference",
+    "retained_output": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b05_data_bank_a01",
+    "source_snapshot": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/219cfcc60b3b4b1facb301593338723e"
+  },
+  "source_gc": {
+    "child_cpu_seconds": 1.011271,
+    "command": [
+      "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+      "-B",
+      "scripts/hmasd_snapshot_gc.py",
+      "--snapshot",
+      "219cfcc60b3b4b1facb301593338723e",
+      "--sudo-process-scan",
+      "--apply"
+    ],
+    "exit_code": 0,
+    "parent_cpu_seconds": 0.0008803730000000037,
+    "stderr": "",
+    "stdout": "{\n  \"mode\": \"apply\",\n  \"snapshots\": [\n    {\n      \"claim\": \"/home/fires/hmasd-wsl/.git/hmasd-admission/1eedcf2aa6e082fc3654b3f88b9474ff0341c7ac2d4663edfaa50c801b4f90b2.json\",\n      \"durable_ref\": \"refs/heads/main\",\n      \"eligible\": true,\n      \"output\": \"/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b05_data_bank_a01\",\n      \"path\": \"/home/fires/hmasd-wsl/.git/hmasd-launch-sources/219cfcc60b3b4b1facb301593338723e\",\n      \"removed\": true,\n      \"sha\": \"c271c7370c6948b06f0a4a6fd783eddff0d8731a\",\n      \"snapshot\": \"219cfcc60b3b4b1facb301593338723e\"\n    }\n  ]\n}\n",
+    "wall_seconds": 1.1492662730015581
+  },
+  "started_at": "2026-10-02T10:45:12.786833+00:00",
+  "status": "removed_selected_source_and_unused_temporary_inputs",
+  "temporary_consumer_scans": [
+    {
+      "child_cpu_seconds": 0.08285699999999996,
+      "exit_code": 0,
+      "parent_cpu_seconds": 0.0007338700000000115,
+      "removed": true,
+      "stderr": "",
+      "stdout": "[]\n",
+      "target": "/home/fires/hmasd-wsl/temp/directions/typed_joint_skill_decision/b05-data-reference",
+      "wall_seconds": 0.08297493700229097
+    },
+    {
+      "child_cpu_seconds": 0.13197099999999984,
+      "exit_code": 0,
+      "parent_cpu_seconds": 0.0007659289999999985,
+      "removed": true,
+      "stderr": "",
+      "stdout": "[]\n",
+      "target": "/home/fires/hmasd-wsl/temp/directions/typed_joint_skill_decision/b05-data-bank",
+      "wall_seconds": 0.13098194400663488
+    }
+  ],
+  "wall_seconds_before_final_record": 1.5977514969999902
+}

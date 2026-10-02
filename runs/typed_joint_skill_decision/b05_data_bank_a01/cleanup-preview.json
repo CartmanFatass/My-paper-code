@@ -1,0 +1,15 @@
+{
+  "command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "scripts/hmasd_snapshot_gc.py",
+    "--snapshot",
+    "219cfcc60b3b4b1facb301593338723e",
+    "--sudo-process-scan"
+  ],
+  "exit_code": 0,
+  "stdout": "{\n  \"mode\": \"preview\",\n  \"snapshots\": [\n    {\n      \"claim\": \"/home/fires/hmasd-wsl/.git/hmasd-admission/1eedcf2aa6e082fc3654b3f88b9474ff0341c7ac2d4663edfaa50c801b4f90b2.json\",\n      \"durable_ref\": \"refs/heads/main\",\n      \"eligible\": true,\n      \"output\": \"/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b05_data_bank_a01\",\n      \"path\": \"/home/fires/hmasd-wsl/.git/hmasd-launch-sources/219cfcc60b3b4b1facb301593338723e\",\n      \"sha\": \"c271c7370c6948b06f0a4a6fd783eddff0d8731a\",\n      \"snapshot\": \"219cfcc60b3b4b1facb301593338723e\"\n    }\n  ]\n}\n",
+  "stderr": "",
+  "parent_cpu_seconds": 0.0005397109999999983,
+  "child_cpu_seconds": 0.580131,
+  "wall_seconds": 1.6368264310003724
+}

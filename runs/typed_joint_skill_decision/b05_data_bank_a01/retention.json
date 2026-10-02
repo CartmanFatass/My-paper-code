@@ -11,8 +11,11 @@
   "required_consumers": "future explicitly selected handling of the bank/compatibility failure and B06 interface; not currently admissible as a complete bank",
   "old_reference_temporary": {
     "allocated_bytes": 48750592,
-    "path": "/home/fires/hmasd-wsl/temp/directions/typed_joint_skill_decision/b05-data-reference"
+    "path": "/home/fires/hmasd-wsl/temp/directions/typed_joint_skill_decision/b05-data-reference",
+    "status": "removed after terminal publication and no-live-consumer verification"
   },
   "old_unique_remote_source": "hmasd-wsl-node:/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b04_a01",
-  "original_core": "retained only at original remote Windows path; not copied/deleted"
+  "original_core": "retained only at original remote Windows path; not copied/deleted",
+  "cleanup_receipt": "cleanup.json",
+  "source_snapshot_status": "removed; exact c271c7370 source remains reachable in main"
 }
