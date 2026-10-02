@@ -1,0 +1,18 @@
+{
+  "compute_sha256": "2bb704e31e08a6a3489e80ea6851826740dfbf71461e0f7e70c4394694e65e6f",
+  "core_pattern": "|/wsl-capture-crash %t %E %p %s",
+  "core_rlimit": [
+    0,
+    -1
+  ],
+  "cores_directory": "/mnt/c/Users/fires/AppData/Local/Temp/wsl-crashes",
+  "existing_core_allocated_bytes": 6275657728,
+  "existing_core_count": 10,
+  "existing_cores_metadata_sha256": "ef3974f77bac6aa7711a3d204dad9cc5fcc0b54742dc219f93eb855ccc979144",
+  "git_objects_allocated_bytes": 4214263808,
+  "metadata_cpu_seconds": 0.209036,
+  "metadata_wall_seconds": 0.3769043769934797,
+  "repo": "/home/fires/hmasd-wsl",
+  "source_snapshot_count": 41,
+  "time_ns": 1790924399845339044
+}

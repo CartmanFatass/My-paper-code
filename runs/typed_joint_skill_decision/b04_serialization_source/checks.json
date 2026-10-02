@@ -1,0 +1,42 @@
+{
+  "dm_disposition": "Accepted full source review and all fixes. Actual node admission and bounded original replay remain future; no runtime-health or B04 retry conclusion.",
+  "engineering_review_answer_sha256": "a7e3cc6c17643626463755efb738ea863de3236525264c3df23f401de29eefb0",
+  "input_manifest_sha256": "3506fc597bca6cf71fa84fa66d0f5e22c2f7e3ff09947f4db34139d4923ac3b4",
+  "pure_mock_checks": {
+    "ceiling_synthetic_encodes": 16,
+    "ceiling_test_cpu_seconds": 10,
+    "implementer": {
+      "cpu_seconds": 0.7,
+      "final_zero_encode_tests_passed": 4,
+      "initial_tests_passed": 9,
+      "original_calls": 0,
+      "reader_tests_passed": 3,
+      "syntax_hash_support_cpu_seconds": 0.04,
+      "synthetic_attempts": 6,
+      "target_calls": 5,
+      "wall_seconds": 0.96
+    },
+    "independent_reviewer": {
+      "cpu_seconds": 0.3,
+      "final_tests_passed": 14,
+      "original_calls": 0,
+      "peak_rss_kib": 34476,
+      "synthetic_attempts": 6,
+      "target_calls": 5,
+      "wall_seconds": 0.43
+    },
+    "total_original_calls": 0,
+    "total_synthetic_attempts": 12,
+    "total_target_calls": 10,
+    "total_test_cpu_seconds": 1.0
+  },
+  "schema": 1,
+  "source_sha256": {
+    "experiments/candidates/typed_joint_skill_decision/b04_serialization/__init__.py": "460d72c9a26e2618799aae01acfefb670741a852df3c95de05b334366a3694fb",
+    "experiments/candidates/typed_joint_skill_decision/b04_serialization/read.py": "a3c6890037d1d435d13bfa5823096478f22b0b319a3badd9885c6110b5a4d52e",
+    "experiments/candidates/typed_joint_skill_decision/b04_serialization/records.py": "1c5dec1e9e2d64fb98fa52c095e018645e3c80c26aba65ad76a196d875110039",
+    "experiments/candidates/typed_joint_skill_decision/b04_serialization/run.py": "3c349f9685cab26fa565f3811918ec03109ce12569a1cfc72d1eb226b070e760",
+    "tests/experiments/candidates/typed_joint_skill_decision/b04_serialization/test_serialization.py": "94ca5020e226ec49cf7b59eca522271d9862071392730d84da54da6bd399ff24"
+  },
+  "target_source_sha256": "74c197cf2ab1db82e8899ba9ad4c7c04d0decc93476731eefb4161bc21f10583"
+}

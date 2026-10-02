@@ -1,0 +1,20 @@
+{
+  "source_rollout": "/mnt/c/Users/fires/.codex/sessions/2026/10/01/rollout-2026-10-01T08-23-15-01a0f810-0818-74f0-b103-1654ae954025.jsonl",
+  "line_1based": 1493,
+  "native_event": {
+    "timestamp": "2026-10-02T07:40:57.460Z",
+    "ordinal": 1492,
+    "type": "event_msg",
+    "payload": {
+      "type": "task_complete",
+      "turn_id": "01a0fb86-571d-76d2-b57f-9315257b8fa3",
+      "last_agent_message": "**PASS for the assigned engineering scope. No material finding remains.** This is not launch authorization or runtime-health certification.\n\nVerified the final repairs:\n- Admission uses the validated command and durable launch manifest without rereading the consumed environment variable.\n- Hard wall watchdog remains active through summary writing and stream closure.\n- Forbidden scientific imports are checked before target import and after execution.\n- Partial summaries retain completion uncertainty: recorded completions ≤ actual completions ≤ attempted ordinals.\n\nOne final focused suite: **14 passed**, six synthetic attempts, five actual encoder calls, **zero original-record encodes**. Whole-process cost: **0.30 CPU-s**, 0.43 wall-s, 34,476 KiB peak RSS. No additional tests or result operations ran.\n\nReviewed SHA256 identities under `b04_serialization/`:\n\n```text\n__init__.py 460d72c9a26e2618799aae01acfefb670741a852df3c95de05b334366a3694fb\nread.py     a3c6890037d1d435d13bfa5823096478f22b0b319a3badd9885c6110b5a4d52e\nrecords.py  1c5dec1e9e2d64fb98fa52c095e018645e3c80c26aba65ad76a196d875110039\nrun.py      3c349f9685cab26fa565f3811918ec03109ce12569a1cfc72d1eb226b070e760\ntest_serialization.py\n            94ca5020e226ec49cf7b59eca522271d9862071392730d84da54da6bd399ff24\nINPUT.json  3506fc597bca6cf71fa84fa66d0f5e22c2f7e3ff09947f4db34139d4923ac3b4\n```\n\nLimits: admission, timers and failure paths were inspected and mocked; actual node admission, OS cap enforcement, full replay and original-data behavior remain unobserved.",
+      "started_at": 1790926283,
+      "completed_at": 1790926857,
+      "duration_ms": 562729,
+      "time_to_first_token_ms": 9370
+    }
+  },
+  "answer_utf8_bytes": 1540,
+  "answer_sha256": "a7e3cc6c17643626463755efb738ea863de3236525264c3df23f401de29eefb0"
+}

@@ -1,0 +1,18 @@
+{
+  "compute_sha256": "2bb704e31e08a6a3489e80ea6851826740dfbf71461e0f7e70c4394694e65e6f",
+  "core_pattern": "|/wsl-capture-crash %t %E %p %s",
+  "core_rlimit": [
+    0,
+    -1
+  ],
+  "cores_directory": "/mnt/c/Users/wu/AppData/Local/Temp/wsl-crashes",
+  "existing_core_allocated_bytes": 10810683392,
+  "existing_core_count": 5,
+  "existing_cores_metadata_sha256": "d865b03fa5c1ef91fa00612ffe194ba81edf0a2bf0d597d0c147d5874164ac02",
+  "git_objects_allocated_bytes": 1201700864,
+  "metadata_cpu_seconds": 0.024150999999999992,
+  "metadata_wall_seconds": 0.03535924106836319,
+  "repo": "/home/wu/projects/HMASD",
+  "source_snapshot_count": 69,
+  "time_ns": 1790924400820205098
+}
