@@ -2649,3 +2649,295 @@ but still below2.5GiB. No continuous-peak claim is made. No cleanup blocker.
 The active scientific reviewer uses retained canonical raw/Git source, not the
 disposable snapshot. Local reading scratch remains temporarily until its reader
 consumer ends; final selected-code retirement is considered with the next choice.
+
+
+<a id="b03-independent-disposition"></a>
+## 2026-10-02 — B03 complete independent diagnosis and DM disposition
+
+The original separate-context ResearchCritic completed its accepted B03 reading.
+The following answer is copied mechanically, without editing, from native
+`event_msg.task_complete.last_agent_message` in
+`/mnt/c/Users/fires/.codex/sessions/2026/10/01/rollout-2026-10-01T12-31-52-01a0f8f3-a3f1-7f12-a0d9-d81a67c03d53.jsonl`,
+line808/ordinal807, timestamp2026-10-02T03:35:31.562Z,
+turn`01a0fa98-dadc-76f3-bef3-c86f09455905`. Original UTF-8 payload14352bytes,
+SHA256`173f2a6a5516da1403799dff063ebc127bd39d9107585e01fbdb8d2873069b47`.
+The stated dissent concerns an unselected successor, not the completed B03 contract.
+
+<!-- BEGIN ORIGINAL B03 RESULT CRITIC -->
+Retain Q’s conditional static-search capability and its positive native cases. Its complete native increment over G remains unresolved, while P retains higher mean J at greater cost. I recommend ending further investment in this prefix selector and declining the proposed sparse-trajectory residual learner on the unchanged B01 menu. The newly relevant ordinary comparator—terminal **J**, rather than B01’s terminal **C**—already captures almost all of that menu’s observed native J opportunity.
+
+This is a boundary for these interfaces, not a general conclusion about learned decision assistance.
+
+I retained the original separate reviewer context. I reconstructed B03 before considering the subsequent native-consequence proposal. My checks covered the selected contract and timing clarification, source `804dac52b1e9ac904f0b86229f88992dd392cad0`, input/alias identities, terminal records, complete 64-world original reader output, relevant prefix/executor/host source, and underlying positive/adverse traces. I independently checked the seven new Q episodes and paired G traces, including reward/service arithmetic, and inspected the actual Q/P trajectory at world 014. Prior applicable B02 raw checks remain relevant to exact reused programs. I did not rerun physics, queries, fits or model inference. I rely on the documented complete manifest verification and reader diagnostics rather than claiming a second exhaustive engineering audit.
+
+The complete comparison is:
+
+| Program | Mean native J | Mean C_bh | Cold selection seconds | Static calls/world |
+|---|---:|---:|---:|---:|
+| G | .5310797863 | .74704625 | .847098294 | 1331.125 |
+| Q | .5319181409 | .74849250 | .891771012 | 1410.266 |
+| P | .5379215122 | .75361500 | 1.213871592 | 2001.594 |
+
+Q−G native J is **+.0008383546**, with the declared descriptive interval **[−.0024099923, +.0040867015]** and 12 positive, 9 negative, 43 equal worlds. C_bh changes by +.00144625, also unresolved. Its static increment is larger: **+.0038274611**, with 16 positive, 5 negative, 43 equal worlds. Static regret relative to P falls from .01194715 to .00811968.
+
+Q−P native J is **−.0060033713**, interval **[−.0097865912, −.0022201514]**, with 5 positive, 21 negative, 38 equal worlds. Q saves time and calls in every world relative to P. These are meaningful quality–cost alternatives; neither G’s omission savings nor Q’s prefix information use is a learned capability.
+
+All 64 worlds were already exposed. The intervals describe this reused panel and do not turn its completion into fresh confirmation. There is no new fitted asset or training replication.
+
+Q requested ranks 0/1/2 in 42/14/8 worlds, with no fallback. Its 22 nonzero-rank requests produced **21 physical/native changes**. World 032 has the same assigned targets and native behavior as G despite a different unassigned/permutation identity. It correctly failed the stricter prospective alias rule and was paid as a new episode. That later physical equality does not retroactively remove its cost.
+
+The seven missing outcomes were consequential:
+
+| World suffix | Q−G J | Q−G C_bh | Q rank |
+|---|---:|---:|---:|
+| 000 | −.0545886130 | +.10500 | 2 |
+| 011 | −.0047752724 | +.02620 | 1 |
+| 025 | +.0079292633 | +.02564 | 1 |
+| 027 | −.0089707751 | +.00676 | 2 |
+| 032 | 0 | 0 | 1 |
+| 033 | −.0042827338 | +.00108 | 1 |
+| 036 | −.0105664592 | +.00560 | 2 |
+
+The 57 previously known aliases contributed a summed Q−G J of **+.1289092843**. Completing the seven missing programs contributed **−.0752545902**, leaving **+.0536546941** across all 64. The earlier favorable partial reading therefore substantially overstated the complete mean. Neither subset is a representative independent sample.
+
+World 031 supplies +.0489515280, about 91% of the final net sum. This does not justify dropping that world, but it shows why the small positive aggregate should not be treated as a stable general improvement. The worst loss must remain equally visible.
+
+The underlying trajectories support several distinct conclusions.
+
+- At **025**, Q beats both G and P in complete J. Its first-100-step J is .291442, versus .266509/.244014. Six users receive service throughout all 500 steps, versus none under G/P; all-team-zero steps are 0 versus 18/8. This is a real useful complete-program outcome.
+- At **014**, Q=P improves J by .03140929 and C_bh by .02936 over G. Yet never-served users increase from **4 to 16**, and all-team-unserved steps from **23 to 30**. Aggregate improvement does not imply every-user improvement.
+- At **036**, a static increment of .01252493 becomes a native loss of .01056646. Q arrives at step 103 rather than 72; its first-100 J is .301803 versus .404483, although its final holding reward is higher.
+- At **048**, Q=P has higher endpoint reward but loses .03679195 native J. Both programs arrive at step 117. The first-100 values, .152305 versus .328268, show that arrival time alone does not characterize service during flight.
+- At **000**, Q loses .05458861 J despite gaining .105 C_bh. This is an explicit coverage/throughput tradeoff alongside a worse trajectory, not simply “less service.”
+
+The four Q/G static-positive/native-negative cases are **028, 036, 040 and 048**. Conversely, Q beats P in native J despite a lower static endpoint in **001, 025, 043, 057 and 063**. The mean difference between the static and native Q−G increments is .00298911: roughly 78% of the static advantage disappears in complete execution. This is an exact descriptive decomposition, not an identified causal mediation effect.
+
+I also resolved the consequential world-000 numerical ambiguity. Prefix rewards for ranks 1 and 2 differ by one floating-point ulp, so the frozen exact rule selects rank 2. Reconstructing both complete branches from saved accepted moves and applying the original NumPy matching produced:
+
+- the same final static reward, **.4704826638078135**;
+- the same assigned float64 target bytes, SHA256 **`58a3674cf868b446616eca920b256bce224178593bf59818233bf36dce3116c5`**;
+- different unassigned ordering and matching permutations.
+
+Changing only that tie decision would therefore select the same physical command. The ulp observation does not explain this loss or supply a useful repair.
+
+These results strengthen “early search progress contains useful information about eventual static quality.” They weaken “that information, used by this rule, reliably improves complete native service.” They do not identify B02’s failure solely as an objective mismatch: B02 also failed at fresh static ranking. Q has an active intervention with favorable and adverse consequences, rather than a nonactivated mechanism whose effect was never tested.
+
+The cost accounting is coherent with that reading. Q pays **79.140625 additional calls and 44.672717 ms additional cold selection time per world** over G—about 5.95% and 5.27%. Against P it saves 591.328125 calls and .322100580 seconds, about 29.54% and 26.54%.
+
+The operation completed 192 independent selections, 185 reused episode reads, seven new H500 episodes and two full executor audits: **4,500 native steps, 307,058 static attempts/completions, zero fits and zero GPU work**. The final progress CPU value is **266.887543 seconds**; the earlier summary snapshot is 266.884339 seconds. Reader time is 31.316530 seconds. Peak scoped disk was 2,039,803,904 bytes. The 792 current artifacts and 648 used prior artifacts were verified; all 994,633 recorded checks passed, with maximum absolute discrepancy 9.094947e−13.
+
+Those checks establish the declared reconstruction, not independent validation of the physical model. Aliases inherit B02’s physics checks; new state checks use the frozen radio implementation. No contemporaneous full-episode CPU measurement exists for reused flights. Cold selection timing includes identity reset and differs from B02’s timing scope. Support work, source integration and historical labels are real additional costs; unmetered support is not zero.
+
+The strongest constructive continuation initially appeared to be native-consequence prediction. The trajectories clearly show why endpoint score and arrival time can miss relevant behavior. However, two ordinary alternatives materially change the investment judgment.
+
+First, this host has fixed users, deterministic straight-line motion, no shadowing, and a known radio law. A complete model-based trajectory evaluator can integrate until the last arrival and then account analytically for holding. B03 mean arrival is about 87–89 steps; the geometric maximum is approximately 236 steps. Charging 500 repeated stationary evaluations per candidate would manufacture an amortization advantage. A full trajectory evaluator is a serious deployable competitor whose actual computation must be measured.
+
+Second, returning to B01’s inexpensive eight-layout menu avoids purchasing full P search, but its relevant baseline must optimize the new target **J**. B01’s published `static` comparator optimized **C_bh**. Comparing a new J learner against that old selector would mix an objective correction with learning.
+
+I therefore read the original B01 candidate labels and stored static values directly. Using only saved terminal `contract_reward`, I selected its maximum with lower construction-slot ties and compared the selected native J with the maximum native J among the eight fully executed alternatives. This was retrospective arithmetic over existing records, with zero new evaluations:
+
+| B01 block | Training mean J regret | Test mean J regret | Test worlds with regret |
+|---|---:|---:|---:|
+| 1 | .0007426865 | .0006608213 | 15/128 |
+| 2 | .0011329160 | .0005675039 | 11/128 |
+| 3 | .0007454997 | .0006822497 | 20/128 |
+
+Across the 384 former test worlds, mean regret is **.0006368583**. The corresponding test means are:
+
+| Block | Terminal-J selection | Exact menu-J maximum |
+|---|---:|---:|
+| 1 | .4715678876 | .4722287089 |
+| 2 | .4668261616 | .4673936655 |
+| 3 | .4679906282 | .4686728779 |
+
+There is local opportunity: 46 worlds have positive regret, with maximum **.0208175131** at 106110015. Those cases should be retained. Nevertheless, eight ordinary terminal evaluations already capture almost all observed menu J. The same conclusion holds in the training records, so it is not resting on one favorable former test subset.
+
+This is not a requirement to prove headroom before exploration. The counterfactuals were already paid and are directly relevant to the proposed comparator. They show that sparse trajectory sampling plus a residual learner would add calls, implementation and fitting effort to recover a small known mean margin. They also show why merely finding all 6,144 training labels intact does not justify a fit.
+
+The strongest favorable case remains legitimate: experience might correct the few discontinuous service/path errors, with useful local effects and fresh-world transfer. A single bounded study could demonstrate such a conditional capability. But this particular proposal offers little computational saving over eight terminal calls, while a sparse ordinary path scorer may already consume its remaining quality opportunity. A learned residual beating the old C selector would not establish the desired learning increment.
+
+If this proposal were nevertheless pursued, its controls would need terminal-J selection, the same sparse trajectory estimator, and a **choice-capable** same-data affine comparator. A globally monotone scalar calibration of one score preserves its ranking and is merely an alias, not a strong learning baseline. The affine solution is also a fitted asset and belongs in the fit count. Lower pooled prediction error, or better training ranking, would remain secondary to fresh native choices and full cost.
+
+My recommendation is consequently:
+
+1. **Retain** G/P as ordinary quality–cost references and Q as an informative fixed-prefix reference, with every positive/adverse native case and its limited exposure claim.
+2. **Stop** further Q budget/prefix/tie sweeps, unchanged replication, and rescue of B02’s static-gain ridge.
+3. **Decline** the unchanged eight-layout quadrature/residual purchase as the next native-quality investment. Preserve the new terminal-J comparator arithmetic in the existing notebook.
+4. **Keep the broader assistance question open**, with the next substantive interface focused on improving the complete joint program available to execute—its construction or path—not increasingly elaborate scoring of this nearly exhausted finite menu.
+
+The last point is a direction for allocation, not an unpriced launch recommendation. A useful next comparison would ask whether an assistant’s proposed joint-program improvement adds native value beyond a competent ordinary trajectory-aware improvement procedure at the same complete online cost, retaining P as the established reference. An ordinary improvement alone would support better planning; an additional matched assistant increment would support experience use. Better endpoint scores without native improvement, or gains purchased solely by more search, would not answer that question.
+
+That comparison still needs an actual proposal interface, lawful inputs, training-data source, ordinary procedure and ownership binding. It must not silently resume paused planner-distillation work or duplicate DM2’s selected frozen-student collaboration. Even a three-program, 64-world H500 panel already costs **96,000 main native steps before audits, training-label acquisition and fits**. Those unresolved costs are a reason not to pretend that this review has selected a complete next study.
+
+The immediate justified boundary is **zero additional fits, queries or native episodes for the current selectors**. The complete B03 evidence and the corrected ordinary baseline now give Root a materially better basis for choosing a different capability investment.
+
+**MATERIAL_DISSENT: yes — against investing now in sparse-path quadrature plus a learned residual on the unchanged B01 menu as the next native-quality study. The direct paid evidence shows only .0006369 mean remaining J opportunity over an eight-query ordinary comparator. There is no dissent about retaining B03’s conditional capability or keeping the broader learning question open.**
+<!-- END ORIGINAL B03 RESULT CRITIC -->
+
+### DM response, explanation and continuing ownership
+
+I accept the complete result diagnosis and the adverse investment recommendation.
+End this exact prefix-selector purchase, with no budget/tie sweep, additional fit
+or automatic panel enlargement. Q remains a useful ordinary fixed-prefix reference:
+it changed21 physical programs, improved static quality on this panel and produced
+substantial positive as well as adverse complete outcomes. Its native increment
+over G is unresolved; P retains higher mean J at greater cost. The missing seven
+outcomes and031's concentrated positive contribution belong in the full reading,
+not a selected favorable subset. Neither endpoint improvement nor shorter arrival
+alone characterizes path service. B02's fresh static ordering failure still stands
+separately; objective mismatch does not retrospectively explain it away.
+
+I also accept the critic's material dissent against buying the proposed sparse-path
+quadrature plus learned J residual on B01's unchanged eight-layout menu. That idea
+was considered, never selected or executed. Terminal-J selection corrects the old
+C-based ordinary comparator and leaves mean native-J menu regret only.0006368583
+on all384 former test worlds. The46 local nonzero cases and maximum.0208175131
+remain meaningful adverse limits on any equivalence claim. The complete answer
+contains both training and former-test arithmetic. This is a retrospective,
+source-bound observation from paid labels, not fresh validation or a new experiment.
+I rely on the critic's independent arithmetic and retained original candidate
+records; I do not label it a second DM computation of every label.
+
+The remaining question concerns useful experience-driven decision capability,
+not whether the old selectors can be rescued. A learning comparison may be worth
+buying to understand finite-data generalization even if an ordinary teacher is
+strong. A construction, proposal or optimization interface could also change the
+available program, but it needs an actual lawful action space, teacher and complete
+price before selection. The immediate owner/Root-requested source work below
+considers a larger raw-layout teaching interface and nested data exposure. It is
+not a relaunch of Claude's paused distillation work or DM2's selected frozen-student
+service-feedback collaboration. Root has received the full dissent and this
+acceptance through native communication; no unresolved disagreement is being
+self-cleared. Long-term DM responsibility stays exploring, with no new result
+producer or fit selected at this boundary.
+
+The critic's2039803904B is the last sampled scoped disk peak. The subsequent
+explicit pre-disposal measurement2043904000B is also retained above; neither is
+an exact continuous maximum. Other original CPU/reader/static/native counters and
+support limitations remain unchanged. Local scratch/source retirement follows
+publication of this complete advice; remote disposal already reclaimed1794961408B.
+
+<a id="continued-interface-source-audit"></a>
+### Source and asset facts for the next investment — no selected experiment
+
+Root's owner-steered request now prioritizes two possible learning questions:
+nested1k/4k/16k static-teacher worlds for one student, and a larger raw-candidate
+interface. The temporary Oracle synthesizes these facts for Root; it is not a
+standing approval dependency. Current relevant shared background is topic4
+`learning-representation-finite-data` at main2015e86ed, including B01 N's strong
+training fit/weak test, L-F's weaker fit, DM2's conditional R generalization and
+B02's distinction between pooled prediction and within-world choice. Those results
+motivate separate train/dev decision-regret readings. They do not identify a common
+failure cause or make ordinary superiority a universal admission condition.
+
+Read-only source binding (unchanged upstream, also pinned by B03):
+
+- `experiments/candidates/coupled_host_joint_skills_stage1/planner.py`, SHA256
+  `5c23f4c8a25df55052fa6eb4bb0da65fcf0f079560789b8abd7db416222a0aa6`:
+  `_plain_candidate`, `_subset_candidates`, `_dedupe`, `build_candidates`,
+  `search_placement`, `assign_targets` and `closed_loop_execute`.
+- The same directory's `menus.py`, SHA256
+  `15b818e0250141b45a47480d5acaa6b0f217c8ce8fe8c35ef6a7abb765102886`:
+  `compute_menu` runs flat search, then relay search with the flat result added,
+  then pays one final static call for routing metadata and assigns six targets.
+- `host.py`, SHA256
+  `92b75c0317009380108bd45429892e49ca857b901ae1adbcd5bfe483d89ef469`:
+  static reward is J=.5(C_bh+frontend_with_path/D); evaluation mutates layout and
+  routing state but does not advance the episode counter. Reset before execution
+  is essential. Calling it is a paid result query despite not advancing native time.
+
+Every raw candidate is an entire[6,3] joint placement, not one site. Raw generation
+uses k-means and plain/relay-subset/flat-subset geometry, no reward calls. Its source
+order and first-kept six-decimal coordinate deduplication are not a canonical
+permutation quotient. All raw z coordinates are100m. The64 old gate worlds contain
+142–203 raw layouts after excluding the separately searched flat incumbent; the
+source combinatorial upper bound is3+2((2^4−1)+(2^5−1)+(2^6−1))=221 before relay
+resource filtering/deduplication. These are facts about this fixed generator,
+not a guarantee of every future world's observed count.
+
+The full planner's continuous coordinate descent can leave the raw pool, including
+changing height to50/150m. Its searched flat incumbent is another paid extra.
+A raw-layout pointer cannot in general reproduce the complete planner winner.
+The minimal legal raw-menu decoder chooses one entire layout and then invokes the
+original min-makespan assignment/executor. Selecting six sites from a pooled site
+universe creates a different combinatorial action space, with new feasibility,
+relay compatibility, duplicate-site and teacher-representability questions. It
+cannot silently inherit the original raw-winner label or planner's guarantees.
+
+Two teacher definitions must remain distinct:
+
+1. **Raw-menu static winner:** generate M legal layouts, pay M relay-enabled
+   static-J calls, choose maximum with frozen ties. No flat search, descent or H500
+   label is needed. A student can receive all legal geometry, but the actual static
+   labels must stay offline if the online objective is to avoid their evaluation.
+   Supplying all true static scores at deployment reduces the task to a cheap argmax.
+2. **Full `compute_menu` teacher:** both searches plus final metadata, at most6001
+   static calls/world. Its output may be outside the raw candidate set. A continuous
+   output or a declared candidate augmentation changes representation and price.
+   Do not call this teacher a raw classifier or reuse its searched output for free.
+
+The already-paid64-world source arithmetic found raw maximum static J below full
+planner by about.05549/.06041 on dev/holdout. This is candidate coverage loss before
+learning, not student error or a native H500 ceiling. A raw-menu learner should have
+regret relative to its reachable raw teacher, while the full planner remains a
+separate quality/cost reference. B01 learned full-episode C_bh and its original static
+rule selected endpoint C_bh. Static J, static C_bh, H500 mean J and H500 mean C_bh
+are four different targets; correcting them is not a learned effect.
+
+B03 supplies a measured instrumented cost anchor: P mean2001.59375 calls/world,
+1.23007765625 child CPU-s and1.213871591724 cold wall-s, including common reset,
+imports, candidate construction, matching and records. This is not an isolated
+per-static-call benchmark. At that observed complete-teacher cost,16000 worlds
+alone forecast5.4670118CPUh and32025500 calls, before reader, development evaluation,
+fits or support. The hard source call bound is96016000. Thus3–5CPUh cannot be
+accepted as an established all-in full-teacher price. A single nested bank costs
+16000 worlds rather than21000; it must not be regenerated separately per prefix.
+
+For raw labels the hard count is16000×221=3536000 calls; typical142–203 counts
+would give2.272–3.248million, with actual future counts unknown. Applying the P
+amortized CPU/call only as a rough planning anchor gives about.60CPUh at that upper
+count. It neither separately measures the builder nor establishes runtime for a
+compact label writer. A full independent replay doubles the relevant generation
+work; a cheaper reader must state its cache/source/numerical trust boundary.
+Fit time, all dev scoring, cold deployment, H500 evaluation and engineering/support
+must be separately priced in the actual contract. There were zero new generator,
+static/native/model calls or fits in this audit.
+
+A fixed-student nested learning curve can measure training and common fresh-dev
+static decision regret across data sizes, with ties/margins and numerical failures
+retained. It can test whether performance changes under a declared data/optimization
+schedule. Equal updates give different per-example exposure as N changes; equal
+epochs increase compute. Neither is a pure causal data/compute decomposition.
+Two initializations×three sizes are six fitted assets on one shared bank, not six
+independent data replications. Three data sizes do not by themselves establish a
+scaling law. A flat curve does not identify representation failure; a falling curve
+does not uniquely prove that past failures were caused by too little compute.
+Native consequences remain a separate, fully priced fixed endpoint comparison if
+selected; static labels alone cannot supply native superiority.
+
+Additional saved-asset feasibility arithmetic, with zero result queries:
+
+- The retained B01 native root is
+  `hmasd-wsl-node:/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b01_native_a01`,
+  source61a2dfa9cde0178d482d0a079c5629c3bcb7789e. All3×256 training worlds retain
+  6144 complete candidate J labels (2048/block), H500, initial positions, assigned
+  targets/permutations and features/provenance identities. Ordered raw training
+  labels SHA256 by block are
+  `e7fa9b8e388ea193bb0e22a7be9b04ca9aa65bee473fefb4b42167199d755212`,
+  `256703fc6ce808d269a75bd9fb62f3447028489e520c9c19163859063278fb87`,
+  `98de640087c9dd6c8956225f72aa60dd786d0920af632cb59b571f13400e12d9`.
+  This read cost.477260049CPU-s; intact data are not a reason to buy a weak fit.
+- Reconstructing all192 B02 final branch/fallback endpoints from saved moves and
+  the frozen matching yields179 unique assigned physical endpoints. Fifty-one
+  unique physical endpoints remain without an executed G/L/P/Q native program
+  (52 rank rows;57 rows under the stricter unassigned/permutation alias rule).
+  This source arithmetic cost.989813064CPU-s. It rules out treating all three
+  post-search native outcomes as free existing labels. Such an interface also pays
+  complete P search before selection. It is considered, not selected.
+
+A bounded public-primary metadata lookup also located Google Research OptFormer
+(`https://github.com/google-research/optformer`) as an optimization-history proposal
+analogy. No checkpoint, dataset, package or model was downloaded/loaded; no asset
+compatibility, license for weights, UAV transfer or cost advantage is established.
+Large-model proposal cost faces a strong adverse prior against this inexpensive
+static oracle. This lookup creates no parallel model-screening programme or fit.
