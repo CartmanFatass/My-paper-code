@@ -7820,3 +7820,32 @@ One local configured scientific-Python invocation passed18 tests (12 scripted co
 Measured wrapper-plus-reaped-pytest CPU was7.419366337s, elapsed8.065217057s (pytest7.168s); reported child peak354836KiB and wrapper peak638276KiB are separate process scopes, not a summed simultaneous peak. The planned mock work is inside the stated finite envelope. Exact transcript, XML and raw timing receipt now have one canonical compact copy in [checks_a01](../../../../runs/uav_fleet_transmission/b10_service_assignment_checks_a01/); the temporary copies were moved, not claimed as freed disk. The finalized [checks.json](../../../../runs/uav_fleet_transmission/b10_service_assignment_checks_a01/checks.json) binds the exact code/test hashes and all measured attempt cost for both admitted phases. Source compilation/AST/hashing support was not fully metered and remains explicitly unmeasured, not zero.
 
 Independent engineering review has reconstructed the source/callers and found no material executable defect so far; its remaining closure is a read-only check of this finalized input wrapper. Native integration and REFERENCE/C equivalence remain unexecuted and will use exactly the selected8 full engineering missions after the complete original review is retained and actual-node admission succeeds. No scientific panel or native pilot has started.
+
+
+<a id="b10-independent-engineering-acceptance"></a>
+#### B10 independent engineering original and DM acceptance — 2026-10-01 PDT
+
+Registered read-only `/root/dm_s7_prediction_use/b10_engineering_review`, UUID`01a0fa29-505d-7340-ab35-b55b5db2ba9f`, reviewed the actual implementation at388f646478d39cab98bd533cf2034b8657b759e5. Exact original below is mechanically extracted from `/mnt/c/Users/fires/.codex/sessions/2026/10/01/rollout-2026-10-01T18-10-06-01a0fa29-505d-7340-ab35-b55b5db2ba9f.jsonl`, `event_msg/task_complete` line184, timestamp`2026-10-02T01:16:12.790Z`, 1641UTF-8 bytes, SHA256`4f364214954469f5f27f3bdaadb2b2b5b17a84eb7c05a2593c3d505739f73520`. This engineering review is distinct from the earlier scientific selection review.
+
+<!-- BEGIN B10 ORIGINAL ENGINEERING REVIEW -->
+**No material engineering finding remains** for commit `388f646478d39cab98bd533cf2034b8657b759e5`. No repair or additional reproduction is requested.
+
+Reviewed all 11 new implementation files, both tests, and reachable inherited callers. Source inspection supports:
+
+- Actual Hungarian provenance, service-only swaps, current-only scoring rows, literal `>` ranking, and commitment before one inherited action.
+- Dynamic NaN xy holds with the retained F/limp/docking order.
+- Bounded failed-prefix replay without executing missing nominal/RF suffixes.
+- Complete-reader checks for assignment menus, native reductions, individual gaps/censoring, source identity, and C/REFERENCE equality excluding audit-only fields.
+- Accumulated CPU accounting, checkpoint preservation, stopped dispatch, and no automatic retry.
+
+Read the existing test transcript, XML, and timing receipt: **18 passed**, 7.419366337 measured CPU seconds; zero actual private-model/native/RF calls. These are DM-run results, not reviewer reruns.
+
+Final [checks.json](/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b10_service_assignment_checks_a01/checks.json) hash verified:
+`49bc5a7c3729fdee26710aae8cb5578d3aa5b007198fadef10cbb07d4e33be72`.
+
+Residual limits: native C/REFERENCE equality and full capture/reader integration remain unexecuted, reserved for the declared eight engineering missions. Linux CPU snapshots disclose their non-atomic scope. Reviewer work comprised read-only source/evidence inspection and hashing; no edits, launches, tests, or controller/model/RNG probes. Static review CPU was not separately metered. Technical acceptance remains with the DM.
+<!-- END B10 ORIGINAL ENGINEERING REVIEW -->
+
+**DM acceptance.** I read the implementation diff/source, the full18-test output and this original engineering verdict. I accept the bounded implementation for its selected full native engineering audit; no repair or extra diagnostic is required by the review. The original controller/state source remains frozen, actual solver provenance and committed-state carry are explicit, and static review supplies no native equivalence or outcome evidence. The reviewer's source/caller/evidence/hash work adds unmeasured static support, not a fabricated zero or extra model call. Checks wrapper49bc5a7c... binds all11 new implementation files and2 tests; final source bytes remain those reviewed at388f64647.
+
+Next is admitted `b10_service_assignment_engineering_a01`, exactly29910091/29910092×REFERENCE/C/H_A/F_A at native max-H3000 with the one full reader. Only a complete verified audit with same-source C equivalence enables the already-selected `b10_service_assignment_a01`32-world panel; that source/correctness dependency is not a scientific activation gate or a new Root approval. The CPU driver carries known finite-check cost then the complete engineering chain into the scientific phase, retaining the declared12CPUh checkpoint/stop semantics. Accepted operation identities will stay in their native run records and this notebook; no duplicate or old producer is revived.
