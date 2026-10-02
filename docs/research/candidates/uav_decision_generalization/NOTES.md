@@ -882,3 +882,88 @@ the scientific reading. Root offered reuse of its original independent
 `/root/next_study_review` for actual-result diagnosis after full evidence arrives;
 no duplicate result Reviewer is assigned here. My own complete reading, costs,
 publication and cleanup continue independently of that advice delivery.
+
+<a id="b01-complete-reading"></a>
+### B01 complete reading — retained package gain with uncertainty and adverse tails
+
+The admitted reader terminated consistently with exit0 at2026-10-02T02:04:18Z.
+Both recorded native processes are absent. Generation6's original READY was
+drained/consumed in generation7; observation is now stopped with all three jobs
+terminal and no scientific work changed. Every collected terminal file and all
+three compact block records match the canonical remote SHA256. The reader
+[summary](../../../../runs/uav_decision_generalization/b01_read_a01/summary.json)
+SHA256 is`a15e1ba03797f452fa5ad588b5c4091388aafc040e90fbd9e4ff0f28ed50cc7a`;
+scientific manifest SHA256 is`58d9414c1224f80875fd776b4ac491eeb32704109f0dfaf2f4940f99d52f9376`.
+Canonical full reader outputs remain at
+`wsl_4070:/home/wu/projects/HMASD/runs/uav_decision_generalization/b01_read_a01/`:
+`raw/blocks/b{1,2,3}.json` contains all384paired world readings; `native/` contains
+all reconstructed episode statistics and `learning/` the endpoint/update reading.
+The original fresh native traces and learned weights remain at the two locator-bound
+canonical roots above. No original B01 test-world forward was added.
+
+The complete reader reconstructed3,456unique H500 episodes,16audit aliases,
+3,072update records and4,992CPU scorer contexts; together with saved GPU endpoints
+this is exactly9,984scorer contexts. It made0native/static queries and0updates.
+All4,992CPU/GPU choices agree. The frozen numerical tolerance flags75contexts
+(44A,31N,0R; all at final endpoints); every flag stays in the original rows and
+summary. Tolerances were not widened and GPU choices remain authoritative. Full
+update-chain checking is not an optimizer replay, and native static query values
+remain trusted at the frozen source digests.
+
+The primary fresh complete-coverage difference R−A is positive in all three
+independent learning/data blocks, with a weak third block:
+
+| Quantity | Block1 | Block2 | Block3 |
+|---|---:|---:|---:|
+| R−A complete Cbar_bh | +.041574688 | +.035114375 | +.006254063 |
+| R−N | +.045413438 | +.026258750 | +.013903750 |
+| R−training-selected fixed | +.020143125 | +.026336250 | +.001640000 |
+| R−static | −.063838125 | −.071319063 | −.089985625 |
+| R−full planner | −.128539688 | −.140618438 | −.170101875 |
+| A−N | +.003838750 | −.008855625 | +.007649688 |
+| A final train regret | .000476250 | .000312500 | .000607188 |
+| A final fresh regret | .106790938 | .106808437 | .097550625 |
+| R final train regret | .045676406 | .053486250 | .057534844 |
+| R final fresh regret | .065216250 | .071694063 | .091296563 |
+| Frozen N final fresh regret | .110629688 | .097952812 | .105200313 |
+
+The mean of the three primary effects is+.027647708, with the predeclared
+descriptive t95 interval[−.019071253,+.074366670] (df2). All-three-positive is an
+observed sign pattern, not a precise estimate of repeat-training performance.
+The128world intervals condition on each fit;384worlds are not384learning
+replications. These fresh worlds use the same generator/task family, not a new
+task law or changed user/UAV count. A−N has mixed signs and remains unresolved;
+it is neither evidence that distances alone repair the old gap nor an equivalence.
+
+The richer native contract is mixed. R−A reward means are
++.019856540/+.023171619/−.000553428; frontend-capacity differences are
+−2.226609/+13.430475/−8.804153Mbps. R has more mean relays in every block.
+R−A mean zero-service steps are−6.796875/−3.617188/+1.109375; longest-zero-run
+differences−6.093750/−3.039063/+1.632813. Against N, block3 adds8.375mean zero
+steps and7.789063mean longest-zero-run steps despite its positive mean coverage
+effect; R's maximum longest-zero-run there is435steps versus45forN. The mean
+within-episode p10 service difference R−N in block3 is−.002343750. These are
+service-continuity adverses; no battery/safety claim follows from these traces.
+
+My current reading is a conditional finite-data package capability: the fixed R
+package converts the same paid training exposure into better fresh mean decisions
+than A/N/fixed on these three blocks, while A attains nearly exact training fit
+without improving fresh quality over N consistently. R's weaker training fit but
+smaller fresh regret is compatible with a useful inductive/regularizing package;
+it does not identify geometry, permutation invariance, capacity or optimization as
+the cause. The point prediction earns retention of the capability/evidence, not
+a deployment claim, a reliable magnitude claim or a default extra fit. Strong
+ordinary static/travel and full planning remain substantially better, and block3
+prevents presenting the mean gain as uniform improvement of the complete contract.
+Independent scientific diagnosis and final continuation disposition follow below.
+
+The reader used512.657s wall,515.301041s process/finished-child CPU,0GPU seconds,
+and685,846,528bytes peak RSS. Cumulative measured engineering+scientific CPU is
+2,932.017230s (.814449CPUh), GPU reserved-window wall133.531748s (.037092GPUh):
+6fits/3,072updates/98,304training contexts,1,736,000native steps,786,045static
+queries,9,984endpoint+reader contexts,0new training labels/LLM forwards/downloads.
+Reader final storage snapshot is12,574,720new allocated bytes before later terminal
+metadata. Cumulative/source storage is reported separately at final measured cleanup.
+The first two compact-summary arithmetic reads after collection used.002311164s
+and.002352691s process CPU,0model/native calls; source/transport/human reading and
+helper support time remain unmetered, not zero.
