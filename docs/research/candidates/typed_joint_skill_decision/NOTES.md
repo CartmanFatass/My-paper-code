@@ -5601,3 +5601,74 @@ No edits, tests, launches or resubmission were performed. This provides no evide
 </details>
 
 DM response: accept the P1 diagnosis. I also missed the actual static scanner contract during source acceptance; earlier tests exercised mocked admission/order, not this concrete native interface. The now demonstrated quoting fix is narrower than complete launch compatibility. No scientific source is being edited after the accepted request. The full actual request, generated wrapper, log and reconciliation are preserved under `b07_consumer_a02/`; the original A01 failure stays unchanged. Applicable independent scientific disposition and measured net cleanup follow before this stopped purchase’s result boundary.
+
+<a id="b07-consumer-a02-independent-disposition"></a>
+### Independent disposition of consumer A02 refusal — 2026-10-02 UTC
+
+The independent Scientific Reviewer reused its complete prior bank/comparison review and reconstructed the new original request, wrapper/log/exit/reconciliation, pinned source/input and actual scanner before reading the engineering diagnosis. This is a focused response to the materially changed integration-confidence and continuation decision, not another physical bank read or an additional scientific execution. Full original native answer follows; its byte identity is preserved in `b07_consumer_a02/scientific-review.json`.
+
+<details><summary>Complete independent scientific disposition</summary>
+
+I recommend **closing this purchase as stopped, retaining the validated A02 bank, and revising the consumer’s admission declaration and its verification before offering the unchanged remaining consumer for a new Root selection**. I still favor that bounded remaining comparison, but confidence in integration readiness has declined. No repair or retry is authorized by the stopped selection.
+
+The new evidence establishes two distinct facts. The corrected submission reached the native launcher and preserved a real terminal record: **exit4, status `failed`, after17 seconds**. The earlier shell-grouping and missing-exit defects did not recur. The launcher then rejected the consumer before admission or execution.
+
+The rejection is deterministic. [The pinned consumer](/home/fires/hmasd-wsl/experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/run.py:281) calls:
+
+`require_admission(__file__, direction=c.DIRECTION)`
+
+Although `c.DIRECTION` has the correct string value, [the native scanner](/home/fires/hmasd-wsl/scripts/hmasd_launch.py:646) counts only calls whose direction argument is an `ast.Constant` containing that literal string. The actual argument is an `ast.Attribute`; consequently, it counts zero qualifying calls and raises precisely the recorded refusal.
+
+I verified that the inspected consumer matches its input pin, SHA256 `625aa9d0…bbb527`. The published, remote canonical and retained snapshot launcher bytes also match, SHA256 `6a22fef7…ab23f9`. This is an incompatibility in the submitted source/interface contract, rather than evidence of changed source during transport. The engineering diagnosis agrees with that reconstruction.
+
+The source route prepares the snapshot before checking this declaration. Therefore, absence of a scientific output does **not** mean absence of preparation effects. The reconciliation records an unclaimed **1,829,666,816-byte snapshot**, alongside no matching claim, consumer process or output. Its supported cleanup belongs to closure; the successful bank and necessary evidence remain retained.
+
+Zero consumer fits, forwards, physical queries and native steps follow from the refusal path and reconciliation. They are not measured runner counters. Unlike the previous supervisor failure, the launcher’s exit code is now known. Neither outcome diagnoses the old SIGSEGV or tests CUDA.
+
+This chiefly changes engineering confidence and cost, but those changes matter to investment. A previously reviewed consumer contains another incompatibility with an actual launch requirement. Existing checks of call ordering and mocked admission did not establish acceptance by the real scanner. Successful verification of the submission renderer remains useful, but it covered that boundary only.
+
+The consequential objection is therefore **repeatedly treating a corrected local boundary as sufficient evidence of readiness for the complete consumer**. Fixing this declaration will remove this refusal; it will not establish that every subsequent integration or runtime requirement works. These distinct failures do not provide a defensible numerical failure-rate estimate, nor identify a common model limitation. They do justify lower confidence in completion forecasts and fuller recognition of support costs.
+
+The scientific comparison itself remains unchanged:
+
+- A02 retains its completed prospective fixed-version validation. Original B05 exit2 and the six old-to-fixed winner differences remain correctly recorded.
+- No new observation bears on scorer representation, finite learnability, fresh-world generalization or native benefit.
+- Strong ordinary alternatives—Raw8J, RawJ and P—remain essential comparators. Earlier conditional R capability remains a constructive reason to investigate, with its native and service-continuity adverses intact.
+- The fixed-optimization comparison still mixes world coverage with repetition and sampled-negative exposure. Two streams on one nested bank remain exploratory repetitions.
+
+I would not pivot the scientific question or discard the bank because of this refusal. Conversely, an unanswered question and prior expenditure do not oblige another purchase.
+
+My reason for still favoring the remaining consumer is prospective: it can distinguish a useful broader-world approximation from finite-fitting limitations and ordinary-program sufficiency, while measuring complete native and cold costs. The known new defect has a narrow correction that does not change that comparison. Repeated support burdens weaken this case, and Root may reasonably stop on opportunity cost; the available evidence does not establish that this study outranks other questions.
+
+For a separately selected successor, the correction should be limited to the consumer’s literal direction declaration and corresponding source/input pins. Preserve the native scanner and frozen scientific semantics. Verification should exercise the **existing effect-free scanner on the corrected entry**, rather than substitute another mocked admission function. That checks the discovered incompatibility; it is neither a health pilot nor proof of downstream execution. No new scientific review round is needed solely to judge that syntactic correction if the comparison remains unchanged.
+
+The remaining scientific purchase is still the complete consumer: six fits/24,576 updates,≤1,383,760 static calls,1,152 cold deployments plus16 audits, and584,000 native steps. Preserve the eight aggregate CPU-hour, four GPU-child-hour and sixteen wall-hour stops, the6GiB normal storage scope, exact information/choice boundaries and first-failure rule. No producer or full bank reconstruction should be repeated.
+
+The recorded preparation subtotal is **81.747407335 CPU-seconds**, with another0.620783547 CPU-seconds for binding and later submission, snapshot, diagnosis and cleanup support additional. These small metered CPU totals are not a complete account of the implementation, review, transport and coordination burden. Prior B04/B05/A02 scientific costs remain separately paid. Real consumer throughput, memory/CUDA feasibility, the original SIGSEGV cause and external abnormal-dump exposure remain unresolved.
+
+The next scientific outcomes would still change action:
+
+- Coherent fresh gains would support the conditional allocation benefit; native service and complete cost would determine usefulness.
+- Similar good performance would favor the smaller allocation.
+- Weak fitting, divergent streams or poor fresh behavior would constrain this finite package without uniquely identifying a repair.
+- Static gains accompanied by adverse native service or cost would limit the deployment claim.
+- Another technical failure would leave another incomplete observation and its actual cost, without an automatic replacement.
+
+My new check was confined to the submitted request, original wrapper/log/terminal and reconciliation records, pinned consumer/input, actual scanner and preparation ledger, followed by the engineering diagnosis. I reused the earlier bank and scientific reading; I did not reconstruct bank data or execute tests, the scanner, admission, physics, models or native steps. No edits or launch occurred. Review support remains incompletely metered.
+
+**MATERIAL_DISSENT: no.** The refusal diagnosis and enforced stop are supported. I recommend revising admission verification and retaining the unchanged remaining consumer as a separately selectable investment, with reduced readiness confidence and cumulative costs explicit—not an automatic rescue or a negative learning verdict.
+
+</details>
+
+DM response: accepted, MATERIAL_DISSENT:no. The actual caller fix is established; complete consumer readiness is weaker than forecast because another concrete native interface defect escaped source acceptance and mocked checks. That changes engineering confidence and cumulative investment cost, without new evidence about task opportunity, representation, finite learnability, generalization or complete native usefulness. Preserve the validated A02 bank, original B05 exit2/six old winner differences, competent Raw8J/RawJ/P and earlier conditional R capability with its adverses. The observed defects do not justify an invented numerical failure rate or a model diagnosis. The small known CPU subtotal omits real implementation/review/coordination burden and unknown support; no cost is erased by zero fits.
+
+I retain the unchanged complete consumer as a potentially useful separately selected comparison, with lower readiness confidence and a narrow proposed literal-declaration/source-pin revision checked through the existing effect-free native scanner. This predicts removal of this exact refusal, not runtime health or successful learning. No producer or whole-bank reconstruction is useful now. A reasoned Root opportunity-cost stop is also defensible; an open scientific question does not demand another purchase. The current purchase is closed and no next idea, source repair or retry is selected. Root owns the new allocation decision. No additional independent science round is needed merely to assess that unchanged syntactic proposal.
+
+<a id="b07-consumer-a02-final-cleanup"></a>
+### A02 refused-consumer closure and net cleanup — 2026-10-02 UTC
+
+The complete refusal and engineering diagnosis are published at `de1083f1da3bdb4b2688985ab54fcdb19e1ae58c`. The stopped supervisor is terminal with a known exit4; no native accepted handle, live consumer, model fit, unread result or running advice remains. The prior session observer remains stopped at generation6, with no new consumer job armed; registration for a nonexistent native operation was never invented.
+
+After exact-path no-open-file checks and supported GC eligibility, the unclaimed source snapshot `/home/wu/projects/HMASD/.git/hmasd-launch-sources/2dbbf46bcc6948778910848a98035834` was actually removed through maintained `hmasd_snapshot_gc.py --unclaimed-source --apply --sudo-process-scan`. The unused one-copy stage `/home/wu/hmasd-inputs/typed_joint_skill_decision-b07-a02` was then deleted. They removed2,167,926,784 allocated bytes gross; `b07_consumer_a02/cleanup.json` measures net after this closure’s compact records/review/notebook growth and records actual absence. This scoped net excludes Git object/admin metadata and unrelated concurrent writes, and is not a claim of whole-task disk reduction. There is no concrete cleanup blocker. No native consumer output or own CUDA scratch directory was created. Original supervisor metadata remains as the compact actual failed-request evidence.
+
+Canonical B05 bank, complete unique A02 vector/physical verification, original B04 evidence/core and all failures remain at their recorded locations. The small published caller regression, useful consumer/fixed-version implementation and tests are retained with the new P1 plainly recorded; they have not been represented as a successfully runnable complete consumer. No test scratch, redundant raw result copy or new archive/backup chain remains. Shared-background fixed-bank validity has not changed in this refusal, so no new general scientific insight or background edit is manufactured. This stopped purchase’s own RESEARCH standing will carry the new refusal, reduced integration confidence and actual re-entry condition.

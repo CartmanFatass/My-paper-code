@@ -1,0 +1,201 @@
+{
+  "schema": 1,
+  "status": "complete",
+  "snapshot_preview": {
+    "transport_returncode": 0,
+    "transport_stderr": "",
+    "preview": {
+      "script_sha256": "27528bcc5e84a9fb26a2c43c0bfc482051f71a503454bc6708bcfba2a533d2fc",
+      "argv": [
+        "/home/wu/.venvs/hmasd-gcc-31021/bin/python",
+        "-B",
+        "/home/wu/projects/HMASD/scripts/hmasd_snapshot_gc.py",
+        "--unclaimed-source",
+        "--snapshot",
+        "2dbbf46bcc6948778910848a98035834",
+        "--sudo-process-scan"
+      ],
+      "returncode": 0,
+      "stdout": "{\n  \"mode\": \"preview\",\n  \"snapshots\": [\n    {\n      \"durable_ref\": \"refs/remotes/origin/HEAD\",\n      \"eligible\": true,\n      \"kind\": \"unclaimed_source_only\",\n      \"path\": \"/home/wu/projects/HMASD/.git/hmasd-launch-sources/2dbbf46bcc6948778910848a98035834\",\n      \"sha\": \"fd23772cc16dde537a5c90ae4659a0ac5f20f572\",\n      \"snapshot\": \"2dbbf46bcc6948778910848a98035834\"\n    }\n  ]\n}\n",
+      "stderr": ""
+    },
+    "local_gc_sha256": "27528bcc5e84a9fb26a2c43c0bfc482051f71a503454bc6708bcfba2a533d2fc",
+    "local_parent_cpu_seconds": 0.001079982000000007,
+    "local_child_cpu_seconds": 0.063244,
+    "wall_seconds": 1.2530405090074055
+  },
+  "local_baseline_before_cleanup": {
+    "paths": [
+      "runs/typed_joint_skill_decision/b07_consumer_a02",
+      "docs/research/candidates/typed_joint_skill_decision/NOTES.md"
+    ],
+    "allocated_bytes": 552960
+  },
+  "observer_before_cleanup": {
+    "generation": 6,
+    "stopped": true,
+    "observer": null,
+    "wake": null
+  },
+  "unique_evidence_retained": [
+    "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b05_data_bank_a01",
+    "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02",
+    "original B04 records/core in their recorded canonical storage",
+    "all A01/A02 failed request/refusal records"
+  ],
+  "terminal_evidence_commit": "de1083f1da3bdb4b2688985ab54fcdb19e1ae58c",
+  "application": {
+    "transport_returncode": 0,
+    "transport_stderr": "",
+    "result": {
+      "at": "2026-10-02T23:41:45.879683+00:00",
+      "before_allocated_bytes": {
+        "/home/wu/projects/HMASD/.git/hmasd-launch-sources/2dbbf46bcc6948778910848a98035834": 1829666816,
+        "/home/wu/hmasd-inputs/typed_joint_skill_decision-b07-a02": 338259968
+      },
+      "stage_open_file_scan": {
+        "returncode": 1,
+        "stdout": "",
+        "stderr": ""
+      },
+      "supervisor_terminal": {
+        "task": "typed-b07-consumer-a02",
+        "status": "failed",
+        "exit_code": 4,
+        "pid": 1353167,
+        "uptime_seconds": 454,
+        "tmux_active": false
+      },
+      "gc": {
+        "argv": [
+          "/home/wu/.venvs/hmasd-gcc-31021/bin/python",
+          "-B",
+          "/home/wu/projects/HMASD/scripts/hmasd_snapshot_gc.py",
+          "--unclaimed-source",
+          "--apply",
+          "--snapshot",
+          "2dbbf46bcc6948778910848a98035834",
+          "--sudo-process-scan"
+        ],
+        "returncode": 0,
+        "stdout": "{\n  \"mode\": \"apply\",\n  \"snapshots\": [\n    {\n      \"durable_ref\": \"refs/remotes/origin/HEAD\",\n      \"eligible\": true,\n      \"kind\": \"unclaimed_source_only\",\n      \"path\": \"/home/wu/projects/HMASD/.git/hmasd-launch-sources/2dbbf46bcc6948778910848a98035834\",\n      \"removed\": true,\n      \"sha\": \"fd23772cc16dde537a5c90ae4659a0ac5f20f572\",\n      \"snapshot\": \"2dbbf46bcc6948778910848a98035834\"\n    }\n  ]\n}\n",
+        "stderr": ""
+      },
+      "status": "deleted",
+      "deleted_targets": [
+        "/home/wu/projects/HMASD/.git/hmasd-launch-sources/2dbbf46bcc6948778910848a98035834",
+        "/home/wu/hmasd-inputs/typed_joint_skill_decision-b07-a02"
+      ],
+      "after_allocated_bytes": {
+        "/home/wu/projects/HMASD/.git/hmasd-launch-sources/2dbbf46bcc6948778910848a98035834": 0,
+        "/home/wu/hmasd-inputs/typed_joint_skill_decision-b07-a02": 0
+      },
+      "normal_consumer_output_never_created": true,
+      "own_scratch_never_created": true,
+      "deletion_cpu_seconds": 0.018199168000000016,
+      "deletion_wall_seconds": 0.456737247062847
+    },
+    "local_parent_cpu_seconds": 0.0007050670000000037,
+    "local_child_cpu_seconds": 0.062712,
+    "wall_seconds": 1.4311911370023154
+  },
+  "verified_absence": {
+    "at": "2026-10-02T23:47:06.225727+00:00",
+    "snapshot_absent": true,
+    "snapshot_registration_absent": true,
+    "stage_absent": true,
+    "project_available_bytes": 833312595968,
+    "windows_available_bytes": 78013558784,
+    "no_new_native_output": true,
+    "no_own_scratch": true
+  },
+  "cleanup_blockers": [],
+  "retained_supervisor_metadata": "/home/wu/.agent-tasks/typed-b07-consumer-a02",
+  "scope": "Deleted snapshot and unused bank/proof stage allocated bytes less net growth of this local consumer closure directory and append-only direction NOTES since pre-deletion baseline. Excludes Git object/admin metadata and unrelated concurrent allocations; not whole-task disk growth.",
+  "later_metered_support": {
+    "scope": "Disjoint known support after frozen81.747407335CPU-s input subtotal; old B04/B05/A02 science separate. Includes no inferred CPU from17s supervisor wall.",
+    "components": [
+      {
+        "source": "runs/typed_joint_skill_decision/b07_source/consumer-a02-binding-check.json",
+        "field": "parent_cpu_seconds",
+        "cpu_seconds": 0.620783547
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_source/consumer-a02-launch-request.json",
+        "field": "request_preparation_cpu_seconds",
+        "cpu_seconds": 0.0015124739999999998
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_source/consumer-a02-node-before.json",
+        "field": "local_child_cpu_seconds",
+        "cpu_seconds": 0.064097
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_source/consumer-a02-node-before.json",
+        "field": "local_parent_cpu_seconds",
+        "cpu_seconds": 0.0013381910000000025
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a02/supervisor-submission.json",
+        "field": "local_parent_cpu_seconds",
+        "cpu_seconds": 0.0009027949999999979
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a02/supervisor-submission.json",
+        "field": "local_child_transport_cpu_seconds",
+        "cpu_seconds": 0.06376
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a02/native-refusal.json",
+        "field": "local_parent_cpu_seconds",
+        "cpu_seconds": 0.0008207589999999904
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a02/native-refusal.json",
+        "field": "local_child_transport_cpu_seconds",
+        "cpu_seconds": 0.062445
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a02/engineering-diagnosis.json",
+        "field": "preservation_cpu_seconds",
+        "cpu_seconds": 5.368899999999566e-05
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a02/scientific-review.json",
+        "field": "preservation_cpu_seconds",
+        "cpu_seconds": 9.516599999999376e-05
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a02/cleanup.json",
+        "field": "snapshot_preview/local_parent_cpu_seconds",
+        "cpu_seconds": 0.001079982000000007
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a02/cleanup.json",
+        "field": "snapshot_preview/local_child_cpu_seconds",
+        "cpu_seconds": 0.063244
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a02/cleanup.json",
+        "field": "application/result/deletion_cpu_seconds",
+        "cpu_seconds": 0.018199168000000016
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a02/cleanup.json",
+        "field": "application/local_parent_cpu_seconds",
+        "cpu_seconds": 0.0007050670000000037
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a02/cleanup.json",
+        "field": "application/local_child_cpu_seconds",
+        "cpu_seconds": 0.062712
+      }
+    ],
+    "known_cpu_seconds": 0.961748838,
+    "other_support": "unknown_not_zero; snapshot creation, underlying remote GC subprocess/services, initial submission reconciliation, advice/edits/publication/coordination and final absence/hash collection incompletely metered"
+  },
+  "gross_deleted_allocated_bytes": 2167926784,
+  "local_final_allocated_bytes": 585728,
+  "local_record_growth_allocated_bytes": 32768,
+  "net_reclaimed_allocated_bytes": 2167894016
+}
