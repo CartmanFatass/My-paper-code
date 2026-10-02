@@ -1742,3 +1742,70 @@ or shared-node setting changed. Compute SHA256 remains
 `2bb704e31e08a6a3489e80ea6851826740dfbf71461e0f7e70c4394694e65e6f`.
 This metadata/preparation is not result admission: new fits, static/native
 queries and launches remain0 at this checkpoint.
+
+
+<a id="b02-engineering-acceptance"></a>
+## 2026-10-01 — B02 source acceptance before the sole result operation
+
+The bounded Implementer completed the owned B02 runner, branch adapter, fixed
+ridge, raw executor and integrated reader. DM inspected the actual modules and
+accepted the resolved implementation after independent engineering review by
+`/root/dm_typed_joint_skill/b01_engineering_review`. Its final answer reports
+no remaining material finding and independently23pure/synthetic/mock tests
+passed in0.99s. Implementer final run separately passed23in0.97s; syntax and
+whitespace checks passed. These include a literal synthetic ridge-equation
+fixture, not a fit on the192historical rows. This support computation is
+separate from the still-zero result-bearing fit/native/static counters.
+
+Three concrete corrections were made before publication/admission: G/P omit
+learned-only feature/matching computation from online cost; independent matching
+uses the original float64 reduction/first-permutation tie semantics rather than
+a different scalar rounding path; every saved geometry and reset/RNG/agent/mask/
+step identity is now checked against the freshly constructed reference world,
+not merely against another saved record. The original source is unchanged.
+The reader also checks the entire static request/response stream, including
+rejected trials, against the original full-search reference; this adds retained
+evidence but no query beyond the declared reference search. Final numerical
+tolerances include1e−10float64 rtol/atol,1e−8m endpoint tolerance,1e−8relative
+normal-equation residual and exact discrete choice/identity checks.
+
+All7pinned upstream hashes match the input manifest. Reviewed owned files:
+
+- `experiments/candidates/typed_joint_skill_decision/__init__.py`: SHA256`d960908ba7b402d00f50eba206b2f737970f8dfc64e2eb5989fc8e39f33e2650`.
+- `experiments/candidates/typed_joint_skill_decision/b02/__init__.py`: SHA256`ff36f2aa18abb21d0af9d5f877ce63e76b81923a0995938a2881d3450aaa36b8`.
+- `experiments/candidates/typed_joint_skill_decision/b02/evidence.py`: SHA256`d00532e54d8f6abe1c940722866fdeb79f1556e383c317daffc8121ae29206f2`.
+- `experiments/candidates/typed_joint_skill_decision/b02/model.py`: SHA256`447634d4f9c84bd2239f5a78f68455919b88b50bd4fb57127681ed0281907c6d`.
+- `experiments/candidates/typed_joint_skill_decision/b02/native.py`: SHA256`e52411c3dc0957a6c5af380e1d78b1f4593b8a7a567a93ca67db157bfe188019`.
+- `experiments/candidates/typed_joint_skill_decision/b02/reader.py`: SHA256`09963c4ca6e269bb2ab66cb19c82fa13b4ff8292950e770e186e46b967caa83b`.
+- `experiments/candidates/typed_joint_skill_decision/b02/run.py`: SHA256`542a46b3ff32ce239dc946f7d21bb9a7f68a39e87340ad9bb66e770c5bab6516`.
+- `experiments/candidates/typed_joint_skill_decision/b02/search.py`: SHA256`6b14d397df5b4e842c3e106615696be0ba41155b1903a5b6885198de5a4a8017`.
+- `tests/experiments/candidates/typed_joint_skill_decision/b02/test_b02.py`: SHA256`f07e0914c567607c7a7fed66adc49bdbcc9fac98881ac70371979a109e5ea516`.
+
+Numerical thread variables are fixed to1 inside the admitted runner before
+imports, without changing the shared environment. Parent/reaped/live-child CPU
+is counted once; selection-ready child CPU is retained separately from H500
+process CPU. Cold latency explicitly includes fresh-process startup, imports,
+required instrumentation/search tracing and selection-evidence writes. It is
+an instrumented implementation measurement, not uninstrumented production or
+universally cold hardware. Nested radio/routing/throughput method counters are
+reported as such, not mistaken for independent link queries or extra CPU sums.
+
+The one integrated entry is
+`experiments/candidates/typed_joint_skill_decision/b02/run.py`; frozen arguments
+are`--seed 0 --input-root /home/wu/hmasd-inputs/typed_joint_skill_decision/b02_archive
+--input-manifest docs/research/candidates/typed_joint_skill_decision/B02_INPUT.json
+--input-manifest-sha256 0b672a2d77526561a7c9ae51de26859119f84186bfee914442ab488326352ed6`,
+plus exact published`--launch-sha`and canonical`--out`bound by the launcher.
+Fresh output is`runs/typed_joint_skill_decision/b02_a01`. No worker CLI, skip-reader
+option, resume-fit or alternate scientific arm exists. No extra pilot occurred.
+Real fit/numerical agreement, native search/executor checks, process spawning and
+measured resource limits remain the selected admitted operation's work.
+
+At this boundary Root is repairing a shared launcher snapshot defect revealed
+by another direction's zero-scientific-step missing-check-file failure. Root
+owns that narrow control correction; this DM will use its published/reviewed
+evidence before creating this study's snapshot. B02's own manifest is in the
+included docs tree and old data are in verified external staging. The canonical
+node remains an old checkout plus controlled overlays; no pull/reset/sparse
+change is attempted. This is a concrete shared launch dependency, not scientific
+dissent or a changed one-fit contract. No B02 operation has yet been accepted.
