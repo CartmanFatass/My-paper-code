@@ -1,0 +1,21 @@
+{
+  "assessed_at": "2026-10-02T01:04:18.442957Z",
+  "available_physical_bytes": 14605631488,
+  "captured_at": "2026-10-02T01:04:18.442659Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "claim_key": "d2f3721e63eda705b23e919862d4aadf7e87336cfb879687670029a25ff2557a",
+  "direction": "uav_decision_generalization",
+  "effective_available_bytes": 14605631488,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "node": "wsl_4070",
+  "passed": true,
+  "physical_floor_pass": true,
+  "preflight_id": "resource_bbc08781c6a245478a884a81f5e7ff80",
+  "schema_version": 1,
+  "sha": "89845b9746f7f8aa0451e04caf059082639ec671"
+}

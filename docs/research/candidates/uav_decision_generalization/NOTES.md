@@ -739,3 +739,63 @@ all declared canonical input bytes in place before scientific consumption. First
 launch will publish this source and the exact three small locator/ledger inputs,
 then use fresh actual-node admission. Failure or uncertain acceptance is preserved
 under the same native handle, without automatic retry.
+
+### B01 learning acceptance and observation
+
+Source`89845b9746f7f8aa0451e04caf059082639ec671` was published before the
+sole supervisor request`uav-decision-generalization-b01-learning-a01`.
+The [native manifest](../../../../runs/uav_decision_generalization/b01_learning_a01/launch-manifest.json)
+records accepted actual-node admission; the
+[fresh memory assessment](../../../../runs/uav_decision_generalization/b01_learning_a01/admission-preflight.json)
+passed at2026-10-02T01:04:18Z with14,605,631,488effective available bytes and the
+unchanged4GiB floor. The supervisor's exit0 completed launch acceptance, not
+the six fits. The same manifest/operation is the recovery identity.
+
+The DM armed`tools/hmasd_wait.py` for this native operation and drained generation1:
+accepted/running, matching live runner/supervisor identities, consistent records,
+no summary or exit witness yet. Private request is
+`temp/directions/uav_decision_generalization/wait-learning.json`; observation
+registration is not assumed future delivery. This native DM remains active through
+terminal collection, fresh native evaluation and complete independent reading.
+No duplicate request, outcome-based choice or new fit is authorized by observation.
+
+### B01 learning terminal collection and prospective fresh phase
+
+The same operation terminated with a consistent valid exit0 and both recorded
+processes absent. Observer generation1 emitted READY; its attempted App wake
+reported`-32600: direct app-server input is not allowed for unloaded spawned
+sub-agents`. The active native DM drained the event directly and consumed it in
+generation2. This delivery limitation did not lose the scientific operation or
+authorize another launch.
+
+Collected compact manifest/config/summary/status/exit/logs into
+[`runs/uav_decision_generalization/b01_learning_a01/`](../../../../runs/uav_decision_generalization/b01_learning_a01/summary.json),
+matching SHA256 of every collected terminal file against the canonical remote
+bytes. Summary SHA256`7c45a9762c81a072719a4ba48184b60c9beee4dda16ab84eb53e964b026b95dc`;
+scientific manifest`c0af7e8079ee9b2e01ce94a88306d5d23c120a499dcd646ba08fd17821377607`.
+Canonical initial/final/optimizer weights, all updates and endpoints remain in
+the original remote run root, without a bulk replica. Counts are6/6fits,
+3,072/3,072updates,49,152contexts per arm,1,536train endpoint contexts per arm,
+0native/static calls. The phase reports133.698s wall,125.832s process/finished-child
+CPU,128.805s reserved GPU-window wall,1,225,494,528bytes peak process RSS and
+399,925,248/492,830,720bytes CUDA allocated/reserved peak. Cumulative measured CPU
+including engineering tests is152.632098s. These are technical completion facts;
+the complete independent learning/native reading has not happened.
+
+`B01_FIT_INPUT.json` binds this terminal summary/manifest and
+`B01_AFTER_FITS_LEDGER.json` carries its exact cumulative counters/CPU/GPU into
+the already-selected fresh collection. All six A/R weight pairs predate fresh
+geometry generation; their manifest is fixed before the next launch. No endpoint
+or hyperparameter is selected from training outcomes, and no scientific input
+code changes between the phases.
+
+The completed learning source snapshot`e3329df307ae40388cf383a5b6527463` was
+previewed eligible after verified collection. The first apply refused because
+the DM's combined measurement/collector parent command itself referenced the
+snapshot path (`snapshot is referenced by pid1285789 cmdline`). That parent
+exited; measuring separately and invoking the supported collector directly then
+passed all normal checks. The snapshot and its Git worktree registration are
+absent. Its allocated usage fell820,944,896→0bytes: **820,944,896net bytes reclaimed**.
+Required run outputs, manifests/claim and all inherited evidence remain intact;
+no copy/archive was made for this deletion. Git object-store size is outside this
+working-tree measurement.
