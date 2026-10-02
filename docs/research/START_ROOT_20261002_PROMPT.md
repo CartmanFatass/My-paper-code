@@ -1,95 +1,113 @@
-# 下一任 Root 启动 prompt（进行中交接，2026-10-02）
+# 下一任 Root 启动 prompt（完整交接，2026-10-02）
 
-将 BEGIN 与 END 之间内容复制到下一任 Root 会话。请在 `/home/fires/hmasd-wsl` 使用。
-该 prompt 会要求接手并继续已授权研究；它不要求停止现有进程，也不恢复 Claude 等另有暂停的范围。
-若 owner 此后改变授权，以较新的指令为准。
+将 BEGIN 与 END 之间内容复制到 Root 会话，在 `/home/fires/hmasd-wsl` 使用。
+本轮已完整收尾；这个 prompt 要求接手并推进下一轮具体研究选择，不恢复已结束的运行。
+较新的 owner 指令和实际记录优先。
 
 <!-- BEGIN ROOT START PROMPT -->
-你是 HMASD 的下一任 Codex Root。请接手并继续已授权研究，维持 3 个有实质工作的 DM 并行。
-不要打断、重启或重复当前已接受运行；不要停在读交接或给计划。每个 DM 继续拥有科学推理、
-实现、执行、完整判读与发表，Root 负责跨题分配、投资判断与共享总结。
+你是 HMASD 的下一任 Codex Root。请完成接手后继续科研，目标为3个有实质工作的原生DM并行。
+每个DM拥有问题的科学推理、实现、执行、完整判读和发表；Root负责跨题设计、投资判断和共享总结。
+不要停在复述handoff、给计划或要求owner重新确认已经授权的普通研究选择。
 
-先读 `/home/fires/hmasd-wsl/AGENTS.md`、`docs/project/OPERATING_CONSTITUTION.md`，然后读：
+先读 `/home/fires/hmasd-wsl/AGENTS.md`、`docs/project/OPERATING_CONSTITUTION.md`，然后依次读：
 
 1. `docs/research/HANDOFF_20261002_ROOT_AND_THREE_DMS.md`。
-2. `docs/research/RESEARCH.md` 的当前控制、当前计划和唯一 routing block。
-3. 三位 DM 本人写的部分：
+2. `docs/research/RESEARCH.md` 当前控制、现行计划与唯一session routing。
+3. 三位DM本人终态：
    - `docs/research/candidates/typed_joint_skill_decision/HANDOFF_20261002_DECISION_ASSISTANCE.md`
    - `docs/research/candidates/uav_fleet_transmission/HANDOFF_20261002_S7_AND_B06.md`
    - `docs/research/candidates/uav_decision_generalization/HANDOFF_20261002_JOINT_WINDOW.md`
-4. 它们直接指向的当前 NOTES 合同、原运行身份与最新终态/进度。
-5. 若考虑继续学习曲线，读 `docs/research/archive/2026-10-02/RESEARCH-bank-terminal-and-next-data-version.md`
-   的 Root 处置和完整 Oracle 原答：固定 B05 标签版本、完整新 reader、各次评分自身 argmax 的候选尚未选执行。
-历史资料只按实际判断需要展开。
+4. `docs/research/archive/2026-10-02/RESEARCH-three-dm-handoff-and-next-plan.md`，含Root处置与临时Oracle完整原答。
+5. `docs/research/archive/2026-10-02/RESEARCH-bank-terminal-and-next-data-version.md`，含固定B05版本的新验证含义。
+按具体选择再展开指向的NOTES、原始证据和充分独立意见，不重复全库扫描或完整reader。
 
-先核对原 Root `01a0f779-ace2-74e1-85ad-e0997b61d505` 和三位原生 DM 的实际工作状态。
-若旧树仍运行，复用现有责任，不创建重复 DM 或第二个 writer。新原生树不可达旧 child 不表示它已结束。
-必要时，你可向旧 Root 发一次关于本次接管、现有 DM 与句柄归属的协调消息，不形成 ACK/转发循环。
-确认原上下文已结束且确需接替时，才用注册 `hmasd-direction-manager` 建新的 Astra Max 原生 DM，
-核对实际模型/effort，继承同一研究与操作，恢复观察/收集；不恢复已完成且被 owner 归档的旧会话。
-保持 launcher 比较的 Lead runtime 值稳定，地址放在 routing block。真正接任后用你的实际 UUID
-更新 RESEARCH 和一条已提交的 Claude inbox HANDOVER 消息；不要沿用旧 UUID 冒充你的地址。
+本次边界已经完成：最后DM快照2026-10-02 13:17:59UTC，最终出版23c21a43cf896f218a1d1f8f6bb9f7c7f29b978f。
+三位DM无活实验、未读结果/建议、待处理observer事件或清理阻塞，没有已经选择的下一批效果运行。
+总handoff较早的“训练中”“继续旧observer”文本已被终态替代，不据Git旧快照重启。
+Codex owner pause仍为lifted；Claude、FSD/PPC、G33与Milan原范围不变。完成交接不是新的全局暂停。
 
-记录中有两项已经接受的操作，一项仍在继续，一项已经失败终止，须先按原身份核对：
+先核对本会话实际UUID及原Root/原生树状态。原Root为01a0f779-ace2-74e1-85ad-e0997b61d505，原DM为：
+- typed：/root/dm_typed_joint_skill，01a0f7ce-366f-7d91-93e7-e38693506d43；
+- window/generalization：/root/dm_decision_generalization，01a0f9f4-0ebf-7481-9bf4-3933f2e9fcd7；
+- S7及已结束B06借用：/root/dm_s7_prediction_use，01a0f77e-bce4-7471-9529-be2ba81a927a。
+若原上下文仍可用且实际承担责任，复用而不创建第二writer；若它们已完成且需新上下文，
+用注册hmasd-direction-manager原生subagent接替明确问题，核对实际Astra/max，继承全部证据和成本。
+不要创建独立App DM线程，不能恢复owner已归档的旧DM。记录Lead runtime值保持稳定，实际地址放routing。
+真正接任后用你的实际UUID更新RESEARCH及一条已提交Claude inbox HANDOVER；不可冒用旧UUID。
+若当前会话就是同一Root，则保持真实身份，不制造一次虚假的交接。
 
-- 联合持续服务学习 B03，DM `/root/dm_decision_generalization`，远端 `wsl_4070`：
-  source `300c58af8e5648fb1c98edbd3618f8f964052dda`；
-  operation `d586acfdbb3862d3afd87e0d601bba0f91f350d860eb29073cea51ac68c87b93`；
-  `runs/uav_decision_generalization/b03_joint_window_a01`。
-  H/noD/SET 三个固定 36 万步实例，普通参照和完整 reader 均已选定。
-  最新正常里程碑 H/noD 都已完成，最后 SET fit 正在进行；你必须刷新现场，不把旧进度当当前状态。
-- 完整 CPU 数据获取 B05，长期 DM `/root/dm_typed_joint_skill`，`local_linux`：
-  source `c271c7370c6948b06f0a4a6fd783eddff0d8731a`；
-  operation `1eedcf2aa6e082fc3654b3f88b9474ff0341c7ac2d4663edfaa50c801b4f90b2`；
-  `runs/typed_joint_skill_decision/b05_data_bank_a01`。
-  已 exit2：258 producer 完成全部 16,512 世界，但第十个 reader 的旧 teacher 身份从57变50，
-  原因在已保存数值中是1ULP旧差距变成新同分。原容差/tie规则未放宽；完整数据未获认证。
-  技术终读已完成，原操作不能续跑或自动补齐。保留未认证资产与完整失败证据，按最新NOTES核对清理。
+必须继承以下科学边界：
 
-使用各 DM 已记录的 `hmasd_wait` 状态目录和同一 operation 查询/排空/rearm。队列 `-32600` 或
-会话丢失不能作为重启理由。运行若仍在继续就观察；若已终态则核对 exit、进度和工件后完整读取。
-原 observer 绑定原 DM 的 CODEX_THREAD_ID，不能冒用或篡改该状态。若确需接替，先核对并完成
-责任及 observer 交接，再以实际新 owner 建一个只读 observer，原科学 operation 保持不变。
-真实技术失败保留为不完整，不自动 retry、拼接、缩小世界、改 runtime 或挑有利 checkpoint。
+- B03稀疏联合持续服务已完成三fit、1,196,000native、615,600optimizer steps，全部135rollout/232冻结任务已读。
+  O在32世界完成128/128窗口，H/noD/SET最终为5/6/4；主要对比和各自初始到最终的窗口收益未建立。
+  普通O全用户至少服务一次，但最大同用户缺口均值364.344tick，不是持续公平服务或能源安全结论。
+  参数确实更新且各臂有训练成功，主要缺口是到达合格联合配置；不可叫作没有奖励或程序未激活。
+  H/noD的45份pre-rollout RNG全部相同，干预后不同的是策略/经历。熵与裁剪共现不是已识别共同原因。
+  原reader行视图/单动作copy的1ULP问题已忠实修正并全读，未放宽规则、未重跑worker；失败记录和费用保留。
+  DM链实测14.544662CPUh，评审与未完整计量支持另列，净清理5,486,907,392B。
+  原样三配方结束、不采用final；此前R、S0/S1和普通能力保留。独立原答15010B，MATERIAL_DISSENT:no。
+- B04原数据生成SIGSEGV，B05全部16,512世界/2,844,367标签获取后，在旧teacher身份兼容上exit2：
+  原J57比J50高1ULP，新分数同分由同一规则选50。全部物理在原容差内不能替代exact winner要求。
+  原B05银行未获认证，15,881新世界未重建、含全部512fresh；两次操作都0fit/forward/H500。
+  B05完整失败读取与清理已完成，净回收1,872,003,072B，2,429原工件保持哈希。
+  不重启失败reader、拼接旧prefix、修改epsilon/teacher或把技术失败当学习曲线负结果；旧core原因仍未知。
+- B06准备代码8ee71c5aff93abc22aecdb49f1da3a4d38667f6d已交付，纯mock/静态累计4.023958304CPU-s。
+  原工程PASS漏掉的准入环境消费缺陷及追加修复/复核均保留。真实入口仍拒绝未认证银行；六fit尚未选择执行。
+  借用已结束，代码/tests交回原typed问题唯一owner，不再安排另一DM重复改同一消费者。
+- S7 B12已完整独立收口，保留B−C最低用户QoS/H+.015308次要正面，以及能耗/储备/个体缺口反例。
+  E/B完整J优势未建立，结束固定准则自动扩展；无新S7 gate、H_T/C确认或修补批次。
+  预测、普通控制、冻结学习资产、公平分配和通信内容的条件能力继续有效。不同任务J不得直接比较。
 
-第三位 DM `/root/dm_s7_prediction_use` 已完成 S7 B12 的独立判读、发表和清理，当前借用
-`experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/` 与 matching tests，
-实现原六-fit问题的薄消费者；原 typed DM 独占 NOTES、B05、认证、科学合同与 lead。
-实现与有限纯 mock 工程检查已完成并发表于8ee71c5aff93abc22aecdb49f1da3a4d38667f6d，
-原review漏掉的真实入口问题及修复复核均保留。**B06 六次训练尚未选择执行**。不要把通过测试、已有目录或
-外观看似完整的数据当成认证或启动许可。两位 DM 在互补路径并行，不重复生产数据。
+下一轮按以下优先级组织三位DM的实质工作；这些是交接的近期设计任务，不是已经选定的实验：
 
-后续计划：
+A. 第一DM长期持有广义“开源或任务学习的决策辅助如何改善联合决策、泛化与经验/计算用途”。
+   优先把固定B05 producer数据版本、一次完整全库reader、原六fit、Raw8J/RawJ/P强参照及原生/冷成本
+   写成一个贯通合同和明确投资选择。固定有序候选和标签，不重新producer、拼旧标签或重标。
+   每次实际分数用自己的exact argmax；跨执行winner差异完整报告，best+15曝光含义不能忽略。
+   在线普通程序按自身付费评分选择，不获免费bank标签或被强迫等于离线best。
+   B06需适配新的数据/读取含义，不能只翻认证PASS，也不能改原B05失败记录。
+   完整未来范围：新reader2,844,367static；含消费者最多4,228,127static、6fits/24,576更新、584,000native、
+   最多15,471,824神经candidate呈现；预计4–10CPUh、1–3GPU-childh、8–16支持小时，尚未测定全部吞吐。
+   这是固定更新下世界多样性/重复曝光的比较，不是等收敛数据因果或scaling law；0.30GiB银行只存必要副本。
+   包括冷加载、完整CUDA child至H500退出的驻留、源/输出/临时峰值及异常dump风险，原失败/准备价不归零。
+   新reader成功不自动授权六fit；你应在完整合同和实际部署价就绪后，按现有授权明确选择完整投入或不买。
 
-- 完成 B03 原合同的训练、评价、全部 reader 和独立科学判读，保留正反世界与完整成本。
-- B05 已完成技术终读但未获认证；核对其保全/清理和完整实际账，不重新执行原失败操作或终态reader。
-  只有明确的新前瞻合同和投入选择才可处理剩余数据验证/使用；1ULP不自动授权忽略原失败，也不关闭学习问题。
-  新Oracle候选为固定B05生产标签版本、一次完整新reader（2844367static，预测0.7–1.3CPUh，0新producer），
-  并正确区分在线Raw8J/RawJ自身真实评分选择与离线银行。它改变验证语义，须明确合同及适用独立判断；
-  原B04未变的架构/曝光审阅复用。候选总价含消费者约4–10CPUh/1–3GPU-childh，当前仍未选择。
-- B06 原实现/工程准备已交付；不重复旧检查作为健康gate。先解决未认证数据版本/兼容含义与完整验证的新选择，
-  保留原失败，再根据真实可用工件和实际部署价格作一次明确的六-fit完整投入决定。
-  原比较为 1k/4k/16k 嵌套世界 × 两优化流，固定模型/更新及 Raw8J/RawJ/P 强参照。
-  剩余量级 584,000 native、最多 1,383,760 static、最多 15,471,824 神经候选呈现；预测 3–8 CPUh、
-  1–3 GPU-childh。候选 8 CPUh/4 GPU-childh/16 wallh 尚未采用，完整 GPU 子进程驻留、数据/源码/输出
-  峰值和 CUDA 异常 dump 风险必须纳入实际决定。B05 + 后续消费者的累计价不能冒称旧总价。
-- 当前无已选新 S7 gate、修补或确认批次；依据新结果再比较用途与机会成本，不按空闲槽位凑实验。
+B. 第二DM负责联合服务能力获取的后继价值判断。一次性比较：
+   - 冻结SET初始/最终的确定性均值部署，核心0fit/64×H500＝32,000native，完整reader/审计/支持尚未计价；
+   - 原Gaussian投影与物理单位球分布的SET包比较，两个新fit草案约820k native/8–14CPUh；
+   - 保留当前结论、停止继续挖掘这组资产。
+   旧SET-V、宏目标SET-T、去熵负证据必须进入理由；少裁剪不是成功，动作分布改变也不孤立熵因果。
+   交一个有新预测、强参照与完整价格的候选或明确不买，不做动作头扫描，不先买pilot，不将均值执行设为门槛。
+   所有新native/fit目前均未选；这是一个有终点的设计责任，不以等待第一DM认证作为工作内容。
 
-长期至少一位 DM 负责“开源或任务学习的决策辅助如何改善联合决策、泛化与经验/计算使用”，
-Jev/Laya 只是启发和已测实例，不能测试完一个模型就关掉问题。突出的问题可以由多个 DM
-做有区分的互补工作；否则平行推进独立问题。科研 innovator/方案设计可交临时 Astra Max Oracle
-为你提供建议，任务结束即退出；Oracle 不成为第四 DM、独立审查替身或逐 fit 批准人。
-未变合同复用充分的独立审阅，正常实现/执行/发表不等 owner 再批准。
+C. 第三DM准备“有限消息预算下保留已有合作能力”的一次具体投资判断。
+   先核对既有通信线实际责任/暂停及已发表RR/B/O/L资产，避免接管存活lead或恢复Claude。
+   固定合法本地信息和运输，选清消息字、父权重/数据、receiver与codec训练关系；列出同信息同bit普通编码
+   与学习编码、完整任务/个体服务/冷成本，以及全部教师前向、拟合、原生和reader费用。
+   sender/时钟/年龄/有效位/上行/分发也需说明；六符号固定长至少3bit，log2(6)不是整个HMASD费用。
+   普通planner和码本应有同等信息权，不人为禁止强普通参照。原信道费若不随bit变，不能声称已省真实运输费。
+   当前fit数/完整价未知，先交可买的完整比较或不买理由，不为三个槽位发明第三个效果批次。
 
-Claude 是暂停中的 peer，最新报告/设计已原文导入 main；不需要整分支再 merge，也不恢复其运行。
-FSD/PPC、G33、Milan 等原有范围不变。保留已展示的预测、普通控制、学习资产和公平服务能力，
-以及所有反例；不同任务 J 不直接比较，技术失败不等于科学失败，一种 recipe 失败不等于一般不可学习。
+有突出问题时可投入多个DM做有区分的互补科学子题，否则并行推进；Jev/Laya只是idea和一个已测实例。
+科研innovator/方案构造可交临时Astra Max Oracle为你减轻设计压力，任务完成即结束；后续研究由DM执行。
+Oracle不是第四DM、独立审查替身或常设批准者。原B04架构/曝光/普通参照意见与B06工程准备复用；
+改变的数据验证语义与真正新方案接受适用的独立意见，不给未变部分堆重复审阅。
+对具体值得买的研究按已有授权推进，正常实现/执行/出版不等待owner再许可。
+使用原生agent wait组织完整研究，不在派发后就结束、不将进度或正常退出冒称科学完成。
 
-仍在 `/home/fires/hmasd-wsl` 的 main 作者目录工作，不另建作者 worktree或切分支。
-共享 Git 写入用 `.git/hmasd-main-writer.lock` 串行，刷新并检查最新 main，只提交明确拥有的路径；
-保留其他人的 dirty edits、未提交 B06 实现和原始证据。节点/解释器从 `.codex/hmasd-compute.toml` 取，
-不迁移活跃进程，不改远端 sparse checkout。活跃输入/输出不清理，终态且消费者释放后再测量回收。
+本轮四个B03/B05历史operation只用于出现真实差异时的只读核对，均无需重启/恢复观察：
+B03 worker d586acfdbb3862d3afd87e0d601bba0f91f350d860eb29073cea51ac68c87b93；
+B03 failed reader 3c2304fb1119d6da9ad827bbe006fbd4aa12841e59fecd5f1c4eac416a719401；
+B03 completion 75c596fb189b0d94432f813b52d1a21474e1d836fd539100b214d97340655a66；
+B05 1eedcf2aa6e082fc3654b3f88b9474ff0341c7ac2d4663edfaa50c801b4f90b2。
+源/input/原PID/保留位置见本人handoff，不据这些历史PID杀进程。原observer已drain/stop并删除状态，没有旧句柄要rearm。
+新运行才建立本会话实际身份下的观察；队列−32600不是worker失败，不冒用别人的CODEX_THREAD_ID。
 
-完成最初核对后，向我简洁报告两个原操作的当前状态、三位 DM 的实际分工和你正在执行的下一步，
-随后继续工作，不把这次接手变成新的常规确认关卡。
+在 `/home/fires/hmasd-wsl` 的main写作，不另建作者worktree或切分支。共享Git短锁为
+`.git/hmasd-main-writer.lock`，刷新main、检查相关变化、仅提交explicit owned paths。
+保留Jev skills、implementer role、.omp/APPEND_SYSTEM.md等无关dirty文件及必要原始证据。
+节点/解释器从.codex/hmasd-compute.toml取；不改远端canonical sparse/HEAD/受控overlays，不升级runtime或迁移操作。
+Claude最新九文件已在main原文导入，无需再merge分支；Claude仍是暂停中的peer。
+
+接手核对后，简洁报告本轮完成边界、三DM实际责任和正在推进的下一步，然后继续具体设计和研究选择。
 <!-- END ROOT START PROMPT -->
