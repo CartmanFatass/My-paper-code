@@ -3548,3 +3548,55 @@ DM disposition: read the entire original answer and adopt its recommendation onc
 Two implementation clarifications keep the original advice precise. The7GiB cap is the complete allocated-byte scope declared in B04_INPUT.json, including this source snapshot, the direction canonical runs, the one retained model object and own scratch; it is not7GiB of freely additive new data on top of those retained bytes. P reading uses an independently written control reconstruction from the pinned search semantics and the paid ordered query/state/response trace, rather than calling the production selector as its own proof; it still does not independently recompute every P radio response. Raw8J static choices/regret on all512 fresh worlds can be read from the already-paid full label bank, without extra online queries; its cold/native measurements remain128 worlds. Main static-call counters refer to the explicit static_evaluate interface; implicit host/reset/radio/reward work is separately counted and CPU-priced.
 
 The L0 above and machine manifest give the bounded implementation task. Pure/mock checks precede launch; all real model/native/RNG correctness happens only under the published admitted study and the declared allowances. The exact7-source hash checks and Raw8 helper-function comparison in preparation created no scientific outcomes. B04 counts at selection:0fits,0static calls,0native steps,0model forwards.
+
+Bounded engineering targets are now fixed without changing allowances: the
+teacher-best raw layout of each first-four training world receives the four
+identity/reverse/rotate-one/lexicographic row checks. The already required first
+fit initial model receives canonical/reversed candidate-display production and
+independent functional reads on those same four complete menus:8GPU+8CPU contexts,
+no extra initializer/fit or initial evaluation panel. Exact display ties use
+original raw index. This target allocation is engineering specification, not an
+extra outcome-selection gate.
+
+Read-only preparation measured current actual node allocated-byte baselines:
+canonical direction runs894255104B; retained single model root846249984B;
+canonical direction scratch absent. Together with the previously measured full
+source snapshot1794961408B this forecasts3535466496B before new output, leaving
+approximately3.98GB under the full7GiB scope. Only the first two are current direct
+measurements; the actual admitted snapshot/output peak will be measured again.
+No new B04 scientific effect or resource admission was performed by this disk read.
+
+
+<a id="b04-engineering-acceptance"></a>
+## 2026-10-02 UTC — B04 exact implementation accepted; no effect yet
+
+The reused bounded Implementer finished the13-module bank/train/cold/native/reader
+package and returned file ownership. The reused independent engineering Reviewer
+read the entire implementation and pinned consumers and reports no material
+finding remaining. One diagnostic omission was corrected: final parameter
+movement is independently reconstructed in float64 from saved initial/final arrays,
+compared with the final update trace, and all gradient/movement diagnostics are
+validated and summarized. This adds no model forward or optimizer replay.
+
+I read the implementation and accepted the final diff/checks. Both helpers ran
+32 pure/mock/source tests; Implementer final0.73s pytest,0.95wall/0.95CPU-s,
+72924KiB peak RSS; independent Reviewer0.76s pytest. Tests cover the7 upstream
+hashes and frozen Raw8 helper ASTs. No real model, native host/static query,
+scientific RNG draw, fit, install or launch occurred. Source, exact15-file
+hashes, tests and limitations are in the[compact engineering record](../../../../runs/typed_joint_skill_decision/b04_source/checks.json).
+Real fixed-shape CUDA feasibility, numerical tolerances, full native identities
+and node resource admission remain paid within the selected study. Neither the
+pure tests nor review establish those results. The numeric training cache has a
+557760000B array ceiling, rather than repeated gzip decoding or retained expanded
+relations; its contents cannot supply fresh inputs to a fit.
+
+The only entry is`experiments/candidates/typed_joint_skill_decision/b04/run.py`,
+with`--seed 0 --input-manifest docs/research/candidates/typed_joint_skill_decision/B04_INPUT.json
+--input-manifest-sha256 000588aa756405e25e9e3dbebec99b95927277b6a85ee38275947f322f4a12a3`,
+plus exact published40-character`--launch-sha`and canonical`--out`bound by the
+launcher. Fresh output is`runs/typed_joint_skill_decision/b04_a01`; configured
+original`wsl_4070`interpreter and complete published source snapshot are selected.
+No old bulk input path is passed through launcher argv. External retained roots
+are only declared disk-accounting locators inside the hashed manifest; source
+and canonical data are not conflated. No new profile/package/environment change.
+B04 remains0effects and has no accepted producer at this publication boundary.

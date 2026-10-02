@@ -1,0 +1,51 @@
+{
+  "schema": 1,
+  "direction": "typed_joint_skill_decision",
+  "study": "B04",
+  "science_effects": {
+    "fits": 0,
+    "model_forwards": 0,
+    "static_calls": 0,
+    "native_steps": 0,
+    "launches": 0
+  },
+  "source_sha256": {
+    "experiments/candidates/typed_joint_skill_decision/b04/__init__.py": "f160546e36507cbb6da4357825a99298431ec6b487248409380b63007a6599df",
+    "experiments/candidates/typed_joint_skill_decision/b04/bank.py": "45cd06e8538b011a62fcdcaca8cea8416fa4a06ef78435f0d7513214ed65b173",
+    "experiments/candidates/typed_joint_skill_decision/b04/contract.py": "d555883a25030a6a1bcb89150b3823d0dc843d96f33085a6dba6329e364b5c7a",
+    "experiments/candidates/typed_joint_skill_decision/b04/evidence.py": "74c197cf2ab1db82e8899ba9ad4c7c04d0decc93476731eefb4161bc21f10583",
+    "experiments/candidates/typed_joint_skill_decision/b04/functional.py": "ff2ae5d5f27260be266ac9959bd6180f892076b9ca7f9f74965df0d7af9803d1",
+    "experiments/candidates/typed_joint_skill_decision/b04/model.py": "cf59f16f79f6cc7f37ba18936d89816f6eff90da61d291c63273f8601965f5ac",
+    "experiments/candidates/typed_joint_skill_decision/b04/native.py": "43c78e5f0da727e0e529ca0a9583352a9c98d63cfcd6ad01e7a62fd4f824e3f8",
+    "experiments/candidates/typed_joint_skill_decision/b04/online.py": "441ddbfb88a4a4c2d992ad4c99a7225dd52214876664c542e957fd94a5afb18e",
+    "experiments/candidates/typed_joint_skill_decision/b04/planner_reader.py": "0f20e3a98d908d72e6a2b2f509e5e151e030a40415e736205b43a54d876ce76b",
+    "experiments/candidates/typed_joint_skill_decision/b04/reader.py": "49ae4474572971bdbaeaecbcb8d2a2470178d8a0c7b1fd1e1678b0e91c7f9bcc",
+    "experiments/candidates/typed_joint_skill_decision/b04/run.py": "dfb43f931798073f8af553b8d235ec428be0b0166a6901b3f5e3ea6fadabaae0",
+    "experiments/candidates/typed_joint_skill_decision/b04/shortlist.py": "0404065d3c7c3b454e9d157bf5cf3d80e80bee25db5f37ccb94982bb09e12f28",
+    "experiments/candidates/typed_joint_skill_decision/b04/training.py": "dd59cdd48787ee3e9684b38735d2b4b11af8875996777ba94b0c87dbae46857b",
+    "tests/experiments/candidates/typed_joint_skill_decision/b04/test_b04.py": "34043f875d7cba4d53333fb5e452dfb2111aca4c14eb235d44597da7a0f3b637",
+    "docs/research/candidates/typed_joint_skill_decision/B04_INPUT.json": "000588aa756405e25e9e3dbebec99b95927277b6a85ee38275947f322f4a12a3"
+  },
+  "implementer": {
+    "native_task": "/root/dm_typed_joint_skill/b01_native_implementation",
+    "tests_passed": 32,
+    "pytest_seconds": 0.73,
+    "wall_seconds": 0.95,
+    "user_cpu_seconds": 0.86,
+    "system_cpu_seconds": 0.09,
+    "peak_rss_kib": 72924,
+    "exit_code": 0
+  },
+  "independent_engineering": {
+    "native_task": "/root/dm_typed_joint_skill/b01_engineering_review",
+    "verdict": "No material engineering finding remains in reviewed bytes",
+    "tests_passed": 32,
+    "pytest_seconds": 0.76,
+    "exit_code": 0,
+    "covered": "All 13 modules and consumers; lawful features; sampler and padding; checkpoint identity; cold-child commitment; original planner and complete cache consumption; reset and full frame reading; counters; hard bounds and partial failure preservation",
+    "repair": "Independent float64 saved-initial/final movement reconstruction and final-trace comparison; validate every gradient/movement diagnostic; report summaries",
+    "limits": "No real Torch model/forward, fit, native host/query, result RNG draw, optimizer replay or launch. Planner branches source-reviewed; pure fixture uses tied/converged search and cache tampering. Actual CUDA, native and tolerances remain in admitted allowance."
+  },
+  "test_command": "PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 /usr/bin/time /home/fires/.venvs/hmasd-linux-cpu/bin/python -m pytest -q tests/experiments/candidates/typed_joint_skill_decision/b04/test_b04.py",
+  "training_numeric_cache_ceiling_bytes": 557760000
+}
