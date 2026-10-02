@@ -3016,3 +3016,293 @@ reader scope and full-training/scorer/read costs remain to be frozen. Six fits c
 still make hundreds of millions of candidate presentations at variable M; six is
 an asset count, not a compute forecast. No new result effect occurred in these
 source/record reads, and no model or fitted asset was selected here.
+
+
+<a id="b04-prospective-contract"></a>
+## 2026-10-02 — B04 proposed complete raw-layout learning curve
+
+**Question selected by Root; this exact recipe is submitted to the original
+independent ResearchCritic before substantial implementation. No B04 effect yet.**
+Read the entire15399-byte temporary Oracle answer (SHA256
+`59e7b08349922cb857e149c07acfe89a2b3bb65dfd081a1320ba13052af91e37`), preserved with
+Root's explicit selection and original owner-forwarded suggestions in the
+[completed allocation advice](../../archive/2026-10-01/RESEARCH-learning-curve-and-cost-aware-successors.md).
+It is constructive advice with inherited context, not independent review. Root
+selected this learning question and delegated exact contract/review/execution;
+no per-fit approval is required. B01–B03 evidence and the accepted rejection of
+unchanged eight-menu residual learning remain as recorded above.
+
+### Scientific object, intervention and alternatives
+
+Can one fixed relation scorer acquire useful new-world joint-layout choice as
+its offline world coverage grows from1000 to4000 to16000, under the same finite
+optimization budget, and what are the complete quality/data/online-compute prices?
+The primary intended contribution is empirical finite-learning capability, not a
+new architecture, a pretrained-model attribution, a scaling-law theorem or a
+claim that ordinary planning must be surpassed. It is one contextual joint choice
+at t0 with the original closed-loop low-level executor; no repeated high-level
+adaptation or new decentralized-information claim is made.
+
+At current mainec0f285d7, shared topic4 retains R's conditional new-world gains over
+A, N's train/test separation, L-F's weaker training fit and the failure of pooled
+branch prediction to guarantee within-world ordering. This supports a relation
+scorer as one evidence-grounded instance while leaving finite optimization and
+capacity as live competing explanations. B03 retains useful path and individual
+service effects; static improvement alone will not establish native usefulness.
+Larger raw sets remove the old eight-plan coverage restriction without modifying
+the host to favor a model. The raw teacher and P deliberately remain strong.
+
+The positive prediction is lower fresh static-J regret at larger N in both fixed
+initialization/order streams, with learning visible in losses, parameter movement
+and training-probe choice. The adverse possibilities include insufficient training,
+no generalization improvement, harder-negative failure when16-way training is
+used on a complete menu, increased initialization spread, path/service reversals
+and a slower learned deployment package. All are scientifically readable results;
+no automatic64k bank, extra epochs or architecture rescue follows.
+
+Primary bridge read directly: [Pointer Networks §2.3](https://arxiv.org/pdf/1506.03134)
+uses input-index outputs whose dictionary follows the input size. Here the pointer
+selects one entire joint plan; no recurrent tour/site decoder is implemented.
+[Deep Sets §§2.2–3](https://arxiv.org/pdf/1703.06114) supports shared entity transforms
+and aggregation as a construction. Its assumptions and representation statements
+do not guarantee this fixed-width network's finite learning, arbitrary physical-ID
+symmetry or wireless performance. Existing three-library/July/external-review
+reconnaissance in this notebook and the linked allocation advice is inherited;
+no novelty claim or new model-family search is made.
+
+### World bank, lawful interface and teacher
+
+Prospective source-only integer search found no1094xxxxx address in current research
+notes, compact contracts/configs or launch manifests. Freeze training worlds
+**109400000–109415999**, nested first1000/4000/16000 in numerical order;
+common fresh evaluation **109420000–109420511**; fixed native subset is its first128,
+**109420000–109420127**. The common training diagnostic probe is the first512
+training worlds, contained in all three prefixes. It is not a full16k training
+endpoint and must never be labeled one. No old B01/B02/B03 world is reused as new.
+All failed worlds/labels/candidates remain in evidence; no redraw or filter.
+
+Keep the exact upstream host/planner/menu/native dependency hashes in the B03
+input record (listed in the source audit above and to be copied into the executable
+manifest). Host is6UAV/50clustered users/5km/fixed BS, free-space, no shadowing,
+H500, original action/routing/reward semantics. For each world, reset with its
+integer world seed, capture all initial geometry and RNG identities, and call
+`build_candidates(env, np.random.default_rng(world), allow_a2a=True)` once.
+Keep its entire returned ordered pool, source six-decimal row-sensitive deduplication
+and metadata; do not add the searched flat incumbent, canonicalize away additional
+permutations, sort by reward, or truncate by quality. Assert1≤M≤221.
+
+Each label is the pinned `host.static_evaluate` static J for that raw[6,3] layout,
+A2A on. Freeze teacher index as max J, exact ties lower generator index. Store the
+full J vector, C and frontend components, layout bytes/kind/k, legal geometry,
+source/RNG bindings and query attempt/completion counts. Static evaluation mutates
+its private host, so execution must restore the original reset. This is not H500
+supervision: **zero full-episode training labels**. Evaluation-bank labels are
+sealed from fit/model code, and no evaluation scorer/native read occurs until all
+six final checkpoints are fixed. A data-reader phase may verify those labels
+without feeding its outcomes to fitting or changing the fixed recipe.
+
+A learned online selector receives only the current users/BS, raw layouts and
+outcome-free kind/k/raw-row cues. It cannot read labels, static scores, routing,
+source index as a feature, world/seed/path IDs, final planner results or future
+native histories. It emits one legal raw index. Only then pay original
+min-makespan matching of initial UAVs to this complete layout. Initial UAV
+coordinates are legitimate execution inputs but are excluded from the static
+scorer: a raw row is not a preassigned aircraft identity. No M-way matching is
+hidden in features. Row-permutation/rounding dependence of the actual static
+implementation is measured by the bounded checks and matched endpoint checks;
+no mathematical permutation equivalence is silently assumed.
+
+### One fixed numerical student, subset exposure and finite optimization
+
+Use an endpoint version of the already implemented R architecture, not its weights
+or its old assigned-target pairing. Coordinates are float64 divided by5000 before
+edge construction and converted to float32 for the network. Candidate tensors:
+
+| Tensor | Shape | Content |
+|---|---|---|
+| U |6×9|raw target XYZ3 + generator row one-hot6|
+| Y |50×52|user XY2 + original user-row one-hot50|
+| B |3|BS XYZ|
+| M |6|kind3 and k∈{4,5,6} one-hot3|
+| E_UY |6×50×4|target minus user(z=0), XYZ difference and squared norm|
+| E_UU |6×5×4|target minus nonself target, peers in ascending row order|
+| E_UB |6×4|target minus BS, XYZ difference and squared norm|
+
+Original row cues are retained as legal observable identities, including user
+ordering's generator cue; this is not a proof of exchangeable physical nodes.
+Candidate scores share all parameters and are independent of other candidates'
+display order. Deployment takes the maximum logit with lower raw-index ties.
+
+All widths64, all linear biases enabled. U9/Y52/B3 each use two linears with GELU
+after both; Y/B embeddings are fixed across three layers. Each layer has separate
+UY/UU/UB message MLPs132→64→64 (GELU between), mean over50users/5peers and the single
+BS message, followed by a256→64→64 update; apply GELU to update+previous U. Readout
+is[mean final U64,mean Y64,B64,M6]198→64→1 with one GELU. Source arithmetic gives
+**205441 parameters** (16768 encoders+114048 messages+61824 updates+12801 readout).
+No layer norm, dropout, augmentation, alternative widths, pretraining or sweep.
+This is a new target/interface package, not a causal repair of B01 N or old R.
+
+Six fits: initialization/order stream0/1 ×N1000/4000/16000. Model seeds109491001/2,
+world-order seeds109492001/2 and candidate-subset seeds109493001/2 are separate.
+For a given stream, all N start from the same initializer seed and architecture;
+state hashes must agree. Each N restarts its declared order/subset generator.
+World draws concatenate independent shuffled permutations of that prefix, taking
+32 successive indices/update even across permutation boundaries. Every prefix
+world is exposed, and each fit presents exactly131072worlds across4096updates.
+Per-world visit counts and sampled candidate IDs are recorded. This amounts to
+131.072/32.768/8.192 passes, so the curve does **not** isolate data amount from
+per-example optimization exposure. Two streams on one nested bank are optimization
+repeats, not independent data-bank replications.
+
+Each world presentation includes its exact teacher-best index plus15 uniformly
+sampled different indices without replacement, using the dedicated subset RNG.
+If M<16 use all M and mask padding; no small-M world is discarded. Sort selected
+indices into raw-index order. Labels are normalized exp((J−max J)/.02) over this
+subset; loss is mean world soft cross-entropy. No importance correction or claim
+of equivalence to full-menu CE: this is deliberately16-way subset training followed
+by complete-menu deployment. Features never contain which item was designated best.
+AdamW lr.001, weight_decay.0001, betas(.9,.999), eps1e−8; no schedule, gradient
+clipping or early stop. Float32, TF32 disabled, original Torch2.7.0+cu118; CPU
+numerical threads1. All gradients/losses must be finite or the affected operation
+terminates with original failure evidence. No second initialization/fit replaces it.
+Fit order is N1k/s0,N4k/s1,N16k/s0,N1k/s1,N4k/s0,N16k/s1. Only update4096 is deployed.
+
+Keep every update's world/subset identity, soft CE, subset regret/entropy, gradient
+norm, parameter movement/checkpoint hashes and cumulative counters. Log the whole
+finite trajectory; do not select checkpoints from it. After each fit, read all M
+candidates on the common512training probe; after all fits, read all512fresh worlds.
+These probe reads plus observed update losses distinguish trainability from fresh
+choice as far as this finite observation allows. They do not establish full-bank
+training fit or diagnose a unique cause. No extra intermediate full-menu forwards
+or initial/final native comparison is included; initial state hashes/movement and
+actual update-chain observations are the learning evidence.
+
+### Complete comparators, execution and independent reader
+
+Native programs are all six fixed students, **Plain3**, **RawJ**, and **P** on every
+one of128predeclared worlds. Plain3 uses the same seeded k-means and the three plain
+layouts, source-equivalent first-kept deduplication, pays at most3static-J calls,
+and selects its maximum with lower original index ties. It need not enumerate
+all subsets merely to imitate a slower baseline. RawJ builds all raw candidates,
+pays all M current static calls and selects the raw teacher. P is exactly
+`compute_menu(world,area_size=5000,budget=3000)`: complete flat then relay plus
+flat incumbent, full top3 descent, one final metadata query and original matching.
+P's possible out-of-pool layout is a separate quality reference, not a raw label.
+
+Every main online program runs in a fresh serial child, order rotated over the nine
+arms by world offset. The child receives world/constants and, for students, its
+fixed checkpoint only. It cannot use the bank's scores or cached complete inputs.
+Measure parent spawn→immutable selection-ready cold wall, including imports,
+model construction/loading, host/reset, raw or plain generation, feature/scorer,
+matching and restoration of the execution reset; report segmented parts and
+child+parent CPU without double counting. Neural GPU occupancy includes cold loads.
+A CUDA-capable model's resident in-process scoring is an additional labeled segment,
+not a replacement for complete cold service price. No cached endpoint decision is
+substituted for actual cold selection. Compare it to its fixed endpoint decision;
+a material mismatch is retained as a technical/identity failure, not silently fixed.
+
+Then execute all1152main H500 episodes with assigned targets and the pinned straight
+line/max-speed/hold low-level semantics, restoring identity/executor/RNG. Full
+planning delay is measured separately and does not advance the native H500 clock.
+Six student audits at each of native worlds0/1, plus P at both and Plain3/RawJ at
+world0, give16complete audits. Audits call the original executor/matching interface
+against the same selected unassigned program; no new choices/fits/native training.
+They are paid even if programs coincide. No trajectory alias discount is assumed.
+
+The reader independently rebuilds every world/raw pool and **recomputes every
+static label once**; it verifies all layouts, values, masks, metadata, RNG/source
+identities and each declared count. It uses the same pinned host laws, so this is
+independent collection/reconstruction, not independent physics. For all recorded
+native initial+500positions, independently restore/recompute the pinned static
+radio/service values and check actions, trajectory, matching, source/RNG, done
+semantics and aggregates. Retain full user identities, backhaul masks, never/always
+served users, first service, censored/longest gaps, all-team outages, travel/arrival,
+frontend throughput and coverage separately, including every adverse episode.
+
+An independent functional CPU scorer implementation reads all six final checkpoints
+on each512training probe and512fresh panel, without calling the production forward.
+This is6144context reconstructions, not a replay of Adam or a second neural fit.
+Read all24576update records and all sampling/exposure counts; optimizer replay is
+explicitly not purchased. GPU choices remain authoritative. Freeze logit tolerance
+rtol1e−5/atol1e−6, retain every flag and actual choice consequence rather than widening
+it. Float64 geometry/radio comparisons use rtol1e−10/atol1e−10, positions atol1e−8,
+exact discrete identities/masks. Unexpected source/identity/nonfinite failures stop
+rather than create a science negative. Numeric discrepancies are retained with
+scope and choice consequences; engineering review may correct an inapplicable
+prospective tolerance before any result, not after seeing its outcome.
+
+### Exact proposed exposure and whole price
+
+The Oracle's approximately15.5M candidate bill is made concrete by a fixed512world
+training probe, not an unpriced all-prefix endpoint. Full training-bank endpoint
+reads would alone add9.282M candidate presentations across the six fits. We do not
+claim that unbought read. The approximately8.3M static forecast is corrected below
+by explicitly including all1168native initial+500frame checks.
+
+| Item | Proposed maximum |
+|---|---:|
+| New bank worlds |16000train+512fresh; no H500 training labels|
+| Main label calls |16512×221=3649152|
+| Full independent label calls |3649152|
+| Online Plain3/RawJ/P calls |384+28288+768128=796800|
+| All9 main matched endpoint diagnostic calls |1152|
+| Full native frame reader |1168×501=585168|
+| Engineering static permutation checks |16|
+| **Total static attempts/completions ceiling** |**8681440**|
+| Fits/updates/world presentations |6/24576/786432|
+| Optimization candidate presentations |≤12582912 (masked padding excluded)|
+| Final training probe+fresh GPU scoring |≤1357824|
+| Full same-endpoint functional CPU reader |≤1357824|
+| Actual cold student choices |≤169728|
+| Engineering full-menu scorer contexts |≤16×221=3536 candidate presentations|
+| **All neural candidate presentations** |**≤15471824**|
+| Main native/audits |1152×500+16×500=**584000**steps|
+| New checkpoint downloads/package installs |0|
+
+Engineering uses four declared training-bank worlds for16static permutation checks
+(identity/reverse/rotate-one/lexicographic row order), counted separately from their
+normal labels. At most16full-menu scorer contexts cover production/functional and
+candidate-display identity checks using already constructed canonical worlds;
+these are the only extra real neural contexts. They occur under published-source
+actual-node admission, not uncounted prelaunch probes. Pure mock/literal checks are
+separate support. Score chunking is fixed at64candidates for full-menu forward and
+functional reader; training batch32×16 candidates is preserved, not silently changed
+to reduce memory. A technical inability to execute these exact batches is returned.
+
+Forecast total **3–8CPUh and.5–2GPUh**, with hard stop/reprice at **28800CPU-s**
+(process+finished children) or **14400reserved-GPU-wall-s**, preserving partial work.
+Reader, cold model loads, all correctness, attempts and failed effects are included.
+B01 generation timing and B03 P scale are empirical anchors above; old DM2 A/R's
+complete learning phase used128.805GPU-s for its smaller input/forward bill, a useful
+scale reference rather than a linear guarantee. No actual B04 speed/memory is known.
+**14–22support-hour equivalents** are forecast separately, including implementation,
+independent engineering, full reading and result critique/publication; unmetered
+support remains unknown. Peak bound **7GiB=7516192768allocated bytes** across the
+current source snapshot, direction canonical run roots, the retained single model
+object and any own staging/scratch. Existing shared interpreter is not copied;
+no new environment or retired Laya profile is needed. Store compact geometry once,
+labels and native evidence, not permanent expanded relation tensors.
+
+Configured physical node is original`wsl_4070` and its existing Python/NumPy/Torch
+profile. No shared interpreter/configuration change is selected. Respect other
+accepted operations and obtain current node admission only for the actual exact
+published launch. A resource or counter boundary preserves the partial study and
+is a concrete reprice issue, never an automatic retry/alternative smaller model.
+
+Primary read is each stream's fresh static regret versus log2N, all per-world
+choices/margins and paired N-differences, next to common training-probe regret and
+actual finite exposure. Give the two streams separately; world-level uncertainty
+is conditional on those fixed assets, not six independent learning replications.
+No three-point power-law or causal data/compute verdict is inferred. Native J,
+C_bh, throughput, individual tails and full cold cost are separately paired for
+all nine programs on128worlds. No native maximum over all raw candidates is known.
+All fit/world failures and missing endpoints remain in the report.
+
+If regret falls coherently, retain the conditional capability and measured price,
+then judge native/cost value separately. Good probe fit with a flat fresh curve
+ends this fixed expansion purchase without identifying representation as the sole
+cause. Weak probe fit or divergent streams limits the finite optimization package;
+no fit extension follows automatically. Static gains with adverse complete service
+reject an immediate native upgrade while preserving learning. A slow but competent
+student is a capability result without compute adoption. This complete result then
+informs the next substantive use of the long-term assistance question.
