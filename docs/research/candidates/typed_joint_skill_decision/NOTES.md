@@ -2941,3 +2941,30 @@ analogy. No checkpoint, dataset, package or model was downloaded/loaded; no asse
 compatibility, license for weights, UAV transfer or cost advantage is established.
 Large-model proposal cost faces a strong adverse prior against this inexpensive
 static oracle. This lookup creates no parallel model-screening programme or fit.
+
+
+<a id="b03-final-cleanup"></a>
+### B03 final measured local retirement
+
+After independent review completed, both local observer generations were absent
+(pid378468/380015); no accepted producer or helper reader remained. Source import/
+entrypoint checks found B02/B03 consumers only inside the same retired modules/tests.
+No next implementation has been selected. The complete original advice and source
+feasibility facts were already pushed in2946796f7 before scratch deletion.
+
+Removed exactly the four owned `b02/` and `b03/` implementation/test directories
+under `experiments/candidates/typed_joint_skill_decision/` and its matching
+`tests/experiments/candidates/` path, plus the owned
+`temp/directions/typed_joint_skill_decision/` scratch container (observer, duplicate
+per-world readback, source-arithmetic scratch and mechanically extracted advice now
+preserved verbatim above). All targets are absent. Historical executable references
+remain in [published B03 source804dac52b](https://github.com/CartmanFatass/My-paper-code/tree/804dac52b1e9ac904f0b86229f88992dd392cad0/experiments/candidates/typed_joint_skill_decision)
+and [B02 sourceeb897c79a](https://github.com/CartmanFatass/My-paper-code/tree/eb897c79a9bd8327d473d4c26ca788a4ac0f9f58/experiments/candidates/typed_joint_skill_decision/b02).
+
+Actual local deleted-target allocation 503808B→0, reclaiming503808B.
+The compact [measurement](../../../../runs/typed_joint_skill_decision/b03_a01/local-cleanup.json)
+also reports net allocation across the owned code/tests/docs/runs/scratch roots,
+including this retained documentation. Original canonical B01/B02/B03 evidence,
+compact local readings and the single pinned Laya object remain; no backup chain
+or raw-evidence deletion was made. Remote snapshot disposal above is a separate
+1794961408B reduction. No cleanup blocker and no new scientific effect.

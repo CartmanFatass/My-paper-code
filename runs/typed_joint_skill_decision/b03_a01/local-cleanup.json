@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "deleted_targets_before_allocated_bytes": {
+    "experiments/candidates/typed_joint_skill_decision/b02": 212992,
+    "experiments/candidates/typed_joint_skill_decision/b03": 73728,
+    "tests/experiments/candidates/typed_joint_skill_decision/b02": 65536,
+    "tests/experiments/candidates/typed_joint_skill_decision/b03": 20480,
+    "temp/directions/typed_joint_skill_decision": 131072
+  },
+  "deleted_targets_after_allocated_bytes": {
+    "experiments/candidates/typed_joint_skill_decision/b02": 0,
+    "experiments/candidates/typed_joint_skill_decision/b03": 0,
+    "tests/experiments/candidates/typed_joint_skill_decision/b02": 0,
+    "tests/experiments/candidates/typed_joint_skill_decision/b03": 0,
+    "temp/directions/typed_joint_skill_decision": 0
+  },
+  "all_targets_absent": true,
+  "deleted_target_reclaimed_bytes": 503808,
+  "owned_roots_before_allocated_bytes": 2600960,
+  "owned_roots_after_allocated_bytes": 2105344,
+  "owned_roots_net_reclaimed_bytes": 495616,
+  "scope_note": "code/tests/docs/runs/scratch for this direction only; includes retained docs and this measurement, excludes Git object storage and other directions",
+  "source_sha": "804dac52b1e9ac904f0b86229f88992dd392cad0",
+  "observer_pids_absent": [
+    378468,
+    380015
+  ],
+  "native_or_model_or_fit_effects": 0,
+  "remote_snapshot_reclaimed_bytes_separate": 1794961408,
+  "blocker": null
+}
