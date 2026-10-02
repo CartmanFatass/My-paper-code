@@ -1,0 +1,8 @@
+{
+  "generation": 6,
+  "job_id": "b10-service-assignment-scientific-a01",
+  "status": "running",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/f48b8950e02344a606488dd313be9f256693c00dc6cf1bd1c356d8ef27424c11.json",
+  "observed": 1790907139.3640058,
+  "queue_delivery": null
+}
