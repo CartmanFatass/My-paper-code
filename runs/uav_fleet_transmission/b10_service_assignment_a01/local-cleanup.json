@@ -1,0 +1,19 @@
+{
+  "targets_removed": true,
+  "before_allocated_bytes": {
+    "temp/directions/uav_fleet_transmission": 16384,
+    "experiments/candidates/uav_fleet_transmission/b10_service_assignment/__pycache__": 135168,
+    "tests/experiments/candidates/uav_fleet_transmission/b10_service_assignment/__pycache__": 40960
+  },
+  "after_allocated_bytes": {
+    "temp/directions/uav_fleet_transmission": 0,
+    "experiments/candidates/uav_fleet_transmission/b10_service_assignment/__pycache__": 0,
+    "tests/experiments/candidates/uav_fleet_transmission/b10_service_assignment/__pycache__": 0
+  },
+  "reclaimed_allocated_bytes": 192512,
+  "observer_generation": 9,
+  "observer_stopped": true,
+  "observer_pid": 378623,
+  "observer_pid_absent": true,
+  "retained": "All source, tests, published compact/failed records, canonical raw and observer state receipts; no external or other-direction path touched"
+}

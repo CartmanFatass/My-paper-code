@@ -1,0 +1,963 @@
+{
+  "scope": "source-only post-result recomputation of saved candidate-table arithmetic; no new controller/model/native/RNG query and no H_T policy result",
+  "arms": {
+    "H_A": {
+      "worlds": [
+        {
+          "seed": 29910001,
+          "plans": 61,
+          "selected_swaps": 22,
+          "top_tied_swaps": 7,
+          "selected_travel_excess_positive": 5,
+          "selected_travel_excess_over_1m": 5,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910002,
+          "plans": 55,
+          "selected_swaps": 45,
+          "top_tied_swaps": 26,
+          "selected_travel_excess_positive": 9,
+          "selected_travel_excess_over_1m": 9,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910003,
+          "plans": 58,
+          "selected_swaps": 27,
+          "top_tied_swaps": 16,
+          "selected_travel_excess_positive": 9,
+          "selected_travel_excess_over_1m": 9,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910004,
+          "plans": 53,
+          "selected_swaps": 23,
+          "top_tied_swaps": 11,
+          "selected_travel_excess_positive": 7,
+          "selected_travel_excess_over_1m": 7,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910005,
+          "plans": 61,
+          "selected_swaps": 47,
+          "top_tied_swaps": 3,
+          "selected_travel_excess_positive": 2,
+          "selected_travel_excess_over_1m": 2,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910006,
+          "plans": 56,
+          "selected_swaps": 23,
+          "top_tied_swaps": 9,
+          "selected_travel_excess_positive": 4,
+          "selected_travel_excess_over_1m": 4,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910007,
+          "plans": 67,
+          "selected_swaps": 35,
+          "top_tied_swaps": 18,
+          "selected_travel_excess_positive": 10,
+          "selected_travel_excess_over_1m": 8,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910008,
+          "plans": 51,
+          "selected_swaps": 19,
+          "top_tied_swaps": 12,
+          "selected_travel_excess_positive": 11,
+          "selected_travel_excess_over_1m": 11,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910009,
+          "plans": 56,
+          "selected_swaps": 20,
+          "top_tied_swaps": 15,
+          "selected_travel_excess_positive": 7,
+          "selected_travel_excess_over_1m": 6,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910010,
+          "plans": 57,
+          "selected_swaps": 31,
+          "top_tied_swaps": 18,
+          "selected_travel_excess_positive": 13,
+          "selected_travel_excess_over_1m": 13,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910011,
+          "plans": 51,
+          "selected_swaps": 35,
+          "top_tied_swaps": 14,
+          "selected_travel_excess_positive": 8,
+          "selected_travel_excess_over_1m": 7,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910012,
+          "plans": 59,
+          "selected_swaps": 25,
+          "top_tied_swaps": 16,
+          "selected_travel_excess_positive": 10,
+          "selected_travel_excess_over_1m": 10,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910013,
+          "plans": 53,
+          "selected_swaps": 27,
+          "top_tied_swaps": 15,
+          "selected_travel_excess_positive": 8,
+          "selected_travel_excess_over_1m": 8,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910014,
+          "plans": 51,
+          "selected_swaps": 27,
+          "top_tied_swaps": 13,
+          "selected_travel_excess_positive": 7,
+          "selected_travel_excess_over_1m": 6,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910015,
+          "plans": 53,
+          "selected_swaps": 46,
+          "top_tied_swaps": 0,
+          "selected_travel_excess_positive": 0,
+          "selected_travel_excess_over_1m": 0,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910016,
+          "plans": 48,
+          "selected_swaps": 39,
+          "top_tied_swaps": 4,
+          "selected_travel_excess_positive": 4,
+          "selected_travel_excess_over_1m": 4,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910017,
+          "plans": 49,
+          "selected_swaps": 27,
+          "top_tied_swaps": 8,
+          "selected_travel_excess_positive": 6,
+          "selected_travel_excess_over_1m": 6,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910018,
+          "plans": 61,
+          "selected_swaps": 43,
+          "top_tied_swaps": 24,
+          "selected_travel_excess_positive": 10,
+          "selected_travel_excess_over_1m": 10,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910019,
+          "plans": 52,
+          "selected_swaps": 29,
+          "top_tied_swaps": 17,
+          "selected_travel_excess_positive": 13,
+          "selected_travel_excess_over_1m": 13,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910020,
+          "plans": 52,
+          "selected_swaps": 31,
+          "top_tied_swaps": 17,
+          "selected_travel_excess_positive": 9,
+          "selected_travel_excess_over_1m": 9,
+          "near_zero_positive_score_swaps": [
+            {
+              "step": 1290,
+              "gain": 3.552713678800501e-15
+            }
+          ]
+        },
+        {
+          "seed": 29910021,
+          "plans": 56,
+          "selected_swaps": 25,
+          "top_tied_swaps": 11,
+          "selected_travel_excess_positive": 6,
+          "selected_travel_excess_over_1m": 6,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910022,
+          "plans": 53,
+          "selected_swaps": 29,
+          "top_tied_swaps": 10,
+          "selected_travel_excess_positive": 6,
+          "selected_travel_excess_over_1m": 6,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910023,
+          "plans": 56,
+          "selected_swaps": 22,
+          "top_tied_swaps": 7,
+          "selected_travel_excess_positive": 3,
+          "selected_travel_excess_over_1m": 3,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910024,
+          "plans": 50,
+          "selected_swaps": 20,
+          "top_tied_swaps": 14,
+          "selected_travel_excess_positive": 10,
+          "selected_travel_excess_over_1m": 10,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910025,
+          "plans": 51,
+          "selected_swaps": 34,
+          "top_tied_swaps": 15,
+          "selected_travel_excess_positive": 10,
+          "selected_travel_excess_over_1m": 10,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910026,
+          "plans": 55,
+          "selected_swaps": 40,
+          "top_tied_swaps": 22,
+          "selected_travel_excess_positive": 11,
+          "selected_travel_excess_over_1m": 11,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910027,
+          "plans": 48,
+          "selected_swaps": 24,
+          "top_tied_swaps": 12,
+          "selected_travel_excess_positive": 8,
+          "selected_travel_excess_over_1m": 8,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910028,
+          "plans": 50,
+          "selected_swaps": 27,
+          "top_tied_swaps": 11,
+          "selected_travel_excess_positive": 9,
+          "selected_travel_excess_over_1m": 9,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910029,
+          "plans": 56,
+          "selected_swaps": 22,
+          "top_tied_swaps": 11,
+          "selected_travel_excess_positive": 6,
+          "selected_travel_excess_over_1m": 6,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910030,
+          "plans": 47,
+          "selected_swaps": 24,
+          "top_tied_swaps": 8,
+          "selected_travel_excess_positive": 5,
+          "selected_travel_excess_over_1m": 5,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910031,
+          "plans": 52,
+          "selected_swaps": 33,
+          "top_tied_swaps": 10,
+          "selected_travel_excess_positive": 8,
+          "selected_travel_excess_over_1m": 8,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910032,
+          "plans": 54,
+          "selected_swaps": 25,
+          "top_tied_swaps": 17,
+          "selected_travel_excess_positive": 14,
+          "selected_travel_excess_over_1m": 13,
+          "near_zero_positive_score_swaps": []
+        }
+      ],
+      "totals": {
+        "plans": 1732,
+        "selected_swaps": 946,
+        "top_tied_swaps": 411,
+        "selected_travel_excess_positive": 248,
+        "selected_travel_excess_over_1m": 242
+      },
+      "worlds_with_top_tied_swaps": 31,
+      "worlds_with_selected_travel_excess_over_1m": 31,
+      "tied_group_travel_range_median_m": 733.8455806112888,
+      "tied_group_travel_range_max_m": 2323.0756180807025,
+      "near_zero_positive_score_swaps": [
+        {
+          "seed": 29910020,
+          "step": 1290,
+          "gain": 3.552713678800501e-15
+        }
+      ]
+    },
+    "F_A": {
+      "worlds": [
+        {
+          "seed": 29910001,
+          "plans": 66,
+          "selected_swaps": 30,
+          "top_tied_swaps": 7,
+          "selected_travel_excess_positive": 4,
+          "selected_travel_excess_over_1m": 4,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910002,
+          "plans": 53,
+          "selected_swaps": 33,
+          "top_tied_swaps": 15,
+          "selected_travel_excess_positive": 7,
+          "selected_travel_excess_over_1m": 7,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910003,
+          "plans": 57,
+          "selected_swaps": 25,
+          "top_tied_swaps": 14,
+          "selected_travel_excess_positive": 8,
+          "selected_travel_excess_over_1m": 8,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910004,
+          "plans": 54,
+          "selected_swaps": 20,
+          "top_tied_swaps": 8,
+          "selected_travel_excess_positive": 5,
+          "selected_travel_excess_over_1m": 5,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910005,
+          "plans": 50,
+          "selected_swaps": 37,
+          "top_tied_swaps": 3,
+          "selected_travel_excess_positive": 2,
+          "selected_travel_excess_over_1m": 2,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910006,
+          "plans": 50,
+          "selected_swaps": 20,
+          "top_tied_swaps": 7,
+          "selected_travel_excess_positive": 3,
+          "selected_travel_excess_over_1m": 3,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910007,
+          "plans": 62,
+          "selected_swaps": 30,
+          "top_tied_swaps": 14,
+          "selected_travel_excess_positive": 8,
+          "selected_travel_excess_over_1m": 8,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910008,
+          "plans": 50,
+          "selected_swaps": 18,
+          "top_tied_swaps": 13,
+          "selected_travel_excess_positive": 13,
+          "selected_travel_excess_over_1m": 13,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910009,
+          "plans": 60,
+          "selected_swaps": 17,
+          "top_tied_swaps": 7,
+          "selected_travel_excess_positive": 6,
+          "selected_travel_excess_over_1m": 4,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910010,
+          "plans": 58,
+          "selected_swaps": 24,
+          "top_tied_swaps": 11,
+          "selected_travel_excess_positive": 8,
+          "selected_travel_excess_over_1m": 8,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910011,
+          "plans": 53,
+          "selected_swaps": 35,
+          "top_tied_swaps": 16,
+          "selected_travel_excess_positive": 10,
+          "selected_travel_excess_over_1m": 10,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910012,
+          "plans": 57,
+          "selected_swaps": 25,
+          "top_tied_swaps": 11,
+          "selected_travel_excess_positive": 5,
+          "selected_travel_excess_over_1m": 5,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910013,
+          "plans": 53,
+          "selected_swaps": 26,
+          "top_tied_swaps": 15,
+          "selected_travel_excess_positive": 8,
+          "selected_travel_excess_over_1m": 8,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910014,
+          "plans": 51,
+          "selected_swaps": 26,
+          "top_tied_swaps": 14,
+          "selected_travel_excess_positive": 12,
+          "selected_travel_excess_over_1m": 12,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910015,
+          "plans": 52,
+          "selected_swaps": 43,
+          "top_tied_swaps": 0,
+          "selected_travel_excess_positive": 0,
+          "selected_travel_excess_over_1m": 0,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910016,
+          "plans": 64,
+          "selected_swaps": 46,
+          "top_tied_swaps": 6,
+          "selected_travel_excess_positive": 5,
+          "selected_travel_excess_over_1m": 5,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910017,
+          "plans": 51,
+          "selected_swaps": 29,
+          "top_tied_swaps": 8,
+          "selected_travel_excess_positive": 5,
+          "selected_travel_excess_over_1m": 5,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910018,
+          "plans": 68,
+          "selected_swaps": 29,
+          "top_tied_swaps": 15,
+          "selected_travel_excess_positive": 9,
+          "selected_travel_excess_over_1m": 9,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910019,
+          "plans": 49,
+          "selected_swaps": 22,
+          "top_tied_swaps": 11,
+          "selected_travel_excess_positive": 9,
+          "selected_travel_excess_over_1m": 9,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910020,
+          "plans": 56,
+          "selected_swaps": 35,
+          "top_tied_swaps": 17,
+          "selected_travel_excess_positive": 7,
+          "selected_travel_excess_over_1m": 7,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910021,
+          "plans": 46,
+          "selected_swaps": 27,
+          "top_tied_swaps": 10,
+          "selected_travel_excess_positive": 7,
+          "selected_travel_excess_over_1m": 7,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910022,
+          "plans": 59,
+          "selected_swaps": 30,
+          "top_tied_swaps": 10,
+          "selected_travel_excess_positive": 8,
+          "selected_travel_excess_over_1m": 8,
+          "near_zero_positive_score_swaps": [
+            {
+              "step": 1140,
+              "gain": 7.105427357601002e-15
+            }
+          ]
+        },
+        {
+          "seed": 29910023,
+          "plans": 57,
+          "selected_swaps": 25,
+          "top_tied_swaps": 12,
+          "selected_travel_excess_positive": 3,
+          "selected_travel_excess_over_1m": 3,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910024,
+          "plans": 50,
+          "selected_swaps": 20,
+          "top_tied_swaps": 14,
+          "selected_travel_excess_positive": 11,
+          "selected_travel_excess_over_1m": 11,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910025,
+          "plans": 53,
+          "selected_swaps": 33,
+          "top_tied_swaps": 13,
+          "selected_travel_excess_positive": 8,
+          "selected_travel_excess_over_1m": 8,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910026,
+          "plans": 57,
+          "selected_swaps": 40,
+          "top_tied_swaps": 23,
+          "selected_travel_excess_positive": 13,
+          "selected_travel_excess_over_1m": 13,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910027,
+          "plans": 51,
+          "selected_swaps": 25,
+          "top_tied_swaps": 10,
+          "selected_travel_excess_positive": 9,
+          "selected_travel_excess_over_1m": 8,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910028,
+          "plans": 51,
+          "selected_swaps": 25,
+          "top_tied_swaps": 12,
+          "selected_travel_excess_positive": 9,
+          "selected_travel_excess_over_1m": 9,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910029,
+          "plans": 66,
+          "selected_swaps": 25,
+          "top_tied_swaps": 13,
+          "selected_travel_excess_positive": 8,
+          "selected_travel_excess_over_1m": 7,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910030,
+          "plans": 48,
+          "selected_swaps": 25,
+          "top_tied_swaps": 8,
+          "selected_travel_excess_positive": 5,
+          "selected_travel_excess_over_1m": 5,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910031,
+          "plans": 52,
+          "selected_swaps": 29,
+          "top_tied_swaps": 13,
+          "selected_travel_excess_positive": 8,
+          "selected_travel_excess_over_1m": 8,
+          "near_zero_positive_score_swaps": []
+        },
+        {
+          "seed": 29910032,
+          "plans": 49,
+          "selected_swaps": 30,
+          "top_tied_swaps": 19,
+          "selected_travel_excess_positive": 16,
+          "selected_travel_excess_over_1m": 15,
+          "near_zero_positive_score_swaps": []
+        }
+      ],
+      "totals": {
+        "plans": 1753,
+        "selected_swaps": 904,
+        "top_tied_swaps": 369,
+        "selected_travel_excess_positive": 239,
+        "selected_travel_excess_over_1m": 234
+      },
+      "worlds_with_top_tied_swaps": 31,
+      "worlds_with_selected_travel_excess_over_1m": 31,
+      "tied_group_travel_range_median_m": 699.2758221824251,
+      "tied_group_travel_range_max_m": 2323.0756180807025,
+      "near_zero_positive_score_swaps": [
+        {
+          "seed": 29910022,
+          "step": 1140,
+          "gain": 7.105427357601002e-15
+        }
+      ]
+    }
+  },
+  "files": [
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910001_H_A.npz",
+      "candidate_rows": 751,
+      "candidate_table_sha256": "8500a1c6d4a8d7aa0649f717b580d017d066840f63514768f20218b1c1a04a96"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910002_H_A.npz",
+      "candidate_rows": 755,
+      "candidate_table_sha256": "8a5659ffcb7480af680ebea70a0fc518a11236488380db9a5e039a84096a61c2"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910003_H_A.npz",
+      "candidate_rows": 774,
+      "candidate_table_sha256": "41e90749f362b3d941b68cd66a43cdf6c77365f21d60474c07508b2bee28a650"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910004_H_A.npz",
+      "candidate_rows": 704,
+      "candidate_table_sha256": "28c98a9720df4006a4a16b2da6164ab0c7afa05511f0319a5d845a6ab76741ea"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910005_H_A.npz",
+      "candidate_rows": 774,
+      "candidate_table_sha256": "1ea9cb4b749b3fac85b1e5dad20c036036b16aa675a103c5ee16d231b23ee272"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910006_H_A.npz",
+      "candidate_rows": 732,
+      "candidate_table_sha256": "1db624994d13f4be471b00c2b0a4a0a95b8663e6861f14cfc248370069b9af65"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910007_H_A.npz",
+      "candidate_rows": 721,
+      "candidate_table_sha256": "9f560bbaca9ee0880272e373a8597c8b550ff2117359ffd47cc75b290faa9e7a"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910008_H_A.npz",
+      "candidate_rows": 695,
+      "candidate_table_sha256": "083ef1b7f46a7108dde905093e65f2d187802aeeeb8311b8c9093f7b6463d5cb"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910009_H_A.npz",
+      "candidate_rows": 736,
+      "candidate_table_sha256": "38900c150740a60d2ae8a5a33749c3478ac92a8de316ce1351906cb7e18196bd"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910010_H_A.npz",
+      "candidate_rows": 804,
+      "candidate_table_sha256": "1ba624870d8d218221598329738b4622b598a724d7d8681059843d153d205ceb"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910011_H_A.npz",
+      "candidate_rows": 670,
+      "candidate_table_sha256": "c49a31a19e7c99b03713941192321ccfaa14e9ea4b2294f4e23090cb3a23797f"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910012_H_A.npz",
+      "candidate_rows": 798,
+      "candidate_table_sha256": "b8874702feecdb64c6405f59f480fe152d09d36cacd62d87e9d84ecc4e129667"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910013_H_A.npz",
+      "candidate_rows": 724,
+      "candidate_table_sha256": "270d3e263d5b9220222e173084a40f5ec57c30a115ea3c4104d294e0f3821f03"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910014_H_A.npz",
+      "candidate_rows": 706,
+      "candidate_table_sha256": "6d8d176d0c1664d93cf106bbb14d409ba6627593925b34d355aa209fd5d81c7d"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910015_H_A.npz",
+      "candidate_rows": 729,
+      "candidate_table_sha256": "71480bcb880827e3c8ee67545da0d1d9c95218d3d904fd65695725227bd363c8"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910016_H_A.npz",
+      "candidate_rows": 657,
+      "candidate_table_sha256": "893f83cb019d9aa1e7f35dd2547f6dab0f8c8d406e22f0d29357d0e25fa757d7"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910017_H_A.npz",
+      "candidate_rows": 736,
+      "candidate_table_sha256": "bf5a70a4edc412a58f4b050ec90c0f719a148aaff2a8c1343059ea1e1d274d1f"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910018_H_A.npz",
+      "candidate_rows": 690,
+      "candidate_table_sha256": "5331881ad15e2407904aed7e550b08b1615e38b4ee63022dd49b340abfec8551"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910019_H_A.npz",
+      "candidate_rows": 689,
+      "candidate_table_sha256": "050b0e59a5fbc4166636a03f2bd61e38dda9c2a5849990d3ef592f369cecc968"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910020_H_A.npz",
+      "candidate_rows": 710,
+      "candidate_table_sha256": "03faa58101c4dce105d979c5423707c08f030fd4383ae71c5ac1856fa5992cc7"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910021_H_A.npz",
+      "candidate_rows": 701,
+      "candidate_table_sha256": "cec01980e40ae61137c03be441843fa2937ced95fa65d988a3a6c13384c9e3d9"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910022_H_A.npz",
+      "candidate_rows": 699,
+      "candidate_table_sha256": "25bae6250983a7984b72153f1bf9f25d9b386f517d910733afd87a2defa7d7cb"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910023_H_A.npz",
+      "candidate_rows": 731,
+      "candidate_table_sha256": "0ce5bdb47c780207045358fe3ed98e8908a92e2b39b8573e600c10d871ec6e20"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910024_H_A.npz",
+      "candidate_rows": 709,
+      "candidate_table_sha256": "6c01cf431e60f25fa41de58eee72fecb9cc8de6d7dfd9d4b43aab8f3667c6f96"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910025_H_A.npz",
+      "candidate_rows": 712,
+      "candidate_table_sha256": "a8758bf49c239d3b844a27dd9f76908d9f0b29f488c7cd0b514827ccd0255991"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910026_H_A.npz",
+      "candidate_rows": 745,
+      "candidate_table_sha256": "5ef7a4a898e55f323326de396ec8f079e9bd3ec86bccd21384a287cf5c83101b"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910027_H_A.npz",
+      "candidate_rows": 667,
+      "candidate_table_sha256": "1d445463989f51bd5db64bef566bea8875e9e89f267d29e38019641610d6d63b"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910028_H_A.npz",
+      "candidate_rows": 631,
+      "candidate_table_sha256": "3ca389bb3472b006c12370c22e115e5d1f73bd6c60a3ae8c106fb6478f51415a"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910029_H_A.npz",
+      "candidate_rows": 773,
+      "candidate_table_sha256": "13fd6c401084141df4aaf573d298c1d533d39ccf2b3bce0df0bf8df7a8d43585"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910030_H_A.npz",
+      "candidate_rows": 615,
+      "candidate_table_sha256": "fd8bce64703aa4477e828f0bc23460c28746fdf61b5a5fc276999b6e6aca11a4"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910031_H_A.npz",
+      "candidate_rows": 647,
+      "candidate_table_sha256": "be9ae0615ccb0b1ba3b166ee8f21b64ef25a4c197d77b0826e78a335d667a210"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910032_H_A.npz",
+      "candidate_rows": 715,
+      "candidate_table_sha256": "f112612e248dbad5f2084d3d0783235e7b7cbff65e19d8a6bfff8a939008bc12"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910001_F_A.npz",
+      "candidate_rows": 735,
+      "candidate_table_sha256": "80c8477b9fb792eb5de910e90fc164878497651ad9f0187b5f6ffce316754e4d"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910002_F_A.npz",
+      "candidate_rows": 734,
+      "candidate_table_sha256": "217c3f74bb2768e52b455ac5f81ec908b1752c3ddf5cc3e466efb12435210bb7"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910003_F_A.npz",
+      "candidate_rows": 772,
+      "candidate_table_sha256": "1610527169cfe7450c27f43845996b260731d3efb1b9baf86088f3af483e1d33"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910004_F_A.npz",
+      "candidate_rows": 732,
+      "candidate_table_sha256": "3afc6a23b94b903b16bbda2991e9efd39888ffc1f75cba72a05a53ae5cf70b17"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910005_F_A.npz",
+      "candidate_rows": 702,
+      "candidate_table_sha256": "d384732c1db68ffbc52d5cb60e2bff1d9fd210dec550c612144bcddfbc016d31"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910006_F_A.npz",
+      "candidate_rows": 649,
+      "candidate_table_sha256": "f581a5d1c6242dc8a75f9edcceb12a20ab8c5e8c60a0f91f24b04415fae9b8a8"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910007_F_A.npz",
+      "candidate_rows": 689,
+      "candidate_table_sha256": "0e39e1d219f5a712b60e3e13d3d517b3701e37d4d861f24b5741987330eb21fb"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910008_F_A.npz",
+      "candidate_rows": 690,
+      "candidate_table_sha256": "c769f6cd29c942b9ebb461179506ab81574e8ca4c46616f15e3b48fc105df656"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910009_F_A.npz",
+      "candidate_rows": 727,
+      "candidate_table_sha256": "1b66db9f1de5f39060084ad7679c6923d8d6a3a1ed50ab600eb94b9be992c65d"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910010_F_A.npz",
+      "candidate_rows": 831,
+      "candidate_table_sha256": "25039819799bf6d08b413072dba7b0164ee9c10da3fd418dc7197fe41bcce44f"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910011_F_A.npz",
+      "candidate_rows": 680,
+      "candidate_table_sha256": "7f6b625369a69a2248d0c4bd35359b0f86cee01198aad3d96e4fba5daec529e3"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910012_F_A.npz",
+      "candidate_rows": 763,
+      "candidate_table_sha256": "a1c1f490e5497765242d0146f19c61336cf604a553556e38be7860daa560a922"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910013_F_A.npz",
+      "candidate_rows": 723,
+      "candidate_table_sha256": "80aba1d036ac54cebf88dbb150f36ec8308be1f0882508869ec5b3f2747e54bf"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910014_F_A.npz",
+      "candidate_rows": 697,
+      "candidate_table_sha256": "c0559c95756432ab35889e74e42c740f6dcb9f23b76ed281a91a759b103f1bc5"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910015_F_A.npz",
+      "candidate_rows": 695,
+      "candidate_table_sha256": "6cc3c09f6cf3c159702b86291cb0117704fc1b1a090d5f501c5073fc9909f7be"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910016_F_A.npz",
+      "candidate_rows": 669,
+      "candidate_table_sha256": "6dc4bf86b46437561412a603e0c371f2907e788dbf6bea1d7e7052bfab241ba6"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910017_F_A.npz",
+      "candidate_rows": 736,
+      "candidate_table_sha256": "6cc99c90bfb04f0b0d522d4f8627b637872023ea39a51c1988f0b6bacfd2d7f7"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910018_F_A.npz",
+      "candidate_rows": 749,
+      "candidate_table_sha256": "a333717278e3e0c9943f9628a744e94c6d5e67d586d26c4c8aedc2df9c54d9e9"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910019_F_A.npz",
+      "candidate_rows": 679,
+      "candidate_table_sha256": "d2b0a9742a90cb76a371a64ba5724cbb3cc0dace04b49bd08d5f4dd39870396b"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910020_F_A.npz",
+      "candidate_rows": 736,
+      "candidate_table_sha256": "983b5e85b9fe77760cb2cb81cfa5bb079e4302761d589e0fb92851812544c7d3"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910021_F_A.npz",
+      "candidate_rows": 636,
+      "candidate_table_sha256": "b57989232c701ec6abbdcc640c411eb849dd7fb69b5edb5476812b516584888a"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910022_F_A.npz",
+      "candidate_rows": 739,
+      "candidate_table_sha256": "0ee99b89a2c9efa9ba53e4d9fb4a0384c50fa70c6054f5859335135a74204e04"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910023_F_A.npz",
+      "candidate_rows": 763,
+      "candidate_table_sha256": "193889d9ed5200b12554cdac52ced8e8904b5b82a8cb776902d8d25626417ecb"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910024_F_A.npz",
+      "candidate_rows": 719,
+      "candidate_table_sha256": "725ca3e0183402b08946b70f95528e8fd58504e3b5f98039168d424054de6541"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910025_F_A.npz",
+      "candidate_rows": 703,
+      "candidate_table_sha256": "32d3e02ffe6d8ed48f5e3ce9c50ab598ba7d8c3b65ce066c753ea019a6da9086"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910026_F_A.npz",
+      "candidate_rows": 765,
+      "candidate_table_sha256": "12465dd0eab0594f23c7dcd15a236f3df4ed3ae314515a62376da6ddbbb8aaa7"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910027_F_A.npz",
+      "candidate_rows": 663,
+      "candidate_table_sha256": "3d25bbbf1c5eae2e453da0bca1e286229dba7387775ef94bc50b95f0806a28a1"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910028_F_A.npz",
+      "candidate_rows": 649,
+      "candidate_table_sha256": "ce3d9e3f86f1fd96ab6f4a0c0c5a95670ec509c44d1543ce7dfbb695a0249a0c"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910029_F_A.npz",
+      "candidate_rows": 794,
+      "candidate_table_sha256": "7c2302f0da2a230bbc0cc7918c29ee011b6ce346980694dd0c3851680f8a4cd7"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910030_F_A.npz",
+      "candidate_rows": 626,
+      "candidate_table_sha256": "f718ea7696517c4a6b89b44cda031a82d1b94296739c7e16042b34a243bd75b6"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910031_F_A.npz",
+      "candidate_rows": 657,
+      "candidate_table_sha256": "1be639b03ccf85f1dc0ccd474ab5a3fe8bfa6a3b9e1763bd665c7e067b114c6f"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_fleet_transmission/b10_service_assignment_a01/raw/29910032_F_A.npz",
+      "candidate_rows": 671,
+      "candidate_table_sha256": "7b33e2b52d8c760e0bc11a3ccda04bc6c39c6890d04cf7584fe892cf5cec7de6"
+    }
+  ],
+  "new_native_steps": 0,
+  "new_model_queries": 0,
+  "new_controller_queries": 0,
+  "remote_parent_cpu_seconds": 0.7675154069999999,
+  "remote_wall_seconds": 0.3068056118208915,
+  "remote_peak_rss_kib": 37176
+}

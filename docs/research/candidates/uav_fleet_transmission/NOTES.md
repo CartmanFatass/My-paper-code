@@ -8014,3 +8014,127 @@ B09's matched F−H+65.974J/+60.769QoS remains valid for its different search pa
 Current local recommendation, pending the one independent result diagnosis, is to end this exact30-tick assignment purchase without new worlds, unchanged replication, threshold/horizon tuning, fitted predictor or confirmation. Continued scientific responsibility concerns how to preserve the demonstrated ordinary service opportunity while pricing the later joint energy/route consequences, and whether anticipation can add value there. The complete native tradeoff motivates examining a concrete cost-aware continuation or a different decision interface; it does **not** establish that adding a terminal penalty, repairing one forecast outlier or lengthening the model would help. A selected successor needs a distinct source-grounded prediction and full comparison/cost; no new result operation is queued by this paragraph. Root is reusing the existing independent selection critic for this single evidence-first result diagnosis; its original answer, dissent and my resolved response will be appended, without an additional overlapping critic queue.
 
 Exact collected primary hashes: summary.json SHA2567891ff49cf5679b66c05e3098d8767b912ab4d7cac2eb2d2e73ce1350cc1d492, reading.json SHA256cad25ae780f6a79d36795ddfba687f1afe862c9ccb5af2cf9168971377ad0ae1.
+
+
+<a id="b10-independent-disposition"></a>
+### B10 complete original independent result diagnosis and resolved disposition — 2026-10-01 PDT
+
+Root assigned this single result diagnosis to the same dedicated independent ResearchCritic `/root/next_study_review`, reusing its original B10 selection reconstruction. The critic explicitly discloses seeing Root/DM result highlights and reading this DM's explanation after reconstructing the primary results; this is not claimed as a blind review. No second overlapping critic was spawned. I read the full original answer below. Root also read it in full and accepted the scoped result disposition, MATERIAL_DISSENT:no, while leaving the proposed H_T successor unselected pending its concrete contract/cost and cross-question integration.
+
+**Mechanical original provenance:** native session UUID01a0f9fe-de22-7d73-82c2-129a0cadede6, rollout `/mnt/c/Users/fires/.codex/sessions/2026/10/01/rollout-2026-10-01T17-23-45-01a0f9fe-de22-7d73-82c2-129a0cadede6.jsonl`, line1181 `event_msg.payload.type=task_complete`, timestamp2026-10-02T03:31:10.344Z. Its `last_agent_message` exactly equals Root's temporary extraction `/tmp/hmasd-root-b10-result-critic-20261001.txt`:12071 UTF8 bytes, SHA25627f1b10de8c77f7fa70f28caaf821ffc4a41566c643402f45661c250a59eeb55. The associated turn_context has turn_id01a0fa99-3835-71b3-a478-aa0367833ecf, modelgpt-6-astra, effortmax. This DM independently compared that native field with the extraction, not merely a paraphrase or completion status. The full original follows unchanged between the markers.
+
+<!-- BEGIN B10 ORIGINAL INDEPENDENT RESULT FINAL -->
+我的判断是：**保留 H_A 的普通重分配服务能力、F 的轨迹预测能力，以及部分世界中的预测控制收益；结束这套固定 30 步评分配方的继续投入。B10 没有建立 F_A 相对 H_A 的完整收益，也没有建立 H_A 或 F_A 对 C 的默认升级。**下一笔若继续投 S7，我优先考虑一个利用现有同分候选的移动成本比较，而不是增加预测器、世界数或模型时域。
+
+本次复用了我原 B10 独立选题上下文，不是盲审：任务中收到的 Root/DM 要点可见。我先重建了主要结果和原生反例，再读取本轮 DM 完整解释。以下结论与其当前“保留能力、结束固定配方、不自动扩展”的处置一致，但增加一个更具体、可证伪的继续建议。
+
+我实际检查了：
+
+- 科学源 `ee7190dae…`、完整合同及相关控制器、评分、原生奖励和 reader 源码；44 个绑定文件与该 Git 源及当前文件的 SHA 全部一致。
+- 全部 96 个任务端点，独立重算三个对照的全部已保存配对指标；与 summary 和 reader 无差异。退出记录为 0，全部 H3000，完整 reader 为 32/32 VERIFIED。
+- 21 条完整科学原始轨迹：世界 05、09、11、15、16、21、23 的三臂。逐文件核对 SHA，检查共同外生路径、初始状态、奖励分解、服务、能耗、储备、路线、候选选择与真实动作分歧。
+- 两个工程世界的 C 与 REFERENCE 共四条原始轨迹，15 类关键输入、动作、物理及服务输出逐数组完全相同。
+- 全部 64 条 H/F 任务中已保存的候选表，并对五个 F 世界独立重建当前观测的用户身份绑定及未来误差。
+
+我没有重新运行控制器、模型、原生环境或 RF。其余科学轨迹的完整内部核对依赖已完成 reader；该 reader 本身也不独立重模拟全部原生 RF。证据入口是 [完整结果](/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b10_service_assignment_a01/summary.json)、[完整 reader](/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b10_service_assignment_a01/reading.json) 和 [逐世界及个体记录](/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b10_service_assignment_a01/perworld.json)。
+
+三个主要对照如下。区间是预定的 32 个配对世界、31 自由度描述性 t95；不是等效检验或独立训练复制。
+
+| 对照 | 原生 J 均差 [t95] | 累计 QoS 均差 [t95] | J 正/负世界 |
+|---|---:|---:|---:|
+| F_A−H_A | −15.759 [−53.080, +21.561] | −20.989 [−59.375, +17.396] | 13/19 |
+| H_A−C | +20.063 [−25.373, +65.500] | +50.709 [+8.726, +92.691] | 18/14 |
+| F_A−C | +4.304 [−42.664, +51.272] | +29.719 [−13.819, +73.258] | 19/13 |
+
+H_A 的服务增量值得保留。C/H_A/F_A 的平均累计 QoS 为 2154.860/2205.569/2184.579；H_A 还改善了平均最低用户 QoS 和用户 p10。它不是只有模型分数改善的空结果。
+
+但这个能力有明确价格。H_A−C 在全部 32 个世界都增加旅行和耗能：平均每 UAV 多飞 3411 米，团队多耗 48.646 Wh，增加 162.969 个充电 UAV 步、494.250 个低储备 UAV 步。返航代价增加 15.323，其区间为 [+2.879,+27.767]。原生奖励中的两倍返航代价消耗了约 30.646 点服务收益，最终只剩未确定的 J 增量。F_A 相对 C 的旅行、耗能和储备代价也类似。
+
+**这不能同时解释 F_A−H_A。**该对照主要表现为服务减少 20.989，而返航代价减少 2.615，反而抵消了部分服务损失。把整个结果归结为“能源没罚够”，会遗漏另一类真实失败。
+
+预测和动作曝光都成立。F 的 132,141 个评分预测起点全部成功绑定；合并平均位置误差从自身“保持当前位置”的 43.520 米降至 1.226 米，每个世界的平均误差都改善。仍有 1843 个更差起点、最坏 166.301 米误差、三个身份切换，不能删去。但世界 09、15 的原始读取也显示预测明显更准而完整服务更差，不能把总体失败解释为预测普遍失效。
+
+H_A/F_A 分别在 1732/1753 个计划中评分、执行 946/904 次严格改善交换；没有选中与原布局坐标相同的交换。F_A−H_A 在全部 32 个世界产生真实提交和物理分歧，合计 72,407 个提交时刻、75,810 个物理边界不同。约一半计划没有可交换服务对，限制了这个动作空间；它不能解释成整个干预未激活。后来路径上的差异也不能逐一归因给某次早期交换。
+
+当前用户集合的合法性保留了：没有把过期记忆用户偷偷加进评分。不过，各臂后来的可见集合随轨迹不同，预测误差是 F 自身实际表示用户的诊断，不是跨臂共同样本上的因果中介量。模型只计算当前表示用户的竞争，遗漏用户并不形成服务下界；三点采样、原生 guard、途中关联和后续充电历史仍使模型分数与完整原生价值不同。
+
+个体服务没有被团队均值覆盖掉。三臂都没有从未服务用户，但都有明显的服务间断。C/H_A/F_A 的零交付间断分别有 3165/2424/2656 段；左删失均为 838 段，右删失为 184/122/143 段，最大观察长度都是 473 步。H_A−C 的全部个体零交付时间均差仅为 +0.3125 用户步，不能宣称个体中断已经改善。最低用户均值改善也不是每个同身份用户都受益。
+
+以下正反例尤其重要：
+
+- **世界 21 保留预测的具体正用途。**F−H 为 J +175.516、QoS +181.314，同时超过 C；但仍有 7/30 用户比 H 更差。两臂在首次分歧后的 30 步中，F 的原生 J 反而略低约 0.368，说明完整收益不能归结为一次局部评分准确命中。
+- **世界 15 保留强普通正能力和预测反例。**H−C 为 J +422.440、QoS +430.581，30 个用户累计服务全部改善；F−H 则为 −371.658/−358.072，24 个用户受损。首次分歧后的 30 步实际服务相同，后续闭环却大幅分开。
+- **世界 09 反驳能源单一解释。**F−C 的 J/QoS 为 −245.698/−248.811，27 个用户服务更差；F 的储备暴露却为零，低于 H 的 987 和 C 的 137。
+- **世界 16 显示延后代价。**F−C 服务增加 22.379，J 却减少 282.847；低储备暴露为 3693 对 0，末端最低电量约 7.61% 对 10.61%。H/F 最后 20 个计划均已没有可交换服务对，约 99%/98% 的返航代价发生在不评分的时段。此前的移动选择与后续任务状态有关，但这些数据没有证明某个终端罚项必能修复它。
+- **世界 23 显示均值改善仍会伴随新的中断。**H−C J 增加 98.139、QoS 增加 92.877，却独有连续 79 步全队零服务，发生在任务后段 `[2591,2670)`；C 和 F 均没有这一段。
+
+所有任务都没有耗尽或跨过 2% cutoff，但 C/H/F 在任务结束时仍分别有 12/14/15 个世界存在低于或等于 10% 储备的 UAV。H/F 更高的路线存在率也不等于服务或安全保证：C 指定为 service 的成员实际会成为别人的中继。原 C/P_BS 的默认使用限制不能撤销。
+
+最强普通解释是：**短模型重新分配能通过改变移动和共同服务几何购买额外服务，但原评分没有充分区分这些选择的完整后续成本。**C 本来就带距离优化和 300 米延续偏好；覆盖它会改变原有的移动节制。H 的正服务结果不需要未来位置预测来解释，而 F 的准确预测也没有使该分配目标更接近完整任务价值。
+
+这里还有一条比“继续提高模型精度”更具体的证据。H_A 的 946 次交换中，411 次存在多个字面浮点值完全相等的最高分候选，覆盖 31 个世界；F_A 对应为 369 次。H 这些同分组的已保存名义旅行量范围，中位数约 734 米。242 次已选交换的名义旅行量比同组最低值高超过 1 米，也覆盖 31 个世界。这里的 1 米只是描述统计，不是建议的选择阈值。
+
+因此，编号优先顺序正在相当多的“模型完全同分”选择中决定不同移动代价。这不证明它导致全部任务损失，但构成了实际、低参数的竞争解释。另有 H/F 各一次交换只以约 `3.6e−15`/`7.1e−15` 的分数优势触发，符合原先冻结的 literal `>`；它们应保留为数值事实，不能据此悄悄改容差，也不足以解释整体结果。
+
+我建议当前处置和继续方向如下：
+
+1. **结束固定配方。**不追加同样 C/H_A/F_A 世界，不把区间跨零当作必须扩样的理由；不自动训练预测器、延长时域、扫权重或恢复旧 zero-trigger。保留完整代码资产、反例和未确定结果。
+2. **若再买一项 S7 观察，优先比较一个普通 H_T 程序。**保留 H_A 的全部输入、候选、评分和状态写回；base 若达到最高分仍优先 base。只有严格优于 base 的最高分候选不止一个时，按已经计算的 `forecast_travel` 最小者选择，最后才按固定编号解同分。没有新罚项权重、近似同分容差或新模型调用规则。
+3. **比较完整任务，不能只重算旧候选表就宣称收益。**主要比较 H_T−H_A 和 H_T−C，完整保留 QoS、J、同身份用户、间断、路线、充电及末端储备。这个程序后来的历史会改变，旧表中的旅行差不能累加成预计实际节省。
+4. **最小有用购买可以复用已曝光的全部 32 个世界及冻结 C/H_A 输出。**只新增一个 H_T 完整臂，并做两个完整工程任务：102,000 原生步、0 fit。按每次最多 16 候选、包含完整 reader 的保守上界，是 108,800 个候选、3,264,000 名义步、326,400 RF 样本、68 个私有模型；有限工程检查和支持成本另闭合。这是曝光面板上的探索性比较，不是新世界确认。CPU、支持工时和新峰值仍需 DM 根据实际实现定价，不能按原 B10 的平均值线性保证。
+
+这项观察有明确的不同结果含义：若 H_T 保留服务增量、降低真实耗能和储备代价，并改善 J，得到的是普通成本选择的有用能力；若只降低名义旅行而完整结果不改善，则结束这个具体解释；若同分改选损害服务，则直接表明模型同分不代表原生价值等价。任何结果都不自动授权进一步扩模型。它也不会建立预测增量——那需要在一个值得继续使用的基程序上另行比较。
+
+实际价格需要完整保留。B10 主研究加工程共 312,000 原生步、104 次 reset、208 次 stream/probe 构造；worker 加完整 reader 共 96,836 个真实候选、2,905,080 名义步、290,508 RF 样本、136 个私有模型，0 fit。已知 CPU 为 11,804.568 秒，即 3.279 小时；收集另计约 1.876 秒。有限检查的 592 次 mock 候选尝试及未完成 mock 工作另列，不能当真实 RF 或删除。第一次工程启动失败没有原生曝光，但启动 CPU 未测；共享修复、实现、审阅及本次数据读取等支持也未全量计时。12–18 支持小时始终只是预测。
+
+C/H/F 的每任务 proposal CPU 均值为 0.859/23.444/23.259 秒，完整 worker 为 80.482/104.653/104.090 秒。因此 H 的服务能力同时增加计算成本。104 份必要原始证据共约 1.142 GB allocated，保留一份远端 canonical；不能把较低于预测的 CPU 支出当成自动购买续项的理由。
+
+最后，B09 的 F−H J +65.974、QoS +60.769 继续是有效的条件预测控制能力，同时保留 F−C 约 −454.277 的巨大缺口和原反例。B08 的准确预测而未建立完整平均收益也仍有效。B10 与旧面板不能相减称为修复幅度，未购买的 zero-trigger 方案不是实验负结果。这些证据共同要求改善“预测被用于什么选择、如何承担完整代价”的研究判断，没有关闭长期预测或决策辅助问题。
+
+**MATERIAL_DISSENT: no。**我支持 DM 当前保留能力、停止固定配方且不自动追加实验的处置；上面的 H_T 是我认为比提高预测精度更值得优先形成合同的一次有界继续建议，不是运行授权。
+<!-- END B10 ORIGINAL INDEPENDENT RESULT FINAL -->
+
+#### DM response and Root disposition
+
+I accept the independent reconstruction and scoped recommendation, with **MATERIAL_DISSENT:no**. The reader is complete and the original fixed B10 purchase ends. Preserve H_A's native ordinary service and low-end-user capability, the F representation capability and its individual favorable worlds, and all energy/return/service adverse outcomes. No H_A/F_A default adoption, established native-J upgrade, forecast-mediated benefit or learned-method claim follows. B09 remains a different package with real F−H anticipation value and severe F−C loss; B08's representation/use separation and old world29890012/29890021 failures remain. The old zero-trigger composition remains unpurchased rather than empirically refuted. C/P_BS's historical default-use restrictions, B01–B08 capabilities/failures and Claude's separate paused question are unchanged.
+
+The added independent observations sharpen rather than replace the working explanation. In world29910016 most return penalty arrives during later unscored sparse-service intervals; local scoring can move the system into a costly later state. That is a plausible missing consequence, not proof that one terminal penalty or longer rollout fixes it. Conversely world29910009 retains a large service loss with improved reserve exposure; an energy-only account of F−H is inadequate. The exact same-score candidate variation supplies a more specific ordinary competing explanation for part of H's travel bill, without asking a better forecast to solve every control mismatch. The critic's world21 first30-step loss, world15 first30-step service tie and later whole-mission differences also caution against identifying full effects with one immediately scored choice. Its same-user counts and world23 late79-step complete outage remain adverse evidence, not removed by favorable user-minimum means.
+
+I accept **preparing** the H_T rule/price as an in-scope constructive use of the H asset, not an automatic run. At this publication Root has accepted the B10 result disposition but has **not selected** H_T, battery-slack assignment, an extended rollout, additional worlds, unchanged replication, threshold tuning, fitting or confirmation. The full source-only H_T closure below returns a concrete option for Root's current integration; continued ownership of the scientific question does not end with this batch. We do not invent a need for owner approval or revive an old producer.
+
+<a id="post-b10-tie-use-source-contract"></a>
+#### Source-only H_T interface, original-table witness and complete prospective price
+
+This is a bounded source/cost construction requested by Root after the result critique; it has no new policy result. I independently read the64 saved H/F candidate tables only, without controller/model/native/RNG calls. [The compact table witness](../../../../runs/uav_fleet_transmission/b10_service_assignment_a01/tie-source-reading.json) records each table's byte digest, per-world counts and0 added effect queries. It used.767515407 remote parent CPU seconds,.306805612 elapsed seconds and37176KiB RSS; native/model data-generating work remains0. This saved-table read is additional support, not hidden in the already-complete execution meter. The critic's independent original-data reading/support is likewise additional and not fully metered by this DM.
+
+The H counts reproduce exactly:946 selected swaps;411 have multiple literal-float64 highest-score candidates, in31 worlds. The old choice has strictly greater `forecast_travel` than the minimum within that exact-score set248 times;242 exceed1m, across31 worlds. Group travel-range median733.845581m, maximum2323.075618m. F has369 such highest-score ties,239 strictly larger-travel choices and234 over1m, with median range699.275822m. The1m cutoff is a descriptive statistic only. H_T's proposed exact rule includes any literal positive travel difference, without silently adding an epsilon. H/F each retain one selected score improvement near machine precision (3.552713678800501e−15 at29910020/t1290 and7.105427357601002e−15 at29910022/t1140). Nothing here rewrites the original literal `>` contract.
+
+**Exact candidate program if selected.** Keep H_A's current-only users, tracker, C layout/actual solver eligibility, all candidate enumeration,30-tick nominal/private-model scores, lawful BS rights, sparse fallback, single clock/feedback/act and actual selected assignment in next C hysteresis. Compute the same complete candidate scores and existing travel once. If candidate0's score equals the maximum, choose base irrespective of travel. Otherwise take only candidates whose score is exactly the maximum (therefore strictly above base), choose their literal minimum float64 `forecast_travel`, then the lowest existing candidate index among exact travel ties. A unique best score is unchanged. No tolerance, weight, minimum distance saving, threshold sweep or extra model query is introduced. Candidate iteration already supplies all score/travel values in `b10_service_assignment/controller.py:214–230`; `_query:266–294` computes them, and `trace.py:14,36–40` stores travel from the30 nominal positions. The travel quantity is total joint3D path length, not native future cost or a safety certificate.
+
+A new direction-local adapter and its reader must leave B10 H_A/C source and records frozen. It can alter final selection before the inherited single `act`, with selected flags/pair/targets/last_plan describing the actual H_T commitment. Audit must distinguish original strict-score incumbent flags from a final equal-score travel selection, rather than claiming a score increase where none occurred. A new callback/adapter must not advance a shadow C, call `act` twice or rebuild candidates on the transient H_A winner. Reuse existing C-provenance/NaN/feedback contracts; independent engineering review addresses this numerical/tie/state/reader change. The existing complete B10 scientific review already supplies the motivation and scope; materially changed questions or contrary engineering findings would require the applicable focused resolution, not a permanent adviser gate.
+
+The candidate **smallest complete panel** is one H_T H3000 mission on each of the already exposed32 scientific worlds29910001–29910032, paired against frozen complete B10 C/H_A evidence at ee7190dae…/8cc3a5cbc…; add H_T H3000 on engineering29910091/29910092. Thus34 new missions/102000 native steps/34 resets/68 stream-plus-probe constructions,0 fits/labels/optimizer updates. Reusing exposed worlds is explicit exploratory development, not fresh-world confirmation or a prospective world selector. Do not rerun old C/H_A controllers or model scores; source/hash validation, all shared initial/exogenous paths and recalculated saved reference/native metrics are paid reads, including the64 old scientific C/H_A raw files and the relevant two engineering references. Any incompatible frozen source/pairing limits the comparison rather than silently launching replacements.
+
+Primary complete contrast is H_T−H_A native J with QoS/service and resource costs read together; H_T−C establishes the ordinary complete reference. Retain all32 worlds, signs/medians/descriptive paired t95, all original individual-user/outage/censoring/route/guard/charging/return/terminal-risk endpoints and actual proposal→submission→physical exposure. Equal **nominal** scores do not imply equal native service. The useful positive prediction is preserved H_A service opportunity with reduced actual travel/energy/return exposure and improved complete J. If actual service falls, or only saved-model travel changes while complete value does not improve, that weakens this concrete ordinary-cost explanation. No equivalence or noninferiority margin is invented after results. No result establishes a new prediction increment; H_T is an ordinary cost-choice comparison. Old-table travel differences must never be accumulated into supposed H_T savings, because the first changed choice changes later observations/targets/charging.
+
+| Prospective incremental scope, not authorization | Native / resets / stream-probe constructions | Candidate / nominal tick / RF / private-model conservative ceiling |
+|---|---:|---:|
+|32 new H_T scientific missions plus one complete H_T reader|96000 /32 /64|102400 /3072000 /307200 /64|
+|2 new full H_T engineering missions plus reader|6000 /2 /4|6400 /192000 /19200 /4|
+|At most6 scripted61-call H_T streams and one replay each|0 /0 /0|576 /17280 /1728 /12, all-real conservative ceiling; planned mocks have0 actual RF/private/native calls|
+|**Complete stated ceiling**|**102000 /34 /68;0fit**|**109376 /3281280 /328128 /80**|
+
+The six bounded scripted streams address base-max ties, a unique best swap, exact-score/different-travel ties, exact travel ties, literal tiny score gains and fallback/actual commitment. They are a correctness ceiling, not a test quota. Pure assertions add0 effects; all actual/mock/failed work is counted, and any additional effects are repriced before execution. New worker+reader proposal/feedback exposure is204000 plus≤732 scripted calls; planning≤6800 plus36 scripted boundaries, associations204000 plus732 and canonicalizations210800 plus768. Up to two C assignment calls per boundary gives≤13600 plus72 scripted calls; Lloyd≤6800 plus36. New H_T candidate/RF work is fully repeated once by its complete reader. The frozen reference reads are additional saved-array/hash/metric work, not new old-policy model exposure.
+
+**Resource forecast:**1.5–3CPUh for the whole incremental native/check/read chain, with4 accumulated CPUh as a checkpoint review/stop boundary preserving incomplete prefixes, not a guaranteed completion bound or automatic retry. B10's measured H worker104.653s/mission and full three-arm reader/chain cost are anchors only; changed eligible histories and legacy-reference reads prevent a linear speed guarantee. Four one-thread native workers then two readers is the provisional profile,0GPU, each worker/reader about.7–1.2GiB and parent about.5GiB pending actual-node admission. New raw approximately.35–.6GiB, compact≤10MiB, full exact source about1.8GiB; allow2.5–4GiB new node peak. Existing C/H raw remains its one canonical copy. Support forecast5–8 focused hour equivalents: implementation2–3, focused checks/engineering review1–2, complete reading/publication/cleanup1–2 and scientific decision about1. These are estimates, not measured labor; B10 and the independent/source-only work remain sunk separately. Source publication, current ownership/pause and real node resource admission would still precede any selected execution. At present **no H_T run, seed query, test, controller/model query or new implementation has been launched**.
+
+For Root's temporary Oracle I also supplied one independent source fact about a different unselected ordinary alternative: `uav_joint_transition/motion.py:95–119` provides lawful array-based return-margin arithmetic and decoded start fields, while native `energy_aware.py:1573–1589,1891–1918` methods read their own live environment and are not a counterfactual policy interface. A direct-flight/target-return energy matrix needs a new public-law adapter; target intent is interrupted by30-tick replanning/F and does not price queues or actual routes. With a fixed UAV set and target multiset, **sum** battery-minus-flight-minus-target-return slack cancels the row battery and column return totals, leaving only flight cost; it is not automatically a battery-aware assignment. This algebra/source correction is not a selected max-min policy or a claim of safety. No second innovation/critic queue was created here.
+
+<a id="b10-final-cleanup"></a>
+#### Measured B10 cleanup and retained consumers — 2026-10-01 PDT
+
+All B10 producer identities are terminal/absent and the own deterministic observer is stopped, with its final PID absent. Exact-source GC preview/apply checked the final snapshot6ca9449d8558449b88b7a269831fe145, its single reconciled claim, durable published source and no live process consumer; all237 output hashes remain exactly those collected. It removed `/home/wu/projects/HMASD/.git/hmasd-launch-sources/6ca9449d8558449b88b7a269831fe145` (1794174976 allocated bytes) and its `.git/worktrees/6ca9449d8558449b88b7a269831fe145` registration(3690496):**1797865472 bytes reclaimed**. [Source receipt](../../../../runs/uav_fleet_transmission/b10_service_assignment_a01/source-cleanup.json). Remote GC/hash support additionally measured1.418600068 parent plus.609634 reaped-child CPU seconds; unrelated transport and support remain unmetered.
+
+The three stopped B10 request JSON files were the only contents of local `temp/directions/uav_fleet_transmission`; that now-empty container and the two B10 implementation/test `__pycache__` directories were removed, reclaiming192512 allocated bytes. [Local receipt](../../../../runs/uav_fleet_transmission/b10_service_assignment_a01/local-cleanup.json). Together with the two earlier engineering source/registration removals, exact target allocation fell **4419653632 bytes**. All listed targets are absent; there is no cleanup blocker or replacement archive/copy. This is measured target reclamation, separate from new raw/compact output and shared Git-object growth, not a claim of whole-host disk change.
+
+Retain the useful ordinary assignment/forecast/controller/nominal/audit/reader and bounded evaluation code/tests: the diagnosed H_A capability, complete source-bound evidence and the concrete unselected H_T adapter comparison use these interfaces. Their source remains published, not a stale backup. Keep the single canonical104 NPZs(1141571584 allocated bytes), all compact positive/adverse/failed records, exact operation claims and necessary cross-direction B04/N8 consumers. No other direction, canonical remote dirty overlay, shared branch or prior adverse evidence was removed. This completes cleanup of the selected B10 operation; it does not close the parent scientific question or start its next candidate.
