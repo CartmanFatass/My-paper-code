@@ -1,0 +1,31 @@
+............B10 scripted mock/nominal attempted work: {"assignment_calls": 104, "assignment_solves": 96, "associations": 1464, "candidate_forecasts": 592, "candidate_forecasts_completed": 588, "canonicalizations": 1536, "future_projections": 72, "joint_forecast_ticks": 17714, "joint_forecast_ticks_completed": 17714, "lloyd_solves": 64, "mock_model_constructions": 20, "mock_model_score_calls": 1769, "model_score_calls_completed": 1768, "plans": 72, "proposals": 1464}
+......
+=============================== warnings summary ===============================
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:64
+  /home/fires/.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:64: PyparsingDeprecationWarning: 'oneOf' deprecated - use 'one_of'
+    prop = Group((name + Suppress("=") + comma_separated(value)) | oneOf(_CONSTANTS))
+
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:85
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:85
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:85
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:85
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:85
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:85
+  /home/fires/.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:85: PyparsingDeprecationWarning: 'parseString' deprecated - use 'parse_string'
+    parse = parser.parseString(pattern)
+
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:89
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:89
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:89
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:89
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:89
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:89
+  /home/fires/.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_fontconfig_pattern.py:89: PyparsingDeprecationWarning: 'resetCache' deprecated - use 'reset_cache'
+    parser.resetCache()
+
+../.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_mathtext.py:45
+  /home/fires/.venvs/hmasd-linux-cpu/lib/python3.10/site-packages/matplotlib/_mathtext.py:45: PyparsingDeprecationWarning: 'enablePackrat' deprecated - use 'enable_packrat'
+    ParserElement.enablePackrat()
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+18 passed, 14 warnings in 7.17s
