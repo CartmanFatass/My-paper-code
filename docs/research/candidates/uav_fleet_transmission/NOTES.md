@@ -8252,3 +8252,78 @@ Publish the exact a02 compact inputs, reclaim its now-unused source snapshot aft
 At published source6344ca4398bab3692e3593b0125c24135c7a563d the fixed32-world H_T scientific operation passed fresh node admission with14610812928 effective available bytes. [Original manifest](../../../../runs/uav_fleet_transmission/b11_travel_ties_a01/launch-manifest.json) preserves its one actual source/argv/output/runner identity. The unchanged worker/reader source hashes match finite and full-engineering evidence; known prior cost229.371174332CPU seconds is carried forward. Observer generation17 adopted this native handle, and the native DM remains active through all32 missions, full one-pass H_T reader, reference/native reductions and independent scientific interpretation. Acceptance is not a result.
 
 The now-unused a02 engineering snapshot5012b987dffd498fb60449a7821d669c and registration passed exact collector/consumer checks and were removed before materializing the scientific source. [Receipt](../../../../runs/uav_fleet_transmission/b11_travel_ties_engineering_a02/source-cleanup.json) measures1807351808 allocated bytes reclaimed and all19 output hashes unchanged, with.147107880 parent+.729102 child CPU seconds of cleanup support. Combined source/registration reclamation across the two engineering attempts is3614605312 bytes. Their unique evidence remains outside both removed snapshots; the active scientific snapshot is untouched. No extra raw copy, source backup or new effect query was created by cleanup.
+
+
+<a id="b11-complete-reading"></a>
+### B11 complete exploratory result: real movement savings, incomplete service preservation — 2026-10-01 PDT
+
+**Technical and comparison boundary.** The original operation d5066616c1a31dc5ab1f86a194c892352c07ccb4ac784f5f38631bd6202f60cf at source6344ca4398bab3692e3593b0125c24135c7a563d exited0 at2026-10-02T05:00:04Z; recorded runner1312706/supervisor1312705 are absent. All32 declared H_T worlds29910001–29910032 completed3000 steps, and the one complete reader is VERIFIED. This is96000 new scientific native transitions/32 resets/64 stream-plus-probe constructions/0fits. Every actual proposal, single feedback/clock, candidate query, exact final tie rule, committed target/last-plan and native endpoint passed the declared replay. Frozen C/H_A source/raw identities and common initial observations/geometry plus all3001 user-path boundaries passed in every paired world. Their192000 saved transitions were reduced; **0 old comparator controller/model/native re-executions** occurred. No missing world, incomplete prefix, extra query, changed score or automatic retry is hidden in this result.
+
+[Complete worker summary](../../../../runs/uav_fleet_transmission/b11_travel_ties_a01/summary.json), [full reader](../../../../runs/uav_fleet_transmission/b11_travel_ties_a01/reading.json), [all native per-world endpoints](../../../../runs/uav_fleet_transmission/b11_travel_ties_a01/perworld.json), [all matching/replay worlds](../../../../runs/uav_fleet_transmission/b11_travel_ties_a01/reading_worlds.json) and [DM saved-row reading](../../../../runs/uav_fleet_transmission/b11_travel_ties_a01/dm-reading.json) retain the complete evidence. The latter hashes its original compact inputs and only aggregates already-recorded values; its measured.072299641CPU seconds add0controller/model/RF/native work. The [collection receipt](../../../../runs/uav_fleet_transmission/b11_travel_ties_a01/collection-receipt.json) verifies all109 remote files and13 compact root copies, with no raw duplication. Observer generation17 READY eventeea10304de47d10fbf74561f was drained/consumed and observation stopped; the native-child queue's-32600 delivery failure is preserved separately from successful same-handle observation/collection.
+
+**Full-panel value.** Native J means C/H_A/H_T are2107.919577/2127.982951/2147.912025; cumulative QoS means2154.859853/2205.568533/2198.910873. All intervals below are the fixed descriptive paired-world t95,32 exposed worlds/31df; this is neither fresh-world confirmation nor a forecast increment.
+
+| Complete contrast | Native J mean [t95] | Cumulative QoS mean [t95] | J signs +/−/= | QoS signs +/−/= |
+|---|---:|---:|---:|---:|
+| H_T−H_A | +19.929075 [−16.723767,+56.581916] | −6.657660 [−40.714505,+27.399185] |17/14/1|14/17/1|
+| H_T−C | +39.992448 [−5.229310,+85.214206] | +44.051021 [−.762039,+88.864080] |20/12/0|20/12/0|
+| frozen H_A−C | +20.063373 [−25.372885,+65.499631] | +50.708681 [+8.726467,+92.690895] |18/14/0|21/11/0|
+
+The complete H_T−H_A J result remains unresolved. QoS is not demonstrated preserved; a spanning interval is not equivalence. The reward accounting is ΔJ=ΔQoS−2Δreturn_cost+Δgraph_potential, with maximum world residual5.12e−13. Mean return-cost reduction13.293283 contributes+26.586566J and offsets mean QoS loss6.657660; graph change+.000169 is negligible. This is an accounting identity along different complete trajectories, not a causal decomposition or a claim that native J directly charges distance/energy.
+
+**Actual use and price of movement.** On H_T's own path,1714/3200 plans were scored and1486 used unchanged sparse fallback; there was no absent-BS fallback. There were413 strictly-above-base exact top-score ties,295 changed choices across31 worlds, and911 selected swaps with no coordinate aliases. Every changed choice had strictly lower already-scored nominal travel than the old H choice; none depended on a changed-tie score gain below1e−12. Literal comparisons were nevertheless retained throughout, with no threshold. Base remained highest at803 scored plans; the two selected three-sample zero-service plans were also all-candidate zero in this panel. These counts concern actual H_T histories, not a replayed list of old H opportunities. No nominal differences are summed as real savings.
+
+All31 exposed worlds changed submitted actions and physical positions; world29910015 is exactly unchanged from H_A and has no tie change. Compared with H_A, H_T actually travels558.604558m less per UAV [−944.471632,−172.737484], with23 lower/8 higher/1 equal worlds; consumes8.093375Wh less per team [−13.618265,−2.568485]; reduces return cost13.293283 [−22.930715,−3.655851] and reserve exposure417.843750 UAV-steps [−707.917982,−127.769518]. Maximum charging wait falls8.718750steps [−17.235021,−.202479]. Charging input−3.029514Wh has an interval spanning zero. Actual native routes also change: mean routed-UAV-steps−150.406 and C-designated-service intermediary route uses+146.344 both have intervals spanning zero. Fixed geometric relay targets never meant fixed native relay paths.
+
+Against C, the resulting package still travels more in every world: mean+2852.615781m/UAV [+2264.097477,+3441.134085] and consumed energy+40.552331Wh [+32.118096,+48.986566]. Charging input+42.239583Wh and routed-UAV-steps+420.281 remain positive on their descriptive intervals. Return cost+2.029639 [−3.480165,+7.539444] is now unresolved. Thus this is a real reduction of the H movement/resource premium, not complete cost dominance over ordinary C.
+
+**Service distribution and contrary cases.** Minimum-user QoS per planned step changes H_T−H_A by **−.016484721 [−.030589516,−.002379926]**,12 positive/19 negative/1 tie worlds; user-p10 changes−.006505533 [−.021741313,+.008730246]. H_T−C minimum+.013401289 and p10+.016009468 both span zero. The old H_A positive low-user result remains evidence for that policy; it cannot be credited unchanged to H_T. Native identity pairing gives463 users better/467 worse/30 equal versus H, and549 better/411 worse versus C. These960 identities are nested within32 worlds, not960 independent inferential samples.
+
+No arm has a never-served user, cutoff or depletion in these complete missions. Terminal reserve occurs in C/H/H_T12/14/11 worlds, with68/97/69 reserve UAVs in total; this does not establish safety. Maximum observed individual gap is473/473/508ticks. All gap starts/stops and left/right censoring remain in perworld records; H_T has132 right-censored gaps versus H122 and C184. H_T's worst508tick gap is user13 inworld29910023,2492→3000, **right-censored**. In that same world H_T removes H's79tick team outage and gains+42.974J/+42.571QoS, yet user13's observed terminal gap grows452→508ticks (C420). Team service improvement therefore does not imply continuity improvement for every user. World29910007 extends its worst individual gap316→423ticks while reducing travel; it loses108.967J/106.275QoS to H.
+
+World29910002 is a constructive case: H_T−H +230.693J/+229.825QoS,−2521.686m/UAV and−35.316Wh, with24 users better. World29910009 is adverse despite reduced return exposure:−125.110J/−157.621QoS,24 users worse, reserve987→0. World29910014 loses171.363QoS while reducing return cost63.762; this mitigates but does not remove its43.838J loss. World29910020 gains86.083J while losing83.697QoS, because its return cost falls84.890. World29910015 retains the old H−C+422.440J/+430.581QoS and30 better users with **no H_T intervention**; it is inherited H capability, not evidence for the tie rule. World29910016 improves over H but still loses80.878J to C despite+56.852QoS, with2380 versus0 reserve UAV-steps. All32 signed outcomes follow, without dropping these cases.
+
+| World | H_T−H_A J | H_T−H_A QoS | H_T−C J | H_T−C QoS |
+|---|---:|---:|---:|---:|
+|29910001|+75.936612|+72.595470|+246.518911|+241.405272|
+|29910002|+230.692819|+229.825268|+156.204672|+152.757954|
+|29910003|-23.287643|-22.452261|+13.616419|+12.288655|
+|29910004|+8.438841|+25.144315|+14.609622|+77.151899|
+|29910005|+72.991274|+72.815982|+127.300069|+121.126409|
+|29910006|+21.034998|+15.446172|-74.240581|-75.750637|
+|29910007|-108.966934|-106.275465|-127.198211|-125.406537|
+|29910008|-18.881665|-16.383745|+33.020874|+34.644584|
+|29910009|-125.109593|-157.621368|-165.589280|-169.546402|
+|29910010|-66.856327|-66.933583|+77.396919|+77.092205|
+|29910011|-136.426747|-139.047537|+91.597009|+89.874873|
+|29910012|+96.783309|+75.063326|+129.313933|+118.047120|
+|29910013|+181.236066|+33.798130|+96.403061|+105.533424|
+|29910014|-43.838489|-171.363076|+42.051545|+41.737005|
+|29910015|+0.000000|+0.000000|+422.439731|+430.581367|
+|29910016|+205.986170|+90.718171|-80.877796|+56.851639|
+|29910017|-151.029126|-151.206731|-193.447292|-221.263146|
+|29910018|+25.115029|+24.159295|-130.166777|-128.728288|
+|29910019|+50.131484|+15.220123|+4.630940|-9.229388|
+|29910020|+86.082805|-83.697498|+166.304290|+160.899480|
+|29910021|+140.681603|+145.617790|+146.888716|+150.637306|
+|29910022|-4.212984|-9.827868|-56.834460|-59.606740|
+|29910023|+42.973869|+42.570715|+141.113352|+135.447763|
+|29910024|+53.452959|-29.540805|-43.743947|-9.198434|
+|29910025|+136.034164|+138.754526|+87.703352|+88.981159|
+|29910026|-38.092839|-43.712771|-10.286228|-6.223834|
+|29910027|-150.560970|-146.996799|-21.130664|-20.814615|
+|29910028|+84.376852|+79.203862|+51.966853|+51.275431|
+|29910029|-21.724842|-22.392595|-5.562240|-6.637261|
+|29910030|+123.037458|-20.192315|+67.594252|+78.214395|
+|29910031|-30.645859|-30.585382|+116.450587|+54.815603|
+|29910032|-77.621899|-55.748468|-44.289294|-37.325602|
+
+**All cost and known scope.** Scientific deployment used23092 complete candidate forecasts/692760 nominal ticks/69276 RF samples/32 private models; its single full reader repeated exactly these actual calls. Including both completed engineering missions and their readers, B11 totals **49062 actual candidates/1471860 nominal ticks/147186 RF samples/68 private model constructions**,204000 proposals/feedback,6800 plans,210800 canonicalizations,204000 associations,7068 assignment calls/6328 solves and6548 Lloyd solves. Native totals are102000steps/34resets/68 environment/probe constructions/0fit/0labels/0updates. The finite fixtures remain separately512 mock candidate attempts,15360 mock nominal ticks,1535 mock score calls and12 mock models, with the recorded two intentional interruption cases; they are not actual RF/native calls. The failed a01 locator setup remains0native/model with1.931557566CPU seconds, carried once. No hidden diagnostic or comparator replay was added.
+
+Scientific chain CPU is4220.839766698seconds,1292.101031wall seconds. The known cumulative checks+failed-startup+engineering+science/readers checkpoint is **4450.210941030CPU seconds=1.236169706CPUh**, below the4CPUh review-stop boundary. Measured science proposal CPU averages23.469957s per mission; complete worker103.957744s; full reader worker total873.002277s. Config constructor mean.005375CPU s and reset mean.063018s are included, not free cold start. C/H proposal.858752/23.443630s and worker80.482346/104.652892s are historical B10 records, not a fresh simultaneous speed comparison. Worker/reader peaks601996/587668KiB and parent489536KiB are separate per-process maxima, not a measured simultaneous sum. The original5–8support-hour equivalent was a forecast, not an actual labor meter. Hash/transport/static review/publication and later cleanup support remain separately measured or unmetered additions; known chain CPU is not asserted to be every project CPU second.
+
+Unique scientific raw is32NPZ/373448554payload bytes/373518336allocated bytes, retained only at the original node canonical run path. Scientific plus engineering raw totals398409728allocated bytes. Full uncompressed science arrays are2200768436bytes; compact metadata is published locally, with no raw backup chain. Snapshot and scratch cleanup will follow collection/consumer checks and preserve all outputs; no deletion is claimed by this entry.
+
+**Cumulative explanation and provisional disposition.** The predicted intermediate change—real travel, energy and return reductions—occurred. The stronger prediction of preserving H service/low-user benefit while establishing greater complete value did not: average service is unresolved/downward and the minimum-user endpoint is adverse. Exact equality of three sampled short-model scores does not imply equality of native service over the ensuing mission. This weakens the simple account that arbitrary equal-score travel choices were an adequate complete-value repair; it does not erase the demonstrated resource-use capability or H's original service capability. H_T is neither an established default upgrade nor a new prediction gain. B09's conditional F−H positive value and large F−C loss, B08's physically active but unsuccessful forecast-centroid change, all B01–B08 capabilities/adverses, the C/P_BS adoption restriction and world29890012/29890021 constraints remain unchanged.
+
+My current recommendation is to retain H/H_T as different observed service/resource tradeoffs and not automatically buy more worlds, a near-tie epsilon, score weights or a forecast replacement for this rule. The next consequential question is how a complete resource/service decision can use prediction while respecting useful ordinary service behavior; the already-proposed broader E/B allocation comparison remains scientifically independent and unselected, not justified or vetoed by this H_T result. Root owns cross-question investment. Root will sequentially reuse the original B10 scientific critic for this complete B11 evidence; no second critic or new producer is started. Independent diagnosis and final response/cleanup remain outstanding, so this is a complete DM read with provisional scientific disposition, not a claimed fully closed route or an owner pause.

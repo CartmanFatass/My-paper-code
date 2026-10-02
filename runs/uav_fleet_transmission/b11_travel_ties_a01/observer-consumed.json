@@ -1,0 +1,11 @@
+{
+  "rearm": {
+    "generation": 18,
+    "pid": 415063,
+    "window_seconds": 1500
+  },
+  "stop": {
+    "status": "observation_stop_requested",
+    "work_unchanged": true
+  }
+}
