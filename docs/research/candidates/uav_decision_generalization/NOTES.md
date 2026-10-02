@@ -816,3 +816,49 @@ The same native handle is registered in private
 drained and adopted with accepted/running, matching live process identities and
 consistent records; summary/exit witness were absent. The learning job remains
 terminal/consumed. This is collection in progress, not a read generalization result.
+
+### B01 fresh terminal collection and bound independent reader
+
+The accepted native operation completed with a consistent exit0 at2026-10-02
+01:51:00Z. Generation3's checkpoint was drained/rearmed without restarting the
+worker; generation4's READY was drained and consumed in generation5. App queue
+delivery again reported the known unloaded-child restriction; the active DM read
+the original observer events directly. Both recorded native processes are absent.
+
+Every collected compact terminal file was SHA256-compared against its canonical
+remote original. [Native summary](../../../../runs/uav_decision_generalization/b01_native_a01/summary.json)
+SHA256`007206bf4d5d09f17e34016169fced1cdc811f99daf78ed956c0c26095b0776e`;
+scientific manifest SHA256`e03cd4b0d7a9cf8b1cdb39f9190ae24cd30715551d63c390d9742f53e3eb32a6`.
+All384fresh worlds have all8legal menu episodes,384full-planner episodes and
+16correctness episodes:1,736,000native steps,786,045static queries,0new optimizer
+updates. All4,992cumulative GPU endpoint contexts are saved. This phase used
+2,284.915s wall,2,264.084082s process/finished-child CPU and4.727246s reserved GPU
+window; cumulative measured CPU/GPU are2,416.716184s/133.531748s. Peak process RSS
+was611,708,928bytes. Its last scientific storage snapshot records180,043,776new
+allocated evidence bytes, excluding later terminal metadata. Both logs are empty.
+These are technical completion/count facts, not yet an independently read result.
+
+`B01_FRESH_INPUT.json` (SHA256`f4c313d25d2db582e903880de3e71cd1598c9889cad83592e978755203e6a8e8`)
+binds the original canonical native root and these two terminal digests.
+`B01_AFTER_NATIVE_LEDGER.json` (SHA256`9eac644d9bcda0fe872869abc3d5ce44fe1c8924560ff84bf7fc2035a94d2fa4`)
+continues all37exact cumulative counters and measured CPU/GPU into the selected
+reader. No raw/model bulk copy or new scientific input is introduced. The reader
+will consume the retained canonical manifests and reconstruct all3,456unique
+native episodes,16audit aliases,3,072update records and4,992CPU scorer contexts.
+
+After verified collection, the supported snapshot collector previewed and removed
+the terminal native source`cf3c8842fb3948ecb05e0ec921422495`. Its directory and
+Git worktree registration are absent; allocated bytes fell820,961,280→0. Together
+with the completed learning snapshot, **1,641,906,176net bytes have been reclaimed**.
+Canonical unique evidence, source commits and operation claims remain retained.
+
+Root's shared source-snapshot repair`5d4b0619bb373d52a2c9bd0b4f6f1cd4b2ba7102`
+only changes creation of future snapshots, materializing inputs outside inherited
+sparse patterns. The deployed helper hash was verified as
+`83b22ec927b5dd452290a2a331db5b39d62385d831fb867f0c5dae26a254b11d`.
+Our accepted operations were unchanged. Reader source/input paths are tracked
+direction code and docs locators; their external data roots stay absolute. The new
+snapshot uses this repaired helper and the configured`zsh -lic`for complete
+partial-clone preparation. Root's actual-node witness anticipates approximately
+1.67GiB source materialization, priced separately from new scientific evidence;
+its shared object hydration is Root's control cost, not a new fit/native purchase.
