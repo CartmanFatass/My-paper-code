@@ -9634,3 +9634,87 @@ The new pure reading cost reported by the ResearchCritic is 6.398850 CPU-s /
 adds .665721 CPU-s /8.883873 operation-wall-s. These are added once beyond the
 reader's inclusive meter, together with its previously recorded later publication
 and DM reading costs. Final exact cleanup and publication are recorded below.
+
+<a id="b06-final-cleanup"></a>
+
+#### 2026-10-03 — Publication, measured cleanup and final boundary
+
+The complete quantitative reading and compact original outcomes were published
+at `97c79fbcb72d1eb7cf0d96eaa9f20d93ec15dae0`; the complete original independent
+answer and resolved stopping judgment at
+`2fceacff9866708e8816d045d3577e6b3c4bf044`. Source remains recoverable at the
+original worker `da74047434845cb2f5b1baf3e0023c66ecadf3d9` and unchanged-science
+reader `4a88c7145540cbee40647e907cef18e4acece6a3`. Publication of the independent
+review added .660309 CPU-s /7.838313 operation-wall-s.
+
+Both accepted operations and their observation are terminal, the full reader
+and independent review are read, and no helper has an unfinished assigned effect.
+The supported snapshot collector freshly reconciled the original process/claim
+identities and inspected live Linux references with its read-only privileged
+scan before deleting both exact snapshots. Neither had a live consumer. A
+scoped consumer search found no external B06 source/output dependency; retained
+scientific files were explicitly checked disjoint from deletion targets. The
+useful ten-module implementation and four focused tests remain as the canonical
+executable definition/reader for the retained ordinary planners and learning
+comparison. No unused prototype or standalone helper was added by this study.
+
+Actual deleted targets and their pre-deletion allocated bytes:
+
+| Exact target under `/home/fires/hmasd-wsl/` | Allocated bytes removed |
+| --- | ---: |
+| `.git/hmasd-launch-sources/48b1e23eed7846f391b23f4a5c6e8f36` | 1,835,995,136 |
+| `.git/hmasd-launch-sources/bc68aef94727442cbc082d4f97921e2e` | 1,837,187,072 |
+| `runs/uav_decision_generalization/b06_amortization_a01/scratch/` | 118,784 |
+| `runs/uav_decision_generalization/b06_amortization_a01/progress.json` | 49,152 |
+| `runs/uav_decision_generalization/b06_amortization_read_a01/progress.json` | 12,288 |
+| `runs/uav_decision_generalization/b06_amortization_read_a01/reading.json` | 335,872 |
+| `temp/directions/uav_decision_generalization/b06_tests/` | 4,096 |
+| `temp/directions/uav_decision_generalization/b06_engineering_receipts/` | 36,864 |
+| `temp/directions/uav_decision_generalization/b06_requests/` | 12,288 |
+| `experiments/candidates/uav_decision_generalization/b06_request_amortization/__pycache__/` | 126,976 |
+| `tests/experiments/candidates/uav_decision_generalization/b06_request_amortization/__pycache__/` | 122,880 |
+
+All eleven targets are absent. The declared B06 owned-root inventory, including
+directories and deduplicating `(device,inode)` without following symlinks,
+fell from **3,910,471,680 to 236,470,272 allocated bytes**: net
+**3,674,001,408 bytes reclaimed**. The later pre-cleanup maximum is 12,288B above
+the reader meter because subsequent compact receipts/output were written. This
+is allocated storage in the named scope, not a claim about Git-object shrinkage
+or total host free capacity. No full backup, archive, duplicate output or
+retention chain was created. There is no cleanup blocker or leftover target.
+
+All 4,317 manifest-bound scientific files and 224 unique reader check files
+remain present in the single canonical outputs. Frozen summaries/configs,
+launch and exit facts, fit/epoch records, checkpoints and all positive/adverse
+world evidence remain. The removed `reading.json` matched the final summary
+in every field except its earlier enclosing cost sample; final summary retains
+the later full cost and the comparison-time CPU intercept. Progress prefixes
+were superseded by complete outputs, with accepted/checkpoint facts already in
+this notebook. Endpoint scratch mirrored the completed counters/cache traces,
+which remain in published endpoint records and original mission arrays. The
+consumed engineering receipts' checks, hashes, failures and measured costs were
+already read and recorded above before their scratch directory was deleted.
+
+The cleanup itself measured **5.100519 CPU-s /5.566700 operation-wall-s**.
+Known cumulative new work through this measured cleanup is
+**16,422.780218 CPU-s (4.561883h) /17,210.495454 aggregate operation-wall-s
+(4.780693h), 0 GPU**, counting each published/reader/acquisition scope once.
+This includes the reader's 16,406.126413/17,169.047318 inclusive sample, later
+reader-input publication .828165/12.108994, four original DM reading calculations
+1.643807/.619245, retention inventory .328947/.158694, later checked-reading
+1.027487/.372907, independent review 6.398850/5.899410, evidence publication
+.665721/8.883873, review publication .660309/7.838313 and cleanup above.
+The final index/closure publication, two later schema-location errors, other
+unmetered source/Git/launch/observer/reading support and serialization/native
+tails are additional/nonzero. This is a known measured account, not a complete
+upper bound on unknown support. No resource ceiling or scientific allowance
+was expanded, and no further model/optimizer/planner/physical call occurred.
+
+At this substantive boundary the own RESEARCH standing moves to **reserve/idle**,
+with the enduring learning question and original lead retained. Topic5 is
+revised to separate task competence, fitted relative values, action fidelity
+and complete service/CPU value, while preserving R1/R4 tail capabilities and
+their actual tradeoff. There is no active producer, unread result/review,
+scheduled continuation or external blocker. The native parent receives the
+published result and optional future planning-use question; no additional
+effect is selected by this closure.
