@@ -2482,3 +2482,5 @@ The completed purchase is now published, read and cleaned; no producer, pending
 advice or required collection remains. The same DM returns the conditional
 capability, unchanged alternatives and full adverse/cost evidence to Root at the
 assigned boundary. No follow-on experiment has been selected by this closure.
+
+Final duplicate-capture check additionally removed `b02_rolling_timing_a01/formal-launch.stdout.txt` (4096 allocated bytes; byte-identical to the retained published `launch-manifest.json`) and empty `formal-launch.stderr.txt` (0 allocated bytes). They have no live consumer and preserve no unique evidence. Both are absent; the exact cleanup record now includes all four targets. Relative to the same2694987776-byte baseline, final owned allocation is859320320bytes and **final net reclamation is1835667456allocated bytes**. This supersedes only the preceding intermediate net measurement; it changes no scientific evidence or result.

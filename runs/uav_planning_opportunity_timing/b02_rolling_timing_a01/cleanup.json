@@ -3,14 +3,18 @@
   "scope": "B02 terminal snapshot and obsolete observer request; canonical unique evidence and useful source retained",
   "targets_allocated_bytes_before": {
     "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/4bf6525e190e4a84b18513be6fbbe530": 1835667456,
-    "/home/fires/hmasd-wsl/temp/directions/uav_planning_opportunity_timing/b02-wait-request.json": 4096
+    "/home/fires/hmasd-wsl/temp/directions/uav_planning_opportunity_timing/b02-wait-request.json": 4096,
+    "/home/fires/hmasd-wsl/runs/uav_planning_opportunity_timing/b02_rolling_timing_a01/formal-launch.stdout.txt": 4096,
+    "/home/fires/hmasd-wsl/runs/uav_planning_opportunity_timing/b02_rolling_timing_a01/formal-launch.stderr.txt": 0
   },
   "deleted_targets": [
     "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/4bf6525e190e4a84b18513be6fbbe530",
-    "/home/fires/hmasd-wsl/temp/directions/uav_planning_opportunity_timing/b02-wait-request.json"
+    "/home/fires/hmasd-wsl/temp/directions/uav_planning_opportunity_timing/b02-wait-request.json",
+    "/home/fires/hmasd-wsl/runs/uav_planning_opportunity_timing/b02_rolling_timing_a01/formal-launch.stdout.txt",
+    "/home/fires/hmasd-wsl/runs/uav_planning_opportunity_timing/b02_rolling_timing_a01/formal-launch.stderr.txt"
   ],
   "all_targets_absent": true,
-  "target_allocated_bytes_removed": 1835671552,
+  "target_allocated_bytes_removed": 1835675648,
   "owned_roots_measured": [
     "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/4bf6525e190e4a84b18513be6fbbe530",
     "/home/fires/hmasd-wsl/runs/uav_planning_opportunity_timing/b02_rolling_timing_a01",
@@ -29,6 +33,7 @@
   "copies_or_archives_created": false,
   "remaining_blocker": null,
   "cpu_meter_note": "GC preview/apply fragments separately recorded; before/after disk measurement, source/control/Git and final writes are not fully metered",
-  "owned_allocated_bytes_after": 859324416,
-  "net_owned_allocated_bytes_reclaimed": 1835663360
+  "owned_allocated_bytes_after": 859320320,
+  "net_owned_allocated_bytes_reclaimed": 1835667456,
+  "launcher_capture_deduplication": "formal stdout byte-identical to retained published launch-manifest; formal stderr empty; no unique evidence removed"
 }
