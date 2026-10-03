@@ -2484,3 +2484,547 @@ capability, unchanged alternatives and full adverse/cost evidence to Root at the
 assigned boundary. No follow-on experiment has been selected by this closure.
 
 Final duplicate-capture check additionally removed `b02_rolling_timing_a01/formal-launch.stdout.txt` (4096 allocated bytes; byte-identical to the retained published `launch-manifest.json`) and empty `formal-launch.stderr.txt` (0 allocated bytes). They have no live consumer and preserve no unique evidence. Both are absent; the exact cleanup record now includes all four targets. Relative to the same2694987776-byte baseline, final owned allocation is859320320bytes and **final net reclamation is1835667456allocated bytes**. This supersedes only the preceding intermediate net measurement; it changes no scientific evidence or result.
+
+
+<a id="b03-source-contract-20261003"></a>
+## 2026-10-03 — B03 source-only construction: four fixed late opportunities versus the retained early capability
+
+**Status: proposed complete comparison, source-only; no result purchase or new
+execution is selected.** Root assigned construction of the actual C contract and
+one C/D reference dependency after reading the closed B02. This entry reserves
+the inputs and defines the finite comparison for the single Root-assigned
+ResearchCritic's assessment of the actual B/C/D contracts. It does not create an
+implementation, fit, native mission, model query, profiling call, audit, positive
+pilot, additional Pro question or another review round. Root owns the current
+RESEARCH review/allocation; this source task changes only this notebook.
+
+I read the **complete original ChatGPT 6 Pro answer**, including its contrary
+arguments, cost qualifications, coverage limits and MATERIAL_DISSENT:yes against
+the earlier investment ranking. The original remains in [RESEARCH, planning
+capability next investment, Pro Answer](https://github.com/CartmanFatass/My-paper-code/blob/97a5fa0268005a258038409f9bc8e03c5073ad7d/docs/research/RESEARCH.md#planning-capability-next-investment-20261003)
+at `97a5fa0268005a258038409f9bc8e03c5073ad7d`; I do not copy it into a new answer
+record. The complete original chat body has its published SHA256
+`fe5baf23fd52f0d88718cfe612aa22d717c05fdd8c42855d5ec09d35fdb9fd7e`.
+Pro's advice is constructive design input, not an independent new reconstruction
+of all B02 arrays, an experiment, a resource grant or proof that late is better.
+
+**Response to Pro.** Adopt the finite C question, the five endpoints, the proposed
+single clock placement40/160/280/400, full early comparators, independent D service
+question and one canonical reference execution. The source algebra below verifies
+Pro's two new per-mission request/tick bounds and five-endpoint model-tick total.
+Its8–14CPUh remains a planning estimate with important sensitivities, not a quote.
+The actual-source correction is to preserve the **eligibility law**, not claim
+identical realized menus or an unconditional previous-mover ban under late clocks.
+The same mask law can expose a previously moved member again after ordinary C/E
+remutes it. Applying B02's early-only exclusion assertion to late policies would
+be wrong. This correction does not add an action right or change the question.
+No material scientific disagreement with this finite C comparison remains under
+that rule-level reading; no endorsement of an unexamined executable or automatic
+B/D purchase is implied.
+
+### Question, prediction and scope of the answer
+
+The consequential phenomenon is B02's useful but expensive repeated ordinary
+anticipation, all of whose actual fourth choices occurred by t140. Does reserving
+three of the **same four** opportunities for later actual states improve complete
+native value relative to early concentration, and does anticipation add value
+under that fixed late placement? Intended contribution: empirical understanding
+and a potentially useful ordinary control capability, **not a learning method**.
+
+Current published main was refreshed at97a5fa0268005a258038409f9bc8e03c5073ad7d.
+Its [ordinary capability background](https://github.com/CartmanFatass/My-paper-code/blob/97a5fa0268005a258038409f9bc8e03c5073ad7d/docs/research/RESEARCH.md#L983)
+(the B02 paragraphs in topic3) supplies the competent A_E4/A_E/G_E4 frontier and
+requires retaining its2.26×/3.86× compute premium and individual losses. The
+[event-order background](https://github.com/CartmanFatass/My-paper-code/blob/97a5fa0268005a258038409f9bc8e03c5073ad7d/docs/research/RESEARCH.md#L1640)
+requires absolute time, distinct command arrival/reselection, and early model
+forecasts scoped before the next actual anticipatory choice. Those judgments
+change this design concretely: no weak replacement baseline, no extra opportunities,
+no four-layer search and no assertion that a selected model tail is the complete
+rolling controller's value. The [full B02 positive/adverse reading](#b02-complete-reading)
+and [B01 reading](#b01-complete-reading) remain separate evidence; old worlds do
+not select these clocks. No unfinished A scores were inspected or used.
+
+The constructive hypothesis is that later C/E evolution changes useful muted-member
+placement and makes fresh late choices valuable; its prospective native prediction
+is positive A_S4−A_E4 J, with useful late commitments/changed complete programs.
+The strongest contrary hypothesis is that static users reward early placement and
+long benefit duration, so deferral loses J or buys later stay decisions. **The main
+sign is unresolved**, rather than a claim that early concentration is a defect.
+The demonstrated anticipation capability gives a reason to expect a positive
+A_S4−G_S4 increment, but altered visited states, shorter remaining reward and the
+finite future-policy approximation can defeat it. No probability or effect size
+is invented from this small previous panel.
+
+These schedules have nonnested attainable complete programs: early stay consumes
+an opportunity and advances10; it cannot freely reserve that right untilt280/400.
+Later opportunities also change the absolute rotating-member phase, public state,
+mask and future reward duration. Comparing their complete policies is meaningful;
+it does not identify a pure spacing coefficient at fixed native trajectories or
+prove that any particular late action caused the difference. An unchanged A_E4
+with no new scientific work remains the strongest zero-incremental-run alternative.
+This finite comparison asks a new question without obliging a fifth opportunity,
+clock scan, optimizer, chooser, amortizer, confirmation or deeper sequence tree.
+
+### Immutable host and actual five-endpoint decision contract
+
+Use the unchanged N8/U50 static-user H500 physical task, free-space radio/capacity,
+original native J and J/8 scalar reward scaling, initial/transmitter rules, public
+CountAdapter **133 FP32** report every10 ticks, actual entering mask and private
+C command/history. All endpoints see the same lawful information and receive no
+world ID, evaluator connections, individual service counts, future truth, new
+feedback, teacher or learned weight. D's possible U objective is outside C's actor.
+The detailed host/menu/ranking law is the [B02 source contract](#b02-source-contract-20261003),
+read against actual source; this entry changes only the named opportunity schedule
+and the next clock in its finite anticipatory search for the two S endpoints.
+
+Source identity is exact B02 input SHA
+`9b763be8a45dad875166efcfba8efbf9c3db54b2`, with all68 path/byte/SHA records in its
+[published config](https://github.com/CartmanFatass/My-paper-code/blob/63ee7491e79fd797cc16f6d8a706335a0b03da33/runs/uav_planning_opportunity_timing/b02_rolling_timing_a01/config.json).
+A source-only current-byte check found **68/68 match**. Canonical UTF8 JSON of that
+binding map (`sort_keys=True,separators=(',',':')`) has SHA256
+`8d08d367ed0c66e7de09f8d6dd28d9809ccaeca1177d0ccd119b81139f20e348`.
+Bind that inherited closure plus every actual new C source/input before execution;
+the old B02 world file is provenance, not the new panel. Future source or array
+hashes do not exist yet and are not fabricated by this proposal.
+
+| Endpoint | Actual opportunities | Selector |
+|---|---|---|
+| A_E4 |Exact original early rolling four, starting40; stay+10 or commanded arrival+10|Frozen `b02.controller.RollingProgram('A_E4')`; first3 anticipate current plus one ordinary next, fourth ordinary.|
+| G_E4 |Same original early four-opportunity rule|Frozen `b02.controller.RollingProgram('G_E4')`; complete ordinary selector at each.|
+| A_E |Exact original two,40 then stay+10 or commanded arrival+10|Frozen `b01.controller.TimingProgram('A_E')`; anticipatory first and ordinary second.|
+| A_S4 |Exactly40,160,280,400 regardless of earlier stay/duration|First3 current plus one ordinary selection at the **next fixed clock**; fourth ordinary.|
+| G_S4 |Exactly40,160,280,400|Complete ordinary C/E-continuation selector at each.|
+
+A_E is an explicitly cheaper two-opportunity frontier reference; the four-way
+E4/S4 timing comparison has equal opportunity limits. A2, old G_E, learned
+policies and extra clock/depth variants are not additional endpoints.
+
+At a fixed late clock, select once **before that tick's ordinary C/E update**,
+using the actual fresh report, old mask and live controller history. Install the
+selected plan with its absolute start and replace the old plan even on stay;
+consume the opportunity unconditionally. After ordinal4 there is no fifth clock.
+Stay does not advance, postpone, reclaim or repeat a fixed opportunity. No event
+outside the four clocks invokes a new planner. Ordinary C/E otherwise runs to499;
+terminal remains exactly after tick499.
+
+Every initiated plan preserves L∈{10,20,30,40}, commands at start…arrival−1 under
+the entering mask, and the arrival tick's fresh report, forced all-zero command
+and original member-containing128-mask selection. Ordinary C resumes at arrival+1;
+E keeps its ordinary10-tick cadence. Fixed gaps are120, so all preceding commands
+expire before the next fixed opportunity; final commanded arrival≤440 leaves the
+original remainder through499. Geometric arrival never advances the clock.
+Zero-path L10 commitments, old issued command bits, command clipping and all
+original mask/arrival tie-breaks are preserved.
+
+The planning menu remains **stay plus one unfiltered champion for every currently
+muted member**. It uses all100 original sites/member, all128 destination masks
+containing that member, unchanged projection/transit, and native-J stationary
+ranking over the true remaining500−t horizon. Keep nonpositive champions, all
+site/command/execution aliases and deterministic member/site ordering. Full
+continuation rank is ordered totalJ,totalserved,less current commitment path,
+shorter duration,lower member/site; stay has its frozen zero tie coordinates.
+After ranking, move only if best totalJ is **strictly greater** than that
+context's stay branch J. A service or tie-coordinate advantage at equal J does
+not move; no epsilon, weighted objective or fitted threshold is introduced.
+
+**Eligibility qualification:** original early arrival+10 selection occurs before
+ordinary E can remute the immediately preceding initiated mover, so its next-menu
+exclusion remains required for A_E/A_E4/G_E4. At a fixed late clock the same mover
+may have been remuted through ordinary history and is then lawfully eligible.
+Do not add an explicit previous-member ban, force remuting or hold a transmitter
+active until the next fixed clock. Do not transplant B02 reader lines226–235's
+early-hold assertion to S4. All arms must still prove that their menu is exactly
+the muted set under their actual entering mask. Record adjacent as well as
+nonadjacent repeated-member choices and their native service/path consequences.
+
+### Finite model law, precision, scopes and source reuse
+
+For A_S4 at ordinalk≤3 and currentt, the futureu is the next element of
+(40,160,280,400), **the same for each current candidate**. For each stay/champion:
+copy the actual controller/history; model its commitment and subsequent C/E over
+[t,u); retain the unrounded FP64 outer terminal positions; encode the ordinary
+FP32 report at absoluteu/500; select one ordinary complete-tail action on a
+separate copy of the terminal history using the report-decoded physical state;
+then execute that chosen inner plan from the saved unrounded outer positions
+over[u,500), followed by C/E. Concatenate in original tick order, rank these
+complete outer programs with strict-J stay, and execute only the actual current
+plan. Actual next selection always rebuilds from actual history and anticipates
+again if its ordinal≤3. No predicted next plan is installed as the actual one.
+The fourth actual choice and each hypothetical next chooser are ordinary.
+
+This changes the next opportunity's timing in the existing two-layer structure;
+it does not recurse over the four actual choices. FP32 command multiplication,
+FP64 outer physics, inner report quantization, original static user report bits,
+absolute member order `(t+j)%8`, E cadence and report denominator500 remain exact.
+All fixed clocks share phase0 modulo40; early clocks need not. No fake local clock,
+phase reset, history reinitialization or rounding of the outer boundary is allowed.
+Inner branches, sinks and selected suffixes cannot mutate another branch or the
+actual controller.
+
+Worker exact reuse remains private to one OptionProgram(C) segment, after its
+explicit start/arrival barrier, with the original phase40/mask/FP64 physical and
+estimated state/FP32 commands/public-user key. In contrast to B02's short early
+prefix, a120-tick late prefix can recur; such a recurrence is legal **within**
+that prefix, not a transfer across the fixed replan at its end. Start a fresh
+cache for every prefix, inner branch, selected suffix, actual selection, arm and
+world. Reconstruct absolute reports/history.next_t even on reused ticks; preserve
+ordered reductions. No old B02 trajectory, lookup table or paid new reference
+output enters a policy or replaces new C's full numerical reader.
+
+New implementation, if selected, belongs in this direction's
+`b03_clock_placement/` and matching tests/run/temp paths. The old B01/B02/fleet/
+parent modules stay read-only. New S4 menu/segment adapters admit exactly the new
+starts40/160/280/400 and import the original sites, transit, scorer, rank, C/E,
+OptionProgram, decode/encode, recurrence/certificate and reduction primitives.
+Do not patch module-global STARTS, extend a frozen controller implicitly, translate
+timestamps or copy the complete environment/planner/scorer. A narrow owned
+schedule/controller and reader integration is required: B02's factory, catalog
+start bound≤190, next-clock validation and early-mover assertion cannot be used
+unchanged for S4. Any unavoidable shared/frozen edit must be returned as a concrete
+scope exception rather than silently changing these bound inputs.
+
+Use canonical evidence identity phase/world/arm/actual ordinal/current clock/
+outer candidate/hypothetical next clock/inner candidate/segment kind. An S4
+anticipated scope can use `ae/op{k}/{first}/t{t}/t{u}/...` in its distinct A_S4
+raw directory, preserving existing segment-parent parsing while separately binding
+arm and schedule. A_E4's `ae/first` identity remains frozen. Distinct objects never
+share mutable caches, IDs or catalogs accidentally. Retain all branches, banks,
+segment boundaries, complete scientific arrays and ordered decisions; compaction
+may remove only verified duplicate segment payloads after full reconstruction.
+
+The one selected full reader would repeat **every** model/selector computation
+with `reuse=False`, verify all branch/bank/segment payloads and certificates,
+all500 actual decisions/private histories and all501 native snapshots per mission.
+It independently reconstructs native user/peer RF, assignments, reports, local
+views/visibility, all500 motions/rewards and J/8/capacity identities. It separately
+checks exact schedule/expiry/menu rights and source/input/artifact identity.
+A law/identity/reconstruction mismatch is a technical failure. Model/native
+quantization error within the distinct declared paths is an empirical reading,
+not a reason to relax tolerance, rerun a world or call the ordinary method invalid.
+
+| Endpoint/opportunity | Valid selected forecast versus native interval |
+|---|---|
+| A_E, both |Complete remaining program through499, with fresh ordinary second replanning.|
+| G_E4/G_S4,1–3 |[t_k,t_{k+1}); the model omits the next actual choice.|
+| G_E4/G_S4,4 |[t4,500).|
+| A_E4/A_S4,1–2 |[t_k,t_{k+1}); modeled next ordinary differs from actual anticipatory next and later choices.|
+| A_E4/A_S4,3 |Both complete remaining[t3,500) and additional next-choice prefix[t3,t4).|
+| A_E4/A_S4,4 |[t4,500).|
+
+This is20 valid readings per world group, **340** including the audit. Report
+commands/masks/per-tick service, ordered J total, coordinate discrepancies and
+modeled/actual next choice. Early full tails remain legitimate ranking evidence,
+not forecasts of the entire rolling controller; unexecuted branches are not native
+counterfactuals. No extra counterfactual rollout is bought for mechanism diagnosis.
+
+Use only paid saved evidence for cross-arm invariants: all five native programs
+agree through inputt40; A_E4/A_E first search and native prefix agree through the
+input to their actual early second choice; G_S4/G_E4 have the same first ordinary
+scientific search and native prefix until G_E4's second input. Compare only the
+documented ID mapping; do not strip changed clocks, scores or scientific fields.
+A_S4's first anticipatory search generally differs from A_E4 because it foresees
+u160; **no first-search or first-choice equality is asserted for those arms**.
+Complete native identity always comes from full saved arrays, not from late stay
+or equal selected relative labels. All-five first stationary bank values can be
+checked from their already-paid records without building another bank.
+
+### Fresh panel and the single C/D reference dependency
+
+Prospectively freeze **29525000…29525015** as the16 common result worlds,
+**29525900** as the one excluded audit world (one mission per endpoint), and
+**29525991** as C's bootstrap seed. Freeze
+`SeedSequence([261003,75,world_id,stream,*suffix]).generate_state(1,uint32)[0]`:
+stream1→user RandomState, stream2→UAV RandomState, stream3/suffix8→native runtime
+seed. Use the original member-major50 x/y pairs uniform[0,1000] and separate
+8 x/y/z triples with z uniform[50,150], in FP64. A boundary-aware check of current
+candidate NOTES/claims/generator input/config/world declarations found no existing
+29525xxx/29526xxx reservation; this is a scoped collision check, not knowledge of
+unrecorded work. The IDs/address were chosen before materializing any new array;
+no initial array, seed state, native score or bootstrap draw was generated here.
+
+Before any selected effect, C publishes exactly one new
+`experiments/candidates/uav_planning_opportunity_timing/b03_clock_placement/worlds.json`
+with all17 initial-array records, derived seeds, explicit draw law and little-endian
+FP64 per-array hashes. D consumes that canonical identity rather than regenerating
+a different private panel. All C endpoints reset independently with the same
+world/runtime seeds; no cross-arm controller state persists.
+
+Proposed canonical output is
+`runs/uav_planning_opportunity_timing/b03_clock_placement_a01/`, on the selected
+node's configured repository/output root. For each exact phase/world/arm, retain
+`raw/{phase}_n8_{arm}_w{world_id}/native.npz`, `native.jsonl.gz`,
+`evidence.json.gz` and `cell-status.json`, referenced by config/summary/reading and
+compact result. Shared reference arms are **A_E4/G_E4/A_E**, C-owned once:
+**51 missions/25,500 native transitions**, including their three audit missions,
+and all51 full uncompressed readers. Their new numerical outputs are not substituted
+with old B02 scores. The common physical environment/algorithm files stay pinned
+by the68 inherited bindings; new C's actual published SHA/world/config and artifact
+hashes complete the future identity when they exist.
+
+To expose this shared dependency independently of the late-clock result, propose
+one accepted85-mission operation with **fixed reference-first serialization**:
+first the three reference audit workers/readers, then all16 ascending result
+worlds with reference order(A_E4,G_E4,A_E) rotated left by world index modulo3;
+then the two S4 audit workers/readers, then all16 worlds with(A_S4,G_S4) rotated
+left modulo2. Within each arm group execute each worker once then fully read each
+once. Record the complete mission/read order in the fixed config. Reference-panel
+completion is an evidence milestone in the existing summary, **not a positive
+outcome gate**, a separate purchase, or permission to drop the remaining S4 work.
+This ordering changes no endpoint's information or native law; CPU/wall comparisons
+retain the different phase/overlap timing and do not claim a randomized timing
+benchmark. Full five-arm contrasts and cross-arm identities are completed as soon
+as the second group supplies the required saved records.
+
+D owns a distinct service-distribution question and may execute only its two new
+F endpoints after its own selected source/admission. C's late sign is irrelevant
+to that decision. D's scientific reading requires source-compatible, complete,
+hash-verified references and their audit/full-reader status, not favorable J.
+D can do independent authorized implementation/execution before all references
+finish; a missing reference is a real data dependency, never a trigger for duplicate
+baseline execution, new seeds or an unpriced audit. If C later fails, preserve
+already complete canonical references for D and report any missing comparisons;
+neither direction imputes missing worlds or automatically repairs/relaunches C.
+No separate reference operation or retry is created by this dependency design.
+
+D derives actual U from **post-transition `connections[1:]`**, per-user served ticks
+and full user-gap/censoring arrays in these native records, under the pinned
+assignment encoding. Initial snapshot0 is not an extra served tick. C retains
+these full native arrays and its complete individual-continuity readings; an
+aggregate mean or minimum alone is not a substitute. D checks hashes, dimensions,
+500-tick completion, source/world identity and original C reader completion, then
+pays its own saved-data U/individual reductions and supporting validation. It does
+not buy another physics/selector/full-model replay of C's already reconstructed
+baselines solely for U. C pays the51 worker/readers and their necessary collection;
+D pays34 new missions/17,000 native plus their readers and D-specific reduction.
+Shared-node access or an actually needed collection copy must be priced explicitly,
+not a default duplicate tree; keep one necessary canonical evidence copy and never
+remove it while D is a live consumer. The joint C/D physical purchase, if both
+selected, is119 missions/59,500 native, not170/85,000. Their common worlds are
+**not independent replications**, and timing and U gains cannot be added into a
+claimed combined late/fair policy that was never executed.
+
+I sent the one authorized bounded native dependency reply to
+`/root/dm_service_resource_control` with this panel, reference source map and
+canonical locator proposal. No App/Claude message or ACK loop is opened. That
+message was source-only and made clear that future array/output/source hashes
+and complete-reference status are not yet available.
+
+### Fixed reading, uncertainty and complete outcome branches
+
+Primary contrast: **A_S4−A_E4 complete native mean J**. The key matched-late-clock
+contrast is **A_S4−G_S4 J**; report the latter's whole service/compute increment,
+not only local model ranking. Retain all ten oriented pairwise contrasts:
+A_S4−A_E4, A_S4−G_S4, G_S4−G_E4, A_S4−A_E, G_S4−A_E,
+A_S4−G_E4, G_S4−A_E4, A_E4−G_E4, A_E4−A_E and G_E4−A_E.
+Also report the paired-world descriptive interaction
+`(A_S4−G_S4)−(A_E4−G_E4)` from the same four saved outcomes; it is not a standalone
+mechanism proof or independent discovery.
+
+For all comparisons publish all16 world vectors and mean/median, positive/equal/
+adverse counts, worst loss and contribution concentration for J, served users/tick,
+quality, height penalty, path/UAV, active count, eligible/ineligible unserved,
+whole-team p05/minimum/zero ticks/longest zero run. Undefined signed net contribution
+shares remain undefined. Use10,000 shared resamples from `default_rng(29525991)`,
+each16 world indices with replacement, paired across all endpoints and metrics,
+with2.5/97.5 percentiles. No incomplete pair becomes zero or is silently dropped.
+This is exploratory world uncertainty for fixed policies, not confirmation,
+independent training-run uncertainty, multiplicity control or equivalence.
+Eighty-five missions and800 users-within-world are not85/800 independent samples.
+
+Read all306 actual opportunities: entering eligibility, complete menu, stay/commit,
+commanded versus physical duration, zero-path/execution aliases, arrival mask,
+remuting, adjacent/nonadjacent revisits, model next choices and actual replanning.
+Native interval totals in fixed bins[0,40),[40,160),[160,280),[280,400),[400,500)
+locate tradeoffs without new counterfactuals or attributing a later difference
+solely to the corresponding action. Retain all paired individual served-tick
+changes, every unserved interval, longest gaps with both mission-edge censoring
+flags, never-served rescue/addition and losses within team-positive worlds. No
+activation subset, late commitment count or model advantage replaces the full
+native primary. D's particular U is an independent question and is not secretly
+C's selection objective or adoption gate.
+
+- A_S4 improves native J over both A_E4 and G_S4 with a useful complete tradeoff:
+  retain a conditional **fixed late** planning capability and its price; neither
+  optimal timing nor throughout-mission cooperation is established.
+- G_S4 explains the useful late gain and A_S4 adds no demonstrated value worth its
+  cost: retain the ordinary late capability. Interval overlap does not prove
+  equivalence, and cost/service tradeoffs remain explicit.
+- A_E4/A_E or G_E4 are better, or late choices mostly stay/change little: retain
+  the early frontier and close this exact clock placement. The failure of this
+  placement is not a failure of temporal cooperation or the previous positive.
+- Late anticipation beats late greedy but not the early frontier: preserve the
+  within-schedule anticipation increment and the failure to establish a better
+  complete-use package. A cheaper late program with lower J may still be a
+  conditional tradeoff, not a positive J verdict or a universal replacement.
+- Team J improves with service/quality/path/individual losses: preserve the true
+  gain and every adverse outcome; no new weighted utility, fairness guarantee or
+  post-result adoption threshold is invented. Static users do not imply equality
+  across visited states, and broader intervals do not prove no effect.
+- Inconclusive/adverse complete results close this finite purchase normally, with
+  no automatic clock scan, fifth opportunity, deeper tree, confirmation or learner.
+  Technical/resource failure instead leaves missing comparison and paid evidence;
+  do not report it as a negative planning experiment or silently repeat an audit.
+
+### Source-derived work, full price and proposed protective limits
+
+The complete prospective C purchase is **85 H500 missions/42,500 native transitions**,
+**306 actual opportunities**, and **0 fits, updates or new teacher labels**.
+The reader adds42,585 saved native snapshot reconstructions,42,500 motion/reward
+checks,42,585 calls each to user path loss/SINR/assignment and peer path loss/SINR,
+340,680 native observation reconstructions and corresponding visibility checks.
+Imports, construction/reset, native RF/observations, hashing, serialization,
+bootstrap/user reductions and publication remain additional real work.
+
+Let B=1+7×100×128=89,601 requests per maximum stationary bank, with700 rows and
+28,000 candidate-transit ticks. The original nonempty mask law bounds muted
+members by7. A C/E model tail at an alignedt costs at most
+`S(t)=217(500−t)+255(500−t)/10=242.5(500−t)` requests including model reward.
+Native controller ceiling isC=120,750 requests/mission; add128 per possible actual
+arrival conservatively without crediting C work suppressed by the option.
+An initiated L10 plan saves at leastK=11×216+255+127=2,758 requests relative to a
+stay tail, so one ordinary search is `D(t)=B+8S(t)−7K`.
+
+For a late currentt and fixednextu, every prefix length isu−t. Stay costs
+`P(t,u)=S(t)−S(u)`; each of seven initiated prefixes is bounded byP−K because the
+120-tick gap includes its arrival. Eight inner ordinary menus and eight selected
+outer suffixes then give
+`A_S(t,u)=B+8P−7K+8(B+8S(u)−7K)+8S(u)`
+`=9B+8S(t)+64S(u)−63K`.
+The three roots(40,160),(160,280),(280,400) cost at most
+**6,801,855;4,706,655;2,611,455** requests respectively. Ordinary D400=264,295;
+D40/160/280/400 are962,695/729,895/497,095/264,295. AddC+512 for four actual
+opportunities. This reproduces Pro'sA_S4=14,505,522 andG_S4=2,575,242.
+
+Each late anticipatory root's logical model ticks are
+`8(500−t)+64(500−u)` =25,440/16,800/8,160. Add800 for its final ordinary search:
+A_S4=51,200; G_S4=8×(460+340+220+100)=8,960. Count an outer concatenated
+prefix/suffix once, plus every inner branch, not a second full return merely
+because segment projections are retained. These are conservative envelopes,
+not jointly attainable menus or predicted actual work.
+
+| One mission | Worker requests ceiling | Logical model ticks | Banks | Rows | Candidate transit ticks | Complete branches | Segment certificates |
+|---|---:|---:|---:|---:|---:|---:|---:|
+|A_E4|25,621,722|97,040|28|19,600|784,000|224|248|
+|G_E4|3,855,642|14,240|4|2,800|112,000|32|32|
+|A_E|9,437,556|35,520|10|7,000|280,000|80|88|
+|A_S4|14,505,522|51,200|28|19,600|784,000|224|248|
+|G_S4|2,575,242|8,960|4|2,800|112,000|32|32|
+|All85 missions, worker|951,926,628|3,518,320|1,258|880,600|35,224,000|10,064|11,016|
+|Full reader, separately|951,926,628|3,518,320|1,258|880,600|35,224,000|10,064|11,016|
+
+Combined ceilings are1,903,853,256 requests and7,036,640 model ticks,2,516 banks,
+1,761,200 rows,70,448,000 candidate-transit ticks,20,128 full branch evaluations
+and22,032 segment certificates, plus the native reconstruction work above. Transit
+propagation under a muted mover uses unchanged invariant radio service and is
+priced as geometry/height/path work, not fictitious extra `_Scores.score` calls.
+Count requested/scored/cache-hit/actual geometry and ordinary candidate-position
+work separately. Exact worker reuse may save real computation; reader remains
+uncompressed and separately charged. C's three shared references alone account
+for661,553,640 requests and2,495,600 logical model ticks per complete pass; the two
+new late endpoints add290,372,988 requests and1,022,720 ticks. D's separate service
+adapter may add work beyond its old skeleton; this C table does not price it as
+free or claim to be D's complete bound.
+
+Paid B02's17-mission worker+reader episode totals are A_E4=10,904.891522CPU-s,
+G_E4=2,814.717974CPU-s and A_E=4,875.221029CPU-s. Their sum is
+**18,594.830525CPU-s=5.165231CPUh**, a historical common-reference cost anchor,
+not the cost of newly executed worlds. Keeping those three anchors and scaling
+A_E4 by14,505,522/25,621,722 forA_S4 andG_E4 by2,575,242/3,855,642 forG_S4 gives
+**7.402371CPUh** for the five endpoints; scaling by logical ticks instead gives
+7.255417CPUh. Both are heuristic locality/menu/reuse assumptions, not benchmarks.
+Twice the old full-reader costs with the same request ratios gives11.357562CPUh
+as another no-worker-reuse sensitivity. The earlier conservative B01 no-reuse
+request-price estimate8.171633CPUh, scaled by951,926,628/369,017,368, gives
+**21.079753CPUh**. None is a proved runtime ceiling or confidence interval.
+
+Retain Pro's **8–14 worker+reader CPUh** as a rough planning range, with the21.08h
+sensitivity visible and enclosing/preparation/engineering/support costs separate.
+Actual later-state menus, longer-prefix reuse, geometry repeats, serialization,
+node/runtime and competing jobs can change it. Plan **8–14 active support hours**
+for source/design, bounded implementation, mock checks, engineering review, full
+reading, publication and cleanup, plus machine/queue/network elapsed. Support and
+model-token use are not CPU measurements; unknown is not zero. Existing B01's
+approximately3.26048CPUh, B02's6.590587CPUh and their failed/preparatory/unknown
+support remain cumulative investment; their unused protective limits are not a
+new budget. Shared asset costs are referenced once, not charged as if acquired
+again for every consumer.
+
+Observed B02 retained raw allocated bytes by arm were176,513,024(A_E),
+397,475,840(A_E4),101,662,720(G_E4), plus22,150,738 logical bytes for its original
+whole summary/reading. B02's measured source snapshot was1,835,667,456 allocated
+bytes and runner peak RSS399,020KiB. Forecast **1–3GiB** for one canonical new C
+evidence copy, **1.7–2.2GiB** source, **1–2GiB** bounded transient output/scratch
+and **1–2GiB** process RSS; actual compression/current source/dependency import
+costs remain uncertain. No full-tree backup, duplicate raw baseline retention or
+second reference run is included. Keep required unique evidence while D consumes
+it, publish compact results/source/status, and reclaim only obsolete scratch,
+verified redundant payloads and terminal managed source snapshots with measured
+net deletion after live-consumer checks.
+
+Node suitability is source-only. This is CPU/NumPy work with one numerical thread;
+no GPU method or new profiling is proposed. Current published policy prioritizes
+configured **wsl_4070**, whose configured interpreter is
+`/home/wu/.venvs/hmasd-gcc-31021/bin/python` (Python3.10.21,NumPy1.26.3,
+Torch2.7.0+cu118) under `/usr/local/bin/agent-task`; it is the prospective first
+choice subject to actual selected source/native admission. The numeric price
+anchors above were measured on **local_linux/Jacob**, Python3.10.20,
+NumPy1.26.3,Torch2.7.0+cpu and one Torch/BLAS/OpenMP thread, so they are not a measured
+remote quote. local_linux remains a concrete same-runtime alternative for an
+explicit later node choice, not an automatic post-failure fallback. No current
+remote failure, free memory or available slot is inferred from older incidents;
+there was no remote health or memory probe in this construction. Fresh actual-node
+memory≥the configured4GiB floor, pause/lead, published source and duplicate admission
+belong to the one selected launch. A's accepted work and every other live operation
+retain their ownership and resource controls. Coordinate the chosen canonical
+reference location with D without moving an already accepted operation.
+
+Propose a **new24 aggregate metered CPUh /48 operation-wallh /12GiB allocated
+owned source+output+scratch** protective envelope if Root selects the complete
+purchase. All new measured source/preparation/input generation/mock/import/formal
+launcher/worker/full-reader/collection/closure CPU counts once. The same-host
+monotonic formal-request origin defines operation wall; do not sum overlapping
+process walls or reuse an old batch balance. A remote selected wrapper/meter must
+use its **node-local** origin and account for local transport separately; a Jacob
+monotonic timestamp cannot be subtracted from the remote host clock. This needs
+explicit future integration rather than blind reuse of B02's same-host wrapper. Include **.5CPUh/2wallh pure automated
+mock checks** within that total, and reserve **600CPU-s/1200wall-s/128MiB** within
+the main envelope for orderly failure/terminal evidence. Science stops before
+the reserve; record actual detection overshoot and unknown support. These are
+proposed protective stops, not an existing result allowance, a fit quota, or
+permission to continue until a ceiling.
+
+The first real formal-request refusal/admission/worker/full-reader/resource
+failure would close this finite purchase with its original status/error, partial
+unique evidence and cost. No automatic retry/resume, omitted reader, reference
+relaunch, seed replacement, audit repetition, fallback or reset of the clocks.
+Reconcile uncertain acceptance against that same request/handle. Pure pre-effect
+mock/source defects can be repaired within the selected bounded engineering scope;
+no real scientific pilot is smuggled into that category. A later distinct purchase
+would preserve this one's missingness and require its own substantive selection.
+
+### Feasibility and return boundary
+
+The fixed schedule is physically admissible under the inspected entry/expiry
+laws and its source-derived counts are finite. Substantial implementation and
+runtime correctness remain untested. A future concise L0 would implement the
+single behavior change—fixed late four-opportunity placement with unchanged finite
+selector—and its correctly scoped complete reader, using registered bounded
+implementation and focused independent engineering review. Synthetic checks cover
+all duration classes, stay/ties/aliases, t400→440 arrival, arbitrary actual masks,
+late adjacent revisits versus early exclusion, absolute phase, copied histories,
+FP32-inner/FP64-outer boundaries, longer-prefix recurrence, segment evidence/ID
+integrity, source tampering and first-failure retention. The five prescribed audit
+missions are part of the selected85, not additional gates or unpriced preflights.
+No such tests or implementation have been executed in this source-only task.
+
+Return this exact prospective contract and cost to Root for its already-assigned
+single independent B/C/D scientific selection review. That is the substantive
+source-construction boundary, not a request for routine per-run permission. No
+new result producer, live observer, unread Pro, implementation scratch or result
+artifact has been created. C's old positive, adverse and failed evidence remains
+unchanged. Material source qualifications are the eligibility-law distinction,
+actual-versus-modeled future policy, host-specific uncertain pricing and the
+shared-reference completeness dependency; none establishes that late clocks
+must win or that early cooperation needs repair.
+
+Source-only arithmetic over the saved B02 compact result was separately measured at0.012673001CPU-s/0.012680754wall-s; this notebook construction/write fragment through its sample used0.002021898CPU-s/0.002034345wall-s. Other source/hash/CodeGraph/Git/manual/tool work and final write tails are incompletely metered, not zero. No new native/model/RF/scorer/optimizer call occurred.
