@@ -578,3 +578,21 @@ The full reader redoes the actually purchased private H queries and actual learn
 reconstructs native endpoint arithmetic from saved evidence, and does not claim independent
 native-RF reconstruction. Save all completed/failed prefixes, exact inputs and consumed counts;
 no acceptance, exit-zero or final checkpoint alone is a read scientific result.
+
+**Reader implementation refinement (same L0, no new effects).** The learner Implementer may
+now own only `b01_native_selector/replay.py` and its matching `test_replay.py`, returning a
+single complete-mission replay function to this DM's collection driver. It must reconstruct
+the controller, one feedback call, every purchased private query and the chronological learner
+updates from the saved initial checkpoint and saved lawful observations/native rewards; then
+compare all recorded arrays and digests. Native arithmetic uses the retained B10 checker, with
+the already stated native-RF limitation. The DM retains run sequencing, checkpoint selection,
+file identities, reductions and all notebook/publication ownership. This bounded continuation
+does not expand the finite check allowance: no native/RF execution or real optimizer steps by
+the helper; any added test must use mocks or be counted by the DM before execution. Other
+writers and frozen sources remain untouched; no Git/index mutations or children.
+
+**Pre-submission control spelling correction.** Root identified that the new RESEARCH row
+used `active`, which the current admission parser does not recognize as an executable state.
+Changed only this direction state to `exploring`, preserving the selected comparison, lead,
+pause and every other row. No formal D request or native operation exists; this is a source
+control correction, not an admission retry or another scientific selection.
