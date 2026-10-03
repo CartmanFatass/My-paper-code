@@ -7,13 +7,11 @@ description: Coordination between the Claude DM session and the Codex Root as pe
 
 Authority: `docs/project/OPERATING_CONSTITUTION.md` section 2 (owner amendment 2026-09-27,
 peer status). This page holds the channel details that the amendment delegates to a shared
-method. Status: **draft proposed by the Claude session on 2026-09-27**; it takes effect when
-Root records agreement (an inbox file, below) and the owner adopts it. Afterwards either peer
-may make maintenance edits that do not change meaning (wording, valid links) with an
-explicit-path commit and a dated line under "Revisions". A substantive change to channels,
-write responsibility, communication scope or disagreement handling needs both peers' agreement
-(an `AGREEMENT` exchange); anything touching constitutional permissions or constraints is
-adopted by the owner. This method grants no new permission.
+method. The owner's adopted peer-channel amendment is recorded in constitution §2.
+Maintenance that does not change meaning uses explicit paths and the Revisions section.
+A substantive change to channels, write responsibility, communication scope or disagreement
+handling needs both peers' agreement; constitutional changes remain the owner's. Historical
+proposal/acceptance entries below preserve provenance, not a pending activation gate.
 
 ## Standing
 
@@ -127,3 +125,4 @@ new record type: messages are ephemeral, the records stay in RESEARCH, NOTES and
 - 2026-09-27 — outbound command needs the App's `CODEX_HOME` / `CODEX_SQLITE_HOME` (added after the first successful send).
 - 2026-09-27 — Root's six scoped revisions (`docs/Claude_docs/inbox/20260927_peer_collaboration_ROOT.md`, commit `d648676c1`) adopted item by item: maintenance-only later edits; lock scope and staged-diff check; delivery by commit SHA and "delivery is not reading"; content responsibility including section 4 shared background; node sparse-selection method of `0f5d78903`; disagreement sequence. Both peers agree; awaiting owner adoption.
 - 2026-09-28 — maintenance (Claude session): the active-session wake is a filesystem trigger (`tools/claude_inbox_wait.py`) instead of a fetch poll; channel, write responsibility and scope unchanged. Root may additionally touch a file under `temp/claude_inbox_trigger/` after an inbox commit made outside this checkout; not required while it commits here.
+- 2026-10-03 — owner-requested consolidation: point activation status to the adopted constitution; channel, writing and disagreement semantics unchanged.

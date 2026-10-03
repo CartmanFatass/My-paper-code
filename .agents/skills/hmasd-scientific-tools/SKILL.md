@@ -125,7 +125,7 @@ pass. Engineering checks implement the declared decision semantics, not choose t
 
 1. Start from the direction's current explanation and the observation or gap motivating this
    work. For a new question or material hypothesis/comparator/investment change, consult the
-   relevant shared background from current published main, not just the direction branch's copy.
+   relevant shared background from current published main, not a stale authoring copy.
    In `NOTES.md`, link the topic/revision and how it changes the comparison, prediction or choice,
    or explain why the scope differs. Link the relevant prior interpretation and contrary evidence. State the
    question, MARL structure, strongest simpler explanation and discriminating observation.
@@ -350,31 +350,16 @@ classes, a C-consumption ladder or a universal held-out requirement for explorat
 
 ## Pro
 
-Apply constitution section 5 proactively before establishing or materially changing the question,
-core hypothesis or key comparator; changing a failure explanation or continuing investment after
-intermediate predictions keep failing; closing/reopening a research route or broadening a claim;
-and confirmation. One adequate independent scientific review in a separate context covers an
-ordinary consequential decision; confirmation still receives scrutiny of its actual claim and
-fixed design. Add Pro when it offers distinct expertise, framing or unresolved-disagreement value.
-Do not wait for the owner to request scientific criticism. These are decision points, not a fixed
-failure count or a consultation after every result.
-
-Identify the choice that advice can change. Check the relevant prior Pro answer: if it already
-covers that choice and its evidence and premises remain materially applicable, reuse it in the
-normal notebook reasoning. Confirmation reuse must cover the actual claim, comparison and fixed
-plan. Routine implementation, planned verification, execution and collection under the same
-reasoning need no repeat. Materially changed questions, premises or evidence at these points
-need focused scientific review. When Pro adds distinct value, use `hmasd-pro-research-prompt-author`
-for synthesis, failure explanation, a simple-model/source bridge, targeted revision, hypothesis
-search or criticism as appropriate.
-
-Read the whole answer; in `NOTES.md` record what you adopt, modify or reject, which judgment
-changes and why. Engineering review remains separate from scientific review; a completed scientific
-review does not automatically require an additional Pro pass. Direction correction and material disagreements follow section 2; other in-scope
-choices remain with DM. Adviser agreement and a fixed idea count are not required.
-The DM can complete the authorized Pro browser workflow without Root forwarding
-or a per-question owner approval. Continue work independent of the pending scientific decision.
-Existing frozen review exceptions remain tied to their original object, not expanded by this method.
+Use constitution §5 at consequential scientific decisions: one adequate independent scientific
+review, with Pro added for distinct expertise, framing or unresolved-disagreement value.
+Confirmation review covers the actual claim and fixed design. Reuse complete applicable advice;
+changed premises/evidence need focused review, while routine implementation or collection adds none.
+Choose the decision advice can change, then use `hmasd-pro-research-prompt-author` for the question
+and pinned context and the applicable transport method for complete delivery. Pro is an adviser,
+not permission or a second automatic critic. Authorised consultation needs no Root forwarding.
+Read the entire answer, verify consequential claims and record adoption, revision or rejection
+and belief changes in NOTES. Preserve dissent under §2; continue independent authorised work.
+Frozen review exceptions stay with their named objects.
 
 ## Tools, only as needed
 

@@ -89,7 +89,8 @@ result stays recoverable, and its required outputs are preserved before scratch 
   bytes. Repair or verify a defect when the next claim depends on it; an unrelated historical
   failure does not block a credible alternative path.
 - **Host choice and recovery**: choose a suitable local or remote node prospectively for a
-  new experiment; the configured default is a convenience, not a remote-first requirement.
+  new experiment, following the owner's current compute priority in RESEARCH. Configuration
+  alone is not that priority; record an actual resource/access/suitability reason for a fallback.
   For an existing attempt, reconcile its process before a replacement and preserve its frozen
   dtype/device/RNG/comparator/horizon semantics. If a new host changes those semantics, label
   the new attempt accordingly rather than treating it as continuation. Admit on the destination.

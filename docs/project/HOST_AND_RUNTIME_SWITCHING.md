@@ -1,109 +1,61 @@
-# 主机与运行时切换协议
+# 主机与运行时切换
 
-操作说明，不是新的权威：与 [OPERATING_CONSTITUTION.md](OPERATING_CONSTITUTION.md) 冲突时以宪法为准。
-本协议不新增任何记录类型，只使用宪法第 4 节已有的三样记录（`NOTES.md`、`runs/<direction>/<tag>/`、
-`CLAIM_<slug>.md`）和 `docs/research/RESEARCH.md`。切换本身不恢复研究，也不解除 owner 的暂停。
+仅在实际切换／接任时使用。本页解释主机特有差异；暂停、责任移交与冻结合同遵循
+[宪法](OPERATING_CONSTITUTION.md)，通用发表／准入／恢复步骤遵循
+[engineering](../../.agents/skills/hmasd-research-engineering/SKILL.md)。切换不恢复研究。
 
-owner 要求（2026-09-18）：`main` 必须支持在 Claude 与 Codex 之间、在 Windows 与 WSL 两台主机之间随时切换，
-研究进度始终同步，两台主机只在控制面适配上不同。
+## 切换会带走什么
 
-## 1. 为什么能切换
+| 对象 | 处理 |
+| --- | --- |
+| 已发表源与控制 | 按 `.codex/hmasd-compute.toml` 的 control_source 和实际原生源身份读取；main 的控制现状不替代旧实验输入 |
+| 进程／claim／观察句柄 | 记录于现有 NOTES/run 元数据；claim 按原 Git common directory 保存，另一 clone 不自动继承 |
+| bulk／ignored 输出 | Git 不运输它们；保留已验证的持久位置和哈希，单纯留在将删除的 checkout 不构成保全 |
+| 会话私有记忆 | 不作为研究状态；接任依靠 RESEARCH、NOTES、CLAIM 和原始输出 |
+| 用户级 MCP／原生设置 | 需在目标环境实际可用；仓库配置或生成检查不证明已生效 |
 
-| 事实 | 位置 |
-|---|---|
-| 研究权威只有一处：`origin` 的 `refs/heads/main`。启动器把本机 `RESEARCH.md` 的暂停、方向状态、Lead 与已发布版本比较，不一致就拒绝 | `.codex/hmasd-compute.toml` `[control_source]`，`scripts/hmasd_launch.py` |
-| 同一份 `main` 服务两台主机：控制面节点按 `--node` → `HMASD_CONTROL_PLANE_NODE` → `[control_plane_by_platform]` → `control_plane_node` 的顺序选出 | `.codex/hmasd-compute.toml` |
-| 两个运行时读同一套方法：`.agents/skills` 是维护源，`.claude/**` 由 `tools/publish_claude_control.py` 生成 | [CONTROL_PLANE_MAP.md](CONTROL_PLANE_MAP.md) |
-| 结果节点相同：两台主机都经 ssh 使用 `wsl_4070` | `.codex/hmasd-compute.toml` |
-| Pro 通道相同：两台主机驱动同一个 Windows agentify 应用，注册在各主机、各运行时的用户级配置里 | `.agents/skills/hmasd-chatgpt-pro-transport/references/agentify.md` |
-| WSL 主机另有本机 Pro 通道（2026-09-18 起为 WSL 默认）：Jev Ultrafast 驱动本机无头 Chrome，登录的是 owner 的第二个 ChatGPT 账号；另一账号的会话 URL 在这里不存在，发送用 `new` 或本账号返回的 URL | `.agents/skills/hmasd-jev-pro-transport/SKILL.md`，`.codex/hmasd-transport.toml` `[jev]` |
+每台主机使用自己的 checkout/index/解释器。Windows 路径和 WSL 路径不能互换执行；
+不要从 WSL 调 `/mnt/c/.../python.exe`。通过 `tools.research_support.interpreters` 查询
+scientific/control-plane Python，解释器覆盖和 native-build PATH 见 `tests/AGENTS.md`。
+Linux torch 扩展需要 scientific venv 的 bin 在 PATH，才能找到 ninja；不安装进现有环境。
 
-每台主机只保留自己的 checkout（Windows `C:/Projects/HMASD`，WSL `/home/fires/hmasd-wsl`）。不跨 `/mnt/c` 或
-`\\wsl$` 使用对方的 checkout、index 或解释器。
+## 接回已有工作
 
-## 2. git 带不走的东西
+离开前在原记录写清责任、未决判断、已接受和接受不确定的工作、节点及 operation ref、
+未读结果／建议和唯一输出位置。发表已完成的自有改动，保留其他写者；遵循 engineering 的
+显式路径／串行 Git 方法。共享 main 有他人的未提交文件不是清空工作区或另建发布树的理由。
+本机进程若不能由接任环境观察，应先到可恢复边界或保留原观察路径；远端进程可以继续，
+但接任者必须实际验证同一原生句柄和可用观察路径。不要用重启获得新句柄。
 
-切换前必须自己处理，因为它们不随 `main` 同步：
+切入后先核对 owner pause、当前 lead/地址与完整已发表记录。没有真实移交不接管方向。
+按原 operation ref 查询 accepted worker／Send 的实际状态；不确定时对账同一请求。
+控制 checkout 与运行 snapshot 不是同一对象；不能通过修改旧 snapshot 的 lead 绕过准入。
+联系地址变化写 routing；实际责任变化才按合同协调 lead，保留未移交的接受操作。
 
-- **进程句柄与 claim。** 启动器的 claim 库按 git 公共目录存放，两个克隆互不可见；本机启动的进程只有本机能观察。
-  远端 `wsl_4070` 上的运行两台主机都能经 ssh 观察，前提是 `NOTES.md` 里记了 operation ref。
-- **被忽略的产物。** `temp/`、`logs/`、`*.csv`、`*.log`、`*.pt` 不进 git；要留给对方看的表格发布为 `.json`，
-  结论写进 `NOTES.md`。
-- **运行时私有记忆。** Claude 记忆与 Codex memories 各主机、各运行时独立，不能承载研究状态；
-  研究状态只写进上面三样记录。
-- **逐位数值。** 相同版本的 numpy/torch 在 Windows 与 Linux 上仍有 1–2 ULP 差异。带字节一致性守卫的测试
-  按主机各有基线（例：`tests/fixtures/flexible_skill_duration_d2/fingerprint_off{,.linux}.json`）；
-  一个主机上的本地检查不能逐位预言另一台主机或 `wsl_4070` 的数值。科学比较始终在同一节点、同一批次内进行。
+Codex 原生子 DM 要保持 turn 至完整收集判读，Root 用 native follow-up 恢复同一 child。
+独立 POSIX Codex 在返回路径支持时用 `tools/hmasd_wait.py`；Claude／Pi／OMP 采用自身
+已验证的确定性观察与 native/manual return。Codex queue 不自动唤醒其他运行时。
+Jev 与 Agentify 各按实际 provider 的 transport skill；不要假定两个账号共享 conversation URL。
 
-## 3. 切出（离开当前主机或运行时之前）
+## 只验证受切换影响的能力
 
-1. **没有在途的本机运行。** 本机启动的运行已到终态并已收集；远端运行可以在途，但其 operation ref、节点、
-   预期结束时间已写入该方向的 `NOTES.md`。不确定的启动或 Send 先按同一请求对账，绝不盲目重发。
-2. **记录落盘。** 当前想法、读数、下一步写入 `NOTES.md`（追加）；`RESEARCH.md` 的该方向一行反映真实状态。
-   不另写 handoff 文件：`NOTES.md` 的最后一节就是交接。
-3. **提交并发布。** 用显式 pathspec 提交并推送方向分支；DM 自行将本方向 RESEARCH 条目和固定
-   证据链接发布到 `main`，无需 Root 代更。代码和结果可保留在已发布方向分支，接任者按链接取回。
-   从最新 main 的自有 checkout/index 更新，合并并发修改，保留其他方向；不要覆盖旧整表或共用 index。
-4. **工作区干净。** `git status` 为空；没有未完成的 merge、rebase 或 cherry-pick；临时 worktree 已移除或已说明。
-5. **Lead 如需变更**，在 `RESEARCH.md` 的 Lead runtime 单元格里改并发布到 `main`。一个方向任何时刻只有一个
-   lead/writer（宪法第 2 节）；启动器的 `--lead` 必须与已发布的单元格逐字一致，所以不改单元格就换不了执行者。
+用已有检查回答具体的不确定项，复用仍适用的结果，不把全部测试变成每批启动清单：
 
-## 4. 切入（在另一台主机或另一个运行时开始之前）
+- 共享正文／副本变化：control-plane Python 执行 `tools/publish_claude_control.py --check`；
+  生成行为变化时使用 `tests/skills/test_control_publication.py` 和 `test_control_alignment.py`。
+- 节点、源身份或启动行为变化：核对 compute 配置与实际节点；需要时运行已有
+  `tests/test_hmasd_launch.py`，不以一次测试代替 fresh node admission。
+- native backend／数值变化：用相关 backend 或方向测试，依 `tests/AGENTS.md` 管理 scratch。
+  Windows/Linux 即使版本相同也可能有 ULP 差异；一台机器通过不证明另一台逐位相同。
+- Pro 路径变化：按所选 transport 的 preflight 与 same-key reconciliation 检查；不以
+  测试链路为由发新问题或重发已有问题。WSL 给 Windows Agentify 的文件路径必须可被 Windows 打开。
 
-1. `git status` 干净，`git pull --ff-only origin main`。拉不动先查原因（未完成的 cherry-pick、本地分叉），
-   不用 reset、stash 或强推解决。
-2. 读 `docs/research/RESEARCH.md`：暂停状态、自己是不是该方向的 Lead。不是 Lead 就不写该方向的 `NOTES.md`。
-3. 读该方向 `NOTES.md` 的最后一节；有在途运行就用其中的 operation ref 执行
-   `<configured-python> scripts/hmasd_launch.py status <operation_ref>`，先确认再接手观察。claim 记在启动它的
-   那个 checkout 里：远端运行经 ssh 在 `wsl_4070` 上查，本机运行只能回到原主机查。
-4. 首次在这台主机上、或控制面刚改过时，跑一次第 5 节的自检。
-5. 运行中的会话不会因为拉取而刷新：方法或角色变了就在安全边界重读，MCP 或角色注册变了就重启会话。
+源码发布不热加载运行会话。在相关工作的安全边界读取变更；确需重启原生工具注册时，先保全
+可恢复上下文和观察责任，重启本身不转移／重做研究。报告实际检查范围及仍未知的运行行为。
 
-## 5. 主机自检
+## 历史验证
 
-在仓库根目录执行；解释器路径见 [CLAUDE.md](../../CLAUDE.md) 的主机表。全部只读或只写 pytest 自管的 scratch。
-
-| 检查 | Windows | WSL | 预期 |
-|---|---|---|---|
-| 控制面生成副本 | 控制面解释器 `tools/publish_claude_control.py --check` | 同左 | `drift: 0` |
-| 启动器与控制面测试 | 科学解释器 `-m pytest -q tests/test_hmasd_launch.py`；控制面解释器 `-m pytest -q tests/skills` | 同左，且 `PATH` 前置 venv 的 `bin` | 全部通过 |
-| 本机节点解析 | 科学解释器 `-c "from pathlib import Path; from scripts import hmasd_launch as L; c=L._load_config(Path('.codex/hmasd-compute.toml')); print(L._node_config(c, None)[0])"` | 同左 | `local_windows` / `local_linux` |
-| 方向守卫（按所接手的方向选） | 例：`tests/flexible_skill_duration_d2_test.py` | 同左 | 全部通过 |
-| 原生后端 | `tests/uav_cpp_backend_test.py` | 同左 | 通过；各主机各有少量平台跳过 |
-| Pro 通道 | `codex mcp list`、`claude mcp list` | 同左 | `agentify-desktop` 在列；Codex 条目含 `tool_timeout_sec = 2700` |
-| 结果节点 | `ssh -o BatchMode=yes hmasd-wsl-node hostname` | 同左 | `LAPTOP-U9TDKC8A` |
-
-WSL 主机上传给 agentify 的路径参数必须是 Windows 能打开的写法：`prompt` 内联，`responsePath` 用
-`wslpath -w` 的输出。
-
-## 6. 当前状态（2026-09-18）
-
-- WSL 主机：第 5 节各项已在 `main` 的独立 detached worktree 上实测通过。控制面副本 `drift: 0`，
-  节点解析为 `local_linux`；启动器 51 passed，控制面技能 22 passed/1 skipped，FSD 守卫 13 passed，
-  UAV 原生后端 30 passed/2 skipped；Codex 与 Claude 均连接 `agentify-desktop`，结果节点返回
-  `LAPTOP-U9TDKC8A`。验证 worktree 已移除，原方向 checkout 未切分支或改动。
-- Windows 主机：checkout 已快进到当天的 `main` 并完成第 5 节自检。控制面副本 `drift: 0`，节点解析为
-  `local_windows`；启动器 50 passed/1 skipped，控制面技能 23 passed，FSD 守卫 13 passed，UAV
-  原生后端 32 passed；Codex 与 Claude 均连接 `agentify-desktop`，两台主机的 Codex 用户级条目均为
-  `tool_timeout_sec = 2700`，结果节点返回 `LAPTOP-U9TDKC8A`。补充检查中 relay 生命周期 24 passed，
-  远端日志同步 3 passed。
-- `tests/production_backend_policy_test.py` 当前为 62 passed/12 failed；12 个参数化 case 属于 4 类已知
-  陈旧断言（RIDGEGATE 注册表以及 TBVUUS、RCLE、TBCC 的旧原生构件摘要），与本次双主机控制面适配无关，
-  未据此改动归档方向。
-
-### Windows 遗留状态的归类与清理
-
-- 停留的 cherry-pick 只指向 `1d3cc67ce`、`4cb511f26` 两个旧 ACVC
-  `TASK`／`HANDOFF` 记录；两者已由 `origin/codex/acvc` 保存。该记录格式属于退役控制流程，未合入
-  当前 `main`，本机 sequencer 已退出并删除。
-- `codex/hmasd-clerk` 的唯一提交 `7bb924068` 是 Clerk 常设角色退役前的控制面快照，不是待整合功能。
-  历史已由远端 tag `archive/retired-hmasd-clerk-20260913` 固定；本地 Clerk 分支、对应 detached
-  worktree 和旧 Clerk 任务均已移出活动面。
-- 清理前的 19 个本地 tag 均已存在于 `origin`；上述 Clerk 归档 tag 也已单独推送，不再有仅靠本地
-  tag 保存的这批遗留。
-- 本机 16 个旧 bundle 已按其 advertised heads 审计：15 个由远端历史或保留包完整覆盖，已经删除；
-  `temp/recovery-retained/frrie_p59_full.bundle` 因仍含远端不可达的旧快照而保留。它只是本机历史恢复
-  材料，不是活动控制输入，也不代表应恢复其中的 Clerk、packet、registry 或旧方向流程。
-
-本节是状态快照；背景与逐项改动见
-[2026-09-18 变更记录](../Claude_docs/changes/2026-09-18-wsl-second-host-enablement.md)。
+2026-09-18 双主机测试、旧 cherry-pick/tag/bundle 清理和当时残留是历史快照，见
+[原始变更记录](../Claude_docs/changes/2026-09-18-wsl-second-host-enablement.md)与
+[本页固定原版](https://github.com/CartmanFatass/My-paper-code/blob/94704c0c0a7d711d3708736d3462506e92b48951/docs/project/HOST_AND_RUNTIME_SWITCHING.md)。
+其中主机名、测试数量和故障现状不作为当前实测；唯一保留材料仍按其原记录保护。

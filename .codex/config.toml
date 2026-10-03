@@ -19,9 +19,8 @@ default_wait_timeout_ms = 1500000
 max_wait_timeout_ms = 3600000
 
 [agents]
-# Three is the research-runtime resource ceiling, independent DMs and children combined.
-# It does not limit the full plan's questions or create permanent DM-to-direction assignments.
-# This runtime fan-out also accommodates bounded implementers and independent reviewers.
+# Runtime helper capacity, not a scientific track limit or allocation target.
+# Current question assignments live in RESEARCH; actual node admission still applies.
 max_concurrent_threads_per_session = 40
 interrupt_message = true
 

@@ -50,10 +50,10 @@ def generated(root=ROOT):
     dm = tomllib.loads((root/'.codex/agents/hmasd-direction-manager.toml').read_text(encoding='utf-8'))['developer_instructions']
     outputs[root/'.claude/skills/hmasd-research-hub/SKILL.md'] = (f'''---
 name: hmasd-research-hub
-description: Drive one direction as the Claude DM under {CONSTITUTION}; not for status or mechanical edits.
+description: Own assigned scientific questions as the Claude DM under {CONSTITUTION}; not for status or mechanical edits.
 ---
 
-''' + BANNER + f'The Claude session is the DM for one direction at a time under `{CONSTITUTION}`; there is no Root/DM '
+''' + BANNER + f'The Claude session owns its assigned directions under `{CONSTITUTION}` and current owner scope; there is no Root/DM '
     'split on this runtime. The session may implement, launch and observe directly; hmasd-implementer '
     'and hmasd-experiment-operator are optional assistance.\n\n## Direction ownership\n\n' + dm).encode()
     return outputs
