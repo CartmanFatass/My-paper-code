@@ -458,3 +458,178 @@ duplicate launch or migration of an accepted operation is authorized by this
 correction. The scientific/reader count and storage/support envelopes are
 unchanged. Current work still has zero scientific effects and no implementation;
 Root's whole-investment disposition remains the actual next dependency.
+
+<a id="b01-selected-l0-20261003"></a>
+### Whole study selected; independent response and bounded L0 — 2026-10-03
+
+Root selected the complete corrected study at
+`fdf68804ec2533d9b6020f5d9b4a393940f6d2c7`,
+[whole-purchase disposition](../../RESEARCH.md#four-dm-c-selected-20261003).
+I read the **entire original C recommendation** from the same separately
+contextualized ResearchCritic, preserved without edits in
+[its canonical original section](../../archive/2026-10-03/RESEARCH-four-dm-selection.md#four-dm-c-independent-review-20261003)
+at that commit:8,677 characters/8,699 UTF-8 bytes, SHA256
+`3aaeff42b91e38d7f4ef15cdc86c1d5bfeb7c86838cf2a1a8fca6faf5f465a1f`
+(body excluding the enclosing details tag and leading/trailing newlines).
+The complete original lives there once; this is my separate scientific response.
+
+I accept the recommendation and its retained objection. This is a narrow
+known-model renewal-law comparison, with no newly demonstrated defect in120.
+Retained ordinary reuse and the usefulness of an earlier complete control answer
+justify this one investment; they do not establish a new timing principle or a
+learning surplus. The first mover's guaranteed early ineligibility, including
+the lost old29497014 possibility, is a predicted tradeoff to test rather than
+repair away. I retain the G_E−A2 simpler-use contrast, exact candidate-specific
+clocks, all aliases/adverse outcomes, and the uncompressed reader bill. There is
+no material dissent, no second selection review or Pro dependency, and no need
+to wait for A/D. No outcome has yet been acquired.
+
+The selected purchase is the declared68H500 missions/34,000 native transitions,
+all four audits, zero fits/updates and complete uncompressed reconstruction.
+Root fixes termination at **20 aggregate metered preparation/worker/reader CPU
+hours**, **48 operation wall hours** or **10GiB normal operation allocation**
+including source, unique evidence and transient scratch. These are operation
+ceilings, not a fit allowance, runtime forecast or permission to add work.
+Unmetered support and the finalization tail stay unknown. Use local_linux first,
+one numerical thread and real memory/overlap admission; no health probe or
+automatic fallback. **The first real formal-request/admission/worker/reader
+failure closes this purchase**, retaining its completed prefix and concrete
+failure facts without automatic retry or missing-cell completion. Reconcile
+uncertain acceptance only for the same request. Pure source/mock corrections
+before formal submission are permitted, metered where feasible, and retain their
+failures. Root selected implementation through execution, reading, publication
+and cleanup, not a prototype or another per-run approval stage.
+
+**L0 deliverable and ownership.** Implement B01 under
+`experiments/candidates/uav_planning_opportunity_timing/b01/`, matching tests,
+the existing owned notebook, one `runs/uav_planning_opportunity_timing/` attempt
+and owned temporary paths on shared main. The complete operation performs the
+four fixed audits and their full reading before the sixty-four result missions
+and their full reading; this is one prospectively bought chain, not an audit
+outcome screen. Exact operation identities and paths will be fixed in committed
+inputs before the single formal launch. No frozen fleet/parent path is edited.
+
+One bounded registered Implementer owns the **early-clock selector and segment
+behavior**, specifically new `b01/controller.py`, `b01/option.py`,
+`b01/segment.py`, `b01/__init__.py` and their focused
+`tests/.../b01/test_timing.py`. Required interface is
+`TimingProgram(arm, horizon=500, branch_sink=None, candidate_sink=None,
+reuse=True, segment_sink=None)` for G_E/A_E, exposing controller, plan,
+plans/selections/banks and the selected second_t; `select(t, report, old_mask)`
+returns command/mask/decision. Callback payloads cannot mutate scientific state.
+Branch outputs retain arrays/summary/decisions; segment callbacks additionally
+carry the B08-compatible entry/terminal/reuse certificate. All identifiers encode
+their actual start time and candidate context. The new ordinary menu must price
+every original site at500−start, not merely reprice an old chosen champion.
+
+The DM owns world/config bindings, collector, complete reader, runner/admission,
+resource accounting, publication and separate pipeline tests. The Implementer
+has no index/commit/NOTES/shared-file ownership, performs no result launch,
+scientific world/controller/model/native/physics probe or fixture run, and spawns
+no children. Its checks use fully stubbed scorer/host dependencies and synthetic
+arrays; any real query belongs to the declared whole audits. Return exact checks,
+metered self/child CPU and wall, owned scratch cleanup, diff and open risks. We
+are not alone in the checkout: preserve all other edits and use disjoint paths.
+
+The implementation preserves the complete contract above: pre-E t2 dispatch,
+expiry even on decline, unchanged absolute ordinary phase and FP32/FP64 order,
+fresh actual history/reports, independent nested copies, inner decoded/outer
+unrounded distinction, strict stay ties, empty menus/zero-path aliases, no third
+opportunity and no cross-segment reuse. Focused independent engineering review
+will cover these semantics plus RNG/source/launch identity, evidence completeness,
+full-reader independence and the actual resource-stop path. The DM reads the
+diff/checks and accepts the implementation. Inputs are committed/published before
+native admission; accepted observation stays on the same operation handle.
+
+
+<a id="b01-implementation-accepted-20261003"></a>
+### Complete implementation accepted before the single formal request — 2026-10-03
+
+The bounded Implementer returned the four owned timing modules and focused tests;
+I read and accept the code and checks. G_E retains the frozen complete first
+selector; A_E prices every first candidate with its own second clock. Early
+menus enumerate all original sites with remaining horizon500−start. The new
+segment loop is needed because the frozen entry validator admits only40/120;
+it imports the original primitives and B08 keys/certificates without changing
+frozen files or shared globals. The DM implemented fixed worlds/input binding,
+streamed collector, uncompressed reader, finite-operation entry, resource guards
+and separate pipeline tests. The full source is in the owned `b01/` directory.
+
+The full reader uses the frozen uncompressed B03/B04 reference for G2/A2 and the
+new explicit nonreuse path for G_E/A_E. Every model array and ordered decision,
+stationary row, selection, actual private history and reuse certificate is
+checked. Native reconstruction uses the original exact-array checks and original
+1e−14 scalar/N8 reward-scaling check; there is no new tolerance chosen from a
+result. Chosen forecasts remain empirical comparisons with actual native suffixes.
+The operation first runs all four audit missions and their full readings, then
+runs and reads each four-arm result-world group in the fixed cyclic order.
+This changes neither the bought population nor the comparison or failure rule.
+
+The collector saves a native prefix and all completed branches/banks/segments
+when an exception closes a cell. Full branch/segment payloads with identical
+scientific arrays/decisions share one artifact reference. After a mission passes
+its full reader, prefix/suffix copies are checked bitwise against the retained
+outer branch before deletion; their summary, certificate, digest and slice
+reference remain. Partial deletion facts and new catalog hashes survive a delete
+failure. These are evidence-layout operations, not an additional model replay.
+
+The separate-context engineering Reviewer inspected all timing/menu/precision,
+cache, source/RNG/admission, full-reader and retention paths. It found three
+material issues, all repaired before submission: (1) negative differences had
+been called adverse even for cost quantities; they now retain neutral signed
+counts/extrema, with explicit adverse fields only for J; (2) repeated SIGXCPU
+could interrupt failure retention; signal/cooperative stops now disarm before
+unwinding and latch a permanent stop; (3) an unlink failure after catalog
+publication could leave the summary's old hash; a `finally` path now refreshes
+catalog bindings and retains a mutable planned/actual-deletion ledger. Synthetic
+regressions cover resource-stop retention and a FAILED_CLOSED summary that still
+resolves every retained branch/segment after unlink failure. Reviewer final:
+**no material engineering finding remains**. DM acceptance is separate and made
+here. Real native execution and actual admission remain untested until this one
+purchased operation; these mock checks are not a scientific pilot.
+
+Checks and measured preparation (one numerical thread, configured scientific
+Python3.10, `-B`, pytest-managed scratch):
+
+| Work | Outcome | Metered self CPU s | Metered child CPU s | Wall s |
+| --- | --- | ---: | ---: | ---: |
+| Implementer check1 |11 passed |.071434|.940302|1.090912360|
+| Implementer check2 |12 passed,1 failed synthetic scorer geometry ledger |.070605|.956785|.957547601|
+| Implementer check3 |13 passed after stub-only repair |.068773|.918932|.902150824|
+| Fixed17-world input generation |88,298B JSON; no host/controller/scorer |.205673|0|.178365705|
+| DM complete focused suite |27 passed |.084954|4.363473|4.793970992|
+| Independent Reviewer suite |27 passed |.000333|3.630421|3.641693|
+
+The failed stub test reported zero geometry rows while the independent certificate
+checker reconstructed unique/reused rows from the arrays; only that synthetic
+bookkeeping was corrected, without a production or tolerance change. Both full
+suites had14 third-party Matplotlib/Pyparsing deprecation warnings and no scratch
+cleanup warning. AST/source checks passed. These instrumented preparation tasks
+sum to**11.311685 CPU seconds**; wrapper interpreter startup before the Reviewer's
+sample and uninstrumented source/support tools remain unknown, not zero. Largest
+pytest-child lifetime peakRSS was323,440KiB; wrapper high-water maxima were inherited
+process-lifetime facts and are neither incremental nor additive. Every check used
+stubs/synthetic arrays:0 real native steps,0 real model/scorer queries,0 fits/updates.
+The input constructor generated exactly the17 declared initial arrays and no
+rollout. Initial arrays and preparation accounting are committed source inputs.
+
+The exact selected attempt tag is `b01_complete_timing_a01`, output
+`runs/uav_planning_opportunity_timing/b01_complete_timing_a01/`. Its sole entry is
+`experiments/candidates/uav_planning_opportunity_timing/b01/run.py`, identity seed
+29523000, full published source SHA supplied to both kernel and runner. Submit
+through the configured local_linux native launcher with a retained source
+snapshot, exact lead `Codex DM (native child)`, and one numerical thread. No input
+checkpoint, remote staging, health probe, alternative node, duplicate, missing-cell
+completion or automatic retry is added. The20h aggregate metered CPU limit reserves
+300CPU seconds for launcher/finalization; the48h wall limit reserves600seconds;
+normal source/output allocation reserves64MiB before10GiB. Runtime signals cover
+long branches and cooperative checks cover cells/callbacks; the final measured
+bill, possible tail and any reserve overrun must be reported, not assumed away.
+A real formal-request/admission/worker/reader failure still closes this purchase.
+
+Root moved the completed original selection advice unchanged to the dated archive;
+the canonical link above now points there. Its8,699-byte original/hash and my
+scientific response are unchanged. No second scientific selection round or owner
+approval was added. The selected whole comparison is now ready for its single
+formal submission; there is still no accepted operation or scientific result at
+this entry's publication boundary.
