@@ -1,0 +1,212 @@
+{
+  "request": {
+    "jobs": [
+      {
+        "id": "launch-b07-consumer-a03",
+        "protocol": "launch",
+        "argv": [
+          "ssh",
+          "hmasd-wsl-node",
+          "/home/wu/.venvs/hmasd-gcc-31021/bin/python -B /home/wu/projects/HMASD/scripts/hmasd_launch.py status /home/wu/projects/HMASD/.git/hmasd-admission/b235dcc1bbf4c5a883fadb4271105fa469e5f6813455f57bd314bdc6f66005ed.json"
+        ],
+        "cwd": "/home/fires/hmasd-wsl",
+        "interval": 30,
+        "timeout": 20
+      }
+    ]
+  },
+  "request_path": "/home/fires/hmasd-wsl/temp/directions/typed_joint_skill_decision/b07-consumer-a03/observer-request.json",
+  "arm_returncode": 1,
+  "arm_stdout": "",
+  "arm_stderr": "Traceback (most recent call last):\n  File \"/home/fires/hmasd-wsl/tools/hmasd_wait.py\", line 437, in <module>\n    main()\n  File \"/home/fires/hmasd-wsl/tools/hmasd_wait.py\", line 419, in main\n    result = arm(folder, json.loads(args.request.read_text()), binary, args.window)\n  File \"/home/fires/hmasd-wsl/tools/hmasd_wait.py\", line 320, in arm\n    validate_job(job)\n  File \"/home/fires/hmasd-wsl/tools/hmasd_wait.py\", line 68, in validate_job\n    raise ValueError('probe requires an existing absolute executable')\nValueError: probe requires an existing absolute executable\n",
+  "native_child_return_rule": "Keep turn active; deterministic same-state event waits and same-handle drain/rearm. Own queue failure never restarts or rebinds the worker.",
+  "corrected_arm": {
+    "correction": "First observer-only validation refused relative ssh before registering any job/probe; actual state remained generation6/stopped/no A03. Correct executable to /usr/bin/ssh for same accepted native handle; no worker/launch effect or new scientific request.",
+    "request": {
+      "jobs": [
+        {
+          "id": "launch-b07-consumer-a03",
+          "protocol": "launch",
+          "argv": [
+            "/usr/bin/ssh",
+            "hmasd-wsl-node",
+            "/home/wu/.venvs/hmasd-gcc-31021/bin/python -B /home/wu/projects/HMASD/scripts/hmasd_launch.py status /home/wu/projects/HMASD/.git/hmasd-admission/b235dcc1bbf4c5a883fadb4271105fa469e5f6813455f57bd314bdc6f66005ed.json"
+          ],
+          "cwd": "/home/fires/hmasd-wsl",
+          "interval": 30,
+          "timeout": 20
+        }
+      ]
+    },
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/home/fires/hmasd-wsl/tools/hmasd_wait.py\", line 437, in <module>\n    main()\n  File \"/home/fires/hmasd-wsl/tools/hmasd_wait.py\", line 419, in main\n    result = arm(folder, json.loads(args.request.read_text()), binary, args.window)\n  File \"/home/fires/hmasd-wsl/tools/hmasd_wait.py\", line 327, in arm\n    raise ValueError('drain and rearm the existing state before adding observations')\nValueError: drain and rearm the existing state before adding observations\n",
+    "local_parent_cpu_seconds": 0.0005909050000000027,
+    "other_support_cpu": "unknown_not_zero"
+  },
+  "stopped_state_recovery": {
+    "drained_generation": 6,
+    "wake_id": null,
+    "event_ids": [],
+    "old_job_statuses": {
+      "launch-b07-fixed-bank-reader-a01": "failed",
+      "launch-b07-fixed-bank-reader-a02": "ready"
+    },
+    "scope": "Rearm stopped observation state without --resume-jobs, preserving all old terminal jobs; then register exactly the new accepted native handle. No worker restart."
+  },
+  "rearm_result": {
+    "argv": [
+      "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+      "-B",
+      "tools/hmasd_wait.py",
+      "rearm",
+      "--generation",
+      "6",
+      "--window",
+      "1500",
+      "--event-ids"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"generation\": 7,\n  \"pid\": 863178,\n  \"window_seconds\": 1500.0\n}\n",
+    "stderr": ""
+  },
+  "registered_arm": {
+    "argv": [
+      "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+      "-B",
+      "tools/hmasd_wait.py",
+      "arm",
+      "--request",
+      "/home/fires/hmasd-wsl/temp/directions/typed_joint_skill_decision/b07-consumer-a03/observer-request.json",
+      "--window",
+      "1500"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"status\": \"registered\",\n  \"pid\": 863198,\n  \"state_dir\": \"/home/fires/.local/state/hmasd-wait/01a0fd18-d308-76a1-98f8-eb9e6b77f15d\",\n  \"note\": \"registration is not handle adoption; drain exposes first observed facts\"\n}\n",
+    "stderr": ""
+  },
+  "first_observed_facts": {
+    "generation": 8,
+    "wake_id": null,
+    "events": [],
+    "delivery": null,
+    "stopped": false,
+    "current_job": {
+      "spec": {
+        "id": "launch-b07-consumer-a03",
+        "protocol": "launch",
+        "argv": [
+          "/usr/bin/ssh",
+          "hmasd-wsl-node",
+          "/home/wu/.venvs/hmasd-gcc-31021/bin/python -B /home/wu/projects/HMASD/scripts/hmasd_launch.py status /home/wu/projects/HMASD/.git/hmasd-admission/b235dcc1bbf4c5a883fadb4271105fa469e5f6813455f57bd314bdc6f66005ed.json"
+        ],
+        "cwd": "/home/fires/hmasd-wsl",
+        "interval": 30,
+        "timeout": 20
+      },
+      "status": "running",
+      "due": 1790986740.277218,
+      "errors": 0,
+      "last": {
+        "admission": {
+          "claim_state": "accepted",
+          "state": "accepted"
+        },
+        "artifacts": {
+          "stderr": {
+            "path": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b07_consumer_a03/stderr.log",
+            "state": "present"
+          },
+          "stdout": {
+            "path": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b07_consumer_a03/stdout.log",
+            "state": "present"
+          },
+          "summary": {
+            "path": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b07_consumer_a03/summary.json",
+            "state": "absent"
+          }
+        },
+        "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/b235dcc1bbf4c5a883fadb4271105fa469e5f6813455f57bd314bdc6f66005ed.json",
+        "direction": "typed_joint_skill_decision",
+        "execution": {
+          "exit_witness": {
+            "path": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b07_consumer_a03/process-exit.json",
+            "state": "absent"
+          },
+          "runner": {
+            "observed_identity": {
+              "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+              "kind": "linux_pid_start_ticks",
+              "pid": 1355312,
+              "session_id": 1355311,
+              "start_ticks": 132454367
+            },
+            "recorded_identity": {
+              "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+              "kind": "linux_pid_start_ticks",
+              "pid": 1355312,
+              "session_id": 1355311,
+              "start_ticks": 132454367
+            },
+            "state": "running"
+          },
+          "state": "running",
+          "supervisor": {
+            "observed_identity": {
+              "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+              "kind": "linux_pid_start_ticks",
+              "pid": 1355311,
+              "session_id": 1355311,
+              "start_ticks": 132454364
+            },
+            "recorded_identity": {
+              "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+              "kind": "linux_pid_start_ticks",
+              "pid": 1355311,
+              "session_id": 1355311,
+              "start_ticks": 132454364
+            },
+            "state": "running"
+          }
+        },
+        "explicit_retry": {
+          "eligible": false,
+          "reasons": [
+            "parent has no consistent terminal nonzero native exit"
+          ],
+          "scientific_authorization": false,
+          "successor_ref": null,
+          "supported": true
+        },
+        "explicit_retry_available": false,
+        "kind": "hmasd_operation_status",
+        "manifest_ref": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b07_consumer_a03/launch-manifest.json",
+        "node": "wsl_4070",
+        "observed_at": "2026-10-03T00:18:30.059175Z",
+        "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/b235dcc1bbf4c5a883fadb4271105fa469e5f6813455f57bd314bdc6f66005ed.json",
+        "output_root": "/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b07_consumer_a03",
+        "record_consistency": {
+          "mismatches": [],
+          "state": "consistent"
+        },
+        "schema_version": 1,
+        "sha": "84a5aca7f4d8b4bea5580df42e8473dab19e0c3a",
+        "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/f30e500415704de8a0f5b1008bfbadc6"
+      },
+      "observed": 1790986710.277218
+    },
+    "scope": "All new A03 job facts/events; old fully consumed reader jobs remain unchanged in controller state.",
+    "file_wait_wall_seconds": 0.04945404599129688
+  },
+  "initial_compact_collection": {
+    "files": [
+      "launch-manifest.json",
+      "admission-preflight.json",
+      "config.json"
+    ],
+    "local_parent_cpu_seconds": 0.0011454340000000007,
+    "local_child_transport_cpu_seconds": 0.069614,
+    "wall_seconds": 1.267294564997428,
+    "other_support": "unknown_not_zero"
+  }
+}
