@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "/home/fires/.venvs/hmasd-linux-science-tools/bin/python",
+    "scripts/hmasd_snapshot_gc.py",
+    "--snapshot",
+    "4bf6525e190e4a84b18513be6fbbe530"
+  ],
+  "returncode": 0,
+  "stdout": "{\n  \"mode\": \"preview\",\n  \"snapshots\": [\n    {\n      \"eligible\": false,\n      \"path\": \"/home/fires/hmasd-wsl/.git/hmasd-launch-sources/4bf6525e190e4a84b18513be6fbbe530\",\n      \"reason\": \"cannot inspect own process 454: [Errno 13] Permission denied: '/proc/454/cwd'; retry with --sudo-process-scan\",\n      \"snapshot\": \"4bf6525e190e4a84b18513be6fbbe530\"\n    }\n  ]\n}\n",
+  "stderr": "",
+  "cpu_seconds": 0.334307,
+  "wall_seconds": 0.30250765799428336,
+  "scope": "GC preview plus wrapper through sample; no scientific call"
+}

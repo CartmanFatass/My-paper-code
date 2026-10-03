@@ -2420,3 +2420,65 @@ establish an amortizer, a useful-world selector, a fairness remedy or a learning
 advantage, and none is launched here. Root owns the next cross-question allocation;
 this is a recommendation at the assigned boundary, not an owner permission blocker
 or a claim that the parent question is exhausted.
+
+
+<a id="b02-final-cleanup"></a>
+### 2026-10-03 — B02 result published; terminal snapshot and obsolete observer scratch reclaimed
+
+Complete evidence and interpretation were published at
+`63ee7491e79fd797cc16f6d8a706335a0b03da33`; the owned reserve standing and directly
+affected ordinary-planning/event-order background were published at
+`9630079ceda74341e39f795a361c36e815601030`. The same-source55-test engineering
+acceptance and full68-mission numerical reconstruction stand; this closure adds
+no executable or scientific change, test purchase, fit or counterfactual. The
+compact support JSONL was explicitly staged despite the generic JSONL ignore
+rule because it is a small cost record, not bulk scientific data. All raw unique
+evidence and the large original readings remain in the canonical run location.
+
+Before deletion, the terminal observer drain had generation30 stopped, no pending
+event and no wake; the worker/supervisor terminal identities and exit0 record had
+already been reconciled. The official exact-target collector's first preview
+refused eligibility because it could not inspect `/proc/454/cwd` (permission
+denied) and explicitly requested `--sudo-process-scan`. That original result is
+preserved in `snapshot-gc-preview.json`. The supported read-only process scan then
+found the source eligible with durable Git reachability and no live consumer;
+`snapshot-gc-preview-process-scan.json` and `snapshot-gc-apply.json` preserve the
+successful preview and apply. No claim, native manifest, result or authoring
+checkout was removed to obtain eligibility. There is **no remaining tool blocker**.
+
+Actual deleted targets were:
+
+- `.git/hmasd-launch-sources/4bf6525e190e4a84b18513be6fbbe530/`:1835667456 allocated bytes.
+- `temp/directions/uav_planning_opportunity_timing/b02-wait-request.json`:4096 allocated bytes.
+
+Both targets are absent. Gross target removal is1835671552bytes. Measuring the
+same owned source/output/implementation/test/scratch roots before and after,
+including the newly written compact cleanup records and result metadata, gives
+**2694987776→859324416 allocated bytes: net1835663360bytes reclaimed**. This is
+working-storage reclamation in those roots, not a Git-object or host-capacity
+estimate. The earlier runtime compaction's111951872 net bytes are separately
+measured and not folded into this interval. No copy, archive, backup chain,
+worktree move or retention package was created. [Exact cleanup measurement and
+records](../../../../runs/uav_planning_opportunity_timing/b02_rolling_timing_a01/cleanup.json).
+
+The useful published B02 controller/full reader and matching tests remain with
+their frozen B01 dependencies. Inspection found no B02/test cache leftovers and
+only the now-deleted wait request in this direction's disposable scratch. B01's
+sole canonical evidence and all unrelated directions were preserved. After GC,
+config/summary/reading hashes still match the values in the complete result; the
+previous full6122-artifact verification remains the unique raw-evidence check.
+
+Separately measured terminal-closure tool fragments cost.334307CPU-s for the
+initial GC preview,.397452262CPU-s for the supported preview, and1.188544794CPU-s
+for apply: total1.920304056CPU-s. The notebook's saved-data table composition
+.009649858CPU-s is appended to the existing support ledger. These augment, not
+replace, the6.590587CPUh runner/preparation/launch scope and prior support fragments.
+Disk measurements, Git publication, manual review and final write tails remain
+incompletely metered. The small saved-JSON formatting corrections and initial
+Git-ignore staging refusal did not repeat the scientific reader or consume a
+second formal request.
+
+The completed purchase is now published, read and cleaned; no producer, pending
+advice or required collection remains. The same DM returns the conditional
+capability, unchanged alternatives and full adverse/cost evidence to Root at the
+assigned boundary. No follow-on experiment has been selected by this closure.

@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "/home/fires/.venvs/hmasd-linux-science-tools/bin/python",
+    "scripts/hmasd_snapshot_gc.py",
+    "--snapshot",
+    "4bf6525e190e4a84b18513be6fbbe530",
+    "--sudo-process-scan"
+  ],
+  "returncode": 0,
+  "stdout": "{\n  \"mode\": \"preview\",\n  \"snapshots\": [\n    {\n      \"claim\": \"/home/fires/hmasd-wsl/.git/hmasd-admission/0d27ce43fd79733cbed6d6372f23a546d79fdc83d7bfc297c3fdc404f980fe45.json\",\n      \"durable_ref\": \"refs/heads/codex/workflow-simplification\",\n      \"eligible\": true,\n      \"output\": \"/home/fires/hmasd-wsl/runs/uav_planning_opportunity_timing/b02_rolling_timing_a01\",\n      \"path\": \"/home/fires/hmasd-wsl/.git/hmasd-launch-sources/4bf6525e190e4a84b18513be6fbbe530\",\n      \"sha\": \"9b763be8a45dad875166efcfba8efbf9c3db54b2\",\n      \"snapshot\": \"4bf6525e190e4a84b18513be6fbbe530\"\n    }\n  ]\n}\n",
+  "stderr": "",
+  "cpu_seconds": 0.397452262,
+  "wall_seconds": 0.37796789698768407,
+  "scope": "supported GC preview using read-only privileged process scan plus wrapper through sample; no scientific call"
+}

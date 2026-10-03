@@ -34321,6 +34321,17 @@
       "world_id": 29524015
     }
   ],
+  "final_cleanup": {
+    "all_targets_absent": true,
+    "copies_or_archives_created": false,
+    "deleted_targets": [
+      "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/4bf6525e190e4a84b18513be6fbbe530",
+      "/home/fires/hmasd-wsl/temp/directions/uav_planning_opportunity_timing/b02-wait-request.json"
+    ],
+    "record": "cleanup.json",
+    "remaining_blocker": null,
+    "target_allocated_bytes_removed": 1835671552
+  },
   "forecast_correspondence_including_audit": [
     {
       "arm": "A2",
