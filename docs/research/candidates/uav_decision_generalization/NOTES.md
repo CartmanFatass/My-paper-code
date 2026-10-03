@@ -9189,3 +9189,295 @@ reader request. Its actual new NN/model/physical work is exactly the previously
 purchased complete reader, with no optimizer replay or old physical replay.
 No further worker, extra endpoint, retry or repair is selected. The first
 reader formal/admission/runtime failure still stops this purchase.
+
+**Full reader accepted,2026-10-03T13:19:03.795414Z.** Published source/input
+commit `4a88c7145540cbee40647e907cef18e4acece6a3` retains all71 scientific
+source identities and the exact original study. The one local_linux reader
+was accepted with fresh kernel/runner resource admission under its
+[original manifest](../../../../runs/uav_decision_generalization/b06_amortization_read_a01/launch-manifest.json).
+Its actual process and supervisor were observed running consistently at
+13:19:27Z by generation30 in this same session's observer; the original worker
+remains terminal and was not restarted. Reader-input publication measured
+.828165CPU-s/12.108994wall-s after the frozen ledger sample; add this to the
+final cumulative account, alongside unknown support. Same-handle observation
+uses `b06_requests/reader-observe.json`,30s status/1,500s checkpoints. The
+DM remains active through this complete read and scientific interpretation.
+
+**Full-reader checkpoint,2026-10-03T13:48Z.** The original accepted reader
+is running consistently with87/224 missions checked, no stderr,1,721.051884
+phase CPU-s/1,668.763310 phase wall-s; known cumulative13,750.770823 CPU-s/
+14,550.441435 operation-wall-s plus later publication/unmetered support.
+Both source snapshots and canonical outputs account for3,889,561,600 allocated
+bytes, below7GiB normal-work stop. Observer30 checkpoint drained/rearmed31,
+window1,500s, same operation; no new effects or changed reading.
+
+**Full-reader checkpoint,2026-10-03T14:14Z.** Original reader running;
+167/224 missions checked, no stderr,3,236.074325 phase CPU-s/3,157.989955
+phase wall-s; known cumulative15,265.793264 CPU-s/16,039.668080 operation-
+wall-s,3,889,561,600 allocated bytes. Observer31 checkpoint drained/rearmed32,
+window1,500s; fixed reading unchanged.
+
+<a id="b06-complete-reading"></a>
+
+#### 2026-10-03 — Complete B06 fixed-bank learning and ordinary planning comparison
+
+**The students learn the exposed relative-value labels substantially better, but
+this does not deliver a useful complete service/CPU replacement for G or either
+planner. The ordinary one-cohort program retains a cheaper conditional tail
+capability, while four cohorts retain additional request-cost/residence value.**
+This is the DM's direct reading; the original independent scientific diagnosis
+and resolved next-investment judgment follow below. No new effect, checkpoint
+selection, repair fit or extra world follows from these observations.
+
+**Complete paid execution and reading.** The only reader exited 0 at
+14:31:09.456Z. Its native runner/supervisor are absent and status is consistent;
+stdout/stderr are empty. Generation32 READY was consumed by rearm33 and
+observation stopped. Both original worker and original reader succeeded on
+first request; no technical-failure exception, restart or additional effect was
+used. The canonical local_linux outputs remain
+`runs/uav_decision_generalization/b06_amortization_a01/` and
+`runs/uav_decision_generalization/b06_amortization_read_a01/`.
+
+The [full summary](../../../../runs/uav_decision_generalization/b06_amortization_read_a01/summary.json)
+is 334,713B, SHA256 `d96c839ad22a23c6573c36d0ecd34ffe7a90df5166f5aad1596a7b86b64cd6fe`;
+[acquisition checks](../../../../runs/uav_decision_generalization/b06_amortization_read_a01/acquisition-checks.json)
+are 29,641B, SHA256 `69fe6f31c5ca392f6c80caf5917fde48cc6704a8a852b27eececd72fcbbb946b`.
+They bind worker source `da74047434845cb2f5b1baf3e0023c66ecadf3d9`, reader source
+`4a88c7145540cbee40647e907cef18e4acece6a3`, the unchanged 71-file scientific
+identity, original bank `d35a36883f81bcdf05248f4de701b19aff309deeb15041e32ef98ff35d865419`,
+and the fixed 224-mission rotated roster on worlds 109255000–109255031.
+
+The reader verified all 4,317 worker-manifest scientific files, every new
+268,800 motion step / 269,024 actual physical state, masks/routes, arrivals,
+FIFO progress/completions, native costs, commands and fixed activation order.
+It reconstructed all 5,175,040 R prefix states plus 3,840 initial states,
+9,600 selected logical cohorts (1,290 exact reuses) and their 222,720 tape
+uniforms, with no incomplete attempt. Worker and reader each account for
+270,144 distinct G queries / 245,881,600 candidate-ticks; the 3,840 mirrored
+R-base records are excluded from duplicate G work. First-cohort identity
+matches for the paired R1/R4 initial public input. Old teacher identities,
+2,100 public feature contexts and 8,400 ordered/alias-weighted labels were
+checked without replaying old physics or collecting new teachers.
+
+All six initial/final bank forwards and all 23,040 committed deployed student
+rows agree in the independent reader. Reader NN rows are exactly 73,440;
+worker plus reader total is 1,759,680. All 6,336 update journals, shuffle/RNG,
+checkpoint identities and finite diagnostics were checked; no optimizer or
+historical changing-network gradient replay was purchased. B's ordered
+bordered least-squares solve was independently assembled and checked once.
+All seven endpoints started exactly once. Every one of 13,440 actual decisions
+met the 20-second deadline, and all committed caches are present; there are
+no attempted/completed/uncommitted neural gaps. Maximum decision wall times
+G/R1/R4/B/S0/S1/S2 are .1402/6.9717/13.8835/.1294/1.2090/1.0909/1.1724 seconds.
+The fixed 20-tick activation delay remains. Thus deadline fallback or an
+unexecuted learner does not explain this panel's result; unexercised timeout
+paths are not thereby certified.
+
+**Complete service and computation.** Each arm encounters the same 1,803
+requests across 32 fresh worlds. C is residence-area cost plus the fixed
+240-tick charge per terminal unfinished request; smaller is better. T is the
+within-mission maximum *completed* request residence, and W the maximum
+same-user service gap. The table gives means of mission summaries, not pooled
+request/user quantiles. CPU includes each mission's actual enclosing deployment
+work and its persistent endpoint use, including the first cold start.
+
+| Arm | Mean C | Mean T | Mean W | Mean travel m/UAV | Mean CPU s/mission | Unfinished requests / affected worlds |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| G | 2601.9375 | 424.40625 | 607.375 | 5100.935 | 3.353334 | 0 / 0 |
+| R1 | 2601.6875 | 295.125 | 516.125 | 6915.071 | 81.364700 | 0 / 0 |
+| R4 | 2443.15625 | 211 | 518.4375 | 6733.127 | 262.556874 | 0 / 0 |
+| B | 3613.25 | 539.8125 | 681.3125 | 14646.539 | 3.263098 | 0 / 0 |
+| S0 | 3834.1875 | 549.78125 | 659.34375 | 10977.340 | 4.222370 | 2 / 2 |
+| S1 | 4047.84375 | 562.15625 | 694.03125 | 11088.332 | 4.169357 | 6 / 5 |
+| S2 | 3843.28125 | 551.5625 | 689.375 | 10957.527 | 4.139062 | 5 / 4 |
+
+These exploratory t95 intervals use 32 paired worlds conditional on the shared
+old bank, fixed programs and three optimization replicates. They are not 96
+independent worlds, independent teacher acquisitions, equivalence tests or
+confirmation. No final student is selected as a winner from this panel.
+
+| Student contrast in C | S0 | S1 | S2 |
+| --- | --- | --- | --- |
+| minus G | +1232.250 [835.160,1629.340] | +1445.906 [1058.299,1833.514] | +1241.344 [872.211,1610.476] |
+| minus R1 | +1232.500 [817.510,1647.490] | +1446.156 [1080.380,1811.932] | +1241.594 [877.002,1606.185] |
+| minus R4 | +1391.031 [966.772,1815.290] | +1604.688 [1271.387,1937.988] | +1400.125 [1048.280,1751.970] |
+| minus B | +220.938 [−209.586,651.461] | +434.594 [44.665,824.522] | +230.031 [−176.015,636.078] |
+
+The three conditional fit-mean C−G values average +1306.5, df2 interval
+[+1006.379,+1606.621]; the separate 32-world average-of-these-three-policies
+interval is [+1010.183,+1602.817]. Against B the corresponding mean is +295.188,
+with df2 [−4.933,+595.308] and shared-world [−32.176,+622.551]. These differing
+conditional scopes cannot be merged into additional acquisition replication.
+S0/S1/S2 improve C over G in 3/1/3 worlds and over R1 in 2/1/1; S0 improves
+against R4 in three worlds, while S1/S2 lose to R4 in all 32. The favorable
+cases remain real observations. For example, at 109255003 S0 lowers G's C
+3051→2262 and team travel 46,480.5→28,905.2m, while W worsens 588→704.
+At 109255018 S0 beats R4 C 2836→2761, but T/W worsen 142→302 and 524→724.
+These cases do not supply a deployable rule for choosing their favorable use.
+
+B also has greater C than G in 30/32 worlds: mean +1011.313
+[+760.486,+1262.139]. Its four-constant optimum is an optimum for the exposed
+relative-square objective, not for complete native control. Each student
+travels about 21.3–22.1km less per team than B and routes 1.465–1.630 more users
+per tick on average, with intervals excluding zero for those changes. Those
+are retained useful relative capabilities, not a C improvement or an overall
+upgrade over G/R. Student mean routed users/tick are 33.138/32.972/33.111,
+versus G 36.425, R1 35.510, R4 35.637 and B 31.507. Relative to G, students
+add about 35.1–35.9km team travel; continuous radio coverage and request
+completion are different outcomes, and distance is not measured energy.
+
+**Retain ordinary tail value and its price.** R1−G C is −.25
+[−157.502,+157.002], with 13 better and 19 worse worlds. R4−G C is −158.781
+[−320.967,+3.404], with 20 better and 12 worse. Both mean-C increments remain
+unresolved, not equivalent. Their prespecified tail readings are useful:
+R1−G T/W are −129.281 [−188.407,−70.155] / −91.25 [−142.014,−40.486];
+R4−G T/W are −213.406 [−271.095,−155.718] / −88.938 [−143.981,−33.894].
+These descriptive secondary results do not replace the primary estimand or
+establish uniform improvement. Both finish all requests, as does G.
+
+Reducing four cohorts to one costs service in this complete comparison:
+R1−R4 C +158.531 [+29.917,+287.146] and T +84.125 [+44.112,+124.138].
+R1 improves C in eight worlds and worsens it in 24. Its W difference −2.313
+[−32.419,+27.794] is unresolved, not preserved-value equivalence. R1 reduces
+measured CPU from 262.557 to 81.365 seconds/mission, but both are more expensive
+than G and both meet the declared deadline. R1/R4 add 10.885/9.793km team travel
+and reduce mean routed users/tick by .915/.788 relative to G; R1 is not a
+physical-resource upgrade over R4. World 109255006 preserves favorable G→R4
+C 3985→2656 and T/W 541/863→241/563, with only 14.0m extra team travel.
+At 109255015, G→R4 instead raises C 2268→2985 and W 445→460, despite T
+409→283, while adding 23.826km team travel. No single all-service-wins claim
+or policy-improvement theorem follows from the sampled planning program.
+
+**Censoring and individual consequences remain.** No workload is empty and
+no mission lacks a completed request; T missingness is zero. Students leave
+2/6/5 requests unfinished, with maximum observed unfinished ages 300/580/820
+and terminal-charge means 15/45/37.5. Most excess C remains residence-area cost:
+S−G means +1217.25/+1400.906/+1203.844 before the terminal charge. At 109255016,
+S2's completed-request T is only 162, but an unfinished cluster2 request is
+already 820 ticks old; the censored maximum must be at least 820. Accordingly
+S2's mean censored maximum is 572.125 rather than its completed-only 551.5625.
+The reader retains every unfinished identity/age and per-cluster outcome.
+
+All 50 users are served at least once in every mission, but this is not
+continuity. Worst observed individual gaps for G/R1/R4/B/S0/S1/S2 are
+925/922/922/945/981/1030/1034 ticks. Mean T for every S is worse than G with
+positive paired intervals; mean W is worse too, but S0−G W's interval crosses
+zero. Means of mission completed-residence p90 are 96.134/97.238/97.963/
+133.378/148.941/157.281/139.047 in the same arm order. All arms have identical
+mean team-zero-service ticks 4.875; those coarse counts do not erase the
+individual gaps or request-scheduling differences. No battery, collision,
+energy, universal continuity or all-arrival-tape guarantee was tested.
+
+**Finite fitting succeeded on its exposed objective; complete transfer did not.**
+Each scorer made all 64 epochs / 2,112 updates and 134,400 context presentations.
+All 192 epoch records were read. Context-weighted online losses start at
+.490157/.491514/.491057 and end at .002963/.003989/.003513, with late small
+fluctuations; these are changing-model training losses, not 64 independently
+fixed endpoint evaluations. Initial/final full-bank loss is the direct endpoint
+reading. Parameters move by L2 7.296391/7.308931/7.002549, with
+53,652/52,339/52,091 changed coordinates. Maximum recorded gradient norms are
+about 1.156/1.245/1.181, below the fixed clipping ceiling10; historical
+gradients are finite diagnostics, not independently replayed gradients.
+
+| Exposed-bank endpoint | Mean anchored square loss | Mean model-menu regret (raw request ticks) | Exact first-index teacher agreement | Any teacher minimum |
+| --- | ---: | ---: | ---: | ---: |
+| Initial canonical G | .504771637 | 19.219500 | .826667 | .828571 |
+| Fitted B | .332141700 | 36.520667 | .250000 | .515238 |
+| S0 final | .002825349 | 11.106911 | .481429 | .682857 |
+| S1 final | .003179516 | 15.334440 | .347619 | .590476 |
+| S2 final | .003485640 | 10.045524 | .648571 | .773333 |
+
+B uses raw offsets [452.691409,−88.963437,−54.409412,−309.318560] with the fixed
+zero-sum gauge; normal-equation residuals are at most 2.33e−10 and the
+constraint residual −1.14e−13. The B endpoint row and any-minimum fractions
+above are direct saved-array arithmetic after the full read: no new solve,
+network forward, teacher query or physical evaluation. Its lower squared loss
+than G nevertheless accompanies larger menu regret. The students reduce
+squared error and mean menu regret versus initial G, while reaching a teacher
+minimum less often. The bank has 593 tied-minimum contexts; first-index
+agreement is deliberately limited, and even the tie-safe frequencies are
+not native value. Median teacher first/second margin is 11 raw ticks. Large
+aggregate regression improvement therefore does not certify exact ranking
+or the value of deploying the induced closed-loop policy. These data neither
+prove distribution shift as the cause nor show that no useful student could
+be learned from planner information.
+
+**The learned/scored intervention reaches native movement.** B/S0/S1/S2 each
+have 1,920 eligible published scores. Their same-input G argmins differ in
+1087/840/986/929 cases; all resulting command publications were timely. The
+last command in each mission is terminal-unused. Excluding those 32 per arm,
+1055/829/974/911 decisions change movement at the actual activation positions.
+These changed-motion windows contain respectively 828/763/893/752 completed
+requests and nonzero residence costs; they establish executed exposure,
+not a causal counterfactual attribution of those outcomes to single choices.
+Mean UAV-target changes per mission G/R1/R4/B/S0/S1/S2 are
+11.938/26/25.375/108.875/65.875/68.125/65.063; mean FIFO-head interruptions
+are 1.406/2.375/2.344/8.875/5.969/5.969/6.469. The supplied executor and
+ordinary complete competence remain; inactive branches, fallback and no
+parameter movement cannot account for this adverse complete student result.
+
+**Complete cost and honest CPU crossings.** New acquisition costs 189.074781
+CPU-s, including the shared bank 5.059586, constant solve .101716, and three
+fits 60.056626/61.114900/60.520860 CPU-s plus artifact overhead. It is not added
+again to worker cost. Worker deployment sums 11,618.201429 CPU-s, with
+173.603532 CPU-s enclosing setup/closing/metadata residual after acquisition.
+The full reader costs 4,376.407474 CPU-s / 4,287.369193 wall-s. Its final known
+inclusive cumulative account is 16,406.126413 CPU-s (4.557257h) /
+17,169.047318 operation-wall-s (4.769180h), plus reader-input publication
+.828165 CPU-s / 12.108994 wall-s and later reading/review/publication/cleanup.
+Four explicitly metered DM saved-reading calculations add 1.643807 CPU-s /
+.619245 wall-s; other support and last-serialization/native-supervisor tails
+remain additional/nonzero. Peak new-owned allocation before cleanup is
+3,910,459,392B; reader self peak RSS327,656KiB, worker368,320KiB, no GPU.
+These are process peaks, not a simultaneous sum. The original10 CPUh/24
+operation-wallh/8GiB limits, including their finalization reserves, were not
+expanded. Final publication/cleanup costs and actual deleted targets follow.
+
+The measured per-use student CPU savings against R1 are 77.142–77.226 seconds
+and against R4 258.335–258.418 seconds. Sharing the already paid bank plus one
+new fit gives CPU-only crossings .844–.857 uses against R1 and .252–.256
+against R4. Including the historical teacher's measured 7,026.128558 CPU-s
+moves those lower bounds to 91.831–91.924 and 27.443–27.450 uses; its extra
+outer/verification/support costs remain unknown. The whole-study curves use
+the reader's comparison-time 16,403.543209 CPU-s intercept, once for the whole
+study: about 212.411–212.640 and 63.477–63.497 uses, before the final enclosing
+meter/support additions. No crossing exists against G or B because every
+student's measured per-use CPU is greater. None is a matched-service break-even:
+the students have worse actual service, G is cheaper, and no deployment volume,
+request-tick/CPU exchange rate or equivalence rule was assumed. Original B05's
+whole ~5.374 CPUh and its teacher-only1.951702h overlap and are not added twice.
+
+**Working explanation update before independent disposition.** The earlier
+[topic5 reading](../../RESEARCH.md#5-技能和异步性是组织决策的方式其收益需要证据)
+separated ordinary task competence, finite DDQN acquisition and R's conditional
+tail capability. B06 strengthens the ordinary capability and locates an actual
+planning-compute tradeoff. It also establishes strong finite supervised fitting
+on one exposed bank, while weakening the proposed inference from those fits
+to useful full deployment. It does not repeat or diagnose B05's Bellman/absolute
+cost-calibration failure. Saved menu ranking errors, finite noisy teacher targets,
+subsequent state visitation and complete-horizon decision consequences remain
+unseparated; none is a demonstrated repair prescription. Improved bank loss,
+cheaper computation than R or relative travel/coverage gains over B do not
+cancel the paid native losses. Conversely, the loss does not refute broader
+learning, information use or the retained planning capability. The independent
+review now receives these original sources and complete outcomes; it will
+challenge the explanation and the next investment, without a new effect.
+
+**Canonical evidence retention for this reading.** Compact reader config,
+admission/launch/exit facts, acquisition checks and full per-world summary,
+plus each fit's endpoint/epoch record and final endpoint counters, are published
+with this entry. The worker manifest already identifies every one of its
+4,317 scientific files by exact path, bytes and SHA256. On `local_linux`, retain
+that one original worker output, including its bank/provenance, initial/final
+weights, final optimizer state, update journals and all actual/model traces;
+do not copy the old B05 teacher evidence. The reader's unique 224 per-mission
+check files remain at the canonical
+`runs/uav_decision_generalization/b06_amortization_read_a01/checks/`, totaling
+19,634,934 logical bytes. Their ordered content identity is
+`c2820858da84561e9de260964bec2af3ba6f9dba134cfeebbce6f136b9ad7a00`:
+SHA256 of the concatenation, in sorted relative-path order, of UTF-8
+`relative_path + NUL + file_SHA256_hex + LF`. No bulk copy or new retention
+package was made. This inventory/hash reading added .328947 CPU-s /
+.158694 operation-wall-s; other support remains additional. Terminal facts
+come from `process-exit.json` and reconciled native status; the immutable
+`launch-status.json` still records its original `accepted` event.
