@@ -1075,3 +1075,61 @@ with Root's other substantive questions before purchase. An unchanged replicatio
 would instead estimate breadth/concentration; it is not a prerequisite to using
 or developing the observed capability. No new effect is selected here, and the
 current result changes neither A's frozen40/120 study nor another lead's work.
+
+
+<a id="b01-final-cleanup"></a>
+### Final publication and measured cleanup — 2026-10-03
+
+The complete scientific reading and compact result/config/terminal records were
+published first at 24b7a97064a6b28656a7b486c1cee417ac670434. The canonical output
+remains `/home/fires/hmasd-wsl/runs/uav_planning_opportunity_timing/b01_complete_timing_a02`
+on configured `local_linux`, outside the accepted source snapshot. Its current
+3,022-file artifact graph had already been verified by size/SHA256; native arrays,
+full original summary/reading, source bindings, all adverse outcomes and the
+terminal claim/manifest/exit evidence are retained. No raw-data copy was created.
+The published policy, exact reuse, independent reader, tests and bound inputs
+remain useful ordinary capability and verification code; there is no unused
+new direction code or cache to remove. Live accepted operations in other
+directions and their source trees were left alone.
+
+After worker/supervisor exit, full reading and consumption of every observer
+event, the exact-target native snapshot collector rechecked terminal witnesses,
+consistent records, durable source reachability and live process references.
+The initial unprivileged preview could not inspect own process 454's `/proc/454/cwd`
+(`Permission denied`). The supported `--sudo-process-scan` read-only scan resolved
+that inspection limitation; preview and apply both admitted the exact snapshot.
+The final apply exited 0, reported `eligible:true`/`removed:true`, and found source
+4481c6240dc8266c2a6f13070cc1e8762328e614 reachable from `refs/heads/main`.
+There is **no remaining cleanup tool blocker**.
+
+Actual deleted targets and allocated bytes were:
+
+- `.git/hmasd-launch-sources/3461f799792c4200ae6f20e13d45c4c8`:
+  1,831,297,024 B, removed by `scripts/hmasd_snapshot_gc.py`.
+- Its linked Git administration directory
+  `.git/worktrees/3461f799792c4200ae6f20e13d45c4c8`: 3,776,512 B, removed by that tool.
+- `temp/directions/uav_planning_opportunity_timing/b01_complete_timing_a02/launch-response.json`,
+  `launch-timing.txt`, and `wait-request.json`, followed by the empty attempt and
+  direction scratch directories: 20,480 B combined. These were duplicate launch/wait
+  request material and the already-recorded launcher timing, not unique evidence.
+
+All listed targets are actually absent. Deletion reclaimed 1,835,094,016 allocated
+bytes before the final record edits. The measured scope includes these targets,
+the retained canonical run, this NOTES and the shared RESEARCH file; it fell
+from 2,276,843,520 to 441,757,696 allocated bytes after the closure prose,
+for **1,835,085,824 net allocated bytes reclaimed**. This is the scoped
+working-tree/linked-metadata reduction, not a Git-object repack or a claim about
+host-wide free capacity while other studies run. The canonical run remains
+441,053,184 allocated bytes. The separately recorded in-run removal of 640 redundant
+segments reclaimed 48,902,144 B; A01's earlier 8,192 B cleanup is also separate and is
+not counted twice here. No unneeded target remains in this closure scope.
+
+Fresh published main 24b7a97064a6b28656a7b486c1cee417ac670434 was fetched before the
+shared update. The direction standing is now reserve, retaining A_E's gain and
+an open temporal-cooperation question with no selected further purchase. Directly
+affected background topics 3/5 now state the complete-package timing positive,
+the greedy adverse comparison, individual limitations and the observed boundary
+of the first-mover exclusion explanation. Routing keeps the same lead. The next
+choice remains Root's capability-development allocation described above; there
+is no running producer, pending result/advice, automatic retry or invented owner
+approval dependency. This closes the assigned complete-read/publication boundary.
