@@ -10323,3 +10323,422 @@ costs; neither is a new B07 result purchase. No executable, scratch tree, launch
 snapshot or bulk result was created here, so this construction deletes nothing
 and claims no reclaimed bytes. Only this existing NOTES entry is authored;
 the current RESEARCH selection prose remains Root's concurrent work.
+
+<a id="b07-quota-source-contract-20261003"></a>
+## 2026-10-03 — B07 revised same-quota contract and response to Pro, source-only
+
+**Current proposal.** This append replaces the never-executed A/S allocation,
+its physical-work budget rule and exposure arithmetic in the
+[first prospective contract](#b07-prospective-source-contract-20261003). It does
+not erase that proposal or any paid B06 outcome. Root requested this bounded
+source-only revision after reading that contract and Pro. No new result purchase
+is selected; the direction remains reserve under the same lead. This entry is
+the actual B contract for Root's forthcoming joint B/C/D selection review, not
+an implementation, run authorization, new independent review or Pro Send.
+Only this direction's existing NOTES is edited; Root owns its RESEARCH review
+and current allocation. Proposed owned implementation/test namespace is now
+`b07_quota_allocation/`, with worker/reader tags `b07_quota_allocation_a01` and
+`b07_quota_allocation_read_a01`; none of these paths is created by this task.
+
+### Full advice read and scientific response
+
+I read the **complete original ChatGPT6 Pro answer**, including C/D's proposed
+objects, its treatment of fixed-bank imitation, all source-access qualifications
+and its investment dissent, at
+[97a5fa0268005a258038409f9bc8e03c5073ad7d, Pro Answer](https://github.com/CartmanFatass/My-paper-code/blob/97a5fa0268005a258038409f9bc8e03c5073ad7d/docs/research/RESEARCH.md#pro-answer)
+under review `planning-capability-next-investment-20261003`. Original chat-body
+SHA256 is `fe5baf23fd52f0d88718cfe612aa22d717c05fdd8c42855d5ec09d35fdb9fd7e`;
+the question source is `7058b377b45666978948cb68b6050c22dbbc0fb8`. The answer is
+preserved once there and is not duplicated here. Pro's `MATERIAL_DISSENT: yes`
+concerns the historical native Oracle's investment ordering and immediate
+fixed-bank imitation purchase, not a selected B execution. Root owns that
+cross-question resolution. Within the assigned B construction, I have **no
+material scientific disagreement with the same-quota revision**.
+
+The useful correction is that the earlier fixed clock used one R3 decision,
+while the adaptive rule used only R2/R4 and could leave a variable number of
+logical upgrades unused. Equal maximum physical budget did not equal the same
+planned mixture. Giving both policies exactly23 upgrade intentions sharpens
+the question to their placement, including the cost of using the signal and
+forced exhaustion. It does not prove that disagreement is useful, establish
+confidence from two agreeing samples, or make actual CPU equal.
+
+The primary question is now: **with the same23 two-to-four-cohort intentions
+within decisions0…46, does allocating them from online cohort disagreement
+improve complete request service relative to a fixed clock at its actual cost?**
+This is an ordinary planning/use study on an exposed panel, not a new learning
+method. The first intermediate prediction is that discretionary disagreement
+changes where intentions are placed and changes some selected commands; the
+native prediction is favorable request-cost/use value relative to S_q and the
+ordinary frontier. Forced intentions are a separate mechanism and cannot be
+credited as discovered opportunities. Agreeing two-sample winners may miss a
+better action; disagreement may concern a tiny gap or a poor H160+G surrogate.
+More forecasts still do not guarantee better native decisions.
+
+I reread current published main`97a5fa0268005a258038409f9bc8e03c5073ad7d`'s
+[B06 background](https://github.com/CartmanFatass/My-paper-code/blob/97a5fa0268005a258038409f9bc8e03c5073ad7d/docs/research/RESEARCH.md#5-技能和异步性是组织决策的方式其收益需要证据)
+and retain the applicable unchanged structural reading from the previous
+contract. Their design consequence remains substantive: R1 is already a cheap
+tail-service alternative, R4's primary mean-C gain over G is unresolved, and
+planning cost, actual service and value of information must remain distinct.
+This common-information scheduler retains three UAV pairs' physical coupling;
+it adds neither private feedback nor decentralized communication. Pro's limited
+raw B06 access is not a new full reader. This DM's original complete reading
+and the certified records, including all adverse/censored outcomes, remain the
+empirical evidence.
+
+### Fixed host, cohort semantics and seven real alternatives
+
+Keep the B05/B06 supplied executor, native geometry/radio/routes, six UAVs,
+three fixed pairs, four commands including KEEP,50 users/four request queues,
+H1200,20-tick decisions and20-tick activation delay. C remains queue-area cost
+plus240 per unfinished request. Actual arrivals occur through tick940; the
+service requirement remains20 consecutive ticks with≥8/10 routed cluster users.
+Use the same public reset/report fields and original user/queue information
+limits; no ages, true future arrivals or reader-only service facts enter a
+controller. Master109259999 and domains20/21/30 retain rates/actual-arrival/
+forecast separation. For world w, decision d and cohort k, forecast coordinates
+remain(master,30,w,d,k); branch order remains(w+d+k)%4.
+
+Each decision computes/publishes G fallback and reconstructs one public model
+base. Each physical cohort scores all four commands over h=min(160,1200−20d)
+native model ticks with the original G continuation and boundary/terminal
+accounting. At every complete logical cohort, publish the unchanged ordered
+float64 cumulative-mean minimizer with lexicographic keys(mean forecast cost,
+original raw G cost, action index). A cohort's individual winner uses its own
+four costs with(raw G, index) ties. The disagreement signal compares the two
+**individual** winners of cohorts0 and1, not the one-cohort winner against the
+two-cohort cumulative winner. Ordinary internal G keeps its first-index argmin.
+
+The planned comparison remains G/R1/R2/R3/R4/S_q/A_q on all32 exposed B06
+worlds109255000–109255031. Reuse the96 certified G/R1/R4 missions; buy only
+R2/R3/S_q/A_q,128 new complete H1200 missions/153,600 actual transitions.
+G/R1/R2/R3/R4 are all actual alternatives, not hypothetical curves or per-state
+prefixes substituted for full closed-loop missions. New mission order remains
+world-ascending with[R2,R3,S_q,A_q] cyclically rotated by world-index mod4.
+Use one normally cold persistent endpoint per new arm; no warmup, extra audit,
+teacher acquisition, neural inference or fit is included.
+
+### Exact quota and the fixed clock
+
+An **upgrade intention** is a once-only parent commitment to permit up to four
+logical cohorts at this decision instead of two. It is not a claim that either
+extra cohort was attempted, completed or used. There are47 eligible decisions,
+d=0…46. A technically complete mission has exactly23 intentions and24 remaining
+R2 decisions in this window. Every d=47…59 is R2, with no upgrade quota there.
+
+Keep the useful public-world phase balance from the first contract with an
+explicit adjustment: set p=(w−109255000)%2; S_q upgrades iff
+`d < 46 and (d+p)%2 == 1`. Thus phase0 uses exactly Pro's odd positions
+1,3,…,45, and phase1 uses0,2,…,44. **d46 is R2 in both phases; there is no R3.**
+Each phase gets23 upgrades among its first46 decisions and another R2 at46;
+16 worlds receive each phase. Simply inverting parity over all47 positions
+would incorrectly give phase1 twenty-four upgrades, so that is excluded.
+This preserves a regular dispersed clock and avoids choosing one arbitrary
+odd/even phase for every world without scanning results. It is one fixed
+policy, not two replicates or a best-clock search. Its deliberate omission of
+an upgrade at46 is part of the declared schedule; A_q may use that position.
+Uniform R3 provides a second strong ordinary comparison. I prefer this bounded
+phase balance to a new clock family; no superiority to every fixed clock is
+claimed or required.
+
+For A_q the parent starts each mission with q=23 uncommitted intentions. At
+decision d≤46 let r=47−d, **including the present position**:
+
+1. If q=0, the intention is0 and the cap is R2.
+2. If q=r, commit intention1 at decision start, decrement q once and mark the
+   reason `forced_quota`. This commitment does not require two timely cohorts.
+3. If0<q<r, begin with no committed upgrade. After timely receipt of the first
+   two complete cohorts, commit intention1 only if their individual canonical
+   winners disagree and the parent commitment occurs before the same deadline.
+   Mark the reason `disagreement`, decrement q once and permit the extra two.
+   Otherwise intention0/R2; missing or late cohorts cannot supply a signal.
+
+No timeout, unused intention, exact alias, completion failure or unused model
+allowance refunds q. No third-cohort score revises a committed intention.
+Record a forced intention's eventual disagreement as a diagnostic when available,
+but keep its reason forced even if the winners also disagree. At d≥47 the
+intention is0. Parent quota state is keyed by arm/world and lives outside the
+replaceable endpoint; child termination, reaping, cold restart and process
+generation changes cannot initialize another23. A parent/mission failure stops
+the operation rather than restoring an allowance from a new process.
+
+The exact-intention property is a simple invariant, not an empirical claim.
+Before each early decision,0≤q≤r. A nonforced non-upgrade can occur only when
+q<r, so after using that position q≤r−1. An upgrade reduces q by1; when q=r it
+is forced. Hence after47 processed positions q=0 and exactly23 intentions were
+committed, even if every endpoint call timed out. A technically interrupted
+mission need not have spent23; retain its prefix and do not label it complete.
+The proof does **not** guarantee23 attempted, completed or timely-used upgrades.
+
+### Parent authorization, deadlines and observable execution
+
+The inherited endpoint already uses a duplex pipe and publishes each cohort.
+The quota state must not be inferred afterward from late diagnostic arrays.
+The proposed bounded adapter therefore gives **all four new arms the same
+authorization exchange after cohort1, the second logical cohort**. This is a
+new, fully priced protocol in owned B07 code; it does not edit frozen B05/B06.
+
+The parent starts the20-second clock before quota bookkeeping, child start,
+imports and IPC. It records any fixed-clock/forced intention at that decision's
+start. The child computes/publishes fallback and cohorts0/1, then waits before
+drawing cohort2. The parent uses the inherited child-ready **and actual
+parent-receipt** deadline tests. Only an eligible two-cohort payload can open
+the exchange; a discretionary A_q commitment must itself be timely. The parent
+records its once-only intention transition and intended cap before sending a
+request-specific authorization (world, decision, endpoint/request identity,
+cap and commitment time). Fixed R2/R3/S_q and forced/exhausted A_q use their
+declared cap; only discretionary A_q consults disagreement. All four new arms
+record the same individual-winner arithmetic for diagnostics, without extra G
+or model calls. A reply received by the child after the deadline cannot start
+a third cohort. No third-cohort draw/native attempt precedes a timely matching
+authorization; stale or duplicate grants are invalid.
+
+A discretionary intention is charged when the parent commits it, even if its
+grant is not subsequently consumed. A forced/fixed-clock intention is charged
+before the child call even when the first two cohorts never finish. This avoids
+using an after-deadline payload to move tomorrow's quota. In ordinary timely
+execution, R2 stops after2, R3 after3, and a quota policy after2 or4 cohorts.
+The common exchange's waiting, serialization and scalar comparison costs are
+included; it is not free infrastructure unique to A_q. Its effects on deadline
+behavior remain actual program costs, including against historical references.
+
+Keep each completed cohort's cumulative command publication. After an upgrade
+authorization, no further value-based stopping occurs: cohort2 and3 are bought
+together, subject to the existing deadline/technical resource stop. The parent
+may therefore execute the third-cohort command if timely while the fourth is
+late or incomplete. Use the last eligible complete-cohort payload, then timely
+G fallback, then KEEP active slots if neither exists. Late G/model/cache values
+may be diagnostic, but cannot change the fixed native command, decide a new
+intention, or refund quota. All cancellation/reap and paid late/partial work
+remain in the bill. Command activation remains20 native ticks later even if a
+reply is fast; no background extension follows a normal cap stop.
+
+Record separately, for every decision: q/r before and q after; intention and
+reason; timely/missing individual winners; planned cap; grant commit/send/
+receipt times and identity; third/fourth tape attempts; committed extra cohorts;
+physical work versus alias hits; eligible cohort messages; selected prefix and
+command; and deadline outcome. Define attempted upgrade by an extra tape attempt,
+completed upgrade by both extra logical cohorts committed, and fully usable
+upgrade by a timely selected four-cohort prefix. These can differ. An intention
+can consume quota with zero extra tape attempts; alias reuse can produce two
+extra logical cohorts with zero extra physical transitions. An intention0 with
+any third-cohort work violates the contract. Disagreement missing because of a
+deadline is missing, not agreement.
+
+Reuse remains only the inherited full-input/source/public/tape identity. At
+d≥47, future times are empty under the frozen source law; two logical cohorts
+can share one physical cohort. Current actual arrivals at940 are already in the
+public report, not hidden future truth. Early exact duplicate tapes may also
+reuse completed work. Neither kind of reuse returns an upgrade intention or
+permits extra work elsewhere. The95,680 ceiling is now a protective exposure
+bound, not the old adaptive remaining-physical-budget decision rule.
+
+### Independently verified ceilings and full reader
+
+I recomputed Pro's arithmetic with stdlib integer sums, no scientific imports or
+controller/model execution. For d≤46, each physical cohort has640 native model
+transitions and32 internal G queries. The13 later one-cohort physical suffixes
+sum to6,080 transitions/272 internal G queries. Thus R2 costs at most66,240;
+23 intentions add at most23×2×640=29,440, giving **95,680** for each S_q/A_q.
+Because intentions are never refunded, partial deadlines cannot increase the
+number of planned cohort slots. The tighter153 physical starts/612 clones per
+quota mission is now safe for attempts, unlike the earlier variable-allowance
+proposal's full-cohort-only bound.
+
+| New policy, per mission | Planned logical cohorts | Physical cohort starts ≤ | Clone attempts ≤ | Model-native attempts ≤ | G attempts ≤ | G candidate ticks ≤ | Forecast uniforms ≤ |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| R2 | 120 | 107 | 428 | 66,240 | 3,340 | 3,014,240 | 2,784 |
+| R3 | 180 | 154 | 616 | 96,320 | 4,844 | 4,440,160 | 4,176 |
+| S_q phase0 | 166 | 153 | 612 | 95,680 | 4,812 | 4,413,280 | 4,160 |
+| S_q phase1 | 166 | 153 | 612 | 95,680 | 4,812 | 4,419,040 | 4,184 |
+| A_q | 166 | 153 | 612 | 95,680 | 4,812 | 4,427,360 | 4,256 |
+
+The last two columns use the actual time-clipped G horizons/arrival grids.
+For A_q their safe maximum is the R2 base plus the23 largest two-cohort additions
+among the47 positions; this is source arithmetic over all possible placements,
+not a tested or optimized schedule. It permits partial attempts but no extra
+query outside the declared slots. Phase-balanced S_q means are4,416,160 G
+candidate ticks/4,172 uniforms, so equal intentions are not even identical
+maximum G/tape arithmetic. No actual numerical work is inferred from a ceiling.
+
+The complete new **worker** ceiling is:
+
+- 128 native constructions,153,600 actual transitions,7,680 decisions and at
+  most7,680 model-base constructions;20,224 logical cohort attempts,
+  18,144 physical cohort starts and72,576 branch-clone attempts.
+- **11,325,440 model-native attempts**, **569,856 G attempts** and
+  **521,533,440 G candidate ticks**. The latter is the tighter source-derived
+  bound, replacing the first proposal's query-count×960 envelope. Corresponding
+  ordinary G work is at most2,279,424 candidate values,2,086,133,760 cluster
+  recurrences and3,129,200,640 UAV kinematic updates; inherited native event
+  sinks still bill all RF/channel/link/route and reward-entry work.
+- At most492,416 forecast uniforms,24,576 actual-arrival uniforms, and the
+  separate public-rate permutations. At most7,680 parent authorization replies;
+  four normal cold endpoint starts, with every actual replacement separately
+  billed and never used to reset an intention counter.
+- Zero fits, optimizer steps, neural forwards, new teacher labels, old-physics
+  replay, initial audits, extra worlds or health/profiling calls.
+
+The **complete independent reader** remains purchased, not deferred to a later
+budget. Reconstruct all new native geometry/radio/routes/ACK, positions, FIFO
+arrivals/service/censoring and commanded motion; every committed model prefix,
+including unused/partial work; the exact G arithmetic, RNG tapes, reuse, cohort
+means/ties, payload eligibility and actually selected command. Independently
+reconstruct S_q's schedule and the parent intention/grant/quota transitions
+from recorded events and saved first-two costs; do not import the worker's
+quota decision as proof. Late diagnostics may be checked but cannot be treated
+as information available for the original intention. Never finish an interrupted
+model suffix or controller mission in the reader.
+
+Reader ceilings are153,728 actual physical states,7,680 model initials and
+11,325,440 model successors, totaling **11,486,848 physical reconstructions**
+or3,687,278,208 elementary relations at321/state. It may make another569,856 G
+queries/521,533,440 candidate ticks and reconstruct the declared committed new
+tapes. Base-G duplicate records are checked once, not queried twice. Worker and
+reader together are up to22,973,696 physical-state evaluations and1,043,066,880
+G candidate ticks under this accounting, with their costs reported separately.
+All attempts are reserved before entry; incomplete work is never free.
+Hashes, serialization, quota/event checking, saved-data statistics, finalization
+and support are additional measured work; they create no new policy/fit exposure.
+
+### Old evidence, runtime suitability and reuse limits checked now
+
+The four canonical B06 evidence hashes in the first contract still match.
+A source-only verification additionally checked **all4,032 selected raw files**
+for the96 G/R1/R4 missions: native arrays/metadata and3,840 R traces,172,407,705
+logical bytes, each equal to the original worker manifest. Their ordered
+identity is`972f50b82d438b09c6a5a298df07c6edc72ff4a9166685c1835d4e2197b4828b`,
+SHA256 over sorted worker-root-relative `path + NUL + SHA256_hex + LF`.
+All96 are complete H1200 records and all5,760 recorded decisions are timely.
+All224 old reader checks retain their published identity
+`c2820858da84561e9de260964bec2af3ba6f9dba134cfeebbce6f136b9ad7a00`, with paths
+relative to the **checks directory**. This verifies the complete old reader
+certificate's saved bytes without re-running its science.
+
+All71 frozen source hashes still match aggregate
+`80c9e70ed76cb8ad076b0a78d9c27768f971f1f83c475f99922ccf857f80869a`.
+The original worker/reader source SHAs remain`da74047434845cb2f5b1baf3e0023c66ecadf3d9`
+and`4a88c7145540cbee40647e907cef18e4acece6a3`. Reading the current bound local
+interpreter's own version and installed package metadata, without importing
+NumPy/Torch, reports the same executable
+`/home/fires/.venvs/hmasd-linux-cpu/bin/python`, Python3.10.20, NumPy1.26.3 and
+Torch2.7.0+cpu. B06's thread configuration remains BLAS1/Torch4/interop1.
+This is source/evidence/runtime-metadata compatibility, **not** new host
+execution, performance profiling, actual-node admission or proof of timing.
+
+The current `wsl_4070`-first policy remains authoritative. The proposed local
+exception is concrete task suitability: reuse binds the original local CPU
+runtime; the remote machine, Python and Torch build differ. Root provisionally
+prefers this bounded reuse to96 additional references. Retain exact inputs and
+the original local runtime with fresh actual-node admission if selected. A
+missing/changed binding stops reuse for an explicit Root choice; no automatic
+cross-build claim, migration, fresh-baseline expansion or verification pilot.
+
+Old G/R1/R4 CPU/wall observations stay **historical**. Their native outcomes
+are the original source-bound, timely programs on the same exposed worlds,
+not observations of how they would execute under today's load. The four new
+arms have a common authorization protocol and interleaved timing; these supply
+the contemporary primary cost contrasts. New deadline effects must be read as
+complete-program effects. The old references do not by themselves establish a
+contemporaneous timing frontier or a pure allocation mechanism. Reuse the old
+certified physics, bind all used raw/check identities, and perform only saved-
+array arithmetic/hash checks on old records; no96-mission replay is hidden in
+the reader. Keep one canonical evidence copy in place.
+
+### Entire price, protective stop and consequential reading
+
+Repricing from the original saved per-use CPU gives indicative R2=141.7621,
+R3=202.1595 and S_q/A_q=200.8744CPU-s (the quota value interpolates the23/47
+two-cohort additions between R2 and R4). This implies **6.6282CPUh worker**.
+Scaling B06's complete reader by the revised model-prefix ceiling gives
+**2.6605CPUh reader**, totaling **9.2886CPUh scientific work**. These are
+arithmetic forecasts, not new timings. The common authorization exchange,
+state visitation, aliases, missed deadlines, load and serialization can alter
+them; equal S_q/A_q forecast prices are not measured cost equivalence.
+
+Retain the honest planning range of **8–12CPUh worker+reader**, plus **up to
+2CPUh support inside the total price**, including at most.5CPUh synthetic/mock
+engineering;0GPU and10–16 aggregate operation-wall hours. No native/model/
+optimizer/learner check or profiling run is added. The complete proposed stop
+remains **14 measured CPUh,24 aggregate operation-wall hours,12GiB owned
+allocated disk**; normal work stops at13.5CPUh/23wallh/11GiB to preserve the
+remaining finalization allowance. No stage or deadline restart resets this bill.
+Carry earlier B07 construction, verification and publication costs forward;
+Pro/Root/model-token effort and unmetered support remain additional disclosed
+costs rather than being declared zero or counted twice as old B06 execution.
+
+Artifact provisioning still includes worker/reader source snapshots, scratch,
+all new traces, full independent checks and quota/authorization records. The
+inherited fixed-capacity R arrays remain727,143bytes per decision regardless of
+how many slots fill:7,680 arrays are5,584,458,240 uncompressed bytes, so a small
+decrease in attempted forecasts does not reduce that allocation formula. B06-
+sized two snapshots add3,673,182,208bytes (8.622GiB combined before mission/
+reader/support output). Budget up to another1MiB/mission for the new journal
+and protocol diagnostics; actual compressed evidence plus snapshots is still
+roughly4–6GiB, with the12GiB protective provision retained. This is an estimate,
+not a fresh disk/memory admission. Proposed worker memory remains8GiB with the
+configured4GiB system floor, checked on the actual node only at selection's
+execution boundary. Unused scratch/snapshots would be removed after consumer/
+evidence checks at closure; no retention copy is a prerequisite.
+
+The primary descriptive contrast is **A_q−S_q for C**, with **A_q−R3** as the
+ordinary intermediate-depth comparison. Retain all seven arms'32-world metric
+vectors and the21 pairwise contrasts (remaining contrasts are contextual, not
+additional primary claims). Use the inherited paired-mean/sample-SD t interval
+with df31 for complete32-world differences; label every interval descriptive
+and conditional on this already exposed panel. If a completed-only metric is
+undefined, preserve the missing worlds and withhold an unconditional32-world
+interval rather than silently changing the population. No user/tick count
+replaces independent worlds, no threshold or phase is fitted after exposure,
+and no confirmation, equivalence or multiplicity-adjusted discovery claim is
+made from these descriptive intervals.
+
+Read C's area and terminal components; all request identities/completions and
+unfinished ages/lower bounds; completed-request T alongside censoring; W and
+every user's gaps; qualified service, routed coverage, travel and all command
+changes. Read per-world cost distributions, G/native work, logical versus
+physical cohorts, all grant/deadline events, unused physical allowance and the
+forced/discretionary split. Quota remaining0 is not proof of full computation.
+Retain every adverse/censored world and all technically valid partial records.
+
+A_q beating S_q and occupying a useful service/cost point relative to G/R1/R2/
+R3/R4 would support this particular allocation package on this panel. A_q
+beating only R3 would not establish better placement under matched intentions.
+Lower CPU from aliases or deadlines is a real cost fact but not proof of
+preserved service; changed mixtures of completed work must remain visible.
+Favorable C with worse tails, unfinished requests, travel or CPU is a conditional
+trade-off, not a universal upgrade. If fixed/R2/R3 alternatives are more useful,
+retain them and close this adaptive rule; if differences are unclear, close this
+finite comparison without threshold tuning, new clocks or another panel. Low
+discretionary use or mostly forced use may make the signal uninformative; it
+does not authorize a repair screen. A technical request/admission/worker/reader
+failure preserves paid evidence and ends that attempt without automatic retry,
+replacement or completion of missing cells. Correct deadline censoring, alias
+reuse and unfavorable results remain outcomes to read, not technical retries.
+
+**Recommendation to Root.** The same-quota revision improves the comparison
+enough to retain B as a coherent finite planning-allocation candidate. Its
+substantive uncertainty and cost remain: no evidence yet links two-cohort
+disagreement to native value; R1 is already a competent cheap tail reference;
+forced late intentions can dominate behavior; and complete readback keeps the
+price around9.3CPUh before support. The common authorization protocol is an
+explicit implementation obligation and actual cost, not an untested hidden
+assumption. Root's one independent review should judge this actual contract
+with C/D's contracts and the intended investment; this DM has not commissioned
+another review, implemented it or purchased effects.
+
+**Source-only work and closure.** Current successful raw/source/check verification
+used .458320556CPU-s/.458366461wall-s; corrected check-root identity arithmetic
+.019218605/.019219672; quota/count/cost arithmetic .007222399/.007210913.
+Known subtotal is .484761560CPU-s/.484797046wall-s, plus nonzero unmetered
+source reading, interpreter metadata, publication and other support. One earlier
+stdlib-only assertion used `checks/`-prefixed paths where the published identity
+is checks-directory-relative; this checker-scope error was resolved by reading
+the original definition. The raw data, source and published identities did not
+change; that failed support call is additional unmetered work, not a failed
+scientific launch or an omitted experiment. Previous B07 preparation remains
+in its existing entries. No executable, scratch, bulk output or snapshot was
+created here; nothing is deleted and reclaimed bytes are0. Source-only revision
+is complete, with Root selection/review the next substantive action and no
+active operation or engineering blocker.
