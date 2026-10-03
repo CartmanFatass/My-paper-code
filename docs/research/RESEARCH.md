@@ -16,27 +16,12 @@ Claude peer 的暂停、FSD/PPC、G33 与 Milan 原范围保持；本次接任�
 
 <a id="in-progress-handoff-20261002"></a>
 <a id="completed-handoff-20261002"></a>
-**上一轮 owner 要求的完整交接已完成（2026-10-02 PDT）：** 前任 Root 使用原生 agent wait 收齐三位 DM 的终态，
-完成本人交接、全部结果/建议读取、独立处置、发表和所需清理；最后 DM 快照为13:17:59UTC。
-[Root 与三 DM handoff](HANDOFF_20261002_ROOT_AND_THREE_DMS.md)及[下次启动 prompt](START_ROOT_20261002_PROMPT.md)
-已更新为完成边界，替代原进行中指令；该轮终态无活实验、未读结果/建议、observer事件或已选效果后继。
-B03原样三fit结束，保留O完整窗口能力；B05获取完整但兼容失败、未认证；B06准备已交付，六fit未购买。
-没有因交接中断、重启或迁移科学worker，也没有新owner暂停或提前移交Root/lead。
-Owner pause仍为lifted，Claude等独立暂停不变。[下一轮优先级、分工及Oracle原答](archive/2026-10-02/RESEARCH-three-dm-handoff-and-next-plan.md)。
-
 <a id="resume-20261001"></a>
-**历史恢复与前任 Root 接任（2026-10-01 PDT）：** owner 要求“你是新的root…完成交接后继续任务”。
-当时 Root 为 `01a0f779-ace2-74e1-85ad-e0997b61d505`（[完成Root交接并继续任务](codex://threads/01a0f779-ace2-74e1-85ad-e0997b61d505)），
-其读取前任完成的[单一 handoff](HANDOFF_20261001_ROOT_AND_FOUR_DMS.md)，接手该轮 Codex 科学管理、选题与后继安排。
-上一轮四项研究及三项资料评估的完成／停止结论保持；旧操作不重启，历史 handoff 不改写。
-本次明确继续解除该轮 Codex 交接暂停；静默承诺、RF 完整购买与参数搜索均已完整判读、发表和清理。S7 构造与计价也已完成，Root 采纳独立评审、本轮不购买该候选；见[首轮完成处置](#root-selected-successors-20261001)。
-Owner要求广义开源／可学习决策辅助长期由DM持有，并维持3DM实质并行。本轮三位DM均完整收尾：Claude联合窗口建议已实际完成H/noD/SET三fit与全读，O128/128窗而学习final5/6/4，原样购买结束；B12保留条件收益并结束E/B扩展；B05全部获取但严格teacher兼容失败、未认证，B06准备交付而六fit未购买。技术失败不等于学习负结果，长期问题与原正面能力保留。临时Oracle的14011B跨题建议及Root修改采纳已归档；交接当时下一轮优先固定数据版本完整比较，另两DM先作有终点的动作/部署与有限通信设计判断，未选新效果；本轮实际选择见[现行计划](#three-dm-decision-assistance-20261001)。
-Claude 的独立权限和当前暂停、FSD/PPC 暂停、G33 冻结及 Milan 数据依赖保持原范围。
-
-**历史恢复：2026-09-29 21:59 UTC，owner明确要求“阅读handoff 我们继续工作”；该轮次现已完成并暂停。**
-本次解除21:25 UTC的本Root及三个Codex方向暂停；原已接受研究及后续A/B、G/N两轮均已完整判读、发表和收尾。
-该次恢复后完成的研究包括：累计原生服务年龄研究已完成1fit、960回合／245760步，完整核验、独立判读和清理均完成；保留普通W/M能力及学习自身增益，结束未超过普通参照的原选择器配方，无已选追加运行。[完整结果](candidates/uav_service_age/NOTES.md#b01-complete-reading)。原责任恢复保留全部Lead／源码／原操作身份。
-这不改变Claude独立授权、FSD/PPC暂停、G33冻结或Milan数据依赖。[恢复范围](#resume-20260929)、[原暂停交接](#paused-handoff-20260929)。
+历次已完成接任不作为当前工作队列：
+[10-02 完整交接](HANDOFF_20261002_ROOT_AND_THREE_DMS.md)、
+[10-01 完整交接](HANDOFF_20261001_ROOT_AND_FOUR_DMS.md)、
+[09-29 恢复范围](#resume-20260929)保留原始责任与失败证据；旧操作不重启。
+当前分工以下方现行计划和唯一路由为准，Claude／FSD／PPC 的独立暂停、G33 冻结及 Milan 依赖不变。
 
 **Owner pause: lifted**：owner 已明确恢复上方 Codex 交接范围；其他明确暂停仍有效。
 Owner 于 2026-09-23 进一步要求本任务作为科学项目管理者，给予 DM 更高自由度与韧性：失败后可以回顾整个项目，提出更广的建议并继续。当前科学选题与转向授权见 [constitution §2](../project/OPERATING_CONSTITUTION.md#2-who-does-what)，不再把结束一个配方等同于结束 DM 责任。
@@ -55,9 +40,8 @@ Root选择问题、比较投入与协调交叉范围；详细科研innovator／�
 结束一模型／配方不结束长期问题责任；负结果、支持工作与必要方法变更均保留，不以新名称抹掉已付证据。
 当前责任与工作区见[任务路由](#session-routing)，上一轮分工及采纳依据见[四DM审查](archive/2026-09-27/RESEARCH-four-codex-root-handover.md#four-dm-root-decision)。
 Owner已归档完成且文档齐全的DM；后继研究创建新DM并继承已发表证据，不恢复或复用这些旧会话。
-六个原生DM及A/B后继比较均已完整收口：7批、640完整回合、1.92M原生步、1fit；来源、独立判读和终态清理均保全。
-Owner于2026-09-28启动的第二轮两项比较已完整运行并独立判读：主动感知学习包未建立超出普通策略的增量，合法锚点比较建立构造的条件性增量并改变性能参照；1fit／960k原生步，原配方不自动追加。轻量方法调整后的第三轮两项独立问题也已完整运行、判读和清理：有限补能承诺保留条件性普通O；联合路径过渡包未建立用途。两学习端点均未改变各自普通参照的部署，不以此诊断共同原因或否定更广学习；2fits／624k原生步，原配方不自动追加。与Claude共同选定的下一轮中，Codex长任务服务与延迟通信内容两比较现已完整运行、独立判读和清理：长任务O_H有平均服务收益但新增耗尽风险，未通过采用规则；通信三臂均学得自身收益，新内容包未超过原聚合参照。共3fits／634368团队步，不自动追加。
-建设性发展方法已落地；2026-09-28 PDT owner要求Claude用Oracle独立选择并推进两个不重叠方向，Codex推进服务改派和保留有效内容后的通信增量。两个新DM各完成首项研究和一项零训练复用比较，共9fit／1743872结果步，均已完整独立判读：合法提前改派在新旧面板保留有限H12000收益，避免原新增耗尽反例，但新的末55步零服务与原残余F赤字阻止默认／持续性宣称；通信B/O/L已训练资产均在新世界保留相对C的联合收益，按固定规则暂用B19451，不把L未胜出改写为无能力。Root采纳停止原样扩展、保留能力与反例的处置，见[现行计划](#current-research-plan)。Claude已通过独立Oracle、critic和Pro选题，首方向`coupled_host_joint_skills_stage1`经其owner决定后声明并实现准备；第二题D1′仍为候选，未称两题均已开跑。恢复方向仍等owner的Milan数据，Root不接管Claude问题，也不以DM数量下降宣称问题空间耗尽。
+此前完成轮次的正反能力、成本与终态证据见各方向 standing／NOTES 和下方现行计划的历史入口；
+不因当前分工改变而清零。Claude 的当前暂停和责任见任务路由，历史开设过程不作为新启动指令。
 本页在科学判断、计划或控制发生实质变化时更新；逐 cell 进度和操作恢复信息见相应 NOTES/runs。
 
 **计算优先级（owner，2026-09-21）：先使用配置中的 WSL 远端 `wsl_4070`，再考虑本地资源。**
@@ -93,48 +77,26 @@ observation 与环境状态不同；仅凭当前 observation 未必能作闭合�
 重算计划与参数训练需分别解释。用户移动或故障可以是固定转移规律下的状态变化，不能直接等同于
 训练时队友更新策略造成的非平稳性。
 
-Decision cadence changes the deployed joint policy even when parameters and the lawful observation
-interface are unchanged. Fleet B06's complete H4/E/H1 comparison gives lower mean J under every-tick H1
-than four-tick H4 for all six C/Q/G/S parents, with all six descriptive intervals below zero.
-The bounded own-count-loss rule E causes physical interventions and cuts S travel by about
-41%/44% versus H4, but E−H4 J/service remain unresolved; the 19-tick S_L0 outage persists.
-A decline first seen at a mandatory boundary followed by a zero-count plateau supplies no
-extra trigger, illustrating the difference between truthful feedback and useful trigger coverage.
-E improves mean J/service and lowers measured episode CPU versus H1 while traveling farther; H1
-retains lower-travel and S_L0 quality/outage exceptions. Ordinary E programs also save travel.
-This supports conditional use of feedback, not a learned timing mechanism, reward preservation,
-individual-user continuity or energy savings. Motion persistence, forecast/execution mismatch
-and coupled visitation remain unseparated explanations. No new fit or automatic timing repair
-follows; a consequential service floor, travel budget or query constraint could motivate a
-separately selected use comparison.
-[Complete B06 evidence and original independent diagnosis](candidates/uav_fleet_transmission/NOTES.md#b06-independent-disposition).
+决策频率本身改变部署的联合策略。Fleet B06 中六组 parent 的每 tick H1 平均 J 均低于 H4；
+事件规则 E 可显著节省 S 的移动，但相对 H4 的 J／服务增量未定，19-tick outage 仍在。
+E 对 H1 的平均用途／CPU改善伴随更多移动，H1仍有质量／outage例外。真实反馈不保证覆盖有用触发，
+不能据此称学习到时机、保留 reward、节能或改善个体连续性；运动持续性、预测失配和访问耦合尚未分离。
+[完整配对结果、具体反例、代价与停止范围](candidates/uav_fleet_transmission/NOTES.md#b06-independent-disposition)。
 
-S1匿名静态用户的合法几何缓存也已完成普通控制比较：B01在32共同新N5/H256世界、64完整回合、
-0fit中，H相对同程序当前观测C的平均J +.004461、服务/步+.376953，描述区间均跨零，
-7升／10降／15完全同轨。全部32世界保留过已不可见用户，但只有543/10240个同输入决策改变实际动作；
-本面板从未填满20用户行、缓存最多19点且无关联错误，因而实际检验的是SINR阈值消失，非top20溢出。
-保留具体正例与损失，不推广H优于C；平均路径增加497.92m/UAV是运动代价，不是此宿主未建模的能源风险。
-这建立了合法表示与选择性使用，仍不建立GRU遗忘、充分状态或学习增量。
-[完整结果、独立判读与成本](candidates/uav_local_history/NOTES.md#2026-09-29---b01-complete-reading)。
+合法历史表示、实际使用和学习用途是不同结论。S1 B01 几何缓存保留消失用户且有选择性动作改变，
+但 H−C 平均 J／服务区间跨零并增加路径；该面板检验 SINR 阈值消失，没有覆盖 top20 溢出。
+B02 三份同历史 set-PPO 中两份相对初始化改善、一份退化，全部96个端点对C的世界比较仍双降；
+去除历史点会改变动作不等于历史的因果用途。新面板 H−C 亦未建立优势，保留原正例与尾部损失。
+结束从零 set-PPO／argmax 配方不否定完整同历史学习；采样熵／确定性动作未识别失败原因，C/H 的
+无线／搜索知识也不是经验价值上界。不由此诊断 GRU 遗忘或充分状态，不自动换解码／延长训练。
+[B01 观测与边界](candidates/uav_local_history/NOTES.md#2026-09-29---b01-complete-reading)、
+[B02 完整训练／对照、成本与独立处置](candidates/uav_local_history/NOTES.md#2026-09-29---b02-complete-reading)。
 
-后续B02已直接训练三份完整同历史27命令策略，并以初始化／端点及固定C/H评价共同32新世界。
-两份策略相对初始化改善，一份退化；最佳实例在全部32世界提高J／服务并消除零服务步，仍比C少服务9.630人。
-全部96个L1-C世界比较双降，三训练实例的L1-H平均J -.258158／服务-15.900472。缓存及学习确实激活，
-移除已不可见点会改变577／743／6407个端点动作，但同输入敏感性不是历史用途的因果比较。
-新面板H-C亦为J -.010167／服务-.632324，区间跨零，保留旧正例与新尾部损失，不能默认升级H。
-这结束当前从零set-PPO／argmax配方投入，不否定完整同历史学习问题；高采样熵和集中确定性动作尚未
-识别失败原因，不自动授权换解码、延长训练或改编码。C/H含明确无线／搜索知识，比较是有限完整包用途，
-不是经验或信息价值上界。[全部正反结果、独立取舍与成本](candidates/uav_local_history/NOTES.md#2026-09-29---b02-complete-reading)。
-
-合法可见队友的二帧预测进一步区分了几何表示与完整用途：固定32个N5/all-on/H256世界、
-96回合／24576步／0fit的C/V/R比较中，反向R在自身203个“移动队友＋当前用户”样本的四步平均欧氏
-误差从静止69.738m降至29.025m，但R−C完整J／服务为−.001195／−.106079；持续V−C为
-+.004691／+.291870，两者描述区间均跨零。相对同输入C影子，每法10240次决策中V/R仅5/9次
-改变实际命令；准确预测的首块收益可以变成完整损失，错误预测的首块损失也可以变成完整收益。
-保留V的条件正例、R的几何能力与全部损失；证据支持稀疏轨迹改道，尚未分离后续发现、干扰或
-多方响应的原因，也未测试学习。停止原样固定符号配方，不宣称可靠V优势、等价或预测家族不可能；
-将来完整用途比较须继承普通随机I这一无需预测的能力，不能以不同面板均值排列I/V。
-[完整C/V/R、独立诊断与停止范围](candidates/uav_local_peer_forecast/NOTES.md#b01-independent-diagnosis)。
+可见队友二帧 C/V/R 比较保留 R 的几何预测能力和 V 的条件正例，但完整 J／服务增量均未定；
+V/R 只在少量同输入决策改变命令。首块预测更准或有收益可伴随后续完整损失，反向情况也存在。
+这支持稀疏轨迹改道，未分离发现、干扰、多方响应原因，也未测试学习。结束固定符号配方不等于
+预测家族不可能或 V 与 C 等价；后继还应继承普通随机 I，不能跨面板排列 I/V。
+[完整C/V/R、具体正反例、成本与独立诊断](candidates/uav_local_peer_forecast/NOTES.md#b01-independent-diagnosis)。
 
 同一当前观测C还存在有用的零训练随机策略：B03的I在每个四步决策以.9概率选C命令，
 其余质量均匀分给另26个命令。96个新世界／动作区组中，I−C的平均J +.023721、服务+1.709106人/步，
@@ -2845,6 +2807,11 @@ Root 接受 critic 对自身初始问题的修正：**不投入的理由是当�
 
 **保留的能力与限制。** B03 lawful O 完成128/128窗口而平均最大同用户缺口364.344tick；原 H/noD/SET sampled 5/6/4 与全部局部正例、失败费用保持。B12 的最差用户收益与额外能耗/旅行/低储备风险，S0/S1 与 Bstar、H_T、R 泛化、公平分配及通信 B/O/L/K/D 的条件能力和反例均保留，不跨任务比较 J。原三 fit B03、B05 完整获取但旧兼容失败，以及 B06 仅工程准备的身份不改。Claude peer、FSD/PPC 的暂停、G33 冻结与 Milan 依赖范围不变；[前轮原答与处置](archive/2026-10-02/RESEARCH-three-dm-handoff-and-next-plan.md)。
 
+### 既往选择与处置
+
+当前接受工作与下一投入以上方四 DM 表及其后合同为准。以下保留既往选择、完成判断与直接原文入口；
+旧“selected”文字只说明其当时来源，不构成新队列。冻结约束、未解决技术限制和原成本保持原义。
+
 <a id="snapshot-materialization-repair-20261001"></a>
 **共享启动输入修复（2026-10-02 UTC／10-01 PDT）：** S7 B10工程a01已接受后在读取已提交checks.json时退出1；
 任何env／controller／model／native步骤之前即失败，启动CPU未测，不能记为0。原source488c72115、op15022f69…与
@@ -2904,43 +2871,9 @@ Claude的独立所有权和暂停、FSD/PPC、G33、Milan范围均保持。
 Root 已分别读完全部原生结果、原始独立科学意见、DM 处置与清理，采纳限定停止；没有待收操作、未读意见或自动追加。
 [完成轮次与历史分配](archive/2026-10-01/RESEARCH-first-root-successor-round-complete.md)及[原跨题审查](archive/2026-10-01/RESEARCH-successor-allocation-review.md)保留，上一轮[handoff](HANDOFF_20261001_ROOT_AND_FOUR_DMS.md)不改写。
 
-| 完整研究 | 已确立的有限结果与处置 | 完成成本／原记录 |
-| --- | --- | --- |
-| U32_FULL 对 P_PRIOR 的完整购买 | payload-J −.009751 [−.015241,−.004260]，6升／26降；保留质量与少发射能力，双方严重等待和正 J 世界227-tick右删失间隔。结束固定购买，保留 PRIOR，方向 idle。不能用成本记账识别各路径的因果贡献。 | 66 episodes／16,400 steps／0 fits；own CPU3,269.136617秒。[完整独立处置](candidates/uav_radio_information_cost/NOTES.md#b02-independent-disposition)。 |
-| 静默后的本机命令承诺 | RETURN 在3世界有实际保留命令用途；RETURN−CJ J +.000671 [−.006428,+.007770] 未建立总体增量，RETURN−Hdirect −.023452 [−.040682,−.006767]。停止本配方，方向 reserve；不据此诊断此前学习失败。 | 192 H256 episodes／49,152 steps／0 fits；完整链137.863369436 CPU-s。[完整独立处置](candidates/uav_fleet_adaptation/NOTES.md#b11-independent-disposition)。 |
-| 完整回合 CAL／CONT 参数搜索 | CAL0−P0_A J +.007087 [.001821,.012625]；CONT−CAL 两区组分别−.011124 [−.017364,−.005093]、+.007393 [.001157,.013612]，没有稳定上下文增量。四端点均值均低于 Bstar0_A；保留同类可表达强规则与丰富 ZERO 权利区别，不诊断共同优化原因。固定购买结束，方向 reserve。 | 4 fits／4,832 H256 episodes／1,236,992 steps；完整链3,829.297205 CPU-s。[完整结果与处置](candidates/uav_episode_policy_search/NOTES.md#b01-dm-disposition)。 |
+[完成轮次与历史分配](archive/2026-10-01/RESEARCH-first-root-successor-round-complete.md)；[原跨题审查](archive/2026-10-01/RESEARCH-successor-allocation-review.md)；[完整独立处置](candidates/uav_radio_information_cost/NOTES.md#b02-independent-disposition)；[完整独立处置](candidates/uav_fleet_adaptation/NOTES.md#b11-independent-disposition)；[完整结果与处置](candidates/uav_episode_policy_search/NOTES.md#b01-dm-disposition)；[完整评审与处置](candidates/uav_fleet_transmission/NOTES.md#post-b09-focused-root-disposition-20261001)；[Parent complete reading](candidates/uav_parent_adaptation/NOTES.md#b07-complete-reading)；[G complete diagnosis](candidates/uav_fleet_transmission/NOTES.md#b05-independent-disposition)；[Full result and independent disposition](candidates/uav_user_waiting/NOTES.md#b05-independent-review-and-disposition)。
 
-S7 的 C/H_C/F_C 构造、完整价格和 focused 独立评审均已发表；本轮不购买，方向 reserve，无前置诊断或自动队列。
-预测的条件性用途仍成立，但触发只覆盖部分已知损失，预计8–24 CPU-h和12–20支持小时等价量不足以支持本轮优先投入。
-[完整评审与处置](candidates/uav_fleet_transmission/NOTES.md#post-b09-focused-root-disposition-20261001)。
-三个结果属于各自合同，J 不跨实验比较；机器成本较低不自动产生后继授权。上方 TJSD 的B01也已完整收尾；当前新工作由owner长期3DM安排承接，具体新增批次待构造；
-Claude 权限与暂停、FSD/PPC、G33及Milan范围保持。
-
-Root read the complete count B06, parent B07 and ordinary G B05 results, original independent
-criticisms and DM responses. It adopts the exact count-mixture and fixed learned-shortlist
-stops while retaining useful P/B*, ordinary planning and scoped learned evidence. Parent
-L2_E−K2_E is −.000885878J [−.002373417,+.000136034], with one gain, three losses and twelve
-identical worlds at similar complete CPU; the suffix-tail witness prevents blanket dominance.
-G retains useful tail/quality/path tradeoffs without established mean-J superiority over Q10;
-S_L1−G retains +.023431J [+.012843,+.033524], while S_L0's J increment is unresolved.
-All retained-policy outages remain adverse evidence. These completed comparisons change
-capability/use judgments, not the number of independent training instances. Each DM has
-published and cleaned its completed study; no added evaluation or refit follows automatically.
-[Parent complete reading](candidates/uav_parent_adaptation/NOTES.md#b07-complete-reading),
-[G complete diagnosis](candidates/uav_fleet_transmission/NOTES.md#b05-independent-disposition).
-
-**Waiting B05 is complete and independently read.** Root read the complete original critic and
-DM response at5715b7469, adopting useful ordinary LRS under richer local allocation rights.
-It preserves every tick's service count and improves waiting on all64worlds per M/S/U path,
-while quality/J fall in every world; RR supplies most of the gain. Retain M:LRS as a main
-reference, cheaper S:LRS and U:LRS's extreme-tail/service tradeoff. U:LRS−S:LRS extreme-tail
-increments remain unresolved and cost1.353448additional inherited scheduler CPU seconds per
-episode. Further same-path allocation can reduce mean episode maximum gap by at most
-.625/.875/1.28125ticks; this finite-panel bound does not constrain F_user or typical age.
-The successful producer/reader cost65.478097CPU seconds with0new native/model/C calls or fits;
-the failed remote prefix remains additional cost. This changes the useful physical-control
-comparison without diagnosing prior learning failures or selecting a learner/native port.
-[Full result and independent disposition](candidates/uav_user_waiting/NOTES.md#b05-independent-review-and-disposition).
+[压缩前的完整结果叙述与选择边界](https://github.com/CartmanFatass/My-paper-code/blob/94704c0c0a7d711d3708736d3462506e92b48951/docs/research/RESEARCH.md#root-selected-successors-20261001)。本处为已完成比较的保留判断，不选择新运行。
 
 <a id="radio-uncertainty-selected-20261001"></a>
 **RF B01 complete: retain U32’s conditional objective capability and its waiting harms.**
@@ -2953,38 +2886,9 @@ and worst-user mean age 4.730225 ticks [+1.327564,+8.132885]. The strongest J-ga
 a closed 129-tick exclusion; the strongest J-loss world improves its maximum gap. All signs
 and initial/terminal censoring are preserved; neither program dominates every service criterion.
 
-Both use the same ideal measured link data, correct known approximate shadowing law, restricted
-C proposals, action menu and 3-tick delivery/4-tick hold. All 4,096 whole decisions met 1.336 s;
-maximum measured round wall is P .049592/U32 .253561 s. U32’s mean accumulated round wall per
-mission is 9.43509 s versus 1.38227 s for P. The positive is an active finite-program increment;
-finite Monte Carlo selection, adaptive search and subsequent trajectories remain combined.
-Hover-persistent channel residuals and an objective without individual waiting penalties are
-consequential limitations; fewer transmitter ticks and shorter paths are not measured energy
-savings. It establishes no learning, field validity, common-sensor acquisition value or general
-default adoption.
+[Complete result](https://github.com/CartmanFatass/My-paper-code/blob/1e363409be4502f81fb1f91a847d83162a38a325/runs/uav_radio_uncertainty/b01_correlated_shadow_a01/result.json)；[full numerical reading](https://github.com/CartmanFatass/My-paper-code/blob/1e363409be4502f81fb1f91a847d83162a38a325/runs/uav_radio_uncertainty/b01_correlated_shadow_read_a01/reading.json)；[original independent scientific review and DM resolution](candidates/uav_radio_uncertainty/NOTES.md#b01-independent-review-and-disposition)；[measured closure](candidates/uav_radio_uncertainty/NOTES.md#b01-final-cleanup)；[original selected contract, rationale and price](archive/2026-10-01/RESEARCH-radio-uncertainty-selection.md)。
 
-The independent ResearchCritic and DM agree to close this fixed purchase, retain U32 as a
-conditional payload-objective option and P as its cheaper matched reference, and select no
-automatic replication, particle/deadline change or continuity repair. The broader question is
-open; this direction is reserve with no queued producer or open advice. A later integrated use
-comparison needs a concrete continuity criterion or cheaper ordinary reference and its own
-prospective price. The separately completed adverse P_FULL/P_PRIOR acquisition result makes
-the cheaper ordinary reference consequential; its effect cannot be added to U32−P and supplies
-no direct U32−PRIOR result. Neither completed study is waiting on the other.
-
-Complete exposure is 64 H256 scientific episodes/16,384 steps plus 4 H8 correctness episodes/32 steps,
-0 fits/updates. Main worker+reader CPU is 3,154.216731 s; with H8 and source-test child CPU the
-metered total is 3,166.677581 s, with source/adviser/support work still incompletely metered.
-Each main worker/reader processes 20,529,026 candidate fleet scores. Required canonical
-positive/adverse evidence remains; all three disposable snapshots and local scratch were
-removed, reclaiming 2,455,527,424 allocated bytes. Useful RF source/readers remain for the
-conditional capability and retained acquisition-code imports; active consumers have finished.
-
-[Complete result](https://github.com/CartmanFatass/My-paper-code/blob/1e363409be4502f81fb1f91a847d83162a38a325/runs/uav_radio_uncertainty/b01_correlated_shadow_a01/result.json),
-[full numerical reading](https://github.com/CartmanFatass/My-paper-code/blob/1e363409be4502f81fb1f91a847d83162a38a325/runs/uav_radio_uncertainty/b01_correlated_shadow_read_a01/reading.json),
-[original independent scientific review and DM resolution](candidates/uav_radio_uncertainty/NOTES.md#b01-independent-review-and-disposition),
-[measured closure](candidates/uav_radio_uncertainty/NOTES.md#b01-final-cleanup),
-[original selected contract, rationale and price](archive/2026-10-01/RESEARCH-radio-uncertainty-selection.md).
+[压缩前的完整结果叙述与选择边界](https://github.com/CartmanFatass/My-paper-code/blob/94704c0c0a7d711d3708736d3462506e92b48951/docs/research/RESEARCH.md#radio-uncertainty-selected-20261001)。本处为已完成比较的保留判断，不选择新运行。
 
 <a id="mixed-controller-response-selected-20261001"></a>
 **Mixed-teammate B09 complete: retain competence; end the bounded response-head purchase.**
@@ -2997,34 +2901,9 @@ All eight learned-endpoint/Bstar mean J differences are adverse and unresolved. 
 establishes a positive J increment over unchanged P0; all X means are adverse. Gains over
 C on T preserve competence but do not establish the requested complete upgrade.
 
-H0-F0 saves195.353m/UAV on T and134.093m on X with negative descriptive intervals; H1 does
-not reproduce that difference. H0-P0 travel is-5.327/+28.649m and unresolved. Preserve this
-conditional fitted-program result, all large favorable/adverse worlds and the seven final
-one-tick zero-service episodes, which also include P0. No energy saving, useful service
-preservation, preferred training block or automatic deployment rule follows.
+[Complete result](candidates/uav_fleet_adaptation/NOTES.md#b09-complete-reading)；[original independent diagnosis and DM resolution](https://github.com/CartmanFatass/My-paper-code/blob/71af384c3176ecc8976579b4442d00b2cafe69c5/docs/research/candidates/uav_fleet_adaptation/NOTES.md#b09-independent-disposition)；[measured closure](candidates/uav_fleet_adaptation/NOTES.md#b09-final-cleanup)；[retired full selection and prospective bill](archive/2026-10-01/RESEARCH-mixed-controller-response-completion.md#retired-mixed-controller-response-selection)。
 
-All heads and critics moved and every declared update completed. History is sparse rather
-than absent, but zeroing its coordinates in all16,384 saved final H contexts changes zero
-modes, sampled categories or physical commands under the same innovations. Small probability
-changes remain. Thus H0's travel result cannot be credited to decisive executed history
-responses on this panel; learning-time effects on other coefficients remain possible.
-This is observed-context sensitivity, not a native ablation, expected-value or mediation
-result. The bounded residual cannot reproduce every stronger stochastic reference, a real
-scope limit rather than evidence that widening it would help. Current-information sufficiency,
-general response unlearnability and a common cause of earlier losses remain unestablished.
-
-Root adopts the exact stop with no additional fits, worlds, partners, visibility, residual
-retuning or confirmation. Retain P0/P1, all ordinary alternatives, fitted assets and signed
-outcomes. Enclosing execution/readback cost3027.478CPU-s/3047.324wall-s; peak process RSS
-716,940KiB. Canonical evidence uses1,354,358,784allocated bytes. Additional engineering,
-staging, final writing and support remain separately incurred. Measured disposable-target
-reclamation is1,093,632bytes; the additionally deleted source snapshot was not measured
-before deletion and earns no numerical credit. No cleanup target or consumer remains.
-
-[Complete result](candidates/uav_fleet_adaptation/NOTES.md#b09-complete-reading),
-[original independent diagnosis and DM resolution](https://github.com/CartmanFatass/My-paper-code/blob/71af384c3176ecc8976579b4442d00b2cafe69c5/docs/research/candidates/uav_fleet_adaptation/NOTES.md#b09-independent-disposition),
-[measured closure](candidates/uav_fleet_adaptation/NOTES.md#b09-final-cleanup),
-[retired full selection and prospective bill](archive/2026-10-01/RESEARCH-mixed-controller-response-completion.md#retired-mixed-controller-response-selection).
+[压缩前的完整结果叙述与选择边界](https://github.com/CartmanFatass/My-paper-code/blob/94704c0c0a7d711d3708736d3462506e92b48951/docs/research/RESEARCH.md#mixed-controller-response-selected-20261001)。本处为已完成比较的保留判断，不选择新运行。
 
 <a id="joint-local-motion-transmission-selected-20261001"></a>
 <a id="joint-local-motion-transmission-completed-20261001"></a>
@@ -3034,56 +2913,9 @@ Both full-network actor/critic fits and all 1,376 H256 episodes completed at pub
 Root read the complete original independent ResearchCritic answer and DM resolution and
 adopts the exact stop: no extra fit, epoch, mask widening, prior tuning or confirmation.
 
-J0/J1 minus actual INIT90 give J −.0229865/−.0261492, with descriptive world-bootstrap
-intervals [−.0323034,−.0140403]/[−.0342395,−.0179911], and service −1.60956/−1.61243
-users per tick. Both endpoints lose J and service to all seven P0_A/ZERO/HIDDEN,
-Bstar0_A/ZERO and Hdirect_A/ZERO references, with negative intervals. Against Hdirect_ZERO,
-J is −.0285998/−.0317624 and service −1.93860/−1.94147; p10 and minimum service also fall.
-Both half-horizon comparisons remain adverse, so the loss is not only an initial transient.
-Their gains over C/CJ retain competence without establishing useful development beyond the
-stronger references. All signed worlds, narrower travel/quality tradeoffs and unresolved
-G comparisons remain. Two fitted systems sharing P0/HIDDEN are not parent-population replication.
+[Complete signed results](https://github.com/CartmanFatass/My-paper-code/blob/4a0db1166d00511f45a4ee40689e67190a67ea87/runs/uav_fleet_adaptation/b10_joint_control_a01/publication.json)；[full original independent diagnosis and DM resolution](https://github.com/CartmanFatass/My-paper-code/blob/4a0db1166d00511f45a4ee40689e67190a67ea87/docs/research/candidates/uav_fleet_adaptation/NOTES.md#b10-independent-disposition)；[measured closure](candidates/uav_fleet_adaptation/NOTES.md#b10-final-cleanup)；[retired complete selection, rationale and price](archive/2026-10-01/RESEARCH-joint-local-control-completion.md#joint-local-motion-transmission-selected-20261001)。
 
-Both actors and critics changed with every declared update active. Actor movement is about
-4.1% in L2; final eligible OFF fractions change in opposite directions, .5444/.4509 versus
-INIT90's .5132, despite both endpoints losing. This does not identify one silence-frequency
-or optimizer cause. Exact initial raw-row duplication and numerical probability fidelity do
-not make INIT90 and P0_HIDDEN the same sampling law or trajectory coupling. B08's positive
-HIDDEN result and the useful inherited/ordinary controls remain evidence, not erased failures.
-
-Ordinary CJ supplies five genuine immediate witnesses: in five worlds its first strict
-positive-service OFF choice holds the same zero motion and positions as C_ZERO over four
-ticks and increases native service by 1.25–6.25 users per tick. Across those five complete
-missions, only two J effects are positive and three negative; the other 27 worlds are
-identical. Across all 32, CJ−C_ZERO is +.000604 J, −.00244 service and +188.175 m/UAV travel.
-These are post-result diagnostics, not a new primary test or established episode benefit.
-The next boundary's old censored row before forced reactivation is a consequential contract
-feature; it does not identify the cause of every later loss or establish a history repair.
-Nor does this simulator contract prove that physical transmit silence requires receiver blindness.
-
-Adverse evidence includes 20 training zero-service ticks in five episodes and 19 final
-zero-service ticks in six episodes. In the shared P0_HIDDEN/INIT90 outage world, small positive
-HIDDEN predictions switch one transmitter OFF and reduce service while held motion and old
-observations match P0_A. This identifies a local immediate adverse bit effect, not the cause
-of the full learning loss. Four transmitters remaining ON does not guarantee team service;
-team tails do not establish individual continuity, and motion/exposure are not energy measures.
-
-The complete bill is 2 fits, 352,256 native steps, 1,024 actor and 1,024 critic Adam steps,
-with 163,840/32,768 collected actor/critic rows. The reader reconstructs 441,696 scalar states,
-2,208,480 observations and 119,257,920 scalar power links, including all masks, policies,
-draws, rewards, targets, first-epoch losses and saved-state chains. It does not independently
-replay every later-epoch gradient/Adam arithmetic. Worker+reader chain cost is 1,780.045981 CPU-s
-and 1,717.666552 wall-s; peak process RSS is 731,560 KiB. Correctness and source/adviser/
-staging/publication support remain additional work; estimates are not actual support time.
-B02–B10 cumulative exposure is 22 fits, two calibrations and 4,055,080 native steps, with B01
-separate. All 1,647 required canonical files remain in one evidence copy, 1,119,678,464 allocated
-bytes. Measured closure reclaimed 1,639,141,376 allocated bytes with no cleanup target or live
-consumer left; retained implementations and readers support the recorded capabilities.
-
-[Complete signed results](https://github.com/CartmanFatass/My-paper-code/blob/4a0db1166d00511f45a4ee40689e67190a67ea87/runs/uav_fleet_adaptation/b10_joint_control_a01/publication.json),
-[full original independent diagnosis and DM resolution](https://github.com/CartmanFatass/My-paper-code/blob/4a0db1166d00511f45a4ee40689e67190a67ea87/docs/research/candidates/uav_fleet_adaptation/NOTES.md#b10-independent-disposition),
-[measured closure](candidates/uav_fleet_adaptation/NOTES.md#b10-final-cleanup),
-[retired complete selection, rationale and price](archive/2026-10-01/RESEARCH-joint-local-control-completion.md#joint-local-motion-transmission-selected-20261001).
+[压缩前的完整结果叙述与选择边界](https://github.com/CartmanFatass/My-paper-code/blob/94704c0c0a7d711d3708736d3462506e92b48951/docs/research/RESEARCH.md#joint-local-motion-transmission-completed-20261001)。本处为已完成比较的保留判断，不选择新运行。
 
 <a id="anonymous-user-tracking-selected-20261001"></a>
 **C/M/V complete: retain accurate ordinary prediction; end this control-package purchase.**
@@ -3093,47 +2925,9 @@ DM disposition and measured cleanup. All96 H3000 missions and the complete reade
 worlds. Native user paths agree across all3001 paired boundaries. C remains exact P_BS with
 its BS prior/memory rights, original feedback and existing conditional-use restrictions.
 
-Primary V-M total J is-21.409861, descriptive paired-world t95[-67.939166,+25.119445];
-cumulative QoS is-32.817715[-74.706679,+9.071250]. V-C gives J-28.080775/QoS-27.058164,
-also unresolved; M-C gives J-6.670914/QoS+5.759550, both intervals crossing zero.
-These are conditional fixed-program comparisons, not equivalence or training replication.
-The mean C/M/V J levels2084.267/2077.596/2056.186 retain useful and adverse individual
-worlds. M's extra return cost outweighs its small service mean gain; V loses service even
-in cases where reserve exposure improves, so an energy-only explanation is inadequate.
-V-M QoS-p10 is-.076817[-.132873,-.020761], with22 adverse worlds. V also adds travel;
-unchanged zero-service duration and zero depletion/cutoff counts establish no safety guarantee.
+[Complete result and signed worlds](candidates/uav_fleet_transmission/NOTES.md#b08-complete-reading)；[original independent diagnosis and disposition](candidates/uav_fleet_transmission/NOTES.md#b08-independent-disposition)；[measured closure](candidates/uav_fleet_transmission/NOTES.md#b08-final-cleanup)；[retired full selection and prospective bill](archive/2026-10-01/RESEARCH-anonymous-tracking-completion.md#retired-anonymous-user-tracking-selection)。
 
-The representation positive is substantive. All68979 V forecast origins bind the same user
-at t+15 without ambiguous/unbound/censored origins. Mean error falls33.218153 to.732951m,
-RMSE34.301469 to5.567979m, with lower mean error in every world. The158.257m worst error and
-rare association defects remain. M adds remembered points in661/3200plans, V in684/3200.
-Every world physically diverges: V's first change is at boundaries61-151, M's at241-1771.
-Thus broad tracking incompetence and nonactivation are weakened. Accuracy is conditional on
-V's own observed/remembered users, not all users or an identified mediator. Limited extra
-memory, competent current control and the midpoint/H1 geometric composition remain plausible
-joint explanations; no unique planning bottleneck or exhausted information value is established.
-
-Preserve favorable cases as well as losses: world29880004 gives V gains over both comparators,
-whereas29880014 has M-C J+256.149 but V-M J-313.229. No prospective selector identifies useful
-worlds. Root adopts the scoped stop: no further world, unchanged replication, tracker tweak,
-horizon/threshold sweep, S4, learner or confirmation. Retain the ordinary tracker/projection,
-C/P_BS and all component tradeoffs; do not promote M/V or infer a general history/learning failure.
-
-Engineering adds244 native steps, for288244total. Complete engineering plus scientific
-execution/readback costs9508.332CPU-seconds/2.641203CPUh; the scientific chain alone is
-9493.606CPU-seconds/42.653wall minutes. C/M/V proposal CPU is.901/7.849/7.858s per mission;
-complete worker costs84.910/92.879/92.496s. Support remains additional and incompletely metered.
-The reader repeats actual lawful control/shield streams and recorded native state/route/
-service/energy checks; it does not independently resimulate all RF physics. Canonical raw and
-compact evidence remain, including6.098GB uncompressed scientific arrays/1,044,791,296allocated
-raw/metadata bytes. Both snapshots, unused study drivers/tests, caches and stopped requests
-are absent; net allocated target storage fell1,635,348,480bytes, with no cleanup blocker.
-Useful controller code and10 rule tests remain; frozen execution source is recoverable in Git.
-
-[Complete result and signed worlds](candidates/uav_fleet_transmission/NOTES.md#b08-complete-reading),
-[original independent diagnosis and disposition](candidates/uav_fleet_transmission/NOTES.md#b08-independent-disposition),
-[measured closure](candidates/uav_fleet_transmission/NOTES.md#b08-final-cleanup),
-[retired full selection and prospective bill](archive/2026-10-01/RESEARCH-anonymous-tracking-completion.md#retired-anonymous-user-tracking-selection).
+[压缩前的完整结果叙述与选择边界](https://github.com/CartmanFatass/My-paper-code/blob/94704c0c0a7d711d3708736d3462506e92b48951/docs/research/RESEARCH.md#anonymous-user-tracking-selected-20261001)。本处为已完成比较的保留判断，不选择新运行。
 
 <a id="service-assignment-cost-and-prediction-b10"></a>
 **B10–B12 and B01 learning: ordinary service, resource use, accurate prediction and complete value separate.**
@@ -3144,94 +2938,9 @@ consumes more energy in every world; mean extra3411m per UAV and48.646Wh per tea
 return-cost+15.323 and reserve exposure+494.25 UAV-steps. Its J+20.063[−25.373,+65.500]
 is unresolved. This useful service tradeoff is not a default upgrade or universal fairness.
 
-F_A−H_A J−15.759[−53.080,+21.561]/QoS−20.989[−59.375,+17.396] does not establish a
-forecast increment; F_A−C J+4.304[−42.664,+51.272] is also unresolved. F's actually current
-scoring users have mean error43.520→1.226m, better in every world, while all32 paired paths
-physically diverge. Accurate representation and real decision exposure therefore coexist with
-uncertain/adverse complete value. Rare large errors/identity switches remain. World29910021
-retains F gains over H and C; world29910015 retains a strong H gain and large F−H loss;
-world29910009 loses service while reducing reserve exposure, so energy alone cannot explain F.
-World29910016 instead improves F−C service but loses282.847J with3693 versus0 reserve
-UAV-steps. Zero depletion/cutoff/never-served counts do not establish safety; all observed and
-censored outages and terminal reserve tails remain in the full result.
+[Full B11 read](candidates/uav_fleet_transmission/NOTES.md#b11-complete-reading)；[full independent original and resolved response](candidates/uav_fleet_transmission/NOTES.md#b11-independent-disposition)；[Full evidence](candidates/uav_fleet_transmission/NOTES.md#b10-complete-reading)；[original independent diagnosis and resolved response](candidates/uav_fleet_transmission/NOTES.md#b10-independent-disposition)；[source-only H_T price](candidates/uav_fleet_transmission/NOTES.md#post-b10-tie-use-source-contract)；[measured cleanup](candidates/uav_fleet_transmission/NOTES.md#b10-final-cleanup)；[Complete B12 evidence](candidates/uav_fleet_transmission/NOTES.md#b12-complete-reading)；[full original diagnosis and resolved disposition](candidates/uav_fleet_transmission/NOTES.md#b12-independent-disposition)；[measured closure](candidates/uav_fleet_transmission/NOTES.md#b12-final-cleanup)。
 
-The concrete ordinary competing explanation is incomplete discrimination of later movement
-costs, not proved forecast failure. In411 of946 H swaps, exact top scores tie across candidates;
-242 selected candidates travel>1m more nominally than their exact-score minimum (1m is only
-a descriptive cutoff). The selected B11 H_T retained base ties and all H scoring, selecting
-minimum already-computed travel only among strictly-above-base exact maxima. Its complete
-32-exposed-world result now records295 changed choices/31 changed physical paths, mean actual
-travel−558.605m/UAV, energy−8.093Wh and return cost−13.293 versus H_A. These intermediate
-cost predictions held, but full J+19.929[−16.724,+56.582] and QoS−6.658[−40.715,+27.399]
-remain unresolved; minimum-user QoS/H falls−.016485[−.030590,−.002380]. World29910023 loses
-the H team outage while extending one user's right-censored terminal gap452→508ticks.
-Thus equal sampled model scores do not ensure preserved native service or individual continuity.
-H_T−C J+39.992[−5.229,+85.214] is unresolved and travel/energy still exceed C in all32 worlds.
-No default adoption, new-world confirmation or prediction increment follows. The complete
-independent diagnosis agrees, MATERIAL_DISSENT:no; it is a reused, nonblind critic that also
-originally proposed H_T. It reconstructs the first changed decision from common real history:
-31old/new choices have individually equal3-point modeled QoS/return, yet next30tick native
-QoS rises in20/falls in11, and29/31 differ even at native sample times. Short-model equality
-therefore does not guarantee short native service equality; no unique missing component is
-identified, and first-window signs can reverse at full H3000. Three of295 secondary travel
-differences are floating-point tails (1e−12–1e−11m); they comply with the frozen literal rule,
-are not all of the observed opportunities, and authorize no epsilon repair or excluded worlds.
-Retain C/H/H_T as different measured tradeoffs, end automatic fixed-rule expansion, and keep
-the broader resource/service question separate. Old-table nominal differences were never
-summed as native savings. [Full B11 read](candidates/uav_fleet_transmission/NOTES.md#b11-complete-reading),
-[full independent original and resolved response](candidates/uav_fleet_transmission/NOTES.md#b11-independent-disposition). B09 F−H+65.974J and its F−C−454.277 loss remain separate evidence; no
-cross-panel subtraction measures a repaired gap. The old zero-trigger deferral was not an
-experiment. C/P_BS default restrictions and all prior positive/adverse capabilities remain.
-
-B10 totals312000 native/0fit and3.279 known CPUh, plus supplementary reading and incompletely
-metered failure/infrastructure/support. The B10 fixed recipe has no queued extension. B11 adds102000native/0fit,
-49062actual candidate queries including its single reader/engineering, and1.236170known CPUh
-plus support. The DM continues the parent question; E/B allocation was independently selected
-as a distinct investment rather than automatically unlocked by H_T. Completed B11
-source/scratch/unused-driver cleanup reclaimed5,422,624,768allocated bytes; required unique
-evidence and the useful exact controllers remain, with no live operation or cleanup blocker.
-[Full evidence](candidates/uav_fleet_transmission/NOTES.md#b10-complete-reading),
-[original independent diagnosis and resolved response](candidates/uav_fleet_transmission/NOTES.md#b10-independent-disposition),
-[source-only H_T price](candidates/uav_fleet_transmission/NOTES.md#post-b10-tie-use-source-contract),
-[measured cleanup](candidates/uav_fleet_transmission/NOTES.md#b10-final-cleanup).
-
-
-B12 now supplies that complete E/B resource-allocation result on the same32 exposed worlds,
-with source-bound old C/H_A/H_T and all native/user/resource endpoints. E320/B822 strict
-assignment changes physically alter every world; B627 raises minimum arrival slack and195
-only later leximin components. Nevertheless B−E J+6.354[−48.950,+61.658]/QoS−21.463
-[−62.717,+19.792], E−C J−33.404[−105.441,+38.633], and B−C−27.050[−69.876,+15.776]
-establish neither an upgrade nor equivalence. E−C actual consumption−1.815Wh is unresolved
-while reserve exposure rises631.594[67.914,1195.274]UAV-steps. B−E consumes22.002Wh
-[15.718,28.286] more (30/32 worlds) and travels1574.355m/UAV more, with uncertain reserve/J
-improvement. Each arm preserves its own current C target multiset; later layouts diverge.
-E also overrides300m C hysteresis, and B−E is a full criterion comparison, not isolated
-battery-information value. Asynchronous arrival slack is not future fleet reserve or service.
-
-Retain B−C minimum-user QoS/H+.015308[.000938,.029678] as a secondary positive, E's useful
-worlds and lower energy than H variants, and the established H/H_T capabilities. Neither
-resource criterion replaces their complete service: E/B−H_T J−73.397/−67.042 have negative
-descriptive intervals. World09 retains severe E/B reserve losses versus C, world24 loses both
-service and reserve under B versus E, and world17 E loses service despite reserve0 while B
-gains service with more reserve. These cases prevent a single low-battery explanation. Full
-individual gaps/censoring, changed native intermediary paths and terminal risks remain;0cutoff
-or never-served events is no safety proof. Close automatic fixed-proxy expansion without
-closing the parent question. This adds204000native/0fit,4325982 completed criteria including
-760mock-input calculations,1.810523 known execution/check/read CPUh plus support. The complete
-independent diagnosis agrees, MATERIAL_DISSENT:no, in the reused nonblind context. Its32
-common-history first divergences share all lawful state/candidate tables; B strictly improves
-slack for more intended flight Wh, but next30tick native QoS is13up/15down/4equal with initial
-F=0 and no return-cost difference. Thus service changes precede later return penalties; neither
-inactivity nor exclusively late charging explains everything.23/32 tiny actual energy
-differences are descriptive only, not an epsilon rule. World23 user13's right-censored C/E/B
-gaps420/388/454ticks coexist with B's better world-minimum QoS, limiting any universal
-continuity/fairness claim. The critic's23 complete raw checks add no controller/edge/power/RF
-query; saved arithmetic/support remain additional cost. Useful assets and all adverses are
-retained; no automatic complex-model repair or H_T/C confirmation is selected. Source/scratch/
-unused-driver cleanup reclaimed3633164288allocated bytes, retaining sole necessary raw and
-core policies with no blocker. [Complete B12 evidence](candidates/uav_fleet_transmission/NOTES.md#b12-complete-reading),
-[full original diagnosis and resolved disposition](candidates/uav_fleet_transmission/NOTES.md#b12-independent-disposition),
-[measured closure](candidates/uav_fleet_transmission/NOTES.md#b12-final-cleanup).
+[压缩前的完整结果叙述与选择边界](https://github.com/CartmanFatass/My-paper-code/blob/94704c0c0a7d711d3708736d3462506e92b48951/docs/research/RESEARCH.md#service-assignment-cost-and-prediction-b10)。本处为已完成比较的保留判断，不选择新运行。
 
 <a id="service-resource-native-learning-b01"></a>
 B01 now tests native-experience selection of C versus H_T on one actual controller history,
@@ -3278,27 +2987,9 @@ with cumulative QoS+60.769[9.617,111.922]:17positive,9negative,6ties. F−C is
 This is a scoped native anticipation positive alongside an inferior complete planning package,
 not a learning result, mediation proof or default-safe endorsement of C/P_BS.
 
-Retain concentrated gains, six active-search trajectory ties, all primary losses, world29890021's
-full-mission zero service despite active zero-QoS selections, and world29890012's never-served
-users/3202reserve UAV-steps. C services world21 with the same erroneous inferred BS; no unique
-prior/horizon/search repair is established. Lower H/F travel and propulsion coexist with much
-worse service and user tails. Zero depletion/cutoff does not establish safety. The complete
-science+engineering+finite-check bill is288244native steps/0fits and8.002 recorded CPUh,
-plus supplementary saved-array reading and incompletely measured support.
+[Full result and signed worlds](candidates/uav_fleet_transmission/NOTES.md#b09-complete-reading)；[original independent diagnosis and disposition](candidates/uav_fleet_transmission/NOTES.md#b09-independent-disposition)；[pinned complete evidence](https://github.com/CartmanFatass/My-paper-code/blob/6da7fe816561ce42091dbf69518df559b2526608/runs/uav_fleet_transmission/b09_service_prediction_a01/reading.json)；[measured closure](candidates/uav_fleet_transmission/NOTES.md#b09-final-cleanup)；[retired full selection and prospective bill](archive/2026-10-01/RESEARCH-service-prediction-completion.md#retired-service-prediction-selection)。
 
-The independent critic reports no material dissent; the DM closes this fixed purchase and
-Root adopts the scoped disposition. No extra worlds, unchanged replication, tuning, learner
-or confirmation is selected. A possible ordinary route-establishment composition remains
-unpriced/unselected in NOTES, not a completed fourth source assessment. Measured closure
-is complete:1,641,795,584allocated bytes reclaimed, no blocker. The DM handoff section is
-complete; Root owns the final overview. Stop this round; re-entry needs explicit owner
-continuation and a later Root allocation. Preserve B08's representation positive, prior C/P_BS
-reserve restriction and all incompatible-rights R/O/D2 evidence.
-[Full result and signed worlds](candidates/uav_fleet_transmission/NOTES.md#b09-complete-reading),
-[original independent diagnosis and disposition](candidates/uav_fleet_transmission/NOTES.md#b09-independent-disposition),
-[pinned complete evidence](https://github.com/CartmanFatass/My-paper-code/blob/6da7fe816561ce42091dbf69518df559b2526608/runs/uav_fleet_transmission/b09_service_prediction_a01/reading.json),
-[measured closure](candidates/uav_fleet_transmission/NOTES.md#b09-final-cleanup),
-[retired full selection and prospective bill](archive/2026-10-01/RESEARCH-service-prediction-completion.md#retired-service-prediction-selection).
+[压缩前的完整结果叙述与选择边界](https://github.com/CartmanFatass/My-paper-code/blob/94704c0c0a7d711d3708736d3462506e92b48951/docs/research/RESEARCH.md#forecast-service-use-selected-20261001)。本处为已完成比较的保留判断，不选择新运行。
 
 <a id="managed-proposal-learning-selected-20261001"></a>
 **Actual-S2 B09 complete: retain a lower-travel asset; end this development purchase.**
@@ -3308,51 +2999,9 @@ episodes/262,144 native steps and the declared full reader. The A01 technical fa
 one separate started fit attempt with two native steps and zero updates; it is not a negative
 scientific outcome. All nine levels,36 contrasts,40 metrics and signed world/tape rows remain.
 
-CONT-CAL J is+.000094[t31-.005340,+.005528], CONT-S-.000550[-.005529,+.004429],
-and CAL-S-.000644[-.001805,+.000517]. The primary positive prediction is unestablished;
-one fitted realization per arm supplies neither training-population precision nor equivalence.
-CONT's path reduction is substantive: -555.084m/UAV versus CAL and-596.464m versus S,
-with negative descriptive intervals and shorter travel in27/32 worlds. The latter is about
-15.8% of S's mean. CONT-S service is-.088989 with an interval crossing zero; substantial
-adverse service worlds and tail losses remain. Distance is not measured energy and no
-service-preservation margin or deployment utility was selected.
+[Original correspondence, actual catalog coverage and separate adoption](https://github.com/CartmanFatass/My-paper-code/blob/71e40520d/docs/research/candidates/uav_parent_adaptation/NOTES.md#post-b09-source-allocation-closeout)；[Complete result](candidates/uav_parent_adaptation/NOTES.md#b09-complete-reading)；[original independent recommendation and DM response](candidates/uav_parent_adaptation/NOTES.md#b09-independent-disposition)；[measured closure](candidates/uav_parent_adaptation/NOTES.md#b09-final-cleanup)；[retired full selection and prospective bill](archive/2026-10-01/RESEARCH-managed-proposal-learning-completion.md#retired-managed-proposal-learning-selection)。
 
-Ordinary C_S2 has+.006204J[+.000097,+.012310] and+.611816users/tick versus CONT, at
-3.601 versus3.567complete CPU-s/episode, while travelling1363.672m more and having a lower
-mean episode minimum. This is no uniform dominance. C_T2-C_S2 J+.000652 is unresolved
-while adding28.117CPU-s/episode; stronger search does not guarantee greater native value.
-S-Q J+.006528[+.002184,+.010872] preserves inherited capability. CONT's J increments over
-paid CAL_all, CONT_all and Bstar also remain unresolved, despite shorter travel.
-
-Learning was active: both heads/critics moved,512 steps per network completed, and CONT
-changes commands/positions/masks in all64 paired final episodes. Fewer requested departures
-and physical command changes are consistent with greater persistence, without identifying
-contextual necessity or an optimizer/representation/visitation cause. All1,024 episodes meet
-their deadlines. The final10 zero-service episodes/12 ticks occur at startup in one world;
-this supplies no individual-continuity guarantee. Root adopts the bounded stop without extra
-fits, epochs, critics, worlds, automatic replication or an invented travel objective.
-
-A02 worker plus reader cost4814.172CPU-s, with updates only62.500CPU-s nested inside it;
-RSS peaks605,596/715,516KiB are separate process measurements. Collection retains all1,550
-original files/744,998,114logical bytes at the canonical local run. A01 and support remain
-additional. After charging canonical local growth, net allocated reclamation is
-1,634,500,608bytes plus225,280cache bytes; required remote compact witnesses remain.
-Both snapshots and unused staging/scratch are absent, with no live consumer or blocker.
-
-**Lower-motion source assessment complete: no further purchase.** Root read the full original
-Oracle answer and same-DM price, preserving both separately from its adoption. The feasible
-ordinary0.9S+0.1STAY rule would require a new192-episode/49152-step/0-fit comparison,10-25worker
-plus2-6reader CPU minutes and3-6support hours. That extra ordinary point does not presently
-settle a consequential question that outranks the other investments. Retain CONT, S, ordinary
-C_S2/C_T2, B02 U3 and all adverse lineages; no calibration, recurrence or B09 repair follows.
-A deployment utility is not a universal prerequisite: a worthwhile empirical-understanding
-question could also justify later work. Broader learning is not exhausted.
-[Original correspondence, actual catalog coverage and separate adoption](https://github.com/CartmanFatass/My-paper-code/blob/71e40520d/docs/research/candidates/uav_parent_adaptation/NOTES.md#post-b09-source-allocation-closeout).
-
-[Complete result](candidates/uav_parent_adaptation/NOTES.md#b09-complete-reading),
-[original independent recommendation and DM response](candidates/uav_parent_adaptation/NOTES.md#b09-independent-disposition),
-[measured closure](candidates/uav_parent_adaptation/NOTES.md#b09-final-cleanup),
-[retired full selection and prospective bill](archive/2026-10-01/RESEARCH-managed-proposal-learning-completion.md#retired-managed-proposal-learning-selection).
+[压缩前的完整结果叙述与选择边界](https://github.com/CartmanFatass/My-paper-code/blob/94704c0c0a7d711d3708736d3462506e92b48951/docs/research/RESEARCH.md#managed-proposal-learning-selected-20261001)。本处为已完成比较的保留判断，不选择新运行。
 
 <a id="radio-information-cost-selected-20261001"></a>
 <a id="radio-information-cost-completed-20261001"></a>
@@ -3365,26 +3014,9 @@ FULL−PRIOR payload-J is −.015930[−.019169, −.012690], with 32 negative w
 also decline on average. All 4,096 rounds execute before their deadlines; commands differ at
 8,017/8,192 paired mission ticks. The package was fully active and technically complete.
 
-Keep FULL's conditional waiting and transmitter-exposure positives. It improves mean age
-in 24 worlds but travels 784 m farther per UAV on average; waiting mean intervals cross zero.
-PRIOR's 203-tick and FULL's 150-tick terminal individual gaps remain opposite right-censored
-adverses, despite no zero-team-service ticks or never-served users. PRIOR is a competent
-known-law ordinary reference with implicit local C information, not a strongest no-pilot
-posterior. The measured comparison changes the acquisition/use judgment, not a claim about
-isolated information, channel aging, learning, field validity or the separate P/U32 study.
+[Published complete effects and costs](https://github.com/CartmanFatass/My-paper-code/blob/4ec3dd759f481da2e0caa7205d7f51d321432125/docs/research/candidates/uav_radio_information_cost/NOTES.md#b01-complete-reading)；[original independent diagnosis and accepted correction](candidates/uav_radio_information_cost/NOTES.md#b01-independent-disposition)；[measured cleanup](candidates/uav_radio_information_cost/NOTES.md#b01-final-cleanup)；[retired full selection, source advice and prospective bill](archive/2026-10-01/RESEARCH-radio-information-package-completion.md)。
 
-No immediate replication, timing/filter/sensor revision, learner or queued successor is
-selected. The broader question is open and idle; a new consequential acquisition, timing
-or continuity comparison would need separate Root selection and its complete prospective
-price. The current fixed purchase requires no further observation. Main+checks cost 66 episodes/
-16,400 native steps, 430.588630 own CPU seconds plus .010114 waited-child; source/engineering/review
-and other support remain incompletely metered. All necessary positive/adverse raw evidence
-is retained once. Final cleanup reclaimed 2,455,994,368 allocated bytes with no remaining blocker;
-this study's RF live-source consumer is released, preserving the RF direction and its operations.
-[Published complete effects and costs](https://github.com/CartmanFatass/My-paper-code/blob/4ec3dd759f481da2e0caa7205d7f51d321432125/docs/research/candidates/uav_radio_information_cost/NOTES.md#b01-complete-reading),
-[original independent diagnosis and accepted correction](candidates/uav_radio_information_cost/NOTES.md#b01-independent-disposition),
-[measured cleanup](candidates/uav_radio_information_cost/NOTES.md#b01-final-cleanup),
-[retired full selection, source advice and prospective bill](archive/2026-10-01/RESEARCH-radio-information-package-completion.md).
+[压缩前的完整结果叙述与选择边界](https://github.com/CartmanFatass/My-paper-code/blob/94704c0c0a7d711d3708736d3462506e92b48951/docs/research/RESEARCH.md#radio-information-cost-completed-20261001)。本处为已完成比较的保留判断，不选择新运行。
 
 <a id="stochastic-target-source-root-question-20261001"></a>
 <a id="stochastic-target-selected-root-decision-20261001"></a>
@@ -3397,24 +3029,9 @@ The two fits completed all16000updates/8192000presentations, followed by672H256e
 and service-tail tradeoffs. This is a fixed-parent/data comparison, not independent training
 replication, equivalence or a universal deployment ranking.
 
-The score tilt is active but modest:75744/81920target rows differ from P, mean TV.007285,
-and both full networks change. T fits its archive target closely, yet direct T also lacks an
-established native gain. This weakens an optimization-only rescue without identifying a common
-cause of prior learning failures. Ordinary Hdirect−P0 has conditional J+.007329
-[+.000754,+.014608], with15/32adverse worlds; it remains below Bstar0 in mean J/service and
-retains useful quality/minimum/path tradeoffs. Preserve that capability without default adoption
-or an automatic replication. Target TV≤.1 is no uniform bound on the trained policies.
+[Complete result and original review](candidates/uav_fleet_adaptation/NOTES.md#b07-original-independent-result-review)；[DM disposition](candidates/uav_fleet_adaptation/NOTES.md#b07-independent-disposition)；[retired exact selection and price](archive/2026-10-01/RESEARCH-stochastic-target-and-cadence-completion.md#retired-stochastic-target-selection)。
 
-Root adopts the independent stop of unchanged T/H: no extra fit, stronger tilt, DAgger,
-optimization extension or episode panel. The ensuing local-gate study is now complete below;
-its result and next-question source work do not reopen T/H. Actual new cost is2fits/172032native steps,
-560.463enclosing CPU seconds/561.756wall seconds, plus incompletely metered support. Direct
-programs compute both target vectors before deploying one; measured direct CPU is honest
-implementation cost, not a minimal baseline or demonstrated net amortization. All adverse
-worlds and earlier outages survive the new panel's absence of total-service outages.
-[Complete result and original review](candidates/uav_fleet_adaptation/NOTES.md#b07-original-independent-result-review),
-[DM disposition](candidates/uav_fleet_adaptation/NOTES.md#b07-independent-disposition),
-[retired exact selection and price](archive/2026-10-01/RESEARCH-stochastic-target-and-cadence-completion.md#retired-stochastic-target-selection).
+[压缩前的完整结果叙述与选择边界](https://github.com/CartmanFatass/My-paper-code/blob/94704c0c0a7d711d3708736d3462506e92b48951/docs/research/RESEARCH.md#stochastic-target-selected-root-decision-20261001)。本处为已完成比较的保留判断，不选择新运行。
 
 <a id="local-transmitter-gate-selected-20261001"></a>
 **Local gating complete: retain conditional learned feature value; end this fixed purchase.**
@@ -3425,50 +3042,9 @@ HIDDEN−RAW mean J is+.007318[+.002490,+.012068], service+.521790 and service-p
 22worlds improve J and10 lose. HIDDEN−unchanged P0_A is+.010576J[+.002280,+.019356] and
 +.749878 mean users. These are complete native positives, not only improved fitting.
 
-The inherited nonlinear feature expansion adds no actor information or encoder training;
-its greater capacity and regularization geometry remain part of the tested package. One
-acquisition dataset/parent and two tapes averaged within world give conditional, pointwise
-uncertainty, not independent training replication or simultaneous37-comparison coverage.
-Both regressions solve their fixed objectives and deploy actively at about53% eligible OFF
-choices. The real random-continuation/repeated-deployment difference is not an identified
-cause or automatic instruction to aggregate data. Frozen weights do not freeze joint motion.
+[Complete native reading](candidates/uav_fleet_adaptation/NOTES.md#b08-complete-reading)；[full original critic and disposition](candidates/uav_fleet_adaptation/NOTES.md#b08-original-independent-result-review)；[measured cleanup](candidates/uav_fleet_adaptation/NOTES.md#b08-final-cleanup)；[retired full selection and price](archive/2026-10-01/RESEARCH-local-gate-completion.md#retired-local-gate-selection)。
 
-HIDDEN's J increments over P0_ZERO, Bstar0 and Hdirect remain unresolved. Relative to P0_A it
-loses.789 service-p10 and.781 mean episode minimum while adding821m/UAV of travel; against
-Hdirect_ZERO it loses1.711p10/1.500minimum and adds859m/UAV. Those component intervals exclude
-zero. HIDDEN retains522m less travel than Bstar0_ZERO and89.395% transmitter on-time, without
-an energy, safety or deployment-default claim. All six ordinary ZERO compositions improve
-mean episode minimum on this panel, while their mean-J increments remain unresolved. Preserve
-these competing capabilities and every adverse world rather than ranking only the primary.
-
-Final evaluation has7 zero-service ticks in6episodes; acquisition has38ticks in13episodes,
-longest streak4 even with four active transmitters. HIDDEN's final outage occurs under all-ON
-at tick2, also seen for P0_A: it is not attributed to a contemporaneous OFF action. These team
-statistics establish neither individual continuity nor a service guarantee. The full reader
-reconstructed636864 scalar states, actual policies/navigation/RNG,512 labels and both ridge
-systems; the original independent critic also reproduced all530 published metric intervals.
-
-Complete measured chain cost is1488.812CPU-s and1458.957reported monotonic wall-s;566320KiB
-peak RSS and1,528,144,689logical raw bytes remain part of the bill. Two tiny solves do not
-refund acquisition, complete evaluation or the full reader. Support remains additional and
-incompletely metered;6–12hours was the original development forecast, not a newly priced
-replication. Canonical unique evidence/gates survive; all19 obsolete targets are absent and
-net allocated storage fell1,666,105,344bytes. No new fit, threshold, worlds or confirmation.
-[Complete native reading](candidates/uav_fleet_adaptation/NOTES.md#b08-complete-reading),
-[full original critic and disposition](candidates/uav_fleet_adaptation/NOTES.md#b08-original-independent-result-review),
-[measured cleanup](candidates/uav_fleet_adaptation/NOTES.md#b08-final-cleanup),
-[retired full selection and price](archive/2026-10-01/RESEARCH-local-gate-completion.md#retired-local-gate-selection).
-
-The subsequent Oracle source assessment recommends no immediate on-policy gate or unchanged
-replication purchase; Root accepts that choice, preserving the conditional capability. Actual-S2
-motion development is a different estimand: common motivation informs allocation, not scientific
-equivalence or a prerequisite rule. The same DM's subsequent bounded source assessment
-supports Root's separately selected [mixed-controller focal-response comparison](#mixed-controller-response-selected-20261001).
-It changes the controllable part of the fleet while retaining native physics and anonymous
-local rights. G0's no-response positive/active harms, permanent VNFC loss, reversible S4
-failures, controller-composition B03 and local-history/forecast adverses remain distinct
-inherited evidence. Neither hidden law labels nor roster events prove memory necessary;
-no paused or archived direction is transferred.
+[压缩前的完整结果叙述与选择边界](https://github.com/CartmanFatass/My-paper-code/blob/94704c0c0a7d711d3708736d3462506e92b48951/docs/research/RESEARCH.md#local-transmitter-gate-selected-20261001)。本处为已完成比较的保留判断，不选择新运行。
 
 <a id="temporal-source-allocation-20261001"></a>
 <a id="temporal-use-and-economy-selected-20261001"></a>
@@ -3481,21 +3057,9 @@ consequential extra queries, but S_L0's19-tick outage remains; the first extra q
 at tick30. The trigger's zero-plateau exposure limitation is not a failed implementation or
 proof of first-transition protection.
 
-E−H1 improves mean J/service and lowers measured CPU for both students, at greater travel;
-H1 retains lower-travel, quality and outage exceptions. Every parent, including deterministic
-C, loses mean J with H1 versus H4, and ordinary E also lowers travel. Cadence-dependent motion
-and visitation are a plausible simpler account, not an isolated mechanism. S still retains
-conditional J/service increments over matched G/E, with quality losses; Q10/E comparisons and
-all adverse worlds remain visible. No reward-preservation, energy, reliability, learned-timing
-or training-population claim follows. Complete cost is755.536CPU/760.112wall seconds, plus
-incompletely metered support; each full reader query is paid even when deployment cached it.
+[Full result and independent disposition](candidates/uav_fleet_transmission/NOTES.md#b06-complete-reading)；[original complete selection review](archive/2026-10-01/RESEARCH-temporal-use-and-planning-economy.md#decision)；[retired cadence selection](archive/2026-10-01/RESEARCH-stochastic-target-and-cadence-completion.md#retired-cadence-selection)。
 
-No threshold sweep, extra worlds, Bstar cadence variant or termination fit follows. A concrete
-service floor, travel budget or query constraint could support a future use decision without
-requiring monetary prices for every component; no such new contract is invented here.
-[Full result and independent disposition](candidates/uav_fleet_transmission/NOTES.md#b06-complete-reading),
-[original complete selection review](archive/2026-10-01/RESEARCH-temporal-use-and-planning-economy.md#decision),
-[retired cadence selection](archive/2026-10-01/RESEARCH-stochastic-target-and-cadence-completion.md#retired-cadence-selection).
+[压缩前的完整结果叙述与选择边界](https://github.com/CartmanFatass/My-paper-code/blob/94704c0c0a7d711d3708736d3462506e92b48951/docs/research/RESEARCH.md#temporal-use-and-economy-selected-20261001)。本处为已完成比较的保留判断，不选择新运行。
 
 <a id="joint-renewal-selected-20261001"></a>
 **Joint renewal complete: fewer simultaneous physical changes did not establish better service.**
@@ -3508,57 +3072,9 @@ that randomization substituted for a useful timing effect. Every matched schedul
 physical trajectories. Multiple-physical-change ticks fell28.44→7.18 for C and51.03→15.94
 for Q10, weakening coincidence count as a value proxy rather than indicating nonactivation.
 
-Q10−C retains mean J/service gains under both schedules, with worse service-p10/minimum,
-about1,601/1,636m additional travel per UAV and higher CPU in every world. Q10 dispersion
-saves130.7m/UAV [−244.1,−16.5] but adds.01360 episode CPU seconds; J/service preservation is
-unestablished. Retain the complete world/offset/tape exceptions, including C dispersion's
-34 zero-service ticks and longest25-tick outage in world29750005/q2. No outage protection,
-energy saving, equivalent performance, learned timing or best-policy claim follows.
+[Complete result and original independent diagnosis](candidates/uav_fleet_transmission/NOTES.md#b07-complete-reading)；[retired full selection and price](archive/2026-10-01/RESEARCH-joint-renewal-and-planning-reuse-completion.md#retired-joint-renewal-selection)；[Full result, original independent diagnosis and cleanup](candidates/uav_parent_adaptation/NOTES.md#b08-complete-reading)；[retired complete selection and bill](archive/2026-10-01/RESEARCH-joint-renewal-and-planning-reuse-completion.md#retired-exact-reuse-selection)。
 
-Complete chain cost345.586312CPU/345.965256wall seconds and309,888KiB peak RSS includes the
-full C/nav/RNG/clock reader; native radio was checked through recorded invariants, not an
-independent full RF resimulation. Recorded support remains additional. All canonical evidence
-is retained; six obsolete targets are absent and net allocated storage fell1,764,622,336bytes.
-No phase/trigger/horizon sweep, extra worlds or learner follows. The common actual-S2
-source assessment produced one parent-owned selected study, not a fleet duplicate. Root's
-subsequent moving-demand source assessment found that S7 already contains continuously moving
-users. It selected the [ordinary anonymous-history comparison](#anonymous-user-tracking-selected-20261001) on that unchanged host;
-no new demand-rate law, objective reweighting, S4 acceleration or learner is selected.
-[Complete result and original independent diagnosis](candidates/uav_fleet_transmission/NOTES.md#b07-complete-reading),
-[retired full selection and price](archive/2026-10-01/RESEARCH-joint-renewal-and-planning-reuse-completion.md#retired-joint-renewal-selection).
-
-**Exact planning reuse complete: retain both faster implementations and the remaining A2 premium.**
-Root read all B08 results, the complete original independent critic and DM response. The
-64 complete saved-history controller replays add0 native transitions/worlds/fits/targets.
-All original commands, masks, decisions and saved model arrays agree bitwise. The zero-query
-reader reconstructs every reuse certificate and work ledger; the archival limits on unsaved
-inner metadata and old actual final private state remain explicit.
-
-G2 original→reuse worker-plus-reader CPU is841.936→388.255seconds; A2 is2456.265→1121.389.
-Every one of16 paired worlds improves: complete remaining fractions are46.11%/45.65%, with
-additional proof/output work paid. Optimized A2 still costs2.888times optimized G2. Period40
-recurrence supplies the reduction under this frozen host; it changes the competent ordinary
-comparison and implementation price, not information, control rights or learning evidence.
-
-Original A2−G2 J+.001706077/service+.243875 remain old audited outcomes, not replication.
-Six worlds improve J and ten execute identical programs while still paying the premium;
-world29497012 supplies about59% of aggregate J gain. Path+42.95m/UAV, quality−.005652,
-world29497007's613.33m/UAV extra travel and29497014's service loss remain. No prospective
-selector for favorable worlds or portable deployment-throughput/deadline gain is established.
-
-The complete chain costs4827.801617CPU/4847.351780wall seconds, including19.955940common
-CPU seconds outside the arm ratios; RSS peaks377,000KiB. Old6223.405CPU seconds and
-incompletely metered support remain separately incurred. Interleaved timings include actual
-waiting and fleet B07 overlap; no isolation correction or extra timing panel was bought.
-One canonical8,953,742-byte summary/certificate/catalog store remains with original B04 science;
-all listed duplicate/scratch/snapshot targets are absent, reclaiming2,137,665,536allocated bytes.
-Retain both exact implementations; end this fixed purchase without JIT, deeper search, timing
-change, ranker fit or native port. The same DM's subsequent source audit found no designated
-persistent unknown law in unchanged N8, without treating that fact as a learning impossibility.
-Its next selected investment is the separately justified [actual-S2 development comparison](#managed-proposal-learning-selected-20261001);
-that N5 question and price do not inherit this N8 optimization result as a new native benefit.
-[Full result, original independent diagnosis and cleanup](candidates/uav_parent_adaptation/NOTES.md#b08-complete-reading),
-[retired complete selection and bill](archive/2026-10-01/RESEARCH-joint-renewal-and-planning-reuse-completion.md#retired-exact-reuse-selection).
+[压缩前的完整结果叙述与选择边界](https://github.com/CartmanFatass/My-paper-code/blob/94704c0c0a7d711d3708736d3462506e92b48951/docs/research/RESEARCH.md#joint-renewal-selected-20261001)。本处为已完成比较的保留判断，不选择新运行。
 
 <a id="fair-physical-eligibility-source-20261001"></a>
 <a id="fair-model-planning-selected-20261001"></a>
@@ -3570,31 +3086,9 @@ versus S:LRS:−22.9375ticks, descriptive t95[−25.663278,−20.211722], all64 
 M:LRS/U:LRS also lose every primary pair, and every-world quality and age gains include
 closed gaps. These development worlds do not provide confirmation or userwise protection.
 
-Service versus S falls4.234070users/tick, with63/64 losses; higher quality+.065331 does not
-offset the native-J loss−.039678. Service also falls in every world versus M/U. Retain M as
-the higher-service reference and the intermediate S/U operating points. Against S,38 individual
-maximum gaps and643 mean ages worsen among3200 user-world records;2617 users receive fewer
-service ticks. World29426053 improves both service and J, so the tradeoff is not proved
-unavoidable. No default adoption, service guarantee, learned benefit or energy claim follows.
+[Complete result](candidates/uav_user_waiting/NOTES.md#b06-complete-reading)；[original scientific diagnosis and disposition](candidates/uav_user_waiting/NOTES.md#b06-independent-review-and-disposition)；[retired exact selection and full prospective cost](archive/2026-10-01/RESEARCH-fair-physical-planning-completion.md#retired-selected-comparison)。
 
-All64 first depart through an executed mask at transition2; commands also depart then in37.
-The common source/reset/prefix checks retain tiny cross-runtime SINR differences with identical
-eligibility and connections; later trajectories are not matched-state counterfactuals.
-Longest no-link intervals fall34.21875→11.109375ticks on average. Fewer concurrent transmitters,
-less interference, altered motion and regular LRS grants plausibly explain more unserved
-user-ticks alongside shorter gaps. This supports physical opportunity plus regular allocation,
-without identifying a unique history/accuracy mechanism. Modeled contacts remain imperfect,
-and no old-S shadow on new states was purchased. B05's fixed-path near-floor result survives.
-
-Complete worker/reader snapshots cost987.521216CPU seconds/.274311CPUh; unmetered support and
-final-write tails remain additional. The reader covers all candidate arithmetic with the declared
-bounded independent candidate physics, all native fair outcomes and original-source bindings.
-All4096 manager decisions were timely; offline LRS replay is not integrated allocation latency,
-and historical remote S/M/U CPU is not a matched local comparison. End this fixed purchase with
-no extra worlds, ACK, horizon/allocator sweep, learner or confirmation.
-[Complete result](candidates/uav_user_waiting/NOTES.md#b06-complete-reading),
-[original scientific diagnosis and disposition](candidates/uav_user_waiting/NOTES.md#b06-independent-review-and-disposition),
-[retired exact selection and full prospective cost](archive/2026-10-01/RESEARCH-fair-physical-planning-completion.md#retired-selected-comparison).
+[压缩前的完整结果叙述与选择边界](https://github.com/CartmanFatass/My-paper-code/blob/94704c0c0a7d711d3708736d3462506e92b48951/docs/research/RESEARCH.md#fair-model-planning-selected-20261001)。本处为已完成比较的保留判断，不选择新运行。
 
 <a id="cap-two-local-allocation-selected-20261001"></a>
 **Cap-two complete: retain cheap capacity control and the adverse continuity result.** Root
@@ -3607,91 +3101,9 @@ retain genuine capacity positives. M's service/J means are24.736/.396270, and C2
 paired differences in all64 worlds.
 Quality/computational-work tradeoffs remain; no full-metric dominance or equivalence claim.
 
-All3200 users eventually receive service, yet2416 have worse maximum gaps against S_F and
-maximum closed gaps also worsen in every world. A251tick terminal gap and a186tick closed gap
-remain visible. C2's mean longest no-link interval89.891 leaves only2.594ticks below its
-maximum-gap endpoint for any allocator on those fixed paths. Every post-start mask has two
-transmitters, every round meets its deadline and selected count forecasts differ from native
-grants in only one block by one user-tick. This is an active, accurately modeled capacity
-intervention with poor temporal coverage, not evidence of an unactivated rule. Saved equal-count
-alternatives sometimes offer a neglected user eligibility, but do not prove a free complete
-trajectory improvement. Mean transmitter count2.023 is higher than S_F1.766; multiple physical/
-objective differences prevent isolating manager memory or low concurrency as the cause.
+[original continuity advice and corrections](https://github.com/CartmanFatass/My-paper-code/blob/0136d45b06e4bd71e0eb0e8b5a035529ba0ecf9a/docs/research/candidates/uav_user_waiting/NOTES.md#post-b07-original-continuity-advice)；[Complete native reading](candidates/uav_user_waiting/NOTES.md#b07-complete-reading)；[original independent diagnosis and disposition](candidates/uav_user_waiting/NOTES.md#b07-independent-review-and-disposition)；[measured closure](candidates/uav_user_waiting/NOTES.md#b07-final-cleanup)；[full prospective contract and source identities](candidates/uav_user_waiting/NOTES.md#b07-selected-contract)；[retired original selection and bill](archive/2026-10-01/RESEARCH-cap-two-completion.md#retired-cap-two-selection)；[recurrence diagnosis](../../runs/runtime_repair/cpython_20261001_recurrence/diagnosis.json)；[retired initial four-study allocation](archive/2026-09-30/RESEARCH-four-study-initial-allocation.md)。
 
-The timely cap20.234 is below M/S/U service levels; another unchanged cap-two patch cannot
-answer service preservation against those references. Root retains S_F's conditional
-continuity, M/S/U's service operating points and C2's inexpensive capacity point, without
-inferring an unavoidable price, history necessity or a learning result. Root's subsequent
-bounded source assessment considered a longer receding-horizon LRS-aware physical planner
-with a modeled M service floor. It chooses no purchase now after M/U/K/S_F/C2: a longer
-model floor remains a distinct hypothesis, but its incremental complete use does not yet
-justify the extra search, engineering and reading investment. K's prior local floor failed
-to establish complete service preservation; that is adverse precedent, not a proof against
-a longer rollout or the broader service-preserving continuity question.
-
-The original recommendation and revisions retain two corrections: M already makes O/W
-joint-motion/radio choices, and no-future-C was an adviser proposal, not a Root/owner ban.
-Lawful modeled future C may be considered with its approximation/cost; privileged real future
-commands are different. Root does not adopt the47.5M per-tick future-C illustration as a
-complete algorithm price: C actually refreshes every four ticks. The source1-3CPUh/8-16supporth
-range remains conditional on a limited search, not an estimate for the unspecified family.
-No new query, reduction, fit or implementation was purchased. The adequate B07 result review
-and both original successor recommendations stay distinct; the source stop is not impossibility.
-
-The independent RF source assessment is complete, with the full original host facts,
-P/U32 contract and worker/reader/support price preserved in waiting's notebook. Root read the
-complete recommendation and selects the [separate RF comparison](#radio-uncertainty-selected-20261001)
-under the same nonarchived DM in uav_radio_uncertainty. The old waiting study remains closed;
-physical RF uncertainty does not retroactively explain losses under deterministic propagation.
-The [original continuity advice and corrections](https://github.com/CartmanFatass/My-paper-code/blob/0136d45b06e4bd71e0eb0e8b5a035529ba0ecf9a/docs/research/candidates/uav_user_waiting/NOTES.md#post-b07-original-continuity-advice)
-retain the scoped longer-planner stop and broader open question.
-
-Complete worker/reader cost110.858CPU-s including waited children; zero-query a01 separately
-cost1.219CPU-s after a sparse-snapshot input failure. Source hydration adds about.216CPU-s and
-saved-output extraction2.132CPU-s; other support remains incompletely metered. Full manager
-rounds cost22.757CPU-s including5.809C CPU-s; max round.02043s is below the1.436s deadline.
-S_F used a different node/runtime, so a controlled speed ratio is not established. New raw/
-outcomes total30,193,881logical bytes; reference staging124,165,095bytes and compact metadata
-5,365,829bytes were additional temporary costs. Final cleanup at4fccb7265 removed all three
-snapshots,320 temporary input copies and obsolete local copies/scratch, with no target left
-or blocker. Net allocated storage fell2,594,779,136bytes;130 unique remote files containing
-31,865,551payload bytes remain hash-verified. This is measured reclamation, not a move or
-Git-object/VHD capacity claim.
-[Complete native reading](candidates/uav_user_waiting/NOTES.md#b07-complete-reading),
-[original independent diagnosis and disposition](candidates/uav_user_waiting/NOTES.md#b07-independent-review-and-disposition),
-[measured closure](candidates/uav_user_waiting/NOTES.md#b07-final-cleanup),
-[full prospective contract and source identities](candidates/uav_user_waiting/NOTES.md#b07-selected-contract),
-[retired original selection and bill](archive/2026-10-01/RESEARCH-cap-two-completion.md#retired-cap-two-selection).
-
-**Actual compute placement.** local_linux and wsl_4070 are distinct physical Windows hosts
-(AMD Ryzen7 8745H and Intel Core i9-13900H). Parent B07 and G B05 have finished their original
-local/remote chains. The remote GCC interpreter then failed in waiting A01; the bounded
-[recurrence diagnosis](../../runs/runtime_repair/cpython_20261001_recurrence/diagnosis.json)
-localizes the fault without identifying a cause. The separately bound local A02 allocation
-recovery and reader are complete. T/H, cadence, S_F:LRS, joint renewal and saved-history A2 economy are
-complete on configured local execution. The economy timing includes waiting's worker
-02:45:12–02:54:19Z, reader02:55:33–03:02:56Z and fleet B07's worker/reader03:09:41–03:15:27Z
-on October1; all those accepted identities have ended. Keep actual boundary samples and
-interleaving in the reading, without an isolated-speed claim or rerun. Cap-two's new worker
-and reader completed on the configured remote node. Anonymous-tracking B08 has also completed
-its recorded remote execution/readback and snapshot cleanup. Managed-proposal B09 has finished
-its remote worker/reader and canonical local collection; mixed-controller B09 has finished its
-local worker/reader. Both accepted operations and cleanup are complete. RF uncertainty,
-radio information and fleet B10 have now finished their recorded remote workers, complete
-readers and snapshot cleanup. S7 service prediction is the remaining accepted study: source
-93166e7ac6cffa3c76da113afdc84e7317bb585c was admitted on wsl_4070 at 2026-10-01 08:49 UTC,
-with four worker processes followed by two full-reader processes under the same chain.
-No result is inferred from its partial progress. The three successor assessments are
-source-only work and reserve no worker, fit or node capacity. Any selected new study must
-account for the remaining accepted operation and obtain fresh actual-node admission.
-This operation-specific placement changes no global runtime configuration and establishes no
-runtime cure. Accepted operations retain their node/identity; new overlap requires fresh
-memory/occupancy evidence, without a standing reservation.
-Completed deadline comparisons retain their recorded hardware, windows and observed fallbacks.
-
-The [retired initial four-study allocation](archive/2026-09-30/RESEARCH-four-study-initial-allocation.md)
-preserves its complete selection reasons, costs, resource decisions and source revision.
-
+[压缩前的完整结果叙述与选择边界](https://github.com/CartmanFatass/My-paper-code/blob/94704c0c0a7d711d3708736d3462506e92b48951/docs/research/RESEARCH.md#cap-two-local-allocation-selected-20261001)。本处为已完成比较的保留判断，不选择新运行。
 
 <a id="n8-planner-amortization-root-decision-20260930"></a>
 **`uav_parent_adaptation`: B06 complete; retain planning and conditional prediction capability.**
@@ -3702,25 +3114,9 @@ below the frozen75%target, while selection CPU is34.4%of T_E and complete episod
 The direct-ranker purchase closes at its failed retention target; useful L witnesses and genuine
 computation savings remain, without a general failure-of-learning claim or automatic refit.
 
-The changed explanation is partial prediction transfer without sufficient decision retention.
-About90%of residual-MSE improvement corrects world-level means, which cannot rerank candidates
-within a world. Native/model agreement on executed choices and seven actual policy changes
-weaken model-error and inactivity explanations for the consequential losses; they do not
-identify a feature, loss or acquisition repair. Exact ordinary recurrence reuse is itself
-retained:58420logical model ticks became8599computed ticks across127branches.
+[Complete result](candidates/uav_parent_adaptation/NOTES.md#b06-complete-reading)；[full independent diagnosis and response](candidates/uav_parent_adaptation/NOTES.md#b06-independent-disposition)；[measured cleanup](candidates/uav_parent_adaptation/NOTES.md#b06-final-cleanup)；[retired complete selected plan](archive/2026-09-30/RESEARCH-parent-amortization-selected.md)。
 
-Measured entry cost is1529.662CPU seconds including the fit; the original1222.448CPU-second
-acquisition remains paid history. Required raw/summary has one verified canonical copy;
-cleanup reclaimed3469398016net allocated bytes. No live producer, unread result or cleanup
-blocker remains. Root has read the complete original critic and the DM's source assessment,
-and selects the concrete learned-top2 use below after considering stopping and its limited
-expected savings. This is a different allocation-of-computation question, not a refit or
-rescue of the direct ranker's failed target.
-
-[Complete result](candidates/uav_parent_adaptation/NOTES.md#b06-complete-reading),
-[full independent diagnosis and response](candidates/uav_parent_adaptation/NOTES.md#b06-independent-disposition),
-[measured cleanup](candidates/uav_parent_adaptation/NOTES.md#b06-final-cleanup),
-[retired complete selected plan](archive/2026-09-30/RESEARCH-parent-amortization-selected.md).
+[压缩前的完整结果叙述与选择边界](https://github.com/CartmanFatass/My-paper-code/blob/94704c0c0a7d711d3708736d3462506e92b48951/docs/research/RESEARCH.md#n8-planner-amortization-root-decision-20260930)。本处为已完成比较的保留判断，不选择新运行。
 
 <a id="parent-learned-shortlist-root-decision-20260930"></a>
 **Selected successor: use the fixed learned ordering to allocate two exact continuations.**
@@ -3733,40 +3129,9 @@ same exact-recurrence continuation and full-return tie order, initiating only ab
 No extra R candidate, adaptive third branch, new feature, calibration or training label is
 introduced. Each arm pays its own bank, feature/selection work and continuations.
 
-Compare R/T_E/K2_E/L2_E on16fresh common H500worlds:64episodes/32000native steps,
-zero new fits/optimizer updates/training labels. The DM freezes new world/RNG addresses and
-cyclic arm order before execution, without exposed-world shortlist probes. Preserve B06 source,
-fit and records; new direction-owned adapters handle arms, admission, outputs and the full
-reader. No repeat of the consumed B06 paid correctness branches or extra native fixture is
-selected; focused synthetic checks and the retained verified numerical routines are available.
+[complete DM assessment](candidates/uav_parent_adaptation/NOTES.md#post-b06-shortlist-source-assessment)。
 
-Primary L2_E−K2_E native J asks whether learned ordering allocates the same branch resource
-more usefully. Read every service/quality/path/height/tail consequence, actual physical choices,
-and selection/controller/complete cost, with R/T_E contrasts. Prospectively retain t40+ suffix
-metrics because shared-prefix minima can hide later effects. Equal branch count is not equal
-CPU: path duration, recurrence, feature construction and learned scoring remain charged. The direct-L75%/half-
-CPU target is not this study's criterion. Favorable conditional value at similar actual cost
-supports the shortlist use; no useful increment favors ordinary K2_E. Little remaining saving
-against T_E weakens practical value. One fixed artifact/16worlds is exploratory, not replication
-of learning, and no observed branch selects more data, features or fits automatically.
-
-Complete worker ceiling is224branches/103040logical model ticks/37972448requests, plus
-1792000stationary transit ticks. The full reader independently reconstructs native inputs and
-banks, derives all features/top2 choices, and replays every executed model branch uncompressed
-with the same request ceiling and ordered accumulation/reuse checks. New evaluation planning
-is charged and barred from training. Anchored to B06 measured work, prospective worker+reader
-cost is0.5–0.9CPUh; recurrence-free sensitivity is included, not a hard runtime cap. Expected
-new canonical evidence is0.10–0.20GB, process RSS0.40–0.75GiB and one disposable source
-snapshot about1.7–2.0GB. Incremental engineering/review/reading/publication costs3.5–6active
-hours. Broader support remains honestly metered where available, not inferred from estimates.
-
-Root accepts that bill for a distinct constructive use of retained learning and exact planning.
-Expectations remain modest: most B06 MSE improvement could not change within-world ranks,
-and the native gain concentrated in one world. Expected L2_E cost near K2_E leaves materially
-smaller savings against T_E than direct L; that is part of this test. Detailed source bindings,
-forecast formulas and the strongest stopping case are in the [complete DM assessment](candidates/uav_parent_adaptation/NOTES.md#post-b06-shortlist-source-assessment).
-No extra selection review, S2 study or timing extension is implied. DM owns exact input
-publication, fresh remote-first node admission, full reading/independent diagnosis and closure.
+[压缩前的完整结果叙述与选择边界](https://github.com/CartmanFatass/My-paper-code/blob/94704c0c0a7d711d3708736d3462506e92b48951/docs/research/RESEARCH.md#parent-learned-shortlist-root-decision-20260930)。本处为已完成比较的保留判断，不选择新运行。
 
 <a id="fleet-count-development-root-decision-20260930"></a>
 <a id="inherited-native-development-root-decision-20260930"></a>
@@ -3783,34 +3148,10 @@ T/H−Bstar0 is−.017762/−.011417 with negative conditional world intervals.
 Both lower travel and improve mean quality relative to Bstar0 while losing
 mean service, so no complete Pareto ranking or default replacement follows.
 
-The target changes75744/81920rows but is small(mean TV.007285); the trained
-T fits it closely(mean KL.000188), without a demonstrated native benefit.
-Exact Tdirect also fails to establish improvement over P0, weakening an optimization-only rescue.
-Hdirect−P0's conditional+.007329J[+.000754,+.014608] is retained, together
-with its15adverse worlds, higher CPU and deficit to Bstar0. Hdirect−H remains
-unresolved; no net amortization or equivalence follows. Direct measured CPU
-also includes constructing both target vectors, so it is not a minimal-cost
-ordinary baseline. No total-service outage occurs in this panel; earlier
-outages and all adverse worlds remain. One parent/archive instance is the
-scope, not training reliability, a cause of earlier failures or unlearnability.
+[Complete B07 reading](candidates/uav_fleet_adaptation/NOTES.md#b07-complete-reading)；[original independent recommendation and DM disposition](candidates/uav_fleet_adaptation/NOTES.md#b07-original-independent-result-review)；[measured cleanup](candidates/uav_fleet_adaptation/NOTES.md#b07-final-cleanup)；[bounded source support](candidates/uav_fleet_adaptation/NOTES.md#post-b07-source-support)；[retired selected plan](archive/2026-10-01/RESEARCH-stochastic-target-selected.md)；[retained B06 disposition](candidates/uav_fleet_adaptation/NOTES.md#b06-independent-disposition)。
 
-New cost is2fits/16000updates/8192000presentations/172032native steps,
-560.463chain CPU-s/561.756wall-s plus separately recorded staging/support.
-Publication, complete independent diagnosis and cleanup are finished: nine
-actual targets removed,1781157888net allocated bytes reclaimed, no blocker.
-Required new evidence stays canonical locally and the old inputs remotely.
-The broader development question remains open. Root's new Oracle reassessment
-is source-only; the same DM supports requested source/feasibility/cost facts,
-without a selected successor, new query/reduction/implementation or automatic
-reopening of B07, exact-count mixture, actual-S2 or transfer purchases.
-[Complete B07 reading](candidates/uav_fleet_adaptation/NOTES.md#b07-complete-reading),
-[original independent recommendation and DM disposition](candidates/uav_fleet_adaptation/NOTES.md#b07-original-independent-result-review),
-[measured cleanup](candidates/uav_fleet_adaptation/NOTES.md#b07-final-cleanup),
-[bounded source support](candidates/uav_fleet_adaptation/NOTES.md#post-b07-source-support),
-[retired selected plan](archive/2026-10-01/RESEARCH-stochastic-target-selected.md),
-[retained B06 disposition](candidates/uav_fleet_adaptation/NOTES.md#b06-independent-disposition).
+[压缩前的完整结果叙述与选择边界](https://github.com/CartmanFatass/My-paper-code/blob/94704c0c0a7d711d3708736d3462506e92b48951/docs/research/RESEARCH.md#fleet-stochastic-target-complete-20261001)。本处为已完成比较的保留判断，不选择新运行。
 
-**`uav_fleet_transmission`: B04 complete; conditional anticipation capability retained.**
 <a id="n8-continuation-root-decision-20260930"></a>
 <a id="n8-temporal-root-decision-20260930"></a>
 The selected T/G2/A2 comparison completed all48H500episodes and the full reader at source
@@ -3842,22 +3183,10 @@ shorter paths retain G as an ordinary option alongside Q05, whose path and CPU a
 The paid S_L0/T2 choice improves mean J with substantially more travel. All six student/B*0
 outage episodes at world 29630013, quality losses and adverse worlds remain beside these means.
 
-The full independent diagnosis supports stopping with no material dissent. A stronger ordinary
-comparison strengthens the implemented representation's capability, especially S_L1; zero new
-fits add no training-population or further-learning evidence. G's proxy improvement and physical
-activation did not establish mean native improvement or identify the mechanism. Neither S nor G
-becomes a universal default, and the parent question remains open. No fit, retuning, additional
-world or confirmation is selected. New measured enclosing cost is 140.041 CPU seconds, with
-support work unmetered. Publication and terminal cleanup are complete; 817,446,912 allocated
-bytes were reclaimed, required raw evidence and useful code retained, and no producer, unread
-result or cleanup blocker remains. The direction is reserve; Root owns any next cross-question
-allocation, without a pending approval dependency for this completed work.
-[Complete result](candidates/uav_fleet_transmission/NOTES.md#b05-complete-reading),
-[original independent diagnosis and resolved disposition](candidates/uav_fleet_transmission/NOTES.md#b05-independent-disposition),
-[measured cleanup](candidates/uav_fleet_transmission/NOTES.md#b05-final-cleanup),
-[completed substantive selection](archive/2026-10-01/RESEARCH-ordinary-score-control-selected.md).
+[Complete result](candidates/uav_fleet_transmission/NOTES.md#b05-complete-reading)；[original independent diagnosis and resolved disposition](candidates/uav_fleet_transmission/NOTES.md#b05-independent-disposition)；[measured cleanup](candidates/uav_fleet_transmission/NOTES.md#b05-final-cleanup)；[completed substantive selection](archive/2026-10-01/RESEARCH-ordinary-score-control-selected.md)。
 
-**`uav_user_waiting`: B03 complete; end unchanged learned-value investment.**
+[压缩前的完整结果叙述与选择边界](https://github.com/CartmanFatass/My-paper-code/blob/94704c0c0a7d711d3708736d3462506e92b48951/docs/research/RESEARCH.md#ordinary-score-control-root-decision-20260930)。本处为已完成比较的保留判断，不选择新运行。
+
 <a id="waiting-value-root-decision-20260930"></a>
 B03 at `fd20615f7` completed512 new H256 episodes/131072steps, two scientific fits and the
 full declared reader. Both fits replayed bitwise; factual fresh-M suffix RMSE improves beyond
@@ -3889,27 +3218,8 @@ M choice289 times across all64 worlds; eight worlds meet all three constructive 
 This preserves a small uncertain benefit as a possibility, not nonactivation, equivalence,
 confirmed service preservation or B03's uniformly adverse learning result.
 
-U−S supplies a useful expanded-search result:service+.486389 and worst-user age−1.599670,
-with G−1.104375 and J+.005405. The maximum-gap contrast is favourable but uncertain.
-It costs1.353448 more scheduler CPU seconds/episode and quality−.004682; U loses3.069336
-served users/tick against M in every world. K−U restores3.032837 service but gives back
-5.6875 maximum-gap ticks and2.601318 worst-user-age ticks. Retain M, U's conditional option,
-S's cheaper operating point and all K positive/adverse evidence, without a new default.
 
-The changed explanation is bounded: modeled local service preservation does not establish
-native trajectory preservation. K accumulates+1,034 modeled user-ticks over its same-state
-M references and−88 selected prediction residual, yet full K−M is−598. These references
-follow K's states, not M's deployed path; the accounting is not a unique causal decomposition.
-First locally exact gains can precede adverse episode outcomes.181 delivered K blocks fall
-below their modeled M floor, not an executed native counterfactual M block.
-
-Worker/full-reader CPU totals2,342.870991s(.650797h); correctness/support are additional.
-The timed-node window is released. All three terminal source snapshots, redundant progress
-and local copies are gone; measured target reclamation is at least27,475,968 allocated bytes,
-with the deleted snapshots' pre-delete allocated sizes unmetered. No cleanup tool blocker,
-active B04 producer or unread B04 result/advice remains. There is no automatic K extension,
-new weight/debt/horizon/fit or confirmation. The broader question continues through the
-separately selected local-allocation comparison below.
+[压缩前的完整结果叙述与选择边界](https://github.com/CartmanFatass/My-paper-code/blob/94704c0c0a7d711d3708736d3462506e92b48951/docs/research/RESEARCH.md#waiting-service-continuity-root-decision-20260930)。本处为已完成比较的保留判断，不选择新运行。
 
 <a id="waiting-local-allocation-root-decision-20260930"></a>
 **Selected successor: ordinary local allocation on complete immutable M/S/U trajectories.**
@@ -3918,55 +3228,9 @@ whether capacity-subset choice can improve individual continuity, and at what qu
 while retaining the demonstrated physical programs. This develops their use and tests a
 separate causal lever; it neither rescues K nor establishes a learning requirement.
 
-Use all64 exposed B04 worlds and all192 retained M/S/U H256traces. Compare frozen highest-
-SINR allocation, cyclic registered-ID round-robin (RR), and local least-recently-served (LRS).
-Each alternative fills min(10,eligible users) per UAV. Under frozen non-FDMA/3dB radio, eligible
-sets are disjoint: every tick's served count is preserved and highest-SINR already maximizes
-quality/J. The intended benefit is a measured continuity/quality tradeoff, not higher fixed-path J.
-RR starts at cursor0, advances after the final grant and does not advance on an empty set.
-LRS starts own-UAV grant timestamps at−1, breaks ties by higher current SINR then persistent ID;
-unscored reset contacts do not initialize memory.
+[Source feasibility and complete bill](candidates/uav_user_waiting/NOTES.md#post-b04-source-assessment)；[full original Oracle question/answer and DM response](candidates/uav_user_waiting/NOTES.md#b05-original-oracle-advice)；[Complete result and cost](candidates/uav_user_waiting/NOTES.md#b04-complete-reading)；[independent diagnosis/DM disposition](candidates/uav_user_waiting/NOTES.md#b04-independent-review-and-disposition)；[cleanup](candidates/uav_user_waiting/NOTES.md#b04-final-cleanup)；[original prospective selection](archive/2026-09-30/RESEARCH-waiting-service-continuity-selection.md)；[complete original Oracle advice/response](candidates/uav_user_waiting/NOTES.md#b04-original-oracle-advice)。
 
-Both alternatives receive the same richer local current eligible-ID/SINR interface and own
-grant history, plus the right to choose the capacity subset. They receive no future eligibility,
-global true age or cross-UAV grants/ACK. Own grant history is not global service age at handoff.
-Keep all C observations, commands, masks, reports and manager modeled-greedy histories unchanged.
-The native source currently separates actual assignments/reward from those policy inputs;
-feeding revised contacts into the manager would invalidate this replay. Hardware discovery,
-addressing, live integration and deadline interference are not validated or priced as zero.
-
-The complete purchase adds384H256allocation outcomes/98304fleet steps and reconstructs the192
-original-law outcomes. Producer plus full reader total294912fleet allocator calls,
-1474560UAVsubdecisions and294912service/quality/age reductions; conservative threshold work
-is49152000entries. New fits, native resets/steps, C calls, radio predictions and acquisition
-are all zero. Hash-check the262741183bytes of original input in place, retaining one new
-contact stream per fair law/path (4915200Boolean bytes or688128row-packed bytes), complete
-per-world/user outcomes and compact source/cost bindings. The uncalibrated worker+reader
-estimate is0.05–0.20CPUh, expected≤0.25GiB streaming RAM/no GPU, plus4–6active engineering,
-review, interpretation and publication hours. Fresh actual-node admission remains necessary.
-
-Read maximum gap, worst-user mean age, G/overall age and censoring, exact tickwise service
-count equality, quality/J, inherited motion/transmitter/manager costs, changed grants and
-capacity-denied versus no-link intervals. Use64paired world clusters;576law/path rows are not
-independent replications. Preserve adverse users and all three paths, with LRS−RR and M/S/U
-comparisons under equally supplied rights. These reused worlds are development evidence.
-Useful RR favors the simple capability; an LRS increment supports its full recency/tie rule.
-RR already has cursor state, so LRS−RR does not isolate a causal memory effect; capacity-denied
-and no-link ticks likewise do not additively decompose a mixed unserved gap.
-M reaching U's tail range would revise the physical-program tradeoff; persistent U benefit
-retains its distinct contribution. Sparse intervention or substantial changes without useful
-continuity end this purchase without a global-ACK/weight/learner escalation. Invalid source
-invariance or baseline reconstruction stops the affected replay, with no automatic native
-replacement. No live deployment or next learning study is selected.
-
-[Source feasibility and complete bill](candidates/uav_user_waiting/NOTES.md#post-b04-source-assessment),
-[full original Oracle question/answer and DM response](candidates/uav_user_waiting/NOTES.md#b05-original-oracle-advice).
-
-[Complete result and cost](candidates/uav_user_waiting/NOTES.md#b04-complete-reading),
-[independent diagnosis/DM disposition](candidates/uav_user_waiting/NOTES.md#b04-independent-review-and-disposition),
-[cleanup](candidates/uav_user_waiting/NOTES.md#b04-final-cleanup),
-[original prospective selection](archive/2026-09-30/RESEARCH-waiting-service-continuity-selection.md),
-[complete original Oracle advice/response](candidates/uav_user_waiting/NOTES.md#b04-original-oracle-advice).
+[压缩前的完整结果叙述与选择边界](https://github.com/CartmanFatass/My-paper-code/blob/94704c0c0a7d711d3708736d3462506e92b48951/docs/research/RESEARCH.md#waiting-local-allocation-root-decision-20260930)。本处为已完成比较的保留判断，不选择新运行。
 
 <a id="local-peer-forecast-selected-scientific-design-no-native-study-yet"></a>
 ### Local peer forecast: complete; retain conditional evidence and reserve
@@ -4007,32 +3271,9 @@ Root's exact B04 selection is complete at source`e7225b0c7`:416episodes,
 and original decision are [retired here](archive/2026-09-30/RESEARCH-joint-sampling-selected.md);
 this anchor preserves the decision's locator, not authority for another run.
 
-The primary S_A−S_I prediction fails: J−.002998[−.012536,+.006539] and mean
-within-episode service-p10−.609375[−1.420082,+.201332]. The sampler changed physical
-joint actions and suppressed conditional departure pairs; Q_A eliminates simultaneous
-categorical departures without J/continuity gain. S_B's small uncertain J positive has
-worse p10 and more travel. Independent scientific review supports ending this state-blind
-A/B recipe, not general coordination impossibility or equivalence.
+[retired here](archive/2026-09-30/RESEARCH-joint-sampling-selected.md)。
 
-The distinct fixed secondary retains a useful asset: S_I−Q_I is+.024075J,
-+1.767029users/step,+3.546875service-p10 and−1232.241m/UAV, with favorable descriptive
-intervals for J/p10/path and substantial adverse worlds retained. The other two matched
-laws show the same favorable mean package pattern but add no independent trained instances.
-Keep S_I, Q_I and C, including the latter's lower compute and the original S acquisition
-cost. Exact implemented marginal equality is at the same history; changed visitation,
-physical-device costs and reward mediators remain separate. Individual-user continuity
-and entropy/credit explanations were not tested.
-
-Actual disjoint worker+reader scopes sum115.438290CPU-s; the reader paid61440frozenS
-rows with0native/radio/optimizer calls. One canonical179448786-byte raw set and the
-211062-byte joint audit remain onwsl_4070. Through B04 this direction totals18fits,
-2760704native steps and3841.716658measured worker+reader CPU-s, with acquisition/support
-and engineering/review additional. Source snapshot cleanup is recorded in the notebook.
-
-B04 has no active producer or unread result/advice. Root adopts its full independent
-retention/closure reading. No decoder sweep, A/B repeat, S0 arm or entropy fit follows.
-B01/B02 K/D/U3 capabilities, U1/U2 losses and the76-tick outage remain; B03's unchanged
-learner stays closed.
+[压缩前的完整结果叙述与选择边界](https://github.com/CartmanFatass/My-paper-code/blob/94704c0c0a7d711d3708736d3462506e92b48951/docs/research/RESEARCH.md#joint-sampling-root-decision-20260930)。本处为已完成比较的保留判断，不选择新运行。
 
 <a id="motion-radio-composition-design-20260930"></a>
 <a id="motion-radio-composition-root-decision-20260930"></a>
@@ -4042,29 +3283,9 @@ and published at `4d516f3a77eedf5bdb5e7765384ee3f2fa6739c9`. The complete origin
 selection, costs and review remain in the [retired substantive plan](archive/2026-09-30/RESEARCH-motion-radio-composition-selected.md).
 Its512episodes/131072steps/0fits cost1902.346 measured worker+reader CPU-s.
 
-The primary positive S increment against both matched S2 controls failed. S_S2−C_S2
-J is−.004497 with a descriptive interval spanning zero; S_S2−Q_S2 is narrowly
-positive, while the predeclared C_T2 comparison loses.010311J and.915955 service/step.
-All-on S usefulness recurs and managed S improves against its own all-on reference,
-but ordinary control gains more. Retain S_S2's shorter-path/resource tradeoff alongside
-C_E/C_S2/C_T2 and all adverse worlds; neither generic superiority nor a causal
-masked-learning diagnosis follows. The independent critic recommends no further native
-run of this unchanged recipe. A source-only actual-S2 development design is now fully
-costed: two fits/2560episodes/655360steps,2–4worker CPUh plus reader and5–9support hours.
-Its comparison preserves same-data CAL, transferred all-on CAL/CONT, paid B*, unchanged S
-and competent C_S2/C_T2. Independent review and Root accept reserve/defer until the already-
-selected all-on result is read, without requiring a positive result. The cheaper transfer-only
-alternative is also unselected; neither proposal changes B05 closure.
-[Full source design, costs and independent disposition](candidates/uav_parent_adaptation/NOTES.md#s2-development-source-design).
+[retired substantive plan](archive/2026-09-30/RESEARCH-motion-radio-composition-selected.md)；[Full source design, costs and independent disposition](candidates/uav_parent_adaptation/NOTES.md#s2-development-source-design)；[Complete reading](candidates/uav_parent_adaptation/NOTES.md#b05-complete-reading)；[independent diagnosis and resolved choice](candidates/uav_parent_adaptation/NOTES.md#b05-independent-disposition)；[measured cleanup](candidates/uav_parent_adaptation/NOTES.md#b05-final-cleanup)。
 
-The direction is reserve, with no producer, unread accepted result, open Pro or selected
-successor. Terminal source snapshot, staged asset, observer request and caches were
-removed after consumer release; measured net reduction1714204672bytes, no remaining
-cleanup blocker. Required canonical raw and the original remote S remain. Own result,
-shared-background revision and cleanup publication require no additional Root approval.
-[Complete reading](candidates/uav_parent_adaptation/NOTES.md#b05-complete-reading),
-[independent diagnosis and resolved choice](candidates/uav_parent_adaptation/NOTES.md#b05-independent-disposition),
-[measured cleanup](candidates/uav_parent_adaptation/NOTES.md#b05-final-cleanup).
+[压缩前的完整结果叙述与选择边界](https://github.com/CartmanFatass/My-paper-code/blob/94704c0c0a7d711d3708736d3462506e92b48951/docs/research/RESEARCH.md#motion-radio-composition-root-decision-20260930)。本处为已完成比较的保留判断，不选择新运行。
 
 ### Retained completed-round capabilities
 
@@ -4291,11 +3512,8 @@ B18 已定位的即时路径是 NumPy `_clip` 的 TypeError 后异常清理与�
 
 ## Session routing
 
-**Owner 工作区决定（2026-09-25）：** 在 `/home/fires/hmasd-wsl` 的 main 使用各方向专属
-实现、测试、记录、运行和临时目录；共享 Git 写操作串行。旧 checkout/branch 只作历史定位，
-不恢复旧任务。工作流已取消回收前整树备份/重复保全，保留精简结论和必要证据后删除无用内容，
-以实际删除及净释放字节验收。本次复查 `git worktree list` 仅剩 main，旧七目录已不再注册；
-这不改变科学负责人、结果或暂停状态。
+写作／共享 Git 方法见 AGENTS 与 engineering；实际地址和工作区以本表为定位入口。
+表中旧 checkout 不构成恢复旧任务的许可，当前 owner 请求的工作树也不转移科学责任。
 
 地址用于恢复与用户明确要求的联系；不产生 App 消息/回复循环。表中是责任路由，任务是否运行、
 操作是否终态及结果是否读完须从对应 NOTES/native 记录核对；发布方法不证明活跃会话已经重载。
@@ -4334,7 +3552,7 @@ Root 已向三个原会话各投递一次明确携带 `model="gpt-6-astra"`、`t
 | DM：静默命令承诺 | parent `01a0f779-ace2-74e1-85ad-e0997b61d505` / child `/root/dm_silence_commitment` / UUID `01a0f780-b068-7f01-b7f6-e4c32d327d40` | `/home/fires/hmasd-wsl` / `main` | 新注册 `hmasd-direction-manager`；Root 直接读本次 rollout session_meta 与首 turn_context，实际 gpt-6-astra / max。独占 `uav_fleet_adaptation` 相应方向路径；本轮完整比较、全部读取、独立科学处置、发表和测量清理已完成，方向 reserve；无活动操作、未读意见或已选追加。保留前任已完成原操作和全部正负证据。[分配](#root-selected-successors-20261001)。 |
 | DM：完整回合参数搜索 | parent `01a0f779-ace2-74e1-85ad-e0997b61d505` / child `/root/dm_episode_search` / UUID `01a0f781-65d4-7ba3-b412-beacc031237f` | `/home/fires/hmasd-wsl` / `main` | 新注册 `hmasd-direction-manager`；Root 直接读本次 rollout session_meta 与首 turn_context，实际 gpt-6-astra / max。独占 `uav_episode_policy_search` 相应方向路径；本轮完整比较、全部读取、独立科学处置、发表和测量清理已完成，方向 reserve；无活动操作、未读意见或已选追加。保留前任已完成原操作和全部正负证据。[分配](#root-selected-successors-20261001)。 |
 | 独立科学审查：方案与结果 | parent `01a0f779-ace2-74e1-85ad-e0997b61d505` / child `/root/next_study_review` / UUID `01a0f9fe-de22-7d73-82c2-129a0cadede6` | `/home/fires/hmasd-wsl` / `main`，read-only | registered ResearchCritic，实际Astra/max；既往选题/A-R/B10/B12意见保留。B03最终15010B原答完整发表，重建728组paired统计及完整check/承重raw，MATERIAL_DISSENT:no；Root与DM采纳结束原样三fit、不采用final、保留O和旧能力。复用上下文并非盲审，当前任务结束；未授权其32k-native均值部署候选。[原文](candidates/uav_decision_generalization/NOTES.md#b03-independent-result-review)、[DM处置](candidates/uav_decision_generalization/NOTES.md#b03-independent-disposition)。 |
-| 已完成 DM：S7 预测用途与 B06 准备 | parent `01a0f779-ace2-74e1-85ad-e0997b61d505` / child `/root/dm_s7_prediction_use` / UUID `01a0f77e-bce4-7471-9529-be2ba81a927a` | `/home/fires/hmasd-wsl` / `main` | 原registered DM、实际Astra/max；B12完整收口，B06薄消费者/有限工程准备8ee71c5af已交付并交回typed唯一owner，无活helper或未提交实现。检查4.023958304CPU-s/0科学效果，六fit未购买，未认证银行继续拒绝。保留S7科学证据与连续性；交接时通信设计仅为Root计划；现由上方新通信DM承接有限设计，本历史DM不再写typed或通信路径。[本人终态](candidates/uav_fleet_transmission/HANDOFF_20261002_S7_AND_B06.md)、[准备接收](candidates/typed_joint_skill_decision/NOTES.md#b06-preparation-complete)、[下一计划](#three-dm-decision-assistance-20261001)。 |
+| 已完成 DM：S7 预测用途与 B06 准备 | parent `01a0f779-ace2-74e1-85ad-e0997b61d505` / child `/root/dm_s7_prediction_use` / UUID `01a0f77e-bce4-7471-9529-be2ba81a927a` | `/home/fires/hmasd-wsl` / `main` | 原registered DM、实际Astra/max；B12完整收口，B06薄消费者/有限工程准备8ee71c5af已交付并交回typed唯一owner，无活helper或未提交实现。 地址保留作既有责任／证据定位，完整终态与限制见 [本人终态](candidates/uav_fleet_transmission/HANDOFF_20261002_S7_AND_B06.md)；[准备接收](candidates/typed_joint_skill_decision/NOTES.md#b06-preparation-complete)；[下一计划](#three-dm-decision-assistance-20261001)；[原路由说明](https://github.com/CartmanFatass/My-paper-code/blob/94704c0c0a7d711d3708736d3462506e92b48951/docs/research/RESEARCH.md#session-routing)。 |
 | Prior completed DM: joint local motion/transmitter development | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_fleet_adaptation` | `/home/fires/hmasd-wsl` / `main` | Same nonarchived registered `hmasd-direction-manager`; actual first turn verified gpt-6-astra/max, native UUID01a0f1f4-bfe5-7ca0-8b1e-4945c185f49a. B10 is complete through the full native reader, independent scientific diagnosis, own publication and measured cleanup; result4a0db1166, reserve with no producer, unread advice or selected successor. Retain original assets, both adverse endpoints, useful joint/CJ code, all B01–B10 evidence and one canonical required bulk copy. Both exact B10 source snapshots, duplicate staging and scratch are gone;1639141376 allocated bytes reclaimed, no cleanup blocker. No accepted operation moves or ownership transfers. [Resolved result](candidates/uav_fleet_adaptation/NOTES.md#b10-independent-disposition), [cleanup](candidates/uav_fleet_adaptation/NOTES.md#b10-final-cleanup), [original advice and adoption](candidates/uav_fleet_adaptation/NOTES.md#b10-original-oracle-advice). |
 | Prior completed DM: radio uncertainty (formerly individual-user waiting) | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_user_waiting` | `/home/fires/hmasd-wsl` / `main` | Same nonarchived registered `hmasd-direction-manager`; first actual turn verified gpt-6-astra/max, native UUID01a0f1f5-8634-7e13-b931-e75abdb10d45. `uav_radio_uncertainty` B01 complete through full numerical/scientific reading, publication and measured cleanup; reserve with conditional U32 capability and all waiting harms retained. No running operation, open advice or selected successor. Source retained for useful P/U32 and acquisition-code imports; active consumers have finished. Waiting B01–B07 remain closed in reserve. [Full RF disposition](candidates/uav_radio_uncertainty/NOTES.md#b01-independent-review-and-disposition), [closure](candidates/uav_radio_uncertainty/NOTES.md#b01-final-cleanup), [original contract/advice](candidates/uav_radio_uncertainty/NOTES.md#b01-selected-contract). |
 | Prior completed DM: radio information cost (formerly UAV development/amortization) | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_parent_adaptation` | `/home/fires/hmasd-wsl` / `main` | Same nonarchived registered `hmasd-direction-manager`; actual first turn gpt-6-astra/max, native UUID01a0f192-56da-7d31-8bfc-a068c0ddde92. B01 P_FULL/P_PRIOR is complete, independently read/diagnosed, published and cleaned. This fixed FULL purchase is closed; broader information-cost ownership remains, reserve with no live producer, unread advice or selected successor. Useful code/PRIOR and all positive/adverse evidence remain; 2,455,994,368 allocated bytes reclaimed, no cleanup blocker and RF live-source consumer released. Parent B01–B09 and lower-motion no-purchase remain closed in reserve. No accepted operation, paused direction or RF ownership moves. [Complete outcome](candidates/uav_radio_information_cost/NOTES.md#b01-complete-reading), [original diagnosis and response](candidates/uav_radio_information_cost/NOTES.md#b01-independent-disposition), [cleanup](candidates/uav_radio_information_cost/NOTES.md#b01-final-cleanup). |
@@ -4345,33 +3563,33 @@ Root 已向三个原会话各投递一次明确携带 `model="gpt-6-astra"`、`t
 | Prior completed DM: fleet transmission control | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_fleet_transmission` | `/home/fires/hmasd-wsl` / `main` | Same nonarchived native lead, actual first turn gpt-6-astra/max; UUID01a0f02a-2102-7aa3-be5a-adfb99e49910. B09 full native chain, actual-candidate reader and independent diagnosis complete. Retain F−H conditional J/service value; no H/F upgrade over C. No active result operation or selected successor. Measured cleanup complete:1,641,795,584allocated bytes reclaimed, no blocker. Own handoff section complete and writing turn returned to Root for its overview; owner round-stop, status/reading does not resume. B01–B08 positives/adverses, sole canonical evidence, B04/N8 live consumers and P_BS restrictions remain. [B09 reading](candidates/uav_fleet_transmission/NOTES.md#b09-complete-reading), [resolved disposition](candidates/uav_fleet_transmission/NOTES.md#b09-independent-disposition), [handoff](HANDOFF_20261001_ROOT_AND_FOUR_DMS.md). |
 | DM: lawful local-peer forecasting (complete) | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_local_peer_forecast` | `/home/fires/hmasd-wsl` / `main` | Registered `hmasd-direction-manager`; first actual turn verified gpt-6-astra/max, native UUID 01a0f300-8dad-7670-b5df-e98b1806afd7. B01 C/V/R fully read, independently diagnosed and published at `d7445071f`; source `13da38312`, 32 worlds/96 episodes/24576 steps/0 fits. Reserve: retain conditional V gains, R geometry and all adverses; end the unchanged sign recipe with no active producer, unread result/advice or selected successor. Complete cleanup reclaimed 810602496 allocated bytes; sole canonical raw evidence and useful code remain, no blocker. Root owns any cross-question allocation. [Reading](candidates/uav_local_peer_forecast/NOTES.md#b01-complete-reading), [disposition](candidates/uav_local_peer_forecast/NOTES.md#b01-independent-diagnosis), [cleanup](candidates/uav_local_peer_forecast/NOTES.md#b01-publication-cleanup). |
 | DM: timely joint radio control (complete) | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_radio_recovery` | `/home/fires/hmasd-wsl` / `main` | Recovered unfinished B03 responsibility with original operation/source intact. Full192/192 saved-data reconstruction and independent diagnosis complete, zero new episodes. Reserve with conditional S2 capability, R tradeoffs and all adverses; no active reader, unread review or successor. [Complete result and disposition](candidates/uav_radio_activation/NOTES.md#2026-09-29---b03-complete-reading), [original pause handoff](candidates/uav_radio_activation/NOTES.md#owner-pause-and-handoff---2026-09-29-2131-utc). |
-| Prior DM: joint motion and radio activation (complete) | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_radio_joint_control` | `/home/fires/hmasd-wsl` / `main` | B02 fully collected, reconstructed and independently read. R retained alongside T-S capability and all adverses. No active producer/unread result; cleanup69dc18003 reclaimed1646100480allocated bytes and preserved unique evidence. New successor ownership is above, not a resumed old process. [Full reading and next-investment disposition](candidates/uav_radio_activation/NOTES.md#2026-09-29---b02-complete-reading). |
-| Prior DM: delayed joint radio activation (complete) | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_radio_activation` | `/home/fires/hmasd-wsl` / `main` | B01 fully collected, reconstructed and independently read, G/E retained with adverse worlds. No old active producer or unread result; cleanup10bb6cdd4 reclaimed1642991616bytes with unique evidence preserved. New B02 ownership is above; this completed child is not reused. [B01 result and original investment boundary](candidates/uav_radio_activation/NOTES.md#2026-09-29---b01-complete-reading). |
+| Prior DM: joint motion and radio activation (complete) | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_radio_joint_control` | `/home/fires/hmasd-wsl` / `main` | B02 fully collected, reconstructed and independently read. 地址保留作既有责任／证据定位，完整终态与限制见 [Full reading and next-investment disposition](candidates/uav_radio_activation/NOTES.md#2026-09-29---b02-complete-reading)；[原路由说明](https://github.com/CartmanFatass/My-paper-code/blob/94704c0c0a7d711d3708736d3462506e92b48951/docs/research/RESEARCH.md#session-routing)。 |
+| Prior DM: delayed joint radio activation (complete) | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_radio_activation` | `/home/fires/hmasd-wsl` / `main` | B01 fully collected, reconstructed and independently read, G/E retained with adverse worlds. 地址保留作既有责任／证据定位，完整终态与限制见 [B01 result and original investment boundary](candidates/uav_radio_activation/NOTES.md#2026-09-29---b01-complete-reading)；[原路由说明](https://github.com/CartmanFatass/My-paper-code/blob/94704c0c0a7d711d3708736d3462506e92b48951/docs/research/RESEARCH.md#session-routing)。 |
 | DM: threshold-conditioned scalar and distributional tail learning | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_tail_learning` | `/home/fires/hmasd-wsl` / `main` | B03 six-fit S_eta/Q32 successor completed, raw/checkpoint audit and independent scientific reading complete, MATERIAL_DISSENT:no. Direction reserve; retain scalar reference and all positive/adverse evidence, no selected successor or active operation. Own result/background publication and exact cleanup recorded in [NOTES](candidates/tail_return_distributional_learning/NOTES.md#independent-scientific-reading-and-investment-decision); return the substantive boundary and cross-question recommendations through native parent. Old session/unsent Pro unchanged. |
 | DM: joint reserve deployment and return (closure complete) | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_availability_closure` | `/home/fires/hmasd-wsl` / `main` | Recovered unfinished publication from result aa2c77e9f/handoff4a7b6d956; B01 fully read, independently reviewed and published, question reserve/idle. Unique native raw/checkpoints and useful code retained; exact source snapshot/caches/scratch removed, net1,641,172,992 allocated bytes reclaimed, no blocker. No live producer, unread result or selected successor. [Closure and retained evidence](candidates/uav_availability_recovery/NOTES.md#2026-09-29---resumed-publication-and-closure). |
-| Prior DM: service-aware replenishment and deployment (complete) | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_service_continuity` | `/home/fires/hmasd-wsl` / `main` | 历史已完成`uav_persistent_service` B05，结果／独立判读及清理发表于`39f75795d`。保留有限R和S的具体中断改善，固定替换规则失败，结束原样S投入；无活动worker／observer、未读结果或已选后继。较宽服务问题仍开放。[完整结果](candidates/uav_persistent_service/NOTES.md#b05-complete-reading)。 |
+| Prior DM: service-aware replenishment and deployment (complete) | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_service_continuity` | `/home/fires/hmasd-wsl` / `main` | 历史已完成`uav_persistent_service` B05，结果／独立判读及清理发表于`39f75795d`。 地址保留作既有责任／证据定位，完整终态与限制见 [完整结果](candidates/uav_persistent_service/NOTES.md#b05-complete-reading)；[原路由说明](https://github.com/CartmanFatass/My-paper-code/blob/94704c0c0a7d711d3708736d3462506e92b48951/docs/research/RESEARCH.md#session-routing)。 |
 | DM: lawful local spatial history | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_local_history` | `/home/fires/hmasd-wsl` / `main` | B01 ordinary comparison and B02 sourcece104088d three full-policy fits are complete on local_linux, fully collected and independently read. Direction reserve: stop this recipe with native learning positives and all losses preserved; no accepted worker, pending observation, unread advice or selected follow-up. Unique raw/checkpoints and useful readers/controllers retained; disposable source snapshots, stopped scratch and unused B02 execution code retired. Returns the substantive same-history learning boundary and reasoned stop to Root; no new track or routine approval dependency. [Full result and disposition](candidates/uav_local_history/NOTES.md#2026-09-29---b02-complete-reading), [assignment](#parallel-expansion-20260929). |
 | Prior completed DM: calibration versus state-dependent learning | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_calibration_recovery` | `/home/fires/hmasd-wsl` / `main` | B06 complete224 evaluation episodes across interrupted sourcef288de641 and0-fit recovery77c1cd9f4; full independent diagnosis accepted, no new default or study. Original operation remains interrupted. Result/background da3c164f5 published; source/scratch cleanup reclaimed4963307520allocated bytes, required evidence intact. No live operation, unread review or cleanup blocker. [Complete reading/disposition](candidates/uav_message_content/NOTES.md#b06-complete-reading). |
-| Prior DM: retained-control message extension (complete) | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_retained_control` | `/home/fires/hmasd-wsl` / `main` | B05源69785db45完整执行、224轨迹/6续训全读并独立诊断。条件正例、未来内容未解和尾部反例保留；无活动worker／观察／未读结果，清理已完成。新后继由上方DM承担，不复活旧B04/B05操作。[完整记录](candidates/uav_message_content/NOTES.md#b05-complete-reading)。 |
-| Independent selection review: retained-control extension (complete) | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/retained_control_selection` | `/home/fires/hmasd-wsl` / read-only | 注册`hmasd-research-critic`、`fork_turns=none`，重构原始紧凑输出／源语义并复用既有raw审查；支持一次有界A比较，保留固定噪声／修正类、单父策略和因果限制。MATERIAL_DISSENT:no；完整实质意见与Root处置见[归档](archive/2026-09-29/RESEARCH-retained-control-selection.md#independent-scientific-assessment)。 |
-| Prior DM: delay-valid future-motion forecasts (complete) | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_delay_intent` | `/home/fires/hmasd-wsl` / `main` | 历史已完成DM，由上方`dm_retained_control`接续科学问题及写责任。B04源`7bb6d2f8e`完整运行、全320轨迹核验并独立判读；有限预测能力和原生正例保留，F-O平均J／服务为负，结束原样配方。旧观察已停、无活动操作或未读结果，不重启／拼接。[完整结果](candidates/uav_message_content/NOTES.md#b04-complete-reading)。 |
-| Independent selection review: continuity and intent (complete) | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/continuity_intent_selection_review` | `/home/fires/hmasd-wsl` / read-only | `hmasd-research-critic`，`fork_turns=none`；合并两题选择已完整返回，实质修正采纳，无未决异议。原答与Root处置已归档，不是活动研究方向或逐运行关口。[本次选题](#portfolio-review-2026-09-29-continuity-intent-selection)。 |
-| Prior DM: preserved-content augmentation (complete) | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_content_augmentation` | `/home/fires/hmasd-wsl` / `main` | Historical completed DM, succeeded by `dm_delay_intent` above. B03 source `ff15fe5df` complete/read; provisional B19451 reuse, O/L capabilities and all adverse evidence retained. No old active operation. B02 results `99291c8e6`, cleanup `ed2479280` reclaimed1604472832 allocated bytes; original C/nine endpoints remain durable. B01 `3567e73b0`/`f5c118c71` unchanged. [B03 complete NOTES](candidates/uav_message_content/NOTES.md#b03-complete-reading), [current plan](#current-research-plan). |
+| Prior DM: retained-control message extension (complete) | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_retained_control` | `/home/fires/hmasd-wsl` / `main` | B05源69785db45完整执行、224轨迹/6续训全读并独立诊断。 地址保留作既有责任／证据定位，完整终态与限制见 [完整记录](candidates/uav_message_content/NOTES.md#b05-complete-reading)；[原路由说明](https://github.com/CartmanFatass/My-paper-code/blob/94704c0c0a7d711d3708736d3462506e92b48951/docs/research/RESEARCH.md#session-routing)。 |
+| Independent selection review: retained-control extension (complete) | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/retained_control_selection` | `/home/fires/hmasd-wsl` / read-only | 注册`hmasd-research-critic`、`fork_turns=none`，重构原始紧凑输出／源语义并复用既有raw审查；支持一次有界A比较，保留固定噪声／修正类、单父策略和因果限制。 地址保留作既有责任／证据定位，完整终态与限制见 [归档](archive/2026-09-29/RESEARCH-retained-control-selection.md#independent-scientific-assessment)；[原路由说明](https://github.com/CartmanFatass/My-paper-code/blob/94704c0c0a7d711d3708736d3462506e92b48951/docs/research/RESEARCH.md#session-routing)。 |
+| Prior DM: delay-valid future-motion forecasts (complete) | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_delay_intent` | `/home/fires/hmasd-wsl` / `main` | 历史已完成DM，由上方`dm_retained_control`接续科学问题及写责任。 地址保留作既有责任／证据定位，完整终态与限制见 [完整结果](candidates/uav_message_content/NOTES.md#b04-complete-reading)；[原路由说明](https://github.com/CartmanFatass/My-paper-code/blob/94704c0c0a7d711d3708736d3462506e92b48951/docs/research/RESEARCH.md#session-routing)。 |
+| Independent selection review: continuity and intent (complete) | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/continuity_intent_selection_review` | `/home/fires/hmasd-wsl` / read-only | `hmasd-research-critic`，`fork_turns=none`；合并两题选择已完整返回，实质修正采纳，无未决异议。 地址保留作既有责任／证据定位，完整终态与限制见 [本次选题](#portfolio-review-2026-09-29-continuity-intent-selection)；[原路由说明](https://github.com/CartmanFatass/My-paper-code/blob/94704c0c0a7d711d3708736d3462506e92b48951/docs/research/RESEARCH.md#session-routing)。 |
+| Prior DM: preserved-content augmentation (complete) | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_content_augmentation` | `/home/fires/hmasd-wsl` / `main` | Historical completed DM, succeeded by `dm_delay_intent` above. 地址保留作既有责任／证据定位，完整终态与限制见 [B03 complete NOTES](candidates/uav_message_content/NOTES.md#b03-complete-reading)；[current plan](#current-research-plan)；[原路由说明](https://github.com/CartmanFatass/My-paper-code/blob/94704c0c0a7d711d3708736d3462506e92b48951/docs/research/RESEARCH.md#session-routing)。 |
 | DM: joint transitions between radio-aware destinations | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_joint_transition` | `/home/fires/hmasd-wsl` · `main` | Registered `hmasd-direction-manager`; owns `uav_joint_transition` and matching paths. B01 result, full independent reading, unique evidence retention and measured cleanup complete. Exact L/O investment ended; reserve, no live producer, unread result, pending advice or selected successor. Broader learning question remains open; Root owns any next cross-question allocation, not a pending approval. [NOTES](candidates/uav_joint_transition/NOTES.md). |
 | 历史DM：强制返航前服务／补能改派（已完成） | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_service_reassignment` | `/home/fires/hmasd-wsl` · `main` | 历史原生DM已完整执行并独立判读B04（源7bc0157f3，句柄664894b4、exit0、8完整H12000），新责任由上方`dm_service_continuity`接续。保留有限R，结束原样扩展，终态清理净回收802578432字节；无旧活动worker／observer或未读结果。B01-B04唯一raw及全部正反判定保持，不复活旧操作。[B04结果与投资判断](candidates/uav_persistent_service/NOTES.md#2026-09-29---b04-complete-original-failures-avoided-new-service-tail-counterexample)、[当前计划](#current-research-plan)。 |
 | 前任 Root（已完成本轮交接） | `01a0ef2b-a391-7693-a748-60e24be246ae` / `local` | `/home/fires/hmasd-wsl` / `main` | Owner于2026-09-29恢复并交接原Root `01a0e560-4333-7b03-8ff3-759a4add1d9a` 的未完成工作。先完成三项责任，再作原委托轮次综合；保留独立peer与其他暂停。[恢复范围](#resume-20260929)。 |
-| DM1：完整服务—补能协调（native child） | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_energy_coordination` | `/home/fires/hmasd-wsl` · `main` | 注册角色`hmasd-direction-manager`；拥有`uav_energy_coordination`。B01 I/C/H与B02冻结I/P均完整读取、独立审查、自有发表及终态清理；当前解析配方结束投入，较宽问题reserve，无活动操作。实际历史句柄和固定源码见NOTES；无旧App会话复用或逐运行审批。 |
-| DM：合法信息的决策价值（本轮native child已完成） | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_information_round2` | `/home/fires/hmasd-wsl` · `main` | 注册角色`hmasd-direction-manager`；B03完整96回合已收集／审查／发表，唯一原始证据持久化，终态清理净释放800,518,144字节。停止本项归因投入并保留正反证据：P是条件性普通性能参照，H默认限制不变，S0为归因控制；无新运行、待观察操作或科学依赖。继承前驱B01/B02全部负证据且未重启其操作；既有合法控制器源码不变供感知研究复用。已到向Root返回的完整结果边界。 |
+| DM1：完整服务—补能协调（native child） | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_energy_coordination` | `/home/fires/hmasd-wsl` · `main` | 注册角色`hmasd-direction-manager`；拥有`uav_energy_coordination`。 地址保留作既有责任／证据定位，完整终态与限制见 [原路由说明](https://github.com/CartmanFatass/My-paper-code/blob/94704c0c0a7d711d3708736d3462506e92b48951/docs/research/RESEARCH.md#session-routing)。 |
+| DM：合法信息的决策价值（本轮native child已完成） | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_information_round2` | `/home/fires/hmasd-wsl` · `main` | 注册角色`hmasd-direction-manager`；B03完整96回合已收集／审查／发表，唯一原始证据持久化，终态清理净释放800,518,144字节。 地址保留作既有责任／证据定位，完整终态与限制见 [原路由说明](https://github.com/CartmanFatass/My-paper-code/blob/94704c0c0a7d711d3708736d3462506e92b48951/docs/research/RESEARCH.md#session-routing)。 |
 | DM3：成员进出与历史用途（native child） | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_roster_memory` | `/home/fires/hmasd-wsl` · `main` | 注册角色`hmasd-direction-manager`；`uav_roster_memory`首轮来源重构已完成并发表于`46be5b5f4`，当前reserve。Root采纳独立异议，不选记忆fit／新宿主；0结果操作，无批准等待。新问题由Root构造，目前无已选后继。 |
 | DM4：几何变换与部署（native child） | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_geometric_generalization` | `/home/fires/hmasd-wsl` · `main` | 注册角色`hmasd-direction-manager`；拥有`uav_geometric_generalization`。固定P/C/H完整读取、独立结果审查、发表与清理完成，方向reserve；原生操作及终态/持久证据见[NOTES](candidates/uav_geometric_generalization/NOTES.md#2026-09-28---b01-complete-reading)。无活动worker、观察或已选后继；后续跨问题选择由Root统筹，不接管Claude学习研究。 |
 | DM5：主动信息获取（native child） | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_sensing_round2` | `/home/fires/hmasd-wsl` · `main` | B02单fit、完整H3000面板、独立判读及保全清理均完成；方向reserve，未选后继，无未收操作／开放Pro。保留B01负面证据与P_BS风险限制，未依另一DM的P_BS／station-0结果调参或解释。当前有限包结束投入，具体新比较及跨题分配交Root；本child返回完整边界，不靠App队列恢复。 |
 | DM6：无线目标空间规划（native child） | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_radio_placement` | `/home/fires/hmasd-wsl` · `main` | 注册角色`hmasd-direction-manager`；拥有`uav_radio_placement`。H/G/R首轮已完整读取、独立审查及发表，方向reserve；无活动worker／观察／已选下一运行。保留R条件性资产及风险尾部，跨题后继交Root取舍；未接管Claude解码或DM1时间规划。[NOTES](candidates/uav_radio_placement/NOTES.md#independent-scientific-reading-and-dm-disposition)。 |
-| 本轮独立科学选题审查（bounded child） | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/round_question_review` | `/home/fires/hmasd-wsl` · read-only | `hmasd-research-critic`，原始独立上下文`fork_turns=none`；A/B/C及D/E/F两次合并选题审查均完整返回并采纳，当前无任务；结果判读由各DM的独立critic完成，不是新增研究方向。[首批答复](archive/2026-09-28/RESEARCH-native-dm-question-review.md)、[扩展三题答复](archive/2026-09-28/RESEARCH-expanded-native-dm-review.md)。 |
-| DM：UAV临时覆盖交接规划 | `01a0e577-d190-70a1-9526-9d1765eab830` / `local` | `/home/fires/hmasd-wsl` · `main` | 已完成的历史设计会话；`uav_transit_handoff`为reserve，残差学习方案未投入，0fit／结果回合，无活动操作或已选后继，不是本轮原生子代理。创建时的不确定返回已消歧，未重复创建；首个实际turn `01a0e57b-0dcc-76e1-b72f-e5bd8841dd7a`已实核为`gpt-6-astra`／`max`。地址保留作证据定位，已完成归档会话不复用。[设计与最终取舍](candidates/uav_transit_handoff/NOTES.md#final-design-disposition)。 |
-| DM3：UAV协作路径规划与MARL | `01a0e2e4-0d39-7cf3-98c0-f87dfb6e00b0` / `local` | `/home/fires/hmasd-wsl` · `main` | 已完成历史会话；owner已归档的任务不恢复或复用，后继新建DM并继承完整文档。以下为收尾时的责任与证据定位：Owner要求的替代独立会话，手动Astra Max保持。已完成`energy_relay_imitation` B01/B02更正与后继`uav_cooperative_planning` B02完整结果／独立判读；当前两方向reserve，无活动worker／未读Pro／已选后继，较宽问题责任保留。旧`01a0e0f8-4e3f-70f1-802f-4bf4c2348221`仍归档，不重启旧操作或重复唤醒。未发App消息。创建接口曾返回outcome-unknown，已从实际独立会话消歧，无重复创建。[当前计划](#current-research-plan)、[完整B02与取舍](candidates/uav_cooperative_planning/NOTES.md#dm-disposition--end-b02-investment-and-reserve-the-broader-question)。 |
+| 本轮独立科学选题审查（bounded child） | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/round_question_review` | `/home/fires/hmasd-wsl` · read-only | `hmasd-research-critic`，原始独立上下文`fork_turns=none`；A/B/C及D/E/F两次合并选题审查均完整返回并采纳，当前无任务；结果判读由各DM的独立critic完成，不是新增研究方向。 地址保留作既有责任／证据定位，完整终态与限制见 [首批答复](archive/2026-09-28/RESEARCH-native-dm-question-review.md)；[扩展三题答复](archive/2026-09-28/RESEARCH-expanded-native-dm-review.md)；[原路由说明](https://github.com/CartmanFatass/My-paper-code/blob/94704c0c0a7d711d3708736d3462506e92b48951/docs/research/RESEARCH.md#session-routing)。 |
+| DM：UAV临时覆盖交接规划 | `01a0e577-d190-70a1-9526-9d1765eab830` / `local` | `/home/fires/hmasd-wsl` · `main` | 已完成的历史设计会话；`uav_transit_handoff`为reserve，残差学习方案未投入，0fit／结果回合，无活动操作或已选后继，不是本轮原生子代理。 地址保留作既有责任／证据定位，完整终态与限制见 [设计与最终取舍](candidates/uav_transit_handoff/NOTES.md#final-design-disposition)；[原路由说明](https://github.com/CartmanFatass/My-paper-code/blob/94704c0c0a7d711d3708736d3462506e92b48951/docs/research/RESEARCH.md#session-routing)。 |
+| DM3：UAV协作路径规划与MARL | `01a0e2e4-0d39-7cf3-98c0-f87dfb6e00b0` / `local` | `/home/fires/hmasd-wsl` · `main` | 已完成历史会话；owner已归档的任务不恢复或复用，后继新建DM并继承完整文档。 地址保留作既有责任／证据定位，完整终态与限制见 [当前计划](#current-research-plan)；[完整B02与取舍](candidates/uav_cooperative_planning/NOTES.md#dm-disposition--end-b02-investment-and-reserve-the-broader-question)；[原路由说明](https://github.com/CartmanFatass/My-paper-code/blob/94704c0c0a7d711d3708736d3462506e92b48951/docs/research/RESEARCH.md#session-routing)。 |
 | DM2 | `01a0e1e9-0fda-74c1-80c9-8b660eca0991` / `local` | `/home/fires/hmasd-wsl` · `main` | 已完成历史会话；owner已归档的任务不恢复或复用，后继新建DM并继承完整文档。以下为收尾时的责任与证据定位：当前App标题DM2（旧文档DM4），继续负责`energy_relay_availability`，当前reserve。B03关闭，B04/B05全部原始输出已核验并独立判读；B05保留条件性评分收益与全部风险反例，未选后续实验。终态事件已消费、观察停止，无活动操作／未读Pro。B04仍被DM3使用；旧B02/B03实现退役及清理实测见NOTES。两份B04/B05源码snapshot共约3.20GB因GC进程检查拒绝仍留存，唯一必要raw保全，未称全部清理成功。旧DM4 `01a0e0f9-ae03-75b2-80b3-c7a2f9adf190`仅供历史恢复；本次未发App消息或重启操作。[完整B05](candidates/energy_relay_availability/NOTES.md#2026-09-27--complete-native-b05-reading)、[审查、取舍与清理](candidates/energy_relay_availability/NOTES.md#2026-09-27--independent-b05-reading-and-dm-disposition)。 |
-| DM1：S7 普通学习基线 | `01a0e0ad-0710-71f3-8d9d-8012fe7b65b0` / `local` | `/home/fires/hmasd-wsl` · `main` | 已完成历史会话；owner已归档的任务不恢复或复用，后继新建DM并继承完整文档。以下为收尾时的责任与证据定位：直接 DM，`energy_relay_baselines`；保留 D1，未执行 D4 后继现归 DM3；共同observer接口仍由`energy_relay_diagnostics`负责人（App DM4）负责。原生读取已核对启动及当前职责／方法读取；独立完成和发布，无自动 App 回复。[NOTES](candidates/energy_relay_baselines/NOTES.md)。 |
-| DM4 | `01a0e1e7-922d-73c1-a2ad-f9a60033105e` / `local` | `/home/fires/hmasd-wsl` · `main` | 已完成历史会话；owner已归档的任务不恢复或复用，后继新建DM并继承完整文档。以下为收尾时的责任与证据定位：App当前标题为DM4（旧文档DM2），Owner明确要求的新直接DM，接手`energy_relay_diagnostics`、B02和observer接口责任。已完成原始证据重审及新的独立科学审查，采纳实质异议：B02为reserve、结束当前cache投入，无活动操作／未读Pro／已选新fit；普通PPO、有限优化与规划贡献边界及两处更正已发表于NOTES。旧DM2 `01a0e0af-35fd-78e1-87a5-0ac2c37df085`的B01已完整关闭，地址仅作历史恢复；首次旧会话投递被归档状态拒绝，未恢复旧B01。[科学选择](#current-research-plan)、[NOTES](candidates/energy_relay_diagnostics/NOTES.md)。 |
+| DM1：S7 普通学习基线 | `01a0e0ad-0710-71f3-8d9d-8012fe7b65b0` / `local` | `/home/fires/hmasd-wsl` · `main` | 已完成历史会话；owner已归档的任务不恢复或复用，后继新建DM并继承完整文档。 地址保留作既有责任／证据定位，完整终态与限制见 [NOTES](candidates/energy_relay_baselines/NOTES.md)；[原路由说明](https://github.com/CartmanFatass/My-paper-code/blob/94704c0c0a7d711d3708736d3462506e92b48951/docs/research/RESEARCH.md#session-routing)。 |
+| DM4 | `01a0e1e7-922d-73c1-a2ad-f9a60033105e` / `local` | `/home/fires/hmasd-wsl` · `main` | 已完成历史会话；owner已归档的任务不恢复或复用，后继新建DM并继承完整文档。 地址保留作既有责任／证据定位，完整终态与限制见 [科学选择](#current-research-plan)；[NOTES](candidates/energy_relay_diagnostics/NOTES.md)；[原路由说明](https://github.com/CartmanFatass/My-paper-code/blob/94704c0c0a7d711d3708736d3462506e92b48951/docs/research/RESEARCH.md#session-routing)。 |
 | Claude DM S7 能源中继参照研究 | this session / `local` | `/home/fires/hmasd-wsl` · `main` | 结果节点 wsl_4070，经 `scripts/hmasd_launch.py` 准入；Claude 无 Codex 唤醒，用分离轮询观察，运行句柄与读数在 NOTES。与 Root 为平级（owner 2026-09-27）：Root→Claude 写 `docs/Claude_docs/inbox/YYYYMMDD_<主题>_ROOT.md` 并按显式路径提交（本会话监视该目录）；Claude→Root 用 `codex queue --thread 01a0f779-ace2-74e1-85ad-e0997b61d505 --message`，每条只办一件具体事、不回 ACK。[NOTES](candidates/energy_relay_benchmark/NOTES.md)。 2026-09-27 起本会话同时担任第二个方向 `sequential_coordinator_credit` 的 DM（owner 授权“同时两个相关方向”）：同一会话、同一 checkout、同一入口；其运行同样经 `hmasd_launch.py` 于 `local_linux` 准入，句柄与读数在其 NOTES。 2026-09-28：`energy_relay_benchmark` 的 Pro 评审已答复并采纳；零 fit 探针 `b04_geometry_probe_a03` 已完成并读出（A 行：地图系固定、WSW 固定初始航向、速度欠饱和）；Pro §5 评审已答并采纳；`b05_canonical_frame_a01`（1 fit，wsl_4070）已实现（193cb57cc）、工程审查通过、启动 sha 5886a7504；07:23 UTC 准入（claim e38d6934…；R2 c00 指纹通过），**13:14 UTC 于 rollout 113 因与 Stage 1 相同的 CPython 内部错误退出，c03（600k）为最后检查点，按配方 resume 契约从 c03 续跑为 `b05_canonical_frame_a01r`（同一 fit，非第二 fit）**；零 fit 面板 C_SW dev/hold-out、C_SW_FULL 及 B 的 c02/c03 dev 面板已完成并读出；句柄与读数在 NOTES。 **2026-09-28 19:17 UTC：`b05_canonical_frame_a01r` 已完成（exit 0，c06），B 的 c06 dev 与 hold-out 面板及声明读器已完成并读出（adverse：L −.080/−.084 dev，−.089/−.029 hold-out）；本方向无在跑操作、无已声明 fit；后继选题待一次 Pro §5 评审与 owner 决定；句柄与读数在 NOTES。** **2026-09-28 后继选题第 2 轮已处置：不再购买 S7-S2 fit；T3 readiness 待 owner Milan 数据决定；方向 reserve，无在跑操作；programme 建议已发 Root；细节在 NOTES。** **2026-09-28 23:20 UTC 两方向选题已读 Pro §5 并处置：第二槽留空，A′ 仅为归因候选（未声明），R 恢复候选，N 不选；0 fit；等待 owner 一项 [DECIDE]；细节在 NOTES。** **2026-09-29 第 3 轮已处置：D2 修订版选定（待 [DECIDE-2]），第二槽未决（D1′ 待写成独立问题；D1 仅凭 [DECIDE-1] 重访）；0 fit；细节在 NOTES。** **2026-09-29 owner "2"：[DECIDE-2] 接受、[DECIDE-1] 不行使；`coupled_host_joint_skills_stage1` b01 已声明（Active 行），待 §5 声明评审后启动 cell 0；本会话同时担任该方向 DM。**  **Owner2026-09-30：Claude会话因额度暂停；本行早期启动叙述为历史，当前科学standing见各方向行。此暂停不移交方向、不恢复任何后继。** |
 | DM 规划压缩学习 | `01a0db8e-361c-7b13-a086-3fe1303fa4b7` / `local` | `/home/fires/hmasd-wsl` · `main`；旧持久数据 `/home/fires/hmasd-artifacts/planning_policy_compression/<tag>/`，新raw见NOTES原生节点路径 | 已按owner要求完成当前任务并停止，交接在NOTES。B01–B03合计20fit核验发布；B03源snapshot净回收793542656bytes，唯一raw保留。B04代码/独立工程检查完成，0科学工作/无handle；PPC本地及节点控制均paused，观察已停。无App消息、责任转移或由读交接自动恢复。节点Git GC警告及未来恢复前检查点已写入交接。[交接](candidates/planning_policy_compression/NOTES.md#2026-09-26--handoff-owner-hold-b03-published-and-b04-unlaunched)。 |
 | DM 伙伴曝光独立复制 | `01a0db8f-1fab-7503-ae4b-feff2d4da8f5` / `local` | `/home/fires/.codex/worktrees/fsd-c/hmasd-wsl` · 当前`codex/partner-exposure-b03-publication`；源码/证据分支`codex/partner-exposure-replication-sept25`保留 | B03两新F2/M区组已完整执行、核验、判读并独立出版；结束当前50:50固定库投入，无活动操作、未读证据、开放Pro或已选后继。全量数据在`/home/fires/hmasd-retained-runs/controller_composition/b03_partner_replication_20260925`逐文件核验保全。fsd-c不在本任务原生附件中，节点源树也非launcher snapshot，两目录保留待可用原生归档路径，不使用shell删除。旧B01/B02及ab18来源/原分支保持终态；无App消息。[完整结果和生命周期边界](candidates/controller_composition/NOTES.md#2026-09-25--b03-complete-partner3-gain-does-not-recur-both-new-mixed-responders-trail-f2)。 |
@@ -4393,6 +3611,7 @@ Root 已向三个原会话各投递一次明确携带 `model="gpt-6-astra"`、`t
 服务方向 B08 运行计划已退役至 [技术故障前快照](archive/2026-09-24/RESEARCH-uav-service-b08-technical-failure.md)；当前不完整批次、根因未明及无选定重跑见上方服务方向，既有科学合同与B07结果仍保留。
 
 智能体数量方向的B18运行计划退役至 [技术故障前快照](archive/2026-09-24/RESEARCH-agent-count-b18-technical-failure.md)；当前不完整配对、保留的F自身学习及已完成转储诊断见方向表。
+
 
 ## Retirement and history
 

@@ -7,44 +7,11 @@ or historical record conflicts with it, this page prevails. Historical scientifi
 their meaning as evidence. Only the owner amends this page. Adoption did not lift the owner's
 research pause of 2026-09-15 22:23 PDT.
 
-The current sections incorporate the owner's amendments through 2026-09-26: independent
-DM responsibility and publication, cost without allowances, proportional engineering,
-scripted observation, proactive Pro advice, shared research understanding, and scientific
-project management, question-led DM continuity and the runtime resource ceiling below,
-and (2026-09-26, instruction "Both" on the reset response) one adequate independent scientific
-review at consequential decisions with Pro added where it offers distinct value (section 5).
-The owner's adopted workflow reduction
-is reflected in section 4. This consolidation changes no pause, ownership, accepted operation,
-scientific minimum or frozen contract. The [prior amendment chronology](https://github.com/CartmanFatass/My-paper-code/blob/382009f85e46039cc11c275165a03987307dd2b6/docs/project/OPERATING_CONSTITUTION.md)
-remains available in Git; the sections below state the current rules.
-
-Owner amendment 2026-09-25: author on main in direction-owned directories; retire unused
-files to release disk space. Full backups, duplicate retention packages and backup chains
-are not cleanup prerequisites. Sections 4 and 9 carry this decision.
-
-Owner amendment 2026-09-25: independent scientific review owns diagnosis and direction
-correction, with its own instructions and context, rather than relying on DM self-correction.
-Section 2 assigns this function to ResearchCritic; engineering Reviewer remains separate.
-
-Owner amendment 2026-09-28 UTC (2026-09-27 PDT): remove the fixed Codex DM/research-track
-count ceiling and ask Root to select and advance worthwhile questions more proactively.
-This supersedes the 2026-09-27 increase from three to five; it sets no replacement quota.
-Actual node admission still accounts for training, evaluation and available resources;
-existing pauses, Claude's own authorized scope, direction ownership and accepted operations
-retain their current scope. Root uses long native agent waits while delegated research runs.
-
-Owner amendment 2026-09-27 (peer status): the Claude session and the Codex Root are peer
-researchers, not superior and subordinate. The Claude side's one-direction setting is a
-temporary concurrency limit that the owner adjusts, not a rank. A material disagreement
-between the two peers is resolved by the owner or by an adequate independent scientific review
-under section 5, never by one peer's decision over the other's direction. The owner authorised
-direct coordination messages between them: the Claude session sends with
-`codex queue --thread <session> --message`; Root reaches the Claude session by writing a dated
-file under `docs/Claude_docs/inbox/` in the shared working tree and committing it with explicit
-paths, which the Claude session observes. One message per concrete need, no acknowledgment or
-relay loops; the channel details belong to a shared collaboration method
-(`.agents/skills/hmasd-peer-collaboration/`, agreed by both peers, adopted by the owner).
-Section 2 carries this decision.
+Current sections incorporate the owner's adopted amendments. Their chronology is available
+[in Git](https://github.com/CartmanFatass/My-paper-code/blob/94704c0c0a7d711d3708736d3462506e92b48951/docs/project/OPERATING_CONSTITUTION.md).
+Owner-requested consolidation (2026-10-03) removes repeated explanations and superseded wording;
+it changes no scientific minimum, ownership, pause, accepted operation or frozen contract.
+Current allocation and contact details belong in RESEARCH, not in parallel policy summaries.
 
 ## 1. What this project is
 
@@ -115,19 +82,15 @@ operation. A method, tool, conversation or historical workflow is not a permanen
   an additional direction DM or approve each DM's next experiment. Independent sessions
   do not create an additional allowance, approval layer or automatic authority for new tasks.
   Native task creation still follows the owner's task-creation request and available tools.
-  The earlier four-direction initialization assigned three independent sessions and the
-  assigning session as the fourth; the current owner assignment may instead retain a project
-  Root. After initialization, independent DMs do not communicate with
-  one another, including Root reports, acknowledgments or relays through other routes. They
-  complete and publish independently; ordinary shared Git evidence and current background
-  remain available. Internal bounded helpers and Pro consultation retain their existing roles.
+  Independent sessions complete and publish independently; cross-task contact follows the
+  explicit-authorisation rule below. Internal helpers and Pro retain their existing roles.
 - **Claude side:** the Claude session is the DM itself, with no Root/DM split. It is a
   **peer** of the Codex Root (owner, 2026-09-27): neither directs the other. Root's
   cross-direction coordination and shared-control maintenance are an assigned service to the
   project, not authority over the Claude DM's directions; the Claude DM's direction choices,
   declarations and publications need no Root approval, and Root's assignments to Codex DMs
-  need no Claude approval. The Claude session currently drives one direction at a time; that is
-  the owner's concurrency setting for the Claude side, which the owner may raise. The two
+  need no Claude approval. The owner sets the Claude side's current direction allocation, recorded in RESEARCH;
+  a count is a concurrency setting, not rank or authority over another runtime. The two
   peers exchange coordination messages only through the owner-authorised channels (outbound
   `codex queue --thread <session>`, inbound dated files under `docs/Claude_docs/inbox/`
   observed by the Claude session), one message per concrete need — scope overlap, a
@@ -231,8 +194,8 @@ and publishing, refresh main and inspect changes affecting the intended entry. U
 owned content in an owned checkout/index, preserve other directions, and push normally. If main
 advances again, refresh and reconcile the affected changes; no standing synchronization or
 central writer is needed. Never replace the index with an older whole-file copy.
-Direction code and runs may stay on the published direction branch with
-pinned evidence links. Root handles assigned cross-direction coordination and shared-control
+New authoring follows section 9: shared main unless the owner requests a separate worktree
+or branch. Existing published direction-branch evidence retains its pinned identity. Root handles assigned cross-direction coordination and shared-control
 maintenance and the delegated scientific project plan; owner pause and actual lead changes
 retain their authority. Direction selection follows the delegation above.
 The direction lead owns NOTES.md, handing only the target answer
@@ -299,7 +262,7 @@ result/plan boundaries or when direction, lead, pause or a real shared dependenc
 Starting, polling, collecting or accepting an individual cell of an unchanged batch does not
 require a main/index update. Keep process handles, observer generations, detailed checks and
 per-cell progress in the existing run records and NOTES, linked from a concise standing.
-Publish exact inputs on the direction branch before execution; this is separate from updating
+Publish exact inputs from the authorised authoring branch before execution; this is separate from updating
 the shared index. Ordinary continuation needs neither a new index edit nor a Root acknowledgment.
 Record any owner pause there; a state label does not cancel a pause. It replaces PORTFOLIO,
 APPROVED_SET, tracking, dossiers and lifecycle-decision paperwork. No pilot cards, intake,
@@ -449,7 +412,7 @@ Improve the research path by removing unnecessary steps, not by creating measure
 
 Git is the ordinary version and recovery mechanism. Owner decision 2026-09-25: author on
 main in the direction-owned implementation/tests, NOTES/CLAIM, runs and scratch folders
-specified by AGENTS. No per-direction authoring/publication worktree unless the owner requests
+specified in AGENTS and detailed by research-engineering. No per-direction authoring/publication worktree unless the owner requests
 one. Helpers receive disjoint paths; shared learner/tools/index changes remain narrow shared
 changes under the existing review rule. Serialize Git index, commit and merge operations,
 use explicit owned pathspecs, and preserve concurrent edits. Commit coherent changes and push
@@ -474,20 +437,10 @@ remove retired roles from active registration. Keep old documents historical, no
 active through AGENTS or skills. Populate RESEARCH.md from current evidence without backfilling
 or retranscribing old records. This is a small activation change, not a repository-wide rewrite.
 
-Two directions are active at adoption; all others become archived for investment purposes,
-not scientifically disproved. `tail_return_distributional_learning` (TRDL) is the one reserve
-direction: Codex Root may start a DM for it under the current concurrency setting when a worthwhile
-discriminating idea exists, and is under no obligation to do so. These are adoption-time
-assignments; current direction selection and reserve changes follow section 2 and RESEARCH.
-
-| Direction | Initial standing after adoption |
-| --- | --- |
-| `flexible_skill_duration` | Priority 1, confirming, lead: Claude session (current lead) or a Codex DM, never both: preserve [FSD matched-information B01](../research/candidates/flexible_skill_duration/FSD_MATCHED_INFORMATION_BASELINE_B01_PROSPECTIVE_CARD_20260916.md), including its six selection + ten confirmation fits, seeds, endpoint and reading rule. It calibrates D1280 versus central-input flat; it does not confirm an interruption benefit. |
-| `vap_folr_core` | Priority 2, exploring, lead: Codex DM: retain the N-axis membership-change/history question. [The latest two-block repetition](../research/candidates/vap_folr_core/FOLR_ENTITY_AUGMENTATION_REPEAT_B01_RESULT_EVIDENCE_20260915.md) did not reproduce the old positive. Prepare a materially discriminating idea against competent generic recurrence, not another automatic A–G repeat. With no worthwhile idea, leave it idle. |
-
-**Adoption does not lift an owner pause.** After explicit resumption, the first execution
-batch is FSD B01, not simultaneous filling of every DM slot. Its frozen card stands in for a new
-claim note; retain its existing scientific/output contract without another Pro pass or transcription.
-No worktree, branch or result deletion is part of adoption. Later cleanup requires fresh checks
-that unique commits and dirty evidence are preserved and no live work depends on the checkout;
-the old worktree audit is not present-tense deletion authority.
+Adoption-time assignments, first-batch order and exceptions remain available in the
+[pinned transition record](https://github.com/CartmanFatass/My-paper-code/blob/94704c0c0a7d711d3708736d3462506e92b48951/docs/project/OPERATING_CONSTITUTION.md#10-transition--switch-the-entrypoints-do-not-rewrite-the-archive).
+They are historical assignments, not today's activation list. Current standing, pauses and
+selected comparisons are in RESEARCH; frozen FSD and other named contracts retain their
+original seeds, endpoint, output obligations and review exceptions. No automatic repetition,
+new claim transcription, pause lift or deletion follows from consolidation. Cleanup of
+old checkouts still requires the consumer and evidence checks in section 9.

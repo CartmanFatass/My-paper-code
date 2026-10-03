@@ -13,35 +13,45 @@ a fresh search. Historical research and every cited paper are not startup readin
 
 ## Existing entry points
 
-Do not partition questions by library name. Both stores may contain methods, mechanisms
-and empirical evidence. Prefer a verified unified real-corpus entry point when available;
-until integration is verified, use the available source indexes below and state actual
-coverage. Files on disk are not proof of searchable coverage. My-lib's default tracked
-paper registry currently contains synthetic fixtures; exclude these from scientific
-retrieval and do not present them as real mechanism evidence. The owner's unified-library
-integration is assigned; this document does not claim it is already complete.
+Check these stores, the July record and external-review rounds before calling an idea new.
+Do not partition questions by library name. Counts and access may change; inspect the actual
+index and authoritative integrity metadata rather than assuming that old counts are current.
+The following paths are on the WSL authoring host, not relative to a worktree or compute node.
+On another host use its configured equivalent and state any concrete coverage/access gap.
 
-- **My-lib — existing retrieval interface:** `C:/Projects/My-lib/README.md`
-  documents the existing local CLI and mechanism/evidence records. Use its existing
-  verified real-collection index and supported search interface. A CLI search uses the library's Innovation
-  Brief and explicit collection selection; derive these from the current question,
-  without asking the DM to rewrite the claim note. Inspect relevant returned
-  source pointers, conditions and differences. No new index, service or acquisition
-  pipeline is needed for HMASD integration.
-- **Inst-sci — formal source corpus:** the formal library is
-  `C:/Projects/Inst-sci/papers/MyLib/`; start with `llm-index/catalog.v2.jsonl`.
-  Search title, algorithm, setting, benchmark or mechanism terms with bounded output.
-  Read a candidate's full metadata record in `metadata/v2/papers.v2.jsonl` when
-  needed, including quality warnings and field provenance. Read relevant pages or
-  elements from `json/<paper-id>.json` for substantive claims; use the corresponding
-  `pdf/<paper-id>.pdf` and assets when equations, tables, figures or extraction gaps
-  need verification. Use `metadata/integrity.json` for asset-availability questions;
-  do not rely on counts in old READMEs. Ignore `papers/temp` in ordinary retrieval.
+- `docs/new-libs/` (this repository): 27 verified foundations works (MARL foundations, Dec-POMDP,
+  mean-field, potential games, VI dynamics). Entry `docs/new-libs/LIBRARY_INDEX.md`; machine indexes
+  under `docs/new-libs/corpus/` (`catalog.jsonl`, `claim_index.jsonl`, `NAV_BY_*.md`,
+  `tools/search_corpus.py`).
+- Inst-sci formal library `/home/fires/projects/Inst-sci/papers/MyLib/` (WSL host): 190 MARL papers as
+  `pdf/<id>.pdf` + structured `json/<id>.json` + `assets/`. `metadata/integrity.json` is authoritative
+  for counts. Retrieval order per `llm-index/INSTRUCTIONS.md`:
+  `llm-index/catalog.v2.jsonl` (title, abstract, algorithm_names, method_family, marl_setting,
+  benchmarks, keywords) or `titles.tsv` with `rg` → `json/<id>.json` → the PDF only for verification.
+  Owner-requested full-text reading notes are in `metadata/deep-readings/<id>.json`, indexed by
+  `llm-index/deep-reading-index.jsonl` and `DEEP_READING_INDEX.md`; inspect actual coverage,
+  source versions/pages and DIRECT versus INFERENCE, not just a completion label.
+- My-lib corpus `/mnt/c/Projects/My-lib/` (Windows `C:\Projects\My-lib`; its tracked project is a
+  read-only mechanism sidecar with its own `AGENTS.md` — do not edit it from here): Phase-0
+  title-screened RL/MARL arXiv preprints of ICLR/ICML/NeurIPS 2023–2025 main tracks, 1,519 PDFs under
+  `.local-formal-capture/corpus/papers/<venue-year>/<official_id>/arxiv-<id>.pdf` (arXiv copies, not
+  camera-ready). Official rosters `.local-formal-capture/rosters/<venue-year>.json`; title/abstract
+  records `.local-formal-capture/.local-acquisition/downloads/four-year-arxiv-matches.json`. The
+  project's own SQLite indexes (`.local-index`, `.local-page-index`, `.local-semantic-index`) hold 2
+  mechanism rows and no pages: not corpus coverage. The LLM index (rebuildable, git-ignored)
+  lives in `.local-llm-index/`: `catalog.jsonl` / `titles.tsv` (one row per PDF), `hints.jsonl` and
+  `hints/<id>.json` (Gemini 3.8 Flash, medium thinking: problem, method, key mechanism, keywords,
+  MARL setting, topics, relevance 0–3 to hierarchical MARL / UAV cooperative planning, one-line
+  hint), `INDEX_BY_TOPIC.md`, `INDEX_BY_RELEVANCE.md`, `README.md` (model, prompt version, build
+  date, counts, cost). Search: `python3 tools/reference_libraries/search_mylib.py <term> [<term>…]`
+  from this checkout; rebuild with `tools/reference_libraries/build_mylib_llm_index.py`. Hints locate
+  papers; they are not evidence and carry no novelty verdict. Owner-requested Astra Max reading
+  notes live separately in `.local-llm-index/deep-readings/<id>.json`, with prior-reading evidence,
+  actual coverage and source hashes in `deep-reading-index.jsonl` / `DEEP_READING_INDEX.md`.
 
-These are local control-plane paths, not paths relative to a DM worktree or remote
-execution node. If unavailable, report that concrete coverage/access gap and use an
-available source; do not silently treat the library as empty. This reading workflow
-does not require loading the Inst-sci download skill or performing downloads.
+A missing local path is an access gap, not an empty scientific literature. Do not install a new
+index/service or download pipeline as a prerequisite to ordinary research. This retrieval method
+does not itself require the Inst-sci acquisition skill or authorise acquisition.
 
 ## Evidence and handoff
 

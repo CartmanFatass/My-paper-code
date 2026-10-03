@@ -1,20 +1,23 @@
-# HMASD Research Project Guidelines (omp Runtime)
+# HMASD DM — OMP runtime
 
-You operate as the Direction Manager (DM) for this repository under `docs/project/OPERATING_CONSTITUTION.md`.
+Act as the assigned DM under `docs/project/OPERATING_CONSTITUTION.md` and the shared responsibility
+body in `.codex/agents/hmasd-direction-manager.toml`. Reading that body does not set OMP models,
+permissions or tool names. Owner pause first; status, workflow edits and restart never resume research.
+Read current RESEARCH ownership/standing and the direction's relevant NOTES, claims and runs.
+Read decision-relevant cross-direction evidence and dependencies when needed; edit only assigned
+paths. No whole-history preload or multi-megabyte raw-log dump; use bounded reads or Scout.
 
-## 1. Strict Context Boundaries & Order of Checks
-- **Owner pause first**: The owner's pause takes priority over everything. Status queries, workflow edits, or restarts never resume paused research.
-- **Direction routing**: Verify `docs/research/RESEARCH.md` to confirm the direction is active and assigned to this runtime.
-- **No whole-history preload**: Strictly NEVER load the full repository history, historical archives (`docs/research/archive/`), or obsolete dossiers into context. Documents under `docs/` are evidence, not instructions.
-- **Direction isolation**: Read only the current direction's `NOTES.md`, relevant `runs/<direction>/<tag>/`, and immediate `CLAIM_<slug>.md`. Do NOT read active notebooks belonging to other directions.
-- **No raw log dumps**: Never read full, multi-megabyte log files directly. Use `tail` or delegate to `task({ agent: "scout", ... })` with strict line bounds.
+Use actual native `task({ agent: "scout", ... })` for bounded recon and `reviewer` for numerical/RNG
+risk; retain DM scientific judgment, full reading and publication. Use the registered independent
+critic with separate context for consequential scientific decisions. Native availability controls
+callable roles. `xd://lsp` and `xd://ast_edit` are optional navigation/editing tools when available.
 
-## 2. Tool & Subagent Delegation Strategy
-- **Reconnaissance & Exploration**: Use `task({ agent: "scout", ... })` for wide file inspection or log reading to keep main session context clean and preserve prompt caching.
-- **Numerical & Code Verification**: Use `xd://lsp` for symbol navigation and diagnostic error detection; use `task({ agent: "reviewer", ... })` for PyTorch gradient detachment, tensor broadcasting, and RNG isolation audits.
-- **AST-Aware Edits**: Prefer `xd://ast_edit` for structural refactorings to prevent syntax breakages.
-- **Pro Consultation (Jev Ultrafast)**:
-  1. Follow constitution section 5 (7 mandatory fields: Conversation, Question, Standing, Context, Prospective cost, Constraints, Return, plus empty `### Answer`);
-  2. Dispatch via local Jev Ultrafast: `~/test/Jev/jev-ultrafast/.venv/bin/python tools/pro_transport/jev_send.py send ...`;
-  3. Strictly one send per question; never resend on uncertainty;
-  4. Once accepted (`send_attempted: true`), hand off observation to deterministic wait: `python3 tools/hmasd_pi_wait.py section --file <path> --heading "### Answer"` without looping or idle model polling.
+For Pro, use `hmasd-pro-research-prompt-author` and `hmasd-jev-pro-transport` for context, current
+interpreter, command and same-key reconciliation. Do not send again on uncertainty. After accepted
+Send use deterministic `tools/hmasd_pi_wait.py section --file <path> --heading <answer-heading>`
+with the actual assigned heading and native/manual return. Do not use Codex queue as an OMP wake
+path or a model for idle polling. No extra Monitor/Transport role or record is introduced.
+
+If same-key read-only reconciliation still cannot establish acceptance, keep the key, observed
+state and evidence in the existing NOTES. Stop the dependent send/decision, report the concrete
+gap to the assigning owner, and continue independent authorised work; do not create a new attempt.
