@@ -7595,3 +7595,1214 @@ Own RESEARCH standing moves to reserve with the original lead retained; the
 bounded native return gives Root the evidence and this next-investment
 recommendation. New scope would be a new selected purchase with inherited
 positive/adverse evidence and cost, not a restart of B05 or a routine repair.
+
+<a id="b06-request-compute-source-scope"></a>
+
+#### 2026-10-03 — Selected source-only construction of ordinary tail capability
+
+Root has read the complete B05 result, original8,833-byte independent review,
+cost and cleanup and accepted its closure. The owner has not archived this DM;
+the same runtime retains the broader question. Root now selects construction
+of one complete G/R4/R1 successor contract asking whether R's observed tail
+capability can be retained with less computation. This is **source, already
+paid evidence, static arithmetic and record work only**:0 new native, model,
+G/R, neural, fit or health effects; no production runner implementation or
+formal request is selected. The old5.374 CPUh outcome is not unused credit,
+and B05 source, verdicts, data and accepted operations remain frozen.
+
+The candidate starts from a new32-world, three-program H1200 comparison
+(96 missions/115,200 native transitions/0 fits), with any genuinely necessary
+extra audit missions and the full reader priced explicitly. The exact first-
+cohort law, sample coupling across arms, public information, action/deadline
+order, existing R4 reuse and all support/retention costs must be specified
+before an investment decision. The new tail-use question does not rewrite
+B05's primary C or treat a non-significant difference as equivalence. Current
+published RESEARCH topic5's observed G/R competence, R's conditional tails and
+travel/coverage/CPU costs, and active DDQN adversity are the design premises;
+they motivate an ordinary complete capability comparison without making it
+a prerequisite for a different learning proposal.
+
+Root has separately reused the original proposal coauthor to compare this
+successor with a potentially stronger complete learning/control alternative.
+The DM will first construct its source/exposure/price contract independently,
+preserve the coauthor's substantive alternative when received, then use the
+existing independent scientific-review context for the actual selection
+differences. No extra critic/Pro sequence is implied. Root will choose any
+new purchase from that complete contract; current work does not authorize
+effects or reopening B05. Writes remain in this direction's notebook and
+owned standing, with the existing lead and other directions' accepted work
+preserved.
+
+<a id="b06-independent-source-contract"></a>
+
+#### 2026-10-03 — DM's independent complete G/R4/R1 contract, before coauthor advice
+
+**Question and prediction.** Can one ordinary sampled future retain a useful
+part of R4's complete-request tail capability while reducing its full
+computation cost? This is a constructive capability/cost question, not an
+explanation of the failed DDQN or a required attribution study before learning.
+My prediction is lower complete CPU for R1 and a retained improvement over G
+in the two named tails, with uncertain C/travel/coverage tradeoffs. Four
+cohorts may instead be important to choosing useful actions, so substantial
+tail loss is a real competing prediction. A one-cohort value at an R4-visited
+state cannot answer the closed-loop question after their actions diverge.
+
+This independently constructed candidate precedes the requested coauthor
+comparison. It is **not purchased, implemented or executed**. Current work
+has used source text, saved JSON/file sizes and standard-library arithmetic;
+no new task/model/G/R/neural call, fit, runtime health probe or formal launch.
+All B05 code/tests remain unchanged. The source reference is the published
+worker `2d754f29308a56a4db81f867ca1b79b5e75f99ad`, source identity
+`7eeaaf614fd8d88023f0baba2ca2aa04804b893acb1ecfec52158e9d0e762210`;
+its complete independent reader is `195fc8f44d5a375081e8b851a67671bbe9aafb1a`.
+The load-bearing modules under
+`experiments/candidates/uav_decision_generalization/b05_request_schedule/`
+are `task.py` (`PublicState`, `initial_assignment`, `candidate_slots`,
+`QueueLedger`), `ordinary.py:g_values`, `native.py:RequestHost`,
+`rollout.py:future_tape/search`, `policy.py:Endpoint.decide`,
+`worker.py:mission`, and the independent `reader.py`/`storage.py` evidence
+format. The contract below follows their actual call/order paths.
+Current published background is `399cdcde1c8d71f816960410673fd3712cc3203f`,
+topic5. Its concrete effect is to retain economical competent G and costly
+but deadline-feasible R4, make their observed tails prospectively named
+secondary estimands, and decline an automatic negative-Q repair. B05 C stays
+its original primary; this new use question does not relabel that result.
+
+**Population, exposure and complete purchase.** Use exactly the new literal
+world IDs `109255000..109255031`, in ascending order, under the unchanged B05
+world/geometry, rate, arrival and service law. This range does not occur in
+the direction's existing source/notebook/study inputs; no geometry or draw
+has been generated or inspected. Preserve master109259999 and all existing
+RNG domain definitions. These are32 new indexed pseudorandom worlds under
+the same law, not a distribution-shift claim or an optimized seed panel.
+For world index j, execute `[G,R4,R1]` rotated left by `j mod3`. Every arm
+receives a separate complete H1200 mission:96 missions/115,200 task advances,
+5,760 timed decisions and96 terminal accounting reports;0 fits,0 updates,
+0 acquired checkpoints and0 training/evaluation checkpoint selection.
+There is one persistent ordinary endpoint per arm, each actually cold on
+its first request, with no warmup mission. All three complete trajectories
+are purchased together; no R1 pilot, winner-based extension or intermediate
+selection. B05's32 exposed worlds select the question but do not enter the
+new panel's uncertainty calculation.
+
+There are **zero additional result audit missions**. No learned deployment
+or checkpoint reload exists here. Each of the96 trajectories and every
+recorded model prefix is already covered by the complete reader below.
+Within saved evidence, the shared initial public state supplies a useful
+R1/R4 first-cohort identity check without buying a fourth arm or more
+missions. It is a correctness check, not a positive-effect requirement.
+Later equal-input encounters may also be compared from saved bytes; unequal
+states never acquire a same-output requirement. Focused synthetic/source
+checks for a future implementation have0 native/model effects; any proposed
+effectful additional test would be separately counted before selection,
+not hidden in115,200. Fresh node admission belongs to an actual later launch.
+
+**Unchanged public task and ordinary actions.** Retain N6/U50, static known
+geometry, one BS, FDMA/free-space/native routing, three immutable UAV pairs
+and the supplied feedback slot executor. Reset exposes all50 user positions
+and the permutation of rates[.6,.3,.2,.1]. A report exposes current float64
+UAV positions, routed ACKs, four FIFO counts/head progress values, active
+slots and tick; pair assignment is known. Actual request IDs/arrival ages,
+the task arrival generator and its future tape are not policy inputs.
+No actor/critic training, new communication channel, queue-age feature,
+low-level learner, arrival-rate tuning or geometry/action expansion occurs.
+The same logical bill is404 reset bytes +61×171 report bytes +60×6 command
+bytes =11,195 bytes/mission, 1,074,720 bytes for96; this is not measured
+wireless energy or an actual network guarantee. There is no training feedback.
+
+Initial assignment still selects the three highest-rate clusters (ID breaks
+ties), tests720 UAV permutations using ceil-distance/30 sum, distance sum,
+then lexicographic order, and fixes the resulting three pairs. At a report,
+action0 keeps all active slots. Actions1/2/3 move the respective immutable
+pair to the one currently unassigned cluster; their inner/outer orientation
+minimizes maximum ceil-travel, summed distance, then UAV-ID order. Other
+pairs retain their slots. Raw steering and executed float64 native actions,
+speed30, service threshold8/10 users and20 consecutive qualifying ticks,
+FIFO reset/interruption semantics and terminal penalty240 remain identical.
+The team cost is C = all pre-service queue residence charges +240×unfinished
+requests, with arrivals on t=0,20,...,940 and no later arrivals.
+
+**Entry, deadline and activation order.** At each t=20d, first activate the
+previous pending command (except t=0), then insert that tick's actual arrivals
+and charge its queue residence. Construct the public report from the current
+native positions/ACK, updated counts/progress and active slots. The parent
+starts the same20-second wall deadline before first-process spawn or IPC;
+ordinary imports, initialization, serialization, G/features, R model work
+and message transport are all inside it. Each result must be ready **and
+received** by the deadline. Retain the last eligible complete publication:
+G result, R's initial G fallback, or R's latest complete cohort average.
+If none arrives, KEEP the currently active slots. Cached diagnostics alone
+do not retroactively authorize a late command. On expiry terminate/reap the
+same child and account for every attempted/completed prefix before any next
+effect. A later request may start a replacement endpoint as the original
+deadline program prescribes; this is not a replacement mission or retry.
+
+The chosen command becomes pending. Finish this tick and the next19 ticks
+under the already active slots; at t+20 activate pending before the next
+arrivals/report. A fast R1 cannot activate earlier than R4 or G. All60
+decisions are paid, including t1180's command whose activation at1200 falls
+outside task motion; no terminal-unused-work optimization is introduced.
+Normal deadline fallback is an outcome of the program, not a technical
+failure or reason to drop a world. No cohort/arm is rerun merely to finish
+more sampling. Save start/ready/receipt/fixed/reaped times, all eligible and
+ineligible messages, attempted work and endpoint starts exactly as in B05.
+
+**G, R4 and precisely one R1 cohort.** G is the corrected B05 program:
+evaluate all four candidate commands through min(240,1200−t), retain current
+slots for its first20 ticks, model known integer heads/progress exactly
+under its geometric availability approximation, use rate-fluid only for
+unknown future requests, and include240 times remaining known/fluid work.
+Choose raw float64 cost, then action ID. Keep its existing feature
+construction/timed wrapper when comparing computation, even though no
+network consumes the features. No new tuning or changed G approximation.
+
+R4 is the exact existing optimized program, including full-input cohort
+reuse. It computes G first and publishes that fallback; then reconstructs
+one native model strictly from the public state. For each decision d it
+considers tape indices0,1,2,3 in that order. **R1 does the same, but only
+tape index0; it does not choose the best tape, resample a rejected tape,
+rotate the tape index by world, use expected arrivals, or start cohort1.**
+The future draw for index k is PCG64/SeedSequence
+`(109259999,30,world,d,k)`, with shape `(number_of_future_times,4)` and
+elementwise comparison to the public rates. Future times are t+20,... up
+to min(t+min(160,1200−t),940), including the nonterminal G-tail endpoint.
+The current tick's arrivals are already in the reported counts and are
+never sampled again.
+
+At the same world/tick, R1's sole future tape is exactly R4's tape0, even
+after their physical states diverge, since rates and future-time grid agree.
+Different k and world addresses use separate streams. Actual arrivals use
+the independent existing domain21; rates use20. Neither model receives the
+actual future tape or task RNG state. These are common random inputs for a
+paired program comparison, not independent realizations between R arms.
+G uses the public expected rates only. New actor information is not the
+intervention; the computation/sampling allocation is. No cross-arm result
+or trajectory cache is permitted, even when a state happens to match.
+
+Within a unique cohort, evaluate all four actions in ascending IDs rotated
+left by `(world+d+k) mod4`, preserving the original cancellation-order
+semantics. Each branch clones the public reconstructed model, sets its
+pending candidate, retains old active slots for20 ticks, then replans with
+G at the subsequent20-tick boundaries. Native RF/routing, queue charges,
+arrivals, command activation and FIFO completion use the original order.
+At a nonterminal160-tick endpoint, activate the last pending command and
+insert the endpoint arrivals; add min G as the tail without double-counting
+that endpoint's first residence charge. At1200 use the terminal240 charge.
+This is a finite sampled model with an approximate G tail, not a theorem-
+certified improvement over G. No new tail objective enters its choices.
+
+Publish a cohort only after all four candidate branches finish. After m
+eligible complete cohorts, choose the action minimizing `(mean_m_cost,
+raw_G_cost,action_ID)`. For R1, m is either0 (G/KEEP fallback) or1. For R4
+it is0..4; duplicate cohorts retain their statistical multiplicity in the
+mean. The exact reuse key frames source identity, world, reset geometry/
+rates, full public report, pairs, future times and sampled bits. Reuse is
+only within that decision and only on full-key equality; no approximate
+state merge, result reuse between worlds/arms, or discarded adverse sample.
+At t≥940 all future tapes are empty, so R4 has one physical cohort and
+four logical copies. Earlier identical sampled tapes also reuse. R1 has
+one physical/logical cohort if complete. This common setup and late-task
+reuse are why total R4 CPU cannot be divided by four.
+
+**Exactly counted dominant work.** The following are complete-worker maxima
+with all requests finishing before the deadline, retaining mandatory empty-
+tape reuse but not anticipating earlier accidental equality. A deadline or
+earlier exact equality can reduce realized work; attempted interrupted work
+is still counted and checked. Let h(t)=min(160,1200−t). The sum of h over60
+decisions is9,040. R4 has four unique cohorts for47 decisions t<940 and one
+for13 later decisions:201 physical/240 logical cohorts per mission. R1 has
+60/60. Each physical cohort contains four native branches. Internal G
+queries occur at offsets20,...,h−20 plus the nonterminal endpoint; actual
+report G is counted once, including R's duplicated trace record.
+
+| Work per complete mission | G | R4 maximum | R1 maximum |
+| --- | ---: | ---: | ---: |
+| Actual task advances | 1,200 | 1,200 | 1,200 |
+| Timed/base G queries | 60 | 60 | 60 |
+| Base G candidate-ticks | 52,320 | 52,320 | 52,320 |
+| Native public model constructions | 0 | 60 | 60 |
+| Native model prefix advances | 0 | 126,400 | 36,160 |
+| Internal G queries | 0 | 6,288 | 1,776 |
+| Internal G candidate-ticks | 0 | 5,813,760 | 1,536,000 |
+| Physical / logical cohorts | 0 / 0 | 201 / 240 | 60 / 60 |
+
+Across32 worlds:115,200 actual advances,3,840 model constructions,
+5,201,920 model prefix advances,8,352 physical cohorts/33,408 clones and
+9,600 logical cohorts. All G work is263,808 queries/1,055,232 candidate
+values/240,215,040 candidate-ticks/960,860,160 four-cluster recurrences;
+base queries are5,760 and internal queries258,048. R4's model ceiling alone
+is4,044,800; R1's is1,157,120. No native or model transition is substituted
+for a fit count. Preserve native constructor/reset/reward/routing event
+accounting as well as these dominant counts. Complete R4/R1 future draws
+are5,568/1,392 uniforms per mission,222,720 in total, plus18,432 actual
+arrival uniforms; all tape generation and comparison work is included.
+There is no neural forward,
+optimizer replay, teacher-label acquisition or hidden alternate seed search.
+
+**Complete reader and artifact contract.** One bound reader checks every96
+mission, all115,296 actual physical states (including constructors), all
+115,200 actual motions/actions and every request's FIFO identity/timestamps.
+It independently reconstructs saved geometry/rates/actual-arrival draws,
+reset assignment, physical links/routes/ACKs, queue costs and pending-command
+activation, and checks every completed/partial R record: model initial
+state, tape address/bits, branch order, native prefixes, G queries, exact
+reuse/multiplicity, scores, publication markers and deadline-selected action.
+It validates all possible3,840 model initial physical states and up to
+5,201,920 model prefix states, and recomputes up to240,215,040 G candidate-
+ticks (the duplicated base record is matched, not charged twice). Total
+reader physical-state ceiling is5,321,056. It reconstructs saved work;
+it does not buy new native worlds, extra model trajectories or suffixes.
+No training/checkpoint/neural checks are needed because none were purchased.
+This removes an inapplicable old obligation, not promised model verification.
+
+The implementation, if selected, must retain the unchanged G/R4 algorithms
+and source identities and add a separately bound R1 cap rather than edit
+B05 evidence. Frozen B05 modules remain the reference; the future direction-
+owned entry/reader needs a narrowly reviewed cap, arm labels,96-mission roster,
+counter ceilings and schema. Preserve full requested/executed commands,
+all native state/motion/routes, actual request tape/ledger and all unique
+model prefix evidence, G inputs/scores, cohort aliases and timing/cost
+snapshots. Compact per-world metrics, full32 paired vectors, config/source
+manifest, terminal status and collection identities go to Git; required
+bulk has one canonical run copy. No replacement command is reconstructed
+from only an average score. Reader failure preserves the raw/partial result
+and limits dependent scientific claims; it does not become a negative result.
+
+**Prospectively read service, tails and price together.** C remains primary
+service cost. Name the following key secondary tails before the new worlds:
+T = maximum completed-request residence within the mission; W = maximum
+longest routed-service gap over all50 users, including leading/trailing
+zeros. Retain all request/cluster/user values, unfinished counts/ages,
+completed count and total requests. Also report the maximum of completed
+residences and observed unfinished ages as a censored lower bound, never
+call it a completed-request tail. If an arm has no completed requests its
+T is missing with that fact explicit, not zero or an excluded successful
+mission; if no requests arrive, report an empty workload separately. A
+reduction in completed-only T accompanied by extra unfinished requests is
+not evidence of preserved complete-service tails.
+
+Read C's area/terminal components, T/W, per-cluster completions/interruptions,
+all-user routed fractions/never-served users, mean routed users per tick,
+team-zero-service runs, travel metres per UAV and target changes together.
+Travel is movement cost, not unmodeled battery energy. Save inclusive task
+CPU/wall (constructor, cold start, actual motion, policy, IPC/cancel/reap,
+trace serialization), decision max/quantiles/deadline misses, logical and
+physical cohorts, all query counts, reader costs and whole-study costs.
+No arbitrary CPU-to-request-cost exchange rate creates a scalar winner.
+
+For each metric report G/R4/R1 means, all32 paired values and signed
+R4−G/R1−G/R1−R4 contrasts. Use a descriptive paired-t interval with df31
+on world differences, retaining covariance and the shared model tape0;
+worlds, not1200 ticks/requests/cohorts, are the inference units. This is a
+new exploratory panel after B05 question selection, not multiplicity-
+controlled confirmation or independent replication of learned fits. No
+missing tail is filled with zero or silently dropped to manufacture32
+pairs: print its world and missingness, and withhold an unconditional
+32-world T interval if any required T is undefined. C, unfinished service,
+W and the saved censored readings remain readable on every world. No
+non-significant R1−R4 difference establishes equivalence. No equivalence
+margin is invented from B05's observed effect or SE. Clear CPU savings and
+recurrent favorable T/W versus G can establish a useful cheaper conditional
+program even when causal components or R1−R4 equality remain unidentified.
+Any C/unfinished/travel/coverage sacrifice remains visible in that use claim.
+
+Outcomes change the next choice as follows. If R1 is substantially cheaper
+and has useful fresh tails versus G, preserve/develop that conditional
+program; C and unfinished service determine whether any broader adoption
+is warranted. If R4's tails recur but R1 loses them, reject this particular
+compression and retain R4's positive; its price alone is not infeasibility.
+If R4's tails do not recur, narrow their generalization and reconsider the
+tail-use investment without erasing B05. If both planners have new C or
+completion harms, preserve those counterexamples rather than promote a
+completed-only tail. If uncertainty remains broad, report an unresolved
+comparison, not equal programs or an automatically authorized larger panel.
+An unforeseen deadline/resource failure is read as part of the executed
+program/technical completeness respectively. No branch automatically selects
+a new fit, changed arrival rate, more cohorts or an unchanged retry.
+
+**Full price from already-paid measurements, not R4/4.** Saved B05 main JSON
+gives G mean2.148516 CPU-s/mission (range2.006917..3.138978), of which timed
+policy CPU averages.518043 and other mission work1.630473. R4 averages
+196.791962 (184.401466..215.959280), with193.760253 in timed policy and
+3.031709 elsewhere;32 R4 missions cost6,297.342780 CPU-s and6,855.382789
+wall-s. They performed4,029,440 model advances and1,272 reused logical
+cohorts. This paid information supports a computation forecast, not a new
+R1 timing measurement. All old R4 decisions met20s; maximum7.005458s is a
+measured scope, not a deadline guarantee on a future loaded node.
+
+R1's maximum model work is28.61% of R4's reuse-aware maximum, and its
+internal G candidate work26.42%; model construction, base G, IPC and actual
+missions are not scaled away. Forecast per mission: G2–4 CPU-s, R4 roughly
+185–240, R1 roughly55–90, giving about2.2–3.0 CPUh for the complete96-mission
+worker. The old full reader cost5,653.181264 CPU-s; the new physical-state
+and G ceilings are respectively82.36% and82.21% of its realized counts.
+A proportional center is about4,650 CPU-s (1.29h), with1.1–1.7 CPUh a
+planning range rather than a benchmark guarantee. Include source snapshot,
+import, hashing, readback, summary, collection and publication work; forecast
+**3.5–5.5 new CPUh,0 GPUh**, roughly4–7 operation-wall hours, plus **4–8
+support-hours** for bounded implementation/review/publication/reading. Some
+support CPU/elapsed time remains unmetered and is explicitly nonzero.
+
+Propose a new8-CPUh/24-aggregate-operation-wall-hour stop for worker plus
+reader and charged failed/support scientific calls if Root buys this whole
+comparison. This is a proposed ceiling, not an allowance or authority now;
+the old50h ceiling is not inherited. Preserve all partial evidence and stop
+on the first new formal launch/admission/worker/reader failure or aggregate
+cap; no automatic repair/retry, duplicate, extra world or continuation is
+purchased. Ordinary valid deadline fallbacks do not trigger that failure rule.
+Complete fixed collection/read/publication is inside the forecast, not an
+unpriced optional stage. A cap-limited incomplete study is not the promised
+96-mission/32-world result. Engineering support beyond the forecast changes the price
+presented to Root rather than silently spending an unlimited repair loop.
+
+The selected suitable runtime would remain configured local Linux with the
+same Python3.10.20/NumPy1.26.3 numerical stack and native source; it is a CPU
+study,0 GPU, one sequential mission/ordinary child and a separate full reader.
+No fresh resource survey is performed during this source-only assignment.
+An actual later launch needs current node memory/disk admission and preserves
+all other accepted workers. The prior sole B05 rollout evidence was about
+130 MB for35 R4 missions; increased R model work plus96 actual traces suggests
+roughly0.2–0.5 GiB retained bulk, with a1 GiB planning reserve. One immutable
+source snapshot was about1.71 GiB allocated; allow2 GiB per concurrently
+retained snapshot, explicitly up to4 GiB if worker/reader overlap. Avoid that
+overlap when their lifecycle permits collection and retirement first. Keep
+the existing8-GiB memory/12-GiB free-disk admission floors rather than infer
+availability from old RSS. Required unique evidence stays canonical; close
+unused scratch/snapshots only after checking live consumers. These are
+storage forecasts, not new allocated data or measured savings.
+
+**Competing investments before the coauthor view.** Adding only32 R1 missions
+to B05's exposed panel would be cheaper (38,400 actual advances/1,157,120
+maximum model advances plus full reader), but answers conditional development
+on the panel that selected the tail finding. A fresh three-arm panel buys
+its recurrence and program comparison together; that is my present preference
+if another request-tail investment is selected. Repeating DDQN unchanged,
+clamping its values or adding fit time has no prediction selected by these
+source facts. A complete nonbootstrapped learning/control proposal could
+instead add acquisition value; it must be compared on its actual ordinary
+competitor, information, target exposure, fresh complete-task result and
+full price. It need not first pass R1. Await that concrete alternative and
+the one reused independent selection-difference review before recommending
+which complete purchase Root should choose. No new effects are selected by
+this contract or by its prospective outcome branches.
+
+
+<a id="b06-coauthor-extension-original"></a>
+
+#### 2026-10-03 — Original coauthor extension, received in full
+
+Root has read the independent three-arm source contract and selected a
+seven-endpoint offline-student extension for concrete source-only design
+comparison, not execution. It retains G/R4/R1 and adds one deterministic
+four-constant calibration plus three new offline neural fits using the
+existing35 R trajectories. Root will choose one complete purchase after
+the actual revised contract and one reused independent selection review.
+There is no review of the superseded three-arm proposal followed by a
+second review of this extension. A/C/D's accepted work remains independent.
+Current authorization is still0 new native/model/G/R/neural/optimizer/fit
+effects, no production implementation, runtime probe or formal request.
+
+The original B05 proposal coauthor delivered the following complete answer
+at Root's explicit request. This is coauthor advice, not independent
+Scientific Reviewer approval or empirical evidence. Original text:
+6,691 characters /13,153 UTF-8 bytes; SHA256
+`c11d1b5565378d895f7b413acaf9703640bb0b39c9e17e0b451caf96d830e956`.
+
+```text
+我建议把下一项选为**一次完整的“R4 请求排程能力能否用较低计算成本实现”的比较**：保留 DM 已构造的 G/R4/R1，再加入一个简单的四常数标定和三个离线学习端点。共七个端点、32 个新世界，全部一次购买。我的实质异议是：**仅选零 fit 的 R1 比较有价值，但在已保存 teacher 数据的条件下，尚未充分利用这次昂贵比较能够提供的学习信息。**
+
+这是我作为原 B05 方案共作者的建议；独立选择判读仍应由 Scientific Reviewer 完成。A、C、D 已接受的研究继续原安排。
+
+**支持改变分配的事实，是可直接复用的训练数据，而不是对 DDQN 失败原因的新解释。**
+
+我完整读取了 B05 的[原始读器汇总](/home/fires/hmasd-wsl/runs/uav_decision_generalization/b05_request_read_a02/summary.json)、[全部诊断](/home/fires/hmasd-wsl/runs/uav_decision_generalization/b05_request_read_a02/diagnostics-summary.json)和独立判读、处置。原结论应保持：
+
+- 三个 learned endpoints 在全部 32 世界的 C 和 residence-area 上均劣于 G/R；目前没有确定的符号、clamp、网络或追加训练修复。
+- G/R 均完成全部 1,848 个请求。R−G 的平均 C 为 −59.59，区间跨零；平均 mission 内最大请求 residence 改善 98.31，最大用户服务 gap 改善 75.81。
+- R 同时增加约 2,253 米/UAV 的飞行，并降低平均 routed users。它的约 196.79 CPU-s/mission 明显高于 G 的 2.15，但所有原有 cohort 都满足 20 秒 deadline。这是一项有价格、有副作用且可按时执行的能力。
+
+进一步检查原工件发现，**全部 35 条 R 轨迹——32 条主评价和三条 audit——均保存了 60 个决策的四动作输入与完整四 cohort 成本**：
+
+- 共 2,100 个决策上下文、8,400 个动作特征与平均评分。
+- 特征数组为每条轨迹 `(60,4,303)`，与现有 scorer 接口直接匹配。
+- 全部 2,100 个决策都完成四 cohort；R 有 360 次相对同状态 G 明确改选。
+- 388 个上下文的四个平均评分完全相同；KEEP 占 R 动作约 77%。因此普通 action accuracy 很容易给出误导性的好成绩。
+- 这些记录已经过完整 reader；不需要新采集 teacher rollout 才能开始学习。
+
+原始入口是[已保存的 worker manifest](/home/fires/hmasd-wsl/runs/uav_decision_generalization/b05_request_a01/manifest.json)。一个实际接口陷阱是：**R 记录中的 `total_q` 保留的是 G 基值，不能直接当 teacher target**；应从已保存的四个 `cohorts[*].costs` 按原程序的 float64 平均顺序重建，并保留重复 cohort 的权重。
+
+复用后，这 35 个世界全部成为明确暴露的训练/开发资料，不能继续作为新学习方案的 holdout。
+
+**我接受 DM 的 R1 源码契约，并在其上增加一种明确的直接学习方案。**
+
+[DM 的完整契约](/home/fires/hmasd-wsl/docs/research/candidates/uav_decision_generalization/NOTES.md:7636)已经解决关键公平性问题：R1 固定使用 tape0；同世界、同 tick 与 R4 的 tape0 相同，实际到达仍由独立 domain21 产生；四动作共享该未来样本；R1、R4、G 均在 20 tick 后激活命令，使用同一 20 秒 deadline。R1 计算更快不会提前获得物理控制机会。R4 的完整输入复用、截止时最后一个合格完整 publication、延迟和 fallback 均应原样保留。
+
+七个端点为：
+
+| 端点 | 冻结的程序 | 它回答的问题 |
+|---|---|---|
+| G | 已修正、已验证的原有普通控制器 | 经济且能完整服务的基准 |
+| R4 | 原有四 cohort 程序 | 较昂贵能力在新世界是否重现 |
+| R1 | DM 已定义的 tape0 单 cohort 程序 | 减少在线采样能否得到有用的价格改善 |
+| B | 下述四常数标定 | 学生的收益是否仅需一个简单的全局动作修正 |
+| S0、S1、S2 | 同一配方的三个独立初始化、独立 shuffle 学生 | 固定 teacher 数据能否形成低计算的完整闭环控制 |
+
+任务、信息、动作集、原生执行和服务成本均沿用 B05。学生只使用当前合法的 303 维特征及 G 值，不增加请求年龄、实际未来到达或隐藏任务状态。
+
+对上下文 \(s\)，记四 cohort 的平均预测成本为 \(\bar R_a(s)\)，G 动作为 \(g(s)\)。学生复用现有 55,553 参数 scorer，部署评分为
+
+\[
+S_\theta(s,a)=G_a(s)/1200+f_\theta(x_{s,a}).
+\]
+
+训练目标是四动作的相对成本：
+
+\[
+\operatorname{MSE}_{s,a}
+\left[
+S_\theta(s,a)-S_\theta(s,g)
+-\frac{\bar R_a(s)-\bar R_g(s)}{1200}
+\right].
+\]
+
+这使训练直接针对行动排序有关的差异。它不使用 bootstrap，也不把共同 offset 当作已确认的旧失败机制。标签仍然只是有限模型、有限采样和 G tail 的预测，不能称为真实最优 Q。
+
+具体配方可以完整冻结为：
+
+- 三个新初始化 seed：109255101、109255102、109255103；shuffle 使用独立的新地址，例如 `SeedSequence(109259999,51,fit)`。
+- 全部 2,100 个上下文，64 epochs；每批 64 个上下文，保留末批 52 个。
+- Adam，学习率 \(3\times10^{-4}\)，默认 betas/epsilon、无 weight decay，固定梯度范数上限 10。
+- 每个 fit 2,112 次更新，固定使用最后端点；无 checkpoint 选择、追加 teacher 查询或根据新评价调整 epoch。
+- 初始 head 精确为零，初始部署定义为 canonical G；保存证书并离线核验初始网络。无需额外购买三份相同的初始原生轨迹。
+
+简单标定 B 使用同一数据，直接拟合四个常数：
+
+\[
+b_a=\operatorname{mean}_s\left[
+(\bar R_a-G_a)
+-\operatorname{mean}_{a'}(\bar R_{a'}-G_{a'})
+\right].
+\]
+
+部署时按 `(G_a+b_a, G_a, action_ID)` 排序。它明确计为**一次确定性四参数拟合**；另有三个神经网络优化 fit。若 B 已能实现学生的收益，便没有证据要求更复杂的网络。
+
+**新观察必须是完整闭环评价，不能用旧 R 状态上的排序准确率替代。**
+
+沿用 DM 尚未生成或查看的世界 `109255000..109255031`。每世界运行七条独立的 H1200 轨迹，按世界索引轮换七个端点的执行顺序。每端点首请求真实冷启动，没有 warmup mission；所有 checkpoint 在评价前冻结。R1/R4 不共享跨 arm 缓存。
+
+三份学生都使用同一个旧 teacher bank，因此是三个优化随机性重复，**不是三次独立数据获取**。35 个旧世界、相邻决策的相关性，以及学生偏离 teacher 轨迹后的状态分布，是这次学习方案的主要科学限制。新 32 世界的完整任务恰好检验这种限制，不需要先做一个正面 pilot。
+
+不增加结果 audit mission。每条新轨迹都由完整 reader 检查，学生从冻结 checkpoint 重新加载后重算全部决策；初始 G 等价由源码、证书和离线检查覆盖。
+
+**主要数量如下；相较零 fit 面板，模型预测量完全相同。**
+
+| 项目 | 推荐完整研究 |
+|---|---:|
+| 新完整任务 | 224 |
+| 原生 task advances | 268,800 |
+| 定时决策 | 13,440 |
+| 新训练所需原生任务／teacher model 查询 | 0／0 |
+| 神经网络优化 fit／四常数标定 | 3／1 |
+| 优化更新总数 | 6,336 |
+| 训练上下文呈现／动作行 forward | 403,200／1,612,800 |
+| R model initial constructions | 3,840 |
+| R model prefix advances 上限 | 5,201,920 |
+| 物理／逻辑 cohort 上限 | 8,352／9,600 |
+| G 查询总数上限 | 271,488 |
+| G candidate-ticks 上限 | 246,912,000 |
+| 完整 reader 的实际任务 physical states | 269,024 |
+| reader 全部 actual/model physical states 上限 | 5,474,784 |
+
+R4 每任务的模型上限为 126,400，R1 为 36,160。t≥940 的空未来 tape 使 R4 只需要一个物理 cohort，再以四份逻辑权重参加平均；因此不能把 R4 的完整 CPU 简单除以四。
+
+相较 DM 的 96-mission 面板，新增的是 **153,600 原生 advances 和 6,696,960 G candidate-ticks**。昂贵的 R/model 部分没有增加。
+
+reader 应重建全部旧标签、检查输入文件身份并读取全部更新记录，验证三个初始和最终 checkpoint，以及全部新原生和模型记录。旧 teacher 数据以已通过完整 reader 的哈希绑定工件为依据，不再重复执行旧 4,407,360 个模型 prefix。新 reader 仍完整重算本次全部模型/G 工作。默认不重跑全部 optimizer；初始/最终 bank 检查和新冻结评价在 worker、reader 两侧都计算时，全部神经网络 forward 约 **1,759,680 动作行**，含上述训练 forward。
+
+完整通信逻辑账仍为每任务 11,195 bytes，本次共 2,507,680 bytes；这只是该接口的 payload 账，不代表无线能耗。
+
+**完整新增价格建议报 4–7 CPUh、0 GPUh，加 8–14 support-hours。**
+
+DM 的零 fit 面板为 3.5–5.5 CPUh、4–8 support-hours。额外机器费用较小有实际依据：旧 B05 三个 learned endpoint 的平均完整任务 CPU 分别为 2.872、2.887、2.847 秒，接近 G。这里只用这些已有测量支持量级预测，不当作新学生 benchmark。新增 96 个学生任务和 32 个 B 任务预计约十分之一 CPUh；训练、额外 reader、导入和工件处理另计，并为未知项保留余量。
+
+增加的主要价格是训练数据绑定、独立训练入口、checkpoint 协议、reader 和数值/RNG 复核，预计较窄方案多约 4–6 个支持小时。我不把这项人工与代理工作藏进“免费复用”。
+
+建议新研究采用 **10 CPUh／24 aggregate-operation-wall-hour** 上限，计入 worker、reader 和收费的失败科学调用；不继承旧 50 小时预算。完整运行预计约 5–9 个 operation-wall hours，支持工时另列。保留部分证据与失败状态，不通过自动追加世界、改变配方或替换失败 fit 补齐表面样本数。
+
+已有 B05 的约 **5.374 CPUh，加未完整计量的支持费用**，是此前取得 teacher 资产的实际价格。此次复用只有边际采集费用为零，不能把整个学习路径称为零成本数据获取。
+
+保留 bulk 预估 0.3–0.7 GiB，按 1 GiB 规划；source snapshot 按每个约 2 GiB、可能并存两个计价。实际 launch 沿用 8 GiB 内存、12 GiB 空闲磁盘 admission floor；节点可用性届时检查。旧 R 数据已经成为本研究的明确消费者，应保留一份必要证据。这里没有执行资源探测或新科学调用。
+
+**判读应同时保留获取增量、普通竞争和服务代价。**
+
+C 继续作为主服务成本；预先声明 completed-request 最大 residence \(T\) 和全部 50 用户最大 gap \(W\) 为关键次指标。比较包含：
+
+- 学生相对 G：是否取得初始策略之外的实际能力。
+- 学生相对 R1：是否具有竞争力的完整低计算控制。
+- 学生相对 B：上下文学习是否超过简单全局标定。
+- R1/R4 相对 G、相互之间，以及学生相对 R4：新世界中的能力与价格关系。
+
+同时报告完成数、未完成数及年龄、C 的面积与 terminal 项、全用户覆盖、飞行距离、目标变更、CPU/wall、deadline 和实际调用账。少完成请求而降低 completed-only \(T\)，不能算保留了完整服务能力；无完成请求时 \(T\) 缺失，不能填零。
+
+保留全部 32 个配对值。世界配对区间条件于这三个已拟合模型；另外列三个 fit 的平均差值与随机性范围。不能把 96 个学生世界结果当成 96 个独立 fit，也不能把三份优化重复当成三份 teacher 数据重复。这里是预先定义的新探索比较，不声称多重性控制的确认研究。R1−R4 或学生−R4 区间跨零不建立等价，不从旧观测反推一个便利的非劣界。
+
+这个完整观察能改变实际选择：
+
+- **R1 在新世界保持有用的服务尾部且明显便宜**：保留并发展 R1；学生失败也不妨碍这个正面结果。
+- **学生取得超过 G/B 的服务增量，并以较低 CPU 接近有用的 R 能力**：得到条件于本任务、数据和模型的可用学习资产。任何 C、完成率、飞行或覆盖牺牲仍进入使用判断。
+- **B 已达到相同用途**：优先保留简单标定，不声称神经网络复杂性必要。
+- **三个学生均失败而 R 仍有用**：关闭这一个固定数据、固定目标、固定配方的摊销尝试；继续保留 R 能力。结果不自动授权更多 epoch、DAgger 或 DDQN 修补。
+- **R4 尾部在新世界未重现**：收窄原能力的泛化判断，同时保留 B05 的正面与负面原记录。
+
+仅跑 R1 的方案仍然合理：它实现简单、支持费用较低。我的优先级不同，是因为现在有一批已付费、完整保存、接口可直接接入的四动作 teacher 数据；在同一次昂贵 R/reader 比较中，增加有限的支持工作，便能同时比较“减少在线采样”和“离线学习摊销”两条完整实现路径。它不依赖 R1 先胜或先败，也不会把正面 R 能力悬置为失败归因的附属品。若 Root 无法承担这项明确的支持费用增量，我的第二选择是 DM 的完整零 fit 面板；目前证据不支持直接停掉请求排程问题。
+```
+
+<a id="b06-seven-endpoint-source-contract"></a>
+
+#### 2026-10-03 — Revised complete seven-endpoint contract for one selection review
+
+**Actual candidate and scope.** I recommend comparing two constructive ways
+to reduce the complete cost of the retained R capability: less online
+sampling and finite offline amortization. The actual proposed purchase is
+G/R4/R1/B/S0/S1/S2 on32 new worlds, preceded by one deterministic four-
+constant fit and three fixed neural fits on an already acquired bank.
+This supersedes the three-arm *proposed purchase/counts/price*, retaining
+its exact task, G/R4/R1 program, sampling, information, delayed activation,
+deadline, output and no-extra-audit definitions. It does not supersede B05
+or select an effect. Root asked for this source-only comparison after
+reading the coauthor's complete answer. No production code, new bank,
+network/optimizer call, fit, native/model/G/R evaluation or resource probe
+has been performed. All scientific computation below remains prospective.
+
+The new prediction is that fixed full-menu relative-cost supervision can
+turn some of R4's useful behavior into low-cost closed-loop control. The
+reason for this investment is the available verified four-action data and
+R's positive package capability, not an identified DDQN mechanism. A
+55,553-parameter network may fail to fit the useful ranking, may overfit
+35 correlated worlds, or may produce harmful decisions when its own
+trajectory leaves R's state distribution. R1 or a simple global correction
+may already capture the useful tradeoff. Those are the intended competing
+answers, not contingencies that must be eliminated before buying the study.
+
+**Reused teacher inputs and exposure.** Canonical source is
+`runs/uav_decision_generalization/b05_request_a01/`, with original manifest
+SHA256 `3c3c7c84af0c0b55a4669e71bbad361d5b4e391e26bd237ee59a3f2aea639026`,
+config `e675836d1775dcbb414395109ca062b8a3bb8341d196a39eab80f87db643e668`
+and summary `d06794e1287e7fca7fd815ec77a4a1e17f6a133f87c42f023ccf50ca42605edd`.
+The completed original reader summary at `b05_request_read_a02/summary.json`
+has SHA256 `8a0a24d9ec71fcfbd892e46729b61e98585a2fbba57ca0a5a4456610f9776612`.
+Its certification remains scoped to its original source and records, not
+to this unimplemented new learner. Before a future use, bind these originals
+and the exact required file identities from their manifest; do not retype
+truncated digests or infer a whole-bank certificate from only a path.
+
+The bank contains exactly the old32 `main/R` trajectories with world IDs
+109253000..109253031 and `audit0/R`, `audit1/R`, `audit2/R` at109253900..902.
+Order contexts by ascending numeric world, then decision0..59; action rows
+are0..3 within each context. All2,100 contexts/8,400 action rows are used,
+including terminal-unused decisions, tied scores and physically aliased
+choices. There is no outcome-based pruning or weighting. Every world has60
+contexts, so uniform-context loss gives equal total weight to each of
+these35 worlds, without making its60 states independent observations.
+All35 worlds, including the former audit/main panel, are now declared
+training/development exposure for this successor. They are not its holdout.
+The coauthor's observations of360 R-versus-G changes,388 all-equal menus
+and approximately77% KEEP explain why unweighted action accuracy is weak;
+they do not establish learnability or determine a filter.
+
+For each context read its saved float32 `(4,303)` features, canonical
+float64 four G costs from the report, and the original four ordered cohort
+cost vectors. Reconstruct Rbar with the exact worker operation
+`np.mean(np.stack([costs_k for k in (0,1,2,3)]),axis=0,dtype=np.float64)`.
+Keep every duplicate cohort as one of those four samples. Require all four
+committed cohorts, matching selected complete publications, action IDs,
+reuse aliases and saved costs. Read/check the2,100 saved rollout files'
+identities and compact score/marker/alias fields against the original
+manifest and checked mission records. Do not recompute their native model
+prefixes. **R's stored `total_q` is G/1200, not Rbar, and is not a label.**
+Old actual C, realized future arrivals, request ages and DDQN outputs do
+not enter labels or features. The original three TD checkpoints remain
+adverse evidence only; no weights or optimizer state are inherited.
+
+Old inputs are consumed in place, with one canonical copy. A small derived
+bank may retain exactly the2,100 feature/G/label rows, ordered source keys
+and their identities for the new fit; it is not a copy of the old trajectories
+or model evidence. The new worker and reader each reconstruct the label
+arithmetic from the bound originals; neither acquires a fresh teacher query.
+The original full physical reader is reused as evidence for the old teacher
+records. Rechecking hashes/labels is charged new support/verification, not
+a second4,407,360-step historical model reconstruction.
+
+**Fixed representation and three supervised fits.** Reuse only the B05
+`ResidualScorer` architecture/interface:303→128 ReLU→128 ReLU→1,55,553
+CPU float32 parameters, with exact zero output-head weight/bias. Existing
+feature slices/scales are unchanged: public user geometry/rates, positions,
+ACK, counts/head progress, pair membership, active and candidate slots,
+action ID, t/1200 and all four G/1200 values. No feature normalization fit,
+age, hidden state, future sample or teacher score is added at deployment.
+Retain raw G in float64; the feature copy of G is deliberately float32 as
+before. An all-zero residual represents G, but equal mathematical argmins
+alone are not a deadline execution certificate.
+
+Initialize the three new scorers at109255101/109255102/109255103 using the
+existing forked CPU Torch RNG and default Linear initialization, then zero
+their final heads. Seeds refer to optimization replicates, not new bank
+draws. Each fit owns one PCG64 shuffle generator from
+`SeedSequence((109259999,51,fit_index))`. At each of64 epochs draw a fresh
+permutation of all2,100 context indices without replacement, then process
+32 batches of64 and the final batch of52 in order; do not drop/pad/resample
+the last batch. No evaluation outcome changes a permutation or epoch count.
+Each fit therefore makes2,112 updates; total6,336, with403,200 context
+presentations and1,612,800 neural action-row forward evaluations. There is
+no replay buffer, exploration, target network, bootstrap or online update.
+
+For each context let g be canonical argmin of unscaled float64 G (action ID
+breaks a G tie). Let `q = G/1200 + float64(f_theta(x))`. Use precisely the
+float64 scalar batch loss
+
+    mean_over_contexts_and_all4actions(
+      ((q[a]-q[g]) - (Rbar[a]-Rbar[g])/1200)**2 )
+
+including the anchor's zero row. Compose q before its subtraction in this
+fixed order, preserving inference arithmetic. Features, network parameters
+and network outputs remain float32; conversion and target/loss arithmetic
+are float64, with gradients propagated through the cast to float32
+parameters. No cast of raw G to float32, detached learned anchor, clipping
+of costs/residuals, label smoothing, sample weighting or auxiliary loss.
+The per-batch mean divides by actual `4*batch_size`, including208 in the
+last batch. Adam is lr3e-4, betas(.9,.999), eps1e-8, weight_decay0,
+amsgradFalse, foreachFalse, fusedFalse, maximizeFalse; clip the total
+parameter-gradient L2 norm at10 before each optimizer step. Check finite
+loss, every gradient, norm, optimizer state and parameters. No scheduler.
+Use the same configured CPU stack, Torch2.7.0+cpu, four Torch intra-op
+threads/one inter-op thread and deterministic algorithms; actual whole-
+process CPU includes its native thread teams. No CUDA or mixed precision.
+
+This loss constrains relative values only. A common offset is unidentified;
+nonnegative absolute outputs are not an admission/adoption rule and a
+negative offset alone is not an explanation of ranking. The teacher itself
+is the finite four-sample native-prefix/G-tail program, not true optimal Q,
+an exact Monte Carlo return or a guarantee of complete-service improvement.
+
+**One competent deterministic four-constant comparator.** I make one
+specific correction to the coauthor proposal for independent review. Its
+closed-form centered mean is optimal for a centered all-action residual
+criterion, but generally not for the actual G-anchored criterion when g(s)
+varies with state. To avoid mistaking a weak global fit for a need for
+contextual learning, define B as the exact finite least-squares optimum
+within four action constants for that same relative-cost loss. This is one
+four-constant deterministic fit (three identifiable contrasts), not another
+NN seed, grid, fifth baseline or an extra collected label.
+
+Use raw-cost units `y_sa = (Rbar_a-Rbar_g) - (G_a-G_g)` and the row
+`A_sa = onehot(a)-onehot(g)`, in the fixed context/action order above.
+Starting from zero float64 H[4,4] and z[4], accumulate
+`H += np.outer(A,A)` and `z += A*y` for each context/action in that order;
+solve the fixed5×5
+bordered system `[[H,ones],[ones.T,0]] [b,lambda] = [z,0]` by NumPy1.26.3
+`linalg.solve`. No regularization, optimizer, stopping tolerance or tuned
+hyperparameter; `sum b=0` fixes the irrelevant common offset. All four
+actions occur in every context's contrast menu, so the contrast graph is
+connected and H has only the one constant null direction. A singular or
+nonfinite result is an implementation/input failure, not permission to use
+a pseudoinverse, alternate calibration or new fit. Save H,z,b and the
+unscaled normal-equation residual. Do not also fit the original centered-
+mean B or select between them. This correction changes neither four fitted
+constants nor the seven-arm/teacher/model counts.
+
+B deploys by `(G_a+b_a, G_a, action_ID)` in float64. It retains G's complete
+public information and timed G/features work but has no neural forward.
+The network can represent action constants via its supplied action ID;
+beating B would support this finite contextual package over a competent
+constant correction, without proving that a neural architecture is necessary
+among all possible ordinary controllers. B's more stringent comparison may
+also remove an apparent learning increment; that is valuable information.
+The original coauthor formula remains above as an unexecuted proposal,
+and the one scientific review is asked to judge this explicit difference.
+
+**Endpoints, cold deployment and zero added audit missions.** Fit B once,
+then S0/S1/S2 sequentially in seed order using the same bank. Save the exact
+initial and final scorer state dictionaries plus final optimizer/RNG state,
+fit/config/source identity and parameter movement. Freeze every final before
+any new world. No best-fit/checkpoint selection. Evaluate new worlds
+109255000..109255031, ascending, with `[G,R4,R1,B,S0,S1,S2]` rotated left
+by world-index mod7. Every endpoint runs its own complete H1200 trajectory:
+224 missions/268,800 actual advances/13,440 decisions.0 extra native audit
+missions;0 new teacher collection missions. A fresh episode resets task
+state/history; persistent endpoints retain only fixed program/weights and
+their own operational state, not another arm's trajectory or live task.
+
+Each arm has one freshly spawned persistent deployment endpoint, cold on
+that arm's first request (and on any actual deadline-triggered restart),
+not newly cold for each mission. Each student loads its final checkpoint
+at its first request inside the20s deadline, with file identity
+checked before use. Do not deploy the still-warm training object. G/R4/R1/B
+use their genuine first-request paths, without unnecessary eager Torch imports
+or neural construction in an ordinary endpoint. Process-cold does not mean
+uncached operating-system disk pages. Later ordinary requests can retain
+their fixed loaded endpoint; cold restarts following deadline expiry keep
+the original operational semantics and cost. Use the same delayed command
+activation and last eligible publication rule as the independent contract.
+
+Students score all four actions by `(G/1200+float64(f), unscaled_G, action_ID)`
+and otherwise KEEP if no complete result is received by the deadline, exactly
+as the original learned endpoint. Do not add an early G fallback publication
+for students/B that G's original result program did not have. R1/R4 keep
+their explicit G publication. Deadline effects remain part of the compared
+complete programs. Learned initialization is *defined* as canonical G;
+three duplicate initial native evaluations are not bought. Its exact zero-
+head certificate and bank forwards are checked separately offline. Final
+checkpoint loading, score composition and actual command selection are
+checked over every student deployment record by the complete reader.
+
+**Training evidence, full reading and neural counts.** At initialization
+and the fixed final endpoint, evaluate all2,100 bank contexts in ascending
+order, batches64/last52, without gradients. Save all four residual and
+composed scores, relative-loss values, selected action, teacher-score regret,
+ties and margins. Initial scores must have exactly zero residual, canonical
+G action and a matching zero-head parameter certificate. Do not use an
+approximate initial forward as a different deployment policy. Report
+complete-menu regret `Rbar[selected]-min(Rbar)`, relative-cost error and
+the selection/tie tables; keep action accuracy as a limited diagnostic.
+These are performance on the exposed teacher-state distribution, not new
+native consequences or fresh generalization. Newly visited student states
+do not receive extra R queries for a same-state teacher-regret diagnostic.
+
+Retain each of6,336 update records: attempted/completed counters, fit/epoch/
+batch, ordered context indices, actual batch size, pre-update relative loss,
+unclipped/clipped norm, parameter/optimizer state identities and CPU/wall.
+Save initial/final parameters and complete final optimizer state with step
+counts; intermediate update hashes/curves are compact evidence, not an
+optimizer replay certificate. Epoch curves are context-weighted summaries
+of the33 online minibatch losses measured at changing parameters. They are
+not64 separately recomputed fixed-endpoint evaluations; do not add those
+extra forwards or claim their stronger meaning. No intermediate checkpoint
+selection or gradient reconstruction is part of this purchase.
+
+The independent reader rederives all teacher labels/anchors/features from
+the saved public rows and cached G, B's system/solution, shuffle schedules,
+batch counts/loss arithmetic available in logs, endpoint movement, zero-head
+and optimizer-step identities. It loads all six initial/final checkpoints
+and recomputes their full-bank forwards at the same batch shape/order; it
+recomputes every final student deployment forward at the original four-row
+decision shape. Same bound CPU stack/dtype/batching and source require exact
+saved residual/composed-score/action agreement, with finiteness and the
+published tie rule. B's independently rebuilt fixed-order H,z/solve and
+deployment scores likewise require agreement. It does not execute6,336
+additional optimizer steps, certify every historical gradient or infer an
+update from a changed parameter hash alone. A consequential discrepancy is
+a technical reading failure, not a tolerance tuned after seeing actions.
+
+All new actual/model physics, G, queue and deadline work remains fully
+read as in the three-arm contract, now across224 missions. No old teacher
+physics is rerun; its bound completed reader is explicitly reused. Required
+forward counts (attempts and completed values separately, including any
+canceled prefix) are fixed as follows:
+
+| Neural work | Worker action rows | Reader action rows |
+| --- | ---: | ---: |
+| Three fits,64 full epochs | 1,612,800 | 0 optimizer replay |
+| Three initial + three final, full old bank | 50,400 | 50,400 |
+| Three final students,32 new missions each | 23,040 | 23,040 |
+| Total | 1,686,240 | 73,440 |
+
+Whole-purchase neural forward ceiling is1,759,680 action rows, plus the
+training backward/update work already counted. Each fit has2,112 backward/
+optimizer steps; no second stochastic teacher-data acquisition is hidden in
+that count. Count scorer construction/loading attempts and their cost,
+including deployments/restarts, without calling them new optimization fits.
+The one B solution consumes the same8,400 action labels and saves four
+constants, with0 neural evaluations. No extra neural health/trust panel.
+The reader repeats B's numerical solution once as paid verification: two
+system solves in the full chain, one fitted asset, not two independent fits.
+
+**Revised dominant work and artifacts.** New G queries total271,488 (13,440
+actual reports plus258,048 R-internal), candidate values1,085,952,
+candidate-ticks246,912,000 and cluster recurrences987,648,000. Those G
+counts apply separately to worker and full reader. R work remains3,840
+model initial constructions, at most5,201,920 native prefix advances,
+8,352 physical cohorts/33,408 clones and9,600 logical cohorts. Actual
+reader physical states increase to269,024; with model initials/prefixes the
+complete ceiling is5,474,784. R future draws remain222,720 uniforms;224
+actual arrival tapes use43,008. Logical task bytes total2,507,680. The
+extension therefore adds153,600 actual advances and6,696,960 G candidate-
+ticks to the three-arm candidate, not more R model prediction. Preserve
+every counter, interrupted prefix, cold load and failed attempt; a lower
+realized count caused by failure is not a completed cheaper program.
+
+New files would be solely in this direction's future
+`experiments/candidates/uav_decision_generalization/b06_request_amortization/`,
+matching tests, run outputs and scratch, with this notebook/owned standing.
+The future entry would buy one worker (data binding/B/three fits/all224
+missions) and its complete reader; B05 modules/evidence stay frozen inputs.
+This names implementation ownership, not a new implementation authorization.
+Exact schema, published input manifest and executable safeguards would be
+reviewed under the existing engineering method only if Root selects it.
+Do not create a separate direction/registry or make A/C/D consumers of it.
+
+**Costs: asset acquisition, use and research are separate.** A fresh read of
+the35 original R mission metadata (no scientific execution) measures
+7,026.128558 CPU-s =1.951702 CPUh and7,657.956077 summed mission-wall-s
+=2.127210h for those missions. They include42,000 actual native advances,
+4,407,360 model prefix advances and2,100 four-cohort decisions, plus the
+recorded constructor/decision/native/trace-compression costs. The original
+three audit R missions cost232.847532/228.101075/267.837171 CPU-s; main-only
+196.79s is not a universal per-world constant. This per-mission bill excludes
+final metadata writes and some endpoint/setup/close/hash support. Their
+attribution to teacher acquisition is unknown, not zero. The full old reader
+also verified other arms/training; its5,653.181264 CPU-s cannot all be assigned
+to these35 teacher trajectories. No defensible separate old teacher-reader
+CPU measurement was recorded.
+
+The entire B05 research account remains approximately5.374 CPUh plus
+incompletely metered support, including unsuccessful TD learning, all
+evaluation, complete reading and the retained first-reader error. It is
+historical study cost, **not** the intrinsic price of obtaining a35-trajectory
+teacher bank. Reuse here has0 marginal task/model *collection* calls, not
+free data, free validation or zero end-to-end acquisition cost. Report the
+measured old teacher mission charge, its attribution limits, old whole-study
+bill, new B/fit acquisition, new deployment, new verification and support
+as separate scopes without adding overlapping components twice.
+
+Forecast the proposed **whole new purchase at4–7 CPUh,0 GPUh and5–9 summed
+operation-wall hours, plus8–14 support-hours**. The old R main/audit range
+supports roughly2.2–3.3 CPUh for the G/R4/R1 base worker; the additional32
+B and96 student missions should be of order.1 CPUh, using old learned
+mission means2.85–2.89s only as a price analogy, not a new benchmark.
+Bank binding, one four-constant fit, three fixed neural fits/checkpoints
+and endpoint-bank readings are forecast.05–.30 CPUh. New full-reader RF/G
+counts are about84.7%/84.5% of the old reader, giving a proportional center
+near1.33 CPUh;1.2–1.8h is a planning range, with cold/import/hash/publication
+and uncertain tails retained in the4–7h whole-purchase range. Reader and
+training costs are not omitted to quote a cheap online policy. The additional
+engineering/numerical/RNG/data-binding work is the main uncertain increment
+over the three-arm4–8-support-hour proposal; none has been purchased by the
+mere existence of this estimate. Current source/arithmetic/advice support is
+unmetered and nonzero, with0 scientific effects.
+
+For every fixed student, show complete-task per-use CPU and service against
+**each of G, B, R1 and R4**. Define a CPU crossing only when observed
+`c_comparator - c_student > 0`; no crossing otherwise. Keep the numerator's
+scope explicit: marginal reuse acquisition (bank handling plus that one
+fit/checkpoint construction), a separately shown historical teacher-
+acquisition scenario using at least the measured1.951702h plus its unknown
+extras, and the whole-study research bill counted once. For S−B incremental
+acquisition, show B's own fitting cost and shared bank cost so common costs
+are not charged twice. If using acquisition differences, state
+`max(0,A_student-A_comparator)/(c_comparator-c_student)` and preserve any
+unknown additive cost. Do not multiply a shared bank by three or quote the
+three-replicate research purchase as a mandatory deployment cost for one
+trained asset. Every crossing sits beside C/T/W/unfinished/travel/coverage;
+no CPU crossing establishes value equivalence or assumes a deployment volume.
+
+**Proposed hard bounds, synthetic engineering and failure finalization.**
+The proposed new overall ceiling is10 CPUh/24 summed-operation-wall hours,
+not inherited B05 credit. Count all new charged computation, failed attempts,
+fit/evaluation/reader calls, support checks, setup and collection where
+measured. Reserve.5 CPUh and1 wall hour *inside* those ceilings for stopping,
+reaping, flushing/hash/partial collection and failure publication; stop new
+scientific effects at9.5 cumulative CPUh or23 operation-wall hours. Those
+reserves cannot buy another fit or make an incomplete study complete. Pure
+engineering checks are forecast at most.5 CPUh within the same bill and
+must be synthetic/mocked/static: fabricated small feature/score arrays,
+shuffle-address/roundtrip/schema/ceiling/deadline protocol tests, fake scorers,
+and saved-data arithmetic. They instantiate no real scorer/optimizer/host,
+evaluate no G/R/native physics, generate no new task outcome, and cannot
+become an unpriced health pilot. If a necessary effectful check is identified,
+its actual calls/cost would change the proposed scope before purchase.
+
+Stop at the first new formal admission/worker/reader failure, including a
+required result-stage numerical check, preserve all paid prefix/failed
+records, and do not restart,
+replace a fit/world, add epochs or silently repair into another attempt.
+Normal declared deadline KEEP/G fallback remains a valid program outcome
+and is still fully read. Interrupted update/scorer counters remain attempts;
+only completed updates/forwards count as completed work. Source/synthetic
+implementation defects may be corrected and checked within the declared
+pre-execution engineering scope; that does not authorize any effect retry.
+Ordinary native fit/reader collection after an eventual accepted purchase
+requires no per-fit or source-acceptance Root ACK.
+
+Declare an **8 GiB cap on newly allocated disk for this operation chain**,
+with a7 GiB normal-work ceiling and1 GiB failure-finalization reserve inside
+that cap. Measure allocated bytes over the disjoint new B06 worker/reader
+outputs, their exact launcher-managed source snapshots, B06 scratch and
+owned test scratch; count each physical inode once if linked. This includes
+source snapshots and required unique bulk, not just logs/free space. Plan
+up to4 GiB for two2-GiB source snapshots,1 GiB new unique evidence (.3–.7
+GiB forecast),1 GiB active scratch and.5 GiB test/metadata/measurement margin;
+these are components of the aggregate ceiling, not independent allowances.
+Prefer retiring a collected, unconsumed worker snapshot before creating a
+reader snapshot, but do not delete a live consumer or necessary evidence to
+fit a forecast. At the normal limit stop new science and retain/finalize;
+the reserve cannot be used for new worlds/queries. A cap failure is an
+incomplete technical purchase, not a request to pack, back up or move bulk.
+The existing canonical B05 evidence is inherited retained usage, reported
+separately and consumed in place; it is not newly copied or silently charged
+as new allocation. Shared Git objects/other directions' outputs are outside
+these owned targets and remain untouched. Source preparation creates no
+new snapshot now.
+
+An actual launch would still require fresh configured local-node admission,
+the unchanged8-GiB effective memory/12-GiB free-disk floors and preserved
+neighbor operations. Free-disk floor is not the operation's disk cap. Actual
+RSS is recorded with process scope; runtime/user/system/child CPU and sums of
+operation walls are not confused with support elapsed time or simultaneous
+host occupancy. A full filesystem or failed observation never licenses a
+duplicate worker. Nothing in this source-only task surveys resources or
+claims that future admission has already passed.
+
+**Joint reading and investment choices.** Retain the original prospectively
+named C, completed-only T, all-user W, unfinished/censored, travel, coverage,
+deadline and cost definitions. Read all seven endpoints'32-world vectors;
+compare every S against G/B/R1/R4, alongside R4−G/R1−G/R1−R4 and B−G.
+Each world's seven records share exogenous geometry/actual arrivals, while
+R1/R4 alone share tape0 as already specified. Paired world intervals are
+conditional on these fixed student instances and this one teacher bank.
+Also show all three fit-mean contrasts and a descriptive df2 interval/range
+for optimization variation conditional on that same bank/panel; optionally
+the shared-world mean over all three students retains their covariance.
+There are three optimization replicates,0 new independent data acquisitions,
+and no96-independent-fit interpretation. Tail missingness is explicit;
+all new exploratory multiple metrics remain descriptive, without equivalence
+claims or a margin fitted to B05. No best student is selected for the headline.
+
+For B and each student retain the stages from score computation through
+eligible message, requested/selected command, target alias, delayed activation
+and distinct physical action. Compare with cached same-report G and its motion
+at the observed activation positions without buying a counterfactual suffix.
+If a gain arises while learned scores never control an effective action,
+preserve that complete-program gain but do not call it use of acquired
+preferences. Deadline fallback, action alias and terminal-unused commands
+are distinguishable outcomes, not missing-data substitutions.
+
+First compare each student's initial versus final exposed-bank relative
+error/regret and parameter movement, then its actual full-task behavior
+versus the ordinary programs. Lower bank loss with worse new service is
+an acquired surrogate approximation with adverse complete use, not evidence
+that labels were absent or that more epochs must fix it. A useful new native
+gain against G/B with a competitive cost/service frontier versus R1/R4 is
+a conditional learning capability even without identifying a repaired
+component. If B captures the use, retain B without inventing neural necessity.
+If R1 captures it, retain R1 regardless of student outcomes. If R4 alone
+retains useful tails, preserve it with its actual costs/deadline feasibility.
+If R4's tails do not recur, narrow their generalization. If no useful complete
+native capability is found, close this fixed-data supervised package, not
+all learning. Poor exposed-bank fitting alone cannot reject a student that
+produces a useful complete native gain: the approximate teacher labels are
+not the scientific objective. Such a result limits a successful-teacher-
+amortization explanation while preserving the actual learned package and
+its costs/adverses. No branch adds DAgger, teacher queries, epochs, sample rates
+or a new architecture automatically. Missing implementation/reader evidence
+remains technical incompleteness, not a learning negative.
+
+My present choice is the complete seven-endpoint extension if its8–14
+support-hour price is worth purchasing. It adds a direct acquisition question
+to almost the same expensive R/full-reader backbone and uses a real existing
+capability rather than requiring R1 to win first. The original complete
+three-arm study remains the useful lower-support alternative; it addresses
+online sampling but leaves this finite amortization opportunity unobserved.
+Stopping is also feasible and preserves G/R; I favor the finite extension
+because verified aligned teacher inputs make its marginal scientific question
+concrete, not because the old budget or a DM slot must be used. Root's A/C/D
+studies are real competing investments, not controls or evidence for this
+task. Their outcomes are not pooled here. The source contract and original
+coauthor dissent now go together to the existing independent critic for
+one selection-difference review; Root chooses the actual next purchase.
+
+
+<a id="b06-independent-selection-review"></a>
+
+#### 2026-10-03 — Complete original independent selection-difference review
+
+The same registered ResearchCritic returned this one consequential review
+of the actual seven-endpoint contract, using its separate B05 context. It
+read original evidence before the coauthor/DM explanation, independently
+reconstructed all2,100 teacher menus and1,391 aliases, and executed no
+new scientific calls or coefficient fit. This is the only selection review
+of the successor; the earlier three-arm draft did not receive a separate
+pass. Its cold-endpoint clarification and bank-fit rejection correction
+were accepted during this review and appear in the final source contract.
+No additional Pro round has a distinct unresolved question here.
+
+Complete original answer:9,788 characters /9,830 UTF-8 bytes, SHA256
+`7d70503fbcf6ff41aadc289e9c4080fbf540c80710a29b15651106c0dae1e4c6`.
+
+```text
+**Recommend the corrected seven-endpoint exploration over the three-arm alternative.** It adds a concrete learning question to almost the same expensive rollout-and-reader comparison. The additional **8–14 support-hour commitment** is material; the proposal is worthwhile at that declared price, rather than because the teacher data are already paid for.
+
+This review reuses my independent B05 analysis. I reconstructed the teacher evidence before reading the coauthor’s explanation and final contract. No new policy, model, neural, optimizer, coefficient-fitting or native calls were made.
+
+The evidence supports the proposed starting point. I checked all 35 original R trajectories and all 2,100 associated rollout files against their manifest, reconstructed the four-cohort means, and verified the 1,391 reuse aliases and their multiplicities. The means reproduce every saved R choice. The warning about `total_q` is consequential: it contains G/1200, not the teacher scores.
+
+There is usable decision information, with substantial limitations:
+
+- R differs from same-state G in 360/2,100 contexts. G already matches approximately 83% of teacher choices.
+- There are 388 fully tied menus and 593 ties between the two lowest teacher scores. Accuracy alone can therefore flatter an ineffective student.
+- G’s mean regret against these saved teacher menus is 19.22 predicted cost ticks. That is a model-score difference, not demonstrated native improvement per decision.
+- The bank comprises **35 correlated trajectories**, rather than 2,100 independent environments or three independent teacher acquisitions.
+
+These observations justify a bounded attempt to learn the additional preferences. They do not predict that fitting them will preserve useful behavior after a student’s trajectory departs from the teacher’s.
+
+**The corrected constant comparator is appropriate.** For the declared anchored loss, each design row is \(A=e_a-e_g\), so the normal equations use \(H=\sum AA^\top\) and \(z=\sum Ay\). The bordered solve with \(\sum b=0\) removes the irrelevant common offset. Every context supplies all four actions, making the contrast space connected and the solution identifiable.
+
+The coauthor’s centered-mean formula generally minimizes a different criterion. That difference matters here because G anchors are highly uneven: `[1694,159,146,101]`. Giving B the optimum for the same anchored objective prevents a weak calibration fit from manufacturing an apparent need for contextual learning. One deterministic fit is sufficient for this fixed bank; three identical solves would not provide replication.
+
+B is a competent **global action-correction comparator**. Together with G, R1 and R4, it gives the proposed acquisition claim meaningful ordinary alternatives. Beating B would not establish that neural networks are necessary among all possible state-dependent controllers; the contract appropriately avoids that claim.
+
+The supervised construction is scientifically distinct from repeating DDQN. It uses fixed, complete-menu targets, includes the learned anchor in the gradient, and removes bootstrapping and changing target networks. It tests whether this particular supervision can acquire useful control. It does not identify or repair the cause of B05’s adverse learning.
+
+The new criterion identifies relative values only. Absolute negative outputs or a common offset consequently cannot be imported from the B05 diagnosis as a rejection rule. Conversely, low relative error remains insufficient: targets are finite sampled rollout predictions with an approximate G tail, and the student still runs G online. This is amortization of the additional R computation, not elimination of planning.
+
+**The strongest consequential risk is the gap between fitting teacher menus and controlling new trajectories.** MSE may improve chiefly on large, nonwinning action differences while small decision margins remain inaccurate. Approximate labels, only 35 training worlds, and subsequent state-distribution changes can each undermine complete use. The proposed fresh closed-loop evaluation measures their combined consequence directly. A positive pilot, extra teacher collection, or successful R1 result is unnecessary beforehand.
+
+I requested one substantive reading correction, which the DM accepted: **poor exposed-bank fit must not reject a student that produces useful complete native results.** Such an outcome would limit the explanation that it successfully approximated the teacher, while preserving the acquired package capability. The revised stopping branch now concerns absence of useful complete native capability. This correction adds no effects or cost.
+
+The decision and numerical schedules are sufficiently specified for selection:
+
+- R1 uses exactly tape0; R4 retains ordered cohorts, exact reuse and duplicate weights. Neither receives actual future arrivals.
+- Every program retains the same 20-tick activation delay and 20-second deadline. Faster computation supplies no earlier physical intervention.
+- There is one persistent deployment endpoint per arm, genuinely cold on its first request and on actual deadline restarts—not a cold-per-mission change.
+- All three students have fixed initialization/shuffle streams, 64 epochs, 33 batches per epoch, and fixed final endpoints.
+- Initial/final bank checks and deployment checks preserve their respective batch shapes. The proposed reader does not claim to replay historical gradients or optimizer updates.
+
+The reading must still distinguish completed score evaluation, selected command, useful activation and fallback. The stored scores, cached G values, timing and native commands support that distinction without additional queries. A benefit produced through nonactivation or fallback would remain a program outcome, but would not establish use of the learned preferences.
+
+I independently checked the principal arithmetic:
+
+| Item | Three-arm proposal | Seven-endpoint proposal |
+|---|---:|---:|
+| New complete missions | 96 | 224 |
+| Native advances | 115,200 | 268,800 |
+| Rollout-model prefix ceiling | 5,201,920 | 5,201,920 |
+| Neural optimization fits | 0 | 3 |
+| Deterministic constant fits | 0 | 1 |
+| Forecast CPU-hours | 3.5–5.5 | 4–7 |
+| Forecast support-hours | 4–8 | 8–14 |
+
+The extension’s 6,336 updates, 403,200 context presentations, **1,759,680 total neural forward rows**, 271,488 G queries, 246,912,000 G candidate-ticks and 5,474,784 reader physical-state ceiling agree with the declared schedules. Retaining complete old-teacher identity/label checks while reusing its completed physical verification avoids an unnecessary historical rollout reconstruction.
+
+The cost separation is also sound. The 35 teacher missions consumed **7,026.128558 CPU-seconds** and **7,657.956077 summed mission-wall seconds**. Outer setup/support and teacher-only reader attribution remain unknown. The historical approximately 5.374 CPU-hour B05 research bill is a different scope. Neither should disappear behind “zero marginal collection,” nor should overlapping components be added twice.
+
+The 10 CPU-hour/24 operation-wall-hour ceiling, internal finalization reserves and aggregate 8 GiB allocation cap make the proposed purchase bounded. They are not evidence that an unimplemented study will finish within them. New training/runtime costs, exact numerical reproduction and actual node admission remain unverified. The forecasts are adequately grounded for selection without a hidden health pilot.
+
+The complete observation can change real choices:
+
+- **Students gain useful native capability beyond G/B and offer a competitive service–compute tradeoff against R1/R4:** retain conditional learned assets, including all completion, flight and coverage costs. This supports finite acquisition on one bank, not a general TD repair or independent data-acquisition replication.
+- **B supplies the useful behavior:** retain the simpler correction; neural complexity has not earned an incremental claim. A nonsignificant S−B difference alone does not establish equivalence.
+- **R1 supplies the useful behavior:** retain its ordinary computation improvement regardless of student outcomes.
+- **Bank approximation improves but native use worsens:** record successful surrogate fitting with adverse control. That does not identify distribution shift as the unique cause or authorize more epochs.
+- **R4’s tails fail to recur:** narrow their generalization while preserving B05’s original positive and adverse evidence. A separately useful student result would still stand.
+- **No student has useful complete capability:** close this fixed-bank recipe without automatic additional labels, DAgger, seeds or architecture changes.
+
+The seven-endpoint design is therefore the smallest proposed complete comparison that answers both the online-sampling and finite-acquisition questions while retaining the important ordinary alternatives. The three-arm version remains the reasonable lower-support choice if Root declines that additional work. I do not prefer stopping on the scientific evidence now available. I have not independently ranked this purchase against A/C/D’s separate research cases.
+
+Metered saved-data, hashing and static arithmetic for this review totaled approximately **8.94 CPU-seconds**; other support remains unmetered. The recommendation applies to the [corrected source contract](/home/fires/hmasd-wsl/docs/research/candidates/uav_decision_generalization/NOTES.md:8160), with implementation and execution still unperformed.
+
+**MATERIAL_DISSENT: no — the verified teacher bank, corrected competent comparator and complete fresh evaluation support the seven-endpoint investment at its stated price. The consequential bank-fit rejection rule was corrected and accepted within this review.**
+```
+
+<a id="b06-selection-disposition"></a>
+
+#### 2026-10-03 — DM disposition and source-only return to Root
+
+I have read the full original coauthor answer and this full independent
+review. I adopt the recommendation for the corrected seven-endpoint
+exploration over the narrower three-arm proposal, at its stated full price.
+The reviewer reports MATERIAL_DISSENT:no after the accepted correction;
+I preserve its qualification that it has not independently ranked A/C/D.
+This is a recommendation for Root's cross-question allocation, not an
+effect purchase, implementation acceptance or positive learning result.
+
+The verified bank changes what is feasible:35 already acquired R trajectories
+contain all2,100 complete four-action menus with their alias weights and
+lawful303-feature interface. The main remaining learning uncertainty is
+useful finite fitting and closed-loop behavior on new states, rather than
+missing teacher acquisition. It does not identify why DDQN failed. The
+reviewer's19.22-tick G regret is against saved model menus, not demonstrated
+native per-decision headroom;83% action agreement and many ties prevent an
+accuracy-only success story. All old worlds are training/development for
+this successor. Three new seeds repeat optimization on one bank, not data
+acquisition or independent task populations.
+
+I retain the deterministic G-anchored least-squares B correction. It fits
+the same relative objective within four global constants, with a fixed
+common-offset gauge; its numerical solve will be executed only if selected.
+This is a stronger ordinary comparison than the coauthor's generally
+different centered-mean criterion, at the same one-fit/four-constant count.
+The full reference is G/B/R1/R4: success against B alone cannot establish
+neural necessity or a useful complete value/cost frontier.
+
+The review made one substantive correction to my original outcome wording:
+poor bank fit alone cannot reject a useful native student. I removed that
+surrogate gate. In either direction, keep package value distinct from its
+explanation: useful native results survive uncertain teacher approximation;
+better approximation does not redeem adverse native control. A gain from
+KEEP/fallback or an inactive learned choice also remains a complete-program
+outcome but does not establish deployment of acquired preferences. The final
+contract now explicitly reads score/publication/command/alias/activation/
+physical-action stages from already purchased evidence, without a new
+query or counterfactual suffix. Cold means one persistent arm endpoint on
+its first request, plus actual deadline restarts, never cold per mission.
+
+The proposed complete observation is fixed: G/R4/R1/B/S0/S1/S2,32 fresh
+worlds109255000..109255031,224 H1200 missions/268,800 native advances,
+three64-epoch neural fits/6,336 updates plus one deterministic constant
+fit, no new teacher collection and no additional audit mission. R's model
+ceiling stays5,201,920 prefix advances; full new reading, all old label/
+identity checks and1,759,680 total neural action-row forwards are included.
+B is solved once to fit and once in the reader as verification, not a second
+independent fit. All endpoints are fixed before fresh evaluation, with the
+original G/R4/R1 information, tape coupling, exact reuse and deadline/
+20-tick activation contract. Initial deployment is canonical G, separately
+certified by zero heads and offline forwards; no old TD checkpoint is reused.
+
+I retain forecast4–7 new CPUh/0GPU,5–9 operation-wall hours and8–14 support
+hours. Proposed bounds are10CPUh/24 aggregate-operation-wall hours, with
+.5CPUh/1wall reserved inside them for failure finalization, and8GiB new
+allocated disk (7GiB normal+1GiB finalization reserve) over exact source
+snapshots, new unique outputs and owned scratch/tests. These are proposed
+stop bounds, not proof of feasibility or an available allowance. Existing
+B05 teacher records are retained in place, not copied into a new backup.
+The first new formal/result-stage failure or bound stops further effects;
+no automatic retry, repair fit or expanded panel is included. Pure source/
+synthetic engineering is separately bounded and adds no scientific calls.
+
+The measured old teacher mission acquisition is1.951702 CPUh plus its
+unallocated outer/verification/support scope; the complete B05 study cost
+about5.374 CPUh is different. Marginal new collection is0 but asset binding,
+training and validation are not free. Report those scopes separately, then
+measure any CPU crossing against each of G/B/R1/R4 only for positive per-use
+savings and beside actual service differences. Neither a CPU crossing nor
+a confidence interval spanning zero establishes value equivalence.
+
+A narrower complete G/R4/R1 comparison remains worthwhile if its lower
+4–8-support-hour price is preferred. I favor the extension because the
+expensive new R/reader backbone is almost unchanged and verified menu data
+make an actual finite-acquisition comparison concrete. Stopping is feasible
+and leaves the demonstrated ordinary capabilities intact; I do not prefer
+it on this evidence and price alone. This is not a requirement to fill a
+DM slot, spend the old budget, explain every mechanism or force a learner
+to be useful. Any later extra labels, epochs, architecture or confirmation
+would be another material choice, not one of this purchase's automatic
+outcome branches.
+
+Before publication I refreshed current main at
+`b01283037740bd136dd34b8c70f392787f209527` and read the affected standing/
+Root selection text and changed relevant background. The new N8 timing
+positive has a different task/interface; it does not transfer a value gain
+to these public request queues, and A/C/D remain independent investments.
+Our prior topic5 R capability and DDQN adversity remain unchanged. There
+is no new reusable empirical judgment requiring another background edit;
+this boundary updates only the owned standing and notebook.
+
+The source-only assignment is complete. No production source/test was
+changed, no new scientific effect or formal request occurred, and there
+is no accepted operation, observer, unread review or launched successor.
+The review metered approximately8.94CPU-s of saved-data/hash/arithmetic
+work; remaining design, publication and source-reading support is unmetered
+and nonzero. No new source snapshot or bulk was created, so there is no
+new disposable run tree to retire. The direction's lead and useful old
+evidence are unchanged. Publish this contract/original advice/disposition
+and the owned standing, then return natively for Root's one complete
+purchase choice; do not start implementation or effects on publication.
