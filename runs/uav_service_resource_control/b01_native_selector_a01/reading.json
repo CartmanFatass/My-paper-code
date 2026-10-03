@@ -10398,6 +10398,51 @@
       }
     }
   },
+  "cleanup": {
+    "allocated_after": {
+      ".git/hmasd-launch-sources/022e7244049d4c6186f402c6539b534a": 0,
+      "docs/research/candidates/uav_service_resource_control": 90112,
+      "experiments/candidates/uav_service_resource_control": 139264,
+      "runs/uav_service_resource_control/b01_native_selector_a01": 7936249856,
+      "temp/directions/uav_service_resource_control": 0,
+      "tests/experiments/candidates/uav_service_resource_control": 86016
+    },
+    "allocated_before": {
+      ".git/hmasd-launch-sources/022e7244049d4c6186f402c6539b534a": 1832370176,
+      "docs/research/candidates/uav_service_resource_control": 86016,
+      "experiments/candidates/uav_service_resource_control": 303104,
+      "runs/uav_service_resource_control/b01_native_selector_a01": 7948013568,
+      "temp/directions/uav_service_resource_control": 12288,
+      "tests/experiments/candidates/uav_service_resource_control": 229376
+    },
+    "deleted": [
+      "runs/uav_service_resource_control/b01_native_selector_a01/audits.json",
+      "runs/uav_service_resource_control/b01_native_selector_a01/calibration.json",
+      "runs/uav_service_resource_control/b01_native_selector_a01/finals.json",
+      "runs/uav_service_resource_control/b01_native_selector_a01/training.json",
+      "runs/uav_service_resource_control/b01_native_selector_a01/training_read.json",
+      "runs/uav_service_resource_control/b01_native_selector_a01/raw/*.progress.json (678 exact completed prefixes)",
+      "experiments/candidates/uav_service_resource_control/__pycache__",
+      "experiments/candidates/uav_service_resource_control/b01_native_selector/__pycache__",
+      "tests/experiments/candidates/uav_service_resource_control/b01_native_selector/__pycache__",
+      "temp/directions/uav_service_resource_control",
+      "experiments/candidates/uav_service_resource_control/b01_native_selector/run.py",
+      "experiments/candidates/uav_service_resource_control/b01_native_selector/checks.py",
+      "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/022e7244049d4c6186f402c6539b534a"
+    ],
+    "live_operation_status": "consistent native exit0, supervisor and runner absent; observer generation26 stopped, no pending wake; scientific reviewer completed",
+    "measurement_scope": "allocated st_blocks*512 for six disjoint owned source/test/notebook/run/scratch/snapshot paths, including directory blocks; excludes shared RESEARCH and Git object storage",
+    "net_allocated_bytes_reclaimed": 1844449280,
+    "resolved_tool_refusal": "initial non-sudo preview could not inspect /proc/454/cwd; supported --sudo-process-scan preview/apply succeeded; no remaining blocker",
+    "retained_bulk_metadata_hashes_match": true,
+    "retained_required_raw_files": 2061,
+    "source_retirement_checks": "CodeGraph then direct import/entrypoint/notebook inspection: no external code consumer of retired run.py/checks.py; remove only retired admission test and its imports; retained source/tests AST pass, no new effects",
+    "source_snapshot_removed_by": "scripts/hmasd_snapshot_gc.py --sudo-process-scan --apply --snapshot 022e7244049d4c6186f402c6539b534a",
+    "status": "complete",
+    "tool_blocker": null,
+    "total_allocated_after": 7936565248,
+    "total_allocated_before": 9781014528
+  },
   "deployment_cost_scope": "Means of32 complete recorded H3000 missions; includes configuration/reset, checkpoint loading, simulation and recording; proposal timing is a subset. Aggregate phase CPU additionally includes process/import/serialization overhead; no separate cold-deployment benchmark.",
   "deployment_costs": {
     "C": {

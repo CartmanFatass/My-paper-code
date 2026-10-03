@@ -1,14 +1,13 @@
 """Finite addresses, identity, stop propagation and effect-free driver wiring."""
 from concurrent.futures import Future
 import json
-from pathlib import Path
 from types import SimpleNamespace
 
 import numpy as np
 import pytest
 
 from experiments.candidates.uav_service_resource_control.b01_native_selector import (
-    budget, contract, reading, run, study,
+    budget, contract, reading, study,
 )
 from experiments.candidates.uav_service_resource_control.b01_native_selector.learner import Learner
 
@@ -246,20 +245,6 @@ def test_final_checkpoint_load_is_inside_timed_mission_not_worker_preamble(monke
     monkeypatch.setattr(study, "episode", lambda actual, out, *, final_checkpoint:
                         (actual, out, final_checkpoint))
     assert study.mission_worker((spec, "owned-output", receipt)) == (spec, "owned-output", receipt)
-
-
-def test_admission_occurs_before_any_study_work(monkeypatch, tmp_path):
-    import scripts.hmasd_admission as admission
-    class ExpectedRefusal(Exception):
-        pass
-    def refuse(script_file, *, direction):
-        assert Path(script_file).name == "run.py" and direction == contract.DIRECTION
-        raise ExpectedRefusal("pure mocked admission; no formal request")
-    monkeypatch.setattr(admission, "require_admission", refuse)
-    with pytest.raises(ExpectedRefusal):
-        run.main(["--out", str(tmp_path/"out"), "--launch-sha", "a"*40,
-                  "--preparation", str(tmp_path/"missing.json")])
-    assert not (tmp_path/"out").exists()
 
 
 def test_pure_ordinary_command_nan_hold_and_resource_scales():

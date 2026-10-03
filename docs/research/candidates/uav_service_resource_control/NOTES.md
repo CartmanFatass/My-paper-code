@@ -989,3 +989,46 @@ queued producer or external dependency**. Root owns the comparison with other qu
 any cross-question investment; this does not add a routine approval gate to in-scope work.
 Concrete re-entry is a consequential recurrence/use decision or a distinct complete-comparison
 prediction at a justified price. No recurring check or automatic continuation is scheduled.
+
+<a id="b01-final-cleanup-20261003"></a>
+## 2026-10-03 UTC — Published result and measured final cleanup
+
+The complete result, original independent review and resolved decision were published at
+`3484457201a6b000fa5ee02e4d35c52606449e0d` before deletion. Native status was freshly
+reconciled again at14:49:30Z: consistent exit0, supervisor/runner absent. The stopped observer
+has no daemon or pending wake; the scientific reviewer has returned and all owned helpers
+are complete. Source/import/entrypoint/test/notebook inspection found no external live code
+consumer of the two retired one-off entrypoints. The accepted exact
+[run driver](https://github.com/CartmanFatass/My-paper-code/blob/0dffa6f2ade7ca35c86b552be0fbc8b5a7837085/experiments/candidates/uav_service_resource_control/b01_native_selector/run.py)
+and [preparation meter](https://github.com/CartmanFatass/My-paper-code/blob/0dffa6f2ade7ca35c86b552be0fbc8b5a7837085/experiments/candidates/uav_service_resource_control/b01_native_selector/checks.py)
+remain in published source history. Removed their current-tree files and only the admission
+regression/import tied to that retired driver; all retained Python files pass AST parsing.
+No numerical/native/controller/optimizer test was repeated. The original59 distinct passing
+checks belong to the accepted source, not a fresh claim about the retired tree.
+
+The supported snapshot collector preview and exact apply both succeeded, deleting
+`.git/hmasd-launch-sources/022e7244049d4c6186f402c6539b534a`. The earlier ordinary preview
+could not inspect `/proc/454/cwd`; its advised `--sudo-process-scan` resolved that concrete
+inspection refusal. There is no remaining tool or permission blocker.
+
+Other actual deletions: `experiments/candidates/uav_service_resource_control/b01_native_selector/{run,checks}.py`;
+three owned `__pycache__` directories (direction root, selector package and matching tests);
+`temp/directions/uav_service_resource_control/` containing only the completed observer request;
+all678 completed `raw/*.progress.json` prefixes; and the exactly redundant `audits.json`,
+`calibration.json`, `finals.json`, `training.json`, `training_read.json` phase containers.
+Each deleted phase's rows and metadata were checked against the retained canonical ledgers
+and original summary before deletion; original identities and replacements remain in
+`reading.json/redundant_phase_verification`. No necessary unique evidence was moved or copied.
+
+Allocated-byte measurement over the six disjoint owned snapshot/source/test/notebook/run/scratch
+paths fell from **9,781,014,528** to **7,936,565,248**, a net **1,844,449,280 bytes reclaimed** including
+this cleanup documentation and the compact reading update. Snapshot alone accounted for
+1,832,370,176 allocated bytes. This is measured working-tree/output reclamation; Git object
+storage and unrelated host changes are outside the scope. Actual target absence and the2,061
+required raw files were checked after deletion; all eight retained bulk metadata hashes still
+match. The useful controller/features/learner, capture, budget, full-reader/reduction source
+and their remaining focused tests stay available, with the sole required raw/checkpoint copy
+at its recorded durable location. No cleanup target remains and no backup/retention chain was
+created. B01 is reserve with no active producer, unread result/advice or selected successor;
+the broader question and all positive/adverse evidence remain open for the next substantive
+Root allocation.
