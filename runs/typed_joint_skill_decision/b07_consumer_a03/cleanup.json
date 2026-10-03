@@ -1,0 +1,474 @@
+{
+  "schema": 1,
+  "status": "complete",
+  "terminal_evidence_commit": "de141f2061f3ca23c20f552aa507c51122e152a4",
+  "local_baseline_before_cleanup": {
+    "paths": [
+      "runs/typed_joint_skill_decision/b07_consumer_a03",
+      "docs/research/candidates/typed_joint_skill_decision/NOTES.md",
+      "temp/directions/typed_joint_skill_decision/b07-consumer-a03"
+    ],
+    "allocated_bytes": 1277952
+  },
+  "unique_evidence_retained": [
+    "wsl_4070:/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b07_consumer_a03",
+    "canonical B05 fixed bank and complete independent A02 reader",
+    "original B04 evidence/core and previous failed operations"
+  ],
+  "scope": "Exact removed remote snapshot/stage/scratch allocated bytes plus measured local before-minus-after for this consumer run, own scratch and append-only NOTES. Excludes Git object/admin metadata, shared RESEARCH allocation and unrelated concurrent files; not whole-task disk growth.",
+  "snapshot_preview": {
+    "transport_returncode": 0,
+    "transport_stderr": "",
+    "stdout": "{\"script_sha256\": \"27528bcc5e84a9fb26a2c43c0bfc482051f71a503454bc6708bcfba2a533d2fc\", \"argv\": [\"/home/wu/.venvs/hmasd-gcc-31021/bin/python\", \"-B\", \"/home/wu/projects/HMASD/scripts/hmasd_snapshot_gc.py\", \"--snapshot\", \"f30e500415704de8a0f5b1008bfbadc6\", \"--sudo-process-scan\"], \"returncode\": 0, \"stdout\": \"{\\n  \\\"mode\\\": \\\"preview\\\",\\n  \\\"snapshots\\\": [\\n    {\\n      \\\"claim\\\": \\\"/home/wu/projects/HMASD/.git/hmasd-admission/b235dcc1bbf4c5a883fadb4271105fa469e5f6813455f57bd314bdc6f66005ed.json\\\",\\n      \\\"durable_ref\\\": \\\"refs/remotes/origin/HEAD\\\",\\n      \\\"eligible\\\": true,\\n      \\\"output\\\": \\\"/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b07_consumer_a03\\\",\\n      \\\"path\\\": \\\"/home/wu/projects/HMASD/.git/hmasd-launch-sources/f30e500415704de8a0f5b1008bfbadc6\\\",\\n      \\\"sha\\\": \\\"84a5aca7f4d8b4bea5580df42e8473dab19e0c3a\\\",\\n      \\\"snapshot\\\": \\\"f30e500415704de8a0f5b1008bfbadc6\\\"\\n    }\\n  ]\\n}\\n\", \"stderr\": \"\", \"remote_parent_cpu_seconds\": 0.0004797989999999995, \"remote_wall_seconds\": 1.2507204900030047}\n",
+    "local_parent_cpu_seconds": 0.000540302999999992,
+    "local_transport_cpu_seconds": 0.061869,
+    "wall_seconds": 2.085910979003529,
+    "local_gc_sha256": "27528bcc5e84a9fb26a2c43c0bfc482051f71a503454bc6708bcfba2a533d2fc"
+  },
+  "application": {
+    "transport_returncode": 0,
+    "transport_stderr": "",
+    "stdout": "{\"at\": \"2026-10-03T00:47:32.380411+00:00\", \"before_allocated_bytes\": {\"/home/wu/projects/HMASD/.git/hmasd-launch-sources/f30e500415704de8a0f5b1008bfbadc6\": 1829830656, \"/home/wu/hmasd-inputs/typed_joint_skill_decision-b07-a03\": 338259968, \"/home/wu/projects/HMASD/temp/directions/typed_joint_skill_decision/b07-consumer-a03\": 8192}, \"open_file_scans\": {\"/home/wu/hmasd-inputs/typed_joint_skill_decision-b07-a03\": {\"returncode\": 1, \"stdout\": \"\", \"stderr\": \"\"}, \"/home/wu/projects/HMASD/temp/directions/typed_joint_skill_decision/b07-consumer-a03\": {\"returncode\": 1, \"stdout\": \"\", \"stderr\": \"\"}}, \"deleted_targets\": [\"/home/wu/projects/HMASD/.git/hmasd-launch-sources/f30e500415704de8a0f5b1008bfbadc6\", \"/home/wu/hmasd-inputs/typed_joint_skill_decision-b07-a03\", \"/home/wu/projects/HMASD/temp/directions/typed_joint_skill_decision/b07-consumer-a03\"], \"gc\": {\"argv\": [\"/home/wu/.venvs/hmasd-gcc-31021/bin/python\", \"-B\", \"/home/wu/projects/HMASD/scripts/hmasd_snapshot_gc.py\", \"--apply\", \"--snapshot\", \"f30e500415704de8a0f5b1008bfbadc6\", \"--sudo-process-scan\"], \"returncode\": 0, \"stdout\": \"{\\n  \\\"mode\\\": \\\"apply\\\",\\n  \\\"snapshots\\\": [\\n    {\\n      \\\"claim\\\": \\\"/home/wu/projects/HMASD/.git/hmasd-admission/b235dcc1bbf4c5a883fadb4271105fa469e5f6813455f57bd314bdc6f66005ed.json\\\",\\n      \\\"durable_ref\\\": \\\"refs/remotes/origin/HEAD\\\",\\n      \\\"eligible\\\": true,\\n      \\\"output\\\": \\\"/home/wu/projects/HMASD/runs/typed_joint_skill_decision/b07_consumer_a03\\\",\\n      \\\"path\\\": \\\"/home/wu/projects/HMASD/.git/hmasd-launch-sources/f30e500415704de8a0f5b1008bfbadc6\\\",\\n      \\\"removed\\\": true,\\n      \\\"sha\\\": \\\"84a5aca7f4d8b4bea5580df42e8473dab19e0c3a\\\",\\n      \\\"snapshot\\\": \\\"f30e500415704de8a0f5b1008bfbadc6\\\"\\n    }\\n  ]\\n}\\n\", \"stderr\": \"\"}, \"after_allocated_bytes\": {\"/home/wu/projects/HMASD/.git/hmasd-launch-sources/f30e500415704de8a0f5b1008bfbadc6\": 0, \"/home/wu/hmasd-inputs/typed_joint_skill_decision-b07-a03\": 0, \"/home/wu/projects/HMASD/temp/directions/typed_joint_skill_decision/b07-consumer-a03\": 0}, \"deleted_targets_absent\": true, \"canonical_output_preserved\": true, \"remote_parent_cpu_seconds\": 0.020364041, \"wall_seconds\": 0.6300642830319703}\n",
+    "local_parent_cpu_seconds": 0.0005223990000000067,
+    "local_transport_cpu_seconds": 0.06085499999999999,
+    "wall_seconds": 1.406149810005445
+  },
+  "verified_absence": {
+    "at": "2026-10-03T00:48:48.246040+00:00",
+    "deleted_targets_absent": {
+      "/home/wu/projects/HMASD/.git/hmasd-launch-sources/f30e500415704de8a0f5b1008bfbadc6": true,
+      "/home/wu/hmasd-inputs/typed_joint_skill_decision-b07-a03": true,
+      "/home/wu/projects/HMASD/temp/directions/typed_joint_skill_decision/b07-consumer-a03": true
+    },
+    "snapshot_registration_absent": true,
+    "external_dump_metadata": {
+      "wsl-crash-1790535138-823176-_home_wu_.local_share_uv_python_cpython-3.10.21-linux-x86_64-gnu_bin_python3.10-11.dmp": {
+        "bytes": 2625273856,
+        "mtime_ns": 1790535168406528400
+      },
+      "wsl-crash-1790814460-1179774-_home_wu_.local_opt_hmasd-cpython-3.10.21-gcc_bin_python3.10-11.dmp": {
+        "bytes": 35643392,
+        "mtime_ns": 1790814461217066900
+      },
+      "wsl-crash-1790919914-1318047-_home_wu_.local_opt_hmasd-cpython-3.10.21-gcc_bin_python3.10-11.dmp": {
+        "bytes": 638087168,
+        "mtime_ns": 1790919921209501300
+      }
+    },
+    "project_available_bytes": 833282359296,
+    "windows_available_bytes": 77541093376,
+    "remote_parent_cpu_seconds": 0.052848087999999994,
+    "wall_seconds": 0.09903660998679698,
+    "canonical_file_count": 58,
+    "canonical_output_all_bytes_unchanged": true,
+    "external_dump_metadata_unchanged": true,
+    "local_parent_cpu_seconds": 0.001107201000000002,
+    "local_transport_cpu_seconds": 0.062796,
+    "local_wall_seconds": 0.7437576520023867,
+    "transport_stderr": ""
+  },
+  "cleanup_blockers": [],
+  "gross_remote_deleted_allocated_bytes": 2168098816,
+  "local_cleanup": {
+    "initial_nonprivileged_scan": {
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "lsof: WARNING: can't stat() overlay file system /var/lib/docker/rootfs/overlayfs/2b2d9761f96e76d890467c2c2b2467ad9f36a318845a68ea4da7fb1d996e8fad\n      Output information may be incomplete.\nlsof: WARNING: can't stat() nsfs file system /run/docker/netns/3738aa6483b5\n      Output information may be incomplete.\n",
+      "deletions": 0
+    },
+    "privileged_scan": {
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "lsof: WARNING: can't stat() fuse.portal file system /run/user/1000/doc\n      Output information may be incomplete.\nlsof: WARNING: can't stat() fuse.portal file system /mnt/wslg/run/user/1000/doc\n      Output information may be incomplete.\n"
+    },
+    "scoped_privileged_scan": {
+      "argv": [
+        "sudo",
+        "-n",
+        "lsof",
+        "-e",
+        "/run/user/1000/doc",
+        "-e",
+        "/mnt/wslg/run/user/1000/doc",
+        "--",
+        "runs/typed_joint_skill_decision/b07_consumer_a03/children/fit-R1000s0/request.json",
+        "runs/typed_joint_skill_decision/b07_consumer_a03/children/fit-R1000s0/stdout.log",
+        "runs/typed_joint_skill_decision/b07_consumer_a03/children/fit-R1000s0/stderr.log",
+        "runs/typed_joint_skill_decision/b07_consumer_a03/children/fit-R4000s1/request.json",
+        "runs/typed_joint_skill_decision/b07_consumer_a03/children/fit-R4000s1/stdout.log",
+        "runs/typed_joint_skill_decision/b07_consumer_a03/children/fit-R4000s1/stderr.log",
+        "runs/typed_joint_skill_decision/b07_consumer_a03/children/fit-R16000s0/request.json",
+        "runs/typed_joint_skill_decision/b07_consumer_a03/children/fit-R16000s0/stdout.log",
+        "runs/typed_joint_skill_decision/b07_consumer_a03/children/fit-R16000s0/stderr.log",
+        "runs/typed_joint_skill_decision/b07_consumer_a03/children/fit-R1000s1/request.json",
+        "runs/typed_joint_skill_decision/b07_consumer_a03/children/fit-R1000s1/stdout.log",
+        "runs/typed_joint_skill_decision/b07_consumer_a03/children/fit-R1000s1/stderr.log",
+        "runs/typed_joint_skill_decision/b07_consumer_a03/raw/engineering/scorers.json.gz",
+        "temp/directions/typed_joint_skill_decision/b07-consumer-a03"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "",
+      "stat_exemptions": "Only the two unrelated inaccessible FUSE portal mounts emitted by preceding scan; every selected target resolves under /home/fires/hmasd-wsl, outside them."
+    },
+    "deleted": [
+      {
+        "path": "runs/typed_joint_skill_decision/b07_consumer_a03/children/fit-R1000s0/request.json",
+        "allocated_bytes_before": 73728,
+        "reason": "local duplicate; verified original retained in unchanged canonical remote output",
+        "absent_after": true
+      },
+      {
+        "path": "runs/typed_joint_skill_decision/b07_consumer_a03/children/fit-R1000s0/stdout.log",
+        "allocated_bytes_before": 0,
+        "reason": "local duplicate; verified original retained in unchanged canonical remote output",
+        "absent_after": true
+      },
+      {
+        "path": "runs/typed_joint_skill_decision/b07_consumer_a03/children/fit-R1000s0/stderr.log",
+        "allocated_bytes_before": 0,
+        "reason": "local duplicate; verified original retained in unchanged canonical remote output",
+        "absent_after": true
+      },
+      {
+        "path": "runs/typed_joint_skill_decision/b07_consumer_a03/children/fit-R4000s1/request.json",
+        "allocated_bytes_before": 73728,
+        "reason": "local duplicate; verified original retained in unchanged canonical remote output",
+        "absent_after": true
+      },
+      {
+        "path": "runs/typed_joint_skill_decision/b07_consumer_a03/children/fit-R4000s1/stdout.log",
+        "allocated_bytes_before": 0,
+        "reason": "local duplicate; verified original retained in unchanged canonical remote output",
+        "absent_after": true
+      },
+      {
+        "path": "runs/typed_joint_skill_decision/b07_consumer_a03/children/fit-R4000s1/stderr.log",
+        "allocated_bytes_before": 0,
+        "reason": "local duplicate; verified original retained in unchanged canonical remote output",
+        "absent_after": true
+      },
+      {
+        "path": "runs/typed_joint_skill_decision/b07_consumer_a03/children/fit-R16000s0/request.json",
+        "allocated_bytes_before": 73728,
+        "reason": "local duplicate; verified original retained in unchanged canonical remote output",
+        "absent_after": true
+      },
+      {
+        "path": "runs/typed_joint_skill_decision/b07_consumer_a03/children/fit-R16000s0/stdout.log",
+        "allocated_bytes_before": 0,
+        "reason": "local duplicate; verified original retained in unchanged canonical remote output",
+        "absent_after": true
+      },
+      {
+        "path": "runs/typed_joint_skill_decision/b07_consumer_a03/children/fit-R16000s0/stderr.log",
+        "allocated_bytes_before": 0,
+        "reason": "local duplicate; verified original retained in unchanged canonical remote output",
+        "absent_after": true
+      },
+      {
+        "path": "runs/typed_joint_skill_decision/b07_consumer_a03/children/fit-R1000s1/request.json",
+        "allocated_bytes_before": 73728,
+        "reason": "local duplicate; verified original retained in unchanged canonical remote output",
+        "absent_after": true
+      },
+      {
+        "path": "runs/typed_joint_skill_decision/b07_consumer_a03/children/fit-R1000s1/stdout.log",
+        "allocated_bytes_before": 0,
+        "reason": "local duplicate; verified original retained in unchanged canonical remote output",
+        "absent_after": true
+      },
+      {
+        "path": "runs/typed_joint_skill_decision/b07_consumer_a03/children/fit-R1000s1/stderr.log",
+        "allocated_bytes_before": 0,
+        "reason": "local duplicate; verified original retained in unchanged canonical remote output",
+        "absent_after": true
+      },
+      {
+        "path": "runs/typed_joint_skill_decision/b07_consumer_a03/raw/engineering/scorers.json.gz",
+        "allocated_bytes_before": 12288,
+        "reason": "local duplicate; verified original retained in unchanged canonical remote output",
+        "absent_after": true
+      },
+      {
+        "path": "temp/directions/typed_joint_skill_decision/b07-consumer-a03",
+        "allocated_bytes_before": 8192,
+        "reason": "unused observer request scratch",
+        "absent_after": true
+      },
+      {
+        "path": "runs/typed_joint_skill_decision/b07_consumer_a03/raw/engineering",
+        "allocated_bytes_before": 4096,
+        "absent_after": true,
+        "reason": "empty duplicate-collection container"
+      },
+      {
+        "path": "runs/typed_joint_skill_decision/b07_consumer_a03/raw",
+        "allocated_bytes_before": 4096,
+        "absent_after": true,
+        "reason": "empty duplicate-collection container"
+      }
+    ],
+    "parent_cpu_seconds": 0.0014988280000000076,
+    "unique_originals_retained": true,
+    "whole_scope_final_measurement_pending": false
+  },
+  "later_metered_support": {
+    "scope": "Disjoint known support after the bound86.969447980CPU-s preparation subtotal. Excludes the actual1,166.899232CPU-s consumer execution and all prior B04/B05/full-reader scientific execution. No wall-to-CPU inference.",
+    "components": [
+      {
+        "source": "runs/typed_joint_skill_decision/b07_source/consumer-a03-binding-check.json",
+        "field": "parent_cpu_seconds",
+        "cpu_seconds": 0.6359060089999999
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_source/consumer-a03-engineering-review.json",
+        "field": "reviewer_hash_cpu_seconds",
+        "cpu_seconds": 0.002029722
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_source/consumer-a03-engineering-review.json",
+        "field": "preservation_cpu_seconds",
+        "cpu_seconds": 3.0245999999997664e-05
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_source/consumer-claim-location-correction.json",
+        "field": "local_parent_cpu_seconds",
+        "cpu_seconds": 0.0006036910000000034
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_source/consumer-claim-location-correction.json",
+        "field": "local_child_cpu_seconds",
+        "cpu_seconds": 0.0629
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_source/consumer-a03-launch-request.json",
+        "field": "request_preparation_cpu_seconds",
+        "cpu_seconds": 0.0011674830000000108
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_source/consumer-a03-node-before.json",
+        "field": "local_child_cpu_seconds",
+        "cpu_seconds": 0.063495
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_source/consumer-a03-node-before.json",
+        "field": "local_parent_cpu_seconds",
+        "cpu_seconds": 0.0014474939999999936
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a03/supervisor-submission.json",
+        "field": "local_parent_cpu_seconds",
+        "cpu_seconds": 0.0008771260000000058
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a03/supervisor-submission.json",
+        "field": "local_child_transport_cpu_seconds",
+        "cpu_seconds": 0.06296700000000001
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a03/submission-reconciliation.json",
+        "field": "local_parent_cpu_seconds",
+        "cpu_seconds": 0.0007639569999999957
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a03/submission-reconciliation.json",
+        "field": "local_child_transport_cpu_seconds",
+        "cpu_seconds": 0.06317
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a03/observation.json",
+        "field": "corrected_arm/local_parent_cpu_seconds",
+        "cpu_seconds": 0.0005909050000000027
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a03/observation.json",
+        "field": "initial_compact_collection/local_parent_cpu_seconds",
+        "cpu_seconds": 0.0011454340000000007
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a03/observation.json",
+        "field": "initial_compact_collection/local_child_transport_cpu_seconds",
+        "cpu_seconds": 0.069614
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a03/observation-drain-008.json",
+        "field": "parent_cpu_seconds",
+        "cpu_seconds": 0.0005221589999999943
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a03/observation-drain-008.json",
+        "field": "child_cpu_seconds",
+        "cpu_seconds": 0.037085
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a03/collection-inventory.json",
+        "field": "remote_parent_cpu_seconds",
+        "cpu_seconds": 0.037788033
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a03/collection-inventory.json",
+        "field": "collection_parent_cpu_seconds",
+        "cpu_seconds": 0.0018054279999999978
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a03/collection-inventory.json",
+        "field": "transport_child_cpu_seconds",
+        "cpu_seconds": 0.061966999999999994
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a03/collection-prefix.json",
+        "field": "remote_parent_cpu_seconds",
+        "cpu_seconds": 0.0011679700000000008
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a03/collection-prefix.json",
+        "field": "parent_cpu_seconds",
+        "cpu_seconds": 0.009687405999999996
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a03/collection-prefix.json",
+        "field": "transport_child_cpu_seconds",
+        "cpu_seconds": 0.066339
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a03/prefix-reading.json",
+        "field": "remote_parent_cpu_seconds",
+        "cpu_seconds": 2.622649462
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a03/prefix-reading.json",
+        "field": "parent_cpu_seconds",
+        "cpu_seconds": 0.0017565860000000044
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a03/prefix-reading.json",
+        "field": "transport_child_cpu_seconds",
+        "cpu_seconds": 0.061161999999999994
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a03/prefix-reading.json",
+        "field": "typed_record_reading_support/remote_parent_cpu_seconds",
+        "cpu_seconds": 2.946246036
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a03/prefix-reading.json",
+        "field": "typed_record_reading_support/parent_cpu_seconds",
+        "cpu_seconds": 0.0007811579999999901
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a03/prefix-reading.json",
+        "field": "typed_record_reading_support/transport_child_cpu_seconds",
+        "cpu_seconds": 0.06281099999999999
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a03/prefix-reading.json",
+        "field": "counter_and_scorer_reading/parent_cpu_seconds",
+        "cpu_seconds": 0.005526333999999994
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a03/engineering-diagnosis.json",
+        "field": "inspection_cpu_seconds",
+        "cpu_seconds": 0.001991
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a03/engineering-diagnosis.json",
+        "field": "preservation_cpu_seconds",
+        "cpu_seconds": 0.01560450499999999
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a03/observation-closure.json",
+        "field": "parent_cpu_seconds",
+        "cpu_seconds": 0.0017152900000000082
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a03/observation-closure.json",
+        "field": "child_cpu_seconds",
+        "cpu_seconds": 0.130538
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a03/wait-events.jsonl",
+        "field": "line1/cpu_seconds",
+        "cpu_seconds": 0.112484463
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a03/cleanup.json",
+        "field": "snapshot_preview/local_parent_cpu_seconds",
+        "cpu_seconds": 0.000540302999999992
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a03/cleanup.json",
+        "field": "snapshot_preview/local_transport_cpu_seconds",
+        "cpu_seconds": 0.061869
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a03/cleanup.json",
+        "field": "application/local_parent_cpu_seconds",
+        "cpu_seconds": 0.0005223990000000067
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a03/cleanup.json",
+        "field": "application/local_transport_cpu_seconds",
+        "cpu_seconds": 0.06085499999999999
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a03/cleanup.json",
+        "field": "verified_absence/remote_parent_cpu_seconds",
+        "cpu_seconds": 0.052848087999999994
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a03/cleanup.json",
+        "field": "verified_absence/local_parent_cpu_seconds",
+        "cpu_seconds": 0.001107201000000002
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a03/cleanup.json",
+        "field": "verified_absence/local_transport_cpu_seconds",
+        "cpu_seconds": 0.062796
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a03/cleanup.json",
+        "field": "local_cleanup/parent_cpu_seconds",
+        "cpu_seconds": 0.0014988280000000076
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a03/cleanup.json",
+        "field": "snapshot_preview/stdout/remote_parent_cpu_seconds",
+        "cpu_seconds": 0.0004797989999999995
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a03/cleanup.json",
+        "field": "application/stdout/remote_parent_cpu_seconds",
+        "cpu_seconds": 0.020364041
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a03/scientific-review.json",
+        "field": "reviewer_reported_metered_cpu_lower_bound_seconds",
+        "cpu_seconds": 10.2326,
+        "qualification": "reported lower bound rounded in original scientific review; other support additional"
+      },
+      {
+        "source": "runs/typed_joint_skill_decision/b07_consumer_a03/scientific-review.json",
+        "field": "preservation_cpu_seconds",
+        "cpu_seconds": 0.066347979
+      }
+    ],
+    "known_cpu_seconds": 17.708164534999998,
+    "other_support": "unknown_not_zero; snapshot preparation/remoteGC child CPU, source reading, failed publication checks, index/transport/review/edit/coordination, observer registration/probes and local lsof checks incompletely metered; final record-write/close tails additional."
+  },
+  "observer_final": {
+    "generation": 9,
+    "stopped": true,
+    "active_jobs": 0,
+    "pending_events": 0,
+    "wake": null,
+    "daemon_pid": 878264,
+    "daemon_pid_present": false
+  },
+  "retained_supervisor_metadata": "/home/wu/.agent-tasks/typed-b07-consumer-a03",
+  "gross_local_deleted_allocated_bytes": 323584,
+  "gross_deleted_allocated_bytes": 2168422400,
+  "local_final_allocated_bytes": 1069056,
+  "local_scope_allocated_change_bytes": -208896,
+  "net_reclaimed_allocated_bytes": 2168307712
+}

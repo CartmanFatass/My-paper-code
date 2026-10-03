@@ -5776,3 +5776,90 @@ I inspected source at `84a5aca7f4d8b4bea5580df42e8473dab19e0c3a`; B04 evidence a
 </details>
 
 DM response: accepted with the stated trust scope. No clear newly demonstrated source defect, resource exhaustion or runtime mechanism was established. The active fourth child was lawfully reaped. The completed prefix is useful evidence to preserve and read cautiously; it is not a completed comparison and cannot be rescued by silently finishing the missing cells. No source edit or new technical/scientific execution is selected.
+
+<a id="b07-consumer-a03-independent-disposition"></a>
+### A03 independent scientific reading and new investment disposition — 2026-10-03 UTC
+
+The same dedicated ResearchCritic reused its separate context and applicable prior bank validation, reconstructed the original terminal/source/fit evidence before the DM interpretation and engineering diagnosis, and independently read the saved training evidence. Complete original wording and original verification command/outputs, including two failed reviewer parsing/assertion attempts, are retained in `b07_consumer_a03/scientific-review.json`. This is a result reading, not a restarted consumer reader. It made no model forward, checkpoint load, physical replay, fresh-data use or new experimental exposure. At least 10.2326 measured CPU-seconds plus unknown support remain charged.
+
+<details><summary>Complete original ResearchCritic disposition</summary>
+
+**Recommend stopping the current allocation and declining another unchanged consumer purchase for now. Retain the validated bank and the qualified three-fit prefix.** The scientific candidate remains plausible, but A03 adds an unresolved execution and trust problem without completing the comparison that would justify further investment.
+
+I reused my separate review context and prior bank validation. I reconstructed the new terminal evidence, source path and original fit outputs before comparing the DM’s interpretation and engineering diagnosis.
+
+The [original failure evidence](/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_consumer_a03/stderr.log) establishes a parent exception during disk accounting. The collected `pathlib.py` binds `a` in the loop before the reported failing use. That on-disk source does not establish the executing code object or interpreter state. No specific repair, CUDA cause, memory-corruption mechanism or connection to the earlier SIGSEGV has been demonstrated. The fourth child’s `-15` termination follows parent cleanup; it supplies no independently diagnosed training failure.
+
+This differs materially from the earlier failures for which I recommended narrow corrections followed by separately selected purchases: those had identified boundary defects and checks that predicted removal of the observed refusal. **That premise is absent here.**
+
+The prefix nevertheless contains useful positive evidence. Three separate children completed 4,096 updates each. Their saved logs contain 4,096 attempt/completion records per fit, changing update-state hashes and final identities matching the returned assets. Independently recomputed first-versus-last 256-update mean KL falls:
+
+- R1000s0: **1.4342 → 0.3990**
+- R4000s1: **1.4789 → 0.3970**
+- R16000s0: **1.4919 → 0.4503**
+
+Target entropy changes little, so its change alone does not explain those reductions. These observations support optimization activity and partial CUDA feasibility. The sampled subsets change across updates, however; this is not a fixed before/after generalization measurement.
+
+I also fetched and hash-checked all three original training-endpoint arrays and training logs directly from the canonical node. Using eight hash-verified frozen training-bank shards, I reconstructed the endpoint arithmetic for **512 worlds and 87,851 candidates per fit**. All **1,536 selected choices** match the saved logits and summaries. Regret means agree exactly; KL means differ by at most \(2.22\times10^{-16}\), with maximum per-context scalar discrepancy \(1.42\times10^{-14}\).
+
+| Completed fit | Training-probe mean regret | Training-probe mean KL | Selected candidates with zero recorded training exposure |
+|---|---:|---:|---:|
+| R1000s0 | 0.0404598 | 0.771172 | 0 / 512 |
+| R4000s1 | 0.0314032 | 0.774849 | 15 / 512 |
+| R16000s0 | 0.0410090 | 0.858838 | 178 / 512 |
+
+These checks strengthen confidence in the **internal coherence of the saved numerical evidence**. I did not load checkpoints or independently recompute their forward passes. Hashes, coherent arithmetic and successful child exits cannot certify that the saved weights generated the reported logits correctly. Conversely, the unexplained parent exception does not demonstrate corruption of those earlier child outputs.
+
+The strongest consequential scientific correction concerns the working explanation. At 1,000 worlds, only **2 of 87,851** probe candidates have zero recorded training exposure, and every selected candidate had been exposed. Yet mean full-menu regret remains 0.04046, with a maximum of 0.61460; that worst selected candidate had 12 recorded exposures and its teacher 131. Thus, absence of individual candidate exposure cannot by itself explain the 1,000-world training-probe error. Finite optimization and transferring a best-plus-15 subset objective to full-menu ranking remain consequential possibilities.
+
+At 16,000 worlds, **41,222** probe candidates have zero recorded exposure. Widening support under a fixed update budget therefore also changes repetition and candidate coverage. The observed training pattern does not isolate a pure data-size effect. R1000s0 and R16000s0 share initialization but show no improvement in this training-probe mean; R4000s1 uses another stream. Selecting the apparently best arm would overread a censored, unbalanced prefix.
+
+Fresh-world performance and the competent ordinary comparisons remain wholly unobserved. There were **zero fresh endpoints, cold cases, native episodes, physical queries or complete-reader effects**. A stored bank teacher is not the operational comparator. The proposed Raw8J/RawJ/P comparisons still matter because ordinary paid scoring may already capture the useful opportunity, while deployment cost and native behavior may erase a surrogate-ranking gain. Thousands of updates or probe contexts do not supply independent training replications.
+
+I checked the accepted source `84a5aca7f4d8b4bea5580df42e8473dab19e0c3a`, the exact A03 input digest, and all **20 executable plus 13 frozen-source** bindings. They agree with the admitted command and configuration. The separate fixed-bank validation remains applicable. B05’s original winner-bound failure, B04’s SIGSEGV and the A01/A02 integration failures remain in the evidence; A03 does not revise their frozen meanings.
+
+The final [resource record](/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_consumer_a03/terminal-resource.json) reports:
+
+- **1,166.899232 CPU seconds**
+- **1,012.284701 whole GPU-child seconds**, including **822.972263 measured GPU-phase seconds**
+- **1,013.626233 wall seconds**
+- **2,220,748,800 peak allocated bytes**
+
+The fourth child consumed 38.295495 CPU seconds and 38.186443 whole GPU-child seconds before any recorded fit increment. Including declared preparation, known consumer CPU is **1,253.86867998 seconds**. Earlier producer/reader science, later support and finalization tails remain additional. Recorded limits were not exhausted. These measurements establish the cost of the partial operation; they do not establish feasibility of the remaining cold/native package.
+
+My investment recommendation is therefore:
+
+1. **Close this purchase under its selected stop.** Preserve the qualified prefix without silently completing missing cells, selecting the favorable arm or expanding data/model capacity.
+2. **Retain the scientific candidate conditionally.** The optimization evidence argues against declaring the learning question dead. It does not justify another identical execution bet.
+3. **Require a concrete, separately priced basis for reopening**, rather than an open-ended obligation to repair. Another few successful CUDA fits would add little reassurance: three already succeeded before this failure. Exhaustive root-cause identification is unnecessary, but an execution change should have a specific prediction concerning the observed failure and preserve the scientific comparison.
+
+If Root chooses a limited trust investigation, one useful complete observation would be an independently specified functional read of all three frozen final checkpoints on their existing 512 training probes: **1,536 contexts / 263,553 candidate rows**, preserving the declared numerical tolerance and every choice discrepancy. Agreement would strengthen artifact trust, without certifying runtime health. Disagreement would block reuse and establish a numerical inconsistency to investigate. This would require separately selected, charged forward evaluations; I have not performed it, and its cost has not been established. Root can reasonably choose the no-run disposition instead.
+
+If execution is later reopened, the complete matched comparison remains necessary. Fresh improvement followed by native benefit at acceptable total cost would support further replication. Fresh improvement without native benefit would establish a narrower surrogate result. No improvement would count against this fixed-budget recipe while leaving representation and other optimization budgets unresolved. Changing runtime or resources requires an explicit comparison contract, not treatment as an invisible continuation.
+
+This review used saved-data arithmetic only, with **at least 10.2326 measured CPU seconds** plus unmetered support, including failed reviewer parsing/assertion attempts. No model execution, physics replay, fresh-data access, edits or experiments occurred.
+
+**MATERIAL_DISSENT: no — the DM’s current stop and provisional reading agree with the checked evidence. My correction is to decline a new unchanged consumer purchase; none is currently selected.**
+
+</details>
+
+**DM response: accepted, MATERIAL_DISSENT:no. Close A03 and decline a new unchanged consumer purchase now.** The critic’s saved-data arithmetic agrees with the original logits, fixed-bank labels, choices and summaries; I read its original check outputs rather than repeat those reductions. That increases confidence in internal numerical coherence, while checkpoint-to-logit correspondence and whole-runtime integrity remain unverified. The stop is an investment judgment under unresolved execution causation and accumulated support cost, not an empirical rejection of the learning question. This differs from the earlier narrowly identified submission/identity defects: there is currently no verified source correction with a specific removal prediction. Three successful CUDA fits already precede the unexplained failure, so another few successful fits alone would add little reassurance.
+
+The useful explanation update is conditional on the saved prefix: R1000s0’s common512 training probe has only 2 of 87,851 candidate rows with zero recorded exposure, and zero selected unseen candidates, yet mean regret is .0404598 and the worst is .6145955. That worst selection had 12 recorded exposures and its teacher 131. Individual candidate absence is therefore insufficient by itself to explain this training-probe error. This does not rule out inadequate repetition, finite optimization or difficulty transferring the sampled best-plus15 objective to full-menu ranking. Those are alternatives, not identified repairs. At16k, 41,222 probe candidates have zero recorded exposure and178/512 selections choose one; widening worlds at fixed updates changes repetition and candidate exposure along with support. No pure data-size effect, full learning curve, best-arm selection or generalization conclusion follows from the three-fit censored/unbalanced prefix.
+
+This reading revises the current published [finite-data/representation background](../../RESEARCH.md#learning-representation-finite-data): partial recorded optimization activity and CUDA feasibility are now observed, while fixed-bank validity remains separate from trained-policy truth and useful native decisions. Task opportunity and representation capacity are not resolved here; the prior conditional R capability and its adverse native/service worlds, competent Raw8J/RawJ/P, old B04 SIGSEGV, original B05 exit2, A01/A02 consumer defects and all their costs remain. A training-probe numerical pattern is neither fresh acquisition evidence nor a complete-package result.
+
+No new idea, fit, diagnosis run or functional evaluation is selected. A possible separately priced trust observation is an independent functional read of all three frozen final checkpoints on their existing512 training probes:1,536 contexts/263,553 candidate rows, fixed original tolerances and every choice discrepancy retained. It would test checkpoint/logit correspondence, not runtime health or fresh/native usefulness. Root may instead choose no further run. Reopening execution would require a concrete costed comparison and a specific prediction for an execution change; exhaustive cause proof or a positive pilot is not a general admission requirement. There is no active producer, unread scientific result/advice or external dependency after this disposition. The broader question remains open in reserve; Root owns a separately selected next allocation.
+
+<a id="b07-consumer-a03-final-cleanup"></a>
+### A03 closure and measured cleanup — 2026-10-03 UTC
+
+Terminal evidence and original engineering diagnosis were published at `de141f2061f3ca23c20f552aa507c51122e152a4` before deletion. The completed result reading and independent scientific advice now end this selected purchase, without completing the six-fit study. All native processes are gone; the original terminal event was consumed through the maintained observer, which is stopped at generation9 with no pending wake/event or active job. Every required unique result remains in its canonical location.
+
+Maintained claimed-operation GC verified terminal identity, source reachability, clean snapshot and no live consumers, then actually removed `/home/wu/projects/HMASD/.git/hmasd-launch-sources/f30e500415704de8a0f5b1008bfbadc6`. Exact no-open-file checks permitted deletion of the unused one-copy bank/proof stage `/home/wu/hmasd-inputs/typed_joint_skill_decision-b07-a03` and CUDA scratch `/home/wu/projects/HMASD/temp/directions/typed_joint_skill_decision/b07-consumer-a03`. Their gross removal was 2,168,098,816 allocated bytes. Post-deletion verification found no snapshot registration or deleted target and rehashed all 58 canonical output files unchanged. External dump metadata is unchanged from before A03; that is an observed endpoint fact, not a general bound on abnormal peaks or a runtime-health certificate.
+
+Locally removed `temp/directions/typed_joint_skill_decision/b07-consumer-a03` (only the now-unused observer request), four duplicate child request JSONs, eight empty child log copies, the duplicate initial scorer record and its empty raw containers. The exact list, allocated sizes, original hash checks and final net measurement are in `b07_consumer_a03/cleanup.json`. The first local lsof reads had unrelated Docker/FUSE mount-stat warnings and caused no deletion; a privileged exact-target read exempting only the two unrelated FUSE portal mounts completed with no open files or warnings. Every selected target resolves under this checkout, outside those mounts. There is no remaining concrete cleanup blocker.
+
+Net reclamation is measured for the deleted remote targets plus the before/after allocated change in this local run, its own scratch and append-only NOTES; it subtracts new review/closure evidence. It excludes Git object/admin metadata, shared RESEARCH allocations and unrelated concurrent writers, and is not a whole-task disk-change claim. No tree copy, tarball, retention chain or backup was created. Canonical 52.45MB A03 prefix, validated B05 bank, complete A02 bank verification, original B04/core and all previous failed outcomes remain. Useful published fixed-bank/consumer source and checks remain with explicit unresolved-runtime scope; no new disposable implementation or test scratch remains. Compact native claim/supervisor metadata remains as the original operation evidence.
+
+Known post-input support is about17.7082 CPU-seconds, with additional unmetered support and final tails, separately from the86.969447980 preparation subtotal and1,166.899232 consumer execution sample. This small CPU account does not erase the substantial scientific, implementation, review and coordination burden. The direction returns to reserve with no producer or unread advice. No new unchanged purchase is recommended; any functional trust observation or execution change remains an unselected proposal for Root’s allocation judgment.
