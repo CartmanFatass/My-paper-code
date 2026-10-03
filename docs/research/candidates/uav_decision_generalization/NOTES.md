@@ -9481,3 +9481,156 @@ package was made. This inventory/hash reading added .328947 CPU-s /
 .158694 operation-wall-s; other support remains additional. Terminal facts
 come from `process-exit.json` and reconciled native status; the immutable
 `launch-status.json` still records its original `accepted` event.
+
+<a id="b06-independent-review"></a>
+
+#### 2026-10-03 — Original independent B06 ResearchCritic answer
+
+The existing registered ResearchCritic worked in its separate review context,
+reconstructed original outcomes before asking for the DM interpretation, and
+returned the following complete answer. It made no new scientific execution.
+The text below is preserved in full; the DM response follows it.
+
+---
+
+建议 **停止 B06 这套固定 B/S 配方，不追加训练或确认；保留 G 的经济参考地位及 R1/R4 的条件性规划能力。** Parent 的学习与用途问题仍开放。这里最有分量的解释修正是：学生大幅改善了回归拟合，但连训练 bank 内的动作排序保真都未改善，不能把结果讲成“已经学会教师，随后才因新世界分布变化失败”。
+
+本轮沿用此前独立 ResearchCritic 上下文。我先重建原始证据并形成上述判断，之后才读取 DM 的新解释与处置。[DM 完整读数](/home/fires/hmasd-wsl/docs/research/candidates/uav_decision_generalization/NOTES.md:9220) 已明确区分拟合、决策保真和闭环用途；其停止固定配方、保留条件能力的处置与证据相符。
+
+**实际核查范围。** 我核验了 worker/reader 的来源绑定、共同的 71 文件科学身份，全部 224 个原始 mission NPZ 与 metadata 的哈希，以及原始请求、完成、未完成、成本、用户服务间隔、覆盖和路径。逐个重算了 B/S 保存分数到实际动作的组合与排序，检查了 R1/R4 全部 3,840 次决策的完整 cohort 均值和动作，以及所有 16 个对比的 240 条指标向量。七臂的初始条件、实际到达输入及其 RNG 地址匹配。
+
+我还检查了六个初末 bank 输出、原始 fit/epoch/update 证据，重建全部 192 条 epoch 损失记录，并独立复算 12 条 CPU crossing。未加载模型、重做前向、优化器或物理过程；完整物理重建和前向一致性采用已有[完整 reader](/home/fires/hmasd-wsl/runs/uav_decision_generalization/b06_amortization_read_a01/summary.json)及承重源码检查。历史梯度仍未独立重放。
+
+每臂共同遇到 1,803 个请求。下表除“未完成”是全 panel 总数外，均为 32 个 mission 指标的均值；T 只统计已完成请求，W 是最大单用户服务间隔。
+
+| 臂 | C | T | W | 未完成 | 路径 m/UAV | 覆盖用户/ tick | CPU秒/mission |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| G | 2601.94 | 424.41 | 607.38 | 0 | 5100.94 | 36.425 | 3.353 |
+| R1 | 2601.69 | 295.13 | 516.13 | 0 | 6915.07 | 35.510 | 81.365 |
+| R4 | 2443.16 | 211.00 | 518.44 | 0 | 6733.13 | 35.637 | 262.557 |
+| B | 3613.25 | 539.81 | 681.31 | 0 | 14646.54 | 31.507 | 3.263 |
+| S0 | 3834.19 | 549.78 | 659.34 | 2 | 10977.34 | 33.138 | 4.222 |
+| S1 | 4047.84 | 562.16 | 694.03 | 6 | 11088.33 | 32.972 | 4.169 |
+| S2 | 3843.28 | 551.56 | 689.38 | 5 | 10957.53 | 33.111 | 4.139 |
+
+三个学生相对 G 的平均 C 增量分别为 **+1232.25、+1445.91、+1241.34**，各自的探索性配对区间均在零以上；相对 R1/R4 也全部更差。相对 B 的 C 增量为 +220.94、+434.59、+230.03，其中 S0/S2 区间跨零。学生相对 B 确实少走约 3.56–3.69 km/UAV、平均多覆盖 1.465–1.630 个用户，但这不足以形成对 G 或规划器的完整替代用途。
+
+三个 fit 的 C−G 均值为 +1306.5，条件 df2 区间为 [+1006.38,+1606.62]。这是同一个 bank、同一个 panel 下的三次优化重复；另一个按共同世界计算的区间回答不同问题。两者都不能成为 96 个独立世界或三次独立教师采集。
+
+**局部正例必须保留，不能据此挑选学生。** 对 G 的 C 改善逐个是：
+
+- S0：世界 003/016/018，分别 −789/−185/−115。
+- S1：世界 006，−691。
+- S2：世界 003/006/025，分别 −422/−459/−209。
+
+世界编号均省略共同前缀 109255。S0 在 003 同时降低 C、路径并提高覆盖，但 T/W 分别增加 16/116。S2 在 003 同时降低 C/T/W，分别 −422/−145/−173；其路径却增加约 3.68 km/UAV，覆盖减少 2.238。其余正例也保留在完整向量中，尚无可部署规则能事先识别这些有利用途。
+
+完成请求的筛选会改变尾部解读。[S2 世界 016](/home/fires/hmasd-wsl/runs/uav_decision_generalization/b06_amortization_read_a01/checks/main/S2/109255016.json) 的 T 为 162，低于 G 的 581；但它留下了一个已等待 **至少 820 秒**的请求，C 增加 524、W 增加 337。加入这个观察下界后，S2 的平均 censored maximum 是 572.125，而不是 551.5625。三个学生的平均用户最长间隔相对 G 分别增加 35.85/44.69/31.09 秒，同时存在个别用户改善；这些用户记录不是额外独立样本。
+
+**拟合的正面结果是真实的，但其含义有限。** [初末 acquisition 证据](/home/fires/hmasd-wsl/runs/uav_decision_generalization/b06_amortization_read_a01/acquisition-checks.json)支持：
+
+| Bank 指标 | 初始 G | S0 | S1 | S2 |
+|---|---:|---:|---:|---:|
+| 相对成本 MSE | .504772 | .002825 | .003180 | .003486 |
+| 平均教师菜单 regret | 19.2195 | 11.1069 | 15.3344 | 10.0455 |
+| 选择教师非最优动作的菜单数 | 360 | 666 | 860 | 476 |
+| 1,507 个唯一最优菜单中的正确数 | 1148 | 876 | 693 | 1042 |
+
+所有 64 epochs、2,112 updates/fit 都完成了，参数有实质变化；训练曲线大幅下降，末期有小幅波动。这里已经有“固定小网络能够用有限优化明显拟合这些暴露标签”的证据，不能用“没有学动”解释失败。但较低平均 regret 与更频繁的错误排序同时成立，说明回归改善集中在哪些误差上，和控制需要保住哪些动作差异，并非同一个判断。
+
+388 个教师四动作全并列的菜单，在三个学生中全部变成了严格排序；其中 310/384/191 个改选非 KEEP。B 也提供相同方向的反例：它把平方损失从 .504772 降到 .332142，却把平均教师 regret 提高到 36.5207。最低二乘误差不是任务控制最优性。
+
+这些证据支持“有限回归目标没有保证决策保真”的诊断。教师标签噪声、有限优化、后续状态分布及完整时域后果仍可参与解释，尚不能唯一归因。新损失只约束相对值，共同偏移未被识别，不能搬用 B05 的绝对成本/Bellman offset 故事。
+
+**这也是实际执行的负面干预。** 全部 13,440 次决策按时完成，缓存完整；七个 endpoint 各启动一次。S0/S1/S2 分别有 829/974/911 次已激活运动不同于同状态 G。它们不是未激活或仅有少量选择机会。
+
+其中仍有 743/914/808 次发生在有队列的状态，748/921/814 次发生在 G 成本非全零的状态。因此，末期空队列上的并列破坏确实存在，却不能单独解释大部分损失。直接加一个末期 KEEP 补丁，尚无证据会修复完整 C。上述对应关系也不等于已经识别了每次动作的反事实因果损失。
+
+**R1/R4 的正面能力及代价都应保留。** 相对 G：
+
+- R1 的 T/W 均值下降 129.28/91.25；C 差 −0.25，区间跨零。
+- R4 的 T/W 均值下降 213.41/88.94；C 差 −158.78，区间为 [−320.97,+3.40]。
+- 两者均完成全部请求，但路径增加、平均覆盖下降，也都有 adverse worlds。
+
+R1 比 R4 少用约 69% CPU，却付出 C +158.53、T +84.13 的代价，两项配对区间均在零以上；W 差异未确定。因此，R1 提供的是另一种有用取舍，不能称为保留等价服务的压缩教师。G、R1、R4 都应继续作为有能力的普通比较对象。
+
+**成本支持停止当前配方，而不是从便宜拟合推导便宜成功。** 三个 fit 各约 60–61 CPU秒，整个新 acquisition 为 189.075 CPU秒；完整研究截至 reader 已用 **4.5573 CPUh / 4.7692 累加 operation-wall h**。另有已测 publication、DM/reviewer 读取及未计支持成本，不能视零。
+
+学生相对 R1/R4 的 CPU-only crossing 很早：已付 bank 加一个 fit，分别约 .84–.86/.25–.26 次使用；计入历史教师的已测成本后，下界约 92/28 次使用。可是学生的实际服务更差，而 G 还更便宜，因此这些均非同等服务的盈亏平衡。相对 G/B 没有学生 CPU crossing。历史教师成本与原 B05 整体研究成本有重叠，不应重复相加。
+
+我的下一投资建议是 **本轮不购买新实验**。复制当前配方主要增加条件于这个 bank 的重复，不能自动解决已观察到的排序—控制问题；更多 epochs、更多数据或改变 loss/gate 也各自改变了待检验假设和成本，现有结果没有指定其中哪一种应立即购买。这一停止不要求证明所有修复都无效，也不关闭学习问题。
+
+最强的建设性保留是：规划存在可用的条件尾部能力，且教师相对值能够低成本拟合。如果 Root 后续选择继续这个问题，我更看重“在明确服务—计算用途下，何时值得支付规划”的比较，而非立即修补当前回归器。最小值得购买的完整观察应是一个冻结调用策略，与同信息、同资源口径的 G/R1/R4 和简单调用规则作配对比较，计入实际调用、训练、完整读取及支持成本，同时保留 C、完成/未完成、T/W、路径、覆盖和选择激活。具体规则、panel、是否训练及完整价格目前尚未冻结，不能把约 60 秒拟合成本当成这项后继研究的报价。
+
+其结果应改变真实选择：普通规则即可取得用途时，不支持学习必要性；学习策略在匹配的普通比较对象上取得完整净收益时，才支持受训练单位限制的窄学习结论；仅降低计算却损失服务时，应记录取舍；未调用或很少改变选择时，只能限制该策略的用途，不能据此否定规划机会。这里没有自动续跑或诊断阶梯的建议。
+
+本次新增纯读取/保存数据算术已测 **6.39885 CPU秒、已知 wall 5.89941秒**；其中一次 schema 定位失败已计入。其他源码阅读、命令及推理支持未完整计时，非零。新增 fit、NN forward、规划查询、物理或 native 调用均为零。
+
+**MATERIAL_DISSENT: no。** 对 DM 当前“停止固定 B/S 配方、保留条件规划能力、不立即购买修补实验”的新投资处置无实质异议；其解释已经保留了训练 bank 内的决策保真不足及完整 native 负面证据。
+
+---
+
+<a id="b06-independent-disposition"></a>
+
+#### 2026-10-03 — DM response and resolved investment
+
+I read and accept the complete independent reconstruction and recommendation.
+**End this fixed B/S investment without another fit, loss/KEEP-gate patch,
+confirmation, panel or automatic planner repeat. Retain G, R1 and R4 as useful
+ordinary alternatives, the finite supervised-fitting capability and every
+favorable/adverse learned case.** The larger question of learned decision
+modules remains open. No material scientific disagreement is being self-cleared;
+the reviewer reports `MATERIAL_DISSENT: no`. This adequate independent review
+covers the actual new evidence and stopping decision; no distinct unresolved
+expertise question presently motivates an additional Pro consultation.
+
+The consequential refinement is stronger than an undifferentiated transfer
+failure. Regression loss and average menu regret improve, while selecting any
+teacher minimum becomes less frequent on the already exposed bank. I checked
+the saved bank and endpoint arrays directly: 1,507 unique-minimum contexts,
+G/S0/S1/S2 correct counts 1,148/876/693/1,042, and nonoptimal counts
+360/666/860/476 agree. All 388 all-action teacher ties acquire strict student
+orders, with 310/384/191 non-KEEP choices. These are zero-new-forward arithmetic
+checks, not additional fitting or evidence from a new distribution. The
+observation rejects the narrow story that good regression had already preserved
+teacher decisions and only fresh deployment introduced the problem. It does
+not identify the ranking errors' unique cause, and lower average teacher regret
+remains a genuine positive observation. The target's unidentifiable common
+offset also prevents importing B05's absolute-Q explanation into B06.
+
+For clarity, the review's +35.85/+44.69/+31.09 individual-gap increments average
+the 50 users' longest gaps and then the 32 worlds; my direct saved-check
+recalculation gives +35.852500/+44.691875/+31.085625 ticks. They are distinct
+from the mission-level maximum W increments +51.96875/+86.65625/+82.0.
+Neither treats users as extra independent worlds. The completed-only T and the
+unfinished 820-tick lower bound remain separate. These source checks add known
+1.027487 CPU-s/.372907431 operation-wall-s; two non-scientific schema-location
+errors and other support are additional/unmetered, not zero. They caused no
+model, optimizer, environment or policy call.
+
+The complete native S/B losses and R1/R4 tradeoff change the investment judgment.
+Small fitting cost cannot turn inferior service into a matched-use amortization
+claim. R1 preserves an ordinary cheaper tail option, with explicit C/T losses
+versus R4, while G remains the lower-CPU and competitive primary-cost reference.
+All planners met the deadline. No transfer mechanism or equivalence is needed
+to retain those useful conditional programs; none justifies a universal upgrade.
+
+The next worthwhile continuation, if Root selects this question again, would
+ask when paying for planning has a consequential complete service/compute use,
+with G/R1/R4 and a competent same-information ordinary invocation rule. A learned
+invocation strategy would need its complete acquisition/deployment/reading
+price and an independently reviewed prospective prediction against that rule.
+Existing fixed-panel capability is a reason to consider this, not an automatic
+new experiment or a mandate to make a small residual around G. Source-level
+representation changes, more data, changed relative loss, a KEEP rule and
+unchanged replication currently have no evidence-selected predicted repair
+strong enough to displace stopping. The broader parent's next allocation belongs
+to Root under this native-child assignment. There is no producer, unresolved
+operation or external dependency after publication/cleanup; the direction is
+idle in reserve, with no scheduled check or selected effect.
+
+The new pure reading cost reported by the ResearchCritic is 6.398850 CPU-s /
+5.899410 operation-wall-s. Compact evidence publication `97c79fbcb72d1eb7cf0d96eaa9f20d93ec15dae0`
+adds .665721 CPU-s /8.883873 operation-wall-s. These are added once beyond the
+reader's inclusive meter, together with its previously recorded later publication
+and DM reading costs. Final exact cleanup and publication are recorded below.
