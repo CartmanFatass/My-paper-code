@@ -1,0 +1,13 @@
+# Retired complete-consumer A03 allocation
+
+Retired 2026-10-03 UTC / 2026-10-02 PDT after A03 terminated and the complete independent disposition was read. Source revision: `baba8483f49e1fc03afc735114ca195d8f6f7d21`. This preserves Root's complete A03 investment reasoning and risk acceptance; it does not retire the still-selected G/R/L request study, alter direction ownership or create a pause. Current allocation is in [RESEARCH](../../RESEARCH.md#consumer-a03-root-disposition-20261003).
+
+The exact retired block before relative-link relocation contains 3187 UTF-8 bytes; SHA256 `492fb9ba6ce638848e007f2a92a722b2677590c926dca31cfb6e2dceb70b3774`. Direction notebooks, original answers and frozen run identities retain their meanings.
+
+**固定 bank 保留，A02 消费者拒绝后另选 A03 完整购买。** A02 全库验证已完成 16,512 世界／2,844,367 标签；producer／重建向量与各自 exact winner 一致。全部 2,501 旧完整世界中的六处旧到新 winner 变化保持，最大交叉 J regret 1.110223e−16 不约束训练或 native 后果。原 B05 exit2、A01 reader 身份错误、A01 consumer shell 分组失败与其精确 exit 未知，均保留原记录。[全库验证与原独立处置](../../candidates/typed_joint_skill_decision/NOTES.md#b07-a02-independent-disposition)。
+
+正式 consumer A02 已证明一条正确的 supervisor 命令能打开 launcher 并记录 exit；随后原生扫描器因 `direction=c.DIRECTION` 不是规定的字面量而拒绝，实际 exit4，尚未 spawn 科学 runner。Root 全文读取 7,581-byte 独立原答、工程诊断、DM 处置与清理，采纳 MATERIAL_DISSENT:no：这降低完整集成就绪信心，但未产生学习或 native 负结果。旧自写 claim 检查误用了目录；DM 已核对真实 `.git/hmasd-admission` 的全部 304 JSON，无匹配旧 source/output，原 pre-claim 路径与 maintained GC 亦支持该结论。修正核对方法不改写旧失败。[完整拒绝、独立意见与处置](../../candidates/typed_joint_skill_decision/NOTES.md#b07-consumer-a02-independent-disposition)。
+
+Root 仍选择一次**新的剩余完整消费者**：其前瞻价值是固定优化投入下的覆盖／重复暴露、新世界近似与强普通方法的完整用途比较；连续支持开销使停止也合理，既往投入和问题未答都不是必须续买的理由。只将 B06 方向声明改为 literal 并更新相应 pins，使用现有真实 effect-free scanner 验证正确入口及旧源码反例，保留已在实际提交中奏效的 shell 修复。该测试通过仅建立这处接口兼容，不证明 CUDA、下游身份或完整运行健康；无 producer／全库 reader／健康 pilot 重复，无因语法修正再加科学审查。[A03 明确选择与原风险](../../candidates/typed_joint_skill_decision/NOTES.md#b07-consumer-a03-selection)、[实际检查](../../candidates/typed_joint_skill_decision/NOTES.md#b07-consumer-a03-engineering-acceptance)。
+
+完整六 fit、24,576 updates、≤1,383,760 static、1,152 cold＋16 audits、584,000 native 与普通／self-score／逐用户／冷费用读取均未缩减；8 aggregate CPUh／4 whole GPU-childh／16 wallh／6 GiB 正常存储边界不变。Root 重新明确接受旧 remote SIGSEGV 原因未定、实际 CUDA／内存／吞吐未测及外部异常 dump 无已知有限峰值上界，全部旧／新支持成本另计。首个正式请求、实际准入、科学运行或 reader 的真实故障停止本购买及依赖；纯草稿检查可修正计费。A03 已真实准入，DM 沿唯一新 handle 观察；这不是科学完成。A02 拒绝购买净回收 2,167,894,016 allocated bytes，前一 reader 购买的 2,215,280,640 bytes 单列，唯一 bank/证据不动。[新操作入口](../../candidates/typed_joint_skill_decision/NOTES.md#b07-consumer-a03-accepted)、[A02 净清理](../../candidates/typed_joint_skill_decision/NOTES.md#b07-consumer-a02-final-cleanup)。

@@ -10,7 +10,7 @@
 本会话实际 UUID 为 `01a0ef2b-a391-7693-a748-60e24be246ae`，现重新承担 Codex Root 的科学管理与跨题投入选择；
 前任 `01a0f779-ace2-74e1-85ad-e0997b61d505` 的三项工作已经终态，旧操作不恢复。
 已建立三位注册原生 DM，首轮实际模型均核对为 `gpt-6-astra/max`：决策辅助完整合同、联合服务后继选择、有限消息编码设计。
-本轮 SET mean 与有限消息比较已完整判读并关闭原配方；A02 验证 bank 保留，consumer A01/A02 的真实启动失败均已关闭，现另选的 A03 完整消费者已准入。修正版 G/R/L 新请求排程继续实施；通信 source-only 构造及独立判断已完成，Root 采纳本轮不投入。全部旧能力、反例、真实失败和成本保留。
+本轮 SET mean 与有限消息比较已完整判读并关闭原配方；A03 消费者在三个 fit 后真实失败，独立判读与清理完成，Root 采纳暂不续买。验证 bank 与有限训练证据保留。修正版 G/R/L 新请求排程继续；通信 source-only 判断也已完成并决定本轮不投入。全部旧能力、反例、真实失败和成本保留。
 具体责任与新 UUID 只维护在[唯一路由](#session-routing)，完整价格、原始意见和 Root 的风险/异议处置见[当前投入](#three-dm-selected-investments-20261002)。
 Claude peer 的暂停、FSD/PPC、G33 与 Milan 原范围保持；本次接任记录见 [HANDOVER](../Claude_docs/inbox/20261002_root_resumption_01a0ef2b_ROOT.md)。
 
@@ -2651,21 +2651,22 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 
 <a id="three-dm-decision-assistance-20261001"></a>
 <a id="three-dm-selected-investments-20261002"></a>
-**当前问题责任与 Root 投入（2026-10-03 UTC／10-02 PDT）：** 固定数据消费者 A02 拒绝已完整判读并关闭，Root 明确另选 A03 完整消费者，现已准入；修正版 G/R/L 请求排程购买继续实施。通信 source-only 比较完成后，Root 采纳原独立意见，本轮不投入新的资源／调度实验。当前两位 DM 推进已选完整研究，第三位保留问题与普通资产、暂 idle；三 DM 工作目标不使低价值候选自动启动。[A02 与通信设计的原选择](archive/2026-10-03/RESEARCH-consumer-a02-and-finite-channel-source-selection.md)退役，原独立答复仍在方向 NOTES；G/R/L 的当前合同不退役。
+**当前问题责任与 Root 投入（2026-10-03 UTC／10-02 PDT）：** A03 消费者已失败并完成独立判读／清理；Root 采纳暂不续买，保留固定 bank 和有范围限制的训练证据。修正版 G/R/L 请求排程是当前已选的完整研究；通信 source-only 也已完整关闭，决定本轮不投入。另两位 DM 保留长期问题与资产、reserve/idle，三 DM 工作目标不使低价值候选自动启动。[A03 原选择](archive/2026-10-03/RESEARCH-consumer-a03-allocation.md)退役，原独立答复仍在方向 NOTES；G/R/L 的当前合同保留。
 
 | 当前问题责任 | 本次实际投入与完整观察 | 费用与科学边界 |
 | --- | --- | --- |
-| 广义决策辅助、世界覆盖与完整用途 | `dm_decision_assistance`：A02 consumer 原生拒绝已关闭；Root 另选修正 literal 声明后的 A03 完整消费者，现已准入。使用已验证 bank，无重复 producer／全库 reader | 六 fit／24,576 updates／≤1,383,760 static／584,000 native；原 8 CPUh／4 whole GPU-childh／16 wallh 及正常 6 GiB 边界，风险与支持费用重新接受。沿原新 handle 全读。[A03 选择](candidates/typed_joint_skill_decision/NOTES.md#b07-consumer-a03-selection) |
+| 广义决策辅助、世界覆盖与完整用途 | `dm_decision_assistance`：A03 在父进程异常后关闭；Root 全读并采纳不追加原样消费者，未购买 checkpoint functional read 或执行修订。保留 bank、训练证据与长期问题 | 三个已完成 fit／12,288 updates；0 fresh／native／完整 reader。1,166.899232 CPU-s、1,012.284701 whole GPU-child-s，准备／支持／旧投入另计；净清理 2,168,307,712 bytes。[Root 处置](#consumer-a03-root-disposition-20261003) |
 | 联合服务能力获取与完整用途 | `dm_joint_service`：购买一次修正版 G/R/L 新请求排程，3 独立 fit、共同 32 世界与 3 审计世界；提供同一三对执行器，读取完整获取、普通规划与部署取舍 | 2,049,600 native、91,392 更新、R＋reader≤8,848,000 computed model-ticks、≤2,342,753,280 G cluster-tick recurrences；预计 20–50 CPUh/0GPU/24–40 支持小时，50 aggregate CPUh 和 72 operation wallh 停点。低负载下 G 可能已充分。[完整合同与原评审](candidates/uav_decision_generalization/NOTES.md#request-scheduling-investment-disposition-20261002) |
 | 有限消息下保留合作能力 | `dm_message_budget`：B07 及有限信道 source-only 决策完整收尾，保留三普通 codec、结束 task-aware 配方，本轮不买新通信比较 | 源构造／完整独立 review 改善未来 21-byte lossless 对照，0 科学效果、55.49min elapsed support；净清理 10,088,448 bytes。不会以缺部署／证明设研究门槛。[Root 处置](#finite-channel-source-design-20261002) |
 
-**固定 bank 保留，A02 消费者拒绝后另选 A03 完整购买。** A02 全库验证已完成 16,512 世界／2,844,367 标签；producer／重建向量与各自 exact winner 一致。全部 2,501 旧完整世界中的六处旧到新 winner 变化保持，最大交叉 J regret 1.110223e−16 不约束训练或 native 后果。原 B05 exit2、A01 reader 身份错误、A01 consumer shell 分组失败与其精确 exit 未知，均保留原记录。[全库验证与原独立处置](candidates/typed_joint_skill_decision/NOTES.md#b07-a02-independent-disposition)。
+<a id="consumer-a03-root-disposition-20261003"></a>
+**固定 bank 与有限训练证据保留，A03 购买关闭，当前不再投入原样消费者。** Root 全文读取原始故障、完整工程诊断、8,641-byte 原科学评审与 DM 处置，采纳 MATERIAL_DISSENT:no。A03 实际 exit1；前三个 fit 各完成 4,096 updates，第四个在父进程异常后被清理，未进入 fresh／cold／native／完整 consumer reader。父进程磁盘计量触发的 `pathlib` 异常尚无已证原因或明确源码修复，也未建立与旧 SIGSEGV 的联系。三次 CUDA fit 已实际发生，不能再笼统称 CUDA 从未执行；这仍不验证整个运行环境和后续流程。[原始终态与工程诊断](candidates/typed_joint_skill_decision/NOTES.md#b07-consumer-a03-terminal)。
 
-正式 consumer A02 已证明一条正确的 supervisor 命令能打开 launcher 并记录 exit；随后原生扫描器因 `direction=c.DIRECTION` 不是规定的字面量而拒绝，实际 exit4，尚未 spawn 科学 runner。Root 全文读取 7,581-byte 独立原答、工程诊断、DM 处置与清理，采纳 MATERIAL_DISSENT:no：这降低完整集成就绪信心，但未产生学习或 native 负结果。旧自写 claim 检查误用了目录；DM 已核对真实 `.git/hmasd-admission` 的全部 304 JSON，无匹配旧 source/output，原 pre-claim 路径与 maintained GC 亦支持该结论。修正核对方法不改写旧失败。[完整拒绝、独立意见与处置](candidates/typed_joint_skill_decision/NOTES.md#b07-consumer-a02-independent-disposition)。
+独立已付数据算术复核三组训练日志与全部 1,536 个训练 probe 的选择／regret／KL，支持已存记录内部一致；没有重新加载 checkpoint 或验证其前向输出。1k 的 87,851 个 probe 候选仅两个无记录曝光，所有选中候选已曝光，平均 regret 仍 .0404598，因此单纯“候选从未见过”不足以解释该训练误差。有限优化、重复量及 best-plus15 子集目标转向完整菜单排序仍是未分离的解释。16k 同时改变覆盖和重复；截断、不平衡的三 fit 不识别纯数据量效应，不选最优臂，也不回答新世界或 Raw8J／RawJ／P 的完整用途。[全部原科学意见与采纳](candidates/typed_joint_skill_decision/NOTES.md#b07-consumer-a03-independent-disposition)。
 
-Root 仍选择一次**新的剩余完整消费者**：其前瞻价值是固定优化投入下的覆盖／重复暴露、新世界近似与强普通方法的完整用途比较；连续支持开销使停止也合理，既往投入和问题未答都不是必须续买的理由。只将 B06 方向声明改为 literal 并更新相应 pins，使用现有真实 effect-free scanner 验证正确入口及旧源码反例，保留已在实际提交中奏效的 shell 修复。该测试通过仅建立这处接口兼容，不证明 CUDA、下游身份或完整运行健康；无 producer／全库 reader／健康 pilot 重复，无因语法修正再加科学审查。[A03 明确选择与原风险](candidates/typed_joint_skill_decision/NOTES.md#b07-consumer-a03-selection)、[实际检查](candidates/typed_joint_skill_decision/NOTES.md#b07-consumer-a03-engineering-acceptance)。
+Root 选择本轮不再买同样消费者，也不购买建议中的 1,536-context／263,553-row 冻结 checkpoint functional read。该读数能加强有限资产信任，却不能单独改变原生方法选择；三次成功训练已使短健康试跑的新增价值有限。当前缺少针对这次异常有具体预测的执行变更，累计支持负担也降低再次原样购买的价值。保留广义决策辅助问题、已验证的 16,512-world bank、条件 R 能力和全部反例；停止是投入判断，不是学习负结果、外部依赖或要求穷尽根因的新门槛。以后可另选有完整价格与比较合同的用途或执行修订，本次没有隐藏续跑。已选 G/R/L 动态请求研究继续；另两位 DM reserve，不为数量目标填充实验。[退役的 A03 原完整选择与风险](archive/2026-10-03/RESEARCH-consumer-a03-allocation.md)。
 
-完整六 fit、24,576 updates、≤1,383,760 static、1,152 cold＋16 audits、584,000 native 与普通／self-score／逐用户／冷费用读取均未缩减；8 aggregate CPUh／4 whole GPU-childh／16 wallh／6 GiB 正常存储边界不变。Root 重新明确接受旧 remote SIGSEGV 原因未定、实际 CUDA／内存／吞吐未测及外部异常 dump 无已知有限峰值上界，全部旧／新支持成本另计。首个正式请求、实际准入、科学运行或 reader 的真实故障停止本购买及依赖；纯草稿检查可修正计费。A03 已真实准入，DM 沿唯一新 handle 观察；这不是科学完成。A02 拒绝购买净回收 2,167,894,016 allocated bytes，前一 reader 购买的 2,215,280,640 bytes 单列，唯一 bank/证据不动。[新操作入口](candidates/typed_joint_skill_decision/NOTES.md#b07-consumer-a03-accepted)、[A02 净清理](candidates/typed_joint_skill_decision/NOTES.md#b07-consumer-a02-final-cleanup)。
+A03 已发生 12,288 updates，执行计量为 1,166.899232 CPU-s、1,012.284701 whole GPU-child-s、1,013.626233 wall-s，另有 86.969447980 preparation CPU-s、约 17.7082 后续已计支持 CPU-s、既往科学与未计支持；第四个子进程的启动成本保留。停止时未耗尽原资源界限。已清除失活 snapshot／stage／scratch／本地重复物，净回收 **2,168,307,712 allocated bytes**，唯一 bank、prefix、失败证据保留，无清理阻碍。此前 A01／A02 各自失败、费用和净清理仍按原记录单列。[完整收尾及测量范围](candidates/typed_joint_skill_decision/NOTES.md#b07-consumer-a03-final-cleanup)。
 
 **SET mean 完整结果与投入处置。** Root 全文读完 12,511-byte 原结果 critic（12,465 characters）及 DM 修订处置，采纳关闭 frozen mean 与独立拒绝两 fit 的建议（MATERIAL_DISSENT:no）。原选择时的实质 no-buy 异议仍保留；完整执行获得了此前未知的初/末差异，负结果不等于原观察没有价值。mean 的完成窗口 5→2/128，final−initial 为−.09375 W/mission，相对原 sampled 训练增量 +.0625 的 interaction 为−.15625；final mean 没有新完成窗口，覆盖与连续性净恶化。初末/模式对照限于这份权重与原暴露世界，不建立训练总体劣势或等价。
 
@@ -2694,7 +2695,7 @@ Root 亲读 [Sivagnanam et al. 本地 PDF pp2–4、7–8](/mnt/c/Projects/My-li
 <a id="finite-channel-source-design-20261002"></a>
 **通信 source-only 判断已完成，Root 采纳不投入。** Root 完整读取构造、10,962-byte 原 critic 与修订处置（MATERIAL_DISSENT:no），并亲读 CADC payload 源码、MAVLink／SiK 原文、Davoli 的承重段落与 pinned Semtech airtime 实现。考察的五机／一秒动作与 SF7 映射，在声明的无额外 access-delay 例子中没有暴露共享 WHO 序列化瓶颈；不能把旧 RR 的每 tick 一包限制视为物理容量。按用户可见信息进行逐设备 duty／WHEN 选择仍是合法的不同研究问题。[完整原评审与 DM 处置](candidates/uav_message_content/NOTES.md#finite-channel-independent-investment-review-20261002)。
 
-Root 接受 critic 对自身初始问题的修正：**不投入的理由是当前知识价值相对完整实施／读取／支持成本不足**，而非必须有实际部署、预先阳性或理论证明。一个明确的 modeled duty fraction 可直接支持前瞻实验；此时最小五包比较主要测固定 B/D receiver 与三个 codec 在新更新过程的用途，不自动证明学习调度值得买。40,960 native＋等量 reader 只是未选例子的 exposure，不是完整价格或已选运行。无需再搜文献、添 pilot 或为维持三 DM 数量制造该实验；当前 A/B 两项已选研究继续，通信问题保留而会话 idle。
+Root 接受 critic 对自身初始问题的修正：**不投入的理由是当前知识价值相对完整实施／读取／支持成本不足**，而非必须有实际部署、预先阳性或理论证明。一个明确的 modeled duty fraction 可直接支持前瞻实验；此时最小五包比较主要测固定 B/D receiver 与三个 codec 在新更新过程的用途，不自动证明学习调度值得买。40,960 native＋等量 reader 只是未选例子的 exposure，不是完整价格或已选运行。无需再搜文献、添 pilot 或为维持三 DM 数量制造该实验；当前 B 的请求排程研究继续，通信问题保留而会话 idle。
 
 未来 lossless 参照也已实质增强：CADC 第六个 varying field 是 20 个 Boolean 的 count/20，仅 21 个精确值，可传一字节并按原次序重建 FP32；其他五个 FP32 合计使 payload 为 21 bytes，无需 codebook。它不是最小熵证明；B07 frozen 的 24-byte reference／28→5 账不改。给定相同 framing/SF7 例子，unsigned 全五包加 beacon 约 .431616s；1% **模型** duty 下 compact 与该 lossless 整秒资格约 5 对 8 秒，不是法律或实测网络保证。冻结 receiver、信号／队列／控制／安装与个体尾部仍决定完整用途。[源码与一手来源、精确算术](candidates/uav_message_content/NOTES.md#serialization-source-decision-20261002)。
 
@@ -4144,7 +4145,7 @@ Root 已向三个原会话各投递一次明确携带 `model="gpt-6-astra"`、`t
 
 | 责任 / 原生任务标题 | Task / host | Authoring checkout / branch | 恢复入口 |
 | --- | --- | --- | --- |
-| 当前 Root：恢复三 DM 研究与跨题投入 | `01a0ef2b-a391-7693-a748-60e24be246ae` / `local` | `/home/fires/hmasd-wsl` / `main` | Owner 已明确继续。A02 consumer 拒绝全读后 Root 另选 A03，现已准入；G/R/L 整包在实现。通信 source-only 全读并采纳 no-buy／21-byte lossless 修正；两项已选研究继续，第三 DM idle，旧能力与失败保留。[当前计划](#three-dm-selected-investments-20261002)。 |
+| 当前 Root：恢复三 DM 研究与跨题投入 | `01a0ef2b-a391-7693-a748-60e24be246ae` / `local` | `/home/fires/hmasd-wsl` / `main` | Owner 已明确继续。A03 失败全读后采纳不追加，保留 bank／有限训练证据；G/R/L 整包继续。通信 source-only 已采纳 no-buy／21-byte lossless 修正。A/C reserve，当前选定研究由 B 推进；旧能力、失败和成本保持。[当前计划](#three-dm-selected-investments-20261002)。 |
 | 临时 Oracle：联合服务实质后继构造（本次完成） | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/joint_service_next_question_oracle` | `/home/fires/hmasd-wsl` / `main`，只读建议 | 显式请求 `gpt-6-astra/max`；完整 8,910-character 原答已读并原样转给联合服务 DM。原建议经 DM／独立 critic 修正后由 Root 选择整包；Oracle 是方案共作者，本次任务已结束，不是独立审查或第四 DM。[最终选择](#joint-request-selected-20261002)。 |
 | 前任 Root：2026-10-02 完整交接 | `01a0f779-ace2-74e1-85ad-e0997b61d505` / `local` | `/home/fires/hmasd-wsl` / `main` | `c3a31d403` 已完整收尾三位 DM、独立处置、发表和清理，无活结果操作/未读返回。该轮身份仅作历史定位，当前联系见上一行。[完整交接](HANDOFF_20261002_ROOT_AND_THREE_DMS.md)。 |
 | DM：开源决策辅助长期探索 | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_decision_assistance` / UUID `01a0fd18-d308-76a1-98f8-eb9e6b77f15d` | `/home/fires/hmasd-wsl` / `main` | 同一注册 Astra/max DM/lead，独占 typed 及 B06。A03 消费者实际 exit1，前三 fit 完成、第四被父进程清理；fresh/native/完整 reader 未进入。原始故障、独立已付数据判读及全部8,641-byte critic 已读/发表，采纳暂不再买原样消费者；bank及有范围限制的训练前缀保留。当前 reserve/idle，无活操作或未读意见，新 functional trust 读取/执行变更仅为未购买建议，后续分配属 Root。实际净清理2,168,307,712 bytes，无阻碍。[科学处置](candidates/typed_joint_skill_decision/NOTES.md#b07-consumer-a03-independent-disposition)、[净清理](candidates/typed_joint_skill_decision/NOTES.md#b07-consumer-a03-final-cleanup)。 |
