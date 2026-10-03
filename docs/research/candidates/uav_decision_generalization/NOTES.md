@@ -9718,3 +9718,204 @@ their actual tradeoff. There is no active producer, unread result/review,
 scheduled continuation or external blocker. The native parent receives the
 published result and optional future planning-use question; no additional
 effect is selected by this closure.
+
+<a id="b07-prospective-construction-20261003"></a>
+
+#### 2026-10-03 — Source-only construction of online planning-work allocation
+
+Root has assigned this same, non-archived DM bounded prospective construction
+after integrating B06 at `f12758b88` and the owner-requested workflow
+consolidation at `0a621fd228f84d99f87e6acc4a43a630d430ca16`. This authoring scope
+is source reading, saved-data arithmetic and a priced complete comparison;
+there is **no new native/model/optimizer/learner check or result launch**.
+The existing scientific review supports stopping B06 and considering a useful
+planning-use question, but does not substitute for review of the new actual
+design. Root owns cross-question selection and a distinct Pro framing question;
+no Pro send is delegated here. Accepted A/C work remains independent and its
+unfinished outcomes are not inputs to this construction.
+
+I read current published pause/ownership, topic5 and the affected consolidated
+methods, reusing the complete primary B06 quantitative reading above. Direct
+source reading of B06's endpoint adapter and inherited B05 rollout, deadline,
+G and RNG definitions precedes interpretation of the Oracle proposal below.
+The [current shared judgment](https://github.com/CartmanFatass/My-paper-code/blob/0a621fd228f84d99f87e6acc4a43a630d430ca16/docs/research/RESEARCH.md#5-技能和异步性是组织决策的方式其收益需要证据)
+changes the question from replacing R with the failed regressor to developing
+R's demonstrated conditional tail capability at an explicit computation price.
+G remains a strong ordinary alternative, R1/R4 have a real C/T tradeoff, and
+all old decisions met deadlines. New computational thrift therefore needs a
+complete use comparison; it cannot be credited with an already observed deadline
+benefit or called a learned capability when no fit is performed.
+
+<a id="b07-root-oracle-original-20261003"></a>
+
+#### Complete original B/D construction advice from Root's temporary Oracle
+
+Received once through native communication from
+`/root/four_dm_allocation_oracle`, under Root's explicit request to preserve
+the full original here and share this single source with D/Root. This is the
+coauthor's complete message, not an independent Scientific Review or an effect
+authorization. Its identity is recorded after the verbatim text.
+
+<!-- B07_ROOT_ORACLE_ORIGINAL_BEGIN -->
+I sent the preceding D consultation to D once, in full, as requested.
+
+My preferred allocation is **B on allocating online planning work, and D on direct planner imitation using B’s frozen teacher bank**. B is the stronger immediate purchase. D is a worthwhile, bounded learning study because it tests a different decision objective at modest acquisition cost, with a complete deployment comparison. Neither assignment depends on A/C results or changes their accepted studies.
+
+This is coauthor advice, not the independent Scientific Review.
+
+I reconstructed B06’s original observations before reading its interpretation: all 224 worker mission JSON records, the full 32-world comparison vectors, acquisition records, and source bindings. All 71 bound source files matched. The 224 records reconstruct the request-area costs and terminal unfinished counts; I did not independently rerun native physics or historical optimizer updates. The complete-record reduction used 0.354 CPU seconds, source hashing 0.010 seconds, and the final exposure arithmetic 0.000414 seconds, apart from ordinary source/metadata reading.
+
+The useful starting point is quite specific:
+
+| Endpoint | Mean request cost \(C\), lower better | Mean maximum completed-request residence | Mean worst-user RF service gap | CPU seconds/mission |
+|---|---:|---:|---:|---:|
+| G | 2601.94 | 424.41 | 607.38 | 3.35 |
+| R1 | 2601.69 | 295.13 | 516.13 | 81.36 |
+| R4 | 2443.16 | 211.00 | 518.44 | 262.56 |
+| Constant B | 3613.25 | 539.81 | 681.31 | 3.26 |
+| S0 | 3834.19 | 549.78 | 659.34 | 4.22 |
+| S1 | 4047.84 | 562.16 | 694.03 | 4.17 |
+| S2 | 3843.28 | 551.56 | 689.38 | 4.14 |
+
+R4–G’s mean \(C\) difference is −158.78, with a paired 95% interval of [−320.97, +3.40]. Its two reported tail reductions are clearer. R1 retains substantial tail improvements over G, but its request cost is +158.53 worse than R4, interval [+29.92, +287.15]. R1 and R4’s worst-user-gap difference remains unresolved; that is not evidence of equivalence.
+
+These are heterogeneous benefits. In world 006, R4 reduces \(C\) from 3985 to 2656. In world 015, it increases \(C\) from 2268 to 2985 despite shortening the maximum completed-request residence. Across the 1803 matched requests, R4 gives 262 shorter residences, 348 longer ones, and 1193 ties. A tail improvement therefore does not mean uniform improvement for individual requests.
+
+The learning evidence is also substantive. Three fits reduce bank relative MSE from 0.50477 to 0.00283–0.00349, yet first-index teacher-minimum agreement falls from 82.67% to 34.76–64.86%. That statistic is **not** agreement with R4’s full tie-breaking rule. All three students materially change commands; they are not inert networks. They leave 2, 6, and 5 requests unfinished, while G/R1/R4 finish all requests. Their shared-bank three-fit mean \(C\) penalty against G is +1306.5. Positive student worlds remain real, but do not rescue the complete comparison. These facts support another carefully chosen learning question; they do not establish learning impossibility or identify a unique regression defect. Sources: [complete reading]( /home/fires/hmasd-wsl/runs/uav_decision_generalization/b06_amortization_read_a01/summary.json), [acquisition checks](/home/fires/hmasd-wsl/runs/uav_decision_generalization/b06_amortization_read_a01/acquisition-checks.json), and [B06 notebook](/home/fires/hmasd-wsl/docs/research/candidates/uav_decision_generalization/NOTES.md).
+
+**1. Assign B one complete study of whether state-dependent scenario allocation improves the ordinary planning cost frontier.**
+
+The question is: *At a fixed ceiling on native forecast work, does deciding when to use two versus four scenarios produce better service than competent fixed allocations?*
+
+The premise is R4’s useful but expensive planning capability and R1’s partial retention of it. The conjecture is that disagreement between the first two scenario decisions identifies occasions worth additional work. The existing results do not establish that conjecture.
+
+Keep the B05/B06 task and lawful interface: six UAVs, the four existing commands, 1200 native ticks, 20-tick decision period and command delay, existing public reset/report, existing 160-tick native forecasts and G continuation. No request ages, private future arrivals, new sensing, reward changes, or learned selector are needed. R2 and R3 can stop the existing search after the corresponding complete cohort, using the same mechanism as R1. The [rollout source](/home/fires/hmasd-wsl/experiments/candidates/uav_decision_generalization/b05_request_schedule/rollout.py) already publishes a decision after each complete cohort.
+
+Use seven fixed endpoints:
+
+- G, R1 and R4.
+- Uniform R2 and uniform R3.
+- A **fixed clock allocation**, S: during decision indices 0–46, use R4 at odd indices 1, 3, …, 45; R2 at even indices 0, 2, …, 44; and R3 at index 46. Thereafter, two logical cohorts suffice because the future-arrival tapes are empty and exact physical reuse applies.
+- An **adaptive allocation**, A: compute two cohorts; compare their individual winners under the existing `(forecast cost, raw G cost, action index)` order. If they disagree and the remaining allowance can fund both additional cohorts while reserving worst-case R2 work for every remaining decision, compute cohorts three and four. Otherwise commit the two-cohort mean. Retain the original deadline and last-complete-publication behavior.
+
+S is necessary. Without it, an A–R3 gain could come from mixing two and four scenarios rather than from identifying useful occasions for extra computation.
+
+Give A a per-mission ceiling of **96,320 native forecast transitions**, equal to uniform R3’s source-derived maximum. Charge attempted work, preserve exact-cohort reuse, and reserve future baseline work before upgrading. This is a ceiling on forecast transitions—not a claim of equal actual CPU time. Publish actual CPU, G work, reuse, deadline outcomes, and unused allowance for every endpoint. Do not label two-scenario agreement a statistical confidence certificate.
+
+The smallest useful complete design is all **32 already exposed B06 worlds**, with exact reuse of the audited G/R1/R4 records and new R2/R3/S/A missions. That is 224 comparison records, of which **128 missions and 153,600 native ticks are newly purchased**. No world subset, tuning panel, or outcome-dependent extension. It is a development comparison on an exposed panel, not fresh-world confirmation. Reuse is valid only while the imported task, ordinary policies, RNG laws and physical interfaces remain source-bound to the existing records.
+
+The leading comparisons are A–S and A–R3 in \(C\), accompanied by the complete cost–service frontier against R1/R2/R4/G. Reconstruct unfinished requests, completed-request residence, worst-user RF gaps, individual request differences, command changes and travel. Retain censoring: a smaller maximum among completed requests does not compensate for leaving an old request unfinished.
+
+Informative outcomes are:
+
+- **Positive:** A improves \(C\) over both S and R3 at the declared work ceiling, with the service and actual-CPU comparisons supporting a useful trade. This supports adaptive allocation on this panel. Any apparent preservation of R4 still needs an explicit preservation criterion; an interval crossing zero is insufficient.
+- **Adverse:** S or R3 matches or beats A; disagreement spends work on noise or misses shared errors; early upgrades exhaust useful later allocation. Close this selector. A newly established R2/R3 ordinary frontier can still be a useful result.
+- **Inconclusive:** small effects and broad paired intervals. Preserve the complete cost frontier without claiming adaptive value or automatically buying another selector.
+
+The strongest objection is that **R1 already obtains much of the observed tail benefit**, while G completes every request at a fraction of the cost. Also, every B06 endpoint met its deadline. Computation saved by A cannot be advertised as an observed deadline-service benefit. The study must establish a better practical trade, not merely fewer forecasts than R4.
+
+The exposure forecast is:
+
+| Item | New B study |
+|---|---:|
+| Fits / training updates | 0 / 0 |
+| New native missions / ticks | 128 / 153,600 |
+| Maximum native forecast transitions, worker | 11,366,400 |
+| Model initializations, worker | 7,680 |
+| G query ceiling, completed-path calculation | 571,904 |
+| Conservative nominal G candidate-tick allowance | About 0.55 billion |
+| Worker plus complete reader CPU forecast | **8–12 hours** |
+| Additional acceptance/collection allowance | **Up to 2 CPU hours**, explicitly metered |
+| Standalone elapsed-time planning range | Roughly 10–16 hours |
+| Incremental retained/peak artifact allowance | Roughly 8–12 GiB |
+| GPU | 0 |
+
+The CPU forecast uses observed R1/R4 mission costs to interpolate approximately 6.1–6.7 worker CPU hours, then prices the complete reader and uncertainty. The reader must reconstruct the new physical records, G scores, allocations and commands; this is substantial paid reading.
+
+**2. Assign D a separate complete study of direct decision imitation, with the frozen bank and architecture held fixed.**
+
+The question is: *Can direct imitation of the planner’s chosen command produce a useful low-cost deployed policy where relative-value fitting did not?*
+
+This is a direct learning-development question, not a claim that classification is the diagnosed repair for B06. Its value is the controlled contrast between learning numerical relative costs and learning the resulting decision. I prefer one complete test to either abandoning learning from this finite result or entering a sequence of loss, feature and KEEP-rule adjustments.
+
+Use the same sealed bank: 2100 contexts from 35 worlds and four logical R-cohort labels per context. Keep the 303-input, 128–128 hidden-layer residual scorer, its 55,553 parameters, the three byte-identical initial parameter sets, original shuffles, Adam settings, clipping, batch schedule, and 64 epochs.
+
+Make one declared objective change:
+
+\[
+a_R=\operatorname{lexargmin}_a
+  \left(\overline R_a,\ G_a,\ a\right),\qquad
+q_a=G_a/1200+f_\theta(x_a),
+\]
+
+and train cross-entropy on `softmax(-q)` with fixed temperature 1 and target \(a_R\). Deploy the original hard score ordering.
+
+A consequential source detail: the archived bank’s `teacher_action` is `argmin(teacher_cost)` with first-index tie-breaking. **Derive \(a_R\) from the saved cost vectors and R4’s actual raw-G tie-break; do not blindly use that archived field.** The [acquisition implementation](/home/fires/hmasd-wsl/experiments/candidates/uav_decision_generalization/b06_request_amortization/acquisition.py:433) makes the distinction explicit.
+
+Use all contexts, including the 388 all-four-cost ties. No filtering, KEEP veto, teacher recollection, architecture change, epoch extension or seed selection. Preserve all three endpoints.
+
+Evaluate **nine arms on 32 fresh worlds**:
+
+- G, R1 and R4;
+- all three frozen B06 regression students S0/S1/S2;
+- all three new imitation students I0/I1/I2.
+
+That is **288 new missions and 345,600 native ticks**. Reserve the unused world namespace before execution; the exact IDs remain an input-contract item for the selected DM. Finish the complete comparison even if bank fidelity disappoints. There is no “successful training metric” gate that releases deployment testing.
+
+The useful comparisons are paired I–S effects under the matched initialization/shuffle and I against G/R1/R4 in deployment. Report canonical planner-action agreement, agreement with any teacher-cost minimum, teacher regret, margins/ties and physical command agreement. These explain what was learned without substituting for native outcomes.
+
+The central uncertainty is substantial: the teacher’s decision depends on stochastic forecast samples unavailable to the student at deployment. Cross-entropy may learn a modal action and improve agreement while discarding important cost magnitudes. It may also improve bank imitation but fail under the student’s own visited states. Neither outcome by itself identifies a unique mechanism.
+
+Informative outcomes are:
+
+- **Positive:** recurrent deployed improvements over G, with low inference cost, and an advantage over the paired regression students. Prespecified tail gains with unresolved \(C\) would be a retained conditional capability, not proof of full objective improvement or R4 preservation.
+- **Adverse:** improved imitation metrics without useful native service; improvement over S that merely returns to G; excessive switching, unfinished requests or degraded individual service. Close this fixed imitation purchase without an automatic new-bank, memory, loss or architecture sweep.
+- **Inconclusive:** mixed seeds or uncertain deployment effects. Keep the variation visible; do not select the best fit or reinterpret the 96 student-world outcomes as 96 independent training replications.
+
+The strongest ordinary objection is **G itself**: it already selects a teacher-cost minimum in 82.86% of bank contexts, completes all evaluation requests, and costs less than a student deployment. Improved classification accuracy, or merely beating the failed S endpoints, does not establish a useful learned capability.
+
+The complete marginal cost is:
+
+| Item | New D study |
+|---|---:|
+| New teacher acquisition | 0 |
+| Fits / optimizer updates | 3 / 6,336 |
+| Training context presentations | 403,200 |
+| Training candidate rows | 1,612,800 |
+| New-fit initial/final bank forward rows | 50,400 |
+| New native missions / ticks | 288 / 345,600 |
+| Maximum native forecast transitions, worker | 5,201,920 |
+| Model initializations, worker | 3,840 |
+| G query / nominal candidate-tick ceilings | 275,328 / 250,260,480 |
+| Worker plus complete reader CPU forecast | **5–8 hours** |
+| Additional acceptance/collection allowance | **Up to 1 CPU hour**, explicitly metered |
+| Standalone elapsed-time planning range | Roughly 6–10 hours |
+| Incremental artifact allowance | Roughly 4–6 GiB |
+| GPU | 0 |
+
+The three fits themselves should be around minutes of CPU, based on B06—not hours—but that is a small part of the complete purchase. The historical teacher cost remains **at least 1.952 CPU hours**, with its recorded coverage limitations; it is sunk marginally, not free historically. Do not add overlapping B05 totals twice.
+
+The reader should bind initial/final weights, schedules, journals and endpoint outputs, and reconstruct the complete new native/R/G records. As in B06, such a reader does not establish historical gradient correctness by replaying optimizer updates. The new cross-entropy implementation needs its bounded numerical engineering check priced in acceptance work.
+
+These two assignments have different estimands. B asks whether online planning computation can be allocated better without fitting. D asks whether a frozen planner’s decision capability can be acquired offline and deployed cheaply. D does not use B’s new selector or await its results. A remains the fixed-N8 two-stage value/scorer study; C remains the fixed four-opportunity anticipation comparison. I read their contracts, not unfinished scores.
+
+Both studies should import source-bound frozen B capabilities, with new code in separately owned paths. They should not concurrently refactor the shared frozen implementation. Together they buy **499,200 new native ticks, three fits, approximately 13–20 CPU hours for workers and complete readers, or 16–23 CPU hours including the stated operational reserves**. Authoring/model-token expenditure and actual admitted memory/concurrency are not quantified by the existing run ledger and must be declared separately; I performed no node probe.
+
+If only one purchase is affordable, choose B. D is the second, more uncertain investment. The reason to fund both is their distinct chance to develop an already observed planning capability—not the desire to occupy four DM slots. I make no novelty claim for either proposal.
+<!-- B07_ROOT_ORACLE_ORIGINAL_END -->
+
+
+**Stored original identity:** 16,113 UTF-8 bytes, SHA256
+`350a4d05e48b9de3411067ecc9fde07c8df32c2520decefd6a8b1dc67aecbb6a`; the hashed text is exactly between the
+markers, excluding the marker lines and its trailing LF. The coauthor reports
+.364414 measured CPU-s of evidence/hash/exposure arithmetic, with other support
+additional. This is historical constructive advice, not an accepted ranking.
+
+Root subsequently conveyed the owner's explicit reassignment of the constructive
+Oracle role to Jev ChatGPT Pro. The native Oracle consultation above is complete;
+there is no second native Oracle round or additional adviser tier. Root owns
+the not-yet-sent Pro question and cross-question selection. This DM continues
+only the bounded source/evidence/cost construction below, without a Pro send,
+new result purchase or RESEARCH prose edit while Root updates the shared question.
+One applicable independent ResearchCritic review must cover the actual design
+chosen for investment; this historical coauthor answer does not discharge it.
