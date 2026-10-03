@@ -2680,6 +2680,11 @@ Root接受52小时result-chain累计CPU、72小时wall、16GiB该操作正常源
 
 完整计价包括worker加独立不压缩reader最多738,034,736次state/mask请求、2,739,040逻辑model ticks、816个banks、571,200行与22,848,000候选transit ticks，以及34,068原生状态重建、34,000运动／奖励核验。旧未压缩成本尺度约8.1716 CPUh，4–10 CPUh只是预测；另预计6–10小时支持工作、1–2GiB唯一证据、1.6–2.0GiB源码snapshot和2–3GiB暂存。Root接受实际复用和新runtime吞吐尚未知，并选定本次操作保护上界为**20小时累计实测准备／worker／reader CPU、48小时操作wall、10GiB该操作正常分配磁盘**；这是本次有界购买的终止条件，不是可消费fit额度或成本承诺。未计量支持与最终写入尾部仍报告未知。配置的local_linux CPU首先使用、单数值线程，实际内存和重叠任务由真实节点准入检查；A03远端异常保持未诊断，不购买健康测试或自动fallback。第一次真实提交／准入／worker／reader失败按本次stop保全并返回具体事实，不自动修复重跑、补前缀或补缺格；不确定接受只对同一请求协调。正式提交前的纯源码／mock错误可在既有范围修正并计费。DM独立发表方向结果，Root不成为每run批准者。
 
+<a id="four-dm-c-a02-selected-20261003"></a>
+**C的A01正式拒绝已关闭；Root选定更正登记后的完整A02。** 已全文读取`5e866a3abb62d65b10285043c583c11e6840d7bc`的[原始拒绝与协调记录](../../runs/uav_planning_opportunity_timing/b01_complete_timing_a01/launch-refusal.json)、[DM完整关闭](candidates/uav_planning_opportunity_timing/NOTES.md#b01-a01-formal-refusal-20261003)及原工程验收。唯一正式请求在源码`4736b91c62b4a1e0072fa6ea37c1300ebafee9c8`以exit4拒绝，方向行误写`active`；源码`parse_research_state`只接受`exploring/confirming`，该拒绝发生在snapshot、claim、内存准入和spawn之前。原输出／admission记录／非author源码树／exact runner／observer均无已接受操作，0原生／model／reader／fit／update。原GNU time为.24wall秒、.12user+.07sys秒，已知准备加launcher为11.501685 CPU秒、其余支持未知；净清理8,192allocated bytes。该错误没有时机效果含义，也没有诊断运行环境。
+
+Root明确重新选择一次`b01_complete_timing_a02`完整比较，具体新理由是已定位、可预测的登记修正，而科学合同、固定17组初始数组、实现和既有独立科学／工程判断仍适用。由C唯一写者把自己的状态改为`exploring`、保持lead／pause，按新attempt身份更新必要provenance并发布精确输入；不改launcher认可规则、不改变科学代码／world／容差／比较对象，也不增加核验任务或健康pilot。原A01记录不覆盖、不冒称同一已接受操作的继续。68完整missions、全部reader与20累计实测CPUh／48操作wallh／10GiB正常分配边界不变，既付准备、A01拒绝和后来已测支持继续计入，不能把失败费用重置为零。不确定接受仅协调同一请求；A02第一次真实正式请求／准入／worker／reader失败仍停止并保全，无自动重试。此前评审已经充分覆盖这个未变的科学比较，复用它而不加一轮Oracle／critic；D相同的登记错误在其正式提交前由该DM于`87ef5e854`更正，不改变D购买。
+
 <a id="four-dm-d-selected-20261003"></a>
 **Root选定D的单一历史完整学习比较。** [源码合同](candidates/uav_service_resource_control/NOTES.md#b01-source-contract-20261003)发布于`fa5b7fb85`，方向与实际路由在`f75d44f3c`登记。采纳327维合法状态、选择后才付H_T搜索、一个真实C／StationPrior历史、一次普通计划及反馈；学习gamma=1与原生graph-shaping .99分开。六种普通校准程序、固定阈值／单侧迟滞、精确常量T*身份复用和终止partial block都按原合同。自然耗尽和不足64 replay时的低实际计数不替换世界、不补任务；最终端点均在fresh之前封存。完整reader复演实际controller和学习更新，额外至多33,600次optimizer执行为验证而非新fit；其不逐步重做原生RF的边界明示保留，私有H模型查询则完整重读。
 
