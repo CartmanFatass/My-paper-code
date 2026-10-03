@@ -482,3 +482,99 @@ No code, bulk evidence or scratch was created in this source-only task. Deleted 
 net allocated bytes reclaimed:0; no cleanup blocker. The new useful record is this notebook and
 the direction's narrow RESEARCH standing/routing. Other directions' edits and accepted inputs
 are preserved; Git publication uses explicit paths under `.git/hmasd-main-writer.lock`.
+
+<a id="b01-selection-response-l0-20261003"></a>
+## 2026-10-03 UTC — Whole comparison selected; scientific response and L0
+
+Root selected the **whole** corrected B01 at published
+`a85b6ded1cca75fb035334eb177b812804b5f7c2`,
+[D decision](../../RESEARCH.md#four-dm-d-selected-20261003), after the same independent
+Scientific Reviewer's complete A/D final. I read that entire original, including the A and
+cross-study discussion, in the [preserved review](../../archive/2026-10-03/RESEARCH-four-dm-selection.md#four-dm-ad-independent-review-20261003)
+and verified its 14,235 UTF-8 bytes and SHA256
+`f727d6d954a5c988c82647b858ebff9098ca700a874de69f07dc187da828fd1b`.
+The review received no inherited Root/DM conversation, reconstructed primary evidence first,
+then examined the actual proposals; it did not execute effects or certify unimplemented code.
+MATERIAL_DISSENT:no. This is the completed applicable selection review, not a reason to add
+another selection critic or Pro.
+
+I accept its central judgment and limits. H/H_T supply a consequential service/resource
+tradeoff but do not establish switching headroom. The paid ordinary rules are a competent
+finite competitor, not an optimal oracle or an equal-experience treatment. Training on complete
+consequences is worth this bounded comparison without first identifying a missing proxy term.
+The state/history, post-choice H payment, finite-return gamma, natural terminal treatment,
+and prospectively resolved T* identity are now actual contract obligations. The C/H_T final
+value/cost frontier is essential: beating development-selected T* while a fixed endpoint
+dominates is not a practical upgrade. A gain could arise from ordinary geometry/context use;
+it supports the complete learned package, not a unique long-horizon resource-reasoning
+mechanism. Existing J/service/individual-gap/reserve tradeoffs, C/P_BS restrictions and all
+earlier positive/adverse records remain. This response changes no feature, seed, fit or
+scientific endpoint from the published construction.
+
+Root selected protective stops of **75 aggregate execution/check/reader CPUh, 96 operation
+wallh and 32 GiB normally allocated owned source/unique output/scratch**, above the uncertain
+25–50 CPUh forecast. The 16–28 support-hour equivalents are estimates; unmetered support is
+unknown. Use local_linux CPU first, at most3 one-numerical-thread workers followed by at most2
+readers, with no worker/reader overlap within B01 and fresh actual-node memory/overlap admission.
+No health probe or automatic fallback is bought. The first real formal request, admission,
+worker or reader failure closes this purchase for retained-fact return; reconcile uncertain
+acceptance on the same request, without retries or missing-cell completion. Natural depletion,
+forced C, H base/aliases/overrides and adverse or unchanged outcomes are valid scientific data.
+Pure pre-submission source/mock corrections within the declared check scope remain allowed
+and billed. No A/C success dependency or per-run Root acknowledgment exists.
+
+**L0 deliverable.** Implement the fixed B01 controller/learning/run/read chain under
+`experiments/candidates/uav_service_resource_control/b01_native_selector/`, mirrored tests
+under `tests/experiments/candidates/uav_service_resource_control/b01_native_selector/`.
+The new CLI will require native admission before scientific imports/construction and write
+the declared `runs/uav_service_resource_control/b01_native_selector_a01/`; disposable work
+stays under `temp/directions/uav_service_resource_control/`. All retained S7 dependencies are
+read-only. New direction-local code is needed for the new pre-search choice/finite-transition
+semantics; existing environments, C/H_T search, capture and native endpoint arithmetic should
+be imported rather than copied or generalized. No shared helper edit is currently selected.
+
+Two bounded Implementer tasks may proceed in parallel on disjoint owned paths in shared
+`/home/fires/hmasd-wsl`, `main`, with **no Git/index operations, launches, children or notebook
+edits**. Each returns its diff, static checks and risks to this DM. They are not alone in the
+checkout and must preserve every other writer. The DM owns orchestration/capture/reader,
+integration, scientific acceptance and the notebook.
+
+* **Single-history choice path:** `controller.py`, `features.py` and their focused test file.
+  Preserve the original one-plan/one-act/feedback path and previous committed targets. Emit
+  the exact327 fields before H search; use one real tracker, reset histories per mission,
+  compute own-edge public resources only, record raw requested/masked/executed/alias meanings.
+  Constant C/H_T endpoints use their canonical frozen factories. The mixed controller's chooser
+  interface receives only `(features, h_eligible, primitive_step)` and returns the selected
+  action plus diagnostics; it never receives candidate values or native state. On C, there is
+  no private-model construction/query. On H, invoke the retained literal query/tie/commit path.
+  Scripted/ordinary/learned choosers share this boundary. Forced-C and forced-H audits exercise
+  the complete wrapper; their signs do not select the experiment.
+* **Finite deterministic learner:** `learner.py` and its focused test file. Implement the
+  frozen network, replay, RNGs, masks, initialization, FP32 reward conversion, optimizer and
+  target clocks. A mission controller calls `start_episode(index, training)`,
+  `decide(features, h_eligible, step)`, and `observe_reward(native_J, terminal)` once per
+  executed native tick. `decide` closes the prior nonterminal30-tick block with this one next
+  context and applies its update before action selection; terminal observation closes the
+  partial block with no bootstrap or extra plan. Return/log enough initial, action, transition,
+  minibatch, loss/target/gradient, parameter/optimizer digest and checkpoint state to replay
+  every actual update and deployed action. Fixed finals are inference-only. Helpers may refine
+  mechanical return schemas with the DM, never the scientific semantics.
+
+**Checks and acceptance.** First use source/AST and mocked observations/query paths, not native
+or RF probes. Implementers write focused tests but do not execute scientific/optimizer work
+independently; the DM owns the declared cumulative check ledger. The construction's finite
+mock/public-law/synthetic-update scope remains the basis. Tests must distinguish single actual
+history from two shadow histories, C query absence, forced/ineligible versus H aliases,
+terminal/partial-block/reset behavior, target masks/gamma, initialization trainability,
+RNG isolation and exact update/replay clocks. Test artifacts use pytest fixtures and clean
+under the existing lifecycle. The selected six full native audits run only after exact-source
+publication and formal admission as part of the same whole purchase.
+
+A registered independent engineering Reviewer receives this contract, the actual diff and
+saved check output in a separate context, focusing on single-state/act/feedback, numerical and
+RNG boundaries, terminal/update clocks, native admission and complete reader identity. This DM
+reviews both Implementer changes and that review and accepts or corrects them before effects.
+The full reader redoes the actually purchased private H queries and actual learner updates,
+reconstructs native endpoint arithmetic from saved evidence, and does not claim independent
+native-RF reconstruction. Save all completed/failed prefixes, exact inputs and consumed counts;
+no acceptance, exit-zero or final checkpoint alone is a read scientific result.
