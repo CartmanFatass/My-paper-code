@@ -1,0 +1,22 @@
+Traceback (most recent call last):
+  File "/home/wu/projects/HMASD/.git/hmasd-launch-sources/f30e500415704de8a0f5b1008bfbadc6/experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/run.py", line 338, in <module>
+    raise SystemExit(main())
+  File "/home/wu/projects/HMASD/.git/hmasd-launch-sources/f30e500415704de8a0f5b1008bfbadc6/experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/run.py", line 325, in main
+    run_pipeline(store, bill, ExecTransport(store, bill), parent, vars(certified), original)
+  File "/home/wu/projects/HMASD/.git/hmasd-launch-sources/f30e500415704de8a0f5b1008bfbadc6/experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/run.py", line 193, in run_pipeline
+    result = transport(job, request, on_ready)
+  File "/home/wu/projects/HMASD/.git/hmasd-launch-sources/f30e500415704de8a0f5b1008bfbadc6/experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/run.py", line 59, in __call__
+    self.bill.check()
+  File "/home/wu/projects/HMASD/.git/hmasd-launch-sources/f30e500415704de8a0f5b1008bfbadc6/experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/billing.py", line 100, in check
+    self.disk_peak = max(self.disk_peak, old.allocated(self.roots))
+  File "/home/wu/projects/HMASD/.git/hmasd-launch-sources/f30e500415704de8a0f5b1008bfbadc6/experiments/candidates/typed_joint_skill_decision/b04/evidence.py", line 92, in allocated
+    for path in [Path(directory), *[Path(directory) / f for f in files]]:
+  File "/home/wu/projects/HMASD/.git/hmasd-launch-sources/f30e500415704de8a0f5b1008bfbadc6/experiments/candidates/typed_joint_skill_decision/b04/evidence.py", line 92, in <listcomp>
+    for path in [Path(directory), *[Path(directory) / f for f in files]]:
+  File "/home/wu/.local/opt/hmasd-cpython-3.10.21-gcc/lib/python3.10/pathlib.py", line 960, in __new__
+    self = cls._from_parts(args)
+  File "/home/wu/.local/opt/hmasd-cpython-3.10.21-gcc/lib/python3.10/pathlib.py", line 594, in _from_parts
+    drv, root, parts = self._parse_args(args)
+  File "/home/wu/.local/opt/hmasd-cpython-3.10.21-gcc/lib/python3.10/pathlib.py", line 578, in _parse_args
+    a = os.fspath(a)
+UnboundLocalError: local variable 'a' referenced before assignment
