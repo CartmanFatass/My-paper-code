@@ -102,6 +102,13 @@ Read the owner instruction, pause and current direction standing. Inspect anothe
 only for a concrete coordination need. Infer the mode from the assignment or ownership; do not ask the
 owner to repeat an already clear choice.
 
+For a selected question, use scientific-tools'
+[question context method](../hmasd-scientific-tools/references/question-context.md) to build the
+short source-linked entry in the existing assignment: question/current judgment, supporting
+and contrary evidence, accepted or unread work, and the original passages needed next.
+Reuse the available derived workspace view to locate sources; it neither replaces their
+reading nor becomes another maintained record. Do not infer scientific inheritance from links.
+
 - **Root:** maintain the project's scientific explanation, compare the information value and
   cost of next investments, address concrete stagnation, and select useful work within the
   owner's delegated scope. Coordinate existing ownership and shared dependencies; maintain

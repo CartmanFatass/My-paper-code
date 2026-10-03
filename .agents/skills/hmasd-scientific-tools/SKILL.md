@@ -8,6 +8,14 @@ description: Develop cumulative HMASD research understanding - update judgments 
 Authority: `docs/project/OPERATING_CONSTITUTION.md` sections 3, 4, 5 and 8. This skill is the
 method; it adds no rule. Records are the notebook, the runs folder and the claim note.
 
+## Enter or resume a question
+
+Use a short, source-linked view of the current question, judgment, supporting/contrary evidence,
+accepted work and unresolved reading to locate the originals. The existing OpenResearch-HMASD
+view can supply navigation; read the consequential source passages before deciding. Follow
+[question-context.md](references/question-context.md) for access, source limits and expressing
+relationships between studies in the existing NOTES. No separate context record is maintained.
+
 ## Mathematics, conjectures and experiments
 
 Owner clarification, 2026-09-25: use mathematical, information-theoretic and game-theoretic

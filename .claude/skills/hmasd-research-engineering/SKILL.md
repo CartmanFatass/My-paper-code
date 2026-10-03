@@ -137,6 +137,12 @@ At an applicable publication boundary:
 1. Publish the direction evidence. Before editing the shared entry, fetch `origin/main`, check
    the shared main checkout/index and inspect upstream changes to the affected content.
    Serialize Git mutations and use only explicit owned paths; do not create a publication checkout.
+   Make the reported conclusion traceable through ordinary Markdown links to its contract/arms,
+   accepted source, complete paired measurements (including adverse/missing outcomes) and
+   published interpretation/limits. For repeated tables and links, derive them from saved
+   outputs or the existing reader and identify the source revision/hash; check the projection
+   rather than hand-copying numbers. Follow scientific-tools' question-context method for
+   navigation limits; generated views do not replace original evidence or change frozen outputs.
 2. Update the owned direction's standing, evidence links and next step, and any directly affected
    shared-background topic whose reusable judgment or scope changed in the scientific reading.
    Constitution section 4 grants the DM this shared-topic publication; no Root or Portfolio wait.

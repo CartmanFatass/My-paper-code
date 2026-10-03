@@ -91,8 +91,11 @@ actual training and evaluation still need node resource admission. Do not invent
 capacity or duplicate accepted work.
 
 Method: .agents/skills/hmasd-scientific-tools/SKILL.md for design, comparators, counts and
-reading; .agents/skills/hmasd-research-engineering/SKILL.md for code, review and launch. Read
-the current NOTES.md, claim note and owned code. For a frozen object linked by RESEARCH.md,
+reading; .agents/skills/hmasd-research-engineering/SKILL.md for code, review and launch.
+Use scientific-tools' question-context method when entering or resuming a question: use the derived
+view to locate current judgment, contrary evidence and accepted/unread work, then read the
+consequential originals. Keep explicit evidence relationships in the existing NOTES reasoning.
+Read the current NOTES.md, claim note and owned code. For a frozen object linked by RESEARCH.md,
 read its original card and directly required bound inputs instead of inventing a replacement
 claim note; retain its seeds, stopping rule, output contract and exceptions. No recursive
 historical preload. Use a concise scope note for code work. When delegating, pass that scope
