@@ -9063,3 +9063,129 @@ locator and an inclusive updated ledger. No second worker, extra world/epoch,
 healthy-node trial, automatic retry or unselected effect is authorized. The
 first new formal/admission/worker/reader technical failure stops the purchase;
 normal deadline fallback remains part of its required complete outcome.
+
+**First formal acceptance,2026-10-03T09:30:59.880899Z.** Exact inputs were
+published at `da74047434845cb2f5b1baf3e0023c66ecadf3d9`; the one selected
+local_linux worker is accepted under its original
+[launch manifest](../../../../runs/uav_decision_generalization/b06_amortization_a01/launch-manifest.json).
+The launcher and runner's additional8GiB RAM/12GiB free-disk admission passed;
+the saved config reports Python3.10.20/NumPy1.26.3/Torch2.7.0+cpu,4 intra-op/1
+interop thread and the bound source identity. Publication itself measured
+.800736CPU-s/6.616464391wall-s, to be included in the reader's cumulative ledger.
+Launch/observation and later unmetered support remain additional, not zero.
+
+The first observer arm encountered the prior B05 observer's stopped state,
+not a scientific refusal or worker failure. Its drained generation18 had no
+wake/event pending and only already-read terminal B05 jobs. Rearm19 left those
+terminal jobs unchanged; registration of the new worker produced generation20.
+The first drain observed the original B06 runner and supervisor running, with
+consistent native identities at09:32:01Z. The accepted operation was never
+repeated or moved. Observation uses the same native manifest/claim handle via
+`temp/directions/uav_decision_generalization/b06_requests/worker-observe.json`;
+window1,500s, read-only status interval30s. The native DM stays active through
+collection/full reading. This is launch acceptance, not a completed result.
+
+**First execution checkpoint,2026-10-03T09:58Z.** The same admitted worker
+remains running with consistent native identities. All three fixed acquisitions
+have written fit records; the09:53 progress sample contains26/224 complete
+missions,1,276.480665 cumulative measured CPU-s/1,301.589638 operation-wall-s
+and1,871,986,688 allocated new-owned bytes. No worker stderr was present.
+These are progress facts only; raw prefix costs were visible but no scientific
+comparison, selection or plan change is made before the fixed complete reader.
+Observer generation20 produced its bounded checkpoint; native App wake returned
+-32600 (direct App-server input is not allowed for multi-agent v2 sub-agents).
+The active native DM drained that event and rearmed the original handle as
+generation21,window1,500s. This observation-delivery failure neither stopped
+nor restarted the worker and is separate from technical result failure.
+
+**Checkpoint,2026-10-03T10:25Z.** Original worker running;50/224 missions
+complete,2,856.358593 cumulative measured CPU-s/3,083.796112 operation-wall-s,
+1,896,128,512 allocated bytes, no stderr. Same-handle observer checkpoint21
+drained and rearmed22/window1,500s; native queue refusal remains observation
+only. Fixed exposure and limits unchanged; full reading remains pending.
+
+**Checkpoint,2026-10-03T10:51Z.** Original worker running;78/224 missions,
+4,373.419188 measured cumulative CPU-s/4,746.900229 operation-wall-s,
+1,920,819,200 allocated bytes, no stderr. Same observer22 checkpoint drained
+and rearmed23/window1,500s; original worker/plan unchanged.
+
+**Checkpoint,2026-10-03T11:17Z.** Original worker running;105/224 missions,
+5,758.211494 measured cumulative CPU-s/6,227.697311 operation-wall-s,
+1,945,800,704 allocated bytes, no stderr. Same observer23 checkpoint drained
+and rearmed24/window1,500s; original worker/plan unchanged.
+
+**Checkpoint,2026-10-03T11:43Z.** Original worker running;131/224 missions,
+7,192.979385 measured cumulative CPU-s/7,756.627341 operation-wall-s,
+1,965,203,456 allocated bytes, no stderr. Same observer24 checkpoint drained
+and rearmed25/window1,500s; original worker/plan unchanged.
+
+**Checkpoint,2026-10-03T12:10Z.** Original worker running;159/224 missions,
+8,721.854511 measured cumulative CPU-s/9,374.113938 operation-wall-s,
+1,994,612,736 allocated bytes, no stderr. Same observer25 checkpoint drained
+and rearmed26/window1,500s; original worker/plan unchanged.
+
+**Checkpoint,2026-10-03T12:36Z.** Original worker running;189/224 missions,
+10,168.842166 measured cumulative CPU-s/10,906.470637 operation-wall-s,
+2,020,184,064 allocated bytes, no stderr. Same observer26 checkpoint drained
+and rearmed27/window1,500s; original worker/plan unchanged.
+
+**Checkpoint,2026-10-03T13:02Z.** Original worker running;216/224 missions,
+11,447.134618 measured cumulative CPU-s/12,269.287054 operation-wall-s,
+2,040,303,616 allocated bytes, no stderr. Same observer27 checkpoint drained
+and rearmed28/window1,500s; original worker/plan unchanged.
+
+<a id="b06-worker-complete-reader-purchase"></a>
+
+**Original worker complete; full reading pending,2026-10-03T13:13Z.** Native
+exit0 at13:09:36.701Z, absent original runner/supervisor and consistent status
+were read from the same accepted operation. The controller's READY event28
+was drained and acknowledged by rearm29, without another worker. Empty
+stdout/stderr, summary COMPLETE, all224 uniquely ordered H1200 missions and
+268,800 native advances are present. All seven deployment endpoints started
+exactly once. Three fits each made2,112 updates/backwards; total6,336 updates,
+403,200 context presentations,1,612,800 training action rows,50,400 initial/final
+bank rows and23,040 deployed student rows. The worker reports1,686,240 total
+neural rows,270,144 G queries/245,881,600 reserved candidate-ticks, and
+5,175,040 R model steps. These are producer exposure/completion facts; the
+full independent numerical and physical reconstruction remains required.
+
+Worker source remains `da74047434845cb2f5b1baf3e0023c66ecadf3d9`, with all71
+canonical/published source hashes rechecked unchanged. The canonical original
+output is `runs/uav_decision_generalization/b06_amortization_a01/` on local_linux.
+Its25,186B summary SHA256 is
+`1c50b28fe1e1f73682555268cc3461f4b4e5b2873a148a8e51ebb3febaa53673`;
+16,244B config `9a76c56e35cf84f5225761f677a48f6d6e04e4ed5c83a4b0a74bf1997d2cddc0`;
+1,106,888B per-file identity manifest
+`3ef20b267d8c8c93d4e1f6ca19239a97ba89aaf979581e18018acc2b6967f78e`.
+The manifest names the one canonical bulk copy, including all mission/rollout
+arrays, three initial/final/training checkpoints and journals, and the derived
+bank/provenance. These stay in place for the reader; no duplicate bulk collection.
+
+The worker's last meter reports11,980.879742 phase CPU-s/12,842.425336 phase
+wall-s, carrying the original47.658729/32.022269 prior once for totals
+12,028.538471 CPU-s/12,874.447605 operation-wall-s. New acquisition is separately
+189.074781 CPU-s/53.763606 wall-s (not an additional whole-study charge), of
+which shared bank handling5.059586 CPU-s and fit0/1/2 costs60.056626/61.114900/
+60.520860 CPU-s. Source/output allocated inventory2,052,313,088B; self peak
+RSS368,320KiB and child peak368,320KiB are separate process-peak scopes.
+Scientific comparison and the claimed affordability remain pending full reading.
+
+The one unchanged-source reader is now prepared at the originally selected
+`b06_amortization_read_a01` tag. `B06_WORKER_INPUT.json` is350B, SHA256
+`f14fc819f1859730b426273bb456e991ee0986ba28075181dcec335065c6c298`,
+and binds exactly the original config/summary/manifest. The4,035B
+`B06_READER_BUDGET_LEDGER.json`, SHA256
+`8e3a8b6d24e19ac7eb63c303b9f60731e03c6048223b478147e8cf5b3a288593`,
+includes the worker cost once, initial publication.800736 CPU-s/6.616464 wall-s
+and reader-input/source/hash/roster preparation.379732 CPU-s/.614056 wall-s.
+Its known cumulative prior is12,029.718939 CPU-s/12,881.678125 operation-wall-s;
+pure engineering48.839197 CPU-s. All unmetered source/edit/observer/launch/Git
+support and native/final-serialization tails remain additional/nonzero.
+
+Publish these exact reader inputs, compact worker identity/completion records
+and this notebook; current main's owner pause is lifted and this direction
+remains exploring under its original lead. Then make the one selected local
+reader request. Its actual new NN/model/physical work is exactly the previously
+purchased complete reader, with no optimizer replay or old physical replay.
+No further worker, extra endpoint, retry or repair is selected. The first
+reader formal/admission/runtime failure still stops this purchase.
