@@ -1484,3 +1484,448 @@ implementation, launch, successor directory, shared RESEARCH edit or deletion
 occurred. This bounded assessment is complete. The next cross-question selection
 belongs to Root after its Pro construction and applicable independent review;
 there is no DM-owned active operation or fabricated wait on A/C.
+
+<a id="service-distribution-source-construction-20261003"></a>
+## 2026-10-03 — Source-only construction: individual service allocation within the existing early planning menu
+
+**State and question.** This is Root's subsequent, bounded construction request,
+not a purchase or a reopening of the closed S7 B01. I read the complete original
+[Jev ChatGPT 6 Pro Oracle answer](../../RESEARCH.md#planning-capability-next-investment-20261003)
+preserved at `97a5fa0268005a258038409f9bc8e03c5073ad7d`, including its adverse
+alternatives, qualifications and investment dissent. I do not duplicate it here.
+Root provisionally prefers C's clock comparison, B's revised same-quota allocation,
+and this distinct D question; the preceding fixed-bank imitation comparison remains
+credible but unselected. No successor directory or new research-index allocation
+has been created. If selected, the proposed namespace is
+`uav_planning_service_distribution`.
+
+The consequential question is whether a finite planner can improve **actual
+individual service allocation** on C's N8/U50/H500 task using the same four early
+opportunities, legal information and J-generated menu, and whether anticipating
+one ordinary future choice adds value over a competent ordinary priority selector.
+The contribution sought is a conditional planning capability and its tradeoffs,
+not a learning method, universal fairness or preservation of every user's service.
+It does not modify C's historical J verdict, import A's unfinished outcomes, or
+test the S7 energy/reserve hypothesis. There are zero fits, optimizer updates,
+new teacher labels and learned endpoints in this proposal.
+
+**Background changes the prediction.** The published main background at
+`e23b83c503e8d506c56778bf2a1842dcca5276ac`, topics on complete ordinary planning
+and event/option semantics, preserves C's useful A_E4 capability and substantial
+individual losses. Its directly required original evidence is C's
+[B02 prospective contract and complete result](../uav_planning_opportunity_timing/NOTES.md#b02-complete-reading):
+accepted source `9b763be8a45dad875166efcfba8efbf9c3db54b2`, read result
+`63ee7491e79fd797cc16f6d8a706335a0b03da33`. I read the B01 host/action contract,
+the complete B02 construction and complete B02 outcome, not A's accepted study.
+The effect on this design is to retain A_E4 and the cheaper A_E/G_E4, preserve
+all individual harms, and keep the early-opportunity and future-policy scopes.
+Four early choices are not throughout-mission control.
+
+A small reduction of C's already complete per-user tables adds a useful adverse
+constraint on the rationale. For its old 16 result worlds `29524000..29524015`,
+actual mean log-service U is 5.635197588953 for A_E4, 5.581838763675 for G_E4,
+and 5.589807242371 for A_E. A_E4−G_E4 averages +.053358825278
+(7 positive/6 equal/3 negative worlds); A_E4−A_E averages +.045390346581
+(10/6/0). These are descriptive saved-data reductions, not new native results
+or a new confirmation test. The source is
+`runs/uav_planning_opportunity_timing/b02_rolling_timing_a01/reading.json`,
+SHA256 `fdcdcad5f508b16278a3ac8124f9640a4f6952c45e0a7c21d7e49fc4799e1b69`,
+using every `phase=result` row's 50 ordered `served_user_ticks` and the U formula
+below. Thus severe individual harm does **not** imply that C's planner failed on
+this concave aggregate. The proposed F comparison asks for further improvement;
+it cannot claim to repair an already demonstrated failure of A_E4 on U. The old
+worlds select neither new worlds, objective weights, times nor stopping rules.
+
+**Actual source and legal service history.** All 68 C B02 bound source files still
+match their accepted bytes. The sorted compact-JSON binding map has SHA256
+`8d08d367ed0c66e7de09f8d6dd28d9809ccaeca1177d0ccd119b81139f20e348`.
+Load-bearing interfaces are `agent_count_generalization/adapter.py`,
+`uav_fleet_transmission/control.py`, its B03 option/rank and B04 surrogate,
+`uav_parent_adaptation/b08_exact_planning_reuse/segment.py`, C's B01/B02
+controllers, B02 segment/study/reader, and `envs/pettingzoo/uav_radio.py`.
+These paths are under `experiments/candidates/` unless a prefix is shown.
+The existing modules remain frozen; the new priority adapter and orchestration,
+if selected, belong entirely to the new direction.
+
+The host has eight UAVs, 50 static uniform users and 500 transitions, free-space
+radio, transmitter masks, a 0 dB service threshold and capacity 10 per UAV.
+This is the interfering-radio host, not B's FDMA request task. Native RF allocation
+is exclusive per user. The 133-field report is FP32: 24 normalized UAV coordinates,
+eight validity bits, 100 normalized user coordinates and time. Its adapter casts
+physical coordinates to FP32 before normalization; decode promotes to FP64 and
+rescales x/y by 1000 and altitude by 100 then adds 50. Only the existing reports
+at ten-tick boundaries reach the policy. Between them its private controller
+propagates commands; motion retains `(FP32 command * 30) * 1.0` before FP64 addition
+and clipping. A native raw position, connection, SINR or actual service count is
+never supplied to the policy. World ids and evaluator records are also excluded.
+
+Define actual evaluator `n_j(t)` as service after transitions `0..t-1`, with
+`n_j(0)=0`; the reset snapshot is not service. Define a separate policy-owned
+int64 vector `n_hat(0)=zeros(50)`. After issuing the tick-t command/mask, the policy
+applies the pure RF adapter to **its post-command estimated positions and public
+user coordinates**, then adds the resulting 50 Boolean service flags to `n_hat`.
+It does this on all 500 ticks, including forced transit, arrival and ordinary C/E.
+The new report reanchors the current physical estimate; it neither resets nor
+retroactively corrects past service counts. Counts remain between 0 and t+1.
+This definition is feasible at the actual policy boundary before `env.step` and
+uses no returned service feedback.
+
+The distinction also applies inside model branches. Predicted cumulative history
+uses each segment's `controller_estimates[1:]`, its issued masks and the public
+static-user bits, **not** the segment's unrounded simulated physical positions as
+if those were future feedback. Those physical positions still determine the
+existing modeled J trace and FP32 future reports. This fixes a possible silent
+privilege leak. At a model handoff both the legal controller history and accumulated
+`n_hat` must propagate; their provenance is separate from physical state.
+
+There is no ready per-user output in `_Scores.score`: it returns aggregate J,
+served, quality and height penalty. The feasible owned adapter composes the
+existing pure `free_space_user_path_loss`, `user_sinr_from_path_loss` with
+`use_fdma=False`, and `greedy_connection_assignment` with threshold 0/capacity 10.
+It retains 2 GHz/23 dBm/noise −80 dBm, source-order interference summation and its
+dBm conversion, silence as negative-infinity SINR, stable descending eligible
+SINR order, flattened UAV-major/user-major tie order, exclusivity and capacity.
+Its output is the 8×50 connection matrix or its 50 Boolean column-any flags.
+The aggregate scorer's per-UAV shortcut has a generic overlap fallback; the
+adapter uses the full stable assignment and must agree with the aggregate scorer
+on the **same estimated geometry**. It must not compare estimated-geometry service
+against an unrounded-physical J score and misclassify quantization as a bug.
+The extra RF extraction and correspondence reading are explicitly priced below.
+
+**Fixed objectives, menu and five endpoints.** The native endpoint is
+`U = sum_j log(1+n_j(500))/50`, with natural logarithms and user order 0..49.
+The selector uses the same terminal formula on its predicted cumulative history.
+Freeze scalar FP64 `math.log1p(float(count))` and sequential addition in that user
+order; there is no epsilon comparison, weight scan, discount, per-tick U reward,
+or reset at an opportunity. Past counts enter terminal U even though past J is
+constant across choices. The utility rewards quantities with diminishing marginal
+returns; it does not penalize the temporal order of service directly. Better U
+can coexist with longer gaps, individual losses and new never-served users.
+
+The five endpoints are original A_E4, G_E4 and A_E, plus new F_A4 and F_G4.
+All new arms retain J-generated stay-plus-muted-member champions, original sites,
+10/20/30/40-tick commanded durations, mover eligibility, hold/arrival commands,
+the original J-based arrival-mask rule, and ordinary C/E. At most seven muted
+members each nominate one J champion; there is no priority-generated site menu,
+extra transmission right, recency heuristic, fairness learner or feedback change.
+The first actual opportunity is t40. After stay the next is t+10; after a move
+it is commanded expiry plus ten ticks, regardless of earlier geometric arrival.
+There are exactly four opportunities, including stay/zero-path aliases. The fourth
+can be as late as t190, with final command expiry t230. Nonadjacent mover revisits
+and subsequent ordinary remuting remain legal. No fifth choice is added.
+
+F_G4 is a **complete remaining-horizon ordinary selector**. At each opportunity,
+copy the same legal history and `n_hat` into every current candidate, execute its
+fixed option then ordinary C/E to tick 500, and rank terminal predicted U followed
+by original modeled total J and the original remaining tie-breaks. Precisely the
+key is `(U_hat_terminal, total_J, total_served, -current_option_path,
+-current_option_duration, -member, -site)`, with zero option tie fields for stay.
+Move only when this complete tuple is strictly greater than the current stay
+branch's tuple. There is no retained old `J <= stay_J` veto. Equal U can therefore
+be resolved by J and remaining ties; higher U can intentionally sacrifice J.
+This ordinary comparator has the same information, cumulative history, model,
+menu and H500 objective as the anticipatory arm, rather than a weaker myopic rule.
+
+F_A4 uses the current candidate plus **one future ordinary F_G4 selection** at
+each of its first three actual opportunities. For each current candidate, simulate
+the prefix to its implied next opportunity u and advance a private copy of
+`n_hat` on that prefix. The inner F_G4 receives that history, the encoded FP32
+report and private controller state, and ranks full continuations to tick 500.
+As in C, inner candidate physical simulations begin from their decoded report;
+the selected inner option is then simulated afresh from the unrounded outer
+physical handoff, with the same legal report/history and prefix counts. Rank the
+concatenated prefix plus selected suffix by the above full tuple. The current
+stay comparator includes its own future ordinary choice, not a never-move tail.
+At the actual next opportunity F_A4 replans from actual legal history; it does not
+blindly execute that earlier predicted choice. The fourth actual choice is F_G4.
+All three anticipatory roots, including t40, must use the new U objective: C's
+existing B02 first-root shortcut calls a J-only parent method and cannot be
+inherited unchanged. This remains a finite two-choice tree, not four-level search.
+
+**Branch identity and exact reuse.** Each branch owns entry counts, every service
+flag increment and terminal counts; forks copy, never share a mutable vector.
+Prefix counts are added exactly once. The suffix starts with prefix-terminal
+counts, and composition must not add the prefix twice. Segment service flags
+have L rows, unlike the L+1 position/estimate arrays. Store one L×50 Boolean trace
+per primitive segment plus entry/end counts and digests; composed branches refer
+to their ordered segment traces rather than writing duplicate flag arrays or a
+second full cumulative-count array. The reader reconstructs every intermediate
+count and the terminal key. Physical execution identity alone is insufficient:
+add a priority-history identity binding public-user bits, entry counts, flags,
+terminal counts, horizon, objective and selected ordinary/anticipatory law.
+
+Primitive reuse can remain useful without pretending cumulative history is absent.
+Inside an existing segment, C/E and its physical recurrence do not read `n_hat`:
+`x -> f(x)`, `b = g(post-command estimated x, mask)`, `n -> n+b`.
+The existing exact phase-40 key already binds physical and estimated positions,
+private commands, public users, mask and N. It can therefore reuse only the
+unchanged physical/C/E transition. This design still computes the service adapter
+for **every logical tick** and folds it into the current branch's own counts,
+even on a reused physical step. No service-cache saving is presumed. It does not
+cache terminal counts, U or a complete F selection. Any later cache of a
+priority-bearing decision/result would have to include entry `n_hat` and all
+existing state; it is outside this proposal. The old recurrence certificate
+certifies only physical/controller behavior; a new owned priority certificate and
+uncompressed reader certify the history fold. Cache scope remains the existing
+per-segment scope, without cross-world/arm/opportunity policy-answer reuse.
+
+**One shared prospective panel, paid once.** The concrete native dependency from
+C's DM reserves result worlds `29525000..29525015`, one excluded audit world
+`29525900`, and address `(261003,75)`. Its declared seed derivation is
+`SeedSequence([261003,75,world_id,stream,*suffix]) -> uint32`: stream 1 user
+RandomState, stream 2 UAV RandomState, and stream 3/suffix 8 runtime. C checked
+existing source/notebook/claim/config reservations for these ranges. Neither DM
+has materialized a world or run a scientific call for this construction. C will
+own one source-bound `worlds.json`, with little-endian FP64 array hashes, before
+selected execution. Use C's shared bootstrap seed `29525991` and 10,000 paired
+world draws. Both complete designs must be frozen before any new results; no
+positive C result is required for D to execute a selected design.
+
+C owns and pays for A_E4/G_E4 via original B02 `RollingProgram` and A_E via B01
+`TimingProgram`: 51 H500 missions/25,500 native transitions including three
+excluded audits, and their complete uncompressed reading. The proposed canonical
+location is `runs/uav_planning_opportunity_timing/b03_clock_placement_a01/`, with
+`raw/{phase}_n8_{arm}_w{world_id}/{native.npz,native.jsonl.gz,evidence.json.gz,cell-status.json}`
+and the bound config/summary/reading/result. Those future hashes and launch SHA
+do not yet exist; D must bind their actual published values, full-reader completion
+and shared world identities before accepting reference evidence.
+
+D adds only F_A4/F_G4: 34 missions/17,000 native transitions including two audits.
+D's proposed output is `runs/uav_planning_service_distribution/b01_priority_allocation_a01/`
+if selected. Freeze audit order F_G4 then F_A4, followed by ascending result worlds
+with (F_G4,F_A4) rotated left by world index modulo two; execute each worker once
+and fully read it once before the next mission. Reset each endpoint independently
+from C's canonical initial arrays and runtime seed; no controller/history persists
+between missions. This is one complete operation, with no audit-score selection.
+D reads the canonical reference arrays and complete C reading directly, makes
+saved-array U/individual reductions, and retains locators/hashes, not copies or
+new reference physics. Reference code/required raw arrays remain live consumers
+until D has completed this reading. The D five-endpoint scientific comparison
+contains 85 missions/42,500 native transitions in total, while the combined C/D
+seven-endpoint panel contains 119/59,500; neither sum is D's marginal bill.
+The shared panel is not an independent replication of C, and no combined late-clock
+plus U controller is tested. Incomplete/mismatched reference evidence is a concrete
+collection dependency owned by C, not a negative D outcome or permission for D
+to launch duplicate reference missions. C's current source proposal uses a fixed
+reference-first order within its one operation. D needs that reference panel's
+complete reading, not completion or success of C's later S4 group; complete
+references remain usable if the later group fails. CPU comparisons retain their
+different operation/phase/overlap conditions, not a randomized timing claim.
+Root would choose any revised purchase.
+
+**Complete reading and fixed interpretation.** The owned reader must reconstruct
+all new arms, rather than monkeypatch the old reader's fixed roster or module
+globals. Import immutable low-level primitives and schemas; own the new policy
+orchestration, branch/history certificates, counts and comparison reduction.
+For both new arms, cover all 501 native snapshots per mission: position/motion,
+FP32 state, user and peer RF, stable capacity allocation, all eight observations
+and visibility, commands, masks, terminations, rewards/J components and private
+controller histories. Reconstruct all model banks, candidates, prefixes, ordinary
+inner choices, selected suffixes and ranks without physical reuse. Check all
+logical service flags with independently written stable assignment logic, and
+check their aggregate served/quality/J against `_Scores` on the same estimated
+geometry. Also reconstruct all actual legal `n_hat` increments independently.
+Keep exact worker/reader identities separate from forecast/native approximation.
+
+For executed forecast correspondence, F_G4 choices 1–3 end before the next actual
+selection and choice 4 covers the remainder. F_A4 choices 1–2 have only the prefix
+scope because the future predicted selector is ordinary while actual control
+replans anticipatorily. Choice 3 has a complete remaining-policy comparison plus
+its prefix, and choice 4 has the complete remainder. Check commands/masks,
+per-user flags, original reward components and coordinates within those scopes.
+Keep legal predicted counts versus evaluator actual counts and their U differences
+explicit; quantized public/model service can disagree with true RF allocation.
+Model/native differences are evidence, not a reason to inject actual counts or
+retrofit a tolerance. Structural or reader inconsistency is technical failure;
+unexecuted model alternatives never become native counterfactual labels.
+
+Reduce actual service as `native.connections[1:].any(axis=1)` over ticks 0..499.
+The two primary world-paired U contrasts are F_A4−A_E4 and F_A4−F_G4. Also retain
+F_G4−G_E4 to expose the ordinary objective's contribution and all ten unordered
+endpoint pairs, including the cheaper A_E. Report 16 paired vectors and paired
+world-bootstrap mean intervals; this is exploratory development, not
+multiplicity-controlled confirmation, a noninferiority test or an equivalence
+claim. The 800 user-world rows per endpoint are dependent individual records,
+not 800 independent replicates. Audits never enter the estimand.
+
+For every endpoint and contrast retain original J, served-user ticks/mean service,
+quality, height penalty, path, worker/reader/inclusive CPU and actual choices.
+Report the mean served ticks of the five least-served users (each endpoint's own
+bottom five, ordered by count then id), all paired user-id changes, longest gaps
+and every gap's mission-edge censoring, never-served rescues/new cases, and severe
+losses even in U-positive or J-positive worlds. Different bottom-five memberships
+do not establish improvement for the same five people. Do not replace these with
+a composite U-plus-J score or filter to activated/beneficial worlds. Their all-panel
+values and tradeoffs are the complete-package evidence.
+
+My prospective prediction is that changing the terminal objective can alter
+allocation within the existing menu, but a cheap full-horizon F_G4 may absorb most
+or all of the benefit. Anticipation has demonstrated J value on this host; its
+increment on U is unknown. Strong competing explanations are an already useful
+A_E4 distribution, the J-only nomination/arrival/C/E restriction, cumulative
+model-service error near capacity/threshold boundaries, and the declared mismatch
+between early ordinary model tails and later actual anticipatory replanning.
+No one explanation is diagnosed by source feasibility or a later score change.
+
+A clear actual U gain over A_E4 **and** F_G4 would support finite anticipation for
+this restricted allocation objective, with whatever J/service/path/CPU tradeoffs
+are observed. A competitive cheaper F_G4 supports ordinary service-priority use.
+Higher U with severe losses/new never-served remains a conditional aggregate gain.
+Better predicted U without actual U gain is failure of this complete deployment
+contract, not proof of a unique representation, menu or model defect. Mixed or
+imprecise outcomes remain unresolved. Complete the fixed panel regardless of
+intermediate model scores; close this exact purchase afterward without automatic
+new weights, menu, information, clock, horizon, learner, world or retry. A genuine
+technical/admission/reader failure preserves partial evidence and missingness.
+
+**Source-derived work, including the additional interface.** For a full ordinary
+C/E continuation beginning at t, the inherited conservative request ceiling is
+`S(t)=217(500-t)+255(500-t)/10`. A J bank is at most `B=89601` state-mask requests
+(stay plus 7×100×128), 700 stationary rows and 28,000 transit ticks. With the
+original forced-command savings, an ordinary selection costs at most
+`D(t)=B+8*S(t)-7*2758`; an early anticipatory selection at most
+`A(t)=72*S(t)+341655`. The whole native controller bound is
+`120750+4*128=121262` requests per mission. Earliest actual starts 40/50/60/70
+give F_G4's four D terms and F_A4's A(40)+A(50)+A(60)+D(70).
+
+| Quantity | One F_G4 mission | One F_A4 mission | All 34 new missions, each full pass |
+| --- | ---: | ---: | ---: |
+| Inherited logical aggregate scorer state-mask requests | 3,855,642 | 25,621,722 | 501,115,188 |
+| Model physical transitions | 14,240 | 97,040 | 1,891,760 |
+| J stationary banks /candidate rows | 4 /2,800 | 28 /19,600 | 544 /380,800 |
+| Candidate transit ticks | 112,000 | 784,000 | 15,232,000 |
+| Full ranked model branches /primitive segments | 32 /32 | 224 /248 | 4,352 /4,760 |
+| Actual native transitions /opportunities | 500 /4 | 500 /4 | 17,000 /136 |
+
+The model-tick calculation is also explicit: F_G4 has
+`8*(460+450+440+430)=14240`; F_A4 has
+`72*(460+450+440)-3*1200+8*430=97040` including prefix, inner candidate and
+selected-suffix work. The Pro skeleton is correct. These are conservative logical
+ceilings, not expected cache misses or extra native episodes; the reader pays its
+own full pass, and candidate transit arithmetic is a separate category.
+
+The added service adapter has at most `P=1891760+17000=1908760` estimated
+state-mask inputs in the worker, with one path-loss/SINR/assignment extraction
+and 50 int64 increments each. No adapter reuse saving is assumed. The reader
+separately pays P extractions with independent assignment plus P aggregate-scorer
+checks on the estimated geometry: 3P additional RF state-mask evaluations across
+worker and reader. Thus the inherited-plus-adapter/check totals are at most
+503,023,948 worker and 504,932,708 reader state-mask evaluations, or
+1,007,956,656 combined. These counters group state-mask evaluations; they do not
+pretend all scalar function calls or verification tasks have equal CPU cost.
+Each pass adds at most 95,438,000 per-user integer increments and 217,600 log
+evaluations for the 4,352 ranked full branches, with native/reference U summaries,
+hashing, serialization and statistical reduction separately metered.
+
+The full native reader additionally covers 17,034 new physical snapshots and
+136,272 per-UAV observation/visibility constructions, plus all 17,000 motions and
+rewards. C already pays the 25,551 physical reference snapshots; D does not
+reconstruct their physics again. D's new reference reduction reads the saved
+25,500 transition-service rows for the 51 reference missions. Neither reset states
+nor the independently paid full model reader are hidden in a native-step total.
+
+If selected, narrow engineering acceptance includes zero-physics mock tests for
+fork isolation, history fold/concatenation, rank/stay law, physical-only cache reuse
+and reader tamper rejection. Four fixed 8×50 synthetic SINR matrices test stable
+assignment: all negative infinity; all zero; row 0's first 11 values at 1 with
+row 1/user 10 at .5 and all other values negative infinity; and only row 0/user 0
+at −1e−12, row 1/user 0 at 0 and row 0/user 1 at 0. Each is evaluated once by
+the frozen allocation helper and once by the independent reader: eight assignment
+calls, zero geometry/SINR/scorer calls, zero model/native transitions. They cover
+empty eligibility, exact ties, capacity spill and inclusive threshold. Real RF
+correspondence is read on the two already-counted upfront native audits and every
+logical modeled state; no extra pilot, physics test mission or acceptance fit is
+silently added. An engineering request for additional numerical exposure must
+revise this prospective declaration before execution. Independent engineering
+review is required for these core executable changes if selected; this source-only
+notebook does not implement them or substitute for that review.
+
+**Whole price, node and protective limits proposed to selection.** The historical
+17-mission A_E4+G_E4 worker total is 3,200.988393 CPU-s and reader total is
+10,518.621103 CPU-s: 3.811002638 CPUh together. Those are already part of C B02's
+6.590587-hour complete purchase, not an additional acquisition charge. D's closed
+S7 result and B's teacher/imitation bills also remain separate historical costs.
+Future new F visitation and RF adapter overhead have not been measured. Retain
+Pro's **5–10 incremental worker-plus-reader CPUh only as a planning range**, plus
+up to 1 CPUh for acceptance/preparation/collection. The old cache cannot supply
+a promised hit fraction. As a sensitivity calculation, scaling two old full-reader
+passes by the new logical ceiling/old actual logical count
+`501115188/169952931=2.948552785` gives approximately **17.23 CPUh** before added
+RF/support. That is neither a calibrated estimate nor a runtime upper bound, but
+it exposes why the 5–10 range is not an executable cap.
+
+The three shared references historically cost 5.165230701 worker-plus-reader
+CPUh for 17 missions each. They are paid once by C in the proposed joint purchase,
+not omitted globally and not charged again to D. An independent five-arm D study
+would require a different declared purchase, roughly 10–16 worker-plus-reader
+CPUh under the same assumptions; D has no authority to silently substitute it.
+Authoring the adapter/controller/reader, independent review and scientific reading
+also plausibly need 8–16 active support hours. That is an uncalibrated planning
+allowance, not measured labor, a token budget or result execution. Expect roughly
+6–16 standalone operation-wall hours for D under comparable uncongested execution;
+actual concurrency or cache behavior can make this longer.
+
+The proposed protective boundary is **24 summed CPUh, 48 operation-wall hours and
+12 GiB new owned peak allocated disk**, including acceptance and preparation.
+Reserve 600 CPU-s, 1,200 wall-s and 128 MiB for terminal accounting/collection;
+stop scientific work before crossing the corresponding reduced boundaries.
+Pure-mock/assignment acceptance is additionally limited to .5 CPUh/2 wallh within
+that envelope, not in addition to it. These are proposed purchase ceilings, not
+authorization or extra fit allowance. A cap hit, new-result failure or lost
+observation does not authorize an extension, duplicate request or replacement
+world. Preserve the same accepted handle and partial evidence.
+
+The old whole C operation peaked at 2,693,521,408 allocated bytes and 399,020 KiB
+runner RSS; its canonical raw evidence was 804,162,344 logical bytes. A conservative
+new D planning allowance is 1–3 GiB canonical evidence and roughly 4–7 GiB peak
+including the accepted source snapshot and temporary files, with 1–2 GiB runner
+RSS as an unmeasured allowance. One copy of new primitive service flags at the
+logical ceiling is 94,588,000 bytes, plus 850,000 actual-policy flag bytes and small
+count/certificate metadata; compression and inherited branch-array duplication
+determine the actual total. These arithmetic byte counts are not an artifact-size
+measurement. Bind actual hashes/dtypes/shapes, costs and terminal status; keep one
+necessary raw/certificate copy plus compact readings, and check C/D live consumers
+before any cleanup. No full-tree backup or duplicate reference retention is needed.
+
+The configured primary candidate remains `wsl_4070`; this task uses CPU, with no
+GPU requirement. `local_linux` is the actually demonstrated host for the inherited
+source and complete reader: Python 3.10.20, NumPy 1.26.3, Torch 2.7.0+cpu, one
+numerical thread. The configured remote is Python 3.10.21/NumPy 1.26.3/Torch
+2.7.0+cu118; its suitability/runtime identity and canonical-reference access must
+be checked rather than assuming CPU code makes it unsuitable. Co-locate the new
+reader with C's single canonical reference location. If C retains local canonical
+arrays, avoiding duplicate raw transport and preserving the already verified CPU
+runtime is a concrete reason to consider `local_linux`; final selection still
+needs fresh actual-node admission and the configured memory floor, including live
+consumers. No resource probe, node reservation, runtime change or admission was
+performed for this source-only task. Freeze the selected interpreter, versions,
+source bindings and command before a single formal launch.
+
+**Recommendation and remaining decision.** This construction is feasible without
+changing frozen RF code or granting new feedback. I favor at most this one complete
+ordinary-versus-anticipatory allocation comparison if Root selects it, with the
+already useful A_E4/A_E frontier retained. I do not predict that F_A4 must win, or
+that U resolves the documented individual-continuity harms. The extra per-user
+adapter is material engineering, and the 5–10 CPUh estimate remains uncertain;
+the restricted J-generated menu is a real scope limitation rather than promised
+fairness headroom. Those are the principal objections to investment, not a
+technical refutation of the question. No wider menu, later clock, learner or
+imitation purchase follows from this construction.
+
+Root's announced independent ResearchCritic will cover the actual B/C/D choice
+after the contracts exist; I did not commission a second review or self-clear a
+material direction objection. Still-unresolved execution facts are the eventual
+C world/source/artifact identities, selected node and measured new adapter/cache
+cost. They do not prevent a source comparison or require positive C outcomes.
+The next action belongs to Root's cross-question selection and that review.
+
+**Work actually performed.** Original advice/current-main/notebook/source reading,
+saved JSON inspection, the old-U reduction, source-file/reading byte bindings and
+cost arithmetic only. Metered saved-data/hash/arithmetic portions in this bounded
+construction total .323038796 CPU-s and approximately .323140 wall-s; text/Git,
+authoring and other support are additional and unmetered. No native/model/RF/scorer,
+optimizer or new synthetic assignment call was executed. No implementation,
+successor directory, launch, Pro request, new helper review, shared RESEARCH edit
+or deletion occurred. One concrete C dependency was coordinated through native
+communication without a reply loop. This is a complete source-only return, with
+no active D operation and no fabricated wait on A.
