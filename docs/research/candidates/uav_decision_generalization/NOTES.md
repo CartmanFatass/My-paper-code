@@ -6634,3 +6634,338 @@ separately scoped arithmetic is about.0772 CPU-s. There is no new empirical
 outcome to pool with the old runs. The relevant shared background is revised
 only for the scoped source deduction and the execution/acquisition distinction;
 local contract and investment details stay here.
+
+<a id="b05-selected-contract-l0-20261002"></a>
+#### 2026-10-02 — B05 complete request-scheduling exploration selected; L0
+
+Root explicitly selected one complete corrected G/R/L exploration after reading
+the whole source contract, addenda, original14,111-byte independent review and
+DM disposition. This is new B05 work, not reopening B03/B04. The substantive
+contract and all corrections immediately above are binding:3 independent fits,
+1536 training/172 frozen missions,2,049,600 native transitions,91,392 learning
+updates, the complete native/G/neural/paid-prefix reader and all tails. The
+scientific question and negative alternatives are unchanged; the completed
+independent selection review applies, with no new Pro or per-phase Root ACK.
+
+The whole accepted ceiling is50 cumulative CPU-hours for scientific execution,
+checks and full reader, and72 aggregate operation wall-hours. Preparation,
+support, queue delay and publication are reported separately in their real
+units and are not zero. The expected20–50 CPU-hour/24–40 support-hour cost,
+4–8GiB unique evidence and6–10GiB additional disk including a single roughly
+1.8GiB source snapshot remain estimates. We will specify an actual free-disk
+floor with reserve for final evidence and one source snapshot before launch,
+and retain the8GiB actual-node available-RAM floor; no current hardware health
+or throughput has been measured. Worker/reader source snapshots are sequential,
+not two simultaneous retained copies. The actual result node remains the
+configured WSL primary unless actual admission establishes a reason otherwise.
+
+Root clarified the failure boundary: pre-acceptance synthetic unit tests,
+static checks and independent engineering-review findings are ordinary draft
+feedback and may be corrected with all costs retained. The first genuine
+failure of a formally submitted/actual-admission request, result worker or
+full reader stops this purchase and dependent effects; no automatic resubmit,
+renamed attempt, replacement fit or unselected continuation. Synthetic checks
+may not become undeclared actual model/physics/learning score screening.
+
+**Literal identities fixed now, not searched.** Study master109259999. Fit
+indices0,1,2 have training worlds109250000…109250511,
+109251000…109251511,109252000…109252511 respectively. The common main panel is
+109253000…109253031; audits109253900/109253901/109253902 belong to fits0/1/2.
+Initial Torch seeds are109254101/109254102/109254103. Geometry keeps B03's
+registered map law, with its `[world,1]` jitter and `[world,2]` user generators;
+native UAV initialization uses the world seed. New PCG64 SeedSequence domains
+are `[master,20,world]` for the public rate permutation,
+`[master,21,world]` for the actual48×4 arrival tape,
+`[master,30,world,decision_index,tape_index]` for R's separate future tapes,
+`[master,10,fit]` for exploration, and `[master,11,fit]` for replay indices.
+The task owns the actual future tape; public objects contain no RNG or suffix.
+Frozen program order cycles by world index through G/R/L0-final/L1-final/
+L2-final; audit order cycles G/R/L-initial/L-final by audit index. Random draws
+and numerical source identities are recorded; ordering creates no extra worlds.
+Use separate conditional paired t summaries for each fit and the shared-world
+average; no unplanned bootstrap/sampling stream is required for that reading.
+
+**Deliverable and ownership.** Implement the selected study under new owned
+`experiments/candidates/uav_decision_generalization/b05_request_schedule/`
+and matching tests. New entry `run.py` has explicit worker/reader mode, seed,
+launch SHA, output, source/input/budget identities and admission before effects.
+Fixed configuration/source/budget JSON stays in the existing direction's docs;
+raw/compact outputs use new `runs/uav_decision_generalization/b05_request_a01/`
+and `b05_request_read_a01/`; operational scratch stays in this direction's temp.
+The DM owns NOTES, executable input acceptance, Git/index publication,
+collection and interpretation. No shared core change is planned. Reuse the
+existing authoritative host and small identity/physics helpers where suitable,
+without changing frozen500-step consumers or copying a shared learner.
+
+First bounded Implementer assignment: pure public state/FIFO/executor/G/feature
+semantics, including source-fixed seed identities and exact payload layout.
+Owned files are new `__init__.py`, `contract.py`, `task.py`, `ordinary.py`,
+`features.py`, and `tests/.../b05_request_schedule/test_core.py` only. No host,
+native/RF, Torch, launch, reader, process-supervision, docs or Git mutation by
+this helper. It implements one verifiable behavior: four lawful delayed target
+choices and the corrected ordinary values/learner features from a public state,
+with a native-compatible FIFO ledger. This shared interface is explicit so
+subsequent model/runner work can consume it without concurrent file writes.
+Helpers are not alone in the checkout; they preserve others' edits and spawn
+no children. Later bounded scopes will be recorded here if delegation helps.
+
+The pure state consists of world/tick, int32(50,2) users, four probability codes,
+float64(6,3) positions, bool50 ACK, integer4 counts/progress, uint8 six active
+slots and immutable three fixed member pairs. Candidate slots are(4,6), slot
+ID `2*cluster+inner_or_outer`; initial membership follows the ordered selected
+clusters. G returns canonical float64 four costs and counted prediction work;
+feature construction returns float32(4,303) plus retained float64 G values.
+State/report operations copy or expose immutable arrays; no private ledger
+timestamps/future tape escape into public control objects. The FIFO ledger
+separates start-of-tick arrival/pre-service charge from end-of-tick ACK service
+and applies terminal cost once. Model reconstruction can use public N/r without
+inventing arrival ages; actual episode outcome ledgers retain real IDs/times.
+
+**Checks and stop.** First helper tests use fixed synthetic maps/positions/
+queues/ACKs only, with no generated scientific world or host/model/RF calls.
+Cover arrival/service ordering, twentieth-tick completion, interruption/empty
+reset, FIFO and residence conservation, terminal/unused command boundary,
+pair/slot legality and orientation ties, current-position delayed mapping,
+known-head G recurrence versus a separately written scalar reference, future
+fluid/no-arrival tail, payload sizes/padding and303 feature ordering/dtypes.
+Record test invocations, failures/corrections and CPU/wall cost; these are
+engineering diagnostics, not task scores or G-throughput estimates. Tests own
+and clean pytest scratch under the existing temp lifecycle. Later neural and
+deadline checks will use separately declared synthetic fixtures/mocks, not
+an undeclared native panel or trained-checkpoint selection. Independent
+high-risk engineering review must cover the integrated code's numerical,
+RNG, replay, identity, deadline/cancel, source and complete-counter behavior.
+The DM accepts the diff and checks. Published exact inputs and active ownership
+precede any actual scientific launch; actual-node admission is not a reason
+to query health or run a pilot during implementation.
+
+**B05 bounded learner implementation scope.** A second disjoint Implementer
+may own only `b05_request_schedule/learner.py` and its `test_learner.py`: the
+fixed55,553-parameter residual scorer, exact64-bit G/tie composition, replay
+with separate sampler, cost-form Double-DQN update/target schedule, and
+checkpoint/movement identities. It receives cached(4,303) feature and float64
+four-G arrays, not a host, public/actual future tape or G callable. Runner,
+deadline policy path and native collection remain the DM's responsibility.
+Its checks may construct the **new untrained** scorer on fixed synthetic
+bounded feature rows, verify exact zero-head ordering, run two synthetic
+128-row gradient/target-copy updates, and use mocked small tensors for
+termination, signs, duplicate-index refusal, stream separation and replay
+boundaries. They must not load old trained assets, draw real study worlds,
+call a physical model or estimate task/throughput scores. Count every actual
+synthetic network forward row/backward/optimizer call separately from the
+selected worker/reader70,606,656-row and91,392-learning-update exposure. These
+correctness diagnostics consume the same complete50-hour CPU budget and
+create0 fitted task policies/native transitions. Parameter construction,
+zero-head certificate and checkpoint round trips are also timed; tests use
+the normal pytest-owned temporary lifecycle. Draft defects may be corrected
+under Root's explicit clarification, with attempts and cost retained.
+
+**Pre-execution timing and source clarification.** Root explicitly resolved the
+offline training order: each nonterminal report first receives a real20s
+monotonic decision window containing canonical four-way G, features, current
+network and exploration. Fix the command and its cache before admitting the
+previous complete transition to replay and doing at most one offline update.
+The fixed command is not reselected; updated weights first act at the next
+report. The terminal transition gets its scheduled update without a new G or
+command. Replay/Adam time remains fully charged training acquisition, outside
+the deployment deadline; this is not claimed as realtime online learning.
+Missing a required training G/decision cache at the deadline preserves the
+actual fallback/missingness and stops the selected training contract as
+technically incomplete. Ordinary declared R cohort cancellation remains a
+policy outcome. This adds no update, fit or native transition.
+
+The earlier phrase “host's float32 action/movement order” at the common
+executor definition was a source error. Current original
+`b03_joint_window/ordinary.py:steer` returns float64;
+`envs/pettingzoo/env_adapter.py:_array_to_dict` passes rows unchanged;
+`CoupledRelayHost.step` preserves each copied floating vector's dtype; native
+velocity multiplication precedes addition to float64 position. FP32 described
+the old Gaussian inputs, not ordinary steering. B05 therefore preserves the
+original **float64** ordinary steering and strict copied-vector `norm>1`
+projection across all arms/model branches. No science ran under the mistaken
+description. Root was informed before execution; the information/action/task
+and purchased ceilings are unchanged.
+
+**Bounded native integration scope.** After the pure-core handback, the same
+Implementer may own only new `native.py` and `test_native.py`, plus correcting
+the inaccurate float32 sentence in its own `task.py` docstring. Implement one
+native1200-tick host facade with source-fixed users, supplied-public-state
+reconstruction, exact float64 common actions, counted reset/RF/step events and
+snapshots. It must never clone an actual queue wrapper or arrival suffix into
+R. Constructor-reset topology overwritten by the inherited constructor must
+be restored from that same completed native reset, without an extra RF call.
+For public model reconstruction, install public positions/users before the
+first native RF computation using the registered user-generation hook; retain
+and count constructor work, then set the public clock and verify the public
+ACK. Pure mock tests may exercise plumbing and snapshot/motion contracts; no
+actual native construction, channel call, scientific world or rollout is
+authorized before the accepted full launch. The DM owns rollout/search,
+deadline processes, traces, runner and reader integration. Other files/index
+remain outside this helper's ownership; independent engineering review follows.
+
+The accepted pure-core18 checks passed first invocation at1.594610 measured
+CPU-s/.557814 wall-s, with8 synthetic G queries,32 values,4,008 candidate-ticks,
+16,032 cluster recurrences,24,048 kinematic UAV steps and368 expected-arrival
+cluster additions. Native facade11 mock checks passed first invocation at
+1.819717 CPU-s/.917193 wall-s; separate static check.005706 CPU/wall-s.
+Actual native constructions, scientific worlds and RF calls remain0. The
+learner's six pure/mock and one bounded real synthetic check passed first
+invocations at6.90 CPU-s/5.19 wall-s:260 actual residual rows,2 backwards and2
+optimizer calls, one scorer plus target/validation copies, no fitted task
+policy. Its target-copy fixture explicitly set schedule counter255; that
+counter is not256 actual diagnostic updates. An added mock-only event sink
+check passed at2.57 CPU-s/1.54 wall-s, with0 further real neural calls. The
+optional numeric cumulative event callback exposes attempts before calls and
+commits after completion to parent-owned storage; it never carries a model,
+private arrival tape or replay cache, and a failing sink is not retried.
+Unmeasured preparation/static/support work is separate, nonzero, and not an
+imputed runtime score. All these measured checks enter the50-hour prior bill.
+
+**Full-reader bounded implementation scope.** A helper may own only new
+`reader.py` and `test_reader.py`. The existing written `storage.py`, `worker.py`,
+`policy.py` and `rollout.py` define the trace interface; their authorship remains
+the DM's. Implement one full audit of the fixed1708 actual records and every
+paid committed R prefix/G query, plus fixed-panel/fit-conditional summaries.
+Use the existing separately written B03 stateless physical reconstruction and
+faithful copied-vector float64 motion; separately reconstruct the FIFO,
+target delay, arrivals, assignment, policy features and corrected G. Retain
+exact native discrete masks/routes/queues/actions and declared numerical
+comparisons; do not invent missing records, complete an interrupted query,
+run a native host, replay optimizers or add worlds. Frozen neural inference
+uses only the saved final/initial endpoints and the fixed303 input, counted
+explicitly. A pure/mock fixture may test accounting and reading plumbing,
+without actual RF/G/NN/world/fit calls. The reader input/manifest identities,
+whole-budget admission and useful result publication remain DM-owned.
+
+**B05 integration and prospective reading details (before execution).** The
+reader will report 95% paired-t descriptive intervals over the32 common worlds
+conditional on the frozen endpoints/shared ordinary realization (df31), and
+separately over the three fit means conditional on that panel (df2). The
+shared-world policy average retains world covariance. These are exploratory
+displays, not a new adoption threshold or96 independent training replicates.
+Completed/unfinished request residence, all50 user gaps, cluster backlog,
+interrupted head service, native movement and actual deadline/cohort exposure
+remain alongside C. No optimizer replay or additional counterfactual native
+suffix is purchased.
+
+The worker/reader use the configured Linux node, CPU Torch4 threads and
+interop1, NumPy/BLAS1, and the configured Python3.10.21/NumPy1.26.3/
+Torch2.7.0+cu118 versions; no CUDA work is requested. Native admission precedes
+all effects. The selected8GiB available-memory floor is accompanied by12GiB
+free output-disk floor after source-snapshot preparation; the4–8GiB unique
+evidence and6–10GiB additional-peak forecasts remain unmeasured estimates.
+No health pilot or new throughput estimate was run. CPU accounting includes
+the parent, live policy PIDs and reaped children; prior measured diagnostic
+cost enters the same50-hour bill. Source reading, design and coordination
+support remain separately nonzero and incompletely metered.
+
+Independent engineering review identified concrete draft defects that were
+corrected before any formal request: duplicate reader Torch interop setup;
+missing inclusive mission/acquisition CPU attribution; nonfinite prior-cost
+acceptance; an ESRCH reap race; parent-death leakage after a policy child's
+`setsid`; and a scientific manifest that inadvertently included mutable
+launcher status/logs. Parent catchable termination now unwinds through child
+reaping and failure evidence; each policy child also binds Linux's SIGKILL
+parent-death signal with both PID-race checks. Spawn identity publication is
+protected from catchable stop signals, and startup/send failures reap before
+any R trace collection. Abrupt external loss remains incomplete evidence, not
+a resumed or replacement fit. The final manifest binds only worker-owned
+config, endpoint counts, named fit metadata/checkpoints and raw traces;
+launcher terminal/status/log records retain their own lifecycle.
+
+The DM's full reader source read also corrected its proposed1200 reward-entry
+expectation: the unchanged native step enters the inherited dense/parent
+reward method twice per tick, hence2400 of each in a complete mission. This
+does not double the once-per-tick request charge and changes no physical
+transition. The reader validates those inherited event identities directly.
+
+Additional DM checks: the first14 pipeline tests plus11 native checks passed
+in one invocation at3.339247 child CPU-s/1.796870 wall-s; the arithmetic-only
+exposure reconstruction cost.065679 CPU-s. The updated20-test pipeline passed
+at4.210313 measured CPU-s/1.768539 wall-s, including a real benign child
+termination/reaping fixture, parent-death signal fixture, start/send unwind,
+and the actual effect-free launcher's literal admission scanner. A subsequent
+immutable-manifest fixture passed1/1 at1.764638 CPU-s/.644628 wall-s. These
+invocations add0 actual host, physical, scientific-world, G or neural calls.
+Test-owned scratch was removed normally. They establish those local plumbing
+properties; native integration, complete reader execution and throughput
+remain unexecuted. Reader mock-check attempts and final review are recorded
+at acceptance below, including any draft-fixture failures rather than erasing
+their cost.
+
+**Reader and engineering acceptance.** The DM read and accepted the full
+bounded reader implementation and its checks. Its seven mock/static pytest
+invocations consumed13.73 measured self-plus-child CPU-s/4.79 wall-s:
+initial11-test pass3.39/1.61; reward-fixture failure1.43/.40 and correction
+1.35/.31; publication check1.37/.34; cancellation check1.43/.40; sampler-fixture
+failure1.42/.40; final14-test pass3.34/1.33. The two failures were fixture
+class-name/signature mistakes; both remain charged. No actual native, RF, G,
+neural, optimizer or scientific-world call was made by these reader checks.
+The reader independently reconstructs geometry/FIFO/actions/features/G,
+replays only committed frozen neural rows and paid committed R prefixes,
+validates source-order cancellation frontiers, and streams the full replay
+identity from its single canonical trace copy. It checks optimizer state and
+updates/sampler lineage without claiming optimizer replay.
+
+The independent Engineering Reviewer found no remaining material/P1+ issue
+in the integrated draft and verified all61 source bindings, exact input bytes
+and cost arithmetic. It retained actual native/RF integration, complete
+worker-to-reader execution, deadlines, memory/disk peaks and throughput as
+unexecuted gaps. The DM accepted its concrete corrections. A final small
+reporting correction separates all policy-cache misses from true neural-cache
+misses; its mocked full-entry regression passed1/1 at1.961803 CPU-s/.918960
+wall-s, with134 synthetic policy misses versus99 neural misses. Source/input
+generation cost1.569054 CPU-s/.447141 wall-s. Additional review/edit support
+is incompletely metered and nonzero.
+
+**Pre-request actual-node choice,2026-10-03 UTC.** Before publication or any
+B05 formal request, Root supplied the other direction's original
+`runs/typed_joint_skill_decision/b07_consumer_a03/stderr.log` and
+`collection-prefix.json`. The DM read both, its current NOTES terminal entry
+and independent engineering diagnosis. The remote configured CPython3.10.21
+GCC process raised `UnboundLocalError` at `pathlib.py:578` while reading `a`,
+although the saved stdlib fragment binds `a` in the preceding `for` at574.
+The observed exception is unexplained by that saved ordinary control flow;
+the source file is not the executing interpreter state. No CUDA, compiler,
+memory, bytecode or shared cause with an older SIGSEGV was established. This
+does not prove general remote-node unsafety or corrupt B04's completed result.
+
+For this CPU-only, still unsubmitted purchase, the DM selects the already
+configured **local_linux** environment for both worker and reader. This
+supersedes the earlier prospective remote version tuple: the existing local
+`pyvenv.cfg` identifies CPython3.10.20; installed package metadata and version
+source identify NumPy1.26.3/Torch2.7.0+cpu. The selected source checks this exact
+tuple and Linux, records the interpreter, and binds the native launch
+manifest's node. All earlier B05 correctness checks used this existing
+scientific venv, but that limited evidence does not establish long-run
+reliability. No interpreter/package installation, health query, native/model
+pilot, new fit or changed scientific comparison occurred. Hardware-dependent
+deadline activation and measured costs will be conditional on this chosen
+node. Throughput remains unknown. The20s deadline,8GiB RAM/12GiB free-disk
+admission floors,50 cumulative measured CPU-hour/72 aggregate operation-hour
+stops and first-formal-failure boundary remain fixed; an admission failure
+does not authorize transfer to another node.
+
+The narrowly changed runtime fixture passed1/1 at1.794653 CPU-s/.712865
+wall-s using mocked Torch/version methods only. Regenerating exact inputs
+cost1.575587 CPU-s/.458188 wall-s. The current fixed61-source identity is
+`7eeaaf614fd8d88023f0baba2ca2aa04804b893acb1ecfec52158e9d0e762210`.
+`B05_STUDY_INPUT.json` is24,830 bytes,SHA256
+`05998b40a59d7766771e4513051aafb44eeebbe6c75e4bd569faf2fe61f9297b`;
+`B05_BUDGET_LEDGER.json` is2,296 bytes,SHA256
+`8597434c50befd0ddeb3795ec0da6df66dd0e48b225ba7dd17f924339a068256`.
+Its known pre-execution bill is42.901007 CPU-s/19.747903 recorded operation
+wall-s; some helper measurements are rounded to centiseconds, one arithmetic
+wall measurement is unavailable, and other support is explicitly unknown,
+not zero. The prior counters retain8 synthetic G queries/260 actual synthetic
+neural rows/two backwards/two optimizer calls; task fits/native transitions
+and formal submissions remain0 at this acceptance point.
+
+The same independent Engineering Reviewer completed the focused runtime
+revision review: no material finding remains; all61 final source hashes and
+both regenerated inputs verify, only `contract.py` and `run.py` changed from
+the integrated reviewed closure, and the local-node risk statement preserves
+the unresolved cause. The DM accepts these exact bytes and the existing
+checks. The local selection expressly supersedes the earlier remote tuple;
+native integration/complete execution/throughput remain unvalidated. Source
+publication is next, followed by this single actual local admission attempt.
