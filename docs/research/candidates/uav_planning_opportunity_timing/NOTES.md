@@ -1898,3 +1898,245 @@ accepts the B01 capability and records this same four-opportunity source assignm
 its updated B learning-data construction is separate. Background topics3/5/8 and
 the source premises used here are unchanged. This ordinary publication refresh
 changes no comparison,permission,accepted operation or source-only boundary.
+
+
+<a id="b02-purchase-l0-20261003"></a>
+### B02 selected whole purchase and L0 — 2026-10-03
+
+Root has selected the complete four-arm B02 purchase on the published actual
+source contract `1d0124bb96cdcf1c2c9c9918487f009aa8dff95a`, after reading that contract,
+the full coauthor proposal and one new independent Root-hosted selection review.
+The fixed contract above now authorizes implementation, exact-input publication,
+one formal admission/execution, all paid reading, interpretation/publication and
+necessary cleanup. Source-only language above remains the historical boundary,
+not a current restriction. The original independent review will be retained below
+verbatim with its identity; no repeat science review or per-run Root ACK is added.
+
+Adopt Root's review clarification: third/fourth stay is not evidence that the
+complete program did not change, because the second actual selector already
+changes in A_E4. Retain complete native usefulness even when its attribution stays
+unresolved; use only the paid choice sequences/arrays to inspect this distinction.
+Never use absent late activation to reject an otherwise useful package, or use
+local modeled improvement to rescue actual loss. The purchase remains finite
+ordinary planning, not sustained throughout H500, learning or optimal opportunity
+count. Existing B01 positive/adverse results, A01 failure/cost and A/D work stand.
+
+**L0 deliverable:** implement exactly four actual completion-based opportunities
+and the fixed two-layer/ordinary selector schedule, with complete uncompressed
+reconstruction, scoped forecasts, published17 initial arrays and bounded runtime.
+Author only on shared main in this direction's new `b02/`, its matching tests,
+`runs/uav_planning_opportunity_timing/b02_rolling_timing_a01/` and owned scratch.
+B01 and all55 original source/input bindings remain byte-frozen; no fleet/parent/
+shared edits, global-start mutation, synthetic shifted clocks or complete planner/
+environment copy. A narrow menu/segment adapter may repeat only the necessary
+clock-validating loop while importing the original sites/transit/scorer/C/E/
+OptionProgram/reduction/key/certificate primitives. Any broader factoring needs
+an explicit narrow exception before editing frozen paths.
+
+The bounded Implementer owns only `b02/{__init__,controller,option,segment}.py`
+and matching `b02/test_rolling.py`; DM owns all other B02 runner/input/reader/test
+integration and this notebook. No simultaneous edits to those helper paths;
+Implementer makes no Git/index mutations, launch, real world/model/RF/scorer/
+native calls or scientific choice, and spawns nothing. It returns its diff and
+metered pure-fixture checks for DM acceptance. Existing B01 implementation and
+checks are read-only evidence. Independent Engineering Reviewer then checks the
+whole final diff and targeted fixtures; DM accepts the result and owns the launch.
+
+Interface: `RollingProgram(arm,horizon=500,branch_sink=None,candidate_sink=None,
+reuse=True,segment_sink=None)` for G_E4/A_E4, retaining frozen `controller`,
+`plans`, `selections`, `banks` and `select(t,report,old_mask)` shapes. Expose ordered
+actual opportunity times. A_E4 first search should call the inherited B01
+anticipated selector with identical scientific IDs/payloads; its `ae/first`
+namespace already identifies opportunity1. Subsequent scopes include ordinal,
+actual clock and candidate/hypothetical clocks, preserving prefix/suffix/outer
+parent mapping. No model or actual-history cache crosses a selector boundary.
+
+Semantics: t1=40, stay advances10, commitment advances commanded arrival+10;
+stay consumes one of four, old plan replaced without history reset, fourth has
+no successor. First three A_E4 searches foresee only one ordinary next choice;
+G_E4 and fourth A_E4 use the ordinary complete C/E tail. Preserve every candidate,
+strict-J stay/ties, zero-path commitments, absolute phase/report denominator500,
+FP32 command arithmetic and inner decode, unrounded FP64 outer state, separate
+history copies and mutating-sink isolation. Entry starts40..190 by10 are explicit.
+Use frozen A2/A_E constructors without changing their external law. Native prefix
+and first-search identity use already-paid evidence; no extra scientific call.
+
+Checks are synthetic only: duration10/20/30/40, all-stay and maximum190/230 clocks,
+nonpositive champions/ties/aliases, changing masks/immediate-mover exclusion,
+old-plan expiry, no fifth/deeper search, absolute phase/history/precision, copied
+sink payloads, segment-local recurrence plus fresh uncompressed certificate,
+ordinal evidence identity, compaction/source tampering and stop/failure retention.
+Real audits are exactly the four paid29524900 missions, not an extra gate/pilot.
+
+Fixed new limits adopted from Root:24 aggregate metered CPUh,48 operation wallh,
+12GiB normal allocated owned source/output/scratch. Science stops before internal
+600CPU-s/1200wall-s/128MiB closure reserves; retain actual overshoot. Pure automated
+mock checks total at most.5CPUh/2wallh within the same24CPUh. For coordination the
+Implementer may use at most.15CPUh/.5wallh of that mock subtotal before returning;
+DM/Reviewer keep the remaining subtotal. All metered preparation/support/import/
+launcher/worker/full-reader/closure costs count once. Previously measured source
+subsections0.126961CPU-s plus Root-reported review support approximately.016CPU-s
+are retained with their actual scope; other support is unknown, never0. Formal
+process/import start defines operation wall, not previous authoring calendar.
+First real formal request (including refusal), admission, worker, complete reader
+or resource failure ends this purchase with partial evidence/original error. No
+retry/resume/fallback/reseed/re-audit. Lost acceptance reconciles the same request.
+Pure fixture/source defects can be repaired within the declared pre-effect scope.
+
+
+<a id="b02-independent-selection-review-20261003"></a>
+### B02 independent selection review — Root-hosted, 2026-10-03
+
+Original complete advice delivered once by `/root/four_dm_selection_critic` at
+Root’s request. This is Root-hosted independent ResearchCritic advice, not the
+Oracle coauthor’s self-review. Verbatim body follows; DM read it completely.
+
+<!-- B02_INDEPENDENT_SELECTION_REVIEW_ORIGINAL_BEGIN -->
+**建议保留 B02 已发布的四臂设计，购买一次完整研究。** 理由是检验已获得的两步合作能力能否在后续实际状态中反复使用，并检验同样四次机会下，廉价贪心程序能否取得相当或更好的用途。无需先购买 chooser、正面试跑或机制证明。
+
+我沿用原独立上下文，没有继承 Root 对 B02 的判词。本次先读 B01 原始配置、结果、完整 reader、正负世界及源码，再读 DM 判读、B02 合同和 Oracle 原答。审阅的是发布于 `1d0124bb96cdcf1c2c9c9918487f009aa8dff95a` 的[完整合同](/home/fires/hmasd-wsl/docs/research/candidates/uav_planning_opportunity_timing/NOTES.md:1288)，未重评 A/D/B，也未执行新实验或修改记录。
+
+B01 的证据足以支持这次有限延伸。原始 [result.json](/home/fires/hmasd-wsl/runs/uav_planning_opportunity_timing/b01_complete_timing_a02/result.json) 中，AE−A2 的平均 J 为 **+.004137129**，配对世界区间 **[+.000260501,+.009437566]**；服务为 **+.37675**，J 正/零/负世界为 **11/3/2**。更有建设性的证据是 AE−GE：七个改变首个承诺的世界全部提高 J 和服务，其余九个完整原生程序逐字节相同。GE−A2 的平均 J 和服务均下降，单纯提前提供第二次机会没有吸收 AE 的收益。
+
+这仍是带有明显代价的能力。世界 29523010 提供约 **55.8%** 的主比较净 J 增益；世界 29523009 提供约 **82.0%** 的净路径节省。质量平均下降，两个主比较 J 负例保留。800 个匹配用户—世界记录中，68 个损失服务时长、61 个最长观察间隙变长；五个 never-served 被救回，同时新增两个。它们不是 800 个独立实验单位。
+
+我直接核对了这些结论的具体支撑：
+
+- 世界 29523010 中，AE 改变两成员序列，取得 +.036933412 J、+3.198 服务；保存的原生连接数组同时确认用户 6 从 0→410 个服务 tick，用户 16 从 500→55，并产生 445 tick 的右删失末端间隙。
+- 世界 29523009 的“先 stay、后移动”保留了有用等待能力；大幅路径下降没有进入原生 J 的成本项。
+- 世界 29523005、29523012 的 J/服务损失是真实执行后的不同程序结果。世界 12 的已选模型、实际选择及个体救回/损失记录一致。
+- 此面板 A2 的首个 mover 在第二机会也仍然活跃，没有同成员再次移动。因此旧面板的再次移动机会不能解释本次两个负例。
+
+B01 全部已选 forecast 在有效比较范围内保持命令、mask、逐 tick 服务一致；这支持其原有两步程序的可信执行，但不能外推为 B02 滚动程序的完整预测准确性。55 个绑定源码文件，以及 canonical config、summary、reading 的字节数和散列均匹配；我还核对了上述关键世界的原始数组、决策流和证据目录绑定。没有重新运行物理或模型重建。
+
+**B02 的科学对象定义成立，但其价值应从完整闭环结果判断。** AE4 第一次搜索就是 AE 的第一次搜索，两者应在实际第二次选择前保持相同首选、时钟和原生前缀。这是一个有用的比较结构：新增问题从第二次重规划开始，检验后续继续使用两层选择是否值得。
+
+我核对了原 `TimingProgram`、菜单、segment 和 `OptionProgram/validate_plan` 的相关路径。合同正确保留了：
+
+- 绝对时钟、报告相位和实际 controller history；每次选择消费一次机会，stay 也替换旧 plan。
+- 到达时强制零命令及 member-containing mask，然后到 arrival+10 才再次选择；直接前一个 mover 被排除，更早的非相邻 mover 仍可能重新进入菜单。
+- 完整 champions、非正预测候选、严格 stay、原始 ties 和 aliases。
+- 内层 FP32 报告解码与外层未舍入 FP64 物理状态的分离。
+- 每个模型 segment 独立的复用缓存；完整 reader 另行计算全部逻辑工作。
+
+四次机会在 t40…190 内发生，最后承诺最迟 t230 到达，其后仍是普通 C/E。它检验的是**四个有限早期机会中的滚动两步选择**；没有覆盖贯穿 H500 的持续合作、无限次组合或四层完整规划。
+
+最重要的限定是模型与实际后继策略的差异。AE4 前两次估值假定“下一次普通选择，然后 C/E”，实际下一次还会进行两步预见。因此这些模型尾部是合法的排序依据，却不是实际四阶段程序的完整价值预测；严格优于模型 stay 也不保证原生逐世界改善。合同将前两次 forecast/native 核验限定到下一次实际重选前，并保留第三、四次对应的完整剩余结构，处理正确。不能把后续策略有意不同造成的尾部差异判成实现错误，也不能因此免除完整原生结果比较。
+
+这项差异没有使研究失去价值。它恰好暴露一个实际选择：这个有限估值器作为滚动控制单元，能否在额外计算和新的访问状态下继续产生用途？若完整效果有益，代理尾部不等于实际策略价值不自动否定用途；若完整效果不利，也不能靠每次局部预测正面来保住方案。
+
+**最强替代仍是直接复用 AE，保留 A2；实验内的关键替代是 GE4。** 更多机会本身是增加控制权，可能让普通贪心充分发挥，也可能只是改变普通 C/E 的后续运动。AE4−GE4 才检验这项共同新增权利下的预见增量。两者匹配机会数量和更新规则，实际时间戳仍由各自选择决定，因此比较的是完整 selector 规则。
+
+我倾向于本次滚动研究优先于 A2/AE chooser：它同时回答能力延伸与廉价替代两个问题，chooser 主要回答两个已有时钟间的条件选择。这个优先级是投资判断，不是数据证明“知识量更大”。也不能把“中心估计只多约 1.8 CPUh”当作可靠差价——两者都有未测菜单、工程与支持成本。若支持工作已成为主要瓶颈，直接保留 AE 而不买 B02，仍是合理的投资停止。
+
+本次值得购买的完整观察是合同中的 **16 个新共同世界×四臂，加四个独立工程 audit，共 68 个 H500 mission**；不要拆成先看有无正面效果再决定是否补完。A2/AE 保留现有用途参照，GE4 保留同权的廉价解释。无需再增加 G2/GE、时钟网格或 attribution 分支。
+
+不同结果应改变不同判断：
+
+- **AE4 同时改善 AE 和 GE4：** 保留滚动预见能力及完整增量成本；个人服务、质量和路径损失仍单列。
+- **GE4 改善 AE，且用途/成本更有利：** 保留简单的四机会能力；额外预见尚未证明值得其价格。区间重叠本身不证明等价。
+- **AE4 胜 GE4，却未改善 AE/A2：** 保留同权合同内的预见价值，但四机会扩展未建立相对已有能力的用途优势。
+- **完整结果不利或不确定：** 结束这次固定购买，保留 AE/A2；不自动购买第五次机会、加深搜索或修补。
+- **技术或资源失败：** 比较缺失，保存已付证据与成本，不能当作规划负面结果。
+
+判读时还应区分“后两次没有启动承诺”和“完整程序没有改变”。AE4 第二次选择的规则已经改变，后两次 stay 不能单独替代主结果判断；只有实际序列和保存数组才能确定新增干预是否发生。现有合同字段足以完成这个区分，无需额外调用。
+
+**完整价格核算一致。** 我用独立整数/有理数算术复核了每臂及总量：
+
+| 项目 | Worker | 完整 reader 另付 |
+|---|---:|---:|
+| state/mask 请求上限 | 803,523,292 | 同量 |
+| logical model ticks | 3,023,280 | 同量 |
+| stationary banks | 884 | 同量 |
+| candidate rows | 618,800 | 同量 |
+| candidate transit ticks | 24,752,000 | 同量 |
+| complete model branches | 7,072 | 同量 |
+
+另有 **34,000 native transitions、204 次实际机会、34,068 个保存原生快照重建、34,000 次运动/奖励检查**，以及原生无线、观察、序列化、散列和归约工作。零 fits 不代表便宜。
+
+B01 已测的完整相关成本约 **3.26048 CPUh**，另有未完整计量的支持成本。B02 的 **6.538530 CPUh** 算式能够复现，但只是按旧各臂成本及新请求负担缩放的中心估计；**6–12 CPUh** 是规划范围，**17.793465 CPUh** 是无复用价格敏感性，均非性能保证。新状态下的菜单大小、复用比例和记录成本仍未知。
+
+合同的 **24 累计 CPUh、48 operation-wall h、12 GiB** 是这次新购买的停止范围，不是旧 20 小时余额。`.5 CPUh/2 wallh` 纯 mock 子界限和 `600 CPU-s/1200 wall-s/128 MiB` 收尾预留均包含在主范围内。首次正式请求、worker、reader 或资源失败即关闭本次购买；没有额外健康查询或自动重试。预计 **8–14 支持小时**、**1–2.5 GiB 唯一证据**以及 source/scratch/RSS 价格仍需保留为估计，实际节点准入和新实现正确性尚未验证。
+
+本次审查没有生成世界、真实 scorer/model/native/RF/optimizer 调用、生产实现或记录改动。可单独计量的保存数据读取、散列和算术片段约 **0.143 CPU-s**；其他检索、阅读和推理支持没有完整计量，不计为零。
+
+**MATERIAL_DISSENT: no — 支持按已发布 B02 的完整比较与新全价购买一次研究；不支持将其解释为四阶段完整预测、普遍部署升级或原生单调改进保证。**
+<!-- B02_INDEPENDENT_SELECTION_REVIEW_ORIGINAL_END -->
+
+DM disposition: adopt the complete four-arm purchase and all scope/cost qualifications; MATERIAL_DISSENT:no. The paid program sequences and native arrays, including second-choice changes, determine whether the intervention changed the complete program. No late-activation proxy gate or additional scientific call is added. The independent original body is 9451 UTF-8 bytes, SHA256 `398192e50c69a5ced53391480fef2396b7c41b9aa7e6fb3326c40317e8eb8acf` (excluding delimiters/final newline).
+
+Meter correction to the preceding provisional L0: the complete original reviewer report measures approximately0.143CPU-s for its own saved-data/hash/arithmetic fragments, not an inferred0.016s. Charge that separately from DM’s0.126961s source fragments and0.000154968s L0 append; other support stays unknown. This corrects the provisional estimate without changing the24CPUh total.
+
+
+<a id="b02-engineering-acceptance-20261003"></a>
+### B02 implementation accepted; one formal request remains — 2026-10-03
+
+DM read and accepts the bounded registered Implementer diff and its checks:
+new rolling controller/menu/segment/init plus `test_rolling.py`. No frozen/shared
+file was edited. The adapters repeat only the short menu/segment loops needed for
+the larger start domain while importing the original C/E, sites, transit, scores,
+OptionProgram, reductions, keys and certificates. A_E4 opportunity1 calls the
+inherited B01 anticipated selector with identical `ae/first` scientific payloads.
+Later IDs are `ae/op{k}/{first}/t{actual}/t{future}/...`: candidate identity remains
+at index2 for the unchanged B08 certificate reader; ordinal/current/future clocks
+and prefix/suffix/outer relationships are all explicit. This narrow correction
+was covered by fresh synthetic prefix/suffix certificate checks, not a frozen edit.
+
+DM's integration uses frozen EvidenceStore/compaction and saved-native reduction
+helpers, with new four-opportunity collector, source/input manifest, complete
+uncompressed reader and scoped forecast comparisons. The first-search comparison
+reads all paid model/bank/segment payloads and certificates; the native comparison
+ends at input t2, while complete-program comparisons retain later differences.
+A regression specifically keeps a changed program when its last two choices stay.
+Every paired world and individual loss remains; zero signed totals leave net
+contribution shares undefined. Complete logical counts now include7752 maximum
+segment certificates in addition to all originally charged work.
+
+All17 selected initial arrays were generated once for publication from stream74,
+with per-array little-endian FP64 hashes and no host/controller/scorer/RF/model
+execution. The original55 source/input files matched the B01 A02 config exactly;
+`frozen-bindings.json` keeps that original source SHA and byte bindings. B02
+`fixed_config` verifies them before science as well as binding every new source/input.
+
+The original Implementer return reported39 passing synthetic tests. Five
+invocations cost21.720959CPU-s/22.027672wall-s, including the first fixture-only
+`KeyError: barrier_t` (15failed/19passed): its assertion was corrected to the
+frozen certificate field `eligibility_after_t`, without production or tolerance
+change. DM's integrated52 tests passed, then two added program/individual-loss
+regressions and one formal-wall-origin regression passed. No real audit was used.
+
+The same registered independent Engineering Reviewer read the full fixed contract,
+planner, callers and final integration, including precision/history, scopes,
+full replay, paired reductions, evidence/compaction, failure retention and budgets.
+Its final finding is **no material engineering finding remains**. It independently
+ran the full existing B02 suite: **55passed**,14 dependency deprecation warnings,
+5.37s pytest/6.291180s enclosing wall. Full-lifetime wrapper.107124CPU-s plus
+children6.205285CPU-s gives6.312409CPU-s; separate peaks669536/332004KiB are neither
+incremental nor additive. No new scratch leftovers, code edits, scientific query
+or launch. Runtime numerical identity and resource sufficiency remain unverified;
+the four paid audits and complete readers are the selected observation, not a
+positive activation gate. DM accepts this engineering result.
+
+B02's Meter preserves the B01 permanent-stop/signal-unwind behavior. It additionally
+counts authored B02 code/tests and direction scratch alongside the accepted
+snapshot/canonical output, and reads one atomically written formal-launch resource
+record. Launcher CPU is charged once. When that same-host record becomes available,
+its monotonic request start replaces the later runner-import origin, so overlapping
+launcher/runner wall is not summed. The narrower initial sample is explicitly
+labeled until then. This conservatively includes snapshot/admission in48operation
+wallh; it changes no exposure, limit or first-failure rule. Detection/reserve and
+hard-envelope overshoot are explicitly recorded. Post-final-sample closure and
+unmetered support remain separately reportable, not zero.
+
+Before submission the owned RESEARCH row will use the launcher's actual admitted
+state **exploring**, consistent with Root's published complete selection at
+`e926c4418`; literal `active` is not an accepted parser state. This carries forward
+the exact B01 A01 failure lesson. Lead stays `Codex DM (native child)` and pause
+must remain lifted. Pure CLI/state parsing is a pre-effect source check, not a
+formal launch, memory probe or extra audit. The single new selected output is
+`runs/uav_planning_opportunity_timing/b02_rolling_timing_a01/`, identityseed29524000,
+configuredlocal_linux/one numerical thread, with no retry/resume/fallback.
+
+Preparation before the final publication/parser tails is **41.884765120CPU-s**; automated mock subtotal is41.396104000CPU-s/41.903658897wall-s, inside1800CPU-s/7200wall-s. The bound preparation JSON retains individual measured scopes and unknown support. This final append/write tail is measured separately below.
+
+Final pre-effect source check refreshed published main`e926c44188833f6cd127ad062e721ec48b8bad66`, preserved Root’s complete selection/routing and other writers, and changed only this direction’s stale reserve row to parser-supported exploring. Pure parse_research_state and CLI parsing verified lifted/exploring/Codex DM (native child), local_linux, one fresh B02 output and no retry argument. All55 inherited byte bindings and new Python ASTs passed. This check incurred0.249730000CPU-s/1.486982732wall-s; with the preceding.000617334CPU-s acceptance append, published preparation now totals42.135112454CPU-s. No actual-node admission or scientific call occurred. This metadata/publication tail remains outside that sample and is not reported as zero.

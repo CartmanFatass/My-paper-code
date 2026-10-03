@@ -1,0 +1,116 @@
+{
+  "entries": [
+    {
+      "cpu_seconds": 0.126961,
+      "scope": "DM: measured source-only read/hash/arithmetic/write fragments"
+    },
+    {
+      "approximate": true,
+      "cpu_seconds": 0.143,
+      "scope": "Root-hosted independent selection review: saved-data/hash/arithmetic fragments, approximate"
+    },
+    {
+      "cpu_seconds": 0.000154968,
+      "scope": "DM: L0 append",
+      "wall_seconds": 0.000152780005
+    },
+    {
+      "cpu_seconds": 0.000213425,
+      "scope": "DM: independent original review capture",
+      "wall_seconds": 0.000209587015
+    },
+    {
+      "cpu_seconds": 0.00502245,
+      "scope": "DM: frozen55 source validation and B02 host/binding write",
+      "wall_seconds": 0.006668312009
+    },
+    {
+      "cpu_seconds": 0.000678288,
+      "scope": "DM: runner/collector initial implementation write",
+      "wall_seconds": 0.001401504007
+    },
+    {
+      "cpu_seconds": 0.000543989,
+      "scope": "DM: reader initial implementation write",
+      "wall_seconds": 0.000537254993
+    },
+    {
+      "child_cpu_seconds": 21.011703,
+      "mock": true,
+      "scope": "Implementer: five pure synthetic checks, first fixture schema typo retained",
+      "self_cpu_seconds": 0.709256,
+      "wall_seconds": 22.027672
+    },
+    {
+      "child_cpu_seconds": 0.0,
+      "scope": "DM: exactly17 fixed bound initial-array preparations, no environment/controller/scorer/RF/model",
+      "self_cpu_seconds": 0.212087,
+      "self_peak_rss_kib": 669536,
+      "wall_seconds": 0.16547271399758756
+    },
+    {
+      "child_cpu_seconds": 7.091687,
+      "child_peak_rss_kib": 322084,
+      "exit_code": 0,
+      "mock": true,
+      "scope": "DM: integrated B02 fully synthetic suite first invocation",
+      "self_cpu_seconds": 0.09052299999999999,
+      "self_peak_rss_kib": 669536,
+      "wall_seconds": 7.658154624019517
+    },
+    {
+      "child_cpu_seconds": 3.100803,
+      "child_peak_rss_kib": 306116,
+      "exit_code": 0,
+      "mock": true,
+      "scope": "DM: two added synthetic complete-program/individual-loss regressions",
+      "self_cpu_seconds": 0.074833,
+      "self_peak_rss_kib": 669536,
+      "wall_seconds": 3.0622625370160677
+    },
+    {
+      "child_cpu_seconds": 2.913352,
+      "child_peak_rss_kib": 303668,
+      "exit_code": 0,
+      "mock": true,
+      "scope": "DM: added synthetic formal-request wall origin regression",
+      "self_cpu_seconds": 0.09153800000000001,
+      "self_peak_rss_kib": 669536,
+      "wall_seconds": 2.8643897360016126
+    },
+    {
+      "child_cpu_seconds": 6.205285,
+      "child_peak_rss_kib": 332004,
+      "exit_code": 0,
+      "mock": true,
+      "scope": "Independent Engineering Reviewer: complete55-test synthetic B02 suite",
+      "self_cpu_seconds": 0.107124,
+      "self_peak_rss_kib": 669536,
+      "wall_seconds": 6.29118
+    },
+    {
+      "cpu_seconds": 0.000617334,
+      "scope": "DM: final engineering acceptance/metadata append",
+      "wall_seconds": 0.000600523985
+    },
+    {
+      "child_cpu_seconds": 0.094675,
+      "scope": "DM: final current-main/state/CLI/source parsing and frozen55 hash check; no formal request or resource probe",
+      "self_cpu_seconds": 0.155055,
+      "wall_seconds": 1.4869827319926117
+    }
+  ],
+  "metered_cpu_seconds": 42.135112454,
+  "mock_cpu_seconds": 41.39610400000001,
+  "mock_wall_seconds": 41.90365889703719,
+  "rss_scope": "Process-lifetime high-water, may include inherited maximum; not incremental and not additive.",
+  "scientific_effects": {
+    "fits": 0,
+    "initial_world_arrays": 17,
+    "native_steps": 0,
+    "real_model_or_scorer_or_RF_queries": 0,
+    "updates": 0
+  },
+  "status": "accepted_before_single_formal_request",
+  "unknown_cost": "Uninstrumented source/search/CodeGraph/adviser/manual reasoning/publication support CPU and command startup outside sampled scopes are unknown, not0. Closure after final runner sample is separately charged. Formal launcher reading is loaded once by runtime Meter from formal-launch-resources.json. This preparation write tail is outside final sample."
+}

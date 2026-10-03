@@ -1,0 +1,280 @@
+{
+  "source_bindings": {
+    "envs/pettingzoo/env_adapter.py": {
+      "bytes": 25232,
+      "path": "envs/pettingzoo/env_adapter.py",
+      "sha256": "8b42c1c3e7ef44cb814f79225b4af944b1018ad764dfeb17e9e1cc294df79d40"
+    },
+    "envs/pettingzoo/scenario1.py": {
+      "bytes": 7476,
+      "path": "envs/pettingzoo/scenario1.py",
+      "sha256": "e5b3eb7d755a7d7866cc7cd01531383bee821f0c6d72a81a3d4fa9cb5954939e"
+    },
+    "envs/pettingzoo/uav_env.py": {
+      "bytes": 68827,
+      "path": "envs/pettingzoo/uav_env.py",
+      "sha256": "fb67554cf911adc9d3260a2a7f16d1773921c295646cb46beb4ba1247fec599e"
+    },
+    "envs/pettingzoo/uav_radio.py": {
+      "bytes": 5001,
+      "path": "envs/pettingzoo/uav_radio.py",
+      "sha256": "db3464803b1a5aa9c9504096810dc971266a6bd7eba1c31dfe79e7d8d903f3cc"
+    },
+    "experiments/candidates/agent_count_generalization/adapter.py": {
+      "bytes": 4364,
+      "path": "experiments/candidates/agent_count_generalization/adapter.py",
+      "sha256": "b59d7028771b5acc4148f7dd90b5480c3143ae88580bb1b8154944831e2c0fbc"
+    },
+    "experiments/candidates/uav_fleet_transmission/b02/controller.py": {
+      "bytes": 5847,
+      "path": "experiments/candidates/uav_fleet_transmission/b02/controller.py",
+      "sha256": "d3766108d55662e0eea19e82227221d11e2ffedf0f971ad526071df2e142afb2"
+    },
+    "experiments/candidates/uav_fleet_transmission/b02/host.py": {
+      "bytes": 2791,
+      "path": "experiments/candidates/uav_fleet_transmission/b02/host.py",
+      "sha256": "822745022a2842d4e683a677d2e3fa4c1dfc52db2dd781f4c0afb018cc09e0e3"
+    },
+    "experiments/candidates/uav_fleet_transmission/b02/option.py": {
+      "bytes": 9269,
+      "path": "experiments/candidates/uav_fleet_transmission/b02/option.py",
+      "sha256": "dbf1dcb827e881986ccadf65c061662900df80b65cd01494c967773ad0815cc8"
+    },
+    "experiments/candidates/uav_fleet_transmission/b02/reader.py": {
+      "bytes": 10409,
+      "path": "experiments/candidates/uav_fleet_transmission/b02/reader.py",
+      "sha256": "e0a85eca3bf98784dce92e5d7bb661092b2f730d7ddaeab00d8ef84a598202b3"
+    },
+    "experiments/candidates/uav_fleet_transmission/b02/run.py": {
+      "bytes": 879,
+      "path": "experiments/candidates/uav_fleet_transmission/b02/run.py",
+      "sha256": "484c5c36cab36f50273e8d9030beba0f51c0b923e3874b3ec0cc2fbe6b770b8b"
+    },
+    "experiments/candidates/uav_fleet_transmission/b02/study.py": {
+      "bytes": 11807,
+      "path": "experiments/candidates/uav_fleet_transmission/b02/study.py",
+      "sha256": "b4e969f8352f27fa1d3dc6aaa76e9eba15f76ce40ce649ec5665ce0645039ced"
+    },
+    "experiments/candidates/uav_fleet_transmission/b02/worlds.json": {
+      "bytes": 83088,
+      "path": "experiments/candidates/uav_fleet_transmission/b02/worlds.json",
+      "sha256": "b1be4cdb2f187a65e98283d9b72ab457edc63e55378636304de8d09d8ca7cbfa"
+    },
+    "experiments/candidates/uav_fleet_transmission/b03/__init__.py": {
+      "bytes": 49,
+      "path": "experiments/candidates/uav_fleet_transmission/b03/__init__.py",
+      "sha256": "5634cd5f5f6e406f15e82aba5b4df4767c06dba459555aa6a8da5c7a3fa00d74"
+    },
+    "experiments/candidates/uav_fleet_transmission/b03/controller.py": {
+      "bytes": 5193,
+      "path": "experiments/candidates/uav_fleet_transmission/b03/controller.py",
+      "sha256": "0f79b38ff4216d3a2494995783caa32a8c487a9380a3483da36f13f7618b2d05"
+    },
+    "experiments/candidates/uav_fleet_transmission/b03/host.py": {
+      "bytes": 1832,
+      "path": "experiments/candidates/uav_fleet_transmission/b03/host.py",
+      "sha256": "66975b7c3cc05637f95f293ff36a5c072b8eab4dd308ec3addfd2c74a49cddbe"
+    },
+    "experiments/candidates/uav_fleet_transmission/b03/option.py": {
+      "bytes": 4830,
+      "path": "experiments/candidates/uav_fleet_transmission/b03/option.py",
+      "sha256": "0cf07104a1bfca09bf1387d11a9b39281975c9a6fd74cd89530c6081a3a3f7a0"
+    },
+    "experiments/candidates/uav_fleet_transmission/b03/reader.py": {
+      "bytes": 19396,
+      "path": "experiments/candidates/uav_fleet_transmission/b03/reader.py",
+      "sha256": "0741289ec07e3e52b6dc86ef0935c5b29e24d92ab9fe2332fa883e639b07f8fc"
+    },
+    "experiments/candidates/uav_fleet_transmission/b03/run.py": {
+      "bytes": 879,
+      "path": "experiments/candidates/uav_fleet_transmission/b03/run.py",
+      "sha256": "3805a684b3f1177c33beff286e52e7ef5b89ec4fbbdbd387b8ab94841d16e6d4"
+    },
+    "experiments/candidates/uav_fleet_transmission/b03/study.py": {
+      "bytes": 12577,
+      "path": "experiments/candidates/uav_fleet_transmission/b03/study.py",
+      "sha256": "15ec715647a40486a47ea4cf6c25470974130788f925ee33fbe1e4eba3583a1b"
+    },
+    "experiments/candidates/uav_fleet_transmission/b03/surrogate.py": {
+      "bytes": 8167,
+      "path": "experiments/candidates/uav_fleet_transmission/b03/surrogate.py",
+      "sha256": "38882231467ee44fa5203c2fda2f07b47969dd363b9c6aa6f67534e0e2e6d967"
+    },
+    "experiments/candidates/uav_fleet_transmission/b03/worlds.json": {
+      "bytes": 83057,
+      "path": "experiments/candidates/uav_fleet_transmission/b03/worlds.json",
+      "sha256": "89098497f13b378c380eb0cd3cbd0e6cef24b6ab377bdc38ec44be9457cd8b20"
+    },
+    "experiments/candidates/uav_fleet_transmission/b04/__init__.py": {
+      "bytes": 60,
+      "path": "experiments/candidates/uav_fleet_transmission/b04/__init__.py",
+      "sha256": "bac678a9be497cc6f2d291022eb12e3c21b98c2d065cb04e136f21b8ac2014f0"
+    },
+    "experiments/candidates/uav_fleet_transmission/b04/controller.py": {
+      "bytes": 10419,
+      "path": "experiments/candidates/uav_fleet_transmission/b04/controller.py",
+      "sha256": "11e8eab916cda01efe81de728567f1e61db67bffe2cad280d0a53378acbe7b0c"
+    },
+    "experiments/candidates/uav_fleet_transmission/b04/host.py": {
+      "bytes": 2027,
+      "path": "experiments/candidates/uav_fleet_transmission/b04/host.py",
+      "sha256": "6942fa3091b174c2fb7a0bbf181b8a0ba306a5300edbc336527b7f3a712c4393"
+    },
+    "experiments/candidates/uav_fleet_transmission/b04/option.py": {
+      "bytes": 4420,
+      "path": "experiments/candidates/uav_fleet_transmission/b04/option.py",
+      "sha256": "9b56610ec6a81f1a1aeb30f7dea59ecc10db072ee494ff20fd863099dced97db"
+    },
+    "experiments/candidates/uav_fleet_transmission/b04/reader.py": {
+      "bytes": 20618,
+      "path": "experiments/candidates/uav_fleet_transmission/b04/reader.py",
+      "sha256": "e47cdedb77ea7e55ff7dde75969d3e654873d9271f2a689becb2df7f53fa4a77"
+    },
+    "experiments/candidates/uav_fleet_transmission/b04/run.py": {
+      "bytes": 1051,
+      "path": "experiments/candidates/uav_fleet_transmission/b04/run.py",
+      "sha256": "cf1cc2b274dbe9525dbac2278e1ae04d00bb40c84995fc374bb90aa45fddb440"
+    },
+    "experiments/candidates/uav_fleet_transmission/b04/study.py": {
+      "bytes": 15839,
+      "path": "experiments/candidates/uav_fleet_transmission/b04/study.py",
+      "sha256": "4932c572d657d6012999b08b889e21f6b0562c45b6e72dfdd9a35dd890a44036"
+    },
+    "experiments/candidates/uav_fleet_transmission/b04/surrogate.py": {
+      "bytes": 8847,
+      "path": "experiments/candidates/uav_fleet_transmission/b04/surrogate.py",
+      "sha256": "3528d957a9f0bd6e4b4569e8bb311f0e9fff2219f996cf15d1b965fbb6422ac3"
+    },
+    "experiments/candidates/uav_fleet_transmission/b04/worlds.json": {
+      "bytes": 83142,
+      "path": "experiments/candidates/uav_fleet_transmission/b04/worlds.json",
+      "sha256": "29b9a94b7dc52f85eef899200d4267de6cdb2f65704786f441686cb465a89ba0"
+    },
+    "experiments/candidates/uav_fleet_transmission/control.py": {
+      "bytes": 10050,
+      "path": "experiments/candidates/uav_fleet_transmission/control.py",
+      "sha256": "8fee671dcdf1183201f6a3e8290347a30e90b20b33955477b638cdbb5e5f36b5"
+    },
+    "experiments/candidates/uav_fleet_transmission/host.py": {
+      "bytes": 4306,
+      "path": "experiments/candidates/uav_fleet_transmission/host.py",
+      "sha256": "f46d4053f6fb0798f2d70e0d6aed3df6b63f012318b4df23207d06dbe0432f76"
+    },
+    "experiments/candidates/uav_fleet_transmission/reader.py": {
+      "bytes": 16221,
+      "path": "experiments/candidates/uav_fleet_transmission/reader.py",
+      "sha256": "639dd22d6314067c6a526bc8534d525738a7de46a57b850c3e1c5950b4b86ce2"
+    },
+    "experiments/candidates/uav_fleet_transmission/study.py": {
+      "bytes": 19049,
+      "path": "experiments/candidates/uav_fleet_transmission/study.py",
+      "sha256": "1ce5f91d7ef67b17181a385021f854d2794e7cfb919662efff2b55d4711424cc"
+    },
+    "experiments/candidates/uav_parent_adaptation/b06_continuation_amortization/cycle.py": {
+      "bytes": 9493,
+      "path": "experiments/candidates/uav_parent_adaptation/b06_continuation_amortization/cycle.py",
+      "sha256": "bfcc2fedc267505f3b9d53ca8f1159fe8d760ec4c2c74cf1826c80b86ca54ec6"
+    },
+    "experiments/candidates/uav_parent_adaptation/b08_exact_planning_reuse/__init__.py": {
+      "bytes": 72,
+      "path": "experiments/candidates/uav_parent_adaptation/b08_exact_planning_reuse/__init__.py",
+      "sha256": "b1a4c7a5c8da5ddbf2c30772d56c37f43ba7ff0ffd7ece6280fc3392025928e6"
+    },
+    "experiments/candidates/uav_parent_adaptation/b08_exact_planning_reuse/controller.py": {
+      "bytes": 11058,
+      "path": "experiments/candidates/uav_parent_adaptation/b08_exact_planning_reuse/controller.py",
+      "sha256": "32eef9409407650a89431800de9e3bc6bfd9a04abb71b7c92b50aef5dc572fd4"
+    },
+    "experiments/candidates/uav_parent_adaptation/b08_exact_planning_reuse/inputs.py": {
+      "bytes": 15834,
+      "path": "experiments/candidates/uav_parent_adaptation/b08_exact_planning_reuse/inputs.py",
+      "sha256": "cea7f3ec51f9cad5077d0e72f8a90a563940b5a7b17efbea96a85d79a78becef"
+    },
+    "experiments/candidates/uav_parent_adaptation/b08_exact_planning_reuse/reader.py": {
+      "bytes": 28057,
+      "path": "experiments/candidates/uav_parent_adaptation/b08_exact_planning_reuse/reader.py",
+      "sha256": "60ec278acff040c238e94c0a78101d735af8dd45ac354a4d039f3c3b93eb9891"
+    },
+    "experiments/candidates/uav_parent_adaptation/b08_exact_planning_reuse/segment.py": {
+      "bytes": 12903,
+      "path": "experiments/candidates/uav_parent_adaptation/b08_exact_planning_reuse/segment.py",
+      "sha256": "aeadbf9796c6bb82f564dd1e9ce73b224db2d7aa40c657514f6dab94d73d957f"
+    },
+    "experiments/candidates/uav_planning_opportunity_timing/__init__.py": {
+      "bytes": 50,
+      "path": "experiments/candidates/uav_planning_opportunity_timing/__init__.py",
+      "sha256": "a2094ed37c7def3b89ebb4a3f8b0019511410a7f664535e8d3326908bd762c70"
+    },
+    "experiments/candidates/uav_planning_opportunity_timing/b01/__init__.py": {
+      "bytes": 149,
+      "path": "experiments/candidates/uav_planning_opportunity_timing/b01/__init__.py",
+      "sha256": "51c98ceabf8948e808328c4708262692dc7a3865161e9252cd72cc568520c767"
+    },
+    "experiments/candidates/uav_planning_opportunity_timing/b01/controller.py": {
+      "bytes": 10608,
+      "path": "experiments/candidates/uav_planning_opportunity_timing/b01/controller.py",
+      "sha256": "1d06f8cb62d4a6dd0fd738c65e5deefed88d5222ccf7fa1240f855f495030d22"
+    },
+    "experiments/candidates/uav_planning_opportunity_timing/b01/evidence.py": {
+      "bytes": 7897,
+      "path": "experiments/candidates/uav_planning_opportunity_timing/b01/evidence.py",
+      "sha256": "7c83609512fb5628bf8ad534c230ed725e814144e1347df8951845810b05f7bd"
+    },
+    "experiments/candidates/uav_planning_opportunity_timing/b01/host.py": {
+      "bytes": 2137,
+      "path": "experiments/candidates/uav_planning_opportunity_timing/b01/host.py",
+      "sha256": "bcab2ee769522202b309cd219993381687c82d31643c92a7c274f2709e421506"
+    },
+    "experiments/candidates/uav_planning_opportunity_timing/b01/inputs.py": {
+      "bytes": 4738,
+      "path": "experiments/candidates/uav_planning_opportunity_timing/b01/inputs.py",
+      "sha256": "ff360bc3bde34c1251b2e745d5e05acad34fc68d9d3bbc8f606007e974035231"
+    },
+    "experiments/candidates/uav_planning_opportunity_timing/b01/meter.py": {
+      "bytes": 6993,
+      "path": "experiments/candidates/uav_planning_opportunity_timing/b01/meter.py",
+      "sha256": "23929798fabab47f9f4ca3d2bf877a97a7b8c13d778334042add776ea036edfd"
+    },
+    "experiments/candidates/uav_planning_opportunity_timing/b01/option.py": {
+      "bytes": 5144,
+      "path": "experiments/candidates/uav_planning_opportunity_timing/b01/option.py",
+      "sha256": "96c646a7c90061a704b2bf0e75a37fe86a0e413f12545294e530290a6b8759e6"
+    },
+    "experiments/candidates/uav_planning_opportunity_timing/b01/preparation.json": {
+      "bytes": 2646,
+      "path": "experiments/candidates/uav_planning_opportunity_timing/b01/preparation.json",
+      "sha256": "1037452e28257e2f5fbe0471fe75aa588233b77823a89e87449178c80fe5de6c"
+    },
+    "experiments/candidates/uav_planning_opportunity_timing/b01/reader.py": {
+      "bytes": 22999,
+      "path": "experiments/candidates/uav_planning_opportunity_timing/b01/reader.py",
+      "sha256": "ae47e6f3516c7a74b6f21613d5ce097f4078c37c3bf440258c74251be42e06e2"
+    },
+    "experiments/candidates/uav_planning_opportunity_timing/b01/run.py": {
+      "bytes": 2123,
+      "path": "experiments/candidates/uav_planning_opportunity_timing/b01/run.py",
+      "sha256": "982de187025beb75113d3e9e278496c1ef273dab2e39e0899f60d6e345946934"
+    },
+    "experiments/candidates/uav_planning_opportunity_timing/b01/segment.py": {
+      "bytes": 6411,
+      "path": "experiments/candidates/uav_planning_opportunity_timing/b01/segment.py",
+      "sha256": "f178ae2709a5b0b4b7065d70eb573acec7095f9d86cb470f7bce76903e441d26"
+    },
+    "experiments/candidates/uav_planning_opportunity_timing/b01/study.py": {
+      "bytes": 13901,
+      "path": "experiments/candidates/uav_planning_opportunity_timing/b01/study.py",
+      "sha256": "35d15ff2941cd6055638495e257432f34149f84fb4289bd56af3e92822bbc1f5"
+    },
+    "experiments/candidates/uav_planning_opportunity_timing/b01/worlds.json": {
+      "bytes": 88298,
+      "path": "experiments/candidates/uav_planning_opportunity_timing/b01/worlds.json",
+      "sha256": "c4314db1dfec21563644d8e7065d1402eb46dc3f58200fddd9ba3a8f7ec8786a"
+    },
+    "scripts/hmasd_admission.py": {
+      "bytes": 19793,
+      "path": "scripts/hmasd_admission.py",
+      "sha256": "0faa5d53fba5af9b1a2fc4979bde5bd50bcbcaac2dbef938e90a64680156cf4d"
+    }
+  },
+  "source_sha": "4481c6240dc8266c2a6f13070cc1e8762328e614"
+}
