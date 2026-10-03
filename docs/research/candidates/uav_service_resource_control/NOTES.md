@@ -1032,3 +1032,94 @@ at its recorded durable location. No cleanup target remains and no backup/retent
 created. B01 is reserve with no active producer, unread result/advice or selected successor;
 the broader question and all positive/adverse evidence remain open for the next substantive
 Root allocation.
+
+<a id="b01-root-oracle-consultation-20261003"></a>
+## 2026-10-03 UTC — Root-requested Oracle consultation preserved after closure
+
+Root requested this bounded append/publication after adopting the B01 disposition in
+`94704c0c0a7d711d3708736d3462506e92b48951`. Native
+`/root/four_dm_allocation_oracle` transmitted the complete preceding D next-investment
+consultation once for this existing notebook. This is **Root's coauthor/Oracle consultation**,
+distinct from the completed independent Scientific Reviewer above. The full original is
+preserved verbatim between the following markers, including its source links, cost forecasts,
+uncertainty boundaries, conditional capabilities and adverse evidence. No reply/ACK to the
+Oracle, new review or scientific purchase was requested or made.
+
+<!-- B01_ROOT_ORACLE_ORIGINAL_START -->
+My preferred recommendation is **no immediate new paid study for D from this lineage**. Preserve the parent question and its positive capabilities. I would not purchase another binary DDQN run, select L1 retrospectively, or reopen service-aware charging under a new name. This is an investment judgment, not a conclusion that learning or cooperative resource control is exhausted.
+
+I reconstructed D’s original results before reading its disposition and complete independent review. I also examined the previously completed persistent-service results and executable charging interface because that was the most plausible distinct continuation. I did not inspect unfinished A/B/C outcomes.
+
+1. **What D actually established**
+
+All three fits completed their exposure and changed consequential native behavior. Each received 12,800 transitions and 11,200 updates; every learned final trajectory differed physically from C. The negative result cannot be dismissed as an inactive controller or unchanged parameters. Conversely, without an initial-policy evaluation panel, parameter movement is not measured improvement caused by training.
+
+The fixed primary L−T* J means are **−18.232, +1.463 and −40.356**. Their mean is −19.042, with the declared df2 interval [−71.013, +32.930], conditional on the shared 32 worlds. These are three training instances; the 96 learner/world pairs do not supply 96 training replications.
+
+The complete outcomes retain genuine capabilities:
+
+- H_T−C improves cumulative QoS by **41.363**, with J +16.974, while consuming 43.188 Wh more. Both service and J contrasts remain uncertain on this panel.
+- L1 saves **12.305 Wh and 9.975 mission CPU-seconds** against H_T. Its J difference is −4.052, with unresolved uncertainty.
+- L0 in world40035007 gains **200.777 J and 195.903 cumulative QoS** against T*, consumes 25.087 Wh less and reduces reserve exposure from 34 to 14 UAV-steps. It also beats C and H_T in J and consumption there.
+
+The adverse observations are equally consequential. L1 in world40035006 gains QoS but loses 455.664 J and introduces 4,805 reserve-exposed UAV-steps. L2 in world40035019 consumes less and gains QoS but loses 270.530 J with 4,682 reserve-exposed UAV-steps. Energy economy therefore does not establish reserve protection. L2’s world40035007 loss occurs without reserve exposure; one user’s gap grows from 84 to 395 ticks and another ends in a 425-tick censored gap. Reserve alone cannot explain the failures.
+
+These are complete-policy observations, not identified causal effects of a particular feature, horizon or optimizer. [Original summary](</home/fires/hmasd-wsl/runs/uav_service_resource_control/b01_native_selector_a01/summary.json>), [complete reading](</home/fires/hmasd-wsl/runs/uav_service_resource_control/b01_native_selector_a01/reading.json>).
+
+2. **Why the positive clues do not currently justify another purchase**
+
+The applicable ordinary comparison is the **C/H_T/T₀ set**, with T₀ frozen as the development-selected T*. T* did not establish superiority over both fixed endpoints; it remains an ordinary alternative with a particular tradeoff.
+
+Most of L1’s apparent economy against H_T is already available from T*: T* saves approximately 10.115 Wh and 7.794 CPU-seconds against H_T. L1’s additional point savings against T* are only 2.190 Wh and 2.182 seconds, with unresolved uncertainty. L0 approaches C’s consumption while retaining substantially higher controller cost and lower mean J.
+
+That does **not** establish equivalence, noninferiority or the absence of a useful learned frontier. It changes the marginal value of another experiment: another purchase must establish something consequential beyond reproducing a tradeoff already accessible through ordinary controls. The strongest isolated positive deserves preservation, but the current evidence does not provide a prospective rule for selecting such cases.
+
+I am separating three judgments:
+
+- **Empirical effect:** active, heterogeneous switching with real beneficial and harmful complete-policy cases.
+- **Adoption:** no demonstrated recurring advantage supports a default learned replacement.
+- **Investment:** a further study remains possible, but its expected information or capability does not presently justify its full cost relative to the available ordinary alternatives and accepted A/B/C work.
+
+A/B/C do not answer D’s question; their existence is an allocation consideration, not substitute evidence.
+
+3. **The smallest complete recurrence study is clear—and presently not my purchase**
+
+If recurrence becomes consequential, the concrete question is:
+
+> Does the unchanged training procedure repeatedly acquire a useful service/resource tradeoff beyond frozen T₀, while retaining a useful position relative to both C and H_T?
+
+The smallest useful complete design is **three fresh 128-mission fits**, followed by all three learned endpoints plus C/H_T/T₀ on **32 fresh common H3000 worlds**. Freeze endpoints before final exposure; use no best-fit selection. Retain whole-mission J/QoS, consumption, reserve consequences, individual continuity, actual deployment and controller cost. Report training-instance and conditional world uncertainty separately.
+
+This entails **576 result-bearing missions, 1,728,000 native steps and 33,600 new training updates**, plus reconstruction and any necessary checks. Reusing T₀ avoids another calibration purchase.
+
+The observed phase costs imply approximately **23 CPU-hours before additional support and checks**. That is a forecast, not a ceiling. The original complete operation cost 27.272 CPU-hours and 10.199 operation-wall hours; concurrency and contention prevent promising the same wall time. Restoring and checking retired entrypoints, review, publication and retention also require work.
+
+Informative outcomes would include recurring complete benefit; a stable resource tradeoff that matters to a declared use; improvement only against T₀ while a fixed endpoint remains preferable; or another heterogeneous/adverse result. Every outcome is scientifically interpretable without first identifying a defect. I decline the purchase because recurrence is not presently tied to a consequential deployment decision—not because an uncertainty interval crosses zero.
+
+An additional six-endpoint panel for the existing checkpoints would cost roughly **7.8 CPU-hours**, but would measure conditional policy performance rather than add training replication. [Original independent review and disposition](</home/fires/hmasd-wsl/docs/research/candidates/uav_service_resource_control/NOTES.md:855>).
+
+4. **Why I did not select the most attractive physical-control pivot**
+
+A substantive alternative was cooperative replenishment that preserves service while avoiding localized charging deficits. It has stronger physical evidence than a conjectured DDQN repair: persistent-service R executed **138 cross-station transfers across its two eight-world panels**, with all recorded arrivals, charging and releases, and removed important ordinary-controller failures.
+
+However, the subsequent S study already tested a fairly substantial version of the seemingly obvious extension: service/defer choices, earlier replenishment, different dwell choices, a 1200-second joint charging forecast with native priority, and predicted return to deployment. Calling that package “joint service and energy scheduling” would not create a new question.
+
+S eliminated the **441 observed late zero-service ticks**, including the former terminal outage. That capability remains valuable. But S−R had full/late QoS means **−.018925/−.021515**, full/late J **−314.403/−214.787**, four newly overloaded worlds and reserve exposure increasing from **20 to 8,908 member-steps**. The service prediction affected actual decisions; the result was neither an inactive intervention nor a demonstrated detector-only failure. [Original S summary](</home/fires/hmasd-wsl/runs/uav_persistent_service/b05_service_shifts_a01/summary.json>), [complete reading and independent diagnosis](</home/fires/hmasd-wsl/docs/research/candidates/uav_persistent_service/NOTES.md:3381>).
+
+Consequently, I do not recommend a generic “make scheduling energy-aware” continuation. A genuinely distinct candidate could still earn investment—for example, an executable joint replenishment schedule with a prospective realized-service and energy prediction—but none follows automatically from these outcomes. Its comparator must include competent R with the same information and rights.
+
+The missing contract is concrete: the exact admissible joint decisions, how future charger competition and actual redeployment enter the candidate, its fallback, its full finite-use objective, and its bounded computational work. The present native interface grants xyz movement and a nearest-station docking bit; it does not grant direct station reservation or charger-priority control. Without that contract I cannot honestly price or recommend a different controller.
+
+My recommendation therefore leaves **conditional ordinary service/resource capabilities, useful learned worlds and the cooperative replenishment question available**, while declining another invoice for the currently specified derivatives. I make no novelty claim or literature-dependent mechanism claim. This consultation used source reads and small metered saved-JSON reductions; it created no artifacts, model calls, native exposure or new operation.
+<!-- B01_ROOT_ORACLE_ORIGINAL_END -->
+
+Original consultation identity: 9,510 UTF-8 bytes, SHA256 `1e1a573250b02991ae107f124b62d399deb9cc946c035b2ae2dbf5ee1723e82b` (without an added trailing newline).
+
+**Disposition requested by Root.** Root agrees with no immediate D-lineage purchase, no
+retrospective best-L1 selection and no generic renamed service/energy scheduler. The parent
+question, conditional C/H_T/T₀ capabilities, useful learned worlds and all adverse evidence
+remain. The23CPUh and7.8CPUh alternatives retain their original forecast/support/uncertainty
+boundaries; neither is a selected or authorized continuation. Broader cross-question allocation
+is still being constructed by Root. This append records that consultation and disposition;
+B01's completed independent review, read result, source identities and measured closure are
+unchanged, with no new scientific exposure, review or cleanup pass.
