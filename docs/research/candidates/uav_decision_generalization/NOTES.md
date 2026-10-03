@@ -8806,3 +8806,260 @@ new disposable run tree to retire. The direction's lead and useful old
 evidence are unchanged. Publish this contract/original advice/disposition
 and the owned standing, then return natively for Root's one complete
 purchase choice; do not start implementation or effects on publication.
+
+<a id="b06-selected-purchase-and-l0"></a>
+
+#### 2026-10-03 — Root selects the complete B06 purchase; implementation L0
+
+Root has now read the published final contract (`f8c2ab328`), the complete
+9,830-byte independent review and the DM disposition and explicitly selected
+one complete B06 purchase. This supersedes the preceding source-only limit,
+not the fixed scientific contract. The same DM owns implementation, focused
+independent engineering acceptance, published exact inputs, actual admission,
+the worker and full reader, scientific reading, own publication and cleanup.
+There is no per-fit or implementation Root acknowledgment. The applicable
+scientific review is complete, MATERIAL_DISSENT:no; neither the question nor
+its comparisons changed in this selection. The current topic5 evidence and
+the different-task scope limit of the new timing result remain applicable.
+
+The selected scope is exactly G/R4/R1/B/S0/S1/S2 on worlds109255000..031:
+224 H1200 missions/268,800 actual advances, one deterministic G-anchored
+four-constant fit and three64-epoch supervised fits on the bound old35 R
+trajectories/2,100 menus. No new teacher collection, additional audit/pilot,
+old TD weights or optimizer replay. Counts, ordered cohort/alias labels,
+303-feature/55,553-parameter interface, mixed-precision relative loss,
+canonical initial-G certificate, cold persistent endpoints and complete
+reader stay as specified above. Every useful or adverse native outcome is
+read independently of teacher-fit quality and mechanism attribution.
+
+Root selects10 cumulative new CPUh and24 aggregate operation-wall hours,
+with.5 CPUh/1wall hour inside those totals reserved for stopping/finalization;
+stop additional science at9.5 CPUh/23wall hours. The new owned allocation
+cap is8GiB (7normal+1finalization), covering exact source snapshots, new
+unique outputs and owned scratch/test targets with physical-inode dedup.
+Old B05 evidence is consumed in place and remains outside new allocation.
+Pure source/mock/static engineering is limited to.5 CPUh within this same
+bill. It makes no actual scorer/optimizer/host/G/R/native calls or health
+pilot. The approximately8.94 CPU-s of prior independent selection arithmetic
+belongs in the new ledger; other unmetered source/advice/support is nonzero.
+The first new formal request rejection, admission, worker or reader failure
+ends this purchase with paid prefixes retained. No duplicate, automatic
+retry, extra seed/world/epoch or repair attempt is selected. Normal declared
+deadline fallback is a valid outcome. Uncertain acceptance is reconciled
+against the same handle. Use the configured local_linux CPU stack first,
+with fresh actual admission only at launch, preserving A/C/D operations.
+
+**Bounded implementation task 1 — fixed-bank acquisition.** Author only
+`experiments/candidates/uav_decision_generalization/b06_request_amortization/`
+`acquisition.py` and its matching `test_acquisition.py`. The behavior is to
+bind/reconstruct the old complete-menu bank, fit the single optimal constant
+correction and the three exact supervised endpoints, and emit complete
+initial/final/update evidence and counters without task/model collection.
+The task owns no runner, rollout, deployment, shared source or notebook.
+Reuse the frozen B05 scorer architecture and public feature interface by
+import without modifying B05. Imports of the acquisition module must not
+eagerly import Torch or construct a model; ordinary deployment must remain
+free of unnecessary neural cold-start cost. Expose data binding, fixed-order
+constant solving, canonical shuffle schedule, fixed fit/endpoint-evaluation
+and checkpoint-load functions for the later worker/reader; document their
+signatures in code. Parameter, optimizer, update/batch identities and partial
+attempts must survive a failure. Inputs contain only bound public features,
+raw float64 G, ordered float64 teacher means and their provenance; outcome
+and future-arrival fields cannot become labels/features.
+
+The Implementer reads the final contract and directly required frozen
+schemas, implements this one behavior and returns its diff plus metered
+mock/static checks. Synthetic tests cover actual last-batch52 schedule,
+label aliases/float64 composition/tie ordering and the anchored LS/loss
+specification with fabricated arrays and fake numerical backends as needed;
+they instantiate no real scorer or optimizer and do not fit the real bank.
+Reading/hashing old records or static arithmetic may be metered, but no
+new scientific output is evaluated before published execution. The DM will
+accept the diff, then assign a subsequent bounded behavior; there is only
+one Implementer task active at a time. Other concurrent writers and their
+edits remain intact. Helpers have no Git index/commit, notebook, launch or
+child-spawn permission. The DM retains ownership of integration, full input
+and cost bindings, the runner and subsequent implementation scopes.
+
+The existing independent engineering Reviewer will inspect the complete
+new executable difference: learned-anchor gradient and dtype ordering,
+fixed-order LS, RNG, checkpoint identity, cold load/IPC/deadline, complete
+counter/disk/stop accounting and reader scope. Static/mock coverage does
+not certify actual numerics or throughput; those remain paid execution
+risks, with no unpriced warm-up or preliminary effect call.
+
+**Acquisition acceptance and next bounded behavior.** The DM has reviewed
+the bank/alias binding, exact float64 anchored LS and loss, forked scorer,
+fixed64/52 batch schedule, lazy loading and failure journals in the returned
+acquisition diff. The accepted paths are only the two L0 paths above;
+ready hashes are `9f0667c7d8f10cc860db0877411448845c5a5e4c6622ff530bf7c1252645304b`
+(source) and `5eb349a8027914a484673fd7dbf53523d7c28154f3f6cea63a28f20f7aaa01ec`
+(tests). Five applicable mock pytest invocations all passed (9/10/1/1/1
+checks), including one fabricated35×60 bank and intentionally injected
+failure paths; no check invocation failed. Source/schema/scratch checks
+also passed. Total measured Implementer CPU11.41s/wall9.25s; peak RSS100,048
+KiB and all five owned test directories removed. Actual scorer, optimizer,
+backward, coefficient solve, G/R/native, host and scientific world calls
+were0. Acceptance is for source behavior and mock coverage, not actual
+Torch numerics or the still-unexecuted complete runtime.
+
+The DM's first five contract/budget tests also passed, checking the counted
+complete schedule, physical-inode union without following symlinks, the
+science/finalization reserve and reader attempt bounds:1.346481 CPU-s and
+.698786086wall-s, plus unmetered source-reading/editing support. The next
+independent engineering review still covers acquisition and integration.
+
+**Bounded implementation task 2 — complete new saved-evidence reading.**
+The same Implementer now owns only new B06 `reader.py` and its matching
+`test_reader.py`; the acquisition task is finished and has no concurrent
+writer. The behavior is to read the original complete new worker without
+additional task trajectories or optimizer replay: bind every new scientific
+artifact, independently reconstruct all new actual/model physical and G
+records, verify old teacher identities/label arithmetic and lawful features,
+repeat the fixed B solve once, replay six scheduled bank endpoints and every
+committed student deployment forward, and produce every selected service/
+tail/censoring/intervention/cost contrast. It must not rerun old physics.
+Reuse frozen B05 independent physical/FIFO/feature/G kernels, adjusting only
+the new explicit limits, roster, R1 cap and frozen-policy/acquisition schema;
+do not monkeypatch the frozen module or turn incomplete work into complete.
+The source reader is distinct from worker execution, while checkpoint/data
+loading utilities may be shared with explicit independent arithmetic checks.
+
+The DM owns the new contract, cost/bindings/entry, deployment and worker.
+New `storage.py` specifies the exact pruned mission arrays plus independent
+`nn_complete` and B/S `score_complete` markers. B uses raw float64 G+b;
+S uses G/1200+float64(f32 residual). Metadata preserves the old full timing,
+selected cohort list, source/counters and request identities, with training/
+initial-audit flags false. R traces have separate arm paths. A cold endpoint
+per arm persists across worlds; its final count record is named by arm.
+Each fit has its own `fits/fit<i>/` acquisition output and fixed initial,
+final, training checkpoint plus initial/final-bank arrays, update journal,
+epochs and fit.json. Worker manifests bind all scientific artifacts.
+
+Reader checks are mock/static only before execution, with the same cost/
+scratch ownership and0 real scorer/optimizer/solve/G/R/native calls. It reads
+all specified outcomes, including no-completion T missingness and observed
+unfinished-age lower bounds. Compare each S to G/B/R1/R4 with32 paired-world
+vectors conditional on this bank/frozen instance, three fit means conditional
+on this same bank/panel, and the named ordinary contrasts. No equivalence,
+independent-acquisition claim or best-student selection. All costs and pure
+check failures are returned. The DM accepts this second diff and retains
+the final independent engineering acceptance and result responsibility.
+
+The DM has completed the worker/deployment integration and begun the existing
+independent engineering review. New B06 code imports the frozen B05 physical,
+FIFO, feature, G, storage and deadline kernels; none of those files is edited.
+R4 calls its original search unchanged. R1 returns normally immediately after
+the first original complete-cohort publication, before tape1; the independent
+reader explicitly bounds its saved prefixes to that cap. All seven endpoint
+processes are persistent across worlds, with actual first-use checkpoint
+loading inside the real deadline. No acquisition scorer is handed to deployment.
+The worker retains cached-score completion independently of command eligibility,
+and the reader distinguishes a completed-but-uncommitted interrupted forward
+from a committed residual it can reconstruct.
+
+The first DM integration invocation passed13 checks, including late B score
+versus KEEP, exactly20 ticks before physical command activation, preserved
+failure prefixes, R1 cap versus unchanged R4, persistent endpoint lifecycle,
+entry seed rejection, allocation bounds and phase/aggregate counter accounting.
+Cost1.292900 CPU-s/2.922683240 wall-s, child peak85,484KiB. A later focused
+mock orchestration check passed1/1 (7 deselected), verifying one bank/one B/three
+fits before the complete rotated seven-arm roster and one endpoint per arm:
+1.024065 CPU-s/.915942508 wall-s, child peak84,416KiB. Both invocation fixtures
+were removed by pytest;14 dependency deprecation warnings are retained in the
+receipts. There were no failed test invocations or actual scorer, optimizer,
+LS solve, G, R, host or native calls. The synthetic failure injection is test
+coverage, not a failed scientific attempt. Later reader checks and engineering
+findings will be added to the same cumulative bill.
+
+Current published main was refreshed at e926c44188833f6cd127ad062e721ec48b8bad66.
+The Root selection and routing explicitly assign this complete B06 purchase to
+the same DM; owner pause remains lifted. The owned direction row still carries
+the earlier source-only reserve text, which will be reconciled at the upcoming
+source/plan publication before any actual admission. This ordinary standing
+update does not require another Root choice. No new formal request has occurred.
+
+**Complete reader acceptance and integration.** The DM has accepted the second
+Implementer task: reader.py SHA256
+`57111858053e66c0001253eab5f188077141243c9b4d8adc9e574a206aa684b2`
+(77,601 bytes), test_reader.py
+`8b3561bc6334457d62094dae906462822f58811ca36bb5987a41132db210e6b0`
+(35,265 bytes). The complete reader binds every new artifact, reconstructs
+all new actual/model/G records, and checks old public features and four ordered
+teacher samples without replaying old physics. It performs six prescribed
+initial/final bank evaluations and all committed deployment forwards, with no
+optimizer replay. It retains completed-but-uncommitted and attempted-incomplete
+neural exposure instead of forcing counter equality. C, completed-only T
+missingness, unfinished age lower bounds, individual gaps, motion/coverage,
+command eligibility/activation and all S-versus-G/B/R1/R4 contrasts remain in
+the full reading. Three optimization replicates condition on one shared bank
+and panel, with32 paired-world vectors and df2 fit-mean summaries.
+
+Independent engineering review found one material draft defect: the reader
+reused the producer's teacher mean and LS assembly, which could self-certify
+a shared arithmetic bug. The Implementer replaced that reliance with ordered
+branch-outcome/alias reconstruction and independent scalar H/z/bordered-system
+assembly. This replaces the original verification path and still makes exactly
+one reader solve. The reviewer has inspected this correction; no additional
+scientific effect or comparator change was introduced.
+
+Reader mock receipts retain all five invocations:11 passed/6 failed expectations;
+21 passed;23 passed;23 passed/1 failed expectation; corrected focused1 passed
+(23 deselected). The first failures expected ValueError where the inherited
+require correctly raises AssertionError. The later negative timeline fixture
+expected a later diagnostic, while the reader correctly rejected the earlier
+20-tick-delay inconsistency. Coverage union24 checks;14.21CPU-s/9.02wall-s
+including both failed invocations and static checks, peak142,940KiB. All five
+pytest scratch directories are gone. These are engineering fixture failures,
+not failed scientific launches or evidence of numerical behavior.
+
+After reading the returned code, the DM ran the complete new integration suite
+against all14 bound source/test files:48 passed with14 dependency warnings,
+4.874430CPU-s/4.831977299wall-s and180,156KiB child peak; AST/hash checks passed
+and invocation scratch was removed. Actual numerical runtime, physical reading
+and throughput are still untested until the admitted selected purchase. There
+were no real scorer/optimizer/backward/LS/G/R/native calls in these checks.
+
+The exact selected study input now binds71 source files and unchanged inherited
+B05 dependencies, source identity
+`80c9e70ed76cb8ad076b0a78d9c27768f971f1f83c475f99922ccf857f80869a`.
+`B06_STUDY_INPUT.json` is13,680 bytes, SHA256
+`750796b69686200a152d3ab0cfe3464eb2c53597783ba8601a37868000902a91`.
+The prospective new-cost ledger records47.058492 known CPU-s and31.520493542
+known operation-wall-s through exact input preparation, including the original
+selection arithmetic, every known check failure and3.06CPU-s/3.08wall-s of
+engineering review. Final review/publication costs will be appended as known.
+Unmetered source/edit/CodeGraph/Git/advice support and unknown selection wall
+remain additional and nonzero; the reported sum is not complete wall or support
+accounting. The independent reviewer now has the complete ready source, inputs
+and integration evidence for final closure before publication/actual admission.
+
+<a id="b06-source-publication-and-first-purchase"></a>
+
+**Independent engineering acceptance and exact first purchase.** The registered
+Reviewer completed the full executable review and final identity pass with no
+material finding remaining. All71 source hashes, all14 implementation/test
+identities and all61 frozen inherited dependencies match; ledger arithmetic
+and AST parsing pass. The DM accepts the corrected implementation and its
+48-pass mock coverage. Actual Torch/numerical/native reconstruction, throughput
+and deadline attainment remain execution risks; neither the reviewer nor the
+DM performed a health pilot or real fit/solve/host/query outside the purchase.
+
+The final review adds approximately.499958CPU-s/.501664132wall-s beyond its
+previous3.06/3.08 measurement. The final budget input is3,056 bytes, SHA256
+`aba525794fc6bb6eb4153e31e5483bf5d0f39b2e61ce6396afc8c3ff77e4711f`, with
+47.658729 known new CPU-s/32.022269161 known operation-wall-s
+through its last preparation sample. Every known check/review invocation is
+included, including the seven corrected reader-fixture expectation failures.
+Unknown source/edit/CodeGraph/Git/advice/serialization support remains
+additional/nonzero. Study/source identities remain as above.
+
+Publish the exact implementation, tests, inputs and this prospective notebook
+on shared main with the owned direction changed to exploring under Root's
+already-selected complete purchase. Then make the single formal local_linux
+worker request for b06_amortization_a01. The same complete source supplies the
+subsequent b06_amortization_read_a01 full reader, using its original worker
+locator and an inclusive updated ledger. No second worker, extra world/epoch,
+healthy-node trial, automatic retry or unselected effect is authorized. The
+first new formal/admission/worker/reader technical failure stops the purchase;
+normal deadline fallback remains part of its required complete outcome.
