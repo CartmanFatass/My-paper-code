@@ -736,3 +736,50 @@ or automatic retry follows. The new sole formal output is
 seed29523000 and all science argv remain unchanged except the newly published
 source/attempt bindings. Submission follows publication of these exact corrected
 inputs. A01's record and8,192byte cleanup remain intact and independently readable.
+
+
+<a id="b01-a02-accepted-20261003"></a>
+### A02 native acceptance and deterministic observation — 2026-10-03
+
+The one corrected request was accepted at2026-10-03T03:28:23.305107Z from
+published source`4481c6240dc8266c2a6f13070cc1e8762328e614`, node`local_linux`
+(Jacob), with the unchanged fixed seed29523000 and complete operation argv.
+[Native manifest](../../../../runs/uav_planning_opportunity_timing/b01_complete_timing_a02/launch-manifest.json)
+and[actual-node preflight](../../../../runs/uav_planning_opportunity_timing/b01_complete_timing_a02/admission-preflight.json)
+are the accepted identities. The immutable source is
+`/home/fires/hmasd-wsl/.git/hmasd-launch-sources/3461f799792c4200ae6f20e13d45c4c8`;
+output remains the original author checkout's A02 run directory. The operation
+reference is
+`/home/fires/hmasd-wsl/.git/hmasd-admission/1d91acf5dbdac0424e47368754ded110b19e347d5c68265843a18297406127e1.json`,
+command SHA256`224de292b02186289666f922b36cc6e0167fa90b1ca1ddce44ac1b488ed97c2f`.
+SupervisorPID1070061 and runnerPID1070062 share session1070061 with native start
+ticks12536133/12536137 and boot id in the manifest. These are process facts,
+not scientific completion.
+
+Fresh actual-node effective available memory9,731,661,824B passed the4GiB floor
+at03:28:23.269329Z. Actual runtime reports Python3.10.20,
+`/home/fires/.venvs/hmasd-linux-cpu/bin/python`, NumPy1.26.3 and Torch2.7.0+cpu,
+Torch intra/inter-op1/1 and the declared numerical environment threads1.
+The runtime's overlap inventory includes the independent decision-generalization
+worker/supervisor at source49b9b182f78c472ebd5f8227396e92b5 (PIDs883772/883773)
+and its own supervisor; this is not an isolated-host throughput claim. Initial
+recorded source/output allocation was about1.849GB; actual operation accounting,
+RSS and later overlap remain in summary.json.
+
+GNU time for this formal launcher reports20.36wall seconds,4.63user+6.69system
+=11.32CPU seconds at.01s precision. Add that separately to the committed
+11.698857preparation CPU seconds (about23.02known pre-worker CPU seconds total);
+do not double count the detached runner. It fits within the prospectively
+reserved300CPU-second allowance for launcher/finalization. The final complete
+bill still includes actual worker/reader CPU and unknown uninstrumented support.
+
+The session's existing stopped observer had no pending events or live jobs;
+it was rearmed and the new A02 status job registered. Observer generation4
+then independently observed matching running supervisor/runner identities and
+consistent native records on this **same** operation handle. Its30second probes
+and1,500second checkpoint window never restart the worker. The DM remains active
+through assigned reading and will drain/rearm that handle as needed; registration
+alone was not used as wake or completion evidence. All four audit worker missions
+had finished when the first full audit reader began; no result claim or fit-law
+change follows from that progress. Correct adverse/no-change outcomes retain the
+entire fixed purchase.

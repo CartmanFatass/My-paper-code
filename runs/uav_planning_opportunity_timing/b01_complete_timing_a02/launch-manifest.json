@@ -1,0 +1,90 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-10-03T03:28:23.305107Z",
+  "bootstrap_command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/3461f799792c4200ae6f20e13d45c4c8/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/3461f799792c4200ae6f20e13d45c4c8/experiments/candidates/uav_planning_opportunity_timing/b01/run.py",
+    "--output",
+    "/home/fires/hmasd-wsl/runs/uav_planning_opportunity_timing/b01_complete_timing_a02",
+    "--",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/uav_planning_opportunity_timing/b01_complete_timing_a02",
+    "--launch-sha",
+    "4481c6240dc8266c2a6f13070cc1e8762328e614",
+    "--seed",
+    "29523000"
+  ],
+  "claim_key": "1d91acf5dbdac0424e47368754ded110b19e347d5c68265843a18297406127e1",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/1d91acf5dbdac0424e47368754ded110b19e347d5c68265843a18297406127e1.json",
+  "command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/3461f799792c4200ae6f20e13d45c4c8/experiments/candidates/uav_planning_opportunity_timing/b01/run.py",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/uav_planning_opportunity_timing/b01_complete_timing_a02",
+    "--launch-sha",
+    "4481c6240dc8266c2a6f13070cc1e8762328e614",
+    "--seed",
+    "29523000"
+  ],
+  "command_sha256": "224de292b02186289666f922b36cc6e0167fa90b1ca1ddce44ac1b488ed97c2f",
+  "control_observation": {
+    "observed_at": "2026-10-03T03:28:23.086239Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "4481c6240dc8266c2a6f13070cc1e8762328e614"
+  },
+  "control_root": "/home/fires/hmasd-wsl",
+  "created_at": "2026-10-03T03:28:23.106748Z",
+  "cwd": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/3461f799792c4200ae6f20e13d45c4c8",
+  "direction": "uav_planning_opportunity_timing",
+  "host_identity": "Jacob",
+  "identity_command": [
+    "/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10",
+    "experiments/candidates/uav_planning_opportunity_timing/b01/run.py",
+    "--launch-sha",
+    "4481c6240dc8266c2a6f13070cc1e8762328e614",
+    "--seed",
+    "29523000"
+  ],
+  "lead": "Codex DM (native child)",
+  "manifest_ref": "/home/fires/hmasd-wsl/runs/uav_planning_opportunity_timing/b01_complete_timing_a02/launch-manifest.json",
+  "node": "local_linux",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/1d91acf5dbdac0424e47368754ded110b19e347d5c68265843a18297406127e1.json",
+  "output_root": "/home/fires/hmasd-wsl/runs/uav_planning_opportunity_timing/b01_complete_timing_a02",
+  "preflight": "/home/fires/hmasd-wsl/runs/uav_planning_opportunity_timing/b01_complete_timing_a02/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "f359a2d7-72f8-4eb1-b898-bc0abf61bed6",
+      "kind": "linux_pid_start_ticks",
+      "pid": 1070061,
+      "session_id": 1070061,
+      "start_ticks": 12536133
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 1070061,
+    "process_group_id": 1070061
+  },
+  "process_exit": "/home/fires/hmasd-wsl/runs/uav_planning_opportunity_timing/b01_complete_timing_a02/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "f359a2d7-72f8-4eb1-b898-bc0abf61bed6",
+      "kind": "linux_pid_start_ticks",
+      "pid": 1070062,
+      "session_id": 1070061,
+      "start_ticks": 12536137
+    },
+    "pid": 1070062,
+    "process_group_id": 1070061,
+    "supervisor_pid": 1070061
+  },
+  "schema_version": 1,
+  "sha": "4481c6240dc8266c2a6f13070cc1e8762328e614",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/3461f799792c4200ae6f20e13d45c4c8",
+  "stderr": "/home/fires/hmasd-wsl/runs/uav_planning_opportunity_timing/b01_complete_timing_a02/stderr.log",
+  "stdout": "/home/fires/hmasd-wsl/runs/uav_planning_opportunity_timing/b01_complete_timing_a02/stdout.log"
+}
