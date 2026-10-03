@@ -676,3 +676,316 @@ no terminal witness and no scientific summary yet. This child keeps the turn act
 the existing operation; checkpoints rearm observation only. Acceptance and observation are
 not a read scientific result. The fixed audits, fits, calibration, finals and complete reader
 remain the work to collect; the first real worker/reader failure still closes the purchase.
+
+<a id="b01-complete-reading-20261003"></a>
+## 2026-10-03 UTC — B01 complete: active finite learning without a recurring J increment
+
+**Close the selected purchase; retain its resource-saving and local service capabilities.**
+The fixed primary L−T* J effects are −18.232, +1.463 and −40.356; their three-fit mean is
+−19.042 with the declared weak df2 interval [−71.013,+32.930], conditional on this common
+32-world panel. This does not establish a recurring complete learned advantage, equivalence,
+or the absence of useful switching opportunity. The full independent original and my resolved
+investment decision follow below. There is no selected extra fit, evaluation or confirmation.
+
+### Completion, exposure and verification
+
+The first and only accepted operation, exact source
+`0dffa6f2ade7ca35c86b552be0fbc8b5a7837085`, exited0. Terminal observation at
+2026-10-03T14:13:29.941114Z reconciled absent supervisor/runner identities with the matching
+exit witness and `summary.status=complete_read`. It completed **678/678 H3000 missions,
+2,034,000 native steps and three independent128-mission fits**. All missions reached the
+planned horizon; no natural-ending replacement, formal-request/admission/worker/reader failure,
+retry or extra study occurred. The96 calibration missions selected T₀, so there was no
+canonical constant-T* identity reuse: all192 final missions are distinct. The six fixed audits
+completed; forced-C/canonical-C and forced-H_T/canonical-H_T match all42 checked physical,
+native and action fields bitwise. Alternating audits also completed. Exogenous matching verifies
+244 comparisons of initial state and the complete saved user-path prefix.
+
+The complete reader verified all678 missions. Each fit has12,800 transitions,11,200 actual
+updates and zero skipped updates. The three training streams total33,600 optimizer updates and
+2,150,400 sampled replay presentations; the reader separately executed the same33,600 updates
+and2,150,400 presentations. These are **three fits**, not six. Initial/every16/final checkpoint
+digests and final inference identities match. Worker and reader each purchased278,159 candidate
+forecasts,8,344,770 joint forecast ticks and834,477 model/RF sample calls. The reader reproduces
+every actually purchased private H query and chronological learner update; native endpoint
+arithmetic is reconstructed from recorded arrays. It does **not** independently rerun native RF.
+
+Observer generations1–24 produced checkpoint-only notices; generation25 recorded the terminal
+READY event. The event was consumed on the same handle, generation26 was stopped, and no wake
+or unconsumed event remains. Native-child App queue delivery was explicitly rejected during
+observation; deterministic local observation remained healthy and this child stayed active.
+No alternate App address or replacement operation was used. The
+[terminal drain](../../../../runs/uav_service_resource_control/b01_native_selector_a01/observer-terminal.json),
+[native exit](../../../../runs/uav_service_resource_control/b01_native_selector_a01/process-exit.json)
+and [launch status](../../../../runs/uav_service_resource_control/b01_native_selector_a01/launch-status.json)
+preserve these technical facts separately from the scientific result.
+
+### Complete package and ordinary frontier
+
+The [original summary](../../../../runs/uav_service_resource_control/b01_native_selector_a01/summary.json)
+contains every planned endpoint, per-world contrast and count. The additional
+[saved-evidence reading](../../../../runs/uav_service_resource_control/b01_native_selector_a01/reading.json)
+retains physical activation, complete primary vectors, same-ID user extremes, censoring,
+terminal states, training/checkpoint descriptions and deployment timing. Neither reduction
+selected a best learner or bought further controller/native/optimizer work.
+
+| Fixed endpoint | Mean J | Mean cumulative QoS | Team consumption Wh | Travel m/UAV | Complete recorded mission CPU s |
+|---|---:|---:|---:|---:|---:|
+| C | 2136.039 | 2190.897 | 1386.315 | 19264.141 | 104.440 |
+| H_T | 2153.013 | 2232.260 | 1429.503 | 22300.636 | 136.711 |
+| T*=T₀ | 2147.498 | 2214.732 | 1419.388 | 21545.455 | 128.917 |
+| L0 | 2129.266 | 2206.825 | 1388.646 | 19443.113 | 115.368 |
+| L1 | 2148.961 | 2227.567 | 1417.198 | 21436.669 | 126.735 |
+| L2 | 2107.141 | 2193.709 | 1417.488 | 21454.502 | 127.728 |
+
+| Primary comparison | Mean J difference | Conditional world t95 | Positive worlds/32 |
+|---|---:|---:|---:|
+| L0−T* | −18.231962 | [−70.181812,+33.717889] | 18 |
+| L1−T* | +1.462963 | [−51.862720,+54.788646] | 16 |
+| L2−T* | −40.356330 | [−76.414332,−4.298328] | 12 |
+
+World intervals use df31 conditional on each fixed fit; the three-fit interval above uses df2
+conditional on the same common panel. Both are exploratory, with weak small-sample/normality
+precision. Worlds do not multiply the number of independently trained policies. No equivalence,
+noninferiority, best-seed selection or confirmation rule was introduced after seeing outcomes.
+
+L−C mean J differences are −6.773,+12.921,−28.898, all unresolved. L−H_T means are
+−23.747,−4.052,−45.872; L2's conditional interval is wholly negative. T*−C J is
++11.458[−30.921,+53.838] and T*−H_T is −5.515[−44.138,+33.108]. H_T−C J is
++16.974[−25.344,+59.292] and QoS +41.363[−1.008,+83.734], with consumption
++43.188[+34.414,+51.963]Wh and travel +3036.495m/UAV. The earlier B10/B11 useful service
+capabilities remain evidence; this new panel is not their refutation and no cross-panel
+subtraction is a treatment effect.
+
+The secondary resource effects are retained as capabilities of these measured packages.
+L0−T* saves30.742[22.925,38.559]Wh and2102.341[1554.435,2650.248]m/UAV, while its
+mission maximum individual gap increases13.469[.865,26.072]ticks. L0−H_T saves40.858Wh,
+but minimum-user QoS/H falls.023496[.001400,.045592]. L1−H_T saves12.305
+[5.219,19.392]Wh,863.967[380.927,1347.006]m/UAV and9.975 recorded mission CPU-seconds,
+with unresolved J and QoS differences. This is a possible useful package tradeoff; it is not
+established service preservation. L2 also saves12.015Wh versus H_T despite its adverse J.
+Ordinary T* itself saves10.115[6.450,13.780]Wh,755.181m/UAV and7.794 mission CPU-seconds
+versus H_T, so much of L1's apparent resource benefit is already available ordinarily.
+L1−T* consumption is −2.190[−7.957,+3.577]Wh. L0 returns near C's consumption but costs
+10.928 more mission CPU-seconds than C without a J gain. None of these comparisons erases
+the local learned positives or supports a post hoc learned default.
+
+### Activation, learning and consequential adverse evidence
+
+Each final has3,200 planning boundaries. L0/L1/L2 use H at355/1,972,1,219/1,845 and
+1,176/1,887 eligible opportunities; T* uses1,148/1,856. Their nonordinary assignments are
+189/617/588 versus T*491. Searches returning the ordinary base number166/602/588 and657;
+there are no selected nonbase coordinate aliases or absent-BS fallbacks. Sparse eligibility
+forces C at1,228/1,355/1,313/1,344 boundaries. All learned and T* physical paths diverge
+from C in32/32 worlds. Same-observation ordinary proposal arithmetic differs at11,340/37,020/
+35,280/29,460 UAV-ticks respectively; feedback overrides and displacement differences remain
+separate descriptive counts. Ordinary target replanning is not itself a learned intervention,
+and these counts are not counterfactual native-J attribution.
+
+The recorded networks changed materially: parameter L2 displacements15.815/12.828/15.116
+across25,282 parameters, with full chronological reconstruction. This rules out no parameter
+learning or a frozen zero head, not finite-value ranking error. Training16-mission blocks
+contain different worlds and changing exploration, so their means are not a matched causal
+learning curve. Final chosen-Q means34.074/33.555/33.505 versus realized suffix J/30 means
+34.509/34.717/33.541 are descriptive; large absolute errors remain and no counterfactual
+ranking test follows. No deployment updates occurred. The critic additionally finds L0's
+H use concentrated late and often at nonpositive projected slack; fewer H searches alone
+therefore does not demonstrate successful reserve reasoning.
+
+Positive and adverse complete-policy cases are both retained. L0 in world40035007 gains
+200.777J/195.903QoS and saves25.087Wh versus T*, with less reserve exposure. L0 in
+40035010 instead loses395.743J despite saving63.227Wh, with1,648 extra reserve UAV-ticks.
+L1 in40035004 gains301.651J/313.622QoS while saving25.309Wh, yet reserve exposure rises500.
+In40035006 L1 gains29.792QoS but loses455.664J with4,805 extra reserve UAV-ticks. L2 in
+40035016 loses288.983J/287.907QoS with9,940 extra user-zero-delivery ticks. The independent
+raw checks below add the40035019 service-positive/reserve-adverse L2 case and the40035007
+L2 loss at zero reserve exposure: a solely late-reserve explanation is insufficient.
+
+Same-ID user QoS fractions for L0/L1/L2 versus T* improve in465/521/431 and worsen in
+494/437/525 of960 nested world-user records, with1/2/4 ties; these are not independent
+replicates. The longest same-user gap extensions include L0 world05/user26:122 left-censored
+ticks→348 uncensored ticks; L1 world30/user12:124→256 uncensored; L2 world07/user17:84→395
+uncensored. Some large same-user QoS losses occur with no zero-delivery spell, so counting only
+outages misses service degradation. All final arms have zero depletion, cutoff and never-served
+counts, but many initial and terminal censored spells remain. The complete right-censored counts
+C/H_T/T*/L0/L1/L2 are29/84/65/66/101/84. No universal continuity, fairness or safety conclusion
+follows, and C/P_BS restrictions remain in force.
+
+### Cumulative cost and durable evidence
+
+The run records98,177.890138 CPU-seconds (**27.271636 CPUh**) including the prior8.431291s
+checks, and36,716.709657 operation-wall seconds (**10.199086h**); GPU use is zero. The
+largest budget snapshot is98,177.914541CPU-s and9,772,412,928 allocated bytes, within the
+75CPUh/96wallh/32GiB stops. Recorded execution phases cost82,415.980038s: audits637.083244,
+training45,766.752392, calibration12,055.878409 and finals23,956.265993. Reader phases add
+15,706.567182s, including9,657.220166 training and6,049.347017 evaluation seconds. Phase
+parent-plus-reaped-child totals already include process/import/setup/serialization; do not add
+mission totals again. Model setup is inside mission timing, separately.063174/.048154/.051375s
+on average for L0/L1/L2. These are recorded mission costs, not a separate cold-deployment
+benchmark. Reader process peak RSS reaches877,456KiB; per-process peaks are not simultaneous
+aggregate RAM. The terminal resource-tracker observation is not an unreaped scientific worker.
+
+Saved-byte reductions add3.595234 CPU-s; full retained raw size/SHA verification adds9.578628s,
+and metadata reduction/equality checks add.251869s. Other inspection, independent review,
+authoring and support are incompletely metered; the16–28 support-hour forecast is not an
+observed total. Shared-parent B10–B12 cost remains618,000 native steps, zero fits and6.325740
+known CPUh plus its older/support costs. Combined with B01 this is2,652,000 native steps,
+three fits and33.597376 known execution/check/read CPUh before the newly listed reductions
+and incompletely metered portions. Renaming a direction does not reset that evidence or cost.
+
+The sole necessary bulk location is local_linux
+`/home/fires/hmasd-wsl/runs/uav_service_resource_control/b01_native_selector_a01/raw/`:
+678 trajectory NPZs,678 complete row JSONs,678 reader JSONs and27 compact checkpoints.
+All2,061 required files passed byte/SHA verification:7,915,688,434 logical bytes,
+7,920,881,664 allocated regular-file bytes; sorted relative-path/TAB/bytes/TAB/SHA/newline
+manifest digest `8b2593250935637dd2295728053693a80fa9ab90436fc8f926cb5a3a805c0d74`.
+Individual identities remain in the canonical `episodes.json`, `fit_0/1/2.json`,
+`fit_0/1/2_read.json` and `evaluation_read.json` beside raw. Their exact byte counts/hashes
+are in `reading.json/retained_bulk_metadata`; all original positive/adverse/training evidence
+needed by the frozen full reader remains. Git receives compact summary/config/seal/selection/
+reading and native status, not those bulk streams. No second retention copy or archive was made.
+
+All five aggregate phase containers have been checked for exact parsed row equality with those
+canonical ledgers and exact phase-metadata equality with `summary.json/phases`; their original
+identities and replacements are recorded in `reading.json/redundant_phase_verification`.
+The678 per-mission progress files are also redundant completed prefixes. Cleanup will remove
+only verified redundancy, completed source snapshot/scratch and retired entrypoints after
+publication and live-consumer checks; actual targets and measured bytes will be appended.
+
+<a id="b01-independent-review-20261003"></a>
+### Complete original independent scientific reading
+
+Registered ResearchCritic `/root/dm_service_resource_control/b01_result_critic` worked in a
+separate context without inherited DM/Root dialogue. It received the actual question, original
+fixed contract, supporting/adverse B10–B12 evidence, accepted source and complete result/raw
+locations, with prior selection advice to read after its reconstruction. The later saved-byte
+reduction and deployment costs were supplied as facts, without a preferred verdict. This is a
+scientific review, separate from the prior engineering review; no additional Pro question was
+needed for a distinct expertise or disagreement issue. The original final returned at
+2026-10-03T14:38:53Z and is preserved verbatim between the following markers; identity follows
+below. The relative result link inside the original is retained unchanged; the working link
+is the original summary link above.
+
+<!-- B01_CRITIC_ORIGINAL_START -->
+I recommend **closing this DDQN purchase without confirmation or an immediate repeat**, retaining the ordinary C/H_T/T* capabilities and the learner’s local positives. B01 establishes real finite learning and consequential control, but not reliable complete benefit beyond competent ordinary switching. This is an investment recommendation about this recipe, not a conclusion that the parent question is exhausted.
+
+I received no inherited Root/DM conversation. I reconstructed the primary result before reading the earlier selection advice. I independently reduced all 192 final endpoint rows and same-user summaries; inspected the 128 mixed-controller choice histories; checked consequential arithmetic and exogenous matching in 21 raw missions, an additional individual-service trace, and nine recorded training-update slices. All 65 bound source files match the accepted launch tree; the three final checkpoint hashes, seal and final inference digests agree. The complete reader remains the basis for exhaustive controller/optimizer reconstruction. I did not repeat controllers, optimization or native RF.
+
+The [fixed result](runs/uav_service_resource_control/b01_native_selector_a01/summary.json) reads:
+
+| Endpoint | Mean native J | Cumulative QoS | Team consumption, Wh | Recorded mission CPU, s |
+|---|---:|---:|---:|---:|
+| C | 2136.04 | 2190.90 | 1386.32 | 104.44 |
+| H_T | 2153.01 | 2232.26 | 1429.50 | 136.71 |
+| T* | 2147.50 | 2214.73 | 1419.39 | 128.92 |
+| L0 | 2129.27 | 2206.83 | 1388.65 | 115.37 |
+| L1 | 2148.96 | 2227.57 | 1417.20 | 126.74 |
+| L2 | 2107.14 | 2193.71 | 1417.49 | 127.73 |
+
+T*=T₀ was correctly selected on the 16 development worlds. Its final J differences are +11.46 versus C and −5.52 versus H_T, both unresolved. Thus calibration did not establish a superior ordinary switcher on the fresh panel.
+
+The fixed primary L−T* means are **−18.23, +1.46 and −40.36**. Their mean is **−19.04**, with the declared weak df2 interval **[−71.01,+32.93]**, conditional on the shared 32-world panel. The corresponding conditional world intervals are [−70.18,+33.72], [−51.86,+54.79] and [−76.41,−4.30]. These are three training units, not 96 replications. No best learner was prospectively selected.
+
+The strongest useful learned clue is L1’s observed package: versus H_T it saves **12.31 Wh and 9.98 mission CPU-seconds**, with J −4.05 and QoS −4.69, both uncertain. Versus T* its point estimates improve J/QoS while slightly reducing consumption and computation. Preserve that observation. It does not establish value preservation, a stable learned frontier or justification for selecting L1 after examining finals. L0’s larger savings mostly return toward C-like consumption; C remains much cheaper computationally and has higher mean J, while L0 retains some service positives.
+
+The intervention was exposed and active:
+
+- Each fit completed 12,800 transitions and 11,200 updates, with changing checkpoint parameters and matching reconstruction digests. Training contained 7,318/7,343/7,298 eligible opportunities and 4,078/4,080/4,241 H searches.
+- Final H searches were **355/1,972**, **1,219/1,845** and **1,176/1,887** eligible opportunities for L0/L1/L2. T* searched on 1,148/1,856; canonical H_T searched at all 1,811 eligible boundaries.
+- Those learned searches produced **189/617/588 nonordinary target assignments**; 166/602/588 searches returned base. There were no selected nonbase coordinate aliases. Sparse eligibility forced C frequently; absent-BS fallback did not occur.
+- Every learned final path differed physically from C. Ordinary-command differences covered 11,340/37,020/35,280 UAV-steps. Feedback and native execution frequently modified commands, so target changes and actual motion must remain separate.
+
+The roughly 3,100 “committed target changed” counts per endpoint include ordinary replanning and must not be reported as that many learned interventions.
+
+L0 particularly contradicts a simple resource-conservation interpretation: only 57 of its 355 searches occur before tick1200, and 245 occur with nonpositive projected slack. L1/L2 also search extensively at nonpositive slack, whereas T* never does. These are descriptive comparisons on endogenous trajectories, not causal estimates of a particular timing rule.
+
+The consequential positive and adverse cases survive direct raw checking:
+
+- **World40035007, L0 versus T*:** J **+200.78**, QoS **+195.90**, consumption **−25.09 Wh**, reserve exposure **34→14 UAV-steps**. L0 also beats C and H_T in J and consumption here. This is a useful complete-policy positive, although individual continuity is not uniformly improved.
+- **World40035006, L1 versus T*:** QoS rises **29.79**, but J falls **455.66**; reserve exposure changes **0→4,805**, and minimum battery falls **.10007→.06867**.
+- **World40035019, L2 versus T*:** QoS rises **192.37** and consumption falls **30.12 Wh**, yet J falls **270.53** and reserve exposure changes **0→4,682**. Less total energy consumption does not imply better reserve consequences.
+- **World40035007, L2:** reserve exposure is zero, yet service and J deteriorate. User17’s uncensored gap grows **84→395 ticks** versus T*. User5 ends with a **425-tick right-censored gap**, versus no terminal gap under C, H_T, T* or L0. This excludes an exclusively reserve-based explanation of the losses.
+- **World40035014:** every non-C endpoint removes C’s 281 team-outage ticks. Nevertheless L0’s minimum-user QoS/H falls slightly relative to C. Team continuity and individual service are distinct outcomes.
+
+All missions reached H3000. Zero cutoff, depletion and never-served counts do not erase these harms. Across finals, right-censored individual spells number C/H_T/T*/L0/L1/L2 **29/84/65/66/101/84**; users and spells are nested observations.
+
+The supported diagnosis is **unstable finite acquisition of useful switching**, against a meaningful ordinary alternative. The primary mean loss combines slightly lower QoS with higher native return-constraint cost. That accounting does not identify why the choices were poor. Neither nonactivation nor a mere absence of parameter learning explains the result.
+
+The strongest simpler interpretation remains ordinary geometry, continuation and resource-conditioned switching, with finite value-learning error adding unreliable departures. B10–B12 already showed that consumption, arrival slack, native service and reserve can separate; the underlying recorded contrasts and adverse cases remain consistent with B01. No unique missing feature, longer-horizon reasoning mechanism, optimizer repair or information insufficiency is identified. The actor is one pooled planner over coupled UAVs, without independently adapting teammate policies.
+
+The supplied B05 request-scheduling result does not establish a shared failure cause: its state, reward and control differ. In particular, B01’s recorded final Q values are positive. Absolute error against realized remaining return is not a counterfactual ranking test, and a common value offset alone cannot explain action-ranking errors.
+
+The paid cost was **678 missions, 2,034,000 native steps, three fits, 33,600 training updates and another 33,600 verification executions**. The run records **27.272 CPU-hours**, **10.199 operation-wall hours**, zero GPU use and about **9.10 GiB allocated** across the recorded storage scope. Training consumed 12.713 CPUh; calibration 3.349; finals 6.655; the two reader phases 4.363. Fit walls were approximately 4.18–4.21 hours each. Worker and reader each purchased 278,159 candidate forecasts. Later reductions, review and incompletely metered support remain additional. Mission timing includes acquisition/reset, checkpoint loading where applicable, simulation and recording; process/import overhead is included in aggregate phase accounting, without a separate cold-deployment benchmark.
+
+My reason for declining another immediate purchase is concrete: **the ordinary frontier already supplies the demonstrated service/resource tradeoff, while no learner reliably extends it**. L1’s possible saving over H_T is largely matched by T*; L0’s economy is largely available from C. The strongest isolated learned gain therefore warrants preservation, not automatic renewed expenditure.
+
+An unchanged replication could test recurrence, but would cost roughly another original purchase. With the existing frozen T* and reusable correctness evidence, three new 128-mission fits plus all six endpoints on 32 fresh worlds would still entail **576 missions/1,728,000 native steps**, approximately **23 CPUh** at observed phase costs, before new support and necessary checks. More evaluation of the existing checkpoints would be cheaper—roughly 7.8 CPUh for the full six-endpoint panel—but would not add independent training replication.
+
+If recurrence later becomes a consequential use decision, that complete comparison is worthwhile without requiring a new architecture or an identified repair. Consistent gains beyond T* **and** a useful position against C/H_T would strengthen learned-package value; gains only against T* would preserve the fixed-controller objection; another mixed or adverse result would further weaken investment in this recipe. Service gains accompanied by reserve or individual harms would remain explicit tradeoffs. None of these alternatives is selected or authorized by this review.
+
+**MATERIAL_DISSENT: no — no competing new investment or stronger DM claim was supplied. I recommend retaining the conditional positives and parent question, closing B01, and declining an immediate repeat or confirmation at its demonstrated cost.**
+<!-- B01_CRITIC_ORIGINAL_END -->
+
+Original final identity: 9,690 UTF-8 bytes, SHA256 `7501303569435128bac8d1664b8e156a669e533428a98e878d7b5d282a5e61d9` (without an added trailing newline).
+
+<a id="b01-dm-disposition-20261003"></a>
+### DM response, changed explanation and next investment
+
+I read the whole original and accept its scoped recommendation; **MATERIAL_DISSENT:no**.
+The independent raw checks strengthen the active, heterogeneous package interpretation and
+exclude inactivity or exclusively low-reserve losses. They do not independently identify an
+optimizer defect, a sufficient representation, a causal effect of training, or action-value
+ranking error. I use “unstable finite acquisition” to describe the three fitted endpoints,
+not as a proved mechanism. No initial-policy final panel was bought, so parameter movement
+must not be relabeled a measured self-training J gain. The review's evidence checks and this
+response preserve both its recommendation and these attribution limits.
+
+The actual updates to the working explanation are four distinct judgments. **Task opportunity:**
+the host contains consequential service/resource choices and useful complete-policy worlds;
+the amount of learnable headroom above C/H_T/T* remains open. **Representation:** the lawful
+327-field policy can expose nontrivial native departures, but the experiment neither proves
+that these features are sufficient nor identifies a missing state. **Finite learning:** the
+declared three-fit DDQN recipe failed to produce a recurring primary advantage despite real
+parameter and action changes. **Complete package value:** its conditional energy/travel/compute
+savings and local J gains are retained, alongside unresolved or adverse average J and individual/
+reserve harms. An unidentified long-horizon mechanism does not cancel those positive capabilities.
+
+Default adoption remains unsupported under the original exploratory contract. This is separate
+from retaining L1's resource-saving clue, L0's world07 gain, the ordinary T* option, and established
+H/H_T service capabilities for later development. It is also separate from **further investment**:
+I decline an immediate unchanged repeat or confirmation because the demonstrated tradeoffs
+already have competent ordinary alternatives, the three primary results do not recur, and this
+one study has already cost27.272 execution/check/read CPUh plus support. That is a scientific
+value/cost decision, not a penalty for unresolved component attribution or a safety veto on all
+learning. The pooled control of eight coupled UAVs here is not evidence about independently
+learning teammate-policy adaptation.
+
+I compared feasible next actions. More final worlds for the same three checkpoints would improve
+conditional precision for roughly7.8CPUh of complete six-endpoint evaluation/read, but would
+not resolve training recurrence. Three new128-mission fits plus the six endpoints on32 new worlds
+with frozen T* would require576missions/1,728,000native steps and roughly23CPUh from observed
+phase costs, before support/checks; that replication can be worthwhile if recurrence changes a
+concrete use decision. Its discriminating prediction is recurring J benefit and a useful position
+against both ordinary endpoints, with every service/resource harm retained. Another mixed result
+would weaken investment in this unchanged recipe. Neither a new architecture nor a proved cause
+is a prerequisite. A targeted learning or richer-information revision presently lacks a specific
+evidence-supported intermediate-plus-native prediction that favors it over that direct replication;
+I do not choose a new knob solely because it is editable. A changed objective assigning explicit
+utility to energy or individual continuity would be a new use question, with the same additional
+rights/utility given to an ordinary comparator, not a retrospective B01 success rule.
+
+Current published main `4a88c7145540cbee40647e907cef18e4acece6a3`, including
+[B10–B12](../../RESEARCH.md#service-assignment-cost-and-prediction-b10), was read at this boundary.
+Its demonstrated separation of energy, arrival slack, service and native reserve explains why
+lower Wh is preserved without treating it as a J or continuity guarantee. The supplied
+[B05 request-scheduling result](../../RESEARCH.md#joint-request-b05-root-disposition-20261003)
+has different state, reward and actions; its adverse active learner does not transfer a common
+cause or verdict to B01, and B01's positive Q values reject simply importing that sign pattern.
+No new novelty claim or literature-dependent mechanism is made.
+
+This complete result and recommendation return to Root at the assigned substantive boundary.
+The parent question stays open, with B01 **reserve and no selected operation, unread advice,
+queued producer or external dependency**. Root owns the comparison with other questions and
+any cross-question investment; this does not add a routine approval gate to in-scope work.
+Concrete re-entry is a consequential recurrence/use decision or a distinct complete-comparison
+prediction at a justified price. No recurring check or automatic continuation is scheduled.

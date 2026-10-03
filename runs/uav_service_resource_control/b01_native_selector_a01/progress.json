@@ -1,0 +1,27 @@
+{
+  "budget": {
+    "allocated_byte_limit": 34359738368,
+    "allocated_bytes": 9772412928,
+    "checkpoint_cpu_seconds": 98174.591338233,
+    "limit_cpu_seconds": 270000.0,
+    "live_descendant_cpu_seconds": 5951.08,
+    "live_descendants": 3,
+    "maximum_checkpoint_cpu_seconds": 98174.591338233,
+    "operation_wall_seconds": 36714.831172184,
+    "parent_cpu_seconds": 1222.946935576,
+    "prior_cpu_seconds": 8.431290657,
+    "reaped_descendant_cpu_seconds": 90992.133112,
+    "scope": "prior declared checks/phases plus current parent and all live/reaped descendants; Linux process accounting",
+    "stable_reap_snapshot": true,
+    "storage_paths": [
+      "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/022e7244049d4c6186f402c6539b534a",
+      "/home/fires/hmasd-wsl/runs/uav_service_resource_control/b01_native_selector_a01",
+      "/home/fires/hmasd-wsl/temp/directions/uav_service_resource_control",
+      "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/022e7244049d4c6186f402c6539b534a/runs/uav_service_resource_control/b01_preparation_a01"
+    ],
+    "wall_limit_seconds": 345600.0
+  },
+  "phase": "evaluation_read",
+  "planned": 294,
+  "returned": 294
+}

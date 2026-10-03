@@ -1,0 +1,1954 @@
+{
+  "checkpoints": {
+    "0": {
+      "allocated_bytes": 417792,
+      "bytes": 415025,
+      "completed_missions": 128,
+      "counts": {
+        "evaluation_ticks": 0,
+        "postwarmup_transitions": 11200,
+        "replay_size": 12800,
+        "skipped_updates": 0,
+        "training_missions": 128,
+        "training_ticks": 384000,
+        "transitions": 12800,
+        "updates": 11200
+      },
+      "digests": {
+        "online": "b5dc9515de8734b52b448f83f88b25920e263cb331f49d97bdfab6ed2734f496",
+        "optimizer": "966891deda68fb9d7aab7b54a121a282f544ca54e36b8351eef6d50a2cc13805",
+        "target": "b5dc9515de8734b52b448f83f88b25920e263cb331f49d97bdfab6ed2734f496"
+      },
+      "inference_only": true,
+      "path": "raw/L0_checkpoint_128.pt",
+      "sha256": "e067ee2623fc9765ba57757deb5d5db4df57c954d1c3b8fefbd314ca3cc911ad",
+      "state_digest": "cdc2ebae9ecac120f6d37d1523a4655a142cc3cb20d2555fdb8eec779d872dd8"
+    },
+    "1": {
+      "allocated_bytes": 417792,
+      "bytes": 415025,
+      "completed_missions": 128,
+      "counts": {
+        "evaluation_ticks": 0,
+        "postwarmup_transitions": 11200,
+        "replay_size": 12800,
+        "skipped_updates": 0,
+        "training_missions": 128,
+        "training_ticks": 384000,
+        "transitions": 12800,
+        "updates": 11200
+      },
+      "digests": {
+        "online": "ba52b2bbf556036811a9117446cebc67b9224dcfa5e67e6441ab7e1b1a9eb869",
+        "optimizer": "ad82a76b09636848fe597cb109e3f6e74260037b4483d748f17a23c4b50f17d4",
+        "target": "ba52b2bbf556036811a9117446cebc67b9224dcfa5e67e6441ab7e1b1a9eb869"
+      },
+      "inference_only": true,
+      "path": "raw/L1_checkpoint_128.pt",
+      "sha256": "b976c55575aa4e050e71df88e77048710697d4778c675d264efbd979af767198",
+      "state_digest": "201013672c240058defb91f75c9d82a78fbfde5ee07b6d41c12cda0b9b4745be"
+    },
+    "2": {
+      "allocated_bytes": 417792,
+      "bytes": 415025,
+      "completed_missions": 128,
+      "counts": {
+        "evaluation_ticks": 0,
+        "postwarmup_transitions": 11200,
+        "replay_size": 12800,
+        "skipped_updates": 0,
+        "training_missions": 128,
+        "training_ticks": 384000,
+        "transitions": 12800,
+        "updates": 11200
+      },
+      "digests": {
+        "online": "15702d841e315b6743bda40e743d81afa0b8a80f814eec0a19221bdc16c86cc9",
+        "optimizer": "8f1272855576ab115cd6828be9a644dec74a4e02860ae3a7da3969fc135b187c",
+        "target": "15702d841e315b6743bda40e743d81afa0b8a80f814eec0a19221bdc16c86cc9"
+      },
+      "inference_only": true,
+      "path": "raw/L2_checkpoint_128.pt",
+      "sha256": "90bd0610f593420357e6f63043da53be5dcbed5dc554c7a295a1cffcaa2e572d",
+      "state_digest": "d315edd06546c6c2a084d3b702668a8716c38ab29479f7adb7a493e399afa76e"
+    }
+  },
+  "final_jobs": [
+    {
+      "arm": "C",
+      "job_key": "final/40035001/C",
+      "limit": 3000,
+      "phase": "final",
+      "program": "C",
+      "seed": 40035001
+    },
+    {
+      "arm": "H_T",
+      "job_key": "final/40035001/H_T",
+      "limit": 3000,
+      "phase": "final",
+      "program": "H_T",
+      "seed": 40035001
+    },
+    {
+      "arm": "T_star",
+      "job_key": "final/40035001/T_star",
+      "limit": 3000,
+      "phase": "final",
+      "program": "T",
+      "seed": 40035001,
+      "theta": 0.0
+    },
+    {
+      "arm": "L0",
+      "episode_index": 0,
+      "fit": 0,
+      "job_key": "final/40035001/L0",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035001
+    },
+    {
+      "arm": "L1",
+      "episode_index": 0,
+      "fit": 1,
+      "job_key": "final/40035001/L1",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035001
+    },
+    {
+      "arm": "L2",
+      "episode_index": 0,
+      "fit": 2,
+      "job_key": "final/40035001/L2",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035001
+    },
+    {
+      "arm": "H_T",
+      "job_key": "final/40035002/H_T",
+      "limit": 3000,
+      "phase": "final",
+      "program": "H_T",
+      "seed": 40035002
+    },
+    {
+      "arm": "T_star",
+      "job_key": "final/40035002/T_star",
+      "limit": 3000,
+      "phase": "final",
+      "program": "T",
+      "seed": 40035002,
+      "theta": 0.0
+    },
+    {
+      "arm": "L0",
+      "episode_index": 1,
+      "fit": 0,
+      "job_key": "final/40035002/L0",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035002
+    },
+    {
+      "arm": "L1",
+      "episode_index": 1,
+      "fit": 1,
+      "job_key": "final/40035002/L1",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035002
+    },
+    {
+      "arm": "L2",
+      "episode_index": 1,
+      "fit": 2,
+      "job_key": "final/40035002/L2",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035002
+    },
+    {
+      "arm": "C",
+      "job_key": "final/40035002/C",
+      "limit": 3000,
+      "phase": "final",
+      "program": "C",
+      "seed": 40035002
+    },
+    {
+      "arm": "T_star",
+      "job_key": "final/40035003/T_star",
+      "limit": 3000,
+      "phase": "final",
+      "program": "T",
+      "seed": 40035003,
+      "theta": 0.0
+    },
+    {
+      "arm": "L0",
+      "episode_index": 2,
+      "fit": 0,
+      "job_key": "final/40035003/L0",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035003
+    },
+    {
+      "arm": "L1",
+      "episode_index": 2,
+      "fit": 1,
+      "job_key": "final/40035003/L1",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035003
+    },
+    {
+      "arm": "L2",
+      "episode_index": 2,
+      "fit": 2,
+      "job_key": "final/40035003/L2",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035003
+    },
+    {
+      "arm": "C",
+      "job_key": "final/40035003/C",
+      "limit": 3000,
+      "phase": "final",
+      "program": "C",
+      "seed": 40035003
+    },
+    {
+      "arm": "H_T",
+      "job_key": "final/40035003/H_T",
+      "limit": 3000,
+      "phase": "final",
+      "program": "H_T",
+      "seed": 40035003
+    },
+    {
+      "arm": "L0",
+      "episode_index": 3,
+      "fit": 0,
+      "job_key": "final/40035004/L0",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035004
+    },
+    {
+      "arm": "L1",
+      "episode_index": 3,
+      "fit": 1,
+      "job_key": "final/40035004/L1",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035004
+    },
+    {
+      "arm": "L2",
+      "episode_index": 3,
+      "fit": 2,
+      "job_key": "final/40035004/L2",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035004
+    },
+    {
+      "arm": "C",
+      "job_key": "final/40035004/C",
+      "limit": 3000,
+      "phase": "final",
+      "program": "C",
+      "seed": 40035004
+    },
+    {
+      "arm": "H_T",
+      "job_key": "final/40035004/H_T",
+      "limit": 3000,
+      "phase": "final",
+      "program": "H_T",
+      "seed": 40035004
+    },
+    {
+      "arm": "T_star",
+      "job_key": "final/40035004/T_star",
+      "limit": 3000,
+      "phase": "final",
+      "program": "T",
+      "seed": 40035004,
+      "theta": 0.0
+    },
+    {
+      "arm": "L1",
+      "episode_index": 4,
+      "fit": 1,
+      "job_key": "final/40035005/L1",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035005
+    },
+    {
+      "arm": "L2",
+      "episode_index": 4,
+      "fit": 2,
+      "job_key": "final/40035005/L2",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035005
+    },
+    {
+      "arm": "C",
+      "job_key": "final/40035005/C",
+      "limit": 3000,
+      "phase": "final",
+      "program": "C",
+      "seed": 40035005
+    },
+    {
+      "arm": "H_T",
+      "job_key": "final/40035005/H_T",
+      "limit": 3000,
+      "phase": "final",
+      "program": "H_T",
+      "seed": 40035005
+    },
+    {
+      "arm": "T_star",
+      "job_key": "final/40035005/T_star",
+      "limit": 3000,
+      "phase": "final",
+      "program": "T",
+      "seed": 40035005,
+      "theta": 0.0
+    },
+    {
+      "arm": "L0",
+      "episode_index": 4,
+      "fit": 0,
+      "job_key": "final/40035005/L0",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035005
+    },
+    {
+      "arm": "L2",
+      "episode_index": 5,
+      "fit": 2,
+      "job_key": "final/40035006/L2",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035006
+    },
+    {
+      "arm": "C",
+      "job_key": "final/40035006/C",
+      "limit": 3000,
+      "phase": "final",
+      "program": "C",
+      "seed": 40035006
+    },
+    {
+      "arm": "H_T",
+      "job_key": "final/40035006/H_T",
+      "limit": 3000,
+      "phase": "final",
+      "program": "H_T",
+      "seed": 40035006
+    },
+    {
+      "arm": "T_star",
+      "job_key": "final/40035006/T_star",
+      "limit": 3000,
+      "phase": "final",
+      "program": "T",
+      "seed": 40035006,
+      "theta": 0.0
+    },
+    {
+      "arm": "L0",
+      "episode_index": 5,
+      "fit": 0,
+      "job_key": "final/40035006/L0",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035006
+    },
+    {
+      "arm": "L1",
+      "episode_index": 5,
+      "fit": 1,
+      "job_key": "final/40035006/L1",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035006
+    },
+    {
+      "arm": "C",
+      "job_key": "final/40035007/C",
+      "limit": 3000,
+      "phase": "final",
+      "program": "C",
+      "seed": 40035007
+    },
+    {
+      "arm": "H_T",
+      "job_key": "final/40035007/H_T",
+      "limit": 3000,
+      "phase": "final",
+      "program": "H_T",
+      "seed": 40035007
+    },
+    {
+      "arm": "T_star",
+      "job_key": "final/40035007/T_star",
+      "limit": 3000,
+      "phase": "final",
+      "program": "T",
+      "seed": 40035007,
+      "theta": 0.0
+    },
+    {
+      "arm": "L0",
+      "episode_index": 6,
+      "fit": 0,
+      "job_key": "final/40035007/L0",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035007
+    },
+    {
+      "arm": "L1",
+      "episode_index": 6,
+      "fit": 1,
+      "job_key": "final/40035007/L1",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035007
+    },
+    {
+      "arm": "L2",
+      "episode_index": 6,
+      "fit": 2,
+      "job_key": "final/40035007/L2",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035007
+    },
+    {
+      "arm": "H_T",
+      "job_key": "final/40035008/H_T",
+      "limit": 3000,
+      "phase": "final",
+      "program": "H_T",
+      "seed": 40035008
+    },
+    {
+      "arm": "T_star",
+      "job_key": "final/40035008/T_star",
+      "limit": 3000,
+      "phase": "final",
+      "program": "T",
+      "seed": 40035008,
+      "theta": 0.0
+    },
+    {
+      "arm": "L0",
+      "episode_index": 7,
+      "fit": 0,
+      "job_key": "final/40035008/L0",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035008
+    },
+    {
+      "arm": "L1",
+      "episode_index": 7,
+      "fit": 1,
+      "job_key": "final/40035008/L1",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035008
+    },
+    {
+      "arm": "L2",
+      "episode_index": 7,
+      "fit": 2,
+      "job_key": "final/40035008/L2",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035008
+    },
+    {
+      "arm": "C",
+      "job_key": "final/40035008/C",
+      "limit": 3000,
+      "phase": "final",
+      "program": "C",
+      "seed": 40035008
+    },
+    {
+      "arm": "T_star",
+      "job_key": "final/40035009/T_star",
+      "limit": 3000,
+      "phase": "final",
+      "program": "T",
+      "seed": 40035009,
+      "theta": 0.0
+    },
+    {
+      "arm": "L0",
+      "episode_index": 8,
+      "fit": 0,
+      "job_key": "final/40035009/L0",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035009
+    },
+    {
+      "arm": "L1",
+      "episode_index": 8,
+      "fit": 1,
+      "job_key": "final/40035009/L1",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035009
+    },
+    {
+      "arm": "L2",
+      "episode_index": 8,
+      "fit": 2,
+      "job_key": "final/40035009/L2",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035009
+    },
+    {
+      "arm": "C",
+      "job_key": "final/40035009/C",
+      "limit": 3000,
+      "phase": "final",
+      "program": "C",
+      "seed": 40035009
+    },
+    {
+      "arm": "H_T",
+      "job_key": "final/40035009/H_T",
+      "limit": 3000,
+      "phase": "final",
+      "program": "H_T",
+      "seed": 40035009
+    },
+    {
+      "arm": "L0",
+      "episode_index": 9,
+      "fit": 0,
+      "job_key": "final/40035010/L0",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035010
+    },
+    {
+      "arm": "L1",
+      "episode_index": 9,
+      "fit": 1,
+      "job_key": "final/40035010/L1",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035010
+    },
+    {
+      "arm": "L2",
+      "episode_index": 9,
+      "fit": 2,
+      "job_key": "final/40035010/L2",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035010
+    },
+    {
+      "arm": "C",
+      "job_key": "final/40035010/C",
+      "limit": 3000,
+      "phase": "final",
+      "program": "C",
+      "seed": 40035010
+    },
+    {
+      "arm": "H_T",
+      "job_key": "final/40035010/H_T",
+      "limit": 3000,
+      "phase": "final",
+      "program": "H_T",
+      "seed": 40035010
+    },
+    {
+      "arm": "T_star",
+      "job_key": "final/40035010/T_star",
+      "limit": 3000,
+      "phase": "final",
+      "program": "T",
+      "seed": 40035010,
+      "theta": 0.0
+    },
+    {
+      "arm": "L1",
+      "episode_index": 10,
+      "fit": 1,
+      "job_key": "final/40035011/L1",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035011
+    },
+    {
+      "arm": "L2",
+      "episode_index": 10,
+      "fit": 2,
+      "job_key": "final/40035011/L2",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035011
+    },
+    {
+      "arm": "C",
+      "job_key": "final/40035011/C",
+      "limit": 3000,
+      "phase": "final",
+      "program": "C",
+      "seed": 40035011
+    },
+    {
+      "arm": "H_T",
+      "job_key": "final/40035011/H_T",
+      "limit": 3000,
+      "phase": "final",
+      "program": "H_T",
+      "seed": 40035011
+    },
+    {
+      "arm": "T_star",
+      "job_key": "final/40035011/T_star",
+      "limit": 3000,
+      "phase": "final",
+      "program": "T",
+      "seed": 40035011,
+      "theta": 0.0
+    },
+    {
+      "arm": "L0",
+      "episode_index": 10,
+      "fit": 0,
+      "job_key": "final/40035011/L0",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035011
+    },
+    {
+      "arm": "L2",
+      "episode_index": 11,
+      "fit": 2,
+      "job_key": "final/40035012/L2",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035012
+    },
+    {
+      "arm": "C",
+      "job_key": "final/40035012/C",
+      "limit": 3000,
+      "phase": "final",
+      "program": "C",
+      "seed": 40035012
+    },
+    {
+      "arm": "H_T",
+      "job_key": "final/40035012/H_T",
+      "limit": 3000,
+      "phase": "final",
+      "program": "H_T",
+      "seed": 40035012
+    },
+    {
+      "arm": "T_star",
+      "job_key": "final/40035012/T_star",
+      "limit": 3000,
+      "phase": "final",
+      "program": "T",
+      "seed": 40035012,
+      "theta": 0.0
+    },
+    {
+      "arm": "L0",
+      "episode_index": 11,
+      "fit": 0,
+      "job_key": "final/40035012/L0",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035012
+    },
+    {
+      "arm": "L1",
+      "episode_index": 11,
+      "fit": 1,
+      "job_key": "final/40035012/L1",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035012
+    },
+    {
+      "arm": "C",
+      "job_key": "final/40035013/C",
+      "limit": 3000,
+      "phase": "final",
+      "program": "C",
+      "seed": 40035013
+    },
+    {
+      "arm": "H_T",
+      "job_key": "final/40035013/H_T",
+      "limit": 3000,
+      "phase": "final",
+      "program": "H_T",
+      "seed": 40035013
+    },
+    {
+      "arm": "T_star",
+      "job_key": "final/40035013/T_star",
+      "limit": 3000,
+      "phase": "final",
+      "program": "T",
+      "seed": 40035013,
+      "theta": 0.0
+    },
+    {
+      "arm": "L0",
+      "episode_index": 12,
+      "fit": 0,
+      "job_key": "final/40035013/L0",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035013
+    },
+    {
+      "arm": "L1",
+      "episode_index": 12,
+      "fit": 1,
+      "job_key": "final/40035013/L1",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035013
+    },
+    {
+      "arm": "L2",
+      "episode_index": 12,
+      "fit": 2,
+      "job_key": "final/40035013/L2",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035013
+    },
+    {
+      "arm": "H_T",
+      "job_key": "final/40035014/H_T",
+      "limit": 3000,
+      "phase": "final",
+      "program": "H_T",
+      "seed": 40035014
+    },
+    {
+      "arm": "T_star",
+      "job_key": "final/40035014/T_star",
+      "limit": 3000,
+      "phase": "final",
+      "program": "T",
+      "seed": 40035014,
+      "theta": 0.0
+    },
+    {
+      "arm": "L0",
+      "episode_index": 13,
+      "fit": 0,
+      "job_key": "final/40035014/L0",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035014
+    },
+    {
+      "arm": "L1",
+      "episode_index": 13,
+      "fit": 1,
+      "job_key": "final/40035014/L1",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035014
+    },
+    {
+      "arm": "L2",
+      "episode_index": 13,
+      "fit": 2,
+      "job_key": "final/40035014/L2",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035014
+    },
+    {
+      "arm": "C",
+      "job_key": "final/40035014/C",
+      "limit": 3000,
+      "phase": "final",
+      "program": "C",
+      "seed": 40035014
+    },
+    {
+      "arm": "T_star",
+      "job_key": "final/40035015/T_star",
+      "limit": 3000,
+      "phase": "final",
+      "program": "T",
+      "seed": 40035015,
+      "theta": 0.0
+    },
+    {
+      "arm": "L0",
+      "episode_index": 14,
+      "fit": 0,
+      "job_key": "final/40035015/L0",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035015
+    },
+    {
+      "arm": "L1",
+      "episode_index": 14,
+      "fit": 1,
+      "job_key": "final/40035015/L1",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035015
+    },
+    {
+      "arm": "L2",
+      "episode_index": 14,
+      "fit": 2,
+      "job_key": "final/40035015/L2",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035015
+    },
+    {
+      "arm": "C",
+      "job_key": "final/40035015/C",
+      "limit": 3000,
+      "phase": "final",
+      "program": "C",
+      "seed": 40035015
+    },
+    {
+      "arm": "H_T",
+      "job_key": "final/40035015/H_T",
+      "limit": 3000,
+      "phase": "final",
+      "program": "H_T",
+      "seed": 40035015
+    },
+    {
+      "arm": "L0",
+      "episode_index": 15,
+      "fit": 0,
+      "job_key": "final/40035016/L0",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035016
+    },
+    {
+      "arm": "L1",
+      "episode_index": 15,
+      "fit": 1,
+      "job_key": "final/40035016/L1",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035016
+    },
+    {
+      "arm": "L2",
+      "episode_index": 15,
+      "fit": 2,
+      "job_key": "final/40035016/L2",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035016
+    },
+    {
+      "arm": "C",
+      "job_key": "final/40035016/C",
+      "limit": 3000,
+      "phase": "final",
+      "program": "C",
+      "seed": 40035016
+    },
+    {
+      "arm": "H_T",
+      "job_key": "final/40035016/H_T",
+      "limit": 3000,
+      "phase": "final",
+      "program": "H_T",
+      "seed": 40035016
+    },
+    {
+      "arm": "T_star",
+      "job_key": "final/40035016/T_star",
+      "limit": 3000,
+      "phase": "final",
+      "program": "T",
+      "seed": 40035016,
+      "theta": 0.0
+    },
+    {
+      "arm": "L1",
+      "episode_index": 16,
+      "fit": 1,
+      "job_key": "final/40035017/L1",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035017
+    },
+    {
+      "arm": "L2",
+      "episode_index": 16,
+      "fit": 2,
+      "job_key": "final/40035017/L2",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035017
+    },
+    {
+      "arm": "C",
+      "job_key": "final/40035017/C",
+      "limit": 3000,
+      "phase": "final",
+      "program": "C",
+      "seed": 40035017
+    },
+    {
+      "arm": "H_T",
+      "job_key": "final/40035017/H_T",
+      "limit": 3000,
+      "phase": "final",
+      "program": "H_T",
+      "seed": 40035017
+    },
+    {
+      "arm": "T_star",
+      "job_key": "final/40035017/T_star",
+      "limit": 3000,
+      "phase": "final",
+      "program": "T",
+      "seed": 40035017,
+      "theta": 0.0
+    },
+    {
+      "arm": "L0",
+      "episode_index": 16,
+      "fit": 0,
+      "job_key": "final/40035017/L0",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035017
+    },
+    {
+      "arm": "L2",
+      "episode_index": 17,
+      "fit": 2,
+      "job_key": "final/40035018/L2",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035018
+    },
+    {
+      "arm": "C",
+      "job_key": "final/40035018/C",
+      "limit": 3000,
+      "phase": "final",
+      "program": "C",
+      "seed": 40035018
+    },
+    {
+      "arm": "H_T",
+      "job_key": "final/40035018/H_T",
+      "limit": 3000,
+      "phase": "final",
+      "program": "H_T",
+      "seed": 40035018
+    },
+    {
+      "arm": "T_star",
+      "job_key": "final/40035018/T_star",
+      "limit": 3000,
+      "phase": "final",
+      "program": "T",
+      "seed": 40035018,
+      "theta": 0.0
+    },
+    {
+      "arm": "L0",
+      "episode_index": 17,
+      "fit": 0,
+      "job_key": "final/40035018/L0",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035018
+    },
+    {
+      "arm": "L1",
+      "episode_index": 17,
+      "fit": 1,
+      "job_key": "final/40035018/L1",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035018
+    },
+    {
+      "arm": "C",
+      "job_key": "final/40035019/C",
+      "limit": 3000,
+      "phase": "final",
+      "program": "C",
+      "seed": 40035019
+    },
+    {
+      "arm": "H_T",
+      "job_key": "final/40035019/H_T",
+      "limit": 3000,
+      "phase": "final",
+      "program": "H_T",
+      "seed": 40035019
+    },
+    {
+      "arm": "T_star",
+      "job_key": "final/40035019/T_star",
+      "limit": 3000,
+      "phase": "final",
+      "program": "T",
+      "seed": 40035019,
+      "theta": 0.0
+    },
+    {
+      "arm": "L0",
+      "episode_index": 18,
+      "fit": 0,
+      "job_key": "final/40035019/L0",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035019
+    },
+    {
+      "arm": "L1",
+      "episode_index": 18,
+      "fit": 1,
+      "job_key": "final/40035019/L1",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035019
+    },
+    {
+      "arm": "L2",
+      "episode_index": 18,
+      "fit": 2,
+      "job_key": "final/40035019/L2",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035019
+    },
+    {
+      "arm": "H_T",
+      "job_key": "final/40035020/H_T",
+      "limit": 3000,
+      "phase": "final",
+      "program": "H_T",
+      "seed": 40035020
+    },
+    {
+      "arm": "T_star",
+      "job_key": "final/40035020/T_star",
+      "limit": 3000,
+      "phase": "final",
+      "program": "T",
+      "seed": 40035020,
+      "theta": 0.0
+    },
+    {
+      "arm": "L0",
+      "episode_index": 19,
+      "fit": 0,
+      "job_key": "final/40035020/L0",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035020
+    },
+    {
+      "arm": "L1",
+      "episode_index": 19,
+      "fit": 1,
+      "job_key": "final/40035020/L1",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035020
+    },
+    {
+      "arm": "L2",
+      "episode_index": 19,
+      "fit": 2,
+      "job_key": "final/40035020/L2",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035020
+    },
+    {
+      "arm": "C",
+      "job_key": "final/40035020/C",
+      "limit": 3000,
+      "phase": "final",
+      "program": "C",
+      "seed": 40035020
+    },
+    {
+      "arm": "T_star",
+      "job_key": "final/40035021/T_star",
+      "limit": 3000,
+      "phase": "final",
+      "program": "T",
+      "seed": 40035021,
+      "theta": 0.0
+    },
+    {
+      "arm": "L0",
+      "episode_index": 20,
+      "fit": 0,
+      "job_key": "final/40035021/L0",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035021
+    },
+    {
+      "arm": "L1",
+      "episode_index": 20,
+      "fit": 1,
+      "job_key": "final/40035021/L1",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035021
+    },
+    {
+      "arm": "L2",
+      "episode_index": 20,
+      "fit": 2,
+      "job_key": "final/40035021/L2",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035021
+    },
+    {
+      "arm": "C",
+      "job_key": "final/40035021/C",
+      "limit": 3000,
+      "phase": "final",
+      "program": "C",
+      "seed": 40035021
+    },
+    {
+      "arm": "H_T",
+      "job_key": "final/40035021/H_T",
+      "limit": 3000,
+      "phase": "final",
+      "program": "H_T",
+      "seed": 40035021
+    },
+    {
+      "arm": "L0",
+      "episode_index": 21,
+      "fit": 0,
+      "job_key": "final/40035022/L0",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035022
+    },
+    {
+      "arm": "L1",
+      "episode_index": 21,
+      "fit": 1,
+      "job_key": "final/40035022/L1",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035022
+    },
+    {
+      "arm": "L2",
+      "episode_index": 21,
+      "fit": 2,
+      "job_key": "final/40035022/L2",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035022
+    },
+    {
+      "arm": "C",
+      "job_key": "final/40035022/C",
+      "limit": 3000,
+      "phase": "final",
+      "program": "C",
+      "seed": 40035022
+    },
+    {
+      "arm": "H_T",
+      "job_key": "final/40035022/H_T",
+      "limit": 3000,
+      "phase": "final",
+      "program": "H_T",
+      "seed": 40035022
+    },
+    {
+      "arm": "T_star",
+      "job_key": "final/40035022/T_star",
+      "limit": 3000,
+      "phase": "final",
+      "program": "T",
+      "seed": 40035022,
+      "theta": 0.0
+    },
+    {
+      "arm": "L1",
+      "episode_index": 22,
+      "fit": 1,
+      "job_key": "final/40035023/L1",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035023
+    },
+    {
+      "arm": "L2",
+      "episode_index": 22,
+      "fit": 2,
+      "job_key": "final/40035023/L2",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035023
+    },
+    {
+      "arm": "C",
+      "job_key": "final/40035023/C",
+      "limit": 3000,
+      "phase": "final",
+      "program": "C",
+      "seed": 40035023
+    },
+    {
+      "arm": "H_T",
+      "job_key": "final/40035023/H_T",
+      "limit": 3000,
+      "phase": "final",
+      "program": "H_T",
+      "seed": 40035023
+    },
+    {
+      "arm": "T_star",
+      "job_key": "final/40035023/T_star",
+      "limit": 3000,
+      "phase": "final",
+      "program": "T",
+      "seed": 40035023,
+      "theta": 0.0
+    },
+    {
+      "arm": "L0",
+      "episode_index": 22,
+      "fit": 0,
+      "job_key": "final/40035023/L0",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035023
+    },
+    {
+      "arm": "L2",
+      "episode_index": 23,
+      "fit": 2,
+      "job_key": "final/40035024/L2",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035024
+    },
+    {
+      "arm": "C",
+      "job_key": "final/40035024/C",
+      "limit": 3000,
+      "phase": "final",
+      "program": "C",
+      "seed": 40035024
+    },
+    {
+      "arm": "H_T",
+      "job_key": "final/40035024/H_T",
+      "limit": 3000,
+      "phase": "final",
+      "program": "H_T",
+      "seed": 40035024
+    },
+    {
+      "arm": "T_star",
+      "job_key": "final/40035024/T_star",
+      "limit": 3000,
+      "phase": "final",
+      "program": "T",
+      "seed": 40035024,
+      "theta": 0.0
+    },
+    {
+      "arm": "L0",
+      "episode_index": 23,
+      "fit": 0,
+      "job_key": "final/40035024/L0",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035024
+    },
+    {
+      "arm": "L1",
+      "episode_index": 23,
+      "fit": 1,
+      "job_key": "final/40035024/L1",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035024
+    },
+    {
+      "arm": "C",
+      "job_key": "final/40035025/C",
+      "limit": 3000,
+      "phase": "final",
+      "program": "C",
+      "seed": 40035025
+    },
+    {
+      "arm": "H_T",
+      "job_key": "final/40035025/H_T",
+      "limit": 3000,
+      "phase": "final",
+      "program": "H_T",
+      "seed": 40035025
+    },
+    {
+      "arm": "T_star",
+      "job_key": "final/40035025/T_star",
+      "limit": 3000,
+      "phase": "final",
+      "program": "T",
+      "seed": 40035025,
+      "theta": 0.0
+    },
+    {
+      "arm": "L0",
+      "episode_index": 24,
+      "fit": 0,
+      "job_key": "final/40035025/L0",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035025
+    },
+    {
+      "arm": "L1",
+      "episode_index": 24,
+      "fit": 1,
+      "job_key": "final/40035025/L1",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035025
+    },
+    {
+      "arm": "L2",
+      "episode_index": 24,
+      "fit": 2,
+      "job_key": "final/40035025/L2",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035025
+    },
+    {
+      "arm": "H_T",
+      "job_key": "final/40035026/H_T",
+      "limit": 3000,
+      "phase": "final",
+      "program": "H_T",
+      "seed": 40035026
+    },
+    {
+      "arm": "T_star",
+      "job_key": "final/40035026/T_star",
+      "limit": 3000,
+      "phase": "final",
+      "program": "T",
+      "seed": 40035026,
+      "theta": 0.0
+    },
+    {
+      "arm": "L0",
+      "episode_index": 25,
+      "fit": 0,
+      "job_key": "final/40035026/L0",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035026
+    },
+    {
+      "arm": "L1",
+      "episode_index": 25,
+      "fit": 1,
+      "job_key": "final/40035026/L1",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035026
+    },
+    {
+      "arm": "L2",
+      "episode_index": 25,
+      "fit": 2,
+      "job_key": "final/40035026/L2",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035026
+    },
+    {
+      "arm": "C",
+      "job_key": "final/40035026/C",
+      "limit": 3000,
+      "phase": "final",
+      "program": "C",
+      "seed": 40035026
+    },
+    {
+      "arm": "T_star",
+      "job_key": "final/40035027/T_star",
+      "limit": 3000,
+      "phase": "final",
+      "program": "T",
+      "seed": 40035027,
+      "theta": 0.0
+    },
+    {
+      "arm": "L0",
+      "episode_index": 26,
+      "fit": 0,
+      "job_key": "final/40035027/L0",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035027
+    },
+    {
+      "arm": "L1",
+      "episode_index": 26,
+      "fit": 1,
+      "job_key": "final/40035027/L1",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035027
+    },
+    {
+      "arm": "L2",
+      "episode_index": 26,
+      "fit": 2,
+      "job_key": "final/40035027/L2",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035027
+    },
+    {
+      "arm": "C",
+      "job_key": "final/40035027/C",
+      "limit": 3000,
+      "phase": "final",
+      "program": "C",
+      "seed": 40035027
+    },
+    {
+      "arm": "H_T",
+      "job_key": "final/40035027/H_T",
+      "limit": 3000,
+      "phase": "final",
+      "program": "H_T",
+      "seed": 40035027
+    },
+    {
+      "arm": "L0",
+      "episode_index": 27,
+      "fit": 0,
+      "job_key": "final/40035028/L0",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035028
+    },
+    {
+      "arm": "L1",
+      "episode_index": 27,
+      "fit": 1,
+      "job_key": "final/40035028/L1",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035028
+    },
+    {
+      "arm": "L2",
+      "episode_index": 27,
+      "fit": 2,
+      "job_key": "final/40035028/L2",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035028
+    },
+    {
+      "arm": "C",
+      "job_key": "final/40035028/C",
+      "limit": 3000,
+      "phase": "final",
+      "program": "C",
+      "seed": 40035028
+    },
+    {
+      "arm": "H_T",
+      "job_key": "final/40035028/H_T",
+      "limit": 3000,
+      "phase": "final",
+      "program": "H_T",
+      "seed": 40035028
+    },
+    {
+      "arm": "T_star",
+      "job_key": "final/40035028/T_star",
+      "limit": 3000,
+      "phase": "final",
+      "program": "T",
+      "seed": 40035028,
+      "theta": 0.0
+    },
+    {
+      "arm": "L1",
+      "episode_index": 28,
+      "fit": 1,
+      "job_key": "final/40035029/L1",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035029
+    },
+    {
+      "arm": "L2",
+      "episode_index": 28,
+      "fit": 2,
+      "job_key": "final/40035029/L2",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035029
+    },
+    {
+      "arm": "C",
+      "job_key": "final/40035029/C",
+      "limit": 3000,
+      "phase": "final",
+      "program": "C",
+      "seed": 40035029
+    },
+    {
+      "arm": "H_T",
+      "job_key": "final/40035029/H_T",
+      "limit": 3000,
+      "phase": "final",
+      "program": "H_T",
+      "seed": 40035029
+    },
+    {
+      "arm": "T_star",
+      "job_key": "final/40035029/T_star",
+      "limit": 3000,
+      "phase": "final",
+      "program": "T",
+      "seed": 40035029,
+      "theta": 0.0
+    },
+    {
+      "arm": "L0",
+      "episode_index": 28,
+      "fit": 0,
+      "job_key": "final/40035029/L0",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035029
+    },
+    {
+      "arm": "L2",
+      "episode_index": 29,
+      "fit": 2,
+      "job_key": "final/40035030/L2",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035030
+    },
+    {
+      "arm": "C",
+      "job_key": "final/40035030/C",
+      "limit": 3000,
+      "phase": "final",
+      "program": "C",
+      "seed": 40035030
+    },
+    {
+      "arm": "H_T",
+      "job_key": "final/40035030/H_T",
+      "limit": 3000,
+      "phase": "final",
+      "program": "H_T",
+      "seed": 40035030
+    },
+    {
+      "arm": "T_star",
+      "job_key": "final/40035030/T_star",
+      "limit": 3000,
+      "phase": "final",
+      "program": "T",
+      "seed": 40035030,
+      "theta": 0.0
+    },
+    {
+      "arm": "L0",
+      "episode_index": 29,
+      "fit": 0,
+      "job_key": "final/40035030/L0",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035030
+    },
+    {
+      "arm": "L1",
+      "episode_index": 29,
+      "fit": 1,
+      "job_key": "final/40035030/L1",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035030
+    },
+    {
+      "arm": "C",
+      "job_key": "final/40035031/C",
+      "limit": 3000,
+      "phase": "final",
+      "program": "C",
+      "seed": 40035031
+    },
+    {
+      "arm": "H_T",
+      "job_key": "final/40035031/H_T",
+      "limit": 3000,
+      "phase": "final",
+      "program": "H_T",
+      "seed": 40035031
+    },
+    {
+      "arm": "T_star",
+      "job_key": "final/40035031/T_star",
+      "limit": 3000,
+      "phase": "final",
+      "program": "T",
+      "seed": 40035031,
+      "theta": 0.0
+    },
+    {
+      "arm": "L0",
+      "episode_index": 30,
+      "fit": 0,
+      "job_key": "final/40035031/L0",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035031
+    },
+    {
+      "arm": "L1",
+      "episode_index": 30,
+      "fit": 1,
+      "job_key": "final/40035031/L1",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035031
+    },
+    {
+      "arm": "L2",
+      "episode_index": 30,
+      "fit": 2,
+      "job_key": "final/40035031/L2",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035031
+    },
+    {
+      "arm": "H_T",
+      "job_key": "final/40035032/H_T",
+      "limit": 3000,
+      "phase": "final",
+      "program": "H_T",
+      "seed": 40035032
+    },
+    {
+      "arm": "T_star",
+      "job_key": "final/40035032/T_star",
+      "limit": 3000,
+      "phase": "final",
+      "program": "T",
+      "seed": 40035032,
+      "theta": 0.0
+    },
+    {
+      "arm": "L0",
+      "episode_index": 31,
+      "fit": 0,
+      "job_key": "final/40035032/L0",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035032
+    },
+    {
+      "arm": "L1",
+      "episode_index": 31,
+      "fit": 1,
+      "job_key": "final/40035032/L1",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035032
+    },
+    {
+      "arm": "L2",
+      "episode_index": 31,
+      "fit": 2,
+      "job_key": "final/40035032/L2",
+      "limit": 3000,
+      "phase": "final",
+      "program": "SELECTOR",
+      "seed": 40035032
+    },
+    {
+      "arm": "C",
+      "job_key": "final/40035032/C",
+      "limit": 3000,
+      "phase": "final",
+      "program": "C",
+      "seed": 40035032
+    }
+  ],
+  "launch_sha": "0dffa6f2ade7ca35c86b552be0fbc8b5a7837085",
+  "selection": {
+    "final_identity_alias": null,
+    "means": {
+      "C": 2116.842480408461,
+      "H_T": 2120.5338903229263,
+      "T_0": 2140.9329889615874,
+      "T_10": 2103.5565789669427,
+      "T_20": 2123.806986337942,
+      "T_30": 2137.566490757562
+    },
+    "program": {
+      "program": "T",
+      "theta": 0.0
+    },
+    "selected": "T_0",
+    "source_worlds": [
+      40034001,
+      40034002,
+      40034003,
+      40034004,
+      40034005,
+      40034006,
+      40034007,
+      40034008,
+      40034009,
+      40034010,
+      40034011,
+      40034012,
+      40034013,
+      40034014,
+      40034015,
+      40034016
+    ],
+    "tie_order": [
+      "C",
+      "H_T",
+      "T_0",
+      "T_10",
+      "T_20",
+      "T_30"
+    ]
+  },
+  "source_binding": {
+    "construction_contract_sha": "72bf27b15d31709dfa4f05e0f485025c7c375c52",
+    "files": {
+      ".codex/hmasd-compute.toml": "2bb704e31e08a6a3489e80ea6851826740dfbf71461e0f7e70c4394694e65e6f",
+      "configs/config_1.py": "f55b5f148c2664334b455305dea094591799eb0c0544237f7bb717bd1401ccb8",
+      "envs/pettingzoo/env_adapter.py": "8b42c1c3e7ef44cb814f79225b4af944b1018ad764dfeb17e9e1cc294df79d40",
+      "envs/pettingzoo/native/uav_geometry_backend.cpp": "1ff1eecb1c4a69ec402f4f2a506dca830e140844f8ed9c56f52e2c99c94791dd",
+      "envs/pettingzoo/relay/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "envs/pettingzoo/relay/belief_map.py": "b27750f09706cad0b97ec2689b703228e3f28a711877b4dd15707c8571b4ce04",
+      "envs/pettingzoo/relay/channel_geometry.py": "c16121dd5ecf82d5f706c236b71b8d1805446d0d9e483a8a4d5258b2657acb69",
+      "envs/pettingzoo/relay/energy_aware.py": "f6836b7b8d26e73b83888fa2eb5cb7d02e9ec565e35ddc3de0098c9746f367cf",
+      "envs/pettingzoo/relay/forced_relay.py": "79a61f1ed07ae9bb52d9cfb6163041b13fff13ecb9e3e30b0a97709f622bd973",
+      "envs/pettingzoo/relay/local_view.py": "560c8de76599c649b921be7c2324f5983c8ad48bf5ca93fe4e1871d2c4f46657",
+      "envs/pettingzoo/relay/progressive.py": "176ce4856725d2b2a8857aa42e80730c5e020996bf3411c8249494d49a8910f8",
+      "envs/pettingzoo/relay/routed_core.py": "f67869ae1de05c4f0d7e05e0dac0e4f13008d2f17251d07e20dc97c4ea44abf0",
+      "envs/pettingzoo/relay/routing.py": "1956f4cabbb3a2660fdbff9a4892327dfd16f02b2d497f64faef2f02a24645d5",
+      "envs/pettingzoo/uav_cpp_backend.py": "59b9915cf232d263930b2521eff2a933aeb2bca218eb2958dfce81ff52fc822c",
+      "experiments/candidates/energy_relay_benchmark/b01/evaluation.py": "15391e2eafff0876dd0bfa94a0d8f9f96558c76254e8d73cb8e55426735eccd7",
+      "experiments/candidates/energy_relay_benchmark/b01/feedback.py": "0cb8cc14d7d63ea6dd6bbc84c830e01c06837507acd70b8fd29ae6411a6c13d2",
+      "experiments/candidates/energy_relay_benchmark/b01/heuristic.py": "f82bbcc1d6586ae41acbb720b225b294c3dff812246e88f15f699b2d9146351e",
+      "experiments/candidates/energy_relay_benchmark/b01/observation.py": "baa416c9067504fdeb2656b376768ed06c3febe440c358c92c7281922791536f",
+      "experiments/candidates/uav_fleet_transmission/b08_anonymous_memory/controller.py": "4f8469b053e70e63ca93ad9636122a6f32ae9eb150802c671f005e25cef78933",
+      "experiments/candidates/uav_fleet_transmission/b09_service_prediction/__init__.py": "e65636c372960506ff434ea18275c4abfca459a16f71a3d56cf8121a50cf08cb",
+      "experiments/candidates/uav_fleet_transmission/b09_service_prediction/contract.py": "e1fa8bea71cb0e1f4096b81986dd8a81356be46c2a52cfa55bd9ee38624b10df",
+      "experiments/candidates/uav_fleet_transmission/b09_service_prediction/controller.py": "fea7ad943e94e509bb4bd08bf0d94a5f26a647e28e4969bd8006f5673dbfbeca",
+      "experiments/candidates/uav_fleet_transmission/b09_service_prediction/frozen_sources.json": "dbd930420ae0688ed317ccdbb60f609b5e5219a0402f1527a8e0e00425db56c5",
+      "experiments/candidates/uav_fleet_transmission/b09_service_prediction/model.py": "a090e8714d3a6d4e6f4a9f53bb6356aa51302036831cca3d2ed90f22c697423c",
+      "experiments/candidates/uav_fleet_transmission/b09_service_prediction/nominal.py": "53607818394218f050ead61db5f257ae9ebcb865159269ea08c07f5f56e542dc",
+      "experiments/candidates/uav_fleet_transmission/b09_service_prediction/trace.py": "ada90960da66bec85cdaaf015de65afece66fd95993ea96748e200c584231293",
+      "experiments/candidates/uav_fleet_transmission/b10_service_assignment/__init__.py": "51461302071dfd2955d107bb5c5a381667030d8975bb987d0ba8fbddaa5de5fc",
+      "experiments/candidates/uav_fleet_transmission/b10_service_assignment/budget.py": "a5db8fe3ebcb610951c95a33021bacb56869db1e0eb213278103d7197bd2599e",
+      "experiments/candidates/uav_fleet_transmission/b10_service_assignment/capture.py": "cf6902fa577f6ff8ff2a1dfdfa257bc449a952232b82fc5b9e9f18c9a9d1586d",
+      "experiments/candidates/uav_fleet_transmission/b10_service_assignment/contract.py": "bf137d987dc021fec5e80b38d61b22067703ac61eb570bb25bafa3029605d34e",
+      "experiments/candidates/uav_fleet_transmission/b10_service_assignment/controller.py": "346d513a850a7561c3310de2e98d5ea4474e6a1a0b02ca452dff9a872ad79501",
+      "experiments/candidates/uav_fleet_transmission/b10_service_assignment/metrics.py": "66a92c3d87b99447e902df2a174d35efbaa215504bfec5b0d36f419f8b78e860",
+      "experiments/candidates/uav_fleet_transmission/b10_service_assignment/nominal.py": "3191b045b2540d16948382150d57268ca0f32484d4682d0fa4dd80e351e2ae07",
+      "experiments/candidates/uav_fleet_transmission/b10_service_assignment/reader.py": "137b887322f9382e23189005ed0e71707e1b37379e686bf196e8157556febd22",
+      "experiments/candidates/uav_fleet_transmission/b10_service_assignment/run.py": "3d9027cf78e4b23991f5307b0e9cbe03b80457e3be5731888861cee5977f2727",
+      "experiments/candidates/uav_fleet_transmission/b10_service_assignment/study.py": "ffbec647a96b6acb62aa32c95e8215f119ce056ed83b79890e3a4a9e36566991",
+      "experiments/candidates/uav_fleet_transmission/b10_service_assignment/trace.py": "bdebf08f99509053f69748625fae40e2841afe4429f8889bde39c9f49c54dea1",
+      "experiments/candidates/uav_fleet_transmission/b11_travel_ties/__init__.py": "6ff30743ac448b88a758bcf94691bc0ff5be45aba94e22e610fef95f036e7176",
+      "experiments/candidates/uav_fleet_transmission/b11_travel_ties/controller.py": "4f1660b362dfe29780f49428c75b36cb7bd21cd62e960742d2e7328384ff6a84",
+      "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/__init__.py": "f1513ee81c75b21cc4ed6ed2bd6addfe5d3421e6d7d5027e79bd2d0c6fc70b2b",
+      "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/controller.py": "b9bb8832dd7d07d604a8e890543cb8584f1133cd7d2ce0bf5b0828cd8860da69",
+      "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/energy.py": "5b7c079dd4a2641d110d20b51f567bb664a74e7b0d72fc536a203b1fffeac2ee",
+      "experiments/candidates/uav_fleet_transmission/b12_resource_assignment/trace.py": "d5be11ff136f585ccef6d4458a29523185dd9ea34986068c73f99e6b8d93cdf6",
+      "experiments/candidates/uav_information_value/b02/controller.py": "6046f3db724c6893c16d1e256ff05603e5148c6239b37ead266e1446988bce3d",
+      "experiments/candidates/uav_information_value/batch.py": "ffa9e3b462e59134347da677f5c5ac4aa68265f3132c502919c5ca50bf5becfb",
+      "experiments/candidates/uav_information_value/controllers.py": "3f06d1a98f24ff6348ba4fb6bc505729f9c7df55b6cedac867d4a4eb5064cac2",
+      "experiments/candidates/uav_joint_transition/controllers.py": "57bfe8a3847f6864c5f2ef97c97aef80ef414e5dd6c5ff6c628ff68370749715",
+      "experiments/candidates/uav_joint_transition/motion.py": "d333c163a816f139b7d71ab4679553d50f742ef4c5aa7633a932c33f9732dbb5",
+      "experiments/candidates/uav_radio_placement/b01/placement.py": "6682930810fec111fa68e165bbb2790117627d986fbb61057742837dee504b4f",
+      "experiments/candidates/uav_service_auxiliary/b01/native.py": "873024b6f3e01705c07005d0dcc19185da2073f871dd93ae4cb739c5e739f990",
+      "experiments/candidates/uav_service_auxiliary/b04/evaluation.py": "0a3695e958c31b1eb97f6bbf38a1d41727f1c7f6cc679b4c046fcfda4b5487af",
+      "experiments/candidates/uav_service_resource_control/b01_native_selector/__init__.py": "b9efffe34db2f6470571f9bad6a0ad1209b503757acc6e6e2a7b558b1b77bbac",
+      "experiments/candidates/uav_service_resource_control/b01_native_selector/budget.py": "f01c54418750baf9277757681e13c8bb5ca39a2d0e613d817882939c61193447",
+      "experiments/candidates/uav_service_resource_control/b01_native_selector/checks.py": "917c013cc64b07e549814470b52c7af8c431c6ddb38fe31c3c7b170c7f3b9046",
+      "experiments/candidates/uav_service_resource_control/b01_native_selector/contract.py": "27aea9bc217b582ceab47e981e97e367a4a4c9ae364a9c0a77a7110a2dce8c16",
+      "experiments/candidates/uav_service_resource_control/b01_native_selector/controller.py": "86c6984e09549b2158ce5036a2ef2096afc9fab4d459b64e1fff2c2f9c363725",
+      "experiments/candidates/uav_service_resource_control/b01_native_selector/features.py": "e5433344de84d51969cec2ce9111319221c73b51878ec2b6fcdb5a991b4c186d",
+      "experiments/candidates/uav_service_resource_control/b01_native_selector/learner.py": "6064b522fa83f2b8bc73abff04f9e35f478a9ecc2d6e8a420e02d871474b0e0d",
+      "experiments/candidates/uav_service_resource_control/b01_native_selector/reading.py": "9015047722b4244e29df0bd8cfdefb896865a0cf4131996ec476d72b1d5f6676",
+      "experiments/candidates/uav_service_resource_control/b01_native_selector/replay.py": "07989a4f63e91e0b4a1771215bc16147e856b3df62b88eb2b565c57354e51ee2",
+      "experiments/candidates/uav_service_resource_control/b01_native_selector/results.py": "cc4aa42bebff6c5c4863315ef35ebe366865e9df23b5a4df1f9da227a2e8f299",
+      "experiments/candidates/uav_service_resource_control/b01_native_selector/run.py": "084ebd34044559000c734751004aa8e6bdac330a707cfbe567697ecc0a42a396",
+      "experiments/candidates/uav_service_resource_control/b01_native_selector/study.py": "c41bb8339544257aed331f38957b80b9fbbc250952e0993d36b520c22e51dd8b",
+      "scripts/hmasd_admission.py": "0faa5d53fba5af9b1a2fc4979bde5bd50bcbcaac2dbef938e90a64680156cf4d",
+      "scripts/hmasd_launch.py": "6a22fef75e7bbc0997b2f4b0096d278de793d43e466497b36bba49884cab23f9"
+    },
+    "original_source_sha": "94f08627050b7d495b4c9e9af18db02ab17a5c1e",
+    "source_contract_sha": "fa5b7fb85e1e06df53fc3e34ec0e7e8f5529d547",
+    "whole_purchase_selection_sha": "a85b6ded1cca75fb035334eb177b812804b5f7c2"
+  }
+}

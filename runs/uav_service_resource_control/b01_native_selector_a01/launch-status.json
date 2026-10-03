@@ -1,0 +1,11 @@
+{
+  "claim_key": "84993ec034da593bc5c5e9cab651a5e5bf157124873fc40f23c050f1710e1512",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/84993ec034da593bc5c5e9cab651a5e5bf157124873fc40f23c050f1710e1512.json",
+  "manifest_ref": "/home/fires/hmasd-wsl/runs/uav_service_resource_control/b01_native_selector_a01/launch-manifest.json",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/84993ec034da593bc5c5e9cab651a5e5bf157124873fc40f23c050f1710e1512.json",
+  "pid": 1090094,
+  "runner_pid": 1090095,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-10-03T03:53:45.128973Z"
+}
