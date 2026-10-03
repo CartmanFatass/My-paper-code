@@ -1,0 +1,2264 @@
+{
+  "all_deadline_misses": 0,
+  "all_longest_team_zero_service_run": 56,
+  "all_missions": 1708,
+  "cost": {
+    "cpu_seconds": 0.801675567,
+    "support_and_prior_unmetered_arithmetic": "unknown_nonzero",
+    "wall_seconds": 3.425375492981402
+  },
+  "full_diagnostics": {
+    "bytes": 1207441,
+    "node": "local_linux",
+    "path": "/home/fires/hmasd-wsl/runs/uav_decision_generalization/b05_request_read_a02/diagnostics.json",
+    "sha256": "31d9739a3ab16a36e6db8c0669e4065f58ac821e3c91b8c685a13ebf513d52da"
+  },
+  "main_aggregates": {
+    "G": {
+      "C": {
+        "max": 4195,
+        "mean": 2605.5625,
+        "min": 1754,
+        "n": 32
+      },
+      "active_uav_target_changes": {
+        "max": 26,
+        "mean": 10.9375,
+        "min": 4,
+        "n": 32
+      },
+      "area_cost": {
+        "max": 4195,
+        "mean": 2605.5625,
+        "min": 1754,
+        "n": 32
+      },
+      "completed": {
+        "max": 70,
+        "mean": 57.75,
+        "min": 46,
+        "n": 32
+      },
+      "decision_wall_max": {
+        "max": 0.112685263,
+        "mean": 0.01828710140625,
+        "min": 0.009835295,
+        "n": 32
+      },
+      "decision_wall_p50": {
+        "max": 0.009120705,
+        "mean": 0.008681614984375,
+        "min": 0.008233394000000002,
+        "n": 32
+      },
+      "head_interruptions": {
+        "max": 7,
+        "mean": 1.09375,
+        "min": 0,
+        "n": 32
+      },
+      "max_cluster_backlog": {
+        "max": 6,
+        "mean": 3.8125,
+        "min": 2,
+        "n": 32
+      },
+      "max_user_gap": {
+        "max": 945,
+        "mean": 546.6875,
+        "min": 334,
+        "n": 32
+      },
+      "mean_user_gap": {
+        "max": 278.44,
+        "mean": 190.22625,
+        "min": 135.96,
+        "n": 32
+      },
+      "never_served_users": {
+        "max": 0,
+        "mean": 0,
+        "min": 0,
+        "n": 32
+      },
+      "requests": {
+        "max": 70,
+        "mean": 57.75,
+        "min": 46,
+        "n": 32
+      },
+      "residence_max": {
+        "max": 589.0,
+        "mean": 330.125,
+        "min": 123.0,
+        "n": 32
+      },
+      "residence_p50": {
+        "max": 25.0,
+        "mean": 20.203125,
+        "min": 20.0,
+        "n": 32
+      },
+      "residence_p90": {
+        "max": 164.20000000000002,
+        "mean": 98.61562500000001,
+        "min": 43.0,
+        "n": 32
+      },
+      "routed_users_per_tick": {
+        "max": 38.094166666666666,
+        "mean": 36.450234375,
+        "min": 34.4525,
+        "n": 32
+      },
+      "team_zero_service_ticks": {
+        "max": 31,
+        "mean": 3.71875,
+        "min": 0,
+        "n": 32
+      },
+      "terminal_charge": {
+        "max": 0,
+        "mean": 0,
+        "min": 0,
+        "n": 32
+      },
+      "totals": {
+        "completed": 1848,
+        "deadline_misses": 0,
+        "max_unfinished_age": 0,
+        "requests": 1848,
+        "unfinished": 0,
+        "worlds_with_unfinished": 0
+      },
+      "travel_per_uav_mean": {
+        "max": 7633.826462515919,
+        "mean": 5038.989665421557,
+        "min": 2783.969333596773,
+        "n": 32
+      },
+      "unfinished": {
+        "max": 0,
+        "mean": 0,
+        "min": 0,
+        "n": 32
+      }
+    },
+    "L0": {
+      "C": {
+        "max": 10240,
+        "mean": 5504.875,
+        "min": 2578,
+        "n": 32
+      },
+      "active_uav_target_changes": {
+        "max": 106,
+        "mean": 72.5,
+        "min": 8,
+        "n": 32
+      },
+      "area_cost": {
+        "max": 8800,
+        "mean": 5249.875,
+        "min": 2578,
+        "n": 32
+      },
+      "completed": {
+        "max": 70,
+        "mean": 56.6875,
+        "min": 45,
+        "n": 32
+      },
+      "decision_wall_max": {
+        "max": 1.015312049,
+        "mean": 0.04628854534375,
+        "min": 0.010625935,
+        "n": 32
+      },
+      "decision_wall_p50": {
+        "max": 0.010122422499999999,
+        "mean": 0.009323685203125,
+        "min": 0.008753127,
+        "n": 32
+      },
+      "head_interruptions": {
+        "max": 17,
+        "mean": 7.25,
+        "min": 0,
+        "n": 32
+      },
+      "joins": {
+        "activated_changed_motion_residence_charge": 94662,
+        "activated_changed_motion_windows_with_completions": 656,
+        "command_differs_G": 1089,
+        "executed_action_differs_G": 1089,
+        "motion_differs_at_observed_activation_position": 1064,
+        "n": 1920,
+        "neural_argmin_differs_G": 1089,
+        "terminal_unused": 32
+      },
+      "max_cluster_backlog": {
+        "max": 8,
+        "mean": 5.34375,
+        "min": 3,
+        "n": 32
+      },
+      "max_user_gap": {
+        "max": 1123,
+        "mean": 657.6875,
+        "min": 255,
+        "n": 32
+      },
+      "mean_user_gap": {
+        "max": 438.04,
+        "mean": 250.293125,
+        "min": 145.06,
+        "n": 32
+      },
+      "never_served_users": {
+        "max": 0,
+        "mean": 0,
+        "min": 0,
+        "n": 32
+      },
+      "requests": {
+        "max": 70,
+        "mean": 57.75,
+        "min": 46,
+        "n": 32
+      },
+      "residence_max": {
+        "max": 1062.0,
+        "mean": 518.75,
+        "min": 167.0,
+        "n": 32
+      },
+      "residence_p50": {
+        "max": 122.0,
+        "mean": 38.546875,
+        "min": 20.0,
+        "n": 32
+      },
+      "residence_p90": {
+        "max": 452.30000000000007,
+        "mean": 201.20625,
+        "min": 67.2,
+        "n": 32
+      },
+      "routed_users_per_tick": {
+        "max": 36.723333333333336,
+        "mean": 31.3478125,
+        "min": 25.183333333333334,
+        "n": 32
+      },
+      "team_zero_service_ticks": {
+        "max": 31,
+        "mean": 3.71875,
+        "min": 0,
+        "n": 32
+      },
+      "terminal_charge": {
+        "max": 1680,
+        "mean": 255,
+        "min": 0,
+        "n": 32
+      },
+      "totals": {
+        "completed": 1814,
+        "deadline_misses": 0,
+        "max_unfinished_age": 860.0,
+        "requests": 1848,
+        "unfinished": 34,
+        "worlds_with_unfinished": 12
+      },
+      "travel_per_uav_mean": {
+        "max": 21227.874495511187,
+        "mean": 13080.702981335338,
+        "min": 4543.3366154993655,
+        "n": 32
+      },
+      "unfinished": {
+        "max": 7,
+        "mean": 1.0625,
+        "min": 0,
+        "n": 32
+      }
+    },
+    "L1": {
+      "C": {
+        "max": 9240,
+        "mean": 5378.6875,
+        "min": 2652,
+        "n": 32
+      },
+      "active_uav_target_changes": {
+        "max": 112,
+        "mean": 73.9375,
+        "min": 24,
+        "n": 32
+      },
+      "area_cost": {
+        "max": 8235,
+        "mean": 5123.6875,
+        "min": 2652,
+        "n": 32
+      },
+      "completed": {
+        "max": 69,
+        "mean": 56.6875,
+        "min": 45,
+        "n": 32
+      },
+      "decision_wall_max": {
+        "max": 0.966866717,
+        "mean": 0.0450747771875,
+        "min": 0.010446252,
+        "n": 32
+      },
+      "decision_wall_p50": {
+        "max": 0.010293207,
+        "mean": 0.009317780562500001,
+        "min": 0.008773865,
+        "n": 32
+      },
+      "head_interruptions": {
+        "max": 17,
+        "mean": 7.59375,
+        "min": 0,
+        "n": 32
+      },
+      "joins": {
+        "activated_changed_motion_residence_charge": 91812,
+        "activated_changed_motion_windows_with_completions": 686,
+        "command_differs_G": 1100,
+        "executed_action_differs_G": 1100,
+        "motion_differs_at_observed_activation_position": 1076,
+        "n": 1920,
+        "neural_argmin_differs_G": 1100,
+        "terminal_unused": 32
+      },
+      "max_cluster_backlog": {
+        "max": 10,
+        "mean": 5.34375,
+        "min": 3,
+        "n": 32
+      },
+      "max_user_gap": {
+        "max": 1200,
+        "mean": 658.9375,
+        "min": 220,
+        "n": 32
+      },
+      "mean_user_gap": {
+        "max": 391.28,
+        "mean": 244.69875,
+        "min": 139.34,
+        "n": 32
+      },
+      "never_served_users": {
+        "max": 9,
+        "mean": 0.28125,
+        "min": 0,
+        "n": 32
+      },
+      "requests": {
+        "max": 70,
+        "mean": 57.75,
+        "min": 46,
+        "n": 32
+      },
+      "residence_max": {
+        "max": 1004.0,
+        "mean": 539.28125,
+        "min": 144.0,
+        "n": 32
+      },
+      "residence_p50": {
+        "max": 96.0,
+        "mean": 43.546875,
+        "min": 20.0,
+        "n": 32
+      },
+      "residence_p90": {
+        "max": 380.5,
+        "mean": 182.56250000000006,
+        "min": 62.0,
+        "n": 32
+      },
+      "routed_users_per_tick": {
+        "max": 35.68333333333333,
+        "mean": 31.684557291666668,
+        "min": 27.454166666666666,
+        "n": 32
+      },
+      "team_zero_service_ticks": {
+        "max": 35,
+        "mean": 3.84375,
+        "min": 0,
+        "n": 32
+      },
+      "terminal_charge": {
+        "max": 1680,
+        "mean": 255,
+        "min": 0,
+        "n": 32
+      },
+      "totals": {
+        "completed": 1814,
+        "deadline_misses": 0,
+        "max_unfinished_age": 1000.0,
+        "requests": 1848,
+        "unfinished": 34,
+        "worlds_with_unfinished": 12
+      },
+      "travel_per_uav_mean": {
+        "max": 17620.51616298152,
+        "mean": 12956.45589650262,
+        "min": 6477.984763263624,
+        "n": 32
+      },
+      "unfinished": {
+        "max": 7,
+        "mean": 1.0625,
+        "min": 0,
+        "n": 32
+      }
+    },
+    "L2": {
+      "C": {
+        "max": 10062,
+        "mean": 5089.46875,
+        "min": 2752,
+        "n": 32
+      },
+      "active_uav_target_changes": {
+        "max": 108,
+        "mean": 70.875,
+        "min": 28,
+        "n": 32
+      },
+      "area_cost": {
+        "max": 9643,
+        "mean": 4909.46875,
+        "min": 2752,
+        "n": 32
+      },
+      "completed": {
+        "max": 70,
+        "mean": 57,
+        "min": 46,
+        "n": 32
+      },
+      "decision_wall_max": {
+        "max": 0.976993681,
+        "mean": 0.0442823708125,
+        "min": 0.010548255,
+        "n": 32
+      },
+      "decision_wall_p50": {
+        "max": 0.010164276,
+        "mean": 0.00940662528125,
+        "min": 0.0088465655,
+        "n": 32
+      },
+      "head_interruptions": {
+        "max": 18,
+        "mean": 6.28125,
+        "min": 2,
+        "n": 32
+      },
+      "joins": {
+        "activated_changed_motion_residence_charge": 91188,
+        "activated_changed_motion_windows_with_completions": 719,
+        "command_differs_G": 1156,
+        "executed_action_differs_G": 1156,
+        "motion_differs_at_observed_activation_position": 1131,
+        "n": 1920,
+        "neural_argmin_differs_G": 1156,
+        "terminal_unused": 32
+      },
+      "max_cluster_backlog": {
+        "max": 13,
+        "mean": 5.8125,
+        "min": 2,
+        "n": 32
+      },
+      "max_user_gap": {
+        "max": 1023,
+        "mean": 592.875,
+        "min": 265,
+        "n": 32
+      },
+      "mean_user_gap": {
+        "max": 393.42,
+        "mean": 240.88875,
+        "min": 154.7,
+        "n": 32
+      },
+      "never_served_users": {
+        "max": 0,
+        "mean": 0,
+        "min": 0,
+        "n": 32
+      },
+      "requests": {
+        "max": 70,
+        "mean": 57.75,
+        "min": 46,
+        "n": 32
+      },
+      "residence_max": {
+        "max": 963.0,
+        "mean": 491.90625,
+        "min": 221.0,
+        "n": 32
+      },
+      "residence_p50": {
+        "max": 102.0,
+        "mean": 36.671875,
+        "min": 20.0,
+        "n": 32
+      },
+      "residence_p90": {
+        "max": 601.0,
+        "mean": 195.74062500000002,
+        "min": 75.60000000000011,
+        "n": 32
+      },
+      "routed_users_per_tick": {
+        "max": 36.321666666666665,
+        "mean": 31.722291666666667,
+        "min": 27.600833333333334,
+        "n": 32
+      },
+      "team_zero_service_ticks": {
+        "max": 35,
+        "mean": 3.84375,
+        "min": 0,
+        "n": 32
+      },
+      "terminal_charge": {
+        "max": 2160,
+        "mean": 180,
+        "min": 0,
+        "n": 32
+      },
+      "totals": {
+        "completed": 1824,
+        "deadline_misses": 0,
+        "max_unfinished_age": 700.0,
+        "requests": 1848,
+        "unfinished": 24,
+        "worlds_with_unfinished": 9
+      },
+      "travel_per_uav_mean": {
+        "max": 17425.66736816598,
+        "mean": 12647.351058914839,
+        "min": 6108.55167530604,
+        "n": 32
+      },
+      "unfinished": {
+        "max": 9,
+        "mean": 0.75,
+        "min": 0,
+        "n": 32
+      }
+    },
+    "R": {
+      "C": {
+        "max": 3741,
+        "mean": 2545.96875,
+        "min": 1712,
+        "n": 32
+      },
+      "active_uav_target_changes": {
+        "max": 50,
+        "mean": 27.1875,
+        "min": 12,
+        "n": 32
+      },
+      "area_cost": {
+        "max": 3741,
+        "mean": 2545.96875,
+        "min": 1712,
+        "n": 32
+      },
+      "completed": {
+        "max": 70,
+        "mean": 57.75,
+        "min": 46,
+        "n": 32
+      },
+      "decision_wall_max": {
+        "max": 7.005457968,
+        "mean": 4.767445953125,
+        "min": 4.018843474,
+        "n": 32
+      },
+      "decision_wall_p50": {
+        "max": 4.2236911125,
+        "mean": 3.929801771609375,
+        "min": 3.6971610415000002,
+        "n": 32
+      },
+      "head_interruptions": {
+        "max": 5,
+        "mean": 1.875,
+        "min": 0,
+        "n": 32
+      },
+      "max_cluster_backlog": {
+        "max": 7,
+        "mean": 3.9375,
+        "min": 2,
+        "n": 32
+      },
+      "max_user_gap": {
+        "max": 664,
+        "mean": 470.875,
+        "min": 258,
+        "n": 32
+      },
+      "mean_user_gap": {
+        "max": 234.88,
+        "mean": 181.326875,
+        "min": 144.58,
+        "n": 32
+      },
+      "never_served_users": {
+        "max": 0,
+        "mean": 0,
+        "min": 0,
+        "n": 32
+      },
+      "requests": {
+        "max": 70,
+        "mean": 57.75,
+        "min": 46,
+        "n": 32
+      },
+      "residence_max": {
+        "max": 482.0,
+        "mean": 231.8125,
+        "min": 115.0,
+        "n": 32
+      },
+      "residence_p50": {
+        "max": 52.0,
+        "mean": 22.609375,
+        "min": 20.0,
+        "n": 32
+      },
+      "residence_p90": {
+        "max": 141.0,
+        "mean": 97.81250000000001,
+        "min": 54.0,
+        "n": 32
+      },
+      "routed_users_per_tick": {
+        "max": 37.0575,
+        "mean": 35.18864583333333,
+        "min": 32.71333333333333,
+        "n": 32
+      },
+      "team_zero_service_ticks": {
+        "max": 35,
+        "mean": 3.84375,
+        "min": 0,
+        "n": 32
+      },
+      "terminal_charge": {
+        "max": 0,
+        "mean": 0,
+        "min": 0,
+        "n": 32
+      },
+      "totals": {
+        "completed": 1848,
+        "deadline_misses": 0,
+        "max_unfinished_age": 0,
+        "requests": 1848,
+        "unfinished": 0,
+        "worlds_with_unfinished": 0
+      },
+      "travel_per_uav_mean": {
+        "max": 10949.471168227252,
+        "mean": 7292.34881164994,
+        "min": 4303.102374656276,
+        "n": 32
+      },
+      "unfinished": {
+        "max": 0,
+        "mean": 0,
+        "min": 0,
+        "n": 32
+      }
+    }
+  },
+  "paired_contrasts": {
+    "L0-G": {
+      "C": {
+        "descriptive_t95_df31": [
+          2106.1013024081894,
+          3692.5236975918106
+        ],
+        "greater": 32,
+        "less": 0,
+        "max": 8264,
+        "mean": 2899.3125,
+        "min": 553,
+        "n": 32,
+        "same": 0,
+        "se": 388.9217788651143
+      },
+      "active_uav_target_changes": {
+        "descriptive_t95_df31": [
+          51.96878610914068,
+          71.15621389085932
+        ],
+        "greater": 32,
+        "less": 0,
+        "max": 100,
+        "mean": 61.5625,
+        "min": 2,
+        "n": 32,
+        "same": 0,
+        "se": 4.7039228438578515
+      },
+      "area_cost": {
+        "descriptive_t95_df31": [
+          1965.2651677715312,
+          3323.359832228469
+        ],
+        "greater": 32,
+        "less": 0,
+        "max": 6824,
+        "mean": 2644.3125,
+        "min": 439,
+        "n": 32,
+        "same": 0,
+        "se": 332.9457491090679
+      },
+      "completed": {
+        "descriptive_t95_df31": [
+          -1.7714817350835015,
+          -0.3535182649164985
+        ],
+        "greater": 0,
+        "less": 12,
+        "max": 0,
+        "mean": -1.0625,
+        "min": -7,
+        "n": 32,
+        "same": 20,
+        "se": 0.34762297661542413
+      },
+      "decision_wall_max": {
+        "descriptive_t95_df31": [
+          -0.030010367537000277,
+          0.08601325541200028
+        ],
+        "greater": 26,
+        "less": 6,
+        "max": 0.903517205,
+        "mean": 0.0280014439375,
+        "min": -0.09992111199999999,
+        "n": 32,
+        "same": 0,
+        "se": 0.02844394655843072
+      },
+      "decision_wall_p50": {
+        "descriptive_t95_df31": [
+          0.0005281437077282576,
+          0.0007559967297717424
+        ],
+        "greater": 32,
+        "less": 0,
+        "max": 0.0013868889999999988,
+        "mean": 0.00064207021875,
+        "min": 5.945000000000256e-06,
+        "n": 32,
+        "same": 0,
+        "se": 5.585965183168455e-05
+      },
+      "head_interruptions": {
+        "descriptive_t95_df31": [
+          4.464903603270403,
+          7.847596396729597
+        ],
+        "greater": 30,
+        "less": 1,
+        "max": 17,
+        "mean": 6.15625,
+        "min": -1,
+        "n": 32,
+        "same": 1,
+        "se": 0.8292891619410585
+      },
+      "max_cluster_backlog": {
+        "descriptive_t95_df31": [
+          1.0053055648270464,
+          2.0571944351729536
+        ],
+        "greater": 19,
+        "less": 0,
+        "max": 4,
+        "mean": 1.53125,
+        "min": 0,
+        "n": 32,
+        "same": 13,
+        "se": 0.2578774050753324
+      },
+      "max_user_gap": {
+        "descriptive_t95_df31": [
+          39.38473129542963,
+          182.61526870457038
+        ],
+        "greater": 22,
+        "less": 10,
+        "max": 538,
+        "mean": 111,
+        "min": -207,
+        "n": 32,
+        "same": 0,
+        "se": 35.11389877380144
+      },
+      "mean_user_gap": {
+        "descriptive_t95_df31": [
+          39.14687394568294,
+          80.98687605431705
+        ],
+        "greater": 28,
+        "less": 4,
+        "max": 255.56000000000003,
+        "mean": 60.066874999999996,
+        "min": -30.939999999999998,
+        "n": 32,
+        "same": 0,
+        "se": 10.257348923725095
+      },
+      "never_served_users": {
+        "descriptive_t95_df31": [
+          0.0,
+          0.0
+        ],
+        "greater": 0,
+        "less": 0,
+        "max": 0,
+        "mean": 0,
+        "min": 0,
+        "n": 32,
+        "same": 32,
+        "se": 0.0
+      },
+      "requests": {
+        "descriptive_t95_df31": [
+          0.0,
+          0.0
+        ],
+        "greater": 0,
+        "less": 0,
+        "max": 0,
+        "mean": 0,
+        "min": 0,
+        "n": 32,
+        "same": 32,
+        "se": 0.0
+      },
+      "residence_max": {
+        "descriptive_t95_df31": [
+          102.99448062673063,
+          274.25551937326935
+        ],
+        "greater": 25,
+        "less": 7,
+        "max": 681.0,
+        "mean": 188.625,
+        "min": -374.0,
+        "n": 32,
+        "same": 0,
+        "se": 41.98575867424111
+      },
+      "residence_p50": {
+        "descriptive_t95_df31": [
+          8.1688814267693,
+          28.5186185732307
+        ],
+        "greater": 17,
+        "less": 0,
+        "max": 102.0,
+        "mean": 18.34375,
+        "min": 0.0,
+        "n": 32,
+        "same": 15,
+        "se": 4.9888705520468895
+      },
+      "residence_p90": {
+        "descriptive_t95_df31": [
+          64.11361119226117,
+          141.06763880773886
+        ],
+        "greater": 30,
+        "less": 2,
+        "max": 356.0,
+        "mean": 102.59062500000002,
+        "min": -33.8,
+        "n": 32,
+        "same": 0,
+        "se": 18.86578089285139
+      },
+      "routed_users_per_tick": {
+        "descriptive_t95_df31": [
+          -5.921271585795955,
+          -4.283572164204045
+        ],
+        "greater": 0,
+        "less": 32,
+        "max": -0.7025000000000006,
+        "mean": -5.102421875,
+        "min": -11.779166666666665,
+        "n": 32,
+        "same": 0,
+        "se": 0.4014926757373289
+      },
+      "team_zero_service_ticks": {
+        "descriptive_t95_df31": [
+          0.0,
+          0.0
+        ],
+        "greater": 0,
+        "less": 0,
+        "max": 0,
+        "mean": 0,
+        "min": 0,
+        "n": 32,
+        "same": 32,
+        "se": 0.0
+      },
+      "terminal_charge": {
+        "descriptive_t95_df31": [
+          84.84438357995961,
+          425.15561642004036
+        ],
+        "greater": 12,
+        "less": 0,
+        "max": 1680,
+        "mean": 255,
+        "min": 0,
+        "n": 32,
+        "same": 20,
+        "se": 83.4295143877018
+      },
+      "travel_per_uav_mean": {
+        "descriptive_t95_df31": [
+          6855.31616276792,
+          9228.110469059642
+        ],
+        "greater": 32,
+        "less": 0,
+        "max": 16858.306139979653,
+        "mean": 8041.713315913781,
+        "min": 991.0768963997216,
+        "n": 32,
+        "same": 0,
+        "se": 581.7059726877956
+      },
+      "unfinished": {
+        "descriptive_t95_df31": [
+          0.3535182649164985,
+          1.7714817350835015
+        ],
+        "greater": 12,
+        "less": 0,
+        "max": 7,
+        "mean": 1.0625,
+        "min": 0,
+        "n": 32,
+        "same": 20,
+        "se": 0.34762297661542413
+      }
+    },
+    "L1-G": {
+      "C": {
+        "descriptive_t95_df31": [
+          2181.5880447505397,
+          3364.6619552494603
+        ],
+        "greater": 32,
+        "less": 0,
+        "max": 7052,
+        "mean": 2773.125,
+        "min": 673,
+        "n": 32,
+        "same": 0,
+        "se": 290.0382717724368
+      },
+      "active_uav_target_changes": {
+        "descriptive_t95_df31": [
+          54.098654115197235,
+          71.90134588480277
+        ],
+        "greater": 32,
+        "less": 0,
+        "max": 108,
+        "mean": 63,
+        "min": 16,
+        "n": 32,
+        "same": 0,
+        "se": 4.36444579491763
+      },
+      "area_cost": {
+        "descriptive_t95_df31": [
+          2025.7170758609218,
+          3010.532924139078
+        ],
+        "greater": 32,
+        "less": 0,
+        "max": 5612,
+        "mean": 2518.125,
+        "min": 614,
+        "n": 32,
+        "same": 0,
+        "se": 241.43401702455455
+      },
+      "completed": {
+        "descriptive_t95_df31": [
+          -1.7350601654194573,
+          -0.3899398345805427
+        ],
+        "greater": 0,
+        "less": 12,
+        "max": 0,
+        "mean": -1.0625,
+        "min": -7,
+        "n": 32,
+        "same": 20,
+        "se": 0.3297650067508973
+      },
+      "decision_wall_max": {
+        "descriptive_t95_df31": [
+          -0.027995180453229344,
+          0.08157053201572934
+        ],
+        "greater": 26,
+        "less": 6,
+        "max": 0.855071873,
+        "mean": 0.02678767578125,
+        "min": -0.07877952499999999,
+        "n": 32,
+        "same": 0,
+        "se": 0.026860747758870884
+      },
+      "decision_wall_p50": {
+        "descriptive_t95_df31": [
+          0.0005198663145672915,
+          0.0007524648416827084
+        ],
+        "greater": 32,
+        "less": 0,
+        "max": 0.0014396104999999989,
+        "mean": 0.000636165578125,
+        "min": 0.00012332999999999962,
+        "n": 32,
+        "same": 0,
+        "se": 5.7023043296525585e-05
+      },
+      "head_interruptions": {
+        "descriptive_t95_df31": [
+          4.970364915202694,
+          8.029635084797306
+        ],
+        "greater": 31,
+        "less": 1,
+        "max": 17,
+        "mean": 6.5,
+        "min": -2,
+        "n": 32,
+        "same": 0,
+        "se": 0.7499999999999999
+      },
+      "max_cluster_backlog": {
+        "descriptive_t95_df31": [
+          0.9521802337157267,
+          2.1103197662842734
+        ],
+        "greater": 24,
+        "less": 0,
+        "max": 7,
+        "mean": 1.53125,
+        "min": 0,
+        "n": 32,
+        "same": 8,
+        "se": 0.2839254466830924
+      },
+      "max_user_gap": {
+        "descriptive_t95_df31": [
+          21.55940814152744,
+          202.94059185847254
+        ],
+        "greater": 22,
+        "less": 10,
+        "max": 588,
+        "mean": 112.25,
+        "min": -487,
+        "n": 32,
+        "same": 0,
+        "se": 44.46677810274441
+      },
+      "mean_user_gap": {
+        "descriptive_t95_df31": [
+          30.607993093419353,
+          78.33700690658064
+        ],
+        "greater": 26,
+        "less": 6,
+        "max": 206.92000000000002,
+        "mean": 54.4725,
+        "min": -69.94,
+        "n": 32,
+        "same": 0,
+        "se": 11.701078484550598
+      },
+      "never_served_users": {
+        "descriptive_t95_df31": [
+          -0.2923631567989897,
+          0.8548631567989897
+        ],
+        "greater": 1,
+        "less": 0,
+        "max": 9,
+        "mean": 0.28125,
+        "min": 0,
+        "n": 32,
+        "same": 31,
+        "se": 0.28125
+      },
+      "requests": {
+        "descriptive_t95_df31": [
+          0.0,
+          0.0
+        ],
+        "greater": 0,
+        "less": 0,
+        "max": 0,
+        "mean": 0,
+        "min": 0,
+        "n": 32,
+        "same": 32,
+        "se": 0.0
+      },
+      "residence_max": {
+        "descriptive_t95_df31": [
+          116.35305145704027,
+          301.95944854295976
+        ],
+        "greater": 28,
+        "less": 4,
+        "max": 665.0,
+        "mean": 209.15625,
+        "min": -236.0,
+        "n": 32,
+        "same": 0,
+        "se": 45.502616669153426
+      },
+      "residence_p50": {
+        "descriptive_t95_df31": [
+          14.660540105839894,
+          32.02695989416011
+        ],
+        "greater": 21,
+        "less": 0,
+        "max": 71.0,
+        "mean": 23.34375,
+        "min": 0.0,
+        "n": 32,
+        "same": 11,
+        "se": 4.257490878279016
+      },
+      "residence_p90": {
+        "descriptive_t95_df31": [
+          55.775141074141445,
+          112.11860892585865
+        ],
+        "greater": 26,
+        "less": 4,
+        "max": 326.09999999999997,
+        "mean": 83.94687500000005,
+        "min": -11.0,
+        "n": 32,
+        "same": 2,
+        "se": 13.812967978041483
+      },
+      "routed_users_per_tick": {
+        "descriptive_t95_df31": [
+          -5.418990201001723,
+          -4.112363965664944
+        ],
+        "greater": 0,
+        "less": 32,
+        "max": -1.6225000000000023,
+        "mean": -4.765677083333333,
+        "min": -9.29,
+        "n": 32,
+        "same": 0,
+        "se": 0.32032792861587706
+      },
+      "team_zero_service_ticks": {
+        "descriptive_t95_df31": [
+          -0.12993918079955097,
+          0.37993918079955097
+        ],
+        "greater": 1,
+        "less": 0,
+        "max": 4,
+        "mean": 0.125,
+        "min": 0,
+        "n": 32,
+        "same": 31,
+        "se": 0.125
+      },
+      "terminal_charge": {
+        "descriptive_t95_df31": [
+          93.58556029933027,
+          416.41443970066973
+        ],
+        "greater": 12,
+        "less": 0,
+        "max": 1680,
+        "mean": 255,
+        "min": 0,
+        "n": 32,
+        "same": 20,
+        "se": 79.14360162021535
+      },
+      "travel_per_uav_mean": {
+        "descriptive_t95_df31": [
+          6932.3807316146585,
+          8902.551730547468
+        ],
+        "greater": 32,
+        "less": 0,
+        "max": 13444.52417836778,
+        "mean": 7917.466231081064,
+        "min": 2841.626490054719,
+        "n": 32,
+        "same": 0,
+        "se": 483.00024753793167
+      },
+      "unfinished": {
+        "descriptive_t95_df31": [
+          0.3899398345805427,
+          1.7350601654194573
+        ],
+        "greater": 12,
+        "less": 0,
+        "max": 7,
+        "mean": 1.0625,
+        "min": 0,
+        "n": 32,
+        "same": 20,
+        "se": 0.3297650067508973
+      }
+    },
+    "L2-G": {
+      "C": {
+        "descriptive_t95_df31": [
+          1976.7269154203045,
+          2991.0855845796955
+        ],
+        "greater": 32,
+        "less": 0,
+        "max": 6308,
+        "mean": 2483.90625,
+        "min": 891,
+        "n": 32,
+        "same": 0,
+        "se": 248.6766319073918
+      },
+      "active_uav_target_changes": {
+        "descriptive_t95_df31": [
+          50.40737252398198,
+          69.46762747601802
+        ],
+        "greater": 32,
+        "less": 0,
+        "max": 102,
+        "mean": 59.9375,
+        "min": 10,
+        "n": 32,
+        "same": 0,
+        "se": 4.672745596679785
+      },
+      "area_cost": {
+        "descriptive_t95_df31": [
+          1841.8368577811295,
+          2765.9756422188707
+        ],
+        "greater": 32,
+        "less": 0,
+        "max": 6308,
+        "mean": 2303.90625,
+        "min": 872,
+        "n": 32,
+        "same": 0,
+        "se": 226.55863977523438
+      },
+      "completed": {
+        "descriptive_t95_df31": [
+          -1.410370108069983,
+          -0.08962989193001691
+        ],
+        "greater": 0,
+        "less": 9,
+        "max": 0,
+        "mean": -0.75,
+        "min": -9,
+        "n": 32,
+        "same": 23,
+        "se": 0.32378806290136664
+      },
+      "decision_wall_max": {
+        "descriptive_t95_df31": [
+          -0.02948985522040436,
+          0.08148039403290436
+        ],
+        "greater": 24,
+        "less": 8,
+        "max": 0.8651988369999999,
+        "mean": 0.025995269406249997,
+        "min": -0.08193666599999999,
+        "n": 32,
+        "same": 0,
+        "se": 0.027205079096041446
+      },
+      "decision_wall_p50": {
+        "descriptive_t95_df31": [
+          0.0006453545906986722,
+          0.0008046660030513275
+        ],
+        "greater": 32,
+        "less": 0,
+        "max": 0.0011443250000000016,
+        "mean": 0.0007250102968749998,
+        "min": 0.00021149850000000067,
+        "n": 32,
+        "same": 0,
+        "se": 3.905622996360744e-05
+      },
+      "head_interruptions": {
+        "descriptive_t95_df31": [
+          3.512776097413323,
+          6.862223902586678
+        ],
+        "greater": 28,
+        "less": 0,
+        "max": 18,
+        "mean": 5.1875,
+        "min": 0,
+        "n": 32,
+        "same": 4,
+        "se": 0.8211389366153614
+      },
+      "max_cluster_backlog": {
+        "descriptive_t95_df31": [
+          1.3208478506852508,
+          2.679152149314749
+        ],
+        "greater": 25,
+        "less": 0,
+        "max": 8,
+        "mean": 2,
+        "min": 0,
+        "n": 32,
+        "same": 7,
+        "se": 0.3329971422913319
+      },
+      "max_user_gap": {
+        "descriptive_t95_df31": [
+          -35.074742014574156,
+          127.44974201457416
+        ],
+        "greater": 19,
+        "less": 12,
+        "max": 542,
+        "mean": 46.1875,
+        "min": -326,
+        "n": 32,
+        "same": 1,
+        "se": 39.84393540437571
+      },
+      "mean_user_gap": {
+        "descriptive_t95_df31": [
+          29.602604770039132,
+          71.72239522996085
+        ],
+        "greater": 27,
+        "less": 5,
+        "max": 181.88000000000002,
+        "mean": 50.662499999999994,
+        "min": -61.900000000000006,
+        "n": 32,
+        "same": 0,
+        "se": 10.3259408596552
+      },
+      "never_served_users": {
+        "descriptive_t95_df31": [
+          0.0,
+          0.0
+        ],
+        "greater": 0,
+        "less": 0,
+        "max": 0,
+        "mean": 0,
+        "min": 0,
+        "n": 32,
+        "same": 32,
+        "se": 0.0
+      },
+      "requests": {
+        "descriptive_t95_df31": [
+          0.0,
+          0.0
+        ],
+        "greater": 0,
+        "less": 0,
+        "max": 0,
+        "mean": 0,
+        "min": 0,
+        "n": 32,
+        "same": 32,
+        "se": 0.0
+      },
+      "residence_max": {
+        "descriptive_t95_df31": [
+          78.61319053698344,
+          244.94930946301656
+        ],
+        "greater": 24,
+        "less": 8,
+        "max": 680.0,
+        "mean": 161.78125,
+        "min": -309.0,
+        "n": 32,
+        "same": 0,
+        "se": 40.7783825156756
+      },
+      "residence_p50": {
+        "descriptive_t95_df31": [
+          9.477809449157029,
+          23.45969055084297
+        ],
+        "greater": 21,
+        "less": 0,
+        "max": 82.0,
+        "mean": 16.46875,
+        "min": 0.0,
+        "n": 32,
+        "same": 11,
+        "se": 3.427749183608072
+      },
+      "residence_p90": {
+        "descriptive_t95_df31": [
+          54.86477778746147,
+          139.38522221253857
+        ],
+        "greater": 29,
+        "less": 3,
+        "max": 462.4,
+        "mean": 97.12500000000001,
+        "min": -41.89999999999999,
+        "n": 32,
+        "same": 0,
+        "se": 20.720737236230352
+      },
+      "routed_users_per_tick": {
+        "descriptive_t95_df31": [
+          -5.657282725226321,
+          -3.7986026914403466
+        ],
+        "greater": 2,
+        "less": 30,
+        "max": 0.8091666666666697,
+        "mean": -4.727942708333334,
+        "min": -9.704999999999998,
+        "n": 32,
+        "same": 0,
+        "se": 0.4556675115503783
+      },
+      "team_zero_service_ticks": {
+        "descriptive_t95_df31": [
+          -0.12993918079955097,
+          0.37993918079955097
+        ],
+        "greater": 1,
+        "less": 0,
+        "max": 4,
+        "mean": 0.125,
+        "min": 0,
+        "n": 32,
+        "same": 31,
+        "se": 0.125
+      },
+      "terminal_charge": {
+        "descriptive_t95_df31": [
+          21.511174063204038,
+          338.48882593679593
+        ],
+        "greater": 9,
+        "less": 0,
+        "max": 2160,
+        "mean": 180,
+        "min": 0,
+        "n": 32,
+        "same": 23,
+        "se": 77.709135096328
+      },
+      "travel_per_uav_mean": {
+        "descriptive_t95_df31": [
+          6208.451743558009,
+          9008.271043428555
+        ],
+        "greater": 30,
+        "less": 2,
+        "max": 14185.0658303694,
+        "mean": 7608.361393493282,
+        "min": -734.6315983791201,
+        "n": 32,
+        "same": 0,
+        "se": 686.3939300860002
+      },
+      "unfinished": {
+        "descriptive_t95_df31": [
+          0.08962989193001691,
+          1.410370108069983
+        ],
+        "greater": 9,
+        "less": 0,
+        "max": 9,
+        "mean": 0.75,
+        "min": 0,
+        "n": 32,
+        "same": 23,
+        "se": 0.32378806290136664
+      }
+    },
+    "R-G": {
+      "C": {
+        "descriptive_t95_df31": [
+          -225.37282457873224,
+          106.18532457873224
+        ],
+        "greater": 15,
+        "less": 17,
+        "max": 743,
+        "mean": -59.59375,
+        "min": -1119,
+        "n": 32,
+        "same": 0,
+        "se": 81.28363893439649
+      },
+      "active_uav_target_changes": {
+        "descriptive_t95_df31": [
+          12.615656152700566,
+          19.884343847299434
+        ],
+        "greater": 30,
+        "less": 2,
+        "max": 42,
+        "mean": 16.25,
+        "min": -2,
+        "n": 32,
+        "same": 0,
+        "se": 1.7819661124180928
+      },
+      "area_cost": {
+        "descriptive_t95_df31": [
+          -225.37282457873224,
+          106.18532457873224
+        ],
+        "greater": 15,
+        "less": 17,
+        "max": 743,
+        "mean": -59.59375,
+        "min": -1119,
+        "n": 32,
+        "same": 0,
+        "se": 81.28363893439649
+      },
+      "completed": {
+        "descriptive_t95_df31": [
+          0.0,
+          0.0
+        ],
+        "greater": 0,
+        "less": 0,
+        "max": 0,
+        "mean": 0,
+        "min": 0,
+        "n": 32,
+        "same": 32,
+        "se": 0.0
+      },
+      "decision_wall_max": {
+        "descriptive_t95_df31": [
+          4.477930986734987,
+          5.020386716702514
+        ],
+        "greater": 32,
+        "less": 0,
+        "max": 6.994786332,
+        "mean": 4.74915885171875,
+        "min": 4.007949665,
+        "n": 32,
+        "same": 0,
+        "se": 0.13298655395628434
+      },
+      "decision_wall_p50": {
+        "descriptive_t95_df31": [
+          3.8642779755062455,
+          3.977962337743754
+        ],
+        "greater": 32,
+        "less": 0,
+        "max": 4.2146486995,
+        "mean": 3.921120156625,
+        "min": 3.688632606,
+        "n": 32,
+        "same": 0,
+        "se": 0.027870461564834567
+      },
+      "head_interruptions": {
+        "descriptive_t95_df31": [
+          0.038774711623233094,
+          1.523725288376767
+        ],
+        "greater": 18,
+        "less": 5,
+        "max": 4,
+        "mean": 0.78125,
+        "min": -6,
+        "n": 32,
+        "same": 9,
+        "se": 0.36404530192661283
+      },
+      "max_cluster_backlog": {
+        "descriptive_t95_df31": [
+          -0.14588799653898826,
+          0.39588799653898826
+        ],
+        "greater": 7,
+        "less": 5,
+        "max": 2,
+        "mean": 0.125,
+        "min": -1,
+        "n": 32,
+        "same": 20,
+        "se": 0.13281991203226293
+      },
+      "max_user_gap": {
+        "descriptive_t95_df31": [
+          -117.93730058545066,
+          -33.68769941454935
+        ],
+        "greater": 8,
+        "less": 23,
+        "max": 100,
+        "mean": -75.8125,
+        "min": -382,
+        "n": 32,
+        "same": 1,
+        "se": 20.654338249095865
+      },
+      "mean_user_gap": {
+        "descriptive_t95_df31": [
+          -21.505503279533535,
+          3.7067532795335385
+        ],
+        "greater": 14,
+        "less": 18,
+        "max": 45.70000000000002,
+        "mean": -8.899375,
+        "min": -89.92000000000002,
+        "n": 32,
+        "same": 0,
+        "se": 6.1809488443467515
+      },
+      "never_served_users": {
+        "descriptive_t95_df31": [
+          0.0,
+          0.0
+        ],
+        "greater": 0,
+        "less": 0,
+        "max": 0,
+        "mean": 0,
+        "min": 0,
+        "n": 32,
+        "same": 32,
+        "se": 0.0
+      },
+      "requests": {
+        "descriptive_t95_df31": [
+          0.0,
+          0.0
+        ],
+        "greater": 0,
+        "less": 0,
+        "max": 0,
+        "mean": 0,
+        "min": 0,
+        "n": 32,
+        "same": 32,
+        "se": 0.0
+      },
+      "residence_max": {
+        "descriptive_t95_df31": [
+          -143.8575515776966,
+          -52.76744842230341
+        ],
+        "greater": 6,
+        "less": 25,
+        "max": 139.0,
+        "mean": -98.3125,
+        "min": -385.0,
+        "n": 32,
+        "same": 1,
+        "se": 22.331331846901822
+      },
+      "residence_p50": {
+        "descriptive_t95_df31": [
+          -0.08677646167153785,
+          4.899276461671538
+        ],
+        "greater": 7,
+        "less": 1,
+        "max": 32.0,
+        "mean": 2.40625,
+        "min": -5.0,
+        "n": 32,
+        "same": 24,
+        "se": 1.2223633367440832
+      },
+      "residence_p90": {
+        "descriptive_t95_df31": [
+          -10.753617353025371,
+          9.147367353025379
+        ],
+        "greater": 11,
+        "less": 18,
+        "max": 63.20000000000013,
+        "mean": -0.8031249999999961,
+        "min": -64.20000000000002,
+        "n": 32,
+        "same": 3,
+        "se": 4.8788559695974465
+      },
+      "routed_users_per_tick": {
+        "descriptive_t95_df31": [
+          -1.5940261484166847,
+          -0.9291509349166494
+        ],
+        "greater": 3,
+        "less": 29,
+        "max": 0.8350000000000009,
+        "mean": -1.261588541666667,
+        "min": -3.3116666666666674,
+        "n": 32,
+        "same": 0,
+        "se": 0.16299848737815276
+      },
+      "team_zero_service_ticks": {
+        "descriptive_t95_df31": [
+          -0.12993918079955097,
+          0.37993918079955097
+        ],
+        "greater": 1,
+        "less": 0,
+        "max": 4,
+        "mean": 0.125,
+        "min": 0,
+        "n": 32,
+        "same": 31,
+        "se": 0.125
+      },
+      "terminal_charge": {
+        "descriptive_t95_df31": [
+          0.0,
+          0.0
+        ],
+        "greater": 0,
+        "less": 0,
+        "max": 0,
+        "mean": 0,
+        "min": 0,
+        "n": 32,
+        "same": 32,
+        "se": 0.0
+      },
+      "travel_per_uav_mean": {
+        "descriptive_t95_df31": [
+          1704.4432998795576,
+          2802.2749925772077
+        ],
+        "greater": 29,
+        "less": 3,
+        "max": 5748.177620313055,
+        "mean": 2253.3591462283825,
+        "min": -1163.102050743627,
+        "n": 32,
+        "same": 0,
+        "se": 269.1405870937982
+      },
+      "unfinished": {
+        "descriptive_t95_df31": [
+          0.0,
+          0.0
+        ],
+        "greater": 0,
+        "less": 0,
+        "max": 0,
+        "mean": 0,
+        "min": 0,
+        "n": 32,
+        "same": 32,
+        "se": 0.0
+      }
+    }
+  },
+  "schema": 1,
+  "scope": "Arithmetic over complete saved reader checks only; no native/RF/G/neural/optimizer execution. Post-result descriptive diagnostics; all original fixed contrasts retained. Per-episode quantiles are aggregated as episode summaries, not pooled request quantiles. Training blocks visit different worlds under changing policies with epsilon .1, so do not estimate fixed-policy learning curves.",
+  "training_blocks": [
+    {
+      "blocks_64_episodes": [
+        {
+          "C": {
+            "max": 7164,
+            "mean": 3718.8125,
+            "min": 1836,
+            "n": 64
+          },
+          "episode_mean_loss": {
+            "max": 0.029965992487151302,
+            "mean": 0.016436735865617284,
+            "min": 0.01175920191585094,
+            "n": 60
+          },
+          "start": 0,
+          "stop_exclusive": 64,
+          "updates": 3584
+        },
+        {
+          "C": {
+            "max": 8936,
+            "mean": 4142.078125,
+            "min": 1858,
+            "n": 64
+          },
+          "episode_mean_loss": {
+            "max": 0.045560836898932186,
+            "mean": 0.03145578123136007,
+            "min": 0.02045329789693195,
+            "n": 64
+          },
+          "start": 64,
+          "stop_exclusive": 128,
+          "updates": 3840
+        },
+        {
+          "C": {
+            "max": 7500,
+            "mean": 4493.46875,
+            "min": 2294,
+            "n": 64
+          },
+          "episode_mean_loss": {
+            "max": 0.06808294110661263,
+            "mean": 0.05055454926790987,
+            "min": 0.03507035661336954,
+            "n": 64
+          },
+          "start": 128,
+          "stop_exclusive": 192,
+          "updates": 3840
+        },
+        {
+          "C": {
+            "max": 12446,
+            "mean": 4827.78125,
+            "min": 2199,
+            "n": 64
+          },
+          "episode_mean_loss": {
+            "max": 0.10076172078476857,
+            "mean": 0.07961612419256062,
+            "min": 0.054757461353221175,
+            "n": 64
+          },
+          "start": 192,
+          "stop_exclusive": 256,
+          "updates": 3840
+        },
+        {
+          "C": {
+            "max": 9777,
+            "mean": 4860.265625,
+            "min": 1305,
+            "n": 64
+          },
+          "episode_mean_loss": {
+            "max": 0.13286298627522486,
+            "mean": 0.1076556220360597,
+            "min": 0.0871620741783636,
+            "n": 64
+          },
+          "start": 256,
+          "stop_exclusive": 320,
+          "updates": 3840
+        },
+        {
+          "C": {
+            "max": 12728,
+            "mean": 5470.703125,
+            "min": 2436,
+            "n": 64
+          },
+          "episode_mean_loss": {
+            "max": 0.1732584664968682,
+            "mean": 0.14209316515682302,
+            "min": 0.11524951087270696,
+            "n": 64
+          },
+          "start": 320,
+          "stop_exclusive": 384,
+          "updates": 3840
+        },
+        {
+          "C": {
+            "max": 9670,
+            "mean": 5331.640625,
+            "min": 2043,
+            "n": 64
+          },
+          "episode_mean_loss": {
+            "max": 0.17942869706470316,
+            "mean": 0.15901265804466763,
+            "min": 0.13818733032611344,
+            "n": 64
+          },
+          "start": 384,
+          "stop_exclusive": 448,
+          "updates": 3840
+        },
+        {
+          "C": {
+            "max": 11587,
+            "mean": 5379.421875,
+            "min": 2576,
+            "n": 64
+          },
+          "episode_mean_loss": {
+            "max": 0.2019123761672484,
+            "mean": 0.16969890135525115,
+            "min": 0.14179992801219177,
+            "n": 64
+          },
+          "start": 448,
+          "stop_exclusive": 512,
+          "updates": 3840
+        }
+      ],
+      "fit": 0,
+      "maximum_gradient_norm_after": 9.999998092651367,
+      "maximum_gradient_norm_before": 10.613204002380371,
+      "maximum_reported_cap_excess": 0
+    },
+    {
+      "blocks_64_episodes": [
+        {
+          "C": {
+            "max": 8108,
+            "mean": 3494.453125,
+            "min": 1235,
+            "n": 64
+          },
+          "episode_mean_loss": {
+            "max": 0.024824307280035218,
+            "mean": 0.011754539888349291,
+            "min": 0.008430191703983545,
+            "n": 60
+          },
+          "start": 0,
+          "stop_exclusive": 64,
+          "updates": 3584
+        },
+        {
+          "C": {
+            "max": 9038,
+            "mean": 4038.390625,
+            "min": 2075,
+            "n": 64
+          },
+          "episode_mean_loss": {
+            "max": 0.02510712118479353,
+            "mean": 0.01642460275124432,
+            "min": 0.010847385654022273,
+            "n": 64
+          },
+          "start": 64,
+          "stop_exclusive": 128,
+          "updates": 3840
+        },
+        {
+          "C": {
+            "max": 8976,
+            "mean": 4089.296875,
+            "min": 1952,
+            "n": 64
+          },
+          "episode_mean_loss": {
+            "max": 0.03127290114650751,
+            "mean": 0.025979134397168435,
+            "min": 0.02103455580073814,
+            "n": 64
+          },
+          "start": 128,
+          "stop_exclusive": 192,
+          "updates": 3840
+        },
+        {
+          "C": {
+            "max": 8373,
+            "mean": 4138.8125,
+            "min": 2046,
+            "n": 64
+          },
+          "episode_mean_loss": {
+            "max": 0.04158133870438783,
+            "mean": 0.0350447034877134,
+            "min": 0.027079163380967823,
+            "n": 64
+          },
+          "start": 192,
+          "stop_exclusive": 256,
+          "updates": 3840
+        },
+        {
+          "C": {
+            "max": 8016,
+            "mean": 4539.421875,
+            "min": 2021,
+            "n": 64
+          },
+          "episode_mean_loss": {
+            "max": 0.04529538325936436,
+            "mean": 0.03782918032335602,
+            "min": 0.031566811618161744,
+            "n": 64
+          },
+          "start": 256,
+          "stop_exclusive": 320,
+          "updates": 3840
+        },
+        {
+          "C": {
+            "max": 16804,
+            "mean": 5162.109375,
+            "min": 1592,
+            "n": 64
+          },
+          "episode_mean_loss": {
+            "max": 0.04903307838883713,
+            "mean": 0.0409764468736047,
+            "min": 0.03416278515297718,
+            "n": 64
+          },
+          "start": 320,
+          "stop_exclusive": 384,
+          "updates": 3840
+        },
+        {
+          "C": {
+            "max": 19088,
+            "mean": 6028.375,
+            "min": 1835,
+            "n": 64
+          },
+          "episode_mean_loss": {
+            "max": 0.07490343128376145,
+            "mean": 0.058244824429701046,
+            "min": 0.0430269216403106,
+            "n": 64
+          },
+          "start": 384,
+          "stop_exclusive": 448,
+          "updates": 3840
+        },
+        {
+          "C": {
+            "max": 11652,
+            "mean": 5347.140625,
+            "min": 2214,
+            "n": 64
+          },
+          "episode_mean_loss": {
+            "max": 0.08273495878514965,
+            "mean": 0.07010741644967865,
+            "min": 0.05827832182943336,
+            "n": 64
+          },
+          "start": 448,
+          "stop_exclusive": 512,
+          "updates": 3840
+        }
+      ],
+      "fit": 1,
+      "maximum_gradient_norm_after": 5.334775447845459,
+      "maximum_gradient_norm_before": 5.334778308868408,
+      "maximum_reported_cap_excess": 0
+    },
+    {
+      "blocks_64_episodes": [
+        {
+          "C": {
+            "max": 7355,
+            "mean": 3517.703125,
+            "min": 1662,
+            "n": 64
+          },
+          "episode_mean_loss": {
+            "max": 0.023012587538967007,
+            "mean": 0.013664703959629878,
+            "min": 0.008733839745235223,
+            "n": 60
+          },
+          "start": 0,
+          "stop_exclusive": 64,
+          "updates": 3584
+        },
+        {
+          "C": {
+            "max": 8504,
+            "mean": 3916.96875,
+            "min": 1695,
+            "n": 64
+          },
+          "episode_mean_loss": {
+            "max": 0.02461821162727113,
+            "mean": 0.019037508861113914,
+            "min": 0.01424594984102336,
+            "n": 64
+          },
+          "start": 64,
+          "stop_exclusive": 128,
+          "updates": 3840
+        },
+        {
+          "C": {
+            "max": 10592,
+            "mean": 4736.09375,
+            "min": 1515,
+            "n": 64
+          },
+          "episode_mean_loss": {
+            "max": 0.0288847292082335,
+            "mean": 0.02408983034015389,
+            "min": 0.02072468400147865,
+            "n": 64
+          },
+          "start": 128,
+          "stop_exclusive": 192,
+          "updates": 3840
+        },
+        {
+          "C": {
+            "max": 10469,
+            "mean": 4425,
+            "min": 2390,
+            "n": 64
+          },
+          "episode_mean_loss": {
+            "max": 0.034110250391546054,
+            "mean": 0.027329397116372386,
+            "min": 0.023875935839116416,
+            "n": 64
+          },
+          "start": 192,
+          "stop_exclusive": 256,
+          "updates": 3840
+        },
+        {
+          "C": {
+            "max": 11719,
+            "mean": 4461.75,
+            "min": 1657,
+            "n": 64
+          },
+          "episode_mean_loss": {
+            "max": 0.028232408547792034,
+            "mean": 0.02347417083328357,
+            "min": 0.018473599828159413,
+            "n": 64
+          },
+          "start": 256,
+          "stop_exclusive": 320,
+          "updates": 3840
+        },
+        {
+          "C": {
+            "max": 14254,
+            "mean": 6026.703125,
+            "min": 2119,
+            "n": 64
+          },
+          "episode_mean_loss": {
+            "max": 0.02530356920196193,
+            "mean": 0.02127922898901565,
+            "min": 0.018219970366176803,
+            "n": 64
+          },
+          "start": 320,
+          "stop_exclusive": 384,
+          "updates": 3840
+        },
+        {
+          "C": {
+            "max": 9466,
+            "mean": 4747.875,
+            "min": 1556,
+            "n": 64
+          },
+          "episode_mean_loss": {
+            "max": 0.023725666045143635,
+            "mean": 0.020384669945488314,
+            "min": 0.0175745195312263,
+            "n": 64
+          },
+          "start": 384,
+          "stop_exclusive": 448,
+          "updates": 3840
+        },
+        {
+          "C": {
+            "max": 10355,
+            "mean": 4865.484375,
+            "min": 1655,
+            "n": 64
+          },
+          "episode_mean_loss": {
+            "max": 0.019512624476438954,
+            "mean": 0.0159994861012424,
+            "min": 0.01329513035539295,
+            "n": 64
+          },
+          "start": 448,
+          "stop_exclusive": 512,
+          "updates": 3840
+        }
+      ],
+      "fit": 2,
+      "maximum_gradient_norm_after": 3.447052478790283,
+      "maximum_gradient_norm_before": 3.4470553398132324,
+      "maximum_reported_cap_excess": 0
+    }
+  ]
+}

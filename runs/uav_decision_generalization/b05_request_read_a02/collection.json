@@ -1,0 +1,181 @@
+{
+  "cost": {
+    "cpu_seconds": 0.141574234,
+    "scope": "all1708 check hash verification, worker input byte verification, compact reduction and saved reader hash inventory; no model/physics/G/optimizer execution",
+    "wall_seconds": 0.14510053500998765
+  },
+  "final_cleanup_net": {
+    "after_allocated_bytes": {
+      "owned_temp_directory": 0,
+      "reader_canonical_output": 16240640,
+      "reader_source_snapshot": 0,
+      "worker_canonical_output": 396664832
+    },
+    "before_allocated_bytes": {
+      "owned_temp_directory": 20480,
+      "reader_canonical_output": 16236544,
+      "reader_source_snapshot": 1834201088,
+      "worker_canonical_output": 397172736
+    },
+    "compact_record_net_growth_bytes": 8192,
+    "concrete_tool_blocker": null,
+    "deleted_target_bytes": 1834733568,
+    "earlier_two_source_snapshot_reclamations_reported_separately": 3664814080,
+    "measurement_note": "An initial support assertion detected that writing this cleanup accounting crossed another4096-byte allocation block. The final measured output footprint and net reclamation include that growth; no scientific file or outcome changed. That support attempt is unmetered and nonzero.",
+    "net_allocated_bytes_reclaimed": 1834725376,
+    "remaining_disposable_targets": [],
+    "retained_necessary_evidence": "All5530 immutable worker scientific files and all1708 reader checks, required initial/final/training states, native/failed records and source-bound executable reconstruction; one configured-node canonical copy. No whole-tree archive or backup.",
+    "scope": "A02 source snapshot plus canonical worker/reader output trees and owned temp directory. Worker before is the previously measured terminal canonical allocation, unchanged until this cleanup; reader before measured immediately before A02 source GC. Counts include directory allocation and the new compact collection-record growth. Other writers and Git object storage excluded."
+  },
+  "full_check_identities": "diagnostics.json input_checks contains every1708 canonical independent reconstruction output identity",
+  "identities": {
+    "config.json": {
+      "bytes": 27497,
+      "path": "config.json",
+      "sha256": "c3f2cacaf5cf7fc43d932c4a45a5cd67235b1e556bfafa3987fc4e05cf32afa7"
+    },
+    "diagnostics-summary.json": {
+      "bytes": 51934,
+      "path": "diagnostics-summary.json",
+      "sha256": "7bb2d07fe0dc066124d9082f5c200784cf5a5bf9e7931bd25441051129abc7f4"
+    },
+    "diagnostics.json": {
+      "bytes": 1207441,
+      "path": "diagnostics.json",
+      "sha256": "31d9739a3ab16a36e6db8c0669e4065f58ac821e3c91b8c685a13ebf513d52da"
+    },
+    "reading.json": {
+      "bytes": 17577,
+      "path": "reading.json",
+      "sha256": "280721562020d7c85f228d5a2354a0200a97351a29e31c90e6c6360fad53d0d4"
+    },
+    "summary.json": {
+      "bytes": 17576,
+      "path": "summary.json",
+      "sha256": "8a0a24d9ec71fcfbd892e46729b61e98585a2fbba57ca0a5a4456610f9776612"
+    },
+    "training-curves.json": {
+      "bytes": 387198,
+      "path": "training-curves.json",
+      "sha256": "8ab117253327e76c1b3e37e46c5446d97c5b18571dfaf37b913f2e52e977d63a"
+    }
+  },
+  "known_cumulative_cpu_before_independent_result_review": 19345.593920516996,
+  "known_cumulative_cpu_scope": "Reader-final known ledger plus separately measured DM schema reads, diagnostic reduction, collection and cleanup; independent reviewer, remaining static/support/publication and final write tails additional and not zero.",
+  "native_exit_code": 0,
+  "node": "local_linux",
+  "observer_terminal": {
+    "generation": 18,
+    "pending_event_count": 0,
+    "stopped": true,
+    "wake_pending": false
+  },
+  "reader_root": "/home/fires/hmasd-wsl/runs/uav_decision_generalization/b05_request_read_a02",
+  "reader_source_cleanup": {
+    "allocated_target_after": 0,
+    "allocated_target_before": 1834201088,
+    "cost": {
+      "cpu_seconds": 1.359717597,
+      "wall_seconds": 1.3818336899857968
+    },
+    "deleted_target": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/2d1c05fb36de4ed78104c1f41ae5ca1b",
+    "method": "supported exact-target hmasd_snapshot_gc with sudo read-only process scan; preview eligible and apply revalidated",
+    "net_allocated_bytes_reclaimed": 1834201088,
+    "reader_output_after": 16236544,
+    "reader_output_before": 16236544,
+    "result": {
+      "mode": "apply",
+      "snapshots": [
+        {
+          "claim": "/home/fires/hmasd-wsl/.git/hmasd-admission/62693e8e31c897c3a62a2b3dff30bb10f1f708b189f46bc40d402cc6c9e98694.json",
+          "durable_ref": "refs/heads/main",
+          "eligible": true,
+          "output": "/home/fires/hmasd-wsl/runs/uav_decision_generalization/b05_request_read_a02",
+          "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/2d1c05fb36de4ed78104c1f41ae5ca1b",
+          "removed": true,
+          "sha": "195fc8f44d5a375081e8b851a67671bbe9aafb1a",
+          "snapshot": "2d1c05fb36de4ed78104c1f41ae5ca1b"
+        }
+      ]
+    }
+  },
+  "retention": "One canonical output on configured local_linux authoring main; no raw copied. All original native, numerical check, training curve and adverse records retained.",
+  "schema": 1,
+  "scientific_source_identity": "7eeaaf614fd8d88023f0baba2ca2aa04804b893acb1ecfec52158e9d0e762210",
+  "scratch_cleanup": {
+    "consumer_check": "Worker final summary has no live children; all11 endpoint close/count records mirrored in immutable scientific manifest and checked by full reader; both native operations terminal and session observer stopped generation18. Removed scratch buffers and progress/request files are outside all5530 required worker scientific files. Reviewer retains canonical source, raw and checks.",
+    "cost": {
+      "cpu_seconds": 0.121886494,
+      "wall_seconds": 0.14383666700450704
+    },
+    "deleted_targets": [
+      {
+        "allocated_bytes_after": 0,
+        "allocated_bytes_before": 184320,
+        "path": "/home/fires/hmasd-wsl/runs/uav_decision_generalization/b05_request_a01/scratch"
+      },
+      {
+        "allocated_bytes_after": 0,
+        "allocated_bytes_before": 323584,
+        "path": "/home/fires/hmasd-wsl/runs/uav_decision_generalization/b05_request_a01/progress.json"
+      },
+      {
+        "allocated_bytes_after": 0,
+        "allocated_bytes_before": 4096,
+        "path": "/home/fires/hmasd-wsl/runs/uav_decision_generalization/b05_request_read_a02/progress.json"
+      },
+      {
+        "allocated_bytes_after": 0,
+        "allocated_bytes_before": 4096,
+        "path": "/home/fires/hmasd-wsl/temp/directions/uav_decision_generalization/b05-reader-a02-launch-request.json"
+      },
+      {
+        "allocated_bytes_after": 0,
+        "allocated_bytes_before": 4096,
+        "path": "/home/fires/hmasd-wsl/temp/directions/uav_decision_generalization/b05-reader-observer-request.json"
+      },
+      {
+        "allocated_bytes_after": 0,
+        "allocated_bytes_before": 4096,
+        "path": "/home/fires/hmasd-wsl/temp/directions/uav_decision_generalization/b05-reader-a02-observer-request.json"
+      },
+      {
+        "allocated_bytes_after": 0,
+        "allocated_bytes_before": 4096,
+        "path": "/home/fires/hmasd-wsl/temp/directions/uav_decision_generalization/b05-worker-observer-request.json"
+      }
+    ],
+    "empty_parent_removal_cpu_seconds": 0.0009412349999999986,
+    "empty_parent_removal_wall_seconds": 0.00149689702084288,
+    "removed_empty_owned_parent": {
+      "allocated_bytes_after": 0,
+      "allocated_bytes_before": 4096,
+      "path": "/home/fires/hmasd-wsl/temp/directions/uav_decision_generalization"
+    },
+    "target_allocated_bytes_reclaimed": 532480,
+    "unique_scientific_files_missing_after": 0
+  },
+  "sorted_path_NUL_bytes_NUL_sha256_LF_inventory_digest": "9f83fbca534b9b09fe99f7bd2b5f8a8cdab2ba2011069cda7e0a490bfabfec66",
+  "source_sha": "195fc8f44d5a375081e8b851a67671bbe9aafb1a",
+  "status": "COMPLETE",
+  "verified_reader_scientific_bytes": 15641765,
+  "verified_reader_scientific_files": 1714,
+  "worker_input_identities": {
+    "config_identity": {
+      "bytes": 27297,
+      "path": "/home/fires/hmasd-wsl/runs/uav_decision_generalization/b05_request_a01/config.json",
+      "sha256": "e675836d1775dcbb414395109ca062b8a3bb8341d196a39eab80f87db643e668"
+    },
+    "manifest_identity": {
+      "bytes": 1630663,
+      "path": "/home/fires/hmasd-wsl/runs/uav_decision_generalization/b05_request_a01/manifest.json",
+      "sha256": "3c3c7c84af0c0b55a4669e71bbad361d5b4e391e26bd237ee59a3f2aea639026"
+    },
+    "summary_identity": {
+      "bytes": 22896,
+      "path": "/home/fires/hmasd-wsl/runs/uav_decision_generalization/b05_request_a01/summary.json",
+      "sha256": "d06794e1287e7fca7fd815ec77a4a1e17f6a133f87c42f023ccf50ca42605edd"
+    }
+  },
+  "worker_root": "/home/fires/hmasd-wsl/runs/uav_decision_generalization/b05_request_a01"
+}

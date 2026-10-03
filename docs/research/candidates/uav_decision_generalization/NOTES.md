@@ -7158,3 +7158,440 @@ allocated reclamation is1,834,164,224 bytes. The40,960-byte allocated failure
 output remains unchanged in size, including original argv, exit and stderr.
 Worker and failed-reader source deletions now total3,664,814,080 allocated
 bytes reclaimed, without a backup/copy or evidence deletion.
+
+**Corrected reader accepted,2026-10-03 UTC.** Failure evidence, Root's complete
+disposition, the new ledger and current standing were published at
+`195fc8f44d5a375081e8b851a67671bbe9aafb1a`. The request argument list was
+constructed from Git-published bytes, compared to canonical bytes and all61
+original source digests, and its study digest matched the completed worker's
+bound config. No digest was manually retyped into that launch. The fresh
+request `b05_request_read_a02` was accepted at04:29:24Z; its
+[native manifest](../../../../runs/uav_decision_generalization/b05_request_read_a02/launch-manifest.json)
+is the authoritative command, source, node, output and process identity.
+The same session observer adopted job `b05_request_read_a02` as generation14
+after closing the prior observer, with the existing60s/1500s cadence/window.
+The first drain showed consistent accepted/running identities, empty stderr
+and32 completed training-record reconstructions. The DM remains active through
+same-handle deterministic observation. This is actual reader execution,
+not completed reading or a scientific result; the new first-failure boundary
+continues to apply.
+
+<a id="b05-complete-reading"></a>
+
+#### 2026-10-03 — Complete B05 request-scheduling result
+
+**The supplied executor supports complete ordinary request service; this
+finite learned residual package worsens the request objective.** Both G and R
+complete all1,848 requests in the common32-world main panel. Each of the three
+learned final endpoints has higher C than both ordinary programs in every
+main world. R retains a useful conditional tail result at a substantially
+higher computation/travel price; an unresolved mean-C increment does not erase
+that capability. This is a result of the new centralized request task, not a
+diagnosis or repair of B03/B04's geometric-skill acquisition failure.
+
+**Complete execution and numerical reading.** Corrected reader A02 exited0
+at06:03:27Z on the same configured `local_linux` runtime. Generations14–16
+were drained/rearmed on that accepted request; generation17 delivered `READY`.
+The event was consumed as generation18 and observation stopped. The native
+runner/supervisor were absent with consistent identities and empty stderr/
+stdout. No worker or reader was restarted. The earlier A01 digest-transcription
+failure, its paid cost and Root's explicit one-reader correction remain above.
+
+The [full reader summary](../../../../runs/uav_decision_generalization/b05_request_read_a02/summary.json)
+binds worker source `2d754f29308a56a4db81f867ca1b79b5e75f99ad`, corrected-reader
+source `195fc8f44d5a375081e8b851a67671bbe9aafb1a` and the unchanged61-source
+scientific identity. All5,530 worker scientific files were reverified. The
+reader reconstructs every one of1,708 H1200 missions:1,536 training and172
+frozen,2,049,600 motions/2,051,308 physical states. Native masks, routes, FIFO
+heads/progress, request completions, costs, commands and motion match exactly.
+All102,480 collected four-action G queries and219,248 distinct R-internal G
+queries were read; the2,100 mirrored R-base records are excluded from the
+distinct total. G costs/features and frozen total Q/residuals match exactly.
+Missing policy/neural caches are0. The reader performs24,480 frozen neural-row
+evaluations and constructs six scorers; it does not create a new fit, native
+evaluation world or optimizer update.
+
+Every paid R prefix is accounted for:4,407,360 model ticks and2,100 initial
+physical reconstructions,8,400 completed/selected logical cohorts including
+1,391 exact reuses. There are no incomplete native attempts. Each of the2,100
+actual R decisions completed all four logical cohorts. Across **all1,708
+missions there were zero20s deadline misses**. Thus deadline censoring is not
+an explanation for this observed comparison; this fact does not validate
+unexercised runtime cancellation cases. The worker and reader each incurred
+292,210,560 G candidate-ticks/1,168,842,240 cluster recurrences. These model and
+verification operations remain distinct from native training exposure.
+
+**Fixed primary contrasts, lower C is better.** Units are unfinished-request
+residence ticks, including successful service time, plus the fixed terminal
+backlog charge. The intervals below are exploratory paired t95 intervals
+over32 common worlds, conditional on these frozen endpoints and the shared
+G/R realization. They are neither96 independent worlds nor96 independent fits.
+
+| Endpoint | Mean C | Mean C−G [descriptive interval] | Mean C−R [descriptive interval] | Unfinished requests / worlds affected |
+| --- | ---: | --- | --- | ---: |
+| G |2605.5625|reference|—|0 /0|
+| R |2545.96875|−59.59375 [−225.37282,+106.18532]|reference|0 /0|
+| L0 final |5504.875|+2899.3125 [+2106.10130,+3692.52370]|+2958.90625 [+2160.01181,+3757.80069]|34 /12|
+| L1 final |5378.6875|+2773.125 [+2181.58804,+3364.66196]|+2832.71875 [+2254.91362,+3410.52388]|34 /12|
+| L2 final |5089.46875|+2483.90625 [+1976.72692,+2991.08558]|+2543.5 [+1954.30697,+3132.69303]|24 /9|
+
+All96 paired L−G and all96 L−R differences are strictly positive. Across the
+three independently acquired fit means, the C−G mean is+2718.78125 with the
+conditional **df2** interval[+2189.73853,+3247.82397]; against R it is
++2778.375[+2249.33228,+3307.41772]. The different shared-world average-of-fixed-
+policies intervals are[+2373.10315,+3064.45935] and
+[+2394.80027,+3161.94973]. The three canonical-initialization audits reproduce
+G exactly; their G→final costs are2344→2886,3173→6304 and2297→3088. No endpoint,
+checkpoint, training length or task condition was selected from these results.
+
+**Retained ordinary capability and its tradeoffs.** R improves C in17 worlds
+and worsens it in15; its modest negative mean is not evidence of equivalence,
+uniform improvement or a clearly established mean-C surplus. Its tail benefit
+is nevertheless observed on the prespecified outcome readings. Mean per-mission
+maximum completed-request residence falls330.125→231.8125 ticks, paired
+−98.3125[−143.85755,−52.76745],25 better/6 worse/1 same. Mean per-mission maximum
+same-user service gap falls546.6875→470.875, paired
+−75.8125[−117.93730,−33.68770],23 better/8 worse/1 same. These descriptive
+secondary comparisons are not multiplicity-adjusted confirmation. Mean mission
+residence p90 barely changes98.615625→97.8125; that contrast remains unresolved.
+These are averages of within-mission summaries, not pooled-request quantiles.
+
+R increases mean travel5038.990→7292.349 metres/UAV, paired+2253.359
+[+1704.443,+2802.275], with increased travel in29/32 worlds. Mean routed users
+per tick decreases36.450234→35.188646 (−1.261589), while request completion stays
+complete; the request objective and continuous radio coverage are different
+outcomes. Both programs reach every user at least once, but the worst observed
+individual gaps are945/664 ticks for G/R. There is no continuity, collision,
+battery or radio-energy guarantee.
+
+Concrete positive/adverse cases remain available in the original records.
+World109253005 has G→R C4195→3076 and mean travel7633.826→6718.026m/UAV, while
+its maximum user gap worsens355→375. World109253017 has C2319→3062 even though
+maximum request residence improves284→184 and maximum user gap420→379;
+travel increases4369.568→7225.787m/UAV. These cases prohibit a single
+"all service improves" description of R. R's sampled native rollout does not
+inherit an exact policy-improvement theorem.
+
+**The learned intervention is active and adverse at the complete endpoint.**
+On each fit's1,920 main decisions, the residual changes the same-input G argmin
+in1089/1100/1156 cases. Commands differ in the same counts;1064/1076/1131 alter
+movement at their observed activation positions. The final command is unused
+in each of32 missions, and is explicitly excluded from useful activation.
+Changed-motion windows contain actual native completions and residence costs.
+This establishes executed intervention and complete adverse program outcomes;
+it is not an exact counterfactual attribution of each completion to one decision.
+Policies visit different later states, so their action disagreements are not
+a fixed-state causal ablation.
+
+Mean target changes per mission rise from G's10.9375 UAV-target changes to
+72.5/73.9375/70.875; mean head interruptions rise1.09375→7.25/7.59375/6.28125.
+Mean travel becomes13080.703/12956.456/12647.351m/UAV; mean routed users/tick
+falls to31.347813/31.684557/31.722292. Completed-request maximum residence is
+518.75/539.28125/491.90625 ticks on average, while unfinished requests have
+observed ages up to860/1000/700 ticks. Those censored requests are not dropped
+to make completed-request tails appear favorable. L1 in world109253002 never
+serves nine users in cluster1 and completes0/2 of its requests; the1200-tick
+user gaps and unfinished ages remain. Local favorable tail/travel comparisons
+also remain in the compact diagnostics; no claim of harm on every secondary
+metric is made.
+
+**Training happened, without demonstrating useful acquisition.** Each fit
+contains30,720 transitions,30,464 updates and119 target copies after the initial
+copy; all three replay/final-state identities validate. Parameter L2 motions
+are18.622764/17.594558/15.005196 across53392/51743/53519 changed coordinates.
+This rules out an unchanged learner. The reader checks the complete stored
+action/Q/update ledger, sampler structure, finite diagnostics and frozen final
+forwards. It does **not** independently execute the91,392 optimizer updates or
+every historical changing-network forward; that was never purchased.
+
+The saved64-episode training blocks give first→last mean C
+3718.8125→5379.421875,3494.453125→5347.140625 and
+3517.703125→4865.484375. Corresponding means of episode-mean Huber losses are
+.016437→.169699,.011755→.070107 and.013665→.015999. These blocks use different
+worlds, epsilon .1 and changing policies/targets; they are descriptive training
+progress, not fixed-policy before/after evaluations or proof of divergent TD.
+Gradient norms are finite, the largest post-cap norm is9.9999981, and no
+reported cap excess occurs. The evidence favors an actively worsening finite
+learning package over nonexecution, deadline fallback or mere action aliasing.
+It does not identify a unique optimization, representation or exploration
+cause, nor prove the task unlearnable.
+
+**Complete price and retained evidence.** Worker acquisition for the three fits
+is1983.139971/2042.507544/2206.138334 CPU-s (6231.785849 total), including their
+native missions, G processing, updates and checkpoint bookkeeping. The narrower
+update/offline CPU counters485.774313/527.675318/630.922 do not replace that
+acquisition bill. Inclusive main-mission deployment CPU is2.148516 for G,
+196.791962 for R and2.871530/2.887332/2.846989 for L0/L1/L2, conditional on the
+selected runtime and trace/process contract. R therefore costs about91.6×G
+CPU per use. All learned endpoints cost more than G online, so they have no
+positive CPU break-even against G. Against R, acquisition-only CPU break-even
+is10.23/10.53/11.38 missions, but service costs are much worse: those arithmetic
+crossings are **not** utility, quality-preserving or adoption break-even.
+No request-tick/CPU exchange rate was defined.
+
+The full A02 reader costs5653.181264 CPU-s/5642.297502 operation wall-s,0 GPU.
+At its final summary the known B05 cumulative total, including preparation,
+worker, original failed reader and earlier collection, is19343.158526 CPU-s
+(5.373100h) and17334.057907 aggregate operation wall-s (4.815016h). The shared
+whole-study research intercept is counted once, not once per fit. Separate
+worker and reader process RSS peaks are recorded in their summaries; none is
+a simultaneous sum. Actual computation was below the20–50 CPUh forecast;
+that is a measured price update, not permission to spend the unused ceiling.
+Earlier B03/B04 expenditures and incompletely metered design, implementation,
+review, publication and scientific support remain additional and nonzero.
+
+Post-result saved-data arithmetic introduced no new model, physics, G or
+optimizer call. The full diagnostic reducer cost.801675567 CPU-s/3.425375493
+wall-s; two small metered schema reads cost.009599390 CPU-s/.023916195 wall-s;
+the collection/hash/compact-summary pass cost.141574234 CPU-s/.145100535 wall-s.
+Other interactive reading/arithmetic support was not completely metered.
+The [compact diagnostics](../../../../runs/uav_decision_generalization/b05_request_read_a02/diagnostics-summary.json)
+retain all primary/secondary components and training blocks. The unique full
+checks, curves and diagnostic records stay on configured `local_linux` at
+`/home/fires/hmasd-wsl/runs/uav_decision_generalization/b05_request_read_a02`;
+[collection](../../../../runs/uav_decision_generalization/b05_request_read_a02/collection.json)
+pins1,714 scientific output files/15,641,765 bytes and their identity inventory.
+Worker raw/checkpoints remain in their previously verified canonical output.
+No sole evidence or adverse mission was discarded to reduce the reported cost.
+
+**Interpretation before independent disposition.** The previously read and
+currently published RESEARCH topic5 separated conditional geometric execution,
+task opportunity and learned acquisition. B05 now replaces the untested new-
+task premise with actual complete G/R request service; low load plus competent
+ordinary planning remains a strong explanation for limited mean-C headroom,
+but does not establish optimality or erase R's measured tail capability.
+Supplying the executor has removed geometric-skill discovery from the learned
+decision interface; it did not suffice for this residual TD recipe to improve
+complete use. This narrows the tested learning claim without giving a common
+cause for the different old B03/B04 failures. Package evidence, component
+mechanism, default adoption and next investment remain separate. The original
+independent ResearchCritic is reading the complete results and adverse sources;
+its substantive recommendation and the DM's resolved continuation judgment
+follow below. No follow-on fit, task retuning or new effect is selected here.
+
+<a id="b05-final-cleanup"></a>
+
+**Measured B05 cleanup,2026-10-03 UTC.** The result reviewer confirmed it did
+not need the disposable corrected-reader source snapshot; current published
+source and all61 bound source hashes cover that reading. The supported native
+collector previewed eligibility, rechecked terminal identities/live process
+references/reachability, and removed
+`.git/hmasd-launch-sources/2d1c05fb36de4ed78104c1f41ae5ca1b`.
+Its allocated size fell1,834,201,088→0 bytes and its worktree registration is
+gone. The canonical result output was untouched by source removal. The
+documented read-only sudo process scan passed; there is no tool blocker.
+
+The worker's immutable manifest and complete reader preserve all11 closed
+endpoint count records; its final live-child list is empty. Both native
+operations are terminal. The observer is stopped at generation18, every
+saved event is consumed and no wake is pending. After checking those consumers,
+the DM also deleted the worker's obsolete `scratch/` count buffers, worker and
+reader `progress.json`, and the four superseded launch/observer request JSONs
+under `temp/directions/uav_decision_generalization/`, then removed that empty
+owned directory. These files are outside the5,530 required worker scientific
+files; all of those files still exist. No raw trajectory, checkpoint, original
+failed request, full independent check or contrary outcome was deleted.
+
+These final-stage deleted targets occupied1,834,733,568 allocated bytes. The
+measured combined footprint of this source snapshot, canonical worker/reader
+output trees and owned temporary directory fell by **1,834,725,376 bytes net**;
+the difference is8,192 bytes of added compact collection accounting. The first
+accounting assertion detected one extra4KiB allocation block from writing the
+record; its corrected final measure includes that growth. Other writers and
+Git object storage are outside this measured scope. The two earlier source
+removals separately reclaimed3,664,814,080 bytes as recorded above. No whole-
+tree backup, tarball, duplicate raw copy or retention chain was created.
+
+No disposable target remains. Useful B05 source/tests stay on main: the
+request/executor/G/R capability and bound adverse learner/complete-reader
+reconstruction remain scientific assets. One canonical local worker output
+(396,664,832 allocated bytes) retains the source-bound raw/initial/final/
+training-state evidence required to reconstruct the full declared comparison;
+the reader output occupies16,240,640 allocated bytes including all1,708 checks,
+curves, compact readings and provenance. These retained unique records are
+the actual leftovers, not an unresolved cleanup failure. The
+[collection record](../../../../runs/uav_decision_generalization/b05_request_read_a02/collection.json)
+contains exact targets, before/after allocations, native collector result and
+all preserved input/output identities.
+
+The source deletion meter reports1.359717597 CPU-s/1.381833690 wall-s; scratch
+cleanup reports.121886494 CPU-s/.143836667 wall-s, with the separately recorded
+empty-parent bookkeeping cost. Known cumulative B05 CPU before the independent
+result review is19345.593921s; remaining accounting, static/support/publication
+and final write tails are additional and incompletely metered, not zero.
+
+<a id="b05-independent-result-review"></a>
+
+#### 2026-10-03 — Original independent B05 result review
+
+The registered ResearchCritic reused its separate construction-review context,
+reconstructed original evidence before receiving the DM interpretation, and
+returned the following complete answer. It was not the proposal coauthor or
+engineering reviewer. The earlier interrupted digest-typo consultation does
+not substitute for this substantive result review. No new model/native/optimizer
+execution was performed in this review.
+
+````text
+**Recommend retaining G and R’s conditional ordinary capability, stopping this DDQN recipe, and making no automatic follow-on purchase.** The result changes the explanation from uncertain task opportunity to demonstrated ordinary competence plus actively harmful finite learning.
+
+This is a follow-up in the existing independent review context, reusing the earlier construction analysis. I reconstructed the results before reading the DM’s proposed interpretation and continuation recommendation.
+
+I checked the unchanged 61-source scientific identity and bound inputs; independently reduced all 160 main request ledgers and consequential summaries; examined all three training curves and all 96 learned endpoint score histories; checked selected positive/adverse native arrays, three exact initial-versus-G audits, and two original R rollout traces. I relied on the completed reader for exhaustive physical reconstruction and frozen neural evaluation. I did not repeat its model calls or replay optimizer updates.
+
+| Program | Mean request cost C ↓ | Mean difference from G | Unfinished requests |
+|---|---:|---:|---:|
+| G | 2605.56 | — | 0 |
+| R | 2545.97 | −59.59 | 0 |
+| L0 | 5504.88 | +2899.31 | 34 |
+| L1 | 5378.69 | +2773.13 | 34 |
+| L2 | 5089.47 | +2483.91 | 24 |
+
+Each learned endpoint loses to **both G and R on every main world**. Across three independently trained fit means, L−G is +2718.78, with descriptive df2 interval [+2189.74, +3247.82], conditional on the common evaluation panel. The 96 learned episodes are not 96 independent training replications. These findings agree with the [complete reading](/home/fires/hmasd-wsl/runs/uav_decision_generalization/b05_request_read_a02/reading.json).
+
+The failure extends beyond terminal penalties. Every learned endpoint also increases residence-area cost on every world. For example, L2 raises C from 3335 to 9643 in world 109253023 despite eventually completing every request. Learned policies leave requests unfinished for as long as 860, 1000 and 700 ticks across the three fits; completed-request tails must therefore remain accompanied by unfinished ages.
+
+**The learned intervention was sufficiently exposed to judge this recipe.** It changes movement relative to same-input G on 1064, 1076 and 1131 of 1888 usable decisions. Mean UAV-target changes rise from G’s 10.94 to roughly 71–74 per mission, with more interrupted service, flight and queued residence. This is active adverse intervention, rather than nonactivation, sparse exposure or deadline fallback.
+
+A further diagnostic sharpens that conclusion. The stored **total cost estimates**, including G/1200 plus the residual, are negative on 7676/7680, 7673/7680 and 7266/7680 final action rows. Selected estimates are negative on every L0/L1 decision and 1865/1920 L2 decisions, although actual remaining costs are nonnegative. Saved training estimates begin nonnegative and subsequently drift below zero; late update targets also become negative.
+
+This establishes badly miscalibrated finite value learning. It does **not** establish that a common negative offset caused the action-ranking errors: offsets alone preserve rankings. My inspection of the actual update found positive immediate costs, cost-minimizing selection and terminal-masked bootstrapping. It supplies no identified sign-clamp, longer-training or larger-network repair, and does not substitute for optimizer replay.
+
+The task’s supplied executor and public state are adequate for strong ordinary performance: G and R each complete all 1848 requests. The zero residual represents G and the initial audits reproduce it exactly. Thus task feasibility and representation of a competent baseline are established here; useful acquisition by this finite recipe is not. Broader learnability remains unresolved. This new centralized request task also does not diagnose the earlier B03/B04 geometric-learning failures.
+
+**R has a useful positive result that should survive closure.** Its mean C improvement is uncertain: −59.59, paired descriptive interval [−225.37, +106.19], with 17 gains and 15 losses. Nevertheless:
+
+- Mean within-mission maximum completed-request residence falls by 98.31 ticks, with 25 improvements, six losses and one tie.
+- Mean within-mission maximum user-service gap falls by 75.81 ticks, with 23 improvements, eight losses and one tie.
+- Both descriptive intervals exclude zero, while remaining secondary, unadjusted exploratory comparisons.
+
+World 109253008 is a particularly useful constructive example: G→R changes C 3007→2352, maximum request residence 484→244, maximum user gap 945→563, and flight 5993→5512 metres/UAV. Conversely, world 109253017 raises C 2319→3062 while improving both maxima. These are real package outcomes; unidentified component contributions do not annul them.
+
+The price is consequential. Across the panel R adds 2253 metres/UAV on average, increases flight in 29/32 worlds, and reduces average routed users by 1.26. Its inclusive deployment CPU averages 196.79 seconds per mission versus G’s 2.15. However, all four cohorts finished at every R decision; the maximum main-panel decision took about seven seconds against the 20-second allowance. R was computationally feasible under this contract. Its approximately 92-fold relative CPU cost does not itself establish impracticality.
+
+Small learned positives also remain: L2 reduces flight and improves average radio service in worlds 109253007 and 109253031. But C rises by 3490 and 5548, and maximum user gaps worsen. Those observations do not support adopting the learned package.
+
+The completed purchase cost **19,343.158526 measured CPU-seconds, or 5.3731 CPU-hours**, through the final reader summary, including the retained failed reader attempt and earlier charged preparation/collection. Training acquisition accounts for 6231.785849 seconds; the full reader for 5653.181264. GPU use was zero. Subsequent support and earlier B03/B04 expenditure remain additional. All learned endpoints cost more than G online, so there is no CPU amortization against G. Their roughly 10–11-mission CPU crossings against R sacrifice the demonstrated service outcomes and are not quality-preserving break-even points. See the [final cost ledger](/home/fires/hmasd-wsl/runs/uav_decision_generalization/b05_request_read_a02/summary.json).
+
+My successful metered saved-data arithmetic totaled approximately **1.388 CPU-seconds**; retrieval, reasoning and some earlier failed schema reads were incompletely metered.
+
+I agree with the DM’s proposed disposition and would **reserve**, rather than immediately select, the R1-versus-R4 computation comparison. It asks a useful direct question: can less model computation retain the observed tail capability? It need not identify R’s components or become a prerequisite for later learned approximation. Given the learner’s uniform primary losses and G’s complete service, another learned fit currently has weaker support than either retaining the existing ordinary choices or investigating their computation cost.
+
+For a new-world capability decision, the proposed complete 32-world G/R4/R1 comparison—96 H1200 missions, 115,200 native transitions, zero fits, and a complete reader—is a reasonable bounded next observation. The **3–6 CPU-hour and 4–8 support-hour figures remain forecasts**, not an accepted price. The one-cohort algorithm, common activation delay, tape rights, exact reuse and accounting must be fixed before selection. R4 already reuses identical cohorts, so R1 cannot simply be priced at one-quarter of its total CPU.
+
+Its outcomes would change actual choices:
+
+- If R1 preserves useful tails and C while materially reducing complete computation, it becomes an ordinary capability worth retaining and reduces the immediate case for learned approximation.
+- If reduced computation loses those benefits, retain R4’s conditional value and reject this compression; that result would neither close learning nor justify another fit automatically.
+- If R4’s tail advantage fails to carry to the fresh panel, narrow the generalization claim while preserving the original positive evidence.
+
+Reusing the existing panel and adding only R1 is a cheaper, legitimate exploratory alternative, but answers a conditional development-panel question. Neither version is required to close B05. I verified that other substantive work is already selected; I have not independently reviewed its complete evidence sufficiently to rank its scientific return against this reserve.
+
+**MATERIAL_DISSENT: no — I support stopping the unchanged learner and retaining R’s measured tail capability, with no automatic new purchase. The direct evidence supports the DM’s proposed closure and a reserved, explicitly priced ordinary-computation continuation.**
+````
+
+The preserved original answer is8,769 characters/8,833 UTF-8 bytes (excluding
+the surrounding fence and its separating newline), SHA256
+`0699e58f26c39ac2c4eb149076cc31684e6ee3bc10d1a7220edefa34fce60d3f`.
+
+<a id="b05-independent-disposition"></a>
+
+#### 2026-10-03 — DM disposition and next-investment judgment
+
+**Accept the independent diagnosis and close this complete purchase.**
+The DM read the entire original answer, compared its figures with the complete
+reader/diagnostic records, and accepts `MATERIAL_DISSENT:no`. The independent
+reduction of all160 main ledgers, final score histories and selected original
+arrays adds useful evidence to the exhaustive reader; it is not another
+physical/model/optimizer experiment. Its approximately1.388 measured CPU-s
+are additional to the known19345.593921s DM ledger after collection/cleanup.
+The combined known subtotal is approximately19346.981921 CPU-s (5.374162h),
+with remaining support and earlier studies explicitly additional. No further
+review or Pro round is needed to decide this unchanged completed comparison.
+
+The main scientific judgment changes in three specific ways. First, the new
+task's ordinary opportunity is now observed: G and R each cleared all requests
+in their public stochastic processes on all32 worlds. This goes beyond the
+pre-run conditional settled-slot geometry argument, without claiming success
+for all possible arrival tapes or optimal G delay. Second, useful-baseline
+representation is demonstrated by the zero residual and exact canonical-G
+initial audits; merely supplying that representation/executor did not yield
+useful acquisition. Third, the learned package is actively adverse, with
+strictly greater residence-area cost as well as greater total C in every
+main fit-world, frequent changed motion and badly miscalibrated value estimates.
+This is stronger evidence than an inactive module or an unread technical failure.
+
+The review's total-Q finding is consequential: in this nonnegative-cost task,
+all true remaining costs are nonnegative, whereas7676/7680,7673/7680 and
+7266/7680 final action estimates are negative; selected estimates are negative
+1920/1920,1920/1920 and1865/1920 times. Saved estimates start nonnegative and
+late targets also become negative. The source preserves positive immediate
+cost, minimizing actions and terminal masking. This supports a finite value-
+learning/calibration failure, while **a shared negative offset alone cannot
+explain a bad ranking**. It does not certify historical optimizer arithmetic
+or identify a sign error, useful clamp, larger network or longer fit. The
+present result therefore does not select one of those repairs. It also does
+not explain the different B03/B04 skill-acquisition failures or falsify the
+broader learned-decision question.
+
+**Empirical capability, default use and further research are distinct.**
+Keep G as the primary-C/economical ordinary reference and do not adopt any of
+the three learned finals. Keep R as a real conditional tail capability:
+smaller mean maximum residence and user gap, complete request service, specific
+jointly favorable worlds, and all counterexamples. The relative92×CPU price
+is not a proof of impracticality: R completed every cohort before the20s
+deadline, with main-panel decision maximum7.005458s. Its unresolved primary-C
+increment, extra flight, lower mean routed-user coverage and nonuniform tail
+effects prevent calling it an unconditional replacement. No missing component
+attribution annuls this measured package value. Small learned flight/coverage
+positives also survive in the records, without overriding uniform primary losses.
+
+I recommend no immediate unchanged learner replication, extra training,
+architecture scan, arrival-rate retuning or outcome-selected model. The present
+three-fit recipe has a consistent primary loss and useful G already clears all
+requests; another such fit has no prediction of a consequential change. A
+nonbootstrapped or otherwise revised learner could be a legitimate later
+construction, but no specific complete-use improvement follows from the
+negative offset alone. The earlier B03~14.544662 CPUh/B04~.257 CPUh and this
+B05~5.374 CPUh, plus substantial incompletely metered support, remain cumulative
+evidence/cost. That history neither spends an entitlement to further runs nor
+makes a contrary learning result impossible.
+
+**The concrete reserved continuation develops the ordinary positive.** If Root
+selects further investment in this request capability, a useful next question
+is whether one-cohort R1 retains R4's observed tail benefit at lower complete
+computation cost, against G under the unchanged task. A fresh32-world complete
+G/R4/R1 panel would cost96 H1200 missions/115,200 native transitions/0 fits,
+plus all actual model work and its complete reader. The present **3–6 CPUh and
+4–8 support-hour** figures are forecasts to refine in source, not an accepted
+budget. R4's exact reuse, shared setup/G work, command delay and deadline
+handling forbid simply dividing total CPU by four. R1's exact rule and tape/
+reuse/accounting contract must be fixed before any selected execution.
+
+This would be a direct capability/use comparison, not a mechanism attribution
+gate or a compulsory pilot for learning. Retaining R4's tails and C at lower
+computation would create a useful ordinary program and weaken the immediate
+need for approximation. Losing the benefit would reject that particular
+compression while preserving the original R4 capability; a fresh-panel loss
+of R4's advantage would narrow its generalization scope while preserving these
+positive observations. No outcome would automatically authorize another fit.
+Adding only R1 to the already exposed panel is a cheaper legitimate alternative,
+but its estimand is conditional exploratory reuse, not fresh generalization.
+
+The DM and reviewer agree to **reserve** this continuation rather than launch
+it now. Stopping the complete B05 purchase already answers the acquired-package
+question; neither unknown causation nor another experiment is required for
+closure. Root's other selected work provides a real opportunity cost for a
+new3–6 CPUh plus support purchase. I favor returning this concrete comparison
+for Root's next cross-question allocation over silently using the unused50h
+ceiling. The reviewer has not independently ranked those other projects; I do
+not describe it as endorsing a cross-project ordering. The decision to reserve
+does not shelve R because its mechanism is unknown and does not end ownership
+of the wider question.
+
+All selected worker, reader, collection, interpretation, independent advice
+and cleanup obligations are complete. There is no active producer, pending
+observer event, unread advice, selected successor or external dependency.
+Own RESEARCH standing moves to reserve with the original lead retained; the
+bounded native return gives Root the evidence and this next-investment
+recommendation. New scope would be a new selected purchase with inherited
+positive/adverse evidence and cost, not a restart of B05 or a routine repair.
