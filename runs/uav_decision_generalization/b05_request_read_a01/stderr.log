@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/7561a0c21f6942959e75522dd49b7116/experiments/candidates/uav_decision_generalization/b05_request_schedule/run.py", line 134, in <module>
+    main()
+  File "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/7561a0c21f6942959e75522dd49b7116/experiments/candidates/uav_decision_generalization/b05_request_schedule/run.py", line 95, in main
+    study = e.bound_json(args.study_input, args.study_input_sha256)
+  File "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/7561a0c21f6942959e75522dd49b7116/experiments/candidates/uav_decision_generalization/b03_joint_window/evidence.py", line 67, in bound_json
+    if hash_file(path)!=sha:raise ValueError('bound input bytes changed')
+ValueError: bound input bytes changed

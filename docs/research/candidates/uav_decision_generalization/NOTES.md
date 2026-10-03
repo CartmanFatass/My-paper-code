@@ -7068,3 +7068,93 @@ unprivileged preview could not inspect `/proc/454/cwd`; the documented
 `--sudo-process-scan` read-only process probe resolved that concrete check,
 and apply revalidated eligibility. The target and Git worktree registration
 are gone, all unique output remains, and there is no cleanup blocker here.
+
+<a id="b05-reader-a01-failure"></a>
+
+**First reader request closed after an operator digest transcription failure,
+2026-10-03 UTC.** The exact complete-worker binding and unchanged reader source
+were published at `173754d233b7cd6dcebecf25bff164c284577457`. The DM then
+submitted one reader request, accepted at04:17:47Z, whose
+[native manifest](../../../../runs/uav_decision_generalization/b05_request_read_a01/launch-manifest.json)
+preserves the actual argv. In that command the DM manually omitted two
+characters from `--study-input-sha256`, submitting the62-character string
+`05998b40a59d7766771e4513051aafb44eeeb6c75e4bd569faf2fe61f9297b`.
+The correct, already published64-character digest remains
+`05998b40a59d7766771e4513051aafb44eeebbe6c75e4bd569faf2fe61f9297b`.
+This was the DM's command transcription error, not changed study bytes.
+
+The accepted runner exited1 at `run.py:95`/`evidence.bound_json`, with
+`ValueError: bound input bytes changed`. This frontier precedes source-manifest
+construction, completed-worker binding, the study-specific resource check,
+runtime setup and reader import/call. Actual reader physical/G/neural/optimizer
+work is0; no worker mission was repeated. The native exit witness is valid,
+both original processes are absent, and no successor or resend was made.
+[Failure summary](../../../../runs/uav_decision_generalization/b05_request_read_a01/summary.json),
+[stderr](../../../../runs/uav_decision_generalization/b05_request_read_a01/stderr.log)
+and [collection proof](../../../../runs/uav_decision_generalization/b05_request_read_a01/collection.json)
+retain the failed argv, correct input digest, terminal identities and missing
+read. The independent byte comparison found identical study bytes in the
+published commit, live canonical checkout and accepted immutable snapshot;
+their common SHA differs from the submitted62-character value. No runtime,
+physics, neural or optimizer diagnosis is inferred from this known input error.
+
+This failed request cost.168788 measured CPU-s/.353515 operation wall-s. Its
+terminal/byte collection cost.157186 CPU-s/.156911 wall-s, with cumulative
+known totals13,689.977262 CPU-s and11,691.760406 aggregate operation wall-s.
+Other static/support work remains incompletely metered and nonzero. Worker
+raw, checkpoints and all positive/adverse outcomes are unchanged and retained;
+the G/R/L complete service comparison is still unread and unvalidated. This
+failure is neither evidence against the task opportunity/learner nor evidence
+for a particular arm. It establishes only that the invocation did not reach
+the selected full reading.
+
+The DM applied Root's explicit first-formal-failure stop, reported immediately
+and added no dependent execution. Root subsequently directed preservation
+and closure of this request, stated that the unchanged complete selection
+review remains applicable, and will explicitly select any corrected reader;
+the original50 cumulative CPUh/72 operation-wallh and all paid costs carry
+forward, with no new training/mission purchase. A just-issued extra internal
+scientific-review request was interrupted on that direction; any reading
+support already spent is nonzero, and no new scientific judgment from it is
+claimed. The original independent selection advice remains the applicable
+review. This is a concrete Root allocation boundary, not a self-authorized
+exception for a small error. Reader observation generation11 was drained;
+its native failure event and App queue rejection were read without rerouting
+or repeating the operation.
+
+<a id="b05-corrected-reader-allocation"></a>
+
+**Root's complete corrected-reader disposition,2026-10-03 UTC:**
+
+> Root已全文读取原reader stderr、launch manifest、FAILED summary、process-exit和worker完成/收集记录，并直接比较输入bytes：当前B05_STUDY_INPUT.json为24,830B，与173754d233读器发布及2d754f293原worker输入逐字节相同；实测SHA为05998b40a59d7766771e4513051aafb44eeebbe6c75e4bd569faf2fe61f9297b（64位），已接受argv为62位。故确认为参数漏写，不能把异常文本误读成文件变更。FAILED summary原phaseCPU .168788、phasewall .3535145、累计CPU13689.820076和operationwall11691.603495已读，counts为空；原exit1见证和源记录保留。
+>
+> 我现在明确选择一次修正摘要参数的原固定完整reader，建议新tag b05_request_read_a02。先完成原reader同handle终态/observer关闭及必要事实保全，再执行新购买；不得修改旧请求或覆盖失败记录。复用相同worker、study字节和61科学源、原完整读器、原节点及原宣告所有读取工作，不新增fit、mission、控制器分支、optimizer replay或健康/检查点试验。原独立科学选择及工程验收覆盖该未变比较，不需新一轮科学复审。已有聚焦工程事实照常保留。
+>
+> 把本完整Root处置及你方响应追加到现有NOTES，carry-forward全部已付CPU/wall/failed/support后发布精确reader输入和新预算账本，维持原50累计CPUh/72aggregate-operation-wallh总账及其他既有资源约束，不重置费用。机械地从受绑定bytes取得/核对argv中的摘要，再按新请求做真实节点准入；这不是手动放宽hash guard。原worker/raw保持只读与唯一必要copy，读器实际运行按同handle观察。这个新reader第一次真实请求/准入/执行/读取失败仍停止；不确定接受只协调同一新请求。完整读取与判读、发表、所需清理属于本授权，无需逐步Root批准。Root不另编辑你方NOTES或standing，也不把这一元数据纠正写成科学结论。
+
+**DM response.** Adopt this explicit single corrected-reader allocation as
+`b05_request_read_a02`. The original failed request is terminal, its observed
+event is consumed and its observation is stopped. Retain every original
+failure/worker artifact and unchanged study/worker locator. The fresh budget
+ledger adds the failed reader and measured failure collection to the existing
+bill; no counter or cost is reset. The launcher argv will be constructed as a
+structured argument list with digests calculated from the published input
+bytes, compared to the original worker binding before launch; the existing
+guard is unchanged. Source bytes, actual local node/runtime, all declared
+readings and new request's first-failure stop are unchanged. There is no new
+scientific-review round or scientific conclusion from correcting metadata.
+
+The corrected-reader prior is frozen in
+`B05_READER_BUDGET_LEDGER_A02.json` (3,449 bytes,SHA256
+`12656b66f2b520a0e6f7994c7e8a8d22811a671d6912a04d4225823b95e12343`):
+13,689.977262 known cumulative CPU-s and11,691.760406 aggregate operation
+wall-s, two prior formal requests including the failed reader,3 existing fits
+and all earlier support/missingness. The original study/worker-input digests
+remain unchanged. After Root read the failure originals and byte identity,
+the supported collector previewed and removed failed-reader snapshot
+`.git/hmasd-launch-sources/7561a0c21f6942959e75522dd49b7116` using its read-only
+sudo process scan. The target and worktree registration are gone; net
+allocated reclamation is1,834,164,224 bytes. The40,960-byte allocated failure
+output remains unchanged in size, including original argv, exit and stderr.
+Worker and failed-reader source deletions now total3,664,814,080 allocated
+bytes reclaimed, without a backup/copy or evidence deletion.

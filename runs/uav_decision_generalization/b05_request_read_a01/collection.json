@@ -1,0 +1,178 @@
+{
+  "actual_argv": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/7561a0c21f6942959e75522dd49b7116/experiments/candidates/uav_decision_generalization/b05_request_schedule/run.py",
+    "--mode",
+    "reader",
+    "--seed",
+    "109259999",
+    "--launch-sha",
+    "173754d233b7cd6dcebecf25bff164c284577457",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/uav_decision_generalization/b05_request_read_a01",
+    "--study-input",
+    "docs/research/candidates/uav_decision_generalization/B05_STUDY_INPUT.json",
+    "--study-input-sha256",
+    "05998b40a59d7766771e4513051aafb44eeeb6c75e4bd569faf2fe61f9297b",
+    "--budget-ledger",
+    "docs/research/candidates/uav_decision_generalization/B05_READER_BUDGET_LEDGER.json",
+    "--budget-ledger-sha256",
+    "f5358750f0ea39921b9ef68aff4339a577173f52b11d19e807ae602e2b0faa7b",
+    "--worker-input",
+    "docs/research/candidates/uav_decision_generalization/B05_WORKER_INPUT.json",
+    "--worker-input-sha256",
+    "01145a87da1801b7a03a325ed2fbd703fdaed0753c9af06a3b64c1bf680f463d"
+  ],
+  "aggregate_operation_wall_seconds_including_collection": 11691.760405593986,
+  "artifacts": {
+    "launch-manifest.json": {
+      "bytes": 5950,
+      "sha256": "620d9e80160fa984fdc2bd17eae6e84e6eb2df483f4cd0e3f89e4a4cb3d5f001"
+    },
+    "process-exit.json": {
+      "bytes": 554,
+      "sha256": "1d0f808cd96ca68141cc7d72cd1c933f8fe74c473c5f40cdc84ea3ef7ee6f4e9"
+    },
+    "stderr.log": {
+      "bytes": 799,
+      "sha256": "9d023a39a4fd8e95f3d7933965306f159f5994615a2d5cec1af215630a220bf6"
+    },
+    "summary.json": {
+      "bytes": 1296,
+      "sha256": "c3c766173826e9caab5c59665347015f9563982f1129848e50bc2d18de197e13"
+    }
+  },
+  "correct_digest_characters": 64,
+  "correct_published_study_sha256": "05998b40a59d7766771e4513051aafb44eeebbe6c75e4bd569faf2fe61f9297b",
+  "cost": {
+    "active_child_cpu_seconds": 0,
+    "aggregate_operation_wall_seconds": 11691.603495031986,
+    "child_peak_rss_kib": 19808,
+    "counts": {},
+    "cpu_limit_seconds": 180000,
+    "cumulative_cpu_seconds": 13689.820076000002,
+    "gpu_seconds": 0,
+    "live_child_pids": [],
+    "phase_cpu_seconds": 0.16878800000000002,
+    "phase_wall_seconds": 0.35351450799498707,
+    "reaped_child_cpu_seconds": 0.0020109999999999998,
+    "self_peak_rss_kib": 37248,
+    "self_system_seconds": 0.051621,
+    "self_user_seconds": 0.115156,
+    "wall_limit_seconds": 259200
+  },
+  "cumulative_measured_cpu_seconds_including_collection": 13689.977262000002,
+  "error_message": "bound input bytes changed",
+  "error_type": "ValueError",
+  "failure_collection_cpu_seconds": 0.157186,
+  "failure_collection_wall_seconds": 0.156910562000121,
+  "failure_frontier": "run.py:95 bound_json before source_manifest, worker_context, selected-resource check, runtime, reader import or call",
+  "native_status": {
+    "admission": {
+      "claim_state": "accepted",
+      "state": "accepted"
+    },
+    "artifacts": {
+      "stderr": {
+        "path": "/home/fires/hmasd-wsl/runs/uav_decision_generalization/b05_request_read_a01/stderr.log",
+        "state": "present"
+      },
+      "stdout": {
+        "path": "/home/fires/hmasd-wsl/runs/uav_decision_generalization/b05_request_read_a01/stdout.log",
+        "state": "present"
+      },
+      "summary": {
+        "path": "/home/fires/hmasd-wsl/runs/uav_decision_generalization/b05_request_read_a01/summary.json",
+        "state": "present"
+      }
+    },
+    "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/3fe19c622b91876937397e3f2a093ff2c7e3df10aa9492e1ad5a091eade316f1.json",
+    "direction": "uav_decision_generalization",
+    "execution": {
+      "exit_code": 1,
+      "exit_witness": {
+        "exit_code": 1,
+        "finished_at_epoch": 1791001067.757299,
+        "path": "/home/fires/hmasd-wsl/runs/uav_decision_generalization/b05_request_read_a01/process-exit.json",
+        "state": "valid",
+        "termination": "process_exit"
+      },
+      "runner": {
+        "recorded_identity": {
+          "boot_id": "f359a2d7-72f8-4eb1-b898-bc0abf61bed6",
+          "kind": "linux_pid_start_ticks",
+          "pid": 1139436,
+          "session_id": 1139435,
+          "start_ticks": 12832556
+        },
+        "state": "absent"
+      },
+      "state": "exited",
+      "supervisor": {
+        "recorded_identity": {
+          "boot_id": "f359a2d7-72f8-4eb1-b898-bc0abf61bed6",
+          "kind": "linux_pid_start_ticks",
+          "pid": 1139435,
+          "session_id": 1139435,
+          "start_ticks": 12832550
+        },
+        "state": "absent"
+      }
+    },
+    "explicit_retry": {
+      "eligible": true,
+      "reasons": [],
+      "scientific_authorization": false,
+      "successor_ref": null,
+      "supported": true
+    },
+    "explicit_retry_available": true,
+    "kind": "hmasd_operation_status",
+    "manifest_ref": "/home/fires/hmasd-wsl/runs/uav_decision_generalization/b05_request_read_a01/launch-manifest.json",
+    "node": "local_linux",
+    "observed_at": "2026-10-03T04:21:55.685724Z",
+    "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/3fe19c622b91876937397e3f2a093ff2c7e3df10aa9492e1ad5a091eade316f1.json",
+    "output_root": "/home/fires/hmasd-wsl/runs/uav_decision_generalization/b05_request_read_a01",
+    "record_consistency": {
+      "mismatches": [],
+      "state": "consistent"
+    },
+    "schema_version": 1,
+    "sha": "173754d233b7cd6dcebecf25bff164c284577457",
+    "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/7561a0c21f6942959e75522dd49b7116"
+  },
+  "new_native_missions": 0,
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/3fe19c622b91876937397e3f2a093ff2c7e3df10aa9492e1ad5a091eade316f1.json",
+  "physical_G_NN_optimizer_reader_calls": 0,
+  "published_canonical_snapshot_bytes_equal": true,
+  "reader_root": "/home/fires/hmasd-wsl/runs/uav_decision_generalization/b05_request_read_a01",
+  "reader_source_cleanup": {
+    "deleted_target": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/7561a0c21f6942959e75522dd49b7116",
+    "method": "supported hmasd_snapshot_gc with sudo read-only process scan",
+    "net_allocated_bytes_reclaimed": 1834164224,
+    "output_allocated_bytes_after": 40960,
+    "output_allocated_bytes_before": 40960,
+    "result": {
+      "mode": "apply",
+      "snapshots": [
+        {
+          "claim": "/home/fires/hmasd-wsl/.git/hmasd-admission/3fe19c622b91876937397e3f2a093ff2c7e3df10aa9492e1ad5a091eade316f1.json",
+          "durable_ref": "refs/heads/main",
+          "eligible": true,
+          "output": "/home/fires/hmasd-wsl/runs/uav_decision_generalization/b05_request_read_a01",
+          "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/7561a0c21f6942959e75522dd49b7116",
+          "removed": true,
+          "sha": "173754d233b7cd6dcebecf25bff164c284577457",
+          "snapshot": "7561a0c21f6942959e75522dd49b7116"
+        }
+      ]
+    },
+    "snapshot_allocated_bytes_after": 0,
+    "snapshot_allocated_bytes_before": 1834164224
+  },
+  "source_sha": "173754d233b7cd6dcebecf25bff164c284577457",
+  "study_input_bytes": 24830,
+  "submitted_digest_characters": 62,
+  "submitted_study_sha256": "05998b40a59d7766771e4513051aafb44eeeb6c75e4bd569faf2fe61f9297b",
+  "worker_outputs_untouched": true
+}
