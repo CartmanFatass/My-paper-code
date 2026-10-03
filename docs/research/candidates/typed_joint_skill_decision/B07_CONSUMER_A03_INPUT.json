@@ -1,0 +1,304 @@
+{
+  "bank": {
+    "producer_root": "/home/wu/hmasd-inputs/typed_joint_skill_decision-b07-a03",
+    "reader": {
+      "input_manifest": {
+        "path": "docs/research/candidates/typed_joint_skill_decision/B07_READER_A02_INPUT.json",
+        "sha256": "fb130f8982a84c5c95d0b47b710652c9b66e3852871c46b9ffaa9cf7216c801f"
+      },
+      "manifest_sha256": "2c1a7021a4f2e4cda32855eacd9030f8c68d9652010696d519bb8a0062d8e18e",
+      "root": "/home/wu/hmasd-inputs/typed_joint_skill_decision-b07-a03/validation",
+      "source_sha": "285eea780dcc63e000d336b65611d3c183b3c768",
+      "terminal": {
+        "launch_manifest_sha256": "54af5b621ea17cb10d39bac4950078d4ad815b6b56eaa77707794c7a1ba8ef96",
+        "process_exit_sha256": "072b8090f389aac7c12779533130ae57ca5990f0b92c312339f1727f135eee76"
+      }
+    }
+  },
+  "direction": "typed_joint_skill_decision",
+  "disk_scope": {
+    "include_current_source_snapshot": true,
+    "own_scratch": "/home/wu/projects/HMASD/temp/directions/typed_joint_skill_decision/b07-consumer-a03",
+    "producer_root": "/home/wu/hmasd-inputs/typed_joint_skill_decision-b07-a03",
+    "reader_root": "/home/wu/hmasd-inputs/typed_joint_skill_decision-b07-a03/validation",
+    "shared_interpreter_copied": false
+  },
+  "executable_sources": {
+    "experiments/candidates/typed_joint_skill_decision/b05_data_bank/__init__.py": "65a0fd28b3c570530f5f2f7925bbd6c160290ac9da27da648dcb4d832e9276a7",
+    "experiments/candidates/typed_joint_skill_decision/b05_data_bank/contract.py": "24bce02b7a7bc4598145e41de3c7da0a3968db858b5e56da2f1a45b57e3741d3",
+    "experiments/candidates/typed_joint_skill_decision/b05_data_bank/data.py": "ed071814f2a64470072e6eb9d99492889f75f441e245c528399035d76e3a8111",
+    "experiments/candidates/typed_joint_skill_decision/b05_data_bank/evidence.py": "7f822526c643034b789d892da767a542280bce92eb287550d270c55c6c5868e8",
+    "experiments/candidates/typed_joint_skill_decision/b05_data_bank/read.py": "1b9e1d6171b69a67a0bc59e291469d9ebb2f2a867783692d952197f870ba037a",
+    "experiments/candidates/typed_joint_skill_decision/b05_data_bank/run.py": "747e0461f1c0d6b1a5f45ac3eafae44b989ef41ef1fdf97783066fe4399208a5",
+    "experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/__init__.py": "f73e07b0aaea41546bf0aa98c10a99c26a436d845dc68871514a8cd51faa214a",
+    "experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/billing.py": "5373b74e697c8504022320ca85aadd05727d2eab7dfc5c2248e95bbecfa2137e",
+    "experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/commitment.py": "fcbb581e354e37d7ad6d19f62b902d7115b722762ac71be1a52903bfdef652a7",
+    "experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/contract.py": "70e68bc4df90ae16ba5370a8d7a73981e88901babacaaf8f98ebd6546392339d",
+    "experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/evidence.py": "5f3b463be7774f9dd589fad18b801d435be71f23de50395ec9c795e99bfa9ddd",
+    "experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/reader.py": "96bfeb1b5a8c26710cce3eb4b0f5e887cfc687b90208bd16b46dc209ebb3b6eb",
+    "experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/run.py": "7c8bc93ec486a7975f1961ee10a9919ea0b0262eb8f8c335604ce97e51c6b6bf",
+    "experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/worker.py": "33b88af6fcbae899c5611a945e249e7ff0b86ad88e92bde78c486813930d250a",
+    "experiments/candidates/typed_joint_skill_decision/b07_fixed_bank/__init__.py": "8da87e0c47800bae776ce71c14139f841346d2517d1dab927ac41f4c7d7ac6a5",
+    "experiments/candidates/typed_joint_skill_decision/b07_fixed_bank/contract.py": "3882b01aa16106a94d6e5f781297685a9ffe74afec1e95048965d7f2842442b4",
+    "experiments/candidates/typed_joint_skill_decision/b07_fixed_bank/data.py": "d4e6d62e53f4886bc18d4702119e04446ff2b3d118c566d8224b1b1c56664ec3",
+    "experiments/candidates/typed_joint_skill_decision/b07_fixed_bank/evidence.py": "8d87b4b74563ea15c6a011302f359aab06c7c6b72c53cccbd645ee3dbe487adb",
+    "experiments/candidates/typed_joint_skill_decision/b07_fixed_bank/read.py": "6a9eb9888ec40ba8b1c8dbac0f50f0f5a9588242a13b7377aa90c4175a6b046f",
+    "experiments/candidates/typed_joint_skill_decision/b07_fixed_bank/run.py": "18aca9120ecaa409b4d4145ec7bdbc3f366db391e9906a04ad21747e3acd16e3"
+  },
+  "frozen_sources": {
+    "experiments/candidates/typed_joint_skill_decision/b04/__init__.py": "f160546e36507cbb6da4357825a99298431ec6b487248409380b63007a6599df",
+    "experiments/candidates/typed_joint_skill_decision/b04/bank.py": "45cd06e8538b011a62fcdcaca8cea8416fa4a06ef78435f0d7513214ed65b173",
+    "experiments/candidates/typed_joint_skill_decision/b04/contract.py": "d555883a25030a6a1bcb89150b3823d0dc843d96f33085a6dba6329e364b5c7a",
+    "experiments/candidates/typed_joint_skill_decision/b04/evidence.py": "74c197cf2ab1db82e8899ba9ad4c7c04d0decc93476731eefb4161bc21f10583",
+    "experiments/candidates/typed_joint_skill_decision/b04/functional.py": "ff2ae5d5f27260be266ac9959bd6180f892076b9ca7f9f74965df0d7af9803d1",
+    "experiments/candidates/typed_joint_skill_decision/b04/model.py": "cf59f16f79f6cc7f37ba18936d89816f6eff90da61d291c63273f8601965f5ac",
+    "experiments/candidates/typed_joint_skill_decision/b04/native.py": "43c78e5f0da727e0e529ca0a9583352a9c98d63cfcd6ad01e7a62fd4f824e3f8",
+    "experiments/candidates/typed_joint_skill_decision/b04/online.py": "441ddbfb88a4a4c2d992ad4c99a7225dd52214876664c542e957fd94a5afb18e",
+    "experiments/candidates/typed_joint_skill_decision/b04/planner_reader.py": "0f20e3a98d908d72e6a2b2f509e5e151e030a40415e736205b43a54d876ce76b",
+    "experiments/candidates/typed_joint_skill_decision/b04/reader.py": "49ae4474572971bdbaeaecbcb8d2a2470178d8a0c7b1fd1e1678b0e91c7f9bcc",
+    "experiments/candidates/typed_joint_skill_decision/b04/run.py": "dfb43f931798073f8af553b8d235ec428be0b0166a6901b3f5e3ea6fadabaae0",
+    "experiments/candidates/typed_joint_skill_decision/b04/shortlist.py": "0404065d3c7c3b454e9d157bf5cf3d80e80bee25db5f37ccb94982bb09e12f28",
+    "experiments/candidates/typed_joint_skill_decision/b04/training.py": "dd59cdd48787ee3e9684b38735d2b4b11af8875996777ba94b0c87dbae46857b"
+  },
+  "investment": {
+    "limits": {
+      "cpu_seconds": 28800,
+      "disk_bytes": 6442450944,
+      "gpu_child_seconds": 14400,
+      "wall_seconds": 57600
+    },
+    "selected": true
+  },
+  "preparation_cost": {
+    "cpu_limit_scope": "separate_from_consumer_cpu_limit",
+    "evidence": [
+      {
+        "bytes": 22518,
+        "path": "runs/typed_joint_skill_decision/b06_consumer_source/checks.json",
+        "sha256": "b003cb7bc00fbcbecbcaaddf6bf4ce8313e01f0f7f40d2b293ef5a2f9acfd234"
+      },
+      {
+        "bytes": 3200,
+        "path": "runs/typed_joint_skill_decision/b07_consumer_a01/cleanup.json",
+        "sha256": "c42568d42a2e9799bce28d73b40814518b326c084b4adab4af01c5d793471333"
+      },
+      {
+        "bytes": 3304,
+        "path": "runs/typed_joint_skill_decision/b07_consumer_a01/engineering-diagnosis.json",
+        "sha256": "af6b9f457283f0ed8cf8133778a7fe8d64333c1cd5fe2930ed47508409d615f5"
+      },
+      {
+        "bytes": 478,
+        "path": "runs/typed_joint_skill_decision/b07_consumer_a01/observation-closure.json",
+        "sha256": "3baac1659b00203618cdbc90db4d9ed2acf6094ad8f55dbc7efacc398e6e41cd"
+      },
+      {
+        "bytes": 13328,
+        "path": "runs/typed_joint_skill_decision/b07_consumer_a01/scientific-review.json",
+        "sha256": "4dc4ddcea3a01ff3a5a13b327c3e11ad5e24d4149de38399faf98fd458c13665"
+      },
+      {
+        "bytes": 4283,
+        "path": "runs/typed_joint_skill_decision/b07_consumer_a01/supervisor-failure.json",
+        "sha256": "ecd32991fd862440aaa70bb5ad3534b98b1fa65261f10e5b107fa06c105012d4"
+      },
+      {
+        "bytes": 8677,
+        "path": "runs/typed_joint_skill_decision/b07_consumer_a02/cleanup.json",
+        "sha256": "ca5fcde0eedd268ebd5fa28df0dcec312c059529a9790a37012a3e771743ca42"
+      },
+      {
+        "bytes": 2792,
+        "path": "runs/typed_joint_skill_decision/b07_consumer_a02/engineering-diagnosis.json",
+        "sha256": "1f08c1aa35f585406af81a86292365dc4901ca2dc53317a1eadd76ab57e3f744"
+      },
+      {
+        "bytes": 3742,
+        "path": "runs/typed_joint_skill_decision/b07_consumer_a02/native-refusal.json",
+        "sha256": "84a1d9927acf2ec2ec827785ed86b5f32628b3c88d026a5498a34f19947ae2f0"
+      },
+      {
+        "bytes": 8492,
+        "path": "runs/typed_joint_skill_decision/b07_consumer_a02/scientific-review.json",
+        "sha256": "46b23742d4e1b8feac60c56fa559d64ad3ab2b056cf728379ff521d855b51436"
+      },
+      {
+        "bytes": 912,
+        "path": "runs/typed_joint_skill_decision/b07_consumer_a02/supervisor-submission.json",
+        "sha256": "d7ce7ad16460009c9b9078b5c4ab516d09f2ef423ded2026e2e5db0470d82213"
+      },
+      {
+        "bytes": 5961,
+        "path": "runs/typed_joint_skill_decision/b07_fixed_bank_reader_a01/cleanup.json",
+        "sha256": "00cc157cf149632bbd582fc98ce1c1d1043f0d974a636e7f68c9289b4517a83c"
+      },
+      {
+        "bytes": 5743,
+        "path": "runs/typed_joint_skill_decision/b07_fixed_bank_reader_a01/technical-reading.json",
+        "sha256": "121537ad36e6593561b5b297dc20724f2f02b2960eff84babb5f74e282871ffd"
+      },
+      {
+        "bytes": 4951,
+        "path": "runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/cleanup.json",
+        "sha256": "06294cf1552e1405728e580a632ac4f77ccce2fa1b806f72f97426e0a7cc7fb6"
+      },
+      {
+        "bytes": 13551,
+        "path": "runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/fixed-version-reading.json",
+        "sha256": "d76c265672cd828a7af5fd940686022eb2c636414f3c13f9cebcc66e8cec2ab8"
+      },
+      {
+        "bytes": 12897,
+        "path": "runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/full-reading.json",
+        "sha256": "4cbe33d18d7e2e8f299d425c0a7ff7cfe81d10b3a18d3f3449ba8d895dfaae68"
+      },
+      {
+        "bytes": 29772,
+        "path": "runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/observer-terminal.json",
+        "sha256": "e5208dea33c8daeb330f19cf03e3fa5d5a633ae4f84b895d8b9f22670de40e44"
+      },
+      {
+        "bytes": 34280,
+        "path": "runs/typed_joint_skill_decision/b07_source/checks.json",
+        "sha256": "8d7584b52fb6f0c357fc0a9afdb22dfd583f69d082986b0ec65d6e5e7fc20602"
+      },
+      {
+        "bytes": 1872,
+        "path": "runs/typed_joint_skill_decision/b07_source/consumer-a02-binding-check.json",
+        "sha256": "5ba3df252d840b5cbe1713b1d5e8418de982c84c6366c91d2dddc9aa0f5c8b94"
+      },
+      {
+        "bytes": 2462,
+        "path": "runs/typed_joint_skill_decision/b07_source/consumer-a02-engineering-review.json",
+        "sha256": "e6f2c94d3ee3892625bb074a9b740efa7943fe12bc2b1f5e45ddf52b44e09d0f"
+      },
+      {
+        "bytes": 5019,
+        "path": "runs/typed_joint_skill_decision/b07_source/consumer-a02-launch-request.json",
+        "sha256": "b9b38f16349e40191babc0ba45a6bcdd349867c115bf858c1de83e0de1550a1c"
+      },
+      {
+        "bytes": 2168,
+        "path": "runs/typed_joint_skill_decision/b07_source/consumer-a02-node-before.json",
+        "sha256": "a90a16e70f0874db406420e151b8c8d4b6f9755846e8bdefd42e23d22468ff12"
+      },
+      {
+        "bytes": 5149,
+        "path": "runs/typed_joint_skill_decision/b07_source/consumer-a02-preparation-cost.json",
+        "sha256": "b422d8457c7248ce3e69644cbfed3d89f3b19379392b126c0c7141efa9638415"
+      },
+      {
+        "bytes": 5635,
+        "path": "runs/typed_joint_skill_decision/b07_source/consumer-a02-staging.json",
+        "sha256": "8f7b3c0b3bc72f27fde9c9b6fac0a91ff8237b1c57649ce3838754ebb0f314cc"
+      },
+      {
+        "bytes": 1277,
+        "path": "runs/typed_joint_skill_decision/b07_source/consumer-a02-submission-checks.json",
+        "sha256": "4d86d498ed2c6a371fc1d4d574b1c875673926e3a06d6798e688aa863545c50e"
+      },
+      {
+        "bytes": 677,
+        "path": "runs/typed_joint_skill_decision/b07_source/consumer-a02-supervisor-source.json",
+        "sha256": "c79613dd0e587179e6465db104116e80a07ecae53d64c07cd4c12e701f7c4384"
+      },
+      {
+        "bytes": 1562,
+        "path": "runs/typed_joint_skill_decision/b07_source/consumer-a03-guard-checks.json",
+        "sha256": "64b4cbddadc3e50e4d2b34b31221ccef0abfc490d6bc27659a2eaf2a75dad9b2"
+      },
+      {
+        "bytes": 3423,
+        "path": "runs/typed_joint_skill_decision/b07_source/consumer-a03-preparation-cost.json",
+        "sha256": "cd94ed7f8e72ee714b593387852a6b09fae0adcef5519344cffdbc7f24b93d35"
+      },
+      {
+        "bytes": 5651,
+        "path": "runs/typed_joint_skill_decision/b07_source/consumer-a03-staging.json",
+        "sha256": "e1c497377c9c0f91afda269703545e6ff0b3160043cc02c35f0eaaab08c2ab54"
+      },
+      {
+        "bytes": 1299,
+        "path": "runs/typed_joint_skill_decision/b07_source/consumer-binding-check.json",
+        "sha256": "829257e6ddaeeaf89f870f12c4f90e4fd8ed6704f654c31d1017088dd84eee59"
+      },
+      {
+        "bytes": 7340,
+        "path": "runs/typed_joint_skill_decision/b07_source/consumer-preparation-cost.json",
+        "sha256": "e1651c19b8f0e9a66e1caf8eed9ed36149c9007023196ca9f9535a892242a74f"
+      },
+      {
+        "bytes": 5648,
+        "path": "runs/typed_joint_skill_decision/b07_source/consumer-staging.json",
+        "sha256": "42d956477a2428771537e5c6e30a69b0bed090f9ea176ce5527881607c1a519b"
+      },
+      {
+        "bytes": 3782,
+        "path": "runs/typed_joint_skill_decision/b07_source/dm-source-acceptance-pending.json",
+        "sha256": "bf318507437c2696f60ba89c67d21c1ec10ad5ea98f28328a936d0d05cdb5cfe"
+      },
+      {
+        "bytes": 3846,
+        "path": "runs/typed_joint_skill_decision/b07_source/engineering-review-correction.json",
+        "sha256": "f48734a097ec69fc05b11f0975668daa59a6940d2e2216fb2a3e157f106c9c5f"
+      },
+      {
+        "bytes": 3407,
+        "path": "runs/typed_joint_skill_decision/b07_source/engineering-review.json",
+        "sha256": "4752ec042efcdd242c8da90881aa5f2c5bd62c9e6e9f20ecaa65eeddeb2d55f7"
+      },
+      {
+        "bytes": 2485,
+        "path": "runs/typed_joint_skill_decision/b07_source/input-binding-check.json",
+        "sha256": "b0abbce45530fd45c66c12399cf73eb07c9f8c004310baba0bec4884f11a2664"
+      },
+      {
+        "bytes": 3617,
+        "path": "runs/typed_joint_skill_decision/b07_source/local-storage-before.json",
+        "sha256": "e6bcf7052fd6398df1f08fe34059370b53690a87b4d18e8dbda6ff823af5d256"
+      },
+      {
+        "bytes": 14605,
+        "path": "runs/typed_joint_skill_decision/b07_source/renewed-checks.json",
+        "sha256": "9f0410c19eec842c840f2886c0aa8761c8656a6b031dbde2624c5c42e822be7d"
+      },
+      {
+        "bytes": 2860,
+        "path": "runs/typed_joint_skill_decision/b07_source/renewed-engineering-review.json",
+        "sha256": "3d98c7b34846941845f6a9420f3efe1fc8e29bfc4cf4c8a18297d67a863c1649"
+      },
+      {
+        "bytes": 1031,
+        "path": "runs/typed_joint_skill_decision/b07_source/renewed-input-binding-check.json",
+        "sha256": "558e25ef046290d1678072508087a86f7e5e77368c7a8d69280a6142eff11269"
+      },
+      {
+        "bytes": 3041,
+        "path": "runs/typed_joint_skill_decision/b07_source/renewed-local-storage-before.json",
+        "sha256": "af804b2802cf18780f3527a3ef2ff24951a9767ac7886c51bca99cef142b3440"
+      },
+      {
+        "bytes": 911,
+        "path": "runs/typed_joint_skill_decision/b07_source/renewed-reference-staging.json",
+        "sha256": "0052fc5eeef5c3bf5d60d439f76e5a486bf1230cbba1950e5e26336942f70f21"
+      }
+    ],
+    "known_cpu_seconds": 86.96944797999998,
+    "unmetered_support": "unknown_not_zero"
+  },
+  "runtime": {
+    "cpu_threads": 1,
+    "device": "cuda:0",
+    "gpu_uuid": "GPU-294302a9-40ff-1a09-43b0-5fd98e06b557",
+    "node": "wsl_4070",
+    "numpy_version": "1.26.3",
+    "package_installs": 0,
+    "python_version": "3.10.21",
+    "torch_version": "2.7.0+cu118",
+    "weight_downloads": 0
+  },
+  "schema": 1,
+  "scientific_input_sha256": "000588aa756405e25e9e3dbebec99b95927277b6a85ee38275947f322f4a12a3",
+  "scientific_source_sha": "b19508a5c2825359e66a36b4fdc1db68b60cc809",
+  "study": "b07_complete_fixed_producer_consumer"
+}

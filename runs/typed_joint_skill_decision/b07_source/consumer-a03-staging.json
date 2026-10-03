@@ -1,0 +1,141 @@
+{
+  "schema": 1,
+  "producer_manifest_sha256": "f18dcef40b320755e5b3bdfd94c4cc5be7869a7b549f58e0eccbe4090d6886e8",
+  "reader_manifest_sha256": "2c1a7021a4f2e4cda32855eacd9030f8c68d9652010696d519bb8a0062d8e18e",
+  "reader_complete_publication": "381e641f325bb077d630480e712e6ccde286c455",
+  "canonical_full_reader_bulk": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/raw",
+  "transported_reader_payload": "all compact actual child contexts/configs/summaries/manifests/reap witnesses and empty diagnostic logs, complete parent shard handoffs/counters/config/summary plus actual native terminal; no raw vector/reconstruction copy",
+  "support_unmetered": "remote ssh/scp service and startup/tails unknown_not_zero",
+  "at": "2026-10-03T00:00:51.679493+00:00",
+  "remote_root": "/home/wu/hmasd-inputs/typed_joint_skill_decision-b07-a03",
+  "status": "complete",
+  "commands": [
+    {
+      "argv": [
+        "ssh",
+        "hmasd-wsl-node",
+        "/usr/bin/python3",
+        "-"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "wall_seconds": 0.6209031649923418
+    },
+    {
+      "argv": [
+        "scp",
+        "-r",
+        "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b05_data_bank_a01/raw/bank",
+        "hmasd-wsl-node:/home/wu/hmasd-inputs/typed_joint_skill_decision-b07-a03/raw/"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "wall_seconds": 55.3945469520113
+    },
+    {
+      "argv": [
+        "scp",
+        "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b05_data_bank_a01/artifact-manifest.json",
+        "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b05_data_bank_a01/summary.json",
+        "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b05_data_bank_a01/config.json",
+        "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b05_data_bank_a01/shared-counters.bin",
+        "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b05_data_bank_a01/launch-manifest.json",
+        "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b05_data_bank_a01/process-exit.json",
+        "hmasd-wsl-node:/home/wu/hmasd-inputs/typed_joint_skill_decision-b07-a03/"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "wall_seconds": 0.5212054269941291
+    },
+    {
+      "argv": [
+        "scp",
+        "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b05_data_bank_a01/raw/parent/shards.json.gz",
+        "hmasd-wsl-node:/home/wu/hmasd-inputs/typed_joint_skill_decision-b07-a03/raw/parent/"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "wall_seconds": 0.42764564100070857
+    },
+    {
+      "argv": [
+        "scp",
+        "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b05_data_bank_a01/raw/engineering/static-permutations.json.gz",
+        "hmasd-wsl-node:/home/wu/hmasd-inputs/typed_joint_skill_decision-b07-a03/raw/engineering/"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "wall_seconds": 0.5157080979988677
+    },
+    {
+      "argv": [
+        "scp",
+        "-r",
+        "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/raw/process/reader",
+        "hmasd-wsl-node:/home/wu/hmasd-inputs/typed_joint_skill_decision-b07-a03/validation/raw/process/"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "wall_seconds": 32.307691356996656
+    },
+    {
+      "argv": [
+        "scp",
+        "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/artifact-manifest.json",
+        "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/summary.json",
+        "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/config.json",
+        "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/shared-counters.bin",
+        "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/launch-manifest.json",
+        "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/process-exit.json",
+        "hmasd-wsl-node:/home/wu/hmasd-inputs/typed_joint_skill_decision-b07-a03/validation/"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "wall_seconds": 0.7880259769881377
+    },
+    {
+      "argv": [
+        "scp",
+        "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02/raw/parent/shards.json.gz",
+        "hmasd-wsl-node:/home/wu/hmasd-inputs/typed_joint_skill_decision-b07-a03/validation/raw/parent/"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "wall_seconds": 0.5019223159906687
+    },
+    {
+      "argv": [
+        "ssh",
+        "hmasd-wsl-node",
+        "/usr/bin/python3",
+        "-"
+      ],
+      "returncode": 0,
+      "stdout": "{\"all_source_bound_hashes_match\": true, \"files\": 2337, \"logical_bytes\": 333492377, \"allocated_bytes\": 338259968, \"hash_cpu_seconds\": 0.23385388299999998, \"hash_wall_seconds\": 0.22954298602417111, \"science_calls\": 0}\n",
+      "stderr": "",
+      "wall_seconds": 0.7045092940097675
+    }
+  ],
+  "scientific_calls": 0,
+  "single_remote_bank_copy": true,
+  "verification": {
+    "all_source_bound_hashes_match": true,
+    "files": 2337,
+    "logical_bytes": 333492377,
+    "allocated_bytes": 338259968,
+    "hash_cpu_seconds": 0.23385388299999998,
+    "hash_wall_seconds": 0.22954298602417111,
+    "science_calls": 0
+  },
+  "parent_cpu_seconds": 0.283935744,
+  "child_transport_cpu_seconds": 3.5661519999999998,
+  "wall_seconds": 92.0604321659921
+}

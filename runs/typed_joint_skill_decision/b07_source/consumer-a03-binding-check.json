@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "at": "2026-10-03T00:04:17.113998+00:00",
+  "input_path": "docs/research/candidates/typed_joint_skill_decision/B07_CONSUMER_A03_INPUT.json",
+  "input_sha256": "e109b654141e4cb22fc403b55b8d27077bf5068f75c4293fb2e7f409e39d63cf",
+  "source_count": 20,
+  "only_changed_runtime_source": {
+    "experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/run.py": {
+      "old_sha256": "625aa9d0e78f29953ddc7059e4675f2cf074e1a70bef4904b1d3140863bbb527",
+      "new_sha256": "7c8bc93ec486a7975f1961ee10a9919ea0b0262eb8f8c335604ce97e51c6b6bf"
+    }
+  },
+  "frozen_science_sources": 13,
+  "unchanged_runtime_and_scientific_bindings": true,
+  "bank_certification": {
+    "reader": {
+      "input_manifest": {
+        "path": "docs/research/candidates/typed_joint_skill_decision/B07_READER_A02_INPUT.json",
+        "sha256": "fb130f8982a84c5c95d0b47b710652c9b66e3852871c46b9ffaa9cf7216c801f"
+      },
+      "manifest_sha256": "2c1a7021a4f2e4cda32855eacd9030f8c68d9652010696d519bb8a0062d8e18e",
+      "root": "/home/fires/hmasd-wsl/runs/typed_joint_skill_decision/b07_fixed_bank_reader_a02",
+      "source_sha": "285eea780dcc63e000d336b65611d3c183b3c768",
+      "terminal": {
+        "launch_manifest_sha256": "54af5b621ea17cb10d39bac4950078d4ad815b6b56eaa77707794c7a1ba8ef96",
+        "process_exit_sha256": "072b8090f389aac7c12779533130ae57ca5990f0b92c312339f1727f135eee76"
+      }
+    },
+    "status": "fixed_producer_version_validated",
+    "original_native_exit_code": 2
+  },
+  "bank_files": 258,
+  "bank_manifest_sha256": "f18dcef40b320755e5b3bdfd94c4cc5be7869a7b549f58e0eccbe4090d6886e8",
+  "selected_limits": {
+    "cpu_seconds": 28800,
+    "disk_bytes": 6442450944,
+    "gpu_child_seconds": 14400,
+    "wall_seconds": 57600
+  },
+  "known_preparation_cpu_subtotal_seconds": 86.96944797999998,
+  "parent_cpu_seconds": 0.6359060089999999,
+  "wall_seconds": 0.6361026649974519,
+  "scientific_calls": 0,
+  "numerical_imports": false,
+  "scope": "Actual complete source/input/upstream binding and canonical bank/compact proof bytes. Only allowed literal-declaration digest changes. No reconstruction, fit, model, native step or health probe; separate staging verifies remote byte copies."
+}

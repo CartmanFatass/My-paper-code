@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "at": "2026-10-02T23:58:47.422138+00:00",
+  "command": [
+    "/home/fires/.venvs/hmasd-linux-science-tools/bin/python",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/test_guard_contract.py"
+  ],
+  "exit_code": 0,
+  "stdout": "..                                                                       [100%]\n2 passed in 0.05s\n",
+  "stderr": "",
+  "parent_cpu_seconds": 0.17635017999999997,
+  "reaped_subprocess_cpu_seconds": 0.0,
+  "wall_seconds": 0.2504948020068696,
+  "source_sha256": {
+    "experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/run.py": "7c8bc93ec486a7975f1961ee10a9919ea0b0262eb8f8c335604ce97e51c6b6bf",
+    "tests/experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/test_guard_contract.py": "fe8e9d8727fbf07aa82a82ac195051234c66aecd20c0c4cf8dbe45de40c6fa11",
+    "scripts/hmasd_launch.py": "6a22fef75e7bbc0997b2f4b0096d278de793d43e466497b36bba49884cab23f9"
+  },
+  "scratch_root": "/home/fires/hmasd-wsl/temp/tests/pytest-c9otq37i",
+  "scratch_removed": true,
+  "forbidden_scientific_imports": [],
+  "actual_native_requests": 0,
+  "actual_admissions": 0,
+  "scientific_calls": 0,
+  "scope": "Actual corrected entry accepted by existing _validate_guard_contract; original complete pinned variable-form source refused with actual LaunchRefusal exit4. No consumer import, launcher request, admission, physics/model/native or health probe.",
+  "unmetered_support": "startup, edits and other support unknown_not_zero"
+}

@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "at": "2026-10-03T00:04:16.475724+00:00",
+  "scope": "Old81.747407335CPU-s frozen subtotal plus disjoint .961748838CPU-s later A02 support, new real-scanner regression and A03 one-copy staging. All prior failures retained; no producer/reader science counted twice.",
+  "components": [
+    {
+      "source": "runs/typed_joint_skill_decision/b07_source/consumer-a02-preparation-cost.json",
+      "field": "known_cpu_seconds",
+      "cpu_seconds": 81.74740733499998
+    },
+    {
+      "source": "runs/typed_joint_skill_decision/b07_consumer_a02/cleanup.json",
+      "field": "later_metered_support/known_cpu_seconds",
+      "cpu_seconds": 0.961748838
+    },
+    {
+      "source": "runs/typed_joint_skill_decision/b07_source/consumer-a03-guard-checks.json",
+      "field": "parent_cpu_seconds",
+      "cpu_seconds": 0.17635017999999997
+    },
+    {
+      "source": "runs/typed_joint_skill_decision/b07_source/consumer-a03-guard-checks.json",
+      "field": "reaped_subprocess_cpu_seconds",
+      "cpu_seconds": 0.0
+    },
+    {
+      "source": "runs/typed_joint_skill_decision/b07_source/consumer-a03-staging.json",
+      "field": "parent_cpu_seconds",
+      "cpu_seconds": 0.283935744
+    },
+    {
+      "source": "runs/typed_joint_skill_decision/b07_source/consumer-a03-staging.json",
+      "field": "child_transport_cpu_seconds",
+      "cpu_seconds": 3.5661519999999998
+    },
+    {
+      "source": "runs/typed_joint_skill_decision/b07_source/consumer-a03-staging.json",
+      "field": "verification/hash_cpu_seconds",
+      "cpu_seconds": 0.23385388299999998
+    }
+  ],
+  "known_cpu_seconds": 86.96944797999998,
+  "separate_prior_science": "Original B05 actual 2129.878646 CPU-s and successful B07 full-reader 2570.461047 CPU-s are retained separately in bank prior_cost, not counted as preparation. Original B04 crash-prefix floor306.264725CPU-s, at least431145saved labels and all other earlier scientific cost remain in the original records; not overwritten by these three fields.",
+  "unknown_not_zero": [
+    "Original A01 runner CPU before counter setup",
+    "Startup, tool, edits, reviews and transport services not captured by these wrappers",
+    "Original B04 crash tail and previous support not fully metered",
+    "Consumer input/check/publication/admission and later support occur after this frozen subtotal",
+    "Remote read-only historical-object query was aborted before launch, including its owned fetch descendants; any partial Git hydration/support is unmeasured and shared objects retained",
+    "A01 unknown actual supervisor numeric exit and incompletely metered launcher-request/review/observation/support cost",
+    "A02 review, Git publication, remote scp/ssh services and later input binding/admission/support are additional, incompletely metered",
+    "One draft ledger construction used wrong existing capture field child_ssh_cpu_seconds, raised KeyError before writing input or effects; corrected to actual transport_child_cpu_seconds. Failed draft support CPU unmetered, not zero.",
+    "Original A02 source snapshot creation and17s failed native-preparation wall have unmeasured CPU; no conversion from wall to CPU.",
+    "Later A02 support beyond its frozen closure subtotal and new A03 editing, source-difference checks, review, publication, binding/admission and subsequent support are additional incompletely metered cost."
+  ],
+  "no_new_scientific_effects": true
+}

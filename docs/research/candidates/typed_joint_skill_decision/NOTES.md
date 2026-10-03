@@ -5687,3 +5687,35 @@ Select all six fits/24,576 updates/at most1,383,760 consumer static calls/1,152 
 The DM directly owns the one-line change in `experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/run.py`: replace the direction argument in the existing `require_admission` call with the exact literal `"typed_joint_skill_decision"`. Preserve the native scanner, call location/order and every scientific/runtime statement. Add a focused test in the matching test directory that invokes the existing effect-free `scripts.hmasd_launch._validate_guard_contract` on this actual corrected entry, and reproduces refusal on the complete original variable-form bytes bound by the A02 input. Use pytest-owned scratch for the negative file. This executes no launcher request, admission, consumer import, model, physical query or native step. Reuse the already demonstrated caller/supervisor regression and complete applicable review; focused independent engineering acceptance covers only this delta and its actual source/input binding. No helper needs shared-path ownership or a second implementation context for this local change.
 
 Use new tag `b07_consumer_a03`, supervisor `typed-b07-consumer-a03`, staged bank/proof `/home/wu/hmasd-inputs/typed_joint_skill_decision-b07-a03`, and scratch `/home/wu/projects/HMASD/temp/directions/typed_joint_skill_decision/b07-consumer-a03`. Bind the single affected executable digest and new preparation/address fields in `B07_CONSUMER_A03_INPUT.json`, retaining the actual successful A02 proof and all frozen scientific pins. Publish exact new source/input and resolved request before the one formal Send; perform fresh actual-node admission. No `--retry-of` is fabricated for the prior pre-claim refusals. Follow the accepted native handle deterministically through full result reading/publication/cleanup, without per-phase Root acknowledgment.
+
+Reconciliation precision correction during A03 preparation: the previous custom A01/A02 records transparently name `.git/hmasd-launch-claims`, which is not the maintained native claim directory. A fresh read of actual `/home/wu/projects/HMASD/.git/hmasd-admission` now checks all304 claim JSON files and confirms no match for either prior source/output. The original records remain unchanged, with this correction in `b07_source/consumer-claim-location-correction.json`. The stronger independent evidence was already the actual pre-claim refusal path and supported unclaimed-source GC’s own claim check; their no-consumer conclusion and cleanup remain valid. This new read adds support cost and no scientific effect. Future reconciliation uses the actual manifest/native claim directory, never a guessed name.
+
+<a id="b07-consumer-a03-engineering-acceptance"></a>
+### A03 literal declaration and bound-input acceptance — 2026-10-03 UTC
+
+The sole runtime-source edit is the admitted direction literal; corrected runner SHA256 is `7c8bc93ec486a7975f1961ee10a9919ea0b0262eb8f8c335604ce97e51c6b6bf`. The unchanged actual native scanner accepts it and rejects the complete original variable-form source (old SHA625aa9d0…bbb527) with actual exit4. Both tests passed in0.05s; full wrapper.17635018CPU-s/.250494802wall-s, no scientific imports/requests/admissions/effects, and scratch was removed. The original caller/supervisor checks and actual A02 successful command grouping/terminal recording remain applicable without rerun.
+
+New `B07_CONSUMER_A03_INPUT.json` is16,180 bytes,SHA256 `e109b654141e4cb22fc403b55b8d27077bf5068f75c4293fb2e7f409e39d63cf`. Exactly one of20 executable digests changed;13 frozen B04 sources, upstream/scientific inputs, runtime, selected limits and complete actual A02 bank proof are unchanged. Staging copied2,337 files/333,492,377 logical bytes/338,259,968 allocated bytes once, with all source hashes matching; no physical bank/vector reconstruction or raw reader copy. Bound preparation subtotal is86.969447980CPU-s (old81.747407335 + disjoint.961748838 later A02 support + new scanner check + new staging); previous science remains separate. The new canonical source/bank/compact-proof byte check adds.635906009CPU-s. Review, corrected claim-directory check, publication and later support remain additional, with unknown cost explicit.
+
+<details><summary>Complete focused engineering acceptance</summary>
+
+**No P1+ finding remains in the literal-declaration correction or A03 input changes. This focused review supports DM acceptance.**
+
+[run.py:281](/home/fires/hmasd-wsl/experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/run.py:281) now supplies the exact literal required by the unchanged native scanner. The one-line change preserves call order and runtime meaning; the corrected source hash matches the receipt and input pin.
+
+[The regression](/home/fires/hmasd-wsl/tests/experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/test_guard_contract.py) invokes the real scanner on the actual entry. Its negative reconstructs the complete original variable-form source, verifies its SHA against A02, and checks the actual `LaunchRefusal` with exit 4. The receipt records **2 passed**, **0.17635018 CPU-s / 0.250494802 wall-s**, scratch removed, and no consumer imports, admissions, requests or scientific calls. No rerun was needed.
+
+I independently verified:
+
+- A03 input: **16,180 bytes**, SHA256 `e109b654141e4cb22fc403b55b8d27077bf5068f75c4293fb2e7f409e39d63cf`.
+- Only the intended runner digest, A03 staging/scratch addresses and preparation evidence/cost changed.
+- All **20 executable**, **13 frozen-source**, and **42 preparation-evidence** bindings match current bytes.
+- The staging receipt reports **2,337 verified files / 338,259,968 allocated bytes**, retaining the same successful A02 reader proof.
+
+This resolves the known static-scanner refusal only. Complete consumer integration, fresh admission and CUDA feasibility remain unverified; prior failures and missed-review findings remain preserved.
+
+No edits, launches or tests were performed. My source/receipt hash inspection used **0.002029722 CPU-s**; other review support was not fully metered.
+
+</details>
+
+DM acceptance: the delta and exact bindings satisfy their narrow contract. This predicts disappearance of the observed static declaration refusal; complete integration and consumer feasibility remain unmeasured. No new empirical or scientific conclusion is inferred. Publish exact inputs and resolved new request, perform fresh actual-node admission, then follow the same accepted operation through the selected full package or first real failure.

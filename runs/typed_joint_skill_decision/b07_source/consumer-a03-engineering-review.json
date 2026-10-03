@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "at": "2026-10-03T00:08:39.421481+00:00",
+  "source": "native final message from /root/dm_decision_assistance/b07_identity_engineering_review",
+  "review": "**No P1+ finding remains in the literal-declaration correction or A03 input changes. This focused review supports DM acceptance.**\n\n[run.py:281](/home/fires/hmasd-wsl/experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/run.py:281) now supplies the exact literal required by the unchanged native scanner. The one-line change preserves call order and runtime meaning; the corrected source hash matches the receipt and input pin.\n\n[The regression](/home/fires/hmasd-wsl/tests/experiments/candidates/typed_joint_skill_decision/b06_bank_consumer/test_guard_contract.py) invokes the real scanner on the actual entry. Its negative reconstructs the complete original variable-form source, verifies its SHA against A02, and checks the actual `LaunchRefusal` with exit 4. The receipt records **2 passed**, **0.17635018 CPU-s / 0.250494802 wall-s**, scratch removed, and no consumer imports, admissions, requests or scientific calls. No rerun was needed.\n\nI independently verified:\n\n- A03 input: **16,180 bytes**, SHA256 `e109b654141e4cb22fc403b55b8d27077bf5068f75c4293fb2e7f409e39d63cf`.\n- Only the intended runner digest, A03 staging/scratch addresses and preparation evidence/cost changed.\n- All **20 executable**, **13 frozen-source**, and **42 preparation-evidence** bindings match current bytes.\n- The staging receipt reports **2,337 verified files / 338,259,968 allocated bytes**, retaining the same successful A02 reader proof.\n\nThis resolves the known static-scanner refusal only. Complete consumer integration, fresh admission and CUDA feasibility remain unverified; prior failures and missed-review findings remain preserved.\n\nNo edits, launches or tests were performed. My source/receipt hash inspection used **0.002029722 CPU-s**; other review support was not fully metered.",
+  "review_utf8_bytes": 1792,
+  "review_sha256": "a2919826034f4aac3c09e59b1b96c9884977c1d243b451385464371373fad17e",
+  "reviewer_hash_cpu_seconds": 0.002029722,
+  "other_review_support": "unknown_not_zero",
+  "preservation_cpu_seconds": 3.0245999999997664e-05,
+  "dm_acceptance": "Accepted only for the literal admission declaration and exact A03 bindings. Real scanner regression covers known incompatibility; no readiness/health promise. Reuse demonstrated unchanged caller; publish exact source/request then one actual admission."
+}

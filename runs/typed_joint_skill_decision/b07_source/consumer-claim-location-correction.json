@@ -1,0 +1,15 @@
+{
+  "at": "2026-10-03T00:06:57.989110+00:00",
+  "canonical_claim_root": "/home/wu/projects/HMASD/.git/hmasd-admission",
+  "claim_json_files_examined": 304,
+  "matching_claims": {
+    "a01": [],
+    "a02": []
+  },
+  "scientific_calls": 0,
+  "schema": 1,
+  "correction": "Prior custom A01/A02 reconciliation recorded a search of .git/hmasd-launch-claims, which is not the maintained claim directory. Those original bytes remain unchanged. This read checks actual .git/hmasd-admission and confirms no matching claims. Independently, the actual static refusal is pre-claim and supported unclaimed-source GC already enforced absence before deletion.",
+  "local_parent_cpu_seconds": 0.0006036910000000034,
+  "local_child_cpu_seconds": 0.0629,
+  "other_support": "unknown_not_zero"
+}

@@ -278,7 +278,7 @@ def main(argv=None):
     started = time.monotonic()
     args = parser().parse_args(argv)
     from scripts.hmasd_admission import require_admission
-    admission = dict(require_admission(__file__, direction=c.DIRECTION))
+    admission = dict(require_admission(__file__, direction="typed_joint_skill_decision"))
     # require_admission consumes its single-use environment. Bind its returned grant
     # to the durable launch and actual runner; never read the consumed specification.
     out = args.out.resolve(strict=True)
