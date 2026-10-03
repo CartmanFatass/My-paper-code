@@ -633,3 +633,57 @@ scientific response are unchanged. No second scientific selection round or owner
 approval was added. The selected whole comparison is now ready for its single
 formal submission; there is still no accepted operation or scientific result at
 this entry's publication boundary.
+
+
+<a id="b01-a01-formal-refusal-20261003"></a>
+### A01 first formal request refused; zero-effect purchase closure — 2026-10-03
+
+The single formal local_linux request at published source
+`4736b91c62b4a1e0072fa6ea37c1300ebafee9c8` exited4 before execution:
+
+> hmasd launch refused: direction 'uav_planning_opportunity_timing' has unrecognized active state 'active'
+
+[Exact request, stderr/stdout, exit, source diagnosis, cost and reconciliation](../../../../runs/uav_planning_opportunity_timing/b01_complete_timing_a01/launch-refusal.json)
+retains the command as an argv array and the empty stdout digest. No native
+manifest, output directory, worker, process-exit witness or result existed; the
+compact run directory was created only afterward to retain this refusal. The
+same-output read-only status request also exited4 because the reference did not
+exist. No accepted handle was invented and no observer was armed.
+
+The defect is specific and ours to preserve: the direction table had literal
+state `active`. Current `scripts/hmasd_launch.py` accepts `exploring` and
+`confirming` in its Active table, and `parse_research_state` rejected that local
+value. `_prepare_paths_and_config` calls this policy check before snapshot
+preparation. Read-only reconciliation found no matching record in the actual
+`.git/hmasd-admission` store, no non-author worktree at the scientific SHA, no
+exact runner process, and no native output. The refusal preceded published-control
+verification, source snapshot construction, memory admission, claim and spawn.
+This is not a runtime-health failure, resource shortage or test of the timing law.
+
+The first-formal-failure stopping rule closes A01: **0 native missions/steps,
+0 model/scorer/full-reader queries,0 fits/updates**, and no automatic correction,
+retry, fallback, missing-cell completion or pilot. GNU time reported.24s launcher
+wall,.12s user+.07s system CPU (each at.01s precision); known metered preparation
+plus launcher is approximately11.50CPU seconds, with uninstrumented support and
+Reviewer's wrapper startup still unknown. There was no scientific worker or reader
+bill. Technical source completion and synthetic checks remain useful; no native
+comparison was acquired and no timing hypothesis is strengthened or weakened.
+
+Root received the concrete failure and requested complete closure/reconciliation
+before it reads the exact record and makes any explicit corrected-purchase choice.
+The existing complete comparator and independent scientific/engineering reviews
+still apply to the unchanged design, but this does not itself authorize another
+formal request. The direction is placed in reserve for that concrete Root choice;
+the question remains open, with old B04/B08 evidence and the first-mover opportunity
+loss unchanged. No shared scientific-background edit is warranted by zero new
+scientific evidence.
+
+After confirming no consumer, the two exact scratch captures and their attempt
+and empty direction directories were deleted. Their unique contents live once
+in the compact refusal record. **Net allocated space reclaimed:8,192bytes**, after
+charging the compact record's final growth; exact deleted paths and before/after
+allocation are in that record. No source snapshot was created or deleted, no
+required evidence was removed, and no cleanup tool blocker or own scratch remains.
+The already published useful implementation/tests/fixed initial arrays remain for
+Root's concrete corrected-purchase review; no new code change or scientific
+repair was performed after the formal refusal.

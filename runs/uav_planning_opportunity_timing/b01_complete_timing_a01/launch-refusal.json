@@ -1,0 +1,112 @@
+{
+  "accepted": false,
+  "argv": [
+    "/home/fires/.venvs/hmasd-linux-science-tools/bin/python",
+    "scripts/hmasd_launch.py",
+    "launch",
+    "--node",
+    "local_linux",
+    "--source-root",
+    "/home/fires/hmasd-wsl",
+    "--snapshot",
+    "--direction",
+    "uav_planning_opportunity_timing",
+    "--lead",
+    "Codex DM (native child)",
+    "--sha",
+    "4736b91c62b4a1e0072fa6ea37c1300ebafee9c8",
+    "--output",
+    "runs/uav_planning_opportunity_timing/b01_complete_timing_a01",
+    "--",
+    "experiments/candidates/uav_planning_opportunity_timing/b01/run.py",
+    "--out",
+    "runs/uav_planning_opportunity_timing/b01_complete_timing_a01",
+    "--launch-sha",
+    "4736b91c62b4a1e0072fa6ea37c1300ebafee9c8",
+    "--seed",
+    "29523000"
+  ],
+  "cleanup": {
+    "after_allocated_bytes": 12288,
+    "before_allocated_bytes": 20480,
+    "deleted": [
+      {
+        "allocated_bytes": 0,
+        "path": "/home/fires/hmasd-wsl/temp/directions/uav_planning_opportunity_timing/b01_complete_timing_a01/launch-response.json"
+      },
+      {
+        "allocated_bytes": 4096,
+        "path": "/home/fires/hmasd-wsl/temp/directions/uav_planning_opportunity_timing/b01_complete_timing_a01/launch-timing.txt"
+      },
+      {
+        "kind": "directory",
+        "path": "/home/fires/hmasd-wsl/temp/directions/uav_planning_opportunity_timing/b01_complete_timing_a01"
+      },
+      {
+        "allocated_bytes": 4096,
+        "kind": "empty direction scratch directory",
+        "path": "/home/fires/hmasd-wsl/temp/directions/uav_planning_opportunity_timing"
+      }
+    ],
+    "leftovers": [],
+    "net_allocated_bytes_reclaimed": 8192,
+    "scope": "exact direction scratch plus preserved compact run record, measured after initial record creation and before/after deletion; final record growth charged",
+    "tool_blocker": null
+  },
+  "cost": {
+    "formal_launcher_system_seconds": 0.07,
+    "formal_launcher_user_seconds": 0.12,
+    "formal_launcher_wall_seconds": 0.24,
+    "gnu_time_text": "real 0.24\nuser 0.12\nsys 0.07\n",
+    "known_preparation_plus_launcher_cpu_seconds": 11.501685,
+    "metered_preparation_cpu_seconds": 11.311685,
+    "resolution_seconds": 0.01,
+    "unknown": "uninstrumented support tools and reviewer wrapper startup remain unknown; no scientific worker/reader exists"
+  },
+  "exit_code": 4,
+  "formal_request_count": 1,
+  "interpretation": "No evidence about the timing hypothesis or complete comparator value. Existing scientific and engineering reviews remain applicable to a separately selected corrected purchase; no correction/retry is authorized by this record.",
+  "node": "local_linux",
+  "operation_ref": null,
+  "purchase_closed": true,
+  "reconciled_at_utc": "2026-10-03T03:17:23.769171+00:00",
+  "reconciliation": {
+    "exact_runner_processes": [],
+    "matching_admission_store_records": [],
+    "matching_non_author_source_worktrees": [],
+    "observer_armed": false,
+    "output_absent_before_this_record": true,
+    "status_command_exit_code": 4,
+    "status_command_stderr": "hmasd launch refused: status reference does not exist: /home/fires/hmasd-wsl/runs/uav_planning_opportunity_timing/b01_complete_timing_a01\n"
+  },
+  "request_completed_at_utc_from_timing_file_mtime": "2026-10-03T03:13:44.981483+00:00",
+  "scientific_effects": {
+    "fits": 0,
+    "full_reader_queries": 0,
+    "native_missions": 0,
+    "native_steps": 0,
+    "real_model_or_scorer_queries": 0,
+    "updates": 0
+  },
+  "source_diagnosis": {
+    "file": "scripts/hmasd_launch.py",
+    "frontier": "_prepare_paths_and_config calls _require_policy before source snapshot preparation; parse_research_state rejects the local row before published-control check, claim, memory admission, process spawn or runner effects",
+    "observed_state": "active",
+    "recognized_active_states": [
+      "exploring",
+      "confirming"
+    ],
+    "sha256": "6a22fef75e7bbc0997b2f4b0096d278de793d43e466497b36bba49884cab23f9"
+  },
+  "source_sha": "4736b91c62b4a1e0072fa6ea37c1300ebafee9c8",
+  "status": "FORMAL_REQUEST_REFUSED_BEFORE_SCIENTIFIC_EFFECT",
+  "stderr": {
+    "capture": "exact stderr from the formal exec tool response; no launcher/native stderr file was created",
+    "text": "hmasd launch refused: direction 'uav_planning_opportunity_timing' has unrecognized active state 'active'\n"
+  },
+  "stdout": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "text": ""
+  }
+}
