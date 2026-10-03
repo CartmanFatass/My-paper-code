@@ -1,13 +1,59 @@
 {
-  "status": "complete_before_single_formal_request",
-  "metered_cpu_seconds": 11.311685,
+  "current_selected_attempt": "b01_complete_timing_a02",
   "entries": [
-    {"scope": "Implementer: three fully synthetic checks, including one failed stub-ledger check", "self_cpu_seconds": 0.210812, "child_cpu_seconds": 2.816019, "wall_seconds": 2.950610785},
-    {"scope": "DM: fixed17-world initial-array generation; no environment, controller or scorer", "self_cpu_seconds": 0.205673, "child_cpu_seconds": 0.0, "wall_seconds": 0.178365705},
-    {"scope": "DM: focused27-test fully synthetic pipeline/timing suite", "self_cpu_seconds": 0.084954, "child_cpu_seconds": 4.363473, "wall_seconds": 4.793970992},
-    {"scope": "independent engineering Reviewer: focused27-test synthetic suite", "self_cpu_seconds": 0.000333, "child_cpu_seconds": 3.630421, "wall_seconds": 3.641693}
+    {
+      "child_cpu_seconds": 2.816019,
+      "scope": "Implementer: three fully synthetic checks, including one failed stub-ledger check",
+      "self_cpu_seconds": 0.210812,
+      "wall_seconds": 2.950610785
+    },
+    {
+      "child_cpu_seconds": 0.0,
+      "scope": "DM: fixed17-world initial-array generation; no environment, controller or scorer",
+      "self_cpu_seconds": 0.205673,
+      "wall_seconds": 0.178365705
+    },
+    {
+      "child_cpu_seconds": 4.363473,
+      "scope": "DM: focused27-test fully synthetic pipeline/timing suite",
+      "self_cpu_seconds": 0.084954,
+      "wall_seconds": 4.793970992
+    },
+    {
+      "child_cpu_seconds": 3.630421,
+      "scope": "independent engineering Reviewer: focused27-test synthetic suite",
+      "self_cpu_seconds": 0.000333,
+      "wall_seconds": 3.641693
+    },
+    {
+      "cpu_seconds": 0.19,
+      "resolution_seconds": 0.01,
+      "scope": "A01 formally refused launcher; GNU time user+system includes reaped launch support",
+      "system_seconds": 0.07,
+      "user_seconds": 0.12,
+      "wall_seconds": 0.24
+    },
+    {
+      "child_cpu_seconds": 0.07435,
+      "scope": "A02 pure control-parser/unchanged-world metadata consistency, including fetch/hash subprocesses; no launch or scientific query",
+      "self_cpu_seconds": 0.12282199999999999,
+      "wall_seconds": 1.7041236929944716
+    }
   ],
-  "scientific_effects": {"fits": 0, "updates": 0, "native_steps": 0, "real_model_or_scorer_queries": 0},
-  "unknown_cost": "Uninstrumented source/support tool CPU and independent-review wrapper startup before its sample are unknown, not zero. Formal launcher CPU and finalization after final worker sample are recorded separately; the runtime reserves300 CPU seconds and600 wall seconds before the selected hard ceilings.",
-  "rss_scope": "Check wrappers report process-lifetime high-water including inherited maxima; these are not incremental or additive. Largest observed pytest-child high-water323440KiB. No real workload RSS has been measured."
+  "metered_cpu_seconds": 11.698857,
+  "prior_closed_attempt": {
+    "closure_commit": "5e866a3abb62d65b10285043c583c11e6840d7bc",
+    "refusal_sha256": "12618878099411cc43b87f245b89d1ac63757750be410f954487e71e846b842f",
+    "source_sha": "4736b91c62b4a1e0072fa6ea37c1300ebafee9c8",
+    "tag": "b01_complete_timing_a01"
+  },
+  "rss_scope": "Check wrappers report process-lifetime high-water including inherited maxima; these are not incremental or additive. Largest observed pytest-child high-water323440KiB. No real workload RSS has been measured.",
+  "scientific_effects": {
+    "fits": 0,
+    "native_steps": 0,
+    "real_model_or_scorer_queries": 0,
+    "updates": 0
+  },
+  "status": "complete_before_corrected_a02_formal_request",
+  "unknown_cost": "Uninstrumented source/support tool CPU and independent-review wrapper startup before its sample are unknown, not zero. Formal launcher CPU and finalization after final worker sample are recorded separately; the runtime reserves300 CPU seconds and600 wall seconds before the selected hard ceilings. A02 consistency-check final metadata write tail is outside its final sample; later uninstrumented source/publication support remains unknown."
 }

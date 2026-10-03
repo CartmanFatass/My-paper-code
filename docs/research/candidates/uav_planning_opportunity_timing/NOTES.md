@@ -687,3 +687,52 @@ required evidence was removed, and no cleanup tool blocker or own scratch remain
 The already published useful implementation/tests/fixed initial arrays remain for
 Root's concrete corrected-purchase review; no new code change or scientific
 repair was performed after the formal refusal.
+
+
+<a id="b01-a02-selected-20261003"></a>
+### Root selects one corrected whole A02 purchase; costs carried forward — 2026-10-03
+
+Root read the complete A01 refusal, reconciliation, cost and closure, and explicitly
+selected `b01_complete_timing_a02` at
+`1ca29126a9899d52ddd42d6c2a396dd5c460f71e`,
+[corrected whole purchase](../../RESEARCH.md#four-dm-c-a02-selected-20261003).
+A01 remains closed. No accepted operation exists to resume. This is one newly
+selected formal request with a specific, source-supported reason: replacing the
+mistaken local/published direction state `active` with the authorized `exploring`
+value should remove exactly the parser refusal identified in the A01 record.
+It does not establish that later admission or native execution will succeed.
+
+Only the owned RESEARCH row/state and task routing, this prospective note and
+preparation/provenance metadata change. Lead remains `Codex DM (native child)`;
+owner pause remains lifted and all other rows/controls are preserved. All
+scientific Python, tests,17 committed initial arrays, controller/comparator/world
+laws, tolerances, tie/order/precision rules and reader contracts remain byte-for-
+byte those accepted at `4736b91c62b4a1e0072fa6ea37c1300ebafee9c8`. A pure Git
+comparison confirmed the only implementation-tree change is preparation.json;
+the unchanged worlds.json Git blob is`cf9e82f2f819acbf15ebc46d8fcdd82e1286780d`.
+No launcher-rule change, redesign, validation mission, health test, new Oracle or
+independent scientific/engineering round is added. Existing completed advice and
+checks cover this unchanged study and remain applicable.
+
+A pure source parser/metadata check verified `parse_research_state` returns
+pause`lifted`, state`exploring`, lead`Codex DM (native child)` for the corrected
+local index, without invoking launch, snapshot, actual-node admission or any
+scientific callable. It consumed.122822self+.074350child=.197172CPU seconds,
+1.704124wall seconds, including its fetch/hash subprocesses. Those costs add to
+11.501685known A01 preparation+refused-launcher CPU seconds, so committed
+preparation now carries**11.698857metered CPU seconds**. Source/publication support,
+Reviewer's pre-sample wrapper startup and the final metadata-write tail remain
+unmeasured, not zero. Paid costs are not reset by the fresh attempt name.
+
+The full fixed68H500 missions/34,000 native transitions/0fit and complete
+uncompressed reading remain selected. Local_linux first, one numerical thread,
+20 cumulative measured preparation/worker/reader CPUh,48 operation wallh and
+10GiB normal source/evidence/scratch allocation remain binding. The first actual
+formal/admission/worker/reader failure of A02 still closes it; uncertain acceptance
+is reconciled only for that request. Healthy adverse/no-change outcomes complete
+all planned cells. No alternative node, repeated audit, missing-cell completion
+or automatic retry follows. The new sole formal output is
+`runs/uav_planning_opportunity_timing/b01_complete_timing_a02/`; runner identity
+seed29523000 and all science argv remain unchanged except the newly published
+source/attempt bindings. Submission follows publication of these exact corrected
+inputs. A01's record and8,192byte cleanup remain intact and independently readable.
