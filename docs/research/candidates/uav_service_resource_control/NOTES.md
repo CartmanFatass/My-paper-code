@@ -657,3 +657,22 @@ snapshot and this receipt as a source-bound input. The current published directi
 `exploring`, lead `Codex DM (native child)`; the selected first-formal-failure rule remains.
 No operation or duplicate retry exists. After acceptance this child will retain the same
 native handle, arm deterministic observation and remain active through collection and reading.
+
+<a id="b01-accepted-operation-20261003"></a>
+### First B01 operation accepted; same-handle observation
+
+Exact implementation/check inputs were published at
+`0dffa6f2ade7ca35c86b552be0fbc8b5a7837085`. The first local_linux request was accepted at
+2026-10-03T03:53:45Z; authoritative source, command, snapshot, node, native identities and
+operation reference are in the [launch manifest](../../../../runs/uav_service_resource_control/b01_native_selector_a01/launch-manifest.json),
+with the fresh [admission preflight](../../../../runs/uav_service_resource_control/b01_native_selector_a01/admission-preflight.json).
+No failed or repeated formal request precedes it. Immediately before submission the read-only
+node snapshot showed9,313,423,360 available memory bytes,16 logical CPUs and733,654,999,040
+free disk bytes; this did not replace the kernel's actual-node admission.
+
+The deterministic observer is armed for that same manifest operation, generation1. Its first
+drain at03:54:17Z reported consistent accepted/running supervisor and runner identities,
+no terminal witness and no scientific summary yet. This child keeps the turn active through
+the existing operation; checkpoints rearm observation only. Acceptance and observation are
+not a read scientific result. The fixed audits, fits, calibration, finals and complete reader
+remain the work to collect; the first real worker/reader failure still closes the purchase.
