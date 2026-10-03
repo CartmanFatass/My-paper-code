@@ -1,0 +1,17 @@
+{
+  "jobs": [
+    {
+      "id": "typed-b08-two-stage-value-a01",
+      "protocol": "launch",
+      "argv": [
+        "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+        "/home/fires/hmasd-wsl/scripts/hmasd_launch.py",
+        "status",
+        "/home/fires/hmasd-wsl/.git/hmasd-admission/9d09bd0bc5d57e270405b71b90a090058446b09f45b4bf49c4aef9c80ca0d2c8.json"
+      ],
+      "cwd": "/home/fires/hmasd-wsl",
+      "interval": 60,
+      "timeout": 20
+    }
+  ]
+}
