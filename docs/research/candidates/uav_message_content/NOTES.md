@@ -5270,3 +5270,417 @@ prediction and fresh-parent qualification; all prior positive/adverse evidence
 remains. Root's future allocation may select a consequential new use, but no
 continuation is selected here. No cleanup tool blocker or disposable B07 target
 remains.
+
+
+<a id="serialization-source-decision-20261002"></a>
+### Finite shared-channel next-question decision: source-only scope, 2026-10-02 UTC
+
+Root assigned a bounded construction or rejection of this question after complete
+B07 closure: can the retained ordinary compact-message capability improve complete
+UAV cooperation when bytes consume a finite serialization-limited shared channel,
+and could learned WHEN/WHO transmission selection add value over competent ordinary
+scheduling at the same lawful information and total cost? This is a possible
+capability-use/development question, not continuation of task-aware dictionary
+fitting. No bitrate sweep, teacher/receiver fit, native run, controller-health call,
+new physics/model forward or implementation is authorized or selected. Direction
+ownership stays with this native DM and standing stays reserve until a prospective
+complete purchase is selected separately. Existing B07 evidence and all contrary
+B01–B06/fast-only results remain frozen.
+
+Source-only work reads the actual sender/header/cache/receiver interface, relevant
+current published RESEARCH topics3/5/8, old communication-selection evidence and
+load-bearing primary resource-model passages. B07's just-published topic5 revision
+(source publication e621cf882224d443659d1c6e64c516fa821c84a0) concretely requires: account setup and real
+serialization/control traffic, include individual service, retain all three
+ordinary codecs, and do not presume a fresh D-over-B surplus. Topic3's actual
+information rights determine whether a central priority can know current local
+changes; topic8 prevents payload-byte reduction or age improvement from being
+called complete usefulness. The original B07 scientific review covers unchanged
+premises. One separate-context whole-investment ResearchCritic review will assess
+the actual construction or no-purchase recommendation once settled. This source
+reading consumes support time; zero new fits/native steps is not zero total cost.
+
+#### Source reconstruction and candidate investment judgment, 2026-10-02 23:38 UTC
+
+**Candidate recommendation for independent review: no purchase now.** The
+consequential difficulty is keeping decentralized cooperative decisions useful
+when information competes for a real transmission resource. A successful answer
+could establish a useful deployment of the retained ordinary codec and identify
+when scheduling needs learning. Neither a new learning algorithm nor a proof of
+communication necessity is required. However, the current five-agent, one-second
+host plus the verified radio passages do not yet supply a specific shared
+serialization bottleneck worth buying. An airtime/off-period use question is
+credible but different; it is considered below rather than silently activated.
+This is a prospective investment judgment, not an empirical negative result.
+
+The published background used here is RESEARCH topics3/5/8 at
+e621cf882224d443659d1c6e64c516fa821c84a0 and the current Root source-only assignment.
+Topic5's complete B07 reading changes the starting explanation: a conventional
+eight-bit book already approximately preserves aggregate fixed-parent behavior,
+while the attempted task-aware fit did not improve its development prediction or
+native use. Any new investment must acquire value from a changed resource/use
+contract, rather than claim a still-missing codec-learning increment. Topic3
+restricts scheduling priorities to information actually available where the
+decision is made. Topic8 requires native complete-service and individual-user
+consequences; airtime, age or packet counts alone would not establish that value.
+
+**Actual host and retained assets.** Source reads used CodeGraph first for the
+B07 collector/transport/receiver and the underlying UAV environment. The host has
+five UAVs,50 stationary users in a1000m square, time_step1.0 and H256. Each actor
+uses local raw observations, previous executed motion, a64-state GRU and stale
+message caches. The retained D19702 receiver has186 inputs, including the15
+disabled forecast coordinates; B19451's base interface has171. The cache carries
+payload, validity, sender timestamp and age. The public clock's phase is t mod5;
+the public GOOD/BAD process determines the old1/5-tick transit delay. A send occurs
+after selecting the current motion and before the environment move; completed
+messages enter caches before a later actor call. Commands execute every tick;
+they do not wait for radio completion. RR currently permits only sender t mod5,
+one packet/team-tick, and the .001 attempted-message fee ignores size. There is
+no byte serializer, finite shared queue, congestion loss or transferable slot.
+Source: experiments/candidates/uav_message_content/b07/{collect,transport,
+receiver}.py and the frozen CADC/B05 environment path they import.
+
+Each current useful packet has six varying FP32 fields, coordinates[0,1,2,3,4,6];
+the fixed ground slot and B06's three forecast zeros need no wire payload. A
+competent lossless packet therefore needs24 payload bytes, not the historical
+28/40 padded bytes. B07 puts a2-byte sender/time/valid header before either that
+payload or one dictionary index, and counts a separate2-byte public beacon per
+tick:28 versus5 logical bytes. This is not a complete physical-radio frame. All
+three selected ordinary books19811/19812/19813 remain assets; no fresh-panel
+winner is selected. Each book plus scales installs6,168 bytes/device,30,840
+across five devices; all are represented in the durable B07 artifact inventory.
+The common D actor is56,201 parameters/224,804 FP32 bytes per device. Preinstalled
+software/books are a legitimate deployment choice if declared; over-the-air
+installation cannot be counted as free, and its fragmentation, headers, losses,
+control and restart behavior would have to be specified. The old269/1341-tick
+byte-amortization arithmetic is not radio-airtime amortization.
+
+B19451 must remain a credible complete-use reference. Fresh B07 D−B was only
++.000011569J/−.027466 service, with world intervals crossing zero; a robust D
+surplus cannot justify paying for its extension. Retaining D is justified only
+as the exact receiver to which these three books were fitted. Their ordinary
+aggregate proximity to D coexists with newly never-served user-world pairs and
+other individual harms. Raw B, raw D and all three compact D packages would be
+the minimal inherited package comparison if a consequential resource contract
+were selected. This is not a requirement to add every old content arm.
+
+**Earlier selection evidence and source bridges.** CADC_B01_CARD/RESULT contain
+one jointly trained learned-send/motion versus RR-motion pair: learned−RR
+J−.013354921, physical return−.012099184,22 adverse worlds of32;16,744 of18,479
+learned attempts collided, versus no RR collisions. It does not isolate collision
+causality or refute learning under a different MAC. The delayed_broadcast_timing
+record preserves RR−none+.079412983J/+5.158203 service and FAST−RR−.009034734J/
+−.615356 service; lower transit time coexisted with older caches. Deleting RR
+opportunities cannot create newer timestamps under that fixed schedule, but this
+ordering argument does not cover slot transfer or a different shared queue.
+The original B01–B07 evidence and complete Oracle/independent advice already read
+for the selected work remain adverse/supporting inputs, not mandates to repeat.
+
+The three library indexes were checked as locators, without a novelty claim.
+The foundations P15/IMAC locator does not provide its indexed body at this local
+path and is not used as primary evidence. Inst-sci MARL-0006, *DACOM*, personally
+read JSON/PDF pp2–3, models message delay using size/rate and couples waiting to
+action timing; MARL-0203, *VIL2C*, personally read PDF pp3–4 and JSON pp5–6,
+includes bandwidth/power allocation, an action-distribution information proxy,
+receiver waiting/old actions and ACK-dependent resource release. Sources are
+/home/fires/projects/Inst-sci/papers/MyLib/{json,pdf}/MARL-0006.{json,pdf} and
+MARL-0203.{json,pdf}. They support explicit delay/control modeling, not free ACKs,
+the B07 receiver's transfer, or performance in this host. MARL-0649 and its
+My-lib NeurIPS2025 communication-constrained-priors entry were locators, not a
+load-bearing theorem or a reason to call the idea new. Targeted July/external
+record searches supplied no inherited byte-serialization law for this host;
+this is a coverage statement, not absence of prior work. No general literature
+preload or further novelty review is necessary for this no-purchase decision.
+
+**Primary radio passages and arithmetic.** The current MAVLink2 definition uses
+12 framing/checksum bytes and an optional13-byte signature. Here those are added
+to B07's existing bytes rather than treating its inner header as complete radio
+framing. This is a declared framing example; a custom raw-LoRa deployment need
+not use MAVLink. [MAVLink serialization](https://mavlink.io/en/guide/serialization.html).
+ArduPilot's SiK documentation gives64kbps as its default, approximately90% one-way
+throughput without ECC, and explicitly describes paired TDM radios. It does not
+establish a five-node broadcast MAC. [SiK radio configuration](https://ardupilot.org/copter/docs/common-3dr-radio-advanced-configuration-and-technical-information.html).
+At that illustrative rate a signed raw data frame plus signed beacon is78 bytes,
+or10.833ms at57.6kbps; five such raw data frames plus one beacon are282 bytes,
+39.167ms. These are serialization arithmetic, not measurements or a reliability
+guarantee. They do not support inventing an80bps residual service without an
+application specifying competing traffic or link conditions.
+
+Davoli, Pagliari and Ferrari's2021 *Hybrid LoRa-IEEE802.11s Opportunistic Mesh
+Networking for Flexible UAV Swarming*, pp13–16, proposes raw LoRa at SF7/125kHz,
+LBT and transmit/listen windows. It leaves window durations to design and notes
+airtime-dependent off-periods. Its actual pp23–25 experiment is one UAV-to-ground
+LoRaWAN link with10s messages; it does not validate five-UAV scheduling. Read
+the load-bearing passages directly from the publisher PDF, SHA256
+3a2e675a7b10e17d15656765d8a7ab8aa0f720de04289841756affbb94375414.
+[Primary article](https://mdpi-res.com/d_attachment/drones/drones-05-00026/article_deploy/drones-05-00026.pdf).
+Its historical regional-duty statements are not adopted here as current law.
+
+For an explicit arithmetic example use SF7,125kHz, eight preamble symbols,
+explicit PHY header, payload CRC, no low-data-rate optimization and4/5 coding.
+The Semtech-authored SX1276 airtime implementation gives
+T(L) = [20.25 + 5 ceil((8L+16)/28)] ×1.024ms for L payload bytes.
+The personally read primary implementation is LoRaMac-node commit
+dcbcfb329b4a343ab007bc19ac43a8dc952b3354,
+[SX1276 airtime](https://github.com/Lora-net/LoRaMac-node/blob/dcbcfb329b4a343ab007bc19ac43a8dc952b3354/src/radio/sx1276/sx1276.c#L1435).
+The formula is used as source-only arithmetic, with no driver, model, simulator
+or radio execution. Semtech AN1200.13's text corroborates the parameter roles;
+its rendered formula was not readable through this tool, so it is not the sole
+authority for these numbers.
+
+| Framed message | L bytes | SF7 air time | Illustrative1% start-to-start interval |
+|---|---:|---:|---:|
+| unsigned compact |15|46.336ms|4.6336s|
+| unsigned raw |38|82.176ms|8.2176s|
+| unsigned beacon |14|46.336ms|4.6336s|
+| signed compact |28|66.816ms|6.6816s|
+| signed raw |51|102.656ms|10.2656s|
+| signed beacon |27|66.816ms|6.6816s|
+
+Inference under this particular serialized, collision-free timing example:
+all five unsigned raw packets plus a beacon take .457216s; signed take .580096s.
+Even4/8 coding in the signed example gives .853504s before access guards. Thus
+the source-backed SF7 setting does not itself make the inherited one-packet-per-
+second offered load a persistent serialization queue. Nor can RR's artificial
+one-send-per-tick cap be retained as if it were the new physical capacity: a
+competent ordinary MAC must be allowed useful feasible service. The arithmetic
+does not bound arbitrary LBT/interference/guard delays, nor establish all-to-all
+link reliability. An observed or prospectively justified access/traffic law could
+change the conclusion.
+
+The1% column is deliberately an *illustrative modeled duty fraction*, not a
+selected channel or asserted regulation. It exposes the nearby alternative:
+size can matter through each transmitter's required off-period even when shared
+serialization is mostly idle. Unsigned raw needs at least9 whole-second starts
+versus5 for compact under that illustrative rule; signing changes both. But a
+single source broadcasting the inherited beacon each second would itself exceed
+that duty fraction. Synchronization, observation of the old GOOD/BAD process and
+the sender's knowledge of delivery cannot be copied over as free public signals.
+GNSS-clock provisioning could replace synchronization traffic if explicitly
+included; it does not reveal instantaneous remote/private state or reception.
+This is precisely why the attractive duty-cycle alternative is not an executable
+purchase in the present note.
+
+**Decision exposure, ordinary alternatives and limits of transfer.** A real
+shared scheduler may know public clock/queue history and already received
+messages. It cannot rank current private local changes without paid requests,
+carrier-access decisions or another declared information channel. A local sender
+can compare its current payload with its last transmitted payload and age; this
+does not give a central chooser those values. A paid request/grant path could
+make age/change/priority arbitration and learned selection comparable, but the
+headers, request airtime, lost grants, ACKs and inference would count for both.
+For no-ACK latest-state broadcast, completion and pending status cannot mean
+verified reception. Fixed RR, latest-value queue replacement and age/change
+priority are candidate ordinary mechanisms only when the chosen resource law
+makes their choices consequential; they are not an expanding required arm list.
+
+If all fresh updates fit before the next1s decision, ordering them within that
+interval does not change which timestamps are available at that next decision
+under the declared collision-free/no-extra-delay example. A learning fit would
+then have no exposed WHO allocation benefit at that resolution. Off-periods,
+deadline crossings, paid energy, interference or command waiting could expose a
+different decision, but none is established by simply changing the byte ledger.
+Skipping an eligible send could also affect future duty eligibility, so the old
+deletion-only timing argument must not be generalized to that case.
+
+Replacing1/5-tick transport with a new queue changes cache ages, pending values,
+validity and possibly the meaning of public regime/phase seen by frozen B/D.
+FIFO versus latest-value replacement, nonpreemptive transmission, end-of-mission
+pending packets and expiry are scientific contract choices, not implementation
+details to choose after scores. Local motion can continue during serialization;
+holding the old motion while awaiting messages would instead add a new command-
+delay mechanism. No energy/native reward conversion is available from packet
+size alone. Any later use study must preserve all ordinary books, price raw B/D
+under their actual rights, and read complete J/service, per-user waiting/gaps and
+positive/adverse worlds alongside delivery age and airtime. New transmitter/
+receiver joint training is a materially larger investment, not a codec reuse.
+
+**Alternatives and whole price at this boundary.** Chosen source-only disposition
+would add0 training fits,0 codec fits,0 ordinary-search evaluations,0 native/env/
+controller/physics calls,0 actor forwards,0 full-trajectory reader calls and0 GPU
+hours. The only selected work is this source/design reading, one independent
+whole-investment review, publication and scratch cleanup. It consumes real DM and
+reviewer support time; actual elapsed/support limitations will be recorded at
+closure. No new trajectory/model-output storage or worker reservation is needed.
+The downloaded publisher PDF/text are temporary reading support, approximately
+10MB, to be deleted once the review no longer consumes them. Existing B07 and
+all inherited acquisition/failed-run costs remain sunk, not rebilled as zero.
+
+A direct frozen use comparison would minimally need the five inherited packages
+above on a fixed common panel;32H256 worlds would mean160 episodes/40,960 native
+steps and another40,960 team-ticks for the full neural/radio reader,0 new fits.
+That arithmetic is an *unselected example*, not a frozen design or a claim that
+32 worlds suffice. It still needs channel/control implementation and independent
+engineering review, physical/message ledger, fresh admission, complete tails,
+retention and support cost; no trustworthy whole-worker/support forecast is
+available before resolving the resource contract. Its likely knowledge would be
+conditional frozen-codec usefulness under that explicit law. This is worth
+reconsidering if a specific duty-budget/deadline/traffic application makes that
+conditional answer consequential; it is not automatically licensed by this note.
+
+A learned WHEN/WHO comparison additionally needs an exposed lawful decision and
+real acquisition data: B07's RR trajectories contain neither counterfactual
+schedule returns nor a trained scheduling policy. Extra initialization endpoints,
+matched ordinary tuning, fits and full readers would be paid rather than treated
+as free reuse. No such fit count, search or acquisition rule is selected now,
+so there is no fictitious fully priced learning purchase. Repeating B07, adding
+bitrates until a favorable separation, imposing SF12 solely to make the raw
+packet miss a deadline, or fitting a new receiver to repair an arbitrary queue
+would answer a different and currently unmotivated question.
+
+The proposed stop concerns this next purchase, not the retained compact-message
+capability, general communication value, or the learnability of scheduling. A
+concrete re-entry condition is an explicit application/operating contract with a
+consequential capacity, access, duty, deadline or energy restriction fixed before
+scores, together with a worthwhile complete comparison against ordinary use.
+There is no current external producer for that input and no fabricated wait.
+The separate-context ResearchCritic is asked to challenge this no-buy and to
+consider whether the source-backed duty alternative is already sufficiently
+worthwhile to recommend a scoped use purchase instead. Root owns any resulting
+cross-question allocation; no implementation or scientific effect occurs here.
+
+<a id="finite-channel-independent-investment-review-20261002"></a>
+#### Original independent ResearchCritic recommendation, 2026-10-02 23:59:45 UTC
+
+The existing named ResearchCritic returned this complete substantive answer after
+an evidence-first separate-context reading. The task disclosed the candidate
+no-buy, but supplied original supporting/adverse sources and explicitly invited
+the duty-use alternative and criticism of an excessive application/proof gate.
+The original B07 result review was reused. No second Pro consultation offers a
+distinct unresolved-decision benefit here. The following original answer is
+preserved in full; the DM response follows it.
+
+<!-- FINITE_CHANNEL_CRITIC_ORIGINAL_BEGIN -->
+**Recommendation: retain the no-buy decision for this new investment. Revise the rationale and the prospective lossless comparator.** A duty-limited model is scientifically legitimate without deployed measurements. My reason for declining it now is the limited additional knowledge it would buy relative to rebuilding and reading the complete communication contract—not a requirement for a real-world deployment, positive pilot or theorem.
+
+I reused the completed B07 review for unchanged evidence. The assignment disclosed the candidate no-buy, but I reconstructed the sources and formed a provisional reading before reading the full DM recommendation. No DM/Root conversation was inherited.
+
+I checked the B07 collector, receiver and transport; the imported environment’s explicit one-second clock and movement update; CADC’s frozen card and underlying analysis; C2’s original summary, including paired means, packet counts and its contrary world; the relevant current RESEARCH passages; and the primary radio and MARL sources below. I did not repeat B07’s neural reader or perform any model, environment, radio, fit or experimental calls.
+
+**The current source does not expose the proposed shared-serialization decision.** Motion is chosen once per second. B07 sends afterward, and delivery affects a later actor call. Its one-packet-per-tick RR restriction, GOOD/BAD delays, public beacon and pending state are specified features of that old contract; they are not measurements of radio capacity.
+
+MAVLink2 supplies 12 framing/checksum bytes, plus an optional 13-byte signature. SiK’s documented 64 kbps default and approximately 90% one-way throughput concern paired radios, not a validated five-node MAC. Nevertheless, the illustrative load is small at that rate. [MAVLink serialization](https://mavlink.io/en/guide/serialization.html), [SiK technical documentation](https://ardupilot.org/copter/docs/common-3dr-radio-advanced-configuration-and-technical-information.html).
+
+The inspected Davoli paper proposes SF7 raw-LoRa broadcasting with access/listening windows whose durations remain design choices. Its experiment is a single UAV-to-ground LoRaWAN link, sending every ten seconds—not a five-UAV scheduling experiment. This supports a resource-model bridge, not the claimed deployment’s reliability or a particular shared queue. I verified the supplied PDF hash and read pp11–16 and 23–25. Its historical regulatory discussion is not a current-law assertion. [Davoli, Pagliari and Ferrari, 2021](https://mdpi-res.com/d_attachment/drones/drones-05-00026/article_deploy/drones-05-00026.pdf).
+
+Under the declared collision-free SF7 example, all five original raw frames plus one beacon occupy **.457216 seconds unsigned or .580096 seconds signed**. If those transmissions finish before the next actor call, their order changes neither the available timestamps nor the next decision opportunity. That removes the claimed allocation benefit from ordering those packets within the interval. It does not prove that access delays, interference, waiting or another traffic load could never create one.
+
+**There is a concrete correction to the ordinary comparator.** [CADC channel.py, lines 9–17](/home/fires/hmasd-wsl/experiments/candidates/contention_aware_decentralized_communication/cadc_b01/channel.py:9) computes visibility over twenty Boolean entries, then appends `count / 20` before converting the payload to FP32. Consequently, the sixth varying field takes only 21 possible values.
+
+A new lossless encoder can transmit integer \(n\in\{0,\ldots,20\}\) in one byte and reconstruct that field as `np.float32(n / 20.0)`. The other five fields remain FP32. This needs **21 payload bytes**, with no fitted dictionary. Keeping B07’s existing two-byte inner header gives:
+
+| Prospective frame | Bytes | SF7 airtime | Whole-second repeat interval under modeled 1% off-period |
+|---|---:|---:|---:|
+| Compact, unsigned | 15 | 46.336 ms | 5 s |
+| Count-packed lossless, unsigned | 35 | 77.056 ms | 8 s |
+| Compact, signed | 28 | 66.816 ms | 7 s |
+| Count-packed lossless, signed | 48 | 97.536 ms | 10 s |
+
+These are calculations from the inspected [pinned Semtech airtime implementation](https://github.com/Lora-net/LoRaMac-node/blob/dcbcfb329b4a343ab007bc19ac43a8dc952b3354/src/radio/sx1276/sx1276.c), not measured throughput. The correction narrows the illustrative compact-versus-lossless opportunity from 5-versus-9 to **5-versus-8 seconds**, unsigned. This is a cheaper valid encoding, not a proved minimum; header semantics and empty-centroid cases permit further consideration if a protocol is actually selected. B07’s frozen accounting remains unchanged.
+
+**The strongest useful positive is still credible.** B07 retained three ordinary dictionaries whose aggregate performance remained close to their fixed D receiver. C2 showed substantial conditional usefulness of the inherited sending process: RR−NONE averaged **+.079413 net J and +5.158203 users/tick**, while preserving a contrary world. Those observations make it plausible that allowing useful updates more often under a duty budget could improve complete cooperation.
+
+They do not establish that result:
+
+- B07’s ordinary codecs changed individual service, including rare connections and never-served cases. Its fresh D−B contrast did not reproduce a robust D advantage.
+- C2’s FAST rule reduced transit time but lost **.615356 users/tick** against RR, with older caches and more missing entries. This is evidence against treating packet latency as complete usefulness, not a causal proof that a particular age reduction will help.
+- CADC’s learned-send package lost **.013355 net J** against RR on one trained pair; 16,744 of 18,479 attempts collided. That challenges ordinary-comparator competence and finite learning in that implementation. It does not refute learning under another MAC.
+
+The same caution applies to the literature bridges. **MARL-0006/DACOM** explicitly connects message size/rate to action waiting; **MARL-0203/VIL2C** adds resource allocation, an action-distribution proxy, progressive reception and ACK-based release. These are changes to the operating contract, not free capabilities of B07. I read their primary PDFs: [MARL-0006, pp2–3](/home/fires/projects/Inst-sci/papers/MyLib/pdf/MARL-0006.pdf), [MARL-0203, pp3–5](/home/fires/projects/Inst-sci/papers/MyLib/pdf/MARL-0203.pdf).
+
+**The duty alternative creates a different opportunity from shared congestion.** With five transmitters each limited to 1% airtime, their long-run transmissions occupy at most roughly 5% of a single shared channel, before other traffic. The consequential constraint is primarily each transmitter’s next eligibility time. Skipping a send can preserve that device’s future opportunity; therefore the old deletion-only RR argument no longer applies. Conversely, unused airtime from one device does not automatically transfer another device’s duty entitlement.
+
+A local WHEN decision could therefore be meaningful even when shared WHO arbitration is mostly resolved by an ordinary collision-free schedule. A central chooser cannot use current private payload changes without obtaining them. A learned priority using those changes must face the same request, grant, acknowledgment and control costs as an ordinary age/change rule.
+
+This distinction changes the investment interpretation. A five-package frozen comparison would mainly measure **transfer of existing B/D receivers and three dictionaries through a new update process**. It could be useful, but would not by itself establish a need for learned scheduling. The source arithmetic already establishes smaller occupied airtime under the illustrative framing; the remaining empirical purchase concerns native usefulness and service tradeoffs.
+
+I judge that narrower transfer observation insufficient to warrant the complete new implementation and reading now. This is a value/cost judgment, not an empirical negative or a claim that abstract duty models are inadmissible.
+
+**A constructive continuation is identifiable without further source-search gates.** If Root later chooses the duty-use question for its own value, a bounded model could use the stated SF7 parameters and an explicitly modeled duty fraction, preinstalled assets and clock, serialized nonpreemptive broadcasts, latest-state replacement, no ACK assumption, and motion continuing every second. Public GOOD/BAD inputs, pending semantics and first usable delivery time would need explicit meanings. The once-per-second inherited beacon cannot simply remain free under the same duty restriction.
+
+The smallest worthwhile complete observation would compare **count-packed lossless B, count-packed lossless D and all three compact D packages**, under one competent ordinary service rule and one common panel. It would retain complete reward/service, individual waiting and censored gaps, actual information available before actions, and airtime/setup/control costs. There is no reason to demand a separate positive pilot or to automatically add learned arms.
+
+Its possible outcomes would change distinct judgments:
+
+- **Compact packages improve complete service over both lossless references at acceptable total cost:** support conditional use under that specified model. This would not establish a learning contribution.
+- **They improve over D but remain below B:** support a compression benefit for D, while weakening the complete-package purchase.
+- **Eligibility or cache freshness improves without native benefit, or service tails worsen:** limit the practical value of that resource opportunity for these fixed receivers. No receiver repair follows automatically.
+- **Results vary substantially across the retained books:** preserve that heterogeneity; do not select a fresh-panel winner and call it replication.
+
+The illustrative 32×H256 panel entails **160 episodes, 40,960 native team steps and 40,960 full-reader team-ticks**, with zero new fits. That is an exposure count, not a complete price or a sufficiency claim. New transport/control implementation, engineering review, admission, collection, full reading, retention and cleanup remain additional costs. B07’s 331.606-second worker provides a useful historical anchor, but cannot price that support or certify a new worker forecast. Three codecs and additional worlds also do not supply independent receiver-training replication.
+
+The selected no-buy adds zero scientific calls, fits, full-trajectory readers or GPU hours. Source work and this review consume real support time. No further audit, literature round or experiment is needed to close this selection decision.
+
+**MATERIAL_DISSENT: no.** I support declining the new purchase. The substantive correction is to use the source-supported cheaper lossless comparator and to distinguish a credible per-device duty-use question from the currently unexposed shared-serialization allocation claim.
+<!-- FINITE_CHANNEL_CRITIC_ORIGINAL_END -->
+
+<a id="finite-channel-source-disposition-20261002"></a>
+#### DM response and resolved source-only disposition, 2026-10-03 UTC
+
+I read the complete original answer and accept its recommendation and both
+substantive corrections. **No new experiment or implementation is selected.**
+The independent review found no material disagreement, and there is no unresolved
+scientific objection requiring Root resolution. Source preparation ends here;
+Root retains cross-question allocation if it later values a new use question.
+
+First, I independently verified CADC channel.py lines9–17 using CodeGraph: count
+is the sum of twenty Boolean visibility indicators, and the exact original
+division/conversion reconstructs its21 FP32 values. The new discussion above
+must therefore be corrected:24 bytes is B07's six-FP32 reference format, **not
+a minimum competent lossless bill for a future protocol**. A fixed21-byte
+five-FP32-plus-count encoding is already feasible without fitting a dictionary.
+With the old2-byte inner header its unsigned/signed MAVLink frame sizes are35/48
+bytes, respectively77.056/97.536ms at the stated SF7 settings. The modeled1%
+start intervals are7.7056/9.7536s, or8/10 whole-second intervals. The all-five-
+plus-beacon totals shrink to .431616/.554496s. Header/validity packing, MAVLink
+trailing-zero truncation and zero-count centroid cases can reduce lengths further;
+this correction is a constructive cheaper encoding, not an entropy minimum.
+No new serializer, payload execution or radio measurement was performed. Frozen
+B07 packet bytes, receipts, comparisons and28→5 accounting remain unchanged.
+
+Second, a prospectively fixed modeled duty fraction with a competent complete
+ordinary service rule is a legitimate experiment. Neither deployed radio
+measurements nor a theorem, prior toy success or extra literature round is a
+prerequisite. I refine my initial stop rationale accordingly: **the source-backed
+duty-use alternative could be specified, but its present likely contribution is
+narrow conditional transfer of fixed receivers/books, and I decline its whole
+implementation/reading/support investment now**. I do not treat lack of a
+current deployment as a veto or an external blocker. Root's proposed shared-
+serialization/WHO premise is not exposed by the examined one-second/SF7 mapping;
+the distinct per-device eligibility/WHEN question remains scientifically open.
+
+The review's constructive alternative and outcome-dependent interpretations are
+accepted as reasoning, not a queued protocol or request to continue. A future
+explicit selection could proceed directly to one smallest useful complete use
+experiment once its resource/public-signal/queue rules and whole price are fixed.
+It would use the cheaper lossless references and all three retained compact
+packages. Learning is optional and would need its own consequential lawful
+decision/acquisition comparison, not a label attached to codec reuse. A good
+parent-relative outcome that still loses to B is not a complete-package adoption;
+negative service tails or poor transfer do not automatically authorize receiver
+retraining. Three dictionaries remain conditional on the one D receiver.
+
+This is a source/design investment conclusion. It adds no native evidence about
+finite-channel control, duty-limited service, energy or scheduler learnability.
+It strengthens the requirement to expose an actual decision opportunity and use
+a competent semantic byte representation; it leaves B07's aggregate capability,
+individual harms, failed task-aware prediction and absent fresh D-over-B surplus
+untouched. There is no active idea, worker, unopened advice or external producer
+to wait for. The direction remains reserve/idle, with a concrete optional re-entry
+through a valued complete resource/use comparison, not a recurring check or a
+new application-documentation gate.
+
+This bounded task began with Root's2026-10-02 23:16:38 UTC assignment. The review
+occupied23:42:06–23:59:45 UTC,17m39.5s overlapping the DM's source work; that is
+elapsed support time, not a measured CPU bill. Selected scientific counts are
+all0: fits, ordinary-search episodes, native/controller/physics/model calls,
+full-trajectory reader calls and GPU hours. Source lookup, reading, arithmetic,
+review, Git publication and cleanup are real additional support cost; their
+CPU/network use was not fully metered and is not claimed zero. The existing
+paid B07 and earlier records retain their complete inherited costs. No new
+trajectory or model-output storage was generated.
+
+The preserved original recommendation is10,913 characters/10,962 UTF-8 bytes,
+SHA25663171a9e98bb49e484246c5e4b8d7593ad54ca8ceb9721cf27bc1e0835a2eb4d.
+Its source-only judgment and DM response are ready for publication; the narrow
+RESEARCH standing/background update and measured scratch removal follow.
