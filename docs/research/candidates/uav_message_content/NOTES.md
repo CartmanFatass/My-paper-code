@@ -5684,3 +5684,47 @@ The preserved original recommendation is10,913 characters/10,962 UTF-8 bytes,
 SHA25663171a9e98bb49e484246c5e4b8d7593ad54ca8ceb9721cf27bc1e0835a2eb4d.
 Its source-only judgment and DM response are ready for publication; the narrow
 RESEARCH standing/background update and measured scratch removal follow.
+
+
+<a id="finite-channel-source-cleanup-20261003"></a>
+#### Source-only publication and measured cleanup, 2026-10-03 UTC
+
+Source reasoning, the full 10,962-byte independent recommendation and resolved
+no-purchase response were published first as
+430be14032968ce386ee8571d4c56a1e4db1b3b7, with main push/readback verified.
+The direction's reserve/idle standing and directly affected topic5 now carry
+that conclusion and the cheaper prospective lossless representation; other
+owned directions and Root's cross-question plan were preserved.
+
+After the critic completed, no live helper consumed the reading scratch.
+An accessible local process cwd/executable/open-file scan found no consumer;
+there was no accepted scientific operation or observation handle in this task.
+The two files were checked against their recorded sizes and SHA256 values,
+then this exact temporary reading directory was deleted:
+`/home/fires/hmasd-wsl/temp/directions/uav_message_content/serialization_source_20261002`.
+Its contents were `davoli2021.pdf`(9,966,138 logical bytes) and
+`davoli2021.txt`(115,811 logical bytes). Publisher URL, paper hash, pages read,
+source arithmetic and original advice remain in the notebook; no backup or
+additional bulk copy was made. B07 code, all dictionaries and canonical
+positive/adverse evidence were untouched.
+
+The deleted tree measured 10,092,544 allocated bytes before and 0 afterward.
+This cleanup boundary also counts growth in the two compact publication records:
+
+| Record | Allocated bytes before | Allocated bytes after |
+|---|---:|---:|
+| docs/research/candidates/uav_message_content/NOTES.md | 417792 | 417792 |
+| docs/research/RESEARCH.md | 602112 | 606208 |
+
+Their net allocation change was 4,096 bytes, so **net reclamation was
+10,088,448 allocated bytes**. This measures the named scratch/document boundary,
+not Git object storage or concurrent whole-host free space. No disposable target,
+accepted worker, unread result/advice or cleanup tool blocker remains.
+
+At the measured cleanup time 2026-10-03T00:12:07.225341+00:00, this task's DM elapsed support window
+was 3329.2s (55.49min), including overlapping review
+and waits. The review's 17m39.5s is separately recorded above and is not added to
+wall time. Publication/self-check support follows within this same source-only
+task. CPU/network use was not fully metered. All selected scientific execution,
+fit/search/full-reader/GPU counts remain 0. No new result artifact or experimental
+code was created, and no further experiment is selected.
