@@ -596,3 +596,64 @@ used `active`, which the current admission parser does not recognize as an execu
 Changed only this direction state to `exploring`, preserving the selected comparison, lead,
 pause and every other row. No formal D request or native operation exists; this is a source
 control correction, not an admission retry or another scientific selection.
+
+<a id="b01-implementation-acceptance-20261003"></a>
+## 2026-10-03 UTC — Implementation accepted for the selected whole purchase
+
+The direction-local controller, fixed learner, capture/finite runner and complete reader are
+implemented. I read and accepted both bounded Implementer returns and the reader continuation;
+their static checks created no native/RF/optimizer effects. Canonical endpoints use their
+original factories, mixed choices preserve one real target/history, and the reader reconstructs
+every purchased private query and chronological learner update from saved legal inputs. The
+runner executes6 serial audits,3 independent serial128-mission fits with at most3 workers,
+the96 calibration missions, seals all final checkpoints and T* before160/192 fresh missions,
+then runs at most2 readers after every worker pool is reaped. This ordering changes no seed,
+program, estimand, natural-termination rule or bought exposure.
+
+The [preparation receipt](../../../../runs/uav_service_resource_control/b01_preparation_a01/checks.json)
+and its two hashed logs retain **53 initial passes plus14 focused passes,59 distinct tests**.
+Measured cumulative check CPU is **8.431290657 s**. Actual effects were976 mock frozen-controller
+proposals,48 mock plan boundaries,416 mock candidate queries,13 synthetic Adam steps,
+16 public flight edges,8 public target returns,4 variable and6 constant public-power arguments,
+and2 lazy constant bundles. The separate independent closed-form reference uses24 power
+argument rows across the two public-law checks, by source accounting; these remain within the
+declared128 additional-argument envelope. The19 two-tick FakeController protocol calls test
+dictionary/array reader wiring and execute no actual controller, model, physics or optimizer.
+There were **0 native transitions,0 real nominal/RF calls,0 scientific fits and0 forbidden-effect
+attempts**. Failed checks: none. AST/compile/whitespace checks passed. Tests own and cleaned their
+normal pytest scratch. The second invocation rechecked the affected driver/stop surface; the
+976-call controller allowance was not repeated.
+
+The separate registered engineering Reviewer
+`/root/dm_service_resource_control/selector_engineering_review` reconstructed the actual
+controller/capture/serialization/learner/read/evaluation chain without inherited DM dialogue,
+made no edits or effect calls, and matched all16 current source/test hashes to receipt SHA256
+`2de62f4079173ec706ca05d228ff6763cae0db87dad5c4595f9d7b6ce5282937`; both saved log hashes and all26
+retained frozen dependency hashes matched. Final judgment: **no material engineering finding
+remains**. I accept that report and the current implementation, with its limits below.
+
+Two concrete defects were corrected before any formal request. First, final model loading had
+been outside the per-mission timer; it now sits inside that timer and failure handling, with
+separate learner-setup CPU/wall. Phase parent-plus-reaped-child totals include imports/startup,
+serialization and checks; do not add those totals to the same missions a second time. Second,
+cooperative stopping alone could leave a hung worker or pool-manager drain running indefinitely.
+The runner now observes normal shutdown under the existing budget, keeps the exact owned
+process handles, and on an actual stop allows60 s for cooperative preservation, then SIGTERM,
+5 s grace, SIGKILL and5 s bounded reaping. Captured descendants use Linux PID identity handles.
+No future/job is resubmitted. Collection failures enter that same drain; a genuinely unreaped
+process or stuck manager gets an explicit unresolved receipt and terminal failure, not an
+unbounded join. Stop thresholds remain75CPUh/96wallh/32GiB; necessary cleanup/grace overhead and
+any overshoot are recorded, not erased. A late threshold during final reduction remains an
+explicit protective-stop status even if the full evidence was already read.
+
+Shutdown regressions use fake processes/clocks/signals plus API availability; they do not claim
+to test real signal delivery. The six full native audits, actual128-mission learner streams,
+fresh endpoint panel and complete native/private/learning reader remain **future admitted work**.
+Same-source/node numerical replay is the promised verification scope; native RF is still not
+independently re-simulated. These are implementation checks, not evidence of a beneficial selector.
+
+Next is exact-source publication and the **first** local_linux formal request with a launcher
+snapshot and this receipt as a source-bound input. The current published direction is
+`exploring`, lead `Codex DM (native child)`; the selected first-formal-failure rule remains.
+No operation or duplicate retry exists. After acceptance this child will retain the same
+native handle, arm deterministic observation and remain active through collection and reading.
