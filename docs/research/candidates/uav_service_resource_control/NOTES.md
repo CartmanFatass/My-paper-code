@@ -1123,3 +1123,364 @@ boundaries; neither is a selected or authorized continuation. Broader cross-ques
 is still being constructed by Root. This append records that consultation and disposition;
 B01's completed independent review, read result, source identities and measured closure are
 unchanged, with no new scientific exposure, review or cleanup pass.
+
+<a id="planner-imitation-source-assessment-20261003"></a>
+## 2026-10-03 UTC — Source-only assessment of a separate planner-imitation question
+
+**State and scope.** Root assigned a bounded construction question after B01 and
+the preceding D-lineage consultation were closed. This entry is an input to
+selection, **not a purchased study, implementation, launch or reopening of B01**.
+Before editing I proposed the unused direction path `uav_planner_imitation`;
+Root accepted it as suitable if selected and explicitly said not to create it
+yet. Any later implementation/tests/records would use that direction's usual
+owned paths and import source-bound B capabilities read-only. B retains its
+frozen source and evidence. No successor directory or executable was created.
+The owner has returned constructive Oracle advice to Jev ChatGPT Pro through
+Root. I made no adviser call or new scientific-review request. The historical
+native coauthor proposal is preserved once in B's
+[complete original](https://github.com/CartmanFatass/My-paper-code/blob/b84362ac27a7e664f35bc091bf230987be624430/docs/research/candidates/uav_decision_generalization/NOTES.md#b07-root-oracle-original-20261003),
+16,113 UTF-8 bytes / SHA256
+`350a4d05e48b9de3411067ecc9fde07c8df32c2520decefd6a8b1dc67aecbb6a`.
+I read the whole original after reconstructing the relevant B contracts/results;
+its ranking is historical coauthor advice, not the independent review or an
+accepted allocation. A/C outcomes were not an input to this assessment.
+
+The earlier D result remains [closed as read](#b01-dm-disposition-20261003),
+including its useful resource/local service cases, ordinary C/H_T/T₀ tradeoffs,
+individual and reserve harms, uncertain three-fit increment and full cost.
+The present task has fixed paired UAV execution and stochastic request queues,
+not B01's native service/energy/reserve objective. It neither retests that failed
+selector nor identifies its cause. No old fit budget or retired code is credit
+for a new purchase. Root retains the cross-question choice.
+
+**Reconstructed question and relevant evidence.** The substantive question is
+whether a sampled planner's joint scheduling decisions can be acquired from a
+fixed public-information bank and deployed with a useful service/compute trade.
+The proposed contribution is an empirical learning-development answer under a
+controlled objective change, not a new architecture, new imitation algorithm or
+general MARL result. The joint decision still matters: three immutable UAV pairs
+can occupy three of four demand clusters, moving one pair displaces service,
+motion/routing couple the queues, and commands activate only twenty ticks later.
+The learned component is the centralized four-command selector over supplied
+execution; it does not learn the RF model, low-level motion or decentralized
+communication.
+
+I used the published B06
+[seven-endpoint source contract](https://github.com/CartmanFatass/My-paper-code/blob/da74047434845cb2f5b1baf3e0023c66ecadf3d9/docs/research/candidates/uav_decision_generalization/NOTES.md#b06-seven-endpoint-source-contract),
+[complete outcome](https://github.com/CartmanFatass/My-paper-code/blob/97c79fbcb72d1eb7cf0d96eaa9f20d93ec15dae0/docs/research/candidates/uav_decision_generalization/NOTES.md#b06-complete-reading)
+and [full original independent diagnosis/disposition](https://github.com/CartmanFatass/My-paper-code/blob/2fceacff9866708e8816d045d3577e6b3c4bf044/docs/research/candidates/uav_decision_generalization/NOTES.md#b06-independent-disposition),
+plus the actual feature/scorer, bank, shuffle, endpoint and rollout source.
+The relevant published topic5 at `26e1f35d31bb3b88bfeb9089f8092b4dfd8d0969`
+separates task competence, successful numerical fitting and acquired useful
+decisions. Its concrete effect here is to retain G/R1/R4, reject inactivity as
+the sole explanation, and treat a different loss as a prospective comparison
+rather than an identified repair.
+
+B06's three fits reduced fixed-bank relative MSE from .50477 to
+.002825/.003180/.003486, with substantial parameter and physical command changes.
+Yet their mean C penalties against G were +1232.25/+1445.91/+1241.34 on all32
+fresh worlds, and they left2/6/5 requests unfinished where G/R1/R4 finished all
+1,803. Positive worlds, reduced bank regret and economy relative to the constant
+fit remain real. Neither those positives nor beating that failed constant is a
+useful complete learned replacement for G. R4's C−G was −158.78 with paired95%
+interval[−320.97,+3.40]; mean maximum completed residence and worst-user RF gap
+fell213.41/88.94 ticks. R1 retained substantial tails but cost C+158.53 relative
+to R4, interval[29.92,287.15]. R4 therefore supplies a conditional capability to
+develop, not an already established primary-C gain or a uniformly better teacher.
+For example R4 improves world006 C3985→2656 but worsens world015 C2268→2985.
+All B06 decisions met their deadlines. Future inference savings cannot be
+credited with an observed deadline-service rescue.
+
+**Frozen assets and lawful target.** The bank remains all2,100 contexts from
+35 old R trajectories: worlds109253000..109253031 and audits109253900..109253902,
+sixty decisions each, all four action rows including ties and the final unused
+command. All are now training/development exposure. The saved
+`runs/uav_decision_generalization/b06_amortization_a01/bank.npz` has SHA256
+`3aea171e0e5ec33d1feaa13730dbfc495b785845b70c40cec7e2190fe691f646`;
+its typed bank/provenance identity is
+`d35a36883f81bcdf05248f4de701b19aff309deeb15041e32ef98ff35d865419`.
+The B06 scientific source identity is
+`80c9e70ed76cb8ad076b0a78d9c27768f971f1f83c475f99922ccf857f80869a`.
+Original acquisition binds the four source anchors and2,170 mission/rollout
+files. Its complete reader already established the old physical teacher labels;
+a new study would verify required bytes/provenance and exact label arithmetic,
+not rerun4,407,360 old model transitions or recollect the teacher.
+
+For context s, use the ordered mean of the four saved logical cohort cost
+vectors, float64 `mean(stack(costs), axis=0, dtype=float64)`, including exact
+aliases with their original multiplicity. Define
+
+`a_R(s) = lexargmin_a (mean_R_cost[s,a], raw_G_cost[s,a], a)`.
+
+Do not substitute stored `total_q` (the old G/1200 field), actual future arrivals,
+true residence ages, native outcomes or an archived first-index teacher label.
+The source `b05_request_schedule/rollout.py:150–153` uses precisely this ordered
+R/G/index decision. The public303-column features are unchanged: user geometry,
+rates, positions, routed ACKs, counts/head progress, fixed pair membership,
+active/candidate slots, action one-hot, time/1200 and four G/1200 float32 feature
+copies. Canonical unscaled G remains float64 outside the feature tensor.
+Teacher sample tapes/world RNG state and actual future requests are not features.
+
+Small saved-array reductions, with no model call, establish the following:
+
+| Saved-bank quantity | Exact reading |
+| --- | ---: |
+| Canonical teacher action counts0/1/2/3 | 1625 /173 /180 /122 |
+| G matches canonical teacher / any teacher minimum | 1740 /2100, both |
+| Constant KEEP matches canonical teacher | 1625 /2100 |
+| Unique /two-way /three-way /four-way cost minima | 1507 /158 /47 /388 |
+| Frozen S0/S1/S2 canonical agreement counts | 1012 /727 /1361 |
+| Frozen S0/S1/S2 agreement with any cost minimum | 1434 /1240 /1624 |
+| Frozen S0/S1/S2 unique-minimum agreement | 876 /693 /1042 |
+
+Exactly four canonical labels differ from first-index `argmin(mean_R_cost)`:
+world/decision109253004/46:0→3,109253012/47:0→3,109253030/41:0→1 and
+109253901/47:0→2. On all388 four-way cost ties canonical G/teacher chooses KEEP.
+This correction is necessary for the new target but far too small to explain
+the old students' ranking losses. Reusing saved q/residual arrays verifies their
+exact composition without a new forward. Their prospective fixed-temperature
+cross-entropies, evaluated only as saved-data arithmetic, are
+1.337880/1.350822/1.329282 versus G1.085768. This is additional description of the
+old scores, not evidence that cross-entropy training will work. Their lower
+teacher regret11.106911/15.334440/10.045524 versus G19.2195 also makes clear that
+accuracy, cost magnitudes and native service are different quantities.
+
+**One fixed prospective intervention.** Keep the CPU float32
+303→128 ReLU→128 ReLU→1 scorer with55,553 parameters. For Ij, load the exact
+initial parameter tensors of Sj, seeds109255101/102/103, including the exact
+zero output head; inherit no optimizer state. The six initial/final frozen
+checkpoint byte hashes were checked against the three saved `fits/fitj/fit.json`
+records,6/6 passing without tensor deserialization. Bind those original files
+and typed parameter identities in any selected successor. New provenance may
+change checkpoint-container bytes; initial parameter bytes must still match.
+
+Make only the declared loss change:
+
+`q = raw_G/1200 + float64(f_theta(float32(features)))`
+
+`L = mean_s[-log_softmax(-q_s)[a_R(s)]]`, temperature1.
+
+Use float64 score/log-softmax arithmetic with gradients flowing to float32
+parameters, batch mean over contexts, no class weights/smoothing, no filtering,
+cost-gap weighting, KEEP veto or loss mixture. Deploy the existing hard ordering
+`(q, raw_G, action_index)`, not sampling. Changing the objective also changes
+gradient scale/geometry under the fixed optimizer; this comparison cannot
+isolate ordinal target information from every optimization-conditioning effect.
+It tests this specified learning package, not all classification methods.
+
+Use all64 epochs and the same PCG64/SeedSequence `(109259999,51,j)` sequence of
+full2,100-context permutations as Sj. Each epoch has32×64+52 contexts,33 updates;
+verify every batch-index sequence against the old journal. Retain Adam
+lr3e−4, betas(.9,.999), epsilon1e−8, no weight decay, fixed non-fused/non-foreach
+settings, L2 gradient clipping10, deterministic CPU execution and the bound
+Python3.10.20/NumPy1.26.3/Torch2.7.0+cpu contract,4 intra-op/1 inter-op threads.
+No bootstrap, target network, online fitting, validation selection, additional
+epoch, fit replacement or temperature/seed search. Preserve all three final
+endpoints before exposing any new world. The same initial q equals G, so initial
+identity is checked on bank forwards; no extra initial native missions.
+
+**Complete comparison proposed for selection.** Use exactly
+`[G,R4,R1,S0,S1,S2,I0,I1,I2]` on32 fresh indexed worlds, in ascending order;
+rotate that list left by world-index mod9. Proposed literal IDs are
+109271000..109271031, disjoint from the35 teacher and32 B06 final worlds.
+No task state or draw from this range was generated/inspected. A source/notebook/
+JSON filename search found no use of this proposed range; it is not yet a
+reservation, and the selected source contract must recheck/freeze it. An earlier
+candidate109257000 range had an existing-record hit and was discarded before
+any exposure. World numbering alone is not statistical independence.
+
+All288 missions are new; the old32-world scores do not substitute for ordinary
+or S controls on the fresh panel. There is no new B constant fit or tenth arm:
+G is the strong economical ordinary control, R1/R4 retain the observed planning
+frontier, and every old S is retained for the matched objective comparison.
+Including B's already adverse constant would add another question at a cost;
+no conclusion about the best possible non-neural bank learner follows from this
+nine-arm study. The models still use the same bank and initializations, not
+three independent teacher acquisitions or96 independent training replications.
+
+Retain N6/U50/H1200, existing stochastic-rate and actual-arrival streams, native
+RF/routing, FIFO progress/service rules, terminal penalty240 and the four lawful
+commands. C is queue residence-area plus240×unfinished, lower better. Decisions
+at t=0,20,...,1180 keep the current command for twenty ticks before activation;
+the last command remains paid even though it activates outside motion. Every
+arm gets its own complete trajectory with the same exogenous world law. R1 is
+exact tape0 of R4's ordered4-cohort public-state search, with the existing160-tick
+model, G continuation/tail, exact within-decision reuse and multiplicity.
+
+Use one genuinely cold persistent endpoint per arm on its first request and
+actual deadline restarts, **not a newly cold endpoint per mission**. Every new
+mission resets task state; fixed weights/programs alone persist. Loading and
+identity checking occur inside the first20-second deadline. Keep the existing
+latest-complete-publication rule and twenty-tick activation delay. G/R1/R4 have
+their original paths/fallbacks; S/I publish only complete learned decisions and
+use KEEP if none is eligible, without adding an early-G fallback. No warmup
+mission or same-state teacher query is added. Attempted interrupted work and
+deadline restarts are outcomes/costs, not grounds to replace a world.
+
+**Exposure and complete reading.** The following complete-worker ceilings follow
+from the actual source, with mandatory empty-tape reuse but no assumed earlier
+coincidental reuse. Partial deadline attempts remain metered. Reader maxima
+describe reconstruction of saved evidence, not additional result trajectories.
+
+| Quantity | Proposed complete purchase |
+| --- | ---: |
+| New teacher worlds/queries | 0 /0 |
+| New fits /optimizer updates | 3 /6336 |
+| Training context presentations /candidate-row forwards | 403200 /1612800 |
+| New I initial/final bank forwards, worker | 50400 rows |
+| Native missions /actual transitions /timed decisions | 288 /345600 /17280 |
+| R model constructions /prefix transitions, worker maximum | 3840 /5201920 |
+| Physical /logical R cohorts; branch clones | 8352 /9600;33408 |
+| R future uniforms /actual-arrival uniforms | 222720 /55296 |
+| G queries /candidate values, worker maximum | 275328 /1101312 |
+| G candidate-ticks /four-cluster recurrences, worker maximum | 250260480 /1001041920 |
+| S/I deployment forward rows, worker | 46080 |
+| All new neural forward rows, worker /reader /combined | 1709280 /96480 /1805760 |
+| Reader actual states, including reset | 345888 |
+| Reader actual+R-initial+R-prefix physical-state maximum | 5551648 |
+| Logical task reset/report/command bytes | 3224160 |
+| GPU /extra native audits /historical optimizer replays | 0 /0 /0 |
+
+The reader separately reconstructs up to the same5,201,920 R prefix transitions
+and250,260,480 G candidate-ticks; those costs are not hidden in a single worker
+column. It covers every mission's native actions/states/routing, exogenous draws,
+queue/FIFO identities, activation, R prefix and alias, G scores, publication and
+deadline choice. For I, it binds exact initial/final weights, parameter motion,
+all schedules and journals and checks initial/final bank outputs. It checks all
+46,080 deployed S/I forward rows. The already audited old S bank forward files
+can be reused for bank comparisons by their bindings; no new S-bank forward
+is in the above bill. If that reuse contract changes, count the extra forwards
+before launch. B06's source-bound teacher evidence is reused, not re-simulated.
+Checking finite historical gradient/update journals is not replaying or proving
+historical optimizer execution. A selected new loss requires a bounded independent
+numerical engineering check; no such check, scorer or optimizer was run here.
+For prospective costing, the narrow loss check is one fixed two-menu/four-action
+synthetic-logit case (raw G rows `[0,300,600,900]`/`[900,600,300,0]`, float32
+residual rows `[.25,-.5,.125,.375]`/`[-.25,0,.5,-.125]`, targets `[2,1]`):
+one CPU float64 cross-entropy evaluation/backward through
+the float32 residual cast, checked against the analytic `(onehot(target)-p)/2`
+gradient and sixteen scalar finite-difference evaluations of an independent
+log-sum-exp reference (perturb q by ±1e−6, absolute gradient tolerance2e−7).
+This is17 loss evaluations/one backward on8 synthetic
+logits,0 scorer forwards,0 optimizer steps and0 native/G/R calls, inside the
+acceptance allowance below. Mock lifecycle/counter/reader checks use0 scientific
+exposure. Any engineering request for actual additional model/optimizer execution
+would revise that declared acceptance exposure before use, not silently consume
+unlisted fits or native audits.
+
+**What would be learned.** The matched objective contrasts are Ij−Sj on each
+world and each fit's32-world mean, with no selected best fit. Useful deployment
+also requires reading every I against G/R1/R4 in C, the prospectively named
+tails T(maximum completed-request residence) and W(worst individual RF-service
+gap), unfinished requests/ages, censored residence lower bounds, request-level
+gains/losses, travel, routed coverage, switching and inclusive computation.
+Completed-only T cannot erase old unfinished requests. Empty workloads or no
+completed requests remain explicit missingness, never artificial zero tails.
+RF continuity, complete request service and travel are not battery-energy tests.
+
+Report the nine endpoint means and full32 paired vectors. Give descriptive
+paired-t df31 intervals on world differences for each fixed endpoint and the
+world-wise mean of the three paired objective effects. Separately show the
+three fit-level means and their weak df2 interval, conditional on this shared
+bank/panel; do not pool96 student-world observations into96 fit replications.
+This is exploratory development after B06-informed selection, not multiplicity-
+controlled confirmation. No noninferiority/equivalence margin is supplied by an
+interval crossing zero; R4-preservation claims are outside this contract.
+
+My prospective prediction is better canonical bank decision agreement than the
+paired S endpoints, with uncertain improvement over already strong G and uncertain
+native transfer. A useful broad positive would be recurring complete native C
+improvements over G at the expected low deployment cost, together with an
+advantage over paired S. Prespecified T/W improvements with unresolved C can
+instead be retained as a conditional learned service capability, provided the
+complete unfinished/censoring and individual-loss reading supports that scope.
+Neither outcome alone identifies a unique regression defect, proves neural
+necessity or licenses a default replacement. G's full computation remains inside
+every student, so its extra neural work needs a service benefit; lower deployment
+CPU is principally a possible gain against R1/R4, not against G.
+
+The first useful adverse is precise: bank imitation can improve while native
+service fails, or I can beat S merely by returning toward G. Either would close
+this fixed imitation purchase with its actual scope. Poor bank agreement would
+show that this fixed optimizer/budget did not acquire the intended decisions;
+it would not establish a representational impossibility. Finish the purchased
+nine-arm evaluation regardless of bank fidelity; no training-score gate, later
+fit selection or success-conditioned expansion. Mixed fits/wide intervals stay
+inconclusive, with no automatic new bank, objective, KEEP gate, architecture,
+memory, extra panel or replication purchase. A real first admission/worker/reader
+failure instead returns technical incompleteness and preserved partial evidence,
+not an empirical negative or permission to relaunch a duplicate.
+
+**Main alternatives and investment judgment.** Source and saved-data inspection
+already show that B06 did not first acquire accurate teacher decisions and only
+then fail from state-distribution shift. They do not distinguish objective geometry,
+finite optimization, stochastic teacher variation and later closed-loop shifts.
+The teacher uses sample-specific forecasts unavailable to the deployed student;
+cross-entropy may learn a frequent action while discarding useful magnitudes.
+KEEP alone covers77.38% of labels, while G already covers82.86%. Fidelity to a
+finite sampled teacher is not optimal control, and its C advantage was unresolved.
+These are serious competing predictions, not post-result excuses or new repair
+promises. The four corrected labels are correctness, not the rationale for buying
+another learner.
+
+Stopping with G and the existing R1/R4 frontier is a credible ordinary alternative.
+Repeating B06 regression, replaying old physical labels or adding a diagnostic
+panel would not answer this distinct objective/use question as directly. A new
+teacher bank, state feature, controller or architecture would change more than
+the proposed contrast and has not earned acquisition here. If a learning question
+is chosen, my current preference is **at most this one complete fixed-objective
+comparison**, rather than a sequence of metric-driven repairs. Its justification
+is the chance to develop a known planning capability and the interpretable matched
+contrast, not that three fits are cheap or a DM is available. It remains the more
+uncertain secondary investment relative to developing ordinary planning use;
+Root/Pro may reasonably prefer no learning purchase. This is a DM recommendation,
+not self-clearance of a material selection objection. One applicable independent
+ResearchCritic review must cover the actual chosen question/comparator/price.
+
+**Whole price and stopping boundary proposed to selection.** B06's known complete
+account through cleanup is16,422.780218 CPU-s=4.561883h plus later/unmetered support.
+Its actual three fits used181.692386 CPU-s, a small part of its deployment and
+complete-reader cost. The new study repeats the expensive R1/R4 comparison on new
+worlds and adds64 cheap S/I missions relative to B06; it cannot reuse old final
+ordinary records. I retain the coauthor's conservative **5–8 CPUh for worker plus
+complete reader, plus up to1 CPUh for acceptance/collection**, with approximately
+6–10h standalone operation elapsed time under comparable uncongested execution.
+Concurrency, contention, import/serialization and actual admitted resources can
+change elapsed time. Authoring, independent review and scientific reading also
+need roughly8–14 active support hours; that is an uncalibrated planning range,
+not a measured model-token budget or extra result exposure. Node/memory admission
+has not occurred and no node probe was made. The bound CPU runtime suggests
+`local_linux` if eventually feasible; this is not a resource reservation.
+
+A concrete candidate hard boundary for review is10 summed CPUh,24 summed
+operation-wall hours and8GiB new owned peak disk, stopping scientific work at
+9CPUh/23wallh/7GiB to preserve1CPUh/1wallh/1GiB for cancellation, accounting and
+collection. This includes acceptance work; it is not an additional fit allowance.
+Expected new artifacts are4–6GiB, retaining one necessary evidence copy and compact
+readings. These are proposed ceilings, not funds allocated by this entry. They
+must be frozen with the selected inputs; hitting one does not extend the batch.
+
+Historical teacher acquisition remains at least7,026.128558 CPU-s=1.951702h and
+7,657.956077 summed mission-wall-s, including42,000 actual and4,407,360 model-prefix
+transitions. Unknown outer acquisition/support and teacher-only reader attribution
+remain unknown. The asset is charged once, shared by all three fits and later
+reuse; zero marginal teacher queries do not mean free historical data. B05's
+whole5.374162CPUh already includes this teacher component. Its known total plus
+B06 is approximately9.936045CPUh before this proposed purchase, excluding the
+explicitly unknown support. Do not add1.951702 again, multiply it by three or
+merge the separate27.271636CPUh D service/energy result into this teacher bill.
+Report marginal research cost and any future policy-acquisition/use curve
+separately. CPU-only crossings against R1/R4 are not matched-service break-even
+unless service preservation has actually been established.
+
+**Work actually performed here.** Source/notebook/current-main reading, small
+saved NPZ/JSON reductions,6 checkpoint byte bindings and arithmetic only. The
+metered saved-data portions total3.034470944 CPU-s and.697298404993 wall-s;
+ordinary text/Git/authoring work is additional and unmetered. One arithmetic
+helper had a parse error before executing its body, then the corrected read
+completed; it produced no scientific exposure. No tensor was deserialized into
+a model; no native/G/R/scorer/optimizer call, helper experiment, fresh acquisition,
+implementation, launch, successor directory, shared RESEARCH edit or deletion
+occurred. This bounded assessment is complete. The next cross-question selection
+belongs to Root after its Pro construction and applicable independent review;
+there is no DM-owned active operation or fabricated wait on A/C.
