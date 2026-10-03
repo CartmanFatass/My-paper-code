@@ -435,3 +435,26 @@ or claim positive timing evidence. The current deliverable remains source-only;
 the next actual dependency is Root's whole-investment choice after the single
 ResearchCritic reads this construction. Source construction has acquired zero
 new scientific effects, and no result producer or accepted launch exists.
+
+<a id="b01-source-runtime-correction-20261003"></a>
+### Concrete runtime correction before selection — 2026-10-03
+
+After reading the full construction, Root relayed the independent critic's
+support for the corrected68-mission comparison and corrected one prospective
+runtime clause. **This paragraph supersedes the initial remote-first sentence
+above:** this proposed study uses configured **local_linux first**, on host Jacob,
+with `/home/fires/.venvs/hmasd-linux-cpu/bin/python`, the configured POSIX detached
+supervisor and one numerical thread. Root explicitly selected this concrete
+runtime because of the documented unresolved A03 remote-interpreter anomaly.
+The old failure is not evidence that the remote node is generally unsafe.
+
+The new operation would record actual interpreter/package/source versions,
+user/system/child CPU without double counting, wall time, RSS, and any overlapping
+local worker/reader conditions in its own records. The old local B04/B08 timings
+remain price evidence, not a promise of equal new-clock recurrence, throughput,
+isolation or latency. Local resource admission occurs only for an actual selected
+effect launch. No health probe, standing reservation, automatic remote fallback,
+duplicate launch or migration of an accepted operation is authorized by this
+correction. The scientific/reader count and storage/support envelopes are
+unchanged. Current work still has zero scientific effects and no implementation;
+Root's whole-investment disposition remains the actual next dependency.
