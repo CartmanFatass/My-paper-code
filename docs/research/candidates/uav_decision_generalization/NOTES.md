@@ -6969,3 +6969,102 @@ the unresolved cause. The DM accepts these exact bytes and the existing
 checks. The local selection expressly supersedes the earlier remote tuple;
 native integration/complete execution/throughput remain unvalidated. Source
 publication is next, followed by this single actual local admission attempt.
+
+**Worker source publication and accepted operation,2026-10-03 UTC.** Exact
+inputs and accepted code were published on main at
+`2d754f29308a56a4db81f867ca1b79b5e75f99ad`. The single selected local request
+was accepted at00:55:17Z; its authoritative
+[native manifest](../../../../runs/uav_decision_generalization/b05_request_a01/launch-manifest.json)
+binds the command, node, source snapshot, output and native identities.
+No replacement or second request was made. The same operation is observed
+with `tools/hmasd_wait.py`, session-owned state
+`/home/fires/.local/state/hmasd-wait/01a0fd19-e19a-7bb2-a7b2-1a11bc665a22`,
+job `b05_request_a01`, generation1,60s native status cadence and1500s window.
+The first drain showed consistent accepted/running identities and empty
+stderr; it is observation adoption, not scientific completion. This native
+child keeps its turn active through deterministic waits and same-handle
+drain/rearm; a possible App queue rejection does not authorize rerouting or
+duplicate work. The unchanged first-formal-failure stop and full collection/
+reading obligation apply.
+
+At the generation1 observation checkpoint, the same worker remained
+accepted/running with664 complete training missions/796,800 native steps,
+recorded cumulative CPU2606.598338s and aggregate operation wall1554.574733s;
+stderr remained empty. The native-child App delivery was rejected with
+`-32600`, as expected for this runtime. The active DM drained that saved event
+and rearmed the same operation as generation2; no worker restart, duplicate
+request or address change occurred. These progress counts are not a read result.
+
+Generation2 was drained/rearmed as generation3 on the same accepted worker.
+At this checkpoint1,282 training missions/1,538,400 native steps were complete,
+with third-fit training in progress, cumulative CPU5167.406184s and aggregate
+operation wall3057.484078s. Stderr was empty. The repeated native-child queue
+rejection did not change worker identity or add work.
+
+Generation3 checkpoint: all three training blocks were complete and the
+unchanged worker was evaluating the common panel.1,554 complete missions/
+1,864,800 actual native steps and377,920 completed R model ticks were retained;
+cumulative CPU6909.194237s, aggregate operation wall4392.069723s, empty stderr.
+The DM drained/rearmed the same job as generation4. Full result validation
+and interpretation remain outstanding.
+
+<a id="b05-worker-complete"></a>
+
+**B05 worker technically complete; full reading pending,2026-10-03 UTC.**
+Generations4–7 were drained/rearmed on the original operation without a
+restart; generation8 delivered a saved `READY` event. The native witness
+records exit0 at04:09:45Z, both native processes absent, consistent identities,
+and empty stdout/stderr. The DM consumed the event as generation9 and stopped
+that completed observation before binding the planned reader. Native-child
+queue delivery remained rejected; the continuously active native DM read the
+deterministic events directly.
+
+The worker's own checks report all1,708 H1200 missions:3 fits/1,536 training
+plus172 frozen evaluations,2,049,600 actual native transitions and91,392
+optimizer updates/11,698,176 sampled current rows. All11 endpoint count
+records were retained. R reports2,100 decisions,8,400 completed logical
+cohorts,1,391 exact cohort reuses and4,407,360 computed native model ticks;
+the worker's total reserved G candidate-tick count is292,210,560 and its neural
+attempted-row count69,609,916. These are worker readings subject to the full
+reader, not empirical acceptance by process exit. Cumulative measured CPU
+including earlier checks is13,687.793894s; this worker's phase is13,644.892887
+CPU-s/11,667.328155 wall-s. The corresponding aggregate operation-wall bill
+is11,687.076058s. GPU use is0. Reported self/child RSS peaks are253,616/615,384
+KiB and are separate process-scope peaks, not a simultaneous summed peak.
+
+The unique canonical output remains on configured `local_linux` at
+`/home/fires/hmasd-wsl/runs/uav_decision_generalization/b05_request_a01`.
+Collection verified all5,530 scientific file identities and382,368,563 bytes
+against the worker manifest, without copying raw data. Allocated output at
+that observation was397,168,640 bytes. The independently timed hash pass
+cost1.857394 CPU-s/4.173922 wall-s. Compact
+[collection facts](../../../../runs/uav_decision_generalization/b05_request_a01/collection.json)
+retain the worker config/summary/manifest identities and source-cleanup facts.
+This actual compressed footprint is below the earlier4–8GiB forecast; that
+forecast was not an observed storage bound.
+
+The already selected reader is now bound to the exact complete worker by
+`B05_WORKER_INPUT.json` (345 bytes,SHA256
+`01145a87da1801b7a03a325ed2fbd703fdaed0753c9af06a3b64c1bf680f463d`).
+`B05_READER_BUDGET_LEDGER.json` (2,788 bytes,SHA256
+`f5358750f0ea39921b9ef68aff4339a577173f52b11d19e807ae602e2b0faa7b`)
+carries13,689.651288 cumulative measured CPU-s and11,691.249981 aggregate
+operation wall-s, including that collection. Static status/source reading,
+compact binding writes and transport/review support remain incompletely
+metered and nonzero. The original study input and all61 executable source
+digests are unchanged; the integrated engineering acceptance still applies.
+The reader adds no native training/evaluation mission or optimizer update;
+it performs the fixed complete saved-evidence reconstruction, including paid
+R prefixes and all training records, on the same local runtime. The original
+50 CPUh/72 operation-wallh stops and first-formal-failure stop remain fixed.
+Publishing these exact reader bindings is the next step before its sole
+actual-node request. G/R/L service and complete-use judgments await that read.
+
+The native exact-target collector removed worker source snapshot
+`.git/hmasd-launch-sources/49b9b182f78c472ebd5f8227396e92b5` after terminal
+identity/unique-output verification. Net allocated space reclaimed was
+1,830,649,856 bytes; the output allocation stayed397,172,736 bytes. The first
+unprivileged preview could not inspect `/proc/454/cwd`; the documented
+`--sudo-process-scan` read-only process probe resolved that concrete check,
+and apply revalidated eligibility. The target and Git worktree registration
+are gone, all unique output remains, and there is no cleanup blocker here.

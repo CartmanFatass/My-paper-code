@@ -1,0 +1,50 @@
+{
+  "allocated_output_bytes": 397168640,
+  "collection_verification_cpu_seconds": 1.8573939999999998,
+  "collection_verification_wall_seconds": 4.1739223769982345,
+  "identities": {
+    "config": {
+      "bytes": 27297,
+      "path": "/home/fires/hmasd-wsl/runs/uav_decision_generalization/b05_request_a01/config.json",
+      "sha256": "e675836d1775dcbb414395109ca062b8a3bb8341d196a39eab80f87db643e668"
+    },
+    "manifest": {
+      "bytes": 1630663,
+      "path": "/home/fires/hmasd-wsl/runs/uav_decision_generalization/b05_request_a01/manifest.json",
+      "sha256": "3c3c7c84af0c0b55a4669e71bbad361d5b4e391e26bd237ee59a3f2aea639026"
+    },
+    "summary": {
+      "bytes": 22896,
+      "path": "/home/fires/hmasd-wsl/runs/uav_decision_generalization/b05_request_a01/summary.json",
+      "sha256": "d06794e1287e7fca7fd815ec77a4a1e17f6a133f87c42f023ccf50ca42605edd"
+    }
+  },
+  "verified_scientific_bytes": 382368563,
+  "verified_scientific_files": 5530,
+  "worker_root": "/home/fires/hmasd-wsl/runs/uav_decision_generalization/b05_request_a01",
+  "worker_source_cleanup": {
+    "deleted_target": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/49b9b182f78c472ebd5f8227396e92b5",
+    "method": "supported hmasd_snapshot_gc with sudo read-only process scan",
+    "net_allocated_bytes_reclaimed": 1830649856,
+    "output_allocated_bytes_after": 397172736,
+    "output_allocated_bytes_before": 397172736,
+    "result": {
+      "mode": "apply",
+      "snapshots": [
+        {
+          "claim": "/home/fires/hmasd-wsl/.git/hmasd-admission/6293ad52c24ed35731a1dd1470e8445c06287dcafb5e7262d5c78c1b98fdc7cb.json",
+          "durable_ref": "refs/heads/main",
+          "eligible": true,
+          "output": "/home/fires/hmasd-wsl/runs/uav_decision_generalization/b05_request_a01",
+          "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/49b9b182f78c472ebd5f8227396e92b5",
+          "removed": true,
+          "sha": "2d754f29308a56a4db81f867ca1b79b5e75f99ad",
+          "snapshot": "49b9b182f78c472ebd5f8227396e92b5"
+        }
+      ]
+    },
+    "snapshot_allocated_bytes_after": 0,
+    "snapshot_allocated_bytes_before": 1830649856
+  },
+  "worker_status": "COMPLETE"
+}
