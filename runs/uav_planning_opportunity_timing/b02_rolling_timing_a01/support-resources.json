@@ -1,0 +1,6 @@
+{
+  "known_initial_observer_cpu_seconds": 0.612463,
+  "this_record_write_cpu_seconds_through_sample": 0.082149,
+  "unknown_support": "Control/method/status-source reads, CodeGraph exploration, external tool overhead and JSON write tails not fully metered. Detached observer/probe lifetime to be reported separately; unknown is not zero.",
+  "formal_launcher_cpu_seconds_recorded_separately": 9.945715
+}

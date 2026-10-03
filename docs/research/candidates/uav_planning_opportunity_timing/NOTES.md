@@ -2140,3 +2140,283 @@ configuredlocal_linux/one numerical thread, with no retry/resume/fallback.
 Preparation before the final publication/parser tails is **41.884765120CPU-s**; automated mock subtotal is41.396104000CPU-s/41.903658897wall-s, inside1800CPU-s/7200wall-s. The bound preparation JSON retains individual measured scopes and unknown support. This final append/write tail is measured separately below.
 
 Final pre-effect source check refreshed published main`e926c44188833f6cd127ad062e721ec48b8bad66`, preserved Root’s complete selection/routing and other writers, and changed only this direction’s stale reserve row to parser-supported exploring. Pure parse_research_state and CLI parsing verified lifted/exploring/Codex DM (native child), local_linux, one fresh B02 output and no retry argument. All55 inherited byte bindings and new Python ASTs passed. This check incurred0.249730000CPU-s/1.486982732wall-s; with the preceding.000617334CPU-s acceptance append, published preparation now totals42.135112454CPU-s. No actual-node admission or scientific call occurred. This metadata/publication tail remains outside that sample and is not reported as zero.
+
+
+<a id="b02-accepted-operation-20261003"></a>
+## 2026-10-03 — B02 single formal request accepted; complete reading pending
+
+The exact inputs were published on main as `9b763be8a45dad875166efcfba8efbf9c3db54b2` before the **one** new formal request. Current canonical and published policy both read owner pause lifted, direction exploring, lead `Codex DM (native child)`. The ordinary local_linux launcher accepted at 09:23:09 UTC. Its [native manifest](../../../../runs/uav_planning_opportunity_timing/b02_rolling_timing_a01/launch-manifest.json) and [preflight](../../../../runs/uav_planning_opportunity_timing/b02_rolling_timing_a01/admission-preflight.json) retain the exact command, source snapshot, node, process identities and stable operation reference; no new cell, fallback, audit, reseed or retry was introduced. The worker and complete independent reconstruction are in the same accepted operation. Acceptance is **not** a scientific result or this assignment's return boundary.
+
+The formal-request wrapper measured 9.945715 CPU-s (0.077823 wrapper + 9.867892 reaped launcher subtree), 20.130138383 monotonic wall-s and separate lifetime peak RSS 669536/673112 KiB. These peaks are not additive or simultaneous. The atomic `formal-launch-resources.json` supplies that extra CPU and the same-host monotonic request start to the worker meter, in addition to published preparation's 42.135112454 CPU-s. Its final JSON-write tail remains unmetered, not zero. UTC and monotonic durations are reported in their own clocks.
+
+The first observer arm returned `ValueError: drain and rearm the existing state before adding observations`: this session's prior completed jobs had consumed events and observation was stopped. The DM inspected and drained generation12 with no pending events or live prior job, rearmed that state, then armed only the new B02 operation. No old scientific worker, launch or blocked observation was resumed. The first actual drain, generation14, read matching live runner/supervisor identities and consistent accepted records at 09:25:14 UTC. Arm refusal, same-session reconciliation and first drain consumed a further measured 0.612463 CPU-s; their exact small records are retained in this run. The detached observer uses 30-s read-only status probes and a 1500-s checkpoint window. Its future support cost is not included in those initial samples. The native child remains active; later checkpoints drain/rearm this same operation, never relaunch it. Registration alone is not assumed to provide a future native-child wake.
+
+The first real formal/admission/worker/full-reader/resource failure still closes this purchase. The four prescribed audits and full finite panel are now pending; no interpretation is inferred from admission or early activity.
+
+
+<a id="b02-complete-reading"></a>
+## 2026-10-03 — B02 complete/read: retain finite rolling anticipation with its full price and adverse service outcomes
+
+**The selected complete comparison is positive for A_E4 against both A_E and G_E4.**
+Retain this four-opportunity ordinary planning capability alongside the two-opportunity
+A_E/A2 and cheaper G_E4 comparators. The fixed purchase ends here; it does not select
+another opportunity count, clock, deeper search, chooser, learning gate or fit. This
+is the positive-with-tradeoffs branch of the [original independent selection
+review](#b02-independent-selection-review-20261003), read before implementation;
+that review is not misrepresented as an independent inspection of these new results.
+The main judgment changes from an untested extension to an observed useful finite
+closed-loop capability on this panel. Its deployable value depends on compute and
+service-distribution costs. The broader cooperation question remains open.
+
+The accepted source is `9b763be8a45dad875166efcfba8efbf9c3db54b2` and the unchanged
+[fixed scientific contract](#b02-source-contract-20261003) defines all four arms.
+The one accepted operation completed at **2026-10-03 15:58:22.598810 UTC**, exit0.
+All **68 H500 missions**, **34,000 native transitions**, **204 actual planning
+opportunities**, and the complete uncompressed numerical reader finished. The
+reader reconstructed **34,068 saved native snapshots**, every motion/reward check,
+all model branches, stationary banks, segment certificates and actual decisions.
+There were **0 fits, 0 optimizer updates and 0 new teacher labels**. No exposure,
+stopping rule, candidate set, seed, scope or metric changed after launch. No formal,
+admission, worker, full-reader or resource failure occurred and there was no retry.
+
+The compact [result](../../../../runs/uav_planning_opportunity_timing/b02_rolling_timing_a01/result.json)
+contains all six comparisons and all world vectors, complete opportunity readings,
+all scoped executed forecast checks, individual adverse records, program identity
+checks, source identity and costs. Tables below are mechanically projected from
+its `core_reading.comparisons`, `individual_continuity_comparisons` and
+`by_arm_costs_including_audit`, which preserve the original reader outputs. The
+source config and native launch/status/exit records are beside it. The DM read all
+world/arm choices, all metric contrasts, forecast scopes, individual losses and the
+complete resource accounting; exit0 alone is not this disposition.
+
+The estimand is the **16 fresh common worlds 29524000…29524015**. The four missions
+at engineering world29524900 are excluded. Intervals use the fixed10,000 common
+paired-world bootstrap draws with seed29524991. These are exploratory world-sample
+intervals, not confirmation, training-seed uncertainty or68/800 independent
+replicates; the six displayed comparisons are not a multiplicity-corrected family.
+
+| Contrast | Mean J [paired-world 95% interval] | J + / 0 / − | Mean served [interval] |
+|---|---:|---:|---:|
+| A_E4-A_E | +0.003381696 [+0.001431760, +0.005597273] | 11 / 5 / 0 | +0.269875 [+0.090250, +0.484756] |
+| A_E4-G_E4 | +0.005336419 [+0.001650346, +0.009669445] | 12 / 4 / 0 | +0.463125 [+0.130747, +0.841506] |
+| A_E4-A2 | +0.004566894 [+0.002073338, +0.007325428] | 15 / 1 / 0 | +0.349125 [+0.138247, +0.588503] |
+| A_E-A2 | +0.001185197 [+0.000142142, +0.002285706] | 14 / 1 / 1 | +0.079250 [-0.050253, +0.196003] |
+| G_E4-A_E | -0.001954723 [-0.005266627, +0.000988033] | 5 / 4 / 7 | -0.193250 [-0.529259, +0.103262] |
+| G_E4-A2 | -0.000769526 [-0.003405011, +0.001844771] | 8 / 2 / 6 | -0.114000 [-0.395250, +0.164031] |
+
+| Contrast | Mean quality [interval] | Mean path m/UAV [interval] |
+|---|---:|---:|
+| A_E4-A_E | -0.000687470 [-0.004102562, +0.002886155] | +67.375228 [+16.020910, +122.419048] |
+| A_E4-G_E4 | -0.003150998 [-0.007614071, +0.000774010] | -4.638593 [-46.617787, +35.513425] |
+| A_E4-A2 | -0.001114833 [-0.004190136, +0.001828368] | +25.259314 [-33.537579, +84.010705] |
+| A_E-A2 | -0.000427363 [-0.001972297, +0.001323250] | -42.115914 [-90.356097, -3.966274] |
+| G_E4-A_E | +0.002463528 [-0.002019495, +0.007603730] | +72.013821 [+12.902804, +134.466801] |
+| G_E4-A2 | +0.002036164 [-0.002135209, +0.006331345] | +29.897907 [-38.706586, +102.848288] |
+
+The primary median J difference is **+.001202918**; its five exact J ties are
+worlds00/03/09/13/15, and the saved **complete native arrays** are bitwise identical
+there. The eleven other worlds improve J; none lose J on this finite panel. The
+largest share of signed primary net J gain is world04's26.0825%, followed by
+world02's18.9560%; this result is less concentrated than B01's55.8% single-world
+share, without establishing population monotonicity. Mean service gains coexist
+with losses of .016 and .006 in worlds07 and11. Mean path rises67.375m/UAV and
+mean quality falls slightly with an interval spanning zero. The primary mean
+active-count change is−.00625, eligible-unserved+.0025, ineligible−.272375 and
+height penalty+.0001903125; world12 contributes a+.00306 height-penalty change.
+A positive J result is not shorthand for every native outcome improving.
+
+The matched-rights A_E4−G_E4 J median is+.000458391; its four full-native identity
+worlds are09/10/13/15. The largest net J share is world11's27.4596%. Service is
+lower by .04 in world06 despite positive J. This supports anticipation's increment
+within the common four-opportunity rule and actual lawful input contract. It
+compares complete selectors, including the clocks their own choices induce; it
+does not identify a pure timing coefficient at fixed native trajectories.
+
+Fresh A_E−A2 remains J-positive on average, with a smaller effect than B01 and one
+adverse world12 (J−.003347934, service−.638). Its service interval crosses zero and
+its mean path saving is42.116m/UAV. B01 remains separate positive/adverse evidence;
+we do not pool the two panels or revise the old outcomes. G_E4's mean J and
+service fall against A_E and A2, with intervals spanning zero. Its positive local
+outcomes, especially worlds06/10, and cheaper compute remain real alternatives;
+an uncertain adverse average does not prove every greedy program useless or
+statistical equivalence. Equal whole-team served p05/minimum/zero counts/longest
+zero-run in all these comparisons do not establish individual continuity.
+
+| Contrast | Served ticks + / equal / − | Longest gap shorter / equal / longer | Never-served rescued / new | Worst served-tick loss / longest-gap increase |
+|---|---:|---:|---:|---:|
+| A_E4-A_E | 24 / 750 / 26 | 23 / 756 / 21 | 4 / 0 | -397 / +397 |
+| A_E4-G_E4 | 69 / 654 / 77 | 66 / 664 / 70 | 6 / 2 | -439 / +440 |
+| A_E4-A2 | 65 / 702 / 33 | 61 / 708 / 31 | 5 / 0 | -430 / +415 |
+| A_E-A2 | 50 / 727 / 23 | 46 / 730 / 24 | 1 / 0 | -431 / +434 |
+| G_E4-A_E | 68 / 670 / 62 | 62 / 681 / 57 | 4 / 4 | -438 / +439 |
+| G_E4-A2 | 74 / 671 / 55 | 65 / 683 / 52 | 4 / 3 | -438 / +439 |
+
+Each row covers the same800 matched **user-within-world records**, not800
+independent draws. The complete reader retains every observed gap and both
+mission-edge censoring flags; a terminal observed gap is not an observed future
+return-to-service time. A_E4−A_E has24 users gain served ticks,26 lose and750
+unchanged, despite all26 losses lying in J-positive team worlds. In world29524002,
+user7 falls492→95 served ticks and its longest observed gap grows8→405 while team
+J and service improve. There are four never-served rescues and no new never-served
+users against A_E. Against G_E4, however, six rescues coexist with **two newly
+never-served** users (world02/user20 and world11/user42). The latter falls439→0
+served ticks and its gap grows60→500 in a team-positive world. Result-panel
+never-served totals are A2=37, A_E=36, G_E4=36, A_E4=32. These outcomes constrain
+fairness/default-adoption claims without erasing the measured team capability.
+Travel is absent from the fixed native J; no post-result weighted utility or new
+adoption threshold is invented to collapse these different costs.
+
+**What the actual programs establish.** All17 A_E4/A_E first scientific searches
+have identical payloads under the declared `ae/first` identity mapping. Their
+saved native prefixes agree until the actual second input (t60/70/80), and all
+arms agree beforet40. A_E4's actual second choice nevertheless differs from A_E
+in worlds05/07/08/12/14; worlds08/12 choose stay there and initiate a later third
+commitment. Thus the added package already changes at the second selector. Five
+A_E4 worlds with both late choices stay happen here to have full-native identity
+with A_E, established by the actual arrays, not by using late stay as a proxy gate.
+
+On the16 result worlds, A2 initiates30/32 opportunities, A_E31/32, G_E4 42/64 and
+A_E4 46/64. The A_E4 ordinal commitment counts are16/13/10/7 and G_E4's16/12/8/6.
+All menus retain their actual2…5 candidates including nonpositive champions;
+every initiated actual plan has nonzero path. No fifth opportunity, hidden deeper
+search, phase reset, forced remuting or candidate pruning appears. Actual A_E4
+commanded durations are10…30 with2…27 physical moving ticks; G_E4 includes40-tick
+commands and up to31 moving ticks. Planning eligibility still excludes the
+immediately preceding mover, while lawful nonadjacent revisits occur at A_E4
+world05/op4/member6 and world06/op4/member5, and G_E4 world00/op4/member5. Ordinary
+subsequent C/E can remute initiated movers:11 A_E4 plans and7 G_E4 plans do so,
+versus2 in each two-opportunity arm. A commitment is not permanent activation.
+All actual fourth opportunities occur by t140; latest commanded arrival is160
+for A_E4 and180 for G_E4. The configured maximum remains t190/t230. These are
+four finite **early** opportunities followed by ordinary C/E, not sustained
+throughout-H500 cooperation or an optimal opportunity count.
+
+**Forecast scope and numerical reading.** Complete same-source, uncompressed
+reconstruction and identity checks pass. Across all221 declared executed forecast
+scopes, commands, masks and per-tick service agree with native execution. Largest
+coordinate discrepancy is0.0000535236493988m and largest absolute ordered J-total
+discrepancy is0.00000209734395185; these are lawful model/native FP32/FP64 readings,
+not a bitwise claim about those distinct paths. The early scopes end before the
+next actual selection as declared (G_E4 first3, A_E4 first2). In A_E4 the first
+model's assumed ordinary next choice differs from the actual anticipatory second
+choice in worlds05/07/08/12/14; the second model's next choice differs from the
+actual third in04/06/07/11. Those full early model tails are **not** predictions
+of the complete rolling controller. A_E4 ordinal3 retains both its prefix check
+and complete remaining-program check; ordinal4 retains the full remaining check.
+Successful ranking usefulness therefore coexists with an intentionally different
+future policy; neither local positive model differences nor forecast agreement
+replace the complete native comparison. Unexecuted branches remain model values,
+not additional native counterfactual outcomes.
+
+**Full measured price.** Every arm's audit mission is included in this table;
+reader work is additional to worker work.
+
+| Arm, 17 missions including audit | Worker episode CPU-s | Full uncompressed reader CPU-s | Actual worker state/mask requests | Logical requests in each complete pass |
+|---|---:|---:|---:|---:|
+| A2 | 1139.638566 | 3407.621381 | 14,267,269 | 54,439,585 |
+| A_E | 1124.744185 | 3750.476844 | 13,615,630 | 60,078,256 |
+| G_E4 | 658.113353 | 2156.604621 | 8,356,942 | 34,017,852 |
+| A_E4 | 2542.875040 | 8362.016482 | 30,024,152 | 135,935,079 |
+
+A_E4 worker CPU is **2.260847× A_E** and **3.863886× G_E4**. Including their full
+uncompressed readers gives2.236799× and3.874239× respectively. A_E worker CPU is
+.986931× A2 on this new panel (1.072123× including reader); B01's historical
+1.01065× observation is unchanged. These are measured CPU scopes on the selected
+host and implementation, not portable response latency. Other accepted direction
+workers overlapped parts of this operation and are recorded in its resources.
+
+Worker episode computation costs5465.371144CPU-s; full reader episodes cost
+17676.719328CPU-s, total23142.090472CPU-s. The broader runner meter, including
+imports/common work/reaped children, is23674.032120CPU-s. Adding bound preparation
+42.135112454CPU-s and the one formal-launch scope9.945715CPU-s once gives
+**23726.112947454CPU-s =6.590587CPUh** through its final sample. Separately logged
+support fragments so far total12.340501CPU-s in `support-waits.jsonl`, plus initial
+observer.612463, initial support-record.082149 and terminal-observer closure
+.218684CPU-s. The final saved-data hash/result extraction3.669233CPU-s is already
+inside that12.340501, not an extra charge. Later publication/cleanup scopes are
+reported below where measured. Source/control inspection, tool overhead, manual
+reading/reasoning, observer/status lifetime and final-write tails are not fully
+metered and remain **unknown, not zero**. Therefore6.590587 is not an exact
+all-inclusive project/support total. Earlier A01 failure and B01's approximately
+3.26048CPUh and unknown support remain cumulative investment, not a balance
+available for B02.
+
+The last runner sample records23400.151221 monotonic operation-wall seconds
+(6.500042h) from the formal request, not a sum of overlapping subprocess walls;
+UTC request-to-exit duration is a separate clock measurement. Observed owned
+allocated-byte peak is2693521408 (2.509GiB), and runner peak RSS399020KiB. No
+science-reserve or hard-envelope excess was detected, and stop_reason is null.
+The24CPUh/48operation-wallh/12GiB new purchase, included mock subtotal and terminal
+reserves were not exhausted. The prior6–12CPUh range,6.538530 center and17.793465
+no-reuse sensitivity remain forecasts, not fitted retrospective guarantees.
+
+Actual worker logical counts are284470772 state/mask requests,1085480 model
+physical ticks,594 stationary banks,203400 candidate rows,4094440 candidate-transit
+ticks,2628 complete model branches and3018 segment certificates. Exact reuse
+reduces worker requests to66263993 and computed model ticks to183128, with902352
+reused. The complete independent reader separately computes all284470772 logical
+requests and1085480 ticks; combined worker-actual plus reader requests are350734765.
+The other listed logical objects are also separately paid in each pass. These
+counts do not subsume the34000 native transitions and their RF/observation work,
+snapshot reconstruction, hashing, serialization or reduction overhead. Zero fits
+never meant zero or negligible research cost.
+
+**Evidence, operations and interpretation.** All68 source-binding checks and all
+6122 retained raw/catalog/cell-status artifact hashes and byte lengths were checked
+after completion:804162344 logical bytes, canonical tree SHA256
+`7c12c6ff11307d5c06f4bde6e7b6a673af2d64a4bc0b86307ff28283f82d54f4`.
+The one durable evidence location remains local_linux at
+`/home/fires/hmasd-wsl/runs/uav_planning_opportunity_timing/b02_rolling_timing_a01/`.
+Original `summary.json` is10448432bytes/SHA256
+`81391ce7afabcf9c524d2d65d94bca5e4f1d88b08c212a1c5ad8a7115562de9f`;
+original `reading.json` is11702306bytes/SHA256
+`fdcdcad5f508b16278a3ac8124f9640a4f6952c45e0a7c21d7e49fc4799e1b69`;
+`config.json` is30486bytes/SHA256
+`44e01f34e4453eb9cbb2553152a7a789ef8c6bfb5df8c941b9f6cab5fd087e67`.
+Raw arrays and large original readings stay unchanged in that one location; the
+compact result and source/native recovery records are published in Git.
+
+The native child stayed active through deterministic waits on the same accepted
+handle. Observer checkpoints were drained/rearmed through generation29; native
+child queue deliveries returned−32600, without invalidating process observation.
+At completion both recorded native processes were absent with valid exit0 evidence.
+The terminal event was consumed, generation30 was stopped and drained with no wake
+or pending events. These records distinguish the actual terminal read from an
+assumed queue return. There is no live producer or future experiment dependency.
+Two manual saved-JSON helpers needed corrections (optional `zero_path` on a stay;
+including68 cell-status metadata files in the artifact union); neither reran
+science nor failed the required numerical reader. Their original unmetered
+support is retained as unknown, not recast as zero or as an experimental failure.
+
+Runtime compaction independently verified then removed1560 redundant prefix/suffix
+files; all exact targets are in `summary.cleanup` and compact `runtime_compaction`.
+All are absent. It removed111906816 allocated file bytes and reclaimed
+**111951872 net allocated bytes** including directories. These were reproducible
+duplicates; all unique required positive/adverse/failed evidence remains. Final
+snapshot/scratch reclamation is reported in the subsequent closure entry.
+
+This reading strengthens **task opportunity**: additional early closed-loop use
+of the existing two-layer ordinary selector produces useful native consequences,
+and same-rights greedy control does not absorb its mean gain on this panel.
+**Representation** remains the same lawful133-FP32 report, actual mask and private
+C history; this study does not compare encoders or grant additional information.
+**Learnability** is untouched because nothing was trained. **Complete-package
+value** is conditional: the native gains are real under the fixed objective, at
+higher compute and with serious individual-service losses. Useful capability,
+universal adoption and further investment are separate decisions.
+
+Current published background was refreshed at main`0a621fd228f84d99f87e6acc4a43a630d430ca16`
+before this interpretation's publication. The ordinary planning capability topic
+and event-order topic are directly affected: extend their finite-use judgment,
+preserve B01's contrary worlds, and distinguish early forecast scope from actual
+rolling control. No wider background rewrite or new explanation is needed.
+
+**Disposition and recommendation to Root:** keep A_E4 as a demonstrated conditional
+ordinary reference, preserve A_E/A2 and cheaper G_E4 with the full comparison, and
+close this purchase with no queued scientific work. The positive result permits
+future development; the cost ratio is a concrete reason to consider reducing the
+whole useful controller's cost if Root selects another purchase. It does not
+establish an amortizer, a useful-world selector, a fairness remedy or a learning
+advantage, and none is launched here. Root owns the next cross-question allocation;
+this is a recommendation at the assigned boundary, not an owner permission blocker
+or a claim that the parent question is exhausted.

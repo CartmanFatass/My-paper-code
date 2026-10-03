@@ -1,0 +1,41 @@
+{"kind": "native_child_deterministic_wait", "reason": "observer_event", "wall_seconds": 1300.121477992012, "cpu_seconds": 0.202062, "generation": 14, "event_ids": ["80b1afa3bcdd7fed7c4e27bf"]}
+{"kind": "observer_drain_and_progress_read", "generation": 14, "wall_seconds": 0.17131252502440475, "cpu_seconds": 0.159746}
+{"kind": "observer_checkpoint_rearm", "generation": 14, "returncode": 0, "wall_seconds": 0.08831177998217754, "cpu_seconds": 0.187443}
+{"kind": "native_child_deterministic_wait", "reason": "observer_event", "wall_seconds": 1425.1487189219915, "cpu_seconds": 0.19693199999999997, "generation": 15, "event_ids": ["5c6a33a4e9628d91c11b5b89"]}
+{"kind": "observer_drain_and_progress_read", "generation": 15, "wall_seconds": 0.07664663100149482, "cpu_seconds": 0.17996099999999998}
+{"kind": "observer_rearm_and_native_child_wait", "reason": "observer_event", "wall_seconds": 1450.2186222739983, "cpu_seconds": 0.289398, "generation": 16, "event_ids": ["f3d1c6b98e67415b97e72744"]}
+{"kind": "observer_drain_and_progress_read", "generation": 16, "wall_seconds": 0.07294540200382471, "cpu_seconds": 0.17044299999999998}
+{"kind": "observer_rearm_and_native_child_wait", "reason": "observer_event", "wall_seconds": 1445.2624202599982, "cpu_seconds": 0.34044199999999997, "generation": 17, "event_ids": ["dec98280bbbccc621318c6a3"]}
+{"kind": "observer_drain_and_progress_read", "generation": 17, "wall_seconds": 0.08895959000801668, "cpu_seconds": 0.17566099999999998}
+{"kind": "observer_rearm_and_native_child_wait", "reason": "observer_event", "wall_seconds": 1445.2666552159935, "cpu_seconds": 0.340577, "generation": 18, "event_ids": ["a80041fd9b4cd5782575b02d"]}
+{"kind": "observer_drain_and_progress_read", "generation": 18, "wall_seconds": 0.2092647640092764, "cpu_seconds": 0.214964}
+{"kind": "observer_rearm_and_native_child_wait", "reason": "observer_event", "wall_seconds": 1445.2829685200122, "cpu_seconds": 0.32609499999999997, "generation": 19, "event_ids": ["99b3cbb66bd9adb59d72c9a5"]}
+{"kind": "observer_drain_and_progress_read", "generation": 19, "wall_seconds": 0.10928946200874634, "cpu_seconds": 0.20131500000000002}
+{"kind": "observer_rearm_and_native_child_wait", "reason": "observer_event", "wall_seconds": 1445.2877074579883, "cpu_seconds": 0.308818, "generation": 20, "event_ids": ["36212a3e8c5d7f9b3b800df8"]}
+{"kind": "observer_drain_and_progress_read", "generation": 20, "wall_seconds": 0.09784353198483586, "cpu_seconds": 0.21027099999999999}
+{"kind": "observer_rearm_and_native_child_wait", "reason": "observer_event", "wall_seconds": 1445.2538941800012, "cpu_seconds": 0.322107, "generation": 21, "event_ids": ["14d4f363baff2d0a1ac48a66"]}
+{"kind": "observer_drain_and_progress_read", "generation": 21, "wall_seconds": 0.09125353800482117, "cpu_seconds": 0.23843099999999998}
+{"kind": "observer_rearm_and_native_child_wait", "reason": "observer_event", "wall_seconds": 1445.2717757230275, "cpu_seconds": 0.30444899999999997, "generation": 22, "event_ids": ["ead35aeaa9482a022590db5a"]}
+{"kind": "observer_drain_and_progress_read", "generation": 22, "wall_seconds": 0.09442622200003825, "cpu_seconds": 0.15824799999999997}
+{"kind": "observer_rearm_and_native_child_wait", "reason": "observer_event", "wall_seconds": 1450.244247266004, "cpu_seconds": 0.28530500000000003, "generation": 23, "event_ids": ["17b041d97dcfba0e94caa6d3"]}
+{"kind": "observer_drain_and_progress_read", "generation": 23, "wall_seconds": 0.10883000600733794, "cpu_seconds": 0.182773}
+{"kind": "observer_rearm_and_native_child_wait", "reason": "observer_event", "wall_seconds": 1465.274329812004, "cpu_seconds": 0.29925, "generation": 24, "event_ids": ["aa99fc281fb276aa7eabe1d2"]}
+{"kind": "observer_drain_and_progress_read", "generation": 24, "wall_seconds": 0.09488645600504242, "cpu_seconds": 0.166733}
+{"kind": "observer_rearm_and_native_child_wait", "reason": "observer_event", "wall_seconds": 1480.2417470609944, "cpu_seconds": 0.304841, "generation": 25, "event_ids": ["0a5064c2c308a699001da238"]}
+{"kind": "observer_drain_and_progress_read", "generation": 25, "wall_seconds": 0.1001414560014382, "cpu_seconds": 0.17345599999999997}
+{"kind": "observer_rearm_and_native_child_wait", "reason": "observer_event", "wall_seconds": 1480.249358060013, "cpu_seconds": 0.311342, "generation": 26, "event_ids": ["c02b2ad97a8b90fbf8df8b52"]}
+{"kind": "observer_drain_and_progress_read", "generation": 26, "wall_seconds": 0.14683973099454306, "cpu_seconds": 0.210217}
+{"kind": "observer_rearm_and_native_child_wait", "reason": "observer_event", "wall_seconds": 1480.2583239750238, "cpu_seconds": 0.28543399999999997, "generation": 27, "event_ids": ["2c466dc9405bef50400e0b79"]}
+{"kind": "observer_drain_and_progress_read", "generation": 27, "wall_seconds": 0.1339358740078751, "cpu_seconds": 0.233242}
+{"kind": "observer_rearm_and_native_child_wait", "reason": "observer_event", "wall_seconds": 1475.2463277410134, "cpu_seconds": 0.287684, "generation": 28, "event_ids": ["8ff30cd4386c5e9f7ec79a47"]}
+{"kind": "observer_drain_and_progress_read", "generation": 28, "wall_seconds": 0.11625873899902217, "cpu_seconds": 0.16588099999999997}
+{"kind": "observer_rearm_and_native_child_wait", "reason": "observer_event", "wall_seconds": 575.1389629920013, "cpu_seconds": 0.19288599999999997, "generation": 29, "event_ids": ["658619619eac31c91ebb0e81"]}
+{"kind": "observer_terminal_drain_and_initial_read", "generation": 29, "wall_seconds": 0.16295636098948307, "cpu_seconds": 0.22987299999999997}
+{"kind": "full_result_schema_and_arm_costs_read", "cpu_seconds": 0.13572499999999998}
+{"kind": "six_comparisons_initial_read", "cpu_seconds": 0.15584399999999998}
+{"kind": "full_six_contrast_aggregate_read", "cpu_seconds": 0.128862}
+{"kind": "all_individual_losses_and_program_choices_read", "cpu_seconds": 0.13056600000000002}
+{"kind": "complete_plan_and_primary_world_read", "cpu_seconds": 0.129001, "prior_manual_render_failure": "previous read-only formatting expression KeyError zero_path on stay record; no scientific call or required reader failure; prior rendering CPU unmetered"}
+{"kind": "catalog_schema_and_compaction_read", "cpu_seconds": 0.13499}
+{"kind": "verify_all_retained_artifacts_and_extract_compact_result", "cpu_seconds": 3.6692329999999997, "wall_seconds": 3.6289269660192076, "peak_rss_kib": 669536, "scope": "saved-file hashes and compact reductions; no scientific call or repeated full numerical reader"}
+{"kind": "compose_complete_B02_NOTES_from_saved_result", "cpu_seconds": 0.009649857999999997, "wall_seconds": 0.009654741996200755, "scope": "saved JSON reductions and notebook write; no scientific call; process import and final ledger write tail excluded"}

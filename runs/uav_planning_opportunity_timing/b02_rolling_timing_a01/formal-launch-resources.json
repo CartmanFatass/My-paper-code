@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "formal_request_count": 1,
+  "returncode": 0,
+  "started_utc": "2026-10-03T09:22:49.070867+00:00",
+  "started_monotonic": 146502.550910798,
+  "finished_utc": "2026-10-03T09:23:09.807136+00:00",
+  "wall_seconds": 20.130138383014128,
+  "cpu_seconds": 9.945715,
+  "self_cpu_seconds": 0.077823,
+  "reaped_launcher_cpu_seconds": 9.867892000000001,
+  "self_peak_rss_kib": 669536,
+  "reaped_launcher_peak_rss_kib": 673112,
+  "cpu_scope": "wrapper lifetime through sample plus reaped formal launcher subtree; detached scientific worker excluded and metered separately; writes after sample unmetered",
+  "operation_wall_origin": "formal_request_started_monotonic_same_host"
+}

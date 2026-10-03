@@ -1,0 +1,90 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-10-03T09:23:09.776397Z",
+  "bootstrap_command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/4bf6525e190e4a84b18513be6fbbe530/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/4bf6525e190e4a84b18513be6fbbe530/experiments/candidates/uav_planning_opportunity_timing/b02/run.py",
+    "--output",
+    "/home/fires/hmasd-wsl/runs/uav_planning_opportunity_timing/b02_rolling_timing_a01",
+    "--",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/uav_planning_opportunity_timing/b02_rolling_timing_a01",
+    "--launch-sha",
+    "9b763be8a45dad875166efcfba8efbf9c3db54b2",
+    "--seed",
+    "29524000"
+  ],
+  "claim_key": "0d27ce43fd79733cbed6d6372f23a546d79fdc83d7bfc297c3fdc404f980fe45",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/0d27ce43fd79733cbed6d6372f23a546d79fdc83d7bfc297c3fdc404f980fe45.json",
+  "command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/4bf6525e190e4a84b18513be6fbbe530/experiments/candidates/uav_planning_opportunity_timing/b02/run.py",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/uav_planning_opportunity_timing/b02_rolling_timing_a01",
+    "--launch-sha",
+    "9b763be8a45dad875166efcfba8efbf9c3db54b2",
+    "--seed",
+    "29524000"
+  ],
+  "command_sha256": "22591b2889fb094c3fdad398c16c1030eaf47c28198759c5899b3ee8f60cabc8",
+  "control_observation": {
+    "observed_at": "2026-10-03T09:23:09.513787Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "9b763be8a45dad875166efcfba8efbf9c3db54b2"
+  },
+  "control_root": "/home/fires/hmasd-wsl",
+  "created_at": "2026-10-03T09:23:09.536516Z",
+  "cwd": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/4bf6525e190e4a84b18513be6fbbe530",
+  "direction": "uav_planning_opportunity_timing",
+  "host_identity": "Jacob",
+  "identity_command": [
+    "/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10",
+    "experiments/candidates/uav_planning_opportunity_timing/b02/run.py",
+    "--launch-sha",
+    "9b763be8a45dad875166efcfba8efbf9c3db54b2",
+    "--seed",
+    "29524000"
+  ],
+  "lead": "Codex DM (native child)",
+  "manifest_ref": "/home/fires/hmasd-wsl/runs/uav_planning_opportunity_timing/b02_rolling_timing_a01/launch-manifest.json",
+  "node": "local_linux",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/0d27ce43fd79733cbed6d6372f23a546d79fdc83d7bfc297c3fdc404f980fe45.json",
+  "output_root": "/home/fires/hmasd-wsl/runs/uav_planning_opportunity_timing/b02_rolling_timing_a01",
+  "preflight": "/home/fires/hmasd-wsl/runs/uav_planning_opportunity_timing/b02_rolling_timing_a01/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "f359a2d7-72f8-4eb1-b898-bc0abf61bed6",
+      "kind": "linux_pid_start_ticks",
+      "pid": 1553262,
+      "session_id": 1553262,
+      "start_ticks": 14652241
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 1553262,
+    "process_group_id": 1553262
+  },
+  "process_exit": "/home/fires/hmasd-wsl/runs/uav_planning_opportunity_timing/b02_rolling_timing_a01/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "f359a2d7-72f8-4eb1-b898-bc0abf61bed6",
+      "kind": "linux_pid_start_ticks",
+      "pid": 1553263,
+      "session_id": 1553262,
+      "start_ticks": 14652245
+    },
+    "pid": 1553263,
+    "process_group_id": 1553262,
+    "supervisor_pid": 1553262
+  },
+  "schema_version": 1,
+  "sha": "9b763be8a45dad875166efcfba8efbf9c3db54b2",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/4bf6525e190e4a84b18513be6fbbe530",
+  "stderr": "/home/fires/hmasd-wsl/runs/uav_planning_opportunity_timing/b02_rolling_timing_a01/stderr.log",
+  "stdout": "/home/fires/hmasd-wsl/runs/uav_planning_opportunity_timing/b02_rolling_timing_a01/stdout.log"
+}
